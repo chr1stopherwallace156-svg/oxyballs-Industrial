@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Elektron Industrial LLC — Gas to EV Conversions | Victorville, CA</title>
+<meta name="description" content="Professional gas-to-electric vehicle conversion services in Victorville, CA. Standard, Extended Range, and Fleet packages. Financing available."/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0B0F1A;
+  --steel:#1A2235;
+  --mid:#243048;
+  --blue:#1D6FD8;
+  --electric:#3B9EFF;
+  --gold:#D4A017;
+  --silver:#8DA0B8;
+  --white:#FFFFFF;
+  --text:#C8D6E8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(11,15,26,0.97);border-bottom:1px solid rgba(61,158,255,0.2);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:64px}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:var(--electric);cursor:pointer;text-decoration:none}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--silver);text-decoration:none;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;transition:color 0.2s;cursor:pointer;background:none;border:none;font-family:'Barlow',sans-serif}
+.nav-links a:hover,.nav-links a.active{color:var(--electric)}
+
+/* PAGES */
+.page{display:none;padding-top:64px;min-height:100vh}
+.page.active{display:block}
+
+/* HERO */
+.hero{position:relative;min-height:90vh;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0B0F1A 0%,#1A2235 40%,#0d1829 100%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(29,111,216,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(29,111,216,0.08) 1px,transparent 1px);background-size:60px 60px}
+.hero-bolt{position:absolute;right:5%;top:50%;transform:translateY(-50%);font-size:320px;color:rgba(29,111,216,0.06);font-family:'Bebas Neue',sans-serif;line-height:1;user-select:none;pointer-events:none}
+.hero-content{position:relative;z-index:2;padding:0 3rem;max-width:800px}
+.hero-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';display:inline-block;width:32px;height:2px;background:var(--gold)}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:96px;line-height:0.9;letter-spacing:2px;margin-bottom:1.5rem}
+.hero h1 .blue{color:var(--electric)}
+.hero h1 .gold{color:var(--gold)}
+.hero-sub{font-size:18px;font-weight:300;color:var(--text);max-width:520px;line-height:1.7;margin-bottom:2.5rem}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--electric);color:var(--white);padding:14px 32px;border:none;font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.2s}
+.btn-primary:hover{background:#5EB3FF}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--electric);padding:14px 32px;border:1.5px solid var(--electric);font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;margin-left:16px}
+.btn-outline:hover{background:rgba(59,158,255,0.1)}
+
+/* STATS */
+.stats-bar{background:var(--steel);border-top:1px solid rgba(61,158,255,0.2);border-bottom:1px solid rgba(61,158,255,0.2);padding:2rem 3rem;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.stat-item{text-align:center}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--electric);letter-spacing:2px;line-height:1}
+.stat-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--silver);margin-top:4px}
+
+/* SECTIONS */
+.section{padding:6rem 3rem}
+.section-header{margin-bottom:4rem}
+.section-tag{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:1;color:var(--white)}
+.section-title .blue{color:var(--electric)}
+.divider{width:60px;height:3px;background:var(--electric);margin-top:1.5rem}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:rgba(59,158,255,0.15)}
+.service-card{background:var(--steel);padding:2.5rem;transition:all 0.3s;position:relative;overflow:hidden}
+.service-card:hover{background:var(--mid)}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--electric);transform:scaleX(0);transition:transform 0.3s;transform-origin:left}
+.service-card:hover::before{transform:scaleX(1)}
+.service-icon{font-size:40px;margin-bottom:1.5rem}
+.service-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1.5px;margin-bottom:1rem}
+.service-desc{font-size:14px;color:var(--text);line-height:1.8}
+.service-price{margin-top:1.5rem;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:600;color:var(--gold)}
+
+/* PROCESS */
+.process-section{background:var(--steel);padding:6rem 3rem}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);position:relative;margin-top:3rem}
+.steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--electric),var(--blue))}
+.step{text-align:center;padding:0 1rem;position:relative;z-index:1}
+.step-num{width:56px;height:56px;border-radius:50%;background:var(--navy);border:2px solid var(--electric);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--electric);margin:0 auto 1.5rem}
+.step-title{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.5rem}
+.step-desc{font-size:12px;color:var(--silver);line-height:1.6}
+
+/* WHY */
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+.why-card{border:1px solid rgba(59,158,255,0.2);padding:2rem;background:var(--steel);display:flex;gap:1.5rem;align-items:flex-start}
+.why-icon{font-size:32px;flex-shrink:0}
+.why-title{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.5rem}
+.why-desc{font-size:14px;color:var(--text);line-height:1.7}
+
+/* CTA BAND */
+.cta-band{background:linear-gradient(135deg,var(--blue) 0%,#0d3b7a 100%);padding:5rem 3rem;text-align:center}
+.cta-band h2{font-family:'Bebas Neue',sans-serif;font-size:64px;letter-spacing:2px;margin-bottom:1rem}
+.cta-band p{font-size:18px;color:rgba(255,255,255,0.8);max-width:600px;margin:0 auto 2.5rem}
+
+/* PAGE HERO */
+.page-hero{background:var(--steel);padding:5rem 3rem;border-bottom:1px solid rgba(59,158,255,0.2)}
+.page-hero h1{font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:0.95;letter-spacing:2px}
+.page-hero p{font-size:17px;color:var(--text);max-width:600px;margin-top:1rem;line-height:1.7}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:4rem 3rem;background:var(--navy)}
+.pricing-card{background:var(--steel);border:1px solid rgba(59,158,255,0.2);padding:2.5rem;position:relative;transition:all 0.3s}
+.pricing-card.featured{border:2px solid var(--electric);transform:scale(1.03)}
+.pricing-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--electric);color:var(--white);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:5px 18px;font-weight:600;white-space:nowrap}
+.pricing-tier{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
+.pricing-name{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;margin-bottom:0.5rem}
+.pricing-price{font-size:52px;font-weight:700;color:var(--electric);margin:1.5rem 0 0.25rem;line-height:1}
+.pricing-price sup{font-size:24px;vertical-align:super}
+.pricing-price-range{font-size:32px;font-weight:700;color:var(--electric);margin:1.5rem 0 0.25rem;line-height:1}
+.pricing-price-range sup{font-size:18px;vertical-align:super}
+.pricing-desc{font-size:13px;color:var(--text);margin-bottom:2rem;line-height:1.6}
+.pricing-features{list-style:none;margin-bottom:2rem}
+.pricing-features li{font-size:13px;color:var(--text);padding:8px 0;border-bottom:1px solid rgba(59,158,255,0.1);display:flex;align-items:center;gap:10px}
+.pricing-features li::before{content:'✓';color:var(--electric);font-weight:700;flex-shrink:0}
+.pricing-btn{width:100%;padding:14px;background:transparent;border:1.5px solid var(--electric);color:var(--electric);font-family:'Barlow',sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all 0.2s}
+.pricing-btn:hover,.pricing-card.featured .pricing-btn{background:var(--electric);color:var(--white)}
+
+/* ADDONS */
+.addons-section{padding:4rem 3rem;background:var(--steel)}
+.addons-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+.addon-item{background:var(--navy);border:1px solid rgba(59,158,255,0.15);padding:1.5rem;text-align:center}
+.addon-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.5rem}
+.addon-price{font-size:22px;font-weight:700;color:var(--gold)}
+.addon-desc{font-size:12px;color:var(--silver);margin-top:0.5rem;line-height:1.5}
+
+/* FINANCING */
+.financing-intro{padding:4rem 3rem 0;max-width:900px}
+.financing-intro p{font-size:16px;color:var(--text);line-height:1.8;margin-top:1rem}
+.fin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:3rem 3rem 4rem}
+.fin-card{background:var(--steel);border:1px solid rgba(59,158,255,0.2);padding:2.5rem;border-top:3px solid var(--electric)}
+.fin-logo{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px;color:var(--electric);margin-bottom:0.5rem}
+.fin-sub{font-size:12px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:1.5rem}
+.fin-rate{display:flex;align-items:baseline;gap:6px;margin-bottom:1.5rem}
+.fin-rate-num{font-size:38px;font-weight:700;color:var(--white)}
+.fin-rate-label{font-size:13px;color:var(--silver)}
+.fin-features{list-style:none;margin-bottom:2rem}
+.fin-features li{font-size:13px;color:var(--text);padding:7px 0;border-bottom:1px solid rgba(59,158,255,0.1);display:flex;align-items:flex-start;gap:8px}
+.fin-features li::before{content:'→';color:var(--electric);flex-shrink:0}
+.fin-verdict{background:rgba(59,158,255,0.08);border:1px solid rgba(59,158,255,0.2);padding:1rem;margin-bottom:1.5rem}
+.fin-verdict-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--electric);margin-bottom:0.25rem}
+.fin-verdict-text{font-size:13px;color:var(--text);line-height:1.5}
+
+/* CONTACT */
+.contact-section{background:var(--steel);padding:5rem 3rem;text-align:center}
+.contact-section h2{font-family:'Bebas Neue',sans-serif;font-size:56px;letter-spacing:2px;margin-bottom:1rem}
+.contact-form{max-width:580px;margin:2.5rem auto 0;display:grid;gap:1rem;text-align:left}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-input{width:100%;padding:14px 16px;background:var(--navy);border:1px solid rgba(59,158,255,0.25);color:var(--white);font-family:'Barlow',sans-serif;font-size:14px;outline:none;transition:border 0.2s}
+.form-input:focus{border-color:var(--electric)}
+.form-input::placeholder{color:var(--silver)}
+textarea.form-input{height:120px;resize:none}
+.form-submit{width:100%;padding:16px;background:var(--electric);color:var(--white);border:none;font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background 0.2s}
+.form-submit:hover{background:#5EB3FF}
+.success-msg{display:none;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.4);color:#4ade80;padding:1.25rem;text-align:center;font-size:15px;margin-top:1rem}
+.contact-info{margin-top:3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:600px;margin-left:auto;margin-right:auto}
+.contact-info-item{text-align:center}
+.contact-info-icon{font-size:28px;margin-bottom:0.5rem}
+.contact-info-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--silver)}
+.contact-info-value{font-size:14px;color:var(--electric);margin-top:4px}
+
+/* FOOTER */
+footer{background:var(--navy);border-top:1px solid rgba(61,158,255,0.15);padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--electric)}
+.footer-logo span{color:var(--gold)}
+.footer-copy{font-size:13px;color:var(--silver)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" onclick="showPage('home')" href="#">ELEKTRON<span>⚡</span>INDUSTRIAL</a>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a onclick="showPage('pricing')" id="nav-pricing">Pricing</a></li>
+    <li><a onclick="showPage('financing')" id="nav-financing">Financing</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HOME ===== -->
+<div id="page-home" class="page active">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-bolt">⚡</div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Elektron Industrial LLC — Victorville, CA</div>
+      <h1>GAS<br>TO <span class="blue">ELECTRIC</span><br><span class="gold">CONVERSIONS</span></h1>
+      <p class="hero-sub">Professional gas-to-EV conversion services for commercial fleets, personal vehicles, and industrial equipment. Powered by American engineering.</p>
+      <button class="btn-primary" onclick="showPage('pricing')">View Packages ⚡</button>
+      <button class="btn-outline" onclick="showPage('financing')">Financing Options</button>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num">48–72</div><div class="stat-label">Hour Turnaround</div></div>
+    <div class="stat-item"><div class="stat-num">0%</div><div class="stat-label">Intro APR Available</div></div>
+    <div class="stat-item"><div class="stat-num">$0</div><div class="stat-label">Emissions After Conversion</div></div>
+    <div class="stat-item"><div class="stat-num">5★</div><div class="stat-label">Service Standard</div></div>
+  </div>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag">What We Do</div>
+      <div class="section-title">CONVERSION <span class="blue">SERVICES</span></div>
+      <div class="divider"></div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🚗</div>
+        <div class="service-title">STANDARD CONVERSION</div>
+        <div class="service-desc">Full drivetrain swap for sedans, SUVs, and light trucks. Motor, battery pack, BMS, charging port, and complete electrical integration.</div>
+        <div class="service-price">$49,995</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <div class="service-title">EXTENDED RANGE</div>
+        <div class="service-desc">Everything in Standard plus a high-capacity battery pack for maximum range. DC fast-charge capable with advanced thermal management.</div>
+        <div class="service-price">$59,995</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🚚</div>
+        <div class="service-title">FLEET PRICING</div>
+        <div class="service-desc">Volume conversions for delivery companies, municipalities, and commercial operators. Priority scheduling and dedicated account manager included.</div>
+        <div class="service-price">$44,995–$47,995 / unit</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔋</div>
+        <div class="service-title">BATTERY UPGRADES</div>
+        <div class="service-desc">Existing EV owners can expand range with our lithium battery packs. 50–200 mile range additions depending on chassis and configuration.</div>
+        <div class="service-price">From $3,200</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔌</div>
+        <div class="service-title">CHARGING INSTALL</div>
+        <div class="service-desc">Level 2 and DC fast-charging installation for home, commercial property, and fleet yards. Licensed electricians on every job.</div>
+        <div class="service-price">From $850</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <div class="service-title">EV MAINTENANCE</div>
+        <div class="service-desc">Annual maintenance contracts for converted vehicles. BMS diagnostics, motor servicing, software updates, and battery health monitoring.</div>
+        <div class="service-price">From $450/yr</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process-section">
+    <div class="section-header">
+      <div class="section-tag">How It Works</div>
+      <div class="section-title">THE CONVERSION <span class="blue">PROCESS</span></div>
+      <div class="divider"></div>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><div class="step-title">Consultation</div><div class="step-desc">Vehicle assessment & custom quote</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">Engineering</div><div class="step-desc">Motor & battery system design</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">Conversion</div><div class="step-desc">48–72 hr shop installation</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">Testing</div><div class="step-desc">Road test & safety certification</div></div>
+      <div class="step"><div class="step-num">05</div><div class="step-title">Delivery</div><div class="step-desc">Handoff with full documentation</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-tag">Why Elektron Industrial</div>
+      <div class="section-title">THE ELEKTRON <span class="blue">ADVANTAGE</span></div>
+      <div class="divider"></div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon">🇺🇸</div><div><div class="why-title">American-Built</div><div class="why-desc">Every conversion is engineered and installed in the USA by certified technicians with a minimum 5 years of EV experience.</div></div></div>
+      <div class="why-card"><div class="why-icon">💳</div><div><div class="why-title">Flexible Financing</div><div class="why-desc">Partner financing through LightStream, GreenSky, and Enhancify means your customer can start for as little as $0 down.</div></div></div>
+      <div class="why-card"><div class="why-icon">📋</div><div><div class="why-title">Full Warranty</div><div class="why-desc">3-year/36,000-mile warranty on all conversion components. We stand behind every vehicle that leaves our facility.</div></div></div>
+      <div class="why-card"><div class="why-icon">📊</div><div><div class="why-title">Fleet ROI Analytics</div><div class="why-desc">Full cost-savings report showing fuel, maintenance, and tax-incentive savings over a 5-year horizon — provided free with every fleet quote.</div></div></div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <h2>READY TO GO ELECTRIC?</h2>
+    <p>Get a free vehicle assessment and custom quote. No obligation. Our team responds within 24 hours.</p>
+    <button class="btn-primary" onclick="showPage('contact')">Get a Free Quote ⚡</button>
+  </div>
+
+  <footer>
+    <div class="footer-logo">ELEKTRON<span>⚡</span>INDUSTRIAL</div>
+    <div class="footer-copy">© 2026 Elektron Industrial LLC — Victorville, CA · (760) 912-0874</div>
+  </footer>
+</div>
+
+<!-- ===== PRICING ===== -->
+<div id="page-pricing" class="page">
+  <div class="page-hero">
+    <div class="section-tag">Transparent Pricing</div>
+    <h1>CONVERSION<br><span style="color:var(--electric)">PACKAGES</span></h1>
+    <p>All packages include labor, parts, battery management system, and first-year maintenance. Financing available on every tier.</p>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pricing-tier">Individual</div>
+      <div class="pricing-name">STANDARD CONVERSION</div>
+      <div class="pricing-price"><sup>$</sup>49,995</div>
+      <div class="pricing-desc">Complete gas-to-electric drivetrain swap for daily commuters, sedans, compact SUVs, and light pickups under 4,500 lbs.</div>
+      <ul class="pricing-features">
+        <li>60–80 kWh battery pack</li>
+        <li>Up to 150 mile estimated range</li>
+        <li>Level 2 charging capable</li>
+        <li>BMS installation & programming</li>
+        <li>Complete electrical integration</li>
+        <li>1-year parts & labor warranty</li>
+        <li>48-hour turnaround</li>
+      </ul>
+      <button class="pricing-btn" onclick="showPage('contact')">Get a Quote</button>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-badge">Most Popular</div>
+      <div class="pricing-tier">Premium</div>
+      <div class="pricing-name">EXTENDED RANGE</div>
+      <div class="pricing-price"><sup>$</sup>59,995</div>
+      <div class="pricing-desc">High-capacity build for full-size trucks, heavy SUVs, and commercial vans. Maximum range with DC fast-charge capability.</div>
+      <ul class="pricing-features">
+        <li>100–120 kWh high-capacity battery pack</li>
+        <li>Up to 250 mile estimated range</li>
+        <li>DC fast-charging capable</li>
+        <li>Advanced thermal management system</li>
+        <li>Fleet telemetry module included</li>
+        <li>3-year parts & labor warranty</li>
+        <li>72-hour turnaround</li>
+        <li>Priority scheduling</li>
+      </ul>
+      <button class="pricing-btn" onclick="showPage('contact')">Get a Quote</button>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Commercial — 5+ Vehicles</div>
+      <div class="pricing-name">FLEET PRICING</div>
+      <div class="pricing-price-range"><sup>$</sup>44,995 <span style="font-size:20px;color:var(--silver)">–</span> <sup>$</sup>47,995</div>
+      <div style="font-size:12px;color:var(--silver);margin-bottom:1.5rem">per vehicle</div>
+      <div class="pricing-desc">Volume-discounted conversions for delivery companies, municipalities, and commercial operators with 5 or more vehicles.</div>
+      <ul class="pricing-features">
+        <li>Custom battery sizing per vehicle class</li>
+        <li>Dedicated fleet account manager</li>
+        <li>Priority shop scheduling</li>
+        <li>Fleet management telemetry</li>
+        <li>5-year service contract option</li>
+        <li>On-site installation available</li>
+        <li>Volume discount increases at 10+ units</li>
+      </ul>
+      <button class="pricing-btn" onclick="showPage('contact')">Request Fleet Proposal</button>
+    </div>
+  </div>
+
+  <div class="addons-section">
+    <div class="section-tag">Add-On Services</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;color:var(--white);margin-bottom:0">ENHANCE YOUR <span style="color:var(--electric)">BUILD</span></div>
+    <div class="addons-grid">
+      <div class="addon-item"><div class="addon-name">Home Charger Install</div><div class="addon-price">$850+</div><div class="addon-desc">Level 2 EVSE with permit & inspection</div></div>
+      <div class="addon-item"><div class="addon-name">Battery Range Upgrade</div><div class="addon-price">$3,200+</div><div class="addon-desc">Add 50–200 miles of range</div></div>
+      <div class="addon-item"><div class="addon-name">Solar Integration</div><div class="addon-price">$4,500+</div><div class="addon-desc">Rooftop solar tied to EV charging</div></div>
+      <div class="addon-item"><div class="addon-name">Annual Maintenance</div><div class="addon-price">$450/yr</div><div class="addon-desc">Full diagnostic & BMS service</div></div>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <h2>FLEXIBLE FINANCING ON ALL PACKAGES</h2>
+    <p>Monthly payments with approved credit. See our financing partners for options tailored to every credit tier.</p>
+    <button class="btn-primary" onclick="showPage('financing')">Explore Financing ⚡</button>
+  </div>
+
+  <footer>
+    <div class="footer-logo">ELEKTRON<span>⚡</span>INDUSTRIAL</div>
+    <div class="footer-copy">© 2026 Elektron Industrial LLC — Victorville, CA · (760) 912-0874</div>
+  </footer>
+</div>
+
+<!-- ===== FINANCING ===== -->
+<div id="page-financing" class="page">
+  <div class="page-hero">
+    <div class="section-tag">Customer Financing</div>
+    <h1>FINANCING<br><span style="color:var(--electric)">OPTIONS</span></h1>
+    <p>We partner with three of the nation's top financing providers so your customers can drive electric today and pay over time.</p>
+  </div>
+
+  <div class="financing-intro">
+    <p>Elektron Industrial has vetted and partnered with three highly competitive financing companies for conversion services. Each serves a different customer profile — together they cover nearly every credit tier from fair to excellent.</p>
+  </div>
+
+  <div class="fin-grid">
+    <div class="fin-card">
+      <div class="fin-logo">LIGHTSTREAM</div>
+      <div class="fin-sub">Best for Excellent Credit</div>
+      <div class="fin-rate"><div class="fin-rate-num">6.49%</div><div class="fin-rate-label">APR starting (with autopay)</div></div>
+      <ul class="fin-features">
+        <li>Loans $5,000–$100,000 — covers all tiers</li>
+        <li>Terms 2 to 20 years — maximum flexibility</li>
+        <li>No fees, no dealer markup</li>
+        <li>Same-day funding possible</li>
+        <li>Unsecured — no collateral required</li>
+        <li>Subsidiary of Truist Bank (top 10 U.S. bank)</li>
+        <li>Rate discount with autopay enrollment</li>
+      </ul>
+      <div class="fin-verdict"><div class="fin-verdict-label">Elektron Verdict</div><div class="fin-verdict-text">Our #1 recommended lender. Highest loan amounts, lowest rates, and fast funding. Best suited for customers with a 700+ credit score who want no-hassle financing with no strings attached.</div></div>
+      <button class="btn-primary" style="width:100%;justify-content:center" onclick="showPage('contact')">Apply via Elektron</button>
+    </div>
+    <div class="fin-card">
+      <div class="fin-logo">GREENSKY</div>
+      <div class="fin-sub">Best for Bundled Projects</div>
+      <div class="fin-rate"><div class="fin-rate-num">0%</div><div class="fin-rate-label">Deferred interest promo available</div></div>
+      <ul class="fin-features">
+        <li>Deferred interest promotional periods available</li>
+        <li>Terms up to 10 years through partner lenders</li>
+        <li>Point-of-sale integrated application</li>
+        <li>Ideal when bundling EV conversion + home charger</li>
+        <li>Works alongside solar add-ons</li>
+        <li>Multiple lender network behind the platform</li>
+      </ul>
+      <div class="fin-verdict"><div class="fin-verdict-label">Elektron Verdict</div><div class="fin-verdict-text">Excellent when a customer is adding a home charger or solar alongside the conversion. Deferred interest promos are powerful for customers who can pay off quickly — review deferred-interest terms carefully with each client.</div></div>
+      <button class="btn-outline" style="width:100%;justify-content:center" onclick="showPage('contact')">Apply via Elektron</button>
+    </div>
+    <div class="fin-card">
+      <div class="fin-logo">ENHANCIFY</div>
+      <div class="fin-sub">Best Contractor-Integrated Option</div>
+      <div class="fin-rate"><div class="fin-rate-num">$0</div><div class="fin-rate-label">No dealer or buy-down fees per loan</div></div>
+      <ul class="fin-features">
+        <li>Elektron earns commission on every funded loan</li>
+        <li>Soft credit pull — no impact on customer score</li>
+        <li>Annual membership — no per-transaction fees</li>
+        <li>Branded Elektron financing portal</li>
+        <li>Full marketing materials provided</li>
+        <li>Multiple lender offers shown to each customer</li>
+      </ul>
+      <div class="fin-verdict"><div class="fin-verdict-label">Elektron Verdict</div><div class="fin-verdict-text">Best for growing Elektron's revenue while giving customers competitive options. The commission structure and zero buy-down fees make this the most profitable financing partner for the business — a true win-win.</div></div>
+      <button class="btn-outline" style="width:100%;justify-content:center" onclick="showPage('contact')">Apply via Elektron</button>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <h2>NOT SURE WHICH OPTION FITS?</h2>
+    <p>Our team will walk every customer through their best financing path before any work begins.</p>
+    <button class="btn-primary" onclick="showPage('contact')">Talk to a Specialist ⚡</button>
+  </div>
+
+  <footer>
+    <div class="footer-logo">ELEKTRON<span>⚡</span>INDUSTRIAL</div>
+    <div class="footer-copy">© 2026 Elektron Industrial LLC — Victorville, CA · (760) 912-0874</div>
+  </footer>
+</div>
+
+<!-- ===== CONTACT ===== -->
+<div id="page-contact" class="page">
+  <div class="page-hero">
+    <div class="section-tag">Get In Touch</div>
+    <h1>REQUEST<br><span style="color:var(--electric)">A QUOTE</span></h1>
+    <p>Tell us about your vehicle or fleet. We'll respond within 24 hours with a custom assessment and pricing.</p>
+  </div>
+
+  <div class="contact-section">
+    <h2>LET'S BUILD YOUR EV</h2>
+    <p style="color:var(--text)">Complete the form below and an Elektron specialist will contact you within one business day.</p>
+
+    <form class="contact-form" action="https://formspree.io/f/xgobeyjj" method="POST" id="contactForm">
+      <div class="form-row">
+        <input type="text" name="first_name" placeholder="First Name" class="form-input" required/>
+        <input type="text" name="last_name" placeholder="Last Name" class="form-input" required/>
+      </div>
+      <input type="email" name="email" placeholder="Email Address" class="form-input" required/>
+      <input type="tel" name="phone" placeholder="Phone Number" class="form-input"/>
+      <input type="text" name="vehicle" placeholder="Vehicle Year, Make & Model (e.g. 2005 Ford F-150)" class="form-input"/>
+      <select name="service" class="form-input" style="background:var(--navy);color:var(--white)">
+        <option value="">— Select Service —</option>
+        <option>Standard Conversion — $49,995</option>
+        <option>Extended Range — $59,995</option>
+        <option>Fleet Pricing — 5+ Vehicles ($44,995–$47,995/unit)</option>
+        <option>Battery Upgrade</option>
+        <option>Home Charging Installation</option>
+        <option>Annual Maintenance</option>
+      </select>
+      <textarea name="message" class="form-input" placeholder="Tell us more about your project, timeline, or questions..."></textarea>
+      <button type="submit" class="form-submit">Send Request ⚡</button>
+    </form>
+
+    <div class="success-msg" id="successMsg">
+      ✅ Message sent! An Elektron specialist will be in touch within 24 hours.
+    </div>
+
+    <div class="contact-info">
+      <div class="contact-info-item">
+        <div class="contact-info-icon">📞</div>
+        <div class="contact-info-label">Phone</div>
+        <div class="contact-info-value">(760) 912-0874</div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-info-icon">📧</div>
+        <div class="contact-info-label">Email</div>
+        <div class="contact-info-value">info@elektronindustrial.com</div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-info-icon">📍</div>
+        <div class="contact-info-label">Location</div>
+        <div class="contact-info-value">Victorville, CA</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">ELEKTRON<span>⚡</span>INDUSTRIAL</div>
+    <div class="footer-copy">© 2026 Elektron Industrial LLC — Victorville, CA · (760) 912-0874</div>
+  </footer>
+</div>
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.getElementById('nav-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// Formspree AJAX submit
+const form = document.getElementById('contactForm');
+const successMsg = document.getElementById('successMsg');
+if(form){
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const btn = form.querySelector('.form-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if(res.ok){
+        form.reset();
+        form.style.display = 'none';
+        successMsg.style.display = 'block';
+      } else {
+        btn.textContent = 'Send Request ⚡';
+        btn.disabled = false;
+        alert('Something went wrong. Please try again or call us directly at (760) 912-0874.');
+      }
+    } catch(err){
+      btn.textContent = 'Send Request ⚡';
+      btn.disabled = false;
+      alert('Network error. Please call us at (760) 912-0874.');
+    }
+  });
+}
+</script>
+</body>
+</html>
