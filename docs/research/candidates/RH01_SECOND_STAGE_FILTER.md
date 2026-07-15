@@ -49,6 +49,9 @@ this file supersedes it (see Addendum, section 7).
 | CS-20 | **SupplierCandidate — MetricCandidate** (owner review_04 promotion) | *Sendyne SIM100MLP isolation monitor for unearthed (IT) DC power systems — datasheet V1.1a* | Sendyne (PDF hosted at dc-components.com) | <https://dc-components.com/wp-content/uploads/Sendyne-SIM100MLP-Datasheet-V1.1a.pdf> | Candidate (batch_09) — `NeedsEngineeringReview`. Isolation-monitoring metric/test candidates only — lane L5/L9 |
 | CS-21 | **TechnicalBackground** (owner review_05 downgrade) | *Feichun: "BEV Wiring: High-Voltage Orange Shielded Cables for Electric Loaders"* — trade article, mining-loader context | feichuncables.com | <https://feichuncables.com/blog/bev-wiring-high-voltage-orange-shielded-cables-for-sandvik-epiroc-electric-loaders/> | Background (batch_10) — `NeedsSupplierData`/`NeedsExactSource`; **wrong-platform context (articulated loaders, not Class 4/5 trucks)** — lane L5 |
 | CS-22 | **TechnicalBackground** (owner review_05 downgrade) | *EV Builder's Guide: "Understanding Loss of Isolation (LOI) in Electric Vehicles"* — explainer article | evbuildersguide.com | <https://www.evbuildersguide.com/understanding-loss-of-isolation-loi-in-electric-vehicles-causes-testing-and-safety-measures/> | Background (batch_10) — learning material only; **FMVSS 305a / eCFR / ISO / monitor datasheets are the primary sources for isolation thresholds** — lane L5 |
+| CS-23 | **SupplierCandidate** | *Coroflex 9-2611 / 6.0 mm² FHLR2GCB2G shielded HV cable — technical datasheet* | Coroflex (cloudfront-hosted PDF) | <https://d2iompx231jv6o.cloudfront.net/userfiles/documents/products/22/92/26/229226.pdf> | Candidate (batch_11) — `NeedsEngineeringReview`. **Owner correction (review_06): this datasheet covers 6.0 mm² ONLY — nothing from it applies to 35/50 mm² until those exact datasheets are on file.** Owner-relayed envelope: 600 V AC / 1000 V DC, −40…+180 °C, derating curves — lane L5/L9 |
+| CS-24 | **SupplierCandidate** | *TE Connectivity / KILOVAC EV200 series contactor datasheet* | TE (PDF hosted at rec-bms.com — mirror; prefer TE-controlled copy) | <https://www.rec-bms.com/datasheet/Technical_datasheet_Kilovac.pdf> | Candidate (batch_11) — `NeedsEngineeringReview`; owner's 9-item needs list applies (battery max V, inverter cont./peak I, fault current, make/break duty, pre-charge sequence, coil voltage, aux contacts, thermal mounting) — lane L5/L9 |
+| CS-25 | **SupplierCandidate — AUXILIARY fuse only** (owner review_06 correction) | *Eaton Bussmann series EV auxiliary fuses, 500 Vdc, 10–50 A — datasheet no. 10864* | Eaton | <https://www.eaton.com/content/dam/eaton/products/emobility/fuses-electric-vehicle/bus-ele-ds-10864-ev-pre-production-sample-aux-fuses.pdf> | Candidate (batch_11) — batch's "Traction Subsystem" title was WRONG: these are **auxiliary-circuit fuses; the main traction fuse remains NeedsSupplierData/OpenGap** — lane L5/L9 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -101,6 +104,9 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-40 | Feichun (loader context): dynamic-zone HV cable bends rated "≥ 100,000 cycles at minimum bend radius (typically 6–8× OD)" *(trade article, mining loaders — owner review_05: **preliminary routing-screen assumption ONLY**; final bend radius comes from the selected cable's datasheet or official standard text)* | CS-21 | Article section "Dynamic Bend Radius Standards Review" — unverified | **TechnicalBackground / NeedsSupplierData — never an enforced rule from this source**; lane L5 |
 | RC-41 | EV Builder's Guide: "According to FMVSS 305, the minimum isolation resistance… is 500 ohms per volt" *(explainer article — owner review_05: **WRONG as a universal rule**; the article flattens the regulation's AC/DC/context structure)* | CS-22 | Article section "Why 500 Ohms Per 1 Volt?" | **TechnicalBackground only — superseded by RC-42's split structure**; lane L5 |
 | RC-42 | FMVSS 305a isolation structure *(owner-relayed, review_05 — citations stripped)*: electrical isolation ≥ **500 Ω/V for AC** HV sources; ≥ **100 Ω/V for DC** HV sources; **500 Ω/V for the charge inlet** during charging-related measurement; plus a **< 0.2 Ω** resistance requirement between reachable exposed conductive parts in the barrier/direct-contact protection context. *(Note: the DC 100 Ω/V figure coincides with the Sendyne datasheet's discussion in RC-38 — corroborating, not confirming.)* | CS-02 (regulation) via owner relay | **Locator pending — FMVSS 305a / 49 CFR 571.305a section numbers required (B-002)** | **RegulatoryCandidate — split-threshold candidates; final values require exact FMVSS/ISO test mapping + engineering review; NO universal threshold permitted** — lane L5/L2 |
+| RC-43 | Coroflex 9-2611 / 6.0 mm²: "Bend radius: - min. 3 x cable-ø: static installation. - min. 6 x cable-ø: dynamic installation." *(FIRST datasheet-sourced bend radius on file — **part-number-scoped**: valid for this 6.0 mm² cable only, per owner review_06; the general 4×/6×/8× fenced variants stay fenced)* | CS-23 | **Candidate locator (batch_11): page 1, Properties block** — unverified | **SupplierCandidate — part-scoped RuleCandidate**; `NeedsEngineeringReview`; OD values for larger gauges missing — lane L5 |
+| RC-44 | Kilovac EV200: "Continuous (Carry) Current, Typical: 500 @ 85°C, 400 mcm conductors… Rated Operating Voltage. VDC. 12 - 900." *(supplier specs for THIS contactor family; owner relay adds 2000 A break @ 320 VDC 1-cycle and environmental data)* | CS-24 | **Candidate locator (batch_11): page 1 parameter matrix** — unverified | **SupplierCandidate** — `NeedsEngineeringReview`; unusable for selection until battery/inverter/fault data exists — lane L5/L9 |
+| RC-45 | Eaton Bussmann EV **auxiliary** fuses: 500 Vdc, 10–50 A, max DC interrupting 20 kA *(owner correction: auxiliary-circuit candidate ONLY — never main-traction data)* | CS-25 | **Candidate locator (batch_11): page 1, Description/Ratings** — unverified | **SupplierCandidate — auxiliary HV circuits only**; main traction fuse = OpenGap — lane L5/L9 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -695,3 +701,75 @@ fault rule.
   column specifically in future batches.
 - Numbering shift "10:175" (vs prior "n:75") noted in PROVENANCE —
   unexplained; owner may clarify total batch count.
+
+---
+
+## 18. Batch 11 + owner review_06 reconciliation (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_11_hv_wiring_components.md`
+and `docs/research/raw/owner_reviews/review_06_batch_11_verdict.md`.
+Row additions: CS-23..CS-25, RC-43..RC-45; RC-38 gains
+`NeedsCANProtocolDocument`. **First component-level payload — HV
+wiring moves from topic mapping to named parts with exact missing
+parameters.**
+
+### Owner corrections applied
+
+1. **Coroflex gauge scoping:** the cited datasheet is 9-2611 /
+   **6.0 mm² only**. Its 3×/6× OD bend radii are part-scoped rule
+   candidates; batch_11's matrix implied 35/50 mm² coverage — wrong;
+   nothing transfers to other gauges without their datasheets.
+2. **Auxiliary ≠ traction fuse:** batch_11 titled the Eaton row
+   "Traction Subsystem…" — the datasheet is for **auxiliary** fuses
+   (10–50 A). Retitled; auxiliary fuse = SupplierCandidate; **main
+   traction fuse remains OpenGap** (pack fault analysis required
+   first).
+3. **EV200 not automatically sufficient:** strong candidate, but held
+   behind the 9-item needs list (battery V, inverter currents, fault
+   current, make/break duty, pre-charge sequence, coil voltage, aux
+   contacts, thermal mounting).
+4. **Sendyne:** stays SupplierCandidate/MetricCandidate; new status
+   `NeedsCANProtocolDocument` (host-controller protocol doc is a
+   separate artifact to obtain).
+
+### HV Wiring Package status table (owner-marked, authoritative)
+
+| Parameter | Status |
+|---|---|
+| Battery max voltage | MISSING_SOURCE / NeedsSupplierData |
+| Battery cont./peak current | MISSING_SOURCE / NeedsSupplierData |
+| Inverter cont./peak current | MISSING_SOURCE / NeedsSupplierData |
+| HV cable part number | Candidate only — Coroflex 9-2611 / 6.0 mm² |
+| HV cable bend radius | Candidate rule only for the exact cable datasheet |
+| Fuse | Auxiliary candidate only; **main traction fuse OpenGap** |
+| Contactor | EV200 SupplierCandidate / NeedsEngineeringReview |
+| Pre-charge | OpenGap |
+| MSD/HVIL | SupplierCandidate / NeedsEngineeringReview |
+| Isolation monitor | Sendyne SupplierCandidate / NeedsCANProtocolDocument |
+| Bonding/grounding | OpenGap |
+| Physical route | PhysicalVerificationRequired |
+| Engineer review | **Required before fabrication** |
+
+### Conduct notes
+
+- Batch_11 obeyed the owner's hard rules (no invented sizes, no
+  universal 500 Ω/V, no cross-gauge bend enforcement) — the review_05
+  corrections took hold within one batch.
+- Residual defect pattern: **row-title inflation** ("Traction
+  Subsystem" over auxiliary data) and **matrix-cell overreach**
+  (35/50 mm² in the ampacity cell against a 6.0 mm² source). Same
+  family as batch_10's action-column overreach: headers/cells claiming
+  more than the quoted source. Both caught by owner review.
+- EV200 datasheet is hosted on a third-party mirror (rec-bms.com) —
+  prefer the TE-controlled copy when obtainable (same policy as
+  xr793/mikesservers mirrors).
+
+### Owner directive — next payload
+
+**Do not move to cooling.** Close remaining HV wiring holes first,
+per the owner's 8-item follow-up ask (main traction fuse sizing,
+contactor make/break duty, pre-charge resistor + relay selection,
+35/50 mm² cable datasheets, matching connector datasheets,
+bonding/grounding test methods, IP validation procedures) — recorded
+in the Research Map.

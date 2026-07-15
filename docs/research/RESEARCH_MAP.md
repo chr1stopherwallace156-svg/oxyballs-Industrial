@@ -151,12 +151,19 @@ order (CAN/PATS deliberately last — proprietary depth): **HV wiring →
 MSD/contactors/fuses/pre-charge/HVIL → cooling → EHPS brake/steering →
 supplier datasheets → CAN/PATS.**
 
-1. **HV wiring** (L5) — **PARTIALLY MAPPED** (batch_09): still missing
-   before build-ready design: selected battery V/I; motor/inverter
-   draw; HV cable, fuse, contactor, pre-charge, connector datasheets;
-   chosen MSD part number; actual routing path on the truck; bend
-   radius from supplier datasheet; derating curve; fault-current calc;
-   grounding/bonding test method; IP test method; engineer review.
+1. **HV wiring** (L5) — **PARTIALLY CLOSED** (batches 09–11): named
+   component candidates exist (Coroflex 9-2611/6.0 mm² cable, Kilovac
+   EV200 contactor, Eaton aux fuse, Sendyne SIM100MLP, Chilye MSD).
+   **Owner directive: stay on this gap — do not move to cooling —
+   until the remaining holes close:** (1) main traction battery fuse
+   sizing; (2) contactor make/break duty; (3) pre-charge resistor
+   sizing; (4) pre-charge relay/contactor selection; (5) 35 mm² and
+   50 mm² cable datasheets; (6) matching HV connector datasheets;
+   (7) bonding/grounding test methods for EV HV enclosures;
+   (8) IP67/IP6K9K validation procedures for underbody components —
+   plus the upstream blockers: battery V/I, inverter currents, fault
+   current, physical routing, engineer review. Hard rules: no aux-fuse
+   data as traction data; no cross-gauge bend-radius transfer.
 2. **Cooling** (L6) — EMPTY: battery/motor/inverter/charger/DC-DC
    loops, pump + radiator sizing, flow, pressure drop, derating,
    high-ambient testing.

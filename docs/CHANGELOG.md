@@ -5,6 +5,23 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 11 + review_06 reconciled: first component candidates
+
+- Archived batch_11 (component-level HV wiring) and review_06 1:1.
+- New SupplierCandidates: Coroflex 9-2611/6.0 mm² cable (CS-23/RC-43 —
+  first datasheet-sourced bend radius, **part-number-scoped**: 3× OD
+  static / 6× OD dynamic for this cable only), Kilovac EV200 contactor
+  (CS-24/RC-44, held behind 9-item needs list), Eaton EV **auxiliary**
+  fuse (CS-25/RC-45 — batch's "Traction" title corrected; main
+  traction fuse remains OpenGap). Sendyne gains
+  NeedsCANProtocolDocument.
+- Owner's authoritative 13-row HV wiring status table recorded
+  (section 18); L5 status → PARTIALLY CLOSED with 8-item hole list;
+  owner directive: do not move to cooling until closed.
+- Conduct: review_05 corrections took hold in one batch; residual
+  defect = row-title inflation / matrix-cell overreach (caught).
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 10 + review_05 reconciled: universal isolation threshold rejected
 
 - Archived batch_10 (HV wiring gap analysis) and review_05 1:1.

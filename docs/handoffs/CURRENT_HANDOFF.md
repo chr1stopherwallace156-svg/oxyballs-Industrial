@@ -4,14 +4,14 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-15
-- Reason for handoff: task complete (batch 10 + review_05 reconciled);
+- Reason for handoff: task complete (batch 11 + review_06 reconciled);
   awaiting owner decisions and/or next batch
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `2b105b1` — Reconcile RH batch 09 + owner review_04
+- Start commit: `6a0f157` — Reconcile RH batch 10 + owner review_05
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
@@ -19,35 +19,36 @@
 ## Work performed
 
 - Files changed:
-  `docs/research/raw/research_hunter/batch_10_hv_wiring_gap_analysis.md`
-  and `docs/research/raw/owner_reviews/review_05_batch_10_verdict.md`
-  (new, verbatim — committed separately as `bf43876`),
+  `docs/research/raw/research_hunter/batch_11_hv_wiring_components.md`
+  and `docs/research/raw/owner_reviews/review_06_batch_11_verdict.md`
+  (new, verbatim — committed separately as `04faf5d`),
   `docs/research/raw/research_hunter/PROVENANCE.md`,
-  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-21/22;
-  RC-40..42; section 17), `docs/CHANGELOG.md`, handoff files
-- Summary: batch 10 + review_05 reconciled. **Safety catch of the
-  pipeline so far: the "hard fault below 500 Ω/V" universal rule was
-  REJECTED per owner correction** — register carries split
-  RegulatoryCandidates instead (RC-42: ≥500 Ω/V AC, ≥100 Ω/V DC,
-  500 Ω/V charge inlet, <0.2 Ω exposed-part bonding context-scoped),
-  all locator-pending, gated on exact FMVSS 305a/eCFR extraction + ISO
-  test mapping + engineering review. Feichun 6–8× OD →
-  TechnicalBackground, preliminary routing screen ONLY (never an
-  enforced rule from a loader trade article); EV Builder's Guide →
-  TechnicalBackground, superseded. Conduct note: Hunter failure mode
-  has shifted to enforcement overreach in "next action" columns —
-  watch that column. **Nothing ingested; nothing Confirmed; ODRs
-  untouched.**
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-23..25;
+  RC-43..45; RC-38 +NeedsCANProtocolDocument; section 18 with the
+  owner-marked 13-row status table),
+  `docs/research/RESEARCH_MAP.md` (L5 → PARTIALLY CLOSED, 8-item hole
+  list, stay-on-HV-wiring directive), `docs/CHANGELOG.md`, handoff
+  files
+- Summary: batch 11 + review_06 reconciled — first component-level
+  payload. New SupplierCandidates: Coroflex 9-2611/6.0 mm² cable
+  (**first datasheet-sourced bend radius: 3× OD static / 6× OD
+  dynamic — part-number-scoped ONLY**), Kilovac EV200 contactor (held
+  behind owner's 9-item needs list), Eaton EV **auxiliary** fuse
+  (batch's "Traction" title corrected — main traction fuse stays
+  OpenGap). Owner corrections applied within one batch of the
+  review_05 rules — residual defect pattern: row-title inflation and
+  matrix-cell overreach (caught). **Owner directive: do not move to
+  cooling until the 8 remaining HV wiring holes close.** **Nothing
+  ingested; nothing Confirmed; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_10/review_05 archives are 1:1 against the
-  owner's chat message ("Gemini 10:175" — numbering shift noted in
-  PROVENANCE); the split-threshold structure is owner-relayed with
-  citations stripped and is locator-pending (B-002); no threshold
-  number entered any rule
+- Verified vs claimed: batch_11/review_06 archives are 1:1 against the
+  owner's chat message ("11:1 75"); all quotes Hunter-supplied and
+  unverified (B-002); no component was selected and no supplier value
+  entered any rule or parameter
 
 ## State
 
