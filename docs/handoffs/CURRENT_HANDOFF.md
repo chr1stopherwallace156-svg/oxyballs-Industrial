@@ -4,14 +4,14 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-15
-- Reason for handoff: task complete (batch 08 + review_03 reconciled);
+- Reason for handoff: task complete (batch 09 + review_04 reconciled);
   awaiting owner decisions and/or next batch
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `0b00f2c` — Reconcile RH batch 07 + owner review_02
+- Start commit: `2430632` — Reconcile RH batch 08 + owner review_03
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
@@ -19,37 +19,34 @@
 ## Work performed
 
 - Files changed:
-  `docs/research/raw/research_hunter/batch_08_gaps_1-6_payload.md` and
-  `docs/research/raw/owner_reviews/review_03_batch_08_verdict.md`
-  (new, verbatim — committed separately as `297c09c`),
+  `docs/research/raw/research_hunter/batch_09_hv_wiring_gap_closure.md`
+  and `docs/research/raw/owner_reviews/review_04_batch_09_verdict.md`
+  (new, verbatim — committed separately as `e78174a`),
   `docs/research/raw/research_hunter/PROVENANCE.md`,
-  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md`
-  (CS-14..19; RC-32..37; section 15), `docs/CHANGELOG.md`, handoff
-  files
-- Summary: batch 08 (first focused payload, gaps 1–6) + review_03
-  reconciled with owner instructions applied verbatim. Promoted:
-  Chilye MSD (SupplierCandidate + NeedsEngineeringReview), Brogen EHPS
-  (SupplierCandidate / **CP#1 candidate**, EngineeringReviewRequired +
-  PhysicalVerificationRequired — 10-item missing list on CS-17), Ford
-  Q-251R2 (CandidateSource for **UIM behavior only**), ISO 6469-3
-  (CandidateSourcePath / NeedsExactSource). Downgraded: SAE
-  J1742-via-Scribd (**NeedsOfficialSource**), EV West EPS
-  (**BackgroundSupplier / WrongPlatformRisk**). The PCM-delete/28-
-  message-mimic inference was split off with NO claim row
-  (EngineeringReviewRequired / MISSING_SOURCE — only Ford service data
-  or real CAN capture resolves it). Supplier numbers fenced as
-  non-design values. Priorities 2/5/6 (cooling, supplier depth,
-  failure modes) remain empty. **Nothing ingested; nothing Confirmed;
-  ODRs untouched.**
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-20;
+  RC-38/39; section 16), `docs/research/RESEARCH_MAP.md` (gap-closure
+  mode, 6 detailed gap checklists, L5 → PARTIALLY MAPPED),
+  `docs/CHANGELOG.md`, handoff files
+- Summary: batch 09 (first single-gap payload — HV wiring) +
+  review_04 reconciled with owner instructions verbatim. Promoted:
+  Sendyne SIM100MLP (SupplierCandidate/MetricCandidate, CS-20/RC-38 —
+  **100 Ω/V fenced as datasheet discussion, not system threshold**,
+  cross-check vs FMVSS 305a / ISO 6469-3 required). Downgraded: ALL
+  Lectromec-derived rows (RC-27/28/39) → TechnicalBackground/
+  NeedsExactSource. Candidate Build Engine items recorded (3 Rule, 1
+  Metric, 1 Test, 4 OpenGaps) — all pre-rule. L5 HV wiring: EMPTY →
+  PARTIALLY MAPPED with owner's 15-item still-missing list. Owner's
+  gap execution order recorded (CAN/PATS last). **Nothing ingested;
+  nothing Confirmed; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_08/review_03 archives are 1:1 against the
-  owner's chat message ("Gemini 8:75"); all quotes remain
-  Hunter-supplied and unverified (B-002); no supplier value entered
-  any rule or parameter
+- Verified vs claimed: batch_09/review_04 archives are 1:1 against the
+  owner's chat message ("Gemini n 9:75"); all quotes remain
+  Hunter-supplied and unverified (B-002); no supplier value (100 Ω/V,
+  Chilye specs) entered any rule or parameter
 
 ## State
 

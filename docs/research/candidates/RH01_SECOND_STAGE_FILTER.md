@@ -46,6 +46,7 @@ this file supersedes it (see Addendum, section 7).
 | CS-17 | **SupplierCandidate — CP#1 solution candidate** (owner review_03 promotion) | *Brogen dual-power Electric Hydraulic Power Steering (EHPS) system page* | Brogen | <https://brogenevsystem.com/parts/electric-power-steering-system/> | Candidate (batch_08) — `EngineeringReviewRequired` + `PhysicalVerificationRequired`. **Does NOT solve CP#1**: Ford hydroboost pressure/flow, steering gear and brake-assist requirements, reservoir, failure modes, mounting space, supply path, LV backup capability, and test procedure all still missing — lanes L10/L4/L9 |
 | CS-18 | **CandidateSource — UIM behavior ONLY** (owner review_03) | *Ford Commercial Vehicle Bulletin Q-251R2: Upfitter Interface Module (UIM)* | Ford BBAS (tokenized asset URL) | <https://madocumentupload.marketingassociates.com/api/Document/GetFile?v1=5405699&v2=060820094914&v3=60&v4=f5785dff32699c207928189560abaea217d868268fbcbe8b49e69555&v5=False> | Candidate (batch_08). Proves UIM behavior and source path; **proves nothing about PCM-delete/PATS/cluster behavior** — lane L7 |
 | CS-19 | **BackgroundSupplier — WrongPlatformRisk** (owner review_03 downgrade) | *EV West electric power steering unit* (12 V column EPS) | EV West | <https://evwest.com/electric-power-steering-unit-for-electric-vehicles> | Background (batch_08). Likely light-vehicle EPS — **not to be used for F-450/F-550 steering unless an engineer confirms applicability**; Brogen-style EHPS is the relevant truck lane — lane L9 |
+| CS-20 | **SupplierCandidate — MetricCandidate** (owner review_04 promotion) | *Sendyne SIM100MLP isolation monitor for unearthed (IT) DC power systems — datasheet V1.1a* | Sendyne (PDF hosted at dc-components.com) | <https://dc-components.com/wp-content/uploads/Sendyne-SIM100MLP-Datasheet-V1.1a.pdf> | Candidate (batch_09) — `NeedsEngineeringReview`. Isolation-monitoring metric/test candidates only — lane L5/L9 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -93,6 +94,8 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-35 | Brogen EHPS: "The dual power electric steering pump operates using both a high voltage battery pack (DC540V) and a low voltage battery (DC24V). If the high voltage supply disconnects suddenly, the low voltage system takes over…" *(supplier marketing/engineering page; DC540V/DC24V are THIS supplier's example parameters, not requirements)* | CS-17 | "EHPS Operations & Vehicle Types" — unverified | **SupplierCandidate — CP#1 solution candidate**; `EngineeringReviewRequired` + `PhysicalVerificationRequired`; owner's 10-item missing list applies (see CS-17) — lanes L10/L4 |
 | RC-36 | Ford Q-251R2: "The UIM receives 28 high speed CAN 'read only' signals from various vehicle systems… the UIM has no interaction with vehicle feature functions (with the exception of horn chirp). It is strictly designed to provide outputs for aftermarket equipment." *(OEM bulletin — proves UIM behavior only)* | CS-18 | **Candidate locator (batch_08): page 2, "UIM Signals & Logic"** — unverified | Candidate — **scope-limited to UIM behavior**; lane L7 |
 | RC-37 | EV West EPS unit: upper spline Woodward #102, lower #114; input shaft 3/4 in, 36-spline GM *(supplier specs for a 12 V column-EPS unit)* | CS-19 | Specs matrix — unverified | **BackgroundSupplier — WrongPlatformRisk** for F-450/F-550; engineering confirmation required before any use — lane L9 |
+| RC-38 | Sendyne SIM100MLP: "If either of the isolation resistances decreases below the threshold of 100 Ohms/Volt a hazard occurs if a person makes contact with the terminal 'opposite' to the leaking resistor." Monitor continuously tracks isolation resistance to chassis, reports in Ω/V over isolated CAN 2.0B *(owner correction, review_04: **the 100 Ω/V figure is this datasheet's safety discussion — NOT the system threshold** until cross-checked against FMVSS 305a / ISO 6469-3 / chosen component requirements)* | CS-20 | **Candidate locator (batch_09): page 2, Figure 2 context / parameters matrix** — unverified | **SupplierCandidate — MetricCandidate + TestCandidate**; `NeedsEngineeringReview`; threshold cross-check required — lane L5 |
+| RC-39 | Per the Lectromec review, J1673 requires unique keying for connectors in close proximity (mis-mate prevention) and identification of all connector cavities/contacts *(secondary-source claim ABOUT the standard)* | CS-08 | Review article; underlying: **J1673 §3.3/3.4 — standard text NeedsExactSource** | **TechnicalBackground / NeedsExactSource** (owner review_04 downgrade applies to all Lectromec-derived rows incl. RC-27/RC-28) — lane L5 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -563,3 +566,67 @@ universal MSD rules.**
 Cooling curves (L6); battery/motor/inverter/charger/DC-DC datasheets
 (L9); Ford hydroboost pressure/flow (L10); Ford CAN/PATS message
 behavior (L7 — capture required); failure-mode test methods (L8/L3).
+
+---
+
+## 16. Batch 09 + owner review_04 reconciliation (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_09_hv_wiring_gap_closure.md`
+and `docs/research/raw/owner_reviews/review_04_batch_09_verdict.md`
+(one message: owner gap-package checklists + payload + verdict).
+First single-gap payload (HV wiring, priority 1). Row additions:
+CS-20, RC-38, RC-39.
+
+### Owner instructions applied verbatim
+
+- **Promoted:** Sendyne SIM100MLP → SupplierCandidate / MetricCandidate
+  (CS-20/RC-38); Chilye MSD → RuleCandidate/NoGoConditionCandidate
+  additions confirmed (CS-15/RC-33 — fifth candidate rule added: *MSD
+  must be physically accessible for service*); ISO 6469-3 stays
+  CandidateSourcePath / NeedsExactSource (no change needed).
+- **Downgraded:** ALL Lectromec-derived rows (RC-27, RC-28, RC-39) →
+  **TechnicalBackground / NeedsExactSource** — may create research
+  tasks, may never create final HV wiring rules. Batch_09's
+  "CandidateSource" labels on those rows are overridden.
+- **Threshold fence (owner correction):** the **100 Ω/V** figure in
+  RC-38 is the Sendyne datasheet's safety discussion, not a system
+  threshold. It may not be used as a design value until cross-checked
+  against FMVSS 305a / ISO 6469-3 / selected-component requirements.
+- **Standing rejections extended:** summary articles presented as
+  final SAE text; any "the selected HV system is safe/compliant"
+  claim; any universal rule not tied to a selected component,
+  standard, or test.
+
+### Candidate Build Engine items (owner list — candidates, NOT rules)
+
+| Item | Type | Source basis |
+|---|---|---|
+| HV power cable splices avoided where possible | RuleCandidate | RC-28 (TechnicalBackground — needs J1673 text) |
+| Adjacent HV connectors require unique keying / mis-mate prevention | RuleCandidate | RC-39 (TechnicalBackground — needs J1673 text) |
+| MSD/HVIL must open interlock path before HV terminal separation | RuleCandidate | RC-33 (component-family-scoped) |
+| Isolation monitoring threshold (cross-check required) | MetricCandidate | RC-38 |
+| Isolation monitor reporting + CAN fault response | TestCandidate | RC-38 |
+| Exact HV cable bend radius | OpenGap | fenced multipliers (batches 05/06/07/09) |
+| Grounding/bonding impedance threshold | OpenGap | none on file |
+| IP67/IP6K9K test cycle | OpenGap | none on file |
+| Selected fuse/contactor/pre-charge ratings | OpenGap | none on file (datasheets needed) |
+
+### Notes
+
+- Batch_09's own held-gaps section (bend radius, grounding impedance,
+  IP cycles) matches the standing fences — fourth consecutive batch
+  converging on the guardrails.
+- Batch_09 Source Row 1 title anomaly: "Aerospace High Voltage
+  Systems…" paired with the automotive Lectromec URL — title/URL
+  mismatch noted; content matches the automotive article.
+- Chilye extended specs relayed in review_04 (2 HVIL sets, M6,
+  16–70 mm² HV cable range, 0.5 mm² HVIL cable, IP67/IP6K9K, IP2XB,
+  −40…125 °C) recorded as owner-relayed datasheet values on RC-33 —
+  still NeedsSupplierData verification against the PDF itself.
+- **HV wiring lane (L5) status: EMPTY → PARTIALLY MAPPED.** Owner's
+  15-item "still missing before build-ready wiring design" list
+  recorded in the Research Map.
+- Owner's recommended next: finish HV wiring (fuse/contactor/
+  pre-charge/HV cable datasheets) or move to cooling; CAN/PATS
+  deliberately last (proprietary depth — real logging/expert help).

@@ -5,6 +5,24 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 09 (HV wiring gap closure) + review_04 reconciled
+
+- Archived batch_09 (first single-gap payload) and review_04 (owner
+  gap-package checklists + gap-closure prompt template + verdict) 1:1.
+- Owner instructions applied: Sendyne SIM100MLP promoted
+  (SupplierCandidate/MetricCandidate — CS-20/RC-38, with the **100 Ω/V
+  figure fenced**: datasheet safety discussion, not a system threshold
+  until cross-checked vs FMVSS 305a / ISO 6469-3 / selected
+  components); ALL Lectromec-derived rows (RC-27/28/39) downgraded to
+  TechnicalBackground/NeedsExactSource; fifth Chilye rule candidate
+  added (service accessibility); standing rejections extended.
+- Candidate Build Engine items table added (3 RuleCandidates, 1
+  MetricCandidate, 1 TestCandidate, 4 OpenGaps) — all pre-rule.
+- Research Map updated: gap-closure mode with owner's execution order;
+  L5 HV wiring EMPTY → PARTIALLY MAPPED with the 15-item still-missing
+  list; detailed checklists recorded for all six gap packages.
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 08 + owner review_03 archived and reconciled
 
 - Archived batch_08 (first focused payload, gaps 1–6) and review_03
