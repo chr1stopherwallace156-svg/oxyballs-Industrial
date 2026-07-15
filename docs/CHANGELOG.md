@@ -5,6 +5,13 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — Delivery "4:75" verified as exact duplicate of batch 03
+
+- Diff-verified byte-identical to `batch_03_finalized_output.md`; not
+  duplicated on disk — receipt recorded in the raw archive's
+  PROVENANCE.md, duplicate notice added to the filter file (section 10).
+- No register changes; flagged to owner as possible mis-send.
+
 ## 2026-07-15 — RH batch 03 archived and reconciled into filter register
 
 - Archived batch_03 ("Finalized Research Hunter Output" — the run the

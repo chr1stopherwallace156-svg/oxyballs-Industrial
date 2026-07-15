@@ -226,3 +226,14 @@ missing-source 3 (candidate citation 89 FR 104318), RC-08/RC-09
 | Row 3 (HVIP) omits batch_02's Appendix B reference | No downgrade — the **Appendix B candidate locator from batch_02 is retained** for next-action 4; batch_03's "keep as regulatory placeholder until the Manual section is parsed" matches the standing disposition. |
 | Row 2 next action: "Draft structural compliance documentation template aligned with Part 561" | **Deferred** — template drafting is downstream build work, not research; out of scope during the ingestion phase. Logged as a future work candidate only. |
 | Closing self-assessment ("finalized as clean, un-hallucinated candidate metadata") | Noted, **not authoritative** — agent statements do not verify anything (AGENTS.md trust rules). Verification flags stand until source text is independently extracted. |
+
+---
+
+## 10. Delivery "4:75" — exact duplicate (2026-07-15)
+
+The delivery labeled "4:75" was diff-verified **byte-identical to
+batch_03**. Disposition: no new rows, no status changes, no register
+edits; receipt recorded in `docs/research/raw/research_hunter/PROVENANCE.md`
+with batch_03 serving as the archival copy for both deliveries.
+Flagged to the owner as a possible mis-send — if a different batch 4
+was intended, it should be resent.
