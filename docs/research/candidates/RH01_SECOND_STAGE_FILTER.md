@@ -40,6 +40,12 @@ this file supersedes it (see Addendum, section 7).
 | CS-11 | CandidateSource | *HVIP Grant Solicitation (ADA), 2026-03* — CARB solicitation referencing the Implementation Manual's appendix structure | CARB | <https://ww2.arb.ca.gov/sites/default/files/2026-03/HVIP-Solicitation_ADA.pdf> | Candidate (batch_07) — RegulatoryCandidate class — lane L2 |
 | CS-12 | **CandidateSourcePath — provenance concern (third-party mirror)** | *2022 Ford Body Application Guide* (claimed) | URL is xr793.com, NOT a Ford server | <https://xr793.com/wp-content/uploads/2021/10/2022-Ford-Body-Application-Guide.pdf> | Lead only (batch_07; owner review_02: prefer Ford-controlled sources) — corroborates RC-16/RC-18 direction; no promotion from this mirror — lanes L1/L4 |
 | CS-13 | **LeadOnly — background** | *EngineCert "What is ZEP certification…"* (industry explainer referencing UL 2580 / CARB concepts) | enginecert.com (commercial consultancy) | <https://enginecert.com/what-is-zep-certification-and-do-you-need-it/> | Background only (batch_07; owner review_02): concept identification only; **cooling/current/temperature/derating/BMS thresholds must come from supplier datasheets, CARB text, OEM data, or testing** — lane L6 |
+| CS-14 | **NeedsOfficialSource** (owner review_03) | *SAE J1742: High Voltage Connection Systems for On-Board Road Vehicle Electrical Wiring Harnesses* — accessed via **Scribd**, not an SAE-controlled copy | SAE (standard); Scribd (uncontrolled host) | <https://www.scribd.com/document/819729663/SAEJ1742v001> | Technical-standard lead (batch_08). **No connector rule until the official SAE copy or supplier-certified test data is obtained** — lane L5 |
+| CS-15 | **SupplierCandidate** (owner review_03 promotion) | *Chilye MINI Manual Service Disconnect (MSD) specification sheet* | Chilye / citini.com | <https://citini.com/wp-content/uploads/2022/07/CL-Mini-MSD-Specification-EN.pdf> | Candidate (batch_08) — `NeedsSupplierData` + `NeedsEngineeringReview`; **rule candidates are scoped to this component family only, and must be tied to a chosen part number** — lane L5/L9 |
+| CS-16 | **CandidateSourcePath / NeedsExactSource** (owner review_03) | *ISO 6469-3:2021 — Electrically propelled road vehicles — Safety — Part 3: Protection of persons against electric shock* — OBP scope preview only; full text paywalled | ISO | <https://www.iso.org/obp/ui/en/#!iso:std:81746:en> | Candidate path (batch_08). **No isolation-resistance thresholds or monitoring test procedures until the actual standard text (or another official requirement) is on file** — lane L5 |
+| CS-17 | **SupplierCandidate — CP#1 solution candidate** (owner review_03 promotion) | *Brogen dual-power Electric Hydraulic Power Steering (EHPS) system page* | Brogen | <https://brogenevsystem.com/parts/electric-power-steering-system/> | Candidate (batch_08) — `EngineeringReviewRequired` + `PhysicalVerificationRequired`. **Does NOT solve CP#1**: Ford hydroboost pressure/flow, steering gear and brake-assist requirements, reservoir, failure modes, mounting space, supply path, LV backup capability, and test procedure all still missing — lanes L10/L4/L9 |
+| CS-18 | **CandidateSource — UIM behavior ONLY** (owner review_03) | *Ford Commercial Vehicle Bulletin Q-251R2: Upfitter Interface Module (UIM)* | Ford BBAS (tokenized asset URL) | <https://madocumentupload.marketingassociates.com/api/Document/GetFile?v1=5405699&v2=060820094914&v3=60&v4=f5785dff32699c207928189560abaea217d868268fbcbe8b49e69555&v5=False> | Candidate (batch_08). Proves UIM behavior and source path; **proves nothing about PCM-delete/PATS/cluster behavior** — lane L7 |
+| CS-19 | **BackgroundSupplier — WrongPlatformRisk** (owner review_03 downgrade) | *EV West electric power steering unit* (12 V column EPS) | EV West | <https://evwest.com/electric-power-steering-unit-for-electric-vehicles> | Background (batch_08). Likely light-vehicle EPS — **not to be used for F-450/F-550 steering unless an engineer confirms applicability**; Brogen-style EHPS is the relevant truck lane — lane L9 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -81,6 +87,12 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-29 | Transit/E-Transit BEMM §1.3.4 ("Drilling and Welding"): adding holes or welding on frame cross members is not recommended *(Hunter marked it "cross-matched from general commercial truck framework rules" — possibly NOT verbatim from this document; platform = Transit, corroborates RC-17's direction only)* | CS-09 | **Candidate locator (batch_06): §1.3.4** — unverified; source is an unofficial mirror | Candidate — **cross-match flag** + platform caveat; lanes L1/L4 |
 | RC-30 | Q-356R2: "BBAS cannot provide support to eliminate error messages, warnings or MILs that are a result of removing the pickup box on vehicle configurations that are not supported for box removal… Refer to the Body Builder Layout Book for additional guidelines and recommendations." *(Hunter-supplied quote — directly relevant to CP#2: OEM confirms module/telltale consequences of unsupported configuration changes and offers no bypass support)* | CS-10 | **Candidate locator (batch_07): Page 2, Bulletin Q-356R2** — unverified | Candidate — lanes L1/L7 |
 | RC-31 | HVIP Solicitation: "The current HVIP Implementation Manual (Appendix C) provides information on the current vehicle categories and requirements for HVIP implementation." *(Hunter-supplied quote — **conflicts with earlier Appendix B references** (RC-25, batch_01/review_01); appendix lettering may differ across manual years; the governing manual + appendix must be pinned)* | CS-11 | **Candidate locator (batch_07): Section III** — unverified | Candidate — **RegulatoryCandidate; appendix B-vs-C discrepancy flag** — lane L2 |
+| RC-32 | SAE J1742 covers recommended test methods and performance requirements for single- and multi-pole HV connectors in EV/HEV on-board harnesses, 50–600 V AC/DC; connectors designed for disconnection in repair/maintenance; duty-cycle effects considered in design *(via uncontrolled Scribd copy)* | CS-14 | Scope/Performance Requirements — **NeedsOfficialSource** | Candidate — connector **test-checklist candidate only**; no rule until official copy — lane L5 |
+| RC-33 | Chilye MSD: "…utilizes a two-stage lever which help to open the HVIL circuit prior to separation of HV connectors… Fuse Rated Voltage：600 to 700Vdc. Fuse Rated Current：Up to 500A, depends on fuse." *(supplier datasheet; values are THIS component family's specs, not design values)* | CS-15 | **Candidate locator (batch_08): page 2, "Applications and Electrical Specs"** — unverified | **SupplierCandidate** — `NeedsSupplierData` + `NeedsEngineeringReview`; component-family-scoped; part number required — lane L5/L9 |
+| RC-34 | ISO 6469-3:2021 scope: electrical safety requirements for voltage class B electric-propulsion circuits; introduces voltage classes B1/B2 and a new test specification for the isolation-resistance monitoring system *(OBP preview text)* | CS-16 | Scope/Foreword — **NeedsExactSource** for all requirements | Candidate path — **no thresholds or test procedures may be derived yet** — lane L5 |
+| RC-35 | Brogen EHPS: "The dual power electric steering pump operates using both a high voltage battery pack (DC540V) and a low voltage battery (DC24V). If the high voltage supply disconnects suddenly, the low voltage system takes over…" *(supplier marketing/engineering page; DC540V/DC24V are THIS supplier's example parameters, not requirements)* | CS-17 | "EHPS Operations & Vehicle Types" — unverified | **SupplierCandidate — CP#1 solution candidate**; `EngineeringReviewRequired` + `PhysicalVerificationRequired`; owner's 10-item missing list applies (see CS-17) — lanes L10/L4 |
+| RC-36 | Ford Q-251R2: "The UIM receives 28 high speed CAN 'read only' signals from various vehicle systems… the UIM has no interaction with vehicle feature functions (with the exception of horn chirp). It is strictly designed to provide outputs for aftermarket equipment." *(OEM bulletin — proves UIM behavior only)* | CS-18 | **Candidate locator (batch_08): page 2, "UIM Signals & Logic"** — unverified | Candidate — **scope-limited to UIM behavior**; lane L7 |
+| RC-37 | EV West EPS unit: upper spline Woodward #102, lower #114; input shaft 3/4 in, 36-spline GM *(supplier specs for a 12 V column-EPS unit)* | CS-19 | Specs matrix — unverified | **BackgroundSupplier — WrongPlatformRisk** for F-450/F-550; engineering confirmation required before any use — lane L9 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -479,3 +491,75 @@ protection/interlock chain (L5); (2) cooling loops (L6); (3)
 hydroboost replacement/redundancy (L10/L4); (4) Ford CAN/PATS/gateway
 (L7); (5) supplier datasheets (L9); (6) failure modes & test methods
 (L8/L3).
+
+---
+
+## 15. Batch 08 + owner review_03 reconciliation (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_08_gaps_1-6_payload.md` and
+`docs/research/raw/owner_reviews/review_03_batch_08_verdict.md`.
+Row additions above: CS-14..CS-19, RC-32..RC-37. First payload scored
+against the six owner priorities: **priorities 1 (HV wiring), 3
+(brake/steering), and 4 (CAN) advanced; 2 (cooling), 5 (supplier
+depth), and 6 (failure modes/test methods) still empty** — batch
+honestly declared both empty lanes.
+
+### Owner promote/downgrade/reject — applied verbatim
+
+- **Promoted:** Chilye MSD → SupplierCandidate + NeedsEngineeringReview
+  (CS-15/RC-33); Brogen EHPS → SupplierCandidate / **CP#1 candidate**
+  with EngineeringReviewRequired + PhysicalVerificationRequired
+  (CS-17/RC-35); Ford Q-251R2 → OEM CandidateSource **for UIM behavior
+  only** (CS-18/RC-36); ISO 6469-3 → CandidateSourcePath /
+  NeedsExactSource (CS-16/RC-34).
+- **Downgraded:** SAE J1742 via Scribd → **NeedsOfficialSource**
+  (CS-14/RC-32 — Scribd is not a controlled standard source); EV West
+  EPS → **BackgroundSupplier / WrongPlatformRisk** (CS-19/RC-37);
+  every PCM-delete/PATS/cluster/CAN-mimic claim →
+  EngineeringReviewRequired unless backed by Ford service data or real
+  CAN capture.
+- **Rejected (standing):** any exact bend-radius/fuse/contactor/cable/
+  isolation threshold not directly in source text or a datasheet; any
+  F-450/F-550 suitability claim without pressure/flow/load/fitment
+  verification; any inference that UIM CAN behavior proves PATS/PCM
+  behavior.
+
+### The UIM inference split (owner-directed)
+
+Batch_08's "Next Action" claimed: *"Deleting the factory PCM
+eliminates these baseline broadcast frames; specialized network nodes
+must mimic these 28 read-only messages…"* — **split per review_03**:
+
+- Supported (RC-36): UIM receives 28 read-only high-speed CAN signals
+  and drives aftermarket outputs.
+- **Unsupported inference (NO claim row created):** PCM deletion
+  eliminates those frames / 28 messages must be mimicked. Status:
+  `EngineeringReviewRequired / MISSING_SOURCE` — resolvable only by
+  Ford service data or a real-vehicle CAN capture. Recorded here so it
+  cannot re-enter as fact.
+
+### Candidate rule preview additions (component-family-scoped, NOT rules)
+
+From review_03, gated on part-number selection + engineering review:
+MSD must interrupt HVIL before HV terminal separation; MSD fuse rating
+must match pack voltage/current and fault study; MSD environmental
+rating must match mounting location; MSD cable-size range must match
+selected HV cable. **Scoped to the Chilye family only — never
+universal MSD rules.**
+
+### Fence notes
+
+- Supplier numbers in RC-33/RC-35 (500 A, 600–700 Vdc, DC540V/DC24V)
+  are **that supplier's specs, not design values** — nothing selects a
+  component or sets a system parameter yet.
+- CP#1 remains **unsolved**: owner's 10-item missing list (hydroboost
+  pressure/flow, steering gear + brake assist requirements, reservoir,
+  failure modes, mounting, supply path, LV backup, test procedure)
+  recorded on CS-17.
+
+### Still-open lanes after batch 08
+
+Cooling curves (L6); battery/motor/inverter/charger/DC-DC datasheets
+(L9); Ford hydroboost pressure/flow (L10); Ford CAN/PATS message
+behavior (L7 — capture required); failure-mode test methods (L8/L3).

@@ -5,6 +5,26 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 08 + owner review_03 archived and reconciled
+
+- Archived batch_08 (first focused payload, gaps 1–6) and review_03
+  1:1. Priorities 1/3/4 advanced; 2/5/6 honestly reported empty.
+- Owner instructions applied verbatim: promoted Chilye MSD
+  (SupplierCandidate + NeedsEngineeringReview), Brogen EHPS
+  (SupplierCandidate / CP#1 candidate, EngineeringReviewRequired +
+  PhysicalVerificationRequired), Ford Q-251R2 (CandidateSource for UIM
+  behavior ONLY), ISO 6469-3 (CandidateSourcePath / NeedsExactSource);
+  downgraded SAE J1742-via-Scribd (NeedsOfficialSource) and EV West
+  EPS (BackgroundSupplier / WrongPlatformRisk).
+- UIM inference split: "PCM delete requires mimicking 28 messages"
+  recorded as unsupported inference (EngineeringReviewRequired /
+  MISSING_SOURCE) — no claim row created; UIM-behavior quote promoted
+  as RC-36.
+- New rows CS-14..CS-19, RC-32..RC-37; MSD candidate rules recorded
+  component-family-scoped; supplier numbers fenced as non-design
+  values; CP#1 10-item missing list recorded on CS-17.
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 07 + owner review_02 archived and reconciled
 
 - Archived batch_07 ("Comprehensive Research Discovery Map") and the
