@@ -5,6 +5,22 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — System Audit 01 recorded
+
+- Added `docs/audits/AUDIT_01_2026-07-15_SYSTEM_STATUS.md`: full
+  status check against what verifiably exists. Headlines: repo safety
+  PASS; build/database/StageGate/M8/FinalVerification NOT PRESENT (no
+  software exists — expected in ingestion phase); research ingestion
+  PASS at document level (7 CS / 26 RC rows, 0 Confirmed, 4 guardrail
+  catch types with evidence); forbidden-language scan: docs PASS,
+  **index.html FAIL** (certified/warranty/turnaround/pricing claims
+  unsupported by any evidence); scope mismatch flagged — audit brief
+  references an `elektron-os-clean` repo that does not exist here
+  (owner decision required); verification debt (B-002) and
+  self-verifying-agent risk recorded.
+- No files outside `docs/audits/` modified; nothing marked Confirmed;
+  ODRs untouched.
+
 ## 2026-07-15 — Handoff protocol amended (D-004)
 
 - Added operational fallback triggers (batch completed / meaningful

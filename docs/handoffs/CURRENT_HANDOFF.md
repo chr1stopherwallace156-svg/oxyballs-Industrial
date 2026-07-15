@@ -4,90 +4,77 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-15
-- Reason for handoff: task complete (owner review of batch 05 archived
-  and applied); awaiting next delivery (~70 remaining)
+- Reason for handoff: task complete (System Audit 01 recorded);
+  awaiting owner decisions and/or next batch
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
-- **Agent owner: Claude Code** (single-writer rule, AGENTS.md — no
-  other agent may modify this branch until ownership is transferred)
-- Start commit: `f89caeb` — Reconcile RH batch 05 into second-stage
-  filter register
+- **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
+- Start commit: `c32524d` — Amend handoff protocol: fallback triggers
+  + branch single-writer rule (D-004)
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- Files changed:
-  `docs/research/raw/owner_reviews/review_01_batch_05_verdict.md`
-  (new, verbatim — committed separately as `839fdf2`),
-  `docs/research/raw/research_hunter/PROVENANCE.md` (owner-reviews
-  cross-reference), `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md`
-  (CS-07 scope correction; RC-22..RC-26 added; frame-rail downgrade
-  restatused; section 12), `docs/CHANGELOG.md`, handoff files
-- Summary: archived the owner's batch-05 verdict 1:1 and applied its
-  filter instructions. Owner verdict on record: filter yes, direct
-  ingestion NO, Confirmed NO. New owner-relayed claims RC-22..RC-26
-  (frame-rail web drilling limits, flange-weld prohibition, HVIP ZEV
-  Conversions section, Appendix B exemption-EO, fleet-class
-  restriction) — all locator-pending and unusable until located.
-  Adopted `NeedsVehicleSpecificBBLB` vocabulary; corrected CS-07 scope
-  to general Ford guidance; fenced FMVSS rows to "map requirements"
-  (never "we comply") and HVIP rows to "EO/eligibility review" (never
-  voucher promises). Section 12 carries the owner-requested outputs:
-  Rule/Metric/Test/NoGo candidate preview, holds, needs-vehicle-specific
-  list, engineering review list.
-  **Nothing ingested into rev07; nothing Confirmed; no SQLite; no
-  StageGate changes; ODRs and SourceClaims.md untouched.**
+- Files changed: `docs/audits/AUDIT_01_2026-07-15_SYSTEM_STATUS.md`
+  (new), `docs/CHANGELOG.md`, handoff files
+- Summary: full system audit executed against actual repository state.
+  Repo safety PASS (clean tree, no reference/, no *.db/data/dist/
+  node_modules tracked, no tags, evidence commands in audit §1).
+  Areas 2–4, 6, 8 NOT PRESENT — no software exists (correct for
+  phase). Research ingestion PASS at document level. Forbidden
+  language: docs PASS; **index.html FAIL** (certified technicians,
+  3yr/36k warranty, fixed prices, 48–72hr turnaround — unsupported).
+  Scope mismatch flagged: audit brief references `elektron-os-clean`
+  which does not exist in this environment. Red-team findings 1–10 in
+  audit §11. Scores in §12. Nothing marked Confirmed; no fixes applied
+  (assessment-only per audit rules).
 
 ## Verification
 
-- Tests run: none — no test suite exists in this repository
-- Test results: n/a
-- Verified vs claimed: owner-review archive is 1:1 against the owner's
-  chat message; owner-relayed source specifics (1.5 in / 0.75 in frame
-  limits, exemption-EO requirement) are registered as
-  **NeedsVerification with locators pending** — owner statements do not
-  substitute for source text under AGENTS.md trust rules
+- Tests run: none exist; audit commands run and reproduced in the
+  audit file (git status/branch/log/ls-files/rev-list/find/grep)
+- Test results: see audit §1, §10 — re-runnable verbatim
+- Verified vs claimed: every audit statement traces to a command
+  output or file path; unresolvable items marked UNVERIFIED
 
 ## State
 
 - Current phase: Revision 07 Source Ingestion and Consolidation
-- Blockers: B-001 (doctrine ingestion — 6 deliveries received: 4
-  distinct Hunter batches + 1 duplicate + 1 owner review); B-002
-  (verbatim .gov/CARB extraction blocked in this environment)
+- Blockers: B-001 (ingestion — ~70 batches outstanding); B-002 (.gov/
+  CARB extraction blocked). New owner-decision items from audit:
+  two-universe question (elektron-os-clean), index.html disposition,
+  regulatory module mapping (standing), verification-debt payment
+  (source PDFs into raw archive).
 
 ## Next exact action
 
-On the next delivery: diff against existing raw batches; if new,
-archive 1:1, update PROVENANCE, commit, then reconcile separately.
-Accumulated extraction targets: General BBLB p.2 Frame Alterations
-full text (frame-rail limits RC-22/23, truncated welding sentence
-RC-19), final-rule DATES text preceding "For all other requirements",
-CARB §2.2 complete subsystem list (RC-20), HVIP ZEV Conversions
-section + Appendix B (RC-24/25). Pending owner decisions: rev07
-module mapping (filter next-action 8); definition of the "Artifact
-Intake Form" (noted in section 12, not built).
+Await owner answers to audit §13 highest-priority items 1–3
+(elektron-os-clean status; index.html disposition; module mapping) —
+or the next research batch, which is processed per the standing
+per-batch procedure (diff → archive → PROVENANCE → commit →
+reconcile → commit). Do not act on index.html without owner decision.
 
 ## Forbidden actions
 
+- Do not edit `index.html` without explicit owner instruction (audit
+  finding, but disposition is a business decision).
 - Do not edit any file under `docs/research/raw/` — immutable evidence.
-- Do not ingest candidate rows into `docs/specifications/rev07/`; no
-  promotion into `SourceClaims.md` before locator verification and
-  owner approval; nothing gets marked Confirmed.
-- Do not use RC-22..RC-26 for anything until exact quotes + page/line
-  are extracted; do not use truncated RC-19/RC-20.
-- Do not bind any General-BBLB claim to Super Duty / F-450/F-550
-  without the vehicle-specific BBLB (`NeedsVehicleSpecificBBLB`).
-- Do not emit "we comply" (FMVSS) or voucher-promise (HVIP) framings.
-- Do not build the Artifact Intake Form — undefined, and no production
-  code during ingestion.
-- Do not implement M10, M11; do not resolve ODR-001..ODR-003.
+- Do not ingest candidate rows into rev07; nothing gets marked
+  Confirmed; no SourceClaims.md promotion before locator verification
+  + owner approval.
+- Do not use truncated/held rows (RC-19/20) or locator-pending rows
+  (RC-22..26); do not leak fenced values (J1673 4×/6×, rejected
+  supplier numbers).
+- Do not implement M10, M11, or any production code; do not resolve
+  ODR-001..ODR-003.
 
 ## Receiving-agent checklist (complete BEFORE modifying any file)
 
+- [ ] **Agent owner field names ME** — if not, do not edit
 - [ ] `git status` — clean tree, expected branch
 - [ ] `git log -1` — HEAD matches end commit above
 - [ ] Active spec checked (`docs/specifications/Revision_07.md`,
