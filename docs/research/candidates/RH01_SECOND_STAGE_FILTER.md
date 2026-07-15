@@ -28,7 +28,7 @@ this file supersedes it (see Addendum, section 7).
 | ID | Type | Document | Publisher / identifier | Exact URL | Status |
 |---|---|---|---|---|---|
 | CS-01 | CandidateSource | *California Standards and Test Procedures for New 2021 and Subsequent Model Heavy-Duty Zero-Emission Powertrains* | CARB; program page: Zero-Emission Powertrain Certification | Procedure PDF: <https://ww2.arb.ca.gov/sites/default/files/2020-05/ADA__California%20Standards%20And%20Test%20Procedures%20For%20New%202021%20And%20Subsequent%20Model%20Heavy-Duty%20Zero-Emission%20Powertrains.pdf> · Program: <https://ww2.arb.ca.gov/our-work/programs/zero-emission-powertrain-certification> | Candidate |
-| CS-02 | CandidateSource | *FMVSS; FMVSS No. 305a Electric-Powered Vehicles: Electric Powertrain Integrity; GTR No. 20 Incorporation by Reference* — Final rule, published 2024-12-20, FR Doc. 2024-28707 (89 FR start page: pending extraction) | NHTSA / Federal Register | <https://www.federalregister.gov/documents/2024/12/20/2024-28707/federal-motor-vehicle-safety-standards-fmvss-no-305a-electric-powered-vehicles-electric-powertrain> | Candidate |
+| CS-02 | CandidateSource | *FMVSS; FMVSS No. 305a Electric-Powered Vehicles: Electric Powertrain Integrity; GTR No. 20 Incorporation by Reference* — Final rule, published 2024-12-20, FR Doc. 2024-28707, **89 FR 104318** *(citation Hunter-supplied in batch_03; consistent with the delay notice's cross-reference; independent verification pending, B-002)* | NHTSA / Federal Register | <https://www.federalregister.gov/documents/2024/12/20/2024-28707/federal-motor-vehicle-safety-standards-fmvss-no-305a-electric-powered-vehicles-electric-powertrain> | Candidate |
 | CS-03 | CandidateSource | Same title — *Delay of effective date*, published 2025-02-14, FR Doc. 2025-02582, **90 FR 9609–9610** | NHTSA / Federal Register | <https://www.federalregister.gov/documents/2025/02/14/2025-02582/federal-motor-vehicle-safety-standards-fmvss-no-305a-electric-powered-vehicles-electric-powertrain> | Candidate |
 | CS-04 | **RegulatoryCandidate** (not final eligibility) | *FAQs — Clean Truck and Bus Voucher Incentive Project (California HVIP)*; details deferred to *HVIP Implementation Manual* (FY23-24, updated 2024-10-31) | CALSTART / CARB | FAQ: <https://californiahvip.org/faqs/> · Manual PDF: <https://californiahvip.org/wp-content/uploads/2024/10/FY23-24-HVIP-Implementation-Manual-103124.pdf> | Candidate — eligibility NOT concluded until the Manual's conversion section is extracted |
 | CS-05 | **CandidateSourcePath** (path only, no claims) | *Ford Pro Body Builder Advisory Service (BBAS)* — portal to BBLBs, BEMM, CAD files | Ford Pro | BBAS: <https://www.fordpro.com/en-us/upfit/bbas/> · Publications: <https://www.fordpro.com/en-us/upfit/publications/> | Candidate path — **no physical frame claims** until the vehicle-specific Super Duty (F-450/F-550) BBLB is obtained and parsed |
@@ -51,9 +51,9 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-05 | FMVSS No. 305a expands applicability to vehicles with GVWR > 4,536 kg (10,000 lb) ("heavy vehicles") | CS-02 | Final rule SUMMARY / S2 Application | Candidate |
 | RC-06 | FMVSS No. 305a adds REESS performance requirements applying to all vehicles regardless of GVWR | CS-02 | Pending extraction | Candidate |
 | RC-07 | The final rule establishes 49 CFR part 561, "Documentation for Electric-powered Vehicles": risk-mitigation documentation submitted at NHTSA request, plus emergency-response information for first/second responders (REESS fires, stranded energy) | CS-02 | Pending extraction | Candidate |
-| RC-08 | Heavy vehicles have a September 1, 2028 compliance date | CS-02 | DATES section — **not independently re-verified in this environment**; note the codified section heading (49 CFR 571.305a, eCFR) reads "mandatory applicability begins on September 1, 2027" — the per-class date structure must be reconciled verbatim | Candidate — **verification flag** |
-| RC-09 | Final-stage manufacturers and alterers receive an additional year for the referenced (part 561) documentation requirements | CS-02 | DATES section — not independently re-verified in this environment. *Structure corroborated at proposal stage by CS-06 (NPRM Dates Section, p. 2: "+1 year for small-volume manufacturers, final-stage manufacturers, and alterers") — final rule text still required* | Candidate — **verification flag** |
-| RC-10 | The effective date of the 2024-12-20 final rule was delayed until March 20, 2025 (per the 2025-01-20 "Regulatory Freeze Pending Review" memorandum) | CS-03 | 90 FR 9609–9610 (2-page notice) | Candidate |
+| RC-08 | Vehicles with GVWR > 4,536 kg have a September 1, 2028 compliance date: "The compliance date is September 1, 2028, for vehicles with a gross vehicle weight rating over 4,536 kg." *(Hunter-supplied quote, batch_03)* | CS-02 | **Candidate locator (batch_03): 89 FR 104318, DATES section** — quote unverified (B-002). Reconciled date picture, all pending verification: effective date 2025-03-20 (RC-10); mandatory applicability from 2027-09-01 (codified heading, presumably lighter classes); heavy-vehicle compliance 2028-09-01 (this row) | Candidate — **verification flag** |
+| RC-09 | Small-volume manufacturers, final-stage manufacturers, and alterers receive an additional year to comply beyond the identified dates *(Hunter-supplied quote, batch_03; scope now includes small-volume manufacturers and reads as the full rule requirements, not only part 561 — earlier narrower phrasing superseded)* | CS-02 | **Candidate locator (batch_03): 89 FR 104318, DATES section** — quote unverified (B-002). Structure corroborated at proposal stage by CS-06 (NPRM Dates, p. 2) | Candidate — **verification flag** |
+| RC-10 | The effective date of the 2024-12-20 final rule was delayed until March 20, 2025: "The effective date of the rule published on December 20, 2024, at 89 FR 104318, is delayed until March 20, 2025." *(Hunter-supplied quote, batch_03, consistent with the notice metadata verified 2026-07-15)* | CS-03 | 90 FR 9609, DATES section (notice spans 90 FR 9609–9610) | Candidate |
 | RC-11 | The HVIP FAQ states that retrofits or conversions of trucks and buses from internal combustion to zero-emission can be funded through HVIP, and refers to the Implementation Manual for details | CS-04 | FAQ entry "Is retrofitting eligible for funding?" — verbatim supplied in batch_02 and consistent with the live FAQ summary verified 2026-07-15 | Candidate — **RegulatoryCandidate; NOT an eligibility conclusion** |
 | RC-12 | *(Replacement for rejected R-01, owner-approved wording)* "CARB ZEPCert is a candidate regulatory path that **may** be required for certain California commercial retrofit/conversion incentive eligibility. Exact HVIP/ZEPCert relationship must be verified against the current HVIP Implementation Manual and CARB guidance." | Hypothesis over CS-01 + CS-04 | n/a — hypothesis, not a source claim | RegulatoryHypothesis — verification required |
 | RC-13 | The NPRM *proposed* expanding FMVSS 305 applicability to vehicles with GVWR > 4,536 kg (10,000 lb) with added requirements and test procedures *(Hunter-supplied quote; proposal-stage corroboration of RC-05)* | CS-06 | **Candidate locator (batch_02): Executive Summary, Page 8** — unverified | Candidate — proposal-stage only |
@@ -83,7 +83,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
    archived at `docs/research/raw/research_hunter/batch_01_research_map.md`.
 2. **FMVSS 305a final rule verbatim DATES/S2 text** (RC-05, RC-06,
    RC-08, RC-09) — retrieval blocked in this environment (B-002).
-3. **89 FR start page** of the final rule (CS-02 citation completeness).
+3. ~~**89 FR start page** of the final rule~~ — **candidate value
+   supplied 2026-07-15**: 89 FR 104318 (batch_03, Hunter-supplied;
+   corroborated by the delay-notice text quoting "published on
+   December 20, 2024, at 89 FR 104318"; independent verification still
+   pending under B-002).
 4. **CARB ZEP procedure verbatim applicability / cert-family /
    monitoring-diagnostics text with section numbers** (RC-01..RC-03).
 5. **HVIP Implementation Manual (FY23-24) conversion/retrofit section**
@@ -188,3 +192,37 @@ RC-02/03/09/11 locators, RC-13..RC-16):
 - All Hunter-supplied quotes remain **unverified against the source
   documents** (B-002); candidate locators do not clear verification
   flags.
+
+---
+
+## 9. Batch 03 reconciliation (2026-07-15)
+
+Raw source: `docs/research/raw/research_hunter/batch_03_finalized_output.md`
+(the run the owner graded PASS). Row updates applied above: CS-02 and
+missing-source 3 (candidate citation 89 FR 104318), RC-08/RC-09
+(DATES-section quotes and locators), RC-10 (90 FR 9609 locator).
+
+### Improvements confirmed in batch 03
+
+- The rejected broad incentive sentence **did not recur** — Row 1's
+  "Why It Matters" is now narrowed to voucher-qualification framing
+  close to RC-12.
+- FMVSS 305a is cited via the final rule + delay notice (matching
+  CS-02/CS-03), superseding batch_02's NPRM framing; the batch_02 "Sept
+  1, 2027 effective date" conflation does not recur.
+- Its next-action list itself asserts the guardrails: no SQLite
+  writes, no StageGate updates, hand-off to the second-stage filter —
+  consistent with the pipeline.
+- Downgrade registry unchanged and consistent (frame rails, U-joint,
+  PATS/UIM, SAE J1673/ISO 6469-3); HVIP correctly held at
+  RegulatoryCandidate; BBAS correctly held at CandidateSourcePath.
+
+### Flags from batch 03
+
+| Item (batch_03 location) | Disposition |
+|---|---|
+| Row 2, Claim 1 text ("This final rule adopts … applies to light and heavy vehicles … also established a part entitled…") | **Treated as paraphrase, not verbatim** — the tense mixing and ellipses match the *delay notice's* summary phrasing more than final-rule text. Supports RC-04/RC-07 as-is; verbatim extraction still required. |
+| Row 4 title "BBAS Publication Directory" paired with the General BBLB asset URL (CS-07) | Title/URL mismatch noted — the URL is the General BBLB document, not a directory page. Claim 1 duplicates RC-16 (consistent). No new row. |
+| Row 3 (HVIP) omits batch_02's Appendix B reference | No downgrade — the **Appendix B candidate locator from batch_02 is retained** for next-action 4; batch_03's "keep as regulatory placeholder until the Manual section is parsed" matches the standing disposition. |
+| Row 2 next action: "Draft structural compliance documentation template aligned with Part 561" | **Deferred** — template drafting is downstream build work, not research; out of scope during the ingestion phase. Logged as a future work candidate only. |
+| Closing self-assessment ("finalized as clean, un-hallucinated candidate metadata") | Noted, **not authoritative** — agent statements do not verify anything (AGENTS.md trust rules). Verification flags stand until source text is independently extracted. |

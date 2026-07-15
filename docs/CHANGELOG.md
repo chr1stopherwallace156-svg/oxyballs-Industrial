@@ -5,6 +5,23 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 03 archived and reconciled into filter register
+
+- Archived batch_03 ("Finalized Research Hunter Output" — the run the
+  owner graded PASS) 1:1 under `docs/research/raw/research_hunter/`.
+- Filter register updates: candidate citation **89 FR 104318** attached
+  to CS-02 (missing-source 3 candidate-resolved); RC-08/RC-09 now carry
+  Hunter-supplied DATES-section quotes and locators (verification flags
+  remain — B-002); RC-10 locator set to 90 FR 9609 DATES; RC-09 scope
+  widened to include small-volume manufacturers per the quoted text.
+- Section 9 reconciliation: rejected sentence did not recur; NPRM
+  framing and date conflation superseded; flags recorded for the
+  spliced Claim-1 paraphrase, the BBAS title/URL mismatch, the dropped
+  (but retained) Appendix B locator, the deferred Part 561 template
+  next-action, and the non-authoritative "un-hallucinated"
+  self-assessment.
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 02 archived and reconciled into filter register
 
 - Archived batch_02 ("Strict Technical Source Map") 1:1 under
