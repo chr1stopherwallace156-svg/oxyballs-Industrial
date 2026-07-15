@@ -5,6 +5,19 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — Handoff protocol amended (D-004)
+
+- Added operational fallback triggers (batch completed / meaningful
+  commit / two hours / unresolved contradiction / dirty tree before
+  agent switch) so continuity does not depend on predicting usage
+  limits.
+- Added branch single-writer rule with `Agent owner` field in the
+  handoff (template + live handoff updated; receiving-agent checklist
+  now verifies ownership first). Mirrored in AGENTS.md, the Cursor
+  rule, and AI_INSTRUCTIONS.md.
+- Handoff validity hashes deferred to M10 start (recorded in AGENTS.md
+  and the M10 roadmap; not implemented now, per owner instruction).
+
 ## 2026-07-15 — Owner review of batch 05 archived and applied (verdict: filter yes, ingestion no)
 
 - Archived `docs/research/raw/owner_reviews/review_01_batch_05_verdict.md`

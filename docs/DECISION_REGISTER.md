@@ -17,6 +17,31 @@ later entry that references it.
 
 ---
 
+## D-004 — Handoff fallback triggers, branch single-writer rule, deferred validity hashes
+
+- Date: 2026-07-15
+- Status: Accepted
+- Context: "Nearing usage/context limits" is not reliably
+  self-detectable by an agent, so continuity could fail on a missed
+  prediction; and the protocol could still fail if two agents edited
+  the same branch simultaneously.
+- Decision: (1) Operational fallback triggers — a handoff is also
+  mandatory after every completed source-ingestion batch, every
+  meaningful commit, every two hours of uninterrupted work, any
+  unresolved contradiction recorded, and any dirty working tree before
+  switching agents. (2) Branch single-writer rule — only one agent may
+  own and modify an active branch at a time; ownership lives in the
+  handoff's `Agent owner` field; transfer requires commit-or-document,
+  push, END_COMMIT, and owner reassignment; receivers must not edit
+  until ownership names them. (3) Handoff validity hashes
+  (handoff_file_hash, active_spec_hash, implementation_ledger_hash,
+  blockers_file_hash) are deferred to M10 start — an enhancement, not
+  a blocker; source ingestion is not delayed for it.
+- Consequences: Continuity no longer depends on usage prediction;
+  concurrent-edit conflicts are a protocol violation with a defined
+  transfer procedure; the hash enhancement is tracked in the M10
+  roadmap so it cannot be silently forgotten.
+
 ## D-003 — Install the Elektron cross-agent handoff protocol
 
 - Date: 2026-07-15

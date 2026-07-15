@@ -62,6 +62,14 @@ M10 is complete when all of the following hold:
 - Any UI, reporting, or integration layers not listed above.
 - Any convenience path that bypasses guardrails, even behind a flag.
 
+## At M10 start (deferred protocol enhancement, D-004)
+
+Extend the handoff record with validity hashes so receivers can detect
+post-handoff document drift: `handoff_file_hash`, `active_spec_hash`,
+`implementation_ledger_hash`, `blockers_file_hash` (see AGENTS.md,
+"Deferred enhancement"). Deliberately NOT implemented during the
+ingestion phase.
+
 ## On completion
 
 Propose (do not silently apply) a README update:

@@ -20,6 +20,9 @@ repository state, not the handoff, as ground truth.
 ## Git state
 
 - Branch: <branch name>
+- **Agent owner: <the ONLY agent allowed to modify this branch —
+  current owner, or the receiving agent if this handoff transfers
+  ownership>**
 - Start commit: <hash + subject — HEAD when this session began>
 - End commit: <hash + subject, or "the commit containing this handoff
   update — verify with git log -1">
@@ -58,6 +61,8 @@ first. Not a goal — an action.>
 
 ## Receiving-agent checklist (complete BEFORE modifying any file)
 
+- [ ] **Agent owner field names ME** — if not, branch ownership has
+      not been transferred; do not edit (AGENTS.md single-writer rule)
 - [ ] `git status` — clean tree, expected branch
 - [ ] `git log -1` — HEAD matches end commit above
 - [ ] Active spec checked (`docs/specifications/Revision_07.md`,

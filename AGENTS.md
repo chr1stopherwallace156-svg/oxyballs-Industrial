@@ -40,6 +40,18 @@ and **commit all valid work**:
 - switching to (or expecting) another agent,
 - completing a milestone or phase.
 
+**Operational fallback triggers.** "Nearing usage/context limits" is
+not reliably self-detectable, so continuity must not depend on
+predicting it. A handoff is ALSO mandatory after:
+
+- every completed source-ingestion batch,
+- every meaningful commit,
+- every two hours of uninterrupted work,
+- any unresolved contradiction being recorded,
+- any dirty working tree before switching agents (commit the work or
+  document it explicitly in the handoff — never hand over silent
+  uncommitted state).
+
 Move the superseded handoff into
 [`docs/handoffs/HANDOFF_LOG.md`](docs/handoffs/HANDOFF_LOG.md)
 (append-only) before overwriting `CURRENT_HANDOFF.md`.
@@ -49,6 +61,27 @@ Move the superseded handoff into
 Branch; start commit; end commit; files changed; tests run; test
 results; blockers; **next exact action**; forbidden actions. Use the
 template — omitted fields make the handoff invalid.
+
+### Branch ownership (single-writer rule)
+
+**Only one agent may own and modify an active branch at a time.**
+Simultaneous edits by two agents (e.g. Claude Code and Cursor) on the
+same branch are a protocol violation regardless of merge outcome.
+
+The current owner is recorded in the `Agent owner` field of
+`docs/handoffs/CURRENT_HANDOFF.md`. Before transfer, the current owner
+must:
+
+1. commit all valid work — or document uncommitted work explicitly in
+   the handoff,
+2. push the branch,
+3. record the END_COMMIT in the handoff,
+4. set `Agent owner` to the receiving agent.
+
+**The receiving agent must not edit anything until ownership has been
+transferred to it** (its name in `Agent owner`, on a pushed branch
+whose HEAD matches the recorded END_COMMIT). If ownership is ambiguous
+or stale, resolve with the human owner before touching files.
 
 ### Receiving-agent duties (before modifying ANY file)
 
@@ -70,6 +103,19 @@ template — omitted fields make the handoff invalid.
   [`docs/status/IMPLEMENTATION_LEDGER.md`](docs/status/IMPLEMENTATION_LEDGER.md).
 - A handoff describes state; it does not certify it. The receiver
   re-verifies.
+
+### Deferred enhancement — handoff validity hashes (adopt at M10 start)
+
+Once M10 begins (not before — do not delay source ingestion for this),
+extend the handoff record with integrity hashes so the receiver can
+detect post-handoff document drift:
+
+- `handoff_file_hash`
+- `active_spec_hash`
+- `implementation_ledger_hash`
+- `blockers_file_hash`
+
+Tracked in the M10 roadmap; decision recorded as D-004.
 
 ## Status files
 

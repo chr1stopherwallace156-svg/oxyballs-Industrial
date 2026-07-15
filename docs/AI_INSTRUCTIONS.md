@@ -71,9 +71,18 @@ defined in [`../AGENTS.md`](../AGENTS.md) with the full template at
   [`handoffs/CURRENT_HANDOFF.md`](handoffs/CURRENT_HANDOFF.md) (append
   the superseded one to
   [`handoffs/HANDOFF_LOG.md`](handoffs/HANDOFF_LOG.md)) and commit all
-  valid work. Every handoff includes branch, start/end commit, files
-  changed, tests run, test results, blockers, next exact action, and
-  forbidden actions.
+  valid work. Every handoff includes branch, agent owner, start/end
+  commit, files changed, tests run, test results, blockers, next exact
+  action, and forbidden actions.
+- **Operational fallback triggers** (continuity must not depend on
+  predicting remaining usage): a handoff is also mandatory after every
+  completed source-ingestion batch, every meaningful commit, every two
+  hours of uninterrupted work, any unresolved contradiction recorded,
+  and any dirty working tree before switching agents.
+- **Branch ownership (single-writer rule):** only one agent may own
+  and modify an active branch at a time — see AGENTS.md for the
+  transfer procedure. Never edit a branch whose `Agent owner` is not
+  you.
 - **On receiving a handoff, before modifying any file:** verify
   `git status`, the end-commit hash, the active specification, and the
   claimed tests; read

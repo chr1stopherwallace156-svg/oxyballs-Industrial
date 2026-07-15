@@ -31,6 +31,17 @@ Before doing anything in this repository, read and follow, in order:
   `docs/handoffs/CURRENT_HANDOFF.md` using
   `docs/handoffs/templates/HANDOFF_TEMPLATE.md`, append the superseded
   handoff to `docs/handoffs/HANDOFF_LOG.md`, and commit all valid work.
+- Operational fallback — a handoff is ALSO mandatory after: every
+  completed source-ingestion batch; every meaningful commit; every two
+  hours of uninterrupted work; any unresolved contradiction recorded;
+  any dirty working tree before switching agents.
+- **Branch ownership (single-writer):** only one agent may own and
+  modify an active branch at a time; the owner is the `Agent owner`
+  field in `CURRENT_HANDOFF.md`. Do not edit until ownership is
+  transferred to you (your name recorded, branch pushed, HEAD matching
+  the recorded END_COMMIT). Before transferring away: commit or
+  document uncommitted work, push, record END_COMMIT, set the new
+  owner.
 - Every handoff must include: branch, start commit, end commit, files
   changed, tests run, test results, blockers, next exact action, and
   forbidden actions.

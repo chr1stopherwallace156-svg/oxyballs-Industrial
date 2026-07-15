@@ -10,6 +10,8 @@
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
+- **Agent owner: Claude Code** (single-writer rule, AGENTS.md — no
+  other agent may modify this branch until ownership is transferred)
 - Start commit: `f89caeb` — Reconcile RH batch 05 into second-stage
   filter register
 - End commit: the commit containing this handoff update — verify with
