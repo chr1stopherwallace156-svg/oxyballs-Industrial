@@ -15,6 +15,13 @@ item 8 in `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md`).
 | *(delivery "4:75" — no separate file)* | 2026-07-15 | Owner, via chat ("4:75") | Received and diff-verified **byte-identical to `batch_03_finalized_output.md`** — an exact duplicate delivery. Content is preserved 1:1 in the batch_03 file, which serves as the archival copy for both deliveries; no filter changes resulted. Flagged to owner as a possible mis-send. |
 | `batch_05_unparaphrased_payload.md` | 2026-07-15 | Owner, via chat ("5:75") | Research Hunter "un-paraphrased data payload": first frame-alteration quotes from the Ford General BBLB (cross members, fasteners, welding precautions — two quotes visibly truncated), the full per-class FMVSS 305a DATES sentence (2027 ≤4,536 kg / 2028 >4,536 kg), extended CARB cert-family quote (EO per family) and §2.2.1 ESS fragment, first quote from inside the HVIP Implementation Manual, updated gaps registry. Quotes are Hunter-supplied and unverified. |
 
+**Related archive:** `docs/research/raw/owner_reviews/` holds the
+owner's verdicts on Hunter batches (see `review_01_batch_05_verdict.md`,
+received 2026-07-15). Owner reviews may relay source content; inline
+citation markers visible in the owner's original were stripped in
+transit, so owner-relayed specifics are candidate claims pending exact
+locators, not verified extractions.
+
 **Standing note:** the archived text is raw research, not doctrine, and
 its self-described statuses have no authority. In particular, the
 "Second-Stage Research Filter Evaluation" section at the end of
