@@ -5,6 +5,25 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 07 + owner review_02 archived and reconciled
+
+- Archived batch_07 ("Comprehensive Research Discovery Map") and the
+  owner verdict (review_02) 1:1 (same-message delivery noted).
+- Owner directives applied: batch-07 FMVSS row marked
+  `NeedsURLCorrection` (2025-02584 is the wrong FR document — verified
+  citations CS-02/CS-03 stand); Lectromec stays TechnicalBackground/
+  NeedsExactSource; xr793 mirror lead-only; EngineCert background-only/
+  NeedsSupplierData.
+- New sources CS-10 (Q-356R2 — first Super-Duty-specific OEM document
+  path), CS-11 (HVIP Solicitation 2026-03), CS-12/CS-13 (third-party
+  mirror / background explainer — held as leads). New claims RC-30 (Q-356R2 MIL/box-
+  removal — CP#2-relevant), RC-31 (Appendix C reference — **B-vs-C
+  discrepancy flag** vs RC-25).
+- Regression flagged: NPRM "Proposed…" quote under a Final Rule title
+  (third proposal/final mix). Third bend-radius variant fenced.
+- Owner's six focused research priorities added to the Research Map.
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 06 archived and reconciled (first lane-bucketed batch)
 
 - Archived batch_06 ("Deep-Dive Source Payload") 1:1.

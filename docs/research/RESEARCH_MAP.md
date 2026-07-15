@@ -142,6 +142,23 @@ lanes so it can never gate or substitute for them.
 
 ---
 
+## Current research priorities (owner, review_02, 2026-07-15)
+
+Broad mapping is done; next payloads should be **focused** on the
+build-critical empty lanes, in this order:
+
+1. **HV wiring** (L5): fuses, contactors, pre-charge, HVIL, isolation
+   monitoring, service disconnect
+2. **Cooling** (L6): battery, inverter, motor, charger, DC-DC loops
+3. **Brake/steering** (L10/L4): F-450/F-550 hydroboost replacement and
+   redundancy
+4. **CAN/PATS** (L7): Super Duty gateway, cluster, PCM delete,
+   diagnostics
+5. **Supplier datasheets** (L9): battery, motor, inverter, charger,
+   DC-DC, contactors, HV cable
+6. **Failure modes / test methods** (L8/L3): isolation fault, water
+   intrusion, thermal derating, cable abrasion, pre-charge failure
+
 ## Open mapping gaps (owner decision required)
 
 1. **L2 regulatory module** — standing question (Module 01 vs new

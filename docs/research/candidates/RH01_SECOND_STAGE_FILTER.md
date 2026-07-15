@@ -36,6 +36,10 @@ this file supersedes it (see Addendum, section 7).
 | CS-07 | CandidateSource | *Ford General Body Builder Layout Book (BBLB)* — general edition, not vehicle-specific | Ford BBAS (public server asset; CAD requires upfitter login via fleet.ford.com/truckbbas) | <https://madocumentupload.marketingassociates.com/api/Document/GetFile?v1=5228386&v2=010620094644&v3=60&v4=891711acbe0f2c3555bb8ec3a9803900b535e5c2ba1bb6417e7e5c94&v5=False> | Candidate. **Scope (owner correction, review_01): general Ford modifier guidance — NOT "all Super Duty"; every platform-specific application of its claims is `NeedsVehicleSpecificBBLB` until the Super Duty / F-450/F-550 BBLB is parsed.** (URL is a tokenized asset link — verify stability, mirror the PDF into `docs/research/raw/` when obtainable) |
 | CS-08 | CandidateSource — **secondary technical review (LeadOnly-class, points to primary)** | *Lectromec analysis of SAE J1673 (High Voltage Automotive Wiring Assembly Design)* | Lectromec (industry technical review) | <https://lectromec.com/hv_automotive_standard/> | Candidate (batch_06) — claims **about** J1673 only; the standard itself remains `NeedsExactSource`; no rule may be instantiated from this review — lane L5 |
 | CS-09 | **CandidateSourcePath — provenance concern** | *Ford Transit & E-Transit Body and Equipment Mounting Manual (BEMM), MY2022, North America* | Ford (document) — but URL is an **unofficial third-party mirror** (library.mikesservers.com), not a Ford server | <https://library.mikesservers.com/F/Ford/Transit,%202022/MY2022%20Ford%20Transit%20&%20E-Transit%20Body%20Guide.pdf> | Candidate path only (batch_06). **Obtain the official copy via Ford BBAS before any claim promotion** — mirror provenance/currency unverifiable. Platform = Transit, NOT Super Duty — lanes L1/L4 |
+| CS-10 | CandidateSourcePath | *Ford Commercial Vehicle Pickup Box Removal & Alterations Bulletin (Q-356R2)* — 2023MY+ Super Duty | Ford BBAS (marketingassociates tokenized asset URL — verify stability) | <https://madocumentupload.marketingassociates.com/api/Document/GetFile?v1=7729328&v2=031523085017&v3=60&v4=927125bfc7f5be0d249fcddad8ed63f05411a11e524eabd101788a31&v5=False> | Candidate (batch_07) — first **Super-Duty-specific** OEM document path on file — lane L1 |
+| CS-11 | CandidateSource | *HVIP Grant Solicitation (ADA), 2026-03* — CARB solicitation referencing the Implementation Manual's appendix structure | CARB | <https://ww2.arb.ca.gov/sites/default/files/2026-03/HVIP-Solicitation_ADA.pdf> | Candidate (batch_07) — RegulatoryCandidate class — lane L2 |
+| CS-12 | **CandidateSourcePath — provenance concern (third-party mirror)** | *2022 Ford Body Application Guide* (claimed) | URL is xr793.com, NOT a Ford server | <https://xr793.com/wp-content/uploads/2021/10/2022-Ford-Body-Application-Guide.pdf> | Lead only (batch_07; owner review_02: prefer Ford-controlled sources) — corroborates RC-16/RC-18 direction; no promotion from this mirror — lanes L1/L4 |
+| CS-13 | **LeadOnly — background** | *EngineCert "What is ZEP certification…"* (industry explainer referencing UL 2580 / CARB concepts) | enginecert.com (commercial consultancy) | <https://enginecert.com/what-is-zep-certification-and-do-you-need-it/> | Background only (batch_07; owner review_02): concept identification only; **cooling/current/temperature/derating/BMS thresholds must come from supplier datasheets, CARB text, OEM data, or testing** — lane L6 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -75,6 +79,8 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-27 | Per the Lectromec review, J1673 §3.2.5 covers cable-size determination factors: temperature rise under operational load, steady-state vs duty cycle, fault conditions, mating-connection sizing, mechanical strength *(secondary-source claim ABOUT the standard)* | CS-08 | Review article; underlying standard section: **J1673 §3.2.5 — standard text NeedsExactSource** | Candidate — **NeedsExactSource** for the standard; lane L5 |
 | RC-28 | Per the Lectromec review, J1673 states power-cable splices should be avoided where possible; a required splice must withstand fabrication, installation, and vehicle-environment abuse *(secondary-source claim ABOUT the standard)* | CS-08 | Review article; underlying: **J1673 §3.3 — standard text NeedsExactSource** | Candidate — **NeedsExactSource**; lane L5 |
 | RC-29 | Transit/E-Transit BEMM §1.3.4 ("Drilling and Welding"): adding holes or welding on frame cross members is not recommended *(Hunter marked it "cross-matched from general commercial truck framework rules" — possibly NOT verbatim from this document; platform = Transit, corroborates RC-17's direction only)* | CS-09 | **Candidate locator (batch_06): §1.3.4** — unverified; source is an unofficial mirror | Candidate — **cross-match flag** + platform caveat; lanes L1/L4 |
+| RC-30 | Q-356R2: "BBAS cannot provide support to eliminate error messages, warnings or MILs that are a result of removing the pickup box on vehicle configurations that are not supported for box removal… Refer to the Body Builder Layout Book for additional guidelines and recommendations." *(Hunter-supplied quote — directly relevant to CP#2: OEM confirms module/telltale consequences of unsupported configuration changes and offers no bypass support)* | CS-10 | **Candidate locator (batch_07): Page 2, Bulletin Q-356R2** — unverified | Candidate — lanes L1/L7 |
+| RC-31 | HVIP Solicitation: "The current HVIP Implementation Manual (Appendix C) provides information on the current vehicle categories and requirements for HVIP implementation." *(Hunter-supplied quote — **conflicts with earlier Appendix B references** (RC-25, batch_01/review_01); appendix lettering may differ across manual years; the governing manual + appendix must be pinned)* | CS-11 | **Candidate locator (batch_07): Section III** — unverified | Candidate — **RegulatoryCandidate; appendix B-vs-C discrepancy flag** — lane L2 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -426,3 +432,50 @@ the §9 splice finding); new CS-08/CS-09 and RC-27..RC-29.
 - L9: derating-curve gap (supplier)
 - L7: CAN/PATS gap · L10: hydroboost gap
 - Quantum: outside lanes (FUTURE_ONLY fence)
+
+---
+
+## 14. Batch 07 + owner review_02 reconciliation (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_07_comprehensive_discovery_map.md`
+and `docs/research/raw/owner_reviews/review_02_batch_07_verdict.md`
+(delivered in one message). Row updates above: CS-10..CS-13, RC-30,
+RC-31.
+
+### Owner directives applied (review_02)
+
+- **Batch-07 Source Row 1 status: `NeedsURLCorrection`** — quoted
+  claims relate to FMVSS 305a but the cited PDF (govinfo 2025-02584)
+  is a different Federal Register document. Matches the batch-06 hold;
+  correct citations remain CS-02 (final rule, FR Doc 2024-28707) and
+  CS-03 (delay notice, FR Doc 2025-02582, 90 FR 9609–9610). The
+  correction is now owner-directed, not just filter-inferred.
+- **Lectromec (CS-08): stays TechnicalBackground/NeedsExactSource** —
+  may point at J1673 topics; may never create final HV cable rules.
+- **xr793 mirror (CS-12): lead only** — fastener/mechanical claims
+  stay NeedsVerification until sourced from Ford-controlled documents.
+- **EngineCert (CS-13): background only / NeedsSupplierData** —
+  concepts only; numeric thermal/current/derating/BMS values must come
+  from supplier datasheets, CARB text, OEM data, or testing.
+
+### Additional batch-07 dispositions
+
+| Item | Disposition |
+|---|---|
+| "Exact Quote" under a "Final Rule" title beginning "**Proposed** FMVSS No. 305a expands…" | **Regression flagged** — NPRM proposal language presented under a final-rule heading (third occurrence of proposal/final mixing). Quote usable only as CS-06 (NPRM) corroboration of RC-13. |
+| Appendix **C** cited for vehicle categories (RC-31) vs Appendix **B** in batch_01/review_01 (RC-25) | **Discrepancy recorded** — likely manual-year drift; pin the governing Implementation Manual edition + appendix before any eligibility claim promotes. |
+| Bend radius "e.g., 6× outer cable diameter" | Fenced (third variant: 4×/6× → 6×–8× → 6×). The fence holds. |
+| "FundingPathCandidate"/"BusinessAction" status labels (Source Row 9) | Mapped to RegulatoryCandidate class; ACF/HVIP milestones quote matches RC-21 verbatim — recorded as an alternate candidate locator (Solicitation §II) for RC-21, not a new claim. |
+| Torque/GAWR/gear-ratio reconciliation claim (Source Row 8) | **Derived engineering methodology, held** — the quoted text (RC-16 contents list) does not state the reconciliation requirement; NominalAssumption pending engineering review. |
+| Sections 8–16 open-gap declarations | **Accepted and commended** — first batch whose gap taxonomy mirrors the Research Map lanes (L5/L6/L7/L8/L9/L10 + failure modes). Nothing hidden. |
+| Section 19 rejections (no cross-platform frame generalization; voucher approval ≠ component certification) | Consistent with standing register rules — recorded as convergence. |
+| Missing-source additions | Engine-bay dimensional drawings for F-450/F-550 added to the vehicle-specific extraction list (joins UIM pinouts, derating curves). |
+
+### Owner research priorities (review_02 — carried to Research Map)
+
+Focused payloads next, in the owner's order: (1) HV wiring
+protection/interlock chain (L5); (2) cooling loops (L6); (3)
+hydroboost replacement/redundancy (L10/L4); (4) Ford CAN/PATS/gateway
+(L7); (5) supplier datasheets (L9); (6) failure modes & test methods
+(L8/L3).

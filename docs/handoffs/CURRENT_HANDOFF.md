@@ -4,14 +4,14 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-15
-- Reason for handoff: task complete (batch 06 archived and reconciled);
+- Reason for handoff: task complete (batch 07 + review_02 reconciled);
   awaiting owner decisions and/or next batch
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `a839bbe` — Establish Research Map with 10 required lanes
+- Start commit: `c5f3065` — Reconcile RH batch 06 (first lane-bucketed batch)
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
@@ -19,32 +19,33 @@
 ## Work performed
 
 - Files changed:
-  `docs/research/raw/research_hunter/batch_06_deep_dive_payload.md`
-  (new, verbatim — committed separately as `57c20db`),
+  `docs/research/raw/research_hunter/batch_07_comprehensive_discovery_map.md`
+  and `docs/research/raw/owner_reviews/review_02_batch_07_verdict.md`
+  (new, verbatim — committed separately as `be05b57`),
   `docs/research/raw/research_hunter/PROVENANCE.md`,
-  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (RC-01/RC-04
-  updates; CS-08/CS-09; RC-27..29; section 13), `docs/CHANGELOG.md`,
-  handoff files
-- Summary: batch 06 archived and reconciled — first batch bucketed
-  under the Research Map lanes. Completions: full CARB applicability
-  quote ("may be certified" nuance flagged); FMVSS summary language
-  attributed to the delay notice. Held items: FR doc URL 2025-02584
-  (conflicts with verified 2025-02582); second CARB PDF URL
-  (governing-version question); derived Sept-1-2029 date (arithmetic +
-  unestablished "alterer" legal classification); cert-family-split
-  inference; zero-splice rule proposal; 6×–8× bend multiplier
-  (contradicts batch_05's fenced 4×/6× — both fenced). CS-09 flagged:
-  OEM manual via unofficial mirror — official copy required.
-  **Nothing ingested; nothing Confirmed; ODRs untouched.**
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-10..13;
+  RC-30/31; section 14), `docs/research/RESEARCH_MAP.md` (owner
+  priorities), `docs/CHANGELOG.md`, handoff files
+- Summary: batch 07 + owner verdict archived and reconciled. Owner
+  directives applied: batch-07 FMVSS row = `NeedsURLCorrection`
+  (2025-02584 is the wrong FR document; verified CS-02/CS-03 stand);
+  Lectromec stays TechnicalBackground; xr793 mirror lead-only;
+  EngineCert background-only/NeedsSupplierData. New: CS-10 Q-356R2
+  (first Super-Duty-specific OEM path; RC-30 is CP#2-relevant), CS-11
+  HVIP Solicitation (RC-31 — **Appendix B-vs-C discrepancy flag** vs
+  RC-25). Regression flagged: NPRM "Proposed…" language under a Final
+  Rule title (third occurrence). Third bend-radius variant fenced.
+  Owner's six focused research priorities carried into the Research
+  Map. **Nothing ingested; nothing Confirmed; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_06 archive is 1:1 against the owner's
-  chat message ("6:75"); the 2025-02582/02584 conflict is checkable
-  against the audit-verified delay-notice metadata; all quotes remain
-  Hunter-supplied and unverified (B-002)
+- Verified vs claimed: batch_07/review_02 archives are 1:1 against the
+  owner's chat message; the 02584-vs-02582 correction is both
+  owner-directed (review_02) and independently verified (Audit 01
+  metadata); all quotes remain Hunter-supplied and unverified (B-002)
 
 ## State
 
