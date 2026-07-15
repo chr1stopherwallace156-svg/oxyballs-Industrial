@@ -4,14 +4,14 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-15
-- Reason for handoff: task complete (batch 09 + review_04 reconciled);
+- Reason for handoff: task complete (batch 10 + review_05 reconciled);
   awaiting owner decisions and/or next batch
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `2430632` — Reconcile RH batch 08 + owner review_03
+- Start commit: `2b105b1` — Reconcile RH batch 09 + owner review_04
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
@@ -19,34 +19,35 @@
 ## Work performed
 
 - Files changed:
-  `docs/research/raw/research_hunter/batch_09_hv_wiring_gap_closure.md`
-  and `docs/research/raw/owner_reviews/review_04_batch_09_verdict.md`
-  (new, verbatim — committed separately as `e78174a`),
+  `docs/research/raw/research_hunter/batch_10_hv_wiring_gap_analysis.md`
+  and `docs/research/raw/owner_reviews/review_05_batch_10_verdict.md`
+  (new, verbatim — committed separately as `bf43876`),
   `docs/research/raw/research_hunter/PROVENANCE.md`,
-  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-20;
-  RC-38/39; section 16), `docs/research/RESEARCH_MAP.md` (gap-closure
-  mode, 6 detailed gap checklists, L5 → PARTIALLY MAPPED),
-  `docs/CHANGELOG.md`, handoff files
-- Summary: batch 09 (first single-gap payload — HV wiring) +
-  review_04 reconciled with owner instructions verbatim. Promoted:
-  Sendyne SIM100MLP (SupplierCandidate/MetricCandidate, CS-20/RC-38 —
-  **100 Ω/V fenced as datasheet discussion, not system threshold**,
-  cross-check vs FMVSS 305a / ISO 6469-3 required). Downgraded: ALL
-  Lectromec-derived rows (RC-27/28/39) → TechnicalBackground/
-  NeedsExactSource. Candidate Build Engine items recorded (3 Rule, 1
-  Metric, 1 Test, 4 OpenGaps) — all pre-rule. L5 HV wiring: EMPTY →
-  PARTIALLY MAPPED with owner's 15-item still-missing list. Owner's
-  gap execution order recorded (CAN/PATS last). **Nothing ingested;
-  nothing Confirmed; ODRs untouched.**
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-21/22;
+  RC-40..42; section 17), `docs/CHANGELOG.md`, handoff files
+- Summary: batch 10 + review_05 reconciled. **Safety catch of the
+  pipeline so far: the "hard fault below 500 Ω/V" universal rule was
+  REJECTED per owner correction** — register carries split
+  RegulatoryCandidates instead (RC-42: ≥500 Ω/V AC, ≥100 Ω/V DC,
+  500 Ω/V charge inlet, <0.2 Ω exposed-part bonding context-scoped),
+  all locator-pending, gated on exact FMVSS 305a/eCFR extraction + ISO
+  test mapping + engineering review. Feichun 6–8× OD →
+  TechnicalBackground, preliminary routing screen ONLY (never an
+  enforced rule from a loader trade article); EV Builder's Guide →
+  TechnicalBackground, superseded. Conduct note: Hunter failure mode
+  has shifted to enforcement overreach in "next action" columns —
+  watch that column. **Nothing ingested; nothing Confirmed; ODRs
+  untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_09/review_04 archives are 1:1 against the
-  owner's chat message ("Gemini n 9:75"); all quotes remain
-  Hunter-supplied and unverified (B-002); no supplier value (100 Ω/V,
-  Chilye specs) entered any rule or parameter
+- Verified vs claimed: batch_10/review_05 archives are 1:1 against the
+  owner's chat message ("Gemini 10:175" — numbering shift noted in
+  PROVENANCE); the split-threshold structure is owner-relayed with
+  citations stripped and is locator-pending (B-002); no threshold
+  number entered any rule
 
 ## State
 

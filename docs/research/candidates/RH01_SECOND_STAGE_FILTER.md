@@ -47,6 +47,8 @@ this file supersedes it (see Addendum, section 7).
 | CS-18 | **CandidateSource — UIM behavior ONLY** (owner review_03) | *Ford Commercial Vehicle Bulletin Q-251R2: Upfitter Interface Module (UIM)* | Ford BBAS (tokenized asset URL) | <https://madocumentupload.marketingassociates.com/api/Document/GetFile?v1=5405699&v2=060820094914&v3=60&v4=f5785dff32699c207928189560abaea217d868268fbcbe8b49e69555&v5=False> | Candidate (batch_08). Proves UIM behavior and source path; **proves nothing about PCM-delete/PATS/cluster behavior** — lane L7 |
 | CS-19 | **BackgroundSupplier — WrongPlatformRisk** (owner review_03 downgrade) | *EV West electric power steering unit* (12 V column EPS) | EV West | <https://evwest.com/electric-power-steering-unit-for-electric-vehicles> | Background (batch_08). Likely light-vehicle EPS — **not to be used for F-450/F-550 steering unless an engineer confirms applicability**; Brogen-style EHPS is the relevant truck lane — lane L9 |
 | CS-20 | **SupplierCandidate — MetricCandidate** (owner review_04 promotion) | *Sendyne SIM100MLP isolation monitor for unearthed (IT) DC power systems — datasheet V1.1a* | Sendyne (PDF hosted at dc-components.com) | <https://dc-components.com/wp-content/uploads/Sendyne-SIM100MLP-Datasheet-V1.1a.pdf> | Candidate (batch_09) — `NeedsEngineeringReview`. Isolation-monitoring metric/test candidates only — lane L5/L9 |
+| CS-21 | **TechnicalBackground** (owner review_05 downgrade) | *Feichun: "BEV Wiring: High-Voltage Orange Shielded Cables for Electric Loaders"* — trade article, mining-loader context | feichuncables.com | <https://feichuncables.com/blog/bev-wiring-high-voltage-orange-shielded-cables-for-sandvik-epiroc-electric-loaders/> | Background (batch_10) — `NeedsSupplierData`/`NeedsExactSource`; **wrong-platform context (articulated loaders, not Class 4/5 trucks)** — lane L5 |
+| CS-22 | **TechnicalBackground** (owner review_05 downgrade) | *EV Builder's Guide: "Understanding Loss of Isolation (LOI) in Electric Vehicles"* — explainer article | evbuildersguide.com | <https://www.evbuildersguide.com/understanding-loss-of-isolation-loi-in-electric-vehicles-causes-testing-and-safety-measures/> | Background (batch_10) — learning material only; **FMVSS 305a / eCFR / ISO / monitor datasheets are the primary sources for isolation thresholds** — lane L5 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -96,6 +98,9 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-37 | EV West EPS unit: upper spline Woodward #102, lower #114; input shaft 3/4 in, 36-spline GM *(supplier specs for a 12 V column-EPS unit)* | CS-19 | Specs matrix — unverified | **BackgroundSupplier — WrongPlatformRisk** for F-450/F-550; engineering confirmation required before any use — lane L9 |
 | RC-38 | Sendyne SIM100MLP: "If either of the isolation resistances decreases below the threshold of 100 Ohms/Volt a hazard occurs if a person makes contact with the terminal 'opposite' to the leaking resistor." Monitor continuously tracks isolation resistance to chassis, reports in Ω/V over isolated CAN 2.0B *(owner correction, review_04: **the 100 Ω/V figure is this datasheet's safety discussion — NOT the system threshold** until cross-checked against FMVSS 305a / ISO 6469-3 / chosen component requirements)* | CS-20 | **Candidate locator (batch_09): page 2, Figure 2 context / parameters matrix** — unverified | **SupplierCandidate — MetricCandidate + TestCandidate**; `NeedsEngineeringReview`; threshold cross-check required — lane L5 |
 | RC-39 | Per the Lectromec review, J1673 requires unique keying for connectors in close proximity (mis-mate prevention) and identification of all connector cavities/contacts *(secondary-source claim ABOUT the standard)* | CS-08 | Review article; underlying: **J1673 §3.3/3.4 — standard text NeedsExactSource** | **TechnicalBackground / NeedsExactSource** (owner review_04 downgrade applies to all Lectromec-derived rows incl. RC-27/RC-28) — lane L5 |
+| RC-40 | Feichun (loader context): dynamic-zone HV cable bends rated "≥ 100,000 cycles at minimum bend radius (typically 6–8× OD)" *(trade article, mining loaders — owner review_05: **preliminary routing-screen assumption ONLY**; final bend radius comes from the selected cable's datasheet or official standard text)* | CS-21 | Article section "Dynamic Bend Radius Standards Review" — unverified | **TechnicalBackground / NeedsSupplierData — never an enforced rule from this source**; lane L5 |
+| RC-41 | EV Builder's Guide: "According to FMVSS 305, the minimum isolation resistance… is 500 ohms per volt" *(explainer article — owner review_05: **WRONG as a universal rule**; the article flattens the regulation's AC/DC/context structure)* | CS-22 | Article section "Why 500 Ohms Per 1 Volt?" | **TechnicalBackground only — superseded by RC-42's split structure**; lane L5 |
+| RC-42 | FMVSS 305a isolation structure *(owner-relayed, review_05 — citations stripped)*: electrical isolation ≥ **500 Ω/V for AC** HV sources; ≥ **100 Ω/V for DC** HV sources; **500 Ω/V for the charge inlet** during charging-related measurement; plus a **< 0.2 Ω** resistance requirement between reachable exposed conductive parts in the barrier/direct-contact protection context. *(Note: the DC 100 Ω/V figure coincides with the Sendyne datasheet's discussion in RC-38 — corroborating, not confirming.)* | CS-02 (regulation) via owner relay | **Locator pending — FMVSS 305a / 49 CFR 571.305a section numbers required (B-002)** | **RegulatoryCandidate — split-threshold candidates; final values require exact FMVSS/ISO test mapping + engineering review; NO universal threshold permitted** — lane L5/L2 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -630,3 +635,63 @@ CS-20, RC-38, RC-39.
 - Owner's recommended next: finish HV wiring (fuse/contactor/
   pre-charge/HV cable datasheets) or move to cooling; CAN/PATS
   deliberately last (proprietary depth — real logging/expert help).
+
+---
+
+## 17. Batch 10 + owner review_05 reconciliation (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_10_hv_wiring_gap_analysis.md`
+and `docs/research/raw/owner_reviews/review_05_batch_10_verdict.md`.
+Row additions: CS-21, CS-22, RC-40..RC-42.
+
+### THE catch of this batch — universal isolation threshold rejected
+
+Batch_10's action log ordered: *"throw a hard fault state if isolation
+drops below 500 Ω/V"*. **Owner correction applied — that rule is
+rejected as written.** The regulation's structure is context-split,
+and the register now carries it only as split candidates (RC-42):
+
+| Context | Candidate threshold | Status |
+|---|---|---|
+| AC HV sources | ≥ 500 Ω/V | RegulatoryCandidate — locator pending |
+| DC HV sources | ≥ 100 Ω/V | RegulatoryCandidate — locator pending (coincides with Sendyne discussion, RC-38) |
+| Charge inlet (charging measurement) | 500 Ω/V | RegulatoryCandidate — locator pending |
+| Exposed conductive parts (barrier/direct-contact context) | < 0.2 Ω bonding | Candidate TEST item, context-scoped only |
+
+Final values require exact FMVSS 305a / eCFR section extraction
+(B-002) + ISO test mapping + engineering review. **A universal
+threshold is forbidden.** This is the pipeline's most safety-relevant
+catch to date: a flattened regulatory number nearly became a hard
+fault rule.
+
+### Owner dispositions applied
+
+- **Promoted as gap items (statuses per review_05):** battery/inverter
+  current parameters → NeedsSupplierData; selected HV component
+  datasheets (cable, fuse, contactors, pre-charge, connectors, MSD
+  part number) → NeedsSupplierData; physical cable routing path →
+  PhysicalVerificationRequired; fault-current + fuse interrupt rating
+  → OpenGap; grounding/bonding threshold → NeedsExactSource; IP-rating
+  validation → OpenGap.
+- **Downgraded:** Feichun 6–8× OD → TechnicalBackground /
+  NeedsSupplierData, usable ONLY as a preliminary routing screen
+  (RC-40) — notable: the previously fenced multiplier variants now
+  have a documentable trade-article origin, and remain non-rules;
+  EV Builder's Guide 500 Ω/V → TechnicalBackground, superseded by the
+  split structure (RC-41 → RC-42).
+- **Rejected (standing, extended):** any universal HV wiring rule not
+  tied to selected part datasheets, official standard text, or
+  verified physical routing.
+
+### Batch-10 conduct notes
+
+- Batch's own section 3 self-held fault-current formulas ("no generic
+  rules until cell internal resistance values are defined"), grounding
+  thresholds, and IP cycles — continued guardrail convergence.
+- The action-log error shows the failure mode has moved: not fake
+  sources anymore, but **overreach in the "next action" column** —
+  converting background numbers into enforcement language. Watch that
+  column specifically in future batches.
+- Numbering shift "10:175" (vs prior "n:75") noted in PROVENANCE —
+  unexplained; owner may clarify total batch count.

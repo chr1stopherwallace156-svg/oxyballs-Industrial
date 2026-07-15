@@ -5,6 +5,26 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 10 + review_05 reconciled: universal isolation threshold rejected
+
+- Archived batch_10 (HV wiring gap analysis) and review_05 1:1.
+- **Safety-relevant catch:** batch_10's "hard fault below 500 Ω/V"
+  action rejected as a universal rule per owner correction. Register
+  now carries split RegulatoryCandidates (RC-42): ≥500 Ω/V AC,
+  ≥100 Ω/V DC, 500 Ω/V charge inlet, <0.2 Ω exposed-part bonding
+  (context-scoped test candidate) — all locator-pending (B-002),
+  final values gated on exact FMVSS 305a/eCFR extraction + ISO test
+  mapping + engineering review.
+- Downgraded: Feichun 6–8× OD bend radius → TechnicalBackground /
+  preliminary routing screen only (CS-21/RC-40); EV Builder's Guide
+  500 Ω/V → TechnicalBackground, superseded (CS-22/RC-41).
+- Gap items promoted with owner statuses (NeedsSupplierData /
+  PhysicalVerificationRequired / OpenGap / NeedsExactSource).
+- Conduct note recorded: Hunter failure mode has shifted from fake
+  sources to enforcement overreach in "next action" columns — watch
+  that column. Numbering shift "10:175" noted.
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 09 (HV wiring gap closure) + review_04 reconciled
 
 - Archived batch_09 (first single-gap payload) and review_04 (owner
