@@ -32,6 +32,8 @@ this file supersedes it (see Addendum, section 7).
 | CS-03 | CandidateSource | Same title — *Delay of effective date*, published 2025-02-14, FR Doc. 2025-02582, **90 FR 9609–9610** | NHTSA / Federal Register | <https://www.federalregister.gov/documents/2025/02/14/2025-02582/federal-motor-vehicle-safety-standards-fmvss-no-305a-electric-powered-vehicles-electric-powertrain> | Candidate |
 | CS-04 | **RegulatoryCandidate** (not final eligibility) | *FAQs — Clean Truck and Bus Voucher Incentive Project (California HVIP)*; details deferred to *HVIP Implementation Manual* (FY23-24, updated 2024-10-31) | CALSTART / CARB | FAQ: <https://californiahvip.org/faqs/> · Manual PDF: <https://californiahvip.org/wp-content/uploads/2024/10/FY23-24-HVIP-Implementation-Manual-103124.pdf> | Candidate — eligibility NOT concluded until the Manual's conversion section is extracted |
 | CS-05 | **CandidateSourcePath** (path only, no claims) | *Ford Pro Body Builder Advisory Service (BBAS)* — portal to BBLBs, BEMM, CAD files | Ford Pro | BBAS: <https://www.fordpro.com/en-us/upfit/bbas/> · Publications: <https://www.fordpro.com/en-us/upfit/publications/> | Candidate path — **no physical frame claims** until the vehicle-specific Super Duty (F-450/F-550) BBLB is obtained and parsed |
+| CS-06 | CandidateSource — **supplementary, proposal-stage only** | *FMVSS No. 305a — Notice of Proposed Rulemaking* (NHTSA web version, April 2024) | NHTSA | <https://www.nhtsa.gov/sites/nhtsa.gov/files/2024-04/FMVSS-305a-NPRM-Web-Version.pdf> | Candidate — NPRM text describes *proposals*; it can corroborate structure but **never instantiate rules**; the final rule (CS-02) governs (added from batch_02) |
+| CS-07 | CandidateSource | *Ford General Body Builder Layout Book (BBLB)* — general edition, not vehicle-specific | Ford BBAS (public server asset; CAD requires upfitter login via fleet.ford.com/truckbbas) | <https://madocumentupload.marketingassociates.com/api/Document/GetFile?v1=5228386&v2=010620094644&v3=60&v4=891711acbe0f2c3555bb8ec3a9803900b535e5c2ba1bb6417e7e5c94&v5=False> | Candidate — meta-claims about documentation structure only; still **no physical frame claims** (added from batch_02; URL is a tokenized asset link — verify stability, mirror the PDF into `docs/research/raw/` when obtainable) |
 
 ## 2. Candidate SourceClaim rows
 
@@ -42,18 +44,22 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 
 | ID | Claim (stated narrowly) | Source | Locator | Status |
 |---|---|---|---|---|
-| RC-01 | The CARB ZEP certification procedure applies to battery-electric and hydrogen fuel-cell powertrains for heavy-duty vehicles > 14,000 lb GVWR and incomplete medium-duty vehicles 8,501–14,000 lb GVWR | CS-01 | Applicability section — **verbatim not yet extracted** | Candidate |
-| RC-02 | The procedure defines powertrain/battery certification-family provisions (family naming and Executive Order per ZEP family) | CS-01 | Pending extraction | Candidate |
-| RC-03 | The procedure includes monitoring/diagnostics information requirements | CS-01 | Pending extraction | Candidate |
+| RC-01 | The CARB ZEP certification procedure applies to battery-electric and hydrogen fuel-cell powertrains for heavy-duty vehicles > 14,000 lb GVWR and incomplete medium-duty vehicles 8,501–14,000 lb GVWR | CS-01 | Applicability section — verbatim not yet independently extracted (weight classes restated in batch_02 without quote) | Candidate |
+| RC-02 | The procedure defines battery certification families: "Each substantially similar battery pack, based on cell chemistry, module construction …, the battery management system, and battery thermal management systems … constitutes a certification family…" *(Hunter-supplied quote)* | CS-01 | **Candidate locator (batch_02): Page 1, Section 1** — quote unverified against the PDF (B-002) | Candidate |
+| RC-03 | The procedure requires system monitoring and diagnostics information: "For each test group, a powertrain manufacturer must provide information … related to the system monitoring and diagnostics components and software strategies of the zero-emission powertrain." *(Hunter-supplied quote)* | CS-01 | **Candidate locator (batch_02): Section 2.2, System Monitoring and Diagnostics** — quote unverified against the PDF (B-002) | Candidate |
 | RC-04 | FMVSS No. 305a replaces FMVSS No. 305 ("Electric-powered vehicles: electrolyte spillage and electrical shock protection") | CS-02, corroborated by CS-03 summary | Final rule SUMMARY | Candidate |
 | RC-05 | FMVSS No. 305a expands applicability to vehicles with GVWR > 4,536 kg (10,000 lb) ("heavy vehicles") | CS-02 | Final rule SUMMARY / S2 Application | Candidate |
 | RC-06 | FMVSS No. 305a adds REESS performance requirements applying to all vehicles regardless of GVWR | CS-02 | Pending extraction | Candidate |
 | RC-07 | The final rule establishes 49 CFR part 561, "Documentation for Electric-powered Vehicles": risk-mitigation documentation submitted at NHTSA request, plus emergency-response information for first/second responders (REESS fires, stranded energy) | CS-02 | Pending extraction | Candidate |
 | RC-08 | Heavy vehicles have a September 1, 2028 compliance date | CS-02 | DATES section — **not independently re-verified in this environment**; note the codified section heading (49 CFR 571.305a, eCFR) reads "mandatory applicability begins on September 1, 2027" — the per-class date structure must be reconciled verbatim | Candidate — **verification flag** |
-| RC-09 | Final-stage manufacturers and alterers receive an additional year for the referenced (part 561) documentation requirements | CS-02 | DATES section — not independently re-verified in this environment | Candidate — **verification flag** |
+| RC-09 | Final-stage manufacturers and alterers receive an additional year for the referenced (part 561) documentation requirements | CS-02 | DATES section — not independently re-verified in this environment. *Structure corroborated at proposal stage by CS-06 (NPRM Dates Section, p. 2: "+1 year for small-volume manufacturers, final-stage manufacturers, and alterers") — final rule text still required* | Candidate — **verification flag** |
 | RC-10 | The effective date of the 2024-12-20 final rule was delayed until March 20, 2025 (per the 2025-01-20 "Regulatory Freeze Pending Review" memorandum) | CS-03 | 90 FR 9609–9610 (2-page notice) | Candidate |
-| RC-11 | The HVIP FAQ states that retrofits or conversions of trucks and buses from internal combustion to zero-emission can be funded through HVIP, and refers to the Implementation Manual for details | CS-04 | FAQ page; specific FAQ entry anchor pending | Candidate — **RegulatoryCandidate; NOT an eligibility conclusion** |
+| RC-11 | The HVIP FAQ states that retrofits or conversions of trucks and buses from internal combustion to zero-emission can be funded through HVIP, and refers to the Implementation Manual for details | CS-04 | FAQ entry "Is retrofitting eligible for funding?" — verbatim supplied in batch_02 and consistent with the live FAQ summary verified 2026-07-15 | Candidate — **RegulatoryCandidate; NOT an eligibility conclusion** |
 | RC-12 | *(Replacement for rejected R-01, owner-approved wording)* "CARB ZEPCert is a candidate regulatory path that **may** be required for certain California commercial retrofit/conversion incentive eligibility. Exact HVIP/ZEPCert relationship must be verified against the current HVIP Implementation Manual and CARB guidance." | Hypothesis over CS-01 + CS-04 | n/a — hypothesis, not a source claim | RegulatoryHypothesis — verification required |
+| RC-13 | The NPRM *proposed* expanding FMVSS 305 applicability to vehicles with GVWR > 4,536 kg (10,000 lb) with added requirements and test procedures *(Hunter-supplied quote; proposal-stage corroboration of RC-05)* | CS-06 | **Candidate locator (batch_02): Executive Summary, Page 8** — unverified | Candidate — proposal-stage only |
+| RC-14 | The NPRM *proposed* a compliance date two years after final-rule publication, with an additional year for small-volume manufacturers, final-stage manufacturers, and alterers *(Hunter-supplied quote; what the final rule adopted must come from CS-02 DATES)* | CS-06 | **Candidate locator (batch_02): Dates Section, Page 2** — unverified | Candidate — proposal-stage only |
+| RC-15 | Each Ford Commercial Truck vehicle line has a program-specific Body Builders Layout Book for subsequent-stage manufacturers or alterers *(Hunter-supplied quote)* | CS-07 | **Candidate locator (batch_02): Reference Information, Page 2** — unverified | Candidate |
+| RC-16 | General BBLB documents typically contain vehicle curb/accessory weights, dimensions, component descriptions, capacities, GAWRs, alternator output, powertrain output and gear ratios *(Hunter-supplied quote; documentation meta-claim, not an engineering value)* | CS-07 | **Candidate locator (batch_02): Reference Information, Page 2** — unverified | Candidate |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -84,8 +90,15 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
    — required before CS-04 can move beyond RegulatoryCandidate.
 6. **Ford Super Duty F-450/F-550 BBLB** — required for any physical
    frame claim.
-7. **SAE J1673** document.
-8. **Ford BEMM/UIM documentation** for PATS/CAN integration claims.
+7. **SAE J1673** document (batch_02 notes ISO 6469-3 as a possible
+   alternative safety reference — also not on file).
+8. **Ford BEMM/UIM documentation** for PATS/CAN integration claims —
+   batch_02 sharpens this to: verbatim Super Duty upfitter bulletin
+   text for UIM pinout and handshake timing.
+9. **Calibrated metrology coordinates for F-450/F-550 hydroboost
+   bracket geometry** (added from batch_02) — physical measurement
+   data; can only come from the M8-style measurement capture on real
+   hardware, never from documents.
 
 ## 6. Next-action list
 
@@ -145,3 +158,33 @@ marks FUTURE RESEARCH ONLY — never usable for safety/fitment/compliance).
   IDs/timing (matches downgraded PATS/UIM row).
 - NEEDS_SUPPLIER_DATA: verified low-temperature current derating curves
   for Tier-1 commercial BMS (no supplier engaged; no values on file).
+
+---
+
+## 8. Batch 02 reconciliation (2026-07-15)
+
+Raw source: `docs/research/raw/research_hunter/batch_02_strict_source_map.md`.
+Batch 02 is the Hunter's tightened second pass. It confirms the fake
+supplier placeholder was removed and supplies quoted text with claim
+locations. Dispositions beyond the row updates above (CS-06, CS-07,
+RC-02/03/09/11 locators, RC-13..RC-16):
+
+### Flags and rejections from batch 02
+
+| Item (batch_02 location) | Disposition |
+|---|---|
+| Recurrence of "A vehicle conversion cannot access primary California incentive networks without matching these identical testing boundaries" (Source Row 1, Why It Matters) | **REMAINS REJECTED** (section 4). The Hunter keeps reasserting this broad conclusion; RC-12 is the approved narrow form. Watch for it in future batches. |
+| "the effective date anchor is officially finalized for September 1, 2027" (Source Row 2, note) | **REJECTED as stated** — conflates dates. Per CS-03 the final rule's *effective date* was delayed to 2025-03-20; September 1, 2027 appears in the codified section heading as the start of *mandatory applicability*. The per-class compliance-date structure remains open under RC-08's verification flag. |
+| FMVSS 305a cited via the NPRM as "Framework Baseline" (Source Row 2) | **Accepted only as CS-06, supplementary/proposal-stage.** NPRM quotes describe proposals ("Proposed FMVSS No. 305a would…"). No rule may be instantiated from NPRM text; the final rule (CS-02) governs. |
+| "upload the local copy of ELK-BuildEngine-Doctrine-StageGate.pdf to extract exact validation scripts" (Next Action 1) | **REJECTED as a research action** — that is an internal doctrine document, not external research; it enters only via the owner through the REV07 ingestion pipeline, and "validation scripts" would be M10-adjacent work that is out of phase. |
+| "Route this candidate array directly to your second-stage filter model" (Next Action 2) | Consistent with the actual pipeline (this file *is* the second-stage filter) — no action needed. |
+
+### Consistency checks against batch 01
+
+- Batch 02's downgrade registry matches the section-3 downgrades
+  (frame rails, U-joint ≤ 3°, UIM/PATS, SAE J1673) — no status changes.
+- Batch 02 explicitly states the NDA supplier placeholder was removed —
+  consistent with its rejection in section 7.
+- All Hunter-supplied quotes remain **unverified against the source
+  documents** (B-002); candidate locators do not clear verification
+  flags.

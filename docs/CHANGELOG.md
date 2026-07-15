@@ -5,6 +5,26 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 02 archived and reconciled into filter register
+
+- Archived batch_02 ("Strict Technical Source Map") 1:1 under
+  `docs/research/raw/research_hunter/`; PROVENANCE updated.
+- Filter register updates: added CS-06 (FMVSS 305a NPRM —
+  supplementary, proposal-stage only) and CS-07 (Ford General BBLB);
+  attached Hunter-supplied quotes as **candidate locators** to
+  RC-02/RC-03 (CARB cert-family, monitoring/diagnostics), RC-09
+  (NPRM corroboration), RC-11 (FAQ verbatim); added RC-13..RC-16.
+- Section 8 reconciliation: re-rejected the recurring broad incentive
+  sentence; rejected the "Sept 1, 2027 effective date" conflation
+  (effective date was 2025-03-20 per delay notice; 2027-09-01 is
+  mandatory-applicability language — RC-08 flag stays open); rejected
+  the ELK-BuildEngine-Doctrine-StageGate.pdf upload suggestion as a
+  research action (internal doctrine enters only via owner ingestion).
+- Missing-source list: added hydroboost bracket metrology
+  (measurement-only) and ISO 6469-3 alternate; sharpened the UIM item.
+- All Hunter quotes remain unverified against source PDFs (B-002);
+  nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — Raw RH-01 Research Hunter output archived 1:1
 
 - Archived the raw RH-01 "Research Map & Candidate Ingestion" document
