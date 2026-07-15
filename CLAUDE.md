@@ -14,5 +14,6 @@ Non-negotiables (full versions in the files above):
   `docs/research/OpenResearchRegister.md`; do not guess.
 - Work only against the active specification
   (`docs/specifications/Revision_07.md`) and the current roadmap
-  (`docs/roadmaps/M10_IMPLEMENTATION.md`).
+  (`docs/roadmaps/REV07_SOURCE_INGESTION.md`). No production code and
+  no M10 work during the ingestion phase.
 - Propose README baseline updates; never rewrite the README silently.

@@ -15,7 +15,8 @@ subordinate only to the
 3. **The active specification** — currently
    [`specifications/Revision_07.md`](specifications/Revision_07.md).
 4. **The current roadmap** — currently
-   [`roadmaps/M10_IMPLEMENTATION.md`](roadmaps/M10_IMPLEMENTATION.md).
+   [`roadmaps/REV07_SOURCE_INGESTION.md`](roadmaps/REV07_SOURCE_INGESTION.md)
+   (M10 does not begin until that phase completes).
 
 ## Hard rules
 

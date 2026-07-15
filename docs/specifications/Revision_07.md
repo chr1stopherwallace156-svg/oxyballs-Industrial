@@ -2,42 +2,36 @@
 
 **Status:** `ACTIVE_SPECIFICATION`
 **Baseline:** Architecture Frozen / M10 Pending
+**Current phase:** [Revision 07 Source Ingestion and Consolidation](../roadmaps/REV07_SOURCE_INGESTION.md)
 **Governed by:** [Engineering Constitution](../ENGINEERING_CONSTITUTION.md)
-
-> Exactly one revision in this directory carries the
-> `ACTIVE_SPECIFICATION` status. When Revision 08 is approved, this file
-> is marked `ARCHIVED — superseded by Revision_08.md` and is never
-> edited again.
 
 ---
 
-## ⚠ Content import pending
+The files under [`/docs/specifications/rev07/`](rev07/) collectively
+constitute Revision 07. **No individual module may override the
+Engineering Constitution.**
 
-The approved Revision 07 doctrine (state machine definitions, schema
-definitions, guardrail specifications, evidence requirements, and
-configuration-locking rules) exists outside this repository and has
-**not yet been imported into this file**.
+Start at the [Baseline Index (Module 00)](rev07/00_BASELINE_INDEX.md),
+which lists every module and its consolidation status.
 
-Per the Engineering Constitution (Article III: no invented values;
-Article VII: unknowns create obligations), this shell contains **no
-fabricated specification content**. The missing content is tracked as
-OpenDataRequirements in the
-[Open Research Register](../research/OpenResearchRegister.md):
+## Consolidation state
 
-- **ODR-001** — Import approved Revision 07 state machine definitions.
-- **ODR-002** — Import approved Revision 07 normalized schema
-  definitions.
-- **ODR-003** — Import approved Revision 07 guardrail, evidence, and
-  configuration-locking requirements.
+Revision 07 content is being ingested from approximately 75 raw research
+exchanges, delivered in topic-based batches and archived unchanged under
+`docs/research/raw/`. A module specifies doctrine only once marked
+`CONSOLIDATED` in the Baseline Index; shells awaiting ingestion specify
+nothing, and no fabricated content stands in for missing doctrine
+(Constitution, Articles III and VII).
 
-## Section plan (to be populated from the approved source)
+The missing content remains tracked as **ODR-001..ODR-003** in the
+[Open Research Register](../research/OpenResearchRegister.md). Their
+resolution conditions are defined in the
+[ingestion roadmap](../roadmaps/REV07_SOURCE_INGESTION.md) and require
+explicit owner approval.
 
-1. Scope and definitions
-2. Deterministic state machines (states, transitions, invariants)
-3. Data model (normalized schemas)
-4. Guardrails and evidence requirements
-5. Configuration locking and supersession process
-6. Validation and completion criteria
+## Supersession
 
-Until ODR-001..ODR-003 are resolved, no implementation may claim
-compliance with Revision 07 beyond what this file actually specifies.
+Exactly one revision is `ACTIVE_SPECIFICATION`. When Revision 08 is
+approved, this file is marked `ARCHIVED — superseded by Revision_08.md`,
+the `rev07/` module tree is frozen as-is, and neither is ever edited
+again.

@@ -21,24 +21,33 @@ reference to the evidence; entries are never deleted.
 
 ---
 
+> **Resolution gate for ODR-001..ODR-003 (owner-imposed, 2026-07-15):**
+> none of these three entries may be marked resolved until every
+> Revision 07 source batch is processed, all recorded contradictions
+> are reviewed, the
+> [Revision 07 Baseline Index](../specifications/rev07/00_BASELINE_INDEX.md)
+> is complete, **and the owner explicitly approves the resolution**.
+> Full conditions:
+> [REV07_SOURCE_INGESTION](../roadmaps/REV07_SOURCE_INGESTION.md).
+
 ## ODR-001 — Revision 07 state machine definitions
 
 - Filed: 2026-07-15
 - Status: Open
-- Blocks: `specifications/Revision_07.md` sections 2 and 6; all of M10.
+- Blocks: Revision 07 modules (see Baseline Index); all of M10.
 - Resolution evidence: —
 
 ## ODR-002 — Revision 07 normalized schema definitions
 
 - Filed: 2026-07-15
 - Status: Open
-- Blocks: `specifications/Revision_07.md` section 3; M10 schema layer.
+- Blocks: Revision 07 modules (see Baseline Index); M10 schema layer.
 - Resolution evidence: —
 
 ## ODR-003 — Revision 07 guardrail, evidence, and configuration-locking requirements
 
 - Filed: 2026-07-15
 - Status: Open
-- Blocks: `specifications/Revision_07.md` sections 4–5; M10 evidence
-  store and configuration lock storage.
+- Blocks: Revision 07 modules (see Baseline Index); M10 evidence store
+  and configuration lock storage.
 - Resolution evidence: —

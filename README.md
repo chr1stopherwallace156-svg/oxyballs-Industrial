@@ -6,7 +6,8 @@
 |---|---|
 | Revision | 07 |
 | Status | Architecture Frozen / M10 Pending |
-| Current Phase | M10 — Database Implementation |
+| Current Phase | [Revision 07 Source Ingestion and Consolidation](docs/roadmaps/REV07_SOURCE_INGESTION.md) |
+| Next Phase | M10 — Database Implementation |
 | Active Specification | [`/docs/specifications/Revision_07.md`](docs/specifications/Revision_07.md) |
 
 This repository implements the deterministic Build Engine used for
@@ -36,13 +37,18 @@ docs/
     DECISION_REGISTER.md          Record of engineering decisions
     CHANGELOG.md                  Documented change history
     specifications/
-        Revision_07.md            ACTIVE_SPECIFICATION
+        Revision_07.md            ACTIVE_SPECIFICATION (index)
+        rev07/                    Modules that constitute Revision 07
+            00_BASELINE_INDEX.md  Module list + consolidation status
+            01..12_*.md           Topic modules
     roadmaps/
-        M10_IMPLEMENTATION.md     Current milestone implementation guide
-        M11_OPEN_DATA_REGISTER.md Next milestone (do not implement yet)
+        REV07_SOURCE_INGESTION.md Current phase: ingest + consolidate
+        M10_IMPLEMENTATION.md     Next milestone (blocked on ingestion)
+        M11_OPEN_DATA_REGISTER.md Later milestone (do not implement yet)
     research/
-        OpenResearchRegister.md   Open research items
+        OpenResearchRegister.md   Open research items / ODRs
         SourceClaims.md           Claims and their sources
+        raw/                      Immutable raw research batches
 ```
 
 ## Maintaining this README

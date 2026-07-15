@@ -5,6 +5,22 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — Revision 07 modularized; ingestion phase opened (D-002)
+
+- Split Revision 07 into modules `docs/specifications/rev07/00..12`
+  (all shells, status `AWAITING SOURCE INGESTION`); `Revision_07.md`
+  is now the ACTIVE_SPECIFICATION index over them.
+- Added `roadmaps/REV07_SOURCE_INGESTION.md` — current phase: per-batch
+  archive → consolidate → extract procedure, consolidation quality bar,
+  and the ODR-001..ODR-003 resolution gate (requires explicit owner
+  approval).
+- Added `docs/research/raw/` archive with immutability rules.
+- Updated README baseline (Current Phase → Revision 07 Source Ingestion
+  and Consolidation), AI_INSTRUCTIONS and CLAUDE.md roadmap pointers,
+  and M10 entry conditions.
+- ODR-001..ODR-003 remain **Open**; register now carries the resolution
+  gate.
+
 ## 2026-07-15 — Documentation structure established
 
 - Restructured repository documentation: README reduced to an entry

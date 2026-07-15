@@ -14,10 +14,14 @@ order, with completion criteria and explicit non-goals.
 
 M10 work may not begin until:
 
-- [ ] ODR-001..ODR-003 are resolved — the Revision 07 doctrine content
-      (state machines, schemas, guardrails) is imported into
-      `specifications/Revision_07.md`. Schemas cannot be implemented
-      from a specification shell.
+- [ ] The [Revision 07 Source Ingestion phase](REV07_SOURCE_INGESTION.md)
+      is complete: every source batch processed, contradictions
+      reviewed, the
+      [Baseline Index](../specifications/rev07/00_BASELINE_INDEX.md)
+      fully `CONSOLIDATED`.
+- [ ] ODR-001..ODR-003 are resolved **with explicit owner approval**
+      per the resolution gate in the ingestion roadmap. Schemas cannot
+      be implemented from specification shells.
 
 ## Build order
 
