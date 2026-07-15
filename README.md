@@ -31,7 +31,17 @@ or configuration locking.**
 
 ```
 README.md                         Entry point (this file)
+AGENTS.md                         Cross-agent rules + handoff protocol
+.cursor/rules/                    Cursor rule mirroring AGENTS.md
 docs/
+    handoffs/
+        CURRENT_HANDOFF.md        Live handoff between agents/sessions
+        HANDOFF_LOG.md            Append-only archive of past handoffs
+        templates/                Handoff template
+    status/
+        CURRENT_PHASE.md          Single source of truth for the phase
+        IMPLEMENTATION_LEDGER.md  Claimed vs verified work
+        BLOCKERS.md               Active blockers
     ENGINEERING_CONSTITUTION.md   Rules that rarely change
     AI_INSTRUCTIONS.md            How Claude Code / AI tooling must behave
     DECISION_REGISTER.md          Record of engineering decisions

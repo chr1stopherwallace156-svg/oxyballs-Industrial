@@ -17,3 +17,9 @@ Non-negotiables (full versions in the files above):
   (`docs/roadmaps/REV07_SOURCE_INGESTION.md`). No production code and
   no M10 work during the ingestion phase.
 - Propose README baseline updates; never rewrite the README silently.
+- Follow the cross-agent handoff protocol in [`AGENTS.md`](AGENTS.md):
+  verify git state, active spec, and tests before modifying files;
+  update `docs/handoffs/CURRENT_HANDOFF.md` and commit valid work
+  before stopping, nearing context limits, switching agents, or
+  completing a milestone. Never mark work complete based only on an
+  agent's statement.

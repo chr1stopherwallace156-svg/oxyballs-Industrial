@@ -17,6 +17,30 @@ later entry that references it.
 
 ---
 
+## D-003 — Install the Elektron cross-agent handoff protocol
+
+- Date: 2026-07-15
+- Status: Accepted
+- Context: Multiple AI agents (Claude Code, Cursor) work in this
+  repository across sessions with practical context limits. Without a
+  shared handoff format, state is lost between agents and completion
+  claims go unverified.
+- Decision: One handoff format for all agents, defined in `AGENTS.md`
+  (mirrored for Cursor in `.cursor/rules/elektron-build-engine.mdc`)
+  with the template in `docs/handoffs/templates/`. Handoffs are
+  mandatory before stopping, nearing usage/context limits, switching
+  agents, or completing a milestone, and must include branch, start/end
+  commit, files changed, tests run, test results, blockers, next exact
+  action, and forbidden actions. Receiving agents verify git status,
+  commit hash, active spec, and tests before modifying files. Work is
+  never marked complete on agent statements alone — verification
+  evidence goes in `docs/status/IMPLEMENTATION_LEDGER.md`. Phase truth
+  lives in `docs/status/CURRENT_PHASE.md`; blockers in
+  `docs/status/BLOCKERS.md`. `HANDOFF_LOG.md` is append-only evidence.
+- Consequences: Any agent can resume from a cold start by reading
+  `CURRENT_HANDOFF.md` and re-verifying. Unverified completion claims
+  are structurally visible as `Claimed` ledger entries.
+
 ## D-002 — Modularize Revision 07; add source-ingestion phase before M10
 
 - Date: 2026-07-15

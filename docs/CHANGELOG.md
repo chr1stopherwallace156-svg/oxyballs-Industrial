@@ -5,6 +5,22 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — Cross-agent handoff protocol installed (D-003)
+
+- Added `AGENTS.md` (cross-agent rules) and
+  `.cursor/rules/elektron-build-engine.mdc` (Cursor mirror) — Claude
+  Code and Cursor use the same handoff format.
+- Added `docs/handoffs/`: `CURRENT_HANDOFF.md` (initialized with real
+  repository state), append-only `HANDOFF_LOG.md`, and
+  `templates/HANDOFF_TEMPLATE.md`.
+- Added `docs/status/`: `CURRENT_PHASE.md` (phase source of truth),
+  `IMPLEMENTATION_LEDGER.md` (claimed vs verified; L-001),
+  `BLOCKERS.md` (B-001).
+- Wired the protocol into `CLAUDE.md`, `docs/AI_INSTRUCTIONS.md`, and
+  the README layout map.
+- No specification content ingested; no production code; ODRs remain
+  Open.
+
 ## 2026-07-15 — Revision 07 modularized; ingestion phase opened (D-002)
 
 - Split Revision 07 into modules `docs/specifications/rev07/00..12`

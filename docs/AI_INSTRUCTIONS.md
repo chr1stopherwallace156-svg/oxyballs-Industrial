@@ -60,6 +60,29 @@ subordinate only to the
   README; the update is reviewed and committed as part of the milestone
   so project history stays clear.
 
+## Cross-agent handoff protocol
+
+All agents (Claude Code, Cursor, others) use the same handoff format —
+defined in [`../AGENTS.md`](../AGENTS.md) with the full template at
+[`handoffs/templates/HANDOFF_TEMPLATE.md`](handoffs/templates/HANDOFF_TEMPLATE.md).
+
+- **Before stopping, nearing practical usage/context limits, switching
+  agents, or completing a milestone:** update
+  [`handoffs/CURRENT_HANDOFF.md`](handoffs/CURRENT_HANDOFF.md) (append
+  the superseded one to
+  [`handoffs/HANDOFF_LOG.md`](handoffs/HANDOFF_LOG.md)) and commit all
+  valid work. Every handoff includes branch, start/end commit, files
+  changed, tests run, test results, blockers, next exact action, and
+  forbidden actions.
+- **On receiving a handoff, before modifying any file:** verify
+  `git status`, the end-commit hash, the active specification, and the
+  claimed tests; read
+  [`status/CURRENT_PHASE.md`](status/CURRENT_PHASE.md) and
+  [`status/BLOCKERS.md`](status/BLOCKERS.md).
+- **Never mark work complete based only on an agent's statement.**
+  Completion requires verification evidence recorded in
+  [`status/IMPLEMENTATION_LEDGER.md`](status/IMPLEMENTATION_LEDGER.md).
+
 ## Recording your work
 
 - Engineering decisions with lasting consequences go in the

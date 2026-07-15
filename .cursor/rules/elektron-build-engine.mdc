@@ -1,0 +1,42 @@
+---
+description: Elektron Build Engine governance and cross-agent handoff protocol
+alwaysApply: true
+---
+
+# Elektron Build Engine — Cursor rules
+
+Before doing anything in this repository, read and follow, in order:
+
+1. `docs/ENGINEERING_CONSTITUTION.md`
+2. `docs/AI_INSTRUCTIONS.md`
+3. `docs/specifications/Revision_07.md` (ACTIVE_SPECIFICATION)
+4. The current roadmap named in `docs/status/CURRENT_PHASE.md`
+5. `AGENTS.md` (cross-agent rules, including the handoff protocol)
+
+## Non-negotiables
+
+- Never invent engineering values.
+- Never delete evidence (raw research archives, handoff logs, registers).
+- Never bypass guardrails, state machines, or configuration locks.
+- Unknown data → file an OpenDataRequirement in
+  `docs/research/OpenResearchRegister.md`; do not guess.
+- No production code and no M10 work during the Revision 07 source
+  ingestion phase.
+- Propose README baseline updates; never rewrite the README silently.
+
+## Handoff protocol (same format as Claude Code — no deviations)
+
+- Before stopping, nearing practical usage/context limits, switching
+  agents, or completing a milestone: update
+  `docs/handoffs/CURRENT_HANDOFF.md` using
+  `docs/handoffs/templates/HANDOFF_TEMPLATE.md`, append the superseded
+  handoff to `docs/handoffs/HANDOFF_LOG.md`, and commit all valid work.
+- Every handoff must include: branch, start commit, end commit, files
+  changed, tests run, test results, blockers, next exact action, and
+  forbidden actions.
+- On receiving a handoff, BEFORE modifying any file: verify `git status`
+  (clean tree, expected branch), verify HEAD against the handoff's end
+  commit, read the active specification status, and run the claimed
+  tests (or verify explicitly that no test suite exists).
+- Never mark work complete based only on an agent's statement — record
+  verification evidence in `docs/status/IMPLEMENTATION_LEDGER.md`.
