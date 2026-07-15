@@ -34,6 +34,8 @@ this file supersedes it (see Addendum, section 7).
 | CS-05 | **CandidateSourcePath** (path only, no claims) | *Ford Pro Body Builder Advisory Service (BBAS)* — portal to BBLBs, BEMM, CAD files | Ford Pro | BBAS: <https://www.fordpro.com/en-us/upfit/bbas/> · Publications: <https://www.fordpro.com/en-us/upfit/publications/> | Candidate path — **no physical frame claims** until the vehicle-specific Super Duty (F-450/F-550) BBLB is obtained and parsed |
 | CS-06 | CandidateSource — **supplementary, proposal-stage only** | *FMVSS No. 305a — Notice of Proposed Rulemaking* (NHTSA web version, April 2024) | NHTSA | <https://www.nhtsa.gov/sites/nhtsa.gov/files/2024-04/FMVSS-305a-NPRM-Web-Version.pdf> | Candidate — NPRM text describes *proposals*; it can corroborate structure but **never instantiate rules**; the final rule (CS-02) governs (added from batch_02) |
 | CS-07 | CandidateSource | *Ford General Body Builder Layout Book (BBLB)* — general edition, not vehicle-specific | Ford BBAS (public server asset; CAD requires upfitter login via fleet.ford.com/truckbbas) | <https://madocumentupload.marketingassociates.com/api/Document/GetFile?v1=5228386&v2=010620094644&v3=60&v4=891711acbe0f2c3555bb8ec3a9803900b535e5c2ba1bb6417e7e5c94&v5=False> | Candidate. **Scope (owner correction, review_01): general Ford modifier guidance — NOT "all Super Duty"; every platform-specific application of its claims is `NeedsVehicleSpecificBBLB` until the Super Duty / F-450/F-550 BBLB is parsed.** (URL is a tokenized asset link — verify stability, mirror the PDF into `docs/research/raw/` when obtainable) |
+| CS-08 | CandidateSource — **secondary technical review (LeadOnly-class, points to primary)** | *Lectromec analysis of SAE J1673 (High Voltage Automotive Wiring Assembly Design)* | Lectromec (industry technical review) | <https://lectromec.com/hv_automotive_standard/> | Candidate (batch_06) — claims **about** J1673 only; the standard itself remains `NeedsExactSource`; no rule may be instantiated from this review — lane L5 |
+| CS-09 | **CandidateSourcePath — provenance concern** | *Ford Transit & E-Transit Body and Equipment Mounting Manual (BEMM), MY2022, North America* | Ford (document) — but URL is an **unofficial third-party mirror** (library.mikesservers.com), not a Ford server | <https://library.mikesservers.com/F/Ford/Transit,%202022/MY2022%20Ford%20Transit%20&%20E-Transit%20Body%20Guide.pdf> | Candidate path only (batch_06). **Obtain the official copy via Ford BBAS before any claim promotion** — mirror provenance/currency unverifiable. Platform = Transit, NOT Super Duty — lanes L1/L4 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -44,10 +46,10 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 
 | ID | Claim (stated narrowly) | Source | Locator | Status |
 |---|---|---|---|---|
-| RC-01 | The CARB ZEP certification procedure applies to battery-electric and hydrogen fuel-cell powertrains for heavy-duty vehicles > 14,000 lb GVWR and incomplete medium-duty vehicles 8,501–14,000 lb GVWR | CS-01 | Applicability section — verbatim not yet independently extracted (weight classes restated in batch_02 without quote) | Candidate |
+| RC-01 | CARB ZEP applicability: "All Model Year (MY) 2021 and subsequent MY electric and hydrogen fuel-cell powertrains intended for use in heavy-duty vehicles (over 14,000 pounds gross vehicle weight rating) and incomplete medium-duty vehicles (from 8,501 through 14,000 pounds gross vehicle weight rating) **may be certified** to these procedures." *(Hunter-supplied full quote, batch_06 — note "may be certified": the procedure reads as an available certification pathway, not a blanket mandate; mandate-vs-option must be resolved from context)* | CS-01 | **Candidate locator (batch_06): Section 1** — unverified (B-002) | Candidate — lane L2 |
 | RC-02 | The procedure defines battery certification families: "Each substantially similar battery pack, based on cell chemistry, module construction …, the battery management system, and battery thermal management systems … constitutes a certification family **and each family is required to obtain its own Executive Order.**" *(Hunter-supplied; batch_05 extends the batch_02 quote with the EO-per-family clause)* | CS-01 | **Candidate locator (batch_02/05): Page 1, Section 1** — quote unverified against the PDF (B-002) | Candidate |
 | RC-03 | The procedure requires system monitoring and diagnostics information: "For each test group, a powertrain manufacturer must provide information … related to the system monitoring and diagnostics components and software strategies of the zero-emission powertrain." *(Hunter-supplied quote)* | CS-01 | **Candidate locator (batch_02): Section 2.2, System Monitoring and Diagnostics** — quote unverified against the PDF (B-002) | Candidate |
-| RC-04 | FMVSS No. 305a replaces FMVSS No. 305 ("Electric-powered vehicles: electrolyte spillage and electrical shock protection") | CS-02, corroborated by CS-03 summary | Final rule SUMMARY | Candidate |
+| RC-04 | FMVSS No. 305a replaces FMVSS No. 305 ("Electric-powered vehicles: electrolyte spillage and electrical shock protection") | CS-02, corroborated by CS-03 summary | Final rule SUMMARY. *Batch_06 attributes the recurring summary language to **90 FR 9609, Summary section** (delay notice) — consistent with the §9 splice finding; final-rule-native wording still to be extracted* | Candidate — lane L2 |
 | RC-05 | FMVSS No. 305a expands applicability to vehicles with GVWR > 4,536 kg (10,000 lb) ("heavy vehicles") | CS-02 | Final rule SUMMARY / S2 Application | Candidate |
 | RC-06 | FMVSS No. 305a adds REESS performance requirements applying to all vehicles regardless of GVWR | CS-02 | Pending extraction | Candidate |
 | RC-07 | The final rule establishes 49 CFR part 561, "Documentation for Electric-powered Vehicles": "…requires manufacturers to compile risk mitigation documentation and to submit standardized emergency response information to assist first and second responders handling electric vehicles." *(Hunter-supplied quote, batch_05)* | CS-02 | **Candidate locator (batch_05): 89 FR 104318, Executive Summary** — unverified (B-002) | Candidate |
@@ -70,6 +72,9 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-24 | The HVIP Implementation Manual contains a **Zero-Emission Vehicle Conversions** section stating conversions to zero-emission are covered *(owner-relayed, review_01)* | CS-04 | **Locator pending** — extraction target: Manual, ZEV Conversions section | **RegulatoryCandidate**; review: HVIP/CARB program review |
 | RC-25 | Appendix B materials state conversion kits must receive an **exemption Executive Order from CARB** *(owner-relayed, review_01 — substantiates the direction of batch_01's unpromoted EO claim; exact Appendix B text REQUIRED)* | CS-04 | **Locator pending** — extraction target: Manual Appendix B: Vehicle Eligibility | **RegulatoryCandidate**; review: HVIP/CARB program review |
 | RC-26 | HVIP vehicles must be commercial, nonprofit, or public-fleet vehicles — not personal vehicles *(owner-relayed, review_01)* | CS-04 | **Locator pending** | **RegulatoryCandidate**; review: HVIP/CARB program review |
+| RC-27 | Per the Lectromec review, J1673 §3.2.5 covers cable-size determination factors: temperature rise under operational load, steady-state vs duty cycle, fault conditions, mating-connection sizing, mechanical strength *(secondary-source claim ABOUT the standard)* | CS-08 | Review article; underlying standard section: **J1673 §3.2.5 — standard text NeedsExactSource** | Candidate — **NeedsExactSource** for the standard; lane L5 |
+| RC-28 | Per the Lectromec review, J1673 states power-cable splices should be avoided where possible; a required splice must withstand fabrication, installation, and vehicle-environment abuse *(secondary-source claim ABOUT the standard)* | CS-08 | Review article; underlying: **J1673 §3.3 — standard text NeedsExactSource** | Candidate — **NeedsExactSource**; lane L5 |
+| RC-29 | Transit/E-Transit BEMM §1.3.4 ("Drilling and Welding"): adding holes or welding on frame cross members is not recommended *(Hunter marked it "cross-matched from general commercial truck framework rules" — possibly NOT verbatim from this document; platform = Transit, corroborates RC-17's direction only)* | CS-09 | **Candidate locator (batch_06): §1.3.4** — unverified; source is an unofficial mirror | Candidate — **cross-match flag** + platform caveat; lanes L1/L4 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -370,3 +375,54 @@ not substitute for source text under the trust rules.
 The owner's "Artifact Intake Form" as the next pipeline step — not yet
 specified in this repository; awaiting owner definition before
 anything is built (no production code during ingestion).
+
+---
+
+## 13. Batch 06 reconciliation (2026-07-15)
+
+Raw source: `docs/research/raw/research_hunter/batch_06_deep_dive_payload.md`.
+Row updates above: RC-01 (full applicability quote, "may be certified"
+nuance), RC-04 (summary language attributed to 90 FR 9609 — confirms
+the §9 splice finding); new CS-08/CS-09 and RC-27..RC-29.
+
+### Citation discrepancies (both HELD)
+
+| Item | Disposition |
+|---|---|
+| FMVSS URL cites govinfo **FR doc 2025-02584** | **Conflicts with the verified delay-notice doc number 2025-02582** (federalregister.gov + 90 FR 9609–9610). Hunter URL held; verified CS-03 URL stands. 02584 may be a different same-day document — do not use. |
+| CARB URL now `.../2019-05/GHG_Phase2_ZEP_cert.pdf` | **Second URL for the same procedure** (CS-01 carries the 2020-05 ADA version). Version question opened: which PDF is the governing text? Both URLs retained on CS-01 as candidates; governing-version determination required before verbatim verification. |
+
+### Derived conclusions (HELD — not source text)
+
+| Item | Disposition |
+|---|---|
+| "compliance boundary … fixed for **September 1, 2029** (2028 + 1-year alterer grace)" | **DerivedCandidate — held.** Arithmetic on two unverified candidates (RC-08 + RC-09), PLUS an unestablished legal classification (that Elektron is an "alterer/final-stage manufacturer" under 49 CFR — a regulatory/legal determination no source on file makes). Broad compliance conclusion per owner reject/hold rules. Regulatory/legal review required. |
+| Altering cooling loop logic / cell arrangement "splits the hardware into separate certification families, mandating a discrete EO map" | **DerivedCandidate — held.** Plausible inference from RC-02's family definition; not quoted text. Requires CARB procedure verification. |
+| "Zero-splice continuity becomes an operational rule" | **Rule proposal from a secondary source — held.** RC-28 supports the direction; no rule instantiates from a review article. |
+| Bend-radius "typically 6×–8× Outer Diameter" | **Fenced — and now CONTRADICTS batch_05's fenced "4× or 6×".** Two conflicting illustrative multipliers across batches is exactly why fenced non-values never enter rules. Only J1673/ISO 6469-3 text settles it. |
+
+### Other dispositions
+
+- **Hunter confidence percentages ("100%")** on unverified rows: self-
+  ratings, non-authoritative; register statuses govern.
+- **Source Row 5 (internal doctrine):** correct self-fence ("stop
+  referencing internal doctrine blocks as research sources") —
+  accepted. But it references an internal "Ingestion Engine Framework
+  and Stage-Gate Execution Doctrine" document that is NOT in this
+  repository — feeds the Audit 01 two-universe question.
+- **Source Row 6 (quantum):** FUTURE_ONLY, cold storage — matches the
+  Research Map fence. No row created.
+- **Next actions deferred as out-of-phase (M10-adjacent):** Part 561
+  document-template architecture; JSON monitor field mapping.
+- **Positive conduct:** batch declares "Database Action: HALTED";
+  gaps section (derating curves, CAN/PATS, hydroboost) matches the
+  register exactly.
+
+### Lane bucketing (Research Map)
+
+- L2: RC-01 update, RC-04 attribution, FMVSS/CARB discrepancy items
+- L5: CS-08, RC-27, RC-28 (+ fenced multiplier conflict)
+- L1/L4: CS-09, RC-29
+- L9: derating-curve gap (supplier)
+- L7: CAN/PATS gap · L10: hydroboost gap
+- Quantum: outside lanes (FUTURE_ONLY fence)

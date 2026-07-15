@@ -5,6 +5,25 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 06 archived and reconciled (first lane-bucketed batch)
+
+- Archived batch_06 ("Deep-Dive Source Payload") 1:1.
+- Register: RC-01 completed with full CARB applicability quote (MY2021+,
+  "may be certified" nuance flagged); RC-04 summary language attributed
+  to 90 FR 9609 (confirms §9 splice finding); added CS-08 (Lectromec
+  J1673 review — secondary, LeadOnly-class) and CS-09 (Transit BEMM via
+  **unofficial mirror** — provenance concern, official copy required);
+  added RC-27..RC-29 (cable-sizing factors, splice avoidance,
+  cross-member rule with cross-match flag).
+- Held: FR doc URL 2025-02584 (conflicts with verified 2025-02582);
+  second CARB PDF URL (governing-version question opened); derived
+  Sept-1-2029 compliance date (arithmetic + unestablished alterer
+  classification); cert-family-split inference; zero-splice rule
+  proposal; 6×–8× bend multiplier (contradicts batch_05's fenced
+  4×/6× — both fenced).
+- All rows lane-bucketed per the Research Map (first batch under the
+  lane system). Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — Research Map established (10 required lanes)
 
 - Added `docs/research/RESEARCH_MAP.md` per owner instruction: L1

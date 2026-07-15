@@ -4,39 +4,47 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-15
-- Reason for handoff: task complete (Research Map established);
+- Reason for handoff: task complete (batch 06 archived and reconciled);
   awaiting owner decisions and/or next batch
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `2f252c6` — Record System Audit 01
+- Start commit: `a839bbe` — Establish Research Map with 10 required lanes
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- Files changed: `docs/research/RESEARCH_MAP.md` (new),
-  `docs/CHANGELOG.md`, handoff files
-- Summary: established the standing Research Map with 10 required
-  lanes (L1 OEM/Ford … L10 physical measurements) per owner
-  instruction; quantum-inspired optimization fenced FUTURE ONLY
-  outside the numbered lanes; standing rules encoded (quantum cannot
-  approve engineering; sim ≠ physical proof; academic →
-  PrincipleCandidate; supplier → NeedsVerification; OEM/regulatory
-  outrank academic; full claim field requirements). Current coverage
-  mapped per lane — most lanes empty. **Nothing ingested; nothing
-  Confirmed; ODRs untouched.**
+- Files changed:
+  `docs/research/raw/research_hunter/batch_06_deep_dive_payload.md`
+  (new, verbatim — committed separately as `57c20db`),
+  `docs/research/raw/research_hunter/PROVENANCE.md`,
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (RC-01/RC-04
+  updates; CS-08/CS-09; RC-27..29; section 13), `docs/CHANGELOG.md`,
+  handoff files
+- Summary: batch 06 archived and reconciled — first batch bucketed
+  under the Research Map lanes. Completions: full CARB applicability
+  quote ("may be certified" nuance flagged); FMVSS summary language
+  attributed to the delay notice. Held items: FR doc URL 2025-02584
+  (conflicts with verified 2025-02582); second CARB PDF URL
+  (governing-version question); derived Sept-1-2029 date (arithmetic +
+  unestablished "alterer" legal classification); cert-family-split
+  inference; zero-splice rule proposal; 6×–8× bend multiplier
+  (contradicts batch_05's fenced 4×/6× — both fenced). CS-09 flagged:
+  OEM manual via unofficial mirror — official copy required.
+  **Nothing ingested; nothing Confirmed; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: lane taxonomy transcribed from the owner's
-  instruction of 2026-07-15; coverage cells reference existing CS/RC
-  rows in the filter register (checkable by grep)
+- Verified vs claimed: batch_06 archive is 1:1 against the owner's
+  chat message ("6:75"); the 2025-02582/02584 conflict is checkable
+  against the audit-verified delay-notice metadata; all quotes remain
+  Hunter-supplied and unverified (B-002)
 
 ## State
 
