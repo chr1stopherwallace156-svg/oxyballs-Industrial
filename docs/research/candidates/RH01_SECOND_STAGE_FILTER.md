@@ -14,10 +14,12 @@ APPLIED · Direct Build Engine ingestion: **NO**
   promotion happens only after exact-locator extraction and owner
   approval.
 
-**Traceability gap (see Missing-source list):** the raw RH-01 output
-document itself is not archived in this repository. Until it is
-committed under `docs/research/raw/`, traceability for this filter run
-terminates at this file.
+**Traceability:** the raw RH-01 output is archived 1:1 at
+[`docs/research/raw/research_hunter/batch_01_research_map.md`](../raw/research_hunter/batch_01_research_map.md)
+(received from owner 2026-07-15; see the directory's `PROVENANCE.md`).
+Every row below traces to that file. The raw document's own
+"Second-Stage Research Filter Evaluation" section has no authority —
+this file supersedes it (see Addendum, section 7).
 
 ---
 
@@ -71,8 +73,8 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 
 ## 5. Missing-source list
 
-1. **Raw RH-01 output document** — not archived in this repository;
-   owner to supply the original file for `docs/research/raw/`.
+1. ~~**Raw RH-01 output document**~~ — **RESOLVED 2026-07-15**:
+   archived at `docs/research/raw/research_hunter/batch_01_research_map.md`.
 2. **FMVSS 305a final rule verbatim DATES/S2 text** (RC-05, RC-06,
    RC-08, RC-09) — retrieval blocked in this environment (B-002).
 3. **89 FR start page** of the final rule (CS-02 citation completeness).
@@ -108,3 +110,38 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
    Module 01 (Global Doctrine) or a new module (e.g.
    `13_REGULATORY_AND_INCENTIVES`) before any consolidation of this
    material.
+
+---
+
+## 7. Addendum — delta review of the archived raw RH-01 (2026-07-15)
+
+The archived raw document
+(`docs/research/raw/research_hunter/batch_01_research_map.md`) contains
+material beyond the rows filtered above. Filter dispositions:
+
+### Rejected from the raw document
+
+| Item (raw location) | Disposition |
+|---|---|
+| **"Supplier Traction Motor Datasheet" row** (section 12): *Internal NDA*, "150 kW at 65°C coolant inlet", "250 kW peak / 60-second window" | **REJECTED** — no source URL, no document title, no obtainable document; a placeholder supplier with specific numeric values is indistinguishable from invented engineering values (Constitution, Article III). Not carried as a CandidateSource. Real supplier data re-enters only as an archived, identified datasheet under NDA handling. |
+| **"Second-Stage Research Filter Evaluation"** (final section), including "Conflict List: None" and "Route these structured candidate objects directly into the final review queue … for permanent logging" | **REJECTED** — agent self-assessment, not verification (AGENTS.md trust rules); the routing instruction violates the ingestion gate. Superseded by this file. Its "Conflict List: None" is contradicted by the discrepancies below. |
+| **FMVSS 305a subtitle as given**: "(Electric Vehicle Dual-Voltage and High-Voltage Safety)" (section 1) | **REJECTED as a title claim** — the actual rule title is "Electric-Powered Vehicles: Electric Powertrain Integrity; GTR No. 20 Incorporation by Reference" (CS-02). Recorded as a raw-document inaccuracy. |
+| **HVIP Appendix B eligibility-if-EO claim** (section 3): eligibility "if they hold an active CARB Executive Order" | **NOT PROMOTED** — more specific than the verified FAQ text (RC-11) and unverified against the Manual. "Appendix B" is retained as a **candidate locator** for next-action 4; the EO condition remains unconfirmed until the Manual section is extracted. |
+
+### Unfiltered candidate topics (present in raw, not yet filtered rows)
+
+These are research directions only — no rows created, no statuses
+assigned; each needs its own source-and-locator pass:
+HVIL convention; UL 2580; SAE Grade 8 / Class 10.9 fastener practice;
+Ford IVM/IVD and SVE bulletins; BAR/DMV fuel-type-change requirements;
+CARB ACF public-fleet rule; CP#1 hydroboost brake/steering assist loss
+(raw correctly marks ENGINEERING_REVIEW_REQUIRED / REAL_TEST_REQUIRED);
+scan-to-CAD metrology limits; QUBO fleet-optimization (raw correctly
+marks FUTURE RESEARCH ONLY — never usable for safety/fitment/compliance).
+
+### Raw missing-source entries carried forward
+
+- MISSING_SOURCE: proprietary Ford Super Duty cluster CAN message
+  IDs/timing (matches downgraded PATS/UIM row).
+- NEEDS_SUPPLIER_DATA: verified low-temperature current derating curves
+  for Tier-1 commercial BMS (no supplier engaged; no values on file).

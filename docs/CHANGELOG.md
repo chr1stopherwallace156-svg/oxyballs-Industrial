@@ -5,6 +5,22 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — Raw RH-01 Research Hunter output archived 1:1
+
+- Archived the raw RH-01 "Research Map & Candidate Ingestion" document
+  unchanged at `docs/research/raw/research_hunter/batch_01_research_map.md`,
+  with `PROVENANCE.md`; resolves missing-source item 1 of the RH-01
+  filter file.
+- Added delta-review addendum to `RH01_SECOND_STAGE_FILTER.md`:
+  rejected the *Internal NDA* supplier-datasheet row (unverifiable
+  values — potential invented engineering values), the Hunter's
+  self-asserted "filter evaluation" and direct-ingestion routing, and
+  the raw document's incorrect FMVSS 305a subtitle; retained "Appendix
+  B" as a candidate locator for the HVIP claim; listed unfiltered
+  candidate topics (HVIL, UL 2580, fasteners, IVM/SVE, BAR/DMV, ACF,
+  hydroboost CP#1, metrology, QUBO-future-only).
+- Still nothing ingested into rev07; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH-01 second-stage research filter output recorded
 
 - Added `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md`:
