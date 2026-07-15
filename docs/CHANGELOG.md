@@ -5,6 +5,19 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH-01 second-stage research filter output recorded
+
+- Added `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md`:
+  5 CandidateSource rows (CARB ZEP procedure; FMVSS 305a final rule;
+  FMVSS 305a delay notice, 90 FR 9609–9610; HVIP FAQ/Manual as
+  RegulatoryCandidate; Ford BBAS as CandidateSourcePath), 12 candidate
+  claim rows (none Confirmed), 4 claims kept downgraded, 2 rejections,
+  missing-source list, next-action list.
+- **Nothing ingested into rev07; no database writes; ODRs untouched;
+  SourceClaims.md untouched.**
+- Filed B-002: verbatim .gov/CARB source extraction blocked by the
+  current environment's network policy.
+
 ## 2026-07-15 — Cross-agent handoff protocol installed (D-003)
 
 - Added `AGENTS.md` (cross-agent rules) and
