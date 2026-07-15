@@ -33,7 +33,7 @@ this file supersedes it (see Addendum, section 7).
 | CS-04 | **RegulatoryCandidate** (not final eligibility) | *FAQs — Clean Truck and Bus Voucher Incentive Project (California HVIP)*; details deferred to *HVIP Implementation Manual* (FY23-24, updated 2024-10-31) | CALSTART / CARB | FAQ: <https://californiahvip.org/faqs/> · Manual PDF: <https://californiahvip.org/wp-content/uploads/2024/10/FY23-24-HVIP-Implementation-Manual-103124.pdf> | Candidate — eligibility NOT concluded until the Manual's conversion section is extracted |
 | CS-05 | **CandidateSourcePath** (path only, no claims) | *Ford Pro Body Builder Advisory Service (BBAS)* — portal to BBLBs, BEMM, CAD files | Ford Pro | BBAS: <https://www.fordpro.com/en-us/upfit/bbas/> · Publications: <https://www.fordpro.com/en-us/upfit/publications/> | Candidate path — **no physical frame claims** until the vehicle-specific Super Duty (F-450/F-550) BBLB is obtained and parsed |
 | CS-06 | CandidateSource — **supplementary, proposal-stage only** | *FMVSS No. 305a — Notice of Proposed Rulemaking* (NHTSA web version, April 2024) | NHTSA | <https://www.nhtsa.gov/sites/nhtsa.gov/files/2024-04/FMVSS-305a-NPRM-Web-Version.pdf> | Candidate — NPRM text describes *proposals*; it can corroborate structure but **never instantiate rules**; the final rule (CS-02) governs (added from batch_02) |
-| CS-07 | CandidateSource | *Ford General Body Builder Layout Book (BBLB)* — general edition, not vehicle-specific | Ford BBAS (public server asset; CAD requires upfitter login via fleet.ford.com/truckbbas) | <https://madocumentupload.marketingassociates.com/api/Document/GetFile?v1=5228386&v2=010620094644&v3=60&v4=891711acbe0f2c3555bb8ec3a9803900b535e5c2ba1bb6417e7e5c94&v5=False> | Candidate — meta-claims about documentation structure only; still **no physical frame claims** (added from batch_02; URL is a tokenized asset link — verify stability, mirror the PDF into `docs/research/raw/` when obtainable) |
+| CS-07 | CandidateSource | *Ford General Body Builder Layout Book (BBLB)* — general edition, not vehicle-specific | Ford BBAS (public server asset; CAD requires upfitter login via fleet.ford.com/truckbbas) | <https://madocumentupload.marketingassociates.com/api/Document/GetFile?v1=5228386&v2=010620094644&v3=60&v4=891711acbe0f2c3555bb8ec3a9803900b535e5c2ba1bb6417e7e5c94&v5=False> | Candidate. **Scope (owner correction, review_01): general Ford modifier guidance — NOT "all Super Duty"; every platform-specific application of its claims is `NeedsVehicleSpecificBBLB` until the Super Duty / F-450/F-550 BBLB is parsed.** (URL is a tokenized asset link — verify stability, mirror the PDF into `docs/research/raw/` when obtainable) |
 
 ## 2. Candidate SourceClaim rows
 
@@ -65,12 +65,17 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-19 | Welding precautions: parts damageable by heat must be removed or shielded before welding; all batteries disconnected "…and sensitive" **[quote truncated mid-sentence in batch_05]** | CS-07 | **Candidate locator (batch_05): Page 2, "Frame Alterations"** — unverified; **incomplete quote — full sentence required before any use** | Candidate — **truncation flag** |
 | RC-20 | §2.2 requires a listed description of monitoring/diagnostics components per powertrain subsystem, beginning "2.2.1 Energy Storage System (ESS) - Individual electronic inputs or…" **[quote truncated in batch_05]** | CS-01 | **Candidate locator (batch_05): Section 2.2 / 2.2.1** — unverified; **incomplete quote** | Candidate — **truncation flag** |
 | RC-21 | HVIP Implementation Manual: "High-priority and public fleets using the milestones option may access HVIP for any zero-emission vehicles purchased in excess of their milestone requirement. Similarly, State and local agencies not using the milestones option may access HVIP for any vehicles purchased above their requirement." *(Hunter-supplied quote, batch_05 — first quote from inside the Manual; concerns fleet-level HVIP access relative to ACF-style requirements, NOT conversion eligibility; Appendix B extraction still pending)* | CS-04 | **Candidate locator (batch_05): Manual Section 1, "Fleet Regulations"** — unverified | Candidate — **RegulatoryCandidate** |
+| RC-22 | General BBLB permits drilling in the vertical frame side-rail **web** with limits including ~1.5 in minimum distance from upper/lower flanges, max 0.75 in hole diameter, edge-distance limits, and avoiding closely-spaced vertical fastener succession *(owner-relayed, review_01 — citations stripped in transit; exact quote and page/line REQUIRED before any use)* | CS-07 | **Locator pending** — extraction target: General BBLB Frame Alterations | **NeedsVerification** + **NeedsVehicleSpecificBBLB** — Rule/NoGo/Measurement candidate; review: Fabricator/Engineer |
+| RC-23 | General BBLB prohibits welding on frame **flanges**, including bend radii *(owner-relayed, review_01 — citations stripped; exact quote and page/line REQUIRED before any use)* | CS-07 | **Locator pending** — extraction target: General BBLB Frame Alterations | **NeedsVerification** + **NeedsVehicleSpecificBBLB** — Rule/NoGo candidate; review: Fabricator/Engineer |
+| RC-24 | The HVIP Implementation Manual contains a **Zero-Emission Vehicle Conversions** section stating conversions to zero-emission are covered *(owner-relayed, review_01)* | CS-04 | **Locator pending** — extraction target: Manual, ZEV Conversions section | **RegulatoryCandidate**; review: HVIP/CARB program review |
+| RC-25 | Appendix B materials state conversion kits must receive an **exemption Executive Order from CARB** *(owner-relayed, review_01 — substantiates the direction of batch_01's unpromoted EO claim; exact Appendix B text REQUIRED)* | CS-04 | **Locator pending** — extraction target: Manual Appendix B: Vehicle Eligibility | **RegulatoryCandidate**; review: HVIP/CARB program review |
+| RC-26 | HVIP vehicles must be commercial, nonprofit, or public-fleet vehicles — not personal vehicles *(owner-relayed, review_01)* | CS-04 | **Locator pending** | **RegulatoryCandidate**; review: HVIP/CARB program review |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
 | Claim | Status | What would upgrade it |
 |---|---|---|
-| Ford frame alteration limits (drilling/welding restrictions) | `NeedsExactSource` | Vehicle-specific Super Duty (F-450/F-550) BBLB obtained, archived, and parsed with page/section |
+| Ford frame alteration limits (drilling/welding restrictions) | `NeedsVerification` + `NeedsVehicleSpecificBBLB` *(upgraded from `NeedsExactSource` 2026-07-15: content candidates now on file as RC-22/RC-23 via owner review; exact General-BBLB quote + page/line still required, and platform-specific application still gated on the Super Duty BBLB)* | (1) exact quote + page/line from the General BBLB; (2) vehicle-specific Super Duty (F-450/F-550) BBLB obtained, archived, and parsed |
 | U-joint operating angle ≤ 3° | `EngineeringReviewRequired` | Exact source (manufacturer/SAE document + section) **and** engineering review — no promotion on source alone |
 | PATS handshake / cluster blanking; UIM CAN bus integration | `EngineeringReviewRequired` / `MISSING_SOURCE` | Official Ford documentation (BEMM/UIM section) archived + engineering review |
 | SAE J1673 HV cable claim | `NeedsExactSource` | SAE J1673 document obtained; claim restated with clause/table reference |
@@ -285,3 +290,83 @@ new rows RC-17..RC-21.
 | Hydroboost gap now marked EngineeringReviewRequired / **PhysicalVerificationRequired** | Status refinement accepted — consistent with missing-source 9 (measurement-only data). |
 | PATS gap sharpened to "physical bus analyzer capture log" | Accepted — upgrade path for the downgraded PATS/UIM row now names its evidence type (real-vehicle CAN capture). |
 | Integrity report: "SQLite Operations Executed: None. StageGate Advancement: No gates passed." | Consistent with guardrails; noted as self-report (non-authoritative but matching repository state). |
+
+---
+
+## 12. Owner review of batch 05 — verdict applied (2026-07-15)
+
+Raw source: `docs/research/raw/owner_reviews/review_01_batch_05_verdict.md`.
+Owner verdict recorded: **Hunter quality strong · ready for
+second-stage filter: yes · ready for direct ingestion: NOT YET · safe
+to treat as Confirmed: NO.** Owner-relayed source content carries
+stripped citations and is registered as candidate claims with locators
+pending (RC-22..RC-26) — owner statements, like agent statements, do
+not substitute for source text under the trust rules.
+
+### Instructions applied
+
+- **Per-claim statuses** are now explicit in the Status column
+  (vocabulary: `Candidate`, `RegulatoryCandidate`, `NeedsVerification`,
+  `NeedsVehicleSpecificBBLB`, truncation/verification flags).
+- **Platform-scope correction:** CS-07 is general Ford modifier
+  guidance. Every CS-07-derived claim (RC-15..RC-19, RC-22, RC-23) is
+  platform-unbound until the vehicle-specific Super Duty BBLB is
+  parsed.
+- **FMVSS framing rule:** FMVSS 305a rows may only ever produce
+  "documentation/test requirements must be mapped" outputs — never a
+  "we comply" statement.
+- **HVIP framing rule:** HVIP rows may only ever produce "path
+  requires exact eligible-vehicle/conversion-kit/EO review" outputs —
+  never a voucher promise.
+
+### Rule / Metric / Test / NoGo candidates (consolidation preview — NOT rules yet)
+
+| Candidate | Type | From | Gate |
+|---|---|---|---|
+| Frame side-rail web drilling limits (distances/diameter/spacing) | Rule + NoGo + Measurement | RC-22 | exact quote + vehicle-specific BBLB + Fabricator/Engineer review |
+| No welding on frame flanges incl. bend radii | Rule + NoGo | RC-23 | same |
+| Cross-member hole/weld prohibition | Rule + NoGo | RC-17 | verification + vehicle-specific BBLB |
+| Fastener grade floor (Gr 8 / PC 10.9 / PC 10) | Rule | RC-18 | verification |
+| FMVSS 305a requirement/test/documentation mapping | Rule + Test + Documentation | RC-04..09, RC-13/14 | regulatory/legal/engineering review |
+| CARB cert-family + EO-per-family | Rule + NoGo | RC-02 | regulatory/powertrain review |
+| CARB monitoring/diagnostics description set | Rule + Metric | RC-03, RC-20 | full §2.2 extraction |
+| HVIP funding-path checklist (fleet class, conversion coverage, exemption EO) | Coverage + Metric | RC-21, RC-24..26 | Manual/Appendix B extraction + program review |
+
+### Held under owner reject/hold rules
+
+- **Truncated:** RC-19, RC-20 (unchanged — full extraction required;
+  RC-20's expected full scope per owner: ESS, thermal management,
+  regenerative braking, charging, motor/generator, fault/monitoring
+  thresholds).
+- **No exact page/line yet:** RC-22..RC-26 (registered but unusable
+  until located).
+- **"Applies directly to F-450/F-550" statements** in batches 02/03/05
+  — held as unverified applicability; platform binding requires
+  vehicle-specific data.
+- **Broad eligibility/compliance conclusions** — standing rejection
+  (section 4) unchanged.
+
+### Needs vehicle-specific extraction list
+
+1. Super Duty / F-450/F-550 BBLB: frame-rail drilling limits, flange
+   welding prohibitions, cross-member rules (binds RC-17, RC-22, RC-23).
+2. Super Duty upfitter/UIM bulletin: pinout + handshake timing.
+3. F-450/F-550 hydroboost geometry: physical measurement only.
+
+### Engineering review list
+
+1. U-joint operating angle ≤ 3° — EngineeringReviewRequired (with
+   metrology cross-check).
+2. PATS/UIM/CAN mitigation — EngineeringReviewRequired (real-vehicle
+   bus capture).
+3. Hydroboost redundant brake/steer assist (CP#1) —
+   EngineeringReviewRequired / PhysicalVerificationRequired /
+   REAL_TEST_REQUIRED.
+4. Frame claims RC-17/18/22/23 — Fabricator/Engineer sign-off after
+   locator verification.
+
+### Noted for later (not actioned)
+
+The owner's "Artifact Intake Form" as the next pipeline step — not yet
+specified in this repository; awaiting owner definition before
+anything is built (no production code during ingestion).

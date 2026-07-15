@@ -5,6 +5,28 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — Owner review of batch 05 archived and applied (verdict: filter yes, ingestion no)
+
+- Archived `docs/research/raw/owner_reviews/review_01_batch_05_verdict.md`
+  1:1 (citation markers stripped in transit noted in provenance).
+- Applied owner instructions: per-claim statuses explicit;
+  `NeedsVehicleSpecificBBLB` vocabulary adopted; CS-07 scope corrected
+  to general Ford guidance (not Super Duty); FMVSS rows fenced to
+  "requirements must be mapped" (never "we comply"); HVIP rows fenced
+  to "path requires EO/eligibility review" (never voucher promises).
+- New owner-relayed candidate claims RC-22..RC-26 (frame-rail web
+  drilling limits, flange welding prohibition, HVIP ZEV Conversions
+  section, Appendix B exemption-EO requirement, fleet-class
+  restriction) — all locator-pending, unusable until located.
+- Frame-rail downgrade upgraded `NeedsExactSource` →
+  `NeedsVerification` + `NeedsVehicleSpecificBBLB` (content candidates
+  on file; exact quote/page still required).
+- Section 12 adds the owner-requested outputs: Rule/Metric/Test/NoGo
+  candidate preview, holds, needs-vehicle-specific list, engineering
+  review list. "Artifact Intake Form" noted as future step, not built.
+- Still: nothing ingested, nothing Confirmed, no SQLite, no StageGate
+  changes, ODRs untouched.
+
 ## 2026-07-15 — RH batch 05 archived and reconciled into filter register
 
 - Archived batch_05 ("un-paraphrased data payload") 1:1.
