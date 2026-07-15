@@ -5,6 +5,26 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — Research Map established (10 required lanes)
+
+- Added `docs/research/RESEARCH_MAP.md` per owner instruction: L1
+  OEM/Ford, L2 regulatory/certification/incentive, L3 core EV
+  conversion engineering, L4 mechanical/structural/bracket/frame/
+  fatigue, L5 electrical/HV wiring, L6 battery/BMS/thermal, L7
+  controls/CAN/diagnostics, L8 quantitative modeling/simulation, L9
+  supplier data, L10 physical truck measurements — all required, none
+  optional. Quantum-inspired optimization fenced as FUTURE ONLY
+  outside the numbered lanes.
+- Standing rules encoded: quantum cannot approve engineering; sim
+  cannot replace physical proof; academic → PrincipleCandidate unless
+  tied to Rule/Metric/Test/NoGo; supplier datasheets →
+  NeedsVerification; OEM/regulatory outrank academic; full claim field
+  requirements.
+- Current coverage mapped per lane (most lanes empty). Mapping gaps
+  escalated to owner: L2 regulatory module (standing), L4 mechanical
+  module (new gap), L6 battery/thermal module (new gap), L9 lane-name
+  truncation ("Supplier b") to confirm.
+
 ## 2026-07-15 — System Audit 01 recorded
 
 - Added `docs/audits/AUDIT_01_2026-07-15_SYSTEM_STATUS.md`: full
