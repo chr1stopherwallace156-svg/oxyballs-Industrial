@@ -5,6 +5,24 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 05 archived and reconciled into filter register
+
+- Archived batch_05 ("un-paraphrased data payload") 1:1.
+- Register updates: RC-02 extended with EO-per-family clause; RC-07
+  gains part 561 quote + Executive Summary locator; RC-08 upgraded to
+  the full per-class DATES sentence — 2027/2028 structure resolved at
+  candidate level (2027 ≤ 4,536 kg; 2028 > 4,536 kg), with the "For
+  all other requirements" prefix flagged as an open nuance.
+- New candidate claims RC-17..RC-21: BBLB cross-member prohibition,
+  fastener grades, welding precautions (truncation flag), CARB §2.2.1
+  ESS fragment (truncation flag), first HVIP Manual-internal quote
+  (fleet-level access, not conversion eligibility).
+- Section 11: frame-rail downgrade explicitly NOT upgraded (quote
+  covers cross members only); J1673 "4×/6×" example multipliers fenced
+  as non-values; hydroboost gains PhysicalVerificationRequired; PATS
+  upgrade path named (real-vehicle CAN capture).
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — Delivery "4:75" verified as exact duplicate of batch 03
 
 - Diff-verified byte-identical to `batch_03_finalized_output.md`; not
