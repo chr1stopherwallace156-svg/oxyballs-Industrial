@@ -2,10 +2,10 @@
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
   "version": "0.12.0",
-  "updated_at": "2026-07-16T16:38:38.538920+00:00",
+  "updated_at": "2026-07-16T16:54:09.333199+00:00",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
-  "phase": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATED",
+  "phase": "F450_DOOR_FL_VERTICAL_SLICE_BLOCKED_BY_MISSING_ASSET",
   "readiness": "L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE",
   "milestone": "L1_SOURCE_PACK_01",
   "source_pack_01_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
@@ -30,7 +30,7 @@
   "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "Implement Instance Resolver harness and execute KRN-ISO-001..003; keep structural suite green",
+  "next_action": "Acquire real ASSET-00031 (or replacement) with hash+inventory; do not expand schemas; resume door vertical slice",
   "owner_approval_required": true,
   "governance_status": {
     "L00_CONFIRMED_CORRECTIONS": "ACCEPTED",
@@ -118,7 +118,10 @@
     "HR_EVI": "CONSTITUTIONAL",
     "ISOLATION_NEGATIVE_TESTS": "PASS",
     "CONFIGURATION_FINGERPRINT": "RFC8785_STYLE_V1",
-    "RUNTIME_ISOLATION_TESTS": "EXECUTED"
+    "RUNTIME_ISOLATION_TESTS": "EXECUTED",
+    "SCHEMA_FREEZE_FOR_VERTICAL_SLICE": "ACTIVE",
+    "ASSET_00031": "CANDIDATE_NOT_ACQUIRED",
+    "F450_DOOR_FL_VERTICAL_SLICE": "BLOCKED_BY_MISSING_ASSET"
   },
   "reference_vehicle": {
     "status": "provisional_profile_locked",
@@ -228,7 +231,7 @@
       "status": "factual_verification_required",
       "geometry_status": "blocked",
       "research_status": "L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE",
-      "phase": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATED",
+      "phase": "F450_DOOR_FL_VERTICAL_SLICE_BLOCKED_BY_MISSING_ASSET",
       "milestone": "L1_SOURCE_PACK_01",
       "source_pack_01_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
       "gate_status": "L1_DOCUMENT_ACQUISITION_READY",
@@ -420,5 +423,12 @@
   "fingerprint_standard": "documentation/CONFIGURATION_FINGERPRINT_CANONICALIZATION_STANDARD.md",
   "runtime_isolation_standard": "documentation/RUNTIME_VEHICLE_ISOLATION_STANDARD.md",
   "kernel_validation_report": "verification/results/KERNEL_VALIDATION_REPORT.md",
-  "kernel_validation_final_status": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATED"
+  "kernel_validation_final_status": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATED",
+  "kernel_validation": "49/49 PASS",
+  "kernel_validation_status": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATED",
+  "schema_posture": "SCHEMA_FREEZE_FOR_VERTICAL_SLICE",
+  "runtime_3d_vertical_slice": "PENDING",
+  "door_vertical_slice_status": "F450_DOOR_FL_VERTICAL_SLICE_BLOCKED_BY_MISSING_ASSET",
+  "asset_00031_status": "CANDIDATE_NOT_ACQUIRED",
+  "kernel_release_manifest": "KERNEL_RELEASE_MANIFEST.json"
 }

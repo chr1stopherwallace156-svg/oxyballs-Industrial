@@ -1,0 +1,90 @@
+{
+  "suite": "door-asset-ingestion-tests",
+  "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+  "runtime": "python3",
+  "total": 7,
+  "passed": 0,
+  "failed": 0,
+  "blocked": 7,
+  "suite_pass_or_fail": "BLOCKED",
+  "block_reason": "CANDIDATE_NOT_ACQUIRED",
+  "results": [
+    {
+      "test_id": "DOOR-ING-001",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Door mesh exists",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-ING-002",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "File parses successfully",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-ING-003",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "No missing external texture references",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-ING-004",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Units and orientation identified",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-ING-005",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Bounding box recorded",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-ING-006",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Polygon and vertex counts recorded",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-ING-007",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Mesh linked only to CMPINST-VEH000001-DOOR-FL",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    }
+  ]
+}

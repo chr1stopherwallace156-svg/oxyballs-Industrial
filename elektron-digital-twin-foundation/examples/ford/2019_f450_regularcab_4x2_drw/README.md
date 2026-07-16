@@ -1,7 +1,11 @@
-# SUPERSEDED PATH (manufacturer-scoped mirror)
+# DEPRECATED — Non-authoritative path
 
-Canonical seed silo for Kernel v1.0.0-rc1 is:
+**Resolution of AUD-001**
 
+This directory previously contained a duplicate example silo.
+
+**Authoritative seed dataset (only):**  
 [`../../2019_f450/`](../../2019_f450/)
 
-This folder is retained only as a historical manufacturer-path scaffold. Do not extend engineering claims here.
+Duplicate JSON instance files were **removed** on 2026-07-16 so no duplicate authoritative records remain.  
+Do not recreate engineering claims here.
