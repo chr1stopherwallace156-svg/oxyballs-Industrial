@@ -25,10 +25,12 @@
     "TRANSFORM_REGISTRY_V4": "PROPOSAL_OFFLINE_CHECK_PASS_RUNTIME_NOT_EXECUTED",
     "TF_FAIL_001": "CORRECTED",
     "THREE_WORLD_FRAME": "PROPOSAL",
-    "CAMERA_VIEW_PRESETS": "PROPOSAL",
+    "CAMERA_VIEW_PRESETS": "DYNAMIC_V1_1_0",
+    "UNIT_REGISTRY_V3": "CORE_PROPOSAL_SI_CURRENT_BASE",
+    "L01_RESEARCH_PLANNING": "AUTHORIZED",
+    "L01_GEOMETRY_PRODUCTION": "BLOCKED",
     "CLAIM_SCHEMA_V6": "PROPOSAL",
     "PHYSICAL_ASSET_INTAKE_V4": "PROPOSAL",
-    "UNIT_REGISTRY_V3": "PROPOSAL",
     "RUNTIME_TRANSFORM_CERTIFICATION": "NOT_READY",
     "GLTF_ASSET_FRAME": "LOCKED_DERIVATION",
     "THREE_SCENE_FRAME": "DEPRECATED",
@@ -74,7 +76,7 @@
     "licensing_status": "COUNSEL_REVIEW_REQUIRED"
   },
   "registries": {
-    "units": "registries/UNIT_REGISTRY_V3_COMPLETE_PROPOSAL.json",
+    "units": "registries/UNIT_REGISTRY_V3_CORE_PROPOSAL.json",
     "coordinate_frames": "registries/COORDINATE_FRAME_REGISTRY.json",
     "transforms": "registries/TRANSFORM_REGISTRY_V4_PROPOSAL.json",
     "camera_presets": "registries/CAMERA_VIEW_PRESET_REGISTRY.json",
@@ -96,6 +98,7 @@
   "pre_intake_readiness": "L00_PRE_INTAKE_READINESS_REPORT.md",
   "runtime_readiness": "L00_TRUE_RUNTIME_READINESS_REPORT.md",
   "regression_audit": "REGRESSION_AUDIT.md",
+  "l01_research_plan": "layers/L01_RESEARCH_DOSSIER_PLAN.md",
   "adversarial_audit": {
     "status": "ACCEPTED_AS_REVIEW_FINDING",
     "verdict": "L00_CLOSURE_REJECTED",
