@@ -258,3 +258,32 @@ All notable changes to the digital twin foundation. Append-only.
 - Phase: **L1_FACTUAL_VERIFICATION_REQUIRED**
 - Gate: **L1_REQUIRES_MORE_REFERENCE_DATA**
 - L01 geometry: **BLOCKED**
+
+## 2026-07-16 (L1 Reference Acquisition Queue — Source Access Block)
+
+### Added
+
+- `layers/L01/L1_REFERENCE_ACQUISITION_QUEUE.md`
+- `layers/L01/L1_SOURCE_ARTIFACT_REGISTRY_PROPOSAL.json` (SRC-L1-001…003)
+- `layers/L01/L1_OEM_DOCUMENT_EXTRACTION_PLAN.md` (EXT-L1-101…105)
+- `layers/L01/L1_REQUIRED_PHOTO_SHOT_LIST.md`
+- `layers/L01/L1_PUBLIC_REFERENCE_IMAGE_MANIFEST_PROPOSAL.json`
+- `layers/L01/L1_PHYSICAL_VEHICLE_SELECTION_CHECKLIST.md`
+- `layers/L01/L1_PHYSICAL_MEASUREMENT_CHECKLIST.md`
+- `layers/L01/L1_EVIDENCE_GAP_PRIORITY_MATRIX.json` (GAP-L1-001…004)
+- `layers/L01/L1_SOURCE_BASELINE_CLOSURE_CRITERIA.md`
+- `research/sources/README.md`, `research/reference_images/README.md`
+- **DT-D014** — acquisition queue; `L1_BLOCKED_BY_SOURCE_ACCESS`
+
+### Changed
+
+- Primary gate → **L1_BLOCKED_BY_SOURCE_ACCESS** (evidence gate retained)
+- Final gap report links acquisition/closure track
+
+### Status
+
+- Status: **L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE**
+- Phase: **L1_FACTUAL_VERIFICATION_REQUIRED**
+- Access gate: **L1_BLOCKED_BY_SOURCE_ACCESS**
+- Evidence gate: **L1_REQUIRES_MORE_REFERENCE_DATA**
+- L01 geometry: **BLOCKED**

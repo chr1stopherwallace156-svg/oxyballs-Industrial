@@ -223,3 +223,21 @@ Append-only record of digital twin foundation decisions.
   - Do not treat DOCUMENT_SUPPORTED claims as VERIFIED until hashed archives + physical cross-check
   - Do not use V1 object/landmark registries for new work
   - Next: factual verification track per `L1_FINAL_GAP_REPORT.md`
+
+## DT-D014 — L1 reference acquisition queue; blocked by source access
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Adversarial gaps cannot close without retrieved OEM pages and a configuration-matched physical unit. Modeling remains suspended.
+- **Decision:**
+  1. Activate `L1_REFERENCE_ACQUISITION_QUEUE.md` (document → public media → VIN → measure → controlled capture/scan)
+  2. Register proposed sources `SRC-L1-001`…`003` with `PENDING_PAGES` / provisional publication identifiers
+  3. Bind extractions `EXT-L1-101`…`105`, gap matrix `GAP-L1-001`…`004`, shot/measurement/selection checklists, public image manifest
+  4. Gate verdict: **`L1_BLOCKED_BY_SOURCE_ACCESS`** (evidence gate `L1_REQUIRES_MORE_REFERENCE_DATA` retained)
+  5. Source baseline unlock only via `L1_SOURCE_BASELINE_CLOSURE_CRITERIA.md`
+  6. Publication numbers, example listing URLs, and VIN pattern filters are acquisition targets — not verified facts
+  7. Geometry production remains **BLOCKED**
+- **Consequences:**
+  - Priority 1 is BBAS / Order Guide / Workshop Manual archive + hash + page extraction
+  - Do not commit copyrighted OEM PDFs without licensing clearance
+  - Example public URLs must be replaced before use as evidence

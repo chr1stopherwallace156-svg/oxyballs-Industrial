@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_EVIDENCE_GAP_PRIORITY_MATRIX",
+  "project": "2019_FORD_F450_CHASSIS_CAB_145_3",
+  "matrix_version": "1.0.0",
+  "status": "ACTIVE",
+  "related_queue": "L1_REFERENCE_ACQUISITION_QUEUE.md",
+  "evidence_gaps": [
+    {
+      "gap_id": "GAP-L1-001",
+      "gap_description": "Absolute confirmation of front 4x2 axle subtype (Monobeam wide-track verification)",
+      "related_conflicts": ["CNF-001-FRONT-SUSPENSION-TYPE"],
+      "related_extractions": ["EXT-L1-101"],
+      "impact": {
+        "visual_impact": "CRITICAL",
+        "dimensional_impact": "CRITICAL",
+        "likelihood_of_rework": "HIGH",
+        "blocks_exterior_modeling": true
+      },
+      "resolution_factors": {
+        "resolvable_by_documents": true,
+        "requires_physical_inspection": false,
+        "acquisition_cost_usd": 0.0,
+        "acquisition_difficulty": "LOW",
+        "cost_note": "Cost assumes BBAS access already available to the team; otherwise access fees TBD"
+      },
+      "priority_score": 1,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-L1-002",
+      "gap_description": "Verification of wheel PCD (Pitch Circle Diameter) and hub flange dimensions",
+      "related_claims": ["CLM-006"],
+      "related_extractions": ["EXT-L1-104"],
+      "impact": {
+        "visual_impact": "MEDIUM",
+        "dimensional_impact": "HIGH",
+        "likelihood_of_rework": "HIGH",
+        "blocks_exterior_modeling": true
+      },
+      "resolution_factors": {
+        "resolvable_by_documents": true,
+        "requires_physical_inspection": true,
+        "acquisition_cost_usd": 0.0,
+        "acquisition_difficulty": "LOW"
+      },
+      "priority_score": 2,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-L1-003",
+      "gap_description": "Exact configuration-dependent presence status of optional visual objects (transit lights, cab-roof lamps)",
+      "related_claims": ["CLM-003"],
+      "impact": {
+        "visual_impact": "HIGH",
+        "dimensional_impact": "LOW",
+        "likelihood_of_rework": "MEDIUM",
+        "blocks_exterior_modeling": false
+      },
+      "resolution_factors": {
+        "resolvable_by_documents": true,
+        "requires_physical_inspection": true,
+        "acquisition_cost_usd": 0.0,
+        "acquisition_difficulty": "MEDIUM"
+      },
+      "priority_score": 3,
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "GAP-L1-004",
+      "gap_description": "Surface-normal high-resolution scans of complex-geometry elements (Dana S110 cast iron housing and steering knuckle castings)",
+      "impact": {
+        "visual_impact": "MEDIUM",
+        "dimensional_impact": "MEDIUM",
+        "likelihood_of_rework": "MEDIUM",
+        "blocks_exterior_modeling": false
+      },
+      "resolution_factors": {
+        "resolvable_by_documents": false,
+        "requires_physical_inspection": true,
+        "acquisition_cost_usd": 500.0,
+        "acquisition_difficulty": "HIGH",
+        "cost_note": "Rough planning estimate for scan vendor / equipment time — not a committed budget"
+      },
+      "priority_score": 4,
+      "status": "OPEN"
+    }
+  ]
+}

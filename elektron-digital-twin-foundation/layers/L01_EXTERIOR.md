@@ -2,9 +2,10 @@
 
 **Status:** Research draft complete — `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`  
 **Phase:** `L1_FACTUAL_VERIFICATION_REQUIRED`  
-**Gate:** `L1_REQUIRES_MORE_REFERENCE_DATA`  
+**Evidence gate:** `L1_REQUIRES_MORE_REFERENCE_DATA`  
+**Access gate:** `L1_BLOCKED_BY_SOURCE_ACCESS`  
 **Geometry / mesh production:** Blocked  
-**Prerequisites for geometry:** factual verification track closes gaps + visual intake evidence archived + owner approval
+**Prerequisites for geometry:** source baseline closure + factual verification + visual intake evidence archived + owner approval
 
 ## Scope
 
@@ -19,6 +20,8 @@ Exterior body shell, doors, hood, fenders, bumpers, mirrors, glass, lighting, wh
 
 Authoritative L1 docs: [`layers/L01/`](L01/README.md)
 
+- Acquisition queue: [`L1_REFERENCE_ACQUISITION_QUEUE.md`](L01/L1_REFERENCE_ACQUISITION_QUEUE.md)
+- Source closure: [`L1_SOURCE_BASELINE_CLOSURE_CRITERIA.md`](L01/L1_SOURCE_BASELINE_CLOSURE_CRITERIA.md)
 - Adversarial audit: [`L1_ADVERSARIAL_SOURCE_AUDIT.md`](L01/L1_ADVERSARIAL_SOURCE_AUDIT.md)
 - Claim register: [`L1_CLAIM_REGISTER_PROPOSAL.json`](L01/L1_CLAIM_REGISTER_PROPOSAL.json)
 - Prefer V2 hierarchy / registries / acceptance / capture grid
@@ -34,7 +37,9 @@ Planning sequence: [`L01_RESEARCH_DOSSIER_PLAN.md`](L01_RESEARCH_DOSSIER_PLAN.md
 - [x] V2 hierarchy, object/landmark registries, landmark classification
 - [x] Capture coverage grid + PBR metalness correction
 - [x] Visual acceptance V2 + final gap report
-- [ ] Tier 1 source archive (hashed BBAS / order guide / T&RA)
+- [x] Reference acquisition queue + source registry + extraction plan
+- [x] Photo shot list, public manifest, vehicle/measurement checklists, gap matrix, closure criteria
+- [ ] Tier 1 source archive (hashed BBAS / order guide / workshop — SRC-L1-001…003)
 - [ ] Physical verification of open claims / conflicts
 - [ ] Footprint/envelope claim records (schema V6) promoted beyond DRAFT
 

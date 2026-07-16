@@ -8,10 +8,12 @@
 |---|---|
 | Status | `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE` |
 | Phase | `L1_FACTUAL_VERIFICATION_REQUIRED` |
-| Gate | `L1_REQUIRES_MORE_REFERENCE_DATA` |
+| Evidence gate | `L1_REQUIRES_MORE_REFERENCE_DATA` |
+| Access gate | `L1_BLOCKED_BY_SOURCE_ACCESS` |
 
 Adversarial audit: `L1_ADVERSARIAL_SOURCE_AUDIT.md`  
-Gap report: `L1_FINAL_GAP_REPORT.md`
+Gap report: `L1_FINAL_GAP_REPORT.md`  
+Acquisition: `L1_REFERENCE_ACQUISITION_QUEUE.md`
 
 ## Locked Configuration Scope
 

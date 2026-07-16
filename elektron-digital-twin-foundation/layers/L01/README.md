@@ -2,13 +2,28 @@
 
 **Status:** `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`  
 **Phase:** `L1_FACTUAL_VERIFICATION_REQUIRED`  
-**Gate:** `L1_REQUIRES_MORE_REFERENCE_DATA`
+**Evidence gate:** `L1_REQUIRES_MORE_REFERENCE_DATA`  
+**Access gate:** `L1_BLOCKED_BY_SOURCE_ACCESS`
 
 **Geometry production:** `BLOCKED`
 
 **Locked vehicle:** 2019 Ford F-450 Chassis Cab — Regular Cab / 4x2 / DRW / 145.3 in WB / 60 in CA / bare cab-and-chassis
 
 ## Package Index
+
+### Acquisition & source baseline (current focus)
+
+| File | Role |
+|---|---|
+| [L1_REFERENCE_ACQUISITION_QUEUE.md](L1_REFERENCE_ACQUISITION_QUEUE.md) | Prioritized acquisition sequence |
+| [L1_SOURCE_ARTIFACT_REGISTRY_PROPOSAL.json](L1_SOURCE_ARTIFACT_REGISTRY_PROPOSAL.json) | SRC-L1-001…003 targets |
+| [L1_OEM_DOCUMENT_EXTRACTION_PLAN.md](L1_OEM_DOCUMENT_EXTRACTION_PLAN.md) | EXT-L1-101…105 page hunts |
+| [L1_REQUIRED_PHOTO_SHOT_LIST.md](L1_REQUIRED_PHOTO_SHOT_LIST.md) | Controlled photo checklist |
+| [L1_PUBLIC_REFERENCE_IMAGE_MANIFEST_PROPOSAL.json](L1_PUBLIC_REFERENCE_IMAGE_MANIFEST_PROPOSAL.json) | Public harvest manifest |
+| [L1_PHYSICAL_VEHICLE_SELECTION_CHECKLIST.md](L1_PHYSICAL_VEHICLE_SELECTION_CHECKLIST.md) | Candidate VIN audit |
+| [L1_PHYSICAL_MEASUREMENT_CHECKLIST.md](L1_PHYSICAL_MEASUREMENT_CHECKLIST.md) | Field metrology checklist |
+| [L1_EVIDENCE_GAP_PRIORITY_MATRIX.json](L1_EVIDENCE_GAP_PRIORITY_MATRIX.json) | GAP-L1-001…004 priorities |
+| [L1_SOURCE_BASELINE_CLOSURE_CRITERIA.md](L1_SOURCE_BASELINE_CLOSURE_CRITERIA.md) | Baseline unlock criteria |
 
 ### Audit & verification (authoritative for claim state)
 
@@ -52,8 +67,8 @@
 
 ## Next Research Actions
 
-1. Archive hashed BBAS / Order Guide / T&RA pages for DOCUMENT_SUPPORTED claims
-2. Physical inspection: front axle subtype, tire sidewall, flare offset, dual track
-3. Optical capture: powdercoat roughness, clearcoat gloss, chrome reflectance
-4. Expand capture grid stations along CA / frame bays
-5. Do **not** begin mesh production while gate is `L1_REQUIRES_MORE_REFERENCE_DATA`
+1. Acquire and hash `SRC-L1-001` / `002` / `003` — clear `L1_BLOCKED_BY_SOURCE_ACCESS`
+2. Execute `EXT-L1-101`…`105` extractions with page locators
+3. Public harvest with counsel-approved license posture
+4. Select reference VIN via physical checklist; measure; controlled shots
+5. Do **not** begin mesh production while access/evidence gates remain open

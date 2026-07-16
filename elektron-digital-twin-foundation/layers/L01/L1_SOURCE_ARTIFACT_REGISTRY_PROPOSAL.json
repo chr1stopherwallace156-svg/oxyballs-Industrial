@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_SOURCE_ARTIFACT_REGISTRY_PROPOSAL",
+  "project": "2019_FORD_F450_CHASSIS_CAB_145_3",
+  "registry_status": "DRAFT_PROPOSAL",
+  "notes": [
+    "publication_number and revision_date values are PROPOSED acquisition identifiers until the actual artifact is retrieved and inspected.",
+    "Do not treat PENDING_PAGES rows as evidence for VERIFIED claims."
+  ],
+  "sources": [
+    {
+      "source_id": "SRC-L1-001",
+      "exact_title": "2019 Ford Super Duty Chassis Cab Body Builder Advisory Service Specs & Body Application Guide",
+      "publication_number": "BBAS-SDCC-2019-V1",
+      "publication_number_status": "PROPOSED_PENDING_ACQUISITION",
+      "revision_date": "2018-11-15",
+      "revision_date_status": "PROPOSED_PENDING_ACQUISITION",
+      "document_type": "OEM_ENGINEERING_MANUAL",
+      "local_repository_path": "research/sources/ford/2019_BBAS_Chassis_Cab_Guide.pdf",
+      "file_present": false,
+      "content_hash_sha256": null,
+      "inspection_status": "PENDING_PAGES",
+      "closes_gaps": ["GAP-L1-001", "GAP-L1-002"],
+      "extraction_plan": "L1_OEM_DOCUMENT_EXTRACTION_PLAN.md"
+    },
+    {
+      "source_id": "SRC-L1-002",
+      "exact_title": "2019 Ford Super Duty Order Guide (Fleet/Dealer Version)",
+      "publication_number": "FOG-SD-2019-03",
+      "publication_number_status": "PROPOSED_PENDING_ACQUISITION",
+      "revision_date": "2018-09-01",
+      "revision_date_status": "PROPOSED_PENDING_ACQUISITION",
+      "document_type": "ORDER_GUIDE",
+      "local_repository_path": "research/sources/ford/2019_Super_Duty_Order_Guide.pdf",
+      "file_present": false,
+      "content_hash_sha256": null,
+      "inspection_status": "PENDING_PAGES",
+      "closes_gaps": ["GAP-L1-002", "GAP-L1-003", "CNF-002"],
+      "extraction_plan": "L1_OEM_DOCUMENT_EXTRACTION_PLAN.md"
+    },
+    {
+      "source_id": "SRC-L1-003",
+      "exact_title": "Ford F-Series Workshop Manual 2017-2019 (Section 204-00: Suspension & Alignment Standards)",
+      "publication_number": "WSM-2019-FSERIES",
+      "publication_number_status": "PROPOSED_PENDING_ACQUISITION",
+      "revision_date": "2019-01-10",
+      "revision_date_status": "PROPOSED_PENDING_ACQUISITION",
+      "document_type": "SERVICE_MANUAL",
+      "local_repository_path": "research/sources/ford/workshop_manual/Section_204_Front_Suspension.pdf",
+      "file_present": false,
+      "content_hash_sha256": null,
+      "inspection_status": "PENDING_PAGES",
+      "closes_gaps": ["GAP-L1-001", "CLM-015"],
+      "extraction_plan": "L1_OEM_DOCUMENT_EXTRACTION_PLAN.md"
+    }
+  ]
+}

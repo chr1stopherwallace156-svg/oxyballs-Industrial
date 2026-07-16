@@ -47,16 +47,23 @@ Even `DOCUMENT_SUPPORTED` claims (`CLM-005`, `CLM-006`) cannot promote to VERIFI
 
 ```text
 [ L1_REQUIRES_MORE_REFERENCE_DATA ]
+[ L1_BLOCKED_BY_SOURCE_ACCESS ]
 ```
+
+Acquisition track: `L1_REFERENCE_ACQUISITION_QUEUE.md`  
+Closure criteria: `L1_SOURCE_BASELINE_CLOSURE_CRITERIA.md`  
+Priority matrix: `L1_EVIDENCE_GAP_PRIORITY_MATRIX.json`
 
 ### Explicitly not ready
 
 - L01 geometry / mesh production
 - VERIFIED dimensional lock beyond provisional profile wheelbase/CA
 - Runtime transform certification (unchanged from L00: `NOT_EXECUTED`)
+- Source baseline (SRC-L1-001…003 still `PENDING_PAGES`)
 
 ### Ready
 
 - Research draft package complete for adversarial review
 - Claim/conflict registers active for factual verification track
 - V2 hierarchy, landmark classes, capture grid, PBR correction available as working proposals
+- Acquisition queue, extraction plan, shot/measurement checklists ready to execute
