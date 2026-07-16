@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://elektron.industrial/schemas/project-status.schema.json",
+  "title": "Elektron Digital Twin Project Status",
+  "type": "object",
+  "required": [
+    "project",
+    "version",
+    "updated_at",
+    "active_layer",
+    "phase",
+    "layers"
+  ],
+  "properties": {
+    "project": { "type": "string" },
+    "version": { "type": "string" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "active_layer": {
+      "type": "string",
+      "pattern": "^L[0-9]{2}$|^complete$"
+    },
+    "active_layer_name": { "type": "string" },
+    "phase": { "type": "string" },
+    "next_action": { "type": "string" },
+    "owner_approval_required": { "type": "boolean" },
+    "reference_vehicle": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": ["provisional", "locked", "superseded", "blocked"]
+        },
+        "decision_id": { "type": "string" },
+        "make": { "type": "string" },
+        "model": { "type": "string" },
+        "model_year": { "type": "integer" },
+        "cab": { "type": "string" },
+        "drivetrain": { "enum": ["4x2", "4x4"] },
+        "wheelbase_in": { "type": "number" },
+        "bed": { "type": "string" },
+        "body_upfit": { "type": "string" },
+        "stock_engine": { "type": "string" },
+        "wheels_tires": { "type": "string" },
+        "reference_unit": { "type": "string" },
+        "geometry_primary_source": { "type": "string" },
+        "geometry_secondary_source": { "type": "string" },
+        "scanning_strategy": { "type": "string" },
+        "licensing_notes": { "type": "string" },
+        "accuracy_tier_mm": {
+          "type": "object",
+          "properties": {
+            "mounting_interfaces": { "type": "number" },
+            "powertrain_envelope": { "type": "number" },
+            "exterior_cosmetic": { "type": "number" }
+          }
+        }
+      }
+    },
+    "layers": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["name", "status", "gates"],
+        "properties": {
+          "name": { "type": "string" },
+          "status": {
+            "enum": ["blocked", "in_progress", "complete"]
+          },
+          "gates": {
+            "type": "object",
+            "required": [
+              "visual",
+              "dimensional",
+              "structural",
+              "interaction",
+              "documentation"
+            ],
+            "properties": {
+              "visual": { "$ref": "#/$defs/gateStatus" },
+              "dimensional": { "$ref": "#/$defs/gateStatus" },
+              "structural": { "$ref": "#/$defs/gateStatus" },
+              "interaction": { "$ref": "#/$defs/gateStatus" },
+              "documentation": { "$ref": "#/$defs/gateStatus" }
+            }
+          }
+        }
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "summary", "unblocks"],
+        "properties": {
+          "id": { "type": "string" },
+          "summary": { "type": "string" },
+          "unblocks": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "gateStatus": {
+      "enum": [
+        "blocked",
+        "pending",
+        "in_progress",
+        "pass",
+        "fail"
+      ]
+    }
+  }
+}

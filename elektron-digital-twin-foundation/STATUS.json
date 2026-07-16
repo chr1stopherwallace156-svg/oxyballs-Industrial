@@ -1,0 +1,88 @@
+{
+  "$schema": "./schemas/project-status.schema.json",
+  "project": "elektron-digital-twin-foundation",
+  "version": "0.1.1",
+  "updated_at": "2026-07-16T07:10:00Z",
+  "active_layer": "L00",
+  "active_layer_name": "Reference Lock",
+  "phase": "configuration_reconciliation",
+  "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
+  "next_action": "Owner selects platform: Candidate C1 (chassis cab) vs P1 (pickup Reg Cab disputed) vs P2 (pickup Crew Cab OEM-confirmed)",
+  "owner_approval_required": true,
+  "reference_vehicle": {
+    "status": "blocked",
+    "decision_id": "DT-D001",
+    "reconciliation": "DT-D005",
+    "lock_statement": "NOT LOCKED — platform type unresolved",
+    "provisional_under_review": {
+      "make": "Ford",
+      "model": "F-450 Super Duty",
+      "model_year": 2019,
+      "platform_type": "AMBIGUOUS — pickup vs chassis cab",
+      "cab": "Regular Cab",
+      "drivetrain": "4x2 DRW",
+      "wheelbase_in": 141.6,
+      "bed_or_body": "8 ft bed (pickup language)",
+      "stock_engine": "6.7L Power Stroke V8 diesel",
+      "conflict": "141.6 in WB + 8 ft bed = pickup framing; chassis cab uses 145.3 in min WB + CA + upfit"
+    },
+    "candidates": {
+      "C1": "2019 F-450 Chassis Cab Reg Cab DRW 4x2 — 145.3 in WB / 60 in CA — DOCUMENTED",
+      "P1": "2019 F-450 Pickup Reg Cab DRW 4x2 — 141.6 in / 8 ft — OEM CONFLICT",
+      "P2": "2019 F-450 Pickup Crew Cab DRW — 176.0 in / 8 ft — DOCUMENTED"
+    },
+    "reference_unit": "TBD — VIN or OEM-only path not chosen",
+    "geometry_primary_source": "Ford BBAS — platform-specific BBLB after lock",
+    "licensing_status": "COUNSEL_REVIEW_REQUIRED"
+  },
+  "layers": {
+    "L00": {
+      "name": "Reference Lock",
+      "status": "blocked",
+      "gates": {
+        "visual": "blocked",
+        "dimensional": "blocked",
+        "structural": "blocked",
+        "interaction": "pass",
+        "documentation": "in_progress"
+      }
+    },
+    "L01": { "name": "Exterior", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L02": { "name": "Chassis", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L03": { "name": "OEM Mechanical", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L04": { "name": "Disassembly", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L05": { "name": "Battery", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L06": { "name": "EV Propulsion and Charging", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L07": { "name": "Wiring and Cooling", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L08": { "name": "Workflow and Evidence", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L09": { "name": "Diagnostics and Telemetry", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L10": { "name": "Spatial Presentation", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } }
+  },
+  "blockers": [
+    {
+      "id": "DT-B004",
+      "summary": "Platform type unresolved — pickup vs chassis cab",
+      "unblocks": "Owner selects Candidate C1, P1, or P2 in CONFIGURATION_RECONCILIATION.md"
+    },
+    {
+      "id": "DT-B005",
+      "summary": "OEM conflict: F-450 Regular Cab pickup 141.6 in WB — KBB vs Ford pickup table",
+      "unblocks": "2019 MY Ford pickup ordering guide or owner rejects P1"
+    },
+    {
+      "id": "DT-B001",
+      "summary": "Reference vehicle not locked",
+      "unblocks": "Configuration selected + REFERENCE_APPROVAL.md signed"
+    },
+    {
+      "id": "DT-B002",
+      "summary": "No physical reference unit (VIN) or OEM-only path declared",
+      "unblocks": "VIN assignment or explicit OEM-only platform reference label"
+    },
+    {
+      "id": "DT-B003",
+      "summary": "Ford Super Duty vehicle-specific BBLB not archived on official BBAS",
+      "unblocks": "Obtain via Ford BBAS after platform lock"
+    }
+  ]
+}

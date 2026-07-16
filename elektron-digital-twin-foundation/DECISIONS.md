@@ -1,0 +1,64 @@
+# DECISIONS.md
+
+Append-only record of digital twin foundation decisions.
+
+## DT-D001 — Provisional L00 reference vehicle
+
+- **Date:** 2026-07-16
+- **Status:** **BLOCKED** — superseded by configuration reconciliation 2026-07-16; **do not treat as locked**
+- **Context:** L00 requires a single canonical reference before any 3D work. Elektron's Build Engine research targets Ford Super Duty F-450/F-550 (Class 4/5). Marketing materials also cite light-duty F-150. One vehicle must be locked first.
+- **Decision (provisional):**
+  - **2019 Ford F-450 Super Duty XL**
+  - Regular Cab, 8 ft Styleside, dual rear wheel (DRW)
+  - 4x2
+  - Wheelbase **141.6 in** (Regular Cab pickup)
+  - Stock body — no commercial upfit
+  - Stock **6.7L Power Stroke diesel** as the OEM configuration to model removal from
+  - Stock 19.5 in DRW steel wheels
+- **Rationale:**
+  - Aligns with Build Engine L1 lane (Super Duty BBLB, frame alteration, fleet GVWR class)
+  - Supports Extended Range / fleet conversion tier (GVWR > 10,000 lb, FMVSS 305a scope)
+  - Ford BBAS publishes Super Duty BBLB/BEMM paths (CS-05, CS-07, CS-10 on docs branch)
+  - Regular Cab + 8 ft bed maximizes accessible engine bay and frame rail length for conversion packaging studies
+  - 4x2 reduces first-pass complexity; 4x4 variant documented as future derivative (DT-D001-A)
+- **Alternatives considered:**
+  - **2017 Ford F-150 SuperCab 6.5 ft 4x2 145 in WB** — better match to Standard Conversion marketing tier and lighter donor pool; deferred as DT-D001-B variant
+  - **2019 F-550 chassis cab** — higher GVWR headroom; deferred until upfit/body type is chosen
+- **Consequences:**
+  - **Blocked 2026-07-16:** CONFIGURATION_RECONCILIATION found pickup/chassis-cab ambiguity; OEM conflict on F-450 Regular Cab pickup; see DT-D005
+  - No L01 work until owner selects Candidate C1, P1, or P2
+
+## DT-D005 — Configuration reconciliation: reference blocked
+
+- **Date:** 2026-07-16
+- **Status:** Accepted (finding — not a vehicle lock)
+- **Context:** Provisional DT-D001 combined pickup dimensions (141.6 in WB, 8 ft bed) with F-450 while EDTS targets commercial chassis-cab / work-truck platform.
+- **Decision:**
+  1. Result = **`REFERENCE_CONFIGURATION_BLOCKED`**
+  2. Provisional spec is **internally inconsistent** with chassis-cab framing
+  3. As F-450 **pickup**, Regular Cab 141.6 in is **disputed** (KBB vs OEM pickup table)
+  4. **Candidate C1** (chassis cab 145.3/60) documented as aligned with work-truck intent — **not auto-selected**
+  5. Dimension import deferred until platform locked
+- **Consequences:** L00 remains open; L01 blocked; no BBAS table bulk import
+
+## DT-D002 — Tiered geometry and accuracy strategy
+
+- **Date:** 2026-07-16
+- **Status:** Accepted (methodology — independent of vehicle choice)
+- **Context:** Full-vehicle sub-millimeter scan is costly; conversion engineering needs high accuracy only at interfaces.
+- **Decision:**
+  1. **Primary envelope:** Ford OEM dimension tables and vehicle-specific BBLB where obtainable
+  2. **Secondary verification:** Targeted LiDAR/photogrammetry on the physical reference unit at mounting interfaces, engine bay, and frame rails
+  3. **Accuracy tiers (mm):** mounting interfaces ±2; powertrain envelope ±5; exterior cosmetic ±10
+- **Consequences:** THREE_D_SPEC and QUALITY_STANDARD reference these tiers; scans are scoped, not whole-vehicle by default.
+
+## DT-D003 — Licensing posture for OEM geometry
+
+- **Date:** 2026-07-16
+- **Status:** Accepted (pending legal review for BBAS terms)
+- **Context:** Ford BBAS CAD and layout books are license-restricted.
+- **Decision:**
+  - OEM CAD stays **out of this git repo** unless counsel approves
+  - Derived meshes and dimension tables with provenance may live in `assets/` after review
+  - Public-facing twin uses Elektron-owned or derived geometry only
+- **Consequences:** Geometry source chain must be documented per component in DATA_MODEL.
