@@ -2,10 +2,10 @@
 
 This repository contains the authoritative schemas, standards, and registries establishing the baseline data model and coordinate frameworks for the F-450 physical vehicle intake and digital reconstruction.
 
-**Readiness:** `L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY`  
-**Closure:** `L00_CLOSURE_REJECTED` — physical asset intake required before re-closure  
-**Runtime transforms:** NOT certified (`validation_status: NOT_EXECUTED`)  
-See [STATUS.json](STATUS.json) and [L00_TRUE_RUNTIME_READINESS_REPORT.md](L00_TRUE_RUNTIME_READINESS_REPORT.md).
+**Readiness:** `L1_EXTERIOR_RESEARCH_FOUNDATION_READY`  
+**L00 residual:** `L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY` (closure REJECTED; runtime transforms NOT_EXECUTED)  
+**L01 geometry:** BLOCKED — research documentation only  
+See [STATUS.json](STATUS.json), [layers/L01/README.md](layers/L01/README.md), and [L00_TRUE_RUNTIME_READINESS_REPORT.md](L00_TRUE_RUNTIME_READINESS_REPORT.md).
 
 ---
 
@@ -34,7 +34,7 @@ All systems, agents, and engineers must consume the core specification files in 
 7. **[CLEARANCE_STANDARD_V2_PROPOSAL.md](CLEARANCE_STANDARD_V2_PROPOSAL.md)**  
    Formula-compliant clearance envelope rules (CLR-001, CLR-002).
 
-Also read: [TRANSFORM_QUATERNION_CORRECTION_REPORT.md](TRANSFORM_QUATERNION_CORRECTION_REPORT.md), [THREE_CAMERA_AND_WORLD_STANDARD.md](THREE_CAMERA_AND_WORLD_STANDARD.md), [REGRESSION_AUDIT.md](REGRESSION_AUDIT.md), [layers/L01_RESEARCH_DOSSIER_PLAN.md](layers/L01_RESEARCH_DOSSIER_PLAN.md).
+Also read: [TRANSFORM_QUATERNION_CORRECTION_REPORT.md](TRANSFORM_QUATERNION_CORRECTION_REPORT.md), [THREE_CAMERA_AND_WORLD_STANDARD.md](THREE_CAMERA_AND_WORLD_STANDARD.md), [REGRESSION_AUDIT.md](REGRESSION_AUDIT.md), [layers/L01_RESEARCH_DOSSIER_PLAN.md](layers/L01_RESEARCH_DOSSIER_PLAN.md), [layers/L01/README.md](layers/L01/README.md).
 
 ### Extended governance reading
 

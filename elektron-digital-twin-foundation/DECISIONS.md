@@ -185,3 +185,21 @@ Append-only record of digital twin foundation decisions.
   - Begin `layers/L01_RESEARCH_DOSSIER_PLAN.md` track 1
   - Do not claim runtime transform certification until tests execute
   - Do not invent L01 dimensions
+
+## DT-D012 — L1 exterior visual reference research foundation
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** L00 architectural runtime work is frozen. Scope shifts entirely to Layer 1 visual reference research for locked Candidate C1 (2019 F-450 Chassis Cab, Regular Cab, 4x2, DRW, 145.3/60, bare cab-and-chassis).
+- **Decision:**
+  1. Land complete L1 exterior research package under `layers/L01/`
+  2. Readiness banner: **`L1_EXTERIOR_RESEARCH_FOUNDATION_READY`**
+  3. Object hierarchy, draft object/landmark registries, view matrix, coverage plan, surface/wheel/glass/material dossiers, detail allocation, acceptance standard, open questions, and gap analysis are the research foundation
+  4. Evidence statuses remain DRAFT / PROVISIONAL — no brochure-to-VERIFIED promotion without archived Tier 1 sources
+  5. Front axle remains `FRONT_AXLE_ASSEMBLY` (RESEARCH_REQUIRED: monobeam vs twin-I-beam)
+  6. L01 geometry / mesh production remains **BLOCKED**
+  7. Next research: archive BBLB/fleet/T&RA sources; footprint/envelope claim extraction; resolve open questions
+- **Consequences:**
+  - Active layer moves to L01 research (not production)
+  - L00 closure remains REJECTED; runtime transform certification remains NOT_EXECUTED
+  - Do not invent missing dimensions to close gaps

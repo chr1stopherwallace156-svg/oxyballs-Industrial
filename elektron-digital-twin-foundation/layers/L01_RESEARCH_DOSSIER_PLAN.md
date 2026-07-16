@@ -2,9 +2,13 @@
 
 ## Status
 
-**PLANNING — Authorized after L00 specification freeze**
+**ACTIVE — Foundation package landed**
 
-L00 readiness: `L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY`. This dossier plan does not authorize L01 geometry production.
+Banner: `L1_EXTERIOR_RESEARCH_FOUNDATION_READY`
+
+L00 remains frozen at `L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY`. This plan does **not** authorize L01 geometry production.
+
+Primary package: [`layers/L01/`](L01/README.md)
 
 ---
 
@@ -22,6 +26,7 @@ L00 readiness: `L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY`. This dossier plan do
 
 | Order | Topic | Output path |
 |---|---|---|
+| 0 | Exterior research foundation (hierarchy, registries, coverage, dossiers) | `layers/L01/` — **COMPLETE (DRAFT)** |
 | 1 | F-Series footprint / envelope mappings (Candidate C1 applicable) | `research/incoming/l01_footprint_envelope/` |
 | 2 | Exterior panel silhouette and gap zones | `research/incoming/l01_panel_silhouette/` |
 | 3 | Image feature-matching / pose landmarks | `research/incoming/l01_pose_landmarks/` |
@@ -35,3 +40,4 @@ L00 readiness: `L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY`. This dossier plan do
 - Claims use schema V6 modular modules
 - Units from `UNIT_REGISTRY_V3_CORE_PROPOSAL.json`
 - Do not begin L01 mesh work until visual intake protocol executes
+- Draft registries in `layers/L01/` are proposals until Tier 1 sources are archived

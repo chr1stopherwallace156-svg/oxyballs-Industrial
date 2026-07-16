@@ -1,15 +1,16 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.2.4",
-  "updated_at": "2026-07-16T11:55:00Z",
-  "active_layer": "L00",
-  "active_layer_name": "Reference Lock",
-  "phase": "l00_spec_frozen_l01_research_planning",
-  "readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
+  "version": "0.3.0",
+  "updated_at": "2026-07-16T12:10:00Z",
+  "active_layer": "L01",
+  "active_layer_name": "Exterior",
+  "phase": "l01_exterior_visual_reference_research",
+  "readiness": "L1_EXTERIOR_RESEARCH_FOUNDATION_READY",
+  "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "Begin L01 research dossier: footprint/envelope dimensional mappings (Candidate C1); do not start pose landmarks until envelope scaffold exists",
+  "next_action": "Archive Tier 1 BBLB/fleet/T&RA sources for Candidate C1; extract footprint/envelope claims; resolve L1 open questions; geometry remains blocked",
   "owner_approval_required": true,
   "governance_status": {
     "L00_CONFIRMED_CORRECTIONS": "ACCEPTED",
@@ -28,6 +29,7 @@
     "CAMERA_VIEW_PRESETS": "DYNAMIC_V1_1_0",
     "UNIT_REGISTRY_V3": "CORE_PROPOSAL_SI_CURRENT_BASE",
     "L01_RESEARCH_PLANNING": "AUTHORIZED",
+    "L01_EXTERIOR_RESEARCH_FOUNDATION": "READY",
     "L01_GEOMETRY_PRODUCTION": "BLOCKED",
     "CLAIM_SCHEMA_V6": "PROPOSAL",
     "PHYSICAL_ASSET_INTAKE_V4": "PROPOSAL",
@@ -99,6 +101,7 @@
   "runtime_readiness": "L00_TRUE_RUNTIME_READINESS_REPORT.md",
   "regression_audit": "REGRESSION_AUDIT.md",
   "l01_research_plan": "layers/L01_RESEARCH_DOSSIER_PLAN.md",
+  "l01_exterior_package": "layers/L01/README.md",
   "adversarial_audit": {
     "status": "ACCEPTED_AS_REVIEW_FINDING",
     "verdict": "L00_CLOSURE_REJECTED",
@@ -125,7 +128,20 @@
         "documentation": "in_progress"
       }
     },
-    "L01": { "name": "Exterior", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L01": {
+      "name": "Exterior",
+      "status": "research_in_progress",
+      "geometry_status": "blocked",
+      "research_status": "L1_EXTERIOR_RESEARCH_FOUNDATION_READY",
+      "package": "layers/L01/",
+      "gates": {
+        "visual": "research_only",
+        "dimensional": "research_only",
+        "structural": "research_only",
+        "interaction": "blocked",
+        "documentation": "in_progress"
+      }
+    },
     "L02": { "name": "Chassis", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
     "L03": { "name": "OEM Mechanical", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
     "L04": { "name": "Disassembly", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },

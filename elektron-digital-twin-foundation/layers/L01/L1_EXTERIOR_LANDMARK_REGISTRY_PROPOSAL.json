@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_name": "EDTS_L1_Exterior_Landmark_Registry",
+  "version": "1.0.0",
+  "status": "DRAFT",
+  "description": "Spatial anchors for pose estimation, photogrammetric alignment, and laser scan registration.",
+  "landmarks": [
+    {
+      "landmark_id": "LMK-AXLE-FRONT-CTR",
+      "associated_object_id": "FRONT_AXLE_ASSEMBLY",
+      "human_description": "Centerpoint of the front axle face at the lateral centerline.",
+      "coordinate_frame": "EDTS_ISO_ALIGNED_VEHICLE_FRAME",
+      "physical_construction_or_identification_method": "Geometric center of the axle beam face",
+      "visibility_by_camera_angle": {
+        "front_low": "VISIBLE",
+        "side_left": "PARTIALLY_VISIBLE",
+        "rear_low": "BLOCKED"
+      },
+      "pose_estimation_suitability": true,
+      "scan_registration_suitability": true,
+      "expected_repeatability_mm": 5.0,
+      "evidence_source": "Ford_Chassis_Drafting_Layout_2019",
+      "status": "DRAFT"
+    },
+    {
+      "landmark_id": "LMK-FRAME-REAR-LH",
+      "associated_object_id": "OBJ-FRAME-RAIL-MAIN",
+      "human_description": "Top outer rear corner of the left-hand C-channel frame rail.",
+      "coordinate_frame": "EDTS_ISO_ALIGNED_VEHICLE_FRAME",
+      "physical_construction_or_identification_method": "Point intersection of the vertical outer web, top flange, and rear cut edge",
+      "visibility_by_camera_angle": {
+        "front_low": "BLOCKED",
+        "side_left": "VISIBLE",
+        "rear_high": "VISIBLE"
+      },
+      "pose_estimation_suitability": true,
+      "scan_registration_suitability": true,
+      "expected_repeatability_mm": 2.0,
+      "evidence_source": "Ford_SVE_Bulletin_2019_Page_12",
+      "status": "DRAFT"
+    },
+    {
+      "landmark_id": "LMK-WHEEL-HUB-FL",
+      "associated_object_id": "WHEEL_ASSEMBLY_FRONT_LEFT",
+      "human_description": "Center of the front left outer wheel hub cover center ornament.",
+      "coordinate_frame": "EDTS_ISO_ALIGNED_VEHICLE_FRAME",
+      "physical_construction_or_identification_method": "Center point of the outer chrome cap",
+      "visibility_by_camera_angle": {
+        "front_low": "VISIBLE",
+        "side_left": "VISIBLE",
+        "rear_high": "BLOCKED"
+      },
+      "pose_estimation_suitability": true,
+      "scan_registration_suitability": true,
+      "expected_repeatability_mm": 1.0,
+      "evidence_source": "Photogrammetric_Reference_Set_01",
+      "status": "DRAFT"
+    }
+  ]
+}

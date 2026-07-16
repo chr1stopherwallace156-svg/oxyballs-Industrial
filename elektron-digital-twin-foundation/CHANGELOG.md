@@ -200,3 +200,29 @@ All notable changes to the digital twin foundation. Append-only.
 - L01 research planning: **AUTHORIZED**
 - L01 geometry: **BLOCKED**
 - Next: footprint/envelope dimensional mappings
+
+## 2026-07-16 (L1 Exterior Visual Reference Research Foundation)
+
+### Added
+
+- `layers/L01/` complete research package:
+  - research plan, object hierarchy, object/landmark registry proposals
+  - reference view matrix, photo/scan coverage plan
+  - body/wheel/glass/material dossiers
+  - geometry vs normal/texture matrix, visual acceptance standard
+  - open questions, gap analysis, package README
+- **DT-D012** — L1 exterior research foundation accepted
+
+### Changed
+
+- Active layer → L01 (research_in_progress; geometry blocked)
+- `layers/L01_EXTERIOR.md` — research active stub
+- `layers/L01_RESEARCH_DOSSIER_PLAN.md` — foundation package marked complete (DRAFT)
+- STATUS readiness banner → **L1_EXTERIOR_RESEARCH_FOUNDATION_READY**
+- L00 readiness retained as `l00_readiness` field
+
+### Status
+
+- Readiness: **L1_EXTERIOR_RESEARCH_FOUNDATION_READY**
+- L01 geometry: **BLOCKED**
+- Next: Tier 1 source archive + footprint/envelope claim extraction
