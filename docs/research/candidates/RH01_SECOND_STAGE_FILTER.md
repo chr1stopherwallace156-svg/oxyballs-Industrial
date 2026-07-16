@@ -64,6 +64,7 @@ this file supersedes it (see Addendum, section 7).
 | CS-35 | **SupplierCandidate — dual-candidate structure** (owner review_09) | *Amphenol Excel\|Mate Mono (HVBI series) product brochure* — HV connectors for 16–70 mm² shielded cable; HVIL; 360° shielding; IP67/IP6K9K mated; 1000 VDC; unique keying (30°/60°/90° color-coded) | Amphenol Industrial (**official Amphenol server**) | <https://www.amphenol-industrial.de/media/pages/downloads/ev/397e425cfa-1707818150/excelmate-mono-produktbroschuere.pdf> | Candidate (batch_14) — **closes the connector ask at candidate level.** Owner structure: **03R8 = 180 A candidate (35–50 mm²); 05R10 = 250 A candidate (50–70 mm²); final choice BLOCKED by battery + inverter current** — lane L5/L9 |
 | CS-36 | **SupplierCandidate — LegacyCandidate + MissingSourceLink** | *Webasto CV Standard Battery System (NMC prismatic) + Vehicle Interface Box (VIB)* | Webasto — **NO URL/document on file (batch_16 supplied numbers without any source link)** | *(none on file — defect)* | Candidate (batch_16) — every value `NeedsExactSource`/`NeedsSupplierData`. **Owner flags: product line superseded by Standard Battery Pro 40 (~40 kWh, 333–407 V, 297 kg — owner-relayed) → LegacyCandidate, availability requires supplier confirmation** — lanes L9/L6 |
 | CS-37 | **SupplierCandidate — MissingSourceLink** | *Dana TM4 SUMO MD (HV2100-6P PM motor + integrated inverter)* | Dana TM4 — **NO URL/document on file (batch_16)**; owner corroborates the Class 4–7 / 265 kW / 3320 Nm / 3700 rpm envelope from Dana's public descriptions | *(none on file — defect)* | Candidate (batch_16) — every value `NeedsExactSource`/`NeedsSupplierData`; DC-side currents and DC-link capacitance not published (supplier questions required) — lanes L9/L6 |
+| CS-38 | **CandidateSourcePath — document named, not archived** | *Dana TM4 SUMO MD troubleshooting/service guide* (source of the 1200 l/h / 40-60 mix / 30 psi / 95.3% metrics) | Dana TM4 — **NO URL on file (batch_19)** | *(none on file — defect)* | Candidate path (batch_19) — obtain and archive the actual guide; until then RC-62 values stay DanaGuideMetricCandidate — lanes L6/L9 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -135,6 +136,10 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-59 | Webasto Pro 40 per-pack + VIB figures *(batch_17/review_12 — corroborated across both, still NO source link)*: Pro 40 ≈ 40 kWh, 333–407 V, **55 kW continuous / 112 kW 10 s peak discharge per pack**, 297 kg, 10 l/min; **VIB: 380 A continuous / 580 A 30 s peak discharge, up to 10 packs**; VIG/VIG Plus: up to 18 packs, higher current capability (owner-relayed) | CS-36 | **MissingSourceLink — NeedsExactSource for every figure** | **SupplierCandidate values** — supersede RC-56's 150/250 A system figures (which now appear to have been mislabeled pack/system data); nothing usable until Webasto datasheets/emails archived — lanes L9/L6 |
 | RC-60 | **Corrected architecture analysis (owner-derived, review_12 — supersedes batch_17's "3 packs minimum")**: pack count is topology-dependent. 1s1p/400 V: REJECTED (fails cont.+peak). 1s3p/400 V (~120 kWh): power may support but continuous ≈325–371 A is near the VIB 380 A limit and peak ≈663 A at 400 V EXCEEDS the VIB 580 A peak — risky. 2s1p/800 V (~80 kWh): ~110 kW cont / 224 kW peak — likely underpowered. **2s2p/800 V (4 packs, ~160 kWh): strongest minimum candidate for review.** 2s3p/800 V (6 packs, ~240 kWh): candidate if weight/space allow. All ideal P=V×I, lossless; real demand higher | derived over RC-57 + RC-59 (unverified inputs) | n/a — derived analysis | **DerivedRiskAnalysis — candidate topology ranking ONLY; pending supplier approval + engineering review (B-003/B-004); NOT a selection** — lanes L9/L6/L8 |
 | RC-61 | Webasto VIG / VIG Plus figures *(batch_18 + review_13, owner-corroborated — still NO source link)*: **1,215 A continuous / 1,400 A peak discharge, up to 18 packs**; marketing phrase "no HV limitation" **fenced** (owner: VIG still has limits — much stronger than VIB, not "unlimited") | CS-36 (Webasto interface family) | **MissingSourceLink — NeedsExactSource** | **SupplierCandidate values** — the numbers that make B-004 decisive; unusable until Webasto documentation archived — lanes L9/L6 |
+| RC-62 | Dana SUMO MD troubleshooting/service-guide cooling metrics *(batch_19 + review_15, owner-corroborated — guide named, NO link)*: motor coolant flow 1200 l/h; MCU coolant flow 1200 l/h; 40% deionized water / 60% glycol; 30 psi max working pressure (motor and MCU); max system efficiency 95.3% | CS-38 | **MissingSourceLink — guide must be archived** | **DanaGuideMetricCandidate / NeedsModelSpecificConfirmation** (owner statuses) — lanes L6/L9 |
+| RC-63 | Webasto Pro 40 thermal envelope *(batch_19 + review_15, owner-corroborated — NO link)*: 10 l/min volume flow, <50 mbar pressure loss, operating −30…+55 °C, 333–407 V, ~40 kWh installed, 45/55 kW continuous charge/discharge at 25 °C **SoC-dependent** | CS-36 | **MissingSourceLink** | **SupplierMetricCandidate / NeedsEngineeringReview** — the 10 l/min figure is per-pack; **total system flow depends on the Webasto-approved manifold layout (hydraulic assumption fence, owner correction 2)** — lanes L6/L9 |
+| RC-64 | Dana inverter max coolant inlet 65 °C *(appears in reseller/public listings, not confirmed in the Dana guide)* | CS-37 (reseller-tier) | No official Dana locator | **NeedsOfficialDanaSource / NeedsEngineeringReview** (owner correction 3) — lane L6 |
+| RC-65 | **Heat-load principle (owner correction 4)**: the cooling loop rejects **LOSSES**, not the 130 kW mechanical output. Illustration only: at 95.3% max efficiency, input ≈136.4 kW → loss ≈6.4 kW best-case — **fenced as a rough illustration, NOT a design value**; real heat rejection comes from supplier efficiency maps and heat-rejection data across operating points | derived over RC-57/RC-62 (unverified) | n/a — principle + fenced illustration | **CandidateRule (cooling sizing basis = loss maps) + fenced number**; combined system heat load remains OpenGap/HardBlocked — lanes L6/L8 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -1249,3 +1254,69 @@ email is the first evidence class that can begin resolving B-003/B-004
 and converting RC-56/57/59/61 from MissingSourceLink to sourced
 candidates. Unlock-dependency map (batch_18 Part 2) accepted with the
 VIG row corrected per above.
+
+---
+
+## 26. Batch 19 + owner review_15 — Cooling Package Gate v0.1 (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_19_cooling_package_framework.md`
+and `docs/research/raw/owner_reviews/review_15_batch_19_verdict.md`.
+Row additions: CS-38, RC-62..RC-65. **Owner label adopted: Cooling
+Package Gate v0.1 — architecture mapped, source metrics partially
+identified, calculations halted, supplier thermal maps required.**
+No pump/radiator/chiller may be picked.
+
+### Status-inflation escalation — "Validated" REJECTED
+
+Batch_19's tracker marked two unconfirmed supplier metrics
+**"Validated / RuleInput"** — the first use of "Validated" in any
+payload, on values with no archived source. Owner replacement labels
+applied verbatim: battery flow → SupplierMetricCandidate /
+NeedsEngineeringReview; inverter/motor flow → DanaGuideMetricCandidate
+/ NeedsModelSpecificConfirmation; 65 °C inlet → NeedsOfficialDanaSource
+/ NeedsEngineeringReview; combined heat load → OpenGap/HardBlocked;
+pump/radiator/chiller → OpenGap/Halted. Recurrence ledger: this is the
+status-inflation family's most serious instance — "Validated" is a
+term the future Build Engine must RESERVE for evidence-backed states;
+flagged for the M10 controlled-vocabulary check.
+
+### Owner corrections 1–5 applied
+
+1. Battery 25–35 °C "optimal" range →
+   **ThermalTargetAssumption / NeedsSupplierConfirmation** (public
+   spec says −30…+55 °C operating; 25 °C reference for power figures).
+2. "10 l/min × N packs" → **hydraulic assumption**; total flow depends
+   on the Webasto-approved manifold layout (series/parallel, hose
+   diameter, pump curve, branch balancing, air bleeding, uniformity).
+3. 65 °C max inlet → NeedsOfficialDanaSource (reseller-tier until Dana
+   states it directly).
+4. **Heat load ≠ output** (RC-65): cooling sizes to LOSSES from
+   battery/inverter/motor/DC-DC/charger/wiring, from efficiency maps —
+   the ~6.4 kW best-case figure is a fenced illustration only.
+5. TONFUL stays TechnicalBackground; ISO 20653 → NeedsExactSource /
+   **LabProcedureRequired** (owner-relayed IPX9K test conditions —
+   80 °C ±5, 80–100 bar, 14–16 l/min, 100–150 mm, multiple angles —
+   recorded as background, not procedure).
+
+### Other dispositions
+
+- Pump names (Pierburg CWA400, Davies Craig EWP150) = **lead names
+  only** — no datasheets, no rows.
+- "CO200" inverter designation appears in batch_19 without source —
+  unverified model reference, flag for the Dana letter.
+- Thermal question sets (9 Webasto + 10 Dana, owner-authored) →
+  appended as thermal addenda to the two outreach letters.
+- Batch_19's Cajon Pass framing corrected per owner but the *scenario*
+  is accepted as the canonical high-ambient sustained-grade design
+  case for L6/L8 (6–8% grade at GVWR, sustained output, derating
+  overlap between battery throttling and inverter derating — the
+  overlap curve is the unmapped rule input).
+
+### Conduct notes
+
+- Structure praised (correct loop separation; no premature component
+  picks; honest cross-dependency on the pending powertrain gate).
+- Defects: "Validated" labels (escalation, rejected); sourceless
+  metrics (3rd consecutive powertrain/cooling batch); an unverified
+  model designation (CO200).

@@ -5,6 +5,27 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 19 + review_15: Cooling Package Gate v0.1; "Validated" rejected
+
+- Archived batch_19 (thermal framework) and review_15 1:1. Owner label
+  adopted: **Cooling Package Gate v0.1** (architecture mapped,
+  calculations halted, supplier thermal maps required; no
+  pump/radiator/chiller picks).
+- **Status-inflation escalation caught:** first "Validated / RuleInput"
+  labels on unconfirmed supplier metrics — rejected; owner replacement
+  labels applied; "Validated" flagged as a RESERVED term for the M10
+  controlled-vocabulary check.
+- Owner corrections 1–5 applied: 25–35 °C → ThermalTargetAssumption;
+  10 l/min×N → hydraulic assumption (manifold-dependent); 65 °C inlet
+  → NeedsOfficialDanaSource; **heat load = LOSSES, not output**
+  (RC-65 CandidateRule; ~6.4 kW best-case fenced as illustration);
+  TONFUL background / ISO 20653 LabProcedureRequired.
+- New rows CS-38, RC-62..65 (Dana guide cooling metrics, Webasto
+  thermal envelope — all sourceless); pump names lead-only; "CO200"
+  designation unverified. Thermal addenda (9+10 owner-authored
+  questions) appended to both outreach letters.
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — Owner follow-up (review_14): gate marked BLOCKED_PENDING_SUPPLIER_RESPONSE; cooling opens
 
 - Archived review_14 1:1. Gate-closure correction applied: the

@@ -213,16 +213,20 @@ supplier datasheets → CAN/PATS.**
    the first evidence class that can resolve B-003/B-004. A parallel
    Dana/TM4 inquiry (10 questions, review_11) is not yet drafted into
    a letter.
-2. **Cooling** (L6) — **ACTIVE FOCUS — Domain Priority Block 3:
-   Cooling Package Gap Closure** (owner authorization, review_14 —
-   runs in parallel while the powertrain gate is
-   BLOCKED_PENDING_SUPPLIER_RESPONSE). Owner checklist: battery
-   cooling; inverter cooling; motor cooling; coolant flow; pressure
-   drop; radiator sizing; pump sizing; heat-exchanger sizing; thermal
-   derating; high-ambient testing; **Cajon Pass / mountain-grade heat
-   load**; underbody airflow; fan/radiator placement. Note: final
-   cooling numbers depend on the same pending powertrain choices —
-   mapping may proceed, sizing may not.
+2. **Cooling** (L6) — **Cooling Package Gate v0.1** (batch_19,
+   owner-labeled): architecture mapped (battery/inverter/motor loops,
+   flow/pressure, radiator/pump/heat-exchanger sizing frames), source
+   metrics partially identified (RC-62/63 — all sourceless),
+   calculations halted, **supplier thermal maps required** (thermal
+   addenda now on both outreach letters: 9 Webasto + 10 Dana
+   questions). No pump/radiator/chiller may be picked. Canonical
+   design case: **Cajon Pass sustained 6–8% grade at GVWR** — the
+   battery-throttling/inverter-derating overlap curve is the key
+   unmapped rule input. Owner corrections in force: cooling sizes to
+   LOSSES (efficiency maps), not output; 10 l/min×N is a hydraulic
+   assumption pending manifold approval; 25–35 °C is a
+   ThermalTargetAssumption; 65 °C inlet NeedsOfficialDanaSource;
+   "Validated" is a RESERVED term (M10 controlled vocabulary).
 3. **Brake/steering CP#1** (L10/L4) — CANDIDATE PATH ONLY (Brogen
    EHPS): Ford hydroboost pressure/flow requirements, LV backup
    behavior, failure modes, mounting/fitment measurement, test

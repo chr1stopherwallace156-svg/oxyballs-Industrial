@@ -4,14 +4,14 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-15
-- Reason for handoff: task complete (review_14 applied — gate waiting, cooling opens);
+- Reason for handoff: task complete (batch 19 + review_15 — Cooling Gate v0.1);
   awaiting owner decisions and/or next batch
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `4805fad` — Reconcile RH batch 18 + owner review_13
+- Start commit: `a5a664d` — Apply review_14 (gate waiting, cooling opens)
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
@@ -19,36 +19,40 @@
 ## Work performed
 
 - Files changed:
-  `docs/research/raw/owner_reviews/review_14_batch_18_followup.md`
-  (new, verbatim — committed separately as `aa7e08d`),
-  **`docs/research/outreach/SUPPLIER_INQUIRY_DANA_01.md` (new —
-  DRAFT, awaiting owner approval)**, `docs/status/BLOCKERS.md` (B-003
-  gate label), `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md`
-  (gate-closure correction in section 25),
-  `docs/research/RESEARCH_MAP.md` (L6 → ACTIVE FOCUS, Cooling Package
-  Gap Closure), `docs/CHANGELOG.md`, handoff files
-- Summary: owner follow-up (review_14) applied. **Gate-closure
-  correction: the question set does not close the powertrain gate —
-  supplier replies + datasheets + engineering review do.** B-003 now
-  carries the owner's label `BLOCKED_PENDING_SUPPLIER_RESPONSE` with
-  the 16 required answer fields (8 Webasto / 8 Dana). **Dana/TM4
-  letter drafted** from the owner's field lists (10 questions,
-  mirrors the approved Webasto framing) — status DRAFT until the
-  owner approves the wording; only the owner sends either letter.
-  **Active focus pivots to Cooling Package Gap Closure (Domain
-  Priority Block 3)** — L6 checklist extended (Cajon/mountain-grade
-  heat load, underbody airflow, fan/radiator placement); mapping may
-  proceed, sizing may not (depends on the same pending powertrain
-  choices). **Nothing ingested; nothing Confirmed; ODRs untouched.**
+  `docs/research/raw/research_hunter/batch_19_cooling_package_framework.md`
+  and `docs/research/raw/owner_reviews/review_15_batch_19_verdict.md`
+  (new, verbatim — committed separately as `e81697c`),
+  `docs/research/raw/research_hunter/PROVENANCE.md`,
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-38;
+  RC-62..65; section 26), both outreach letters (owner-authored
+  thermal addenda appended), `docs/research/RESEARCH_MAP.md` (L6 →
+  Cooling Package Gate v0.1), `docs/CHANGELOG.md`, handoff files
+- Summary: batch 19 (cooling framework) + review_15 reconciled. Owner
+  label adopted: **Cooling Package Gate v0.1** — architecture mapped,
+  calculations halted, supplier thermal maps required; no
+  pump/radiator/chiller picks. **Status-inflation escalation caught
+  and rejected: first "Validated / RuleInput" labels on unconfirmed
+  supplier metrics** — owner replacement labels applied; "Validated"
+  flagged as a RESERVED term for M10's controlled vocabulary. Owner
+  corrections 1–5 applied, most substantively: **cooling sizes to
+  LOSSES (efficiency maps), not the 130 kW output** — the ~6.4 kW
+  best-case figure is a fenced illustration (RC-65). New sourceless
+  candidate data: Dana guide cooling metrics (RC-62), Webasto thermal
+  envelope (RC-63); 65 °C inlet NeedsOfficialDanaSource (RC-64);
+  pump names lead-only; "CO200" designation unverified. Thermal
+  question sets (9+10) appended to both outreach letters. Canonical
+  design case recorded: Cajon Pass sustained 6–8% grade at GVWR with
+  the battery/inverter derating-overlap curve as the key unmapped rule
+  input. **Nothing ingested; nothing Confirmed; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: review_14 archive is 1:1 against the owner's
-  chat message; the Dana letter is filter-composed strictly from the
-  owner's required-answer field lists (coverage table included in the
-  file) and is explicitly NOT ready to send without owner approval
+- Verified vs claimed: batch_19/review_15 archives are 1:1 against the
+  owner's chat message ("19:75"); the thermal addenda are the owner's
+  wording transcribed unchanged; no thermal figure entered any rule or
+  sizing; the 6.4 kW illustration is fenced
 
 ## State
 

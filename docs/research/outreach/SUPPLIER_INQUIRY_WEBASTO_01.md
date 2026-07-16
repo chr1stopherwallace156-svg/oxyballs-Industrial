@@ -51,6 +51,20 @@ Thank you. We are trying to determine whether this architecture is appropriate f
 
 ---
 
+## Thermal addendum (owner-authored, review_15 — append to the letter when sending)
+
+For Standard Battery Pro 40 in a 2s2p / 800V candidate layout, please provide:
+
+1. heat rejection to coolant in watts per pack at continuous discharge
+2. heat rejection to coolant in watts per pack at peak discharge
+3. coolant inlet temperature limits
+4. coolant outlet temperature limits
+5. required flow rate per pack and approved manifold layout
+6. pressure drop vs flow curve
+7. thermal derating curve vs cell temperature, coolant temperature, SoC, and C-rate
+8. minimum/maximum coolant concentration and allowed coolant type
+9. whether active refrigerant chiller integration is required for high-ambient operation
+
 ## Status block (owner, review_13)
 
 - SupplierQuestionSet: **READY_TO_SEND**

@@ -51,6 +51,21 @@ Thank you. We are trying to determine whether this architecture is appropriate f
 
 ---
 
+## Thermal addendum (owner-authored, review_15 — append to the letter when sending)
+
+For the SUMO MD motor/inverter system, please provide:
+
+1. motor heat rejection at 130 kW continuous output
+2. inverter heat rejection at 130 kW continuous output
+3. heat rejection at 250–265 kW peak output
+4. coolant inlet temperature limit
+5. coolant outlet temperature limit
+6. required motor flow and pressure drop
+7. required inverter/MCU flow and pressure drop
+8. recommended serial vs parallel cooling layout
+9. thermal derating map vs coolant temperature and ambient temperature
+10. coolant pump/radiator/chiller recommendations
+
 ## Field coverage check (owner's required-answer list, review_14)
 
 | Required field | Question # |
