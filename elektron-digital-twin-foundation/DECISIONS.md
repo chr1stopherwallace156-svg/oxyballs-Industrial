@@ -609,3 +609,21 @@ Append-only record of digital twin foundation decisions.
 - **validation_evidence:** `verification/results/EAE_CORE_INGESTION_IMPLEMENTATION_REPORT.md` (35 passed)
 - **final_status:** `EDTS_EAE_CORE_INGESTION_VALIDATED`
 
+
+## DT-D037 — Front suspension: PRIMARY_SOURCE_REQUIRED
+
+- **Change-control record:** [`decisions/DT-D037_PRIMARY_SOURCE_REQUIRED_FRONT_SUSPENSION.json`](decisions/DT-D037_PRIMARY_SOURCE_REQUIRED_FRONT_SUSPENSION.json)
+- **decision_id:** `DT-D037`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `PRIMARY_SOURCE_REQUIRED`
+- **locked_configuration:** 2019 F-450 Chassis Cab Regular Cab 4x2 DRW 145.3/60 (`VEH-000001` / `CFG-000001`)
+- **scope:** CNF-001, Q3, document candidates `CAND-FORD-BBAS-2019` / `CAND-FORD-SM-2019`, sprint RL-006
+- **reason:** No `VERIFIED_EVIDENCE` for 4x2 front suspension architecture; BBAS/service manuals not acquired; suspension geometry upload review `NOT_EXECUTED`; deciding Beam vs Twin-I-Beam now would risk 4x4 / wrong-WB contamination.
+- **decision:**
+  1. No architecture decision (Beam/Monobeam vs Twin-I-Beam)
+  2. All current assertions remain `CANDIDATE` / `RESEARCH_REQUIRED`
+  3. Retract authoritative review claim for “F-450 Suspension Geometry Research” upload
+  4. Acquire/hash primary OEM sources bound to this silo before resolution
+  5. Kernel + passport rc1 unchanged; no geometry freeze
+

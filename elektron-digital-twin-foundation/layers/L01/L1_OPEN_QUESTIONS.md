@@ -28,13 +28,22 @@
 
 ## Q3 — F-450 4x2 Front Suspension Architecture
 
-**Question:** Does this specific Regular Cab 4x2 chassis-cab use a monobeam front axle structure or the classic twin-I-beam design?
+**Question:** Does this specific Regular Cab 4x2 chassis-cab use a monobeam / non-driving solid beam front axle structure, the classic twin-I-beam design, or another architecture?
 
-**Source Pack 01 authenticity audit:** Prior page citations voided (`NOT_VERIFIED_FILE_ABSENT`). Public marketing may support general wide-track monobeam (`GENERAL_PLATFORM_ARCHITECTURE_SUPPORTED`). Exact engineering variant unverified.
+**Exact config only:** 2019 F-450 Chassis Cab · Regular Cab · 4x2 · DRW · 145.3 in WB / 60 in CA (`VEH-000001` / `CFG-000001`).
+
+**Sprint RL-006 / DT-D037:**
+- Architecture claims = **`CANDIDATE_ASSERTION` only** — **no decision**
+- Uploaded “F-450 Suspension Geometry Research” file review = **`NOT_EXECUTED` / `NOT_CONFIRMED`** (retracted as authoritative)
+- Document candidates `CAND-FORD-BBAS-2019`, `CAND-FORD-SM-2019` = **`NOT_ACQUIRED`**
+- No claims at `VERIFIED_EVIDENCE`
+- Decision posture: **`PRIMARY_SOURCE_REQUIRED`**
+
+**Risks:** 4x4 driven-beam contamination; 169.3 in WB frame mount contamination.
 
 **Impact:** `FRONT_AXLE_*` object identity, landmark `LMK-AXLE-FRONT-CTR`, front suspension hierarchy
 
-**Status:** OPEN — acquire/hash SRC-L1-001; then physical confirmation before geometry freeze
+**Status:** OPEN — acquire/hash primary OEM sources bound to this silo; physical confirmation still required before geometry freeze
 
 ---
 

@@ -127,3 +127,31 @@ DT-D030.
 ### Status
 
 DT-D032.
+
+---
+
+## RL-006 — Front suspension architecture: PRIMARY_SOURCE_REQUIRED
+
+- **Date:** 2026-07-16
+- **Layer:** L00 / L01 (exact-vehicle isolation)
+- **Agent:** Cursor Cloud Agent
+- **Question:** What is the front suspension architecture for locked 2019 F-450 Chassis Cab Regular Cab 4x2 DRW 145.3/60?
+
+### Findings
+
+1. **Configuration lock only:** `VEH-000001` / `CFG-000001` — no cross-config inheritance.
+2. **Architecture:** Beam/Monobeam vs Twin-I-Beam remains **`CANDIDATE_ASSERTION`** — **no decision**.
+3. **File review retracted:** “F-450 Suspension Geometry Research” upload review = **`NOT_EXECUTED` / `NOT_CONFIRMED`**. Not present/verified in repo.
+4. **Document candidates NOT_ACQUIRED:** `CAND-FORD-BBAS-2019`, `CAND-FORD-SM-2019`.
+5. **No `VERIFIED_EVIDENCE`.** Knowledge hierarchy: CANDIDATE / RESEARCH_REQUIRED only.
+6. **Risks:** 4x4 driven-beam contamination; 169.3 in WB dimensional contamination.
+
+### Impact
+
+- CNF-001 → `OPEN_PRIMARY_SOURCE_REQUIRED`; preferred architecture cleared (`null`).
+- Q3 updated; geometry freeze remains blocked for front suspension.
+- Decision: **DT-D037 / `PRIMARY_SOURCE_REQUIRED`**.
+
+### Status
+
+Recorded under `research/sprints/RL-006_FRONT_SUSPENSION_PRIMARY_SOURCE.md`.
