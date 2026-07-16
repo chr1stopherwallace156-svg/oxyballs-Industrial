@@ -9,6 +9,20 @@ Rules:
 
 ## Source registry
 
+### Applicability
+
+Applies To:
+- 2019 Ford F-450
+- Regular Cab
+- DRW
+- 4×2
+
+Not Applicable To:
+- F-350
+- Pickup configurations that do not match the above
+- Crew Cab configurations
+- Other model years unless separately verified
+
 ### SRC-OEM-001 — Super Duty Pickups dimension guide
 
 | Field | Value |

@@ -58,3 +58,19 @@ See [CONFIGURATION_RECONCILIATION.md](CONFIGURATION_RECONCILIATION.md) §5:
 | Completed work-truck upfit | Requires named body — not specified |
 
 **Do not begin exterior modeling.**
+
+---
+
+## Applicability
+
+Applies To:
+- 2019 Ford F-450
+- Regular Cab
+- DRW
+- 4×2
+
+Not Applicable To:
+- F-350
+- Pickup configurations that do not match the above
+- Crew Cab configurations
+- Other model years unless separately verified

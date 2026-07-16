@@ -12,6 +12,20 @@
 
 Layer 0 reference is **not locked**. The provisional specification is **internally inconsistent with the stated EDTS commercial chassis-cab / work-truck intent**, and **cannot be confirmed as a single valid factory configuration** without owner resolution of platform type and an OEM conflict on F-450 Regular Cab pickup availability.
 
+### Applicability
+
+Applies To:
+- 2019 Ford F-450
+- Regular Cab
+- DRW
+- 4×2
+
+Not Applicable To:
+- F-350
+- Pickup configurations that do not match the above
+- Crew Cab configurations
+- Other model years unless separately verified
+
 ---
 
 ## 1. Provisional specification under review

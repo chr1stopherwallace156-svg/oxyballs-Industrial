@@ -42,6 +42,38 @@
 
 ---
 
+### Engineering Impact (C1 entries above)
+
+This affects:
+- Exterior Geometry
+- Wheel Placement
+- Fender Width
+- Steering Geometry
+- Suspension Modeling
+- Camera Collision
+- Future Battery Packaging
+
+Does NOT currently affect:
+- Telemetry
+- Wiring
+- Diagnostics
+
+### Applicability
+
+Applies To:
+- 2019 Ford F-450
+- Regular Cab
+- DRW
+- 4×2
+
+Not Applicable To:
+- F-350
+- Pickup configurations that do not match the above
+- Crew Cab configurations
+- Other model years unless separately verified
+
+---
+
 ## Platform B — F-250/F-350 Regular Cab Pickup 141.6 in WB (OEM reference — not provisional lock)
 
 *Included because 141.6 in + 8 ft bed is documented here; **do not apply to F-450 without confirmation**.*
@@ -83,3 +115,36 @@ Do **not** bulk-import BBAS tables. Add rows only when:
 1. Configuration is owner-locked, and  
 2. Row includes full applicability tag, and  
 3. Source page/table is recorded.
+
+---
+
+## Candidate: Front Suspension Geometry (C1) — Research scaffold
+
+Status: RESEARCH_REQUIRED (no values used for modeling)  
+Sources (to confirm):  
+- Ford Body Builder Advisory Service (BBAS) — 2019 Super Duty Chassis Cab Specs & Body Application Guide (official BBAS copy)  
+- Ford Super Duty Order Guide (2019) — Mechanical & Suspension specs (official)  
+- Ford OEM Service Manual (2019) — Front Suspension & Alignment Standards (official)
+
+Applicability:
+- 2019 Ford F-450 Regular Cab DRW 4×2 (Chassis Cab — Candidate C1)
+
+Engineering Impact:
+- Affects Exterior Geometry, Wheel Placement, Fender Width, Steering Geometry, Suspension Modeling, Camera Collision, Future Battery Packaging
+- Does NOT currently affect Telemetry, Wiring, Diagnostics
+
+Parameters (candidate — not verified for modeling):
+
+| parameter_id | description | candidate_value | unit | source_document | page/table | verification_status | notes |
+|--------------|-------------|----------------:|------|-----------------|-----------|---------------------|-------|
+| C1-TRACK-F | Front track width | 74.8 | in | BBAS Layout Book (to be archived) | — | RESEARCH_REQUIRED | Wide-track claim appears in multiple references; confirm against 2019 CC specs |
+| C1-FRAME-F-WIDTH | Frame rail width (front) | 34.2 | in | BBAS Chassis Cab Specs | — | RESEARCH_REQUIRED | Confirm section and datum definition |
+| C1-FOH | Front overhang | 38.3 | in | BBAS Dimension Matrix | — | RESEARCH_REQUIRED | Pickup vs chassis-cab overhang definitions differ; confirm CC value |
+| C1-WHEEL | Standard wheel size | 19.5×6.0 | in | 2019 Order Guide | — | RESEARCH_REQUIRED | Confirm for F-450 CC Reg Cab DRW 4×2 |
+| C1-TIRE | Standard tire spec | 225/70R19.5G | — | 2019 Order Guide | — | RESEARCH_REQUIRED | Confirm load index and OEM line code |
+| C1-FGAWR-STD | Front GAWR (std) | 5250 | lb | 2019 Chassis Cab Specs | — | RESEARCH_REQUIRED | Range depends on spring code; verify exact for chosen configuration |
+| C1-FGAWR-HD | Front GAWR (max package) | 7500 | lb | 2019 Chassis Cab Specs | — | RESEARCH_REQUIRED | Verify package code and availability for 4×2 DRW Reg Cab |
+
+Discrepancies to watch:
+- Twin‑I‑Beam vs Monobeam claims on third-party sites — F‑450 CC 4×2 uses monobeam front axle (to verify from OEM)
+- Track width confusion with F‑350 values — ensure F‑450 CC table is used
