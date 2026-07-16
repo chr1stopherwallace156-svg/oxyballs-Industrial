@@ -4,14 +4,14 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-15
-- Reason for handoff: task complete (batch 16 + review_11 — B-003 filed);
+- Reason for handoff: task complete (batch 17 + review_12 — B-004 filed);
   awaiting owner decisions and/or next batch
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `f6c460b` — Reconcile RH batch 15 + owner review_10
+- Start commit: `0c3515a` — Reconcile RH batch 16 + owner review_11
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
@@ -19,45 +19,46 @@
 ## Work performed
 
 - Files changed:
-  `docs/research/raw/research_hunter/batch_16_powertrain_candidates.md`
-  and `docs/research/raw/owner_reviews/review_11_batch_16_verdict.md`
-  (new, verbatim — committed separately as `fc5ae9b`),
+  `docs/research/raw/research_hunter/batch_17_powertrain_compatibility_check.md`
+  and `docs/research/raw/owner_reviews/review_12_batch_17_verdict.md`
+  (new, verbatim — committed separately as `c1aa169`),
   `docs/research/raw/research_hunter/PROVENANCE.md`,
-  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-36/37;
-  RC-56..58; section 23), `docs/status/BLOCKERS.md` (**B-003 filed**),
-  `docs/research/RESEARCH_MAP.md` (powertrain status + compatibility
-  check next), `docs/CHANGELOG.md`, handoff files
-- Summary: batch 16 (first powertrain candidates: Webasto CV Standard
-  + VIB, Dana TM4 SUMO MD) + review_11 reconciled. **B-003
-  POWERTRAIN_COMPATIBILITY_REVIEW_REQUIRED filed** — the owner's
-  P=V×I check shows face-value battery limits (150/250 A at ≤400 V →
-  ≤60/100 kW) cannot feed the Dana 130/250 kW target (needs ≈325/625 A
-  at 400 V); RC-58 records the arithmetic as a DerivedRiskFlag.
-  Component selection everywhere stays blocked until configuration is
-  established (pack count, 400/800 V, VIB limit) and reviewed. New
-  defect type recorded: **sourceless data matrix** (batch supplied all
-  numbers with zero URLs/quotes) — CS-36/37 carry MissingSourceLink;
-  every RC-56/57 value is NeedsExactSource; Webasto data additionally
-  **LegacyCandidate** (Pro 40 successor question). 20 supplier
-  questions recorded as the first external-outreach work package.
-  **Next payload: the Powertrain Compatibility Check.** **Nothing
-  ingested; nothing Confirmed; ODRs untouched.**
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (RC-59/60;
+  section 24), `docs/status/BLOCKERS.md` (**B-004 filed; B-003
+  extended with owner blockers 04–08**),
+  `docs/research/RESEARCH_MAP.md` (corrected topology summary),
+  `docs/CHANGELOG.md`, handoff files
+- Summary: batch 17 (Powertrain Compatibility Check) + review_12
+  reconciled. **Owner topology correction supersedes the batch's "3
+  packs minimum"**: 800 V requires 2sNp series pairing → practical
+  minimum 4 packs; corrected ranking on RC-60 (1s1p rejected;
+  1s3p/400 V risky — peak ≈663 A exceeds VIB 580 A; 2s1p underpowered;
+  **2s2p/800 V strongest minimum candidate**; 2s3p if weight/space
+  allow) — all derived, lossless, unverified inputs. **B-004
+  INTERFACE_SELECTION_REQUIRED filed** (VIB vs VIG/VIG Plus changes
+  every current limit). RC-59 records the Pro 40 (55/112 kW) and VIB
+  (380/580 A) figures — **2nd consecutive sourceless batch**;
+  everything MissingSourceLink; RC-56's system figures superseded as
+  apparently mislabeled. Supplier outreach now 24 questions. Conduct
+  watch item added: topology conclusions require series/parallel
+  constraint checks. **Nothing ingested; nothing Confirmed; ODRs
+  untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_16/review_11 archives are 1:1 against the
-  owner's chat message ("16:75"); RC-58's arithmetic is owner-supplied
-  over explicitly unverified inputs and is recorded as risk analysis,
-  not fact; no powertrain value entered any rule or sizing
+- Verified vs claimed: batch_17/review_12 archives are 1:1 against the
+  owner's chat message ("17:75"); RC-60's ranking is owner-derived
+  over explicitly unverified inputs and recorded as risk analysis,
+  not selection; no powertrain value entered any rule or sizing
 
 ## State
 
 - Current phase: Revision 07 Source Ingestion and Consolidation
 - Blockers: B-001 (ingestion — ~70 batches outstanding); B-002
-  (.gov/CARB extraction blocked); **B-003 (powertrain compatibility
-  review — blocks all component selection)**
+  (.gov/CARB extraction blocked); **B-003 (powertrain compatibility —
+  extended 04–08)**; **B-004 (interface selection VIB vs VIG)**
 - Open owner decisions (accumulated): (1) elektron-os-clean
   two-universe question (Audit 01 §0/§11.1); (2) index.html
   disposition (Audit 01 §10); (3) L2 regulatory module mapping;

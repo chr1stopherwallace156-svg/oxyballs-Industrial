@@ -132,6 +132,8 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-56 | Webasto CV Standard Battery candidate profile *(batch_16, NO source link)*: ~350 V nominal / 280–400 V range per pack; 35 kWh/pack scalable to 10 packs (350 kWh) via VIB; **150 A continuous / 250 A 10 s peak at VIB (system level)**; liquid cooled 10 l/min, <50 mbar; 295 kg/pack; 960×686×302 mm; J1939 via VIB; LV 123/124 referenced. I_sc / internal resistance NOT published | CS-36 | **NO locator — MissingSourceLink defect; every value NeedsExactSource** | **SupplierCandidate — LegacyCandidate**; owner downgrade list applies (currents, coolant specs, J1939 registers all need datasheet or supplier-email proof) — lanes L9/L6 |
 | RC-57 | Dana TM4 SUMO MD candidate profile *(batch_16, NO source link)*: 130 kW continuous / 250–265 kW peak (30 s duty limit); 685 Nm continuous / 2150–3320 Nm peak (direct drive); 3500–3700 rpm; up to 750–800 V DC; coolant inlet max 65 °C, water/glycol 40/60; pre-charge "integrated in S-Box" (unproven); J1939. Continuous/peak **DC bus currents, DC-link capacitance, and mass NOT published** | CS-37 | **NO locator — MissingSourceLink defect; every value NeedsExactSource** | **SupplierCandidate**; the four OPEN fields are exactly the HV-wiring unlock variables — supplier questions required — lanes L9/L6 |
 | RC-58 | **Powertrain compatibility risk (owner-derived, review_11)**: at candidate face values, Webasto VIB limits (150 A cont / 250 A peak) yield ≤60 kW continuous / ≤100 kW peak at 400 V — versus the Dana target of 130 kW continuous / 250 kW peak, which needs ≈325 A cont / ≈625 A peak at 400 V (P=V×I, lossless). **Candidate battery output may not support candidate motor demand** unless configuration differs (pack count, 400 vs 800 V, parallel arrangement, VIB limit, supplier-approved setup) | derived over RC-56 + RC-57 (both unverified) | n/a — derived risk analysis, not a source claim | **DerivedRiskFlag → blocker B-003 (POWERTRAIN_COMPATIBILITY_REVIEW_REQUIRED)**; arithmetic owner-supplied; resolves only via supplier answers + engineering review — lanes L9/L6/L8 |
+| RC-59 | Webasto Pro 40 per-pack + VIB figures *(batch_17/review_12 — corroborated across both, still NO source link)*: Pro 40 ≈ 40 kWh, 333–407 V, **55 kW continuous / 112 kW 10 s peak discharge per pack**, 297 kg, 10 l/min; **VIB: 380 A continuous / 580 A 30 s peak discharge, up to 10 packs**; VIG/VIG Plus: up to 18 packs, higher current capability (owner-relayed) | CS-36 | **MissingSourceLink — NeedsExactSource for every figure** | **SupplierCandidate values** — supersede RC-56's 150/250 A system figures (which now appear to have been mislabeled pack/system data); nothing usable until Webasto datasheets/emails archived — lanes L9/L6 |
+| RC-60 | **Corrected architecture analysis (owner-derived, review_12 — supersedes batch_17's "3 packs minimum")**: pack count is topology-dependent. 1s1p/400 V: REJECTED (fails cont.+peak). 1s3p/400 V (~120 kWh): power may support but continuous ≈325–371 A is near the VIB 380 A limit and peak ≈663 A at 400 V EXCEEDS the VIB 580 A peak — risky. 2s1p/800 V (~80 kWh): ~110 kW cont / 224 kW peak — likely underpowered. **2s2p/800 V (4 packs, ~160 kWh): strongest minimum candidate for review.** 2s3p/800 V (6 packs, ~240 kWh): candidate if weight/space allow. All ideal P=V×I, lossless; real demand higher | derived over RC-57 + RC-59 (unverified inputs) | n/a — derived analysis | **DerivedRiskAnalysis — candidate topology ranking ONLY; pending supplier approval + engineering review (B-003/B-004); NOT a selection** — lanes L9/L6/L8 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -1115,3 +1117,73 @@ status, missing values, supplier questions), P=V×I / I=P/V formulas,
 outputs = compatibility table + mismatch warnings + missing data +
 supplier questions + blocker list. **No selections, nothing
 Confirmed.**
+
+---
+
+## 24. Batch 17 + owner review_12 — compatibility check corrected; B-004 filed (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_17_powertrain_compatibility_check.md`
+and `docs/research/raw/owner_reviews/review_12_batch_17_verdict.md`.
+Row additions: RC-59 (Pro 40/VIB/VIG figures — still sourceless),
+RC-60 (owner-corrected architecture analysis). **B-004
+INTERFACE_SELECTION_REQUIRED filed; B-003 extended with owner blockers
+04–08.**
+
+### The topology correction (owner) — supersedes batch_17's conclusion
+
+Batch_17 concluded "minimum 3 packs" from simple power division. That
+math only works for a 400 V parallel (1s3p) layout — **an 800 V
+architecture requires series pairs (2sNp), so the practical minimum
+becomes 4 packs (2s2p)**. RC-60 carries the owner's full corrected
+ranking: 1s1p rejected; 1s3p/400 V risky (continuous near the VIB
+380 A limit; peak ≈663 A EXCEEDS the VIB 580 A 30 s rating); 2s1p/800 V
+likely underpowered (~110/224 kW); **2s2p/800 V strongest minimum
+candidate**; 2s3p if weight/space allow. All lossless-ideal, all
+pending supplier approval and engineering review. Batch_17's "800V
+should be chosen" softened per owner to "appears more compatible…
+requires supplier-approved series configuration."
+
+### The interface catch — B-004
+
+Batch_17 treated the VIB as the only battery interface. The owner
+surfaced the **VIG / VIG Plus** (up to 18 packs, higher current
+capability) — which could dissolve the entire current-bottleneck
+analysis. Until the interface is supplier-confirmed with its datasheet
+archived, **no battery-system current limit is accepted** (B-004
+blocks B-003's resolution).
+
+### Dispositions
+
+- **RC-56 superseded in part:** batch_16's "150 A cont / 250 A peak
+  system" figures now appear mislabeled; RC-59's 380/580 A VIB and
+  55/112 kW per-pack figures replace them as the working candidates —
+  all still `MissingSourceLink`/`NeedsExactSource` (2nd consecutive
+  sourceless batch for Webasto/Dana numbers).
+- **Production status:** batch_17 asserts "current production" for
+  Pro 40 + SUMO MD — accepted as candidate only; the LegacyCandidate
+  flag on CV-Standard-era data stands until supplier confirmation.
+- **Low-voltage-at-load + efficiency blockers (06/07):** all existing
+  current figures are nominal/full-charge ideal values; sizing at
+  280–333 V floor with losses will be worse — recorded so no one
+  sizes to the pretty numbers.
+- **Supplier outreach updated:** batch_17's 3 technical questions
+  (DC-link µF; Isc/impedance through VIB; pre-charge ownership —
+  inverter firmware vs battery junction) + the owner's combined
+  configuration question appended to the outreach package (now 24
+  questions).
+- **Unlock tracker accepted:** partially-unlocked lanes (voltage
+  range, mass/dims, cooling, J1939, 1000 VDC insulation class)
+  consistent with review_11; all five BLOCKED items remain blocked.
+
+### Conduct notes
+
+- Good: single-pack elimination is sound; mismatch warnings (VIB
+  bottleneck, low-voltage current rise) are genuine engineering
+  insight; OpenGaps honest; "Powertrain Sign-Off Filter" hand-off
+  framing correct.
+- Defects: **2nd consecutive sourceless payload** ("The VIB datasheet
+  explicitly limits…" — which datasheet? no link); **engineering
+  conclusions beyond inputs** ("3 packs minimum", "800V should be
+  chosen") — new watch item: topology/architecture conclusions
+  require the series/parallel constraint check the owner demonstrated.

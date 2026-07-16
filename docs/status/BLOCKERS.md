@@ -33,6 +33,27 @@ Active blockers and what unblocks them. Entries are closed by marking
   (10 Webasto + 10 Dana — review_11), confirmation of system
   architecture (400 vs 800 V, pack count, VIB limits, current
   production status), and engineering review of the resulting numbers.
+- Extended (review_12, owner blockers 04–08): (04) pack topology
+  1sNp vs 2sNp must be declared; (05) interface choice — see B-004;
+  (06) current demand must be checked at MINIMUM pack voltage, not
+  nominal/full charge; (07) DC input current must include
+  inverter/motor losses, not ideal P=V×I; (08) 4/6-pack layouts must
+  be checked against F-450/F-550 frame space, payload, axle load, and
+  cooling. Corrected candidate ranking on file (RC-60): 800 V
+  2s2p/4-pack = strongest minimum candidate for review; combined
+  supplier question issued (review_12).
+
+## B-004 — INTERFACE_SELECTION_REQUIRED (Webasto VIB vs VIG/VIG Plus)
+
+- Filed: 2026-07-15 (owner directive, review_12)
+- Status: Active
+- Blocks: acceptance of ANY battery-system current limit (the VIB's
+  380 A cont / 580 A 30 s peak vs the VIG/VIG Plus's higher, 18-pack
+  capability changes the whole current-bottleneck picture); therefore
+  also blocks the topology decision and everything under B-003.
+- Unblocked by: supplier-confirmed interface selection (VIB vs
+  VIG/VIG Plus) with its official datasheet archived, for the chosen
+  400/800 V topology and pack count.
 
 ## B-002 — Verbatim extraction from .gov/CARB sources blocked in current environment
 

@@ -189,11 +189,19 @@ supplier datasheets → CAN/PATS.**
    everything NeedsExactSource) and with a face-value **power
    mismatch** (owner P=V×I check: ≤60/100 kW available vs 130/250 kW
    target → **blocker B-003 POWERTRAIN_COMPATIBILITY_REVIEW_REQUIRED**).
-   **Next payload: the Powertrain Compatibility Check** (8 checks,
-   compatibility table, mismatch warnings, supplier questions). The 20
-   recorded supplier questions (10 Webasto / 10 Dana, review_11) are
-   owner/business outreach actions. Component selection everywhere
-   stays blocked until B-003 resolves.
+   **Compatibility check done (batch_17, corrected by review_12):**
+   single pack rejected; 400 V 1s3p risky (VIB 380 A cont / 580 A peak
+   limits — peak demand ≈663 A exceeds it); 800 V 2s1p underpowered;
+   **800 V 2s2p/4-pack = strongest minimum candidate for review**
+   (RC-60 — derived, lossless, unverified inputs). **B-004
+   INTERFACE_SELECTION_REQUIRED filed** (VIB vs VIG/VIG Plus changes
+   all current limits); B-003 extended with blockers 04–08 (topology
+   declaration, interface, minimum-voltage current check, loss
+   correction, weight/space/axle/cooling for 4–6 packs). Supplier
+   outreach package now 24 questions incl. the owner's combined
+   configuration question. **Everything remains candidate-level:
+   both powertrain batches were sourceless — official Webasto/Dana
+   datasheets must be archived before any figure is usable.**
 2. **Cooling** (L6) — EMPTY: battery/motor/inverter/charger/DC-DC
    loops, pump + radiator sizing, flow, pressure drop, derating,
    high-ambient testing.

@@ -5,6 +5,27 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 17 + review_12: topology correction; B-004 filed
+
+- Archived batch_17 (Powertrain Compatibility Check) and review_12 1:1.
+- **Owner topology correction supersedes the batch's "3 packs
+  minimum":** 800 V requires 2sNp series pairing → practical minimum
+  4 packs (2s2p, ~160 kWh) = strongest minimum candidate; 1s3p/400 V
+  risky (peak ≈663 A exceeds VIB 580 A); 2s1p underpowered. RC-60
+  records the full corrected ranking as DerivedRiskAnalysis (lossless,
+  unverified inputs, pending supplier approval + review).
+- **B-004 INTERFACE_SELECTION_REQUIRED filed** (VIB vs VIG/VIG Plus —
+  interface choice changes every current limit); B-003 extended with
+  owner blockers 04–08 (topology, interface, minimum-voltage current,
+  loss correction, weight/space/axle/cooling).
+- RC-59: Pro 40 per-pack (55/112 kW) + VIB (380/580 A) figures —
+  2nd consecutive sourceless batch; everything MissingSourceLink;
+  RC-56's system figures superseded as apparently mislabeled.
+- Supplier outreach package now 24 questions; "800V should be chosen"
+  softened per owner; conduct watch item added (topology conclusions
+  require series/parallel constraint checks).
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 16 + review_11: powertrain candidates; B-003 compatibility blocker filed
 
 - Archived batch_16 (Webasto CV Standard + VIB / Dana TM4 SUMO MD
