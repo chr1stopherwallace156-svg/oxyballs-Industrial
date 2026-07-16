@@ -1,0 +1,43 @@
+{
+  "claim_id": "CLM-00001",
+  "claim_type": "DIMENSION",
+  "subject_entity_id": "ford_f450_2019_frame",
+  "property_id": "frame_rail_width_front",
+  "schema_version": "5.0.0",
+  "metadata": {
+    "recorded_at": "2026-07-16T10:00:00Z",
+    "asserted_at": "2026-07-16T10:00:00Z",
+    "effective_from": null,
+    "effective_until": null,
+    "supersedes_claim_id": null,
+    "review_status": "PROVISIONAL",
+    "reviewed_by": "USR-001",
+    "intended_use": "Chassis component spatial verification"
+  },
+  "provenance": {
+    "source_locator": "Ford BBAS 2019 Layout Book Page 14",
+    "verification_method": "DOCUMENT_REVIEW",
+    "source_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "spatial_context": {
+    "coordinate_frame_id": "EDTS_ISO_ALIGNED_VEHICLE_FRAME",
+    "datum_id": "DTM-DSN-001",
+    "measurement_axis": "Y"
+  },
+  "claim_value": {
+    "value_structure": "SCALAR",
+    "source_value": "868.7",
+    "source_unit_id": "UNIT-MM",
+    "canonical_unit_id": "UNIT-MM"
+  },
+  "value_details": {
+    "scalar_value": 868.7
+  },
+  "uncertainty_and_tolerances": {
+    "design_tolerance_symmetric": 0.5,
+    "manufacturing_tolerance_symmetric": 1.0,
+    "measurement_uncertainty_sigma_1": 0.1,
+    "accuracy_class": "MAC-A",
+    "uncertainty_method": "OEM Spec Sheet"
+  }
+}

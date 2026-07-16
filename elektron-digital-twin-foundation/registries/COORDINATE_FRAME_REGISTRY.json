@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "registry_name": "EDTS_Coordinate_Frames",
   "datum_state_model": "DATUM_STATE_MODEL_PROPOSAL.md",
+  "transform_registry": "registries/TRANSFORM_REGISTRY_V3_PROPOSAL.json",
   "frames": {
     "EDTS_ISO_ALIGNED_VEHICLE_FRAME": {
       "standard": "ISO 8855",
@@ -33,15 +34,34 @@
       },
       "origin_datum_id": "DTM-DSN-001"
     },
-    "GLTF_RUNTIME_FRAME": {
-      "standard": "glTF 2.0 Standard Specification",
+    "GLTF_ASSET_FRAME": {
+      "standard": "glTF 2.0 Asset Specification",
+      "handedness": "right_handed",
+      "basis": {
+        "left": [1.0, 0.0, 0.0],
+        "up": [0.0, 1.0, 0.0],
+        "forward": [0.0, 0.0, 1.0]
+      },
+      "notes": "+X points left; +Y up; +Z forward. Authoring and packaging frame.",
+      "origin_datum_id": "DTM-SUP-001",
+      "correction_doc": "GLTF_FRAME_CORRECTION.md"
+    },
+    "THREE_SCENE_FRAME": {
+      "standard": "Three.js / WebGL default viewing convention",
       "handedness": "right_handed",
       "basis": {
         "right": [1.0, 0.0, 0.0],
         "up": [0.0, 1.0, 0.0],
         "backward": [0.0, 0.0, 1.0]
       },
-      "origin_datum_id": "DTM-SUP-001"
+      "notes": "+X right; +Y up; -Z forward for default camera. Runtime scene placement only.",
+      "origin_datum_id": "DTM-SUP-001",
+      "standard_doc": "THREE_RUNTIME_FRAME_STANDARD_PROPOSAL.md"
+    },
+    "GLTF_RUNTIME_FRAME": {
+      "status": "DEPRECATED",
+      "superseded_by": ["GLTF_ASSET_FRAME", "THREE_SCENE_FRAME"],
+      "reason": "Conflated glTF asset authoring space with WebGL -Z-forward viewing space"
     },
     "UNREAL_FRAME": {
       "standard": "Unreal Engine Editor Standard",

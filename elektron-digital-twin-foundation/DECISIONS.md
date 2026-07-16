@@ -127,3 +127,24 @@ Append-only record of digital twin foundation decisions.
   - Implementation parsers must use TRANSFORM_REGISTRY_V2 only
   - L01 visual exterior work may begin visual intake protocol when vehicle available
   - L02 engineering metrology remains blocked until vehicle receipt
+
+## DT-D009 — glTF asset vs Three.js scene frame separation
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Prior GLTF_RUNTIME_FRAME conflated official glTF 2.0 asset coordinates (+Y up, +Z forward, -X right / +X left) with Three.js WebGL viewing space (-Z forward).
+- **Decision:**
+  1. `GLTF_ASSET_FRAME` — official glTF 2.0 asset authoring/packaging frame (`GLTF_FRAME_CORRECTION.md`)
+  2. `THREE_SCENE_FRAME` — Three.js default viewing space (`THREE_RUNTIME_FRAME_STANDARD_PROPOSAL.md`)
+  3. `TRANSFORM_REGISTRY_V3_PROPOSAL.json` — authoritative: `TF-ISO-TO-GLTF-ASSET`, `TF-ISO-TO-THREE-SCENE`, `TF-ISO-TO-UNREAL`
+  4. `COORDINATE_BASIS_TESTS_V2.json` — active test matrix (all pass)
+  5. V2 transform registry superseded; V1 remains REJECTED
+  6. `UNIT_REGISTRY_V2_PROPOSAL.json` — UNIT-DEGC, UNIT-COULOMB, milliohm/megaohm naming
+  7. `PHYSICAL_ASSET_INTAKE_SCHEMA_V3_PROPOSAL.json` — VIN status dependencies; six DRW tire pressures
+  8. `VISUAL_REFERENCE_INTAKE_PROTOCOL_V2.md` — authorized; flexible hardware guidelines
+  9. Claim schema test fixtures under `schemas/tests/`
+  10. Readiness: **`L00_VISUAL_INTAKE_ONLY_READY`**
+- **Consequences:**
+  - Asset export must use TF-ISO-TO-GLTF-ASSET, not the old TF-ISO-TO-GLTF mapping
+  - Three.js loaders may apply TF-ISO-TO-THREE-SCENE for root placement
+  - L00 remains visual-intake-only; engineering metrology still L2-gated

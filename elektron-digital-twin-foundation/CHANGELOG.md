@@ -125,3 +125,27 @@ All notable changes to the digital twin foundation. Append-only.
 - Readiness: **L00_READY_FOR_VISUAL_REFERENCE_INTAKE**
 - Visual intake: **AUTHORIZED** (Layer 1)
 - Engineering metrology: **PROVISIONAL** (Layer 2, blocked)
+
+## 2026-07-16 (glTF Asset vs Three.js Scene Separation)
+
+### Added
+
+- `GLTF_FRAME_CORRECTION.md`, `THREE_RUNTIME_FRAME_STANDARD_PROPOSAL.md`
+- `registries/TRANSFORM_REGISTRY_V3_PROPOSAL.json`, `registries/COORDINATE_BASIS_TESTS_V2.json`
+- `FULL_FORMULA_COMPLIANCE_REPORT.md`, `L00_RUNTIME_READINESS_REPORT.md`
+- `registries/UNIT_REGISTRY_V2_PROPOSAL.json`
+- `schemas/PHYSICAL_ASSET_INTAKE_SCHEMA_V3_PROPOSAL.json`
+- `schemas/tests/valid/valid_scalar_claim.json`, `schemas/tests/invalid/invalid_mixed_fields_claim.json`
+- `VISUAL_REFERENCE_INTAKE_PROTOCOL_V2.md`
+
+### Changed
+
+- `COORDINATE_FRAME_REGISTRY.json` — `GLTF_ASSET_FRAME`, `THREE_SCENE_FRAME`; deprecate `GLTF_RUNTIME_FRAME`
+- `TRANSFORM_REGISTRY_V2_PROPOSAL.json` — SUPERSEDED
+- `VISUAL_REFERENCE_INTAKE_PROTOCOL.md` — superseded by V2
+- **DT-D009** — glTF asset vs Three.js scene separation
+
+### Status
+
+- Readiness: **L00_VISUAL_INTAKE_ONLY_READY**
+- Transform authority: **V3**

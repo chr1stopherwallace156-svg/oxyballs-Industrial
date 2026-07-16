@@ -2,7 +2,7 @@
 
 This repository contains the authoritative schemas, standards, and registries establishing the baseline data model and coordinate frameworks for the F-450 physical vehicle intake and digital reconstruction.
 
-**Readiness:** `L00_READY_FOR_VISUAL_REFERENCE_INTAKE`  
+**Readiness:** `L00_VISUAL_INTAKE_ONLY_READY`  
 **Closure:** `L00_CLOSURE_REJECTED` — physical asset intake required before re-closure  
 See [STATUS.json](STATUS.json) for machine-readable project state.
 
@@ -15,14 +15,14 @@ All systems, agents, and engineers must consume the core specification files in 
 1. **[FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md)**  
    Establishes the copyability, structure, and machine-readability rules for all mathematical and tolerance statements.
 
-2. **[registries/UNIT_REGISTRY.json](registries/UNIT_REGISTRY.json)**  
-   The controlled vocabulary of all measurement units.
+2. **[registries/UNIT_REGISTRY_V2_PROPOSAL.json](registries/UNIT_REGISTRY_V2_PROPOSAL.json)**  
+   The controlled vocabulary of all measurement units (with conversion multipliers).
 
 3. **[registries/COORDINATE_FRAME_REGISTRY.json](registries/COORDINATE_FRAME_REGISTRY.json)**  
-   Defines spatial systems, handedness, and core platform datums.
+   Defines spatial systems including `GLTF_ASSET_FRAME` and `THREE_SCENE_FRAME`.
 
-4. **[registries/TRANSFORM_REGISTRY_V2_PROPOSAL.json](registries/TRANSFORM_REGISTRY_V2_PROPOSAL.json)**  
-   Machine-readable 4x4 matrix transforms (validated per `TRANSFORM_VALIDATION_REPORT.md`). **Do not use** deprecated `TRANSFORM_REGISTRY.json`.
+4. **[registries/TRANSFORM_REGISTRY_V3_PROPOSAL.json](registries/TRANSFORM_REGISTRY_V3_PROPOSAL.json)**  
+   Machine-readable transforms. **Do not use** V1 or V2 registries.
 
 5. **[schemas/CLAIM_REGISTRY_CORE_SCHEMA_V5_PROPOSAL.json](schemas/CLAIM_REGISTRY_CORE_SCHEMA_V5_PROPOSAL.json)**  
    Core JSON schema with mutually exclusive value structure validation.
@@ -33,6 +33,8 @@ All systems, agents, and engineers must consume the core specification files in 
 7. **[CLEARANCE_STANDARD_V2_PROPOSAL.md](CLEARANCE_STANDARD_V2_PROPOSAL.md)**  
    Formula-compliant clearance envelope rules (CLR-001, CLR-002).
 
+Also read: [GLTF_FRAME_CORRECTION.md](GLTF_FRAME_CORRECTION.md), [THREE_RUNTIME_FRAME_STANDARD_PROPOSAL.md](THREE_RUNTIME_FRAME_STANDARD_PROPOSAL.md), [L00_RUNTIME_READINESS_REPORT.md](L00_RUNTIME_READINESS_REPORT.md).
+
 ### Extended governance reading
 
 After the core sequence above, read:
@@ -42,7 +44,7 @@ After the core sequence above, read:
 - [L00_CONFIRMED_CORRECTIONS.md](L00_CONFIRMED_CORRECTIONS.md) — accepted corrections
 - [L00_PROVISIONAL_CORRECTIONS.md](L00_PROVISIONAL_CORRECTIONS.md) — provisional dimensional claims
 - [L00_PRE_INTAKE_READINESS_REPORT.md](L00_PRE_INTAKE_READINESS_REPORT.md) — final gate assessment
-- [VISUAL_REFERENCE_INTAKE_PROTOCOL.md](VISUAL_REFERENCE_INTAKE_PROTOCOL.md) — Layer 1 visual capture (authorized)
+- [VISUAL_REFERENCE_INTAKE_PROTOCOL_V2.md](VISUAL_REFERENCE_INTAKE_PROTOCOL_V2.md) — Layer 1 visual capture (authorized)
 - [ENGINEERING_METROLOGY_INTAKE_PROTOCOL.md](ENGINEERING_METROLOGY_INTAKE_PROTOCOL.md) — Layer 2 metrology (provisional)
 
 ---

@@ -31,7 +31,13 @@ You must strictly follow the rules in [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_A
 
 ### 2. Guard the coordinate orientation baseline
 
-Ensure that any code or coordinate transformations generated match [registries/TRANSFORM_REGISTRY_V2_PROPOSAL.json](registries/TRANSFORM_REGISTRY_V2_PROPOSAL.json) and pass [registries/COORDINATE_BASIS_TESTS.json](registries/COORDINATE_BASIS_TESTS.json). Use ISO 8855 orientation (+X Forward, +Y Left, +Z Up). **Never use** deprecated `TRANSFORM_REGISTRY.json` (v1).
+Ensure that any code or coordinate transformations generated match [registries/TRANSFORM_REGISTRY_V3_PROPOSAL.json](registries/TRANSFORM_REGISTRY_V3_PROPOSAL.json) and pass [registries/COORDINATE_BASIS_TESTS_V2.json](registries/COORDINATE_BASIS_TESTS_V2.json).
+
+- Asset export: `TF-ISO-TO-GLTF-ASSET` (`GLTF_ASSET_FRAME` — +Y up, +Z forward)
+- Three.js scene placement: `TF-ISO-TO-THREE-SCENE` (`THREE_SCENE_FRAME` — -Z forward)
+- Unreal: `TF-ISO-TO-UNREAL` (scale 0.1 mm to cm with Y reflection)
+
+**Never use** deprecated `TRANSFORM_REGISTRY.json` (v1) or superseded `TRANSFORM_REGISTRY_V2_PROPOSAL.json`. See [GLTF_FRAME_CORRECTION.md](GLTF_FRAME_CORRECTION.md).
 
 ### 3. Use claim schema v5 for engineering claims
 

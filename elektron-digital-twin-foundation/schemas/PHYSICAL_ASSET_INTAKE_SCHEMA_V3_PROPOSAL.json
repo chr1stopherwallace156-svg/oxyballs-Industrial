@@ -1,0 +1,159 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EDTS_Physical_Asset_Intake_Record_V3",
+  "_supersedes": "schemas/PHYSICAL_ASSET_INTAKE_SCHEMA_V2_PROPOSAL.json",
+  "type": "object",
+  "properties": {
+    "intake_record_id": { "type": "string", "pattern": "^INTK-[0-9]{5}$" },
+    "intake_timestamp": { "type": "string", "format": "date-time" },
+    "inspector_id": { "type": "string" },
+    "instrument_id": { "type": ["string", "null"] },
+    "instrument_calibration_record_id": { "type": ["string", "null"] },
+    "vin_status": { "type": "string", "enum": ["CAPTURED", "NOT_PRESENT", "ILLEGIBLE", "NOT_APPLICABLE", "PENDING"] },
+    "vin": { "type": ["string", "null"] },
+    "safety_certification_label": {
+      "type": "object",
+      "properties": {
+        "label_status": { "type": "string", "enum": ["CAPTURED", "NOT_PRESENT", "ILLEGIBLE", "NOT_APPLICABLE", "PENDING"] },
+        "gvwr_lbs": { "type": ["number", "null"] },
+        "fgawr_lbs": { "type": ["number", "null"] },
+        "rgawr_lbs": { "type": ["number", "null"] },
+        "production_date": { "type": ["string", "null"], "pattern": "^[0-9]{2}/[0-9]{2}$" },
+        "paint_code": { "type": ["string", "null"] }
+      },
+      "required": ["label_status"],
+      "additionalProperties": false
+    },
+    "measured_ride_heights": {
+      "type": "object",
+      "properties": {
+        "front_left_mm": { "type": ["number", "null"] },
+        "front_right_mm": { "type": ["number", "null"] },
+        "rear_left_mm": { "type": ["number", "null"] },
+        "rear_right_mm": { "type": ["number", "null"] }
+      },
+      "required": ["front_left_mm", "front_right_mm", "rear_left_mm", "rear_right_mm"],
+      "additionalProperties": false
+    },
+    "drw_tire_inflation_pressures_psi": {
+      "type": "object",
+      "properties": {
+        "front_left": {
+          "type": "object",
+          "properties": {
+            "placard_recommended": { "type": "number" },
+            "as_found_measured": { "type": "number" },
+            "adjusted_to": { "type": ["number", "null"] }
+          },
+          "required": ["placard_recommended", "as_found_measured"],
+          "additionalProperties": false
+        },
+        "front_right": {
+          "type": "object",
+          "properties": {
+            "placard_recommended": { "type": "number" },
+            "as_found_measured": { "type": "number" },
+            "adjusted_to": { "type": ["number", "null"] }
+          },
+          "required": ["placard_recommended", "as_found_measured"],
+          "additionalProperties": false
+        },
+        "rear_left_outer": {
+          "type": "object",
+          "properties": {
+            "placard_recommended": { "type": "number" },
+            "as_found_measured": { "type": "number" },
+            "adjusted_to": { "type": ["number", "null"] }
+          },
+          "required": ["placard_recommended", "as_found_measured"],
+          "additionalProperties": false
+        },
+        "rear_left_inner": {
+          "type": "object",
+          "properties": {
+            "placard_recommended": { "type": "number" },
+            "as_found_measured": { "type": "number" },
+            "adjusted_to": { "type": ["number", "null"] }
+          },
+          "required": ["placard_recommended", "as_found_measured"],
+          "additionalProperties": false
+        },
+        "rear_right_inner": {
+          "type": "object",
+          "properties": {
+            "placard_recommended": { "type": "number" },
+            "as_found_measured": { "type": "number" },
+            "adjusted_to": { "type": ["number", "null"] }
+          },
+          "required": ["placard_recommended", "as_found_measured"],
+          "additionalProperties": false
+        },
+        "rear_right_outer": {
+          "type": "object",
+          "properties": {
+            "placard_recommended": { "type": "number" },
+            "as_found_measured": { "type": "number" },
+            "adjusted_to": { "type": ["number", "null"] }
+          },
+          "required": ["placard_recommended", "as_found_measured"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["front_left", "front_right", "rear_left_outer", "rear_left_inner", "rear_right_inner", "rear_right_outer"],
+      "additionalProperties": false
+    },
+    "evidence_attachments": {
+      "type": "object",
+      "properties": {
+        "label_photo_id": { "type": ["string", "null"] },
+        "placard_photo_id": { "type": ["string", "null"] },
+        "vin_photo_id": { "type": ["string", "null"] },
+        "axle_tag_photo_id": { "type": ["string", "null"] },
+        "wheel_marking_photo_id": { "type": ["string", "null"] },
+        "tire_sidewall_photo_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "measurement_record_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "file_hash_sha256": { "type": ["string", "null"] }
+      },
+      "required": ["tire_sidewall_photo_ids", "measurement_record_ids"],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "intake_record_id",
+    "intake_timestamp",
+    "inspector_id",
+    "vin_status",
+    "vin",
+    "safety_certification_label",
+    "measured_ride_heights",
+    "drw_tire_inflation_pressures_psi",
+    "evidence_attachments"
+  ],
+  "dependencies": {
+    "vin_status": {
+      "oneOf": [
+        {
+          "properties": {
+            "vin_status": { "const": "CAPTURED" },
+            "vin": { "type": "string", "minLength": 17, "maxLength": 17 }
+          },
+          "required": ["vin"]
+        },
+        {
+          "properties": {
+            "vin_status": { "enum": ["NOT_PRESENT", "ILLEGIBLE", "NOT_APPLICABLE", "PENDING"] },
+            "vin": { "type": "null" }
+          },
+          "required": ["vin"]
+        }
+      ]
+    }
+  },
+  "additionalProperties": false
+}
