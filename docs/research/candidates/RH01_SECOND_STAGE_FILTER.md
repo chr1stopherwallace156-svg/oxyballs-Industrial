@@ -983,3 +983,57 @@ Recorded in the Research Map. The owner's framing question stands
 above all of it: *which battery pack and inverter is this being sized
 around?* — an upstream business/engineering decision no research batch
 can answer.
+
+---
+
+## 22. Batch 15 + owner review_10 — HV Wiring Package v0.1 (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_15_hv_wiring_decision_matrix.md`
+and `docs/research/raw/owner_reviews/review_10_batch_15_verdict.md`.
+**No new sources or claims** — the Decision Matrix references only
+already-registered rows (CS-15/17/20/24/26/27/28/29/31/32/34/35 and
+their RC rows). This section records the matrix's acceptance, the
+corrections that bind any future consolidation of it, and the phase
+pivot.
+
+### Matrix accepted as candidate decision logic — v0.1
+
+All 10 component rows correctly OPEN/Halted; every blocker matches the
+register's OpenGaps; the closing question ("what battery pack and
+inverter are we sizing this around?") is the right terminal state.
+**Owner label adopted: HV Wiring Package v0.1 — candidate architecture
+mapped, component families identified, open blockers documented, final
+selection halted, engineering review required.**
+
+### Corrections binding on any use of the matrix
+
+| Matrix text | Corrected reading (owner review_10) |
+|---|---|
+| "decision rules are hard-coded" | **"decision logic is mapped"** — candidate logic until engineering review; nothing is final |
+| "Candidate selection locked" *(3rd recurrence)* | "candidate selected for evaluation" — standing rule (review_08) |
+| HV connector row: "peak **phase** demand" | **"DC link continuous and peak current demand"** — cable/connector/fuse/contactor live on the battery DC side; motor phase current ≠ DC input current. Technical correction; any consolidation of the matrix must carry it |
+| Isolation monitor row: "the **hard** 100 Ω/V **danger boundary threshold**" *(2nd absolute-phrasing recurrence)* | RC-38 fence stands: supplier-context figure; final threshold via FMVSS 305a / ISO 6469-3 mapping + engineering review |
+
+### Recurrence ledger (for the future mechanical checks at M10)
+
+- "Candidate selection locked": 3 occurrences (batches 13, 14, 15).
+- Sendyne absolute-threshold phrasing: 2 occurrences (13, 15).
+- Metrel/TONFUL RegulatoryCandidate mislabel: 2 occurrences (13/14) —
+  absent in batch 15's matrix (Metrel correctly under Bonding Test as
+  instrument). Improvement noted.
+
+### Phase pivot — L5 held, powertrain definition opens
+
+Owner directive: stop broad HV wiring research. Next payloads define
+the **upstream powertrain package** — candidate battery pack, inverter,
+and motor datasheets for a Class 4/5 conversion, with the owner's
+full extraction field lists (battery: 14 fields; inverter: 10; motor:
+9) and outputs (candidate powertrain table, missing-datasheet list,
+values-to-unlock mapping, per-value Build Engine status). This moves
+the active research focus to lanes **L9 (supplier data) and L6
+(battery/BMS/thermal)** while **L5 is held at v0.1 in
+NeedsEngineeringReview**. What powertrain data unlocks, per owner:
+cable gauge, connector rating, fuse family/rating, contactor
+suitability, pre-charge resistor value, pre-charge relay suitability,
+thermal/cooling load, range/gradeability simulation inputs.

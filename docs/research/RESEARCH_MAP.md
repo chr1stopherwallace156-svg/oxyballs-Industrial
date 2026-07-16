@@ -161,16 +161,27 @@ supplier datasheets → CAN/PATS.**
    candidate, Metrel 4-wire Kelvin method (InstrumentationCandidate),
    ISO 20653 path, **Amphenol HVBI connectors (03R8 180 A / 05R10
    250 A dual candidates — batch_14, official Amphenol server)**.
-   **Research-side remaining:** official ISO 20653/lab IP procedure;
-   official bonding threshold + full test procedure incl. surface
-   prep. **Build-side blockers (research cannot close):** battery
-   nominal/max V, cont./peak/short-circuit I, inverter DC currents,
-   DC-link capacitance, final part numbers, physical routing, engineer
-   review — and above all the owner's framing question: **which
-   battery pack and inverter is this sized around?** **Next payload
-   (owner prompt): the HV Wiring Decision Matrix** — 10 component rows
-   × 7 decision columns, no selections, nothing Confirmed, data-needs
-   only.
+   **STATUS: HV Wiring Package v0.1 (batch_15 Decision Matrix,
+   owner-labeled)** — candidate architecture mapped, component families
+   identified, open blockers documented, final selection halted,
+   engineering review required. **L5 research is HELD** (no more broad
+   HV wiring payloads). Research-side residue: official ISO 20653/lab
+   IP procedure; official bonding threshold + full procedure incl.
+   surface prep. Everything else waits on the powertrain definition
+   below.
+
+   **ACTIVE FOCUS → POWERTRAIN DEFINITION (L9/L6, owner review_10):**
+   candidate battery pack / inverter / motor supplier datasheets for a
+   Class 4/5 conversion. Extraction fields — Battery: nominal V, max V,
+   usable kWh, cont./peak discharge I, short-circuit I or internal R,
+   BMS diagnostics, thermal derating, coolant needs, mass, dimensions,
+   mounting, CAN protocol, supplier status. Inverter: DC input V range,
+   cont./peak DC I, phase I, DC-link capacitance, derating, coolant,
+   pre-charge requirements, CAN, fault outputs. Motor: cont./peak
+   power + torque, max RPM, cooling, mass, mounting, duty-cycle
+   limits. Outputs: candidate powertrain table, missing-datasheet
+   list, values-to-unlock mapping, per-value Build Engine status.
+   **No final parts, nothing Confirmed.**
 2. **Cooling** (L6) — EMPTY: battery/motor/inverter/charger/DC-DC
    loops, pump + radiator sizing, flow, pressure drop, derating,
    high-ambient testing.

@@ -4,14 +4,14 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-15
-- Reason for handoff: task complete (batch 14 + review_09 reconciled);
+- Reason for handoff: task complete (batch 15 + review_10 reconciled — HV Wiring v0.1);
   awaiting owner decisions and/or next batch
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `fbd008d` — Reconcile RH batch 13 + owner review_08
+- Start commit: `63f0479` — Reconcile RH batch 14 + owner review_09
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
@@ -19,39 +19,37 @@
 ## Work performed
 
 - Files changed:
-  `docs/research/raw/research_hunter/batch_14_hv_wiring_blocked_state.md`
-  and `docs/research/raw/owner_reviews/review_09_batch_14_verdict.md`
-  (new, verbatim — committed separately as `8a74743`),
+  `docs/research/raw/research_hunter/batch_15_hv_wiring_decision_matrix.md`
+  and `docs/research/raw/owner_reviews/review_10_batch_15_verdict.md`
+  (new, verbatim — committed separately as `22a8466`),
   `docs/research/raw/research_hunter/PROVENANCE.md`,
-  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-35;
-  RC-55; RC-52 update; section 21), `docs/research/RESEARCH_MAP.md`
-  (connector ask closed; next = Decision Matrix), `docs/CHANGELOG.md`,
-  handoff files
-- Summary: batch 14 + review_09 reconciled. **Connector ask closed at
-  candidate level**: Amphenol HVBI brochure (first official-server
-  supplier document) with the owner's dual-candidate structure —
-  03R8 180 A vs 05R10 250 A, final choice blocked by battery+inverter
-  current. RC-52 gains OD 15.8 mm and computed part-scoped bend
-  envelopes (≥47.4/≥94.8 mm, owner-verified arithmetic — precedent:
-  derived values admissible only with datasheet-sourced inputs +
-  owner/engineer check). **Conduct benchmark recorded:** the Balancing
-  Form's honest BLOCKED state is the standard ("empty form honestly
-  blocked beats filled form dishonestly complete"). Regressions
-  re-corrected: Metrel/TONFUL RegulatoryCandidate labels (2nd
-  occurrence — watchlisted) and "selection locked" language. **Next
-  payload per owner: the 10×7 HV Wiring Decision Matrix — no
-  selections, nothing Confirmed.** **Nothing ingested; nothing
-  Confirmed; ODRs untouched.**
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (section 22 —
+  no new CS/RC rows), `docs/research/RESEARCH_MAP.md` (L5 → v0.1 HELD;
+  active focus → powertrain definition), `docs/CHANGELOG.md`, handoff
+  files
+- Summary: batch 15 (the owner-prompted 10×7 HV Wiring Decision
+  Matrix) + review_10 reconciled. Matrix accepted as candidate
+  decision logic — **HV Wiring Package v0.1** (owner label:
+  architecture mapped, families identified, blockers documented,
+  selection halted, review required). Corrections binding on the
+  matrix: "hard-coded" → "decision logic is mapped"; "selection
+  locked" (3rd recurrence); **"peak phase demand" → "DC link
+  continuous and peak current demand"** (battery DC side ≠ motor
+  phase side); Sendyne "hard danger boundary" re-fenced (2nd
+  recurrence). Recurrence ledger recorded for future M10 mechanical
+  checks. **Phase pivot: L5 HELD; next payloads = powertrain
+  definition (battery/inverter/motor candidate datasheets, L9/L6)
+  with the owner's extraction field lists.** **Nothing ingested;
+  nothing Confirmed; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_14/review_09 archives are 1:1 against the
-  owner's chat message ("14:75"); all quotes Hunter-supplied and
-  unverified (B-002); the only derived values admitted (47.4/94.8 mm)
-  are datasheet-arithmetic, owner-verified, part-scoped; no component
-  was selected
+- Verified vs claimed: batch_15/review_10 archives are 1:1 against the
+  owner's chat message ("Gemini 15:75"); the matrix introduced no new
+  claims (verified: all cited sources map to existing CS rows); no
+  component was selected and nothing was marked Confirmed
 
 ## State
 

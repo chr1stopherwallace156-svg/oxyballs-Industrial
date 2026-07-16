@@ -5,6 +5,25 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 15 + review_10: HV Wiring Package v0.1; pivot to powertrain definition
+
+- Archived batch_15 (HV Wiring Decision Matrix, 10×7, all rows
+  OPEN/Halted) and review_10 1:1. No new sources/claims — matrix
+  references only registered rows; accepted as candidate decision
+  logic **v0.1** (owner label: architecture mapped, families
+  identified, blockers documented, selection halted, review required).
+- Corrections binding on the matrix: "hard-coded" → "decision logic is
+  mapped"; "selection locked" (3rd recurrence); **"peak phase demand"
+  → "DC link continuous and peak current demand"** (battery DC side ≠
+  motor phase side — technical correction); Sendyne "hard danger
+  boundary" re-fenced (2nd recurrence).
+- Recurrence ledger recorded for future M10 mechanical checks;
+  Metrel mislabel absent this batch (improvement).
+- Phase pivot: L5 HELD at v0.1; active research focus →
+  **powertrain definition (L9/L6)** with the owner's full extraction
+  field lists (battery 14 / inverter 10 / motor 9 fields).
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 14 + review_09 reconciled: connector ask closed; blocked-state benchmark
 
 - Archived batch_14 (blocked-state Balancing Form + Amphenol HVBI) and
