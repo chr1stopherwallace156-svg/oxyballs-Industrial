@@ -1,0 +1,37 @@
+{
+  "rubric_id": "PHOTO_REFERENCE_RUBRIC",
+  "rubric_version": "1.0.0-proposal",
+  "status": "PROPOSAL_NOT_ACTIVATED",
+  "applicable_evidence_types": ["DEALER_PHOTO", "AUCTION_PHOTO", "USER_PHOTO"],
+  "activation": "EMPIRICAL_TRIGGER_REQUIRED",
+  "metrics": [
+    {
+      "metric_id": "PHOTO_RESOLUTION",
+      "meaning": "Normalized resolution fitness",
+      "applicable_evidence_types": ["DEALER_PHOTO", "AUCTION_PHOTO", "USER_PHOTO"],
+      "required_inputs": ["resolution_score"],
+      "formula": "identity",
+      "formula_id": "IDENTITY_FLOAT",
+      "units": "ratio_0_1",
+      "weight": 0.4,
+      "missing_data_behavior": "score=null; scoring_status=NOT_EXECUTED",
+      "pass_threshold": 0.5,
+      "fail_threshold": 0.2,
+      "evidence_requirements": ["image dimensions"]
+    },
+    {
+      "metric_id": "PHOTO_CONFIG_MATCH",
+      "meaning": "Visual configuration match confidence declared by reviewer",
+      "applicable_evidence_types": ["DEALER_PHOTO", "AUCTION_PHOTO"],
+      "required_inputs": ["config_match_score"],
+      "formula": "identity",
+      "formula_id": "IDENTITY_FLOAT",
+      "units": "ratio_0_1",
+      "weight": 0.6,
+      "missing_data_behavior": "score=null; scoring_status=NOT_EXECUTED",
+      "pass_threshold": 0.6,
+      "fail_threshold": 0.3,
+      "evidence_requirements": ["configuration review record"]
+    }
+  ]
+}

@@ -1,8 +1,11 @@
 # Evidence Acquisition Engine
 
-**Status:** `ACTIVE_OPERATIONAL`  
+**Status:** `PARTIAL` — see `verification/results/EAE_READINESS_REPORT.md`  
+**Readiness:** `EDTS_EAE_SPECIFICATION_READY_IMPLEMENTATION_PENDING`  
 **Kernel:** frozen (`edts-kernel-v1.0.0-rc1`) — this subsystem does **not** expand schemas  
-**Decision:** `decisions/DT-D032_EVIDENCE_ACQUISITION_ENGINE.json`
+**Decisions:** `DT-D032`, `DT-D033`  
+
+Do **not** claim full operational readiness. Do **not** score `CAND-00031-CGT` / `CAND-771-GRAB` while `NOT_ACQUIRED`.
 
 ## Purpose
 

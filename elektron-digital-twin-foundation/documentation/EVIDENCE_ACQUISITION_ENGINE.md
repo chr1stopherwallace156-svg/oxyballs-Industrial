@@ -1,9 +1,10 @@
 # Evidence Acquisition Engine
 
-**Status:** `ACTIVE_OPERATIONAL`  
+**Status:** `PARTIAL` — authoritative readiness: `EDTS_EAE_SPECIFICATION_READY_IMPLEMENTATION_PENDING`  
 **Not a kernel schema.** Frozen rc1 schemas are untouched.  
-**Implementation:** `tools/evidence_acquisition/`  
-**Decision:** `decisions/DT-D032_EVIDENCE_ACQUISITION_ENGINE.json`
+**Implementation:** `tools/evidence_acquisition/` (+ `eae_core/` primitives)  
+**Audit:** `verification/results/eae-implementation-audit.json`  
+**Decisions:** `DT-D032`, `DT-D033`
 
 ## Shift
 

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:proposal:passport-event:v1",
+  "title": "EDTS Passport Event (PROPOSAL — NOT ACTIVE)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "sequence",
+    "event_type",
+    "timestamp",
+    "previous_event_hash",
+    "event_hash",
+    "passport_id",
+    "proposal_status"
+  ],
+  "properties": {
+    "proposal_status": { "const": "PROPOSAL_NOT_ACTIVATED" },
+    "event_id": { "type": "string" },
+    "sequence": { "type": "integer", "minimum": 1 },
+    "event_type": {
+      "type": "string",
+      "enum": ["ADD_GEOMETRY_ROLE", "SUPERSEDE", "NOTE", "ATTACH_EVIDENCE_LINK"]
+    },
+    "timestamp": { "type": "string" },
+    "previous_event_hash": { "type": ["string", "null"] },
+    "event_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "passport_id": { "type": "string", "pattern": "^PP-[A-Z0-9-]+$" },
+    "supersedes_event_id": { "type": ["string", "null"] },
+    "data": { "type": ["object", "null"] }
+  }
+}

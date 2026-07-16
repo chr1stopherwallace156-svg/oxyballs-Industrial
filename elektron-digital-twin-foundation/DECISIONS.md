@@ -537,6 +537,7 @@ Append-only record of digital twin foundation decisions.
 - **validation_evidence:** `verification/results/component-passport-rc1-validation.json`, `verification/results/COMPONENT_PASSPORT_EXISTING_SCHEMA_AUDIT.md`
 - **final_status:** `COMPONENT_PASSPORT_RC1_SUFFICIENT`
 
+
 ## DT-D032 — Evidence Acquisition Engine (empirical sprint)
 
 - **Change-control record:** [`decisions/DT-D032_EVIDENCE_ACQUISITION_ENGINE.json`](decisions/DT-D032_EVIDENCE_ACQUISITION_ENGINE.json)
@@ -549,3 +550,16 @@ Append-only record of digital twin foundation decisions.
 - **validation_evidence:** `verification/results/evidence-acquisition-engine-run.json` (both candidates `BLOCKED_BY_MISSING_SOURCE_URL` — honest)
 - **posture:** `EVIDENCE_ACQUISITION_IN_PROGRESS`
 - **passport:** not auto-updated until usable geometry exists
+
+
+## DT-D033 — EAE audit gate (spec-ready, implementation pending)
+
+- **Change-control record:** [`decisions/DT-D033_EAE_AUDIT_AND_SPEC_GATE.json`](decisions/DT-D033_EAE_AUDIT_AND_SPEC_GATE.json)
+- **decision_id:** `DT-D033`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **scope:** EAE code audit; rubric/event proposals; unacquired candidates not scored
+- **reason:** “Operational / ready to score” overclaimed relative to code. Fixture suites validate primitives; download/URL/FBX/STEP/activated scoring remain pending.
+- **validation_evidence:** `verification/results/EAE_READINESS_REPORT.md`
+- **final_status:** `EDTS_EAE_SPECIFICATION_READY_IMPLEMENTATION_PENDING`
+

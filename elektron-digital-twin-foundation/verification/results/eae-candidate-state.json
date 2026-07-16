@@ -1,0 +1,44 @@
+{
+  "execution_timestamp": "2026-07-16T17:49:40.126614+00:00",
+  "policy": "Do not score or create GEO records while NOT_ACQUIRED",
+  "candidates": [
+    {
+      "candidate_asset_id": "CAND-00031-CGT",
+      "lifecycle": "DISCOVERED",
+      "acquisition_status": "NOT_ACQUIRED",
+      "source_verification_status": "NOT_EXECUTED",
+      "acquisition_accessibility": "UNKNOWN_URL_NOT_RECORDED",
+      "acquisition_requirements": [
+        "Record real source URL",
+        "License clearance",
+        "Place bytes under research/incoming/l01_lane_a_assets/ASSET-00031/source/"
+      ],
+      "local_file": false,
+      "hash": null,
+      "parse": null,
+      "inventory": null,
+      "score": null,
+      "geometry_asset_id": null,
+      "geometry_roles": []
+    },
+    {
+      "candidate_asset_id": "CAND-771-GRAB",
+      "lifecycle": "DISCOVERED",
+      "acquisition_status": "NOT_ACQUIRED",
+      "source_verification_status": "NOT_EXECUTED",
+      "acquisition_accessibility": "UNKNOWN_URL_NOT_RECORDED",
+      "acquisition_requirements": [
+        "Record real source URL",
+        "License clearance",
+        "Place bytes under research/incoming/l01_lane_a_assets/CAND-771-GRAB/source/"
+      ],
+      "local_file": false,
+      "hash": null,
+      "parse": null,
+      "inventory": null,
+      "score": null,
+      "geometry_asset_id": null,
+      "geometry_roles": []
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "decision_id": "DT-D033",
+  "title": "EAE implementation audit — do not score unacquired candidates; specs under proposals/",
+  "date": "2026-07-16",
+  "approved_status": "ACCEPTED",
+  "scope": [
+    "tools/evidence_acquisition/eae_core/",
+    "verification/evidence_acquisition/",
+    "proposals/eae/",
+    "CAND-00031-CGT",
+    "CAND-771-GRAB",
+    "frozen component-passport.schema.json"
+  ],
+  "reason": "Claims that the EAE was fully operational and ready to score/parse door candidates outran the code. Audit from executable code + fixtures is required. Unacquired candidates must not receive integrity/parse/inventory/score/GEO claims.",
+  "decision": [
+    "Do not score CAND-00031-CGT or CAND-771-GRAB while NOT_ACQUIRED.",
+    "Publish eae-implementation-audit.json from code inspection + fixture suites (not Markdown inference).",
+    "Formalize rubric profiles under proposals/eae/ as PROPOSAL_NOT_ACTIVATED.",
+    "Design append-only passport events under proposals/eae/; do not mutate frozen rc1 passport schema; do not claim in-place history append is non-modifying.",
+    "Record honest candidate state: DISCOVERED / NOT_ACQUIRED / no file / no hash / no parse / no inventory / no score / no GEO id.",
+    "Final readiness status from suite: EDTS_EAE_SPECIFICATION_READY_IMPLEMENTATION_PENDING."
+  ],
+  "affected_files": [
+    "verification/results/eae-implementation-audit.json",
+    "verification/results/eae-security-tests.json",
+    "verification/results/eae-idempotency-tests.json",
+    "verification/results/eae-rubric-tests.json",
+    "verification/results/eae-candidate-state.json",
+    "verification/results/EAE_READINESS_REPORT.md",
+    "proposals/eae/",
+    "tools/evidence_acquisition/eae_core/",
+    "STATUS.json",
+    "PROJECT_STATE.md"
+  ],
+  "validation_evidence": [
+    "verification/results/EAE_READINESS_REPORT.md",
+    "verification/results/eae-implementation-audit.json"
+  ],
+  "final_status": "EDTS_EAE_SPECIFICATION_READY_IMPLEMENTATION_PENDING",
+  "related_decisions": ["DT-D028", "DT-D032"],
+  "change_control": {
+    "kernel_schema_change": false,
+    "real_candidate_scoring": false
+  }
+}

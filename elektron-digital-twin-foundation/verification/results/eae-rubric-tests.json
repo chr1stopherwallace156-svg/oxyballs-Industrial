@@ -1,0 +1,69 @@
+{
+  "suite": "eae-rubric-tests",
+  "execution_timestamp": "2026-07-16T17:49:40.126228+00:00",
+  "runtime": "python3",
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "suite_pass_or_fail": "PASS",
+  "results": [
+    {
+      "test_id": "EAE-RUB-001",
+      "execution_timestamp": "2026-07-16T17:49:40.126091+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "missing inputs => null NOT_EXECUTED",
+      "actual_result": "{\"aggregate\": null, \"confidence\": \"NOT_EVALUATED\"}",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-RUB-002",
+      "execution_timestamp": "2026-07-16T17:49:40.126107+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "partial missing stays null",
+      "actual_result": "{\"metric_id\": \"MESH_TEXTURE_PRESENT\", \"score\": null, \"scoring_status\": \"NOT_EXECUTED\", \"missing_inputs\": [\"texture_count\"], \"formula\": \"clamp01(texture_count / 1)\"}",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-RUB-003",
+      "execution_timestamp": "2026-07-16T17:49:40.126174+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "full CAD inputs evaluate",
+      "actual_result": "{\"agg\": 0.975, \"cov\": 1.0}",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-RUB-004",
+      "execution_timestamp": "2026-07-16T17:49:40.126223+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "rubric profiles exist for mapping",
+      "actual_result": "{\"OBJ\": \"MESH_VISUAL_RUBRIC\", \"STEP\": \"CAD_ENGINEERING_RUBRIC\", \"SCAN\": \"SCAN_REFERENCE_RUBRIC\", \"DEALER_PHOTO\": \"PHOTO_REFERENCE_RUBRIC\", \"OEM_MANUAL\": \"DOCUMENT_EVIDENCE_RUBRIC\"}",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-RUB-005",
+      "execution_timestamp": "2026-07-16T17:49:40.126225+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "real candidates not scored",
+      "actual_result": "SKIPPED_BY_POLICY",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "research/incoming/l01_lane_a_assets/"
+    }
+  ],
+  "notes": [
+    "CAND-00031-CGT and CAND-771-GRAB intentionally not scored (NOT_ACQUIRED)."
+  ]
+}

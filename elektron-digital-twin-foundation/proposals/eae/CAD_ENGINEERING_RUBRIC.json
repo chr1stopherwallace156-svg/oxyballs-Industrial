@@ -1,0 +1,51 @@
+{
+  "rubric_id": "CAD_ENGINEERING_RUBRIC",
+  "rubric_version": "1.0.0-proposal",
+  "status": "PROPOSAL_NOT_ACTIVATED",
+  "applicable_evidence_types": ["STEP", "IGES", "OEM_CAD"],
+  "activation": "EMPIRICAL_TRIGGER_REQUIRED",
+  "metrics": [
+    {
+      "metric_id": "CAD_DIM_ERROR",
+      "meaning": "Dimensional error vs OEM/reference measurement",
+      "applicable_evidence_types": ["STEP", "IGES"],
+      "required_inputs": ["dimensional_error_mm", "tolerance_mm"],
+      "formula": "max(0, 1 - abs(error_mm)/tolerance_mm)",
+      "formula_id": "INVERT_ERROR_MM",
+      "units": "ratio_0_1",
+      "weight": 0.4,
+      "missing_data_behavior": "score=null; scoring_status=NOT_EXECUTED",
+      "pass_threshold": 0.8,
+      "fail_threshold": 0.4,
+      "evidence_requirements": ["paired reference dimension", "measured feature"]
+    },
+    {
+      "metric_id": "CAD_ASSEMBLY_COMPLETENESS",
+      "meaning": "Fraction of required engineering subcomponents present",
+      "applicable_evidence_types": ["STEP"],
+      "required_inputs": ["completeness_ratio"],
+      "formula": "identity completeness_ratio",
+      "formula_id": "IDENTITY_FLOAT",
+      "units": "ratio_0_1",
+      "weight": 0.35,
+      "missing_data_behavior": "score=null; scoring_status=NOT_EXECUTED",
+      "pass_threshold": 0.7,
+      "fail_threshold": 0.3,
+      "evidence_requirements": ["required BOM list", "parsed CAD node inventory"]
+    },
+    {
+      "metric_id": "CAD_PROVENANCE",
+      "meaning": "Source authority class for engineering CAD",
+      "applicable_evidence_types": ["STEP", "OEM_CAD"],
+      "required_inputs": ["provenance_score"],
+      "formula": "identity",
+      "formula_id": "IDENTITY_FLOAT",
+      "units": "ratio_0_1",
+      "weight": 0.25,
+      "missing_data_behavior": "score=null; scoring_status=NOT_EXECUTED",
+      "pass_threshold": 0.6,
+      "fail_threshold": 0.2,
+      "evidence_requirements": ["license/provenance record"]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "suite": "eae-idempotency-tests",
+  "execution_timestamp": "2026-07-16T17:49:40.126018+00:00",
+  "runtime": "python3",
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "suite_pass_or_fail": "PASS",
+  "results": [
+    {
+      "test_id": "EAE-IDEM-001",
+      "execution_timestamp": "2026-07-16T17:49:40.125825+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "deterministic sha256",
+      "actual_result": "sha256:9ff1769903fe8f7984d15ddc4da7d9d61a0e38a7b45ccdd8f79b3ad3a75c2637",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-IDEM-002",
+      "execution_timestamp": "2026-07-16T17:49:40.125958+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "duplicate file same hash",
+      "actual_result": "sha256:9ff1769903fe8f7984d15ddc4da7d9d61a0e38a7b45ccdd8f79b3ad3a75c2637",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-IDEM-003",
+      "execution_timestamp": "2026-07-16T17:49:40.126000+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "append-only preserves prior event",
+      "actual_result": "sha256:e54be613ef6ab7b58fb0f0badbb0f83789124de692271f17beed30b530cf00df",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-IDEM-004",
+      "execution_timestamp": "2026-07-16T17:49:40.126010+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "supersession removes active role",
+      "actual_result": "{\"geometry_asset_ids\": [], \"geometry_roles\": [], \"superseded_event_ids\": [\"EV-1\"], \"active_event_ids\": []}",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-IDEM-005",
+      "execution_timestamp": "2026-07-16T17:49:40.126013+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "sha256_bytes stable",
+      "actual_result": "sha256:ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "rubric_id": "MESH_VISUAL_RUBRIC",
+  "rubric_version": "1.0.0-proposal",
+  "status": "PROPOSAL_NOT_ACTIVATED",
+  "applicable_evidence_types": ["GLB", "GLTF", "FBX", "OBJ", "USD"],
+  "activation": "EMPIRICAL_TRIGGER_REQUIRED",
+  "metrics": [
+    {
+      "metric_id": "MESH_POLY_EFFICIENCY",
+      "meaning": "Polygon budget fitness for visual LOD role",
+      "applicable_evidence_types": ["GLB", "GLTF", "FBX", "OBJ"],
+      "required_inputs": ["polygon_count", "target_poly_budget"],
+      "formula": "clamp01(1 - abs(polygon_count - target_poly_budget) / target_poly_budget)",
+      "formula_id": "CLAMP_01",
+      "units": "ratio_0_1",
+      "weight": 0.25,
+      "missing_data_behavior": "score=null; scoring_status=NOT_EXECUTED",
+      "pass_threshold": 0.5,
+      "fail_threshold": 0.2,
+      "evidence_requirements": ["parsed mesh statistics"]
+    },
+    {
+      "metric_id": "MESH_MANIFOLD_HINT",
+      "meaning": "Non-manifold flag when available from parser",
+      "applicable_evidence_types": ["OBJ", "GLB", "GLTF"],
+      "required_inputs": ["non_manifold"],
+      "formula": "1.0 if non_manifold==false else 0.0",
+      "formula_id": "IDENTITY_FLOAT",
+      "units": "ratio_0_1",
+      "weight": 0.25,
+      "missing_data_behavior": "score=null; scoring_status=NOT_EXECUTED",
+      "pass_threshold": 1.0,
+      "fail_threshold": 0.0,
+      "evidence_requirements": ["topology inspection result"]
+    },
+    {
+      "metric_id": "MESH_TEXTURE_PRESENT",
+      "meaning": "Texture count presence for visual role",
+      "applicable_evidence_types": ["GLB", "GLTF", "FBX"],
+      "required_inputs": ["texture_count"],
+      "formula": "clamp01(texture_count / 1)",
+      "formula_id": "CLAMP_01",
+      "units": "ratio_0_1",
+      "weight": 0.2,
+      "missing_data_behavior": "score=null; scoring_status=NOT_EXECUTED",
+      "pass_threshold": 1.0,
+      "fail_threshold": 0.0,
+      "evidence_requirements": ["material/texture inventory"]
+    },
+    {
+      "metric_id": "MESH_PROVENANCE_CLASS",
+      "meaning": "Normalized provenance class weight for marketplace/visual sources",
+      "applicable_evidence_types": ["GLB", "GLTF", "FBX", "OBJ"],
+      "required_inputs": ["provenance_score"],
+      "formula": "identity provenance_score in [0,1]",
+      "formula_id": "IDENTITY_FLOAT",
+      "units": "ratio_0_1",
+      "weight": 0.3,
+      "missing_data_behavior": "score=null; scoring_status=NOT_EXECUTED",
+      "pass_threshold": 0.4,
+      "fail_threshold": 0.1,
+      "evidence_requirements": ["source class declaration"]
+    }
+  ]
+}
