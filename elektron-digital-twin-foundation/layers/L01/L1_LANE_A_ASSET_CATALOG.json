@@ -1,0 +1,93 @@
+{
+  "catalog_id": "L1_LANE_A_ASSET_CATALOG",
+  "schema_note": "Operational Lane A register (not a frozen kernel schema expansion). Fields follow L1_PARALLEL_LANES.md catalog template plus Component-First Acquisition target components.",
+  "updated_at": "2026-07-16T17:10:00Z",
+  "exact_vehicle_silo": {
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_id": "CFG-000001",
+    "locked_configuration": "2019 Ford F-450 Chassis Cab Regular Cab 4x2 DRW 145.3 WB / 60 CA"
+  },
+  "component_first_acquisition": {
+    "status": "ACTIVE",
+    "rule": "Hard Rule 0 corollary — Component-First Acquisition",
+    "primary_component_targets": [
+      "CMPINST-VEH000001-DOOR-FL",
+      "ASMINST-VEH000001-CAB"
+    ],
+    "admission_rule": "Candidate assets do not enter the exact-vehicle silo until Hard Rule 4 lifecycle + HR-EVI verification; similarity and generation match are discovery-only."
+  },
+  "authorized_search_lanes": [
+    {
+      "lane_id": "LANE-A-CGT",
+      "platform": "CGTrader",
+      "objective": "Exterior cab / door mesh candidates for VEH-000001",
+      "status": "AUTHORIZED",
+      "notes": "Prior documentation referenced ASSET-00031 as a Grade B marketplace candidate; physical bytes remain CANDIDATE_NOT_ACQUIRED."
+    },
+    {
+      "lane_id": "LANE-A-GRAB",
+      "platform": "GrabCAD",
+      "objective": "Separable front-door CAD (STEP/IGES) for part-number / interface comparison",
+      "status": "AUTHORIZED",
+      "notes": "No verified GrabCAD URL or local file admitted yet. Do not invent listing URLs."
+    },
+    {
+      "lane_id": "LANE-A-FORD-PARTS",
+      "platform": "Ford Parts / OEM exploded diagrams",
+      "objective": "2019 Super Duty front door part-number and mounting interface evidence",
+      "status": "AUTHORIZED",
+      "notes": "Parts diagrams are Tier A/C candidates only after local artifact acquisition; generation-band diagrams alone are not CONFIGURATION_MATCHED."
+    },
+    {
+      "lane_id": "LANE-A-VISUAL",
+      "platform": "eBay Motors / dealer / auction walkarounds",
+      "objective": "High-res Regular Cab Chassis Cab visual references (Tier E)",
+      "status": "AUTHORIZED",
+      "notes": "Visual references support silhouette studies only; not geometry assets."
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": "ASSET-00031",
+      "candidate_asset_id": "CAND-00031-CGT",
+      "marketplace": "CGTrader",
+      "url": null,
+      "url_status": "NOT_RECORDED",
+      "claimed_year_range": "2017-2019",
+      "claimed_body": "Regular Cab Super Duty exterior / cab shell",
+      "reported_vehicle": "2019 Ford F-450 Regular Cab (unverified marketplace claim)",
+      "asset_type": "3D_MODEL",
+      "file_format": null,
+      "license": "REQUIRES_COUNSEL_REVIEW",
+      "grade": "B",
+      "price_condition": "UNKNOWN",
+      "downloadable_status": "CANDIDATE_NOT_ACQUIRED",
+      "local_file_path": "research/incoming/l01_lane_a_assets/ASSET-00031/",
+      "file_exists": false,
+      "sha256": null,
+      "visible_component_separation": "UNKNOWN_UNTIL_INGEST",
+      "front_left_door_presence": "CLAIMED_UNVERIFIED",
+      "target_component_instance_ids": [
+        "CMPINST-VEH000001-DOOR-FL",
+        "ASMINST-VEH000001-CAB"
+      ],
+      "estimated_configuration_match": "VISUAL_GENERATION_MATCH",
+      "evidence_status": "DISCOVERED",
+      "availability_audit": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json",
+      "evaluation_doc": "layers/L01/L1_ASSET_EVALUATION_ASSET-00031.md",
+      "notes": "Authoritative availability audit: CANDIDATE_NOT_ACQUIRED. No GLB/GLTF/FBX/OBJ bytes. Do not fabricate mesh inventory, hash, or marketplace URL. Cab shell usable only after ingest + keep/discard map; pickup-style rear structure discard candidate."
+    }
+  ],
+  "rejected_proposal_artifacts": [
+    "L1_ASSET_ACQUISITION_SEARCH_LOG.md",
+    "L1_ASSET_CANDIDATE_DATABASE.json",
+    "L1_DOOR_FL_CANDIDATE_SHORTLIST.md",
+    "L1_CAB_SHELL_CANDIDATE_SHORTLIST.md",
+    "L1_EXACT_VS_RELATED_ASSET_REGISTER.json",
+    "L1_ASSET_ACQUISITION_GAPS.md",
+    "L1_NEXT_ACQUISITION_ACTIONS.md"
+  ],
+  "rejection_reason": "Redundant with RESEARCH_LOG, this catalog, per-asset evaluation/audit, HR-EVI + cross-vehicle-comparison schema, L1 gap matrix, and REFERENCE_ACQUISITION_QUEUE / STATUS. Example marketplace URLs in the proposal are not admitted (Hard Rule 6).",
+  "acquisition_status": "F450_DOOR_FL_CANDIDATES_TRACKED_NOT_ACQUIRED",
+  "door_vertical_slice_gate": "F450_DOOR_FL_VERTICAL_SLICE_BLOCKED_BY_MISSING_ASSET"
+}

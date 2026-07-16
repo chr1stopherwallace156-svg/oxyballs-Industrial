@@ -89,6 +89,23 @@ gantt
 
 ---
 
+## Priority 1b — Component-First Marketplace Asset Acquisition (Lane A)
+
+**Gap addressed:** No local geometry bytes for `CMPINST-VEH000001-DOOR-FL` (blocks door vertical slice).  
+**Rule:** Component-First Acquisition — hunt door, cab shell, and other components independently; do not wait for / assume one complete exact-vehicle marketplace model.  
+**Register:** `L1_LANE_A_ASSET_CATALOG.json`  
+**Immediate actions (STATUS-owned; no separate next-actions file):**
+
+1. Record a real source URL (or local path) for `ASSET-00031` or a replacement candidate — never invent listing URLs.
+2. Acquire/license file bytes; compute SHA-256; inventory meshes/materials/textures/bbox/counts into the availability audit.
+3. Confirm whether the front-left door is a separately extractable mesh before Team C adaptation.
+4. OEM parts-catalog part-number check for 2019 F-450 front door skin/assembly before promoting any 2017-generation STEP candidate to `CONFIGURATION_MATCHED` (related-year CAD remains discovery-only under HR-EVI).
+5. On ingest: link geometry only to the exact component instance under `VEH-000001` + `CFG-000001`.
+
+**Current gate:** `ASSET-00031` = `CANDIDATE_NOT_ACQUIRED` → `F450_DOOR_FL_VERTICAL_SLICE_BLOCKED_BY_MISSING_ASSET`.
+
+---
+
 ## Binding Rules
 
 1. Do not invent page contents, publication numbers, or revision dates before files are acquired.
@@ -97,3 +114,4 @@ gantt
 4. Geometry / mesh production remains **BLOCKED** until modeling baseline approval.
 5. Priority 1 document extractions for `GAP-L1-001` are DOCUMENT_SUPPORTED; physical capture still required.
 6. Scan work follows `L1_SCAN_PRIORITY_SEQUENCE.md` (fine castings deferred).
+7. Do not invent marketplace URLs, SHA-256 hashes, or mesh inventories for Lane A candidates (Hard Rule 6).

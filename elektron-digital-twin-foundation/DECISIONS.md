@@ -467,3 +467,19 @@ Append-only record of digital twin foundation decisions.
   5. Set final status only from executed outcomes
 - **Consequences:**
   - Final status after execution: see `verification/results/KERNEL_VALIDATION_REPORT.md`
+
+## DT-D027 — Component-First Acquisition (integrate; reject redundant pack)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Proposal offered Component-First Acquisition Principle plus seven L1 acquisition files (search log, candidate DB, door/cab shortlists, exact-vs-related register, gaps, next actions). Kernel is under `SCHEMA_FREEZE_FOR_VERTICAL_SLICE`; ASSET-00031 is `CANDIDATE_NOT_ACQUIRED`.
+- **Decision:**
+  1. **Accept** the principle as a Hard Rule 0 corollary in `EDTS_RESEARCH_PROTOCOL.md` v2.1.1 and `EDTS_OS.md` — research proceeds per component; assemblies are built from verified component records, not inherited from one marketplace model.
+  2. **Reject** the seven proposed files as redundant with existing homes (Lane A catalog, RESEARCH_LOG, per-asset eval/audit, HR-EVI + cross-vehicle-comparison, gap matrix, acquisition queue, STATUS).
+  3. **Create** the already-designated `layers/L01/L1_LANE_A_ASSET_CATALOG.json` as the candidate register; filter by `target_component_instance_ids` instead of shortlist markdown.
+  4. **Do not admit** proposal example marketplace URLs or unverified GrabCAD discovery claims (Hard Rule 6).
+  5. **Do not expand** frozen kernel schemas for this principle.
+  6. Door vertical slice remains `F450_DOOR_FL_VERTICAL_SLICE_BLOCKED_BY_MISSING_ASSET` until real bytes + inventory exist.
+- **Consequences:**
+  - Acquisition tracking consolidates into catalog + queue Priority 1b
+  - Related-year CAD (e.g. 2017 door STEP) stays discovery-only until part-number / interface evidence reaches `CONFIGURATION_MATCHED`

@@ -32,8 +32,10 @@ Scan active 3D model registries, CAD marketplaces (e.g., GrabCAD, CGTrader), and
 | **C** | Generic Super Duty / wrong cab style / heavy cleanup needed | Mood / material study only |
 | **D** | Wrong platform, license unclear, or unusable topology | Reject |
 
-**Output path:** `research/incoming/l01_lane_a_assets/` (create when first asset is logged)  
-**Register (to create on first find):** `layers/L01/L1_LANE_A_ASSET_CATALOG.json`
+**Output path:** `research/incoming/l01_lane_a_assets/`  
+**Register (active):** `layers/L01/L1_LANE_A_ASSET_CATALOG.json`  
+
+**Component-First Acquisition (Hard Rule 0 corollary):** Lane A hunts **per component** (e.g. `CMPINST-VEH000001-DOOR-FL`, cab shell). Do not assume a complete exact-vehicle marketplace model. Filter the catalog by `target_component_instance_ids` — do not create separate door/cab shortlist files. Exact-vs-related posture stays in HR-EVI + catalog `grade` / `estimated_configuration_match` (+ `schemas/cross-vehicle-comparison.schema.json` when a formal comparison record is warranted).
 
 ---
 

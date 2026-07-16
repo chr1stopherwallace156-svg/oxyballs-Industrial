@@ -44,5 +44,8 @@
   "next_executable_target": "CMPINST-VEH000001-DOOR-FL",
   "asset_gate": "ASSET-00031 must be physically acquired before geometry adaptation",
   "door_vertical_slice_status": "F450_DOOR_FL_VERTICAL_SLICE_BLOCKED_BY_MISSING_ASSET",
-  "asset_00031_status": "CANDIDATE_NOT_ACQUIRED"
+  "asset_00031_status": "CANDIDATE_NOT_ACQUIRED",
+  "component_first_acquisition": "ACTIVE",
+  "lane_a_asset_catalog": "layers/L01/L1_LANE_A_ASSET_CATALOG.json",
+  "door_fl_acquisition_status": "F450_DOOR_FL_CANDIDATES_TRACKED_NOT_ACQUIRED"
 }

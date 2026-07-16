@@ -1,9 +1,12 @@
 # Asset Evaluation Profile: ASSET-00031
 
-**Protocol:** `EDTS_RESEARCH_PROTOCOL.md` Hard Rule 10 (Efficiency Principle)  
+**Protocol:** `EDTS_RESEARCH_PROTOCOL.md` Hard Rule 0 (Component-First Acquisition) + Hard Rule 10 (Efficiency Principle)  
 **Team:** B (Assets)  
-**Status:** `CANDIDATE — Grade B`  
-**Does not authorize:** geometry freeze or dimensional lock
+**Status:** `CANDIDATE — Grade B` / availability **`CANDIDATE_NOT_ACQUIRED`**  
+**Does not authorize:** geometry freeze, dimensional lock, or Team C mesh adaptation
+
+**Catalog:** `L1_LANE_A_ASSET_CATALOG.json`  
+**Availability audit:** `research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json`
 
 ---
 
@@ -15,7 +18,9 @@
 | Found asset grade | **Grade B** (strong base requiring dimensional correction) |
 | Claimed coverage | 2017–2019 Super Duty Regular Cab exterior sheet metal |
 | Suitability | Production-quality doors, roof, cab rear wall for body-generation match |
-| Lifecycle stage | `FOUND` → advancing to `CANDIDATE` evaluation |
+| Lifecycle stage | `DISCOVERED` — physical bytes **not acquired** |
+| Component targets | `CMPINST-VEH000001-DOOR-FL`, `ASMINST-VEH000001-CAB` (evaluate independently) |
+| Marketplace URL | `null` — not recorded; do not invent |
 
 ## Suitability Assessment
 
@@ -66,7 +71,10 @@ Efficiency conclusion: prefer audit-and-correct of ASSET-00031 over recreation f
 
 Team C may begin **provisional** cleanup/separation only when:
 
-1. License path is recorded (even if pending counsel)
-2. Keep/discard map above is respected
-3. All dimensional inserts tagged `Placeholder` or `Probability` per protocol taxonomy
-4. Modeling baseline remains `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`
+1. Local file exists with SHA-256 + mesh/texture inventory in the availability audit (`file_exists: true`)
+2. License path is recorded (even if pending counsel)
+3. Keep/discard map above is respected; door mesh evaluated for `CMPINST-VEH000001-DOOR-FL` on its own merits
+4. All dimensional inserts tagged `Placeholder` or `Probability` per protocol taxonomy
+5. Modeling baseline remains `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`
+
+Until then: door vertical slice remains `F450_DOOR_FL_VERTICAL_SLICE_BLOCKED_BY_MISSING_ASSET`.

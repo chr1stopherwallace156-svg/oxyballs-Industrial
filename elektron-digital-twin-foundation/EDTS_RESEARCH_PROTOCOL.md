@@ -2,12 +2,13 @@
 
 **Status:** `ACTIVE`  
 **Effective Date:** 2026-07-16  
-**Version:** `2.1.0`  
+**Version:** `2.1.1`  
 **Architecture host:** [EDTS_OS.md](EDTS_OS.md) v3.0.0 (EDTS-OS)  
 **Isolation law:** [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
 **Binding for:** all research, acquisition, geometry development, and software logic operations under `elektron-digital-twin-foundation/`
 
-**Changelog from 2.0.0:** Constitutional **Hard Rule — Exact Vehicle Isolation (HR-EVI)**; vehicle datasets under `examples/<oem>/<exact_config>/`; similarity never evidence; Hard Rule 0 sharing clarified as non-automatic.
+**Changelog from 2.0.0:** Constitutional **Hard Rule — Exact Vehicle Isolation (HR-EVI)**; vehicle datasets under `examples/<oem>/<exact_config>/`; similarity never evidence; Hard Rule 0 sharing clarified as non-automatic.  
+**Changelog from 2.1.0:** Hard Rule 0 adds **Component-First Acquisition** (no assumption of a complete exact-vehicle marketplace asset; admit components only after verification).
 
 ---
 
@@ -37,7 +38,24 @@ The EDTS models **components**, not monolithic vehicles. A vehicle configuration
 
 Binding a reusable definition to a vehicle requires independent evidence for that exact vehicle (see Hard Rule Exact Vehicle Isolation). Similarity never establishes applicability.
 
-Machine form: `schemas/*` (universal) + `examples/<oem>/<exact_config>/` (datasets).
+#### Component-First Acquisition (Hard Rule 0 corollary)
+
+The system shall **not** assume that a complete, exact-vehicle digital asset exists. Research and marketplace hunting proceed **independently per component** (door, hood, frame rail, axle, mirror, dashboard, cab shell, etc.).
+
+Each candidate component is evaluated on its own evidence merits and admitted into the exact-vehicle silo only after passing the established verification workflow (Hard Rule 4 lifecycle + HR-EVI). Vehicle assemblies are constructed from individually verified component records rather than inherited from a single marketplace model.
+
+Operational homes (do **not** create parallel shortlist/gap/next-action files):
+
+| Concern | Authoritative home |
+|---|---|
+| Marketplace candidate register | `layers/L01/L1_LANE_A_ASSET_CATALOG.json` |
+| Per-asset evaluation | `layers/L01/L1_ASSET_EVALUATION_<ASSET-ID>.md` + `research/incoming/l01_lane_a_assets/<ASSET-ID>/` |
+| Search attempts | `research/RESEARCH_LOG.md` (append-only) and/or catalog `notes` |
+| Exact vs related | HR-EVI + `schemas/cross-vehicle-comparison.schema.json` + catalog `grade` / `estimated_configuration_match` |
+| Acquisition sequence / next actions | `layers/L01/L1_REFERENCE_ACQUISITION_QUEUE.md` + `STATUS.json` |
+| Evidence gaps | existing L1 gap matrix / final gap report + per-asset availability audit |
+
+Machine form: `schemas/*` (universal) + `examples/<oem>/<exact_config>/` (datasets) + Lane A catalog (candidates).
 
 ### Hard Rule — Exact Vehicle Isolation (Constitutional) — HR-EVI
 
@@ -120,6 +138,8 @@ Log modifications, source revisions, and reviewer status changes in the correcti
 
 Prioritize discovering, auditing, and correcting existing 3D/CAD/scan assets over recreating files from scratch. Characterize effort by subsystems touched (keep / discard / build), not calendar-day estimates.
 
+Efficiency applies **per component** under Component-First Acquisition: prefer adapting a graded door or cab-shell candidate over rebuilding that subsystem, without treating a partial marketplace vehicle as automatic silo truth.
+
 ---
 
 ## IV. Evidence Tiers (A–F)
@@ -168,4 +188,5 @@ Replacement query model: traverse Evidence Graph relationships for a parameter n
 | `configurations/` | Ephemeral vehicle configs |
 | `layers/L01/L1_PARALLEL_TEAMS.md` | Teams A–D sprint board |
 | `layers/L01/L1_ASSET_EVALUATION_ASSET-00031.md` | Efficiency-principle asset profile |
+| `layers/L01/L1_LANE_A_ASSET_CATALOG.json` | Lane A marketplace candidate catalog |
 | `layers/L01/L1_SOURCE_PACK_01_AUTHENTICITY_AUDIT.md` | Pack verification posture |

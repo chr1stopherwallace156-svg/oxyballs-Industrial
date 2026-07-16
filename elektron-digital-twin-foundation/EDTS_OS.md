@@ -38,6 +38,7 @@ Implications:
 2. Every assembly element on a vehicle is a **vehicle-bound component instance** first.
 3. Optional reusable definitions may exist, but cross-vehicle use requires proven interchangeability + comparison records — **never automatic inheritance** (HR-EVI).
 4. Configuration files / datasets are **thin, isolated** — they do not own dimensional truth without evidence, and they do not inherit from siblings.
+5. **Component-First Acquisition:** do not assume a complete exact-vehicle marketplace asset exists. Hunt and verify components independently; admit each into the exact-vehicle silo only after the verification workflow. Assemblies are built from verified component records, not inherited from one marketplace model. (See `EDTS_RESEARCH_PROTOCOL.md` Hard Rule 0 corollary; catalog = `layers/L01/L1_LANE_A_ASSET_CATALOG.json`.)
 
 ---
 
