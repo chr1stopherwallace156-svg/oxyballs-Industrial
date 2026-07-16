@@ -1,19 +1,21 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.1.1",
-  "updated_at": "2026-07-16T07:10:00Z",
+  "version": "0.1.2",
+  "updated_at": "2026-07-16T09:30:00Z",
   "active_layer": "L00",
   "active_layer_name": "Reference Lock",
-  "phase": "configuration_reconciliation",
+  "phase": "adversarial_audit_correction",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
-  "next_action": "Owner selects platform: Candidate C1 (chassis cab) vs P1 (pickup Reg Cab disputed) vs P2 (pickup Crew Cab OEM-confirmed)",
+  "closure_result": "L00_CLOSURE_REJECTED",
+  "next_action": "Owner reviews L00_CORRECTION_PLAN.md and provides feedback on correction proposals before re-attempting closure",
   "owner_approval_required": true,
   "reference_vehicle": {
     "status": "blocked",
     "decision_id": "DT-D001",
     "reconciliation": "DT-D005",
-    "lock_statement": "NOT LOCKED — platform type unresolved",
+    "closure_audit": "DT-D006",
+    "lock_statement": "NOT LOCKED — platform type unresolved; closure rejected per adversarial audit",
     "provisional_under_review": {
       "make": "Ford",
       "model": "F-450 Super Duty",
@@ -35,10 +37,21 @@
     "geometry_primary_source": "Ford BBAS — platform-specific BBLB after lock",
     "licensing_status": "COUNSEL_REVIEW_REQUIRED"
   },
+  "adversarial_audit": {
+    "status": "UNDER_REVIEW",
+    "verdict": "L00_CLOSURE_REJECTED",
+    "audit_document": "L00_ADVERSARIAL_AUDIT.md",
+    "error_register": "L00_CLAIM_ERROR_REGISTER.json",
+    "correction_plan": "L00_CORRECTION_PLAN.md",
+    "blocking_claims": ["CHASSIS-001", "COORD-001", "METRO-001", "EVID-005"],
+    "major_claims": ["IP-001"],
+    "minor_claims": ["UNIT-001"]
+  },
   "layers": {
     "L00": {
       "name": "Reference Lock",
       "status": "blocked",
+      "closure_status": "REJECTED",
       "gates": {
         "visual": "blocked",
         "dimensional": "blocked",
@@ -59,6 +72,26 @@
     "L10": { "name": "Spatial Presentation", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } }
   },
   "blockers": [
+    {
+      "id": "DT-B006",
+      "summary": "L00 closure rejected per adversarial audit — 4 BLOCKING claims unresolved",
+      "unblocks": "Apply L00_CORRECTION_PLAN.md + owner sign-off on correction proposals"
+    },
+    {
+      "id": "DT-B007",
+      "summary": "Coordinate system incorrectly labeled ISO 8855 (+X rear / +Y right)",
+      "unblocks": "Adopt COORDINATE_SYSTEM_CORRECTION_PROPOSAL.md frame dictionary and transforms"
+    },
+    {
+      "id": "DT-B008",
+      "summary": "Universal ≤0.05 mm metrology tolerance rejected as unphysical",
+      "unblocks": "Adopt MEASUREMENT_ACCURACY_CLASS_PROPOSAL.md (MAC-A through MAC-D)"
+    },
+    {
+      "id": "DT-B009",
+      "summary": "SRC-005 listed as verified but scan is PLANNED (unexecuted)",
+      "unblocks": "Execute scan + submit cryptographic hash to registry"
+    },
     {
       "id": "DT-B004",
       "summary": "Platform type unresolved — pickup vs chassis cab",

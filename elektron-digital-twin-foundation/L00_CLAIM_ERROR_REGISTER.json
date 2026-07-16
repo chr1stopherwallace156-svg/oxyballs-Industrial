@@ -1,0 +1,56 @@
+[
+  {
+    "claim_id": "CHASSIS-001",
+    "property": "engine_output",
+    "proposed_value": "450 hp / 935 lb-ft",
+    "actual_value": "330 hp @ 2600 rpm / 750 lb-ft @ 2000 rpm",
+    "severity": "BLOCKING",
+    "reason": "Previous value was pulled from the Class 3 F-450 pickup specification. The Class 4/5 F-450 Chassis Cab is dyno-certified and governed differently.",
+    "source_reconciliation": "2019 Ford Super Duty Chassis Cab Order Guide, Mechanical Powertrain Specs (p. 20, 24)"
+  },
+  {
+    "claim_id": "COORD-001",
+    "property": "coordinate_system_iso_8855",
+    "proposed_value": "+X Rear, +Y Right, +Z Up",
+    "actual_value": "+X Forward, +Y Left, +Z Up",
+    "severity": "BLOCKING",
+    "reason": "The previous system reversed X and Y. While technically a right-handed system, it is NOT the ISO 8855 standard coordinate frame.",
+    "source_reconciliation": "ISO 8855:2011 Road Vehicles - Vehicle dynamics and road-holding ability - Vocabulary"
+  },
+  {
+    "claim_id": "METRO-001",
+    "property": "measurement_tolerance",
+    "proposed_value": "<= 0.05 mm (Universal)",
+    "actual_value": "Accuracy Classes (ranging from 0.1 mm up to 5.0 mm based on scope)",
+    "severity": "BLOCKING",
+    "reason": "A 50-micron universal tolerance over a full commercial vehicle envelope defies thermodynamics and practical metrology.",
+    "source_reconciliation": "VDI/VDE 2634 Part 2/3 (Optical 3D measuring systems)"
+  },
+  {
+    "claim_id": "IP-001",
+    "property": "data_licensing_rights",
+    "proposed_value": "Unrestricted Own IP",
+    "actual_value": "Data Provenance: EDTS-generated; Usage constraints: not evaluated",
+    "severity": "MAJOR",
+    "reason": "Claiming unrestricted ownership of scanned OEM designs creates massive downstream legal liability in commercial simulators.",
+    "source_reconciliation": "US Patent and Trademark Office (35 U.S.C. 171 Design Patents) and Trademark Fair Use Doctrine"
+  },
+  {
+    "claim_id": "EVID-005",
+    "property": "SRC-005 Metrology Scan",
+    "proposed_value": "Verified Source (2026 Capture)",
+    "actual_value": "PLANNED (Unexecuted)",
+    "severity": "BLOCKING",
+    "reason": "Treating a planned scan as completed and verified evidence is a fundamental data governance breach.",
+    "source_reconciliation": "Project Schedule Gating Protocol"
+  },
+  {
+    "claim_id": "UNIT-001",
+    "property": "wheelbase_formatting",
+    "proposed_value": "868.70 mm / 145.30 in",
+    "actual_value": "3690.6 mm (145.3 in nominal)",
+    "severity": "MINOR",
+    "reason": "The wheelbase of 145.3 inches was converted and formatted to two decimal places, implying 10-micron precision on a nominal chassis measurement.",
+    "source_reconciliation": "2019 Ford Truck Body Builder's Layout Book"
+  }
+]

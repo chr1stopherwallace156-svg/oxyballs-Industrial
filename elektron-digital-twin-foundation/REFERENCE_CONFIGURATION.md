@@ -27,10 +27,11 @@ For current “not locked” status, see:
 | Field | Proposed value | Verification status |
 |---|---|---|
 | Model year | 2019 | DOCUMENTED (L00) |
-| Wheelbase (WB) | 145.3 in | DOCUMENTED (L00) |
+| Wheelbase (WB) | 145.3 in (3690.6 mm nominal) | DOCUMENTED (L00) — use nominal OEM precision, not false decimal places |
 | Cab-to-axle (CA) | 60.0 in | DOCUMENTED (L00) |
 | Frame extension / rear overhang | 47.2 in | RESEARCH_REQUIRED (potential conflict: L00 reconciliation cites 42.2 in aft-of-axle extension for 60 CA) |
 | Engine | 6.7L Power Stroke V8 Turbo Diesel | RESEARCH_REQUIRED (available vs exact tuned configuration) |
+| Engine output (vocational / chassis cab) | 330 hp @ 2,600 rpm / 750 lb-ft @ 2,000 rpm | PROVISIONAL — pending Tier 1 archive (CHASSIS-001 correction; **not** 450 hp / 935 lb-ft pickup rating) |
 | Transmission | TorqShift 6-speed SelectShift automatic | RESEARCH_REQUIRED |
 | Rear axle | Dana Spicer S110 (4.88 ratio, limited slip) | RESEARCH_REQUIRED |
 | GVWR | 16,500 lbs | DOCUMENTED (L00 reconciliation) |

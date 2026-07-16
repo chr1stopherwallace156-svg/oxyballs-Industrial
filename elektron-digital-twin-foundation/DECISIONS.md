@@ -62,3 +62,23 @@ Append-only record of digital twin foundation decisions.
   - Derived meshes and dimension tables with provenance may live in `assets/` after review
   - Public-facing twin uses Elektron-owned or derived geometry only
 - **Consequences:** Geometry source chain must be documented per component in DATA_MODEL.
+
+## DT-D006 — Layer 0 closure rejected (adversarial audit)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted (finding — closure not authorized)
+- **Context:** Research governance adversarial audit (`L00_ADVERSARIAL_AUDIT.md`) deconstructed proposed Layer 0 parameters and found blocking errors in powertrain ratings, coordinate frame labeling, metrology tolerances, IP assertions, and unexecuted evidence (SRC-005).
+- **Decision:**
+  1. Layer 0 closure = **`L00_CLOSURE_REJECTED`**
+  2. `L00_CLOSURE_REPORT.md` demoted to **UNDER_REVIEW**
+  3. Six claims registered in `L00_CLAIM_ERROR_REGISTER.json` (4 BLOCKING, 1 MAJOR, 1 MINOR)
+  4. Correction plan published in `L00_CORRECTION_PLAN.md`
+  5. `COORDINATE_SYSTEM_STANDARD.md` **deprecated** — superseded by `COORDINATE_SYSTEM_CORRECTION_PROPOSAL.md`
+  6. Universal ≤ 0.05 mm metrology tolerance **rejected** — adopt MAC classes per `MEASUREMENT_ACCURACY_CLASS_PROPOSAL.md`
+  7. Chassis cab vocational powertrain = **330 hp @ 2,600 rpm / 750 lb-ft @ 2,000 rpm** (not 450/935 pickup rating) — pending Tier 1 verification
+  8. SRC-005 demoted to **PLANNED**
+  9. Claim registry schema v2 proposed in `CLAIM_REGISTRY_SCHEMA_V2_PROPOSAL.json`
+- **Consequences:**
+  - No Layer 1 work until corrections applied and owner feedback received
+  - All new spatial claims must declare `coordinate_frame_id` per schema v2 proposal
+  - Scan/IP language must use `EDTS_CAPTURE` + `NOT_EVALUATED` redistribution status until counsel review

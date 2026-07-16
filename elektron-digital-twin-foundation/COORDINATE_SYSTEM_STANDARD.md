@@ -1,12 +1,33 @@
-# COORDINATE_SYSTEM_STANDARD.md — Coordinate Frames (Proposed)
+# COORDINATE_SYSTEM_STANDARD.md — Coordinate Frames (Deprecated)
 
 ## Status
 
-**Architecture Material (Non-binding until owner resolves any origin convention conflicts)**
+**DEPRECATED — Rejected per adversarial audit (COORD-001)**
 
-## 1. Vector Convention
+This document incorrectly labeled +X rear / +Y right / +Z up as "ISO 8855." That axis convention is **not** ISO 8855 and has been rejected.
 
-This document defines a right-handed vehicle frame:
+**Use instead:** `COORDINATE_SYSTEM_CORRECTION_PROPOSAL.md`
+
+---
+
+## Deprecation Notice (2026-07-16)
+
+| Finding | Detail |
+|---|---|
+| Claim ID | COORD-001 |
+| Error | +X Rear, +Y Right, +Z Up labeled as ISO 8855 |
+| Correct ISO 8855 | +X Forward, +Y Left, +Z Up |
+| Impact | Would cause catastrophic rotation matrix and Unreal import bugs without explicit transforms |
+
+All new spatial claims must declare `coordinate_frame_id` per `CLAIM_REGISTRY_SCHEMA_V2_PROPOSAL.json`.
+
+---
+
+## Historical Content (Do Not Use)
+
+The following was the previous proposed convention. It is preserved for audit traceability only.
+
+### Previous Vector Convention (Rejected)
 
 - +Z: Up
 - -Z: Down
@@ -15,34 +36,13 @@ This document defines a right-handed vehicle frame:
 - -Y: Left
 - +Y: Right
 
-Handedness: Right-Handed Coordinate System (RHS).
+Handedness: Right-Handed Coordinate System (RHS) — but **not ISO 8855**.
 
-## 2. Coordinate System Orientation Diagram
+### Previous Origin (Rejected as sole standard)
 
-```
-  +Z (Up)
-     ^
-    /|
-   / |
-  /  v
- -X  -Y  +Y
-```
-
-## 3. Origin (Proposed Vehicle Frame)
-
-Proposed origin (per user-provided closure plan):
 - Origin (0,0,0): Front Axle Centerline / Longitudinal Centerplane
 
-## 4. Project Compatibility Note (DATA_MODEL.md)
-
-Current repo `DATA_MODEL.md` declares a coordinate convention:
-- Origin: Center of rear axle, ground plane (shop convention — confirm at L02)
-
-This standard does **not** overwrite `DATA_MODEL.md`. Instead:
-- Treat this as an interoperability reference.
-- Mark the mapping between “Front-axle origin” and “Rear-axle origin” as **RESEARCH_REQUIRED** until unified.
-
-## 5. System Frame Matrix
+### Previous System Frame Matrix (Rejected)
 
 | System | Origin Location | Axis Directions | Unit | Handedness |
 |---|---|---|---|---|
@@ -50,4 +50,3 @@ This standard does **not** overwrite `DATA_MODEL.md`. Instead:
 | World Frame | Scan floor ground datum (project defined) | +X North, +Y East, +Z Up | mm | RHS |
 | CAD Frame | Front bumper center plane offset | +X Forward, +Y Left, +Z Up | mm | RHS |
 | Display/Unreal | Center of bounding box (symmetrical) | +X Forward, +Y Right, +Z Up | cm | LHS |
-

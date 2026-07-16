@@ -32,6 +32,11 @@ If tolerances are asymmetric:
 
 ## 3. Precision Rules
 
-- Linear dimensions: record to exactly two decimal places (e.g., `868.70 mm`)
-- Angular dimensions: record to four decimal places (e.g., `4.1250 deg`)
+- **Nominal OEM dimensions:** Use source-document precision (e.g., 145.3 in → 3690.6 mm). Do not imply sub-millimeter precision on nominal chassis measurements (see UNIT-001 in `L00_CLAIM_ERROR_REGISTER.json`).
+- **Measured dimensions:** Record to the precision justified by the Measurement Accuracy Class (MAC) and instrument certificate.
+- **Angular dimensions:** Record to four decimal places when sourced from calibrated metrology (e.g., `4.1250 deg`).
+
+## 4. Measurement Accuracy Classes
+
+See `MEASUREMENT_ACCURACY_CLASS_PROPOSAL.md` for MAC-A (±0.5 mm) through MAC-D (no dimensional authority).
 

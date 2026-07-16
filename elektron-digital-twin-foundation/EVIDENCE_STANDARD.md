@@ -42,7 +42,20 @@ An engineering claim (component dimension, mechanical configuration, or operatio
 
 OR
 
-2) It is captured via Tier 2 physical observation (using metrology tools with certified tolerance <= 0.05 mm) and matches a Tier 1 baseline within the documented manufacturing variance window.
+2) It is captured via Tier 2 physical observation at the appropriate **Measurement Accuracy Class (MAC)** for the feature scope, and matches a Tier 1 baseline within the documented manufacturing variance window.
+
+### Measurement Accuracy Classes (MAC)
+
+Per `MEASUREMENT_ACCURACY_CLASS_PROPOSAL.md` (adopted pending owner approval):
+
+| Class | Target Accuracy | Typical Scope |
+|---|---|---|
+| MAC-A | ± 0.5 mm | Rigid structural hardpoints (suspension, cab mounts) |
+| MAC-B | ± 2.0 mm | Exterior envelopes (panels, glass transitions) |
+| MAC-C | ± 5.0 mm | Global volume, frame rail spacing, packaging envelope |
+| MAC-D | No dimensional authority | Visual/textural capture only |
+
+> **Audit note (METRO-001):** A universal ≤ 0.05 mm tolerance over a full commercial vehicle envelope is **rejected** as unphysical. Terrestrial LiDAR achieves ± 1.0–3.0 mm at nominal range; sub-0.1 mm requires structured-light or laser tracking over small rigid parts.
 
 ## 3. Notes on “Tier 1 Use” vs Licensing
 
