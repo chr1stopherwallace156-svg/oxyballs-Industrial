@@ -1,49 +1,68 @@
 # Cross-Vehicle Non-Inheritance Rules
 
 **Status:** `ACTIVE`  
-**Version:** `1.0.0`
+**Law:** [HARD_RULE_EXACT_VEHICLE_ISOLATION.md](HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
+**Version:** `2.0.0`
 
 ---
 
 ## Core law
 
-**Similarity permits discovery only. It does not establish applicability.**
-
-Cross-vehicle reuse remains `NOT_EVALUATED` until independently verified for each exact vehicle and exact configuration.
-
----
-
-## What may live on an exact vehicle record
-
-- Facts true for **that** `vehicle_instance_id` + `configuration_id` only
-- Links to evidence/geometry/interaction for **that** component instance
-
-## What must stay outside
-
-| Content | Home |
-|---|---|
-| “Also fits 2017–2018” | `cross-vehicle-comparison` only, status ≠ PROVEN until verified |
-| “Super Duty family door” | reusable definition candidate — empty until proven |
-| F-350 / F-550 / Crew Cab / 4x4 listings | other vehicle/config records — never auto-copied |
-| Platform marketing architecture | discovery notes / comparison — not applicability |
-
----
-
-## Promotion path (plain text)
+**Similarity is never evidence.**  
+**Cross-vehicle comparison is allowed. Cross-vehicle inheritance is prohibited.**
 
 ```text
-DISCOVERY_ONLY similarity
-  → cross-vehicle-comparison.reuse_status = NOT_EVALUATED
-  → independent evidence on EACH exact vehicle
-  → reuse_status = PROVEN (optional)
-  → only then may reusable_component_definition link component instances
+Vehicle A  →  Comparison Record  →  Vehicle B     ✅
+Vehicle A  →  inherits directly  →  Vehicle B     ❌
 ```
-
-Skipping steps is prohibited.
 
 ---
 
-## Door slice implication
+## Non-leakage inventory
 
-`CMPINST-VEH000001-DOOR-FL` must **not** claim interchangeability with any other year, model, cab, or drivetrain.  
-`reusable_link_status` starts at `NOT_EVALUATED` with `reusable_component_definition_id: null`.
+A vehicle dataset must never automatically inherit any of the following from another vehicle:
+
+- geometry  
+- materials  
+- measurements  
+- procedures  
+- evidence  
+- assemblies  
+- interactions  
+- shaders  
+- pivots  
+- tolerances  
+- fasteners  
+- service procedures  
+- torque values  
+- dimensions  
+- CAD  
+- scans  
+
+---
+
+## Promotion path
+
+```text
+observe similarity (discovery only)
+  → write cross-vehicle-comparison (reuse_status = NOT_EVALUATED)
+  → gather independent evidence on EACH exact vehicle
+  → optionally set reuse_status = PROVEN
+  → only then link reusable_component_definition_id on each instance
+```
+
+Skipping steps is a constitutional violation.
+
+---
+
+## Universal examples (illustrative only)
+
+These pairs are always distinct datasets until independently proven:
+
+- 2019 F-450 Regular Cab vs 2018 F-450 Regular Cab  
+- 2019 F-450 4x2 vs 2019 F-450 4x4  
+- F-450 DRW vs F-450 SRW  
+- 2021 Transit vs 2022 Transit  
+- Model 3 Long Range vs Model 3 Performance  
+- Silverado 2500HD vs 3500HD  
+- Camry LE vs Camry XSE  

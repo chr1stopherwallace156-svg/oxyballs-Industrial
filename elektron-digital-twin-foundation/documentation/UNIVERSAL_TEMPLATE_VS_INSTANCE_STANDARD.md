@@ -17,11 +17,12 @@ Populated facts live only in **examples/** (or future instance stores), never in
 
 | Path | Contents |
 |---|---|
-| `schemas/*.schema.json` | JSON Schema Draft **2020-12** only (`$id`, `type`, `properties`, `required`, `additionalProperties`) |
-| `examples/<vehicle>/` | Populated records for one exact vehicle |
-| `documentation/` | Standards and plans |
+| `schemas/*.schema.json` | JSON Schema Draft **2020-12** only — universal, OEM-agnostic |
+| `examples/<manufacturer>/<exact_configuration>/` | Isolated vehicle datasets |
+| `documentation/` | Constitutional law + standards |
+| `verification/isolation/` | Negative tests proving no cross-vehicle leakage |
 
-**Forbidden:** Embedding example payloads inside schema files as the sole “instance.” Schema `examples` keywords (if any) are non-authoritative illustrations only; authoritative instances are under `examples/`.
+**Forbidden:** Embedding OEM catalogs inside schema files. **The kernel never changes; only datasets change.**
 
 ---
 

@@ -399,3 +399,23 @@ Append-only record of digital twin foundation decisions.
 - **Consequences:**
   - Phase `EDTS_EXACT_VEHICLE_KERNEL_READY`
   - Prior `CMP-FORD-SD-DOOR-FL-001` / year-range applicability must not be extended
+
+## DT-D023 — Constitutional Exact Vehicle Isolation (universal kernel law)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Exact-vehicle isolation must be a core architectural law for every OEM and configuration, not a Ford/2019 coding preference.
+- **Decision:**
+  1. Elevate **HR-EVI** (`documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md`) to constitutional status beside Hard Rule 0
+  2. **Similarity is never evidence**; cross-vehicle comparison allowed; inheritance prohibited
+  3. Kernel remains OEM-agnostic; vehicle data only under `examples/<manufacturer>/<exact_configuration>/`
+  4. Relocate seed dataset to `examples/ford/2019_f450_regularcab_4x2_drw/`
+  5. Add empty scaffolds for Tesla / Toyota / Chevrolet to prove kernel immutability
+  6. Add configuration / evidence / component-instance architecture docs + `KERNEL_VALIDATION_RULES.md`
+  7. Add negative isolation suite `verification/isolation/run_isolation_tests.py` (must pass)
+  8. Clarify Hard Rule 0: reusable definitions exist, but binding is never automatic
+  9. Protocol → v2.1.0; EDTS-OS → v3.1.0
+- **Consequences:**
+  - Phase `EDTS_UNIVERSAL_EXACT_VEHICLE_KERNEL_READY`
+  - Isolation suite is a gate for kernel readiness claims
+  - Scales from any passenger car to any commercial EV without kernel forks

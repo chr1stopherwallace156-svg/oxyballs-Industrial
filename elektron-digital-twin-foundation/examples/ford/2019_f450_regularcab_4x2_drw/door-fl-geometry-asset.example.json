@@ -1,5 +1,5 @@
 {
-  "$schema": "../../schemas/geometry-asset.schema.json",
+  "$schema": "../../../schemas/geometry-asset.schema.json",
   "geometry_asset_id": "GEO-VEH000001-DOOR-FL-001",
   "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
   "format": "GLB",

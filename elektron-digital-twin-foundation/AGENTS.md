@@ -6,22 +6,21 @@ Rules for every AI agent, LLM engine, code generation pipeline, and automated va
 
 Before modifying any file, read:
 
-1. [EDTS_OS.md](EDTS_OS.md) — **EDTS-OS v3 constitution** (Hard Rule 0 — Component First)
-2. [documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md](documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md) — **exact-vehicle isolation** (binding)
-3. [kernel/EDTS_KERNEL_SCOPE.md](kernel/EDTS_KERNEL_SCOPE.md) — superseded pointer → exact-vehicle examples
-4. [EDTS_OS_ARCHITECTURE_BLUEPRINT.md](EDTS_OS_ARCHITECTURE_BLUEPRINT.md) — Engine vs Data + universal subsystems
-5. [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) — research / evidence runtime core (v2+)
-6. [README.md](README.md) — required reading order for core specifications
-7. [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md)
-8. [AGENTS.md](AGENTS.md) (this file)
-9. [STATUS.json](STATUS.json)
-10. [DECISIONS.md](DECISIONS.md)
-11. [REQUIREMENTS.md](REQUIREMENTS.md)
-12. [ARCHITECTURE.md](ARCHITECTURE.md)
-13. [DATA_MODEL.md](DATA_MODEL.md)
-14. [THREE_D_SPEC.md](THREE_D_SPEC.md)
-15. [QUALITY_STANDARD.md](QUALITY_STANDARD.md)
-16. The active layer doc under `layers/`
+1. [EDTS_OS.md](EDTS_OS.md) — **EDTS-OS constitution**
+2. [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md) — **HR-EVI constitutional isolation law**
+3. [documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md](documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md) — operational isolation standard
+4. [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) — research / evidence runtime core (v2.1+)
+5. [README.md](README.md) — required reading order for core specifications
+6. [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md)
+7. [AGENTS.md](AGENTS.md) (this file)
+8. [STATUS.json](STATUS.json)
+9. [DECISIONS.md](DECISIONS.md)
+10. [REQUIREMENTS.md](REQUIREMENTS.md)
+11. [ARCHITECTURE.md](ARCHITECTURE.md)
+12. [DATA_MODEL.md](DATA_MODEL.md)
+13. [THREE_D_SPEC.md](THREE_D_SPEC.md)
+14. [QUALITY_STANDARD.md](QUALITY_STANDARD.md)
+15. The active layer doc under `layers/`
 
 ## Operational directives
 
@@ -50,14 +49,14 @@ Prefer [schemas/CLAIM_SCHEMA_ROOT_V6_PROPOSAL.json](schemas/CLAIM_SCHEMA_ROOT_V6
 
 ### 4. EDTS-OS component-first operations
 
-- **Never inherit** platform-family or cross-year applicability onto an exact vehicle or component instance ([EXACT_VEHICLE_ISOLATION_STANDARD.md](documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md)).
-- Allocate IDs via [`registries/COMPONENT_IDENTITY_REGISTRY.json`](registries/COMPONENT_IDENTITY_REGISTRY.json) before new passports.
-- Follow version bump rules in [`schemas/edts-os-platform-master.schema.json`](schemas/edts-os-platform-master.schema.json).
-- Exact-vehicle door slice uses [`examples/2019_f450/`](examples/2019_f450/) (`CMPINST-VEH000001-DOOR-FL`).
-- Parameter queries run against [`layers/L01/L1_EVIDENCE_GRAPH.json`](layers/L01/L1_EVIDENCE_GRAPH.json) with isolation rules.
+- **Obey HR-EVI** — Exact Vehicle Isolation is constitutional. Similarity is never evidence. Never copy values across vehicles ([HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md)).
+- **Never inherit** platform-family or cross-year applicability onto an exact vehicle or component instance.
+- Run `python3 verification/isolation/run_isolation_tests.py` after kernel/dataset edits affecting isolation.
+- Exact-vehicle seed dataset: [`examples/ford/2019_f450_regularcab_4x2_drw/`](examples/ford/2019_f450_regularcab_4x2_drw/) (`CMPINST-VEH000001-DOOR-FL`).
+- Parameter queries run against evidence systems with per-vehicle verification only.
 - **Do not** invent confidence percentages (deprecated).
 - **Do not** invent source IDs or assert runtime tests / verified disassembly without execution evidence.
-- **Do not** promote edges to `NORMALIZED` / passports to `FROZEN` without file evidence + lifecycle completion.
+- Prefer `UNKNOWN` / `REQUIRES_EVIDENCE` / `NOT_EVALUATED` / `null` over copying another vehicle.
 
 ## Non-negotiables
 

@@ -1,5 +1,5 @@
 {
-  "$schema": "../../schemas/vehicle-instance.schema.json",
+  "$schema": "../../../schemas/vehicle-instance.schema.json",
   "vehicle_instance_id": "VEH-000001",
   "model_year": 2019,
   "manufacturer": "Ford",

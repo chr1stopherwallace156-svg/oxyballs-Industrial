@@ -1,5 +1,5 @@
 {
-  "$schema": "../../schemas/assembly-relationship.schema.json",
+  "$schema": "../../../schemas/assembly-relationship.schema.json",
   "relationship_id": "REL-VEH000001-0001",
   "subject_id": "CMPINST-VEH000001-DOOR-FL",
   "predicate": "IS_PART_OF",

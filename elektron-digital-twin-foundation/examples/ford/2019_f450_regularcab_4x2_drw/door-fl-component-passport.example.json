@@ -1,5 +1,5 @@
 {
-  "$schema": "../../schemas/component-passport.schema.json",
+  "$schema": "../../../schemas/component-passport.schema.json",
   "passport_id": "PP-VEH000001-DOOR-FL-001",
   "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
   "vehicle_instance_id": "VEH-000001",

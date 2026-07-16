@@ -19,7 +19,7 @@
     {
       "slot": "CAB_DOOR_FRONT_LEFT",
       "component_id": "CMPINST-VEH000001-DOOR-FL",
-      "passport": "examples/2019_f450/door-fl-component-passport.example.json",
+      "passport": "examples/ford/2019_f450_regularcab_4x2_drw/door-fl-component-passport.example.json",
       "version_pin": 1,
       "inherit": true,
       "kernel_slice": true,

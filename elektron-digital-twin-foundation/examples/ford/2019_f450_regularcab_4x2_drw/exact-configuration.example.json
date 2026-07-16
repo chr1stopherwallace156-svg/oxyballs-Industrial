@@ -1,5 +1,5 @@
 {
-  "$schema": "../../schemas/exact-configuration.schema.json",
+  "$schema": "../../../schemas/exact-configuration.schema.json",
   "configuration_id": "CFG-000001",
   "vehicle_instance_id": "VEH-000001",
   "cab": "Regular Cab",

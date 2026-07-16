@@ -1,0 +1,10 @@
+{
+  "_comment": "NEGATIVE FIXTURE ONLY — illicit direct inheritance from another vehicle. Must not appear in examples/.",
+  "component_instance_id": "ILLICIT-INHERIT",
+  "vehicle_instance_id": "VEH-000001",
+  "configuration_id": "CFG-000001",
+  "inherits_from_vehicle_instance_id": "VEH-TESLA-0001",
+  "inherited_fields": ["geometry", "torque_values", "pivots"],
+  "lifecycle_status": "DISCOVERED",
+  "schema_version": "1.0.0"
+}

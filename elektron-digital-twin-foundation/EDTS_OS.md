@@ -1,16 +1,17 @@
 # EDTS-OS — Engineering Digital Twin Operating System
 
 **Status:** `ACTIVE`  
-**Architecture version:** `3.0.0`  
+**Architecture version:** `3.1.0`  
 **Effective Date:** 2026-07-16  
 **Supersedes process posture:** Version 2 (Engineering Process) for system framing  
-**Binding protocol:** [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) v2.0.0+  
+**Binding protocol:** [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) v2.1.0+  
+**Constitutional isolation law:** [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
 **Blueprint:** [EDTS_OS_ARCHITECTURE_BLUEPRINT.md](EDTS_OS_ARCHITECTURE_BLUEPRINT.md)  
 **Roadmap:** [EDTS_OS_IMPLEMENTATION_ROADMAP.md](EDTS_OS_IMPLEMENTATION_ROADMAP.md)  
 **Master schema:** [schemas/edts-os-platform-master.schema.json](schemas/edts-os-platform-master.schema.json)  
 **Platform instance:** [registries/EDTS_OS_PLATFORM_INSTANCE.json](registries/EDTS_OS_PLATFORM_INSTANCE.json)
 
-**Mindset:** We are building a **factory that builds trucks**, not the truck itself.
+**Mindset:** The kernel is a **universal factory**. Every vehicle is an **isolated, evidence-backed dataset**. The kernel never changes; only datasets change.
 
 ---
 
@@ -33,10 +34,10 @@ Evidence graph         →  parameter ↔ source relationships (SUPPORTS / CONTR
 
 Implications:
 
-1. Do not compile “the F-450” as a monolithic mesh authority.
-2. Every assembly element receives a **Component Passport**.
-3. Cross-platform reuse (F-450 ↔ E-450 ↔ Transit templates) is a first-class design goal.
-4. Configuration files are **thin pointers** — they do not own dimensional truth.
+1. Do not compile a monolithic mesh authority per marketing “platform family.”
+2. Every assembly element on a vehicle is a **vehicle-bound component instance** first.
+3. Optional reusable definitions may exist, but cross-vehicle use requires proven interchangeability + comparison records — **never automatic inheritance** (HR-EVI).
+4. Configuration files / datasets are **thin, isolated** — they do not own dimensional truth without evidence, and they do not inherit from siblings.
 
 ---
 

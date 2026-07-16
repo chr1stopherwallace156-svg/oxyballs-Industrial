@@ -495,3 +495,25 @@ All notable changes to the digital twin foundation. Append-only.
 - Exact-vehicle kernel: **READY**
 - Interaction: **VISUAL_PREVIEW_ONLY** (runtime NOT_EXECUTED)
 - Evidence links: **empty** (no invented source IDs)
+
+## 2026-07-16 (Constitutional HR-EVI — Universal Exact Vehicle Kernel)
+
+### Added
+
+- `documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md` — constitutional law
+- Architecture docs: configuration identity, evidence linkage, component instance, validation rules, universal acceptance tests
+- `verification/isolation/` negative isolation suite (9/9 pass)
+- OEM dataset scaffolds: Tesla / Toyota / Chevrolet
+- **DT-D023**
+
+### Changed
+
+- Seed dataset path → `examples/ford/2019_f450_regularcab_4x2_drw/`
+- Protocol v2.1.0; EDTS-OS v3.1.0 — Hard Rule 0 sharing clarified as non-automatic
+- Phase → `EDTS_UNIVERSAL_EXACT_VEHICLE_KERNEL_READY`
+
+### Status
+
+- HR-EVI: **CONSTITUTIONAL**
+- Isolation tests: **PASS**
+- Kernel: universal; datasets: isolated

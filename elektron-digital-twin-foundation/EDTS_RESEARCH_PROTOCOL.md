@@ -2,11 +2,12 @@
 
 **Status:** `ACTIVE`  
 **Effective Date:** 2026-07-16  
-**Version:** `2.0.0`  
+**Version:** `2.1.0`  
 **Architecture host:** [EDTS_OS.md](EDTS_OS.md) v3.0.0 (EDTS-OS)  
+**Isolation law:** [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
 **Binding for:** all research, acquisition, geometry development, and software logic operations under `elektron-digital-twin-foundation/`
 
-**Changelog from 1.0.0:** Hard Rule 0 (Component First); confidence percentages **deprecated**; Evidence Tier decoupled from Verification Status; Evidence Graph + Component Passport become Hard Rule 5 machine form; expanded candidate lifecycle.
+**Changelog from 2.0.0:** Constitutional **Hard Rule — Exact Vehicle Isolation (HR-EVI)**; vehicle datasets under `examples/<oem>/<exact_config>/`; similarity never evidence; Hard Rule 0 sharing clarified as non-automatic.
 
 ---
 
@@ -32,9 +33,19 @@ Every parameter, value, or visual property in the database must be categorized i
 
 ### Hard Rule 0 — Component First (Constitutional)
 
-The EDTS models **components**, not vehicles. A vehicle is an assembly of verified components with configuration-specific relationships. Every reusable component must exist independently of any single vehicle and may be shared across multiple compatible platforms.
+The EDTS models **components**, not monolithic vehicles. A vehicle configuration is an assembly of **vehicle-bound component instances**. Optional reusable component definitions may exist outside any single vehicle, but **must not be automatically inherited**.
 
-Machine form: `components/*` passports + `configurations/*` ephemeral pointers.
+Binding a reusable definition to a vehicle requires independent evidence for that exact vehicle (see Hard Rule Exact Vehicle Isolation). Similarity never establishes applicability.
+
+Machine form: `schemas/*` (universal) + `examples/<oem>/<exact_config>/` (datasets).
+
+### Hard Rule — Exact Vehicle Isolation (Constitutional) — HR-EVI
+
+Every unique vehicle configuration is its own completely independent engineering dataset. No vehicle inherits engineering information from another because they appear similar. **Similarity is never evidence.** Every vehicle stands on its own evidence.
+
+Applies to every manufacturer, year, trim, drivetrain, body style, wheelbase, cab, suspension/axle/option package, and production variation.
+
+Full law: [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md)
 
 ### Hard Rule 1 — Evidence Hierarchy (Tiers)
 

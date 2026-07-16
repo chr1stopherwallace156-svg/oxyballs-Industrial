@@ -1,5 +1,5 @@
 {
-  "$schema": "../../schemas/interaction-definition.schema.json",
+  "$schema": "../../../schemas/interaction-definition.schema.json",
   "interaction_id": "INT-VEH000001-DOOR-FL-001",
   "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
   "selectable": true,

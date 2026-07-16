@@ -1,7 +1,7 @@
 # F-450 Door FL Vertical Slice Plan V2
 
-**Status:** Supersedes `kernel/F450_DOOR_FL_VERTICAL_SLICE_PLAN.md`  
-**Isolation:** [EXACT_VEHICLE_ISOLATION_STANDARD.md](EXACT_VEHICLE_ISOLATION_STANDARD.md)
+**Examples:** `examples/ford/2019_f450_regularcab_4x2_drw/`  
+**Isolation:** [EXACT_VEHICLE_ISOLATION_STANDARD.md](EXACT_VEHICLE_ISOLATION_STANDARD.md) · [HARD_RULE_EXACT_VEHICLE_ISOLATION.md](HARD_RULE_EXACT_VEHICLE_ISOLATION.md)
 
 ---
 

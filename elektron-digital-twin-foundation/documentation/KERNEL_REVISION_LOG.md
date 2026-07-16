@@ -1,6 +1,23 @@
 # Kernel Revision Log
 
-## 2026-07-16 — Exact-vehicle isolation revision (DT-D022)
+## 2026-07-16 — Constitutional Exact Vehicle Isolation (DT-D023)
+
+### Strengthening
+
+Elevated Exact Vehicle Isolation from dataset preference to **constitutional Hard Rule (HR-EVI)** applying to every OEM, year, trim, and option package.
+
+### Changes
+
+1. Added `documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md`
+2. Relocated seed dataset to `examples/ford/2019_f450_regularcab_4x2_drw/`
+3. Added OEM scaffolds: Tesla / Toyota / Chevrolet (claims-empty)
+4. Added configuration / evidence / component-instance architecture docs
+5. Added `verification/isolation/` negative test suite
+6. Reconciled Hard Rule 0 (Component First): sharing allowed only after per-vehicle proof — never automatic inheritance
+
+### Status
+
+`EDTS_UNIVERSAL_EXACT_VEHICLE_KERNEL_READY` when isolation suite passes.
 
 ### Defect corrected
 

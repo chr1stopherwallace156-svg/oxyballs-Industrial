@@ -1,5 +1,5 @@
 {
-  "$schema": "../../schemas/reusable-component-definition.schema.json",
+  "$schema": "../../../schemas/reusable-component-definition.schema.json",
   "reusable_component_definition_id": "RDEF-DOOR-FL-CANDIDATE-001",
   "canonical_name": null,
   "definition_status": "EMPTY_CANDIDATE",

@@ -1,5 +1,5 @@
 {
-  "$schema": "../../schemas/component-instance.schema.json",
+  "$schema": "../../../schemas/component-instance.schema.json",
   "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
   "vehicle_instance_id": "VEH-000001",
   "configuration_id": "CFG-000001",
