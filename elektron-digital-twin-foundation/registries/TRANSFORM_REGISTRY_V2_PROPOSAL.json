@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_name": "EDTS_Frame_Transforms_V2",
+  "_deprecation": {
+    "status": "SUPERSEDED",
+    "reason": "Conflated glTF asset frame (+Z forward) with Three.js scene frame (-Z forward). Use V3.",
+    "superseded_by": "registries/TRANSFORM_REGISTRY_V3_PROPOSAL.json",
+    "decision_id": "DT-D009"
+  },
+  "matrix_convention": "column_major",
+  "quaternion_element_ordering": "WXYZ",
+  "_supersedes": "registries/TRANSFORM_REGISTRY.json",
+  "validation_report": "TRANSFORM_VALIDATION_REPORT.md",
+  "basis_tests": "registries/COORDINATE_BASIS_TESTS.json",
+  "transforms": [
+    {
+      "transform_id": "TF-ISO-TO-GLTF",
+      "from_frame": "EDTS_ISO_ALIGNED_VEHICLE_FRAME",
+      "to_frame": "GLTF_RUNTIME_FRAME",
+      "scale_factor": 0.001,
+      "scale_note": "millimeters to meters",
+      "quaternion": [0.5, -0.5, 0.5, 0.5],
+      "translation": [0.0, 0.0, 0.0],
+      "affine_transformation_matrix": [
+        [0.0, -0.001, 0.0, 0.0],
+        [0.0, 0.0, 0.001, 0.0],
+        [-0.001, 0.0, 0.0, 0.0],
+        [0.0, 0.0, 0.0, 1.0]
+      ]
+    },
+    {
+      "transform_id": "TF-ISO-TO-UNREAL",
+      "from_frame": "EDTS_ISO_ALIGNED_VEHICLE_FRAME",
+      "to_frame": "UNREAL_FRAME",
+      "scale_factor": 0.1,
+      "scale_note": "millimeters to centimeters",
+      "quaternion": [1.0, 0.0, 0.0, 0.0],
+      "scale_reflection_vector": [0.1, -0.1, 0.1],
+      "handedness_note": "Y-axis reflection required for RHS ISO to LHS Unreal; not representable as pure rotation quaternion alone",
+      "translation": [0.0, 0.0, 0.0],
+      "affine_transformation_matrix": [
+        [0.1, 0.0, 0.0, 0.0],
+        [0.0, -0.1, 0.0, 0.0],
+        [0.0, 0.0, 0.1, 0.0],
+        [0.0, 0.0, 0.0, 1.0]
+      ]
+    }
+  ]
+}

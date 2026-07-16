@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_name": "EDTS_Three_Camera_View_Presets",
+  "version": "1.1.0",
+  "description": "Controlled dynamic camera view presets for the Three.js viewport scene. Positions are parametric relative to vehicle bounds.",
+  "world_frame": "THREE_WORLD_FRAME",
+  "standard_doc": "THREE_CAMERA_AND_WORLD_STANDARD.md",
+  "target_anchor_definitions": {
+    "VEHICLE_VISUAL_CENTER": "Bounding-box centroid of the loaded vehicle visual asset in THREE_WORLD_FRAME"
+  },
+  "presets": [
+    {
+      "preset_id": "VIEW-PRESET-FRONT-THREE",
+      "description": "Dynamic front view looking at the vehicle visual center.",
+      "target_anchor_id": "VEHICLE_VISUAL_CENTER",
+      "distance_multiplier": 1.25,
+      "spherical_offset_polar_rad": 1.570796,
+      "spherical_offset_azimuth_rad": 0.0
+    },
+    {
+      "preset_id": "VIEW-PRESET-FRONT-LEFT-THREE",
+      "description": "Dynamic isometric front-left view.",
+      "target_anchor_id": "VEHICLE_VISUAL_CENTER",
+      "distance_multiplier": 1.5,
+      "spherical_offset_polar_rad": 1.221730,
+      "spherical_offset_azimuth_rad": 0.785398
+    },
+    {
+      "preset_id": "VIEW-PRESET-HERO-THREE",
+      "description": "Dynamic low-angle front-left hero presentation shot.",
+      "target_anchor_id": "VEHICLE_VISUAL_CENTER",
+      "distance_multiplier": 1.1,
+      "spherical_offset_polar_rad": 1.396263,
+      "spherical_offset_azimuth_rad": 0.523599
+    }
+  ]
+}

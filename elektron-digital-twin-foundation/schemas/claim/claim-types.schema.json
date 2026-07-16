@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EDTS_Claim_Types_Registry",
+  "type": "string",
+  "enum": [
+    "DIMENSION",
+    "MASS",
+    "PRESSURE",
+    "CLEARANCE",
+    "MATERIAL",
+    "THERMAL",
+    "ELECTRICAL",
+    "CONFIGURATION",
+    "GEOMETRY",
+    "MANUFACTURING",
+    "PROCEDURE",
+    "TORQUE",
+    "TELEMETRY",
+    "STATE",
+    "EVENT",
+    "FAILURE_MODE",
+    "RELATIONSHIP",
+    "IDENTIFICATION"
+  ]
+}

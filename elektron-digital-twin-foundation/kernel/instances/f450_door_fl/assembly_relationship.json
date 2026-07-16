@@ -1,0 +1,8 @@
+{
+  "relationship_id": "REL-00001",
+  "subject_entity_id": "CMP-FORD-SD-DOOR-FL-001",
+  "predicate": "IS_PART_OF",
+  "object_entity_id": "ASM-FORD-SD-CAB-001",
+  "configuration_id": "CFG-F450-REG-2019",
+  "notes": "Cab assembly entity ASM-FORD-SD-CAB-001 is a kernel placeholder parent for the vertical slice."
+}

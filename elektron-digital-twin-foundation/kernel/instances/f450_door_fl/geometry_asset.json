@@ -1,0 +1,15 @@
+{
+  "asset_id": "GEO-00001",
+  "entity_id": "CMP-FORD-SD-DOOR-FL-001",
+  "format": "GLB",
+  "asset_role": "PROVISIONAL_VISUAL",
+  "validation_status": "NOT_EXECUTED",
+  "source_asset_id": "ASSET-00031",
+  "local_path": null,
+  "objective_metrics": {
+    "triangle_count": null,
+    "bounding_box_mm": null,
+    "texture_count": null
+  },
+  "notes": "Visually reusable Grade B candidate. Dimensionally inaccurate until proven otherwise (KQ-001)."
+}

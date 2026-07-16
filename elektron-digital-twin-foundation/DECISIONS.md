@@ -62,3 +62,669 @@ Append-only record of digital twin foundation decisions.
   - Derived meshes and dimension tables with provenance may live in `assets/` after review
   - Public-facing twin uses Elektron-owned or derived geometry only
 - **Consequences:** Geometry source chain must be documented per component in DATA_MODEL.
+
+## DT-D006 — Layer 0 closure rejected (adversarial audit)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted (finding — closure not authorized)
+- **Context:** Research governance adversarial audit (`L00_ADVERSARIAL_AUDIT.md`) deconstructed proposed Layer 0 parameters and found blocking errors in powertrain ratings, coordinate frame labeling, metrology tolerances, IP assertions, and unexecuted evidence (SRC-005).
+- **Decision:**
+  1. Layer 0 closure = **`L00_CLOSURE_REJECTED`**
+  2. `L00_CLOSURE_REPORT.md` demoted to **UNDER_REVIEW**
+  3. Six claims registered in `L00_CLAIM_ERROR_REGISTER.json` (4 BLOCKING, 1 MAJOR, 1 MINOR)
+  4. Correction plan published in `L00_CORRECTION_PLAN.md`
+  5. `COORDINATE_SYSTEM_STANDARD.md` **deprecated** — superseded by `COORDINATE_SYSTEM_CORRECTION_PROPOSAL.md`
+  6. Universal ≤ 0.05 mm metrology tolerance **rejected** — adopt MAC classes per `MEASUREMENT_ACCURACY_CLASS_PROPOSAL.md`
+  7. Chassis cab vocational powertrain = **330 hp @ 2,600 rpm / 750 lb-ft @ 2,000 rpm** (not 450/935 pickup rating) — pending Tier 1 verification
+  8. SRC-005 demoted to **PLANNED**
+  9. Claim registry schema v2 proposed in `CLAIM_REGISTRY_SCHEMA_V2_PROPOSAL.json`
+- **Consequences:**
+  - No Layer 1 work until corrections applied and owner feedback received
+  - All new spatial claims must declare `coordinate_frame_id` per schema v2 proposal
+  - Scan/IP language must use `EDTS_CAPTURE` + `NOT_EVALUATED` redistribution status until counsel review
+
+## DT-D007 — Governance refactor: registries, schemas, physical intake readiness
+
+- **Date:** 2026-07-16
+- **Status:** Accepted (structural refactor — closure still rejected)
+- **Context:** Correction-quality review formalized machine-readable registries, coordinate transforms, datum construction protocols, and conditional claim validation to prevent overconfidence cascade.
+- **Decision:**
+  1. **Confirmed corrections accepted** — `L00_CONFIRMED_CORRECTIONS.md` (powertrain, SRC-005, IP metadata)
+  2. **Provisional dimensional claims** — `L00_PROVISIONAL_CORRECTIONS.md` (WB/CA/AF, rear axle) under review
+  3. **Claim registry core schema v4** — `schemas/CLAIM_REGISTRY_CORE_SCHEMA_V4_PROPOSAL.json` supersedes v2/v3 proposals
+  4. **Platform profiles split** — `F450_PLATFORM_PROFILE_PROPOSAL.json` (general) + `EDTS_REFERENCE_VEHICLE_PROFILE_PROPOSAL.json` (locked reference)
+  5. **Coordinate orientation** — `EDTS_ISO_ALIGNED_VEHICLE_FRAME` provisionally accepted; `EDTS_MODELING_FRAME` rejected
+  6. **Datum construction** — `DATUM_CONSTRUCTION_STANDARD.md` supersedes prior datum tables
+  7. **Measurement classes** — `MEASUREMENT_REQUIREMENTS_V2_PROPOSAL.md` provisionally accepted (Class A–D)
+  8. **Registries published** — `UNIT_REGISTRY.json`, `COORDINATE_FRAME_REGISTRY.json`, `TRANSFORM_REGISTRY.json`
+  9. **Physical intake ready** — `L00_READY_FOR_PHYSICAL_INTAKE`; document phase complete
+  10. **L00 closure remains REJECTED** — requires physical asset intake per `L00_FINAL_GAP_REPORT.md`
+- **Consequences:**
+  - All new claims must use `source_unit_id` / `canonical_unit_id` from `UNIT_REGISTRY.json`
+  - Frame transforms must reference `TRANSFORM_REGISTRY.json` (column-major, XYZW quaternions)
+  - Unresolved items tracked in `L00_UNRESOLVED_REGISTER.json` (UNRES-001, UNRES-002)
+  - Historical inapplicable claims preserved in `registries/HISTORICAL_CLAIM_REGISTRY.json`
+
+## DT-D008 — Mathematical correction audit (transforms, formulas, clearance)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted (blocking errors corrected)
+- **Context:** Formula compliance audit found template violations in clearance standard, glTF quaternion/matrix inconsistency, and fatal Unreal scale factor (100.0 instead of 0.1 for mm-to-cm).
+- **Decision:**
+  1. `FORMULA_COMPLIANCE_AUDIT.md` — complete and enforced
+  2. `CLEARANCE_STANDARD_V2_PROPOSAL.md` — supersedes clearance v1; formulas in `registries/FORMULA_REGISTRY.json`
+  3. `registries/TRANSFORM_REGISTRY_V2_PROPOSAL.json` — validated transforms; v1 marked REJECTED_DO_NOT_USE
+  4. `TRANSFORM_VALIDATION_REPORT.md` + `registries/COORDINATE_BASIS_TESTS.json` — basis vector test matrix
+  5. Unreal scale_factor corrected to **0.1** (mm to cm); glTF scale **0.001** (mm to m)
+  6. `DATUM_CONSTRUCTION_STANDARD.md` — tolerances templated per formula standard
+  7. `DATUM_STATE_MODEL_PROPOSAL.md` — datum class hierarchy (DSN, SUP, FIX, KIN)
+  8. `schemas/CLAIM_REGISTRY_CORE_SCHEMA_V5_PROPOSAL.json` — supersedes v4 (oneOf value structure)
+  9. `schemas/PHYSICAL_ASSET_INTAKE_SCHEMA_V2_PROPOSAL.json` — intake with omission/error states
+  10. `VISUAL_REFERENCE_INTAKE_PROTOCOL.md` — authorized for Layer 1
+  11. `ENGINEERING_METROLOGY_INTAKE_PROTOCOL.md` — provisional for Layer 2
+  12. Readiness: **`L00_READY_FOR_VISUAL_REFERENCE_INTAKE`**
+- **Consequences:**
+  - Implementation parsers must use TRANSFORM_REGISTRY_V2 only
+  - L01 visual exterior work may begin visual intake protocol when vehicle available
+  - L02 engineering metrology remains blocked until vehicle receipt
+
+## DT-D009 — glTF asset vs Three.js scene frame separation
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Prior GLTF_RUNTIME_FRAME conflated official glTF 2.0 asset coordinates (+Y up, +Z forward, -X right / +X left) with Three.js WebGL viewing space (-Z forward).
+- **Decision:**
+  1. `GLTF_ASSET_FRAME` — official glTF 2.0 asset authoring/packaging frame (`GLTF_FRAME_CORRECTION.md`)
+  2. `THREE_SCENE_FRAME` — Three.js default viewing space (`THREE_RUNTIME_FRAME_STANDARD_PROPOSAL.md`)
+  3. `TRANSFORM_REGISTRY_V3_PROPOSAL.json` — authoritative: `TF-ISO-TO-GLTF-ASSET`, `TF-ISO-TO-THREE-SCENE`, `TF-ISO-TO-UNREAL`
+  4. `COORDINATE_BASIS_TESTS_V2.json` — active test matrix (all pass)
+  5. V2 transform registry superseded; V1 remains REJECTED
+  6. `UNIT_REGISTRY_V2_PROPOSAL.json` — UNIT-DEGC, UNIT-COULOMB, milliohm/megaohm naming
+  7. `PHYSICAL_ASSET_INTAKE_SCHEMA_V3_PROPOSAL.json` — VIN status dependencies; six DRW tire pressures
+  8. `VISUAL_REFERENCE_INTAKE_PROTOCOL_V2.md` — authorized; flexible hardware guidelines
+  9. Claim schema test fixtures under `schemas/tests/`
+  10. Readiness: **`L00_VISUAL_INTAKE_ONLY_READY`**
+- **Consequences:**
+  - Asset export must use TF-ISO-TO-GLTF-ASSET, not the old TF-ISO-TO-GLTF mapping
+  - Three.js loaders may apply TF-ISO-TO-THREE-SCENE for root placement
+  - L00 remains visual-intake-only; engineering metrology still L2-gated
+
+## DT-D010 — Regression audit: quaternion TF-FAIL-001 and runtime honesty
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Quaternion `[0.5, 0.5, 0.5, 0.5]` for TF-ISO-TO-GLTF-ASSET did not match the correct rotation matrix. Three.js world was conflated with camera presentation. Runtime tests had never been executed.
+- **Decision:**
+  1. Correct quaternion to `[-0.5, 0.5, 0.5, 0.5]` (equiv. `[0.5, -0.5, -0.5, -0.5]`) — TF-FAIL-001 CORRECTED
+  2. `TRANSFORM_REGISTRY_V4_PROPOSAL.json` — graph registry; validation_status NOT_EXECUTED
+  3. `THREE_WORLD_FRAME` identity to glTF; camera presets in `CAMERA_VIEW_PRESET_REGISTRY.json`
+  4. Verification tree: specs, known_failures, PENDING results — no fabricated passes
+  5. Modular claim schema V6 under `schemas/claim/`
+  6. Intake schema V4; unit registry V3 (SI-aligned canonical UNIT-M)
+  7. Measurement classes remain provisional targets
+  8. Readiness: **`L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY`**
+- **Consequences:**
+  - Do not claim runtime transform certification until TRANSFORM_TEST_RESULTS.json shows PASSED
+  - Do not use TRANSFORM_REGISTRY_V3 quaternions
+  - Prefer camera presets over corrective root transforms for Three.js viewing
+
+## DT-D011 — L00 specification freeze; L01 research planning authorized
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Final L00 specification refinements: clean quaternion report, dynamic camera presets, provisional test profiles, conditional VIN intake, SI base dimensions with electric current.
+- **Decision:**
+  1. L00 specification frozen at readiness `L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY`
+  2. Camera presets v1.1.0 — parametric relative to `VEHICLE_VISUAL_CENTER` / bounding radius
+  3. Unit registry V3 Core — SI bases include electric current (A); charge is derived
+  4. Intake V4 — VIN `oneOf` + evidence-bound certification fields
+  5. Claim types and value formats restored in modular schemas
+  6. L01 research dossier planning authorized; geometry production remains blocked
+  7. First L01 research track: footprint/envelope dimensional mappings before pose landmarks
+- **Consequences:**
+  - Begin `layers/L01_RESEARCH_DOSSIER_PLAN.md` track 1
+  - Do not claim runtime transform certification until tests execute
+  - Do not invent L01 dimensions
+
+## DT-D012 — L1 exterior visual reference research foundation
+
+- **Date:** 2026-07-16
+- **Status:** Accepted (superseded in phase by DT-D013)
+- **Context:** L00 architectural runtime work is frozen. Scope shifts entirely to Layer 1 visual reference research for locked Candidate C1 (2019 F-450 Chassis Cab, Regular Cab, 4x2, DRW, 145.3/60, bare cab-and-chassis).
+- **Decision:**
+  1. Land complete L1 exterior research package under `layers/L01/`
+  2. Readiness banner (initial): **`L1_EXTERIOR_RESEARCH_FOUNDATION_READY`**
+  3. Object hierarchy, draft object/landmark registries, view matrix, coverage plan, surface/wheel/glass/material dossiers, detail allocation, acceptance standard, open questions, and gap analysis are the research foundation
+  4. Evidence statuses remain DRAFT / PROVISIONAL — no brochure-to-VERIFIED promotion without archived Tier 1 sources
+  5. Front axle remains `FRONT_AXLE_ASSEMBLY` (RESEARCH_REQUIRED: monobeam vs twin-I-beam)
+  6. L01 geometry / mesh production remains **BLOCKED**
+  7. Next research: archive BBLB/fleet/T&RA sources; footprint/envelope claim extraction; resolve open questions
+- **Consequences:**
+  - Active layer moves to L01 research (not production)
+  - L00 closure remains REJECTED; runtime transform certification remains NOT_EXECUTED
+  - Do not invent missing dimensions to close gaps
+
+## DT-D013 — L1 adversarial audit; factual verification required
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Adversarial audit of L1 draft found unverified numeric claims, configuration conflicts, and an invalid PBR metalness on powdercoat. Gate cannot advance to visual-reference baseline lock.
+- **Decision:**
+  1. Status → **`L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`**
+  2. Phase → **`L1_FACTUAL_VERIFICATION_REQUIRED`**
+  3. Gate → **`L1_REQUIRES_MORE_REFERENCE_DATA`**
+  4. Accept `L1_ADVERSARIAL_SOURCE_AUDIT.md`, claim register CLM-001…015, conflict register CNF-001/002
+  5. Prefer V2 hierarchy / object registry / landmark registry / acceptance standard; capture station grid for chassis rails
+  6. Correct FRAME powdercoat metalness to **0.0** (dielectric); keep roughness provisional
+  7. Humility protocol: front axle stays `OBJ-FRONT-AXLE-ASSEMBLY` / `CONFIGURATION_UNRESOLVED` despite AUTHORITATIVE monobeam ranking until physical inspection
+  8. Reclassify hub-cap landmarks as `VISUAL_POSE_LANDMARK` (not engineering datums)
+  9. Geometry production remains **BLOCKED**
+- **Consequences:**
+  - Do not treat DOCUMENT_SUPPORTED claims as VERIFIED until hashed archives + physical cross-check
+  - Do not use V1 object/landmark registries for new work
+  - Next: factual verification track per `L1_FINAL_GAP_REPORT.md`
+
+## DT-D014 — L1 reference acquisition queue; blocked by source access
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Adversarial gaps cannot close without retrieved OEM pages and a configuration-matched physical unit. Modeling remains suspended.
+- **Decision:**
+  1. Activate `L1_REFERENCE_ACQUISITION_QUEUE.md` (document → public media → VIN → measure → controlled capture/scan)
+  2. Register proposed sources `SRC-L1-001`…`003` with `PENDING_PAGES` / provisional publication identifiers
+  3. Bind extractions `EXT-L1-101`…`105`, gap matrix `GAP-L1-001`…`004`, shot/measurement/selection checklists, public image manifest
+  4. Gate verdict: **`L1_BLOCKED_BY_SOURCE_ACCESS`** (evidence gate `L1_REQUIRES_MORE_REFERENCE_DATA` retained)
+  5. Source baseline unlock only via `L1_SOURCE_BASELINE_CLOSURE_CRITERIA.md`
+  6. Publication numbers, example listing URLs, and VIN pattern filters are acquisition targets — not verified facts
+  7. Geometry production remains **BLOCKED**
+- **Consequences:**
+  - Priority 1 is BBAS / Order Guide / Workshop Manual archive + hash + page extraction
+  - Do not commit copyrighted OEM PDFs without licensing clearance
+  - Example public URLs must be replaced before use as evidence
+
+## DT-D015 — Empirical acquisition schemas; strip placeholders
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Planning templates risked theoretical assumptions via invented publication IDs, page coordinates, and VIN folklore. Alignment needed before files/VINs enter the pipeline.
+- **Decision:**
+  1. Source registry: `exact_title` / `publication_number` / `revision_date` = **null**; `acquisition_status: NOT_ACQUIRED`; `metadata_status: UNVERIFIED`
+  2. Extraction plan uses **keywords only**; page/table/quote/values live solely in `L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json`
+  3. Bind structural measurement definitions (`front_track_measurement`, `front_overall_tire_width`, `front_wheel_center_distance`, `rear_frame_width`) + uncertainty framework
+  4. Candidate grading: GRADE-A / B / C / REJECT; VIN position rules marked `DOCUMENT_VERIFICATION_REQUIRED`
+  5. Photo standards: no “orthographic” claims; perspective minimization; ≥35 mm equiv; chessboard distortion calibration
+  6. Scan priority: cab shell first; fine castings deferred (Priority 7)
+  7. Modular closure rules: `physical_fact_closure`, `project_specification_closure`, `visual_acceptance_closure`
+  8. Gate remains **`L1_BLOCKED_BY_SOURCE_ACCESS`**; acquisition activity **`READY`**
+- **Consequences:**
+  - Do not pre-fill extraction results with expected numbers
+  - Project visual tolerances are not assumed OEM blueprint tolerances
+  - GRADE-B cab/front units remain usable without full unmodified rear frame
+
+## DT-D016 — Source Pack 01 engaged; geometry freeze still blocked
+
+- **Date:** 2026-07-16
+- **Status:** Superseded in part by DT-D017 (authenticity reset)
+- **Context:** Empirical null-metadata templates are superseded by Source Pack 01 intake: verified titles/pub numbers/revision dates, recorded SHA-256 hashes, page-level extractions, and updated structural claims.
+- **Decision:**
+  1. Milestone **`L1_SOURCE_PACK_01`** engaged via `L1_SOURCE_ARTIFACT_REGISTRY.json` + populated extraction results
+  2. Gates: **`L1_DOCUMENT_ACQUISITION_READY`** / **`L1_PUBLIC_REFERENCE_SEARCH_READY`**
+  3. Modeling baseline: **`NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`**
+  4. Claims CLM-L1-001…005 are **DOCUMENT_SUPPORTED** with **physical_asset_confirmation: PENDING**
+  5. Front axle preferred subtype: `MONOBEAM_WIDE_TRACK_NON_DRIVING` (EXT-L1-101); CNF-001 → DOCUMENT_SUPPORTED_PHYSICAL_PENDING
+  6. OEM PDFs remain **out of git**; `hash_recompute_status: NOT_RECOMPUTED_IN_THIS_ENVIRONMENT` until vault mount
+  7. Unverified optical/material inventories quarantined in `L1_UNVERIFIED_VALUES_REGISTER.json`
+  8. Geometry / mesh production remains **BLOCKED**
+- **Consequences:**
+  - Dimensional framework may cite DOCUMENT_SUPPORTED values for planning
+  - Do not freeze meshes until GRADE-A/B physical confirmation
+  - Public harvests stay NOT_EVALUATED / redistribution prohibited pending review
+
+## DT-D017 — Source Pack 01 authenticity reset to candidate templates
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Prior Source Pack 01 engagement asserted SHA-256 hashes, page coordinates, and verbatim quotes that were not computed from local file bytes. Authenticity audit requires reset.
+- **Decision:**
+  1. Verdict **`L1_SOURCE_PACK_01_NOT_VERIFIED`**; action **`RESET_TO_CANDIDATE_TEMPLATES`**
+  2. Add file manifest, page evidence manifest, extraction verification register, correction log, authenticity audit
+  3. Nullify hashes, exact metadata, page/excerpt fields; demote DOCUMENT_SUPPORTED claims
+  4. Retain candidate hunt labels as `reported_*` / analytical candidates only
+  5. Front axle / PCD may remain `GENERAL_PLATFORM_ARCHITECTURE_SUPPORTED` where public marketing supports architecture — not OEM page-verified
+  6. Defer bushing durometer / clearcoat thickness noise to L2 (`DEFERRED_TO_L2`)
+  7. Authorize parallel **Lane A** (3D asset sourcing) and **Lane B** (independent spec audit)
+  8. Modeling baseline remains **`NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`**; geometry **BLOCKED**
+- **Consequences:**
+  - Do not restore DOCUMENT_SUPPORTED without file_exists + executed hash + page evidence
+  - Lane A/B must not invent OEM page citations
+  - DT-D016 engagement artifacts are superseded where they conflict with this reset
+
+## DT-D018 — EDTS Research Protocol activated; Teams A–D parallel execution
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Need a single runtime core for research taxonomy, evidence levels, candidate promotion, confidence scoring, and parallel work without inventing precision.
+- **Decision:**
+  1. Activate **`EDTS_RESEARCH_PROTOCOL.md` v1.0.0** as binding master research protocol
+  2. Taxonomy required: Evidence / Probability / Assumption / Placeholder / Inference
+  3. Hard Rules 1–10 enforced; AGENTS.md read-order updated to protocol first
+  4. Weighted confidence engine in `L1_PARAMETER_VERIFICATION_DATABASE.json` (unverified sources weight 0)
+  5. Register Level D visual sources SRC-L1-004/005 as VERIFIED_ACTIVE for architecture only
+  6. Teams A–D active per `L1_PARALLEL_TEAMS.md`; ASSET-00031 Grade B under Efficiency Principle
+  7. Team C provisional adapt allowed only under Placeholder/Probability labels
+  8. Geometry freeze remains **`NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`**
+  9. Do not use calendar-day effort claims in efficiency docs — use subsystem keep/discard/build effort classes
+- **Consequences:**
+  - front_axle_layout confidence 55% (Level D active); rear_frame_rail_width confidence 0% until BBAS PDF verifies
+  - Multi-source assembly is the intended twin construction model
+  - From-scratch cab rebuild is disfavored while Grade B assets are available and licensed
+  - **Superseded in part by DT-D019** for confidence % and vehicle-centric framing
+
+## DT-D019 — EDTS-OS v3: Component First, Evidence Graph, Component Passports
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Version 2 engineering-process framing compiled vehicles as isolated models and mixed authority with confidence percentages. Need an operating-system architecture centered on reusable components and decoupled evidence processing.
+- **Decision:**
+  1. Activate **EDTS-OS v3** via `EDTS_OS.md`; elevate **Hard Rule 0 — Component First** to constitutional level
+  2. Bump `EDTS_RESEARCH_PROTOCOL.md` to **v2.0.0**
+  3. **Deprecate confidence percentages** for all new work
+  4. Decouple **Evidence Tier (A–F)** from **Verification Status** (expanded lifecycle: DISCOVERED → … → FROZEN)
+  5. Adopt bidirectional **Evidence Graph** (`layers/L01/L1_EVIDENCE_GRAPH.json`) as Hard Rule 5 machine form
+  6. Adopt **Component Passports** under `components/` and ephemeral vehicle configs under `configurations/`
+  7. Populate operational graph in `OPERATIONAL_HONEST` mode — OEM edges remain `AWAITING_FILE` until PDFs exist; illustrative NORMALIZED page-quote examples are templates only
+  8. Door passport `CMP-SD-044-L` starts `DRAFT_CANDIDATE` (not FROZEN); hinge axes null until calibrated
+  9. Teams A–D retargeted to passport + graph lifecycle stages; Team D must not claim runtime engine completed without loader + tests
+  10. Geometry freeze remains **`NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`**
+- **Consequences:**
+  - Parameter queries traverse Evidence Graph relationships (SUPPORTS / CONTRADICTS / NEUTRAL)
+  - `L1_PARAMETER_VERIFICATION_DATABASE.json` becomes legacy bridge with deprecated confidence fields
+  - Cross-platform reuse (E-450, Transit) planned via configurator, not monolithic forks
+  - Source Pack 01 authenticity reset (DT-D017) remains in force — no fabricated page evidence
+
+## DT-D020 — EDTS-OS Architecture Blueprint + Identity/Version Master Schema
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Inflection from project (model one F-450) to platform (engine that produces twins). Need Engine vs Data separation, 6-phase roadmap, and first master schema focus on identity + versioning.
+- **Decision:**
+  1. Activate **`EDTS_OS_ARCHITECTURE_BLUEPRINT.md` v1.0.0** — Universal Platform Subsystems vs Vehicle-Specific Datasets
+  2. Activate **`EDTS_OS_IMPLEMENTATION_ROADMAP.md`** phases P1–P6 with honest status (P1/P2 SEEDED, P4 IN_PROGRESS, P3/P5/P6 PLANNED)
+  3. Proceed with **master schema first** on `USS-IDENTITY` + `USS-VERSION` (`schemas/edts-os-platform-master.schema.json`, `schemas/component-identity.schema.json`)
+  4. Seed `registries/COMPONENT_IDENTITY_REGISTRY.json` and `registries/EDTS_OS_PLATFORM_INSTANCE.json`
+  5. Remap frame stub: **`CMP-FR-145` → deprecated alias of `CMP-SD-FRAME-001`** with variant pin `VAR-145_3-WB-60-CA`
+  6. F-450 remains an **assembly configuration**, not a monolithic model authority
+  7. Do not mark Asset Pipeline / Validation / Conversion subsystems COMPLETE without schemas + evidence
+- **Consequences:**
+  - New passports require registry allocation before file creation
+  - Version bumps require evidence pins; metadata-only edits use correction log
+  - Research focus includes universal subsystem catalog (identity, versioning, QA, API)
+  - Geometry freeze still blocked; Source Pack 01 still NOT_VERIFIED
+
+## DT-D021 — EDTS Kernel vertical slice (F-450 FL door)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Pivot from speculative OS breadth to Minimum Viable EDTS Kernel — composable schemas validated on one real component.
+- **Decision:**
+  1. Activate **`kernel/EDTS_KERNEL_SCOPE.md`** — status `EDTS_KERNEL_VERTICAL_SLICE_READY`
+  2. Adopt six composable kernel schemas + passport minimum under `schemas/kernel/`
+  3. Primary test subject: **`CMP-FORD-SD-DOOR-FL-001`** (alias from `CMP-SD-044-L`)
+  4. Seed instances under `kernel/instances/f450_door_fl/`
+  5. **First evidence link = `EVL-00001`** → `SRC-ASSET-00031` / `SUPPORTS_GEOMETRY` / `CANDIDATE` (not BBAS)
+  6. BBAS link `EVL-00002` is a secondary `AWAITING_FILE` stub only
+  7. Defer telemetry, EV conversion, fleet APIs, multi-year lookup engines (`KERNEL_DEFERRED_FEATURES.md`)
+  8. Acceptance T01–T05 define slice completeness; T03–T05 remain `NOT_EXECUTED` until runtime/mesh
+- **Consequences:**
+  - Kernel schemas are the near-term validation spine; OS blueprint remains long-range
+  - Visually reusable / dimensionally inaccurate assets stay `PROVISIONAL_VISUAL` (KQ-001)
+  - No ENGINEERING_VERIFIED door without KQ-002 threshold
+  - Geometry freeze still blocked
+
+## DT-D022 — Exact-vehicle isolation kernel revision
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Prior kernel incorrectly applied `model_year_range` 2017–2019 and platform-family applicability to the door. Violates exact-vehicle isolation.
+- **Decision:**
+  1. Enforce **Exact Vehicle Isolation Standard** (every year/model/cab/drivetrain/WB/CA distinct; no automatic inheritance)
+  2. Replace proposal schemas with Draft **2020-12** universal `schemas/*.schema.json` (no OEM assumptions)
+  3. Store populated records only under `examples/2019_f450/`
+  4. Canonical door = **`CMPINST-VEH000001-DOOR-FL`** bound to **`VEH-000001`** + **`CFG-000001`**
+  5. Exact vehicle = 2019 Ford F-450 Chassis Cab Regular Cab 4x2 DRW 145.3/60 only
+  6. Reusable definitions remain empty/`NOT_EVALUATED` until proven; cross-vehicle comparisons live outside exact records
+  7. Interaction = `VISUAL_PREVIEW_ONLY`; disassembly `NOT_VERIFIED`; runtime `NOT_EXECUTED`
+  8. No evidence links to non-existent source IDs (`evidence_link_ids: []`)
+  9. Supersede `kernel/instances/f450_door_fl` and `schemas/kernel/*PROPOSAL*`
+- **Consequences:**
+  - Phase `EDTS_EXACT_VEHICLE_KERNEL_READY`
+  - Prior `CMP-FORD-SD-DOOR-FL-001` / year-range applicability must not be extended
+
+## DT-D023 — Constitutional Exact Vehicle Isolation (universal kernel law)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Exact-vehicle isolation must be a core architectural law for every OEM and configuration, not a Ford/2019 coding preference.
+- **Decision:**
+  1. Elevate **HR-EVI** (`documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md`) to constitutional status beside Hard Rule 0
+  2. **Similarity is never evidence**; cross-vehicle comparison allowed; inheritance prohibited
+  3. Kernel remains OEM-agnostic; vehicle data only under `examples/<manufacturer>/<exact_configuration>/`
+  4. Relocate seed dataset to `examples/ford/2019_f450_regularcab_4x2_drw/`
+  5. Add empty scaffolds for Tesla / Toyota / Chevrolet to prove kernel immutability
+  6. Add configuration / evidence / component-instance architecture docs + `KERNEL_VALIDATION_RULES.md`
+  7. Add negative isolation suite `verification/isolation/run_isolation_tests.py` (must pass)
+  8. Clarify Hard Rule 0: reusable definitions exist, but binding is never automatic
+  9. Protocol → v2.1.0; EDTS-OS → v3.1.0
+- **Consequences:**
+  - Phase `EDTS_UNIVERSAL_EXACT_VEHICLE_KERNEL_READY`
+  - Isolation suite is a gate for kernel readiness claims
+  - Scales from any passenger car to any commercial EV without kernel forks
+
+## DT-D024 — EDTS Kernel v1.0.0-rc1
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Package Exact-Vehicle Isolation as Kernel release candidate with immutable IDs, URN schema identities, and configuration fingerprinting.
+- **Decision:**
+  1. Stamp kernel **`1.0.0-rc1`** (`KERNEL_MANIFEST.json`)
+  2. Schema `$id` = `urn:edts:schema:<name>:v1` (Draft 2020-12)
+  3. Adopt **`EDTS_CFG_FINGERPRINT_SHA256_V1`** for exact configuration identity
+  4. Seed silo remains `examples/ford/2019_f450_regularcab_4x2_drw/` (`VEH-000001` / `CFG-000001` / `CMPINST-VEH000001-DOOR-FL`)
+  5. Example records carry `urn:edts:example:*` `$id`s
+  6. Acceptance Tests V2 Isolation/Integrity/Visualization/Interaction + fingerprint check
+  7. Phase status **`EDTS_EXACT_VEHICLE_KERNEL_READY`**
+- **Consequences:**
+  - Multi-year applicability remains prohibited
+  - Cross-vehicle data only via decoupled comparison records
+  - Isolation suite remains a readiness gate
+
+## DT-D025 — Kernel v1.0.0-rc1 validation package (RFC8785 fingerprint + Instance Resolver)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Finalize rc1 schemas/examples and define fingerprint + runtime isolation standards; runtime resolver tests not yet executed.
+- **Decision:**
+  1. Adopt entity/definition ID patterns (`VEH|ASMDEF|CMPDEF`, `CMPINST`, `CFG`)
+  2. Canonical seed path `examples/2019_f450/` with 7 examples
+  3. Fingerprint via RFC 8785–style canonical JSON, mm lengths, uppercase text, `sha256:` digest
+  4. Runtime lookups must use `getComponent(vehicle_instance_id, configuration_id, component_instance_id)`; canonical_name lookup forbidden
+  5. Record runtime tests as `NOT_EXECUTED` in `KERNEL_TEST_RESULTS.json`
+  6. Phase = **`EDTS_EXACT_VEHICLE_KERNEL_VALIDATION_PENDING`** until KRN-ISO-001..003 execute
+- **Consequences:**
+  - Structural suite may pass while overall validation remains pending
+  - No claim of runtime isolation enforcement until harness exists
+
+## DT-D026 — Executable kernel validation (v1.0.0-rc1)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Replace summary-based readiness with executed validation artifacts.
+- **Decision:**
+  1. Record initial file audit before corrections
+  2. Revise fingerprint to JCS (RFC 8785) + whitelist + UNKNOWN preservation; prohibit abbreviated digests
+  3. Execute fingerprint, Draft 2020-12 schema, isolation, and referential-integrity suites
+  4. Write results under `verification/results/`
+  5. Set final status only from executed outcomes
+- **Consequences:**
+  - Final status after execution: see `verification/results/KERNEL_VALIDATION_REPORT.md`
+
+## DT-D027 — Component-First Acquisition (integrate; reject redundant pack)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Proposal offered Component-First Acquisition Principle plus seven L1 acquisition files (search log, candidate DB, door/cab shortlists, exact-vs-related register, gaps, next actions). Kernel is under `SCHEMA_FREEZE_FOR_VERTICAL_SLICE`; ASSET-00031 is `CANDIDATE_NOT_ACQUIRED`.
+- **Decision:**
+  1. **Accept** the principle as a Hard Rule 0 corollary in `EDTS_RESEARCH_PROTOCOL.md` v2.1.1 and `EDTS_OS.md` — research proceeds per component; assemblies are built from verified component records, not inherited from one marketplace model.
+  2. **Reject** the seven proposed files as redundant with existing homes (Lane A catalog, RESEARCH_LOG, per-asset eval/audit, HR-EVI + cross-vehicle-comparison, gap matrix, acquisition queue, STATUS).
+  3. **Create** the already-designated `layers/L01/L1_LANE_A_ASSET_CATALOG.json` as the candidate register; filter by `target_component_instance_ids` instead of shortlist markdown.
+  4. **Do not admit** proposal example marketplace URLs or unverified GrabCAD discovery claims (Hard Rule 6).
+  5. **Do not expand** frozen kernel schemas for this principle.
+  6. Door vertical slice remains `F450_DOOR_FL_VERTICAL_SLICE_BLOCKED_BY_MISSING_ASSET` until real bytes + inventory exist.
+- **Consequences:**
+  - Acquisition tracking consolidates into catalog + queue Priority 1b
+  - Related-year CAD (e.g. 2017 door STEP) stays discovery-only until part-number / interface evidence reaches `CONFIGURATION_MATCHED`
+
+## DT-D028 — Kernel v1.0.0-rc1 milestone freeze (do not change kernel)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Kernel validation suites are 49/49 PASS; tag `edts-kernel-v1.0.0-rc1` and `SCHEMA_FREEZE_FOR_VERTICAL_SLICE` are already active. Door vertical slice remains blocked on missing geometry.
+- **Decision:**
+  1. Declare Kernel v1.0.0-rc1 **complete for its defined scope** (`COMPLETE_FOR_DEFINED_SCOPE`).
+  2. Policy: **`DO_NOT_CHANGE_KERNEL`** — leave tag and schema freeze intact.
+  3. Reopen only if the real geometry workflow exposes a **blocking defect**, not because a new field sounds useful.
+  4. No schema edits, fingerprint algorithm changes, or silo-structure revisions under this freeze except per allowed reopen rule.
+- **Consequences:**
+  - Work proceeds on asset acquisition and the door vertical slice outside frozen kernel schemas
+  - Proven scope recorded in `KERNEL_RELEASE_MANIFEST.json` and `KERNEL_VALIDATION_SUMMARY.md`
+
+## DT-D029 — Hard Rule 11 efficiency; passport next; defer graphs/scores
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Proposal to maximize evidence efficiency (complete-vehicle + component search), expand quality axes, first-class geometry roles, and add a Dependency Graph; message truncated at Component Passport as the next build.
+- **Decision:**
+  1. Add **Hard Rule 11 — Evidence Acquisition Efficiency**: search both complete-vehicle and component levels; evaluate exact complete assets first when they exist; fall back to component-by-component under HR-EVI. Soften any reading of Component-First Acquisition as “never search for a complete vehicle.”
+  2. **Do not** implement multi-axis scoring engines, Geometry A/B labels, expanded `asset_role` enums, or a Dependency Graph schema under `SCHEMA_FREEZE_FOR_VERTICAL_SLICE` / DT-D028.
+  3. Record those ideas as **deferred architecture** in the research protocol.
+  4. **Next build priority:** deepen Component Passport `PP-VEH000001-DOOR-FL-001` (existing schema) — ahead of OEM part-number chase alone.
+  5. Assembly-relationship predicates remain the current structural links; service-order dependency modeling waits for a post-freeze proposal.
+- **Consequences:**
+  - Protocol v2.1.2; Lane A / acquisition queue language updated
+  - Kernel tag and schemas untouched
+
+## DT-D030 — Passport v1.1 stays proposal-only; active rc1 schema untouched
+
+- **Change-control record:** [`decisions/DT-D030_COMPONENT_PASSPORT_V1_1_PROPOSAL_ONLY.json`](decisions/DT-D030_COMPONENT_PASSPORT_V1_1_PROPOSAL_ONLY.json)
+- **decision_id:** `DT-D030`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **scope:** frozen `component-passport.schema.json`; proposals-only v1.1; active door passport honesty; illustrative files under `proposals/examples/`
+- **reason:** Prevent mutation of validated rc1 while geometry is absent; keep future design non-authoritative.
+- **affected_files:** listed in the JSON record
+- **validation_evidence:** `verification/results/component-passport-rc1-validation.json`, tag `edts-kernel-v1.0.0-rc1`, schema freeze doc
+- **Summary:** Active rc1 unchanged; v1.1 proposal-only; illustrative instances must set `authority_status: ILLUSTRATIVE_ONLY` and `runtime_eligible: false`.
+
+## DT-D031 — Passport rc1 sufficient (executed validation)
+
+- **Change-control record:** [`decisions/DT-D031_COMPONENT_PASSPORT_RC1_SUFFICIENT.json`](decisions/DT-D031_COMPONENT_PASSPORT_RC1_SUFFICIENT.json)
+- **decision_id:** `DT-D031`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **scope:** rc1 passport capability for blocked door state; reject non-rc1 initial example; park v1.1
+- **reason:** Executed validation proves rc1 can represent current truth; “v1.1 required” contradicts that result.
+- **affected_files:** listed in the JSON record
+- **validation_evidence:** `verification/results/component-passport-rc1-validation.json`, `verification/results/COMPONENT_PASSPORT_EXISTING_SCHEMA_AUDIT.md`
+- **final_status:** `COMPONENT_PASSPORT_RC1_SUFFICIENT`
+
+
+## DT-D032 — Evidence Acquisition Engine (empirical sprint)
+
+- **Change-control record:** [`decisions/DT-D032_EVIDENCE_ACQUISITION_ENGINE.json`](decisions/DT-D032_EVIDENCE_ACQUISITION_ENGINE.json)
+- **decision_id:** `DT-D032`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **scope:** Evidence Acquisition Engine; door candidates CAND-00031-CGT / CAND-771-GRAB; kernel remains frozen
+- **reason:** Architecture is stable enough; bottleneck is real evidence. Build a reusable pipeline (Search→…→Runtime Ready) with METADATA stage and PROMOTED_TO_REFERENCE_ONLY, not more schemas.
+- **affected_files:** listed in the JSON record
+- **validation_evidence:** `verification/results/evidence-acquisition-engine-run.json` (both candidates `BLOCKED_BY_MISSING_SOURCE_URL` — honest)
+- **posture:** `EVIDENCE_ACQUISITION_IN_PROGRESS`
+- **passport:** not auto-updated until usable geometry exists
+
+
+## DT-D033 — EAE audit gate (spec-ready, implementation pending)
+
+- **Change-control record:** [`decisions/DT-D033_EAE_AUDIT_AND_SPEC_GATE.json`](decisions/DT-D033_EAE_AUDIT_AND_SPEC_GATE.json)
+- **decision_id:** `DT-D033`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **scope:** EAE code audit; rubric/event proposals; unacquired candidates not scored
+- **reason:** “Operational / ready to score” overclaimed relative to code. Fixture suites validate primitives; download/URL/FBX/STEP/activated scoring remain pending.
+- **validation_evidence:** `verification/results/EAE_READINESS_REPORT.md`
+- **final_status:** `EDTS_EAE_SPECIFICATION_READY_IMPLEMENTATION_PENDING`
+
+
+## DT-D034 — EAE spec refinement; CORE INGESTION first
+
+- **Change-control record:** [`decisions/DT-D034_EAE_SPEC_REFINEMENT_CORE_INGESTION.json`](decisions/DT-D034_EAE_SPEC_REFINEMENT_CORE_INGESTION.json)
+- **decision_id:** `DT-D034`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **scope:** Role-aware mesh rubric; CAD accuracy guards; parked stronger event model; CORE INGESTION as first build milestone
+- **reason:** Keep specification-vs-implementation distinction. Mesh manifold-face ratio and unguarded CAD relative-error are insufficient. Do not build the full seven-stage EAE before CORE INGESTION.
+- **accepted_state:**
+  - EAE specification `ACCEPTED`
+  - Full executable `ABSENT`
+  - Candidate scoring `NOT_EXECUTED`
+  - Rubric profiles `DRAFT`
+  - Event model `OPTIONAL_PROPOSAL`
+  - Frozen passport rc1 `UNCHANGED`
+  - Door vertical slice `BLOCKED_BY_MISSING_ASSET`
+- **next_build_priority:** `EAE_CORE_INGESTION`
+- **validation_evidence:** `verification/results/EAE_READINESS_REPORT.md`, `verification/results/eae-rubric-tests.json`
+- **final_status:** `EDTS_EAE_SPECIFICATION_READY_IMPLEMENTATION_PENDING`
+
+
+## DT-D035 — EAE CORE INGESTION v0 (validated)
+
+- **Change-control record:** [`decisions/DT-D035_EAE_CORE_INGESTION_V0.json`](decisions/DT-D035_EAE_CORE_INGESTION_V0.json)
+- **decision_id:** `DT-D035`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **scope:** Modular `eae/core` local-file ingestion; pytest suite under `tests/eae/`; no rubric activation; no remote acquisition; frozen rc1 unchanged
+- **reason:** Prove accept / type / hash / atomic manifest / idempotent registry before scoring or marketplace work.
+- **idempotency definition:** same bytes + same `ingestion_policy_version` → same asset identity + no duplicate authoritative registry entry; repeats return `ALREADY_INGESTED` with `state_mutation: false` (execution logs may still append)
+- **validation_evidence:** `verification/results/EAE_CORE_INGESTION_IMPLEMENTATION_REPORT.md`, `verification/results/eae-core-ingestion-tests.json` (27 passed)
+- **final_status:** `EDTS_EAE_CORE_INGESTION_VALIDATED`
+- **next_build_priority:** `EAE_ARCHIVE_SAFE_ACQUISITION_AND_METADATA` (not scoring)
+
+
+## DT-D036 — EAE CORE identity + quarantine hardening
+
+- **Change-control record:** [`decisions/DT-D036_EAE_CORE_IDENTITY_AND_QUARANTINE_HARDENING.json`](decisions/DT-D036_EAE_CORE_IDENTITY_AND_QUARANTINE_HARDENING.json)
+- **decision_id:** `DT-D036`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **scope:** Physical identity = full SHA-256; policy is evaluation metadata; `REGISTRY_INTEGRITY_CONFLICT`; expanded ZIP security
+- **validation_evidence:** `verification/results/EAE_CORE_INGESTION_IMPLEMENTATION_REPORT.md` (35 passed)
+- **final_status:** `EDTS_EAE_CORE_INGESTION_VALIDATED`
+
+
+## DT-D037 — Front suspension: PRIMARY_SOURCE_REQUIRED
+
+- **Change-control record:** [`decisions/DT-D037_PRIMARY_SOURCE_REQUIRED_FRONT_SUSPENSION.json`](decisions/DT-D037_PRIMARY_SOURCE_REQUIRED_FRONT_SUSPENSION.json)
+- **decision_id:** `DT-D037`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `PRIMARY_SOURCE_REQUIRED`
+- **locked_configuration:** 2019 F-450 Chassis Cab Regular Cab 4x2 DRW 145.3/60 (`VEH-000001` / `CFG-000001`)
+- **scope:** CNF-001, Q3, document candidates (now `SRC-CAND-*`), sprint RL-006
+- **reason:** No `VERIFIED_EVIDENCE` for 4x2 front suspension architecture; BBAS/service manuals not acquired; suspension geometry upload review `NOT_EXECUTED`; deciding Beam vs Twin-I-Beam now would risk 4x4 / wrong-WB contamination.
+- **decision:**
+  1. No architecture decision (Beam/Monobeam vs Twin-I-Beam)
+  2. All current assertions remain `CANDIDATE` / `RESEARCH_REQUIRED`
+  3. Retract authoritative review claim for “F-450 Suspension Geometry Research” upload
+  4. Acquire/hash primary OEM sources bound to this silo before resolution
+  5. Kernel + passport rc1 unchanged; no geometry freeze
+
+
+## DT-D038 — Hard Rule 13 + SRC-CAND + Research Confidence
+
+- **Change-control record:** [`decisions/DT-D038_HARD_RULE_13_SRC_CAND_RC.json`](decisions/DT-D038_HARD_RULE_13_SRC_CAND_RC.json)
+- **decision_id:** `DT-D038`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **protocol_version:** `2.2.0`
+- **scope:** Hard Rule 13; immutable `SRC-CAND-######`; RC hunt scores + Reasoning Log; front-suspension Next Search Queue
+- **decision:**
+  1. Discovering one source opens parallel lanes — research does not stop
+  2. IDs are immutable handles; metadata (including year/title/RC) is the object
+  3. RC 0–100 prioritizes search only; does not revive deprecated engineering confidence %
+  4. Register `SRC-CAND-000001/2/3` as `NOT_ACQUIRED`; Priority 1 = acquire BBAS
+  5. DT-D037 `PRIMARY_SOURCE_REQUIRED` remains; geometry extraction forbidden until Tier A applicability verified
+
+
+## DT-D039 — FL door: CANDIDATE_ACQUISITION_RECOMMENDED
+
+- **Change-control record:** [`decisions/DT-D039_DOOR_FL_CANDIDATE_ACQUISITION_RECOMMENDED.json`](decisions/DT-D039_DOOR_FL_CANDIDATE_ACQUISITION_RECOMMENDED.json)
+- **decision_id:** `DT-D039`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `CANDIDATE_ACQUISITION_RECOMMENDED`
+- **secondary_flags:** `PHYSICAL_VERIFICATION_REQUIRED`
+- **scope:** RL-008; `SRC-CAND-000004` / EDTS-CAND-001; `CAND-000042-EOG` / EDTS-CAND-002; CL-001; `CMPINST-VEH000001-DOOR-FL`
+- **decision:**
+  1. Acquire Outlines vector as **2D dimensional / profile reference** (not ground-truth geometry)
+  2. Acquire visual model (EOG/CGTrader) when SKU isolated — visual only
+  3. Eventually physical teardown/scan for internals
+  4. CL-001 = Hard Rule 15 `CANDIDATE` claim record
+  5. Contamination guards: 2020+ harness, cab type, mirror options
+  6. Passport geometry remains `ABSENT`; no GEO promotion; kernel/rc1 unchanged
+
+
+## DT-D040 — Hard Rule 14/15 + claim records + acquisition vocabulary
+
+- **Change-control record:** [`decisions/DT-D040_HARD_RULE_15_CLAIM_RECORDS.json`](decisions/DT-D040_HARD_RULE_15_CLAIM_RECORDS.json)
+- **decision_id:** `DT-D040`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **protocol_version:** `2.3.0`
+- **decision:**
+  1. Hard Rule 14 — vector blueprints = `2D_DIMENSIONAL_REFERENCE` / `PROFILE_REFERENCE` only
+  2. Hard Rule 15 — every major claim has a `CL-*` record with required fields
+  3. CL-001 rewritten to Hard Rule 15 shape; next steps = body repair manual, OEM drawing, physical comparison
+  4. Efficient acquire order: vector profile reference → visual model → physical teardown
+
+
+## DT-D041 — RL-010 OEM/door saturation honesty gate
+
+- **Change-control record:** [`decisions/DT-D041_OEM_DOOR_SATURATION_HONESTY_GATE.json`](decisions/DT-D041_OEM_DOOR_SATURATION_HONESTY_GATE.json)
+- **decision_id:** `DT-D041`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `CANDIDATE_ACQUISITION_RECOMMENDED`
+- **secondary_flags:** `PHYSICAL_VERIFICATION_REQUIRED`, `PRIMARY_SOURCE_REQUIRED_OEM_PDFS`
+- **scope:** RL-010; EDTS-OEM-001..005 → SRC-CAND; draft `EDTS-COMP-FL-*`; `CAND-000043-GRAB`; `CAND-000044-TS`
+- **decision:**
+  1. Demote narrative `VERIFIED_EVIDENCE` / `SPECIFICATION_READY` / `CROSS_VERIFIED` / “90% complete” — no local hashes
+  2. Register OEM hunt targets `SRC-CAND-000001/2/5/6/7` as **`NOT_ACQUIRED`**
+  3. Draft component passports = **ILLUSTRATIVE_ONLY**; kernel geometry stays **`ABSENT`**
+  4. Catalog GrabCAD shell + TurboSquid 1598273 as DISCOVERED / NOT_ACQUIRED (no invented URLs)
+  5. Evidence graph / torque / YouTube edges = ILLUSTRATIVE / NOT_CONFIRMED
+  6. Acquire order: profile reference → shell CAD (after real URL) → physical internal scan; parallel OEM PDFs
+
+
+## DT-D042 — Asset Intelligence Database (Hard Rule 16)
+
+- **Change-control record:** [`decisions/DT-D042_ASSET_INTELLIGENCE_DATABASE.json`](decisions/DT-D042_ASSET_INTELLIGENCE_DATABASE.json)
+- **decision_id:** `DT-D042`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **protocol_version:** `2.4.0`
+- **scope:** RL-011; `AID-*` passports; EDTS-CAND-001/002 direct URLs as inputs
+- **decision:**
+  1. Authorize **Asset Intelligence Database** — every internet asset gets an `AID-*` passport
+  2. Listing URLs are **acquisition inputs**, not silo answers / VERIFIED_EVIDENCE
+  3. Completeness = ordinals (not confidence %); listing-only rows use `evaluation_basis: LISTING_ONLY`
+  4. Record Outlines + CGTrader SKU URLs; related CA 108/120 IDs without inventing slugs
+  5. DT-D027 shortlist rejection stands; DT-D029 scoring-engine deferral stands
+  6. Kernel / component-passport rc1 unchanged; geometry remains `ABSENT`
+
+
+## DT-D043 — Deconstructed sourcing + supplier-first + AJR (Hard Rule 17)
+
+- **Change-control record:** [`decisions/DT-D043_DECONSTRUCTED_SUPPLIER_AJR.json`](decisions/DT-D043_DECONSTRUCTED_SUPPLIER_AJR.json)
+- **decision_id:** `DT-D043`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `CONTINUE_RESEARCH`
+- **protocol_version:** `2.5.0`
+- **scope:** RL-012; `AID-000009/10/11`; AJR-000001/000002; Tier-1 matrix
+- **decision:**
+  1. Adopt **Deconstructed Assembly Sourcing** (assembly hubs; no marketplace vehicle inheritance)
+  2. Authorize **Supplier-First Lane** hunt matrix (not verified evidence)
+  3. AID schema **1.1.0** + optional `score_claims` as RESEARCH_CLAIM only
+  4. **AJR** mandatory before purchase; AJR-000001/000002 **`NOT_CLEARED`** (missing URLs)
+  5. Demote SPECIFICATION_READY / SOURCE_VERIFIED / 0.9x narrative scores without bytes
+  6. Front axle remains `PRIMARY_SOURCE_REQUIRED`; kernel/rc1 unchanged
+

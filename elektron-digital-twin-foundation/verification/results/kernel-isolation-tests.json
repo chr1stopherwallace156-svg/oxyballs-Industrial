@@ -1,0 +1,177 @@
+{
+  "suite": "kernel-isolation-tests",
+  "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
+  "runtime": "python3",
+  "total": 15,
+  "passed": 15,
+  "failed": 0,
+  "suite_pass_or_fail": "PASS",
+  "not_executed_count": 0,
+  "results": [
+    {
+      "test_id": "ISO-POS-001",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "resolver returns door for exact IDs",
+      "actual_result": "HIT",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "verification/isolation/run_executable_isolation_tests.py"
+    },
+    {
+      "test_id": "ISO-NEG-001",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "wrong vehicle_instance_id => MISS",
+      "actual_result": "MISS",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "verification/isolation/run_executable_isolation_tests.py"
+    },
+    {
+      "test_id": "ISO-NEG-002",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "wrong configuration_id => MISS",
+      "actual_result": "MISS",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "verification/isolation/run_executable_isolation_tests.py"
+    },
+    {
+      "test_id": "ISO-NEG-003",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "canonical-name-only lookup rejected",
+      "actual_result": "lookup_type=CANONICAL_NAME_ONLY",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/verification/isolation/fixtures/invalid/invalid_canonical_name_only_lookup.json"
+    },
+    {
+      "test_id": "ISO-NEG-004",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "2018 configuration fingerprint != 2019 silo",
+      "actual_result": "sha256:1eed4a948155b5f925b1ff49faa90a408efe32eb36995ddd25c6cd0e2c083783 vs sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/verification/isolation/fixtures/invalid/invalid_year_2018_configuration.json"
+    },
+    {
+      "test_id": "ISO-NEG-005",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "F-550 fingerprint != F-450 silo",
+      "actual_result": "sha256:b78d2849fc944b1ea1665bcd7e5b366e46cd6b815d8cd803e255c63f959a9003 vs sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/verification/isolation/fixtures/invalid/invalid_model_f550_configuration.json"
+    },
+    {
+      "test_id": "ISO-NEG-006",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "4X4 fingerprint != 4X2 silo",
+      "actual_result": "sha256:c27f886e6458a1be96f8cc1c64a2ea32882f169893c2de6fc71f6bf391f1dbca vs sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/verification/isolation/fixtures/invalid/invalid_drivetrain_4x4_configuration.json"
+    },
+    {
+      "test_id": "ISO-NEG-007",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "mismatched fingerprint detected",
+      "actual_result": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/verification/isolation/fixtures/invalid/invalid_component_mismatched_fingerprint.json"
+    },
+    {
+      "test_id": "ISO-NEG-008",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "other-vehicle component not resolved into silo",
+      "actual_result": "MISS",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/verification/isolation/fixtures/invalid/invalid_component_other_vehicle.json"
+    },
+    {
+      "test_id": "ISO-NEG-009",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "cross-vehicle comparison must not live on component instance",
+      "actual_result": "HAS_INLINE_XVC",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/verification/isolation/fixtures/invalid/invalid_component_with_cross_vehicle_comparison_inline.json"
+    },
+    {
+      "test_id": "ISO-NEG-010",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "schema rejects inline cross-vehicle comparison on component",
+      "actual_result": "REJECTED",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/verification/isolation/fixtures/invalid/invalid_component_with_cross_vehicle_comparison_inline.json"
+    },
+    {
+      "test_id": "ISO-NEG-011",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "abbreviated fingerprint fails pattern",
+      "actual_result": "sha256:d84f86f3...",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/verification/isolation/fixtures/invalid/invalid_abbreviated_fingerprint.json"
+    },
+    {
+      "test_id": "ISO-NEG-012",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "malformed fingerprint fails pattern",
+      "actual_result": "sha256:not-hex",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/verification/isolation/fixtures/invalid/invalid_malformed_fingerprint.json"
+    },
+    {
+      "test_id": "ISO-NEG-013",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "fixture vehicle_instance_id incorrect relative to silo",
+      "actual_result": "VEH-OTHER",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/verification/isolation/fixtures/invalid/invalid_component_wrong_vehicle_id.json"
+    },
+    {
+      "test_id": "ISO-NEG-014",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "fixture configuration_id incorrect relative to silo",
+      "actual_result": "CFG-OTHER",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/verification/isolation/fixtures/invalid/invalid_component_wrong_configuration_id.json"
+    }
+  ]
+}

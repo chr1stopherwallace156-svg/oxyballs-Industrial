@@ -1,0 +1,18 @@
+{
+  "configuration_id": "CFG-000001",
+  "manufacturer": "Ford",
+  "model": "F-550",
+  "model_year": 2019,
+  "vehicle_type": "CHASSIS_CAB",
+  "cab_type": "REGULAR_CAB",
+  "drivetrain": "4X2",
+  "rear_wheel_configuration": "DRW",
+  "wheelbase_mm": 3690.62,
+  "cab_to_axle_mm": 1524.0,
+  "series": "UNKNOWN",
+  "configuration_fingerprint": null,
+  "fingerprint_version": 1,
+  "inheritance_status": "NONE",
+  "schema_version": "1.0.0",
+  "fingerprint_status": "NOT_COMPUTED"
+}

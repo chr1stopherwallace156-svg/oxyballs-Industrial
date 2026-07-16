@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EDTS_Physical_Asset_Intake_Record_V2",
+  "_supersedes": "schemas/PHYSICAL_ASSET_INTAKE_SCHEMA.json",
+  "type": "object",
+  "properties": {
+    "intake_record_id": { "type": "string", "pattern": "^INTK-[0-9]{5}$" },
+    "intake_timestamp": { "type": "string", "format": "date-time" },
+    "inspector_id": { "type": "string" },
+    "instrument_id": { "type": ["string", "null"] },
+    "instrument_calibration_record_id": { "type": ["string", "null"] },
+    "vehicle_identifiers": {
+      "type": "object",
+      "properties": {
+        "vin": { "type": "string", "minLength": 17, "maxLength": 17 },
+        "vin_status": { "type": "string", "enum": ["CAPTURED", "NOT_PRESENT", "ILLEGIBLE", "NOT_APPLICABLE", "PENDING"] },
+        "safety_certification_label": {
+          "type": "object",
+          "properties": {
+            "label_status": { "type": "string", "enum": ["CAPTURED", "NOT_PRESENT", "ILLEGIBLE", "NOT_APPLICABLE", "PENDING"] },
+            "gvwr_lbs": { "type": ["number", "null"] },
+            "fgawr_lbs": { "type": ["number", "null"] },
+            "rgawr_lbs": { "type": ["number", "null"] },
+            "production_date": { "type": ["string", "null"], "pattern": "^[0-9]{2}/[0-9]{2}$" },
+            "paint_code": { "type": ["string", "null"] }
+          },
+          "required": ["label_status"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["vin", "vin_status", "safety_certification_label"],
+      "additionalProperties": false
+    },
+    "measured_ride_heights": {
+      "type": "object",
+      "properties": {
+        "front_left_mm": { "type": ["number", "null"] },
+        "front_right_mm": { "type": ["number", "null"] },
+        "rear_left_mm": { "type": ["number", "null"] },
+        "rear_right_mm": { "type": ["number", "null"] }
+      },
+      "required": ["front_left_mm", "front_right_mm", "rear_left_mm", "rear_right_mm"],
+      "additionalProperties": false
+    },
+    "tire_inflation_data": {
+      "type": "object",
+      "properties": {
+        "placard_recommended_pressure_psi": { "type": "number" },
+        "as_found_measured_pressure_psi": { "type": "number" },
+        "adjusted_pressure_psi": { "type": ["number", "null"] },
+        "measurement_temperature_degc": { "type": "number" },
+        "instrument_uncertainty_psi": { "type": "number" }
+      },
+      "required": [
+        "placard_recommended_pressure_psi",
+        "as_found_measured_pressure_psi",
+        "measurement_temperature_degc",
+        "instrument_uncertainty_psi"
+      ],
+      "additionalProperties": false
+    },
+    "evidence_attachments": {
+      "type": "object",
+      "properties": {
+        "label_photo_id": { "type": ["string", "null"] },
+        "placard_photo_id": { "type": ["string", "null"] },
+        "vin_photo_id": { "type": ["string", "null"] },
+        "axle_tag_photo_id": { "type": ["string", "null"] },
+        "wheel_marking_photo_id": { "type": ["string", "null"] },
+        "tire_sidewall_photo_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "measurement_record_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "file_hash_sha256": { "type": ["string", "null"] }
+      },
+      "required": ["tire_sidewall_photo_ids", "measurement_record_ids"],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "intake_record_id",
+    "intake_timestamp",
+    "inspector_id",
+    "vehicle_identifiers",
+    "measured_ride_heights",
+    "tire_inflation_data",
+    "evidence_attachments"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,9 @@
+{
+  "candidate_id": "CAND-FORD-SM-2019",
+  "superseded_by": "SRC-CAND-000002",
+  "status": "ALIAS_ONLY",
+  "note": "Legacy label retained for audit. Authoritative record is research/src_candidates/SRC-CAND-000002.json (immutable ID).",
+  "acquisition_status": "NOT_ACQUIRED",
+  "research_sprint": "RL-007",
+  "decision": "DT-D038"
+}

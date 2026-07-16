@@ -1,0 +1,48 @@
+{
+  "$id": "urn:edts:schema:component-passport:v1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EDTS Component Passport",
+  "type": "object",
+  "required": ["$id", "component_id", "name", "current_version", "compatibility", "meta"],
+  "properties": {
+    "$id": { "type": "string" },
+    "component_id": { "type": "string" },
+    "name": { "type": "string" },
+    "current_version": { "type": "integer", "minimum": 1 },
+    "hard_rule_0": { "type": "string", "const": "COMPONENT_FIRST" },
+    "compatibility": {
+      "type": "object",
+      "properties": {
+        "platforms": { "type": "array", "items": { "type": "string" } },
+        "body_styles": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "geometry_status": { "type": "object" },
+    "materials_profile": { "type": "object" },
+    "runtime_capabilities": { "type": "object" },
+    "evidence_graph_links": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Parameter node IDs in L1_EVIDENCE_GRAPH.json"
+    },
+    "meta": {
+      "type": "object",
+      "required": ["review_status"],
+      "properties": {
+        "last_engineering_review": { "type": ["string", "null"] },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "DRAFT_CANDIDATE",
+            "IN_REVIEW",
+            "COMPONENT_VERIFIED",
+            "PRODUCTION_APPROVED",
+            "FROZEN",
+            "REJECTED"
+          ]
+        },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

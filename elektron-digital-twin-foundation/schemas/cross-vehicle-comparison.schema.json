@@ -1,0 +1,78 @@
+{
+  "title": "EDTS Cross-Vehicle Comparison",
+  "description": "Decoupled comparison only. Never inheritance.",
+  "type": "object",
+  "required": [
+    "comparison_id",
+    "left_vehicle_instance_id",
+    "right_vehicle_instance_id",
+    "comparison_status",
+    "reuse_status",
+    "schema_version"
+  ],
+  "properties": {
+    "comparison_id": {
+      "type": "string",
+      "pattern": "^XVC-[A-Z0-9-]+$"
+    },
+    "left_vehicle_instance_id": {
+      "type": "string",
+      "pattern": "^VEH-[A-Z0-9-]+$"
+    },
+    "right_vehicle_instance_id": {
+      "type": "string",
+      "pattern": "^VEH-[A-Z0-9-]+$"
+    },
+    "left_component_instance_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "right_component_instance_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "similarity_notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "comparison_status": {
+      "type": "string",
+      "enum": [
+        "DISCOVERY_ONLY",
+        "IN_PROGRESS",
+        "COMPLETE",
+        "REJECTED",
+        "UNKNOWN",
+        "NOT_EVALUATED"
+      ]
+    },
+    "reuse_status": {
+      "type": "string",
+      "enum": [
+        "NOT_EVALUATED",
+        "DISALLOWED",
+        "PROVEN",
+        "REJECTED"
+      ]
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:schema:cross-vehicle-comparison:v1",
+  "additionalProperties": false
+}

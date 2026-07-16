@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "F450_Platform_General_Profile",
+  "type": "object",
+  "properties": {
+    "target_platform": { "type": "string", "const": "F-450-CHASSIS-CAB" },
+    "target_model_year": { "type": "integer", "const": 2019 },
+    "allowed_wheelbases_inches": {
+      "type": "array",
+      "items": { "type": "number", "enum": [145.3, 169.3, 193.3, 205.3] }
+    },
+    "allowed_cab_to_axle_inches": {
+      "type": "array",
+      "items": { "type": "number", "enum": [60.0, 84.0, 108.0, 120.0] }
+    },
+    "allowed_powertrains": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["6.7L_POWERSTROKE_V8_DIESEL", "6.8L_TRITON_V10_GAS"] }
+    }
+  },
+  "required": ["target_platform", "target_model_year", "allowed_wheelbases_inches", "allowed_cab_to_axle_inches", "allowed_powertrains"],
+  "additionalProperties": false
+}

@@ -1,0 +1,137 @@
+{
+  "$id": "urn:edts:os:platform-instance:v1",
+  "$schema": "../schemas/edts-os-platform-master.schema.json",
+  "platform_id": "EDTS-OS",
+  "architecture_version": "3.0.0",
+  "hard_rule_0": "COMPONENT_FIRST",
+  "confidence_percentages": "DEPRECATED",
+  "identity": {
+    "$ref_doc": "registries/COMPONENT_IDENTITY_REGISTRY.json",
+    "grammar": "CMP-{FAMILY}-{TOKEN}[-{QUALIFIER}]",
+    "pattern": "^CMP-[A-Z0-9]+-[A-Z0-9]+(-[A-Z0-9]+)?$",
+    "families": {
+      "SD": { "code": "SD", "description": "Super Duty family", "platform_agnostic": false },
+      "AXL": { "code": "AXL", "description": "Axle assemblies", "platform_agnostic": true },
+      "PBR": { "code": "PBR", "description": "Shared materials", "platform_agnostic": true },
+      "SYS": { "code": "SYS", "description": "Engine templates", "platform_agnostic": true }
+    },
+    "allocation_rules": [
+      "Allocate in COMPONENT_IDENTITY_REGISTRY before passport creation.",
+      "Aliases map deprecated IDs to canonical IDs."
+    ],
+    "aliases": {
+      "CMP-FR-145": "CMP-SD-FRAME-001"
+    }
+  },
+  "versioning": {
+    "scheme": "INTEGER_MONOTONIC",
+    "passport_field": "current_version",
+    "bump_rules": {
+      "major_content_change": "Mesh topology replacement, datum shift, or interface change increments version.",
+      "evidence_revision": "New NORMALIZED Tier A edge that changes claimed dimensions increments version.",
+      "geometry_source_change": "Changing mesh_source asset ID increments version.",
+      "metadata_only": "Notes/typo fixes do not bump; use correction log."
+    },
+    "evidence_pin_required": true,
+    "evidence_pin_shape": {
+      "parameter_node_ids": [],
+      "source_ids": [],
+      "min_verification_status": "DISCOVERED"
+    },
+    "immutable_history": true
+  },
+  "subsystems": {
+    "USS-IDENTITY": {
+      "id": "USS-IDENTITY",
+      "name": "Identity Management",
+      "implementation_status": "SCHEMA_SEEDED",
+      "schema_ref": "schemas/component-identity.schema.json",
+      "notes": "Master priority deliverable for platform research week."
+    },
+    "USS-VERSION": {
+      "id": "USS-VERSION",
+      "name": "Version Control",
+      "implementation_status": "SCHEMA_SEEDED",
+      "schema_ref": "schemas/edts-os-platform-master.schema.json#/definitions/versioningPolicy",
+      "notes": "INTEGER_MONOTONIC on passports; evidence pins required."
+    },
+    "USS-EVIDENCE": {
+      "id": "USS-EVIDENCE",
+      "name": "Evidence Management",
+      "implementation_status": "PARTIAL",
+      "schema_ref": "schemas/evidence-graph.schema.json",
+      "notes": "P1 seeded; OEM edges AWAITING_FILE."
+    },
+    "USS-COMPLIB": {
+      "id": "USS-COMPLIB",
+      "name": "Component Library Engine",
+      "implementation_status": "PARTIAL",
+      "schema_ref": "schemas/component-passport.schema.json",
+      "notes": "P2 seeded with draft passports."
+    },
+    "USS-ASSET": {
+      "id": "USS-ASSET",
+      "name": "Asset Pipeline",
+      "implementation_status": "PLANNED",
+      "schema_ref": null,
+      "notes": "P3 — Keep/Modify/Reject API not yet specified."
+    },
+    "USS-COMPAT": {
+      "id": "USS-COMPAT",
+      "name": "Compatibility Engine",
+      "implementation_status": "PLANNED",
+      "schema_ref": null,
+      "notes": "GVWR/cab/drivetrain matrices TBD."
+    },
+    "USS-SIM": {
+      "id": "USS-SIM",
+      "name": "Simulation/Conversion Engine",
+      "implementation_status": "PLANNED",
+      "schema_ref": null,
+      "notes": "P5 Removal/Replacement/Integration."
+    },
+    "USS-VALIDATE": {
+      "id": "USS-VALIDATE",
+      "name": "Validation Engine",
+      "implementation_status": "PLANNED",
+      "schema_ref": null,
+      "notes": "Watertight collision, fastener counts, centers — no fabricated pass results."
+    },
+    "USS-API": {
+      "id": "USS-API",
+      "name": "API/Integration",
+      "implementation_status": "PLANNED",
+      "schema_ref": null,
+      "notes": "Export profiles for CAD/simulation TBD."
+    }
+  },
+  "phase_progress": {
+    "P1": {
+      "status": "SEEDED",
+      "deliverable": "Evidence Graph",
+      "notes": "Operational-honest graph exists; not COMPLETE until OEM NORMALIZED edges exist."
+    },
+    "P2": {
+      "status": "SEEDED",
+      "deliverable": "Component Library + identity/version master schema",
+      "notes": "Identity registry + draft passports; not COMPLETE."
+    },
+    "P3": { "status": "PLANNED", "deliverable": "Asset Pipeline API" },
+    "P4": {
+      "status": "IN_PROGRESS",
+      "deliverable": "Software Engine (passport loader)",
+      "notes": "Team D — not completed."
+    },
+    "P5": { "status": "PLANNED", "deliverable": "Conversion System" },
+    "P6": { "status": "PLANNED", "deliverable": "EDTS Platform scaffold release" }
+  },
+  "engine_vs_data": {
+    "engine_root": "schemas/ + registries/ + EDTS_OS*.md",
+    "data_roots": [
+      "layers/L01/L1_EVIDENCE_GRAPH.json",
+      "components/",
+      "configurations/",
+      "resources/sources/"
+    ]
+  }
+}

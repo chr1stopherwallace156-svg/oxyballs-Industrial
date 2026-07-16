@@ -1,0 +1,91 @@
+{
+  "rubric_id": "CAD_ENGINEERING_RUBRIC",
+  "rubric_version": "1.1.0-draft",
+  "status": "DRAFT",
+  "activation": "NOT_ACTIVATED",
+  "notes": [
+    "Bounding-box agreement alone does not prove internal geometry correctness.",
+    "Relative error formulas require abs(nominal) > 0 and confirmed property/datum/frame/units/config/state match.",
+    "Negative scores must be clamped; missing inputs remain null / NOT_EXECUTED."
+  ],
+  "prerequisites_before_any_accuracy_score": [
+    "same_property",
+    "same_coordinate_frame",
+    "same_datum",
+    "same_units",
+    "same_configuration_id",
+    "same_physical_state_or_declared_nominal"
+  ],
+  "applicable_evidence_types": ["STEP", "IGES", "OEM_CAD"],
+  "metrics": [
+    {
+      "metric_id": "CER-000-COMPARABILITY_GATE",
+      "meaning": "Measurement is comparable to nominal (frame/datum/units/config/state)",
+      "applicable_evidence_types": ["STEP", "IGES", "OEM_CAD"],
+      "required_inputs": [
+        "same_property",
+        "same_coordinate_frame",
+        "same_datum",
+        "same_units",
+        "same_configuration_id",
+        "physical_state_declared"
+      ],
+      "formula": "1.0 if all prerequisite flags true else null",
+      "formula_id": "COMPARABILITY_GATE",
+      "units": "ratio_0_1",
+      "weight": 0.0,
+      "missing_data_behavior": "score=null; evaluation_status=NOT_EXECUTED — blocks CER-001",
+      "pass_threshold": 1.0,
+      "fail_threshold": 0.0,
+      "evidence_requirements": ["dimension definition record", "configuration binding"]
+    },
+    {
+      "metric_id": "CER-001-TOLERANCE",
+      "meaning": "Relative error vs nominal for one confirmed property (not whole-vehicle proof)",
+      "applicable_evidence_types": ["STEP", "IGES"],
+      "required_inputs": ["measured_dim", "nominal_dim", "comparability_gate_pass"],
+      "formula": "If abs(nominal_dim)==0 → NOT_EXECUTED. Else relative_error=abs(measured_dim-nominal_dim)/abs(nominal_dim); score=max(0, 1-relative_error).",
+      "formula_id": "RELATIVE_ERROR_CLAMPED",
+      "units": "ratio_0_1",
+      "weight": 0.6,
+      "missing_data_behavior": "score=null; evaluation_status=NOT_EXECUTED (requires OEM/source registry match and comparability gate)",
+      "pass_threshold": 0.8,
+      "fail_threshold": 0.4,
+      "evidence_requirements": ["OEM_Service_Manual_Specs or verified nominal", "parsed_cad_geometry measurement of same property"],
+      "guards": [
+        "reject Spec_Dim/nominal_dim == 0",
+        "clamp score to >= 0",
+        "forbid using a single bounding-box dimension as overall accuracy proof",
+        "forbid mixing loaded physical dimensions with nominal design without state declaration"
+      ]
+    },
+    {
+      "metric_id": "CER-002-ASSEMBLY_COMPLETENESS",
+      "meaning": "Fraction of required engineering subcomponents present in inventory",
+      "applicable_evidence_types": ["STEP"],
+      "required_inputs": ["completeness_ratio"],
+      "formula": "identity completeness_ratio",
+      "formula_id": "IDENTITY_FLOAT",
+      "units": "ratio_0_1",
+      "weight": 0.25,
+      "missing_data_behavior": "score=null; evaluation_status=NOT_EXECUTED",
+      "pass_threshold": 0.7,
+      "fail_threshold": 0.3,
+      "evidence_requirements": ["required BOM list", "parsed CAD node inventory"]
+    },
+    {
+      "metric_id": "CER-003-PROVENANCE",
+      "meaning": "Source authority class for engineering CAD",
+      "applicable_evidence_types": ["STEP", "OEM_CAD"],
+      "required_inputs": ["provenance_score"],
+      "formula": "identity",
+      "formula_id": "IDENTITY_FLOAT",
+      "units": "ratio_0_1",
+      "weight": 0.15,
+      "missing_data_behavior": "score=null; evaluation_status=NOT_EXECUTED",
+      "pass_threshold": 0.6,
+      "fail_threshold": 0.2,
+      "evidence_requirements": ["license/provenance record"]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "rubric_id": "SCAN_REFERENCE_RUBRIC",
+  "rubric_version": "1.0.0-proposal",
+  "status": "PROPOSAL_NOT_ACTIVATED",
+  "applicable_evidence_types": ["SCAN", "LIDAR", "PHOTOGRAMMETRY"],
+  "activation": "EMPIRICAL_TRIGGER_REQUIRED",
+  "metrics": [
+    {
+      "metric_id": "SCAN_COVERAGE",
+      "meaning": "Fraction of target surface covered",
+      "applicable_evidence_types": ["SCAN", "LIDAR", "PHOTOGRAMMETRY"],
+      "required_inputs": ["coverage_ratio"],
+      "formula": "identity",
+      "formula_id": "IDENTITY_FLOAT",
+      "units": "ratio_0_1",
+      "weight": 0.4,
+      "missing_data_behavior": "score=null; scoring_status=NOT_EXECUTED",
+      "pass_threshold": 0.8,
+      "fail_threshold": 0.4,
+      "evidence_requirements": ["coverage map or operator report"]
+    },
+    {
+      "metric_id": "SCAN_NOISE",
+      "meaning": "Inverse normalized noise estimate",
+      "applicable_evidence_types": ["SCAN", "LIDAR"],
+      "required_inputs": ["noise_score"],
+      "formula": "identity noise_score in [0,1]",
+      "formula_id": "IDENTITY_FLOAT",
+      "units": "ratio_0_1",
+      "weight": 0.3,
+      "missing_data_behavior": "score=null; scoring_status=NOT_EXECUTED",
+      "pass_threshold": 0.6,
+      "fail_threshold": 0.3,
+      "evidence_requirements": ["metrology noise estimate"]
+    },
+    {
+      "metric_id": "SCAN_PROVENANCE",
+      "meaning": "Capture chain provenance",
+      "applicable_evidence_types": ["SCAN", "LIDAR", "PHOTOGRAMMETRY"],
+      "required_inputs": ["provenance_score"],
+      "formula": "identity",
+      "formula_id": "IDENTITY_FLOAT",
+      "units": "ratio_0_1",
+      "weight": 0.3,
+      "missing_data_behavior": "score=null; scoring_status=NOT_EXECUTED",
+      "pass_threshold": 0.5,
+      "fail_threshold": 0.2,
+      "evidence_requirements": ["capture log"]
+    }
+  ]
+}

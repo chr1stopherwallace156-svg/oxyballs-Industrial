@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EDTS_Physical_Asset_Intake_Record_V4",
+  "_supersedes": "schemas/PHYSICAL_ASSET_INTAKE_SCHEMA_V3_PROPOSAL.json",
+  "type": "object",
+  "properties": {
+    "intake_record_id": { "type": "string", "pattern": "^INTK-[0-9]{5}$" },
+    "capture_timestamp": { "type": "string", "format": "date-time" },
+    "vin_status": {
+      "type": "string",
+      "enum": ["CAPTURED", "NOT_PRESENT", "ILLEGIBLE", "PENDING"]
+    },
+    "vin": {
+      "type": ["string", "null"]
+    },
+    "certification_label_data": {
+      "type": "object",
+      "properties": {
+        "gvwr_lbs": { "$ref": "#/definitions/evidence_bound_integer" },
+        "fgawr_lbs": { "$ref": "#/definitions/evidence_bound_integer" },
+        "rgawr_lbs": { "$ref": "#/definitions/evidence_bound_integer" },
+        "production_date": { "$ref": "#/definitions/evidence_bound_string" },
+        "paint_code": { "$ref": "#/definitions/evidence_bound_string" },
+        "tire_placard_data": { "$ref": "#/definitions/evidence_bound_string" },
+        "axle_tag": { "$ref": "#/definitions/evidence_bound_string" },
+        "spring_code": { "$ref": "#/definitions/evidence_bound_string" },
+        "wheel_markings": { "$ref": "#/definitions/evidence_bound_string" },
+        "tire_sidewall_details": { "$ref": "#/definitions/evidence_bound_string" }
+      },
+      "additionalProperties": false
+    },
+    "tire_pressure_data": {
+      "type": "object",
+      "properties": {
+        "measuring_instrument_id": { "type": "string" },
+        "instrument_calibration_date": { "type": "string", "format": "date-time" },
+        "instrument_uncertainty_psi": { "type": "number" },
+        "ambient_temperature_degc": { "type": "number" },
+        "positions": {
+          "type": "object",
+          "properties": {
+            "front_left": { "$ref": "#/definitions/tire_state_detailed" },
+            "front_right": { "$ref": "#/definitions/tire_state_detailed" },
+            "rear_left_outer": { "$ref": "#/definitions/tire_state_detailed" },
+            "rear_left_inner": { "$ref": "#/definitions/tire_state_detailed" },
+            "rear_right_inner": { "$ref": "#/definitions/tire_state_detailed" },
+            "rear_right_outer": { "$ref": "#/definitions/tire_state_detailed" }
+          },
+          "required": ["front_left", "front_right", "rear_left_outer", "rear_left_inner", "rear_right_inner", "rear_right_outer"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["measuring_instrument_id", "positions"],
+      "additionalProperties": false
+    },
+    "ride_heights_mm": {
+      "type": "object",
+      "properties": {
+        "front_left": { "type": "number" },
+        "front_right": { "type": "number" },
+        "rear_left": { "type": "number" },
+        "rear_right": { "type": "number" }
+      },
+      "required": ["front_left", "front_right", "rear_left", "rear_right"],
+      "additionalProperties": false
+    },
+    "evidence_attachments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "attachment_id": { "type": "string" },
+          "type": { "type": "string", "enum": ["PHOTO", "LABEL_SCAN", "CALIBRATION_CERT"] },
+          "file_path": { "type": "string" }
+        },
+        "required": ["attachment_id", "type", "file_path"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["intake_record_id", "capture_timestamp", "vin_status", "tire_pressure_data", "ride_heights_mm", "evidence_attachments"],
+  "oneOf": [
+    {
+      "properties": {
+        "vin_status": { "const": "CAPTURED" },
+        "vin": { "type": "string", "minLength": 17, "maxLength": 17 }
+      }
+    },
+    {
+      "properties": {
+        "vin_status": { "enum": ["NOT_PRESENT", "ILLEGIBLE", "PENDING"] },
+        "vin": { "type": "null" }
+      }
+    }
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "evidence_bound_integer": {
+      "type": "object",
+      "properties": {
+        "value": { "type": "integer" },
+        "evidence_attachment_id": { "type": "string" },
+        "capture_status": { "type": "string", "enum": ["CAPTURED", "NOT_PRESENT", "ILLEGIBLE"] }
+      },
+      "required": ["capture_status"],
+      "additionalProperties": false
+    },
+    "evidence_bound_string": {
+      "type": "object",
+      "properties": {
+        "value": { "type": "string" },
+        "evidence_attachment_id": { "type": "string" },
+        "capture_status": { "type": "string", "enum": ["CAPTURED", "NOT_PRESENT", "ILLEGIBLE"] }
+      },
+      "required": ["capture_status"],
+      "additionalProperties": false
+    },
+    "tire_state_detailed": {
+      "type": "object",
+      "properties": {
+        "placard_recommended_psi": { "type": "number" },
+        "as_found_measured_psi": { "type": "number" },
+        "adjusted_pressure_psi": { "type": ["number", "null"] }
+      },
+      "required": ["placard_recommended_psi", "as_found_measured_psi"],
+      "additionalProperties": false
+    }
+  }
+}

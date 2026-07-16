@@ -1,0 +1,11 @@
+{
+  "_comment": "NEGATIVE FIXTURE ONLY — must never be copied into examples/. Used by isolation tests to prove year-range applicability is illicit.",
+  "component_instance_id": "ILLICIT-DO-NOT-USE",
+  "vehicle_instance_id": "VEH-000001",
+  "configuration_id": "CFG-000001",
+  "slot": "DOOR_FRONT_LEFT",
+  "model_year_range": { "from": 2017, "to": 2019 },
+  "platform_family": "Super Duty",
+  "lifecycle_status": "DISCOVERED",
+  "schema_version": "1.0.0"
+}

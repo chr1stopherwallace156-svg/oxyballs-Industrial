@@ -1,0 +1,39 @@
+[
+  {
+    "claim_id": "CHASSIS-001-HIST",
+    "claim_type": "PERFORMANCE",
+    "subject_entity_id": "ford_f450_powertrain_6.7l_diesel",
+    "property_id": "engine_output",
+    "schema_version": "4.0.0",
+    "metadata": {
+      "recorded_at": "2026-07-16T09:00:00Z",
+      "asserted_at": "2026-07-16T07:00:00Z",
+      "effective_from": null,
+      "effective_until": "2026-07-16T09:00:00Z",
+      "supersedes_claim_id": null,
+      "review_status": "CONFIGURATION_INAPPLICABLE",
+      "reviewed_by": "L00_ADVERSARIAL_AUDIT",
+      "intended_use": "historical_record_only"
+    },
+    "provenance": {
+      "source_locator": "Class 3 F-450 pickup specification (incorrectly applied to chassis cab)",
+      "verification_method": "UNVERIFIED",
+      "source_hash": null
+    },
+    "claim_value": {
+      "value_structure": "SCALAR",
+      "source_value": "450 hp / 935 lb-ft",
+      "source_unit_id": "UNIT-HP",
+      "canonical_unit_id": "UNIT-HP"
+    },
+    "value_details": {
+      "scalar_value": 450.0,
+      "enum_value": "Class 3 pickup rating — not applicable to F-450 chassis cab vocational calibration"
+    },
+    "applicability_note": {
+      "valid_platforms": ["F-450-PICKUP-CLASS-3"],
+      "invalid_platforms": ["F-450-CHASSIS-CAB"],
+      "superseded_by_claim_id": "CHASSIS-001"
+    }
+  }
+]

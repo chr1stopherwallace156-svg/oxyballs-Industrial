@@ -1,0 +1,33 @@
+{
+  "draft_passport_id": "EDTS-COMP-FL-HARNESS",
+  "authority_status": "ILLUSTRATIVE_ONLY",
+  "component_class": "Door Electrical Wire Harness",
+  "reported_oem_part_number": "HC3Z-14631-A",
+  "reported_base_manual_variants": ["HC3Z-14630-X (family claim — trim dependent)"],
+  "bound_component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "applicability_claim": "Reported 2019 Super Duty Regular Cab with power/tow mirror option — must not assume on base XL",
+  "connector_claims_unverified": [
+    "22-Pin Mirror connector (power telescoping option)",
+    "6-Pin Window regulator",
+    "8-Pin Lock switch",
+    "Speaker terminals",
+    "Main A-pillar inline pigtail / door boot"
+  ],
+  "contamination_risks": [
+    "2020+ facelift harness divergence",
+    "8-pin manual mirror vs 22-pin power telescope mismatch"
+  ],
+  "downstream_role_draft": "Spline-path / electrical routing simulation after physical scan + EWD",
+  "geometry_status": "ABSENT",
+  "project_confidence_status": "RESEARCH_REQUIRED",
+  "scan_required": true,
+  "related_src_cand": ["SRC-CAND-000006", "SRC-CAND-000007"],
+  "forbidden": [
+    "Electrical twin pinout truth without hashed EWD",
+    "Assume tow-mirror harness on every Regular Cab"
+  ],
+  "research_sprint": "RL-010",
+  "decision": "DT-D041"
+}

@@ -1,0 +1,26 @@
+{
+  "draft_passport_id": "EDTS-COMP-FL-REGULATOR",
+  "authority_status": "ILLUSTRATIVE_ONLY",
+  "component_class": "Window Regulator & Motor",
+  "reported_oem_part_number": "FL3Z-1523201-A",
+  "bound_component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "applicability_claim": "Reported F-Series Regular Cab & Crew Cab front-left power window option — VIN/option filter required",
+  "interface_claim": "6-pin electrical harness connection with integrated anti-pinch logic (reported; EWD not acquired)",
+  "downstream_role_draft": "Animation constraints for glass travel after physical/OEM verification",
+  "geometry_status": "ABSENT",
+  "project_confidence_status": "CANDIDATE",
+  "missing_structural_areas": [
+    "Motor casing internal housing",
+    "Gear mesh",
+    "Scissor / lift arms"
+  ],
+  "scan_required": true,
+  "forbidden": [
+    "Invent pinouts without SRC-CAND-000006 bytes",
+    "Promote to GEO without hashed evidence"
+  ],
+  "research_sprint": "RL-010",
+  "decision": "DT-D041"
+}

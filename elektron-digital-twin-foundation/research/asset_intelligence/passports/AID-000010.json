@@ -1,0 +1,171 @@
+{
+  "asset_id": "AID-000010",
+  "id_immutable": true,
+  "schema_version": "1.1.0",
+  "authority_status": "RESEARCH_OPERATIONAL",
+  "aliases": [
+    "AID-STEER-GEAR-03"
+  ],
+  "title": "ZF TRW TAS65 Hydraulic Steering Gearbox (catalog claim)",
+  "source": {
+    "platform": "TraceParts / ZF OEM Engineering Directory (reported)",
+    "publisher": "ZF / TRW (claimed)",
+    "url": null,
+    "url_status": "NOT_RECORDED",
+    "marketplace_id": null,
+    "access_condition": "Reported free with registration \u2014 listing URL required"
+  },
+  "vehicle": {
+    "reported_make": "Ford",
+    "reported_model": "F-Series Heavy-Duty",
+    "reported_year_range": "unspecified",
+    "reported_body": "Steering gearbox",
+    "listing_claim_summary": "TAS65 series hydraulic gearbox STEP/Parasolid with interface dimensions"
+  },
+  "configuration": {
+    "reported_cab": null,
+    "reported_ca_in": null,
+    "reported_wheelbase_in": null,
+    "reported_drivetrain": null,
+    "reported_rear_wheels": null,
+    "notes": "Confirm TAS65 + HC3Z-3504-A applicability to 2019 F-450 Chassis Cab 4x2 before match"
+  },
+  "exact_configuration_match": "UNKNOWN",
+  "match_tri_state": {
+    "value": "conditional",
+    "crossover_validation_requirements": [
+      "ZF/TRW catalog page hash proving TAS65 for locked MY/config",
+      "OEM PN HC3Z-3504-A VIN-filter confirmation",
+      "Sector-shaft spline / mounting pattern cite"
+    ]
+  },
+  "geometry_types": [
+    "STEP",
+    "PARASOLID"
+  ],
+  "completeness": {
+    "exterior": "PARTIAL",
+    "interior": "NOT_EVALUATED",
+    "mechanical": "PARTIAL",
+    "electrical": "NONE",
+    "hierarchy_quality": "NOT_EVALUATED",
+    "mesh_separation": "NOT_EVALUATED",
+    "topology_quality": "NOT_EVALUATED",
+    "evaluation_basis": "LISTING_ONLY"
+  },
+  "usefulness": {
+    "engineering": "PARTIAL",
+    "visual": "LOW"
+  },
+  "score_claims": {
+    "engineering_usefulness": {
+      "value": 0.98,
+      "status": "RESEARCH_CLAIM",
+      "basis": "Operator sprint \u2014 NOT EVALUATED"
+    },
+    "visual_usefulness": {
+      "value": 0.5,
+      "status": "RESEARCH_CLAIM",
+      "basis": "Operator sprint \u2014 NOT EVALUATED"
+    },
+    "mechanical_completeness": {
+      "value": null,
+      "status": "NOT_EXECUTED",
+      "basis": null
+    },
+    "exterior_completeness": {
+      "value": null,
+      "status": "NOT_EXECUTED",
+      "basis": null
+    },
+    "interior_completeness": {
+      "value": null,
+      "status": "NOT_EXECUTED",
+      "basis": null
+    },
+    "electrical_completeness": {
+      "value": 0.0,
+      "status": "RESEARCH_CLAIM",
+      "basis": null
+    }
+  },
+  "license": {
+    "status": "REQUIRES_COUNSEL_REVIEW",
+    "terms_summary": "OEM/catalog registration terms unknown"
+  },
+  "price": {
+    "status": "FREE_CLAIMED",
+    "amount_usd": 0.0,
+    "currency_note": "Registration required claim"
+  },
+  "lifecycle": {
+    "discovered": true,
+    "acquired": "NOT_ACQUIRED",
+    "parsed": "NOT_EXECUTED",
+    "verified": "NOT_EXECUTED"
+  },
+  "component_coverage": [
+    {
+      "target": "Steering gearbox HC3Z-3504-A",
+      "presence": "CLAIMED"
+    },
+    {
+      "target": "Pitman arm / tie rods",
+      "presence": "UNKNOWN"
+    }
+  ],
+  "component_coverage_lists": {
+    "present": [
+      "Gearbox envelope (claimed)"
+    ],
+    "missing": [
+      "Local STEP/Parasolid bytes",
+      "Hashed ZF catalog pages",
+      "Linkage CAD"
+    ]
+  },
+  "known_deficiencies": [
+    "No TraceParts/ZF URL recorded",
+    "CONFIGURATION_EVALUATED narrative rejected without local catalog proof",
+    "Supplier MY change risk on spline/mount tolerances"
+  ],
+  "evidence_links": [
+    {
+      "kind": "AJR",
+      "ref": "research/asset_intelligence/ajr/AJR-000002.json"
+    },
+    {
+      "kind": "SPRINT",
+      "ref": "research/sprints/RL-012_DECONSTRUCTED_SUPPLIER_SOURCING.md"
+    },
+    {
+      "kind": "ASSEMBLY_HUB",
+      "ref": "STEERING"
+    }
+  ],
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "related_asset_ids": [],
+  "maps_to_src_cand": null,
+  "maps_to_candidate_asset_id": null,
+  "supplier_hub": {
+    "supplier_name": "ZF / TRW",
+    "supplier_component_id": "TAS65 Series Hydraulic Gearbox",
+    "reported_oem_part_number": "HC3Z-3504-A",
+    "documentation_types_hunt": [
+      "Fluid pressure profiles",
+      "Sector-shaft spline configurations",
+      "Mounting bolt patterns"
+    ],
+    "lane": "LANE_SUPPLIER"
+  },
+  "assembly_hub": "STEERING",
+  "ajr_id": "AJR-000002",
+  "edts_role": "SUPPLIER_CAD_CANDIDATE",
+  "research_sprint": "RL-012",
+  "decision": "DT-D043",
+  "notes": [
+    "Pending AJR \u2014 purchase not cleared."
+  ]
+}

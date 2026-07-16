@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:schema:component-passport:v1.1-proposal",
+  "title": "EDTS Component Passport v1.1 (OPTIONAL FUTURE PROPOSAL — NOT ACTIVE)",
+  "description": "COMPLETE restatement draft for future inspection only. NOT activated. Do not use allOf against rc1 while additionalProperties:false — that rejects new properties. EMPIRICAL_TRIGGER_REQUIRED before any activation. Does not replace schemas/component-passport.schema.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "passport_id",
+    "component_instance_id",
+    "vehicle_instance_id",
+    "configuration_id",
+    "status_summary",
+    "links",
+    "schema_version",
+    "proposal_status",
+    "authority_status",
+    "runtime_eligible"
+  ],
+  "properties": {
+    "authority_status": {
+      "type": "string",
+      "const": "ILLUSTRATIVE_ONLY",
+      "description": "Proposal examples under proposals/examples/ are never authoritative silo records."
+    },
+    "runtime_eligible": {
+      "type": "boolean",
+      "const": false,
+      "description": "Must remain false while this schema is OPTIONAL_FUTURE_PROPOSAL."
+    },
+    "proposal_status": {
+      "type": "string",
+      "const": "OPTIONAL_FUTURE_PROPOSAL"
+    },
+    "passport_id": {
+      "type": "string",
+      "pattern": "^PP-[A-Z0-9-]+$"
+    },
+    "component_instance_id": {
+      "type": "string",
+      "pattern": "^CMPINST-[A-Z0-9-]+$"
+    },
+    "vehicle_instance_id": {
+      "type": "string",
+      "pattern": "^VEH-[A-Z0-9-]+$"
+    },
+    "configuration_id": {
+      "type": "string",
+      "pattern": "^CFG-[A-Z0-9-]+$"
+    },
+    "configuration_fingerprint": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      ]
+    },
+    "reusable_definition_id": {
+      "type": ["string", "null"]
+    },
+    "status_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence", "geometry", "interaction"],
+      "properties": {
+        "evidence": {
+          "type": "string",
+          "enum": [
+            "ABSENT",
+            "CANDIDATE",
+            "AWAITING_FILE",
+            "NORMALIZED",
+            "VERIFIED",
+            "UNKNOWN",
+            "NOT_EVALUATED",
+            "REQUIRES_EVIDENCE"
+          ]
+        },
+        "geometry": {
+          "type": "string",
+          "enum": [
+            "ABSENT",
+            "PROVISIONAL",
+            "DIMENSIONAL_CANDIDATE",
+            "ENGINEERING_VERIFIED",
+            "UNKNOWN",
+            "NOT_EVALUATED"
+          ]
+        },
+        "interaction": {
+          "type": "string",
+          "enum": [
+            "ABSENT",
+            "PROTOTYPE",
+            "VISUAL_PREVIEW_ONLY",
+            "CALIBRATED",
+            "ENGINEERING_VERIFIED",
+            "UNKNOWN",
+            "NOT_EVALUATED"
+          ]
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_link_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "geometry_asset_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "relationship_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "interaction_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "connection_relationship_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "procedure_dependency_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "geometry_roles": {
+      "type": "array",
+      "description": "Future only. Empty until real geometry proves need. Never invent COLLISION/LOD roles without assets.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["geometry_asset_id", "role", "role_status"],
+        "properties": {
+          "geometry_asset_id": { "type": "string" },
+          "role": {
+            "type": "string",
+            "enum": [
+              "VISUAL_EXTERIOR",
+              "ENGINEERING_REFERENCE",
+              "COLLISION",
+              "LOD0",
+              "LOD1",
+              "LOD2",
+              "AR_OPTIMIZED",
+              "SCAN_REFERENCE"
+            ]
+          },
+          "role_status": {
+            "type": "string",
+            "enum": ["NOT_EVALUATED", "PROVISIONAL", "VALIDATED", "REJECTED"]
+          },
+          "validation_result_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "quality_assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "score": { "type": ["number", "null"] },
+        "scoring_status": {
+          "type": "string",
+          "enum": ["NOT_EVALUATED", "IN_PROGRESS", "EVALUATED", "REJECTED"]
+        },
+        "rubric_version": { "type": ["string", "null"] },
+        "score_inputs": { "type": ["object", "null"] }
+      }
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.1.0-proposal"
+    },
+    "notes": {
+      "type": ["string", "null"]
+    },
+    "composition_notes": {
+      "type": "string",
+      "description": "Documentation field for proposal consumers.",
+      "const": "Do not compose via allOf against rc1 additionalProperties:false. This file is a complete restatement draft."
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "applicability_id": "APP-00001",
+  "entity_id": "CMP-FORD-SD-DOOR-FL-001",
+  "make": "Ford",
+  "platform_family": "Super Duty",
+  "model_year_range": { "from": 2017, "to": 2019 },
+  "cab_styles": ["REGULAR_CAB"],
+  "verification_status": "CANDIDATE",
+  "evidence_links": ["EVL-00001"],
+  "notes": "Narrowed to Regular Cab for vertical slice; broader cab styles remain OS-level candidates on legacy passport."
+}

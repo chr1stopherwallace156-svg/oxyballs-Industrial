@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:proposal:passport-current-state-projection:v1",
+  "title": "EDTS Passport Current-State Projection (PROPOSAL — NOT ACTIVE)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "proposal_status",
+    "passport_id",
+    "geometry_asset_ids",
+    "geometry_roles",
+    "active_event_ids",
+    "superseded_event_ids"
+  ],
+  "properties": {
+    "proposal_status": { "const": "PROPOSAL_NOT_ACTIVATED" },
+    "passport_id": { "type": "string" },
+    "geometry_asset_ids": { "type": "array", "items": { "type": "string" } },
+    "geometry_roles": { "type": "array", "items": { "type": "object" } },
+    "active_event_ids": { "type": "array", "items": { "type": "string" } },
+    "superseded_event_ids": { "type": "array", "items": { "type": "string" } }
+  }
+}

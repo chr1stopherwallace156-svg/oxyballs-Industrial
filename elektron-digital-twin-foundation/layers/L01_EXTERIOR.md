@@ -1,29 +1,70 @@
 # L01 — Exterior
 
-**Status:** Blocked — awaiting L00 owner approval  
-**Prerequisites:** L00 all gates pass
+**Status:** Research draft complete — protocol ACTIVE  
+**Architecture:** `EDTS_OS.md` v3 · **Research protocol:** `EDTS_RESEARCH_PROTOCOL.md` v2  
+**Milestone:** `L1_SOURCE_PACK_01` (`NOT_VERIFIED`)  
+**Document / public gates:** READY (templates)  
+**Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`  
+**Teams:** A Research · B Assets · C Geometry (provisional) · D Software  
+**Geometry / mesh freeze:** Blocked  
+**Prerequisites for freeze:** verified PDF hashes + page evidence + Rule 4 lifecycle + owner approval
 
 ## Scope
 
-Exterior body shell, doors, hood, fenders, bumpers, mirrors, glass, lighting, wheels/tires, and Tier C dimensional envelope.
+Exterior body shell, doors, hood, fenders, bumpers, mirrors, glass, lighting, wheels/tires, bare C-channel chassis presentation, and Tier C dimensional envelope for the locked Candidate C1 configuration:
+
+- 2019 Ford F-450 Chassis Cab
+- Regular Cab / 4x2 / DRW
+- 145.3 in WB / 60 in CA
+- Bare cab-and-chassis
+
+## Research package
+
+Authoritative L1 docs: [`layers/L01/`](L01/README.md)
+
+- Acquisition queue: [`L1_REFERENCE_ACQUISITION_QUEUE.md`](L01/L1_REFERENCE_ACQUISITION_QUEUE.md)
+- Source closure: [`L1_SOURCE_BASELINE_CLOSURE_CRITERIA.md`](L01/L1_SOURCE_BASELINE_CLOSURE_CRITERIA.md)
+- Adversarial audit: [`L1_ADVERSARIAL_SOURCE_AUDIT.md`](L01/L1_ADVERSARIAL_SOURCE_AUDIT.md)
+- Claim register: [`L1_CLAIM_REGISTER_PROPOSAL.json`](L01/L1_CLAIM_REGISTER_PROPOSAL.json)
+- Prefer V2 hierarchy / registries / acceptance / capture grid
+
+Planning sequence: [`L01_RESEARCH_DOSSIER_PLAN.md`](L01_RESEARCH_DOSSIER_PLAN.md)
 
 ## Deliverables
 
+### Research
+
+- [x] Exterior research plan and dossiers (draft)
+- [x] Adversarial source audit + claim/conflict registers
+- [x] V2 hierarchy, object/landmark registries, landmark classification
+- [x] Capture coverage grid + PBR metalness correction
+- [x] Visual acceptance V2 + final gap report
+- [x] EDTS Research Protocol ACTIVE + parameter verification DB + Teams A–D
+- [x] ASSET-00031 Grade B efficiency evaluation (provisional adapt prep)
+- [ ] Real SRC PDF acquisition + executed SHA-256
+- [ ] Page evidence restoration → promote Evidence Graph edges (INGESTED → NORMALIZED); confidence % deprecated
+- [ ] Physical verification on GRADE-A/B VIN
+- [ ] Geometry freeze approval
+
+### Production (blocked)
+
 - [ ] Exterior glTF assembly `L01_ROOT`
-- [ ] Material manifest
+- [ ] Material manifest (authored assets)
 - [ ] ≥5 dimension spot-checks vs OEM
-- [ ] Gate records in STATUS.json
+- [ ] Gate records promoted beyond research
 
 ## Gate checklist
 
 | Gate | Status |
 |------|--------|
-| Visual | blocked |
-| Dimensional | blocked |
-| Structural | blocked |
+| Visual | requires_more_reference_data |
+| Dimensional | factual_verification_required |
+| Structural | research_only |
 | Interaction | blocked |
-| Documentation | blocked |
+| Documentation | draft_complete |
 
 ## Notes
 
-Regular Cab F-450 DRW: wide body (~105.9 in); mirror configurations affect width — lock mirror type at L01 start.
+- Frame powdercoat metalness corrected to **0.0** (dielectric); do not use draft 0.8.
+- Front axle remains `CONFIGURATION_UNRESOLVED` despite AUTHORITATIVE monobeam ranking.
+- Hub ornaments are `VISUAL_POSE_LANDMARK` only — not engineering datums.

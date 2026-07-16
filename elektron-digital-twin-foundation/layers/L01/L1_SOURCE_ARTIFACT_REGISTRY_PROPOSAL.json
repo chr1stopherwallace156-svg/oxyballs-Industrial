@@ -1,0 +1,62 @@
+{
+  "$id": "urn:edts:schema:source-registry:v1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_SOURCE_ARTIFACT_REGISTRY_PROPOSAL",
+  "project": "2019_FORD_F450_CHASSIS_CAB_145_3",
+  "registry_status": "SUPERSEDED_BY_L1_SOURCE_ARTIFACT_REGISTRY",
+  "superseded_by": "L1_SOURCE_ARTIFACT_REGISTRY.json",
+  "notes": [
+    "SUPERSEDED by Source Pack 01 engaged registry L1_SOURCE_ARTIFACT_REGISTRY.json.",
+    "Retained as pre-acquisition null-metadata audit trail."
+  ],
+  "sources": [
+    {
+      "source_id": "SRC-L1-001",
+      "working_title": "2019 Ford Super Duty Chassis Cab Body Builder Advisory Service Documentation",
+      "exact_title": null,
+      "publication_number": null,
+      "revision_date": null,
+      "document_type": "OEM_ENGINEERING_MANUAL",
+      "local_repository_path": "research/sources/ford/SRC-L1-001/",
+      "file_present": false,
+      "content_hash_sha256": null,
+      "acquisition_status": "NOT_ACQUIRED",
+      "metadata_status": "UNVERIFIED",
+      "closes_gaps": ["GAP-L1-001", "GAP-L1-002"],
+      "extraction_plan": "L1_OEM_DOCUMENT_EXTRACTION_PLAN.md",
+      "extraction_results": "L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json"
+    },
+    {
+      "source_id": "SRC-L1-002",
+      "working_title": "2019 Ford Super Duty Order Guide (Fleet/Dealer Specifications)",
+      "exact_title": null,
+      "publication_number": null,
+      "revision_date": null,
+      "document_type": "ORDER_GUIDE",
+      "local_repository_path": "research/sources/ford/SRC-L1-002/",
+      "file_present": false,
+      "content_hash_sha256": null,
+      "acquisition_status": "NOT_ACQUIRED",
+      "metadata_status": "UNVERIFIED",
+      "closes_gaps": ["GAP-L1-002", "GAP-L1-003", "CNF-002"],
+      "extraction_plan": "L1_OEM_DOCUMENT_EXTRACTION_PLAN.md",
+      "extraction_results": "L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json"
+    },
+    {
+      "source_id": "SRC-L1-003",
+      "working_title": "Ford F-Series Workshop Manual (2017-2019 Suspension & Frame Alignment Standards)",
+      "exact_title": null,
+      "publication_number": null,
+      "revision_date": null,
+      "document_type": "SERVICE_MANUAL",
+      "local_repository_path": "research/sources/ford/SRC-L1-003/",
+      "file_present": false,
+      "content_hash_sha256": null,
+      "acquisition_status": "NOT_ACQUIRED",
+      "metadata_status": "UNVERIFIED",
+      "closes_gaps": ["GAP-L1-001", "CLM-015"],
+      "extraction_plan": "L1_OEM_DOCUMENT_EXTRACTION_PLAN.md",
+      "extraction_results": "L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json"
+    }
+  ]
+}

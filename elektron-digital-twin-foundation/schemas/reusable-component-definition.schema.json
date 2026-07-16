@@ -1,0 +1,71 @@
+{
+  "title": "EDTS Reusable Component Definition",
+  "type": "object",
+  "required": [
+    "component_definition_id",
+    "definition_status",
+    "interchangeability_status",
+    "schema_version"
+  ],
+  "properties": {
+    "component_definition_id": {
+      "type": "string",
+      "pattern": "^CMPDEF-[A-Z0-9-]+$"
+    },
+    "canonical_name": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        }
+      ]
+    },
+    "definition_status": {
+      "type": "string",
+      "enum": [
+        "EMPTY_CANDIDATE",
+        "DRAFT",
+        "ACTIVE",
+        "SUPERSEDED",
+        "DEPRECATED"
+      ]
+    },
+    "interchangeability_status": {
+      "type": "string",
+      "enum": [
+        "NOT_EVALUATED",
+        "DISCOVERY_ONLY",
+        "PROVEN",
+        "REJECTED"
+      ]
+    },
+    "proven_vehicle_instance_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cross_vehicle_comparison_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:schema:reusable-component-definition:v1",
+  "additionalProperties": false
+}

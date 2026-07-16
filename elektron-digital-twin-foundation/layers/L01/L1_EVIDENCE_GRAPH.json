@@ -1,0 +1,166 @@
+{
+  "$id": "urn:edts:schema:evidence-graph:v1",
+  "$schema": "../../../schemas/evidence-graph.schema.json",
+  "system_id": "EDTS-OS-CORE",
+  "architecture_version": "3.0.0",
+  "protocol": "EDTS_RESEARCH_PROTOCOL.md",
+  "confidence_percentages": "DEPRECATED",
+  "graph_population_mode": "OPERATIONAL_HONEST",
+  "integrity_note": "OEM Tier A edges are AWAITING_FILE until local PDF bytes exist and page evidence is recorded. Do not treat illustrative_target_structure as verified extractions. Source Pack 01 remains L1_SOURCE_PACK_01_NOT_VERIFIED.",
+  "source_id_aliases": {
+    "SRC-OEM-001": "SRC-L1-001",
+    "SRC-OEM-002": "SRC-L1-003",
+    "SRC-IMG-455": ["SRC-L1-004", "SRC-L1-005"]
+  },
+  "graph_nodes": {
+    "PAR-FW-001": {
+      "parameter_name": "front_track_width_mm",
+      "claimed_value": 1899.92,
+      "claimed_value_status": "CANDIDATE",
+      "taxonomy": "Probability",
+      "unit": "mm",
+      "claimed_value_note": "74.8 in → 1899.92 mm is a candidate conversion under historical wide-track Super Duty chassis-cab marketing/architecture. Not ENGINEERING_VERIFIED. Requires BBAS/WSM page evidence after file ingest.",
+      "target_configurations": [
+        "F450_2019_REG_CAB_145_3_WB_4X2"
+      ],
+      "relationships": [
+        {
+          "source_id": "SRC-OEM-001",
+          "source_name": "Ford BBAS Layout Book (2019 Chassis Cab) — candidate hunt label",
+          "evidence_tier": "TIER_A_AUTHORITATIVE",
+          "relationship_type": "SUPPORTS",
+          "verification_status": "AWAITING_FILE",
+          "file_exists": false,
+          "page_evidence_asserted": false,
+          "notes": "Target Tier A source. Local PDF absent (SRC-L1-001). No page number or quote may be asserted until cover + page audit."
+        },
+        {
+          "source_id": "SRC-OEM-002",
+          "source_name": "Ford Workshop Manual (Section 204-00: Suspension) — candidate hunt label",
+          "evidence_tier": "TIER_A_AUTHORITATIVE",
+          "relationship_type": "SUPPORTS",
+          "verification_status": "AWAITING_FILE",
+          "file_exists": false,
+          "page_evidence_asserted": false,
+          "notes": "Target Tier A source. Local PDF absent (SRC-L1-003). Lifecycle target: INGESTED → NORMALIZED after hash + extraction."
+        },
+        {
+          "source_id": "SRC-PUB-109",
+          "source_name": "Third-Party Spec Database (Auto-Specs class) — conflict monitor",
+          "evidence_tier": "TIER_D_SECONDARY_TECHNICAL",
+          "relationship_type": "CONTRADICTS",
+          "claimed_value_in_source": 1734.82,
+          "verification_status": "DISCOVERED",
+          "page_evidence_asserted": false,
+          "notes": "Illustrative conflict class: aggregator tables often list narrow-track F-350 values as universal Super Duty 4x2. Specific 68.3 in / 1734.82 mm figure is a DISCOVERED conflict candidate pending source URL capture — not treated as normalized fact. Tier A OEM overrides when present."
+        },
+        {
+          "source_id": "SRC-IMG-455",
+          "source_name": "Authorized Dealer / Auction Fleet Walkaround Photos (SRC-L1-004/005)",
+          "evidence_tier": "TIER_E_VISUAL_REFERENCE",
+          "relationship_type": "SUPPORTS",
+          "verification_status": "CONFIGURATION_MATCHED",
+          "page_evidence_asserted": false,
+          "notes": "Visual architecture only: outer front wheel-arch flare packaging consistent with wide-track monobeam class. Does not lock mm."
+        }
+      ]
+    },
+    "PAR-AXL-001": {
+      "parameter_name": "front_axle_layout",
+      "claimed_value": "MONOBEAM_WIDE_TRACK_NON_DRIVING",
+      "claimed_value_status": "CANDIDATE",
+      "taxonomy": "Probability",
+      "target_configurations": [
+        "F450_2019_REG_CAB_145_3_WB_4X2"
+      ],
+      "relationships": [
+        {
+          "source_id": "SRC-OEM-002",
+          "source_name": "Ford Workshop Manual 204-00 — candidate",
+          "evidence_tier": "TIER_A_AUTHORITATIVE",
+          "relationship_type": "SUPPORTS",
+          "verification_status": "AWAITING_FILE",
+          "file_exists": false,
+          "page_evidence_asserted": false,
+          "notes": "Schematic confirmation blocked on PDF absence."
+        },
+        {
+          "source_id": "SRC-L1-004",
+          "source_name": "Dealer Reference Photos",
+          "evidence_tier": "TIER_E_VISUAL_REFERENCE",
+          "relationship_type": "SUPPORTS",
+          "verification_status": "CONFIGURATION_MATCHED",
+          "notes": "GENERAL_PLATFORM_ARCHITECTURE_SUPPORTED."
+        },
+        {
+          "source_id": "SRC-L1-005",
+          "source_name": "Auction Walkaround Video",
+          "evidence_tier": "TIER_E_VISUAL_REFERENCE",
+          "relationship_type": "SUPPORTS",
+          "verification_status": "CONFIGURATION_MATCHED",
+          "notes": "GENERAL_PLATFORM_ARCHITECTURE_SUPPORTED."
+        }
+      ]
+    },
+    "PAR-FR-001": {
+      "parameter_name": "rear_frame_rail_width_mm",
+      "claimed_value": 868.7,
+      "claimed_value_status": "CANDIDATE",
+      "taxonomy": "Probability",
+      "unit": "mm",
+      "claimed_value_note": "34.2 in candidate. Do not insert as ENGINEERING_VERIFIED frame geometry.",
+      "target_configurations": [
+        "F450_2019_REG_CAB_145_3_WB_4X2"
+      ],
+      "relationships": [
+        {
+          "source_id": "SRC-OEM-001",
+          "source_name": "Ford BBAS Layout Book — candidate",
+          "evidence_tier": "TIER_A_AUTHORITATIVE",
+          "relationship_type": "SUPPORTS",
+          "verification_status": "AWAITING_FILE",
+          "file_exists": false,
+          "page_evidence_asserted": false,
+          "notes": "UNVERIFIED until BBAS PDF hashed and drawing bounds measured."
+        }
+      ]
+    }
+  },
+  "illustrative_target_structure": {
+    "status": "TEMPLATE_ILLUSTRATIVE_NOT_VERIFIED",
+    "warning": "The following block shows the intended populated shape AFTER real file audit. It is NOT operational truth. Page numbers and NORMALIZED OEM statuses below are placeholders for future promotion only.",
+    "example_node_id": "PAR-FW-001",
+    "example_when_files_exist": {
+      "relationships_target_shape": [
+        {
+          "source_id": "SRC-OEM-001",
+          "evidence_tier": "TIER_A_AUTHORITATIVE",
+          "relationship_type": "SUPPORTS",
+          "verification_status": "NORMALIZED",
+          "notes_template": "Replace with actual page + measured value after PDF ingest. Do not invent page numbers."
+        },
+        {
+          "source_id": "SRC-OEM-002",
+          "evidence_tier": "TIER_A_AUTHORITATIVE",
+          "relationship_type": "SUPPORTS",
+          "verification_status": "INGESTED",
+          "notes_template": "Axle housing mechanical specifications — extract only after local WSM file exists."
+        },
+        {
+          "source_id": "SRC-PUB-109",
+          "evidence_tier": "TIER_D_SECONDARY_TECHNICAL",
+          "relationship_type": "CONTRADICTS",
+          "verification_status": "NORMALIZED",
+          "notes_template": "Document aggregator conflict; Tier A overrides when NORMALIZED."
+        },
+        {
+          "source_id": "SRC-IMG-455",
+          "evidence_tier": "TIER_E_VISUAL_REFERENCE",
+          "relationship_type": "SUPPORTS",
+          "verification_status": "CONFIGURATION_MATCHED",
+          "notes_template": "Visual wide-track confirmation — architecture only."
+        }
+      ]
+    }
+  }
+}

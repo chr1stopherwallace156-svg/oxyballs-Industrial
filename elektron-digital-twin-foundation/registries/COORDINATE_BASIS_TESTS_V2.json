@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "test_name": "EDTS_Coordinate_Basis_Validation_Tests_V2",
+  "registry_reference": "registries/TRANSFORM_REGISTRY_V3_PROPOSAL.json",
+  "tests": [
+    {
+      "transform_id": "TF-ISO-TO-GLTF-ASSET",
+      "basis_vectors": {
+        "forward": { "input": [1.0, 0.0, 0.0], "expected_output": [0.0, 0.0, 0.001] },
+        "left": { "input": [0.0, 1.0, 0.0], "expected_output": [0.001, 0.0, 0.0] },
+        "up": { "input": [0.0, 0.0, 1.0], "expected_output": [0.0, 0.001, 0.0] }
+      },
+      "known_test_points": [
+        { "input": [1000.0, 500.0, 200.0], "expected_output": [0.5, 0.2, 1.0] }
+      ]
+    },
+    {
+      "transform_id": "TF-ISO-TO-THREE-SCENE",
+      "basis_vectors": {
+        "forward": { "input": [1.0, 0.0, 0.0], "expected_output": [0.0, 0.0, -0.001] },
+        "left": { "input": [0.0, 1.0, 0.0], "expected_output": [-0.001, 0.0, 0.0] },
+        "up": { "input": [0.0, 0.0, 1.0], "expected_output": [0.0, 0.001, 0.0] }
+      },
+      "known_test_points": [
+        { "input": [1000.0, 500.0, 200.0], "expected_output": [-0.5, 0.2, -1.0] }
+      ]
+    },
+    {
+      "transform_id": "TF-ISO-TO-UNREAL",
+      "basis_vectors": {
+        "forward": { "input": [1.0, 0.0, 0.0], "expected_output": [0.1, 0.0, 0.0] },
+        "left": { "input": [0.0, 1.0, 0.0], "expected_output": [0.0, -0.1, 0.0] },
+        "up": { "input": [0.0, 0.0, 1.0], "expected_output": [0.0, 0.0, 0.1] }
+      },
+      "known_test_points": [
+        { "input": [1000.0, 500.0, 200.0], "expected_output": [100.0, -50.0, 20.0] }
+      ]
+    }
+  ]
+}

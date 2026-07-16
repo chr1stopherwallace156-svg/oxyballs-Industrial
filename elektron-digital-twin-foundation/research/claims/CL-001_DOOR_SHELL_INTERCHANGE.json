@@ -1,0 +1,39 @@
+{
+  "claim_id": "CL-001",
+  "claim": "Outer door shell (OEM family FL3Z-1520125-A / FL3Z-1520125-B) is shared with F-150 and other Super Duty platforms of the same design generation.",
+  "evidence_level": "TIER_A_OEM_PARTS_CATALOG_CLAIMED",
+  "configuration": {
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_id": "CFG-000001",
+    "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+    "summary": "2019 Ford F-450 Regular Cab Chassis Cab 4x2 DRW 145.3/60"
+  },
+  "supporting_sources": [
+    {
+      "source": "Ford Parts Catalog / interchange (FL3Z-1520125-A ↔ FL3Z-1520125-B family — as reported in RL-008)",
+      "notes": "No local catalog page bytes or SHA-256 in-repo yet",
+      "local_hash_status": "NOT_EXECUTED"
+    }
+  ],
+  "conflicting_sources": [],
+  "status": "CANDIDATE",
+  "next_verification_step": [
+    "OEM body repair manual page extract (hashed) for outer panel applicability",
+    "OEM engineering / body drawing confirming panel identity for F-450 Chassis Cab Regular Cab",
+    "Physical comparison (panel stamp / fit) on exact-config or proven-interchange donor"
+  ],
+  "reported_oem_identifiers": ["FL3Z-1520125-A", "FL3Z-1520125-B"],
+  "hr_evi_classification": "COMPARISON_REFERENCE_CROSSOVER_CANDIDATE",
+  "scope_notes": [
+    "Latch, modules, mirror plates, trim, and harnesses remain configuration-dependent — not covered by this claim.",
+    "F-150 shell scans may be evaluated only as COMPARISON_REFERENCE baselines until Hard Rule 4 crossover proof."
+  ],
+  "forbidden_downstream": [
+    "Auto-admit F-150 mesh as verified F-450 silo geometry",
+    "Geometry freeze from this claim alone",
+    "Assume 2020+ harness pinouts for 2019 twin"
+  ],
+  "research_sprint": "RL-008",
+  "decision": "DT-D040",
+  "hard_rule": "Hard Rule 15"
+}

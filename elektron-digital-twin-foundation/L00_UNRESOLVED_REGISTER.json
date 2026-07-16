@@ -1,0 +1,25 @@
+[
+  {
+    "unresolved_item_id": "UNRES-001",
+    "description": "Wheel and tire package physical load capacity correlation",
+    "parameters": [
+      "19.5 x 6.0 polished forged aluminum wheels",
+      "225/70R19.5G traction tires"
+    ],
+    "unresolved_conflict": "Tire load limits and cold inflation pressures vary based on the specific vocational body upfit weight distribution. Nominals are 95 psi (front) and 80 psi (rear), but final operational limits depend on the final center-of-gravity calculations.",
+    "resolution_path": "Extract physical tire placard data from the selected test vehicle once physically received, and weigh the front/rear axles on certified scales.",
+    "target_resolution_gate": "Layer 0 Physical Asset Intake"
+  },
+  {
+    "unresolved_item_id": "UNRES-002",
+    "description": "Suspension package and spring-code identifier confirmation",
+    "parameters": [
+      "5250-lb FGAWR",
+      "12000-lb RGAWR",
+      "Mono-beam front suspension"
+    ],
+    "unresolved_conflict": "FGAWR and spring rates are option-code dependent (e.g., Heavy-Service Front Suspension Package or Extra Heavy-Duty Front Suspension Package). Nominal values in sales literature do not dictate the spring codes of the actual baseline vehicle.",
+    "resolution_path": "Decode the OEM door jamb safety certification label and cross-reference the spring codes against the 2019 Ford Parts Catalog.",
+    "target_resolution_gate": "Layer 0 Physical Asset Intake"
+  }
+]

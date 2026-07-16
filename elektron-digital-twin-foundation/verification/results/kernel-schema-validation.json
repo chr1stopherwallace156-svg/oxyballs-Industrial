@@ -1,0 +1,220 @@
+{
+  "suite": "kernel-schema-validation",
+  "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+  "runtime": "python3+jsonschema Draft202012Validator",
+  "total": 19,
+  "passed": 19,
+  "failed": 0,
+  "suite_pass_or_fail": "PASS",
+  "results": [
+    {
+      "test_id": "SCHEMA-META-assembly-relationship.schema.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "schema is valid Draft 2020-12",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/schemas/assembly-relationship.schema.json"
+    },
+    {
+      "test_id": "SCHEMA-META-component-instance.schema.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "schema is valid Draft 2020-12",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/schemas/component-instance.schema.json"
+    },
+    {
+      "test_id": "SCHEMA-META-component-passport.schema.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "schema is valid Draft 2020-12",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/schemas/component-passport.schema.json"
+    },
+    {
+      "test_id": "SCHEMA-META-cross-vehicle-comparison.schema.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "schema is valid Draft 2020-12",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/schemas/cross-vehicle-comparison.schema.json"
+    },
+    {
+      "test_id": "SCHEMA-META-entity-definition.schema.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "schema is valid Draft 2020-12",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/schemas/entity-definition.schema.json"
+    },
+    {
+      "test_id": "SCHEMA-META-evidence-link.schema.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "schema is valid Draft 2020-12",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/schemas/evidence-link.schema.json"
+    },
+    {
+      "test_id": "SCHEMA-META-exact-configuration.schema.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "schema is valid Draft 2020-12",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/schemas/exact-configuration.schema.json"
+    },
+    {
+      "test_id": "SCHEMA-META-geometry-asset.schema.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "schema is valid Draft 2020-12",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/schemas/geometry-asset.schema.json"
+    },
+    {
+      "test_id": "SCHEMA-META-interaction-definition.schema.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "schema is valid Draft 2020-12",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/schemas/interaction-definition.schema.json"
+    },
+    {
+      "test_id": "SCHEMA-META-reusable-component-definition.schema.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "schema is valid Draft 2020-12",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/schemas/reusable-component-definition.schema.json"
+    },
+    {
+      "test_id": "SCHEMA-META-vehicle-instance.schema.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "schema is valid Draft 2020-12",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/schemas/vehicle-instance.schema.json"
+    },
+    {
+      "test_id": "EX-vehicle-instance.example.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "valid against vehicle-instance.schema.json",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/examples/2019_f450/vehicle-instance.example.json"
+    },
+    {
+      "test_id": "EX-exact-configuration.example.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "valid against exact-configuration.schema.json",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/examples/2019_f450/exact-configuration.example.json"
+    },
+    {
+      "test_id": "EX-door-fl-component-instance.example.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "valid against component-instance.schema.json",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/examples/2019_f450/door-fl-component-instance.example.json"
+    },
+    {
+      "test_id": "EX-door-fl-geometry-asset.example.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "valid against geometry-asset.schema.json",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/examples/2019_f450/door-fl-geometry-asset.example.json"
+    },
+    {
+      "test_id": "EX-door-fl-assembly-relationship.example.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "valid against assembly-relationship.schema.json",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/examples/2019_f450/door-fl-assembly-relationship.example.json"
+    },
+    {
+      "test_id": "EX-door-fl-interaction.example.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "valid against interaction-definition.schema.json",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/examples/2019_f450/door-fl-interaction.example.json"
+    },
+    {
+      "test_id": "EX-door-fl-component-passport.example.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "valid against component-passport.schema.json",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/examples/2019_f450/door-fl-component-passport.example.json"
+    },
+    {
+      "test_id": "EX-component-definition-door-fl.example.json",
+      "execution_timestamp": "2026-07-16T17:34:19.344664+00:00",
+      "runtime": "python3+jsonschema",
+      "execution_status": "EXECUTED",
+      "expected_result": "valid against reusable-component-definition.schema.json",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/examples/2019_f450/component-definition-door-fl.example.json"
+    }
+  ]
+}

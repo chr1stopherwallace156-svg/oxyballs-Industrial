@@ -1,0 +1,99 @@
+{
+  "suite": "kernel-fingerprint-tests",
+  "execution_timestamp": "2026-07-16T17:34:19.279540+00:00",
+  "runtime": "python3",
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "suite_pass_or_fail": "PASS",
+  "results": [
+    {
+      "test_id": "FP-ORDER-001",
+      "execution_timestamp": "2026-07-16T17:34:19.279540+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "hash unchanged under property reorder",
+      "actual_result": "base=sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943 reordered=sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "verification/fingerprint/test_configuration_fingerprint.py"
+    },
+    {
+      "test_id": "FP-YEAR-001",
+      "execution_timestamp": "2026-07-16T17:34:19.279540+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "hash changes when model_year changes",
+      "actual_result": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943 -> sha256:1eed4a948155b5f925b1ff49faa90a408efe32eb36995ddd25c6cd0e2c083783",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "verification/fingerprint/test_configuration_fingerprint.py"
+    },
+    {
+      "test_id": "FP-DRV-001",
+      "execution_timestamp": "2026-07-16T17:34:19.279540+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "hash changes when drivetrain changes",
+      "actual_result": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943 -> sha256:c27f886e6458a1be96f8cc1c64a2ea32882f169893c2de6fc71f6bf391f1dbca",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "verification/fingerprint/test_configuration_fingerprint.py"
+    },
+    {
+      "test_id": "FP-WB-001",
+      "execution_timestamp": "2026-07-16T17:34:19.279540+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "hash changes when wheelbase changes",
+      "actual_result": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943 -> sha256:1e1e739764b39ce9d12c8caaeec59c2c7d80cf763c55172484e572285d27a6cf",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "verification/fingerprint/test_configuration_fingerprint.py"
+    },
+    {
+      "test_id": "FP-UNK-001",
+      "execution_timestamp": "2026-07-16T17:34:19.279540+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "hash changes when UNKNOWN becomes known",
+      "actual_result": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943 -> sha256:0a5bd7c49873241f9ce36ba51e500079b0de2718f32585f577bf3e2b21a9792f",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "verification/fingerprint/test_configuration_fingerprint.py"
+    },
+    {
+      "test_id": "FP-CFGID-001",
+      "execution_timestamp": "2026-07-16T17:34:19.279540+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "hash unchanged when configuration_id changes",
+      "actual_result": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943 vs sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "verification/fingerprint/test_configuration_fingerprint.py"
+    },
+    {
+      "test_id": "FP-PAT-001",
+      "execution_timestamp": "2026-07-16T17:34:19.279540+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "matches ^sha256:[a-f0-9]{64}$",
+      "actual_result": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "verification/fingerprint/test_configuration_fingerprint.py"
+    },
+    {
+      "test_id": "FP-ABBR-001",
+      "execution_timestamp": "2026-07-16T17:34:19.279540+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "abbreviated hash rejected by pattern",
+      "actual_result": "sha256:d84f86f3...",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "verification/fingerprint/test_configuration_fingerprint.py"
+    }
+  ]
+}

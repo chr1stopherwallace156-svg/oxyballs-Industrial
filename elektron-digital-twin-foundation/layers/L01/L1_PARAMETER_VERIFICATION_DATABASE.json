@@ -1,0 +1,104 @@
+{
+  "$id": "urn:edts:schema:parameter-verification-db:v1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_PARAMETER_VERIFICATION_DATABASE",
+  "project": "2019_FORD_F450_CHASSIS_CAB_145_3",
+  "protocol": "EDTS_RESEARCH_PROTOCOL.md",
+  "protocol_version": "2.0.0",
+  "architecture": "EDTS-OS-v3",
+  "status": "LEGACY_BRIDGE_SUPERSEDED_BY_EVIDENCE_GRAPH",
+  "superseded_by": "layers/L01/L1_EVIDENCE_GRAPH.json",
+  "confidence_percentages": "DEPRECATED",
+  "confidence_formula_plain_text": "DEPRECATED — do not use. Traverse L1_EVIDENCE_GRAPH.json relationships instead.",
+  "configuration_default": "2019 F-450 Regular Cab 145.3in WB 60in CA 4x2 DRW",
+  "migration_note": "Evidence Tier and Verification Status are decoupled. Historical confidence_score fields retained as deprecated snapshots only.",
+  "parameters": {
+    "front_axle_layout": {
+      "taxonomy": "Probability",
+      "value_or_description": "MONOBEAM_WIDE_TRACK_NON_DRIVING",
+      "evidence_graph_node": "PAR-AXL-001",
+      "target_evidence_tier": "TIER_A_AUTHORITATIVE",
+      "evidence_tier_active": "TIER_E_VISUAL_REFERENCE",
+      "evidence_level": "E",
+      "evidence_level_note": "DEPRECATED field name evidence_level retained as tier letter alias. Active verified edges are visual (Tier E). OEM workshop remains AWAITING_FILE.",
+      "confidence_score": "DEPRECATED",
+      "confidence_score_numeric": null,
+      "confidence_score_historical_snapshot": "55%",
+      "configuration": "2019 F-450 Regular Cab 145.3in WB 60in CA 4x2 DRW",
+      "source_count": 3,
+      "source_profile": [
+        {
+          "source_id": "SRC-L1-003",
+          "source": "SRC-L1-003 / SRC-OEM-002 (Workshop Manual)",
+          "evidence_tier": "TIER_A_AUTHORITATIVE",
+          "verification_status": "AWAITING_FILE",
+          "target_weight": 9,
+          "status": "CANDIDATE_UNVERIFIED"
+        },
+        {
+          "source_id": "SRC-L1-004",
+          "source": "SRC-L1-004 (Dealer Reference Photos)",
+          "evidence_tier": "TIER_E_VISUAL_REFERENCE",
+          "verification_status": "CONFIGURATION_MATCHED",
+          "target_weight": 6,
+          "status": "VERIFIED_ACTIVE"
+        },
+        {
+          "source_id": "SRC-L1-005",
+          "source": "SRC-L1-005 (Auction Walkaround Video)",
+          "evidence_tier": "TIER_E_VISUAL_REFERENCE",
+          "verification_status": "CONFIGURATION_MATCHED",
+          "target_weight": 5,
+          "status": "VERIFIED_ACTIVE"
+        }
+      ],
+      "verification_status": "CONFIGURATION_MATCHED",
+      "lifecycle_stage": "CONFIGURATION_MATCHED",
+      "claim_verification_status": "GENERAL_PLATFORM_ARCHITECTURE_SUPPORTED",
+      "reviewer_notes": "Use Evidence Graph PAR-AXL-001. Visual architecture supported; OEM schematics AWAITING_FILE."
+    },
+    "rear_frame_rail_width": {
+      "taxonomy": "Probability",
+      "value_or_description": "34.2 inches (868.7 mm)",
+      "evidence_graph_node": "PAR-FR-001",
+      "target_evidence_tier": "TIER_A_AUTHORITATIVE",
+      "evidence_tier_active": null,
+      "evidence_level": null,
+      "evidence_level_note": "No active verified edges; BBAS AWAITING_FILE.",
+      "confidence_score": "DEPRECATED",
+      "confidence_score_numeric": null,
+      "confidence_score_historical_snapshot": "0%",
+      "configuration": "2019 F-450 Regular Cab 145.3in WB 60in CA 4x2 DRW",
+      "source_count": 1,
+      "source_profile": [
+        {
+          "source_id": "SRC-L1-001",
+          "source": "SRC-L1-001 / SRC-OEM-001 (BBAS Layout Book)",
+          "evidence_tier": "TIER_A_AUTHORITATIVE",
+          "verification_status": "AWAITING_FILE",
+          "target_weight": 10,
+          "status": "CANDIDATE_UNVERIFIED"
+        }
+      ],
+      "verification_status": "DISCOVERED",
+      "lifecycle_stage": "DISCOVERED",
+      "claim_verification_status": "UNVERIFIED",
+      "reviewer_notes": "Use Evidence Graph PAR-FR-001. Do not insert 34.2 in as ENGINEERING_VERIFIED frame geometry."
+    },
+    "front_track_width_mm": {
+      "taxonomy": "Probability",
+      "value_or_description": "1899.92 mm (74.8 in candidate)",
+      "evidence_graph_node": "PAR-FW-001",
+      "target_evidence_tier": "TIER_A_AUTHORITATIVE",
+      "evidence_tier_active": "TIER_E_VISUAL_REFERENCE",
+      "confidence_score": "DEPRECATED",
+      "confidence_score_numeric": null,
+      "configuration": "2019 F-450 Regular Cab 145.3in WB 60in CA 4x2 DRW",
+      "source_count": 4,
+      "verification_status": "DISCOVERED",
+      "lifecycle_stage": "DISCOVERED",
+      "claim_verification_status": "CANDIDATE",
+      "reviewer_notes": "Authoritative node is L1_EVIDENCE_GRAPH PAR-FW-001. OEM edges AWAITING_FILE; visual SUPPORTS at CONFIGURATION_MATCHED for architecture only."
+    }
+  }
+}

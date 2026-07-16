@@ -1,0 +1,12 @@
+{
+  "$schema": "../../schemas/reusable-component-definition.schema.json",
+  "$id": "urn:edts:example:definition:CMPDEF-DOOR-FRONT-LH-0001",
+  "component_definition_id": "CMPDEF-DOOR-FRONT-LH-0001",
+  "canonical_name": "front_left_door_assembly",
+  "definition_status": "EMPTY_CANDIDATE",
+  "interchangeability_status": "NOT_EVALUATED",
+  "proven_vehicle_instance_ids": [],
+  "cross_vehicle_comparison_ids": [],
+  "schema_version": "1.0.0",
+  "notes": "Empty candidate definition referenced by door instance."
+}

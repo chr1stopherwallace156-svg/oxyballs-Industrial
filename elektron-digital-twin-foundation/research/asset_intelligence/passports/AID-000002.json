@@ -1,0 +1,134 @@
+{
+  "asset_id": "AID-000002",
+  "id_immutable": true,
+  "schema_version": "1.0.0",
+  "authority_status": "RESEARCH_OPERATIONAL",
+  "aliases": [
+    "EDTS-CAND-002",
+    "C-002",
+    "CAND-000042-EOG"
+  ],
+  "title": "Ford F350 - F550 Super Duty Dually EOG - Complete Model",
+  "source": {
+    "platform": "CGTrader",
+    "publisher": "outlawtransport",
+    "url": "https://www.cgtrader.com/3d-models/vehicle/truck/ford-f350-f550-super-duty-dually-eog-complete-model",
+    "url_status": "URL_FETCH_CONFIRMED",
+    "marketplace_id": "6371726",
+    "access_condition": "Commercial marketplace download (Royalty Free License claimed)"
+  },
+  "vehicle": {
+    "reported_make": "Ford",
+    "reported_model": "F-350 to F-550 Super Duty Dually",
+    "reported_year_range": "unspecified (EOG / latest Super Duty claim)",
+    "reported_body": "Complete vehicle polygonal model",
+    "listing_claim_summary": "Detailed exterior + interior; suspension modeled after liquid-spring logic (listing)"
+  },
+  "configuration": {
+    "reported_cab": null,
+    "reported_ca_in": null,
+    "reported_wheelbase_in": null,
+    "reported_drivetrain": null,
+    "reported_rear_wheels": "DRW (dually claim)",
+    "notes": "Platform band F350\u2013F550 \u2014 not isolated to 2019 Chassis Cab Regular Cab 145.3/60 4x2"
+  },
+  "exact_configuration_match": "PLATFORM_BAND",
+  "geometry_types": [
+    "BLEND",
+    "OBJ",
+    "FBX",
+    "DAE",
+    "STL"
+  ],
+  "completeness": {
+    "exterior": "HIGH",
+    "interior": "HIGH",
+    "mechanical": "PARTIAL",
+    "electrical": "NONE",
+    "hierarchy_quality": "PARTIAL",
+    "mesh_separation": "PARTIAL",
+    "topology_quality": "NOT_EVALUATED",
+    "evaluation_basis": "LISTING_ONLY"
+  },
+  "usefulness": {
+    "engineering": "LOW",
+    "visual": "HIGH"
+  },
+  "license": {
+    "status": "ROYALTY_FREE_CLAIMED",
+    "terms_summary": "CGTrader Royalty Free License claimed on listing \u2014 REQUIRES_COUNSEL_REVIEW before silo use"
+  },
+  "price": {
+    "status": "PAID",
+    "amount_usd": null,
+    "currency_note": "Marketplace price varies; prior research noted ~$55/$30 sale \u2014 re-check at purchase"
+  },
+  "lifecycle": {
+    "discovered": true,
+    "acquired": "NOT_ACQUIRED",
+    "parsed": "NOT_EXECUTED",
+    "verified": "LISTING_URL_CONFIRMED"
+  },
+  "component_coverage": [
+    {
+      "target": "ASMINST-VEH000001-CAB",
+      "presence": "CLAIMED",
+      "notes": "Exterior body claimed detailed"
+    },
+    {
+      "target": "CMPINST-VEH000001-DOOR-FL",
+      "presence": "SHELL_ONLY",
+      "notes": "Facade risk \u2014 inner cavity/harness unlikely"
+    },
+    {
+      "target": "Interior",
+      "presence": "CLAIMED",
+      "notes": "Listing claims ~202k interior verts \u2014 not silo-verified"
+    },
+    {
+      "target": "Suspension",
+      "presence": "CLAIMED",
+      "notes": "Liquid-spring logic claim \u2014 not 2019 Chassis Cab OEM topology"
+    },
+    {
+      "target": "Door harness / latch guides",
+      "presence": "ABSENT",
+      "notes": "Expected missing from render mesh"
+    }
+  ],
+  "known_deficiencies": [
+    "Not exact locked configuration (F350\u2013F550 band)",
+    "Engineering twin utility low until keep/discard after ingest",
+    "Door internals / electrical routes expected absent",
+    "Suspension claim is marketplace logic \u2014 not OEM evidence"
+  ],
+  "evidence_links": [
+    {
+      "kind": "LISTING_URL",
+      "ref": "https://www.cgtrader.com/3d-models/vehicle/truck/ford-f350-f550-super-duty-dually-eog-complete-model",
+      "note": "URL_FETCH_CONFIRMED 2026-07-16"
+    },
+    {
+      "kind": "LANE_A_CATALOG",
+      "ref": "layers/L01/L1_LANE_A_ASSET_CATALOG.json#CAND-000042-EOG"
+    },
+    {
+      "kind": "SPRINT",
+      "ref": "research/sprints/RL-011_ASSET_INTELLIGENCE_DATABASE.md"
+    }
+  ],
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "related_asset_ids": [],
+  "maps_to_src_cand": null,
+  "maps_to_candidate_asset_id": "CAND-000042-EOG",
+  "edts_role": "VISUAL_CANDIDATE",
+  "research_sprint": "RL-011",
+  "decision": "DT-D042",
+  "notes": [
+    "SKU URL upgraded from category surface; publisher outlawtransport; Model ID #6371726.",
+    "Listing reports ~627800 verts / ~556200 polys; formats BLEND/OBJ/FBX/DAE/STL.",
+    "INPUT to EDTS acquisition \u2014 not verified silo geometry."
+  ]
+}

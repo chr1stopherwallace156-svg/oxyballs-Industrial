@@ -1,0 +1,8 @@
+{
+  "test_session_id": "TS-20260716-01",
+  "validation_status": "NOT_EXECUTED",
+  "registry_version": "4.0.0",
+  "test_spec": "verification/specifications/TRANSFORM_TEST_SPEC.md",
+  "execution_results": [],
+  "notes": "Offline quaternion-matrix check for TF-FAIL-001 recorded separately; formal suite not executed."
+}

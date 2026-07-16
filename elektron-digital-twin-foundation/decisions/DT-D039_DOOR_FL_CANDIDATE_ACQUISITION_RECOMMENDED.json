@@ -1,0 +1,43 @@
+{
+  "decision_id": "DT-D039",
+  "title": "FL door sprint — CANDIDATE_ACQUISITION_RECOMMENDED + PHYSICAL_VERIFICATION_REQUIRED",
+  "date": "2026-07-16",
+  "approved_status": "ACCEPTED",
+  "recommended_decision": "CANDIDATE_ACQUISITION_RECOMMENDED",
+  "secondary_flags": ["PHYSICAL_VERIFICATION_REQUIRED"],
+  "locked_configuration": {
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_id": "CFG-000001",
+    "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+    "summary": "2019 Ford F-450 Chassis Cab Regular Cab 4x2 DRW 145.3 WB / 60 CA"
+  },
+  "scope": [
+    "research/sprints/RL-008_DOOR_FL_SCOPE_LOCK_AND_CANDIDATES.md",
+    "research/src_candidates/SRC-CAND-000004.json",
+    "layers/L01/L1_LANE_A_ASSET_CATALOG.json",
+    "research/claims/CL-001_DOOR_SHELL_INTERCHANGE.json"
+  ],
+  "reason": "Outlines listing provides a real URL for a 2D dimensional / profile reference (not OEM engineering geometry). Acquire vector + visual model efficiently; physical teardown later for internals. Shell interchange is Hard Rule 15 claim CL-001 (CANDIDATE).",
+  "decision": [
+    "Acquire SRC-CAND-000004 / EDTS-CAND-001 (Outlines) as Priority 2D_DIMENSIONAL_REFERENCE / PROFILE_REFERENCE after purchase — never call it ground-truth geometry.",
+    "Acquire / evaluate EDTS-CAND-002 / CAND-000042-EOG visual model when SKU URL is isolated — visual candidate only, not CAD-grade inner structure.",
+    "Eventually execute PHYSICAL_VERIFICATION_REQUIRED teardown/scan for harness routing, latch geometry, inner cavity.",
+    "CL-001 (Hard Rule 15): status CANDIDATE; next verification = OEM body repair manual, OEM engineering drawing, physical comparison.",
+    "Contamination guards: 2020+ facelift harness, cab-type trim/harness, mirror-option pinouts.",
+    "Do not update passport geometry/interaction from ABSENT; no GEO promotion; kernel/passport rc1 unchanged.",
+    "Hard Rule 13: acquisition triggers parallel lanes — does not close research."
+  ],
+  "terminology_correction": {
+    "forbidden": ["ground-truth geometry", "engineering ground truth"],
+    "required_for_vector_blueprints": ["2D_DIMENSIONAL_REFERENCE", "PROFILE_REFERENCE"]
+  },
+  "candidates": {
+    "SRC-CAND-000004": "NOT_ACQUIRED_URL_RECORDED",
+    "EDTS-CAND-002": "DISCOVERED_CONFIGURATION_EVALUATED"
+  },
+  "change_control": {
+    "kernel_schema_change": false,
+    "component_passport_rc1_change": false,
+    "geometry_freeze": false
+  }
+}

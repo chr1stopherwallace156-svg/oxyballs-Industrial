@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EDTS_Claim_Registry_Schema_V2",
+  "_deprecation": {
+    "status": "SUPERSEDED",
+    "superseded_by": "schemas/CLAIM_REGISTRY_CORE_SCHEMA_V4_PROPOSAL.json",
+    "decision_id": "DT-D007"
+  },
+  "type": "object",
+  "properties": {
+    "claim_id": { "type": "string", "pattern": "^[A-Z0-9_-]+$" },
+    "schema_version": { "type": "string", "enum": ["2.0.0"] },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "asserted_at": { "type": "string", "format": "date-time" },
+        "reviewed_by": { "type": "string" },
+        "status": { "type": "string", "enum": ["PLANNED", "DRAFT", "PROVISIONAL", "VERIFIED"] }
+      },
+      "required": ["asserted_at", "status"],
+      "additionalProperties": false
+    },
+    "applicability": {
+      "type": "object",
+      "properties": {
+        "model_year": { "type": "integer", "enum": [2019] },
+        "platform": { "type": "string", "enum": ["F-450-CHASSIS-CAB"] },
+        "wheelbase_inches": { "type": "number" },
+        "cab_to_axle_inches": { "type": "number" },
+        "engine_type": { "type": "string" },
+        "vin_specific": { "type": "boolean" },
+        "vin_pattern": { "type": "string" }
+      },
+      "required": ["model_year", "platform"],
+      "additionalProperties": false
+    },
+    "spatial_context": {
+      "type": "object",
+      "properties": {
+        "coordinate_frame_id": {
+          "type": "string",
+          "enum": ["ISO_8855_VEHICLE_FRAME", "EDTS_MODELING_FRAME", "SCAN_FRAME", "UNREAL_FRAME"]
+        },
+        "datum_id": { "type": "string" },
+        "measurement_axis": { "type": "string", "enum": ["X", "Y", "Z", "3D_VECTOR", "N_A"] }
+      },
+      "required": ["coordinate_frame_id"],
+      "additionalProperties": false
+    },
+    "claim_value": {
+      "type": "object",
+      "properties": {
+        "source_value": { "type": "string" },
+        "source_unit": { "type": "string" },
+        "canonical_value": {
+          "type": "array",
+          "items": { "type": "number" }
+        },
+        "canonical_unit": { "type": "string" },
+        "value_structure": { "type": "string", "enum": ["SCALAR", "RANGE", "3D_VECTOR", "MATRIX"] }
+      },
+      "required": ["source_value", "source_unit", "canonical_value", "canonical_unit", "value_structure"],
+      "additionalProperties": false
+    },
+    "uncertainty_and_tolerances": {
+      "type": "object",
+      "properties": {
+        "design_tolerance_symmetric": { "type": "number" },
+        "manufacturing_tolerance_symmetric": { "type": "number" },
+        "measurement_uncertainty_sigma_1": { "type": "number" },
+        "accuracy_class": { "type": "string", "enum": ["MAC-A", "MAC-B", "MAC-C", "MAC-D"] }
+      },
+      "required": ["accuracy_class"],
+      "additionalProperties": false
+    },
+    "provenance_and_licensing": {
+      "type": "object",
+      "properties": {
+        "evidence_source_id": { "type": "string" },
+        "data_provenance": { "type": "string", "enum": ["OEM_SPEC", "EDTS_CAPTURE", "THIRD_PARTY_DATA"] },
+        "redistribution_status": { "type": "string", "enum": ["NOT_EVALUATED", "RESTRICTED", "OPEN_SOURCE"] }
+      },
+      "required": ["evidence_source_id", "data_provenance", "redistribution_status"],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "claim_id",
+    "schema_version",
+    "metadata",
+    "applicability",
+    "spatial_context",
+    "claim_value",
+    "uncertainty_and_tolerances",
+    "provenance_and_licensing"
+  ],
+  "additionalProperties": false
+}

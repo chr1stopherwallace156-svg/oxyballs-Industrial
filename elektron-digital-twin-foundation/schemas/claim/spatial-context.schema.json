@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "coordinate_frame_id": { "type": "string" },
+    "datum_id": { "type": "string" },
+    "measurement_axis": { "type": "string", "enum": ["X", "Y", "Z", "3D_VECTOR", "N_A"] }
+  },
+  "required": ["coordinate_frame_id"],
+  "additionalProperties": false
+}

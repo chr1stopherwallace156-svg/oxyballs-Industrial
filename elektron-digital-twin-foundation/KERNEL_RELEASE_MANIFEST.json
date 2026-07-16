@@ -1,0 +1,63 @@
+{
+  "product": "EDTS Exact-Vehicle Kernel",
+  "version": "1.0.0-rc1",
+  "git_tag": "edts-kernel-v1.0.0-rc1",
+  "validation_status": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATED",
+  "kernel_milestone": "COMPLETE_FOR_DEFINED_SCOPE",
+  "kernel_change_policy": "DO_NOT_CHANGE_KERNEL",
+  "schema_posture": "SCHEMA_FREEZE_FOR_VERTICAL_SLICE",
+  "reopen_rule": "Reopen only if the real geometry workflow exposes a blocking defect — not because a new field sounds useful",
+  "validation": {
+    "total": "49/49 PASS",
+    "scope": "Data integrity and exact-vehicle isolation",
+    "runtime_3d_vertical_slice": "PENDING",
+    "proven": [
+      "exact_vehicle_configuration_isolation",
+      "deterministic_configuration_fingerprinting",
+      "schema_validity",
+      "rejection_of_invalid_and_cross_vehicle_records",
+      "referential_integrity",
+      "audit_history_preservation",
+      "honest_blocking_when_geometry_absent"
+    ]
+  },
+  "suite_artifacts": {
+    "fingerprint": "verification/results/kernel-fingerprint-tests.json",
+    "schema": "verification/results/kernel-schema-validation.json",
+    "isolation": "verification/results/kernel-isolation-tests.json",
+    "referential": "verification/results/kernel-referential-integrity-tests.json",
+    "report": "verification/results/KERNEL_VALIDATION_REPORT.md",
+    "summary": "verification/results/KERNEL_VALIDATION_SUMMARY.md",
+    "audit_corrections": "verification/results/KERNEL_INITIAL_AUDIT_AND_CORRECTIONS.md",
+    "initial_audit": "verification/results/KERNEL_INITIAL_FILE_AUDIT.md"
+  },
+  "authoritative_dataset": "examples/2019_f450/",
+  "dependencies": {
+    "file": "verification/requirements-kernel-validation.txt",
+    "jsonschema": "4.26.0",
+    "rfc8785": "0.1.4",
+    "referencing": "0.37.0"
+  },
+  "schema_freeze": {
+    "status": "SCHEMA_FREEZE_FOR_VERTICAL_SLICE",
+    "allowed": [
+      "blocking bug fixes",
+      "validator defects",
+      "fields proven necessary by the real vertical slice"
+    ],
+    "prohibited": [
+      "speculative future fields",
+      "telemetry expansion",
+      "EV conversion expansion",
+      "broad compatibility logic",
+      "new platform abstractions"
+    ]
+  },
+  "next_executable_target": "CMPINST-VEH000001-DOOR-FL",
+  "asset_gate": "ASSET-00031 must be physically acquired before geometry adaptation",
+  "door_vertical_slice_status": "F450_DOOR_FL_VERTICAL_SLICE_BLOCKED_BY_MISSING_ASSET",
+  "asset_00031_status": "CANDIDATE_NOT_ACQUIRED",
+  "component_first_acquisition": "ACTIVE",
+  "lane_a_asset_catalog": "layers/L01/L1_LANE_A_ASSET_CATALOG.json",
+  "door_fl_acquisition_status": "F450_DOOR_FL_CANDIDATES_TRACKED_NOT_ACQUIRED"
+}

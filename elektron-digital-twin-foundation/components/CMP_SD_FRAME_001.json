@@ -1,0 +1,65 @@
+{
+  "$id": "urn:edts:component-passport:sd_frame_001:v1",
+  "$schema": "../schemas/component-passport-os-v1.schema.json",
+  "hard_rule_0": "COMPONENT_FIRST",
+  "component_id": "CMP-SD-FRAME-001",
+  "name": "Super_Duty_Chassis_Cab_Frame_Family",
+  "current_version": 1,
+  "version_evidence_pin": {
+    "parameter_node_ids": ["PAR-FR-001"],
+    "source_ids": ["SRC-OEM-001"],
+    "min_verification_status": "AWAITING_FILE"
+  },
+  "aliases_from": ["CMP-FR-145"],
+  "compatibility": {
+    "platforms": [
+      "F-350_2017_2022_CHASSIS_CAB",
+      "F-450_2017_2022_CHASSIS_CAB",
+      "F-550_2017_2022_CHASSIS_CAB"
+    ],
+    "body_styles": ["REGULAR_CAB", "SUPER_CAB", "CREW_CAB"],
+    "compatibility_status": "PLATFORM_FAMILY_CANDIDATE",
+    "notes": "Family passport for Super Duty chassis-cab frames. Wheelbase/CA are variant pins — not separate engines. Configuration match required before COMPONENT_VERIFIED."
+  },
+  "variants": [
+    {
+      "variant_id": "VAR-145_3-WB-60-CA",
+      "wheelbase_in": 145.3,
+      "cab_to_axle_in": 60.0,
+      "used_by_configurations": ["F450_2019_REG_CAB_145_3_WB_4X2"],
+      "status": "CANDIDATE"
+    }
+  ],
+  "geometry_status": {
+    "mesh_source": null,
+    "mesh_lifecycle": "PLACEHOLDER",
+    "cleanup_retopology": "NOT_STARTED",
+    "frame_rail_width_mm_candidate": 868.7,
+    "frame_rail_width_status": "CANDIDATE_UNVERIFIED",
+    "notes": "Old way: model the F-450 frame. New way: this passport + Evidence Graph + Asset Pipeline mapping. Discard pickup rails from ASSET-00031."
+  },
+  "materials_profile": {
+    "rail_coating": {
+      "material_type": "FRAME_POWDERCOAT_DIELECTRIC",
+      "pbr_metalness": 0.0,
+      "verification_status": "CONFIGURATION_MATCHED",
+      "notes": "Metalness 0.0 dielectric — coating class, not dimensional verification."
+    }
+  },
+  "runtime_capabilities": {
+    "removal_logic_enabled": false,
+    "interactivity_actions": [],
+    "interactivity_status": "NOT_STARTED"
+  },
+  "evidence_graph_links": ["PAR-FR-001"],
+  "asset_pipeline": {
+    "evaluation_status": "NOT_STARTED",
+    "keep_modify_reject": null,
+    "notes": "P3 will auto-evaluate CAD against this component_id."
+  },
+  "meta": {
+    "last_engineering_review": "2026-07-16",
+    "review_status": "DRAFT_CANDIDATE",
+    "notes": "Canonical ID for Super Duty chassis-cab frame family. CMP-FR-145 is deprecated alias."
+  }
+}

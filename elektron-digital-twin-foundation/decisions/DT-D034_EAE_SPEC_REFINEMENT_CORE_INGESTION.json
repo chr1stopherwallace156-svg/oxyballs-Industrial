@@ -1,0 +1,42 @@
+{
+  "decision_id": "DT-D034",
+  "title": "EAE spec refinement — CORE INGESTION first; rubrics/events parked with guards",
+  "date": "2026-07-16",
+  "approved_status": "ACCEPTED",
+  "scope": [
+    "verification/results/EAE_READINESS_REPORT.md",
+    "proposals/eae/",
+    "proposals/COMPONENT_PASSPORT_REVISION_DECISION.md",
+    "EAE full product vs CORE INGESTION milestone"
+  ],
+  "reason": "Keep specification-vs-implementation distinction. Refine mesh topology (role-aware) and CAD accuracy (guards). Park stronger append-only event model. Do not build full seven-stage EAE before CORE INGESTION.",
+  "decision": [
+    "Accepted state: EAE specification ACCEPTED; full executable ABSENT; CORE INGESTION PARTIAL_FIXTURE_VALIDATED; scoring NOT_EXECUTED; rubrics DRAFT; event model OPTIONAL_PROPOSAL; rc1 UNCHANGED; door slice BLOCKED_BY_MISSING_ASSET.",
+    "Next milestone is EAE CORE INGESTION only (local fixture→quarantine→detect→hash→extract→manifest→idempotency).",
+    "Mesh rubric must classify geometry_role; watertight not always required.",
+    "CAD relative-error formula requires abs(nominal)>0, clamp>=0, and comparability prerequisites.",
+    "Event model gains sequence/schema/actor/hash algorithm/canonicalization/supersession; remains parked.",
+    "Final status remains EDTS_EAE_SPECIFICATION_READY_IMPLEMENTATION_PENDING."
+  ],
+  "affected_files": [
+    "verification/results/EAE_READINESS_REPORT.md",
+    "proposals/eae/MESH_VISUAL_RUBRIC.json",
+    "proposals/eae/CAD_ENGINEERING_RUBRIC.json",
+    "proposals/eae/PASSPORT_APPEND_ONLY_EVENT_MODEL.md",
+    "proposals/eae/passport-event.schema.json",
+    "proposals/eae/EAE_CORE_INGESTION_MILESTONE.md",
+    "proposals/COMPONENT_PASSPORT_REVISION_DECISION.md",
+    "STATUS.json",
+    "PROJECT_STATE.md"
+  ],
+  "validation_evidence": [
+    "verification/results/EAE_READINESS_REPORT.md",
+    "verification/results/eae-rubric-tests.json"
+  ],
+  "final_status": "EDTS_EAE_SPECIFICATION_READY_IMPLEMENTATION_PENDING",
+  "related_decisions": ["DT-D033"],
+  "change_control": {
+    "kernel_schema_change": false,
+    "full_eae_activation": false
+  }
+}

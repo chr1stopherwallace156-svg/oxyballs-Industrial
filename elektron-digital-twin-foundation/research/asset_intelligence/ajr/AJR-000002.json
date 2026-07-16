@@ -1,0 +1,43 @@
+{
+  "ajr_id": "AJR-000002",
+  "id_immutable": true,
+  "asset_id": "AID-000010",
+  "asset_alias": "AID-STEER-GEAR-03",
+  "status": "BLOCKED",
+  "decision": "CONTINUE_RESEARCH",
+  "adds_new_engineering_data": {
+    "result": "UNKNOWN",
+    "rationale": "Supplier STEP/Parasolid would likely add mounting/spline envelope data \u2014 not confirmable without URL/bytes.",
+    "required_geometry_class": "STEP/Parasolid interface envelope"
+  },
+  "duplication_check": {
+    "result": "NOT_EXECUTED",
+    "compared_against": [
+      "AID-000002 visual complete model"
+    ],
+    "rationale": "No steering gearbox in local verified library."
+  },
+  "resolves_priority_gaps": {
+    "result": "PARTIAL",
+    "gaps_addressed": [
+      "Steering kinematic interface dimensions"
+    ],
+    "rationale": "High priority if TAS65+HC3Z-3504-A proven for CFG-000001."
+  },
+  "purchase_clearance": "NOT_CLEARED",
+  "blockers": [
+    "source_url NOT_RECORDED",
+    "No local STEP/Parasolid",
+    "TAS65 applicability to 2019 F-450 Chassis Cab 4x2 unproven",
+    "License/terms unknown"
+  ],
+  "estimated_price_usd": 0.0,
+  "source_url_status": "NOT_RECORDED",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "research_sprint": "RL-012",
+  "decision_ref": "DT-D043",
+  "notes": [
+    "Operator PENDING AJR approval \u2014 formal AJR exists but purchase clearance blocked."
+  ]
+}

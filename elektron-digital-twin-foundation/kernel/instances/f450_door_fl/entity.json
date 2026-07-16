@@ -1,0 +1,9 @@
+{
+  "entity_id": "CMP-FORD-SD-DOOR-FL-001",
+  "entity_type": "COMPONENT",
+  "canonical_name": "front_left_door_assembly",
+  "lifecycle_status": "DISCOVERED",
+  "schema_version": "1.0.0",
+  "aliases": ["CMP-SD-044-L"],
+  "notes": "Kernel canonical ID for F-450 Regular Cab front-left door vertical slice."
+}

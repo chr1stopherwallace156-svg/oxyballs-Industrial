@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:schema:acquisition-justification-report:1.0.0",
+  "title": "EDTS Acquisition Justification Report (AJR)",
+  "description": "Purchase gate for AID candidates. Prevents budget waste on visual-only duplicates. NOT_CLEARED until engineering-data + uniqueness + gap-resolution checks execute.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ajr_id",
+    "id_immutable",
+    "asset_id",
+    "status",
+    "decision",
+    "adds_new_engineering_data",
+    "duplication_check",
+    "resolves_priority_gaps",
+    "purchase_clearance",
+    "bound_vehicle_instance_id",
+    "bound_configuration_id"
+  ],
+  "properties": {
+    "ajr_id": {
+      "type": "string",
+      "pattern": "^AJR-[0-9]{6}$"
+    },
+    "id_immutable": {
+      "type": "boolean",
+      "const": true
+    },
+    "asset_id": {
+      "type": "string",
+      "pattern": "^AID-[0-9]{6}$"
+    },
+    "asset_alias": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "IN_REVIEW",
+        "APPROVED_FOR_PURCHASE",
+        "REJECTED",
+        "HOLD",
+        "BLOCKED"
+      ]
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "CONTINUE_RESEARCH",
+        "GENERATE_AJR_AND_PURCHASE",
+        "REJECT_AS_CANDIDATE",
+        "HOLD_IN_CANDIDATE_QUEUE",
+        "NOT_EXECUTED"
+      ]
+    },
+    "adds_new_engineering_data": {
+      "type": "object",
+      "required": [
+        "result"
+      ],
+      "properties": {
+        "result": {
+          "type": "string",
+          "enum": [
+            "NOT_EXECUTED",
+            "YES",
+            "NO",
+            "UNKNOWN"
+          ]
+        },
+        "rationale": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "required_geometry_class": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "duplication_check": {
+      "type": "object",
+      "required": [
+        "result"
+      ],
+      "properties": {
+        "result": {
+          "type": "string",
+          "enum": [
+            "NOT_EXECUTED",
+            "UNIQUE",
+            "DUPLICATE",
+            "UNKNOWN"
+          ]
+        },
+        "compared_against": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rationale": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "resolves_priority_gaps": {
+      "type": "object",
+      "required": [
+        "result"
+      ],
+      "properties": {
+        "result": {
+          "type": "string",
+          "enum": [
+            "NOT_EXECUTED",
+            "YES",
+            "NO",
+            "PARTIAL",
+            "UNKNOWN"
+          ]
+        },
+        "gaps_addressed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rationale": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "purchase_clearance": {
+      "type": "string",
+      "enum": [
+        "NOT_CLEARED",
+        "CLEARED",
+        "REJECTED",
+        "HOLD"
+      ]
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "estimated_price_usd": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "source_url_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "bound_vehicle_instance_id": {
+      "type": "string"
+    },
+    "bound_configuration_id": {
+      "type": "string"
+    },
+    "research_sprint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "decision_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

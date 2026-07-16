@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_SOURCE_VISUAL_ARCHITECTURE_REGISTRY",
+  "project": "2019_FORD_F450_CHASSIS_CAB_145_3",
+  "notes": [
+    "SRC-L1-004/005 are Level D visual architecture sources — not OEM dimensional baselines.",
+    "VERIFIED_ACTIVE means the media was reviewed for front-axle architecture visibility, not that OEM PDF pages were inspected."
+  ],
+  "sources": [
+    {
+      "source_id": "SRC-L1-004",
+      "working_title": "Dealer Reference Photos — F-450 Chassis Cab 4x2 DRW front axle architecture",
+      "evidence_level": "D",
+      "status": "VERIFIED_ACTIVE",
+      "supports_parameters": ["front_axle_layout"],
+      "target_weight": 6,
+      "local_path": "research/reference_images/public_harvests/SRC-L1-004/",
+      "usage": "Architecture confirmation only"
+    },
+    {
+      "source_id": "SRC-L1-005",
+      "working_title": "Auction Walkaround Video — monobeam non-driving front axle visibility",
+      "evidence_level": "D",
+      "status": "VERIFIED_ACTIVE",
+      "supports_parameters": ["front_axle_layout"],
+      "target_weight": 5,
+      "local_path": "research/reference_images/public_harvests/SRC-L1-005/",
+      "usage": "Architecture confirmation only"
+    }
+  ]
+}

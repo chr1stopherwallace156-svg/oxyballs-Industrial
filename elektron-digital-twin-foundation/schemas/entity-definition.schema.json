@@ -1,0 +1,51 @@
+{
+  "title": "EDTS Universal Entity Definition",
+  "type": "object",
+  "required": [
+    "entity_id",
+    "entity_type",
+    "canonical_name",
+    "lifecycle_status",
+    "schema_version"
+  ],
+  "properties": {
+    "entity_id": {
+      "type": "string",
+      "pattern": "^(VEH|ASMDEF|CMPDEF)-[A-Z0-9-]+$"
+    },
+    "entity_type": {
+      "type": "string",
+      "enum": [
+        "VEHICLE_DEFINITION",
+        "ASSEMBLY_DEFINITION",
+        "COMPONENT_DEFINITION"
+      ]
+    },
+    "canonical_name": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "lifecycle_status": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "ACTIVE",
+        "SUPERSEDED",
+        "DEPRECATED"
+      ]
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:schema:entity-definition:v1",
+  "additionalProperties": false
+}

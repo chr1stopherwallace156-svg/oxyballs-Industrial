@@ -1,0 +1,21 @@
+{
+  "schemas/component-passport.schema.json": {
+    "sha256": "0fbf42e74552f1b3dce905030c0f6b32b26fe66fa2438ae9e5365b35fa7332ce",
+    "bytes": 2837
+  },
+  "KERNEL_MANIFEST.json": {
+    "sha256": "478f7db5dce2244fd5a56cdee22aec3e3cf65ffe775238d8d8ac193b810f811e",
+    "bytes": 1089
+  },
+  "KERNEL_RELEASE_MANIFEST.json": {
+    "sha256": "ca4ef2779ecbdee63ff7518b42bb499af6c6c4ecc611a05392ba012d8348568d",
+    "bytes": 2641
+  },
+  "KERNEL_TEST_RESULTS.json": {
+    "sha256": "ca1586dd3c3a48108a329e5dfb868a4695a644d49c5047d0d840cff9c58a0c54",
+    "bytes": 880
+  },
+  "git_porcelain_local": "(clean)",
+  "git_porcelain_workspace": "(clean)",
+  "frozen_kernel_unchanged": true
+}
