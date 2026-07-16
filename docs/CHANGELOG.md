@@ -5,6 +5,43 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 23 + review_20: Brake/Steering Gate v0.4 (complete EHPS candidate)
+
+- Archived batch_23 (complete EHPS candidates) and review_20 1:1
+  (commit `0508bce`). Owner label adopted: **Brake/Steering Gate
+  v0.4** — architecture strong, a **complete** EHPS candidate now
+  exists, but the replacement system is not proven and final selection
+  is halted.
+- New rows CS-53 (ZF EPHS MPU 100-C — **first complete EHPS
+  candidate**; CompleteEHPSCandidate / MotorsportSupplierCandidate /
+  NeedsCommercialDutyReview / NeedsHydroboostCompatibilityReview /
+  NeedsCurrentMap / NeedsThermalDeratingData), CS-54 (Ford.com power-
+  steering return-line hose — FordProductReference / NeedsFordExactSource
+  / NeedsExactQuote); RC-82 (ZF hydraulic envelope 1.32–3.17 GPM /
+  113–124.5 bar / 2500–6000 rpm), RC-83 (**defect-catch:** the batch's
+  "CAN control" claim is refuted by the ZF factsheet's "No connection
+  to the CAN bus required" → control/diagnostics = NeedsSupplierData),
+  RC-84 (ZF is a **motorsport** pump, not proven commercial-duty),
+  RC-85 (~2.5–3.3 kW / ~250–300 A → EngineeringEstimate /
+  NeedsZFCurrentMap — do not size DC-DC from it alone), RC-86 (Ford
+  hose corroborates ~1750 psi envelope but is not the pump curve),
+  RC-87 (FMVSS 105 test map must cover partial-failure/fade-recovery/
+  water-recovery/stability/parking-brake/warning-lamp, not just
+  stopping distance). Section 31 added.
+- Lee CS-51 reaffirmed (FordStyleHydroboostPumpReference /
+  NeedsFordExactSource — not the native Super Duty spec).
+- **Register cleanup:** removed an orphaned, truncated duplicate of
+  section 28 (an earlier draft that had been appended after section 30
+  and cut off mid-word); the canonical section 28 at its proper
+  position is complete and unchanged. No evidence lost (raw evidence is
+  under `docs/research/raw/`).
+- ZF supplier packet (owner's 10 questions) drafted as
+  `SUPPLIER_INQUIRY_ZF_01.md` (DRAFT, awaiting owner approval). Next
+  research (owner): FMVSS 105 brake test mapping + loaded low-speed
+  steering test procedure while supplier questions wait.
+- PATS "bypass" language did **not** recur (second consecutive clean
+  batch). Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-16 — RH batch 22 + review_19: Brake/Steering Gate v0.2 (EHPS pumps)
 
 - Archived batch_22 (Gate 04 EHPS/hydraulic pumps) and review_19 1:1

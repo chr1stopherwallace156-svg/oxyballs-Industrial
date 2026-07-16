@@ -4,15 +4,16 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-16
-- Reason for handoff: task complete (batch 22 + review_19 — Brake/Steering
-  Gate v0.2, EHPS pumps); awaiting owner decisions and/or next batch
+- Reason for handoff: task complete (batch 23 + review_20 — Brake/Steering
+  Gate v0.4, first complete EHPS candidate); awaiting owner decisions
+  and/or next batch
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `6a57c95` — Archive raw RH batch 22 (Gate 04 EHPS pumps)
-  + owner verdict (review_19) 1:1
+- Start commit: `0508bce` — Archive raw RH batch 23 (Gate 04 complete EHPS
+  candidates) + owner verdict (review_20) 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
@@ -20,42 +21,54 @@
 ## Work performed
 
 - Files changed (reconciliation commit):
-  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-51, CS-52;
-  RC-79, RC-80, RC-81; section 30), `docs/research/RESEARCH_MAP.md`
-  (Gate 04 v0.2 status), `docs/CHANGELOG.md`, handoff files.
-  (Raw archives `batch_22_brake_steering_ehps_pumps.md`,
-  `review_19_batch_22_verdict.md`, and the PROVENANCE update were
-  committed separately as `6a57c95`.)
-- Summary: batch 22 (Gate 04 EHPS/hydraulic pumps) + review_19
-  reconciled. Owner label: **Brake/Steering Gate v0.2** — the
-  architecture problem is proven, the replacement system is NOT yet
-  proven. Hydroboost dependency mapped; vacuum path rejected; EHPS path
-  confirmed correct; Ford-specific final values still missing; EHPS
-  final candidate not selected. Owner's corrections applied verbatim:
-  CS-51 Lee (SupplierBackground / Ford-StyleComponentCandidate /
-  NeedsFordExactSource — **not** the native Ford Super Duty spec);
-  CS-52 TRW 14-20358-010 (HydraulicPumpCandidate /
-  NeedsElectricMotorDriveData — a pump end, not a complete EHPS);
-  RC-80 "will not bottleneck or overheat" downgraded to
-  NeedsEngineeringReview; RC-81 DC-DC load linkage (OpenGap / RuleInput,
-  ~2–3.5 kW → ~160–290 A at 12 V — loops Gate 04 back to Gate 01
-  low-voltage architecture). Eight OpenGaps carried. **PATS-language did
-  NOT recur** in batch_22 (held one batch after the escalation).
-  **Nothing ingested; nothing Confirmed; ODRs untouched.**
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-53, CS-54;
+  RC-82..RC-87; section 31; CS-51 reaffirmed; **orphaned truncated
+  section-28 duplicate removed** — see below),
+  `docs/research/RESEARCH_MAP.md` (Gate 04 v0.4),
+  `docs/research/outreach/SUPPLIER_INQUIRY_ZF_01.md` (new, DRAFT),
+  `docs/CHANGELOG.md`, handoff files.
+  (Raw archives `batch_23_ehps_complete_candidates.md`,
+  `review_20_batch_23_verdict.md`, and the PROVENANCE update were
+  committed separately as `0508bce`.)
+- Summary: batch 23 (complete EHPS candidates) + review_20 reconciled.
+  Owner label: **Brake/Steering Gate v0.4** — architecture strong, a
+  **complete** EHPS candidate now exists (ZF EPHS MPU 100-C, CS-53), but
+  the replacement system is not proven and final selection is halted.
+  Owner corrections applied verbatim: (1) the batch's "6000 RPM CAN
+  control" claim is **refuted** by the ZF factsheet's "No connection to
+  the CAN bus required" → RC-83 control/diagnostics = NeedsSupplierData;
+  (2) ZF is a **motorsport** pump, not proven commercial-duty → RC-84
+  MotorsportSupplierCandidate/NeedsCommercialDutyReview; (3) Lee CS-51
+  reaffirmed as FordStyleHydroboostPumpReference/NeedsFordExactSource;
+  (4) ~2.5–3.3 kW / ~250–300 A → RC-85 EngineeringEstimate/
+  NeedsZFCurrentMap (do NOT size DC-DC from it alone); (5) FMVSS 105
+  test map must cover partial-failure/fade-recovery/water-recovery/
+  stability/parking-brake/warning-lamp, not just stopping distance
+  (RC-87); (6) Ford return-line hose = FordProductReference (CS-54/RC-86,
+  not the pump curve). ZF supplier packet drafted (`SUPPLIER_INQUIRY_
+  ZF_01.md`, DRAFT). **PATS "bypass" language did NOT recur (2nd clean
+  batch). Nothing ingested; nothing Confirmed; ODRs untouched.**
+- **Register cleanup note:** the reconciliation removed an orphaned,
+  truncated duplicate of section 28 that had been appended after
+  section 30 (an earlier draft, cut off mid-word "Theo"). The canonical
+  section 28 at its proper position (Cooling Modeling Framework v0.1) is
+  complete and unchanged; no evidence was lost (raw evidence lives under
+  `docs/research/raw/`). Sections now run 1..31 without duplication.
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_22/review_19 archives are 1:1 against the
-  owner's chat message ("22:75"); every source labeled by
-  Ford-specificity per owner; no aftermarket/hydraulic-pump value became
-  a rule; nothing marked Confirmed
+- Verified vs claimed: batch_23/review_20 archives are 1:1 against the
+  owner's chat message ("23:75"); the ZF row is held at candidate
+  altitude with the source-contradiction (CAN) recorded as a defect; no
+  motorsport/estimate value became a rule; nothing marked Confirmed;
+  section numbering re-checked (28/29/30/31 unique)
 
 ## State
 
 - Current phase: Revision 07 Source Ingestion and Consolidation
-- Blockers: B-001 (ingestion — ~53 batches outstanding); B-002
+- Blockers: B-001 (ingestion — ~52 batches outstanding); B-002
   (.gov/CARB extraction blocked); **B-003 + B-004 unified under
   BLOCKED_PENDING_SUPPLIER_DATA (research/modeling allowed; final
   numbers wait)**
@@ -66,31 +79,27 @@
   module; (6) L9 lane name confirmation; (7) Artifact Intake Form
   definition; (8) formalize the M10 forbidden-phrase scanner
   (bypass/override/defeat + Validated reserved-vocab); (9) approve/edit
-  the Dana supplier letter.
+  the Dana supplier letter; (10) **approve/edit the new ZF supplier
+  letter** (`SUPPLIER_INQUIRY_ZF_01.md`, DRAFT).
 
 ## Next exact action
 
 Expected next inputs, in any order: (a) the owner approves/edits the
-Dana letter (then flip its status to READY_TO_SEND); (b) the owner
-sends either letter (record "Sent" + date; start the 7-day follow-up
-clock — cadence sections are in both outreach files); (c) a supplier
-reply arrives (archive 1:1 under `docs/research/raw/supplier_replies/`,
-then reconcile — first evidence that can resolve the
-BLOCKED_PENDING_SUPPLIER_DATA gate); (d) the next research batch — by
-the review_19 prompt, the **complete-EHPS-systems payload**: for each
-candidate extract manufacturer, exact model, voltage (12/24/HV),
-continuous + peak current, hydraulic flow curve, pressure curve, relief
-pressure, duty cycle, thermal derating, control method (PWM/CAN/analog/
-fixed), reservoir, fluid type, ports, fault outputs, mounting, and
-whether it supports simultaneous hydroboost + steering. Also Ford/OEM
-sources for F-450/F-550 factory pump pressure/flow, steering-gear req,
-hydroboost accumulator reserve, loaded low-speed steering test, FMVSS
-105 mapping. Enforce: **hydraulic-pump data alone is not enough**; a
-Dodge/Mopar EHPS example is LeadOnly until pressure/flow/current/duty
-are proven; no FMVSS-compliance claim; nothing Confirmed; **NEVER "PATS
-bypass/override"** (authorized Ford-compatible integration only). Lane
-doctrine still applies (modeling statuses, NeedsExactQuote, name the
-supplier data).
+Dana or ZF letter (then flip its status to READY_TO_SEND); (b) the owner
+sends any letter (record "Sent" + date; start the 7-day follow-up clock —
+cadence sections are in each outreach file); (c) a supplier reply arrives
+(archive 1:1 under `docs/research/raw/supplier_replies/`, then reconcile —
+first evidence that can resolve the BLOCKED_PENDING_SUPPLIER_DATA / ZF
+NeedsCurrentMap holds); (d) the next research batch — by the review_20
+prompt, **FMVSS 105 brake test mapping + the loaded low-speed steering
+test procedure** (not more generic hydroboost). Enforce: FMVSS 105 test
+map must include partial-failure/fade-recovery/water-recovery/stability/
+parking-brake/warning-lamp behavior with exact 49 CFR 571.105 locators —
+no compliance claim; hydraulic-pump data alone is not enough; a
+Dodge/Mopar EHPS example is LeadOnly until pressure/flow/current/duty are
+proven; nothing Confirmed; **NEVER "PATS bypass/override"** (authorized
+Ford-compatible integration only). Lane doctrine still applies (modeling
+statuses, NeedsExactQuote, name the supplier data).
 
 ## Forbidden actions
 
@@ -101,7 +110,8 @@ supplier data).
   Confirmed; no SourceClaims.md promotion before locator verification
   + owner approval.
 - Do not use held rows (RC-19/20 truncated; RC-22..26 locator-pending)
-  or fenced values (J1673 4×/6×; rejected supplier numbers).
+  or fenced values (J1673 4×/6×; rejected supplier numbers; ZF current
+  estimate RC-85; ZF "CAN control" claim RC-83).
 - Do not let quantum-inspired material gate or approve anything.
 - Do not implement M10, M11, or any production code; do not resolve
   ODR-001..ODR-003.

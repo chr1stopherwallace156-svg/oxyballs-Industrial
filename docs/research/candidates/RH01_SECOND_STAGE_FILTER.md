@@ -77,8 +77,10 @@ this file supersedes it (see Addendum, section 7).
 | CS-48 | **LeadOnly / SupplierCandidatePath / NeedsDatasheet** (owner review_18) | *"Dodge Electric Hydraulic Power Steering for your build!"* (Mopar 5154662AC EHPS + PSC controller) | hangtight.io (conversion vendor blog) | <https://hangtight.io/blogs/resources/upgrading-to-electric-hydraulic-power-steering-parts-list> | Lead only (batch_21) — an EHPS *idea*, NOT proof a Mopar/TRW pump supports a loaded F-550 hydroboost+steering system; needs a datasheet proving pressure, flow, current, duty cycle — lanes L9/L10 |
 | CS-49 | **RegulatoryCandidate — primary brake lane** (owner review_18, added) | *FMVSS No. 105 — Hydraulic and electric brake systems (49 CFR 571.105)* | NHTSA / eCFR | (locator pending — B-002) | Candidate (owner-added) — the correct primary brake-performance regulation for this platform (covers hydraulic + electric service brakes and parking brakes, normal + emergency performance); replaces batch_21's mis-cited TOP 2-2-607 — lanes L2/L5 |
 | CS-50 | **LeadOnly (video)** | *YouTube "Electric Commercial Vehicles and Powertrain Sizing"* | youtube.com | <https://www.youtube.com/watch?v=3PqEW2Pf90I> | LeadOnly (batch_21) — background video; per standing rule (batch_01) videos are LeadOnly, never rule sources — lane L3 |
-| CS-51 | **SupplierBackground / Ford-StyleComponentCandidate / NeedsFordExactSource** (owner review_19) | *Lee Power Steering — CII pump replacement for Ford, dual-return reservoir for gearbox with hydroboost (PUMP-CII-HB)* | leepowersteering.com (aftermarket) | <https://leepowersteering.com/products/cii-power-steering-pump-replacement-r-metric> | Candidate (batch_22) — a Ford-**style** CII/dual-return option (1750 psi / 3.25 GPM); **the page itself says Ford used many pressure/flow settings — NOT proof of the 2020–2026 F-450/F-550 OEM value** — lanes L10/L4 |
+| CS-51 | **FordStyleHydroboostPumpReference / SupplierBackground / Ford-StyleComponentCandidate / NeedsFordExactSource** (owner review_19; reaffirmed review_20, "FordStyleHydroboostPumpReference" label added) | *Lee Power Steering — CII pump replacement for Ford, dual-return reservoir for gearbox with hydroboost (PUMP-CII-HB)* | leepowersteering.com (aftermarket) | <https://leepowersteering.com/products/cii-power-steering-pump-replacement-r-metric> | Candidate (batch_22, re-cited batch_23) — a Ford-**style** CII/dual-return option (1750 psi / 3.25 GPM); **the page itself says Ford used many pressure/flow settings — NOT proof of the 2020–2026 F-450/F-550 OEM value** — lanes L10/L4 |
 | CS-52 | **HydraulicPumpCandidate / NeedsElectricMotorDriveData** (owner review_19) | *TRW medium-duty power steering pump assembly 14-20358-010* | trucklinerparts.com (commercial parts reseller) | <https://trucklinerparts.com/products/new-trw-medium-duty-power-steering-pump-assembly-p-n-14-20358-010> | Candidate (batch_22) — real hydraulic values (185 bar/2683 psi relief, 6.30 GPM, 25 cc/rev, −40…+135 °C) but it is a **hydraulic pump end, NOT a complete EHPS**: no motor voltage/current/controller/duty/thermal/reservoir/fault data — not a final EHPS candidate — lanes L9/L10 |
+| CS-53 | **CompleteEHPSCandidate / MotorsportSupplierCandidate / NeedsCommercialDutyReview / NeedsHydroboostCompatibilityReview / NeedsCurrentMap / NeedsThermalDeratingData** (owner review_20) | *ZF Race Engineering — EPHS MPU 100-C electro-hydraulic motor-pump-unit factsheet* | zf.com (ZF official server, ZF Race Engineering) | <https://www.zf.com/products/media/zfraceengineering/about_us_3/downloads_9/ZF_RE_Factsheet_EPHS-MPU-100-C_EN_001508000140_Screen.pdf> | Candidate (batch_23) — **first complete EHPS candidate** (self-contained motor+pump+reservoir): 5–12 L/min (1.32–3.17 GPM), 113–124.5 bar (~1639–1806 psi), 2500–6000 rpm, −40…+120 °C. In the general hydraulic range of the Ford-style hydroboost target but **NOT proven for F-450/F-550 hydroboost+steering**. Two owner defect-catches: (1) the factsheet states **"No connection to the CAN bus required"** — the batch's "6000 RPM CAN control" claim is **refuted by the cited source**; control/diagnostics/fault outputs = NeedsSupplierData; (2) it is a **motorsport** EPHS pump, **not** a proven Class 4/5 commercial hydroboost unit — do NOT label "commercial-duty validated" — lanes L9/L10/L5 |
+| CS-54 | **FordProductReference / SupplierBackground / NeedsFordExactSource / NeedsExactQuote** | *Ford.com — power steering return line hose assembly (P4000028025)* | ford.com (Ford OEM parts catalog) | <https://www.ford.com/product/power-steering-return-line-hose-assembly-p4000028025> | Candidate (batch_23) — Ford-**listed** return-line hose; burst-tested >1750 psi, listed for hydroboost/commercial use (≈19,500 lb GVWR envelope). **Corroborates the ~1750 psi system-pressure envelope, but it is a hose spec — NOT the OEM pump pressure/flow curve** and not a steering-gear requirement. The batch's "Exact Quote" is garbled ("500 LB. With Or Less GVWR or 19 or 4 Wheel Disc Brake") → **NeedsExactQuote** before any use — lanes L10/L4 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -170,6 +172,12 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-79 | Ford-**style** dual-return hydroboost pump candidate: 1750 psi / 3.25 GPM (Lee PUMP-CII-HB) *(supplier value for a Ford-style part; NOT the verified OEM F-450/F-550 number)* | CS-51 | product config index — vendor listing | **SupplierBackground / NeedsFordExactSource** — a candidate data point for the pump curve, not the Ford spec — lanes L10/L4 |
 | RC-80 | Medium-duty hydraulic pump candidate: 185 bar (2683 psi) relief, 6.30 GPM, 25 cc/rev, −40…+135 °C (TRW 14-20358-010) *(hydraulic end only)* | CS-52 | spec index — vendor listing | **HydraulicPumpCandidate / NeedsElectricMotorDriveData**; hydraulic capacity looks adequate to *evaluate*, but suitability depends on the electric motor drive, duty cycle, plumbing, reservoir, fluid temp, and Ford requirements (owner: "will not bottleneck/overheat" claim → **NeedsEngineeringReview**) — lanes L9/L10 |
 | RC-81 | **DC-DC / low-voltage load linkage (owner-promoted)**: an EHPS pushing ~2.5–3.25 GPM at >1500 psi needs ~2.0–3.5 kW; on a 12 V system that peaks ≈160–290 A — forcing an upsized 800V→12V DC-DC converter and/or a 12 V ultracap/AGM buffer. *(batch cites "SAE J134 baseline" without a verified quote — the kW/amp figures are estimates, not sourced values)* | derived over RC-79/80 (unverified) | n/a — engineering estimate | **OpenGap / RuleInput** — Gate 04 loops back into the low-voltage architecture (Gate 01/DC-DC); real numbers come from a complete EHPS datasheet + engineering review — lanes L5/L9 |
+| RC-82 | ZF EPHS MPU 100-C hydraulic envelope: **5–12 L/min (1.32–3.17 GPM), 113–124.5 bar (~1639–1806 psi), variable 2500–6000 rpm, −40…+120 °C** *(complete self-contained EHPS motor-pump-unit)* | CS-53 | p.1 technical specs table; quote "Flexible flow rate from 5 to 12 l/min at variable speeds ranging from 2,500 to 6,000 rpm. Operating pressure of 113 to 124.5 bar" (Hunter-supplied, unverified vs PDF → NeedsExactQuote) | **CompleteEHPSCandidate / ModelingFramework** — in the same general hydraulic range as the Ford-style hydroboost target (3.25 GPM / 1750 psi), but its 3.17 GPM ceiling sits **just under** the Ford-style 3.25 GPM and peak simultaneous demand pushes toward relief; **NeedsHydroboostCompatibilityReview** before it can be called suitable — lanes L9/L5 |
+| RC-83 | **ZF control / diagnostics correction (owner defect-catch)**: the ZF factsheet states **"No connection to the CAN bus required"** — the batch's "6000 RPM CAN control" and "DTCs broadcast over CAN" claims are **contradicted by the cited source**. | CS-53 | p.1 (owner-relayed factsheet statement) | **DefectCatch → NeedsSupplierData** — control mode, fault outputs, and diagnostic options are unknown; do NOT request a DBC/CAN map unless a *different* controller variant with CAN diagnostics is confirmed — lanes L9/L8 |
+| RC-84 | **ZF duty classification (owner correction)**: the ZF document describes an **EPHS motorsport steering pump**, not a Class 4/5 commercial-truck hydroboost pump. | CS-53 | factsheet title/positioning | **MotorsportSupplierCandidate / NeedsCommercialDutyReview** — must NOT be labeled "designed for commercial vehicle validation"; commercial-duty high-load survival is unproven — lanes L9/L10 |
+| RC-85 | **ZF power/current estimate**: running the MPU near max (≈3.17 GPM @ ~1806 psi ≈ 3.3 kW shaft) implies a large 12 V draw. *(The batch is internally inconsistent — item 1 estimates 90–110 A peak; Part 2 estimates 275–300 A. Both are unsourced.)* | derived over RC-82 (unverified) | n/a — engineering estimate | **EngineeringEstimate / NeedsZFCurrentMap** — actual current depends on pump/motor/controller efficiency, relief behavior, fluid temp, and duty cycle; **the Build Engine must NOT size the DC-DC converter from this estimate alone** (feeds RC-81) — lanes L5/L9 |
+| RC-86 | Ford power-steering **return-line hose** burst-tested >1750 psi, listed for hydroboost/commercial use (≈19,500 lb GVWR) | CS-54 | product description index; quote garbled in batch → **NeedsExactQuote** | **FordProductReference / NeedsFordExactSource** — corroborates the ~1750 psi system-pressure envelope but is a **hose spec, not the OEM pump pressure/flow curve** and not a steering-gear requirement — lanes L10/L4 |
+| RC-87 | **FMVSS 105 test-map scope (owner expansion)**: the brake test plan is **not just stopping distance** — it must map partial-failure behavior, fade/recovery, water recovery, stability/control during braking, parking brake, warning-lamp requirements, and the full test procedures; FMVSS 105 covers hydraulic/electric service + parking brakes on vehicles >3500 kg GVWR. | CS-49 (FMVSS 105 lane, batch_21) | 49 CFR 571.105 — **exact section/paragraph locators still needed** | **RegulatoryCandidate / TestMapInput / NeedsExactSource** — the primary Gate 04 brake-regulation lane; owner-relayed scope, not yet extracted from the regulation text — lanes L2/L8 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -1622,57 +1630,101 @@ test mapping; loaded low-speed steering test. Next payload (owner
 prompt): **complete EHPS systems** — hydraulic-pump-only data is
 explicitly not enough.
 
+
 ---
 
-## 28. Batch 20 + owner review_17 — Cooling Modeling Framework v0.1 (2026-07-15)
+## 31. Batch 23 + owner review_20 — Brake/Steering Gate v0.4 (complete EHPS candidate) (2026-07-16)
 
 Raw sources:
-`docs/research/raw/research_hunter/batch_20_cooling_modeling_frameworks.md`
-and `docs/research/raw/owner_reviews/review_17_batch_20_verdict.md`.
-Row additions: CS-39..CS-45, RC-66..RC-73. **Owner label adopted:
-Cooling Modeling Framework v0.1 — ModelingFrameworkCandidate; not
-validated, not locked, not component-selection-ready.** First batch
-processed fully under the review_16 lane doctrine.
+`docs/research/raw/research_hunter/batch_23_ehps_complete_candidates.md`
+and `docs/research/raw/owner_reviews/review_20_batch_23_verdict.md`.
+Row additions: CS-53, CS-54; RC-82..RC-87. **Owner label adopted:
+Brake/Steering Gate v0.4 — the architecture is strong and a *complete*
+EHPS candidate now exists, but the replacement system is NOT proven and
+final selection is halted.** (Owner numbered the gate v0.4, up from the
+v0.2 of batch_22; label applied verbatim.)
 
-### Owner's 7 filter tasks — applied
+### What advanced
 
-1. **NeedsExactQuote rule adopted as standing:** any row whose Exact
-   Quote field is empty or equation-only-without-verifiable-text is
-   held at `NeedsExactQuote` and cannot convert to a SourceClaim. All
-   RC-66..73 quote fields remain **unverified against their PDFs**
-   (candidate quotes; the equations are recorded as claimed content).
-2. Reddit → **LeadOnly / InformalDiscussion / NotForRuleCreation**
-   (CS-44/RC-72); serial-vs-parallel doctrine requires a
-   textbook/SAE/supplier source.
-3. Towing article → **FieldContext / NeedsEngineeringSource**
-   (CS-43/RC-71); the mountain-grade model must come from
-   tractive-power equations in an engineering source.
-4. "Thermal Runaway Containment" → **reclassified Thermal Anomaly
-   Detection** (CS-42/RC-70). **Containment itself = OpenGap /
-   NeedsStandardsAndSupplierSafetyData** (UL/SAE/NFPA + Webasto
-   propagation-barrier and venting data).
-5. **Gate 04 corrected:** batch_20's "auxiliary vacuum pump loads" is
-   the WRONG architecture for F-450/F-550 — the platform's critical
-   path is **hydroboost / hydraulic brake + steering assist** (as
-   established since batch_01 CP#1). Owner's corrected gate scope
-   recorded verbatim in the Research Map roadmap.
-6. **Gate 05 language corrected:** "PATS software override bypass
-   design" REJECTED — the program never frames work as defeating an
-   anti-theft system. Replacement (owner wording): *authorized
-   Ford-compatible controls integration, gateway compatibility,
-   immobilizer-safe architecture, cluster/CAN diagnostics,
-   serviceability review.* This matches the standing register rule
-   (batch_08 UIM split): PATS work proceeds only via Ford service
-   data or legitimate captures, never "bypass" framing.
-7. **Modeling modules only:** the 7 unlocked build-engine modules are
-   recorded as FUTURE M10 modules (battery heat estimator, loop flow
-   calculator, ΔP calculator, radiator sizing estimator,
-   mountain-grade thermal simulator, derating risk model, cooling
-   test-plan generator) — nothing is built during ingestion.
+- **First complete EHPS candidate on file (CS-53 / RC-82):** the ZF
+  Race Engineering EPHS MPU 100-C — a self-contained motor+pump+reservoir
+  unit, 5–12 L/min (1.32–3.17 GPM), 113–124.5 bar (~1639–1806 psi),
+  2500–6000 rpm, −40…+120 °C. This is a genuine step past batch_22's
+  hydraulic-pump-only rows: it is in the same general hydraulic range as
+  the Ford-style hydroboost target (3.25 GPM / 1750 psi).
 
-### Language corrections
+### Owner corrections — applied verbatim
 
-- "validated academic, mathematical, and laboratory baselines" →
-  **candidate** modeling references (status-inflation family; header
-  variant).
-- "Theo
+1. **Biggest correction — the ZF "CAN control" claim is refuted by its
+   own source (RC-83).** The batch said "6000 RPM CAN control" and "DTCs
+   broadcast over CAN," but the ZF factsheet states **"No connection to
+   the CAN bus required."** Control mode, fault outputs, and diagnostics
+   are therefore **NeedsSupplierData** — do not ask ZF for a DBC/CAN map
+   unless a different controller variant with CAN diagnostics is
+   confirmed. (Recorded as a Hunter defect-catch: source-contradicting
+   claim.)
+2. **ZF is a motorsport pump, not proven commercial-duty (RC-84).** The
+   ZF document positions this as an **EPHS motorsport** steering pump,
+   not a Class 4/5 commercial-truck hydroboost unit → status
+   **MotorsportSupplierCandidate / NeedsCommercialDutyReview**; the
+   "designed for commercial vehicle validation" framing is removed.
+   Full ZF status: **CompleteEHPSCandidate / MotorsportSupplierCandidate
+   / NeedsCommercialDutyReview / NeedsHydroboostCompatibilityReview /
+   NeedsCurrentMap / NeedsThermalDeratingData.**
+3. **Lee is still not final Ford proof.** The Lee CII-HB re-cite
+   (existing CS-51 / RC-79) is reaffirmed as a **FordStyleHydroboost
+   PumpReference / SupplierBackground / NeedsFordExactSource** — the
+   1750 psi / 3.25 GPM value is a strong Ford-**style** benchmark, not
+   the verified 2020–2026 F-450/F-550 factory requirement (the page
+   itself says Ford used many pressure/flow settings). No new CS row;
+   the owner's added label "FordStyleHydroboostPumpReference" is recorded
+   against CS-51.
+4. **Power/current numbers are estimates only (RC-85).** The ~2.5–3.3 kW
+   / ~250–300 A warning is directionally right and important, but it is
+   **EngineeringEstimate / NeedsZFCurrentMap** — the batch is even
+   internally inconsistent (90–110 A in item 1 vs 275–300 A in Part 2).
+   **The Build Engine must not size the DC-DC converter from this
+   estimate alone** (feeds the RC-81 DC-DC OpenGap).
+5. **FMVSS 105 test-map scope expanded (RC-87).** FMVSS 105 stays the
+   primary brake-testing lane, but the test map must cover **partial-
+   failure behavior, fade/recovery, water recovery, stability/control
+   during braking, parking brake, and warning-lamp requirements** — not
+   just stopping distance. Exact 49 CFR 571.105 locators still needed.
+6. **Ford return-line hose (CS-54 / RC-86)** is a **FordProductReference
+   / NeedsFordExactSource** — it corroborates the ~1750 psi system-
+   pressure envelope for hydroboost/commercial use, but it is a hose
+   spec, **not** the OEM pump pressure/flow curve; its batch "Exact
+   Quote" is garbled → **NeedsExactQuote** before any use.
+
+### Gate 04 v0.4 — corrected state (owner verbatim)
+
+- **Known:** vacuum-pump path rejected; hydroboost + steering share the
+  hydraulic supply; EHPS is the correct replacement lane; the ZF EPHS
+  MPU 100-C is a promising complete EHPS candidate; the 12 V electrical
+  load may be severe.
+- **Not proven:** that ZF can support F-450/F-550 hydroboost + steering
+  simultaneously; that ZF survives commercial-duty high-load cycles;
+  that Lee's 1750 psi / 3.25 GPM is the exact 2020–2026 F-450/F-550
+  factory value; that DC-DC sizing is final; that the FMVSS 105 test
+  plan is mapped.
+
+### Owner action items recorded (not agent actions)
+
+- **ZF supplier packet drafted:** the owner supplied a 10-question ZF
+  inquiry (current-vs-pressure/flow, continuous + peak current + peak
+  duration, duty cycle at 12 L/min & 124.5 bar, thermal derating curve,
+  hydroboost+steering suitability, simultaneous panic-brake + low-speed
+  lock, reservoir/hose/port/fluid, fault/diagnostic outputs given
+  "no CAN required," and fuse/relay/wiring/supply sizing). Captured as
+  a **DRAFT** outreach letter `SUPPLIER_INQUIRY_ZF_01.md`, awaiting
+  owner approval before sending (sending is an owner action).
+- **Next research (owner):** FMVSS 105 brake test mapping and the loaded
+  low-speed steering test procedure, while the ZF/Ford/Lee supplier
+  questions wait.
+
+### Standing checks
+
+- PATS "bypass/override" language did **not** appear in batch_23
+  (Gate 05 roadmap remains clean — second consecutive clean batch).
+- Nothing ingested; nothing marked Confirmed; no compliance claimed;
+  ODRs untouched.

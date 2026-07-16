@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 22 + review_19 — Brake/Steering Gate v0.2)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 22 + review_19 — Brake/Steering Gate v0.2, EHPS pumps); awaiting owner decisions and/or next batch
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `6a57c95`; end commit: `7a2968a` (batch-22 reconciliation)
+- Work: batch 22 (Gate 04 EHPS/hydraulic pumps) + review_19 reconciled — Brake/Steering Gate v0.2 (architecture problem proven, replacement system not yet proven). CS-51 Lee (SupplierBackground/Ford-StyleComponentCandidate/NeedsFordExactSource — not the native Super Duty spec); CS-52 TRW 14-20358-010 (HydraulicPumpCandidate/NeedsElectricMotorDriveData — pump end, not complete EHPS); RC-79/80/81; RC-80 "will not bottleneck or overheat" → NeedsEngineeringReview; RC-81 DC-DC load linkage (OpenGap/RuleInput). Section 30. RESEARCH_MAP Gate 04 → v0.2. PATS language did not recur. Nothing ingested; nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean two-universe; index.html disposition; L2/L4/L6 module mapping; L9 lane name; Artifact Intake Form; M10 forbidden-phrase scanner; Dana letter approval.
+
 ## 2026-07-15 — Claude Code — task complete (batch 21 + review_18 — Brake/Steering Gate v0.1)
 
 ### (archived handoff)
