@@ -17,7 +17,13 @@ to classify — they assert no engineering content.
 1. **Quantum-inspired research cannot approve engineering.** Ever.
 2. **Simulation cannot replace physical proof.**
 3. **Academic research becomes `PrincipleCandidate`** unless tied to a
-   Rule, Metric, Test, or NoGoCondition.
+   Rule, Metric, Test, or NoGoCondition. **Lane doctrine (owner,
+   review_16): academic/scientific sources build modeling frameworks —
+   statuses `EngineeringBackground`, `AcademicPrincipleCandidate`,
+   `ModelingFramework`, `NeedsSupplierData`,
+   `NeedsPhysicalVerification` — and may NEVER be marked `Confirmed`,
+   `FinalRule`, or `BuildReady`. Academic sources cannot close a
+   supplier gate.**
 4. **Supplier datasheets are `NeedsVerification`.**
 5. **OEM/regulatory sources outrank academic sources** for direct
    vehicle requirements.
@@ -241,6 +247,34 @@ supplier datasheets → CAN/PATS.**
    cable abrasion, water intrusion, pre-charge failure, contactor
    weld, cooling failure, thermal derating, BMS fault, CAN fault,
    brake/steer assist failure, post-drive inspection.
+
+## Gate roadmap after cooling (owner, review_16)
+
+While the HV wiring + powertrain + cooling gates sit at
+**BLOCKED_PENDING_SUPPLIER_DATA**, the research sequence continues:
+
+4. Brake / Steering Assist Gate (CP#1)
+5. CAN / Controls / PATS / Cluster Gate (CP#2)
+6. Mechanical Mounting / Battery Enclosure Gate
+7. Weight / Axle Load / CG Gate
+8. Failure Mode + Test Procedure Gate
+9. Physical Measurement / 3D Scan Gate
+10. Supplier Second-Source Comparison Gate
+11. Business / Fleet Readiness Scan Package
+
+**Next expected batch:** the modeling-frameworks payload (owner prompt,
+review_16) — academic/national-lab/standards sources for 10 topics
+(battery heat generation, inverter/motor losses, radiator/pump sizing,
+Darcy-Weisbach, NTU-effectiveness, high-ambient derating,
+mountain-grade duty cycles, thermal aging, serial-vs-parallel loops,
+thermal failure modes, validation test procedures) — statuses per the
+lane doctrine above; Build Engine impact limited to
+Model/Test/OpenGap/NominalAssumption; every row must state what
+supplier data is still needed.
+
+**Supplier follow-up cadence (owner):** if no response 7 days after a
+letter is sent, follow up; repeat weekly until answered or redirected.
+Tracked in the outreach files; a 7-day repository reminder is set.
 
 ## Open mapping gaps (owner decision required)
 

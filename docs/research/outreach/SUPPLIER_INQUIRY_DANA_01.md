@@ -80,3 +80,9 @@ For the SUMO MD motor/inverter system, please provide:
 | Motor + inverter mass | 8 |
 | (CAN/faults — from review_11 list) | 9 |
 | (Recommended battery capability — owner combined question) | 10 |
+
+## Follow-up cadence (owner, review_16)
+
+If no response within 7 days of sending: follow up. Repeat every
+7 days until answered or redirected. Log each follow-up here with a
+date line.

@@ -1320,3 +1320,54 @@ flagged for the M10 controlled-vocabulary check.
 - Defects: "Validated" labels (escalation, rejected); sourceless
   metrics (3rd consecutive powertrain/cooling batch); an unverified
   model designation (CO200).
+
+---
+
+## 27. Owner follow-up review_16 — the research-vs-supplier lane doctrine (2026-07-15)
+
+Raw source:
+`docs/research/raw/owner_reviews/review_16_batch_19_followup.md`.
+Standing doctrine, applied repo-wide:
+
+### The lane split
+
+- **Academic/scientific research** → understands, estimates,
+  simulates, designs the framework. Permitted statuses:
+  `EngineeringBackground`, `AcademicPrincipleCandidate`,
+  `ModelingFramework`, `NeedsSupplierData`,
+  `NeedsPhysicalVerification`. Forbidden statuses: `Confirmed`,
+  `FinalRule`, `BuildReady`. **Academic sources may create modeling
+  logic; they can never close a gate.**
+- **Supplier data** → finalizes real components, ratings, limits, test
+  thresholds. The 13 supplier-only closure items (review_16): battery
+  I_sc, internal resistance, current-limit maps, thermal derating map,
+  approved pack topology, VIB-vs-VIG limits, inverter DC-link
+  capacitance, DC input current limits, motor/inverter heat-rejection
+  maps, pre-charge responsibility, CAN/J1939 documentation, coolant
+  flow/pressure-drop curves, warranty/approved-integration
+  requirements.
+
+### Gate label unified
+
+HV wiring + powertrain + cooling gates →
+**BLOCKED_PENDING_SUPPLIER_DATA** (B-003/B-004 updated) with the
+owner's allowed/not-allowed work lists. Research, modeling, decision
+matrices, test plans, failure modes, supplier comparison, and
+packaging study continue; final selections and any compliance/safety
+claim wait.
+
+### Roadmap + next batch
+
+Gates 4–11 recorded in the Research Map (brake/steering → CAN/PATS →
+mounting/enclosure → weight/axle/CG → failure modes/tests →
+measurement/3D scan → second-source comparison → business/fleet
+readiness). Next expected batch: the 10-topic modeling-frameworks
+payload; impact vocabulary restricted to
+Model/Test/OpenGap/NominalAssumption; every row must name the supplier
+data still needed.
+
+### Follow-up cadence
+
+7 days after each letter is sent, follow up; weekly thereafter.
+Cadence recorded in both outreach files; a repository-side 7-day
+reminder is scheduled (checks send status and prompts follow-up).

@@ -18,8 +18,17 @@ Active blockers and what unblocks them. Entries are closed by marking
 ## B-003 — POWERTRAIN_COMPATIBILITY_REVIEW_REQUIRED
 
 - Filed: 2026-07-15 (owner directive, review_11)
-- Status: Active — **gate label per owner (review_14):
-  `BLOCKED_PENDING_SUPPLIER_RESPONSE`.** Reason (owner wording):
+- Status: Active — **unified gate label per owner (review_16):
+  `BLOCKED_PENDING_SUPPLIER_DATA`** (applies jointly to the HV wiring,
+  powertrain, and cooling gates). **Allowed work (owner list):**
+  research, simulation framework, decision matrices, test plans,
+  failure modes, supplier comparison, packaging study. **Not allowed:**
+  final fuse selection, final cable gauge, final pre-charge resistor,
+  final pump/radiator sizing, final cooling-loop layout, any final
+  compliance/safety claim. **Academic sources may build modeling
+  logic; they can never close this gate** — closure requires the
+  13 supplier-only items (review_16) + engineering review. Reason
+  (owner wording, review_14):
   battery topology, system current limits, short-circuit current,
   inverter DC-link capacitance, and pre-charge responsibility are not
   yet provided by supplier documentation. **The question set does NOT

@@ -76,3 +76,9 @@ For Standard Battery Pro 40 in a 2s2p / 800V candidate layout, please provide:
 - Isc/FuseCoordination: OpenGap
 - CANIntegration: OpenGap
 - CoolingManifold: OpenGap
+
+## Follow-up cadence (owner, review_16)
+
+If no response within 7 days of sending: follow up. Repeat every
+7 days until answered or redirected. Log each follow-up here with a
+date line.

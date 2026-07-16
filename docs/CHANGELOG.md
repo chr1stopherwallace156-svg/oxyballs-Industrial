@@ -5,6 +5,26 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — Owner follow-up (review_16): research-vs-supplier lane doctrine
+
+- Archived review_16 1:1. Standing doctrine applied repo-wide:
+  academic/scientific sources build modeling frameworks (statuses
+  EngineeringBackground / AcademicPrincipleCandidate /
+  ModelingFramework / NeedsSupplierData / NeedsPhysicalVerification;
+  never Confirmed / FinalRule / BuildReady) — **they can never close a
+  supplier gate**. 13 supplier-only closure items recorded.
+- Gate label unified: HV wiring + powertrain + cooling →
+  **BLOCKED_PENDING_SUPPLIER_DATA** (B-003/B-004) with the owner's
+  allowed/not-allowed work lists.
+- Gate roadmap 4–11 recorded in the Research Map; next expected batch
+  = the 10-topic modeling-frameworks payload (impact vocabulary
+  restricted to Model/Test/OpenGap/NominalAssumption).
+- Supplier follow-up cadence (7 days post-send, then weekly) recorded
+  in both outreach letters. (A scheduled in-session reminder could not
+  be set autonomously — tool requires owner approval; cadence is
+  tracked in the handoff instead.)
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 19 + review_15: Cooling Package Gate v0.1; "Validated" rejected
 
 - Archived batch_19 (thermal framework) and review_15 1:1. Owner label

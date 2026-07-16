@@ -4,14 +4,14 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-15
-- Reason for handoff: task complete (batch 19 + review_15 — Cooling Gate v0.1);
+- Reason for handoff: task complete (review_16 lane doctrine applied);
   awaiting owner decisions and/or next batch
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `a5a664d` — Apply review_14 (gate waiting, cooling opens)
+- Start commit: `2a63551` — Reconcile RH batch 19 + owner review_15
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
@@ -19,48 +19,49 @@
 ## Work performed
 
 - Files changed:
-  `docs/research/raw/research_hunter/batch_19_cooling_package_framework.md`
-  and `docs/research/raw/owner_reviews/review_15_batch_19_verdict.md`
-  (new, verbatim — committed separately as `e81697c`),
-  `docs/research/raw/research_hunter/PROVENANCE.md`,
-  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-38;
-  RC-62..65; section 26), both outreach letters (owner-authored
-  thermal addenda appended), `docs/research/RESEARCH_MAP.md` (L6 →
-  Cooling Package Gate v0.1), `docs/CHANGELOG.md`, handoff files
-- Summary: batch 19 (cooling framework) + review_15 reconciled. Owner
-  label adopted: **Cooling Package Gate v0.1** — architecture mapped,
-  calculations halted, supplier thermal maps required; no
-  pump/radiator/chiller picks. **Status-inflation escalation caught
-  and rejected: first "Validated / RuleInput" labels on unconfirmed
-  supplier metrics** — owner replacement labels applied; "Validated"
-  flagged as a RESERVED term for M10's controlled vocabulary. Owner
-  corrections 1–5 applied, most substantively: **cooling sizes to
-  LOSSES (efficiency maps), not the 130 kW output** — the ~6.4 kW
-  best-case figure is a fenced illustration (RC-65). New sourceless
-  candidate data: Dana guide cooling metrics (RC-62), Webasto thermal
-  envelope (RC-63); 65 °C inlet NeedsOfficialDanaSource (RC-64);
-  pump names lead-only; "CO200" designation unverified. Thermal
-  question sets (9+10) appended to both outreach letters. Canonical
-  design case recorded: Cajon Pass sustained 6–8% grade at GVWR with
-  the battery/inverter derating-overlap curve as the key unmapped rule
-  input. **Nothing ingested; nothing Confirmed; ODRs untouched.**
+  `docs/research/raw/owner_reviews/review_16_batch_19_followup.md`
+  (new, verbatim — committed separately as `80a2e93`),
+  `docs/status/BLOCKERS.md` (unified BLOCKED_PENDING_SUPPLIER_DATA
+  label + allowed/not-allowed lists),
+  `docs/research/RESEARCH_MAP.md` (lane doctrine in standing rules;
+  gate roadmap 4–11; next-batch spec; follow-up cadence),
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (section 27 —
+  lane doctrine, 13 supplier-only closure items), both outreach
+  letters (follow-up cadence sections), `docs/CHANGELOG.md`, handoff
+  files
+- Summary: review_16 applied — the standing **research-vs-supplier
+  lane doctrine**: academic sources build modeling frameworks
+  (EngineeringBackground / AcademicPrincipleCandidate /
+  ModelingFramework / NeedsSupplierData / NeedsPhysicalVerification —
+  never Confirmed/FinalRule/BuildReady) and **can never close a
+  gate**; 13 supplier-only closure items recorded. HV wiring +
+  powertrain + cooling gates unified under
+  **BLOCKED_PENDING_SUPPLIER_DATA** with owner allowed/not-allowed
+  work lists. Gate roadmap 4–11 recorded. Next expected batch: the
+  10-topic modeling-frameworks payload (impact vocabulary
+  Model/Test/OpenGap/NominalAssumption; every row names the supplier
+  data still needed). 7-day/weekly supplier follow-up cadence recorded
+  in both outreach letters. **Note: an in-session scheduled reminder
+  could not be set autonomously (scheduling tool requires owner
+  approval) — the cadence lives in the outreach files and this
+  handoff; owner may ask to schedule it.** **Nothing ingested; nothing
+  Confirmed; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_19/review_15 archives are 1:1 against the
-  owner's chat message ("19:75"); the thermal addenda are the owner's
-  wording transcribed unchanged; no thermal figure entered any rule or
-  sizing; the 6.4 kW illustration is fenced
+- Verified vs claimed: review_16 archive is 1:1 against the owner's
+  chat message; all doctrine text traces to the archived review; no
+  statuses were upgraded anywhere
 
 ## State
 
 - Current phase: Revision 07 Source Ingestion and Consolidation
 - Blockers: B-001 (ingestion — ~70 batches outstanding); B-002
-  (.gov/CARB extraction blocked); **B-003
-  (BLOCKED_PENDING_SUPPLIER_RESPONSE — extended 04–08)**; **B-004
-  (interface selection VIB vs VIG)**
+  (.gov/CARB extraction blocked); **B-003 + B-004 unified under
+  BLOCKED_PENDING_SUPPLIER_DATA (research/modeling allowed; final
+  numbers wait)**
 - Open owner decisions (accumulated): (1) elektron-os-clean
   two-universe question (Audit 01 §0/§11.1); (2) index.html
   disposition (Audit 01 §10); (3) L2 regulatory module mapping;
@@ -72,13 +73,17 @@
 
 Expected next inputs, in any order: (a) the owner approves/edits the
 Dana letter (then flip its status to READY_TO_SEND); (b) the owner
-sends either letter (record "Sent" + date in the outreach file);
+sends either letter (record "Sent" + date; **start the 7-day
+follow-up clock** — cadence sections are in both outreach files);
 (c) a supplier reply arrives (archive 1:1 under
 `docs/research/raw/supplier_replies/`, then reconcile — first evidence
-that can resolve B-003/B-004); (d) the next research batch — expected
-to be **Cooling Package Gap Closure (Domain Priority Block 3)** —
-processed per the standing per-batch procedure (diff → archive →
-PROVENANCE → commit → reconcile + lane-bucket → commit).
+that can resolve the BLOCKED_PENDING_SUPPLIER_DATA gate); (d) the next
+research batch — expected to be the **10-topic modeling-frameworks
+payload** (review_16 prompt) — processed per the standing per-batch
+procedure, with the lane doctrine enforced: academic rows get
+EngineeringBackground/AcademicPrincipleCandidate/ModelingFramework
+statuses, impact limited to Model/Test/OpenGap/NominalAssumption, and
+every row must name the supplier data still needed.
 
 ## Forbidden actions
 
