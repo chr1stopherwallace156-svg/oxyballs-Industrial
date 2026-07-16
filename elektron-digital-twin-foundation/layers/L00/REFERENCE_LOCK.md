@@ -1,27 +1,60 @@
-# EDTS — Layer 0: Reference Lock
+# REFERENCE_LOCK.md — EDTS Layer 0
 
-Status: IN_PROGRESS — RESEARCH/ARCHITECTURE/DOCUMENTATION ONLY. No production code. No placeholder geometry.
+**Status:** `REFERENCE_CONFIGURATION_BLOCKED` — **reference not locked**  
+**Reconciliation:** [CONFIGURATION_RECONCILIATION.md](CONFIGURATION_RECONCILIATION.md)  
+**Decision:** DT-D001 **BLOCKED** — do not treat as locked
 
-Canonical identifier (PROVISIONAL — pending owner approval):
+---
 
-- Manufacturer: Ford
-- Model: F-450 Super Duty (pickup, DRW)
-- Model Year: 2019
-- VIN format: UNVERIFIED (RESEARCH_REQUIRED — decode pattern for 2017–2019 F-450 pickup; record WMI, VDS, VIS rules)
-- Chassis configuration: Pickup, Regular Cab, dual rear wheel (DRW)
-- Cab configuration: Regular Cab
-- Drive configuration: 4x2 (derivative 4x4 documented separately)
-- Wheelbase: 141.6 in (3597 mm) — Source: Ford Super Duty pickup dimension guide (2017–2019) [OEM path via Ford BBAS, tokenized PDF link; verification required on official server]
-- GVWR: UNVERIFIED (RESEARCH_REQUIRED — cite official 2019 F‑450 Regular Cab DRW pickup GVWR table)
-- Body configuration: 8 ft Styleside bed, DRW
-- Suspension: UNVERIFIED (RESEARCH_REQUIRED — front/rear type and spring codes for this trim)
-- Axles: UNVERIFIED (RESEARCH_REQUIRED — front drive axle N/A for 4x2; rear axle model/ratio from OEM table or door sticker)
-- Wheels: 19.5 in steel DRW (stock, UNVERIFIED for exact size and offset)
-- Tires: UNVERIFIED (RESEARCH_REQUIRED — OEM tire size/load index for 2019 F‑450 DRW pickup Regular Cab)
+## Lock statement
 
-Decision: See DECISIONS.md (DT-D001 — Provisional L00 reference vehicle).
+> **The reference vehicle is NOT locked.**  
+> Layer 0 cannot be approved until configuration reconciliation is resolved and owner selects a single internally consistent platform.
 
-Notes:
-- This lock aligns with the Build Engine’s Super Duty focus (F‑450/F‑550 BBAS lanes). F‑150 is tracked as DT‑D001‑B (alternative), not part of the first lock.
-- All UNVERIFIED items must be closed before L01 begins or explicitly documented as accepted unknowns in STATUS.json and APPROVAL_GATES.md.
+---
 
+## Provisional specification (under review — do not use for L01)
+
+| Field | Provisional value | Lock status |
+|-------|-------------------|-------------|
+| Manufacturer | Ford | DOCUMENTED |
+| Model | F-450 Super Duty | DOCUMENTED |
+| Model year | 2019 | DOCUMENTED |
+| Platform type | **Unstated — ambiguous** | **BLOCKED** |
+| Cab | Regular Cab | Stated |
+| Drive | 4×2 DRW | Stated |
+| Wheelbase | 141.6 in | **CONFLICT** — pickup dimension; not chassis cab |
+| Body | 8 ft bed | **CONFLICT** — pickup language; not chassis cab upfit |
+| Engine | 6.7L Power Stroke diesel | DOCUMENTED available on both platforms |
+| VIN | Not assigned | RESEARCH_REQUIRED |
+
+---
+
+## What reconciliation found
+
+1. **141.6 in wheelbase + 8 ft factory bed** = pickup framing (documented for F-250/F-350 Regular Cab).
+2. **F-450 chassis cab** Regular Cab minimum wheelbase = **145.3 in** with **60 in CA** — no factory 8 ft bed.
+3. **F-450 pickup** in OEM configuration table = **Crew Cab 176.0 in DRW only** — Regular Cab **not listed** (conflicts with KBB).
+4. **EDTS commercial work-truck intent** aligns with **chassis cab (Candidate C1)**, not the provisional pickup description.
+
+---
+
+## Candidate configurations (owner must choose one)
+
+See [CONFIGURATION_RECONCILIATION.md](CONFIGURATION_RECONCILIATION.md) §5:
+
+- **C1** — 2019 F-450 Chassis Cab Regular Cab DRW 4×2, 145.3 in WB / 60 in CA *(recommended for work-truck intent)*
+- **P1** — 2019 F-450 Pickup Regular Cab DRW 4×2, 141.6 in / 8 ft *(OEM disputed)*
+- **P2** — 2019 F-450 Pickup Crew Cab DRW, 176.0 in / 8 ft *(OEM confirmed)*
+
+---
+
+## Layer 1 geometry scope (blocked)
+
+| Option | Status |
+|--------|--------|
+| OEM cab + chassis only | Pending platform lock (C1 path) |
+| Factory pickup | Pending platform lock (P1/P2 path) |
+| Completed work-truck upfit | Requires named body — not specified |
+
+**Do not begin exterior modeling.**

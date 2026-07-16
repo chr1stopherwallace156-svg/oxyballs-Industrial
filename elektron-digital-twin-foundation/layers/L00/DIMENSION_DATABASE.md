@@ -1,37 +1,85 @@
-# DIMENSION_DATABASE.md — L00 Canonical Dimensions (PROVISIONAL)
+# DIMENSION_DATABASE.md — L00 Canonical Dimensions
 
-Storage format: table with per‑row source, confidence, and verification status.
+**Status:** BLOCKED — platform not locked. See [CONFIGURATION_RECONCILIATION.md](CONFIGURATION_RECONCILIATION.md).
 
-Legend: VERIFIED (OEM), UNVERIFIED, RESEARCH_REQUIRED, ASSUMPTION
+**Rule:** No dimension may be used for modeling until `verification_status` = VERIFIED with OEM page/table citation for the **locked** configuration.
 
-Vehicle: 2019 Ford F‑450 Super Duty Regular Cab, DRW, 8 ft bed, 4x2
+## Field definitions
 
-## Wheelbase / Length / Width / Height
+| Field | Description |
+|-------|-------------|
+| `dimension_id` | Stable ID |
+| `description` | Human label |
+| `value` | Numeric or null |
+| `unit` | in, mm, gal, lb, etc. |
+| `configuration` | Platform + cab + WB + drive — must match locked reference |
+| `source_document` | Full document title |
+| `page` | Page or section |
+| `table` | Table name or code |
+| `verification_status` | VERIFIED \| UNVERIFIED \| RESEARCH_REQUIRED \| CONFLICT |
+| `confidence` | high \| medium \| low |
+| `physical_measurement_status` | not_measured \| scheduled \| measured |
 
-| Name | Value | Units | Source | Confidence | Status | Notes |
-|---|---:|:---:|---|:---:|:---:|---|
-| Wheelbase | 141.6 | in | Super Duty pickup dimension guide (2017–2019, OEM path) | medium | RESEARCH_REQUIRED | Obtain official BBAS PDF; record page/line |
-| Overall length | 231.8 | in | Third‑party (KBB/aggregators) | low | UNVERIFIED | Replace with OEM table |
-| Overall width (excl. mirrors) | 105.9 | in | Third‑party | low | UNVERIFIED | Confirm mirror variant; verify OEM |
-| Overall height | UNVERIFIED | in | — | — | RESEARCH_REQUIRED | — |
+---
 
-## Overhangs and Track
+## Platform A — F-450 Chassis Cab, Regular Cab DRW 4×2, 145.3 in WB (Candidate C1 — not locked)
 
-| Name | Value | Units | Source | Confidence | Status | Notes |
-|---|---:|:---:|---|:---:|:---:|---|
-| Front overhang | UNVERIFIED | in | — | — | RESEARCH_REQUIRED | — |
-| Rear overhang | UNVERIFIED | in | — | — | RESEARCH_REQUIRED | — |
-| Front track | UNVERIFIED | in | — | — | RESEARCH_REQUIRED | — |
-| Rear track | UNVERIFIED | in | — | — | RESEARCH_REQUIRED | — |
+| dimension_id | description | value | unit | configuration | source_document | page | table | verification_status | confidence | physical_measurement_status |
+|--------------|-------------|------:|------|---------------|-----------------|------|-------|---------------------|------------|----------------------------|
+| DIM-C1-WB | Wheelbase | 145.3 | in | 2019 F-450 CC Reg Cab DRW 4×2 | 2019 F-350/F-450/F-550 SD Chassis Cabs - Specs | Dimensions/Weights | Regular Cab Chassis Cab — Code A | VERIFIED | high | not_measured |
+| DIM-C1-CA | Cab-to-axle (back-of-cab to rear axle center) | 60 | in | same | same | Dimensions/Weights | Regular Cab Chassis Cab | VERIFIED | high | not_measured |
+| DIM-C1-AFX | Aft-axle frame extension | 42.2 | in | same | same | Dimensions/Weights | Footnote (3) | VERIFIED | high | not_measured |
+| DIM-C1-OL | Overall length | 230.7 | in | same | same | Dimensions/Weights | Code E | VERIFIED | high | not_measured |
+| DIM-C1-GVWR | Maximum GVWR | 16500 | lb | F-450 chassis cab class | same | Weight Ratings | Vehicle Class Ratings | VERIFIED | high | not_measured |
+| DIM-C1-WIDTH-MIR | Width with mirrors | 105.9 | in | F-450 CC Reg Cab DRW | same | Dimensions/Weights | Width with Mirrors | VERIFIED | high | not_measured |
+| DIM-C1-FUEL-AFT | Fuel tank aft-of-axle (standard) | 40.0 | gal | Reg Cab CC | same | Dimensions/Weights | Fuel tank table | VERIFIED | high | not_measured |
+| DIM-C1-FUEL-MID | Fuel tank midship (optional 65C) | 26.5 | gal | DRW 6.7L diesel | same | Dimensions/Weights | Fuel tank table | VERIFIED | high | not_measured |
+| DIM-C1-FRONT-OH | Front overhang | null | in | same | same | — | — | RESEARCH_REQUIRED | — | not_measured |
+| DIM-C1-REAR-OH | Rear overhang | null | in | same | same | — | — | RESEARCH_REQUIRED | — | not_measured |
+| DIM-C1-TRACK-F | Front track width | null | in | same | same | — | — | RESEARCH_REQUIRED | — | not_measured |
+| DIM-C1-TRACK-R | Rear track width | null | in | same | same | — | — | RESEARCH_REQUIRED | — | not_measured |
+| DIM-C1-FRAME | Frame rail section | null | — | same | BBLB | — | — | RESEARCH_REQUIRED | — | not_measured |
 
-## Frame and Cab Key Dimensions
+---
 
-| Name | Value | Units | Source | Confidence | Status | Notes |
-|---|---:|:---:|---|:---:|:---:|---|
-| Frame rail section dims | — | — | — | — | RESEARCH_REQUIRED | Vehicle‑specific BBLB |
-| Engine bay length (firewall→rad) | — | — | — | — | RESEARCH_REQUIRED | Scan + OEM |
-| Door aperture (H×W) | — | — | — | — | RESEARCH_REQUIRED | — |
-| Hood planform dims | — | — | — | — | RESEARCH_REQUIRED | — |
+## Platform B — F-250/F-350 Regular Cab Pickup 141.6 in WB (OEM reference — not provisional lock)
 
-All values remain blocked until OEM tables are archived or scans executed. Do not propagate UNVERIFIED numbers into geometry.
+*Included because 141.6 in + 8 ft bed is documented here; **do not apply to F-450 without confirmation**.*
 
+| dimension_id | description | value | unit | configuration | source_document | page | table | verification_status | confidence | physical_measurement_status |
+|--------------|-------------|------:|------|---------------|-----------------|------|-------|---------------------|------------|----------------------------|
+| DIM-P350-WB | Wheelbase | 141.6 | in | F-350 Reg Cab pickup | 2018 F-250/F-350/F-450 Super Duty Pickups | Configurations | Code A | VERIFIED | high | not_measured |
+| DIM-P350-BCA | Back-of-cab to rear axle | 56.1 | in | F-350 Reg Cab pickup 8 ft | same | Configurations | Config table | VERIFIED | high | not_measured |
+| DIM-P350-OL | Overall length | 231.8 | in | F-350 Reg Cab pickup | same | Exterior Dimensions | Code E | VERIFIED | high | not_measured |
+| DIM-P350-FOH | Front overhang | 38.2 | in | same | same | Exterior Dimensions | Code B | VERIFIED | high | not_measured |
+| DIM-P350-ROH | Rear overhang | 52.0 | in | same | same | Exterior Dimensions | Code C | VERIFIED | high | not_measured |
+
+---
+
+## Platform C — F-450 Pickup Crew Cab DRW 176.0 in WB (Candidate P2 — OEM confirmed, not provisional lock)
+
+| dimension_id | description | value | unit | configuration | source_document | page | table | verification_status | confidence | physical_measurement_status |
+|--------------|-------------|------:|------|---------------|-----------------|------|-------|---------------------|------------|----------------------------|
+| DIM-P450CC-WB | Wheelbase | 176.0 | in | F-450 pickup Crew Cab DRW | 2018 F-250/F-350/F-450 Super Duty Pickups | Configurations | F-450 row | VERIFIED | high | not_measured |
+| DIM-P450CC-GVWR | Max GVWR | 14000 | lb | F-450 DRW pickup Crew Cab 6.7L | same | Weight Ratings | F-450 DRW Styleside Pickup | VERIFIED | high | not_measured |
+
+---
+
+## Platform D — Provisional spec (F-450 Reg Cab pickup 141.6 in) — CONFLICT
+
+| dimension_id | description | value | unit | configuration | source_document | page | table | verification_status | confidence | physical_measurement_status |
+|--------------|-------------|------:|------|---------------|-----------------|------|-------|---------------------|------------|----------------------------|
+| DIM-PROV-WB | Wheelbase | 141.6 | in | 2019 F-450 Reg Cab pickup (provisional) | KBB 2019 F-450 Regular Cab specs | web | — | CONFLICT | low | not_measured |
+| DIM-PROV-WB-OEM | F-450 pickup Regular Cab in OEM table | null | in | F-450 pickup | 2018 Super Duty Pickups | Configurations | F-450 row | CONFLICT | high | not_measured |
+
+**Conflict note:** OEM pickup configuration table does not list F-450 Regular Cab; only Crew Cab 176.0. KBB claims Regular Cab 141.6 exists for 2019. **Do not use provisional dimensions for modeling.**
+
+---
+
+## Import policy (per owner instruction)
+
+Do **not** bulk-import BBAS tables. Add rows only when:
+
+1. Configuration is owner-locked, and  
+2. Row includes full applicability tag, and  
+3. Source page/table is recorded.

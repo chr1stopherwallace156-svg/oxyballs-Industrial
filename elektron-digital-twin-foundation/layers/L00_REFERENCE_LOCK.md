@@ -1,26 +1,29 @@
 # L00 — Reference Lock
 
-**Status:** In progress — provisional reference defined; owner approval required  
-**Decision:** [DT-D001](../DECISIONS.md#dt-d001--provisional-l00-reference-vehicle-pending-owner-approval)  
-**Blocks:** L01 Exterior until all L00 gates pass and owner approves
+**Status:** `REFERENCE_CONFIGURATION_BLOCKED` — **reference not locked**  
+**Authoritative docs:** [`layers/L00/`](L00/)  
+**Reconciliation:** [L00/CONFIGURATION_RECONCILIATION.md](L00/CONFIGURATION_RECONCILIATION.md)  
+**Decision:** DT-D001 BLOCKED; DT-D005 accepted  
+**Blocks:** L01 until owner selects platform (Candidate C1, P1, or P2)
 
-## Purpose
+> **Do not use the provisional specification below for modeling.**  
+> See [L00/REFERENCE_LOCK.md](L00/REFERENCE_LOCK.md) for current lock statement.
 
-Research and lock the exact first vehicle that anchors every downstream layer: dimensions, disassembly, EV packaging, and presentation.
+## Gate status (2026-07-16)
 
-## Gate status
-
-| Gate | Status | Notes |
-|------|--------|-------|
-| Visual | pending | Awaits reference photo sheet or silhouette from OEM table |
-| Dimensional | pending | Wheelbase sourced; full dimension set incomplete until BBLB |
-| Structural | pending | N/A for mesh; hierarchy conventions defined in DATA_MODEL |
-| Interaction | pass | N/A — documented per QUALITY_STANDARD |
-| Documentation | in_progress | This document + STATUS.json |
+| Gate | Status |
+|------|--------|
+| Visual | blocked |
+| Dimensional | blocked |
+| Structural | blocked |
+| Interaction | pass (N/A) |
+| Documentation | in_progress |
 
 ---
 
-## 1. Candidate analysis
+## Historical note
+
+The content below predates configuration reconciliation and is retained for audit trail only.
 
 Elektron operates in two vehicle classes today:
 

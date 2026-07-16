@@ -27,7 +27,7 @@
       "type": "object",
       "properties": {
         "status": {
-          "enum": ["provisional", "locked", "superseded"]
+          "enum": ["provisional", "locked", "superseded", "blocked"]
         },
         "decision_id": { "type": "string" },
         "make": { "type": "string" },

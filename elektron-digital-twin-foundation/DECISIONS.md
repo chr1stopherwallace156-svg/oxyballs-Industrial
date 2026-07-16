@@ -2,10 +2,10 @@
 
 Append-only record of digital twin foundation decisions.
 
-## DT-D001 — Provisional L00 reference vehicle (pending owner approval)
+## DT-D001 — Provisional L00 reference vehicle
 
 - **Date:** 2026-07-16
-- **Status:** Provisional — **not locked until owner approval**
+- **Status:** **BLOCKED** — superseded by configuration reconciliation 2026-07-16; **do not treat as locked**
 - **Context:** L00 requires a single canonical reference before any 3D work. Elektron's Build Engine research targets Ford Super Duty F-450/F-550 (Class 4/5). Marketing materials also cite light-duty F-150. One vehicle must be locked first.
 - **Decision (provisional):**
   - **2019 Ford F-450 Super Duty XL**
@@ -25,9 +25,21 @@ Append-only record of digital twin foundation decisions.
   - **2017 Ford F-150 SuperCab 6.5 ft 4x2 145 in WB** — better match to Standard Conversion marketing tier and lighter donor pool; deferred as DT-D001-B variant
   - **2019 F-550 chassis cab** — higher GVWR headroom; deferred until upfit/body type is chosen
 - **Consequences:**
-  - All L01–L10 dimensions trace to this configuration until superseded
-  - Physical reference unit, VIN, and Ford BBAS CAD access must be confirmed before L01
-  - F-150 fleet work requires explicit variant decision (DT-D001-B) — not assumed
+  - **Blocked 2026-07-16:** CONFIGURATION_RECONCILIATION found pickup/chassis-cab ambiguity; OEM conflict on F-450 Regular Cab pickup; see DT-D005
+  - No L01 work until owner selects Candidate C1, P1, or P2
+
+## DT-D005 — Configuration reconciliation: reference blocked
+
+- **Date:** 2026-07-16
+- **Status:** Accepted (finding — not a vehicle lock)
+- **Context:** Provisional DT-D001 combined pickup dimensions (141.6 in WB, 8 ft bed) with F-450 while EDTS targets commercial chassis-cab / work-truck platform.
+- **Decision:**
+  1. Result = **`REFERENCE_CONFIGURATION_BLOCKED`**
+  2. Provisional spec is **internally inconsistent** with chassis-cab framing
+  3. As F-450 **pickup**, Regular Cab 141.6 in is **disputed** (KBB vs OEM pickup table)
+  4. **Candidate C1** (chassis cab 145.3/60) documented as aligned with work-truck intent — **not auto-selected**
+  5. Dimension import deferred until platform locked
+- **Consequences:** L00 remains open; L01 blocked; no BBAS table bulk import
 
 ## DT-D002 — Tiered geometry and accuracy strategy
 

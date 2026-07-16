@@ -1,26 +1,64 @@
 # LEGAL_LICENSES.md — L00 Legal and Licensing
 
-Questions to answer before L01:
+**Rule:** Do not claim legal approval unless counsel or rights holder confirms.
 
-## OEM Geometry (Ford BBAS)
-- Can OEM CAD be used? Internally yes (under upfitter terms). Public redistribution typically prohibited. RESEARCH_REQUIRED: obtain and review BBAS terms applicable to CAD and BBLB documents.\n
-- Action: Legal review of BBAS agreement; record summary and constraints.\n
+## Status vocabulary
 
-## Commercial 3D Models
-- Can we license and modify? Generally yes under vendor EULAs; redistribution terms vary.\n
-- RESEARCH_REQUIRED: Identify reputable vendors for 2017–2019 Super Duty and review EULAs for modification and derivative works.\n
+| Status | Meaning |
+|--------|---------|
+| DOCUMENTED | Terms/restrictions recorded from source |
+| COUNSEL_REVIEW_REQUIRED | Needs legal review before reliance |
+| RIGHTSHOLDER_PERMISSION_REQUIRED | Needs explicit permission |
+| APPROVED | Counsel/rights holder confirmed |
+| RESTRICTED | Use prohibited or severely limited |
 
-## Scans (LiDAR/photogrammetry)\n
-- Ownership: Elektron‑owned when captured by us; includes location privacy and plate/VIN redaction obligations.\n
-- Redistribution: Allowed for derived meshes; raw scans may include sensitive data — policy required.\n
+---
 
-## Attribution & Costs\n
-- OEM citations: Required when quoting dimensions; do not embed PDFs without permission.\n
-- Licensing costs: UNVERIFIED — collect per‑vendor.\n
+## OEM geometry (Ford BBAS)
 
-## Commercial restrictions\n
-- No use of OEM trademarks beyond nominative fair use in documentation.\n
-- No implication of OEM endorsement.\n
+| Field | Value |
+|-------|-------|
+| **Status** | COUNSEL_REVIEW_REQUIRED |
+| **Source** | Ford Pro BBAS — https://www.fordpro.com/en-us/upfit/bbas/ |
+| **Documented restriction** | CAD and layout books typically **internal-use only**; public redistribution prohibited |
+| **Can OEM geometry be used?** | Internally — **pending counsel confirmation** |
+| **Redistribution** | RESTRICTED — do not commit OEM CAD/PDF to public repo without approval |
+| **Attribution** | Required when citing dimensions — document title, page/table |
 
-All final decisions recorded in DECISIONS.md (see DT‑D003).\n
+---
 
+## Commercial 3D models
+
+| Field | Value |
+|-------|-------|
+| **Status** | RESEARCH_REQUIRED |
+| **Can models be modified?** | Unknown — vendor EULA review required per vendor |
+| **Licensing costs** | UNVERIFIED |
+| **Redistribution** | RIGHTSHOLDER_PERMISSION_REQUIRED until EULA reviewed |
+
+---
+
+## Scans (LiDAR / photogrammetry)
+
+| Field | Value |
+|-------|-------|
+| **Status** | DOCUMENTED |
+| **Ownership** | Elektron-owned when captured in-house |
+| **Redistribution** | Derived meshes may be publishable; raw scans may contain VIN/plate — policy TBD |
+| **VIN / plate** | Redact in any published material |
+
+---
+
+## Third-party hosted OEM PDFs
+
+| Field | Value |
+|-------|-------|
+| **Status** | DOCUMENTED |
+| **Note** | marketingassociates / third-party mirrors used for reconciliation only — **official BBAS archive preferred** |
+| **Legal use** | COUNSEL_REVIEW_REQUIRED for mirroring and citation |
+
+---
+
+## Summary
+
+Legal use of OEM geometry for EDTS is **not approved** in this layer. Documentation records access terms and restrictions only.
