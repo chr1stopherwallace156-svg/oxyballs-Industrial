@@ -1,6 +1,6 @@
 {
   "suite": "kernel-referential-integrity-tests",
-  "execution_timestamp": "2026-07-16T17:31:32.558992+00:00",
+  "execution_timestamp": "2026-07-16T17:34:19.480168+00:00",
   "runtime": "python3",
   "total": 7,
   "passed": 7,
@@ -9,7 +9,7 @@
   "results": [
     {
       "test_id": "REF-EXIST-001",
-      "execution_timestamp": "2026-07-16T17:31:32.558992+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.480168+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "all referenced records exist",
@@ -20,7 +20,7 @@
     },
     {
       "test_id": "REF-VEH-001",
-      "execution_timestamp": "2026-07-16T17:31:32.558992+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.480168+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "component/assembly/vehicle IDs align",
@@ -31,7 +31,7 @@
     },
     {
       "test_id": "REF-CFG-001",
-      "execution_timestamp": "2026-07-16T17:31:32.558992+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.480168+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "component configuration matches vehicle configuration",
@@ -42,7 +42,7 @@
     },
     {
       "test_id": "REF-FP-001",
-      "execution_timestamp": "2026-07-16T17:31:32.558992+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.480168+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "component fingerprint matches exact configuration",
@@ -53,7 +53,7 @@
     },
     {
       "test_id": "REF-GEO-001",
-      "execution_timestamp": "2026-07-16T17:31:32.558992+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.480168+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "geometry asset links to correct component instance",
@@ -64,7 +64,7 @@
     },
     {
       "test_id": "REF-REL-001",
-      "execution_timestamp": "2026-07-16T17:31:32.558992+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.480168+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "assembly relationship endpoints exist and align",
@@ -75,7 +75,7 @@
     },
     {
       "test_id": "REF-PP-001",
-      "execution_timestamp": "2026-07-16T17:31:32.558992+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.480168+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "passport IDs/fingerprint align with silo",

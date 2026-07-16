@@ -529,3 +529,19 @@ Append-only record of digital twin foundation decisions.
 - **Consequences:**
   - Kernel freeze preserved; illustrative v1.1 instance is non-authoritative
   - GEO seed may remain for referential suite but stays unlinked from the passport while `file_exists: false`
+
+## DT-D031 — Passport rc1 sufficient (executed validation)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Correction that draft “initial” passport fields and `COMPONENT_PASSPORT_V1_1_PROPOSAL_REQUIRED` contradicted freeze + executed capability of rc1.
+- **Decision:**
+  1. Validate active door passport against frozen `schemas/component-passport.schema.json` and record schema SHA-256, validator version, timestamp, errors.
+  2. Do not create `door-fl-component-passport.initial.example.json` with non-rc1 fields; hypothetical validation **FAIL**.
+  3. Reject abbreviated fingerprints; require full CFG-000001 digest equality.
+  4. Candidates remain in Lane A catalog; passport keeps empty geometry/evidence/procedure ID lists as applicable.
+  5. Revise v1.1: warn that `allOf` vs `additionalProperties:false` rejects new properties; park as `OPTIONAL_FUTURE_PROPOSAL` / `EMPIRICAL_TRIGGER_REQUIRED`.
+  6. Final status: **`COMPONENT_PASSPORT_RC1_SUFFICIENT`**.
+- **Consequences:**
+  - Evidence: `verification/results/component-passport-rc1-validation.json`
+  - Decision doc: `proposals/COMPONENT_PASSPORT_REVISION_DECISION.md`

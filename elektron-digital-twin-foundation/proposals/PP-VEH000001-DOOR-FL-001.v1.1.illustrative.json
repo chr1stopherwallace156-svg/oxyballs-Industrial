@@ -1,5 +1,5 @@
 {
-  "proposal_status": "PROPOSAL_NOT_ACTIVE",
+  "proposal_status": "OPTIONAL_FUTURE_PROPOSAL",
   "passport_id": "PP-VEH000001-DOOR-FL-001",
   "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
   "vehicle_instance_id": "VEH-000001",
@@ -9,23 +9,17 @@
   "status_summary": {
     "evidence": "CANDIDATE",
     "geometry": "ABSENT",
-    "interaction": "ABSENT",
-    "procedure": "NOT_EVALUATED"
+    "interaction": "ABSENT"
   },
   "links": {
-    "candidate_asset_ids": [
-      "CAND-00031-CGT",
-      "CAND-771-GRAB"
-    ],
-    "geometry_asset_ids": [],
     "evidence_link_ids": [],
-    "assembly_relationship_ids": [
-      "REL-VEH000001-0001"
-    ],
+    "geometry_asset_ids": [],
+    "relationship_ids": ["REL-VEH000001-0001"],
+    "interaction_ids": [],
     "connection_relationship_ids": [],
-    "procedure_dependency_ids": [],
-    "interaction_ids": []
+    "procedure_dependency_ids": []
   },
+  "geometry_roles": [],
   "quality_assessment": {
     "score": null,
     "scoring_status": "NOT_EVALUATED",
@@ -33,5 +27,6 @@
     "score_inputs": null
   },
   "schema_version": "1.1.0-proposal",
-  "notes": "ILLUSTRATIVE ONLY — not an active silo record. Exact component instance exists. Two candidates discovered and not acquired. No usable geometry asset and no verified procedure have entered this passport. Do not invent Visual/Engineering/Collision roles or removal graphs until records are acquired and evaluated."
+  "composition_notes": "Do not compose via allOf against rc1 additionalProperties:false. This file is a complete restatement draft.",
+  "notes": "ILLUSTRATIVE ONLY — NOT ACTIVE. Candidates remain in L1_LANE_A_ASSET_CATALOG.json (not forced into rc1 passport fields). No usable geometry. No verified procedure. Full CFG fingerprint only — never abbreviated."
 }

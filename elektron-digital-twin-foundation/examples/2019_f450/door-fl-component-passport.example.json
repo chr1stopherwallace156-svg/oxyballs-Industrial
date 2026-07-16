@@ -20,5 +20,5 @@
     "interaction_ids": []
   },
   "schema_version": "1.0.0",
-  "notes": "Exact component instance CMPINST-VEH000001-DOOR-FL under VEH-000001/CFG-000001. Candidates discovered (not acquired): CAND-00031-CGT, CAND-771-GRAB — see L1_LANE_A_ASSET_CATALOG.json. No usable geometry asset and no verified procedure have entered this passport. GEO-VEH000001-DOOR-FL-001 remains a dormant seed (file_exists false) and is intentionally not linked here. v1.1 ID-index design is proposal-only under proposals/. Legacy family passport CMP_PASS_FR_DOOR_L must not auto-inherit."
+  "notes": "Exact component instance CMPINST-VEH000001-DOOR-FL under VEH-000001/CFG-000001. Candidates discovered (not acquired): CAND-00031-CGT, CAND-771-GRAB — authoritative in L1_LANE_A_ASSET_CATALOG.json (not passport fields; rc1 has no candidate_asset_ids). links.geometry_asset_ids empty; no usable geometry. No procedure dependency IDs. Fingerprint equals CFG-000001 full digest. Audit: verification/results/COMPONENT_PASSPORT_EXISTING_SCHEMA_AUDIT.md. v1.1 is OPTIONAL_FUTURE_PROPOSAL only. Legacy CMP_PASS_FR_DOOR_L must not auto-inherit."
 }

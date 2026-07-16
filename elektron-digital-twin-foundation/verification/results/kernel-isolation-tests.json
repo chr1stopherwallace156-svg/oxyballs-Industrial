@@ -1,6 +1,6 @@
 {
   "suite": "kernel-isolation-tests",
-  "execution_timestamp": "2026-07-16T17:31:32.490663+00:00",
+  "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
   "runtime": "python3",
   "total": 15,
   "passed": 15,
@@ -10,7 +10,7 @@
   "results": [
     {
       "test_id": "ISO-POS-001",
-      "execution_timestamp": "2026-07-16T17:31:32.490663+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "resolver returns door for exact IDs",
@@ -21,7 +21,7 @@
     },
     {
       "test_id": "ISO-NEG-001",
-      "execution_timestamp": "2026-07-16T17:31:32.490663+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "wrong vehicle_instance_id => MISS",
@@ -32,7 +32,7 @@
     },
     {
       "test_id": "ISO-NEG-002",
-      "execution_timestamp": "2026-07-16T17:31:32.490663+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "wrong configuration_id => MISS",
@@ -43,7 +43,7 @@
     },
     {
       "test_id": "ISO-NEG-003",
-      "execution_timestamp": "2026-07-16T17:31:32.490663+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "canonical-name-only lookup rejected",
@@ -54,7 +54,7 @@
     },
     {
       "test_id": "ISO-NEG-004",
-      "execution_timestamp": "2026-07-16T17:31:32.490663+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "2018 configuration fingerprint != 2019 silo",
@@ -65,7 +65,7 @@
     },
     {
       "test_id": "ISO-NEG-005",
-      "execution_timestamp": "2026-07-16T17:31:32.490663+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "F-550 fingerprint != F-450 silo",
@@ -76,7 +76,7 @@
     },
     {
       "test_id": "ISO-NEG-006",
-      "execution_timestamp": "2026-07-16T17:31:32.490663+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "4X4 fingerprint != 4X2 silo",
@@ -87,7 +87,7 @@
     },
     {
       "test_id": "ISO-NEG-007",
-      "execution_timestamp": "2026-07-16T17:31:32.490663+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "mismatched fingerprint detected",
@@ -98,7 +98,7 @@
     },
     {
       "test_id": "ISO-NEG-008",
-      "execution_timestamp": "2026-07-16T17:31:32.490663+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "other-vehicle component not resolved into silo",
@@ -109,7 +109,7 @@
     },
     {
       "test_id": "ISO-NEG-009",
-      "execution_timestamp": "2026-07-16T17:31:32.490663+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "cross-vehicle comparison must not live on component instance",
@@ -120,7 +120,7 @@
     },
     {
       "test_id": "ISO-NEG-010",
-      "execution_timestamp": "2026-07-16T17:31:32.490663+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "schema rejects inline cross-vehicle comparison on component",
@@ -131,7 +131,7 @@
     },
     {
       "test_id": "ISO-NEG-011",
-      "execution_timestamp": "2026-07-16T17:31:32.490663+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "abbreviated fingerprint fails pattern",
@@ -142,7 +142,7 @@
     },
     {
       "test_id": "ISO-NEG-012",
-      "execution_timestamp": "2026-07-16T17:31:32.490663+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "malformed fingerprint fails pattern",
@@ -153,7 +153,7 @@
     },
     {
       "test_id": "ISO-NEG-013",
-      "execution_timestamp": "2026-07-16T17:31:32.490663+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "fixture vehicle_instance_id incorrect relative to silo",
@@ -164,7 +164,7 @@
     },
     {
       "test_id": "ISO-NEG-014",
-      "execution_timestamp": "2026-07-16T17:31:32.490663+00:00",
+      "execution_timestamp": "2026-07-16T17:34:19.411567+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "fixture configuration_id incorrect relative to silo",
