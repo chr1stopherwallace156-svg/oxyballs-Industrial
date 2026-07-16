@@ -5,11 +5,15 @@ Decision: DT‑D001 — Provisional L00 reference vehicle → LOCK
 Proposed lock:\n
 - 2019 Ford F‑450 Super Duty Regular Cab, DRW, 8 ft bed, 4x2, 6.7L diesel
 
-Approval checklist:\n
-- [ ] All UNVERIFIED fields documented or resolved\n
-- [ ] DIMENSION_DATABASE.md cites OEM tables for wheelbase, length/width/height\n
-- [ ] LEGAL_LICENSES.md reviewed by counsel\n
-- [ ] STATUS.json gates updated to pass for Documentation; others as applicable\n
+Approval checklist (Layer 0 cannot be approved until ALL are satisfied):\n
+- [ ] Reference vehicle locked (model year, cab, 4×2/4×4, wheelbase, body/upfit, engine config, wheel/tire package)\n
+- [ ] Dimensions documented (DIMENSION_DATABASE.md) with source, confidence, and verification status for each entry\n
+- [ ] Geometry acquisition strategy selected (GEOMETRY_OPTIONS.md) with rationale\n
+- [ ] Licensing reviewed (LEGAL_LICENSES.md) and OEM BBAS terms acknowledged\n
+- [ ] Unknowns documented (REFERENCE_SOURCES.md + DIMENSION_DATABASE.md) as UNVERIFIED/RESEARCH_REQUIRED — none silently assumed\n
+- [ ] Exterior object hierarchy approved (EXTERIOR_OBJECT_HIERARCHY.md)\n
+- [ ] Design philosophy and vision in place (DESIGN_PHILOSOPHY.md, VISION.md)\n
+- [ ] STATUS.json updated; Documentation gate = pass; other gates as applicable\n
 
 Approval fields:\n
 - Approver: ___________________\n
