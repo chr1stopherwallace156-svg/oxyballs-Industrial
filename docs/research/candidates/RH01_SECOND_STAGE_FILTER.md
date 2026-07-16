@@ -60,7 +60,8 @@ this file supersedes it (see Addendum, section 7).
 | CS-31 | **SupplierCandidate — voltage-suitability flag** | *TE AMP+ Mini K HV Precharge Relay (product page 2-1904058-5)* | TE Connectivity | <https://www.te.com/en/product-2-1904058-5.html> | Candidate (batch_13) — **owner flag (review_08): TE lists 400 VDC contact / 450 VDC max switching, 12 VDC coil — this exact relay may NOT suit the final pack voltage**; pack-voltage, pre-charge current, and coil-architecture checks required — lane L5/L9 |
 | CS-32 | **SupplierCandidate** | *Coroflex 9-2611 / 50 mm² FHLR2GCB2G shielded HV cable — technical datasheet (LV 216-2)* | Coroflex (PDF hosted at citini.com — mirror; prefer Coroflex copy) | <https://citini.com/wp-content/uploads/2022/07/HV50SSC.pdf> | Candidate (batch_13) — **closes the 50 mm² datasheet gap at candidate level**; part-scoped; ampacity curves need clean extraction + engineering review — lane L5/L9 |
 | CS-33 | **TechnicalBackground** (owner review_08) | *TONFUL: "IP67 vs. IP69K: Waterproof Ratings Guide for Off-Road Vehicles"* | tonful.com (trade article) | <https://tonful.com/ip67-vs-ip69k-waterproof-ratings-guide-for-off-road-vehicles-tonful/> | Background (batch_13) — guides the test requirement; **final IP test parameters only from ISO 20653 text or a certified lab procedure** (CS-29 stays the gate) — lane L5/L8 |
-| CS-34 | **InstrumentationCandidate / TestMethodCandidate** (owner reclassification — NOT RegulatoryCandidate) | *Metrel MI3132 EV vehicle tester — spec listing (µΩ Kelvin 4-wire, 1 A/2 A; supports ECE R100 Annex 4A/4B, ISO 6469-3)* | Metrel (via test-meter.co.uk reseller page) | <https://www.test-meter.co.uk/metrel-mi3132-ev-electric-vehicle-tester> | Candidate (batch_13) — shows HOW to measure bonding (4-wire Kelvin ≥1 A), not WHAT the legal threshold is; surface-prep procedure still missing — lane L5/L10 |
+| CS-34 | **InstrumentationCandidate / TestMethodCandidate** (owner reclassification — NOT RegulatoryCandidate; **re-affirmed after batch_14 regression**) | *Metrel MI3132 EV vehicle tester — spec listing (µΩ Kelvin 4-wire, 1 A/2 A; supports ECE R100 Annex 4A/4B, ISO 6469-3)* | Metrel (via test-meter.co.uk reseller page) | <https://www.test-meter.co.uk/metrel-mi3132-ev-electric-vehicle-tester> | Candidate (batch_13) — shows HOW to measure bonding (4-wire Kelvin ≥1 A), not WHAT the legal threshold is; surface-prep procedure still missing — lane L5/L10 |
+| CS-35 | **SupplierCandidate — dual-candidate structure** (owner review_09) | *Amphenol Excel\|Mate Mono (HVBI series) product brochure* — HV connectors for 16–70 mm² shielded cable; HVIL; 360° shielding; IP67/IP6K9K mated; 1000 VDC; unique keying (30°/60°/90° color-coded) | Amphenol Industrial (**official Amphenol server**) | <https://www.amphenol-industrial.de/media/pages/downloads/ev/397e425cfa-1707818150/excelmate-mono-produktbroschuere.pdf> | Candidate (batch_14) — **closes the connector ask at candidate level.** Owner structure: **03R8 = 180 A candidate (35–50 mm²); 05R10 = 250 A candidate (50–70 mm²); final choice BLOCKED by battery + inverter current** — lane L5/L9 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -122,9 +123,10 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-49 | UNECE GTR 20: "Specification of the 0.1 Ω upper resistance limit for chassis bonding provides protection from electric shock by shunting any harmful electrical currents to the vehicle chassis should any electrically charged components lose isolation… test probes are specified that conform to ISO 20653…" | CS-28 | **Candidate locator (batch_12): page 60, Section II (rationale)** — unverified | **RegulatoryCandidate — TestCandidate (bonding resistance test) + MetricCandidate (≤ 0.1 Ω)**; NOT final pass/fail until mapped to the US FMVSS/ISO context and a measurement method. **Reconciliation flag: distinct from RC-42's <0.2 Ω exposed-part figure — different contexts (GTR bonding path vs FMVSS exposed-part resistance); never conflate** — lane L5/L2 |
 | RC-50 | Miba pre-charge framework: "R = t / (5 * C)… I_max = U / R… E = 0.5 * C * U²" — with the inrush limit checked against contactor/fuse load limits and the resistor rated for full charging energy *(formulas are CandidateRules; they select nothing until U, C, t, allowed inrush, pulse-energy rating, and thermal duty are known)* | CS-30 | **Candidate locator (batch_13): guide sections 1–3** — unverified | **CandidateRule — pre-charge calculation module inputs: U, C, t, Imax, E**; resistor part = OpenGap — lane L5/L8 |
 | RC-51 | TE Mini K pre-charge relay: 1 Form X SPST-NO-DM, 20 A DC contact rating, 2000 Vrms initial dielectric contacts–coil, −40…85 °C *(owner relay adds: 400 VDC contact voltage / 450 VDC max switching / 12 VDC coil — **suitability above that pack voltage NOT established**)* | CS-31 | **Candidate locator (batch_13): product configuration/usage matrix** — unverified | **SupplierCandidate — pack-voltage check REQUIRED (OpenGap: relay suitability above 400/450 VDC)**; coil architecture (12 vs 24 V) unresolved — lane L5/L9 |
-| RC-52 | Coroflex 50 mm²: "MAX 600 V AC / 1000 V DC… Specification: LV 216-2… Our specifications shall not release you from your obligation to test the products supplied regarding their suitability for the intended purpose of use." *(owner relay adds: 3×/6× OD bend radii, ≈630 g/m, −40…+180 °C, ambient-indexed load curves — part-scoped to THIS 50 mm² cable; note the datasheet's own suitability-testing disclaimer)* | CS-32 | **Candidate locator (batch_13): page 1, core specifications** — unverified | **SupplierCandidate — part-scoped Rule/Metric candidates; ampacity = needs curve extraction + engineering review** — lane L5 |
+| RC-52 | Coroflex 50 mm²: "MAX 600 V AC / 1000 V DC… Specification: LV 216-2… Our specifications shall not release you from your obligation to test the products supplied regarding their suitability for the intended purpose of use." *(owner relay adds: 3×/6× OD bend radii, ≈630 g/m, −40…+180 °C, max 0.368 mΩ/m conductor resistance, ambient-indexed load curves. Batch_14 adds **OD = 15.8 mm** → computed part-scoped bend envelopes **≥47.4 mm static / ≥94.8 mm dynamic** — arithmetic owner-verified. Part-scoped to THIS 50 mm² cable; note the datasheet's own suitability-testing disclaimer)* | CS-32 | **Candidate locators (batches 13/14): page 1, mechanical properties** — unverified | **SupplierCandidate — part-scoped Rule/Metric candidates (incl. computed bend envelopes); ampacity = needs curve extraction (50 °C ambient index) + engineering review** — lane L5 |
 | RC-53 | TONFUL: IP69K (ISO 20653 "K") = 80 °C water jets at 100 bar, multiple angles, rotating fixture; IP67 = static immersion, 1 m, 30 min *(trade explainer — describes the tests, is not the standard)* | CS-33 | Article comparison section — unverified | **TechnicalBackground / NeedsExactSource** — guides underbody test design (dynamic washdown, not just immersion); final parameters from ISO 20653/lab only — lane L5/L8 |
 | RC-54 | Metrel MI3132 EV: µΩ-meter function, 1 A / 2 A test currents, 4-wire Kelvin method, supports ECE R100 Annex 4A/4B and ISO 6469-3 *(instrument spec — shows a credible bonding measurement method: ≥1 A injection, Kelvin connection, not a DMM continuity check)* | CS-34 | **Candidate locator (batch_13): µΩ-meter spec block** — unverified | **InstrumentationCandidate / TestMethodCandidate** (owner reclassification); surface-prep procedure (e-coat, corrosion inhibitor) still missing — lane L5/L10 |
+| RC-55 | Amphenol HVBI part-number system: "HVBI-7-03R8-XFC-X-XX-FG… 35mm2 to 50mm2. Shell type: 7: straight plug. 9: Right angle plug. Insert size: 03R8: 8mm Radsok (Rated current 180A)… Alternate keying positions: ARD: 30°, Red. BBK: 60°, Black. CYL: 90°, Yellow." *(owner adds from same brochure: 05R10 = 250 A / 50–70 mm² option; HVIL, EMI shield, IP67/IP6K9K mated, 1000 VDC)* — directly satisfies the J1673-style keying/mis-mate concern (RC-39) at supplier level | CS-35 | **Candidate locator (batch_14): page 3, part-number selection block** — unverified | **SupplierCandidate — dual candidates (03R8 180 A vs 05R10 250 A); selection BLOCKED by battery + inverter current**; `NeedsEngineeringReview` — lane L5/L9 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -930,3 +932,54 @@ F-450/F-550; bonding/grounding exact method; official IP procedure;
 engineer review. Owner's stated options next: finish HV
 connector/pre-charge details, or move to cooling with HV wiring held
 in NeedsEngineeringReview.
+
+---
+
+## 21. Batch 14 + owner review_09 reconciliation (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_14_hv_wiring_blocked_state.md`
+and `docs/research/raw/owner_reviews/review_09_batch_14_verdict.md`.
+Row additions/updates: CS-35, RC-55 (new); RC-52 (OD + computed
+envelopes).
+
+### The connector ask closes at candidate level
+
+Amphenol Excel|Mate HVBI (CS-35/RC-55) — **from the official Amphenol
+server**, the first supplier document in this register not hosted on a
+mirror. Owner's dual-candidate structure applied: 03R8 (180 A,
+35–50 mm²) vs 05R10 (250 A, 50–70 mm²); **final choice blocked by
+battery + inverter current** — a clean example of the register's core
+principle: candidates parameterize the decision, upstream data makes
+it. Bonus: HVBI's unique keying (30°/60°/90° color-coded) satisfies the
+RC-39 J1673-style mis-mate concern at supplier level.
+
+### Blocked-state conduct — the payload's real achievement
+
+Batch_14's Balancing Form declares every upstream parameter `OPEN`,
+every dependent part number `Halted`, and the validation state
+`BLOCKED BY UPSTREAM DATA DEFICIENCIES` — refusing to calculate,
+generate, or guess. Owner: "That is the right answer." Recorded as the
+conduct benchmark for future payloads: **an empty form honestly
+blocked beats a filled form dishonestly complete.**
+
+### Corrections and regressions
+
+| Item | Disposition |
+|---|---|
+| Metrel + TONFUL again labeled `RegulatoryCandidate` | **REGRESSION** — both were reclassified in review_08 (Instrumentation/TestMethod; TechnicalBackground). Re-corrected; register statuses unchanged. Second occurrence → these two rows added to the recurring-error watchlist (with the broad-incentive sentence from batches 1–2). |
+| "Candidate selection locked" recurred | **REGRESSION** — re-corrected to "candidate selected for evaluation" (review_08 rule stands). |
+| 50 mm² computed bend envelopes (47.4 / 94.8 mm) | **ACCEPTED as derived values** — first Hunter arithmetic admitted to the register: datasheet OD × datasheet multipliers, owner-verified, part-scoped. Precedent note: derived values are admissible ONLY when both inputs are datasheet-sourced and the arithmetic is owner/engineer-checked. |
+
+### Owner's next step — HV Wiring Decision Matrix
+
+Owner's prompt for the next payload: a 10-row decision matrix (cable
+gauge, connector, main fuse, contactor, pre-charge resistor,
+pre-charge relay, MSD, isolation monitor, bonding test, IP enclosure)
+× 7 columns (required input, status, candidate source, blocker,
+calculation needed, engineer review, Build Engine status) — **no final
+selections, nothing Confirmed, show only what data is needed.**
+Recorded in the Research Map. The owner's framing question stands
+above all of it: *which battery pack and inverter is this being sized
+around?* — an upstream business/engineering decision no research batch
+can answer.

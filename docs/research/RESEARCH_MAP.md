@@ -159,15 +159,18 @@ supplier datasheets → CAN/PATS.**
    CandidateRule (U, C, t, Imax, E), Sendyne SIM100MLP
    (+NeedsCANProtocolDocument), Chilye MSD, GTR 20 ≤0.1 Ω bonding
    candidate, Metrel 4-wire Kelvin method (InstrumentationCandidate),
-   ISO 20653 path. **Research-side remaining:** HV connector
-   datasheets for 35/50 mm² (only untouched ask item); official ISO
-   20653/lab IP procedure; official bonding threshold + full test
-   procedure incl. surface prep. **Build-side blockers (research
-   cannot close):** battery nominal/max V, cont./peak/short-circuit I,
-   inverter DC currents, DC-link capacitance, final part numbers,
-   physical routing, engineer review. Owner options next: finish
-   connectors/pre-charge, or move to cooling with L5 held in
-   NeedsEngineeringReview.
+   ISO 20653 path, **Amphenol HVBI connectors (03R8 180 A / 05R10
+   250 A dual candidates — batch_14, official Amphenol server)**.
+   **Research-side remaining:** official ISO 20653/lab IP procedure;
+   official bonding threshold + full test procedure incl. surface
+   prep. **Build-side blockers (research cannot close):** battery
+   nominal/max V, cont./peak/short-circuit I, inverter DC currents,
+   DC-link capacitance, final part numbers, physical routing, engineer
+   review — and above all the owner's framing question: **which
+   battery pack and inverter is this sized around?** **Next payload
+   (owner prompt): the HV Wiring Decision Matrix** — 10 component rows
+   × 7 decision columns, no selections, nothing Confirmed, data-needs
+   only.
 2. **Cooling** (L6) — EMPTY: battery/motor/inverter/charger/DC-DC
    loops, pump + radiator sizing, flow, pressure drop, derating,
    high-ambient testing.

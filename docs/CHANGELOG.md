@@ -5,6 +5,29 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 14 + review_09 reconciled: connector ask closed; blocked-state benchmark
+
+- Archived batch_14 (blocked-state Balancing Form + Amphenol HVBI) and
+  review_09 1:1.
+- CS-35/RC-55: Amphenol Excel|Mate HVBI — first official-server
+  supplier document; connector ask closed at candidate level with the
+  owner's dual-candidate structure (03R8 180 A vs 05R10 250 A; final
+  choice blocked by battery + inverter current); HVBI keying satisfies
+  the RC-39 mis-mate concern at supplier level.
+- RC-52 updated: OD 15.8 mm + computed part-scoped bend envelopes
+  (≥47.4 mm static / ≥94.8 mm dynamic — owner-verified arithmetic).
+  Precedent recorded: derived values admissible only when both inputs
+  are datasheet-sourced and the arithmetic is owner/engineer-checked.
+- Conduct benchmark recorded: the Balancing Form's honest BLOCKED
+  state ("an empty form honestly blocked beats a filled form
+  dishonestly complete").
+- Regressions re-corrected: Metrel/TONFUL RegulatoryCandidate labels
+  (2nd occurrence — added to recurring-error watchlist) and "Candidate
+  selection locked" language.
+- Research Map: L5 next step = owner's HV Wiring Decision Matrix
+  prompt; framing question recorded (which pack/inverter?).
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 13 + review_08 reconciled: pre-charge math + 50 mm² cable
 
 - Archived batch_13 and review_08 1:1. Delivered 5 of the owner's
