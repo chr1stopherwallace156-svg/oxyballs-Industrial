@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_name": "EDTS_Controlled_Unit_Vocabulary",
+  "units": {
+    "UNIT-MM": { "symbol": "mm", "dimension": "length", "description": "Millimeter" },
+    "UNIT-INCH": { "symbol": "in", "dimension": "length", "description": "Inch" },
+    "UNIT-DEG": { "symbol": "deg", "dimension": "angle", "description": "Degree" },
+    "UNIT-RAD": { "symbol": "rad", "dimension": "angle", "description": "Radian" },
+    "UNIT-KPA": { "symbol": "kPa", "dimension": "pressure", "description": "Kilopascal" },
+    "UNIT-PSI": { "symbol": "psi", "dimension": "pressure", "description": "Pounds per square inch" },
+    "UNIT-HP": { "symbol": "hp", "dimension": "power", "description": "Mechanical horsepower" },
+    "UNIT-KW": { "symbol": "kW", "dimension": "power", "description": "Kilowatt" },
+    "UNIT-LBFT": { "symbol": "lb-ft", "dimension": "torque", "description": "Pound-foot" },
+    "UNIT-NM": { "symbol": "N·m", "dimension": "torque", "description": "Newton-meter" },
+    "UNIT-RPM": { "symbol": "rpm", "dimension": "rotational_velocity", "description": "Rotations per minute" },
+    "UNIT-KG": { "symbol": "kg", "dimension": "mass", "description": "Kilogram" },
+    "UNIT-LB": { "symbol": "lb", "dimension": "mass", "description": "Pound" },
+    "UNIT-PERCENT": { "symbol": "%", "dimension": "dimensionless", "description": "Percentage" }
+  }
+}

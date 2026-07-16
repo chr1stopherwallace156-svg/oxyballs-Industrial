@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EDTS_Physical_Asset_Intake_Record",
+  "type": "object",
+  "properties": {
+    "intake_record_id": { "type": "string", "pattern": "^INTK-[0-9]{5}$" },
+    "intake_timestamp": { "type": "string", "format": "date-time" },
+    "inspector_id": { "type": "string" },
+    "vehicle_identifiers": {
+      "type": "object",
+      "properties": {
+        "vin": { "type": "string", "minLength": 17, "maxLength": 17 },
+        "safety_certification_label": {
+          "type": "object",
+          "properties": {
+            "gvwr_lbs": { "type": "number" },
+            "fgawr_lbs": { "type": "number" },
+            "rgawr_lbs": { "type": "number" },
+            "production_date": { "type": "string", "pattern": "^[0-9]{2}/[0-9]{2}$" },
+            "paint_code": { "type": "string" }
+          },
+          "required": ["gvwr_lbs", "fgawr_lbs", "rgawr_lbs", "production_date"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["vin", "safety_certification_label"],
+      "additionalProperties": false
+    },
+    "measured_ride_heights": {
+      "type": "object",
+      "properties": {
+        "front_left_mm": { "type": "number" },
+        "front_right_mm": { "type": "number" },
+        "rear_left_mm": { "type": "number" },
+        "rear_right_mm": { "type": "number" }
+      },
+      "required": ["front_left_mm", "front_right_mm", "rear_left_mm", "rear_right_mm"],
+      "additionalProperties": false
+    },
+    "tire_placard_details": {
+      "type": "object",
+      "properties": {
+        "tire_size_installed": { "type": "string" },
+        "cold_inflation_pressure_front_psi": { "type": "integer" },
+        "cold_inflation_pressure_rear_psi": { "type": "integer" }
+      },
+      "required": ["tire_size_installed", "cold_inflation_pressure_front_psi", "cold_inflation_pressure_rear_psi"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["intake_record_id", "intake_timestamp", "inspector_id", "vehicle_identifiers", "measured_ride_heights", "tire_placard_details"],
+  "additionalProperties": false
+}

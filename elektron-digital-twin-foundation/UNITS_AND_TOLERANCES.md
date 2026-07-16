@@ -6,7 +6,7 @@
 
 ## 1. Primary Units of Measure
 
-To eliminate parsing errors, all physical quantities must use standard metric units:
+All physical quantities must use standard metric units internally. **Unit identifiers** in claim records must reference `registries/UNIT_REGISTRY.json` (e.g., `UNIT-MM`, `UNIT-INCH`).
 
 - Length / Spatial Position: millimeters (mm)
 - Angles / Rotations: degrees (deg) or radians (rad)
@@ -36,7 +36,7 @@ If tolerances are asymmetric:
 - **Measured dimensions:** Record to the precision justified by the Measurement Accuracy Class (MAC) and instrument certificate.
 - **Angular dimensions:** Record to four decimal places when sourced from calibrated metrology (e.g., `4.1250 deg`).
 
-## 4. Measurement Accuracy Classes
+## 4. Measurement Conformance Classes
 
-See `MEASUREMENT_ACCURACY_CLASS_PROPOSAL.md` for MAC-A (±0.5 mm) through MAC-D (no dimensional authority).
+See `MEASUREMENT_REQUIREMENTS_V2_PROPOSAL.md` for Class A through Class D targets and validation plans.
 

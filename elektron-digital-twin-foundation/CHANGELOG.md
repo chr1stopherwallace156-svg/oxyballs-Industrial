@@ -56,3 +56,33 @@ All notable changes to the digital twin foundation. Append-only.
 - Reference vehicle: **NOT LOCKED**
 - Layer 1: **BLOCKED** — do not begin exterior work
 - Next action: Owner reviews `L00_CORRECTION_PLAN.md` and provides feedback
+
+## 2026-07-16 (Governance Refactor)
+
+### Added
+
+- `registries/UNIT_REGISTRY.json` — controlled unit vocabulary
+- `registries/COORDINATE_FRAME_REGISTRY.json` — frame definitions
+- `registries/TRANSFORM_REGISTRY.json` — machine-readable transforms
+- `registries/HISTORICAL_CLAIM_REGISTRY.json` — CONFIGURATION_INAPPLICABLE claims
+- `L00_CONFIRMED_CORRECTIONS.md`, `L00_PROVISIONAL_CORRECTIONS.md`, `L00_UNRESOLVED_REGISTER.json`
+- `L00_FINAL_GAP_REPORT.md` — GAP-001 through GAP-004
+- `COORDINATE_AND_DATUM_STANDARD_V2_PROPOSAL.md`, `DATUM_CONSTRUCTION_STANDARD.md`
+- `MEASUREMENT_REQUIREMENTS_V2_PROPOSAL.md`, `CLEARANCE_AND_FIT_STANDARD_PROPOSAL.md`
+- `VIN_AND_LABEL_CAPTURE_PROTOCOL.md`, `schemas/PHYSICAL_ASSET_INTAKE_SCHEMA.json`
+- `schemas/CLAIM_REGISTRY_CORE_SCHEMA_V4_PROPOSAL.json`
+- `schemas/profiles/F450_PLATFORM_PROFILE_PROPOSAL.json`, `EDTS_REFERENCE_VEHICLE_PROFILE_PROPOSAL.json`
+
+### Changed
+
+- `STATUS.json` v0.2.0 — `L00_READY_FOR_PHYSICAL_INTAKE`; governance status block
+- `L00_CLOSURE_REPORT.md` — REJECTED; document phase complete
+- `L00_ADVERSARIAL_AUDIT.md` — ACCEPTED AS REVIEW FINDING
+- Superseded v2 schema, MAC proposal, coordinate correction proposal
+- **DT-D007** — governance refactor
+
+### Status
+
+- Readiness: **L00_READY_FOR_PHYSICAL_INTAKE**
+- L00 closure: **REJECTED**
+- Layer 1: **BLOCKED**

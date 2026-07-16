@@ -44,18 +44,20 @@ OR
 
 2) It is captured via Tier 2 physical observation at the appropriate **Measurement Accuracy Class (MAC)** for the feature scope, and matches a Tier 1 baseline within the documented manufacturing variance window.
 
-### Measurement Accuracy Classes (MAC)
+### Measurement Conformance Classes
 
-Per `MEASUREMENT_ACCURACY_CLASS_PROPOSAL.md` (adopted pending owner approval):
+Per `MEASUREMENT_REQUIREMENTS_V2_PROPOSAL.md` (provisionally accepted):
 
 | Class | Target Accuracy | Typical Scope |
 |---|---|---|
-| MAC-A | ± 0.5 mm | Rigid structural hardpoints (suspension, cab mounts) |
-| MAC-B | ± 2.0 mm | Exterior envelopes (panels, glass transitions) |
-| MAC-C | ± 5.0 mm | Global volume, frame rail spacing, packaging envelope |
-| MAC-D | No dimensional authority | Visual/textural capture only |
+| Class A / MAC-A | ± 0.5 mm | Structural interfaces, kinematic datums |
+| Class B / MAC-B | ± 1.5 mm | Rigid packaging clearances, mounting planes |
+| Class C / MAC-C | ± 3.0 mm | Volumetric envelope, exterior styling |
+| Class D / MAC-D | Reference only | Non-structural routing, visual context |
 
-> **Audit note (METRO-001):** A universal ≤ 0.05 mm tolerance over a full commercial vehicle envelope is **rejected** as unphysical. Terrestrial LiDAR achieves ± 1.0–3.0 mm at nominal range; sub-0.1 mm requires structured-light or laser tracking over small rigid parts.
+Unit identifiers must reference `registries/UNIT_REGISTRY.json`. Frame identifiers must reference `registries/COORDINATE_FRAME_REGISTRY.json`.
+
+> **Audit note (METRO-001):** A universal ≤ 0.05 mm tolerance over a full commercial vehicle envelope is rejected as unphysical.
 
 ## 3. Notes on “Tier 1 Use” vs Licensing
 

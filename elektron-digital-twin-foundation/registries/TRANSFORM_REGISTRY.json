@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_name": "EDTS_Frame_Transforms",
+  "matrix_convention": "column_major",
+  "euler_rotation_order": "XYZ",
+  "quaternion_element_ordering": "XYZW",
+  "transforms": [
+    {
+      "transform_id": "TF-ISO-TO-CAD",
+      "from_frame": "EDTS_ISO_ALIGNED_VEHICLE_FRAME",
+      "to_frame": "CAD_ASSEMBLY_FRAME",
+      "scale_factor": 1.0,
+      "rotation": { "quaternion": [0.0, 0.0, 0.0, 1.0] },
+      "translation": [0.0, 0.0, 0.0],
+      "transformation_matrix": [
+        [1.0, 0.0, 0.0, 0.0],
+        [0.0, 1.0, 0.0, 0.0],
+        [0.0, 0.0, 1.0, 0.0],
+        [0.0, 0.0, 0.0, 1.0]
+      ]
+    },
+    {
+      "transform_id": "TF-ISO-TO-GLTF",
+      "from_frame": "EDTS_ISO_ALIGNED_VEHICLE_FRAME",
+      "to_frame": "GLTF_RUNTIME_FRAME",
+      "scale_factor": 0.001,
+      "rotation": { "quaternion": [0.0, -0.7071068, 0.0, 0.7071068] },
+      "translation": [0.0, 0.0, 0.0],
+      "transformation_matrix": [
+        [-0.001,  0.0,    0.0,   0.0],
+        [ 0.0,    0.001,  0.0,   0.0],
+        [ 0.0,    0.0,   -0.001, 0.0],
+        [ 0.0,    0.0,    0.0,   1.0]
+      ]
+    },
+    {
+      "transform_id": "TF-ISO-TO-UNREAL",
+      "from_frame": "EDTS_ISO_ALIGNED_VEHICLE_FRAME",
+      "to_frame": "UNREAL_FRAME",
+      "scale_factor": 100.0,
+      "rotation": { "quaternion": [0.0, 0.0, 0.0, 1.0] },
+      "translation": [0.0, 0.0, 0.0],
+      "transformation_matrix": [
+        [100.0,   0.0,    0.0, 0.0],
+        [  0.0, -100.0,    0.0, 0.0],
+        [  0.0,   0.0,  100.0, 0.0],
+        [  0.0,   0.0,    0.0, 1.0]
+      ]
+    }
+  ]
+}

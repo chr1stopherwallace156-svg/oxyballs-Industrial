@@ -2,9 +2,16 @@
 
 ## Status
 
-**UNDER_REVIEW — Awaiting owner feedback before re-attempting closure**
+**UNDER REVIEW — Superseded by governance refactor (DT-D007)**
 
-To recover Layer 0 and achieve a state where closure is authorized with corrections, the following physical and digital reconciliation steps must be taken.
+Original correction steps remain valid. Structural implementation now tracked in:
+
+- `L00_CONFIRMED_CORRECTIONS.md` — accepted corrections
+- `L00_PROVISIONAL_CORRECTIONS.md` — provisional dimensional claims
+- `COORDINATE_AND_DATUM_STANDARD_V2_PROPOSAL.md` — coordinate orientation (EDTS_ISO_ALIGNED_VEHICLE_FRAME)
+- `DATUM_CONSTRUCTION_STANDARD.md` — datum construction (supersedes Step 2 EDTS_MODELING_FRAME)
+- `MEASUREMENT_REQUIREMENTS_V2_PROPOSAL.md` — conformance classes (supersedes Step 3 MAC proposal)
+- `schemas/CLAIM_REGISTRY_CORE_SCHEMA_V4_PROPOSAL.json` — claim schema v4
 
 ---
 

@@ -2,7 +2,9 @@
 
 ## Status
 
-**UNDER_REVIEW — Closure authorization REJECTED**
+**ACCEPTED AS REVIEW FINDING**
+
+Closure authorization remains rejected. Corrections tracked in `L00_CONFIRMED_CORRECTIONS.md` and `L00_PROVISIONAL_CORRECTIONS.md`.
 
 ## Executive Summary
 

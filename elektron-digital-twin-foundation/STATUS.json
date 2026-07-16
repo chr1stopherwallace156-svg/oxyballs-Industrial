@@ -1,57 +1,80 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.1.2",
-  "updated_at": "2026-07-16T09:30:00Z",
+  "version": "0.2.0",
+  "updated_at": "2026-07-16T09:50:00Z",
   "active_layer": "L00",
   "active_layer_name": "Reference Lock",
-  "phase": "adversarial_audit_correction",
+  "phase": "physical_asset_intake_ready",
+  "readiness": "L00_READY_FOR_PHYSICAL_INTAKE",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "Owner reviews L00_CORRECTION_PLAN.md and provides feedback on correction proposals before re-attempting closure",
+  "next_action": "Execute Layer 0 Physical Asset Intake per VIN_AND_LABEL_CAPTURE_PROTOCOL.md when vehicle arrives on-site",
   "owner_approval_required": true,
+  "governance_status": {
+    "L00_CONFIRMED_CORRECTIONS": "ACCEPTED",
+    "L00_PROVISIONAL_DIMENSIONAL_CLAIMS": "UNDER_REVIEW",
+    "L00_ADVERSARIAL_AUDIT": "ACCEPTED_AS_REVIEW_FINDING",
+    "L00_CORRECTION_PLAN": "UNDER_REVIEW",
+    "CLAIM_REGISTRY_CORE_SCHEMA_V3": "REJECTED_SUPERSEDED_BY_V4",
+    "CLAIM_REGISTRY_CORE_SCHEMA_V4": "PROPOSAL",
+    "F450_PLATFORM_PROFILE": "PROPOSAL",
+    "EDTS_REFERENCE_VEHICLE_PROFILE": "PROPOSAL",
+    "COORDINATE_ORIENTATION": "PROVISIONALLY_ACCEPTED",
+    "DATUM_DEFINITIONS": "REVISE_SUPERSEDED_BY_CONSTRUCTION_STANDARD",
+    "MEASUREMENT_CLASSES": "PROVISIONALLY_ACCEPTED",
+    "L00_CLOSURE": "REJECTED"
+  },
   "reference_vehicle": {
-    "status": "blocked",
+    "status": "provisional_profile_locked",
     "decision_id": "DT-D001",
     "reconciliation": "DT-D005",
     "closure_audit": "DT-D006",
-    "lock_statement": "NOT LOCKED — platform type unresolved; closure rejected per adversarial audit",
-    "provisional_under_review": {
+    "governance_refactor": "DT-D007",
+    "reference_profile_id": "EDTS-REF-VEHICLE-01",
+    "platform_profile": "F450_Platform_General_Profile",
+    "profile_schema": "schemas/profiles/EDTS_REFERENCE_VEHICLE_PROFILE_PROPOSAL.json",
+    "lock_statement": "PROVISIONAL — reference profile defined; VIN and physical intake pending",
+    "locked_configuration": {
       "make": "Ford",
-      "model": "F-450 Super Duty",
+      "model": "F-450 Super Duty Chassis Cab",
       "model_year": 2019,
-      "platform_type": "AMBIGUOUS — pickup vs chassis cab",
-      "cab": "Regular Cab",
-      "drivetrain": "4x2 DRW",
-      "wheelbase_in": 141.6,
-      "bed_or_body": "8 ft bed (pickup language)",
-      "stock_engine": "6.7L Power Stroke V8 diesel",
-      "conflict": "141.6 in WB + 8 ft bed = pickup framing; chassis cab uses 145.3 in min WB + CA + upfit"
+      "cab_style": "REGULAR_CAB",
+      "drivetrain": "4X2",
+      "rear_wheels": "DRW",
+      "wheelbase_in": 145.3,
+      "cab_to_axle_in": 60.0,
+      "engine_type": "6.7L_POWERSTROKE_V8_DIESEL",
+      "engine_calibration_hp": 330,
+      "engine_calibration_torque_lbft": 750
     },
-    "candidates": {
-      "C1": "2019 F-450 Chassis Cab Reg Cab DRW 4x2 — 145.3 in WB / 60 in CA — DOCUMENTED",
-      "P1": "2019 F-450 Pickup Reg Cab DRW 4x2 — 141.6 in / 8 ft — OEM CONFLICT",
-      "P2": "2019 F-450 Pickup Crew Cab DRW — 176.0 in / 8 ft — DOCUMENTED"
-    },
-    "reference_unit": "TBD — VIN or OEM-only path not chosen",
-    "geometry_primary_source": "Ford BBAS — platform-specific BBLB after lock",
+    "reference_unit": "TBD — VIN pending physical asset intake",
+    "geometry_primary_source": "Ford BBAS — platform-specific BBLB after physical intake",
     "licensing_status": "COUNSEL_REVIEW_REQUIRED"
   },
+  "registries": {
+    "units": "registries/UNIT_REGISTRY.json",
+    "coordinate_frames": "registries/COORDINATE_FRAME_REGISTRY.json",
+    "transforms": "registries/TRANSFORM_REGISTRY.json",
+    "historical_claims": "registries/HISTORICAL_CLAIM_REGISTRY.json"
+  },
   "adversarial_audit": {
-    "status": "UNDER_REVIEW",
+    "status": "ACCEPTED_AS_REVIEW_FINDING",
     "verdict": "L00_CLOSURE_REJECTED",
     "audit_document": "L00_ADVERSARIAL_AUDIT.md",
     "error_register": "L00_CLAIM_ERROR_REGISTER.json",
-    "correction_plan": "L00_CORRECTION_PLAN.md",
-    "blocking_claims": ["CHASSIS-001", "COORD-001", "METRO-001", "EVID-005"],
-    "major_claims": ["IP-001"],
-    "minor_claims": ["UNIT-001"]
+    "confirmed_corrections": "L00_CONFIRMED_CORRECTIONS.md",
+    "provisional_corrections": "L00_PROVISIONAL_CORRECTIONS.md",
+    "unresolved_register": "L00_UNRESOLVED_REGISTER.json",
+    "final_gap_report": "L00_FINAL_GAP_REPORT.md"
   },
   "layers": {
     "L00": {
       "name": "Reference Lock",
-      "status": "blocked",
+      "status": "in_progress",
       "closure_status": "REJECTED",
+      "document_phase": "complete",
+      "physical_intake": "ready",
       "gates": {
         "visual": "blocked",
         "dimensional": "blocked",
@@ -73,49 +96,34 @@
   },
   "blockers": [
     {
-      "id": "DT-B006",
-      "summary": "L00 closure rejected per adversarial audit — 4 BLOCKING claims unresolved",
-      "unblocks": "Apply L00_CORRECTION_PLAN.md + owner sign-off on correction proposals"
+      "id": "DT-B010",
+      "summary": "Physical asset intake not executed — VIN, FGAWR, spring codes, tire placard unverified",
+      "unblocks": "Complete VIN_AND_LABEL_CAPTURE_PROTOCOL.md + PHYSICAL_ASSET_INTAKE_SCHEMA.json record"
     },
     {
-      "id": "DT-B007",
-      "summary": "Coordinate system incorrectly labeled ISO 8855 (+X rear / +Y right)",
-      "unblocks": "Adopt COORDINATE_SYSTEM_CORRECTION_PROPOSAL.md frame dictionary and transforms"
-    },
-    {
-      "id": "DT-B008",
-      "summary": "Universal ≤0.05 mm metrology tolerance rejected as unphysical",
-      "unblocks": "Adopt MEASUREMENT_ACCURACY_CLASS_PROPOSAL.md (MAC-A through MAC-D)"
+      "id": "DT-B011",
+      "summary": "L00 closure rejected — GAP-001 through GAP-004 unresolved",
+      "unblocks": "Physical intake evidence + L00_FINAL_GAP_REPORT.md gap closure"
     },
     {
       "id": "DT-B009",
-      "summary": "SRC-005 listed as verified but scan is PLANNED (unexecuted)",
+      "summary": "SRC-005 metrology scan is PLANNED (unexecuted)",
       "unblocks": "Execute scan + submit cryptographic hash to registry"
     },
     {
-      "id": "DT-B004",
-      "summary": "Platform type unresolved — pickup vs chassis cab",
-      "unblocks": "Owner selects Candidate C1, P1, or P2 in CONFIGURATION_RECONCILIATION.md"
-    },
-    {
-      "id": "DT-B005",
-      "summary": "OEM conflict: F-450 Regular Cab pickup 141.6 in WB — KBB vs Ford pickup table",
-      "unblocks": "2019 MY Ford pickup ordering guide or owner rejects P1"
-    },
-    {
-      "id": "DT-B001",
-      "summary": "Reference vehicle not locked",
-      "unblocks": "Configuration selected + REFERENCE_APPROVAL.md signed"
-    },
-    {
       "id": "DT-B002",
-      "summary": "No physical reference unit (VIN) or OEM-only path declared",
-      "unblocks": "VIN assignment or explicit OEM-only platform reference label"
+      "summary": "No physical reference unit (VIN) assigned",
+      "unblocks": "VIN recorded in physical asset intake schema"
     },
     {
       "id": "DT-B003",
       "summary": "Ford Super Duty vehicle-specific BBLB not archived on official BBAS",
-      "unblocks": "Obtain via Ford BBAS after platform lock"
+      "unblocks": "Obtain via Ford BBAS after VIN confirmation"
+    },
+    {
+      "id": "DT-B001",
+      "summary": "Reference vehicle not formally locked (provisional profile only)",
+      "unblocks": "Physical intake complete + REFERENCE_APPROVAL.md signed"
     }
   ]
 }

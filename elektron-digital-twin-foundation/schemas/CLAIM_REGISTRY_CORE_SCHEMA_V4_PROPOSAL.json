@@ -1,0 +1,186 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EDTS_Claim_Registry_Core_Schema_V4",
+  "type": "object",
+  "properties": {
+    "claim_id": { "type": "string", "pattern": "^[A-Z0-9_-]+$" },
+    "claim_type": { "type": "string", "enum": ["DIMENSION", "MASS_PROPERTY", "ELECTRICAL", "PERFORMANCE", "SYSTEM_INTERFACE"] },
+    "subject_entity_id": { "type": "string" },
+    "property_id": { "type": "string" },
+    "schema_version": { "type": "string", "const": "4.0.0" },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "recorded_at": { "type": "string", "format": "date-time" },
+        "asserted_at": { "type": "string", "format": "date-time" },
+        "effective_from": { "type": ["string", "null"], "format": "date-time" },
+        "effective_until": { "type": ["string", "null"], "format": "date-time" },
+        "supersedes_claim_id": { "type": ["string", "null"] },
+        "review_status": { "type": "string", "enum": ["DRAFT", "UNDER_REVIEW", "PROVISIONAL", "ACCEPTED", "CONFIGURATION_INAPPLICABLE"] },
+        "reviewed_by": { "type": "string" },
+        "intended_use": { "type": "string" }
+      },
+      "required": ["recorded_at", "asserted_at", "review_status", "intended_use"],
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "source_locator": { "type": "string" },
+        "verification_method": { "type": "string", "enum": ["DOCUMENT_REVIEW", "PHYSICAL_METROLOGY", "SIMULATION", "CALCULATION", "UNVERIFIED"] },
+        "source_hash": { "type": ["string", "null"] }
+      },
+      "required": ["source_locator", "verification_method"],
+      "additionalProperties": false
+    },
+    "spatial_context": {
+      "type": "object",
+      "properties": {
+        "coordinate_frame_id": { "type": "string" },
+        "datum_id": { "type": "string" },
+        "measurement_axis": { "type": "string", "enum": ["X", "Y", "Z", "3D_VECTOR", "N_A"] }
+      },
+      "required": ["coordinate_frame_id"],
+      "additionalProperties": false
+    },
+    "claim_value": {
+      "type": "object",
+      "properties": {
+        "value_structure": { "type": "string", "enum": ["SCALAR", "RANGE", "VECTOR", "MATRIX", "ENUM", "RELATIONSHIP"] },
+        "source_value": { "type": "string" },
+        "source_unit_id": { "type": "string" },
+        "canonical_unit_id": { "type": "string" }
+      },
+      "required": ["value_structure", "source_value", "source_unit_id", "canonical_unit_id"],
+      "additionalProperties": false
+    },
+    "value_details": {
+      "type": "object",
+      "properties": {
+        "scalar_value": { "type": "number" },
+        "range_value": {
+          "type": "object",
+          "properties": {
+            "minimum": { "type": "number" },
+            "maximum": { "type": "number" }
+          },
+          "required": ["minimum", "maximum"],
+          "additionalProperties": false
+        },
+        "vector_value": {
+          "type": "array",
+          "items": { "type": "number" }
+        },
+        "matrix_value": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": { "type": "number" }
+          }
+        },
+        "enum_value": { "type": "string" },
+        "relationship_target_entity_id": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "uncertainty_and_tolerances": {
+      "type": "object",
+      "properties": {
+        "design_tolerance_symmetric": { "type": "number" },
+        "manufacturing_tolerance_symmetric": { "type": "number" },
+        "measurement_uncertainty_sigma_1": { "type": "number" },
+        "accuracy_class": { "type": "string", "enum": ["MAC-A", "MAC-B", "MAC-C", "MAC-D"] },
+        "uncertainty_method": { "type": "string" }
+      },
+      "required": ["accuracy_class"],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "claim_id",
+    "claim_type",
+    "subject_entity_id",
+    "property_id",
+    "schema_version",
+    "metadata",
+    "provenance",
+    "claim_value",
+    "value_details",
+    "uncertainty_and_tolerances"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "claim_value": { "properties": { "value_structure": { "const": "SCALAR" } } }
+        }
+      },
+      "then": {
+        "properties": {
+          "value_details": { "required": ["scalar_value"] }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "claim_value": { "properties": { "value_structure": { "const": "RANGE" } } }
+        }
+      },
+      "then": {
+        "properties": {
+          "value_details": { "required": ["range_value"] }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "claim_value": { "properties": { "value_structure": { "const": "VECTOR" } } }
+        }
+      },
+      "then": {
+        "properties": {
+          "value_details": { "required": ["vector_value"] }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "claim_value": { "properties": { "value_structure": { "const": "MATRIX" } } }
+        }
+      },
+      "then": {
+        "properties": {
+          "value_details": { "required": ["matrix_value"] }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "claim_value": { "properties": { "value_structure": { "const": "ENUM" } } }
+        }
+      },
+      "then": {
+        "properties": {
+          "value_details": { "required": ["enum_value"] }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "claim_value": { "properties": { "value_structure": { "const": "RELATIONSHIP" } } }
+        }
+      },
+      "then": {
+        "properties": {
+          "value_details": { "required": ["relationship_target_entity_id"] }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false
+}

@@ -1,8 +1,17 @@
-# COORDINATE_SYSTEM_CORRECTION_PROPOSAL.md — Frame Dictionary & Transform Pipeline
+# COORDINATE_SYSTEM_CORRECTION_PROPOSAL.md — Superseded
 
 ## Status
 
-**PROPOSED — Supersedes `COORDINATE_SYSTEM_STANDARD.md` pending owner approval**
+**REJECTED — `EDTS_MODELING_FRAME` rejected (DT-D007)**
+
+The custom modeling frame (+X rear, +Y right) is rejected. Use:
+
+- `COORDINATE_AND_DATUM_STANDARD_V2_PROPOSAL.md` — `EDTS_ISO_ALIGNED_VEHICLE_FRAME`
+- `registries/COORDINATE_FRAME_REGISTRY.json` — machine-readable frame definitions
+- `registries/TRANSFORM_REGISTRY.json` — machine-readable transforms
+- `DATUM_CONSTRUCTION_STANDARD.md` — datum construction protocols
+
+Retained for audit traceability only.
 
 ---
 

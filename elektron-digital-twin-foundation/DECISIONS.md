@@ -82,3 +82,25 @@ Append-only record of digital twin foundation decisions.
   - No Layer 1 work until corrections applied and owner feedback received
   - All new spatial claims must declare `coordinate_frame_id` per schema v2 proposal
   - Scan/IP language must use `EDTS_CAPTURE` + `NOT_EVALUATED` redistribution status until counsel review
+
+## DT-D007 — Governance refactor: registries, schemas, physical intake readiness
+
+- **Date:** 2026-07-16
+- **Status:** Accepted (structural refactor — closure still rejected)
+- **Context:** Correction-quality review formalized machine-readable registries, coordinate transforms, datum construction protocols, and conditional claim validation to prevent overconfidence cascade.
+- **Decision:**
+  1. **Confirmed corrections accepted** — `L00_CONFIRMED_CORRECTIONS.md` (powertrain, SRC-005, IP metadata)
+  2. **Provisional dimensional claims** — `L00_PROVISIONAL_CORRECTIONS.md` (WB/CA/AF, rear axle) under review
+  3. **Claim registry core schema v4** — `schemas/CLAIM_REGISTRY_CORE_SCHEMA_V4_PROPOSAL.json` supersedes v2/v3 proposals
+  4. **Platform profiles split** — `F450_PLATFORM_PROFILE_PROPOSAL.json` (general) + `EDTS_REFERENCE_VEHICLE_PROFILE_PROPOSAL.json` (locked reference)
+  5. **Coordinate orientation** — `EDTS_ISO_ALIGNED_VEHICLE_FRAME` provisionally accepted; `EDTS_MODELING_FRAME` rejected
+  6. **Datum construction** — `DATUM_CONSTRUCTION_STANDARD.md` supersedes prior datum tables
+  7. **Measurement classes** — `MEASUREMENT_REQUIREMENTS_V2_PROPOSAL.md` provisionally accepted (Class A–D)
+  8. **Registries published** — `UNIT_REGISTRY.json`, `COORDINATE_FRAME_REGISTRY.json`, `TRANSFORM_REGISTRY.json`
+  9. **Physical intake ready** — `L00_READY_FOR_PHYSICAL_INTAKE`; document phase complete
+  10. **L00 closure remains REJECTED** — requires physical asset intake per `L00_FINAL_GAP_REPORT.md`
+- **Consequences:**
+  - All new claims must use `source_unit_id` / `canonical_unit_id` from `UNIT_REGISTRY.json`
+  - Frame transforms must reference `TRANSFORM_REGISTRY.json` (column-major, XYZW quaternions)
+  - Unresolved items tracked in `L00_UNRESOLVED_REGISTER.json` (UNRES-001, UNRES-002)
+  - Historical inapplicable claims preserved in `registries/HISTORICAL_CLAIM_REGISTRY.json`

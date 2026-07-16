@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_name": "EDTS_Coordinate_Frames",
+  "frames": {
+    "EDTS_ISO_ALIGNED_VEHICLE_FRAME": {
+      "standard": "ISO 8855",
+      "handedness": "right_handed",
+      "axes": {
+        "x": "+X Forward (longitudinal)",
+        "y": "+Y Left (lateral)",
+        "z": "+Z Up (vertical)"
+      },
+      "origin_datum_id": "DTM-001"
+    },
+    "SCAN_RAW_FRAME": {
+      "standard": "Scanner Local",
+      "handedness": "right_handed",
+      "axes": {
+        "x": "Arbitrary horizontal axis",
+        "y": "Arbitrary horizontal perpendicular axis",
+        "z": "+Z parallel to local gravity vector"
+      },
+      "origin_datum_id": "DTM-004"
+    },
+    "CAD_ASSEMBLY_FRAME": {
+      "standard": "EDTS Design",
+      "handedness": "right_handed",
+      "axes": {
+        "x": "+X Forward (longitudinal)",
+        "y": "+Y Left (lateral)",
+        "z": "+Z Up (vertical)"
+      },
+      "origin_datum_id": "DTM-001"
+    },
+    "GLTF_RUNTIME_FRAME": {
+      "standard": "glTF 2.0 Standard Specification",
+      "handedness": "right_handed",
+      "axes": {
+        "x": "+X Right",
+        "y": "+Y Up",
+        "z": "-Z Forward"
+      },
+      "origin_datum_id": "DTM-001"
+    },
+    "UNREAL_FRAME": {
+      "standard": "Unreal Engine Editor Standard",
+      "handedness": "left_handed",
+      "axes": {
+        "x": "+X Forward",
+        "y": "+Y Right",
+        "z": "+Z Up"
+      },
+      "origin_datum_id": "DTM-001"
+    }
+  }
+}

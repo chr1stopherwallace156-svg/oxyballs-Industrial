@@ -1,6 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "EDTS_Claim_Registry_Schema_V2",
+  "_deprecation": {
+    "status": "SUPERSEDED",
+    "superseded_by": "schemas/CLAIM_REGISTRY_CORE_SCHEMA_V4_PROPOSAL.json",
+    "decision_id": "DT-D007"
+  },
   "type": "object",
   "properties": {
     "claim_id": { "type": "string", "pattern": "^[A-Z0-9_-]+$" },

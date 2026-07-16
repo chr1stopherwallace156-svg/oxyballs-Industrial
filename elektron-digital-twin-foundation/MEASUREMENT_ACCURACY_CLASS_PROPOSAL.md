@@ -1,8 +1,12 @@
-# MEASUREMENT_ACCURACY_CLASS_PROPOSAL.md — Measurement Accuracy Classes (MAC)
+# MEASUREMENT_ACCURACY_CLASS_PROPOSAL.md — Superseded
 
 ## Status
 
-**PROPOSED — Supersedes universal ≤ 0.05 mm tolerance claims**
+**SUPERSEDED by `MEASUREMENT_REQUIREMENTS_V2_PROPOSAL.md` (DT-D007)**
+
+Conformance classes are now defined by downstream application consequence. See Class A through Class D in the v2 measurement requirements document.
+
+Retained for audit traceability only.
 
 ---
 
