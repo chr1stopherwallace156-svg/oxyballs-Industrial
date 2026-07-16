@@ -584,3 +584,17 @@ Append-only record of digital twin foundation decisions.
 - **validation_evidence:** `verification/results/EAE_READINESS_REPORT.md`, `verification/results/eae-rubric-tests.json`
 - **final_status:** `EDTS_EAE_SPECIFICATION_READY_IMPLEMENTATION_PENDING`
 
+
+## DT-D035 — EAE CORE INGESTION v0 (validated)
+
+- **Change-control record:** [`decisions/DT-D035_EAE_CORE_INGESTION_V0.json`](decisions/DT-D035_EAE_CORE_INGESTION_V0.json)
+- **decision_id:** `DT-D035`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **scope:** Modular `eae/core` local-file ingestion; pytest suite under `tests/eae/`; no rubric activation; no remote acquisition; frozen rc1 unchanged
+- **reason:** Prove accept / type / hash / atomic manifest / idempotent registry before scoring or marketplace work.
+- **idempotency definition:** same bytes + same `ingestion_policy_version` → same asset identity + no duplicate authoritative registry entry; repeats return `ALREADY_INGESTED` with `state_mutation: false` (execution logs may still append)
+- **validation_evidence:** `verification/results/EAE_CORE_INGESTION_IMPLEMENTATION_REPORT.md`, `verification/results/eae-core-ingestion-tests.json` (27 passed)
+- **final_status:** `EDTS_EAE_CORE_INGESTION_VALIDATED`
+- **next_build_priority:** `EAE_ARCHIVE_SAFE_ACQUISITION_AND_METADATA` (not scoring)
+

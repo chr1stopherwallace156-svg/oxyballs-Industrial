@@ -4,8 +4,9 @@
 **Not a kernel schema.** Frozen rc1 schemas are untouched.  
 **Implementation:** `tools/evidence_acquisition/` (+ `eae_core/` primitives)  
 **Audit:** `verification/results/eae-implementation-audit.json`  
-**Decisions:** `DT-D032`, `DT-D033`, `DT-D034`  
-**Next build:** `EAE CORE INGESTION` — see `proposals/eae/EAE_CORE_INGESTION_MILESTONE.md`
+**Decisions:** `DT-D032` … `DT-D035`  
+**CORE INGESTION:** `EDTS_EAE_CORE_INGESTION_VALIDATED` — package `eae/`; report `verification/results/EAE_CORE_INGESTION_IMPLEMENTATION_REPORT.md`  
+**Next build:** archive-safe acquisition + richer metadata — **not** scoring
 
 ## Shift
 

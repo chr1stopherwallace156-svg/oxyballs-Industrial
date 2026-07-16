@@ -15,23 +15,22 @@
 | Vertical slice | `BLOCKED_BY_MISSING_ASSET` |
 | EAE specification | `ACCEPTED` |
 | EAE full executable | `ABSENT` |
-| EAE CORE INGESTION | `PARTIAL_FIXTURE_VALIDATED` |
-| Rubric profiles | `DRAFT` |
+| EAE CORE INGESTION | **`VALIDATED`** (`EDTS_EAE_CORE_INGESTION_VALIDATED`) |
+| Rubric profiles | `DRAFT` (not activated) |
 | Event model | `OPTIONAL PROPOSAL` (parked) |
-| EAE readiness | **`EDTS_EAE_SPECIFICATION_READY_IMPLEMENTATION_PENDING`** |
 | Current posture | `ACQUISITION_GATED_BY_MISSING_SOURCE` |
-| Next build priority | **`EAE_CORE_INGESTION`** |
+| Next build priority | **`EAE_ARCHIVE_SAFE_ACQUISITION_AND_METADATA`** |
 
-## EAE audit (authoritative)
+## EAE CORE INGESTION (authoritative)
 
-- Report: `verification/results/EAE_READINESS_REPORT.md`
-- Audit: `verification/results/eae-implementation-audit.json`
-- Candidate state: `verification/results/eae-candidate-state.json`
-- Decisions: `DT-D033`, `DT-D034` (`decisions/DT-D033_*.json`, `decisions/DT-D034_*.json`)
-- Milestone: `proposals/eae/EAE_CORE_INGESTION_MILESTONE.md`
+- Package: `eae/`
+- Tests: `tests/eae/` (27 passed)
+- Report: `verification/results/EAE_CORE_INGESTION_IMPLEMENTATION_REPORT.md`
+- Machine results: `verification/results/eae-core-ingestion-tests.json`
+- Decision: `decisions/DT-D035_EAE_CORE_INGESTION_V0.json`
 
 **Not scored:** `CAND-00031-CGT`, `CAND-771-GRAB` (no local file, hash, parse, inventory, score, or GEO id).
 
 ## Change-control records
 
-- `decisions/DT-D030_*.json` … `DT-D034_*.json`
+- `decisions/DT-D030_*.json` … `DT-D035_*.json`

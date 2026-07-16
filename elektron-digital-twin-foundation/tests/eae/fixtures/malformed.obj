@@ -1,0 +1,5 @@
+# pretends to be an OBJ / Wavefront mesh but has no vertex or face data
+# intentionally broken for REJECT_MALFORMED coverage
+this is not a valid mesh
+vertex data missing
+face data missing
