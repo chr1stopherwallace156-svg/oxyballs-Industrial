@@ -5,6 +5,24 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — Owner follow-up (review_14): gate marked BLOCKED_PENDING_SUPPLIER_RESPONSE; cooling opens
+
+- Archived review_14 1:1. Gate-closure correction applied: the
+  question set does not close the powertrain gate — supplier replies +
+  datasheets + engineering review do. B-003 carries the owner's gate
+  label `BLOCKED_PENDING_SUPPLIER_RESPONSE` with the 16 required
+  answer fields (8 Webasto / 8 Dana).
+- **Dana/TM4 letter drafted** from the owner's field lists at
+  `docs/research/outreach/SUPPLIER_INQUIRY_DANA_01.md` — status DRAFT,
+  awaiting owner approval (sending is an owner action; Webasto letter
+  remains READY_TO_SEND).
+- **Active focus pivots to Cooling Package Gap Closure (Domain
+  Priority Block 3)** per owner authorization — L6 checklist extended
+  (incl. Cajon/mountain-grade heat load, underbody airflow,
+  fan/radiator placement); mapping may proceed, sizing may not (same
+  pending powertrain choices).
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 18 + review_13: Webasto inquiry READY_TO_SEND
 
 - Archived batch_18 (supplier-inquiry draft) and review_13 1:1;

@@ -213,9 +213,16 @@ supplier datasheets → CAN/PATS.**
    the first evidence class that can resolve B-003/B-004. A parallel
    Dana/TM4 inquiry (10 questions, review_11) is not yet drafted into
    a letter.
-2. **Cooling** (L6) — EMPTY: battery/motor/inverter/charger/DC-DC
-   loops, pump + radiator sizing, flow, pressure drop, derating,
-   high-ambient testing.
+2. **Cooling** (L6) — **ACTIVE FOCUS — Domain Priority Block 3:
+   Cooling Package Gap Closure** (owner authorization, review_14 —
+   runs in parallel while the powertrain gate is
+   BLOCKED_PENDING_SUPPLIER_RESPONSE). Owner checklist: battery
+   cooling; inverter cooling; motor cooling; coolant flow; pressure
+   drop; radiator sizing; pump sizing; heat-exchanger sizing; thermal
+   derating; high-ambient testing; **Cajon Pass / mountain-grade heat
+   load**; underbody airflow; fan/radiator placement. Note: final
+   cooling numbers depend on the same pending powertrain choices —
+   mapping may proceed, sizing may not.
 3. **Brake/steering CP#1** (L10/L4) — CANDIDATE PATH ONLY (Brogen
    EHPS): Ford hydroboost pressure/flow requirements, LV backup
    behavior, failure modes, mounting/fitment measurement, test

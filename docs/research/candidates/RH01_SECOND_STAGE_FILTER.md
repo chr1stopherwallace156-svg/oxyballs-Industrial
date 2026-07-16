@@ -1224,6 +1224,21 @@ PackTopology candidate 2s2p/800 V; InterfaceChoice OpenGap (B-004);
 PreChargeResponsibility / Isc-FuseCoordination / CANIntegration /
 CoolingManifold all OpenGap.
 
+### Gate-closure correction (owner follow-up, review_14)
+
+**The question set does not close the gate — supplier replies +
+datasheets + engineering review do.** Gate label per owner:
+`BLOCKED_PENDING_SUPPLIER_RESPONSE` (applied to B-003). The 16
+required answer fields (8 Webasto / 8 Dana) are recorded in review_14
+and mapped into the two outreach letters. Owner authorization: proceed
+to **Cooling Package Gap Closure (Domain Priority Block 3)** in
+parallel; no more HV wiring research — the blocker is manufacturer
+data, not internet searching. Dana letter drafted by the filter from
+the owner's field lists at
+`docs/research/outreach/SUPPLIER_INQUIRY_DANA_01.md` — **status DRAFT,
+awaiting owner approval of the wording** (only owner-approved text
+gets READY_TO_SEND; only the owner sends).
+
 ### Process note — replies are evidence
 
 Sending the letter is an **owner/business action** (external

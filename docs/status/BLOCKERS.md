@@ -18,7 +18,16 @@ Active blockers and what unblocks them. Entries are closed by marking
 ## B-003 — POWERTRAIN_COMPATIBILITY_REVIEW_REQUIRED
 
 - Filed: 2026-07-15 (owner directive, review_11)
-- Status: Active
+- Status: Active — **gate label per owner (review_14):
+  `BLOCKED_PENDING_SUPPLIER_RESPONSE`.** Reason (owner wording):
+  battery topology, system current limits, short-circuit current,
+  inverter DC-link capacitance, and pre-charge responsibility are not
+  yet provided by supplier documentation. **The question set does NOT
+  close this gate — supplier replies + datasheets + engineering review
+  do.** Allowed next action: proceed to Cooling Package Gap Closure in
+  parallel. Required answer fields: 8 Webasto + 8 Dana (review_14;
+  letters at `docs/research/outreach/` — Webasto READY_TO_SEND, Dana
+  DRAFT awaiting owner approval).
 - Blocks: all HV Wiring Package component selections (cable gauge,
   connector insert, main fuse, contactor, pre-charge R/relay, MSD
   rating); powertrain candidate advancement; any range/gradeability
