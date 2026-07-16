@@ -52,6 +52,10 @@ this file supersedes it (see Addendum, section 7).
 | CS-23 | **SupplierCandidate** | *Coroflex 9-2611 / 6.0 mm² FHLR2GCB2G shielded HV cable — technical datasheet* | Coroflex (cloudfront-hosted PDF) | <https://d2iompx231jv6o.cloudfront.net/userfiles/documents/products/22/92/26/229226.pdf> | Candidate (batch_11) — `NeedsEngineeringReview`. **Owner correction (review_06): this datasheet covers 6.0 mm² ONLY — nothing from it applies to 35/50 mm² until those exact datasheets are on file.** Owner-relayed envelope: 600 V AC / 1000 V DC, −40…+180 °C, derating curves — lane L5/L9 |
 | CS-24 | **SupplierCandidate** | *TE Connectivity / KILOVAC EV200 series contactor datasheet* | TE (PDF hosted at rec-bms.com — mirror; prefer TE-controlled copy) | <https://www.rec-bms.com/datasheet/Technical_datasheet_Kilovac.pdf> | Candidate (batch_11) — `NeedsEngineeringReview`; owner's 9-item needs list applies (battery max V, inverter cont./peak I, fault current, make/break duty, pre-charge sequence, coil voltage, aux contacts, thermal mounting) — lane L5/L9 |
 | CS-25 | **SupplierCandidate — AUXILIARY fuse only** (owner review_06 correction) | *Eaton Bussmann series EV auxiliary fuses, 500 Vdc, 10–50 A — datasheet no. 10864* | Eaton | <https://www.eaton.com/content/dam/eaton/products/emobility/fuses-electric-vehicle/bus-ele-ds-10864-ev-pre-production-sample-aux-fuses.pdf> | Candidate (batch_11) — batch's "Traction Subsystem" title was WRONG: these are **auxiliary-circuit fuses; the main traction fuse remains NeedsSupplierData/OpenGap** — lane L5/L9 |
+| CS-26 | **SupplierCandidate — main-fuse FAMILY lane** | *Eaton Bussmann series EV fuses catalogue (EMOB0062)* — 500–1000 Vdc, 10–1600 A portfolio | Eaton | <https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/fuses/bussmann-electric-vehicles-fuses/catalogs/eaton-ev-fuse-catalogue-emob0062-en-us.pdf> | Candidate (batch_12) — the real main-traction lane (fixes batch_11's aux mistake); `NeedsEngineeringReview`; **no fuse size selection until battery V, short-circuit current, cont./peak currents, and thermal derating review exist** — lane L5/L9 |
+| CS-27 | **SupplierCandidate** | *Coroflex 9-2611 / 35 mm² FHLR2GCB2G shielded HV cable — technical datasheet* | Coroflex (PDF hosted at citini.com — mirror; prefer Coroflex-controlled copy) | <https://citini.com/wp-content/uploads/2022/07/HV35SSC.pdf> | Candidate (batch_12) — `NeedsEngineeringReview`; part-scoped (35 mm² only; 50 mm² datasheet still missing) — lane L5/L9 |
+| CS-28 | **RegulatoryCandidate** | *UNECE Global Technical Regulation No. 20 (Electric Vehicle Safety), ECE/TRANS/180/Add.20* | UNECE (official server) | <https://unece.org/fileadmin/DAM/trans/main/wp29/wp29wgs/wp29gen/wp29registry/ECE-TRANS-180a20e.pdf> | Candidate (batch_12) — first official-server standard PDF in the register; also the GTR that CS-02 incorporates by reference — lane L2/L5 |
+| CS-29 | **CandidateSourcePath / NeedsExactSource** | *ISO 20653 — Road vehicles: Degrees of protection (IP code)* — referenced by GTR 20 for test probes; text not on file | ISO | (no URL on file — paywalled standard) | Path only (batch_12) — the IP67/IP6K9K validation procedure lane; no test cycle derivable yet — lane L5/L8 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -107,6 +111,10 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-43 | Coroflex 9-2611 / 6.0 mm²: "Bend radius: - min. 3 x cable-ø: static installation. - min. 6 x cable-ø: dynamic installation." *(FIRST datasheet-sourced bend radius on file — **part-number-scoped**: valid for this 6.0 mm² cable only, per owner review_06; the general 4×/6×/8× fenced variants stay fenced)* | CS-23 | **Candidate locator (batch_11): page 1, Properties block** — unverified | **SupplierCandidate — part-scoped RuleCandidate**; `NeedsEngineeringReview`; OD values for larger gauges missing — lane L5 |
 | RC-44 | Kilovac EV200: "Continuous (Carry) Current, Typical: 500 @ 85°C, 400 mcm conductors… Rated Operating Voltage. VDC. 12 - 900." *(supplier specs for THIS contactor family; owner relay adds 2000 A break @ 320 VDC 1-cycle and environmental data)* | CS-24 | **Candidate locator (batch_11): page 1 parameter matrix** — unverified | **SupplierCandidate** — `NeedsEngineeringReview`; unusable for selection until battery/inverter/fault data exists — lane L5/L9 |
 | RC-45 | Eaton Bussmann EV **auxiliary** fuses: 500 Vdc, 10–50 A, max DC interrupting 20 kA *(owner correction: auxiliary-circuit candidate ONLY — never main-traction data)* | CS-25 | **Candidate locator (batch_11): page 1, Description/Ratings** — unverified | **SupplierCandidate — auxiliary HV circuits only**; main traction fuse = OpenGap — lane L5/L9 |
+| RC-46 | Eaton EV fuse catalogue: "…supporting voltages from 500V to 1,000V DC and current ratings between 10A and 1,600A… current ratings are based on 20°C; higher ambient temperatures and altitudes above 2000 m require current derating." *(family envelope, not a selection)* | CS-26 | **Candidate locator (batch_12): page 1, Features/Sizing** — unverified | **SupplierCandidate — family lane**; exact fuse = OpenGap pending upstream data — lane L5/L9 |
+| RC-47 | Kilovac EV200 duty: "Break Current at 320VDC… 2,000, 1 cycle… The maximum make current is 650A to avoid contact welding… 80% Minimum Pre Charge, 90% Nominal Pre Charge." *(gives the pre-charge NO-GO logic candidate: incomplete pre-charge → closing can weld contacts. Owner correction: these curves define the pre-charge COMPLETION target — they do NOT size the pre-charge resistor)* | CS-24 | **Candidate locator (batch_12): pages 1–2, ratings matrix / load-life notes** — unverified | **SupplierCandidate — NoGoCondition candidate (pre-charge completion 80–90% before main close, component-scoped)**; pre-charge resistor sizing = **OpenGap** (needs pack V, controller capacitance, target time, inrush limit, resistor power/energy, relay rating, thermal duty) — lane L5 |
+| RC-48 | Coroflex 35 mm²: "MAX 600 V AC / 1000 V DC… Bend radius: - min. 3 x cable-ø: static installation. - min. 6 x cable-ø: dynamic installation. Weight of cable: approx. 485 g/m." *(owner relay adds OD 14.4 mm, −40…+180 °C — part-scoped to THIS 35 mm² cable; 50 mm² remains unsourced)* | CS-27 | **Candidate locator (batch_12): page 1, mechanical/structural matrix** — unverified | **SupplierCandidate — part-scoped Rule/Metric candidates** (static ≥3× OD, dynamic ≥6× OD, OD 14.4 mm, 600 VAC/1000 VDC); `NeedsEngineeringReview` — lane L5 |
+| RC-49 | UNECE GTR 20: "Specification of the 0.1 Ω upper resistance limit for chassis bonding provides protection from electric shock by shunting any harmful electrical currents to the vehicle chassis should any electrically charged components lose isolation… test probes are specified that conform to ISO 20653…" | CS-28 | **Candidate locator (batch_12): page 60, Section II (rationale)** — unverified | **RegulatoryCandidate — TestCandidate (bonding resistance test) + MetricCandidate (≤ 0.1 Ω)**; NOT final pass/fail until mapped to the US FMVSS/ISO context and a measurement method. **Reconciliation flag: distinct from RC-42's <0.2 Ω exposed-part figure — different contexts (GTR bonding path vs FMVSS exposed-part resistance); never conflate** — lane L5/L2 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -773,3 +781,76 @@ contactor make/break duty, pre-charge resistor + relay selection,
 35/50 mm² cable datasheets, matching connector datasheets,
 bonding/grounding test methods, IP validation procedures) — recorded
 in the Research Map.
+
+---
+
+## 19. Batch 12 + owner review_07 reconciliation (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_12_hv_wiring_datasheets.md`
+and `docs/research/raw/owner_reviews/review_07_batch_12_verdict.md`.
+Row additions: CS-26..CS-29, RC-46..RC-49.
+
+### What batch 12 delivered (all candidates, nothing selected)
+
+- **The real main-fuse lane** (CS-26/RC-46): Eaton EV fuse catalogue,
+  500–1000 Vdc / 10–1600 A family — corrects batch_11's aux-as-traction
+  mistake. Owner rule: **no fuse size is picked** until battery
+  voltage, short-circuit current, continuous/peak currents, and
+  thermal derating review exist.
+- **Pre-charge NO-GO logic candidate** (RC-47): EV200 duty data — max
+  make 650 A (weld prevention), 80–90% pre-charge completion before
+  main-contactor close. Component-scoped.
+- **35 mm² cable sheet** (CS-27/RC-48): the cleanest cable row so far;
+  part-scoped rule/metric candidates (3×/6× OD, OD 14.4 mm,
+  600 VAC/1000 VDC envelope).
+- **First official-server standard** (CS-28/RC-49): UNECE GTR 20 —
+  0.1 Ω bonding rationale at page 60, plus the ISO 20653 probe
+  reference (CS-29 opened as the IP-validation path).
+
+### Owner correction applied — pre-charge sizing overreach
+
+Batch_12's matrix claimed pre-charge resistor sizing was covered by
+"TE EV200 Capacitive Make Test Curves." **Rejected as stated**: the
+curves define how much pre-charge is required, not the resistor.
+Register state: pre-charge **completion target = CandidateRule**
+(RC-47); pre-charge **resistor sizing = OpenGap** behind the owner's
+7-item list (pack V, controller capacitance, target time, inrush
+limit, resistor power/energy, relay rating, thermal duty).
+
+### Held — unsourced matrix cells (same defect family as batch 11)
+
+| Matrix cell | Problem | Disposition |
+|---|---|---|
+| "HV Cable 50 mm² Bend Radius: 3×/6× OD — Coroflex Multi-Gauge Specification" | **No 50 mm² datasheet exists on file**; cross-gauge transfer is exactly what the owner's hard rule forbids | HELD — 50 mm² row stays open until its sheet is produced |
+| "HV Connector Compatibility: Amphenol Excel\|Mate MSD (400 A, 1500 Vdc)" | No URL, no quote, no datasheet | HELD — Amphenol recorded as a lead name only; connector row stays OpenGap |
+| "Pre-Charge Relay Selection: 80–90% target — TE Kilovac Specification Suite" | Conflates completion target with relay selection; no relay datasheet | HELD — relay selection stays OpenGap |
+
+### Threshold reconciliation flag (new standing item)
+
+Two bonding/contact resistance figures now coexist: **GTR 20's
+≤ 0.1 Ω chassis-bonding limit** (RC-49) and **FMVSS 305a's < 0.2 Ω
+exposed-conductive-parts figure** (RC-42, owner-relayed). Different
+regulations, different measurement contexts. Both stay
+context-scoped candidates; the verification pass that extracts exact
+FMVSS text must reconcile them explicitly. **Never merge them into
+one "bonding number."**
+
+### Owner's closed-vs-open accounting (authoritative)
+
+Partially closed: 35 mm² cable + bend radius, EV200 contactor, Eaton
+EV fuse family, bonding-resistance candidate, MSD/HVIL (Chilye),
+isolation monitor (Sendyne).
+Still open: battery V/I + short-circuit current; inverter currents;
+main fuse exact part; pre-charge resistor sizing + relay selection;
+50 mm² cable datasheet; HV connector compatibility;
+grounding/bonding test procedure; IP67/IP6K9K exact procedure;
+physical routing on truck.
+
+### Next payload (owner's narrow 6-item ask — recorded in Research Map)
+
+Pre-charge sizing formulas + datasheets; pre-charge relay datasheets;
+50 mm² cable datasheet; connectors for 35/50 mm² shielded cable;
+IP67/IP6K9K exact validation procedures; bonding/grounding test
+procedure + measurement method. No repeats of already-sourced rows
+except for compatibility comparison.

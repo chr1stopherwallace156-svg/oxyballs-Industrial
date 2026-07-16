@@ -151,19 +151,22 @@ order (CAN/PATS deliberately last — proprietary depth): **HV wiring →
 MSD/contactors/fuses/pre-charge/HVIL → cooling → EHPS brake/steering →
 supplier datasheets → CAN/PATS.**
 
-1. **HV wiring** (L5) — **PARTIALLY CLOSED** (batches 09–11): named
-   component candidates exist (Coroflex 9-2611/6.0 mm² cable, Kilovac
-   EV200 contactor, Eaton aux fuse, Sendyne SIM100MLP, Chilye MSD).
-   **Owner directive: stay on this gap — do not move to cooling —
-   until the remaining holes close:** (1) main traction battery fuse
-   sizing; (2) contactor make/break duty; (3) pre-charge resistor
-   sizing; (4) pre-charge relay/contactor selection; (5) 35 mm² and
-   50 mm² cable datasheets; (6) matching HV connector datasheets;
-   (7) bonding/grounding test methods for EV HV enclosures;
-   (8) IP67/IP6K9K validation procedures for underbody components —
-   plus the upstream blockers: battery V/I, inverter currents, fault
-   current, physical routing, engineer review. Hard rules: no aux-fuse
-   data as traction data; no cross-gauge bend-radius transfer.
+1. **HV wiring** (L5) — **PARTIALLY CLOSED** (batches 09–12).
+   Candidate architecture on file: Coroflex 6.0/35 mm² cables (+ bend
+   radii, part-scoped), Kilovac EV200 contactor (+ make/break duty +
+   pre-charge no-go candidate), Eaton EV fuse family (main lane) +
+   aux fuses, Sendyne SIM100MLP, Chilye MSD, GTR 20 ≤0.1 Ω bonding
+   candidate, ISO 20653 path. **Owner directive: stay on this gap.
+   Remaining (owner's narrow 6-item ask):** (1) pre-charge resistor
+   sizing formulas + datasheets; (2) pre-charge relay/contactor
+   datasheets; (3) 50 mm² cable datasheet; (4) HV connector datasheets
+   for 35/50 mm² shielded cable; (5) IP67/IP6K9K exact validation
+   procedures; (6) bonding/grounding test procedure + measurement
+   method — plus the upstream blockers only the build decides: battery
+   V/I + short-circuit current, inverter currents, physical routing,
+   engineer review. Hard rules: no aux-fuse data as traction data; no
+   cross-gauge bend-radius transfer; no repeats of already-sourced
+   rows except compatibility comparison.
 2. **Cooling** (L6) — EMPTY: battery/motor/inverter/charger/DC-DC
    loops, pump + radiator sizing, flow, pressure drop, derating,
    high-ambient testing.

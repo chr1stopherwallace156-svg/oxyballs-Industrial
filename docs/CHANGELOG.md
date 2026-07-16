@@ -5,6 +5,26 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 12 + review_07 reconciled: main-fuse lane + GTR 20
+
+- Archived batch_12 (HV wiring datasheets) and review_07 1:1.
+- New rows: CS-26/RC-46 Eaton EV fuse catalogue (real main-fuse family
+  lane — no size selected until upstream data exists); RC-47 EV200
+  make/break duty → **pre-charge NO-GO candidate** (650 A max make,
+  80–90% completion before close; owner correction: curves set the
+  completion target, they do NOT size the resistor — sizing stays
+  OpenGap); CS-27/RC-48 Coroflex 35 mm² datasheet (part-scoped
+  rules/metrics); CS-28/RC-49 UNECE GTR 20 (first official-server
+  standard PDF; ≤0.1 Ω bonding Test+Metric candidates, p.60);
+  CS-29 ISO 20653 path opened.
+- Held: unsourced matrix cells (50 mm² bend radius — cross-gauge
+  transfer forbidden; Amphenol connector — no datasheet; pre-charge
+  relay — conflated cell). Same defect family as batch 11.
+- New standing reconciliation flag: GTR 20 ≤0.1 Ω bonding vs FMVSS
+  <0.2 Ω exposed-part figures are context-distinct — never merged.
+- Research Map L5 updated to the owner's narrow 6-item remaining ask.
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 11 + review_06 reconciled: first component candidates
 
 - Archived batch_11 (component-level HV wiring) and review_06 1:1.
