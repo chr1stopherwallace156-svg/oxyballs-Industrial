@@ -1,0 +1,38 @@
+{
+  "$id": "urn:edts:schema:unverified-register:v1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_UNVERIFIED_VALUES_REGISTER",
+  "project": "2019_FORD_F450_CHASSIS_CAB_145_3",
+  "version": "1.0.0",
+  "milestone": "L1_SOURCE_PACK_01",
+  "purpose": "Hold provisional or rejected-as-baseline values that must not enter the dimensional twin lock.",
+  "unverified_values": [
+    {
+      "parameter_id": "UNV-L1-001",
+      "parameter_name": "front_radius_arm_bushing_durometer",
+      "provisional_value": "75A_SHORE",
+      "status": "REJECTED_AS_BASELINE",
+      "confidence": "LOW",
+      "resolution_type": "PHYSICAL_TEST_OR_OEM_ENGINEERING_DRAWING",
+      "impact": "Low visual/dimensional impact. Non-blocking for exterior modeling."
+    },
+    {
+      "parameter_id": "UNV-L1-002",
+      "parameter_name": "cab_mounting_bushings_material_roughness",
+      "provisional_value": "0.18",
+      "status": "PROVISIONAL_VISUAL_TUNING",
+      "confidence": "LOW",
+      "resolution_type": "CONTROLLED_PHOTOGRAPHY_CALIBRATION",
+      "impact": "Affects underbody material representation. Non-blocking for exterior modeling."
+    },
+    {
+      "parameter_id": "UNV-L1-003",
+      "parameter_name": "sheet_metal_clear_coat_thickness",
+      "provisional_value": "0.12_MM",
+      "status": "REJECTED_AS_BASELINE",
+      "confidence": "LOW",
+      "resolution_type": "PHYSICAL_COATING_MEASUREMENT",
+      "impact": "Extremely low dimensional impact. Shader-based tuning is sufficient."
+    }
+  ]
+}

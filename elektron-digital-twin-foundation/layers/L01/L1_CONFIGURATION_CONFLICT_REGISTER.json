@@ -20,8 +20,10 @@
           "ranking": "AUTHORITATIVE"
         }
       ],
-      "mitigation_reconciliation": "The node is labeled FRONT_AXLE_ASSEMBLY / OBJ-FRONT-AXLE-ASSEMBLY with status CONFIGURATION_UNRESOLVED and candidate_types [MONOBEAM, TWIN_I_BEAM]. Confirm monobeam during physical inspection before locking design. Do not archive BBAS claim as VERIFIED until pages are hashed into evidence store.",
-      "status": "OPEN_MONITORING"
+      "mitigation_reconciliation": "Source Pack 01 EXT-L1-101 / CLM-L1-001 DOCUMENT_SUPPORTED as MONOBEAM_WIDE_TRACK_NON_DRIVING. Aggregator Twin-I-Beam claim remains LOW ranking and unresolved as conflict folklore. Object node uses preferred_subtype MONOBEAM_WIDE_TRACK_NON_DRIVING with physical_asset_confirmation PENDING before geometry freeze.",
+      "status": "DOCUMENT_SUPPORTED_PHYSICAL_PENDING",
+      "preferred_resolution": "MONOBEAM_WIDE_TRACK_NON_DRIVING",
+      "document_extraction_id": "EXT-L1-101"
     },
     {
       "conflict_id": "CNF-002-TIRE-BRAND-AND-MODEL",

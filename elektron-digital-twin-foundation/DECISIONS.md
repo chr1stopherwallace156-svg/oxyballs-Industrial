@@ -260,3 +260,22 @@ Append-only record of digital twin foundation decisions.
   - Do not pre-fill extraction results with expected numbers
   - Project visual tolerances are not assumed OEM blueprint tolerances
   - GRADE-B cab/front units remain usable without full unmodified rear frame
+
+## DT-D016 — Source Pack 01 engaged; geometry freeze still blocked
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Empirical null-metadata templates are superseded by Source Pack 01 intake: verified titles/pub numbers/revision dates, recorded SHA-256 hashes, page-level extractions, and updated structural claims.
+- **Decision:**
+  1. Milestone **`L1_SOURCE_PACK_01`** engaged via `L1_SOURCE_ARTIFACT_REGISTRY.json` + populated extraction results
+  2. Gates: **`L1_DOCUMENT_ACQUISITION_READY`** / **`L1_PUBLIC_REFERENCE_SEARCH_READY`**
+  3. Modeling baseline: **`NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`**
+  4. Claims CLM-L1-001…005 are **DOCUMENT_SUPPORTED** with **physical_asset_confirmation: PENDING**
+  5. Front axle preferred subtype: `MONOBEAM_WIDE_TRACK_NON_DRIVING` (EXT-L1-101); CNF-001 → DOCUMENT_SUPPORTED_PHYSICAL_PENDING
+  6. OEM PDFs remain **out of git**; `hash_recompute_status: NOT_RECOMPUTED_IN_THIS_ENVIRONMENT` until vault mount
+  7. Unverified optical/material inventories quarantined in `L1_UNVERIFIED_VALUES_REGISTER.json`
+  8. Geometry / mesh production remains **BLOCKED**
+- **Consequences:**
+  - Dimensional framework may cite DOCUMENT_SUPPORTED values for planning
+  - Do not freeze meshes until GRADE-A/B physical confirmation
+  - Public harvests stay NOT_EVALUATED / redistribution prohibited pending review

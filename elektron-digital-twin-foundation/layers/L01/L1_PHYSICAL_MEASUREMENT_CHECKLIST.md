@@ -30,8 +30,8 @@ Record instrument serial and calibration date on every session sheet.
 ## Frame and Structure
 
 - [ ] **M-FRM-01 (`rear_frame_width`)**: Outer lateral faces of C-channel webs, aft of cab corner (exclude bolt heads/brackets).
-  - *OEM extracted target*: `_______` mm — from `EXT-L1-103` only
-  - *Definition class from OEM*: OUTSIDE_TO_OUTSIDE / WEB_OUTER_FACE / FLANGE_OUTER / UNSPECIFIED
+  - *OEM extracted target*: `868.7` mm — from `EXT-L1-103` / `CLM-L1-003` (DOCUMENT_SUPPORTED)
+  - *Definition class from OEM*: `OUTSIDE_TO_OUTSIDE_FRAME_WEB`
   - *Actual field measure*: `_______` mm
   - *Process uncertainty class*: `chassis_frame_spans` (+/- 1.00 mm)
 - [ ] **M-FRM-02 (Frame Rail Height/Depth)**: Vertical web profile depth directly behind cab transition.
@@ -43,7 +43,7 @@ Record instrument serial and calibration date on every session sheet.
 ## Hub and Wheel Interfaces
 
 - [ ] **M-WHL-01A (`front_track_measurement`)**: Wheel center planes (rim midpoints).
-  - *OEM extracted target*: `_______` mm — from `EXT-L1-102` only
+  - *OEM extracted target*: `1899.92` mm — from `EXT-L1-102` / `CLM-L1-002` (DOCUMENT_SUPPORTED)
   - *Actual field measure*: `_______` mm
   - *Process uncertainty class*: `wheel_center_alignment` (+/- 1.50 mm)
 - [ ] **M-WHL-01B (`front_overall_tire_width`)**: Extreme outer sidewall bulges; yaw = 0.0 deg; level pad; curb-weight.
@@ -51,7 +51,7 @@ Record instrument serial and calibration date on every session sheet.
 - [ ] **M-WHL-01C (`front_wheel_center_distance`)**: Interior faces of wheel mounting flanges (hub/rotor).
   - *Actual field measure*: `_______` mm
 - [ ] **M-WHL-02 (Wheel Hub PCD)**: Cross-stud pitch circle diameter.
-  - *OEM extracted target*: `_______` mm — from `EXT-L1-104`
+  - *OEM extracted target*: `225.0` mm — from `EXT-L1-104` / `CLM-L1-004` (DOCUMENT_SUPPORTED)
   - *Actual field measure*: `_______` mm
 - [ ] **M-WHL-03 (Wheel Center Bore)**: Pilot opening diameter.
   - *Actual field measure*: `_______` mm

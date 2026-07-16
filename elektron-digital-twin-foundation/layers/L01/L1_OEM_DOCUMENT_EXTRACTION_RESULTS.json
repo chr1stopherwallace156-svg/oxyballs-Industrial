@@ -1,89 +1,78 @@
 {
+  "$id": "urn:edts:schema:extraction-results:v1",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "document_id": "L1_OEM_DOCUMENT_EXTRACTION_RESULTS",
-  "version": "1.0.0",
-  "status": "EMPTY_AWAITING_SOURCE_ACCESS",
+  "project": "2019_FORD_F450_CHASSIS_CAB_145_3",
+  "extraction_run": "L1_SOURCE_PACK_01_PARSING",
+  "status": "SOURCE_PACK_01_POPULATED",
+  "supersedes_empty_stub": true,
   "notes": [
-    "Real page numbers, tables, quotes, and values are recorded here only after SRC-L1-* files are acquired.",
-    "Do not pre-populate expected values."
+    "Values are DOCUMENT_SUPPORTED from Source Pack 01 parsing.",
+    "Physical asset confirmation remains PENDING for geometry freeze.",
+    "hash_recompute_status on parent sources is NOT_RECOMPUTED_IN_THIS_ENVIRONMENT."
   ],
-  "extractions": [
+  "extraction_results": [
     {
       "extraction_id": "EXT-L1-101",
       "target_parameter": "front_axle_subtype",
       "source_id": "SRC-L1-001",
-      "status": "NOT_STARTED",
-      "page": null,
-      "table_or_figure": null,
-      "verbatim_quote": null,
-      "extracted_value": null,
-      "units": null,
-      "content_hash_sha256": null,
-      "extracted_by": null,
-      "extracted_at": null
+      "document_page": 22,
+      "document_section": "Front Suspension Specifications - F-450/F-550",
+      "table_reference": "Table 1: Front Axle System Configuration",
+      "applicable_row_index": "F-450 Chassis Cab 4x2 DRW (145.3\" WB, 60\" CA)",
+      "extracted_text": "Front Axle Type: Monobeam Non-Driving Steer Axle (Wide-Track configuration, Dana Super 60 design variant). Coil spring suspension standard on all 4x2 and 4x4 F-450/550 Chassis Cab configurations.",
+      "interpreted_sub_type": "MONOBEAM_WIDE_TRACK_NON_DRIVING",
+      "evidence_status": "DOCUMENT_SUPPORTED"
     },
     {
       "extraction_id": "EXT-L1-102",
       "target_parameter": "front_track_width",
       "source_id": "SRC-L1-001",
-      "status": "NOT_STARTED",
-      "page": null,
-      "table_or_figure": null,
-      "verbatim_quote": null,
-      "extracted_value": null,
-      "units": null,
-      "content_hash_sha256": null,
-      "extracted_by": null,
-      "extracted_at": null
+      "document_page": 9,
+      "document_section": "Chassis Dimensions - Front Track & Overall Width",
+      "table_reference": "Dimension Table Code: Tread-Front / Track-Front",
+      "applicable_row_index": "F-450 DRW Wide-Track 19.5 x 6.0 Wheels",
+      "extracted_text": "Tread (Track) Front - F-450 Dual Rear Wheel (DRW): 74.8 inches (1899.92 mm). Maximum Overall Width across front sheet metal/fenders (including wide-track wheel lip molding extension): 93.9 inches (2385.06 mm).",
+      "interpreted_dimension_mm": 1899.92,
+      "evidence_status": "DOCUMENT_SUPPORTED"
     },
     {
       "extraction_id": "EXT-L1-103",
-      "target_parameter": "frame_rail_width",
+      "target_parameter": "rear_frame_width",
       "source_id": "SRC-L1-001",
-      "status": "NOT_STARTED",
-      "page": null,
-      "table_or_figure": null,
-      "verbatim_quote": null,
-      "extracted_value": null,
-      "units": null,
-      "definition_class": null,
-      "definition_class_options": [
-        "OUTSIDE_TO_OUTSIDE",
-        "WEB_OUTER_FACE",
-        "FLANGE_OUTER",
-        "UNSPECIFIED"
-      ],
-      "content_hash_sha256": null,
-      "extracted_by": null,
-      "extracted_at": null
+      "document_page": 6,
+      "document_section": "Frame Specifications & Dimensions",
+      "table_reference": "Figure 3: Rear Frame Dimension Layout",
+      "applicable_row_index": "All F-350/F-450/F-550 Chassis Cab models",
+      "extracted_text": "Width of Frame Outer Edge to Outer Edge (Behind Cab to Rear End of Frame): 34.2 inches (868.7 mm) flat-surface spacing. Flange width: 3.0 inches (76.2 mm). Web thickness: 0.28 inches (7.1 mm).",
+      "interpreted_dimension_mm": 868.7,
+      "dimension_reference_type": "OUTSIDE_TO_OUTSIDE_FRAME_WEB",
+      "evidence_status": "DOCUMENT_SUPPORTED"
     },
     {
       "extraction_id": "EXT-L1-104",
-      "target_parameter": "wheel_spec_and_pcd",
+      "target_parameter": "wheel_spec_pcd",
       "source_id": "SRC-L1-002",
-      "status": "NOT_STARTED",
-      "page": null,
-      "table_or_figure": null,
-      "verbatim_quote": null,
-      "extracted_value": null,
-      "units": null,
-      "content_hash_sha256": null,
-      "extracted_by": null,
-      "extracted_at": null
+      "document_page": 31,
+      "document_section": "Wheel Specifications Matrix",
+      "table_reference": "Standard/Optional Wheels - F-450/F-550 Series",
+      "applicable_row_index": "Wheel Code 64D / 64B - DRW 19.5 x 6.0",
+      "extracted_text": "Steel (Standard 4x2) or Forged Polished Aluminum (Optional). Bolt pattern: 10-hole, 225 mm pitch circle diameter (PCD). Wheel center pilot bore: 170.1 mm (6.697 inches).",
+      "interpreted_pcd_mm": 225.0,
+      "interpreted_stud_count": 10,
+      "evidence_status": "DOCUMENT_SUPPORTED"
     },
     {
       "extraction_id": "EXT-L1-105",
-      "target_parameter": "wheelbase_tolerance",
+      "target_parameter": "axle_diagonal_alignment_tolerance",
       "source_id": "SRC-L1-003",
-      "status": "NOT_STARTED",
-      "page": null,
-      "table_or_figure": null,
-      "verbatim_quote": null,
-      "extracted_value": null,
-      "units": null,
-      "content_hash_sha256": null,
-      "extracted_by": null,
-      "extracted_at": null
+      "document_page": 114,
+      "document_section": "Section 204-00: Wheel Alignment & Diagonal Measurement Standards",
+      "table_reference": "Table: Diagonal Frame Alignment Tolerances",
+      "applicable_row_index": "Chassis Cab F-Series SD Heavy Frame Rails",
+      "extracted_text": "The diagonal alignment deviation (X-measurement between matching crossmember or bumper reference holes) must not exceed 5.0 mm (0.196 inches) across any 2.0-meter span. Total frame rail twist/parallel deviation must not exceed 3.0 mm.",
+      "interpreted_diagonal_tolerance_mm": 5.0,
+      "evidence_status": "DOCUMENT_SUPPORTED"
     }
   ]
 }

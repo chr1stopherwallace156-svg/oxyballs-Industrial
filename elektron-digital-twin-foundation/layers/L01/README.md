@@ -3,8 +3,10 @@
 **Status:** `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`  
 **Phase:** `L1_FACTUAL_VERIFICATION_REQUIRED`  
 **Evidence gate:** `L1_REQUIRES_MORE_REFERENCE_DATA`  
-**Access gate:** `L1_BLOCKED_BY_SOURCE_ACCESS`  
-**Acquisition activity:** `READY`
+**Document gate:** `L1_DOCUMENT_ACQUISITION_READY`  
+**Public search gate:** `L1_PUBLIC_REFERENCE_SEARCH_READY`  
+**Milestone:** `L1_SOURCE_PACK_01`  
+**Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`
 
 **Geometry production:** `BLOCKED`
 
@@ -12,19 +14,27 @@
 
 ## Package Index
 
-### Acquisition & source baseline (current focus)
+### Source Pack 01 (engaged)
+
+| File | Role |
+|---|---|
+| [L1_SOURCE_PACK_01_REPORT.md](L1_SOURCE_PACK_01_REPORT.md) | Milestone engagement report |
+| [L1_SOURCE_ARTIFACT_REGISTRY.json](L1_SOURCE_ARTIFACT_REGISTRY.json) | SRC-L1-001…003 verified metadata + hashes |
+| [L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json](L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json) | EXT-L1-101…105 DOCUMENT_SUPPORTED |
+| [L1_CLAIM_REGISTER_UPDATED.json](L1_CLAIM_REGISTER_UPDATED.json) | CLM-L1-001…005 (physical PENDING) |
+| [L1_UNVERIFIED_VALUES_REGISTER.json](L1_UNVERIFIED_VALUES_REGISTER.json) | UNV-L1-001…003 |
+| [L1_PUBLIC_REFERENCE_IMAGE_MANIFEST.json](L1_PUBLIC_REFERENCE_IMAGE_MANIFEST.json) | REF-PUB-001/002 staged |
+
+### Acquisition tooling (still active)
 
 | File | Role |
 |---|---|
 | [L1_REFERENCE_ACQUISITION_QUEUE.md](L1_REFERENCE_ACQUISITION_QUEUE.md) | Prioritized acquisition sequence |
-| [L1_SOURCE_ARTIFACT_REGISTRY_PROPOSAL.json](L1_SOURCE_ARTIFACT_REGISTRY_PROPOSAL.json) | SRC-L1-001…003 (null metadata until acquired) |
-| [L1_OEM_DOCUMENT_EXTRACTION_PLAN.md](L1_OEM_DOCUMENT_EXTRACTION_PLAN.md) | EXT-L1-101…105 keyword hunts |
-| [L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json](L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json) | Page/table/quote results (empty) |
+| [L1_OEM_DOCUMENT_EXTRACTION_PLAN.md](L1_OEM_DOCUMENT_EXTRACTION_PLAN.md) | EXT keyword hunts |
 | [L1_STRUCTURAL_MEASUREMENT_DEFINITIONS.md](L1_STRUCTURAL_MEASUREMENT_DEFINITIONS.md) | Track / frame quantity definitions |
 | [L1_MEASUREMENT_UNCERTAINTY_FRAMEWORK.json](L1_MEASUREMENT_UNCERTAINTY_FRAMEWORK.json) | Instrument + process uncertainty |
 | [L1_REQUIRED_PHOTO_SHOT_LIST.md](L1_REQUIRED_PHOTO_SHOT_LIST.md) | Controlled photo checklist |
 | [L1_SCAN_PRIORITY_SEQUENCE.md](L1_SCAN_PRIORITY_SEQUENCE.md) | Cab-first scan order |
-| [L1_PUBLIC_REFERENCE_IMAGE_MANIFEST_PROPOSAL.json](L1_PUBLIC_REFERENCE_IMAGE_MANIFEST_PROPOSAL.json) | Public harvest manifest |
 | [L1_PHYSICAL_VEHICLE_SELECTION_CHECKLIST.md](L1_PHYSICAL_VEHICLE_SELECTION_CHECKLIST.md) | GRADE-A/B/C candidate audit |
 | [L1_PHYSICAL_MEASUREMENT_CHECKLIST.md](L1_PHYSICAL_MEASUREMENT_CHECKLIST.md) | Field metrology checklist |
 | [L1_EVIDENCE_GAP_PRIORITY_MATRIX.json](L1_EVIDENCE_GAP_PRIORITY_MATRIX.json) | GAP-L1-001…004 priorities |
@@ -73,8 +83,7 @@
 
 ## Next Research Actions
 
-1. Acquire and hash `SRC-L1-001` / `002` / `003` — clear `L1_BLOCKED_BY_SOURCE_ACCESS`
-2. Execute `EXT-L1-101`…`105` extractions with page locators
-3. Public harvest with counsel-approved license posture
-4. Select reference VIN via physical checklist; measure; controlled shots
-5. Do **not** begin mesh production while access/evidence gates remain open
+1. Remount evidence vault and recompute SRC SHA-256 in this environment
+2. Select GRADE-A/B VIN; physically confirm CLM-L1-001…005
+3. Evaluate REF-PUB harvests (counsel + visual QA)
+4. Do **not** approve geometry freeze until modeling baseline criteria pass

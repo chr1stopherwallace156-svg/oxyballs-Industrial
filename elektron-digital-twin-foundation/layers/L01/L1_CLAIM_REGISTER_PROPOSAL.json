@@ -2,7 +2,12 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "document_id": "L1_CLAIM_REGISTER_PROPOSAL",
   "version": "1.0.0",
-  "status": "DRAFT",
+  "status": "SUPERSEDED_IN_PART_BY_L1_CLAIM_REGISTER_UPDATED",
+  "superseded_by": "L1_CLAIM_REGISTER_UPDATED.json",
+  "notes": [
+    "Structural claims CLM-001-style dimensional items are superseded by CLM-L1-001…005 where overlapping.",
+    "Optical/PBR and provisional-spec claims remain relevant alongside L1_UNVERIFIED_VALUES_REGISTER.json."
+  ],
   "vehicle_configuration": {
     "make": "Ford",
     "model": "F-450 Chassis Cab",

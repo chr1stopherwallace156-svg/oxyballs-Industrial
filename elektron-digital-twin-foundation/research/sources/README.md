@@ -11,4 +11,6 @@ Expected placements (see `layers/L01/L1_SOURCE_ARTIFACT_REGISTRY_PROPOSAL.json`)
 | SRC-L1-002 | `ford/SRC-L1-002/` |
 | SRC-L1-003 | `ford/SRC-L1-003/` |
 
-Do not commit copyrighted OEM PDFs without licensing clearance. When a file is added: set registry `acquisition_status: ACQUIRED`, fill `exact_title` / `publication_number` / `revision_date` from the file, set `content_hash_sha256`, then populate `layers/L01/L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json`.
+Do not commit copyrighted OEM PDFs without licensing clearance.
+
+**Source Pack 01:** Metadata + SHA-256 claims are recorded in `layers/L01/L1_SOURCE_ARTIFACT_REGISTRY.json` with `git_committed: false`. Mount the external evidence vault here (or configured path) and set `hash_recompute_status` after byte verification. Extractions: `layers/L01/L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json`.

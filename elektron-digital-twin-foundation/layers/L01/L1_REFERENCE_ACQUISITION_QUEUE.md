@@ -1,8 +1,10 @@
 # EDTS Layer 1 Reference Acquisition Queue
 
-**Status:** `ACTIVE`  
-**Gate:** `L1_BLOCKED_BY_SOURCE_ACCESS`  
-**Reference acquisition activity:** `READY`  
+**Status:** `ACTIVE — Priority 1 documents engaged via Source Pack 01`  
+**Document gate:** `L1_DOCUMENT_ACQUISITION_READY`  
+**Public search:** `L1_PUBLIC_REFERENCE_SEARCH_READY`  
+**Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`  
+**Milestone:** `L1_SOURCE_PACK_01`  
 **Vehicle:** 2019 Ford F-450 Chassis Cab — Regular Cab / 4x2 / DRW / 145.3 in WB / 60 in CA
 
 This queue prioritizes and sequences all missing reference data required to close Layer 1 evidence gaps.
@@ -90,6 +92,6 @@ gantt
 1. Do not invent page contents, publication numbers, or revision dates before files are acquired.
 2. Source registry keeps `exact_title` / `publication_number` / `revision_date` as **null** until read from the artifact (`NOT_ACQUIRED`).
 3. Extraction page locators live only in `L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json`.
-4. Geometry / mesh production remains **BLOCKED** while gate is `L1_BLOCKED_BY_SOURCE_ACCESS`.
-5. Prefer Priority 1 document resolution for `GAP-L1-001` before physical capture.
+4. Geometry / mesh production remains **BLOCKED** until modeling baseline approval.
+5. Priority 1 document extractions for `GAP-L1-001` are DOCUMENT_SUPPORTED; physical capture still required.
 6. Scan work follows `L1_SCAN_PRIORITY_SEQUENCE.md` (fine castings deferred).

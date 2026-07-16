@@ -3,11 +3,11 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "document_id": "L1_SOURCE_ARTIFACT_REGISTRY_PROPOSAL",
   "project": "2019_FORD_F450_CHASSIS_CAB_145_3",
-  "registry_status": "DRAFT_PROPOSAL",
+  "registry_status": "SUPERSEDED_BY_L1_SOURCE_ARTIFACT_REGISTRY",
+  "superseded_by": "L1_SOURCE_ARTIFACT_REGISTRY.json",
   "notes": [
-    "exact_title, publication_number, and revision_date remain null until the physical artifact is acquired and metadata is read from the file itself.",
-    "Do not invent catalog identifiers. working_title is a hunt label only.",
-    "acquisition_status NOT_ACQUIRED means no file is present and no claim may cite this source as evidence."
+    "SUPERSEDED by Source Pack 01 engaged registry L1_SOURCE_ARTIFACT_REGISTRY.json.",
+    "Retained as pre-acquisition null-metadata audit trail."
   ],
   "sources": [
     {

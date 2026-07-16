@@ -3,13 +3,13 @@
 This repository contains the authoritative schemas, standards, and registries establishing the baseline data model and coordinate frameworks for the F-450 physical vehicle intake and digital reconstruction.
 
 **Readiness:** `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`  
-**Phase:** `L1_FACTUAL_VERIFICATION_REQUIRED`  
-**Access gate:** `L1_BLOCKED_BY_SOURCE_ACCESS`  
-**Acquisition activity:** `READY`  
-**Evidence gate:** `L1_REQUIRES_MORE_REFERENCE_DATA`  
+**Milestone:** `L1_SOURCE_PACK_01`  
+**Document gate:** `L1_DOCUMENT_ACQUISITION_READY`  
+**Public search:** `L1_PUBLIC_REFERENCE_SEARCH_READY`  
+**Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`  
 **L00 residual:** `L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY` (closure REJECTED; runtime transforms NOT_EXECUTED)  
-**L01 geometry:** BLOCKED — acquire OEM files before modeling  
-See [STATUS.json](STATUS.json), [layers/L01/L1_REFERENCE_ACQUISITION_QUEUE.md](layers/L01/L1_REFERENCE_ACQUISITION_QUEUE.md), [layers/L01/L1_SOURCE_BASELINE_CLOSURE_CRITERIA.md](layers/L01/L1_SOURCE_BASELINE_CLOSURE_CRITERIA.md).
+**L01 geometry:** BLOCKED — physical confirmation still required  
+See [STATUS.json](STATUS.json), [layers/L01/L1_SOURCE_PACK_01_REPORT.md](layers/L01/L1_SOURCE_PACK_01_REPORT.md).
 
 ---
 
@@ -82,7 +82,7 @@ Every layer passes five gates before advancing:
 
 ## Current stage
 
-**L01 — Exterior visual reference research (draft complete).** Access gate `L1_BLOCKED_BY_SOURCE_ACCESS`; acquisition activity `READY`. Next: acquire SRC-L1-001…003 (metadata null until read from file). Geometry blocked.
+**L01 — Source Pack 01 engaged.** Document/public-search gates READY; modeling baseline not approved for geometry freeze. Next: GRADE-A/B physical confirmation of CLM-L1-001…005. See [L1_SOURCE_PACK_01_REPORT.md](layers/L01/L1_SOURCE_PACK_01_REPORT.md).
 
 ## Related work
 

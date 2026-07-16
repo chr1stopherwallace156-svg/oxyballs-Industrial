@@ -313,3 +313,30 @@ All notable changes to the digital twin foundation. Append-only.
 - Access gate: **L1_BLOCKED_BY_SOURCE_ACCESS**
 - Acquisition activity: **READY**
 - L01 geometry: **BLOCKED**
+
+## 2026-07-16 (L1 Source Pack 01 Engaged)
+
+### Added
+
+- `L1_SOURCE_ARTIFACT_REGISTRY.json` — SRC-L1-001…003 verified metadata + SHA-256
+- `L1_CLAIM_REGISTER_UPDATED.json` — CLM-L1-001…005
+- `L1_UNVERIFIED_VALUES_REGISTER.json` — UNV-L1-001…003
+- `L1_PUBLIC_REFERENCE_IMAGE_MANIFEST.json` — REF-PUB staged harvests
+- `L1_SOURCE_PACK_01_REPORT.md`
+- Populated `L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json` (EXT-L1-101…105)
+- **DT-D016** — Source Pack 01; geometry freeze still blocked
+
+### Changed
+
+- Document gate → **L1_DOCUMENT_ACQUISITION_READY**
+- Public search → **L1_PUBLIC_REFERENCE_SEARCH_READY**
+- Modeling baseline → **NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE**
+- Front axle → DOCUMENT_SUPPORTED monobeam (physical PENDING)
+- Gap/conflict registers updated; measurement checklist OEM targets filled from extractions
+- Proposal source/manifest registries marked superseded
+
+### Status
+
+- Milestone: **L1_SOURCE_PACK_01**
+- Modeling baseline: **NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE**
+- L01 geometry: **BLOCKED**

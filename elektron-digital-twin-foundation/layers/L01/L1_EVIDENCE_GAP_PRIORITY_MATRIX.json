@@ -25,12 +25,13 @@
         "cost_note": "Cost assumes BBAS access already available to the team; otherwise access fees TBD"
       },
       "priority_score": 1,
-      "status": "OPEN"
+      "status": "DOCUMENT_SUPPORTED_PHYSICAL_PENDING",
+      "status_note": "EXT-L1-101 / CLM-L1-001 engaged; physical confirmation still required for geometry freeze"
     },
     {
       "gap_id": "GAP-L1-002",
       "gap_description": "Verification of wheel PCD (Pitch Circle Diameter) and hub flange dimensions",
-      "related_claims": ["CLM-006"],
+      "related_claims": ["CLM-006", "CLM-L1-004"],
       "related_extractions": ["EXT-L1-104"],
       "impact": {
         "visual_impact": "MEDIUM",
@@ -45,7 +46,8 @@
         "acquisition_difficulty": "LOW"
       },
       "priority_score": 2,
-      "status": "OPEN"
+      "status": "DOCUMENT_SUPPORTED_PHYSICAL_PENDING",
+      "status_note": "EXT-L1-104 / CLM-L1-004 DOCUMENT_SUPPORTED; physical PCD chord check PENDING"
     },
     {
       "gap_id": "GAP-L1-003",

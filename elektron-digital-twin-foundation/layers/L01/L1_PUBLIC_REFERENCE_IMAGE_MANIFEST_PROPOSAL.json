@@ -2,11 +2,10 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "document_id": "L1_PUBLIC_REFERENCE_IMAGE_MANIFEST_PROPOSAL",
   "project": "2019_FORD_F450_CHASSIS_CAB_145_3",
-  "manifest_status": "DRAFT_PROPOSAL",
+  "manifest_status": "SUPERSEDED_BY_L1_PUBLIC_REFERENCE_IMAGE_MANIFEST",
+  "superseded_by": "L1_PUBLIC_REFERENCE_IMAGE_MANIFEST.json",
   "notes": [
-    "source_url values are EXAMPLE placeholders for harvest planning — replace with real listing URLs when captured.",
-    "Do not scrape or store copyrighted media without counsel-approved license posture.",
-    "license_restriction remains FAIR_USE_INTERNAL_NON_COMMERCIAL_RESEARCH pending counsel review (see L00 licensing blockers)."
+    "SUPERSEDED by Source Pack 01 manifest. Retained as planning trail with example URL placeholders."
   ],
   "categories": {
     "dealer_inventory_harvests": [

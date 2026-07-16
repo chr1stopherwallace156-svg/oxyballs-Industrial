@@ -1,16 +1,19 @@
 # EDTS Layer 1 Source Baseline Closure Criteria
 
 **Status:** `ACTIVE`  
-**Current gate verdict:** `L1_BLOCKED_BY_SOURCE_ACCESS`  
-**Reference acquisition activity:** `READY` (templates, grading, lens standards, measurement defs in place)
+**Milestone:** `L1_SOURCE_PACK_01`  
+**Document gate:** `L1_DOCUMENT_ACQUISITION_READY`  
+**Public search gate:** `L1_PUBLIC_REFERENCE_SEARCH_READY`  
+**Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`
 
 | Field | Value |
 |---|---|
 | Research draft | `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE` |
-| Phase | `L1_FACTUAL_VERIFICATION_REQUIRED` |
-| Evidence gate | `L1_REQUIRES_MORE_REFERENCE_DATA` |
-| Access gate | **`L1_BLOCKED_BY_SOURCE_ACCESS`** |
-| Acquisition activity | **`READY`** |
+| Milestone | `L1_SOURCE_PACK_01` |
+| Evidence gate | `L1_REQUIRES_MORE_REFERENCE_DATA` (physical still open) |
+| Document acquisition | **`L1_DOCUMENT_ACQUISITION_READY`** |
+| Public reference search | **`L1_PUBLIC_REFERENCE_SEARCH_READY`** |
+| Modeling baseline | **`NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`** |
 
 Closure is **claim-specific and modular**. Absolute unanimous consensus across every manual for every detail is **not** required.
 
@@ -53,18 +56,20 @@ Rendered shader parameters (roughness, metallic, coating type) must be mapped to
 ## Project Gate Verdict (current)
 
 ```text
-Status Code: L1_BLOCKED_BY_SOURCE_ACCESS
-Reference Acquisition Activity Status: READY
+Document Gate: L1_DOCUMENT_ACQUISITION_READY
+Public Search Gate: L1_PUBLIC_REFERENCE_SEARCH_READY
+Modeling Baseline: NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE
+Milestone: L1_SOURCE_PACK_01
 ```
 
-**Reasoning:** All structural planning assets, checklists, and measurement methodologies have been structurally updated. Modeling work and coordinate lock remain blocked pending physical document retrieval. Templates are ready to receive primary research material.
+**Reasoning:** Source Pack 01 metadata and DOCUMENT_SUPPORTED extractions are engaged. Geometry freeze remains paused until GRADE-A/B physical confirmation and modular closure rules are satisfied claim-by-claim. Hash recompute against vault bytes is still pending in this environment.
 
 ### Explicitly suspended
 
 - L01 mesh / glTF production
 - Coordinate lock / geometry freeze
-- Promotion of claims to VERIFIED without extraction results locators
+- Promotion of DOCUMENT_SUPPORTED → physically VERIFIED without inspection
 
-### Unblocks when
+### Unblocks geometry freeze when
 
-Priority 1 sources are acquired and hashed; modular closure rules above are satisfied claim-by-claim; signed baseline record created (future: `L1_SOURCE_BASELINE_APPROVAL.md`).
+Physical confirmation of CLM-L1-001…005 on an accepted grade vehicle; hash recompute optional but recommended; signed baseline record (future: `L1_SOURCE_BASELINE_APPROVAL.md`).

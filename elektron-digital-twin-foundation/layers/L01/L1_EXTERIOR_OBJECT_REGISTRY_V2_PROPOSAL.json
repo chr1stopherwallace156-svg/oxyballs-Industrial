@@ -29,8 +29,11 @@
       "layer": "L1_VISIBLE_UNDERBODY",
       "parent_object": "ROOT_VEHICLE",
       "vehicle_side_location": "FRONT_CENTERLINE",
-      "configuration_status": "CONFIGURATION_UNRESOLVED",
-      "candidate_types": ["MONOBEAM", "TWIN_I_BEAM"],
+      "configuration_status": "DOCUMENT_SUPPORTED_PHYSICAL_PENDING",
+      "preferred_subtype": "MONOBEAM_WIDE_TRACK_NON_DRIVING",
+      "candidate_types": ["MONOBEAM_WIDE_TRACK_NON_DRIVING", "TWIN_I_BEAM"],
+      "document_extraction_id": "EXT-L1-101",
+      "claim_id": "CLM-L1-001",
       "material_class": "CAST_IRON_STEEL",
       "manufacturing_method": "CAST_AND_FORGED",
       "visual_importance": "MEDIUM",
@@ -42,9 +45,9 @@
       "future_interaction_role": "STEER_INTERACTION",
       "geometry_detail_level": "HIGH",
       "detail_distribution": "GEOMETRY",
-      "evidence_status": "PHYSICAL_VERIFICATION_PENDING",
+      "evidence_status": "DOCUMENT_SUPPORTED_PHYSICAL_PENDING",
       "unresolved_questions": [
-        "Confirm the monobeam configuration over the Twin-I-Beam on the reference vehicle chassis."
+        "Physically confirm MONOBEAM_WIDE_TRACK_NON_DRIVING on the selected GRADE-A/B VIN (CLM-L1-001 mitigation)."
       ]
     },
     {
