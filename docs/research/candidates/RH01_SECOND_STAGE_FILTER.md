@@ -134,6 +134,7 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-58 | **Powertrain compatibility risk (owner-derived, review_11)**: at candidate face values, Webasto VIB limits (150 A cont / 250 A peak) yield ≤60 kW continuous / ≤100 kW peak at 400 V — versus the Dana target of 130 kW continuous / 250 kW peak, which needs ≈325 A cont / ≈625 A peak at 400 V (P=V×I, lossless). **Candidate battery output may not support candidate motor demand** unless configuration differs (pack count, 400 vs 800 V, parallel arrangement, VIB limit, supplier-approved setup) | derived over RC-56 + RC-57 (both unverified) | n/a — derived risk analysis, not a source claim | **DerivedRiskFlag → blocker B-003 (POWERTRAIN_COMPATIBILITY_REVIEW_REQUIRED)**; arithmetic owner-supplied; resolves only via supplier answers + engineering review — lanes L9/L6/L8 |
 | RC-59 | Webasto Pro 40 per-pack + VIB figures *(batch_17/review_12 — corroborated across both, still NO source link)*: Pro 40 ≈ 40 kWh, 333–407 V, **55 kW continuous / 112 kW 10 s peak discharge per pack**, 297 kg, 10 l/min; **VIB: 380 A continuous / 580 A 30 s peak discharge, up to 10 packs**; VIG/VIG Plus: up to 18 packs, higher current capability (owner-relayed) | CS-36 | **MissingSourceLink — NeedsExactSource for every figure** | **SupplierCandidate values** — supersede RC-56's 150/250 A system figures (which now appear to have been mislabeled pack/system data); nothing usable until Webasto datasheets/emails archived — lanes L9/L6 |
 | RC-60 | **Corrected architecture analysis (owner-derived, review_12 — supersedes batch_17's "3 packs minimum")**: pack count is topology-dependent. 1s1p/400 V: REJECTED (fails cont.+peak). 1s3p/400 V (~120 kWh): power may support but continuous ≈325–371 A is near the VIB 380 A limit and peak ≈663 A at 400 V EXCEEDS the VIB 580 A peak — risky. 2s1p/800 V (~80 kWh): ~110 kW cont / 224 kW peak — likely underpowered. **2s2p/800 V (4 packs, ~160 kWh): strongest minimum candidate for review.** 2s3p/800 V (6 packs, ~240 kWh): candidate if weight/space allow. All ideal P=V×I, lossless; real demand higher | derived over RC-57 + RC-59 (unverified inputs) | n/a — derived analysis | **DerivedRiskAnalysis — candidate topology ranking ONLY; pending supplier approval + engineering review (B-003/B-004); NOT a selection** — lanes L9/L6/L8 |
+| RC-61 | Webasto VIG / VIG Plus figures *(batch_18 + review_13, owner-corroborated — still NO source link)*: **1,215 A continuous / 1,400 A peak discharge, up to 18 packs**; marketing phrase "no HV limitation" **fenced** (owner: VIG still has limits — much stronger than VIB, not "unlimited") | CS-36 (Webasto interface family) | **MissingSourceLink — NeedsExactSource** | **SupplierCandidate values** — the numbers that make B-004 decisive; unusable until Webasto documentation archived — lanes L9/L6 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -1187,3 +1188,49 @@ blocks B-003's resolution).
   conclusions beyond inputs** ("3 packs minimum", "800V should be
   chosen") — new watch item: topology/architecture conclusions
   require the series/parallel constraint check the owner demonstrated.
+
+---
+
+## 25. Batch 18 + owner review_13 — supplier inquiry READY_TO_SEND (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_18_supplier_inquiry_draft.md`
+and `docs/research/raw/owner_reviews/review_13_batch_18_verdict.md`.
+Row addition: RC-61 (VIG/VIG Plus figures). **Canonical outreach
+artifact created:**
+`docs/research/outreach/SUPPLIER_INQUIRY_WEBASTO_01.md` — the owner's
+9-question supplier-ready letter, status READY_TO_SEND.
+
+### Owner softenings applied (commitment-language overreach — 6th defect flavor)
+
+| Batch_18 text | Owner correction |
+|---|---|
+| "The **selected** traction drive is a Dana TM4 SUMO MD" | "**candidate** traction drive **under evaluation**" — nothing is selected |
+| "does Webasto engineering **approve** a 2s2p 800V configuration" | "does Webasto have an **application-approved configuration or integration guideline**" — ask for their product limits, not vehicle responsibility |
+| VIG "**eliminates hardware throttling** downstream" | VIG "**may reduce** the VIB current bottleneck, pending Webasto-approved pack topology and current limits" — VIG has limits too (RC-61 fence) |
+| CAN ask: "register addresses" | Upgraded: **J1939 DBC file, CAN integration guide, PGN/SPN list, or NDA process** |
+
+Defect-family note: commitment language ("selected", "approve",
+"eliminates") is the outward-facing sibling of status inflation — it
+tells a *supplier* decisions were made that weren't. Caught before
+anything was sent. Ledger: splice → action-column → title/cell →
+status-language → sourceless matrix → **commitment language**.
+
+### What the letter gates (owner status block, recorded verbatim in the outreach file)
+
+SupplierQuestionSet READY_TO_SEND; PowertrainCompatibility
+BLOCKED_PENDING_SUPPLIER_REPLY (B-003); HVWiringCalculations HALTED;
+PackTopology candidate 2s2p/800 V; InterfaceChoice OpenGap (B-004);
+PreChargeResponsibility / Isc-FuseCoordination / CANIntegration /
+CoolingManifold all OpenGap.
+
+### Process note — replies are evidence
+
+Sending the letter is an **owner/business action** (external
+communication — not performed by any agent without explicit owner
+instruction). When a reply arrives: archive it 1:1 under
+`docs/research/raw/supplier_replies/`, then reconcile — a supplier
+email is the first evidence class that can begin resolving B-003/B-004
+and converting RC-56/57/59/61 from MissingSourceLink to sourced
+candidates. Unlock-dependency map (batch_18 Part 2) accepted with the
+VIG row corrected per above.

@@ -5,6 +5,26 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 18 + review_13: Webasto inquiry READY_TO_SEND
+
+- Archived batch_18 (supplier-inquiry draft) and review_13 1:1;
+  created `docs/research/outreach/SUPPLIER_INQUIRY_WEBASTO_01.md` —
+  the owner's 9-question supplier-ready letter (READY_TO_SEND; sending
+  is an owner action; replies archived 1:1 under
+  `docs/research/raw/supplier_replies/`).
+- Owner softenings applied — new defect flavor recorded (**commitment
+  language**, outward-facing sibling of status inflation): "selected"
+  → "candidate under evaluation"; "approve" → "application-approved
+  configuration or integration guideline"; VIG "eliminates throttling"
+  → "may reduce the bottleneck" ("no HV limitation" fenced); CAN ask
+  upgraded to DBC/PGN/SPN/NDA.
+- RC-61: VIG/VIG Plus figures (1,215 A cont / 1,400 A peak, 18 packs)
+  — owner-corroborated, still sourceless (MissingSourceLink).
+- Owner status block recorded (PowertrainCompatibility =
+  BLOCKED_PENDING_SUPPLIER_REPLY; 5 OpenGaps). Dana/TM4 letter not yet
+  drafted.
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 17 + review_12: topology correction; B-004 filed
 
 - Archived batch_17 (Powertrain Compatibility Check) and review_12 1:1.

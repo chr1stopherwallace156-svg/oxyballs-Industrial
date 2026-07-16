@@ -4,14 +4,14 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-15
-- Reason for handoff: task complete (batch 17 + review_12 — B-004 filed);
+- Reason for handoff: task complete (batch 18 + review_13 — inquiry READY_TO_SEND);
   awaiting owner decisions and/or next batch
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `0c3515a` — Reconcile RH batch 16 + owner review_11
+- Start commit: `f8b7685` — Reconcile RH batch 17 + owner review_12
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
@@ -19,39 +19,37 @@
 ## Work performed
 
 - Files changed:
-  `docs/research/raw/research_hunter/batch_17_powertrain_compatibility_check.md`
-  and `docs/research/raw/owner_reviews/review_12_batch_17_verdict.md`
-  (new, verbatim — committed separately as `c1aa169`),
-  `docs/research/raw/research_hunter/PROVENANCE.md`,
-  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (RC-59/60;
-  section 24), `docs/status/BLOCKERS.md` (**B-004 filed; B-003
-  extended with owner blockers 04–08**),
-  `docs/research/RESEARCH_MAP.md` (corrected topology summary),
+  `docs/research/raw/research_hunter/batch_18_supplier_inquiry_draft.md`
+  and `docs/research/raw/owner_reviews/review_13_batch_18_verdict.md`
+  (new, verbatim — committed separately as `3c703fc`),
+  **`docs/research/outreach/SUPPLIER_INQUIRY_WEBASTO_01.md` (new —
+  READY_TO_SEND)**, `docs/research/raw/research_hunter/PROVENANCE.md`,
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (RC-61;
+  section 25), `docs/research/RESEARCH_MAP.md` (outreach state),
   `docs/CHANGELOG.md`, handoff files
-- Summary: batch 17 (Powertrain Compatibility Check) + review_12
-  reconciled. **Owner topology correction supersedes the batch's "3
-  packs minimum"**: 800 V requires 2sNp series pairing → practical
-  minimum 4 packs; corrected ranking on RC-60 (1s1p rejected;
-  1s3p/400 V risky — peak ≈663 A exceeds VIB 580 A; 2s1p underpowered;
-  **2s2p/800 V strongest minimum candidate**; 2s3p if weight/space
-  allow) — all derived, lossless, unverified inputs. **B-004
-  INTERFACE_SELECTION_REQUIRED filed** (VIB vs VIG/VIG Plus changes
-  every current limit). RC-59 records the Pro 40 (55/112 kW) and VIB
-  (380/580 A) figures — **2nd consecutive sourceless batch**;
-  everything MissingSourceLink; RC-56's system figures superseded as
-  apparently mislabeled. Supplier outreach now 24 questions. Conduct
-  watch item added: topology conclusions require series/parallel
-  constraint checks. **Nothing ingested; nothing Confirmed; ODRs
-  untouched.**
+- Summary: batch 18 (Webasto supplier-inquiry draft) + review_13
+  reconciled. **The owner's 9-question supplier-ready letter is
+  recorded as the canonical outreach artifact — READY_TO_SEND; sending
+  is an owner/business action, never an agent action.** Owner
+  softenings applied and a new defect flavor recorded (**commitment
+  language** — "selected"/"approve"/"eliminates throttling" told a
+  supplier decisions were made that weren't; caught before sending).
+  RC-61: VIG/VIG Plus 1,215 A cont / 1,400 A peak / 18 packs —
+  owner-corroborated, still sourceless; "no HV limitation" fenced.
+  Owner status block recorded (BLOCKED_PENDING_SUPPLIER_REPLY + 5
+  OpenGaps). Replies get archived 1:1 under
+  `docs/research/raw/supplier_replies/` — first evidence class that
+  can resolve B-003/B-004. Dana/TM4 letter not yet drafted. **Nothing
+  ingested; nothing Confirmed; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_17/review_12 archives are 1:1 against the
-  owner's chat message ("17:75"); RC-60's ranking is owner-derived
-  over explicitly unverified inputs and recorded as risk analysis,
-  not selection; no powertrain value entered any rule or sizing
+- Verified vs claimed: batch_18/review_13 archives are 1:1 against the
+  owner's chat message ("18:75"); the outreach letter is the owner's
+  own wording, transcribed unchanged; no supplier figure entered any
+  rule or sizing
 
 ## State
 

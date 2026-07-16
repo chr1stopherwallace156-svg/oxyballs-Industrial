@@ -202,6 +202,17 @@ supplier datasheets → CAN/PATS.**
    configuration question. **Everything remains candidate-level:
    both powertrain batches were sourceless — official Webasto/Dana
    datasheets must be archived before any figure is usable.**
+
+   **Outreach state (batch_18/review_13):** the consolidated Webasto
+   inquiry is **READY_TO_SEND** at
+   `docs/research/outreach/SUPPLIER_INQUIRY_WEBASTO_01.md`
+   (owner-approved 9-question letter; sending is an owner action).
+   VIG/VIG Plus figures on file (RC-61: 1,215 A cont / 1,400 A peak,
+   18 packs — sourceless, "no HV limitation" fenced). Replies get
+   archived 1:1 under `docs/research/raw/supplier_replies/` and are
+   the first evidence class that can resolve B-003/B-004. A parallel
+   Dana/TM4 inquiry (10 questions, review_11) is not yet drafted into
+   a letter.
 2. **Cooling** (L6) — EMPTY: battery/motor/inverter/charger/DC-DC
    loops, pump + radiator sizing, flow, pressure drop, derating,
    high-ambient testing.
