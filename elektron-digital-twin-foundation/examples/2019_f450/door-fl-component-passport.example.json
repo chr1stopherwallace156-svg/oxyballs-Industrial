@@ -1,0 +1,28 @@
+{
+  "$schema": "../../schemas/component-passport.schema.json",
+  "$id": "urn:edts:example:passport:PP-VEH000001-DOOR-FL-001",
+  "passport_id": "PP-VEH000001-DOOR-FL-001",
+  "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+  "vehicle_instance_id": "VEH-000001",
+  "configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:39162085dcee611d8713522a771dcf3b7cdeb0e948825a0dd2d2d087530a928e",
+  "status_summary": {
+    "evidence": "ABSENT",
+    "geometry": "PROVISIONAL",
+    "interaction": "VISUAL_PREVIEW_ONLY"
+  },
+  "links": {
+    "evidence_link_ids": [],
+    "geometry_asset_ids": [
+      "GEO-VEH000001-DOOR-FL-001"
+    ],
+    "relationship_ids": [
+      "REL-VEH000001-0001"
+    ],
+    "interaction_ids": [
+      "INT-VEH000001-DOOR-FL-001"
+    ]
+  },
+  "schema_version": "1.0.0",
+  "notes": null
+}

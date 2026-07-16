@@ -437,3 +437,19 @@ Append-only record of digital twin foundation decisions.
   - Multi-year applicability remains prohibited
   - Cross-vehicle data only via decoupled comparison records
   - Isolation suite remains a readiness gate
+
+## DT-D025 — Kernel v1.0.0-rc1 validation package (RFC8785 fingerprint + Instance Resolver)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Finalize rc1 schemas/examples and define fingerprint + runtime isolation standards; runtime resolver tests not yet executed.
+- **Decision:**
+  1. Adopt entity/definition ID patterns (`VEH|ASMDEF|CMPDEF`, `CMPINST`, `CFG`)
+  2. Canonical seed path `examples/2019_f450/` with 7 examples
+  3. Fingerprint via RFC 8785–style canonical JSON, mm lengths, uppercase text, `sha256:` digest
+  4. Runtime lookups must use `getComponent(vehicle_instance_id, configuration_id, component_instance_id)`; canonical_name lookup forbidden
+  5. Record runtime tests as `NOT_EXECUTED` in `KERNEL_TEST_RESULTS.json`
+  6. Phase = **`EDTS_EXACT_VEHICLE_KERNEL_VALIDATION_PENDING`** until KRN-ISO-001..003 execute
+- **Consequences:**
+  - Structural suite may pass while overall validation remains pending
+  - No claim of runtime isolation enforcement until harness exists

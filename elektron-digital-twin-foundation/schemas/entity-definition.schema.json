@@ -1,44 +1,37 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:edts:schema:entity-definition:v1",
-  "title": "EntityDefinition",
-  "description": "Universal entity definition. Contains no vehicle-specific facts. Kernel v1.0.0-rc1.",
+  "title": "EDTS Universal Entity Definition",
   "type": "object",
-  "additionalProperties": false,
   "required": [
     "entity_id",
-    "entity_type"
+    "entity_type",
+    "canonical_name",
+    "lifecycle_status",
+    "schema_version"
   ],
   "properties": {
     "entity_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^(VEH|ASMDEF|CMPDEF)-[A-Z0-9-]+$"
     },
     "entity_type": {
       "type": "string",
       "enum": [
-        "COMPONENT",
-        "VEHICLE",
-        "ASSEMBLY"
+        "VEHICLE_DEFINITION",
+        "ASSEMBLY_DEFINITION",
+        "COMPONENT_DEFINITION"
       ]
     },
     "canonical_name": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
     },
     "lifecycle_status": {
       "type": "string",
       "enum": [
-        "DISCOVERED",
-        "REGISTERED",
-        "CANDIDATE",
+        "DRAFT",
         "ACTIVE",
-        "DEPRECATED",
-        "REJECTED",
-        "UNKNOWN",
-        "NOT_EVALUATED"
+        "SUPERSEDED",
+        "DEPRECATED"
       ]
     },
     "schema_version": {
@@ -51,5 +44,8 @@
         "null"
       ]
     }
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:schema:entity-definition:v1",
+  "additionalProperties": false
 }

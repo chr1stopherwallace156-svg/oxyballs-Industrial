@@ -1,6 +1,6 @@
 {
-  "title": "CrossVehicleComparison",
-  "description": "Optional comparison record between exact vehicles/components. Similarity permits discovery only. Cross-vehicle reuse remains NOT_EVALUATED until independently verified. Must live outside exact vehicle records.",
+  "title": "EDTS Cross-Vehicle Comparison",
+  "description": "Decoupled comparison only. Never inheritance.",
   "type": "object",
   "required": [
     "comparison_id",
@@ -13,15 +13,15 @@
   "properties": {
     "comparison_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^XVC-[A-Z0-9-]+$"
     },
     "left_vehicle_instance_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^VEH-[A-Z0-9-]+$"
     },
     "right_vehicle_instance_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^VEH-[A-Z0-9-]+$"
     },
     "left_component_instance_id": {
       "type": [
@@ -59,8 +59,7 @@
         "DISALLOWED",
         "PROVEN",
         "REJECTED"
-      ],
-      "description": "Default NOT_EVALUATED. Similarity never auto-promotes to PROVEN."
+      ]
     },
     "schema_version": {
       "type": "string",

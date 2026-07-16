@@ -537,3 +537,26 @@ All notable changes to the digital twin foundation. Append-only.
 
 - Kernel: **1.0.0-rc1 READY**
 - Isolation suite: **PASS**
+
+## 2026-07-16 (Kernel v1.0.0-rc1 Validation Package)
+
+### Added
+
+- `documentation/CONFIGURATION_FINGERPRINT_CANONICALIZATION_STANDARD.md` (RFC 8785–style)
+- `documentation/RUNTIME_VEHICLE_ISOLATION_STANDARD.md` (Instance Resolver)
+- `KERNEL_TEST_RESULTS.json` (runtime NOT_EXECUTED)
+- `examples/2019_f450/` 7/7 seed examples
+- **DT-D025**
+
+### Changed
+
+- All 11 schemas aligned to rc1 identity contract
+- Fingerprint format `sha256:<hex>`; lengths in mm
+- Phase → `EDTS_EXACT_VEHICLE_KERNEL_VALIDATION_PENDING`
+
+### Status
+
+- Schemas: **11/11**
+- Examples: **7/7**
+- Runtime isolation: **NOT_EXECUTED**
+- Suite: **VALIDATION_PENDING**

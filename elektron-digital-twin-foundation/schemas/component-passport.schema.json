@@ -1,6 +1,5 @@
 {
-  "title": "ComponentPassport",
-  "description": "Minimum passport for a vehicle-bound component instance. Summarizes evidence/geometry/interaction without cross-vehicle claims.",
+  "title": "EDTS Component Passport",
   "type": "object",
   "required": [
     "passport_id",
@@ -13,19 +12,30 @@
   "properties": {
     "passport_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^PP-[A-Z0-9-]+$"
     },
     "component_instance_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^CMPINST-[A-Z0-9-]+$"
     },
     "vehicle_instance_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^VEH-[A-Z0-9-]+$"
     },
     "configuration_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^CFG-[A-Z0-9-]+$"
+    },
+    "configuration_fingerprint": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      ]
     },
     "status_summary": {
       "type": "object",
@@ -45,7 +55,8 @@
             "NORMALIZED",
             "VERIFIED",
             "UNKNOWN",
-            "NOT_EVALUATED"
+            "NOT_EVALUATED",
+            "REQUIRES_EVIDENCE"
           ]
         },
         "geometry": {

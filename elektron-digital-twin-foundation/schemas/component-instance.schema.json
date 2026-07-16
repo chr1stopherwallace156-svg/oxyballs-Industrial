@@ -1,39 +1,63 @@
 {
-  "title": "ComponentInstance",
-  "description": "Vehicle-bound component instance. Bound to exactly one vehicle instance and exact configuration. No model_year_range. No automatic platform-family applicability.",
+  "title": "EDTS Component Instance",
+  "description": "Vehicle-bound component instance. Lookup requires vehicle_instance_id + configuration_id + component_instance_id.",
   "type": "object",
   "required": [
     "component_instance_id",
     "vehicle_instance_id",
     "configuration_id",
-    "slot",
-    "lifecycle_status",
+    "instance_status",
+    "engineering_verification_status",
     "schema_version"
   ],
   "properties": {
     "component_instance_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^CMPINST-[A-Z0-9-]+$"
+    },
+    "component_definition_id": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^CMPDEF-[A-Z0-9-]+$"
+        }
+      ]
     },
     "vehicle_instance_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^VEH-[A-Z0-9-]+$"
     },
     "configuration_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^CFG-[A-Z0-9-]+$"
     },
-    "slot": {
-      "type": "string",
-      "minLength": 1
+    "configuration_fingerprint": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      ]
     },
-    "display_name": {
+    "parent_assembly_instance_id": {
       "type": [
         "string",
         "null"
       ]
     },
-    "lifecycle_status": {
+    "location_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "instance_status": {
       "type": "string",
       "enum": [
         "DISCOVERED",
@@ -45,31 +69,24 @@
         "NOT_EVALUATED"
       ]
     },
-    "reusable_component_definition_id": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "Optional. Null until interchangeability is proven. Must not imply cross-vehicle applicability."
-    },
-    "reusable_link_status": {
+    "engineering_verification_status": {
       "type": "string",
       "enum": [
-        "NONE",
-        "CANDIDATE_EMPTY",
         "NOT_EVALUATED",
-        "PROVEN",
-        "REJECTED"
+        "REQUIRES_EVIDENCE",
+        "CANDIDATE",
+        "VERIFIED",
+        "REJECTED",
+        "UNKNOWN"
       ]
     },
-    "evidence_link_ids": {
+    "geometry_asset_ids": {
       "type": "array",
       "items": {
         "type": "string"
-      },
-      "description": "Only IDs of evidence-link records that exist in-repo."
+      }
     },
-    "geometry_asset_ids": {
+    "evidence_link_ids": {
       "type": "array",
       "items": {
         "type": "string"
@@ -96,16 +113,6 @@
       {
         "required": [
           "platform_family"
-        ]
-      },
-      {
-        "required": [
-          "applicable_models"
-        ]
-      },
-      {
-        "required": [
-          "applicable_years"
         ]
       }
     ]

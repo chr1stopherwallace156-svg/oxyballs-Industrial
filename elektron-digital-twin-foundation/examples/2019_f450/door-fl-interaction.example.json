@@ -1,0 +1,17 @@
+{
+  "$schema": "../../schemas/interaction-definition.schema.json",
+  "$id": "urn:edts:example:interaction:INT-VEH000001-DOOR-FL-001",
+  "interaction_id": "INT-VEH000001-DOOR-FL-001",
+  "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+  "selectable": true,
+  "isolatable": true,
+  "interaction_class": "VISUAL_PREVIEW_ONLY",
+  "visual_removal_preview": true,
+  "disassembly_status": "NOT_VERIFIED",
+  "pivot_status": "NOT_DEFINED",
+  "pivot_axis": null,
+  "exploded_offset_mm": null,
+  "runtime_execution_status": "NOT_EXECUTED",
+  "schema_version": "1.0.0",
+  "notes": "removal_preview must not assert a verified service procedure."
+}

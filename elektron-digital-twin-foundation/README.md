@@ -1,14 +1,16 @@
 # EDTS Kernel
 
-**Version:** `1.0.0-rc1` — see [KERNEL_MANIFEST.json](KERNEL_MANIFEST.json)  
-**Status:** `EDTS_EXACT_VEHICLE_KERNEL_READY`  
-**Primary directive:** Exact-Vehicle Isolation ([documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md))
+**Version:** `1.0.0-rc1` — [KERNEL_MANIFEST.json](KERNEL_MANIFEST.json)  
+**Status:** `EDTS_EXACT_VEHICLE_KERNEL_VALIDATION_PENDING`  
+**Primary directive:** Exact-Vehicle Isolation
 
 | Area | Path |
 |---|---|
-| Universal schemas | `schemas/*.schema.json` |
-| Seed vehicle silo | `examples/ford/2019_f450_regularcab_4x2_drw/` |
-| Isolation tests | `python3 verification/isolation/run_isolation_tests.py` |
-| Fingerprints | `documentation/CONFIGURATION_FINGERPRINT_STANDARD.md` |
+| Schemas (11/11) | `schemas/*.schema.json` |
+| Seed examples (7/7) | `examples/2019_f450/` |
+| Fingerprint | [CONFIGURATION_FINGERPRINT_CANONICALIZATION_STANDARD.md](documentation/CONFIGURATION_FINGERPRINT_CANONICALIZATION_STANDARD.md) |
+| Runtime isolation | [RUNTIME_VEHICLE_ISOLATION_STANDARD.md](documentation/RUNTIME_VEHICLE_ISOLATION_STANDARD.md) |
+| Test results | [KERNEL_TEST_RESULTS.json](KERNEL_TEST_RESULTS.json) |
+| Structural suite | `python3 verification/isolation/run_isolation_tests.py` |
 
-The kernel never changes for a new OEM. Only datasets under `examples/<manufacturer>/<exact_configuration>/` are added.
+Runtime Instance Resolver tests remain **NOT_EXECUTED**.

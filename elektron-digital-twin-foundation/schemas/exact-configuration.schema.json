@@ -1,38 +1,46 @@
 {
-  "title": "ExactConfiguration",
-  "description": "Exact vehicle configuration. Each cab, drivetrain, wheelbase, and CA value is a distinct configuration \u2014 no ranges, no inheritance.",
+  "title": "EDTS Exact Configuration",
+  "description": "Exact configuration silo with RFC 8785-style fingerprint. Schema contains no manufacturer literals.",
   "type": "object",
   "required": [
-    "cab",
-    "cab_to_axle",
-    "configuration_fingerprint",
     "configuration_id",
+    "manufacturer",
+    "model",
+    "model_year",
+    "vehicle_type",
+    "cab_type",
     "drivetrain",
-    "fingerprint_algorithm",
-    "inheritance_status",
     "rear_wheel_configuration",
-    "schema_version",
-    "vehicle_instance_id",
-    "wheelbase"
+    "wheelbase_mm",
+    "cab_to_axle_mm",
+    "configuration_fingerprint",
+    "fingerprint_version",
+    "schema_version"
   ],
   "properties": {
     "configuration_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^CFG-[A-Z0-9-]+$"
     },
-    "vehicle_instance_id": {
+    "manufacturer": {
       "type": "string",
       "minLength": 1
     },
-    "cab": {
+    "model": {
       "type": "string",
       "minLength": 1
     },
-    "body_type": {
-      "type": [
-        "string",
-        "null"
-      ]
+    "model_year": {
+      "type": "integer",
+      "minimum": 1900
+    },
+    "vehicle_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cab_type": {
+      "type": "string",
+      "minLength": 1
     },
     "drivetrain": {
       "type": "string",
@@ -42,45 +50,11 @@
       "type": "string",
       "minLength": 1
     },
-    "wheelbase": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "value",
-        "unit"
-      ],
-      "properties": {
-        "value": {
-          "type": "number"
-        },
-        "unit": {
-          "type": "string",
-          "enum": [
-            "in",
-            "mm"
-          ]
-        }
-      }
+    "wheelbase_mm": {
+      "type": "number"
     },
-    "cab_to_axle": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "value",
-        "unit"
-      ],
-      "properties": {
-        "value": {
-          "type": "number"
-        },
-        "unit": {
-          "type": "string",
-          "enum": [
-            "in",
-            "mm"
-          ]
-        }
-      }
+    "cab_to_axle_mm": {
+      "type": "number"
     },
     "series": {
       "type": [
@@ -88,10 +62,23 @@
         "null"
       ]
     },
+    "configuration_fingerprint": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "fingerprint_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "fingerprint_canonical_json": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "inheritance_status": {
       "type": "string",
-      "const": "NONE",
-      "description": "Exact configurations never inherit from related platforms."
+      "const": "NONE"
     },
     "schema_version": {
       "type": "string",
@@ -102,95 +89,6 @@
         "string",
         "null"
       ]
-    },
-    "configuration_fingerprint": {
-      "type": "string",
-      "pattern": "^[a-f0-9]{64}$",
-      "description": "SHA-256 hex digest of the canonical fingerprint string for this exact configuration."
-    },
-    "fingerprint_algorithm": {
-      "type": "string",
-      "const": "EDTS_CFG_FINGERPRINT_SHA256_V1"
-    },
-    "fingerprint_canonical_string": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "Optional audit copy of the canonical string that was hashed. Dataset-only; never copied across vehicles."
-    },
-    "fingerprint_axes": {
-      "type": "object",
-      "additionalProperties": false,
-      "description": "Physical attribute axes that feed the fingerprint. All axes are exact \u2014 never ranges.",
-      "properties": {
-        "model_year": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "manufacturer": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "model": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "vehicle_type": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "cab": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "body_type": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "drivetrain": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "rear_wheel_configuration": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "wheelbase_in": {
-          "type": [
-            "number",
-            "null"
-          ]
-        },
-        "cab_to_axle_in": {
-          "type": [
-            "number",
-            "null"
-          ]
-        },
-        "series": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      }
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",

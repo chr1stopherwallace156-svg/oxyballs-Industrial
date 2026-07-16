@@ -1,6 +1,5 @@
 {
-  "title": "InteractionDefinition",
-  "description": "Interaction capabilities. Distinguishes visual preview from engineering-verified disassembly.",
+  "title": "EDTS Interaction Definition",
   "type": "object",
   "required": [
     "interaction_id",
@@ -15,11 +14,11 @@
   "properties": {
     "interaction_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^INT-[A-Z0-9-]+$"
     },
     "component_instance_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^CMPINST-[A-Z0-9-]+$"
     },
     "selectable": {
       "type": "boolean"
@@ -36,8 +35,7 @@
         "ENGINEERING_VERIFIED",
         "UNKNOWN",
         "NOT_EVALUATED"
-      ],
-      "description": "Visual removal preview is PROTOTYPE or VISUAL_PREVIEW_ONLY \u2014 not engineering-verified disassembly."
+      ]
     },
     "visual_removal_preview": {
       "type": "boolean"

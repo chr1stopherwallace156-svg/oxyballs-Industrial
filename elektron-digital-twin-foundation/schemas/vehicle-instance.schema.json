@@ -1,55 +1,47 @@
 {
-  "title": "VehicleInstance",
-  "description": "Exact physical or reference vehicle instance. One record per exact vehicle identity \u2014 no year ranges.",
+  "title": "EDTS Vehicle Instance",
+  "description": "Exact vehicle instance silo. No OEM literals in schema enums beyond structural states.",
   "type": "object",
   "required": [
     "vehicle_instance_id",
-    "model_year",
-    "manufacturer",
-    "model",
-    "vehicle_type",
+    "configuration_id",
+    "instance_scope",
+    "physical_asset_status",
     "schema_version"
   ],
   "properties": {
     "vehicle_instance_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^VEH-[A-Z0-9-]+$"
     },
-    "model_year": {
-      "type": "integer",
-      "minimum": 1900
-    },
-    "manufacturer": {
+    "configuration_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^CFG-[A-Z0-9-]+$"
     },
-    "model": {
+    "instance_scope": {
       "type": "string",
-      "minLength": 1
+      "enum": [
+        "CONFIGURATION_REFERENCE",
+        "PHYSICAL_ASSET",
+        "UNKNOWN",
+        "NOT_EVALUATED"
+      ]
     },
-    "vehicle_type": {
+    "physical_asset_status": {
       "type": "string",
-      "minLength": 1
+      "enum": [
+        "NOT_ASSIGNED",
+        "ASSIGNED",
+        "INTAKE_PENDING",
+        "UNKNOWN",
+        "NOT_EVALUATED"
+      ]
     },
     "vin": {
       "type": [
         "string",
         "null"
       ]
-    },
-    "vin_status": {
-      "type": "string",
-      "enum": [
-        "UNKNOWN",
-        "PENDING",
-        "RECORDED",
-        "NOT_EVALUATED"
-      ]
-    },
-    "isolation_declaration": {
-      "type": "string",
-      "const": "EXACT_VEHICLE_ONLY",
-      "description": "Record must not inherit platform-family or cross-year facts."
     },
     "schema_version": {
       "type": "string",

@@ -1,6 +1,5 @@
 {
-  "title": "EvidenceLink",
-  "description": "Link between an entity and an existing source artifact ID. Do not invent source IDs.",
+  "title": "EDTS Evidence Link",
   "type": "object",
   "required": [
     "evidence_link_id",
@@ -14,7 +13,7 @@
   "properties": {
     "evidence_link_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^EVL-[A-Z0-9-]+$"
     },
     "subject_id": {
       "type": "string",
@@ -32,8 +31,7 @@
     },
     "source_id": {
       "type": "string",
-      "minLength": 1,
-      "description": "Must reference a source ID that exists in a registry or manifest in this repository."
+      "minLength": 1
     },
     "source_file_exists": {
       "type": [
@@ -63,7 +61,8 @@
         "NORMALIZED",
         "REJECTED",
         "UNKNOWN",
-        "NOT_EVALUATED"
+        "NOT_EVALUATED",
+        "REQUIRES_EVIDENCE"
       ]
     },
     "schema_version": {

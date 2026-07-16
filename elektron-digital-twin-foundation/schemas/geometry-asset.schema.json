@@ -1,6 +1,5 @@
 {
-  "title": "GeometryAsset",
-  "description": "Geometry asset bound to a component instance. Metrics null until executed against local bytes.",
+  "title": "EDTS Geometry Asset",
   "type": "object",
   "required": [
     "geometry_asset_id",
@@ -13,11 +12,11 @@
   "properties": {
     "geometry_asset_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^GEO-[A-Z0-9-]+$"
     },
     "component_instance_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^CMPINST-[A-Z0-9-]+$"
     },
     "format": {
       "type": "string",
@@ -56,8 +55,7 @@
       "type": [
         "string",
         "null"
-      ],
-      "description": "Optional catalog ID if registered; null if unknown."
+      ]
     },
     "local_path": {
       "type": [
@@ -84,6 +82,12 @@
         "bounding_box_mm": {
           "type": [
             "object",
+            "null"
+          ]
+        },
+        "non_manifold": {
+          "type": [
+            "boolean",
             "null"
           ]
         },

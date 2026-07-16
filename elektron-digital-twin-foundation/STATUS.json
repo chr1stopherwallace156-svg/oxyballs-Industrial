@@ -1,11 +1,11 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.11.0",
-  "updated_at": "2026-07-16T16:30:00Z",
+  "version": "0.12.0",
+  "updated_at": "2026-07-16T16:40:00Z",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
-  "phase": "EDTS_EXACT_VEHICLE_KERNEL_READY",
+  "phase": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATION_PENDING",
   "readiness": "L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE",
   "milestone": "L1_SOURCE_PACK_01",
   "source_pack_01_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
@@ -30,7 +30,7 @@
   "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "Objective mesh ingestion for GEO-VEH000001-DOOR-FL-001 when bytes exist; keep silos isolated; run isolation suite",
+  "next_action": "Implement Instance Resolver harness and execute KRN-ISO-001..003; keep structural suite green",
   "owner_approval_required": true,
   "governance_status": {
     "L00_CONFIRMED_CORRECTIONS": "ACCEPTED",
@@ -112,12 +112,13 @@
     "EVL_00001": "CANDIDATE_SUPPORTS_GEOMETRY",
     "EVL_00002": "AWAITING_FILE_STUB",
     "CMP_SD_044_L": "DEPRECATED_ALIAS",
-    "EDTS_EXACT_VEHICLE_KERNEL": "READY",
+    "EDTS_EXACT_VEHICLE_KERNEL": "VALIDATION_PENDING",
     "EXACT_VEHICLE_ISOLATION": "ACTIVE_UNIVERSAL",
     "CMPINST_VEH000001_DOOR_FL": "DISCOVERED",
     "HR_EVI": "CONSTITUTIONAL",
     "ISOLATION_NEGATIVE_TESTS": "PASS",
-    "CONFIGURATION_FINGERPRINT": "ACTIVE"
+    "CONFIGURATION_FINGERPRINT": "RFC8785_STYLE_V1",
+    "RUNTIME_ISOLATION_TESTS": "NOT_EXECUTED"
   },
   "reference_vehicle": {
     "status": "provisional_profile_locked",
@@ -227,7 +228,7 @@
       "status": "factual_verification_required",
       "geometry_status": "blocked",
       "research_status": "L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE",
-      "phase": "EDTS_EXACT_VEHICLE_KERNEL_READY",
+      "phase": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATION_PENDING",
       "milestone": "L1_SOURCE_PACK_01",
       "source_pack_01_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
       "gate_status": "L1_DOCUMENT_ACQUISITION_READY",
@@ -407,12 +408,15 @@
   "kernel_vehicle_instance_id": "VEH-000001",
   "kernel_configuration_id": "CFG-000001",
   "kernel_door_component_instance_id": "CMPINST-VEH000001-DOOR-FL",
-  "kernel_examples": "examples/ford/2019_f450_regularcab_4x2_drw/",
+  "kernel_examples": "examples/2019_f450/",
   "kernel_documentation": "documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md",
   "hard_rule_exact_vehicle_isolation": "CONSTITUTIONAL",
   "isolation_test_suite": "verification/isolation/run_isolation_tests.py",
   "isolation_law": "documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md",
   "kernel_version": "1.0.0-rc1",
   "kernel_manifest": "KERNEL_MANIFEST.json",
-  "fingerprint_algorithm": "EDTS_CFG_FINGERPRINT_SHA256_V1"
+  "fingerprint_algorithm": "EDTS_CFG_FINGERPRINT_SHA256_V1",
+  "kernel_test_results": "KERNEL_TEST_RESULTS.json",
+  "fingerprint_standard": "documentation/CONFIGURATION_FINGERPRINT_CANONICALIZATION_STANDARD.md",
+  "runtime_isolation_standard": "documentation/RUNTIME_VEHICLE_ISOLATION_STANDARD.md"
 }

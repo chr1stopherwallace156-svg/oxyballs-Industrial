@@ -1,32 +1,36 @@
 {
-  "title": "ReusableComponentDefinition",
-  "description": "Optional reusable component definition. Exists as empty candidate until interchangeability is independently verified. Similarity does not establish applicability.",
+  "title": "EDTS Reusable Component Definition",
   "type": "object",
   "required": [
-    "reusable_component_definition_id",
+    "component_definition_id",
     "definition_status",
     "interchangeability_status",
     "schema_version"
   ],
   "properties": {
-    "reusable_component_definition_id": {
+    "component_definition_id": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^CMPDEF-[A-Z0-9-]+$"
     },
     "canonical_name": {
-      "type": [
-        "string",
-        "null"
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+$"
+        }
       ]
     },
     "definition_status": {
       "type": "string",
       "enum": [
         "EMPTY_CANDIDATE",
-        "PARTIAL",
+        "DRAFT",
         "ACTIVE",
-        "DEPRECATED",
-        "REJECTED"
+        "SUPERSEDED",
+        "DEPRECATED"
       ]
     },
     "interchangeability_status": {
@@ -42,8 +46,7 @@
       "type": "array",
       "items": {
         "type": "string"
-      },
-      "description": "Populated only after independent verification per exact vehicle. Empty for EMPTY_CANDIDATE."
+      }
     },
     "cross_vehicle_comparison_ids": {
       "type": "array",

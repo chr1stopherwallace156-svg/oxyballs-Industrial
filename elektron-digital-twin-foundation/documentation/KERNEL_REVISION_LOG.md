@@ -1,5 +1,16 @@
 # Kernel Revision Log
 
+## 2026-07-16 — Kernel v1.0.0-rc1 validation package (DT-D025)
+
+### Changes
+
+- Materialized all 11 Draft 2020-12 schemas to the rc1 identity contract (`VEHICLE_DEFINITION` / `CMPDEF` / etc.)
+- Seed dataset canonical path: `examples/2019_f450/` (7/7 examples)
+- Fingerprint method: RFC 8785–style canonical JSON + `sha256:` prefix (`CONFIGURATION_FINGERPRINT_CANONICALIZATION_STANDARD.md`)
+- Runtime isolation: Instance Resolver only (`RUNTIME_VEHICLE_ISOLATION_STANDARD.md`)
+- `KERNEL_TEST_RESULTS.json` — runtime isolation **NOT_EXECUTED**; structural checks PASS_SCHEMA
+- Status: **`EDTS_EXACT_VEHICLE_KERNEL_VALIDATION_PENDING`**
+
 ## 2026-07-16 — Kernel v1.0.0-rc1 (DT-D024)
 
 ### Release candidate

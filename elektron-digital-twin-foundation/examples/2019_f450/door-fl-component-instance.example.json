@@ -1,0 +1,17 @@
+{
+  "$schema": "../../schemas/component-instance.schema.json",
+  "$id": "urn:edts:example:component:CMPINST-VEH000001-DOOR-FL",
+  "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+  "component_definition_id": "CMPDEF-DOOR-FRONT-LH-0001",
+  "vehicle_instance_id": "VEH-000001",
+  "configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:39162085dcee611d8713522a771dcf3b7cdeb0e948825a0dd2d2d087530a928e",
+  "parent_assembly_instance_id": "ASMINST-VEH000001-CAB",
+  "location_code": "FRONT_LEFT",
+  "instance_status": "DISCOVERED",
+  "engineering_verification_status": "NOT_EVALUATED",
+  "geometry_asset_ids": [],
+  "evidence_link_ids": [],
+  "schema_version": "1.0.0",
+  "notes": "Vehicle-bound. Lookup must use Instance Resolver \u2014 never canonical_name alone."
+}
