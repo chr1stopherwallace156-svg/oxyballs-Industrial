@@ -1,7 +1,7 @@
 {
   "catalog_id": "L1_LANE_A_ASSET_CATALOG",
   "schema_note": "Operational Lane A register (not a frozen kernel schema expansion). Fields follow L1_PARALLEL_LANES.md catalog template plus Component-First Acquisition target components.",
-  "updated_at": "2026-07-16T20:40:00Z",
+  "updated_at": "2026-07-16T21:10:00Z",
   "exact_vehicle_silo": {
     "vehicle_instance_id": "VEH-000001",
     "configuration_id": "CFG-000001",
@@ -81,7 +81,8 @@
       "evidence_status": "DISCOVERED",
       "availability_audit": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json",
       "evaluation_doc": "layers/L01/L1_ASSET_EVALUATION_ASSET-00031.md",
-      "notes": "Authoritative availability audit: CANDIDATE_NOT_ACQUIRED. No GLB/GLTF/FBX/OBJ bytes. Do not fabricate mesh inventory, hash, or marketplace URL. Cab shell usable only after ingest + keep/discard map; pickup-style rear structure discard candidate."
+      "notes": "Authoritative availability audit: CANDIDATE_NOT_ACQUIRED. No GLB/GLTF/FBX/OBJ bytes. Do not fabricate mesh inventory, hash, or marketplace URL. Cab shell usable only after ingest + keep/discard map; pickup-style rear structure discard candidate.",
+      "maps_to_aid": "AID-000005"
     },
     {
       "asset_id": null,
@@ -110,7 +111,8 @@
       "evidence_status": "DISCOVERED",
       "availability_audit": null,
       "evaluation_doc": null,
-      "notes": "Tracked as a component-level discovery candidate only. No verified URL, local bytes, or geometry-asset registration. Related-year CAD remains discovery-only under HR-EVI until configuration match is proven. Do not invent listing URLs or promote to GEO-*."
+      "notes": "Tracked as a component-level discovery candidate only. No verified URL, local bytes, or geometry-asset registration. Related-year CAD remains discovery-only under HR-EVI until configuration match is proven. Do not invent listing URLs or promote to GEO-*.",
+      "maps_to_aid": "AID-000006"
     },
     {
       "asset_id": null,
@@ -120,15 +122,15 @@
         "C-002"
       ],
       "marketplace": "CGTrader",
-      "publisher_reported": "EOG",
-      "url": "https://www.cgtrader.com/3d-models/f450",
-      "url_status": "CATEGORY_OR_SEARCH_SURFACE_NOT_SKU_SPECIFIC",
+      "publisher_reported": "outlawtransport",
+      "url": "https://www.cgtrader.com/3d-models/vehicle/truck/ford-f350-f550-super-duty-dually-eog-complete-model",
+      "url_status": "URL_FETCH_CONFIRMED",
       "claimed_year_range": "2017-2022 band (unverified)",
       "claimed_body": "F-350 to F-550 Super Duty Dually / Chassis Cab complete model (reported)",
       "reported_vehicle": "Ford F-350\u2013F-550 Super Duty Dually (EOG listing claim)",
       "asset_type": "3D_MODEL",
-      "file_format": "FBX/OBJ/BLEND (reported)",
-      "license": "REQUIRES_COUNSEL_REVIEW",
+      "file_format": "BLEND/OBJ/FBX/DAE/STL (listing)",
+      "license": "ROYALTY_FREE_CLAIMED_REQUIRES_COUNSEL_REVIEW",
       "grade": "B",
       "price_condition": "REPORTED_55_30_USD_SALE",
       "downloadable_status": "CANDIDATE_NOT_ACQUIRED",
@@ -143,10 +145,12 @@
       ],
       "estimated_configuration_match": "VISUAL_PLATFORM_BAND_ONLY",
       "evidence_status": "DISCOVERED",
-      "lifecycle_note": "DISCOVERED -> CONFIGURATION_EVALUATED (visual candidate; CAD-grade accuracy unverified)",
+      "lifecycle_note": "DISCOVERED -> SKU_URL_CONFIRMED -> AWAITING_PURCHASE (visual complete-vehicle INPUT)",
       "availability_audit": null,
-      "evaluation_doc": "research/sprints/RL-008_DOOR_FL_SCOPE_LOCK_AND_CANDIDATES.md",
-      "notes": "RL-008 / DT-D039. Facade risk: missing inner door, latch guides, wire paths. Not interchangeable with ASSET-00031 without proof. Isolate SKU URL before purchase. No GEO promotion."
+      "evaluation_doc": "research/asset_intelligence/passports/AID-000002.json",
+      "notes": "RL-011 / DT-D042. SKU URL fetch-confirmed. Platform band F350\u2013F550 \u2014 not exact CFG-000001. Facade/inner-structure gap remains. Intelligence passport: AID-000002. No GEO promotion.",
+      "marketplace_id": "6371726",
+      "maps_to_aid": "AID-000002"
     },
     {
       "asset_id": null,
@@ -156,8 +160,8 @@
       "url": "https://getoutlines.com/vector-drawings/30637/2017-2022-ford-f-450-super-duty-drawings",
       "url_status": "URL_RECORDED",
       "claimed_year_range": "2017-2022",
-      "claimed_body": "F-450 Super Duty Chassis Cab Regular Cab CA 60 DRW vector blueprint",
-      "reported_vehicle": "Ford F-450 Super Duty 4th gen Chassis Cab Regular Cab 60 CA DRW",
+      "claimed_body": "F-450 Super Duty Chassis Cab Regular Cab CA 60 DRW vector blueprint (listing title includes Facelift '20 band)",
+      "reported_vehicle": "2017 Ford F-450 Super Duty 4 Gen Facelift '20 Chassis Cab Regular Cab CA 60 DRW",
       "asset_type": "VECTOR_2D_REFERENCE",
       "file_format": "EPS/SVG/AI/CDR (reported)",
       "license": "COMMERCIAL_PURCHASE",
@@ -175,10 +179,11 @@
       ],
       "estimated_configuration_match": "EXTERIOR_PROPORTION_CANDIDATE",
       "evidence_status": "DISCOVERED",
-      "lifecycle_note": "DISCOVERED -> URL_RECORDED -> AWAITING_PURCHASE (DT-D039/D040 Priority acquire as PROFILE_REFERENCE)",
+      "lifecycle_note": "DISCOVERED -> URL_RECORDED -> AWAITING_PURCHASE (PROFILE_REFERENCE INPUT \u2014 DT-D042)",
       "availability_audit": null,
-      "evaluation_doc": "research/sprints/RL-008_DOOR_FL_SCOPE_LOCK_AND_CANDIDATES.md",
-      "notes": "Authoritative machine record: research/src_candidates/SRC-CAND-000004.json. Hard Rule 14: 2D_DIMENSIONAL_REFERENCE / PROFILE_REFERENCE \u2014 NEVER ground-truth geometry. MY band includes 2020+."
+      "evaluation_doc": "research/asset_intelligence/passports/AID-000001.json",
+      "notes": "Authoritative machine records: SRC-CAND-000004 + AID-000001. Hard Rule 14: PROFILE_REFERENCE \u2014 NEVER ground-truth geometry. Acquisition INPUT not answer.",
+      "maps_to_aid": "AID-000001"
     },
     {
       "asset_id": null,
@@ -217,7 +222,8 @@
         "Uploaded as 2015 F-150; interior weld-nut / trim fastener map may differ on Super Duty",
         "CL-001 outer-shell interchange remains CANDIDATE \u2014 not auto GEO admission"
       ],
-      "notes": "RL-010 / DT-D041. No verified GrabCAD URL in payload (Hard Rule 6). Evaluation NOT_EXECUTED until physical payload bytes."
+      "notes": "RL-010 / DT-D041. No verified GrabCAD URL in payload (Hard Rule 6). Evaluation NOT_EXECUTED until physical payload bytes.",
+      "maps_to_aid": "AID-000003"
     },
     {
       "asset_id": null,
@@ -255,7 +261,8 @@
         "Lacks internal mounting plates, wire conduits, structural brackets",
         "Option-dependent \u2014 do not assume power telescope on base XL"
       ],
-      "notes": "RL-010 / DT-D041. Marketplace ID recorded from operator sprint; full URL not invented. Suitable only for visual exterior rendering after license review."
+      "notes": "RL-010 / DT-D041. Marketplace ID recorded from operator sprint; full URL not invented. Suitable only for visual exterior rendering after license review.",
+      "maps_to_aid": "AID-000004"
     }
   ],
   "rejected_proposal_artifacts": [
@@ -273,5 +280,7 @@
   "evidence_acquisition_latest_run": "verification/results/evidence-acquisition-engine-run.json",
   "evidence_acquisition_posture": "EVIDENCE_ACQUISITION_IN_PROGRESS",
   "door_vertical_slice_gate": "F450_DOOR_FL_VERTICAL_SLICE_BLOCKED_BY_MISSING_ASSET",
-  "pipeline_note": "CAND-00031-CGT / CAND-771-GRAB remain DISCOVERED without SKU bytes. EDTS-CAND-001/SRC-CAND-000004 has URL_RECORDED (Outlines). CAND-000042-EOG needs SKU isolation. CAND-000043-GRAB / CAND-000044-TS added RL-010 (NOT_ACQUIRED). Passport geometry remains ABSENT; no auto-update."
+  "pipeline_note": "AID intelligence DB active (DT-D042). AID-000001 Outlines URL recorded; AID-000002 CGTrader SKU URL_FETCH_CONFIRMED. AID-000003 GrabCAD URL still missing. Passport geometry remains ABSENT; no auto-update.",
+  "asset_intelligence_register": "research/asset_intelligence/ASSET_INTELLIGENCE_REGISTER.json",
+  "asset_intelligence_note": "DT-D042: AID passports hold intelligence depth; this catalog remains thin marketplace pointers. URLs are acquisition inputs, not answers."
 }

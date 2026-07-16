@@ -1,8 +1,8 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.15.3",
-  "updated_at": "2026-07-16T20:45:00Z",
+  "version": "0.16.0",
+  "updated_at": "2026-07-16T21:15:00Z",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
   "phase": "EVIDENCE_ACQUISITION_IN_PROGRESS",
@@ -30,14 +30,14 @@
   "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "Acquire SRC-CAND-000004 as PROFILE_REFERENCE; locate GrabCAD URL for CAND-000043-GRAB; parallel OEM PDF hunt SRC-CAND-000001/2/5/6/7 (all NOT_ACQUIRED). Schedule FL_DOOR_INTERNAL_SCAN_PROTOCOL. CL-001 remains CANDIDATE. No GEO promotion.",
-  "next_build_priority": "ACQUIRE_PROFILE_REFERENCE_THEN_SHELL_CAD_THEN_PHYSICAL_SCAN",
+  "next_action": "Acquire AID-000001 (Outlines PROFILE_REFERENCE) then AID-000003 (after GrabCAD URL); optional visual AID-000002 (SKU confirmed). Every new asset gets an AID passport. URLs are inputs not answers. No GEO promotion.",
+  "next_build_priority": "ASSET_INTELLIGENCE_DB_THEN_ACQUIRE_AID_000001",
   "door_fl_decision": "CANDIDATE_ACQUISITION_RECOMMENDED",
   "door_fl_physical_verification": "REQUIRED_EVENTUALLY",
-  "door_fl_sprint": "research/sprints/RL-010_OEM_DOOR_COMPONENT_SATURATION_HONEST.md",
+  "door_fl_sprint": "research/sprints/RL-011_ASSET_INTELLIGENCE_DATABASE.md",
   "src_cand_000004": "NOT_ACQUIRED_URL_RECORDED_PROFILE_REFERENCE",
   "src_cand_000004_class": "2D_DIMENSIONAL_REFERENCE",
-  "edts_cand_002": "DISCOVERED_CONFIGURATION_EVALUATED_VISUAL_ACQUIRE",
+  "edts_cand_002": "SKU_URL_FETCH_CONFIRMED_NOT_ACQUIRED",
   "cl_001_status": "CANDIDATE",
   "claim_register": "research/claims/CLAIM_REGISTER.json",
   "hard_rule_14": "ACTIVE",
@@ -235,7 +235,10 @@
     "F450_DOOR_FL_VERTICAL_SLICE": "BLOCKED_BY_MISSING_ASSET",
     "DT_D041": "ACCEPTED",
     "RL_010": "COMPLETE_HONESTY_GATE",
-    "OEM_REGISTRY_EDTS_OEM": "HUNT_NOT_ACQUIRED"
+    "OEM_REGISTRY_EDTS_OEM": "HUNT_NOT_ACQUIRED",
+    "DT_D042": "ACCEPTED",
+    "ASSET_INTELLIGENCE_DATABASE": "ACTIVE",
+    "RL_011": "COMPLETE"
   },
   "reference_vehicle": {
     "status": "provisional_profile_locked",
@@ -496,7 +499,7 @@
   ],
   "architecture": "EDTS-OS-v3.1",
   "architecture_doc": "EDTS_OS.md",
-  "research_protocol_version": "2.3.0",
+  "research_protocol_version": "2.4.0",
   "confidence_percentages": "DEPRECATED",
   "hard_rule_0": "COMPONENT_FIRST",
   "hard_rule_11": "EVIDENCE_ACQUISITION_EFFICIENCY",
@@ -558,5 +561,11 @@
   "component_passport_drafts": "research/component_passports/",
   "door_fl_evidence_graph": "research/graphs/DOOR_FL_EVIDENCE_GRAPH_ILLUSTRATIVE.md",
   "door_fl_scan_protocol": "research/plans/FL_DOOR_INTERNAL_SCAN_PROTOCOL.md",
-  "rl_010_honesty_gate": "ACTIVE_NARRATIVE_VERIFIED_LABELS_DEMOTED"
+  "rl_010_honesty_gate": "ACTIVE_NARRATIVE_VERIFIED_LABELS_DEMOTED",
+  "asset_intelligence_status": "ACTIVE",
+  "asset_intelligence_register": "research/asset_intelligence/ASSET_INTELLIGENCE_REGISTER.json",
+  "asset_intelligence_schema": "schemas/asset-intelligence-passport.schema.json",
+  "decision_dt_d042": "decisions/DT-D042_ASSET_INTELLIGENCE_DATABASE.json",
+  "aid_000001": "URL_RECORDED_NOT_ACQUIRED_PROFILE_REFERENCE",
+  "aid_000002": "URL_FETCH_CONFIRMED_NOT_ACQUIRED_VISUAL"
 }

@@ -693,3 +693,20 @@ Append-only record of digital twin foundation decisions.
   5. Evidence graph / torque / YouTube edges = ILLUSTRATIVE / NOT_CONFIRMED
   6. Acquire order: profile reference → shell CAD (after real URL) → physical internal scan; parallel OEM PDFs
 
+
+## DT-D042 — Asset Intelligence Database (Hard Rule 16)
+
+- **Change-control record:** [`decisions/DT-D042_ASSET_INTELLIGENCE_DATABASE.json`](decisions/DT-D042_ASSET_INTELLIGENCE_DATABASE.json)
+- **decision_id:** `DT-D042`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **protocol_version:** `2.4.0`
+- **scope:** RL-011; `AID-*` passports; EDTS-CAND-001/002 direct URLs as inputs
+- **decision:**
+  1. Authorize **Asset Intelligence Database** — every internet asset gets an `AID-*` passport
+  2. Listing URLs are **acquisition inputs**, not silo answers / VERIFIED_EVIDENCE
+  3. Completeness = ordinals (not confidence %); listing-only rows use `evaluation_basis: LISTING_ONLY`
+  4. Record Outlines + CGTrader SKU URLs; related CA 108/120 IDs without inventing slugs
+  5. DT-D027 shortlist rejection stands; DT-D029 scoring-engine deferral stands
+  6. Kernel / component-passport rc1 unchanged; geometry remains `ABSENT`
+

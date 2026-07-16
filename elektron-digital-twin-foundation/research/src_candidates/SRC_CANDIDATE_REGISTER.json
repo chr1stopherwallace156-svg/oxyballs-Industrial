@@ -122,13 +122,13 @@
   "next_search_queue": [
     {
       "priority": 1,
-      "task": "Purchase/acquire SRC-CAND-000004 (Outlines vector / EDTS-CAND-001) as PROFILE_REFERENCE",
+      "task": "Purchase/acquire AID-000001 / SRC-CAND-000004 as PROFILE_REFERENCE INPUT",
       "lane": "LANE_A_DOC",
       "topic": "DOOR_FL_ASSEMBLY",
       "expected_evidence": "2D dimensional / profile reference (NOT ground-truth geometry)",
       "candidate_id": "SRC-CAND-000004",
       "status": "ACTIVE",
-      "decision": "DT-D039/D040/D041"
+      "decision": "DT-D042"
     },
     {
       "priority": 2,
@@ -142,13 +142,13 @@
     },
     {
       "priority": 3,
-      "task": "Isolate SKU URL + acquire CAND-000042-EOG / EDTS-CAND-002 visual model",
+      "task": "Acquire AID-000002 / CAND-000042-EOG visual model (SKU URL confirmed)",
       "lane": "LANE_VIS",
       "topic": "DOOR_FL_ASSEMBLY",
       "expected_evidence": "Visual polygonal cab/door exterior candidate",
       "candidate_id": "EDTS-CAND-002",
       "status": "ACTIVE",
-      "decision": "DT-D040"
+      "decision": "DT-D042"
     },
     {
       "priority": 4,
@@ -246,21 +246,25 @@
     "EDTS-OEM-004": "SRC-CAND-000006",
     "EDTS-OEM-005": "SRC-CAND-000007",
     "EDTS-COMP-CAD-001": "CAND-000043-GRAB",
-    "EDTS-COMP-CAD-002": "CAND-000044-TS"
+    "EDTS-COMP-CAD-002": "CAND-000044-TS",
+    "AID-000001": "SRC-CAND-000004"
   },
   "decisions": [
     "DT-D037",
     "DT-D038",
     "DT-D039",
     "DT-D040",
-    "DT-D041"
+    "DT-D041",
+    "DT-D042"
   ],
   "sprints": [
     "RL-006",
     "RL-007",
     "RL-008",
-    "RL-010"
+    "RL-010",
+    "RL-011"
   ],
   "hard_rule_14_note": "Vector blueprints = 2D_DIMENSIONAL_REFERENCE / PROFILE_REFERENCE only",
-  "rl_010_note": "Operator VERIFIED_EVIDENCE / SPECIFICATION_READY / CROSS_VERIFIED / 90% complete labels demoted. Draft passports ILLUSTRATIVE_ONLY. Decision remains CANDIDATE_ACQUISITION_RECOMMENDED."
+  "rl_010_note": "Operator VERIFIED_EVIDENCE / SPECIFICATION_READY / CROSS_VERIFIED / 90% complete labels demoted. Draft passports ILLUSTRATIVE_ONLY. Decision remains CANDIDATE_ACQUISITION_RECOMMENDED.",
+  "asset_intelligence_register": "research/asset_intelligence/ASSET_INTELLIGENCE_REGISTER.json"
 }

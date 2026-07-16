@@ -2,18 +2,27 @@
   "candidate_id": "SRC-CAND-000004",
   "id_immutable": true,
   "metadata": {
-    "title": "2017-2022 Ford F-450 Super Duty Chassis Cab Regular Cab 60 CA DRW Blueprint",
+    "title": "2017 Ford F-450 Super Duty 4 Gen Facelift '20 Chassis Cab Regular Cab CA 60 DRW Blueprint",
     "source_type": "VECTOR_BLUEPRINT_COMMERCIAL",
     "document_class": "2D_DIMENSIONAL_REFERENCE",
     "reference_class": "PROFILE_REFERENCE",
     "not_oem_engineering_geometry": true,
     "publisher": "Outlines (GetOutlines)",
     "reported_year": 2017,
-    "legacy_aliases": ["EDTS-CAND-001", "C-001"],
+    "legacy_aliases": [
+      "EDTS-CAND-001",
+      "C-001"
+    ],
     "source_url": "https://getoutlines.com/vector-drawings/30637/2017-2022-ford-f-450-super-duty-drawings",
     "source_url_status": "URL_RECORDED",
     "reported_cost_usd": 24.0,
-    "reported_formats": ["EPS", "SVG", "AI", "CDR"]
+    "reported_formats": [
+      "EPS",
+      "SVG",
+      "AI",
+      "CDR"
+    ],
+    "listing_title_reported": "2017 Ford F-450 Super Duty 4 Gen Facelift '20 Chassis Cab \u2219 Regular Cab CA 60\" \u2219 DRW Blueprint"
   },
   "acquisition_status": "NOT_ACQUIRED",
   "access_status": "NOT_ACQUIRED",
@@ -22,7 +31,12 @@
     {
       "at": "2026-07-16T19:50:00Z",
       "rc": 78,
-      "note": "Real listing URL recorded for Regular Cab Chassis Cab 60 CA DRW band including 145.3 WB exterior proportions. Hunt value as 2D dimensional / profile reference only — NOT ground-truth geometry, NOT OEM engineering geometry (Hard Rule 14). RC reduced for 2020+ band + exterior-only content."
+      "note": "Real listing URL recorded for Regular Cab Chassis Cab 60 CA DRW band including 145.3 WB exterior proportions. Hunt value as 2D dimensional / profile reference only \u2014 NOT ground-truth geometry, NOT OEM engineering geometry (Hard Rule 14). RC reduced for 2020+ band + exterior-only content."
+    },
+    {
+      "at": "2026-07-16T21:10:00Z",
+      "rc": 78,
+      "note": "Direct URL reconfirmed as acquisition INPUT into AID-000001. Still PROFILE_REFERENCE only \u2014 not silo answer (DT-D042)."
     }
   ],
   "bound_vehicle_instance_id": "VEH-000001",
@@ -36,7 +50,11 @@
   "related_source_registry_id": null,
   "closes_conflicts": [],
   "closes_questions": [],
-  "parallel_lanes_triggered": ["LANE_A_DOC", "LANE_VIS", "LANE_DIM"],
+  "parallel_lanes_triggered": [
+    "LANE_A_DOC",
+    "LANE_VIS",
+    "LANE_DIM"
+  ],
   "forbidden_uses_until_acquired": [
     "geometry_freeze",
     "treating_2d_as_inner_structure_truth",
@@ -46,8 +64,10 @@
     "Decision DT-D039: CANDIDATE_ACQUISITION_RECOMMENDED (Priority acquire).",
     "After purchase: ingest via EAE CORE (local file), hash full bytes, bind extracts to CFG-000001 only.",
     "Alias EDTS-CAND-001 from RL-008 sprint narrative.",
-    "Hard Rule 14 vocabulary: 2D_DIMENSIONAL_REFERENCE / PROFILE_REFERENCE."
+    "Hard Rule 14 vocabulary: 2D_DIMENSIONAL_REFERENCE / PROFILE_REFERENCE.",
+    "AID passport: research/asset_intelligence/passports/AID-000001.json"
   ],
-  "research_sprint": "RL-008",
-  "decision": "DT-D040"
+  "research_sprint": "RL-011",
+  "decision": "DT-D042",
+  "maps_to_aid": "AID-000001"
 }

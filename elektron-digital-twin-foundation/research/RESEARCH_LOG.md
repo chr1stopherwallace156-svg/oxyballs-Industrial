@@ -242,3 +242,25 @@ DT-D040; protocol v2.3.0.
 ### Status
 
 DT-D041 — `CANDIDATE_ACQUISITION_RECOMMENDED` (with demoted verification labels).
+
+---
+
+## RL-011 — Asset Intelligence Database (Hard Rule 16)
+
+- **Date:** 2026-07-16
+- **Layer:** acquisition intelligence / L01 assets
+- **Agent:** Cursor Cloud Agent
+- **Question:** Pivot from “found the vehicle answer” to a structured Asset Intelligence Database?
+
+### Findings
+
+1. **Hard Rule 16** / **DT-D042:** every internet asset gets an `AID-*` passport under `research/asset_intelligence/`.
+2. Direct URLs recorded as **inputs**: Outlines 30637 (`AID-000001`); CGTrader SKU `URL_FETCH_CONFIRMED` (`AID-000002`, publisher outlawtransport, model #6371726).
+3. Related Outlines CA 108/120 (30638/30639) retained as related IDs only — full slugs **not invented**.
+4. Seeded 8 AID passports covering prior CAND/SRC/ASSET discoveries with ordinal completeness + lifecycle fields.
+5. DT-D027 shortlist rejection and DT-D029 scoring-engine deferral **stand**; AID ≠ numeric scoring engine.
+6. Protocol bumped to **v2.4.0**. Geometry remains **`ABSENT`**.
+
+### Status
+
+DT-D042 — Asset Intelligence DB **ACTIVE**; still `CANDIDATE_ACQUISITION_RECOMMENDED` for bytes.

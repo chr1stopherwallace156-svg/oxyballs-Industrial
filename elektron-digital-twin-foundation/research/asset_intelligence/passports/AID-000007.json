@@ -1,0 +1,102 @@
+{
+  "asset_id": "AID-000007",
+  "id_immutable": true,
+  "schema_version": "1.0.0",
+  "authority_status": "RESEARCH_OPERATIONAL",
+  "aliases": [
+    "OUTLINES-30638"
+  ],
+  "title": "Outlines F-450 Super Duty Chassis Cab blueprint \u2014 Regular Cab Chassis Cab CA 108 (related listing)",
+  "source": {
+    "platform": "GetOutlines",
+    "publisher": "Outlines",
+    "url": null,
+    "url_status": "INCOMPLETE_SLUG_DO_NOT_INVENT",
+    "marketplace_id": "30638",
+    "access_condition": "Commercial \u2014 full URL slug not supplied"
+  },
+  "vehicle": {
+    "reported_make": "Ford",
+    "reported_model": "F-450 Super Duty",
+    "reported_year_range": "2017-2022 (assumed same family as 30637 \u2014 unverified)",
+    "reported_body": "Chassis Cab Regular Cab",
+    "listing_claim_summary": "Alternative CA 108\" proportions \u2014 NOT locked 60 CA silo geometry"
+  },
+  "configuration": {
+    "reported_cab": "REGULAR_CAB",
+    "reported_ca_in": 108.0,
+    "reported_wheelbase_in": null,
+    "reported_drivetrain": null,
+    "reported_rear_wheels": "DRW",
+    "notes": "Wrong CA for CFG-000001 (60 CA) \u2014 retain as related proportion reference only"
+  },
+  "exact_configuration_match": "NONE",
+  "geometry_types": [
+    "VECTOR_2D"
+  ],
+  "completeness": {
+    "exterior": "PARTIAL",
+    "interior": "NOT_APPLICABLE",
+    "mechanical": "NOT_APPLICABLE",
+    "electrical": "NOT_APPLICABLE",
+    "hierarchy_quality": "NOT_APPLICABLE",
+    "mesh_separation": "NOT_APPLICABLE",
+    "topology_quality": "NOT_APPLICABLE",
+    "evaluation_basis": "LISTING_ONLY"
+  },
+  "usefulness": {
+    "engineering": "NONE",
+    "visual": "LOW"
+  },
+  "license": {
+    "status": "COMMERCIAL_PURCHASE",
+    "terms_summary": null
+  },
+  "price": {
+    "status": "UNKNOWN",
+    "amount_usd": null,
+    "currency_note": null
+  },
+  "lifecycle": {
+    "discovered": true,
+    "acquired": "NOT_ACQUIRED",
+    "parsed": "NOT_EXECUTED",
+    "verified": "NOT_EXECUTED"
+  },
+  "component_coverage": [
+    {
+      "target": "CFG-000001 (60 CA)",
+      "presence": "ABSENT",
+      "notes": "Listing CA=108 \u2260 60"
+    }
+  ],
+  "known_deficiencies": [
+    "Full URL slug not provided \u2014 do not invent (Hard Rule 6)",
+    "Wrong CA for locked configuration"
+  ],
+  "evidence_links": [
+    {
+      "kind": "RELATED_LISTING",
+      "ref": "AID-000001",
+      "note": "Sibling Outlines ID 30638"
+    },
+    {
+      "kind": "SPRINT",
+      "ref": "research/sprints/RL-011_ASSET_INTELLIGENCE_DATABASE.md"
+    }
+  ],
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "related_asset_ids": [
+    "AID-000001"
+  ],
+  "maps_to_src_cand": null,
+  "maps_to_candidate_asset_id": null,
+  "edts_role": "ACQUISITION_INPUT",
+  "research_sprint": "RL-011",
+  "decision": "DT-D042",
+  "notes": [
+    "Do not acquire as primary envelope for CFG-000001."
+  ]
+}

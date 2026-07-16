@@ -2,7 +2,7 @@
 
 **Status:** `ACTIVE`  
 **Effective Date:** 2026-07-16  
-**Version:** `2.3.0`  
+**Version:** `2.4.0`  
 **Architecture host:** [EDTS_OS.md](EDTS_OS.md) v3.0.0+ (EDTS-OS)  
 **Isolation law:** [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
 **Binding for:** all research, acquisition, geometry development, and software logic operations under `elektron-digital-twin-foundation/`
@@ -11,7 +11,8 @@
 **Changelog from 2.1.0:** Hard Rule 0 adds **Component-First Acquisition** (no assumption of a complete exact-vehicle marketplace asset; admit components only after verification).  
 **Changelog from 2.1.1:** Hard Rule 11 — Evidence Acquisition Efficiency (search complete-vehicle **and** component levels; prefer exact complete assets when they exist; never forbid complete-vehicle search).  
 **Changelog from 2.1.2:** **Hard Rule 13** — Research Never Stops at One Source; **Research Confidence (RC)** for SRC-CAND search prioritization (not engineering verification %); immutable **`SRC-CAND-######`** IDs.  
-**Changelog from 2.2.0:** **Hard Rule 15** — Every Major Claim Must Have Its Own Claim Record; vector blueprints are **2D dimensional / profile reference**, never “ground-truth geometry.”
+**Changelog from 2.2.0:** **Hard Rule 15** — Every Major Claim Must Have Its Own Claim Record; vector blueprints are **2D dimensional / profile reference**, never “ground-truth geometry.”  
+**Changelog from 2.3.0:** **Hard Rule 16** — Asset Intelligence Database; every internet asset gets an `AID-*` passport; listing URLs are acquisition **inputs**, not answers.
 
 ---
 
@@ -53,14 +54,17 @@ Operational homes (do **not** create parallel shortlist/gap/next-action files):
 
 | Concern | Authoritative home |
 |---|---|
-| Marketplace candidate register | `layers/L01/L1_LANE_A_ASSET_CATALOG.json` |
+| Marketplace candidate register (thin pointers) | `layers/L01/L1_LANE_A_ASSET_CATALOG.json` |
+| **Asset Intelligence passports (`AID-*`)** | **`research/asset_intelligence/ASSET_INTELLIGENCE_REGISTER.json`** |
 | Document / source candidates (`SRC-CAND-*`) | `research/src_candidates/SRC_CANDIDATE_REGISTER.json` |
-| Per-asset evaluation | `layers/L01/L1_ASSET_EVALUATION_<ASSET-ID>.md` + `research/incoming/l01_lane_a_assets/<ASSET-ID>/` |
+| Per-asset evaluation | AID passport + optional `layers/L01/L1_ASSET_EVALUATION_<ASSET-ID>.md` + `research/incoming/l01_lane_a_assets/<ASSET-ID>/` |
 | Search attempts | `research/RESEARCH_LOG.md` (append-only) and/or catalog `notes` |
-| Exact vs related | HR-EVI + `schemas/cross-vehicle-comparison.schema.json` + catalog `grade` / `estimated_configuration_match` |
-| Acquisition sequence / next actions | `layers/L01/L1_REFERENCE_ACQUISITION_QUEUE.md` + `STATUS.json` + SRC-CAND `next_search_queue` |
-| Evidence gaps | existing L1 gap matrix / final gap report + per-asset availability audit |
+| Exact vs related | HR-EVI + `schemas/cross-vehicle-comparison.schema.json` + AID `exact_configuration_match` |
+| Acquisition sequence / next actions | `layers/L01/L1_REFERENCE_ACQUISITION_QUEUE.md` + `STATUS.json` + SRC-CAND / AID queues |
+| Evidence gaps | existing L1 gap matrix / final gap report + AID `known_deficiencies` |
 | Component truth surface | Component Passport (`components/` + exact-vehicle passport examples) |
+
+Do **not** recreate rejected DT-D027 shortlist files (`L1_ASSET_CANDIDATE_DATABASE.json`, door/cab shortlists, etc.). AID is the structured intelligence layer; the Lane A catalog remains the thin pointer register.
 
 Machine form: `schemas/*` (universal) + `examples/<oem>/<exact_config>/` (datasets) + Lane A catalog (candidates).
 
@@ -248,13 +252,27 @@ Status: CANDIDATE
 Next Verification Step: OEM body repair manual; OEM engineering drawing; physical comparison
 ```
 
+### Hard Rule 16 — Asset Intelligence Database (every asset gets a passport)
+
+Marketplace finds, CAD listings, scans, and vector blueprints are **inputs into EDTS**, not answers.
+
+1. Every discovered internet asset receives an immutable **`AID-######`** passport.
+2. Passports live under `research/asset_intelligence/` and conform to `schemas/asset-intelligence-passport.schema.json` (non-kernel).
+3. Required intelligence surface includes at least: source, vehicle/configuration claims, `exact_configuration_match`, geometry types, ordinal completeness (exterior / interior / mechanical / electrical / hierarchy / mesh separation / topology), engineering & visual usefulness, license, price, acquired / parsed / verified lifecycle, component coverage, known deficiencies, evidence links.
+4. Completeness uses **ordinals** (`NOT_EVALUATED` / `NONE` / `LOW` / `PARTIAL` / `HIGH`) — never engineering confidence percentages (Hard Rule 5).
+5. `exact_configuration_match = CONFIGURATION_MATCHED` requires Hard Rule 4 + HR-EVI — never a listing title alone.
+6. Listing-only rows must set `completeness.evaluation_basis = LISTING_ONLY` until local bytes are parsed.
+7. AID does **not** revive rejected DT-D027 shortlist files and does **not** activate deferred multi-axis scoring engines (DT-D029).
+
+**Register:** `research/asset_intelligence/ASSET_INTELLIGENCE_REGISTER.json`
+
 ### Deferred architecture (do not implement under schema freeze)
 
 These improve long-term rigor but must **not** expand frozen kernel schemas unless a blocking defect from the real geometry workflow requires it (DT-D028):
 
 | Idea | Disposition |
 |---|---|
-| Multi-axis quality scores (exterior/interior geometry, dimensions, topology, textures, materials, animation, separation, scan/metadata quality, license, provenance, evidence strength) | Future evaluation axes — **not** Geometry A/B; scores stay `null` / `NOT_EVALUATED` until a rubric exists — see `proposals/COMPONENT_PASSPORT_V1_1_DESIGN.md` |
+| Multi-axis quality scores (exterior/interior geometry, dimensions, topology, textures, materials, animation, separation, scan/metadata quality, license, provenance, evidence strength) | Numeric rubric engines remain deferred / `NOT_AUTHORIZED_UNTIL_ACQUIRED`. **AID ordinals** (Hard Rule 16) are the authorized pre-bytes intelligence surface — not Geometry A/B scores. |
 | First-class geometry roles (Visual Exterior, Engineering Surface, Scan, CAD, LOD0–2, Collision, Proxy, Repair, Simulation, AR, Exploded) | Multiple simultaneous **registry** assets per component (IDs on passport); frozen `geometry-asset.asset_role` unchanged; do not invent roles without bytes |
 | Dependency Graph (structural / connection / procedure) | Separate record types; procedure edges `NOT_EVALUATED` until verified — **not** embedded remove-lists on the passport; see proposals design |
 | Passport v1.1 schema | **Proposal only** at `proposals/component-passport-v1.1.schema.json` — do **not** edit active rc1 `schemas/component-passport.schema.json` |
@@ -332,7 +350,8 @@ Replacement query model for **verified engineering claims**: traverse Evidence G
 | `configurations/` | Ephemeral vehicle configs |
 | `layers/L01/L1_PARALLEL_TEAMS.md` | Teams A–D sprint board |
 | `layers/L01/L1_ASSET_EVALUATION_ASSET-00031.md` | Efficiency-principle asset profile |
-| `layers/L01/L1_LANE_A_ASSET_CATALOG.json` | Lane A marketplace candidate catalog |
+| `layers/L01/L1_LANE_A_ASSET_CATALOG.json` | Lane A marketplace candidate catalog (thin pointers) |
+| `research/asset_intelligence/ASSET_INTELLIGENCE_REGISTER.json` | Hard Rule 16 `AID-*` asset intelligence passports |
 | `research/src_candidates/SRC_CANDIDATE_REGISTER.json` | Immutable `SRC-CAND-*` register + Next Search Queue |
 | `research/claims/CLAIM_REGISTER.json` | Hard Rule 15 major-claim index |
 | `layers/L01/L1_SOURCE_PACK_01_AUTHENTICITY_AUDIT.md` | Pack verification posture |

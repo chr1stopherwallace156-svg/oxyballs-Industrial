@@ -1,0 +1,33 @@
+{
+  "decision_id": "DT-D042",
+  "title": "Authorize Asset Intelligence Database (AID); URLs are acquisition inputs not answers",
+  "date": "2026-07-16",
+  "approved_status": "ACCEPTED",
+  "scope": [
+    "schemas/asset-intelligence-passport.schema.json",
+    "research/asset_intelligence/",
+    "EDTS_RESEARCH_PROTOCOL.md homes table",
+    "layers/L01/L1_LANE_A_ASSET_CATALOG.json URL updates",
+    "SRC-CAND-000004 / CAND-000042-EOG",
+    "RL-011"
+  ],
+  "reason": "Research phase is pivoting from hunting vehicle answers to building a world-class acquisition intelligence system. Marketplace links must feed structured asset passports, not be treated as verified twin truth.",
+  "decision": [
+    "Authorize Asset Intelligence Database under research/asset_intelligence/ with non-kernel schema schemas/asset-intelligence-passport.schema.json.",
+    "Every discovered internet asset receives an immutable AID-###### passport covering source, vehicle/config claims, exact-match class, geometry types, ordinal completeness axes, usefulness, license, price, acquired/parsed/verified lifecycle, component coverage, deficiencies, and evidence links.",
+    "Listing URLs (including EDTS-CAND-001/002 direct links) are ACQUISITION_INPUTS — not VERIFIED_EVIDENCE and not silo geometry answers.",
+    "Upgrade CAND-000042-EOG / AID-000002 to SKU URL with URL_FETCH_CONFIRMED; keep AID-000001 Outlines URL as PROFILE_REFERENCE priority acquire.",
+    "Record related Outlines CA 108/120 listing IDs (30638/30639) without inventing URL slugs.",
+    "DT-D027 remains: do not recreate rejected shortlist/candidate-DB markdown pack; AID is the structured intelligence layer; Lane A catalog stays the thin pointer register.",
+    "DT-D029 remains for scoring engines: AID ordinals + evaluation_basis are not activated multi-axis rubric scoring; EAE scoring stays NOT_AUTHORIZED_UNTIL_ACQUIRED.",
+    "Frozen kernel and component-passport rc1 unchanged.",
+    "Door decision posture unchanged: CANDIDATE_ACQUISITION_RECOMMENDED; geometry ABSENT until Hard Rule 4."
+  ],
+  "recommended_decision": "CANDIDATE_ACQUISITION_RECOMMENDED",
+  "related_decisions": ["DT-D027", "DT-D029", "DT-D039", "DT-D040", "DT-D041"],
+  "change_control": {
+    "kernel_schema_change": false,
+    "component_passport_rc1_change": false,
+    "new_non_kernel_schema": "schemas/asset-intelligence-passport.schema.json"
+  }
+}

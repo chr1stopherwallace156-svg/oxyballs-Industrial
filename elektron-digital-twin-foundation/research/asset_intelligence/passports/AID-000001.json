@@ -1,0 +1,123 @@
+{
+  "asset_id": "AID-000001",
+  "id_immutable": true,
+  "schema_version": "1.0.0",
+  "authority_status": "RESEARCH_OPERATIONAL",
+  "aliases": [
+    "EDTS-CAND-001",
+    "C-001",
+    "SRC-CAND-000004"
+  ],
+  "title": "2017 Ford F-450 Super Duty 4 Gen Facelift '20 Chassis Cab \u2219 Regular Cab CA 60\" \u2219 DRW Blueprint",
+  "source": {
+    "platform": "GetOutlines",
+    "publisher": "Outlines",
+    "url": "https://getoutlines.com/vector-drawings/30637/2017-2022-ford-f-450-super-duty-drawings",
+    "url_status": "URL_RECORDED",
+    "marketplace_id": "30637",
+    "access_condition": "Commercial purchase (reported ~$24 USD)"
+  },
+  "vehicle": {
+    "reported_make": "Ford",
+    "reported_model": "F-450 Super Duty",
+    "reported_year_range": "2017-2022 (facelift '20 band in listing title)",
+    "reported_body": "Chassis Cab Regular Cab",
+    "listing_claim_summary": "4th gen Chassis Cab Regular Cab CA 60 DRW vector blueprint"
+  },
+  "configuration": {
+    "reported_cab": "REGULAR_CAB",
+    "reported_ca_in": 60.0,
+    "reported_wheelbase_in": null,
+    "reported_drivetrain": null,
+    "reported_rear_wheels": "DRW",
+    "notes": "Listing targets CA 60 Chassis Cab proportions; MY band includes 2020+ facelift layers \u2014 isolate 2019 applicability after purchase"
+  },
+  "exact_configuration_match": "EXTERIOR_PROPORTION_CANDIDATE",
+  "geometry_types": [
+    "VECTOR_2D",
+    "EPS",
+    "SVG",
+    "AI",
+    "CDR"
+  ],
+  "completeness": {
+    "exterior": "PARTIAL",
+    "interior": "NOT_APPLICABLE",
+    "mechanical": "NOT_APPLICABLE",
+    "electrical": "NOT_APPLICABLE",
+    "hierarchy_quality": "NOT_APPLICABLE",
+    "mesh_separation": "NOT_APPLICABLE",
+    "topology_quality": "NOT_APPLICABLE",
+    "evaluation_basis": "LISTING_ONLY"
+  },
+  "usefulness": {
+    "engineering": "LOW",
+    "visual": "PARTIAL"
+  },
+  "license": {
+    "status": "COMMERCIAL_PURCHASE",
+    "terms_summary": "Paid vector download \u2014 counsel review before redistribution"
+  },
+  "price": {
+    "status": "PAID",
+    "amount_usd": 24.0,
+    "currency_note": "Reported listing price"
+  },
+  "lifecycle": {
+    "discovered": true,
+    "acquired": "NOT_ACQUIRED",
+    "parsed": "NOT_EXECUTED",
+    "verified": "NOT_EXECUTED"
+  },
+  "component_coverage": [
+    {
+      "target": "ASMINST-VEH000001-CAB",
+      "presence": "SHELL_ONLY",
+      "notes": "2D exterior profile only"
+    },
+    {
+      "target": "CMPINST-VEH000001-DOOR-FL",
+      "presence": "SHELL_ONLY",
+      "notes": "Side elevation silhouette only"
+    }
+  ],
+  "known_deficiencies": [
+    "Not OEM engineering geometry (Hard Rule 14)",
+    "No inner door / harness / latch content",
+    "MY band spans 2020+ facelift"
+  ],
+  "evidence_links": [
+    {
+      "kind": "LISTING_URL",
+      "ref": "https://getoutlines.com/vector-drawings/30637/2017-2022-ford-f-450-super-duty-drawings"
+    },
+    {
+      "kind": "SRC_CAND",
+      "ref": "research/src_candidates/SRC-CAND-000004.json"
+    },
+    {
+      "kind": "LANE_A_CATALOG",
+      "ref": "layers/L01/L1_LANE_A_ASSET_CATALOG.json#EDTS-CAND-001"
+    },
+    {
+      "kind": "SPRINT",
+      "ref": "research/sprints/RL-011_ASSET_INTELLIGENCE_DATABASE.md"
+    }
+  ],
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "related_asset_ids": [
+    "AID-000007",
+    "AID-000008"
+  ],
+  "maps_to_src_cand": "SRC-CAND-000004",
+  "maps_to_candidate_asset_id": "EDTS-CAND-001",
+  "edts_role": "PROFILE_REFERENCE",
+  "research_sprint": "RL-011",
+  "decision": "DT-D042",
+  "notes": [
+    "Acquisition INPUT \u2014 not 'the answer'. Priority purchase per DT-D039/D041/D042.",
+    "After bytes: EAE ingest + hash; still PROFILE_REFERENCE only."
+  ]
+}
