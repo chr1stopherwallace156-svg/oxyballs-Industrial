@@ -21,6 +21,7 @@
   ],
   "notes": [
     "Major claims must not live only in sprint prose.",
-    "CL-DOOR-FL-SUBCOMPONENT_COVERAGE.json is a coverage matrix, not a Hard Rule 15 claim record — promote individual rows to CL-* when they become major claims."
+    "CL-DOOR-FL-SUBCOMPONENT_COVERAGE.json is a coverage matrix, not a Hard Rule 15 claim record \u2014 promote individual rows to CL-* when they become major claims.",
+    "RL-010 / DT-D041: draft EDTS-COMP-FL-* passports and coverage matrix are ILLUSTRATIVE \u2014 promote individual major claims to CL-* when asserted as project truth."
   ]
 }

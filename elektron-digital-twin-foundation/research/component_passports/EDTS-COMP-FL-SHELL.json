@@ -1,0 +1,24 @@
+{
+  "draft_passport_id": "EDTS-COMP-FL-SHELL",
+  "authority_status": "ILLUSTRATIVE_ONLY",
+  "component_class": "Outer Skin / Door Shell",
+  "reported_oem_part_number": "FL3Z-1520125-A",
+  "reported_interchange": ["FL3Z-1520125-B"],
+  "bound_component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "applicability_claim": "Reported F-150 (2015–2020) and F-250–F-550 (2017–2022) aluminum outer panel family — see CL-001 (status CANDIDATE)",
+  "material_claim": "6000-series aluminum alloy (reported; not locally verified)",
+  "downstream_role_draft": "Dimensional bounding box / exterior mesh reference after ingest + Hard Rule 4",
+  "geometry_status": "ABSENT",
+  "related_candidates": ["CAND-000043-GRAB", "EDTS-COMP-CAD-001"],
+  "related_claims": ["CL-001"],
+  "project_confidence_status": "CANDIDATE",
+  "forbidden": [
+    "Treat as CROSS_VERIFIED or VERIFIED_EVIDENCE",
+    "Auto-admit F-150 interior fastener map as F-450 truth",
+    "Geometry freeze from draft passport alone"
+  ],
+  "research_sprint": "RL-010",
+  "decision": "DT-D041"
+}

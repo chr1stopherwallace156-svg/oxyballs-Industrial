@@ -1,0 +1,35 @@
+{
+  "decision_id": "DT-D041",
+  "title": "RL-010 OEM/door saturation honesty gate — demote VERIFIED labels; keep CANDIDATE_ACQUISITION_RECOMMENDED",
+  "date": "2026-07-16",
+  "approved_status": "ACCEPTED",
+  "scope": [
+    "research/sprints/RL-010_OEM_DOOR_COMPONENT_SATURATION_HONEST.md",
+    "research/src_candidates/SRC-CAND-000005.json",
+    "research/src_candidates/SRC-CAND-000006.json",
+    "research/src_candidates/SRC-CAND-000007.json",
+    "research/component_passports/",
+    "research/graphs/DOOR_FL_EVIDENCE_GRAPH_ILLUSTRATIVE.md",
+    "research/plans/FL_DOOR_INTERNAL_SCAN_PROTOCOL.md",
+    "layers/L01/L1_LANE_A_ASSET_CATALOG.json",
+    "CMPINST-VEH000001-DOOR-FL"
+  ],
+  "reason": "Operator sprint asserted VERIFIED_EVIDENCE / SPECIFICATION_READY / CROSS_VERIFIED / 90% geometry completeness without local hashed bytes. Honesty gate demotes those labels while preserving useful hunt inventory and acquisition recommendation.",
+  "decision": [
+    "Map EDTS-OEM-001..005 to SRC-CAND hunt records (000001, 000005, 000002, 000006, 000007); all remain NOT_ACQUIRED.",
+    "Reject VERIFIED_EVIDENCE / DOCUMENT_SUPPORTED / CROSS_VERIFIED / SPECIFICATION_READY from URL indexing or narrative alone.",
+    "Draft component passports under research/component_passports/ are ILLUSTRATIVE_ONLY; kernel passport geometry stays ABSENT.",
+    "Catalog CAND-000043-GRAB (GrabCAD door shell) and CAND-000044-TS (TurboSquid 1598273) as DISCOVERED / NOT_ACQUIRED — no invented listing URLs.",
+    "Evidence graph and torque/YouTube/procedure edges are ILLUSTRATIVE_ONLY / NOT_CONFIRMED until hashed workshop + media proof.",
+    "Coverage matrix demoted: CANDIDATE / RESEARCH_REQUIRED / DOCUMENT_HUNT — qualitative estimates only (Hard Rule 5).",
+    "Recommended decision remains CANDIDATE_ACQUISITION_RECOMMENDED: (1) SRC-CAND-000004 profile reference, (2) door shell CAD after real URL/license, (3) schedule FL door internal scan protocol, (4) parallel OEM PDF lanes.",
+    "Frozen kernel and component-passport rc1 unchanged."
+  ],
+  "recommended_decision": "CANDIDATE_ACQUISITION_RECOMMENDED",
+  "secondary_flags": ["PHYSICAL_VERIFICATION_REQUIRED", "PRIMARY_SOURCE_REQUIRED_OEM_PDFS"],
+  "related_decisions": ["DT-D039", "DT-D040", "DT-D038", "DT-D037"],
+  "change_control": {
+    "kernel_schema_change": false,
+    "component_passport_rc1_change": false
+  }
+}

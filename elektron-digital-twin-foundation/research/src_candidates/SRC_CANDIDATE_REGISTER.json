@@ -1,15 +1,19 @@
 {
   "document_id": "SRC_CANDIDATE_REGISTER",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "status": "ACTIVE",
   "schema": "schemas/src-candidate.schema.json",
   "id_policy": {
     "pattern": "SRC-CAND-######",
     "immutable_handle": true,
     "metadata_mutable": true,
-    "next_id": "SRC-CAND-000005"
+    "next_id": "SRC-CAND-000008"
   },
-  "hard_rules": ["HR-EVI", "Hard Rule 13", "Hard Rule 5 (RC ≠ engineering verification %)"],
+  "hard_rules": [
+    "HR-EVI",
+    "Hard Rule 13",
+    "Hard Rule 5 (RC \u2260 engineering verification %)"
+  ],
   "locked_configuration": {
     "vehicle_instance_id": "VEH-000001",
     "configuration_id": "CFG-000001",
@@ -24,8 +28,13 @@
     "DOOR_FL_ASSEMBLY": {
       "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
       "recommended_decision": "CANDIDATE_ACQUISITION_RECOMMENDED",
-      "secondary_flags": ["PHYSICAL_VERIFICATION_REQUIRED"],
-      "geometry_status": "ABSENT"
+      "secondary_flags": [
+        "PHYSICAL_VERIFICATION_REQUIRED"
+      ],
+      "geometry_status": "ABSENT",
+      "oem_registry_status": "HUNT_NOT_ACQUIRED",
+      "sprint": "research/sprints/RL-010_OEM_DOOR_COMPONENT_SATURATION_HONEST.md",
+      "decision": "DT-D041"
     }
   },
   "research_engine_status": "OPERATIONAL",
@@ -37,7 +46,12 @@
       "topic": "FRONT_SUSPENSION_GEOMETRY",
       "research_confidence_rc": 85,
       "acquisition_status": "NOT_ACQUIRED",
-      "metadata_title": "2019 Super Duty Chassis Cab BBAS Guide"
+      "metadata_title": "2019 Super Duty Chassis Cab BBAS Guide",
+      "aliases": [
+        "EDTS-OEM-001",
+        "CAND-FORD-BBAS-2019"
+      ],
+      "topics_note": "Also applicable to DOOR_FL_ASSEMBLY / chassis layout (shared OEM)"
     },
     {
       "candidate_id": "SRC-CAND-000002",
@@ -45,7 +59,11 @@
       "topic": "FRONT_SUSPENSION_GEOMETRY",
       "research_confidence_rc": 90,
       "acquisition_status": "NOT_ACQUIRED",
-      "metadata_title": "2019 F-Super Duty Workshop Manual"
+      "metadata_title": "2019 F-Super Duty Workshop Manual",
+      "aliases": [
+        "EDTS-OEM-003",
+        "CAND-FORD-SM-2019"
+      ]
     },
     {
       "candidate_id": "SRC-CAND-000003",
@@ -61,67 +79,117 @@
       "topic": "DOOR_FL_ASSEMBLY",
       "research_confidence_rc": 78,
       "acquisition_status": "NOT_ACQUIRED",
-      "metadata_title": "2017-2022 F-450 Chassis Cab Regular Cab 60 CA DRW Blueprint (Outlines)"
+      "metadata_title": "2017-2022 F-450 Chassis Cab Regular Cab 60 CA DRW Blueprint (Outlines)",
+      "aliases": [
+        "EDTS-CAND-001",
+        "Outlines vector blueprint"
+      ]
+    },
+    {
+      "candidate_id": "SRC-CAND-000005",
+      "path": "research/src_candidates/SRC-CAND-000005.json",
+      "topic": "DOOR_FL_ASSEMBLY",
+      "research_confidence_rc": 82,
+      "acquisition_status": "NOT_ACQUIRED",
+      "metadata_title": "Ford General Body Builder Layout Book (BBAS)",
+      "aliases": [
+        "EDTS-OEM-002"
+      ]
+    },
+    {
+      "candidate_id": "SRC-CAND-000006",
+      "path": "research/src_candidates/SRC-CAND-000006.json",
+      "topic": "DOOR_FL_ASSEMBLY",
+      "research_confidence_rc": 88,
+      "acquisition_status": "NOT_ACQUIRED",
+      "metadata_title": "2019 F-Series Super Duty Electrical Wiring Diagram (EWD)",
+      "aliases": [
+        "EDTS-OEM-004"
+      ]
+    },
+    {
+      "candidate_id": "SRC-CAND-000007",
+      "path": "research/src_candidates/SRC-CAND-000007.json",
+      "topic": "DOOR_FL_ASSEMBLY",
+      "research_confidence_rc": 80,
+      "acquisition_status": "NOT_ACQUIRED",
+      "metadata_title": "Ford OEM Parts Catalog \u2014 Front Door Components",
+      "aliases": [
+        "EDTS-OEM-005"
+      ]
     }
   ],
   "next_search_queue": [
     {
       "priority": 1,
-      "task": "Purchase/acquire SRC-CAND-000004 (Outlines vector / EDTS-CAND-001)",
+      "task": "Purchase/acquire SRC-CAND-000004 (Outlines vector / EDTS-CAND-001) as PROFILE_REFERENCE",
       "lane": "LANE_A_DOC",
       "topic": "DOOR_FL_ASSEMBLY",
-      "expected_evidence": "2D dimensional / profile reference (NOT ground-truth geometry) for Regular Cab Chassis Cab 60 CA DRW proportions",
+      "expected_evidence": "2D dimensional / profile reference (NOT ground-truth geometry)",
       "candidate_id": "SRC-CAND-000004",
       "status": "ACTIVE",
-      "decision": "DT-D039/D040"
+      "decision": "DT-D039/D040/D041"
     },
     {
       "priority": 2,
+      "task": "Locate real GrabCAD listing URL + license; acquire CAND-000043-GRAB / EDTS-COMP-CAD-001 door shell CAD",
+      "lane": "LANE_VIS",
+      "topic": "DOOR_FL_ASSEMBLY",
+      "expected_evidence": "STEP/SLDPRT outer shell candidate \u2014 interior fasteners COMPARISON_REFERENCE only",
+      "candidate_id": "CAND-000043-GRAB",
+      "status": "ACTIVE",
+      "decision": "DT-D041"
+    },
+    {
+      "priority": 3,
       "task": "Isolate SKU URL + acquire CAND-000042-EOG / EDTS-CAND-002 visual model",
       "lane": "LANE_VIS",
       "topic": "DOOR_FL_ASSEMBLY",
-      "expected_evidence": "Visual polygonal cab/door exterior candidate — not CAD-grade internals",
+      "expected_evidence": "Visual polygonal cab/door exterior candidate",
       "candidate_id": "EDTS-CAND-002",
       "status": "ACTIVE",
       "decision": "DT-D040"
     },
     {
-      "priority": 3,
-      "task": "Locate/Acquire SRC-CAND-000001 (BBAS)",
+      "priority": 4,
+      "task": "Acquire SRC-CAND-000001 (BBAS / Body Application Guide) + SRC-CAND-000005 (General BBLB)",
       "lane": "LANE_A_DOC",
-      "topic": "FRONT_SUSPENSION_GEOMETRY",
-      "expected_evidence": "Axle/frame mounting diagrams for locked 4x2 Chassis Cab",
+      "topic": "SHARED",
+      "expected_evidence": "Hashed PDF pages for 145.3/60 Chassis Cab Regular Cab 4x2",
       "candidate_id": "SRC-CAND-000001",
       "status": "ACTIVE",
-      "decision": "DT-D037"
-    },
-    {
-      "priority": 4,
-      "task": "Locate SRC-CAND-000002 (Workshop Manual) — door hinge torque + suspension pages",
-      "lane": "LANE_SVC",
-      "topic": "SHARED",
-      "expected_evidence": "Hinge torque/clearance; 4x2-isolated suspension topology",
-      "candidate_id": "SRC-CAND-000002",
-      "status": "QUEUED"
+      "decision": "DT-D041"
     },
     {
       "priority": 5,
-      "task": "Parts cross-ref: door PNs (CL coverage) + VIN-filtered mirror/harness options",
-      "lane": "LANE_PRT",
+      "task": "Purchase SRC-CAND-000002 (WSM) + SRC-CAND-000006 (EWD)",
+      "lane": "LANE_SVC",
       "topic": "DOOR_FL_ASSEMBLY",
-      "expected_evidence": "Confirm FL3Z/HC3Z families; isolate 2019 vs 2020+ connectors",
-      "candidate_id": null,
-      "status": "QUEUED"
+      "expected_evidence": "Hinge torque/door sections; Regular Cab mirror option pinouts",
+      "candidate_id": "SRC-CAND-000002",
+      "status": "QUEUED",
+      "decision": "DT-D041"
     },
     {
       "priority": 6,
-      "task": "PHYSICAL_VERIFICATION_REQUIRED — FL door teardown/scan plan",
+      "task": "VIN-filtered parts catalog archive (SRC-CAND-000007) for FL3Z/HC3Z families",
+      "lane": "LANE_PRT",
+      "topic": "DOOR_FL_ASSEMBLY",
+      "expected_evidence": "Local hashed catalog pages for door shell/harness/mirror options",
+      "candidate_id": "SRC-CAND-000007",
+      "status": "QUEUED",
+      "decision": "DT-D041"
+    },
+    {
+      "priority": 7,
+      "task": "PHYSICAL_VERIFICATION_REQUIRED \u2014 execute FL_DOOR_INTERNAL_SCAN_PROTOCOL",
       "lane": "LANE_VIS",
       "topic": "DOOR_FL_ASSEMBLY",
-      "expected_evidence": "Inner cavity, harness routing, latch geometry absent from commercial CAD",
+      "expected_evidence": "Inner cavity, harness clips, vapor barrier map",
       "candidate_id": null,
       "status": "QUEUED",
-      "decision": "DT-D039"
+      "decision": "DT-D041",
+      "plan": "research/plans/FL_DOOR_INTERNAL_SCAN_PROTOCOL.md"
     }
   ],
   "contradictions_and_risks": [
@@ -144,23 +212,55 @@
       "id": "RISK-F150-SHELL-INHERITANCE",
       "summary": "Shell interchange claim must not auto-import F-150 geometry as F-450 truth.",
       "mitigation": "CL-001 stays COMPARISON_REFERENCE until locally hashed + Hard Rule 4."
+    },
+    {
+      "id": "RISK-NARRATIVE-VERIFIED-WITHOUT-BYTES",
+      "summary": "Sprint prose labeled OEM PDFs VERIFIED_EVIDENCE / SPECIFICATION_READY without local hashes.",
+      "mitigation": "DT-D041 honesty gate; NOT_ACQUIRED until bytes + SHA-256 + Hard Rule 4."
+    },
+    {
+      "id": "RISK-MIRROR-OPTION-ASSUMPTION",
+      "summary": "Power telescoping tow mirror / 22-pin harness must not be assumed on base Regular Cab.",
+      "mitigation": "Option gate on EDTS-COMP-FL-MIRROR / HARNESS; EWD + VIN filter."
     }
   ],
   "missing_evidence": [
     "Hashed Outlines bytes (SRC-CAND-000004)",
+    "Verified GrabCAD listing URL + hashed STEP (CAND-000043-GRAB)",
     "SKU-specific CGTrader listing for EDTS-CAND-002",
-    "Local parts-catalog pages for FL3Z/HC3Z families",
-    "Inner door cavity / harness routing (physical)",
-    "BBAS/WSM for suspension architecture (DT-D037)"
+    "Local BBAS/BAG/BBLB PDF hashes (SRC-CAND-000001/000005)",
+    "Local WSM + EWD hashes (SRC-CAND-000002/000006)",
+    "Local parts-catalog pages for FL3Z/HC3Z (SRC-CAND-000007)",
+    "Inner door cavity / harness routing (physical scan)",
+    "Confirmed teardown media (YouTube ID NOT_CONFIRMED)"
   ],
   "alias_map": {
     "CAND-FORD-BBAS-2019": "SRC-CAND-000001",
     "CAND-FORD-SM-2019": "SRC-CAND-000002",
     "EDTS-CAND-001": "SRC-CAND-000004",
     "C-001": "SRC-CAND-000004",
-    "EDTS-CAND-002": "CAND-000042-EOG"
+    "EDTS-CAND-002": "CAND-000042-EOG",
+    "EDTS-OEM-001": "SRC-CAND-000001",
+    "EDTS-OEM-002": "SRC-CAND-000005",
+    "EDTS-OEM-003": "SRC-CAND-000002",
+    "EDTS-OEM-004": "SRC-CAND-000006",
+    "EDTS-OEM-005": "SRC-CAND-000007",
+    "EDTS-COMP-CAD-001": "CAND-000043-GRAB",
+    "EDTS-COMP-CAD-002": "CAND-000044-TS"
   },
-  "decisions": ["DT-D037", "DT-D038", "DT-D039", "DT-D040"],
-  "sprints": ["RL-006", "RL-007", "RL-008"],
-  "hard_rule_14_note": "Vector blueprints = 2D_DIMENSIONAL_REFERENCE / PROFILE_REFERENCE only"
+  "decisions": [
+    "DT-D037",
+    "DT-D038",
+    "DT-D039",
+    "DT-D040",
+    "DT-D041"
+  ],
+  "sprints": [
+    "RL-006",
+    "RL-007",
+    "RL-008",
+    "RL-010"
+  ],
+  "hard_rule_14_note": "Vector blueprints = 2D_DIMENSIONAL_REFERENCE / PROFILE_REFERENCE only",
+  "rl_010_note": "Operator VERIFIED_EVIDENCE / SPECIFICATION_READY / CROSS_VERIFIED / 90% complete labels demoted. Draft passports ILLUSTRATIVE_ONLY. Decision remains CANDIDATE_ACQUISITION_RECOMMENDED."
 }

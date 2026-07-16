@@ -7,7 +7,10 @@
     "document_class": "WORKSHOP_OR_SERVICE_MANUAL",
     "publisher": "Ford",
     "reported_year": 2019,
-    "legacy_aliases": ["CAND-FORD-SM-2019", "SRC-L1-003"]
+    "legacy_aliases": [
+      "CAND-FORD-SM-2019",
+      "SRC-L1-003"
+    ]
   },
   "acquisition_status": "NOT_ACQUIRED",
   "access_status": "NOT_ACQUIRED",
@@ -28,18 +31,28 @@
   "page_extraction_status": "NOT_EXECUTED",
   "evidence_status": "CANDIDATE",
   "related_source_registry_id": "SRC-L1-003",
-  "closes_conflicts": ["CNF-001-FRONT-SUSPENSION-TYPE"],
-  "closes_questions": ["Q3"],
-  "parallel_lanes_triggered": ["LANE_SVC", "LANE_A_DOC", "LANE_PRT"],
+  "closes_conflicts": [
+    "CNF-001-FRONT-SUSPENSION-TYPE"
+  ],
+  "closes_questions": [
+    "Q3"
+  ],
+  "parallel_lanes_triggered": [
+    "LANE_SVC",
+    "LANE_A_DOC",
+    "LANE_PRT"
+  ],
   "forbidden_uses_until_acquired": [
     "architecture_decision",
     "geometry_extraction",
     "applying_4x4_driven_axle_procedures_to_4x2_without_page_proof"
   ],
-  "notes": [
-    "Hard Rule 13: workshop-manual discovery must also task parts + visual lanes.",
-    "Cross-contamination risk: marketplace listings often mislabel 4x2 as 4x4."
-  ],
+  "notes": "Commercial purchase required (Helm Inc. / Motorcraft Service). Handoff payload ready claim from operator sprint is not equivalent to acquisition. Remains NOT_ACQUIRED.",
   "research_sprint": "RL-007",
-  "decision": "DT-D038"
+  "decision": "DT-D038",
+  "aliases": [
+    "EDTS-OEM-003",
+    "2019 F-250\u2013F-550 Super Duty Workshop Manual",
+    "Helm / Motorcraft Service"
+  ]
 }

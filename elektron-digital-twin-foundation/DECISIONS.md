@@ -675,3 +675,21 @@ Append-only record of digital twin foundation decisions.
   3. CL-001 rewritten to Hard Rule 15 shape; next steps = body repair manual, OEM drawing, physical comparison
   4. Efficient acquire order: vector profile reference → visual model → physical teardown
 
+
+## DT-D041 — RL-010 OEM/door saturation honesty gate
+
+- **Change-control record:** [`decisions/DT-D041_OEM_DOOR_SATURATION_HONESTY_GATE.json`](decisions/DT-D041_OEM_DOOR_SATURATION_HONESTY_GATE.json)
+- **decision_id:** `DT-D041`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `CANDIDATE_ACQUISITION_RECOMMENDED`
+- **secondary_flags:** `PHYSICAL_VERIFICATION_REQUIRED`, `PRIMARY_SOURCE_REQUIRED_OEM_PDFS`
+- **scope:** RL-010; EDTS-OEM-001..005 → SRC-CAND; draft `EDTS-COMP-FL-*`; `CAND-000043-GRAB`; `CAND-000044-TS`
+- **decision:**
+  1. Demote narrative `VERIFIED_EVIDENCE` / `SPECIFICATION_READY` / `CROSS_VERIFIED` / “90% complete” — no local hashes
+  2. Register OEM hunt targets `SRC-CAND-000001/2/5/6/7` as **`NOT_ACQUIRED`**
+  3. Draft component passports = **ILLUSTRATIVE_ONLY**; kernel geometry stays **`ABSENT`**
+  4. Catalog GrabCAD shell + TurboSquid 1598273 as DISCOVERED / NOT_ACQUIRED (no invented URLs)
+  5. Evidence graph / torque / YouTube edges = ILLUSTRATIVE / NOT_CONFIRMED
+  6. Acquire order: profile reference → shell CAD (after real URL) → physical internal scan; parallel OEM PDFs
+

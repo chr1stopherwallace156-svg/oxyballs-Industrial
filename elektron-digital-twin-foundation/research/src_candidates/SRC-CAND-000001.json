@@ -7,7 +7,10 @@
     "document_class": "BODY_BUILDER_LAYOUT_OR_CHASSIS_CAB_SPECS",
     "publisher": "Ford",
     "reported_year": 2019,
-    "legacy_aliases": ["CAND-FORD-BBAS-2019", "SRC-L1-001"]
+    "legacy_aliases": [
+      "CAND-FORD-BBAS-2019",
+      "SRC-L1-001"
+    ]
   },
   "acquisition_status": "NOT_ACQUIRED",
   "access_status": "NOT_ACQUIRED",
@@ -16,7 +19,7 @@
     {
       "at": "2026-07-16T19:30:00Z",
       "rc": 85,
-      "note": "Highest-value Tier A hunt target for exact-vehicle front axle/frame mounts on 2019 F-450 Chassis Cab 145.3/60. RC is hunt priority only — bytes absent; no VERIFIED_EVIDENCE."
+      "note": "Highest-value Tier A hunt target for exact-vehicle front axle/frame mounts on 2019 F-450 Chassis Cab 145.3/60. RC is hunt priority only \u2014 bytes absent; no VERIFIED_EVIDENCE."
     }
   ],
   "bound_vehicle_instance_id": "VEH-000001",
@@ -28,19 +31,31 @@
   "page_extraction_status": "NOT_EXECUTED",
   "evidence_status": "CANDIDATE",
   "related_source_registry_id": "SRC-L1-001",
-  "closes_conflicts": ["CNF-001-FRONT-SUSPENSION-TYPE"],
-  "closes_questions": ["Q3"],
-  "parallel_lanes_triggered": ["LANE_A_DOC", "LANE_SVC", "LANE_PRT", "LANE_VIS"],
+  "closes_conflicts": [
+    "CNF-001-FRONT-SUSPENSION-TYPE"
+  ],
+  "closes_questions": [
+    "Q3"
+  ],
+  "parallel_lanes_triggered": [
+    "LANE_A_DOC",
+    "LANE_SVC",
+    "LANE_PRT",
+    "LANE_VIS"
+  ],
   "forbidden_uses_until_acquired": [
     "architecture_decision",
     "geometry_extraction",
     "geometry_freeze",
     "VERIFIED_EVIDENCE_promotion"
   ],
-  "notes": [
-    "Hard Rule 13: discovering this candidate opens parallel lanes; it does not close research.",
-    "Priority 1 in Next Search Queue. No geometry extraction until acquired and applicability verified."
-  ],
+  "notes": "Prioritized for LANE_A_DOC acquisition. SPECIFICATION_READY / PDF URL indexed claims from the operator sprint are rejected until local bytes + sha256 + page cites exist. Do not mark VERIFIED_EVIDENCE or SPECIFICATION_READY from URL indexing alone.",
   "research_sprint": "RL-007",
-  "decision": "DT-D038"
+  "decision": "DT-D038",
+  "aliases": [
+    "EDTS-OEM-001",
+    "2019 Ford Body Application Guide",
+    "Ford BBAS Body Application Guide"
+  ],
+  "configuration_applicability_claim": "Claimed in operator sprint to cover F-250 through F-550 Chassis Cab including 145.3 WB / 60 CA. Not verified against local PDF bytes in this sprint."
 }

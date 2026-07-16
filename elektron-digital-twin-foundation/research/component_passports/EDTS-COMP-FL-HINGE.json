@@ -1,0 +1,24 @@
+{
+  "draft_passport_id": "EDTS-COMP-FL-HINGE",
+  "authority_status": "ILLUSTRATIVE_ONLY",
+  "component_class": "Door Hinges",
+  "reported_oem_part_number": "HC3Z-2826800-A",
+  "bound_component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "torque_claim": {
+    "value": "M10 Bolt: 45 Nm (33 lb-ft)",
+    "status": "PENDING_WORKSHOP_CONFIRMATION",
+    "source": "Operator sprint narrative — NOT admitted until SRC-CAND-000002 hashed page cite"
+  },
+  "downstream_role_draft": "Door swing kinematic limits and hinge axis alignment",
+  "geometry_status": "ABSENT",
+  "project_confidence_status": "DOCUMENT_HUNT",
+  "related_src_cand": ["SRC-CAND-000002"],
+  "forbidden": [
+    "Treat torque claim as VERIFIED_EVIDENCE",
+    "Freeze kinematic model from narrative alone"
+  ],
+  "research_sprint": "RL-010",
+  "decision": "DT-D041"
+}

@@ -1,7 +1,7 @@
 {
   "catalog_id": "L1_LANE_A_ASSET_CATALOG",
   "schema_note": "Operational Lane A register (not a frozen kernel schema expansion). Fields follow L1_PARALLEL_LANES.md catalog template plus Component-First Acquisition target components.",
-  "updated_at": "2026-07-16T19:55:00Z",
+  "updated_at": "2026-07-16T20:40:00Z",
   "exact_vehicle_silo": {
     "vehicle_instance_id": "VEH-000001",
     "configuration_id": "CFG-000001",
@@ -9,7 +9,7 @@
   },
   "component_first_acquisition": {
     "status": "ACTIVE",
-    "rule": "Hard Rule 0 corollary + Hard Rule 11 — Evidence Acquisition Efficiency",
+    "rule": "Hard Rule 0 corollary + Hard Rule 11 \u2014 Evidence Acquisition Efficiency",
     "search_levels": [
       "COMPLETE_VEHICLE",
       "INDIVIDUAL_COMPONENT"
@@ -90,7 +90,7 @@
       "url": null,
       "url_status": "NOT_RECORDED",
       "claimed_year_range": "2017",
-      "claimed_body": "Super Duty front door CAD (STEP) — discovery claim",
+      "claimed_body": "Super Duty front door CAD (STEP) \u2014 discovery claim",
       "reported_vehicle": "2017 Super Duty Front Door (unverified listing claim)",
       "asset_type": "CAD",
       "file_format": "STEP",
@@ -115,14 +115,17 @@
     {
       "asset_id": null,
       "candidate_asset_id": "CAND-000042-EOG",
-      "legacy_aliases": ["EDTS-CAND-002", "C-002"],
+      "legacy_aliases": [
+        "EDTS-CAND-002",
+        "C-002"
+      ],
       "marketplace": "CGTrader",
       "publisher_reported": "EOG",
       "url": "https://www.cgtrader.com/3d-models/f450",
       "url_status": "CATEGORY_OR_SEARCH_SURFACE_NOT_SKU_SPECIFIC",
       "claimed_year_range": "2017-2022 band (unverified)",
       "claimed_body": "F-350 to F-550 Super Duty Dually / Chassis Cab complete model (reported)",
-      "reported_vehicle": "Ford F-350–F-550 Super Duty Dually (EOG listing claim)",
+      "reported_vehicle": "Ford F-350\u2013F-550 Super Duty Dually (EOG listing claim)",
       "asset_type": "3D_MODEL",
       "file_format": "FBX/OBJ/BLEND (reported)",
       "license": "REQUIRES_COUNSEL_REVIEW",
@@ -175,7 +178,84 @@
       "lifecycle_note": "DISCOVERED -> URL_RECORDED -> AWAITING_PURCHASE (DT-D039/D040 Priority acquire as PROFILE_REFERENCE)",
       "availability_audit": null,
       "evaluation_doc": "research/sprints/RL-008_DOOR_FL_SCOPE_LOCK_AND_CANDIDATES.md",
-      "notes": "Authoritative machine record: research/src_candidates/SRC-CAND-000004.json. Hard Rule 14: 2D_DIMENSIONAL_REFERENCE / PROFILE_REFERENCE — NEVER ground-truth geometry. MY band includes 2020+."
+      "notes": "Authoritative machine record: research/src_candidates/SRC-CAND-000004.json. Hard Rule 14: 2D_DIMENSIONAL_REFERENCE / PROFILE_REFERENCE \u2014 NEVER ground-truth geometry. MY band includes 2020+."
+    },
+    {
+      "asset_id": null,
+      "candidate_asset_id": "CAND-000043-GRAB",
+      "legacy_aliases": [
+        "EDTS-COMP-CAD-001"
+      ],
+      "marketplace": "GrabCAD",
+      "publisher_reported": "Ford_Alum_Design (reported \u2014 not verified)",
+      "url": null,
+      "url_status": "NOT_RECORDED_DO_NOT_INVENT",
+      "marketplace_id": null,
+      "claimed_year_range": "2015 F-150 listing claim (outer skin dimensional match claimed for 2019 F-450)",
+      "claimed_body": "F-Series aluminum front door outer shell STEP/SLDPRT",
+      "reported_vehicle": "2015 F-150 Front Door (uploader claim)",
+      "asset_type": "CAD",
+      "file_format": "STEP / SLDPRT (reported)",
+      "license": "UNKNOWN_OPEN_COMMUNITY_CLAIM",
+      "grade": "C",
+      "price_condition": "REPORTED_FREE",
+      "downloadable_status": "CANDIDATE_NOT_ACQUIRED",
+      "local_file_path": null,
+      "file_exists": false,
+      "sha256": null,
+      "visible_component_separation": "OUTER_SHELL_CLAIMED",
+      "front_left_door_presence": "CLAIMED_UNVERIFIED",
+      "target_component_instance_ids": [
+        "CMPINST-VEH000001-DOOR-FL"
+      ],
+      "estimated_configuration_match": "COMPARISON_REFERENCE_OUTER_SKIN_CANDIDATE",
+      "evidence_status": "DISCOVERED",
+      "lifecycle_note": "DISCOVERED -> SOURCE_CLAIMED -> AWAITING_URL_AND_BYTES (DT-D041)",
+      "availability_audit": null,
+      "evaluation_doc": "research/sprints/RL-010_OEM_DOOR_COMPONENT_SATURATION_HONEST.md",
+      "mismatches_risks": [
+        "Uploaded as 2015 F-150; interior weld-nut / trim fastener map may differ on Super Duty",
+        "CL-001 outer-shell interchange remains CANDIDATE \u2014 not auto GEO admission"
+      ],
+      "notes": "RL-010 / DT-D041. No verified GrabCAD URL in payload (Hard Rule 6). Evaluation NOT_EXECUTED until physical payload bytes."
+    },
+    {
+      "asset_id": null,
+      "candidate_asset_id": "CAND-000044-TS",
+      "legacy_aliases": [
+        "EDTS-COMP-CAD-002"
+      ],
+      "marketplace": "TurboSquid",
+      "url": null,
+      "url_status": "MARKETPLACE_ID_REPORTED_URL_NOT_VERIFIED",
+      "marketplace_id": "1598273",
+      "claimed_year_range": "unspecified",
+      "claimed_body": "Tow Mirror Assembly (Manual Fold/Telescope) STEP/IGES \u2014 visual mesh claim",
+      "reported_vehicle": "Super Duty tow mirror (listing claim)",
+      "asset_type": "3D_MODEL",
+      "file_format": "STEP / IGES (reported)",
+      "license": "COMMERCIAL_PURCHASE",
+      "grade": "D",
+      "price_condition": "REPORTED_39_00_USD",
+      "downloadable_status": "CANDIDATE_NOT_ACQUIRED",
+      "local_file_path": null,
+      "file_exists": false,
+      "sha256": null,
+      "visible_component_separation": "EXTERIOR_VISUAL_ONLY",
+      "front_left_door_presence": "MIRROR_ASSEMBLY_ONLY",
+      "target_component_instance_ids": [
+        "CMPINST-VEH000001-DOOR-FL"
+      ],
+      "estimated_configuration_match": "VISUAL_EXTERIOR_ONLY",
+      "evidence_status": "DISCOVERED",
+      "lifecycle_note": "DISCOVERED -> CONFIGURATION_EVALUATED (low engineering utility; exterior visual only)",
+      "availability_audit": null,
+      "evaluation_doc": "research/sprints/RL-010_OEM_DOOR_COMPONENT_SATURATION_HONEST.md",
+      "mismatches_risks": [
+        "Lacks internal mounting plates, wire conduits, structural brackets",
+        "Option-dependent \u2014 do not assume power telescope on base XL"
+      ],
+      "notes": "RL-010 / DT-D041. Marketplace ID recorded from operator sprint; full URL not invented. Suitable only for visual exterior rendering after license review."
     }
   ],
   "rejected_proposal_artifacts": [
@@ -193,5 +273,5 @@
   "evidence_acquisition_latest_run": "verification/results/evidence-acquisition-engine-run.json",
   "evidence_acquisition_posture": "EVIDENCE_ACQUISITION_IN_PROGRESS",
   "door_vertical_slice_gate": "F450_DOOR_FL_VERTICAL_SLICE_BLOCKED_BY_MISSING_ASSET",
-  "pipeline_note": "CAND-00031-CGT / CAND-771-GRAB remain DISCOVERED without SKU bytes. EDTS-CAND-001/SRC-CAND-000004 has URL_RECORDED (Outlines). CAND-000042-EOG needs SKU isolation. Passport geometry remains ABSENT; no auto-update."
+  "pipeline_note": "CAND-00031-CGT / CAND-771-GRAB remain DISCOVERED without SKU bytes. EDTS-CAND-001/SRC-CAND-000004 has URL_RECORDED (Outlines). CAND-000042-EOG needs SKU isolation. CAND-000043-GRAB / CAND-000044-TS added RL-010 (NOT_ACQUIRED). Passport geometry remains ABSENT; no auto-update."
 }

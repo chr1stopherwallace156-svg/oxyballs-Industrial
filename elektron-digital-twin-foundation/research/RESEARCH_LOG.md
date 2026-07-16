@@ -219,3 +219,26 @@ DT-D039 — `CANDIDATE_ACQUISITION_RECOMMENDED`.
 ### Status
 
 DT-D040; protocol v2.3.0.
+
+---
+
+## RL-010 — OEM / door-component saturation (honesty gate)
+
+- **Date:** 2026-07-16
+- **Layer:** L01 / door assembly `CMPINST-VEH000001-DOOR-FL`
+- **Agent:** Cursor Cloud Agent
+- **Question:** Can the operator OEM registry + component saturation sprint be admitted as verified evidence?
+
+### Findings
+
+1. **Honesty gate:** Indexed URL / narrative alone ≠ `VERIFIED_EVIDENCE`. All EDTS-OEM-001..005 mapped to `SRC-CAND-*` and remain **`NOT_ACQUIRED`**.
+2. **New hunt IDs:** `SRC-CAND-000005` (General BBLB), `SRC-CAND-000006` (EWD), `SRC-CAND-000007` (parts catalog).
+3. **Draft passports** `EDTS-COMP-FL-SHELL/REGULATOR/HARNESS/HINGE/MIRROR` — ILLUSTRATIVE_ONLY under `research/component_passports/`.
+4. **CAD candidates:** `CAND-000043-GRAB` (GrabCAD shell — no listing URL), `CAND-000044-TS` (TurboSquid ID 1598273 — visual only).
+5. **Coverage % / CROSS_VERIFIED** demoted to CANDIDATE / RESEARCH_REQUIRED / DOCUMENT_HUNT (Hard Rule 5).
+6. **Physical scan protocol** planned: `research/plans/FL_DOOR_INTERNAL_SCAN_PROTOCOL.md`.
+7. Passport geometry remains **`ABSENT`**.
+
+### Status
+
+DT-D041 — `CANDIDATE_ACQUISITION_RECOMMENDED` (with demoted verification labels).
