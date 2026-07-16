@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 23 + review_20 — Brake/Steering Gate v0.4)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 23 + review_20 — Brake/Steering Gate v0.4, first complete EHPS candidate); awaiting owner decisions and/or next batch
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `0508bce`; end commit: `93c5efe` (batch-23 reconciliation)
+- Work: batch 23 (complete EHPS candidates) + review_20 reconciled — Brake/Steering Gate v0.4. CS-53 ZF EPHS MPU 100-C (first complete EHPS candidate; CompleteEHPSCandidate/MotorsportSupplierCandidate/NeedsCommercialDutyReview/NeedsHydroboostCompatibilityReview/NeedsCurrentMap/NeedsThermalDeratingData); CS-54 Ford return-line hose (FordProductReference); RC-82..RC-87. Owner defect-catch: "6000 RPM CAN control" refuted by factsheet's "No connection to the CAN bus required" (RC-83); ZF = motorsport not commercial (RC-84); power = EngineeringEstimate/NeedsZFCurrentMap (RC-85); FMVSS 105 test-map scope expanded (RC-87). Section 31. RESEARCH_MAP Gate 04 → v0.4. ZF supplier packet drafted. Register cleanup: removed an orphaned truncated section-28 duplicate (canonical 28 intact). PATS language did not recur. Nothing ingested; nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean two-universe; index.html disposition; L2/L4/L6 module mapping; L9 lane name; Artifact Intake Form; M10 forbidden-phrase scanner; Dana + ZF letter approval.
+
 ## 2026-07-16 — Claude Code — task complete (batch 22 + review_19 — Brake/Steering Gate v0.2)
 
 ### (archived handoff)

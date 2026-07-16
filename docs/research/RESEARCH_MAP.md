@@ -291,6 +291,23 @@ While the HV wiring + powertrain + cooling gates sit at
    what assist is lost when the engine-driven pump is removed; evaluate
    electric-hydraulic pump, accumulator/reserve assist, fault warning,
    low-speed steering load, brake-assist failure mode, and test plan.
+   **State flags (owner review_21, batch_24): `CANDIDATE_EHPS_FOUND` /
+   `FINAL_SELECTION_HALTED` / `BLOCKED_PENDING_SUPPLIER_RESPONSE`** — the
+   candidate path is found but unproven; the gate now waits on ZF and
+   Ford/Lee supplier answers (`SUPPLIER_INQUIRY_ZF_01.md` and
+   `SUPPLIER_INQUIRY_FORD_LEE_STEERING_01.md`, both DRAFT). **Regression
+   watch:** the ZF "CAN control" and "commercial-duty validated" claims
+   RECURRED in batch_24 one batch after correction (re-corrected — RC-83/
+   RC-84); recorded as the second corrected-claim recurrence (after PATS)
+   and a leading M10 regression-scanner use-case.
+4B. **Brake/Steering Validation sub-gate — Gate 04B (owner review_21):**
+   *FMVSS 105 Brake Test Mapping + Loaded Low-Speed Steering Test
+   Procedure.* The next research target. **Owner instruction: the next
+   research is NOT more generic hydroboost** — it is supplier
+   confirmation (ZF/Ford/Lee) plus brake/steering validation testing.
+   FMVSS 105 stays the brake-testing lane but needs a brake engineer /
+   test plan before any compliance claim; the loaded low-speed steering
+   test must exercise max front GAWR at slow speed.
 5. **CAN / Controls / Cluster / Immobilizer Gate (CP#2)** — *(owner
    correction, review_17: NEVER "PATS bypass / override" language —
    that reads as defeating anti-theft).* Scope: **authorized

@@ -173,8 +173,8 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-80 | Medium-duty hydraulic pump candidate: 185 bar (2683 psi) relief, 6.30 GPM, 25 cc/rev, −40…+135 °C (TRW 14-20358-010) *(hydraulic end only)* | CS-52 | spec index — vendor listing | **HydraulicPumpCandidate / NeedsElectricMotorDriveData**; hydraulic capacity looks adequate to *evaluate*, but suitability depends on the electric motor drive, duty cycle, plumbing, reservoir, fluid temp, and Ford requirements (owner: "will not bottleneck/overheat" claim → **NeedsEngineeringReview**) — lanes L9/L10 |
 | RC-81 | **DC-DC / low-voltage load linkage (owner-promoted)**: an EHPS pushing ~2.5–3.25 GPM at >1500 psi needs ~2.0–3.5 kW; on a 12 V system that peaks ≈160–290 A — forcing an upsized 800V→12V DC-DC converter and/or a 12 V ultracap/AGM buffer. *(batch cites "SAE J134 baseline" without a verified quote — the kW/amp figures are estimates, not sourced values)* | derived over RC-79/80 (unverified) | n/a — engineering estimate | **OpenGap / RuleInput** — Gate 04 loops back into the low-voltage architecture (Gate 01/DC-DC); real numbers come from a complete EHPS datasheet + engineering review — lanes L5/L9 |
 | RC-82 | ZF EPHS MPU 100-C hydraulic envelope: **5–12 L/min (1.32–3.17 GPM), 113–124.5 bar (~1639–1806 psi), variable 2500–6000 rpm, −40…+120 °C** *(complete self-contained EHPS motor-pump-unit)* | CS-53 | p.1 technical specs table; quote "Flexible flow rate from 5 to 12 l/min at variable speeds ranging from 2,500 to 6,000 rpm. Operating pressure of 113 to 124.5 bar" (Hunter-supplied, unverified vs PDF → NeedsExactQuote) | **CompleteEHPSCandidate / ModelingFramework** — in the same general hydraulic range as the Ford-style hydroboost target (3.25 GPM / 1750 psi), but its 3.17 GPM ceiling sits **just under** the Ford-style 3.25 GPM and peak simultaneous demand pushes toward relief; **NeedsHydroboostCompatibilityReview** before it can be called suitable — lanes L9/L5 |
-| RC-83 | **ZF control / diagnostics correction (owner defect-catch)**: the ZF factsheet states **"No connection to the CAN bus required"** — the batch's "6000 RPM CAN control" and "DTCs broadcast over CAN" claims are **contradicted by the cited source**. | CS-53 | p.1 (owner-relayed factsheet statement) | **DefectCatch → NeedsSupplierData** — control mode, fault outputs, and diagnostic options are unknown; do NOT request a DBC/CAN map unless a *different* controller variant with CAN diagnostics is confirmed — lanes L9/L8 |
-| RC-84 | **ZF duty classification (owner correction)**: the ZF document describes an **EPHS motorsport steering pump**, not a Class 4/5 commercial-truck hydroboost pump. | CS-53 | factsheet title/positioning | **MotorsportSupplierCandidate / NeedsCommercialDutyReview** — must NOT be labeled "designed for commercial vehicle validation"; commercial-duty high-load survival is unproven — lanes L9/L10 |
+| RC-83 | **ZF control / diagnostics correction (owner defect-catch)**: the ZF factsheet states **"No connection to the CAN bus required"** — the batch's "6000 RPM CAN control" and "DTCs broadcast over CAN" claims are **contradicted by the cited source**. | CS-53 | p.1 (owner-relayed factsheet statement) | **DefectCatch → NeedsSupplierData** — control mode, fault outputs, and diagnostic options are unknown; do NOT request a DBC/CAN map unless a *different* controller variant with CAN diagnostics is confirmed. **RECURRED in batch_24** (re-asserted "CAN control" + a `.dbc` request one batch after the review_20 correction — re-corrected in review_21; leading candidate for the M10 corrected-claim regression scanner) — lanes L9/L8 |
+| RC-84 | **ZF duty classification (owner correction)**: the ZF document describes an **EPHS motorsport steering pump**, not a Class 4/5 commercial-truck hydroboost pump. | CS-53 | factsheet title/positioning | **MotorsportSupplierCandidate / NeedsCommercialDutyReview** — must NOT be labeled "designed for commercial vehicle validation"; commercial-duty high-load survival is unproven. **RECURRED in batch_24** ("Designed for commercial vehicle validation" re-asserted one batch after the review_20 correction — re-corrected in review_21) — lanes L9/L10 |
 | RC-85 | **ZF power/current estimate**: running the MPU near max (≈3.17 GPM @ ~1806 psi ≈ 3.3 kW shaft) implies a large 12 V draw. *(The batch is internally inconsistent — item 1 estimates 90–110 A peak; Part 2 estimates 275–300 A. Both are unsourced.)* | derived over RC-82 (unverified) | n/a — engineering estimate | **EngineeringEstimate / NeedsZFCurrentMap** — actual current depends on pump/motor/controller efficiency, relief behavior, fluid temp, and duty cycle; **the Build Engine must NOT size the DC-DC converter from this estimate alone** (feeds RC-81) — lanes L5/L9 |
 | RC-86 | Ford power-steering **return-line hose** burst-tested >1750 psi, listed for hydroboost/commercial use (≈19,500 lb GVWR) | CS-54 | product description index; quote garbled in batch → **NeedsExactQuote** | **FordProductReference / NeedsFordExactSource** — corroborates the ~1750 psi system-pressure envelope but is a **hose spec, not the OEM pump pressure/flow curve** and not a steering-gear requirement — lanes L10/L4 |
 | RC-87 | **FMVSS 105 test-map scope (owner expansion)**: the brake test plan is **not just stopping distance** — it must map partial-failure behavior, fade/recovery, water recovery, stability/control during braking, parking brake, warning-lamp requirements, and the full test procedures; FMVSS 105 covers hydraulic/electric service + parking brakes on vehicles >3500 kg GVWR. | CS-49 (FMVSS 105 lane, batch_21) | 49 CFR 571.105 — **exact section/paragraph locators still needed** | **RegulatoryCandidate / TestMapInput / NeedsExactSource** — the primary Gate 04 brake-regulation lane; owner-relayed scope, not yet extracted from the regulation text — lanes L2/L8 |
@@ -1726,5 +1726,87 @@ v0.2 of batch_22; label applied verbatim.)
 
 - PATS "bypass/override" language did **not** appear in batch_23
   (Gate 05 roadmap remains clean — second consecutive clean batch).
+- Nothing ingested; nothing marked Confirmed; no compliance claimed;
+  ODRs untouched.
+
+---
+
+## 32. Batch 24 + owner review_21 — Gate 04 v0.4 supplier-inquiry prep + regression catch (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_24_ehps_supplier_inquiry_prep.md`
+and `docs/research/raw/owner_reviews/review_21_batch_24_verdict.md`.
+**Row additions: none — no new sources.** The batch re-cited ZF (CS-53)
+and Lee (CS-51) and prepared two supplier-inquiry packets. Its value to
+the register is (a) a **defect recurrence** the filter must catch and
+(b) two owner-issued **gate-state transitions**.
+
+### Regression caught (owner review_21)
+
+The payload **re-asserted two claims already corrected one batch
+earlier** in review_20:
+
+1. **"Delivers up to 3.17 GPM at 1,805 PSI via 6,000 RPM CAN control"** —
+   the ZF factsheet says **"No connection to the CAN bus required."** The
+   ZF supplier packet in the same payload also again demanded a **`.dbc`
+   CAN database file** (Q9). Both re-corrected: ZF control/fault output
+   details are **NeedsSupplierData**; do not claim CAN control, DBC
+   files, or CAN diagnostics from this factsheet. (RC-83 updated with the
+   recurrence marker.)
+2. **"Designed for commercial vehicle validation"** (duty-cycle field) —
+   ZF is a **motorsport** EPHS pump, not a proven Class 4/5 commercial
+   hydroboost unit. Re-corrected to **MotorsportSupplierCandidate /
+   NeedsCommercialDutyReview**. (RC-84 updated with the recurrence
+   marker.)
+
+This is the **second corrected-claim recurrence pattern** in the project
+(the first was the PATS "bypass" language, batches 20→21). Both are now
+recorded as the leading use-cases for the proposed **M10 forbidden-
+phrase + corrected-claim regression scanner** (owner formalization still
+pending): a mechanical check that flags when a claim the owner has
+already downgraded/corrected reappears in a later batch at its old
+altitude.
+
+Unchanged owner corrections re-affirmed: Lee CS-51 =
+**FordStyleHydroboostPumpReference / SupplierBackground /
+NeedsFordExactSource** (not the final F-450/F-550 value); the
+~2.5–3.3 kW / ~250–300 A figure stays **EngineeringEstimate /
+NeedsZFCurrentMap** — *do not hard-code 250–300 A* until ZF supplies a
+current-vs-pressure map (RC-85); FMVSS 105 stays the brake-testing lane
+but needs a brake engineer / test plan before any compliance claim
+(RC-87).
+
+### Gate-state transitions (owner review_21)
+
+- **Gate 04 status flags set:** `CANDIDATE_EHPS_FOUND`,
+  `FINAL_SELECTION_HALTED`, `BLOCKED_PENDING_SUPPLIER_RESPONSE`. The
+  gate stays at **v0.4** (no version bump this batch); the candidate
+  path is found but unproven, and the gate now formally waits on the ZF
+  and Ford/Lee supplier answers.
+- **New sub-gate opened — Gate 04B:** *FMVSS 105 Brake Test Mapping +
+  Loaded Low-Speed Steering Test Procedure.* This is the **next research
+  target** — owner instruction: **"the next research should not be more
+  generic hydroboost"**; it should be supplier confirmation plus
+  brake/steering validation testing.
+
+### Outreach status
+
+- **ZF packet:** already drafted as
+  `docs/research/outreach/SUPPLIER_INQUIRY_ZF_01.md` (review_20) — the
+  batch's ZF questions mirror it; the one divergence is the batch's Q9
+  DBC demand, which the drafted letter correctly avoids (asks what
+  diagnostic/warning outputs exist given "no CAN required"). No change
+  needed to the ZF draft.
+- **Ford/Lee/steering-specialist packet:** newly drafted as
+  `docs/research/outreach/SUPPLIER_INQUIRY_FORD_LEE_STEERING_01.md`
+  (DRAFT, awaiting owner approval) from the owner's 5-question Ford/Lee
+  template (factory pump flow-vs-RPM + relief, steering-gear flow/
+  pressure demand at max GAWR, hydroboost panic-brake displacement,
+  return-line backpressure limit, accumulator internal volume + N₂
+  pre-charge). Sending remains an owner action.
+
+### Standing checks
+
+- PATS "bypass/override" language did **not** appear in batch_24.
 - Nothing ingested; nothing marked Confirmed; no compliance claimed;
   ODRs untouched.

@@ -5,6 +5,37 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 24 + review_21: Gate 04 v0.4 supplier-inquiry prep + regression catch
+
+- Archived batch_24 (supplier-inquiry prep) and review_21 1:1 (commit
+  `5abd8a8`). **No new sources** — the batch re-cited ZF (CS-53) and
+  Lee (CS-51) and prepared two supplier packets.
+- **Regression caught (owner):** the payload re-asserted two claims
+  already corrected in review_20 — "6000 RPM CAN control" (the ZF
+  factsheet says "No connection to the CAN bus required"; the ZF Q9
+  also again demanded a `.dbc` file) and "Designed for commercial
+  vehicle validation" (ZF is a motorsport pump). Both re-corrected;
+  RC-83 and RC-84 updated with recurrence markers. This is the **second
+  corrected-claim recurrence** in the project (after the PATS "bypass"
+  language, batches 20→21) — recorded as the leading use-case for the
+  proposed M10 corrected-claim regression scanner.
+- Re-affirmed unchanged: Lee = FordStyleHydroboostPumpReference /
+  NeedsFordExactSource; power ~2.5–3.3 kW / ~250–300 A stays
+  EngineeringEstimate / NeedsZFCurrentMap (do NOT hard-code 250–300 A);
+  FMVSS 105 needs a brake-engineer test plan before any compliance claim.
+- **Gate-state transitions (owner):** Gate 04 flags set —
+  `CANDIDATE_EHPS_FOUND` / `FINAL_SELECTION_HALTED` /
+  `BLOCKED_PENDING_SUPPLIER_RESPONSE` (stays v0.4). New sub-gate
+  **Gate 04B = FMVSS 105 brake test mapping + loaded low-speed steering
+  test procedure** — the next research target ("not more generic
+  hydroboost").
+- Outreach: ZF packet already drafted (`SUPPLIER_INQUIRY_ZF_01.md`);
+  new Ford/Lee/steering-specialist packet drafted
+  (`SUPPLIER_INQUIRY_FORD_LEE_STEERING_01.md`, DRAFT). Both await owner
+  approval — sending is an owner action.
+- PATS "bypass" language did not recur. Nothing ingested; nothing
+  Confirmed; ODRs untouched.
+
 ## 2026-07-16 — RH batch 23 + review_20: Brake/Steering Gate v0.4 (complete EHPS candidate)
 
 - Archived batch_23 (complete EHPS candidates) and review_20 1:1
