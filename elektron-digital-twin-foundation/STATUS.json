@@ -1,0 +1,75 @@
+{
+  "$schema": "./schemas/project-status.schema.json",
+  "project": "elektron-digital-twin-foundation",
+  "version": "0.1.0",
+  "updated_at": "2026-07-16T06:35:00Z",
+  "active_layer": "L00",
+  "active_layer_name": "Reference Lock",
+  "phase": "reference_selection",
+  "next_action": "Owner review and approval of L00 provisional reference vehicle lock (DT-D001)",
+  "owner_approval_required": true,
+  "reference_vehicle": {
+    "status": "provisional",
+    "decision_id": "DT-D001",
+    "make": "Ford",
+    "model": "F-450 Super Duty",
+    "model_year": 2019,
+    "cab": "Regular Cab",
+    "drivetrain": "4x2",
+    "wheelbase_in": 141.6,
+    "bed": "8 ft Styleside DRW",
+    "body_upfit": "Stock pickup — no upfit",
+    "stock_engine": "6.7L Power Stroke V8 diesel",
+    "wheels_tires": "19.5 in steel DRW (stock)",
+    "reference_unit": "TBD — shop donor or sourced chassis",
+    "geometry_primary_source": "Ford BBAS BBLB/BEMM + verified OEM dimension tables",
+    "geometry_secondary_source": "Selective LiDAR/photogrammetry of reference unit",
+    "scanning_strategy": "Tiered: OEM envelope first, then targeted scan of engine bay, frame rails, and cab floor",
+    "licensing_notes": "Ford BBAS CAD internal-use only; no public redistribution",
+    "accuracy_tier_mm": {
+      "mounting_interfaces": 2,
+      "powertrain_envelope": 5,
+      "exterior_cosmetic": 10
+    }
+  },
+  "layers": {
+    "L00": {
+      "name": "Reference Lock",
+      "status": "in_progress",
+      "gates": {
+        "visual": "pending",
+        "dimensional": "pending",
+        "structural": "pending",
+        "interaction": "pending",
+        "documentation": "in_progress"
+      }
+    },
+    "L01": { "name": "Exterior", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L02": { "name": "Chassis", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L03": { "name": "OEM Mechanical", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L04": { "name": "Disassembly", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L05": { "name": "Battery", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L06": { "name": "EV Propulsion and Charging", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L07": { "name": "Wiring and Cooling", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L08": { "name": "Workflow and Evidence", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L09": { "name": "Diagnostics and Telemetry", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
+    "L10": { "name": "Spatial Presentation", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } }
+  },
+  "blockers": [
+    {
+      "id": "DT-B001",
+      "summary": "L00 reference vehicle not owner-approved",
+      "unblocks": "Owner approval record for DT-D001 in APPROVAL_GATES.md"
+    },
+    {
+      "id": "DT-B002",
+      "summary": "No physical reference unit identified",
+      "unblocks": "VIN or shop inventory assignment for donor vehicle"
+    },
+    {
+      "id": "DT-B003",
+      "summary": "Ford Super Duty vehicle-specific BBLB not archived",
+      "unblocks": "Obtain via Ford BBAS; mirror per Build Engine CS-10 path"
+    }
+  ]
+}
