@@ -3,9 +3,8 @@
   "registry_name": "EDTS_Coordinate_Transform_Graph_Registry",
   "registry_version": "4.0.0",
   "_supersedes": "registries/TRANSFORM_REGISTRY_V3_PROPOSAL.json",
-  "description": "Versioned coordinate transformation graph with verified nodes and edges. Quaternion for TF-ISO-TO-GLTF-ASSET corrected per TF-FAIL-001.",
+  "description": "Versioned coordinate transformation graph. Quaternion for TF-ISO-TO-GLTF-ASSET corrected per TF-FAIL-001.",
   "quaternion_element_ordering": "WXYZ",
-  "matrix_convention": "row_major",
   "correction_report": "TRANSFORM_QUATERNION_CORRECTION_REPORT.md",
   "test_spec": "verification/specifications/TRANSFORM_TEST_SPEC.md",
   "nodes": [
@@ -33,13 +32,18 @@
   "edges": [
     {
       "edge_id": "TF-ISO-TO-GLTF-ASSET",
+      "inverse_edge_id": "TF-GLTF-ASSET-TO-ISO",
       "version": "2.0.0",
       "from_node": "EDTS_ISO_ALIGNED_VEHICLE_FRAME",
       "to_node": "GLTF_ASSET_FRAME",
+      "input_unit_id": "UNIT-MM",
+      "output_unit_id": "UNIT-M",
       "linear_scale": 0.001,
       "quaternion_wxyz": [-0.5, 0.5, 0.5, 0.5],
-      "quaternion_wxyz_equivalent": [0.5, -0.5, -0.5, -0.5],
+      "quaternion_wxyz_alternate": [0.5, -0.5, -0.5, -0.5],
       "translation": [0.0, 0.0, 0.0],
+      "matrix_storage_order": "row_major",
+      "vector_application_convention": "column_vector",
       "matrix_row_major": [
         [0.0, 0.001, 0.0, 0.0],
         [0.0, 0.0, 0.001, 0.0],
@@ -49,26 +53,30 @@
       "known_failure_corrected": "TF-FAIL-001",
       "validation": {
         "validation_status": "NOT_EXECUTED",
-        "offline_quaternion_matrix_check": "PASS",
         "test_suite_hash": null,
         "validated_by": null
       }
     },
     {
       "edge_id": "TF-GLTF-ASSET-TO-THREE-WORLD",
+      "inverse_edge_id": "TF-THREE-WORLD-TO-GLTF-ASSET",
       "version": "1.0.0",
       "from_node": "GLTF_ASSET_FRAME",
       "to_node": "THREE_WORLD_FRAME",
+      "input_unit_id": "UNIT-M",
+      "output_unit_id": "UNIT-M",
       "linear_scale": 1.0,
       "quaternion_wxyz": [1.0, 0.0, 0.0, 0.0],
       "translation": [0.0, 0.0, 0.0],
+      "matrix_storage_order": "row_major",
+      "vector_application_convention": "column_vector",
       "matrix_row_major": [
         [1.0, 0.0, 0.0, 0.0],
         [0.0, 1.0, 0.0, 0.0],
         [0.0, 0.0, 1.0, 0.0],
         [0.0, 0.0, 0.0, 1.0]
       ],
-      "notes": "Identity. World frame preserves glTF asset coordinates. Camera aiming uses CAMERA_VIEW_PRESET_REGISTRY.",
+      "notes": "Identity. Camera aiming uses CAMERA_VIEW_PRESET_REGISTRY.",
       "validation": {
         "validation_status": "NOT_EXECUTED",
         "test_suite_hash": null,
@@ -77,13 +85,18 @@
     },
     {
       "edge_id": "TF-ISO-TO-UNREAL",
+      "inverse_edge_id": "TF-UNREAL-TO-ISO",
       "version": "1.0.0",
       "from_node": "EDTS_ISO_ALIGNED_VEHICLE_FRAME",
       "to_node": "UNREAL_FRAME",
+      "input_unit_id": "UNIT-MM",
+      "output_unit_id": "UNIT-CM",
       "linear_scale": 0.1,
       "reflection_vector": [1.0, -1.0, 1.0],
       "quaternion_wxyz": [1.0, 0.0, 0.0, 0.0],
       "translation": [0.0, 0.0, 0.0],
+      "matrix_storage_order": "row_major",
+      "vector_application_convention": "column_vector",
       "matrix_row_major": [
         [0.1, 0.0, 0.0, 0.0],
         [0.0, -0.1, 0.0, 0.0],

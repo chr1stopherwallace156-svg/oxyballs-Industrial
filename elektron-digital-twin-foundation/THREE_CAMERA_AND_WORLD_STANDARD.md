@@ -2,25 +2,27 @@
 
 ## Status
 
-**PROPOSAL — Supersedes corrective root-transform approach in THREE_RUNTIME_FRAME_STANDARD_PROPOSAL.md**
+**PROPOSAL**
 
-Decouples physical asset placement from camera presentation so visualization engines do not mutate vehicle coordinates to satisfy a view.
+Decouples physical asset placement from camera presentation. Presets are parametric relative to vehicle bounds, not absolute world coordinates.
 
 ---
 
-## 1. Three Distinct Entities
+## 1. Core Architecture
+
+Three distinct entities:
 
 | Entity | Role |
 |---|---|
-| `THREE_WORLD_FRAME` | Scene spatial organization; preserves loaded glTF asset coordinates |
-| `THREE_CAMERA_LOCAL_FRAME` | Default Three.js camera local axes |
-| `CAMERA_VIEW_PRESET` | Presentation-only camera pose; does not alter asset transforms |
+| `THREE_WORLD_FRAME` | World coordinate system of the WebGL scene; preserves loaded glTF asset coordinates |
+| `THREE_CAMERA_LOCAL_FRAME` | Default Three.js camera local axes (looks along local -Z) |
+| `CAMERA_VIEW_PRESET` | Initial position/target/view settings relative to vehicle bounding box |
 
 ---
 
-## 2. THREE_WORLD_FRAME
+## 2. Frame Specifications
 
-Preserves loaded glTF asset coordinates directly (no unversioned corrective root rotation):
+### THREE_WORLD_FRAME
 
 ```text
 Up Axis:      +Y
@@ -29,37 +31,31 @@ Right Axis:   -X  (Left is +X)
 Linear Units: meters (UNIT-M)
 ```
 
-Asset export remains `TF-ISO-TO-GLTF-ASSET`. World frame equals glTF asset frame at load time.
-
----
-
-## 3. THREE_CAMERA_LOCAL_FRAME
-
-Default Three.js camera local frame:
+### THREE_CAMERA_LOCAL_FRAME
 
 ```text
 Up Axis:      +Y
-Forward Axis: -Z  (looking into the screen)
+Forward Axis: -Z
 Right Axis:   +X
 ```
 
-This describes camera-local axes only. It is not a vehicle transform edge.
-
 ---
 
-## 4. CAMERA_VIEW_PRESET
+## 3. Dynamic Camera Presets
 
-Presentation parameter defining viewport start orientation without altering vehicle spatial transforms.
+Presets are defined relative to vehicle spatial bounds, not absolute static coordinates.
 
-Example: place camera at a positive Z offset looking toward origin `[0, 0, 0]` to face the front of a glTF vehicle without corrective root transforms on the asset.
+| Parameter | Definition |
+|---|---|
+| `target_anchor_id` | `VEHICLE_VISUAL_CENTER` — dynamically calculated bounding-box centroid |
+| `distance_multiplier` | Scale factor applied to bounding sphere radius |
+
+### Plain-Text Distance Rule
+
+```text
+d = 1.25 * r_bounding
+```
+
+**Read in Words:** Camera distance equals one point two five times the bounding sphere radius of the vehicle asset (example multiplier; each preset declares its own).
 
 Presets: `registries/CAMERA_VIEW_PRESET_REGISTRY.json`
-
----
-
-## 5. Deprecated Approach
-
-`TF-ISO-TO-THREE-SCENE` and `THREE_SCENE_FRAME` (V3) applied a corrective root transform to face -Z-forward cameras. That conflated world coordinates with presentation. Prefer:
-
-1. Load assets in `GLTF_ASSET_FRAME` / `THREE_WORLD_FRAME`
-2. Aim cameras via `CAMERA_VIEW_PRESET`

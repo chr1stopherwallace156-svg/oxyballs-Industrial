@@ -4,54 +4,40 @@
 
 **COMPLETE (specification layer) — Runtime execution PENDING**
 
-Addresses prior iteration errors, corrects mathematics, and restores modular data structures without fabricating executed test results.
+Addresses past structural regressions without fabricating executable proof.
 
 ---
 
-## 1. Transform Quaternion Refactoring
+## 1. Transform Quaternion Correction
 
-Resolved axis-mapping error **TF-FAIL-001** by correcting the ISO-to-glTF quaternion from `[0.5, 0.5, 0.5, 0.5]` to `[-0.5, 0.5, 0.5, 0.5]`.
-
-Artifacts:
-
-- `TRANSFORM_QUATERNION_CORRECTION_REPORT.md`
-- `verification/known_failures/TF-FAIL-001_QUATERNION_MATRIX_MISMATCH.md`
-- `registries/TRANSFORM_REGISTRY_V4_PROPOSAL.json`
+Closed historical debug trace `TF-FAIL-001`. Established matrix equivalence using verified quaternion `[-0.5, 0.5, 0.5, 0.5]`. Incorrect derivation archived only in known-failures history.
 
 ---
 
-## 2. Uncoupling Three.js Presentation
+## 2. Dynamic Camera View Preset Restructuring
 
-Split runtime presentation from canonical physical coordinates:
-
-- `THREE_WORLD_FRAME` preserves glTF asset coordinates (identity edge)
-- Camera posing uses `CAMERA_VIEW_PRESET_REGISTRY.json`
-- `THREE_CAMERA_AND_WORLD_STANDARD.md` supersedes corrective root-transform approach
+Replaced absolute viewport coordinates with parametric distance scaling relative to bounding dimensions (`CAMERA_VIEW_PRESET_REGISTRY.json` v1.1.0).
 
 ---
 
-## 3. Restoring Modular Claim Schemas
+## 3. Restoring Claim Types and Value Formats
 
-Restored metadata, provenance, uncertainty, and related properties as modular `$ref` schemas under `schemas/claim/`, rooted at `schemas/CLAIM_SCHEMA_ROOT_V6_PROPOSAL.json`.
-
----
-
-## 4. Restoring Physical Intake Records
-
-Restored field-ingestion detail in `schemas/PHYSICAL_ASSET_INTAKE_SCHEMA_V4_PROPOSAL.json`:
-
-- Instrument calibration and uncertainty
-- Ambient temperature
-- Six DRW tire pressure stages (placard / as-found / adjusted)
+Re-established scalable claim types (`schemas/claim/claim-types.schema.json`) and extended value formats (`schemas/claim/value.schema.json`) via `$ref`.
 
 ---
 
-## 5. Measurement Tolerances as Provisional
+## 4. Conditional Ingestion Schema Rules
 
-Measurement class limits are reclassified as **provisional targets** pending equipment-specific uncertainty budgets (`PROVISIONAL_TARGET_A` through `D` in claim uncertainty schema).
+Structured conditional VIN availability using JSON Schema `oneOf` blocks in intake V4.
 
 ---
 
-## 6. Non-Fabrication Rule
+## 5. Reconstituting Safety Certification Metadata
 
-Transform validation status remains `NOT_EXECUTED` until a real test runner produces results. Offline quaternion-matrix checks are recorded separately and do not constitute runtime certification.
+Re-inserted axle loads, spring codes, and related fields as evidence-bound objects mapped to photo attachments.
+
+---
+
+## 6. SI Base Dimensions
+
+Unit registry V3 Core uses SI base dimensions with **electric current (A)**, not electrical charge as a base dimension. Charge is a derived dimension (`A * s`).

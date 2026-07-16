@@ -3,10 +3,11 @@
 | Field | Value |
 |---|---|
 | Failure ID | TF-FAIL-001 |
-| Status | CORRECTED |
+| Failure Status | CORRECTED_IN_SPECIFICATION |
+| Regression Guard | SPECIFIED |
+| Executable Verification | PENDING |
 | Component | Coordinate Transform Registry |
 | Discovered | 2026-07-16 |
-| Regression guard added | Yes |
 
 ---
 
@@ -15,36 +16,34 @@
 The quaternion `q_wxyz = [0.5, 0.5, 0.5, 0.5]` declared for `TF-ISO-TO-GLTF-ASSET` was mathematically inconsistent with the target rotation matrix:
 
 ```text
-R =
-[ 0, 1, 0 ]
-[ 0, 0, 1 ]
-[ 1, 0, 0 ]
+R = [
+  [0, 1, 0],
+  [0, 0, 1],
+  [1, 0, 0]
+]
 ```
 
-Quaternion-based rotation engines would rotate incorrectly, producing axis orientation errors. The affine matrix itself was already correct.
+### Derivation Error Trace (Archived)
+
+Incorrect candidate assessed during development:
+
+```text
+Assuming w=0.5, x=0.5, y=0.5, z=0.5:
+R_01 = 2*(x*y - w*z) = 2*(0.25 - 0.25) = 0.0
+```
+
+This failed to produce the target element `R_01 = 1.0`, resulting in a cyclic permutation error during transformation.
 
 ---
 
-## 2. Resolution
+## 2. Correction
 
-Corrected quaternion:
+Registry updated to:
 
 ```text
 q_wxyz = [-0.5, 0.5, 0.5, 0.5]
 ```
 
-Equivalent dual:
-
-```text
-q_wxyz = [0.5, -0.5, -0.5, -0.5]
-```
-
-Registered in `registries/TRANSFORM_REGISTRY_V4_PROPOSAL.json` edge version `2.0.0`. Offline quaternion-to-matrix check: PASS. Formal runner: NOT_EXECUTED.
-
----
-
-## 3. Prevention Rule
-
-Every transform added to the registry must pass quaternion-to-matrix equivalence checks within float64 precision limits before registration.
+Manual substitution into the Hamilton quaternion-to-matrix formula produces the target matrix. Executable regression testing remains pending.
 
 See: `TRANSFORM_QUATERNION_CORRECTION_REPORT.md`

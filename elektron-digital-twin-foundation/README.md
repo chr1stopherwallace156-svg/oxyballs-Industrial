@@ -16,8 +16,8 @@ All systems, agents, and engineers must consume the core specification files in 
 1. **[FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md)**  
    Establishes the copyability, structure, and machine-readability rules for all mathematical and tolerance statements.
 
-2. **[registries/UNIT_REGISTRY_V3_COMPLETE_PROPOSAL.json](registries/UNIT_REGISTRY_V3_COMPLETE_PROPOSAL.json)**  
-   Controlled unit vocabulary (SI-aligned canonical bases).
+2. **[registries/UNIT_REGISTRY_V3_CORE_PROPOSAL.json](registries/UNIT_REGISTRY_V3_CORE_PROPOSAL.json)**  
+   Core unit vocabulary (SI bases: length, mass, time, electric current, temperature, amount, luminous intensity).
 
 3. **[registries/COORDINATE_FRAME_REGISTRY.json](registries/COORDINATE_FRAME_REGISTRY.json)**  
    Frames including `GLTF_ASSET_FRAME` and `THREE_WORLD_FRAME`.

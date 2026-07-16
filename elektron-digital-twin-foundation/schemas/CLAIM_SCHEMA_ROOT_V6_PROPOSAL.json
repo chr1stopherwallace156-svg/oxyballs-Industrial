@@ -5,7 +5,7 @@
   "type": "object",
   "properties": {
     "claim_id": { "type": "string", "pattern": "^CLM-[0-9]{5}$" },
-    "claim_type": { "type": "string", "enum": ["DIMENSION", "MASS", "PRESSURE", "CLEARANCE"] },
+    "claim_type": { "$ref": "claim/claim-types.schema.json" },
     "subject_entity_id": { "type": "string" },
     "property_id": { "type": "string" },
     "metadata": { "$ref": "claim/metadata.schema.json" },

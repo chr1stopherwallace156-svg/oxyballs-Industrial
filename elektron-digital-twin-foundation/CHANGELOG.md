@@ -176,3 +176,27 @@ All notable changes to the digital twin foundation. Append-only.
 
 - Readiness: **L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY**
 - Transform validation: **NOT_EXECUTED** (no fabricated passes)
+
+## 2026-07-16 (L00 Spec Freeze + L01 Research Plan)
+
+### Added
+
+- `registries/UNIT_REGISTRY_V3_CORE_PROPOSAL.json` — SI bases with electric current
+- `schemas/claim/claim-types.schema.json` — expanded claim types
+- `layers/L01_RESEARCH_DOSSIER_PLAN.md` — footprint-first research sequence
+- Camera presets v1.1.0 — dynamic bounding-relative parameters
+
+### Changed
+
+- Quaternion report cleaned; debug traces only in known-failures
+- Intake V4 — VIN oneOf + evidence-bound certification fields
+- Claim value schema — multi-format representations
+- Test spec — provisional profile targets (MATH_FLOAT64_STRICT, etc.)
+- **DT-D011** — L00 freeze; L01 research planning authorized
+
+### Status
+
+- Readiness: **L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY**
+- L01 research planning: **AUTHORIZED**
+- L01 geometry: **BLOCKED**
+- Next: footprint/envelope dimensional mappings

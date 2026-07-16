@@ -167,3 +167,21 @@ Append-only record of digital twin foundation decisions.
   - Do not claim runtime transform certification until TRANSFORM_TEST_RESULTS.json shows PASSED
   - Do not use TRANSFORM_REGISTRY_V3 quaternions
   - Prefer camera presets over corrective root transforms for Three.js viewing
+
+## DT-D011 — L00 specification freeze; L01 research planning authorized
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Final L00 specification refinements: clean quaternion report, dynamic camera presets, provisional test profiles, conditional VIN intake, SI base dimensions with electric current.
+- **Decision:**
+  1. L00 specification frozen at readiness `L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY`
+  2. Camera presets v1.1.0 — parametric relative to `VEHICLE_VISUAL_CENTER` / bounding radius
+  3. Unit registry V3 Core — SI bases include electric current (A); charge is derived
+  4. Intake V4 — VIN `oneOf` + evidence-bound certification fields
+  5. Claim types and value formats restored in modular schemas
+  6. L01 research dossier planning authorized; geometry production remains blocked
+  7. First L01 research track: footprint/envelope dimensional mappings before pose landmarks
+- **Consequences:**
+  - Begin `layers/L01_RESEARCH_DOSSIER_PLAN.md` track 1
+  - Do not claim runtime transform certification until tests execute
+  - Do not invent L01 dimensions
