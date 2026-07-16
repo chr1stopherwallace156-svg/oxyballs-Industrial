@@ -710,3 +710,21 @@ Append-only record of digital twin foundation decisions.
   5. DT-D027 shortlist rejection stands; DT-D029 scoring-engine deferral stands
   6. Kernel / component-passport rc1 unchanged; geometry remains `ABSENT`
 
+
+## DT-D043 — Deconstructed sourcing + supplier-first + AJR (Hard Rule 17)
+
+- **Change-control record:** [`decisions/DT-D043_DECONSTRUCTED_SUPPLIER_AJR.json`](decisions/DT-D043_DECONSTRUCTED_SUPPLIER_AJR.json)
+- **decision_id:** `DT-D043`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `CONTINUE_RESEARCH`
+- **protocol_version:** `2.5.0`
+- **scope:** RL-012; `AID-000009/10/11`; AJR-000001/000002; Tier-1 matrix
+- **decision:**
+  1. Adopt **Deconstructed Assembly Sourcing** (assembly hubs; no marketplace vehicle inheritance)
+  2. Authorize **Supplier-First Lane** hunt matrix (not verified evidence)
+  3. AID schema **1.1.0** + optional `score_claims` as RESEARCH_CLAIM only
+  4. **AJR** mandatory before purchase; AJR-000001/000002 **`NOT_CLEARED`** (missing URLs)
+  5. Demote SPECIFICATION_READY / SOURCE_VERIFIED / 0.9x narrative scores without bytes
+  6. Front axle remains `PRIMARY_SOURCE_REQUIRED`; kernel/rc1 unchanged
+

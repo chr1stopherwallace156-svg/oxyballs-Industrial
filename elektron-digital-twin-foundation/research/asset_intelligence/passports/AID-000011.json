@@ -1,0 +1,181 @@
+{
+  "asset_id": "AID-000011",
+  "id_immutable": true,
+  "schema_version": "1.1.0",
+  "authority_status": "RESEARCH_OPERATIONAL",
+  "aliases": [
+    "AID-DOOR-SHELL-01"
+  ],
+  "title": "F-Series Driver Door Shell \u2014 Hum3D F-150 Door Group Extract (claim)",
+  "source": {
+    "platform": "Hum3D",
+    "publisher": null,
+    "url": null,
+    "url_status": "NOT_RECORDED",
+    "marketplace_id": null,
+    "access_condition": "Commercial marketplace claim \u2014 URL required"
+  },
+  "vehicle": {
+    "reported_make": "Ford",
+    "reported_model": "F-150 (crossover extract claim)",
+    "reported_year_range": "unspecified",
+    "reported_body": "Front door outer shell group",
+    "listing_claim_summary": "Polygonal OBJ/FBX outer skin; high visual curvature claim"
+  },
+  "configuration": {
+    "reported_cab": null,
+    "reported_ca_in": null,
+    "reported_wheelbase_in": null,
+    "reported_drivetrain": null,
+    "reported_rear_wheels": null,
+    "notes": "CL-001 CANDIDATE interchange only \u2014 latch/harness/trim separate"
+  },
+  "exact_configuration_match": "COMPARISON_REFERENCE",
+  "match_tri_state": {
+    "value": "conditional",
+    "crossover_validation_requirements": [
+      "CL-001 next verification steps",
+      "Do not import F-150 interior fastener map as F-450 truth"
+    ]
+  },
+  "geometry_types": [
+    "OBJ",
+    "FBX"
+  ],
+  "completeness": {
+    "exterior": "PARTIAL",
+    "interior": "NONE",
+    "mechanical": "NONE",
+    "electrical": "NONE",
+    "hierarchy_quality": "NOT_EVALUATED",
+    "mesh_separation": "LOW",
+    "topology_quality": "NOT_EVALUATED",
+    "evaluation_basis": "LISTING_ONLY"
+  },
+  "usefulness": {
+    "engineering": "LOW",
+    "visual": "HIGH"
+  },
+  "score_claims": {
+    "engineering_usefulness": {
+      "value": 0.65,
+      "status": "RESEARCH_CLAIM",
+      "basis": "Operator sprint \u2014 NOT EVALUATED"
+    },
+    "visual_usefulness": {
+      "value": 0.95,
+      "status": "RESEARCH_CLAIM",
+      "basis": "Operator sprint \u2014 NOT EVALUATED"
+    },
+    "exterior_completeness": {
+      "value": null,
+      "status": "NOT_EXECUTED",
+      "basis": null
+    },
+    "interior_completeness": {
+      "value": 0.0,
+      "status": "RESEARCH_CLAIM",
+      "basis": "Polygonal outer skin \u2014 no cavities"
+    },
+    "mechanical_completeness": {
+      "value": 0.0,
+      "status": "RESEARCH_CLAIM",
+      "basis": null
+    },
+    "electrical_completeness": {
+      "value": 0.0,
+      "status": "RESEARCH_CLAIM",
+      "basis": null
+    }
+  },
+  "license": {
+    "status": "REQUIRES_COUNSEL_REVIEW",
+    "terms_summary": null
+  },
+  "price": {
+    "status": "UNKNOWN",
+    "amount_usd": null,
+    "currency_note": null
+  },
+  "lifecycle": {
+    "discovered": true,
+    "acquired": "NOT_ACQUIRED",
+    "parsed": "NOT_EXECUTED",
+    "verified": "NOT_EXECUTED"
+  },
+  "component_coverage": [
+    {
+      "target": "EDTS-COMP-FL-SHELL / FL3Z-1520125-A",
+      "presence": "CLAIMED"
+    },
+    {
+      "target": "Inner stamping / crash beam",
+      "presence": "ABSENT"
+    },
+    {
+      "target": "Harness / latch",
+      "presence": "ABSENT"
+    }
+  ],
+  "component_coverage_lists": {
+    "present": [
+      "Outer door skin (claimed polygonal)"
+    ],
+    "missing": [
+      "Inner structural CAD",
+      "Wall thickness",
+      "Window track mounts"
+    ]
+  },
+  "known_deficiencies": [
+    "No Hum3D URL",
+    "Polygonal vs NURBS mix with supplier STEP creates pipeline bottlenecks",
+    "Inner door stamping CAD still missing evidence"
+  ],
+  "evidence_links": [
+    {
+      "kind": "RELATED_LISTING",
+      "ref": "AID-000003",
+      "note": "Alternate GrabCAD shell hunt"
+    },
+    {
+      "kind": "CLAIM",
+      "ref": "research/claims/CL-001_DOOR_SHELL_INTERCHANGE.json"
+    },
+    {
+      "kind": "SPRINT",
+      "ref": "research/sprints/RL-012_DECONSTRUCTED_SUPPLIER_SOURCING.md"
+    },
+    {
+      "kind": "ASSEMBLY_HUB",
+      "ref": "FL_DOOR"
+    }
+  ],
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "related_asset_ids": [
+    "AID-000003",
+    "AID-000001"
+  ],
+  "maps_to_src_cand": null,
+  "maps_to_candidate_asset_id": null,
+  "supplier_hub": {
+    "supplier_name": "Ford aluminum stamping (Michigan Assembly Plant \u2014 reported)",
+    "supplier_component_id": "Aluminum door outer skin",
+    "reported_oem_part_number": "FL3Z-1520125-A",
+    "documentation_types_hunt": [
+      "Body repair manual",
+      "Stamping drawings"
+    ],
+    "lane": "LANE_MIXED"
+  },
+  "assembly_hub": "FL_DOOR",
+  "ajr_id": null,
+  "edts_role": "VISUAL_CANDIDATE",
+  "research_sprint": "RL-012",
+  "decision": "DT-D043",
+  "notes": [
+    "CANDIDATE_ACQUISITION_RECOMMENDED remains for door envelope family \u2014 AJR not yet drafted for Hum3D until URL exists."
+  ]
+}

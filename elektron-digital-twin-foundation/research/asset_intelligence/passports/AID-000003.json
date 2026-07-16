@@ -5,7 +5,8 @@
   "authority_status": "RESEARCH_OPERATIONAL",
   "aliases": [
     "EDTS-COMP-CAD-001",
-    "CAND-000043-GRAB"
+    "CAND-000043-GRAB",
+    "related-to:AID-DOOR-SHELL-01"
   ],
   "title": "F-Series Aluminum Door Outer Shell (GrabCAD claim \u2014 2015 F-150 Front Door)",
   "source": {
@@ -98,7 +99,9 @@
   "bound_vehicle_instance_id": "VEH-000001",
   "bound_configuration_id": "CFG-000001",
   "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
-  "related_asset_ids": [],
+  "related_asset_ids": [
+    "AID-000011"
+  ],
   "maps_to_src_cand": null,
   "maps_to_candidate_asset_id": "CAND-000043-GRAB",
   "edts_role": "CAD_CANDIDATE",

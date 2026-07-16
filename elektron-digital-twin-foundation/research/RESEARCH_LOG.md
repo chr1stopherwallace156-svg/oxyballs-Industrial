@@ -264,3 +264,25 @@ DT-D041 — `CANDIDATE_ACQUISITION_RECOMMENDED` (with demoted verification label
 ### Status
 
 DT-D042 — Asset Intelligence DB **ACTIVE**; still `CANDIDATE_ACQUISITION_RECOMMENDED` for bytes.
+
+---
+
+## RL-012 — Deconstructed sourcing, supplier-first, AJR
+
+- **Date:** 2026-07-16
+- **Layer:** acquisition intelligence / chassis + door hubs
+- **Agent:** Cursor Cloud Agent
+- **Question:** Pivot to modular Tier-1 component sourcing with purchase justification?
+
+### Findings
+
+1. **Hard Rule 17 / DT-D043:** Deconstructed Assembly Sourcing + Supplier-First Lane + AJR purchase gate.
+2. Tier-1 matrix recorded as **hunt draft** (Dana, ZF/TRW, Bosch, Denso/BorgWarner) — not verified.
+3. New AIDs: `AID-000009` (M300), `AID-000010` (TAS65), `AID-000011` (Hum3D door) — **no URLs**; narrative SPECIFICATION_READY / 0.9x scores demoted to RESEARCH_CLAIM.
+4. **AJR-000001 / AJR-000002** drafted → **`NOT_CLEARED`** / `CONTINUE_RESEARCH` (URL + uniqueness + engineering-data gates incomplete).
+5. Front axle architecture still **`PRIMARY_SOURCE_REQUIRED`**.
+6. Protocol **v2.5.0**. Geometry remains **`ABSENT`**.
+
+### Status
+
+DT-D043 — **`CONTINUE_RESEARCH`** (AJR blocked until real supplier listing URLs).

@@ -2,7 +2,7 @@
 
 **Status:** `ACTIVE`  
 **Effective Date:** 2026-07-16  
-**Version:** `2.4.0`  
+**Version:** `2.5.0`  
 **Architecture host:** [EDTS_OS.md](EDTS_OS.md) v3.0.0+ (EDTS-OS)  
 **Isolation law:** [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
 **Binding for:** all research, acquisition, geometry development, and software logic operations under `elektron-digital-twin-foundation/`
@@ -12,7 +12,8 @@
 **Changelog from 2.1.1:** Hard Rule 11 — Evidence Acquisition Efficiency (search complete-vehicle **and** component levels; prefer exact complete assets when they exist; never forbid complete-vehicle search).  
 **Changelog from 2.1.2:** **Hard Rule 13** — Research Never Stops at One Source; **Research Confidence (RC)** for SRC-CAND search prioritization (not engineering verification %); immutable **`SRC-CAND-######`** IDs.  
 **Changelog from 2.2.0:** **Hard Rule 15** — Every Major Claim Must Have Its Own Claim Record; vector blueprints are **2D dimensional / profile reference**, never “ground-truth geometry.”  
-**Changelog from 2.3.0:** **Hard Rule 16** — Asset Intelligence Database; every internet asset gets an `AID-*` passport; listing URLs are acquisition **inputs**, not answers.
+**Changelog from 2.3.0:** **Hard Rule 16** — Asset Intelligence Database; every internet asset gets an `AID-*` passport; listing URLs are acquisition **inputs**, not answers.  
+**Changelog from 2.4.0:** **Hard Rule 17** — Deconstructed Assembly Sourcing + Supplier-First Lane + **AJR** purchase gate.
 
 ---
 
@@ -266,6 +267,23 @@ Marketplace finds, CAD listings, scans, and vector blueprints are **inputs into 
 
 **Register:** `research/asset_intelligence/ASSET_INTELLIGENCE_REGISTER.json`
 
+### Hard Rule 17 — Deconstructed Assembly Sourcing, Supplier-First Lane, AJR
+
+1. **Deconstructed Assembly Sourcing:** build the twin from best-documented sub-system assets under assembly hubs (axle, door, steering, …). A complete marketplace vehicle package is never automatic silo truth.
+2. **Supplier-First Lane (`LANE_SUPPLIER`):** hunt Tier-1 supplier manuals, flange drawings, connector schematics, and supplier CAD in parallel with OEM vehicle docs — matrix rows are hunt drafts until hashed.
+3. **Acquisition Justification Report (AJR):** any paid or download-clearance candidate must pass AJR gates:
+   - adds new engineering data?
+   - unique vs existing library?
+   - resolves priority gaps?
+4. Purchase / download clearance requires `purchase_clearance = CLEARED`. Missing URL ⇒ `BLOCKED`.
+5. Optional AID `score_claims` (0–1) remain `RESEARCH_CLAIM` / `LISTING_CLAIM` until local bytes are parsed — they do **not** revive Hard Rule 5 confidence percentages.
+
+**Homes:**  
+`research/sourcing/DECONSTRUCTED_ASSEMBLY_SOURCING.md`  
+`research/sourcing/TIER1_SUPPLIER_MATRIX_2019_F450.json`  
+`research/asset_intelligence/ajr/AJR_REGISTER.json`  
+`schemas/acquisition-justification-report.schema.json`
+
 ### Deferred architecture (do not implement under schema freeze)
 
 These improve long-term rigor but must **not** expand frozen kernel schemas unless a blocking defect from the real geometry workflow requires it (DT-D028):
@@ -352,6 +370,9 @@ Replacement query model for **verified engineering claims**: traverse Evidence G
 | `layers/L01/L1_ASSET_EVALUATION_ASSET-00031.md` | Efficiency-principle asset profile |
 | `layers/L01/L1_LANE_A_ASSET_CATALOG.json` | Lane A marketplace candidate catalog (thin pointers) |
 | `research/asset_intelligence/ASSET_INTELLIGENCE_REGISTER.json` | Hard Rule 16 `AID-*` asset intelligence passports |
+| `research/asset_intelligence/ajr/AJR_REGISTER.json` | Hard Rule 17 Acquisition Justification Reports |
+| `research/sourcing/DECONSTRUCTED_ASSEMBLY_SOURCING.md` | Assembly Orchestrator / deconstructed sourcing model |
+| `research/sourcing/TIER1_SUPPLIER_MATRIX_2019_F450.json` | Tier-1 supplier hunt matrix |
 | `research/src_candidates/SRC_CANDIDATE_REGISTER.json` | Immutable `SRC-CAND-*` register + Next Search Queue |
 | `research/claims/CLAIM_REGISTER.json` | Hard Rule 15 major-claim index |
 | `layers/L01/L1_SOURCE_PACK_01_AUTHENTICITY_AUDIT.md` | Pack verification posture |

@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:edts:schema:asset-intelligence-passport:1.0.0",
+  "$id": "urn:edts:schema:asset-intelligence-passport:1.1.0",
   "title": "EDTS Asset Intelligence Passport (AID)",
-  "description": "Non-kernel research/ops schema. Every discovered internet asset gets a passport. Listing claims ≠ evaluated truth. Completeness uses ordinals — never engineering confidence percentages (Hard Rule 5). Frozen kernel schemas are untouched.",
+  "description": "Non-kernel research/ops schema. Every discovered internet asset gets a passport. Listing claims \u2260 evaluated truth. Completeness ordinals are authoritative for pre-bytes triage (Hard Rule 5). Optional 0\u20131 score_claims are RESEARCH_CLAIM / LISTING_CLAIM only until LOCAL_BYTES_PARSED. Frozen kernel schemas are untouched.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -30,8 +30,17 @@
       "pattern": "^AID-[0-9]{6}$",
       "description": "Immutable Asset Intelligence handle"
     },
-    "id_immutable": { "type": "boolean", "const": true },
-    "schema_version": { "type": "string", "const": "1.0.0" },
+    "id_immutable": {
+      "type": "boolean",
+      "const": true
+    },
+    "schema_version": {
+      "type": "string",
+      "enum": [
+        "1.0.0",
+        "1.1.0"
+      ]
+    },
     "authority_status": {
       "type": "string",
       "enum": [
@@ -42,18 +51,38 @@
     },
     "aliases": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Legacy IDs: EDTS-CAND-*, CAND-*, SRC-CAND-*, ASSET-*"
     },
-    "title": { "type": "string" },
+    "title": {
+      "type": "string"
+    },
     "source": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["platform", "url", "url_status"],
+      "required": [
+        "platform",
+        "url",
+        "url_status"
+      ],
       "properties": {
-        "platform": { "type": "string" },
-        "publisher": { "type": ["string", "null"] },
-        "url": { "type": ["string", "null"] },
+        "platform": {
+          "type": "string"
+        },
+        "publisher": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "url_status": {
           "type": "string",
           "enum": [
@@ -66,31 +95,96 @@
             "BROKEN_OR_UNREACHABLE"
           ]
         },
-        "marketplace_id": { "type": ["string", "null"] },
-        "access_condition": { "type": ["string", "null"] }
+        "marketplace_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "access_condition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
     "vehicle": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "reported_make": { "type": ["string", "null"] },
-        "reported_model": { "type": ["string", "null"] },
-        "reported_year_range": { "type": ["string", "null"] },
-        "reported_body": { "type": ["string", "null"] },
-        "listing_claim_summary": { "type": ["string", "null"] }
+        "reported_make": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reported_model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reported_year_range": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reported_body": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "listing_claim_summary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
     "configuration": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "reported_cab": { "type": ["string", "null"] },
-        "reported_ca_in": { "type": ["number", "null"] },
-        "reported_wheelbase_in": { "type": ["number", "null"] },
-        "reported_drivetrain": { "type": ["string", "null"] },
-        "reported_rear_wheels": { "type": ["string", "null"] },
-        "notes": { "type": ["string", "null"] }
+        "reported_cab": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reported_ca_in": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "reported_wheelbase_in": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "reported_drivetrain": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reported_rear_wheels": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
     "exact_configuration_match": {
@@ -105,7 +199,7 @@
         "COMPARISON_REFERENCE",
         "CONFIGURATION_MATCHED"
       ],
-      "description": "CONFIGURATION_MATCHED only after Hard Rule 4 + HR-EVI — never from listing title alone"
+      "description": "CONFIGURATION_MATCHED only after Hard Rule 4 + HR-EVI \u2014 never from listing title alone"
     },
     "geometry_types": {
       "type": "array",
@@ -149,13 +243,27 @@
         "evaluation_basis"
       ],
       "properties": {
-        "exterior": { "$ref": "#/$defs/ordinal" },
-        "interior": { "$ref": "#/$defs/ordinal" },
-        "mechanical": { "$ref": "#/$defs/ordinal" },
-        "electrical": { "$ref": "#/$defs/ordinal" },
-        "hierarchy_quality": { "$ref": "#/$defs/ordinal" },
-        "mesh_separation": { "$ref": "#/$defs/ordinal" },
-        "topology_quality": { "$ref": "#/$defs/ordinal" },
+        "exterior": {
+          "$ref": "#/$defs/ordinal"
+        },
+        "interior": {
+          "$ref": "#/$defs/ordinal"
+        },
+        "mechanical": {
+          "$ref": "#/$defs/ordinal"
+        },
+        "electrical": {
+          "$ref": "#/$defs/ordinal"
+        },
+        "hierarchy_quality": {
+          "$ref": "#/$defs/ordinal"
+        },
+        "mesh_separation": {
+          "$ref": "#/$defs/ordinal"
+        },
+        "topology_quality": {
+          "$ref": "#/$defs/ordinal"
+        },
         "evaluation_basis": {
           "type": "string",
           "enum": [
@@ -170,16 +278,25 @@
     "usefulness": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["engineering", "visual"],
+      "required": [
+        "engineering",
+        "visual"
+      ],
       "properties": {
-        "engineering": { "$ref": "#/$defs/ordinal" },
-        "visual": { "$ref": "#/$defs/ordinal" }
+        "engineering": {
+          "$ref": "#/$defs/ordinal"
+        },
+        "visual": {
+          "$ref": "#/$defs/ordinal"
+        }
       }
     },
     "license": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["status"],
+      "required": [
+        "status"
+      ],
       "properties": {
         "status": {
           "type": "string",
@@ -193,35 +310,74 @@
             "REJECTED"
           ]
         },
-        "terms_summary": { "type": ["string", "null"] }
+        "terms_summary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
     "price": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["status"],
+      "required": [
+        "status"
+      ],
       "properties": {
         "status": {
           "type": "string",
-          "enum": ["UNKNOWN", "FREE_CLAIMED", "PAID", "NOT_APPLICABLE"]
+          "enum": [
+            "UNKNOWN",
+            "FREE_CLAIMED",
+            "PAID",
+            "NOT_APPLICABLE"
+          ]
         },
-        "amount_usd": { "type": ["number", "null"] },
-        "currency_note": { "type": ["string", "null"] }
+        "amount_usd": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "currency_note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
     "lifecycle": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["discovered", "acquired", "parsed", "verified"],
+      "required": [
+        "discovered",
+        "acquired",
+        "parsed",
+        "verified"
+      ],
       "properties": {
-        "discovered": { "type": "boolean" },
+        "discovered": {
+          "type": "boolean"
+        },
         "acquired": {
           "type": "string",
-          "enum": ["NOT_ACQUIRED", "ACQUIRED", "QUARANTINED", "REJECTED"]
+          "enum": [
+            "NOT_ACQUIRED",
+            "ACQUIRED",
+            "QUARANTINED",
+            "REJECTED"
+          ]
         },
         "parsed": {
           "type": "string",
-          "enum": ["NOT_EXECUTED", "PARTIAL", "COMPLETE", "FAILED"]
+          "enum": [
+            "NOT_EXECUTED",
+            "PARTIAL",
+            "COMPLETE",
+            "FAILED"
+          ]
         },
         "verified": {
           "type": "string",
@@ -240,9 +396,14 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["target", "presence"],
+        "required": [
+          "target",
+          "presence"
+        ],
         "properties": {
-          "target": { "type": "string" },
+          "target": {
+            "type": "string"
+          },
           "presence": {
             "type": "string",
             "enum": [
@@ -255,67 +416,422 @@
               "VERIFIED_PRESENT"
             ]
           },
-          "notes": { "type": ["string", "null"] }
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
         }
       }
     },
     "known_deficiencies": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "evidence_links": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["kind", "ref"],
+        "required": [
+          "kind",
+          "ref"
+        ],
         "properties": {
           "kind": {
             "type": "string",
             "enum": [
-              "LISTING_URL",
-              "SRC_CAND",
-              "LANE_A_CATALOG",
+              "AJR",
+              "ASSEMBLY_HUB",
               "CLAIM",
-              "SPRINT",
+              "COMPONENT_PASSPORT",
               "EVALUATION",
+              "LANE_A_CATALOG",
+              "LISTING_URL",
               "LOCAL_BYTES",
+              "OTHER",
               "RELATED_LISTING",
-              "OTHER"
+              "SPRINT",
+              "SRC_CAND",
+              "SUPPLIER_DOC"
             ]
           },
-          "ref": { "type": "string" },
-          "note": { "type": ["string", "null"] }
+          "ref": {
+            "type": "string"
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
         }
       }
     },
-    "bound_vehicle_instance_id": { "type": "string" },
-    "bound_configuration_id": { "type": "string" },
-    "configuration_fingerprint": { "type": ["string", "null"] },
+    "bound_vehicle_instance_id": {
+      "type": "string"
+    },
+    "bound_configuration_id": {
+      "type": "string"
+    },
+    "configuration_fingerprint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "related_asset_ids": {
       "type": "array",
-      "items": { "type": "string", "pattern": "^AID-[0-9]{6}$" }
+      "items": {
+        "type": "string",
+        "pattern": "^AID-[0-9]{6}$"
+      }
     },
-    "maps_to_src_cand": { "type": ["string", "null"] },
-    "maps_to_candidate_asset_id": { "type": ["string", "null"] },
+    "maps_to_src_cand": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "maps_to_candidate_asset_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "edts_role": {
       "type": "string",
       "enum": [
         "ACQUISITION_INPUT",
-        "PROFILE_REFERENCE",
-        "VISUAL_CANDIDATE",
+        "ASSEMBLY_HUB_INPUT",
         "CAD_CANDIDATE",
         "COMPARISON_REFERENCE",
+        "PROFILE_REFERENCE",
         "REJECTED_INPUT",
-        "UNKNOWN"
+        "SUPPLIER_CAD_CANDIDATE",
+        "UNKNOWN",
+        "VISUAL_CANDIDATE"
       ],
-      "description": "How EDTS should treat this asset — never 'the answer' until verified"
+      "description": "How EDTS should treat this asset \u2014 never 'the answer' until verified"
     },
-    "research_sprint": { "type": ["string", "null"] },
-    "decision": { "type": ["string", "null"] },
+    "research_sprint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "decision": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "notes": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
+    },
+    "score_claims": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional 0\u20131 claims from research narrative/listings \u2014 NOT Hard Rule 5 engineering confidence; not EVALUATED without bytes",
+      "properties": {
+        "exterior_completeness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status"
+          ],
+          "properties": {
+            "value": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "NOT_EXECUTED",
+                "RESEARCH_CLAIM",
+                "LISTING_CLAIM",
+                "EVALUATED",
+                "REJECTED"
+              ]
+            },
+            "basis": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "interior_completeness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status"
+          ],
+          "properties": {
+            "value": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "NOT_EXECUTED",
+                "RESEARCH_CLAIM",
+                "LISTING_CLAIM",
+                "EVALUATED",
+                "REJECTED"
+              ]
+            },
+            "basis": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "mechanical_completeness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status"
+          ],
+          "properties": {
+            "value": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "NOT_EXECUTED",
+                "RESEARCH_CLAIM",
+                "LISTING_CLAIM",
+                "EVALUATED",
+                "REJECTED"
+              ]
+            },
+            "basis": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "electrical_completeness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status"
+          ],
+          "properties": {
+            "value": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "NOT_EXECUTED",
+                "RESEARCH_CLAIM",
+                "LISTING_CLAIM",
+                "EVALUATED",
+                "REJECTED"
+              ]
+            },
+            "basis": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "engineering_usefulness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status"
+          ],
+          "properties": {
+            "value": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "NOT_EXECUTED",
+                "RESEARCH_CLAIM",
+                "LISTING_CLAIM",
+                "EVALUATED",
+                "REJECTED"
+              ]
+            },
+            "basis": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "visual_usefulness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status"
+          ],
+          "properties": {
+            "value": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 1
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "NOT_EXECUTED",
+                "RESEARCH_CLAIM",
+                "LISTING_CLAIM",
+                "EVALUATED",
+                "REJECTED"
+              ]
+            },
+            "basis": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "supplier_hub": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "supplier_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "supplier_component_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reported_oem_part_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "documentation_types_hunt": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lane": {
+          "type": "string",
+          "enum": [
+            "LANE_SUPPLIER",
+            "LANE_OEM",
+            "LANE_MARKETPLACE",
+            "LANE_MIXED"
+          ]
+        }
+      }
+    },
+    "assembly_hub": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Logical assembly hub under deconstructed sourcing (e.g. REAR_AXLE, FL_DOOR, STEERING)"
+    },
+    "ajr_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^AJR-[0-9]{6}$"
+    },
+    "match_tri_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Operator-facing true|false|conditional mapping onto exact_configuration_match enum",
+      "properties": {
+        "value": {
+          "type": "string",
+          "enum": [
+            "true",
+            "false",
+            "conditional",
+            "unknown"
+          ]
+        },
+        "crossover_validation_requirements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "component_coverage_lists": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "present": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "missing": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "$defs": {
@@ -329,7 +845,7 @@
         "PARTIAL",
         "HIGH"
       ],
-      "description": "Qualitative ordinal only — not a confidence percentage (Hard Rule 5)"
+      "description": "Qualitative ordinal only \u2014 not a confidence percentage (Hard Rule 5)"
     }
   }
 }

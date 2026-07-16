@@ -1,15 +1,15 @@
 {
   "document_id": "ASSET_INTELLIGENCE_REGISTER",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "ACTIVE",
   "schema": "schemas/asset-intelligence-passport.schema.json",
   "home": "research/asset_intelligence/",
-  "decision": "DT-D042",
-  "research_sprint": "RL-011",
+  "decision": "DT-D043",
+  "research_sprint": "RL-012",
   "id_policy": {
     "pattern": "AID-######",
     "immutable_handle": true,
-    "next_id": "AID-000009"
+    "next_id": "AID-000012"
   },
   "locked_configuration": {
     "vehicle_instance_id": "VEH-000001",
@@ -18,8 +18,8 @@
     "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943"
   },
   "relationship_to_dt_d027": "DT-D027 rejected redundant shortlist files (L1_ASSET_CANDIDATE_DATABASE.json et al.). AID is a different artifact: structured per-asset intelligence passports. Lane A catalog remains the thin marketplace pointer register.",
-  "relationship_to_scoring": "AID uses qualitative ordinals + evaluation_basis. It is NOT an activated multi-axis scoring engine (DT-D029 deferral stands). EAE rubric scoring remains NOT_AUTHORIZED_UNTIL_ACQUIRED / NOT_EXECUTED.",
-  "posture": "URLS_AND_LISTINGS_ARE_ACQUISITION_INPUTS_NOT_ANSWERS",
+  "relationship_to_scoring": "Ordinals remain primary pre-bytes triage. Optional score_claims (0\u20131) are RESEARCH_CLAIM/LISTING_CLAIM only. EVALUATED scores require local bytes. Numeric EAE rubric engines remain NOT_AUTHORIZED_UNTIL_ACQUIRED (DT-D029).",
+  "posture": "DECONSTRUCTED_SOURCING_AJR_GATED_INPUTS_NOT_ANSWERS",
   "assets": [
     {
       "asset_id": "AID-000001",
@@ -123,13 +123,58 @@
         "OUTLINES-30639"
       ],
       "url_status": "INCOMPLETE_SLUG_DO_NOT_INVENT"
+    },
+    {
+      "asset_id": "AID-000009",
+      "path": "research/asset_intelligence/passports/AID-000009.json",
+      "title": "Spicer M300 DRW Rear Axle Assembly CAD (supplier-channel claim)",
+      "edts_role": "SUPPLIER_CAD_CANDIDATE",
+      "exact_configuration_match": "UNKNOWN",
+      "acquired": "NOT_ACQUIRED",
+      "aliases": [
+        "AID-AXLE-M300-01",
+        "CMP-AXL-M300-CAND"
+      ],
+      "url_status": "NOT_RECORDED",
+      "ajr_id": "AJR-000001",
+      "assembly_hub": "REAR_AXLE"
+    },
+    {
+      "asset_id": "AID-000010",
+      "path": "research/asset_intelligence/passports/AID-000010.json",
+      "title": "ZF TRW TAS65 Hydraulic Steering Gearbox (catalog claim)",
+      "edts_role": "SUPPLIER_CAD_CANDIDATE",
+      "exact_configuration_match": "UNKNOWN",
+      "acquired": "NOT_ACQUIRED",
+      "aliases": [
+        "AID-STEER-GEAR-03"
+      ],
+      "url_status": "NOT_RECORDED",
+      "ajr_id": "AJR-000002",
+      "assembly_hub": "STEERING"
+    },
+    {
+      "asset_id": "AID-000011",
+      "path": "research/asset_intelligence/passports/AID-000011.json",
+      "title": "F-Series Driver Door Shell \u2014 Hum3D F-150 Door Group Extract (claim)",
+      "edts_role": "VISUAL_CANDIDATE",
+      "exact_configuration_match": "COMPARISON_REFERENCE",
+      "acquired": "NOT_ACQUIRED",
+      "aliases": [
+        "AID-DOOR-SHELL-01"
+      ],
+      "url_status": "NOT_RECORDED",
+      "ajr_id": null,
+      "assembly_hub": "FL_DOOR"
     }
   ],
   "acquisition_priority_suggested": [
     "AID-000001",
+    "AID-000009",
+    "AID-000010",
     "AID-000003",
-    "AID-000002",
-    "AID-000004"
+    "AID-000011",
+    "AID-000002"
   ],
   "alias_map": {
     "EDTS-CAND-001": "AID-000001",
@@ -142,11 +187,18 @@
     "CAND-000044-TS": "AID-000004",
     "ASSET-00031": "AID-000005",
     "CAND-00031-CGT": "AID-000005",
-    "CAND-771-GRAB": "AID-000006"
+    "CAND-771-GRAB": "AID-000006",
+    "AID-AXLE-M300-01": "AID-000009",
+    "AID-STEER-GEAR-03": "AID-000010",
+    "AID-DOOR-SHELL-01": "AID-000011"
   },
   "notes": [
     "Every new internet asset discovery should create or update an AID-* passport.",
     "Promote listing claims to evaluated ordinals only after local parse.",
-    "Never set exact_configuration_match=CONFIGURATION_MATCHED from a marketplace title alone."
-  ]
+    "Never set exact_configuration_match=CONFIGURATION_MATCHED from a marketplace title alone.",
+    "RL-012 / DT-D043: supplier hub candidates added; AJR required before purchase; score_claims are not EVALUATED."
+  ],
+  "ajr_register": "research/asset_intelligence/ajr/AJR_REGISTER.json",
+  "sourcing_model": "research/sourcing/DECONSTRUCTED_ASSEMBLY_SOURCING.md",
+  "supplier_matrix": "research/sourcing/TIER1_SUPPLIER_MATRIX_2019_F450.json"
 }

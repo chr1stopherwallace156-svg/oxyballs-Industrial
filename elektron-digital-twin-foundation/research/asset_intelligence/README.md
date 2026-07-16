@@ -31,9 +31,10 @@ AID is the intelligence layer that makes acquisition decisions machine-readable:
 
 ## Hard rules
 
-- **Hard Rule 5:** Completeness fields are ordinals (`NONE`/`LOW`/`PARTIAL`/`HIGH`/`NOT_EVALUATED`) — never engineering confidence %.
+- **Hard Rule 5:** Completeness fields are ordinals (`NONE`/`LOW`/`PARTIAL`/`HIGH`/`NOT_EVALUATED`) — never engineering confidence %. Optional `score_claims` (0–1) are `RESEARCH_CLAIM` / `LISTING_CLAIM` only until bytes.
 - **Hard Rule 6:** No invented URLs or hashes.
 - **Hard Rule 14:** Vector blueprints = `PROFILE_REFERENCE` only.
+- **Hard Rule 17:** Deconstructed sourcing + supplier-first + **AJR** before purchase (`ajr/`).
 - **HR-EVI:** Listing similarity ≠ `CONFIGURATION_MATCHED`.
 - **Listing ≠ evaluated:** `completeness.evaluation_basis: LISTING_ONLY` until local bytes are parsed.
 

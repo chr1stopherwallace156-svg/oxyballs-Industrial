@@ -1,0 +1,102 @@
+{
+  "document_id": "TIER1_SUPPLIER_MATRIX_2019_F450",
+  "version": "1.0.0",
+  "status": "RESEARCH_DRAFT_HUNT_TARGETS",
+  "authority_status": "NOT_LOCALLY_VERIFIED",
+  "decision": "DT-D043",
+  "research_sprint": "RL-012",
+  "locked_configuration": {
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_id": "CFG-000001",
+    "summary": "2019 Ford F-450 Chassis Cab Regular Cab 4x2 DRW 145.3 WB / 60 CA"
+  },
+  "honesty_gate": [
+    "Supplier names and doc types are hunt targets from operator sprint — not VERIFIED_EVIDENCE.",
+    "Front axle architecture remains RESEARCH_REQUIRED / PRIMARY_SOURCE_REQUIRED (DT-D037) — monobeam 4x2/4x4 variants must not be assumed.",
+    "No invented supplier portal URLs (Hard Rule 6)."
+  ],
+  "rows": [
+    {
+      "assembly_hub": "REAR_AXLE",
+      "component": "Dana M300 Rear Axle Assembly",
+      "primary_tier1_supplier_claim": "Dana Spicer",
+      "documentation_types_hunt": [
+        "Spicer service manuals",
+        "Flange drawings",
+        "Gear-backlash tolerances"
+      ],
+      "related_aid": ["AID-000009"],
+      "related_component": "CMP-AXL-M300",
+      "project_status": "DISCOVERED_HUNT"
+    },
+    {
+      "assembly_hub": "FRONT_AXLE",
+      "component": "Monobeam Front Axle (4x2 / 4x4 variants)",
+      "primary_tier1_supplier_claim": "Dana Spicer",
+      "documentation_types_hunt": [
+        "Knuckle assemblies",
+        "Hub oil seal cross-references"
+      ],
+      "related_aid": [],
+      "project_status": "PRIMARY_SOURCE_REQUIRED",
+      "notes": "Do not decide 4x2 topology from this matrix alone (DT-D037)."
+    },
+    {
+      "assembly_hub": "BRAKING",
+      "component": "Hydraulic ABS Modulator / Calipers",
+      "primary_tier1_supplier_claim": "Bosch / Bendix",
+      "documentation_types_hunt": [
+        "Hydraulic schematics",
+        "CAN-bus protocol registers"
+      ],
+      "related_aid": [],
+      "project_status": "RESEARCH_REQUIRED"
+    },
+    {
+      "assembly_hub": "STEERING",
+      "component": "Gearbox, Pitman Arm, Tie Rods",
+      "primary_tier1_supplier_claim": "ZF / TRW",
+      "documentation_types_hunt": [
+        "Fluid pressure profiles",
+        "Sector-shaft spline configurations"
+      ],
+      "related_aid": ["AID-000010"],
+      "project_status": "DISCOVERED_HUNT"
+    },
+    {
+      "assembly_hub": "FUEL",
+      "component": "High-Pressure Pump & Injectors (6.7L Diesel)",
+      "primary_tier1_supplier_claim": "Bosch",
+      "documentation_types_hunt": [
+        "CP4.2 pump exploded views",
+        "Connector pinouts",
+        "Seal tolerances"
+      ],
+      "related_aid": [],
+      "project_status": "RESEARCH_REQUIRED"
+    },
+    {
+      "assembly_hub": "HVAC_THERMAL",
+      "component": "Engine Fan Clutch & A/C Compressor",
+      "primary_tier1_supplier_claim": "Denso / BorgWarner",
+      "documentation_types_hunt": [
+        "PWM signal logic controls",
+        "Mounting pattern CAD"
+      ],
+      "related_aid": [],
+      "project_status": "RESEARCH_REQUIRED"
+    },
+    {
+      "assembly_hub": "FL_DOOR",
+      "component": "Front-Left Aluminum Door Shell + internals",
+      "primary_tier1_supplier_claim": "Ford stamping / mixed OEM",
+      "documentation_types_hunt": [
+        "Body repair manual",
+        "Parts catalog",
+        "EWD"
+      ],
+      "related_aid": ["AID-000001", "AID-000003", "AID-000011"],
+      "project_status": "CANDIDATE_ACQUISITION_RECOMMENDED"
+    }
+  ]
+}

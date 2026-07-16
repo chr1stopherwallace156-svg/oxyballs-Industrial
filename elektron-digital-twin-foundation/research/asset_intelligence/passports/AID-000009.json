@@ -1,0 +1,178 @@
+{
+  "asset_id": "AID-000009",
+  "id_immutable": true,
+  "schema_version": "1.1.0",
+  "authority_status": "RESEARCH_OPERATIONAL",
+  "aliases": [
+    "AID-AXLE-M300-01",
+    "CMP-AXL-M300-CAND"
+  ],
+  "title": "Spicer M300 DRW Rear Axle Assembly CAD (supplier-channel claim)",
+  "source": {
+    "platform": "GrabCAD / Dana Component Engineering Shared Models (reported)",
+    "publisher": "Dana Spicer (claimed channel \u2014 not locally verified)",
+    "url": null,
+    "url_status": "NOT_RECORDED",
+    "marketplace_id": null,
+    "access_condition": "Reported free / public-domain claim \u2014 listing URL required (Hard Rule 6)"
+  },
+  "vehicle": {
+    "reported_make": "Ford",
+    "reported_model": "F-450 / Super Duty DRW class",
+    "reported_year_range": "2019-class claim",
+    "reported_body": "Rear axle assembly",
+    "listing_claim_summary": "Dana M300 DRW axle STEP with mechanical tolerances (operator sprint claim)"
+  },
+  "configuration": {
+    "reported_cab": null,
+    "reported_ca_in": null,
+    "reported_wheelbase_in": null,
+    "reported_drivetrain": "4X2 (rear drive axle \u2014 drivetrain-agnostic housing claim)",
+    "reported_rear_wheels": "DRW",
+    "notes": "Must VIN/parts-filter to 2019 Chassis Cab DRW before CONFIGURATION_MATCHED"
+  },
+  "exact_configuration_match": "UNKNOWN",
+  "match_tri_state": {
+    "value": "conditional",
+    "crossover_validation_requirements": [
+      "Local Dana/Spicer service page or STEP hash",
+      "Confirm HC3Z-4010-A (or proven interchange) for CFG-000001",
+      "Reject 4x4-only housing variants without proof"
+    ]
+  },
+  "geometry_types": [
+    "STEP"
+  ],
+  "completeness": {
+    "exterior": "PARTIAL",
+    "interior": "NOT_EVALUATED",
+    "mechanical": "PARTIAL",
+    "electrical": "NONE",
+    "hierarchy_quality": "NOT_EVALUATED",
+    "mesh_separation": "NOT_EVALUATED",
+    "topology_quality": "NOT_EVALUATED",
+    "evaluation_basis": "LISTING_ONLY"
+  },
+  "usefulness": {
+    "engineering": "PARTIAL",
+    "visual": "LOW"
+  },
+  "score_claims": {
+    "engineering_usefulness": {
+      "value": 0.95,
+      "status": "RESEARCH_CLAIM",
+      "basis": "Operator sprint narrative \u2014 NOT EVALUATED"
+    },
+    "visual_usefulness": {
+      "value": 0.7,
+      "status": "RESEARCH_CLAIM",
+      "basis": "Operator sprint narrative \u2014 NOT EVALUATED"
+    },
+    "mechanical_completeness": {
+      "value": null,
+      "status": "NOT_EXECUTED",
+      "basis": "No local STEP bytes"
+    },
+    "exterior_completeness": {
+      "value": null,
+      "status": "NOT_EXECUTED",
+      "basis": null
+    },
+    "interior_completeness": {
+      "value": null,
+      "status": "NOT_EXECUTED",
+      "basis": null
+    },
+    "electrical_completeness": {
+      "value": 0.0,
+      "status": "RESEARCH_CLAIM",
+      "basis": "Axle CAD typically non-electrical"
+    }
+  },
+  "license": {
+    "status": "UNKNOWN",
+    "terms_summary": "Public Domain claim unverified"
+  },
+  "price": {
+    "status": "FREE_CLAIMED",
+    "amount_usd": 0.0,
+    "currency_note": "Reported \u2014 confirm on listing"
+  },
+  "lifecycle": {
+    "discovered": true,
+    "acquired": "NOT_ACQUIRED",
+    "parsed": "NOT_EXECUTED",
+    "verified": "NOT_EXECUTED"
+  },
+  "component_coverage": [
+    {
+      "target": "CMP-AXL-M300",
+      "presence": "CLAIMED",
+      "notes": "OS draft passport DRAFT_CANDIDATE"
+    },
+    {
+      "target": "Differential housing HC3Z-4010-A",
+      "presence": "CLAIMED",
+      "notes": "OEM PN research claim"
+    }
+  ],
+  "component_coverage_lists": {
+    "present": [
+      "CMP-AXL-M300 (claimed)"
+    ],
+    "missing": [
+      "Local STEP bytes",
+      "Hashed Spicer flange drawings",
+      "Verified gear-backlash pages"
+    ]
+  },
+  "known_deficiencies": [
+    "No GrabCAD/Dana listing URL recorded \u2014 SPECIFICATION_READY / SOURCE_VERIFIED rejected",
+    "Narrative engineering score 0.95 is RESEARCH_CLAIM only",
+    "Polygonal vs NURBS pipeline risk when mixed with door meshes"
+  ],
+  "evidence_links": [
+    {
+      "kind": "COMPONENT_PASSPORT",
+      "ref": "components/CMP_AXL_M300.json"
+    },
+    {
+      "kind": "AJR",
+      "ref": "research/asset_intelligence/ajr/AJR-000001.json"
+    },
+    {
+      "kind": "SPRINT",
+      "ref": "research/sprints/RL-012_DECONSTRUCTED_SUPPLIER_SOURCING.md"
+    },
+    {
+      "kind": "ASSEMBLY_HUB",
+      "ref": "REAR_AXLE"
+    }
+  ],
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "related_asset_ids": [],
+  "maps_to_src_cand": null,
+  "maps_to_candidate_asset_id": null,
+  "supplier_hub": {
+    "supplier_name": "Dana Spicer",
+    "supplier_component_id": "M300 Dual Rear Wheel (DRW) Axle",
+    "reported_oem_part_number": "HC3Z-4010-A",
+    "documentation_types_hunt": [
+      "Spicer service manuals",
+      "Flange drawings",
+      "Gear-backlash tolerances"
+    ],
+    "lane": "LANE_SUPPLIER"
+  },
+  "assembly_hub": "REAR_AXLE",
+  "ajr_id": "AJR-000001",
+  "edts_role": "SUPPLIER_CAD_CANDIDATE",
+  "research_sprint": "RL-012",
+  "decision": "DT-D043",
+  "notes": [
+    "Operator status SPECIFICATION_READY / SOURCE_VERIFIED demoted to DISCOVERED / NOT_ACQUIRED.",
+    "AJR required before download clearance."
+  ]
+}

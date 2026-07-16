@@ -5,18 +5,20 @@
 
 | Concern | Status |
 |---|---|
-| Research protocol | **v2.4.0** — Hard Rules **13–16** ACTIVE |
-| **Asset Intelligence DB** | **ACTIVE** (`AID-*` passports) |
-| URLs / listings | **Acquisition inputs** — not silo answers |
-| Vector blueprints | **`PROFILE_REFERENCE`** — never ground-truth geometry |
-| FL door decision | `CANDIDATE_ACQUISITION_RECOMMENDED` |
-| Acquire order | **1)** `AID-000001` profile ref → **2)** `AID-000003` shell CAD (needs URL) → **3)** optional `AID-000002` visual → physical scan |
-| AID-000002 SKU | `URL_FETCH_CONFIRMED` (not acquired) |
-| CL-001 | **`CANDIDATE`** |
+| Research protocol | **v2.5.0** — Hard Rules **13–17** ACTIVE |
+| Sourcing model | **Deconstructed Assembly Sourcing** (not complete-vehicle inheritance) |
+| Supplier-First Lane | **ACTIVE_HUNT** (matrix = draft, not verified) |
+| Asset Intelligence DB | **ACTIVE** (schema 1.1.0) |
+| AJR purchase gate | **ACTIVE** — AJR-000001/000002 **`NOT_CLEARED`** |
+| Recommended decision | **`CONTINUE_RESEARCH`** |
+| AID-000009 (M300) | DISCOVERED — URL missing |
+| AID-000010 (TAS65) | DISCOVERED — URL missing |
+| AID-000011 (Hum3D door) | DISCOVERED — URL missing |
+| FL door / profile ref | Still acquire `AID-000001` in parallel |
+| Front axle architecture | `PRIMARY_SOURCE_REQUIRED` |
 | Passport geometry | `ABSENT` |
-| EAE CORE INGESTION | `VALIDATED` |
-| Numeric asset scoring | Still `NOT_AUTHORIZED_UNTIL_ACQUIRED` |
+| Kernel / rc1 | Unchanged |
 
 ## Change-control
 
-- `decisions/DT-D030_*.json` … `DT-D042_*.json`
+- `decisions/DT-D030_*.json` … `DT-D043_*.json`

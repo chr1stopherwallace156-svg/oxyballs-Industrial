@@ -1,0 +1,45 @@
+{
+  "ajr_id": "AJR-000001",
+  "id_immutable": true,
+  "asset_id": "AID-000009",
+  "asset_alias": "AID-AXLE-M300-01",
+  "status": "BLOCKED",
+  "decision": "CONTINUE_RESEARCH",
+  "adds_new_engineering_data": {
+    "result": "UNKNOWN",
+    "rationale": "STEP/NURBS axle CAD would add engineering data IF real bytes exist \u2014 listing URL and file absent; cannot affirm YES.",
+    "required_geometry_class": "STEP/NURBS mechanical envelope"
+  },
+  "duplication_check": {
+    "result": "NOT_EXECUTED",
+    "compared_against": [
+      "AID-000002 (complete vehicle mesh)",
+      "CMP-AXL-M300 geometry ABSENT"
+    ],
+    "rationale": "No local library axle STEP to compare; complete-vehicle meshes are not engineering duplicates until ingest."
+  },
+  "resolves_priority_gaps": {
+    "result": "PARTIAL",
+    "gaps_addressed": [
+      "Rear axle envelope / Team B CMP-AXL-M300 discovery"
+    ],
+    "rationale": "Would address axle gap if URL+bytes acquired and config-matched; currently research-only."
+  },
+  "purchase_clearance": "NOT_CLEARED",
+  "blockers": [
+    "source_url NOT_RECORDED (Hard Rule 6)",
+    "No local STEP sha256",
+    "exact_configuration_match still UNKNOWN/conditional",
+    "Narrative SPECIFICATION_READY rejected"
+  ],
+  "estimated_price_usd": 0.0,
+  "source_url_status": "NOT_RECORDED",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "research_sprint": "RL-012",
+  "decision_ref": "DT-D043",
+  "notes": [
+    "AJR drafted but cannot GENERATE_AJR_AND_PURCHASE until listing URL + uniqueness + engineering-data checks execute.",
+    "Next: locate real GrabCAD/Dana URL \u2192 re-run AJR gates \u2192 then clear or reject."
+  ]
+}
