@@ -5,6 +5,27 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 21 + review_18: Brake/Steering Gate v0.1; PATS-language recurrence escalated
+
+- Archived batch_21 (Gate 04 brake/steering) and review_18 1:1. Owner
+  label adopted: **Brake/Steering Gate v0.1** — hydraulic dependency
+  identified, vacuum-pump path rejected, EHPS path opened,
+  Ford-specific data still missing. First CP#1 (physical-safety) gate.
+- New rows CS-46..50, RC-74..78: combined brake+steering demand NoGo
+  (RC-74 — owner's "biggest win"); general hydroboost minimums as
+  EngineeringBackground/NeedsFordExactSource (RC-75); loss-of-assist
+  and accumulator-reserve NoGo/Test candidates; EHPS LeadOnly path.
+- Owner's 7 corrections applied: generic/aftermarket sources
+  downgraded (NeedsFordExactSource); **TOP 2-2-607 rejected for Gate
+  04 (self-citation error — it is a cooling doc)**; **FMVSS 105 added
+  as the primary brake regulation lane** (CS-49); OpenGaps created.
+- **PATS-language recurrence escalated:** batch_21 repeated "digital
+  bypass frameworks for PATS" one batch after review_17 made it a
+  standing rule — re-corrected; recorded as the leading candidate for
+  an M10 forbidden-phrase scanner (bypass/override/defeat on
+  anti-theft contexts + the Validated reserved-vocab check).
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 20 + review_17: Cooling Modeling Framework v0.1
 
 - Archived batch_20 (10-row modeling payload) and review_17 1:1. Owner

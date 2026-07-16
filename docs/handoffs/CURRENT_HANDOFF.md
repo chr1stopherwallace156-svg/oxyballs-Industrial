@@ -4,14 +4,14 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-15
-- Reason for handoff: task complete (batch 20 + review_17 — Cooling Modeling Framework v0.1);
+- Reason for handoff: task complete (batch 21 + review_18 — Brake/Steering Gate v0.1);
   awaiting owner decisions and/or next batch
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `41029ff` — Apply review_16 (lane doctrine)
+- Start commit: `f0cc932` — Reconcile RH batch 20 + owner review_17
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
@@ -19,39 +19,38 @@
 ## Work performed
 
 - Files changed:
-  `docs/research/raw/research_hunter/batch_20_cooling_modeling_frameworks.md`
-  and `docs/research/raw/owner_reviews/review_17_batch_20_verdict.md`
-  (new, verbatim — committed separately as `34d29b5`),
+  `docs/research/raw/research_hunter/batch_21_brake_steering_gate04.md`
+  and `docs/research/raw/owner_reviews/review_18_batch_21_verdict.md`
+  (new, verbatim — committed separately as `400e9a4`),
   `docs/research/raw/research_hunter/PROVENANCE.md`,
-  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-39..45;
-  RC-66..73; section 28), `docs/research/RESEARCH_MAP.md` (Gate 04/05
-  corrections), `docs/CHANGELOG.md`, handoff files
-- Summary: batch 20 (10-row modeling-frameworks payload) + review_17
-  reconciled. Owner label adopted: **Cooling Modeling Framework v0.1**
-  (ModelingFrameworkCandidate; not validated/locked/selection-ready).
-  First batch under the review_16 lane doctrine — held cleanly (a
-  modeling brain was added while every gate stayed
-  BLOCKED_PENDING_SUPPLIER_DATA). Accepted modeling refs: Bernardi
-  (RC-66), MathWorks loss + ε-NTU (RC-67/68), Darcy-Weisbach (RC-69),
-  two-state thermal (RC-70), TOP 2-2-607 test (RC-73). Owner's 7 tasks
-  applied — most importantly: **Gate 05 "PATS bypass" language →
-  authorized Ford-compatible integration (standing terminology rule:
-  never frame anti-theft work as bypass)**; Gate 04 vacuum-pump →
-  hydroboost/EHPS; "validated baselines" prose rejected;
-  **NeedsExactQuote** set on equation rows lacking verbatim quotes;
-  Reddit → LeadOnly; towing article → FieldContext; thermal-runaway →
-  anomaly detection (containment = OpenGap). Permitted design-time
-  modeling modules listed (framework specs only — no production code).
-  **Nothing ingested; nothing Confirmed; ODRs untouched.**
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-46..50;
+  RC-74..78; section 29), `docs/research/RESEARCH_MAP.md` (Gate 04
+  v0.1 status), `docs/CHANGELOG.md`, handoff files
+- Summary: batch 21 (Gate 04 brake/steering) + review_18 reconciled.
+  Owner label: **Brake/Steering Gate v0.1** — hydraulic dependency
+  identified, vacuum-pump path rejected, EHPS path opened,
+  Ford-specific data still missing. First CP#1 physical-safety gate.
+  Core candidate: RC-74 combined brake+steering demand NoGo (never
+  size steering alone). Owner's 7 corrections applied: generic/
+  aftermarket sources → EngineeringBackground/NeedsFordExactSource;
+  **TOP 2-2-607 rejected for Gate 04 (self-citation error — cooling
+  doc mis-cited as brake/steering + FMVSS)**; **FMVSS 105 added as the
+  primary brake regulation lane (CS-49)**; OpenGaps created.
+  **PATS-language RECURRENCE escalated:** batch_21 repeated "digital
+  bypass frameworks for PATS" one batch after review_17 made it a
+  standing rule — re-corrected; recorded as the leading candidate for
+  an M10 forbidden-phrase scanner (bypass/override/defeat on
+  anti-theft contexts + Validated reserved-vocab). **Nothing ingested;
+  nothing Confirmed; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_20/review_17 archives are 1:1 against the
-  owner's chat message ("20:75"); all modeling rows carry
-  academic/modeling statuses and NeedsSupplierData; no equation sized
-  a real component; nothing marked Confirmed
+- Verified vs claimed: batch_21/review_18 archives are 1:1 against the
+  owner's chat message ("21:75"); every source is labeled by
+  Ford-specificity per owner; no aftermarket value became a rule;
+  nothing marked Confirmed
 
 ## State
 
@@ -76,14 +75,15 @@ follow-up clock** — cadence sections are in both outreach files);
 (c) a supplier reply arrives (archive 1:1 under
 `docs/research/raw/supplier_replies/`, then reconcile — first evidence
 that can resolve the BLOCKED_PENDING_SUPPLIER_DATA gate); (d) the next
-research batch — by the roadmap, likely **Gate 04: Brake / Steering
-Assist (CP#1)** — processed per the standing per-batch procedure.
-Enforce the two standing terminology/scope rules from review_17: Gate
-04 is hydroboost/EHPS (NOT vacuum pump); Gate 05 is authorized
-Ford-compatible controls integration (NEVER "PATS bypass/override").
-Lane doctrine still applies: academic rows get modeling statuses,
-NeedsExactQuote on any row missing a verbatim quote, every row names
-the supplier data still needed.
+research batch — by the owner prompt, the **Ford-specific Gate 04
+closure payload** (Ford F-450/F-550 pump pressure/flow, hydroboost
+accumulator, steering-gear req, EHPS pressure-flow-current curves,
+DC-DC sizing, FMVSS 105 mapping). Enforce: generic hydroboost =
+EngineeringBackground only; Dodge/Mopar EHPS = LeadOnly until a
+datasheet proves pressure/flow/current/duty; no FMVSS-compliance
+claim; **NEVER "PATS bypass/override" (recurred in batch_21 — watch
+it)**; Gate 04 is hydroboost/EHPS not vacuum. Lane doctrine still
+applies (modeling statuses, NeedsExactQuote, name the supplier data).
 
 ## Forbidden actions
 

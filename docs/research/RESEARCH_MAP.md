@@ -253,7 +253,16 @@ supplier datasheets → CAN/PATS.**
 While the HV wiring + powertrain + cooling gates sit at
 **BLOCKED_PENDING_SUPPLIER_DATA**, the research sequence continues:
 
-4. **Brake / Steering Assist Gate (CP#1)** — *(owner correction,
+4. **Brake / Steering Assist Gate (CP#1) — Gate 04 v0.1 OPENED
+   (batch_21):** hydraulic dependency identified, vacuum-pump path
+   rejected, EHPS path opened, Ford-specific data still missing. Core
+   candidate: the combined brake+steering demand NoGo (RC-74 — never
+   size steering alone). Primary brake regulation lane = **FMVSS 105**
+   (CS-49). Still-missing: Ford pump pressure/flow, hydroboost
+   accumulator reserve, steering-gear req, manual-steering torque,
+   EHPS pressure-flow-current curve, EHPS duty/derating, DC-DC output,
+   FMVSS 105 test mapping. Next payload: Ford-specific/supplier-
+   specific only. *(owner correction,
    review_17: NOT "auxiliary vacuum pump" — F-450/F-550 use hydroboost
    / hydraulic brake + power-steering assist).* Scope: determine the
    factory Ford brake-assist and steering-assist architecture; identify

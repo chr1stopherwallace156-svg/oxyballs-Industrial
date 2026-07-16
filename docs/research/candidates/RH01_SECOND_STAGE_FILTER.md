@@ -71,7 +71,12 @@ this file supersedes it (see Addendum, section 7).
 | CS-42 | **AcademicPrincipleCandidate** (owner label) | *Zhang et al., "An online heat generation estimation method for lithium-ion batteries using dual-temperature measurements", Applied Energy 2020* (two-state core/surface thermal model; anomaly detection) | Penn State ECEC (university server) | <https://ecec.me.psu.edu/Pubs/2020_Zhang_Appl_Energy.pdf> | Candidate (batch_20) — `NeedsSensorAndPackData`; **anomaly-detection use only — NOT thermal-runaway containment** (owner task 4) — lanes L6/L8 |
 | CS-43 | **FieldContext / NeedsEngineeringSource** (owner task 3) | *energy-solutions.co: "Electric Truck Range Under Load: Real Towing Tests"* | trade/field article | <https://energy-solutions.co/articles/sub/electric-trucks-towing-range-tests> | Background (batch_20) — proves load/towing hurts range and flags regen thermal loading; the mountain-grade MODEL must come from tractive-power equations in a proper engineering source (`NeedsBetterSource`) — lanes L8/L6 |
 | CS-44 | **LeadOnly / InformalDiscussion / NotForRuleCreation** (owner task 2) | *Reddit r/AskEngineers thread on coolant velocity vs heat transfer* | reddit.com (forum) | <https://www.reddit.com/r/AskEngineers/comments/1izl7kl/can_an_increase_in_coolant_velocity_ever_lower/> | Sanity-check only (batch_20) — serial-vs-parallel doctrine needs a thermal-fluids textbook / SAE paper / supplier cooling guide — lane L6 |
-| CS-45 | **CandidateTestSource** (owner label) | *US DoD TOP 2-2-607 "Cooling Systems" — Test Operations Procedure* | DTIC (**official server**) | <https://apps.dtic.mil/sti/pdfs/ADA640254.pdf> | Candidate (batch_20) — `NeedsExactSource` verification of quotes; the strongest validation-test lane on file; maps directly onto the Cajon design case — lanes L8/L3 |
+| CS-45 | **CandidateTestSource (cooling only)** (owner label) | *US DoD TOP 2-2-607 "Cooling Systems" — Test Operations Procedure* | DTIC (**official server**) | <https://apps.dtic.mil/sti/pdfs/ADA640254.pdf> | Candidate (batch_20) — `NeedsExactSource` verification of quotes; the strongest **cooling** validation-test lane; maps onto the Cajon design case. **Owner (review_18): this is NOT a brake/steering or FMVSS source — batch_21's use of it for Gate 04 is rejected; TestContextBackground only outside cooling** — lanes L8/L3 |
+| CS-46 | **EngineeringBackground / NeedsFordExactSource — NotForFinalRule** (owner review_18) | *"HydroBoost Hydraulic Brake Assist Booster Instructions"* (Bosch/Bendix-pattern aftermarket) | partsforhotrods.com.au (aftermarket) | <https://www.partsforhotrods.com.au/wp-content/uploads/2024/07/NEW-HydroBoost-Instructions.pdf> | Background (batch_21) — supports **general** hydroboost logic (min pump flow/pressure, combined brake+steering draw); **cannot prove the F-450/F-550 value** (a HydraStop equivalent says ≥2.8 GPM — different number, same point). No final rule — lanes L10/L4 |
+| CS-47 | **ModelingFramework / NeedsFordExactSource** (owner review_18) | *"Steering Pump Flow Rate"* (commercial steering vendor) | hydrosteer.com.au | <https://www.hydrosteer.com.au/steering-pump-flow-rate/> | Background (batch_21) — steering-flow *concept* source (backpressure/temperature, low-RPM balking); not Ford-specific design data — lane L10 |
+| CS-48 | **LeadOnly / SupplierCandidatePath / NeedsDatasheet** (owner review_18) | *"Dodge Electric Hydraulic Power Steering for your build!"* (Mopar 5154662AC EHPS + PSC controller) | hangtight.io (conversion vendor blog) | <https://hangtight.io/blogs/resources/upgrading-to-electric-hydraulic-power-steering-parts-list> | Lead only (batch_21) — an EHPS *idea*, NOT proof a Mopar/TRW pump supports a loaded F-550 hydroboost+steering system; needs a datasheet proving pressure, flow, current, duty cycle — lanes L9/L10 |
+| CS-49 | **RegulatoryCandidate — primary brake lane** (owner review_18, added) | *FMVSS No. 105 — Hydraulic and electric brake systems (49 CFR 571.105)* | NHTSA / eCFR | (locator pending — B-002) | Candidate (owner-added) — the correct primary brake-performance regulation for this platform (covers hydraulic + electric service brakes and parking brakes, normal + emergency performance); replaces batch_21's mis-cited TOP 2-2-607 — lanes L2/L5 |
+| CS-50 | **LeadOnly (video)** | *YouTube "Electric Commercial Vehicles and Powertrain Sizing"* | youtube.com | <https://www.youtube.com/watch?v=3PqEW2Pf90I> | LeadOnly (batch_21) — background video; per standing rule (batch_01) videos are LeadOnly, never rule sources — lane L3 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -155,6 +160,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-71 | Tractive energy balance: E_total = E_rolling + E_aero + E_grade + E_accel with E_grade = m·g·sin(θ); regen 80–100 kW flagged as thermal risk *(from a towing field article — FieldContext; the model itself needs a proper engineering source)* | CS-43 | §3.1 — unverified | **ModelingFrameworkCandidate / NeedsBetterSource** (owner: use tractive-power equations from an engineering source; article = context only) — lanes L8/L6 |
 | RC-72 | Serial-loop principle: Q̇ = ṁ·C_p·ΔT — downstream components in a serial loop receive pre-heated coolant, reducing local ΔT vs a balanced parallel loop *(forum sanity check ONLY)* | CS-44 | forum thread — n/a | **LeadOnly / NotForRuleCreation**; doctrine requires textbook/SAE/supplier source; supplier split tolerances needed — lane L6 |
 | RC-73 | TOP 2-2-607: "Mountain road load course: To provide an average grade of 6% or greater and of sufficient continuous length to allow the vehicle to stabilize at a minimum speed for sustained operation." — steady-state thermal-equilibrium validation criterion | CS-45 | §1/§4, pp.1–5 — quote unverified | **CandidateTestSource — TestCandidate for the Cajon design case** (cooling valid only if temperatures stabilize on sustained grade); `NeedsPhysicalVerification` for component temperature limits — lanes L8/L3 |
+| RC-74 | **Combined-demand NoGo (owner's "biggest win")**: an EHPS replacement must supply the SIMULTANEOUS brake-assist + steering-assist hydraulic demand — sizing for steering alone starves the steering gear on brake apply (hydroboost draws from the same fluid stream) | CS-46 (general hydroboost logic) | Aftermarket instructions §"pump requirements" — general, not Ford | **NoGoConditionCandidate** — do NOT size steering assist alone; needs the combined peak simultaneous flow-draw curve (Ford / test) — lanes L10/L4 |
+| RC-75 | General hydroboost pump minimums (hydroboost-*pattern*, not Ford): "flow at least 2 gallons per minute… at least 1200psi"; assist delay / steering fall-off below that *(aftermarket value; a HydraStop equivalent says ≥2.8 GPM — variance proves it's not the Ford number)* | CS-46 | §"Important pump requirements", p.1 | **EngineeringBackground / NeedsFordExactSource — NOT a final rule**; the Ford F-450/F-550 pump pressure/flow/relief values are OpenGaps — lane L10 |
+| RC-76 | Loss-of-assist failure behavior: steering effort rises nonlinearly when hydraulic flow is lost; near max front-axle rating a sudden loss can produce an unmanageable steering condition — dedicated mitigation required *(general principle)* | CS-46 | §"pump requirements", ¶2 | **NoGoConditionCandidate**; needs quantitative manual lock-to-lock steering torque (Nm) on a loaded F-550 at 0 mph (`NeedsPhysicalVerification`) — lanes L10/L4 |
+| RC-77 | Accumulator reserve: the hydroboost gas/nitrogen accumulator stores energy for a limited number of engine-off/assist-off brake actuations *(general principle)* | CS-46 | §"pump requirements", ¶2 | **Rule/Test candidate**; needs the factory Super Duty accumulator pre-charge + reserve-actuation count across temperature (`NeedsSupplierData`) — lanes L10/L4 |
+| RC-78 | EHPS candidate path: Mopar 5154662AC-class electric-hydraulic pumps run independent of engine speed on a high-amp DC circuit, PWM-modulated from vehicle speed *(vendor blog — idea only)* | CS-48 | vendor "Parts Available"/"Control" | **LeadOnly / NeedsSupplierDatasheet**; must prove pressure–flow–current–duty; est. 60–100 A 12 V transient load → forces DC-DC upsizing (recorded as a Gate 04→Gate 01 linkage, candidate) — lanes L9/L10 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -1467,6 +1477,81 @@ supplier data to run on real numbers.**
   roadmap errors (vacuum pump; "PATS bypass") that were downstream
   roadmap text, not cooling claims, but corrected now so they can't
   propagate into Gates 04/05.
+
+---
+
+## 29. Batch 21 + owner review_18 — Brake/Steering Gate v0.1 (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_21_brake_steering_gate04.md`
+and `docs/research/raw/owner_reviews/review_18_batch_21_verdict.md`.
+Row additions: CS-46..CS-50, RC-74..RC-78. **Owner label adopted:
+Brake/Steering Gate v0.1 — hydraulic dependency identified,
+vacuum-pump path rejected, EHPS path opened, Ford-specific data still
+missing.** First physical-safety critical path (CP#1).
+
+### What batch 21 got right
+
+- **Vacuum-pump path rejected** as the wrong assist type for
+  F-450/F-550 (hydroboost, hydraulic) — the Gate 04 correction from
+  review_17 took hold.
+- **The combined-demand NoGo** (RC-74, owner's "biggest win"): size
+  the EHPS for simultaneous brake + steering, never steering alone.
+- Correct architecture coverage: dependency chains, accumulator
+  reserve, loss-of-assist failure mode, the ~60–100 A EHPS load →
+  DC-DC upsizing linkage.
+
+### Owner's 7 filter corrections applied
+
+1. Generic hydroboost instructions (CS-46) → EngineeringBackground /
+   NeedsFordExactSource / NotForFinalRule.
+2. Hydrosteer (CS-47) → ModelingFramework / NeedsFordExactSource.
+3. Hang Tight / Dodge EHPS (CS-48) → LeadOnly /
+   SupplierCandidatePath / NeedsDatasheet.
+4. **TOP 2-2-607 reclassified** — it is a COOLING doc; batch_21
+   mis-cited it as the brake/steering AND FMVSS source. Rejected for
+   Gate 04; TestContextBackground only (CS-45 note added). **This is a
+   self-citation error: the batch cited a source for something the
+   source does not cover.**
+5. **FMVSS 105 added as the primary brake regulation lane** (CS-49) —
+   hydraulic + electric service brakes, normal + emergency
+   performance; locator pending (B-002).
+6. **PATS language re-corrected** — see escalation below.
+7. OpenGaps created (Ford pump pressure, Ford pump flow, hydroboost
+   accumulator capacity, steering-gear requirements, EHPS
+   pressure-flow-current curves, DC-DC load, FMVSS 105 test mapping).
+
+### PATS-language RECURRENCE — escalation
+
+Batch_21's Gate 05 roadmap said: *"Developing digital bypass
+frameworks for the Ford Passive Anti-Theft System (PATS)…"* — the
+**exact "bypass" framing corrected one batch earlier (review_17,
+standing terminology rule).** Re-corrected to authorized
+Ford-compatible controls integration / immobilizer-safe architecture /
+serviceability / diagnostic compatibility.
+
+**This is the first correction to recur across consecutive batches
+after being made a standing rule** — and it is the highest-stakes one
+(security-defeat framing). Recorded as the leading candidate for the
+M10 mechanical guardrail: a **forbidden-phrase scanner** (blocklist:
+"bypass", "override", "defeat" applied to anti-theft/PATS/immobilizer
+contexts; plus the "Validated"/"validated" reserved-vocabulary check
+from batch_19/20). Human review has caught it twice; a string check
+should catch it the third time. Proposed for the D-004 hash-era M10
+tooling — owner decision to formalize.
+
+### Gate 04 v0.1 — still open
+
+Missing before closure (owner list): Ford F-450/F-550 factory pump
+pressure + flow; stock hydroboost operating pressure; steering-gear
+pressure/flow; relief-valve pressure; return/reservoir; accumulator
+reserve capacity; manual steering torque without assist; candidate
+EHPS pressure-flow-current curve; EHPS duty cycle + thermal derating;
+required DC-DC output; FMVSS 105 brake-test mapping; loaded low-speed
+steering test procedure. Next payload (owner prompt): Ford-specific +
+supplier-specific only — generic hydroboost is EngineeringBackground,
+Dodge/Mopar is LeadOnly-until-datasheet, no FMVSS-compliance claim, no
+PATS-bypass language.
 
 ---
 
