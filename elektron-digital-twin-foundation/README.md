@@ -2,15 +2,14 @@
 
 This repository contains the authoritative schemas, standards, and registries establishing the baseline data model and coordinate frameworks for the F-450 physical vehicle intake and digital reconstruction.
 
+**Research protocol:** `ACTIVE` — [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md)  
 **Readiness:** `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`  
-**Milestone:** `L1_SOURCE_PACK_01`  
-**Source pack:** `L1_SOURCE_PACK_01_NOT_VERIFIED` (`RESET_TO_CANDIDATE_TEMPLATES`)  
-**Document gate:** `L1_DOCUMENT_ACQUISITION_READY`  
-**Public search:** `L1_PUBLIC_REFERENCE_SEARCH_READY`  
+**Milestone:** `L1_SOURCE_PACK_01` (`NOT_VERIFIED`)  
+**Document / public gates:** READY (templates)  
 **Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`  
-**Parallel:** Lane A (3D assets) + Lane B (spec audit) authorized  
-**L01 geometry:** BLOCKED  
-See [STATUS.json](STATUS.json), [layers/L01/L1_SOURCE_PACK_01_AUTHENTICITY_AUDIT.md](layers/L01/L1_SOURCE_PACK_01_AUTHENTICITY_AUDIT.md).
+**Teams:** A Research · B Assets (ASSET-00031 Grade B) · C Geometry (provisional) · D Software  
+**L01 geometry freeze:** BLOCKED  
+See [STATUS.json](STATUS.json), [layers/L01/L1_PARALLEL_TEAMS.md](layers/L01/L1_PARALLEL_TEAMS.md).
 
 ---
 
@@ -39,7 +38,7 @@ All systems, agents, and engineers must consume the core specification files in 
 7. **[CLEARANCE_STANDARD_V2_PROPOSAL.md](CLEARANCE_STANDARD_V2_PROPOSAL.md)**  
    Formula-compliant clearance envelope rules (CLR-001, CLR-002).
 
-Also read: [TRANSFORM_QUATERNION_CORRECTION_REPORT.md](TRANSFORM_QUATERNION_CORRECTION_REPORT.md), [THREE_CAMERA_AND_WORLD_STANDARD.md](THREE_CAMERA_AND_WORLD_STANDARD.md), [REGRESSION_AUDIT.md](REGRESSION_AUDIT.md), [layers/L01_RESEARCH_DOSSIER_PLAN.md](layers/L01_RESEARCH_DOSSIER_PLAN.md), [layers/L01/README.md](layers/L01/README.md).
+Also read: [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md), [TRANSFORM_QUATERNION_CORRECTION_REPORT.md](TRANSFORM_QUATERNION_CORRECTION_REPORT.md), [THREE_CAMERA_AND_WORLD_STANDARD.md](THREE_CAMERA_AND_WORLD_STANDARD.md), [REGRESSION_AUDIT.md](REGRESSION_AUDIT.md), [layers/L01_RESEARCH_DOSSIER_PLAN.md](layers/L01_RESEARCH_DOSSIER_PLAN.md), [layers/L01/README.md](layers/L01/README.md).
 
 ### Extended governance reading
 
@@ -83,7 +82,7 @@ Every layer passes five gates before advancing:
 
 ## Current stage
 
-**L01 — Source Pack 01 not verified (reset to candidates).** Templates ready for real PDFs; Lane A/B parallel work authorized. Geometry freeze blocked. See [authenticity audit](layers/L01/L1_SOURCE_PACK_01_AUTHENTICITY_AUDIT.md).
+**L01 — Research protocol ACTIVE.** Source Pack 01 still NOT_VERIFIED. Teams A–D parallel. ASSET-00031 Grade B candidate. Geometry freeze blocked. See [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md).
 
 ## Related work
 

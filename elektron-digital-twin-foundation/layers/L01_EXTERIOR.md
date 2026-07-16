@@ -1,13 +1,13 @@
 # L01 — Exterior
 
-**Status:** Research draft complete — `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`  
-**Milestone:** `L1_SOURCE_PACK_01`  
-**Source pack:** `L1_SOURCE_PACK_01_NOT_VERIFIED`  
-**Document gate:** `L1_DOCUMENT_ACQUISITION_READY`  
-**Public search:** `L1_PUBLIC_REFERENCE_SEARCH_READY`  
+**Status:** Research draft complete — protocol ACTIVE  
+**Research protocol:** `EDTS_RESEARCH_PROTOCOL.md`  
+**Milestone:** `L1_SOURCE_PACK_01` (`NOT_VERIFIED`)  
+**Document / public gates:** READY (templates)  
 **Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`  
-**Geometry / mesh production:** Blocked  
-**Prerequisites for geometry:** verified PDF hashes + page evidence + physical confirmation + owner approval
+**Teams:** A Research · B Assets · C Geometry (provisional) · D Software  
+**Geometry / mesh freeze:** Blocked  
+**Prerequisites for freeze:** verified PDF hashes + page evidence + Rule 4 lifecycle + owner approval
 
 ## Scope
 
@@ -39,10 +39,10 @@ Planning sequence: [`L01_RESEARCH_DOSSIER_PLAN.md`](L01_RESEARCH_DOSSIER_PLAN.md
 - [x] V2 hierarchy, object/landmark registries, landmark classification
 - [x] Capture coverage grid + PBR metalness correction
 - [x] Visual acceptance V2 + final gap report
-- [x] Source Pack 01 authenticity reset to candidate templates
-- [x] File/page manifests + extraction verification + parallel lanes A/B
+- [x] EDTS Research Protocol ACTIVE + parameter verification DB + Teams A–D
+- [x] ASSET-00031 Grade B efficiency evaluation (provisional adapt prep)
 - [ ] Real SRC PDF acquisition + executed SHA-256
-- [ ] Page evidence restoration → DOCUMENT_SUPPORTED
+- [ ] Page evidence restoration → raise confidence / evidence levels
 - [ ] Physical verification on GRADE-A/B VIN
 - [ ] Geometry freeze approval
 

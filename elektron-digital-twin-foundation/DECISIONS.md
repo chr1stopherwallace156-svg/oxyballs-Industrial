@@ -298,3 +298,23 @@ Append-only record of digital twin foundation decisions.
   - Do not restore DOCUMENT_SUPPORTED without file_exists + executed hash + page evidence
   - Lane A/B must not invent OEM page citations
   - DT-D016 engagement artifacts are superseded where they conflict with this reset
+
+## DT-D018 — EDTS Research Protocol activated; Teams A–D parallel execution
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Need a single runtime core for research taxonomy, evidence levels, candidate promotion, confidence scoring, and parallel work without inventing precision.
+- **Decision:**
+  1. Activate **`EDTS_RESEARCH_PROTOCOL.md` v1.0.0** as binding master research protocol
+  2. Taxonomy required: Evidence / Probability / Assumption / Placeholder / Inference
+  3. Hard Rules 1–10 enforced; AGENTS.md read-order updated to protocol first
+  4. Weighted confidence engine in `L1_PARAMETER_VERIFICATION_DATABASE.json` (unverified sources weight 0)
+  5. Register Level D visual sources SRC-L1-004/005 as VERIFIED_ACTIVE for architecture only
+  6. Teams A–D active per `L1_PARALLEL_TEAMS.md`; ASSET-00031 Grade B under Efficiency Principle
+  7. Team C provisional adapt allowed only under Placeholder/Probability labels
+  8. Geometry freeze remains **`NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`**
+  9. Do not use calendar-day effort claims in efficiency docs — use subsystem keep/discard/build effort classes
+- **Consequences:**
+  - front_axle_layout confidence 55% (Level D active); rear_frame_rail_width confidence 0% until BBAS PDF verifies
+  - Multi-source assembly is the intended twin construction model
+  - From-scratch cab rebuild is disfavored while Grade B assets are available and licensed

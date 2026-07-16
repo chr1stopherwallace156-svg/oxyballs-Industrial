@@ -367,3 +367,27 @@ All notable changes to the digital twin foundation. Append-only.
 - Parallel lanes: **AUTHORIZED**
 - Modeling baseline: **NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE**
 - L01 geometry: **BLOCKED**
+
+## 2026-07-16 (EDTS Research Protocol Active — Teams A–D)
+
+### Added
+
+- `EDTS_RESEARCH_PROTOCOL.md` v1.0.0 — master evidence taxonomy + Hard Rules 1–10
+- `layers/L01/L1_PARAMETER_VERIFICATION_DATABASE.json` — weighted confidence engine
+- `layers/L01/L1_PARALLEL_TEAMS.md` — Teams A/B/C/D sprint board
+- `layers/L01/L1_ASSET_EVALUATION_ASSET-00031.md` — Grade B efficiency evaluation
+- `layers/L01/L1_SOURCE_VISUAL_ARCHITECTURE_REGISTRY.json` — SRC-L1-004/005
+- **DT-D018** — protocol activation
+
+### Changed
+
+- `AGENTS.md` — protocol first in read order; Hard Rule bindings
+- Phase → `EDTS_RESEARCH_PROTOCOL_ACTIVE`
+- Teams A–D marked active; Team C provisional-only
+
+### Status
+
+- Research protocol: **ACTIVE**
+- Source pack: **NOT_VERIFIED**
+- ASSET-00031: **Grade B candidate**
+- Geometry freeze: **NOT_YET_APPROVED**

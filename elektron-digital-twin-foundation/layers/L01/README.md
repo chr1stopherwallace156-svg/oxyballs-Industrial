@@ -3,17 +3,28 @@
 **Status:** `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`  
 **Phase:** `L1_FACTUAL_VERIFICATION_REQUIRED`  
 **Evidence gate:** `L1_REQUIRES_MORE_REFERENCE_DATA`  
+**Research protocol:** `ACTIVE` — [`EDTS_RESEARCH_PROTOCOL.md`](../EDTS_RESEARCH_PROTOCOL.md)  
 **Document gate:** `L1_DOCUMENT_ACQUISITION_READY`  
 **Public search gate:** `L1_PUBLIC_REFERENCE_SEARCH_READY`  
 **Milestone:** `L1_SOURCE_PACK_01`  
 **Source pack:** `L1_SOURCE_PACK_01_NOT_VERIFIED`  
 **Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`
 
-**Geometry production:** `BLOCKED`
+**Geometry production:** `BLOCKED` (Team C provisional adapt only)
 
 **Locked vehicle:** 2019 Ford F-450 Chassis Cab — Regular Cab / 4x2 / DRW / 145.3 in WB / 60 in CA / bare cab-and-chassis
 
 ## Package Index
+
+### Protocol & parallel execution
+
+| File | Role |
+|---|---|
+| [../../EDTS_RESEARCH_PROTOCOL.md](../../EDTS_RESEARCH_PROTOCOL.md) | Master research protocol |
+| [L1_PARAMETER_VERIFICATION_DATABASE.json](L1_PARAMETER_VERIFICATION_DATABASE.json) | Weighted confidence engine |
+| [L1_PARALLEL_TEAMS.md](L1_PARALLEL_TEAMS.md) | Teams A–D sprint board |
+| [L1_ASSET_EVALUATION_ASSET-00031.md](L1_ASSET_EVALUATION_ASSET-00031.md) | Grade B asset efficiency profile |
+| [L1_SOURCE_VISUAL_ARCHITECTURE_REGISTRY.json](L1_SOURCE_VISUAL_ARCHITECTURE_REGISTRY.json) | SRC-L1-004/005 Level D visuals |
 
 ### Source Pack 01 (NOT_VERIFIED — reset)
 
@@ -90,6 +101,8 @@
 
 ## Next Research Actions
 
-1. Acquire real SRC PDFs → execute SHA-256 → cover + page evidence
-2. Run **Lane A** asset catalog and **Lane B** independent spec audit in parallel
-3. Do **not** restore DOCUMENT_SUPPORTED or approve geometry freeze until files verify
+1. **Team A:** Acquire real SRC PDFs → SHA-256 → page evidence
+2. **Team B:** License + catalog ASSET-00031; continue asset hunt
+3. **Team C:** Provisional cab adapt under Placeholder/Probability only
+4. **Team D:** Multi-source hierarchy tree with claim/provenance fields
+5. Do **not** approve geometry freeze until protocol Rule 4 + modeling baseline clear

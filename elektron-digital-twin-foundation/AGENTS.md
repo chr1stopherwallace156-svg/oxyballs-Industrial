@@ -6,17 +6,18 @@ Rules for every AI agent, LLM engine, code generation pipeline, and automated va
 
 Before modifying any file, read:
 
-1. [README.md](README.md) — required reading order for core specifications
-2. [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md)
-3. [AGENTS.md](AGENTS.md) (this file)
-4. [STATUS.json](STATUS.json)
-5. [DECISIONS.md](DECISIONS.md)
-6. [REQUIREMENTS.md](REQUIREMENTS.md)
-7. [ARCHITECTURE.md](ARCHITECTURE.md)
-8. [DATA_MODEL.md](DATA_MODEL.md)
-9. [THREE_D_SPEC.md](THREE_D_SPEC.md)
-10. [QUALITY_STANDARD.md](QUALITY_STANDARD.md)
-11. The active layer doc under `layers/`
+1. [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) — **runtime core** for research, acquisition, geometry, and software evidence rules
+2. [README.md](README.md) — required reading order for core specifications
+3. [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md)
+4. [AGENTS.md](AGENTS.md) (this file)
+5. [STATUS.json](STATUS.json)
+6. [DECISIONS.md](DECISIONS.md)
+7. [REQUIREMENTS.md](REQUIREMENTS.md)
+8. [ARCHITECTURE.md](ARCHITECTURE.md)
+9. [DATA_MODEL.md](DATA_MODEL.md)
+10. [THREE_D_SPEC.md](THREE_D_SPEC.md)
+11. [QUALITY_STANDARD.md](QUALITY_STANDARD.md)
+12. The active layer doc under `layers/`
 
 ## Operational directives
 
@@ -45,11 +46,13 @@ Prefer [schemas/CLAIM_SCHEMA_ROOT_V6_PROPOSAL.json](schemas/CLAIM_SCHEMA_ROOT_V6
 
 ## Non-negotiables
 
-- **Never invent dimensions.** Unknown values become open questions in [research/OPEN_QUESTIONS.md](research/OPEN_QUESTIONS.md) or assumptions in [research/ASSUMPTIONS.md](research/ASSUMPTIONS.md) — never silent guesses in locked fields.
+- **Obey EDTS_RESEARCH_PROTOCOL.md** — taxonomy (Evidence/Probability/Assumption/Placeholder/Inference), Hard Rules 1–10, candidate promotion lifecycle, and confidence scoring.
+- **Never invent dimensions.** Unknown values become open questions in [research/OPEN_QUESTIONS.md](research/OPEN_QUESTIONS.md) or assumptions in [research/ASSUMPTIONS.md](research/ASSUMPTIONS.md) — never silent guesses in locked fields. Prefer `UNKNOWN` / `REQUIRES ADDITIONAL EVIDENCE` (Hard Rule 6).
 - **Never skip gates.** A layer advances only when all five gates are recorded in [STATUS.json](STATUS.json) and the layer doc.
 - **Never delete evidence.** Research log, decisions, and changelog entries are append-only.
-- **L00 must be owner-approved** before L01 geometry work begins. Provisional recommendations are not locks.
+- **L00 must be owner-approved** before L01 geometry freeze. Provisional Team C adaptations are not locks.
 - **Ford OEM CAD** obtained via BBAS is internal-use only; do not commit Ford-controlled CAD into this repo without explicit licensing review.
+- **Prefer asset audit-and-correct** over from-scratch rebuilds when graded assets exist (Hard Rule 10).
 - **Align with Build Engine** where applicable — do not contradict confirmed engineering doctrine on the docs branch without a new decision entry.
 
 ## Gate workflow
@@ -65,9 +68,12 @@ For each layer:
 
 ## Research protocol
 
+- **Master:** [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) (ACTIVE)
+- Parameter confidence engine → [layers/L01/L1_PARAMETER_VERIFICATION_DATABASE.json](layers/L01/L1_PARAMETER_VERIFICATION_DATABASE.json)
+- Teams A–D → [layers/L01/L1_PARALLEL_TEAMS.md](layers/L01/L1_PARALLEL_TEAMS.md)
 - New findings → [research/RESEARCH_LOG.md](research/RESEARCH_LOG.md) using [templates/RESEARCH_ENTRY.md](templates/RESEARCH_ENTRY.md).
 - Unresolved items → [research/OPEN_QUESTIONS.md](research/OPEN_QUESTIONS.md).
-- Working assumptions → [research/ASSUMPTIONS.md](research/ASSUMPTIONS.md) with confidence and expiry.
+- Working assumptions → [research/ASSUMPTIONS.md](research/ASSUMPTIONS.md) with confidence and expiry (taxonomy: Assumption).
 - Research tolerances and measurements → [RESEARCH_STANDARD.md](RESEARCH_STANDARD.md) and [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md).
 
 ## Approval

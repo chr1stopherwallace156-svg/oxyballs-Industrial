@@ -1,6 +1,7 @@
 # L1 Parallel Lanes (While Source Pack 01 Is Not Verified)
 
 **Authorization:** Active under `L1_SOURCE_PACK_01_NOT_VERIFIED`  
+**Superseded for sprint board by:** `L1_PARALLEL_TEAMS.md` (Teams A–D per Hard Rule 8)  
 **Does not authorize:** geometry freeze, DOCUMENT_SUPPORTED promotion, or fabricated OEM page citations
 
 ---
