@@ -1,5 +1,18 @@
 # Kernel Revision Log
 
+## 2026-07-16 — Kernel v1.0.0-rc1 (DT-D024)
+
+### Release candidate
+
+- Kernel stamped **`1.0.0-rc1`** via `KERNEL_MANIFEST.json`
+- Schema `$id` URNs: `urn:edts:schema:<name>:v1`
+- Configuration identity fingerprinting (`EDTS_CFG_FINGERPRINT_SHA256_V1`) on `CFG-000001`
+- Example records carry `urn:edts:example:*` `$id`s
+- Primary directive remains Exact-Vehicle Isolation (HR-EVI)
+- Multi-year applicability fields remain removed
+- Schema definitions remain separated from populated instance examples
+- Status target: **`EDTS_EXACT_VEHICLE_KERNEL_READY`**
+
 ## 2026-07-16 — Constitutional Exact Vehicle Isolation (DT-D023)
 
 ### Strengthening

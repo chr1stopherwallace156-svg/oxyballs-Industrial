@@ -78,6 +78,6 @@
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://edts.local/schemas/evidence-link.schema.json",
+  "$id": "urn:edts:schema:evidence-link:v1",
   "additionalProperties": false
 }

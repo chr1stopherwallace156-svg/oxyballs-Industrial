@@ -11,10 +11,17 @@
   },
   "links": {
     "evidence_link_ids": [],
-    "geometry_asset_ids": ["GEO-VEH000001-DOOR-FL-001"],
-    "relationship_ids": ["REL-VEH000001-0001"],
-    "interaction_ids": ["INT-VEH000001-DOOR-FL-001"]
+    "geometry_asset_ids": [
+      "GEO-VEH000001-DOOR-FL-001"
+    ],
+    "relationship_ids": [
+      "REL-VEH000001-0001"
+    ],
+    "interaction_ids": [
+      "INT-VEH000001-DOOR-FL-001"
+    ]
   },
   "schema_version": "1.0.0",
-  "notes": "Evidence links empty until a source ID that exists in-repo is linked with file awareness. No cross-year claims."
+  "notes": "Evidence links empty until a source ID that exists in-repo is linked with file awareness. No cross-year claims.",
+  "$id": "urn:edts:example:passport:PP-VEH000001-DOOR-FL-001"
 }

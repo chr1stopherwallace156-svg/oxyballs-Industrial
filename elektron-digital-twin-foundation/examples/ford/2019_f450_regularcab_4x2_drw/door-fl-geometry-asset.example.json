@@ -14,5 +14,6 @@
     "texture_count": null
   },
   "schema_version": "1.0.0",
-  "notes": "Catalog ID ASSET-00031 is recorded in L1 asset evaluation docs. Local mesh bytes are not present. Metrics remain null until executed."
+  "notes": "Catalog ID ASSET-00031 is recorded in L1 asset evaluation docs. Local mesh bytes are not present. Metrics remain null until executed.",
+  "$id": "urn:edts:example:geometry:GEO-VEH000001-DOOR-FL-001"
 }

@@ -7,5 +7,6 @@
   "configuration_id": "CFG-000001",
   "vehicle_instance_id": "VEH-000001",
   "schema_version": "1.0.0",
-  "notes": "Parent cab assembly is a placeholder instance ID for this exact vehicle only."
+  "notes": "Parent cab assembly is a placeholder instance ID for this exact vehicle only.",
+  "$id": "urn:edts:example:relationship:REL-VEH000001-0001"
 }

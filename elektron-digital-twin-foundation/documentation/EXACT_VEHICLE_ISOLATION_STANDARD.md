@@ -1,63 +1,43 @@
 # Exact Vehicle Isolation Standard
 
-**Status:** `ACTIVE` — implements constitutional law [HARD_RULE_EXACT_VEHICLE_ISOLATION.md](HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
-**Version:** `2.0.0`  
-**Universality:** All OEMs, all years, all body styles, all option packages
+**Status:** `ACTIVE` — primary directive  
+**Kernel:** `1.0.0-rc1` ([KERNEL_MANIFEST.json](../KERNEL_MANIFEST.json))  
+**Constitutional law:** [HARD_RULE_EXACT_VEHICLE_ISOLATION.md](HARD_RULE_EXACT_VEHICLE_ISOLATION.md)
 
 ---
 
-## Hard rules (operational)
+## Principle
 
-1. Every **model year** is distinct.
-2. Every **manufacturer** is distinct.
-3. Every **model** is distinct.
-4. Every **series / trim** is distinct.
-5. Every **cab type** is distinct.
-6. Every **body type** is distinct.
-7. Every **drivetrain** is distinct.
-8. Every **rear-wheel configuration** is distinct.
-9. Every **wheelbase** is distinct.
-10. Every **cab-to-axle** (or equivalent packaging measure) is distinct.
-11. Every **suspension package**, **axle package**, and **option package** that changes engineering truth is distinct.
-12. No information may automatically inherit from a related platform, generation, or model year.
-13. Similarity permits **discovery only**. It is never evidence.
-14. Cross-vehicle reuse remains `NOT_EVALUATED` until independently verified for each exact vehicle.
+No component or configuration may inherit attributes from another.
 
----
-
-## Six-layer separation
-
-| # | Layer | Schema | May contain OEM facts? |
-|---|---|---|---|
-| 1 | Universal entity definition | `entity-definition.schema.json` | No |
-| 2 | Exact vehicle instance | `vehicle-instance.schema.json` | Yes (dataset only) |
-| 3 | Exact configuration | `exact-configuration.schema.json` | Yes (dataset only) |
-| 4 | Vehicle-bound component instance | `component-instance.schema.json` | Yes (dataset only) |
-| 5 | Optional reusable definition | `reusable-component-definition.schema.json` | Empty until proven |
-| 6 | Cross-vehicle comparison | `cross-vehicle-comparison.schema.json` | Comparison only — never inheritance |
-
----
-
-## Dataset path convention
+Data for an exact vehicle (for example the 2019 F-450 Chassis Cab Regular Cab 4x2 DRW 145.3/60 silo) is stored exclusively within its own instance space under:
 
 ```text
-examples/<manufacturer_slug>/<exact_configuration_slug>/
+examples/<manufacturer>/<exact_configuration>/
 ```
 
-Slugs are lowercase, underscore-separated, and must encode the isolation axes needed to prevent collision (year, model, cab, drivetrain, axle/wheel config, etc.).
-
-First populated dataset:
-
-`examples/ford/2019_f450_regularcab_4x2_drw/` → `VEH-000001` / `CFG-000001` / `CMPINST-VEH000001-DOOR-FL`
-
-Scaffold-only datasets (empty of engineering claims) may exist for other OEMs to prove the kernel does not change.
+Similarities to other model years or platforms are treated as **Comparison Records only**, never as functional data inheritance.
 
 ---
 
-## Prohibited in any exact vehicle dataset
+## Operational rules
 
-- `model_year_range`
-- Auto-copied geometry, materials, measurements, procedures, evidence, assemblies, interactions, shaders, pivots, tolerances, fasteners, torque values, dimensions, CAD, or scans from another vehicle
-- Platform-family facts used as applicability
-- Invented source IDs
-- Runtime / disassembly claims without execution evidence
+1. Every unique configuration is a silo.
+2. Cross-vehicle comparisons are explicitly decoupled records (`cross-vehicle-comparison.schema.json`).
+3. Verification in one vehicle does not status-update another.
+4. `configuration_id` is paired with an immutable fingerprint ([CONFIGURATION_FINGERPRINT_STANDARD.md](CONFIGURATION_FINGERPRINT_STANDARD.md)).
+5. Schemas remain universal; populated values exist only in datasets.
+6. Multi-year applicability fields are prohibited.
+
+---
+
+## Seed silo
+
+| ID | Value |
+|---|---|
+| Path | `examples/ford/2019_f450_regularcab_4x2_drw/` |
+| Vehicle | `VEH-000001` |
+| Configuration | `CFG-000001` |
+| Door instance | `CMPINST-VEH000001-DOOR-FL` |
+
+Legacy folder `examples/2019_f450/` is a superseded pointer only.

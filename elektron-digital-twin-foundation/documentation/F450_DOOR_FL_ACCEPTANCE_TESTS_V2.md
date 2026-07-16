@@ -1,24 +1,20 @@
 # F-450 Door FL Acceptance Tests V2
 
+**Kernel:** `1.0.0-rc1`  
 **Subject:** `CMPINST-VEH000001-DOOR-FL` on `VEH-000001` / `CFG-000001`  
-**Supersedes:** `kernel/F450_DOOR_FL_ACCEPTANCE_TESTS.md`
+**Automated:** `verification/isolation/run_isolation_tests.py`
 
 | ID | Test | Pass criteria | Result |
 |---|---|---|---|
-| T01 | Identified by exact instance ID | `CMPINST-VEH000001-DOOR-FL` resolves; refs `VEH-000001` and `CFG-000001` | `PASS_SCHEMA` |
-| T02 | No illegal applicability fields | No `model_year_range`; no other years/models/cabs on instance | `PASS_SCHEMA` |
-| T03 | Geometry record honest | `validation_status` is `NOT_EXECUTED` until bytes exist; metrics null | `PASS_SCHEMA` |
-| T04 | Interaction class correct | `PROTOTYPE` or `VISUAL_PREVIEW_ONLY`; disassembly `NOT_VERIFIED` | `PASS_SCHEMA` |
-| T05 | Renderer displays asset | Mesh visible in Three.js | `NOT_EXECUTED` |
-| T06 | Isolate hides others | Isolate toggle works | `NOT_EXECUTED` |
-| T07 | Visual removal preview | Preview move only — **not** engineering-verified disassembly | `NOT_EXECUTED` |
+| **Test 01 (Isolation)** | Search/bind `VEH-000001` | Returns `CMPINST-VEH000001-DOOR-FL` without leakage from other vehicle IDs | `PASS_SCHEMA` (automated) |
+| **Test 02 (Integrity)** | `model_year` integrity | Instance vehicle record `model_year` is strictly `2019` | `PASS_SCHEMA` (automated) |
+| **Test 03 (Visualization)** | Three.js transform | Viewport handles transform matrix of `CMPINST-VEH000001-DOOR-FL` without reference to external cab models | `NOT_EXECUTED` |
+| **Test 04 (Interaction)** | Removal preview | `removal_preview` / visual preview triggers without asserting a verified service procedure | `PASS_SCHEMA` for flags; runtime `NOT_EXECUTED` |
+| **Test 05 (Fingerprint)** | CFG fingerprint | `configuration_fingerprint` matches SHA-256 of published canonical string | `PASS_SCHEMA` (automated) |
 
 ## Vocabulary
 
 ```text
-PASS_SCHEMA   — instance/schema structure satisfies the check
-NOT_EXECUTED  — runtime/mesh not available; do not claim pass
-FAIL          — assertion failed
+PASS_SCHEMA   — structure satisfies the check without runtime
+NOT_EXECUTED  — renderer/harness not run; do not claim runtime pass
 ```
-
-No test in this document is claimed as runtime-executed.

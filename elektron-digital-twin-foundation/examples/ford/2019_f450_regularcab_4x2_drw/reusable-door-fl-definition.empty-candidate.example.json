@@ -7,5 +7,6 @@
   "proven_vehicle_instance_ids": [],
   "cross_vehicle_comparison_ids": [],
   "schema_version": "1.0.0",
-  "notes": "Empty candidate only. Not linked from CMPINST-VEH000001-DOOR-FL until interchangeability is proven. Outside exact vehicle applicability."
+  "notes": "Empty candidate only. Not linked from CMPINST-VEH000001-DOOR-FL until interchangeability is proven. Outside exact vehicle applicability.",
+  "$id": "urn:edts:example:reusable:RDEF-DOOR-FL-CANDIDATE-001"
 }

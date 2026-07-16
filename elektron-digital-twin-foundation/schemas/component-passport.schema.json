@@ -115,6 +115,6 @@
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://edts.local/schemas/component-passport.schema.json",
+  "$id": "urn:edts:schema:component-passport:v1",
   "additionalProperties": false
 }

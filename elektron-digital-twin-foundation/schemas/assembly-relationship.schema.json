@@ -56,6 +56,6 @@
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://edts.local/schemas/assembly-relationship.schema.json",
+  "$id": "urn:edts:schema:assembly-relationship:v1",
   "additionalProperties": false
 }

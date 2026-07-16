@@ -74,6 +74,6 @@
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://edts.local/schemas/cross-vehicle-comparison.schema.json",
+  "$id": "urn:edts:schema:cross-vehicle-comparison:v1",
   "additionalProperties": false
 }

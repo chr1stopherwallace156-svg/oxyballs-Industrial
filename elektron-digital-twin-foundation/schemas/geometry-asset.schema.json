@@ -107,6 +107,6 @@
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://edts.local/schemas/geometry-asset.schema.json",
+  "$id": "urn:edts:schema:geometry-asset:v1",
   "additionalProperties": false
 }

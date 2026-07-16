@@ -419,3 +419,21 @@ Append-only record of digital twin foundation decisions.
   - Phase `EDTS_UNIVERSAL_EXACT_VEHICLE_KERNEL_READY`
   - Isolation suite is a gate for kernel readiness claims
   - Scales from any passenger car to any commercial EV without kernel forks
+
+## DT-D024 — EDTS Kernel v1.0.0-rc1
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Package Exact-Vehicle Isolation as Kernel release candidate with immutable IDs, URN schema identities, and configuration fingerprinting.
+- **Decision:**
+  1. Stamp kernel **`1.0.0-rc1`** (`KERNEL_MANIFEST.json`)
+  2. Schema `$id` = `urn:edts:schema:<name>:v1` (Draft 2020-12)
+  3. Adopt **`EDTS_CFG_FINGERPRINT_SHA256_V1`** for exact configuration identity
+  4. Seed silo remains `examples/ford/2019_f450_regularcab_4x2_drw/` (`VEH-000001` / `CFG-000001` / `CMPINST-VEH000001-DOOR-FL`)
+  5. Example records carry `urn:edts:example:*` `$id`s
+  6. Acceptance Tests V2 Isolation/Integrity/Visualization/Interaction + fingerprint check
+  7. Phase status **`EDTS_EXACT_VEHICLE_KERNEL_READY`**
+- **Consequences:**
+  - Multi-year applicability remains prohibited
+  - Cross-vehicle data only via decoupled comparison records
+  - Isolation suite remains a readiness gate

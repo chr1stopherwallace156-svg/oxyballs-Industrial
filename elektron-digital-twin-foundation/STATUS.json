@@ -1,11 +1,11 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.10.0",
-  "updated_at": "2026-07-16T15:00:00Z",
+  "version": "0.11.0",
+  "updated_at": "2026-07-16T16:30:00Z",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
-  "phase": "EDTS_UNIVERSAL_EXACT_VEHICLE_KERNEL_READY",
+  "phase": "EDTS_EXACT_VEHICLE_KERNEL_READY",
   "readiness": "L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE",
   "milestone": "L1_SOURCE_PACK_01",
   "source_pack_01_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
@@ -30,7 +30,7 @@
   "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "Keep kernel OEM-agnostic; populate only exact datasets; run isolation suite after dataset edits",
+  "next_action": "Objective mesh ingestion for GEO-VEH000001-DOOR-FL-001 when bytes exist; keep silos isolated; run isolation suite",
   "owner_approval_required": true,
   "governance_status": {
     "L00_CONFIRMED_CORRECTIONS": "ACCEPTED",
@@ -106,17 +106,18 @@
     "USS_VERSION": "SCHEMA_SEEDED",
     "CMP_SD_FRAME_001": "DRAFT_CANDIDATE",
     "CMP_FR_145": "DEPRECATED_ALIAS",
-    "EDTS_KERNEL": "SUPERSEDED_BY_EXACT_VEHICLE_KERNEL",
+    "EDTS_KERNEL": "V1_0_0_RC1",
     "EDTS_KERNEL_SCHEMAS": "PROPOSAL_V1",
     "CMP_FORD_SD_DOOR_FL_001": "SUPERSEDED_NON_ISOLATED",
     "EVL_00001": "CANDIDATE_SUPPORTS_GEOMETRY",
     "EVL_00002": "AWAITING_FILE_STUB",
     "CMP_SD_044_L": "DEPRECATED_ALIAS",
-    "EDTS_EXACT_VEHICLE_KERNEL": "UNIVERSAL_READY",
+    "EDTS_EXACT_VEHICLE_KERNEL": "READY",
     "EXACT_VEHICLE_ISOLATION": "ACTIVE_UNIVERSAL",
     "CMPINST_VEH000001_DOOR_FL": "DISCOVERED",
     "HR_EVI": "CONSTITUTIONAL",
-    "ISOLATION_NEGATIVE_TESTS": "PASS"
+    "ISOLATION_NEGATIVE_TESTS": "PASS",
+    "CONFIGURATION_FINGERPRINT": "ACTIVE"
   },
   "reference_vehicle": {
     "status": "provisional_profile_locked",
@@ -226,7 +227,7 @@
       "status": "factual_verification_required",
       "geometry_status": "blocked",
       "research_status": "L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE",
-      "phase": "EDTS_UNIVERSAL_EXACT_VEHICLE_KERNEL_READY",
+      "phase": "EDTS_EXACT_VEHICLE_KERNEL_READY",
       "milestone": "L1_SOURCE_PACK_01",
       "source_pack_01_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
       "gate_status": "L1_DOCUMENT_ACQUISITION_READY",
@@ -410,5 +411,8 @@
   "kernel_documentation": "documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md",
   "hard_rule_exact_vehicle_isolation": "CONSTITUTIONAL",
   "isolation_test_suite": "verification/isolation/run_isolation_tests.py",
-  "isolation_law": "documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md"
+  "isolation_law": "documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md",
+  "kernel_version": "1.0.0-rc1",
+  "kernel_manifest": "KERNEL_MANIFEST.json",
+  "fingerprint_algorithm": "EDTS_CFG_FINGERPRINT_SHA256_V1"
 }

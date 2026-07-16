@@ -63,6 +63,6 @@
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://edts.local/schemas/reusable-component-definition.schema.json",
+  "$id": "urn:edts:schema:reusable-component-definition:v1",
   "additionalProperties": false
 }

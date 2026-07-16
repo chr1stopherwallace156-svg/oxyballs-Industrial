@@ -1,15 +1,32 @@
 # Cross-Vehicle Non-Inheritance Rules
 
 **Status:** `ACTIVE`  
-**Law:** [HARD_RULE_EXACT_VEHICLE_ISOLATION.md](HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
-**Version:** `2.0.0`
+**Kernel:** `1.0.0-rc1`  
+**Law:** HR-EVI
 
 ---
 
-## Core law
+## Zero-Inheritance
 
-**Similarity is never evidence.**  
-**Cross-vehicle comparison is allowed. Cross-vehicle inheritance is prohibited.**
+Any attribute (geometry, material, procedure, measurement, evidence, assembly, interaction, shader, pivot, tolerance, fastener, torque, dimension, CAD, scan) that appears related across model years or platforms must be documented in a **cross-vehicle-comparison** record.
+
+It must never be copied as functional inheritance into another vehicle silo.
+
+---
+
+## Explicit Verification
+
+Verification in one vehicle (e.g. 2019) does **not** status-update the component in another (e.g. 2018).
+
+Every dataset earns its own verification status.
+
+---
+
+## Identity Fingerprinting
+
+Every `configuration_id` must be paired with a canonical fingerprint of its specific physical attributes (wheelbase, CA, drivetrain, cab, rear-wheel configuration, etc.).
+
+See [CONFIGURATION_FINGERPRINT_STANDARD.md](CONFIGURATION_FINGERPRINT_STANDARD.md).
 
 ```text
 Vehicle A  →  Comparison Record  →  Vehicle B     ✅
@@ -18,51 +35,6 @@ Vehicle A  →  inherits directly  →  Vehicle B     ❌
 
 ---
 
-## Non-leakage inventory
+## Similarity
 
-A vehicle dataset must never automatically inherit any of the following from another vehicle:
-
-- geometry  
-- materials  
-- measurements  
-- procedures  
-- evidence  
-- assemblies  
-- interactions  
-- shaders  
-- pivots  
-- tolerances  
-- fasteners  
-- service procedures  
-- torque values  
-- dimensions  
-- CAD  
-- scans  
-
----
-
-## Promotion path
-
-```text
-observe similarity (discovery only)
-  → write cross-vehicle-comparison (reuse_status = NOT_EVALUATED)
-  → gather independent evidence on EACH exact vehicle
-  → optionally set reuse_status = PROVEN
-  → only then link reusable_component_definition_id on each instance
-```
-
-Skipping steps is a constitutional violation.
-
----
-
-## Universal examples (illustrative only)
-
-These pairs are always distinct datasets until independently proven:
-
-- 2019 F-450 Regular Cab vs 2018 F-450 Regular Cab  
-- 2019 F-450 4x2 vs 2019 F-450 4x4  
-- F-450 DRW vs F-450 SRW  
-- 2021 Transit vs 2022 Transit  
-- Model 3 Long Range vs Model 3 Performance  
-- Silverado 2500HD vs 3500HD  
-- Camry LE vs Camry XSE  
+Similarity permits discovery only. Similarity is never evidence.

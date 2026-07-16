@@ -175,6 +175,35 @@ def test_foreign_vehicle_id_not_in_ford_dataset() -> None:
                 fail(f"foreign vehicle token {tok} in {path.name}")
 
 
+def test_configuration_fingerprint_matches_canonical() -> None:
+    import hashlib
+
+    data = json.loads((DATASET / "exact-configuration.example.json").read_text())
+    canonical = data.get("fingerprint_canonical_string")
+    digest = data.get("configuration_fingerprint")
+    algo = data.get("fingerprint_algorithm")
+    if algo != "EDTS_CFG_FINGERPRINT_SHA256_V1":
+        fail("unexpected fingerprint_algorithm")
+    if not canonical or not digest:
+        fail("fingerprint fields missing")
+    expected = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+    if digest != expected:
+        fail("configuration_fingerprint does not match canonical string")
+    if data.get("inheritance_status") != "NONE":
+        fail("inheritance_status must be NONE")
+
+
+def test_schema_urn_ids() -> None:
+    for name in KERNEL_SCHEMAS:
+        data = json.loads((SCHEMAS / name).read_text())
+        expected = f"urn:edts:schema:{name.replace('.schema.json', '')}:v1"
+        # name already includes .schema.json in KERNEL_SCHEMAS entries
+        stem = name[: -len(".schema.json")]
+        expected = f"urn:edts:schema:{stem}:v1"
+        if data.get("$id") != expected:
+            fail(f"{name} $id expected {expected}, got {data.get('$id')}")
+
+
 def main() -> int:
     tests = [
         test_schemas_are_draft_2020_12_and_universal,
@@ -186,6 +215,8 @@ def main() -> int:
         test_passport_evidence_empty,
         test_negative_fixture_rejected_by_policy,
         test_foreign_vehicle_id_not_in_ford_dataset,
+        test_configuration_fingerprint_matches_canonical,
+        test_schema_urn_ids,
     ]
     failed = 0
     for t in tests:

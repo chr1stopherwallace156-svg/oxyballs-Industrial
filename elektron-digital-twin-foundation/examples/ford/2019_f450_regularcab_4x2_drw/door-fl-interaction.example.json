@@ -12,5 +12,6 @@
   "exploded_offset_mm": null,
   "runtime_execution_status": "NOT_EXECUTED",
   "schema_version": "1.0.0",
-  "notes": "Visual removal preview only. Not engineering-verified disassembly. Runtime tests not executed."
+  "notes": "Visual removal preview only. Not engineering-verified disassembly. Runtime tests not executed.",
+  "$id": "urn:edts:example:interaction:INT-VEH000001-DOOR-FL-001"
 }

@@ -8,19 +8,20 @@ Before modifying any file, read:
 
 1. [EDTS_OS.md](EDTS_OS.md) — **EDTS-OS constitution**
 2. [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md) — **HR-EVI constitutional isolation law**
-3. [documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md](documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md) — operational isolation standard
-4. [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) — research / evidence runtime core (v2.1+)
-5. [README.md](README.md) — required reading order for core specifications
-6. [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md)
-7. [AGENTS.md](AGENTS.md) (this file)
-8. [STATUS.json](STATUS.json)
-9. [DECISIONS.md](DECISIONS.md)
-10. [REQUIREMENTS.md](REQUIREMENTS.md)
-11. [ARCHITECTURE.md](ARCHITECTURE.md)
-12. [DATA_MODEL.md](DATA_MODEL.md)
-13. [THREE_D_SPEC.md](THREE_D_SPEC.md)
-14. [QUALITY_STANDARD.md](QUALITY_STANDARD.md)
-15. The active layer doc under `layers/`
+3. [KERNEL_MANIFEST.json](KERNEL_MANIFEST.json) — Kernel **v1.0.0-rc1**
+4. [documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md](documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md) — operational isolation standard
+5. [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) — research / evidence runtime core (v2.1+)
+6. [README.md](README.md) — required reading order for core specifications
+7. [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md)
+8. [AGENTS.md](AGENTS.md) (this file)
+9. [STATUS.json](STATUS.json)
+10. [DECISIONS.md](DECISIONS.md)
+11. [REQUIREMENTS.md](REQUIREMENTS.md)
+12. [ARCHITECTURE.md](ARCHITECTURE.md)
+13. [DATA_MODEL.md](DATA_MODEL.md)
+14. [THREE_D_SPEC.md](THREE_D_SPEC.md)
+15. [QUALITY_STANDARD.md](QUALITY_STANDARD.md)
+16. The active layer doc under `layers/`
 
 ## Operational directives
 

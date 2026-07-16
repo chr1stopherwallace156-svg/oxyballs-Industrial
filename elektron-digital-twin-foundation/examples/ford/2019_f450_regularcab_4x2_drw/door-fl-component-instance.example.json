@@ -1,5 +1,6 @@
 {
   "$schema": "../../../schemas/component-instance.schema.json",
+  "$id": "urn:edts:example:component:CMPINST-VEH000001-DOOR-FL",
   "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
   "vehicle_instance_id": "VEH-000001",
   "configuration_id": "CFG-000001",
@@ -11,5 +12,5 @@
   "evidence_link_ids": [],
   "geometry_asset_ids": ["GEO-VEH000001-DOOR-FL-001"],
   "schema_version": "1.0.0",
-  "notes": "Vehicle-bound instance only. Not a generic shared-platform door. Cross-vehicle reuse NOT_EVALUATED."
+  "notes": "Vehicle-bound instance in the VEH-000001 silo only."
 }

@@ -517,3 +517,23 @@ All notable changes to the digital twin foundation. Append-only.
 - HR-EVI: **CONSTITUTIONAL**
 - Isolation tests: **PASS**
 - Kernel: universal; datasets: isolated
+
+## 2026-07-16 (EDTS Kernel v1.0.0-rc1)
+
+### Added
+
+- `KERNEL_MANIFEST.json` — kernel `1.0.0-rc1`
+- `documentation/CONFIGURATION_FINGERPRINT_STANDARD.md`
+- Configuration fingerprint on `CFG-000001`
+- URN `$id`s on schemas (`urn:edts:schema:*:v1`) and examples (`urn:edts:example:*`)
+- **DT-D024**
+
+### Changed
+
+- Acceptance / slice plans aligned to Isolation · Integrity · Visualization · Interaction
+- Phase → `EDTS_EXACT_VEHICLE_KERNEL_READY`
+
+### Status
+
+- Kernel: **1.0.0-rc1 READY**
+- Isolation suite: **PASS**

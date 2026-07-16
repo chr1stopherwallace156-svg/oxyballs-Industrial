@@ -1,0 +1,33 @@
+{
+  "kernel_id": "EDTS-KERNEL",
+  "kernel_version": "1.0.0-rc1",
+  "status": "EDTS_EXACT_VEHICLE_KERNEL_READY",
+  "constitutional_law": "documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md",
+  "primary_directive": "EXACT_VEHICLE_ISOLATION",
+  "schema_draft": "2020-12",
+  "schema_id_pattern": "urn:edts:schema:<name>:v1",
+  "schemas": [
+    "schemas/entity-definition.schema.json",
+    "schemas/vehicle-instance.schema.json",
+    "schemas/exact-configuration.schema.json",
+    "schemas/component-instance.schema.json",
+    "schemas/reusable-component-definition.schema.json",
+    "schemas/evidence-link.schema.json",
+    "schemas/geometry-asset.schema.json",
+    "schemas/assembly-relationship.schema.json",
+    "schemas/interaction-definition.schema.json",
+    "schemas/component-passport.schema.json",
+    "schemas/cross-vehicle-comparison.schema.json"
+  ],
+  "seed_dataset": "examples/ford/2019_f450_regularcab_4x2_drw/",
+  "seed_vehicle_instance_id": "VEH-000001",
+  "seed_configuration_id": "CFG-000001",
+  "seed_door_component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+  "fingerprint_algorithm": "EDTS_CFG_FINGERPRINT_SHA256_V1",
+  "isolation_tests": "verification/isolation/run_isolation_tests.py",
+  "notes": [
+    "Kernel is OEM-agnostic. Vehicle data lives only in examples/<manufacturer>/<exact_configuration>/.",
+    "examples/2019_f450/ is a superseded path pointer — use the ford exact-config dataset.",
+    "No multi-year or cross-platform interchangeability assumptions."
+  ]
+}
