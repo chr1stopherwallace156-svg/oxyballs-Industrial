@@ -1,11 +1,11 @@
 # EDTS Kernel Scope — Minimum Viable Kernel
 
-**Status:** `EDTS_KERNEL_VERTICAL_SLICE_READY`  
-**Version:** `1.0.0`  
-**Effective:** 2026-07-16  
-**Primary test subject:** 2019 Ford F-450 Regular Cab **front-left door assembly**  
-**Canonical entity:** `CMP-FORD-SD-DOOR-FL-001`  
-**Decision:** DT-D021
+**Status:** `SUPERSEDED` by exact-vehicle isolation revision  
+**Successor:** [documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md](../documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md)  
+**Canonical door:** `CMPINST-VEH000001-DOOR-FL` on `VEH-000001` / `CFG-000001`  
+**Examples:** [examples/2019_f450/](../examples/2019_f450/)
+
+This document retained for audit. Prior `model_year_range` applicability is **prohibited**.
 
 ---
 

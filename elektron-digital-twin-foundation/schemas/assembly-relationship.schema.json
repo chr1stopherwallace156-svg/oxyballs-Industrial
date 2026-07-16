@@ -1,0 +1,61 @@
+{
+  "title": "AssemblyRelationship",
+  "description": "Relationship between entities within one exact configuration. No cross-vehicle inheritance.",
+  "type": "object",
+  "required": [
+    "relationship_id",
+    "subject_id",
+    "predicate",
+    "object_id",
+    "configuration_id",
+    "schema_version"
+  ],
+  "properties": {
+    "relationship_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "predicate": {
+      "type": "string",
+      "enum": [
+        "IS_PART_OF",
+        "ATTACHES_TO",
+        "REPLACES",
+        "COMPATIBLE_WITH",
+        "UNKNOWN",
+        "NOT_EVALUATED"
+      ]
+    },
+    "object_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "configuration_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "vehicle_instance_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edts.local/schemas/assembly-relationship.schema.json",
+  "additionalProperties": false
+}

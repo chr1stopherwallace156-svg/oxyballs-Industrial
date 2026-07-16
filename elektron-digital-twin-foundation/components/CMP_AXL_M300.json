@@ -1,6 +1,6 @@
 {
   "$id": "urn:edts:component-passport:axle_m300:v1",
-  "$schema": "../schemas/component-passport.schema.json",
+  "$schema": "../schemas/component-passport-os-v1.schema.json",
   "hard_rule_0": "COMPONENT_FIRST",
   "component_id": "CMP-AXL-M300",
   "name": "Dana_M300_Class_Rear_DRW_Assembly",

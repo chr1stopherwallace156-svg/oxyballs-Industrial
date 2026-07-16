@@ -474,3 +474,24 @@ All notable changes to the digital twin foundation. Append-only.
 - T01/T02: **PASS_SCHEMA**
 - T03–T05: **NOT_EXECUTED**
 - Geometry freeze: **NOT_YET_APPROVED**
+
+## 2026-07-16 (Exact-Vehicle Isolation Kernel)
+
+### Added
+
+- Draft 2020-12 universal schemas: entity/vehicle/config/component-instance/reusable/evidence/geometry/assembly/interaction/passport/cross-vehicle-comparison
+- `examples/2019_f450/*` exact-vehicle records (`VEH-000001`, `CFG-000001`, `CMPINST-VEH000001-DOOR-FL`)
+- `documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md` and related isolation docs
+- **DT-D022**
+
+### Changed
+
+- Prior year-range door applicability **superseded**
+- OS passport schema renamed to `component-passport-os-v1.schema.json`
+- Phase → `EDTS_EXACT_VEHICLE_KERNEL_READY`
+
+### Status
+
+- Exact-vehicle kernel: **READY**
+- Interaction: **VISUAL_PREVIEW_ONLY** (runtime NOT_EXECUTED)
+- Evidence links: **empty** (no invented source IDs)

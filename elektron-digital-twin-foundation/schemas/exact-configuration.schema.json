@@ -1,0 +1,107 @@
+{
+  "title": "ExactConfiguration",
+  "description": "Exact vehicle configuration. Each cab, drivetrain, wheelbase, and CA value is a distinct configuration \u2014 no ranges, no inheritance.",
+  "type": "object",
+  "required": [
+    "configuration_id",
+    "vehicle_instance_id",
+    "cab",
+    "drivetrain",
+    "rear_wheel_configuration",
+    "wheelbase",
+    "cab_to_axle",
+    "schema_version"
+  ],
+  "properties": {
+    "configuration_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "vehicle_instance_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cab": {
+      "type": "string",
+      "minLength": 1
+    },
+    "body_type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "drivetrain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rear_wheel_configuration": {
+      "type": "string",
+      "minLength": 1
+    },
+    "wheelbase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "unit"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string",
+          "enum": [
+            "in",
+            "mm"
+          ]
+        }
+      }
+    },
+    "cab_to_axle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "unit"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string",
+          "enum": [
+            "in",
+            "mm"
+          ]
+        }
+      }
+    },
+    "series": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "inheritance_status": {
+      "type": "string",
+      "const": "NONE",
+      "description": "Exact configurations never inherit from related platforms."
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edts.local/schemas/exact-configuration.schema.json",
+  "additionalProperties": false
+}

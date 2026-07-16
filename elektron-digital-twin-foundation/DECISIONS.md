@@ -380,3 +380,22 @@ Append-only record of digital twin foundation decisions.
   - Visually reusable / dimensionally inaccurate assets stay `PROVISIONAL_VISUAL` (KQ-001)
   - No ENGINEERING_VERIFIED door without KQ-002 threshold
   - Geometry freeze still blocked
+
+## DT-D022 — Exact-vehicle isolation kernel revision
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Prior kernel incorrectly applied `model_year_range` 2017–2019 and platform-family applicability to the door. Violates exact-vehicle isolation.
+- **Decision:**
+  1. Enforce **Exact Vehicle Isolation Standard** (every year/model/cab/drivetrain/WB/CA distinct; no automatic inheritance)
+  2. Replace proposal schemas with Draft **2020-12** universal `schemas/*.schema.json` (no OEM assumptions)
+  3. Store populated records only under `examples/2019_f450/`
+  4. Canonical door = **`CMPINST-VEH000001-DOOR-FL`** bound to **`VEH-000001`** + **`CFG-000001`**
+  5. Exact vehicle = 2019 Ford F-450 Chassis Cab Regular Cab 4x2 DRW 145.3/60 only
+  6. Reusable definitions remain empty/`NOT_EVALUATED` until proven; cross-vehicle comparisons live outside exact records
+  7. Interaction = `VISUAL_PREVIEW_ONLY`; disassembly `NOT_VERIFIED`; runtime `NOT_EXECUTED`
+  8. No evidence links to non-existent source IDs (`evidence_link_ids: []`)
+  9. Supersede `kernel/instances/f450_door_fl` and `schemas/kernel/*PROPOSAL*`
+- **Consequences:**
+  - Phase `EDTS_EXACT_VEHICLE_KERNEL_READY`
+  - Prior `CMP-FORD-SD-DOOR-FL-001` / year-range applicability must not be extended

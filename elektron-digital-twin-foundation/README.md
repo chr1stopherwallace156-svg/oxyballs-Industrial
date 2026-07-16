@@ -2,15 +2,13 @@
 
 This repository contains the authoritative schemas, standards, and registries establishing the baseline data model and coordinate frameworks for the F-450 physical vehicle intake and digital reconstruction.
 
-**Kernel:** `EDTS_KERNEL_VERTICAL_SLICE_READY` — [kernel/EDTS_KERNEL_SCOPE.md](kernel/EDTS_KERNEL_SCOPE.md)  
-**Test subject:** `CMP-FORD-SD-DOOR-FL-001` (F-450 Regular Cab FL door)  
-**First evidence link:** `EVL-00001` → `SRC-ASSET-00031` (`SUPPORTS_GEOMETRY`, `CANDIDATE`)  
-**Architecture:** `EDTS-OS v3` — [EDTS_OS.md](EDTS_OS.md) · [Blueprint](EDTS_OS_ARCHITECTURE_BLUEPRINT.md)  
-**Research protocol:** `ACTIVE` v2 — [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md)  
+**Exact-vehicle kernel:** `EDTS_EXACT_VEHICLE_KERNEL_READY`  
+**Isolation:** [documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md](documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md)  
+**Vehicle:** `VEH-000001` · **Config:** `CFG-000001` · **Door:** `CMPINST-VEH000001-DOOR-FL`  
+**Examples:** [examples/2019_f450/](examples/2019_f450/)  
 **Confidence %:** `DEPRECATED`  
 **Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`  
-**Acceptance:** T01/T02 PASS_SCHEMA · T03–T05 NOT_EXECUTED  
-See [STATUS.json](STATUS.json), [kernel/instances/f450_door_fl/](kernel/instances/f450_door_fl/).
+See [STATUS.json](STATUS.json).
 
 ---
 
@@ -83,7 +81,7 @@ Every layer passes five gates before advancing:
 
 ## Current stage
 
-**L01 — EDTS Kernel vertical slice READY.** Primary subject `CMP-FORD-SD-DOOR-FL-001`. First evidence link EVL-00001 (ASSET-00031). T03–T05 not executed. Geometry freeze blocked. See [kernel/EDTS_KERNEL_SCOPE.md](kernel/EDTS_KERNEL_SCOPE.md).
+**L01 — Exact-vehicle kernel READY.** Door `CMPINST-VEH000001-DOOR-FL` on `VEH-000001`/`CFG-000001` only. No year-range applicability. See [documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md](documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md).
 
 ## Related work
 

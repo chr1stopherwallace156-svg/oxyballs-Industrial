@@ -1,0 +1,116 @@
+{
+  "title": "ComponentInstance",
+  "description": "Vehicle-bound component instance. Bound to exactly one vehicle instance and exact configuration. No model_year_range. No automatic platform-family applicability.",
+  "type": "object",
+  "required": [
+    "component_instance_id",
+    "vehicle_instance_id",
+    "configuration_id",
+    "slot",
+    "lifecycle_status",
+    "schema_version"
+  ],
+  "properties": {
+    "component_instance_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "vehicle_instance_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "configuration_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "slot": {
+      "type": "string",
+      "minLength": 1
+    },
+    "display_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "lifecycle_status": {
+      "type": "string",
+      "enum": [
+        "DISCOVERED",
+        "REGISTERED",
+        "PROVISIONAL",
+        "VERIFIED",
+        "REJECTED",
+        "UNKNOWN",
+        "NOT_EVALUATED"
+      ]
+    },
+    "reusable_component_definition_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Optional. Null until interchangeability is proven. Must not imply cross-vehicle applicability."
+    },
+    "reusable_link_status": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "CANDIDATE_EMPTY",
+        "NOT_EVALUATED",
+        "PROVEN",
+        "REJECTED"
+      ]
+    },
+    "evidence_link_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Only IDs of evidence-link records that exist in-repo."
+    },
+    "geometry_asset_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "not": {
+    "anyOf": [
+      {
+        "required": [
+          "model_year_range"
+        ]
+      },
+      {
+        "required": [
+          "platform_family"
+        ]
+      },
+      {
+        "required": [
+          "applicable_models"
+        ]
+      },
+      {
+        "required": [
+          "applicable_years"
+        ]
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edts.local/schemas/component-instance.schema.json",
+  "additionalProperties": false
+}

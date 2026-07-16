@@ -1,0 +1,112 @@
+{
+  "title": "GeometryAsset",
+  "description": "Geometry asset bound to a component instance. Metrics null until executed against local bytes.",
+  "type": "object",
+  "required": [
+    "geometry_asset_id",
+    "component_instance_id",
+    "format",
+    "asset_role",
+    "validation_status",
+    "schema_version"
+  ],
+  "properties": {
+    "geometry_asset_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "component_instance_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "GLB",
+        "GLTF",
+        "OBJ",
+        "FBX",
+        "USD",
+        "OTHER",
+        "UNKNOWN"
+      ]
+    },
+    "asset_role": {
+      "type": "string",
+      "enum": [
+        "PROVISIONAL_VISUAL",
+        "DIMENSIONAL_CANDIDATE",
+        "ENGINEERING_VERIFIED",
+        "REJECTED",
+        "UNKNOWN",
+        "NOT_EVALUATED"
+      ]
+    },
+    "validation_status": {
+      "type": "string",
+      "enum": [
+        "NOT_EXECUTED",
+        "PASS",
+        "FAIL",
+        "BLOCKED",
+        "UNKNOWN"
+      ]
+    },
+    "catalog_asset_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Optional catalog ID if registered; null if unknown."
+    },
+    "local_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "file_exists": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "objective_metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "triangle_count": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "bounding_box_mm": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "texture_count": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edts.local/schemas/geometry-asset.schema.json",
+  "additionalProperties": false
+}

@@ -18,12 +18,14 @@
   "component_graph": [
     {
       "slot": "CAB_DOOR_FRONT_LEFT",
-      "component_id": "CMP-FORD-SD-DOOR-FL-001",
-      "passport": "kernel/instances/f450_door_fl/passport_minimum.json",
-      "legacy_passport": "components/CMP_PASS_FR_DOOR_L.json",
+      "component_id": "CMPINST-VEH000001-DOOR-FL",
+      "passport": "examples/2019_f450/door-fl-component-passport.example.json",
       "version_pin": 1,
       "inherit": true,
-      "kernel_slice": true
+      "kernel_slice": true,
+      "vehicle_instance_id": "VEH-000001",
+      "configuration_id": "CFG-000001",
+      "notes": "Exact-vehicle bound instance."
     },
     {
       "slot": "FRAME_RAILS",
@@ -33,7 +35,10 @@
       "variant_id": "VAR-145_3-WB-60-CA",
       "inherit": true,
       "unique_to_configuration": false,
-      "configuration_unique_fields": ["wheelbase_in", "cab_to_axle_in"],
+      "configuration_unique_fields": [
+        "wheelbase_in",
+        "cab_to_axle_in"
+      ],
       "notes": "Family component with configuration-unique variant pin (not a one-off F-450-only engine object)."
     },
     {

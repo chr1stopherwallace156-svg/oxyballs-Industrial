@@ -1,6 +1,6 @@
 {
   "$id": "urn:edts:component-passport:sd_frame_001:v1",
-  "$schema": "../schemas/component-passport.schema.json",
+  "$schema": "../schemas/component-passport-os-v1.schema.json",
   "hard_rule_0": "COMPONENT_FIRST",
   "component_id": "CMP-SD-FRAME-001",
   "name": "Super_Duty_Chassis_Cab_Frame_Family",

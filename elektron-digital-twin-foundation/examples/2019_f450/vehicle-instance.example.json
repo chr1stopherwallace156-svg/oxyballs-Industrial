@@ -1,0 +1,13 @@
+{
+  "$schema": "../../schemas/vehicle-instance.schema.json",
+  "vehicle_instance_id": "VEH-000001",
+  "model_year": 2019,
+  "manufacturer": "Ford",
+  "model": "F-450",
+  "vehicle_type": "Chassis Cab",
+  "vin": null,
+  "vin_status": "PENDING",
+  "isolation_declaration": "EXACT_VEHICLE_ONLY",
+  "schema_version": "1.0.0",
+  "notes": "Exact vehicle instance only. No platform-family inheritance. No other model years."
+}

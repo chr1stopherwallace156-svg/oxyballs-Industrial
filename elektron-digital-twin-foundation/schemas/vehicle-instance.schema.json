@@ -1,0 +1,68 @@
+{
+  "title": "VehicleInstance",
+  "description": "Exact physical or reference vehicle instance. One record per exact vehicle identity \u2014 no year ranges.",
+  "type": "object",
+  "required": [
+    "vehicle_instance_id",
+    "model_year",
+    "manufacturer",
+    "model",
+    "vehicle_type",
+    "schema_version"
+  ],
+  "properties": {
+    "vehicle_instance_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_year": {
+      "type": "integer",
+      "minimum": 1900
+    },
+    "manufacturer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "vehicle_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "vin": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "vin_status": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "PENDING",
+        "RECORDED",
+        "NOT_EVALUATED"
+      ]
+    },
+    "isolation_declaration": {
+      "type": "string",
+      "const": "EXACT_VEHICLE_ONLY",
+      "description": "Record must not inherit platform-family or cross-year facts."
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edts.local/schemas/vehicle-instance.schema.json",
+  "additionalProperties": false
+}

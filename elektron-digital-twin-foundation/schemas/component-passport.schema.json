@@ -1,48 +1,120 @@
 {
-  "$id": "urn:edts:schema:component-passport:v1",
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "EDTS Component Passport",
+  "title": "ComponentPassport",
+  "description": "Minimum passport for a vehicle-bound component instance. Summarizes evidence/geometry/interaction without cross-vehicle claims.",
   "type": "object",
-  "required": ["$id", "component_id", "name", "current_version", "compatibility", "meta"],
+  "required": [
+    "passport_id",
+    "component_instance_id",
+    "vehicle_instance_id",
+    "configuration_id",
+    "status_summary",
+    "schema_version"
+  ],
   "properties": {
-    "$id": { "type": "string" },
-    "component_id": { "type": "string" },
-    "name": { "type": "string" },
-    "current_version": { "type": "integer", "minimum": 1 },
-    "hard_rule_0": { "type": "string", "const": "COMPONENT_FIRST" },
-    "compatibility": {
-      "type": "object",
-      "properties": {
-        "platforms": { "type": "array", "items": { "type": "string" } },
-        "body_styles": { "type": "array", "items": { "type": "string" } }
-      }
+    "passport_id": {
+      "type": "string",
+      "minLength": 1
     },
-    "geometry_status": { "type": "object" },
-    "materials_profile": { "type": "object" },
-    "runtime_capabilities": { "type": "object" },
-    "evidence_graph_links": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Parameter node IDs in L1_EVIDENCE_GRAPH.json"
+    "component_instance_id": {
+      "type": "string",
+      "minLength": 1
     },
-    "meta": {
+    "vehicle_instance_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "configuration_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status_summary": {
       "type": "object",
-      "required": ["review_status"],
+      "additionalProperties": false,
+      "required": [
+        "evidence",
+        "geometry",
+        "interaction"
+      ],
       "properties": {
-        "last_engineering_review": { "type": ["string", "null"] },
-        "review_status": {
+        "evidence": {
           "type": "string",
           "enum": [
-            "DRAFT_CANDIDATE",
-            "IN_REVIEW",
-            "COMPONENT_VERIFIED",
-            "PRODUCTION_APPROVED",
-            "FROZEN",
-            "REJECTED"
+            "ABSENT",
+            "CANDIDATE",
+            "AWAITING_FILE",
+            "NORMALIZED",
+            "VERIFIED",
+            "UNKNOWN",
+            "NOT_EVALUATED"
           ]
         },
-        "notes": { "type": "string" }
+        "geometry": {
+          "type": "string",
+          "enum": [
+            "ABSENT",
+            "PROVISIONAL",
+            "DIMENSIONAL_CANDIDATE",
+            "ENGINEERING_VERIFIED",
+            "UNKNOWN",
+            "NOT_EVALUATED"
+          ]
+        },
+        "interaction": {
+          "type": "string",
+          "enum": [
+            "ABSENT",
+            "PROTOTYPE",
+            "VISUAL_PREVIEW_ONLY",
+            "CALIBRATED",
+            "ENGINEERING_VERIFIED",
+            "UNKNOWN",
+            "NOT_EVALUATED"
+          ]
+        }
       }
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_link_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "geometry_asset_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relationship_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "interaction_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edts.local/schemas/component-passport.schema.json",
+  "additionalProperties": false
 }

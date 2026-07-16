@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/exact-configuration.schema.json",
+  "configuration_id": "CFG-000001",
+  "vehicle_instance_id": "VEH-000001",
+  "cab": "Regular Cab",
+  "body_type": "Chassis Cab",
+  "drivetrain": "4x2",
+  "rear_wheel_configuration": "DRW",
+  "wheelbase": { "value": 145.3, "unit": "in" },
+  "cab_to_axle": { "value": 60.0, "unit": "in" },
+  "series": null,
+  "inheritance_status": "NONE",
+  "schema_version": "1.0.0",
+  "notes": "Exact configuration only. Does not include Crew Cab, 4x4, pickup, alternate WB/CA, or other years."
+}

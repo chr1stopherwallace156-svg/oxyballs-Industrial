@@ -1,0 +1,20 @@
+{
+  "$schema": "../../schemas/component-passport.schema.json",
+  "passport_id": "PP-VEH000001-DOOR-FL-001",
+  "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+  "vehicle_instance_id": "VEH-000001",
+  "configuration_id": "CFG-000001",
+  "status_summary": {
+    "evidence": "ABSENT",
+    "geometry": "PROVISIONAL",
+    "interaction": "VISUAL_PREVIEW_ONLY"
+  },
+  "links": {
+    "evidence_link_ids": [],
+    "geometry_asset_ids": ["GEO-VEH000001-DOOR-FL-001"],
+    "relationship_ids": ["REL-VEH000001-0001"],
+    "interaction_ids": ["INT-VEH000001-DOOR-FL-001"]
+  },
+  "schema_version": "1.0.0",
+  "notes": "Evidence links empty until a source ID that exists in-repo is linked with file awareness. No cross-year claims."
+}

@@ -1,0 +1,83 @@
+{
+  "title": "EvidenceLink",
+  "description": "Link between an entity and an existing source artifact ID. Do not invent source IDs.",
+  "type": "object",
+  "required": [
+    "evidence_link_id",
+    "subject_id",
+    "subject_type",
+    "source_id",
+    "relationship",
+    "verification_status",
+    "schema_version"
+  ],
+  "properties": {
+    "evidence_link_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject_type": {
+      "type": "string",
+      "enum": [
+        "COMPONENT_INSTANCE",
+        "VEHICLE_INSTANCE",
+        "CONFIGURATION",
+        "GEOMETRY_ASSET",
+        "OTHER"
+      ]
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Must reference a source ID that exists in a registry or manifest in this repository."
+    },
+    "source_file_exists": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "relationship": {
+      "type": "string",
+      "enum": [
+        "SUPPORTS_GEOMETRY",
+        "SUPPORTS_DIMENSION",
+        "SUPPORTS_MATERIAL",
+        "SUPPORTS_APPLICABILITY",
+        "CONTRADICTS",
+        "NEUTRAL",
+        "UNKNOWN",
+        "NOT_EVALUATED"
+      ]
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "CANDIDATE",
+        "AWAITING_FILE",
+        "INGESTED",
+        "NORMALIZED",
+        "REJECTED",
+        "UNKNOWN",
+        "NOT_EVALUATED"
+      ]
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edts.local/schemas/evidence-link.schema.json",
+  "additionalProperties": false
+}

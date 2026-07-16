@@ -1,0 +1,121 @@
+{
+  "title": "InteractionDefinition",
+  "description": "Interaction capabilities. Distinguishes visual preview from engineering-verified disassembly.",
+  "type": "object",
+  "required": [
+    "interaction_id",
+    "component_instance_id",
+    "selectable",
+    "isolatable",
+    "interaction_class",
+    "disassembly_status",
+    "pivot_status",
+    "schema_version"
+  ],
+  "properties": {
+    "interaction_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "component_instance_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "selectable": {
+      "type": "boolean"
+    },
+    "isolatable": {
+      "type": "boolean"
+    },
+    "interaction_class": {
+      "type": "string",
+      "enum": [
+        "PROTOTYPE",
+        "VISUAL_PREVIEW_ONLY",
+        "CALIBRATED",
+        "ENGINEERING_VERIFIED",
+        "UNKNOWN",
+        "NOT_EVALUATED"
+      ],
+      "description": "Visual removal preview is PROTOTYPE or VISUAL_PREVIEW_ONLY \u2014 not engineering-verified disassembly."
+    },
+    "visual_removal_preview": {
+      "type": "boolean"
+    },
+    "disassembly_status": {
+      "type": "string",
+      "enum": [
+        "NOT_VERIFIED",
+        "VISUAL_PREVIEW_ONLY",
+        "PROCEDURE_DOCUMENTED",
+        "ENGINEERING_VERIFIED",
+        "UNKNOWN",
+        "NOT_EVALUATED"
+      ]
+    },
+    "pivot_status": {
+      "type": "string",
+      "enum": [
+        "NOT_DEFINED",
+        "PROVISIONAL",
+        "CALIBRATED",
+        "VERIFIED",
+        "UNKNOWN",
+        "NOT_EVALUATED"
+      ]
+    },
+    "pivot_axis": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      ]
+    },
+    "exploded_offset_mm": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      ]
+    },
+    "runtime_execution_status": {
+      "type": "string",
+      "enum": [
+        "NOT_EXECUTED",
+        "PASS",
+        "FAIL",
+        "BLOCKED",
+        "UNKNOWN"
+      ]
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edts.local/schemas/interaction-definition.schema.json",
+  "additionalProperties": false
+}

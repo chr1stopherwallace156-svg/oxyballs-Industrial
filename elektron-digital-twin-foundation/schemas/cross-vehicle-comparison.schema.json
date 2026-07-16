@@ -1,0 +1,79 @@
+{
+  "title": "CrossVehicleComparison",
+  "description": "Optional comparison record between exact vehicles/components. Similarity permits discovery only. Cross-vehicle reuse remains NOT_EVALUATED until independently verified. Must live outside exact vehicle records.",
+  "type": "object",
+  "required": [
+    "comparison_id",
+    "left_vehicle_instance_id",
+    "right_vehicle_instance_id",
+    "comparison_status",
+    "reuse_status",
+    "schema_version"
+  ],
+  "properties": {
+    "comparison_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "left_vehicle_instance_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "right_vehicle_instance_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "left_component_instance_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "right_component_instance_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "similarity_notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "comparison_status": {
+      "type": "string",
+      "enum": [
+        "DISCOVERY_ONLY",
+        "IN_PROGRESS",
+        "COMPLETE",
+        "REJECTED",
+        "UNKNOWN",
+        "NOT_EVALUATED"
+      ]
+    },
+    "reuse_status": {
+      "type": "string",
+      "enum": [
+        "NOT_EVALUATED",
+        "DISALLOWED",
+        "PROVEN",
+        "REJECTED"
+      ],
+      "description": "Default NOT_EVALUATED. Similarity never auto-promotes to PROVEN."
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://edts.local/schemas/cross-vehicle-comparison.schema.json",
+  "additionalProperties": false
+}
