@@ -106,3 +106,24 @@ DT-D029; protocol v2.1.2.
 ### Status
 
 DT-D030.
+
+---
+
+## RL-005 — Evidence Acquisition Engine activated (empirical shift)
+
+- **Date:** 2026-07-16
+- **Layer:** L01 / tools
+- **Agent:** Cursor Cloud Agent
+- **Question:** Proceed with acquisition sprint for CAND-00031 / CAND-771?
+
+### Findings
+
+1. Built reusable **Evidence Acquisition Engine** (not a new kernel schema): Search→…→Runtime Ready with METADATA stage and PROMOTED_TO_REFERENCE_ONLY.
+2. Executed against both candidates: both **`BLOCKED_BY_MISSING_SOURCE_URL`** (no URL, no bytes) — honest.
+3. Passport **not** updated with invented hash/parse metadata.
+4. Kernel remains `EDTS_EXACT_VEHICLE_KERNEL_VALIDATED` / frozen.
+5. Posture: `EVIDENCE_ACQUISITION_IN_PROGRESS`.
+
+### Status
+
+DT-D032.

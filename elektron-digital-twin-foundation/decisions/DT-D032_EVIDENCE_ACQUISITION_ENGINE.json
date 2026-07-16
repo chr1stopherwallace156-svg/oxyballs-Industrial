@@ -1,0 +1,48 @@
+{
+  "decision_id": "DT-D032",
+  "title": "Shift to Evidence Acquisition Engine (empirical sprint; kernel remains frozen)",
+  "date": "2026-07-16",
+  "approved_status": "ACCEPTED",
+  "scope": [
+    "tools/evidence_acquisition/",
+    "documentation/EVIDENCE_ACQUISITION_ENGINE.md",
+    "research/incoming/l01_lane_a_assets/",
+    "verification/results/evidence-acquisition-engine-run.json",
+    "STATUS.json / PROJECT_STATE.md",
+    "CMPINST-VEH000001-DOOR-FL vertical slice gate"
+  ],
+  "reason": "Kernel v1.0.0-rc1 is validated and frozen. Further schema design has diminishing returns. The bottleneck is real evidence. Build a reusable Evidence Acquisition pipeline (not only two one-off asset downloads) that hashes, extracts metadata, parses, inventories, grades, and preserves audit trails without inventing URLs or digests.",
+  "decision": [
+    "Keep edts-kernel-v1.0.0-rc1 and SCHEMA_FREEZE_FOR_VERTICAL_SLICE intact.",
+    "Implement Evidence Acquisition Engine under tools/evidence_acquisition/ (operational code + stages JSON — not a frozen kernel schema).",
+    "Generalize Asset Acquisition to Evidence Acquisition (meshes are one evidence class).",
+    "Insert METADATA between INTEGRITY and PARSE.",
+    "Use lifecycle DISCOVERED→ACQUIRED→VERIFIED→PARSED→INDEXED→COMPONENTIZED→EVIDENCE_LINKED→RUNTIME_READY plus PROMOTED_TO_REFERENCE_ONLY.",
+    "Never invent source URLs, SHA-256 values, mesh inventories, or passport geometry links.",
+    "Do not auto-update the Component Passport until usable geometry is acquired and inventoried.",
+    "First engine execution against CAND-00031-CGT and CAND-771-GRAB must honestly report blocked status while URLs/bytes are absent.",
+    "Posture: EVIDENCE_ACQUISITION_IN_PROGRESS."
+  ],
+  "affected_files": [
+    "tools/evidence_acquisition/README.md",
+    "tools/evidence_acquisition/pipeline_stages.json",
+    "tools/evidence_acquisition/run_evidence_acquisition.py",
+    "documentation/EVIDENCE_ACQUISITION_ENGINE.md",
+    "verification/results/evidence-acquisition-engine-run.json",
+    "verification/results/EVIDENCE_ACQUISITION_ENGINE_REPORT.md",
+    "STATUS.json",
+    "PROJECT_STATE.md",
+    "DECISIONS.md",
+    "layers/L01/L1_LANE_A_ASSET_CATALOG.json"
+  ],
+  "validation_evidence": [
+    "verification/results/evidence-acquisition-engine-run.json",
+    "verification/results/EVIDENCE_ACQUISITION_ENGINE_REPORT.md"
+  ],
+  "related_decisions": ["DT-D028", "DT-D030", "DT-D031"],
+  "change_control": {
+    "kernel_schema_change": false,
+    "runtime_activation": false,
+    "empirical_subsystem": true
+  }
+}

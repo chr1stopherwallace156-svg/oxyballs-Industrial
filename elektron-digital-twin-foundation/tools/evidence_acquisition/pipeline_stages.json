@@ -1,0 +1,77 @@
+{
+  "subsystem": "Evidence Acquisition Engine",
+  "status": "ACTIVE_OPERATIONAL",
+  "kernel_posture": "SCHEMA_FREEZE_FOR_VERTICAL_SLICE — no frozen kernel schema mutation",
+  "pipeline": [
+    "SEARCH",
+    "DISCOVER",
+    "ACQUIRE",
+    "INTEGRITY",
+    "METADATA",
+    "PARSE",
+    "INVENTORY",
+    "GRADE",
+    "EXTRACT_COMPONENTS",
+    "ATTACH_EVIDENCE",
+    "UPDATE_PASSPORT",
+    "RUNTIME_READY"
+  ],
+  "lifecycle_milestones": [
+    "DISCOVERED",
+    "ACQUIRED",
+    "VERIFIED",
+    "PARSED",
+    "INDEXED",
+    "COMPONENTIZED",
+    "EVIDENCE_LINKED",
+    "RUNTIME_READY"
+  ],
+  "terminal_side_states": [
+    "NOT_ACQUIRED",
+    "BLOCKED_BY_MISSING_SOURCE_URL",
+    "BLOCKED_BY_LICENSE",
+    "BLOCKED_BY_MISSING_LOCAL_BYTES",
+    "PROMOTED_TO_REFERENCE_ONLY",
+    "REJECTED"
+  ],
+  "evidence_types_supported": [
+    "CAD",
+    "FBX",
+    "GLB",
+    "GLTF",
+    "OBJ",
+    "STEP",
+    "STL",
+    "USD",
+    "OEM_MANUAL",
+    "DEALER_PHOTO",
+    "AUCTION_PHOTO",
+    "WIRING_DIAGRAM",
+    "PARTS_CATALOG",
+    "SERVICE_PROCEDURE",
+    "TORQUE_CHART",
+    "PAINT_SPEC",
+    "MATERIAL_DATA",
+    "SCAN",
+    "LIDAR",
+    "PHOTOGRAMMETRY",
+    "USER_MEASUREMENT",
+    "OTHER"
+  ],
+  "rules": [
+    "Never invent source URLs, SHA-256 digests, mesh inventories, or scores.",
+    "Never overwrite existing evidence records; only append pipeline runs and update status.",
+    "Do not mutate frozen kernel schemas.",
+    "Do not update Component Passport geometry/evidence links until ACQUIRED→HASHED→PARSED→INVENTORIED.",
+    "Non-separable geometry may be PROMOTED_TO_REFERENCE_ONLY — still useful, not a door extract.",
+    "CAD hierarchy is discovery-only until relationship verification (DT relationship separation)."
+  ],
+  "required_outputs_on_successful_acquire": [
+    "asset_manifest.json",
+    "mesh_inventory.json",
+    "asset_hash_record.json",
+    "metadata_record.json",
+    "door_extractability_report.md",
+    "pipeline_run.json"
+  ]
+}

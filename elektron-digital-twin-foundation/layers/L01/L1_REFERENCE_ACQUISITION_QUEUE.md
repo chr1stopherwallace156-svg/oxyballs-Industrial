@@ -89,7 +89,13 @@ gantt
 
 ---
 
-## Priority 1b — Component-First Marketplace Asset Acquisition (Lane A)
+## Priority 1b — Evidence Acquisition Engine (Lane A + broader evidence)
+
+**Subsystem:** `tools/evidence_acquisition/` · `documentation/EVIDENCE_ACQUISITION_ENGINE.md` · DT-D032  
+
+Pipeline: Search → Discover → Acquire → Integrity → **Metadata** → Parse → Inventory → Grade → Extract → Attach Evidence → Update Passport → Runtime Ready.
+
+## Priority 1b-legacy note — Component-First Marketplace Asset Acquisition (Lane A)
 
 **Gap addressed:** No local geometry bytes for `CMPINST-VEH000001-DOOR-FL` (blocks door vertical slice).  
 **Rule:** Hard Rule 11 — search complete-vehicle **and** component levels; evaluate an exact complete asset first when found; otherwise acquire component-by-component under HR-EVI.  

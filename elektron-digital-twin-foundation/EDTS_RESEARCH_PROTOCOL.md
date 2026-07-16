@@ -156,7 +156,7 @@ Research shall maximize evidence acquisition efficiency. Search for the highest-
 
 **Hard Rule 11 does *not* say:** “Never search for a complete vehicle.” Complete-vehicle search is encouraged when quality and configuration match justify it.
 
-**Immediate next build priority (over OEM part-number chase alone):** deepen the **Component Passport** for `CMPINST-VEH000001-DOOR-FL` using the existing passport schema and exact-vehicle instance records — geometry, evidence links, interaction status, and assembly relationships — without inventing missing bytes or reopening the frozen kernel.
+**Immediate next build priority:** operate the **Evidence Acquisition Engine** (`tools/evidence_acquisition/`, `documentation/EVIDENCE_ACQUISITION_ENGINE.md`) to move candidates from `DISCOVERED` toward `PARSED` / `COMPONENTIZED` — without inventing URLs, hashes, or reopening the frozen kernel. Deepen the Component Passport only after real evidence is acquired and inventoried.
 
 ### Deferred architecture (do not implement under schema freeze)
 

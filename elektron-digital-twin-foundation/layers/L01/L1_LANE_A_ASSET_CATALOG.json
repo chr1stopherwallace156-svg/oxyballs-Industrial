@@ -124,5 +124,9 @@
   ],
   "rejection_reason": "Redundant with RESEARCH_LOG, this catalog, per-asset evaluation/audit, HR-EVI + cross-vehicle-comparison schema, L1 gap matrix, and REFERENCE_ACQUISITION_QUEUE / STATUS. Example marketplace URLs in the proposal are not admitted (Hard Rule 6).",
   "acquisition_status": "F450_DOOR_FL_CANDIDATES_TRACKED_NOT_ACQUIRED",
-  "door_vertical_slice_gate": "F450_DOOR_FL_VERTICAL_SLICE_BLOCKED_BY_MISSING_ASSET"
+  "evidence_acquisition_engine": "tools/evidence_acquisition/",
+  "evidence_acquisition_latest_run": "verification/results/evidence-acquisition-engine-run.json",
+  "evidence_acquisition_posture": "EVIDENCE_ACQUISITION_IN_PROGRESS",
+  "door_vertical_slice_gate": "F450_DOOR_FL_VERTICAL_SLICE_BLOCKED_BY_MISSING_ASSET",
+  "pipeline_note": "Both CAND-00031-CGT and CAND-771-GRAB remain DISCOVERED; engine run BLOCKED_BY_MISSING_SOURCE_URL until real URLs and licensed bytes are supplied. Passport not auto-updated."
 }

@@ -536,3 +536,16 @@ Append-only record of digital twin foundation decisions.
 - **affected_files:** listed in the JSON record
 - **validation_evidence:** `verification/results/component-passport-rc1-validation.json`, `verification/results/COMPONENT_PASSPORT_EXISTING_SCHEMA_AUDIT.md`
 - **final_status:** `COMPONENT_PASSPORT_RC1_SUFFICIENT`
+
+## DT-D032 — Evidence Acquisition Engine (empirical sprint)
+
+- **Change-control record:** [`decisions/DT-D032_EVIDENCE_ACQUISITION_ENGINE.json`](decisions/DT-D032_EVIDENCE_ACQUISITION_ENGINE.json)
+- **decision_id:** `DT-D032`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **scope:** Evidence Acquisition Engine; door candidates CAND-00031-CGT / CAND-771-GRAB; kernel remains frozen
+- **reason:** Architecture is stable enough; bottleneck is real evidence. Build a reusable pipeline (Search→…→Runtime Ready) with METADATA stage and PROMOTED_TO_REFERENCE_ONLY, not more schemas.
+- **affected_files:** listed in the JSON record
+- **validation_evidence:** `verification/results/evidence-acquisition-engine-run.json` (both candidates `BLOCKED_BY_MISSING_SOURCE_URL` — honest)
+- **posture:** `EVIDENCE_ACQUISITION_IN_PROGRESS`
+- **passport:** not auto-updated until usable geometry exists
