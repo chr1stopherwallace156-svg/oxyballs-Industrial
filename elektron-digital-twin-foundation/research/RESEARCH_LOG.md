@@ -177,3 +177,25 @@ Recorded under `research/sprints/RL-006_FRONT_SUSPENSION_PRIMARY_SOURCE.md`.
 ### Status
 
 DT-D038; protocol v2.2.0; register `research/src_candidates/SRC_CANDIDATE_REGISTER.json`.
+
+---
+
+## RL-008 — FL door scope lock, candidates, CL-001 interchange
+
+- **Date:** 2026-07-16
+- **Layer:** L01 / door assembly `CMPINST-VEH000001-DOOR-FL`
+- **Agent:** Cursor Cloud Agent
+- **Question:** What exact-config evidence exists for FL door shell + internals; what should be acquired next?
+
+### Findings
+
+1. **Scope lock** recorded with contamination vectors (2020+ facelift, cab type, mirror harness).
+2. **EDTS-CAND-001 / SRC-CAND-000004** Outlines vector — real URL recorded; `NOT_ACQUIRED`; acquisition recommended.
+3. **EDTS-CAND-002 / CAND-000042-EOG** — category URL only; visual candidate; facade/inner-structure gap.
+4. **CL-001** shell interchange (FL3Z-1520125-A/B) kept as `DISCOVERED_NOT_LOCALLY_HASHED` / `COMPARISON_REFERENCE` — not Evidence Graph CROSS_VERIFIED; F-150 baseline use is comparison-only under HR-EVI.
+5. Internals (hinge, latch cables, regulator, trim, bracket) missing from public CAD → **`PHYSICAL_VERIFICATION_REQUIRED`**.
+6. Passport geometry remains `ABSENT`.
+
+### Status
+
+DT-D039 — `CANDIDATE_ACQUISITION_RECOMMENDED`.

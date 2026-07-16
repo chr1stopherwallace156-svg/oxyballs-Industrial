@@ -6,26 +6,24 @@
 | Concern | Status |
 |---|---|
 | Kernel | `VALIDATED AND FROZEN` |
-| Research protocol | **v2.2.0** — Hard Rule 13 **ACTIVE** |
 | Locked config | 2019 F-450 CC Reg Cab 4x2 DRW 145.3/60 |
-| Front suspension architecture | **`RESEARCH_REQUIRED`** |
-| Front suspension decision | **`PRIMARY_SOURCE_REQUIRED`** |
-| `SRC-CAND-000001` BBAS | `NOT_ACQUIRED` (RC 85) — **Priority 1** |
-| `SRC-CAND-000002` WSM | `NOT_ACQUIRED` (RC 90) |
-| `SRC-CAND-000003` Parts | `NOT_ACQUIRED` (RC 75) |
-| Geometry extraction | **FORBIDDEN** until Tier A applicability verified |
-| Research engine | `OPERATIONAL` |
-| EAE CORE INGESTION | `VALIDATED` |
-| Next build priority | **`SRC_CAND_000001_BBAS_ACQUISITION`** |
+| FL door passport geometry | `ABSENT` |
+| FL door decision | **`CANDIDATE_ACQUISITION_RECOMMENDED` (DT-D039)** |
+| Physical door internals | **`PHYSICAL_VERIFICATION_REQUIRED`** |
+| `SRC-CAND-000004` Outlines | `NOT_ACQUIRED` / URL recorded — **Priority acquire** |
+| `CAND-000042-EOG` / EDTS-CAND-002 | Visual candidate; SKU URL not isolated |
+| CL-001 shell interchange | `COMPARISON_REFERENCE` (not locally hashed) |
+| Front suspension | `PRIMARY_SOURCE_REQUIRED` (DT-D037) — parallel |
+| Research engine | `OPERATIONAL` (Hard Rule 13) |
+| Next build priority | **`SRC_CAND_000004_OUTLINES_ACQUISITION`** |
 
-## Authoritative research surfaces
+## Authoritative surfaces
 
-- Register / queue: `research/src_candidates/SRC_CANDIDATE_REGISTER.json`
-- Sprint: `research/sprints/RL-007_HARD_RULE_13_SRC_CAND_FRONT_SUSPENSION.md`
-- Decisions: `DT-D037`, `DT-D038`
+- Sprint: `research/sprints/RL-008_DOOR_FL_SCOPE_LOCK_AND_CANDIDATES.md`
+- Register: `research/src_candidates/SRC_CANDIDATE_REGISTER.json`
+- Claims: `research/claims/CL-001_DOOR_SHELL_INTERCHANGE.json`
+- Catalog: `layers/L01/L1_LANE_A_ASSET_CATALOG.json`
 
-RC = hunt prioritization only (Reasoning Log required). Not engineering verification %.
+## Change-control
 
-## Change-control records
-
-- `decisions/DT-D030_*.json` … `DT-D038_*.json`
+- `decisions/DT-D030_*.json` … `DT-D039_*.json`

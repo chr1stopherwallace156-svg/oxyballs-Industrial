@@ -643,3 +643,21 @@ Append-only record of digital twin foundation decisions.
   4. Register `SRC-CAND-000001/2/3` as `NOT_ACQUIRED`; Priority 1 = acquire BBAS
   5. DT-D037 `PRIMARY_SOURCE_REQUIRED` remains; geometry extraction forbidden until Tier A applicability verified
 
+
+## DT-D039 — FL door: CANDIDATE_ACQUISITION_RECOMMENDED
+
+- **Change-control record:** [`decisions/DT-D039_DOOR_FL_CANDIDATE_ACQUISITION_RECOMMENDED.json`](decisions/DT-D039_DOOR_FL_CANDIDATE_ACQUISITION_RECOMMENDED.json)
+- **decision_id:** `DT-D039`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `CANDIDATE_ACQUISITION_RECOMMENDED`
+- **secondary_flags:** `PHYSICAL_VERIFICATION_REQUIRED`
+- **scope:** RL-008; `SRC-CAND-000004` / EDTS-CAND-001; `CAND-000042-EOG` / EDTS-CAND-002; CL-001; `CMPINST-VEH000001-DOOR-FL`
+- **decision:**
+  1. Acquire Outlines vector (`SRC-CAND-000004`) as Priority 2D exterior baseline after purchase
+  2. Keep EOG/CGTrader mesh as visual candidate only (facade risk)
+  3. CL-001 shell interchange = comparison/crossover candidate until locally hashed — not F-450 silo geometry truth
+  4. Physical teardown/scan required for inner cavity, harness routing, latch geometry
+  5. Contamination guards: 2020+ harness, cab type, mirror options
+  6. Passport geometry remains `ABSENT`; no GEO promotion; kernel/rc1 unchanged
+

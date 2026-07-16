@@ -20,5 +20,5 @@
     "interaction_ids": []
   },
   "schema_version": "1.0.0",
-  "notes": "Exact component instance CMPINST-VEH000001-DOOR-FL under VEH-000001/CFG-000001. Candidates discovered (not acquired): CAND-00031-CGT, CAND-771-GRAB — authoritative in L1_LANE_A_ASSET_CATALOG.json (not passport fields; rc1 has no candidate_asset_ids). links.geometry_asset_ids empty; no usable geometry. No procedure dependency IDs. Fingerprint equals CFG-000001 full digest. Audit: verification/results/COMPONENT_PASSPORT_EXISTING_SCHEMA_AUDIT.md. v1.1 is OPTIONAL_FUTURE_PROPOSAL only. Legacy CMP_PASS_FR_DOOR_L must not auto-inherit."
+  "notes": "Exact component instance CMPINST-VEH000001-DOOR-FL under VEH-000001/CFG-000001. Candidates discovered (not acquired): CAND-00031-CGT, CAND-771-GRAB, EDTS-CAND-001/SRC-CAND-000004 (Outlines URL recorded), CAND-000042-EOG/EDTS-CAND-002 — see L1_LANE_A_ASSET_CATALOG.json + research/src_candidates/ (rc1 has no candidate_asset_ids field). CL-001 shell interchange is COMPARISON_REFERENCE only (DISCOVERED_NOT_LOCALLY_HASHED). links.geometry_asset_ids empty; geometry ABSENT. DT-D039: CANDIDATE_ACQUISITION_RECOMMENDED + PHYSICAL_VERIFICATION_REQUIRED. Fingerprint equals CFG-000001 full digest. Do not inherit F-150 mesh or 2020+ harness as silo truth."
 }

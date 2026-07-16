@@ -1,0 +1,33 @@
+{
+  "claim_id": "CL-001",
+  "title": "FL outer door shell interchange (aluminum panel family)",
+  "exact_claim": "The F-450 driver's side front outer door shell (OEM family FL3Z-1520125-A / FL3Z-1520125-B) is shared with F-150 and other Super Duty platforms of the same design generation — as reported from Ford parts-interchange research.",
+  "target": {
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_id": "CFG-000001",
+    "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+    "configuration_summary": "2019 Ford F-450 Regular Cab Chassis Cab 4x2 DRW 145.3/60"
+  },
+  "reported_oem_identifiers": ["FL3Z-1520125-A", "FL3Z-1520125-B"],
+  "claimed_evidence_authority": "TIER_A_OEM_PARTS_RECORD",
+  "project_verification_status": "DISCOVERED_NOT_LOCALLY_HASHED",
+  "sprint_narrative_status": "CROSS_VERIFIED",
+  "sprint_narrative_note": "Sprint Pass 4 labeled CROSS_VERIFIED; project does not promote Evidence Graph CROSS_VERIFIED until hashed local Tier A pages + Hard Rule 4 progression.",
+  "hr_evi_classification": "COMPARISON_REFERENCE_CROSSOVER_CANDIDATE",
+  "direct_applicability": "HIGH_FOR_SHELL_PANEL_FAMILY_PENDING_LOCAL_PROOF",
+  "contradictions": [
+    "Latch mechanisms, modules, mirror mounting plates, interior trim, and harnesses remain configuration-dependent and must not inherit from F-150 or other cabs."
+  ],
+  "allowed_downstream": [
+    "Evaluate F-150 generation-band door shell scans as COMPARISON_REFERENCE baselines to reduce scan cost"
+  ],
+  "forbidden_downstream": [
+    "Auto-admit F-150 mesh as verified F-450 silo geometry",
+    "GEOMETRY freeze from interchange claim alone",
+    "Assume 2020+ harness pinouts for 2019 twin"
+  ],
+  "local_evidence_paths": [],
+  "sha256_of_source_pages": null,
+  "research_sprint": "RL-008",
+  "decision": "DT-D039"
+}

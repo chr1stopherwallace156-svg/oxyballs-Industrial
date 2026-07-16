@@ -1,7 +1,7 @@
 {
   "catalog_id": "L1_LANE_A_ASSET_CATALOG",
   "schema_note": "Operational Lane A register (not a frozen kernel schema expansion). Fields follow L1_PARALLEL_LANES.md catalog template plus Component-First Acquisition target components.",
-  "updated_at": "2026-07-16T17:10:00Z",
+  "updated_at": "2026-07-16T19:55:00Z",
   "exact_vehicle_silo": {
     "vehicle_instance_id": "VEH-000001",
     "configuration_id": "CFG-000001",
@@ -111,6 +111,71 @@
       "availability_audit": null,
       "evaluation_doc": null,
       "notes": "Tracked as a component-level discovery candidate only. No verified URL, local bytes, or geometry-asset registration. Related-year CAD remains discovery-only under HR-EVI until configuration match is proven. Do not invent listing URLs or promote to GEO-*."
+    },
+    {
+      "asset_id": null,
+      "candidate_asset_id": "CAND-000042-EOG",
+      "legacy_aliases": ["EDTS-CAND-002", "C-002"],
+      "marketplace": "CGTrader",
+      "publisher_reported": "EOG",
+      "url": "https://www.cgtrader.com/3d-models/f450",
+      "url_status": "CATEGORY_OR_SEARCH_SURFACE_NOT_SKU_SPECIFIC",
+      "claimed_year_range": "2017-2022 band (unverified)",
+      "claimed_body": "F-350 to F-550 Super Duty Dually / Chassis Cab complete model (reported)",
+      "reported_vehicle": "Ford F-350–F-550 Super Duty Dually (EOG listing claim)",
+      "asset_type": "3D_MODEL",
+      "file_format": "FBX/OBJ/BLEND (reported)",
+      "license": "REQUIRES_COUNSEL_REVIEW",
+      "grade": "B",
+      "price_condition": "REPORTED_55_30_USD_SALE",
+      "downloadable_status": "CANDIDATE_NOT_ACQUIRED",
+      "local_file_path": null,
+      "file_exists": false,
+      "sha256": null,
+      "visible_component_separation": "UNLIKELY_RENDER_MESH",
+      "front_left_door_presence": "CLAIMED_SHELL_ONLY_UNVERIFIED",
+      "target_component_instance_ids": [
+        "CMPINST-VEH000001-DOOR-FL",
+        "ASMINST-VEH000001-CAB"
+      ],
+      "estimated_configuration_match": "VISUAL_PLATFORM_BAND_ONLY",
+      "evidence_status": "DISCOVERED",
+      "lifecycle_note": "DISCOVERED -> CONFIGURATION_EVALUATED (visual candidate; CAD-grade accuracy unverified)",
+      "availability_audit": null,
+      "evaluation_doc": "research/sprints/RL-008_DOOR_FL_SCOPE_LOCK_AND_CANDIDATES.md",
+      "notes": "RL-008 / DT-D039. Facade risk: missing inner door, latch guides, wire paths. Not interchangeable with ASSET-00031 without proof. Isolate SKU URL before purchase. No GEO promotion."
+    },
+    {
+      "asset_id": null,
+      "candidate_asset_id": "EDTS-CAND-001",
+      "maps_to_src_cand": "SRC-CAND-000004",
+      "marketplace": "GetOutlines",
+      "url": "https://getoutlines.com/vector-drawings/30637/2017-2022-ford-f-450-super-duty-drawings",
+      "url_status": "URL_RECORDED",
+      "claimed_year_range": "2017-2022",
+      "claimed_body": "F-450 Super Duty Chassis Cab Regular Cab CA 60 DRW vector blueprint",
+      "reported_vehicle": "Ford F-450 Super Duty 4th gen Chassis Cab Regular Cab 60 CA DRW",
+      "asset_type": "VECTOR_2D_REFERENCE",
+      "file_format": "EPS/SVG/AI/CDR (reported)",
+      "license": "COMMERCIAL_PURCHASE",
+      "grade": "C",
+      "price_condition": "REPORTED_24_00_USD",
+      "downloadable_status": "CANDIDATE_NOT_ACQUIRED",
+      "local_file_path": null,
+      "file_exists": false,
+      "sha256": null,
+      "visible_component_separation": "N_A_2D",
+      "front_left_door_presence": "EXTERIOR_PROFILE_ONLY",
+      "target_component_instance_ids": [
+        "CMPINST-VEH000001-DOOR-FL",
+        "ASMINST-VEH000001-CAB"
+      ],
+      "estimated_configuration_match": "EXTERIOR_PROPORTION_CANDIDATE",
+      "evidence_status": "DISCOVERED",
+      "lifecycle_note": "DISCOVERED -> URL_RECORDED -> AWAITING_PURCHASE (DT-D039 Priority acquire)",
+      "availability_audit": null,
+      "evaluation_doc": "research/sprints/RL-008_DOOR_FL_SCOPE_LOCK_AND_CANDIDATES.md",
+      "notes": "Authoritative machine record also at research/src_candidates/SRC-CAND-000004.json. 2D only — not inner structure truth. MY band includes 2020+."
     }
   ],
   "rejected_proposal_artifacts": [
@@ -128,5 +193,5 @@
   "evidence_acquisition_latest_run": "verification/results/evidence-acquisition-engine-run.json",
   "evidence_acquisition_posture": "EVIDENCE_ACQUISITION_IN_PROGRESS",
   "door_vertical_slice_gate": "F450_DOOR_FL_VERTICAL_SLICE_BLOCKED_BY_MISSING_ASSET",
-  "pipeline_note": "Both CAND-00031-CGT and CAND-771-GRAB remain DISCOVERED; engine run BLOCKED_BY_MISSING_SOURCE_URL until real URLs and licensed bytes are supplied. Passport not auto-updated."
+  "pipeline_note": "CAND-00031-CGT / CAND-771-GRAB remain DISCOVERED without SKU bytes. EDTS-CAND-001/SRC-CAND-000004 has URL_RECORDED (Outlines). CAND-000042-EOG needs SKU isolation. Passport geometry remains ABSENT; no auto-update."
 }
