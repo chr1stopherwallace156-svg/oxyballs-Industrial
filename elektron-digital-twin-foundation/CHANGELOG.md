@@ -560,3 +560,25 @@ All notable changes to the digital twin foundation. Append-only.
 - Examples: **7/7**
 - Runtime isolation: **NOT_EXECUTED**
 - Suite: **VALIDATION_PENDING**
+
+## 2026-07-16 (Executable Kernel Validation)
+
+### Added
+
+- `verification/results/KERNEL_INITIAL_FILE_AUDIT.md`
+- Fingerprint generator + tests (`verification/fingerprint/`)
+- Draft 2020-12 example validator (`verification/schema/`)
+- Executable isolation + invalid fixtures
+- Referential integrity suite
+- Result artifacts under `verification/results/`
+- Master runner `verification/run_kernel_validation.py`
+- **DT-D026**
+
+### Changed
+
+- Fingerprint standard → RFC 8785 JCS whitelist algorithm
+- Final status derived from executed results only
+
+### Status
+
+- See `verification/results/KERNEL_VALIDATION_REPORT.md`

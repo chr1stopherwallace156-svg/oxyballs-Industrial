@@ -1,0 +1,88 @@
+{
+  "suite": "kernel-referential-integrity-tests",
+  "execution_timestamp": "2026-07-16T16:38:38.535358+00:00",
+  "runtime": "python3",
+  "total": 7,
+  "passed": 7,
+  "failed": 0,
+  "suite_pass_or_fail": "PASS",
+  "results": [
+    {
+      "test_id": "REF-EXIST-001",
+      "execution_timestamp": "2026-07-16T16:38:38.535358+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "all referenced records exist",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "examples/2019_f450/"
+    },
+    {
+      "test_id": "REF-VEH-001",
+      "execution_timestamp": "2026-07-16T16:38:38.535358+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "component/assembly/vehicle IDs align",
+      "actual_result": "comp=VEH-000001 asm=VEH-000001 veh=VEH-000001",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "examples/2019_f450/door-fl-component-instance.example.json"
+    },
+    {
+      "test_id": "REF-CFG-001",
+      "execution_timestamp": "2026-07-16T16:38:38.535358+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "component configuration matches vehicle configuration",
+      "actual_result": "comp=CFG-000001 veh=CFG-000001",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "examples/2019_f450/door-fl-component-instance.example.json"
+    },
+    {
+      "test_id": "REF-FP-001",
+      "execution_timestamp": "2026-07-16T16:38:38.535358+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "component fingerprint matches exact configuration",
+      "actual_result": "comp=sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943 cfg=sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "examples/2019_f450/exact-configuration.example.json"
+    },
+    {
+      "test_id": "REF-GEO-001",
+      "execution_timestamp": "2026-07-16T16:38:38.535358+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "geometry asset links to correct component instance",
+      "actual_result": "geo.component=CMPINST-VEH000001-DOOR-FL listed=['GEO-VEH000001-DOOR-FL-001']",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "examples/2019_f450/door-fl-geometry-asset.example.json"
+    },
+    {
+      "test_id": "REF-REL-001",
+      "execution_timestamp": "2026-07-16T16:38:38.535358+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "assembly relationship endpoints exist and align",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "examples/2019_f450/door-fl-assembly-relationship.example.json"
+    },
+    {
+      "test_id": "REF-PP-001",
+      "execution_timestamp": "2026-07-16T16:38:38.535358+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "passport IDs/fingerprint align with silo",
+      "actual_result": "OK",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "examples/2019_f450/door-fl-component-passport.example.json"
+    }
+  ]
+}

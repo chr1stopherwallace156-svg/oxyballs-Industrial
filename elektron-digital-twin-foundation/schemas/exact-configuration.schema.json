@@ -3,19 +3,20 @@
   "description": "Exact configuration silo with RFC 8785-style fingerprint. Schema contains no manufacturer literals.",
   "type": "object",
   "required": [
+    "cab_to_axle_mm",
+    "cab_type",
+    "configuration_fingerprint",
     "configuration_id",
+    "drivetrain",
+    "fingerprint_status",
+    "fingerprint_version",
     "manufacturer",
     "model",
     "model_year",
-    "vehicle_type",
-    "cab_type",
-    "drivetrain",
     "rear_wheel_configuration",
-    "wheelbase_mm",
-    "cab_to_axle_mm",
-    "configuration_fingerprint",
-    "fingerprint_version",
-    "schema_version"
+    "schema_version",
+    "vehicle_type",
+    "wheelbase_mm"
   ],
   "properties": {
     "configuration_id": {
@@ -63,18 +64,20 @@
       ]
     },
     "configuration_fingerprint": {
-      "type": "string",
-      "pattern": "^sha256:[a-f0-9]{64}$"
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      ],
+      "description": "null when fingerprint_status is NOT_COMPUTED; otherwise full sha256:hex64"
     },
     "fingerprint_version": {
       "type": "integer",
       "const": 1
-    },
-    "fingerprint_canonical_json": {
-      "type": [
-        "string",
-        "null"
-      ]
     },
     "inheritance_status": {
       "type": "string",
@@ -85,6 +88,26 @@
       "const": "1.0.0"
     },
     "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "fingerprint_status": {
+      "type": "string",
+      "enum": [
+        "NOT_COMPUTED",
+        "COMPUTED",
+        "INVALID"
+      ]
+    },
+    "fingerprint_identity_object": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "fingerprint_canonical_jcs": {
       "type": [
         "string",
         "null"

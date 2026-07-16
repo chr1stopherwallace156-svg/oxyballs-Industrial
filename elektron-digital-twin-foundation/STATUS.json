@@ -2,10 +2,10 @@
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
   "version": "0.12.0",
-  "updated_at": "2026-07-16T16:40:00Z",
+  "updated_at": "2026-07-16T16:38:38.538920+00:00",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
-  "phase": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATION_PENDING",
+  "phase": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATED",
   "readiness": "L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE",
   "milestone": "L1_SOURCE_PACK_01",
   "source_pack_01_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
@@ -112,13 +112,13 @@
     "EVL_00001": "CANDIDATE_SUPPORTS_GEOMETRY",
     "EVL_00002": "AWAITING_FILE_STUB",
     "CMP_SD_044_L": "DEPRECATED_ALIAS",
-    "EDTS_EXACT_VEHICLE_KERNEL": "VALIDATION_PENDING",
+    "EDTS_EXACT_VEHICLE_KERNEL": "VALIDATED",
     "EXACT_VEHICLE_ISOLATION": "ACTIVE_UNIVERSAL",
     "CMPINST_VEH000001_DOOR_FL": "DISCOVERED",
     "HR_EVI": "CONSTITUTIONAL",
     "ISOLATION_NEGATIVE_TESTS": "PASS",
     "CONFIGURATION_FINGERPRINT": "RFC8785_STYLE_V1",
-    "RUNTIME_ISOLATION_TESTS": "NOT_EXECUTED"
+    "RUNTIME_ISOLATION_TESTS": "EXECUTED"
   },
   "reference_vehicle": {
     "status": "provisional_profile_locked",
@@ -228,7 +228,7 @@
       "status": "factual_verification_required",
       "geometry_status": "blocked",
       "research_status": "L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE",
-      "phase": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATION_PENDING",
+      "phase": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATED",
       "milestone": "L1_SOURCE_PACK_01",
       "source_pack_01_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
       "gate_status": "L1_DOCUMENT_ACQUISITION_READY",
@@ -418,5 +418,7 @@
   "fingerprint_algorithm": "EDTS_CFG_FINGERPRINT_SHA256_V1",
   "kernel_test_results": "KERNEL_TEST_RESULTS.json",
   "fingerprint_standard": "documentation/CONFIGURATION_FINGERPRINT_CANONICALIZATION_STANDARD.md",
-  "runtime_isolation_standard": "documentation/RUNTIME_VEHICLE_ISOLATION_STANDARD.md"
+  "runtime_isolation_standard": "documentation/RUNTIME_VEHICLE_ISOLATION_STANDARD.md",
+  "kernel_validation_report": "verification/results/KERNEL_VALIDATION_REPORT.md",
+  "kernel_validation_final_status": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATED"
 }

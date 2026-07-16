@@ -1,55 +1,21 @@
 {
   "kernel_version": "1.0.0-rc1",
-  "suite_status": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATION_PENDING",
+  "suite_status": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATED",
+  "execution_timestamp": "2026-07-16T16:38:38.538920+00:00",
   "summary": {
     "schemas_materialized": "11/11",
     "examples_materialized": "7/7",
     "fingerprint_standard_defined": true,
     "isolation_standards_defined": true,
-    "runtime_tests_executed": false
+    "runtime_tests_executed": true,
+    "final_status": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATED"
   },
-  "results": [
-    {
-      "test_id": "KRN-ISO-001",
-      "test_type": "RUNTIME_ISOLATION",
-      "description": "Enforce mandatory vehicle and configuration ID for component lookup (Instance Resolver).",
-      "execution_status": "NOT_EXECUTED",
-      "actual_result": null
-    },
-    {
-      "test_id": "KRN-ISO-002",
-      "test_type": "RUNTIME_ISOLATION",
-      "description": "Forbid lookup by canonical_name alone.",
-      "execution_status": "NOT_EXECUTED",
-      "actual_result": null
-    },
-    {
-      "test_id": "KRN-ISO-003",
-      "test_type": "RUNTIME_ISOLATION",
-      "description": "Miss must not fall back to another vehicle silo.",
-      "execution_status": "NOT_EXECUTED",
-      "actual_result": null
-    },
-    {
-      "test_id": "KRN-FP-001",
-      "test_type": "FINGERPRINT",
-      "description": "CFG-000001 fingerprint matches RFC8785-style canonical JSON SHA-256.",
-      "execution_status": "PASS_SCHEMA",
-      "actual_result": "sha256:39162085dcee611d8713522a771dcf3b7cdeb0e948825a0dd2d2d087530a928e"
-    },
-    {
-      "test_id": "KRN-STRUCT-001",
-      "test_type": "STRUCTURE",
-      "description": "Eleven Draft 2020-12 schemas present with urn:edts:schema:*:v1 and additionalProperties false.",
-      "execution_status": "PASS_SCHEMA",
-      "actual_result": "11/11"
-    },
-    {
-      "test_id": "KRN-STRUCT-002",
-      "test_type": "STRUCTURE",
-      "description": "Seven examples present under examples/2019_f450/ for VEH-000001 silo.",
-      "execution_status": "PASS_SCHEMA",
-      "actual_result": "7/7"
-    }
-  ]
+  "suite_files": {
+    "schema": "verification/results/kernel-schema-validation.json",
+    "fingerprint": "verification/results/kernel-fingerprint-tests.json",
+    "isolation": "verification/results/kernel-isolation-tests.json",
+    "referential": "verification/results/kernel-referential-integrity-tests.json",
+    "report": "verification/results/KERNEL_VALIDATION_REPORT.md",
+    "initial_audit": "verification/results/KERNEL_INITIAL_FILE_AUDIT.md"
+  }
 }

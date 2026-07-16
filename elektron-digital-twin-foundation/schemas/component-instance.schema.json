@@ -101,6 +101,15 @@
         "string",
         "null"
       ]
+    },
+    "fingerprint_status": {
+      "type": "string",
+      "enum": [
+        "NOT_COMPUTED",
+        "COMPUTED",
+        "INVALID",
+        "NOT_EVALUATED"
+      ]
     }
   },
   "not": {

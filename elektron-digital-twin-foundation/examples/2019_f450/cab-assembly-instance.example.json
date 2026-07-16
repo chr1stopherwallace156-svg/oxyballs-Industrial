@@ -1,0 +1,11 @@
+{
+  "$id": "urn:edts:example:assembly:ASMINST-VEH000001-CAB",
+  "assembly_instance_id": "ASMINST-VEH000001-CAB",
+  "vehicle_instance_id": "VEH-000001",
+  "configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "assembly_role": "CAB",
+  "instance_status": "DISCOVERED",
+  "schema_version": "1.0.0",
+  "notes": "Supporting assembly record for referential integrity (post-audit correction)."
+}

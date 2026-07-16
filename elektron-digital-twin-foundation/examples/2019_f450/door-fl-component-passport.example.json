@@ -5,7 +5,7 @@
   "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
   "vehicle_instance_id": "VEH-000001",
   "configuration_id": "CFG-000001",
-  "configuration_fingerprint": "sha256:39162085dcee611d8713522a771dcf3b7cdeb0e948825a0dd2d2d087530a928e",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
   "status_summary": {
     "evidence": "ABSENT",
     "geometry": "PROVISIONAL",

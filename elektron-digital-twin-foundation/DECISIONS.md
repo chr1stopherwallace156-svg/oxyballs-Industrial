@@ -453,3 +453,17 @@ Append-only record of digital twin foundation decisions.
 - **Consequences:**
   - Structural suite may pass while overall validation remains pending
   - No claim of runtime isolation enforcement until harness exists
+
+## DT-D026 — Executable kernel validation (v1.0.0-rc1)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Replace summary-based readiness with executed validation artifacts.
+- **Decision:**
+  1. Record initial file audit before corrections
+  2. Revise fingerprint to JCS (RFC 8785) + whitelist + UNKNOWN preservation; prohibit abbreviated digests
+  3. Execute fingerprint, Draft 2020-12 schema, isolation, and referential-integrity suites
+  4. Write results under `verification/results/`
+  5. Set final status only from executed outcomes
+- **Consequences:**
+  - Final status after execution: see `verification/results/KERNEL_VALIDATION_REPORT.md`

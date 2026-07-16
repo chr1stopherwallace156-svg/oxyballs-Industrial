@@ -1,6 +1,4 @@
 {
-  "$schema": "../../schemas/component-instance.schema.json",
-  "$id": "urn:edts:example:component:CMPINST-VEH000001-DOOR-FL",
   "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
   "component_definition_id": "CMPDEF-DOOR-FRONT-LH-0001",
   "vehicle_instance_id": "VEH-000001",
@@ -15,6 +13,11 @@
   ],
   "evidence_link_ids": [],
   "schema_version": "1.0.0",
-  "notes": "Vehicle-bound. Lookup must use Instance Resolver \u2014 never canonical_name alone.",
-  "fingerprint_status": "COMPUTED"
+  "fingerprint_status": "COMPUTED",
+  "cross_vehicle_comparison": {
+    "comparison_id": "XVC-ILLICIT",
+    "left_vehicle_instance_id": "VEH-000001",
+    "right_vehicle_instance_id": "VEH-2018",
+    "reuse_status": "NOT_EVALUATED"
+  }
 }

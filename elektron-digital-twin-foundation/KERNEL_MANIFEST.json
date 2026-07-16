@@ -1,7 +1,7 @@
 {
   "kernel_id": "EDTS-KERNEL",
   "kernel_version": "1.0.0-rc1",
-  "status": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATION_PENDING",
+  "status": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATED",
   "constitutional_law": "documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md",
   "primary_directive": "EXACT_VEHICLE_ISOLATION",
   "schema_draft": "2020-12",
