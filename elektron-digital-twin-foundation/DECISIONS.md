@@ -515,33 +515,24 @@ Append-only record of digital twin foundation decisions.
 
 ## DT-D030 — Passport v1.1 stays proposal-only; active rc1 schema untouched
 
-- **Date:** 2026-07-16
-- **Status:** Accepted
-- **Context:** A draft proposed editing the Component Passport schema, embedding geometry/evidence objects, procedure remove-lists, premature geometry roles, and invented scores — while `edts-kernel-v1.0.0-rc1` is frozen and the door asset is still missing.
-- **Decision:**
-  1. **Do not modify** active `schemas/component-passport.schema.json` (byte-identical to tagged rc1).
-  2. Capture corrected architecture only under `proposals/COMPONENT_PASSPORT_V1_1_DESIGN.md` + `proposals/component-passport-v1.1.schema.json` (valid JSON Schema; ID-only links; no embedded authoritative records).
-  3. Passport is an **index + status summary**, not a container duplicating registries.
-  4. Separate assembly / connection / procedure dependency records; do not seed unverified remove-door graphs.
-  5. Candidates ≠ geometry assets; no Visual/Engineering/Collision roles until ACQUIRED→…→ROLE_EVALUATED.
-  6. Scores remain `null` + `NOT_EVALUATED` until a rubric exists.
-  7. Active door passport example truthfully states: exact instance exists; `CAND-00031-CGT` + `CAND-771-GRAB` discovered; no usable geometry or verified procedure linked.
-- **Consequences:**
-  - Kernel freeze preserved; illustrative v1.1 instance is non-authoritative
-  - GEO seed may remain for referential suite but stays unlinked from the passport while `file_exists: false`
+- **Change-control record:** [`decisions/DT-D030_COMPONENT_PASSPORT_V1_1_PROPOSAL_ONLY.json`](decisions/DT-D030_COMPONENT_PASSPORT_V1_1_PROPOSAL_ONLY.json)
+- **decision_id:** `DT-D030`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **scope:** frozen `component-passport.schema.json`; proposals-only v1.1; active door passport honesty; illustrative files under `proposals/examples/`
+- **reason:** Prevent mutation of validated rc1 while geometry is absent; keep future design non-authoritative.
+- **affected_files:** listed in the JSON record
+- **validation_evidence:** `verification/results/component-passport-rc1-validation.json`, tag `edts-kernel-v1.0.0-rc1`, schema freeze doc
+- **Summary:** Active rc1 unchanged; v1.1 proposal-only; illustrative instances must set `authority_status: ILLUSTRATIVE_ONLY` and `runtime_eligible: false`.
 
 ## DT-D031 — Passport rc1 sufficient (executed validation)
 
-- **Date:** 2026-07-16
-- **Status:** Accepted
-- **Context:** Correction that draft “initial” passport fields and `COMPONENT_PASSPORT_V1_1_PROPOSAL_REQUIRED` contradicted freeze + executed capability of rc1.
-- **Decision:**
-  1. Validate active door passport against frozen `schemas/component-passport.schema.json` and record schema SHA-256, validator version, timestamp, errors.
-  2. Do not create `door-fl-component-passport.initial.example.json` with non-rc1 fields; hypothetical validation **FAIL**.
-  3. Reject abbreviated fingerprints; require full CFG-000001 digest equality.
-  4. Candidates remain in Lane A catalog; passport keeps empty geometry/evidence/procedure ID lists as applicable.
-  5. Revise v1.1: warn that `allOf` vs `additionalProperties:false` rejects new properties; park as `OPTIONAL_FUTURE_PROPOSAL` / `EMPIRICAL_TRIGGER_REQUIRED`.
-  6. Final status: **`COMPONENT_PASSPORT_RC1_SUFFICIENT`**.
-- **Consequences:**
-  - Evidence: `verification/results/component-passport-rc1-validation.json`
-  - Decision doc: `proposals/COMPONENT_PASSPORT_REVISION_DECISION.md`
+- **Change-control record:** [`decisions/DT-D031_COMPONENT_PASSPORT_RC1_SUFFICIENT.json`](decisions/DT-D031_COMPONENT_PASSPORT_RC1_SUFFICIENT.json)
+- **decision_id:** `DT-D031`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **scope:** rc1 passport capability for blocked door state; reject non-rc1 initial example; park v1.1
+- **reason:** Executed validation proves rc1 can represent current truth; “v1.1 required” contradicts that result.
+- **affected_files:** listed in the JSON record
+- **validation_evidence:** `verification/results/component-passport-rc1-validation.json`, `verification/results/COMPONENT_PASSPORT_EXISTING_SCHEMA_AUDIT.md`
+- **final_status:** `COMPONENT_PASSPORT_RC1_SUFFICIENT`

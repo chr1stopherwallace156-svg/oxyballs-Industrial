@@ -1,4 +1,6 @@
 {
+  "authority_status": "ILLUSTRATIVE_ONLY",
+  "runtime_eligible": false,
   "proposal_status": "OPTIONAL_FUTURE_PROPOSAL",
   "passport_id": "PP-VEH000001-DOOR-FL-001",
   "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
@@ -28,5 +30,5 @@
   },
   "schema_version": "1.1.0-proposal",
   "composition_notes": "Do not compose via allOf against rc1 additionalProperties:false. This file is a complete restatement draft.",
-  "notes": "ILLUSTRATIVE ONLY — NOT ACTIVE. Candidates remain in L1_LANE_A_ASSET_CATALOG.json (not forced into rc1 passport fields). No usable geometry. No verified procedure. Full CFG fingerprint only — never abbreviated."
+  "notes": "ILLUSTRATIVE ONLY — stored under proposals/examples/, not examples/2019_f450/. Candidates remain in L1_LANE_A_ASSET_CATALOG.json. No usable geometry. No verified procedure. Full CFG fingerprint only."
 }

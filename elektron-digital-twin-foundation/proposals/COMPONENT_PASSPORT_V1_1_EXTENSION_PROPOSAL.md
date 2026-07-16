@@ -3,7 +3,8 @@
 **Status:** `OPTIONAL_FUTURE_PROPOSAL` · `NOT_ACTIVATED` · `EMPIRICAL_TRIGGER_REQUIRED`  
 **Does not modify:** `schemas/component-passport.schema.json`  
 **Machine draft:** `proposals/component-passport-v1.1.schema.json`  
-**Parent decision:** `COMPONENT_PASSPORT_REVISION_DECISION.md`
+**Illustrative instances:** `proposals/examples/` (`authority_status: ILLUSTRATIVE_ONLY`, `runtime_eligible: false`)  
+**Parent decisions:** `decisions/DT-D030_*.json`, `decisions/DT-D031_*.json`
 
 ## Objective
 

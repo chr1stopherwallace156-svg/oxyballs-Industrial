@@ -1,8 +1,12 @@
 # COMPONENT_PASSPORT_REVISION_DECISION
 
 **Date:** 2026-07-16  
-**Decision ID:** DT-D031  
-**Executed validation:** `verification/results/component-passport-rc1-validation.json`
+**Decision IDs:** `DT-D030`, `DT-D031`  
+**Change-control records:**  
+- `decisions/DT-D030_COMPONENT_PASSPORT_V1_1_PROPOSAL_ONLY.json`  
+- `decisions/DT-D031_COMPONENT_PASSPORT_RC1_SUFFICIENT.json`  
+**Executed validation:** `verification/results/component-passport-rc1-validation.json`  
+**Illustrative (non-authoritative) root:** `proposals/examples/`
 
 ## Decisions
 

@@ -11,7 +11,9 @@ Independent, reusable component registries. Vehicles do not own these files; veh
 | `PP-VEH000001-DOOR-FL-001` | `CMPINST-VEH000001-DOOR-FL` | [`../examples/2019_f450/door-fl-component-passport.example.json`](../examples/2019_f450/door-fl-component-passport.example.json) | Exact instance exists; candidates discovered; **no usable geometry / no verified procedure** linked |
 
 Active schema remains frozen `schemas/component-passport.schema.json` (rc1).  
-v1.1 ID-index design (proposal only): [`../proposals/COMPONENT_PASSPORT_V1_1_DESIGN.md`](../proposals/COMPONENT_PASSPORT_V1_1_DESIGN.md).
+v1.1 (proposal only): [`../proposals/COMPONENT_PASSPORT_V1_1_EXTENSION_PROPOSAL.md`](../proposals/COMPONENT_PASSPORT_V1_1_EXTENSION_PROPOSAL.md)  
+Illustrative instances: [`../proposals/examples/`](../proposals/examples/) — never beside `examples/2019_f450/`.  
+Change control: [`../decisions/DT-D030_COMPONENT_PASSPORT_V1_1_PROPOSAL_ONLY.json`](../decisions/DT-D030_COMPONENT_PASSPORT_V1_1_PROPOSAL_ONLY.json), [`../decisions/DT-D031_COMPONENT_PASSPORT_RC1_SUFFICIENT.json`](../decisions/DT-D031_COMPONENT_PASSPORT_RC1_SUFFICIENT.json).
 
 Deepen links only after ACQUIRED→HASHED→PARSED→INVENTORIED→ROLE_EVALUATED. Do not invent mesh hashes, hinge coordinates, removal graphs, or numeric quality scores.
 

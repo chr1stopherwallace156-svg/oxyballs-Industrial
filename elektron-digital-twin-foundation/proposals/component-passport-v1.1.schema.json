@@ -13,9 +13,21 @@
     "status_summary",
     "links",
     "schema_version",
-    "proposal_status"
+    "proposal_status",
+    "authority_status",
+    "runtime_eligible"
   ],
   "properties": {
+    "authority_status": {
+      "type": "string",
+      "const": "ILLUSTRATIVE_ONLY",
+      "description": "Proposal examples under proposals/examples/ are never authoritative silo records."
+    },
+    "runtime_eligible": {
+      "type": "boolean",
+      "const": false,
+      "description": "Must remain false while this schema is OPTIONAL_FUTURE_PROPOSAL."
+    },
     "proposal_status": {
       "type": "string",
       "const": "OPTIONAL_FUTURE_PROPOSAL"

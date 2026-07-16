@@ -1,0 +1,44 @@
+{
+  "decision_id": "DT-D030",
+  "title": "Component Passport v1.1 stays proposal-only; active rc1 schema untouched",
+  "date": "2026-07-16",
+  "approved_status": "ACCEPTED",
+  "scope": [
+    "schemas/component-passport.schema.json",
+    "proposals/component-passport-v1.1.schema.json",
+    "proposals/examples/",
+    "examples/2019_f450/door-fl-component-passport.example.json",
+    "SCHEMA_FREEZE_FOR_VERTICAL_SLICE"
+  ],
+  "reason": "A draft proposed mutating the frozen Component Passport schema, embedding authoritative geometry/evidence objects, seeding unverified procedure graphs, and inventing scores while edts-kernel-v1.0.0-rc1 is frozen and no door geometry bytes exist. Active truth must remain the rc1 index/summary passport; future design stays non-authoritative.",
+  "decision": [
+    "Do not modify active schemas/component-passport.schema.json (byte-identical to tag edts-kernel-v1.0.0-rc1).",
+    "Capture corrected architecture only under proposals/ as OPTIONAL_FUTURE_PROPOSAL.",
+    "Passport remains an index + status summary; authoritative records stay in their registries.",
+    "Do not seed unverified removal/procedure graphs or invented numeric scores.",
+    "Candidates are not geometry assets until ACQUIRED→HASHED→PARSED→INVENTORIED→ROLE_EVALUATED.",
+    "Illustrative v1.1 instances must live under proposals/examples/ with authority_status ILLUSTRATIVE_ONLY and runtime_eligible false."
+  ],
+  "affected_files": [
+    "schemas/component-passport.schema.json (unchanged)",
+    "proposals/component-passport-v1.1.schema.json",
+    "proposals/COMPONENT_PASSPORT_V1_1_EXTENSION_PROPOSAL.md",
+    "proposals/COMPONENT_PASSPORT_V1_1_DESIGN.md",
+    "proposals/examples/PP-VEH000001-DOOR-FL-001.v1.1.illustrative.json",
+    "examples/2019_f450/door-fl-component-passport.example.json",
+    "DECISIONS.md",
+    "STATUS.json"
+  ],
+  "validation_evidence": [
+    "verification/results/component-passport-rc1-validation.json",
+    "verification/results/COMPONENT_PASSPORT_EXISTING_SCHEMA_AUDIT.md",
+    "git tag edts-kernel-v1.0.0-rc1",
+    "documentation/SCHEMA_FREEZE_FOR_VERTICAL_SLICE.md"
+  ],
+  "related_decisions": ["DT-D028", "DT-D031"],
+  "change_control": {
+    "kernel_schema_change": false,
+    "runtime_activation": false,
+    "proposal_only": true
+  }
+}
