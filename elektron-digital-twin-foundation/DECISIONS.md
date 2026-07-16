@@ -483,3 +483,17 @@ Append-only record of digital twin foundation decisions.
 - **Consequences:**
   - Acquisition tracking consolidates into catalog + queue Priority 1b
   - Related-year CAD (e.g. 2017 door STEP) stays discovery-only until part-number / interface evidence reaches `CONFIGURATION_MATCHED`
+
+## DT-D028 — Kernel v1.0.0-rc1 milestone freeze (do not change kernel)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Kernel validation suites are 49/49 PASS; tag `edts-kernel-v1.0.0-rc1` and `SCHEMA_FREEZE_FOR_VERTICAL_SLICE` are already active. Door vertical slice remains blocked on missing geometry.
+- **Decision:**
+  1. Declare Kernel v1.0.0-rc1 **complete for its defined scope** (`COMPLETE_FOR_DEFINED_SCOPE`).
+  2. Policy: **`DO_NOT_CHANGE_KERNEL`** — leave tag and schema freeze intact.
+  3. Reopen only if the real geometry workflow exposes a **blocking defect**, not because a new field sounds useful.
+  4. No schema edits, fingerprint algorithm changes, or silo-structure revisions under this freeze except per allowed reopen rule.
+- **Consequences:**
+  - Work proceeds on asset acquisition and the door vertical slice outside frozen kernel schemas
+  - Proven scope recorded in `KERNEL_RELEASE_MANIFEST.json` and `KERNEL_VALIDATION_SUMMARY.md`

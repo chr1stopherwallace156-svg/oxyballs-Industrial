@@ -3,11 +3,23 @@
   "version": "1.0.0-rc1",
   "git_tag": "edts-kernel-v1.0.0-rc1",
   "validation_status": "EDTS_EXACT_VEHICLE_KERNEL_VALIDATED",
+  "kernel_milestone": "COMPLETE_FOR_DEFINED_SCOPE",
+  "kernel_change_policy": "DO_NOT_CHANGE_KERNEL",
   "schema_posture": "SCHEMA_FREEZE_FOR_VERTICAL_SLICE",
+  "reopen_rule": "Reopen only if the real geometry workflow exposes a blocking defect — not because a new field sounds useful",
   "validation": {
     "total": "49/49 PASS",
     "scope": "Data integrity and exact-vehicle isolation",
-    "runtime_3d_vertical_slice": "PENDING"
+    "runtime_3d_vertical_slice": "PENDING",
+    "proven": [
+      "exact_vehicle_configuration_isolation",
+      "deterministic_configuration_fingerprinting",
+      "schema_validity",
+      "rejection_of_invalid_and_cross_vehicle_records",
+      "referential_integrity",
+      "audit_history_preservation",
+      "honest_blocking_when_geometry_absent"
+    ]
   },
   "suite_artifacts": {
     "fingerprint": "verification/results/kernel-fingerprint-tests.json",
