@@ -5,6 +5,27 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 13 + review_08 reconciled: pre-charge math + 50 mm² cable
+
+- Archived batch_13 and review_08 1:1. Delivered 5 of the owner's
+  6-item ask; HV connectors remain the only untouched item.
+- New rows: CS-30/RC-50 Miba pre-charge formulas (CandidateRule —
+  resistor selection stays OpenGap); CS-31/RC-51 TE Mini K pre-charge
+  relay (**voltage-suitability OpenGap: 400 VDC contact / 450 VDC max
+  switching vs unknown pack voltage**); CS-32/RC-52 Coroflex 50 mm²
+  datasheet (closes the 50 mm² gap at candidate level; supplier's own
+  suitability-testing disclaimer recorded); CS-33/RC-53 TONFUL IP
+  explainer (TechnicalBackground; ISO 20653 stays the gate);
+  CS-34/RC-54 Metrel MI3132 (**InstrumentationCandidate /
+  TestMethodCandidate** per owner — 4-wire Kelvin ≥1 A method).
+- All 7 owner corrections applied, incl. status-language reversion
+  ("Marked Closed" → partially sourced; "selection locked" → selected
+  for evaluation) and rejection of Sendyne "absolute" phrasing.
+- Conduct: status-inflation language identified as the dominant
+  residual defect (4th packaging-drift variant); none entered the
+  register. Research Map L5 → CANDIDATE ARCHITECTURE STAGE.
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 12 + review_07 reconciled: main-fuse lane + GTR 20
 
 - Archived batch_12 (HV wiring datasheets) and review_07 1:1.

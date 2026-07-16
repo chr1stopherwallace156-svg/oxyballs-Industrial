@@ -151,22 +151,23 @@ order (CAN/PATS deliberately last — proprietary depth): **HV wiring →
 MSD/contactors/fuses/pre-charge/HVIL → cooling → EHPS brake/steering →
 supplier datasheets → CAN/PATS.**
 
-1. **HV wiring** (L5) — **PARTIALLY CLOSED** (batches 09–12).
-   Candidate architecture on file: Coroflex 6.0/35 mm² cables (+ bend
-   radii, part-scoped), Kilovac EV200 contactor (+ make/break duty +
-   pre-charge no-go candidate), Eaton EV fuse family (main lane) +
-   aux fuses, Sendyne SIM100MLP, Chilye MSD, GTR 20 ≤0.1 Ω bonding
-   candidate, ISO 20653 path. **Owner directive: stay on this gap.
-   Remaining (owner's narrow 6-item ask):** (1) pre-charge resistor
-   sizing formulas + datasheets; (2) pre-charge relay/contactor
-   datasheets; (3) 50 mm² cable datasheet; (4) HV connector datasheets
-   for 35/50 mm² shielded cable; (5) IP67/IP6K9K exact validation
-   procedures; (6) bonding/grounding test procedure + measurement
-   method — plus the upstream blockers only the build decides: battery
-   V/I + short-circuit current, inverter currents, physical routing,
-   engineer review. Hard rules: no aux-fuse data as traction data; no
-   cross-gauge bend-radius transfer; no repeats of already-sourced
-   rows except compatibility comparison.
+1. **HV wiring** (L5) — **CANDIDATE ARCHITECTURE STAGE** (batches
+   09–13): Coroflex 6.0/35/50 mm² cables (part-scoped bend radii),
+   Kilovac EV200 (+ pre-charge no-go candidate), Eaton EV fuse family
+   + aux fuses, TE Mini K pre-charge relay (**voltage-suitability
+   OpenGap: 400/450 VDC vs pack**), Miba pre-charge calculation
+   CandidateRule (U, C, t, Imax, E), Sendyne SIM100MLP
+   (+NeedsCANProtocolDocument), Chilye MSD, GTR 20 ≤0.1 Ω bonding
+   candidate, Metrel 4-wire Kelvin method (InstrumentationCandidate),
+   ISO 20653 path. **Research-side remaining:** HV connector
+   datasheets for 35/50 mm² (only untouched ask item); official ISO
+   20653/lab IP procedure; official bonding threshold + full test
+   procedure incl. surface prep. **Build-side blockers (research
+   cannot close):** battery nominal/max V, cont./peak/short-circuit I,
+   inverter DC currents, DC-link capacitance, final part numbers,
+   physical routing, engineer review. Owner options next: finish
+   connectors/pre-charge, or move to cooling with L5 held in
+   NeedsEngineeringReview.
 2. **Cooling** (L6) — EMPTY: battery/motor/inverter/charger/DC-DC
    loops, pump + radiator sizing, flow, pressure drop, derating,
    high-ambient testing.

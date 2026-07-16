@@ -56,6 +56,11 @@ this file supersedes it (see Addendum, section 7).
 | CS-27 | **SupplierCandidate** | *Coroflex 9-2611 / 35 mm² FHLR2GCB2G shielded HV cable — technical datasheet* | Coroflex (PDF hosted at citini.com — mirror; prefer Coroflex-controlled copy) | <https://citini.com/wp-content/uploads/2022/07/HV35SSC.pdf> | Candidate (batch_12) — `NeedsEngineeringReview`; part-scoped (35 mm² only; 50 mm² datasheet still missing) — lane L5/L9 |
 | CS-28 | **RegulatoryCandidate** | *UNECE Global Technical Regulation No. 20 (Electric Vehicle Safety), ECE/TRANS/180/Add.20* | UNECE (official server) | <https://unece.org/fileadmin/DAM/trans/main/wp29/wp29wgs/wp29gen/wp29registry/ECE-TRANS-180a20e.pdf> | Candidate (batch_12) — first official-server standard PDF in the register; also the GTR that CS-02 incorporates by reference — lane L2/L5 |
 | CS-29 | **CandidateSourcePath / NeedsExactSource** | *ISO 20653 — Road vehicles: Degrees of protection (IP code)* — referenced by GTR 20 for test probes; text not on file | ISO | (no URL on file — paywalled standard) | Path only (batch_12) — the IP67/IP6K9K validation procedure lane; no test cycle derivable yet — lane L5/L8 |
+| CS-30 | **SupplierCandidate — calculation framework** | *Miba: "Precharge resistor calculation: Formulas & Practical Guide"* | Miba (supplier application guide) | <https://www.miba.com/en/product-areas/power-electronics/precharge-resistor-calculation> | Candidate (batch_13) — formulas → CandidateRules; **specific resistor selection stays OpenGap** until U, C, t, Imax, energy, pulse rating, duty cycle known — lane L5/L8 |
+| CS-31 | **SupplierCandidate — voltage-suitability flag** | *TE AMP+ Mini K HV Precharge Relay (product page 2-1904058-5)* | TE Connectivity | <https://www.te.com/en/product-2-1904058-5.html> | Candidate (batch_13) — **owner flag (review_08): TE lists 400 VDC contact / 450 VDC max switching, 12 VDC coil — this exact relay may NOT suit the final pack voltage**; pack-voltage, pre-charge current, and coil-architecture checks required — lane L5/L9 |
+| CS-32 | **SupplierCandidate** | *Coroflex 9-2611 / 50 mm² FHLR2GCB2G shielded HV cable — technical datasheet (LV 216-2)* | Coroflex (PDF hosted at citini.com — mirror; prefer Coroflex copy) | <https://citini.com/wp-content/uploads/2022/07/HV50SSC.pdf> | Candidate (batch_13) — **closes the 50 mm² datasheet gap at candidate level**; part-scoped; ampacity curves need clean extraction + engineering review — lane L5/L9 |
+| CS-33 | **TechnicalBackground** (owner review_08) | *TONFUL: "IP67 vs. IP69K: Waterproof Ratings Guide for Off-Road Vehicles"* | tonful.com (trade article) | <https://tonful.com/ip67-vs-ip69k-waterproof-ratings-guide-for-off-road-vehicles-tonful/> | Background (batch_13) — guides the test requirement; **final IP test parameters only from ISO 20653 text or a certified lab procedure** (CS-29 stays the gate) — lane L5/L8 |
+| CS-34 | **InstrumentationCandidate / TestMethodCandidate** (owner reclassification — NOT RegulatoryCandidate) | *Metrel MI3132 EV vehicle tester — spec listing (µΩ Kelvin 4-wire, 1 A/2 A; supports ECE R100 Annex 4A/4B, ISO 6469-3)* | Metrel (via test-meter.co.uk reseller page) | <https://www.test-meter.co.uk/metrel-mi3132-ev-electric-vehicle-tester> | Candidate (batch_13) — shows HOW to measure bonding (4-wire Kelvin ≥1 A), not WHAT the legal threshold is; surface-prep procedure still missing — lane L5/L10 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -115,6 +120,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-47 | Kilovac EV200 duty: "Break Current at 320VDC… 2,000, 1 cycle… The maximum make current is 650A to avoid contact welding… 80% Minimum Pre Charge, 90% Nominal Pre Charge." *(gives the pre-charge NO-GO logic candidate: incomplete pre-charge → closing can weld contacts. Owner correction: these curves define the pre-charge COMPLETION target — they do NOT size the pre-charge resistor)* | CS-24 | **Candidate locator (batch_12): pages 1–2, ratings matrix / load-life notes** — unverified | **SupplierCandidate — NoGoCondition candidate (pre-charge completion 80–90% before main close, component-scoped)**; pre-charge resistor sizing = **OpenGap** (needs pack V, controller capacitance, target time, inrush limit, resistor power/energy, relay rating, thermal duty) — lane L5 |
 | RC-48 | Coroflex 35 mm²: "MAX 600 V AC / 1000 V DC… Bend radius: - min. 3 x cable-ø: static installation. - min. 6 x cable-ø: dynamic installation. Weight of cable: approx. 485 g/m." *(owner relay adds OD 14.4 mm, −40…+180 °C — part-scoped to THIS 35 mm² cable; 50 mm² remains unsourced)* | CS-27 | **Candidate locator (batch_12): page 1, mechanical/structural matrix** — unverified | **SupplierCandidate — part-scoped Rule/Metric candidates** (static ≥3× OD, dynamic ≥6× OD, OD 14.4 mm, 600 VAC/1000 VDC); `NeedsEngineeringReview` — lane L5 |
 | RC-49 | UNECE GTR 20: "Specification of the 0.1 Ω upper resistance limit for chassis bonding provides protection from electric shock by shunting any harmful electrical currents to the vehicle chassis should any electrically charged components lose isolation… test probes are specified that conform to ISO 20653…" | CS-28 | **Candidate locator (batch_12): page 60, Section II (rationale)** — unverified | **RegulatoryCandidate — TestCandidate (bonding resistance test) + MetricCandidate (≤ 0.1 Ω)**; NOT final pass/fail until mapped to the US FMVSS/ISO context and a measurement method. **Reconciliation flag: distinct from RC-42's <0.2 Ω exposed-part figure — different contexts (GTR bonding path vs FMVSS exposed-part resistance); never conflate** — lane L5/L2 |
+| RC-50 | Miba pre-charge framework: "R = t / (5 * C)… I_max = U / R… E = 0.5 * C * U²" — with the inrush limit checked against contactor/fuse load limits and the resistor rated for full charging energy *(formulas are CandidateRules; they select nothing until U, C, t, allowed inrush, pulse-energy rating, and thermal duty are known)* | CS-30 | **Candidate locator (batch_13): guide sections 1–3** — unverified | **CandidateRule — pre-charge calculation module inputs: U, C, t, Imax, E**; resistor part = OpenGap — lane L5/L8 |
+| RC-51 | TE Mini K pre-charge relay: 1 Form X SPST-NO-DM, 20 A DC contact rating, 2000 Vrms initial dielectric contacts–coil, −40…85 °C *(owner relay adds: 400 VDC contact voltage / 450 VDC max switching / 12 VDC coil — **suitability above that pack voltage NOT established**)* | CS-31 | **Candidate locator (batch_13): product configuration/usage matrix** — unverified | **SupplierCandidate — pack-voltage check REQUIRED (OpenGap: relay suitability above 400/450 VDC)**; coil architecture (12 vs 24 V) unresolved — lane L5/L9 |
+| RC-52 | Coroflex 50 mm²: "MAX 600 V AC / 1000 V DC… Specification: LV 216-2… Our specifications shall not release you from your obligation to test the products supplied regarding their suitability for the intended purpose of use." *(owner relay adds: 3×/6× OD bend radii, ≈630 g/m, −40…+180 °C, ambient-indexed load curves — part-scoped to THIS 50 mm² cable; note the datasheet's own suitability-testing disclaimer)* | CS-32 | **Candidate locator (batch_13): page 1, core specifications** — unverified | **SupplierCandidate — part-scoped Rule/Metric candidates; ampacity = needs curve extraction + engineering review** — lane L5 |
+| RC-53 | TONFUL: IP69K (ISO 20653 "K") = 80 °C water jets at 100 bar, multiple angles, rotating fixture; IP67 = static immersion, 1 m, 30 min *(trade explainer — describes the tests, is not the standard)* | CS-33 | Article comparison section — unverified | **TechnicalBackground / NeedsExactSource** — guides underbody test design (dynamic washdown, not just immersion); final parameters from ISO 20653/lab only — lane L5/L8 |
+| RC-54 | Metrel MI3132 EV: µΩ-meter function, 1 A / 2 A test currents, 4-wire Kelvin method, supports ECE R100 Annex 4A/4B and ISO 6469-3 *(instrument spec — shows a credible bonding measurement method: ≥1 A injection, Kelvin connection, not a DMM continuity check)* | CS-34 | **Candidate locator (batch_13): µΩ-meter spec block** — unverified | **InstrumentationCandidate / TestMethodCandidate** (owner reclassification); surface-prep procedure (e-coat, corrosion inhibitor) still missing — lane L5/L10 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -854,3 +864,69 @@ Pre-charge sizing formulas + datasheets; pre-charge relay datasheets;
 IP67/IP6K9K exact validation procedures; bonding/grounding test
 procedure + measurement method. No repeats of already-sourced rows
 except for compatibility comparison.
+
+---
+
+## 20. Batch 13 + owner review_08 reconciliation (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_13_hv_wiring_precharge_50mm.md`
+and `docs/research/raw/owner_reviews/review_08_batch_13_verdict.md`.
+Row additions: CS-30..CS-34, RC-50..RC-54. Of the owner's 6-item ask,
+batch 13 delivered on 5 (pre-charge formulas, pre-charge relay, 50 mm²
+cable, IP background, bonding measurement method) — **HV connectors
+remain the only untouched item** (batch self-declared the gap).
+
+### Owner corrections applied (7, per the review_08 paste-block)
+
+1. **Status language reverted:** "Marked Closed" → *partially sourced /
+   candidate identified*; "Candidate selection locked" → *candidate
+   selected for evaluation*. Nothing closes before upstream data +
+   engineer review.
+2. **TE Mini K voltage flag:** owner-relayed TE specs (400 VDC
+   contact / 450 VDC max switching / 12 VDC coil) mean this relay may
+   not suit the final pack voltage — suitability check is an OpenGap
+   on RC-51.
+3. **Miba formulas** = CandidateRules; **resistor selection stays
+   OpenGap** behind U, C, t, Imax, energy, pulse rating, duty cycle.
+4. **50 mm² bend radii** part-scoped to that exact datasheet.
+5. **TONFUL** = TechnicalBackground only; ISO 20653/lab procedure
+   remains NeedsExactSource (CS-29 unchanged as the gate).
+6. **Metrel** reclassified **InstrumentationCandidate /
+   TestMethodCandidate** — measurement method, not regulatory source.
+7. **Sendyne language:** batch_13's "100 Ω/V absolute defect boundary"
+   REJECTED as phrasing — RC-38's fence stands (supplier-context
+   hazard discussion; final threshold via FMVSS/ISO mapping).
+
+### Owner "Create" items recorded
+
+- CandidateRule: pre-charge calculation requires U, C, t, Imax, E
+  (RC-50).
+- OpenGaps: final pre-charge resistor part; pre-charge relay
+  suitability above pack voltage; HV connector model for 35/50 mm²;
+  physical route path; official IP67/IP6K9K procedure; official
+  bonding/grounding threshold + test procedure.
+
+### Conduct notes
+
+- **Status-inflation language is now the dominant residual defect**
+  ("Marked Closed", "selection locked", "absolute defect boundary") —
+  fourth variant of packaging drift (splice → action-column →
+  title/cell → status language). All caught; none entered the
+  register.
+- Coroflex 50 mm² sheet's own disclaimer ("shall not release you from
+  your obligation to test…suitability") is recorded on RC-52 — the
+  supplier itself demands application testing.
+- Batch 13 correctly did not repeat already-sourced rows and
+  self-declared the connector gap — instruction compliance improving.
+
+### HV Wiring Package — remaining before build-ready (owner list)
+
+Battery nominal/max V; battery cont./peak/short-circuit I; inverter
+cont./peak DC I; DC-link capacitance; final main fuse part; final
+pre-charge resistor part; final pre-charge relay part (voltage-
+suitable); HV connector model for 35/50 mm²; physical route on the
+F-450/F-550; bonding/grounding exact method; official IP procedure;
+engineer review. Owner's stated options next: finish HV
+connector/pre-charge details, or move to cooling with HV wiring held
+in NeedsEngineeringReview.
