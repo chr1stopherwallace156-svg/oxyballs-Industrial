@@ -104,3 +104,26 @@ Append-only record of digital twin foundation decisions.
   - Frame transforms must reference `TRANSFORM_REGISTRY.json` (column-major, XYZW quaternions)
   - Unresolved items tracked in `L00_UNRESOLVED_REGISTER.json` (UNRES-001, UNRES-002)
   - Historical inapplicable claims preserved in `registries/HISTORICAL_CLAIM_REGISTRY.json`
+
+## DT-D008 — Mathematical correction audit (transforms, formulas, clearance)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted (blocking errors corrected)
+- **Context:** Formula compliance audit found template violations in clearance standard, glTF quaternion/matrix inconsistency, and fatal Unreal scale factor (100.0 instead of 0.1 for mm-to-cm).
+- **Decision:**
+  1. `FORMULA_COMPLIANCE_AUDIT.md` — complete and enforced
+  2. `CLEARANCE_STANDARD_V2_PROPOSAL.md` — supersedes clearance v1; formulas in `registries/FORMULA_REGISTRY.json`
+  3. `registries/TRANSFORM_REGISTRY_V2_PROPOSAL.json` — validated transforms; v1 marked REJECTED_DO_NOT_USE
+  4. `TRANSFORM_VALIDATION_REPORT.md` + `registries/COORDINATE_BASIS_TESTS.json` — basis vector test matrix
+  5. Unreal scale_factor corrected to **0.1** (mm to cm); glTF scale **0.001** (mm to m)
+  6. `DATUM_CONSTRUCTION_STANDARD.md` — tolerances templated per formula standard
+  7. `DATUM_STATE_MODEL_PROPOSAL.md` — datum class hierarchy (DSN, SUP, FIX, KIN)
+  8. `schemas/CLAIM_REGISTRY_CORE_SCHEMA_V5_PROPOSAL.json` — supersedes v4 (oneOf value structure)
+  9. `schemas/PHYSICAL_ASSET_INTAKE_SCHEMA_V2_PROPOSAL.json` — intake with omission/error states
+  10. `VISUAL_REFERENCE_INTAKE_PROTOCOL.md` — authorized for Layer 1
+  11. `ENGINEERING_METROLOGY_INTAKE_PROTOCOL.md` — provisional for Layer 2
+  12. Readiness: **`L00_READY_FOR_VISUAL_REFERENCE_INTAKE`**
+- **Consequences:**
+  - Implementation parsers must use TRANSFORM_REGISTRY_V2 only
+  - L01 visual exterior work may begin visual intake protocol when vehicle available
+  - L02 engineering metrology remains blocked until vehicle receipt

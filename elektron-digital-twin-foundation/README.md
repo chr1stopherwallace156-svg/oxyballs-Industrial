@@ -2,7 +2,7 @@
 
 This repository contains the authoritative schemas, standards, and registries establishing the baseline data model and coordinate frameworks for the F-450 physical vehicle intake and digital reconstruction.
 
-**Readiness:** `L00_READY_FOR_PHYSICAL_INTAKE`  
+**Readiness:** `L00_READY_FOR_VISUAL_REFERENCE_INTAKE`  
 **Closure:** `L00_CLOSURE_REJECTED` — physical asset intake required before re-closure  
 See [STATUS.json](STATUS.json) for machine-readable project state.
 
@@ -21,17 +21,17 @@ All systems, agents, and engineers must consume the core specification files in 
 3. **[registries/COORDINATE_FRAME_REGISTRY.json](registries/COORDINATE_FRAME_REGISTRY.json)**  
    Defines spatial systems, handedness, and core platform datums.
 
-4. **[registries/TRANSFORM_REGISTRY.json](registries/TRANSFORM_REGISTRY.json)**  
-   Provides machine-readable 4x4 matrix transforms for engine, CAD, and runtime rendering.
+4. **[registries/TRANSFORM_REGISTRY_V2_PROPOSAL.json](registries/TRANSFORM_REGISTRY_V2_PROPOSAL.json)**  
+   Machine-readable 4x4 matrix transforms (validated per `TRANSFORM_VALIDATION_REPORT.md`). **Do not use** deprecated `TRANSFORM_REGISTRY.json`.
 
-5. **[schemas/CLAIM_REGISTRY_CORE_SCHEMA_V4_PROPOSAL.json](schemas/CLAIM_REGISTRY_CORE_SCHEMA_V4_PROPOSAL.json)**  
-   Core JSON schema with Draft 7 conditional validations for validating engineering claims.
+5. **[schemas/CLAIM_REGISTRY_CORE_SCHEMA_V5_PROPOSAL.json](schemas/CLAIM_REGISTRY_CORE_SCHEMA_V5_PROPOSAL.json)**  
+   Core JSON schema with mutually exclusive value structure validation.
 
 6. **[DATUM_CONSTRUCTION_STANDARD.md](DATUM_CONSTRUCTION_STANDARD.md)**  
    Repeatable physical metrology routines for establishing vehicle origins.
 
-7. **[CLEARANCE_AND_FIT_STANDARD_PROPOSAL.md](CLEARANCE_AND_FIT_STANDARD_PROPOSAL.md)**  
-   Formulas and tables governing dynamic packaging buffers.
+7. **[CLEARANCE_STANDARD_V2_PROPOSAL.md](CLEARANCE_STANDARD_V2_PROPOSAL.md)**  
+   Formula-compliant clearance envelope rules (CLR-001, CLR-002).
 
 ### Extended governance reading
 
@@ -41,8 +41,9 @@ After the core sequence above, read:
 - [DECISIONS.md](DECISIONS.md) — locked decisions
 - [L00_CONFIRMED_CORRECTIONS.md](L00_CONFIRMED_CORRECTIONS.md) — accepted corrections
 - [L00_PROVISIONAL_CORRECTIONS.md](L00_PROVISIONAL_CORRECTIONS.md) — provisional dimensional claims
-- [L00_FINAL_GAP_REPORT.md](L00_FINAL_GAP_REPORT.md) — remaining gaps (GAP-001 through GAP-004)
-- [VIN_AND_LABEL_CAPTURE_PROTOCOL.md](VIN_AND_LABEL_CAPTURE_PROTOCOL.md) — physical intake protocol
+- [L00_PRE_INTAKE_READINESS_REPORT.md](L00_PRE_INTAKE_READINESS_REPORT.md) — final gate assessment
+- [VISUAL_REFERENCE_INTAKE_PROTOCOL.md](VISUAL_REFERENCE_INTAKE_PROTOCOL.md) — Layer 1 visual capture (authorized)
+- [ENGINEERING_METROLOGY_INTAKE_PROTOCOL.md](ENGINEERING_METROLOGY_INTAKE_PROTOCOL.md) — Layer 2 metrology (provisional)
 
 ---
 

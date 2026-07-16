@@ -1,56 +1,57 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "registry_name": "EDTS_Coordinate_Frames",
+  "datum_state_model": "DATUM_STATE_MODEL_PROPOSAL.md",
   "frames": {
     "EDTS_ISO_ALIGNED_VEHICLE_FRAME": {
       "standard": "ISO 8855",
       "handedness": "right_handed",
-      "axes": {
-        "x": "+X Forward (longitudinal)",
-        "y": "+Y Left (lateral)",
-        "z": "+Z Up (vertical)"
+      "basis": {
+        "forward": [1.0, 0.0, 0.0],
+        "left": [0.0, 1.0, 0.0],
+        "up": [0.0, 0.0, 1.0]
       },
-      "origin_datum_id": "DTM-001"
+      "origin_datum_id": "DTM-DSN-001"
     },
     "SCAN_RAW_FRAME": {
       "standard": "Scanner Local",
       "handedness": "right_handed",
-      "axes": {
-        "x": "Arbitrary horizontal axis",
-        "y": "Arbitrary horizontal perpendicular axis",
-        "z": "+Z parallel to local gravity vector"
+      "basis": {
+        "x": "arbitrary horizontal",
+        "y": "arbitrary horizontal perpendicular",
+        "z": "parallel to local gravity"
       },
       "origin_datum_id": "DTM-004"
     },
     "CAD_ASSEMBLY_FRAME": {
       "standard": "EDTS Design",
       "handedness": "right_handed",
-      "axes": {
-        "x": "+X Forward (longitudinal)",
-        "y": "+Y Left (lateral)",
-        "z": "+Z Up (vertical)"
+      "basis": {
+        "forward": [1.0, 0.0, 0.0],
+        "left": [0.0, 1.0, 0.0],
+        "up": [0.0, 0.0, 1.0]
       },
-      "origin_datum_id": "DTM-001"
+      "origin_datum_id": "DTM-DSN-001"
     },
     "GLTF_RUNTIME_FRAME": {
       "standard": "glTF 2.0 Standard Specification",
       "handedness": "right_handed",
-      "axes": {
-        "x": "+X Right",
-        "y": "+Y Up",
-        "z": "-Z Forward"
+      "basis": {
+        "right": [1.0, 0.0, 0.0],
+        "up": [0.0, 1.0, 0.0],
+        "backward": [0.0, 0.0, 1.0]
       },
-      "origin_datum_id": "DTM-001"
+      "origin_datum_id": "DTM-SUP-001"
     },
     "UNREAL_FRAME": {
       "standard": "Unreal Engine Editor Standard",
       "handedness": "left_handed",
-      "axes": {
-        "x": "+X Forward",
-        "y": "+Y Right",
-        "z": "+Z Up"
+      "basis": {
+        "forward": [1.0, 0.0, 0.0],
+        "right": [0.0, 1.0, 0.0],
+        "up": [0.0, 0.0, 1.0]
       },
-      "origin_datum_id": "DTM-001"
+      "origin_datum_id": "DTM-SUP-001"
     }
   }
 }

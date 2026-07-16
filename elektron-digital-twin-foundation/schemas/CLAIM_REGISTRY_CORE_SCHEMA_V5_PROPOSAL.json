@@ -1,14 +1,22 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "EDTS_Claim_Registry_Core_Schema_V4",
-  "_supersedes_note": "Superseded by schemas/CLAIM_REGISTRY_CORE_SCHEMA_V5_PROPOSAL.json",
+  "title": "EDTS_Claim_Registry_Core_Schema_V5",
+  "_supersedes": "schemas/CLAIM_REGISTRY_CORE_SCHEMA_V4_PROPOSAL.json",
   "type": "object",
   "properties": {
     "claim_id": { "type": "string", "pattern": "^[A-Z0-9_-]+$" },
-    "claim_type": { "type": "string", "enum": ["DIMENSION", "MASS_PROPERTY", "ELECTRICAL", "PERFORMANCE", "SYSTEM_INTERFACE"] },
+    "claim_type": {
+      "type": "string",
+      "enum": [
+        "DIMENSION", "MASS_PROPERTY", "ELECTRICAL", "PERFORMANCE", "SYSTEM_INTERFACE",
+        "MATERIAL", "THERMAL", "GEOMETRIC", "CONFIGURATION", "MANUFACTURING",
+        "PROCEDURAL", "FASTENER", "TORQUE", "TELEMETRY", "STATE", "EVENT",
+        "FAILURE_MODE", "RELATIONSHIP", "IDENTIFICATION"
+      ]
+    },
     "subject_entity_id": { "type": "string" },
     "property_id": { "type": "string" },
-    "schema_version": { "type": "string", "const": "4.0.0" },
+    "schema_version": { "type": "string", "const": "5.0.0" },
     "metadata": {
       "type": "object",
       "properties": {
@@ -70,14 +78,20 @@
         },
         "vector_value": {
           "type": "array",
-          "items": { "type": "number" }
+          "items": { "type": "number" },
+          "minItems": 1,
+          "maxItems": 4
         },
         "matrix_value": {
           "type": "array",
           "items": {
             "type": "array",
-            "items": { "type": "number" }
-          }
+            "items": { "type": "number" },
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "minItems": 4,
+          "maxItems": 4
         },
         "enum_value": { "type": "string" },
         "relationship_target_entity_id": { "type": "string" }
@@ -109,76 +123,70 @@
     "value_details",
     "uncertainty_and_tolerances"
   ],
-  "allOf": [
+  "oneOf": [
     {
-      "if": {
-        "properties": {
-          "claim_value": { "properties": { "value_structure": { "const": "SCALAR" } } }
-        }
-      },
-      "then": {
-        "properties": {
-          "value_details": { "required": ["scalar_value"] }
+      "properties": {
+        "claim_value": { "properties": { "value_structure": { "const": "SCALAR" } } },
+        "value_details": {
+          "type": "object",
+          "required": ["scalar_value"],
+          "properties": { "scalar_value": { "type": "number" } },
+          "additionalProperties": false
         }
       }
     },
     {
-      "if": {
-        "properties": {
-          "claim_value": { "properties": { "value_structure": { "const": "RANGE" } } }
-        }
-      },
-      "then": {
-        "properties": {
-          "value_details": { "required": ["range_value"] }
-        }
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "claim_value": { "properties": { "value_structure": { "const": "VECTOR" } } }
-        }
-      },
-      "then": {
-        "properties": {
-          "value_details": { "required": ["vector_value"] }
+      "properties": {
+        "claim_value": { "properties": { "value_structure": { "const": "RANGE" } } },
+        "value_details": {
+          "type": "object",
+          "required": ["range_value"],
+          "properties": { "range_value": { "type": "object" } },
+          "additionalProperties": false
         }
       }
     },
     {
-      "if": {
-        "properties": {
-          "claim_value": { "properties": { "value_structure": { "const": "MATRIX" } } }
-        }
-      },
-      "then": {
-        "properties": {
-          "value_details": { "required": ["matrix_value"] }
-        }
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "claim_value": { "properties": { "value_structure": { "const": "ENUM" } } }
-        }
-      },
-      "then": {
-        "properties": {
-          "value_details": { "required": ["enum_value"] }
+      "properties": {
+        "claim_value": { "properties": { "value_structure": { "const": "VECTOR" } } },
+        "value_details": {
+          "type": "object",
+          "required": ["vector_value"],
+          "properties": { "vector_value": { "type": "array" } },
+          "additionalProperties": false
         }
       }
     },
     {
-      "if": {
-        "properties": {
-          "claim_value": { "properties": { "value_structure": { "const": "RELATIONSHIP" } } }
+      "properties": {
+        "claim_value": { "properties": { "value_structure": { "const": "MATRIX" } } },
+        "value_details": {
+          "type": "object",
+          "required": ["matrix_value"],
+          "properties": { "matrix_value": { "type": "array" } },
+          "additionalProperties": false
         }
-      },
-      "then": {
-        "properties": {
-          "value_details": { "required": ["relationship_target_entity_id"] }
+      }
+    },
+    {
+      "properties": {
+        "claim_value": { "properties": { "value_structure": { "const": "ENUM" } } },
+        "value_details": {
+          "type": "object",
+          "required": ["enum_value"],
+          "properties": { "enum_value": { "type": "string" } },
+          "additionalProperties": false
+        }
+      }
+    },
+    {
+      "properties": {
+        "claim_value": { "properties": { "value_structure": { "const": "RELATIONSHIP" } } },
+        "value_details": {
+          "type": "object",
+          "required": ["relationship_target_entity_id"],
+          "properties": { "relationship_target_entity_id": { "type": "string" } },
+          "additionalProperties": false
         }
       }
     }

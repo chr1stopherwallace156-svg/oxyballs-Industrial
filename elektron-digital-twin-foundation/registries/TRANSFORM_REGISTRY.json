@@ -1,6 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "registry_name": "EDTS_Frame_Transforms",
+  "_deprecation": {
+    "status": "REJECTED_DO_NOT_USE",
+    "reason": "glTF quaternion/matrix inconsistency; Unreal scale_factor 100.0 incorrect (must be 0.1)",
+    "superseded_by": "registries/TRANSFORM_REGISTRY_V2_PROPOSAL.json",
+    "validation_report": "TRANSFORM_VALIDATION_REPORT.md",
+    "decision_id": "DT-D008"
+  },
   "matrix_convention": "column_major",
   "euler_rotation_order": "XYZ",
   "quaternion_element_ordering": "XYZW",

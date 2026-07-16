@@ -99,3 +99,29 @@ All notable changes to the digital twin foundation. Append-only.
 - `AGENTS.md` — formula/symbol and coordinate orientation operational directives
 - `RESEARCH_STANDARD.md` — mathematical representation and tolerancing requirements
 - `CLEARANCE_AND_FIT_STANDARD_PROPOSAL.md` — minimum clearance formula reformatted per formula standard
+
+## 2026-07-16 (Mathematical Correction Audit)
+
+### Added
+
+- `FORMULA_COMPLIANCE_AUDIT.md`, `TRANSFORM_VALIDATION_REPORT.md`, `L00_PRE_INTAKE_READINESS_REPORT.md`
+- `registries/FORMULA_REGISTRY.json`, `registries/TRANSFORM_REGISTRY_V2_PROPOSAL.json`, `registries/COORDINATE_BASIS_TESTS.json`
+- `CLEARANCE_STANDARD_V2_PROPOSAL.md`, `DATUM_STATE_MODEL_PROPOSAL.md`
+- `VISUAL_REFERENCE_INTAKE_PROTOCOL.md`, `ENGINEERING_METROLOGY_INTAKE_PROTOCOL.md`
+- `schemas/CLAIM_REGISTRY_CORE_SCHEMA_V5_PROPOSAL.json`, `schemas/PHYSICAL_ASSET_INTAKE_SCHEMA_V2_PROPOSAL.json`
+
+### Changed
+
+- `registries/TRANSFORM_REGISTRY.json` — REJECTED_DO_NOT_USE (glTF matrix error; Unreal scale 100.0 fatal)
+- `registries/UNIT_REGISTRY.json` — conversion multipliers and canonical unit IDs
+- `registries/COORDINATE_FRAME_REGISTRY.json` — basis vectors; DTM-DSN/SUP datum IDs
+- `DATUM_CONSTRUCTION_STANDARD.md` — formula-compliant tolerance blocks
+- `CLEARANCE_AND_FIT_STANDARD_PROPOSAL.md` — superseded
+- `README.md`, `AGENTS.md` — v2 transforms, schema v5, visual intake readiness
+- **DT-D008** — mathematical correction audit
+
+### Status
+
+- Readiness: **L00_READY_FOR_VISUAL_REFERENCE_INTAKE**
+- Visual intake: **AUTHORIZED** (Layer 1)
+- Engineering metrology: **PROVISIONAL** (Layer 2, blocked)

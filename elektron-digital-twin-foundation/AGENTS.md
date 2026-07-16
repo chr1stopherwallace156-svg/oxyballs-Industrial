@@ -31,11 +31,11 @@ You must strictly follow the rules in [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_A
 
 ### 2. Guard the coordinate orientation baseline
 
-Ensure that any code or coordinate transformations generated match the spatial mappings in [registries/TRANSFORM_REGISTRY.json](registries/TRANSFORM_REGISTRY.json) and use the ISO 8855 orientation system (+X Forward, +Y Left, +Z Up) per [registries/COORDINATE_FRAME_REGISTRY.json](registries/COORDINATE_FRAME_REGISTRY.json).
+Ensure that any code or coordinate transformations generated match [registries/TRANSFORM_REGISTRY_V2_PROPOSAL.json](registries/TRANSFORM_REGISTRY_V2_PROPOSAL.json) and pass [registries/COORDINATE_BASIS_TESTS.json](registries/COORDINATE_BASIS_TESTS.json). Use ISO 8855 orientation (+X Forward, +Y Left, +Z Up). **Never use** deprecated `TRANSFORM_REGISTRY.json` (v1).
 
-### 3. Use claim schema v4 for engineering claims
+### 3. Use claim schema v5 for engineering claims
 
-New or revised engineering claims must conform to [schemas/CLAIM_REGISTRY_CORE_SCHEMA_V4_PROPOSAL.json](schemas/CLAIM_REGISTRY_CORE_SCHEMA_V4_PROPOSAL.json), including `source_unit_id` and `canonical_unit_id` from the unit registry.
+New or revised engineering claims must conform to [schemas/CLAIM_REGISTRY_CORE_SCHEMA_V5_PROPOSAL.json](schemas/CLAIM_REGISTRY_CORE_SCHEMA_V5_PROPOSAL.json), including `source_unit_id` and `canonical_unit_id` from the unit registry.
 
 ## Non-negotiables
 
