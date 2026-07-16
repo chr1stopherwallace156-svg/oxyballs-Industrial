@@ -2,7 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "registry_name": "EDTS_L1_Exterior_Object_Registry",
   "version": "1.0.0",
-  "status": "DRAFT",
+  "status": "SUPERSEDED_BY_V2",
+  "superseded_by": "L1_EXTERIOR_OBJECT_REGISTRY_V2_PROPOSAL.json",
   "vehicle_configuration": {
     "make": "Ford",
     "model": "F-450 Chassis Cab",

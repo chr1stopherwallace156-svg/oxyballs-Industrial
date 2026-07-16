@@ -1,7 +1,8 @@
 # L1 Photo and Scan Coverage Plan
 
-**Status:** `DRAFT`  
+**Status:** `DRAFT — complemented by station grid`  
 **Purpose:** complete exterior capture coverage for the locked F-450 chassis-cab configuration without blind spots on C-channel rails and underbody  
+**Prefer for chassis rails:** `L1_CAPTURE_COVERAGE_GRID_PROPOSAL.json` (longitudinal stations) in addition to rings  
 **Does not authorize:** mesh production or fabricated scan results
 
 ---

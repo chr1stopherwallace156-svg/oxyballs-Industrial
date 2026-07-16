@@ -1,6 +1,6 @@
 # L1 Visual Acceptance Standard
 
-**Status:** `DRAFT`  
+**Status:** `SUPERSEDED by L1_VISUAL_ACCEPTANCE_STANDARD_V2_PROPOSAL.md`  
 **Applies when:** L01 visual assets are produced (not yet authorized)  
 **Vehicle footprint target:** 145.3 in (3690.6 mm) wheelbase configuration
 

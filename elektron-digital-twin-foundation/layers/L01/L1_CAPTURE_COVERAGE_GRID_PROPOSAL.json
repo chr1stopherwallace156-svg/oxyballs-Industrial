@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "grid_name": "EDTS_L1_Exterior_Capture_Coverage_Grid",
+  "version": "1.0.0",
+  "status": "DRAFT",
+  "purpose": "Station-based capture grid along chassis length; complements (and for rails prefers over) circular photo rings alone.",
+  "related_documents": [
+    "L1_PHOTO_AND_SCAN_COVERAGE_PLAN.md",
+    "L1_REFERENCE_VIEW_MATRIX.md"
+  ],
+  "grid_stations": [
+    {
+      "station_id": "STN-001-FASCIA-LOW",
+      "azimuth_rad": 0.0,
+      "height_m": 0.4,
+      "longitudinal_station": "FRONT_BUMPER",
+      "working_distance_m": 1.5,
+      "target_surface": "FRONT_BUMPER_AND_LOWER_VALANCE",
+      "expected_overlap_percent": 80.0,
+      "occlusion_risk": "MEDIUM",
+      "plain_text_coordinates": "azimuth_rad = 0.0, elevation_height_m = 0.4, working_dist_m = 1.5"
+    },
+    {
+      "station_id": "STN-002-CAB-REAR-LH",
+      "azimuth_rad": 2.3562,
+      "height_m": 1.6,
+      "longitudinal_station": "CAB_BACK_WALL_LH",
+      "working_distance_m": 2.0,
+      "target_surface": "CAB_REAR_SHEET_METAL_AND_MOUNT_BUSHINGS",
+      "expected_overlap_percent": 75.0,
+      "occlusion_risk": "HIGH",
+      "plain_text_coordinates": "azimuth_rad = 2.3562, elevation_height_m = 1.6, working_dist_m = 2.0"
+    },
+    {
+      "station_id": "STN-003-FRAME-MID-LH",
+      "azimuth_rad": 1.5708,
+      "height_m": 0.6,
+      "longitudinal_station": "MID_FRAME_RAIL_LH",
+      "working_distance_m": 1.2,
+      "target_surface": "LH_FRAME_C_CHANNEL_AND_DEF_LINE_RUNS",
+      "expected_overlap_percent": 85.0,
+      "occlusion_risk": "LOW",
+      "plain_text_coordinates": "azimuth_rad = 1.5708, elevation_height_m = 0.6, working_dist_m = 1.2"
+    }
+  ],
+  "expansion_note": "Seed stations only. Full grid expansion (every longitudinal bay along CA and behind cab) is required before physical capture execution."
+}

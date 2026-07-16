@@ -30,9 +30,11 @@
 
 **Question:** Does this specific Regular Cab 4x2 chassis-cab use a monobeam front axle structure or the classic twin-I-beam design?
 
+**Audit update:** Conflict `CNF-001` ranks Ford BBAS/Order Guide monobeam claim as AUTHORITATIVE vs aggregator Twin-I-Beam as LOW. Humility protocol keeps node as `OBJ-FRONT-AXLE-ASSEMBLY` with `CONFIGURATION_UNRESOLVED` until physical inspection.
+
 **Impact:** `FRONT_AXLE_*` object identity, landmark `LMK-AXLE-FRONT-CTR`, front suspension hierarchy
 
-**Status:** OPEN — hierarchy currently uses provisional `FRONT_AXLE_ASSEMBLY` until tagged
+**Status:** OPEN_MONITORING — do not lock subtype yet
 
 ---
 

@@ -1,7 +1,8 @@
 # L1 Gap Analysis
 
 **Status:** `ACTIVE`  
-**Purpose:** track missing evidence that blocks promotion of research claims to VERIFIED
+**Purpose:** track missing evidence that blocks promotion of research claims to VERIFIED  
+**Post-audit summary:** see `L1_FINAL_GAP_REPORT.md` (gate `L1_REQUIRES_MORE_REFERENCE_DATA`)
 
 ---
 

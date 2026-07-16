@@ -189,11 +189,11 @@ Append-only record of digital twin foundation decisions.
 ## DT-D012 — L1 exterior visual reference research foundation
 
 - **Date:** 2026-07-16
-- **Status:** Accepted
+- **Status:** Accepted (superseded in phase by DT-D013)
 - **Context:** L00 architectural runtime work is frozen. Scope shifts entirely to Layer 1 visual reference research for locked Candidate C1 (2019 F-450 Chassis Cab, Regular Cab, 4x2, DRW, 145.3/60, bare cab-and-chassis).
 - **Decision:**
   1. Land complete L1 exterior research package under `layers/L01/`
-  2. Readiness banner: **`L1_EXTERIOR_RESEARCH_FOUNDATION_READY`**
+  2. Readiness banner (initial): **`L1_EXTERIOR_RESEARCH_FOUNDATION_READY`**
   3. Object hierarchy, draft object/landmark registries, view matrix, coverage plan, surface/wheel/glass/material dossiers, detail allocation, acceptance standard, open questions, and gap analysis are the research foundation
   4. Evidence statuses remain DRAFT / PROVISIONAL — no brochure-to-VERIFIED promotion without archived Tier 1 sources
   5. Front axle remains `FRONT_AXLE_ASSEMBLY` (RESEARCH_REQUIRED: monobeam vs twin-I-beam)
@@ -203,3 +203,23 @@ Append-only record of digital twin foundation decisions.
   - Active layer moves to L01 research (not production)
   - L00 closure remains REJECTED; runtime transform certification remains NOT_EXECUTED
   - Do not invent missing dimensions to close gaps
+
+## DT-D013 — L1 adversarial audit; factual verification required
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Adversarial audit of L1 draft found unverified numeric claims, configuration conflicts, and an invalid PBR metalness on powdercoat. Gate cannot advance to visual-reference baseline lock.
+- **Decision:**
+  1. Status → **`L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`**
+  2. Phase → **`L1_FACTUAL_VERIFICATION_REQUIRED`**
+  3. Gate → **`L1_REQUIRES_MORE_REFERENCE_DATA`**
+  4. Accept `L1_ADVERSARIAL_SOURCE_AUDIT.md`, claim register CLM-001…015, conflict register CNF-001/002
+  5. Prefer V2 hierarchy / object registry / landmark registry / acceptance standard; capture station grid for chassis rails
+  6. Correct FRAME powdercoat metalness to **0.0** (dielectric); keep roughness provisional
+  7. Humility protocol: front axle stays `OBJ-FRONT-AXLE-ASSEMBLY` / `CONFIGURATION_UNRESOLVED` despite AUTHORITATIVE monobeam ranking until physical inspection
+  8. Reclassify hub-cap landmarks as `VISUAL_POSE_LANDMARK` (not engineering datums)
+  9. Geometry production remains **BLOCKED**
+- **Consequences:**
+  - Do not treat DOCUMENT_SUPPORTED claims as VERIFIED until hashed archives + physical cross-check
+  - Do not use V1 object/landmark registries for new work
+  - Next: factual verification track per `L1_FINAL_GAP_REPORT.md`

@@ -1,8 +1,10 @@
 # L01 — Exterior
 
-**Status:** Research active — `L1_EXTERIOR_RESEARCH_FOUNDATION_READY`  
+**Status:** Research draft complete — `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`  
+**Phase:** `L1_FACTUAL_VERIFICATION_REQUIRED`  
+**Gate:** `L1_REQUIRES_MORE_REFERENCE_DATA`  
 **Geometry / mesh production:** Blocked  
-**Prerequisites for geometry:** L00 physical gaps closed + visual intake evidence archived + owner approval
+**Prerequisites for geometry:** factual verification track closes gaps + visual intake evidence archived + owner approval
 
 ## Scope
 
@@ -15,22 +17,26 @@ Exterior body shell, doors, hood, fenders, bumpers, mirrors, glass, lighting, wh
 
 ## Research package
 
-Authoritative L1 research docs live in [`layers/L01/`](L01/README.md).
+Authoritative L1 docs: [`layers/L01/`](L01/README.md)
 
-Planning sequence remains footprint-first per [`L01_RESEARCH_DOSSIER_PLAN.md`](L01_RESEARCH_DOSSIER_PLAN.md).
+- Adversarial audit: [`L1_ADVERSARIAL_SOURCE_AUDIT.md`](L01/L1_ADVERSARIAL_SOURCE_AUDIT.md)
+- Claim register: [`L1_CLAIM_REGISTER_PROPOSAL.json`](L01/L1_CLAIM_REGISTER_PROPOSAL.json)
+- Prefer V2 hierarchy / registries / acceptance / capture grid
+
+Planning sequence: [`L01_RESEARCH_DOSSIER_PLAN.md`](L01_RESEARCH_DOSSIER_PLAN.md)
 
 ## Deliverables
 
-### Research (in progress)
+### Research
 
-- [x] Exterior research plan and object hierarchy
-- [x] Draft object + landmark registries
-- [x] Reference view matrix + photo/scan coverage plan
-- [x] Surface / wheel / glass / material dossiers
-- [x] Geometry vs normal/texture matrix + visual acceptance standard
-- [x] Open questions + gap analysis
-- [ ] Tier 1 source archive (BBLB / fleet dims / T&RA)
-- [ ] Footprint/envelope claim records (schema V6)
+- [x] Exterior research plan and dossiers (draft)
+- [x] Adversarial source audit + claim/conflict registers
+- [x] V2 hierarchy, object/landmark registries, landmark classification
+- [x] Capture coverage grid + PBR metalness correction
+- [x] Visual acceptance V2 + final gap report
+- [ ] Tier 1 source archive (hashed BBAS / order guide / T&RA)
+- [ ] Physical verification of open claims / conflicts
+- [ ] Footprint/envelope claim records (schema V6) promoted beyond DRAFT
 
 ### Production (blocked)
 
@@ -43,14 +49,14 @@ Planning sequence remains footprint-first per [`L01_RESEARCH_DOSSIER_PLAN.md`](L
 
 | Gate | Status |
 |------|--------|
-| Visual | research_only (geometry blocked) |
-| Dimensional | research_only (claims DRAFT) |
+| Visual | requires_more_reference_data |
+| Dimensional | factual_verification_required |
 | Structural | research_only |
 | Interaction | blocked |
-| Documentation | in_progress |
+| Documentation | draft_complete |
 
 ## Notes
 
-- Wide-track front flares and DRW stance are research-critical; do not invent flare depth or dual track.
-- Front axle architecture (monobeam vs twin-I-beam) remains OPEN for this 4x2 chassis cab.
-- Temporary rear transit bumper inclusion is an owner decision (`L1_OPEN_QUESTIONS.md`).
+- Frame powdercoat metalness corrected to **0.0** (dielectric); do not use draft 0.8.
+- Front axle remains `CONFIGURATION_UNRESOLVED` despite AUTHORITATIVE monobeam ranking.
+- Hub ornaments are `VISUAL_POSE_LANDMARK` only — not engineering datums.

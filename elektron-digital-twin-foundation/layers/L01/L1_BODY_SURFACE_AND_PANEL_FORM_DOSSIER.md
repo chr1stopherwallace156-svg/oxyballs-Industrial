@@ -14,7 +14,7 @@
 - Expected visual consequences if confirmed:
   - soft / rounded edge transitions
   - tight door gaps
-- Nominal panel gap claim (research, not verified): 3.5 mm ± 0.5 mm
+- Nominal panel gap claim (research, not verified): 3.5 mm ± 0.5 mm — claim `CLM-001` status `RESEARCH_REQUIRED`
 
 **Required before VERIFIED:** OEM body construction source or measured physical sample.
 
@@ -32,7 +32,7 @@
 
 - Unlike F-250 / F-350 pickup packaging, F-450 chassis cab uses a wider front track that requires bolted front fender flares.
 - Flare material class (research): dark molded-in-color plastic.
-- Extension claim (research): approximately 50.8 mm (2.0 in) outward each side, starting at front bumper transition and tapering at wheel-well trailing edge.
+- Extension claim (research): approximately 50.8 mm (2.0 in) outward each side — claim `CLM-002` status `PHYSICAL_CAPTURE_REQUIRED`
 
 **Required before VERIFIED:**
 

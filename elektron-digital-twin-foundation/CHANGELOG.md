@@ -226,3 +226,35 @@ All notable changes to the digital twin foundation. Append-only.
 - Readiness: **L1_EXTERIOR_RESEARCH_FOUNDATION_READY**
 - L01 geometry: **BLOCKED**
 - Next: Tier 1 source archive + footprint/envelope claim extraction
+
+## 2026-07-16 (L1 Adversarial Audit — Factual Verification Required)
+
+### Added
+
+- `layers/L01/L1_ADVERSARIAL_SOURCE_AUDIT.md`
+- `layers/L01/L1_CLAIM_REGISTER_PROPOSAL.json` (CLM-001…015)
+- `layers/L01/L1_CONFIGURATION_CONFLICT_REGISTER.json` (CNF-001, CNF-002)
+- `layers/L01/L1_EXTERIOR_OBJECT_HIERARCHY_V2_PROPOSAL.md`
+- `layers/L01/L1_EXTERIOR_OBJECT_REGISTRY_V2_PROPOSAL.json`
+- `layers/L01/L1_LANDMARK_CLASSIFICATION_STANDARD.md`
+- `layers/L01/L1_LANDMARK_REGISTRY_V2_PROPOSAL.json`
+- `layers/L01/L1_CAPTURE_COVERAGE_GRID_PROPOSAL.json`
+- `layers/L01/L1_MATERIAL_PBR_CORRECTION.md`
+- `layers/L01/L1_VISUAL_ACCEPTANCE_STANDARD_V2_PROPOSAL.md`
+- `layers/L01/L1_FINAL_GAP_REPORT.md`
+- **DT-D013** — adversarial audit; factual verification gate
+
+### Changed
+
+- Frame powdercoat metalness corrected to **0.0** (dielectric)
+- V1 object/landmark registries and acceptance standard marked SUPERSEDED
+- Hub ornament landmark reclassed as `VISUAL_POSE_LANDMARK`
+- Front axle humility: `CONFIGURATION_UNRESOLVED` (OPEN_MONITORING)
+- STATUS: draft complete / factual verification / requires more reference data
+
+### Status
+
+- Status: **L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE**
+- Phase: **L1_FACTUAL_VERIFICATION_REQUIRED**
+- Gate: **L1_REQUIRES_MORE_REFERENCE_DATA**
+- L01 geometry: **BLOCKED**

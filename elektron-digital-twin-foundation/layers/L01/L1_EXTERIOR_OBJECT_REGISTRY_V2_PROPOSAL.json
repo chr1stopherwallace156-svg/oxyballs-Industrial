@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_name": "EDTS_L1_Exterior_Object_Registry_V2",
+  "version": "2.0.0",
+  "status": "DRAFT",
+  "supersedes": "L1_EXTERIOR_OBJECT_REGISTRY_PROPOSAL.json",
+  "vehicle_configuration": {
+    "make": "Ford",
+    "model": "F-450 Chassis Cab",
+    "year": 2019,
+    "cab_style": "Regular Cab",
+    "drivetrain": "4X2",
+    "wheelbase_in": 145.3,
+    "cab_to_axle_in": 60.0,
+    "rear_wheels": "DRW",
+    "body_state": "BARE_CAB_AND_CHASSIS"
+  },
+  "layer_classes": [
+    "L1_VISIBLE_EXTERIOR",
+    "L1_VISIBLE_UNDERBODY",
+    "L2_STRUCTURAL",
+    "L3_MECHANICAL",
+    "DEFERRED_DETAIL"
+  ],
+  "objects": [
+    {
+      "object_id": "OBJ-FRONT-AXLE-ASSEMBLY",
+      "human_readable_name": "Front Axle Assembly",
+      "layer": "L1_VISIBLE_UNDERBODY",
+      "parent_object": "ROOT_VEHICLE",
+      "vehicle_side_location": "FRONT_CENTERLINE",
+      "configuration_status": "CONFIGURATION_UNRESOLVED",
+      "candidate_types": ["MONOBEAM", "TWIN_I_BEAM"],
+      "material_class": "CAST_IRON_STEEL",
+      "manufacturing_method": "CAST_AND_FORGED",
+      "visual_importance": "MEDIUM",
+      "dimensional_importance": "CRITICAL",
+      "required_references": ["Ford_BBAS_Layout_Book_2019_Page_10"],
+      "separate_mesh_requirement": true,
+      "pivot_requirement": false,
+      "future_removability": false,
+      "future_interaction_role": "STEER_INTERACTION",
+      "geometry_detail_level": "HIGH",
+      "detail_distribution": "GEOMETRY",
+      "evidence_status": "PHYSICAL_VERIFICATION_PENDING",
+      "unresolved_questions": [
+        "Confirm the monobeam configuration over the Twin-I-Beam on the reference vehicle chassis."
+      ]
+    },
+    {
+      "object_id": "OBJ-FENDER-FLARE-LH",
+      "human_readable_name": "Front Left Fender Wide-Track Flare",
+      "layer": "L1_VISIBLE_EXTERIOR",
+      "parent_object": "OBJ-FENDER-LH",
+      "vehicle_side_location": "LEFT",
+      "material_class": "PLASTIC-MOLDED-MOLD-IN-COLOR",
+      "manufacturing_method": "INJECTION_MOLDED",
+      "visual_importance": "HIGH",
+      "dimensional_importance": "HIGH",
+      "required_references": ["Chassis_Cab_Front_Fender_Reference_Set"],
+      "separate_mesh_requirement": true,
+      "pivot_requirement": false,
+      "future_removability": true,
+      "future_interaction_role": "NONE",
+      "geometry_detail_level": "MEDIUM",
+      "detail_distribution": "GEOMETRY",
+      "evidence_status": "PHYSICAL_VERIFICATION_PENDING",
+      "unresolved_questions": [
+        "Measure the mounting surface offset relative to the base fender sheet metal."
+      ]
+    },
+    {
+      "object_id": "OBJ-FRAME-RAIL-LH",
+      "human_readable_name": "Left-Hand Main Frame Rail",
+      "layer": "L1_VISIBLE_UNDERBODY",
+      "parent_object": "OBJ-CHASSIS-FRAME",
+      "vehicle_side_location": "LEFT",
+      "material_class": "STEEL_HIGH_STRENGTH",
+      "manufacturing_method": "STAMPED_C_CHANNEL",
+      "visual_importance": "HIGH",
+      "dimensional_importance": "CRITICAL",
+      "required_references": ["2019_Ford_SVE_Chassis_Layout"],
+      "separate_mesh_requirement": true,
+      "pivot_requirement": false,
+      "future_removability": false,
+      "future_interaction_role": "NONE",
+      "geometry_detail_level": "HIGH",
+      "detail_distribution": "GEOMETRY",
+      "evidence_status": "DRAFT_PENDING_SOURCE_ARCHIVE",
+      "unresolved_questions": [
+        "Confirm 34-inch outer frame width from archived BBAS table."
+      ]
+    },
+    {
+      "object_id": "OBJ-REAR-AXLE-VISIBLE-ENVELOPE",
+      "human_readable_name": "Rear Axle Visible Envelope",
+      "layer": "L1_VISIBLE_UNDERBODY",
+      "parent_object": "ROOT_VEHICLE",
+      "vehicle_side_location": "REAR_CENTERLINE",
+      "material_class": "CAST_IRON_STEEL",
+      "manufacturing_method": "CAST_AND_WELDED",
+      "visual_importance": "MEDIUM",
+      "dimensional_importance": "CRITICAL",
+      "required_references": ["Dana_Spicer_S110_Technical_Data_Sheet"],
+      "separate_mesh_requirement": true,
+      "pivot_requirement": true,
+      "future_removability": false,
+      "future_interaction_role": "ROTATE_WHEELS",
+      "geometry_detail_level": "MEDIUM",
+      "detail_distribution": "GEOMETRY_AND_NORMAL",
+      "evidence_status": "PROVISIONAL_PENDING_AXLE_TAG_AND_SCAN",
+      "unresolved_questions": [
+        "Confirm S110 via axle housing tag at physical intake.",
+        "Obtain high-resolution cast housing scan before HIGH geometry detail."
+      ]
+    }
+  ]
+}

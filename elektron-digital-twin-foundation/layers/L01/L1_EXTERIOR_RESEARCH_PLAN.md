@@ -2,7 +2,16 @@
 
 ## Status
 
-**ACTIVE — L1_EXTERIOR_RESEARCH_FOUNDATION_READY**
+**DRAFT COMPLETE — awaiting factual verification**
+
+| Field | Value |
+|---|---|
+| Status | `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE` |
+| Phase | `L1_FACTUAL_VERIFICATION_REQUIRED` |
+| Gate | `L1_REQUIRES_MORE_REFERENCE_DATA` |
+
+Adversarial audit: `L1_ADVERSARIAL_SOURCE_AUDIT.md`  
+Gap report: `L1_FINAL_GAP_REPORT.md`
 
 ## Locked Configuration Scope
 
@@ -60,16 +69,27 @@ Generate registries and structural files under `layers/L01/` as draft source-of-
 
 | File | Purpose |
 |---|---|
-| `L1_EXTERIOR_OBJECT_HIERARCHY.md` | Parent-child assembly tree |
-| `L1_EXTERIOR_OBJECT_REGISTRY_PROPOSAL.json` | Object metadata registry |
-| `L1_EXTERIOR_LANDMARK_REGISTRY_PROPOSAL.json` | Pose / scan landmarks |
+| `L1_ADVERSARIAL_SOURCE_AUDIT.md` | Adversarial claim downgrade + PBR/suspension findings |
+| `L1_CLAIM_REGISTER_PROPOSAL.json` | Claim verification register (CLM-001…015) |
+| `L1_CONFIGURATION_CONFLICT_REGISTER.json` | CNF-001 / CNF-002 conflicts |
+| `L1_EXTERIOR_OBJECT_HIERARCHY.md` | V1 hierarchy (superseded) |
+| `L1_EXTERIOR_OBJECT_HIERARCHY_V2_PROPOSAL.md` | V2 layered hierarchy (**prefer**) |
+| `L1_EXTERIOR_OBJECT_REGISTRY_PROPOSAL.json` | V1 object registry (superseded) |
+| `L1_EXTERIOR_OBJECT_REGISTRY_V2_PROPOSAL.json` | V2 object registry (**prefer**) |
+| `L1_EXTERIOR_LANDMARK_REGISTRY_PROPOSAL.json` | V1 landmarks (superseded) |
+| `L1_LANDMARK_CLASSIFICATION_STANDARD.md` | Landmark class definitions |
+| `L1_LANDMARK_REGISTRY_V2_PROPOSAL.json` | V2 landmarks (**prefer**) |
 | `L1_REFERENCE_VIEW_MATRIX.md` | Spherical capture views |
 | `L1_PHOTO_AND_SCAN_COVERAGE_PLAN.md` | Three-ring capture plan |
+| `L1_CAPTURE_COVERAGE_GRID_PROPOSAL.json` | Longitudinal station grid (**prefer for rails**) |
 | `L1_BODY_SURFACE_AND_PANEL_FORM_DOSSIER.md` | Cab / flare form research |
 | `L1_WHEEL_TIRE_DRW_DOSSIER.md` | Wheel/tire stance research |
 | `L1_GLASS_TRIM_LIGHTING_DOSSIER.md` | Glass and lighting |
 | `L1_MATERIAL_AND_MANUFACTURING_DOSSIER.md` | PBR material classes |
+| `L1_MATERIAL_PBR_CORRECTION.md` | Dielectric metalness correction |
 | `L1_GEOMETRY_VS_NORMAL_MAP_VS_TEXTURE_MATRIX.md` | Detail allocation |
-| `L1_VISUAL_ACCEPTANCE_STANDARD.md` | Visual gate criteria |
+| `L1_VISUAL_ACCEPTANCE_STANDARD.md` | V1 visual gates (superseded) |
+| `L1_VISUAL_ACCEPTANCE_STANDARD_V2_PROPOSAL.md` | V2 visual gates (**prefer**) |
 | `L1_OPEN_QUESTIONS.md` | Unresolved items |
-| `L1_GAP_ANALYSIS.md` | Evidence gaps |
+| `L1_GAP_ANALYSIS.md` | Evidence gaps (working) |
+| `L1_FINAL_GAP_REPORT.md` | Post-audit gate report |

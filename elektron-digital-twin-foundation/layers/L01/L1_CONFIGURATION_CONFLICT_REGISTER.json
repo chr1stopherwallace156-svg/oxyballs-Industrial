@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_CONFIGURATION_CONFLICT_REGISTER",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "purpose": "Track conflicting information across official and unofficial specs so the digital twin is built to actual 2019 F-450 parameters, not generic Super Duty specs.",
+  "unresolved_conflicts": [
+    {
+      "conflict_id": "CNF-001-FRONT-SUSPENSION-TYPE",
+      "description": "Third-party automotive spec sites often label 4x2 Ford Super Duties as having independent Twin-I-Beam front suspensions. Heavy-duty F-450 fleet models require a solid axle to support high weight ratings.",
+      "contradicting_sources": [
+        {
+          "source_name": "Generic Auto Specification Aggregators",
+          "claim": "Front Suspension: Twin-I-Beam Independent Coil Spring (4x2)",
+          "ranking": "LOW"
+        },
+        {
+          "source_name": "Ford BBAS & Order Guide (2019)",
+          "claim": "Front Suspension: Wide-track Monobeam Solid Axle with coil springs (all 4x2 and 4x4 F-450 models)",
+          "ranking": "AUTHORITATIVE"
+        }
+      ],
+      "mitigation_reconciliation": "The node is labeled FRONT_AXLE_ASSEMBLY / OBJ-FRONT-AXLE-ASSEMBLY with status CONFIGURATION_UNRESOLVED and candidate_types [MONOBEAM, TWIN_I_BEAM]. Confirm monobeam during physical inspection before locking design. Do not archive BBAS claim as VERIFIED until pages are hashed into evidence store.",
+      "status": "OPEN_MONITORING"
+    },
+    {
+      "conflict_id": "CNF-002-TIRE-BRAND-AND-MODEL",
+      "description": "Standard Ford fleet order guides list tires as standard 225/70R19.5G tires, but the actual tire brand (e.g., Continental, Michelin, Goodyear) can vary by factory batch and trim choice.",
+      "contradicting_sources": [
+        {
+          "source_name": "Ford Fleet Order Guide (2019)",
+          "claim": "Tire: 225/70R19.5G standard black-sidewall highway tread",
+          "ranking": "AUTHORITATIVE"
+        },
+        {
+          "source_name": "Digital Twin Reference Dossier",
+          "claim": "Tire: Continental Hybrid HS3 225/70R19.5",
+          "ranking": "SPECIFIC_ASSET_DEPENDENT"
+        }
+      ],
+      "mitigation_reconciliation": "Factory tire size is modeled generically as 225/70R19.5. Continental Hybrid HS3 is noted as reference-vehicle-specific and must be verified by sidewall inspection.",
+      "status": "OPEN_MONITORING"
+    }
+  ]
+}

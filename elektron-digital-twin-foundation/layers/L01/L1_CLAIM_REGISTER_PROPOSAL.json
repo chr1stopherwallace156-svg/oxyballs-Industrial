@@ -1,0 +1,187 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_CLAIM_REGISTER_PROPOSAL",
+  "version": "1.0.0",
+  "status": "DRAFT",
+  "vehicle_configuration": {
+    "make": "Ford",
+    "model": "F-450 Chassis Cab",
+    "year": 2019,
+    "cab_style": "Regular Cab",
+    "drivetrain": "4X2",
+    "rear_wheels": "DRW",
+    "wheelbase_in": 145.3,
+    "cab_to_axle_in": 60.0
+  },
+  "claims": [
+    {
+      "claim_id": "CLM-001-DOOR-GAP",
+      "property": "door_gap",
+      "proposed_value": "3.5 +/- 0.5 mm",
+      "plain_text_formula": "door_gap = 3.5 mm +/- 0.5 mm",
+      "source_authority": "UNVERIFIED",
+      "source_document": "NONE",
+      "status": "RESEARCH_REQUIRED",
+      "confidence": "LOW",
+      "mitigation_plan": "Perform physical caliper measurements on the reference vehicle door gaps."
+    },
+    {
+      "claim_id": "CLM-002-FENDER-FLARE-EXT",
+      "property": "fender_flare_extension",
+      "proposed_value": "50.8 mm",
+      "plain_text_formula": "flare_extension_lh_rh = 50.8 mm",
+      "source_authority": "UNVERIFIED",
+      "source_document": "NONE",
+      "status": "PHYSICAL_CAPTURE_REQUIRED",
+      "confidence": "LOW",
+      "mitigation_plan": "Measure flare protrusion relative to the cab outer sheet metal."
+    },
+    {
+      "claim_id": "CLM-003-ROOF-LAMP-SPACING",
+      "property": "roof_lamp_spacing",
+      "proposed_value": "150.0 mm",
+      "plain_text_formula": "center_cab_lamp_spacing = 150.0 mm",
+      "source_authority": "UNVERIFIED",
+      "source_document": "NONE",
+      "status": "RESEARCH_REQUIRED",
+      "confidence": "LOW",
+      "mitigation_plan": "Review roof panel production drawings or measure light bezel centers physically."
+    },
+    {
+      "claim_id": "CLM-004-DUAL-WHEEL-SPACING",
+      "property": "dual_wheel_spacing",
+      "proposed_value": "270.3 mm",
+      "plain_text_formula": "dual_spacing = 270.3 mm",
+      "source_authority": "UNVERIFIED",
+      "source_document": "NONE",
+      "status": "CONFIGURATION_DEPENDENT",
+      "confidence": "LOW",
+      "mitigation_plan": "Acknowledge that dual spacing varies with the installed tire model and rim. Measure spacing on the actual reference vehicle."
+    },
+    {
+      "claim_id": "CLM-005-OVERALL-DRW-WIDTH",
+      "property": "overall_drw_width",
+      "proposed_value": "2438.4 mm",
+      "plain_text_formula": "overall_width_rear_axle = 2438.4 mm",
+      "source_authority": "DOCUMENT_SUPPORTED",
+      "source_document": "Ford Body Builder Advisory Service Layout Book (2019)",
+      "page_reference": "Super Duty Chassis Cab Dimension Matrix, Page 12",
+      "status": "PHYSICAL_VERIFICATION_PENDING",
+      "confidence": "HIGH",
+      "mitigation_plan": "Perform laser scan cross-check on outer-tire-sidewall-to-outer-tire-sidewall dimension.",
+      "archive_note": "DOCUMENT_SUPPORTED requires archived hashed BBAS page before promotion to VERIFIED."
+    },
+    {
+      "claim_id": "CLM-006-WHEEL-PCD",
+      "property": "wheel_pitch_circle_diameter",
+      "proposed_value": "225.0 mm",
+      "plain_text_formula": "wheel_pcd = 225.0 mm",
+      "source_authority": "DOCUMENT_SUPPORTED",
+      "source_document": "Ford Super Duty Order Guide (2019) - Mechanical Specs",
+      "status": "PHYSICAL_VERIFICATION_PENDING",
+      "confidence": "HIGH",
+      "mitigation_plan": "Verify standard 10-lug heavy-duty commercial axle hubs.",
+      "archive_note": "DOCUMENT_SUPPORTED requires archived hashed order-guide excerpt before promotion to VERIFIED."
+    },
+    {
+      "claim_id": "CLM-007-TIRE-DIAMETER",
+      "property": "tire_outer_diameter",
+      "proposed_value": "811.0 mm",
+      "plain_text_formula": "tire_diameter = 811.0 mm",
+      "source_authority": "CONFIGURATION_DEPENDENT",
+      "source_document": "Continental Hybrid HS3 225/70R19.5 Specification Sheet",
+      "status": "PHYSICAL_CAPTURE_REQUIRED",
+      "confidence": "MEDIUM",
+      "mitigation_plan": "Physical tires wear down and flex under load. Measure actual standing height on the reference vehicle."
+    },
+    {
+      "claim_id": "CLM-008-TIRE-WIDTH",
+      "property": "tire_section_width",
+      "proposed_value": "226.0 mm",
+      "plain_text_formula": "tire_section_width = 226.0 mm",
+      "source_authority": "CONFIGURATION_DEPENDENT",
+      "source_document": "Continental Hybrid HS3 225/70R19.5 Specification Sheet",
+      "status": "PHYSICAL_CAPTURE_REQUIRED",
+      "confidence": "MEDIUM",
+      "mitigation_plan": "Check the section width of the mounted tire, as it varies with rim width."
+    },
+    {
+      "claim_id": "CLM-009-WHEEL-CONSTRUCTION",
+      "property": "wheel_rim_materials",
+      "proposed_value": "Aluminum outer rim, steel inner rim",
+      "plain_text_formula": "wheel_composition_outer = ALUMINUM, wheel_composition_inner = STEEL",
+      "source_authority": "CONFIGURATION_DEPENDENT",
+      "source_document": "Ford Super Duty Order Guide (2019) - XL/XLT Trim Specs",
+      "status": "CONFIGURATION_DEPENDENT",
+      "confidence": "HIGH",
+      "mitigation_plan": "Inspect the reference vehicle. Base XL trim utilizes all-steel wheel sets; higher-trim configurations use outer polished aluminum wheels."
+    },
+    {
+      "claim_id": "CLM-010-FRAME-ROUGHNESS",
+      "property": "frame_powder_coat_roughness",
+      "proposed_value": "0.45 - 0.55",
+      "plain_text_formula": "roughness_min = 0.45, roughness_max = 0.55",
+      "source_authority": "UNVERIFIED",
+      "source_document": "NONE",
+      "status": "PHYSICAL_CAPTURE_REQUIRED",
+      "confidence": "LOW",
+      "mitigation_plan": "Perform a physical roughness evaluation using optical reference cards under controlled lighting."
+    },
+    {
+      "claim_id": "CLM-011-FRAME-METALNESS",
+      "property": "frame_powder_coat_metalness",
+      "proposed_value": "0.80",
+      "corrected_value": "0.0",
+      "plain_text_formula": "metalness = 0.0  (corrected from invalid 0.80 dielectric violation)",
+      "source_authority": "UNVERIFIED",
+      "source_document": "NONE",
+      "status": "PBR_CORRECTION_APPLIED",
+      "confidence": "ZERO_FOR_ORIGINAL",
+      "mitigation_plan": "Correct metalness to 0.0 to properly render the paint/powdercoat layer as a dielectric coating. See L1_MATERIAL_PBR_CORRECTION.md."
+    },
+    {
+      "claim_id": "CLM-012-PAINT-ROUGHNESS",
+      "property": "cab_clear_coat_roughness",
+      "proposed_value": "0.02 - 0.05",
+      "plain_text_formula": "paint_roughness_min = 0.02, paint_roughness_max = 0.05",
+      "source_authority": "UNVERIFIED",
+      "source_document": "NONE",
+      "status": "PHYSICAL_CAPTURE_REQUIRED",
+      "confidence": "LOW",
+      "mitigation_plan": "Measure clearcoat gloss values on clean, unscratched cab aluminum panels."
+    },
+    {
+      "claim_id": "CLM-013-CHROME-REFLECTIVITY",
+      "property": "chrome_minimum_reflectivity",
+      "proposed_value": "0.95",
+      "plain_text_formula": "chrome_reflectivity_min = 0.95",
+      "source_authority": "UNVERIFIED",
+      "source_document": "NONE",
+      "status": "PHYSICAL_CAPTURE_REQUIRED",
+      "confidence": "LOW",
+      "mitigation_plan": "Determine chrome reflectance values against standard metallic mirror reference datasets."
+    },
+    {
+      "claim_id": "CLM-014-TEXTURE-DENSITY",
+      "property": "mesh_texture_density_target",
+      "proposed_value": "2048 pixels per meter",
+      "plain_text_formula": "texture_density = 2048 px/m",
+      "source_authority": "UNVERIFIED",
+      "source_document": "NONE",
+      "status": "PROVISIONAL_SPECIFICATION_ONLY",
+      "confidence": "MEDIUM",
+      "mitigation_plan": "Acknowledge this value as a software performance guideline rather than an observed physical measurement."
+    },
+    {
+      "claim_id": "CLM-015-WHEELBASE-TOLERANCE",
+      "property": "modeled_wheelbase_tolerance",
+      "proposed_value": "+/- 2.0 mm",
+      "plain_text_formula": "wheelbase_tolerance = +/- 2.0 mm",
+      "source_authority": "UNVERIFIED",
+      "source_document": "NONE",
+      "status": "PROVISIONAL_SPECIFICATION_ONLY",
+      "confidence": "MEDIUM",
+      "mitigation_plan": "Acknowledge this value as a quality gate guideline. Wheelbase is measured between axle centers."
+    }
+  ]
+}

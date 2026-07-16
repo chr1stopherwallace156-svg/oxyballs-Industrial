@@ -23,21 +23,21 @@
 | Spec | Claimed value | Status |
 |---|---|---|
 | Wheel size | 19.5 in × 6.0 in | DRAFT — confirm by door placard / OEM |
-| Outer wheels | forged polished aluminum (common) | DRAFT |
-| Inner duals | steel (common commercial packaging) | DRAFT |
-| Lug pattern | 10-lug on 225 mm PCD | DRAFT — confirm |
-| Tire family | Continental Hybrid HS3 or equivalent | DRAFT — confirm actual fitment |
-| Tire size | 225/70R19.5 | DRAFT — confirm |
-| Nominal OD (D) | 811 mm (31.9 in) | DRAFT — T&RA / tire maker |
-| Section width (W) | 226 mm (8.9 in) | DRAFT — T&RA / tire maker |
+| Outer wheels | forged polished aluminum (trim-dependent) | `CLM-009` CONFIGURATION_DEPENDENT |
+| Inner duals | steel (common) / XL may be all-steel | `CLM-009` CONFIGURATION_DEPENDENT |
+| Lug pattern | 10-lug on 225 mm PCD | `CLM-006` DOCUMENT_SUPPORTED + PHYSICAL_VERIFICATION_PENDING |
+| Tire family | Continental Hybrid HS3 or equivalent | `CNF-002` — verify sidewall; size generic 225/70R19.5 |
+| Tire size | 225/70R19.5(G) | Order-guide size; brand OPEN |
+| Nominal OD (D) | 811 mm (31.9 in) | `CLM-007` PHYSICAL_CAPTURE_REQUIRED |
+| Section width (W) | 226 mm (8.9 in) | `CLM-008` PHYSICAL_CAPTURE_REQUIRED |
 
 ## 2. Stance Metrics (research claims)
 
 | Metric | Claimed value | Status |
 |---|---|---|
 | Front wheel offset | deep dish outward for brake clearance | qualitative DRAFT |
-| Dual spacing (inner–outer centerline) | 270.3 mm (10.64 in) | DRAFT — reconcile with Body Builder book |
-| Outer overall dual-wheel width | 2438.4 mm (96.0 in) | DRAFT — reconcile with OEM width |
+| Dual spacing (inner–outer centerline) | 270.3 mm (10.64 in) | `CLM-004` CONFIGURATION_DEPENDENT / UNVERIFIED |
+| Outer overall dual-wheel width | 2438.4 mm (96.0 in) | `CLM-005` DOCUMENT_SUPPORTED + PHYSICAL_VERIFICATION_PENDING |
 
 ## 3. Required Confirmation Sources
 

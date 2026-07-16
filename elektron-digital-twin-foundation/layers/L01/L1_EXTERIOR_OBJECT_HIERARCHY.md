@@ -2,10 +2,11 @@
 
 ## Status
 
-**DRAFT — Locked configuration: 2019 F-450 Chassis Cab Reg Cab 4x2 DRW 145.3/60**
+**SUPERSEDED for ongoing work by `L1_EXTERIOR_OBJECT_HIERARCHY_V2_PROPOSAL.md`**
 
-Parent-child tree for transform inheritance (wheels, doors, etc.). Front axle type remains **RESEARCH_REQUIRED** (see `L1_OPEN_QUESTIONS.md`).
+Retained as V1 audit trail. Locked configuration: 2019 F-450 Chassis Cab Reg Cab 4x2 DRW 145.3/60.
 
+Parent-child tree for transform inheritance (wheels, doors, etc.). Front axle type remains **CONFIGURATION_UNRESOLVED** (see `L1_CONFIGURATION_CONFLICT_REGISTER.json` CNF-001).
 ```text
 ROOT_VEHICLE
 ├── CHASSIS_FRAME_SYSTEM (Main structural C-channel rails, 34-inch outer width — PROVISIONAL)

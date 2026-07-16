@@ -24,7 +24,7 @@
 ### Cab roof clearance lights (research)
 
 - Five individual amber marker lamps on roof brow
-- Center group of three claimed spacing: 150 mm apart
+- Center group of three claimed spacing: 150 mm apart — claim `CLM-003` `RESEARCH_REQUIRED`
 - Two outboard lights aligned with outer windshield edges
 
 **Confirm before VERIFIED:** measured spacing on physical cab or OEM illustration.

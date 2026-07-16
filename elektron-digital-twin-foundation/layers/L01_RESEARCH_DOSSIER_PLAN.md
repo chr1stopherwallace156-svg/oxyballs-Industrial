@@ -2,13 +2,19 @@
 
 ## Status
 
-**ACTIVE — Foundation package landed**
+**DRAFT COMPLETE — factual verification required**
 
-Banner: `L1_EXTERIOR_RESEARCH_FOUNDATION_READY`
+| Field | Value |
+|---|---|
+| Status | `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE` |
+| Phase | `L1_FACTUAL_VERIFICATION_REQUIRED` |
+| Gate | `L1_REQUIRES_MORE_REFERENCE_DATA` |
 
 L00 remains frozen at `L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY`. This plan does **not** authorize L01 geometry production.
 
-Primary package: [`layers/L01/`](L01/README.md)
+Primary package: [`layers/L01/`](L01/README.md)  
+Audit: [`L1_ADVERSARIAL_SOURCE_AUDIT.md`](L01/L1_ADVERSARIAL_SOURCE_AUDIT.md)  
+Gap report: [`L1_FINAL_GAP_REPORT.md`](L01/L1_FINAL_GAP_REPORT.md)
 
 ---
 

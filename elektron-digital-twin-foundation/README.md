@@ -2,10 +2,12 @@
 
 This repository contains the authoritative schemas, standards, and registries establishing the baseline data model and coordinate frameworks for the F-450 physical vehicle intake and digital reconstruction.
 
-**Readiness:** `L1_EXTERIOR_RESEARCH_FOUNDATION_READY`  
+**Readiness:** `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`  
+**Phase:** `L1_FACTUAL_VERIFICATION_REQUIRED`  
+**Gate:** `L1_REQUIRES_MORE_REFERENCE_DATA`  
 **L00 residual:** `L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY` (closure REJECTED; runtime transforms NOT_EXECUTED)  
 **L01 geometry:** BLOCKED — research documentation only  
-See [STATUS.json](STATUS.json), [layers/L01/README.md](layers/L01/README.md), and [L00_TRUE_RUNTIME_READINESS_REPORT.md](L00_TRUE_RUNTIME_READINESS_REPORT.md).
+See [STATUS.json](STATUS.json), [layers/L01/README.md](layers/L01/README.md), [layers/L01/L1_FINAL_GAP_REPORT.md](layers/L01/L1_FINAL_GAP_REPORT.md).
 
 ---
 
@@ -78,7 +80,7 @@ Every layer passes five gates before advancing:
 
 ## Current stage
 
-**L00 — Reference Lock** (document phase complete; physical intake pending). See [STATUS.json](STATUS.json).
+**L01 — Exterior visual reference research (draft complete).** Status `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`; phase `L1_FACTUAL_VERIFICATION_REQUIRED`; gate `L1_REQUIRES_MORE_REFERENCE_DATA`. Geometry blocked. See [STATUS.json](STATUS.json) and [layers/L01/L1_FINAL_GAP_REPORT.md](layers/L01/L1_FINAL_GAP_REPORT.md).
 
 ## Related work
 

@@ -25,15 +25,16 @@
 
 - Type: automotive clearcoat on aluminum
 - Visual: base color coat + highly reflective glossy clear finish
-- Roughness (research target): 0.02 – 0.05
+- Roughness (research target): 0.02 – 0.05 — **UNVERIFIED** (`CLM-012`); provisional single-point 0.03 in PBR correction
 - Metalness: 0.0 (dielectric clearcoat layer)
 
 ### FRAME-POWDERCOAT-SATIN
 
 - Type: semi-gloss electrostatic powder-coated structural steel
 - Visual: micro-textured, low-luster black surface
-- Roughness (research target): 0.45 – 0.55
-- Metalness: 0.8 (underlying metal with thick protective coating — shader approximation pending validation)
+- Roughness (research target): 0.45 – 0.55 — **UNVERIFIED** (`CLM-010`)
+- Metalness: **0.0** (dielectric coating — corrected from invalid 0.8; see `L1_MATERIAL_PBR_CORRECTION.md` / `CLM-011`)
+- Wear exception: exposed bare steel after chip-through → metalness 1.0, roughness ~0.20
 
 ### PLASTIC-MOLDED-MOLD-IN-COLOR (MIC)
 
