@@ -253,8 +253,20 @@ supplier datasheets → CAN/PATS.**
 While the HV wiring + powertrain + cooling gates sit at
 **BLOCKED_PENDING_SUPPLIER_DATA**, the research sequence continues:
 
-4. Brake / Steering Assist Gate (CP#1)
-5. CAN / Controls / PATS / Cluster Gate (CP#2)
+4. **Brake / Steering Assist Gate (CP#1)** — *(owner correction,
+   review_17: NOT "auxiliary vacuum pump" — F-450/F-550 use hydroboost
+   / hydraulic brake + power-steering assist).* Scope: determine the
+   factory Ford brake-assist and steering-assist architecture; identify
+   what assist is lost when the engine-driven pump is removed; evaluate
+   electric-hydraulic pump, accumulator/reserve assist, fault warning,
+   low-speed steering load, brake-assist failure mode, and test plan.
+5. **CAN / Controls / Cluster / Immobilizer Gate (CP#2)** — *(owner
+   correction, review_17: NEVER "PATS bypass / override" language —
+   that reads as defeating anti-theft).* Scope: **authorized
+   Ford-compatible controls integration, gateway compatibility,
+   immobilizer-safe architecture, cluster/CAN diagnostics, and
+   serviceability review.** Standing terminology rule for all future
+   batches.
 6. Mechanical Mounting / Battery Enclosure Gate
 7. Weight / Axle Load / CG Gate
 8. Failure Mode + Test Procedure Gate

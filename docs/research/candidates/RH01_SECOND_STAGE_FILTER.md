@@ -65,6 +65,13 @@ this file supersedes it (see Addendum, section 7).
 | CS-36 | **SupplierCandidate — LegacyCandidate + MissingSourceLink** | *Webasto CV Standard Battery System (NMC prismatic) + Vehicle Interface Box (VIB)* | Webasto — **NO URL/document on file (batch_16 supplied numbers without any source link)** | *(none on file — defect)* | Candidate (batch_16) — every value `NeedsExactSource`/`NeedsSupplierData`. **Owner flags: product line superseded by Standard Battery Pro 40 (~40 kWh, 333–407 V, 297 kg — owner-relayed) → LegacyCandidate, availability requires supplier confirmation** — lanes L9/L6 |
 | CS-37 | **SupplierCandidate — MissingSourceLink** | *Dana TM4 SUMO MD (HV2100-6P PM motor + integrated inverter)* | Dana TM4 — **NO URL/document on file (batch_16)**; owner corroborates the Class 4–7 / 265 kW / 3320 Nm / 3700 rpm envelope from Dana's public descriptions | *(none on file — defect)* | Candidate (batch_16) — every value `NeedsExactSource`/`NeedsSupplierData`; DC-side currents and DC-link capacitance not published (supplier questions required) — lanes L9/L6 |
 | CS-38 | **CandidateSourcePath — document named, not archived** | *Dana TM4 SUMO MD troubleshooting/service guide* (source of the 1200 l/h / 40-60 mix / 30 psi / 95.3% metrics) | Dana TM4 — **NO URL on file (batch_19)** | *(none on file — defect)* | Candidate path (batch_19) — obtain and archive the actual guide; until then RC-62 values stay DanaGuideMetricCandidate — lanes L6/L9 |
+| CS-39 | **AcademicPrincipleCandidate** (owner label) | *"Passive Electric Vehicle Battery Thermal Management Solution"* — academic heat report (Bernardi equation; fin efficiency) | academic paper (personal-site hosting — provenance modest) | <https://amnehj.github.io/pdf-files/heat-report.pdf> | Candidate (batch_20) — modeling reference only; `NeedsSupplierData` — lanes L6/L8 |
+| CS-40 | **ModelingFrameworkCandidate** (owner label) | *MathWorks: "EV Battery Cooling System Design"* — Simulink example (loss model; ε-NTU radiator sizing) | MathWorks (official docs) | <https://www.mathworks.com/help/hydro/ug/EVBatteryCoolingSystemDesign.html> | Candidate (batch_20) — `NeedsHardwareInputs` / `NeedsRadiatorSupplierData` — lanes L6/L8 |
+| CS-41 | **EngineeringPrincipleCandidate** (owner label) | *Sinoextrud: "How to Calculate Pressure Drop in Liquid Cooling Plates?"* (Darcy-Weisbach; notes complex plates/bends may need CFD) | sinoextrud.com (industrial vendor article) | <https://sinoextrud.com/how-to-calculate-pressure-drop-in-liquid-cooling-plates/> | Candidate (batch_20) — `NeedsPhysicalRouting`; CFD caveat recorded — lanes L6/L8 |
+| CS-42 | **AcademicPrincipleCandidate** (owner label) | *Zhang et al., "An online heat generation estimation method for lithium-ion batteries using dual-temperature measurements", Applied Energy 2020* (two-state core/surface thermal model; anomaly detection) | Penn State ECEC (university server) | <https://ecec.me.psu.edu/Pubs/2020_Zhang_Appl_Energy.pdf> | Candidate (batch_20) — `NeedsSensorAndPackData`; **anomaly-detection use only — NOT thermal-runaway containment** (owner task 4) — lanes L6/L8 |
+| CS-43 | **FieldContext / NeedsEngineeringSource** (owner task 3) | *energy-solutions.co: "Electric Truck Range Under Load: Real Towing Tests"* | trade/field article | <https://energy-solutions.co/articles/sub/electric-trucks-towing-range-tests> | Background (batch_20) — proves load/towing hurts range and flags regen thermal loading; the mountain-grade MODEL must come from tractive-power equations in a proper engineering source (`NeedsBetterSource`) — lanes L8/L6 |
+| CS-44 | **LeadOnly / InformalDiscussion / NotForRuleCreation** (owner task 2) | *Reddit r/AskEngineers thread on coolant velocity vs heat transfer* | reddit.com (forum) | <https://www.reddit.com/r/AskEngineers/comments/1izl7kl/can_an_increase_in_coolant_velocity_ever_lower/> | Sanity-check only (batch_20) — serial-vs-parallel doctrine needs a thermal-fluids textbook / SAE paper / supplier cooling guide — lane L6 |
+| CS-45 | **CandidateTestSource** (owner label) | *US DoD TOP 2-2-607 "Cooling Systems" — Test Operations Procedure* | DTIC (**official server**) | <https://apps.dtic.mil/sti/pdfs/ADA640254.pdf> | Candidate (batch_20) — `NeedsExactSource` verification of quotes; the strongest validation-test lane on file; maps directly onto the Cajon design case — lanes L8/L3 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -140,6 +147,14 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-63 | Webasto Pro 40 thermal envelope *(batch_19 + review_15, owner-corroborated — NO link)*: 10 l/min volume flow, <50 mbar pressure loss, operating −30…+55 °C, 333–407 V, ~40 kWh installed, 45/55 kW continuous charge/discharge at 25 °C **SoC-dependent** | CS-36 | **MissingSourceLink** | **SupplierMetricCandidate / NeedsEngineeringReview** — the 10 l/min figure is per-pack; **total system flow depends on the Webasto-approved manifold layout (hydraulic assumption fence, owner correction 2)** — lanes L6/L9 |
 | RC-64 | Dana inverter max coolant inlet 65 °C *(appears in reseller/public listings, not confirmed in the Dana guide)* | CS-37 (reseller-tier) | No official Dana locator | **NeedsOfficialDanaSource / NeedsEngineeringReview** (owner correction 3) — lane L6 |
 | RC-65 | **Heat-load principle (owner correction 4)**: the cooling loop rejects **LOSSES**, not the 130 kW mechanical output. Illustration only: at 95.3% max efficiency, input ≈136.4 kW → loss ≈6.4 kW best-case — **fenced as a rough illustration, NOT a design value**; real heat rejection comes from supplier efficiency maps and heat-rejection data across operating points | derived over RC-57/RC-62 (unverified) | n/a — principle + fenced illustration | **CandidateRule (cooling sizing basis = loss maps) + fenced number**; combined system heat load remains OpenGap/HardBlocked — lanes L6/L8 |
+| RC-66 | **Bernardi equation** (battery heat generation): q̇_T = I²R_int + I·T·(∂U_avg/∂T) — irreversible Joulean + reversible entropic terms *(equation quoted; modeling logic only)* | CS-39 | "Modeling Approach", p.1 — unverified | **AcademicPrincipleCandidate / NeedsSupplierData** (needs Webasto R_int vs SoC + entropic coefficient matrix) — lanes L6/L8 |
+| RC-67 | Component loss model Q = I²·R/1000 kW (quadratic in current) for inverter/motor thermal dissipation *(Simulink example)* | CS-40 | "Battery Harness" section — unverified | **ModelingFrameworkCandidate / NeedsHardwareInputs** (needs Dana efficiency maps, torque-vs-RPM heat to jacket) — lanes L6/L8 |
+| RC-68 | **ε-NTU cross-flow radiator sizing**: q_max = C_min·ΔT_in; effectiveness = q/q_max; NTU relation for cross-flow unmixed exchangers *(Simulink example)* | CS-40 | "Radiator Harness" section — unverified | **ModelingFrameworkCandidate / NeedsRadiatorSupplierData** (fin density, louver angles, air-side ΔP) — lanes L6/L8 |
+| RC-69 | **Darcy-Weisbach**: ΔP = f·(L/D)·(ρv²/2) for loop head loss; source itself notes complex plates/bends may require CFD | CS-41 | "How to Compute and Simulate Flow Loss?" — unverified | **EngineeringPrincipleCandidate / NeedsPhysicalRouting** (path lengths, fittings, channel geometry) — lanes L6/L8 |
+| RC-70 | **Two-state (core/surface) battery thermal model** with heat-generation reconstruction from dual temperature measurements — usable for thermal-lag limits and **anomaly detection** | CS-42 | §2 "Two-state thermal model" — unverified | **AcademicPrincipleCandidate / NeedsSensorAndPackData**; anomaly-detection scope only — lanes L6/L8 |
+| RC-71 | Tractive energy balance: E_total = E_rolling + E_aero + E_grade + E_accel with E_grade = m·g·sin(θ); regen 80–100 kW flagged as thermal risk *(from a towing field article — FieldContext; the model itself needs a proper engineering source)* | CS-43 | §3.1 — unverified | **ModelingFrameworkCandidate / NeedsBetterSource** (owner: use tractive-power equations from an engineering source; article = context only) — lanes L8/L6 |
+| RC-72 | Serial-loop principle: Q̇ = ṁ·C_p·ΔT — downstream components in a serial loop receive pre-heated coolant, reducing local ΔT vs a balanced parallel loop *(forum sanity check ONLY)* | CS-44 | forum thread — n/a | **LeadOnly / NotForRuleCreation**; doctrine requires textbook/SAE/supplier source; supplier split tolerances needed — lane L6 |
+| RC-73 | TOP 2-2-607: "Mountain road load course: To provide an average grade of 6% or greater and of sufficient continuous length to allow the vehicle to stabilize at a minimum speed for sustained operation." — steady-state thermal-equilibrium validation criterion | CS-45 | §1/§4, pp.1–5 — quote unverified | **CandidateTestSource — TestCandidate for the Cajon design case** (cooling valid only if temperatures stabilize on sustained grade); `NeedsPhysicalVerification` for component temperature limits — lanes L8/L3 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -1371,3 +1386,139 @@ data still needed.
 7 days after each letter is sent, follow up; weekly thereafter.
 Cadence recorded in both outreach files; a repository-side 7-day
 reminder is scheduled (checks send status and prompts follow-up).
+
+---
+
+## 28. Batch 20 + owner review_17 — Cooling Modeling Framework v0.1 (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_20_cooling_modeling_frameworks.md`
+and `docs/research/raw/owner_reviews/review_17_batch_20_verdict.md`.
+Row additions: CS-39..CS-45, RC-66..RC-73. **Owner label adopted:
+Cooling Modeling Framework v0.1 — ModelingFrameworkCandidate; not
+validated, not locked, not component-selection-ready; supplier data
+still required.** First batch under the review_16 lane doctrine, and
+it holds: the register gained a modeling **brain** while every gate
+stayed BLOCKED_PENDING_SUPPLIER_DATA.
+
+### Owner's 7 filter tasks — applied
+
+1. **"Validated baselines" language rejected** — the payload's header
+   ("validated academic, mathematical, and laboratory baselines")
+   downgraded to *candidate modeling references*. This is a
+   status-inflation instance in prose form; "validated" joins
+   "Validated" (batch_19) on the RESERVED-vocabulary list for M10.
+2. **Blank exact-quote fields → NeedsExactQuote.** Several rows list
+   "Exact Quote:" with an equation but no verbatim source sentence.
+   The `NeedsExactQuote` flag is set repo-wide: **no modeling row
+   becomes a SourceClaim without a verbatim quote + page/section**
+   (RC-66..73 carry equations as principles, not as verified quotes).
+3. **Reddit (CS-44/RC-72) → LeadOnly / NotForRuleCreation.**
+4. **Towing article (CS-43/RC-71) → FieldContext / NeedsBetterSource**
+   — proves load hurts range; the mountain-grade *model* comes from
+   tractive-power equations in a real engineering source.
+5. **Thermal-runaway row reclassified (CS-42/RC-70):** the two-state
+   paper supports **anomaly detection / heat-generation estimation**,
+   NOT thermal-runaway containment. Containment = OpenGap needing
+   UL/SAE/NFPA + supplier propagation/venting/enclosure data.
+6. **Gate 04 corrected — vacuum pump → hydroboost/EHPS** (F-450/F-550
+   are hydraulic-assist, not vacuum). Recorded in the Research Map
+   roadmap.
+7. **Gate 05 corrected — "PATS bypass/override" → authorized
+   Ford-compatible controls integration, immobilizer-safe
+   architecture, cluster/CAN diagnostics.** **Standing terminology
+   rule: the Build Engine never frames anti-theft work as "bypass."**
+   This is the most important correction in the batch — a security-
+   framing error that could misrepresent the project's intent.
+
+### Accepted vs downgraded vs rejected (owner-requested output)
+
+- **Accepted modeling references:** Bernardi (RC-66), MathWorks loss +
+  ε-NTU (RC-67/68), Darcy-Weisbach (RC-69), two-state thermal (RC-70),
+  TOP 2-2-607 test (RC-73). Equations allowed for simulation **as
+  modeling logic only** — none may size a real component.
+- **Downgraded:** towing article → FieldContext; tractive model →
+  NeedsBetterSource; thermal-runaway → anomaly detection.
+- **Rejected for rule creation:** Reddit (LeadOnly). Personal-site and
+  vendor-article hosting (CS-39/CS-41) noted as modest provenance —
+  fine for principles, not for values.
+- **Supplier data still required (unchanged, 13 items — §27):** every
+  RC-66..73 row names its own NeedsSupplierData/PhysicalVerification.
+- **OpenGap list:** thermal-runaway containment design; a proper
+  mountain-grade tractive model source; serial-vs-parallel textbook/SAE
+  source; verbatim quotes for the equation rows (NeedsExactQuote).
+
+### What this unlocks (owner)
+
+Permission to build MODELING MODULES (design-time, not M10 production):
+battery heat-generation estimator, cooling-loop flow calculator,
+pressure-drop calculator, radiator sizing estimator, mountain-grade
+thermal stress simulator, thermal derating risk model, cooling
+validation test-plan generator. **These are framework specs, not code
+— no production code during the ingestion phase; they wait for M10 and
+supplier data to run on real numbers.**
+
+### Conduct notes
+
+- The batch correctly stayed in the modeling lane and did not select
+  components — the review_16 doctrine took hold on the first batch.
+- Defects: "validated" prose inflation; blank exact-quote fields
+  (structural — NeedsExactQuote); two low-provenance hosts; and two
+  roadmap errors (vacuum pump; "PATS bypass") that were downstream
+  roadmap text, not cooling claims, but corrected now so they can't
+  propagate into Gates 04/05.
+
+---
+
+## 28. Batch 20 + owner review_17 — Cooling Modeling Framework v0.1 (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_20_cooling_modeling_frameworks.md`
+and `docs/research/raw/owner_reviews/review_17_batch_20_verdict.md`.
+Row additions: CS-39..CS-45, RC-66..RC-73. **Owner label adopted:
+Cooling Modeling Framework v0.1 — ModelingFrameworkCandidate; not
+validated, not locked, not component-selection-ready.** First batch
+processed fully under the review_16 lane doctrine.
+
+### Owner's 7 filter tasks — applied
+
+1. **NeedsExactQuote rule adopted as standing:** any row whose Exact
+   Quote field is empty or equation-only-without-verifiable-text is
+   held at `NeedsExactQuote` and cannot convert to a SourceClaim. All
+   RC-66..73 quote fields remain **unverified against their PDFs**
+   (candidate quotes; the equations are recorded as claimed content).
+2. Reddit → **LeadOnly / InformalDiscussion / NotForRuleCreation**
+   (CS-44/RC-72); serial-vs-parallel doctrine requires a
+   textbook/SAE/supplier source.
+3. Towing article → **FieldContext / NeedsEngineeringSource**
+   (CS-43/RC-71); the mountain-grade model must come from
+   tractive-power equations in an engineering source.
+4. "Thermal Runaway Containment" → **reclassified Thermal Anomaly
+   Detection** (CS-42/RC-70). **Containment itself = OpenGap /
+   NeedsStandardsAndSupplierSafetyData** (UL/SAE/NFPA + Webasto
+   propagation-barrier and venting data).
+5. **Gate 04 corrected:** batch_20's "auxiliary vacuum pump loads" is
+   the WRONG architecture for F-450/F-550 — the platform's critical
+   path is **hydroboost / hydraulic brake + steering assist** (as
+   established since batch_01 CP#1). Owner's corrected gate scope
+   recorded verbatim in the Research Map roadmap.
+6. **Gate 05 language corrected:** "PATS software override bypass
+   design" REJECTED — the program never frames work as defeating an
+   anti-theft system. Replacement (owner wording): *authorized
+   Ford-compatible controls integration, gateway compatibility,
+   immobilizer-safe architecture, cluster/CAN diagnostics,
+   serviceability review.* This matches the standing register rule
+   (batch_08 UIM split): PATS work proceeds only via Ford service
+   data or legitimate captures, never "bypass" framing.
+7. **Modeling modules only:** the 7 unlocked build-engine modules are
+   recorded as FUTURE M10 modules (battery heat estimator, loop flow
+   calculator, ΔP calculator, radiator sizing estimator,
+   mountain-grade thermal simulator, derating risk model, cooling
+   test-plan generator) — nothing is built during ingestion.
+
+### Language corrections
+
+- "validated academic, mathematical, and laboratory baselines" →
+  **candidate** modeling references (status-inflation family; header
+  variant).
+- "Theo

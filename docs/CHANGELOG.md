@@ -5,6 +5,28 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 20 + review_17: Cooling Modeling Framework v0.1
+
+- Archived batch_20 (10-row modeling payload) and review_17 1:1. Owner
+  label adopted: **Cooling Modeling Framework v0.1**
+  (ModelingFrameworkCandidate; not validated/locked/selection-ready).
+  First batch under the review_16 lane doctrine — held cleanly.
+- New rows CS-39..45, RC-66..73: Bernardi (RC-66), I²R loss (RC-67),
+  ε-NTU radiator (RC-68), Darcy-Weisbach (RC-69), two-state thermal
+  (RC-70), tractive balance (RC-71), serial-loop principle (RC-72),
+  TOP 2-2-607 test (RC-73) — all modeling/principle candidates, none
+  component-selection-ready.
+- Owner's 7 filter tasks applied: "validated baselines" prose rejected
+  (RESERVED-vocab); **NeedsExactQuote** set on equation rows lacking
+  verbatim quotes; Reddit → LeadOnly; towing article → FieldContext /
+  NeedsBetterSource; thermal-runaway → anomaly detection (containment
+  = OpenGap); **Gate 04 vacuum-pump → hydroboost/EHPS**; **Gate 05
+  "PATS bypass" → authorized Ford-compatible integration** (standing
+  terminology rule: never frame anti-theft work as "bypass").
+- Permitted design-time modeling modules listed (framework specs only,
+  no production code; wait for M10 + supplier data).
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — Owner follow-up (review_16): research-vs-supplier lane doctrine
 
 - Archived review_16 1:1. Standing doctrine applied repo-wide:

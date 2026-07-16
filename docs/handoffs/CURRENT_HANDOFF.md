@@ -4,14 +4,14 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-15
-- Reason for handoff: task complete (review_16 lane doctrine applied);
+- Reason for handoff: task complete (batch 20 + review_17 — Cooling Modeling Framework v0.1);
   awaiting owner decisions and/or next batch
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `2a63551` — Reconcile RH batch 19 + owner review_15
+- Start commit: `41029ff` — Apply review_16 (lane doctrine)
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
@@ -19,41 +19,39 @@
 ## Work performed
 
 - Files changed:
-  `docs/research/raw/owner_reviews/review_16_batch_19_followup.md`
-  (new, verbatim — committed separately as `80a2e93`),
-  `docs/status/BLOCKERS.md` (unified BLOCKED_PENDING_SUPPLIER_DATA
-  label + allowed/not-allowed lists),
-  `docs/research/RESEARCH_MAP.md` (lane doctrine in standing rules;
-  gate roadmap 4–11; next-batch spec; follow-up cadence),
-  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (section 27 —
-  lane doctrine, 13 supplier-only closure items), both outreach
-  letters (follow-up cadence sections), `docs/CHANGELOG.md`, handoff
-  files
-- Summary: review_16 applied — the standing **research-vs-supplier
-  lane doctrine**: academic sources build modeling frameworks
-  (EngineeringBackground / AcademicPrincipleCandidate /
-  ModelingFramework / NeedsSupplierData / NeedsPhysicalVerification —
-  never Confirmed/FinalRule/BuildReady) and **can never close a
-  gate**; 13 supplier-only closure items recorded. HV wiring +
-  powertrain + cooling gates unified under
-  **BLOCKED_PENDING_SUPPLIER_DATA** with owner allowed/not-allowed
-  work lists. Gate roadmap 4–11 recorded. Next expected batch: the
-  10-topic modeling-frameworks payload (impact vocabulary
-  Model/Test/OpenGap/NominalAssumption; every row names the supplier
-  data still needed). 7-day/weekly supplier follow-up cadence recorded
-  in both outreach letters. **Note: an in-session scheduled reminder
-  could not be set autonomously (scheduling tool requires owner
-  approval) — the cadence lives in the outreach files and this
-  handoff; owner may ask to schedule it.** **Nothing ingested; nothing
-  Confirmed; ODRs untouched.**
+  `docs/research/raw/research_hunter/batch_20_cooling_modeling_frameworks.md`
+  and `docs/research/raw/owner_reviews/review_17_batch_20_verdict.md`
+  (new, verbatim — committed separately as `34d29b5`),
+  `docs/research/raw/research_hunter/PROVENANCE.md`,
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-39..45;
+  RC-66..73; section 28), `docs/research/RESEARCH_MAP.md` (Gate 04/05
+  corrections), `docs/CHANGELOG.md`, handoff files
+- Summary: batch 20 (10-row modeling-frameworks payload) + review_17
+  reconciled. Owner label adopted: **Cooling Modeling Framework v0.1**
+  (ModelingFrameworkCandidate; not validated/locked/selection-ready).
+  First batch under the review_16 lane doctrine — held cleanly (a
+  modeling brain was added while every gate stayed
+  BLOCKED_PENDING_SUPPLIER_DATA). Accepted modeling refs: Bernardi
+  (RC-66), MathWorks loss + ε-NTU (RC-67/68), Darcy-Weisbach (RC-69),
+  two-state thermal (RC-70), TOP 2-2-607 test (RC-73). Owner's 7 tasks
+  applied — most importantly: **Gate 05 "PATS bypass" language →
+  authorized Ford-compatible integration (standing terminology rule:
+  never frame anti-theft work as bypass)**; Gate 04 vacuum-pump →
+  hydroboost/EHPS; "validated baselines" prose rejected;
+  **NeedsExactQuote** set on equation rows lacking verbatim quotes;
+  Reddit → LeadOnly; towing article → FieldContext; thermal-runaway →
+  anomaly detection (containment = OpenGap). Permitted design-time
+  modeling modules listed (framework specs only — no production code).
+  **Nothing ingested; nothing Confirmed; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: review_16 archive is 1:1 against the owner's
-  chat message; all doctrine text traces to the archived review; no
-  statuses were upgraded anywhere
+- Verified vs claimed: batch_20/review_17 archives are 1:1 against the
+  owner's chat message ("20:75"); all modeling rows carry
+  academic/modeling statuses and NeedsSupplierData; no equation sized
+  a real component; nothing marked Confirmed
 
 ## State
 
@@ -78,12 +76,14 @@ follow-up clock** — cadence sections are in both outreach files);
 (c) a supplier reply arrives (archive 1:1 under
 `docs/research/raw/supplier_replies/`, then reconcile — first evidence
 that can resolve the BLOCKED_PENDING_SUPPLIER_DATA gate); (d) the next
-research batch — expected to be the **10-topic modeling-frameworks
-payload** (review_16 prompt) — processed per the standing per-batch
-procedure, with the lane doctrine enforced: academic rows get
-EngineeringBackground/AcademicPrincipleCandidate/ModelingFramework
-statuses, impact limited to Model/Test/OpenGap/NominalAssumption, and
-every row must name the supplier data still needed.
+research batch — by the roadmap, likely **Gate 04: Brake / Steering
+Assist (CP#1)** — processed per the standing per-batch procedure.
+Enforce the two standing terminology/scope rules from review_17: Gate
+04 is hydroboost/EHPS (NOT vacuum pump); Gate 05 is authorized
+Ford-compatible controls integration (NEVER "PATS bypass/override").
+Lane doctrine still applies: academic rows get modeling statuses,
+NeedsExactQuote on any row missing a verbatim quote, every row names
+the supplier data still needed.
 
 ## Forbidden actions
 
