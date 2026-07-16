@@ -1,8 +1,8 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.14.2",
-  "updated_at": "2026-07-16T19:20:00Z",
+  "version": "0.15.0",
+  "updated_at": "2026-07-16T19:40:00Z",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
   "phase": "EVIDENCE_ACQUISITION_IN_PROGRESS",

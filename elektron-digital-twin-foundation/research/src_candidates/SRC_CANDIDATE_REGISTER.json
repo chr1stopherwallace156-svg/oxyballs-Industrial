@@ -1,0 +1,106 @@
+{
+  "document_id": "SRC_CANDIDATE_REGISTER",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "schema": "schemas/src-candidate.schema.json",
+  "id_policy": {
+    "pattern": "SRC-CAND-######",
+    "immutable_handle": true,
+    "metadata_mutable": true,
+    "next_id": "SRC-CAND-000004"
+  },
+  "hard_rules": ["HR-EVI", "Hard Rule 13", "Hard Rule 5 (RC ≠ engineering verification %)"],
+  "locked_configuration": {
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_id": "CFG-000001",
+    "summary": "2019 Ford F-450 Chassis Cab Regular Cab 4x2 DRW 145.3 WB / 60 CA",
+    "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943"
+  },
+  "topic": "FRONT_SUSPENSION_GEOMETRY",
+  "architecture_status": "RESEARCH_REQUIRED",
+  "recommended_decision": "PRIMARY_SOURCE_REQUIRED",
+  "research_engine_status": "OPERATIONAL",
+  "geometry_extraction_authorized": false,
+  "candidates": [
+    {
+      "candidate_id": "SRC-CAND-000001",
+      "path": "research/src_candidates/SRC-CAND-000001.json",
+      "research_confidence_rc": 85,
+      "acquisition_status": "NOT_ACQUIRED",
+      "metadata_title": "2019 Super Duty Chassis Cab BBAS Guide"
+    },
+    {
+      "candidate_id": "SRC-CAND-000002",
+      "path": "research/src_candidates/SRC-CAND-000002.json",
+      "research_confidence_rc": 90,
+      "acquisition_status": "NOT_ACQUIRED",
+      "metadata_title": "2019 F-Super Duty Workshop Manual"
+    },
+    {
+      "candidate_id": "SRC-CAND-000003",
+      "path": "research/src_candidates/SRC-CAND-000003.json",
+      "research_confidence_rc": 75,
+      "acquisition_status": "NOT_ACQUIRED",
+      "metadata_title": "2019 F-450 Parts Catalog (Front Axle)"
+    }
+  ],
+  "next_search_queue": [
+    {
+      "priority": 1,
+      "task": "Locate/Acquire SRC-CAND-000001 (BBAS)",
+      "lane": "LANE_A_DOC",
+      "expected_evidence": "Axle/frame mounting diagrams for locked 4x2 Chassis Cab",
+      "candidate_id": "SRC-CAND-000001",
+      "status": "ACTIVE"
+    },
+    {
+      "priority": 2,
+      "task": "Locate SRC-CAND-000002 (Workshop Manual)",
+      "lane": "LANE_A_DOC",
+      "secondary_lane": "LANE_SVC",
+      "expected_evidence": "Steering topology / alignment specs (4x2-isolated)",
+      "candidate_id": "SRC-CAND-000002",
+      "status": "QUEUED"
+    },
+    {
+      "priority": 3,
+      "task": "Cross-reference SRC-CAND-000003 (Parts)",
+      "lane": "LANE_PRT",
+      "expected_evidence": "Part numbers (knuckle / radius arm) via VIN-filtered inquiry when possible",
+      "candidate_id": "SRC-CAND-000003",
+      "status": "QUEUED"
+    },
+    {
+      "priority": 4,
+      "task": "Initiate LANE_VIS (visual teardown / 4x2 front-end photo-video)",
+      "lane": "LANE_VIS",
+      "expected_evidence": "Visual reference of exact-config 4x2 front end (not Team D software)",
+      "candidate_id": null,
+      "status": "QUEUED",
+      "triggered_by": "Hard Rule 13 — SRC-CAND-000001 discovery"
+    }
+  ],
+  "contradictions_and_risks": [
+    {
+      "id": "RISK-4X2-AS-4X4",
+      "summary": "Secondary/marketplace sources frequently misidentify F-450 4x2 as 4x4.",
+      "mitigation": "VIN-filtered parts inquiry (LANE_PRT) before CONFIGURATION_MATCH; isolate service pages."
+    },
+    {
+      "id": "RISK-WRONG-WB",
+      "summary": "169.3 in WB frame geometry contaminates 145.3 in mounts/CG.",
+      "mitigation": "HR-EVI — bind every extract to CFG-000001 fingerprint."
+    }
+  ],
+  "missing_evidence": [
+    "Definitive OEM statement of front suspension architecture for F-450 Chassis Cab 4x2 (may differ from F-350 4x2)",
+    "Acquired/hashed BBAS and/or workshop pages",
+    "Component topology for steering linkage / axle mounts"
+  ],
+  "alias_map": {
+    "CAND-FORD-BBAS-2019": "SRC-CAND-000001",
+    "CAND-FORD-SM-2019": "SRC-CAND-000002"
+  },
+  "decisions": ["DT-D037", "DT-D038"],
+  "sprints": ["RL-006", "RL-007"]
+}

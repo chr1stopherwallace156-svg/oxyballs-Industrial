@@ -618,7 +618,7 @@ Append-only record of digital twin foundation decisions.
 - **approved_status:** `ACCEPTED`
 - **recommended_decision:** `PRIMARY_SOURCE_REQUIRED`
 - **locked_configuration:** 2019 F-450 Chassis Cab Regular Cab 4x2 DRW 145.3/60 (`VEH-000001` / `CFG-000001`)
-- **scope:** CNF-001, Q3, document candidates `CAND-FORD-BBAS-2019` / `CAND-FORD-SM-2019`, sprint RL-006
+- **scope:** CNF-001, Q3, document candidates (now `SRC-CAND-*`), sprint RL-006
 - **reason:** No `VERIFIED_EVIDENCE` for 4x2 front suspension architecture; BBAS/service manuals not acquired; suspension geometry upload review `NOT_EXECUTED`; deciding Beam vs Twin-I-Beam now would risk 4x4 / wrong-WB contamination.
 - **decision:**
   1. No architecture decision (Beam/Monobeam vs Twin-I-Beam)
@@ -626,4 +626,20 @@ Append-only record of digital twin foundation decisions.
   3. Retract authoritative review claim for “F-450 Suspension Geometry Research” upload
   4. Acquire/hash primary OEM sources bound to this silo before resolution
   5. Kernel + passport rc1 unchanged; no geometry freeze
+
+
+## DT-D038 — Hard Rule 13 + SRC-CAND + Research Confidence
+
+- **Change-control record:** [`decisions/DT-D038_HARD_RULE_13_SRC_CAND_RC.json`](decisions/DT-D038_HARD_RULE_13_SRC_CAND_RC.json)
+- **decision_id:** `DT-D038`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **protocol_version:** `2.2.0`
+- **scope:** Hard Rule 13; immutable `SRC-CAND-######`; RC hunt scores + Reasoning Log; front-suspension Next Search Queue
+- **decision:**
+  1. Discovering one source opens parallel lanes — research does not stop
+  2. IDs are immutable handles; metadata (including year/title/RC) is the object
+  3. RC 0–100 prioritizes search only; does not revive deprecated engineering confidence %
+  4. Register `SRC-CAND-000001/2/3` as `NOT_ACQUIRED`; Priority 1 = acquire BBAS
+  5. DT-D037 `PRIMARY_SOURCE_REQUIRED` remains; geometry extraction forbidden until Tier A applicability verified
 

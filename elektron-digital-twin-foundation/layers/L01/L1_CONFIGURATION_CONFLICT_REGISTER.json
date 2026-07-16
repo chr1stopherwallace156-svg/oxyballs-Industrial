@@ -31,15 +31,15 @@
           "notes": "High cross-contamination risk if 4x4 driven-beam pages are applied to 4x2."
         }
       ],
-      "mitigation_reconciliation": "DT-D037 / RL-006: PRIMARY_SOURCE_REQUIRED. No preferred architecture selected. Uploaded F-450 Suspension Geometry Research file review = NOT_EXECUTED. Do not freeze geometry. Do not inherit 4x4 or 169.3 in WB mounts.",
+      "mitigation_reconciliation": "DT-D037/D038 · RL-006/007: PRIMARY_SOURCE_REQUIRED + Hard Rule 13. Architecture = RESEARCH_REQUIRED. SRC-CAND-000001/2/3 NOT_ACQUIRED. RC scores are hunt priority only. No geometry extraction. VIN-filtered parts match required before CONFIGURATION_MATCH. Do not inherit 4x4 or 169.3 in WB mounts.",
       "status": "OPEN_PRIMARY_SOURCE_REQUIRED",
       "preferred_resolution_candidate": null,
-      "architecture_decision_status": "NOT_DECIDED",
+      "architecture_decision_status": "RESEARCH_REQUIRED",
       "document_extraction_id": null,
       "page_evidence_status": "NOT_VERIFIED_FILE_ABSENT",
-      "research_sprint": "RL-006",
-      "decision_id": "DT-D037",
-      "candidate_ids": ["CAND-FORD-BBAS-2019", "CAND-FORD-SM-2019"]
+      "research_sprint": "RL-007",
+      "decision_ids": ["DT-D037", "DT-D038"],
+      "candidate_ids": ["SRC-CAND-000001", "SRC-CAND-000002", "SRC-CAND-000003"]
     },
     {
       "conflict_id": "CNF-002-TIRE-BRAND-AND-MODEL",

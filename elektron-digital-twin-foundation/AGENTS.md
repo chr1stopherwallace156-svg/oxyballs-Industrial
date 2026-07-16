@@ -10,7 +10,7 @@ Before modifying any file, read:
 2. [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md) — **HR-EVI constitutional isolation law**
 3. [KERNEL_MANIFEST.json](KERNEL_MANIFEST.json) — Kernel **v1.0.0-rc1**
 4. [documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md](documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md) — operational isolation standard
-5. [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) — research / evidence runtime core (v2.1+)
+5. [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) — research / evidence runtime core (v2.2+; Hard Rule 13 / SRC-CAND)
 6. [README.md](README.md) — required reading order for core specifications
 7. [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md)
 8. [AGENTS.md](AGENTS.md) (this file)

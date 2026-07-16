@@ -32,18 +32,20 @@
 
 **Exact config only:** 2019 F-450 Chassis Cab · Regular Cab · 4x2 · DRW · 145.3 in WB / 60 in CA (`VEH-000001` / `CFG-000001`).
 
-**Sprint RL-006 / DT-D037:**
-- Architecture claims = **`CANDIDATE_ASSERTION` only** — **no decision**
-- Uploaded “F-450 Suspension Geometry Research” file review = **`NOT_EXECUTED` / `NOT_CONFIRMED`** (retracted as authoritative)
-- Document candidates `CAND-FORD-BBAS-2019`, `CAND-FORD-SM-2019` = **`NOT_ACQUIRED`**
+**Sprint RL-006 / RL-007 · DT-D037 / DT-D038:**
+- Architecture status = **`RESEARCH_REQUIRED`** — **no decision**
+- Hard Rule 13 active: discovering one source opens parallel lanes (does not close research)
+- Immutable candidates: `SRC-CAND-000001` (BBAS, RC 85), `SRC-CAND-000002` (WSM, RC 90), `SRC-CAND-000003` (Parts, RC 75) — all **`NOT_ACQUIRED`**
+- Uploaded “F-450 Suspension Geometry Research” file review = **`NOT_EXECUTED`**
 - No claims at `VERIFIED_EVIDENCE`
 - Decision posture: **`PRIMARY_SOURCE_REQUIRED`**
+- Geometry extraction: **forbidden** until `SRC-CAND-000001` (or equivalent Tier A) acquired + applicability verified
 
-**Risks:** 4x4 driven-beam contamination; 169.3 in WB frame mount contamination.
+**Risks:** marketplace 4x2↔4x4 mislabel; 169.3 in WB contamination; F-350 4x2 ≠ F-450 4x2 inheritance
 
 **Impact:** `FRONT_AXLE_*` object identity, landmark `LMK-AXLE-FRONT-CTR`, front suspension hierarchy
 
-**Status:** OPEN — acquire/hash primary OEM sources bound to this silo; physical confirmation still required before geometry freeze
+**Status:** OPEN — prioritize locate/acquire `SRC-CAND-000001`; keep parallel lanes tasked
 
 ---
 

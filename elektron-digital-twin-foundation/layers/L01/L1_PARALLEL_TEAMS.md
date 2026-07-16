@@ -1,10 +1,12 @@
 # L1 Parallel Teams A–D (Protocol Hard Rule 8) — EDTS-OS v3
 
-**Protocol:** `EDTS_RESEARCH_PROTOCOL.md` v2.0.0  
-**OS:** `EDTS_OS.md` v3.0.0  
+**Protocol:** `EDTS_RESEARCH_PROTOCOL.md` v2.2.0  
+**OS:** `EDTS_OS.md` v3.0.0+  
 **Source pack posture:** `L1_SOURCE_PACK_01_NOT_VERIFIED`  
 **Geometry freeze:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`  
-**Confidence %:** `DEPRECATED` — use Evidence Graph tiers + verification status
+**Engineering confidence %:** `DEPRECATED` — use Evidence Graph tiers + verification status  
+**Research Confidence (RC):** allowed on `SRC-CAND-*` hunt records only (Hard Rule 13 / §V-bis)  
+**Research lanes vs teams:** `LANE_VIS` ≠ Team D (Software); see `SRC_CANDIDATE_REGISTER.json`
 
 Research blockage must not paralyze asset acquisition, provisional geometry prep, or software architecture.
 
@@ -21,7 +23,7 @@ Research blockage must not paralyze asset acquisition, provisional geometry prep
 
 | Team | Current Active Target | Dependent Components | Target Status |
 | :--- | :--- | :--- | :--- |
-| **Team A** (Research) | Audit SRC-OEM-001 (BBAS) & SRC-OEM-002 (WSM) | `CMP-FORD-SD-DOOR-FL-001`, `CMP-SD-FRAME-001` | `AWAITING_FILE` → `INGESTED` → `NORMALIZED` |
+| **Team A** (Research) | Prioritize `SRC-CAND-000001` BBAS; parallel `SRC-CAND-000002/3` + `LANE_VIS` (HR-13) | Front suspension / frame / door evidence | `NOT_ACQUIRED` → acquire → hash → extract (no geometry yet) |
 | **Team B** (Assets) | Source Dana M300-class housing models | `CMP-AXL-M300` | `DISCOVERED` → `INGESTED` |
 | **Team C** (Geometry) | Separate FL door from ASSET-00031 → `GEO-00001` | `CMP-FORD-SD-DOOR-FL-001` | Discovery → provisional metrics |
 | **Team D** (Software) | Kernel acceptance T03–T05 harness | `INT-00001` | `NOT_EXECUTED` until mesh bound |

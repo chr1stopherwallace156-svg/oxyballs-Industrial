@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:schema:src-candidate:1.0.0",
+  "title": "EDTS Immutable Source Candidate (SRC-CAND)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "candidate_id",
+    "id_immutable",
+    "metadata",
+    "acquisition_status",
+    "research_confidence_rc",
+    "reasoning_log",
+    "bound_vehicle_instance_id",
+    "bound_configuration_id"
+  ],
+  "properties": {
+    "candidate_id": {
+      "type": "string",
+      "pattern": "^SRC-CAND-[0-9]{6}$",
+      "description": "Immutable handle. Never encode year/type into the ID."
+    },
+    "id_immutable": { "type": "boolean", "const": true },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["title", "source_type"],
+      "properties": {
+        "title": { "type": "string" },
+        "source_type": { "type": "string" },
+        "document_class": { "type": "string" },
+        "publisher": { "type": ["string", "null"] },
+        "reported_year": { "type": ["integer", "null"] },
+        "legacy_aliases": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "acquisition_status": {
+      "type": "string",
+      "enum": ["NOT_ACQUIRED", "ACQUIRED", "QUARANTINED", "REJECTED"]
+    },
+    "access_status": {
+      "type": "string",
+      "enum": ["NOT_ACQUIRED", "LOCAL_BYTES_PRESENT", "BLOCKED", "UNKNOWN"]
+    },
+    "research_confidence_rc": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Hunt prioritization only — not VERIFIED_EVIDENCE"
+    },
+    "reasoning_log": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["at", "rc", "note"],
+        "properties": {
+          "at": { "type": "string" },
+          "rc": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "bound_vehicle_instance_id": { "type": "string" },
+    "bound_configuration_id": { "type": "string" },
+    "configuration_fingerprint": { "type": ["string", "null"] },
+    "local_file_path": { "type": ["string", "null"] },
+    "sha256": { "type": ["string", "null"] },
+    "hash_status": { "type": "string" },
+    "page_extraction_status": { "type": "string" },
+    "evidence_status": { "type": "string" },
+    "related_source_registry_id": { "type": ["string", "null"] },
+    "closes_conflicts": { "type": "array", "items": { "type": "string" } },
+    "closes_questions": { "type": "array", "items": { "type": "string" } },
+    "parallel_lanes_triggered": { "type": "array", "items": { "type": "string" } },
+    "forbidden_uses_until_acquired": { "type": "array", "items": { "type": "string" } },
+    "notes": { "type": "array", "items": { "type": "string" } },
+    "research_sprint": { "type": ["string", "null"] },
+    "decision": { "type": ["string", "null"] }
+  }
+}

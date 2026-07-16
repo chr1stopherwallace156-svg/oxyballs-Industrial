@@ -155,3 +155,25 @@ DT-D032.
 ### Status
 
 Recorded under `research/sprints/RL-006_FRONT_SUSPENSION_PRIMARY_SOURCE.md`.
+
+---
+
+## RL-007 — Hard Rule 13 + immutable SRC-CAND + RC hunt scores
+
+- **Date:** 2026-07-16
+- **Layer:** protocol / L01 research
+- **Agent:** Cursor Cloud Agent
+- **Question:** How should research continue after discovering BBAS/service/parts candidates for front suspension?
+
+### Findings
+
+1. **Hard Rule 13 adopted:** one source discovery propagates parallel lanes; research does not stop.
+2. **Immutable IDs:** `SRC-CAND-000001` (BBAS, RC 85), `000002` (WSM, RC 90), `000003` (Parts, RC 75) — all `NOT_ACQUIRED`.
+3. **RC protocol:** 0–100 hunt prioritization + Reasoning Log; **not** engineering verification % (Hard Rule 5 still forbids that).
+4. **Architecture:** remains `RESEARCH_REQUIRED`; decision remains **`PRIMARY_SOURCE_REQUIRED`**.
+5. **Geometry extraction:** forbidden until `SRC-CAND-000001` (or equivalent Tier A) acquired and applicability verified.
+6. Next Search Queue Priority 1 = locate/acquire `SRC-CAND-000001`.
+
+### Status
+
+DT-D038; protocol v2.2.0; register `research/src_candidates/SRC_CANDIDATE_REGISTER.json`.

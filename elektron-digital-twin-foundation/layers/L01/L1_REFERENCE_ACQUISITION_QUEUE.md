@@ -44,15 +44,17 @@ gantt
 ### Priority 1 — Exact OEM Documents and Page-Level Extraction (`DOCUMENT_ACQUISITION`)
 
 - **Gap addressed:** Absolute dimensional verification of front axle configuration (Monobeam/solid non-driving beam vs Twin-I-Beam — **undecided**), frame rails, and wheel mounting PCD.
-- **DT-D037 / RL-006 posture:** **`PRIMARY_SOURCE_REQUIRED`**. Architecture = `CANDIDATE_ASSERTION` only. Uploaded suspension geometry research file review = `NOT_EXECUTED`.
-- **Target artifacts:**
-  - 2019 Ford Super Duty Body Builder Layout Book / Chassis Cab Specs — `SRC-L1-001` / candidate **`CAND-FORD-BBAS-2019`** (`NOT_ACQUIRED`)
-  - 2019 Ford Super Duty Order Guide (Mechanical & Suspension Sections) — `SRC-L1-002`
-  - 2019 Ford OEM Workshop / Service Manual (Front Suspension) — `SRC-L1-003` / candidate **`CAND-FORD-SM-2019`** (`NOT_ACQUIRED`)
-- **Verification objective:** Establish the nominal baseline ground truth for mathematical verification of modeling scales — **only after hashed local bytes + page extracts bound to CFG-000001**.
-- **Contamination guards:** Do not import 4x4 driven-beam geometry or 169.3 in WB frame mounts into the 145.3/60 4x2 silo.
-- **Plan:** `L1_OEM_DOCUMENT_EXTRACTION_PLAN.md`
-- **Sprint record:** `research/sprints/RL-006_FRONT_SUSPENSION_PRIMARY_SOURCE.md`
+- **DT-D037/D038 · RL-006/007 posture:** **`PRIMARY_SOURCE_REQUIRED`** + **Hard Rule 13**. Architecture = `RESEARCH_REQUIRED`. Geometry extraction forbidden until Tier A applicability verified.
+- **Immutable source candidates** (`research/src_candidates/`):
+  - **`SRC-CAND-000001`** BBAS Guide — RC 85 — Priority 1 (`NOT_ACQUIRED`)
+  - **`SRC-CAND-000002`** Workshop Manual — RC 90 — Priority 2 (`NOT_ACQUIRED`)
+  - **`SRC-CAND-000003`** Parts Catalog (Front Axle) — RC 75 — Priority 3 / `LANE_PRT` (`NOT_ACQUIRED`)
+  - Priority 4: `LANE_VIS` visual teardown refs for exact 4x2 front end
+- **Also:** Order Guide `SRC-L1-002` remains a document hunt stub.
+- **Verification objective:** Establish nominal baseline **only after** hashed local bytes + page extracts bound to CFG-000001.
+- **Contamination guards:** No 4x4 driven-beam / no 169.3 in WB mounts; VIN-filtered parts before `CONFIGURATION_MATCH`.
+- **Authoritative queue:** `research/src_candidates/SRC_CANDIDATE_REGISTER.json`
+- **Sprint records:** `RL-006`, `RL-007`
 
 ### Priority 2 — High-Resolution Exterior Image Sets (`PUBLIC_PHOTO_ACQUISITION`)
 

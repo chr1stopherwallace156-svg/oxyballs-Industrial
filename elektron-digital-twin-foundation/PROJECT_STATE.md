@@ -6,26 +6,26 @@
 | Concern | Status |
 |---|---|
 | Kernel | `VALIDATED AND FROZEN` |
-| Component Passport rc1 | `ACTIVE` / `UNCHANGED` |
-| Locked config | 2019 F-450 CC Reg Cab 4x2 DRW 145.3/60 (`VEH-000001` / `CFG-000001`) |
-| Door candidates | `DISCOVERED / NOT ACQUIRED` |
-| Vertical slice | `BLOCKED_BY_MISSING_ASSET` |
+| Research protocol | **v2.2.0** — Hard Rule 13 **ACTIVE** |
+| Locked config | 2019 F-450 CC Reg Cab 4x2 DRW 145.3/60 |
+| Front suspension architecture | **`RESEARCH_REQUIRED`** |
+| Front suspension decision | **`PRIMARY_SOURCE_REQUIRED`** |
+| `SRC-CAND-000001` BBAS | `NOT_ACQUIRED` (RC 85) — **Priority 1** |
+| `SRC-CAND-000002` WSM | `NOT_ACQUIRED` (RC 90) |
+| `SRC-CAND-000003` Parts | `NOT_ACQUIRED` (RC 75) |
+| Geometry extraction | **FORBIDDEN** until Tier A applicability verified |
+| Research engine | `OPERATIONAL` |
 | EAE CORE INGESTION | `VALIDATED` |
-| Front suspension architecture | **`CANDIDATE_ASSERTION` — NOT DECIDED** |
-| Front suspension decision | **`PRIMARY_SOURCE_REQUIRED` (DT-D037)** |
-| BBAS / Service Manual candidates | `NOT_ACQUIRED` |
-| Suspension geometry upload review | `NOT_EXECUTED` |
-| Next build priority | **`PRIMARY_SOURCE_ACQUISITION_FRONT_SUSPENSION`** |
+| Next build priority | **`SRC_CAND_000001_BBAS_ACQUISITION`** |
 
-## Research sprint RL-006
+## Authoritative research surfaces
 
-- Report: `research/sprints/RL-006_FRONT_SUSPENSION_PRIMARY_SOURCE.md`
-- Candidates: `research/candidates/CAND-FORD-BBAS-2019.json`, `CAND-FORD-SM-2019.json`
-- Conflict: `CNF-001` → `OPEN_PRIMARY_SOURCE_REQUIRED`
-- Decision: `decisions/DT-D037_PRIMARY_SOURCE_REQUIRED_FRONT_SUSPENSION.json`
+- Register / queue: `research/src_candidates/SRC_CANDIDATE_REGISTER.json`
+- Sprint: `research/sprints/RL-007_HARD_RULE_13_SRC_CAND_FRONT_SUSPENSION.md`
+- Decisions: `DT-D037`, `DT-D038`
 
-No claims at `VERIFIED_EVIDENCE`. Do not import 4x4 or 169.3 in WB geometry into this silo.
+RC = hunt prioritization only (Reasoning Log required). Not engineering verification %.
 
 ## Change-control records
 
-- `decisions/DT-D030_*.json` … `DT-D037_*.json`
+- `decisions/DT-D030_*.json` … `DT-D038_*.json`
