@@ -4,12 +4,13 @@ This repository contains the authoritative schemas, standards, and registries es
 
 **Readiness:** `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`  
 **Milestone:** `L1_SOURCE_PACK_01`  
+**Source pack:** `L1_SOURCE_PACK_01_NOT_VERIFIED` (`RESET_TO_CANDIDATE_TEMPLATES`)  
 **Document gate:** `L1_DOCUMENT_ACQUISITION_READY`  
 **Public search:** `L1_PUBLIC_REFERENCE_SEARCH_READY`  
 **Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`  
-**L00 residual:** `L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY` (closure REJECTED; runtime transforms NOT_EXECUTED)  
-**L01 geometry:** BLOCKED — physical confirmation still required  
-See [STATUS.json](STATUS.json), [layers/L01/L1_SOURCE_PACK_01_REPORT.md](layers/L01/L1_SOURCE_PACK_01_REPORT.md).
+**Parallel:** Lane A (3D assets) + Lane B (spec audit) authorized  
+**L01 geometry:** BLOCKED  
+See [STATUS.json](STATUS.json), [layers/L01/L1_SOURCE_PACK_01_AUTHENTICITY_AUDIT.md](layers/L01/L1_SOURCE_PACK_01_AUTHENTICITY_AUDIT.md).
 
 ---
 
@@ -82,7 +83,7 @@ Every layer passes five gates before advancing:
 
 ## Current stage
 
-**L01 — Source Pack 01 engaged.** Document/public-search gates READY; modeling baseline not approved for geometry freeze. Next: GRADE-A/B physical confirmation of CLM-L1-001…005. See [L1_SOURCE_PACK_01_REPORT.md](layers/L01/L1_SOURCE_PACK_01_REPORT.md).
+**L01 — Source Pack 01 not verified (reset to candidates).** Templates ready for real PDFs; Lane A/B parallel work authorized. Geometry freeze blocked. See [authenticity audit](layers/L01/L1_SOURCE_PACK_01_AUTHENTICITY_AUDIT.md).
 
 ## Related work
 

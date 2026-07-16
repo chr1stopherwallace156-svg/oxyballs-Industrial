@@ -29,25 +29,26 @@
       "layer": "L1_VISIBLE_UNDERBODY",
       "parent_object": "ROOT_VEHICLE",
       "vehicle_side_location": "FRONT_CENTERLINE",
-      "configuration_status": "DOCUMENT_SUPPORTED_PHYSICAL_PENDING",
-      "preferred_subtype": "MONOBEAM_WIDE_TRACK_NON_DRIVING",
+      "configuration_status": "GENERAL_PLATFORM_ARCHITECTURE_SUPPORTED",
+      "preferred_subtype_candidate": "MONOBEAM_WIDE_TRACK_NON_DRIVING",
       "candidate_types": ["MONOBEAM_WIDE_TRACK_NON_DRIVING", "TWIN_I_BEAM"],
       "document_extraction_id": "EXT-L1-101",
       "claim_id": "CLM-L1-001",
+      "page_evidence_status": "NOT_VERIFIED_FILE_ABSENT",
       "material_class": "CAST_IRON_STEEL",
       "manufacturing_method": "CAST_AND_FORGED",
       "visual_importance": "MEDIUM",
       "dimensional_importance": "CRITICAL",
-      "required_references": ["Ford_BBAS_Layout_Book_2019_Page_10"],
+      "required_references": ["Ford_BBAS_Layout_Book_2019_Page_TBD"],
       "separate_mesh_requirement": true,
       "pivot_requirement": false,
       "future_removability": false,
       "future_interaction_role": "STEER_INTERACTION",
       "geometry_detail_level": "HIGH",
       "detail_distribution": "GEOMETRY",
-      "evidence_status": "DOCUMENT_SUPPORTED_PHYSICAL_PENDING",
+      "evidence_status": "NOT_VERIFIED_FILE_ABSENT",
       "unresolved_questions": [
-        "Physically confirm MONOBEAM_WIDE_TRACK_NON_DRIVING on the selected GRADE-A/B VIN (CLM-L1-001 mitigation)."
+        "Acquire and hash SRC-L1-001; inspect front-axle table; physically confirm subtype on GRADE-A/B VIN."
       ]
     },
     {

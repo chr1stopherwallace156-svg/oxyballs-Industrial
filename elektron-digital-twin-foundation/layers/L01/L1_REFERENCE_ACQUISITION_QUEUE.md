@@ -1,9 +1,11 @@
 # EDTS Layer 1 Reference Acquisition Queue
 
-**Status:** `ACTIVE — Priority 1 documents engaged via Source Pack 01`  
+**Status:** `ACTIVE — templates ready; Source Pack 01 NOT_VERIFIED`  
+**Source pack:** `L1_SOURCE_PACK_01_NOT_VERIFIED`  
 **Document gate:** `L1_DOCUMENT_ACQUISITION_READY`  
 **Public search:** `L1_PUBLIC_REFERENCE_SEARCH_READY`  
 **Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`  
+**Parallel:** Lane A + Lane B authorized  
 **Milestone:** `L1_SOURCE_PACK_01`  
 **Vehicle:** 2019 Ford F-450 Chassis Cab — Regular Cab / 4x2 / DRW / 145.3 in WB / 60 in CA
 

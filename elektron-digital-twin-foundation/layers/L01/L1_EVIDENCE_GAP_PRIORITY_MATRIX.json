@@ -25,8 +25,8 @@
         "cost_note": "Cost assumes BBAS access already available to the team; otherwise access fees TBD"
       },
       "priority_score": 1,
-      "status": "DOCUMENT_SUPPORTED_PHYSICAL_PENDING",
-      "status_note": "EXT-L1-101 / CLM-L1-001 engaged; physical confirmation still required for geometry freeze"
+      "status": "OPEN",
+      "status_note": "Source Pack 01 reset: page evidence absent; monobeam remains GENERAL_PLATFORM_ARCHITECTURE_SUPPORTED candidate only"
     },
     {
       "gap_id": "GAP-L1-002",
@@ -46,8 +46,8 @@
         "acquisition_difficulty": "LOW"
       },
       "priority_score": 2,
-      "status": "DOCUMENT_SUPPORTED_PHYSICAL_PENDING",
-      "status_note": "EXT-L1-104 / CLM-L1-004 DOCUMENT_SUPPORTED; physical PCD chord check PENDING"
+      "status": "OPEN",
+      "status_note": "225 mm PCD is GENERAL_PLATFORM_ARCHITECTURE_SUPPORTED; Order Guide page evidence NOT_VERIFIED_FILE_ABSENT"
     },
     {
       "gap_id": "GAP-L1-003",

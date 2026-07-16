@@ -1,0 +1,40 @@
+{
+  "$id": "urn:edts:schema:extraction-verification:v1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_EXTRACTION_RESULTS_VERIFICATION",
+  "project": "2019_FORD_F450_CHASSIS_CAB_145_3",
+  "verification_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
+  "action_taken": "RESET_TO_CANDIDATE_TEMPLATES",
+  "parameters": [
+    {
+      "parameter_name": "front_axle_subtype",
+      "current_status": "GENERAL_PLATFORM_ARCHITECTURE_SUPPORTED",
+      "candidate_value": "MONOBEAM_WIDE_TRACK_NON_DRIVING",
+      "analytical_note": "Ford fleet brochures and dealer marketing confirm F-450 models use a wide-track monobeam front axle. However, the exact design variant (e.g. Dana Super 60 non-driving vs driving variant housing modifications) remains unverified at the engineering document level."
+    },
+    {
+      "parameter_name": "front_track_width_mm",
+      "current_status": "UNVERIFIED",
+      "candidate_value": 1899.92,
+      "analytical_note": "A value of 1899.92 mm (74.8 inches) is a highly probable candidate based on previous documentation passes, but the precise page reference, measuring plane parameters, and tolerances are unverified without the primary PDF file."
+    },
+    {
+      "parameter_name": "rear_frame_width_mm",
+      "current_status": "UNVERIFIED",
+      "candidate_value": 868.7,
+      "analytical_note": "Chassis cab standards historically target 34 inches nominal outside rail spacing, but the exact measurement boundaries (including web vs flange endpoints) must be visually confirmed on the engineering schematic."
+    },
+    {
+      "parameter_name": "wheel_pcd_mm",
+      "current_status": "GENERAL_PLATFORM_ARCHITECTURE_SUPPORTED",
+      "candidate_value": 225.0,
+      "analytical_note": "F-450 10-lug wheel pattern historically uses a 225 mm PCD. Verifying this against the 2019 Order Guide or assembly drawings is pending primary document availability."
+    },
+    {
+      "parameter_name": "frame_web_thickness_mm",
+      "current_status": "UNVERIFIED",
+      "candidate_value": 7.1,
+      "analytical_note": "Chassis cab rail thicknesses are highly variable by GVWR rating. The claimed 7.1 mm value is flagged as a candidate needing layout sheet verification."
+    }
+  ]
+}

@@ -340,3 +340,30 @@ All notable changes to the digital twin foundation. Append-only.
 - Milestone: **L1_SOURCE_PACK_01**
 - Modeling baseline: **NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE**
 - L01 geometry: **BLOCKED**
+
+## 2026-07-16 (L1 Source Pack 01 Authenticity Reset)
+
+### Added
+
+- `L1_SOURCE_ARTIFACT_FILE_MANIFEST.json` — file_exists false; hash NOT_EXECUTED
+- `L1_PAGE_EVIDENCE_MANIFEST.json` — excerpts/pages null
+- `L1_EXTRACTION_RESULTS_VERIFICATION.json` — candidate analytical statuses
+- `L1_SOURCE_PACK_01_CORRECTION_LOG.md`
+- `L1_SOURCE_PACK_01_AUTHENTICITY_AUDIT.md`
+- `L1_PARALLEL_LANES.md` — Lane A/B authorized
+- `resources/sources/README.md`
+- **DT-D017** — reset to candidate templates
+
+### Changed
+
+- Source pack verdict → **L1_SOURCE_PACK_01_NOT_VERIFIED**
+- Voided prior SHA-256 / page quote / DOCUMENT_SUPPORTED promotions
+- Claims demoted; gaps reopened; measurement OEM targets blanked to candidates
+- Unverified material params deferred to L2
+
+### Status
+
+- Source pack: **L1_SOURCE_PACK_01_NOT_VERIFIED**
+- Parallel lanes: **AUTHORIZED**
+- Modeling baseline: **NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE**
+- L01 geometry: **BLOCKED**

@@ -5,10 +5,11 @@
   "project": "2019_FORD_F450_CHASSIS_CAB_145_3",
   "manifest_status": "DRAFT_PROPOSAL",
   "milestone": "L1_SOURCE_PACK_01",
-  "supersedes": "L1_PUBLIC_REFERENCE_IMAGE_MANIFEST_PROPOSAL.json",
+  "source_pack_verification": "L1_SOURCE_PACK_01_NOT_VERIFIED",
   "notes": [
     "Images staged externally; not redistributed from this repo.",
-    "usage_status NOT_EVALUATED until counsel/license review and visual QA."
+    "usage_status NOT_EVALUATED until counsel/license review and visual QA.",
+    "Does not substitute for OEM PDF verification."
   ],
   "categories": {
     "dealer_inventory_harvests": [

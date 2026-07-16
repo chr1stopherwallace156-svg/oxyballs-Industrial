@@ -2,11 +2,12 @@
 
 **Status:** Research draft complete — `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`  
 **Milestone:** `L1_SOURCE_PACK_01`  
+**Source pack:** `L1_SOURCE_PACK_01_NOT_VERIFIED`  
 **Document gate:** `L1_DOCUMENT_ACQUISITION_READY`  
 **Public search:** `L1_PUBLIC_REFERENCE_SEARCH_READY`  
 **Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`  
 **Geometry / mesh production:** Blocked  
-**Prerequisites for geometry:** physical confirmation of DOCUMENT_SUPPORTED claims + grade vehicle + owner approval
+**Prerequisites for geometry:** verified PDF hashes + page evidence + physical confirmation + owner approval
 
 ## Scope
 
@@ -38,10 +39,11 @@ Planning sequence: [`L01_RESEARCH_DOSSIER_PLAN.md`](L01_RESEARCH_DOSSIER_PLAN.md
 - [x] V2 hierarchy, object/landmark registries, landmark classification
 - [x] Capture coverage grid + PBR metalness correction
 - [x] Visual acceptance V2 + final gap report
-- [x] Source Pack 01 engaged (metadata, extractions, claims, public manifest, unverified quarantine)
-- [x] Front axle DOCUMENT_SUPPORTED as monobeam wide-track (physical PENDING)
-- [ ] Evidence-vault hash recompute in this environment
-- [ ] Physical verification of CLM-L1-001…005 on GRADE-A/B VIN
+- [x] Source Pack 01 authenticity reset to candidate templates
+- [x] File/page manifests + extraction verification + parallel lanes A/B
+- [ ] Real SRC PDF acquisition + executed SHA-256
+- [ ] Page evidence restoration → DOCUMENT_SUPPORTED
+- [ ] Physical verification on GRADE-A/B VIN
 - [ ] Geometry freeze approval
 
 ### Production (blocked)

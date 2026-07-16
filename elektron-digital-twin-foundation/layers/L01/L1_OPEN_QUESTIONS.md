@@ -30,11 +30,11 @@
 
 **Question:** Does this specific Regular Cab 4x2 chassis-cab use a monobeam front axle structure or the classic twin-I-beam design?
 
-**Source Pack 01 update:** `EXT-L1-101` / `CLM-L1-001` DOCUMENT_SUPPORTED as `MONOBEAM_WIDE_TRACK_NON_DRIVING`. Conflict `CNF-001` → `DOCUMENT_SUPPORTED_PHYSICAL_PENDING`.
+**Source Pack 01 authenticity audit:** Prior page citations voided (`NOT_VERIFIED_FILE_ABSENT`). Public marketing may support general wide-track monobeam (`GENERAL_PLATFORM_ARCHITECTURE_SUPPORTED`). Exact engineering variant unverified.
 
 **Impact:** `FRONT_AXLE_*` object identity, landmark `LMK-AXLE-FRONT-CTR`, front suspension hierarchy
 
-**Status:** DOCUMENT_SUPPORTED — physical confirmation still required before geometry freeze
+**Status:** OPEN — acquire/hash SRC-L1-001; then physical confirmation before geometry freeze
 
 ---
 

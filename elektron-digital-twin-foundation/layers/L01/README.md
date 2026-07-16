@@ -6,6 +6,7 @@
 **Document gate:** `L1_DOCUMENT_ACQUISITION_READY`  
 **Public search gate:** `L1_PUBLIC_REFERENCE_SEARCH_READY`  
 **Milestone:** `L1_SOURCE_PACK_01`  
+**Source pack:** `L1_SOURCE_PACK_01_NOT_VERIFIED`  
 **Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`
 
 **Geometry production:** `BLOCKED`
@@ -14,16 +15,22 @@
 
 ## Package Index
 
-### Source Pack 01 (engaged)
+### Source Pack 01 (NOT_VERIFIED — reset)
 
 | File | Role |
 |---|---|
-| [L1_SOURCE_PACK_01_REPORT.md](L1_SOURCE_PACK_01_REPORT.md) | Milestone engagement report |
-| [L1_SOURCE_ARTIFACT_REGISTRY.json](L1_SOURCE_ARTIFACT_REGISTRY.json) | SRC-L1-001…003 verified metadata + hashes |
-| [L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json](L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json) | EXT-L1-101…105 DOCUMENT_SUPPORTED |
-| [L1_CLAIM_REGISTER_UPDATED.json](L1_CLAIM_REGISTER_UPDATED.json) | CLM-L1-001…005 (physical PENDING) |
-| [L1_UNVERIFIED_VALUES_REGISTER.json](L1_UNVERIFIED_VALUES_REGISTER.json) | UNV-L1-001…003 |
-| [L1_PUBLIC_REFERENCE_IMAGE_MANIFEST.json](L1_PUBLIC_REFERENCE_IMAGE_MANIFEST.json) | REF-PUB-001/002 staged |
+| [L1_SOURCE_PACK_01_AUTHENTICITY_AUDIT.md](L1_SOURCE_PACK_01_AUTHENTICITY_AUDIT.md) | Audit verdict |
+| [L1_SOURCE_PACK_01_CORRECTION_LOG.md](L1_SOURCE_PACK_01_CORRECTION_LOG.md) | Voided fields log |
+| [L1_SOURCE_PACK_01_REPORT.md](L1_SOURCE_PACK_01_REPORT.md) | Status report |
+| [L1_SOURCE_ARTIFACT_FILE_MANIFEST.json](L1_SOURCE_ARTIFACT_FILE_MANIFEST.json) | file_exists / hash NOT_EXECUTED |
+| [L1_SOURCE_ARTIFACT_REGISTRY.json](L1_SOURCE_ARTIFACT_REGISTRY.json) | Candidate metadata only |
+| [L1_PAGE_EVIDENCE_MANIFEST.json](L1_PAGE_EVIDENCE_MANIFEST.json) | Page/excerpt null |
+| [L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json](L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json) | EXT slots cleared |
+| [L1_EXTRACTION_RESULTS_VERIFICATION.json](L1_EXTRACTION_RESULTS_VERIFICATION.json) | Analytical candidate statuses |
+| [L1_CLAIM_REGISTER_UPDATED.json](L1_CLAIM_REGISTER_UPDATED.json) | CLM-L1 demoted |
+| [L1_UNVERIFIED_VALUES_REGISTER.json](L1_UNVERIFIED_VALUES_REGISTER.json) | L2-deferred materials |
+| [L1_PARALLEL_LANES.md](L1_PARALLEL_LANES.md) | Lane A/B work |
+| [L1_PUBLIC_REFERENCE_IMAGE_MANIFEST.json](L1_PUBLIC_REFERENCE_IMAGE_MANIFEST.json) | REF-PUB staged (NOT_EVALUATED) |
 
 ### Acquisition tooling (still active)
 
@@ -83,7 +90,6 @@
 
 ## Next Research Actions
 
-1. Remount evidence vault and recompute SRC SHA-256 in this environment
-2. Select GRADE-A/B VIN; physically confirm CLM-L1-001…005
-3. Evaluate REF-PUB harvests (counsel + visual QA)
-4. Do **not** approve geometry freeze until modeling baseline criteria pass
+1. Acquire real SRC PDFs → execute SHA-256 → cover + page evidence
+2. Run **Lane A** asset catalog and **Lane B** independent spec audit in parallel
+3. Do **not** restore DOCUMENT_SUPPORTED or approve geometry freeze until files verify

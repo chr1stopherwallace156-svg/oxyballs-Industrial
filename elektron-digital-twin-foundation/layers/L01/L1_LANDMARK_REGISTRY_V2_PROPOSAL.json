@@ -44,10 +44,10 @@
       "surface_definition": "Geometric center of the axle beam face / spindle axis plane intersection",
       "removable_or_variable": false,
       "occlusion_risk": "HIGH",
-      "configuration_dependency": "FRONT_AXLE_DOCUMENT_SUPPORTED_MONOBEAM",
-      "repeatability_basis": "Design geometry; physical confirmation PENDING (CLM-L1-001)",
+      "configuration_dependency": "FRONT_AXLE_CANDIDATE_MONOBEAM",
+      "repeatability_basis": "Design geometry after verified SRC page evidence + physical confirmation",
       "expected_repeatability_mm": 5.0,
-      "physical_verification_status": "DOCUMENT_SUPPORTED_PHYSICAL_PENDING"
+      "physical_verification_status": "NOT_VERIFIED_FILE_ABSENT"
     }
   ]
 }

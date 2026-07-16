@@ -264,7 +264,7 @@ Append-only record of digital twin foundation decisions.
 ## DT-D016 — Source Pack 01 engaged; geometry freeze still blocked
 
 - **Date:** 2026-07-16
-- **Status:** Accepted
+- **Status:** Superseded in part by DT-D017 (authenticity reset)
 - **Context:** Empirical null-metadata templates are superseded by Source Pack 01 intake: verified titles/pub numbers/revision dates, recorded SHA-256 hashes, page-level extractions, and updated structural claims.
 - **Decision:**
   1. Milestone **`L1_SOURCE_PACK_01`** engaged via `L1_SOURCE_ARTIFACT_REGISTRY.json` + populated extraction results
@@ -279,3 +279,22 @@ Append-only record of digital twin foundation decisions.
   - Dimensional framework may cite DOCUMENT_SUPPORTED values for planning
   - Do not freeze meshes until GRADE-A/B physical confirmation
   - Public harvests stay NOT_EVALUATED / redistribution prohibited pending review
+
+## DT-D017 — Source Pack 01 authenticity reset to candidate templates
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Prior Source Pack 01 engagement asserted SHA-256 hashes, page coordinates, and verbatim quotes that were not computed from local file bytes. Authenticity audit requires reset.
+- **Decision:**
+  1. Verdict **`L1_SOURCE_PACK_01_NOT_VERIFIED`**; action **`RESET_TO_CANDIDATE_TEMPLATES`**
+  2. Add file manifest, page evidence manifest, extraction verification register, correction log, authenticity audit
+  3. Nullify hashes, exact metadata, page/excerpt fields; demote DOCUMENT_SUPPORTED claims
+  4. Retain candidate hunt labels as `reported_*` / analytical candidates only
+  5. Front axle / PCD may remain `GENERAL_PLATFORM_ARCHITECTURE_SUPPORTED` where public marketing supports architecture — not OEM page-verified
+  6. Defer bushing durometer / clearcoat thickness noise to L2 (`DEFERRED_TO_L2`)
+  7. Authorize parallel **Lane A** (3D asset sourcing) and **Lane B** (independent spec audit)
+  8. Modeling baseline remains **`NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`**; geometry **BLOCKED**
+- **Consequences:**
+  - Do not restore DOCUMENT_SUPPORTED without file_exists + executed hash + page evidence
+  - Lane A/B must not invent OEM page citations
+  - DT-D016 engagement artifacts are superseded where they conflict with this reset

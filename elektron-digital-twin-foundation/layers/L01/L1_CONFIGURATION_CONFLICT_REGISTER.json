@@ -20,10 +20,11 @@
           "ranking": "AUTHORITATIVE"
         }
       ],
-      "mitigation_reconciliation": "Source Pack 01 EXT-L1-101 / CLM-L1-001 DOCUMENT_SUPPORTED as MONOBEAM_WIDE_TRACK_NON_DRIVING. Aggregator Twin-I-Beam claim remains LOW ranking and unresolved as conflict folklore. Object node uses preferred_subtype MONOBEAM_WIDE_TRACK_NON_DRIVING with physical_asset_confirmation PENDING before geometry freeze.",
-      "status": "DOCUMENT_SUPPORTED_PHYSICAL_PENDING",
-      "preferred_resolution": "MONOBEAM_WIDE_TRACK_NON_DRIVING",
-      "document_extraction_id": "EXT-L1-101"
+      "mitigation_reconciliation": "Authenticity audit voided premature DOCUMENT_SUPPORTED page citations. Public marketing supports general wide-track monobeam architecture (GENERAL_PLATFORM_ARCHITECTURE_SUPPORTED). Exact engineering variant remains unverified until SRC-L1-001 bytes are hashed and inspected. Physical confirmation still required before geometry freeze.",
+      "status": "OPEN_MONITORING",
+      "preferred_resolution_candidate": "MONOBEAM_WIDE_TRACK_NON_DRIVING",
+      "document_extraction_id": "EXT-L1-101",
+      "page_evidence_status": "NOT_VERIFIED_FILE_ABSENT"
     },
     {
       "conflict_id": "CNF-002-TIRE-BRAND-AND-MODEL",

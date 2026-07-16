@@ -1,7 +1,8 @@
 # EDTS Layer 1 Source Baseline Closure Criteria
 
-**Status:** `ACTIVE`  
 **Milestone:** `L1_SOURCE_PACK_01`  
+**Source pack verdict:** `L1_SOURCE_PACK_01_NOT_VERIFIED`  
+**Action:** `RESET_TO_CANDIDATE_TEMPLATES`  
 **Document gate:** `L1_DOCUMENT_ACQUISITION_READY`  
 **Public search gate:** `L1_PUBLIC_REFERENCE_SEARCH_READY`  
 **Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`
@@ -10,10 +11,11 @@
 |---|---|
 | Research draft | `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE` |
 | Milestone | `L1_SOURCE_PACK_01` |
-| Evidence gate | `L1_REQUIRES_MORE_REFERENCE_DATA` (physical still open) |
-| Document acquisition | **`L1_DOCUMENT_ACQUISITION_READY`** |
+| Evidence gate | `L1_REQUIRES_MORE_REFERENCE_DATA` |
+| Document acquisition | **`L1_DOCUMENT_ACQUISITION_READY`** (templates; files absent) |
 | Public reference search | **`L1_PUBLIC_REFERENCE_SEARCH_READY`** |
 | Modeling baseline | **`NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`** |
+| Parallel lanes | A (3D assets) + B (independent specs) **AUTHORIZED** |
 
 Closure is **claim-specific and modular**. Absolute unanimous consensus across every manual for every detail is **not** required.
 
@@ -56,20 +58,22 @@ Rendered shader parameters (roughness, metallic, coating type) must be mapped to
 ## Project Gate Verdict (current)
 
 ```text
+Source Pack: L1_SOURCE_PACK_01_NOT_VERIFIED
+Action: RESET_TO_CANDIDATE_TEMPLATES
 Document Gate: L1_DOCUMENT_ACQUISITION_READY
 Public Search Gate: L1_PUBLIC_REFERENCE_SEARCH_READY
 Modeling Baseline: NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE
-Milestone: L1_SOURCE_PACK_01
+Parallel: LANE_A + LANE_B AUTHORIZED
 ```
 
-**Reasoning:** Source Pack 01 metadata and DOCUMENT_SUPPORTED extractions are engaged. Geometry freeze remains paused until GRADE-A/B physical confirmation and modular closure rules are satisfied claim-by-claim. Hash recompute against vault bytes is still pending in this environment.
+**Reasoning:** Prior Source Pack 01 hashes/page quotes were candidate fabrications, not byte-verified. Templates remain ready to receive real PDFs. Geometry freeze stays paused. Parallel lanes may proceed without inventing DOCUMENT_SUPPORTED citations.
 
 ### Explicitly suspended
 
 - L01 mesh / glTF production
 - Coordinate lock / geometry freeze
-- Promotion of DOCUMENT_SUPPORTED → physically VERIFIED without inspection
+- Re-asserting voided SHA-256 or page excerpts
 
-### Unblocks geometry freeze when
+### Unblocks DOCUMENT_SUPPORTED restoration when
 
-Physical confirmation of CLM-L1-001…005 on an accepted grade vehicle; hash recompute optional but recommended; signed baseline record (future: `L1_SOURCE_BASELINE_APPROVAL.md`).
+`file_exists: true` + executed hash + cover inspection + page evidence rows approved (see authenticity audit).

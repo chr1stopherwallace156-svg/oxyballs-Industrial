@@ -1,45 +1,39 @@
-# L1 Source Pack 01 — Engagement Report
+# L1 Source Pack 01 — Status Report (Reset)
 
 **Milestone:** `L1_SOURCE_PACK_01`  
-**Registry status:** `L1_SOURCE_PACK_01_ENGAGED`
+**Verdict:** `L1_SOURCE_PACK_01_NOT_VERIFIED`  
+**Action:** `RESET_TO_CANDIDATE_TEMPLATES`
 
-## Project gates
+## Gates
 
 | Field | Value |
 |---|---|
-| Document acquisition | `L1_DOCUMENT_ACQUISITION_READY` |
+| Source pack | `L1_SOURCE_PACK_01_NOT_VERIFIED` |
+| Document acquisition | `L1_DOCUMENT_ACQUISITION_READY` (templates ready; files absent) |
 | Public reference search | `L1_PUBLIC_REFERENCE_SEARCH_READY` |
 | Modeling baseline | `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE` |
-| Geometry / mesh production | **BLOCKED** |
+| Geometry | **BLOCKED** |
 
-## What landed
+## Authoritative reset artifacts
 
-| Artifact | Role |
+| File | Role |
 |---|---|
-| `L1_SOURCE_ARTIFACT_REGISTRY.json` | SRC-L1-001…003 metadata + SHA-256 claims |
-| `L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json` | EXT-L1-101…105 DOCUMENT_SUPPORTED extractions |
-| `L1_PUBLIC_REFERENCE_IMAGE_MANIFEST.json` | REF-PUB-001/002 staged (NOT_EVALUATED) |
-| `L1_CLAIM_REGISTER_UPDATED.json` | CLM-L1-001…005 (physical PENDING) |
-| `L1_UNVERIFIED_VALUES_REGISTER.json` | UNV-L1-001…003 rejected/provisional |
+| `L1_SOURCE_PACK_01_AUTHENTICITY_AUDIT.md` | Audit verdict |
+| `L1_SOURCE_PACK_01_CORRECTION_LOG.md` | What was voided |
+| `L1_SOURCE_ARTIFACT_FILE_MANIFEST.json` | file_exists false; hash NOT_EXECUTED |
+| `L1_PAGE_EVIDENCE_MANIFEST.json` | page/excerpt null |
+| `L1_EXTRACTION_RESULTS_VERIFICATION.json` | candidate analytical statuses |
+| `L1_PARALLEL_LANES.md` | Lane A/B authorized work |
 
-## Document-supported structural facts (physical still PENDING)
+## Explicitly voided
 
-| Parameter | Value | Extraction |
-|---|---|---|
-| Front axle subtype | `MONOBEAM_WIDE_TRACK_NON_DRIVING` | EXT-L1-101 |
-| Front track width | 1899.92 mm (74.8 in) | EXT-L1-102 |
-| Rear frame width | 868.7 mm (34.2 in) OUTSIDE_TO_OUTSIDE_FRAME_WEB | EXT-L1-103 |
-| Wheel PCD | 225.0 mm / 10 stud | EXT-L1-104 |
-| Diagonal alignment tolerance | 5.0 mm / 2.0 m span | EXT-L1-105 |
+- All previously asserted SHA-256 hashes
+- All page/table/verbatim extraction citations
+- All `DOCUMENT_SUPPORTED` promotions from the prior engagement pass
 
-## Integrity posture
+## Next
 
-- OEM PDFs **not** committed to git (licensing).
-- Recorded `sha256_hash` values have `hash_recompute_status: NOT_RECOMPUTED_IN_THIS_ENVIRONMENT` until the evidence vault is mounted for byte recompute.
-- Public images: `external_distribution: PROHIBITED_PENDING_REVIEW`.
-
-## Explicitly not approved
-
-- Geometry freeze / coordinate lock
-- Mesh / glTF production
-- Treating DOCUMENT_SUPPORTED as physically VERIFIED without GRADE-A/B inspection
+1. Place real PDFs at manifest paths (or vault)
+2. Compute SHA-256; inspect covers
+3. Fill page evidence; then restore claims
+4. Meanwhile: Lane A asset hunt + Lane B independent spec audit
