@@ -1,6 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "registry_name": "EDTS_Frame_Transforms_V3",
+  "_deprecation": {
+    "status": "SUPERSEDED",
+    "reason": "Quaternion TF-FAIL-001 ([0.5,0.5,0.5,0.5] incorrect); THREE_SCENE_FRAME approach superseded by THREE_WORLD_FRAME + camera presets",
+    "superseded_by": "registries/TRANSFORM_REGISTRY_V4_PROPOSAL.json",
+    "decision_id": "DT-D010"
+  },
   "matrix_convention": "column_major",
   "quaternion_element_ordering": "WXYZ",
   "_supersedes": "registries/TRANSFORM_REGISTRY_V2_PROPOSAL.json",

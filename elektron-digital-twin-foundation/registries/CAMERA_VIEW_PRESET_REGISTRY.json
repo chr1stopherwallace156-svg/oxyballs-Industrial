@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_name": "EDTS_Three_Camera_View_Presets",
+  "version": "1.0.0",
+  "description": "Controlled presentation camera view presets for the Three.js viewport scene. Presets do not alter vehicle asset transforms.",
+  "world_frame": "THREE_WORLD_FRAME",
+  "standard_doc": "THREE_CAMERA_AND_WORLD_STANDARD.md",
+  "presets": [
+    {
+      "preset_id": "VIEW-PRESET-FRONT-THREE",
+      "description": "Standard front view looking at the vehicle bumper.",
+      "camera_target_world_m": [0.0, 1.0, 0.0],
+      "camera_position_world_m": [0.0, 1.0, 4.5],
+      "up_vector_world": [0.0, 1.0, 0.0]
+    },
+    {
+      "preset_id": "VIEW-PRESET-FRONT-LEFT-THREE",
+      "description": "Isometric front-left perspective.",
+      "camera_target_world_m": [0.0, 1.0, 0.0],
+      "camera_position_world_m": [3.5, 2.0, 3.5],
+      "up_vector_world": [0.0, 1.0, 0.0]
+    },
+    {
+      "preset_id": "VIEW-PRESET-HERO-THREE",
+      "description": "Low-angle heroic presentation shot.",
+      "camera_target_world_m": [0.0, 0.8, -0.5],
+      "camera_position_world_m": [2.5, 0.5, 4.0],
+      "up_vector_world": [0.0, 1.0, 0.0]
+    }
+  ]
+}

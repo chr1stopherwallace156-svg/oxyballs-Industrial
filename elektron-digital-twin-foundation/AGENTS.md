@@ -31,17 +31,17 @@ You must strictly follow the rules in [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_A
 
 ### 2. Guard the coordinate orientation baseline
 
-Ensure that any code or coordinate transformations generated match [registries/TRANSFORM_REGISTRY_V3_PROPOSAL.json](registries/TRANSFORM_REGISTRY_V3_PROPOSAL.json) and pass [registries/COORDINATE_BASIS_TESTS_V2.json](registries/COORDINATE_BASIS_TESTS_V2.json).
+Ensure transforms match [registries/TRANSFORM_REGISTRY_V4_PROPOSAL.json](registries/TRANSFORM_REGISTRY_V4_PROPOSAL.json).
 
-- Asset export: `TF-ISO-TO-GLTF-ASSET` (`GLTF_ASSET_FRAME` — +Y up, +Z forward)
-- Three.js scene placement: `TF-ISO-TO-THREE-SCENE` (`THREE_SCENE_FRAME` — -Z forward)
+- Asset export: `TF-ISO-TO-GLTF-ASSET` with `quaternion_wxyz = [-0.5, 0.5, 0.5, 0.5]` (TF-FAIL-001 corrected)
+- Three.js world: identity from glTF (`THREE_WORLD_FRAME`); aim cameras via [registries/CAMERA_VIEW_PRESET_REGISTRY.json](registries/CAMERA_VIEW_PRESET_REGISTRY.json)
 - Unreal: `TF-ISO-TO-UNREAL` (scale 0.1 mm to cm with Y reflection)
 
-**Never use** deprecated `TRANSFORM_REGISTRY.json` (v1) or superseded `TRANSFORM_REGISTRY_V2_PROPOSAL.json`. See [GLTF_FRAME_CORRECTION.md](GLTF_FRAME_CORRECTION.md).
+**Never use** V1–V3 transform registries. Do not claim runtime certification while `TRANSFORM_TEST_RESULTS.json` shows `NOT_EXECUTED`. See [TRANSFORM_QUATERNION_CORRECTION_REPORT.md](TRANSFORM_QUATERNION_CORRECTION_REPORT.md).
 
-### 3. Use claim schema v5 for engineering claims
+### 3. Use claim schema v6 for engineering claims
 
-New or revised engineering claims must conform to [schemas/CLAIM_REGISTRY_CORE_SCHEMA_V5_PROPOSAL.json](schemas/CLAIM_REGISTRY_CORE_SCHEMA_V5_PROPOSAL.json), including `source_unit_id` and `canonical_unit_id` from the unit registry.
+Prefer [schemas/CLAIM_SCHEMA_ROOT_V6_PROPOSAL.json](schemas/CLAIM_SCHEMA_ROOT_V6_PROPOSAL.json) and modular `schemas/claim/*` modules.
 
 ## Non-negotiables
 

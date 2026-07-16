@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "source_tier": { "type": "integer", "minimum": 1, "maximum": 4 },
+    "source_document_id": { "type": "string" },
+    "exact_citation_reference": { "type": "string" }
+  },
+  "required": ["source_tier", "source_document_id"],
+  "additionalProperties": false
+}

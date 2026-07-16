@@ -149,3 +149,30 @@ All notable changes to the digital twin foundation. Append-only.
 
 - Readiness: **L00_VISUAL_INTAKE_ONLY_READY**
 - Transform authority: **V3**
+
+## 2026-07-16 (Regression Audit — TF-FAIL-001)
+
+### Added
+
+- `TRANSFORM_QUATERNION_CORRECTION_REPORT.md`, `REGRESSION_AUDIT.md`, `L00_TRUE_RUNTIME_READINESS_REPORT.md`
+- `THREE_CAMERA_AND_WORLD_STANDARD.md`, `registries/CAMERA_VIEW_PRESET_REGISTRY.json`
+- `registries/TRANSFORM_REGISTRY_V4_PROPOSAL.json`
+- `verification/specifications/TRANSFORM_TEST_SPEC.md`
+- `verification/known_failures/TF-FAIL-001_QUATERNION_MATRIX_MISMATCH.md`
+- `verification/results/PENDING_IMPLEMENTATION.md`, `TRANSFORM_TEST_RESULTS.json`
+- `schemas/CLAIM_SCHEMA_ROOT_V6_PROPOSAL.json`, `schemas/claim/*` modular schemas
+- `schemas/PHYSICAL_ASSET_INTAKE_SCHEMA_V4_PROPOSAL.json`
+- `registries/UNIT_REGISTRY_V3_COMPLETE_PROPOSAL.json`
+- `FORMULA_STANDARD_V2_PROPOSAL.md`
+
+### Changed
+
+- Corrected glTF quaternion to `[-0.5, 0.5, 0.5, 0.5]` (TF-FAIL-001)
+- V3 transform registry SUPERSEDED; THREE_SCENE_FRAME DEPRECATED
+- Measurement uncertainty classes marked provisional targets
+- **DT-D010** registered
+
+### Status
+
+- Readiness: **L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY**
+- Transform validation: **NOT_EXECUTED** (no fabricated passes)

@@ -148,3 +148,22 @@ Append-only record of digital twin foundation decisions.
   - Asset export must use TF-ISO-TO-GLTF-ASSET, not the old TF-ISO-TO-GLTF mapping
   - Three.js loaders may apply TF-ISO-TO-THREE-SCENE for root placement
   - L00 remains visual-intake-only; engineering metrology still L2-gated
+
+## DT-D010 — Regression audit: quaternion TF-FAIL-001 and runtime honesty
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Quaternion `[0.5, 0.5, 0.5, 0.5]` for TF-ISO-TO-GLTF-ASSET did not match the correct rotation matrix. Three.js world was conflated with camera presentation. Runtime tests had never been executed.
+- **Decision:**
+  1. Correct quaternion to `[-0.5, 0.5, 0.5, 0.5]` (equiv. `[0.5, -0.5, -0.5, -0.5]`) — TF-FAIL-001 CORRECTED
+  2. `TRANSFORM_REGISTRY_V4_PROPOSAL.json` — graph registry; validation_status NOT_EXECUTED
+  3. `THREE_WORLD_FRAME` identity to glTF; camera presets in `CAMERA_VIEW_PRESET_REGISTRY.json`
+  4. Verification tree: specs, known_failures, PENDING results — no fabricated passes
+  5. Modular claim schema V6 under `schemas/claim/`
+  6. Intake schema V4; unit registry V3 (SI-aligned canonical UNIT-M)
+  7. Measurement classes remain provisional targets
+  8. Readiness: **`L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY`**
+- **Consequences:**
+  - Do not claim runtime transform certification until TRANSFORM_TEST_RESULTS.json shows PASSED
+  - Do not use TRANSFORM_REGISTRY_V3 quaternions
+  - Prefer camera presets over corrective root transforms for Three.js viewing

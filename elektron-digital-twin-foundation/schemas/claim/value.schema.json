@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "nominal_value": { "type": "number" },
+    "minimum_allowed": { "type": "number" },
+    "maximum_allowed": { "type": "number" }
+  },
+  "required": ["nominal_value"],
+  "additionalProperties": false
+}

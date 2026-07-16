@@ -2,9 +2,10 @@
 
 This repository contains the authoritative schemas, standards, and registries establishing the baseline data model and coordinate frameworks for the F-450 physical vehicle intake and digital reconstruction.
 
-**Readiness:** `L00_VISUAL_INTAKE_ONLY_READY`  
+**Readiness:** `L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY`  
 **Closure:** `L00_CLOSURE_REJECTED` — physical asset intake required before re-closure  
-See [STATUS.json](STATUS.json) for machine-readable project state.
+**Runtime transforms:** NOT certified (`validation_status: NOT_EXECUTED`)  
+See [STATUS.json](STATUS.json) and [L00_TRUE_RUNTIME_READINESS_REPORT.md](L00_TRUE_RUNTIME_READINESS_REPORT.md).
 
 ---
 
@@ -15,17 +16,17 @@ All systems, agents, and engineers must consume the core specification files in 
 1. **[FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md)**  
    Establishes the copyability, structure, and machine-readability rules for all mathematical and tolerance statements.
 
-2. **[registries/UNIT_REGISTRY_V2_PROPOSAL.json](registries/UNIT_REGISTRY_V2_PROPOSAL.json)**  
-   The controlled vocabulary of all measurement units (with conversion multipliers).
+2. **[registries/UNIT_REGISTRY_V3_COMPLETE_PROPOSAL.json](registries/UNIT_REGISTRY_V3_COMPLETE_PROPOSAL.json)**  
+   Controlled unit vocabulary (SI-aligned canonical bases).
 
 3. **[registries/COORDINATE_FRAME_REGISTRY.json](registries/COORDINATE_FRAME_REGISTRY.json)**  
-   Defines spatial systems including `GLTF_ASSET_FRAME` and `THREE_SCENE_FRAME`.
+   Frames including `GLTF_ASSET_FRAME` and `THREE_WORLD_FRAME`.
 
-4. **[registries/TRANSFORM_REGISTRY_V3_PROPOSAL.json](registries/TRANSFORM_REGISTRY_V3_PROPOSAL.json)**  
-   Machine-readable transforms. **Do not use** V1 or V2 registries.
+4. **[registries/TRANSFORM_REGISTRY_V4_PROPOSAL.json](registries/TRANSFORM_REGISTRY_V4_PROPOSAL.json)**  
+   Transform graph. Quaternion corrected (TF-FAIL-001). **Do not use** V1–V3.
 
-5. **[schemas/CLAIM_REGISTRY_CORE_SCHEMA_V5_PROPOSAL.json](schemas/CLAIM_REGISTRY_CORE_SCHEMA_V5_PROPOSAL.json)**  
-   Core JSON schema with mutually exclusive value structure validation.
+5. **[schemas/CLAIM_SCHEMA_ROOT_V6_PROPOSAL.json](schemas/CLAIM_SCHEMA_ROOT_V6_PROPOSAL.json)**  
+   Modular claim schema root (`schemas/claim/*`).
 
 6. **[DATUM_CONSTRUCTION_STANDARD.md](DATUM_CONSTRUCTION_STANDARD.md)**  
    Repeatable physical metrology routines for establishing vehicle origins.
@@ -33,7 +34,7 @@ All systems, agents, and engineers must consume the core specification files in 
 7. **[CLEARANCE_STANDARD_V2_PROPOSAL.md](CLEARANCE_STANDARD_V2_PROPOSAL.md)**  
    Formula-compliant clearance envelope rules (CLR-001, CLR-002).
 
-Also read: [GLTF_FRAME_CORRECTION.md](GLTF_FRAME_CORRECTION.md), [THREE_RUNTIME_FRAME_STANDARD_PROPOSAL.md](THREE_RUNTIME_FRAME_STANDARD_PROPOSAL.md), [L00_RUNTIME_READINESS_REPORT.md](L00_RUNTIME_READINESS_REPORT.md).
+Also read: [TRANSFORM_QUATERNION_CORRECTION_REPORT.md](TRANSFORM_QUATERNION_CORRECTION_REPORT.md), [THREE_CAMERA_AND_WORLD_STANDARD.md](THREE_CAMERA_AND_WORLD_STANDARD.md), [REGRESSION_AUDIT.md](REGRESSION_AUDIT.md).
 
 ### Extended governance reading
 

@@ -2,7 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "registry_name": "EDTS_Coordinate_Frames",
   "datum_state_model": "DATUM_STATE_MODEL_PROPOSAL.md",
-  "transform_registry": "registries/TRANSFORM_REGISTRY_V3_PROPOSAL.json",
+  "transform_registry": "registries/TRANSFORM_REGISTRY_V4_PROPOSAL.json",
+  "camera_presets": "registries/CAMERA_VIEW_PRESET_REGISTRY.json",
   "frames": {
     "EDTS_ISO_ALIGNED_VEHICLE_FRAME": {
       "standard": "ISO 8855",
@@ -13,6 +14,40 @@
         "up": [0.0, 0.0, 1.0]
       },
       "origin_datum_id": "DTM-DSN-001"
+    },
+    "GLTF_ASSET_FRAME": {
+      "standard": "glTF 2.0 Asset Specification",
+      "handedness": "right_handed",
+      "basis": {
+        "left": [1.0, 0.0, 0.0],
+        "up": [0.0, 1.0, 0.0],
+        "forward": [0.0, 0.0, 1.0]
+      },
+      "notes": "+X left; +Y up; +Z forward. Authoring and packaging frame.",
+      "origin_datum_id": "DTM-SUP-001",
+      "correction_doc": "GLTF_FRAME_CORRECTION.md"
+    },
+    "THREE_WORLD_FRAME": {
+      "standard": "Three.js world (preserves glTF asset axes)",
+      "handedness": "right_handed",
+      "basis": {
+        "left": [1.0, 0.0, 0.0],
+        "up": [0.0, 1.0, 0.0],
+        "forward": [0.0, 0.0, 1.0]
+      },
+      "notes": "Identity to GLTF_ASSET_FRAME. Camera aiming via CAMERA_VIEW_PRESET only.",
+      "origin_datum_id": "DTM-SUP-001",
+      "standard_doc": "THREE_CAMERA_AND_WORLD_STANDARD.md"
+    },
+    "THREE_CAMERA_LOCAL_FRAME": {
+      "standard": "Three.js default camera local axes",
+      "handedness": "right_handed",
+      "basis": {
+        "right": [1.0, 0.0, 0.0],
+        "up": [0.0, 1.0, 0.0],
+        "forward": [0.0, 0.0, -1.0]
+      },
+      "notes": "Camera-local only. Not a vehicle transform edge."
     },
     "SCAN_RAW_FRAME": {
       "standard": "Scanner Local",
@@ -34,34 +69,15 @@
       },
       "origin_datum_id": "DTM-DSN-001"
     },
-    "GLTF_ASSET_FRAME": {
-      "standard": "glTF 2.0 Asset Specification",
-      "handedness": "right_handed",
-      "basis": {
-        "left": [1.0, 0.0, 0.0],
-        "up": [0.0, 1.0, 0.0],
-        "forward": [0.0, 0.0, 1.0]
-      },
-      "notes": "+X points left; +Y up; +Z forward. Authoring and packaging frame.",
-      "origin_datum_id": "DTM-SUP-001",
-      "correction_doc": "GLTF_FRAME_CORRECTION.md"
-    },
     "THREE_SCENE_FRAME": {
-      "standard": "Three.js / WebGL default viewing convention",
-      "handedness": "right_handed",
-      "basis": {
-        "right": [1.0, 0.0, 0.0],
-        "up": [0.0, 1.0, 0.0],
-        "backward": [0.0, 0.0, 1.0]
-      },
-      "notes": "+X right; +Y up; -Z forward for default camera. Runtime scene placement only.",
-      "origin_datum_id": "DTM-SUP-001",
-      "standard_doc": "THREE_RUNTIME_FRAME_STANDARD_PROPOSAL.md"
+      "status": "DEPRECATED",
+      "superseded_by": ["THREE_WORLD_FRAME", "CAMERA_VIEW_PRESET"],
+      "reason": "Conflated world coordinates with camera presentation; corrective root transform no longer used"
     },
     "GLTF_RUNTIME_FRAME": {
       "status": "DEPRECATED",
-      "superseded_by": ["GLTF_ASSET_FRAME", "THREE_SCENE_FRAME"],
-      "reason": "Conflated glTF asset authoring space with WebGL -Z-forward viewing space"
+      "superseded_by": ["GLTF_ASSET_FRAME", "THREE_WORLD_FRAME"],
+      "reason": "Conflated glTF asset authoring space with WebGL viewing space"
     },
     "UNREAL_FRAME": {
       "standard": "Unreal Engine Editor Standard",
