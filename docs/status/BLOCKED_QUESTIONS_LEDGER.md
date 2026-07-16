@@ -1,0 +1,222 @@
+# BLOCKED QUESTIONS LEDGER
+
+Every supplier-only value that would otherwise stall a gate is **parked
+here** so research can keep moving on the parts that do not need a
+supplier answer yet (owner directive, 2026-07-16 —
+`docs/research/raw/owner_directives/directive_01_park_and_proceed.md`).
+
+**Operating rule:** supplier data closes *final numbers*; research now
+builds the *test plan, failure logic, and next gates*. When a batch hits
+a supplier-only value, add an entry here and continue with the
+"Alternative research allowed" line — do not wait, do not guess, do not
+mark Confirmed.
+
+**Entry structure (owner-specified):**
+
+```
+Gate:
+Question:
+Supplier needed:
+Why it matters:
+What calculation it unlocks:
+Current status:
+Follow-up date:
+Alternative research allowed:
+```
+
+**Follow-up clock note:** the supplier letters (Webasto, Dana, ZF,
+Ford/Lee) are drafted under `docs/research/outreach/`. Webasto is
+READY_TO_SEND; Dana, ZF, and Ford/Lee are DRAFT awaiting owner approval.
+**The 7-day follow-up clock starts on the actual send date** (an owner
+action) — until then follow-up dates read "on send + 7d." Record the
+send date in the outreach file and here when each letter goes out.
+
+---
+
+## Gate 04 — Brake / Steering Assist (ZF EPHS MPU 100-C)
+
+### BQ-01
+- **Gate:** 04 — Brake / Steering
+- **Question:** Can the ZF MPU 100-C support hydroboost brake assist +
+  steering gear simultaneously (including a rapid pedal-travel volume
+  drop while steering)?
+- **Supplier needed:** ZF Race Engineering
+- **Why it matters:** determines whether the EHPS candidate is viable at
+  all for this architecture
+- **Unlocks:** EHPS candidate suitability, DC-DC sizing, brake/steering
+  assist architecture
+- **Current status:** BLOCKED_PENDING_SUPPLIER_RESPONSE (RC-82,
+  NeedsHydroboostCompatibilityReview)
+- **Follow-up date:** on send + 7d (`SUPPLIER_INQUIRY_ZF_01.md`, DRAFT)
+- **Alternative research allowed:** Gate 04B FMVSS 105 test mapping +
+  loaded low-speed steering test procedure
+
+### BQ-02
+- **Gate:** 04 — Brake / Steering
+- **Question:** Current-vs-pressure/flow map; max continuous current; max
+  peak current + allowed duration (ZF MPU 100-C).
+- **Supplier needed:** ZF Race Engineering
+- **Why it matters:** the 12 V load could be a hundreds-of-amps event;
+  the current is the missing input to low-voltage sizing
+- **Unlocks:** RC-85 (removes the EngineeringEstimate fence), Gate 04C
+  DC-DC / buffer sizing
+- **Current status:** BLOCKED_PENDING_SUPPLIER_RESPONSE (RC-85,
+  NeedsZFCurrentMap — do NOT hard-code 250–300 A)
+- **Follow-up date:** on send + 7d
+- **Alternative research allowed:** Gate 04C DC-DC converter / buffering
+  modeling (transient sag, fuse/relay sizing) without ZF's final numbers
+
+### BQ-03
+- **Gate:** 04 — Brake / Steering
+- **Question:** Duty cycle at 12 L/min & 124.5 bar; thermal derating
+  curve (ZF MPU 100-C).
+- **Supplier needed:** ZF Race Engineering
+- **Why it matters:** continuous-load survival and derating drive both
+  suitability and the failure/warning logic
+- **Unlocks:** commercial-duty suitability (RC-84), thermal fault logic
+- **Current status:** BLOCKED_PENDING_SUPPLIER_RESPONSE (CS-53,
+  NeedsThermalDeratingData / NeedsCommercialDutyReview)
+- **Follow-up date:** on send + 7d
+- **Alternative research allowed:** Gate 04B EHPS-pump-failure-response
+  test methods
+
+### BQ-04
+- **Gate:** 04 — Brake / Steering
+- **Question:** Control mode + fault/diagnostic outputs — **the factsheet
+  says "No connection to the CAN bus required," so do NOT assume CAN/DBC**;
+  ask what warning/diagnostic outputs exist and whether a CAN variant
+  exists.
+- **Supplier needed:** ZF Race Engineering
+- **Why it matters:** warning-lamp and safe-shutdown logic depend on what
+  the unit can actually signal
+- **Unlocks:** Gate 04B/04C warning-lamp + safe-shutdown logic, Gate 05
+  cluster/diagnostic integration
+- **Current status:** BLOCKED_PENDING_SUPPLIER_RESPONSE (RC-83,
+  NeedsSupplierData — CAN-control claim already caught twice)
+- **Follow-up date:** on send + 7d
+- **Alternative research allowed:** Gate 05 cluster/CAN integration
+  research (authorized Ford-compatible framing only)
+
+## Gate 04 — Brake / Steering Assist (Ford / Lee / steering specialist)
+
+### BQ-05
+- **Gate:** 04 — Brake / Steering
+- **Question:** Exact 2020–2026 Ford F-450/F-550 factory power-steering
+  pump flow-vs-RPM curve and maximum pressure-relief limit.
+- **Supplier needed:** Ford Fleet / Lee Power Steering / steering
+  specialist
+- **Why it matters:** this is the *requirement* the EHPS must meet; the
+  Lee 1750 psi / 3.25 GPM figure is only a Ford-**style** benchmark
+- **Unlocks:** the real Gate 04 target curve; upgrades the Ford-side rows
+  off NeedsFordExactSource
+- **Current status:** BLOCKED_PENDING_SUPPLIER_RESPONSE (CS-51,
+  NeedsFordExactSource)
+- **Follow-up date:** on send + 7d
+  (`SUPPLIER_INQUIRY_FORD_LEE_STEERING_01.md`, DRAFT)
+- **Alternative research allowed:** Gate 04B loaded low-speed steering
+  test procedure
+
+### BQ-06
+- **Gate:** 04 — Brake / Steering
+- **Question:** F-450/F-550 steering-gear peak flow (GPM) and pressure
+  (PSI) demand during low-speed maneuvering at max front GAWR.
+- **Supplier needed:** Ford / steering-gear supplier
+- **Why it matters:** worst-case steering demand sets the simultaneous
+  brake+steering sizing floor
+- **Unlocks:** the RC-74 combined-demand NoGo threshold
+- **Current status:** BLOCKED_PENDING_SUPPLIER_RESPONSE
+- **Follow-up date:** on send + 7d
+- **Alternative research allowed:** Gate 04B loaded low-speed steering
+  test method
+
+### BQ-07
+- **Gate:** 04 — Brake / Steering
+- **Question:** Hydroboost accumulator internal volume + nitrogen
+  pre-charge pressure (Class 4/5 factory unit).
+- **Supplier needed:** Ford / hydroboost supplier
+- **Why it matters:** determines how many power-off emergency stops
+  remain if the electric pump fails
+- **Unlocks:** power-off reserve-stop modeling (Gate 04B)
+- **Current status:** BLOCKED_PENDING_SUPPLIER_RESPONSE (OpenGap)
+- **Follow-up date:** on send + 7d
+- **Alternative research allowed:** Gate 04B power-off brake-reserve test
+  methods (test procedure can be researched before the number is known)
+
+### BQ-08
+- **Gate:** 04 — Brake / Steering
+- **Question:** Hydroboost fluid-volume displacement during a fast panic
+  brake; max allowable return-line backpressure before seal bypass.
+- **Supplier needed:** Ford / hydroboost supplier
+- **Why it matters:** transient volume + return-line limits size the pump
+  reserve and plumbing
+- **Unlocks:** transient flow-split modeling, plumbing spec
+- **Current status:** BLOCKED_PENDING_SUPPLIER_RESPONSE
+- **Follow-up date:** on send + 7d
+- **Alternative research allowed:** Gate 04B partial-failure brake tests
+
+### BQ-09
+- **Gate:** 04 — Brake / Steering
+- **Question:** Manual steering torque (Nm) with assist fully lost, at
+  max front GAWR.
+- **Supplier needed:** Ford spec **or** field measurement (may not be
+  supplier-only — a loaded test can measure it)
+- **Why it matters:** defines the loss-of-assist failure severity
+- **Unlocks:** steering-assist-loss failure-behavior classification
+- **Current status:** BLOCKED (spec) / researchable via test method
+- **Follow-up date:** on send + 7d
+- **Alternative research allowed:** Gate 04B loaded low-speed steering
+  test procedure (defines how to measure it)
+
+## Powertrain — HV / battery / motor (Webasto, Dana)
+
+### BQ-10
+- **Gate:** Powertrain (B-003)
+- **Question:** Webasto Standard Battery Pro 40 continuous/peak discharge
+  current capability vs Dana TM4 SUMO MD DC input demand — do they match?
+- **Supplier needed:** Webasto
+- **Why it matters:** the P=V×I check flagged a possible battery-current
+  / motor-power mismatch
+- **Unlocks:** powertrain compatibility (B-003), HV wiring current basis
+- **Current status:** BLOCKED_PENDING_SUPPLIER_DATA (B-003)
+- **Follow-up date:** on send + 7d (`SUPPLIER_INQUIRY_WEBASTO_01.md`,
+  READY_TO_SEND)
+- **Alternative research allowed:** cooling / loss modeling (already in
+  progress); no final HV wiring gauge until this resolves
+
+### BQ-11
+- **Gate:** Powertrain (B-004)
+- **Question:** Webasto VIB/VIG interface electrical + control data
+  (contactor control, pre-charge, interlock, comms).
+- **Supplier needed:** Webasto
+- **Why it matters:** the interface defines HV connection + pre-charge
+  handshake
+- **Unlocks:** HV wiring interface (B-004), pre-charge sequencing
+- **Current status:** BLOCKED_PENDING_SUPPLIER_DATA (B-004)
+- **Follow-up date:** on send + 7d
+- **Alternative research allowed:** HV wiring modeling frameworks (v0.1
+  already candidate-level)
+
+### BQ-12
+- **Gate:** Powertrain (Dana)
+- **Question:** SUMO MD inverter DC input voltage range, continuous/peak
+  DC current, DC-link capacitance, pre-charge ownership.
+- **Supplier needed:** Dana / TM4
+- **Why it matters:** motor-side demand + pre-charge criteria drive HV
+  architecture and contactor/fuse sizing
+- **Unlocks:** powertrain compatibility, pre-charge circuit design
+- **Current status:** BLOCKED_PENDING_SUPPLIER_DATA
+- **Follow-up date:** on send + 7d (`SUPPLIER_INQUIRY_DANA_01.md`, DRAFT)
+- **Alternative research allowed:** powertrain modeling; no final DC-link
+  / contactor numbers until this resolves
+
+---
+
+## Resolution log
+
+*(When a supplier reply arrives, archive it 1:1 under
+`docs/research/raw/supplier_replies/`, reconcile it into the filter
+register, then move the entry here with the answer + the commit that
+recorded it. Nothing is marked Confirmed without locator verification +
+owner approval.)*
+
+- *(none yet — all entries open)*

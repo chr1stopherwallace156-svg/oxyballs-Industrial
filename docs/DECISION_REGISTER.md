@@ -17,6 +17,34 @@ later entry that references it.
 
 ---
 
+## D-005 — Park supplier-only questions; proceed with supplier-independent research
+
+- Date: 2026-07-16
+- Status: Accepted
+- Context: Gate 04 (and the powertrain gates) reached
+  BLOCKED_PENDING_SUPPLIER_RESPONSE / BLOCKED_PENDING_SUPPLIER_DATA. The
+  supplier letters are drafted but not yet sent (sending is an owner
+  action), so the final numbers could be days or weeks away. Waiting
+  idle wastes the interval; guessing the values would violate the
+  Constitution.
+- Decision: (1) Adopt a **park-and-proceed** operating rule — a gate
+  that is blocked only on a supplier value is marked
+  BLOCKED_PENDING_SUPPLIER_RESPONSE, its open question is logged in the
+  new **Blocked Questions Ledger** (`docs/status/BLOCKED_QUESTIONS_LEDGER.md`,
+  owner-specified 8-field structure), and research continues on the
+  supplier-*independent* work: test plans, failure-mode logic, controls,
+  mechanical mounting, and weight. (2) Adopt the owner's ordered,
+  supplier-independent research plan — **Gate 04B → 04C → 05 → 06 →
+  07 → 08** — captured with verbatim prompts in
+  `docs/roadmaps/GATE_RESEARCH_QUEUE.md`. (3) Supplier data closes final
+  numbers only; nothing researched in the interim may be marked
+  Confirmed, claim compliance, or state the vehicle is safe.
+- Consequences: the project is never idle on supplier latency; every
+  parked value has a home, a follow-up date, and an explicit
+  "alternative research allowed" path, so no blocked question is lost;
+  the 7-day follow-up clock starts on each letter's actual send date.
+  Supersedes nothing; extends the review_16 gate roadmap ordering.
+
 ## D-004 — Handoff fallback triggers, branch single-writer rule, deferred validity hashes
 
 - Date: 2026-07-15

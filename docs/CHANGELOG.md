@@ -5,6 +5,30 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — Owner directive_01: park-and-proceed; Blocked Questions Ledger + gate research queue
+
+- Owner operating directive ("do not sit and wait on emails"): mark
+  Gate 04 BLOCKED_PENDING_SUPPLIER_RESPONSE, park supplier-only values,
+  and keep researching supplier-independent work. Archived 1:1 at
+  `docs/research/raw/owner_directives/directive_01_park_and_proceed.md`.
+- New **Blocked Questions Ledger** (`docs/status/BLOCKED_QUESTIONS_LEDGER.md`,
+  owner's 8-field structure) — BQ-01..BQ-12 parking every current
+  supplier-only value (ZF hydroboost+steering, ZF current/duty/thermal/
+  control, Ford pump curve, steering-gear demand, accumulator reserve,
+  panic-brake displacement, manual-steering torque, and the Webasto/Dana
+  powertrain items B-003/B-004), each with a follow-up date and an
+  allowed alternative-research path.
+- New **Gate Research Queue** (`docs/roadmaps/GATE_RESEARCH_QUEUE.md`) —
+  the owner's ordered plan **04B → 04C → 05 → 06 → 07 → 08** with the
+  verbatim research prompts for 04B, 04C, 05, 06 (07/08 prompts pending).
+- New **Gate 04C** (EHPS low-voltage / DC-DC architecture) added to the
+  Research Map roadmap; the stale "next expected batch" pointer updated
+  from the (already-processed) modeling-frameworks payload to the
+  **Gate 04B** validation-test payload.
+- Decision **D-005** recorded (park-and-proceed operating rule +
+  ledger + ordered queue). Nothing ingested; nothing Confirmed; no
+  compliance claim; ODRs untouched.
+
 ## 2026-07-16 — RH batch 24 + review_21: Gate 04 v0.4 supplier-inquiry prep + regression catch
 
 - Archived batch_24 (supplier-inquiry prep) and review_21 1:1 (commit

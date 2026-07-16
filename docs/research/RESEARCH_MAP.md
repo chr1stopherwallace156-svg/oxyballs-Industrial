@@ -248,10 +248,18 @@ supplier datasheets → CAN/PATS.**
    weld, cooling failure, thermal derating, BMS fault, CAN fault,
    brake/steer assist failure, post-drive inspection.
 
-## Gate roadmap after cooling (owner, review_16)
+## Gate roadmap after cooling (owner, review_16; re-ordered directive_01)
 
 While the HV wiring + powertrain + cooling gates sit at
-**BLOCKED_PENDING_SUPPLIER_DATA**, the research sequence continues:
+**BLOCKED_PENDING_SUPPLIER_DATA**, the research sequence continues.
+
+**Operating rule (owner directive_01, 2026-07-16 — "do not wait"):**
+supplier-only values are parked in
+[`docs/status/BLOCKED_QUESTIONS_LEDGER.md`](../status/BLOCKED_QUESTIONS_LEDGER.md)
+and research keeps moving on supplier-independent work. The ordered,
+supplier-independent plan with the owner's verbatim prompts lives in
+[`docs/roadmaps/GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md).
+**Best order from here:** Gate 04B → 04C → 05 → 06 → 07 → 08.
 
 4. **Brake / Steering Assist Gate (CP#1) — Gate 04 v0.4 (batch_23):**
    architecture strong; a **complete** EHPS candidate now exists, but
@@ -308,6 +316,18 @@ While the HV wiring + powertrain + cooling gates sit at
    FMVSS 105 stays the brake-testing lane but needs a brake engineer /
    test plan before any compliance claim; the loaded low-speed steering
    test must exercise max front GAWR at slow speed.
+4C. **EHPS Electrical / Low-Voltage Architecture — Gate 04C (owner
+   directive_01):** the EHPS may hit the 12 V system hard, so its
+   low-voltage impact is researched **now**, in parallel, without ZF's
+   final current map. Scope: 800V→12V DC-DC converter sizing for
+   high-current auxiliary loads, 12 V bus sag under transient loads,
+   ultracapacitor / auxiliary-battery buffering, high-current fuse/relay
+   sizing, low-voltage fault detection, emergency backup power for
+   steering/brake assist, pressure-sensor integration, warning-lamp /
+   driver-alert logic, safe shutdown if EHPS power fails. Output limited
+   to modeling rules / candidate tests / OpenGaps + named supplier data
+   still required. Loops with RC-81/RC-85 (the DC-DC OpenGap and the ZF
+   current estimate — parked as BQ-02 in the Blocked Questions Ledger).
 5. **CAN / Controls / Cluster / Immobilizer Gate (CP#2)** — *(owner
    correction, review_17: NEVER "PATS bypass / override" language —
    that reads as defeating anti-theft).* Scope: **authorized
@@ -322,15 +342,18 @@ While the HV wiring + powertrain + cooling gates sit at
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch:** the modeling-frameworks payload (owner prompt,
-review_16) — academic/national-lab/standards sources for 10 topics
-(battery heat generation, inverter/motor losses, radiator/pump sizing,
-Darcy-Weisbach, NTU-effectiveness, high-ambient derating,
-mountain-grade duty cycles, thermal aging, serial-vs-parallel loops,
-thermal failure modes, validation test procedures) — statuses per the
-lane doctrine above; Build Engine impact limited to
-Model/Test/OpenGap/NominalAssumption; every row must state what
-supplier data is still needed.
+**Next expected batch (owner directive_01):** the **Gate 04B** payload —
+validation tests and failure-mode procedures for the converted
+brake/steering system (FMVSS 105 hydraulic brake test procedure,
+stopping-distance, fade/recovery, partial-failure, warning-lamp,
+parking-brake, power-off reserve stops, loaded low-speed steering test,
+steering-assist-loss + EHPS-pump-failure + low-voltage-failure behavior,
+pressure-sensor/warning logic). Build Engine impact limited to
+Test / NoGoCondition / OpenGap / Rule; no compliance claim, no "vehicle
+is safe" statement, no final pass/fail numbers unless the source is
+primary regulation / OEM / accepted test standard. Verbatim prompt in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); then
+04C → 05 → 06 → 07 → 08.
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

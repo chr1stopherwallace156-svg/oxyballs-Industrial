@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 24 + review_21 — Gate 04 v0.4 supplier-inquiry prep + regression catch)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 24 + review_21); awaiting owner decisions and/or next batch
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `5abd8a8`; end commit: `8c2c85b` (batch-24 reconciliation)
+- Work: batch 24 (supplier-inquiry prep) + review_21 reconciled — no new sources. Regression caught: ZF "6000 RPM CAN control" + "commercial vehicle validation" re-asserted one batch after review_20 corrected both (RC-83/RC-84 recurrence markers; second corrected-claim recurrence after PATS; M10 regression-scanner use-case). Gate 04 flags set: CANDIDATE_EHPS_FOUND / FINAL_SELECTION_HALTED / BLOCKED_PENDING_SUPPLIER_RESPONSE. New sub-gate Gate 04B (FMVSS 105 + loaded low-speed steering test). Ford/Lee/steering supplier packet drafted (DRAFT). Section 32. Nothing ingested; nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean two-universe; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 forbidden-phrase/regression scanner; Dana/ZF/Ford-Lee letter approvals.
+
 ## 2026-07-16 — Claude Code — task complete (batch 23 + review_20 — Brake/Steering Gate v0.4)
 
 ### (archived handoff)
