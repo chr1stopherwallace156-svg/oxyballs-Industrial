@@ -253,16 +253,33 @@ supplier datasheets → CAN/PATS.**
 While the HV wiring + powertrain + cooling gates sit at
 **BLOCKED_PENDING_SUPPLIER_DATA**, the research sequence continues:
 
-4. **Brake / Steering Assist Gate (CP#1) — Gate 04 v0.1 OPENED
-   (batch_21):** hydraulic dependency identified, vacuum-pump path
-   rejected, EHPS path opened, Ford-specific data still missing. Core
-   candidate: the combined brake+steering demand NoGo (RC-74 — never
-   size steering alone). Primary brake regulation lane = **FMVSS 105**
-   (CS-49). Still-missing: Ford pump pressure/flow, hydroboost
-   accumulator reserve, steering-gear req, manual-steering torque,
-   EHPS pressure-flow-current curve, EHPS duty/derating, DC-DC output,
-   FMVSS 105 test mapping. Next payload: Ford-specific/supplier-
-   specific only. *(owner correction,
+4. **Brake / Steering Assist Gate (CP#1) — Gate 04 v0.2 (batch_22):**
+   architecture problem proven, replacement system NOT yet proven.
+   Hydroboost dependency mapped; vacuum-pump path rejected; EHPS path
+   confirmed correct; Ford-specific final values still missing; EHPS
+   final candidate not selected. Core rule: EHPS must support
+   simultaneous brake + steering demand (RC-74 — never size steering
+   alone). New candidate data held at the correct altitude: generic
+   hydroboost minimum 2 GPM / 1200 psi (EngineeringBackground);
+   Ford-style dual-return pump candidate 1750 psi / 3.25 GPM
+   (CS-51, SupplierBackground / NeedsFordExactSource — **not** the
+   native Ford Super Duty spec); medium-duty hydraulic pump candidate
+   2683 psi / 6.30 GPM (CS-52, HydraulicPumpCandidate /
+   NeedsElectricMotorDriveData — a pump end, not a complete EHPS).
+   DC-DC load impact now identified (RC-81 — ~2–3.5 kW → ~160–290 A at
+   12 V, loops Gate 04 back to Gate 01 low-voltage architecture).
+   "Will not bottleneck or overheat" downgraded to
+   NeedsEngineeringReview. Primary brake regulation lane = **FMVSS 105**
+   (CS-49). Still blocked: exact Ford F-450/F-550 pump curve, exact
+   steering-gear requirement, hydroboost accumulator reserve, true EHPS
+   motor/controller data, DC-DC sizing, FMVSS 105 test mapping,
+   loaded low-speed steering test procedure. **Next payload: complete
+   EHPS systems only** (voltage, continuous/peak current, flow curve,
+   pressure curve, relief, duty cycle, thermal derating, control method,
+   reservoir, fluid, ports, fault outputs, mounting, simultaneous
+   hydroboost+steering support) — hydraulic-pump data alone is not
+   enough; a Dodge/Mopar EHPS example is LeadOnly until pressure/flow/
+   current/duty are proven. *(owner correction,
    review_17: NOT "auxiliary vacuum pump" — F-450/F-550 use hydroboost
    / hydraulic brake + power-steering assist).* Scope: determine the
    factory Ford brake-assist and steering-assist architecture; identify

@@ -5,6 +5,36 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 22 + review_19: Brake/Steering Gate v0.2 (EHPS pumps)
+
+- Archived batch_22 (Gate 04 EHPS/hydraulic pumps) and review_19 1:1
+  (commit `6a57c95`). Owner label adopted: **Brake/Steering Gate
+  v0.2** — architecture problem proven, replacement system not yet
+  proven. Hydroboost dependency mapped; vacuum path rejected; EHPS
+  path confirmed correct; Ford-specific final values still missing;
+  EHPS final candidate not selected.
+- New rows CS-51 (Lee Power Steering — SupplierBackground /
+  Ford-StyleComponentCandidate / NeedsFordExactSource; **not** the
+  native Ford Super Duty spec), CS-52 (TRW 14-20358-010 —
+  HydraulicPumpCandidate / NeedsElectricMotorDriveData; a pump end,
+  not a complete EHPS); RC-79 (Ford-style 1750 psi / 3.25 GPM),
+  RC-80 (TRW 2683 psi / 6.30 GPM / 25 cc-rev — "will not bottleneck
+  or overheat" downgraded to NeedsEngineeringReview), RC-81 (DC-DC
+  load linkage OpenGap / RuleInput — ~2–3.5 kW → ~160–290 A at 12 V,
+  loops Gate 04 back to Gate 01 low-voltage architecture). Section 30
+  added to the filter register.
+- Owner's corrections applied verbatim: Lee and PartsForHotRods
+  sources downgraded off "final Ford rule"; TRW kept as a hydraulic
+  pump end only; simultaneous brake+steering demand promoted as a
+  NoGoConditionCandidate; vacuum-pump rejection as RuleCandidate;
+  eight OpenGaps carried (Ford pump curve, steering-gear req,
+  accumulator reserve, complete EHPS pressure-flow-current map, EHPS
+  duty/derating, DC-DC sizing, FMVSS 105 mapping, loaded low-speed
+  steering test).
+- PATS-language did **not** recur in batch_22 (held one batch after
+  the review_17/review_18 escalation). Nothing ingested; nothing
+  Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 21 + review_18: Brake/Steering Gate v0.1; PATS-language recurrence escalated
 
 - Archived batch_21 (Gate 04 brake/steering) and review_18 1:1. Owner

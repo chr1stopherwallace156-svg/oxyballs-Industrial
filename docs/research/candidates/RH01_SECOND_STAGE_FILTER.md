@@ -77,6 +77,8 @@ this file supersedes it (see Addendum, section 7).
 | CS-48 | **LeadOnly / SupplierCandidatePath / NeedsDatasheet** (owner review_18) | *"Dodge Electric Hydraulic Power Steering for your build!"* (Mopar 5154662AC EHPS + PSC controller) | hangtight.io (conversion vendor blog) | <https://hangtight.io/blogs/resources/upgrading-to-electric-hydraulic-power-steering-parts-list> | Lead only (batch_21) — an EHPS *idea*, NOT proof a Mopar/TRW pump supports a loaded F-550 hydroboost+steering system; needs a datasheet proving pressure, flow, current, duty cycle — lanes L9/L10 |
 | CS-49 | **RegulatoryCandidate — primary brake lane** (owner review_18, added) | *FMVSS No. 105 — Hydraulic and electric brake systems (49 CFR 571.105)* | NHTSA / eCFR | (locator pending — B-002) | Candidate (owner-added) — the correct primary brake-performance regulation for this platform (covers hydraulic + electric service brakes and parking brakes, normal + emergency performance); replaces batch_21's mis-cited TOP 2-2-607 — lanes L2/L5 |
 | CS-50 | **LeadOnly (video)** | *YouTube "Electric Commercial Vehicles and Powertrain Sizing"* | youtube.com | <https://www.youtube.com/watch?v=3PqEW2Pf90I> | LeadOnly (batch_21) — background video; per standing rule (batch_01) videos are LeadOnly, never rule sources — lane L3 |
+| CS-51 | **SupplierBackground / Ford-StyleComponentCandidate / NeedsFordExactSource** (owner review_19) | *Lee Power Steering — CII pump replacement for Ford, dual-return reservoir for gearbox with hydroboost (PUMP-CII-HB)* | leepowersteering.com (aftermarket) | <https://leepowersteering.com/products/cii-power-steering-pump-replacement-r-metric> | Candidate (batch_22) — a Ford-**style** CII/dual-return option (1750 psi / 3.25 GPM); **the page itself says Ford used many pressure/flow settings — NOT proof of the 2020–2026 F-450/F-550 OEM value** — lanes L10/L4 |
+| CS-52 | **HydraulicPumpCandidate / NeedsElectricMotorDriveData** (owner review_19) | *TRW medium-duty power steering pump assembly 14-20358-010* | trucklinerparts.com (commercial parts reseller) | <https://trucklinerparts.com/products/new-trw-medium-duty-power-steering-pump-assembly-p-n-14-20358-010> | Candidate (batch_22) — real hydraulic values (185 bar/2683 psi relief, 6.30 GPM, 25 cc/rev, −40…+135 °C) but it is a **hydraulic pump end, NOT a complete EHPS**: no motor voltage/current/controller/duty/thermal/reservoir/fault data — not a final EHPS candidate — lanes L9/L10 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -165,6 +167,9 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-76 | Loss-of-assist failure behavior: steering effort rises nonlinearly when hydraulic flow is lost; near max front-axle rating a sudden loss can produce an unmanageable steering condition — dedicated mitigation required *(general principle)* | CS-46 | §"pump requirements", ¶2 | **NoGoConditionCandidate**; needs quantitative manual lock-to-lock steering torque (Nm) on a loaded F-550 at 0 mph (`NeedsPhysicalVerification`) — lanes L10/L4 |
 | RC-77 | Accumulator reserve: the hydroboost gas/nitrogen accumulator stores energy for a limited number of engine-off/assist-off brake actuations *(general principle)* | CS-46 | §"pump requirements", ¶2 | **Rule/Test candidate**; needs the factory Super Duty accumulator pre-charge + reserve-actuation count across temperature (`NeedsSupplierData`) — lanes L10/L4 |
 | RC-78 | EHPS candidate path: Mopar 5154662AC-class electric-hydraulic pumps run independent of engine speed on a high-amp DC circuit, PWM-modulated from vehicle speed *(vendor blog — idea only)* | CS-48 | vendor "Parts Available"/"Control" | **LeadOnly / NeedsSupplierDatasheet**; must prove pressure–flow–current–duty; est. 60–100 A 12 V transient load → forces DC-DC upsizing (recorded as a Gate 04→Gate 01 linkage, candidate) — lanes L9/L10 |
+| RC-79 | Ford-**style** dual-return hydroboost pump candidate: 1750 psi / 3.25 GPM (Lee PUMP-CII-HB) *(supplier value for a Ford-style part; NOT the verified OEM F-450/F-550 number)* | CS-51 | product config index — vendor listing | **SupplierBackground / NeedsFordExactSource** — a candidate data point for the pump curve, not the Ford spec — lanes L10/L4 |
+| RC-80 | Medium-duty hydraulic pump candidate: 185 bar (2683 psi) relief, 6.30 GPM, 25 cc/rev, −40…+135 °C (TRW 14-20358-010) *(hydraulic end only)* | CS-52 | spec index — vendor listing | **HydraulicPumpCandidate / NeedsElectricMotorDriveData**; hydraulic capacity looks adequate to *evaluate*, but suitability depends on the electric motor drive, duty cycle, plumbing, reservoir, fluid temp, and Ford requirements (owner: "will not bottleneck/overheat" claim → **NeedsEngineeringReview**) — lanes L9/L10 |
+| RC-81 | **DC-DC / low-voltage load linkage (owner-promoted)**: an EHPS pushing ~2.5–3.25 GPM at >1500 psi needs ~2.0–3.5 kW; on a 12 V system that peaks ≈160–290 A — forcing an upsized 800V→12V DC-DC converter and/or a 12 V ultracap/AGM buffer. *(batch cites "SAE J134 baseline" without a verified quote — the kW/amp figures are estimates, not sourced values)* | derived over RC-79/80 (unverified) | n/a — engineering estimate | **OpenGap / RuleInput** — Gate 04 loops back into the low-voltage architecture (Gate 01/DC-DC); real numbers come from a complete EHPS datasheet + engineering review — lanes L5/L9 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -1552,6 +1557,70 @@ steering test procedure. Next payload (owner prompt): Ford-specific +
 supplier-specific only — generic hydroboost is EngineeringBackground,
 Dodge/Mopar is LeadOnly-until-datasheet, no FMVSS-compliance claim, no
 PATS-bypass language.
+
+---
+
+## 30. Batch 22 + owner review_19 — Brake/Steering Gate v0.2 (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_22_brake_steering_ehps_pumps.md`
+and `docs/research/raw/owner_reviews/review_19_batch_22_verdict.md`.
+Row additions: CS-51/52, RC-79..81. **Owner label adopted:
+Brake/Steering Gate v0.2 — architecture problem proven; replacement
+system NOT yet proven.**
+
+### PATS recurrence did NOT repeat — the standing rule held
+
+Batch_22's Gate 05 roadmap reads "CAN Bus Integration & Digital
+Cluster Interface Gate" with **no bypass/override language.** After the
+review_18 escalation, the correction held on the very next batch.
+Recorded as evidence the terminology rule works when carried in the
+handoff — though the M10 forbidden-phrase scanner proposal stands
+(human vigilance caught it twice; automation should be the backstop).
+
+### First Ford-adjacent numbers — held at the right altitude
+
+Three pressure/flow data points now on file, none a verified Ford OEM
+value: generic hydroboost minimum 2 GPM/1200 psi (RC-75); Ford-**style**
+1750 psi/3.25 GPM (RC-79); medium-duty 2683 psi/6.30 GPM (RC-80). The
+Lee page's own admission ("Ford used many pressure/flow settings")
+is the reason RC-79 stays SupplierBackground, not an OEM spec.
+
+### Owner corrections applied
+
+- Lee (CS-51/RC-79) → SupplierBackground / Ford-StyleComponentCandidate
+  / NeedsFordExactSource — not "the native Ford Super Duty
+  specification."
+- HotRods hydroboost (CS-46) → EngineeringBackground /
+  HydroboostPrincipleCandidate / NeedsFordExactSource (unchanged).
+- TRW (CS-52/RC-80) → **HydraulicPumpCandidate /
+  NeedsElectricMotorDriveData** — a pump *end*, not a complete EHPS.
+- "will not bottleneck or overheat" → **NeedsEngineeringReview**
+  (softened to: hydraulic capacity is *evaluable*, suitability depends
+  on motor drive/duty/plumbing/reservoir/fluid temp/Ford req).
+- **Promoted:** vacuum-pump rejection = RuleCandidate; simultaneous
+  brake+steering demand = NoGoConditionCandidate (RC-74, reaffirmed);
+  DC-DC load impact = OpenGap/RuleInput (RC-81).
+
+### The Gate 04 → Gate 01 loop-back (important)
+
+RC-81 records that brake/steering is no longer purely hydraulic — an
+EHPS at ~2–3.5 kW is a 160–290 A event on a 12 V bus, which feeds back
+into DC-DC converter sizing and 12 V buffering. Note: the batch cited
+"SAE J134 baseline" for the kW figure **without a verified quote** —
+the kW/amp numbers are engineering estimates (fenced), not sourced
+values; a real EHPS datasheet closes them.
+
+### Gate 04 v0.2 — still blocked
+
+Exact Ford F-450/F-550 pump curve; Ford steering-gear requirement;
+hydroboost accumulator reserve; a COMPLETE EHPS motor+controller
+dataset (voltage, cont./peak current, flow & pressure curves, relief,
+duty cycle, thermal derating, control method, reservoir, fluid, ports,
+faults, mounting, medium-duty suitability); DC-DC sizing; FMVSS 105
+test mapping; loaded low-speed steering test. Next payload (owner
+prompt): **complete EHPS systems** — hydraulic-pump-only data is
+explicitly not enough.
 
 ---
 

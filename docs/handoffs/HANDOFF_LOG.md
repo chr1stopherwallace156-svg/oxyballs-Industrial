@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-15 — Claude Code — task complete (batch 21 + review_18 — Brake/Steering Gate v0.1)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-15
+- Reason for handoff: task complete (batch 21 + review_18 — Brake/Steering Gate v0.1); awaiting owner decisions and/or next batch
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `f0cc932`; end commit: the batch-21 reconciliation commit
+- Work: batch 21 (Gate 04 brake/steering) + review_18 reconciled — Brake/Steering Gate v0.1 (hydraulic dependency identified, vacuum-pump path rejected, EHPS path opened, Ford-specific data still missing). CS-46..50, RC-74..78, section 29. TOP 2-2-607 rejected for Gate 04 (self-citation); FMVSS 105 added as primary brake regulation lane (CS-49). PATS-language recurrence escalated (M10 forbidden-phrase scanner candidate). Nothing ingested; nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean two-universe; index.html disposition; L2/L4/L6 module mapping; L9 lane name; Artifact Intake Form.
+
 ## 2026-07-15 — Claude Code — milestone complete (handoff protocol installed)
 
 ### (archived handoff)
