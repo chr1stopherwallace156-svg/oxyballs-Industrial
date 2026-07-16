@@ -227,22 +227,108 @@ def run_rubric_tests() -> dict:
             all_null and out["aggregate_score"] is None and out["confidence_status"] == "NOT_EVALUATED",
         )
     )
-    # partial inputs still leave missing metrics null
+    # partial inputs: topology suite stays null; poly budget alone is insufficient without geometry_role
     out2 = evaluate_rubric(mesh, {"polygon_count": 1000, "target_poly_budget": 1000})
-    # first metric may still fail formula_id CLAMP_01 on wrong input wiring — MESH_POLY uses CLAMP_01 on first required only
-    # Our evaluate uses first required_input with CLAMP_01 — polygon_count=1000 → 1.0 after clamp? CLAMP_01 clamps raw value not the formula string.
-    # For IDENTITY-style we need proper formula — for this test focus on missing texture_count remains null
-    tex = [m for m in out2["metrics"] if m["metric_id"] == "MESH_TEXTURE_PRESENT"][0]
-    results.append(rec("EAE-RUB-002", "partial missing stays null", json.dumps(tex), tex["score"] is None and tex["scoring_status"] == "NOT_EXECUTED"))
+    topo = next(m for m in out2["metrics"] if m["metric_id"] == "MVR-001-TOPOLOGY_SUITE")
+    poly = next(m for m in out2["metrics"] if m["metric_id"] == "MVR-002-POLY_EFFICIENCY")
+    results.append(
+        rec(
+            "EAE-RUB-002",
+            "partial missing stays null (role-aware mesh suite)",
+            json.dumps({"topo": topo, "poly": poly}),
+            topo["score"] is None
+            and topo["evaluation_status"] == "NOT_EXECUTED"
+            and poly["score"] is None
+            and poly["evaluation_status"] == "NOT_EXECUTED",
+        )
+    )
+
+    # Role declared + poly budget can execute without inventing topology scores
+    out2b = evaluate_rubric(
+        mesh,
+        {
+            "geometry_role": "OPEN_SURFACE",
+            "polygon_count": 1000,
+            "target_poly_budget": 1000,
+            "provenance_score": 0.8,
+        },
+    )
+    topo_b = next(m for m in out2b["metrics"] if m["metric_id"] == "MVR-001-TOPOLOGY_SUITE")
+    poly_b = next(m for m in out2b["metrics"] if m["metric_id"] == "MVR-002-POLY_EFFICIENCY")
+    results.append(
+        rec(
+            "EAE-RUB-002b",
+            "OPEN_SURFACE allows poly scoring; topology remains NOT_EXECUTED until diagnostics",
+            json.dumps({"topo": topo_b, "poly": poly_b, "cov": out2b["coverage_ratio"]}),
+            topo_b["score"] is None
+            and topo_b["evaluation_status"] == "NOT_EXECUTED"
+            and poly_b["score"] == 1.0
+            and out2b["coverage_ratio"] > 0.0,
+        )
+    )
 
     cad = json.loads((PROPOSALS / "CAD_ENGINEERING_RUBRIC.json").read_text())
-    out3 = evaluate_rubric(cad, {"dimensional_error_mm": 0.0, "tolerance_mm": 1.0, "completeness_ratio": 1.0, "provenance_score": 0.9})
+    out3 = evaluate_rubric(
+        cad,
+        {
+            "same_property": True,
+            "same_coordinate_frame": True,
+            "same_datum": True,
+            "same_units": True,
+            "same_configuration_id": True,
+            "physical_state_declared": True,
+            "comparability_gate_pass": True,
+            "measured_dim": 100.0,
+            "nominal_dim": 100.0,
+            "completeness_ratio": 1.0,
+            "provenance_score": 0.9,
+        },
+    )
+    zero = evaluate_rubric(
+        cad,
+        {
+            "same_property": True,
+            "same_coordinate_frame": True,
+            "same_datum": True,
+            "same_units": True,
+            "same_configuration_id": True,
+            "physical_state_declared": True,
+            "comparability_gate_pass": True,
+            "measured_dim": 1.0,
+            "nominal_dim": 0.0,
+            "completeness_ratio": 1.0,
+            "provenance_score": 0.9,
+        },
+    )
+    clamp = evaluate_rubric(
+        cad,
+        {
+            "same_property": True,
+            "same_coordinate_frame": True,
+            "same_datum": True,
+            "same_units": True,
+            "same_configuration_id": True,
+            "physical_state_declared": True,
+            "comparability_gate_pass": True,
+            "measured_dim": 100.0,
+            "nominal_dim": 10.0,
+            "completeness_ratio": 1.0,
+            "provenance_score": 0.9,
+        },
+    )
+    tol_metric = next(m for m in zero["metrics"] if m["metric_id"] == "CER-001-TOLERANCE")
+    clamp_tol = next(m for m in clamp["metrics"] if m["metric_id"] == "CER-001-TOLERANCE")
     results.append(
         rec(
             "EAE-RUB-003",
-            "full CAD inputs evaluate",
-            json.dumps({"agg": out3["aggregate_score"], "cov": out3["coverage_ratio"]}),
-            out3["execution_status"] == "EXECUTED" and out3["aggregate_score"] is not None and out3["coverage_ratio"] == 1.0,
+            "CAD evaluates when comparable; nominal=0 NOT_EXECUTED; large error clamps to 0",
+            json.dumps({"agg": out3["aggregate_score"], "zero_tol": tol_metric, "clamp": clamp_tol}),
+            out3["execution_status"] == "EXECUTED"
+            and out3["aggregate_score"] is not None
+            and tol_metric["score"] is None
+            and tol_metric["evaluation_status"] == "NOT_EXECUTED"
+            and clamp_tol["score"] == 0.0
+            and clamp_tol["evaluation_status"] == "EVALUATED",
         )
     )
 
@@ -445,8 +531,33 @@ def main() -> int:
 
     report = f"""# EAE_READINESS_REPORT
 
-**execution_timestamp:** `{utc()}`
-**final_status:** `{status}`
+**execution_timestamp:** `{utc()}`  
+**final_status:** `{status}`  
+**decision:** `DT-D034`
+
+## Distinction (mandatory)
+
+| Claim | Truth |
+|---|---|
+| EAE **specification** exists | **ACCEPTED** |
+| Full seven-stage EAE **executable product** | **ABSENT / PENDING** |
+| EAE **CORE INGESTION** primitives (fixture-validated) | **PRESENT** — not production acquisition |
+| Specification exists | ≠ working engine exists |
+
+Do not confuse fixture-validated library primitives with an operational acquisition engine that can download, verify marketplace sources, parse STEP/FBX, score candidates, or promote geometry into passports.
+
+## Recommended accepted state
+
+| Item | Status |
+|---|---|
+| EAE specification | `ACCEPTED` |
+| EAE executable implementation (full) | `ABSENT` |
+| EAE CORE INGESTION milestone | `PARTIAL_FIXTURE_VALIDATED` — next build target |
+| Candidate scoring | `NOT_EXECUTED` |
+| Rubric profiles | `DRAFT` (`proposals/eae/`) |
+| Event model | `OPTIONAL_PROPOSAL` (parked) |
+| Frozen passport rc1 | `UNCHANGED` |
+| Door vertical slice | `BLOCKED_BY_MISSING_ASSET` |
 
 ## Rationale
 
@@ -460,7 +571,7 @@ def main() -> int:
 | Idempotency / events | {idem['suite_pass_or_fail']} ({idem['passed']}/{idem['total']}) |
 | Rubric | {rub['suite_pass_or_fail']} ({rub['passed']}/{rub['total']}) |
 
-## Capability summary
+## Capability matrix (code audit)
 
 | Capability | Status |
 |---|---|
@@ -468,19 +579,42 @@ def main() -> int:
     for c in audit["capabilities"]:
         report += f"| {c['capability']} | {c['execution_status']} |\n"
     report += """
+## First implementation milestone (do not build full EAE yet)
+
+**EAE CORE INGESTION** only:
+
+```text
+local fixture → quarantine → file-type detection → SHA-256
+  → safe archive extraction → manifest generation → repeat-ingestion test
+```
+
+See `proposals/eae/EAE_CORE_INGESTION_MILESTONE.md`.
+
 ## Candidates (not scored)
 
-| Candidate | State |
-|---|---|
-| CAND-00031-CGT | DISCOVERED / NOT_ACQUIRED — no file, hash, parse, inventory, score, GEO id |
-| CAND-771-GRAB | DISCOVERED / NOT_ACQUIRED — no file, hash, parse, inventory, score, GEO id |
+| Metric | CAND-00031-CGT | CAND-771-GRAB |
+|---|---|---|
+| State | DISCOVERED | DISCOVERED |
+| Acquisition | NOT_ACQUIRED | NOT_ACQUIRED |
+| Local file path | null | null |
+| Hash / parse / inventory | null | null |
+| Geometry asset ID | null | null |
+| Score / status | null / NOT_EXECUTED | null / NOT_EXECUTED |
+
+## Rubric / event refinements
+
+- Mesh topology: role-classified (`CLOSED_SOLID` / `OPEN_SURFACE` / …); watertight not always required — see `proposals/eae/MESH_VISUAL_RUBRIC.json`
+- CAD accuracy: zero-division guards + datum/frame/units/config prerequisites — see `proposals/eae/CAD_ENGINEERING_RUBRIC.json`
+- Append-only events: stronger fields; **parked** until CORE INGESTION is solid — see `proposals/eae/PASSPORT_APPEND_ONLY_EVENT_MODEL.md`
+
+Missing rubric inputs → `{ "score": null, "evaluation_status": "NOT_EXECUTED" }` — never invent `0.0` as a fake measurement.
 
 ## Frozen kernel
 
 `schemas/component-passport.schema.json` unchanged. Append-only passport events remain under `proposals/eae/`.
 
 """
-    report += f"\n{status}\n"
+    report += f"{status}\n"
     (RESULTS / "EAE_READINESS_REPORT.md").write_text(report)
     print(json.dumps({"final_status": status, "security": sec["suite_pass_or_fail"], "idempotency": idem["suite_pass_or_fail"], "rubric": rub["suite_pass_or_fail"]}, indent=2))
     return 0 if status != "EDTS_EAE_IMPLEMENTED_VALIDATION_FAILED" else 1

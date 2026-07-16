@@ -1,5 +1,5 @@
 {
-  "execution_timestamp": "2026-07-16T17:49:40.126614+00:00",
+  "execution_timestamp": "2026-07-16T17:56:40.369616+00:00",
   "policy": "Do not score or create GEO records while NOT_ACQUIRED",
   "candidates": [
     {

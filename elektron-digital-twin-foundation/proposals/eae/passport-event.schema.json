@@ -1,32 +1,54 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:edts:proposal:passport-event:v1",
-  "title": "EDTS Passport Event (PROPOSAL — NOT ACTIVE)",
+  "title": "EDTS Passport Event (OPTIONAL PROPOSAL — NOT ACTIVE)",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "event_id",
-    "sequence",
+    "event_schema_version",
+    "passport_id",
+    "sequence_number",
     "event_type",
-    "timestamp",
+    "payload",
     "previous_event_hash",
     "event_hash",
-    "passport_id",
+    "hash_algorithm",
+    "recorded_at",
+    "recorded_by",
     "proposal_status"
   ],
   "properties": {
-    "proposal_status": { "const": "PROPOSAL_NOT_ACTIVATED" },
-    "event_id": { "type": "string" },
-    "sequence": { "type": "integer", "minimum": 1 },
+    "proposal_status": { "const": "OPTIONAL_PROPOSAL" },
+    "event_id": { "type": "string", "pattern": "^PASEVT-[0-9]{6,}$" },
+    "event_schema_version": { "type": "string" },
+    "passport_id": { "type": "string", "pattern": "^PP-[A-Z0-9-]+$" },
+    "sequence_number": { "type": "integer", "minimum": 1 },
     "event_type": {
       "type": "string",
-      "enum": ["ADD_GEOMETRY_ROLE", "SUPERSEDE", "NOTE", "ATTACH_EVIDENCE_LINK"]
+      "enum": [
+        "ASSET_ACQUIRED",
+        "ADD_GEOMETRY_ROLE",
+        "ATTACH_EVIDENCE_LINK",
+        "SUPERSEDE",
+        "CORRECTION",
+        "NOTE"
+      ]
     },
-    "timestamp": { "type": "string" },
-    "previous_event_hash": { "type": ["string", "null"] },
+    "payload": { "type": "object" },
+    "payload_schema_id": { "type": ["string", "null"] },
+    "previous_event_hash": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+      ]
+    },
     "event_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
-    "passport_id": { "type": "string", "pattern": "^PP-[A-Z0-9-]+$" },
-    "supersedes_event_id": { "type": ["string", "null"] },
-    "data": { "type": ["object", "null"] }
+    "hash_algorithm": { "const": "SHA-256" },
+    "canonicalization": { "type": "string" },
+    "recorded_at": { "type": "string" },
+    "recorded_by": { "type": "string" },
+    "process_id": { "type": ["string", "null"] },
+    "supersedes_event_id": { "type": ["string", "null"] }
   }
 }

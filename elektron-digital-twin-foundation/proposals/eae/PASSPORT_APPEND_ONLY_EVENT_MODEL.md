@@ -1,25 +1,53 @@
-# Passport Append-Only Event Model (Proposal)
+# Passport Append-Only Event Model (OPTIONAL PROPOSAL — PARKED)
 
-**Status:** `PROPOSAL_NOT_ACTIVATED`  
+**Status:** `OPTIONAL_PROPOSAL` · `NOT_ACTIVATED`  
+**Activation gate:** EAE CORE INGESTION proven; do not activate for scoring or GEO promotion yet  
 **Frozen rc1 passport schema:** unchanged  
 **Machine drafts:** `passport-event.schema.json`, `passport-current-state-projection.schema.json`
 
-## Problem with “append to validation_history”
+## Problem with “append to validation_history on the passport”
 
-Appending fields onto a live passport object is still a mutation of that object’s bytes and identity over time. Audit language must not claim the passport is unmodified when history grows in-place.
+Appending fields onto a live passport object still mutates that object. Do not claim the passport is unmodified when history grows in-place.
 
-## Design
+## Parked event shape (stronger than UUID-only)
 
-1. **Immutable passport events** live in an event log (separate files/records), each with:
-   - `event_id`, `sequence`, `event_type`, `timestamp`
-   - `previous_event_hash`
-   - `event_hash` over canonical payload
-2. **Supersession/correction** uses `SUPERSEDE` events pointing at prior `event_id` — no deletion.
-3. **Current-state projection** is a deterministic fold over the event log (`eae_core.events.project_current_state`).
-4. Active rc1 passport remains an **index snapshot** that may optionally point at a projection id later — only after validation and explicit reopen/activation.
+```json
+{
+  "event_id": "PASEVT-000001",
+  "event_schema_version": "1.0.0",
+  "passport_id": "PP-VEH000001-DOOR-FL-001",
+  "sequence_number": 1,
+  "event_type": "ASSET_ACQUIRED",
+  "payload": {},
+  "payload_schema_id": "urn:edts:proposal:passport-event-payload:asset-acquired:v1",
+  "previous_event_hash": null,
+  "event_hash": "sha256:…",
+  "hash_algorithm": "SHA-256",
+  "canonicalization": "JCS_RFC8785_OR_EDTS_SORTED_JSON",
+  "recorded_at": "2026-07-16T00:00:00Z",
+  "recorded_by": "EAE",
+  "process_id": "eae-core-ingestion",
+  "supersedes_event_id": null
+}
+```
 
-## Forbidden until activation
+## Required controls (before activation)
 
-- Writing `GEO-*` / geometry roles for unacquired candidates
-- Claiming validation_history mutation is “non-modifying”
-- Activating these schemas as replacements for `schemas/component-passport.schema.json`
+| Control | Why |
+|---|---|
+| `sequence_number` | UUID alone does not order events |
+| `previous_event_hash` + `event_hash` | Tamper-evident chain |
+| `hash_algorithm` + deterministic serialization | Reproducible digests |
+| Payload schema **by event_type** | Typed validation |
+| `SUPERSEDE` / correction types | No deletion of history |
+| Reject two children with same `previous_event_hash` (fork) | Linear log unless explicitly branched |
+
+## Current-state projection
+
+Replay events from genesis (`previous_event_hash: null`) to the latest accepted tip. Projection is derived, not authoritative over rc1 until explicitly activated.
+
+## Forbidden now
+
+- Activating this model in runtime
+- Writing GEO roles for `NOT_ACQUIRED` candidates
+- Replacing `schemas/component-passport.schema.json`

@@ -4,11 +4,12 @@
 **Not a kernel schema.** Frozen rc1 schemas are untouched.  
 **Implementation:** `tools/evidence_acquisition/` (+ `eae_core/` primitives)  
 **Audit:** `verification/results/eae-implementation-audit.json`  
-**Decisions:** `DT-D032`, `DT-D033`
+**Decisions:** `DT-D032`, `DT-D033`, `DT-D034`  
+**Next build:** `EAE CORE INGESTION` — see `proposals/eae/EAE_CORE_INGESTION_MILESTONE.md`
 
 ## Shift
 
-Architecture is frozen for the vertical slice. Effort moves to **empirical evidence**: acquire → verify → parse → inventory → grade → attach.
+Architecture is frozen for the vertical slice. Do **not** confuse specification existence with a working engine. First build target is **CORE INGESTION** (fixture→quarantine→detect→hash→extract→manifest→idempotency), not full seven-stage evidence intelligence.
 
 “Asset acquisition” is a special case of **Evidence Acquisition**. The same pipeline should eventually ingest CAD/meshes, OEM manuals, photos, scans, procedures, torque charts, material data, etc.
 

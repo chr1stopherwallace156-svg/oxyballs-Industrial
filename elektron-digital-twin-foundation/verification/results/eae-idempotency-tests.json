@@ -1,6 +1,6 @@
 {
   "suite": "eae-idempotency-tests",
-  "execution_timestamp": "2026-07-16T17:49:40.126018+00:00",
+  "execution_timestamp": "2026-07-16T17:56:40.368968+00:00",
   "runtime": "python3",
   "total": 5,
   "passed": 5,
@@ -9,7 +9,7 @@
   "results": [
     {
       "test_id": "EAE-IDEM-001",
-      "execution_timestamp": "2026-07-16T17:49:40.125825+00:00",
+      "execution_timestamp": "2026-07-16T17:56:40.368805+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "deterministic sha256",
@@ -20,7 +20,7 @@
     },
     {
       "test_id": "EAE-IDEM-002",
-      "execution_timestamp": "2026-07-16T17:49:40.125958+00:00",
+      "execution_timestamp": "2026-07-16T17:56:40.368911+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "duplicate file same hash",
@@ -31,18 +31,18 @@
     },
     {
       "test_id": "EAE-IDEM-003",
-      "execution_timestamp": "2026-07-16T17:49:40.126000+00:00",
+      "execution_timestamp": "2026-07-16T17:56:40.368951+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "append-only preserves prior event",
-      "actual_result": "sha256:e54be613ef6ab7b58fb0f0badbb0f83789124de692271f17beed30b530cf00df",
+      "actual_result": "sha256:ce6fa324fcb9fce51cb0482336969e54c089265c15a1e36242e0448188801c47",
       "pass_or_fail": "PASS",
       "error_message": null,
       "evidence_file": null
     },
     {
       "test_id": "EAE-IDEM-004",
-      "execution_timestamp": "2026-07-16T17:49:40.126010+00:00",
+      "execution_timestamp": "2026-07-16T17:56:40.368962+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "supersession removes active role",
@@ -53,7 +53,7 @@
     },
     {
       "test_id": "EAE-IDEM-005",
-      "execution_timestamp": "2026-07-16T17:49:40.126013+00:00",
+      "execution_timestamp": "2026-07-16T17:56:40.368965+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "sha256_bytes stable",

@@ -563,3 +563,24 @@ Append-only record of digital twin foundation decisions.
 - **validation_evidence:** `verification/results/EAE_READINESS_REPORT.md`
 - **final_status:** `EDTS_EAE_SPECIFICATION_READY_IMPLEMENTATION_PENDING`
 
+
+## DT-D034 — EAE spec refinement; CORE INGESTION first
+
+- **Change-control record:** [`decisions/DT-D034_EAE_SPEC_REFINEMENT_CORE_INGESTION.json`](decisions/DT-D034_EAE_SPEC_REFINEMENT_CORE_INGESTION.json)
+- **decision_id:** `DT-D034`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **scope:** Role-aware mesh rubric; CAD accuracy guards; parked stronger event model; CORE INGESTION as first build milestone
+- **reason:** Keep specification-vs-implementation distinction. Mesh manifold-face ratio and unguarded CAD relative-error are insufficient. Do not build the full seven-stage EAE before CORE INGESTION.
+- **accepted_state:**
+  - EAE specification `ACCEPTED`
+  - Full executable `ABSENT`
+  - Candidate scoring `NOT_EXECUTED`
+  - Rubric profiles `DRAFT`
+  - Event model `OPTIONAL_PROPOSAL`
+  - Frozen passport rc1 `UNCHANGED`
+  - Door vertical slice `BLOCKED_BY_MISSING_ASSET`
+- **next_build_priority:** `EAE_CORE_INGESTION`
+- **validation_evidence:** `verification/results/EAE_READINESS_REPORT.md`, `verification/results/eae-rubric-tests.json`
+- **final_status:** `EDTS_EAE_SPECIFICATION_READY_IMPLEMENTATION_PENDING`
+
