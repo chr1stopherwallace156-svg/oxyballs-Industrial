@@ -1,11 +1,11 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.6.0",
-  "updated_at": "2026-07-16T14:00:00Z",
+  "version": "0.7.0",
+  "updated_at": "2026-07-16T14:15:00Z",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
-  "phase": "EDTS_OS_V3_ACTIVE",
+  "phase": "EDTS_OS_PLATFORM_BLUEPRINT_ACTIVE",
   "readiness": "L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE",
   "milestone": "L1_SOURCE_PACK_01",
   "source_pack_01_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
@@ -30,7 +30,7 @@
   "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "Team A: acquire/hash OEM PDFs and promote Evidence Graph edges; Team B: CMP-AXL-M300 discovery; Team C: door separation on ASSET-00031 (draft passport); Team D: passport dynamic loader; geometry freeze blocked",
+  "next_action": "Continue P1 OEM file acquisition; expand P2 component identity registry; Team D P4 loader; do not claim P3-P6 complete",
   "owner_approval_required": true,
   "governance_status": {
     "L00_CONFIRMED_CORRECTIONS": "ACCEPTED",
@@ -98,7 +98,14 @@
     "HARD_RULE_0_COMPONENT_FIRST": "ACTIVE",
     "CONFIDENCE_PERCENTAGES": "DEPRECATED",
     "L01_EVIDENCE_GRAPH": "ACTIVE_OPERATIONAL_HONEST",
-    "L01_COMPONENT_PASSPORTS": "DRAFT_CANDIDATE"
+    "L01_COMPONENT_PASSPORTS": "DRAFT_CANDIDATE",
+    "EDTS_OS_ARCHITECTURE_BLUEPRINT": "ACTIVE_V1",
+    "EDTS_OS_IMPLEMENTATION_ROADMAP": "ACTIVE_V1",
+    "EDTS_OS_PLATFORM_MASTER_SCHEMA": "SEEDED_IDENTITY_VERSION_FIRST",
+    "USS_IDENTITY": "SCHEMA_SEEDED",
+    "USS_VERSION": "SCHEMA_SEEDED",
+    "CMP_SD_FRAME_001": "DRAFT_CANDIDATE",
+    "CMP_FR_145": "DEPRECATED_ALIAS"
   },
   "reference_vehicle": {
     "status": "provisional_profile_locked",
@@ -208,7 +215,7 @@
       "status": "factual_verification_required",
       "geometry_status": "blocked",
       "research_status": "L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE",
-      "phase": "EDTS_OS_V3_ACTIVE",
+      "phase": "EDTS_OS_PLATFORM_BLUEPRINT_ACTIVE",
       "milestone": "L1_SOURCE_PACK_01",
       "source_pack_01_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
       "gate_status": "L1_DOCUMENT_ACQUISITION_READY",
@@ -367,5 +374,18 @@
   "edts_os_platform_configurator": "EDTS_OS_PLATFORM_CONFIGURATOR.md",
   "components_root": "components/",
   "configurations_root": "configurations/",
-  "active_vehicle_configuration": "configurations/VEH_CFG_F450_2019_REG_CAB_145_3.json"
+  "active_vehicle_configuration": "configurations/VEH_CFG_F450_2019_REG_CAB_145_3.json",
+  "platform_blueprint": "EDTS_OS_ARCHITECTURE_BLUEPRINT.md",
+  "platform_roadmap": "EDTS_OS_IMPLEMENTATION_ROADMAP.md",
+  "platform_master_schema": "schemas/edts-os-platform-master.schema.json",
+  "platform_instance": "registries/EDTS_OS_PLATFORM_INSTANCE.json",
+  "component_identity_registry": "registries/COMPONENT_IDENTITY_REGISTRY.json",
+  "edts_os_phases": {
+    "P1": "SEEDED",
+    "P2": "SEEDED",
+    "P3": "PLANNED",
+    "P4": "IN_PROGRESS",
+    "P5": "PLANNED",
+    "P6": "PLANNED"
+  }
 }

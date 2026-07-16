@@ -1,0 +1,181 @@
+{
+  "$id": "urn:edts:schema:os-platform-master:v1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EDTS-OS Platform Master Schema (Identity + Versioning First)",
+  "description": "Root contract for the EDTS-OS platform. P2 priority: stable component identity and evidence-tied versioning. Other subsystem schemas mount as $refs as phases land.",
+  "type": "object",
+  "required": [
+    "platform_id",
+    "architecture_version",
+    "hard_rule_0",
+    "identity",
+    "versioning",
+    "subsystems"
+  ],
+  "properties": {
+    "platform_id": {
+      "type": "string",
+      "const": "EDTS-OS"
+    },
+    "architecture_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "hard_rule_0": {
+      "type": "string",
+      "const": "COMPONENT_FIRST"
+    },
+    "confidence_percentages": {
+      "type": "string",
+      "const": "DEPRECATED"
+    },
+    "identity": {
+      "$ref": "component-identity.schema.json"
+    },
+    "versioning": {
+      "$ref": "#/definitions/versioningPolicy"
+    },
+    "subsystems": {
+      "type": "object",
+      "required": [
+        "USS-IDENTITY",
+        "USS-VERSION",
+        "USS-EVIDENCE",
+        "USS-COMPLIB"
+      ],
+      "properties": {
+        "USS-IDENTITY": { "$ref": "#/definitions/subsystemStatus" },
+        "USS-VERSION": { "$ref": "#/definitions/subsystemStatus" },
+        "USS-EVIDENCE": { "$ref": "#/definitions/subsystemStatus" },
+        "USS-COMPLIB": { "$ref": "#/definitions/subsystemStatus" },
+        "USS-ASSET": { "$ref": "#/definitions/subsystemStatus" },
+        "USS-COMPAT": { "$ref": "#/definitions/subsystemStatus" },
+        "USS-SIM": { "$ref": "#/definitions/subsystemStatus" },
+        "USS-VALIDATE": { "$ref": "#/definitions/subsystemStatus" },
+        "USS-API": { "$ref": "#/definitions/subsystemStatus" }
+      },
+      "additionalProperties": false
+    },
+    "phase_progress": {
+      "type": "object",
+      "properties": {
+        "P1": { "$ref": "#/definitions/phaseStatus" },
+        "P2": { "$ref": "#/definitions/phaseStatus" },
+        "P3": { "$ref": "#/definitions/phaseStatus" },
+        "P4": { "$ref": "#/definitions/phaseStatus" },
+        "P5": { "$ref": "#/definitions/phaseStatus" },
+        "P6": { "$ref": "#/definitions/phaseStatus" }
+      }
+    },
+    "engine_vs_data": {
+      "type": "object",
+      "properties": {
+        "engine_root": { "type": "string" },
+        "data_roots": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "subsystemStatus": {
+      "type": "object",
+      "required": ["id", "name", "implementation_status"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "implementation_status": {
+          "type": "string",
+          "enum": [
+            "PLANNED",
+            "SCHEMA_SEEDED",
+            "PARTIAL",
+            "ACTIVE",
+            "COMPLETE"
+          ]
+        },
+        "schema_ref": { "type": ["string", "null"] },
+        "notes": { "type": "string" }
+      }
+    },
+    "phaseStatus": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["PLANNED", "SEEDED", "IN_PROGRESS", "GATE_PENDING", "COMPLETE"]
+        },
+        "deliverable": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+    "versioningPolicy": {
+      "type": "object",
+      "required": [
+        "scheme",
+        "bump_rules",
+        "evidence_pin_required"
+      ],
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "enum": ["INTEGER_MONOTONIC", "SEMVER"],
+          "description": "P2 default is INTEGER_MONOTONIC on passports; SEMVER reserved for platform releases."
+        },
+        "passport_field": {
+          "type": "string",
+          "const": "current_version"
+        },
+        "bump_rules": {
+          "type": "object",
+          "required": ["major_content_change", "evidence_revision", "geometry_source_change"],
+          "properties": {
+            "major_content_change": {
+              "type": "string",
+              "description": "Any mesh topology replacement, datum shift, or interface change increments version."
+            },
+            "evidence_revision": {
+              "type": "string",
+              "description": "New NORMALIZED Tier A edge that changes claimed dimensions increments version."
+            },
+            "geometry_source_change": {
+              "type": "string",
+              "description": "Changing mesh_source asset ID increments version."
+            },
+            "metadata_only": {
+              "type": "string",
+              "description": "Notes/typo fixes do not bump version; record in correction log instead."
+            }
+          }
+        },
+        "evidence_pin_required": {
+          "type": "boolean",
+          "const": true
+        },
+        "evidence_pin_shape": {
+          "type": "object",
+          "properties": {
+            "parameter_node_ids": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "source_ids": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "min_verification_status": {
+              "type": "string"
+            }
+          }
+        },
+        "immutable_history": {
+          "type": "boolean",
+          "const": true,
+          "description": "Prior versions remain addressable; never overwrite historical passport blobs in place without a new version."
+        }
+      }
+    }
+  }
+}

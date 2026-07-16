@@ -4,7 +4,13 @@
 **Architecture version:** `3.0.0`  
 **Effective Date:** 2026-07-16  
 **Supersedes process posture:** Version 2 (Engineering Process) for system framing  
-**Binding protocol:** [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) v2.0.0+
+**Binding protocol:** [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) v2.0.0+  
+**Blueprint:** [EDTS_OS_ARCHITECTURE_BLUEPRINT.md](EDTS_OS_ARCHITECTURE_BLUEPRINT.md)  
+**Roadmap:** [EDTS_OS_IMPLEMENTATION_ROADMAP.md](EDTS_OS_IMPLEMENTATION_ROADMAP.md)  
+**Master schema:** [schemas/edts-os-platform-master.schema.json](schemas/edts-os-platform-master.schema.json)  
+**Platform instance:** [registries/EDTS_OS_PLATFORM_INSTANCE.json](registries/EDTS_OS_PLATFORM_INSTANCE.json)
+
+**Mindset:** We are building a **factory that builds trucks**, not the truck itself.
 
 ---
 

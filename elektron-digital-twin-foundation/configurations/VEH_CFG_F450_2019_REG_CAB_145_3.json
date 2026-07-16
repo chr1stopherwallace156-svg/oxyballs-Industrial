@@ -25,11 +25,14 @@
     },
     {
       "slot": "FRAME_RAILS",
-      "component_id": "CMP-FR-145",
-      "passport": "components/CMP_FR_145.json",
+      "component_id": "CMP-SD-FRAME-001",
+      "passport": "components/CMP_SD_FRAME_001.json",
       "version_pin": 1,
-      "inherit": false,
-      "unique_to_configuration": true
+      "variant_id": "VAR-145_3-WB-60-CA",
+      "inherit": true,
+      "unique_to_configuration": false,
+      "configuration_unique_fields": ["wheelbase_in", "cab_to_axle_in"],
+      "notes": "Family component with configuration-unique variant pin (not a one-off F-450-only engine object)."
     },
     {
       "slot": "REAR_AXLE_ASSEMBLY",

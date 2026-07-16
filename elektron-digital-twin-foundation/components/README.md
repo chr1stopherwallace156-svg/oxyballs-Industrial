@@ -5,14 +5,19 @@ Independent, reusable component registries. Vehicles do not own these files; veh
 | Component ID | Passport | Status |
 |---|---|---|
 | `CMP-SD-044-L` | [CMP_PASS_FR_DOOR_L.json](CMP_PASS_FR_DOOR_L.json) | `DRAFT_CANDIDATE` |
+| `CMP-SD-FRAME-001` | [CMP_SD_FRAME_001.json](CMP_SD_FRAME_001.json) | `DRAFT_CANDIDATE` (canonical frame family) |
 | `CMP-AXL-M300` | [CMP_AXL_M300.json](CMP_AXL_M300.json) | `DRAFT_CANDIDATE` (Team B discovery) |
-| `CMP-FR-145` | [CMP_FR_145.json](CMP_FR_145.json) | `DRAFT_CANDIDATE` (placeholder frame) |
+| `CMP-FR-145` | [CMP_FR_145.json](CMP_FR_145.json) | **DEPRECATED** → `CMP-SD-FRAME-001` |
 
-Schema: [`../schemas/component-passport.schema.json`](../schemas/component-passport.schema.json)
+Identity registry: [`../registries/COMPONENT_IDENTITY_REGISTRY.json`](../registries/COMPONENT_IDENTITY_REGISTRY.json)  
+Passport schema: [`../schemas/component-passport.schema.json`](../schemas/component-passport.schema.json)  
+Master platform schema: [`../schemas/edts-os-platform-master.schema.json`](../schemas/edts-os-platform-master.schema.json)
 
 **Rules**
 
-1. Never mark `FROZEN` / `PRODUCTION_APPROVED` without lifecycle completion + owner gate.  
-2. Geometry fields null/`NOT_STARTED` beat invented coordinates.  
-3. Link dimensional claims to Evidence Graph parameter IDs.  
-4. Cross-platform compatibility lists are candidates until `CONFIGURATION_MATCHED`.
+1. Allocate `component_id` in the identity registry **before** creating a passport.  
+2. Never mark `FROZEN` / `PRODUCTION_APPROVED` without lifecycle completion + owner gate.  
+3. Geometry fields null/`NOT_STARTED` beat invented coordinates.  
+4. Link dimensional claims to Evidence Graph parameter IDs; pin versions to evidence.  
+5. Cross-platform compatibility lists are candidates until `CONFIGURATION_MATCHED`.  
+6. Configuration-unique length/CA → **variant pins**, not new component families.

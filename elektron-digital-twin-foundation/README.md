@@ -2,13 +2,14 @@
 
 This repository contains the authoritative schemas, standards, and registries establishing the baseline data model and coordinate frameworks for the F-450 physical vehicle intake and digital reconstruction.
 
-**Architecture:** `EDTS-OS v3` — [EDTS_OS.md](EDTS_OS.md) (Hard Rule 0 — Component First)  
+**Architecture:** `EDTS-OS v3` — [EDTS_OS.md](EDTS_OS.md) · [Blueprint](EDTS_OS_ARCHITECTURE_BLUEPRINT.md) · [Roadmap P1–P6](EDTS_OS_IMPLEMENTATION_ROADMAP.md)  
 **Research protocol:** `ACTIVE` v2 — [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md)  
+**Master schema:** [schemas/edts-os-platform-master.schema.json](schemas/edts-os-platform-master.schema.json) (identity + versioning first)  
 **Evidence Graph:** [layers/L01/L1_EVIDENCE_GRAPH.json](layers/L01/L1_EVIDENCE_GRAPH.json)  
 **Confidence %:** `DEPRECATED`  
 **Milestone:** `L1_SOURCE_PACK_01` (`NOT_VERIFIED`)  
 **Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`  
-**Teams:** A Research · B Assets (CMP-AXL-M300) · C Geometry (CMP-SD-044-L) · D Software (passport loader)  
+**Phases:** P1/P2 SEEDED · P4 IN_PROGRESS · P3/P5/P6 PLANNED  
 **L01 geometry freeze:** BLOCKED  
 See [STATUS.json](STATUS.json), [components/](components/), [configurations/](configurations/).
 
@@ -83,7 +84,7 @@ Every layer passes five gates before advancing:
 
 ## Current stage
 
-**L01 — EDTS-OS v3 ACTIVE.** Component-first passports + Evidence Graph. Confidence % deprecated. Source Pack 01 still NOT_VERIFIED. OEM graph edges AWAITING_FILE. Geometry freeze blocked. See [EDTS_OS.md](EDTS_OS.md).
+**L01 — EDTS-OS platform blueprint ACTIVE.** Factory mindset: Engine vs Data. Identity/version master schema seeded. F-450 is an assembly config. P1/P2 seeded; geometry freeze blocked. See [EDTS_OS_ARCHITECTURE_BLUEPRINT.md](EDTS_OS_ARCHITECTURE_BLUEPRINT.md).
 
 ## Related work
 

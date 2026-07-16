@@ -21,10 +21,11 @@ Research blockage must not paralyze asset acquisition, provisional geometry prep
 
 | Team | Current Active Target | Dependent Components | Target Status |
 | :--- | :--- | :--- | :--- |
-| **Team A** (Research) | Audit SRC-OEM-001 (BBAS) & SRC-OEM-002 (WSM) | `CMP-SD-044-L`, `CMP-FR-145` | `AWAITING_FILE` → `INGESTED` → `NORMALIZED` |
+| **Team A** (Research) | Audit SRC-OEM-001 (BBAS) & SRC-OEM-002 (WSM) | `CMP-SD-044-L`, `CMP-SD-FRAME-001` | `AWAITING_FILE` → `INGESTED` → `NORMALIZED` |
 | **Team B** (Assets) | Source Dana M300-class housing models | `CMP-AXL-M300` | `DISCOVERED` → `INGESTED` |
 | **Team C** (Geometry) | Separate cab/doors from ASSET-00031; pivot prep | `CMP-SD-044-L` | Draft → toward `COMPONENT_VERIFIED` (not frozen) |
-| **Team D** (Software) | Dynamically load components via passports | System-wide component tree | Schema/runtime hierarchy in progress — **not** `RUNTIME ENGINE COMPLETED` until wired + tested |
+| **Team D** (Software) | Dynamically load components via passports (P4) | System-wide component tree | Schema/runtime hierarchy in progress — **not** completed |
+| **Platform Arch** | Universal subsystem catalog + identity/version schema | `USS-IDENTITY`, `USS-VERSION` | **SCHEMA_SEEDED** (DT-D020) |
 
 ---
 

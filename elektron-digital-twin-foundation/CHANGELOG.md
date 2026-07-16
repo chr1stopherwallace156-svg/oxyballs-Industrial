@@ -420,3 +420,31 @@ All notable changes to the digital twin foundation. Append-only.
 - Evidence Graph: **OPERATIONAL_HONEST** (OEM edges AWAITING_FILE)
 - Component passports: **DRAFT_CANDIDATE**
 - Geometry freeze: **NOT_YET_APPROVED**
+
+## 2026-07-16 (EDTS-OS Platform Blueprint + Identity Master Schema)
+
+### Added
+
+- `EDTS_OS_ARCHITECTURE_BLUEPRINT.md` — Engine vs Data; universal subsystems catalog
+- `EDTS_OS_IMPLEMENTATION_ROADMAP.md` — phases P1–P6 with honest progress
+- `schemas/edts-os-platform-master.schema.json` — platform master (identity + versioning first)
+- `schemas/component-identity.schema.json` — `CMP-{FAMILY}-{TOKEN}[-{QUALIFIER}]` grammar
+- `registries/COMPONENT_IDENTITY_REGISTRY.json` — allocated IDs + aliases
+- `registries/EDTS_OS_PLATFORM_INSTANCE.json` — live subsystem/phase instance
+- `components/CMP_SD_FRAME_001.json` — canonical Super Duty chassis-cab frame family
+- **DT-D020** — blueprint + master schema activation
+
+### Changed
+
+- `CMP-FR-145` → **deprecated alias** of `CMP-SD-FRAME-001`
+- F-450 config frame slot uses family ID + `VAR-145_3-WB-60-CA` variant pin
+- `AGENTS.md` / `EDTS_OS.md` — blueprint + identity allocation rules
+- Phase → `EDTS_OS_PLATFORM_BLUEPRINT_ACTIVE`
+
+### Status
+
+- Mindset: **factory (platform), not single truck**
+- P1/P2: **SEEDED** (not COMPLETE)
+- P4: **IN_PROGRESS**
+- P3/P5/P6: **PLANNED**
+- Geometry freeze: **NOT_YET_APPROVED**

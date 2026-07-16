@@ -341,3 +341,22 @@ Append-only record of digital twin foundation decisions.
   - `L1_PARAMETER_VERIFICATION_DATABASE.json` becomes legacy bridge with deprecated confidence fields
   - Cross-platform reuse (E-450, Transit) planned via configurator, not monolithic forks
   - Source Pack 01 authenticity reset (DT-D017) remains in force — no fabricated page evidence
+
+## DT-D020 — EDTS-OS Architecture Blueprint + Identity/Version Master Schema
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Inflection from project (model one F-450) to platform (engine that produces twins). Need Engine vs Data separation, 6-phase roadmap, and first master schema focus on identity + versioning.
+- **Decision:**
+  1. Activate **`EDTS_OS_ARCHITECTURE_BLUEPRINT.md` v1.0.0** — Universal Platform Subsystems vs Vehicle-Specific Datasets
+  2. Activate **`EDTS_OS_IMPLEMENTATION_ROADMAP.md`** phases P1–P6 with honest status (P1/P2 SEEDED, P4 IN_PROGRESS, P3/P5/P6 PLANNED)
+  3. Proceed with **master schema first** on `USS-IDENTITY` + `USS-VERSION` (`schemas/edts-os-platform-master.schema.json`, `schemas/component-identity.schema.json`)
+  4. Seed `registries/COMPONENT_IDENTITY_REGISTRY.json` and `registries/EDTS_OS_PLATFORM_INSTANCE.json`
+  5. Remap frame stub: **`CMP-FR-145` → deprecated alias of `CMP-SD-FRAME-001`** with variant pin `VAR-145_3-WB-60-CA`
+  6. F-450 remains an **assembly configuration**, not a monolithic model authority
+  7. Do not mark Asset Pipeline / Validation / Conversion subsystems COMPLETE without schemas + evidence
+- **Consequences:**
+  - New passports require registry allocation before file creation
+  - Version bumps require evidence pins; metadata-only edits use correction log
+  - Research focus includes universal subsystem catalog (identity, versioning, QA, API)
+  - Geometry freeze still blocked; Source Pack 01 still NOT_VERIFIED
