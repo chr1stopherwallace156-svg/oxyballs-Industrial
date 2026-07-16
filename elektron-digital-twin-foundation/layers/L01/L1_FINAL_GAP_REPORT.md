@@ -59,7 +59,7 @@ Priority matrix: `L1_EVIDENCE_GAP_PRIORITY_MATRIX.json`
 - L01 geometry / mesh production
 - VERIFIED dimensional lock beyond provisional profile wheelbase/CA
 - Runtime transform certification (unchanged from L00: `NOT_EXECUTED`)
-- Source baseline (SRC-L1-001…003 still `PENDING_PAGES`)
+- Source baseline (SRC-L1-001…003 still `NOT_ACQUIRED`; extraction results empty)
 
 ### Ready
 

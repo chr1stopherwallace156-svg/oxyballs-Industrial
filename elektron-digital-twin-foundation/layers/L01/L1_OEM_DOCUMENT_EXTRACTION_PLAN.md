@@ -1,27 +1,29 @@
-# EDTS Layer 1 OEM Document Extraction Plan
+# EDTS Layer 1 OEM Document Extraction Plan (Awaiting Source Access)
 
-**Status:** `DRAFT — PENDING SOURCE FILES`  
-**Depends on:** `L1_SOURCE_ARTIFACT_REGISTRY_PROPOSAL.json` (`inspection_status: PENDING_PAGES`)  
-**Rule:** Expected values below are **research targets**, not verified extractions. Record actual page/table text after archive.
+**Status:** `AWAITING_SOURCE_ACCESS`  
+**Depends on:** `L1_SOURCE_ARTIFACT_REGISTRY_PROPOSAL.json` (`acquisition_status: NOT_ACQUIRED`)  
+**Results file:** `L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json` (empty until documents acquired)
 
-This plan targets precise extraction coordinates of nominal configuration parameters within official Ford Motor Company literature.
+This plan **decouples hunt queries from verified locators**. Real page numbers, table IDs, and extracted values reside **only** in the results file after documents are acquired and metadata verified.
 
-| Extraction ID | Target Parameter | Target Document | Target Location Coordinates | Claim Context / Expected Value |
+| Extraction ID | Target Parameter | Target Document | Target Section Keywords / Search Terms | Expected Evidence Target |
 | :--- | :--- | :--- | :--- | :--- |
-| **EXT-L1-101** | Front Axle Subtype | `SRC-L1-001` (BBAS Guide) | Section: "Front Suspension & Axle", Page 24, Table: "Front Axle Specs" | Verify wide-track Monobeam configuration on 4x2 DRW. Resolves `CNF-001` / `GAP-L1-001`. |
-| **EXT-L1-102** | Front Track Width | `SRC-L1-001` (BBAS Guide) | Layout Dimension Matrix, Page 12, Dimension `Front Track - DRW Wide Track` | Confirm 74.8 in (1899.9 mm). Cross-check acceptance V2 track claim. |
-| **EXT-L1-103** | Frame Rail Width | `SRC-L1-001` (BBAS Guide) | Section: "Frame Dimensions", Page 8, Figure 2: "Rear Frame Width" | Confirm 34.2 in (868.7 mm) flat-surface spacing. **Reconcile** vs prior draft "34 in" provisional wording. |
-| **EXT-L1-104** | Wheel Spec & PCD | `SRC-L1-002` (Order Guide) | Mechanical Specifications Section, Page 17, Table: "Wheels & Tires" | Confirm 19.5 x 6.0-inch DRW wheel, 10-lug, 225 mm PCD (`CLM-006`, `GAP-L1-002`). |
-| **EXT-L1-105** | Wheelbase Tolerance | `SRC-L1-003` (Workshop Manual) | Section 204-00: Front Suspension, Frame Measurement and Diagonal Tolerance Matrix | Retrieve factory nominal tolerance (e.g., +/- 2.0 mm diagonal skew). Do not keep `CLM-015` as invented gate if OEM states otherwise. |
+| **EXT-L1-101** | Front Axle Subtype | `SRC-L1-001` | "front axle", "monobeam", "twin-i-beam", "4x2 spec" | Establish axle configuration for the 4x2 DRW F-450 platform. |
+| **EXT-L1-102** | Front Track Width | `SRC-L1-001` | "track width", "front track", "tread", "DRW wide track" | Acquire nominal front track width. |
+| **EXT-L1-103** | Frame Rail Width | `SRC-L1-001` | "frame width", "rear frame width", "C-channel dimension" | Determine whether any stated width (e.g. research candidate 34.2 in) is outside-to-outside, web, or flange. |
+| **EXT-L1-104** | Wheel Spec & PCD | `SRC-L1-002` | "wheel size", "bolt circle", "pitch circle", "10-lug" | Confirm standard PCD (research candidate 225 mm) on DRW configurations. |
+| **EXT-L1-105** | Wheelbase Tolerance | `SRC-L1-003` | "wheelbase tolerance", "frame diagonal", "alignment limits" | Extract the factory allowed dimensional deviation. |
 
-## Extraction Workflow
+## Workflow
 
-1. Acquire PDF → store at `local_repository_path`
-2. Compute SHA-256 → write `content_hash_sha256`; set `file_present: true`
-3. Extract page image + OCR/text snippet for each EXT-L1-*
-4. Create claim record (schema V6) with locator: publication, date, page, table/figure index
-5. Update `L1_CLAIM_REGISTER_PROPOSAL.json` and close related gaps only when locator is complete
+1. Acquire file → store under `local_repository_path` for the source ID
+2. Read exact title / publication number / revision from the artifact → update source registry (`metadata_status: VERIFIED`)
+3. Hash file → set `content_hash_sha256`, `acquisition_status: ACQUIRED`
+4. Search using keywords above → fill `L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json` with page, table/figure, quote, and numeric value
+5. Promote claims only from results locators — never from this plan's keyword table alone
 
-## Page Coordinate Humility
+## Forbidden
 
-Page numbers and section titles above are **hunt coordinates** from research planning. If the acquired revision uses different pagination, update this plan — do not force-fit text to the expected value.
+- Inventing page numbers or table titles before acquisition
+- Writing expected numeric values into the results file without a verbatim locator
+- Treating keyword hits as VERIFIED without archived hash + quote

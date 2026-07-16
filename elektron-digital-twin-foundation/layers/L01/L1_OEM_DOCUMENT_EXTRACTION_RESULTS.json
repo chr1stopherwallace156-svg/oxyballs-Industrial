@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_OEM_DOCUMENT_EXTRACTION_RESULTS",
+  "version": "1.0.0",
+  "status": "EMPTY_AWAITING_SOURCE_ACCESS",
+  "notes": [
+    "Real page numbers, tables, quotes, and values are recorded here only after SRC-L1-* files are acquired.",
+    "Do not pre-populate expected values."
+  ],
+  "extractions": [
+    {
+      "extraction_id": "EXT-L1-101",
+      "target_parameter": "front_axle_subtype",
+      "source_id": "SRC-L1-001",
+      "status": "NOT_STARTED",
+      "page": null,
+      "table_or_figure": null,
+      "verbatim_quote": null,
+      "extracted_value": null,
+      "units": null,
+      "content_hash_sha256": null,
+      "extracted_by": null,
+      "extracted_at": null
+    },
+    {
+      "extraction_id": "EXT-L1-102",
+      "target_parameter": "front_track_width",
+      "source_id": "SRC-L1-001",
+      "status": "NOT_STARTED",
+      "page": null,
+      "table_or_figure": null,
+      "verbatim_quote": null,
+      "extracted_value": null,
+      "units": null,
+      "content_hash_sha256": null,
+      "extracted_by": null,
+      "extracted_at": null
+    },
+    {
+      "extraction_id": "EXT-L1-103",
+      "target_parameter": "frame_rail_width",
+      "source_id": "SRC-L1-001",
+      "status": "NOT_STARTED",
+      "page": null,
+      "table_or_figure": null,
+      "verbatim_quote": null,
+      "extracted_value": null,
+      "units": null,
+      "definition_class": null,
+      "definition_class_options": [
+        "OUTSIDE_TO_OUTSIDE",
+        "WEB_OUTER_FACE",
+        "FLANGE_OUTER",
+        "UNSPECIFIED"
+      ],
+      "content_hash_sha256": null,
+      "extracted_by": null,
+      "extracted_at": null
+    },
+    {
+      "extraction_id": "EXT-L1-104",
+      "target_parameter": "wheel_spec_and_pcd",
+      "source_id": "SRC-L1-002",
+      "status": "NOT_STARTED",
+      "page": null,
+      "table_or_figure": null,
+      "verbatim_quote": null,
+      "extracted_value": null,
+      "units": null,
+      "content_hash_sha256": null,
+      "extracted_by": null,
+      "extracted_at": null
+    },
+    {
+      "extraction_id": "EXT-L1-105",
+      "target_parameter": "wheelbase_tolerance",
+      "source_id": "SRC-L1-003",
+      "status": "NOT_STARTED",
+      "page": null,
+      "table_or_figure": null,
+      "verbatim_quote": null,
+      "extracted_value": null,
+      "units": null,
+      "content_hash_sha256": null,
+      "extracted_by": null,
+      "extracted_at": null
+    }
+  ]
+}

@@ -4,6 +4,7 @@
 **Phase:** `L1_FACTUAL_VERIFICATION_REQUIRED`  
 **Evidence gate:** `L1_REQUIRES_MORE_REFERENCE_DATA`  
 **Access gate:** `L1_BLOCKED_BY_SOURCE_ACCESS`  
+**Acquisition activity:** `READY`  
 **Geometry / mesh production:** Blocked  
 **Prerequisites for geometry:** source baseline closure + factual verification + visual intake evidence archived + owner approval
 
@@ -37,9 +38,10 @@ Planning sequence: [`L01_RESEARCH_DOSSIER_PLAN.md`](L01_RESEARCH_DOSSIER_PLAN.md
 - [x] V2 hierarchy, object/landmark registries, landmark classification
 - [x] Capture coverage grid + PBR metalness correction
 - [x] Visual acceptance V2 + final gap report
-- [x] Reference acquisition queue + source registry + extraction plan
-- [x] Photo shot list, public manifest, vehicle/measurement checklists, gap matrix, closure criteria
-- [ ] Tier 1 source archive (hashed BBAS / order guide / workshop — SRC-L1-001…003)
+- [x] Reference acquisition queue + source registry (null metadata until acquired)
+- [x] Keyword extraction plan + empty results file; measurement defs/uncertainty; GRADE-A/B/C; scan priority
+- [x] Photo lens/perspective standards; modular closure rules; acquisition activity READY
+- [ ] Tier 1 source archive (hashed SRC-L1-001…003 with verified metadata)
 - [ ] Physical verification of open claims / conflicts
 - [ ] Footprint/envelope claim records (schema V6) promoted beyond DRAFT
 

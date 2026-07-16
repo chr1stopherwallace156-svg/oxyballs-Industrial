@@ -287,3 +287,29 @@ All notable changes to the digital twin foundation. Append-only.
 - Access gate: **L1_BLOCKED_BY_SOURCE_ACCESS**
 - Evidence gate: **L1_REQUIRES_MORE_REFERENCE_DATA**
 - L01 geometry: **BLOCKED**
+
+## 2026-07-16 (L1 Empirical Acquisition Schema Alignment)
+
+### Added
+
+- `L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json` (empty locators)
+- `L1_STRUCTURAL_MEASUREMENT_DEFINITIONS.md`
+- `L1_MEASUREMENT_UNCERTAINTY_FRAMEWORK.json`
+- `L1_SCAN_PRIORITY_SEQUENCE.md`
+- `L1_SOURCE_BASELINE_CLOSURE_RULES.json`
+- **DT-D015** — strip placeholders; modular closure; GRADE-A/B/C
+
+### Changed
+
+- Source registry: null metadata + `NOT_ACQUIRED` (no invented pub numbers)
+- Extraction plan: keyword hunts only (no page coordinates)
+- Vehicle selection: grade framework; VIN rules `DOCUMENT_VERIFICATION_REQUIRED`
+- Measurement checklist: separated track vs overall tire width vs hub flange distance
+- Shot list: perspective/lens standards; orthographic wording removed
+- Closure criteria: claim-specific modular rules; acquisition activity READY
+
+### Status
+
+- Access gate: **L1_BLOCKED_BY_SOURCE_ACCESS**
+- Acquisition activity: **READY**
+- L01 geometry: **BLOCKED**

@@ -241,3 +241,22 @@ Append-only record of digital twin foundation decisions.
   - Priority 1 is BBAS / Order Guide / Workshop Manual archive + hash + page extraction
   - Do not commit copyrighted OEM PDFs without licensing clearance
   - Example public URLs must be replaced before use as evidence
+
+## DT-D015 — Empirical acquisition schemas; strip placeholders
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Planning templates risked theoretical assumptions via invented publication IDs, page coordinates, and VIN folklore. Alignment needed before files/VINs enter the pipeline.
+- **Decision:**
+  1. Source registry: `exact_title` / `publication_number` / `revision_date` = **null**; `acquisition_status: NOT_ACQUIRED`; `metadata_status: UNVERIFIED`
+  2. Extraction plan uses **keywords only**; page/table/quote/values live solely in `L1_OEM_DOCUMENT_EXTRACTION_RESULTS.json`
+  3. Bind structural measurement definitions (`front_track_measurement`, `front_overall_tire_width`, `front_wheel_center_distance`, `rear_frame_width`) + uncertainty framework
+  4. Candidate grading: GRADE-A / B / C / REJECT; VIN position rules marked `DOCUMENT_VERIFICATION_REQUIRED`
+  5. Photo standards: no “orthographic” claims; perspective minimization; ≥35 mm equiv; chessboard distortion calibration
+  6. Scan priority: cab shell first; fine castings deferred (Priority 7)
+  7. Modular closure rules: `physical_fact_closure`, `project_specification_closure`, `visual_acceptance_closure`
+  8. Gate remains **`L1_BLOCKED_BY_SOURCE_ACCESS`**; acquisition activity **`READY`**
+- **Consequences:**
+  - Do not pre-fill extraction results with expected numbers
+  - Project visual tolerances are not assumed OEM blueprint tolerances
+  - GRADE-B cab/front units remain usable without full unmodified rear frame
