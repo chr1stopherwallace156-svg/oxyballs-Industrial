@@ -448,3 +448,29 @@ All notable changes to the digital twin foundation. Append-only.
 - P4: **IN_PROGRESS**
 - P3/P5/P6: **PLANNED**
 - Geometry freeze: **NOT_YET_APPROVED**
+
+## 2026-07-16 (EDTS Kernel Vertical Slice — F-450 FL Door)
+
+### Added
+
+- `kernel/EDTS_KERNEL_SCOPE.md` — Minimum Viable Kernel
+- `kernel/F450_DOOR_FL_VERTICAL_SLICE_PLAN.md`
+- `kernel/F450_DOOR_FL_ACCEPTANCE_TESTS.md` — T01–T05
+- `kernel/KERNEL_OPEN_QUESTIONS.md` / `KERNEL_DEFERRED_FEATURES.md`
+- `schemas/kernel/*` — six composable schemas + passport minimum (v1.0.0)
+- `kernel/instances/f450_door_fl/*` — door slice instances
+- **EVL-00001** first evidence link → `SRC-ASSET-00031` SUPPORTS_GEOMETRY CANDIDATE
+- **EVL-00002** BBAS stub AWAITING_FILE
+- **DT-D021**
+
+### Changed
+
+- Canonical door ID → `CMP-FORD-SD-DOOR-FL-001` (`CMP-SD-044-L` alias)
+- Phase → `EDTS_KERNEL_VERTICAL_SLICE_READY`
+
+### Status
+
+- Kernel: **VERTICAL_SLICE_READY**
+- T01/T02: **PASS_SCHEMA**
+- T03–T05: **NOT_EXECUTED**
+- Geometry freeze: **NOT_YET_APPROVED**

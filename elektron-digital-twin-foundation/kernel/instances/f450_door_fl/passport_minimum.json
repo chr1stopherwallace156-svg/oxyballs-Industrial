@@ -1,0 +1,18 @@
+{
+  "passport_id": "PP-00001",
+  "entity_id": "CMP-FORD-SD-DOOR-FL-001",
+  "status_summary": {
+    "evidence": "CANDIDATE",
+    "geometry": "PROVISIONAL",
+    "interaction": "PROTOTYPE"
+  },
+  "links": {
+    "applicability_ids": ["APP-00001"],
+    "evidence_link_ids": ["EVL-00001", "EVL-00002"],
+    "geometry_asset_ids": ["GEO-00001"],
+    "relationship_ids": ["REL-00001"],
+    "interaction_ids": ["INT-00001"]
+  },
+  "acceptance_tests_ref": "kernel/F450_DOOR_FL_ACCEPTANCE_TESTS.md",
+  "legacy_passport_ref": "components/CMP_PASS_FR_DOOR_L.json"
+}

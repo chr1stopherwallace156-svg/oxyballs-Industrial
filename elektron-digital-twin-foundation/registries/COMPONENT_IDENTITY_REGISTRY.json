@@ -1,12 +1,12 @@
 {
   "$id": "urn:edts:registry:component-identity:v1",
   "$schema": "../schemas/component-identity.schema.json",
-  "grammar": "CMP-{FAMILY}-{TOKEN}[-{QUALIFIER}]",
-  "pattern": "^CMP-[A-Z0-9]+-[A-Z0-9]+(-[A-Z0-9]+)?$",
+  "grammar": "CMP-{SEGMENT}(-{SEGMENT})+  (kernel form preferred: CMP-FORD-SD-DOOR-FL-001)",
+  "pattern": "^CMP-[A-Z0-9]+(-[A-Z0-9]+)+$",
   "families": {
     "SD": {
       "code": "SD",
-      "description": "Ford Super Duty body/chassis generation family (2017–2022 band unless narrowed on passport)",
+      "description": "Ford Super Duty body/chassis generation family (2017\u20132022 band unless narrowed on passport)",
       "platform_agnostic": false
     },
     "AXL": {
@@ -16,7 +16,7 @@
     },
     "FR": {
       "code": "FR",
-      "description": "DEPRECATED family token for frames — use SD-FRAME-* canonical IDs",
+      "description": "DEPRECATED family token for frames \u2014 use SD-FRAME-* canonical IDs",
       "platform_agnostic": false
     },
     "PBR": {
@@ -31,16 +31,20 @@
     }
   },
   "qualifiers": {
-    "side": ["L", "R", "C"],
+    "side": [
+      "L",
+      "R",
+      "C"
+    ],
     "notes": "L/R/C for left/right/center. Omit when not applicable."
   },
   "allocation_rules": [
     "component_id is stable forever; never reuse an ID for a different physical part class.",
     "Allocate IDs in COMPONENT_IDENTITY_REGISTRY before creating a passport file.",
-    "Configuration-unique length/CA variants use variant pins on the passport — do not mint a new family for every wheelbase.",
-    "Aliases are one-way: deprecated_id → canonical_id.",
-    "Vehicle configuration IDs use VEH_CFG_* / F450_* namespaces — never CMP-*.",
-    "Evidence parameter nodes use PAR-* — never CMP-*."
+    "Configuration-unique length/CA variants use variant pins on the passport \u2014 do not mint a new family for every wheelbase.",
+    "Aliases are one-way: deprecated_id \u2192 canonical_id.",
+    "Vehicle configuration IDs use VEH_CFG_* / F450_* namespaces \u2014 never CMP-*.",
+    "Evidence parameter nodes use PAR-* \u2014 never CMP-*."
   ],
   "forbidden": [
     "Embedding VIN in component_id",
@@ -48,15 +52,29 @@
     "Vehicle-only IDs that cannot be referenced from another compatible platform"
   ],
   "aliases": {
-    "CMP-FR-145": "CMP-SD-FRAME-001"
+    "CMP-FR-145": "CMP-SD-FRAME-001",
+    "CMP-SD-044-L": "CMP-FORD-SD-DOOR-FL-001"
   },
   "registered_components": [
     {
+      "component_id": "CMP-FORD-SD-DOOR-FL-001",
+      "name": "front_left_door_assembly",
+      "passport": "kernel/instances/f450_door_fl/passport_minimum.json",
+      "legacy_passport": "components/CMP_PASS_FR_DOOR_L.json",
+      "current_version": 1,
+      "status": "DISCOVERED",
+      "aliases_from": [
+        "CMP-SD-044-L"
+      ],
+      "kernel_slice": true
+    },
+    {
       "component_id": "CMP-SD-044-L",
-      "name": "Super_Duty_Cab_Door_Front_Left",
+      "name": "DEPRECATED_ALIAS_Super_Duty_Cab_Door_Front_Left",
       "passport": "components/CMP_PASS_FR_DOOR_L.json",
       "current_version": 1,
-      "status": "DRAFT_CANDIDATE"
+      "status": "DEPRECATED_ALIAS",
+      "canonical_component_id": "CMP-FORD-SD-DOOR-FL-001"
     },
     {
       "component_id": "CMP-SD-FRAME-001",
@@ -64,7 +82,9 @@
       "passport": "components/CMP_SD_FRAME_001.json",
       "current_version": 1,
       "status": "DRAFT_CANDIDATE",
-      "aliases_from": ["CMP-FR-145"]
+      "aliases_from": [
+        "CMP-FR-145"
+      ]
     },
     {
       "component_id": "CMP-AXL-M300",
@@ -73,5 +93,6 @@
       "current_version": 1,
       "status": "DRAFT_CANDIDATE"
     }
-  ]
+  ],
+  "kernel_note": "EDTS Kernel vertical slice uses CMP-FORD-SD-DOOR-FL-001 as canonical door entity (DT-D021)."
 }

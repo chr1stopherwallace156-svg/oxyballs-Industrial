@@ -1,0 +1,48 @@
+{
+  "$id": "urn:edts:schema:kernel:entity-identity:v1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ENTITY_IDENTITY_SCHEMA_PROPOSAL",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["entity_id", "entity_type", "canonical_name", "lifecycle_status", "schema_version"],
+  "properties": {
+    "entity_id": {
+      "type": "string",
+      "pattern": "^CMP-[A-Z0-9-]+$",
+      "description": "Stable component identity. Kernel canonical form e.g. CMP-FORD-SD-DOOR-FL-001"
+    },
+    "entity_type": {
+      "type": "string",
+      "enum": ["COMPONENT", "ASSEMBLY", "MATERIAL", "SYSTEM_TEMPLATE"]
+    },
+    "canonical_name": { "type": "string" },
+    "lifecycle_status": {
+      "type": "string",
+      "enum": [
+        "DISCOVERED",
+        "REGISTERED",
+        "INGESTED",
+        "PROVISIONAL",
+        "CONFIGURATION_MATCHED",
+        "COMPONENT_VERIFIED",
+        "ENGINEERING_VERIFIED",
+        "FROZEN",
+        "REJECTED"
+      ]
+    },
+    "schema_version": { "type": "string", "const": "1.0.0" },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "examples": [
+    {
+      "entity_id": "CMP-FORD-SD-DOOR-FL-001",
+      "entity_type": "COMPONENT",
+      "canonical_name": "front_left_door_assembly",
+      "lifecycle_status": "DISCOVERED",
+      "schema_version": "1.0.0"
+    }
+  ]
+}

@@ -3,9 +3,11 @@
   "$schema": "../schemas/component-passport.schema.json",
   "hard_rule_0": "COMPONENT_FIRST",
   "component_id": "CMP-SD-044-L",
+  "canonical_kernel_entity_id": "CMP-FORD-SD-DOOR-FL-001",
+  "deprecated_as_canonical": true,
   "name": "Super_Duty_Cab_Door_Front_Left",
   "current_version": 1,
-  "version_note": "User illustrative 'current_version: 3 / FROZEN' is a target shape only. Operational passport starts at v1 DRAFT_CANDIDATE until mesh cleanup and evidence gates complete.",
+  "version_note": "Legacy OS passport retained. Kernel canonical entity is CMP-FORD-SD-DOOR-FL-001 (DT-D021). Prefer kernel/instances/f450_door_fl/.",
   "compatibility": {
     "platforms": [
       "F-250_2017_2022",

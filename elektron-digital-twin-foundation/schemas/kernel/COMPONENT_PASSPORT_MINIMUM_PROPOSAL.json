@@ -1,0 +1,51 @@
+{
+  "$id": "urn:edts:schema:kernel:passport-minimum:v1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "COMPONENT_PASSPORT_MINIMUM_PROPOSAL",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["passport_id", "entity_id", "status_summary"],
+  "properties": {
+    "passport_id": { "type": "string" },
+    "entity_id": { "type": "string" },
+    "status_summary": {
+      "type": "object",
+      "required": ["evidence", "geometry", "interaction"],
+      "properties": {
+        "evidence": {
+          "type": "string",
+          "enum": ["ABSENT", "CANDIDATE", "CONFIGURATION_MATCHED", "NORMALIZED", "VERIFIED"]
+        },
+        "geometry": {
+          "type": "string",
+          "enum": ["ABSENT", "PROVISIONAL", "DIMENSIONAL_CANDIDATE", "ENGINEERING_VERIFIED"]
+        },
+        "interaction": {
+          "type": "string",
+          "enum": ["ABSENT", "PROTOTYPE", "CALIBRATED", "VERIFIED"]
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "applicability_ids": { "type": "array", "items": { "type": "string" } },
+        "evidence_link_ids": { "type": "array", "items": { "type": "string" } },
+        "geometry_asset_ids": { "type": "array", "items": { "type": "string" } },
+        "relationship_ids": { "type": "array", "items": { "type": "string" } },
+        "interaction_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  },
+  "examples": [
+    {
+      "passport_id": "PP-00001",
+      "entity_id": "CMP-FORD-SD-DOOR-FL-001",
+      "status_summary": {
+        "evidence": "CANDIDATE",
+        "geometry": "PROVISIONAL",
+        "interaction": "PROTOTYPE"
+      }
+    }
+  ]
+}

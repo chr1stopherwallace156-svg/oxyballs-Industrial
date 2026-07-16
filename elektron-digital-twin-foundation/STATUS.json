@@ -1,11 +1,11 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.7.0",
-  "updated_at": "2026-07-16T14:15:00Z",
+  "version": "0.8.0",
+  "updated_at": "2026-07-16T14:30:00Z",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
-  "phase": "EDTS_OS_PLATFORM_BLUEPRINT_ACTIVE",
+  "phase": "EDTS_KERNEL_VERTICAL_SLICE_READY",
   "readiness": "L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE",
   "milestone": "L1_SOURCE_PACK_01",
   "source_pack_01_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
@@ -20,8 +20,8 @@
   "parallel_teams": {
     "team_a_research": "ACTIVE_OEM_EDGE_PROMOTION_AWAITING_FILE",
     "team_b_assets": "ACTIVE_CMP_AXL_M300_DISCOVERY",
-    "team_c_geometry": "ACTIVE_CMP_SD_044_L_SEPARATION_PREP",
-    "team_d_software": "ACTIVE_PASSPORT_DYNAMIC_LOADER"
+    "team_c_geometry": "ACTIVE_KERNEL_DOOR_SEPARATION",
+    "team_d_software": "ACTIVE_KERNEL_ACCEPTANCE_T03_T05"
   },
   "parallel_lanes": {
     "lane_a_3d_asset_sourcing": "AUTHORIZED",
@@ -30,7 +30,7 @@
   "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "Continue P1 OEM file acquisition; expand P2 component identity registry; Team D P4 loader; do not claim P3-P6 complete",
+  "next_action": "Archive ASSET-00031 bytes for GEO-00001; run objective metrics; Team D T03-T05 harness; keep EVL-00002 AWAITING_FILE until BBAS PDF exists",
   "owner_approval_required": true,
   "governance_status": {
     "L00_CONFIRMED_CORRECTIONS": "ACCEPTED",
@@ -105,7 +105,13 @@
     "USS_IDENTITY": "SCHEMA_SEEDED",
     "USS_VERSION": "SCHEMA_SEEDED",
     "CMP_SD_FRAME_001": "DRAFT_CANDIDATE",
-    "CMP_FR_145": "DEPRECATED_ALIAS"
+    "CMP_FR_145": "DEPRECATED_ALIAS",
+    "EDTS_KERNEL": "VERTICAL_SLICE_READY",
+    "EDTS_KERNEL_SCHEMAS": "PROPOSAL_V1",
+    "CMP_FORD_SD_DOOR_FL_001": "DISCOVERED",
+    "EVL_00001": "CANDIDATE_SUPPORTS_GEOMETRY",
+    "EVL_00002": "AWAITING_FILE_STUB",
+    "CMP_SD_044_L": "DEPRECATED_ALIAS"
   },
   "reference_vehicle": {
     "status": "provisional_profile_locked",
@@ -215,7 +221,7 @@
       "status": "factual_verification_required",
       "geometry_status": "blocked",
       "research_status": "L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE",
-      "phase": "EDTS_OS_PLATFORM_BLUEPRINT_ACTIVE",
+      "phase": "EDTS_KERNEL_VERTICAL_SLICE_READY",
       "milestone": "L1_SOURCE_PACK_01",
       "source_pack_01_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
       "gate_status": "L1_DOCUMENT_ACQUISITION_READY",
@@ -387,5 +393,8 @@
     "P4": "IN_PROGRESS",
     "P5": "PLANNED",
     "P6": "PLANNED"
-  }
+  },
+  "kernel_scope": "kernel/EDTS_KERNEL_SCOPE.md",
+  "kernel_entity": "CMP-FORD-SD-DOOR-FL-001",
+  "kernel_first_evidence_link": "EVL-00001"
 }

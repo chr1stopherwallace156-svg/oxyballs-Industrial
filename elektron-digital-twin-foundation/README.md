@@ -2,16 +2,15 @@
 
 This repository contains the authoritative schemas, standards, and registries establishing the baseline data model and coordinate frameworks for the F-450 physical vehicle intake and digital reconstruction.
 
-**Architecture:** `EDTS-OS v3` — [EDTS_OS.md](EDTS_OS.md) · [Blueprint](EDTS_OS_ARCHITECTURE_BLUEPRINT.md) · [Roadmap P1–P6](EDTS_OS_IMPLEMENTATION_ROADMAP.md)  
+**Kernel:** `EDTS_KERNEL_VERTICAL_SLICE_READY` — [kernel/EDTS_KERNEL_SCOPE.md](kernel/EDTS_KERNEL_SCOPE.md)  
+**Test subject:** `CMP-FORD-SD-DOOR-FL-001` (F-450 Regular Cab FL door)  
+**First evidence link:** `EVL-00001` → `SRC-ASSET-00031` (`SUPPORTS_GEOMETRY`, `CANDIDATE`)  
+**Architecture:** `EDTS-OS v3` — [EDTS_OS.md](EDTS_OS.md) · [Blueprint](EDTS_OS_ARCHITECTURE_BLUEPRINT.md)  
 **Research protocol:** `ACTIVE` v2 — [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md)  
-**Master schema:** [schemas/edts-os-platform-master.schema.json](schemas/edts-os-platform-master.schema.json) (identity + versioning first)  
-**Evidence Graph:** [layers/L01/L1_EVIDENCE_GRAPH.json](layers/L01/L1_EVIDENCE_GRAPH.json)  
 **Confidence %:** `DEPRECATED`  
-**Milestone:** `L1_SOURCE_PACK_01` (`NOT_VERIFIED`)  
 **Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`  
-**Phases:** P1/P2 SEEDED · P4 IN_PROGRESS · P3/P5/P6 PLANNED  
-**L01 geometry freeze:** BLOCKED  
-See [STATUS.json](STATUS.json), [components/](components/), [configurations/](configurations/).
+**Acceptance:** T01/T02 PASS_SCHEMA · T03–T05 NOT_EXECUTED  
+See [STATUS.json](STATUS.json), [kernel/instances/f450_door_fl/](kernel/instances/f450_door_fl/).
 
 ---
 
@@ -84,7 +83,7 @@ Every layer passes five gates before advancing:
 
 ## Current stage
 
-**L01 — EDTS-OS platform blueprint ACTIVE.** Factory mindset: Engine vs Data. Identity/version master schema seeded. F-450 is an assembly config. P1/P2 seeded; geometry freeze blocked. See [EDTS_OS_ARCHITECTURE_BLUEPRINT.md](EDTS_OS_ARCHITECTURE_BLUEPRINT.md).
+**L01 — EDTS Kernel vertical slice READY.** Primary subject `CMP-FORD-SD-DOOR-FL-001`. First evidence link EVL-00001 (ASSET-00031). T03–T05 not executed. Geometry freeze blocked. See [kernel/EDTS_KERNEL_SCOPE.md](kernel/EDTS_KERNEL_SCOPE.md).
 
 ## Related work
 

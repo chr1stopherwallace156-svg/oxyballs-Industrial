@@ -1,0 +1,45 @@
+{
+  "$id": "urn:edts:schema:kernel:geometry-asset:v1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GEOMETRY_ASSET_SCHEMA_PROPOSAL",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["asset_id", "entity_id", "format", "asset_role", "validation_status"],
+  "properties": {
+    "asset_id": { "type": "string" },
+    "entity_id": { "type": "string" },
+    "format": { "type": "string", "enum": ["GLB", "GLTF", "OBJ", "FBX", "USD", "OTHER"] },
+    "asset_role": {
+      "type": "string",
+      "enum": [
+        "PROVISIONAL_VISUAL",
+        "DIMENSIONAL_CANDIDATE",
+        "ENGINEERING_VERIFIED",
+        "REJECTED"
+      ]
+    },
+    "validation_status": {
+      "type": "string",
+      "enum": ["NOT_EXECUTED", "PASS", "FAIL", "BLOCKED"]
+    },
+    "source_asset_id": { "type": ["string", "null"] },
+    "local_path": { "type": ["string", "null"] },
+    "objective_metrics": {
+      "type": "object",
+      "properties": {
+        "triangle_count": { "type": ["integer", "null"] },
+        "bounding_box_mm": { "type": ["object", "null"] },
+        "texture_count": { "type": ["integer", "null"] }
+      }
+    }
+  },
+  "examples": [
+    {
+      "asset_id": "GEO-00001",
+      "entity_id": "CMP-FORD-SD-DOOR-FL-001",
+      "format": "GLB",
+      "asset_role": "PROVISIONAL_VISUAL",
+      "validation_status": "NOT_EXECUTED"
+    }
+  ]
+}

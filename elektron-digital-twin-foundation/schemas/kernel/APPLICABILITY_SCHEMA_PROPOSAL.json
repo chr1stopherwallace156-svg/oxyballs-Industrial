@@ -1,0 +1,54 @@
+{
+  "$id": "urn:edts:schema:kernel:applicability:v1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "APPLICABILITY_SCHEMA_PROPOSAL",
+  "version": "1.0.0",
+  "type": "object",
+  "required": [
+    "applicability_id",
+    "entity_id",
+    "make",
+    "platform_family",
+    "model_year_range",
+    "verification_status"
+  ],
+  "properties": {
+    "applicability_id": { "type": "string" },
+    "entity_id": { "type": "string" },
+    "make": { "type": "string" },
+    "platform_family": { "type": "string" },
+    "model_year_range": {
+      "type": "object",
+      "required": ["from", "to"],
+      "properties": {
+        "from": { "type": "integer" },
+        "to": { "type": "integer" }
+      }
+    },
+    "cab_styles": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": ["CANDIDATE", "CONFIGURATION_MATCHED", "CROSS_VERIFIED", "REJECTED"]
+    },
+    "evidence_links": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "evidence_link_id references"
+    }
+  },
+  "examples": [
+    {
+      "applicability_id": "APP-00001",
+      "entity_id": "CMP-FORD-SD-DOOR-FL-001",
+      "make": "Ford",
+      "platform_family": "Super Duty",
+      "model_year_range": { "from": 2017, "to": 2019 },
+      "cab_styles": ["REGULAR_CAB"],
+      "verification_status": "CANDIDATE",
+      "evidence_links": []
+    }
+  ]
+}

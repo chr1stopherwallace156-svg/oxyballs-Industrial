@@ -7,19 +7,20 @@ Rules for every AI agent, LLM engine, code generation pipeline, and automated va
 Before modifying any file, read:
 
 1. [EDTS_OS.md](EDTS_OS.md) — **EDTS-OS v3 constitution** (Hard Rule 0 — Component First)
-2. [EDTS_OS_ARCHITECTURE_BLUEPRINT.md](EDTS_OS_ARCHITECTURE_BLUEPRINT.md) — Engine vs Data + universal subsystems
-3. [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) — research / evidence runtime core (v2+)
-4. [README.md](README.md) — required reading order for core specifications
-5. [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md)
-6. [AGENTS.md](AGENTS.md) (this file)
-7. [STATUS.json](STATUS.json)
-8. [DECISIONS.md](DECISIONS.md)
-9. [REQUIREMENTS.md](REQUIREMENTS.md)
-10. [ARCHITECTURE.md](ARCHITECTURE.md)
-11. [DATA_MODEL.md](DATA_MODEL.md)
-12. [THREE_D_SPEC.md](THREE_D_SPEC.md)
-13. [QUALITY_STANDARD.md](QUALITY_STANDARD.md)
-14. The active layer doc under `layers/`
+2. [kernel/EDTS_KERNEL_SCOPE.md](kernel/EDTS_KERNEL_SCOPE.md) — **Minimum Viable Kernel** (near-term validation spine)
+3. [EDTS_OS_ARCHITECTURE_BLUEPRINT.md](EDTS_OS_ARCHITECTURE_BLUEPRINT.md) — Engine vs Data + universal subsystems
+4. [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) — research / evidence runtime core (v2+)
+5. [README.md](README.md) — required reading order for core specifications
+6. [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md)
+7. [AGENTS.md](AGENTS.md) (this file)
+8. [STATUS.json](STATUS.json)
+9. [DECISIONS.md](DECISIONS.md)
+10. [REQUIREMENTS.md](REQUIREMENTS.md)
+11. [ARCHITECTURE.md](ARCHITECTURE.md)
+12. [DATA_MODEL.md](DATA_MODEL.md)
+13. [THREE_D_SPEC.md](THREE_D_SPEC.md)
+14. [QUALITY_STANDARD.md](QUALITY_STANDARD.md)
+15. The active layer doc under `layers/`
 
 ## Operational directives
 

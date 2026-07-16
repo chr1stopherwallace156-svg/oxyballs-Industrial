@@ -18,10 +18,12 @@
   "component_graph": [
     {
       "slot": "CAB_DOOR_FRONT_LEFT",
-      "component_id": "CMP-SD-044-L",
-      "passport": "components/CMP_PASS_FR_DOOR_L.json",
+      "component_id": "CMP-FORD-SD-DOOR-FL-001",
+      "passport": "kernel/instances/f450_door_fl/passport_minimum.json",
+      "legacy_passport": "components/CMP_PASS_FR_DOOR_L.json",
       "version_pin": 1,
-      "inherit": true
+      "inherit": true,
+      "kernel_slice": true
     },
     {
       "slot": "FRAME_RAILS",

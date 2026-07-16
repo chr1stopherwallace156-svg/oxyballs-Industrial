@@ -1,0 +1,48 @@
+{
+  "$id": "urn:edts:schema:kernel:interaction-definition:v1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "INTERACTION_DEFINITION_SCHEMA_PROPOSAL",
+  "version": "1.0.0",
+  "type": "object",
+  "required": [
+    "interaction_id",
+    "entity_id",
+    "selectable",
+    "isolatable",
+    "removable",
+    "pivot_status"
+  ],
+  "properties": {
+    "interaction_id": { "type": "string" },
+    "entity_id": { "type": "string" },
+    "selectable": { "type": "boolean" },
+    "isolatable": { "type": "boolean" },
+    "removable": { "type": "boolean" },
+    "pivot_status": {
+      "type": "string",
+      "enum": ["NOT_DEFINED", "PROVISIONAL", "CALIBRATED", "VERIFIED"]
+    },
+    "pivot_axis": {
+      "type": ["array", "null"],
+      "items": { "type": "number" },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "exploded_offset_mm": {
+      "type": ["array", "null"],
+      "items": { "type": "number" },
+      "minItems": 3,
+      "maxItems": 3
+    }
+  },
+  "examples": [
+    {
+      "interaction_id": "INT-00001",
+      "entity_id": "CMP-FORD-SD-DOOR-FL-001",
+      "selectable": true,
+      "isolatable": true,
+      "removable": true,
+      "pivot_status": "NOT_DEFINED"
+    }
+  ]
+}

@@ -360,3 +360,23 @@ Append-only record of digital twin foundation decisions.
   - Version bumps require evidence pins; metadata-only edits use correction log
   - Research focus includes universal subsystem catalog (identity, versioning, QA, API)
   - Geometry freeze still blocked; Source Pack 01 still NOT_VERIFIED
+
+## DT-D021 — EDTS Kernel vertical slice (F-450 FL door)
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Pivot from speculative OS breadth to Minimum Viable EDTS Kernel — composable schemas validated on one real component.
+- **Decision:**
+  1. Activate **`kernel/EDTS_KERNEL_SCOPE.md`** — status `EDTS_KERNEL_VERTICAL_SLICE_READY`
+  2. Adopt six composable kernel schemas + passport minimum under `schemas/kernel/`
+  3. Primary test subject: **`CMP-FORD-SD-DOOR-FL-001`** (alias from `CMP-SD-044-L`)
+  4. Seed instances under `kernel/instances/f450_door_fl/`
+  5. **First evidence link = `EVL-00001`** → `SRC-ASSET-00031` / `SUPPORTS_GEOMETRY` / `CANDIDATE` (not BBAS)
+  6. BBAS link `EVL-00002` is a secondary `AWAITING_FILE` stub only
+  7. Defer telemetry, EV conversion, fleet APIs, multi-year lookup engines (`KERNEL_DEFERRED_FEATURES.md`)
+  8. Acceptance T01–T05 define slice completeness; T03–T05 remain `NOT_EXECUTED` until runtime/mesh
+- **Consequences:**
+  - Kernel schemas are the near-term validation spine; OS blueprint remains long-range
+  - Visually reusable / dimensionally inaccurate assets stay `PROVISIONAL_VISUAL` (KQ-001)
+  - No ENGINEERING_VERIFIED door without KQ-002 threshold
+  - Geometry freeze still blocked
