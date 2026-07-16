@@ -61,7 +61,7 @@ Prefer [schemas/CLAIM_SCHEMA_ROOT_V6_PROPOSAL.json](schemas/CLAIM_SCHEMA_ROOT_V6
 
 ## Non-negotiables
 
-- **Obey EDTS_OS.md + EDTS_RESEARCH_PROTOCOL.md** — Hard Rule 0, taxonomy, Hard Rules 1–10, expanded lifecycle, Evidence Graph.
+- **Obey EDTS_OS.md + EDTS_RESEARCH_PROTOCOL.md** — Hard Rule 0, HR-EVI, Hard Rules 1–11 + **13**, expanded lifecycle, Evidence Graph, immutable `SRC-CAND-*` + RC hunt scores (not engineering %).
 - **Never invent dimensions, page quotes, or hashes.** Prefer `UNKNOWN` / `AWAITING_FILE` / `REQUIRES ADDITIONAL EVIDENCE` (Hard Rule 6).
 - **Never skip gates.** A layer advances only when all five gates are recorded in [STATUS.json](STATUS.json) and the layer doc.
 - **Never delete evidence.** Research log, decisions, and changelog entries are append-only.
@@ -84,7 +84,8 @@ For each layer:
 ## Research & OS protocol
 
 - **OS constitution:** [EDTS_OS.md](EDTS_OS.md) (ACTIVE v3)
-- **Research protocol:** [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) (ACTIVE v2)
+- **Research protocol:** [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) (ACTIVE v2.2; Hard Rule 13)
+- **Source candidates:** [research/src_candidates/SRC_CANDIDATE_REGISTER.json](research/src_candidates/SRC_CANDIDATE_REGISTER.json)
 - Evidence Graph → [layers/L01/L1_EVIDENCE_GRAPH.json](layers/L01/L1_EVIDENCE_GRAPH.json)
 - Component passports → [components/](components/)
 - Vehicle configs → [configurations/](configurations/)
