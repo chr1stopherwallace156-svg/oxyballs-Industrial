@@ -1,6 +1,6 @@
 {
   "suite": "eae-core-ingestion",
-  "execution_timestamp": "2026-07-16T18:01:44.409650+00:00",
+  "execution_timestamp": "2026-07-16T18:18:02.674389+00:00",
   "runtime": {
     "python": "3.12.3",
     "python_full": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
@@ -16,14 +16,14 @@
     "--tb=short"
   ],
   "exit_code": 0,
-  "summary_line": "27 passed in 0.16s",
-  "total": 27,
-  "passed": 27,
+  "summary_line": "35 passed in 0.20s",
+  "total": 35,
+  "passed": 35,
   "failed": 0,
   "skipped": 0,
   "suite_pass_or_fail": "PASS",
   "final_status": "EDTS_EAE_CORE_INGESTION_VALIDATED",
-  "stdout": "...........................                                              [100%]\n27 passed in 0.16s\n",
+  "stdout": "...................................                                      [100%]\n35 passed in 0.20s\n",
   "stderr": "",
   "implementation_paths": [
     "eae/core/ingest.py",

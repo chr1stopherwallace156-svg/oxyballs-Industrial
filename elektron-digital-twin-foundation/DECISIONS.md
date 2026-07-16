@@ -598,3 +598,14 @@ Append-only record of digital twin foundation decisions.
 - **final_status:** `EDTS_EAE_CORE_INGESTION_VALIDATED`
 - **next_build_priority:** `EAE_ARCHIVE_SAFE_ACQUISITION_AND_METADATA` (not scoring)
 
+
+## DT-D036 — EAE CORE identity + quarantine hardening
+
+- **Change-control record:** [`decisions/DT-D036_EAE_CORE_IDENTITY_AND_QUARANTINE_HARDENING.json`](decisions/DT-D036_EAE_CORE_IDENTITY_AND_QUARANTINE_HARDENING.json)
+- **decision_id:** `DT-D036`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **scope:** Physical identity = full SHA-256; policy is evaluation metadata; `REGISTRY_INTEGRITY_CONFLICT`; expanded ZIP security
+- **validation_evidence:** `verification/results/EAE_CORE_INGESTION_IMPLEMENTATION_REPORT.md` (35 passed)
+- **final_status:** `EDTS_EAE_CORE_INGESTION_VALIDATED`
+

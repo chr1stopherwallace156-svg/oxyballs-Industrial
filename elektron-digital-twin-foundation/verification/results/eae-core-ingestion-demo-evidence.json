@@ -1,0 +1,39 @@
+{
+  "expected_sha256": "2b05dde385350523cfeaf607efa8bdc34b254fdd96c5ab869446f6d5d1968bb1",
+  "actual_sha256": "2b05dde385350523cfeaf607efa8bdc34b254fdd96c5ab869446f6d5d1968bb1",
+  "sha256_match": true,
+  "first_result": "ACCEPTED",
+  "second_result": "ALREADY_INGESTED",
+  "same_asset_id": true,
+  "state_mutation_second": false,
+  "registry_count": {
+    "entries": {
+      "2b05dde385350523cfeaf607efa8bdc34b254fdd96c5ab869446f6d5d1968bb1": {
+        "asset_id": "AST-2b05dde385350523cfeaf607efa8bdc34b254fdd96c5ab869446f6d5d1968bb1",
+        "first_ingestion_policy_version": "1.0.0",
+        "manifest_path": "assets/2b05dde385350523cfeaf607efa8bdc34b254fdd96c5ab869446f6d5d1968bb1/manifest.json",
+        "sha256": "2b05dde385350523cfeaf607efa8bdc34b254fdd96c5ab869446f6d5d1968bb1"
+      }
+    },
+    "version": 1
+  },
+  "manifest_example": {
+    "asset_id": "AST-2b05dde385350523cfeaf607efa8bdc34b254fdd96c5ab869446f6d5d1968bb1",
+    "content_address": "sha256:2b05dde385350523cfeaf607efa8bdc34b254fdd96c5ab869446f6d5d1968bb1",
+    "created_at": "2026-07-16T18:17:43.669649+00:00",
+    "detected_format": "OBJ",
+    "file_size_bytes": 282,
+    "format_detection_confidence": "HIGH",
+    "format_detection_method": "CONTENT_HEURISTIC",
+    "ingestion_policy_version": "1.0.0",
+    "integrity_status": "PASS",
+    "manifest_version": "1.0.0",
+    "original_filename": "cube.obj",
+    "quarantine_status": "CLEARED",
+    "sha256": "2b05dde385350523cfeaf607efa8bdc34b254fdd96c5ab869446f6d5d1968bb1",
+    "source_kind": "LOCAL_FIXTURE"
+  },
+  "source_bytes_unchanged": false,
+  "source_fixture_unchanged": true,
+  "authoritative_entries": 1
+}

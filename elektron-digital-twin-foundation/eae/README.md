@@ -26,4 +26,9 @@ result = ingest_local_file(Path("tests/eae/fixtures/cube.obj"), Path("/tmp/eae_s
 print(result["result"], result.get("asset_id"))
 ```
 
-Idempotency: same bytes + same `ingestion_policy_version` → same `asset_id`, `ALREADY_INGESTED`, `state_mutation: false`.
+**Identity:** physical content identity = complete SHA-256 of source bytes.  
+`ingestion_policy_version` is evaluation metadata only and never creates a second physical asset.
+
+**Idempotency:** same bytes → same `asset_id`, `ALREADY_INGESTED`, `state_mutation: false` (execution/evaluation logs may append).
+
+**Integrity:** equivalent existing manifest → `ALREADY_INGESTED`; conflicting manifest at same identity → `REGISTRY_INTEGRITY_CONFLICT` (no silent overwrite).

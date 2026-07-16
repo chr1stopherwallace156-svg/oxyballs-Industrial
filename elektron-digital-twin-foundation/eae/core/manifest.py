@@ -8,7 +8,17 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+from .errors import ManifestConflictError
 from .policy import INGESTION_POLICY_VERSION, MANIFEST_VERSION
+
+# Fields that define physical/authoritative identity (not evaluation metadata).
+PHYSICAL_IDENTITY_FIELDS = (
+    "asset_id",
+    "sha256",
+    "content_address",
+    "file_size_bytes",
+    "detected_format",
+)
 
 
 def build_manifest(
@@ -45,12 +55,37 @@ def build_manifest(
     }
 
 
-def write_manifest_atomic(path: Path, manifest: dict[str, Any]) -> None:
+def physical_identity_view(manifest: dict[str, Any]) -> dict[str, Any]:
+    return {k: manifest.get(k) for k in PHYSICAL_IDENTITY_FIELDS}
+
+
+def manifests_physically_equivalent(a: dict[str, Any], b: dict[str, Any]) -> bool:
     """
-    Write via temporary file in the same directory, then os.replace (atomic on POSIX).
-    Partial writes never become the authoritative path.
+    Physical content identity comparison.
+    Policy version / original_filename / created_at are evaluation or provenance metadata
+    and do not make a second physical asset.
+    """
+    return physical_identity_view(a) == physical_identity_view(b)
+
+
+def write_manifest_atomic(path: Path, manifest: dict[str, Any], *, allow_overwrite: bool = False) -> str:
+    """
+    Write via temporary file on the same filesystem, fsync, then os.replace.
+    Does not silently overwrite a conflicting authoritative manifest.
+
+    Returns:
+      "WRITTEN" | "EQUIVALENT_EXISTING"
     """
     path.parent.mkdir(parents=True, exist_ok=True)
+    if path.exists() and not allow_overwrite:
+        existing = read_manifest(path)
+        if manifests_physically_equivalent(existing, manifest):
+            return "EQUIVALENT_EXISTING"
+        raise ManifestConflictError(
+            f"authoritative manifest conflict at {path}: "
+            f"existing={physical_identity_view(existing)} proposed={physical_identity_view(manifest)}"
+        )
+
     data = json.dumps(manifest, indent=2, sort_keys=True) + "\n"
     fd, tmp_name = tempfile.mkstemp(prefix=".manifest.", suffix=".tmp", dir=str(path.parent))
     try:
@@ -66,6 +101,7 @@ def write_manifest_atomic(path: Path, manifest: dict[str, Any]) -> None:
         except OSError:
             pass
         raise
+    return "WRITTEN"
 
 
 def read_manifest(path: Path) -> dict[str, Any]:

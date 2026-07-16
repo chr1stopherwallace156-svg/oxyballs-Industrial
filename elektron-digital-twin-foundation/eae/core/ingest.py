@@ -11,7 +11,12 @@ from typing import Any
 from . import errors
 from .detection import detect_format, is_extension_format_match
 from .hashing import asset_id_from_hash, content_address, sha256_hex_file
-from .manifest import build_manifest, write_manifest_atomic
+from .manifest import (
+    build_manifest,
+    manifests_physically_equivalent,
+    read_manifest,
+    write_manifest_atomic,
+)
 from .policy import ALLOWED_DETECTED_FORMATS, ALLOWED_EXTENSIONS, INGESTION_POLICY_VERSION
 from .quarantine import inspect_zip_security, safe_extract_zip_to_quarantine
 from .registry import AssetRegistry
@@ -33,13 +38,13 @@ def ingest_local_file(
     store_root: Path | str,
     *,
     source_kind: str = "LOCAL_FIXTURE",
-    allow_zip_security_inspect: bool = True,
 ) -> dict[str, Any]:
     """
     Accept a local file into a content-addressed store with atomic manifest.
 
+    Physical identity = complete SHA-256 of source bytes.
+    Policy version is evaluation metadata only and never creates a second physical asset.
     Does not modify the source file.
-    Does not score geometry, update passports, or download remotes.
     """
     source = Path(source_path)
     store = Path(store_root)
@@ -64,7 +69,8 @@ def ingest_local_file(
         result["result"] = code
         result.update(extra)
         result["recorded_at"] = _utc_now()
-        log_path = registry.write_execution_log(execution_id, result)
+        # Always allowed: execution log (not authoritative asset state)
+        log_path = registry.write_execution_log(execution_id, dict(result))
         result["execution_log_path"] = str(log_path)
         return result
 
@@ -78,38 +84,33 @@ def ingest_local_file(
     result["sha256"] = sha
     result["content_address"] = addr
     result["file_size_bytes"] = size
+    asset_id = asset_id_from_hash(sha)
 
     detection = detect_format(source)
     result["details"]["detection"] = detection
     ext = detection.get("extension_claim")
     detected = detection["detected_format"]
 
-    # Security path: ZIP with traversal / absolute members
+    # Security path: ZIP inspection (test/security scope; not a V0 asset format)
     if detected == "ZIP":
         safety = inspect_zip_security(source)
         result["details"]["zip_security"] = safety
         if not safety["safe"] or safety.get("error"):
-            # Attempt extract into quarantine to prove no escape (will refuse)
             qdir = registry.quarantine_dir / sha
             extract_attempt = safe_extract_zip_to_quarantine(source, qdir)
             result["details"]["extract_attempt"] = extract_attempt
             return _finish(errors.REJECT_SECURITY, details=result["details"])
-        # Safe ZIP is still out of V0 asset allowlist
         return _finish(
             errors.REJECT_UNSUPPORTED,
             details={**result["details"], "reason": "zip_not_in_v0_allowlist"},
         )
 
-    # Unsupported extension (not malicious by itself)
     if ext not in ALLOWED_EXTENSIONS:
-        # Harmless but unsupported types (e.g. .txt, .exe) reject cleanly
         return _finish(
             errors.REJECT_UNSUPPORTED,
             details={**result["details"], "reason": "unsupported_extension", "extension": ext},
         )
 
-    # Claimed allowlisted extension but content does not match → quarantine mismatch
-    # Special case: .obj that looks like broken Wavefront text → REJECT_MALFORMED
     if ext == "obj" and detected != "OBJ":
         sample = source.read_bytes()[:8192]
         try:
@@ -123,6 +124,19 @@ def ingest_local_file(
                 errors.REJECT_MALFORMED,
                 details={**result["details"], "reason": "obj_extension_but_not_parseable_obj"},
             )
+        # Non-OBJ binary/bytes named .obj → type mismatch quarantine
+        q_target = registry.quarantine_dir / f"{sha}{source.suffix}"
+        if not q_target.exists():
+            shutil.copy2(source, q_target)
+        return _finish(
+            errors.QUARANTINE_TYPE_MISMATCH,
+            details={
+                **result["details"],
+                "reason": "non_obj_bytes_with_obj_extension",
+                "quarantine_copy": str(q_target),
+            },
+            state_mutation=False,
+        )
 
     if not is_extension_format_match(ext, detected):
         q_target = registry.quarantine_dir / f"{sha}{source.suffix}"
@@ -144,7 +158,6 @@ def ingest_local_file(
             details={**result["details"], "reason": "unsupported_detected_format"},
         )
 
-    # OBJ structural minimum: at least one vertex or face directive
     if detected == "OBJ":
         if detection.get("format_detection_confidence") == "LOW":
             return _finish(
@@ -164,31 +177,7 @@ def ingest_local_file(
                 details={**result["details"], "reason": "obj_missing_v_or_f"},
             )
 
-    # Idempotency: same bytes + same policy → same asset, no duplicate registry
-    existing = registry.lookup(sha, INGESTION_POLICY_VERSION)
-    if existing:
-        return _finish(
-            errors.ALREADY_INGESTED,
-            asset_id=existing["asset_id"],
-            existing_asset_id=existing["asset_id"],
-            state_mutation=False,
-            manifest_path=str(store / existing["manifest_path"]),
-            details={**result["details"], "registry_count": registry.count_authoritative()},
-        )
-
-    # First ingestion — immutable content copy + atomic manifest + registry
-    asset_id = asset_id_from_hash(sha)
-    adir = registry.asset_dir(sha)
-    adir.mkdir(parents=True, exist_ok=False)
-    content_dst = registry.content_path(sha)
-    shutil.copyfile(source, content_dst)
-    # Verify stored bytes match
-    if sha256_hex_file(content_dst) != sha:
-        shutil.rmtree(adir, ignore_errors=True)
-        return _finish(errors.REJECT_SECURITY, details={"reason": "content_copy_hash_mismatch"})
-
-    created_at = _utc_now()
-    manifest = build_manifest(
+    proposed = build_manifest(
         asset_id=asset_id,
         original_filename=source.name,
         detected_format=detected,
@@ -197,19 +186,159 @@ def ingest_local_file(
         file_size_bytes=size,
         sha256_hex=sha,
         content_address=addr,
-        created_at=created_at,
+        created_at=_utc_now(),
         source_kind=source_kind,
     )
-    mpath = registry.manifest_path(sha)
-    write_manifest_atomic(mpath, manifest)
-    rel_manifest = str(mpath.relative_to(store))
-    registry.register(sha, asset_id, rel_manifest)
 
+    # Physical identity: complete SHA-256 only (policy does not change asset identity)
+    existing = registry.lookup(sha)
+    mpath = registry.manifest_path(sha)
+    content_dst = registry.content_path(sha)
+
+    if existing:
+        return _handle_existing(registry, store, existing, mpath, proposed, result, _finish, execution_id)
+
+    # Orphaned asset dir / manifest without registry entry → integrity conflict
+    if mpath.exists() or content_dst.exists():
+        if mpath.exists():
+            try:
+                on_disk = read_manifest(mpath)
+            except Exception as exc:
+                return _finish(
+                    errors.REGISTRY_INTEGRITY_CONFLICT,
+                    details={**result["details"], "reason": "unreadable_orphan_manifest", "error": str(exc)},
+                )
+            if manifests_physically_equivalent(on_disk, proposed):
+                # Heal index if content matches (still one physical asset)
+                try:
+                    registry.register(sha, asset_id, str(mpath.relative_to(store)))
+                except ValueError:
+                    pass
+                registry.write_evaluation_log(
+                    execution_id,
+                    {
+                        "asset_id": asset_id,
+                        "sha256": sha,
+                        "ingestion_policy_version": INGESTION_POLICY_VERSION,
+                        "note": "healed_registry_index_from_equivalent_orphan",
+                    },
+                )
+                return _finish(
+                    errors.ALREADY_INGESTED,
+                    asset_id=asset_id,
+                    existing_asset_id=asset_id,
+                    state_mutation=False,
+                    manifest_path=str(mpath),
+                    details={**result["details"], "registry_count": registry.count_authoritative()},
+                )
+        return _finish(
+            errors.REGISTRY_INTEGRITY_CONFLICT,
+            details={
+                **result["details"],
+                "reason": "orphan_asset_path_without_matching_identity",
+                "manifest_exists": mpath.exists(),
+                "content_exists": content_dst.exists(),
+            },
+        )
+
+    # First ingestion — immutable content copy + atomic manifest + registry
+    adir = registry.asset_dir(sha)
+    adir.mkdir(parents=True, exist_ok=False)
+    shutil.copyfile(source, content_dst)
+    if sha256_hex_file(content_dst) != sha:
+        shutil.rmtree(adir, ignore_errors=True)
+        return _finish(errors.REJECT_SECURITY, details={"reason": "content_copy_hash_mismatch"})
+
+    try:
+        write_status = write_manifest_atomic(mpath, proposed, allow_overwrite=False)
+    except errors.ManifestConflictError as exc:
+        return _finish(
+            errors.REGISTRY_INTEGRITY_CONFLICT,
+            details={**result["details"], "reason": str(exc)},
+        )
+
+    if write_status == "EQUIVALENT_EXISTING":
+        # Race: another writer landed equivalent manifest
+        if not registry.lookup(sha):
+            registry.register(sha, asset_id, str(mpath.relative_to(store)))
+        return _finish(
+            errors.ALREADY_INGESTED,
+            asset_id=asset_id,
+            existing_asset_id=asset_id,
+            state_mutation=False,
+            manifest_path=str(mpath),
+        )
+
+    registry.register(sha, asset_id, str(mpath.relative_to(store)))
     return _finish(
         errors.ACCEPTED,
         asset_id=asset_id,
         existing_asset_id=None,
         state_mutation=True,
+        manifest_path=str(mpath),
+        details={**result["details"], "registry_count": registry.count_authoritative()},
+    )
+
+
+def _handle_existing(
+    registry: AssetRegistry,
+    store: Path,
+    existing: dict[str, Any],
+    mpath: Path,
+    proposed: dict[str, Any],
+    result: dict[str, Any],
+    _finish,
+    execution_id: str,
+) -> dict[str, Any]:
+    """Same bytes → same asset. Conflicting manifest → REGISTRY_INTEGRITY_CONFLICT."""
+    asset_id = existing["asset_id"]
+    if not mpath.exists():
+        return _finish(
+            errors.REGISTRY_INTEGRITY_CONFLICT,
+            asset_id=asset_id,
+            existing_asset_id=asset_id,
+            details={**result["details"], "reason": "registry_entry_missing_manifest"},
+        )
+    try:
+        on_disk = read_manifest(mpath)
+    except Exception as exc:
+        return _finish(
+            errors.REGISTRY_INTEGRITY_CONFLICT,
+            asset_id=asset_id,
+            existing_asset_id=asset_id,
+            details={**result["details"], "reason": "manifest_unreadable", "error": str(exc)},
+        )
+
+    if not manifests_physically_equivalent(on_disk, proposed):
+        return _finish(
+            errors.REGISTRY_INTEGRITY_CONFLICT,
+            asset_id=asset_id,
+            existing_asset_id=asset_id,
+            manifest_path=str(mpath),
+            details={
+                **result["details"],
+                "reason": "existing_manifest_differs_at_same_content_identity",
+                "existing_identity": {k: on_disk.get(k) for k in ("asset_id", "sha256", "content_address", "file_size_bytes", "detected_format")},
+                "proposed_identity": {k: proposed.get(k) for k in ("asset_id", "sha256", "content_address", "file_size_bytes", "detected_format")},
+            },
+        )
+
+    # Optional: record that a (possibly newer) policy evaluated an existing asset
+    registry.write_evaluation_log(
+        execution_id,
+        {
+            "asset_id": asset_id,
+            "sha256": proposed["sha256"],
+            "ingestion_policy_version": INGESTION_POLICY_VERSION,
+            "result": errors.ALREADY_INGESTED,
+            "note": "policy_is_evaluation_metadata_only_no_duplicate_physical_asset",
+        },
+    )
+    return _finish(
+        errors.ALREADY_INGESTED,
+        asset_id=asset_id,
+        existing_asset_id=asset_id,
+        state_mutation=False,
         manifest_path=str(mpath),
         details={**result["details"], "registry_count": registry.count_authoritative()},
     )

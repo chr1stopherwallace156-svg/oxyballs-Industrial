@@ -157,21 +157,32 @@ def main() -> int:
 | Skipped | {skipped} |
 | Suite | {"PASS" if suite_ok else "FAIL"} |
 
+### Identity rules (executed)
+
+1. Physical content identity = complete SHA-256 of source bytes.
+2. `ingestion_policy_version` is evaluation metadata only (may write evaluation logs; never duplicates physical assets).
+3. Same bytes → same authoritative asset.
+4. Conflicting authoritative manifest at same content identity → `REGISTRY_INTEGRITY_CONFLICT`.
+
 ### Expected vs actual (requirements)
 
 | Requirement | Expected | Actual |
 |---|---|---|
 | Valid OBJ accepted | ACCEPTED | covered by `test_idempotency.py` |
 | SHA-256 matches known value | equal full hex | covered by `test_hashing.py` |
-| Repeat → same asset identity | ALREADY_INGESTED | covered |
+| Repeat → same asset identity | ALREADY_INGESTED / `state_mutation:false` | covered |
 | No duplicate registry entry | count==1 | covered |
 | Same bytes / different name | same identity | covered |
 | Same name / different bytes | different identity | covered |
+| Policy version change | no duplicate physical asset | covered by `test_policy_metadata_does_not_duplicate_physical_asset` |
 | Unsupported extension | REJECT_UNSUPPORTED | covered |
 | Extension/content mismatch | QUARANTINE_TYPE_MISMATCH | covered |
+| Non-OBJ bytes named `.obj` | QUARANTINE_TYPE_MISMATCH | covered |
 | Malformed OBJ | REJECT_MALFORMED | covered |
-| ZIP `../` traversal | REJECT_SECURITY, no escape | covered |
-| Partial manifest not authoritative | no corrupt index | covered |
+| ZIP `../` / absolute / Windows traversal | REJECT_SECURITY | covered |
+| ZIP symlink / duplicate dest / bomb ratio | REJECT_SECURITY | covered |
+| Corrupted authoritative manifest | REGISTRY_INTEGRITY_CONFLICT | covered |
+| Atomic write / failed rename | no authoritative leftover | covered |
 | Source never modified | bytes+mtime stable | covered |
 
 ## Known limitations
@@ -180,17 +191,19 @@ def main() -> int:
 - OBJ detection is **CONTENT_HEURISTIC** (no binary magic) — confidence recorded on manifest.
 - ZIP is inspected for security; safe ZIPs are still `REJECT_UNSUPPORTED` (not V0 assets).
 - No remote download, FBX, STEP, scoring, passport mutation, or event streams.
-- Execution logs may grow on repeat runs; authoritative asset/manifest registry does not.
+- Execution / evaluation logs may grow on repeat runs; authoritative asset registry does not.
 
 ## Evidence paths
 
 - `{JSON_OUT.relative_to(ROOT)}`
 - `{REPORT.relative_to(ROOT)}`
+- `verification/results/eae-core-ingestion-demo-evidence.json`
+- `verification/results/eae-core-kernel-freeze-audit.json`
 - Fixtures: `tests/eae/fixtures/`
 
 ## Frozen kernel
 
-`schemas/component-passport.schema.json` was **not modified** by this implementation.  
+`schemas/component-passport.schema.json` and validated kernel fixtures/results were **not modified**.  
 Git check clean: `{kernel_unchanged}`.
 
 ## stdout (pytest)

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import zipfile
 from pathlib import Path
 
@@ -32,6 +33,13 @@ def test_extension_content_mismatch_quarantined(type_mismatch_glb: Path, store_r
     assert (store_root / "quarantine").exists()
 
 
+def test_non_obj_bytes_named_obj_quarantined(fixtures_dir: Path, store_root: Path):
+    p = fixtures_dir / "non_obj_bytes.obj"
+    out = ingest_local_file(p, store_root)
+    assert out["result"] == "QUARANTINE_TYPE_MISMATCH"
+    assert AssetRegistry(store_root).count_authoritative() == 0
+
+
 def test_malformed_obj_rejected(malformed_obj: Path, store_root: Path):
     out = ingest_local_file(malformed_obj, store_root)
     assert out["result"] == "REJECT_MALFORMED"
@@ -42,13 +50,10 @@ def test_zip_traversal_rejected_via_ingest(store_root: Path, tmp_path: Path):
     zpath = tmp_path / "trav.zip"
     with zipfile.ZipFile(zpath, "w") as zf:
         zf.writestr("../escape.txt", b"pwn")
-    outside_before = set(tmp_path.iterdir())
     out = ingest_local_file(zpath, store_root)
     assert out["result"] == "REJECT_SECURITY"
-    # No new escape file beside the zip
     assert not (tmp_path / "escape.txt").exists()
     assert AssetRegistry(store_root).count_authoritative() == 0
-    assert set(tmp_path.iterdir()) >= outside_before
 
 
 def test_source_fixture_never_modified(cube_obj: Path, store_root: Path):
@@ -62,8 +67,7 @@ def test_source_fixture_never_modified(cube_obj: Path, store_root: Path):
     assert cube_obj.stat().st_mtime_ns == before_mtime
 
 
-def test_partial_manifest_does_not_corrupt_registry(cube_obj: Path, store_root: Path, tmp_path: Path):
-    # Simulate a stray partial file that is NOT the authoritative path
+def test_partial_manifest_does_not_corrupt_registry(cube_obj: Path, store_root: Path):
     junk = store_root / "assets" / ("c" * 64) / "manifest.json.partial"
     junk.parent.mkdir(parents=True)
     junk.write_text("{", encoding="utf-8")
@@ -74,7 +78,20 @@ def test_partial_manifest_does_not_corrupt_registry(cube_obj: Path, store_root: 
     entry = reg.load_index()["entries"][out["sha256"]]
     auth = store_root / entry["manifest_path"]
     assert auth.is_file()
-    assert auth.read_text(encoding="utf-8").strip().startswith("{")
-    assert '"corrupted"' not in auth.read_text(encoding="utf-8") or True
-    # Partial junk must not be indexed
+    json.loads(auth.read_text(encoding="utf-8"))
     assert all("partial" not in e.get("manifest_path", "") for e in reg.load_index()["entries"].values())
+
+
+def test_corrupted_manifest_is_integrity_conflict(cube_obj: Path, store_root: Path):
+    first = ingest_local_file(cube_obj, store_root)
+    assert first["result"] == "ACCEPTED"
+    mpath = Path(first["manifest_path"])
+    # Hostile overwrite of authoritative manifest identity fields
+    bad = json.loads(mpath.read_text(encoding="utf-8"))
+    bad["sha256"] = "0" * 64
+    bad["content_address"] = "sha256:" + ("0" * 64)
+    mpath.write_text(json.dumps(bad, indent=2) + "\n", encoding="utf-8")
+    second = ingest_local_file(cube_obj, store_root)
+    assert second["result"] == "REGISTRY_INTEGRITY_CONFLICT"
+    assert second["state_mutation"] is False
+    assert AssetRegistry(store_root).count_authoritative() == 1

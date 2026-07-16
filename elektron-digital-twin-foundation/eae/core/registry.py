@@ -14,11 +14,12 @@ from .policy import INGESTION_POLICY_VERSION
 class AssetRegistry:
     """
     Layout under store_root:
-      registry/index.json
+      registry/index.json          — keyed by full sha256 hex (physical identity)
       assets/<sha256_hex>/content
       assets/<sha256_hex>/manifest.json
       logs/executions/<execution_id>.json
-      quarantine/  (security staging only)
+      logs/evaluations/<execution_id>.json  — optional policy evaluation metadata
+      quarantine/  (security / mismatch staging only)
     """
 
     def __init__(self, store_root: Path):
@@ -27,26 +28,22 @@ class AssetRegistry:
         self.index_path = self.registry_dir / "index.json"
         self.assets_dir = store_root / "assets"
         self.logs_dir = store_root / "logs" / "executions"
+        self.eval_logs_dir = store_root / "logs" / "evaluations"
         self.quarantine_dir = store_root / "quarantine"
         self.registry_dir.mkdir(parents=True, exist_ok=True)
         self.assets_dir.mkdir(parents=True, exist_ok=True)
         self.logs_dir.mkdir(parents=True, exist_ok=True)
+        self.eval_logs_dir.mkdir(parents=True, exist_ok=True)
         self.quarantine_dir.mkdir(parents=True, exist_ok=True)
         if not self.index_path.exists():
-            self._write_index_atomic({"version": 1, "ingestion_policy_version": INGESTION_POLICY_VERSION, "entries": {}})
+            self._write_index_atomic({"version": 1, "entries": {}})
 
     def load_index(self) -> dict[str, Any]:
         return json.loads(self.index_path.read_text(encoding="utf-8"))
 
-    def lookup(self, sha256_hex: str, policy_version: str = INGESTION_POLICY_VERSION) -> dict[str, Any] | None:
-        idx = self.load_index()
-        entry = idx.get("entries", {}).get(sha256_hex)
-        if not entry:
-            return None
-        if entry.get("ingestion_policy_version") != policy_version:
-            # Different policy → not the same authoritative identity for this policy
-            return None
-        return entry
+    def lookup(self, sha256_hex: str) -> dict[str, Any] | None:
+        """Physical identity lookup by complete SHA-256. Policy version is ignored."""
+        return self.load_index().get("entries", {}).get(sha256_hex)
 
     def asset_dir(self, sha256_hex: str) -> Path:
         return self.assets_dir / sha256_hex
@@ -64,8 +61,9 @@ class AssetRegistry:
         idx.setdefault("entries", {})[sha256_hex] = {
             "asset_id": asset_id,
             "sha256": sha256_hex,
-            "ingestion_policy_version": INGESTION_POLICY_VERSION,
             "manifest_path": manifest_relpath,
+            # Recorded for audit only — does not participate in physical identity.
+            "first_ingestion_policy_version": INGESTION_POLICY_VERSION,
         }
         self._write_index_atomic(idx)
 
@@ -73,9 +71,16 @@ class AssetRegistry:
         return len(self.load_index().get("entries", {}))
 
     def write_execution_log(self, execution_id: str, payload: dict[str, Any]) -> Path:
-        path = self.logs_dir / f"{execution_id}.json"
+        return self._write_json_atomic(self.logs_dir / f"{execution_id}.json", payload)
+
+    def write_evaluation_log(self, execution_id: str, payload: dict[str, Any]) -> Path:
+        """Policy/evaluation metadata only — never creates a second physical asset."""
+        return self._write_json_atomic(self.eval_logs_dir / f"{execution_id}.json", payload)
+
+    def _write_json_atomic(self, path: Path, payload: dict[str, Any]) -> Path:
+        path.parent.mkdir(parents=True, exist_ok=True)
         data = json.dumps(payload, indent=2, sort_keys=True) + "\n"
-        fd, tmp_name = tempfile.mkstemp(prefix=".exec.", suffix=".tmp", dir=str(self.logs_dir))
+        fd, tmp_name = tempfile.mkstemp(prefix=".log.", suffix=".tmp", dir=str(path.parent))
         try:
             with os.fdopen(fd, "w", encoding="utf-8") as f:
                 f.write(data)
