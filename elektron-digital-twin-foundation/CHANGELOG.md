@@ -86,3 +86,16 @@ All notable changes to the digital twin foundation. Append-only.
 - Readiness: **L00_READY_FOR_PHYSICAL_INTAKE**
 - L00 closure: **REJECTED**
 - Layer 1: **BLOCKED**
+
+## 2026-07-16 (Formula and Symbol Standard)
+
+### Added
+
+- `FORMULA_AND_SYMBOL_STANDARD.md` — copyable formula template, symbol translation, tolerance formatting rules
+
+### Changed
+
+- `README.md` — EDTS Layer 0 baseline reading order; formula standard as item 1
+- `AGENTS.md` — formula/symbol and coordinate orientation operational directives
+- `RESEARCH_STANDARD.md` — mathematical representation and tolerancing requirements
+- `CLEARANCE_AND_FIT_STANDARD_PROPOSAL.md` — minimum clearance formula reformatted per formula standard

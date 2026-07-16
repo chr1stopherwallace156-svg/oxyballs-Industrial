@@ -36,7 +36,20 @@ Every research topic must progress through four sequential, deterministic passes
 ### Pass 4 — Integration Proposal
 - Package resolved knowledge into machine-readable `.json` structures and human-readable `.md` dossiers.
 
-## 3. Code / Directory Structure
+## 4. Mathematical Representation in Technical Research
+
+All parameters, measurements, dimensions, and limits compiled during technical research must be declared using the explicit structured template of [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md).
+
+### Measurement validation and tolerancing
+
+1. Do not use un-templated ranges or shorthand tolerance limits (such as "approx 2m").
+2. Transcribe all technical tolerances to include:
+   - Nominal value
+   - Symmetric or asymmetric deviation bounds
+   - Written operational range (minimum and maximum bounds spelled out as text)
+3. Ensure every calculated parameter includes an explicit citation of its measurement instrumentation class (MAC-A through MAC-D) as mapped in [schemas/CLAIM_REGISTRY_CORE_SCHEMA_V4_PROPOSAL.json](schemas/CLAIM_REGISTRY_CORE_SCHEMA_V4_PROPOSAL.json).
+
+## 5. Code / Directory Structure
 
 All generated research must be written directly to the following git file paths, keeping data completely isolated from runtime logic:
 

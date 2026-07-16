@@ -1,19 +1,50 @@
-# Elektron Digital Twin Foundation
+# EDTS: Entire Vehicle Digital Twin System (Layer 0 Baseline)
 
-Authoritative documentation scaffold for building a layered, gate-governed 3D digital twin of Elektron Industrial's gas-to-EV conversion reference vehicle.
+This repository contains the authoritative schemas, standards, and registries establishing the baseline data model and coordinate frameworks for the F-450 physical vehicle intake and digital reconstruction.
 
-## Start here
+**Readiness:** `L00_READY_FOR_PHYSICAL_INTAKE`  
+**Closure:** `L00_CLOSURE_REJECTED` — physical asset intake required before re-closure  
+See [STATUS.json](STATUS.json) for machine-readable project state.
 
-Agents and humans must read these files **in order** before any layer work:
+---
 
-1. [AGENTS.md](AGENTS.md) — operating rules
-2. [STATUS.json](STATUS.json) — machine-readable project state
-3. [DECISIONS.md](DECISIONS.md) — locked decisions
-4. [REQUIREMENTS.md](REQUIREMENTS.md) — what the twin must deliver
-5. [ARCHITECTURE.md](ARCHITECTURE.md) — system structure
-6. [DATA_MODEL.md](DATA_MODEL.md) — entities and relationships
-7. [THREE_D_SPEC.md](THREE_D_SPEC.md) — 3D asset rules
-8. [QUALITY_STANDARD.md](QUALITY_STANDARD.md) — acceptance criteria
+## Required Reading Order
+
+All systems, agents, and engineers must consume the core specification files in the following sequence:
+
+1. **[FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md)**  
+   Establishes the copyability, structure, and machine-readability rules for all mathematical and tolerance statements.
+
+2. **[registries/UNIT_REGISTRY.json](registries/UNIT_REGISTRY.json)**  
+   The controlled vocabulary of all measurement units.
+
+3. **[registries/COORDINATE_FRAME_REGISTRY.json](registries/COORDINATE_FRAME_REGISTRY.json)**  
+   Defines spatial systems, handedness, and core platform datums.
+
+4. **[registries/TRANSFORM_REGISTRY.json](registries/TRANSFORM_REGISTRY.json)**  
+   Provides machine-readable 4x4 matrix transforms for engine, CAD, and runtime rendering.
+
+5. **[schemas/CLAIM_REGISTRY_CORE_SCHEMA_V4_PROPOSAL.json](schemas/CLAIM_REGISTRY_CORE_SCHEMA_V4_PROPOSAL.json)**  
+   Core JSON schema with Draft 7 conditional validations for validating engineering claims.
+
+6. **[DATUM_CONSTRUCTION_STANDARD.md](DATUM_CONSTRUCTION_STANDARD.md)**  
+   Repeatable physical metrology routines for establishing vehicle origins.
+
+7. **[CLEARANCE_AND_FIT_STANDARD_PROPOSAL.md](CLEARANCE_AND_FIT_STANDARD_PROPOSAL.md)**  
+   Formulas and tables governing dynamic packaging buffers.
+
+### Extended governance reading
+
+After the core sequence above, read:
+
+- [AGENTS.md](AGENTS.md) — agent operating rules
+- [DECISIONS.md](DECISIONS.md) — locked decisions
+- [L00_CONFIRMED_CORRECTIONS.md](L00_CONFIRMED_CORRECTIONS.md) — accepted corrections
+- [L00_PROVISIONAL_CORRECTIONS.md](L00_PROVISIONAL_CORRECTIONS.md) — provisional dimensional claims
+- [L00_FINAL_GAP_REPORT.md](L00_FINAL_GAP_REPORT.md) — remaining gaps (GAP-001 through GAP-004)
+- [VIN_AND_LABEL_CAPTURE_PROTOCOL.md](VIN_AND_LABEL_CAPTURE_PROTOCOL.md) — physical intake protocol
+
+---
 
 ## Layer progression
 
@@ -43,7 +74,7 @@ Every layer passes five gates before advancing:
 
 ## Current stage
 
-**L00 — Reference Lock** (in progress). See [STATUS.json](STATUS.json).
+**L00 — Reference Lock** (document phase complete; physical intake pending). See [STATUS.json](STATUS.json).
 
 ## Related work
 
