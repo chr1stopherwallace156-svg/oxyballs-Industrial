@@ -182,6 +182,18 @@ supplier datasheets → CAN/PATS.**
    limits. Outputs: candidate powertrain table, missing-datasheet
    list, values-to-unlock mapping, per-value Build Engine status.
    **No final parts, nothing Confirmed.**
+
+   **Status (batch_16):** first candidates named — Webasto CV Standard
+   Battery + VIB (**LegacyCandidate** — Pro 40 successor question) and
+   Dana TM4 SUMO MD — but delivered **sourceless** (no URLs/quotes;
+   everything NeedsExactSource) and with a face-value **power
+   mismatch** (owner P=V×I check: ≤60/100 kW available vs 130/250 kW
+   target → **blocker B-003 POWERTRAIN_COMPATIBILITY_REVIEW_REQUIRED**).
+   **Next payload: the Powertrain Compatibility Check** (8 checks,
+   compatibility table, mismatch warnings, supplier questions). The 20
+   recorded supplier questions (10 Webasto / 10 Dana, review_11) are
+   owner/business outreach actions. Component selection everywhere
+   stays blocked until B-003 resolves.
 2. **Cooling** (L6) — EMPTY: battery/motor/inverter/charger/DC-DC
    loops, pump + radiator sizing, flow, pressure drop, derating,
    high-ambient testing.

@@ -5,6 +5,26 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-15 — RH batch 16 + review_11: powertrain candidates; B-003 compatibility blocker filed
+
+- Archived batch_16 (Webasto CV Standard + VIB / Dana TM4 SUMO MD
+  candidate profiles) and review_11 1:1.
+- **B-003 POWERTRAIN_COMPATIBILITY_REVIEW_REQUIRED filed** (owner
+  directive): face-value P=V×I check shows ≤60/100 kW available vs the
+  130/250 kW Dana target (≈325/625 A needed at 400 V) — RC-58 records
+  the arithmetic as a DerivedRiskFlag; component selection everywhere
+  stays blocked until configuration is established and reviewed.
+- New rows CS-36/37 + RC-56/57 — all values NeedsExactSource: batch_16
+  delivered a **sourceless data matrix** (zero URLs/quotes — 5th
+  defect variant, wholesale provenance failure); Webasto data
+  additionally flagged **LegacyCandidate** (Standard Battery Pro 40
+  successor question).
+- Owner downgrades applied (VIB currents, coolant figures, Dana DC
+  specs, S-Box pre-charge, J1939 claims); 20 supplier questions
+  recorded as the first external-outreach work package.
+- Next payload: the Powertrain Compatibility Check (owner prompt).
+- Nothing ingested; nothing Confirmed; ODRs untouched.
+
 ## 2026-07-15 — RH batch 15 + review_10: HV Wiring Package v0.1; pivot to powertrain definition
 
 - Archived batch_15 (HV Wiring Decision Matrix, 10×7, all rows

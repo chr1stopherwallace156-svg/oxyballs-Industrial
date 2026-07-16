@@ -62,6 +62,8 @@ this file supersedes it (see Addendum, section 7).
 | CS-33 | **TechnicalBackground** (owner review_08) | *TONFUL: "IP67 vs. IP69K: Waterproof Ratings Guide for Off-Road Vehicles"* | tonful.com (trade article) | <https://tonful.com/ip67-vs-ip69k-waterproof-ratings-guide-for-off-road-vehicles-tonful/> | Background (batch_13) — guides the test requirement; **final IP test parameters only from ISO 20653 text or a certified lab procedure** (CS-29 stays the gate) — lane L5/L8 |
 | CS-34 | **InstrumentationCandidate / TestMethodCandidate** (owner reclassification — NOT RegulatoryCandidate; **re-affirmed after batch_14 regression**) | *Metrel MI3132 EV vehicle tester — spec listing (µΩ Kelvin 4-wire, 1 A/2 A; supports ECE R100 Annex 4A/4B, ISO 6469-3)* | Metrel (via test-meter.co.uk reseller page) | <https://www.test-meter.co.uk/metrel-mi3132-ev-electric-vehicle-tester> | Candidate (batch_13) — shows HOW to measure bonding (4-wire Kelvin ≥1 A), not WHAT the legal threshold is; surface-prep procedure still missing — lane L5/L10 |
 | CS-35 | **SupplierCandidate — dual-candidate structure** (owner review_09) | *Amphenol Excel\|Mate Mono (HVBI series) product brochure* — HV connectors for 16–70 mm² shielded cable; HVIL; 360° shielding; IP67/IP6K9K mated; 1000 VDC; unique keying (30°/60°/90° color-coded) | Amphenol Industrial (**official Amphenol server**) | <https://www.amphenol-industrial.de/media/pages/downloads/ev/397e425cfa-1707818150/excelmate-mono-produktbroschuere.pdf> | Candidate (batch_14) — **closes the connector ask at candidate level.** Owner structure: **03R8 = 180 A candidate (35–50 mm²); 05R10 = 250 A candidate (50–70 mm²); final choice BLOCKED by battery + inverter current** — lane L5/L9 |
+| CS-36 | **SupplierCandidate — LegacyCandidate + MissingSourceLink** | *Webasto CV Standard Battery System (NMC prismatic) + Vehicle Interface Box (VIB)* | Webasto — **NO URL/document on file (batch_16 supplied numbers without any source link)** | *(none on file — defect)* | Candidate (batch_16) — every value `NeedsExactSource`/`NeedsSupplierData`. **Owner flags: product line superseded by Standard Battery Pro 40 (~40 kWh, 333–407 V, 297 kg — owner-relayed) → LegacyCandidate, availability requires supplier confirmation** — lanes L9/L6 |
+| CS-37 | **SupplierCandidate — MissingSourceLink** | *Dana TM4 SUMO MD (HV2100-6P PM motor + integrated inverter)* | Dana TM4 — **NO URL/document on file (batch_16)**; owner corroborates the Class 4–7 / 265 kW / 3320 Nm / 3700 rpm envelope from Dana's public descriptions | *(none on file — defect)* | Candidate (batch_16) — every value `NeedsExactSource`/`NeedsSupplierData`; DC-side currents and DC-link capacitance not published (supplier questions required) — lanes L9/L6 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -127,6 +129,9 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-53 | TONFUL: IP69K (ISO 20653 "K") = 80 °C water jets at 100 bar, multiple angles, rotating fixture; IP67 = static immersion, 1 m, 30 min *(trade explainer — describes the tests, is not the standard)* | CS-33 | Article comparison section — unverified | **TechnicalBackground / NeedsExactSource** — guides underbody test design (dynamic washdown, not just immersion); final parameters from ISO 20653/lab only — lane L5/L8 |
 | RC-54 | Metrel MI3132 EV: µΩ-meter function, 1 A / 2 A test currents, 4-wire Kelvin method, supports ECE R100 Annex 4A/4B and ISO 6469-3 *(instrument spec — shows a credible bonding measurement method: ≥1 A injection, Kelvin connection, not a DMM continuity check)* | CS-34 | **Candidate locator (batch_13): µΩ-meter spec block** — unverified | **InstrumentationCandidate / TestMethodCandidate** (owner reclassification); surface-prep procedure (e-coat, corrosion inhibitor) still missing — lane L5/L10 |
 | RC-55 | Amphenol HVBI part-number system: "HVBI-7-03R8-XFC-X-XX-FG… 35mm2 to 50mm2. Shell type: 7: straight plug. 9: Right angle plug. Insert size: 03R8: 8mm Radsok (Rated current 180A)… Alternate keying positions: ARD: 30°, Red. BBK: 60°, Black. CYL: 90°, Yellow." *(owner adds from same brochure: 05R10 = 250 A / 50–70 mm² option; HVIL, EMI shield, IP67/IP6K9K mated, 1000 VDC)* — directly satisfies the J1673-style keying/mis-mate concern (RC-39) at supplier level | CS-35 | **Candidate locator (batch_14): page 3, part-number selection block** — unverified | **SupplierCandidate — dual candidates (03R8 180 A vs 05R10 250 A); selection BLOCKED by battery + inverter current**; `NeedsEngineeringReview` — lane L5/L9 |
+| RC-56 | Webasto CV Standard Battery candidate profile *(batch_16, NO source link)*: ~350 V nominal / 280–400 V range per pack; 35 kWh/pack scalable to 10 packs (350 kWh) via VIB; **150 A continuous / 250 A 10 s peak at VIB (system level)**; liquid cooled 10 l/min, <50 mbar; 295 kg/pack; 960×686×302 mm; J1939 via VIB; LV 123/124 referenced. I_sc / internal resistance NOT published | CS-36 | **NO locator — MissingSourceLink defect; every value NeedsExactSource** | **SupplierCandidate — LegacyCandidate**; owner downgrade list applies (currents, coolant specs, J1939 registers all need datasheet or supplier-email proof) — lanes L9/L6 |
+| RC-57 | Dana TM4 SUMO MD candidate profile *(batch_16, NO source link)*: 130 kW continuous / 250–265 kW peak (30 s duty limit); 685 Nm continuous / 2150–3320 Nm peak (direct drive); 3500–3700 rpm; up to 750–800 V DC; coolant inlet max 65 °C, water/glycol 40/60; pre-charge "integrated in S-Box" (unproven); J1939. Continuous/peak **DC bus currents, DC-link capacitance, and mass NOT published** | CS-37 | **NO locator — MissingSourceLink defect; every value NeedsExactSource** | **SupplierCandidate**; the four OPEN fields are exactly the HV-wiring unlock variables — supplier questions required — lanes L9/L6 |
+| RC-58 | **Powertrain compatibility risk (owner-derived, review_11)**: at candidate face values, Webasto VIB limits (150 A cont / 250 A peak) yield ≤60 kW continuous / ≤100 kW peak at 400 V — versus the Dana target of 130 kW continuous / 250 kW peak, which needs ≈325 A cont / ≈625 A peak at 400 V (P=V×I, lossless). **Candidate battery output may not support candidate motor demand** unless configuration differs (pack count, 400 vs 800 V, parallel arrangement, VIB limit, supplier-approved setup) | derived over RC-56 + RC-57 (both unverified) | n/a — derived risk analysis, not a source claim | **DerivedRiskFlag → blocker B-003 (POWERTRAIN_COMPATIBILITY_REVIEW_REQUIRED)**; arithmetic owner-supplied; resolves only via supplier answers + engineering review — lanes L9/L6/L8 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -1037,3 +1042,76 @@ NeedsEngineeringReview**. What powertrain data unlocks, per owner:
 cable gauge, connector rating, fuse family/rating, contactor
 suitability, pre-charge resistor value, pre-charge relay suitability,
 thermal/cooling load, range/gradeability simulation inputs.
+
+---
+
+## 23. Batch 16 + owner review_11 — powertrain candidates + compatibility blocker (2026-07-15)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_16_powertrain_candidates.md`
+and `docs/research/raw/owner_reviews/review_11_batch_16_verdict.md`.
+Row additions: CS-36/37, RC-56..RC-58. **New blocker filed: B-003
+(POWERTRAIN_COMPATIBILITY_REVIEW_REQUIRED)** — owner directive.
+
+### The compatibility catch (owner P=V×I check)
+
+Face-value candidate numbers don't close: Webasto VIB limits give
+≤60 kW continuous / ≤100 kW peak at 400 V; the Dana target needs
+130/250 kW (≈325/625 A at 400 V). RC-58 records the full arithmetic as
+a **DerivedRiskFlag** — not a conclusion that the parts are wrong,
+but a proof that **configuration must be established before any
+component math runs** (pack count, 400 vs 800 V, VIB limit, parallel
+arrangement, supplier-approved setup). This is the pipeline's first
+system-level engineering catch — earlier catches were sourcing
+discipline; this one is physics.
+
+### New defect type: sourceless data matrix (5th variant)
+
+Batch_16 delivered its entire numeric profile with **zero URLs and
+zero quotes** — violating the standing "every claim must include
+title, URL, exact quote, page/section" rule wholesale for the first
+time. Disposition: CS-36/37 carry `MissingSourceLink`; every value in
+RC-56/57 is `NeedsExactSource`; nothing from this batch can promote
+until actual datasheets (or supplier emails) are archived. Defect
+ledger: splice → action-column → title/cell → status-language →
+**sourceless matrix**.
+
+### Owner dispositions applied
+
+- **Downgraded pending source proof:** 150/250 A VIB limits; 10 l/min
+  and <50 mbar coolant figures; Dana DC input voltage; DC-link
+  capacitance; "integrated pre-charge via S-Box"; J1939 register
+  claims.
+- **LegacyCandidate:** Webasto CV Standard data may describe a
+  superseded product (Standard Battery Pro 40 successor: ~40 kWh,
+  333–407 V, 297 kg, 400/800 V configs, up to 18 packs/720 kWh —
+  owner-relayed, also unverified). Availability = supplier
+  confirmation required.
+- **Partially unlocked for HV wiring:** voltage-range lane, pack
+  mass/dimensions, cooling lane, CAN/J1939 lane, cable/connector
+  voltage class. **Still locked:** cable gauge, fuse rating, contactor
+  suitability, pre-charge values, short-circuit protection, thermal
+  derating — pending B-003 resolution.
+- **Supplier outreach list recorded:** 10 Webasto + 10 Dana questions
+  (verbatim in review_11) — the first concrete external-contact work
+  package in the program. These are owner/business actions, not
+  research actions.
+
+### Conduct notes
+
+- Batch_16 correctly held its own four OPEN fields (I_sc, DC-link C,
+  DC bus currents, motor mass) and correctly framed Confirmed as a
+  human-authority action. The failure was provenance, not honesty.
+- Batch_16's "unlock" narrative (Part 3) treated the 150/250 A figures
+  as the sizing basis — the owner's compatibility check shows why
+  that's premature. Unlock claims from unverified inputs are now a
+  watch item.
+
+### Next payload (owner prompt): Powertrain Compatibility Check
+
+Compare Webasto vs Dana candidates: 8 checks (current-vs-power both
+ways, 400/800 V question, VIB limiting, pack count for target, legacy
+status, missing values, supplier questions), P=V×I / I=P/V formulas,
+outputs = compatibility table + mismatch warnings + missing data +
+supplier questions + blocker list. **No selections, nothing
+Confirmed.**

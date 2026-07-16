@@ -4,14 +4,14 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-15
-- Reason for handoff: task complete (batch 15 + review_10 reconciled — HV Wiring v0.1);
+- Reason for handoff: task complete (batch 16 + review_11 — B-003 filed);
   awaiting owner decisions and/or next batch
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `63f0479` — Reconcile RH batch 14 + owner review_09
+- Start commit: `f6c460b` — Reconcile RH batch 15 + owner review_10
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
@@ -19,43 +19,45 @@
 ## Work performed
 
 - Files changed:
-  `docs/research/raw/research_hunter/batch_15_hv_wiring_decision_matrix.md`
-  and `docs/research/raw/owner_reviews/review_10_batch_15_verdict.md`
-  (new, verbatim — committed separately as `22a8466`),
+  `docs/research/raw/research_hunter/batch_16_powertrain_candidates.md`
+  and `docs/research/raw/owner_reviews/review_11_batch_16_verdict.md`
+  (new, verbatim — committed separately as `fc5ae9b`),
   `docs/research/raw/research_hunter/PROVENANCE.md`,
-  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (section 22 —
-  no new CS/RC rows), `docs/research/RESEARCH_MAP.md` (L5 → v0.1 HELD;
-  active focus → powertrain definition), `docs/CHANGELOG.md`, handoff
-  files
-- Summary: batch 15 (the owner-prompted 10×7 HV Wiring Decision
-  Matrix) + review_10 reconciled. Matrix accepted as candidate
-  decision logic — **HV Wiring Package v0.1** (owner label:
-  architecture mapped, families identified, blockers documented,
-  selection halted, review required). Corrections binding on the
-  matrix: "hard-coded" → "decision logic is mapped"; "selection
-  locked" (3rd recurrence); **"peak phase demand" → "DC link
-  continuous and peak current demand"** (battery DC side ≠ motor
-  phase side); Sendyne "hard danger boundary" re-fenced (2nd
-  recurrence). Recurrence ledger recorded for future M10 mechanical
-  checks. **Phase pivot: L5 HELD; next payloads = powertrain
-  definition (battery/inverter/motor candidate datasheets, L9/L6)
-  with the owner's extraction field lists.** **Nothing ingested;
-  nothing Confirmed; ODRs untouched.**
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-36/37;
+  RC-56..58; section 23), `docs/status/BLOCKERS.md` (**B-003 filed**),
+  `docs/research/RESEARCH_MAP.md` (powertrain status + compatibility
+  check next), `docs/CHANGELOG.md`, handoff files
+- Summary: batch 16 (first powertrain candidates: Webasto CV Standard
+  + VIB, Dana TM4 SUMO MD) + review_11 reconciled. **B-003
+  POWERTRAIN_COMPATIBILITY_REVIEW_REQUIRED filed** — the owner's
+  P=V×I check shows face-value battery limits (150/250 A at ≤400 V →
+  ≤60/100 kW) cannot feed the Dana 130/250 kW target (needs ≈325/625 A
+  at 400 V); RC-58 records the arithmetic as a DerivedRiskFlag.
+  Component selection everywhere stays blocked until configuration is
+  established (pack count, 400/800 V, VIB limit) and reviewed. New
+  defect type recorded: **sourceless data matrix** (batch supplied all
+  numbers with zero URLs/quotes) — CS-36/37 carry MissingSourceLink;
+  every RC-56/57 value is NeedsExactSource; Webasto data additionally
+  **LegacyCandidate** (Pro 40 successor question). 20 supplier
+  questions recorded as the first external-outreach work package.
+  **Next payload: the Powertrain Compatibility Check.** **Nothing
+  ingested; nothing Confirmed; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_15/review_10 archives are 1:1 against the
-  owner's chat message ("Gemini 15:75"); the matrix introduced no new
-  claims (verified: all cited sources map to existing CS rows); no
-  component was selected and nothing was marked Confirmed
+- Verified vs claimed: batch_16/review_11 archives are 1:1 against the
+  owner's chat message ("16:75"); RC-58's arithmetic is owner-supplied
+  over explicitly unverified inputs and is recorded as risk analysis,
+  not fact; no powertrain value entered any rule or sizing
 
 ## State
 
 - Current phase: Revision 07 Source Ingestion and Consolidation
 - Blockers: B-001 (ingestion — ~70 batches outstanding); B-002
-  (.gov/CARB extraction blocked)
+  (.gov/CARB extraction blocked); **B-003 (powertrain compatibility
+  review — blocks all component selection)**
 - Open owner decisions (accumulated): (1) elektron-os-clean
   two-universe question (Audit 01 §0/§11.1); (2) index.html
   disposition (Audit 01 §10); (3) L2 regulatory module mapping;

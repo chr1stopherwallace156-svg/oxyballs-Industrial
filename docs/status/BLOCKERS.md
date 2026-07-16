@@ -15,6 +15,25 @@ Active blockers and what unblocks them. Entries are closed by marking
 
 ---
 
+## B-003 — POWERTRAIN_COMPATIBILITY_REVIEW_REQUIRED
+
+- Filed: 2026-07-15 (owner directive, review_11)
+- Status: Active
+- Blocks: all HV Wiring Package component selections (cable gauge,
+  connector insert, main fuse, contactor, pre-charge R/relay, MSD
+  rating); powertrain candidate advancement; any range/gradeability
+  simulation inputs.
+- Reason (owner wording): candidate battery output current may not
+  support candidate motor/inverter continuous and peak power demand.
+  At face values: Webasto VIB 150 A cont / 250 A peak at ≤400 V yields
+  ≤60/100 kW vs the Dana SUMO MD 130/250 kW target needing ≈325/625 A
+  (RC-58).
+- Unblocked by: the Powertrain Compatibility Check (owner-prompted next
+  payload), answers to the 20 recorded supplier questions
+  (10 Webasto + 10 Dana — review_11), confirmation of system
+  architecture (400 vs 800 V, pack count, VIB limits, current
+  production status), and engineering review of the resulting numbers.
+
 ## B-002 — Verbatim extraction from .gov/CARB sources blocked in current environment
 
 - Filed: 2026-07-15
