@@ -43,11 +43,13 @@ No phase is marked COMPLETE without its gate evidence recorded in `STATUS.json` 
 
 ---
 
-## Next schema priority
+## Next build priority (under kernel freeze)
 
-**Approved next deliverable:** Master Schema for **Identity Management + Version Control** (`USS-IDENTITY`, `USS-VERSION`) before expanding Asset Pipeline API schemas.
+**Approved next deliverable:** deepen the **Component Passport** for `CMPINST-VEH000001-DOOR-FL` (`PP-VEH000001-DOOR-FL-001`) — evidence / geometry / interaction status and links — **without** expanding frozen kernel schemas.
 
-See:
+Deferred (post-reopen or separate proposal only): multi-axis asset quality scores, first-class multi-role geometry assets (CAD/scan/LOD/collision/…), and a service **Dependency Graph**. Do not invent Geometry A/B labels.
+
+Identity / version master schemas remain seeded:
 
 - [`schemas/edts-os-platform-master.schema.json`](schemas/edts-os-platform-master.schema.json)
 - [`schemas/component-identity.schema.json`](schemas/component-identity.schema.json)

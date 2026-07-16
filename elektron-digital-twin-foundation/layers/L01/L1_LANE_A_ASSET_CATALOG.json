@@ -9,12 +9,18 @@
   },
   "component_first_acquisition": {
     "status": "ACTIVE",
-    "rule": "Hard Rule 0 corollary — Component-First Acquisition",
+    "rule": "Hard Rule 0 corollary + Hard Rule 11 — Evidence Acquisition Efficiency",
+    "search_levels": [
+      "COMPLETE_VEHICLE",
+      "INDIVIDUAL_COMPONENT"
+    ],
+    "preference": "Evaluate exact complete-vehicle assets first when discovered; otherwise acquire component-by-component. Never forbid complete-vehicle search.",
     "primary_component_targets": [
       "CMPINST-VEH000001-DOOR-FL",
       "ASMINST-VEH000001-CAB"
     ],
-    "admission_rule": "Candidate assets do not enter the exact-vehicle silo until Hard Rule 4 lifecycle + HR-EVI verification; similarity and generation match are discovery-only."
+    "admission_rule": "Candidate assets do not enter the exact-vehicle silo until Hard Rule 4 lifecycle + HR-EVI verification; similarity and generation match are discovery-only.",
+    "next_build_priority": "COMPONENT_PASSPORT_PP-VEH000001-DOOR-FL-001"
   },
   "authorized_search_lanes": [
     {

@@ -24,5 +24,5 @@
     ]
   },
   "schema_version": "1.0.0",
-  "notes": null
+  "notes": "Primary truth surface for CMPINST-VEH000001-DOOR-FL under Hard Rule 11. Deepen evidence/geometry/interaction links as real assets are acquired. Do not invent part numbers, hashes, or hinge coordinates. Legacy family passport CMP_PASS_FR_DOOR_L is non-isolated and must not auto-inherit here."
 }

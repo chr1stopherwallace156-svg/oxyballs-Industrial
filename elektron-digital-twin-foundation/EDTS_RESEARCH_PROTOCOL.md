@@ -2,13 +2,14 @@
 
 **Status:** `ACTIVE`  
 **Effective Date:** 2026-07-16  
-**Version:** `2.1.1`  
+**Version:** `2.1.2`  
 **Architecture host:** [EDTS_OS.md](EDTS_OS.md) v3.0.0 (EDTS-OS)  
 **Isolation law:** [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
 **Binding for:** all research, acquisition, geometry development, and software logic operations under `elektron-digital-twin-foundation/`
 
 **Changelog from 2.0.0:** Constitutional **Hard Rule — Exact Vehicle Isolation (HR-EVI)**; vehicle datasets under `examples/<oem>/<exact_config>/`; similarity never evidence; Hard Rule 0 sharing clarified as non-automatic.  
-**Changelog from 2.1.0:** Hard Rule 0 adds **Component-First Acquisition** (no assumption of a complete exact-vehicle marketplace asset; admit components only after verification).
+**Changelog from 2.1.0:** Hard Rule 0 adds **Component-First Acquisition** (no assumption of a complete exact-vehicle marketplace asset; admit components only after verification).  
+**Changelog from 2.1.1:** Hard Rule 11 — Evidence Acquisition Efficiency (search complete-vehicle **and** component levels; prefer exact complete assets when they exist; never forbid complete-vehicle search).
 
 ---
 
@@ -40,9 +41,11 @@ Binding a reusable definition to a vehicle requires independent evidence for tha
 
 #### Component-First Acquisition (Hard Rule 0 corollary)
 
-The system shall **not** assume that a complete, exact-vehicle digital asset exists. Research and marketplace hunting proceed **independently per component** (door, hood, frame rail, axle, mirror, dashboard, cab shell, etc.).
+The system shall **not assume** that a complete exact-vehicle digital asset always exists — and shall **not refuse** to search for one when it might.
 
-Each candidate component is evaluated on its own evidence merits and admitted into the exact-vehicle silo only after passing the established verification workflow (Hard Rule 4 lifecycle + HR-EVI). Vehicle assemblies are constructed from individually verified component records rather than inherited from a single marketplace model.
+Each candidate component is evaluated on its own evidence merits and admitted into the exact-vehicle silo only after passing the established verification workflow (Hard Rule 4 lifecycle + HR-EVI). When evidence arrives as a complete-vehicle package, usable components are still admitted **individually** (keep/discard/build); the package is never inherited as automatic silo truth.
+
+Search order and completeness rules: **Hard Rule 11**.
 
 Operational homes (do **not** create parallel shortlist/gap/next-action files):
 
@@ -54,6 +57,7 @@ Operational homes (do **not** create parallel shortlist/gap/next-action files):
 | Exact vs related | HR-EVI + `schemas/cross-vehicle-comparison.schema.json` + catalog `grade` / `estimated_configuration_match` |
 | Acquisition sequence / next actions | `layers/L01/L1_REFERENCE_ACQUISITION_QUEUE.md` + `STATUS.json` |
 | Evidence gaps | existing L1 gap matrix / final gap report + per-asset availability audit |
+| Component truth surface | Component Passport (`components/` + exact-vehicle passport examples) |
 
 Machine form: `schemas/*` (universal) + `examples/<oem>/<exact_config>/` (datasets) + Lane A catalog (candidates).
 
@@ -138,7 +142,31 @@ Log modifications, source revisions, and reviewer status changes in the correcti
 
 Prioritize discovering, auditing, and correcting existing 3D/CAD/scan assets over recreating files from scratch. Characterize effort by subsystems touched (keep / discard / build), not calendar-day estimates.
 
-Efficiency applies **per component** under Component-First Acquisition: prefer adapting a graded door or cab-shell candidate over rebuilding that subsystem, without treating a partial marketplace vehicle as automatic silo truth.
+Works with Hard Rule 11: prefer the highest-quality *available* evidence — including a complete exact-vehicle package when one exists — then adapt at component granularity.
+
+### Hard Rule 11 — Evidence Acquisition Efficiency
+
+Research shall maximize evidence acquisition efficiency. Search for the highest-quality available evidence at **both** the complete-vehicle level and the individual-component level.
+
+**Order of preference (soft, not exclusive):**
+
+1. **Exact complete-vehicle asset** for the locked configuration — evaluate first when discovered. Legitimate sources include OEM CAD, manufacturer scan, photogrammetry dataset, teardown scan, museum scan, and engineering-supplier CAD.
+2. If no exact complete asset exists — or it is incomplete / wrong-configuration / unlicensed — **acquire evidence component-by-component** while preserving exact-vehicle isolation (HR-EVI).
+3. Related-year or platform-family assets remain **discovery-only** until configuration match is proven; they never auto-inherit into the silo.
+
+**Hard Rule 11 does *not* say:** “Never search for a complete vehicle.” Complete-vehicle search is encouraged when quality and configuration match justify it.
+
+**Immediate next build priority (over OEM part-number chase alone):** deepen the **Component Passport** for `CMPINST-VEH000001-DOOR-FL` using the existing passport schema and exact-vehicle instance records — geometry, evidence links, interaction status, and assembly relationships — without inventing missing bytes or reopening the frozen kernel.
+
+### Deferred architecture (do not implement under schema freeze)
+
+These improve long-term rigor but must **not** expand frozen kernel schemas unless a blocking defect from the real geometry workflow requires it (DT-D028):
+
+| Idea | Disposition |
+|---|---|
+| Multi-axis quality scores (exterior/interior geometry, dimensions, topology, textures, materials, animation, separation, scan/metadata quality, license, provenance, evidence strength) | Future evaluation axes — **not** Geometry A/B labels; do not invent a scoring engine now |
+| First-class geometry roles (Visual Exterior, Engineering Surface, Scan, CAD, LOD0–2, Collision, Proxy, Repair, Simulation, AR, Exploded) | Aligns with multiple simultaneous assets per component; frozen `geometry-asset.asset_role` stays as-is until reopen |
+| Dependency Graph (door → skin, frame, regulator, harness, latch, …) for remove/service order | Future graph alongside Evidence / Component / Assembly / Geometry; today’s assembly-relationship predicates are insufficient for full service dependency — propose later, do not fork schemas now |
 
 ---
 

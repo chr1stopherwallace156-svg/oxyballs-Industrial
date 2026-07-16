@@ -66,3 +66,23 @@ Consolidated into [L00_REFERENCE_LOCK.md](../layers/L00_REFERENCE_LOCK.md) and D
 ### Status
 
 Integrated; redundant proposal files not created.
+
+---
+
+## RL-003 — Evidence acquisition efficiency + deferred graphs (Hard Rule 11)
+
+- **Date:** 2026-07-16
+- **Layer:** L01 / protocol
+- **Agent:** Cursor Cloud Agent
+- **Question:** Soften “never search complete vehicle”; add multi-axis scores, geometry roles, Dependency Graph; next build = Component Passport?
+
+### Findings
+
+1. **Hard Rule 11 accepted (soft):** search complete-vehicle **and** component levels; prefer exact complete assets (OEM CAD, scans, photogrammetry, supplier CAD) when they exist; otherwise component-by-component under HR-EVI.
+2. **Multi-axis scores / first-class multi-role geometry / Dependency Graph:** deferred under kernel freeze — recorded as future architecture only; no Geometry A/B; no schema expansion.
+3. **Next build:** Component Passport `PP-VEH000001-DOOR-FL-001` (existing schema) prioritized over OEM part-number chase alone.
+4. Kernel tag `edts-kernel-v1.0.0-rc1` untouched.
+
+### Status
+
+DT-D029; protocol v2.1.2.

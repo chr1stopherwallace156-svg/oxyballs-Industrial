@@ -497,3 +497,18 @@ Append-only record of digital twin foundation decisions.
 - **Consequences:**
   - Work proceeds on asset acquisition and the door vertical slice outside frozen kernel schemas
   - Proven scope recorded in `KERNEL_RELEASE_MANIFEST.json` and `KERNEL_VALIDATION_SUMMARY.md`
+
+## DT-D029 — Hard Rule 11 efficiency; passport next; defer graphs/scores
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Proposal to maximize evidence efficiency (complete-vehicle + component search), expand quality axes, first-class geometry roles, and add a Dependency Graph; message truncated at Component Passport as the next build.
+- **Decision:**
+  1. Add **Hard Rule 11 — Evidence Acquisition Efficiency**: search both complete-vehicle and component levels; evaluate exact complete assets first when they exist; fall back to component-by-component under HR-EVI. Soften any reading of Component-First Acquisition as “never search for a complete vehicle.”
+  2. **Do not** implement multi-axis scoring engines, Geometry A/B labels, expanded `asset_role` enums, or a Dependency Graph schema under `SCHEMA_FREEZE_FOR_VERTICAL_SLICE` / DT-D028.
+  3. Record those ideas as **deferred architecture** in the research protocol.
+  4. **Next build priority:** deepen Component Passport `PP-VEH000001-DOOR-FL-001` (existing schema) — ahead of OEM part-number chase alone.
+  5. Assembly-relationship predicates remain the current structural links; service-order dependency modeling waits for a post-freeze proposal.
+- **Consequences:**
+  - Protocol v2.1.2; Lane A / acquisition queue language updated
+  - Kernel tag and schemas untouched

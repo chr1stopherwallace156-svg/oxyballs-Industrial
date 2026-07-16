@@ -35,7 +35,7 @@ Scan active 3D model registries, CAD marketplaces (e.g., GrabCAD, CGTrader), and
 **Output path:** `research/incoming/l01_lane_a_assets/`  
 **Register (active):** `layers/L01/L1_LANE_A_ASSET_CATALOG.json`  
 
-**Component-First Acquisition (Hard Rule 0 corollary):** Lane A hunts **per component** (e.g. `CMPINST-VEH000001-DOOR-FL`, cab shell). Do not assume a complete exact-vehicle marketplace model. Filter the catalog by `target_component_instance_ids` — do not create separate door/cab shortlist files. Exact-vs-related posture stays in HR-EVI + catalog `grade` / `estimated_configuration_match` (+ `schemas/cross-vehicle-comparison.schema.json` when a formal comparison record is warranted).
+**Hard Rule 11 + Component-First Acquisition:** Lane A searches at **complete-vehicle and component** levels. If an exact complete-vehicle asset exists, evaluate it first; if absent or incomplete, hunt per component (e.g. `CMPINST-VEH000001-DOOR-FL`, cab shell). Filter the catalog by `target_component_instance_ids` — do not create separate door/cab shortlist files. Exact-vs-related posture stays in HR-EVI + catalog `grade` / `estimated_configuration_match` (+ `schemas/cross-vehicle-comparison.schema.json` when a formal comparison record is warranted).
 
 ---
 
