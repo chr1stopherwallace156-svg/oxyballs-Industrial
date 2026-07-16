@@ -512,3 +512,20 @@ Append-only record of digital twin foundation decisions.
 - **Consequences:**
   - Protocol v2.1.2; Lane A / acquisition queue language updated
   - Kernel tag and schemas untouched
+
+## DT-D030 — Passport v1.1 stays proposal-only; active rc1 schema untouched
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** A draft proposed editing the Component Passport schema, embedding geometry/evidence objects, procedure remove-lists, premature geometry roles, and invented scores — while `edts-kernel-v1.0.0-rc1` is frozen and the door asset is still missing.
+- **Decision:**
+  1. **Do not modify** active `schemas/component-passport.schema.json` (byte-identical to tagged rc1).
+  2. Capture corrected architecture only under `proposals/COMPONENT_PASSPORT_V1_1_DESIGN.md` + `proposals/component-passport-v1.1.schema.json` (valid JSON Schema; ID-only links; no embedded authoritative records).
+  3. Passport is an **index + status summary**, not a container duplicating registries.
+  4. Separate assembly / connection / procedure dependency records; do not seed unverified remove-door graphs.
+  5. Candidates ≠ geometry assets; no Visual/Engineering/Collision roles until ACQUIRED→…→ROLE_EVALUATED.
+  6. Scores remain `null` + `NOT_EVALUATED` until a rubric exists.
+  7. Active door passport example truthfully states: exact instance exists; `CAND-00031-CGT` + `CAND-771-GRAB` discovered; no usable geometry or verified procedure linked.
+- **Consequences:**
+  - Kernel freeze preserved; illustrative v1.1 instance is non-authoritative
+  - GEO seed may remain for referential suite but stays unlinked from the passport while `file_exists: false`

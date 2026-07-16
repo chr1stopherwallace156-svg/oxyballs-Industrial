@@ -164,9 +164,10 @@ These improve long-term rigor but must **not** expand frozen kernel schemas unle
 
 | Idea | Disposition |
 |---|---|
-| Multi-axis quality scores (exterior/interior geometry, dimensions, topology, textures, materials, animation, separation, scan/metadata quality, license, provenance, evidence strength) | Future evaluation axes — **not** Geometry A/B labels; do not invent a scoring engine now |
-| First-class geometry roles (Visual Exterior, Engineering Surface, Scan, CAD, LOD0–2, Collision, Proxy, Repair, Simulation, AR, Exploded) | Aligns with multiple simultaneous assets per component; frozen `geometry-asset.asset_role` stays as-is until reopen |
-| Dependency Graph (door → skin, frame, regulator, harness, latch, …) for remove/service order | Future graph alongside Evidence / Component / Assembly / Geometry; today’s assembly-relationship predicates are insufficient for full service dependency — propose later, do not fork schemas now |
+| Multi-axis quality scores (exterior/interior geometry, dimensions, topology, textures, materials, animation, separation, scan/metadata quality, license, provenance, evidence strength) | Future evaluation axes — **not** Geometry A/B; scores stay `null` / `NOT_EVALUATED` until a rubric exists — see `proposals/COMPONENT_PASSPORT_V1_1_DESIGN.md` |
+| First-class geometry roles (Visual Exterior, Engineering Surface, Scan, CAD, LOD0–2, Collision, Proxy, Repair, Simulation, AR, Exploded) | Multiple simultaneous **registry** assets per component (IDs on passport); frozen `geometry-asset.asset_role` unchanged; do not invent roles without bytes |
+| Dependency Graph (structural / connection / procedure) | Separate record types; procedure edges `NOT_EVALUATED` until verified — **not** embedded remove-lists on the passport; see proposals design |
+| Passport v1.1 schema | **Proposal only** at `proposals/component-passport-v1.1.schema.json` — do **not** edit active rc1 `schemas/component-passport.schema.json` |
 
 ---
 

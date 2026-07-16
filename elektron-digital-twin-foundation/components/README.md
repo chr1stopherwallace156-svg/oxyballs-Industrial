@@ -8,9 +8,12 @@ Independent, reusable component registries. Vehicles do not own these files; veh
 
 | Passport | Component instance | Path | Status |
 |---|---|---|---|
-| `PP-VEH000001-DOOR-FL-001` | `CMPINST-VEH000001-DOOR-FL` | [`../examples/2019_f450/door-fl-component-passport.example.json`](../examples/2019_f450/door-fl-component-passport.example.json) | Seed — evidence absent; geometry provisional; interaction visual-preview-only |
+| `PP-VEH000001-DOOR-FL-001` | `CMPINST-VEH000001-DOOR-FL` | [`../examples/2019_f450/door-fl-component-passport.example.json`](../examples/2019_f450/door-fl-component-passport.example.json) | Exact instance exists; candidates discovered; **no usable geometry / no verified procedure** linked |
 
-Deepen this passport (status honesty + evidence/geometry/relationship/interaction links) as assets are acquired. Do not invent mesh hashes or hinge coordinates.
+Active schema remains frozen `schemas/component-passport.schema.json` (rc1).  
+v1.1 ID-index design (proposal only): [`../proposals/COMPONENT_PASSPORT_V1_1_DESIGN.md`](../proposals/COMPONENT_PASSPORT_V1_1_DESIGN.md).
+
+Deepen links only after ACQUIRED→HASHED→PARSED→INVENTORIED→ROLE_EVALUATED. Do not invent mesh hashes, hinge coordinates, removal graphs, or numeric quality scores.
 
 ## Legacy / family draft passports
 

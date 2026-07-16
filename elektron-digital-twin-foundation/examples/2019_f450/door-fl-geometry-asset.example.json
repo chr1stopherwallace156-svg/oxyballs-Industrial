@@ -16,5 +16,5 @@
     "texture_count": null
   },
   "schema_version": "1.0.0",
-  "notes": "Linked as PROVISIONAL_VISUAL pending engineering review. Metrics null until ingestion executes."
+  "notes": "Dormant seed only: file_exists false. Not a usable geometry asset. Do not link from the component passport until ACQUIRED→HASHED→PARSED→COMPONENT_INVENTORIED→ROLE_EVALUATED. Component-instance listing may remain for kernel referential seed; passport geometry_asset_ids stays empty."
 }

@@ -86,3 +86,23 @@ Integrated; redundant proposal files not created.
 ### Status
 
 DT-D029; protocol v2.1.2.
+
+---
+
+## RL-004 — Reject active passport schema mutation; proposal-only v1.1
+
+- **Date:** 2026-07-16
+- **Layer:** kernel governance / L01
+- **Agent:** Cursor Cloud Agent
+- **Question:** May the Component Passport schema be updated now for embedded registries, remove-lists, and scores?
+
+### Findings
+
+1. **No.** Active `schemas/component-passport.schema.json` remains byte-identical to `edts-kernel-v1.0.0-rc1`.
+2. Corrected architecture recorded under `proposals/` only (valid ID-index schema + design doc).
+3. Active door passport example corrected: exact instance; two candidates; geometry/interaction ABSENT; no GEO/INT links.
+4. Embedding authoritative records, invented scores, and unverified procedure graphs rejected.
+
+### Status
+
+DT-D030.

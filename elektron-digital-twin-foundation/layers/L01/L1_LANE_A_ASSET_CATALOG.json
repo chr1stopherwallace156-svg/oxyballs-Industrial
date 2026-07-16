@@ -82,6 +82,35 @@
       "availability_audit": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json",
       "evaluation_doc": "layers/L01/L1_ASSET_EVALUATION_ASSET-00031.md",
       "notes": "Authoritative availability audit: CANDIDATE_NOT_ACQUIRED. No GLB/GLTF/FBX/OBJ bytes. Do not fabricate mesh inventory, hash, or marketplace URL. Cab shell usable only after ingest + keep/discard map; pickup-style rear structure discard candidate."
+    },
+    {
+      "asset_id": null,
+      "candidate_asset_id": "CAND-771-GRAB",
+      "marketplace": "GrabCAD",
+      "url": null,
+      "url_status": "NOT_RECORDED",
+      "claimed_year_range": "2017",
+      "claimed_body": "Super Duty front door CAD (STEP) — discovery claim",
+      "reported_vehicle": "2017 Super Duty Front Door (unverified listing claim)",
+      "asset_type": "CAD",
+      "file_format": "STEP",
+      "license": "UNKNOWN",
+      "grade": "C",
+      "price_condition": "UNKNOWN",
+      "downloadable_status": "CANDIDATE_NOT_ACQUIRED",
+      "local_file_path": null,
+      "file_exists": false,
+      "sha256": null,
+      "visible_component_separation": "UNKNOWN_UNTIL_INGEST",
+      "front_left_door_presence": "CLAIMED_UNVERIFIED",
+      "target_component_instance_ids": [
+        "CMPINST-VEH000001-DOOR-FL"
+      ],
+      "estimated_configuration_match": "PART_NUMBER_COMPARISON_PENDING",
+      "evidence_status": "DISCOVERED",
+      "availability_audit": null,
+      "evaluation_doc": null,
+      "notes": "Tracked as a component-level discovery candidate only. No verified URL, local bytes, or geometry-asset registration. Related-year CAD remains discovery-only under HR-EVI until configuration match is proven. Do not invent listing URLs or promote to GEO-*."
     }
   ],
   "rejected_proposal_artifacts": [

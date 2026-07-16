@@ -7,22 +7,18 @@
   "configuration_id": "CFG-000001",
   "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
   "status_summary": {
-    "evidence": "ABSENT",
-    "geometry": "PROVISIONAL",
-    "interaction": "VISUAL_PREVIEW_ONLY"
+    "evidence": "CANDIDATE",
+    "geometry": "ABSENT",
+    "interaction": "ABSENT"
   },
   "links": {
     "evidence_link_ids": [],
-    "geometry_asset_ids": [
-      "GEO-VEH000001-DOOR-FL-001"
-    ],
+    "geometry_asset_ids": [],
     "relationship_ids": [
       "REL-VEH000001-0001"
     ],
-    "interaction_ids": [
-      "INT-VEH000001-DOOR-FL-001"
-    ]
+    "interaction_ids": []
   },
   "schema_version": "1.0.0",
-  "notes": "Primary truth surface for CMPINST-VEH000001-DOOR-FL under Hard Rule 11. Deepen evidence/geometry/interaction links as real assets are acquired. Do not invent part numbers, hashes, or hinge coordinates. Legacy family passport CMP_PASS_FR_DOOR_L is non-isolated and must not auto-inherit here."
+  "notes": "Exact component instance CMPINST-VEH000001-DOOR-FL under VEH-000001/CFG-000001. Candidates discovered (not acquired): CAND-00031-CGT, CAND-771-GRAB — see L1_LANE_A_ASSET_CATALOG.json. No usable geometry asset and no verified procedure have entered this passport. GEO-VEH000001-DOOR-FL-001 remains a dormant seed (file_exists false) and is intentionally not linked here. v1.1 ID-index design is proposal-only under proposals/. Legacy family passport CMP_PASS_FR_DOOR_L must not auto-inherit."
 }

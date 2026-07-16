@@ -1,0 +1,37 @@
+{
+  "proposal_status": "PROPOSAL_NOT_ACTIVE",
+  "passport_id": "PP-VEH000001-DOOR-FL-001",
+  "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+  "vehicle_instance_id": "VEH-000001",
+  "configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "reusable_definition_id": "CMPDEF-DOOR-FRONT-LH-0001",
+  "status_summary": {
+    "evidence": "CANDIDATE",
+    "geometry": "ABSENT",
+    "interaction": "ABSENT",
+    "procedure": "NOT_EVALUATED"
+  },
+  "links": {
+    "candidate_asset_ids": [
+      "CAND-00031-CGT",
+      "CAND-771-GRAB"
+    ],
+    "geometry_asset_ids": [],
+    "evidence_link_ids": [],
+    "assembly_relationship_ids": [
+      "REL-VEH000001-0001"
+    ],
+    "connection_relationship_ids": [],
+    "procedure_dependency_ids": [],
+    "interaction_ids": []
+  },
+  "quality_assessment": {
+    "score": null,
+    "scoring_status": "NOT_EVALUATED",
+    "rubric_version": null,
+    "score_inputs": null
+  },
+  "schema_version": "1.1.0-proposal",
+  "notes": "ILLUSTRATIVE ONLY — not an active silo record. Exact component instance exists. Two candidates discovered and not acquired. No usable geometry asset and no verified procedure have entered this passport. Do not invent Visual/Engineering/Collision roles or removal graphs until records are acquired and evaluated."
+}

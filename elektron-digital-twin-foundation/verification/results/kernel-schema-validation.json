@@ -1,6 +1,6 @@
 {
   "suite": "kernel-schema-validation",
-  "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+  "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
   "runtime": "python3+jsonschema Draft202012Validator",
   "total": 19,
   "passed": 19,
@@ -9,7 +9,7 @@
   "results": [
     {
       "test_id": "SCHEMA-META-assembly-relationship.schema.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "schema is valid Draft 2020-12",
@@ -20,7 +20,7 @@
     },
     {
       "test_id": "SCHEMA-META-component-instance.schema.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "schema is valid Draft 2020-12",
@@ -31,7 +31,7 @@
     },
     {
       "test_id": "SCHEMA-META-component-passport.schema.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "schema is valid Draft 2020-12",
@@ -42,7 +42,7 @@
     },
     {
       "test_id": "SCHEMA-META-cross-vehicle-comparison.schema.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "schema is valid Draft 2020-12",
@@ -53,7 +53,7 @@
     },
     {
       "test_id": "SCHEMA-META-entity-definition.schema.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "schema is valid Draft 2020-12",
@@ -64,7 +64,7 @@
     },
     {
       "test_id": "SCHEMA-META-evidence-link.schema.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "schema is valid Draft 2020-12",
@@ -75,7 +75,7 @@
     },
     {
       "test_id": "SCHEMA-META-exact-configuration.schema.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "schema is valid Draft 2020-12",
@@ -86,7 +86,7 @@
     },
     {
       "test_id": "SCHEMA-META-geometry-asset.schema.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "schema is valid Draft 2020-12",
@@ -97,7 +97,7 @@
     },
     {
       "test_id": "SCHEMA-META-interaction-definition.schema.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "schema is valid Draft 2020-12",
@@ -108,7 +108,7 @@
     },
     {
       "test_id": "SCHEMA-META-reusable-component-definition.schema.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "schema is valid Draft 2020-12",
@@ -119,7 +119,7 @@
     },
     {
       "test_id": "SCHEMA-META-vehicle-instance.schema.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "schema is valid Draft 2020-12",
@@ -130,7 +130,7 @@
     },
     {
       "test_id": "EX-vehicle-instance.example.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "valid against vehicle-instance.schema.json",
@@ -141,7 +141,7 @@
     },
     {
       "test_id": "EX-exact-configuration.example.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "valid against exact-configuration.schema.json",
@@ -152,7 +152,7 @@
     },
     {
       "test_id": "EX-door-fl-component-instance.example.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "valid against component-instance.schema.json",
@@ -163,7 +163,7 @@
     },
     {
       "test_id": "EX-door-fl-geometry-asset.example.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "valid against geometry-asset.schema.json",
@@ -174,7 +174,7 @@
     },
     {
       "test_id": "EX-door-fl-assembly-relationship.example.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "valid against assembly-relationship.schema.json",
@@ -185,7 +185,7 @@
     },
     {
       "test_id": "EX-door-fl-interaction.example.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "valid against interaction-definition.schema.json",
@@ -196,7 +196,7 @@
     },
     {
       "test_id": "EX-door-fl-component-passport.example.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "valid against component-passport.schema.json",
@@ -207,7 +207,7 @@
     },
     {
       "test_id": "EX-component-definition-door-fl.example.json",
-      "execution_timestamp": "2026-07-16T16:38:38.396967+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.424541+00:00",
       "runtime": "python3+jsonschema",
       "execution_status": "EXECUTED",
       "expected_result": "valid against reusable-component-definition.schema.json",

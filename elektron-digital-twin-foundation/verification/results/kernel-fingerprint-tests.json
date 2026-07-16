@@ -1,6 +1,6 @@
 {
   "suite": "kernel-fingerprint-tests",
-  "execution_timestamp": "2026-07-16T16:38:38.328161+00:00",
+  "execution_timestamp": "2026-07-16T17:31:32.359271+00:00",
   "runtime": "python3",
   "total": 8,
   "passed": 8,
@@ -9,7 +9,7 @@
   "results": [
     {
       "test_id": "FP-ORDER-001",
-      "execution_timestamp": "2026-07-16T16:38:38.328161+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.359271+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "hash unchanged under property reorder",
@@ -20,7 +20,7 @@
     },
     {
       "test_id": "FP-YEAR-001",
-      "execution_timestamp": "2026-07-16T16:38:38.328161+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.359271+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "hash changes when model_year changes",
@@ -31,7 +31,7 @@
     },
     {
       "test_id": "FP-DRV-001",
-      "execution_timestamp": "2026-07-16T16:38:38.328161+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.359271+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "hash changes when drivetrain changes",
@@ -42,7 +42,7 @@
     },
     {
       "test_id": "FP-WB-001",
-      "execution_timestamp": "2026-07-16T16:38:38.328161+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.359271+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "hash changes when wheelbase changes",
@@ -53,7 +53,7 @@
     },
     {
       "test_id": "FP-UNK-001",
-      "execution_timestamp": "2026-07-16T16:38:38.328161+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.359271+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "hash changes when UNKNOWN becomes known",
@@ -64,7 +64,7 @@
     },
     {
       "test_id": "FP-CFGID-001",
-      "execution_timestamp": "2026-07-16T16:38:38.328161+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.359271+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "hash unchanged when configuration_id changes",
@@ -75,7 +75,7 @@
     },
     {
       "test_id": "FP-PAT-001",
-      "execution_timestamp": "2026-07-16T16:38:38.328161+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.359271+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "matches ^sha256:[a-f0-9]{64}$",
@@ -86,7 +86,7 @@
     },
     {
       "test_id": "FP-ABBR-001",
-      "execution_timestamp": "2026-07-16T16:38:38.328161+00:00",
+      "execution_timestamp": "2026-07-16T17:31:32.359271+00:00",
       "runtime": "python3",
       "execution_status": "EXECUTED",
       "expected_result": "abbreviated hash rejected by pattern",

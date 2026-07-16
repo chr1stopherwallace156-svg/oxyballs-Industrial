@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:schema:component-passport:v1.1-proposal",
+  "title": "EDTS Component Passport v1.1 (PROPOSAL — NOT ACTIVE)",
+  "description": "Design draft only. Does not replace schemas/component-passport.schema.json while SCHEMA_FREEZE_FOR_VERTICAL_SLICE is active. Passport is an index + status summary; authoritative records live in their own registries.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "passport_id",
+    "component_instance_id",
+    "vehicle_instance_id",
+    "configuration_id",
+    "status_summary",
+    "links",
+    "schema_version",
+    "proposal_status"
+  ],
+  "properties": {
+    "proposal_status": {
+      "type": "string",
+      "const": "PROPOSAL_NOT_ACTIVE"
+    },
+    "passport_id": {
+      "type": "string",
+      "pattern": "^PP-[A-Z0-9-]+$"
+    },
+    "component_instance_id": {
+      "type": "string",
+      "pattern": "^CMPINST-[A-Z0-9-]+$"
+    },
+    "vehicle_instance_id": {
+      "type": "string",
+      "pattern": "^VEH-[A-Z0-9-]+$"
+    },
+    "configuration_id": {
+      "type": "string",
+      "pattern": "^CFG-[A-Z0-9-]+$"
+    },
+    "configuration_fingerprint": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      ]
+    },
+    "reusable_definition_id": {
+      "description": "Optional reference to a reusable definition. Never substitutes for exact-instance binding.",
+      "type": ["string", "null"]
+    },
+    "status_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence", "geometry", "interaction", "procedure"],
+      "properties": {
+        "evidence": {
+          "type": "string",
+          "enum": [
+            "ABSENT",
+            "CANDIDATE",
+            "AWAITING_FILE",
+            "NORMALIZED",
+            "VERIFIED",
+            "UNKNOWN",
+            "NOT_EVALUATED",
+            "REQUIRES_EVIDENCE"
+          ]
+        },
+        "geometry": {
+          "type": "string",
+          "enum": [
+            "ABSENT",
+            "PROVISIONAL",
+            "DIMENSIONAL_CANDIDATE",
+            "ENGINEERING_VERIFIED",
+            "UNKNOWN",
+            "NOT_EVALUATED"
+          ]
+        },
+        "interaction": {
+          "type": "string",
+          "enum": [
+            "ABSENT",
+            "PROTOTYPE",
+            "VISUAL_PREVIEW_ONLY",
+            "CALIBRATED",
+            "ENGINEERING_VERIFIED",
+            "UNKNOWN",
+            "NOT_EVALUATED"
+          ]
+        },
+        "procedure": {
+          "type": "string",
+          "enum": [
+            "ABSENT",
+            "NOT_EVALUATED",
+            "CANDIDATE",
+            "VERIFIED",
+            "UNKNOWN"
+          ]
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_asset_ids",
+        "geometry_asset_ids",
+        "evidence_link_ids",
+        "assembly_relationship_ids",
+        "connection_relationship_ids",
+        "procedure_dependency_ids"
+      ],
+      "properties": {
+        "candidate_asset_ids": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Lane A / catalog candidate IDs. Not geometry assets."
+        },
+        "geometry_asset_ids": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "IDs only. Authoritative records remain in the geometry-asset registry."
+        },
+        "evidence_link_ids": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "IDs only. Authoritative records remain in the evidence system."
+        },
+        "assembly_relationship_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "connection_relationship_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "procedure_dependency_ids": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Procedure sequencing IDs only. Unresearched edges stay NOT_EVALUATED in their own records."
+        },
+        "interaction_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "quality_assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional future multi-axis assessment. Scores must not be invented.",
+      "properties": {
+        "score": {
+          "type": ["number", "null"]
+        },
+        "scoring_status": {
+          "type": "string",
+          "enum": ["NOT_EVALUATED", "IN_PROGRESS", "EVALUATED", "REJECTED"]
+        },
+        "rubric_version": {
+          "type": ["string", "null"]
+        },
+        "score_inputs": {
+          "type": ["object", "null"]
+        }
+      }
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.1.0-proposal"
+    },
+    "notes": {
+      "type": ["string", "null"]
+    }
+  }
+}
