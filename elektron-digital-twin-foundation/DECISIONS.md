@@ -318,3 +318,26 @@ Append-only record of digital twin foundation decisions.
   - front_axle_layout confidence 55% (Level D active); rear_frame_rail_width confidence 0% until BBAS PDF verifies
   - Multi-source assembly is the intended twin construction model
   - From-scratch cab rebuild is disfavored while Grade B assets are available and licensed
+  - **Superseded in part by DT-D019** for confidence % and vehicle-centric framing
+
+## DT-D019 — EDTS-OS v3: Component First, Evidence Graph, Component Passports
+
+- **Date:** 2026-07-16
+- **Status:** Accepted
+- **Context:** Version 2 engineering-process framing compiled vehicles as isolated models and mixed authority with confidence percentages. Need an operating-system architecture centered on reusable components and decoupled evidence processing.
+- **Decision:**
+  1. Activate **EDTS-OS v3** via `EDTS_OS.md`; elevate **Hard Rule 0 — Component First** to constitutional level
+  2. Bump `EDTS_RESEARCH_PROTOCOL.md` to **v2.0.0**
+  3. **Deprecate confidence percentages** for all new work
+  4. Decouple **Evidence Tier (A–F)** from **Verification Status** (expanded lifecycle: DISCOVERED → … → FROZEN)
+  5. Adopt bidirectional **Evidence Graph** (`layers/L01/L1_EVIDENCE_GRAPH.json`) as Hard Rule 5 machine form
+  6. Adopt **Component Passports** under `components/` and ephemeral vehicle configs under `configurations/`
+  7. Populate operational graph in `OPERATIONAL_HONEST` mode — OEM edges remain `AWAITING_FILE` until PDFs exist; illustrative NORMALIZED page-quote examples are templates only
+  8. Door passport `CMP-SD-044-L` starts `DRAFT_CANDIDATE` (not FROZEN); hinge axes null until calibrated
+  9. Teams A–D retargeted to passport + graph lifecycle stages; Team D must not claim runtime engine completed without loader + tests
+  10. Geometry freeze remains **`NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`**
+- **Consequences:**
+  - Parameter queries traverse Evidence Graph relationships (SUPPORTS / CONTRADICTS / NEUTRAL)
+  - `L1_PARAMETER_VERIFICATION_DATABASE.json` becomes legacy bridge with deprecated confidence fields
+  - Cross-platform reuse (E-450, Transit) planned via configurator, not monolithic forks
+  - Source Pack 01 authenticity reset (DT-D017) remains in force — no fabricated page evidence

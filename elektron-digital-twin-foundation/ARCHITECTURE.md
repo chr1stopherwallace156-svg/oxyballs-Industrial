@@ -2,38 +2,45 @@
 
 High-level architecture of the Elektron digital twin foundation.
 
+**Active framing:** [EDTS_OS.md](EDTS_OS.md) v3 — **Component First**. Vehicles are ephemeral configurations over a graph of passports + Evidence Graph edges.
+
 ## System context
 
 ```mermaid
 flowchart TB
-  subgraph sources [Geometry Sources]
+  subgraph sources [Evidence Sources]
     BBAS[Ford BBAS BBLB/BEMM]
-    OEM[OEM dimension tables]
+    OEM[OEM / supplier docs]
     SCAN[LiDAR / photogrammetry]
-    SHOP[Shop measurements]
+    VIS[Dealer / fleet visuals]
   end
 
-  subgraph foundation [elektron-digital-twin-foundation]
+  subgraph os [EDTS-OS Core]
+    EG[Evidence Graph]
+    CP[Component Passports]
+    VC[Vehicle Configurations]
+  end
+
+  subgraph foundation [Layer docs + gates]
     L00[L00 Reference Lock]
-    L01_09[L01–L09 Layer docs + gate records]
+    L01_09[L01–L09]
     L10[L10 Spatial Presentation]
-    DM[DATA_MODEL + component mapping]
   end
 
-  subgraph runtime [Future runtime — not in v1 repo]
-    VIEWER[3D viewer / interaction]
-    EVIDENCE[Evidence store]
+  subgraph runtime [Runtime]
+    VIEWER[Three.js / React component tree]
   end
 
-  BBAS --> L00
-  OEM --> L00
-  SCAN --> L01_09
-  SHOP --> L01_09
+  BBAS --> EG
+  OEM --> EG
+  SCAN --> CP
+  VIS --> EG
+  EG --> CP
+  CP --> VC
+  VC --> VIEWER
   L00 --> L01_09
   L01_09 --> L10
-  DM --> VIEWER
-  L10 --> VIEWER
-  L08 --> EVIDENCE
+  CP --> L10
 ```
 
 ## Layer dependency chain
@@ -62,10 +69,14 @@ L00 → L01 → L02 → L03 → L04 → L05 → L06 → L07 → L08 → L09 → 
 
 ```
 elektron-digital-twin-foundation/
+├── EDTS_OS.md           # v3 OS constitution (Hard Rule 0)
+├── EDTS_RESEARCH_PROTOCOL.md
 ├── STATUS.json          # machine state
-├── layers/              # per-layer specs and gate evidence
+├── components/          # Component Passports (Hard Rule 0)
+├── configurations/      # ephemeral vehicle assembly pointers
+├── layers/              # per-layer specs + Evidence Graph
 ├── research/            # log, questions, assumptions
-├── schemas/             # JSON schemas
+├── schemas/             # JSON schemas (evidence-graph, passport, claims)
 ├── templates/           # entry templates
 └── assets/              # derived geometry (gitignored OEM CAD)
 ```

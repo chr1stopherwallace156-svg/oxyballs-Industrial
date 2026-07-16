@@ -1,0 +1,121 @@
+{
+  "$id": "urn:edts:schema:evidence-graph:v1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EDTS Evidence Graph",
+  "type": "object",
+  "required": ["$id", "system_id", "graph_nodes"],
+  "properties": {
+    "$id": { "type": "string" },
+    "system_id": { "type": "string" },
+    "architecture_version": { "type": "string" },
+    "confidence_percentages": {
+      "type": "string",
+      "const": "DEPRECATED"
+    },
+    "graph_population_mode": {
+      "type": "string",
+      "enum": [
+        "OPERATIONAL_HONEST",
+        "TEMPLATE_ILLUSTRATIVE_NOT_VERIFIED"
+      ]
+    },
+    "graph_nodes": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/definitions/parameterNode" }
+    },
+    "illustrative_target_structure": {
+      "description": "Non-authoritative examples only; must not be treated as verified OEM extractions.",
+      "type": "object"
+    }
+  },
+  "definitions": {
+    "evidenceTier": {
+      "type": "string",
+      "enum": [
+        "TIER_A_AUTHORITATIVE",
+        "TIER_B_LICENSED_MEASURED",
+        "TIER_C_SUPPLIER",
+        "TIER_D_SECONDARY_TECHNICAL",
+        "TIER_E_VISUAL_REFERENCE",
+        "TIER_F_INFERENCE_ASSUMPTION"
+      ]
+    },
+    "relationshipType": {
+      "type": "string",
+      "enum": ["SUPPORTS", "CONTRADICTS", "NEUTRAL", "SUPERSEDES"]
+    },
+    "verificationStatus": {
+      "type": "string",
+      "enum": [
+        "DISCOVERED",
+        "AWAITING_FILE",
+        "INGESTED",
+        "NORMALIZED",
+        "CONFIGURATION_MATCHED",
+        "CROSS_VERIFIED",
+        "COMPONENT_VERIFIED",
+        "ENGINEERING_VERIFIED",
+        "PRODUCTION_APPROVED",
+        "FROZEN",
+        "REJECTED"
+      ]
+    },
+    "relationship": {
+      "type": "object",
+      "required": [
+        "source_id",
+        "evidence_tier",
+        "relationship_type",
+        "verification_status"
+      ],
+      "properties": {
+        "source_id": { "type": "string" },
+        "source_name": { "type": "string" },
+        "evidence_tier": { "$ref": "#/definitions/evidenceTier" },
+        "relationship_type": { "$ref": "#/definitions/relationshipType" },
+        "verification_status": { "$ref": "#/definitions/verificationStatus" },
+        "claimed_value_in_source": {},
+        "notes": { "type": "string" },
+        "page_evidence_asserted": { "type": "boolean" },
+        "file_exists": { "type": ["boolean", "null"] }
+      }
+    },
+    "parameterNode": {
+      "type": "object",
+      "required": ["parameter_name", "relationships"],
+      "properties": {
+        "parameter_name": { "type": "string" },
+        "claimed_value": {},
+        "claimed_value_status": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "CANDIDATE",
+            "CONFIGURATION_MATCHED",
+            "CROSS_VERIFIED",
+            "ENGINEERING_VERIFIED"
+          ]
+        },
+        "taxonomy": {
+          "type": "string",
+          "enum": [
+            "Evidence",
+            "Probability",
+            "Assumption",
+            "Placeholder",
+            "Inference"
+          ]
+        },
+        "unit": { "type": "string" },
+        "target_configurations": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "relationships": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/relationship" }
+        }
+      }
+    }
+  }
+}

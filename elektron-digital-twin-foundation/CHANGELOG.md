@@ -391,3 +391,32 @@ All notable changes to the digital twin foundation. Append-only.
 - Source pack: **NOT_VERIFIED**
 - ASSET-00031: **Grade B candidate**
 - Geometry freeze: **NOT_YET_APPROVED**
+
+## 2026-07-16 (EDTS-OS v3 — Component First)
+
+### Added
+
+- `EDTS_OS.md` v3.0.0 — operating system constitution (Hard Rule 0)
+- `EDTS_OS_PLATFORM_CONFIGURATOR.md` — multi-platform reuse roadmap
+- `schemas/evidence-graph.schema.json` — Evidence Graph schema
+- `schemas/component-passport.schema.json` — Component Passport schema
+- `layers/L01/L1_EVIDENCE_GRAPH.json` — operational honest graph + illustrative template appendix
+- `components/` — `CMP-SD-044-L`, `CMP-AXL-M300`, `CMP-FR-145` draft passports
+- `configurations/VEH_CFG_F450_2019_REG_CAB_145_3.json` — ephemeral vehicle assembly pointer
+- **DT-D019** — EDTS-OS v3 activation
+
+### Changed
+
+- `EDTS_RESEARCH_PROTOCOL.md` → **v2.0.0** (Hard Rule 0; confidence % deprecated; expanded lifecycle)
+- `L1_PARAMETER_VERIFICATION_DATABASE.json` → legacy bridge; confidence fields deprecated
+- `L1_PARALLEL_TEAMS.md` → V3 sprint board (passport + graph stages)
+- `AGENTS.md` — OS-first read order; Evidence Graph bindings
+- Phase → `EDTS_OS_V3_ACTIVE`
+
+### Status
+
+- Architecture: **EDTS-OS v3 ACTIVE**
+- Confidence %: **DEPRECATED**
+- Evidence Graph: **OPERATIONAL_HONEST** (OEM edges AWAITING_FILE)
+- Component passports: **DRAFT_CANDIDATE**
+- Geometry freeze: **NOT_YET_APPROVED**

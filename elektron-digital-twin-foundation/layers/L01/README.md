@@ -1,16 +1,18 @@
 # L01 Exterior — Visual Reference Research Package
 
 **Status:** `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`  
-**Phase:** `L1_FACTUAL_VERIFICATION_REQUIRED`  
+**Phase:** `EDTS_OS_V3_ACTIVE`  
+**OS:** [`EDTS_OS.md`](../../EDTS_OS.md) v3 — Hard Rule 0 Component First  
 **Evidence gate:** `L1_REQUIRES_MORE_REFERENCE_DATA`  
-**Research protocol:** `ACTIVE` — [`EDTS_RESEARCH_PROTOCOL.md`](../EDTS_RESEARCH_PROTOCOL.md)  
+**Research protocol:** `ACTIVE` v2 — [`EDTS_RESEARCH_PROTOCOL.md`](../../EDTS_RESEARCH_PROTOCOL.md)  
+**Confidence %:** `DEPRECATED`  
 **Document gate:** `L1_DOCUMENT_ACQUISITION_READY`  
 **Public search gate:** `L1_PUBLIC_REFERENCE_SEARCH_READY`  
 **Milestone:** `L1_SOURCE_PACK_01`  
 **Source pack:** `L1_SOURCE_PACK_01_NOT_VERIFIED`  
 **Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`
 
-**Geometry production:** `BLOCKED` (Team C provisional adapt only)
+**Geometry production:** `BLOCKED` (Team C provisional adapt only; draft passports)
 
 **Locked vehicle:** 2019 Ford F-450 Chassis Cab — Regular Cab / 4x2 / DRW / 145.3 in WB / 60 in CA / bare cab-and-chassis
 
@@ -20,11 +22,15 @@
 
 | File | Role |
 |---|---|
-| [../../EDTS_RESEARCH_PROTOCOL.md](../../EDTS_RESEARCH_PROTOCOL.md) | Master research protocol |
-| [L1_PARAMETER_VERIFICATION_DATABASE.json](L1_PARAMETER_VERIFICATION_DATABASE.json) | Weighted confidence engine |
+| [../../EDTS_OS.md](../../EDTS_OS.md) | EDTS-OS v3 constitution |
+| [../../EDTS_RESEARCH_PROTOCOL.md](../../EDTS_RESEARCH_PROTOCOL.md) | Master research protocol v2 |
+| [L1_EVIDENCE_GRAPH.json](L1_EVIDENCE_GRAPH.json) | Bidirectional Evidence Graph (primary) |
+| [L1_PARAMETER_VERIFICATION_DATABASE.json](L1_PARAMETER_VERIFICATION_DATABASE.json) | Legacy bridge (confidence deprecated) |
 | [L1_PARALLEL_TEAMS.md](L1_PARALLEL_TEAMS.md) | Teams A–D sprint board |
+| [../../components/](../../components/) | Component Passports |
+| [../../configurations/](../../configurations/) | Ephemeral vehicle configs |
 | [L1_ASSET_EVALUATION_ASSET-00031.md](L1_ASSET_EVALUATION_ASSET-00031.md) | Grade B asset efficiency profile |
-| [L1_SOURCE_VISUAL_ARCHITECTURE_REGISTRY.json](L1_SOURCE_VISUAL_ARCHITECTURE_REGISTRY.json) | SRC-L1-004/005 Level D visuals |
+| [L1_SOURCE_VISUAL_ARCHITECTURE_REGISTRY.json](L1_SOURCE_VISUAL_ARCHITECTURE_REGISTRY.json) | SRC-L1-004/005 Tier E visuals |
 
 ### Source Pack 01 (NOT_VERIFIED — reset)
 

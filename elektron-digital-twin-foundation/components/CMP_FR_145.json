@@ -1,0 +1,41 @@
+{
+  "$id": "urn:edts:component-passport:frame_145:v1",
+  "$schema": "../schemas/component-passport.schema.json",
+  "hard_rule_0": "COMPONENT_FIRST",
+  "component_id": "CMP-FR-145",
+  "name": "F450_Chassis_Cab_Frame_145_3_WB_60_CA",
+  "current_version": 1,
+  "compatibility": {
+    "platforms": ["F-450_2017_2022_CHASSIS_CAB"],
+    "body_styles": ["REGULAR_CAB"],
+    "compatibility_status": "CONFIGURATION_UNIQUE_CANDIDATE",
+    "notes": "Wheelbase/CA packaging is vehicle-unique; not a shared pickup frame."
+  },
+  "geometry_status": {
+    "mesh_source": null,
+    "mesh_lifecycle": "PLACEHOLDER",
+    "cleanup_retopology": "NOT_STARTED",
+    "frame_rail_width_mm_candidate": 868.7,
+    "frame_rail_width_status": "CANDIDATE_UNVERIFIED",
+    "notes": "Discard pickup rails from ASSET-00031. Insert straight chassis-cab rails only after PAR-FR-001 Evidence Graph promotion."
+  },
+  "materials_profile": {
+    "rail_coating": {
+      "material_type": "FRAME_POWDERCOAT_DIELECTRIC",
+      "pbr_metalness": 0.0,
+      "verification_status": "CONFIGURATION_MATCHED",
+      "notes": "Metalness 0.0 dielectric per L01 PBR correction — coating class, not dimensional verification."
+    }
+  },
+  "runtime_capabilities": {
+    "removal_logic_enabled": false,
+    "interactivity_actions": [],
+    "interactivity_status": "NOT_STARTED"
+  },
+  "evidence_graph_links": ["PAR-FR-001"],
+  "meta": {
+    "last_engineering_review": "2026-07-16",
+    "review_status": "DRAFT_CANDIDATE",
+    "notes": "Placeholder frame passport. 34.2 in width not ENGINEERING_VERIFIED."
+  }
+}

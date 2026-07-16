@@ -2,14 +2,15 @@
 
 This repository contains the authoritative schemas, standards, and registries establishing the baseline data model and coordinate frameworks for the F-450 physical vehicle intake and digital reconstruction.
 
-**Research protocol:** `ACTIVE` — [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md)  
-**Readiness:** `L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`  
+**Architecture:** `EDTS-OS v3` — [EDTS_OS.md](EDTS_OS.md) (Hard Rule 0 — Component First)  
+**Research protocol:** `ACTIVE` v2 — [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md)  
+**Evidence Graph:** [layers/L01/L1_EVIDENCE_GRAPH.json](layers/L01/L1_EVIDENCE_GRAPH.json)  
+**Confidence %:** `DEPRECATED`  
 **Milestone:** `L1_SOURCE_PACK_01` (`NOT_VERIFIED`)  
-**Document / public gates:** READY (templates)  
 **Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`  
-**Teams:** A Research · B Assets (ASSET-00031 Grade B) · C Geometry (provisional) · D Software  
+**Teams:** A Research · B Assets (CMP-AXL-M300) · C Geometry (CMP-SD-044-L) · D Software (passport loader)  
 **L01 geometry freeze:** BLOCKED  
-See [STATUS.json](STATUS.json), [layers/L01/L1_PARALLEL_TEAMS.md](layers/L01/L1_PARALLEL_TEAMS.md).
+See [STATUS.json](STATUS.json), [components/](components/), [configurations/](configurations/).
 
 ---
 
@@ -38,7 +39,7 @@ All systems, agents, and engineers must consume the core specification files in 
 7. **[CLEARANCE_STANDARD_V2_PROPOSAL.md](CLEARANCE_STANDARD_V2_PROPOSAL.md)**  
    Formula-compliant clearance envelope rules (CLR-001, CLR-002).
 
-Also read: [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md), [TRANSFORM_QUATERNION_CORRECTION_REPORT.md](TRANSFORM_QUATERNION_CORRECTION_REPORT.md), [THREE_CAMERA_AND_WORLD_STANDARD.md](THREE_CAMERA_AND_WORLD_STANDARD.md), [REGRESSION_AUDIT.md](REGRESSION_AUDIT.md), [layers/L01_RESEARCH_DOSSIER_PLAN.md](layers/L01_RESEARCH_DOSSIER_PLAN.md), [layers/L01/README.md](layers/L01/README.md).
+Also read: [EDTS_OS.md](EDTS_OS.md), [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md), [EDTS_OS_PLATFORM_CONFIGURATOR.md](EDTS_OS_PLATFORM_CONFIGURATOR.md), [TRANSFORM_QUATERNION_CORRECTION_REPORT.md](TRANSFORM_QUATERNION_CORRECTION_REPORT.md), [THREE_CAMERA_AND_WORLD_STANDARD.md](THREE_CAMERA_AND_WORLD_STANDARD.md), [REGRESSION_AUDIT.md](REGRESSION_AUDIT.md), [layers/L01_RESEARCH_DOSSIER_PLAN.md](layers/L01_RESEARCH_DOSSIER_PLAN.md), [layers/L01/README.md](layers/L01/README.md).
 
 ### Extended governance reading
 
@@ -82,7 +83,7 @@ Every layer passes five gates before advancing:
 
 ## Current stage
 
-**L01 — Research protocol ACTIVE.** Source Pack 01 still NOT_VERIFIED. Teams A–D parallel. ASSET-00031 Grade B candidate. Geometry freeze blocked. See [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md).
+**L01 — EDTS-OS v3 ACTIVE.** Component-first passports + Evidence Graph. Confidence % deprecated. Source Pack 01 still NOT_VERIFIED. OEM graph edges AWAITING_FILE. Geometry freeze blocked. See [EDTS_OS.md](EDTS_OS.md).
 
 ## Related work
 

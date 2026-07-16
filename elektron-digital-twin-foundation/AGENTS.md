@@ -6,18 +6,19 @@ Rules for every AI agent, LLM engine, code generation pipeline, and automated va
 
 Before modifying any file, read:
 
-1. [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) — **runtime core** for research, acquisition, geometry, and software evidence rules
-2. [README.md](README.md) — required reading order for core specifications
-3. [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md)
-4. [AGENTS.md](AGENTS.md) (this file)
-5. [STATUS.json](STATUS.json)
-6. [DECISIONS.md](DECISIONS.md)
-7. [REQUIREMENTS.md](REQUIREMENTS.md)
-8. [ARCHITECTURE.md](ARCHITECTURE.md)
-9. [DATA_MODEL.md](DATA_MODEL.md)
-10. [THREE_D_SPEC.md](THREE_D_SPEC.md)
-11. [QUALITY_STANDARD.md](QUALITY_STANDARD.md)
-12. The active layer doc under `layers/`
+1. [EDTS_OS.md](EDTS_OS.md) — **EDTS-OS v3 constitution** (Hard Rule 0 — Component First)
+2. [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) — research / evidence runtime core (v2+)
+3. [README.md](README.md) — required reading order for core specifications
+4. [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md)
+5. [AGENTS.md](AGENTS.md) (this file)
+6. [STATUS.json](STATUS.json)
+7. [DECISIONS.md](DECISIONS.md)
+8. [REQUIREMENTS.md](REQUIREMENTS.md)
+9. [ARCHITECTURE.md](ARCHITECTURE.md)
+10. [DATA_MODEL.md](DATA_MODEL.md)
+11. [THREE_D_SPEC.md](THREE_D_SPEC.md)
+12. [QUALITY_STANDARD.md](QUALITY_STANDARD.md)
+13. The active layer doc under `layers/`
 
 ## Operational directives
 
@@ -44,10 +45,18 @@ Ensure transforms match [registries/TRANSFORM_REGISTRY_V4_PROPOSAL.json](registr
 
 Prefer [schemas/CLAIM_SCHEMA_ROOT_V6_PROPOSAL.json](schemas/CLAIM_SCHEMA_ROOT_V6_PROPOSAL.json) and modular `schemas/claim/*` modules.
 
+### 4. EDTS-OS component-first operations
+
+- Vehicles are ephemeral configs in [`configurations/`](configurations/).
+- Geometry / materials / runtime live on [`components/`](components/) passports.
+- Parameter queries run against [`layers/L01/L1_EVIDENCE_GRAPH.json`](layers/L01/L1_EVIDENCE_GRAPH.json).
+- **Do not** invent confidence percentages (deprecated).
+- **Do not** promote edges to `NORMALIZED` / passports to `FROZEN` without file evidence + lifecycle completion.
+
 ## Non-negotiables
 
-- **Obey EDTS_RESEARCH_PROTOCOL.md** — taxonomy (Evidence/Probability/Assumption/Placeholder/Inference), Hard Rules 1–10, candidate promotion lifecycle, and confidence scoring.
-- **Never invent dimensions.** Unknown values become open questions in [research/OPEN_QUESTIONS.md](research/OPEN_QUESTIONS.md) or assumptions in [research/ASSUMPTIONS.md](research/ASSUMPTIONS.md) — never silent guesses in locked fields. Prefer `UNKNOWN` / `REQUIRES ADDITIONAL EVIDENCE` (Hard Rule 6).
+- **Obey EDTS_OS.md + EDTS_RESEARCH_PROTOCOL.md** — Hard Rule 0, taxonomy, Hard Rules 1–10, expanded lifecycle, Evidence Graph.
+- **Never invent dimensions, page quotes, or hashes.** Prefer `UNKNOWN` / `AWAITING_FILE` / `REQUIRES ADDITIONAL EVIDENCE` (Hard Rule 6).
 - **Never skip gates.** A layer advances only when all five gates are recorded in [STATUS.json](STATUS.json) and the layer doc.
 - **Never delete evidence.** Research log, decisions, and changelog entries are append-only.
 - **L00 must be owner-approved** before L01 geometry freeze. Provisional Team C adaptations are not locks.
@@ -66,14 +75,18 @@ For each layer:
 5. If a lasting choice was made, append [DECISIONS.md](DECISIONS.md).
 6. Update [STATUS.json](STATUS.json) `active_layer` and `next_action`.
 
-## Research protocol
+## Research & OS protocol
 
-- **Master:** [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) (ACTIVE)
-- Parameter confidence engine → [layers/L01/L1_PARAMETER_VERIFICATION_DATABASE.json](layers/L01/L1_PARAMETER_VERIFICATION_DATABASE.json)
+- **OS constitution:** [EDTS_OS.md](EDTS_OS.md) (ACTIVE v3)
+- **Research protocol:** [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) (ACTIVE v2)
+- Evidence Graph → [layers/L01/L1_EVIDENCE_GRAPH.json](layers/L01/L1_EVIDENCE_GRAPH.json)
+- Component passports → [components/](components/)
+- Vehicle configs → [configurations/](configurations/)
 - Teams A–D → [layers/L01/L1_PARALLEL_TEAMS.md](layers/L01/L1_PARALLEL_TEAMS.md)
+- Legacy parameter DB (confidence deprecated) → [layers/L01/L1_PARAMETER_VERIFICATION_DATABASE.json](layers/L01/L1_PARAMETER_VERIFICATION_DATABASE.json)
 - New findings → [research/RESEARCH_LOG.md](research/RESEARCH_LOG.md) using [templates/RESEARCH_ENTRY.md](templates/RESEARCH_ENTRY.md).
 - Unresolved items → [research/OPEN_QUESTIONS.md](research/OPEN_QUESTIONS.md).
-- Working assumptions → [research/ASSUMPTIONS.md](research/ASSUMPTIONS.md) with confidence and expiry (taxonomy: Assumption).
+- Working assumptions → [research/ASSUMPTIONS.md](research/ASSUMPTIONS.md) with taxonomy Assumption (no confidence %).
 - Research tolerances and measurements → [RESEARCH_STANDARD.md](RESEARCH_STANDARD.md) and [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md).
 
 ## Approval

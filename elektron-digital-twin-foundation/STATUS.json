@@ -1,11 +1,11 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.5.0",
-  "updated_at": "2026-07-16T13:45:00Z",
+  "version": "0.6.0",
+  "updated_at": "2026-07-16T14:00:00Z",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
-  "phase": "EDTS_RESEARCH_PROTOCOL_ACTIVE",
+  "phase": "EDTS_OS_V3_ACTIVE",
   "readiness": "L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE",
   "milestone": "L1_SOURCE_PACK_01",
   "source_pack_01_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
@@ -18,10 +18,10 @@
   "evidence_gate": "L1_REQUIRES_MORE_REFERENCE_DATA",
   "reference_acquisition_activity_status": "RESET_TO_CANDIDATE_TEMPLATES",
   "parallel_teams": {
-    "team_a_research": "ACTIVE_LEVEL_A_SOURCE_ACCESS",
-    "team_b_assets": "ACTIVE_ASSET_00031_GRADE_B",
-    "team_c_geometry": "ACTIVE_PROVISIONAL_ADAPT_PREP",
-    "team_d_software": "ACTIVE_MULTISOURCE_NODE_TREE"
+    "team_a_research": "ACTIVE_OEM_EDGE_PROMOTION_AWAITING_FILE",
+    "team_b_assets": "ACTIVE_CMP_AXL_M300_DISCOVERY",
+    "team_c_geometry": "ACTIVE_CMP_SD_044_L_SEPARATION_PREP",
+    "team_d_software": "ACTIVE_PASSPORT_DYNAMIC_LOADER"
   },
   "parallel_lanes": {
     "lane_a_3d_asset_sourcing": "AUTHORIZED",
@@ -30,7 +30,7 @@
   "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "Team A: acquire/hash OEM PDFs; Team B: license ASSET-00031; Team C: provisional cab adapt under Placeholder taxonomy; Team D: multi-source hierarchy; geometry freeze blocked",
+  "next_action": "Team A: acquire/hash OEM PDFs and promote Evidence Graph edges; Team B: CMP-AXL-M300 discovery; Team C: door separation on ASSET-00031 (draft passport); Team D: passport dynamic loader; geometry freeze blocked",
   "owner_approval_required": true,
   "governance_status": {
     "L00_CONFIRMED_CORRECTIONS": "ACCEPTED",
@@ -70,7 +70,7 @@
     "L01_PARALLEL_TEAM_B": "ACTIVE",
     "L01_PARALLEL_TEAM_C": "ACTIVE_PROVISIONAL_ONLY",
     "L01_PARALLEL_TEAM_D": "ACTIVE",
-    "EDTS_RESEARCH_PROTOCOL": "ACTIVE_V1",
+    "EDTS_RESEARCH_PROTOCOL": "ACTIVE_V2",
     "L01_GEOMETRY_PRODUCTION": "BLOCKED",
     "L01_GEOMETRY_FREEZE": "NOT_YET_APPROVED",
     "L01_PBR_FRAME_METALNESS": "CORRECTED_TO_0_0_DIELECTRIC",
@@ -93,7 +93,12 @@
     "COORDINATE_ORIENTATION": "PROVISIONALLY_ACCEPTED",
     "DATUM_DEFINITIONS": "REVISE_SUPERSEDED_BY_CONSTRUCTION_STANDARD",
     "MEASUREMENT_CLASSES": "PROVISIONALLY_ACCEPTED",
-    "L00_CLOSURE": "REJECTED"
+    "L00_CLOSURE": "REJECTED",
+    "EDTS_OS": "ACTIVE_V3",
+    "HARD_RULE_0_COMPONENT_FIRST": "ACTIVE",
+    "CONFIDENCE_PERCENTAGES": "DEPRECATED",
+    "L01_EVIDENCE_GRAPH": "ACTIVE_OPERATIONAL_HONEST",
+    "L01_COMPONENT_PASSPORTS": "DRAFT_CANDIDATE"
   },
   "reference_vehicle": {
     "status": "provisional_profile_locked",
@@ -104,7 +109,7 @@
     "reference_profile_id": "EDTS-REF-VEHICLE-01",
     "platform_profile": "F450_Platform_General_Profile",
     "profile_schema": "schemas/profiles/EDTS_REFERENCE_VEHICLE_PROFILE_PROPOSAL.json",
-    "lock_statement": "PROVISIONAL — reference profile defined; VIN and physical intake pending",
+    "lock_statement": "PROVISIONAL \u2014 reference profile defined; VIN and physical intake pending",
     "locked_configuration": {
       "make": "Ford",
       "model": "F-450 Super Duty Chassis Cab",
@@ -118,8 +123,8 @@
       "engine_calibration_hp": 330,
       "engine_calibration_torque_lbft": 750
     },
-    "reference_unit": "TBD — VIN pending physical asset intake",
-    "geometry_primary_source": "Ford BBAS — platform-specific BBLB after physical intake",
+    "reference_unit": "TBD \u2014 VIN pending physical asset intake",
+    "geometry_primary_source": "Ford BBAS \u2014 platform-specific BBLB after physical intake",
     "licensing_status": "COUNSEL_REVIEW_REQUIRED"
   },
   "registries": {
@@ -203,7 +208,7 @@
       "status": "factual_verification_required",
       "geometry_status": "blocked",
       "research_status": "L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE",
-      "phase": "EDTS_RESEARCH_PROTOCOL_ACTIVE",
+      "phase": "EDTS_OS_V3_ACTIVE",
       "milestone": "L1_SOURCE_PACK_01",
       "source_pack_01_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
       "gate_status": "L1_DOCUMENT_ACQUISITION_READY",
@@ -213,32 +218,122 @@
       "reference_acquisition_activity_status": "RESET_TO_CANDIDATE_TEMPLATES",
       "package": "layers/L01/",
       "gates": {
-        "visual": "protocol_active_parallel_teams",
+        "visual": "os_v3_parallel_teams",
         "dimensional": "unverified_pending_pdf",
         "structural": "provisional_adapt_prep_only",
         "interaction": "blocked",
-        "documentation": "research_protocol_active"
+        "documentation": "edts_os_v3_active"
       }
     },
-    "L02": { "name": "Chassis", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
-    "L03": { "name": "OEM Mechanical", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
-    "L04": { "name": "Disassembly", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
-    "L05": { "name": "Battery", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
-    "L06": { "name": "EV Propulsion and Charging", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
-    "L07": { "name": "Wiring and Cooling", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
-    "L08": { "name": "Workflow and Evidence", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
-    "L09": { "name": "Diagnostics and Telemetry", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } },
-    "L10": { "name": "Spatial Presentation", "status": "blocked", "gates": { "visual": "blocked", "dimensional": "blocked", "structural": "blocked", "interaction": "blocked", "documentation": "blocked" } }
+    "L02": {
+      "name": "Chassis",
+      "status": "blocked",
+      "gates": {
+        "visual": "blocked",
+        "dimensional": "blocked",
+        "structural": "blocked",
+        "interaction": "blocked",
+        "documentation": "blocked"
+      }
+    },
+    "L03": {
+      "name": "OEM Mechanical",
+      "status": "blocked",
+      "gates": {
+        "visual": "blocked",
+        "dimensional": "blocked",
+        "structural": "blocked",
+        "interaction": "blocked",
+        "documentation": "blocked"
+      }
+    },
+    "L04": {
+      "name": "Disassembly",
+      "status": "blocked",
+      "gates": {
+        "visual": "blocked",
+        "dimensional": "blocked",
+        "structural": "blocked",
+        "interaction": "blocked",
+        "documentation": "blocked"
+      }
+    },
+    "L05": {
+      "name": "Battery",
+      "status": "blocked",
+      "gates": {
+        "visual": "blocked",
+        "dimensional": "blocked",
+        "structural": "blocked",
+        "interaction": "blocked",
+        "documentation": "blocked"
+      }
+    },
+    "L06": {
+      "name": "EV Propulsion and Charging",
+      "status": "blocked",
+      "gates": {
+        "visual": "blocked",
+        "dimensional": "blocked",
+        "structural": "blocked",
+        "interaction": "blocked",
+        "documentation": "blocked"
+      }
+    },
+    "L07": {
+      "name": "Wiring and Cooling",
+      "status": "blocked",
+      "gates": {
+        "visual": "blocked",
+        "dimensional": "blocked",
+        "structural": "blocked",
+        "interaction": "blocked",
+        "documentation": "blocked"
+      }
+    },
+    "L08": {
+      "name": "Workflow and Evidence",
+      "status": "blocked",
+      "gates": {
+        "visual": "blocked",
+        "dimensional": "blocked",
+        "structural": "blocked",
+        "interaction": "blocked",
+        "documentation": "blocked"
+      }
+    },
+    "L09": {
+      "name": "Diagnostics and Telemetry",
+      "status": "blocked",
+      "gates": {
+        "visual": "blocked",
+        "dimensional": "blocked",
+        "structural": "blocked",
+        "interaction": "blocked",
+        "documentation": "blocked"
+      }
+    },
+    "L10": {
+      "name": "Spatial Presentation",
+      "status": "blocked",
+      "gates": {
+        "visual": "blocked",
+        "dimensional": "blocked",
+        "structural": "blocked",
+        "interaction": "blocked",
+        "documentation": "blocked"
+      }
+    }
   },
   "blockers": [
     {
       "id": "DT-B010",
-      "summary": "Physical asset intake not executed — VIN, FGAWR, spring codes, tire placard unverified",
+      "summary": "Physical asset intake not executed \u2014 VIN, FGAWR, spring codes, tire placard unverified",
       "unblocks": "Complete VIN_AND_LABEL_CAPTURE_PROTOCOL.md + PHYSICAL_ASSET_INTAKE_SCHEMA.json record"
     },
     {
       "id": "DT-B011",
-      "summary": "L00 closure rejected — GAP-001 through GAP-004 unresolved",
+      "summary": "L00 closure rejected \u2014 GAP-001 through GAP-004 unresolved",
       "unblocks": "Physical intake evidence + L00_FINAL_GAP_REPORT.md gap closure"
     },
     {
@@ -261,5 +356,16 @@
       "summary": "Reference vehicle not formally locked (provisional profile only)",
       "unblocks": "Physical intake complete + REFERENCE_APPROVAL.md signed"
     }
-  ]
+  ],
+  "architecture": "EDTS-OS-v3",
+  "architecture_doc": "EDTS_OS.md",
+  "research_protocol_version": "2.0.0",
+  "confidence_percentages": "DEPRECATED",
+  "hard_rule_0": "COMPONENT_FIRST",
+  "l01_evidence_graph": "layers/L01/L1_EVIDENCE_GRAPH.json",
+  "edts_os": "EDTS_OS.md",
+  "edts_os_platform_configurator": "EDTS_OS_PLATFORM_CONFIGURATOR.md",
+  "components_root": "components/",
+  "configurations_root": "configurations/",
+  "active_vehicle_configuration": "configurations/VEH_CFG_F450_2019_REG_CAB_145_3.json"
 }

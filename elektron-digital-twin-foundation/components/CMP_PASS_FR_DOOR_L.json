@@ -1,0 +1,83 @@
+{
+  "$id": "urn:edts:component-passport:front_door_l:v1",
+  "$schema": "../schemas/component-passport.schema.json",
+  "hard_rule_0": "COMPONENT_FIRST",
+  "component_id": "CMP-SD-044-L",
+  "name": "Super_Duty_Cab_Door_Front_Left",
+  "current_version": 1,
+  "version_note": "User illustrative 'current_version: 3 / FROZEN' is a target shape only. Operational passport starts at v1 DRAFT_CANDIDATE until mesh cleanup and evidence gates complete.",
+  "compatibility": {
+    "platforms": [
+      "F-250_2017_2022",
+      "F-350_2017_2022",
+      "F-450_2017_2022",
+      "F-550_2017_2022"
+    ],
+    "body_styles": [
+      "REGULAR_CAB",
+      "SUPER_CAB",
+      "CREW_CAB"
+    ],
+    "compatibility_status": "PLATFORM_FAMILY_CANDIDATE",
+    "notes": "Body-generation family compatibility is probable for 2017–2022 Super Duty doors; configuration match per VIN/body style still required before COMPONENT_VERIFIED."
+  },
+  "geometry_status": {
+    "mesh_source": "ASSET-00031",
+    "mesh_format": "GLB",
+    "mesh_lifecycle": "CANDIDATE",
+    "cleanup_retopology": "NOT_STARTED",
+    "level_of_detail_lods": {
+      "LOD0": { "target_tris": 45000, "status": "PLACEHOLDER_BUDGET", "role": "Close-up inspection" },
+      "LOD1": { "target_tris": 15000, "status": "PLACEHOLDER_BUDGET", "role": "Mid-range runtime" },
+      "LOD2": { "target_tris": 2500, "status": "PLACEHOLDER_BUDGET", "role": "Distanced system-node" }
+    },
+    "animation_pivots": {
+      "hinge_axis": null,
+      "hinge_axis_units": "mm_vehicle_frame",
+      "status": "REQUIRES_CALIBRATION",
+      "notes": "Do not invent hinge coordinates. Calibrate after door separation from ASSET-00031 and datum alignment."
+    },
+    "structured_scan_coverage": null,
+    "structured_scan_coverage_status": "UNKNOWN"
+  },
+  "materials_profile": {
+    "outer_panel": {
+      "material_type": "6022-T4_ALUMINUM_ALLOY",
+      "material_taxonomy": "Probability",
+      "manufacturing_process": "STAMPED",
+      "pbr_material_id": "PBR-MAT-OEM-OXFORD-WHITE",
+      "verification_status": "DISCOVERED",
+      "notes": "Aluminum outer panel is platform-typical for this generation; alloy designation remains Probability until OEM/material evidence edge is NORMALIZED."
+    },
+    "glass_run_channel": {
+      "material_type": "EPDM_RUBBER_SHORE_A_70",
+      "material_taxonomy": "Assumption",
+      "manufacturing_process": "EXTRUDED",
+      "pbr_material_id": "PBR-MAT-EPDM-WEATHERSEAL",
+      "verification_status": "DISCOVERED",
+      "notes": "Shore A 70 is an explicit design baseline Assumption for PBR — not COMPONENT_VERIFIED."
+    }
+  },
+  "runtime_capabilities": {
+    "removal_logic_enabled": true,
+    "exploded_view_offset": [-650.0, 0.0, 0.0],
+    "exploded_view_offset_status": "PLACEHOLDER",
+    "interactivity_actions": [
+      "ACTIVATE_HINGE_ROTATE",
+      "OPEN_EXPLODED_PASSPORT",
+      "SHOW_TORQUE_SPECS"
+    ],
+    "interactivity_status": "SCHEMA_READY_RUNTIME_NOT_BOUND"
+  },
+  "evidence_graph_links": [],
+  "dependent_teams": {
+    "team_a": "Audit SRC-OEM-001/002 for door-related dimensional claims when files exist",
+    "team_c": "Separate door from ASSET-00031; configure hinge pivot",
+    "team_d": "Load passport dynamically in component tree"
+  },
+  "meta": {
+    "last_engineering_review": "2026-07-16",
+    "review_status": "DRAFT_CANDIDATE",
+    "notes": "Hard Rule 0 passport skeleton. Not FROZEN. Geometry freeze globally blocked."
+  }
+}

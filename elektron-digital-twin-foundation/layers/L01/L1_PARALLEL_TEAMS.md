@@ -1,17 +1,30 @@
-# L1 Parallel Teams A–D (Protocol Hard Rule 8)
+# L1 Parallel Teams A–D (Protocol Hard Rule 8) — EDTS-OS v3
 
-**Protocol:** `EDTS_RESEARCH_PROTOCOL.md`  
+**Protocol:** `EDTS_RESEARCH_PROTOCOL.md` v2.0.0  
+**OS:** `EDTS_OS.md` v3.0.0  
 **Source pack posture:** `L1_SOURCE_PACK_01_NOT_VERIFIED`  
-**Geometry freeze:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`
+**Geometry freeze:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`  
+**Confidence %:** `DEPRECATED` — use Evidence Graph tiers + verification status
 
 Research blockage must not paralyze asset acquisition, provisional geometry prep, or software architecture.
 
 ```text
-[TEAM A: Research] ─────► Isolating Level A source access (2019 BBAS and Workshop Manual PDFs)
-[TEAM B: Assets] ───────► Auditing ASSET-00031 (Grade B) under Efficiency Principle
-[TEAM C: Geometry] ─────► Preparing provisional adapt of ASSET-00031 cab shell + placeholder frame
-[TEAM D: Software] ─────► Multi-source node tree in Three.js/React (hierarchy only)
+[TEAM A: Research] ─────► SRC-OEM-001/002 audit → INGESTED ➔ NORMALIZED (files pending)
+[TEAM B: Assets] ───────► Dana M300 housing models → CMP-AXL-M300 DISCOVERED ➔ INGESTED
+[TEAM C: Geometry] ─────► Separate cab/door from ASSET-00031 → CMP-SD-044-L draft passport
+[TEAM D: Software] ─────► Dynamic passport loader / component tree (EDTS-OS runtime)
 ```
+
+---
+
+## Current sprints (V3 OS)
+
+| Team | Current Active Target | Dependent Components | Target Status |
+| :--- | :--- | :--- | :--- |
+| **Team A** (Research) | Audit SRC-OEM-001 (BBAS) & SRC-OEM-002 (WSM) | `CMP-SD-044-L`, `CMP-FR-145` | `AWAITING_FILE` → `INGESTED` → `NORMALIZED` |
+| **Team B** (Assets) | Source Dana M300-class housing models | `CMP-AXL-M300` | `DISCOVERED` → `INGESTED` |
+| **Team C** (Geometry) | Separate cab/doors from ASSET-00031; pivot prep | `CMP-SD-044-L` | Draft → toward `COMPONENT_VERIFIED` (not frozen) |
+| **Team D** (Software) | Dynamically load components via passports | System-wide component tree | Schema/runtime hierarchy in progress — **not** `RUNTIME ENGINE COMPLETED` until wired + tested |
 
 ---
 
@@ -19,47 +32,45 @@ Research blockage must not paralyze asset acquisition, provisional geometry prep
 
 | Field | Value |
 |---|---|
-| Focus | Level A OEM PDF acquisition + hash + cover/page evidence |
-| Primary artifacts | `L1_SOURCE_ARTIFACT_FILE_MANIFEST.json`, `L1_PAGE_EVIDENCE_MANIFEST.json` |
-| Sprint now | Isolate access path for SRC-L1-001 / 002 / 003 |
+| Focus | Tier A OEM PDF acquisition + hash + Evidence Graph edge promotion |
+| Primary artifacts | `L1_SOURCE_ARTIFACT_FILE_MANIFEST.json`, `L1_EVIDENCE_GRAPH.json` |
+| Sprint now | Isolate access for SRC-OEM-001 / SRC-OEM-002 (= SRC-L1-001 / SRC-L1-003) |
 | Blocked on | Local PDF bytes |
-| Must not | Assert DOCUMENT_SUPPORTED without file hash |
+| Must not | Assert `NORMALIZED` or page quotes without file hash |
 
 ## Team B — Assets
 
 | Field | Value |
 |---|---|
-| Focus | Discover/grade existing 3D assets (Hard Rule 10) |
-| Active profile | `L1_ASSET_EVALUATION_ASSET-00031.md` — **Grade B** |
-| Sprint now | License capture + keep/discard enforcement |
-| Catalog | `research/incoming/l01_lane_a_assets/` |
-| Must not | Treat Grade B as dimensional truth |
+| Focus | Discover/grade existing 3D assets (Hard Rule 10); supplier axle hunt |
+| Active profiles | `ASSET-00031` Grade B; `CMP-AXL-M300` discovery |
+| Sprint now | License capture + keep/discard; M300 housing candidates |
+| Must not | Treat Grade B / supplier previews as dimensional truth |
 
 ## Team C — Geometry
 
 | Field | Value |
 |---|---|
-| Focus | Provisional adapt of graded assets; placeholder frame |
-| Sprint now | Prep clean/separate doors & greenhouse on ASSET-00031 |
-| Taxonomy | Outputs = Placeholder / Probability until Rule 4 complete |
-| Must not | Approve geometry freeze or invent 34.2 in as verified |
+| Focus | Provisional adapt; door passport geometry fields |
+| Sprint now | Prep clean/separate doors & greenhouse on ASSET-00031; hinge calibration prep |
+| Taxonomy | Outputs = Placeholder / Probability; passport `DRAFT_CANDIDATE` |
+| Must not | Mark passport `FROZEN` or invent hinge_axis mm |
 
 ## Team D — Software
 
 | Field | Value |
 |---|---|
-| Focus | Multi-source assembly node tree (Hard Rule 7) |
-| Sprint now | Three.js/React hierarchy matching `L1_EXTERIOR_OBJECT_HIERARCHY_V2_PROPOSAL.md` |
-| Provenance | Each node carries source_id / evidence_level / lifecycle_stage fields |
-| Must not | Bake unverified mm into runtime constants without claim IDs |
+| Focus | EDTS-OS component tree + passport dynamic load (Hard Rule 0 / 7) |
+| Sprint now | Three.js/React hierarchy keyed by `component_id` + version pin from vehicle config |
+| Provenance | Each node carries passport path, evidence_tier, verification_status |
+| Must not | Claim `RUNTIME ENGINE COMPLETED` without executable loader + tests; bake unverified mm as constants |
 
 ---
 
 ## Cross-team sync rules
 
-1. Team A promotions unlock confidence numerator weights in `L1_PARAMETER_VERIFICATION_DATABASE.json`.
-2. Team B grades feed Team C keep/discard maps only after catalog entry exists.
-3. Team C mesh PRs must cite taxonomy class per mesh part.
-4. Team D schema for nodes must accept multi-source blocks without requiring Level A for every part.
-
-Supersedes the narrower operational focus of this file for sprint tracking — use **`L1_PARALLEL_TEAMS.md`** (Teams A–D) as the active board. This document retains Lane A/B definitions for asset grading and independent spec audit detail.
+1. Team A promotions update Evidence Graph `verification_status` (not confidence %).
+2. Team B grades feed passport `mesh_source` / discovery only.
+3. Team C writes geometry fields on passports; never skips lifecycle.
+4. Team D reads `configurations/*` → `components/*` → Evidence Graph for claims UI.
+5. Geometry freeze remains blocked until dimensional edges reach required stages.

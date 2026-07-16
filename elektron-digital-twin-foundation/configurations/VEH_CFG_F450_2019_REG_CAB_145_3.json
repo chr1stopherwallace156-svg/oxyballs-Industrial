@@ -1,0 +1,45 @@
+{
+  "$id": "urn:edts:configuration:f450_2019_reg_cab_145_3:v1",
+  "configuration_id": "F450_2019_REG_CAB_145_3_WB_4X2",
+  "architecture": "EDTS-OS-v3",
+  "hard_rule_0": "COMPONENT_FIRST",
+  "role": "EPHEMERAL_ASSEMBLY_POINTER",
+  "note": "This file does not own dimensional truth. Query L1_EVIDENCE_GRAPH.json for parameters; load components via passports.",
+  "identity": {
+    "make": "Ford",
+    "model": "F-450 Super Duty Chassis Cab",
+    "model_year": 2019,
+    "cab_style": "REGULAR_CAB",
+    "drivetrain": "4X2",
+    "rear_wheels": "DRW",
+    "wheelbase_in": 145.3,
+    "cab_to_axle_in": 60.0
+  },
+  "component_graph": [
+    {
+      "slot": "CAB_DOOR_FRONT_LEFT",
+      "component_id": "CMP-SD-044-L",
+      "passport": "components/CMP_PASS_FR_DOOR_L.json",
+      "version_pin": 1,
+      "inherit": true
+    },
+    {
+      "slot": "FRAME_RAILS",
+      "component_id": "CMP-FR-145",
+      "passport": "components/CMP_FR_145.json",
+      "version_pin": 1,
+      "inherit": false,
+      "unique_to_configuration": true
+    },
+    {
+      "slot": "REAR_AXLE_ASSEMBLY",
+      "component_id": "CMP-AXL-M300",
+      "passport": "components/CMP_AXL_M300.json",
+      "version_pin": 1,
+      "inherit": true,
+      "status": "DISCOVERY"
+    }
+  ],
+  "evidence_graph": "layers/L01/L1_EVIDENCE_GRAPH.json",
+  "geometry_freeze": "NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE"
+}

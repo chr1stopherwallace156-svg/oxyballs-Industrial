@@ -1,7 +1,7 @@
 # L01 — Exterior
 
 **Status:** Research draft complete — protocol ACTIVE  
-**Research protocol:** `EDTS_RESEARCH_PROTOCOL.md`  
+**Architecture:** `EDTS_OS.md` v3 · **Research protocol:** `EDTS_RESEARCH_PROTOCOL.md` v2  
 **Milestone:** `L1_SOURCE_PACK_01` (`NOT_VERIFIED`)  
 **Document / public gates:** READY (templates)  
 **Modeling baseline:** `NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE`  
@@ -42,7 +42,7 @@ Planning sequence: [`L01_RESEARCH_DOSSIER_PLAN.md`](L01_RESEARCH_DOSSIER_PLAN.md
 - [x] EDTS Research Protocol ACTIVE + parameter verification DB + Teams A–D
 - [x] ASSET-00031 Grade B efficiency evaluation (provisional adapt prep)
 - [ ] Real SRC PDF acquisition + executed SHA-256
-- [ ] Page evidence restoration → raise confidence / evidence levels
+- [ ] Page evidence restoration → promote Evidence Graph edges (INGESTED → NORMALIZED); confidence % deprecated
 - [ ] Physical verification on GRADE-A/B VIN
 - [ ] Geometry freeze approval
 

@@ -1,0 +1,35 @@
+{
+  "$id": "urn:edts:component-passport:axle_m300:v1",
+  "$schema": "../schemas/component-passport.schema.json",
+  "hard_rule_0": "COMPONENT_FIRST",
+  "component_id": "CMP-AXL-M300",
+  "name": "Dana_M300_Class_Rear_DRW_Assembly",
+  "current_version": 1,
+  "compatibility": {
+    "platforms": [
+      "F-450_2017_2022",
+      "F-550_2017_2022",
+      "E-450_REUSE_CANDIDATE"
+    ],
+    "body_styles": ["CHASSIS_CAB", "CUTAWAY_CANDIDATE"],
+    "compatibility_status": "SUPPLIER_FAMILY_CANDIDATE"
+  },
+  "geometry_status": {
+    "mesh_source": null,
+    "mesh_lifecycle": "DISCOVERED",
+    "cleanup_retopology": "NOT_APPLICABLE",
+    "notes": "Team B sourcing supplier / aftermarket housing models. No mesh locked."
+  },
+  "materials_profile": {},
+  "runtime_capabilities": {
+    "removal_logic_enabled": false,
+    "interactivity_actions": [],
+    "interactivity_status": "NOT_STARTED"
+  },
+  "evidence_graph_links": [],
+  "meta": {
+    "last_engineering_review": "2026-07-16",
+    "review_status": "DRAFT_CANDIDATE",
+    "notes": "Discovery passport for Team B. Do not claim COMPONENT_VERIFIED."
+  }
+}
