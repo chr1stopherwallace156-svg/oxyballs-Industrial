@@ -1,0 +1,26 @@
+{
+  "document_id": "CLAIM_REGISTER",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "hard_rule": "Hard Rule 15",
+  "schema": "schemas/research-claim.schema.json",
+  "home": "research/claims/",
+  "locked_configuration": {
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_id": "CFG-000001"
+  },
+  "claims": [
+    {
+      "claim_id": "CL-001",
+      "path": "research/claims/CL-001_DOOR_SHELL_INTERCHANGE.json",
+      "claim_summary": "Outer door shell shared with F-150 (same design generation panel family)",
+      "status": "CANDIDATE",
+      "evidence_level": "TIER_A_OEM_PARTS_CATALOG_CLAIMED",
+      "component_instance_id": "CMPINST-VEH000001-DOOR-FL"
+    }
+  ],
+  "notes": [
+    "Major claims must not live only in sprint prose.",
+    "CL-DOOR-FL-SUBCOMPONENT_COVERAGE.json is a coverage matrix, not a Hard Rule 15 claim record — promote individual rows to CL-* when they become major claims."
+  ]
+}

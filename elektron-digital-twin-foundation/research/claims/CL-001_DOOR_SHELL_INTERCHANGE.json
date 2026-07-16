@@ -1,33 +1,39 @@
 {
   "claim_id": "CL-001",
-  "title": "FL outer door shell interchange (aluminum panel family)",
-  "exact_claim": "The F-450 driver's side front outer door shell (OEM family FL3Z-1520125-A / FL3Z-1520125-B) is shared with F-150 and other Super Duty platforms of the same design generation — as reported from Ford parts-interchange research.",
-  "target": {
+  "claim": "Outer door shell (OEM family FL3Z-1520125-A / FL3Z-1520125-B) is shared with F-150 and other Super Duty platforms of the same design generation.",
+  "evidence_level": "TIER_A_OEM_PARTS_CATALOG_CLAIMED",
+  "configuration": {
     "vehicle_instance_id": "VEH-000001",
     "configuration_id": "CFG-000001",
     "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
-    "configuration_summary": "2019 Ford F-450 Regular Cab Chassis Cab 4x2 DRW 145.3/60"
+    "summary": "2019 Ford F-450 Regular Cab Chassis Cab 4x2 DRW 145.3/60"
   },
-  "reported_oem_identifiers": ["FL3Z-1520125-A", "FL3Z-1520125-B"],
-  "claimed_evidence_authority": "TIER_A_OEM_PARTS_RECORD",
-  "project_verification_status": "DISCOVERED_NOT_LOCALLY_HASHED",
-  "sprint_narrative_status": "CROSS_VERIFIED",
-  "sprint_narrative_note": "Sprint Pass 4 labeled CROSS_VERIFIED; project does not promote Evidence Graph CROSS_VERIFIED until hashed local Tier A pages + Hard Rule 4 progression.",
-  "hr_evi_classification": "COMPARISON_REFERENCE_CROSSOVER_CANDIDATE",
-  "direct_applicability": "HIGH_FOR_SHELL_PANEL_FAMILY_PENDING_LOCAL_PROOF",
-  "contradictions": [
-    "Latch mechanisms, modules, mirror mounting plates, interior trim, and harnesses remain configuration-dependent and must not inherit from F-150 or other cabs."
+  "supporting_sources": [
+    {
+      "source": "Ford Parts Catalog / interchange (FL3Z-1520125-A ↔ FL3Z-1520125-B family — as reported in RL-008)",
+      "notes": "No local catalog page bytes or SHA-256 in-repo yet",
+      "local_hash_status": "NOT_EXECUTED"
+    }
   ],
-  "allowed_downstream": [
-    "Evaluate F-150 generation-band door shell scans as COMPARISON_REFERENCE baselines to reduce scan cost"
+  "conflicting_sources": [],
+  "status": "CANDIDATE",
+  "next_verification_step": [
+    "OEM body repair manual page extract (hashed) for outer panel applicability",
+    "OEM engineering / body drawing confirming panel identity for F-450 Chassis Cab Regular Cab",
+    "Physical comparison (panel stamp / fit) on exact-config or proven-interchange donor"
+  ],
+  "reported_oem_identifiers": ["FL3Z-1520125-A", "FL3Z-1520125-B"],
+  "hr_evi_classification": "COMPARISON_REFERENCE_CROSSOVER_CANDIDATE",
+  "scope_notes": [
+    "Latch, modules, mirror plates, trim, and harnesses remain configuration-dependent — not covered by this claim.",
+    "F-150 shell scans may be evaluated only as COMPARISON_REFERENCE baselines until Hard Rule 4 crossover proof."
   ],
   "forbidden_downstream": [
     "Auto-admit F-150 mesh as verified F-450 silo geometry",
-    "GEOMETRY freeze from interchange claim alone",
+    "Geometry freeze from this claim alone",
     "Assume 2020+ harness pinouts for 2019 twin"
   ],
-  "local_evidence_paths": [],
-  "sha256_of_source_pages": null,
   "research_sprint": "RL-008",
-  "decision": "DT-D039"
+  "decision": "DT-D040",
+  "hard_rule": "Hard Rule 15"
 }

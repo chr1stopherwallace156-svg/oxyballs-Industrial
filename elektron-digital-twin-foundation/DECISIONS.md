@@ -654,10 +654,24 @@ Append-only record of digital twin foundation decisions.
 - **secondary_flags:** `PHYSICAL_VERIFICATION_REQUIRED`
 - **scope:** RL-008; `SRC-CAND-000004` / EDTS-CAND-001; `CAND-000042-EOG` / EDTS-CAND-002; CL-001; `CMPINST-VEH000001-DOOR-FL`
 - **decision:**
-  1. Acquire Outlines vector (`SRC-CAND-000004`) as Priority 2D exterior baseline after purchase
-  2. Keep EOG/CGTrader mesh as visual candidate only (facade risk)
-  3. CL-001 shell interchange = comparison/crossover candidate until locally hashed — not F-450 silo geometry truth
-  4. Physical teardown/scan required for inner cavity, harness routing, latch geometry
+  1. Acquire Outlines vector as **2D dimensional / profile reference** (not ground-truth geometry)
+  2. Acquire visual model (EOG/CGTrader) when SKU isolated — visual only
+  3. Eventually physical teardown/scan for internals
+  4. CL-001 = Hard Rule 15 `CANDIDATE` claim record
   5. Contamination guards: 2020+ harness, cab type, mirror options
   6. Passport geometry remains `ABSENT`; no GEO promotion; kernel/rc1 unchanged
+
+
+## DT-D040 — Hard Rule 14/15 + claim records + acquisition vocabulary
+
+- **Change-control record:** [`decisions/DT-D040_HARD_RULE_15_CLAIM_RECORDS.json`](decisions/DT-D040_HARD_RULE_15_CLAIM_RECORDS.json)
+- **decision_id:** `DT-D040`
+- **date:** 2026-07-16
+- **approved_status:** `ACCEPTED`
+- **protocol_version:** `2.3.0`
+- **decision:**
+  1. Hard Rule 14 — vector blueprints = `2D_DIMENSIONAL_REFERENCE` / `PROFILE_REFERENCE` only
+  2. Hard Rule 15 — every major claim has a `CL-*` record with required fields
+  3. CL-001 rewritten to Hard Rule 15 shape; next steps = body repair manual, OEM drawing, physical comparison
+  4. Efficient acquire order: vector profile reference → visual model → physical teardown
 

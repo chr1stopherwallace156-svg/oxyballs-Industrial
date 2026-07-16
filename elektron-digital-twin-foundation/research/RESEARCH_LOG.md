@@ -199,3 +199,23 @@ DT-D038; protocol v2.2.0; register `research/src_candidates/SRC_CANDIDATE_REGIST
 ### Status
 
 DT-D039 — `CANDIDATE_ACQUISITION_RECOMMENDED`.
+
+---
+
+## RL-009 — Hard Rule 14/15; CL-001 claim record; acquisition vocabulary
+
+- **Date:** 2026-07-16
+- **Layer:** protocol / door claims
+- **Agent:** Cursor Cloud Agent
+- **Question:** Correct vector “ground truth” language; require structured claim records?
+
+### Findings
+
+1. **Hard Rule 14:** vector blueprints = **2D dimensional / profile reference** — never ground-truth geometry.
+2. **Hard Rule 15:** major claims require `CL-*` records (claim, evidence level, configuration, supporting/conflicting sources, status, next verification step).
+3. **CL-001** rewritten; status **`CANDIDATE`**; next steps = OEM body repair manual, OEM engineering drawing, physical comparison.
+4. Acquisition order affirmed: **vector → visual model → physical teardown**.
+
+### Status
+
+DT-D040; protocol v2.3.0.

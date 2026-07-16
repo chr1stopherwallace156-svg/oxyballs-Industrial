@@ -1,0 +1,28 @@
+{
+  "decision_id": "DT-D040",
+  "title": "Hard Rule 14/15 — reference vocabulary + mandatory claim records; acquire vector + visual",
+  "date": "2026-07-16",
+  "approved_status": "ACCEPTED",
+  "protocol_version": "2.3.0",
+  "scope": [
+    "EDTS_RESEARCH_PROTOCOL.md",
+    "research/claims/",
+    "schemas/research-claim.schema.json",
+    "SRC-CAND-000004 terminology",
+    "DT-D039 acquisition posture"
+  ],
+  "reason": "Vector blueprints must not be mislabeled as ground-truth geometry. Major claims must be first-class records. Efficient path is acquire 2D profile reference + visual model, then physical teardown.",
+  "decision": [
+    "Adopt Hard Rule 14: vector blueprints are 2D_DIMENSIONAL_REFERENCE / PROFILE_REFERENCE — never ground-truth geometry.",
+    "Adopt Hard Rule 15: every major claim has its own claim record (CL-*) with required fields.",
+    "Rewrite CL-001 into Hard Rule 15 shape; status CANDIDATE; next steps = body repair manual, OEM drawing, physical comparison.",
+    "Acquisition plan: (1) vector/profile reference SRC-CAND-000004, (2) visual model CAND-000042-EOG when SKU isolated, (3) eventually PHYSICAL_VERIFICATION_REQUIRED teardown/scan.",
+    "DT-D039 remains CANDIDATE_ACQUISITION_RECOMMENDED with corrected vocabulary.",
+    "Frozen kernel and component-passport rc1 unchanged."
+  ],
+  "related_decisions": ["DT-D039", "DT-D038"],
+  "change_control": {
+    "kernel_schema_change": false,
+    "component_passport_rc1_change": false
+  }
+}

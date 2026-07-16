@@ -17,16 +17,20 @@
     "layers/L01/L1_LANE_A_ASSET_CATALOG.json",
     "research/claims/CL-001_DOOR_SHELL_INTERCHANGE.json"
   ],
-  "reason": "Outlines 2D listing provides a real URL for Regular Cab Chassis Cab 60 CA DRW exterior baseline. Commercial 3D lacks door internals. Shell interchange with F-150 is a crossover candidate only until locally hashed. Physical teardown/scan required for harness routing and inner structure.",
+  "reason": "Outlines listing provides a real URL for a 2D dimensional / profile reference (not OEM engineering geometry). Acquire vector + visual model efficiently; physical teardown later for internals. Shell interchange is Hard Rule 15 claim CL-001 (CANDIDATE).",
   "decision": [
-    "Acquire SRC-CAND-000004 / EDTS-CAND-001 (Outlines vector) as Priority reference baseline after purchase.",
-    "Keep EDTS-CAND-002 / CAND-000042-EOG as visual candidate; do not treat as CAD-grade or inner-structure truth.",
-    "CL-001 shell interchange remains DISCOVERED_NOT_LOCALLY_HASHED / COMPARISON_REFERENCE — not silo geometry truth.",
-    "Flag PHYSICAL_VERIFICATION_REQUIRED for FL door internals, harness routing, latch geometry.",
+    "Acquire SRC-CAND-000004 / EDTS-CAND-001 (Outlines) as Priority 2D_DIMENSIONAL_REFERENCE / PROFILE_REFERENCE after purchase — never call it ground-truth geometry.",
+    "Acquire / evaluate EDTS-CAND-002 / CAND-000042-EOG visual model when SKU URL is isolated — visual candidate only, not CAD-grade inner structure.",
+    "Eventually execute PHYSICAL_VERIFICATION_REQUIRED teardown/scan for harness routing, latch geometry, inner cavity.",
+    "CL-001 (Hard Rule 15): status CANDIDATE; next verification = OEM body repair manual, OEM engineering drawing, physical comparison.",
     "Contamination guards: 2020+ facelift harness, cab-type trim/harness, mirror-option pinouts.",
     "Do not update passport geometry/interaction from ABSENT; no GEO promotion; kernel/passport rc1 unchanged.",
-    "Hard Rule 13: acquisition of Outlines triggers parallel parts/service/visual lanes — does not close research."
+    "Hard Rule 13: acquisition triggers parallel lanes — does not close research."
   ],
+  "terminology_correction": {
+    "forbidden": ["ground-truth geometry", "engineering ground truth"],
+    "required_for_vector_blueprints": ["2D_DIMENSIONAL_REFERENCE", "PROFILE_REFERENCE"]
+  },
   "candidates": {
     "SRC-CAND-000004": "NOT_ACQUIRED_URL_RECORDED",
     "EDTS-CAND-002": "DISCOVERED_CONFIGURATION_EVALUATED"

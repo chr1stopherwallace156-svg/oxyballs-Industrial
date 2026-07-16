@@ -4,7 +4,7 @@
 **Architecture version:** `3.1.0`  
 **Effective Date:** 2026-07-16  
 **Supersedes process posture:** Version 2 (Engineering Process) for system framing  
-**Binding protocol:** [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) v2.2.0+  
+**Binding protocol:** [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) v2.3.0+  
 **Constitutional isolation law:** [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
 **Blueprint:** [EDTS_OS_ARCHITECTURE_BLUEPRINT.md](EDTS_OS_ARCHITECTURE_BLUEPRINT.md)  
 **Roadmap:** [EDTS_OS_IMPLEMENTATION_ROADMAP.md](EDTS_OS_IMPLEMENTATION_ROADMAP.md)  
@@ -41,6 +41,7 @@ Implications:
 5. **Component-First Acquisition + Hard Rule 11:** do not *assume* a complete exact-vehicle asset always exists — and do not *forbid* searching for one. Prefer an exact complete-vehicle package (OEM CAD, scans, photogrammetry, supplier CAD, etc.) when available; otherwise acquire component-by-component. Admit each component only after verification; never inherit a marketplace package as automatic silo truth. (Protocol Hard Rule 0 corollary + Hard Rule 11; catalog = `layers/L01/L1_LANE_A_ASSET_CATALOG.json`.)
 6. **Component Passport** is the primary truth surface for a component instance (evidence / geometry / interaction status + links). Prefer passport depth over speculative schema expansion.
 7. **Hard Rule 13 — Research Never Stops at One Source:** a `SRC-CAND-*` discovery triggers parallel research lanes (document / service / parts / dimensional / visual) until Evidence Graph saturation or explicit `PRIMARY_SOURCE_REQUIRED`. Immutable IDs live under `research/src_candidates/`. Research Confidence (RC) prioritizes the search queue only — it is not engineering verification %.
+8. **Hard Rule 14 / 15:** Vector blueprints are **2D dimensional / profile reference**, never ground-truth geometry. Every major claim has its own `CL-*` record under `research/claims/` (claim, evidence level, configuration, supporting/conflicting sources, status, next verification step).
 
 ---
 

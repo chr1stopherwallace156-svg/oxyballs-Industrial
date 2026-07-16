@@ -4,7 +4,9 @@
   "metadata": {
     "title": "2017-2022 Ford F-450 Super Duty Chassis Cab Regular Cab 60 CA DRW Blueprint",
     "source_type": "VECTOR_BLUEPRINT_COMMERCIAL",
-    "document_class": "2D_VECTOR_REFERENCE",
+    "document_class": "2D_DIMENSIONAL_REFERENCE",
+    "reference_class": "PROFILE_REFERENCE",
+    "not_oem_engineering_geometry": true,
     "publisher": "Outlines (GetOutlines)",
     "reported_year": 2017,
     "legacy_aliases": ["EDTS-CAND-001", "C-001"],
@@ -20,7 +22,7 @@
     {
       "at": "2026-07-16T19:50:00Z",
       "rc": 78,
-      "note": "Real listing URL recorded for Regular Cab Chassis Cab 60 CA DRW band including 145.3 WB exterior proportions. Strong hunt value for 2D baseline. RC reduced because MY band includes 2020+ facelift and content is exterior-only (no door internals)."
+      "note": "Real listing URL recorded for Regular Cab Chassis Cab 60 CA DRW band including 145.3 WB exterior proportions. Hunt value as 2D dimensional / profile reference only — NOT ground-truth geometry, NOT OEM engineering geometry (Hard Rule 14). RC reduced for 2020+ band + exterior-only content."
     }
   ],
   "bound_vehicle_instance_id": "VEH-000001",
@@ -43,8 +45,9 @@
   "notes": [
     "Decision DT-D039: CANDIDATE_ACQUISITION_RECOMMENDED (Priority acquire).",
     "After purchase: ingest via EAE CORE (local file), hash full bytes, bind extracts to CFG-000001 only.",
-    "Alias EDTS-CAND-001 from RL-008 sprint narrative."
+    "Alias EDTS-CAND-001 from RL-008 sprint narrative.",
+    "Hard Rule 14 vocabulary: 2D_DIMENSIONAL_REFERENCE / PROFILE_REFERENCE."
   ],
   "research_sprint": "RL-008",
-  "decision": "DT-D039"
+  "decision": "DT-D040"
 }

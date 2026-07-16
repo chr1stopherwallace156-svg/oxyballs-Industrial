@@ -10,7 +10,7 @@ Before modifying any file, read:
 2. [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md) — **HR-EVI constitutional isolation law**
 3. [KERNEL_MANIFEST.json](KERNEL_MANIFEST.json) — Kernel **v1.0.0-rc1**
 4. [documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md](documentation/EXACT_VEHICLE_ISOLATION_STANDARD.md) — operational isolation standard
-5. [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) — research / evidence runtime core (v2.2+; Hard Rule 13 / SRC-CAND)
+5. [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) — research / evidence runtime core (v2.3+; Hard Rules 13–15 / SRC-CAND / claims)
 6. [README.md](README.md) — required reading order for core specifications
 7. [FORMULA_AND_SYMBOL_STANDARD.md](FORMULA_AND_SYMBOL_STANDARD.md)
 8. [AGENTS.md](AGENTS.md) (this file)
@@ -61,7 +61,7 @@ Prefer [schemas/CLAIM_SCHEMA_ROOT_V6_PROPOSAL.json](schemas/CLAIM_SCHEMA_ROOT_V6
 
 ## Non-negotiables
 
-- **Obey EDTS_OS.md + EDTS_RESEARCH_PROTOCOL.md** — Hard Rule 0, HR-EVI, Hard Rules 1–11 + **13**, expanded lifecycle, Evidence Graph, immutable `SRC-CAND-*` + RC hunt scores (not engineering %).
+- **Obey EDTS_OS.md + EDTS_RESEARCH_PROTOCOL.md** — Hard Rule 0, HR-EVI, Hard Rules 1–11 + **13–15**, expanded lifecycle, Evidence Graph, immutable `SRC-CAND-*` + RC hunt scores (not engineering %). Major claims → `research/claims/CL-*`. Vector blueprints ≠ ground-truth geometry.
 - **Never invent dimensions, page quotes, or hashes.** Prefer `UNKNOWN` / `AWAITING_FILE` / `REQUIRES ADDITIONAL EVIDENCE` (Hard Rule 6).
 - **Never skip gates.** A layer advances only when all five gates are recorded in [STATUS.json](STATUS.json) and the layer doc.
 - **Never delete evidence.** Research log, decisions, and changelog entries are append-only.
@@ -84,8 +84,9 @@ For each layer:
 ## Research & OS protocol
 
 - **OS constitution:** [EDTS_OS.md](EDTS_OS.md) (ACTIVE v3)
-- **Research protocol:** [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) (ACTIVE v2.2; Hard Rule 13)
+- **Research protocol:** [EDTS_RESEARCH_PROTOCOL.md](EDTS_RESEARCH_PROTOCOL.md) (ACTIVE v2.3; Hard Rules 13–15)
 - **Source candidates:** [research/src_candidates/SRC_CANDIDATE_REGISTER.json](research/src_candidates/SRC_CANDIDATE_REGISTER.json)
+- **Claim records:** [research/claims/CLAIM_REGISTER.json](research/claims/CLAIM_REGISTER.json)
 - Evidence Graph → [layers/L01/L1_EVIDENCE_GRAPH.json](layers/L01/L1_EVIDENCE_GRAPH.json)
 - Component passports → [components/](components/)
 - Vehicle configs → [configurations/](configurations/)

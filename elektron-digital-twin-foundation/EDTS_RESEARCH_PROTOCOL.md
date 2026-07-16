@@ -2,7 +2,7 @@
 
 **Status:** `ACTIVE`  
 **Effective Date:** 2026-07-16  
-**Version:** `2.2.0`  
+**Version:** `2.3.0`  
 **Architecture host:** [EDTS_OS.md](EDTS_OS.md) v3.0.0+ (EDTS-OS)  
 **Isolation law:** [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
 **Binding for:** all research, acquisition, geometry development, and software logic operations under `elektron-digital-twin-foundation/`
@@ -10,7 +10,8 @@
 **Changelog from 2.0.0:** Constitutional **Hard Rule — Exact Vehicle Isolation (HR-EVI)**; vehicle datasets under `examples/<oem>/<exact_config>/`; similarity never evidence; Hard Rule 0 sharing clarified as non-automatic.  
 **Changelog from 2.1.0:** Hard Rule 0 adds **Component-First Acquisition** (no assumption of a complete exact-vehicle marketplace asset; admit components only after verification).  
 **Changelog from 2.1.1:** Hard Rule 11 — Evidence Acquisition Efficiency (search complete-vehicle **and** component levels; prefer exact complete assets when they exist; never forbid complete-vehicle search).  
-**Changelog from 2.1.2:** **Hard Rule 13** — Research Never Stops at One Source; **Research Confidence (RC)** for SRC-CAND search prioritization (not engineering verification %); immutable **`SRC-CAND-######`** IDs.
+**Changelog from 2.1.2:** **Hard Rule 13** — Research Never Stops at One Source; **Research Confidence (RC)** for SRC-CAND search prioritization (not engineering verification %); immutable **`SRC-CAND-######`** IDs.  
+**Changelog from 2.2.0:** **Hard Rule 15** — Every Major Claim Must Have Its Own Claim Record; vector blueprints are **2D dimensional / profile reference**, never “ground-truth geometry.”
 
 ---
 
@@ -201,6 +202,52 @@ A `SRC-CAND-*` discovery is a **trigger** to propagate parallel tasks across res
 
 Finding BBAS alone is never “research complete.”
 
+### Hard Rule 14 — Reference Geometry Vocabulary
+
+Commercial **vector blueprints** and similar 2D drawings are:
+
+- **`2D_DIMENSIONAL_REFERENCE`**, or  
+- **`PROFILE_REFERENCE`**
+
+They are **not** OEM engineering geometry and must **not** be called “ground-truth geometry,” “engineering ground truth,” or equivalent.
+
+OEM engineering geometry requires Tier A drawings / BBAS / measured Tier B evidence under Hard Rule 4.
+
+### Hard Rule 15 — Every Major Claim Must Have Its Own Claim Record
+
+Do not bury major engineering or interchange statements only in prose paragraphs.
+
+Every major claim must have a machine-readable record under `research/claims/` with at least:
+
+| Field | Meaning |
+|---|---|
+| `claim_id` | Immutable handle (`CL-###` or `CL-<topic>-###`) |
+| `claim` | Exact statement under evaluation |
+| `evidence_level` | Tier A–F (claimed/target — not automatic verification) |
+| `configuration` | Exact silo binding (`VEH` / `CFG` / component as applicable) |
+| `supporting_sources` | Sources that appear to support the claim |
+| `conflicting_sources` | Sources that contradict (or `[]` if none yet) |
+| `status` | e.g. `CANDIDATE`, `RESEARCH_REQUIRED`, `PRIMARY_SOURCE_REQUIRED`, … |
+| `next_verification_step` | Concrete next proof action(s) |
+
+Optional but recommended: `reported_oem_identifiers`, `forbidden_downstream`, `hr_evi_classification`.
+
+**Register:** `research/claims/CLAIM_REGISTER.json`  
+**Schema:** `schemas/research-claim.schema.json`
+
+Example shape (shell interchange):
+
+```text
+Claim ID: CL-001
+Claim: Outer door shell shared with F-150 (same design generation panel family)
+Evidence Level: Tier A (OEM Parts Catalog — claimed)
+Configuration: VEH-000001 / CFG-000001 / CMPINST-VEH000001-DOOR-FL
+Supporting Sources: Ford Parts Catalog (interchange — not yet locally hashed)
+Conflicting Sources: none yet identified
+Status: CANDIDATE
+Next Verification Step: OEM body repair manual; OEM engineering drawing; physical comparison
+```
+
 ### Deferred architecture (do not implement under schema freeze)
 
 These improve long-term rigor but must **not** expand frozen kernel schemas unless a blocking defect from the real geometry workflow requires it (DT-D028):
@@ -287,4 +334,5 @@ Replacement query model for **verified engineering claims**: traverse Evidence G
 | `layers/L01/L1_ASSET_EVALUATION_ASSET-00031.md` | Efficiency-principle asset profile |
 | `layers/L01/L1_LANE_A_ASSET_CATALOG.json` | Lane A marketplace candidate catalog |
 | `research/src_candidates/SRC_CANDIDATE_REGISTER.json` | Immutable `SRC-CAND-*` register + Next Search Queue |
+| `research/claims/CLAIM_REGISTER.json` | Hard Rule 15 major-claim index |
 | `layers/L01/L1_SOURCE_PACK_01_AUTHENTICITY_AUDIT.md` | Pack verification posture |

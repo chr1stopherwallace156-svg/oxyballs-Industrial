@@ -172,10 +172,10 @@
       ],
       "estimated_configuration_match": "EXTERIOR_PROPORTION_CANDIDATE",
       "evidence_status": "DISCOVERED",
-      "lifecycle_note": "DISCOVERED -> URL_RECORDED -> AWAITING_PURCHASE (DT-D039 Priority acquire)",
+      "lifecycle_note": "DISCOVERED -> URL_RECORDED -> AWAITING_PURCHASE (DT-D039/D040 Priority acquire as PROFILE_REFERENCE)",
       "availability_audit": null,
       "evaluation_doc": "research/sprints/RL-008_DOOR_FL_SCOPE_LOCK_AND_CANDIDATES.md",
-      "notes": "Authoritative machine record also at research/src_candidates/SRC-CAND-000004.json. 2D only — not inner structure truth. MY band includes 2020+."
+      "notes": "Authoritative machine record: research/src_candidates/SRC-CAND-000004.json. Hard Rule 14: 2D_DIMENSIONAL_REFERENCE / PROFILE_REFERENCE — NEVER ground-truth geometry. MY band includes 2020+."
     }
   ],
   "rejected_proposal_artifacts": [

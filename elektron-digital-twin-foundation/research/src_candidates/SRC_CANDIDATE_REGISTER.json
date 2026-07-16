@@ -70,13 +70,23 @@
       "task": "Purchase/acquire SRC-CAND-000004 (Outlines vector / EDTS-CAND-001)",
       "lane": "LANE_A_DOC",
       "topic": "DOOR_FL_ASSEMBLY",
-      "expected_evidence": "2D exterior baseline for Regular Cab Chassis Cab 60 CA DRW proportions",
+      "expected_evidence": "2D dimensional / profile reference (NOT ground-truth geometry) for Regular Cab Chassis Cab 60 CA DRW proportions",
       "candidate_id": "SRC-CAND-000004",
       "status": "ACTIVE",
-      "decision": "DT-D039"
+      "decision": "DT-D039/D040"
     },
     {
       "priority": 2,
+      "task": "Isolate SKU URL + acquire CAND-000042-EOG / EDTS-CAND-002 visual model",
+      "lane": "LANE_VIS",
+      "topic": "DOOR_FL_ASSEMBLY",
+      "expected_evidence": "Visual polygonal cab/door exterior candidate — not CAD-grade internals",
+      "candidate_id": "EDTS-CAND-002",
+      "status": "ACTIVE",
+      "decision": "DT-D040"
+    },
+    {
+      "priority": 3,
       "task": "Locate/Acquire SRC-CAND-000001 (BBAS)",
       "lane": "LANE_A_DOC",
       "topic": "FRONT_SUSPENSION_GEOMETRY",
@@ -84,15 +94,6 @@
       "candidate_id": "SRC-CAND-000001",
       "status": "ACTIVE",
       "decision": "DT-D037"
-    },
-    {
-      "priority": 3,
-      "task": "Isolate SKU URL + evaluate CAND-000042-EOG / EDTS-CAND-002 (CGTrader EOG)",
-      "lane": "LANE_VIS",
-      "topic": "DOOR_FL_ASSEMBLY",
-      "expected_evidence": "Polygonal cab exterior candidate — dimensional audit only after bytes",
-      "candidate_id": "EDTS-CAND-002",
-      "status": "QUEUED"
     },
     {
       "priority": 4,
@@ -159,6 +160,7 @@
     "C-001": "SRC-CAND-000004",
     "EDTS-CAND-002": "CAND-000042-EOG"
   },
-  "decisions": ["DT-D037", "DT-D038", "DT-D039"],
-  "sprints": ["RL-006", "RL-007", "RL-008"]
+  "decisions": ["DT-D037", "DT-D038", "DT-D039", "DT-D040"],
+  "sprints": ["RL-006", "RL-007", "RL-008"],
+  "hard_rule_14_note": "Vector blueprints = 2D_DIMENSIONAL_REFERENCE / PROFILE_REFERENCE only"
 }

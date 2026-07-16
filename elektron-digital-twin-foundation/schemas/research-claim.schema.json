@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:schema:research-claim:1.0.0",
+  "title": "EDTS Research Claim Record (Hard Rule 15)",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "claim_id",
+    "claim",
+    "evidence_level",
+    "configuration",
+    "supporting_sources",
+    "conflicting_sources",
+    "status",
+    "next_verification_step"
+  ],
+  "properties": {
+    "claim_id": {
+      "type": "string",
+      "pattern": "^CL-[A-Za-z0-9-]+$",
+      "description": "Immutable claim handle"
+    },
+    "claim": { "type": "string", "minLength": 1 },
+    "evidence_level": {
+      "type": "string",
+      "description": "Tier A–F or explicit UNKNOWN — claimed/target, not automatic verification"
+    },
+    "configuration": {
+      "type": "object",
+      "required": ["vehicle_instance_id", "configuration_id"],
+      "properties": {
+        "vehicle_instance_id": { "type": "string" },
+        "configuration_id": { "type": "string" },
+        "component_instance_id": { "type": ["string", "null"] },
+        "summary": { "type": "string" }
+      }
+    },
+    "supporting_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source"],
+        "properties": {
+          "source": { "type": "string" },
+          "notes": { "type": "string" },
+          "local_hash_status": { "type": "string" }
+        }
+      }
+    },
+    "conflicting_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source"],
+        "properties": {
+          "source": { "type": "string" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "CANDIDATE",
+        "RESEARCH_REQUIRED",
+        "PRIMARY_SOURCE_REQUIRED",
+        "COMPARISON_REFERENCE",
+        "CONFIGURATION_MATCHED",
+        "CROSS_VERIFIED",
+        "REJECTED",
+        "SUPERSEDED"
+      ]
+    },
+    "next_verification_step": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    }
+  }
+}
