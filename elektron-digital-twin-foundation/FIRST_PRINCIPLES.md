@@ -4,6 +4,206 @@ Status:
 Active / System Constitutional Base
 
 Sources:
+- ISO 15926 — Industrial automation systems and integration—Integration of life-cycle data
+- ISO/IEC/IEEE 21839 — System of Systems (SoS) engineering of systems
+- NASA-SP-2016-6105 — NASA Systems Engineering Handbook
+- EDTS Design Directives — State-Time, 6D Object Rules, and Scientific Verification Protocols
+
+Confidence:
+Maximum (First-Principles Foundation)
+
+1. System Philosophy: The EDTS Paradigm
+
+The Engineering Digital Twin System (EDTS) does not treat a digital twin as a static 3D mesh, a CAD file, or a database of isolated values.
+
+The Central Axiom of EDTS:
+
+> An object is not defined by its visualization; its visualization is a spatial representation of its identity, relationships, state, and evidence.
+>
+> A 3D model is merely a projection of the underlying Knowledge Engine onto a spatial viewport. If the Knowledge Engine lacks a deep understanding of a bolt's torque spec, parent assembly, physical material, manufacturing lineage, or maintenance history, then rendering that bolt is merely digital puppetry, not a digital twin.
+
+  [ Physical Asset ] <====== Real-world State & Observables ======> [ EDTS Core ]
+                                                                        ||
+                                                                [ Knowledge Engine ]
+                                                                        ||
+  [ 3D Visualization ] <=== Spatial & Structural Mappings === [ Relationship Model ]
+
+2. The Universal Object Rule (The 6 Pillars)
+
+Every physical, digital, or process entity represented in EDTS must obey this fundamental rule. Whether it is an entire truck, a single bolt, a technician, or an inspection step, it possesses:
+
+                  +-----------------------------------+
+                  |         UNIVERSAL OBJECT          |
+                  +-----------------------------------+
+                  | 1. IDENTITY     | Unique Name/ID  |
+                  | 2. LOCATION     | Space & Assembly|
+                  | 3. STATE        | Current Mode    |
+                  | 4. HISTORY      | Time & Events   |
+                  | 5. RELATIONSHIPS| Connections     |
+                  | 6. EVIDENCE     | Verification    |
+                  +-----------------------------------+
+
+- Identity: A globally unique name and ID that identifies exactly what it is and distinguishes it from every other entity.
+- Location: A defined spatial coordinate (using the ISO 8855 coordinate system) or structural placement within a parent assembly.
+- State: Its current condition, functional parameters, configuration, or structural properties at this precise moment in time.
+- History: A linear, immutable record of all changes, events, modifications, or failures that have occurred across its lifespan.
+- Relationships: Explicit, bi-directional connections detailing how it affects, links to, or interacts with other objects in the system.
+- Evidence: Concrete physical observation, authoritative design documentation, or sensor data proving its parameters and current state.
+
+3. Core System Definitions
+
+To prevent semantic drift across developer tools (such as Cursor), researchers, and software engineers, we enforce this unified system terminology:
+
+A. What is a Vehicle?
+
+A Vehicle is a complex system-of-systems. It is a self-contained, mobile engineering asset designed to fulfill a specific operational profile. It acts as the ultimate root node of all underlying assemblies, subsystems, and components.
+
+B. What is an Assembly?
+
+An Assembly is a functional grouping of interacting parts, sub-assemblies, or systems that perform a coherent, higher-level system function (e.g., front_suspension_assembly, door_fl_assembly).
+
+- Assemblies can be nested recursively.
+- Assemblies define physical or energetic networks (how fluid, force, heat, or electricity flows through the system).
+
+C. What is a Component?
+
+A Component is an indivisible physical unit within the scope of maintenance, modeling, and digital representation (e.g., bolt_m10_65mm, brake_rotor_fr). It is the lowest level of the vehicle hierarchy that:
+
+- Features homogeneous material or clear physical boundaries.
+- Possesses direct physical, mechanical, thermal, or visual appearance properties.
+- Can be individually inspected, tracked, repaired, or replaced.
+
+D. What is a Procedure?
+
+A Procedure is an ordered, step-by-step sequence of physical or cognitive actions executed to inspect, alter, test, or verify the state of an Assembly or Component. Every step must define its Preconditions, Execution Criteria, and Verification States.
+
+E. What is Evidence?
+
+Evidence is the immutable verification layer of EDTS. It bridges the physical world and the digital twin via three tiers:
+
+- Authoritative Design Records: OEM manuals, CAD drawings, manufacturing schematics.
+- Physical Observations: High-resolution photographs, laser scans, direct metrology.
+- Sensor / Telemetry Streams: Real-time CAN-bus metrics, physical testing logs.
+
+4. Time, History, & State Transitions
+
+Nothing in the physical world is static. EDTS treats Time as a core system coordinate.
+
+```
+[Design Spec] ----> [Installed] ----> [Operating/Wear] ----> [Degraded] ----> [Replaced] 
+      |                  |                    |                  |                |
+  (Snapshot)         (Snapshot)           (Snapshot)         (Snapshot)       (Snapshot)
+      \-------------------\--------------------\------------------/----------------/
+                                               |
+                                   [ Immutable Lifecycle Log ]
+```
+
+Key Principles of Time:
+
+- The State Snapshot: An object's State at any given time t is a snapshot.
+- The Immutable Lifecycle Log: We do not overwrite an object's past state when it changes. We write an immutable event to its History.
+- Transition States: Every component must track its lifecycle state through standard transitions.
+- Events as Triggers: Any action—be it a technician tightening a bolt, a temperature spike on a sensor, or a mileage milestone—is recorded as an Event Node that updates the component's state and history.
+
+5. Relationship Model
+
+Every entity entered into the EDTS database must define its relationships to other components using these simple, standardized verbs:
+
+- IS_PART_OF / CONTAINS: Physical containment or structural nesting.
+  - Example: piston_ring_fl -> IS_PART_OF -> piston_assembly_1.
+- MECHANICALLY_COUPLED_TO: A rigid, rotational, or structural load path.
+  - Example: wheel_hub_fr -> MECHANICALLY_COUPLED_TO -> brake_rotor_fr.
+- THERMALLY_COUPLED_TO: Thermal paths where heat energy transfers.
+  - Example: coolant_fluid -> THERMALLY_COUPLED_TO -> battery_cell_matrix.
+- ELECTRICALLY_CONNECTED_TO: Paths transferring electrical power (high or low voltage).
+  - Example: bms_module -> ELECTRICALLY_CONNECTED_TO -> wiring_harness_hv.
+- AFFECTS_STATE_OF: Control feedback loops, signals, or analog/digital dependencies.
+  - Example: coolant_temp_sensor -> AFFECTS_STATE_OF -> coolant_pump.
+
+6. Data Integrity & Scientific Verification
+
+We do not accept "AI guesses" or uncorroborated assumptions. We think and verify like scientists.
+
+Source Hierarchy (Authority Ranking)
+
+- Tier 1 (Highest): OEM Design Specifications — Original blueprints, factory body-builder layout guides, OEM service manuals.
+- Tier 2: Physical Metrology — Direct 3D scans, physical measurements with calibrated tools, physical inspection.
+- Tier 3: Secondary Manufacturer Records — Part-specific manufacturer datasheets (e.g., Bosch sensor diagrams).
+- Tier 4 (Lowest): General Knowledge — Community forums, standard parts-store databases, generic auto specs. Tier 4 cannot be used to verify a specification.
+
+Trusting Measurements vs. Documents
+
+- If a physical measurement (Tier 2) contradicts an engineering document (Tier 1), the system must not overwrite either.
+- The system logs a Discrepancy Node and flags it for inspection.
+- This discrepancy is evaluated: Is it a manufacturing tolerance issue, aftermarket wear, frame deformation, or an alternative trim variation? Both data points are kept as independent historical values until resolved.
+
+                     +---------------------------+
+                     |  Authority Tier Ranking   |
+                     +---------------------------+
+                                   |
+           +-----------------------+-----------------------+
+           |                                               |
+  [ Tier 1: OEM Design ]                         [ Tier 2: Field Data ]
+  - Blueprints, CAD, BBAS                        - Laser Scans, Calipers
+  - Service Manuals, Recalls                     - Telemetry, High-Res Photos
+           |                                               |
+           +-----------------------+-----------------------+
+                                   |
+                         [ Conflict Resolution ]
+                         - Hierarchy: Tier 1 > Tier 2
+                         - Discrepancy logged as open issue
+
+7. Operationalization: The Scientific Research Dossier (Layer B)
+
+Every scientific, technical, or spatial query analyzed by EDTS must output its final verified document matching this layout to guarantee semantic conformity across all systems.
+
+# RESEARCH_DOSSIER: [SYSTEM/COMPONENT_NAME]
+
+## 1. RESEARCH PARAMETERS
+- **Target Question:** [What exact specification, geometry, or relationship is being investigated?]
+- **System/Sub-System Mapping:** [e.g., Layer C - Front Axle Assembly]
+- **Target Coordinates / Spatial Scope:** [ISO 8855 spatial bounding box or component center of mass]
+
+## 2. KNOWLEDGE GRAPH STATUS
+- **Status:** [Draft / Under Review / Verified]
+- **Global Confidence Score:** [Low / Medium / High]
+- **Last Semantic Integration Date:** [YYYY-MM-DD]
+
+## 3. EVIDENCE & SOURCES
+### Primary Sources (Tier 1 - 2)
+- [Source ID] - [Full Citation, Document ID, Paragraph, Page, Figure, or Measurement Log]
+
+### Secondary Sources (Tier 3 - 4)
+- [Source ID] - [Full Citation, Database, or Third-Party Parts Catalogue]
+
+## 4. VERIFIED ENGINEERING DATA
+| Parameter ID | Parameter Name | Measured / Nominal Value | Unit | Tolerances | Evidence Reference |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `val_001` | [Descriptor] | [Value] | [mm, N·m, etc.] | [± Tolerance] | [Source ID] |
+
+## 5. SYSTEM RELATIONSHIPS & CONNECTIONS
+- `(this_component)` -> `[RELATIONSHIP_PREDICATE]` -> `(target_component)` [Source ID]
+
+## 6. CONTRADICTIONS, DISCREPANCIES, & RESOLUTIONS
+- **Discrepancy:** [Describe the conflict found between source A and source B]
+- **Analysis & Resolution:** [Why does it exist, and how do we represent both states over time?]
+
+## 7. SCIENTIFIC CERTAINTY & ASSUMPTIONS (THE BLAST RADIUS)
+- **Can this information be trusted?** [Clear, unvarnished statement of trust: e.g., "Highly trustworthy for CAD modeling, but lacks physical metrology validation."]
+- **Why?** [Brief explanation of the quality/authority of the sources used.]
+- **What assumptions remain?** [Explicitly state any unverified assumptions made during compilation.]
+- **What future layers/systems depend on this?** [List downstream components, rendering workflows, or structural simulations that rely on this data.]
+- **If this is wrong, what breaks?** [Detail the exact downstream consequences: e.g., "If frame width is off by >2mm, the bumper brackets will fail to align in Unreal Engine, and the steering assembly linkage will intersect the sway bar."]
+
+Verification Protocol
+
+By enacting this FIRST_PRINCIPLES.md constitution, EDTS ensures that any file, 3D model, sensor feed, or repair manual entry becomes instantly searchable, highly structured, and structurally linked to the global vehicle platform.
+# FIRST_PRINCIPLES.md
+
+Status:
+Active / System Constitutional Base
+
+Sources:
 - ISO 15926 — Industrial automation systems and integration—Integration of life-cycle data for process plants including oil and gas production facilities
 - ISO/IEC/IEEE 21839 — System of Systems (SoS) considerations for engineering of systems
 - W3C Semantic Web Standards — Resource Description Framework (RDF) & Web Ontology Language (OWL)
