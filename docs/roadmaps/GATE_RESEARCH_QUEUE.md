@@ -23,7 +23,13 @@ the missing supplier data) still apply.
 
 ---
 
-## Gate 04B — Brake / Steering Test Plan  · STATUS: NEXT
+## Gate 04B — Brake / Steering Test Plan  · STATUS: FIRST PASS DONE (batch_25)
+
+First pass reconciled in batch_25 → `REGULATORY_TEST_SOURCE_FOUND /
+NEEDS_BRAKE_ENGINEER_MAPPING` (CS-55 FMVSS/TSD 105; RC-88/89/90). Still
+open: parse the exact 49 CFR §571.105 table rows and get a brake
+engineer to map the stopping-distance / partial-failure / fade-recovery /
+parking-brake / warning-lamp requirements to this vehicle class.
 
 Focus: FMVSS 105 brake test procedure, loaded low-speed steering test,
 hydroboost failure response, loss-of-EHPS-pump behavior, low-voltage
@@ -71,7 +77,7 @@ stops.
 > - Do not say the vehicle is safe.
 > - Do not create final pass/fail numbers unless the source is primary regulation, OEM, or accepted test standard.
 
-## Gate 04C — EHPS Electrical / Low-Voltage Architecture  · STATUS: QUEUED
+## Gate 04C — EHPS Electrical / Low-Voltage Architecture  · STATUS: FIRST PASS DONE (batch_25)
 
 Focus: 800V→12V DC-DC converter sizing, 12V battery buffer, ultracapacitor
 buffer, high-current 12V fuse sizing, low-voltage brownout risk,
@@ -102,7 +108,7 @@ warning logic.
 > - OpenGaps
 > - what supplier data is still required
 
-## Gate 05 — CAN / Controls / Cluster Integration  · STATUS: QUEUED
+## Gate 05 — CAN / Controls / Cluster Integration  · STATUS: FIRST PASS DONE (batch_25)
 
 **Terminology rule (standing):** authorized Ford-compatible controls
 integration, immobilizer-safe architecture, diagnostic compatibility,
@@ -149,7 +155,7 @@ cluster serviceability. **NEVER "PATS bypass/override."**
 > - Forum posts are LeadOnly.
 > - Ford/OEM/service documentation is preferred.
 
-## Gate 06 — Mechanical Mounting / Battery Enclosure  · STATUS: QUEUED
+## Gate 06 — Mechanical Mounting / Battery Enclosure  · STATUS: FIRST PASS DONE (batch_25)
 
 Focus: Ford frame modification rules, battery tray design, bracket
 fatigue, fastener preload, welding/drilling restrictions, vibration
@@ -181,10 +187,34 @@ access, water drainage, pack venting direction.
 > - Do not approve welding or drilling without Ford/OEM or engineering review.
 > - Mark all structural conclusions NeedsEngineeringReview.
 
-## Gate 07 — Weight / Axle Load / CG  · STATUS: QUEUED
+## Gate 07 — Weight / Axle Load / CG  · STATUS: NEXT (owner review_22)
 
-*(Owner prompt not yet supplied; sequence position 5. To be researched
-after Gate 06.)*
+Focus: prove the truck can carry the battery weight without exceeding
+GVWR / front+rear GAWR / payload / tire+wheel rating / CG limits.
+
+**Owner prompt (verbatim):**
+
+> We are starting Gate 07: Weight / Axle Load / Center of Gravity.
+>
+> Research only Ford F-450/F-550 Class 4/5 weight, axle load, payload, and CG validation for an EV conversion.
+>
+> Find sources for:
+> 1. GVWR and front/rear GAWR by model year and wheelbase
+> 2. door-label data capture procedure
+> 3. scale-ticket procedure
+> 4. removed engine/transmission/fuel/exhaust component weights
+> 5. added battery/motor/inverter/enclosure/cooling system weights
+> 6. front/rear axle load calculation
+> 7. center-of-gravity height and longitudinal CG calculation
+> 8. suspension and tire load-rating checks
+> 9. brake performance dependency on final weight
+> 10. post-build weigh-in validation
+>
+> Hard rules:
+> - Physical scale ticket overrides estimates.
+> - Do not mark any weight condition safe without actual scale data.
+> - Do not exceed GVWR, front GAWR, rear GAWR, tire rating, or wheel rating.
+> - All estimates are NominalAssumption until measured.
 
 ## Gate 08 — Failure Modes + Test Procedures  · STATUS: QUEUED
 

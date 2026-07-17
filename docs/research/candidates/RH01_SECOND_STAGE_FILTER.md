@@ -81,6 +81,11 @@ this file supersedes it (see Addendum, section 7).
 | CS-52 | **HydraulicPumpCandidate / NeedsElectricMotorDriveData** (owner review_19) | *TRW medium-duty power steering pump assembly 14-20358-010* | trucklinerparts.com (commercial parts reseller) | <https://trucklinerparts.com/products/new-trw-medium-duty-power-steering-pump-assembly-p-n-14-20358-010> | Candidate (batch_22) — real hydraulic values (185 bar/2683 psi relief, 6.30 GPM, 25 cc/rev, −40…+135 °C) but it is a **hydraulic pump end, NOT a complete EHPS**: no motor voltage/current/controller/duty/thermal/reservoir/fault data — not a final EHPS candidate — lanes L9/L10 |
 | CS-53 | **CompleteEHPSCandidate / MotorsportSupplierCandidate / NeedsCommercialDutyReview / NeedsHydroboostCompatibilityReview / NeedsCurrentMap / NeedsThermalDeratingData** (owner review_20) | *ZF Race Engineering — EPHS MPU 100-C electro-hydraulic motor-pump-unit factsheet* | zf.com (ZF official server, ZF Race Engineering) | <https://www.zf.com/products/media/zfraceengineering/about_us_3/downloads_9/ZF_RE_Factsheet_EPHS-MPU-100-C_EN_001508000140_Screen.pdf> | Candidate (batch_23) — **first complete EHPS candidate** (self-contained motor+pump+reservoir): 5–12 L/min (1.32–3.17 GPM), 113–124.5 bar (~1639–1806 psi), 2500–6000 rpm, −40…+120 °C. In the general hydraulic range of the Ford-style hydroboost target but **NOT proven for F-450/F-550 hydroboost+steering**. Two owner defect-catches: (1) the factsheet states **"No connection to the CAN bus required"** — the batch's "6000 RPM CAN control" claim is **refuted by the cited source**; control/diagnostics/fault outputs = NeedsSupplierData; (2) it is a **motorsport** EPHS pump, **not** a proven Class 4/5 commercial hydroboost unit — do NOT label "commercial-duty validated" — lanes L9/L10/L5 |
 | CS-54 | **FordProductReference / SupplierBackground / NeedsFordExactSource / NeedsExactQuote** | *Ford.com — power steering return line hose assembly (P4000028025)* | ford.com (Ford OEM parts catalog) | <https://www.ford.com/product/power-steering-return-line-hose-assembly-p4000028025> | Candidate (batch_23) — Ford-**listed** return-line hose; burst-tested >1750 psi, listed for hydroboost/commercial use (≈19,500 lb GVWR envelope). **Corroborates the ~1750 psi system-pressure envelope, but it is a hose spec — NOT the OEM pump pressure/flow curve** and not a steering-gear requirement. The batch's "Exact Quote" is garbled ("500 LB. With Or Less GVWR or 19 or 4 Wheel Disc Brake") → **NeedsExactQuote** before any use — lanes L10/L4 |
+| CS-55 | **RegulatoryTestSource / NeedsBrakeEngineerMapping** (owner review_22) | *Technical Standards Document No. 105, Rev 6 — Hydraulic and Electric Brake Systems (harmonized with 49 CFR §571.105)* | Transport Canada (tc.canada.ca — a **harmonized TSD**, not the US CFR text itself) | <https://tc.canada.ca/sites/default/files/2025-08/105_TSD_rev_6_clean_CCV.pdf> | Candidate (batch_25) — the Gate 04B brake-testing lane. FMVSS/TSD 105 covers stopping distance, partial failure, inoperative power-assist, fade/recovery, water recovery, stability/control, parking brake, and indicator-lamp requirements. **Owner: for US application confirm against the 49 CFR §571.105 text; do NOT hard-code the 400 ft / 150 lb figure until the exact table row is parsed & matched to the vehicle class/GVWR/condition** — lanes L2/L8 |
+| CS-56 | **RegulatoryInterpretation / NoGoConditionCandidate** | *NHTSA interpretation nht78-1.13 — hydraulic fluid isolation / split-system behavior* | nhtsa.gov (federal agency interpretation) | <https://www.nhtsa.gov/interpretations/nht78-113> | Candidate (batch_25) — supports a Gate 04B NoGo: a power-steering/hydroboost assist-loop fluid loss must **not** degrade the isolated split master-cylinder brake circuits. Batch-supplied locator ("Section 1") unverified → NeedsExactQuote — lanes L2/L8 |
+| CS-57 | **TechnicalBackground / LeadOnly / NeedsOEMElectricalSource / NotForFinalRule** (owner review_22) | *BenchForce — "Understanding the Body Control Module"* | benchforce.com (vendor blog) | <https://www.benchforce.com/blogs/news/understanding-the-body-control-module> | Candidate (batch_25) — background only for Gate 04C 12 V brownout discussion; **must NOT create a low-voltage safety rule** — the real anchor is the Ford General BBLB electrical-load rule (RC-91) — lanes L5/L8 |
+| CS-58 | **TechnicalBackground / LeadOnly / NeedsOEMElectricalSource / NotForFinalRule** (owner review_22) | *FS1Inc — DTC U0256 (lost communication, front controls interface module)* | fs1inc.com (vendor service blog) | <https://www.fs1inc.com/blog/dtc-u0256-lost-communication-front-controls-interface-module/> | Candidate (batch_25) — background only for Gate 04C overcurrent→comms-fault discussion; **NotForFinalRule** — lanes L5/L8 |
+| CS-59 | **CandidateSourcePath / NeedsOfficialFordCopy** (owner review_22) | *2026 Ford Super Duty Body Builders Guide (BBLB)* | Scribd (NOT a clean OEM host) | <https://www.scribd.com/document/940429439/2026-Super-Duty-Bblb-Final> | Candidate (batch_25) — useful for finding page numbers only; **prefer the official Ford Pro Upfitter / BBAS / NHTSA-hosted copy** (CS-05 BBAS portal) before treating any claim as OEM. Used for Gate 05 module-config dependency (RC-95) and Gate 06 sub-frame spacer (RC-98) — lanes L4/L1 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -178,6 +183,17 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-85 | **ZF power/current estimate**: running the MPU near max (≈3.17 GPM @ ~1806 psi ≈ 3.3 kW shaft) implies a large 12 V draw. *(The batch is internally inconsistent — item 1 estimates 90–110 A peak; Part 2 estimates 275–300 A. Both are unsourced.)* | derived over RC-82 (unverified) | n/a — engineering estimate | **EngineeringEstimate / NeedsZFCurrentMap** — actual current depends on pump/motor/controller efficiency, relief behavior, fluid temp, and duty cycle; **the Build Engine must NOT size the DC-DC converter from this estimate alone** (feeds RC-81) — lanes L5/L9 |
 | RC-86 | Ford power-steering **return-line hose** burst-tested >1750 psi, listed for hydroboost/commercial use (≈19,500 lb GVWR) | CS-54 | product description index; quote garbled in batch → **NeedsExactQuote** | **FordProductReference / NeedsFordExactSource** — corroborates the ~1750 psi system-pressure envelope but is a **hose spec, not the OEM pump pressure/flow curve** and not a steering-gear requirement — lanes L10/L4 |
 | RC-87 | **FMVSS 105 test-map scope (owner expansion)**: the brake test plan is **not just stopping distance** — it must map partial-failure behavior, fade/recovery, water recovery, stability/control during braking, parking brake, warning-lamp requirements, and the full test procedures; FMVSS 105 covers hydraulic/electric service + parking brakes on vehicles >3500 kg GVWR. | CS-49 (FMVSS 105 lane, batch_21) | 49 CFR 571.105 — **exact section/paragraph locators still needed** | **RegulatoryCandidate / TestMapInput / NeedsExactSource** — the primary Gate 04 brake-regulation lane; owner-relayed scope, not yet extracted from the regulation text — lanes L2/L8 |
+| RC-88 | **FMVSS/TSD 105 inoperative-power-assist stop**: GVWR >10,000 lb (4,536 kg) — stop from 60 mph within 400 ft (121.9 m) with an inoperative brake power assist at a pedal force ≤150 lb (667 N) *(batch-supplied S5.1.2 / Tables I & III — Hunter locator unverified)* | CS-55 | S5 / Table I / Table III (harmonized TSD 105 Rev 6) | **RegulatoryTestSource / NeedsBrakeEngineerMapping / NeedsExactTableRowMatch** — owner: **do NOT hard-code the 400 ft / 150 lb figure** until the exact 49 CFR §571.105 table row is parsed and matched to the vehicle category/GVWR/brake condition; missing: stock-pedal deflection limit under sustained 150 lb manual input — lanes L2/L8 |
+| RC-89 | **FMVSS/TSD 105 fade & recovery (S7.11)**: 10–30 consecutive high-speed deceleration snubs to thermally saturate the system; recovery stops must not deviate >±20% from the cold baseline *(batch-supplied — unverified)* | CS-55 | S7.11 (harmonized TSD 105 Rev 6) | **TestCandidate / NeedsBrakeEngineerMapping** — a Gate 04B test procedure; missing: EHPS reservoir-inlet fluid-temperature logging during the snub sequence — lanes L2/L8 |
+| RC-90 | **Brake-circuit isolation NoGo (NHTSA nht78-1.13)**: a seal blowout / fluid loss in the power-steering / hydroboost assist loop must **not** degrade the isolated split master-cylinder brake circuits. | CS-56 | Section 1 (batch-supplied locator — unverified) | **NoGoConditionCandidate / NeedsExactQuote** — a hard Gate 04B design constraint; missing: EHPS-fluid vs glycol DOT-4 chemical-compatibility on a cross-leak — lanes L2/L8 |
+| RC-91 | **Ford General BBLB electrical-load rule (owner's real Gate 04C anchor)**: an electrical load analysis must be done before adding loads; added circuit draw must not exceed OEM fused-circuit limits; do not overload BCM outputs; high-demand circuits should be fed directly from the 12 V battery / an added battery through relays. | CS-07 (General BBLB) | Frame/Electrical guidance — **exact page/section still required** | **RuleCandidate / NeedsOfficialFordCopy / NeedsExactQuote** — the Gate 04C anchor for the EHPS low-voltage feed; **note the batch cited this via `static.nhtsa.gov/odi/inv/2024/INRD-PE24023-21075.pdf`, an NHTSA ODI investigation PDF, NOT the BBLB (title/URL mismatch — provenance defect)** — lanes L5/L8 |
+| RC-92 | 12 V bus brownout background: keep steady 12.0–12.6 V under peak draw; sag <10.5 V can reset BCM/ABS (BenchForce) *(vendor blog)* | CS-57 | "Network Stability" section (unverified) | **TechnicalBackground / LeadOnly / NotForFinalRule** (owner) — usable as a modeling cue only; the real threshold must come from an OEM electrical source — lanes L5/L8 |
+| RC-93 | Low-voltage overcurrent → U-series comms faults can place safety modules in an unpredictable state (FS1Inc) *(vendor blog)* | CS-58 | U0256 article (unverified) | **TechnicalBackground / LeadOnly / NotForFinalRule** (owner) — lanes L5/L8 |
+| RC-94 | **Gate 05 authorized-integration rules (Ford General BBLB)**: OEM wiring to the PCM must **not** be modified; the ignition circuit must **not** be altered; stop-lamp switch splices can interfere with the PCM, speed control, and ABS. | CS-07 (General BBLB) | Electrical guidance — **exact page/section still required** | **RuleCandidate / NoGoConditionCandidate / NeedsOfficialFordCopy** — frame Gate 05 as *authorized serviceable integration preserving diagnostics, warning lamps, ABS/stability, and scan-tool visibility* — **NOT "clearing dashboard lights"** (owner); same ODI-URL mis-citation as RC-91 — lanes L7/L8 |
+| RC-95 | Ford Super Duty module-config dependency: BCM / ABS / instrument cluster require configuration matching; removing the factory ICE ECM affects the cluster and can raise warning lamps (2026 Super Duty BBLB) | CS-59 (Scribd) | p.73, SUB mounting section (unverified) | **CandidateSourcePath / NeedsOfficialFordCopy** — Gate 05 dependency claim; get the official Ford copy before use — lanes L7/L1 |
+| RC-96 | Removing/modifying primary factory control modules impacts electronic stability + traction control (calibrated to factory weight/powertrain) → authorized software parameter updates needed to preserve ABS/ESC without a factory engine controller (Ford General BBLB) | CS-07 (General BBLB) | "Stability Control Calibration" section (unverified) | **NoGoConditionCandidate / NeedsOfficialFordCopy** — Gate 05; same ODI-URL mis-citation as RC-91 — lanes L7/L8 |
+| RC-97 | **Gate 06 frame-drilling rule (Ford General BBLB)**: no holes in the top/bottom chassis-rail flanges; web holes ≥38 mm (1.5 in) from the flange inner edge; max added hole 19 mm (0.75 in); use existing frame holes where possible. | CS-07 (General BBLB) | Frame Modification section — exact page still required | **RuleCandidate / NeedsEngineeringReview / NeedsPlatformSpecificConfirmation / NeedsOfficialFordCopy** — **refines/echoes RC-22** (same 1.5 in / 0.75 in limits, now with the no-flange-drilling + use-existing-holes detail); same ODI-URL mis-citation; missing: FEA of the battery-box brackets on the web at 3g vertical — lanes L4 |
+| RC-98 | Gate 06 sub-frame isolation spacer: tapered spacers between added vocational brackets and the factory side members, ~0.5 in thickness reduction transitioning over 4–6 in (2026 Super Duty BBLB) | CS-59 (Scribd) | p.73, Fig. C (unverified) | **RuleCandidate / NeedsEngineeringReview / NeedsOfficialFordCopy** — Gate 06; missing: mounting-hardware shear strength + thread-locking spec — lanes L4 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -1810,3 +1826,98 @@ but needs a brake engineer / test plan before any compliance claim
 - PATS "bypass/override" language did **not** appear in batch_24.
 - Nothing ingested; nothing marked Confirmed; no compliance claimed;
   ODRs untouched.
+
+---
+
+## 33. Batch 25 + owner review_22 — Gate 04B/04C/05/06 first pass (parallel research) (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_25_gate04b_04c_05_06_testplan.md`
+and `docs/research/raw/owner_reviews/review_22_batch_25_verdict.md`.
+Row additions: CS-55..CS-59; RC-88..RC-98. **First "do-not-wait"
+payload** (directive_01) — it covers four gates at once (04B, 04C, 05,
+06) with supplier-only values parked, and it is the first batch since the
+park-and-proceed rule.
+
+### Regression finally resolved
+
+The ZF "6000 RPM CAN control" line — caught in review_20 and again in
+review_21 (RC-83/RC-84) — is **corrected in the payload itself** this
+time (Part 2 reads "no active CAN connection is required," control/fault
+= NeedsSupplierData). The corrected-claim recurrence is closed for ZF;
+the regression-scanner proposal stands for future catches.
+
+### Owner's 5 corrections — applied verbatim
+
+1. **Follow-up dates must be real, not "Q3 2026."** The Hunter's own
+   ledger used a vague quarter; the standing cadence is **7 days (first
+   follow-up) → 14 days (second) → 21 days (escalate / contact the
+   distributor or engineering rep)**. Applied to
+   `docs/status/BLOCKED_QUESTIONS_LEDGER.md`.
+2. **FMVSS 105 is regulatory, not just modeling (CS-55 / RC-88/89).**
+   Status **RegulatoryTestSource / NeedsBrakeEngineerMapping.** The exact
+   **400 ft / 150 lb** inoperative-assist figure must **not** be
+   hard-coded until the specific 49 CFR §571.105 table row is parsed and
+   matched to the vehicle category / GVWR / brake condition. (The cited
+   copy is the harmonized Transport Canada TSD 105 Rev 6 — useful, but US
+   application confirms against the CFR text.)
+3. **Gate 04C vendor sources downgraded (CS-57/58, RC-92/93).** BenchForce
+   and FS1Inc → **TechnicalBackground / LeadOnly / NotForFinalRule**; they
+   may not create low-voltage safety rules. The **real Gate 04C anchor is
+   the Ford General BBLB electrical-load rule** (RC-91): load analysis
+   before adding loads, respect OEM fused-circuit limits, don't overload
+   BCM outputs, feed high-demand circuits directly from the 12 V battery /
+   an added battery through relays.
+4. **Scribd downgraded (CS-59, RC-95/98).** The 2026 Super Duty BBLB via
+   Scribd is **CandidateSourcePath / NeedsOfficialFordCopy** — page-number
+   aid only; prefer the official Ford Pro Upfitter / BBAS / NHTSA-hosted
+   copy (CS-05) before any claim is treated as OEM.
+5. **Gate 05 framing (RC-94).** Not "clearing dashboard lights" — frame it
+   as **authorized serviceable integration that preserves diagnostics,
+   warning lamps, ABS/stability behavior, and scan-tool visibility.** The
+   Ford General BBLB is explicit: do **not** modify OEM PCM wiring, do
+   **not** alter the ignition circuit, and stop-lamp switch splices can
+   interfere with the PCM, speed control, and ABS.
+
+### Provenance defect caught
+
+The three "Ford General BBLB" rows (RC-91/94/96/97) were cited by the
+batch via `static.nhtsa.gov/odi/inv/2024/INRD-PE24023-21075.pdf` — an
+**NHTSA ODI investigation PDF, not the Body Builder Layout Book**
+(title/URL mismatch, same failure class as the batch_02 row-4 mismatch).
+All four are anchored to the real General BBLB (CS-07) and flagged
+**NeedsOfficialFordCopy / NeedsExactQuote**; the frame rule (RC-97)
+refines the existing RC-22 (same 1.5 in / 0.75 in limits). Nothing from
+this source may become a rule until the official BBLB page is obtained
+and parsed.
+
+### Gate-state flags (owner review_22)
+
+- **Gate 04 — Brake / Steering:** `BLOCKED_PENDING_SUPPLIER_RESPONSE`;
+  continue 04B + 04C research. (Hunter self-labeled "v0.5"; owner's clean
+  status uses the flag set below, so **no version bump adopted** — no new
+  proof landed.)
+- **Gate 04B — Brake Test Mapping:** `REGULATORY_TEST_SOURCE_FOUND` /
+  `NEEDS_BRAKE_ENGINEER_MAPPING`.
+- **Gate 04C — Low-Voltage Architecture:** `OEM_ELECTRICAL_RULE_SOURCE_FOUND`
+  / `DC_DC_SIZING_OPEN`.
+- **Gate 05 — CAN / Controls:** `STARTED` /
+  `NEEDS_OFFICIAL_FORD_SUPER_DUTY_SOURCE` / **NO SECURITY-BYPASS LANGUAGE**.
+- **Gate 06 — Mechanical Mounting:** `OFFICIAL_FRAME_RULE_CANDIDATES_FOUND`
+  / `NEEDS_PLATFORM_SPECIFIC_CONFIRMATION` / `NEEDS_STRUCTURAL_ENGINEER_REVIEW`.
+
+### Next
+
+Owner: **do Gate 07 next — Weight / Axle Load / Center of Gravity**
+(prove the truck carries the battery weight without exceeding GVWR /
+front+rear GAWR / payload / tire+wheel rating / CG limits; physical scale
+ticket overrides estimates; all estimates NominalAssumption until
+measured). Verbatim prompt added to `GATE_RESEARCH_QUEUE.md`. Gates
+04B/04C/05/06 got a first pass and stay open with the follow-ups above.
+
+### Standing checks
+
+- PATS "bypass/override" language did **not** appear in batch_25; Gate 05
+  framing corrected pre-emptively.
+- Nothing ingested; nothing marked Confirmed; no compliance claimed; no
+  "vehicle is safe" statement; ODRs untouched.

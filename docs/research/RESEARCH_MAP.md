@@ -261,6 +261,22 @@ supplier-independent plan with the owner's verbatim prompts lives in
 [`docs/roadmaps/GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md).
 **Best order from here:** Gate 04B → 04C → 05 → 06 → 07 → 08.
 
+**Gate-state snapshot (owner review_22, batch_25 — first parallel pass):**
+
+- **Gate 04 (Brake/Steering):** `BLOCKED_PENDING_SUPPLIER_RESPONSE`.
+- **Gate 04B (Brake Test Mapping):** `REGULATORY_TEST_SOURCE_FOUND` /
+  `NEEDS_BRAKE_ENGINEER_MAPPING` (CS-55 FMVSS/TSD 105; RC-88/89/90).
+- **Gate 04C (Low-Voltage Architecture):** `OEM_ELECTRICAL_RULE_SOURCE_FOUND`
+  / `DC_DC_SIZING_OPEN` (anchor RC-91 Ford BBLB electrical-load rule;
+  vendor rows RC-92/93 LeadOnly).
+- **Gate 05 (CAN/Controls):** `STARTED` /
+  `NEEDS_OFFICIAL_FORD_SUPER_DUTY_SOURCE` / **NO SECURITY-BYPASS LANGUAGE**
+  (RC-94/95/96; frame as authorized serviceable integration).
+- **Gate 06 (Mechanical Mounting):** `OFFICIAL_FRAME_RULE_CANDIDATES_FOUND`
+  / `NEEDS_PLATFORM_SPECIFIC_CONFIRMATION` / `NEEDS_STRUCTURAL_ENGINEER_REVIEW`
+  (RC-97 refines RC-22; RC-98).
+- **Next: Gate 07 (Weight / Axle Load / CG).**
+
 4. **Brake / Steering Assist Gate (CP#1) — Gate 04 v0.4 (batch_23):**
    architecture strong; a **complete** EHPS candidate now exists, but
    the replacement system is NOT proven and final selection is halted.
@@ -342,18 +358,19 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner directive_01):** the **Gate 04B** payload —
-validation tests and failure-mode procedures for the converted
-brake/steering system (FMVSS 105 hydraulic brake test procedure,
-stopping-distance, fade/recovery, partial-failure, warning-lamp,
-parking-brake, power-off reserve stops, loaded low-speed steering test,
-steering-assist-loss + EHPS-pump-failure + low-voltage-failure behavior,
-pressure-sensor/warning logic). Build Engine impact limited to
-Test / NoGoCondition / OpenGap / Rule; no compliance claim, no "vehicle
-is safe" statement, no final pass/fail numbers unless the source is
-primary regulation / OEM / accepted test standard. Verbatim prompt in
-[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); then
-04C → 05 → 06 → 07 → 08.
+**Next expected batch (owner review_22):** the **Gate 07** payload —
+Weight / Axle Load / Center of Gravity for the F-450/F-550 EV conversion
+(GVWR + front/rear GAWR by model year/wheelbase, door-label + scale-ticket
+capture, removed ICE-component weights, added EV-component weights, axle
+load + CG-height/longitudinal calculation, suspension + tire/wheel load
+ratings, brake dependence on final weight, post-build weigh-in). Hard
+rules: **physical scale ticket overrides estimates; no weight condition
+marked safe without actual scale data; never exceed GVWR / front GAWR /
+rear GAWR / tire / wheel rating; all estimates are NominalAssumption until
+measured.** Verbatim prompt in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md). (Gates
+04B/04C/05/06 got a first pass in batch_25 and stay open with the
+review_22 follow-ups.)
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

@@ -4,97 +4,114 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-16
-- Reason for handoff: owner directive_01 processed (park-and-proceed;
-  Blocked Questions Ledger + gate research queue built); awaiting the
-  next research batch (Gate 04B) or a supplier reply
+- Reason for handoff: task complete (batch 25 + review_22 — Gate
+  04B/04C/05/06 first parallel pass); awaiting the next research batch
+  (Gate 07) or a supplier reply
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `8c2c85b` — Reconcile RH batch 24 + review_21
+- Start commit: `654b111` — Archive raw RH batch 25 + review_22 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- New files:
-  `docs/research/raw/owner_directives/directive_01_park_and_proceed.md`
-  (owner directive archived 1:1),
-  `docs/status/BLOCKED_QUESTIONS_LEDGER.md` (BQ-01..BQ-12),
-  `docs/roadmaps/GATE_RESEARCH_QUEUE.md` (ordered plan + verbatim
-  prompts).
-- Changed: `docs/research/RESEARCH_MAP.md` (park-and-proceed operating
-  rule + ledger/queue pointers; new Gate 04C entry; "next expected
-  batch" repointed to Gate 04B), `docs/DECISION_REGISTER.md` (D-005),
-  `docs/CHANGELOG.md`, handoff files.
-- Summary: the owner said **do not wait on supplier emails** — mark
-  Gate 04 `BLOCKED_PENDING_SUPPLIER_RESPONSE`, **park** supplier-only
-  values, and keep researching the parts that don't need a supplier.
-  Built the governance to do that: a Blocked Questions Ledger (owner's
-  8-field structure) holding every current supplier-only value with a
-  follow-up date + an allowed alternative-research path, and a Gate
-  Research Queue holding the owner's ordered plan
-  (**04B → 04C → 05 → 06 → 07 → 08**) with the verbatim prompts for 04B,
-  04C, 05, 06. Recorded as **D-005**. **This was a directive, not a
-  Hunter batch — no new CS/RC rows; nothing Confirmed; ODRs untouched.**
+- Files changed (reconciliation commit):
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (CS-55..CS-59;
+  RC-88..RC-98; section 33), `docs/status/BLOCKED_QUESTIONS_LEDGER.md`
+  (7/14/21-day cadence), `docs/research/RESEARCH_MAP.md` (gate-state
+  snapshot; "next" → Gate 07), `docs/roadmaps/GATE_RESEARCH_QUEUE.md`
+  (04B/04C/05/06 marked first-pass-done; Gate 07 promoted to NEXT with
+  verbatim prompt), `docs/CHANGELOG.md`, handoff files.
+  (Raw archives `batch_25_gate04b_04c_05_06_testplan.md`,
+  `review_22_batch_25_verdict.md`, PROVENANCE committed separately as
+  `654b111`.)
+- Summary: first "do-not-wait" payload — one batch covered Gates 04B,
+  04C, 05, and 06. **The ZF "CAN control" regression is fixed in the
+  payload this time.** Owner's 5 corrections applied verbatim:
+  (1) real follow-up dates (7/14/21-day cadence, not "Q3 2026");
+  (2) FMVSS 105 = RegulatoryTestSource/NeedsBrakeEngineerMapping — do NOT
+  hard-code the 400 ft/150 lb figure until the exact 49 CFR §571.105
+  table row is matched to the vehicle class/GVWR/condition; (3) BenchForce
+  /FS1Inc → TechnicalBackground/LeadOnly/NotForFinalRule, real Gate 04C
+  anchor = Ford General BBLB electrical-load rule (RC-91); (4) Scribd
+  2026 BBLB → CandidateSourcePath/NeedsOfficialFordCopy; (5) Gate 05 =
+  authorized serviceable integration preserving diagnostics/warning
+  lamps/ABS/scan-tool (NOT "clearing dashboard lights"; BBLB: don't
+  modify PCM wiring, don't alter ignition, stop-lamp splices interfere
+  with PCM/speed-control/ABS). **Provenance defect caught:** the "Ford
+  General BBLB" rows were cited via an NHTSA ODI investigation PDF, not
+  the BBLB — anchored to CS-07, flagged NeedsOfficialFordCopy.
+  **Nothing ingested; nothing Confirmed; no compliance claim; no
+  "vehicle is safe"; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: the directive is archived 1:1; the ledger covers
-  every open supplier-only value referenced across Gate 04 (ZF + Ford/
-  Lee) and the powertrain blockers (B-003/B-004); the queue prompts are
-  verbatim; no engineering value was invented
+- Verified vs claimed: batch_25/review_22 archives are 1:1 against the
+  owner's chat ("25:75"); the Hunter's self-labeled "v0.5" was NOT
+  adopted (owner's clean status uses gate flags, no new proof landed);
+  the FMVSS figure and the BBLB-via-ODI-URL rows are fenced, not
+  hard-coded; nothing marked Confirmed
 
 ## State
 
 - Current phase: Revision 07 Source Ingestion and Consolidation
-- Blockers: B-001 (ingestion — outstanding); B-002 (.gov/CARB blocked);
-  **B-003 + B-004 (BLOCKED_PENDING_SUPPLIER_DATA)**; Gate 04
-  BLOCKED_PENDING_SUPPLIER_RESPONSE. **All supplier-only values now
-  parked in `docs/status/BLOCKED_QUESTIONS_LEDGER.md` (BQ-01..BQ-12).**
+- Blockers: B-001 (ingestion); B-002 (.gov/CARB); B-003/B-004
+  (BLOCKED_PENDING_SUPPLIER_DATA); Gate 04 BLOCKED_PENDING_SUPPLIER_
+  RESPONSE. All supplier-only values parked in
+  `docs/status/BLOCKED_QUESTIONS_LEDGER.md` (BQ-01..BQ-12).
+- Gate-state snapshot (review_22): 04B REGULATORY_TEST_SOURCE_FOUND /
+  NEEDS_BRAKE_ENGINEER_MAPPING; 04C OEM_ELECTRICAL_RULE_SOURCE_FOUND /
+  DC_DC_SIZING_OPEN; 05 STARTED / NEEDS_OFFICIAL_FORD_SUPER_DUTY_SOURCE;
+  06 OFFICIAL_FRAME_RULE_CANDIDATES_FOUND / NEEDS_PLATFORM_SPECIFIC_
+  CONFIRMATION / NEEDS_STRUCTURAL_ENGINEER_REVIEW.
 - Open owner decisions (accumulated): (1) elektron-os-clean two-universe;
-  (2) index.html disposition; (3) L2 regulatory module; (4) L4
-  mechanical/structural module; (5) L6 battery/BMS/thermal module;
-  (6) L9 lane name; (7) Artifact Intake Form; (8) formalize the M10
-  forbidden-phrase + corrected-claim regression scanner; (9)(10)(11)
-  approve/edit the Dana / ZF / Ford-Lee letters and send them (starts
-  the 7-day clocks); (12) **whether the agent should set a 7-day
-  supplier follow-up reminder** — the owner offered this; prior
-  send_later attempts needed approval, so it is flagged for the owner.
+  (2) index.html; (3) L2 regulatory module; (4) L4 mechanical/structural
+  module; (5) L6 battery/BMS/thermal module; (6) L9 lane name; (7)
+  Artifact Intake Form; (8) formalize the M10 forbidden-phrase +
+  corrected-claim regression scanner; (9)(10)(11) approve/send the Dana /
+  ZF / Ford-Lee letters (starts the 7/14/21-day clocks); (12) whether the
+  agent should set a supplier follow-up reminder (prior send_later needed
+  approval); (13) get the **official Ford BBLB copy** (Ford Pro / BBAS /
+  NHTSA-hosted) to lift the NeedsOfficialFordCopy flags on RC-91/94/95/
+  96/97/98; (14) a **brake engineer** to map FMVSS 105 (Gate 04B).
 
 ## Next exact action
 
-Expected next inputs, in any order: (a) the **Gate 04B research batch** —
-FMVSS 105 hydraulic brake test procedure + loaded low-speed steering
-test + failure-mode behaviors (verbatim prompt in
-`docs/roadmaps/GATE_RESEARCH_QUEUE.md`). Reconcile it as a normal batch:
-Build Engine impact limited to **Test / NoGoCondition / OpenGap / Rule**;
-**no compliance claim, no "vehicle is safe," no final pass/fail numbers
-unless the source is primary regulation / OEM / accepted test standard.**
-(b) Then 04C (EHPS low-voltage/DC-DC), 05 (CAN/controls — authorized
-Ford-compatible framing, NEVER "PATS bypass"), 06 (mechanical mounting —
-mark all structural conclusions NeedsEngineeringReview; never invent
-bracket/bolt sizes), 07, 08. (c) A supplier reply — archive 1:1 under
-`docs/research/raw/supplier_replies/`, reconcile, then move the matching
-BQ entry to the ledger's Resolution log. (d) The owner approves/sends any
-letter — record Sent + date, start that BQ's 7-day clock.
+Expected next inputs, in any order: (a) the **Gate 07 research batch** —
+Weight / Axle Load / Center of Gravity (verbatim prompt in
+`docs/roadmaps/GATE_RESEARCH_QUEUE.md`). Reconcile with the hard rules:
+**physical scale ticket overrides estimates; no weight condition marked
+safe without actual scale data; never exceed GVWR / front GAWR / rear
+GAWR / tire / wheel rating; all estimates NominalAssumption until
+measured.** (b) A follow-up batch deepening 04B (parse exact 49 CFR
+§571.105 table rows), 04C (DC-DC sizing), 05 (official Ford source), or
+06 (platform-specific + structural-engineer review). (c) A supplier reply
+— archive 1:1 under `docs/research/raw/supplier_replies/`, reconcile,
+move the matching BQ to the Resolution log. (d) The owner approves/sends
+a letter — record Sent + date, start that BQ's 7/14/21-day clock.
+Enforce throughout: nothing Confirmed; no compliance/"safe" claim; NEVER
+"PATS bypass"; official Ford source beats Scribd; vendor blogs are
+LeadOnly.
 
 ## Forbidden actions
 
 - Do not edit `index.html` without explicit owner instruction.
 - Do not edit any file under `docs/research/raw/` — immutable evidence
-  (including the new `owner_directives/`).
+  (incl. `owner_directives/`).
 - Do not create rev07 modules 13/14/15 without owner approval.
 - Do not ingest candidate rows into rev07; nothing gets marked
   Confirmed; no SourceClaims.md promotion before locator verification
   + owner approval.
 - Do not use held rows or fenced values (RC-19/20; RC-22..26; J1673
   4×/6×; ZF current estimate RC-85; ZF "CAN control" RC-83; ZF
-  "commercial-duty validated" RC-84).
+  "commercial-duty" RC-84; FMVSS 400 ft/150 lb RC-88; BenchForce/FS1Inc
+  RC-92/93; any BBLB-via-ODI-URL claim RC-91/94/96/97).
 - Do not select final parts, claim compliance, or state the vehicle is
   safe during the interim (04B–08) research.
 - Do not let quantum-inspired material gate or approve anything.

@@ -24,12 +24,20 @@ Follow-up date:
 Alternative research allowed:
 ```
 
-**Follow-up clock note:** the supplier letters (Webasto, Dana, ZF,
-Ford/Lee) are drafted under `docs/research/outreach/`. Webasto is
-READY_TO_SEND; Dana, ZF, and Ford/Lee are DRAFT awaiting owner approval.
-**The 7-day follow-up clock starts on the actual send date** (an owner
-action) — until then follow-up dates read "on send + 7d." Record the
-send date in the outreach file and here when each letter goes out.
+**Follow-up cadence (owner review_22 — real dates, not vague quarters
+like "Q3 2026"):**
+
+- **First follow-up:** 7 days after the letter is first sent.
+- **Second follow-up:** 14 days after first send.
+- **Escalation:** 21 days after first send — or contact the distributor /
+  engineering rep.
+
+The supplier letters (Webasto, Dana, ZF, Ford/Lee) are drafted under
+`docs/research/outreach/`. Webasto is READY_TO_SEND; Dana, ZF, and
+Ford/Lee are DRAFT awaiting owner approval. **The clock starts on the
+actual send date** (an owner action) — until then follow-up fields read
+"on send + 7/14/21d." Record the send date in the outreach file and here
+when each letter goes out.
 
 ---
 
@@ -47,7 +55,7 @@ send date in the outreach file and here when each letter goes out.
   assist architecture
 - **Current status:** BLOCKED_PENDING_SUPPLIER_RESPONSE (RC-82,
   NeedsHydroboostCompatibilityReview)
-- **Follow-up date:** on send + 7d (`SUPPLIER_INQUIRY_ZF_01.md`, DRAFT)
+- **Follow-up date:** on send + 7/14/21d (`SUPPLIER_INQUIRY_ZF_01.md`, DRAFT)
 - **Alternative research allowed:** Gate 04B FMVSS 105 test mapping +
   loaded low-speed steering test procedure
 
@@ -62,7 +70,7 @@ send date in the outreach file and here when each letter goes out.
   DC-DC / buffer sizing
 - **Current status:** BLOCKED_PENDING_SUPPLIER_RESPONSE (RC-85,
   NeedsZFCurrentMap — do NOT hard-code 250–300 A)
-- **Follow-up date:** on send + 7d
+- **Follow-up date:** on send + 7/14/21d
 - **Alternative research allowed:** Gate 04C DC-DC converter / buffering
   modeling (transient sag, fuse/relay sizing) without ZF's final numbers
 
@@ -76,7 +84,7 @@ send date in the outreach file and here when each letter goes out.
 - **Unlocks:** commercial-duty suitability (RC-84), thermal fault logic
 - **Current status:** BLOCKED_PENDING_SUPPLIER_RESPONSE (CS-53,
   NeedsThermalDeratingData / NeedsCommercialDutyReview)
-- **Follow-up date:** on send + 7d
+- **Follow-up date:** on send + 7/14/21d
 - **Alternative research allowed:** Gate 04B EHPS-pump-failure-response
   test methods
 
@@ -93,7 +101,7 @@ send date in the outreach file and here when each letter goes out.
   cluster/diagnostic integration
 - **Current status:** BLOCKED_PENDING_SUPPLIER_RESPONSE (RC-83,
   NeedsSupplierData — CAN-control claim already caught twice)
-- **Follow-up date:** on send + 7d
+- **Follow-up date:** on send + 7/14/21d
 - **Alternative research allowed:** Gate 05 cluster/CAN integration
   research (authorized Ford-compatible framing only)
 
@@ -111,7 +119,7 @@ send date in the outreach file and here when each letter goes out.
   off NeedsFordExactSource
 - **Current status:** BLOCKED_PENDING_SUPPLIER_RESPONSE (CS-51,
   NeedsFordExactSource)
-- **Follow-up date:** on send + 7d
+- **Follow-up date:** on send + 7/14/21d
   (`SUPPLIER_INQUIRY_FORD_LEE_STEERING_01.md`, DRAFT)
 - **Alternative research allowed:** Gate 04B loaded low-speed steering
   test procedure
@@ -125,7 +133,7 @@ send date in the outreach file and here when each letter goes out.
   brake+steering sizing floor
 - **Unlocks:** the RC-74 combined-demand NoGo threshold
 - **Current status:** BLOCKED_PENDING_SUPPLIER_RESPONSE
-- **Follow-up date:** on send + 7d
+- **Follow-up date:** on send + 7/14/21d
 - **Alternative research allowed:** Gate 04B loaded low-speed steering
   test method
 
@@ -138,7 +146,7 @@ send date in the outreach file and here when each letter goes out.
   remain if the electric pump fails
 - **Unlocks:** power-off reserve-stop modeling (Gate 04B)
 - **Current status:** BLOCKED_PENDING_SUPPLIER_RESPONSE (OpenGap)
-- **Follow-up date:** on send + 7d
+- **Follow-up date:** on send + 7/14/21d
 - **Alternative research allowed:** Gate 04B power-off brake-reserve test
   methods (test procedure can be researched before the number is known)
 
@@ -151,7 +159,7 @@ send date in the outreach file and here when each letter goes out.
   reserve and plumbing
 - **Unlocks:** transient flow-split modeling, plumbing spec
 - **Current status:** BLOCKED_PENDING_SUPPLIER_RESPONSE
-- **Follow-up date:** on send + 7d
+- **Follow-up date:** on send + 7/14/21d
 - **Alternative research allowed:** Gate 04B partial-failure brake tests
 
 ### BQ-09
@@ -163,7 +171,7 @@ send date in the outreach file and here when each letter goes out.
 - **Why it matters:** defines the loss-of-assist failure severity
 - **Unlocks:** steering-assist-loss failure-behavior classification
 - **Current status:** BLOCKED (spec) / researchable via test method
-- **Follow-up date:** on send + 7d
+- **Follow-up date:** on send + 7/14/21d
 - **Alternative research allowed:** Gate 04B loaded low-speed steering
   test procedure (defines how to measure it)
 
@@ -178,7 +186,7 @@ send date in the outreach file and here when each letter goes out.
   / motor-power mismatch
 - **Unlocks:** powertrain compatibility (B-003), HV wiring current basis
 - **Current status:** BLOCKED_PENDING_SUPPLIER_DATA (B-003)
-- **Follow-up date:** on send + 7d (`SUPPLIER_INQUIRY_WEBASTO_01.md`,
+- **Follow-up date:** on send + 7/14/21d (`SUPPLIER_INQUIRY_WEBASTO_01.md`,
   READY_TO_SEND)
 - **Alternative research allowed:** cooling / loss modeling (already in
   progress); no final HV wiring gauge until this resolves
@@ -192,7 +200,7 @@ send date in the outreach file and here when each letter goes out.
   handshake
 - **Unlocks:** HV wiring interface (B-004), pre-charge sequencing
 - **Current status:** BLOCKED_PENDING_SUPPLIER_DATA (B-004)
-- **Follow-up date:** on send + 7d
+- **Follow-up date:** on send + 7/14/21d
 - **Alternative research allowed:** HV wiring modeling frameworks (v0.1
   already candidate-level)
 
@@ -205,7 +213,7 @@ send date in the outreach file and here when each letter goes out.
   architecture and contactor/fuse sizing
 - **Unlocks:** powertrain compatibility, pre-charge circuit design
 - **Current status:** BLOCKED_PENDING_SUPPLIER_DATA
-- **Follow-up date:** on send + 7d (`SUPPLIER_INQUIRY_DANA_01.md`, DRAFT)
+- **Follow-up date:** on send + 7/14/21d (`SUPPLIER_INQUIRY_DANA_01.md`, DRAFT)
 - **Alternative research allowed:** powertrain modeling; no final DC-link
   / contactor numbers until this resolves
 

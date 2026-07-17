@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — owner directive_01 processed (park-and-proceed; ledger + queue)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: owner directive_01 processed; awaiting next research batch (Gate 04B) or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `8c2c85b`; end commit: `3fbccfa` (directive_01 governance)
+- Work: owner "do not wait on emails" directive — built the Blocked Questions Ledger (`docs/status/BLOCKED_QUESTIONS_LEDGER.md`, BQ-01..BQ-12), the Gate Research Queue (`docs/roadmaps/GATE_RESEARCH_QUEUE.md`, order 04B→04C→05→06→07→08 with verbatim prompts), added Gate 04C to the Research Map, repointed "next expected batch" to Gate 04B, recorded Decision D-005, archived the directive 1:1 under `owner_directives/`. Not a Hunter batch — no CS/RC rows; nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean two-universe; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 forbidden-phrase/regression scanner; Dana/ZF/Ford-Lee letter approvals; 7-day supplier reminder question.
+
 ## 2026-07-16 — Claude Code — task complete (batch 24 + review_21 — Gate 04 v0.4 supplier-inquiry prep + regression catch)
 
 ### (archived handoff)

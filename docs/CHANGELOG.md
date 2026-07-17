@@ -5,6 +5,42 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 25 + review_22: Gate 04B/04C/05/06 first pass (parallel research)
+
+- Archived batch_25 (four-gate test-plan payload) and review_22 1:1
+  (commit `654b111`). First "do-not-wait" payload under directive_01.
+- **ZF "CAN control" regression resolved in-payload** (Part 2 now reads
+  "no active CAN connection is required") — the recurrence caught in
+  review_20/21 is closed for ZF.
+- New rows CS-55..CS-59, RC-88..RC-98: FMVSS/TSD 105 (CS-55 —
+  RegulatoryTestSource/NeedsBrakeEngineerMapping; RC-88 inoperative-assist
+  stop, RC-89 fade/recovery), NHTSA nht78-1.13 brake-circuit isolation
+  NoGo (CS-56/RC-90), Ford General BBLB electrical-load rule as the real
+  Gate 04C anchor (RC-91) + Gate 05 PCM/ignition/stop-lamp rules (RC-94)
+  + ESC/traction (RC-96) + frame-drilling rule refining RC-22 (RC-97),
+  BenchForce/FS1Inc low-voltage background downgraded to
+  TechnicalBackground/LeadOnly/NotForFinalRule (CS-57/58, RC-92/93),
+  2026 Super Duty BBLB via Scribd downgraded to CandidateSourcePath/
+  NeedsOfficialFordCopy (CS-59, RC-95/98). Section 33.
+- **Provenance defect caught:** the "Ford General BBLB" rows were cited
+  via an NHTSA ODI investigation PDF, not the BBLB (title/URL mismatch) —
+  all anchored to CS-07 and flagged NeedsOfficialFordCopy/NeedsExactQuote.
+- Owner's 5 corrections applied: real follow-up dates (7/14/21-day
+  cadence, applied to the Blocked Questions Ledger); FMVSS 105 regulatory
+  not modeling (no hard-coded 400 ft/150 lb until the exact table row is
+  matched); vendor low-voltage sources → LeadOnly; Scribd →
+  NeedsOfficialFordCopy; Gate 05 = authorized serviceable integration
+  (not "clearing dashboard lights").
+- Gate flags: 04=BLOCKED_PENDING_SUPPLIER_RESPONSE; 04B=REGULATORY_TEST_
+  SOURCE_FOUND/NEEDS_BRAKE_ENGINEER_MAPPING; 04C=OEM_ELECTRICAL_RULE_
+  SOURCE_FOUND/DC_DC_SIZING_OPEN; 05=STARTED/NEEDS_OFFICIAL_FORD_SUPER_
+  DUTY_SOURCE; 06=OFFICIAL_FRAME_RULE_CANDIDATES_FOUND/NEEDS_PLATFORM_
+  SPECIFIC_CONFIRMATION/NEEDS_STRUCTURAL_ENGINEER_REVIEW. Research Map
+  snapshot + queue updated; **next = Gate 07 (weight/axle/CG)** with the
+  owner's verbatim prompt captured.
+- PATS "bypass" language did not recur. Nothing ingested; nothing
+  Confirmed; no compliance claim; no "vehicle is safe"; ODRs untouched.
+
 ## 2026-07-16 — Owner directive_01: park-and-proceed; Blocked Questions Ledger + gate research queue
 
 - Owner operating directive ("do not sit and wait on emails"): mark
