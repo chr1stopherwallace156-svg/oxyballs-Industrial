@@ -371,21 +371,19 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_23):** the **Gate 07B** payload — the
-**Removed / Added Mass Ledger + scale-ticket procedure** for the
-F-450/F-550 EV conversion (removed: engine, transmission, fuel tank/fuel,
-exhaust/aftertreatment, radiator/cooling, DEF-if-diesel, accessories;
-added: battery packs, enclosures, brackets, motor/inverter, HV cables,
-coolant loops, radiator/chiller, EHPS pump, DC-DC — each with a
-measurement method, whether supplier datasheet / physical scale / estimate
-is allowed, and how each mass links to the front/rear axle-moment
-calculation, captured before teardown / after teardown / after final
-build). Hard rules: **physical scale values override estimates; estimates
-are NominalAssumption only; final validation requires certified front-axle,
-rear-axle, and total scale tickets.** Verbatim prompt in
-[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md). (Gate 07
-got its v0.1 first pass in batch_26; Gates 04B/04C/05/06 first pass in
-batch_25 — all stay open with their review follow-ups.)
+**Next expected batch (owner review_24):** the **Gate 07C** payload — the
+**Axle Moment Calculator + CG Calculation Method** (front/rear axle-moment
+equations, four-corner method, longitudinal + transverse + vertical CG,
+tilt-table/lift CG-height method, removed/added mass modeling,
+GVWR/GAWR/tire/wheel overload flags, and the CG→FMVSS-105/stability link),
+with allowed equations, required/blocked input fields, nominal
+assumptions, physical-verification steps, and Build-Engine pass/block
+logic. Hard rules: **do not mark anything Confirmed; do not use estimates
+as final values.** Verbatim prompt in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md). (Gate 07B
+delivered the living mass ledger `docs/status/MASS_LEDGER.md` in batch_27;
+Gate 07 v0.1 in batch_26; Gates 04B/04C/05/06 first pass in batch_25 —
+all stay open with their review follow-ups.)
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

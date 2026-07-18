@@ -229,9 +229,16 @@ platform split D-006 (001A gas / 001B diesel); source downgrades applied.
 > - Do not exceed GVWR, front GAWR, rear GAWR, tire rating, or wheel rating.
 > - All estimates are NominalAssumption until measured.
 
-## Gate 07B — Removed / Added Mass Ledger  · STATUS: NEXT (owner review_23)
+## Gate 07B — Removed / Added Mass Ledger  · STATUS: v0.2 FIRST PASS DONE (batch_27)
 
-**Owner prompt (verbatim):**
+Deliverable is the living **`docs/status/MASS_LEDGER.md`** (RM-01..06 /
+AM-01..05 tracker, 3-phase scale procedure, operating-state cases,
+release gate). Owner corrections applied: gas/diesel split (D-006 —
+gas 001A ledger still OUTSTANDING); four-corner (LF/RF/LR/RR) + transverse
+CG instead of "three-pad"; milestone dates; 500 lb FMVSS-105 passenger
+load; the "no road test until…" release gate (RC-106).
+
+**Original Gate 07B prompt (verbatim, batch_27):**
 
 > We are continuing Gate 07: Weight / Axle Load / Center of Gravity.
 >
@@ -254,6 +261,37 @@ platform split D-006 (001A gas / 001B diesel); source downgrades applied.
 > - Physical scale values override estimates.
 > - Estimates are NominalAssumption only.
 > - Final validation requires certified front axle, rear axle, and total vehicle scale tickets.
+
+## Gate 07C — Axle Moment Calculator + CG Method  · STATUS: NEXT (owner review_24)
+
+**Owner prompt (verbatim):**
+
+> We are continuing Gate 07: Weight / Axle Load / Center of Gravity.
+>
+> Build the Axle Moment Calculator and CG Calculation Method.
+>
+> Do not mark anything Confirmed.
+> Do not use estimates as final values.
+>
+> Research and structure:
+> 1. front/rear axle moment equations
+> 2. four-corner weight method
+> 3. longitudinal CG calculation
+> 4. transverse CG calculation
+> 5. vertical CG measurement methods
+> 6. tilt-table or lift-based CG height method
+> 7. how to model removed component mass
+> 8. how to model added battery/enclosure mass
+> 9. how to flag GVWR/GAWR/tire/wheel overload
+> 10. how to connect CG results to FMVSS 105 brake testing and stability concerns
+>
+> Output:
+> - allowed equations
+> - required input fields
+> - blocked fields
+> - nominal assumptions
+> - physical verification steps
+> - Build Engine pass/block logic
 
 ## Gate 08 — Failure Modes + Test Procedures  · STATUS: QUEUED
 

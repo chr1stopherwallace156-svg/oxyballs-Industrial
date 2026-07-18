@@ -200,6 +200,10 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-100 | **Axle-moment method (Gate 07C)**: moment = component weight × distance from front-axle line; rear-axle weight = Σmoments ÷ wheelbase; front-axle weight = total − rear; front must stay < Front GAWR **and** retain ≥20–30% of total weight on the front steering axle for control *(NTEA/Work Truck)* | CS-60 | Longitudinal CG & Moments section | **ModelingFrameworkCandidate / AxleMomentMethod / NeedsPhysicalMeasurements** — simulation-only until physical scale tickets verify; needs the exact 3D center-points of every added bracket — lanes L4 |
 | RC-101 | **Door-label + baseline-scale procedure (Gate 07A)**: capture VIN-specific Front GAWR / Rear GAWR / GVWR from the door-jamb Safety Compliance Certification Label (**overrides any marketing/dealer value**), then record baseline front-axle, rear-axle, and total curb weights on certified scales *(RC Lacy page describes the step)* | CS-61; def. cross-ref CS-07 | door-jamb label; 3-pad scale | **RuleCandidate / OpenGap / NeedsEngineeringReview** — the real first closure step; the donor VIN/label and a certified scale ticket are still to be captured (field task, not supplier) — lanes L4 |
 | RC-102 | **GAWR/GVWR definitions (Ford General BBLB)**: GAWR = the manufacturer-specified load-carrying capacity of a single axle system; GVWR = the manufacturer-specified maximum loaded weight of the vehicle → the **actual vehicle door label is the governing input**, not a marketing chart | CS-07 (General BBLB) | definitions section — exact page still required | **RuleCandidate / NeedsOfficialFordCopy** — anchors the Gate 07 no-go boundaries; owner-relayed (same BBLB whose batch_25 copy was mis-cited via an ODI URL — get the official copy) — lanes L4 |
+| RC-103 | **Four-corner / axle definitions (Ford General BBLB)**: front-axle weight = LF + RF; rear-axle weight = LR + RR — used for CG and axle calculations *(owner correction of the batch's wrong "three-pad" framing)* | CS-07 (General BBLB) | weight/CG section — exact page still required | **RuleCandidate / NeedsOfficialFordCopy** — Gate 07B scale method = certified axle scale (front+rear+total) minimum, four-corner (LF/RF/LR/RR) preferred; recorded in `docs/status/MASS_LEDGER.md` — lanes L4 |
+| RC-104 | **Transverse CG (Ford General BBLB)**: four-corner weights + front/rear track widths determine the transverse (side-to-side) center of gravity → track left/right balance (battery boxes, cooling loops, HV junction boxes, asymmetric ICE-removal offsets can bias one side) | CS-07 (General BBLB) | CG section — exact page still required | **RuleCandidate / NeedsOfficialFordCopy** — adds LF/RF/LR/RR + transverse-CG + side-to-side balance warning to Gate 07B/07C — lanes L4 |
+| RC-105 | **FMVSS 105 passenger load (Ford General BBLB)**: passenger load for FMVSS 105 = **500 lb for vehicles over 10,000 lb GVWR** — an input to the loaded brake/CG cases | CS-07 (General BBLB); links CS-55 (FMVSS 105) | FMVSS-105 reference — exact page still required | **RegulatoryInput / NeedsOfficialFordCopy** — feeds the operating-state weight cases (curb + driver/passenger + payload + fluids) in the mass ledger — lanes L4/L2 |
+| RC-106 | **Weight release-gate NoGo (owner review_24)**: **no road test until** final front-axle ≤ front GAWR, final rear-axle ≤ rear GAWR, final total ≤ GVWR, each tire/wheel ≤ rated, side-to-side imbalance reviewed, certified scale ticket archived, engineering signoff complete | owner-promoted (over RC-99/101/102/103) | n/a — release rule | **NoGoConditionCandidate** — a release gate, **not** a safety claim; every box requires physical evidence + signoff; recorded in `docs/status/MASS_LEDGER.md` — lanes L4 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -2025,3 +2029,89 @@ total scale tickets.
   door-label value; the axle-moment method is a framework, not numbers.
 - Nothing ingested; nothing marked Confirmed; no weight condition marked
   safe; no compliance claim; ODRs untouched.
+
+---
+
+## 35. Batch 27 + owner review_24 — Gate 07B v0.2 (Removed / Added Mass Ledger) (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_27_gate07b_mass_ledger.md`
+and `docs/research/raw/owner_reviews/review_24_batch_27_verdict.md`.
+Row additions: RC-103..RC-106 (no new CS — all anchored to the Ford
+General BBLB, CS-07). **Deliverable: the living
+`docs/status/MASS_LEDGER.md`** (RM-01..06 removed tracker, AM-01..05
+added tracker, 3-phase scale procedure, operating-state cases, release
+gate). Owner label: **Gate 07B — Removed / Added Mass Ledger v0.2.**
+
+### What is strong (owner)
+
+The workflow moved from "estimated truck weight" to a real mass ledger +
+scale-ticket process: certified scale tickets + door label override
+generic specs; estimates are NominalAssumption only; every part carries a
+measurement method, data class, axle-moment relationship, and
+verification status — "how you keep the system from lying to itself." The
+three-phase scale process (baseline → stripped → final) gives real
+before/after evidence.
+
+### D-006 recurrence — gas vs diesel (again)
+
+The ledger was **again built on the 6.7L diesel** (DEF + DPF/SCR), one
+gate after D-006 established the donor is **7.3L gas**. The received
+removal ledger (RM-01..06) is therefore tagged **Platform 001B (diesel)**
+in `MASS_LEDGER.md`, and the **Platform 001A (gas) removal ledger is
+flagged OUTSTANDING** (gas engine/exhaust/cooling/fuel weights; no
+DEF/DPF). **Third corrected-claim recurrence pattern** in the project
+(PATS batches 20→21; ZF-CAN/duty 20→21→resolved; now gas/diesel 26→27) —
+another data point for the M10 regression-scanner proposal.
+
+### Owner's 5 corrections — applied
+
+1. **Split gas vs diesel** (above; D-006) — do not mix the diesel removal
+   ledger into the gas model.
+2. **"Three-pad" is wrong (RC-103).** The diagram shows two axle pads.
+   Use a **certified axle scale (front + rear + total)** minimum and
+   **four-corner (LF/RF/LR/RR)** preferred; BBLB: front = LF+RF, rear =
+   LR+RR.
+3. **Add left/right balance (RC-104).** LF/RF/LR/RR wheel loads +
+   transverse-CG estimate + side-to-side balance warning (BBLB transverse
+   CG from four-corner + track widths).
+4. **Real milestone dates.** Physical captures keyed to **pre-teardown
+   (before first wrench) / mid-build (before final bracket welding) /
+   final (before road test)**; supplier items 7/14/21-day cadence.
+   Applied to the mass ledger + BQ-15.
+5. **Operating-state payload/passenger cases (RC-105).** Judge loaded,
+   not curb-only: curb EV + driver/passenger + tools + fleet payload +
+   body/upfit + coolant/washer full + LV battery + spare. BBLB FMVSS 105
+   passenger load = **500 lb for >10,000 lb GVWR**.
+
+### New release-gate rule (RC-106)
+
+**No road test until:** final front-axle ≤ front GAWR; rear ≤ rear GAWR;
+total ≤ GVWR; each tire/wheel ≤ rated; side-to-side reviewed; scale
+ticket archived; engineering signoff complete. A NoGoCondition / release
+gate — **not** a safety claim.
+
+### Gate 07B v0.2 — still blocked
+
+Donor VIN/door label; baseline, stripped, and final scale tickets;
+four-corner data; actual removed weights (per platform); actual added
+weights; final battery-enclosure CG (X/Y/Z); tire/wheel/suspension load
+check. (BQ-13..15 hold the supplier-preferred items.)
+
+### Next
+
+Owner: **Gate 07C — Axle Moment Calculator + CG Calculation Method**
+(verbatim prompt in `GATE_RESEARCH_QUEUE.md`): front/rear axle-moment
+equations, four-corner method, longitudinal + transverse + vertical CG,
+tilt-table/lift CG-height method, removed/added mass modeling,
+GVWR/GAWR/tire/wheel overload flags, and the CG→FMVSS-105/stability link
+— with allowed equations, required/blocked input fields, nominal
+assumptions, physical-verification steps, and pass/block logic.
+
+### Standing checks
+
+- No weight is a donor-truck value; all RM/AM figures are
+  NominalAssumption placeholders; four-corner + CG numbers await physical
+  measurement.
+- Nothing ingested; nothing marked Confirmed; no weight marked safe; no
+  compliance claim; ODRs untouched.

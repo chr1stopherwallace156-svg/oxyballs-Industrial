@@ -254,10 +254,27 @@ when each letter goes out.
 - **Alternative research allowed:** Gate 06 frame-rule constraints
   (RC-97/RC-22) + FEA at 3g vertical (NeedsEngineeringReview)
 
+### BQ-15
+- **Gate:** 07B — Weight / Axle / CG
+- **Question:** Physical CG (X, Y, Z) coordinates of the HV battery
+  cell-carrier frame.
+- **Supplier needed:** pack structural fabricator — **engineering review,
+  not a datasheet**
+- **Why it matters:** the battery box is the dominant added mass; its CG
+  drives side-rail moment, pitch-moment stability, and rollover tracking
+- **Unlocks:** final composite CG (Gate 07C), side-to-side balance
+- **Current status:** NeedsEngineeringReview; **CAD uniform-density
+  approximation allowed for simulation** until the pack is built/measured
+- **Follow-up date:** mid-build (before final bracket welding/bolting);
+  supplier cadence 7/14/21d
+- **Alternative research allowed:** Gate 07C CG-modeling method +
+  tilt-table/lift CG-height procedure
+
 *(Physical, non-supplier Gate 07 blockers — donor VIN/door-label capture,
-baseline + post-build scale tickets, removed/added component weighing —
-are field tasks tracked under Gate 07A/07B in
-`docs/roadmaps/GATE_RESEARCH_QUEUE.md`, not supplier questions.)*
+baseline + stripped + final scale tickets, four-corner data,
+removed/added component weighing — are field tasks tracked in
+`docs/status/MASS_LEDGER.md` (3-phase scale procedure), not supplier
+questions.)*
 
 ---
 

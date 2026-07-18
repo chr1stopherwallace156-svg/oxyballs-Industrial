@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 26 + review_23 — Gate 07 v0.1 Weight/Axle/CG)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 26 + review_23); awaiting next research batch (Gate 07B) or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `ab5c16b`; end commit: `d3ef2fe` (batch-26 reconciliation)
+- Work: Gate 07 (Weight/Axle/CG) opened at v0.1. CS-60/61, RC-99..102. Truth hierarchy (scale > door label > marketing). **D-006 platform split** (001A gas active / 001B diesel — Hunter used diesel data). Downgrades: Scribd → NeedsOfficialFordCopy; dealer → FleetBackground; Work Truck/NTEA → ModelingFrameworkCandidate. Ledger dates real (Jul 17/24/31); engine CG → NominalAssumption-allowed (BQ-13/14). Gate 07 split 07A/07B/07C. Section 34. Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 scanner; Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB copy; brake engineer for FMVSS 105; confirm donor is 7.3L gas + provide VIN/door-label/baseline scale (Gate 07A).
+
 ## 2026-07-16 — Claude Code — task complete (batch 25 + review_22 — Gate 04B/04C/05/06 first pass)
 
 ### (archived handoff)

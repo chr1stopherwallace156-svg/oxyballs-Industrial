@@ -5,6 +5,35 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 27 + review_24: Gate 07B v0.2 (Removed / Added Mass Ledger)
+
+- Archived batch_27 (Gate 07B mass ledger) and review_24 1:1 (commit
+  `766b77d`). Owner label: **Gate 07B — Removed / Added Mass Ledger
+  v0.2.**
+- **New deliverable: `docs/status/MASS_LEDGER.md`** — living RM-01..06
+  (removed) / AM-01..05 (added) tracker, 3-phase scale-ticket procedure
+  (baseline → stripped → final), operating-state weight cases, and the
+  release gate. New rows RC-103..106 (no new CS — all Ford General BBLB,
+  CS-07): four-corner axle defs (RC-103), transverse CG (RC-104), FMVSS
+  105 500 lb passenger load (RC-105), the "no road test until…" release
+  NoGo (RC-106). Section 35.
+- **D-006 gas/diesel split RECURRED** — the ledger was again built on the
+  6.7L diesel + DEF/DPF; the donor is 7.3L gas → the removal ledger is
+  tagged Platform 001B, and the **001A gas removal ledger is flagged
+  OUTSTANDING**. Third corrected-claim recurrence in the project (after
+  PATS and ZF-CAN) — another M10 regression-scanner data point.
+- Owner's 5 corrections applied: split gas/diesel; **"three-pad" → axle
+  scale (front+rear+total) minimum / four-corner (LF/RF/LR/RR)
+  preferred**; add left/right + transverse CG + side-to-side warning;
+  real milestone dates (pre-teardown/mid-build/final; suppliers 7/14/21d);
+  operating-state payload/passenger cases (500 lb FMVSS-105 passenger
+  load). Release-gate rule added (RC-106). BQ-15 (battery-pack CG coords)
+  added to the Blocked Questions Ledger.
+- Research Map + queue updated; **next = Gate 07C (axle-moment calculator
+  + CG method)** with the owner's verbatim prompt captured.
+- Nothing ingested; nothing Confirmed; no weight marked safe; no
+  compliance claim; ODRs untouched.
+
 ## 2026-07-16 — RH batch 26 + review_23: Gate 07 v0.1 (Weight / Axle Load / CG)
 
 - Archived batch_26 (Gate 07 weight/axle/CG) and review_23 1:1 (commit
