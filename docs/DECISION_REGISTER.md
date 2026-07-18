@@ -17,6 +17,26 @@ later entry that references it.
 
 ---
 
+## D-006 — Split the donor platform: 001A (7.3L gas) vs 001B (6.7L diesel)
+
+- Date: 2026-07-16
+- Status: Accepted
+- Context: The batch_26 Gate 07 payload introduced factory-component CG
+  and weight data for a **6.7L Power Stroke diesel + 10R140**
+  transmission, but the active build direction is the **7.3L gas**
+  F-450/F-550 chassis cab. Diesel and gas powertrains differ in mass and
+  CG, so mixing them would corrupt the weight/axle/CG model.
+- Decision: Formalize two donor platforms — **Platform 001A =
+  F-450/F-550 7.3L gas** (the active direction) and **Platform 001B =
+  F-450/F-550 6.7L diesel** (separate, only if the donor is actually
+  diesel). Removed-component weight and CG data must be tagged to the
+  correct platform; diesel data may not enter the 001A model unless the
+  donor truck is diesel.
+- Consequences: Gate 07 (and the removed-mass ledger, Gate 07B) tracks
+  component weights per platform; the engine/trans CG blocker (BQ-13) is
+  a 001A gas value, not a diesel one. Binds which weight/CG figures are
+  valid inputs; supersedes nothing.
+
 ## D-005 — Park supplier-only questions; proceed with supplier-independent research
 
 - Date: 2026-07-16

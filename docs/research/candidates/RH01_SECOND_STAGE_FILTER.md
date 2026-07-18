@@ -85,7 +85,9 @@ this file supersedes it (see Addendum, section 7).
 | CS-56 | **RegulatoryInterpretation / NoGoConditionCandidate** | *NHTSA interpretation nht78-1.13 — hydraulic fluid isolation / split-system behavior* | nhtsa.gov (federal agency interpretation) | <https://www.nhtsa.gov/interpretations/nht78-113> | Candidate (batch_25) — supports a Gate 04B NoGo: a power-steering/hydroboost assist-loop fluid loss must **not** degrade the isolated split master-cylinder brake circuits. Batch-supplied locator ("Section 1") unverified → NeedsExactQuote — lanes L2/L8 |
 | CS-57 | **TechnicalBackground / LeadOnly / NeedsOEMElectricalSource / NotForFinalRule** (owner review_22) | *BenchForce — "Understanding the Body Control Module"* | benchforce.com (vendor blog) | <https://www.benchforce.com/blogs/news/understanding-the-body-control-module> | Candidate (batch_25) — background only for Gate 04C 12 V brownout discussion; **must NOT create a low-voltage safety rule** — the real anchor is the Ford General BBLB electrical-load rule (RC-91) — lanes L5/L8 |
 | CS-58 | **TechnicalBackground / LeadOnly / NeedsOEMElectricalSource / NotForFinalRule** (owner review_22) | *FS1Inc — DTC U0256 (lost communication, front controls interface module)* | fs1inc.com (vendor service blog) | <https://www.fs1inc.com/blog/dtc-u0256-lost-communication-front-controls-interface-module/> | Candidate (batch_25) — background only for Gate 04C overcurrent→comms-fault discussion; **NotForFinalRule** — lanes L5/L8 |
-| CS-59 | **CandidateSourcePath / NeedsOfficialFordCopy** (owner review_22) | *2026 Ford Super Duty Body Builders Guide (BBLB)* | Scribd (NOT a clean OEM host) | <https://www.scribd.com/document/940429439/2026-Super-Duty-Bblb-Final> | Candidate (batch_25) — useful for finding page numbers only; **prefer the official Ford Pro Upfitter / BBAS / NHTSA-hosted copy** (CS-05 BBAS portal) before treating any claim as OEM. Used for Gate 05 module-config dependency (RC-95) and Gate 06 sub-frame spacer (RC-98) — lanes L4/L1 |
+| CS-59 | **CandidateSourcePath / NeedsOfficialFordCopy** (owner review_22; re-cited batch_26 for GVWR/GAWR weight bands) | *2026 Ford Super Duty Body Builders Guide (BBLB)* | Scribd (NOT a clean OEM host) | <https://www.scribd.com/document/940429439/2026-Super-Duty-Bblb-Final> | Candidate (batch_25/26) — useful for finding page numbers only; **prefer the official Ford Pro Upfitter / BBAS / NHTSA-hosted copy** (CS-05 BBAS portal) before treating any claim as OEM. Used for Gate 05 module-config dependency (RC-95), Gate 06 sub-frame spacer (RC-98), Gate 07 GVWR bands (RC-99) — lanes L4/L1 |
+| CS-60 | **ModelingFrameworkCandidate / AxleMomentMethod / NeedsPhysicalMeasurements** (owner review_23) | *Work Truck Online (NTEA) — "Calculating Commercial Vehicle Weight Distribution & Payload Made Easy"* | worktruckonline.com (industry / NTEA reference) | <https://www.worktruckonline.com/articles/calculating-commercial-vehicle-weight-distribution-payload-made-easy> | Candidate (batch_26) — the Gate 07C axle-moment **method** (moment = weight × distance-from-front-axle; rear axle = Σmoments/WB; front = total − rear; keep ≥20–30% on the front steering axle). A modeling framework only — needs the real 3D component positions + physical scale to become numbers — lanes L4 |
+| CS-61 | **FleetBackground / DoorLabelReminder / NotForFinalRule** (owner review_23) | *RC Lacy Ford — "Ford F-450 vs. F-550: Specs & Payload"* | rclacyford.com (dealer page) | <https://www.rclacyford.com/ford-f450-vs-f550/> | Candidate (batch_26) — orientation only; **NOT the source of truth for a specific donor vehicle**. Useful only as a reminder that the VIN-specific door-jamb label governs GVWR/GAWR — lanes L4 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -194,6 +196,10 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-96 | Removing/modifying primary factory control modules impacts electronic stability + traction control (calibrated to factory weight/powertrain) → authorized software parameter updates needed to preserve ABS/ESC without a factory engine controller (Ford General BBLB) | CS-07 (General BBLB) | "Stability Control Calibration" section (unverified) | **NoGoConditionCandidate / NeedsOfficialFordCopy** — Gate 05; same ODI-URL mis-citation as RC-91 — lanes L7/L8 |
 | RC-97 | **Gate 06 frame-drilling rule (Ford General BBLB)**: no holes in the top/bottom chassis-rail flanges; web holes ≥38 mm (1.5 in) from the flange inner edge; max added hole 19 mm (0.75 in); use existing frame holes where possible. | CS-07 (General BBLB) | Frame Modification section — exact page still required | **RuleCandidate / NeedsEngineeringReview / NeedsPlatformSpecificConfirmation / NeedsOfficialFordCopy** — **refines/echoes RC-22** (same 1.5 in / 0.75 in limits, now with the no-flange-drilling + use-existing-holes detail); same ODI-URL mis-citation; missing: FEA of the battery-box brackets on the web at 3g vertical — lanes L4 |
 | RC-98 | Gate 06 sub-frame isolation spacer: tapered spacers between added vocational brackets and the factory side members, ~0.5 in thickness reduction transitioning over 4–6 in (2026 Super Duty BBLB) | CS-59 (Scribd) | p.73, Fig. C (unverified) | **RuleCandidate / NeedsEngineeringReview / NeedsOfficialFordCopy** — Gate 06; missing: mounting-hardware shear strength + thread-locking spec — lanes L4 |
+| RC-99 | **Super Duty GVWR bands (Gate 07)**: F-450 Class 4 ≈ 14,000–16,500 lb; F-550 Class 5 ≈ 17,500–19,500 lb GVWR *(2026 Super Duty BBLB p.84-85 — Hunter-supplied, unverified)* | CS-59 (Scribd) | p.84-85 chassis-cab weights table | **RuleCandidate / NoGoConditionCandidate / NeedsOfficialFordCopy** — hard upper boundary the loaded conversion may not exceed; the **VIN-specific door label governs** (RC-101), these bands are a range not the donor value; missing: model-year/wheelbase-specific config (145/169/193 in WB) — lanes L4 |
+| RC-100 | **Axle-moment method (Gate 07C)**: moment = component weight × distance from front-axle line; rear-axle weight = Σmoments ÷ wheelbase; front-axle weight = total − rear; front must stay < Front GAWR **and** retain ≥20–30% of total weight on the front steering axle for control *(NTEA/Work Truck)* | CS-60 | Longitudinal CG & Moments section | **ModelingFrameworkCandidate / AxleMomentMethod / NeedsPhysicalMeasurements** — simulation-only until physical scale tickets verify; needs the exact 3D center-points of every added bracket — lanes L4 |
+| RC-101 | **Door-label + baseline-scale procedure (Gate 07A)**: capture VIN-specific Front GAWR / Rear GAWR / GVWR from the door-jamb Safety Compliance Certification Label (**overrides any marketing/dealer value**), then record baseline front-axle, rear-axle, and total curb weights on certified scales *(RC Lacy page describes the step)* | CS-61; def. cross-ref CS-07 | door-jamb label; 3-pad scale | **RuleCandidate / OpenGap / NeedsEngineeringReview** — the real first closure step; the donor VIN/label and a certified scale ticket are still to be captured (field task, not supplier) — lanes L4 |
+| RC-102 | **GAWR/GVWR definitions (Ford General BBLB)**: GAWR = the manufacturer-specified load-carrying capacity of a single axle system; GVWR = the manufacturer-specified maximum loaded weight of the vehicle → the **actual vehicle door label is the governing input**, not a marketing chart | CS-07 (General BBLB) | definitions section — exact page still required | **RuleCandidate / NeedsOfficialFordCopy** — anchors the Gate 07 no-go boundaries; owner-relayed (same BBLB whose batch_25 copy was mis-cited via an ODI URL — get the official copy) — lanes L4 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -1921,3 +1927,101 @@ measured). Verbatim prompt added to `GATE_RESEARCH_QUEUE.md`. Gates
   framing corrected pre-emptively.
 - Nothing ingested; nothing marked Confirmed; no compliance claimed; no
   "vehicle is safe" statement; ODRs untouched.
+
+---
+
+## 34. Batch 26 + owner review_23 — Gate 07 v0.1 (Weight / Axle Load / CG) (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_26_gate07_weight_axle_cg.md`
+and `docs/research/raw/owner_reviews/review_23_batch_26_verdict.md`.
+Row additions: CS-60, CS-61; RC-99..RC-102. **Owner label adopted:
+Gate 07 — Weight / Axle Load / CG v0.1 — properly structured around the
+right truth source (door label + scale tickets + component mass ledger),
+not closed.**
+
+### What is strong (owner)
+
+The truth hierarchy is correct: **certified physical scale data overrides
+estimates; the VIN door-label GVWR/GAWR overrides generic online values;
+GVWR / front GAWR / rear GAWR / tire / wheel ratings are hard no-go
+boundaries.** The Ford General BBLB definitions anchor it (RC-102): GAWR
+= a single axle's rated capacity, GVWR = the vehicle's rated loaded
+weight — so the actual door label is the governing input.
+
+### Big correction — 6.7L diesel vs 7.3L gas (platform split)
+
+The Hunter's ledger referenced a **6.7L Power Stroke V8 + 10R140**, but
+the active donor direction is the **7.3L gas** chassis cab. Split the
+platform and **do not mix diesel engine/trans weight or CG into the gas
+model unless the donor truck is actually diesel** (recorded as **D-006**):
+
+- **Platform 001A — F-450/F-550 7.3L gas** (the active build direction).
+- **Platform 001B — F-450/F-550 6.7L diesel** (separate; only if the
+  donor is diesel).
+
+### Source corrections (owner)
+
+1. **Scribd 2026 BBLB (CS-59, RC-99)** → **CandidateSourcePath /
+   NeedsOfficialFordCopy** — page-number aid only; prefer the Ford Pro
+   Upfitter / BBAS official copy.
+2. **RC Lacy dealer page (CS-61, RC-101)** → **FleetBackground /
+   DoorLabelReminder / NotForFinalRule** — orientation only; not the
+   source of truth for a specific donor.
+3. **Work Truck / NTEA method (CS-60, RC-100)** → **ModelingFramework
+   Candidate / AxleMomentMethod / NeedsPhysicalMeasurements** — a good
+   axle-moment modeling method, simulation-only until scale tickets
+   verify.
+
+### Ledger corrections (owner)
+
+- **Real follow-up dates** for the Gate 07 blocked questions: **first
+  Jul 17, 2026 · second Jul 24, 2026 · escalation Jul 31, 2026** (not
+  "Q3 2026"). Applied to the Blocked Questions Ledger (BQ-13/BQ-14).
+- **Factory engine/trans CG height is NOT supplier-only:**
+  **NominalAssumption allowed for simulation; physical removed-component
+  weighing required before final layout; supplier data preferred, not
+  mandatory** to keep research moving. (Demoted from the Hunter's
+  NeedsSupplierData.)
+
+### Gate 07 split into three sub-gates (owner)
+
+- **Gate 07A — Door Label + Baseline Scale Ticket** (the real first
+  closure step): capture VIN, wheelbase, cab config, GVWR, front/rear
+  GAWR, tire size/load rating, wheel rating, and baseline front/rear/
+  total curb weights.
+- **Gate 07B — Removed / Added Mass Ledger** (next research target):
+  removed (engine, transmission, fuel tank/fuel, exhaust/aftertreatment,
+  radiator/cooling, DEF if diesel, accessories) vs added (battery packs,
+  enclosures, brackets, motor/inverter, HV cables, coolant loops,
+  radiator/chiller, EHPS pump, DC-DC converter).
+- **Gate 07C — Axle Moment Calculator** (RC-100): simulation-only until
+  physical scale tickets verify.
+
+### Structural tie-in (owner)
+
+Any battery-enclosure mounting plan must link Gate 07 weight results back
+into the **Gate 06 frame rules (RC-97/RC-22)**: use existing holes where
+possible; no top/bottom flange drilling; web holes ≥38 mm / 1.5 in from
+the flange; max added hole 19 mm / 0.75 in.
+
+### Gate 07 v0.1 — still blocked (owner)
+
+Actual donor VIN/door label; baseline scale ticket; removed component
+weights; added component weights; final battery placement coordinates;
+post-build scale ticket; tire/wheel/suspension load check.
+
+### Next
+
+Owner: **do Gate 07B next — the Removed / Added Mass Ledger + scale-ticket
+procedure** (verbatim prompt in `GATE_RESEARCH_QUEUE.md`). Hard rules:
+physical scale values override estimates; estimates are NominalAssumption
+only; final validation requires certified front-axle, rear-axle, and
+total scale tickets.
+
+### Standing checks
+
+- No supplier value invented; the GVWR bands are a range, not the donor
+  door-label value; the axle-moment method is a framework, not numbers.
+- Nothing ingested; nothing marked Confirmed; no weight condition marked
+  safe; no compliance claim; ODRs untouched.

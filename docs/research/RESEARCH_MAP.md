@@ -352,25 +352,40 @@ supplier-independent plan with the owner's verbatim prompts lives in
    serviceability review.** Standing terminology rule for all future
    batches.
 6. Mechanical Mounting / Battery Enclosure Gate
-7. Weight / Axle Load / CG Gate
+7. **Weight / Axle Load / CG Gate — v0.1 (batch_26):** structured around
+   the right truth source (door label + scale tickets + component mass
+   ledger), not closed. **Truth hierarchy:** certified scale data > VIN
+   door-label GVWR/GAWR > marketing/dealer charts; GVWR / front GAWR /
+   rear GAWR / tire / wheel are hard no-go boundaries (RC-99/102).
+   **Platform split (D-006):** 001A = 7.3L **gas** (active) vs 001B =
+   6.7L diesel — no diesel weight/CG in the gas model. Split into three
+   sub-gates: **07A** door-label + baseline scale ticket (real first
+   closure step); **07B** removed/added mass ledger (**next**); **07C**
+   axle-moment calculator (RC-100, simulation-only until scale tickets
+   verify). Downgrades: Scribd BBLB → CandidateSourcePath/
+   NeedsOfficialFordCopy; dealer page → FleetBackground; factory engine
+   CG → NominalAssumption until measured (not supplier-only). Enclosure
+   mounting links back to the Gate 06 frame rules (RC-97/RC-22).
 8. Failure Mode + Test Procedure Gate
 9. Physical Measurement / 3D Scan Gate
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_22):** the **Gate 07** payload —
-Weight / Axle Load / Center of Gravity for the F-450/F-550 EV conversion
-(GVWR + front/rear GAWR by model year/wheelbase, door-label + scale-ticket
-capture, removed ICE-component weights, added EV-component weights, axle
-load + CG-height/longitudinal calculation, suspension + tire/wheel load
-ratings, brake dependence on final weight, post-build weigh-in). Hard
-rules: **physical scale ticket overrides estimates; no weight condition
-marked safe without actual scale data; never exceed GVWR / front GAWR /
-rear GAWR / tire / wheel rating; all estimates are NominalAssumption until
-measured.** Verbatim prompt in
-[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md). (Gates
-04B/04C/05/06 got a first pass in batch_25 and stay open with the
-review_22 follow-ups.)
+**Next expected batch (owner review_23):** the **Gate 07B** payload — the
+**Removed / Added Mass Ledger + scale-ticket procedure** for the
+F-450/F-550 EV conversion (removed: engine, transmission, fuel tank/fuel,
+exhaust/aftertreatment, radiator/cooling, DEF-if-diesel, accessories;
+added: battery packs, enclosures, brackets, motor/inverter, HV cables,
+coolant loops, radiator/chiller, EHPS pump, DC-DC — each with a
+measurement method, whether supplier datasheet / physical scale / estimate
+is allowed, and how each mass links to the front/rear axle-moment
+calculation, captured before teardown / after teardown / after final
+build). Hard rules: **physical scale values override estimates; estimates
+are NominalAssumption only; final validation requires certified front-axle,
+rear-axle, and total scale tickets.** Verbatim prompt in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md). (Gate 07
+got its v0.1 first pass in batch_26; Gates 04B/04C/05/06 first pass in
+batch_25 — all stay open with their review follow-ups.)
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

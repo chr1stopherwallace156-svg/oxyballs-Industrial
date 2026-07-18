@@ -5,6 +5,36 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 26 + review_23: Gate 07 v0.1 (Weight / Axle Load / CG)
+
+- Archived batch_26 (Gate 07 weight/axle/CG) and review_23 1:1 (commit
+  `ab5c16b`). Owner label: **Gate 07 v0.1** — properly structured around
+  the right truth source (door label + scale tickets + component mass
+  ledger), not closed.
+- New rows CS-60 (Work Truck/NTEA axle-moment method →
+  ModelingFrameworkCandidate/AxleMomentMethod/NeedsPhysicalMeasurements),
+  CS-61 (RC Lacy dealer page → FleetBackground/DoorLabelReminder/
+  NotForFinalRule); RC-99 (Super Duty GVWR bands via Scribd BBLB —
+  NoGo/NeedsOfficialFordCopy), RC-100 (axle-moment method), RC-101
+  (door-label + baseline-scale procedure), RC-102 (Ford BBLB GAWR/GVWR
+  definitions — door label governs). Section 34.
+- **Platform split (D-006):** the Hunter cited 6.7L diesel + 10R140 data,
+  but the donor is **7.3L gas** → Platform 001A (gas, active) vs 001B
+  (diesel); no diesel weight/CG in the gas model.
+- Owner corrections: Scribd BBLB downgraded (NeedsOfficialFordCopy);
+  dealer page → FleetBackground; Work Truck method →
+  ModelingFrameworkCandidate; ledger dates made real (Jul 17/24/31 2026);
+  **factory engine CG demoted from supplier-only to NominalAssumption-
+  allowed** (BQ-13; physical weighing before final layout). Gate 07 split
+  into sub-gates **07A** (door label + baseline scale), **07B** (removed/
+  added mass ledger), **07C** (axle-moment calculator). Enclosure mounting
+  tied back to the Gate 06 frame rules (RC-97/RC-22).
+- Blocked Questions Ledger gained BQ-13/BQ-14 (Gate 07 supplier-preferred
+  items); Research Map + queue updated; **next = Gate 07B** with the
+  owner's verbatim prompt captured.
+- Nothing ingested; nothing Confirmed; no weight marked safe; no
+  compliance claim; ODRs untouched.
+
 ## 2026-07-16 — RH batch 25 + review_22: Gate 04B/04C/05/06 first pass (parallel research)
 
 - Archived batch_25 (four-gate test-plan payload) and review_22 1:1

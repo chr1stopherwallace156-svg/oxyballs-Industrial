@@ -217,6 +217,48 @@ when each letter goes out.
 - **Alternative research allowed:** powertrain modeling; no final DC-link
   / contactor numbers until this resolves
 
+## Gate 07 — Weight / Axle Load / CG (Ford / physical)
+
+*Real follow-up dates for this gate (owner review_23): **first Jul 17,
+2026 · second Jul 24, 2026 · escalation Jul 31, 2026.***
+
+### BQ-13
+- **Gate:** 07 — Weight / Axle / CG (Platform **001A gas**, per D-006)
+- **Question:** Factory 7.3L gas engine + transmission assembly CG height
+  and dressed weight.
+- **Supplier needed:** Ford Fleet / Powertrain — **preferred, not
+  mandatory**
+- **Why it matters:** vertical CG shift when the ICE core is removed feeds
+  rollover-threshold / pitch-moment modeling
+- **Unlocks:** composite CG-height model (Gate 07C)
+- **Current status:** **NominalAssumption allowed for simulation; physical
+  removed-component weighing required before final layout** (demoted from
+  supplier-only per owner review_23) — **do not treat as a hard blocker**
+- **Follow-up date:** Jul 17 / Jul 24 / Jul 31, 2026
+- **Alternative research allowed:** approximate from engine-block volume /
+  uniform center-point, then replace with physical weigh
+- **Note:** use **7.3L gas** data only — do NOT substitute 6.7L diesel /
+  10R140 figures (D-006)
+
+### BQ-14
+- **Gate:** 07 — Weight / Axle / CG
+- **Question:** Factory frame vertical section-modulus limit under
+  concentrated mid-span battery-bracket loading.
+- **Supplier needed:** Ford Body Builder Advisory Service — **preferred**
+- **Why it matters:** prevents frame buckling / flange wrinkling / cross-
+  member fatigue under the battery box
+- **Unlocks:** max concentrated battery-box mass profile along the web
+- **Current status:** BLOCKED (supplier-preferred); **nominal HSLA / ASTM
+  A1011 modeling allowed** to keep moving
+- **Follow-up date:** Jul 17 / Jul 24 / Jul 31, 2026
+- **Alternative research allowed:** Gate 06 frame-rule constraints
+  (RC-97/RC-22) + FEA at 3g vertical (NeedsEngineeringReview)
+
+*(Physical, non-supplier Gate 07 blockers — donor VIN/door-label capture,
+baseline + post-build scale tickets, removed/added component weighing —
+are field tasks tracked under Gate 07A/07B in
+`docs/roadmaps/GATE_RESEARCH_QUEUE.md`, not supplier questions.)*
+
 ---
 
 ## Resolution log

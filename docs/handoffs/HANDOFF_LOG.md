@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 25 + review_22 — Gate 04B/04C/05/06 first pass)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 25 + review_22); awaiting next research batch (Gate 07) or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `654b111`; end commit: `bad806a` (batch-25 reconciliation)
+- Work: first parallel-research payload — Gates 04B/04C/05/06 in one batch. ZF "CAN control" regression fixed in-payload. CS-55..59, RC-88..98. Owner's 5 corrections: real 7/14/21-day cadence; FMVSS 105 RegulatoryTestSource/NeedsBrakeEngineerMapping (400 ft/150 lb not hard-coded); BenchForce/FS1Inc LeadOnly, real Gate 04C anchor = Ford BBLB electrical-load rule; Scribd NeedsOfficialFordCopy; Gate 05 authorized serviceable integration. Provenance defect: General BBLB rows cited via an NHTSA ODI URL, not the BBLB → CS-07 + NeedsOfficialFordCopy. Gate flags set (04B/04C/05/06); Section 33. Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 scanner; Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB copy; brake engineer for FMVSS 105.
+
 ## 2026-07-16 — Claude Code — owner directive_01 processed (park-and-proceed; ledger + queue)
 
 ### (archived handoff)

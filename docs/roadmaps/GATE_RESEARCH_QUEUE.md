@@ -187,12 +187,25 @@ access, water drainage, pack venting direction.
 > - Do not approve welding or drilling without Ford/OEM or engineering review.
 > - Mark all structural conclusions NeedsEngineeringReview.
 
-## Gate 07 — Weight / Axle Load / CG  · STATUS: NEXT (owner review_22)
+## Gate 07 — Weight / Axle Load / CG  · STATUS: v0.1 FIRST PASS DONE (batch_26)
 
-Focus: prove the truck can carry the battery weight without exceeding
-GVWR / front+rear GAWR / payload / tire+wheel rating / CG limits.
+First pass reconciled in batch_26 → Gate 07 v0.1 (CS-59/60/61,
+RC-99..102). Truth hierarchy set (scale > door label > marketing);
+platform split D-006 (001A gas / 001B diesel); source downgrades applied.
+**Split into three sub-gates:**
 
-**Owner prompt (verbatim):**
+- **Gate 07A — Door Label + Baseline Scale Ticket** (the real first
+  closure step; field capture, not a Hunter batch): VIN, wheelbase, cab
+  config, GVWR, front GAWR, rear GAWR, tire size/load rating, wheel
+  rating, baseline front/rear/total axle weights.
+- **Gate 07B — Removed / Added Mass Ledger** → **STATUS: NEXT** (prompt
+  below).
+- **Gate 07C — Axle Moment Calculator** (RC-100): moment = weight ×
+  distance-from-front-axle; rear = Σmoments ÷ WB; front = total − rear;
+  keep ≥20–30% on the front steering axle; **simulation-only until scale
+  tickets verify.**
+
+**Original Gate 07 prompt (verbatim, batch_26):**
 
 > We are starting Gate 07: Weight / Axle Load / Center of Gravity.
 >
@@ -215,6 +228,32 @@ GVWR / front+rear GAWR / payload / tire+wheel rating / CG limits.
 > - Do not mark any weight condition safe without actual scale data.
 > - Do not exceed GVWR, front GAWR, rear GAWR, tire rating, or wheel rating.
 > - All estimates are NominalAssumption until measured.
+
+## Gate 07B — Removed / Added Mass Ledger  · STATUS: NEXT (owner review_23)
+
+**Owner prompt (verbatim):**
+
+> We are continuing Gate 07: Weight / Axle Load / Center of Gravity.
+>
+> Do not mark anything Confirmed.
+> Do not use generic specs as final donor-truck data.
+>
+> Create a Removed / Added Mass Ledger for a Ford F-450/F-550 EV conversion.
+>
+> Research and structure:
+> 1. removed engine/transmission/fuel/exhaust/cooling/DEF component weight categories
+> 2. added battery/motor/inverter/enclosure/cooling/HV/LV component weight categories
+> 3. required measurement method for each item
+> 4. whether supplier datasheet, physical scale, or estimate is allowed
+> 5. how each mass links to front/rear axle moment calculations
+> 6. what must be captured before teardown
+> 7. what must be captured after teardown
+> 8. what must be captured after final build
+>
+> Hard rules:
+> - Physical scale values override estimates.
+> - Estimates are NominalAssumption only.
+> - Final validation requires certified front axle, rear axle, and total vehicle scale tickets.
 
 ## Gate 08 — Failure Modes + Test Procedures  · STATUS: QUEUED
 
