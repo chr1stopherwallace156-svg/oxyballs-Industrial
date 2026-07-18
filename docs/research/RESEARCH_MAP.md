@@ -371,19 +371,16 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_24):** the **Gate 07C** payload — the
-**Axle Moment Calculator + CG Calculation Method** (front/rear axle-moment
-equations, four-corner method, longitudinal + transverse + vertical CG,
-tilt-table/lift CG-height method, removed/added mass modeling,
-GVWR/GAWR/tire/wheel overload flags, and the CG→FMVSS-105/stability link),
-with allowed equations, required/blocked input fields, nominal
-assumptions, physical-verification steps, and Build-Engine pass/block
-logic. Hard rules: **do not mark anything Confirmed; do not use estimates
-as final values.** Verbatim prompt in
-[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md). (Gate 07B
-delivered the living mass ledger `docs/status/MASS_LEDGER.md` in batch_27;
-Gate 07 v0.1 in batch_26; Gates 04B/04C/05/06 first pass in batch_25 —
-all stay open with their review follow-ups.)
+**Next expected batch (owner review_25):** the **Gate 08 — Failure Modes
++ Test Procedures** payload — HV, powertrain, cooling, brake/steering, and
+weight gates are now all structured with blockers, so failure-mode + test
+procedure work ties them together. (Owner named Gate 08 as next; the
+verbatim prompt is awaited — queued in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md).) Gate 07
+is fully structured: v0.1 (batch_26), v0.2 mass ledger
+`docs/status/MASS_LEDGER.md` (batch_27), v0.3 axle-moment/CG calculator
+`docs/status/AXLE_CG_CALCULATOR.md` (batch_28) — all open with their
+review follow-ups; Gates 04B/04C/05/06 first pass in batch_25.
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

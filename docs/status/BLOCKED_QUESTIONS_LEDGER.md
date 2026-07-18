@@ -270,11 +270,46 @@ when each letter goes out.
 - **Alternative research allowed:** Gate 07C CG-modeling method +
   tilt-table/lift CG-height procedure
 
+### BQ-16
+- **Gate:** 07C — Weight / Axle / CG
+- **Question:** Vertical CG (CGv) of the bare, fluid-drained rolling
+  chassis cab — and the **approved CG-height test procedure** (Ford
+  Transit BEMM/BBAS).
+- **Supplier needed:** Ford Body Builder Advisory Service / certified test
+  facility
+- **Why it matters:** CGv is the base coordinate for the composite 3D CG
+  and the FMVSS-105 stability boundary
+- **Unlocks:** vertical-CG calculation (Gate 07C), rollover/brake-bias
+  review
+- **Current status:** **BlockedPendingOfficialMethod / NeedsPhysicalTest**;
+  interim **NominalAssumption ~22–24 in allowed for simulation** (BBLB
+  standard models) — never verified
+- **Follow-up date:** prior to frame integration; supplier cadence
+  7/14/21d
+- **Alternative research allowed:** Gate 07C CG-modeling method (RC-107..
+  109); the "raise ≥10 in" lift is a candidate setup, not a rule
+
+### BQ-17
+- **Gate:** 07C — Weight / Axle / CG
+- **Question:** Ford IVM statement-of-conformity **CGv Min/Max equations**
+  (FMVSS-105-related, function of CGh + WB) and factory roll-stability /
+  ESC pitch-moment constants.
+- **Supplier needed:** Ford (IVM / Chassis Control / Active Safety)
+- **Why it matters:** the CGv compliance window is a per-loading-condition
+  check, not a single max-height number; ESC constants prevent
+  mismatch/premature intervention
+- **Unlocks:** the RC-110 vertical-CG compliance check (else
+  NEEDS_IVM_OR_ENGINEERING_REVIEW)
+- **Current status:** NeedsIVMSource / OpenGap
+- **Follow-up date:** prior to track testing; supplier cadence 7/14/21d
+- **Alternative research allowed:** none for the ESC parameters (absolute
+  system values); the CGv logic can be structured now, left unresolved
+
 *(Physical, non-supplier Gate 07 blockers — donor VIN/door-label capture,
 baseline + stripped + final scale tickets, four-corner data,
 removed/added component weighing — are field tasks tracked in
-`docs/status/MASS_LEDGER.md` (3-phase scale procedure), not supplier
-questions.)*
+`docs/status/MASS_LEDGER.md` (3-phase scale procedure) and the Gate 07C
+calculator `docs/status/AXLE_CG_CALCULATOR.md`, not supplier questions.)*
 
 ---
 

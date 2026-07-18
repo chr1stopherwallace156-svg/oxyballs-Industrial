@@ -262,9 +262,18 @@ load; the "no road test until…" release gate (RC-106).
 > - Estimates are NominalAssumption only.
 > - Final validation requires certified front axle, rear axle, and total vehicle scale tickets.
 
-## Gate 07C — Axle Moment Calculator + CG Method  · STATUS: NEXT (owner review_24)
+## Gate 07C — Axle Moment Calculator + CG Method  · STATUS: v0.3 FIRST PASS DONE (batch_28)
 
-**Owner prompt (verbatim):**
+Deliverable is the living **`docs/status/AXLE_CG_CALCULATOR.md`** (allowed
+equations, data-entry matrix, nominal assumptions, pass/block logic).
+Owner corrections applied: explicit equations (RC-107/108); vertical CG
+BLOCKED pending an approved CG-height procedure (RC-109); IVM CGv Min/Max
+instead of a single threshold (RC-110); honest status labels — no
+compliance claim (RC-112); 500 lb = FMVSS-105 lightly-loaded allowance,
+not fleet payload (RC-111). Gas/diesel split now honored in-payload (001A
+gas removal figures populated in `MASS_LEDGER.md`).
+
+**Original Gate 07C prompt (verbatim, batch_28):**
 
 > We are continuing Gate 07: Weight / Axle Load / Center of Gravity.
 >
@@ -293,7 +302,11 @@ load; the "no road test until…" release gate (RC-106).
 > - physical verification steps
 > - Build Engine pass/block logic
 
-## Gate 08 — Failure Modes + Test Procedures  · STATUS: QUEUED
+## Gate 08 — Failure Modes + Test Procedures  · STATUS: NEXT (owner review_25)
 
-*(Owner prompt not yet supplied; sequence position 6. To be researched
-after Gate 07.)*
+The next research target — HV, powertrain, cooling, brake/steering, and
+weight gates are now all structured with blockers, so failure-mode + test
+procedure work ties them together.
+
+*(Owner prompt not yet supplied; owner review_25 named Gate 08 as the next
+research after 07C. Await the verbatim Gate 08 prompt.)*

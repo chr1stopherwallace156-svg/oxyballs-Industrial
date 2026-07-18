@@ -88,6 +88,7 @@ this file supersedes it (see Addendum, section 7).
 | CS-59 | **CandidateSourcePath / NeedsOfficialFordCopy** (owner review_22; re-cited batch_26 for GVWR/GAWR weight bands) | *2026 Ford Super Duty Body Builders Guide (BBLB)* | Scribd (NOT a clean OEM host) | <https://www.scribd.com/document/940429439/2026-Super-Duty-Bblb-Final> | Candidate (batch_25/26) — useful for finding page numbers only; **prefer the official Ford Pro Upfitter / BBAS / NHTSA-hosted copy** (CS-05 BBAS portal) before treating any claim as OEM. Used for Gate 05 module-config dependency (RC-95), Gate 06 sub-frame spacer (RC-98), Gate 07 GVWR bands (RC-99) — lanes L4/L1 |
 | CS-60 | **ModelingFrameworkCandidate / AxleMomentMethod / NeedsPhysicalMeasurements** (owner review_23) | *Work Truck Online (NTEA) — "Calculating Commercial Vehicle Weight Distribution & Payload Made Easy"* | worktruckonline.com (industry / NTEA reference) | <https://www.worktruckonline.com/articles/calculating-commercial-vehicle-weight-distribution-payload-made-easy> | Candidate (batch_26) — the Gate 07C axle-moment **method** (moment = weight × distance-from-front-axle; rear axle = Σmoments/WB; front = total − rear; keep ≥20–30% on the front steering axle). A modeling framework only — needs the real 3D component positions + physical scale to become numbers — lanes L4 |
 | CS-61 | **FleetBackground / DoorLabelReminder / NotForFinalRule** (owner review_23) | *RC Lacy Ford — "Ford F-450 vs. F-550: Specs & Payload"* | rclacyford.com (dealer page) | <https://www.rclacyford.com/ford-f450-vs-f550/> | Candidate (batch_26) — orientation only; **NOT the source of truth for a specific donor vehicle**. Useful only as a reminder that the VIN-specific door-jamb label governs GVWR/GAWR — lanes L4 |
+| CS-62 | **LeadOnly / InformalReference / NotForRuleCreation** | *YouTube — "Calculate your Center of Gravity Height" (axle-elevation method walkthrough)* | youtube.com (video, uncredentialed) | <https://www.youtube.com/watch?v=i2Q3DlDgeaA> | Candidate (batch_28) — illustrates the physical lift-based CGv method conceptually; **not a rule source** — the CG-height procedure must come from the Ford Transit BEMM/BBAS or a certified test facility — lanes L4 |
 
 ## 2. Candidate SourceClaim rows
 
@@ -202,8 +203,14 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-102 | **GAWR/GVWR definitions (Ford General BBLB)**: GAWR = the manufacturer-specified load-carrying capacity of a single axle system; GVWR = the manufacturer-specified maximum loaded weight of the vehicle → the **actual vehicle door label is the governing input**, not a marketing chart | CS-07 (General BBLB) | definitions section — exact page still required | **RuleCandidate / NeedsOfficialFordCopy** — anchors the Gate 07 no-go boundaries; owner-relayed (same BBLB whose batch_25 copy was mis-cited via an ODI URL — get the official copy) — lanes L4 |
 | RC-103 | **Four-corner / axle definitions (Ford General BBLB)**: front-axle weight = LF + RF; rear-axle weight = LR + RR — used for CG and axle calculations *(owner correction of the batch's wrong "three-pad" framing)* | CS-07 (General BBLB) | weight/CG section — exact page still required | **RuleCandidate / NeedsOfficialFordCopy** — Gate 07B scale method = certified axle scale (front+rear+total) minimum, four-corner (LF/RF/LR/RR) preferred; recorded in `docs/status/MASS_LEDGER.md` — lanes L4 |
 | RC-104 | **Transverse CG (Ford General BBLB)**: four-corner weights + front/rear track widths determine the transverse (side-to-side) center of gravity → track left/right balance (battery boxes, cooling loops, HV junction boxes, asymmetric ICE-removal offsets can bias one side) | CS-07 (General BBLB) | CG section — exact page still required | **RuleCandidate / NeedsOfficialFordCopy** — adds LF/RF/LR/RR + transverse-CG + side-to-side balance warning to Gate 07B/07C — lanes L4 |
-| RC-105 | **FMVSS 105 passenger load (Ford General BBLB)**: passenger load for FMVSS 105 = **500 lb for vehicles over 10,000 lb GVWR** — an input to the loaded brake/CG cases | CS-07 (General BBLB); links CS-55 (FMVSS 105) | FMVSS-105 reference — exact page still required | **RegulatoryInput / NeedsOfficialFordCopy** — feeds the operating-state weight cases (curb + driver/passenger + payload + fluids) in the mass ledger — lanes L4/L2 |
+| RC-105 | **FMVSS 105 passenger load (Ford General BBLB)**: passenger load for FMVSS 105 = **500 lb for vehicles over 10,000 lb GVWR** — an input to the loaded brake/CG cases | CS-07 (General BBLB); links CS-55 (FMVSS 105) | FMVSS-105 reference — exact page still required | **RegulatoryInput / NeedsOfficialFordCopy** — feeds the operating-state weight cases in the mass ledger. **Refined by RC-111 (review_25):** this is the FMVSS-105 *lightly-loaded vehicle weight* test allowance, **not** a universal fleet-payload assumption — lanes L4/L2 |
 | RC-106 | **Weight release-gate NoGo (owner review_24)**: **no road test until** final front-axle ≤ front GAWR, final rear-axle ≤ rear GAWR, final total ≤ GVWR, each tire/wheel ≤ rated, side-to-side imbalance reviewed, certified scale ticket archived, engineering signoff complete | owner-promoted (over RC-99/101/102/103) | n/a — release rule | **NoGoConditionCandidate** — a release gate, **not** a safety claim; every box requires physical evidence + signoff; recorded in `docs/status/MASS_LEDGER.md` — lanes L4 |
+| RC-107 | **Axle-moment + longitudinal-CG equation set (owner review_25)**: W=LF+RF+LR+RR; F=LF+RF; R=LR+RR; CGh=(R×WB)/W; component ΔR=(w×x)/WB, ΔF=w−ΔR (removed mass = negative w) | owner-promoted; defs cross-ref CS-07 | n/a — equations | **ModelingFrameworkCandidate / AxleMomentMethod** — allowed for **simulation only**; needs four-corner scale + component positions to produce numbers; recorded in `docs/status/AXLE_CG_CALCULATOR.md` — lanes L4 |
+| RC-108 | **Transverse-CG equation (owner review_25, corrected form)**: CGt=[(RF−LF)×Tf/2 + (RR−LR)×Tr/2]/W, sign convention right +/left −; DRW rear track measured to the center of the wheel pair (Ford BBLB) | owner-promoted; CS-07 | BBLB CG/track-width defs — exact page still required | **ModelingFrameworkCandidate / NeedsOfficialFordCopy** — simulation-only; supersedes the batch's own transverse formula — lanes L4 |
+| RC-109 | **Vertical CG stays BLOCKED (owner review_25)**: the rear-axle-lift method must follow an **approved CG-height test procedure** (Ford Transit BEMM/BBAS), performed by a certified facility / qualified technician; the "raise ≥10 in" step is a **candidate setup, not a final rule** (suspension compliance complicates CGv) | CS-07 (General BBLB) → CS-05 (BBAS/BEMM portal) | BBLB CGv section — official method still required | **BlockedPendingOfficialMethod / NeedsPhysicalTest** — interim NominalAssumption CGv (~22–24 in, BQ-16) for simulation only, never verified — lanes L4 |
+| RC-110 | **IVM CGv Min/Max compliance equations (owner review_25)**: some Ford IVM statements of conformity give FMVSS-105-related **Max and Min CGv as a function of horizontal-CG location and wheelbase**; the calculated CGv must fall between them for all loading conditions — a **compliance check, not a general CG target** | CS-07 (General BBLB); needs the IVM statement-of-conformity | IVM statement of conformity — **source still to obtain** | **RegulatoryComplianceInput / NeedsIVMSource / OpenGap** — **replaces the batch's single generic "Factory_Maximum_Allowable_Height_Threshold"**; else status = NEEDS_IVM_OR_ENGINEERING_REVIEW — lanes L2/L4 |
+| RC-111 | **FMVSS 105 "lightly loaded vehicle weight" (owner review_25)**: unloaded vehicle weight + **500 lb** for >10,000 lb GVWR (incl. driver + instrumentation) — a FMVSS-105 **test-reference** input, **NOT** a universal fleet-payload assumption | CS-07 (General BBLB); links CS-55 (FMVSS 105) | FMVSS 105 lightly-loaded def — exact locator still needed | **RegulatoryTestInput / NeedsVehicleCategoryMapping** — **refines RC-105** (which framed the 500 lb as passenger load); the ~2,500 lb fleet-payload placeholder is separate — lanes L2/L4 |
+| RC-112 | **Gate 07C pass/block logic + honest labels (owner review_25)**: BLOCK / WARNING / ALLOW-SIMULATION-ONLY rule set; rename `Final_Safety_Compliance_Status` → `Weight_CG_Gate_Status`; `OPERATIONAL_ALPHA` → `NOMINAL_CALCULATION_PASS / PHYSICAL_VERIFICATION_REQUIRED`; **the Build Engine must not claim compliance** | owner-promoted (over RC-99/102/106/110) | n/a — gate logic | **NoGoConditionCandidate / GateLogic** — recorded in `docs/status/AXLE_CG_CALCULATOR.md`; a calculation-gate, not a safety verdict — lanes L4 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -2115,3 +2122,80 @@ assumptions, physical-verification steps, and pass/block logic.
   measurement.
 - Nothing ingested; nothing marked Confirmed; no weight marked safe; no
   compliance claim; ODRs untouched.
+
+---
+
+## 36. Batch 28 + owner review_25 — Gate 07C v0.3 (Axle Moment + CG Calculator) (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_28_gate07c_axle_moment_cg.md`
+and `docs/research/raw/owner_reviews/review_25_batch_28_verdict.md`.
+Row additions: CS-62; RC-107..RC-112. **Deliverable: the living
+`docs/status/AXLE_CG_CALCULATOR.md`.** Owner label: **Gate 07C — Axle
+Moment / CG Calculator v0.3 — a good calculator architecture, NOT a
+verified CG system; calculation-ready, not road-test-ready.**
+
+### What is strongest (owner)
+
+The donor split is now honored **in the payload** — the removed-ICE mass
+profiles carry **both** branches (001A gas: engine ~540 lb, exhaust
+~65 lb; 001B diesel: engine ~1,100 lb, DPF/SCR ~180 lb, DEF ~70 lb, all
+NominalAssumption). **The D-006 gas/diesel recurrence is resolved
+in-payload** (the gas figures now populate the 001A removal set in
+`MASS_LEDGER.md`). Four-corner scale data (LF/RF/LR/RR) is required, per
+the Ford BBLB axle/CG definitions.
+
+### Owner's corrections — applied
+
+1. **Explicit equations filled in (RC-107/108):** W, F, R, CGh=(R×WB)/W,
+   component ΔR/ΔF (removed = negative w), and the corrected transverse
+   CGt=[(RF−LF)·Tf/2+(RR−LR)·Tr/2]/W (right +/left −; DRW rear track to
+   the wheel-pair center). Simulation-only.
+2. **Vertical CG stays BLOCKED (RC-109):** the rear-lift method must
+   follow an **approved CG-height test procedure** (Ford Transit
+   BEMM/BBAS), certified facility / qualified technician; "raise ≥10 in"
+   is a candidate setup, not a rule.
+3. **IVM CGv Min/Max, not one threshold (RC-110):** replace the generic
+   `Factory_Maximum_Allowable_Height_Threshold` with the Ford IVM
+   statement-of-conformity **Min/Max CGv equations** (function of CGh +
+   WB; CGv must fall between for all loading conditions) — else
+   `NEEDS_IVM_OR_ENGINEERING_REVIEW`.
+4. **Honest status labels (RC-112):** `Final_Safety_Compliance_Status` →
+   **`Weight_CG_Gate_Status`**; `OPERATIONAL_ALPHA` →
+   **`NOMINAL_CALCULATION_PASS / PHYSICAL_VERIFICATION_REQUIRED`**. **The
+   Build Engine must not claim compliance.**
+5. **500 lb is the FMVSS-105 lightly-loaded allowance (RC-111):**
+   unloaded + 500 lb for >10,000 lb GVWR (incl. driver + instrumentation)
+   — a **RegulatoryTestInput / NeedsVehicleCategoryMapping**, not a
+   universal fleet payload (refines RC-105); the ~2,500 lb fleet-payload
+   figure is a separate placeholder.
+
+### Pass/block logic (RC-112, recorded in the calculator)
+
+BLOCK on GVWR/GAWR/tire-wheel overload, missing door-label or final scale
+ticket, or missing/violated IVM CGv. WARNING on >5% side imbalance, low
+front-axle %, NominalAssumption battery location, or axle-only (no
+four-corner) data. ALLOW SIMULATION ONLY when all values are estimates /
+no scale ticket / CGv approximated → `NOMINAL_CALCULATION_PASS /
+PHYSICAL_VERIFICATION_REQUIRED`.
+
+### Gate 07C v0.3 — still blocked
+
+Actual donor door label; wheelbase + track measurements; baseline +
+final four-corner scale tickets; official IVM CGv equations; vertical-CG
+physical test; final battery-enclosure CG. (BQ-16/17 hold the
+supplier/official-method items.)
+
+### Next
+
+Owner: **Gate 08 — Failure Modes + Test Procedures** (HV, powertrain,
+cooling, brake/steering, and weight gates are now all structured with
+blockers). Verbatim prompt to be supplied; queued in
+`GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- No CG or weight value is verified; the equations are simulation
+  frameworks; vertical CG and IVM limits are OpenGaps.
+- Nothing ingested; nothing marked Confirmed; no compliance claim; no
+  "vehicle is safe"; ODRs untouched.

@@ -5,6 +5,34 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 28 + review_25: Gate 07C v0.3 (Axle Moment + CG Calculator)
+
+- Archived batch_28 (Gate 07C axle-moment/CG) and review_25 1:1 (commit
+  `12491b7`). Owner label: **Gate 07C — Axle Moment / CG Calculator
+  v0.3** — a good calculator architecture, not a verified CG system;
+  calculation-ready, not road-test-ready.
+- **New deliverable: `docs/status/AXLE_CG_CALCULATOR.md`** (allowed
+  equations, data-entry matrix, nominal assumptions, physical-verification
+  steps, pass/block logic). New rows CS-62 (YouTube CG-height video →
+  LeadOnly), RC-107..112. Section 36.
+- **D-006 gas/diesel split resolved in-payload** — the removed-ICE
+  profiles now carry both branches; the 001A gas figures (engine ~540 lb,
+  exhaust ~65 lb, NominalAssumption) populate `MASS_LEDGER.md`.
+- Owner's corrections applied: (1) explicit equations (W/F/R,
+  CGh=(R×WB)/W, ΔR/ΔF, transverse CGt — RC-107/108); (2) **vertical CG
+  stays BLOCKED** pending an approved CG-height procedure (Transit
+  BEMM/BBAS) — RC-109; (3) **IVM CGv Min/Max equations** replace the naive
+  single max-height threshold — RC-110; (4) honest labels
+  (`Weight_CG_Gate_Status`; `NOMINAL_CALCULATION_PASS /
+  PHYSICAL_VERIFICATION_REQUIRED`) — **no compliance claim** — RC-112;
+  (5) 500 lb = FMVSS-105 **lightly-loaded allowance**, not fleet payload
+  (RC-111, refines RC-105).
+- Blocked Questions Ledger gained BQ-16 (bare-chassis CGv + official
+  method) and BQ-17 (IVM CGv equations + ESC constants). Research Map +
+  queue updated; **next = Gate 08 (Failure Modes + Test Procedures)**.
+- Nothing ingested; nothing Confirmed; no compliance claim; no "vehicle
+  is safe"; ODRs untouched.
+
 ## 2026-07-16 — RH batch 27 + review_24: Gate 07B v0.2 (Removed / Added Mass Ledger)
 
 - Archived batch_27 (Gate 07B mass ledger) and review_24 1:1 (commit

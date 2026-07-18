@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 27 + review_24 — Gate 07B v0.2 Mass Ledger)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 27 + review_24); awaiting next research batch (Gate 07C) or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `766b77d`; end commit: `38e9f52` (batch-27 reconciliation)
+- Work: Gate 07B delivered the living `docs/status/MASS_LEDGER.md` (RM-01..06 removed / AM-01..05 added, 3-phase scale procedure, operating-state cases, release gate). RC-103..106 (BBLB four-corner defs, transverse CG, 500 lb FMVSS-105 passenger load, "no road test until" release NoGo). D-006 gas/diesel split RECURRED → ledger tagged 001B diesel, 001A gas OUTSTANDING. Owner corrections: four-corner (LF/RF/LR/RR) not "three-pad"; left/right + transverse CG; milestone dates; operating-state cases. BQ-15 added. Section 35. Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (3 recurrences); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB copy; brake engineer FMVSS 105; confirm donor is 7.3L gas + provide VIN/door-label/baseline scale + 001A gas removal weights.
+
 ## 2026-07-16 — Claude Code — task complete (batch 26 + review_23 — Gate 07 v0.1 Weight/Axle/CG)
 
 ### (archived handoff)

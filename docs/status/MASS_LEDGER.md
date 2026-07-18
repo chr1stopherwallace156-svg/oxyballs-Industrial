@@ -42,10 +42,12 @@ final layout. **None are donor-truck values.**
 | RM-05 | Engine cooling (radiators, CAC, fan shroud, oil coolers) | Dry weigh + drained-fluid calc | NominalAssumption (~120 lb) | Forward-most front-axle moment arm | OpenGap |
 | RM-06 | DEF sub-system (tank, fluid, brackets, injection) — **001B only** | Floor scale | NominalAssumption (~50–70 lb) | Localized rear-axle load point | OpenGap |
 
-**Platform 001A (gas) removal ledger — TO RESEARCH/MEASURE:** 7.3L gas
-engine (dressed), transmission (gas application), fuel system (gasoline),
-gas exhaust (no DPF/SCR/DEF), engine cooling, accessories. Do not copy
-the diesel figures.
+**Platform 001A (gas) removal ledger — NominalAssumption placeholders
+(batch_28, review_25):** 7.3L V8 gas engine (dry) ≈ **540 lb / 245 kg**;
+exhaust + single converter ≈ **65 lb / 29 kg**. Still to detail for 001A:
+transmission (gas application), gasoline fuel system, engine cooling,
+accessories — **no DEF, no DPF/SCR**. All figures are placeholders to be
+replaced by physical weighing; do not copy the diesel figures.
 
 ## Section B — Added Mass (both platforms)
 
