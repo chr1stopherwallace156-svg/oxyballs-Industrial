@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 31 + review_28 — Gate 08 FMEA registry, 15 modes)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 31 + review_28); awaiting the Gate 08B batch or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `f626e91`; end commit: `f827307` (batch-31 reconciliation)
+- Work: full Gate 08 FMEA registry populated (15 modes) in `docs/status/FMEA_REGISTRY.md`. RC-120..126. No 200 ms recurrence. Owner's 6 corrections: dashboard messages → DriverWarningCandidate; Riso 100/500 Ω/V → RegulatoryReferenceCandidate context-split; HVIL timing NeedsExactTimingSource; brake assist hydraulic not pneumatic; regen-loss wording softened; FMVSS 105 = test-mapping lane. Status FMEA_REGISTRY_CREATED + stronger pass/block. BQ-21/22. Section 39. Nothing Confirmed; no invented thresholds; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner; Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 text; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan.
+
 ## 2026-07-16 — Claude Code — task complete (batch 30 + review_27 — Gate 08 v0.1 transition)
 
 ### (archived handoff)

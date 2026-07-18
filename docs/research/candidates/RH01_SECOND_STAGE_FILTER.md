@@ -225,6 +225,12 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-124 | **Regen-loss response wording (owner review_28)**: change "friction brakes seamlessly blend or step in" to **"friction braking remains available and the system removes regen torque without destabilizing brake balance"** — no seamless OEM-style blending is implied | batch_31 | n/a — wording | **StatusInflationCorrection** — do not imply a true blended-brake controller exists; FM-06 response reworded — lanes L8 |
 | RC-125 | **FMVSS 105 stays a test-mapping lane (owner review_28)**: Gate 08 must say **`FMVSS_105_TEST_MAPPING_REQUIRED` / `BrakeEngineerReviewRequired`**, never "FMVSS compliance satisfied" | CS-49/CS-55 (FMVSS 105) | 49 CFR 571.105 — exact locators still needed | **RegulatoryTestMapping / BrakeEngineerReviewRequired** — no compliance claim from the Build Engine — lanes L2/L8 |
 | RC-126 | **Gate 08 status relabel + stronger pass/block (owner review_28)**: `FMEA_REGISTRY_CREATED` / `TEST_SEQUENCE_MAPPED` / `SUPPLIER_DATA_REQUIRED` / `NO_LIVE_HV_TESTING_APPROVED` / `NO_TRACK_TESTING_APPROVED` / `NO_COMPLIANCE_CLAIMS`; plus BLOCK/WARNING/SIMULATION-ONLY rules (block if a mode lacks detection/response/warning-candidate/test/proof, needs live HV without LOTO/PPE/signoff, brake/steering lacks brake-engineer review, or regen/ABS lacks sim/HIL before track) | owner-promoted (supersedes RC-119) | n/a — gate logic | **GateStatus / GateLogic** — recorded in `docs/status/FMEA_REGISTRY.md`; final validation not started — lanes L8 |
+| RC-127 | **"Exact Quote" → "Claim Summary / NeedsExactQuote" (owner review_29, STANDING)**: standard language stored by the Build Engine as an "Exact Quote" without the official PDF in hand is a **paraphrase**, not verified text | batch_32 (all 15 Gate 08B source rows) | n/a — standing rule | **NeedsExactQuote / NeedsPageSectionTable** — upgrade to `ExactQuoteVerified` only after the official (often paid) standard PDF is obtained and the exact page/section/table is cited; no standard quote is a final rule until then — lanes L1/L8 |
+| RC-128 | **Gate 08B source-candidate mapping (batch_32)**: each of the 15 FMEA modes mapped to a candidate standard (SAE J1742, UN ECE R100/FMVSS 305, SAE J2344, ISO 6469-3, SAE J2464/UL 2580, ISO 26262-4, FMVSS 105/ECE R13-H, ISO 5010/FMVSS 121-135, FMVSS 105, SAE J2672, ISO 16750-2, IEC 60529/ISO 16750-4, UL 2580/SAE J2289, SAE J1939-21/ISO 11898, ISO 20653) | owner-promoted; batch_32 | n/a — source map | **SourceCandidateMapping** — leads only; per-source corrected statuses recorded in `docs/status/FMEA_REGISTRY.md`; none are verified sources (no CS rows minted — NeedsExactQuote) — lanes L8/L1 |
+| RC-129 | **Wrong/weak source matches downgraded (owner review_29)**: EHPS→**ISO 5010 (earth-moving)** = NeedsBetterSource; coolant→**IEC 60529 / ISO 16750-4 (environmental)** = NeedsThermalSupplierData; regen→**ISO 26262-4** = FunctionalSafetyFrameworkCandidate (not a brake test); ABS/ESC→**ECE R13-H** = ContextCheckNeeded (passenger-car; Class 4/5 needs FMVSS 105 + heavy-vehicle review); steering→**SAE J2672** = NeedsExactStandardVerification | batch_32 | n/a — source corrections | **SourceMismatchCorrections** — the failure modes are correct; the source matches were wrong/weak — lanes L8 |
+| RC-130 | **ABS/ESC regen wording (owner review_29)**: change "transferring complete slip control to the hydraulic brakes" to **"regen torque is removed or reduced so friction braking and factory ABS/ESC logic are not opposed by drive-axle motor torque"** | batch_32 (FM-07) | n/a — wording | **StatusInflationCorrection** — refines RC-124; do not imply the conversion takes over slip control — lanes L8 |
+| RC-131 | **Water-intrusion IP correction (owner review_29)**: **pressure-decay leak testing ≠ IP67/IP69K certification** — it is a production/engineering leak screen; formal IP validation needs the ISO 20653 test method or a certified lab / supplier IP report | CS (ISO 20653, registered); FM-15 | ISO 20653 — exact method still needed | **ISO 20653 = StrongSourceLane; pressure-decay = ProductionScreenCandidate / NeedsCorrelationToIPTest** — final proof = certified lab IP67/IP69K report — lanes L8 |
+| RC-132 | **Gate 08B status (owner review_29)**: `SOURCE_CANDIDATES_MAPPED` / `NOT_FINAL` / `NEEDS_EXACT_QUOTES` / `NEEDS_PAGE_SECTION_TABLE` / `NEEDS_SUPPLIER_THRESHOLDS` / `NO_LIVE_HV` / `NO_TRACK` / `NO_COMPLIANCE`; **Gate 08C = NOT STARTED**; **08B parked, not closed — move to Gate 05 in parallel** | owner-promoted | n/a — gate status | **GateStatus** — the Hunter's "Gate 08B COMPLETED" rejected; source authority (not workflow) is the gap — lanes L8 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -2408,3 +2414,77 @@ timing thresholds). After Gate 08B → Gate 05 CAN/Controls deep dive.
   `NeedsExactSource`; no live-HV or track testing approved; no compliance
   claimed.
 - Nothing ingested; nothing marked Confirmed; ODRs untouched.
+
+---
+
+## 40. Batch 32 + owner review_29 — Gate 08B source-backed test-procedure mapping (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_32_gate08b_test_procedure_mapping.md`
+and `docs/research/raw/owner_reviews/review_29_batch_32_verdict.md`.
+Row additions: RC-127..RC-132 (no new CS — the mapped standards are
+candidate leads at `NeedsExactQuote`, not verified sources). Recorded in
+`docs/status/FMEA_REGISTRY.md` (new Gate 08B section). Owner: "the
+structure is excellent — the issue is source authority, not the
+workflow."
+
+### The big correction — "Exact Quote" is not verified (RC-127)
+
+The Hunter gave a "best source" + "exact quote" for each of the 15 modes,
+but the quoted standard language is a **paraphrase**, not verified text.
+Standing rule: any standard quote stored without the official PDF in hand
+is a **`Claim Summary / NeedsExactQuote / NeedsPageSectionTable`** —
+upgrade to `ExactQuoteVerified` only after the official (often paid)
+standard is obtained and the exact page/section/table is cited. No
+standard quote is a final rule until then.
+
+### The other big correction — "COMPLETED" rejected (RC-132)
+
+The payload marked Gate 08B **COMPLETED**. Owner rejected it: Gate 08B is
+**`SOURCE_CANDIDATES_MAPPED / NOT_FINAL / NEEDS_EXACT_QUOTES /
+NEEDS_PAGE_SECTION_TABLE / NEEDS_SUPPLIER_THRESHOLDS / NO_LIVE_HV /
+NO_TRACK / NO_COMPLIANCE`**; **Gate 08C = NOT STARTED**. **08B is parked,
+not closed — move to Gate 05 in parallel** while waiting on exact
+standards, supplier data, and engineering review.
+
+### Wrong/weak source matches downgraded (RC-129)
+
+- **EHPS → ISO 5010** (earth-moving machinery) = **NeedsBetterSource** —
+  better = Ford steering + ZF EHPS data + hydroboost specialist. Failure
+  mode correct, source wrong.
+- **Coolant pump → IEC 60529 / ISO 16750-4** (environmental) =
+  **NeedsThermalSupplierData** — better = pump datasheet + thermal
+  derating + controller diagnostic + flow-sensor data.
+- **Regen → ISO 26262-4** = **FunctionalSafetyFrameworkCandidate** — a
+  functional-safety framework, not a brake test; needs brake-engineer
+  mapping + torque-decay data + VCU safety concept + dyno plan.
+- **ABS/ESC → ECE R13-H** = **ContextCheckNeeded** — passenger-car
+  braking; Class 4/5 needs FMVSS 105 + heavy-vehicle review. FM-07
+  response reworded (RC-130).
+- **Steering → SAE J2672** = **NeedsExactStandardVerification**.
+
+### Held / strong (owner)
+
+- Isolation Riso context-split held (100 Ω/V DC / 500 Ω/V AC =
+  RegulatoryReferenceCandidate; BMS threshold NeedsSupplierData).
+- FMVSS 105 (brake assist) = one of the strongest rows
+  (RegulatoryTestLane / NeedsBrakeEngineerMapping).
+- ISO 16750-2 (LV brownout) = StrongTestFrameworkCandidate.
+- ISO 20653 (water/IP) = StrongSourceLane — but **pressure-decay ≠
+  IP67/IP69K cert** (ProductionScreenCandidate / NeedsCorrelationToIPTest,
+  RC-131).
+- The test ladder (sim → HIL → bench/dyno → low-speed closed-course) and
+  the no-live-HV mandate held.
+
+### Next
+
+Owner: **move to Gate 05 — CAN / Controls deep dive in parallel** (08B
+stays parked). Gate 05 prompt already queued in `GATE_RESEARCH_QUEUE.md`
+(review_22, authorized Ford-compatible integration, NEVER "PATS bypass").
+
+### Standing checks
+
+- No standard quote is verified; every Gate 08B row is a
+  SourceCandidate/NeedsExactQuote/NeedsSupplierData; nothing "Completed."
+- Nothing ingested; nothing marked Confirmed; no compliance claim; no
+  live-HV/track testing; ODRs untouched.

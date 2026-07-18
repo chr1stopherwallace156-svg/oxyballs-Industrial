@@ -371,17 +371,18 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_28):** **Gate 08B — source-backed
-test-procedure mapping.** For each of the 15 FMEA modes: best source +
-exact quote + test stage (sim/HIL/bench/dyno/closed-course) + required
-equipment + proof artifact + pass/block candidate + missing supplier data
-+ verification status. **Hard rules: no live HV tests; nothing Confirmed;
-no compliance claim; no invented timing thresholds.** Verbatim prompt in
-[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md). The full
-15-mode FMEA registry was populated in batch_31
-(`docs/status/FMEA_REGISTRY.md`, FMEA_REGISTRY_CREATED). Gate 07 fully
-structured (`MASS_LEDGER.md`, `AXLE_CG_CALCULATOR.md`). Confirmed order
-after 08B: Gate 05 deep dive → 06 deep dive → 09 → 10 → 11.
+**Next expected batch (owner review_29):** **Gate 05 — CAN / Controls /
+Cluster deep dive** (run in parallel while Gate 08B is parked). Authorized
+Ford-compatible controls integration, immobilizer-safe architecture,
+diagnostic compatibility, cluster serviceability — **NEVER "PATS
+bypass."** Verbatim prompt in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md). Gate 08B
+(source-backed test mapping) is parked: `SOURCE_CANDIDATES_MAPPED /
+NOT_FINAL / NEEDS_EXACT_QUOTES / …` — every standard quote is a
+`Claim Summary / NeedsExactQuote`; Gate 08C not started
+(`docs/status/FMEA_REGISTRY.md`). The 15-mode FMEA registry (batch_31) and
+Gate 07 artifacts (`MASS_LEDGER.md`, `AXLE_CG_CALCULATOR.md`) stay open.
+Confirmed order after 05: Gate 06 deep dive → 09 → 10 → 11.
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

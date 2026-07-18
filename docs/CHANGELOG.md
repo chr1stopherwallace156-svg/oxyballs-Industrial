@@ -5,6 +5,33 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 32 + review_29: Gate 08B source-backed test-procedure mapping (parked)
+
+- Archived batch_32 (Gate 08B test mapping) and review_29 1:1 (commit
+  `6731d62`). The 15 FMEA modes mapped to candidate standards; recorded
+  in `docs/status/FMEA_REGISTRY.md` (new Gate 08B section). New rows
+  RC-127..132 (no new CS — the standards are `NeedsExactQuote` leads, not
+  verified sources). Section 40.
+- **Big correction (RC-127):** every standard "Exact Quote" is a
+  **`Claim Summary / NeedsExactQuote / NeedsPageSectionTable`** — upgrade
+  to `ExactQuoteVerified` only after the official PDF + exact
+  page/section/table.
+- **"COMPLETED" rejected (RC-132):** Gate 08B = `SOURCE_CANDIDATES_MAPPED
+  / NOT_FINAL / NEEDS_EXACT_QUOTES / NEEDS_PAGE_SECTION_TABLE /
+  NEEDS_SUPPLIER_THRESHOLDS / NO_LIVE_HV / NO_TRACK / NO_COMPLIANCE`;
+  Gate 08C = NOT STARTED; **08B parked, move to Gate 05 in parallel.**
+- Wrong/weak source matches downgraded (RC-129): EHPS→ISO 5010
+  (earth-moving)=NeedsBetterSource; coolant→IEC 60529/ISO 16750-4
+  (environmental)=NeedsThermalSupplierData; regen→ISO 26262-4=Functional
+  SafetyFrameworkCandidate; ABS/ESC→ECE R13-H=ContextCheckNeeded;
+  steering→SAE J2672=NeedsExactStandardVerification. FM-07 wording
+  reworded (RC-130); water pressure-decay ≠ IP cert (RC-131). BQ-23/24
+  added.
+- Research Map + queue updated; **next = Gate 05 CAN/Controls deep dive**
+  (parallel with parked 08B).
+- Nothing ingested; nothing Confirmed; no compliance claim; no verified
+  standard quote; no live-HV/track testing; ODRs untouched.
+
 ## 2026-07-16 — RH batch 31 + review_28: Gate 08 FMEA registry (15 modes)
 
 - Archived batch_31 (full FMEA registry) and review_28 1:1 (commit

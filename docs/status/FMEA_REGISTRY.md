@@ -109,6 +109,49 @@ nothing Confirmed; no compliance claimed; all timing/threshold values are
 invented numbers). FM-06..10 → FMVSS 105 (brake-engineer plan required;
 test-mapping only).
 
+---
+
+## Gate 08B — Source-backed test-procedure mapping (batch_32 + review_29)
+
+**Status: `SOURCE_CANDIDATES_MAPPED` / `NOT_FINAL` / `NEEDS_EXACT_QUOTES`
+/ `NEEDS_PAGE_SECTION_TABLE` / `NEEDS_SUPPLIER_THRESHOLDS` /
+`NO_LIVE_HV_TESTING_APPROVED` / `NO_TRACK_TESTING_APPROVED` /
+`NO_COMPLIANCE_CLAIMS`.** **Gate 08B is parked, NOT closed** — proceed to
+Gate 05 in parallel while waiting on exact standards, supplier data, and
+engineering review. **Gate 08C (final validation) = NOT STARTED** (needs
+verified exact source text, supplier thresholds, an engineering test
+plan, LOTO/PPE/ESD, and proof-artifact templates).
+
+**Biggest rule (RC-127): every standard "Exact Quote" is a `Claim Summary
+/ NeedsExactQuote / NeedsPageSectionTable`** — the Hunter's quoted
+standard language is a paraphrase, not verified text. Upgrade to
+`ExactQuoteVerified` **only** after the official (often paid) standard PDF
+is obtained and the exact page/section/table is cited. Until then no
+standard quote is a final rule.
+
+| FM | Candidate source (lead) | Corrected status (owner review_29) |
+|---|---|---|
+| FM-01 HVIL open | SAE J1742 | **SourceCandidate / NeedsExactStandardText / NeedsSupplierTimingData** — HIL + oscilloscope proof planning allowed; final timing pass/fail, compliance, live-HV BLOCKED |
+| FM-02 Isolation fault | UN ECE R100 / FMVSS 305; ISO 6469-3 | **RegulatoryReferenceCandidate** (100 Ω/V DC / 500 Ω/V AC, context-split) + final BMS threshold **NeedsSupplierData / NeedsSystemContext** |
+| FM-03 Contactor weld | SAE J2344 | **SourceCandidate** — needs contactor-supplier datasheet + VCU/BMS power-up diagnostic + PDU weld-detection method; pass/block logic kept |
+| FM-04 Pre-charge failure | ISO 6469-3 (too broad) | **EngineeringPrincipleCandidate / NeedsPowerElectronicsSupplierData / NeedsDCLinkCapacitance / NeedsPreChargeTimerCurve** |
+| FM-05 Battery overcurrent | SAE J2464 / UL 2580 | **strong source lane**; final threshold **NeedsCellSupplierData**; sim/HIL only until an approved lab test |
+| FM-06 Inverter shutdown / regen | ISO 26262-4 | **FunctionalSafetyFrameworkCandidate** (NOT a brake test) — needs brake-engineer mapping + inverter torque-decay data + VCU safety concept + dyno plan |
+| FM-07 ABS/ESC × regen loss | FMVSS 105 + Ford ABS data; ECE R13-H | **ECE R13-H = ContextCheckNeeded** (passenger-car; Class 4/5 needs FMVSS 105 + heavy-vehicle review). Response reworded (RC-130): *regen torque removed/reduced so friction braking and factory ABS/ESC are not opposed by drive-axle motor torque* |
+| FM-08 EHPS pump failure | ISO 5010 (earth-moving) / FMVSS 121-135 | **NeedsBetterSource / NeedsPhysicalVerification** — wrong source match; better = Ford steering + ZF EHPS data + hydroboost specialist plan. Failure mode correct |
+| FM-09 Brake-assist pressure loss | FMVSS 105 | **RegulatoryTestLane / NeedsBrakeEngineerMapping / NeedsHydroboostAccumulatorData / NeedsPedalForceInstrumentation** (one of the strongest rows) |
+| FM-10 Steering-assist pressure loss | SAE J2672 | **SourceCandidate / NeedsExactStandardVerification** — better = ZF EHPS + Ford steering-gear + pressure-sensor supplier + bench decay test |
+| FM-11 LV DC-DC brownout | ISO 16750-2 | **StrongTestFrameworkCandidate / NeedsFordModuleVoltageThresholds / NeedsDC_DCTransientResponseData** |
+| FM-12 Coolant-pump failure | IEC 60529 / ISO 16750-4 (environmental) | **NeedsThermalSupplierData** — wrong lane; better = pump datasheet + thermal-derating data + controller diagnostic + flow-sensor data |
+| FM-13 Battery/inverter/motor overtemp | UL 2580 / SAE J2289 | **ThermalDeratingFrameworkCandidate / NeedsBatterySupplierCurve / NeedsInverterSupplierCurve / NeedsMotorSupplierCurve** |
+| FM-14 CAN loss | SAE J1939-21 / ISO 11898 | protocol lanes OK; **safe-state = NeedsControlsArchitecture; timeout values = NeedsSupplierData** |
+| FM-15 Water intrusion / IP seal | ISO 20653 | **StrongSourceLane**; pressure-decay = **ProductionScreenCandidate / NeedsCorrelationToIPTest**; final proof = certified lab IP67/IP69K report or supplier cert |
+
+**The issue is source authority, not the workflow** — most rows are
+stored as `SourceCandidate / TestMethodCandidate / NeedsExactQuote /
+NeedsSupplierData`, never `Completed / Verified / Final Test Rule`
+(RC-132).
+
 ## Regulatory lanes
 
 - **FMVSS 305a** — EV high-voltage electrical safety (CS from batch_03).

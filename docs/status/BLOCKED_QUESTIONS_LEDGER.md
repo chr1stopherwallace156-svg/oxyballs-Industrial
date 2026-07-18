@@ -389,6 +389,34 @@ calculator `docs/status/AXLE_CG_CALCULATOR.md`, not supplier questions.)*
 - **Alternative research allowed:** theoretical accumulator pressure-decay
   equations (NominalAssumption; links BQ-07 accumulator reserve)
 
+### BQ-23
+- **Gate:** 08B — Source-backed test-procedure mapping
+- **Question:** High-current transient pulse-injection test parameters
+  (duration + amplitude) to validate overcurrent shutdown profiles
+  (FM-05).
+- **Supplier needed:** inverter & cell manufacturer application engineers
+- **Why it matters:** sets the HIL bench programming for overcurrent
+  validation
+- **Unlocks:** the HIL test-script parameters
+- **Current status:** NeedsSupplierData
+- **Follow-up date:** prior to HIL script freeze; supplier cadence
+  7/14/21d
+- **Alternative research allowed:** generic SAE J2464 abuse baselines as a
+  reference only (NeedsExactQuote — not a rule)
+
+### BQ-24
+- **Gate:** 08B — Source-backed test-procedure mapping
+- **Question:** Hydraulic brake-line pressure-transducer signal scaling
+  maps (V → PSI) (FM-09).
+- **Supplier needed:** brake-system component manufacturer / brake
+  engineer
+- **Why it matters:** lets the VCU log brake-assist degradation accurately
+- **Unlocks:** the bench pressure-calibration + logging run
+- **Current status:** NeedsBrakeEngineerMapping
+- **Follow-up date:** prior to bench physical setup; brake-engineer review
+- **Alternative research allowed:** mechanical pressure-gauge comparison
+  across known pedal displacements (NominalAssumption)
+
 ---
 
 ## Resolution log

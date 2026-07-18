@@ -108,7 +108,11 @@ warning logic.
 > - OpenGaps
 > - what supplier data is still required
 
-## Gate 05 — CAN / Controls / Cluster Integration  · STATUS: FIRST PASS DONE (batch_25)
+## Gate 05 — CAN / Controls / Cluster Integration  · STATUS: NEXT — DEEP DIVE (owner review_29)
+
+First pass was batch_25; the **deep dive is the next research target**
+(run in parallel while Gate 08B is parked). Authorized Ford-compatible
+integration only — **NEVER "PATS bypass."** Prompt below (unchanged).
 
 **Terminology rule (standing):** authorized Ford-compatible controls
 integration, immobilizer-safe architecture, diagnostic compatibility,
@@ -368,11 +372,17 @@ validation not started. Next = Gate 08B.
 > - HIL pass does not equal road-test approval.
 > - Live HV testing requires LOTO, PPE, test plan, emergency shutdown, and engineering signoff.
 
-## Gate 08B — Source-backed test-procedure mapping  · STATUS: NEXT (owner review_28)
+## Gate 08B — Source-backed test-procedure mapping  · STATUS: SOURCE_CANDIDATES_MAPPED — PARKED (batch_32)
 
-For each of the 15 FMEA modes, find the strongest source-backed test
-procedure / test-method reference. After 08B → Gate 05 CAN/Controls deep
-dive.
+First pass (batch_32) mapped all 15 modes to candidate standards; owner
+rejected the Hunter's "COMPLETED" → **`SOURCE_CANDIDATES_MAPPED /
+NOT_FINAL / NEEDS_EXACT_QUOTES / NEEDS_PAGE_SECTION_TABLE /
+NEEDS_SUPPLIER_THRESHOLDS / NO_LIVE_HV / NO_TRACK / NO_COMPLIANCE`**;
+Gate 08C = NOT STARTED. Every standard "Exact Quote" is a
+`Claim Summary / NeedsExactQuote` (RC-127). Per-source corrected statuses
+in `docs/status/FMEA_REGISTRY.md`. **Parked, not closed — proceed to
+Gate 05 in parallel.** Reopen 08B when official standard PDFs + supplier
+thresholds + an engineering test plan land.
 
 **Owner prompt (verbatim):**
 
