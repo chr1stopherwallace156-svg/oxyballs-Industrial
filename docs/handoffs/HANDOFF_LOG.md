@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 28 + review_25 — Gate 07C v0.3 Axle Moment/CG Calculator)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 28 + review_25); awaiting next research batch (Gate 08) or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `12491b7`; end commit: `89ea189` (batch-28 reconciliation)
+- Work: Gate 07C delivered `docs/status/AXLE_CG_CALCULATOR.md`. CS-62, RC-107..112 (RC-105 refined). Owner corrections: explicit equations; vertical CG BLOCKED pending an approved CG-height procedure; IVM CGv Min/Max instead of a single threshold; honest labels (Weight_CG_Gate_Status / NOMINAL_CALCULATION_PASS); 500 lb = FMVSS-105 lightly-loaded allowance not fleet payload. Gas/diesel split resolved in-payload (001A gas removal figures added to MASS_LEDGER). BQ-16/17. Section 36. Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner; Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB copy + IVM statement; brake engineer FMVSS 105; confirm donor is 7.3L gas + provide VIN/door-label/four-corner scale/001A removal weights.
+
 ## 2026-07-16 — Claude Code — task complete (batch 27 + review_24 — Gate 07B v0.2 Mass Ledger)
 
 ### (archived handoff)

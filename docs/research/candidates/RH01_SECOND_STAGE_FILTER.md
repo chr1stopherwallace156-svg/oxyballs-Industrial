@@ -208,9 +208,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-107 | **Axle-moment + longitudinal-CG equation set (owner review_25)**: W=LF+RF+LR+RR; F=LF+RF; R=LR+RR; CGh=(R×WB)/W; component ΔR=(w×x)/WB, ΔF=w−ΔR (removed mass = negative w) | owner-promoted; defs cross-ref CS-07 | n/a — equations | **ModelingFrameworkCandidate / AxleMomentMethod** — allowed for **simulation only**; needs four-corner scale + component positions to produce numbers; recorded in `docs/status/AXLE_CG_CALCULATOR.md` — lanes L4 |
 | RC-108 | **Transverse-CG equation (owner review_25, corrected form)**: CGt=[(RF−LF)×Tf/2 + (RR−LR)×Tr/2]/W, sign convention right +/left −; DRW rear track measured to the center of the wheel pair (Ford BBLB) | owner-promoted; CS-07 | BBLB CG/track-width defs — exact page still required | **ModelingFrameworkCandidate / NeedsOfficialFordCopy** — simulation-only; supersedes the batch's own transverse formula — lanes L4 |
 | RC-109 | **Vertical CG stays BLOCKED (owner review_25)**: the rear-axle-lift method must follow an **approved CG-height test procedure** (Ford Transit BEMM/BBAS), performed by a certified facility / qualified technician; the "raise ≥10 in" step is a **candidate setup, not a final rule** (suspension compliance complicates CGv) | CS-07 (General BBLB) → CS-05 (BBAS/BEMM portal) | BBLB CGv section — official method still required | **BlockedPendingOfficialMethod / NeedsPhysicalTest** — interim NominalAssumption CGv (~22–24 in, BQ-16) for simulation only, never verified — lanes L4 |
-| RC-110 | **IVM CGv Min/Max compliance equations (owner review_25)**: some Ford IVM statements of conformity give FMVSS-105-related **Max and Min CGv as a function of horizontal-CG location and wheelbase**; the calculated CGv must fall between them for all loading conditions — a **compliance check, not a general CG target** | CS-07 (General BBLB); needs the IVM statement-of-conformity | IVM statement of conformity — **source still to obtain** | **RegulatoryComplianceInput / NeedsIVMSource / OpenGap** — **replaces the batch's single generic "Factory_Maximum_Allowable_Height_Threshold"**; else status = NEEDS_IVM_OR_ENGINEERING_REVIEW — lanes L2/L4 |
+| RC-110 | **IVM CGv Min/Max compliance equations (owner review_25)**: some Ford IVM statements of conformity give FMVSS-105-related **Max and Min CGv as a function of horizontal-CG location and wheelbase**; the calculated CGv must fall between them for all loading conditions — a **compliance check, not a general CG target** | CS-07 (General BBLB); needs the IVM statement-of-conformity | IVM statement of conformity — **source still to obtain** | **RegulatoryComplianceInput / NeedsIVMSource / OpenGap** — **replaces the batch's single generic "Factory_Maximum_Allowable_Height_Threshold"**; else status = NEEDS_IVM_OR_ENGINEERING_REVIEW. **RECURRED in batch_29** (`IF CG_v > Max_Allowable_Height → BLOCK` re-used one batch after correction — re-corrected; the calculator holds the IVM form) — lanes L2/L4 |
 | RC-111 | **FMVSS 105 "lightly loaded vehicle weight" (owner review_25)**: unloaded vehicle weight + **500 lb** for >10,000 lb GVWR (incl. driver + instrumentation) — a FMVSS-105 **test-reference** input, **NOT** a universal fleet-payload assumption | CS-07 (General BBLB); links CS-55 (FMVSS 105) | FMVSS 105 lightly-loaded def — exact locator still needed | **RegulatoryTestInput / NeedsVehicleCategoryMapping** — **refines RC-105** (which framed the 500 lb as passenger load); the ~2,500 lb fleet-payload placeholder is separate — lanes L2/L4 |
-| RC-112 | **Gate 07C pass/block logic + honest labels (owner review_25)**: BLOCK / WARNING / ALLOW-SIMULATION-ONLY rule set; rename `Final_Safety_Compliance_Status` → `Weight_CG_Gate_Status`; `OPERATIONAL_ALPHA` → `NOMINAL_CALCULATION_PASS / PHYSICAL_VERIFICATION_REQUIRED`; **the Build Engine must not claim compliance** | owner-promoted (over RC-99/102/106/110) | n/a — gate logic | **NoGoConditionCandidate / GateLogic** — recorded in `docs/status/AXLE_CG_CALCULATOR.md`; a calculation-gate, not a safety verdict — lanes L4 |
+| RC-112 | **Gate 07C pass/block logic + honest labels (owner review_25)**: BLOCK / WARNING / ALLOW-SIMULATION-ONLY rule set; rename `Final_Safety_Compliance_Status` → `Weight_CG_Gate_Status`; `OPERATIONAL_ALPHA` → `NOMINAL_CALCULATION_PASS / PHYSICAL_VERIFICATION_REQUIRED`; **the Build Engine must not claim compliance** | owner-promoted (over RC-99/102/106/110) | n/a — gate logic | **NoGoConditionCandidate / GateLogic** — recorded in `docs/status/AXLE_CG_CALCULATOR.md`; a calculation-gate, not a safety verdict. **RECURRED in batch_29** (`Final_Safety_Compliance_Status` / `OPERATIONAL_ALPHA` re-used one batch after correction — re-corrected; the calculator holds the honest labels) — lanes L4 |
+| RC-113 | **Track-width (Tf, Tr) sourcing (owner review_26)**: the F-450/F-550 DRW track widths needed for CGt are **NOT supplier-only** — they can come from the official Ford BBLB/BBAS, physical measurement, or the door/VIN-specific configuration | CS-07 (General BBLB) / CS-05 (BBAS) / physical | BBLB dimensions — official copy or measurement | **NeedsOfficialFordSource OR PhysicalMeasurement** (not NeedsSupplierData) — a Gate 07C input to RC-108; interim NominalAssumption BBLB values for simulation only (BQ-18) — lanes L4 |
+| RC-114 | **Gate 07C park status (owner review_26)**: `CALCULATOR_FRAMEWORK_READY` / `PHYSICAL_DATA_REQUIRED` / `NO_ROAD_TEST_CLEARANCE` — the calculator is ready for simulation but proves neither safety nor compliance | owner-promoted (over RC-107..112) | n/a — gate status | **GateStatus** — parks Gate 07C; road-test clearance stays blocked (RC-106 release gate) until physical scale + IVM CG review — lanes L4 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -2199,3 +2201,67 @@ blockers). Verbatim prompt to be supplied; queued in
   frameworks; vertical CG and IVM limits are OpenGaps.
 - Nothing ingested; nothing marked Confirmed; no compliance claim; no
   "vehicle is safe"; ODRs untouched.
+
+---
+
+## 37. Batch 29 + owner review_26 — Gate 07C v0.4 refinement + two recurrences (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_29_gate07c_v04_refinement.md`
+and `docs/research/raw/owner_reviews/review_26_batch_29_verdict.md`.
+Row additions: RC-113, RC-114 (no new CS). The Hunter re-delivered the
+Gate 07C calculator with the **explicit equations now shown** (W/F/R, CGh,
+ΔR/ΔF, transverse CGt). Owner label: **Gate 07C v0.4 —
+CALCULATOR_FRAMEWORK_READY / PHYSICAL_DATA_REQUIRED /
+NO_ROAD_TEST_CLEARANCE** (RC-114).
+
+### Two recurrences caught
+
+The payload re-introduced two items corrected one batch earlier
+(review_25):
+
+1. **`Final_Safety_Compliance_Status` / `OPERATIONAL_ALPHA`** — the
+   compliance-language the owner already renamed to `Weight_CG_Gate_Status`
+   / `NOMINAL_CALCULATION_PASS / PHYSICAL_VERIFICATION_REQUIRED` (RC-112,
+   recurrence marker added).
+2. **`IF CG_v > Max_Allowable_Height → BLOCK`** — the naive single-threshold
+   vertical-CG check the owner already replaced with the Ford IVM Min/Max
+   CGv equations (RC-110, recurrence marker added).
+
+Both re-corrected; the deliverable `AXLE_CG_CALCULATOR.md` already holds
+the honest labels and the IVM logic, so **nothing regressed in the
+register** — only the incoming payload did. These join the PATS,
+ZF-CAN/duty, and gas/diesel recurrences as data points for the proposed
+M10 corrected-claim regression scanner (now four distinct recurring
+items).
+
+### Genuine refinements (owner)
+
+1. **Track widths are not supplier-only (RC-113).** Tf/Tr can come from
+   the official Ford BBLB/BBAS, physical measurement, or the door/VIN
+   config → **NeedsOfficialFordSource OR PhysicalMeasurement** (BQ-18),
+   not NeedsSupplierData.
+2. **Regen/ABS/ESC dynamic fault-injection belongs in Gate 08, not 07C.**
+   Moved to the Blocked Questions Ledger under Gate 08 (BQ-19); Gate 07C
+   stays focused on weight, axle load, CG, tire/wheel loading, and
+   physical scale proof.
+
+### Calculator updates
+
+`AXLE_CG_CALCULATOR.md` bumped to v0.4: park-status flags added; the
+pass/block WARNING list gained "diesel/gas branch mismatch" and the
+SIMULATION-ONLY list gained "generic track widths"; the recurrence note
+records that the honest labels + IVM logic are held.
+
+### Roadmap (owner-confirmed)
+
+Gate 07C → **Gate 08 (Failure Modes + Test Procedures)** → Gate 05 deep
+dive → Gate 06 deep dive → Gate 09 (3D scan) → Gate 10 (supplier
+second-source) → Gate 11 (fleet readiness).
+
+### Standing checks
+
+- Gate 07C proves neither safety nor compliance; road-test clearance stays
+  blocked (RC-106) pending physical scale + IVM CG review.
+- Nothing ingested; nothing marked Confirmed; no compliance claim; ODRs
+  untouched.

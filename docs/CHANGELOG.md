@@ -5,6 +5,29 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 29 + review_26: Gate 07C v0.4 refinement (parked)
+
+- Archived batch_29 (Gate 07C v0.4 refinement) and review_26 1:1 (commit
+  `75523c8`). The Hunter re-delivered the calculator with the **explicit
+  equations shown**. Owner parks Gate 07C as **CALCULATOR_FRAMEWORK_READY
+  / PHYSICAL_DATA_REQUIRED / NO_ROAD_TEST_CLEARANCE** (RC-114).
+- **Two recurrences caught:** the payload re-used
+  `Final_Safety_Compliance_Status` / `OPERATIONAL_ALPHA` and the naive
+  `IF CG_v > Max_Allowable_Height → BLOCK`, both corrected in review_25 —
+  re-corrected (RC-110/RC-112 recurrence markers). The calculator
+  `AXLE_CG_CALCULATOR.md` already held the honest labels + IVM logic, so
+  nothing regressed in the register. Fourth distinct recurring item for
+  the M10 regression-scanner case.
+- Genuine refinements: track widths Tf/Tr → **NeedsOfficialFordSource OR
+  PhysicalMeasurement** (RC-113, BQ-18), not supplier-only; the regen/ABS/
+  ESC dynamic fault-injection item **moved to Gate 08** (BQ-19). Section
+  37.
+- Calculator bumped to v0.4 (park-status flags; WARNING gained diesel/gas
+  branch mismatch; SIMULATION-ONLY gained generic track widths). Confirmed
+  next order: **Gate 08 → 05 deep dive → 06 deep dive → 09 → 10 → 11.**
+- Nothing ingested; nothing Confirmed; no compliance claim; ODRs
+  untouched.
+
 ## 2026-07-16 — RH batch 28 + review_25: Gate 07C v0.3 (Axle Moment + CG Calculator)
 
 - Archived batch_28 (Gate 07C axle-moment/CG) and review_25 1:1 (commit

@@ -1,10 +1,24 @@
 # AXLE MOMENT + CG CALCULATOR (Gate 07C)
 
 The axle-moment and center-of-gravity calculation framework for the
-F-450/F-550 EV conversion (Gate 07C, batch_28 + owner review_25). This is
-a **calculator architecture for simulation only** — not a verified CG
-system and **not a compliance determination**. Nothing here is Confirmed;
-no result may be read as "the vehicle is safe."
+F-450/F-550 EV conversion (Gate 07C, batch_28/29 + owner review_25/26).
+This is a **calculator architecture for simulation only** — not a verified
+CG system and **not a compliance determination**. Nothing here is
+Confirmed; no result may be read as "the vehicle is safe."
+
+**Park status (owner review_26, v0.4):** `CALCULATOR_FRAMEWORK_READY` /
+`PHYSICAL_DATA_REQUIRED` / `NO_ROAD_TEST_CLEARANCE`. The equations are
+ready for simulation; road-test clearance stays blocked (see the release
+gate in `MASS_LEDGER.md`, RC-106) until physical scale data + IVM CG
+review land.
+
+> **Recurrence note (review_26):** the batch_29 payload re-used
+> `Final_Safety_Compliance_Status` / `OPERATIONAL_ALPHA` and the naive
+> `IF CG_v > Max_Allowable_Height → BLOCK`, both corrected one batch
+> earlier (review_25). This document keeps the corrected forms — honest
+> labels (§ status) and the IVM Min/Max CGv check (§5). Second/third
+> corrected-claim recurrences on the same items; regression-scanner
+> candidates.
 
 **Status labels (owner review_25 — honest naming):**
 
@@ -108,15 +122,17 @@ BLOCK if:
   - CGv outside IVM allowed range (if equations exist)
 
 WARNING if:
-  - side-to-side imbalance |(LF+LR) − (RF+RR)| / W  > 5%
+  - side-to-side imbalance |CGt| > 5% of max(Tf, Tr)  (or |(LF+LR)−(RF+RR)|/W > 5%)
   - front steering-axle % drops below the engineering target
-  - battery mass location is still NominalAssumption
+  - battery/enclosure CG is still NominalAssumption
   - only axle data exists (four-corner data unavailable)
+  - diesel/gas donor branch does not match the actual donor vehicle (D-006)
 
 ALLOW SIMULATION ONLY if:
   - all values are estimates
   - no scale ticket exists
   - vertical CG is approximated
+  - using generic (non-measured) track widths (RC-113)
   → Weight_CG_Gate_Status = NOMINAL_CALCULATION_PASS /
                             PHYSICAL_VERIFICATION_REQUIRED
 ```

@@ -262,7 +262,16 @@ load; the "no road test until…" release gate (RC-106).
 > - Estimates are NominalAssumption only.
 > - Final validation requires certified front axle, rear axle, and total vehicle scale tickets.
 
-## Gate 07C — Axle Moment Calculator + CG Method  · STATUS: v0.3 FIRST PASS DONE (batch_28)
+## Gate 07C — Axle Moment Calculator + CG Method  · STATUS: v0.4 PARKED (batch_28/29)
+
+Parked (owner review_26): **CALCULATOR_FRAMEWORK_READY /
+PHYSICAL_DATA_REQUIRED / NO_ROAD_TEST_CLEARANCE.** batch_29 re-delivered
+the calculator with explicit equations and two recurrences (compliance
+labels + naive CGv) that were re-corrected; refinements: track widths =
+NeedsOfficialFordSource OR PhysicalMeasurement (BQ-18); regen/ABS/ESC
+fault item moved to Gate 08 (BQ-19). **Confirmed post-08 order: Gate 08 →
+05 deep dive → 06 deep dive → 09 (3D scan) → 10 (supplier second-source)
+→ 11 (fleet readiness).**
 
 Deliverable is the living **`docs/status/AXLE_CG_CALCULATOR.md`** (allowed
 equations, data-entry matrix, nominal assumptions, pass/block logic).

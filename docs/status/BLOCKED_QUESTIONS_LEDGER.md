@@ -305,11 +305,44 @@ when each letter goes out.
 - **Alternative research allowed:** none for the ESC parameters (absolute
   system values); the CGv logic can be structured now, left unresolved
 
+### BQ-18
+- **Gate:** 07C — Weight / Axle / CG
+- **Question:** Exact front and rear track widths (Tf, Tr) for the target
+  F-450/F-550 DRW chassis-cab config (Tr to the dual-wheel-pair center).
+- **Supplier needed:** **NOT supplier-only** (owner review_26) — official
+  Ford BBLB/BBAS, physical measurement, or the door/VIN-specific config
+- **Why it matters:** track width sets the lateral moment arm for
+  transverse CG (RC-108)
+- **Unlocks:** CGt positional placement vs the frame centerline
+- **Current status:** **NeedsOfficialFordSource OR PhysicalMeasurement**;
+  interim NominalAssumption BBLB values allowed for simulation only
+- **Follow-up date:** prior to module placement; official-copy / measure
+- **Alternative research allowed:** Gate 07C CGt simulation with generic
+  track widths (flagged SIMULATION ONLY)
+
 *(Physical, non-supplier Gate 07 blockers — donor VIN/door-label capture,
 baseline + stripped + final scale tickets, four-corner data,
 removed/added component weighing — are field tasks tracked in
 `docs/status/MASS_LEDGER.md` (3-phase scale procedure) and the Gate 07C
 calculator `docs/status/AXLE_CG_CALCULATOR.md`, not supplier questions.)*
+
+## Gate 08 — Failure Modes + Test Procedures
+
+### BQ-19
+- **Gate:** 08 — Failure Modes + Test Procedures *(moved from 07C, owner
+  review_26)*
+- **Question:** Dynamic fault-injection protocols for the Class 4/5
+  electric-drive regenerative-braking handshake (ABS/ESC interaction under
+  high-torque transitions).
+- **Supplier needed:** traction motor / inverter software team
+- **Why it matters:** deceleration pitch-moment load transfer during
+  multi-system failures; FMVSS-105 behavior during severe ABS/ESC events
+- **Unlocks:** Gate 08 regen/brake failure-mode + test coverage
+- **Current status:** NeedsSupplierData (Gate 08 scope)
+- **Follow-up date:** prior to test-track deployment; supplier cadence
+  7/14/21d
+- **Alternative research allowed:** desktop simulation of standard torque
+  drop-outs / electronic freewheeling (NominalAssumption)
 
 ---
 
