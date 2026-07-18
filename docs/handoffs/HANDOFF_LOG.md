@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 29 + review_26 — Gate 07C v0.4 refinement, parked)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 29 + review_26); awaiting next research batch (Gate 08) or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `75523c8`; end commit: `964db41` (batch-29 reconciliation)
+- Work: Gate 07C v0.4 refinement. Two recurrences re-corrected (compliance labels + naive CGv) → RC-110/112 markers; calculator already held corrected forms. RC-113 track widths = NeedsOfficialFordSource OR PhysicalMeasurement (BQ-18); regen/ABS/ESC fault moved to Gate 08 (BQ-19). RC-114 park status. Section 37. Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (4 recurring items); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB copy + IVM statement; brake engineer FMVSS 105; confirm donor is 7.3L gas + provide VIN/door-label/four-corner scale/track widths/001A removal weights.
+
 ## 2026-07-16 — Claude Code — task complete (batch 28 + review_25 — Gate 07C v0.3 Axle Moment/CG Calculator)
 
 ### (archived handoff)

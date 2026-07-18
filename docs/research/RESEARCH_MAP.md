@@ -371,16 +371,24 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_25):** the **Gate 08 — Failure Modes
-+ Test Procedures** payload — HV, powertrain, cooling, brake/steering, and
-weight gates are now all structured with blockers, so failure-mode + test
-procedure work ties them together. (Owner named Gate 08 as next; the
-verbatim prompt is awaited — queued in
-[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md).) Gate 07
-is fully structured: v0.1 (batch_26), v0.2 mass ledger
-`docs/status/MASS_LEDGER.md` (batch_27), v0.3 axle-moment/CG calculator
-`docs/status/AXLE_CG_CALCULATOR.md` (batch_28) — all open with their
-review follow-ups; Gates 04B/04C/05/06 first pass in batch_25.
+**Next expected batch (owner review_27):** the **full Gate 08 FMEA
+registry** — the 15 failure modes (HVIL open / service disconnect,
+isolation-resistance fault, contactor weld, pre-charge failure, battery
+overcurrent, inverter shutdown during regen, ABS/ESC × regen loss, EHPS
+pump failure, brake-assist pressure loss, steering-assist pressure loss,
+LV DC-DC brownout, coolant-pump failure, battery/inverter/motor
+overtemperature, CAN loss, water intrusion / IP seal failure), each with
+subsystem, trigger, hazard, detection, response, driver warning, staged
+test method, proof artifact, pass/block, source, verification status, and
+missing supplier data. **Hard rules: no live HV tests; nothing Confirmed;
+no compliance claim; no invented timing thresholds** (all limits
+`NeedsExactSource`). Verbatim prompt in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); framework
+in `docs/status/FMEA_REGISTRY.md`. Gate 08 transition delivered in
+batch_30 (FMEA_FRAMEWORK_STARTED). Gate 07 fully structured: v0.1
+(batch_26), v0.2 `MASS_LEDGER.md` (batch_27), v0.3/v0.4
+`AXLE_CG_CALCULATOR.md` (batch_28/29, parked). Confirmed order after 08:
+05 deep dive → 06 deep dive → 09 → 10 → 11.
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

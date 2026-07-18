@@ -6,11 +6,13 @@ This is a **calculator architecture for simulation only** — not a verified
 CG system and **not a compliance determination**. Nothing here is
 Confirmed; no result may be read as "the vehicle is safe."
 
-**Park status (owner review_26, v0.4):** `CALCULATOR_FRAMEWORK_READY` /
-`PHYSICAL_DATA_REQUIRED` / `NO_ROAD_TEST_CLEARANCE`. The equations are
+**Park status (owner review_26, extended review_27):**
+`CALCULATOR_FRAMEWORK_READY` / `PHYSICAL_SCALE_DATA_REQUIRED` /
+`VERTICAL_CG_TEST_REQUIRED` / `NO_ROAD_TEST_CLEARANCE`. The equations are
 ready for simulation; road-test clearance stays blocked (see the release
 gate in `MASS_LEDGER.md`, RC-106) until physical scale data + IVM CG
-review land.
+review land. **The weight/CG checks here are a Gate 08 prerequisite** —
+Gate 08 (`FMEA_REGISTRY.md`) references them, it does not own them.
 
 > **Recurrence note (review_26):** the batch_29 payload re-used
 > `Final_Safety_Compliance_Status` / `OPERATIONAL_ALPHA` and the naive

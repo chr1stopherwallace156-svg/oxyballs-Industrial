@@ -212,7 +212,12 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-111 | **FMVSS 105 "lightly loaded vehicle weight" (owner review_25)**: unloaded vehicle weight + **500 lb** for >10,000 lb GVWR (incl. driver + instrumentation) — a FMVSS-105 **test-reference** input, **NOT** a universal fleet-payload assumption | CS-07 (General BBLB); links CS-55 (FMVSS 105) | FMVSS 105 lightly-loaded def — exact locator still needed | **RegulatoryTestInput / NeedsVehicleCategoryMapping** — **refines RC-105** (which framed the 500 lb as passenger load); the ~2,500 lb fleet-payload placeholder is separate — lanes L2/L4 |
 | RC-112 | **Gate 07C pass/block logic + honest labels (owner review_25)**: BLOCK / WARNING / ALLOW-SIMULATION-ONLY rule set; rename `Final_Safety_Compliance_Status` → `Weight_CG_Gate_Status`; `OPERATIONAL_ALPHA` → `NOMINAL_CALCULATION_PASS / PHYSICAL_VERIFICATION_REQUIRED`; **the Build Engine must not claim compliance** | owner-promoted (over RC-99/102/106/110) | n/a — gate logic | **NoGoConditionCandidate / GateLogic** — recorded in `docs/status/AXLE_CG_CALCULATOR.md`; a calculation-gate, not a safety verdict. **RECURRED in batch_29** (`Final_Safety_Compliance_Status` / `OPERATIONAL_ALPHA` re-used one batch after correction — re-corrected; the calculator holds the honest labels) — lanes L4 |
 | RC-113 | **Track-width (Tf, Tr) sourcing (owner review_26)**: the F-450/F-550 DRW track widths needed for CGt are **NOT supplier-only** — they can come from the official Ford BBLB/BBAS, physical measurement, or the door/VIN-specific configuration | CS-07 (General BBLB) / CS-05 (BBAS) / physical | BBLB dimensions — official copy or measurement | **NeedsOfficialFordSource OR PhysicalMeasurement** (not NeedsSupplierData) — a Gate 07C input to RC-108; interim NominalAssumption BBLB values for simulation only (BQ-18) — lanes L4 |
-| RC-114 | **Gate 07C park status (owner review_26)**: `CALCULATOR_FRAMEWORK_READY` / `PHYSICAL_DATA_REQUIRED` / `NO_ROAD_TEST_CLEARANCE` — the calculator is ready for simulation but proves neither safety nor compliance | owner-promoted (over RC-107..112) | n/a — gate status | **GateStatus** — parks Gate 07C; road-test clearance stays blocked (RC-106 release gate) until physical scale + IVM CG review — lanes L4 |
+| RC-114 | **Gate 07C park status (owner review_26; extended review_27)**: `CALCULATOR_FRAMEWORK_READY` / `PHYSICAL_SCALE_DATA_REQUIRED` / `VERTICAL_CG_TEST_REQUIRED` / `NO_ROAD_TEST_CLEARANCE` — the calculator is ready for simulation but proves neither safety nor compliance | owner-promoted (over RC-107..112) | n/a — gate status | **GateStatus** — parks Gate 07C; road-test clearance stays blocked (RC-106 release gate) until physical scale + IVM CG review — lanes L4 |
+| RC-115 | **Gate 08 FMEA registry schema (owner review_27)**: every failure mode requires subsystem, failure event, cause, hazard, detection method, system response, driver warning, test method (sim/HIL/bench/dyno/closed-course), required proof artifact, pass/block criteria, source, verification status, missing supplier data | owner-promoted | n/a — gate schema | **FMEAFramework / GateSchema** — the required structure for Gate 08; recorded in `docs/status/FMEA_REGISTRY.md`; Gate 08 = FMEA_FRAMEWORK_STARTED, not open — lanes L8/L7 |
+| RC-116 | **Fabricated 200 ms HVIL limit REJECTED (owner defect-catch)**: the batch's `IF HVIL_LOOP_INTERRUPT_TIMING > 200 → BLOCK` invents a disconnect-latency threshold with **no standard / supplier / engineering source** | batch_30 (no source) | n/a — invented value | **DerivedRiskFlag / FabricationCaught → `HVIL_LOOP_INTERRUPT_TIMING_LIMIT = NeedsExactSource`** — FMVSS 305a is the HV-safety lane but no numeric HVIL threshold may be derived from it without exact text/test mapping; **the 200 ms is fenced, never a rule** — lanes L1/L8 |
+| RC-117 | **No live-HV fault testing — staged testing NoGo (owner review_27)**: manually opening a LV circuit at an inverter service plug, or forcing an inverter shutdown on a moving vehicle, is prohibited as an early step → **Stage 1 bench/HIL (LV mock) → Stage 2 component test HV-isolated → Stage 3 supervised integrated test only after engineering safety plan + LOTO + PPE + test boundary + emergency shutdown are approved** | owner-promoted | n/a — safety rule | **NoGoConditionCandidate / SafetyStaging** — simulation pass ≠ physical pass; HIL pass ≠ road-test approval; recorded in `FMEA_REGISTRY.md` — lanes L8 |
+| RC-118 | **Brake/regen test staging (owner review_27)**: regen/ABS/ESC validation must go simulation → HIL → dyno/wheel-lift → closed-course low-speed → **loaded only after brake-engineer review** | owner-promoted; links CS-49/CS-55 (FMVSS 105) | n/a — test staging | **TestStagingRule / NeedsBrakeEngineerMapping** — no result satisfies FMVSS 105 without a brake-engineer plan — lanes L8/L2 |
+| RC-119 | **Gate 08 status (owner review_27)**: `FMEA_FRAMEWORK_STARTED` / `FAULT_TEST_PROCEDURES_REQUIRED` / `NO_LIVE_HV_TESTING_APPROVED` / `NO_TRACK_TESTING_APPROVED` / `SUPPLIER_TIMING_LIMITS_REQUIRED` | owner-promoted (over RC-115..118) | n/a — gate status | **GateStatus** — Gate 08 is started, not open; weight/CG CHECK 1/2 belong to Gate 07C (referenced as prerequisites only) — lanes L8 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -2263,5 +2268,75 @@ second-source) → Gate 11 (fleet readiness).
 
 - Gate 07C proves neither safety nor compliance; road-test clearance stays
   blocked (RC-106) pending physical scale + IVM CG review.
+- Nothing ingested; nothing marked Confirmed; no compliance claim; ODRs
+  untouched.
+
+---
+
+## 38. Batch 30 + owner review_27 — Gate 08 v0.1 transition (Failure Modes + Test Procedures) (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_30_gate08_failure_modes.md`
+and `docs/research/raw/owner_reviews/review_27_batch_30_verdict.md`.
+Row additions: RC-115..RC-119 (no new CS). **Deliverable: the living
+`docs/status/FMEA_REGISTRY.md`.** Owner label: **Gate 08 —
+FMEA_FRAMEWORK_STARTED** (started, not open); Gate 07C parked
+(CALCULATOR_FRAMEWORK_READY / PHYSICAL_SCALE_DATA_REQUIRED /
+VERTICAL_CG_TEST_REQUIRED / NO_ROAD_TEST_CLEARANCE — RC-114).
+
+### Two safety-critical defects caught (owner review_27)
+
+1. **Fabricated 200 ms HVIL limit (RC-116).** The payload's
+   `IF HVIL_LOOP_INTERRUPT_TIMING > 200 → BLOCK` invents a disconnect-
+   latency threshold with no source → **`NeedsExactSource`**. This is the
+   Constitution's core prohibition (never invent engineering values); the
+   filter fenced it. FMVSS 305a is the HV-safety lane but no numeric HVIL
+   threshold may be derived from it without exact text/test mapping.
+2. **Unsafe live-HV fault-test wording (RC-117).** "Manually trigger a LV
+   circuit opening at an inverter service plug" and "force a total inverter
+   shutdown during low-speed closed-track" are **not** early physical
+   steps. Replaced with staged testing: **Stage 1 bench/HIL (LV mock) →
+   Stage 2 component test HV-isolated → Stage 3 supervised integrated test
+   only after engineering safety plan + LOTO + PPE + test boundary +
+   emergency shutdown**. Simulation pass ≠ physical pass; HIL pass ≠
+   road-test approval.
+
+### Other corrections (owner)
+
+- **Weight/CG checks belong to Gate 07C, not Gate 08 (RC-119).** The
+  payload's CHECK 1 (weight validation) and CHECK 2 (vertical-CG gate) are
+  07C checks; Gate 08 references them as **prerequisites** only.
+- **Regen/ABS/ESC test staging (RC-118):** simulation → HIL → dyno/
+  wheel-lift → closed-course → loaded only after brake-engineer review.
+- **`GATE_08_OPEN` → `FMEA_FRAMEWORK_STARTED`** (RC-119) — Gate 08 is not
+  cleared.
+- **Gate 08 must be a proper FMEA registry (RC-115):** subsystem, failure
+  event, cause, hazard, detection, response, driver warning, test method,
+  proof artifact, pass/block, source, verification status.
+
+### Positive notes
+
+- Track-width sourcing correction from review_26 **held** (Ford Pro / OR
+  physical measurement, not supplier-only) — BQ-18.
+- The equation core (W/F/R, CGh, CGt, ΔR/ΔF) is now clean and parked with
+  the Gate 07C calculator.
+- No compliance-label recurrence in the Gate 08 status this batch (the
+  Hunter used `GATE_08_OPEN`, corrected to `FMEA_FRAMEWORK_STARTED`).
+
+### Next
+
+Owner supplied the **15-failure-mode FMEA prompt** (HVIL open, isolation
+fault, contactor weld, pre-charge failure, battery overcurrent, inverter
+shutdown during regen, ABS/ESC × regen loss, EHPS pump failure, brake-
+assist pressure loss, steering-assist pressure loss, LV DC-DC brownout,
+coolant-pump failure, battery/inverter/motor overtemperature, CAN loss,
+water intrusion / IP seal failure), each with the full FMEA columns. Hard
+rules: **no live HV tests; nothing Confirmed; no compliance claim; no
+invented timing thresholds.** Verbatim prompt in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- The 200 ms limit is fenced, never a rule; all timing limits stay
+  NeedsExactSource; no live-HV or track testing approved.
 - Nothing ingested; nothing marked Confirmed; no compliance claim; ODRs
   untouched.

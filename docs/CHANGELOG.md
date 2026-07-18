@@ -5,6 +5,31 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 30 + review_27: Gate 08 v0.1 transition (Failure Modes + Test Procedures)
+
+- Archived batch_30 (Gate 08 transition) and review_27 1:1 (commit
+  `df2f4c3`). **New deliverable: `docs/status/FMEA_REGISTRY.md`** (FMEA
+  framework + staged-testing safety rules). New rows RC-115..119 (no new
+  CS). Section 38. Gate 07C parked; Gate 08 = **FMEA_FRAMEWORK_STARTED**.
+- **Two safety-critical defects caught:** (1) a **fabricated 200 ms HVIL
+  disconnect-latency limit** (`IF HVIL_LOOP_INTERRUPT_TIMING > 200 →
+  BLOCK`) with no source → **`NeedsExactSource`** (RC-116, BQ-20) — the
+  Constitution's never-invent-values rule; (2) **unsafe live-HV
+  fault-test wording** → **staged testing** (Stage 1 bench/HIL LV-mock →
+  Stage 2 component test HV-isolated → Stage 3 supervised integrated test
+  only after engineering safety plan + LOTO + PPE + emergency shutdown) —
+  RC-117.
+- Other corrections: weight/CG CHECK 1/2 belong to Gate 07C (Gate 08
+  references them as prerequisites) — RC-119; regen/ABS/ESC test staging
+  (sim → HIL → dyno → closed-course → loaded after brake-engineer review)
+  — RC-118; `GATE_08_OPEN` → `FMEA_FRAMEWORK_STARTED`; Gate 08 must be a
+  proper FMEA registry (RC-115).
+- Gate 07C park-status extended (VERTICAL_CG_TEST_REQUIRED added). BQ-20
+  added. Research Map + queue updated with the owner's **15-mode FMEA
+  prompt**; next = the full Gate 08 registry.
+- Nothing ingested; nothing Confirmed; no compliance claim; no invented
+  thresholds; no live-HV/track testing approved; ODRs untouched.
+
 ## 2026-07-16 — RH batch 29 + review_26: Gate 07C v0.4 refinement (parked)
 
 - Archived batch_29 (Gate 07C v0.4 refinement) and review_26 1:1 (commit

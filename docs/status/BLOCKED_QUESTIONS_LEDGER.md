@@ -344,6 +344,23 @@ calculator `docs/status/AXLE_CG_CALCULATOR.md`, not supplier questions.)*
 - **Alternative research allowed:** desktop simulation of standard torque
   drop-outs / electronic freewheeling (NominalAssumption)
 
+### BQ-20
+- **Gate:** 08 — Failure Modes + Test Procedures
+- **Question:** HV isolation-fault / HVIL detection control-loop latency
+  and the **safe HV disconnect-timing limit** (the batch's 200 ms is
+  fabricated — RC-116).
+- **Supplier needed:** inverter / BMS firmware group (+ FMVSS 305a exact
+  text for any regulatory limit)
+- **Why it matters:** sets the safe HV shutdown window during an isolation
+  / containment fault
+- **Unlocks:** FM-01 HVIL detection→response timing (FMEA_REGISTRY)
+- **Current status:** **`HVIL_LOOP_INTERRUPT_TIMING_LIMIT = NeedsExactSource`**
+  — no timing threshold without a standard / supplier datasheet /
+  engineering requirement; the 200 ms is fenced, never a rule
+- **Follow-up date:** prior to commissioning; supplier cadence 7/14/21d
+- **Alternative research allowed:** HIL bench simulation with digital
+  fault-injection cards (Stage 1 only — no live HV)
+
 ---
 
 ## Resolution log
