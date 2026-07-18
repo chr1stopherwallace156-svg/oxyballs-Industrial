@@ -371,24 +371,17 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_27):** the **full Gate 08 FMEA
-registry** — the 15 failure modes (HVIL open / service disconnect,
-isolation-resistance fault, contactor weld, pre-charge failure, battery
-overcurrent, inverter shutdown during regen, ABS/ESC × regen loss, EHPS
-pump failure, brake-assist pressure loss, steering-assist pressure loss,
-LV DC-DC brownout, coolant-pump failure, battery/inverter/motor
-overtemperature, CAN loss, water intrusion / IP seal failure), each with
-subsystem, trigger, hazard, detection, response, driver warning, staged
-test method, proof artifact, pass/block, source, verification status, and
-missing supplier data. **Hard rules: no live HV tests; nothing Confirmed;
-no compliance claim; no invented timing thresholds** (all limits
-`NeedsExactSource`). Verbatim prompt in
-[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); framework
-in `docs/status/FMEA_REGISTRY.md`. Gate 08 transition delivered in
-batch_30 (FMEA_FRAMEWORK_STARTED). Gate 07 fully structured: v0.1
-(batch_26), v0.2 `MASS_LEDGER.md` (batch_27), v0.3/v0.4
-`AXLE_CG_CALCULATOR.md` (batch_28/29, parked). Confirmed order after 08:
-05 deep dive → 06 deep dive → 09 → 10 → 11.
+**Next expected batch (owner review_28):** **Gate 08B — source-backed
+test-procedure mapping.** For each of the 15 FMEA modes: best source +
+exact quote + test stage (sim/HIL/bench/dyno/closed-course) + required
+equipment + proof artifact + pass/block candidate + missing supplier data
++ verification status. **Hard rules: no live HV tests; nothing Confirmed;
+no compliance claim; no invented timing thresholds.** Verbatim prompt in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md). The full
+15-mode FMEA registry was populated in batch_31
+(`docs/status/FMEA_REGISTRY.md`, FMEA_REGISTRY_CREATED). Gate 07 fully
+structured (`MASS_LEDGER.md`, `AXLE_CG_CALCULATOR.md`). Confirmed order
+after 08B: Gate 05 deep dive → 06 deep dive → 09 → 10 → 11.
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

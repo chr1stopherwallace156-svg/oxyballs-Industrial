@@ -217,7 +217,14 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-116 | **Fabricated 200 ms HVIL limit REJECTED (owner defect-catch)**: the batch's `IF HVIL_LOOP_INTERRUPT_TIMING > 200 → BLOCK` invents a disconnect-latency threshold with **no standard / supplier / engineering source** | batch_30 (no source) | n/a — invented value | **DerivedRiskFlag / FabricationCaught → `HVIL_LOOP_INTERRUPT_TIMING_LIMIT = NeedsExactSource`** — FMVSS 305a is the HV-safety lane but no numeric HVIL threshold may be derived from it without exact text/test mapping; **the 200 ms is fenced, never a rule** — lanes L1/L8 |
 | RC-117 | **No live-HV fault testing — staged testing NoGo (owner review_27)**: manually opening a LV circuit at an inverter service plug, or forcing an inverter shutdown on a moving vehicle, is prohibited as an early step → **Stage 1 bench/HIL (LV mock) → Stage 2 component test HV-isolated → Stage 3 supervised integrated test only after engineering safety plan + LOTO + PPE + test boundary + emergency shutdown are approved** | owner-promoted | n/a — safety rule | **NoGoConditionCandidate / SafetyStaging** — simulation pass ≠ physical pass; HIL pass ≠ road-test approval; recorded in `FMEA_REGISTRY.md` — lanes L8 |
 | RC-118 | **Brake/regen test staging (owner review_27)**: regen/ABS/ESC validation must go simulation → HIL → dyno/wheel-lift → closed-course low-speed → **loaded only after brake-engineer review** | owner-promoted; links CS-49/CS-55 (FMVSS 105) | n/a — test staging | **TestStagingRule / NeedsBrakeEngineerMapping** — no result satisfies FMVSS 105 without a brake-engineer plan — lanes L8/L2 |
-| RC-119 | **Gate 08 status (owner review_27)**: `FMEA_FRAMEWORK_STARTED` / `FAULT_TEST_PROCEDURES_REQUIRED` / `NO_LIVE_HV_TESTING_APPROVED` / `NO_TRACK_TESTING_APPROVED` / `SUPPLIER_TIMING_LIMITS_REQUIRED` | owner-promoted (over RC-115..118) | n/a — gate status | **GateStatus** — Gate 08 is started, not open; weight/CG CHECK 1/2 belong to Gate 07C (referenced as prerequisites only) — lanes L8 |
+| RC-119 | **Gate 08 status (owner review_27)**: `FMEA_FRAMEWORK_STARTED` / `FAULT_TEST_PROCEDURES_REQUIRED` / `NO_LIVE_HV_TESTING_APPROVED` / `NO_TRACK_TESTING_APPROVED` / `SUPPLIER_TIMING_LIMITS_REQUIRED` | owner-promoted (over RC-115..118) | n/a — gate status | **GateStatus** — Gate 08 is started, not open; weight/CG CHECK 1/2 belong to Gate 07C (referenced as prerequisites only). **Superseded by RC-126** (review_28 relabel) — lanes L8 |
+| RC-120 | **Gate 08 FMEA registry populated (batch_31)**: all 15 failure modes (HVIL open, isolation fault, contactor weld, pre-charge failure, battery overcurrent, inverter shutdown during regen, ABS/ESC × regen loss, EHPS pump failure, brake-assist pressure loss, steering-assist pressure loss, LV DC-DC brownout, coolant-pump failure, battery/inverter/motor overtemp, CAN loss, water intrusion/IP seal) with the full FMEA schema | owner-promoted; batch_31 | n/a — registry | **FMEAFramework** — the correct failure universe; **every row NeedsSupplierData / NeedsExactTimingSource / NeedsBrakeEngineerMapping / NeedsPhysicalVerification** — recorded in `docs/status/FMEA_REGISTRY.md`; nothing Confirmed — lanes L8/L1 |
+| RC-121 | **Driver-warning messages are drafts (owner review_28)**: dashboard strings ("HV FAULT - STOP SAFELY", "SYSTEM ERROR - DO NOT ATTEMPT TO DRIVE", etc.) are **not Ford-confirmed** | batch_31 (Hunter-drafted) | n/a — UI concept | **DriverWarningCandidate / NeedsControlsIntegration** — draft UI only; final warnings come from Ford controls integration (Gate 05) — lanes L7/L8 |
+| RC-122 | **Isolation Riso thresholds are reference-only (owner review_28)**: 100 Ω/V DC and 500 Ω/V AC (FMVSS 305/305a) must be **split by context**, not treated as one universal threshold | CS (FMVSS 305a, batch_03); links the batch_10 500 Ω/V split | FMVSS 305a isolation text — exact locator still needed | **RegulatoryReferenceCandidate / NeedsSystemContext / NeedsSupplierBMSMapping** — the BMS/inverter supplier sets the programmable threshold; consistent with the AC/DC/charge-inlet split — lanes L1/L8 |
+| RC-123 | **Brake-assist subsystem = hydraulic, not pneumatic (owner review_28)**: FM-09's "Auxiliary Pneumatic / Hydraulic Braking Assist" is corrected to **Auxiliary Hydraulic Brake Assist** — the F-450/F-550 hydroboost lane is hydraulic | batch_31 | n/a — classification | **Correction** — recurrence-adjacent to the rejected vacuum/pneumatic path (review_17/19); hydroboost is hydraulic — lanes L9 |
+| RC-124 | **Regen-loss response wording (owner review_28)**: change "friction brakes seamlessly blend or step in" to **"friction braking remains available and the system removes regen torque without destabilizing brake balance"** — no seamless OEM-style blending is implied | batch_31 | n/a — wording | **StatusInflationCorrection** — do not imply a true blended-brake controller exists; FM-06 response reworded — lanes L8 |
+| RC-125 | **FMVSS 105 stays a test-mapping lane (owner review_28)**: Gate 08 must say **`FMVSS_105_TEST_MAPPING_REQUIRED` / `BrakeEngineerReviewRequired`**, never "FMVSS compliance satisfied" | CS-49/CS-55 (FMVSS 105) | 49 CFR 571.105 — exact locators still needed | **RegulatoryTestMapping / BrakeEngineerReviewRequired** — no compliance claim from the Build Engine — lanes L2/L8 |
+| RC-126 | **Gate 08 status relabel + stronger pass/block (owner review_28)**: `FMEA_REGISTRY_CREATED` / `TEST_SEQUENCE_MAPPED` / `SUPPLIER_DATA_REQUIRED` / `NO_LIVE_HV_TESTING_APPROVED` / `NO_TRACK_TESTING_APPROVED` / `NO_COMPLIANCE_CLAIMS`; plus BLOCK/WARNING/SIMULATION-ONLY rules (block if a mode lacks detection/response/warning-candidate/test/proof, needs live HV without LOTO/PPE/signoff, brake/steering lacks brake-engineer review, or regen/ABS lacks sim/HIL before track) | owner-promoted (supersedes RC-119) | n/a — gate logic | **GateStatus / GateLogic** — recorded in `docs/status/FMEA_REGISTRY.md`; final validation not started — lanes L8 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -2340,3 +2347,64 @@ invented timing thresholds.** Verbatim prompt in `GATE_RESEARCH_QUEUE.md`.
   NeedsExactSource; no live-HV or track testing approved.
 - Nothing ingested; nothing marked Confirmed; no compliance claim; ODRs
   untouched.
+
+---
+
+## 39. Batch 31 + owner review_28 — Gate 08 FMEA registry (15 modes) (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_31_gate08_fmea_registry.md`
+and `docs/research/raw/owner_reviews/review_28_batch_31_verdict.md`.
+Row additions: RC-120..RC-126 (no new CS). **Deliverable: the populated
+`docs/status/FMEA_REGISTRY.md` (15 modes).** Owner: "the best Gate 08
+structure so far" — the right format (failure mode → trigger → hazard →
+detection → response → warning → test method → proof artifact →
+pass/block → missing data). Status relabelled (RC-126):
+**FMEA_REGISTRY_CREATED / TEST_SEQUENCE_MAPPED / SUPPLIER_DATA_REQUIRED /
+NO_LIVE_HV_TESTING_APPROVED / NO_TRACK_TESTING_APPROVED /
+NO_COMPLIANCE_CLAIMS.**
+
+### What held (no recurrence)
+
+- **The 200 ms HVIL limit did NOT return** — HVIL timing stayed
+  `NeedsExactTimingSource` (the review_27 correction held).
+- The staged test ladder (sim → HIL → bench/dyno → low-speed
+  closed-course) and the LOTO/PPE/engineering-signoff mandate held.
+
+### Owner's 6 corrections — applied
+
+1. **Invented dashboard messages → `DriverWarningCandidate /
+   NeedsControlsIntegration`** (RC-121) — draft UI only, not Ford-confirmed.
+2. **Isolation Riso thresholds → `RegulatoryReferenceCandidate /
+   NeedsSystemContext / NeedsSupplierBMSMapping`** (RC-122) — 100 Ω/V DC /
+   500 Ω/V AC are reference lanes, split by context, not one universal
+   threshold (echoes the batch_10 500 Ω/V correction).
+3. **HVIL timing stays `NeedsExactTimingSource / NeedsSupplierFirmwareData`**
+   — no number without a supplier/standard.
+4. **FM-09 subsystem = Auxiliary HYDRAULIC Brake Assist**, not
+   "pneumatic/hydraulic" (RC-123) — hydroboost is hydraulic.
+5. **FM-06 regen-loss response reworded** (RC-124) — "friction braking
+   remains available… without destabilizing brake balance," NOT
+   "seamless blend."
+6. **FMVSS 105 stays a test-mapping lane** (RC-125) —
+   `FMVSS_105_TEST_MAPPING_REQUIRED / BrakeEngineerReviewRequired`, never
+   "compliance satisfied."
+
+Stronger BLOCK/WARNING/SIMULATION-ONLY pass/block logic added to the
+registry (RC-126).
+
+### Next
+
+Owner: **Gate 08B — source-backed test-procedure mapping** (verbatim
+prompt in `GATE_RESEARCH_QUEUE.md`): for each of the 15 modes, the best
+source + exact quote + test stage + required equipment + proof artifact +
+pass/block candidate + missing supplier data + verification status. Hard
+rules unchanged (no live HV; nothing Confirmed; no compliance; no invented
+timing thresholds). After Gate 08B → Gate 05 CAN/Controls deep dive.
+
+### Standing checks
+
+- Every FMEA row is a candidate; all timing/threshold values
+  `NeedsExactSource`; no live-HV or track testing approved; no compliance
+  claimed.
+- Nothing ingested; nothing marked Confirmed; ODRs untouched.

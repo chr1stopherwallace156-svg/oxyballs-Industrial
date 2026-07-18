@@ -311,15 +311,17 @@ gas removal figures populated in `MASS_LEDGER.md`).
 > - physical verification steps
 > - Build Engine pass/block logic
 
-## Gate 08 — Failure Modes + Test Procedures  · STATUS: FMEA_FRAMEWORK_STARTED (batch_30)
+## Gate 08 — Failure Modes + Test Procedures  · STATUS: FMEA_REGISTRY_CREATED (batch_30/31)
 
-First pass (batch_30) transitioned into Gate 08 and delivered the FMEA
-framework `docs/status/FMEA_REGISTRY.md`. Owner caught a fabricated 200 ms
-HVIL limit (→ NeedsExactSource, RC-116) and unsafe live-HV test wording
-(→ staged testing, RC-117). Gate 08 = **FMEA_FRAMEWORK_STARTED /
-NO_LIVE_HV_TESTING_APPROVED / NO_TRACK_TESTING_APPROVED /
-SUPPLIER_TIMING_LIMITS_REQUIRED.** The full 15-mode registry is the next
-payload.
+batch_30 transitioned into Gate 08 (framework); batch_31 populated the
+full **15-mode FMEA registry** (`docs/status/FMEA_REGISTRY.md`). Status
+(review_28): **FMEA_REGISTRY_CREATED / TEST_SEQUENCE_MAPPED /
+SUPPLIER_DATA_REQUIRED / NO_LIVE_HV_TESTING_APPROVED /
+NO_TRACK_TESTING_APPROVED / NO_COMPLIANCE_CLAIMS.** Owner corrections
+applied: driver-warning messages → candidates; Riso 100/500 Ω/V →
+RegulatoryReferenceCandidate; brake assist = hydraulic not pneumatic;
+regen-loss wording softened; FMVSS 105 = test-mapping lane. Final
+validation not started. Next = Gate 08B.
 
 **Owner prompt for the full FMEA registry (verbatim, review_27):**
 
@@ -365,3 +367,47 @@ payload.
 > - Simulation pass does not equal physical test pass.
 > - HIL pass does not equal road-test approval.
 > - Live HV testing requires LOTO, PPE, test plan, emergency shutdown, and engineering signoff.
+
+## Gate 08B — Source-backed test-procedure mapping  · STATUS: NEXT (owner review_28)
+
+For each of the 15 FMEA modes, find the strongest source-backed test
+procedure / test-method reference. After 08B → Gate 05 CAN/Controls deep
+dive.
+
+**Owner prompt (verbatim):**
+
+> We are continuing Gate 08: Failure Modes + Test Procedures.
+>
+> Do not mark anything Confirmed.
+> Do not claim compliance.
+> Do not invent timing thresholds.
+> Do not recommend live HV testing.
+>
+> For each failure mode in the registry, find the strongest source-backed test procedure or test-method reference.
+>
+> Failure modes:
+> 1. HVIL open
+> 2. isolation resistance fault
+> 3. contactor weld
+> 4. pre-charge failure
+> 5. battery overcurrent
+> 6. inverter shutdown during regen
+> 7. ABS/ESC interaction with regen loss
+> 8. EHPS pump failure
+> 9. brake assist pressure loss
+> 10. steering assist pressure loss
+> 11. low-voltage DC-DC brownout
+> 12. coolant pump failure
+> 13. battery/inverter/motor overtemperature
+> 14. CAN communication loss
+> 15. water intrusion/IP seal failure
+>
+> For each one, output:
+> - best source
+> - exact quote
+> - test stage: simulation / HIL / bench / dyno / closed-course
+> - required equipment
+> - required proof artifact
+> - pass/block candidate
+> - missing supplier data
+> - verification status

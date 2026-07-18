@@ -361,6 +361,34 @@ calculator `docs/status/AXLE_CG_CALCULATOR.md`, not supplier questions.)*
 - **Alternative research allowed:** HIL bench simulation with digital
   fault-injection cards (Stage 1 only — no live HV)
 
+### BQ-21
+- **Gate:** 08 — Failure Modes + Test Procedures
+- **Question:** Exact HV isolation-fault resistance detection threshold
+  (Riso, Ω/V) programmed into the BMS/inverter.
+- **Supplier needed:** pack BMS & inverter firmware suppliers
+- **Why it matters:** sets the isolation-loss shutdown trigger point
+- **Unlocks:** FM-02 isolation-monitor validation logic
+- **Current status:** **RegulatoryReferenceCandidate / NeedsSystemContext
+  / NeedsSupplierBMSMapping** — 100 Ω/V DC / 500 Ω/V AC (FMVSS 305/305a)
+  are reference lanes, **split by context, not one universal threshold**
+- **Follow-up date:** prior to bench integration; supplier cadence
+  7/14/21d
+- **Alternative research allowed:** UN ECE R100 / FMVSS 305 baseline
+  regulatory defaults as a reference only (not a rule)
+
+### BQ-22
+- **Gate:** 08 — Failure Modes + Test Procedures
+- **Question:** Minimum remaining hydraulic circuit volume / pressure
+  reserve curve under complete auxiliary (EHPS) pump failure.
+- **Supplier needed:** brake-system upfitter / hydraulic engineer
+- **Why it matters:** dictates the number of legal power-assisted stops
+  remaining under full load (FM-08/FM-09)
+- **Unlocks:** the physical staging plan for closed-course brake testing
+- **Current status:** NeedsBrakeEngineerMapping
+- **Follow-up date:** prior to dyno testing; brake-engineer review
+- **Alternative research allowed:** theoretical accumulator pressure-decay
+  equations (NominalAssumption; links BQ-07 accumulator reserve)
+
 ---
 
 ## Resolution log

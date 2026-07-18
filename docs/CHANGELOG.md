@@ -5,6 +5,35 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 31 + review_28: Gate 08 FMEA registry (15 modes)
+
+- Archived batch_31 (full FMEA registry) and review_28 1:1 (commit
+  `f626e91`). **`docs/status/FMEA_REGISTRY.md` populated with all 15
+  failure modes.** New rows RC-120..126 (no new CS). Section 39. Owner:
+  "the best Gate 08 structure so far."
+- **No recurrence:** the 200 ms HVIL limit did not return (timing kept
+  `NeedsExactTimingSource`); staged testing + LOTO/PPE held.
+- Owner's 6 corrections: (1) invented dashboard messages →
+  `DriverWarningCandidate / NeedsControlsIntegration` (RC-121); (2)
+  isolation Riso 100/500 Ω/V → `RegulatoryReferenceCandidate /
+  NeedsSystemContext / NeedsSupplierBMSMapping` (RC-122, context-split);
+  (3) HVIL timing stays `NeedsExactTimingSource`; (4) brake assist is
+  **hydraulic, not pneumatic** (RC-123); (5) regen-loss "seamless blend"
+  → "friction braking remains available without destabilizing brake
+  balance" (RC-124); (6) FMVSS 105 = **test-mapping lane**
+  (`FMVSS_105_TEST_MAPPING_REQUIRED / BrakeEngineerReviewRequired`,
+  RC-125), never "compliance satisfied."
+- Gate 08 relabelled (RC-126): `FMEA_REGISTRY_CREATED / TEST_SEQUENCE_
+  MAPPED / SUPPLIER_DATA_REQUIRED / NO_LIVE_HV_TESTING_APPROVED /
+  NO_TRACK_TESTING_APPROVED / NO_COMPLIANCE_CLAIMS` + a stronger
+  BLOCK/WARNING/SIMULATION-ONLY rule set. BQ-21 (Riso threshold) and
+  BQ-22 (hydraulic reserve curve) added.
+- Research Map + queue updated; **next = Gate 08B (source-backed
+  test-procedure mapping)** with the owner's verbatim prompt captured;
+  then Gate 05 CAN deep dive.
+- Nothing ingested; nothing Confirmed; no compliance claim; no invented
+  thresholds; no live-HV/track testing approved; ODRs untouched.
+
 ## 2026-07-16 — RH batch 30 + review_27: Gate 08 v0.1 transition (Failure Modes + Test Procedures)
 
 - Archived batch_30 (Gate 08 transition) and review_27 1:1 (commit

@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 30 + review_27 — Gate 08 v0.1 transition)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 30 + review_27); awaiting the full Gate 08 FMEA registry batch or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `df2f4c3`; end commit: `98bc93b` (batch-30 reconciliation)
+- Work: transition into Gate 08; delivered `docs/status/FMEA_REGISTRY.md`. Two safety-critical defects caught: fabricated 200 ms HVIL limit → NeedsExactSource (RC-116, BQ-20); unsafe live-HV wording → staged testing (RC-117). Weight/CG belongs to Gate 07C (RC-119); regen staging (RC-118); GATE_08_OPEN → FMEA_FRAMEWORK_STARTED (RC-115). RC-114 extended. Section 38. Nothing Confirmed; no invented thresholds; no live-HV/track testing; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner; Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a text; brake engineer FMVSS 105; confirm donor 7.3L gas + donor data; inverter/BMS timing + HV safety plan.
+
 ## 2026-07-16 — Claude Code — task complete (batch 29 + review_26 — Gate 07C v0.4 refinement, parked)
 
 ### (archived handoff)
