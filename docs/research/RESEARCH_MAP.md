@@ -371,18 +371,18 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_29):** **Gate 05 — CAN / Controls /
-Cluster deep dive** (run in parallel while Gate 08B is parked). Authorized
-Ford-compatible controls integration, immobilizer-safe architecture,
-diagnostic compatibility, cluster serviceability — **NEVER "PATS
-bypass."** Verbatim prompt in
-[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md). Gate 08B
-(source-backed test mapping) is parked: `SOURCE_CANDIDATES_MAPPED /
-NOT_FINAL / NEEDS_EXACT_QUOTES / …` — every standard quote is a
-`Claim Summary / NeedsExactQuote`; Gate 08C not started
-(`docs/status/FMEA_REGISTRY.md`). The 15-mode FMEA registry (batch_31) and
-Gate 07 artifacts (`MASS_LEDGER.md`, `AXLE_CG_CALCULATOR.md`) stay open.
-Confirmed order after 05: Gate 06 deep dive → 09 → 10 → 11.
+**Next expected batch (owner review_30):** **continue the Gate 05 CAN /
+Controls deep dive** (against authorized sources) — running in parallel
+with the **Gate 08C draft-validation sweep engine**
+(`docs/status/DRAFT_VALIDATION_08C.md`) and the parked Gate 08B. Gate 05 =
+STARTED (`docs/status/GATE05_CONTROLS.md`): **authorized Ford-compatible,
+listen-only only — NEVER "PATS bypass"; no spoofing/transmitting onto
+factory Ford safety buses.** Gate 08C = DRAFT_VALIDATION_STARTED /
+SIMULATION_ONLY / **NO_PLACEHOLDER_PASS_BLOCK_AUTHORITY** — placeholder
+numbers are sweep inputs, never thresholds. Verbatim Gate 05 prompt in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md). The Gate 07
+artifacts and the 15-mode FMEA registry stay open. Confirmed order after
+05: Gate 06 deep dive → 09 → 10 → 11.
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

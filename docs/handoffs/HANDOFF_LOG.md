@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 32 + review_29 — Gate 08B source-backed test mapping, parked)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 32 + review_29); awaiting the Gate 05 deep-dive batch or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `6731d62`; end commit: `a80b597` (batch-32 reconciliation)
+- Work: Gate 08B mapped 15 FMEA modes to candidate standards (FMEA_REGISTRY.md Gate 08B section). RC-127..132. Big correction: every standard "Exact Quote" is a Claim Summary / NeedsExactQuote (RC-127). "COMPLETED" rejected → SOURCE_CANDIDATES_MAPPED / parked (RC-132). Wrong/weak source matches downgraded (EHPS ISO 5010, coolant IEC 60529, regen ISO 26262-4, ABS ECE R13-H, steering SAE J2672). BQ-23/24. Section 40. Move to Gate 05 in parallel. Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner; Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 text + paid Gate 08B standards; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan.
+
 ## 2026-07-16 — Claude Code — task complete (batch 31 + review_28 — Gate 08 FMEA registry, 15 modes)
 
 ### (archived handoff)

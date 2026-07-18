@@ -417,6 +417,42 @@ calculator `docs/status/AXLE_CG_CALCULATOR.md`, not supplier questions.)*
 - **Alternative research allowed:** mechanical pressure-gauge comparison
   across known pedal displacements (NominalAssumption)
 
+## Gate 05 — CAN / Controls / Cluster Integration
+
+### BQ-25
+- **Gate:** 05 — CAN / Controls
+- **Question:** Authorized Ford-compatible CAN / controls interface data
+  (Ford-side arbitration IDs, rates, DTC/cluster behavior).
+- **Supplier needed:** Ford Pro upfitter network / official upfitter docs;
+  supplier BMS/inverter DBC files — **NOT reverse engineering**
+- **Why it matters:** the VCU gateway must read Ford signals correctly
+  without spoofing/bypassing factory safety systems
+- **Unlocks:** the authorized CAN translation-gateway mapping (RC-137)
+- **Current status:** **NeedsAuthorizedSource** — **ALLOWED:** listen-only
+  logging, supplier DBC import, upfitter doc review; **BLOCKED:**
+  proprietary-DBC assumptions, anti-theft bypass, spoofing/transmitting
+  onto factory Ford safety buses (RC-136)
+- **Follow-up date:** immediate (Ford Pro upfitter portal); supplier DBC
+  on request
+- **Alternative research allowed:** public/authorized J1939/OBD-II PGN
+  documentation review only (no unauthorized transmit)
+
+## Gate 08C — Draft Validation
+
+### BQ-26
+- **Gate:** 08C — Draft Validation
+- **Question:** Final production firmware verification signature (firmware
+  features match the physical wiring safety layout).
+- **Supplier needed:** lead systems engineer / sign-off authority
+- **Why it matters:** transitions Gate 08C from simulation-only draft to a
+  production clear
+- **Unlocks:** the FINAL_VALIDATED transition (never from placeholders)
+- **Current status:** SupplierDataPending — **blocks final validation**;
+  LOTO + physical-containment rules block any alternative path
+- **Follow-up date:** prior to commissioning; engineering signoff
+- **Alternative research allowed:** none for the signoff itself;
+  simulation sweeps continue meanwhile (RC-133)
+
 ---
 
 ## Resolution log

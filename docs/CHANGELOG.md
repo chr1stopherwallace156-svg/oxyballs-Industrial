@@ -5,6 +5,37 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 33 + review_30: Gate 08C draft validation + Gate 05 initiation
+
+- Archived batch_33 (Gate 08C draft validation + Gate 05 init) and
+  review_30 1:1 (commit `3d2b9ec`). **Two new deliverables:
+  `docs/status/DRAFT_VALIDATION_08C.md` (Gate 08C sweep engine) and
+  `docs/status/GATE05_CONTROLS.md` (Gate 05 authorized-controls).** New
+  rows RC-133..137 (no new CS). Section 41. BQ-25/26 added.
+- **Correction 1 (RC-133/134/135):** placeholder numbers have **no
+  pass/block authority** — a nominal value yields
+  `ASSUMPTION_STRESS_RESULT_ONLY / GATE_AUTHORITY = NONE`; numeric fields
+  reformatted as sweep inputs; engine reports **Simulation Sweep Result
+  (stable/unstable/needs-review/missing-source/supplier-data-required)**,
+  not PASS/BLOCK; PASS/BLOCK reserved for SupplierConfirmed/
+  PhysicallyVerified. Gate 08C = DRAFT_VALIDATION_STARTED / SIMULATION_ONLY
+  / NO_PLACEHOLDER_PASS_BLOCK_AUTHORITY / SUPPLIER_DATA_PENDING /
+  NO_PHYSICAL_TEST_CLEARANCE / NO_COMPLIANCE_CLAIMS.
+- **Correction 2 (RC-136/137, SAFETY-CRITICAL):** the Gate 05 "Ford
+  proprietary CAN DBC via Vehicle Reverse Engineering Group / sniffing"
+  framing corrected to **authorized, listen-only** — ALLOWED: authorized
+  Ford-compatible integration, listen-only capture, public/authorized
+  J1939/OBD-II, upfitter docs, supplier DBC files; **BLOCKED:
+  proprietary-DBC assumptions, anti-theft bypass, fake/spoofed ABS/ESC
+  messages, transmitting onto factory Ford safety buses without
+  approval** (same class as the PATS prohibition). DBC-IDs row →
+  NeedsAuthorizedSource (BQ-25).
+- Gate 05 = STARTED (parallel deep dive). Research Map + queue updated;
+  **next = continue Gate 05 deep dive + Gate 08C sweeps in parallel.**
+- Nothing ingested; nothing Confirmed; no placeholder pass/block; no
+  compliance claim; no live-HV/track testing; no bus spoofing; ODRs
+  untouched.
+
 ## 2026-07-16 — RH batch 32 + review_29: Gate 08B source-backed test-procedure mapping (parked)
 
 - Archived batch_32 (Gate 08B test mapping) and review_29 1:1 (commit

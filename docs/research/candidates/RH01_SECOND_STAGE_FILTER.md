@@ -231,6 +231,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-130 | **ABS/ESC regen wording (owner review_29)**: change "transferring complete slip control to the hydraulic brakes" to **"regen torque is removed or reduced so friction braking and factory ABS/ESC logic are not opposed by drive-axle motor torque"** | batch_32 (FM-07) | n/a — wording | **StatusInflationCorrection** — refines RC-124; do not imply the conversion takes over slip control — lanes L8 |
 | RC-131 | **Water-intrusion IP correction (owner review_29)**: **pressure-decay leak testing ≠ IP67/IP69K certification** — it is a production/engineering leak screen; formal IP validation needs the ISO 20653 test method or a certified lab / supplier IP report | CS (ISO 20653, registered); FM-15 | ISO 20653 — exact method still needed | **ISO 20653 = StrongSourceLane; pressure-decay = ProductionScreenCandidate / NeedsCorrelationToIPTest** — final proof = certified lab IP67/IP69K report — lanes L8 |
 | RC-132 | **Gate 08B status (owner review_29)**: `SOURCE_CANDIDATES_MAPPED` / `NOT_FINAL` / `NEEDS_EXACT_QUOTES` / `NEEDS_PAGE_SECTION_TABLE` / `NEEDS_SUPPLIER_THRESHOLDS` / `NO_LIVE_HV` / `NO_TRACK` / `NO_COMPLIANCE`; **Gate 08C = NOT STARTED**; **08B parked, not closed — move to Gate 05 in parallel** | owner-promoted | n/a — gate status | **GateStatus** — the Hunter's "Gate 08B COMPLETED" rejected; source authority (not workflow) is the gap — lanes L8 |
+| RC-133 | **Placeholder values have NO gate authority (owner review_30, CRITICAL)**: a `NominalEngineeringAssumption` cannot create a PASS/BLOCK — it produces `ASSUMPTION_STRESS_RESULT_ONLY` with `GATE_AUTHORITY = NONE` and `PHYSICAL_TEST_CLEARANCE = BLOCKED`; PASS/BLOCK is reserved for `SupplierConfirmed` / `PhysicallyVerified` values | owner-promoted; batch_33 (the "PASS if ≤ 50 ms" logic) | n/a — gate guardrail | **NoGoConditionCandidate / GateLogic** — the Build Engine may **build** logic from placeholders but never **approve** with them; recorded in `docs/status/DRAFT_VALIDATION_08C.md` — lanes L8/L1 |
+| RC-134 | **Gate 08C sweep vocabulary + parameter format (owner review_30)**: use **Simulation Sweep Result — stable / unstable / needs-review / missing-source / supplier-data-required**, NOT PASS/BLOCK; numeric fields become sweep inputs (Default null + Exploratory values + Status + Allowed/Blocked use + Authority=none + Upgrade Required) | owner-promoted | n/a — engine format | **SweepEngineFormat** — the 15 placeholder numbers are exploratory sweep points, not thresholds; recorded in `DRAFT_VALIDATION_08C.md` — lanes L8 |
+| RC-135 | **Gate 08C status (owner review_30)**: `DRAFT_VALIDATION_STARTED` / `SIMULATION_ONLY` / `PLACEHOLDER_VALUES_ALLOWED_FOR_STRESS_TESTING` / `NO_PLACEHOLDER_PASS_BLOCK_AUTHORITY` / `SUPPLIER_DATA_PENDING` / `NO_PHYSICAL_TEST_CLEARANCE` / `NO_COMPLIANCE_CLAIMS` | owner-promoted | n/a — gate status | **GateStatus** — cannot become FINAL_VALIDATED without supplier data + exact standards + physical tests + engineering signoff — lanes L8 |
+| RC-136 | **Gate 05 authorized-controls doctrine (owner review_30, SAFETY-CRITICAL)**: ALLOWED = authorized Ford-compatible integration, **listen-only** capture, public/authorized J1939/OBD-II, upfitter docs, supplier DBC files; **BLOCKED = proprietary-DBC assumptions, anti-theft bypass, fake/spoofed ABS/ESC messages, transmitting onto factory Ford safety buses without approval** | owner-promoted; batch_33 (corrects the "reverse-engineering group / sniffing" framing) | n/a — security/safety rule | **NoGoConditionCandidate / SecurityFraming** — same class as the standing PATS-bypass prohibition; the DBC-IDs row → **NeedsAuthorizedSource** (BQ-25); recorded in `docs/status/GATE05_CONTROLS.md` — lanes L7/L8 |
+| RC-137 | **Gate 05 candidate network topology + CAN config (batch_33)**: split gateway architecture (Ford chassis/body/comfort CAN → VCU gateway → EV inverter/BMS/aux loops) + a 4-channel capture matrix (wheel-speed, pedal, brake-switch, dashboard, ignition, inverter/BMS telemetry) | batch_33 (Hunter-drafted) | n/a — candidate topology | **ListenOnlyCandidate / NeedsAuthorizedSource** — all Ford-side IDs/rates unverified; **no transmit onto Ford safety buses**; diagnostic slots are for listening, not injecting; recorded in `GATE05_CONTROLS.md` — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -2488,3 +2493,62 @@ stays parked). Gate 05 prompt already queued in `GATE_RESEARCH_QUEUE.md`
   SourceCandidate/NeedsExactQuote/NeedsSupplierData; nothing "Completed."
 - Nothing ingested; nothing marked Confirmed; no compliance claim; no
   live-HV/track testing; ODRs untouched.
+
+---
+
+## 41. Batch 33 + owner review_30 — Gate 08C draft validation + Gate 05 initiation (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_33_gate08c_draft_validation_gate05_init.md`
+and `docs/research/raw/owner_reviews/review_30_batch_33_verdict.md`.
+Row additions: RC-133..RC-137 (no new CS). **Deliverables:
+`docs/status/DRAFT_VALIDATION_08C.md` (Gate 08C sweep engine) and
+`docs/status/GATE05_CONTROLS.md` (Gate 05 authorized-controls).** The
+owner directive: keep building Gate 08C logic with placeholders (the logic
+can be **built** without supplier data; it can only be **approved** with
+it) and start Gate 05 in parallel.
+
+### Correction 1 — placeholders have no gate authority (RC-133/134/135)
+
+The payload's `IF SIM_PARAM_HVIL_DELAY_MS <= 50.0 ms → PASS` made 50 ms
+act like a real boundary. Under the strict rules a nominal value **cannot
+create a PASS/BLOCK** → `ASSUMPTION_STRESS_RESULT_ONLY / GATE_AUTHORITY =
+NONE / PHYSICAL_TEST_CLEARANCE = BLOCKED`. The numeric fields are
+reformatted as **sweep inputs** (Default null + Exploratory values +
+Authority none + Upgrade Required), and the engine reports **Simulation
+Sweep Result (stable / unstable / needs-review / missing-source /
+supplier-data-required)** instead of PASS/BLOCK. PASS/BLOCK is reserved
+for `SupplierConfirmed` / `PhysicallyVerified`. Gate 08C status =
+`DRAFT_VALIDATION_STARTED / SIMULATION_ONLY /
+PLACEHOLDER_VALUES_ALLOWED_FOR_STRESS_TESTING /
+NO_PLACEHOLDER_PASS_BLOCK_AUTHORITY / SUPPLIER_DATA_PENDING /
+NO_PHYSICAL_TEST_CLEARANCE / NO_COMPLIANCE_CLAIMS`.
+
+### Correction 2 — Gate 05 safety framing (RC-136/137)
+
+The batch's ledger row "Ford proprietary CAN DBC arbitration IDs via a
+**Vehicle Reverse Engineering Group** / signal **sniffing**" is a
+security-framing hazard — the same class as the standing PATS-bypass
+prohibition. Corrected to the **authorized, listen-only** lane: authorized
+Ford-compatible integration, listen-only capture, public/authorized
+J1939/OBD-II, upfitter docs, supplier DBC files. **BLOCKED: proprietary-
+DBC assumptions, anti-theft bypass, fake/spoofed ABS/ESC messages,
+transmitting onto factory Ford safety buses without approval.** The DBC-ID
+row → **NeedsAuthorizedSource** (BQ-25). The candidate network topology +
+4-channel matrix are recorded as **ListenOnlyCandidate / NeedsAuthorized
+Source** (no Ford-side ID/rate verified; diagnostic slots are for
+listening, not injecting).
+
+### Gate 05 started (parallel)
+
+Gate 05 = **STARTED / AUTHORIZED_CONTROLS_CAN_DEEP_DIVE**, running in
+parallel with the Gate 08C sweep engine and the parked Gate 08B. Gate 08C
+tells us *what* signals/faults matter; Gate 05 maps *how* they move
+through VCU/BMS/inverter/ABS-ESC/cluster/service tools.
+
+### Standing checks
+
+- No placeholder value has pass/block authority; no compliance/physical
+  clearance from nominal values; Gate 05 stays authorized/listen-only —
+  no bypass, no spoofing factory safety buses.
+- Nothing ingested; nothing marked Confirmed; ODRs untouched.

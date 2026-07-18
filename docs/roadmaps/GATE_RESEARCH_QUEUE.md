@@ -108,11 +108,24 @@ warning logic.
 > - OpenGaps
 > - what supplier data is still required
 
-## Gate 05 — CAN / Controls / Cluster Integration  · STATUS: NEXT — DEEP DIVE (owner review_29)
+## Gate 05 — CAN / Controls / Cluster Integration  · STATUS: STARTED — DEEP DIVE (batch_33)
 
-First pass was batch_25; the **deep dive is the next research target**
-(run in parallel while Gate 08B is parked). Authorized Ford-compatible
-integration only — **NEVER "PATS bypass."** Prompt below (unchanged).
+Deep dive **started** (batch_33) — deliverable `docs/status/GATE05_CONTROLS.md`
+(authorized-controls doctrine + candidate listen-only topology). Runs in
+parallel with the Gate 08C sweep engine and parked Gate 08B. **Authorized
+Ford-compatible, listen-only only — NEVER "PATS bypass"; no spoofing/
+transmitting onto factory Ford safety buses; forum posts LeadOnly; Ford/
+OEM/supplier DBC docs preferred.** Prompt below (unchanged); continue the
+deep dive against authorized sources.
+
+## Gate 08C — Draft Validation  · STATUS: DRAFT_VALIDATION_STARTED — SIMULATION SWEEPS (batch_33)
+
+Draft-validation sweep engine `docs/status/DRAFT_VALIDATION_08C.md` — 15
+placeholder sweep inputs with **no gate authority** (RC-133); reports
+Simulation Sweep Result, not PASS/BLOCK. Cannot become FINAL_VALIDATED
+without supplier data + exact standards + physical tests + engineering
+signoff. Runs in parallel; reopens toward closure as supplier thresholds
+land (upgrades sweep inputs → SupplierConfirmed / PhysicallyVerified).
 
 **Terminology rule (standing):** authorized Ford-compatible controls
 integration, immobilizer-safe architecture, diagnostic compatibility,
