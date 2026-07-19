@@ -373,12 +373,25 @@ injection protected-bench-only (RC-200); driver-safety stays bench-level →
 Gate 05I-A (RC-201). **Gate 05J / live vehicle commissioning explicitly NOT
 YET.**
 
-## Gate 05I-A — Low-Voltage Driver Safety Logic Verification  · STATUS: NEXT (owner review_42)
+## Gate 05I-A — Low-Voltage Driver Safety Logic Verification  · STATUS: BENCH_TEST_MATRIX_CREATED (batch_46)
 
-A **bench-only** driver-safety verification matrix — **not** vehicle road
-testing, **not** live HV, **not** real driver-operation approval.
+Deliverable `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` (13-row
+driver-safety verification matrix + brake-override script + calibration
+record). Status (review_43): `BENCH_TEST_MATRIX_CREATED /
+LOW_VOLTAGE_BENCH_ONLY / DRIVER_INPUT_LOGIC_UNDER_TEST / NO_LIVE_HV /
+NO_VEHICLE_MOTION / NO_LIVE_FORD_CAN_TRANSMISSION /
+TIMING_VALUES_TARGET_PROFILE_ONLY / BENCH_EVIDENCE_PENDING /
+NO_VEHICLE_CLEARANCE`. Owner: "the correct next subgate … very strong."
+Corrections: timing/percentages → BENCH_TARGET_PROFILE / SUPPLIER_DATA_PENDING
+/ CONTROLS_REVIEW_REQUIRED (RC-202, seventh invented-timing recurrence);
+expected-safe-output vs blocked-outputs split (RC-203); no "immediate" —
+measured latency within a configured window (RC-204); HVIL — VCU requests,
+BMS/PDU/hardwired loop owns isolation (RC-205); UDS service-clear must not
+clear active hardwired/HVIL/E-stop/BMS/isolation faults or a live latch
+(RC-206); `PERMANENTLY_BLOCKED` → `HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW`
+(RC-207); script returns BENCH categories not HIL (RC-197).
 
-**Owner prompt (verbatim):**
+**Owner prompt was (verbatim, now fulfilled):**
 
 > Begin Gate 05I-A: Low-Voltage Driver Safety Logic Verification.
 >
@@ -423,12 +436,42 @@ testing, **not** live HV, **not** real driver-operation approval.
 > - Bench evidence only.
 
 Enforce throughout — BENCH result categories not HIL (RC-197); E-stop
-measured not "instant" (RC-198); CAN_1 protected-bench-only + listen-only
-(RC-200); no timeout/threshold gains authority until proven (RC-173/179/180/
-188); the VCU coordinates but owns nothing safety-critical (BQ-27); D-007 +
-RC-168 bind. Blocked: real propulsion, live HV, wheels-on-ground, Ford
-ABS/ESC intervention, factory-cluster injection, road-test driver-safety
-claims (RC-201).
+measured not "instant" (RC-198/204); CAN_1 protected-bench-only + listen-only
+(RC-200); no timeout/threshold/percentage gains authority until proven
+(RC-173/179/180/188/202); the VCU coordinates but owns nothing
+safety-critical (BQ-27); D-007 + RC-168 bind. Blocked: real propulsion, live
+HV, wheels-on-ground, Ford ABS/ESC intervention, factory-cluster injection,
+road-test driver-safety claims (RC-201).
+
+## Gate 05I-B — Mechanical Interlocks & Physical Safety Loop Verification  · STATUS: NEXT (owner review_43)
+
+Bench-only physical safety-loop verification — the mechanical / hardwired
+counterpart to Gate 05I-A's logic verification.
+
+**Owner scope (review_43) — cover:**
+
+> - E-stop circuit
+> - HVIL connectors
+> - service disconnect state
+> - charge-port interlock
+> - contactor simulator coil path
+> - safety relay dropout
+> - fuse / power distribution behavior
+> - low-voltage harness strain relief
+> - connector keying
+> - ground continuity
+> - shield continuity
+> - bench lockout/tagout verification
+
+Enforce throughout — bench-only; no live HV, no vehicle motion, no Ford
+factory-bus transmission; E-stop / relay / coil timing measured not "instant"
+against schematic + datasheets (RC-198/204); CAN_1 protected-bench-only +
+listen-only (RC-200); the VCU requests but does not own HV isolation — the
+BMS/PDU/hardwired safety loop owns it (RC-205; BQ-27); no bench
+timing/percentage becomes a rule until controls review + supplier
+confirmation upgrades it (RC-202); BENCH result categories +
+HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW (RC-197/207). **Gate 05J / live
+vehicle commissioning is NOT YET.**
 
 Enforce throughout — every proof bench/HIL, no vehicle, no live-HV without a
 staged safety plan + LOTO/PPE (RC-117); no timeout/threshold/HIL timing

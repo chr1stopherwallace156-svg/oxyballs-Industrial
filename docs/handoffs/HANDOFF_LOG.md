@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 45 + review_42 — Gate 05I Physical Bench Integration)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 45 + review_42); awaiting the Gate 05I-A Low-Voltage Driver Safety Logic Verification batch or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `ca466ac` (batch-45 archive); end commit: `023dbb6` (batch-45 reconciliation)
+- Work: new `GATE05I_BENCH_INTEGRATION.md`. RC-197..201 (no new CS). Section 53. Gate 05I = production-like LV bench integration; three RESTRICTED constraints (HV traction battery forbidden + isolated, no vehicle road test, no live Ford-bus transmission). Corrections: BENCH (not HIL) result categories (RC-197); E-stop measured not "instant" (RC-198); production-intent harness (RC-199); CAN_1 fault injection protected-bench-only (RC-200); driver-safety stays bench-level → sub-gate Gate 05I-A (RC-201). Gate 05J / live vehicle commissioning explicitly NOT YET. Note: owner framing listed the three restricted items without leading "no" — applied the established forbidden intent per review_41 + payload RESTRICTED lines. Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (invented-timing RC-116/133/169/174/180/188 — five+ artifacts); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/HV-shutdown ownership.
+
 ## 2026-07-16 — Claude Code — task complete (batch 44 + review_41 — Gate 05H v3 physical HIL/bench evidence)
 
 ### (archived handoff)

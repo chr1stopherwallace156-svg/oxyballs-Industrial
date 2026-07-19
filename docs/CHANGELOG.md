@@ -5,6 +5,40 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 46 + review_43: Gate 05I-A Low-Voltage Driver Safety Logic Verification
+
+- Archived batch_46 (Gate 05I-A) and review_43 1:1 (commit `09d1c55`). New
+  rows RC-202..207 (no new CS). Section 54. New deliverable
+  `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` (13-row driver-safety
+  verification matrix + brake-override script + calibration record). Owner:
+  "the correct next subgate … very strong."
+- **Recurrence caught — invented timing/percentages, seventh artifact
+  (RC-202):** the batch embedded >10% / >25% / >5% APPS thresholds,
+  13.5→8.5 V / ≥20 V/ms, and 50/15/10 ms timings as rules — same defect
+  family as RC-116/133/169/174/180/188. Downgraded to `BENCH_TARGET_PROFILE
+  / SUPPLIER_DATA_PENDING / CONTROLS_REVIEW_REQUIRED`; script window made
+  configurable. The invented-timing family has now recurred across seven
+  artifacts — the strongest standing case for the M10 regression scanner.
+- Other corrections: expected-safe-output vs blocked-outputs split — a
+  torque-zero response is the safe output, not a "blocked output" (tests
+  001/002/004/007/008/010) (RC-203); no "immediate" — zero-torque within a
+  configured window, measured latency (RC-204); HVIL ownership — VCU
+  requests, BMS/PDU/hardwired loop owns isolation execution (RC-205);
+  service-clear may clear software records only, never active
+  hardwired/HVIL/E-stop/BMS/isolation faults or a live latch, and requires
+  safe/neutral + technician authorization + fault source reviewed (RC-206);
+  `PERMANENTLY_BLOCKED` → `HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW` +
+  root-cause / corrective-action / re-test / signoff / versioned record
+  (RC-207); script returns BENCH categories not HIL/PASS (RC-197).
+- Gate 05I-A status = `BENCH_TEST_MATRIX_CREATED / LOW_VOLTAGE_BENCH_ONLY /
+  DRIVER_INPUT_LOGIC_UNDER_TEST / NO_LIVE_HV / NO_VEHICLE_MOTION /
+  NO_LIVE_FORD_CAN_TRANSMISSION / TIMING_VALUES_TARGET_PROFILE_ONLY /
+  BENCH_EVIDENCE_PENDING / NO_VEHICLE_CLEARANCE`.
+- Nothing ingested; nothing marked Confirmed; scripts are pseudocode not
+  production code; the VCU requests but does not own HV isolation; Gate 05J
+  NOT YET; ODRs untouched. Next = Gate 05I-B (Mechanical Interlocks &
+  Physical Safety Loop Verification).
+
 ## 2026-07-16 — RH batch 45 + review_42: Gate 05I Physical Bench Integration
 
 - Archived batch_45 (Gate 05I) and review_42 1:1 (commit `ca466ac`). New

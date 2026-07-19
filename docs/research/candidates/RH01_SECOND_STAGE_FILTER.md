@@ -300,6 +300,12 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-199 | **Production-intent harness, not production-spec (owner review_42)**: "final production-spec wiring harness" is too final → **"production-intent bench harness"**, `Harness Status: PRODUCTION_INTENT / NOT_RELEASED_FOR_VEHICLE_INSTALL` (upgrades to "production-released" only later) | batch_45 (over-final label) | n/a — status rule | **ControlsSafety / GateStatus** — recorded in `docs/status/GATE05I_BENCH_INTEGRATION.md` — lanes L7 |
 | RC-200 | **CAN_1 fault injection is protected-bench-only (owner review_42, hard rule)**: CAN_1 stuck-dominant/stuck-TXD fault injection is permitted **only on a protected bench harness or simulated OEM network**; **forbidden on a live Ford vehicle network** | batch_45 (unsafe-if-on-live-bus) | n/a — test boundary rule | **ControlsSafety** — recorded in `docs/status/GATE05I_BENCH_INTEGRATION.md` (extends RC-182/187/192) — lanes L7 |
 | RC-201 | **Driver-safety verification stays bench-level (owner review_42)**: Gate 05I driver-safety work opens as sub-gate **Gate 05I-A — Low-Voltage Driver Safety Logic Verification** (not real driver-safety approval) — allowed bench tests (accel/brake plausibility, brake override, shift-state inhibit, charger-plug drive lockout, E-stop response, HVIL open detection, BMS no-discharge, inverter fault response, LV brownout, fault-latch persistence, service-clear routine, EV-display warning, CAN_1 listen-only maintained); **blocked: real propulsion, live HV, wheels-on-ground movement, Ford ABS/ESC intervention, factory-cluster injection, road-test driver-safety claims** | owner-promoted | n/a — gate-scope rule | **GateStatus / ControlsSafety** — recorded in `docs/status/GATE05I_BENCH_INTEGRATION.md`; scoped in `GATE_RESEARCH_QUEUE.md` — lanes L7 |
+| RC-202 | **Gate 05I-A timing/percentages are bench-target profiles (owner review_43, sixth+ recurrence of the invented-timing family — cf. RC-116/133/169/174/180/188)**: the batch's >10% APPS skew, >25% accel, >5% APPS, 13.5→8.5 V, ≥20 V/ms, 50 ms APPS-fault, 50 ms brake-override window, 15 ms coil delay, 10 ms relay drop-out must be labeled **`BENCH_TARGET_PROFILE / SUPPLIER_DATA_PENDING / CONTROLS_REVIEW_REQUIRED / NO_VEHICLE_AUTHORITY`** — configurable sweep, initial bench target only, **final threshold pending controls-engineer review + APPS source verification + supplier documentation**; the brake-override script window must be configurable (`bench.get_config(...)`) | batch_46 (invented timing/percentages) | n/a — parameter rule | **NeedsSupplierData / NoGateAuthority** — recorded in `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` — lanes L7/L8 |
+| RC-203 | **Expected-safe-output vs blocked-outputs (owner review_43)**: the batch put the safe response ("CAN_2 torque payload set to 0x0000") in the **Blocked Outputs** column — a torque-zero response is the **expected safe output**, not a blocked output → split into **Expected Safe Output** (torque → zero) vs **Blocked Outputs** (non-zero torque request, CAN_1 transmit activity, factory-cluster injection, auto-clear of active fault) for tests 001/002/004/007/008/010 | batch_46 (mislabeled column) | n/a — schema rule | **GateLogic / ControlsSafety** — recorded in `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` — lanes L7 |
+| RC-204 | **No "immediate" for the driver-safety responses (owner review_43)**: "command immediate zero-torque state" → **"command zero-torque state within the configured bench target window; final timing pending controls review + supplier/HIL/bench evidence"** (measured latency, not "instant"); applies to brake override, E-stop, and charger-plug lockout | batch_46 (unsafe timing word) | n/a — controls-safety rule | **ControlsSafety / NeedsSupplierData** — recorded in `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` (extends RC-175/198) — lanes L7/L8 |
+| RC-205 | **HVIL row ownership cleanup (owner review_43)**: "VCU commands open sequence to control lines" → **"VCU requests shutdown / torque inhibit / fault latch; the BMS/PDU/hardwired safety loop owns physical contactor or isolation execution"** — keeps the VCU from owning HV isolation | batch_46 (VCU over-ownership) | n/a — controls-safety rule | **ControlsSafety** — recorded in `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` (extends D-007; links BQ-27) — lanes L7 |
+| RC-206 | **Service-clear stricter rule (owner review_43)**: a UDS Clear (0x14) may clear **software diagnostic records only** — it **must not clear active hardwired faults, active HVIL faults, active E-stop, BMS no-discharge, isolation fault, or an unresolved safety latch**; service clear requires **no active fault input + zero torque command + charger disconnected + safe/neutral state + technician authorization + fault source reviewed**; a diagnostic command alone must not restore drive readiness | batch_46 (over-permissive clear) | n/a — controls-safety rule | **NoGoConditionCandidate / ControlsSafety** — recorded in `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` — lanes L7/L8 |
+| RC-207 | **Failsafe block should be reviewable, not permanent (owner review_43)**: `VEHICLE_COMMISSIONING_APPROVAL = "PERMANENTLY_BLOCKED"` is too permanent → **`HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW`** + `SAFETY_CONFLATION_HALT`, then require **root-cause analysis + corrective action + repeat bench test + engineering signoff + versioned record** | batch_46 (over-permanent block) | n/a — process rule | **GateLogic / ControlsSafety** — recorded in `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -3413,5 +3419,76 @@ list + hard rules). Queued in `GATE_RESEARCH_QUEUE.md`.
   vehicle road testing; no live Ford-bus transmission; CAN_1 listen-only
   (protected/simulated fault injection only); non-destructive fault
   injection; no vehicle clearance; pending engineering review.
+- Nothing ingested; nothing marked Confirmed; scripts are illustrative
+  pseudocode, not production code; Gate 05J NOT YET; ODRs untouched.
+
+---
+
+## 54. Batch 46 + owner review_43 — Gate 05I-A Low-Voltage Driver Safety Logic Verification (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_46_gate05ia_driver_safety_logic.md`
+and `docs/research/raw/owner_reviews/review_43_batch_46_verdict.md`.
+Row additions: RC-202..RC-207 (no new CS). Deliverable:
+`docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` (13-row driver-safety
+verification matrix + brake-override script + calibration record). Owner:
+"the correct next subgate … very strong."
+
+### Scope kept (owner: "a serious bench safety-logic package")
+
+The three CRITICAL_RESTRICTIONs (zero vehicle motion, zero live HV, zero
+road-test approval) + the 13 driver-safety logic checks (APPS plausibility,
+brake override, shift inhibit, charger-plug drive lockout, E-stop, HVIL
+open, BMS no-discharge, inverter fault, LV brownout, fault-latch
+persistence, service clear, isolated EV warning display, CAN_1 listen-only).
+
+### Recurrence caught — invented timing/percentages, sixth+ artifact (RC-202)
+
+The batch embedded >10% / >25% / >5% APPS thresholds, 13.5→8.5 V / ≥20 V/ms,
+and 50/15/10 ms timings as if they were rules — same defect family as
+RC-116/133/169/174/180/188. Downgraded to `BENCH_TARGET_PROFILE /
+SUPPLIER_DATA_PENDING / CONTROLS_REVIEW_REQUIRED`; script window made
+configurable. **The invented-timing family has now recurred across seven
+artifacts — the strongest standing case for the M10 regression scanner.**
+
+### Other corrections
+
+- **Expected-safe-output vs blocked-outputs (RC-203):** a torque-zero
+  response is the safe output, not a "blocked output" (tests 001/002/004/
+  007/008/010).
+- **No "immediate" (RC-204):** zero-torque within the configured window;
+  measured latency (brake override, E-stop, charger lockout).
+- **HVIL ownership (RC-205):** VCU requests; BMS/PDU/hardwired loop owns
+  isolation execution.
+- **Service-clear rule (RC-206):** software records only; never active
+  hardwired/HVIL/E-stop/BMS/isolation faults or a live latch; requires
+  safe/neutral + technician authorization + fault source reviewed.
+- **Reviewable block, not permanent (RC-207):**
+  `HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW` + root-cause / corrective-action /
+  re-test / signoff / versioned record.
+- Script returns BENCH categories (RC-197), never HIL/PASS.
+
+### Gate 05I-A status (owner review_43)
+
+`BENCH_TEST_MATRIX_CREATED` / `LOW_VOLTAGE_BENCH_ONLY` /
+`DRIVER_INPUT_LOGIC_UNDER_TEST` / `NO_LIVE_HV` / `NO_VEHICLE_MOTION` /
+`NO_LIVE_FORD_CAN_TRANSMISSION` / `TIMING_VALUES_TARGET_PROFILE_ONLY` /
+`BENCH_EVIDENCE_PENDING` / `NO_VEHICLE_CLEARANCE`.
+
+### Next
+
+Owner: **Gate 05I-B — Mechanical Interlocks & Physical Safety Loop
+Verification** (E-stop circuit, HVIL connectors, service-disconnect state,
+charge-port interlock, contactor-simulator coil path, safety-relay dropout,
+fuse/power-distribution, LV harness strain relief, connector keying, ground
+continuity, shield continuity, bench LOTO verification). Queued in
+`GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- Low-voltage bench only; no live HV; no vehicle motion; no live Ford-bus
+  transmission; CAN_1 listen-only; the VCU requests but does not own HV
+  isolation (BQ-27); no bench timing/percentage becomes a rule until
+  controls review + supplier confirmation upgrades it.
 - Nothing ingested; nothing marked Confirmed; scripts are illustrative
   pseudocode, not production code; Gate 05J NOT YET; ODRs untouched.

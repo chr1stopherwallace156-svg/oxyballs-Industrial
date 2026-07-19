@@ -371,31 +371,29 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_42):** **Gate 05I-A — Low-Voltage
-Driver Safety Logic Verification** — a **bench-only** driver-safety
-verification matrix (13 tests: accel-pedal plausibility, brake override,
-shift-state inhibit, charger-plug drive lockout, E-stop hardwired interrupt,
-HVIL open detection, BMS no-discharge, inverter fault response, LV brownout,
-fault-latch persistence, service-clear routine, EV-display warning, CAN_1
-listen-only maintained), each with test ID / function / bench setup /
-fault-input / expected VCU + hardwired behaviour / blocked outputs /
-measurement method / proof artifact / result category / authority status /
-Build Engine status. **Not** vehicle road testing, **not** live HV, **not**
-real driver-operation approval; blocked outputs = real propulsion, live HV,
-wheels-on-ground, Ford ABS/ESC intervention, factory-cluster injection,
-road-test claims (RC-201). Gate 05I (Physical LV Bench Integration,
-`GATE05I_BENCH_INTEGRATION.md`) is `LOW_VOLTAGE_BENCH_INTEGRATION_STARTED` —
-HV traction battery forbidden + isolated, no vehicle road test, no live
-Ford-bus transmission; BENCH (not HIL) result categories (RC-197); E-stop
-measured not "instant" (RC-198); production-intent harness (RC-199); CAN_1
-fault injection protected-bench-only (RC-200). **Gate 05J / live vehicle
-commissioning explicitly NOT YET.** Keep the ownership discipline — the VCU
-**coordinates** but owns nothing safety-critical (contactors / pre-charge /
-HV shutdown / torque authority) until the BMS/PDU supplier architecture
-proves it (BQ-27); CAN_1 stays listen-only; EV-side outputs stay isolated;
-**NEVER "PATS bypass"; no factory-cluster injection; no invented
-thresholds/timeouts as gate logic (RC-173/179/180/188); bench evidence
-only.** Verbatim scope in
+**Next expected batch (owner review_43):** **Gate 05I-B — Mechanical
+Interlocks & Physical Safety Loop Verification** — the bench-only mechanical
+/ hardwired counterpart to Gate 05I-A's logic verification: E-stop circuit,
+HVIL connectors, service-disconnect state, charge-port interlock,
+contactor-simulator coil path, safety-relay dropout, fuse/power-distribution,
+LV harness strain relief, connector keying, ground continuity, shield
+continuity, bench lockout/tagout verification. Bench-only; no live HV, no
+vehicle motion, no Ford factory-bus transmission; E-stop / relay / coil
+timing measured not "instant" against schematic + datasheets (RC-198/204);
+the VCU requests but does not own HV isolation — BMS/PDU/hardwired safety
+loop owns it (RC-205; BQ-27). Gate 05I-A (Driver Safety Logic,
+`GATE05I_A_DRIVER_SAFETY_LOGIC.md`) is `BENCH_TEST_MATRIX_CREATED` — 13-test
+matrix; timing/percentages are BENCH_TARGET_PROFILE (RC-202);
+expected-safe-output vs blocked-outputs split (RC-203); service-clear must
+not clear active safety faults (RC-206); HARD_BLOCKED_PENDING_ROOT_CAUSE_
+REVIEW not permanent (RC-207). **Gate 05J / live vehicle commissioning
+explicitly NOT YET.** Keep the ownership discipline — the VCU **coordinates**
+but owns nothing safety-critical (contactors / pre-charge / HV shutdown /
+torque authority) until the BMS/PDU supplier architecture proves it (BQ-27);
+CAN_1 stays listen-only; EV-side outputs stay isolated; **NEVER "PATS
+bypass"; no factory-cluster injection; no invented
+thresholds/timeouts/percentages as gate logic (RC-173/179/180/188/202);
+bench evidence only.** Verbatim scope in
 [`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); permanent
 doctrine D-007: **Coordinator ≠ Owner**. **Gate 08C is parked**; Gate 07
 artifacts + the 15-mode FMEA registry stay open. Order after 05: Gate 06
