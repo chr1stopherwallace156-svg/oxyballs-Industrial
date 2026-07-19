@@ -5,6 +5,45 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 49 + review_46: Gate 05I-C full comms + sleep/wake matrix ("48:75 B follow-up")
+
+- Archived batch_49 (Gate 05I-C full matrix) and review_46 1:1 (commit
+  `bffed4d`). New rows RC-215..219 (no new CS). Section 57. Deliverable
+  updated: `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md`. Delivered as the
+  "48:75 B follow-up" — realizes the queued 05I-C1 (Communication Network
+  Integrity) + 05I-C2 (Sleep/Wake). Owner: "exactly the right next gate …
+  the real hidden-failure layer."
+- 8-row verification matrix (CAN_1 silent mode, bus loading & error
+  integrity, DBC schema/scale mismatch, wrong-ID/corrupted-packet rejection,
+  loss-of-heartbeat timeout, diagnostic/UDS sessions, sleep/wake & quiescent
+  current, network-induced wakeup) + stress profiles (120 Ω 1% termination,
+  twisted-shielded 110 turns/m, ≥10 m harness, 0-30/30-75/75-90% bus stress)
+  + DBC version control + sleep/wake transition. Expected-Safe-Output vs
+  Blocked-Outputs columns throughout.
+- **Recurrence caught — invented values, tenth artifact (RC-215):** all the
+  timings/percentages/currents (>15 ms, 100 ms, 50 ms, ≤2.0 s, ≤1.0 mA,
+  ≤200 ms, 75-90%, 10 m, 110 turns/m, >4.5 V, >150 °C) labeled
+  `BENCH_TARGET_PROFILE`; sleep current split per-node + total-system; IF
+  logic made variable (`approved_latency_limit_ms` / `approved_bus_load_
+  target`).
+- Other corrections: CAN_1 ACK proof via the VCU TXD/transceiver path, not
+  just decoded bus logs — other sim OEM nodes may ACK, the VCU must not
+  (RC-216); frame-fault layering — bad CRC/DLC are controller-level,
+  wrong-ID/source/DBC/counter/checksum/out-of-range are app-level (RC-217);
+  DBC version hash stored in the Build Engine + declared by firmware +
+  logged by the bench, mismatch = BENCH_HARD_BLOCK_PENDING_REVIEW (RC-218);
+  CAN_1 bench interface simulated OEM / protected bench only, no live Ford
+  network during 05I-C (RC-219).
+- Gate 05I-C status = `NETWORK_INTEGRITY_MATRIX_CREATED /
+  SLEEP_WAKE_VALIDATION_INCLUDED / LOW_VOLTAGE_BENCH_ONLY /
+  CAN_1_LISTEN_ONLY_PROOF_REQUIRED / DBC_VERSION_CONTROL_REQUIRED /
+  HEARTBEAT_TARGETS_PENDING_SOURCE_REVIEW /
+  SLEEP_CURRENT_TARGETS_PENDING_SOURCE_REVIEW / NO_LIVE_HV /
+  NO_VEHICLE_MOTION / NO_LIVE_FORD_CAN_TRANSMISSION / NO_VEHICLE_CLEARANCE`.
+- Nothing ingested; nothing marked Confirmed; scripts are pseudocode not
+  production code; Gate 05J NOT YET; ODRs untouched. Next = Gate 05I-D
+  (Low-Voltage End-to-End Bench Run / Integrated Fault Sequence).
+
 ## 2026-07-16 — RH batch 48 + review_45: Gate 05I-A (final baseline) + 05I-B (refined) + 05I-C (Comms, split C1/C2)
 
 - Archived batch_48 and review_45 1:1 (commit `dfbf49e`). New rows

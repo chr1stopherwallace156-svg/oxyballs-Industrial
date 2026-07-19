@@ -476,36 +476,51 @@ out-of-range / unexpected-diagnostic-request (RC-213). Split into 05I-C1 +
 05I-C2 (RC-214). (05I-A + 05I-B also gained the Expected-Safe-Output vs
 Blocked-Outputs column split, RC-203/208 realized.)
 
-## Gate 05I-C1 — Communication Network Integrity  · STATUS: NEXT (owner review_45)
+## Gate 05I-C1 / 05I-C2 — Communication Network Integrity + Sleep/Wake  · STATUS: NETWORK_INTEGRITY_MATRIX_CREATED (batch_49)
 
-Bench-only per-signal comm-integrity matrix.
+Deliverable `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (8-row comms +
+sleep/wake matrix, stress profiles, DBC version control). Status (review_46):
+`NETWORK_INTEGRITY_MATRIX_CREATED / SLEEP_WAKE_VALIDATION_INCLUDED /
+LOW_VOLTAGE_BENCH_ONLY / CAN_1_LISTEN_ONLY_PROOF_REQUIRED /
+DBC_VERSION_CONTROL_REQUIRED / HEARTBEAT_TARGETS_PENDING_SOURCE_REVIEW /
+SLEEP_CURRENT_TARGETS_PENDING_SOURCE_REVIEW / NO_LIVE_HV / NO_VEHICLE_MOTION /
+NO_LIVE_FORD_CAN_TRANSMISSION / NO_VEHICLE_CLEARANCE`. Owner: "exactly the
+right next gate … the real hidden-failure layer." Corrections: values are
+BENCH_TARGET_PROFILE + sleep current per-node/total-system + IF logic
+variables (RC-215); CAN_1 ACK proof via the VCU TXD path (RC-216); frame-fault
+layering — controller-level bad-CRC/DLC vs app-level wrong-ID/DBC/counter
+(RC-217); DBC version hash stored/declared/logged, mismatch =
+BENCH_HARD_BLOCK_PENDING_REVIEW (RC-218); CAN_1 bench interface simulated OEM
+/ protected only, no live Ford network (RC-219).
 
-**Owner scope (review_45) — verify:**
+## Gate 05I-D — Low-Voltage End-to-End Bench Run / Integrated Fault Sequence  · STATUS: NEXT (owner review_46)
 
-> - CAN_2 VCU ↔ inverter logic board
-> - CAN_3 VCU ↔ BMS/PDU logic board
-> - display node
-> - diagnostic tool / UDS
-> - DBC version matching
-> - heartbeat loss (configured target window; final timeout pending source review)
-> - wrong arbitration ID / wrong PGN-source address / wrong DBC version rejection
-> - bad checksum / rolling-counter mismatch / out-of-range signal-scaling / unexpected-diagnostic-request rejection
-> - high bus-load stress (>75% utilization target)
-> - CAN_1 no-leakage proof (TXD-line)
+Test everything together as a **combined sequence** (not isolated tests) —
+the integration counterpart after 05I-A (logic), 05I-B (mechanical), 05I-C
+(comms/sleep-wake).
 
-Then **Gate 05I-C2 — Sleep / Wake / Parasitic Drain** (key-off sleep entry,
-charger-plug/service-tool/fault-event wake, BMS/PDU + inverter + display
-sleep behaviour, stuck-awake detection, brownout recovery, total
-sleep-current measurement, no unauthorized CAN_1 wake/transmit).
+**Owner scope (review_46) — run as one sequence:**
+
+> - driver input
+> - brake override
+> - E-stop
+> - HVIL open
+> - BMS no-discharge
+> - inverter fault
+> - CAN heartbeat loss
+> - display warning
+> - diagnostic lockout
+> - sleep/wake recovery
+> - CAN_1 silence
 
 Enforce throughout — bench-only; no live HV, no vehicle motion, no Ford
-factory-bus transmission; CAN_1 stays listen-only with the TXD-line proof
-(RC-186/200), **no leakage during any comm test**; the VCU requests but does
-not own HV isolation (RC-205; BQ-27); no timing/threshold/bus-load number
-becomes a rule until controls review + supplier/DBC confirmation upgrades it
-(RC-202/208/212); a DBC is a database not a packet (RC-213); BENCH result
-categories + HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW (RC-197/207/209). **Gate
-05J / live vehicle commissioning is NOT YET.**
+factory-bus transmission; CAN_1 stays listen-only with the TXD-line proof +
+no leakage (RC-186/216/219); the VCU requests but does not own HV isolation
+(RC-205; BQ-27); no timing/threshold/bus-load/current becomes a rule until
+controls review + supplier/DBC confirmation upgrades it (RC-202/208/212/215);
+a DBC is a database not a packet + version-hash enforced (RC-213/218); BENCH
+result categories + HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW (RC-197/207/209).
+**Gate 05J / live vehicle commissioning is NOT YET.**
 
 Enforce throughout — every proof bench/HIL, no vehicle, no live-HV without a
 staged safety plan + LOTO/PPE (RC-117); no timeout/threshold/HIL timing

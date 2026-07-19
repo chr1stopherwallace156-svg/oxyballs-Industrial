@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 48 + review_45 — Gate 05I-A final + 05I-B refined + 05I-C comms split C1/C2)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 48 + review_45); awaiting the Gate 05I-C1 Communication Network Integrity batch or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `dfbf49e` (batch-48 archive); end commit: `b503972` (batch-48 reconciliation)
+- Work: new `GATE05I_C_COMMS_SLEEP_WAKE.md` (05I-C1 + 05I-C2); updated 05I-A (+FINAL_BASELINE_MATRIX_CREATED) + 05I-B. RC-210..214 (no new CS). Section 56. Blocked-outputs column split finally landed (RC-203/208 realized). Recurrences: "immediate" wording (RC-211); hard values (RC-212, ninth artifact) incl. new >75% bus-util + >100 ms heartbeat → BENCH_TARGET_PROFILE. Corrections: intro over-claim (RC-210); DBC is a database not a packet (RC-213); split C1/C2 (RC-214). Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (invented-values RC-116/133/169/174/180/188/202/208/212 — nine artifacts + "immediate" pattern RC-175/198/204/211); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/HV-shutdown ownership.
+
 ## 2026-07-16 — Claude Code — task complete (batch 47 + review_44 — Gate 05I-A revised + Gate 05I-B Mechanical Interlocks)
 
 ### (archived handoff)

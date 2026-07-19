@@ -313,6 +313,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-212 | **Hard values STILL act like rules (owner review_45, RECURRENCE of RC-202/208 — ninth artifact — + new values)**: >10% APPS, >25% accel, >5% shift, 13.5→8.5 V, ≥20 V/ms, 50 ms, <0.1 Ω, <0.02 Ω, ≤20 ms, plus **>75% bus utilization** + **>100 ms heartbeat timeout** = `BENCH_TARGET_PROFILE / SUPPLIER_DATA_PENDING / ENGINEERING_REVIEW_REQUIRED / NO_VEHICLE_AUTHORITY`; breach limits are variables (`approved_ground_limit` / `approved_datasheet_limit` / `approved_heartbeat_window`), not hard-coded constants | batch_48 (invented values, recurrence) | n/a — parameter rule | **NeedsSupplierData / NoGateAuthority** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (extends RC-202/208/209) — lanes L7/L8 |
 | RC-213 | **DBC terminology + rejection set (owner review_45)**: "wrong-DTC, wrong-ID, or corrupted DBC packet rejection" is wrong — **a DBC is a database/map that explains how to decode packets, not a packet** → verify rejection of **wrong arbitration ID / wrong PGN-source address / wrong DBC version / bad checksum / rolling-counter mismatch / out-of-range signal scaling / unexpected diagnostic request**; heartbeat line → "VCU torque command transitions toward zero after a configured heartbeat-loss target window; final timeout pending supplier docs + controls review + bench evidence" | batch_48 (terminology error) | n/a — controls rule | **GateLogic / ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` — lanes L7 |
 | RC-214 | **Gate 05I-C must include sleep/wake (owner review_45)**: split into **Gate 05I-C1 — Communication Network Integrity** (CAN_2/CAN_3, display, diagnostic/UDS, DBC version matching, heartbeat loss, wrong-ID rejection, checksum/rolling-counter rejection, high bus-load stress, CAN_1 no-leakage proof) + **Gate 05I-C2 — Sleep/Wake/Parasitic Drain** (key-off sleep entry, charger-plug/service-tool/fault-event wake, BMS/PDU + inverter + display sleep behaviour, stuck-awake detection, brownout recovery, total sleep-current measurement, no unauthorized CAN_1 wake/transmit) | owner-promoted | n/a — gate-scope rule | **GateStatus / ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md`; scoped in `GATE_RESEARCH_QUEUE.md` — lanes L7 |
+| RC-215 | **Gate 05I-C values are bench-target profiles (owner review_46, RECURRENCE of RC-212 — tenth artifact)**: >15 ms latency, >100 ms heartbeat, 50 ms UDS, ≤2.0 s sleep transition, ≤1.0 mA sleep current, ≤200 ms wakeup, 75-90% bus load, 10 m harness, 110 turns/m, V_cell >4.5 V, Temp >150 °C = `BENCH_TARGET_PROFILE / SUPPLIER_DATA_PENDING / CONTROLS_REVIEW_REQUIRED / NO_VEHICLE_AUTHORITY` (heartbeat: "initial bench target 100 ms; final timeout pending supplier docs + controls review + bench evidence"); **sleep current is per-node + total-system** (`VCU_/BMS_logic_/Inverter_logic_/Display_/Total_system_sleep_current_target` — ≤1.0 mA may be too aggressive for the whole system; final limits require supplier datasheets + parasitic-drain budget); the isolation IF logic uses `approved_latency_limit_ms` / `approved_bus_load_target` variables, not hard-coded 15.0/75.0 | batch_49 (invented values, recurrence) | n/a — parameter rule | **NeedsSupplierData / NoGateAuthority** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (extends RC-202/208/212) — lanes L7/L8 |
+| RC-216 | **CAN_1 ACK proof must probe the VCU TXD path (owner review_46)**: "zero ACK bits" is imprecise (CAN ACK is a shared bus slot) → **"the VCU CAN_1 shall not transmit frames, assert TXD dominant, participate in ACK, or emit active error frames; ACK behaviour must be verified by probing the VCU TXD / transceiver path, not only by decoded bus logs"** — other simulated OEM nodes may ACK; the point is that the VCU does not | batch_49 (imprecise ACK proof) | n/a — proof rule | **ProofRequirement / ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (extends RC-186) — lanes L7 |
+| RC-217 | **Frame-fault layering — controller vs application (owner review_46)**: **physical/protocol faults** (bad CRC, bit-stuffing error, bus error, DLC mismatch) are expected to be rejected by the **CAN controller hardware before application parsing**; **application/data faults** (wrong ID, wrong source address, wrong DBC version, bad alive counter, bad app checksum, out-of-range decoded values) are **application-layer validation tests** — do not conflate the two | batch_49 (layering conflation) | n/a — controls rule | **GateLogic / ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` — lanes L7 |
+| RC-218 | **DBC version hash/checksum required (owner review_46)**: the DBC version hash/checksum must be **stored in the Build Engine**; the **VCU firmware build declares its expected DBC version**; the **bench run logs the actual DBC version** used by the test tools; a **mismatch = `BENCH_HARD_BLOCK_PENDING_REVIEW`** — prevents the classic silent-nonsense-decode when the inverter/BMS DBC changes | owner-promoted | n/a — proof rule | **ProofRequirement / ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (extends RC-213) — lanes L7 |
+| RC-219 | **CAN_1 bench interface is simulated/protected only (owner review_46)**: the topography diagram's "Production CAN_1" must not imply a real Ford-bus connection → **"CAN_1 bench interface uses simulated OEM traffic or a protected bench harness only; no live Ford vehicle network connection is allowed during 05I-C"** | batch_49 (ambiguous diagram language) | n/a — test boundary rule | **ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (extends RC-182/187/192/200) — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -3636,5 +3641,70 @@ Sleep/Wake/Parasitic Drain). Queued in `GATE_RESEARCH_QUEUE.md`.
   is a database not a packet; no bench value becomes a rule until controls
   review + supplier/DBC confirmation upgrades it; the VCU requests but does
   not own HV isolation (BQ-27).
+- Nothing ingested; nothing marked Confirmed; scripts are illustrative
+  pseudocode, not production code; Gate 05J NOT YET; ODRs untouched.
+
+---
+
+## 57. Batch 49 + owner review_46 — Gate 05I-C full comms + sleep/wake matrix ("48:75 B follow-up") (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_49_gate05ic_comms_matrix.md`
+and `docs/research/raw/owner_reviews/review_46_batch_49_verdict.md`.
+Row additions: RC-215..RC-219 (no new CS). Deliverable updated:
+`docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md`. Delivered as the "48:75 B
+follow-up" — the full Gate 05I-C matrix realizing the queued 05I-C1
+(Communication Network Integrity) + 05I-C2 (Sleep/Wake). Owner: "exactly the
+right next gate … the real hidden-failure layer."
+
+### Scope kept (owner: "very good test coverage")
+
+CAN_1 silent mode, CAN_2 inverter comm, CAN_3 BMS/PDU comm, DBC mismatch,
+wrong-ID rejection, bad-checksum/DLC, heartbeat loss, UDS sessions,
+sleep/wake, bus-load stress, quiescent current — the 8-row matrix + stress
+profiles (120 Ω 1% termination, twisted-shielded 110 turns/m, ≥10 m harness,
+0-30/30-75/75-90% bus stress) + DBC version control + sleep/wake transition.
+
+### Recurrence caught — invented values, tenth artifact (RC-215)
+
+All the timings/percentages/currents (>15 ms, 100 ms, 50 ms, ≤2.0 s, ≤1.0 mA,
+≤200 ms, 75-90%, 10 m, 110 turns/m, >4.5 V, >150 °C) labeled
+`BENCH_TARGET_PROFILE`; sleep current split per-node + total-system; IF logic
+made variable (`approved_latency_limit_ms` / `approved_bus_load_target`).
+
+### Other corrections
+
+- **CAN_1 ACK proof (RC-216):** probe the VCU TXD/transceiver path (not just
+  decoded bus logs); other sim OEM nodes may ACK, the VCU must not.
+- **Frame-fault layering (RC-217):** bad CRC/DLC = controller-level;
+  wrong-ID/source/DBC/counter/checksum/out-of-range = app-level.
+- **DBC version hash (RC-218):** stored in the Build Engine + declared by
+  firmware + logged by the bench; mismatch = BENCH_HARD_BLOCK_PENDING_REVIEW.
+- **CAN_1 bench boundary (RC-219):** simulated OEM / protected bench only; no
+  live Ford network during 05I-C.
+
+### Gate 05I-C status (owner review_46)
+
+`NETWORK_INTEGRITY_MATRIX_CREATED / SLEEP_WAKE_VALIDATION_INCLUDED /
+LOW_VOLTAGE_BENCH_ONLY / CAN_1_LISTEN_ONLY_PROOF_REQUIRED /
+DBC_VERSION_CONTROL_REQUIRED / HEARTBEAT_TARGETS_PENDING_SOURCE_REVIEW /
+SLEEP_CURRENT_TARGETS_PENDING_SOURCE_REVIEW / NO_LIVE_HV / NO_VEHICLE_MOTION /
+NO_LIVE_FORD_CAN_TRANSMISSION / NO_VEHICLE_CLEARANCE`.
+
+### Next
+
+Owner: **Gate 05I-D — Low-Voltage End-to-End Bench Run / Integrated Fault
+Sequence** — test everything together as a combined sequence (driver input,
+brake override, E-stop, HVIL open, BMS no-discharge, inverter fault, CAN
+heartbeat loss, display warning, diagnostic lockout, sleep/wake recovery,
+CAN_1 silence), not isolated tests. Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- Bench-only; no live HV; no vehicle motion; no Ford factory-bus
+  transmission; CAN_1 listen-only + no leakage; DBC version hash enforced; no
+  bench value becomes a rule until controls review + supplier/DBC
+  confirmation upgrades it; the VCU requests but does not own HV isolation
+  (BQ-27).
 - Nothing ingested; nothing marked Confirmed; scripts are illustrative
   pseudocode, not production code; Gate 05J NOT YET; ODRs untouched.
