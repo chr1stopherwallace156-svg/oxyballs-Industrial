@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:schema:knowledge-gap:1.0.0",
+  "title": "EDTS Knowledge Gap",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "gap_id",
+    "component",
+    "critical_need",
+    "priority",
+    "status",
+    "bound_vehicle_instance_id",
+    "bound_configuration_id"
+  ],
+  "properties": {
+    "gap_id": {
+      "type": "string",
+      "pattern": "^KG-[0-9]{3}$"
+    },
+    "component": {
+      "type": "string"
+    },
+    "reported_oem_part_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "critical_need": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW"
+      ]
+    },
+    "possible_sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "related_aid_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "related_csp_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "related_src_cand_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "related_media_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "OPEN",
+        "IN_PROGRESS",
+        "MITIGATED",
+        "CLOSED",
+        "BLOCKED"
+      ]
+    },
+    "bound_vehicle_instance_id": {
+      "type": "string"
+    },
+    "bound_configuration_id": {
+      "type": "string"
+    },
+    "research_sprint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "decision": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

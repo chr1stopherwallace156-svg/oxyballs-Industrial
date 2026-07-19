@@ -122,6 +122,17 @@
   "next_search_queue": [
     {
       "priority": 1,
+      "task": "KG-001: Acquire/hash EWD door harness pages (SRC-CAND-000006) + review MEDIA-000001 for clip routing cues",
+      "lane": "LANE_SVC",
+      "topic": "DOOR_FL_HARNESS",
+      "expected_evidence": "Pinouts + visual clip cues \u2014 not coordinate truth until physical",
+      "candidate_id": "SRC-CAND-000006",
+      "status": "ACTIVE",
+      "decision": "DT-D044",
+      "gap_id": "KG-001"
+    },
+    {
+      "priority": 2,
       "task": "Locate real GrabCAD/Dana URL for AID-000009 / AID-AXLE-M300-01; re-run AJR-000001",
       "lane": "LANE_SUPPLIER",
       "topic": "REAR_AXLE",
@@ -131,7 +142,7 @@
       "decision": "DT-D043"
     },
     {
-      "priority": 2,
+      "priority": 3,
       "task": "Locate real TraceParts/ZF URL for AID-000010 / AID-STEER-GEAR-03; re-run AJR-000002",
       "lane": "LANE_SUPPLIER",
       "topic": "STEERING",
@@ -141,7 +152,7 @@
       "decision": "DT-D043"
     },
     {
-      "priority": 3,
+      "priority": 4,
       "task": "Purchase/acquire AID-000001 / SRC-CAND-000004 as PROFILE_REFERENCE INPUT",
       "lane": "LANE_A_DOC",
       "topic": "DOOR_FL_ASSEMBLY",
@@ -151,7 +162,7 @@
       "decision": "DT-D042"
     },
     {
-      "priority": 4,
+      "priority": 5,
       "task": "Locate real GrabCAD listing URL + license; acquire CAND-000043-GRAB / EDTS-COMP-CAD-001 door shell CAD",
       "lane": "LANE_VIS",
       "topic": "DOOR_FL_ASSEMBLY",
@@ -161,7 +172,7 @@
       "decision": "DT-D041"
     },
     {
-      "priority": 5,
+      "priority": 6,
       "task": "Acquire AID-000002 / CAND-000042-EOG visual model (SKU URL confirmed)",
       "lane": "LANE_VIS",
       "topic": "DOOR_FL_ASSEMBLY",
@@ -171,7 +182,7 @@
       "decision": "DT-D042"
     },
     {
-      "priority": 6,
+      "priority": 7,
       "task": "Acquire SRC-CAND-000001 (BBAS / Body Application Guide) + SRC-CAND-000005 (General BBLB)",
       "lane": "LANE_A_DOC",
       "topic": "SHARED",
@@ -181,7 +192,7 @@
       "decision": "DT-D041"
     },
     {
-      "priority": 7,
+      "priority": 8,
       "task": "Purchase SRC-CAND-000002 (WSM) + SRC-CAND-000006 (EWD)",
       "lane": "LANE_SVC",
       "topic": "DOOR_FL_ASSEMBLY",
@@ -191,7 +202,7 @@
       "decision": "DT-D041"
     },
     {
-      "priority": 8,
+      "priority": 9,
       "task": "VIN-filtered parts catalog archive (SRC-CAND-000007) for FL3Z/HC3Z families",
       "lane": "LANE_PRT",
       "topic": "DOOR_FL_ASSEMBLY",
@@ -201,7 +212,7 @@
       "decision": "DT-D041"
     },
     {
-      "priority": 9,
+      "priority": 10,
       "task": "PHYSICAL_VERIFICATION_REQUIRED \u2014 execute FL_DOOR_INTERNAL_SCAN_PROTOCOL",
       "lane": "LANE_VIS",
       "topic": "DOOR_FL_ASSEMBLY",
@@ -276,7 +287,8 @@
     "DT-D040",
     "DT-D041",
     "DT-D042",
-    "DT-D043"
+    "DT-D043",
+    "DT-D044"
   ],
   "sprints": [
     "RL-006",
@@ -284,11 +296,13 @@
     "RL-008",
     "RL-010",
     "RL-011",
-    "RL-012"
+    "RL-012",
+    "RL-013"
   ],
   "hard_rule_14_note": "Vector blueprints = 2D_DIMENSIONAL_REFERENCE / PROFILE_REFERENCE only",
   "rl_010_note": "Operator VERIFIED_EVIDENCE / SPECIFICATION_READY / CROSS_VERIFIED / 90% complete labels demoted. Draft passports ILLUSTRATIVE_ONLY. Decision remains CANDIDATE_ACQUISITION_RECOMMENDED.",
   "asset_intelligence_register": "research/asset_intelligence/ASSET_INTELLIGENCE_REGISTER.json",
   "supplier_first_lane": "ACTIVE_HUNT",
-  "ajr_register": "research/asset_intelligence/ajr/AJR_REGISTER.json"
+  "ajr_register": "research/asset_intelligence/ajr/AJR_REGISTER.json",
+  "knowledge_gap_register": "research/knowledge_gaps/KNOWLEDGE_GAP_REGISTER.json"
 }

@@ -1,0 +1,28 @@
+{
+  "gap_id": "KG-002",
+  "component": "Dana M300 Rear Axle Housing",
+  "reported_oem_part_number": "HC3Z-4010-A",
+  "critical_need": "True structural wall thickness and material stamping tolerances.",
+  "priority": "HIGH",
+  "possible_sources": [
+    "Dana Spicer service documents",
+    "Physical ultrasonic thickness measurement",
+    "AID-000009 STEP after AJR clearance + local parse"
+  ],
+  "related_aid_ids": [
+    "AID-000009"
+  ],
+  "related_csp_ids": [
+    "CSP-000002"
+  ],
+  "related_src_cand_ids": [],
+  "related_media_ids": [],
+  "status": "OPEN",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "research_sprint": "RL-013",
+  "decision": "DT-D044",
+  "notes": [
+    "Cannot close from marketplace STEP claims alone \u2014 wall thickness often absent even in CAD."
+  ]
+}

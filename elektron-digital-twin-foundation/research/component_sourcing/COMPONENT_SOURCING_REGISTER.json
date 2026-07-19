@@ -1,0 +1,54 @@
+{
+  "document_id": "COMPONENT_SOURCING_REGISTER",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "schema": "schemas/component-sourcing-passport.schema.json",
+  "home": "research/component_sourcing/",
+  "decision": "DT-D044",
+  "research_sprint": "RL-013",
+  "id_policy": {
+    "pattern": "CSP-######",
+    "next_id": "CSP-000004"
+  },
+  "locked_configuration": {
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_id": "CFG-000001",
+    "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943"
+  },
+  "maturity_policy": {
+    "operator_pct_bars": "RESEARCH_DRAFT_ESTIMATE_ONLY",
+    "hard_rule_5": "Operator % \u2260 engineering confidence",
+    "verified_requires": "Local hashed evidence per channel"
+  },
+  "passports": [
+    {
+      "sourcing_passport_id": "CSP-000001",
+      "aliases": [
+        "AID-COMP-01"
+      ],
+      "path": "research/component_sourcing/passports/CSP-000001.json",
+      "project_maturity_status": "PARTIAL"
+    },
+    {
+      "sourcing_passport_id": "CSP-000002",
+      "aliases": [
+        "AID-COMP-02"
+      ],
+      "path": "research/component_sourcing/passports/CSP-000002.json",
+      "project_maturity_status": "RESEARCH_REQUIRED"
+    },
+    {
+      "sourcing_passport_id": "CSP-000003",
+      "aliases": [
+        "AID-COMP-03"
+      ],
+      "path": "research/component_sourcing/passports/CSP-000003.json",
+      "project_maturity_status": "CRITICAL_GAP"
+    }
+  ],
+  "alias_map": {
+    "AID-COMP-01": "CSP-000001",
+    "AID-COMP-02": "CSP-000002",
+    "AID-COMP-03": "CSP-000003"
+  }
+}

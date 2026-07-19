@@ -55,7 +55,8 @@
         "GENERATE_AJR_AND_PURCHASE",
         "REJECT_AS_CANDIDATE",
         "HOLD_IN_CANDIDATE_QUEUE",
-        "NOT_EXECUTED"
+        "NOT_EXECUTED",
+        "HOLD_REJECTED"
       ]
     },
     "adds_new_engineering_data": {
@@ -195,6 +196,42 @@
       "type": "array",
       "items": {
         "type": "string"
+      }
+    },
+    "diagnostic_checklist": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "engineering_gap_closed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "component_upgraded": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_appended": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "direct_duplicate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cost_benefit_status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     }
   }

@@ -1,0 +1,51 @@
+{
+  "ajr_id": "AJR-000003",
+  "id_immutable": true,
+  "asset_id": "AID-000011",
+  "asset_alias": "AID-COMP-01 / AID-DOOR-SHELL-01",
+  "status": "REJECTED",
+  "decision": "HOLD_REJECTED",
+  "adds_new_engineering_data": {
+    "result": "NO",
+    "rationale": "Visual-only polygonal shell (FBX/OBJ). No inner stamping, impact bars, latches, or wiring.",
+    "required_geometry_class": "N/A \u2014 visual envelope only"
+  },
+  "duplication_check": {
+    "result": "DUPLICATE",
+    "compared_against": [
+      "AID-000003 GrabCAD F-150 door shell hunt",
+      "CL-001 outer-skin interchange CANDIDATE (FL3Z-1520125-A/B)"
+    ],
+    "rationale": "Operator AJR claims free F-150 polygonal shells are dimensionally identical for outer skin. CL-001 remains CANDIDATE (not locally hashed) \u2014 duplication accepted as purchase reject basis, not as CONFIGURATION_MATCHED silo truth."
+  },
+  "resolves_priority_gaps": {
+    "result": "NO",
+    "gaps_addressed": [],
+    "rationale": "Does not close KG-001 (harness) or inner structural cavity gaps."
+  },
+  "purchase_clearance": "REJECTED",
+  "blockers": [
+    "Visual-only / no new engineering data",
+    "Duplicates free F-150 crossover hunt path (CL-001)",
+    "Reported $79 cost unjustified vs free alternatives",
+    "Hum3D listing URL still NOT_RECORDED"
+  ],
+  "estimated_price_usd": 79.0,
+  "source_url_status": "NOT_RECORDED",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "research_sprint": "RL-013",
+  "decision_ref": "DT-D044",
+  "notes": [
+    "Operator Acquisition Decision HOLD_REJECTED accepted for purchase posture.",
+    "Map operator AJR-001 \u2192 machine AJR-000003.",
+    "Continue free GrabCAD/F-150 shell path (AID-000003) only as COMPARISON_REFERENCE until CL-001 verified."
+  ],
+  "diagnostic_checklist": {
+    "engineering_gap_closed": "No \u2014 visual-only polygonal shell",
+    "component_upgraded": "Claimed yes vs low-poly placeholder \u2014 not required if free duplicate exists",
+    "evidence_appended": "Outer surface boundary visual only",
+    "direct_duplicate": "Yes \u2014 free F-150 crossover meshes (CL-001 CANDIDATE basis)",
+    "cost_benefit_status": "Rejected \u2014 $79 unjustified vs free alternatives"
+  }
+}

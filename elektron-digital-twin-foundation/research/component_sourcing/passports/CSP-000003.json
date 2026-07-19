@@ -1,0 +1,79 @@
+{
+  "sourcing_passport_id": "CSP-000003",
+  "id_immutable": true,
+  "aliases": [
+    "AID-COMP-03",
+    "Driver-Side Door Harness"
+  ],
+  "component_name": "Driver-Side Door Wire Harness",
+  "reported_oem_part_number": "HC3Z-14631-A",
+  "assembly_hub": "FL_DOOR",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "related_aid_ids": [],
+  "related_ajr_ids": [],
+  "related_gap_ids": [
+    "KG-001"
+  ],
+  "authority_status": "RESEARCH_OPERATIONAL",
+  "maturity_channels": {
+    "oem_docs": {
+      "project_status": "HUNT",
+      "operator_claim_pct": 80,
+      "operator_claim_status": "RESEARCH_DRAFT_ESTIMATE",
+      "notes": "EWD SRC-CAND-000006 NOT_ACQUIRED \u2014 80% claim unverified"
+    },
+    "supplier_docs": {
+      "project_status": "HUNT",
+      "operator_claim_pct": 60,
+      "operator_claim_status": "RESEARCH_DRAFT_ESTIMATE",
+      "notes": "Connector layout claims without bytes"
+    },
+    "cad_assets": {
+      "project_status": "NOT_STARTED",
+      "operator_claim_pct": 0,
+      "operator_claim_status": "RESEARCH_DRAFT_ESTIMATE",
+      "notes": "Honest zero \u2014 no wiring path CAD"
+    },
+    "marketplace": {
+      "project_status": "NOT_STARTED",
+      "operator_claim_pct": 0,
+      "operator_claim_status": "RESEARCH_DRAFT_ESTIMATE",
+      "notes": "Honest zero \u2014 no commercial harness meshes"
+    },
+    "videos": {
+      "project_status": "PARTIAL",
+      "operator_claim_pct": 60,
+      "operator_claim_status": "RESEARCH_DRAFT_ESTIMATE",
+      "notes": "Panel removal walkthroughs may show clips \u2014 MEDIA-000001 candidate"
+    },
+    "parts_lookup": {
+      "project_status": "HUNT",
+      "operator_claim_pct": 100,
+      "operator_claim_status": "REJECTED_WITHOUT_BYTES",
+      "notes": "100% rejected without hashed catalog"
+    },
+    "photos": {
+      "project_status": "HUNT",
+      "operator_claim_pct": 80,
+      "operator_claim_status": "RESEARCH_DRAFT_ESTIMATE",
+      "notes": "Salvage/OEM photo claims \u2014 no local hashes"
+    },
+    "physical": {
+      "project_status": "NOT_STARTED",
+      "operator_claim_pct": 0,
+      "operator_claim_status": "RESEARCH_DRAFT_ESTIMATE",
+      "notes": "Critical \u2014 routing coordinates absent"
+    }
+  },
+  "operator_total_maturity_pct": 47,
+  "project_maturity_status": "CRITICAL_GAP",
+  "project_total_maturity_note": "Operator 47% aligns with CRITICAL_GAP for CAD/marketplace/physical zeros. KG-001 OPEN.",
+  "research_sprint": "RL-013",
+  "decision": "DT-D044",
+  "notes": [
+    "Option-dependent (power/tow mirror 22-pin vs manual). Do not assume on base XL.",
+    "Focus next research on KG-001 before physical scan recommendation."
+  ]
+}

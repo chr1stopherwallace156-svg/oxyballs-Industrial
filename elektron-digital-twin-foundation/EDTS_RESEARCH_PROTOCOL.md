@@ -2,7 +2,7 @@
 
 **Status:** `ACTIVE`  
 **Effective Date:** 2026-07-16  
-**Version:** `2.5.0`  
+**Version:** `2.6.0`  
 **Architecture host:** [EDTS_OS.md](EDTS_OS.md) v3.0.0+ (EDTS-OS)  
 **Isolation law:** [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
 **Binding for:** all research, acquisition, geometry development, and software logic operations under `elektron-digital-twin-foundation/`
@@ -13,7 +13,8 @@
 **Changelog from 2.1.2:** **Hard Rule 13** — Research Never Stops at One Source; **Research Confidence (RC)** for SRC-CAND search prioritization (not engineering verification %); immutable **`SRC-CAND-######`** IDs.  
 **Changelog from 2.2.0:** **Hard Rule 15** — Every Major Claim Must Have Its Own Claim Record; vector blueprints are **2D dimensional / profile reference**, never “ground-truth geometry.”  
 **Changelog from 2.3.0:** **Hard Rule 16** — Asset Intelligence Database; every internet asset gets an `AID-*` passport; listing URLs are acquisition **inputs**, not answers.  
-**Changelog from 2.4.0:** **Hard Rule 17** — Deconstructed Assembly Sourcing + Supplier-First Lane + **AJR** purchase gate.
+**Changelog from 2.4.0:** **Hard Rule 17** — Deconstructed Assembly Sourcing + Supplier-First Lane + **AJR** purchase gate.  
+**Changelog from 2.5.0:** **Component Sourcing Passports (`CSP-*`)** + **Knowledge Gap Register (`KG-*`)**; operator maturity % bars = research draft estimates only.
 
 ---
 

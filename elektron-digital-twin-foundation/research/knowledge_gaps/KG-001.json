@@ -1,0 +1,34 @@
+{
+  "gap_id": "KG-001",
+  "component": "Driver-Side Front Door Harness",
+  "reported_oem_part_number": "HC3Z-14631-A",
+  "critical_need": "Exact physical routing and clip positions inside the door panel cavities.",
+  "priority": "CRITICAL",
+  "possible_sources": [
+    "2019 Super Duty EWD (SRC-CAND-000006)",
+    "Physical teardown / coordinate scan",
+    "2017\u20132022 Super Duty door-panel removal walkthrough videos (MEDIA-000001 candidate)",
+    "Salvage harness photo sets (hashed)"
+  ],
+  "related_aid_ids": [],
+  "related_csp_ids": [
+    "CSP-000003",
+    "CSP-000001"
+  ],
+  "related_src_cand_ids": [
+    "SRC-CAND-000006",
+    "SRC-CAND-000007"
+  ],
+  "related_media_ids": [
+    "MEDIA-000001"
+  ],
+  "status": "OPEN",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "research_sprint": "RL-013",
+  "decision": "DT-D044",
+  "notes": [
+    "Primary focus for CONTINUE_RESEARCH before recommending physical laser scan.",
+    "Mirror option pinout contamination risk (8-pin vs 22-pin)."
+  ]
+}

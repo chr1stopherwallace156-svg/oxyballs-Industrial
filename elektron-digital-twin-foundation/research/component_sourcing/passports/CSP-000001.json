@@ -1,0 +1,85 @@
+{
+  "sourcing_passport_id": "CSP-000001",
+  "id_immutable": true,
+  "aliases": [
+    "AID-COMP-01",
+    "Driver-Side Door Shell"
+  ],
+  "component_name": "Driver-Side Front Door Shell (Outer Aluminum Skin)",
+  "reported_oem_part_number": "FL3Z-1520125-A",
+  "assembly_hub": "FL_DOOR",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "related_aid_ids": [
+    "AID-000011",
+    "AID-000003",
+    "AID-000001"
+  ],
+  "related_ajr_ids": [
+    "AJR-000003"
+  ],
+  "related_gap_ids": [
+    "KG-001"
+  ],
+  "authority_status": "RESEARCH_OPERATIONAL",
+  "maturity_channels": {
+    "oem_docs": {
+      "project_status": "HUNT",
+      "operator_claim_pct": 60,
+      "operator_claim_status": "RESEARCH_DRAFT_ESTIMATE",
+      "notes": "SRC-CAND WSM/BBAS NOT_ACQUIRED \u2014 60% claim unverified"
+    },
+    "supplier_docs": {
+      "project_status": "HUNT",
+      "operator_claim_pct": 100,
+      "operator_claim_status": "REJECTED_WITHOUT_BYTES",
+      "notes": "100% supplier stamping guides claim rejected \u2014 no local bytes"
+    },
+    "cad_assets": {
+      "project_status": "PARTIAL",
+      "operator_claim_pct": 40,
+      "operator_claim_status": "RESEARCH_DRAFT_ESTIMATE",
+      "notes": "AID-000003/000011 candidates \u2014 NOT_ACQUIRED"
+    },
+    "marketplace": {
+      "project_status": "PARTIAL",
+      "operator_claim_pct": 80,
+      "operator_claim_status": "RESEARCH_DRAFT_ESTIMATE",
+      "notes": "Visual candidates exist; not silo truth"
+    },
+    "videos": {
+      "project_status": "PARTIAL",
+      "operator_claim_pct": 60,
+      "operator_claim_status": "RESEARCH_DRAFT_ESTIMATE",
+      "notes": "Door panel removal media candidate for KG-001 \u2014 see MEDIA-000001"
+    },
+    "parts_lookup": {
+      "project_status": "HUNT",
+      "operator_claim_pct": 100,
+      "operator_claim_status": "REJECTED_WITHOUT_BYTES",
+      "notes": "100% parts lookup claim rejected \u2014 SRC-CAND-000007 NOT_ACQUIRED"
+    },
+    "photos": {
+      "project_status": "HUNT",
+      "operator_claim_pct": 80,
+      "operator_claim_status": "RESEARCH_DRAFT_ESTIMATE",
+      "notes": "No hashed photo set in-repo"
+    },
+    "physical": {
+      "project_status": "NOT_STARTED",
+      "operator_claim_pct": 0,
+      "operator_claim_status": "RESEARCH_DRAFT_ESTIMATE",
+      "notes": "Laser/tactile absent \u2014 honest"
+    }
+  },
+  "operator_total_maturity_pct": 65,
+  "project_maturity_status": "PARTIAL",
+  "project_total_maturity_note": "Operator 62\u201365% saturation rejected as verified. Project: PARTIAL hunt with physical=0 and OEM PDFs NOT_ACQUIRED.",
+  "research_sprint": "RL-013",
+  "decision": "DT-D044",
+  "notes": [
+    "AJR-000003 HOLD_REJECTED for paid Hum3D shell pending free F-150 crossover path (CL-001 still CANDIDATE).",
+    "Do not treat maturity % as engineering confidence (Hard Rule 5)."
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "sourcing_passport_id": "CSP-000002",
+  "id_immutable": true,
+  "aliases": [
+    "AID-COMP-02",
+    "Dana M300 Drive Axle"
+  ],
+  "component_name": "Dana Spicer M300 DRW Rear Axle Assembly",
+  "reported_oem_part_number": "HC3Z-4010-A",
+  "assembly_hub": "REAR_AXLE",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "related_aid_ids": [
+    "AID-000009"
+  ],
+  "related_ajr_ids": [
+    "AJR-000001"
+  ],
+  "related_gap_ids": [
+    "KG-002"
+  ],
+  "authority_status": "RESEARCH_OPERATIONAL",
+  "maturity_channels": {
+    "oem_docs": {
+      "project_status": "HUNT",
+      "operator_claim_pct": null,
+      "operator_claim_status": "ABSENT",
+      "notes": "OEM axle pages still hunt"
+    },
+    "supplier_docs": {
+      "project_status": "HUNT",
+      "operator_claim_pct": null,
+      "operator_claim_status": "ABSENT",
+      "notes": "Dana Spicer docs NOT_ACQUIRED"
+    },
+    "cad_assets": {
+      "project_status": "HUNT",
+      "operator_claim_pct": null,
+      "operator_claim_status": "ABSENT",
+      "notes": "AID-000009 \u2014 URL missing; ACQUIRED claim REJECTED"
+    },
+    "marketplace": {
+      "project_status": "HUNT",
+      "operator_claim_pct": null,
+      "operator_claim_status": "ABSENT",
+      "notes": null
+    },
+    "videos": {
+      "project_status": "NOT_STARTED",
+      "operator_claim_pct": null,
+      "operator_claim_status": "ABSENT",
+      "notes": null
+    },
+    "parts_lookup": {
+      "project_status": "HUNT",
+      "operator_claim_pct": null,
+      "operator_claim_status": "ABSENT",
+      "notes": null
+    },
+    "photos": {
+      "project_status": "NOT_STARTED",
+      "operator_claim_pct": null,
+      "operator_claim_status": "ABSENT",
+      "notes": null
+    },
+    "physical": {
+      "project_status": "NOT_STARTED",
+      "operator_claim_pct": 0,
+      "operator_claim_status": "RESEARCH_DRAFT_ESTIMATE",
+      "notes": "Ultrasonic wall thickness absent \u2014 KG-002"
+    }
+  },
+  "operator_total_maturity_pct": 82,
+  "project_maturity_status": "RESEARCH_REQUIRED",
+  "project_total_maturity_note": "Operator 82% saturated + ACQUIRED/PARSED REJECTED. No local STEP hash. Project maturity RESEARCH_REQUIRED.",
+  "research_sprint": "RL-013",
+  "decision": "DT-D044",
+  "notes": [
+    "Narrative Exact Config Match=Yes REJECTED \u2014 remains conditional/UNKNOWN until hashed proof.",
+    "AJR-000001 remains NOT_CLEARED until listing URL."
+  ]
+}

@@ -1,11 +1,11 @@
 {
   "document_id": "ASSET_INTELLIGENCE_REGISTER",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "status": "ACTIVE",
   "schema": "schemas/asset-intelligence-passport.schema.json",
   "home": "research/asset_intelligence/",
-  "decision": "DT-D043",
-  "research_sprint": "RL-012",
+  "decision": "DT-D044",
+  "research_sprint": "RL-013",
   "id_policy": {
     "pattern": "AID-######",
     "immutable_handle": true,
@@ -133,11 +133,13 @@
       "acquired": "NOT_ACQUIRED",
       "aliases": [
         "AID-AXLE-M300-01",
+        "AID-COMP-02",
         "CMP-AXL-M300-CAND"
       ],
       "url_status": "NOT_RECORDED",
       "ajr_id": "AJR-000001",
-      "assembly_hub": "REAR_AXLE"
+      "assembly_hub": "REAR_AXLE",
+      "honesty_note": "Operator ACQUIRED/PARSED rejected \u2014 no local bytes"
     },
     {
       "asset_id": "AID-000010",
@@ -157,15 +159,17 @@
       "asset_id": "AID-000011",
       "path": "research/asset_intelligence/passports/AID-000011.json",
       "title": "F-Series Driver Door Shell \u2014 Hum3D F-150 Door Group Extract (claim)",
-      "edts_role": "VISUAL_CANDIDATE",
+      "edts_role": "REJECTED_INPUT",
       "exact_configuration_match": "COMPARISON_REFERENCE",
       "acquired": "NOT_ACQUIRED",
       "aliases": [
+        "AID-COMP-01",
         "AID-DOOR-SHELL-01"
       ],
       "url_status": "NOT_RECORDED",
-      "ajr_id": null,
-      "assembly_hub": "FL_DOOR"
+      "ajr_id": "AJR-000003",
+      "assembly_hub": "FL_DOOR",
+      "honesty_note": "AJR HOLD_REJECTED \u2014 do not purchase"
     }
   ],
   "acquisition_priority_suggested": [
@@ -190,15 +194,23 @@
     "CAND-771-GRAB": "AID-000006",
     "AID-AXLE-M300-01": "AID-000009",
     "AID-STEER-GEAR-03": "AID-000010",
-    "AID-DOOR-SHELL-01": "AID-000011"
+    "AID-DOOR-SHELL-01": "AID-000011",
+    "AID-COMP-01": "AID-000011",
+    "AID-COMP-02": "AID-000009",
+    "CSP-000001": "AID-000011",
+    "CSP-000002": "AID-000009"
   },
   "notes": [
     "Every new internet asset discovery should create or update an AID-* passport.",
     "Promote listing claims to evaluated ordinals only after local parse.",
     "Never set exact_configuration_match=CONFIGURATION_MATCHED from a marketplace title alone.",
-    "RL-012 / DT-D043: supplier hub candidates added; AJR required before purchase; score_claims are not EVALUATED."
+    "RL-012 / DT-D043: supplier hub candidates added; AJR required before purchase; score_claims are not EVALUATED.",
+    "RL-013: CSP maturity trackers + KG register; Hum3D AJR rejected; M300 ACQUIRED claim demoted."
   ],
   "ajr_register": "research/asset_intelligence/ajr/AJR_REGISTER.json",
   "sourcing_model": "research/sourcing/DECONSTRUCTED_ASSEMBLY_SOURCING.md",
-  "supplier_matrix": "research/sourcing/TIER1_SUPPLIER_MATRIX_2019_F450.json"
+  "supplier_matrix": "research/sourcing/TIER1_SUPPLIER_MATRIX_2019_F450.json",
+  "component_sourcing_register": "research/component_sourcing/COMPONENT_SOURCING_REGISTER.json",
+  "knowledge_gap_register": "research/knowledge_gaps/KNOWLEDGE_GAP_REGISTER.json",
+  "media_candidate_register": "research/media_candidates/MEDIA_CANDIDATE_REGISTER.json"
 }

@@ -4,6 +4,7 @@
   "schema_version": "1.1.0",
   "authority_status": "RESEARCH_OPERATIONAL",
   "aliases": [
+    "AID-COMP-01",
     "AID-DOOR-SHELL-01"
   ],
   "title": "F-Series Driver Door Shell \u2014 Hum3D F-150 Door Group Extract (claim)",
@@ -34,8 +35,9 @@
   "match_tri_state": {
     "value": "conditional",
     "crossover_validation_requirements": [
-      "CL-001 next verification steps",
-      "Do not import F-150 interior fastener map as F-450 truth"
+      "Aluminum-body generation match",
+      "Mirrors/locks/harness option isolation",
+      "CL-001 next verification steps"
     ]
   },
   "geometry_types": [
@@ -47,9 +49,9 @@
     "interior": "NONE",
     "mechanical": "NONE",
     "electrical": "NONE",
-    "hierarchy_quality": "NOT_EVALUATED",
+    "hierarchy_quality": "PARTIAL",
     "mesh_separation": "LOW",
-    "topology_quality": "NOT_EVALUATED",
+    "topology_quality": "LOW",
     "evaluation_basis": "LISTING_ONLY"
   },
   "usefulness": {
@@ -57,45 +59,45 @@
     "visual": "HIGH"
   },
   "score_claims": {
-    "engineering_usefulness": {
-      "value": 0.65,
-      "status": "RESEARCH_CLAIM",
-      "basis": "Operator sprint \u2014 NOT EVALUATED"
-    },
-    "visual_usefulness": {
+    "exterior_completeness": {
       "value": 0.95,
       "status": "RESEARCH_CLAIM",
-      "basis": "Operator sprint \u2014 NOT EVALUATED"
-    },
-    "exterior_completeness": {
-      "value": null,
-      "status": "NOT_EXECUTED",
-      "basis": null
+      "basis": "Operator sprint"
     },
     "interior_completeness": {
-      "value": 0.0,
+      "value": 0.15,
       "status": "RESEARCH_CLAIM",
-      "basis": "Polygonal outer skin \u2014 no cavities"
+      "basis": "Operator sprint"
     },
     "mechanical_completeness": {
       "value": 0.0,
       "status": "RESEARCH_CLAIM",
-      "basis": null
+      "basis": "Operator sprint"
     },
     "electrical_completeness": {
       "value": 0.0,
       "status": "RESEARCH_CLAIM",
-      "basis": null
+      "basis": "Operator sprint"
+    },
+    "engineering_usefulness": {
+      "value": 0.35,
+      "status": "RESEARCH_CLAIM",
+      "basis": "Operator sprint"
+    },
+    "visual_usefulness": {
+      "value": 0.9,
+      "status": "RESEARCH_CLAIM",
+      "basis": "Operator sprint"
     }
   },
   "license": {
     "status": "REQUIRES_COUNSEL_REVIEW",
-    "terms_summary": null
+    "terms_summary": "Editorial / Proprietary Royalty-Free claim \u2014 unverified"
   },
   "price": {
-    "status": "UNKNOWN",
-    "amount_usd": null,
-    "currency_note": null
+    "status": "PAID",
+    "amount_usd": 79.0,
+    "currency_note": "Operator reported Hum3D cost \u2014 purchase REJECTED by AJR-000003"
   },
   "lifecycle": {
     "discovered": true,
@@ -149,6 +151,14 @@
     {
       "kind": "ASSEMBLY_HUB",
       "ref": "FL_DOOR"
+    },
+    {
+      "kind": "AJR",
+      "ref": "research/asset_intelligence/ajr/AJR-000003.json"
+    },
+    {
+      "kind": "CLAIM",
+      "ref": "research/claims/CL-001_DOOR_SHELL_INTERCHANGE.json"
     }
   ],
   "bound_vehicle_instance_id": "VEH-000001",
@@ -171,11 +181,13 @@
     "lane": "LANE_MIXED"
   },
   "assembly_hub": "FL_DOOR",
-  "ajr_id": null,
-  "edts_role": "VISUAL_CANDIDATE",
-  "research_sprint": "RL-012",
-  "decision": "DT-D043",
+  "ajr_id": "AJR-000003",
+  "edts_role": "REJECTED_INPUT",
+  "research_sprint": "RL-013",
+  "decision": "DT-D044",
   "notes": [
-    "CANDIDATE_ACQUISITION_RECOMMENDED remains for door envelope family \u2014 AJR not yet drafted for Hum3D until URL exists."
+    "CANDIDATE_ACQUISITION_RECOMMENDED remains for door envelope family \u2014 AJR not yet drafted for Hum3D until URL exists.",
+    "AJR-000003 HOLD_REJECTED \u2014 do not purchase $79 Hum3D shell.",
+    "Prefer free F-150 crossover hunt (AID-000003) as COMPARISON_REFERENCE only until CL-001 verified."
   ]
 }

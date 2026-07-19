@@ -1,24 +1,19 @@
 # EDTS Project State
 
-**Updated:** 2026-07-16  
+**Updated:** 2026-07-19  
 **Authoritative machine form:** `STATUS.json`
 
 | Concern | Status |
 |---|---|
-| Research protocol | **v2.5.0** — Hard Rules **13–17** ACTIVE |
-| Sourcing model | **Deconstructed Assembly Sourcing** (not complete-vehicle inheritance) |
-| Supplier-First Lane | **ACTIVE_HUNT** (matrix = draft, not verified) |
-| Asset Intelligence DB | **ACTIVE** (schema 1.1.0) |
-| AJR purchase gate | **ACTIVE** — AJR-000001/000002 **`NOT_CLEARED`** |
-| Recommended decision | **`CONTINUE_RESEARCH`** |
-| AID-000009 (M300) | DISCOVERED — URL missing |
-| AID-000010 (TAS65) | DISCOVERED — URL missing |
-| AID-000011 (Hum3D door) | DISCOVERED — URL missing |
-| FL door / profile ref | Still acquire `AID-000001` in parallel |
-| Front axle architecture | `PRIMARY_SOURCE_REQUIRED` |
+| Research protocol | **v2.6.0** (Hard Rules 13–17; CSP + KG homes) |
+| Component Sourcing Passports | **ACTIVE** (`CSP-000001..000003`) |
+| Knowledge Gap focus | **KG-001** OPEN (CRITICAL) |
+| AJR-000003 (Hum3D door) | **`HOLD_REJECTED`** — do not purchase |
+| AID-000009 (M300) | **`NOT_ACQUIRED`** (operator ACQUIRED claim rejected) |
+| Recommended decision | **`CONTINUE_RESEARCH`** → KG-001 |
 | Passport geometry | `ABSENT` |
 | Kernel / rc1 | Unchanged |
 
 ## Change-control
 
-- `decisions/DT-D030_*.json` … `DT-D043_*.json`
+- `decisions/DT-D030_*.json` … `DT-D044_*.json`
