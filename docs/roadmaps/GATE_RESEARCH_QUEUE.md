@@ -118,14 +118,16 @@ transmitting onto factory Ford safety buses; forum posts LeadOnly; Ford/
 OEM/supplier DBC docs preferred.** Prompt below (unchanged); continue the
 deep dive against authorized sources.
 
-## Gate 08C — Draft Validation  · STATUS: DRAFT_VALIDATION_STARTED — SIMULATION SWEEPS (batch_33)
+## Gate 08C — Draft Validation  · STATUS: SIMULATION_SWEEP_ACTIVE (batch_33/34)
 
 Draft-validation sweep engine `docs/status/DRAFT_VALIDATION_08C.md` — 15
-placeholder sweep inputs with **no gate authority** (RC-133); reports
-Simulation Sweep Result, not PASS/BLOCK. Cannot become FINAL_VALIDATED
-without supplier data + exact standards + physical tests + engineering
-signoff. Runs in parallel; reopens toward closure as supplier thresholds
-land (upgrades sweep inputs → SupplierConfirmed / PhysicallyVerified).
+placeholder sweep inputs with **no gate authority** (RC-133); reports the
+**Simulation Response Category** (Model Accepts / Model Needs Review /
+Model Stress Failure / Supplier Data Required, each "No Gate Authority" —
+RC-138), never PASS/BLOCK. Cannot become FINAL_VALIDATED without supplier
+data + exact standards + physical tests + engineering signoff. Runs in
+parallel; reopens toward closure as supplier thresholds land (upgrades
+sweep inputs → SupplierConfirmed / PhysicallyVerified).
 
 **Terminology rule (standing):** authorized Ford-compatible controls
 integration, immobilizer-safe architecture, diagnostic compatibility,
@@ -171,6 +173,31 @@ cluster serviceability. **NEVER "PATS bypass/override."**
 > - Do not claim OEM compatibility.
 > - Forum posts are LeadOnly.
 > - Ford/OEM/service documentation is preferred.
+
+## Gate 05A — Source-Backed Signal Registry  · STATUS: NEXT (owner review_31)
+
+The next Gate 05 sub-task: build a **source-backed** signal registry (find
+official Ford UIM / BBAS / J1939 documentation first). All Ford
+PGN/byte/rate mappings stay `J1939SignalCandidate / NeedsOfficialFordUIMSource`
+until an official source proves them (RC-140). Transmit stays blocked
+(RC-142).
+
+**Owner prompt (verbatim):**
+
+> Gate 05A — Source-Backed Signal Registry
+>
+> For every signal:
+> - signal name
+> - source document
+> - bus/channel
+> - protocol
+> - PGN or ID
+> - byte/bit mapping
+> - direction: listen-only / receive / transmit
+> - allowed use
+> - blocked use
+> - verification status
+> - required proof artifact
 
 ## Gate 06 — Mechanical Mounting / Battery Enclosure  · STATUS: FIRST PASS DONE (batch_25)
 

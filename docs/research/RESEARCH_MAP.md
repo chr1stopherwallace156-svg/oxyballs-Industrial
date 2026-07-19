@@ -371,18 +371,20 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_30):** **continue the Gate 05 CAN /
-Controls deep dive** (against authorized sources) — running in parallel
-with the **Gate 08C draft-validation sweep engine**
-(`docs/status/DRAFT_VALIDATION_08C.md`) and the parked Gate 08B. Gate 05 =
-STARTED (`docs/status/GATE05_CONTROLS.md`): **authorized Ford-compatible,
-listen-only only — NEVER "PATS bypass"; no spoofing/transmitting onto
-factory Ford safety buses.** Gate 08C = DRAFT_VALIDATION_STARTED /
-SIMULATION_ONLY / **NO_PLACEHOLDER_PASS_BLOCK_AUTHORITY** — placeholder
-numbers are sweep inputs, never thresholds. Verbatim Gate 05 prompt in
-[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md). The Gate 07
-artifacts and the 15-mode FMEA registry stay open. Confirmed order after
-05: Gate 06 deep dive → 09 → 10 → 11.
+**Next expected batch (owner review_31):** **Gate 05A — Source-Backed
+Signal Registry** (find official Ford UIM / BBAS / J1939 docs first; per
+signal: name, source doc, bus/channel, protocol, PGN/ID, byte/bit,
+direction [listen-only/receive/transmit], allowed/blocked use,
+verification status, proof artifact). All Ford PGN/byte/rate mappings stay
+**`J1939SignalCandidate / NeedsOfficialFordUIMSource`** until an official
+source proves them; **transmit stays blocked**; **NEVER "PATS bypass"; no
+spoofing factory safety buses.** Runs in parallel with the **Gate 08C
+sweep engine** (`docs/status/DRAFT_VALIDATION_08C.md`, sweep inputs report
+the Simulation Response Category, never PASS/BLOCK). Verbatim prompt in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); Gate 05
+doctrine in `docs/status/GATE05_CONTROLS.md`. Gate 07 artifacts + the
+15-mode FMEA registry stay open. Order after 05: Gate 06 deep dive → 09 →
+10 → 11.
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

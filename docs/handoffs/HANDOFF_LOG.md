@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 33 + review_30 — Gate 08C draft validation + Gate 05 init)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 33 + review_30); awaiting Gate 05 deep-dive continuation or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `3d2b9ec`; end commit: `00c3d91` (batch-33 reconciliation)
+- Work: Gate 08C draft-validation engine (`DRAFT_VALIDATION_08C.md`) + Gate 05 init (`GATE05_CONTROLS.md`). RC-133..137. Correction 1: placeholder numbers have no pass/block authority (sweep inputs only). Correction 2 (safety-critical): Gate 05 reverse-eng/sniffing framing → authorized/listen-only, no bypass, no spoofing factory safety buses. BQ-25/26. Section 41. Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner; Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards + Ford Pro CAN/controls docs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff.
+
 ## 2026-07-16 — Claude Code — task complete (batch 32 + review_29 — Gate 08B source-backed test mapping, parked)
 
 ### (archived handoff)

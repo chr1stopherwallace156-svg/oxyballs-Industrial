@@ -5,7 +5,9 @@ The controls-integration record for the F-450/F-550 EV conversion (Gate
 and faults matter; Gate 05 maps *how* those signals are communicated
 through the VCU, BMS, inverter, ABS/ESC, cluster, and service tools.
 
-**Status: `STARTED` / `AUTHORIZED_CONTROLS_CAN_DEEP_DIVE`.**
+**Status (owner review_31): `STARTED` / `LISTEN_ONLY_RESEARCH` /
+`AUTHORIZED_CHANNELS_ONLY` / `NO_FACTORY_SAFETY_BUS_TRANSMIT` /
+`NO_IMMOBILIZER_OR_SECURITY_BYPASS` / `NO_PROPRIETARY_DBC_ASSUMPTIONS`.**
 
 ---
 
@@ -68,6 +70,61 @@ The channel names, bit rates, and source-address allocations are
 ID/rate is `NeedsAuthorizedSource` (official upfitter docs or supplier
 DBC). The 0xEF/0x22 "diagnostic tool" slots are for **listening**, not
 injecting.
+
+## J1939 listen-only signal candidates (RC-140 — NOT confirmed)
+
+Ford Pro's upfit integration provides vehicle data in **J1939** format for
+equipped vehicles, so an authorized upfitter/J1939 *research path* is
+reasonable — but the specific PGNs, byte/bit maps, buses, and rates below
+are **candidates**, not verified Ford values. Each is
+**`J1939SignalCandidate / NeedsOfficialFordUIMSource / ListenOnlyCandidate
+/ NoTransmitAuthority`** until official Ford/UIM documentation proves the
+exact mapping (Gate 05A source-backed signal registry).
+
+| Candidate PGN / source | Candidate byte/bit | Candidate content | Status |
+|---|---|---|---|
+| PGN 61444 (EEC1) | bytes 3–4 | engine speed | J1939SignalCandidate / NeedsOfficialFordUIMSource |
+| PGN 61443 (EEC2) | byte 2 | accelerator-pedal position | J1939SignalCandidate / NeedsOfficialFordUIMSource (**see accel-pedal caution**) |
+| PGN 65265 (CCVS) | bytes 2–3 | wheel-based vehicle speed | J1939SignalCandidate / NeedsOfficialFordUIMSource |
+| Ford UIM status | byte 0, bit 2 | ignition-key position | J1939SignalCandidate / NeedsOfficialFordUIMSource |
+| CAN_1 body-builder bus | — | 500 kbps J1939 frame | NeedsOfficialFordUIMSource |
+
+**Accelerator-pedal caution (RC-141):** the batch's "accelerator pedal →
+scaled **directly** into the EV inverter torque loop" is **too strong**.
+Corrected: *the accel-pedal signal, if available through an authorized
+source, may only **inform** a VCU torque-demand model. The final torque
+command requires pedal-plausibility checks, brake-override logic, fault
+handling, and controls-engineer review.* Never drive inverter torque
+directly from an unverified Ford signal.
+
+## Transmit rule + VCU boundary (RC-142 — owner review_31)
+
+- **Receive/listen first.** Authorized VCU **receive/listen** logic is the
+  starting point. **Transmit behaviour stays BLOCKED** until Ford/UIM
+  documentation explicitly allows the exact **message, bus, address, and
+  use case.**
+- **VCU boundary (stricter):** the VCU may **read** authorized
+  vehicle-state signals; it may **command only conversion-side
+  components** unless Ford documentation explicitly permits otherwise;
+  the **factory safety modules remain authoritative** for ABS/ESC/brake
+  warnings.
+
+### Upfitter-gateway isolation (candidate architecture)
+
+```
+[FORD BASE VEHICLE NETWORK]  ABS · ESC · PCM (authoritative)
+        │
+[PHYSICAL ISOLATION GATEWAY]  Ford Pro UIM connector ◄── safe-lane boundary
+        │
+[AUTHORIZED INTERFACE BUS]  CAN_1 body-builder bus (listen-only deck)
+        │
+   [CENTRAL VCU GATEWAY]  processes allowed messages only (read authorized;
+        │                 command conversion-side only)
+[CONVERSION CORES]  CAN_2 EV inverter loop · CAN_3 EV BMS loop (owned)
+```
+
+Conversion controls interact **solely through factory-designated upfitter
+channels** — no unfiltered access to core powertrain/safety paths.
 
 ## Gate 05 deep-dive scope (owner review_22, standing)
 

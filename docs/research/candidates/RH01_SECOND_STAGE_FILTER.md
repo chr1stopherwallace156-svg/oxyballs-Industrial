@@ -236,6 +236,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-135 | **Gate 08C status (owner review_30)**: `DRAFT_VALIDATION_STARTED` / `SIMULATION_ONLY` / `PLACEHOLDER_VALUES_ALLOWED_FOR_STRESS_TESTING` / `NO_PLACEHOLDER_PASS_BLOCK_AUTHORITY` / `SUPPLIER_DATA_PENDING` / `NO_PHYSICAL_TEST_CLEARANCE` / `NO_COMPLIANCE_CLAIMS` | owner-promoted | n/a — gate status | **GateStatus** — cannot become FINAL_VALIDATED without supplier data + exact standards + physical tests + engineering signoff — lanes L8 |
 | RC-136 | **Gate 05 authorized-controls doctrine (owner review_30, SAFETY-CRITICAL)**: ALLOWED = authorized Ford-compatible integration, **listen-only** capture, public/authorized J1939/OBD-II, upfitter docs, supplier DBC files; **BLOCKED = proprietary-DBC assumptions, anti-theft bypass, fake/spoofed ABS/ESC messages, transmitting onto factory Ford safety buses without approval** | owner-promoted; batch_33 (corrects the "reverse-engineering group / sniffing" framing) | n/a — security/safety rule | **NoGoConditionCandidate / SecurityFraming** — same class as the standing PATS-bypass prohibition; the DBC-IDs row → **NeedsAuthorizedSource** (BQ-25); recorded in `docs/status/GATE05_CONTROLS.md` — lanes L7/L8 |
 | RC-137 | **Gate 05 candidate network topology + CAN config (batch_33)**: split gateway architecture (Ford chassis/body/comfort CAN → VCU gateway → EV inverter/BMS/aux loops) + a 4-channel capture matrix (wheel-speed, pedal, brake-switch, dashboard, ignition, inverter/BMS telemetry) | batch_33 (Hunter-drafted) | n/a — candidate topology | **ListenOnlyCandidate / NeedsAuthorizedSource** — all Ford-side IDs/rates unverified; **no transmit onto Ford safety buses**; diagnostic slots are for listening, not injecting; recorded in `GATE05_CONTROLS.md` — lanes L7 |
+| RC-138 | **Gate 08C sweep vocabulary cleanup (owner review_31)**: replace "stable/unstable" (still reads as approval) with **Simulation Response Category — `Model Accepts` / `Model Needs Review` / `Model Stress Failure` / `Supplier Data Required`**, each carrying **`No Gate Authority`** (e.g. "[100 ms]: Model Stress Failure / No Gate Authority") | owner-promoted | n/a — engine vocabulary | **SweepEngineFormat** — refines RC-134; PASS/BLOCK still reserved for SupplierConfirmed/PhysicallyVerified; recorded in `docs/status/DRAFT_VALIDATION_08C.md` — lanes L8 |
+| RC-139 | **Gate 08C status (owner review_31)**: `DRAFT_VALIDATION_STARTED` / `SIMULATION_SWEEP_ACTIVE` / `PLACEHOLDER_VALUES_HAVE_NO_GATE_AUTHORITY` / `SUPPLIER_THRESHOLDS_REQUIRED` / `NO_PHYSICAL_TEST_CLEARANCE` / `NO_COMPLIANCE_CLAIMS` | owner-promoted (refines RC-135) | n/a — gate status | **GateStatus** — sweep matrix active; no authority beyond stress testing — lanes L8 |
+| RC-140 | **Gate 05 J1939 PGN candidates (batch_34)**: PGN 61444 (EEC1) engine speed, PGN 61443 (EEC2) accel-pedal, PGN 65265 (CCVS) wheel-based speed, Ford UIM byte0-bit2 ignition-key, CAN_1 500 kbps J1939 — Ford byte-maps **unverified** | batch_34 (Hunter-drafted); Ford Pro J1939 upfit path | n/a — candidate signals; **NeedsOfficialFordUIMSource** | **J1939SignalCandidate / NeedsOfficialFordUIMSource / ListenOnlyCandidate / NoTransmitAuthority** — do not treat any Ford PGN/byte/rate as confirmed until official Ford/UIM docs prove it (Gate 05A); recorded in `GATE05_CONTROLS.md` — lanes L7 |
+| RC-141 | **Accel-pedal→torque caution (owner review_31)**: "accel pedal scaled **directly** into the EV inverter torque loop" is too strong → the pedal signal (from an authorized source) may only **inform** a VCU torque-demand model; **final torque requires pedal-plausibility checks, brake-override logic, fault handling, and controls-engineer review** | batch_34 (FM/controls) | n/a — controls-safety rule | **NoGoConditionCandidate / ControlsSafety** — never drive inverter torque directly from an unverified Ford signal — lanes L7/L8 |
+| RC-142 | **Gate 05 transmit rule + VCU boundary + labels (owner review_31)**: transmit stays **BLOCKED** until Ford/UIM docs allow the exact message/bus/address/use case; VCU may **read** authorized signals, command **only conversion-side** unless Ford permits; **factory safety modules remain authoritative** for ABS/ESC/brake. Labels: STARTED / LISTEN_ONLY_RESEARCH / AUTHORIZED_CHANNELS_ONLY / NO_FACTORY_SAFETY_BUS_TRANSMIT / NO_IMMOBILIZER_OR_SECURITY_BYPASS / NO_PROPRIETARY_DBC_ASSUMPTIONS | owner-promoted | n/a — gate status/security | **GateStatus / SecurityFraming** — extends RC-136; recorded in `GATE05_CONTROLS.md` — lanes L7/L8 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -2551,4 +2556,69 @@ through VCU/BMS/inverter/ABS-ESC/cluster/service tools.
 - No placeholder value has pass/block authority; no compliance/physical
   clearance from nominal values; Gate 05 stays authorized/listen-only —
   no bypass, no spoofing factory safety buses.
+- Nothing ingested; nothing marked Confirmed; ODRs untouched.
+
+---
+
+## 42. Batch 34 + owner review_31 — Gate 08C sweep cleanup + Gate 05 signal candidates (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_34_gate08c_sweep_gate05_signals.md`
+and `docs/research/raw/owner_reviews/review_31_batch_34_verdict.md`.
+Row additions: RC-138..RC-142 (no new CS). Owner: "much cleaner — you
+fixed the biggest issue: placeholders are simulation-sweep inputs, not
+pass/block authority." Two deliverables updated:
+`docs/status/DRAFT_VALIDATION_08C.md` (Gate 08C) and
+`docs/status/GATE05_CONTROLS.md` (Gate 05).
+
+### Gate 08C — wording cleanup (RC-138/139)
+
+The sweep-result vocabulary "stable/unstable" still read as an engineering
+approval → replaced with **Simulation Response Category: `Model Accepts` /
+`Model Needs Review` / `Model Stress Failure` / `Supplier Data Required`**,
+each carrying **`No Gate Authority`** (e.g. "[100 ms]: Model Stress
+Failure / No Gate Authority"). Status → `DRAFT_VALIDATION_STARTED /
+SIMULATION_SWEEP_ACTIVE / PLACEHOLDER_VALUES_HAVE_NO_GATE_AUTHORITY /
+SUPPLIER_THRESHOLDS_REQUIRED / NO_PHYSICAL_TEST_CLEARANCE /
+NO_COMPLIANCE_CLAIMS`. The no-placeholder-authority rule (RC-133) held.
+
+### Gate 05 — biggest correction: Ford signals are candidates (RC-140/141)
+
+The Hunter listed specific Ford PGNs/byte-maps (PGN 61444 engine speed,
+61443 accel-pedal, 65265 wheel speed, UIM ignition-key byte, CAN_1 500 k
+J1939) as if usable. They are **candidates only** →
+**`J1939SignalCandidate / NeedsOfficialFordUIMSource / ListenOnlyCandidate
+/ NoTransmitAuthority`** until official Ford/UIM docs prove the exact
+mapping. Ford Pro's upfit-integration J1939 path makes the *research
+direction* reasonable, but no PGN/byte/rate is confirmed. **Accel-pedal
+correction (RC-141):** "scaled directly into the EV inverter torque loop"
+→ the pedal may only **inform** a VCU torque-demand model; final torque
+needs pedal-plausibility + brake-override + fault-handling +
+controls-engineer review. Never drive inverter torque directly from an
+unverified Ford signal.
+
+### Gate 05 — transmit rule + VCU boundary + labels (RC-142)
+
+**Transmit stays BLOCKED** until Ford/UIM docs allow the exact message /
+bus / address / use case. **VCU boundary:** read authorized signals;
+command **only conversion-side** unless Ford permits; **factory safety
+modules remain authoritative** for ABS/ESC/brake. Labels: `STARTED /
+LISTEN_ONLY_RESEARCH / AUTHORIZED_CHANNELS_ONLY /
+NO_FACTORY_SAFETY_BUS_TRANSMIT / NO_IMMOBILIZER_OR_SECURITY_BYPASS /
+NO_PROPRIETARY_DBC_ASSUMPTIONS`. The listen-only doctrine (RC-136) held.
+
+### Next
+
+Owner: **Gate 05A — Source-Backed Signal Registry** (per signal: name,
+source document, bus/channel, protocol, PGN/ID, byte/bit, direction
+[listen-only/receive/transmit], allowed use, blocked use, verification
+status, proof artifact). First task: find official Ford UIM / BBAS /
+J1939 documentation. Verbatim prompt in `GATE_RESEARCH_QUEUE.md`. Gate 08C
+sweeps continue in parallel.
+
+### Standing checks
+
+- No placeholder value has gate authority; no Ford PGN/byte/rate is
+  confirmed; transmit onto factory safety buses stays blocked; no
+  bypass/spoofing.
 - Nothing ingested; nothing marked Confirmed; ODRs untouched.

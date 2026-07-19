@@ -5,6 +5,37 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 34 + review_31: Gate 08C sweep cleanup + Gate 05 signal candidates
+
+- Archived batch_34 (Gate 08C sweep + Gate 05 signals) and review_31 1:1
+  (commit `49f6e59`). New rows RC-138..142 (no new CS). Section 42.
+  Deliverables updated: `docs/status/DRAFT_VALIDATION_08C.md` and
+  `docs/status/GATE05_CONTROLS.md`. Owner: "much cleaner."
+- **Gate 08C wording cleanup (RC-138/139):** "stable/unstable" (still
+  reads as approval) → **Simulation Response Category (Model Accepts /
+  Model Needs Review / Model Stress Failure / Supplier Data Required)**,
+  each "No Gate Authority." Status → SIMULATION_SWEEP_ACTIVE /
+  PLACEHOLDER_VALUES_HAVE_NO_GATE_AUTHORITY / SUPPLIER_THRESHOLDS_REQUIRED.
+- **Gate 05 biggest correction (RC-140/141):** the Ford PGNs (61444
+  engine speed, 61443 accel-pedal, 65265 wheel speed, UIM ignition-key,
+  CAN_1 500k J1939) are **candidates** → J1939SignalCandidate /
+  NeedsOfficialFordUIMSource / ListenOnlyCandidate / NoTransmitAuthority.
+  "Accel pedal scaled directly into inverter torque" softened — pedal may
+  only inform a VCU torque-demand model (plausibility + brake-override +
+  fault-handling + controls-engineer review).
+- **Gate 05 transmit rule + VCU boundary + labels (RC-142):** transmit
+  BLOCKED until Ford/UIM docs allow the exact message/bus/address/use
+  case; VCU reads authorized signals, commands only conversion-side;
+  factory safety modules authoritative. Labels STARTED /
+  LISTEN_ONLY_RESEARCH / AUTHORIZED_CHANNELS_ONLY /
+  NO_FACTORY_SAFETY_BUS_TRANSMIT / NO_IMMOBILIZER_OR_SECURITY_BYPASS /
+  NO_PROPRIETARY_DBC_ASSUMPTIONS.
+- Research Map + queue updated; **next = Gate 05A source-backed signal
+  registry** (find official Ford UIM/BBAS/J1939 docs); Gate 08C sweeps
+  continue in parallel.
+- Nothing ingested; nothing Confirmed; no placeholder authority; no
+  confirmed Ford signal; no transmit/bypass; ODRs untouched.
+
 ## 2026-07-16 — RH batch 33 + review_30: Gate 08C draft validation + Gate 05 initiation
 
 - Archived batch_33 (Gate 08C draft validation + Gate 05 init) and
