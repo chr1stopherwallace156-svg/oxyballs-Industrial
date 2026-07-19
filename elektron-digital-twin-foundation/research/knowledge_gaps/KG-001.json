@@ -25,10 +25,14 @@
   "status": "OPEN",
   "bound_vehicle_instance_id": "VEH-000001",
   "bound_configuration_id": "CFG-000001",
-  "research_sprint": "RL-013",
-  "decision": "DT-D044",
+  "research_sprint": "RL-014",
+  "decision": "DT-D045",
   "notes": [
     "Primary focus for CONTINUE_RESEARCH before recommending physical laser scan.",
-    "Mirror option pinout contamination risk (8-pin vs 22-pin)."
+    "Mirror option pinout contamination risk (8-pin vs 22-pin).",
+    "Assigned to MISN-000001 \u2014 primary resolution vector = SRC-CAND-000006 EWD acquire."
+  ],
+  "related_mission_ids": [
+    "MISN-000001"
   ]
 }

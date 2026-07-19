@@ -1,0 +1,59 @@
+{
+  "twin_passport_id": "TWIN-VIS-000001",
+  "domain": "VISUAL",
+  "aliases": [
+    "AID-VIS-0104",
+    "EDTS-COMP-FL-SHELL-VISUAL"
+  ],
+  "component_alias": "EDTS-COMP-FL-SHELL",
+  "related_csp_id": "CSP-000001",
+  "related_aid_ids": [
+    "AID-000012"
+  ],
+  "authority_status": "ILLUSTRATIVE_ONLY",
+  "fields": {
+    "textures_uv_sets": {
+      "value": "Base clearcoat aluminum diffuse, normal maps for stamp creases, 4K layout (operator claim)",
+      "status": "RESEARCH_CLAIM",
+      "note": "No local texture bytes"
+    },
+    "material_shading_models": {
+      "value": "Anisotropic aluminum specular; clearcoat thickness 0.4 (operator claim)",
+      "status": "RESEARCH_CLAIM",
+      "note": "Numeric clearcoat rating NOT_EXECUTED as engineering truth"
+    },
+    "uv_mapping_channels": {
+      "value": "Ch0 paint wrap; Ch1 AO bake (operator claim)",
+      "status": "RESEARCH_CLAIM",
+      "note": null
+    },
+    "lod_specifications": {
+      "value": {
+        "LOD0": 45000,
+        "LOD1": 12000,
+        "LOD2": 1500
+      },
+      "status": "RESEARCH_CLAIM",
+      "note": "Polygon counts unverified \u2014 no local mesh inventory"
+    },
+    "animation_rigging_hooks": {
+      "value": "Pivot axis locked to hinge pin centerlines (operator claim)",
+      "status": "RESEARCH_CLAIM",
+      "note": "Requires hinge datum from workshop/physical \u2014 NOT verified"
+    },
+    "rendering_verification": {
+      "value": "Zero normal-map shading artifacts (operator claim)",
+      "status": "REJECTED_WITHOUT_BYTES",
+      "note": "Cannot evaluate without acquired mesh"
+    }
+  },
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "research_sprint": "RL-014",
+  "decision": "DT-D045",
+  "notes": [
+    "Independent of Engineering twin \u2014 do not merge into one passport.",
+    "Origin offset risk vs vehicle grid must be transformed before kinship constraints."
+  ]
+}

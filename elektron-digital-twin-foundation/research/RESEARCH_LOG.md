@@ -308,3 +308,25 @@ DT-D043 — **`CONTINUE_RESEARCH`** (AJR blocked until real supplier listing URL
 ### Status
 
 DT-D044 — **`CONTINUE_RESEARCH`** (KG-001).
+
+---
+
+## RL-014 — Mission queue, twin VIS/ENG, honest evidence counts
+
+- **Date:** 2026-07-19
+- **Layer:** orchestration / FL door / axle maturity honesty
+- **Agent:** Cursor Cloud Agent
+- **Question:** Formalize missions + twin domain split; migrate maturity to counts?
+
+### Findings
+
+1. **`MISN-000001`** created (`EDTS-MISN-001`) — `NOT_STARTED`; success via EWD **or** 2 Tier-1 layouts **or** physical scan.
+2. Primary assignment: acquire **`SRC-CAND-000006`** (2019 Super Duty EWD) for KG-001.
+3. Twin passports: **`TWIN-VIS-000001`** / **`TWIN-ENG-000001`** (AID-VIS-0104→`AID-000012`, AID-ENG-0082→`AID-000013`) — independent; speculative numerics = RESEARCH_CLAIM.
+4. Evidence matrix + maturity counts: operator “verified/acquired” cells demoted; **wiring 0/2**; **Dana 8/8 rejected**.
+5. **KG-003** (inner impact beam) OPEN HIGH.
+6. Protocol **v2.7.0**.
+
+### Status
+
+DT-D045 — **`CONTINUE_RESEARCH`** (acquire EWD).

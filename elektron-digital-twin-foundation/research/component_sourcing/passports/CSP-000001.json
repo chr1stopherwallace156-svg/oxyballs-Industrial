@@ -20,7 +20,8 @@
     "AJR-000003"
   ],
   "related_gap_ids": [
-    "KG-001"
+    "KG-001",
+    "KG-003"
   ],
   "authority_status": "RESEARCH_OPERATIONAL",
   "maturity_channels": {
@@ -76,10 +77,11 @@
   "operator_total_maturity_pct": 65,
   "project_maturity_status": "PARTIAL",
   "project_total_maturity_note": "Operator 62\u201365% saturation rejected as verified. Project: PARTIAL hunt with physical=0 and OEM PDFs NOT_ACQUIRED.",
-  "research_sprint": "RL-013",
-  "decision": "DT-D044",
+  "research_sprint": "RL-014",
+  "decision": "DT-D045",
   "notes": [
     "AJR-000003 HOLD_REJECTED for paid Hum3D shell pending free F-150 crossover path (CL-001 still CANDIDATE).",
-    "Do not treat maturity % as engineering confidence (Hard Rule 5)."
+    "Do not treat maturity % as engineering confidence (Hard Rule 5).",
+    "RL-014: twin VIS/ENG split; evidence matrix wiring 0/2; operator acquired counts demoted."
   ]
 }

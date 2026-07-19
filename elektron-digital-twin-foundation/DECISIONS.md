@@ -745,3 +745,21 @@ Append-only record of digital twin foundation decisions.
   5. MEDIA-000001 door-panel video candidate for KG-001 (search-discovered; confirm intended media)
   6. Kernel/rc1 unchanged
 
+
+## DT-D045 — Mission queue + twin VIS/ENG + honest evidence counts
+
+- **Change-control record:** [`decisions/DT-D045_MISSION_TWIN_EVIDENCE_COUNTS.json`](decisions/DT-D045_MISSION_TWIN_EVIDENCE_COUNTS.json)
+- **decision_id:** `DT-D045`
+- **date:** 2026-07-19
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `CONTINUE_RESEARCH`
+- **protocol_version:** `2.7.0`
+- **active_mission:** `MISN-000001` → acquire `SRC-CAND-000006` (EWD) for KG-001
+- **decision:**
+  1. Authorize Research Mission Queue (`MISN-*`)
+  2. Split Visual / Engineering twin passports (`TWIN-VIS-*` / `TWIN-ENG-*`)
+  3. Evidence coverage = hashed acquired/required counts — demote narrative “verified” cells
+  4. Reject Dana supplier 8/8 complete; reject ENG SOURCE_VERIFIED / VIS CONFIGURATION_EVALUATED without URLs
+  5. Register **KG-003** (inner impact beam) OPEN
+  6. Kernel/rc1 unchanged
+

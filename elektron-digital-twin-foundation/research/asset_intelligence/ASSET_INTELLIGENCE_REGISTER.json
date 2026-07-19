@@ -1,15 +1,15 @@
 {
   "document_id": "ASSET_INTELLIGENCE_REGISTER",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "status": "ACTIVE",
   "schema": "schemas/asset-intelligence-passport.schema.json",
   "home": "research/asset_intelligence/",
-  "decision": "DT-D044",
+  "decision": "DT-D045",
   "research_sprint": "RL-013",
   "id_policy": {
     "pattern": "AID-######",
     "immutable_handle": true,
-    "next_id": "AID-000012"
+    "next_id": "AID-000014"
   },
   "locked_configuration": {
     "vehicle_instance_id": "VEH-000001",
@@ -170,6 +170,30 @@
       "ajr_id": "AJR-000003",
       "assembly_hub": "FL_DOOR",
       "honesty_note": "AJR HOLD_REJECTED \u2014 do not purchase"
+    },
+    {
+      "asset_id": "AID-000012",
+      "path": "research/asset_intelligence/passports/AID-000012.json",
+      "title": "2017-2022 F-Series Super Duty PBR Texture Pack & Exterior Mesh (operator claim)",
+      "edts_role": "VISUAL_CANDIDATE",
+      "exact_configuration_match": "PLATFORM_BAND",
+      "acquired": "NOT_ACQUIRED",
+      "aliases": [
+        "AID-VIS-0104"
+      ],
+      "url_status": "NOT_RECORDED"
+    },
+    {
+      "asset_id": "AID-000013",
+      "path": "research/asset_intelligence/passports/AID-000013.json",
+      "title": "F-Series Driver Side Aluminum Door Assembly Engineering Geometry (GrabCAD claim)",
+      "edts_role": "CAD_CANDIDATE",
+      "exact_configuration_match": "COMPARISON_REFERENCE",
+      "acquired": "NOT_ACQUIRED",
+      "aliases": [
+        "AID-ENG-0082"
+      ],
+      "url_status": "NOT_RECORDED"
     }
   ],
   "acquisition_priority_suggested": [
@@ -198,19 +222,26 @@
     "AID-COMP-01": "AID-000011",
     "AID-COMP-02": "AID-000009",
     "CSP-000001": "AID-000011",
-    "CSP-000002": "AID-000009"
+    "CSP-000002": "AID-000009",
+    "AID-VIS-0104": "AID-000012",
+    "AID-ENG-0082": "AID-000013",
+    "EDTS-MISN-001": "MISN-000001"
   },
   "notes": [
     "Every new internet asset discovery should create or update an AID-* passport.",
     "Promote listing claims to evaluated ordinals only after local parse.",
     "Never set exact_configuration_match=CONFIGURATION_MATCHED from a marketplace title alone.",
     "RL-012 / DT-D043: supplier hub candidates added; AJR required before purchase; score_claims are not EVALUATED.",
-    "RL-013: CSP maturity trackers + KG register; Hum3D AJR rejected; M300 ACQUIRED claim demoted."
+    "RL-013: CSP maturity trackers + KG register; Hum3D AJR rejected; M300 ACQUIRED claim demoted.",
+    "RL-014: twin VIS/ENG passports; MISN-000001; evidence count honesty gate; Dana 8/8 rejected."
   ],
   "ajr_register": "research/asset_intelligence/ajr/AJR_REGISTER.json",
   "sourcing_model": "research/sourcing/DECONSTRUCTED_ASSEMBLY_SOURCING.md",
   "supplier_matrix": "research/sourcing/TIER1_SUPPLIER_MATRIX_2019_F450.json",
   "component_sourcing_register": "research/component_sourcing/COMPONENT_SOURCING_REGISTER.json",
   "knowledge_gap_register": "research/knowledge_gaps/KNOWLEDGE_GAP_REGISTER.json",
-  "media_candidate_register": "research/media_candidates/MEDIA_CANDIDATE_REGISTER.json"
+  "media_candidate_register": "research/media_candidates/MEDIA_CANDIDATE_REGISTER.json",
+  "mission_register": "research/missions/MISSION_REGISTER.json",
+  "twin_passport_register": "research/twin_passports/TWIN_PASSPORT_REGISTER.json",
+  "evidence_matrices": "research/evidence_matrices/"
 }

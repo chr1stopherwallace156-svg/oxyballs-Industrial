@@ -1,0 +1,23 @@
+{
+  "document_id": "MISSION_REGISTER",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "schema": "schemas/research-mission.schema.json",
+  "decision": "DT-D045",
+  "next_id": "MISN-000002",
+  "active_missions": [
+    {
+      "mission_id": "MISN-000001",
+      "aliases": [
+        "EDTS-MISN-001"
+      ],
+      "path": "research/missions/MISN-000001.json",
+      "completion_status": "NOT_STARTED",
+      "primary_target": "SRC-CAND-000006",
+      "gap_id": "KG-001"
+    }
+  ],
+  "notes": [
+    "Orchestration issues missions; silo CFG-000001 only."
+  ]
+}

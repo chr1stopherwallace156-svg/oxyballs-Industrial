@@ -1,0 +1,194 @@
+{
+  "document_id": "EVIDENCE_COVERAGE_MATRIX_FL_DOOR_SHELL",
+  "version": "1.0.0",
+  "authority_status": "RESEARCH_OPERATIONAL_HONEST",
+  "component_alias": "EDTS-COMP-FL-SHELL / COMP-FL-SHELL",
+  "related_csp_id": "CSP-000001",
+  "related_twin_ids": [
+    "TWIN-VIS-000001",
+    "TWIN-ENG-000001"
+  ],
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "policy": {
+    "counts_are_hashed_local_sources_only": true,
+    "operator_verified_cells_without_bytes": "REJECTED",
+    "wiring_starvation_blocks_simulation": true
+  },
+  "rows": [
+    {
+      "engineering_property": "Geometry",
+      "evidence_types_claimed": [
+        "OEM Master Body Book",
+        "3D Surface Photogrammetry",
+        "Supplier Stamp Models"
+      ],
+      "required_count": 3,
+      "operator_claimed_acquired": 3,
+      "project_acquired_hashed": 0,
+      "project_status": "STARVED",
+      "honesty_note": "Operator claimed 3/3 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+    },
+    {
+      "engineering_property": "Materials",
+      "evidence_types_claimed": [
+        "Ford Metallurgical Press Releases",
+        "OEM Material Spec Sheets"
+      ],
+      "required_count": 2,
+      "operator_claimed_acquired": 2,
+      "project_acquired_hashed": 0,
+      "project_status": "STARVED",
+      "honesty_note": "Operator claimed 2/2 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+    },
+    {
+      "engineering_property": "Mass",
+      "evidence_types_claimed": [
+        "Component Shipping Slips",
+        "Physical Scale Teardowns"
+      ],
+      "required_count": 2,
+      "operator_claimed_acquired": 1,
+      "project_acquired_hashed": 0,
+      "project_status": "STARVED",
+      "honesty_note": "Operator claimed 1/2 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+    },
+    {
+      "engineering_property": "Center of Gravity",
+      "evidence_types_claimed": [
+        "Kinematic CAD Assembly Calculation"
+      ],
+      "required_count": 1,
+      "operator_claimed_acquired": 0,
+      "project_acquired_hashed": 0,
+      "project_status": "STARVED",
+      "honesty_note": "Operator claimed 0/1 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+    },
+    {
+      "engineering_property": "Mounting Interfaces",
+      "evidence_types_claimed": [
+        "OEM Mechanical Service Assembly Manuals",
+        "Supplier Hinge Drawings"
+      ],
+      "required_count": 2,
+      "operator_claimed_acquired": 2,
+      "project_acquired_hashed": 0,
+      "project_status": "STARVED",
+      "honesty_note": "Operator claimed 2/2 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+    },
+    {
+      "engineering_property": "Fasteners",
+      "evidence_types_claimed": [
+        "Ford Parts Catalog Standard Hardware Schematics"
+      ],
+      "required_count": 4,
+      "operator_claimed_acquired": 4,
+      "project_acquired_hashed": 0,
+      "project_status": "STARVED",
+      "honesty_note": "Operator claimed 4/4 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+    },
+    {
+      "engineering_property": "Torque Specs",
+      "evidence_types_claimed": [
+        "2019 Workshop Manual Fastener Torque Tables"
+      ],
+      "required_count": 2,
+      "operator_claimed_acquired": 1,
+      "project_acquired_hashed": 0,
+      "project_status": "STARVED",
+      "honesty_note": "Operator claimed 1/2 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+    },
+    {
+      "engineering_property": "Wiring",
+      "evidence_types_claimed": [
+        "Motorcraft Service EWD Portfolio"
+      ],
+      "required_count": 2,
+      "operator_claimed_acquired": 0,
+      "project_acquired_hashed": 0,
+      "project_status": "STARVED",
+      "honesty_note": "Operator claimed 0/2 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+    },
+    {
+      "engineering_property": "Fluid Routing",
+      "evidence_types_claimed": [],
+      "required_count": null,
+      "operator_claimed_acquired": null,
+      "project_acquired_hashed": null,
+      "project_status": "NOT_APPLICABLE",
+      "honesty_note": "N/A dry assembly"
+    },
+    {
+      "engineering_property": "Motion/Kinematics",
+      "evidence_types_claimed": [
+        "Hinge Swing Clearance Path Blueprints"
+      ],
+      "required_count": 1,
+      "operator_claimed_acquired": 1,
+      "project_acquired_hashed": 0,
+      "project_status": "STARVED",
+      "honesty_note": "Operator claimed 1/1 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+    },
+    {
+      "engineering_property": "Tolerances",
+      "evidence_types_claimed": [
+        "OEM Body Stamping Boundary Specification Sheets"
+      ],
+      "required_count": 1,
+      "operator_claimed_acquired": 0,
+      "project_acquired_hashed": 0,
+      "project_status": "STARVED",
+      "honesty_note": "Operator claimed 0/1 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+    },
+    {
+      "engineering_property": "Service Procedures",
+      "evidence_types_claimed": [
+        "Section 501-14 Workshop Disassembly Guides"
+      ],
+      "required_count": 1,
+      "operator_claimed_acquired": 1,
+      "project_acquired_hashed": 0,
+      "project_status": "STARVED",
+      "honesty_note": "Operator claimed 1/1 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+    },
+    {
+      "engineering_property": "Failure Modes",
+      "evidence_types_claimed": [
+        "NHTSA Recall Database",
+        "OEM TSBs"
+      ],
+      "required_count": 8,
+      "operator_claimed_acquired": 5,
+      "project_acquired_hashed": 0,
+      "project_status": "STARVED",
+      "honesty_note": "Operator claimed 5/8 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+    }
+  ],
+  "critical_starvation": [
+    {
+      "property": "Wiring",
+      "project": "0 / 2",
+      "blocks": [
+        "KG-001",
+        "MISN-000001"
+      ]
+    },
+    {
+      "property": "Tolerances",
+      "project": "0 / 1",
+      "blocks": [
+        "TWIN-ENG dimensional claims"
+      ]
+    },
+    {
+      "property": "Center of Gravity",
+      "project": "0 / 1",
+      "blocks": [
+        "Kinematic mass properties"
+      ]
+    }
+  ],
+  "research_sprint": "RL-014",
+  "decision": "DT-D045"
+}

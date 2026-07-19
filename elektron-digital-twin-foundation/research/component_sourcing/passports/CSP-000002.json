@@ -74,10 +74,11 @@
   "operator_total_maturity_pct": 82,
   "project_maturity_status": "RESEARCH_REQUIRED",
   "project_total_maturity_note": "Operator 82% saturated + ACQUIRED/PARSED REJECTED. No local STEP hash. Project maturity RESEARCH_REQUIRED.",
-  "research_sprint": "RL-013",
-  "decision": "DT-D044",
+  "research_sprint": "RL-014",
+  "decision": "DT-D045",
   "notes": [
     "Narrative Exact Config Match=Yes REJECTED \u2014 remains conditional/UNKNOWN until hashed proof.",
-    "AJR-000001 remains NOT_CLEARED until listing URL."
+    "AJR-000001 remains NOT_CLEARED until listing URL.",
+    "RL-014: operator Dana supplier 8/8 COMPLETE REJECTED \u2014 project hashed = 0."
   ]
 }

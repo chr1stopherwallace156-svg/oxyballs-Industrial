@@ -1,10 +1,10 @@
 {
   "document_id": "COMPONENT_SOURCING_REGISTER",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "ACTIVE",
   "schema": "schemas/component-sourcing-passport.schema.json",
   "home": "research/component_sourcing/",
-  "decision": "DT-D044",
+  "decision": "DT-D045",
   "research_sprint": "RL-013",
   "id_policy": {
     "pattern": "CSP-######",
@@ -18,7 +18,8 @@
   "maturity_policy": {
     "operator_pct_bars": "RESEARCH_DRAFT_ESTIMATE_ONLY",
     "hard_rule_5": "Operator % \u2260 engineering confidence",
-    "verified_requires": "Local hashed evidence per channel"
+    "verified_requires": "Local hashed evidence per channel",
+    "count_format": "acquired_hashed / required_target (preferred over %)"
   },
   "passports": [
     {
@@ -50,5 +51,8 @@
     "AID-COMP-01": "CSP-000001",
     "AID-COMP-02": "CSP-000002",
     "AID-COMP-03": "CSP-000003"
-  }
+  },
+  "maturity_counts": "research/component_sourcing/COMPONENT_MATURITY_COUNTS.json",
+  "twin_passport_register": "research/twin_passports/TWIN_PASSPORT_REGISTER.json",
+  "evidence_matrix_fl_door": "research/evidence_matrices/FL_DOOR_SHELL_EVIDENCE_COVERAGE.json"
 }

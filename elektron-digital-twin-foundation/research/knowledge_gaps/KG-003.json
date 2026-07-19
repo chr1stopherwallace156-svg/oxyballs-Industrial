@@ -1,0 +1,32 @@
+{
+  "gap_id": "KG-003",
+  "component": "Inner Cavity Structural Impact Beam (COMP-FL-INT-BEAM)",
+  "reported_oem_part_number": null,
+  "critical_need": "Cross-sectional dimensional profile and thickness of the aluminum safety beam extrusion.",
+  "priority": "HIGH",
+  "possible_sources": [
+    "OEM Collision Repair Manual frame/door section",
+    "Salvage yard destructive teardown scan",
+    "Physical structured-light cavity scan (Sprint 7 protocol)"
+  ],
+  "related_aid_ids": [
+    "AID-000013",
+    "AID-000003"
+  ],
+  "related_csp_ids": [
+    "CSP-000001"
+  ],
+  "related_src_cand_ids": [
+    "SRC-CAND-000002"
+  ],
+  "related_media_ids": [],
+  "status": "OPEN",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "research_sprint": "RL-014",
+  "decision": "DT-D045",
+  "notes": [
+    "Blocks inner-structure engineering completeness for FL door.",
+    "Do not invent beam dimensions from F-150 crossover claims."
+  ]
+}

@@ -1,83 +1,75 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:edts:schema:knowledge-gap:1.0.0",
-  "title": "EDTS Knowledge Gap",
+  "$id": "urn:edts:schema:research-mission:1.0.0",
+  "title": "EDTS Research Mission",
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "gap_id",
-    "component",
-    "critical_need",
-    "priority",
-    "status",
+    "mission_id",
+    "id_immutable",
+    "objective",
+    "success_criteria",
+    "completion_status",
     "bound_vehicle_instance_id",
     "bound_configuration_id"
   ],
   "properties": {
-    "gap_id": {
+    "mission_id": {
       "type": "string",
-      "pattern": "^KG-[0-9]{3}$"
+      "pattern": "^MISN-[0-9]{6}$"
     },
-    "component": {
+    "id_immutable": {
+      "type": "boolean",
+      "const": true
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "objective": {
       "type": "string"
     },
-    "reported_oem_part_number": {
-      "type": [
-        "string",
-        "null"
-      ]
+    "target_gap_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
-    "critical_need": {
-      "type": "string"
+    "success_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
-    "priority": {
+    "evidence_required": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "completion_status": {
       "type": "string",
       "enum": [
-        "CRITICAL",
-        "HIGH",
-        "MEDIUM",
-        "LOW"
-      ]
-    },
-    "possible_sources": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "related_aid_ids": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "related_csp_ids": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "related_src_cand_ids": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "related_media_ids": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "status": {
-      "type": "string",
-      "enum": [
-        "OPEN",
+        "NOT_STARTED",
         "IN_PROGRESS",
-        "MITIGATED",
-        "CLOSED",
-        "BLOCKED"
+        "BLOCKED",
+        "COMPLETE",
+        "CANCELLED"
       ]
+    },
+    "assigned_src_cand_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "assigned_aid_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "bound_vehicle_instance_id": {
       "type": "string"
@@ -98,12 +90,6 @@
       ]
     },
     "notes": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "related_mission_ids": {
       "type": "array",
       "items": {
         "type": "string"

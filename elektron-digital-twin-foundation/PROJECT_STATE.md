@@ -5,15 +5,15 @@
 
 | Concern | Status |
 |---|---|
-| Research protocol | **v2.6.0** (Hard Rules 13–17; CSP + KG homes) |
-| Component Sourcing Passports | **ACTIVE** (`CSP-000001..000003`) |
-| Knowledge Gap focus | **KG-001** OPEN (CRITICAL) |
-| AJR-000003 (Hum3D door) | **`HOLD_REJECTED`** — do not purchase |
-| AID-000009 (M300) | **`NOT_ACQUIRED`** (operator ACQUIRED claim rejected) |
-| Recommended decision | **`CONTINUE_RESEARCH`** → KG-001 |
-| Passport geometry | `ABSENT` |
+| Active mission | **`MISN-000001`** → KG-001 (EWD) — `NOT_STARTED` |
+| Twin passports | VIS `TWIN-VIS-000001` / ENG `TWIN-ENG-000001` (independent) |
+| Evidence counts | Hashed-only; operator “verified” cells demoted |
+| Wiring coverage | **0 / 2** (starved) |
+| Dana 8/8 supplier claim | **Rejected** |
+| Recommended decision | **`CONTINUE_RESEARCH`** — acquire `SRC-CAND-000006` |
+| Geometry | `ABSENT` |
 | Kernel / rc1 | Unchanged |
 
 ## Change-control
 
-- `decisions/DT-D030_*.json` … `DT-D044_*.json`
+- `decisions/DT-D030_*.json` … `DT-D045_*.json`

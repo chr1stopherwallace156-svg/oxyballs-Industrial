@@ -1,0 +1,36 @@
+{
+  "document_id": "TWIN_PASSPORT_REGISTER",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "schema": "schemas/twin-domain-passport.schema.json",
+  "decision": "DT-D045",
+  "policy": {
+    "visual_and_engineering_are_independent": true,
+    "speculative_numeric_fields": "RESEARCH_CLAIM_OR_NOT_EXECUTED",
+    "forbid_merge": "Never collapse VIS+ENG into one silo truth record"
+  },
+  "passports": [
+    {
+      "twin_passport_id": "TWIN-VIS-000001",
+      "domain": "VISUAL",
+      "aliases": [
+        "AID-VIS-0104"
+      ],
+      "path": "research/twin_passports/TWIN-VIS-000001.json",
+      "related_aid": "AID-000012"
+    },
+    {
+      "twin_passport_id": "TWIN-ENG-000001",
+      "domain": "ENGINEERING",
+      "aliases": [
+        "AID-ENG-0082"
+      ],
+      "path": "research/twin_passports/TWIN-ENG-000001.json",
+      "related_aid": "AID-000013"
+    }
+  ],
+  "alias_map": {
+    "AID-VIS-0104": "TWIN-VIS-000001",
+    "AID-ENG-0082": "TWIN-ENG-000001"
+  }
+}

@@ -1,11 +1,11 @@
 {
   "document_id": "KNOWLEDGE_GAP_REGISTER",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "ACTIVE",
   "schema": "schemas/knowledge-gap.schema.json",
-  "decision": "DT-D044",
-  "research_sprint": "RL-013",
-  "next_id": "KG-003",
+  "decision": "DT-D045",
+  "research_sprint": "RL-014",
+  "next_id": "KG-004",
   "gaps": [
     {
       "gap_id": "KG-001",
@@ -18,7 +18,13 @@
       "priority": "HIGH",
       "status": "OPEN",
       "path": "research/knowledge_gaps/KG-002.json"
+    },
+    {
+      "gap_id": "KG-003",
+      "priority": "HIGH",
+      "status": "OPEN",
+      "path": "research/knowledge_gaps/KG-003.json"
     }
   ],
-  "focus": "KG-001 door harness routing before physical scan authorization"
+  "focus": "KG-001 via MISN-000001 / SRC-CAND-000006 (EWD); KG-003 secondary"
 }
