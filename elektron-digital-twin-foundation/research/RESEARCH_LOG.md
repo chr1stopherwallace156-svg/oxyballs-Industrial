@@ -286,3 +286,25 @@ DT-D042 — Asset Intelligence DB **ACTIVE**; still `CANDIDATE_ACQUISITION_RECOM
 ### Status
 
 DT-D043 — **`CONTINUE_RESEARCH`** (AJR blocked until real supplier listing URLs).
+
+---
+
+## RL-013 — Component sourcing passports, KG register, Hum3D reject
+
+- **Date:** 2026-07-19
+- **Layer:** component maturity / door harness / axle
+- **Agent:** Cursor Cloud Agent
+- **Question:** Track per-component maturity + gaps; decide Hum3D purchase; honor M300 acquire claim?
+
+### Findings
+
+1. **CSP-000001..000003** created (aliases AID-COMP-01/02/03). Operator saturation % retained as draft estimates only.
+2. **KG-001 CRITICAL** (harness routing) and **KG-002 HIGH** (M300 wall thickness) registered OPEN.
+3. **AJR-000003 HOLD_REJECTED** — $79 Hum3D door shell is visual duplicate of free F-150 crossover path (CL-001 still CANDIDATE).
+4. Operator **AID-COMP-02 ACQUIRED→PARSED** and Exact Match=Yes **rejected** — `AID-000009` remains `NOT_ACQUIRED`.
+5. **MEDIA-000001** search-discovered Super Duty door-panel removal video candidate for KG-001 (confirm intended media).
+6. Next focus: KG-001 via EWD + media/salvage before physical scan.
+
+### Status
+
+DT-D044 — **`CONTINUE_RESEARCH`** (KG-001).

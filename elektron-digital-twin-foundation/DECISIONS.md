@@ -728,3 +728,20 @@ Append-only record of digital twin foundation decisions.
   5. Demote SPECIFICATION_READY / SOURCE_VERIFIED / 0.9x narrative scores without bytes
   6. Front axle remains `PRIMARY_SOURCE_REQUIRED`; kernel/rc1 unchanged
 
+
+## DT-D044 — Component Sourcing Passports + Knowledge Gaps + Hum3D HOLD_REJECTED
+
+- **Change-control record:** [`decisions/DT-D044_COMPONENT_SOURCING_KG_AJR.json`](decisions/DT-D044_COMPONENT_SOURCING_KG_AJR.json)
+- **decision_id:** `DT-D044`
+- **date:** 2026-07-19
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `CONTINUE_RESEARCH` (focus KG-001)
+- **protocol_version:** `2.6.0`
+- **decision:**
+  1. Authorize `CSP-*` maturity trackers — operator % = draft estimates only
+  2. Authorize Knowledge Gap Register — **KG-001 CRITICAL**, KG-002 HIGH
+  3. **AJR-000003 `HOLD_REJECTED`** — do not buy $79 Hum3D door shell
+  4. Reject M300 `ACQUIRED→PARSED` / Exact Match=Yes without bytes
+  5. MEDIA-000001 door-panel video candidate for KG-001 (search-discovered; confirm intended media)
+  6. Kernel/rc1 unchanged
+

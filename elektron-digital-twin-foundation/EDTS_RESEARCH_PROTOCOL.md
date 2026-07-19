@@ -374,6 +374,9 @@ Replacement query model for **verified engineering claims**: traverse Evidence G
 | `research/asset_intelligence/ajr/AJR_REGISTER.json` | Hard Rule 17 Acquisition Justification Reports |
 | `research/sourcing/DECONSTRUCTED_ASSEMBLY_SOURCING.md` | Assembly Orchestrator / deconstructed sourcing model |
 | `research/sourcing/TIER1_SUPPLIER_MATRIX_2019_F450.json` | Tier-1 supplier hunt matrix |
+| `research/component_sourcing/COMPONENT_SOURCING_REGISTER.json` | Component Sourcing Passports (`CSP-*`) + maturity channels |
+| `research/knowledge_gaps/KNOWLEDGE_GAP_REGISTER.json` | Knowledge Gap Register (`KG-*`) |
+| `research/media_candidates/MEDIA_CANDIDATE_REGISTER.json` | Video/photo media candidates |
 | `research/src_candidates/SRC_CANDIDATE_REGISTER.json` | Immutable `SRC-CAND-*` register + Next Search Queue |
 | `research/claims/CLAIM_REGISTER.json` | Hard Rule 15 major-claim index |
 | `layers/L01/L1_SOURCE_PACK_01_AUTHENTICITY_AUDIT.md` | Pack verification posture |
