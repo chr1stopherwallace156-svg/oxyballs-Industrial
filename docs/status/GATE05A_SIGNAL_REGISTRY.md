@@ -5,9 +5,17 @@ batch_35 + owner review_32). Every signal carries its source document,
 bus/channel, protocol, PGN/ID, byte/bit map, direction, allowed/blocked
 use, verification status, and proof artifact.
 
-**Status (owner review_32): `SIGNAL_REGISTRY_STARTED` /
-`LISTEN_ONLY_RESEARCH` / `UNVERIFIED_STAGE` / `NO_ACTIVE_TRANSMISSIONS` /
-`NO_FACTORY_SAFETY_BUS_CONTROL`.**
+**Status (owner review_33): `SIGNAL_REGISTRY_STARTED` /
+`UNVERIFIED_STAGE` / `LISTEN_ONLY_RESEARCH` / `NO_ACTIVE_TRANSMISSIONS` /
+`NO_FACTORY_SAFETY_BUS_CONTROL` / `NO_PROPRIETARY_DBC_ASSUMPTIONS`.**
+
+> **Transmit-config re-correction (review_33 — RC-148):** the ledger line
+> "unlocks custom VCU configurations on the body-builder bus" is corrected
+> **again** to: *unlocks authorized **receive/listen-only** VCU awareness
+> from the body-builder bus; transmit behaviour remains **blocked** unless
+> official Ford documentation explicitly allows the exact message,
+> address, timing, bus, and use case.* (Recurrence of the RC-142/144
+> transmit rule.)
 
 **Strict compliance directive:** under unverified conditions **no PGN,
 byte offset, or bit map is treated as confirmed**, and all structures stay
@@ -57,8 +65,13 @@ transmit into Ford ABS/ESC/anti-theft/safety buses.*
 
 | # | Signal | Source | Bus | ID | Direction | Allowed use | Blocked use |
 |---|---|---|---|---|---|---|---|
-| S5 | `M_EV_Torque_Command_Nm` | conversion inverter integration manual | CAN_2 (isolated EV inverter) | pending inverter DBC | Receive/Transmit **within the isolated loop only** | internal traction-inverter loop modeling | forwarding commands onto factory Ford chassis components |
-| S6 | `M_BMS_Pack_SOC_Pct` | conversion BMS interface guidelines | CAN_3 (isolated EV battery) | pending BMS DBC | Receive **within the isolated loop only** | cabin state estimation / performance-tracking sim | HV contactor physical disconnect commands |
+| S5 | `M_EV_Torque_Command_Nm` | conversion inverter integration manual | CAN_2 (isolated EV inverter) | via inverter DBC | Receive/Transmit **within the isolated loop only** | internal traction-inverter loop modeling | forwarding commands onto factory Ford chassis components |
+| S6 | `M_BMS_Pack_SOC_Pct` | conversion BMS interface guidelines | CAN_3 (isolated EV battery) | via BMS DBC | Receive **within the isolated loop only** | cabin state estimation / performance-tracking sim | HV contactor physical disconnect commands |
+| S7 | `M_Inverter_Rpm` | inverter DBC | CAN_2 | via inverter DBC | Receive | VCU state-machine machine-speed input | — |
+| S8 | `M_BMS_Pack_Volt` | BMS DBC | CAN_3 | via BMS DBC | Receive | VCU input-voltage monitoring | HV contactor commands |
+| S9 | `M_BMS_Pack_Current` | BMS DBC | CAN_3 | via BMS DBC | Receive | VCU energy-consumption trend | — |
+| S10 | `M_DCDC_Temp` | DC-DC DBC | LV supervisor | via DC-DC DBC | Receive | VCU LV thermal-trend monitoring | — |
+| S11 | `M_CHG_Plug_Connected` | charger DBC | charger loop | via charger DBC | Receive | alert VCU to isolate HV during charging | — |
 
 **Proof artifacts** (per signal): passive network-capture text exports
 (no transceiver ACK) for the Ford-side listen-only rows; component/BMS

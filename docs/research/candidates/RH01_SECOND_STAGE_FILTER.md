@@ -246,6 +246,12 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-145 | **Gate 05A signal registry (batch_35)**: 6 signals — Ford-side S1 wheel-speed (PGN 65215 EWS1), S2 accel-pedal (61443 EEC2), S3 brake-switch (61441 EBC1), S4 ignition (Ford UIM); EV-side S5 inverter torque (CAN_2), S6 BMS SOC (CAN_3) | batch_35 (Hunter-drafted); public SAE J1939-71 | n/a — signal registry; **byte/bit Unverified** | **Ford-side: Public/Standard J1939 Candidate / UnverifiedStage / NeedsExactStandardText / NeedsVehicleCapture / Listen-Only / No control authority. EV-side: owned isolated loops.** Recorded in `GATE05A_SIGNAL_REGISTRY.md` — lanes L7 |
 | RC-146 | **Signal-use restrictions (owner review_32)**: **accel-pedal (S2)** Allowed = compare driver-demand trend in **simulation**; Blocked = **direct inverter torque command, physical torque arbitration, road-test torque control**. **brake-switch (S3)** Allowed = **simulation-only** regen-decay study; Blocked = **physical regen disable, braking validation, or safety control without a confirmed source + debounce logic + brake-engineer review** | owner-promoted (extends RC-141) | n/a — controls-safety rule | **NoGoConditionCandidate / ControlsSafety** — an unverified Ford signal is never physical torque/brake authority — lanes L7/L8 |
 | RC-147 | **Gate 05A status (owner review_32)**: `SIGNAL_REGISTRY_STARTED` / `LISTEN_ONLY_RESEARCH` / `UNVERIFIED_STAGE` / `NO_ACTIVE_TRANSMISSIONS` / `NO_FACTORY_SAFETY_BUS_CONTROL` | owner-promoted | n/a — gate status | **GateStatus** — next is Gate 05B (Controls Dependency Map) — lanes L7 |
+| RC-148 | **Gate 05A transmit-config re-correction + status (owner review_33)**: "unlocks custom VCU configurations on the body-builder bus" → **unlocks authorized RECEIVE/LISTEN-ONLY VCU awareness; transmit blocked unless Ford docs allow the exact message/address/timing/bus/use case**; status adds **`NO_PROPRIETARY_DBC_ASSUMPTIONS`** | batch_36 (ledger line RECURRED) | n/a — gate doctrine | **GateStatus / SecurityFraming** — **RECURRENCE** of the RC-142/144 transmit rule (re-corrected); recorded in `docs/status/GATE05A_SIGNAL_REGISTRY.md` — lanes L7 |
+| RC-149 | **Gate 05B controls dependency map (batch_36)**: Ford-side receive-only inputs (accel/brake/ignition/wheel-speed on CAN_1) + EV-side receive inputs (inverter rpm, BMS volt/current/SOC, DC-DC temp, charger plug — owned DBCs) + VCU decisions + driver warnings + fault levels 1–3 + directionality/isolation constraints | batch_36 (Hunter-drafted) | n/a — controls map | **ControlsDependencyMap** — recorded in `docs/status/GATE05B_CONTROLS_DEPENDENCY_MAP.md`; Ford-side stays ListenOnlyCandidate; EV-side isolated — lanes L7 |
+| RC-150 | **VCU decision authority = SimulationOnly (owner review_33)**: Torque Demand Arbitration (needs verified pedal source + brake override + plausibility + inverter DBC + BMS limits + controls-engineer review); **Pre-Charge (do NOT assume the VCU controls contactors — pre-charge authority may belong to the BMS/PDU safety controller)**; Thermal Derating (needs supplier curves + temp limits) | owner-promoted | n/a — controls-safety rule | **NoGoConditionCandidate / ControlsSafety** — VCU decisions carry no physical authority until sources + DBCs + supplier ownership are proven (BQ-27) — lanes L7/L8 |
+| RC-151 | **Driver-warning output rule (owner review_33)**: EV warnings (malfunction indicator, thermal, SOC) → **isolated display node / service laptop / prototype dashboard ONLY**; **factory cluster warning integration = `BLOCKED_PENDING_AUTHORIZED_FORD_INTERFACE`** | owner-promoted | n/a — output rule | **NoGoConditionCandidate** — no warning injected into the Ford factory cluster until an authorized Ford interface exists — lanes L7 |
+| RC-152 | **Emergency-shutdown authority (owner review_33)**: Fault Level 3 → **request** EV-side contactor open / torque inhibit / restart lockout **through the authorized BMS-PDU safety architecture**; `SimulationOnly` until BMS/PDU ownership + contactor-control authority confirmed; **the VCU does NOT automatically own final HV shutdown** unless the supplier architecture confirms it | owner-promoted | n/a — controls-safety rule | **NoGoConditionCandidate / ControlsSafety** — HV shutdown authority is a supplier-architecture question (BQ-27) — lanes L7/L8 |
+| RC-153 | **Gate 05B status (owner review_33)**: `CONTROL_DEPENDENCY_MAP_STARTED` / `SIMULATION_ONLY` / `FORD_SIDE_RECEIVE_ONLY` / `EV_SIDE_ISOLATED_CONTROL_ONLY` / `PRECHARGE_AUTHORITY_UNCONFIRMED` / `DRIVER_WARNING_OUTPUT_UNCONFIRMED` / `NO_PHYSICAL_TORQUE_CONTROL` / `NO_FACTORY_CLUSTER_INJECTION` | owner-promoted | n/a — gate status | **GateStatus** — next is Gate 05C (Controls State Machine) — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -2690,4 +2696,62 @@ stays parked; Gate 05 continues.
 - No placeholder value has gate authority; no Ford signal is confirmed;
   transmit onto factory buses stays blocked; unverified Ford signals are
   never torque/brake authority.
+- Nothing ingested; nothing marked Confirmed; ODRs untouched.
+
+---
+
+## 44. Batch 36 + owner review_33 — Gate 05B Controls Dependency Map (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_36_gate05b_controls_dependency_map.md`
+and `docs/research/raw/owner_reviews/review_33_batch_36_verdict.md`.
+Row additions: RC-148..RC-153 (no new CS). Owner: "very strong now."
+Deliverable: `docs/status/GATE05B_CONTROLS_DEPENDENCY_MAP.md`; Gate 05A
+registry updated (S7–S11 EV-side receive signals added; status +
+`NO_PROPRIETARY_DBC_ASSUMPTIONS`).
+
+### Gate 05A — transmit-config recurrence (RC-148)
+
+The ledger line "unlocks custom VCU configurations on the body-builder
+bus" reappeared → re-corrected to **authorized receive/listen-only VCU
+awareness; transmit blocked unless Ford docs allow the exact
+message/address/timing/bus/use case.** A recurrence of the RC-142/144
+transmit rule (data point for the M10 regression scanner). Status gained
+`NO_PROPRIETARY_DBC_ASSUMPTIONS`.
+
+### Gate 05B — the authority corrections (RC-149..153)
+
+The dependency map is well-structured; the corrections are all about
+**where control authority actually lives**:
+
+- **VCU decisions = SimulationOnly (RC-150).** Torque arbitration,
+  pre-charge, and thermal derating all carry authority conditions.
+  **Critically: do NOT assume the VCU controls contactors / pre-charge —
+  that authority may belong to the BMS/PDU safety controller** (BQ-27).
+- **Driver warnings (RC-151):** EV-side display / service laptop /
+  prototype dashboard only; **factory cluster integration =
+  `BLOCKED_PENDING_AUTHORIZED_FORD_INTERFACE`.**
+- **Emergency shutdown (RC-152):** Fault Level 3 **requests** EV-side
+  contactor open / torque inhibit / restart lockout **through the
+  authorized BMS-PDU safety architecture**; the VCU does not
+  automatically own final HV shutdown.
+- **Directionality held:** Ford-side receive-only; EV-side transmit
+  isolated to CAN_2/CAN_3; no CAN_1→CAN_2 routing of unverified Ford data;
+  no packet injection onto factory safety buses; no unauthorized J1939 /
+  upfitter overrides.
+
+### Next
+
+Owner: **Gate 05C — Controls State Machine** — 11 states (OFF, ACCESSORY,
+READY_REQUEST, PRECHARGE_REQUEST, READY_TO_DRIVE, DRIVE_ENABLED, DERATE,
+FAULT_LATCHED, SERVICE_MODE, CHARGE_CONNECTED, EMERGENCY_SHUTDOWN), each
+with required inputs, allowed EV-side outputs, blocked Ford-side outputs,
+fault transitions, proof artifact, verification status. Queued in
+`GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- Ford-side signals inform the model only; EV-side authority stays
+  isolated until sources + DBCs + supplier ownership + test paths are
+  proven; no factory-cluster injection; no VCU-owned HV shutdown yet.
 - Nothing ingested; nothing marked Confirmed; ODRs untouched.

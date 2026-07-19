@@ -371,19 +371,19 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_32):** **Gate 05B — Controls
-Dependency Map** — map Ford-side signals needed, EV-side signals needed,
-VCU decisions, driver warnings, fault states, what is receive-only, what
-is transmit-only on the EV side, and what is completely blocked. Keep the
-listen-only / no-safety-bus-transmit doctrine; Ford-side signals stay
-candidates until proven; accel-pedal never commands inverter torque
-directly; **NEVER "PATS bypass."** Verbatim scope in
-[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); Gate 05
-doctrine in `docs/status/GATE05_CONTROLS.md`, signal registry in
-`docs/status/GATE05A_SIGNAL_REGISTRY.md`. **Gate 08C is parked**
-(`SIMULATION_SWEEP_MATRIX_CREATED / PARKED_FOR_SUPPLIER_DATA`). Gate 07
-artifacts + the 15-mode FMEA registry stay open. Order after 05: Gate 06
-deep dive → 09 → 10 → 11.
+**Next expected batch (owner review_33):** **Gate 05C — Controls State
+Machine** — 11 states (OFF, ACCESSORY, READY_REQUEST, PRECHARGE_REQUEST,
+READY_TO_DRIVE, DRIVE_ENABLED, DERATE, FAULT_LATCHED, SERVICE_MODE,
+CHARGE_CONNECTED, EMERGENCY_SHUTDOWN), each with required inputs, allowed
+EV-side outputs, blocked Ford-side outputs, fault transitions, proof
+artifact, verification status. Keep Ford-side receive-only, EV-side
+isolated, **authority unconfirmed** until the BMS/PDU supplier
+architecture proves pre-charge/contactor/HV-shutdown ownership (BQ-27);
+**NEVER "PATS bypass"; no factory-cluster injection.** Verbatim scope in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); Gate 05B
+map in `docs/status/GATE05B_CONTROLS_DEPENDENCY_MAP.md`. **Gate 08C is
+parked**; Gate 07 artifacts + the 15-mode FMEA registry stay open. Order
+after 05: Gate 06 deep dive → 09 → 10 → 11.
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

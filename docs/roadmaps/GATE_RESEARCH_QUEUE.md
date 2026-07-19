@@ -201,26 +201,34 @@ source + a vehicle capture prove them.
 > - verification status
 > - required proof artifact
 
-## Gate 05B — Controls Dependency Map  · STATUS: NEXT (owner review_32)
+## Gate 05B — Controls Dependency Map  · STATUS: CONTROL_DEPENDENCY_MAP_STARTED (batch_36)
 
-The next Gate 05 sub-task. Map the control/communication dependencies —
-keeping the listen-only / no-safety-bus-transmit doctrine (RC-136/142)
-and the signal-use restrictions (RC-146).
+Deliverable `docs/status/GATE05B_CONTROLS_DEPENDENCY_MAP.md`. Status
+(review_33): `CONTROL_DEPENDENCY_MAP_STARTED / SIMULATION_ONLY /
+FORD_SIDE_RECEIVE_ONLY / EV_SIDE_ISOLATED_CONTROL_ONLY /
+PRECHARGE_AUTHORITY_UNCONFIRMED / DRIVER_WARNING_OUTPUT_UNCONFIRMED /
+NO_PHYSICAL_TORQUE_CONTROL / NO_FACTORY_CLUSTER_INJECTION`. VCU decisions
+are SimulationOnly (pre-charge/contactor/HV-shutdown authority may belong
+to the BMS/PDU — BQ-27, RC-150/152); driver warnings EV-side only, factory
+cluster BLOCKED_PENDING_AUTHORIZED_FORD_INTERFACE (RC-151).
 
-**Owner scope (review_32) — map:**
+## Gate 05C — Controls State Machine  · STATUS: NEXT (owner review_33)
 
-> - Ford-side signals needed
-> - EV-side signals needed
-> - VCU decisions
-> - driver warnings
-> - fault states
-> - what is receive-only
-> - what is transmit-only on the EV side
-> - what is completely blocked
+Map every operating state; keep Ford-side receive-only, EV-side isolated,
+authority unconfirmed until supplier architecture proves ownership.
 
-Enforce: Ford-side signals stay listen-only candidates until proven; no
-transmit onto factory safety buses; accel-pedal never commands inverter
-torque directly; nothing Confirmed; no compliance claim.
+**Owner scope (review_33) — states:** OFF · ACCESSORY · READY_REQUEST ·
+PRECHARGE_REQUEST · READY_TO_DRIVE · DRIVE_ENABLED · DERATE ·
+FAULT_LATCHED · SERVICE_MODE · CHARGE_CONNECTED · EMERGENCY_SHUTDOWN.
+
+**For each state define:**
+
+> - required inputs
+> - allowed EV-side outputs
+> - blocked Ford-side outputs
+> - fault transitions
+> - proof artifact
+> - verification status
 
 ## Gate 06 — Mechanical Mounting / Battery Enclosure  · STATUS: FIRST PASS DONE (batch_25)
 

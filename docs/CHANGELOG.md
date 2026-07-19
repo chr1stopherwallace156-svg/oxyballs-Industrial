@@ -5,6 +5,35 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 36 + review_33: Gate 05B Controls Dependency Map
+
+- Archived batch_36 (Gate 05B controls dependency map) and review_33 1:1
+  (commit `ef1f337`). New rows RC-148..153 (no new CS). Section 44. New
+  deliverable `docs/status/GATE05B_CONTROLS_DEPENDENCY_MAP.md`; Gate 05A
+  registry updated (S7–S11 EV-side receive signals; status +
+  NO_PROPRIETARY_DBC_ASSUMPTIONS). Owner: "very strong now."
+- **Gate 05A transmit-config recurrence (RC-148):** the "custom VCU
+  configurations on the body-builder bus" line reappeared → re-corrected
+  to authorized receive/listen-only awareness; transmit blocked unless
+  Ford docs allow the exact message/address/timing/bus/use case.
+- **Gate 05B authority corrections:** VCU decisions = SimulationOnly
+  (RC-150) — torque arbitration, pre-charge, thermal derating carry
+  authority conditions; **pre-charge/contactor/HV-shutdown authority may
+  belong to the BMS/PDU, not the VCU** (BQ-27). Driver warnings → EV-side
+  display only; factory cluster BLOCKED_PENDING_AUTHORIZED_FORD_INTERFACE
+  (RC-151). Fault Level 3 emergency shutdown routes through the authorized
+  BMS-PDU safety architecture (RC-152). Directionality held (Ford
+  receive-only; EV transmit isolated; no CAN_1→CAN_2 routing of unverified
+  data; no factory-safety-bus injection).
+- Gate 05B status: CONTROL_DEPENDENCY_MAP_STARTED / SIMULATION_ONLY /
+  FORD_SIDE_RECEIVE_ONLY / EV_SIDE_ISOLATED_CONTROL_ONLY /
+  PRECHARGE_AUTHORITY_UNCONFIRMED / DRIVER_WARNING_OUTPUT_UNCONFIRMED /
+  NO_PHYSICAL_TORQUE_CONTROL / NO_FACTORY_CLUSTER_INJECTION (RC-153).
+- Research Map + queue updated; **next = Gate 05C Controls State Machine**
+  (11 states); Gate 08C stays parked.
+- Nothing ingested; nothing Confirmed; no confirmed Ford signal; no
+  VCU-owned HV shutdown; no factory-cluster injection; ODRs untouched.
+
 ## 2026-07-16 — RH batch 35 + review_32: Gate 08C parked + Gate 05A signal registry
 
 - Archived batch_35 (Gate 08C parked + Gate 05A registry) and review_32

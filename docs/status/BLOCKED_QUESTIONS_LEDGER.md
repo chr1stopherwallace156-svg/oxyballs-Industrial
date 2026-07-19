@@ -419,6 +419,22 @@ calculator `docs/status/AXLE_CG_CALCULATOR.md`, not supplier questions.)*
 
 ## Gate 05 — CAN / Controls / Cluster Integration
 
+### BQ-27
+- **Gate:** 05B — Controls Dependency Map
+- **Question:** Who owns **pre-charge + contactor control + final HV
+  shutdown authority** — the VCU, the BMS, or the PDU safety controller?
+- **Supplier needed:** BMS / PDU / inverter supplier architecture
+- **Why it matters:** the VCU must NOT be assumed to control contactors /
+  pre-charge / HV shutdown; that may belong to the BMS/PDU safety
+  controller (RC-150/152)
+- **Unlocks:** the Gate 05B pre-charge + Fault-Level-3 authority (and the
+  Gate 05C state machine)
+- **Current status:** **PRECHARGE_AUTHORITY_UNCONFIRMED** —
+  SimulationOnly until confirmed
+- **Follow-up date:** prior to commissioning; supplier architecture review
+- **Alternative research allowed:** simulate all three ownership models;
+  do not assume VCU ownership
+
 ### BQ-25
 - **Gate:** 05 — CAN / Controls
 - **Question:** Authorized Ford-compatible CAN / controls interface data

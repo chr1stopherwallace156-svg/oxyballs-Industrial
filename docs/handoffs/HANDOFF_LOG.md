@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 35 + review_32 — Gate 08C parked + Gate 05A signal registry)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 35 + review_32); awaiting Gate 05B Controls Dependency Map or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `a8b8c5e`; end commit: `3354162` (batch-35 reconciliation)
+- Work: Gate 08C parked (SIMULATION_SWEEP_MATRIX_CREATED / PARKED_FOR_SUPPLIER_DATA; "Model Accepts" → "Within Draft Stress Envelope"). New `GATE05A_SIGNAL_REGISTRY.md` (6 signals); Ford factory = AuthorizedSourcePending/ListenOnlyCandidate/NoTransmitAuthority; EV-side DBCs owned; accel-pedal + brake-switch use restricted. RC-143..147. Section 43. Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner; Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff.
+
 ## 2026-07-16 — Claude Code — task complete (batch 34 + review_31 — Gate 08C sweep cleanup + Gate 05 signals)
 
 ### (archived handoff)
