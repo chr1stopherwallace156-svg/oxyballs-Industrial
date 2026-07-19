@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 39 + review_36 — Gate 05E Interface Control Document / Signal Authority Table)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 39 + review_36); awaiting Gate 05F Network Boundary / Gateway Safety Rules or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `4bdbe37` (batch-39 archive); end commit: `33ed7a4` (batch-39 reconciliation)
+- Work: new `GATE05E_ICD_SIGNAL_AUTHORITY.md` (10-row signal-authority table + ICD gate rule). RC-164..168 (no new CS). Section 47. Corrections: split pre-charge into request/status/relay-coil-control (RC-164); split emergency shutdown into torque-zero/shutdown-request/hardwired-E-stop/contactor-open-status, de-inhibited (RC-165); Ford sources stay generic (RC-166); listen-only proof requirement (RC-167); signal-decomposition doctrine — a signal cannot be both a request and a hardware actuation unless the source says so (RC-168, extends D-007). ICD gate rule: authority == UNVERIFIED_STAGE OR owner == PENDING → hardware drive + factory transmit BLOCKED. Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner; Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/HV-shutdown ownership.
+
 ## 2026-07-16 — Claude Code — task complete (batch 38 + review_35 — Gate 05D State Transition + Ownership Matrix)
 
 ### (archived handoff)

@@ -258,27 +258,53 @@ hardware actuation unless the source says so (RC-168). The ICD gate rule:
 `authority == UNVERIFIED_STAGE OR owner == PENDING → hardware drive +
 factory transmit BLOCKED, evaluation SIMULATION_ONLY`.
 
-## Gate 05F — Network Boundary / Gateway Safety Rules  · STATUS: NEXT (owner review_36)
+## Gate 05F — Network Boundary / Gateway Safety Rules  · STATUS: NETWORK_BOUNDARY_RULES_CREATED / SIMULATION_ONLY (batch_40)
 
-Gate 05E maps the signals; Gate 05F defines what the gateway is physically
-and logically allowed to do.
+Deliverable `docs/status/GATE05F_NETWORK_BOUNDARY.md` (3-bus isolation
+architecture, routing rules, failure protocols A/B/C, listen-only proof
+dossier, gateway gate rule). Status (review_37):
+`NETWORK_BOUNDARY_RULES_CREATED / CAN_1_LISTEN_ONLY_REQUIREMENT_DEFINED /
+EV_SIDE_BUSES_ISOLATED / PRECHARGE_SIGNAL_DECOMPOSED /
+SHUTDOWN_SIGNAL_DECOMPOSED / TIMEOUT_VALUES_PENDING_SUPPLIER_DATA /
+NO_FACTORY_BUS_TRANSMISSION / NO_PHYSICAL_GATEWAY_DEPLOYMENT /
+SIMULATION_ONLY`. Owner: "excellent structurally … very good." **Main
+correction (recurrence): the 50 ms / 100 ms timeouts were acting like
+sourced safety boundaries** → downgraded to SupplierDataPending sweep-only
+"No Gate Authority" (RC-169); general rule RC-173 forbids any
+timeout/heartbeat/alive-counter/torque-zero/shutdown/contactor-open timing
+from becoming physical gate logic until supplier docs or HIL/bench proof.
+Other corrections: authority-chain language (RC-170); signal-owner ≠
+action-owner for the VCU request signals (RC-171); CAN_1
+"selected/wired/configured for listen-only" not "modified" (RC-172). The
+gateway gate rule: `listen_only_proof == MISSING OR isolation == UNVERIFIED
+→ deployment + physical-injection BLOCKED, evaluation SIMULATION_ONLY`.
 
-**Owner scope (review_36) — the gateway rules must answer:**
+## Gate 05G — Fault Containment and Gateway Failsafe Matrix  · STATUS: NEXT (owner review_37)
 
-> - Which buses are physically isolated?
-> - Which buses are listen-only?
-> - Which buses can transmit?
-> - Which signals can cross from Ford-side to EV-side?
-> - Which signals are forbidden from crossing?
-> - What happens if the gateway crashes?
-> - What happens if CAN_2 or CAN_3 goes silent?
-> - What proof shows CAN_1 never transmits?
+Gate 05F says what may cross the network boundary; Gate 05G says what
+happens when something fails.
 
-Keep the ownership discipline — the VCU coordinates but owns nothing
-safety-critical until supplier/Ford docs prove it (BQ-27); CAN_1 stays
-listen-only; EV-side (CAN_2/CAN_3) outputs stay isolated; no factory-bus
-transmission; no physical-hardware drive while authority is
-UNVERIFIED_STAGE / owner PENDING (D-007 + the RC-168 decomposition rule).
+**Owner scope (review_37) — the failsafe matrix must cover:**
+
+> - VCU crash
+> - CAN_1 accidentally attempts transmit
+> - CAN_2 inverter loop silent
+> - CAN_3 BMS loop silent
+> - gateway power loss
+> - gateway stuck dominant
+> - gateway stuck recessive
+> - bad checksum / alive counter
+> - message replay
+> - wrong source address
+> - BMS says no-discharge
+> - inverter ignores torque-zero
+> - E-stop asserted
+
+Keep the discipline — every failsafe response stays SIMULATION_ONLY; no
+timeout/threshold has physical authority until supplier docs or HIL/bench
+proof confirm it (RC-173); CAN_1 stays listen-only; EV-side outputs stay
+isolated; the VCU coordinates but owns nothing safety-critical (BQ-27);
+D-007 + RC-168 decomposition bind throughout.
 
 ## Gate 06 — Mechanical Mounting / Battery Enclosure  · STATUS: FIRST PASS DONE (batch_25)
 

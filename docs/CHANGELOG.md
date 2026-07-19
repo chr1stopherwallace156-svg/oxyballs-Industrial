@@ -5,6 +5,47 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 40 + review_37: Gate 05F Network Boundary / Gateway Safety Rules
+
+- Archived batch_40 (Gate 05F) and review_37 1:1 (commit `d0428d9`). New
+  rows RC-169..173 (no new CS). Section 48. New deliverable
+  `docs/status/GATE05F_NETWORK_BOUNDARY.md` (3-bus isolation architecture,
+  routing rules, failure protocols A/B/C, listen-only proof dossier,
+  gateway gate rule). Owner: "excellent structurally … very good."
+- **Recurrence caught — invented timing as gate logic (RC-169):** the
+  batch's hard `50 ms` (inverter zero-torque) / `100 ms` (CAN_2/CAN_3
+  silence) timeouts were acting like sourced safety boundaries — same
+  defect family as the 200 ms HVIL fabrication (RC-116) and the Gate 08C
+  placeholder-authority rule (RC-133). Downgraded to
+  `t_inverter/can2/can3_timeout = SupplierDataPending`, sweep-only,
+  labeled **No Gate Authority**; Protocols A/B/C reworded to
+  supplier-defined timeouts. General rule **RC-173:** no timeout /
+  heartbeat / alive-counter / torque-zero / shutdown / contactor-open
+  timing becomes physical gate logic until supplier docs or HIL/bench
+  proof confirm it. Flagged for the M10 regression scanner.
+- Other corrections: "academic engineering wiring protocol" / "manual OEM
+  academic research protocol" → "supplier wiring diagram + ICD +
+  controls-engineer review confirm request authority" (RC-170);
+  `VCU_Precharge_Request` + `VCU_Shutdown_Request_To_BMS` split Signal
+  Owner (VCU, request generation) vs Action Owner (BMS/PDU/hardwired
+  safety, execution), VCU Authority = requester only (RC-171); CAN_1
+  "transceiver must be modified" → "selected, wired, or configured for
+  listen-only / silent monitoring with no transmit capability enabled"
+  (RC-172).
+- Architecture kept: CAN_1 Ford listen-only / no transmit; CAN_2 isolated
+  VCU↔inverter; CAN_3 isolated VCU↔BMS/PDU; forbidden crossings (EV
+  torque, HV metrics, thermal alerts, any Ford PCM/ABS/ESC/airbag ID
+  spoof). Gateway gate rule kept verbatim.
+- Gate 05F status = `NETWORK_BOUNDARY_RULES_CREATED /
+  CAN_1_LISTEN_ONLY_REQUIREMENT_DEFINED / EV_SIDE_BUSES_ISOLATED /
+  PRECHARGE_SIGNAL_DECOMPOSED / SHUTDOWN_SIGNAL_DECOMPOSED /
+  TIMEOUT_VALUES_PENDING_SUPPLIER_DATA / NO_FACTORY_BUS_TRANSMISSION /
+  NO_PHYSICAL_GATEWAY_DEPLOYMENT / SIMULATION_ONLY`.
+- Nothing ingested; nothing marked Confirmed; no timeout has physical
+  authority; no factory-bus transmission; no physical gateway deployment;
+  ODRs untouched. Next = Gate 05G (Fault Containment and Gateway Failsafe
+  Matrix).
+
 ## 2026-07-16 — RH batch 39 + review_36: Gate 05E Interface Control Document / Signal Authority Table
 
 - Archived batch_39 (Gate 05E ICD) and review_36 1:1 (commit `4bdbe37`).

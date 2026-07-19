@@ -267,6 +267,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-166 | **Ford source controllers stay generic (owner review_36)**: batch_39's "Ford PCM / Accelerator Hub Module" and "Ford ABS / Brake Pedal Sensor Module" are **too specific** → use **"Ford factory module / UIM path — pending verification"** until the Ford source or a passive capture proves the exact module | batch_39 (unproven module attribution) | n/a — ICD rule | **NeedsFordExactSource / ListenOnlyCandidate** — recorded in `docs/status/GATE05E_ICD_SIGNAL_AUTHORITY.md` — lanes L7 |
 | RC-167 | **Listen-only proof requirement (owner review_36)**: a Ford-side listen-only claim requires **silent/listen-only interface mode + no ACK participation + no transmit mailbox enabled + capture log attached + hardware-configuration screenshot attached** (makes the "no transceiver ACK activation" artifact a hard rule; strengthens Gate 05A) | owner-promoted | n/a — proof rule | **ControlsSafety / ProofRequirement** — recorded in `docs/status/GATE05E_ICD_SIGNAL_AUTHORITY.md` — lanes L7 |
 | RC-168 | **Signal-decomposition doctrine (owner review_36)**: **a signal cannot be both a request and a hardware actuation unless the source document explicitly says so**; every safety-critical action decomposes into **request · status · feedback · hardware-actuation · fault** signals — one signal name may not imply more authority than it has | owner-promoted (extends D-007) | n/a — controls doctrine | **GateLogic / ControlsSafety** — recorded in `docs/status/GATE05E_ICD_SIGNAL_AUTHORITY.md` — lanes L7 |
+| RC-169 | **Gateway timeouts have no authority (owner review_37, RECURRENCE of the invented-timing defect — cf. RC-116 200 ms HVIL, RC-133 Gate 08C placeholder-authority)**: the batch_40 `50 ms` inverter zero-torque + `100 ms` CAN_2/CAN_3 silence numbers are acting like sourced safety boundaries → downgrade to `t_inverter_timeout / t_can2_timeout / t_can3_timeout = SupplierDataPending`; exploratory sweep values (50/100/250 ms) allowed **simulation-only, labeled No Gate Authority**; Protocols A/B/C reworded to "supplier-defined timeout pending inverter DBC / supplier safety manual / BMS architecture" | batch_40 (invented timing) | n/a — parameter | **NeedsSupplierData / NoGateAuthority** — recorded in `docs/status/GATE05F_NETWORK_BOUNDARY.md`; links BQ-27 — lanes L7/L8 |
+| RC-170 | **Authority-chain language (owner review_37)**: "BLOCKED until **academic engineering wiring protocol** confirms request is allowed" / "pending **manual OEM academic research protocol**" → **"BLOCKED until supplier wiring diagram, interface control document, and controls-engineer review confirm request authority"** ("academic" is too weak for a real build authority chain) | batch_40 (weak authority language) | n/a — authority rule | **ControlsSafety** — recorded in `docs/status/GATE05F_NETWORK_BOUNDARY.md` — lanes L7 |
+| RC-171 | **Signal-owner vs action-owner split (owner review_37)**: for `VCU_Precharge_Request` and `VCU_Shutdown_Request_To_BMS` the batch's "Owner: Conversion VCU" is incomplete → make it explicit — **Signal Owner = VCU (owns request generation); Action Owner = BMS/PDU/hardwired safety (owns execution); VCU Authority = requester only** | batch_40 (owner conflation) | n/a — ownership rule | **ControlsSafety** — recorded in `docs/status/GATE05F_NETWORK_BOUNDARY.md`; links BQ-27 — lanes L7 |
+| RC-172 | **CAN_1 hardware language (owner review_37)**: "CAN_1 transceiver hardware must be **modified** or configured to prevent transmission" ("modified" is risky) → **"CAN_1 hardware must be selected, wired, or configured for listen-only / silent monitoring with no transmit capability enabled"** (options: silent-mode controller, receive-only transceiver, removed TX path, hardware gating) | batch_40 (over-narrow method) | n/a — boundary rule | **ControlsSafety** — recorded in `docs/status/GATE05F_NETWORK_BOUNDARY.md` — lanes L7 |
+| RC-173 | **No timing becomes gate logic unproven (owner review_37, new rule)**: **no timeout, heartbeat, alive-counter, torque-zero, shutdown, or contactor-open timing may become physical gate logic until confirmed by supplier documentation or HIL/bench proof**; an estimated timeout is **simulation-sweep-only and must be labeled No Gate Authority** | owner-promoted (generalizes RC-169; extends RC-133) | n/a — controls doctrine | **GateLogic / NoGateAuthority** — recorded in `docs/status/GATE05F_NETWORK_BOUNDARY.md` — lanes L7/L8 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -2958,3 +2963,77 @@ CAN_2/CAN_3-silent behavior; proof that CAN_1 never transmits. Queued in
   split-ownership; hardwired E-stop takes no software override.
 - Nothing ingested; nothing marked Confirmed; no factory-bus transmission;
   no physical-hardware drive; ODRs untouched.
+
+---
+
+## 48. Batch 40 + owner review_37 — Gate 05F Network Boundary / Gateway Safety Rules (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_40_gate05f_network_boundary_gateway_rules.md`
+and `docs/research/raw/owner_reviews/review_37_batch_40_verdict.md`.
+Row additions: RC-169..RC-173 (no new CS). Deliverable:
+`docs/status/GATE05F_NETWORK_BOUNDARY.md` (3-bus isolation architecture,
+routing rules, failure protocols, listen-only proof dossier, gateway gate
+rule). Owner: "excellent structurally … very good."
+
+### Recurrence caught — invented timing acting as gate logic (RC-169)
+
+The batch re-introduced hard `50 ms` (inverter zero-torque) / `100 ms`
+(CAN_2, CAN_3 silence) timeouts as if they were sourced safety boundaries —
+the **same defect family** as the fabricated 200 ms HVIL limit (RC-116) and
+the Gate 08C placeholder-authority problem (RC-133). Downgraded to
+`SupplierDataPending` sweep-only placeholders labeled **No Gate Authority**;
+Protocols A/B/C reworded to supplier-defined timeouts. A general rule
+(RC-173) now forbids any timeout / heartbeat / alive-counter / torque-zero /
+shutdown / contactor-open timing from becoming physical gate logic until
+supplier docs or HIL/bench proof confirm it. **Recommended for the M10
+regression scanner** (owner decision pending) alongside the other recurring
+patterns.
+
+### Other corrections
+
+- **Authority-chain language (RC-170):** "academic engineering wiring
+  protocol" / "manual OEM academic research protocol" → "supplier wiring
+  diagram + ICD + controls-engineer review confirm request authority."
+- **Signal-owner vs action-owner (RC-171):** `VCU_Precharge_Request` +
+  `VCU_Shutdown_Request_To_BMS` — Signal Owner = VCU (request generation),
+  Action Owner = BMS/PDU/hardwired safety (execution), VCU Authority =
+  requester only.
+- **CAN_1 hardware language (RC-172):** "transceiver must be modified" →
+  "selected, wired, or configured for listen-only / silent monitoring with
+  no transmit capability enabled."
+
+### Architecture kept (owner: "the architecture is right")
+
+CAN_1 = Ford listen-only / no transmit; CAN_2 = isolated VCU↔inverter;
+CAN_3 = isolated VCU↔BMS/PDU. Forbidden crossings (EV torque, HV metrics,
+thermal alerts, any Ford PCM/ABS/ESC/airbag ID spoof) held. The gateway
+gate rule kept verbatim: `listen_only_proof == MISSING OR isolation_status
+== UNVERIFIED → GATEWAY_DEPLOYMENT = BLOCKED, PHYSICAL_INJECTION_TEST =
+FORBIDDEN, EXECUTION_MODE = SIMULATION_BOUNDARY_LOGIC_ONLY`.
+
+### Gate 05F status (owner review_37)
+
+`NETWORK_BOUNDARY_RULES_CREATED` / `CAN_1_LISTEN_ONLY_REQUIREMENT_DEFINED` /
+`EV_SIDE_BUSES_ISOLATED` / `PRECHARGE_SIGNAL_DECOMPOSED` /
+`SHUTDOWN_SIGNAL_DECOMPOSED` / `TIMEOUT_VALUES_PENDING_SUPPLIER_DATA` /
+`NO_FACTORY_BUS_TRANSMISSION` / `NO_PHYSICAL_GATEWAY_DEPLOYMENT` /
+`SIMULATION_ONLY`.
+
+### Next
+
+Owner: **Gate 05G — Fault Containment and Gateway Failsafe Matrix** — what
+happens when something fails: VCU crash, CAN_1 accidental transmit,
+CAN_2/CAN_3 silent, gateway power loss, gateway stuck dominant/recessive,
+bad checksum / alive-counter, message replay, wrong source address, BMS
+says no-discharge, inverter ignores torque-zero, E-stop asserted. Queued in
+`GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- CAN_1 listen-only (no transmit); EV-side buses isolated; no timeout has
+  physical authority (RC-173); pre-charge + shutdown decomposed with
+  signal-owner ≠ action-owner (RC-171); no EV torque / HV metric crosses to
+  the Ford side; no Ford ID spoofing.
+- Nothing ingested; nothing marked Confirmed; no factory-bus transmission;
+  no physical gateway deployment; ODRs untouched.

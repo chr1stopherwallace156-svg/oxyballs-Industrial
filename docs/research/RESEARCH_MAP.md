@@ -371,24 +371,24 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_36):** **Gate 05F — Network Boundary /
-Gateway Safety Rules** — define what the CAN gateway is physically and
-logically allowed to do: which buses are physically isolated / listen-only
-/ transmit-capable; which signals may cross Ford-side → EV-side and which
-are forbidden; what happens if the gateway crashes; what happens if CAN_2
-or CAN_3 goes silent; and what proof shows CAN_1 never transmits. Keep the
-ownership discipline — the VCU **coordinates** but owns nothing
-safety-critical (contactors / pre-charge / HV shutdown / torque authority)
-until the BMS/PDU supplier architecture proves it (BQ-27); CAN_1 stays
-listen-only; EV-side outputs stay isolated; **NEVER "PATS bypass"; no
-factory-cluster injection; no invented thresholds; no physical-hardware
-drive while authority is UNVERIFIED_STAGE / owner PENDING.** Verbatim scope
-in [`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); Gate 05E
-ICD in `docs/status/GATE05E_ICD_SIGNAL_AUTHORITY.md` (signals decomposed
-into request/status/feedback/actuation/fault, RC-168; permanent doctrine
-D-007: **Coordinator ≠ Owner**). **Gate 08C is parked**; Gate 07 artifacts
-+ the 15-mode FMEA registry stay open. Order after 05: Gate 06 deep dive →
-09 → 10 → 11.
+**Next expected batch (owner review_37):** **Gate 05G — Fault Containment
+and Gateway Failsafe Matrix** — what happens when something fails: VCU
+crash, CAN_1 accidental transmit, CAN_2/CAN_3 silent, gateway power loss,
+gateway stuck dominant/recessive, bad checksum / alive-counter, message
+replay, wrong source address, BMS says no-discharge, inverter ignores
+torque-zero, E-stop asserted. Keep the ownership discipline — the VCU
+**coordinates** but owns nothing safety-critical (contactors / pre-charge /
+HV shutdown / torque authority) until the BMS/PDU supplier architecture
+proves it (BQ-27); CAN_1 stays listen-only; EV-side outputs stay isolated;
+**NEVER "PATS bypass"; no factory-cluster injection; no invented
+thresholds/timeouts as gate logic (RC-173); no physical-hardware drive
+while authority is UNVERIFIED_STAGE / owner PENDING.** Verbatim scope in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); Gate 05F
+network boundary in `docs/status/GATE05F_NETWORK_BOUNDARY.md` (3-bus
+isolation; timeouts SupplierDataPending / No Gate Authority; permanent
+doctrine D-007: **Coordinator ≠ Owner**). **Gate 08C is parked**; Gate 07
+artifacts + the 15-mode FMEA registry stay open. Order after 05: Gate 06
+deep dive → 09 → 10 → 11.
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

@@ -4,59 +4,62 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-16
-- Reason for handoff: task complete (batch 39 + review_36 — Gate 05E
-  Interface Control Document / Signal Authority Table); awaiting the Gate
-  05F Network Boundary / Gateway Safety Rules batch or a supplier reply
+- Reason for handoff: task complete (batch 40 + review_37 — Gate 05F
+  Network Boundary / Gateway Safety Rules); awaiting the Gate 05G Fault
+  Containment and Gateway Failsafe Matrix batch or a supplier reply
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `4bdbe37` — Archive raw RH batch 39 + review_36 1:1
+- Start commit: `d0428d9` — Archive raw RH batch 40 + review_37 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- New file: **`docs/status/GATE05E_ICD_SIGNAL_AUTHORITY.md`** (10-row
-  signal-authority table after the owner's splits + the ICD gate rule).
+- New file: **`docs/status/GATE05F_NETWORK_BOUNDARY.md`** (3-bus isolation
+  architecture, routing rules, failure protocols A/B/C, listen-only proof
+  dossier, gateway gate rule).
 - Files changed (reconciliation commit):
-  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (RC-164..168;
-  section 47 — no new CS), `docs/research/RESEARCH_MAP.md` ("next" → Gate
-  05F), `docs/roadmaps/GATE_RESEARCH_QUEUE.md` (Gate 05E mapped; Gate 05F →
-  NEXT with verbatim gateway questions), `docs/CHANGELOG.md`, handoff
-  files. (Raw archives `batch_39_gate05e_icd_signal_authority.md`,
-  `review_36_batch_39_verdict.md`, PROVENANCE committed separately as
-  `4bdbe37`.)
-- Summary: Gate 05E ICD created (owner: "strong Gate 05E draft"). Every
-  signal carries owner / direction / allowed use / blocked use / physical
-  authority / verification status / proof artifact. **The ICD gate rule:**
-  `authority == UNVERIFIED_STAGE OR owner == PENDING → hardware drive +
-  factory transmit BLOCKED, evaluation SIMULATION_ONLY`. Owner
-  corrections applied: **pre-charge split into 3 signals** (request /
-  status / relay-coil control — VCU may not energize the coil unless
-  supplier arch assigns it, RC-164); **emergency shutdown split into 4
-  signals** and de-"inhibit"ed (torque-zero / shutdown-request / hardwired
-  E-stop no-software-override / contactor-open status, RC-165); **Ford
-  sources stay generic** "Ford factory module / UIM path — pending
-  verification" (RC-166); **listen-only proof requirement** (silent mode +
-  no ACK + no transmit mailbox + capture log + hardware-config screenshot,
-  RC-167); **signal-decomposition doctrine** — a signal cannot be both a
-  request and a hardware actuation unless the source says so; decompose
-  every safety-critical action into request/status/feedback/actuation/fault
-  (RC-168, extends D-007). **Nothing ingested; nothing Confirmed; no
-  factory-bus transmission; no physical-hardware drive; no invented
-  threshold; ODRs untouched.**
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (RC-169..173;
+  section 48 — no new CS), `docs/research/RESEARCH_MAP.md` ("next" → Gate
+  05G), `docs/roadmaps/GATE_RESEARCH_QUEUE.md` (Gate 05F created; Gate 05G
+  → NEXT with verbatim failure list), `docs/CHANGELOG.md`, handoff files.
+  (Raw archives `batch_40_gate05f_network_boundary_gateway_rules.md`,
+  `review_37_batch_40_verdict.md`, PROVENANCE committed separately as
+  `d0428d9`.)
+- Summary: Gate 05F network-boundary gate created (owner: "excellent
+  structurally … very good"). Three isolated buses — CAN_1 Ford
+  listen-only (no transmit), CAN_2 isolated VCU↔inverter, CAN_3 isolated
+  VCU↔BMS/PDU; forbidden crossings (EV torque, HV metrics, thermal alerts,
+  any Ford PCM/ABS/ESC/airbag ID spoof); gateway failure protocols; the
+  5-part listen-only proof dossier; the gateway gate rule
+  (`listen_only_proof == MISSING OR isolation == UNVERIFIED → deployment +
+  physical-injection BLOCKED, evaluation SIMULATION_ONLY`). **Recurrence
+  caught (RC-169): the batch's 50 ms / 100 ms timeouts were acting like
+  sourced safety boundaries** — same defect family as the 200 ms HVIL
+  fabrication (RC-116) and the Gate 08C placeholder-authority rule
+  (RC-133); downgraded to SupplierDataPending sweep-only "No Gate
+  Authority," Protocols A/B/C reworded, and a general rule added (RC-173:
+  no timeout/heartbeat/alive-counter/torque-zero/shutdown/contactor-open
+  timing becomes physical gate logic until supplier docs or HIL/bench
+  proof). Other corrections: authority-chain language de-"academic"ed
+  (RC-170); signal-owner ≠ action-owner for the VCU request signals
+  (RC-171); CAN_1 "selected/wired/configured for listen-only" not
+  "modified" (RC-172). **Nothing ingested; nothing Confirmed; no timeout
+  has physical authority; no factory-bus transmission; no physical gateway
+  deployment; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_39/review_36 archives are 1:1 against the
-  owner's chat ("39:75"); every signal is UNVERIFIED_STAGE /
-  SIMULATION_ONLY; pre-charge and shutdown are decomposed per the owner;
-  no Ford module is named as proven; nothing marked Confirmed
+- Verified vs claimed: batch_40/review_37 archives are 1:1 against the
+  owner's chat ("40:75"); every rule is SIMULATION_ONLY; the 50/100 ms
+  timeouts carry No Gate Authority; CAN_1 is listen-only with the 5-part
+  proof dossier; nothing marked Confirmed
 
 ## State
 
@@ -67,56 +70,60 @@
   `docs/status/BLOCKED_QUESTIONS_LEDGER.md` (BQ-01..BQ-27).
 - Gate-state snapshot: 04B/04C/06 first pass; **05 STARTED — 05A/05B done;
   05C STATE_MACHINE_DRAFTED; 05D STATE_OWNERSHIP_MATRIX_CREATED; 05E
-  ICD_SIGNAL_BOUNDARIES_MAPPED / SIMULATION_ONLY
-  (`GATE05E_ICD_SIGNAL_AUTHORITY.md`); 05F Network Boundary / Gateway
-  Safety Rules NEXT**; 07 v0.1 / 07B (`MASS_LEDGER.md`) / 07C v0.4 PARKED
-  (`AXLE_CG_CALCULATOR.md`); 08 FMEA_REGISTRY_CREATED (15 modes); 08B
-  SOURCE_CANDIDATES_MAPPED PARKED; **08C SIMULATION_SWEEP_MATRIX_CREATED —
-  PARKED_FOR_SUPPLIER_DATA**. Order after 05: 06 deep dive → 09 → 10 → 11.
+  ICD_SIGNAL_BOUNDARIES_MAPPED; 05F NETWORK_BOUNDARY_RULES_CREATED /
+  SIMULATION_ONLY (`GATE05F_NETWORK_BOUNDARY.md`); 05G Fault Containment /
+  Gateway Failsafe Matrix NEXT**; 07 v0.1 / 07B (`MASS_LEDGER.md`) / 07C
+  v0.4 PARKED (`AXLE_CG_CALCULATOR.md`); 08 FMEA_REGISTRY_CREATED (15
+  modes); 08B SOURCE_CANDIDATES_MAPPED PARKED; **08C
+  SIMULATION_SWEEP_MATRIX_CREATED — PARKED_FOR_SUPPLIER_DATA**. Order after
+  05: 06 deep dive → 09 → 10 → 11.
 - Build artifacts: `MASS_LEDGER.md`, `AXLE_CG_CALCULATOR.md`,
   `FMEA_REGISTRY.md`, `DRAFT_VALIDATION_08C.md`, `GATE05_CONTROLS.md`,
   `GATE05A_SIGNAL_REGISTRY.md`, `GATE05B_CONTROLS_DEPENDENCY_MAP.md`,
   `GATE05C_STATE_MACHINE.md`, `GATE05D_OWNERSHIP_MATRIX.md`,
-  `GATE05E_ICD_SIGNAL_AUTHORITY.md`.
+  `GATE05E_ICD_SIGNAL_AUTHORITY.md`, `GATE05F_NETWORK_BOUNDARY.md`.
 - Doctrine: **D-007** (controls-authority doctrine) + the RC-168
-  signal-decomposition rule bind all Gate 05x and downstream controls work.
+  signal-decomposition rule + RC-173 (no unproven timing as gate logic)
+  bind all Gate 05x and downstream controls work.
 - Open owner decisions (accumulated): (1) elektron-os-clean two-universe;
   (2) index.html; (3) L2 regulatory module; (4) L4 mechanical/structural
   module; (5) L6 battery/BMS/thermal module; (6) L9 lane name; (7)
-  Artifact Intake Form; (8) M10 forbidden-phrase + regression scanner;
-  (9)(10)(11) approve/send Dana / ZF / Ford-Lee letters; (12) supplier
-  reminder; (13) official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B
-  standards + official Ford UIM/BBAS/J1939 docs + supplier BMS/inverter/
-  VCU/DC-DC/charger DBCs; (14) brake engineer for FMVSS 105; (15) confirm
-  donor is 7.3L gas (001A) + donor data; (16) inverter/BMS firmware timing
-  + HV safety plan; (17) firmware signoff (BQ-26); (18) BMS/PDU
-  pre-charge + contactor + HV-shutdown ownership (BQ-27).
+  Artifact Intake Form; (8) M10 forbidden-phrase + regression scanner (now
+  covers PATS bypass, ZF-CAN/duty, gas/diesel, compliance-labels,
+  transmit-config, invented-timing RC-116/133/169); (9)(10)(11)
+  approve/send Dana / ZF / Ford-Lee letters; (12) supplier reminder; (13)
+  official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards +
+  official Ford UIM/BBAS/J1939 docs + supplier BMS/inverter/VCU/DC-DC/
+  charger DBCs; (14) brake engineer for FMVSS 105; (15) confirm donor is
+  7.3L gas (001A) + donor data; (16) inverter/BMS firmware timing + HV
+  safety plan; (17) firmware signoff (BQ-26); (18) BMS/PDU pre-charge +
+  contactor + HV-shutdown ownership (BQ-27).
 
 ## Next exact action
 
-Expected next inputs, in any order: (a) the **Gate 05F Network Boundary /
-Gateway Safety Rules batch** (scope in `GATE_RESEARCH_QUEUE.md`; ICD in
-`GATE05E_ICD_SIGNAL_AUTHORITY.md`) — define what the gateway is physically
-and logically allowed to do: which buses are physically isolated /
-listen-only / transmit-capable; which signals may cross Ford-side →
-EV-side and which are forbidden; gateway-crash behavior; CAN_2/CAN_3-silent
-behavior; proof that CAN_1 never transmits. **Enforce D-007 + RC-168: the
-VCU coordinates but owns nothing safety-critical (contactors / pre-charge /
-HV shutdown / torque) until the BMS/PDU supplier architecture proves it
+Expected next inputs, in any order: (a) the **Gate 05G Fault Containment
+and Gateway Failsafe Matrix batch** (scope in `GATE_RESEARCH_QUEUE.md`;
+network boundary in `GATE05F_NETWORK_BOUNDARY.md`) — what happens when
+something fails: VCU crash, CAN_1 accidental transmit, CAN_2/CAN_3 silent,
+gateway power loss, gateway stuck dominant/recessive, bad checksum /
+alive-counter, message replay, wrong source address, BMS says no-discharge,
+inverter ignores torque-zero, E-stop asserted. **Enforce D-007 + RC-168 +
+RC-173: every failsafe response stays SIMULATION_ONLY; no timeout/threshold
+has physical authority until supplier docs or HIL/bench proof; the VCU
+coordinates but owns nothing safety-critical (contactors / pre-charge / HV
+shutdown / torque) until the BMS/PDU supplier architecture proves it
 (BQ-27); CAN_1 stays listen-only; EV-side outputs stay isolated; no
-invented thresholds / timeouts; no factory-bus transmission; no
-physical-hardware drive while authority is UNVERIFIED_STAGE / owner
-PENDING; NEVER "PATS bypass"; nothing Confirmed; no compliance claim.** (b)
-A Gate 08C reopen if supplier thresholds land. (c) Gate 08B reopen if
-official standard PDFs arrive. (d) Gate 07A/07C field data. (e) A supplier
-reply — archive 1:1, reconcile, move the matching BQ to the Resolution
-log. (f) The owner approves/sends a letter — record Sent + date, start that
-BQ's 7/14/21-day clock. Enforce throughout: nothing Confirmed; no
-compliance/"safe" claim; NEVER "PATS bypass" or bus spoofing; NEVER invent
-a threshold / grant a placeholder pass-block; no Ford signal is confirmed
-until an official source proves it; the VCU does not own HV shutdown until
-supplier architecture confirms it; keep diesel data out of the 001A gas
-model (D-006).
+factory-bus transmission; NEVER "PATS bypass"; nothing Confirmed; no
+compliance claim.** (b) A Gate 08C reopen if supplier thresholds land. (c)
+Gate 08B reopen if official standard PDFs arrive. (d) Gate 07A/07C field
+data. (e) A supplier reply — archive 1:1, reconcile, move the matching BQ
+to the Resolution log. (f) The owner approves/sends a letter — record Sent
++ date, start that BQ's 7/14/21-day clock. Enforce throughout: nothing
+Confirmed; no compliance/"safe" claim; NEVER "PATS bypass" or bus spoofing;
+NEVER invent a threshold / timeout / grant a placeholder pass-block; no
+Ford signal is confirmed until an official source proves it; the VCU does
+not own HV shutdown until supplier architecture confirms it; keep diesel
+data out of the 001A gas model (D-006).
 
 ## Forbidden actions
 
@@ -135,21 +142,23 @@ model (D-006).
   RC-116; draft driver-warning strings RC-121; Gate 08B standard "quotes";
   any Gate 08C placeholder value as a pass/block RC-133; unverified
   Ford-side CAN IDs/rates/PGNs RC-137/140/145; the pre-charge >95% number
-  RC-156).
+  RC-156; the 50 ms / 100 ms gateway timeouts RC-169/173).
 - Do not mix 6.7L diesel weight/CG into the 7.3L gas model (D-006).
-- **Gate 05 (D-007 + RC-168 bind): authorized/listen-only only — no
-  anti-theft bypass, no fake/spoofed ABS/ESC messages, no transmit onto
+- **Gate 05 (D-007 + RC-168 + RC-173 bind): authorized/listen-only only —
+  no anti-theft bypass, no fake/spoofed ABS/ESC messages, no transmit onto
   factory Ford safety buses without approval (RC-136/142/148); accel-pedal
   never drives inverter torque directly (RC-141/146); no factory-cluster
   warning injection (RC-151); the VCU does not own pre-charge / HV shutdown
   / contactors until the BMS/PDU architecture confirms it (RC-150/152/157/
-  158/164/165; BQ-27); Ford signals don't gate real state transitions
+  158/164/165/171; BQ-27); Ford signals don't gate real state transitions
   (RC-155); torque command stays strictly in DRIVE_ENABLED (RC-160);
   SERVICE_MODE requires HV de-energized / LOTO / absence-of-voltage
   (RC-163); a signal cannot be both a request and a hardware actuation
   unless the source says so (RC-168); Ford source controllers stay generic
-  until proven (RC-166); CAN_1 stays listen-only with the RC-167 proof
-  pack.**
+  until proven (RC-166); CAN_1 stays listen-only (selected/wired/configured,
+  not "modified", RC-172) with the RC-167 proof pack; no timeout/heartbeat/
+  alive-counter/torque-zero/shutdown/contactor-open timing becomes physical
+  gate logic until supplier docs or HIL/bench proof (RC-173).**
 - Do not recommend or run live-HV fault testing; no track testing;
   staged testing only (RC-117) with LOTO/PPE/engineering signoff.
 - Do not let the Build Engine claim compliance or mark anything safe.
@@ -172,4 +181,4 @@ model (D-006).
       `DRAFT_VALIDATION_08C.md`, `GATE05_CONTROLS.md`,
       `GATE05A_SIGNAL_REGISTRY.md`, `GATE05B_CONTROLS_DEPENDENCY_MAP.md`,
       `GATE05C_STATE_MACHINE.md`, `GATE05D_OWNERSHIP_MATRIX.md`,
-      `GATE05E_ICD_SIGNAL_AUTHORITY.md`) read
+      `GATE05E_ICD_SIGNAL_AUTHORITY.md`, `GATE05F_NETWORK_BOUNDARY.md`) read
