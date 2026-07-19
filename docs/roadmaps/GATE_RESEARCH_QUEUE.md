@@ -355,19 +355,80 @@ compliance authority (RC-190); result categories `…_NO_VEHICLE_AUTHORITY` /
 mandatory pre-test safety checklist (RC-195). Deliverable updated
 `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md`.
 
-## Gate 05I — Physical (LOW-VOLTAGE) Bench Integration  · STATUS: NEXT (owner review_41)
+## Gate 05I — Physical (LOW-VOLTAGE) Bench Integration  · STATUS: LOW_VOLTAGE_BENCH_INTEGRATION_STARTED (batch_45)
 
-Production-like **low-voltage** bench integration — runs only after Gate
-05H-B HIL bench observation + engineering review. **Gate 05I must not jump
-to live HV or vehicle testing (RC-196).**
+Deliverable `docs/status/GATE05I_BENCH_INTEGRATION.md` (production-like LV
+integration environment, bench fault-injection & driver-safety matrix,
+transceiver-protection script, bench-integration artifact dossier with
+calibration records). Status (review_42):
+`LOW_VOLTAGE_BENCH_INTEGRATION_STARTED / PRODUCTION_INTENT_HARNESS_REQUIRED /
+REAL_VCU_REQUIRED / SUPPLIER_LOGIC_NODES_REQUIRED / HARDWIRED_ESTOP_REQUIRED
+/ NO_HV_TRACTION_BATTERY / NO_VEHICLE_ROAD_TESTING /
+NO_LIVE_FORD_BUS_TRANSMISSION / NO_VEHICLE_CLEARANCE /
+PENDING_ENGINEERING_REVIEW`. Owner: "begin Gate 05I — but keep it
+low-voltage physical bench integration only." Corrections: BENCH (not HIL)
+result categories (RC-197); E-stop measured not "instant" (RC-198);
+production-intent (not production-spec) harness (RC-199); CAN_1 fault
+injection protected-bench-only (RC-200); driver-safety stays bench-level →
+Gate 05I-A (RC-201). **Gate 05J / live vehicle commissioning explicitly NOT
+YET.**
 
-**Owner scope (review_41):** real harness · real VCU · real or
-supplier-representative BMS/PDU controller · real inverter controller if
-possible — with **no traction-battery HV, no vehicle road testing, no Ford
-factory bus transmission**. The transition is HIL bench observation →
-production-like low-voltage bench integration → (eventually, only after
-engineering sign-off + a staged safety plan + LOTO/PPE) any HV/integrated
-testing.
+## Gate 05I-A — Low-Voltage Driver Safety Logic Verification  · STATUS: NEXT (owner review_42)
+
+A **bench-only** driver-safety verification matrix — **not** vehicle road
+testing, **not** live HV, **not** real driver-operation approval.
+
+**Owner prompt (verbatim):**
+
+> Begin Gate 05I-A: Low-Voltage Driver Safety Logic Verification.
+>
+> This is not vehicle road testing.
+> This is not live high-voltage testing.
+> This does not approve real driver operation.
+>
+> Create a bench-only verification matrix for:
+> 1. accelerator pedal plausibility
+> 2. brake override
+> 3. shift-state inhibit
+> 4. charger-plug drive lockout
+> 5. E-stop hardwired interrupt
+> 6. HVIL open detection
+> 7. BMS no-discharge response
+> 8. inverter fault response
+> 9. low-voltage brownout
+> 10. fault latch persistence
+> 11. service clear routine
+> 12. isolated EV display warning behavior
+> 13. CAN_1 listen-only maintained during all driver-input tests
+>
+> For each test include:
+> - test ID
+> - driver-safety function
+> - bench setup
+> - fault/input injected
+> - expected VCU behavior
+> - expected hardwired behavior
+> - blocked outputs
+> - measurement method
+> - proof artifact
+> - result category
+> - authority status
+> - Build Engine status
+>
+> Hard rules:
+> - No live HV.
+> - No vehicle motion.
+> - No real Ford factory bus transmission.
+> - No road-test approval.
+> - Bench evidence only.
+
+Enforce throughout — BENCH result categories not HIL (RC-197); E-stop
+measured not "instant" (RC-198); CAN_1 protected-bench-only + listen-only
+(RC-200); no timeout/threshold gains authority until proven (RC-173/179/180/
+188); the VCU coordinates but owns nothing safety-critical (BQ-27); D-007 +
+RC-168 bind. Blocked: real propulsion, live HV, wheels-on-ground, Ford
+ABS/ESC intervention, factory-cluster injection, road-test driver-safety
+claims (RC-201).
 
 Enforce throughout — every proof bench/HIL, no vehicle, no live-HV without a
 staged safety plan + LOTO/PPE (RC-117); no timeout/threshold/HIL timing

@@ -295,6 +295,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-194 | **Instrument calibration records in the artifact package (owner review_41)**: since calibrated lab instruments are cited, every HIL run must record **oscilloscope serial/calibration date · CAN-analyzer serial/firmware · programmable-supply serial/calibration date · FIU hardware revision** | owner-promoted (extends RC-184) | n/a — proof rule | **ProofRequirement** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7 |
 | RC-195 | **Mandatory Gate 05H pre-test safety checklist (owner review_41, new rule)**: before any 05H run — **no live HV connected · no real battery pack · no real contactor coil unless explicitly part of the LV bench test · current-limited supply active · bench E-stop available · fused DUT supply · test-bench wiring reviewed · firmware hash recorded · CAN_1 connected only to simulated/bench OEM nodes · raw logging enabled before fault injection** | owner-promoted | n/a — bench-safety rule | **ControlsSafety / HardwareSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7 |
 | RC-196 | **Gate 05I is low-voltage only (owner review_41)**: Gate 05I (Physical Bench Integration) must **not** jump to live HV or vehicle testing → it means **production-like low-voltage bench integration** (real harness, real VCU, real or supplier-representative BMS/PDU controller, real inverter controller if possible) with **no traction-battery HV, no vehicle road testing, no Ford factory bus transmission** | owner-promoted | n/a — gate-scope rule | **GateStatus / ControlsSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md`; scoped in `GATE_RESEARCH_QUEUE.md` — lanes L7 |
+| RC-197 | **Gate 05I result categories are BENCH, not HIL (owner review_42)**: in Gate 05I `HIL_OBSERVED_VALID` → **`BENCH_OBSERVED_VALID_NO_VEHICLE_AUTHORITY`** / **`BENCH_NEEDS_REVIEW_NO_VEHICLE_AUTHORITY`** / **`BENCH_HARD_BLOCK`** / **`BENCH_INVALID_RUN`** — Gate 05H = HIL, Gate 05I = production-like LV bench integration | batch_45 (wrong-layer result label) | n/a — test rule | **NoVehicleAuthority / ControlsSafety** — recorded in `docs/status/GATE05I_BENCH_INTEGRATION.md` (extends RC-191) — lanes L7 |
+| RC-198 | **No "instant" for the bench E-stop (owner review_42)**: "instant physical path break / immediate mechanical drop-out / coil voltage drops to 0 V" → **"E-stop removes the LV control path through the approved hardwired safety loop; coil-voltage decay, relay drop-out time, and output behavior must be measured and compared against the verified schematic + component datasheets"** (even LV relays/contactors have real physical delay) | batch_45 (unsafe timing word) | n/a — bench-safety rule | **NeedsSupplierData / ControlsSafety** — recorded in `docs/status/GATE05I_BENCH_INTEGRATION.md` (extends RC-175) — lanes L7/L8 |
+| RC-199 | **Production-intent harness, not production-spec (owner review_42)**: "final production-spec wiring harness" is too final → **"production-intent bench harness"**, `Harness Status: PRODUCTION_INTENT / NOT_RELEASED_FOR_VEHICLE_INSTALL` (upgrades to "production-released" only later) | batch_45 (over-final label) | n/a — status rule | **ControlsSafety / GateStatus** — recorded in `docs/status/GATE05I_BENCH_INTEGRATION.md` — lanes L7 |
+| RC-200 | **CAN_1 fault injection is protected-bench-only (owner review_42, hard rule)**: CAN_1 stuck-dominant/stuck-TXD fault injection is permitted **only on a protected bench harness or simulated OEM network**; **forbidden on a live Ford vehicle network** | batch_45 (unsafe-if-on-live-bus) | n/a — test boundary rule | **ControlsSafety** — recorded in `docs/status/GATE05I_BENCH_INTEGRATION.md` (extends RC-182/187/192) — lanes L7 |
+| RC-201 | **Driver-safety verification stays bench-level (owner review_42)**: Gate 05I driver-safety work opens as sub-gate **Gate 05I-A — Low-Voltage Driver Safety Logic Verification** (not real driver-safety approval) — allowed bench tests (accel/brake plausibility, brake override, shift-state inhibit, charger-plug drive lockout, E-stop response, HVIL open detection, BMS no-discharge, inverter fault response, LV brownout, fault-latch persistence, service-clear routine, EV-display warning, CAN_1 listen-only maintained); **blocked: real propulsion, live HV, wheels-on-ground movement, Ford ABS/ESC intervention, factory-cluster injection, road-test driver-safety claims** | owner-promoted | n/a — gate-scope rule | **GateStatus / ControlsSafety** — recorded in `docs/status/GATE05I_BENCH_INTEGRATION.md`; scoped in `GATE_RESEARCH_QUEUE.md` — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -3348,3 +3353,65 @@ scope). Queued in `GATE_RESEARCH_QUEUE.md`.
   supplier confirmation upgrades it.
 - Nothing ingested; nothing marked Confirmed; scripts are illustrative
   pseudocode, not production code; ODRs untouched.
+
+---
+
+## 53. Batch 45 + owner review_42 — Gate 05I Physical Bench Integration (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_45_gate05i_bench_integration.md`
+and `docs/research/raw/owner_reviews/review_42_batch_45_verdict.md`.
+Row additions: RC-197..RC-201 (no new CS). Deliverable:
+`docs/status/GATE05I_BENCH_INTEGRATION.md`. Owner: "yes, begin Gate 05I —
+but keep it low-voltage physical bench integration only; **do not move to
+Gate 05J / live vehicle commissioning yet**."
+
+### Scope kept (owner: "excellent")
+
+HV traction battery forbidden (LV aux 12 V only, HV isolated); vehicle road
+testing forbidden; live Ford factory-bus injection forbidden; supplier
+BMS/PDU + inverter controller logic only; production-like harness; real
+E-stop/interlock loop; calibration records; raw CAN logs; oscilloscope
+captures; harness part numbers; firmware versions. Gate 05I is real bench
+evidence, not software evidence.
+
+### Owner corrections
+
+- **BENCH result categories (RC-197):** Gate 05I reports
+  `BENCH_OBSERVED_VALID_NO_VEHICLE_AUTHORITY` /
+  `BENCH_NEEDS_REVIEW_NO_VEHICLE_AUTHORITY` / `BENCH_HARD_BLOCK` /
+  `BENCH_INVALID_RUN` — not HIL labels (Gate 05H = HIL, Gate 05I = LV bench).
+- **E-stop measured, not "instant" (RC-198):** coil decay + relay drop-out
+  time measured against the schematic + component datasheets.
+- **Production-intent harness (RC-199):** `PRODUCTION_INTENT /
+  NOT_RELEASED_FOR_VEHICLE_INSTALL`, not "production-spec/released."
+- **CAN_1 fault-injection protected-bench-only (RC-200):** forbidden on a
+  live Ford vehicle network.
+- **Driver-safety stays bench-level (RC-201):** opens sub-gate **Gate 05I-A
+  — Low-Voltage Driver Safety Logic Verification** (blocked: real
+  propulsion, live HV, wheels-on-ground, Ford ABS/ESC, cluster injection,
+  road-test claims).
+
+### Gate 05I status (owner review_42)
+
+`LOW_VOLTAGE_BENCH_INTEGRATION_STARTED` / `PRODUCTION_INTENT_HARNESS_REQUIRED`
+/ `REAL_VCU_REQUIRED` / `SUPPLIER_LOGIC_NODES_REQUIRED` /
+`HARDWIRED_ESTOP_REQUIRED` / `NO_HV_TRACTION_BATTERY` /
+`NO_VEHICLE_ROAD_TESTING` / `NO_LIVE_FORD_BUS_TRANSMISSION` /
+`NO_VEHICLE_CLEARANCE` / `PENDING_ENGINEERING_REVIEW`. **Gate 05J / live
+vehicle commissioning explicitly NOT YET.**
+
+### Next
+
+Owner: **Gate 05I-A — Low-Voltage Driver Safety Logic Verification**
+(bench-only; owner supplied the verbatim 13-test prompt + per-test field
+list + hard rules). Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- Low-voltage bench only; HV traction battery forbidden + isolated; no
+  vehicle road testing; no live Ford-bus transmission; CAN_1 listen-only
+  (protected/simulated fault injection only); non-destructive fault
+  injection; no vehicle clearance; pending engineering review.
+- Nothing ingested; nothing marked Confirmed; scripts are illustrative
+  pseudocode, not production code; Gate 05J NOT YET; ODRs untouched.

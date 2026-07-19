@@ -371,31 +371,33 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_41):** **Gate 05I — Physical
-(low-voltage) Bench Integration** — production-like LV bench integration
-(real harness · real VCU · real or supplier-representative BMS/PDU · real
-inverter controller if possible) with **no traction-battery HV, no vehicle
-road testing, no Ford factory bus transmission**; Gate 05I **must not** jump
-to live HV or vehicle testing (RC-196). Runs only after Gate 05H-B HIL bench
-observation + engineering review; still no live HV without a staged safety
-plan + LOTO/PPE (RC-117). Gate 05H v3 is now framed as **real low-voltage
-HIL / bench evidence** (real VCU DUT), cleaned of vehicle-approval language —
-results are DUT/firmware/harness-scoped, never vehicle/live-HV/compliance
-authority (RC-190); result categories `…_NO_VEHICLE_AUTHORITY` /
-`HIL_HARD_BLOCK` / `HIL_INVALID_RUN` (RC-191); CAN short bench-only (RC-192);
-non-destructive TX fault (RC-193); calibration records (RC-194); mandatory
-pre-test safety checklist (RC-195). Keep the ownership discipline — the VCU
+**Next expected batch (owner review_42):** **Gate 05I-A — Low-Voltage
+Driver Safety Logic Verification** — a **bench-only** driver-safety
+verification matrix (13 tests: accel-pedal plausibility, brake override,
+shift-state inhibit, charger-plug drive lockout, E-stop hardwired interrupt,
+HVIL open detection, BMS no-discharge, inverter fault response, LV brownout,
+fault-latch persistence, service-clear routine, EV-display warning, CAN_1
+listen-only maintained), each with test ID / function / bench setup /
+fault-input / expected VCU + hardwired behaviour / blocked outputs /
+measurement method / proof artifact / result category / authority status /
+Build Engine status. **Not** vehicle road testing, **not** live HV, **not**
+real driver-operation approval; blocked outputs = real propulsion, live HV,
+wheels-on-ground, Ford ABS/ESC intervention, factory-cluster injection,
+road-test claims (RC-201). Gate 05I (Physical LV Bench Integration,
+`GATE05I_BENCH_INTEGRATION.md`) is `LOW_VOLTAGE_BENCH_INTEGRATION_STARTED` —
+HV traction battery forbidden + isolated, no vehicle road test, no live
+Ford-bus transmission; BENCH (not HIL) result categories (RC-197); E-stop
+measured not "instant" (RC-198); production-intent harness (RC-199); CAN_1
+fault injection protected-bench-only (RC-200). **Gate 05J / live vehicle
+commissioning explicitly NOT YET.** Keep the ownership discipline — the VCU
 **coordinates** but owns nothing safety-critical (contactors / pre-charge /
 HV shutdown / torque authority) until the BMS/PDU supplier architecture
-proves it (BQ-27); CAN_1 stays listen-only (TXD-line proof, RC-186;
-bench-only fault injection, RC-187/192); EV-side outputs stay isolated;
+proves it (BQ-27); CAN_1 stays listen-only; EV-side outputs stay isolated;
 **NEVER "PATS bypass"; no factory-cluster injection; no invented
-thresholds/timeouts as gate logic until a proof upgrades them
-(RC-173/179/180/188); report HIL-observed, never vehicle-authority
-(RC-190/191).** Verbatim scope in
-[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); Gate 05H
-protocol in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` (permanent
-doctrine D-007: **Coordinator ≠ Owner**). **Gate 08C is parked**; Gate 07
+thresholds/timeouts as gate logic (RC-173/179/180/188); bench evidence
+only.** Verbatim scope in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); permanent
+doctrine D-007: **Coordinator ≠ Owner**. **Gate 08C is parked**; Gate 07
 artifacts + the 15-mode FMEA registry stay open. Order after 05: Gate 06
 deep dive → 09 → 10 → 11.
 

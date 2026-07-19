@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 44 + review_41 — Gate 05H v3 physical HIL/bench evidence)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 44 + review_41); awaiting the Gate 05I Physical (low-voltage) Bench Integration batch or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `5690e91` (batch-44 archive); end commit: `14ea786` (batch-44 reconciliation)
+- Work: updated `GATE05H_HIL_BENCH_TEST_PROTOCOL.md` to v3. RC-190..196 (no new CS). Section 52. HIL reframed as real low-voltage bench evidence, cleaned of vehicle-approval language: evidence boundary — results DUT/firmware/harness-scoped, not vehicle/live-HV/compliance authority (RC-190); result categories `…_NO_VEHICLE_AUTHORITY` / `HIL_HARD_BLOCK` / `HIL_INVALID_RUN` (RC-191). Bench-safety: CAN short bench-only (RC-192); non-destructive TX fault (RC-193); calibration records (RC-194); mandatory pre-test safety checklist (RC-195). Gate 05I defined low-voltage only (RC-196). Also recorded a byte-identical duplicate re-send of "43:75" as a PROVENANCE note (commit `58d155b`). Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (invented-timing RC-116/133/169/174/180/188 — five artifacts); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/HV-shutdown ownership.
+
 ## 2026-07-16 — Claude Code — task complete (batch 43 + review_40 — Gate 05H v2 HIL refinement; 05H-A/05H-B/05I split)
 
 ### (archived handoff)

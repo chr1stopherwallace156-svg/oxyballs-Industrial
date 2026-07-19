@@ -4,63 +4,63 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-16
-- Reason for handoff: task complete (batch 44 + review_41 — Gate 05H v3
-  physical HIL/bench evidence); awaiting the Gate 05I Physical (low-voltage)
-  Bench Integration batch or a supplier reply
+- Reason for handoff: task complete (batch 45 + review_42 — Gate 05I
+  Physical Bench Integration); awaiting the Gate 05I-A Low-Voltage Driver
+  Safety Logic Verification batch or a supplier reply
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `5690e91` — Archive raw RH batch 44 + review_41 1:1
+- Start commit: `ca466ac` — Archive raw RH batch 45 + review_42 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- **Updated** file: **`docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md`** —
-  now the v3 protocol (physical HIL/bench evidence framing, evidence
-  boundary, stricter result categories, bench-only + non-destructive fault
-  rules, calibration records, mandatory pre-test safety checklist,
-  low-voltage Gate 05I definition).
+- New file: **`docs/status/GATE05I_BENCH_INTEGRATION.md`** (production-like
+  LV integration environment, bench fault-injection & driver-safety matrix,
+  transceiver-protection script, artifact dossier with calibration records).
 - Files changed (reconciliation commit):
-  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (RC-190..196;
-  section 52 — no new CS), `docs/research/RESEARCH_MAP.md` ("next" → Gate
-  05I low-voltage), `docs/roadmaps/GATE_RESEARCH_QUEUE.md` (Gate 05H v3
-  refined; Gate 05I → NEXT, low-voltage scope), `docs/CHANGELOG.md`,
-  handoff files. (Raw archives `batch_44_gate05h_v3_physical_hil_evidence.md`,
-  `review_41_batch_44_verdict.md`, PROVENANCE committed separately as
-  `5690e91`.)
-- **Also handled a duplicate re-send of "43:75"** just before this batch —
-  byte-identical to the already-archived batch_43; recorded as a
-  duplicate-delivery note in PROVENANCE (no new evidence/rows/section),
-  commit `58d155b`.
-- Summary: Gate 05H reframed as **real low-voltage HIL / bench evidence**
-  (owner: "the best Gate 05H version so far") — real VCU DUT, real
-  transceivers, physical FIU, calibrated instruments, physical
-  voltage/signal boundary. **Cleaned of vehicle-approval language:**
-  evidence boundary (RC-190) — results are DUT/firmware/harness-scoped, not
-  vehicle/live-HV/compliance authority; stricter result categories (RC-191)
-  — `…_NO_VEHICLE_AUTHORITY` / `HIL_HARD_BLOCK` (CAN_1 TXD activity /
-  factory-bus transmit leakage) / `HIL_INVALID_RUN`. Bench-safety
-  corrections: CAN short bench-only hard rule (RC-192); non-destructive TX
-  fault through a protected path (RC-193); instrument calibration records
-  (RC-194); mandatory pre-test safety checklist (RC-195). Gate 05I defined
-  low-voltage only (RC-196) — real harness/VCU/BMS-PDU/inverter controller,
-  no traction HV, no vehicle road test, no Ford factory bus transmit.
-  **Nothing ingested; nothing Confirmed; no placeholder timing has gate
-  authority; scripts are pseudocode not production code; no vehicle /
-  live-HV / compliance authority; ODRs untouched.**
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (RC-197..201;
+  section 53 — no new CS), `docs/research/RESEARCH_MAP.md` ("next" → Gate
+  05I-A), `docs/roadmaps/GATE_RESEARCH_QUEUE.md` (Gate 05I started; Gate
+  05I-A → NEXT with verbatim 13-test prompt), `docs/CHANGELOG.md`, handoff
+  files. (Raw archives `batch_45_gate05i_bench_integration.md`,
+  `review_42_batch_45_verdict.md`, PROVENANCE committed separately as
+  `ca466ac`.)
+- Summary: Gate 05I opened as production-like **low-voltage** bench
+  integration (owner: "begin Gate 05I — but keep it low-voltage physical
+  bench integration only; do not move to Gate 05J / live vehicle
+  commissioning yet"). Real harness & PDU, real VCU, supplier BMS/PDU +
+  inverter logic boards on LV power only, hardwired E-stop. Three RESTRICTED
+  constraints held: **HV traction battery forbidden + isolated; vehicle road
+  testing forbidden; live Ford factory-bus (CAN_1) injection forbidden.**
+  Owner corrections: BENCH (not HIL) result categories
+  (`BENCH_OBSERVED_VALID_NO_VEHICLE_AUTHORITY` /
+  `BENCH_NEEDS_REVIEW_NO_VEHICLE_AUTHORITY` / `BENCH_HARD_BLOCK` /
+  `BENCH_INVALID_RUN`, RC-197); E-stop measured not "instant" — coil decay +
+  relay drop-out measured vs schematic + datasheets (RC-198);
+  "production-spec" → "production-intent bench harness /
+  NOT_RELEASED_FOR_VEHICLE_INSTALL" (RC-199); CAN_1 fault injection
+  protected-bench-only, forbidden on a live Ford vehicle network (RC-200);
+  driver-safety stays bench-level → sub-gate Gate 05I-A (RC-201). **Nothing
+  ingested; nothing Confirmed; scripts are pseudocode not production code;
+  Gate 05J / live vehicle commissioning explicitly NOT YET; ODRs
+  untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_44/review_41 archives are 1:1 against the
-  owner's chat ("44:75"); the corrected Gate 05H status + result categories
-  + Gate 05I low-voltage scope match the owner's verdict; the duplicate
-  "43:75" was not re-processed; nothing marked Confirmed
+- Verified vs claimed: batch_45/review_42 archives are 1:1 against the
+  owner's chat ("45:75"); the Gate 05I status + BENCH result categories +
+  Gate 05I-A sub-gate match the owner's verdict; the three RESTRICTED
+  constraints are enforced; nothing marked Confirmed. (Note: the owner's
+  framing listed the three restricted items without the leading "no"; the
+  established review_41 intent + the payload's own RESTRICTED lines confirm
+  all three are forbidden — applied that intent.)
 
 ## State
 
@@ -70,12 +70,11 @@
   RESPONSE. Supplier-only values parked in
   `docs/status/BLOCKED_QUESTIONS_LEDGER.md` (BQ-01..BQ-27).
 - Gate-state snapshot: 04B/04C/06 first pass; **05 STARTED — 05A/05B done;
-  05C STATE_MACHINE_DRAFTED; 05D STATE_OWNERSHIP_MATRIX_CREATED; 05E
-  ICD_SIGNAL_BOUNDARIES_MAPPED; 05F NETWORK_BOUNDARY_RULES_CREATED; 05G
-  FAILSAFE_MATRIX_MAPPED; 05H HIL_VALIDATION_PROTOCOL_CREATED (v3; split
-  05H-A / 05H-B / 05I), PENDING_ENGINEERING_REVIEW
-  (`GATE05H_HIL_BENCH_TEST_PROTOCOL.md`); 05I Physical (low-voltage) Bench
-  Integration NEXT**; 07 v0.1 / 07B (`MASS_LEDGER.md`) / 07C v0.4 PARKED
+  05C..05G done; 05H HIL_VALIDATION_PROTOCOL_CREATED (v3; split 05H-A /
+  05H-B / 05I); 05I LOW_VOLTAGE_BENCH_INTEGRATION_STARTED
+  (`GATE05I_BENCH_INTEGRATION.md`); 05I-A Low-Voltage Driver Safety Logic
+  Verification NEXT; Gate 05J / live vehicle commissioning NOT YET**; 07
+  v0.1 / 07B (`MASS_LEDGER.md`) / 07C v0.4 PARKED
   (`AXLE_CG_CALCULATOR.md`); 08 FMEA_REGISTRY_CREATED (15 modes); 08B
   SOURCE_CANDIDATES_MAPPED PARKED; **08C SIMULATION_SWEEP_MATRIX_CREATED —
   PARKED_FOR_SUPPLIER_DATA**. Order after 05: 06 deep dive → 09 → 10 → 11.
@@ -84,57 +83,58 @@
   `GATE05A_SIGNAL_REGISTRY.md`, `GATE05B_CONTROLS_DEPENDENCY_MAP.md`,
   `GATE05C_STATE_MACHINE.md`, `GATE05D_OWNERSHIP_MATRIX.md`,
   `GATE05E_ICD_SIGNAL_AUTHORITY.md`, `GATE05F_NETWORK_BOUNDARY.md`,
-  `GATE05G_FAILSAFE_MATRIX.md`, `GATE05H_HIL_BENCH_TEST_PROTOCOL.md`.
+  `GATE05G_FAILSAFE_MATRIX.md`, `GATE05H_HIL_BENCH_TEST_PROTOCOL.md`,
+  `GATE05I_BENCH_INTEGRATION.md`.
 - Doctrine: **D-007** (controls-authority) + RC-168 (signal-decomposition)
-  + RC-173/179/180/188 (no unproven timing as gate logic) + RC-190/191 (HIL
-  is bench evidence, not vehicle authority) bind all Gate 05x + downstream
-  controls work.
+  + RC-173/179/180/188 (no unproven timing as gate logic) + RC-190/191/197
+  (HIL/bench is evidence, not vehicle authority) bind all Gate 05x +
+  downstream controls work.
 - Open owner decisions (accumulated): (1) elektron-os-clean two-universe;
   (2) index.html; (3) L2 regulatory module; (4) L4 mechanical/structural
   module; (5) L6 battery/BMS/thermal module; (6) L9 lane name; (7)
   Artifact Intake Form; (8) M10 forbidden-phrase + regression scanner (now
   covers PATS bypass, ZF-CAN/duty, gas/diesel, compliance-labels,
-  transmit-config, and the invented-timing family RC-116/133/169/174/180/188
-  — five artifacts; strongest scanner case); (9)(10)(11) approve/send Dana /
-  ZF / Ford-Lee letters; (12) supplier reminder; (13) official Ford BBLB +
-  IVM + FMVSS 305a/105 + paid Gate 08B standards + official Ford UIM/BBAS/
-  J1939 docs + supplier BMS/inverter/VCU/DC-DC/charger DBCs; (14) brake
-  engineer for FMVSS 105; (15) confirm donor is 7.3L gas (001A) + donor
-  data; (16) inverter/BMS firmware timing + HV safety plan; (17) firmware
-  signoff (BQ-26); (18) BMS/PDU pre-charge + contactor + HV-shutdown
-  ownership (BQ-27).
+  transmit-config, the invented-timing family RC-116/133/169/174/180/188,
+  and the "instant" mechanical-timing pattern RC-175/198 — six+ artifacts;
+  strongest scanner case); (9)(10)(11) approve/send Dana / ZF / Ford-Lee
+  letters; (12) supplier reminder; (13) official Ford BBLB + IVM + FMVSS
+  305a/105 + paid Gate 08B standards + official Ford UIM/BBAS/J1939 docs +
+  supplier BMS/inverter/VCU/DC-DC/charger DBCs; (14) brake engineer for
+  FMVSS 105; (15) confirm donor is 7.3L gas (001A) + donor data; (16)
+  inverter/BMS firmware timing + HV safety plan; (17) firmware signoff
+  (BQ-26); (18) BMS/PDU pre-charge + contactor + HV-shutdown ownership
+  (BQ-27).
 
 ## Next exact action
 
-Expected next inputs, in any order: (a) the **Gate 05I Physical
-(low-voltage) Bench Integration batch** (scope in `GATE_RESEARCH_QUEUE.md`;
-HIL protocol in `GATE05H_HIL_BENCH_TEST_PROTOCOL.md`) — production-like LV
-bench integration (real harness · real VCU · real or supplier-representative
-BMS/PDU · real inverter controller if possible) with **no traction-battery
-HV, no vehicle road testing, no Ford factory bus transmission**; 05I must
-not jump to live HV or vehicle testing (RC-196); runs only after 05H-B HIL
-bench observation + engineering review. **Enforce D-007 + RC-168 +
-RC-173/179/180/188 + RC-190/191: HIL/bench results are DUT/firmware/harness-
-scoped evidence, never vehicle / live-HV / compliance authority; report
-`…_NO_VEHICLE_AUTHORITY` / `HIL_HARD_BLOCK` / `HIL_INVALID_RUN`, never PASS;
-CAN_1 stays listen-only with the TXD-line proof (RC-186), bench-only +
-non-destructive fault injection (RC-192/193); mandatory pre-test safety
-checklist + calibration records (RC-194/195); the VCU coordinates but owns
-nothing safety-critical (contactors / pre-charge / HV shutdown / torque)
-until the BMS/PDU supplier architecture proves it (BQ-27); no factory-bus
-transmission; NEVER "PATS bypass"; nothing Confirmed; no compliance claim.**
-(b) The **Gate 06 deep dive** (Mechanical Mounting / Battery Enclosure) per
-the standing order after Gate 05 (06 → 09 → 10 → 11). (c) A Gate 08C reopen
-if supplier thresholds land. (d) Gate 08B reopen if official standard PDFs
-arrive. (e) Gate 07A/07C field data. (f) A supplier reply — archive 1:1,
-reconcile, move the matching BQ to the Resolution log. (g) The owner
-approves/sends a letter — record Sent + date, start that BQ's 7/14/21-day
-clock. Enforce throughout: nothing Confirmed; no compliance/"safe" claim;
-NEVER "PATS bypass" or bus spoofing; NEVER invent a threshold / timeout /
-grant a placeholder pass-block; no Ford signal is confirmed until an
-official source proves it; the VCU does not own HV shutdown until supplier
-architecture confirms it; keep diesel data out of the 001A gas model
-(D-006).
+Expected next inputs, in any order: (a) the **Gate 05I-A Low-Voltage Driver
+Safety Logic Verification batch** (verbatim 13-test prompt + field list +
+hard rules in `GATE_RESEARCH_QUEUE.md`; Gate 05I environment in
+`GATE05I_BENCH_INTEGRATION.md`) — a **bench-only** driver-safety matrix
+(accel/brake plausibility, brake override, shift-state inhibit, charger-plug
+drive lockout, E-stop, HVIL open, BMS no-discharge, inverter fault, LV
+brownout, fault-latch persistence, service-clear, EV-display warning, CAN_1
+listen-only maintained). **Not** vehicle road testing, **not** live HV,
+**not** real driver-operation approval. **Enforce: BENCH result categories
+not HIL (RC-197); E-stop measured not "instant" (RC-198); CAN_1
+protected-bench-only + listen-only (RC-200); blocked outputs = real
+propulsion / live HV / wheels-on-ground / Ford ABS/ESC intervention /
+factory-cluster injection / road-test claims (RC-201); no timeout/threshold
+gains authority until proven (RC-173/179/180/188); the VCU coordinates but
+owns nothing safety-critical until the BMS/PDU supplier architecture proves
+it (BQ-27); NEVER "PATS bypass"; nothing Confirmed; no compliance claim;
+Gate 05J / live vehicle commissioning NOT YET.** (b) The **Gate 06 deep
+dive** (Mechanical Mounting / Battery Enclosure) per the standing order
+after Gate 05 (06 → 09 → 10 → 11). (c) A Gate 08C reopen if supplier
+thresholds land. (d) Gate 08B reopen if official standard PDFs arrive. (e)
+Gate 07A/07C field data. (f) A supplier reply — archive 1:1, reconcile, move
+the matching BQ to the Resolution log. (g) The owner approves/sends a letter
+— record Sent + date, start that BQ's 7/14/21-day clock. Enforce throughout:
+nothing Confirmed; no compliance/"safe" claim; NEVER "PATS bypass" or bus
+spoofing; NEVER invent a threshold / timeout / grant a placeholder
+pass-block; no Ford signal is confirmed until an official source proves it;
+the VCU does not own HV shutdown until supplier architecture confirms it;
+keep diesel data out of the 001A gas model (D-006).
 
 ## Forbidden actions
 
@@ -158,7 +158,7 @@ architecture confirms it; keep diesel data out of the 001A gas model
   3-cycle HIL timings RC-180/188; the 11.8–14.2 V / 20 V/ms / 0–5 V bench
   profiles as vehicle requirements RC-189).
 - Do not mix 6.7L diesel weight/CG into the 7.3L gas model (D-006).
-- **Gate 05 (D-007 + RC-168 + RC-173/179/180/188 + RC-190/191 bind):
+- **Gate 05 (D-007 + RC-168 + RC-173/179/180/188 + RC-190/191/197 bind):
   authorized/listen-only only — no anti-theft bypass, no fake/spoofed
   ABS/ESC messages, no transmit onto factory Ford safety buses without
   approval (RC-136/142/148); accel-pedal never drives inverter torque
@@ -170,23 +170,25 @@ architecture confirms it; keep diesel data out of the 001A gas model
   / LOTO / absence-of-voltage (RC-163); a signal cannot be both a request
   and a hardware actuation unless the source says so (RC-168); Ford source
   controllers stay generic until proven (RC-166); CAN_1 stays listen-only
-  (selected/wired/configured, not "modified", RC-172; simulated/bench only
-  + non-destructive fault injection, RC-182/187/192/193; TXD-line ACK proof,
-  RC-186) with the RC-167 proof pack; no timeout / heartbeat / alive-counter
-  / torque-zero / shutdown / contactor-open / HIL timing becomes physical
-  gate logic until supplier docs or HIL/bench proof (RC-173/174/179/180/188);
-  no "instant" mechanical/E-stop contactor action — supplier-defined +
-  bench/HIL-verified (RC-175); power-loss safe-state is measured not assumed
-  (RC-183); HIL scripts report `…_NO_VEHICLE_AUTHORITY` / `HIL_HARD_BLOCK` /
-  `HIL_INVALID_RUN`, never PASS (RC-181/188/191); HIL results are not
-  vehicle/live-HV/compliance authority (RC-190); every HIL run produces the
-  proof-artifact package + calibration records (RC-184/194) + pre-test
-  safety checklist (RC-195); Gate 05H is bench/HIL evidence not
+  (not "modified", RC-172; simulated/bench + non-destructive fault injection
+  only, RC-182/187/192/193/200; TXD-line ACK proof, RC-186) with the RC-167
+  proof pack; no timeout / heartbeat / alive-counter / torque-zero /
+  shutdown / contactor-open / HIL timing becomes physical gate logic until
+  supplier docs or HIL/bench proof (RC-173/174/179/180/188); no "instant"
+  mechanical/E-stop contactor action — supplier-defined + measured (RC-175/
+  198); power-loss safe-state is measured not assumed (RC-183); HIL scripts
+  report `…_NO_VEHICLE_AUTHORITY` / `HIL_HARD_BLOCK`, Gate 05I reports BENCH
+  categories, never PASS (RC-181/188/191/197); HIL/bench results are not
+  vehicle/live-HV/compliance authority (RC-190); every HIL/bench run
+  produces the proof-artifact package + calibration records (RC-184/194) +
+  pre-test safety checklist (RC-195); Gate 05H is bench/HIL evidence not
   simulation-only, split 05H-A/05H-B/05I (RC-185); Gate 05I is low-voltage
   only — no traction HV, no vehicle test, no Ford bus transmit (RC-196);
-  every torque / contactor / BMS-discharge / HVIL / isolation / e-stop fault
-  defaults toward torque inhibit + restart lockout + engineering review
-  (RC-179).**
+  Gate 05I harness is production-intent not production-released (RC-199);
+  Gate 05I-A driver-safety is bench-only (RC-201); Gate 05J / live vehicle
+  commissioning is NOT YET; every torque / contactor / BMS-discharge / HVIL
+  / isolation / e-stop fault defaults toward torque inhibit + restart
+  lockout + engineering review (RC-179).**
 - Do not recommend or run live-HV fault testing; no track testing;
   staged testing only (RC-117) with LOTO/PPE/engineering signoff.
 - Do not let the Build Engine claim compliance or mark anything safe.
@@ -210,5 +212,5 @@ architecture confirms it; keep diesel data out of the 001A gas model
       `GATE05A_SIGNAL_REGISTRY.md`, `GATE05B_CONTROLS_DEPENDENCY_MAP.md`,
       `GATE05C_STATE_MACHINE.md`, `GATE05D_OWNERSHIP_MATRIX.md`,
       `GATE05E_ICD_SIGNAL_AUTHORITY.md`, `GATE05F_NETWORK_BOUNDARY.md`,
-      `GATE05G_FAILSAFE_MATRIX.md`, `GATE05H_HIL_BENCH_TEST_PROTOCOL.md`)
-      read
+      `GATE05G_FAILSAFE_MATRIX.md`, `GATE05H_HIL_BENCH_TEST_PROTOCOL.md`,
+      `GATE05I_BENCH_INTEGRATION.md`) read

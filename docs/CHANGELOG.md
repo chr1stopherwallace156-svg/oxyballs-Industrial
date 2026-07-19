@@ -5,6 +5,41 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 45 + review_42: Gate 05I Physical Bench Integration
+
+- Archived batch_45 (Gate 05I) and review_42 1:1 (commit `ca466ac`). New
+  rows RC-197..201 (no new CS). Section 53. New deliverable
+  `docs/status/GATE05I_BENCH_INTEGRATION.md`. Owner: "yes, begin Gate 05I —
+  but keep it low-voltage physical bench integration only; do not move to
+  Gate 05J / live vehicle commissioning yet."
+- Gate 05I = production-like **low-voltage** bench integration (real
+  harness & PDU, real VCU, supplier BMS/PDU + inverter logic boards on LV
+  power only, hardwired E-stop / dual-channel relays). Three RESTRICTED
+  constraints held: HV traction battery forbidden + isolated; vehicle road
+  testing forbidden; live Ford factory-bus (CAN_1) injection forbidden.
+  Bench fault-injection matrix (BENCH-05I-001..004), transceiver-protection
+  script, and a bench-integration artifact dossier with instrument
+  calibration records.
+- Owner corrections: BENCH (not HIL) result categories —
+  `BENCH_OBSERVED_VALID_NO_VEHICLE_AUTHORITY` /
+  `BENCH_NEEDS_REVIEW_NO_VEHICLE_AUTHORITY` / `BENCH_HARD_BLOCK` /
+  `BENCH_INVALID_RUN` (RC-197); E-stop measured not "instant" — coil decay +
+  relay drop-out time measured against schematic + datasheets (RC-198);
+  "production-spec harness" → "production-intent bench harness" /
+  `NOT_RELEASED_FOR_VEHICLE_INSTALL` (RC-199); CAN_1 fault injection
+  protected-bench-only, forbidden on a live Ford vehicle network (RC-200);
+  driver-safety stays bench-level → sub-gate Gate 05I-A (RC-201).
+- Gate 05I status = `LOW_VOLTAGE_BENCH_INTEGRATION_STARTED /
+  PRODUCTION_INTENT_HARNESS_REQUIRED / REAL_VCU_REQUIRED /
+  SUPPLIER_LOGIC_NODES_REQUIRED / HARDWIRED_ESTOP_REQUIRED /
+  NO_HV_TRACTION_BATTERY / NO_VEHICLE_ROAD_TESTING /
+  NO_LIVE_FORD_BUS_TRANSMISSION / NO_VEHICLE_CLEARANCE /
+  PENDING_ENGINEERING_REVIEW`. **Gate 05J / live vehicle commissioning
+  explicitly NOT YET.**
+- Nothing ingested; nothing marked Confirmed; scripts are pseudocode not
+  production code; no vehicle / live-HV clearance; ODRs untouched. Next =
+  Gate 05I-A (Low-Voltage Driver Safety Logic Verification, bench-only).
+
 ## 2026-07-16 — RH batch 44 + review_41: Gate 05H v3 (physical HIL/bench evidence)
 
 - Archived batch_44 (Gate 05H v3) and review_41 1:1 (commit `5690e91`).
