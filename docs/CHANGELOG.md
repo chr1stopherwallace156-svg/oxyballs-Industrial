@@ -5,6 +5,33 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 35 + review_32: Gate 08C parked + Gate 05A signal registry
+
+- Archived batch_35 (Gate 08C parked + Gate 05A registry) and review_32
+  1:1 (commit `a8b8c5e`). New rows RC-143..147 (no new CS). Section 43.
+  New deliverable `docs/status/GATE05A_SIGNAL_REGISTRY.md`; Gate 08C
+  parked. Owner: "one of the cleanest versions so far."
+- **Gate 08C parked (RC-143):** status `SIMULATION_SWEEP_MATRIX_CREATED /
+  … / PARKED_FOR_SUPPLIER_DATA`; the term "Model Accepts" → **"Within
+  Draft Stress Envelope / No Gate Authority"** (never read as approval).
+- **Gate 05A (RC-144/145/146/147):** DBC reality — Ford factory systems =
+  AuthorizedSourcePending / ListenOnlyCandidate / NoTransmitAuthority
+  (Ford may not give a clean proprietary DBC); EV-side DBCs
+  (BMS/inverter/VCU/DC-DC/charger) realistic + owned; "unlocks transmit
+  configs" → unlocks listen-only registry + receive-only VCU state +
+  authorized upfitter mapping (transmit blocked). 6 signals registered
+  (S1 wheel-speed PGN 65215, S2 accel-pedal 61443, S3 brake-switch 61441,
+  S4 ignition, S5 inverter CAN_2, S6 BMS SOC CAN_3) — Ford-side =
+  Public/Standard J1939 Candidate / UnverifiedStage / Listen-Only / No
+  control authority. Accel-pedal (compare driver-demand trend in sim only)
+  and brake-switch (sim-only regen-decay study) use restricted. Status
+  SIGNAL_REGISTRY_STARTED / LISTEN_ONLY_RESEARCH / UNVERIFIED_STAGE /
+  NO_ACTIVE_TRANSMISSIONS / NO_FACTORY_SAFETY_BUS_CONTROL.
+- Research Map + queue updated; **next = Gate 05B Controls Dependency
+  Map**; Gate 08C stays parked.
+- Nothing ingested; nothing Confirmed; no placeholder authority; no
+  confirmed Ford signal; no transmit/bypass; ODRs untouched.
+
 ## 2026-07-16 — RH batch 34 + review_31: Gate 08C sweep cleanup + Gate 05 signal candidates
 
 - Archived batch_34 (Gate 08C sweep + Gate 05 signals) and review_31 1:1

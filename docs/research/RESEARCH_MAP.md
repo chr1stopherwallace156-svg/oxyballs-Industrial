@@ -371,20 +371,19 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_31):** **Gate 05A — Source-Backed
-Signal Registry** (find official Ford UIM / BBAS / J1939 docs first; per
-signal: name, source doc, bus/channel, protocol, PGN/ID, byte/bit,
-direction [listen-only/receive/transmit], allowed/blocked use,
-verification status, proof artifact). All Ford PGN/byte/rate mappings stay
-**`J1939SignalCandidate / NeedsOfficialFordUIMSource`** until an official
-source proves them; **transmit stays blocked**; **NEVER "PATS bypass"; no
-spoofing factory safety buses.** Runs in parallel with the **Gate 08C
-sweep engine** (`docs/status/DRAFT_VALIDATION_08C.md`, sweep inputs report
-the Simulation Response Category, never PASS/BLOCK). Verbatim prompt in
+**Next expected batch (owner review_32):** **Gate 05B — Controls
+Dependency Map** — map Ford-side signals needed, EV-side signals needed,
+VCU decisions, driver warnings, fault states, what is receive-only, what
+is transmit-only on the EV side, and what is completely blocked. Keep the
+listen-only / no-safety-bus-transmit doctrine; Ford-side signals stay
+candidates until proven; accel-pedal never commands inverter torque
+directly; **NEVER "PATS bypass."** Verbatim scope in
 [`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); Gate 05
-doctrine in `docs/status/GATE05_CONTROLS.md`. Gate 07 artifacts + the
-15-mode FMEA registry stay open. Order after 05: Gate 06 deep dive → 09 →
-10 → 11.
+doctrine in `docs/status/GATE05_CONTROLS.md`, signal registry in
+`docs/status/GATE05A_SIGNAL_REGISTRY.md`. **Gate 08C is parked**
+(`SIMULATION_SWEEP_MATRIX_CREATED / PARKED_FOR_SUPPLIER_DATA`). Gate 07
+artifacts + the 15-mode FMEA registry stay open. Order after 05: Gate 06
+deep dive → 09 → 10 → 11.
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

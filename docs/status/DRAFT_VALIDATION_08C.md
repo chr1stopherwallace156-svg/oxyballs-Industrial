@@ -6,11 +6,14 @@ The simulation-only draft-validation layer for the FMEA registry (Gate
 gate authority**. "You do not need supplier data to build the logic; you
 need supplier data to approve the logic" (owner).
 
-**Status (owner review_31): `DRAFT_VALIDATION_STARTED` /
-`SIMULATION_SWEEP_ACTIVE` / `PLACEHOLDER_VALUES_HAVE_NO_GATE_AUTHORITY` /
-`SUPPLIER_THRESHOLDS_REQUIRED` / `NO_PHYSICAL_TEST_CLEARANCE` /
-`NO_COMPLIANCE_CLAIMS`.** Cannot become `FINAL_VALIDATED` until supplier
-data + exact standards + physical tests + engineering signoff are added.
+**Status (owner review_32 — PARKED): `SIMULATION_SWEEP_MATRIX_CREATED` /
+`PLACEHOLDER_VALUES_HAVE_NO_GATE_AUTHORITY` / `SUPPLIER_THRESHOLDS_REQUIRED`
+/ `NO_PHYSICAL_TEST_CLEARANCE` / `NO_COMPLIANCE_CLAIMS` /
+`PARKED_FOR_SUPPLIER_DATA`.** The sweep matrix is built — "not done, but
+done enough to keep moving." Cannot become `FINAL_VALIDATED` until supplier
+data + exact standards + physical tests + engineering signoff are added;
+reopens when supplier thresholds land (upgrades sweep inputs →
+SupplierConfirmed / PhysicallyVerified).
 
 ---
 
@@ -26,13 +29,15 @@ IF parameter_source == "NominalEngineeringAssumption":
     PHYSICAL_TEST_CLEARANCE = "BLOCKED"
 ```
 
-**Simulation Response Category (owner review_31 — RC-138)** — use these,
-NOT PASS/BLOCK and NOT "stable/unstable" (which still reads as engineering
-approval): **`Model Accepts` · `Model Needs Review` · `Model Stress
-Failure` · `Supplier Data Required`**, each carrying `No Gate Authority`.
-So a sweep point reports e.g. **"[100 ms]: Model Stress Failure / No Gate
-Authority"**, never "unstable" or "PASS/BLOCK." Reserve `PASS` / `BLOCK`
-for `SupplierConfirmed` or `PhysicallyVerified` values only.
+**Simulation Response Category (owner review_31/32 — RC-138/143)** — use
+these, NOT PASS/BLOCK and NOT "stable/unstable" (and NOT "Model Accepts",
+which still reads as approval): **`Within Draft Stress Envelope` · `Needs
+Review` · `Model Stress Failure` · `Supplier Data Required`**, each
+carrying `No Gate Authority`. So a sweep point reports e.g. **"[100 ms]:
+Model Stress Failure / No Gate Authority"** or **"[10–20 ms]: Within Draft
+Stress Envelope / No Gate Authority"**, never "unstable", "Model Accepts",
+or "PASS/BLOCK." Reserve `PASS` / `BLOCK` for `SupplierConfirmed` or
+`PhysicallyVerified` values only.
 
 **Corrected execution logic (owner):**
 

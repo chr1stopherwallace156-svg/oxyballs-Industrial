@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 34 + review_31 — Gate 08C sweep cleanup + Gate 05 signals)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 34 + review_31); awaiting Gate 05A signal registry or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `49f6e59`; end commit: `71e5aaa` (batch-34 reconciliation)
+- Work: Gate 08C "stable/unstable" → Simulation Response Category (Model Accepts / Needs Review / Stress Failure / Supplier Data Required, "No Gate Authority"). Gate 05 Ford PGNs/byte-maps → J1939SignalCandidate / NeedsOfficialFordUIMSource / ListenOnlyCandidate / NoTransmitAuthority; accel-pedal never drives inverter torque directly; transmit blocked; VCU reads authorized signals, commands only conversion-side. RC-138..142. Section 42. Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner; Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff.
+
 ## 2026-07-16 — Claude Code — task complete (batch 33 + review_30 — Gate 08C draft validation + Gate 05 init)
 
 ### (archived handoff)

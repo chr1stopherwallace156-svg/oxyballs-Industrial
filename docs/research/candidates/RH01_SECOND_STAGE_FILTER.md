@@ -241,6 +241,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-140 | **Gate 05 J1939 PGN candidates (batch_34)**: PGN 61444 (EEC1) engine speed, PGN 61443 (EEC2) accel-pedal, PGN 65265 (CCVS) wheel-based speed, Ford UIM byte0-bit2 ignition-key, CAN_1 500 kbps J1939 — Ford byte-maps **unverified** | batch_34 (Hunter-drafted); Ford Pro J1939 upfit path | n/a — candidate signals; **NeedsOfficialFordUIMSource** | **J1939SignalCandidate / NeedsOfficialFordUIMSource / ListenOnlyCandidate / NoTransmitAuthority** — do not treat any Ford PGN/byte/rate as confirmed until official Ford/UIM docs prove it (Gate 05A); recorded in `GATE05_CONTROLS.md` — lanes L7 |
 | RC-141 | **Accel-pedal→torque caution (owner review_31)**: "accel pedal scaled **directly** into the EV inverter torque loop" is too strong → the pedal signal (from an authorized source) may only **inform** a VCU torque-demand model; **final torque requires pedal-plausibility checks, brake-override logic, fault handling, and controls-engineer review** | batch_34 (FM/controls) | n/a — controls-safety rule | **NoGoConditionCandidate / ControlsSafety** — never drive inverter torque directly from an unverified Ford signal — lanes L7/L8 |
 | RC-142 | **Gate 05 transmit rule + VCU boundary + labels (owner review_31)**: transmit stays **BLOCKED** until Ford/UIM docs allow the exact message/bus/address/use case; VCU may **read** authorized signals, command **only conversion-side** unless Ford permits; **factory safety modules remain authoritative** for ABS/ESC/brake. Labels: STARTED / LISTEN_ONLY_RESEARCH / AUTHORIZED_CHANNELS_ONLY / NO_FACTORY_SAFETY_BUS_TRANSMIT / NO_IMMOBILIZER_OR_SECURITY_BYPASS / NO_PROPRIETARY_DBC_ASSUMPTIONS | owner-promoted | n/a — gate status/security | **GateStatus / SecurityFraming** — extends RC-136; recorded in `GATE05_CONTROLS.md` — lanes L7/L8 |
+| RC-143 | **Gate 08C parked + wording tightened (owner review_32)**: status `SIMULATION_SWEEP_MATRIX_CREATED` / … / `PARKED_FOR_SUPPLIER_DATA` ("done enough to keep moving"); the Simulation Response Category term **"Model Accepts" → "Within Draft Stress Envelope / No Gate Authority"** (so it is never mistaken for approval) | owner-promoted (refines RC-138/139) | n/a — gate status/vocab | **GateStatus / SweepEngineFormat** — recorded in `docs/status/DRAFT_VALIDATION_08C.md` — lanes L8 |
+| RC-144 | **Gate 05A DBC reality (owner review_32)**: Ford may not provide a clean proprietary DBC → Ford factory systems = **`AuthorizedSourcePending / ListenOnlyCandidate / NoTransmitAuthority`**; EV/conversion-side DBCs (BMS, inverter, VCU, DC-DC, charger) are realistic + **owned**; "Authorized Ford UIM/J1939 documentation" unlocks **listen-only registry + receive-only VCU state awareness + authorized upfitter mapping**, NOT "custom VCU transmit configs" | owner-promoted (extends RC-142) | n/a — controls doctrine | **ControlsDoctrine** — recorded in `GATE05A_SIGNAL_REGISTRY.md` — lanes L7 |
+| RC-145 | **Gate 05A signal registry (batch_35)**: 6 signals — Ford-side S1 wheel-speed (PGN 65215 EWS1), S2 accel-pedal (61443 EEC2), S3 brake-switch (61441 EBC1), S4 ignition (Ford UIM); EV-side S5 inverter torque (CAN_2), S6 BMS SOC (CAN_3) | batch_35 (Hunter-drafted); public SAE J1939-71 | n/a — signal registry; **byte/bit Unverified** | **Ford-side: Public/Standard J1939 Candidate / UnverifiedStage / NeedsExactStandardText / NeedsVehicleCapture / Listen-Only / No control authority. EV-side: owned isolated loops.** Recorded in `GATE05A_SIGNAL_REGISTRY.md` — lanes L7 |
+| RC-146 | **Signal-use restrictions (owner review_32)**: **accel-pedal (S2)** Allowed = compare driver-demand trend in **simulation**; Blocked = **direct inverter torque command, physical torque arbitration, road-test torque control**. **brake-switch (S3)** Allowed = **simulation-only** regen-decay study; Blocked = **physical regen disable, braking validation, or safety control without a confirmed source + debounce logic + brake-engineer review** | owner-promoted (extends RC-141) | n/a — controls-safety rule | **NoGoConditionCandidate / ControlsSafety** — an unverified Ford signal is never physical torque/brake authority — lanes L7/L8 |
+| RC-147 | **Gate 05A status (owner review_32)**: `SIGNAL_REGISTRY_STARTED` / `LISTEN_ONLY_RESEARCH` / `UNVERIFIED_STAGE` / `NO_ACTIVE_TRANSMISSIONS` / `NO_FACTORY_SAFETY_BUS_CONTROL` | owner-promoted | n/a — gate status | **GateStatus** — next is Gate 05B (Controls Dependency Map) — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -2621,4 +2626,68 @@ sweeps continue in parallel.
 - No placeholder value has gate authority; no Ford PGN/byte/rate is
   confirmed; transmit onto factory safety buses stays blocked; no
   bypass/spoofing.
+- Nothing ingested; nothing marked Confirmed; ODRs untouched.
+
+---
+
+## 43. Batch 35 + owner review_32 — Gate 08C parked + Gate 05A signal registry (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_35_gate08c_parked_gate05a_signal_registry.md`
+and `docs/research/raw/owner_reviews/review_32_batch_35_verdict.md`.
+Row additions: RC-143..RC-147 (no new CS). Owner: "one of the cleanest
+versions so far." Deliverables: `docs/status/DRAFT_VALIDATION_08C.md`
+(parked) and the new `docs/status/GATE05A_SIGNAL_REGISTRY.md`.
+
+### Gate 08C — parked (RC-143)
+
+The sweep matrix is clean (Simulation Response Category applied, no gate
+authority). Parked: **`SIMULATION_SWEEP_MATRIX_CREATED` /
+`PLACEHOLDER_VALUES_HAVE_NO_GATE_AUTHORITY` / `SUPPLIER_THRESHOLDS_REQUIRED`
+/ `NO_PHYSICAL_TEST_CLEARANCE` / `NO_COMPLIANCE_CLAIMS` /
+`PARKED_FOR_SUPPLIER_DATA`** — "done enough to keep moving." One more
+tightening: **"Model Accepts" → "Within Draft Stress Envelope / No Gate
+Authority"** so it is never read as approval.
+
+### Gate 05A — signal registry started (RC-144/145/146/147)
+
+The 6-signal registry is structured correctly; the corrections are about
+**source authority and control safety**:
+
+- **DBC reality (RC-144):** Ford may not give a clean proprietary DBC →
+  Ford factory systems = **AuthorizedSourcePending / ListenOnlyCandidate /
+  NoTransmitAuthority**; EV-side DBCs (BMS/inverter/VCU/DC-DC/charger) are
+  realistic + owned. "Authorized Ford UIM/J1939 documentation" unlocks a
+  **listen-only registry + receive-only VCU state awareness + authorized
+  upfitter mapping**, not "custom VCU transmit configs"; transmit stays
+  blocked (RC-142).
+- **Signal labels (RC-145):** the public J1939 rows (S1 wheel-speed
+  PGN 65215, S2 accel-pedal 61443, S3 brake-switch 61441, S4 ignition) are
+  **Public/Standard J1939 Candidate / UnverifiedStage / NeedsExactStandardText
+  / NeedsVehicleCapture / Listen-Only / No control authority** — they may
+  *inform* the VCU model but not command torque/braking/pre-charge/safety
+  until proven. EV-side S5 (inverter, CAN_2) and S6 (BMS SOC, CAN_3) are
+  owned isolated loops.
+- **Use restrictions (RC-146):** accel-pedal Allowed = compare
+  driver-demand trend **in simulation**; Blocked = direct inverter torque
+  command / physical torque arbitration / road-test torque control.
+  brake-switch Allowed = **simulation-only** regen-decay study; Blocked =
+  physical regen disable / braking validation / safety control without a
+  confirmed source + debounce + brake-engineer review.
+- **Status (RC-147):** `SIGNAL_REGISTRY_STARTED / LISTEN_ONLY_RESEARCH /
+  UNVERIFIED_STAGE / NO_ACTIVE_TRANSMISSIONS / NO_FACTORY_SAFETY_BUS_CONTROL`.
+
+### Next
+
+Owner: **Gate 05B — Controls Dependency Map** — map Ford-side signals
+needed, EV-side signals needed, VCU decisions, driver warnings, fault
+states, what is receive-only, what is transmit-only on the EV side, and
+what is completely blocked. Queued in `GATE_RESEARCH_QUEUE.md`. Gate 08C
+stays parked; Gate 05 continues.
+
+### Standing checks
+
+- No placeholder value has gate authority; no Ford signal is confirmed;
+  transmit onto factory buses stays blocked; unverified Ford signals are
+  never torque/brake authority.
 - Nothing ingested; nothing marked Confirmed; ODRs untouched.

@@ -118,16 +118,15 @@ transmitting onto factory Ford safety buses; forum posts LeadOnly; Ford/
 OEM/supplier DBC docs preferred.** Prompt below (unchanged); continue the
 deep dive against authorized sources.
 
-## Gate 08C — Draft Validation  · STATUS: SIMULATION_SWEEP_ACTIVE (batch_33/34)
+## Gate 08C — Draft Validation  · STATUS: SIMULATION_SWEEP_MATRIX_CREATED — PARKED_FOR_SUPPLIER_DATA (batch_33/34/35)
 
 Draft-validation sweep engine `docs/status/DRAFT_VALIDATION_08C.md` — 15
 placeholder sweep inputs with **no gate authority** (RC-133); reports the
-**Simulation Response Category** (Model Accepts / Model Needs Review /
-Model Stress Failure / Supplier Data Required, each "No Gate Authority" —
-RC-138), never PASS/BLOCK. Cannot become FINAL_VALIDATED without supplier
-data + exact standards + physical tests + engineering signoff. Runs in
-parallel; reopens toward closure as supplier thresholds land (upgrades
-sweep inputs → SupplierConfirmed / PhysicallyVerified).
+**Simulation Response Category** (Within Draft Stress Envelope / Needs
+Review / Model Stress Failure / Supplier Data Required, each "No Gate
+Authority" — RC-138/143), never PASS/BLOCK. **Parked "done enough to keep
+moving"** — reopens toward FINAL_VALIDATED as supplier thresholds land
+(upgrades sweep inputs → SupplierConfirmed / PhysicallyVerified).
 
 **Terminology rule (standing):** authorized Ford-compatible controls
 integration, immobilizer-safe architecture, diagnostic compatibility,
@@ -174,13 +173,16 @@ cluster serviceability. **NEVER "PATS bypass/override."**
 > - Forum posts are LeadOnly.
 > - Ford/OEM/service documentation is preferred.
 
-## Gate 05A — Source-Backed Signal Registry  · STATUS: NEXT (owner review_31)
+## Gate 05A — Source-Backed Signal Registry  · STATUS: SIGNAL_REGISTRY_STARTED — UNVERIFIED_STAGE (batch_35)
 
-The next Gate 05 sub-task: build a **source-backed** signal registry (find
-official Ford UIM / BBAS / J1939 documentation first). All Ford
-PGN/byte/rate mappings stay `J1939SignalCandidate / NeedsOfficialFordUIMSource`
-until an official source proves them (RC-140). Transmit stays blocked
-(RC-142).
+Deliverable `docs/status/GATE05A_SIGNAL_REGISTRY.md` (6 signals). Status
+(review_32): `SIGNAL_REGISTRY_STARTED / LISTEN_ONLY_RESEARCH /
+UNVERIFIED_STAGE / NO_ACTIVE_TRANSMISSIONS / NO_FACTORY_SAFETY_BUS_CONTROL`.
+Ford factory signals = AuthorizedSourcePending / ListenOnlyCandidate /
+NoTransmitAuthority (RC-144); EV-side DBCs owned; accel-pedal/brake-switch
+use restricted (RC-146). All Ford PGN/byte/rate mappings stay
+`J1939SignalCandidate / NeedsOfficialFordUIMSource` until an official
+source + a vehicle capture prove them.
 
 **Owner prompt (verbatim):**
 
@@ -198,6 +200,27 @@ until an official source proves them (RC-140). Transmit stays blocked
 > - blocked use
 > - verification status
 > - required proof artifact
+
+## Gate 05B — Controls Dependency Map  · STATUS: NEXT (owner review_32)
+
+The next Gate 05 sub-task. Map the control/communication dependencies —
+keeping the listen-only / no-safety-bus-transmit doctrine (RC-136/142)
+and the signal-use restrictions (RC-146).
+
+**Owner scope (review_32) — map:**
+
+> - Ford-side signals needed
+> - EV-side signals needed
+> - VCU decisions
+> - driver warnings
+> - fault states
+> - what is receive-only
+> - what is transmit-only on the EV side
+> - what is completely blocked
+
+Enforce: Ford-side signals stay listen-only candidates until proven; no
+transmit onto factory safety buses; accel-pedal never commands inverter
+torque directly; nothing Confirmed; no compliance claim.
 
 ## Gate 06 — Mechanical Mounting / Battery Enclosure  · STATUS: FIRST PASS DONE (batch_25)
 
