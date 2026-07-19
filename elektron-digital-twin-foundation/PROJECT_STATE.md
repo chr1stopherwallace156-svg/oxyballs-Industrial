@@ -5,15 +5,14 @@
 
 | Concern | Status |
 |---|---|
-| Active mission | **`MISN-000001`** → KG-001 (EWD) — `NOT_STARTED` |
-| Twin passports | VIS `TWIN-VIS-000001` / ENG `TWIN-ENG-000001` (independent) |
-| Evidence counts | Hashed-only; operator “verified” cells demoted |
-| Wiring coverage | **0 / 2** (starved) |
-| Dana 8/8 supplier claim | **Rejected** |
-| Recommended decision | **`CONTINUE_RESEARCH`** — acquire `SRC-CAND-000006` |
+| EGS-v1 relationship graph | **Schema handoff ready** — edges `ILLUSTRATIVE_ONLY` |
+| Recommended decision | **`IMPLEMENTATION_HANDOFF_READY`** (schema package) |
+| Active missions | `MISN-000001` (EWD/KG-001) primary; `MISN-000002` secondary |
+| KG-004 | OPEN HIGH (hinge shims) |
+| Frozen assembly-relationship | **Unchanged** |
 | Geometry | `ABSENT` |
 | Kernel / rc1 | Unchanged |
 
 ## Change-control
 
-- `decisions/DT-D030_*.json` … `DT-D045_*.json`
+- `decisions/DT-D030_*.json` … `DT-D046_*.json`

@@ -1,0 +1,31 @@
+{
+  "mission_id": "MISN-000002",
+  "id_immutable": true,
+  "aliases": [
+    "EDTS-MISN-002"
+  ],
+  "objective": "Map all physical connection edges for the interior cabin dashboard assembly (steering column \u2194 structural frame cross-member).",
+  "target_gap_ids": [],
+  "success_criteria": [
+    "Ingest and log every BOLTED_TO, MOUNTED_TO, and ROUTES_THROUGH edge connecting the steering column assembly to the structural frame cross-member \u2014 each with hashed supporting documentation."
+  ],
+  "evidence_required": [
+    "BOLTED_TO edges with torque metadata when applicable",
+    "MOUNTED_TO edges for brackets/tabs",
+    "ROUTES_THROUGH edges for harness/fluid paths at column/cross-member interface"
+  ],
+  "completion_status": "NOT_STARTED",
+  "assigned_src_cand_ids": [
+    "SRC-CAND-000002"
+  ],
+  "assigned_aid_ids": [],
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "research_sprint": "RL-015",
+  "decision": "DT-D046",
+  "notes": [
+    "Parallel to MISN-000001 (door harness EWD) \u2014 do not starve KG-001.",
+    "Dashboard edge mapping uses EGS-v1 vocabulary only.",
+    "Steering column edges must not invent TAS65 applicability without prior config proof."
+  ]
+}

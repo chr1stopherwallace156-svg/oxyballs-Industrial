@@ -4,7 +4,7 @@
   "status": "ACTIVE",
   "schema": "schemas/asset-intelligence-passport.schema.json",
   "home": "research/asset_intelligence/",
-  "decision": "DT-D045",
+  "decision": "DT-D046",
   "research_sprint": "RL-013",
   "id_policy": {
     "pattern": "AID-######",
@@ -233,7 +233,8 @@
     "Never set exact_configuration_match=CONFIGURATION_MATCHED from a marketplace title alone.",
     "RL-012 / DT-D043: supplier hub candidates added; AJR required before purchase; score_claims are not EVALUATED.",
     "RL-013: CSP maturity trackers + KG register; Hum3D AJR rejected; M300 ACQUIRED claim demoted.",
-    "RL-014: twin VIS/ENG passports; MISN-000001; evidence count honesty gate; Dana 8/8 rejected."
+    "RL-014: twin VIS/ENG passports; MISN-000001; evidence count honesty gate; Dana 8/8 rejected.",
+    "RL-015: EGS-v1 graph handoff; edges ILLUSTRATIVE_ONLY."
   ],
   "ajr_register": "research/asset_intelligence/ajr/AJR_REGISTER.json",
   "sourcing_model": "research/sourcing/DECONSTRUCTED_ASSEMBLY_SOURCING.md",
@@ -243,5 +244,6 @@
   "media_candidate_register": "research/media_candidates/MEDIA_CANDIDATE_REGISTER.json",
   "mission_register": "research/missions/MISSION_REGISTER.json",
   "twin_passport_register": "research/twin_passports/TWIN_PASSPORT_REGISTER.json",
-  "evidence_matrices": "research/evidence_matrices/"
+  "evidence_matrices": "research/evidence_matrices/",
+  "relationship_graph_register": "research/relationship_graph/RELATIONSHIP_GRAPH_REGISTER.json"
 }

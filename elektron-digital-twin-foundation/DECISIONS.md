@@ -763,3 +763,20 @@ Append-only record of digital twin foundation decisions.
   5. Register **KG-003** (inner impact beam) OPEN
   6. Kernel/rc1 unchanged
 
+
+## DT-D046 — EGS-v1 relationship graph schema handoff
+
+- **Change-control record:** [`decisions/DT-D046_EGS_V1_RELATIONSHIP_GRAPH.json`](decisions/DT-D046_EGS_V1_RELATIONSHIP_GRAPH.json)
+- **decision_id:** `DT-D046`
+- **date:** 2026-07-19
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `IMPLEMENTATION_HANDOFF_READY` (schema package)
+- **protocol_version:** `2.8.0`
+- **decision:**
+  1. Authorize **EGS-v1** non-kernel edge schema + closed vocabulary
+  2. Frozen `assembly-relationship.schema.json` **unchanged**
+  3. REL-REG suite + removal sequence = **ILLUSTRATIVE_ONLY** (OEM not hashed)
+  4. Property confidence fields on evidence matrix — demote false VERIFIED cells
+  5. **MISN-000002** (dashboard edges) + **KG-004** (hinge shims)
+  6. Handoff = migration linking only — not verified teardown automation
+

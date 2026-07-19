@@ -1,10 +1,10 @@
 {
   "document_id": "MISSION_REGISTER",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "ACTIVE",
   "schema": "schemas/research-mission.schema.json",
-  "decision": "DT-D045",
-  "next_id": "MISN-000002",
+  "decision": "DT-D046",
+  "next_id": "MISN-000003",
   "active_missions": [
     {
       "mission_id": "MISN-000001",
@@ -15,9 +15,25 @@
       "completion_status": "NOT_STARTED",
       "primary_target": "SRC-CAND-000006",
       "gap_id": "KG-001"
+    },
+    {
+      "mission_id": "MISN-000002",
+      "aliases": [
+        "EDTS-MISN-002"
+      ],
+      "path": "research/missions/MISN-000002.json",
+      "completion_status": "NOT_STARTED",
+      "primary_target": "EGS-v1 dashboard edge mapping",
+      "gap_id": null,
+      "priority_note": "Secondary to MISN-000001 / KG-001"
     }
   ],
   "notes": [
     "Orchestration issues missions; silo CFG-000001 only."
+  ],
+  "relationship_graph": "research/relationship_graph/RELATIONSHIP_GRAPH_REGISTER.json",
+  "priority_order": [
+    "MISN-000001",
+    "MISN-000002"
   ]
 }

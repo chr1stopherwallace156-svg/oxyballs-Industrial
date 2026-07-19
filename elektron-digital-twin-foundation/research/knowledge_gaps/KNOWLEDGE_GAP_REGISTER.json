@@ -1,11 +1,11 @@
 {
   "document_id": "KNOWLEDGE_GAP_REGISTER",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "status": "ACTIVE",
   "schema": "schemas/knowledge-gap.schema.json",
-  "decision": "DT-D045",
-  "research_sprint": "RL-014",
-  "next_id": "KG-004",
+  "decision": "DT-D046",
+  "research_sprint": "RL-015",
+  "next_id": "KG-005",
   "gaps": [
     {
       "gap_id": "KG-001",
@@ -24,7 +24,13 @@
       "priority": "HIGH",
       "status": "OPEN",
       "path": "research/knowledge_gaps/KG-003.json"
+    },
+    {
+      "gap_id": "KG-004",
+      "priority": "HIGH",
+      "status": "OPEN",
+      "path": "research/knowledge_gaps/KG-004.json"
     }
   ],
-  "focus": "KG-001 via MISN-000001 / SRC-CAND-000006 (EWD); KG-003 secondary"
+  "focus": "KG-001 via MISN-000001 (EWD); KG-003/KG-004 secondary structural/fit gaps"
 }

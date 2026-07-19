@@ -1,0 +1,120 @@
+{
+  "document_id": "RELATIONSHIP_GRAPH_REGISTER",
+  "version": "egs-v1.0.0",
+  "status": "ACTIVE",
+  "standard": "research/relationship_graph/EGS_v1_STANDARD.md",
+  "schema": "schemas/relationship-graph-edge.egs-v1.schema.json",
+  "frozen_kernel_assembly_relationship": "schemas/assembly-relationship.schema.json",
+  "kernel_policy": "DO_NOT_MUTATE_FROZEN_KERNEL \u2014 EGS-v1 is parallel research/ops graph",
+  "decision": "DT-D046",
+  "handoff_status": "IMPLEMENTATION_HANDOFF_READY",
+  "handoff_scope": "Schema + vocabulary + illustrative FL regulator edge suite for migration pipeline linking",
+  "handoff_exclusions": [
+    "Do not promote ILLUSTRATIVE edges to VERIFIED_EVIDENCE",
+    "Do not execute physical removal from illustrative sequence",
+    "Do not expand frozen assembly-relationship predicates under this handoff"
+  ],
+  "locked_configuration": {
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_id": "CFG-000001",
+    "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+    "model_year": "2019",
+    "platform": "Super Duty F-450 Chassis Cab",
+    "cab_config": "Regular Cab"
+  },
+  "next_edge_id": "REL-000008",
+  "edges": [
+    {
+      "edge_id": "REL-000001",
+      "aliases": [
+        "REL-REG-01"
+      ],
+      "relationship_type": "BOLTED_TO",
+      "source_node": "EDTS-COMP-FL-REGULATOR",
+      "target_node": "EDTS-COMP-FL-SHELL-INNER",
+      "authority_status": "ILLUSTRATIVE_ONLY",
+      "path": "research/relationship_graph/edges/REL-000001.json"
+    },
+    {
+      "edge_id": "REL-000002",
+      "aliases": [
+        "REL-REG-02"
+      ],
+      "relationship_type": "CONNECTED_TO",
+      "source_node": "EDTS-COMP-FL-HARNESS",
+      "target_node": "EDTS-COMP-FL-REGULATOR",
+      "authority_status": "ILLUSTRATIVE_ONLY",
+      "path": "research/relationship_graph/edges/REL-000002.json"
+    },
+    {
+      "edge_id": "REL-000003",
+      "aliases": [
+        "REL-REG-03"
+      ],
+      "relationship_type": "SUPPORTS",
+      "source_node": "EDTS-COMP-FL-REGULATOR",
+      "target_node": "EDTS-COMP-FL-GLASS",
+      "authority_status": "ILLUSTRATIVE_ONLY",
+      "path": "research/relationship_graph/edges/REL-000003.json"
+    },
+    {
+      "edge_id": "REL-000004",
+      "aliases": [
+        "REL-REG-04"
+      ],
+      "relationship_type": "BLOCKS_REMOVAL_OF",
+      "source_node": "EDTS-COMP-FL-TRIM-PANEL",
+      "target_node": "EDTS-COMP-FL-REGULATOR",
+      "authority_status": "ILLUSTRATIVE_ONLY",
+      "path": "research/relationship_graph/edges/REL-000004.json"
+    },
+    {
+      "edge_id": "REL-000005",
+      "aliases": [
+        "REL-REG-05"
+      ],
+      "relationship_type": "BLOCKS_REMOVAL_OF",
+      "source_node": "EDTS-COMP-FL-GLASS",
+      "target_node": "EDTS-COMP-FL-REGULATOR",
+      "authority_status": "ILLUSTRATIVE_ONLY",
+      "path": "research/relationship_graph/edges/REL-000005.json"
+    },
+    {
+      "edge_id": "REL-000006",
+      "aliases": [
+        "REL-REG-06"
+      ],
+      "relationship_type": "PASSES_BEHIND",
+      "source_node": "EDTS-COMP-FL-INT-BEAM",
+      "target_node": "EDTS-COMP-FL-REGULATOR",
+      "authority_status": "ILLUSTRATIVE_ONLY",
+      "path": "research/relationship_graph/edges/REL-000006.json"
+    },
+    {
+      "edge_id": "REL-000007",
+      "aliases": [
+        "REL-FL-DOOR-0104"
+      ],
+      "relationship_type": "BOLTED_TO",
+      "source_node": "EDTS-COMP-FL-SHELL",
+      "target_node": "EDTS-COMP-FL-HINGE",
+      "authority_status": "ILLUSTRATIVE_ONLY",
+      "path": "research/relationship_graph/edges/REL-000007.json"
+    }
+  ],
+  "alias_map": {
+    "REL-REG-01": "REL-000001",
+    "REL-REG-02": "REL-000002",
+    "REL-REG-03": "REL-000003",
+    "REL-REG-04": "REL-000004",
+    "REL-REG-05": "REL-000005",
+    "REL-REG-06": "REL-000006",
+    "REL-FL-DOOR-0104": "REL-000007"
+  },
+  "illustrative_sequences": [
+    "research/relationship_graph/FL_REGULATOR_REMOVAL_SEQUENCE_ILLUSTRATIVE.json"
+  ],
+  "notes": [
+    "Operator REL-REG-01..06 CONFIGURATION_EVALUATED / provisionally admitted baseline \u2014 demoted to ILLUSTRATIVE_ONLY pending hashed OEM."
+  ]
+}

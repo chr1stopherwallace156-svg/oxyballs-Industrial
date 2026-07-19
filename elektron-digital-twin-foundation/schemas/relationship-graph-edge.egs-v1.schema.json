@@ -1,0 +1,279 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:schema:relationship-graph-edge:egs-v1",
+  "title": "EDTS Relationship Graph Edge (EGS-v1)",
+  "description": "Non-kernel research/ops relationship edge schema. Does NOT mutate frozen schemas/assembly-relationship.schema.json. VERIFIED_EVIDENCE requires local hashed OEM/supplier bytes + Hard Rule 4 \u2014 never narrative alone.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "edge_id",
+    "id_immutable",
+    "relationship_type",
+    "source_node",
+    "target_node",
+    "directionality",
+    "vehicle_silo_context",
+    "evidence_verification",
+    "authority_status",
+    "schema_version"
+  ],
+  "properties": {
+    "edge_id": {
+      "type": "string",
+      "pattern": "^REL-[0-9]{6}$"
+    },
+    "id_immutable": {
+      "type": "boolean",
+      "const": true
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "egs-v1.0.0"
+    },
+    "relationship_type": {
+      "type": "string",
+      "enum": [
+        "BOLTED_TO",
+        "MOUNTED_TO",
+        "HINGES_ON",
+        "SUPPORTS",
+        "OVERLAPS",
+        "CONTAINS",
+        "CONNECTED_TO",
+        "ROUTES_THROUGH",
+        "PASSES_BEHIND",
+        "INTERFERES_WITH",
+        "SLIDES_ALONG",
+        "BLOCKS_REMOVAL_OF"
+      ]
+    },
+    "source_node": {
+      "type": "string",
+      "description": "Component/CSP/AID node handle"
+    },
+    "target_node": {
+      "type": "string"
+    },
+    "directionality": {
+      "type": "string",
+      "enum": [
+        "FORWARD",
+        "BACKWARD",
+        "BIDIRECTIONAL"
+      ]
+    },
+    "vehicle_silo_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "vehicle_instance_id",
+        "configuration_id",
+        "model_year",
+        "platform",
+        "cab_config"
+      ],
+      "properties": {
+        "vehicle_instance_id": {
+          "type": "string"
+        },
+        "configuration_id": {
+          "type": "string"
+        },
+        "configuration_fingerprint": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "model_year": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "cab_config": {
+          "type": "string"
+        }
+      }
+    },
+    "edge_engineering_properties": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "torque_specification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "value": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "unit": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "tolerance": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "NOT_EXECUTED",
+                "RESEARCH_CLAIM",
+                "PENDING_WORKSHOP",
+                "VERIFIED"
+              ]
+            }
+          }
+        },
+        "fastener_id_reference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fastener_count": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "connector_claim": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "procedural_weight": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "removal_precedence_index": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ILLUSTRATIVE",
+            "RESEARCH_CLAIM",
+            "VERIFIED"
+          ]
+        }
+      }
+    },
+    "evidence_verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_confidence",
+        "local_hash_status"
+      ],
+      "properties": {
+        "source_id_alias": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "src_cand_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "workshop_manual_section_claim": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_confidence": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "RESEARCH_CLAIM",
+            "DOCUMENT_HUNT",
+            "ILLUSTRATIVE_ONLY",
+            "CALCULATED",
+            "PROBABLE",
+            "DOCUMENT_SUPPORTED",
+            "OEM_CLAIMED",
+            "SIMULATION_UNVERIFIED",
+            "VERIFIED_EVIDENCE"
+          ]
+        },
+        "local_hash_status": {
+          "type": "string",
+          "enum": [
+            "NOT_EXECUTED",
+            "HASHED",
+            "ABSENT"
+          ]
+        },
+        "operator_claimed_confidence": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "honesty_note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "authority_status": {
+      "type": "string",
+      "enum": [
+        "ILLUSTRATIVE_ONLY",
+        "RESEARCH_OPERATIONAL",
+        "ADMITTED_BASELINE",
+        "REJECTED"
+      ]
+    },
+    "research_sprint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "decision": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

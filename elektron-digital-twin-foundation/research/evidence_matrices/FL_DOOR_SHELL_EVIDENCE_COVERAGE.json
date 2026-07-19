@@ -1,6 +1,6 @@
 {
   "document_id": "EVIDENCE_COVERAGE_MATRIX_FL_DOOR_SHELL",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "authority_status": "RESEARCH_OPERATIONAL_HONEST",
   "component_alias": "EDTS-COMP-FL-SHELL / COMP-FL-SHELL",
   "related_csp_id": "CSP-000001",
@@ -28,7 +28,10 @@
       "operator_claimed_acquired": 3,
       "project_acquired_hashed": 0,
       "project_status": "STARVED",
-      "honesty_note": "Operator claimed 3/3 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+      "honesty_note": "Operator claimed 3/3 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0.",
+      "operator_property_confidence": "VERIFIED_EVIDENCE",
+      "project_property_confidence": "DOCUMENT_HUNT",
+      "confidence_honesty_note": "Operator 3/3 VERIFIED demoted \u2014 0 hashed"
     },
     {
       "engineering_property": "Materials",
@@ -40,7 +43,10 @@
       "operator_claimed_acquired": 2,
       "project_acquired_hashed": 0,
       "project_status": "STARVED",
-      "honesty_note": "Operator claimed 2/2 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+      "honesty_note": "Operator claimed 2/2 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0.",
+      "operator_property_confidence": "OEM_VERIFIED",
+      "project_property_confidence": "OEM_CLAIMED",
+      "confidence_honesty_note": "No metallurgical sheets hashed"
     },
     {
       "engineering_property": "Mass",
@@ -52,7 +58,10 @@
       "operator_claimed_acquired": 1,
       "project_acquired_hashed": 0,
       "project_status": "STARVED",
-      "honesty_note": "Operator claimed 1/2 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+      "honesty_note": "Operator claimed 1/2 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0.",
+      "operator_property_confidence": "PROBABLE",
+      "project_property_confidence": "UNKNOWN",
+      "confidence_honesty_note": "Operator PROBABLE from shipping docs \u2014 no local source; project UNKNOWN until hashed"
     },
     {
       "engineering_property": "Center of Gravity",
@@ -63,7 +72,10 @@
       "operator_claimed_acquired": 0,
       "project_acquired_hashed": 0,
       "project_status": "STARVED",
-      "honesty_note": "Operator claimed 0/1 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+      "honesty_note": "Operator claimed 0/1 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0.",
+      "operator_property_confidence": "CALCULATED",
+      "project_property_confidence": "CALCULATED",
+      "confidence_honesty_note": "CAD volume estimate \u2014 not physical"
     },
     {
       "engineering_property": "Mounting Interfaces",
@@ -75,7 +87,10 @@
       "operator_claimed_acquired": 2,
       "project_acquired_hashed": 0,
       "project_status": "STARVED",
-      "honesty_note": "Operator claimed 2/2 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+      "honesty_note": "Operator claimed 2/2 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0.",
+      "operator_property_confidence": "VERIFIED_EVIDENCE",
+      "project_property_confidence": "DOCUMENT_HUNT",
+      "confidence_honesty_note": "Factory drawings not hashed"
     },
     {
       "engineering_property": "Fasteners",
@@ -86,7 +101,10 @@
       "operator_claimed_acquired": 4,
       "project_acquired_hashed": 0,
       "project_status": "STARVED",
-      "honesty_note": "Operator claimed 4/4 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+      "honesty_note": "Operator claimed 4/4 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0.",
+      "operator_property_confidence": "DOCUMENT_SUPPORTED",
+      "project_property_confidence": "DOCUMENT_HUNT",
+      "confidence_honesty_note": "Parts catalog not hashed"
     },
     {
       "engineering_property": "Torque Specs",
@@ -97,10 +115,13 @@
       "operator_claimed_acquired": 1,
       "project_acquired_hashed": 0,
       "project_status": "STARVED",
-      "honesty_note": "Operator claimed 1/2 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+      "honesty_note": "Operator claimed 1/2 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0.",
+      "operator_property_confidence": "VERIFIED_EVIDENCE",
+      "project_property_confidence": "DOCUMENT_HUNT",
+      "confidence_honesty_note": "WSM not acquired"
     },
     {
-      "engineering_property": "Wiring",
+      "engineering_property": "Wiring Pathways",
       "evidence_types_claimed": [
         "Motorcraft Service EWD Portfolio"
       ],
@@ -108,7 +129,10 @@
       "operator_claimed_acquired": 0,
       "project_acquired_hashed": 0,
       "project_status": "STARVED",
-      "honesty_note": "Operator claimed 0/2 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+      "honesty_note": "Operator claimed 0/2 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0.",
+      "operator_property_confidence": "UNKNOWN",
+      "project_property_confidence": "UNKNOWN",
+      "confidence_honesty_note": "0/2 \u2014 critical starvation; MISN-000001"
     },
     {
       "engineering_property": "Fluid Routing",
@@ -117,7 +141,9 @@
       "operator_claimed_acquired": null,
       "project_acquired_hashed": null,
       "project_status": "NOT_APPLICABLE",
-      "honesty_note": "N/A dry assembly"
+      "honesty_note": "N/A dry assembly",
+      "operator_property_confidence": null,
+      "project_property_confidence": "NOT_APPLICABLE"
     },
     {
       "engineering_property": "Motion/Kinematics",
@@ -128,7 +154,10 @@
       "operator_claimed_acquired": 1,
       "project_acquired_hashed": 0,
       "project_status": "STARVED",
-      "honesty_note": "Operator claimed 1/1 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+      "honesty_note": "Operator claimed 1/1 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0.",
+      "operator_property_confidence": "SIMULATION_VERIFIED",
+      "project_property_confidence": "SIMULATION_UNVERIFIED",
+      "confidence_honesty_note": "Virtual CAD mock-up without hashed hinge datum"
     },
     {
       "engineering_property": "Tolerances",
@@ -139,7 +168,10 @@
       "operator_claimed_acquired": 0,
       "project_acquired_hashed": 0,
       "project_status": "STARVED",
-      "honesty_note": "Operator claimed 0/1 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+      "honesty_note": "Operator claimed 0/1 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0.",
+      "operator_property_confidence": null,
+      "project_property_confidence": "UNKNOWN",
+      "confidence_honesty_note": "0/1 outstanding"
     },
     {
       "engineering_property": "Service Procedures",
@@ -150,7 +182,10 @@
       "operator_claimed_acquired": 1,
       "project_acquired_hashed": 0,
       "project_status": "STARVED",
-      "honesty_note": "Operator claimed 1/1 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+      "honesty_note": "Operator claimed 1/1 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0.",
+      "operator_property_confidence": null,
+      "project_property_confidence": "DOCUMENT_HUNT",
+      "confidence_honesty_note": "501-14 claim without bytes"
     },
     {
       "engineering_property": "Failure Modes",
@@ -162,7 +197,10 @@
       "operator_claimed_acquired": 5,
       "project_acquired_hashed": 0,
       "project_status": "STARVED",
-      "honesty_note": "Operator claimed 5/8 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0."
+      "honesty_note": "Operator claimed 5/8 verified/acquired \u2014 REJECTED without local hashed sources. Project hashed count = 0.",
+      "operator_property_confidence": null,
+      "project_property_confidence": "DOCUMENT_HUNT",
+      "confidence_honesty_note": "NHTSA/TSB audit claims without local archive"
     }
   ],
   "critical_starvation": [
@@ -189,6 +227,20 @@
       ]
     }
   ],
-  "research_sprint": "RL-014",
-  "decision": "DT-D045"
+  "research_sprint": "RL-015",
+  "decision": "DT-D046",
+  "property_confidence_policy": {
+    "allowed_statuses": [
+      "UNKNOWN",
+      "CALCULATED",
+      "PROBABLE",
+      "DOCUMENT_HUNT",
+      "DOCUMENT_SUPPORTED",
+      "OEM_CLAIMED",
+      "SIMULATION_UNVERIFIED",
+      "VERIFIED_EVIDENCE"
+    ],
+    "verified_requires": "local hashed sources + Hard Rule 4",
+    "operator_verified_without_bytes": "DEMOTED"
+  }
 }

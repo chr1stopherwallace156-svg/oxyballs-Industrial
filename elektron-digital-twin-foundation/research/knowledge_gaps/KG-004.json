@@ -1,0 +1,35 @@
+{
+  "gap_id": "KG-004",
+  "component": "Door Hinge Shim Interfaces (COMP-FL-HINGE-SHIM)",
+  "reported_oem_part_number": null,
+  "critical_need": "Information on alignment shims that dictate how the door shell overlaps and fits with the front body panels.",
+  "priority": "HIGH",
+  "possible_sources": [
+    "Ford factory frame alignment bulletins",
+    "Technical collision adjustment data sheets",
+    "Workshop manual hinge/body alignment sections (SRC-CAND-000002)"
+  ],
+  "related_aid_ids": [],
+  "related_csp_ids": [
+    "CSP-000001"
+  ],
+  "related_src_cand_ids": [
+    "SRC-CAND-000002"
+  ],
+  "related_media_ids": [],
+  "related_mission_ids": [],
+  "related_edge_types": [
+    "OVERLAPS",
+    "HINGES_ON",
+    "BOLTED_TO"
+  ],
+  "status": "OPEN",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "research_sprint": "RL-015",
+  "decision": "DT-D046",
+  "notes": [
+    "Blocks accurate OVERLAPS / fit edges between door shell and body panels.",
+    "Do not invent shim stack from visual mesh gaps."
+  ]
+}

@@ -330,3 +330,25 @@ DT-D044 — **`CONTINUE_RESEARCH`** (KG-001).
 ### Status
 
 DT-D045 — **`CONTINUE_RESEARCH`** (acquire EWD).
+
+---
+
+## RL-015 — EGS-v1 relationship graph
+
+- **Date:** 2026-07-19
+- **Layer:** dependency graph / FL door procedural demo
+- **Agent:** Cursor Cloud Agent
+- **Question:** Deploy typed relationship graph + hand off schema for migration?
+
+### Findings
+
+1. **EGS-v1** non-kernel schema + closed edge vocabulary deployed; frozen assembly-relationship **untouched**.
+2. **REL-000001..000007** (REL-REG-01..06 + REL-FL-DOOR-0104) admitted as **ILLUSTRATIVE_ONLY** — operator VERIFIED_EVIDENCE demoted (WSM/EWD not hashed).
+3. Regulator removal sequence = illustrative dependency demo — **not** workshop-validated.
+4. Evidence matrix gains property confidence fields; false VERIFIED cells demoted.
+5. **MISN-000002** (dashboard edges) + **KG-004** (hinge shims) registered.
+6. Decision: **`IMPLEMENTATION_HANDOFF_READY`** for schema package only.
+
+### Status
+
+DT-D046 — schema handoff ready; parallel MISN-000001 still needs EWD bytes.

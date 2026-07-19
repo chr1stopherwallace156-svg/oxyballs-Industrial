@@ -301,7 +301,8 @@
     "DT-D042",
     "DT-D043",
     "DT-D044",
-    "DT-D045"
+    "DT-D045",
+    "DT-D046"
   ],
   "sprints": [
     "RL-006",
@@ -311,7 +312,8 @@
     "RL-011",
     "RL-012",
     "RL-013",
-    "RL-014"
+    "RL-014",
+    "RL-015"
   ],
   "hard_rule_14_note": "Vector blueprints = 2D_DIMENSIONAL_REFERENCE / PROFILE_REFERENCE only",
   "rl_010_note": "Operator VERIFIED_EVIDENCE / SPECIFICATION_READY / CROSS_VERIFIED / 90% complete labels demoted. Draft passports ILLUSTRATIVE_ONLY. Decision remains CANDIDATE_ACQUISITION_RECOMMENDED.",
@@ -320,5 +322,6 @@
   "ajr_register": "research/asset_intelligence/ajr/AJR_REGISTER.json",
   "knowledge_gap_register": "research/knowledge_gaps/KNOWLEDGE_GAP_REGISTER.json",
   "mission_register": "research/missions/MISSION_REGISTER.json",
-  "active_mission": "MISN-000001"
+  "active_mission": "MISN-000001",
+  "relationship_graph_register": "research/relationship_graph/RELATIONSHIP_GRAPH_REGISTER.json"
 }

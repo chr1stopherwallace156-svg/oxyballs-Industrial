@@ -108,6 +108,12 @@
       "items": {
         "type": "string"
       }
+    },
+    "related_edge_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   }
 }
