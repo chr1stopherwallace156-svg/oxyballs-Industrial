@@ -5,6 +5,44 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 42 + review_39: Gate 05H HIL / Bench Test Protocol
+
+- Archived batch_42 (Gate 05H) and review_39 1:1 (commit `1b06fcb`). New
+  rows RC-180..184 (no new CS). Section 50. New deliverable
+  `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` (HIL harness
+  architecture, fault-injection matrix HIL-05G-001..006, two illustrative
+  Python scripts, per-run proof-artifact package). Owner: "strong first
+  draft … the right Gate 05H direction."
+- **Recurrence caught — invented timing as gate logic, fourth gate
+  (RC-180):** the HIL matrix + scripts embedded `10/20/50/100/2 ms` and
+  `3-cycle/30 ms` as real pass/fail limits — same defect family as RC-116
+  (200 ms HVIL), RC-133 (Gate 08C), RC-169/173 (Gate 05F), RC-174 (Gate
+  05G). Downgraded to `SimulationSweepOnly / SupplierDataPending`; matrix
+  header "Pass Criteria Metric" → "HIL Observation Metric / Candidate Pass
+  Criteria" + Authority Status row. This defect has now recurred across
+  five artifacts — the strongest case yet for the M10 regression scanner.
+- Other corrections: HIL-result language — `[HIL_OBSERVED]` /
+  `HIL_OBSERVED_NO_GATE_AUTHORITY`, never `[PASS]` /
+  `VERIFICATION_STAGE_PASSED_SIM` (RC-181); CAN_1 short test simulated /
+  bench-replica only, forbidden on a live Ford network, strongest proof =
+  silent-mode register + no TX mailbox + no ACK + analyzer + oscilloscope
+  (RC-182); power-loss safe-state measured not assumed — depends on
+  output-stage design, pull-ups/downs, relay topology, hardware fail-safe
+  (RC-183); per-HIL-run proof-artifact package + configurable script
+  timeout (RC-184).
+- Kept: HIL architecture, fault-injection matrix, listen-only proof,
+  automation scripts, proof artifacts, and the HIL gate rule. Scripts
+  remain illustrative pseudocode (no firmware exists yet), not production
+  code.
+- Gate 05H status = `HIL_TEST_PROTOCOL_DRAFTED / LOW_VOLTAGE_BENCH_ONLY /
+  NO_LIVE_HV / NO_VEHICLE_TESTING / NO_FACTORY_BUS_TRANSMISSION /
+  TIMING_VALUES_SIMULATION_SWEEP_ONLY / HIL_PROOF_ARTIFACTS_DEFINED /
+  BENCH_EXECUTION_NOT_STARTED`.
+- Nothing ingested; nothing marked Confirmed; no placeholder timing has
+  gate authority; scripts are pseudocode not production code; ODRs
+  untouched. Next = owner's call (a further Gate 05 proof step, or the Gate
+  06 deep dive per the order 06 → 09 → 10 → 11).
+
 ## 2026-07-16 — RH batch 41 + review_38: Gate 05G Fault Containment / Gateway Failsafe Matrix
 
 - Archived batch_41 (Gate 05G) and review_38 1:1 (commit `f2163e1`). New

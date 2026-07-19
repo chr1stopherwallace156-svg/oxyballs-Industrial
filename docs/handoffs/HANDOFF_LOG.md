@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 41 + review_38 — Gate 05G Fault Containment and Gateway Failsafe Matrix)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 41 + review_38); awaiting Gate 05H Gateway Proof Plan / HIL Bench Test Matrix or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `f2163e1` (batch-41 archive); end commit: `183e907` (batch-41 reconciliation)
+- Work: new `GATE05G_FAILSAFE_MATRIX.md` (13-row failsafe matrix + failsafe gate rule + default-safe rule). RC-174..179 (no new CS). Section 49. Recurrence caught, third time (RC-174): 50/100/2 ms timeouts acting as sourced timing → downgraded to SupplierDataPending/SimulationSweepOnly. Other corrections: no "instant" for mechanical/E-stop (RC-175); CAN_1 transmit-attempt firmware+physical block (RC-176); bad-checksum stale data can't preserve torque authority (RC-177); wrong-source-address reject+log, latch on repeat (RC-178). New default-safe rule RC-179. BMS no-discharge + inverter-ignores-torque-zero kept as critical containment. Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (now includes invented-timing RC-116/133/169/174 — four gates); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/HV-shutdown ownership.
+
 ## 2026-07-16 — Claude Code — task complete (batch 40 + review_37 — Gate 05F Network Boundary / Gateway Safety Rules)
 
 ### (archived handoff)

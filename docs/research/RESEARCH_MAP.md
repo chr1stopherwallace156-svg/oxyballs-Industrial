@@ -371,24 +371,25 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_38):** **Gate 05H — Gateway Proof Plan
-/ HIL Bench Test Matrix** — how to *prove* the Gate 05G failsafe behavior
-without a vehicle: CAN_1 silent-mode proof, CAN_2 inverter-timeout test,
-CAN_3 BMS heartbeat-dropout test, bad-checksum injection, wrong-source-
-address rejection, torque-zero command trace, BMS no-discharge response,
-e-stop loop bench proof, gateway power-loss behavior, watchdog-reset
-behavior. Keep the ownership discipline — the VCU **coordinates** but owns
+**Next expected batch (owner's call after review_39):** the owner did not
+name a Gate 05I after **Gate 05H (HIL / Bench Test Protocol,
+`GATE05H_HIL_BENCH_TEST_PROTOCOL.md`)**. Expected next inputs, in any order:
+a further **Gate 05 proof step** (e.g. Gate 05I) if the controls-proof
+series continues; the **Gate 06 deep dive** (Mechanical Mounting / Battery
+Enclosure) per the standing order after Gate 05 (**06 → 09 → 10 → 11**); or
+a supplier reply / Gate 08C reopen / Gate 08B reopen / Gate 07A/07C field
+data. Keep the ownership discipline — the VCU **coordinates** but owns
 nothing safety-critical (contactors / pre-charge / HV shutdown / torque
 authority) until the BMS/PDU supplier architecture proves it (BQ-27); CAN_1
 stays listen-only; EV-side outputs stay isolated; every proof is bench/HIL,
 no vehicle, no live-HV without a staged safety plan + LOTO/PPE (RC-117);
 **NEVER "PATS bypass"; no factory-cluster injection; no invented
-thresholds/timeouts as gate logic until a proof upgrades them (RC-173/179);
-no physical-hardware drive while authority is UNVERIFIED_STAGE / owner
-PENDING.** Verbatim scope in
-[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); Gate 05G
-failsafe matrix in `docs/status/GATE05G_FAILSAFE_MATRIX.md` (13 fault rows;
-timeouts SupplierDataPending / No Gate Authority; permanent doctrine D-007:
+thresholds/timeouts as gate logic until a proof upgrades them
+(RC-173/179/180); no physical-hardware drive while authority is
+UNVERIFIED_STAGE / owner PENDING.** Verbatim scope in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); Gate 05H HIL
+protocol in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` (timings
+SimulationSweepOnly; HIL-observed not PASS; permanent doctrine D-007:
 **Coordinator ≠ Owner**). **Gate 08C is parked**; Gate 07 artifacts + the
 15-mode FMEA registry stay open. Order after 05: Gate 06 deep dive → 09 →
 10 → 11.

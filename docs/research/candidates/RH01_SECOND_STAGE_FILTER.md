@@ -278,6 +278,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-177 | **Bad-checksum stale-data caution (owner review_38)**: "uses last valid safe data" is risky for torque / driver-demand → **reject the corrupted frame; use last known value only if it is an explicit safe fallback within a supplier-defined timeout, otherwise transition toward torque zero / FAULT_LATCHED**; **bad data cannot preserve torque authority unless timeout + fallback behavior are verified** | batch_41 (stale-data risk) | n/a — failsafe rule | **ControlsSafety** — recorded in `docs/status/GATE05G_FAILSAFE_MATRIX.md` — lanes L7 |
 | RC-178 | **Wrong-source-address should not hard-latch immediately (owner review_38)**: "FAULT_LATCHED upon unexpected ID reception" is too aggressive (diagnostics / service tools / unrelated devices produce unexpected frames) → **reject the unexpected source address; log the event; escalate to FAULT_LATCHED only if repeated, safety-critical, or matching a forbidden control-path pattern — threshold pending controls/security review** | batch_41 (over-aggressive latch) | n/a — failsafe rule | **ControlsSafety / NeedsSecurityReview** — recorded in `docs/status/GATE05G_FAILSAFE_MATRIX.md` — lanes L7 |
 | RC-179 | **Failsafe default-safe rule (owner review_38, new rule)**: **no failsafe timing value may control physical hardware until upgraded from SimulationSweepOnly to SupplierConfirmed or BenchVerified**; **any signal fault involving torque, contactors, BMS discharge permission, HVIL, isolation, or e-stop must default toward torque inhibit, restart lockout, and engineering review**. Critical containment kept: BMS no-discharge → clamp inverter torque to zero; inverter ignores torque-zero → escalate to shutdown request + FAULT_LATCHED on current/torque-feedback conflict | owner-promoted (extends RC-173) | n/a — controls doctrine | **GateLogic / ControlsSafety** — recorded in `docs/status/GATE05G_FAILSAFE_MATRIX.md` — lanes L7/L8 |
+| RC-180 | **HIL timing values are not limits (owner review_39, FOURTH recurrence of the invented-timing defect — cf. RC-116/133/169/174)**: the batch_42 Gate 05H `10 ms / 20 ms / 50 ms / 100 ms / 2 ms / 3-cycle-30 ms` values in the fault-injection matrix + scripts read like real pass/fail limits → **`SimulationSweepOnly / SupplierDataPending`**; matrix header "Pass Criteria Metric" → **"HIL Observation Metric / Candidate Pass Criteria"** + Authority Status row ("No physical gate authority until supplier timing boundary or bench/HIL requirement is approved"); measure + record observed latency, HIL result only, not vehicle approval | batch_42 (invented timing) | n/a — parameter / test rule | **NeedsSupplierData / NoGateAuthority** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7/L8 |
+| RC-181 | **HIL result language, not "PASS" (owner review_39)**: the scripts' `[PASS]` / `return "VERIFICATION_STAGE_PASSED_SIM"` can sound like final vehicle approval → use **`[HIL_OBSERVED]` … return `"HIL_OBSERVED_NO_GATE_AUTHORITY"`**; result category = **HIL observed / needs review / model stress failure** (echoes the Gate 08C Simulation Response Category RC-131) | batch_42 (approval-sounding language) | n/a — test rule | **ControlsSafety / NoGateAuthority** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7/L8 |
+| RC-182 | **CAN_1 fault-injection bench boundary (owner review_39)**: the "FIU forces physical short CAN-H↔CAN-L" test may run **only on simulated OEM nodes or bench-harness replicas — forbidden on a live Ford factory network**; the strongest CAN_1 proof is not the short test but **silent-mode register dump + no TX mailbox allocation + no ACK participation + protocol-analyzer capture + oscilloscope confirmation of no dominant-bit drive** | batch_42 (unsafe-if-on-live-bus) | n/a — test boundary rule | **ControlsSafety / ProofRequirement** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7 |
+| RC-183 | **Power-loss safe-state is measured, not assumed (owner review_39)**: "all VCU low-side/high-side driver pins float open within <2 ms" is too absolute — pins do not become safe unless the circuit is designed that way → **measure driver-output behavior after power loss; the expected safe state depends on output-stage design, pull-ups/pull-downs, relay topology, and hardware fail-safe design; timing + final expected state require bench proof** | batch_42 (unproven hardware assumption) | n/a — test rule | **NeedsHardwareProof / ControlsSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7/L8 |
+| RC-184 | **Per-HIL-run proof-artifact package (owner review_39, new rule)**: every HIL run must record **HIL Run ID · firmware version · VCU hardware revision · test-script version · bench wiring diagram · simulated-node config · fault injected · raw CAN log · oscilloscope capture · power-rail log · state-transition log · observed latency · expected response · result category · authority status · engineer reviewer** (makes each bench run reusable evidence); Script B timeout must be **configurable** (`hil.get_config(...)`), not a hardcoded 100 ms max | owner-promoted | n/a — proof rule | **ProofRequirement / ControlsSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -3121,3 +3126,74 @@ power-loss behavior, watchdog-reset behavior. Queued in
 - Nothing ingested; nothing marked Confirmed; no placeholder timing has
   gate authority; no factory-bus transmission; no physical gateway
   deployment; ODRs untouched.
+
+---
+
+## 50. Batch 42 + owner review_39 — Gate 05H HIL / Bench Test Protocol (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_42_gate05h_hil_bench_test_protocol.md`
+and `docs/research/raw/owner_reviews/review_39_batch_42_verdict.md`.
+Row additions: RC-180..RC-184 (no new CS). Deliverable:
+`docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` (HIL harness architecture,
+fault-injection matrix HIL-05G-001..006, two illustrative Python scripts,
+per-run proof-artifact package). Owner: "strong first draft … the right
+Gate 05H direction."
+
+### Recurrence caught — invented timing acting as gate logic, FOURTH gate (RC-180)
+
+Fourth recurrence of the invented-timing defect family (RC-116 200 ms HVIL,
+RC-133 Gate 08C, RC-169/173 Gate 05F, RC-174 Gate 05G): the HIL matrix +
+scripts embedded `10/20/50/100/2 ms` and `3-cycle/30 ms` as real pass/fail
+limits. Downgraded to `SimulationSweepOnly / SupplierDataPending`; the matrix
+header "Pass Criteria Metric" → "HIL Observation Metric / Candidate Pass
+Criteria" + an Authority Status row. **This defect has now recurred across
+five artifacts — the single strongest case for the M10 regression scanner
+(owner decision pending).**
+
+### Other corrections
+
+- **HIL-result language (RC-181):** `[HIL_OBSERVED]` /
+  `HIL_OBSERVED_NO_GATE_AUTHORITY`, never `[PASS]` /
+  `VERIFICATION_STAGE_PASSED_SIM`; result category = HIL observed / needs
+  review / model stress failure.
+- **CAN_1 fault-injection bench boundary (RC-182):** short test on
+  simulated OEM nodes / bench replicas only, forbidden on a live Ford
+  network; strongest proof = silent-mode register dump + no TX mailbox + no
+  ACK + analyzer capture + oscilloscope no-dominant-bit.
+- **Power-loss safe-state measured, not assumed (RC-183):** depends on
+  output-stage design / pull-ups-downs / relay topology / hardware
+  fail-safe; timing + final state require bench proof.
+- **Proof-artifact package + configurable script timeout (RC-184):** every
+  HIL run records the full evidence set; Script B timeout comes from config,
+  not a hardcoded 100 ms.
+
+### Kept (owner: "keep")
+
+HIL architecture, fault-injection matrix, listen-only proof, automation
+scripts, proof artifacts, and the HIL gate rule (`logic_trace_captured ==
+FALSE OR script_execution_status == UNRUN → BENCH_INTEGRATION_APPROVAL =
+BLOCKED, MONITOR_MODE = SIMULATION_SCRIPTS_ONLY`). Scripts remain
+illustrative pseudocode (no firmware exists yet), not production code.
+
+### Gate 05H status (owner review_39)
+
+`HIL_TEST_PROTOCOL_DRAFTED` / `LOW_VOLTAGE_BENCH_ONLY` / `NO_LIVE_HV` /
+`NO_VEHICLE_TESTING` / `NO_FACTORY_BUS_TRANSMISSION` /
+`TIMING_VALUES_SIMULATION_SWEEP_ONLY` / `HIL_PROOF_ARTIFACTS_DEFINED` /
+`BENCH_EXECUTION_NOT_STARTED`.
+
+### Next
+
+The owner did not name a Gate 05I. Expected next inputs: the owner's next
+batch (a further Gate 05 proof step or the return to the Gate 06 deep dive
+per the roadmap order 06 → 09 → 10 → 11), or a supplier reply / Gate
+08B–08C reopen / Gate 07 field data.
+
+### Standing checks
+
+- Low-voltage bench only; no live HV; no vehicle testing; CAN_1 listen-only
+  (simulated, proof required); no HIL timing becomes a gate limit until a
+  source/HIL-approved requirement upgrades it; bench execution not started.
+- Nothing ingested; nothing marked Confirmed; scripts are illustrative
+  pseudocode, not production code; ODRs untouched.

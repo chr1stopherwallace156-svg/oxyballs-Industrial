@@ -302,30 +302,44 @@ torque inhibit + restart lockout + engineering review. Failsafe gate rule:
 PHYSICAL_HARDWARE_INTEGRATION = BLOCKED, SYSTEM_EXECUTION_MODE =
 SIMULATION_FAULTS_ONLY`.
 
-## Gate 05H — Gateway Proof Plan / HIL Bench Test Matrix  · STATUS: NEXT (owner review_38)
+## Gate 05H — HIL / Bench Test Protocol  · STATUS: HIL_TEST_PROTOCOL_DRAFTED / BENCH_EXECUTION_NOT_STARTED (batch_42)
 
-Gate 05G says what should happen when faults occur; Gate 05H defines how to
-**prove** it without putting it in a vehicle yet.
+Deliverable `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` (HIL harness
+architecture, fault-injection matrix HIL-05G-001..006, two illustrative
+Python scripts, per-run proof-artifact package). Status (review_39):
+`HIL_TEST_PROTOCOL_DRAFTED / LOW_VOLTAGE_BENCH_ONLY / NO_LIVE_HV /
+NO_VEHICLE_TESTING / NO_FACTORY_BUS_TRANSMISSION /
+TIMING_VALUES_SIMULATION_SWEEP_ONLY / HIL_PROOF_ARTIFACTS_DEFINED /
+BENCH_EXECUTION_NOT_STARTED`. Owner: "strong first draft … the right Gate
+05H direction." **Main correction (FOURTH recurrence): the 10/20/50/100/2 ms
++ 3-cycle HIL timings were written like real pass/fail limits** → downgraded
+to SimulationSweepOnly / SupplierDataPending; "Pass Criteria Metric" → "HIL
+Observation Metric / Candidate Pass Criteria" + Authority Status (RC-180).
+Other corrections: `[HIL_OBSERVED]` not `[PASS]`, return
+`HIL_OBSERVED_NO_GATE_AUTHORITY` (RC-181); CAN_1 short test simulated/bench
+only, forbidden on a live Ford bus (RC-182); power-loss safe-state measured
+not assumed (RC-183); per-HIL-run proof-artifact package + configurable
+script timeout (RC-184). HIL gate rule kept:
+`logic_trace_captured == FALSE OR script_execution_status == UNRUN →
+BENCH_INTEGRATION_APPROVAL = BLOCKED, MONITOR_MODE = SIMULATION_SCRIPTS_ONLY`.
 
-**Owner scope (review_38) — the proof plan must cover:**
+## NEXT — owner's call (Gate 05I or return to Gate 06 deep dive)
 
-> - CAN_1 silent-mode proof
-> - CAN_2 inverter timeout test
-> - CAN_3 BMS heartbeat dropout test
-> - bad checksum injection
-> - wrong source address rejection
-> - torque-zero command trace
-> - BMS no-discharge response
-> - e-stop loop bench proof
-> - gateway power-loss behavior
-> - watchdog reset behavior
+The owner did not name a Gate 05I after Gate 05H. Expected next inputs, in
+any order:
 
-Keep the discipline — every proof stays bench/HIL, no vehicle, no live-HV
-without staged safety plan + LOTO/PPE (RC-117); no timeout/threshold gains
-physical authority until the proof upgrades it from SimulationSweepOnly to
-SupplierConfirmed / BenchVerified (RC-173/179); CAN_1 stays listen-only;
-EV-side outputs stay isolated; the VCU coordinates but owns nothing
-safety-critical (BQ-27); D-007 + RC-168 decomposition bind throughout.
+- A further **Gate 05 proof step** (e.g. Gate 05I) if the owner continues
+  the controls-proof series.
+- The **Gate 06 deep dive** (Mechanical Mounting / Battery Enclosure) per
+  the standing order after Gate 05: **06 → 09 → 10 → 11**.
+- A supplier reply, a Gate 08C reopen (supplier thresholds), a Gate 08B
+  reopen (official standard PDFs), or Gate 07A/07C field data.
+
+Enforce throughout — every proof bench/HIL, no vehicle, no live-HV without a
+staged safety plan + LOTO/PPE (RC-117); no timeout/threshold gains physical
+authority until a source/HIL requirement upgrades it (RC-173/179/180); CAN_1
+listen-only; EV-side isolated; the VCU owns nothing safety-critical (BQ-27);
+D-007 + RC-168 bind.
 
 ## Gate 06 — Mechanical Mounting / Battery Enclosure  · STATUS: FIRST PASS DONE (batch_25)
 
