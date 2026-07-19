@@ -279,32 +279,53 @@ action-owner for the VCU request signals (RC-171); CAN_1
 gateway gate rule: `listen_only_proof == MISSING OR isolation == UNVERIFIED
 → deployment + physical-injection BLOCKED, evaluation SIMULATION_ONLY`.
 
-## Gate 05G — Fault Containment and Gateway Failsafe Matrix  · STATUS: NEXT (owner review_37)
+## Gate 05G — Fault Containment and Gateway Failsafe Matrix  · STATUS: FAILSAFE_MATRIX_MAPPED / SIMULATION_ONLY (batch_41)
 
-Gate 05F says what may cross the network boundary; Gate 05G says what
-happens when something fails.
+Deliverable `docs/status/GATE05G_FAILSAFE_MATRIX.md` (13-row failsafe
+matrix + failsafe gate rule + default-safe rule). Status (review_38):
+`FAILSAFE_MATRIX_MAPPED / SIMULATION_ONLY / TIMEOUT_VALUES_PENDING_SUPPLIER_
+DATA / HIL_BENCH_PROOF_REQUIRED / CAN_1_LISTEN_ONLY_PROOF_REQUIRED /
+NO_PHYSICAL_GATEWAY_DEPLOYMENT / NO_FACTORY_BUS_TRANSMISSION /
+NO_PLACEHOLDER_TIMING_AUTHORITY`. Owner: "strong … architecture right,
+failsafe categories right." **Main correction (THIRD recurrence): the 50 ms
+/ 100 ms / 2 ms timeouts still read like sourced timing** → downgraded to
+SupplierDataPending / SimulationSweepOnly (RC-174). Other corrections: no
+"instant" for mechanical/E-stop contactor actions — supplier-defined +
+bench/HIL-verified (RC-175); CAN_1 transmit-attempt rejected by firmware
+policy AND physically unable to drive the bus (RC-176); bad-checksum stale
+data cannot preserve torque authority (RC-177); wrong-source-address
+reject+log, latch only on repeat (RC-178). New default-safe rule RC-179: no
+failsafe timing controls hardware until SupplierConfirmed/BenchVerified; any
+torque/contactor/BMS-discharge/HVIL/isolation/e-stop fault defaults to
+torque inhibit + restart lockout + engineering review. Failsafe gate rule:
+`failsafe_timing_confirmed == FALSE OR hil_bench_proof == MISSING →
+PHYSICAL_HARDWARE_INTEGRATION = BLOCKED, SYSTEM_EXECUTION_MODE =
+SIMULATION_FAULTS_ONLY`.
 
-**Owner scope (review_37) — the failsafe matrix must cover:**
+## Gate 05H — Gateway Proof Plan / HIL Bench Test Matrix  · STATUS: NEXT (owner review_38)
 
-> - VCU crash
-> - CAN_1 accidentally attempts transmit
-> - CAN_2 inverter loop silent
-> - CAN_3 BMS loop silent
-> - gateway power loss
-> - gateway stuck dominant
-> - gateway stuck recessive
-> - bad checksum / alive counter
-> - message replay
-> - wrong source address
-> - BMS says no-discharge
-> - inverter ignores torque-zero
-> - E-stop asserted
+Gate 05G says what should happen when faults occur; Gate 05H defines how to
+**prove** it without putting it in a vehicle yet.
 
-Keep the discipline — every failsafe response stays SIMULATION_ONLY; no
-timeout/threshold has physical authority until supplier docs or HIL/bench
-proof confirm it (RC-173); CAN_1 stays listen-only; EV-side outputs stay
-isolated; the VCU coordinates but owns nothing safety-critical (BQ-27);
-D-007 + RC-168 decomposition bind throughout.
+**Owner scope (review_38) — the proof plan must cover:**
+
+> - CAN_1 silent-mode proof
+> - CAN_2 inverter timeout test
+> - CAN_3 BMS heartbeat dropout test
+> - bad checksum injection
+> - wrong source address rejection
+> - torque-zero command trace
+> - BMS no-discharge response
+> - e-stop loop bench proof
+> - gateway power-loss behavior
+> - watchdog reset behavior
+
+Keep the discipline — every proof stays bench/HIL, no vehicle, no live-HV
+without staged safety plan + LOTO/PPE (RC-117); no timeout/threshold gains
+physical authority until the proof upgrades it from SimulationSweepOnly to
+SupplierConfirmed / BenchVerified (RC-173/179); CAN_1 stays listen-only;
+EV-side outputs stay isolated; the VCU coordinates but owns nothing
+safety-critical (BQ-27); D-007 + RC-168 decomposition bind throughout.
 
 ## Gate 06 — Mechanical Mounting / Battery Enclosure  · STATUS: FIRST PASS DONE (batch_25)
 

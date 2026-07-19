@@ -5,6 +5,46 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 41 + review_38: Gate 05G Fault Containment / Gateway Failsafe Matrix
+
+- Archived batch_41 (Gate 05G) and review_38 1:1 (commit `f2163e1`). New
+  rows RC-174..179 (no new CS). Section 49. New deliverable
+  `docs/status/GATE05G_FAILSAFE_MATRIX.md` (13-row failsafe matrix +
+  failsafe gate rule + default-safe rule). Owner: "strong … architecture
+  right, failsafe categories right."
+- **Recurrence caught — invented timing as gate logic, third time
+  (RC-174):** the batch's `50 ms` (inverter zero-torque), `100 ms`
+  (CAN_2/CAN_3 silence), `2 ms` (dominant-timeout DTO) numbers still read
+  like sourced timing — same defect family as RC-116 (200 ms HVIL), RC-133
+  (Gate 08C placeholder-authority), and RC-169/173 (Gate 05F). Downgraded
+  to `SupplierDataPending / SimulationSweepOnly`
+  (`TransceiverSupplierDataPending` for the DTO); rows reworded to
+  supplier-defined behavior pending inverter docs + HIL. Now recurred
+  across four gates — strongly recommended for the M10 regression scanner.
+- Other corrections: no "instant" for mechanical / E-stop contactor
+  actions — supplier-defined + bench/HIL-verified (coil decay, spring
+  travel, arc suppression, contact separation) (RC-175); CAN_1
+  transmit-attempt rejected by firmware policy AND physically unable to
+  drive the bus (RC-176); bad-checksum stale data cannot preserve torque
+  authority — reject frame, safe-fallback only within supplier timeout
+  else torque zero / FAULT_LATCHED (RC-177); wrong-source-address reject +
+  log, latch only on repeat / safety-critical / forbidden-pattern (RC-178).
+- **New default-safe rule (RC-179):** no failsafe timing controls physical
+  hardware until upgraded from SimulationSweepOnly to SupplierConfirmed /
+  BenchVerified; any torque / contactor / BMS-discharge / HVIL / isolation
+  / e-stop fault defaults toward torque inhibit + restart lockout +
+  engineering review. Critical containment kept: BMS no-discharge → clamp
+  torque to zero; inverter ignores torque-zero → escalate to shutdown
+  request + FAULT_LATCHED on current/torque-feedback conflict.
+- Gate 05G status = `FAILSAFE_MATRIX_MAPPED / SIMULATION_ONLY /
+  TIMEOUT_VALUES_PENDING_SUPPLIER_DATA / HIL_BENCH_PROOF_REQUIRED /
+  CAN_1_LISTEN_ONLY_PROOF_REQUIRED / NO_PHYSICAL_GATEWAY_DEPLOYMENT /
+  NO_FACTORY_BUS_TRANSMISSION / NO_PLACEHOLDER_TIMING_AUTHORITY`.
+- Nothing ingested; nothing marked Confirmed; no placeholder timing has
+  gate authority; no factory-bus transmission; no physical gateway
+  deployment; ODRs untouched. Next = Gate 05H (Gateway Proof Plan / HIL
+  Bench Test Matrix).
+
 ## 2026-07-16 — RH batch 40 + review_37: Gate 05F Network Boundary / Gateway Safety Rules
 
 - Archived batch_40 (Gate 05F) and review_37 1:1 (commit `d0428d9`). New

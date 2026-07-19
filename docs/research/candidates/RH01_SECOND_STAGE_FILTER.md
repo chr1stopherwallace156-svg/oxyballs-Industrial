@@ -272,6 +272,12 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-171 | **Signal-owner vs action-owner split (owner review_37)**: for `VCU_Precharge_Request` and `VCU_Shutdown_Request_To_BMS` the batch's "Owner: Conversion VCU" is incomplete → make it explicit — **Signal Owner = VCU (owns request generation); Action Owner = BMS/PDU/hardwired safety (owns execution); VCU Authority = requester only** | batch_40 (owner conflation) | n/a — ownership rule | **ControlsSafety** — recorded in `docs/status/GATE05F_NETWORK_BOUNDARY.md`; links BQ-27 — lanes L7 |
 | RC-172 | **CAN_1 hardware language (owner review_37)**: "CAN_1 transceiver hardware must be **modified** or configured to prevent transmission" ("modified" is risky) → **"CAN_1 hardware must be selected, wired, or configured for listen-only / silent monitoring with no transmit capability enabled"** (options: silent-mode controller, receive-only transceiver, removed TX path, hardware gating) | batch_40 (over-narrow method) | n/a — boundary rule | **ControlsSafety** — recorded in `docs/status/GATE05F_NETWORK_BOUNDARY.md` — lanes L7 |
 | RC-173 | **No timing becomes gate logic unproven (owner review_37, new rule)**: **no timeout, heartbeat, alive-counter, torque-zero, shutdown, or contactor-open timing may become physical gate logic until confirmed by supplier documentation or HIL/bench proof**; an estimated timeout is **simulation-sweep-only and must be labeled No Gate Authority** | owner-promoted (generalizes RC-169; extends RC-133) | n/a — controls doctrine | **GateLogic / NoGateAuthority** — recorded in `docs/status/GATE05F_NETWORK_BOUNDARY.md` — lanes L7/L8 |
+| RC-174 | **Failsafe timeouts have no authority (owner review_38, THIRD recurrence of the invented-timing defect — cf. RC-116/133/169/173)**: the batch_41 `50 ms` (inverter zero-torque), `100 ms` (CAN_2/CAN_3 silence), `2 ms` (dominant-timeout DTO) numbers still read like sourced timing → downgrade to `t_inverter_torque_zero / t_can2_timeout / t_can3_timeout = SupplierDataPending / SimulationSweepOnly`, `t_dominant_timeout = TransceiverSupplierDataPending / SimulationSweepOnly`; rows reworded to "supplier-defined safe behavior … timeout pending inverter documentation and HIL proof" | batch_41 (invented timing) | n/a — parameter | **NeedsSupplierData / NoGateAuthority** — recorded in `docs/status/GATE05G_FAILSAFE_MATRIX.md`; links BQ-27 — lanes L7/L8 |
+| RC-175 | **No "instant" for mechanical / E-stop actions (owner review_38)**: "hardwired loop breaks LV supply to contactor coils **instantly**; HV link isolation happens **instantly**" → **"hardwired loop removes/interrupts the contactor control path through the approved safety circuit; actual contactor opening time is supplier-defined and must be verified by bench/HIL oscilloscope trace"** (mechanical contactors have coil decay, spring travel, arc suppression, contact-separation timing — "instant" is not a safe engineering word) | batch_41 (unsafe timing word) | n/a — failsafe rule | **NeedsSupplierData / ControlsSafety** — recorded in `docs/status/GATE05G_FAILSAFE_MATRIX.md` — lanes L7/L8 |
+| RC-176 | **CAN_1 transmit-attempt failure type (owner review_38)**: clarify — a software transmit attempt is **rejected by firmware policy AND physically unable to drive the bus due to listen-only/silent hardware**; proof = silent-mode register + no transmit mailbox + no ACK participation + no dominant-bit injection + protocol-analyzer capture | batch_41 (under-specified) | n/a — failsafe rule | **ControlsSafety / ProofRequirement** — recorded in `docs/status/GATE05G_FAILSAFE_MATRIX.md` — lanes L7 |
+| RC-177 | **Bad-checksum stale-data caution (owner review_38)**: "uses last valid safe data" is risky for torque / driver-demand → **reject the corrupted frame; use last known value only if it is an explicit safe fallback within a supplier-defined timeout, otherwise transition toward torque zero / FAULT_LATCHED**; **bad data cannot preserve torque authority unless timeout + fallback behavior are verified** | batch_41 (stale-data risk) | n/a — failsafe rule | **ControlsSafety** — recorded in `docs/status/GATE05G_FAILSAFE_MATRIX.md` — lanes L7 |
+| RC-178 | **Wrong-source-address should not hard-latch immediately (owner review_38)**: "FAULT_LATCHED upon unexpected ID reception" is too aggressive (diagnostics / service tools / unrelated devices produce unexpected frames) → **reject the unexpected source address; log the event; escalate to FAULT_LATCHED only if repeated, safety-critical, or matching a forbidden control-path pattern — threshold pending controls/security review** | batch_41 (over-aggressive latch) | n/a — failsafe rule | **ControlsSafety / NeedsSecurityReview** — recorded in `docs/status/GATE05G_FAILSAFE_MATRIX.md` — lanes L7 |
+| RC-179 | **Failsafe default-safe rule (owner review_38, new rule)**: **no failsafe timing value may control physical hardware until upgraded from SimulationSweepOnly to SupplierConfirmed or BenchVerified**; **any signal fault involving torque, contactors, BMS discharge permission, HVIL, isolation, or e-stop must default toward torque inhibit, restart lockout, and engineering review**. Critical containment kept: BMS no-discharge → clamp inverter torque to zero; inverter ignores torque-zero → escalate to shutdown request + FAULT_LATCHED on current/torque-feedback conflict | owner-promoted (extends RC-173) | n/a — controls doctrine | **GateLogic / ControlsSafety** — recorded in `docs/status/GATE05G_FAILSAFE_MATRIX.md` — lanes L7/L8 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -3037,3 +3043,81 @@ says no-discharge, inverter ignores torque-zero, E-stop asserted. Queued in
   the Ford side; no Ford ID spoofing.
 - Nothing ingested; nothing marked Confirmed; no factory-bus transmission;
   no physical gateway deployment; ODRs untouched.
+
+---
+
+## 49. Batch 41 + owner review_38 — Gate 05G Fault Containment / Gateway Failsafe Matrix (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_41_gate05g_fault_containment_failsafe_matrix.md`
+and `docs/research/raw/owner_reviews/review_38_batch_41_verdict.md`.
+Row additions: RC-174..RC-179 (no new CS). Deliverable:
+`docs/status/GATE05G_FAILSAFE_MATRIX.md` (13-row failsafe matrix + the
+failsafe gate rule + default-safe rule). Owner: "strong … architecture
+right, failsafe categories right."
+
+### Recurrence caught — invented timing acting as gate logic, again (RC-174)
+
+**Third recurrence** of the invented-timing defect family (RC-116 200 ms
+HVIL, RC-133 Gate 08C placeholder-authority, RC-169/173 Gate 05F 50/100 ms):
+the batch's `50 ms` (inverter zero-torque), `100 ms` (CAN_2/CAN_3 silence),
+and `2 ms` (dominant-timeout DTO) numbers still read like sourced timing.
+Downgraded to `SupplierDataPending / SimulationSweepOnly`
+(`TransceiverSupplierDataPending` for the DTO); rows reworded to
+supplier-defined behavior pending inverter docs + HIL. **Strongly
+recommended for the M10 regression scanner** — this defect has now recurred
+across four gates.
+
+### Other corrections
+
+- **No "instant" for mechanical / E-stop actions (RC-175):** contactor
+  opening time is supplier-defined + bench/HIL-verified (coil decay, spring
+  travel, arc suppression, contact separation), never "instant."
+- **CAN_1 transmit-attempt failure type (RC-176):** rejected by firmware
+  policy AND physically unable to drive the bus; five-part proof pack.
+- **Bad-checksum stale-data caution (RC-177):** bad data cannot preserve
+  torque authority; stale value only as an explicit safe fallback within a
+  supplier-defined timeout, else torque zero / FAULT_LATCHED.
+- **Wrong-source-address de-escalated (RC-178):** reject + log; latch only
+  on repeat / safety-critical / forbidden-pattern; threshold pending
+  controls-security review.
+- **Failsafe default-safe rule (RC-179):** no failsafe timing controls
+  hardware until SupplierConfirmed / BenchVerified; any torque / contactor /
+  BMS-discharge / HVIL / isolation / e-stop fault defaults toward torque
+  inhibit + restart lockout + engineering review.
+
+### Kept (owner: "critical containment rows")
+
+- **BMS no-discharge** → VCU clamps inverter torque request to zero.
+- **Inverter ignores torque-zero** → VCU escalates to a shutdown request
+  over CAN_3 + FAULT_LATCHED on current/torque-feedback conflict.
+- The failsafe gate rule verbatim: `failsafe_timing_confirmed == FALSE OR
+  hil_bench_proof == MISSING → PHYSICAL_HARDWARE_INTEGRATION = BLOCKED,
+  SYSTEM_EXECUTION_MODE = SIMULATION_FAULTS_ONLY`.
+
+### Gate 05G status (owner review_38)
+
+`FAILSAFE_MATRIX_MAPPED` / `SIMULATION_ONLY` /
+`TIMEOUT_VALUES_PENDING_SUPPLIER_DATA` / `HIL_BENCH_PROOF_REQUIRED` /
+`CAN_1_LISTEN_ONLY_PROOF_REQUIRED` / `NO_PHYSICAL_GATEWAY_DEPLOYMENT` /
+`NO_FACTORY_BUS_TRANSMISSION` / `NO_PLACEHOLDER_TIMING_AUTHORITY`.
+
+### Next
+
+Owner: **Gate 05H — Gateway Proof Plan / HIL Bench Test Matrix** — how to
+**prove** the failsafe behavior without putting it in a vehicle yet: CAN_1
+silent-mode proof, CAN_2 inverter-timeout test, CAN_3 BMS heartbeat-dropout
+test, bad-checksum injection, wrong-source-address rejection, torque-zero
+command trace, BMS no-discharge response, e-stop loop bench proof, gateway
+power-loss behavior, watchdog-reset behavior. Queued in
+`GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- CAN_1 listen-only (proof required); CAN_2/CAN_3 isolated; no timeout has
+  physical authority (RC-174/179); every torque / contactor / BMS-discharge
+  / HVIL / isolation / e-stop fault defaults toward torque inhibit +
+  restart lockout + engineering review.
+- Nothing ingested; nothing marked Confirmed; no placeholder timing has
+  gate authority; no factory-bus transmission; no physical gateway
+  deployment; ODRs untouched.

@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 40 + review_37 — Gate 05F Network Boundary / Gateway Safety Rules)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 40 + review_37); awaiting Gate 05G Fault Containment and Gateway Failsafe Matrix or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `d0428d9` (batch-40 archive); end commit: `a378171` (batch-40 reconciliation)
+- Work: new `GATE05F_NETWORK_BOUNDARY.md` (3-bus isolation architecture, routing rules, failure protocols A/B/C, listen-only proof dossier, gateway gate rule). RC-169..173 (no new CS). Section 48. Recurrence caught (RC-169): 50 ms / 100 ms timeouts acting as sourced safety boundaries → downgraded to SupplierDataPending sweep-only No Gate Authority; general rule RC-173. Other corrections: authority-chain language de-"academic"ed (RC-170); signal-owner ≠ action-owner (RC-171); CAN_1 selected/wired/configured for listen-only not "modified" (RC-172). CAN_1 Ford listen-only; CAN_2/CAN_3 isolated; forbidden EV→Ford crossings. Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (now includes invented-timing RC-116/133/169); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/HV-shutdown ownership.
+
 ## 2026-07-16 — Claude Code — task complete (batch 39 + review_36 — Gate 05E Interface Control Document / Signal Authority Table)
 
 ### (archived handoff)
