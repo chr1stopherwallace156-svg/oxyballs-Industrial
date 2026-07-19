@@ -371,19 +371,23 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_34):** **Gate 05D — State Transition +
-Ownership Matrix** — per state: state, owner, entry conditions, exit
-conditions, allowed outputs, blocked outputs, fault transitions, required
-proof artifact, authority status, supplier data needed. Keep the ownership
+**Next expected batch (owner review_35):** **Gate 05E — Interface Control
+Document / Signal Authority Table** — per signal: signal, source
+controller, destination controller, bus, direction, owner, requester,
+allowed use, blocked use, physical authority, verification status, proof
+artifact. Gate 05D says *who owns what*; Gate 05E says *what signal may
+cross which boundary* — preventing Ford-side monitoring signals from
+crossing into EV-side control without permission. Keep the ownership
 discipline — the VCU **coordinates** but owns nothing safety-critical
-(contactors / pre-charge / HV shutdown) until the BMS/PDU supplier
-architecture proves it (BQ-27); Ford signals don't gate real transitions;
-**NEVER "PATS bypass"; no factory-cluster injection; no invented
-thresholds.** Verbatim scope in
-[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); Gate 05C
-state machine in `docs/status/GATE05C_STATE_MACHINE.md`. **Gate 08C is
-parked**; Gate 07 artifacts + the 15-mode FMEA registry stay open. Order
-after 05: Gate 06 deep dive → 09 → 10 → 11.
+(contactors / pre-charge / HV shutdown / torque authority) until the
+BMS/PDU supplier architecture proves it (BQ-27); Ford signals don't gate
+real transitions; **NEVER "PATS bypass"; no factory-cluster injection; no
+invented thresholds.** Verbatim scope in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); Gate 05D
+ownership matrix in `docs/status/GATE05D_OWNERSHIP_MATRIX.md` (permanent
+doctrine D-007: **Coordinator ≠ Owner**). **Gate 08C is parked**; Gate 07
+artifacts + the 15-mode FMEA registry stay open. Order after 05: Gate 06
+deep dive → 09 → 10 → 11.
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

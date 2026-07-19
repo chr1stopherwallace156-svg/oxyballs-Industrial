@@ -224,24 +224,58 @@ NO_FACTORY_CLUSTER_INJECTION`. Every state carries an ownership label
 threshold ParameterPending (RC-156); E-shutdown/service-mode safety-worded
 (RC-157).
 
-## Gate 05D — State Transition + Ownership Matrix  · STATUS: NEXT (owner review_34)
+## Gate 05D — State Transition + Ownership Matrix  · STATUS: CREATED / SIMULATION_ONLY / OWNERSHIP PENDING (batch_38)
 
-Build the transition + ownership matrix. Keep the ownership discipline —
-the VCU coordinates but owns nothing safety-critical until supplier/Ford
-docs prove it (BQ-27).
+Deliverable `docs/status/GATE05D_OWNERSHIP_MATRIX.md` (11-state ownership
+matrix + Final Responsibility Matrix). Status (review_35):
+`STATE_OWNERSHIP_MATRIX_CREATED / VCU_ROLE_LIMITS_DEFINED /
+FORD_SIDE_CONTROL_BLOCKED / EV_SIDE_CONTROL_ISOLATED /
+CONTACTOR_OWNER_PENDING / PRECHARGE_OWNER_PENDING /
+HV_SHUTDOWN_OWNER_PENDING / TORQUE_AUTHORITY_PENDING /
+SERVICE_MODE_PHYSICAL_SAFETY_PENDING / SIMULATION_ONLY`. Owner: "major
+upgrade — VCU god-controller risk reduced." Corrections: READY_TO_DRIVE
+must not command torque (RC-160); OFF monitor-only-if-supervisor-awake
+(RC-161); ACCESSORY thermal-pump limits (RC-162); SERVICE_MODE
+LOTO/absence-of-voltage (RC-163); EMERGENCY_SHUTDOWN "request HV
+de-energization." The coordination principle + Build Engine Authority Law
+promoted to permanent doctrine (Decision Register **D-007**).
 
-**Owner scope (review_34) — per state, map:**
+## Gate 05E — Interface Control Document / Signal Authority Table  · STATUS: NEXT (owner review_35)
 
-> - state
-> - owner
-> - entry conditions
-> - exit conditions
-> - allowed outputs
-> - blocked outputs
-> - fault transitions
-> - required proof artifact
-> - authority status
-> - supplier data needed
+Gate 05D says *who owns what*; Gate 05E says *what signal may cross which
+boundary* — preventing Ford-side monitoring signals from crossing into
+EV-side control without permission.
+
+**Owner scope (review_35) — per signal, map:**
+
+> - Signal
+> - Source controller
+> - Destination controller
+> - Bus
+> - Direction
+> - Owner
+> - Requester
+> - Allowed use
+> - Blocked use
+> - Physical authority
+> - Verification status
+> - Proof artifact
+
+**Owner example (verbatim):**
+
+> Signal: M_EV_Torque_Command_Nm
+> Source: VCU
+> Destination: Inverter
+> Bus: CAN_2 isolated EV loop
+> Direction: Transmit
+> Owner: VCU/Inverter pending supplier DBC
+> Allowed use: isolated EV torque command after all enable checks
+> Blocked use: Ford factory network, unverified pedal pass-through
+> Physical authority: BLOCKED until DBC + HIL + controls review
+
+Keep the ownership discipline — the VCU coordinates but owns nothing
+safety-critical until supplier/Ford docs prove it (BQ-27); Ford-side
+networks stay listen-only; EV-side outputs stay isolated.
 
 ## Gate 06 — Mechanical Mounting / Battery Enclosure  · STATUS: FIRST PASS DONE (batch_25)
 

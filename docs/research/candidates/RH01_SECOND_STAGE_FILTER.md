@@ -258,6 +258,10 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-157 | **Emergency-shutdown + service-mode safety wording (owner review_34)**: EMERGENCY_SHUTDOWN → **request/trigger EV-side torque inhibit + contactor-open + restart lockout through the authorized BMS/PDU safety architecture; final HV isolation authority = BMS/PDU / hardwired E-stop — pending supplier arch**. SERVICE_MODE → **diagnostics only after HV de-energized + LOTO active + service disconnect removed + absence-of-voltage verification** (not a normal software action) | owner-promoted (extends RC-152/117) | n/a — controls-safety rule | **NoGoConditionCandidate / ControlsSafety** — the VCU does not own final HV shutdown; opening HVIL is never a routine software step — lanes L7/L8 |
 | RC-158 | **State ownership labels (owner review_34, biggest upgrade)**: every state carries **Owner ∈ {VCU, BMS, PDU, Inverter, Charger, Ford module, Hardwired safety circuit, Unknown/Pending supplier architecture}** + VCU Role + Authority Status; the VCU may **coordinate** but cannot assume ownership of contactors / pre-charge / HV shutdown / factory signals / cluster warnings until proven | owner-promoted | n/a — state-machine schema | **GateLogic** — recorded in `docs/status/GATE05C_STATE_MACHINE.md` — lanes L7 |
 | RC-159 | **Gate 05C status (owner review_34)**: `STATE_MACHINE_DRAFTED` / `SIMULATION_ONLY` / `AUTHORITY_OWNERSHIP_UNRESOLVED` / `FORD_SIDE_SIGNALS_LISTEN_ONLY` / `EV_SIDE_OUTPUTS_ISOLATED` / `PRECHARGE_OWNER_PENDING` / `HV_SHUTDOWN_OWNER_PENDING` / `NO_PHYSICAL_TORQUE_CONTROL` / `NO_FACTORY_CLUSTER_INJECTION` | owner-promoted | n/a — gate status | **GateStatus** — next is Gate 05D (State Transition + Ownership Matrix) — lanes L7 |
+| RC-160 | **READY_TO_DRIVE must not command torque (owner review_35)**: the batch_38 line "VCU may command torque only after confirmed ready state" is **too early** → replace with "VCU may request drive-enable state confirmation; **torque command remains BLOCKED until DRIVE_ENABLED is entered and all torque-authority conditions are satisfied**." Torque stays strictly in DRIVE_ENABLED | batch_38 (over-broad output) | n/a — controls-safety rule | **ControlsSafety** — recorded in `docs/status/GATE05D_OWNERSHIP_MATRIX.md`; links BQ-27 — lanes L7 |
+| RC-161 | **OFF-state monitor scope (owner review_35)**: a truly asleep VCU cannot monitor much → VCU Role = **"MONITOR only if low-power supervisor mode is active; otherwise dormant."** Sleep-state monitoring may be owned by the **LV supervisor / BMS keep-alive** | batch_38 (over-stated monitor role) | n/a — ownership detail | **GateLogic** — recorded in `docs/status/GATE05D_OWNERSHIP_MATRIX.md` — lanes L7 |
+| RC-162 | **ACCESSORY thermal-pump limit (owner review_35)**: "power delivery to thermal cooling pumps" needs a limit → **pumps may run only if LV power budget + pump ownership + thermal-controller authority are verified**, so the VCU does not become the thermal-controller owner too early | batch_38 (unbounded output) | n/a — ownership limit | **NeedsSupplierData / ControlsSafety** — recorded in `docs/status/GATE05D_OWNERSHIP_MATRIX.md` — lanes L7/L8 |
+| RC-163 | **SERVICE_MODE physical-safety language (owner review_35)**: SERVICE_MODE must state that physical maintenance requires **HV de-energized + LOTO active + service disconnect removed (if applicable) + absence-of-voltage verification + technician signoff**; the VCU cannot make service "safe" by software alone | owner-promoted (extends RC-157) | n/a — controls-safety rule | **NoGoConditionCandidate / ControlsSafety** — recorded in `docs/status/GATE05D_OWNERSHIP_MATRIX.md` — lanes L7/L8 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -2814,4 +2818,72 @@ supplier data needed. Queued in `GATE_RESEARCH_QUEUE.md`.
 - The VCU coordinates but owns nothing safety-critical yet; Ford signals
   don't gate real transitions; no invented pre-charge number; no
   factory-cluster injection; opening HVIL is not a routine software step.
+- Nothing ingested; nothing marked Confirmed; ODRs untouched.
+
+---
+
+## 46. Batch 38 + owner review_35 — Gate 05D State Transition + Ownership Matrix (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_38_gate05d_ownership_matrix.md`
+and `docs/research/raw/owner_reviews/review_35_batch_38_verdict.md`.
+Row additions: RC-160..RC-163 (no new CS). Owner: "major upgrade … VCU
+god-controller risk reduced." Deliverable:
+`docs/status/GATE05D_OWNERSHIP_MATRIX.md` (11-state ownership matrix +
+Final Responsibility Matrix).
+
+### Permanent doctrine promoted (Decision Register D-007)
+
+The owner elevated the coordination principle to **"a permanent Build
+Engine doctrine line":** **Coordinator ≠ Owner · Requesting ≠ Commanding ·
+Monitoring ≠ Approving · Seeing a signal ≠ having authority to act on it.**
+Paired with the **Build Engine Authority Law** ("No state transition may
+become physical-control authority until every action inside that
+transition has an assigned owner, allowed requester, blocked-controller
+list, and proof artifact; if ownership is unknown, the VCU may simulate,
+monitor, or request only — it may not directly control"). Recorded as
+**D-007** in `docs/DECISION_REGISTER.md`.
+
+### Owner corrections (verbatim intent)
+
+- **READY_TO_DRIVE (RC-160):** must not command torque — torque stays
+  strictly in DRIVE_ENABLED; READY_TO_DRIVE only requests drive-enable
+  state confirmation.
+- **OFF (RC-161):** MONITOR only if a low-power supervisor mode is awake,
+  otherwise dormant; sleep-state monitoring may belong to the LV
+  supervisor / BMS keep-alive.
+- **ACCESSORY (RC-162):** thermal pumps may run only if LV power budget +
+  pump ownership + thermal-controller authority are verified.
+- **SERVICE_MODE (RC-163):** physical maintenance requires HV
+  de-energized + LOTO active + service disconnect removed +
+  absence-of-voltage verification + technician signoff.
+- **EMERGENCY_SHUTDOWN:** "de-energize HV system" → "**request** HV
+  de-energization through the authorized BMS/PDU/hardwired safety
+  architecture" (extends RC-157 — VCU may not own final HV isolation).
+
+### Gate 05D status (owner review_35)
+
+`STATE_OWNERSHIP_MATRIX_CREATED` / `VCU_ROLE_LIMITS_DEFINED` /
+`FORD_SIDE_CONTROL_BLOCKED` / `EV_SIDE_CONTROL_ISOLATED` /
+`CONTACTOR_OWNER_PENDING` / `PRECHARGE_OWNER_PENDING` /
+`HV_SHUTDOWN_OWNER_PENDING` / `TORQUE_AUTHORITY_PENDING` /
+`SERVICE_MODE_PHYSICAL_SAFETY_PENDING` / `SIMULATION_ONLY`. Owner bottom
+line: **CREATED / SIMULATION_ONLY / OWNERSHIP PENDING.**
+
+### Next
+
+Owner: **Gate 05E — Interface Control Document / Signal Authority Table** —
+per signal: signal, source controller, destination controller, bus,
+direction, owner, requester, allowed use, blocked use, physical authority,
+verification status, proof artifact. Gate 05D says *who owns what*; Gate
+05E says *what signal may cross which boundary*. Queued in
+`GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- The VCU coordinates but owns nothing safety-critical (contactors,
+  pre-charge, HV shutdown, torque authority all PENDING supplier
+  architecture, BQ-27); Ford-side control BLOCKED, EV-side ISOLATED; no
+  invented threshold; no factory-cluster injection; SERVICE_MODE requires
+  LOTO / absence-of-voltage.
 - Nothing ingested; nothing marked Confirmed; ODRs untouched.

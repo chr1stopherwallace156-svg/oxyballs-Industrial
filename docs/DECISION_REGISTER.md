@@ -17,6 +17,36 @@ later entry that references it.
 
 ---
 
+## D-007 — Controls-authority doctrine: Coordinator ≠ Owner + Build Engine Authority Law
+
+- Date: 2026-07-16
+- Status: Accepted
+- Context: Through the Gate 05 controls work (05A–05D), a recurring risk
+  appeared of the VCU quietly being treated as the owner of every
+  safety-critical action (pre-charge, main contactors, HV shutdown, torque,
+  Ford cluster/ABS-ESC), simply because it can see the signals or
+  coordinate the state machine. In owner review_35 (batch_38, Gate 05D) the
+  owner elevated the coordination principle to "a permanent Build Engine
+  doctrine line."
+- Decision: Adopt as permanent Build Engine doctrine —
+  **Coordinator ≠ Owner · Requesting ≠ Commanding · Monitoring ≠ Approving ·
+  Seeing a signal ≠ having authority to act on it** — paired with the
+  **Build Engine Authority Law:** *No state transition may become
+  physical-control authority until every action inside that transition has
+  an assigned owner, an allowed requester, a blocked-controller list, and a
+  proof artifact. If ownership is unknown, the VCU may simulate, monitor, or
+  request only — it may not directly control.* A state may be **simulated**
+  while ownership is pending; it may **not control physical hardware** until
+  every action inside it has owner · requester · monitor · blocked
+  controllers · proof artifact · verified source · test status.
+- Consequences: Binds all controls gates (Gate 05x and downstream). Every
+  state/action must carry an ownership label; the VCU coordinates but owns
+  nothing safety-critical without documentation (contactor / pre-charge /
+  HV-shutdown / torque ownership remain PENDING supplier architecture,
+  BQ-27). Ford-side factory networks stay listen-only unless officially
+  authorized; EV-side outputs stay isolated. Recorded in
+  `docs/status/GATE05D_OWNERSHIP_MATRIX.md`. Supersedes nothing.
+
 ## D-006 — Split the donor platform: 001A (7.3L gas) vs 001B (6.7L diesel)
 
 - Date: 2026-07-16

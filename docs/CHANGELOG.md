@@ -5,6 +5,41 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 38 + review_35: Gate 05D State Transition + Ownership Matrix
+
+- Archived batch_38 (Gate 05D ownership matrix) and review_35 1:1 (commit
+  `158dcba`). New rows RC-160..163 (no new CS). Section 46. New deliverable
+  `docs/status/GATE05D_OWNERSHIP_MATRIX.md` (11-state ownership matrix +
+  Final Responsibility Matrix). Owner: "major upgrade — VCU god-controller
+  risk reduced."
+- **Permanent doctrine promoted (Decision Register D-007):** the owner
+  elevated **Coordinator ≠ Owner · Requesting ≠ Commanding · Monitoring ≠
+  Approving · Seeing a signal ≠ having authority to act on it** to a
+  permanent Build Engine doctrine line, paired with the **Build Engine
+  Authority Law** (no state transition becomes physical-control authority
+  until every action has an owner, requester, blocked-controller list, and
+  proof artifact; unknown ownership → simulate/monitor/request only).
+- Owner corrections: READY_TO_DRIVE must not command torque — torque stays
+  strictly in DRIVE_ENABLED (RC-160); OFF is MONITOR only if a low-power
+  supervisor mode is awake, otherwise dormant (RC-161); ACCESSORY thermal
+  pumps run only if LV power budget + pump ownership + thermal-controller
+  authority are verified (RC-162); SERVICE_MODE requires HV de-energized +
+  LOTO + service disconnect removed + absence-of-voltage verification +
+  technician signoff (RC-163); EMERGENCY_SHUTDOWN "de-energize HV" →
+  "request HV de-energization through the authorized BMS/PDU/hardwired
+  safety architecture."
+- Gate 05D status = `STATE_OWNERSHIP_MATRIX_CREATED /
+  VCU_ROLE_LIMITS_DEFINED / FORD_SIDE_CONTROL_BLOCKED /
+  EV_SIDE_CONTROL_ISOLATED / CONTACTOR_OWNER_PENDING /
+  PRECHARGE_OWNER_PENDING / HV_SHUTDOWN_OWNER_PENDING /
+  TORQUE_AUTHORITY_PENDING / SERVICE_MODE_PHYSICAL_SAFETY_PENDING /
+  SIMULATION_ONLY`. Owner bottom line: CREATED / SIMULATION_ONLY /
+  OWNERSHIP PENDING.
+- Nothing ingested; nothing marked Confirmed; the VCU owns nothing
+  safety-critical; no invented threshold; no factory-cluster injection;
+  ODRs untouched. Next = Gate 05E (Interface Control Document / Signal
+  Authority Table).
+
 ## 2026-07-16 — RH batch 37 + review_34: Gate 05C Controls State Machine
 
 - Archived batch_37 (Gate 05C state machine) and review_34 1:1 (commit
