@@ -306,6 +306,8 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-205 | **HVIL row ownership cleanup (owner review_43)**: "VCU commands open sequence to control lines" → **"VCU requests shutdown / torque inhibit / fault latch; the BMS/PDU/hardwired safety loop owns physical contactor or isolation execution"** — keeps the VCU from owning HV isolation | batch_46 (VCU over-ownership) | n/a — controls-safety rule | **ControlsSafety** — recorded in `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` (extends D-007; links BQ-27) — lanes L7 |
 | RC-206 | **Service-clear stricter rule (owner review_43)**: a UDS Clear (0x14) may clear **software diagnostic records only** — it **must not clear active hardwired faults, active HVIL faults, active E-stop, BMS no-discharge, isolation fault, or an unresolved safety latch**; service clear requires **no active fault input + zero torque command + charger disconnected + safe/neutral state + technician authorization + fault source reviewed**; a diagnostic command alone must not restore drive readiness | batch_46 (over-permissive clear) | n/a — controls-safety rule | **NoGoConditionCandidate / ControlsSafety** — recorded in `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` — lanes L7/L8 |
 | RC-207 | **Failsafe block should be reviewable, not permanent (owner review_43)**: `VEHICLE_COMMISSIONING_APPROVAL = "PERMANENTLY_BLOCKED"` is too permanent → **`HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW`** + `SAFETY_CONFLATION_HALT`, then require **root-cause analysis + corrective action + repeat bench test + engineering signoff + versioned record** | batch_46 (over-permanent block) | n/a — process rule | **GateLogic / ControlsSafety** — recorded in `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` — lanes L7 |
+| RC-208 | **Bench values are target profiles / criteria (owner review_44, RECURRENCE of RC-202/203 — the Hunter re-emit did not apply them, and it adds new 05I-B criteria)**: the 05I-A values (>10% APPS skew, >25% accel, >5% shift, 13.5→8.5 V, ≥20 V/ms, 50 ms) STILL need `BENCH_TARGET_PROFILE / SUPPLIER_DATA_PENDING / CONTROLS_REVIEW_REQUIRED / NO_VEHICLE_AUTHORITY`, and the new 05I-B criteria (**<0.1 Ω** E-stop contact, **<0.02 Ω** ground, **≤20 ms** relay dropout, **5 A/10 A** fuses) need `TARGET_BENCH_CRITERIA / NEEDS_COMPONENT_DATASHEET / NEEDS_ENGINEERING_REVIEW` — "initial bench target only; final value pending supplier datasheet + controls-engineer review + bench evidence". Also the **"Blocked Outputs" column recurred mis-used** → Expected Safe Output (torque → zero) vs Blocked Outputs (non-zero torque after fault, CAN_1 transmission, factory-cluster injection, automatic fault clear, **direct contactor control by VCU**) | batch_47 (invented values / mislabeled column, recurrence) | n/a — parameter + schema rule | **NeedsSupplierData / NoGateAuthority** — recorded in `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` + `docs/status/GATE05I_B_MECHANICAL_INTERLOCKS.md` (extends RC-202/203) — lanes L7/L8 |
+| RC-209 | **05I-B breach logic must not hard-code limits (owner review_44)**: `IF ground_resistance_ohms >= 0.02 OR safety_relay_dropout_ms > 20.0` → **`IF ground_resistance_ohms >= approved_ground_limit OR safety_relay_dropout_ms > approved_datasheet_limit`** (limits are variables set from the approved datasheet / engineering review, not universal constants) → `HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW` | batch_47 (hard-coded limits) | n/a — gate-logic rule | **GateLogic / NoGateAuthority** — recorded in `docs/status/GATE05I_B_MECHANICAL_INTERLOCKS.md` (extends RC-207/208) — lanes L7/L8 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -3490,5 +3492,70 @@ continuity, shield continuity, bench LOTO verification). Queued in
   transmission; CAN_1 listen-only; the VCU requests but does not own HV
   isolation (BQ-27); no bench timing/percentage becomes a rule until
   controls review + supplier confirmation upgrades it.
+- Nothing ingested; nothing marked Confirmed; scripts are illustrative
+  pseudocode, not production code; Gate 05J NOT YET; ODRs untouched.
+
+---
+
+## 55. Batch 47 + owner review_44 — Gate 05I-A (revised) + Gate 05I-B Mechanical Interlocks (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_47_gate05ia_revised_gate05ib_interlocks.md`
+and `docs/research/raw/owner_reviews/review_44_batch_47_verdict.md`.
+Row additions: RC-208..RC-209 (no new CS). Deliverables:
+`docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` (updated) +
+`docs/status/GATE05I_B_MECHANICAL_INTERLOCKS.md` (new). Owner: "a very strong
+05I-A + 05I-B package … serious bench-validation structure; still not
+vehicle/HV/road-test approval."
+
+### 05I-A review_43 fixes realized in the re-emit
+
+The Hunter applied HVIL ownership (RC-205 — VCU requests, BMS/PDU/hardwired
+loop owns isolation), the **Service Clear Operational Law** (RC-206 — UDS
+0x14 clears software records only, six preconditions), and the 4-step
+RCA/corrective-action/repeat-test/engineering-signoff flow (RC-207 —
+`HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW`). Owner: "the Service Clear
+Operational Law is excellent … protects the system from a laptop 'clear'
+becoming a fake safety reset."
+
+### Recurrence caught + new criteria (RC-208)
+
+The re-emitted 05I-A matrix STILL carried hard timing/percentages and the
+mis-used "Blocked Outputs" column (RC-202/203 not applied by the Hunter),
+and 05I-B added new numeric criteria (<0.1 Ω / <0.02 Ω / ≤20 ms / 5 A-10 A).
+All labeled `BENCH_TARGET_PROFILE` (05I-A) / `TARGET_BENCH_CRITERIA /
+NEEDS_COMPONENT_DATASHEET / NEEDS_ENGINEERING_REVIEW` (05I-B); the safe
+torque-zero response is an **Expected Safe Output**, not a blocked output;
+**"direct contactor control by VCU"** added to the blocked-outputs set. This
+is the invented-values family's eighth artifact (RC-116/133/169/174/180/188/
+202/208).
+
+### 05I-B breach logic must not hard-code limits (RC-209)
+
+`IF ground_resistance_ohms >= 0.02 OR safety_relay_dropout_ms > 20.0` →
+`approved_ground_limit` / `approved_datasheet_limit` variables.
+
+### Status (owner review_44)
+
+Gate 05I-A adds `SERVICE_CLEAR_RULES_DEFINED / ROOT_CAUSE_FLOW_DEFINED`.
+Gate 05I-B = `MECHANICAL_INTERLOCK_MATRIX_CREATED /
+PHYSICAL_SAFETY_LOOP_TESTS_DEFINED / PRODUCTION_INTENT_HARNESS_REQUIRED /
+BENCH_LOTO_REQUIRED / TARGET_CRITERIA_PENDING_SOURCE_REVIEW / NO_LIVE_HV /
+NO_VEHICLE_CLEARANCE`.
+
+### Next
+
+Owner: **Gate 05I-C — Low-Voltage Communications Integration** (CAN_2
+VCU↔inverter, CAN_3 VCU↔BMS/PDU, display-node comm, diagnostic-tool comm,
+heartbeat, message filtering, DBC version matching, wrong-DTC/wrong-ID
+rejection, bus load under max frame density, no CAN_1 leakage during all
+comm tests). Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- Bench-only; no live HV; no vehicle motion; no Ford factory-bus
+  transmission; production-intent harness; bench LOTO; the VCU requests but
+  does not own HV isolation (BQ-27); no bench criterion becomes a rule until
+  component datasheet + engineering review confirms it.
 - Nothing ingested; nothing marked Confirmed; scripts are illustrative
   pseudocode, not production code; Gate 05J NOT YET; ODRs untouched.

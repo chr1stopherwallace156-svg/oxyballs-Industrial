@@ -443,35 +443,49 @@ safety-critical (BQ-27); D-007 + RC-168 bind. Blocked: real propulsion, live
 HV, wheels-on-ground, Ford ABS/ESC intervention, factory-cluster injection,
 road-test driver-safety claims (RC-201).
 
-## Gate 05I-B — Mechanical Interlocks & Physical Safety Loop Verification  · STATUS: NEXT (owner review_43)
+## Gate 05I-B — Mechanical Interlocks & Physical Safety Loop Verification  · STATUS: MECHANICAL_INTERLOCK_MATRIX_CREATED (batch_47)
 
-Bench-only physical safety-loop verification — the mechanical / hardwired
-counterpart to Gate 05I-A's logic verification.
+Deliverable `docs/status/GATE05I_B_MECHANICAL_INTERLOCKS.md` (12-row
+mechanical-interlock matrix + bench-run traceability package). Status
+(review_44): `MECHANICAL_INTERLOCK_MATRIX_CREATED /
+PHYSICAL_SAFETY_LOOP_TESTS_DEFINED / PRODUCTION_INTENT_HARNESS_REQUIRED /
+BENCH_LOTO_REQUIRED / TARGET_CRITERIA_PENDING_SOURCE_REVIEW / NO_LIVE_HV /
+NO_VEHICLE_CLEARANCE`. Owner: "the correct 'real harness' layer before
+anything touches the vehicle." Corrections: numeric criteria (<0.1 Ω / <0.02 Ω
+/ ≤20 ms / 5 A-10 A) → `TARGET_BENCH_CRITERIA / NEEDS_COMPONENT_DATASHEET /
+NEEDS_ENGINEERING_REVIEW` (RC-208); breach IF logic uses
+`approved_ground_limit` / `approved_datasheet_limit` variables, not
+hard-coded 0.02 Ω / 20 ms (RC-209). The re-emitted 05I-A also realized the
+review_43 fixes (HVIL ownership RC-205, Service Clear Operational Law RC-206,
+RCA flow RC-207) — Gate 05I-A now adds `SERVICE_CLEAR_RULES_DEFINED /
+ROOT_CAUSE_FLOW_DEFINED`.
 
-**Owner scope (review_43) — cover:**
+## Gate 05I-C — Low-Voltage Communications Integration  · STATUS: NEXT (owner review_44)
 
-> - E-stop circuit
-> - HVIL connectors
-> - service disconnect state
-> - charge-port interlock
-> - contactor simulator coil path
-> - safety relay dropout
-> - fuse / power distribution behavior
-> - low-voltage harness strain relief
-> - connector keying
-> - ground continuity
-> - shield continuity
-> - bench lockout/tagout verification
+Bench-only low-voltage communications integration — the comms counterpart to
+05I-A (logic) and 05I-B (mechanical).
+
+**Owner scope (review_44) — verify:**
+
+> - CAN_2 VCU ↔ inverter logic board
+> - CAN_3 VCU ↔ BMS/PDU logic board
+> - display node communication
+> - diagnostic tool communication
+> - heartbeat behavior
+> - message filtering
+> - DBC version matching
+> - wrong-DTC / wrong-ID rejection
+> - bus load under maximum frame density
+> - no CAN_1 leakage during all communication tests
 
 Enforce throughout — bench-only; no live HV, no vehicle motion, no Ford
-factory-bus transmission; E-stop / relay / coil timing measured not "instant"
-against schematic + datasheets (RC-198/204); CAN_1 protected-bench-only +
-listen-only (RC-200); the VCU requests but does not own HV isolation — the
-BMS/PDU/hardwired safety loop owns it (RC-205; BQ-27); no bench
-timing/percentage becomes a rule until controls review + supplier
-confirmation upgrades it (RC-202); BENCH result categories +
-HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW (RC-197/207). **Gate 05J / live
-vehicle commissioning is NOT YET.**
+factory-bus transmission; CAN_1 stays listen-only with the TXD-line proof
+(RC-186/200), no leakage during any comm test; the VCU requests but does not
+own HV isolation (RC-205; BQ-27); no timing/threshold/bus-load number
+becomes a rule until controls review + supplier/DBC confirmation upgrades it
+(RC-202/208); BENCH result categories + HARD_BLOCKED_PENDING_ROOT_CAUSE_
+REVIEW (RC-197/207/209). **Gate 05J / live vehicle commissioning is NOT
+YET.**
 
 Enforce throughout — every proof bench/HIL, no vehicle, no live-HV without a
 staged safety plan + LOTO/PPE (RC-117); no timeout/threshold/HIL timing

@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 46 + review_43 — Gate 05I-A Low-Voltage Driver Safety Logic Verification)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 46 + review_43); awaiting the Gate 05I-B Mechanical Interlocks & Physical Safety Loop Verification batch or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `09d1c55` (batch-46 archive); end commit: `a1e0bd5` (batch-46 reconciliation)
+- Work: new `GATE05I_A_DRIVER_SAFETY_LOGIC.md` (13-row driver-safety matrix + brake-override script + calibration record). RC-202..207 (no new CS). Section 54. Recurrence caught, seventh artifact (RC-202): >10%/>25%/>5% APPS + 13.5→8.5 V + 50/15/10 ms written as rules → BENCH_TARGET_PROFILE. Other corrections: expected-safe-output vs blocked-outputs (RC-203); no "immediate" (RC-204); HVIL VCU-requests-not-owns (RC-205); service-clear must not clear active safety faults (RC-206); PERMANENTLY_BLOCKED → HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW (RC-207). Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (invented-timing RC-116/133/169/174/180/188/202 — seven artifacts); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/HV-shutdown ownership.
+
 ## 2026-07-16 — Claude Code — task complete (batch 45 + review_42 — Gate 05I Physical Bench Integration)
 
 ### (archived handoff)

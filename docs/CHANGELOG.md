@@ -5,6 +5,47 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 47 + review_44: Gate 05I-A (revised) + Gate 05I-B Mechanical Interlocks
+
+- Archived batch_47 (Gate 05I-A revised + Gate 05I-B) and review_44 1:1
+  (commit `595bbbe`). New rows RC-208..209 (no new CS). Section 55.
+  Deliverables: `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` (updated) +
+  `docs/status/GATE05I_B_MECHANICAL_INTERLOCKS.md` (new). Owner: "a very
+  strong 05I-A + 05I-B package … serious bench-validation structure; still
+  not vehicle/HV/road-test approval."
+- **05I-A review_43 fixes realized in the re-emit:** HVIL ownership (RC-205
+  — VCU requests, BMS/PDU/hardwired loop owns isolation), the **Service
+  Clear Operational Law** (RC-206 — UDS 0x14 clears software records only,
+  six preconditions; owner: "excellent … protects against a laptop 'clear'
+  becoming a fake safety reset"), and the 4-step RCA/corrective-action/
+  repeat-test/engineering-signoff flow (RC-207). Gate 05I-A now adds
+  `SERVICE_CLEAR_RULES_DEFINED / ROOT_CAUSE_FLOW_DEFINED`.
+- **New: Gate 05I-B** — 12-row mechanical-interlock matrix (E-stop circuit,
+  HVIL connectors [made-last/broken-first], service-disconnect LOTO,
+  charge-port interlock, contactor-simulator coil path, safety-relay
+  dropout, fuse/PDB, strain relief, connector keying, ground continuity,
+  shield continuity, bench LOTO) + traceability package.
+- **Recurrence caught + new criteria (RC-208):** the re-emitted 05I-A matrix
+  STILL carried hard timing/percentages and the mis-used "Blocked Outputs"
+  column (RC-202/203 not applied by the Hunter), and 05I-B added new numeric
+  criteria (<0.1 Ω / <0.02 Ω / ≤20 ms / 5 A-10 A). All labeled
+  `BENCH_TARGET_PROFILE` / `TARGET_BENCH_CRITERIA / NEEDS_COMPONENT_DATASHEET
+  / NEEDS_ENGINEERING_REVIEW`; the torque-zero response is an expected safe
+  output, not a blocked output; "direct contactor control by VCU" added to
+  blocked outputs. Invented-values family's eighth artifact
+  (RC-116/133/169/174/180/188/202/208).
+- **05I-B breach logic (RC-209):** `IF ground_resistance_ohms >= 0.02 OR
+  safety_relay_dropout_ms > 20.0` → `approved_ground_limit` /
+  `approved_datasheet_limit` variables.
+- Gate 05I-B status = `MECHANICAL_INTERLOCK_MATRIX_CREATED /
+  PHYSICAL_SAFETY_LOOP_TESTS_DEFINED / PRODUCTION_INTENT_HARNESS_REQUIRED /
+  BENCH_LOTO_REQUIRED / TARGET_CRITERIA_PENDING_SOURCE_REVIEW / NO_LIVE_HV /
+  NO_VEHICLE_CLEARANCE`.
+- Nothing ingested; nothing marked Confirmed; scripts are pseudocode not
+  production code; the VCU requests but does not own HV isolation; Gate 05J
+  NOT YET; ODRs untouched. Next = Gate 05I-C (Low-Voltage Communications
+  Integration).
+
 ## 2026-07-16 — RH batch 46 + review_43: Gate 05I-A Low-Voltage Driver Safety Logic Verification
 
 - Archived batch_46 (Gate 05I-A) and review_43 1:1 (commit `09d1c55`). New
