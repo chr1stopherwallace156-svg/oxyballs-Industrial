@@ -283,6 +283,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-182 | **CAN_1 fault-injection bench boundary (owner review_39)**: the "FIU forces physical short CAN-H↔CAN-L" test may run **only on simulated OEM nodes or bench-harness replicas — forbidden on a live Ford factory network**; the strongest CAN_1 proof is not the short test but **silent-mode register dump + no TX mailbox allocation + no ACK participation + protocol-analyzer capture + oscilloscope confirmation of no dominant-bit drive** | batch_42 (unsafe-if-on-live-bus) | n/a — test boundary rule | **ControlsSafety / ProofRequirement** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7 |
 | RC-183 | **Power-loss safe-state is measured, not assumed (owner review_39)**: "all VCU low-side/high-side driver pins float open within <2 ms" is too absolute — pins do not become safe unless the circuit is designed that way → **measure driver-output behavior after power loss; the expected safe state depends on output-stage design, pull-ups/pull-downs, relay topology, and hardware fail-safe design; timing + final expected state require bench proof** | batch_42 (unproven hardware assumption) | n/a — test rule | **NeedsHardwareProof / ControlsSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7/L8 |
 | RC-184 | **Per-HIL-run proof-artifact package (owner review_39, new rule)**: every HIL run must record **HIL Run ID · firmware version · VCU hardware revision · test-script version · bench wiring diagram · simulated-node config · fault injected · raw CAN log · oscilloscope capture · power-rail log · state-transition log · observed latency · expected response · result category · authority status · engineer reviewer** (makes each bench run reusable evidence); Script B timeout must be **configurable** (`hil.get_config(...)`), not a hardcoded 100 ms max | owner-promoted | n/a — proof rule | **ProofRequirement / ControlsSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7 |
+| RC-185 | **Gate 05H is bench/HIL evidence, not "simulation only" (owner review_40)**: a real VCU DUT + real transceivers + supply + oscilloscope + FIU is bench evidence → split into **Gate 05H-A (simulation script draft, `SIMULATION_SCRIPT_DRAFT`), Gate 05H-B (low-voltage HIL bench execution with real VCU, `HIL_BENCH_OBSERVED / NO_VEHICLE_CLEARANCE`), Gate 05I (physical bench proof with production-like harness/components, NOT STARTED)**; a real HIL run returns **`HIL_OBSERVED_VALID / NO_LIVE_HV / NO_VEHICLE_CLEARANCE / NO_COMPLIANCE_AUTHORITY`**, not just SIMULATION_ONLY | owner-promoted | n/a — gate-structure rule | **GateStatus / ControlsSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7 |
+| RC-186 | **ACK / listen-only proof must watch the TX line (owner review_40)**: a shared-slot CAN analyzer cannot prove which node asserted the ACK → truly-silent CAN_1 proof requires **register dump (listen-only) + zero TX mailbox + TX pin disabled/disconnected/hardware-gated + oscilloscope probe on the VCU TX/TXD line + controlled bench bus with known ACK-capable nodes + analyzer log showing no VCU-originated frames**; criterion = **"VCU_TXD line remains inactive during the ACK slot and all frame periods"**, not the decoded `f.is_ack_asserted` flag | batch_43 (weak ACK proof) | n/a — proof rule | **ProofRequirement / ControlsSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` (strengthens RC-167/182) — lanes L7 |
+| RC-187 | **CAN-H/CAN-L short test is bench-only (owner review_40, hard warning)**: the FIU 500 ms CAN-H↔CAN-L short is **forbidden on a live Ford factory network**; it may run **only on a bench harness or simulated OEM-node network** | batch_43 (unsafe-if-on-live-bus) | n/a — test boundary rule | **ControlsSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` (reinforces RC-182) — lanes L7 |
+| RC-188 | **Timing Authority field + script return language (owner review_40)**: every HIL timing carries a **Timing Authority** label `SimulationSweepOnly / SupplierDataPending / HILObservedOnly` ("we observed 42.17 ms under this bench setup; this does not become the official safety limit"); scripts return **`HIL_OBSERVED_VALID_NO_GATE_AUTHORITY`** and **`HIL_NEEDS_REVIEW_NO_GATE_AUTHORITY`** (the latter replacing `MODEL_STRESS_FAILURE` unless the script crashed or violated a hard bench safety rule) | batch_43 (unlabeled timing / approval-sounding return) | n/a — parameter / test rule | **NoGateAuthority / ControlsSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` (extends RC-180/181) — lanes L7/L8 |
+| RC-189 | **LV bench-profile status labels (owner review_40)**: the HIL LV rail profiles (11.8–14.2 V, ≥20 V/ms slew, 0–5 V APPS) are plausible test setups but must be labeled **`TestBenchProfileCandidate / NotFinalVehicleRequirement / NeedsComponentSpec`** so they guide HIL setup without becoming final vehicle electrical requirements | batch_43 (unlabeled bench profile) | n/a — parameter rule | **NeedsSupplierData / TestBenchProfileCandidate** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7/L8 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -3195,5 +3200,72 @@ per the roadmap order 06 → 09 → 10 → 11), or a supplier reply / Gate
 - Low-voltage bench only; no live HV; no vehicle testing; CAN_1 listen-only
   (simulated, proof required); no HIL timing becomes a gate limit until a
   source/HIL-approved requirement upgrades it; bench execution not started.
+- Nothing ingested; nothing marked Confirmed; scripts are illustrative
+  pseudocode, not production code; ODRs untouched.
+
+---
+
+## 51. Batch 43 + owner review_40 — Gate 05H v2 (HIL refinement; 05H-A/05H-B/05I split) (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_43_gate05h_v2_hil_refinement.md`
+and `docs/research/raw/owner_reviews/review_40_batch_43_verdict.md`.
+Row additions: RC-185..RC-189 (no new CS). Deliverable **updated**:
+`docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md`. Owner: "strong Gate 05H
+draft … the right direction." (The Hunter had already applied the review_39
+fixes in-payload — configurable timeout, HIL-observed result categories, the
+measured-power-loss row, the artifact dossier — so this batch is the owner's
+next-level cleanup.)
+
+### The main structural upgrade — 05H is not "simulation only" (RC-185)
+
+A real VCU DUT + real transceivers + supply + oscilloscope + FIU is
+**bench/HIL evidence**. Gate 05H splits into **05H-A** (simulation script
+draft), **05H-B** (low-voltage HIL bench execution with a real VCU →
+`HIL_BENCH_OBSERVED / NO_VEHICLE_CLEARANCE`), and **05I** (physical bench
+proof with production-like harness/components — NOT STARTED). A real run
+returns `HIL_OBSERVED_VALID / NO_LIVE_HV / NO_VEHICLE_CLEARANCE /
+NO_COMPLIANCE_AUTHORITY`, never just SIMULATION_ONLY or PASS.
+
+### Other corrections
+
+- **ACK/listen-only proof must watch the TX line (RC-186):** a shared-slot
+  CAN analyzer can't prove which node ACKed → oscilloscope on the VCU
+  TX/TXD line + register dump + zero TX mailbox + TX-pin gated + controlled
+  bench bus + analyzer log; criterion = "VCU_TXD inactive during the ACK
+  slot and all frame periods," not `f.is_ack_asserted`.
+- **CAN-H/CAN-L short is bench-only (RC-187):** forbidden on a live Ford
+  network; bench harness / simulated OEM nodes only (reinforces RC-182).
+- **Timing Authority field + return language (RC-188):** every timing =
+  SimulationSweepOnly / SupplierDataPending / HILObservedOnly; scripts
+  return `HIL_OBSERVED_VALID_NO_GATE_AUTHORITY` /
+  `HIL_NEEDS_REVIEW_NO_GATE_AUTHORITY` (the latter replacing
+  MODEL_STRESS_FAILURE unless the script crashed / violated a hard bench
+  safety rule). (Fourth-gate recurrence of the invented-timing family,
+  RC-116/133/169/174/180.)
+- **LV bench-profile labels (RC-189):** 11.8–14.2 V, ≥20 V/ms, 0–5 V APPS =
+  `TestBenchProfileCandidate / NotFinalVehicleRequirement / NeedsComponentSpec`.
+
+### Gate 05H status (owner review_40)
+
+`HIL_TEST_PROTOCOL_DRAFTED` / `LOW_VOLTAGE_HIL_ONLY` / `REAL_VCU_DUT_ALLOWED`
+/ `NO_LIVE_HV` / `NO_VEHICLE_TESTING` / `NO_FACTORY_BUS_TRANSMISSION` /
+`TIMING_VALUES_NOT_GATE_AUTHORITY` / `ARTIFACT_PACKAGE_DEFINED` /
+`BENCH_EXECUTION_PENDING`. After a real run, Gate 05H-B = `HIL_RUN_OBSERVED /
+RAW_LOGS_CAPTURED / NO_VEHICLE_CLEARANCE / READY_FOR_ENGINEERING_REVIEW`.
+
+### Next
+
+Owner: **Gate 05I — Physical Bench Proof** (production-like wiring / harness
+/ components; runs only after 05H-B HIL bench observation + engineering
+review; still no vehicle, no live HV without a staged safety plan +
+LOTO/PPE). Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- Low-voltage HIL only; real VCU DUT allowed but no live HV / no vehicle /
+  no compliance authority; CAN_1 listen-only (bench/simulated, TXD-line
+  proof); no HIL timing becomes a gate limit until a source/HIL requirement
+  upgrades it; bench execution pending.
 - Nothing ingested; nothing marked Confirmed; scripts are illustrative
   pseudocode, not production code; ODRs untouched.

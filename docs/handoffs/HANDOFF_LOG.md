@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 42 + review_39 — Gate 05H HIL / Bench Test Protocol)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 42 + review_39); awaiting the owner's next batch (a further Gate 05 proof step or the Gate 06 deep dive) or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `1b06fcb` (batch-42 archive); end commit: `4e7e76e` (batch-42 reconciliation)
+- Work: new `GATE05H_HIL_BENCH_TEST_PROTOCOL.md` (HIL harness architecture, fault-injection matrix HIL-05G-001..006, two illustrative Python scripts, per-run proof-artifact package). RC-180..184 (no new CS). Section 50. Recurrence caught, fourth gate (RC-180): 10/20/50/100/2 ms + 3-cycle HIL timings written as real pass/fail limits → downgraded to SimulationSweepOnly/SupplierDataPending; header "Pass Criteria Metric" → "HIL Observation Metric / Candidate Pass Criteria". Other corrections: HIL-observed not PASS (RC-181); CAN_1 short bench-only (RC-182); power-loss safe-state measured not assumed (RC-183); per-run proof-artifact package (RC-184). Scripts illustrative pseudocode. Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (invented-timing RC-116/133/169/174/180 — five artifacts); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/HV-shutdown ownership.
+
 ## 2026-07-16 — Claude Code — task complete (batch 41 + review_38 — Gate 05G Fault Containment and Gateway Failsafe Matrix)
 
 ### (archived handoff)

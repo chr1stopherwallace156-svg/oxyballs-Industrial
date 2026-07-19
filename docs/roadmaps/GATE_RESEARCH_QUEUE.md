@@ -323,23 +323,47 @@ script timeout (RC-184). HIL gate rule kept:
 `logic_trace_captured == FALSE OR script_execution_status == UNRUN →
 BENCH_INTEGRATION_APPROVAL = BLOCKED, MONITOR_MODE = SIMULATION_SCRIPTS_ONLY`.
 
-## NEXT — owner's call (Gate 05I or return to Gate 06 deep dive)
+### Gate 05H refinement (batch_43 + review_40) — sub-gate split
 
-The owner did not name a Gate 05I after Gate 05H. Expected next inputs, in
-any order:
+Gate 05H is not "simulation only" — a real VCU DUT + transceivers + supply +
+scope + FIU is bench/HIL evidence (RC-185). Split: **05H-A** simulation
+script draft (`SIMULATION_SCRIPT_DRAFT`); **05H-B** low-voltage HIL bench
+execution with a real VCU (`HIL_BENCH_OBSERVED / NO_VEHICLE_CLEARANCE`);
+**05I** physical bench proof (NOT STARTED). Corrected Gate 05H status:
+`HIL_TEST_PROTOCOL_DRAFTED / LOW_VOLTAGE_HIL_ONLY / REAL_VCU_DUT_ALLOWED /
+NO_LIVE_HV / NO_VEHICLE_TESTING / NO_FACTORY_BUS_TRANSMISSION /
+TIMING_VALUES_NOT_GATE_AUTHORITY / ARTIFACT_PACKAGE_DEFINED /
+BENCH_EXECUTION_PENDING`. ACK proof now watches the VCU TX/TXD line
+(RC-186); CAN-H/CAN-L short bench-only (RC-187); Timing Authority field +
+`…_NO_GATE_AUTHORITY` returns (RC-188); LV rail profiles
+TestBenchProfileCandidate (RC-189). Deliverable updated
+`docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md`.
 
-- A further **Gate 05 proof step** (e.g. Gate 05I) if the owner continues
-  the controls-proof series.
+## Gate 05I — Physical Bench Proof  · STATUS: NEXT (owner review_40)
+
+Physical bench proof with production-like wiring / harness / components —
+runs only after Gate 05H-B HIL bench observation + engineering review.
+
+**Owner scope (review_40):** production-like harness/components; still **no
+vehicle and no live HV** without a staged safety plan + LOTO/PPE (RC-117).
+The transition is HIL bench observation → physical bench proof →
+(eventually, only after engineering sign-off) integrated testing.
+
+Enforce throughout — every proof bench/HIL, no vehicle, no live-HV without a
+staged safety plan + LOTO/PPE (RC-117); no timeout/threshold/HIL timing
+gains physical authority until a source/HIL requirement upgrades it from
+SimulationSweepOnly/HILObservedOnly to SupplierConfirmed/BenchVerified
+(RC-173/179/180/188); report HIL-observed, never PASS (RC-181/188); CAN_1
+listen-only with the TXD-line proof (RC-186), bench-only fault injection
+(RC-187); EV-side isolated; the VCU owns nothing safety-critical (BQ-27);
+D-007 + RC-168 bind.
+
+### Standing alternatives (any order)
+
 - The **Gate 06 deep dive** (Mechanical Mounting / Battery Enclosure) per
   the standing order after Gate 05: **06 → 09 → 10 → 11**.
 - A supplier reply, a Gate 08C reopen (supplier thresholds), a Gate 08B
   reopen (official standard PDFs), or Gate 07A/07C field data.
-
-Enforce throughout — every proof bench/HIL, no vehicle, no live-HV without a
-staged safety plan + LOTO/PPE (RC-117); no timeout/threshold gains physical
-authority until a source/HIL requirement upgrades it (RC-173/179/180); CAN_1
-listen-only; EV-side isolated; the VCU owns nothing safety-critical (BQ-27);
-D-007 + RC-168 bind.
 
 ## Gate 06 — Mechanical Mounting / Battery Enclosure  · STATUS: FIRST PASS DONE (batch_25)
 

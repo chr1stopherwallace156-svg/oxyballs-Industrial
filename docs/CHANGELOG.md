@@ -5,6 +5,40 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 43 + review_40: Gate 05H v2 (HIL refinement; 05H-A/05H-B/05I split)
+
+- Archived batch_43 (Gate 05H v2) and review_40 1:1 (commit `c075641`).
+  New rows RC-185..189 (no new CS). Section 51. Deliverable **updated**:
+  `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md`. Owner: "strong Gate 05H
+  draft … the right direction."
+- **Main structural upgrade — 05H is not "simulation only" (RC-185):** a
+  real VCU DUT + transceivers + supply + oscilloscope + FIU is bench/HIL
+  evidence → split into **Gate 05H-A** (simulation script draft), **Gate
+  05H-B** (low-voltage HIL bench execution with a real VCU →
+  `HIL_BENCH_OBSERVED / NO_VEHICLE_CLEARANCE`), **Gate 05I** (physical bench
+  proof, NOT STARTED). A real run returns `HIL_OBSERVED_VALID / NO_LIVE_HV /
+  NO_VEHICLE_CLEARANCE / NO_COMPLIANCE_AUTHORITY`, never just
+  SIMULATION_ONLY or PASS.
+- Other corrections: ACK/listen-only proof must watch the VCU TX/TXD line
+  (a shared-slot CAN analyzer can't prove which node ACKed) — criterion
+  "VCU_TXD inactive during the ACK slot and all frame periods," not
+  `f.is_ack_asserted` (RC-186); CAN-H/CAN-L 500 ms short is bench-only,
+  forbidden on a live Ford network (RC-187); every HIL timing carries a
+  Timing Authority label (SimulationSweepOnly / SupplierDataPending /
+  HILObservedOnly) and scripts return `…_NO_GATE_AUTHORITY` — fourth-gate
+  recurrence of the invented-timing family (RC-116/133/169/174/180) now
+  labeled (RC-188); LV rail profiles (11.8–14.2 V, ≥20 V/ms, 0–5 V APPS) =
+  TestBenchProfileCandidate / NotFinalVehicleRequirement / NeedsComponentSpec
+  (RC-189).
+- Corrected Gate 05H status = `HIL_TEST_PROTOCOL_DRAFTED /
+  LOW_VOLTAGE_HIL_ONLY / REAL_VCU_DUT_ALLOWED / NO_LIVE_HV /
+  NO_VEHICLE_TESTING / NO_FACTORY_BUS_TRANSMISSION /
+  TIMING_VALUES_NOT_GATE_AUTHORITY / ARTIFACT_PACKAGE_DEFINED /
+  BENCH_EXECUTION_PENDING`.
+- Nothing ingested; nothing marked Confirmed; no placeholder timing has
+  gate authority; scripts are pseudocode not production code; ODRs
+  untouched. Next = Gate 05I (Physical Bench Proof).
+
 ## 2026-07-16 — RH batch 42 + review_39: Gate 05H HIL / Bench Test Protocol
 
 - Archived batch_42 (Gate 05H) and review_39 1:1 (commit `1b06fcb`). New
