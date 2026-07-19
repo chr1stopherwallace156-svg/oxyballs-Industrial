@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 36 + review_33 — Gate 05B Controls Dependency Map)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 36 + review_33); awaiting Gate 05C Controls State Machine or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `ef1f337`; end commit: `974fb97` (batch-36 reconciliation)
+- Work: new `GATE05B_CONTROLS_DEPENDENCY_MAP.md`. RC-148..153. Gate 05A registry updated (S7-S11 EV-side signals; NO_PROPRIETARY_DBC_ASSUMPTIONS; transmit-config re-correction RC-148). VCU decisions = SimulationOnly; pre-charge/contactor/HV-shutdown authority may belong to BMS/PDU (BQ-27); driver warnings EV-side only, factory cluster BLOCKED; Fault Level 3 via BMS-PDU safety architecture. Section 44. Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner; Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/HV-shutdown ownership.
+
 ## 2026-07-16 — Claude Code — task complete (batch 35 + review_32 — Gate 08C parked + Gate 05A signal registry)
 
 ### (archived handoff)

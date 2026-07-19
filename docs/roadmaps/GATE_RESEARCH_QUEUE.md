@@ -212,23 +212,36 @@ are SimulationOnly (pre-charge/contactor/HV-shutdown authority may belong
 to the BMS/PDU — BQ-27, RC-150/152); driver warnings EV-side only, factory
 cluster BLOCKED_PENDING_AUTHORIZED_FORD_INTERFACE (RC-151).
 
-## Gate 05C — Controls State Machine  · STATUS: NEXT (owner review_33)
+## Gate 05C — Controls State Machine  · STATUS: STATE_MACHINE_DRAFTED (batch_37)
 
-Map every operating state; keep Ford-side receive-only, EV-side isolated,
-authority unconfirmed until supplier architecture proves ownership.
+Deliverable `docs/status/GATE05C_STATE_MACHINE.md` (11 states). Status
+(review_34): `STATE_MACHINE_DRAFTED / SIMULATION_ONLY /
+AUTHORITY_OWNERSHIP_UNRESOLVED / FORD_SIDE_SIGNALS_LISTEN_ONLY /
+EV_SIDE_OUTPUTS_ISOLATED / PRECHARGE_OWNER_PENDING /
+HV_SHUTDOWN_OWNER_PENDING / NO_PHYSICAL_TORQUE_CONTROL /
+NO_FACTORY_CLUSTER_INJECTION`. Every state carries an ownership label
+(RC-158); Ford signals don't gate real transitions (RC-155); pre-charge
+threshold ParameterPending (RC-156); E-shutdown/service-mode safety-worded
+(RC-157).
 
-**Owner scope (review_33) — states:** OFF · ACCESSORY · READY_REQUEST ·
-PRECHARGE_REQUEST · READY_TO_DRIVE · DRIVE_ENABLED · DERATE ·
-FAULT_LATCHED · SERVICE_MODE · CHARGE_CONNECTED · EMERGENCY_SHUTDOWN.
+## Gate 05D — State Transition + Ownership Matrix  · STATUS: NEXT (owner review_34)
 
-**For each state define:**
+Build the transition + ownership matrix. Keep the ownership discipline —
+the VCU coordinates but owns nothing safety-critical until supplier/Ford
+docs prove it (BQ-27).
 
-> - required inputs
-> - allowed EV-side outputs
-> - blocked Ford-side outputs
+**Owner scope (review_34) — per state, map:**
+
+> - state
+> - owner
+> - entry conditions
+> - exit conditions
+> - allowed outputs
+> - blocked outputs
 > - fault transitions
-> - proof artifact
-> - verification status
+> - required proof artifact
+> - authority status
+> - supplier data needed
 
 ## Gate 06 — Mechanical Mounting / Battery Enclosure  · STATUS: FIRST PASS DONE (batch_25)
 

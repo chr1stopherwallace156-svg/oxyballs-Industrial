@@ -5,6 +5,36 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 37 + review_34: Gate 05C Controls State Machine
+
+- Archived batch_37 (Gate 05C state machine) and review_34 1:1 (commit
+  `95179a8`). New rows RC-154..159 (no new CS). Section 45. New
+  deliverable `docs/status/GATE05C_STATE_MACHINE.md` (11 states). Owner:
+  "strong draft."
+- **Biggest upgrade — ownership labels (RC-158):** every state carries an
+  Owner (VCU / BMS / PDU / Inverter / Charger / Ford module / Hardwired
+  safety / Unknown-Pending) + VCU Role + Authority Status. The VCU
+  coordinates but cannot assume ownership of contactors / pre-charge / HV
+  shutdown / factory signals / cluster warnings; PRECHARGE_REQUEST,
+  READY_TO_DRIVE, EMERGENCY_SHUTDOWN owned by BMS/PDU/safety controller —
+  pending supplier arch (BQ-27).
+- Other corrections: Ford-side signals are `SimulationOnly /
+  CandidateSignal`, not real state-transition authority (RC-155);
+  pre-charge ">95%/timeout" → ParameterPending / SupplierDataRequired
+  (RC-156); EMERGENCY_SHUTDOWN requests through the authorized BMS/PDU
+  safety architecture + SERVICE_MODE requires HV de-energized/LOTO/
+  absence-of-voltage (RC-157); DRIVE_ENABLED gets the full pre-drive input
+  set.
+- Gate 05C status: STATE_MACHINE_DRAFTED / SIMULATION_ONLY /
+  AUTHORITY_OWNERSHIP_UNRESOLVED / FORD_SIDE_SIGNALS_LISTEN_ONLY /
+  EV_SIDE_OUTPUTS_ISOLATED / PRECHARGE_OWNER_PENDING /
+  HV_SHUTDOWN_OWNER_PENDING / NO_PHYSICAL_TORQUE_CONTROL /
+  NO_FACTORY_CLUSTER_INJECTION (RC-159).
+- Research Map + queue updated; **next = Gate 05D State Transition +
+  Ownership Matrix**; Gate 08C stays parked.
+- Nothing ingested; nothing Confirmed; no VCU-owned HV shutdown; no
+  invented threshold; no factory-cluster injection; ODRs untouched.
+
 ## 2026-07-16 — RH batch 36 + review_33: Gate 05B Controls Dependency Map
 
 - Archived batch_36 (Gate 05B controls dependency map) and review_33 1:1

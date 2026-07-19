@@ -371,17 +371,17 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_33):** **Gate 05C — Controls State
-Machine** — 11 states (OFF, ACCESSORY, READY_REQUEST, PRECHARGE_REQUEST,
-READY_TO_DRIVE, DRIVE_ENABLED, DERATE, FAULT_LATCHED, SERVICE_MODE,
-CHARGE_CONNECTED, EMERGENCY_SHUTDOWN), each with required inputs, allowed
-EV-side outputs, blocked Ford-side outputs, fault transitions, proof
-artifact, verification status. Keep Ford-side receive-only, EV-side
-isolated, **authority unconfirmed** until the BMS/PDU supplier
-architecture proves pre-charge/contactor/HV-shutdown ownership (BQ-27);
-**NEVER "PATS bypass"; no factory-cluster injection.** Verbatim scope in
-[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); Gate 05B
-map in `docs/status/GATE05B_CONTROLS_DEPENDENCY_MAP.md`. **Gate 08C is
+**Next expected batch (owner review_34):** **Gate 05D — State Transition +
+Ownership Matrix** — per state: state, owner, entry conditions, exit
+conditions, allowed outputs, blocked outputs, fault transitions, required
+proof artifact, authority status, supplier data needed. Keep the ownership
+discipline — the VCU **coordinates** but owns nothing safety-critical
+(contactors / pre-charge / HV shutdown) until the BMS/PDU supplier
+architecture proves it (BQ-27); Ford signals don't gate real transitions;
+**NEVER "PATS bypass"; no factory-cluster injection; no invented
+thresholds.** Verbatim scope in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); Gate 05C
+state machine in `docs/status/GATE05C_STATE_MACHINE.md`. **Gate 08C is
 parked**; Gate 07 artifacts + the 15-mode FMEA registry stay open. Order
 after 05: Gate 06 deep dive → 09 → 10 → 11.
 

@@ -252,6 +252,12 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-151 | **Driver-warning output rule (owner review_33)**: EV warnings (malfunction indicator, thermal, SOC) → **isolated display node / service laptop / prototype dashboard ONLY**; **factory cluster warning integration = `BLOCKED_PENDING_AUTHORIZED_FORD_INTERFACE`** | owner-promoted | n/a — output rule | **NoGoConditionCandidate** — no warning injected into the Ford factory cluster until an authorized Ford interface exists — lanes L7 |
 | RC-152 | **Emergency-shutdown authority (owner review_33)**: Fault Level 3 → **request** EV-side contactor open / torque inhibit / restart lockout **through the authorized BMS-PDU safety architecture**; `SimulationOnly` until BMS/PDU ownership + contactor-control authority confirmed; **the VCU does NOT automatically own final HV shutdown** unless the supplier architecture confirms it | owner-promoted | n/a — controls-safety rule | **NoGoConditionCandidate / ControlsSafety** — HV shutdown authority is a supplier-architecture question (BQ-27) — lanes L7/L8 |
 | RC-153 | **Gate 05B status (owner review_33)**: `CONTROL_DEPENDENCY_MAP_STARTED` / `SIMULATION_ONLY` / `FORD_SIDE_RECEIVE_ONLY` / `EV_SIDE_ISOLATED_CONTROL_ONLY` / `PRECHARGE_AUTHORITY_UNCONFIRMED` / `DRIVER_WARNING_OUTPUT_UNCONFIRMED` / `NO_PHYSICAL_TORQUE_CONTROL` / `NO_FACTORY_CLUSTER_INJECTION` | owner-promoted | n/a — gate status | **GateStatus** — next is Gate 05C (Controls State Machine) — lanes L7 |
+| RC-154 | **Gate 05C controls state machine (batch_37)**: 11 states (OFF, ACCESSORY, READY_REQUEST, PRECHARGE_REQUEST, READY_TO_DRIVE, DRIVE_ENABLED, DERATE, FAULT_LATCHED, SERVICE_MODE, CHARGE_CONNECTED, EMERGENCY_SHUTDOWN) each with required inputs / allowed EV-side outputs / blocked Ford-side outputs / fault transitions / proof artifact / verification status | batch_37 (Hunter-drafted) | n/a — state machine | **ControlsStateMachine** — recorded in `docs/status/GATE05C_STATE_MACHINE.md`; every state UNVERIFIED_STAGE — lanes L7 |
+| RC-155 | **Ford-side signals cannot be hard Required Inputs (owner review_34)**: listen-only Ford signals (ignition, brake, etc.) are **`SimulationOnly / CandidateSignal`** — not real state-transition authority until an official Ford/UIM source or verified capture exists; physical control uses verified EV-side / supplier-confirmed / hardwired-safety / authorized-upfitter inputs | owner-promoted (extends RC-140/145) | n/a — controls rule | **ControlsSafety** — an unverified Ford signal never gates a real state transition — lanes L7 |
+| RC-156 | **Pre-charge threshold is ParameterPending (owner review_34)**: the batch's ">95% of pack voltage / timeout" is **`ParameterPending / SupplierDataRequired`** → FAULT_LATCHED if pre-charge fails to reach the **supplier-defined target within the supplier-defined timeout** (no invented number) | batch_37 (invented threshold) | n/a — parameter | **NeedsSupplierData** — links BQ-27 (pre-charge ownership) — lanes L7/L8 |
+| RC-157 | **Emergency-shutdown + service-mode safety wording (owner review_34)**: EMERGENCY_SHUTDOWN → **request/trigger EV-side torque inhibit + contactor-open + restart lockout through the authorized BMS/PDU safety architecture; final HV isolation authority = BMS/PDU / hardwired E-stop — pending supplier arch**. SERVICE_MODE → **diagnostics only after HV de-energized + LOTO active + service disconnect removed + absence-of-voltage verification** (not a normal software action) | owner-promoted (extends RC-152/117) | n/a — controls-safety rule | **NoGoConditionCandidate / ControlsSafety** — the VCU does not own final HV shutdown; opening HVIL is never a routine software step — lanes L7/L8 |
+| RC-158 | **State ownership labels (owner review_34, biggest upgrade)**: every state carries **Owner ∈ {VCU, BMS, PDU, Inverter, Charger, Ford module, Hardwired safety circuit, Unknown/Pending supplier architecture}** + VCU Role + Authority Status; the VCU may **coordinate** but cannot assume ownership of contactors / pre-charge / HV shutdown / factory signals / cluster warnings until proven | owner-promoted | n/a — state-machine schema | **GateLogic** — recorded in `docs/status/GATE05C_STATE_MACHINE.md` — lanes L7 |
+| RC-159 | **Gate 05C status (owner review_34)**: `STATE_MACHINE_DRAFTED` / `SIMULATION_ONLY` / `AUTHORITY_OWNERSHIP_UNRESOLVED` / `FORD_SIDE_SIGNALS_LISTEN_ONLY` / `EV_SIDE_OUTPUTS_ISOLATED` / `PRECHARGE_OWNER_PENDING` / `HV_SHUTDOWN_OWNER_PENDING` / `NO_PHYSICAL_TORQUE_CONTROL` / `NO_FACTORY_CLUSTER_INJECTION` | owner-promoted | n/a — gate status | **GateStatus** — next is Gate 05D (State Transition + Ownership Matrix) — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -2754,4 +2760,58 @@ fault transitions, proof artifact, verification status. Queued in
 - Ford-side signals inform the model only; EV-side authority stays
   isolated until sources + DBCs + supplier ownership + test paths are
   proven; no factory-cluster injection; no VCU-owned HV shutdown yet.
+- Nothing ingested; nothing marked Confirmed; ODRs untouched.
+
+---
+
+## 45. Batch 37 + owner review_34 — Gate 05C Controls State Machine (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_37_gate05c_state_machine.md`
+and `docs/research/raw/owner_reviews/review_34_batch_37_verdict.md`.
+Row additions: RC-154..RC-159 (no new CS). Owner: "strong Gate 05C
+draft." Deliverable: `docs/status/GATE05C_STATE_MACHINE.md` (11 states).
+
+### The biggest upgrade — ownership labels (RC-158)
+
+Every state now carries an **Owner** (VCU / BMS / PDU / Inverter /
+Charger / Ford module / Hardwired safety circuit / Unknown-Pending), a
+**VCU Role**, and an **Authority Status**. The VCU may **coordinate** the
+state machine but cannot assume ownership of contactors, pre-charge, HV
+shutdown, factory signals, or cluster warnings until supplier/Ford docs
+prove it. PRECHARGE_REQUEST, READY_TO_DRIVE, and EMERGENCY_SHUTDOWN are
+owned by the **BMS/PDU/safety controller — pending supplier
+architecture** (BQ-27); the VCU role is request/monitor only.
+
+### Other corrections (owner)
+
+- **Ford-side signals are not hard Required Inputs (RC-155):**
+  listen-only Ford signals (ignition, brake) are `SimulationOnly /
+  CandidateSignal` — not real state-transition authority until an
+  official Ford/UIM source or verified capture exists.
+- **Pre-charge ">95%/timeout" → ParameterPending (RC-156):** FAULT_LATCHED
+  if pre-charge fails the **supplier-defined** target within the
+  **supplier-defined** timeout (no invented number).
+- **Emergency shutdown + service mode (RC-157):** E-shutdown **requests**
+  through the authorized BMS/PDU safety architecture (final HV isolation
+  authority pending); SERVICE_MODE diagnostics only after **HV
+  de-energized + LOTO + service disconnect removed + absence-of-voltage
+  verification** — opening HVIL is never a routine software action.
+- **DRIVE_ENABLED** now carries the full pre-drive input set (charger
+  disconnected, HVIL/isolation valid, no fault latch, pre-charge complete,
+  contactors confirmed by the safety controller, brake override + accel
+  plausibility, LV rail healthy, BMS allows discharge, inverter ready).
+
+### Next
+
+Owner: **Gate 05D — State Transition + Ownership Matrix** — per state:
+state, owner, entry conditions, exit conditions, allowed outputs, blocked
+outputs, fault transitions, required proof artifact, authority status,
+supplier data needed. Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- The VCU coordinates but owns nothing safety-critical yet; Ford signals
+  don't gate real transitions; no invented pre-charge number; no
+  factory-cluster injection; opening HVIL is not a routine software step.
 - Nothing ingested; nothing marked Confirmed; ODRs untouched.
