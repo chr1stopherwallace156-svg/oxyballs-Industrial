@@ -476,42 +476,45 @@ out-of-range / unexpected-diagnostic-request (RC-213). Split into 05I-C1 +
 05I-C2 (RC-214). (05I-A + 05I-B also gained the Expected-Safe-Output vs
 Blocked-Outputs column split, RC-203/208 realized.)
 
-## Gate 05I-C1 / 05I-C2 — Communication Network Integrity + Sleep/Wake  · STATUS: NETWORK_INTEGRITY_MATRIX_CREATED (batch_49)
+## Gate 05I-C1 / 05I-C2 — Communications & Power State Integrity  · STATUS: NETWORK_INTEGRITY_MATRIX_CREATED + SLEEP_WAKE_MATRIX_CREATED (batch_50)
 
-Deliverable `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (8-row comms +
-sleep/wake matrix, stress profiles, DBC version control). Status (review_46):
-`NETWORK_INTEGRITY_MATRIX_CREATED / SLEEP_WAKE_VALIDATION_INCLUDED /
-LOW_VOLTAGE_BENCH_ONLY / CAN_1_LISTEN_ONLY_PROOF_REQUIRED /
-DBC_VERSION_CONTROL_REQUIRED / HEARTBEAT_TARGETS_PENDING_SOURCE_REVIEW /
-SLEEP_CURRENT_TARGETS_PENDING_SOURCE_REVIEW / NO_LIVE_HV / NO_VEHICLE_MOTION /
-NO_LIVE_FORD_CAN_TRANSMISSION / NO_VEHICLE_CLEARANCE`. Owner: "exactly the
-right next gate … the real hidden-failure layer." Corrections: values are
-BENCH_TARGET_PROFILE + sleep current per-node/total-system + IF logic
-variables (RC-215); CAN_1 ACK proof via the VCU TXD path (RC-216); frame-fault
-layering — controller-level bad-CRC/DLC vs app-level wrong-ID/DBC/counter
-(RC-217); DBC version hash stored/declared/logged, mismatch =
-BENCH_HARD_BLOCK_PENDING_REVIEW (RC-218); CAN_1 bench interface simulated OEM
-/ protected only, no live Ford network (RC-219).
+Deliverable `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (v2: 05I-C1
+physical/protocol + application-layer + 6-row matrix; 05I-C2 per-node sleep
+current + 6-row matrix). Status (review_47): `NETWORK_INTEGRITY_MATRIX_CREATED
+/ SLEEP_WAKE_MATRIX_CREATED / LOW_VOLTAGE_BENCH_ONLY /
+CAN_1_LISTEN_ONLY_PROOF_REQUIRED / DBC_VERSION_HASH_REQUIRED /
+APPLICATION_LAYER_VALIDATION_DEFINED / PHYSICAL_CAN_FAULT_INJECTION_DEFINED /
+SLEEP_CURRENT_TARGETS_PENDING_SOURCE_REVIEW /
+HEARTBEAT_TIMEOUTS_PENDING_SOURCE_REVIEW / NO_LIVE_HV / NO_VEHICLE_MOTION /
+NO_LIVE_FORD_CAN_TRANSMISSION / NO_VEHICLE_CLEARANCE`. Owner: "now a real
+bench network-integrity gate; the DBC version hash + TXD-pin proof are
+excellent." review_46 fixes realized (RC-216/217/218 + C1/C2 split);
+review_47 corrections: values BENCH_TARGET_PROFILE + explicit per-node sleep
+current (RC-220); CAN_1 diagram simulated/protected only (RC-221);
+physical/protocol vs app-layer fault-injection wording (RC-222); brownout
+NVM-save needs early-warning hardware (RC-223).
 
-## Gate 05I-D — Low-Voltage End-to-End Bench Run / Integrated Fault Sequence  · STATUS: NEXT (owner review_46)
+## Gate 05I-D — Low-Voltage End-to-End Bench Run / Integrated Fault Cascades  · STATUS: NEXT (owner review_47)
 
-Test everything together as a **combined sequence** (not isolated tests) —
-the integration counterpart after 05I-A (logic), 05I-B (mechanical), 05I-C
-(comms/sleep-wake).
+Stop testing one thing at a time — subject the fully integrated low-voltage
+architecture (VCU + BMS logic + inverter logic + display + simulator
+interfaces, running dynamically in real-time) to coordinated off-nominal
+**fault cascades**.
 
-**Owner scope (review_46) — run as one sequence:**
+**Owner scope (review_47) — the 12 cascades:**
 
-> - driver input
-> - brake override
-> - E-stop
-> - HVIL open
-> - BMS no-discharge
-> - inverter fault
-> - CAN heartbeat loss
-> - display warning
-> - diagnostic lockout
-> - sleep/wake recovery
-> - CAN_1 silence
+> - active accelerator + brake override
+> - active torque request + HVIL open
+> - active torque request + BMS no-discharge
+> - active torque request + inverter fault
+> - active torque request + CAN_2 heartbeat loss
+> - charge-plug inserted during drive state
+> - E-stop during active torque request
+> - brownout during fault latch
+> - service-clear attempt during active fault
+> - sleep request with a stuck-awake node
+> - CAN_1 silence during every cascade
+> - display warning during every cascade
 
 Enforce throughout — bench-only; no live HV, no vehicle motion, no Ford
 factory-bus transmission; CAN_1 stays listen-only with the TXD-line proof +

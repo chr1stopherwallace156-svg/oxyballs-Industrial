@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 49 + review_46 — Gate 05I-C full comms + sleep/wake matrix, "48:75 B follow-up")
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 49 + review_46); awaiting the Gate 05I-D Integrated Fault Sequence batch or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `bffed4d` (batch-49 archive); end commit: `c074bfa` (batch-49 reconciliation)
+- Work: updated `GATE05I_C_COMMS_SLEEP_WAKE.md` to the full 8-row comms + sleep/wake matrix. RC-215..219 (no new CS). Section 57. Recurrence caught, tenth artifact (RC-215): all timings/percentages/currents → BENCH_TARGET_PROFILE, sleep current per-node + total-system, IF logic variables. Corrections: CAN_1 ACK proof via VCU TXD path (RC-216); frame-fault layering controller-vs-app (RC-217); DBC version hash stored/declared/logged, mismatch = BENCH_HARD_BLOCK_PENDING_REVIEW (RC-218); CAN_1 bench interface simulated/protected only (RC-219). Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (invented-values RC-116/133/169/174/180/188/202/208/212/215 — ten artifacts + "immediate" pattern RC-175/198/204/211); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/HV-shutdown ownership.
+
 ## 2026-07-16 — Claude Code — task complete (batch 48 + review_45 — Gate 05I-A final + 05I-B refined + 05I-C comms split C1/C2)
 
 ### (archived handoff)

@@ -371,20 +371,26 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_46):** **Gate 05I-D — Low-Voltage
-End-to-End Bench Run / Integrated Fault Sequence** — test everything together
-as a **combined sequence** (not isolated tests): driver input · brake
-override · E-stop · HVIL open · BMS no-discharge · inverter fault · CAN
-heartbeat loss · display warning · diagnostic lockout · sleep/wake recovery ·
-CAN_1 silence. The integration counterpart after 05I-A (logic), 05I-B
-(mechanical), and 05I-C (comms + sleep/wake). Bench-only; no live HV, no
-vehicle motion, no Ford factory-bus transmission; CAN_1 stays listen-only +
-no leakage (TXD-line proof, RC-186/216/219). Gate 05I-C
-(`GATE05I_C_COMMS_SLEEP_WAKE.md`) is `NETWORK_INTEGRITY_MATRIX_CREATED /
-SLEEP_WAKE_VALIDATION_INCLUDED` — values are BENCH_TARGET_PROFILE (RC-215),
-CAN_1 ACK proof via the VCU TXD path (RC-216), frame-fault layering
-controller-vs-app (RC-217), DBC version hash enforced (RC-218), CAN_1 bench
-interface simulated/protected only (RC-219). 05I-A/05I-B/05I-C all carry the
+**Next expected batch (owner review_47):** **Gate 05I-D — Low-Voltage
+End-to-End Bench Run / Integrated Fault Cascades** — stop testing one thing
+at a time; subject the fully integrated LV architecture (VCU + BMS logic +
+inverter logic + display + simulator interfaces, running dynamically) to the
+12 coordinated off-nominal cascades: accel+brake override · torque+HVIL open
+· torque+BMS no-discharge · torque+inverter fault · torque+CAN_2 heartbeat
+loss · charge-plug during drive · E-stop during active torque · brownout
+during fault latch · service-clear during active fault · sleep with a
+stuck-awake node · **CAN_1 silence during every cascade** · **display warning
+during every cascade**. The integration counterpart after 05I-A (logic),
+05I-B (mechanical), and 05I-C (comms + sleep/wake). Bench-only; no live HV,
+no vehicle motion, no Ford factory-bus transmission; CAN_1 stays listen-only
++ no leakage (TXD-pin proof, RC-186/216/219/221). Gate 05I-C
+(`GATE05I_C_COMMS_SLEEP_WAKE.md`) is v2 `NETWORK_INTEGRITY_MATRIX_CREATED /
+SLEEP_WAKE_MATRIX_CREATED / DBC_VERSION_HASH_REQUIRED /
+APPLICATION_LAYER_VALIDATION_DEFINED / PHYSICAL_CAN_FAULT_INJECTION_DEFINED`
+— values are BENCH_TARGET_PROFILE + per-node sleep current (RC-220), CAN_1
+diagram simulated/protected only (RC-221), physical/protocol vs app-layer
+fault-injection (RC-222), brownout NVM-save needs early-warning hardware
+(RC-223); DBC version hash enforced (RC-218). 05I-A/05I-B/05I-C all carry the
 Expected-Safe-Output vs Blocked-Outputs split; a DBC is a database not a
 packet (RC-213). **Gate 05J / live vehicle commissioning explicitly NOT
 YET.** Keep the ownership discipline — the VCU **coordinates** but owns
@@ -393,11 +399,11 @@ authority) until the BMS/PDU supplier architecture proves it (BQ-27); CAN_1
 stays listen-only; EV-side outputs stay isolated; **NEVER "PATS bypass"; no
 factory-cluster injection; no invented
 thresholds/timeouts/percentages/bus-loads/currents as gate logic
-(RC-173/179/180/188/202/208/212/215); bench evidence only.** Verbatim scope
-in [`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); permanent
-doctrine D-007: **Coordinator ≠ Owner**. **Gate 08C is parked**; Gate 07
-artifacts + the 15-mode FMEA registry stay open. Order after 05: Gate 06
-deep dive → 09 → 10 → 11.
+(RC-173/179/180/188/202/208/212/215/220); bench evidence only.** Verbatim
+scope in [`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md);
+permanent doctrine D-007: **Coordinator ≠ Owner**. **Gate 08C is parked**;
+Gate 07 artifacts + the 15-mode FMEA registry stay open. Order after 05:
+Gate 06 deep dive → 09 → 10 → 11.
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

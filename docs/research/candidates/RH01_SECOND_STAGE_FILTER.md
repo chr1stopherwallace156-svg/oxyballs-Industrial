@@ -318,6 +318,10 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-217 | **Frame-fault layering — controller vs application (owner review_46)**: **physical/protocol faults** (bad CRC, bit-stuffing error, bus error, DLC mismatch) are expected to be rejected by the **CAN controller hardware before application parsing**; **application/data faults** (wrong ID, wrong source address, wrong DBC version, bad alive counter, bad app checksum, out-of-range decoded values) are **application-layer validation tests** — do not conflate the two | batch_49 (layering conflation) | n/a — controls rule | **GateLogic / ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` — lanes L7 |
 | RC-218 | **DBC version hash/checksum required (owner review_46)**: the DBC version hash/checksum must be **stored in the Build Engine**; the **VCU firmware build declares its expected DBC version**; the **bench run logs the actual DBC version** used by the test tools; a **mismatch = `BENCH_HARD_BLOCK_PENDING_REVIEW`** — prevents the classic silent-nonsense-decode when the inverter/BMS DBC changes | owner-promoted | n/a — proof rule | **ProofRequirement / ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (extends RC-213) — lanes L7 |
 | RC-219 | **CAN_1 bench interface is simulated/protected only (owner review_46)**: the topography diagram's "Production CAN_1" must not imply a real Ford-bus connection → **"CAN_1 bench interface uses simulated OEM traffic or a protected bench harness only; no live Ford vehicle network connection is allowed during 05I-C"** | batch_49 (ambiguous diagram language) | n/a — test boundary rule | **ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (extends RC-182/187/192/200) — lanes L7 |
+| RC-220 | **Gate 05I-C v2 values are bench-target profiles + explicit per-node sleep current (owner review_47, RECURRENCE of RC-215 — eleventh artifact)**: ≤100 ms heartbeat, >15 ms latency, 50 ms UDS, ≤2.0 s sleep, ≤4.0 mA total sleep, ≤200 ms wakeup, ≤5.0 s stuck-awake, 6.0 V/9.0 V brownout, 75/90% bus load = `BENCH_TARGET_PROFILE / SUPPLIER_DATA_PENDING / CONTROLS_REVIEW_REQUIRED / NO_VEHICLE_AUTHORITY`; the (formatting-damaged) sleep-current list becomes explicit per node **`VCU_ / BMS_logic_ / PDU_logic_ / Inverter_logic_ / Display_ / Total_system_sleep_current_target`**, all bench-target-profile, final values pending supplier datasheets + parasitic-drain budget + engineering review | batch_50 (invented values, recurrence) | n/a — parameter rule | **NeedsSupplierData / NoGateAuthority** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (extends RC-202/208/212/215) — lanes L7/L8 |
+| RC-221 | **"Production CAN_1" diagram → simulated/protected only (owner review_47)**: "[Production CAN_1] → physical cut → VCU CAN_1 Transceiver" could read as a real Ford network nearby → **"[Simulated OEM CAN_1 Traffic / Protected Bench Harness] … physical isolation barrier … VCU CAN_1 Transceiver — passive listen-only, TXD monitored"** + **"No live Ford vehicle network may be connected during Gate 05I-C"** | batch_50 (misleading diagram) | n/a — test boundary rule | **ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (reinforces RC-219) — lanes L7 |
+| RC-222 | **Physical/protocol vs application fault-injection wording (owner review_47)**: bad CRC / bit-stuffing / form / bit errors are **physical/protocol-layer faults injected with a CAN fault-injection tool capable of corrupting frames below the application layer** (rejected by the CAN controller hardware); wrong ID / wrong source address / wrong DLC / bad alive counter / bad app checksum / out-of-range decoded values are **application-layer validation tests** — do not conflate the two test types | batch_50 (test-layer conflation) | n/a — controls rule | **GateLogic / ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (reinforces RC-217) — lanes L7 |
+| RC-223 | **Brownout NVM-save needs early-warning hardware (owner review_47)**: "VCU must save NVM variables before 6.0 V shutdown" only works with adequate warning/time/energy reserve → **"VCU shall preserve NVM integrity during brownout; if a graceful save is required, the early-warning threshold + hold-up capacitance + write-time budget + memory endurance must be verified"**; initial bench profile 6.0 V drop / 9.0 V recovery; final values pending VCU hardware design + bench proof | batch_50 (unproven hardware assumption) | n/a — hardware rule | **NeedsHardwareProof / ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (extends RC-183) — lanes L7/L8 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -3706,5 +3710,73 @@ CAN_1 silence), not isolated tests. Queued in `GATE_RESEARCH_QUEUE.md`.
   bench value becomes a rule until controls review + supplier/DBC
   confirmation upgrades it; the VCU requests but does not own HV isolation
   (BQ-27).
+- Nothing ingested; nothing marked Confirmed; scripts are illustrative
+  pseudocode, not production code; Gate 05J NOT YET; ODRs untouched.
+
+---
+
+## 58. Batch 50 + owner review_47 — Gate 05I-C v2 (full 05I-C1 + 05I-C2) (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_50_gate05ic_v2_c1_c2.md`
+and `docs/research/raw/owner_reviews/review_47_batch_50_verdict.md`.
+Row additions: RC-220..RC-223 (no new CS). Deliverable updated:
+`docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md`. Owner: "a strong Gate 05I-C
+draft … now a real bench network-integrity gate; the DBC version hash +
+TXD-pin proof are excellent."
+
+### review_46 fixes realized in the re-emit
+
+The Hunter applied: the C1/C2 split; the CAN_1 TXD-pin ACK proof (RC-216);
+the physical/protocol vs application-layer fault split (RC-217); the DBC
+version hash/checksum stored in the Build Engine + firmware-declared +
+bench-logged, mismatch = BENCH_HARD_BLOCK_PENDING_REVIEW (RC-218); per-node
+sleep-current targets. Owner: "excellent — prevents the classic silent
+wrong-scale/byte-order decode; the TXD-pin proof is the correct proof level."
+
+### Recurrence + new corrections
+
+- **Values still act like rules (RC-220, eleventh artifact):** all the 05I-C
+  timings/percentages/currents → `BENCH_TARGET_PROFILE`; the
+  formatting-damaged sleep-current list made explicit per node
+  (VCU/BMS/PDU/Inverter/Display/Total_system).
+- **CAN_1 diagram simulated/protected only (RC-221):** "Production CAN_1" →
+  "Simulated OEM CAN_1 Traffic / Protected Bench Harness"; no live Ford
+  network during 05I-C.
+- **Fault-injection wording (RC-222):** bad CRC/bit-stuffing via a CAN
+  fault-injection tool below the app layer; wrong-ID/DBC/counter are
+  app-layer.
+- **Brownout early-warning hardware (RC-223):** NVM save needs verified
+  early-warning threshold + hold-up capacitance + write-time budget +
+  memory endurance; 6.0 V/9.0 V are bench profile pending hardware design +
+  bench proof.
+
+### Gate 05I-C status (owner review_47)
+
+`NETWORK_INTEGRITY_MATRIX_CREATED / SLEEP_WAKE_MATRIX_CREATED /
+LOW_VOLTAGE_BENCH_ONLY / CAN_1_LISTEN_ONLY_PROOF_REQUIRED /
+DBC_VERSION_HASH_REQUIRED / APPLICATION_LAYER_VALIDATION_DEFINED /
+PHYSICAL_CAN_FAULT_INJECTION_DEFINED /
+SLEEP_CURRENT_TARGETS_PENDING_SOURCE_REVIEW /
+HEARTBEAT_TIMEOUTS_PENDING_SOURCE_REVIEW / NO_LIVE_HV / NO_VEHICLE_MOTION /
+NO_LIVE_FORD_CAN_TRANSMISSION / NO_VEHICLE_CLEARANCE`.
+
+### Next
+
+Owner: **Gate 05I-D — Low-Voltage End-to-End Bench Run / Integrated Fault
+Cascades** (12 cascades: accel+brake override, torque+HVIL open, torque+BMS
+no-discharge, torque+inverter fault, torque+CAN_2 heartbeat loss, charge-plug
+during drive, E-stop during active torque, brownout during fault latch,
+service-clear during active fault, sleep with stuck-awake node, CAN_1 silence
+during every cascade, display warning during every cascade). Owner approved
+detailing 05I-D next. Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- Bench-only; no live HV; no vehicle motion; no Ford factory-bus
+  transmission; CAN_1 listen-only (TXD-pin proof) + no leakage during any
+  cascade; DBC version hash enforced; no bench value becomes a rule until
+  controls review + supplier/DBC confirmation upgrades it; the VCU requests
+  but does not own HV isolation (BQ-27).
 - Nothing ingested; nothing marked Confirmed; scripts are illustrative
   pseudocode, not production code; Gate 05J NOT YET; ODRs untouched.

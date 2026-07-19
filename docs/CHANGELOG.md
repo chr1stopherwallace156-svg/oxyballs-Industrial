@@ -5,6 +5,39 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 50 + review_47: Gate 05I-C v2 (full 05I-C1 + 05I-C2)
+
+- Archived batch_50 (Gate 05I-C v2) and review_47 1:1 (commit `fa3e411`).
+  New rows RC-220..223 (no new CS). Section 58. Deliverable updated:
+  `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md`. Owner: "a strong Gate 05I-C
+  draft … now a real bench network-integrity gate; the DBC version hash +
+  TXD-pin proof are excellent."
+- **review_46 fixes realized in the re-emit:** the C1/C2 split; CAN_1 TXD-pin
+  ACK proof (RC-216); physical/protocol vs application-layer fault split
+  (RC-217); DBC version hash stored in the Build Engine + firmware-declared +
+  bench-logged, mismatch = BENCH_HARD_BLOCK_PENDING_REVIEW (RC-218);
+  per-node sleep-current targets.
+- **Recurrence + new corrections:** values still act like rules (RC-220,
+  eleventh artifact) — all 05I-C timings/percentages/currents →
+  BENCH_TARGET_PROFILE, sleep-current list made explicit per node
+  (VCU/BMS/PDU/Inverter/Display/Total_system); CAN_1 diagram
+  simulated/protected only, no live Ford network (RC-221); bad CRC/bit-
+  stuffing via a CAN fault-injection tool below the app layer vs app-layer
+  wrong-ID/DBC/counter (RC-222); brownout NVM-save needs verified
+  early-warning threshold + hold-up capacitance + write-time budget + memory
+  endurance (RC-223).
+- Gate 05I-C status = `NETWORK_INTEGRITY_MATRIX_CREATED /
+  SLEEP_WAKE_MATRIX_CREATED / LOW_VOLTAGE_BENCH_ONLY /
+  CAN_1_LISTEN_ONLY_PROOF_REQUIRED / DBC_VERSION_HASH_REQUIRED /
+  APPLICATION_LAYER_VALIDATION_DEFINED / PHYSICAL_CAN_FAULT_INJECTION_DEFINED
+  / SLEEP_CURRENT_TARGETS_PENDING_SOURCE_REVIEW /
+  HEARTBEAT_TIMEOUTS_PENDING_SOURCE_REVIEW / NO_LIVE_HV / NO_VEHICLE_MOTION /
+  NO_LIVE_FORD_CAN_TRANSMISSION / NO_VEHICLE_CLEARANCE`.
+- Nothing ingested; nothing marked Confirmed; scripts are pseudocode not
+  production code; Gate 05J NOT YET; ODRs untouched. Next = Gate 05I-D
+  (Low-Voltage End-to-End Bench Run / Integrated Fault Cascades, 12
+  cascades).
+
 ## 2026-07-16 — RH batch 49 + review_46: Gate 05I-C full comms + sleep/wake matrix ("48:75 B follow-up")
 
 - Archived batch_49 (Gate 05I-C full matrix) and review_46 1:1 (commit

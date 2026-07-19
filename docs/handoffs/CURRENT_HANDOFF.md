@@ -4,57 +4,55 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-16
-- Reason for handoff: task complete (batch 49 + review_46 — Gate 05I-C full
-  comms + sleep/wake matrix, delivered as "48:75 B follow-up"); awaiting the
-  Gate 05I-D Integrated Fault Sequence batch or a supplier reply
+- Reason for handoff: task complete (batch 50 + review_47 — Gate 05I-C v2,
+  full 05I-C1 + 05I-C2); awaiting the Gate 05I-D Integrated Fault Cascades
+  batch or a supplier reply
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `bffed4d` — Archive raw RH batch 49 + review_46 1:1
+- Start commit: `fa3e411` — Archive raw RH batch 50 + review_47 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- **Updated** file: **`docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md`** — now the
-  full 8-row comms + sleep/wake matrix (05I-C1 + 05I-C2), stress profiles,
-  DBC version control, isolation-resolution IF logic.
+- **Updated** file: **`docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md`** — v2:
+  05I-C1 (physical/protocol + application-layer + 6-row matrix) + 05I-C2
+  (per-node sleep current + 6-row matrix), CAN_1 simulated-only diagram,
+  brownout early-warning caveat, all values target-profile.
 - Files changed (reconciliation commit): that deliverable,
-  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (RC-215..219;
-  section 57 — no new CS), `docs/research/RESEARCH_MAP.md` ("next" → Gate
-  05I-D), `docs/roadmaps/GATE_RESEARCH_QUEUE.md` (05I-C1/C2 matrix created;
-  05I-D → NEXT with verbatim scope), `docs/CHANGELOG.md`, handoff files.
-  (Raw archives `batch_49_gate05ic_comms_matrix.md`,
-  `review_46_batch_49_verdict.md`, PROVENANCE committed separately as
-  `bffed4d`.)
-- Summary: the Gate 05I-C full matrix landed (owner: "exactly the right next
-  gate … the real hidden-failure layer") — CAN_1 silent mode, bus loading &
-  error integrity, DBC schema/scale mismatch, wrong-ID/corrupted-packet
-  rejection, loss-of-heartbeat timeout, diagnostic/UDS, sleep/wake &
-  quiescent current, network-induced wakeup + stress profiles + DBC version
-  control. **Recurrence caught, tenth artifact (RC-215):** all the
-  timings/percentages/currents (>15 ms, 100 ms, 50 ms, ≤2.0 s, ≤1.0 mA,
-  ≤200 ms, 75-90%, 10 m, 110 turns/m, >4.5 V, >150 °C) → BENCH_TARGET_PROFILE;
-  sleep current split per-node + total-system; IF logic made variable. Other
-  corrections: CAN_1 ACK proof via the VCU TXD path (RC-216); frame-fault
-  layering — controller-level bad-CRC/DLC vs app-level wrong-ID/DBC/counter
-  (RC-217); DBC version hash stored/declared/logged, mismatch =
-  BENCH_HARD_BLOCK_PENDING_REVIEW (RC-218); CAN_1 bench interface simulated
-  OEM / protected only, no live Ford network (RC-219). **Nothing ingested;
-  nothing Confirmed; scripts are pseudocode not production code; the VCU
-  requests but does not own HV isolation; Gate 05J NOT YET; ODRs untouched.**
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (RC-220..223;
+  section 58 — no new CS), `docs/research/RESEARCH_MAP.md` ("next" → Gate
+  05I-D w/ 12 cascades), `docs/roadmaps/GATE_RESEARCH_QUEUE.md` (05I-C v2;
+  05I-D → NEXT with the 12 cascades), `docs/CHANGELOG.md`, handoff files.
+  (Raw archives `batch_50_gate05ic_v2_c1_c2.md`,
+  `review_47_batch_50_verdict.md`, PROVENANCE committed separately as
+  `fa3e411`.)
+- Summary: Gate 05I-C v2 (owner: "now a real bench network-integrity gate;
+  the DBC version hash + TXD-pin proof are excellent"). The re-emit realized
+  review_46's C1/C2 split, TXD-pin ACK proof (RC-216), physical/protocol vs
+  app-layer split (RC-217), and DBC version hash (RC-218). **Recurrence +
+  new corrections:** values still act like rules (RC-220, eleventh artifact)
+  → BENCH_TARGET_PROFILE + explicit per-node sleep current; CAN_1 diagram
+  simulated/protected only (RC-221); bad CRC/bit-stuffing via a CAN
+  fault-injection tool below the app layer vs app-layer wrong-ID/DBC/counter
+  (RC-222); brownout NVM-save needs verified early-warning threshold +
+  hold-up capacitance + write-time budget + memory endurance (RC-223).
+  **Nothing ingested; nothing Confirmed; scripts are pseudocode not
+  production code; the VCU requests but does not own HV isolation; Gate 05J
+  NOT YET; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_49/review_46 archives are 1:1 against the
-  owner's chat ("48:75 B follow up"); the Gate 05I-C status + the RC-215..219
-  corrections + Gate 05I-D scope match the owner's verdict; nothing marked
-  Confirmed
+- Verified vs claimed: batch_50/review_47 archives are 1:1 against the
+  owner's chat ("49:75"); the Gate 05I-C v2 status + the RC-220..223
+  corrections + the Gate 05I-D 12-cascade scope match the owner's verdict;
+  nothing marked Confirmed
 
 ## State
 
@@ -67,8 +65,8 @@
   05C..05G done; 05H HIL_VALIDATION_PROTOCOL_CREATED (v3); 05I
   LOW_VOLTAGE_BENCH_INTEGRATION_STARTED; 05I-A FINAL_BASELINE_MATRIX_CREATED;
   05I-B MECHANICAL_INTERLOCK_MATRIX_CREATED; 05I-C
-  NETWORK_INTEGRITY_MATRIX_CREATED / SLEEP_WAKE_VALIDATION_INCLUDED
-  (`GATE05I_C_COMMS_SLEEP_WAKE.md`); 05I-D Integrated Fault Sequence NEXT;
+  NETWORK_INTEGRITY_MATRIX_CREATED + SLEEP_WAKE_MATRIX_CREATED (v2,
+  `GATE05I_C_COMMS_SLEEP_WAKE.md`); 05I-D Integrated Fault Cascades NEXT;
   Gate 05J / live vehicle commissioning NOT YET**; 07 v0.1 / 07B / 07C v0.4
   PARKED; 08 FMEA_REGISTRY_CREATED (15 modes); 08B PARKED; **08C
   SIMULATION_SWEEP_MATRIX_CREATED — PARKED_FOR_SUPPLIER_DATA**. Order after
@@ -76,19 +74,18 @@
 - Build artifacts: all `docs/status/GATE05*` files (through
   `GATE05I_C_COMMS_SLEEP_WAKE.md`), `MASS_LEDGER.md`,
   `AXLE_CG_CALCULATOR.md`, `FMEA_REGISTRY.md`, `DRAFT_VALIDATION_08C.md`.
-- Doctrine: **D-007** + RC-168 + RC-173/179/180/188/202/208/212/215 (no
+- Doctrine: **D-007** + RC-168 + RC-173/179/180/188/202/208/212/215/220 (no
   unproven timing/percentage/criterion/bus-load/current as gate logic) +
   RC-190/191/197 (HIL/bench is evidence, not vehicle authority) + RC-205
   (VCU requests, does not own HV isolation) + RC-206 (service-clear never
-  clears active safety faults) + RC-213 (a DBC is a database not a packet) +
-  RC-218 (DBC version hash enforced) bind all Gate 05x + downstream controls
-  work.
+  clears active safety faults) + RC-213/218 (a DBC is a database, version
+  hash enforced) bind all Gate 05x + downstream controls work.
 - Open owner decisions (accumulated): (1) elektron-os-clean; (2) index.html;
   (3) L2; (4) L4; (5) L6; (6) L9 lane name; (7) Artifact Intake Form; (8)
   M10 forbidden-phrase + regression scanner (now covers PATS bypass,
   ZF-CAN/duty, gas/diesel, compliance-labels, transmit-config, the
-  invented-values family RC-116/133/169/174/180/188/202/208/212/215 — ten
-  artifacts — and the "instant/immediate" pattern RC-175/198/204/211;
+  invented-values family RC-116/133/169/174/180/188/202/208/212/215/220 —
+  eleven artifacts — and the "instant/immediate" pattern RC-175/198/204/211;
   strongest scanner case); (9)(10)(11) Dana / ZF / Ford-Lee letters; (12)
   supplier reminder; (13) official Ford BBLB + IVM + FMVSS 305a/105 + paid
   Gate 08B standards + official Ford UIM/BBAS/J1939 docs + supplier BMS/
@@ -100,32 +97,36 @@
 ## Next exact action
 
 Expected next inputs, in any order: (a) the **Gate 05I-D Low-Voltage
-End-to-End Bench Run / Integrated Fault Sequence batch** (scope in
-`GATE_RESEARCH_QUEUE.md`; 05I-C matrix in `GATE05I_C_COMMS_SLEEP_WAKE.md`) —
-test everything together as a **combined sequence** (driver input, brake
-override, E-stop, HVIL open, BMS no-discharge, inverter fault, CAN heartbeat
-loss, display warning, diagnostic lockout, sleep/wake recovery, CAN_1
-silence), not isolated tests. **Enforce: bench-only — no live HV, no vehicle
-motion, no Ford factory-bus transmission; CAN_1 listen-only + no leakage
-(TXD-line proof, RC-186/216/219); a DBC is a database not a packet +
-version-hash enforced (RC-213/218); no timing/threshold/bus-load/current
-becomes a rule until controls review + supplier/DBC confirmation upgrades it
-(RC-202/208/212/215); no "immediate" — measured window (RC-211); the VCU
-requests but does not own HV isolation (RC-205; BQ-27); BENCH result
-categories + HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW (RC-197/207/209); NEVER
-"PATS bypass"; nothing Confirmed; no compliance claim; Gate 05J NOT YET.**
-(b) The **Gate 06 deep dive** (Mechanical Mounting / Battery Enclosure) per
-the standing order after Gate 05 (06 → 09 → 10 → 11). (c) A Gate 08C reopen
-if supplier thresholds land. (d) Gate 08B reopen if official standard PDFs
-arrive. (e) Gate 07A/07C field data. (f) A supplier reply — archive 1:1,
-reconcile, move the matching BQ to the Resolution log. (g) The owner
-approves/sends a letter — record Sent + date, start that BQ's 7/14/21-day
-clock. Enforce throughout: nothing Confirmed; no compliance/"safe" claim;
-NEVER "PATS bypass" or bus spoofing; NEVER invent a threshold / timeout /
-percentage / criterion / bus-load / current / grant a placeholder
-pass-block; no Ford signal is confirmed until an official source proves it;
-the VCU does not own HV shutdown until supplier architecture confirms it;
-keep diesel data out of the 001A gas model (D-006).
+End-to-End Bench Run / Integrated Fault Cascades batch** (scope in
+`GATE_RESEARCH_QUEUE.md`; 05I-C v2 in `GATE05I_C_COMMS_SLEEP_WAKE.md`) — the
+12 coordinated off-nominal cascades (accel+brake override, torque+HVIL open,
+torque+BMS no-discharge, torque+inverter fault, torque+CAN_2 heartbeat loss,
+charge-plug during drive, E-stop during active torque, brownout during fault
+latch, service-clear during active fault, sleep with a stuck-awake node,
+CAN_1 silence during every cascade, display warning during every cascade)
+with all components running dynamically. **Enforce: bench-only — no live HV,
+no vehicle motion, no Ford factory-bus transmission; CAN_1 listen-only + no
+leakage during any cascade (TXD-pin proof, RC-186/216/219/221); a DBC is a
+database not a packet + version-hash enforced (RC-213/218); no
+timing/threshold/bus-load/current becomes a rule until controls review +
+supplier/DBC confirmation upgrades it (RC-202/208/212/215/220); no
+"immediate" — measured window (RC-211); every fault defaults toward torque
+inhibit + restart lockout + engineering review (RC-179); the VCU requests
+but does not own HV isolation (RC-205; BQ-27); BENCH result categories +
+HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW (RC-197/207/209); NEVER "PATS bypass";
+nothing Confirmed; no compliance claim; Gate 05J NOT YET.** (b) The **Gate
+06 deep dive** (Mechanical Mounting / Battery Enclosure) per the standing
+order after Gate 05 (06 → 09 → 10 → 11). (c) A Gate 08C reopen if supplier
+thresholds land. (d) Gate 08B reopen if official standard PDFs arrive. (e)
+Gate 07A/07C field data. (f) A supplier reply — archive 1:1, reconcile, move
+the matching BQ to the Resolution log. (g) The owner approves/sends a letter
+— record Sent + date, start that BQ's 7/14/21-day clock. Enforce throughout:
+nothing Confirmed; no compliance/"safe" claim; NEVER "PATS bypass" or bus
+spoofing; NEVER invent a threshold / timeout / percentage / criterion /
+bus-load / current / grant a placeholder pass-block; no Ford signal is
+confirmed until an official source proves it; the VCU does not own HV
+shutdown until supplier architecture confirms it; keep diesel data out of the
+001A gas model (D-006).
 
 ## Forbidden actions
 
@@ -145,10 +146,10 @@ keep diesel data out of the 001A gas model (D-006).
   any Gate 08C placeholder value as a pass/block RC-133; unverified
   Ford-side CAN IDs/rates/PGNs RC-137/140/145; the pre-charge >95% number
   RC-156; the gateway/failsafe/HIL timeouts RC-169/173/174/179/180/188; the
-  bench profiles RC-189; the Gate 05I-A/05I-B/05I-C bench
-  values/criteria/percentages/bus-loads/currents RC-202/208/212/215).
+  bench profiles RC-189; the Gate 05I bench
+  values/criteria/percentages/bus-loads/currents RC-202/208/212/215/220).
 - Do not mix 6.7L diesel weight/CG into the 7.3L gas model (D-006).
-- **Gate 05 (D-007 + RC-168 + RC-173/179/180/188/202/208/212/215 +
+- **Gate 05 (D-007 + RC-168 + RC-173/179/180/188/202/208/212/215/220 +
   RC-190/191/197 + RC-205/206/213/218 bind): authorized/listen-only only —
   no anti-theft bypass, no fake/spoofed ABS/ESC messages, no transmit onto
   factory Ford safety buses without approval (RC-136/142/148); accel-pedal
@@ -163,21 +164,22 @@ keep diesel data out of the 001A gas model (D-006).
   signal cannot be both a request and a hardware actuation unless the source
   says so (RC-168); a DBC is a database not a packet + version-hash enforced,
   mismatch hard-blocks (RC-213/218); frame-fault layering — controller-level
-  bad-CRC/DLC vs app-level wrong-ID/DBC/counter (RC-217); Ford source
+  bad-CRC/DLC/bit-stuffing (via a CAN fault-injection tool below the app
+  layer) vs app-level wrong-ID/DBC/counter (RC-217/222); Ford source
   controllers stay generic until proven (RC-166); CAN_1 stays listen-only
   (not "modified", RC-172; simulated/bench + non-destructive fault injection
-  only, RC-182/187/192/193/200/219; TXD-line ACK proof, RC-186/216; no
-  leakage during comm/sleep tests) with the RC-167 proof pack; no timeout /
-  heartbeat / alive-counter / torque-zero / shutdown / contactor-open / HIL
-  timing / bench percentage / mechanical criterion / bus-load / sleep-current
-  becomes physical gate logic until supplier docs / datasheet / DBC or
-  HIL/bench proof + controls review
-  (RC-173/174/179/180/188/202/208/212/215); no "instant"/"immediate"
+  only, RC-182/187/192/193/200/219/221; TXD-pin ACK proof, RC-186/216; no
+  leakage during comm/sleep/cascade tests) with the RC-167 proof pack; no
+  timeout / heartbeat / alive-counter / torque-zero / shutdown /
+  contactor-open / HIL timing / bench percentage / mechanical criterion /
+  bus-load / sleep-current becomes physical gate logic until supplier docs /
+  datasheet / DBC or HIL/bench proof + controls review
+  (RC-173/174/179/180/188/202/208/212/215/220); no "instant"/"immediate"
   mechanical/E-stop/torque action — measured latency vs schematic +
-  datasheets (RC-175/198/204/211); power-loss safe-state measured not
-  assumed (RC-183); HIL scripts report `…_NO_VEHICLE_AUTHORITY` /
-  `HIL_HARD_BLOCK`, Gate 05I/05I-A/05I-B/05I-C report BENCH categories, never
-  PASS (RC-181/188/191/197); HIL/bench results are not
+  datasheets (RC-175/198/204/211); power-loss safe-state + brownout NVM-save
+  measured/hardware-verified not assumed (RC-183/223); HIL scripts report
+  `…_NO_VEHICLE_AUTHORITY` / `HIL_HARD_BLOCK`, Gate 05I* report BENCH
+  categories, never PASS (RC-181/188/191/197); HIL/bench results are not
   vehicle/live-HV/compliance authority (RC-190); every run produces the
   proof-artifact package + calibration records (RC-184/194) + pre-test
   safety checklist (RC-195); expected-safe-output ≠ blocked-output
@@ -185,8 +187,8 @@ keep diesel data out of the 001A gas model (D-006).
   RCA recovery, not permanent (RC-207); breach limits are variables not
   hard-coded constants (RC-209/215); Gate 05H split 05H-A/05H-B/05I
   (RC-185); Gate 05I low-voltage only, harness production-intent
-  (RC-196/199); Gate 05I-A/05I-B/05I-C/05I-D driver-safety + interlocks +
-  comms + integration are bench-only (RC-201/214); Gate 05J / live vehicle
+  (RC-196/199); Gate 05I-A..05I-D driver-safety + interlocks + comms +
+  integration are bench-only (RC-201/214); Gate 05J / live vehicle
   commissioning is NOT YET; every torque / contactor / BMS-discharge / HVIL /
   isolation / e-stop fault defaults toward torque inhibit + restart lockout +
   engineering review (RC-179).**
