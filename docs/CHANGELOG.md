@@ -5,6 +5,48 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 44 + review_41: Gate 05H v3 (physical HIL/bench evidence)
+
+- Archived batch_44 (Gate 05H v3) and review_41 1:1 (commit `5690e91`).
+  New rows RC-190..196 (no new CS). Section 52. Deliverable **updated**:
+  `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md`. Owner: "the best Gate
+  05H version so far … the direction is right." (Also handled a duplicate
+  re-send of "43:75" just before — recorded as a PROVENANCE
+  duplicate-delivery note, commit `58d155b`, no new evidence/rows/section.)
+- **The upgrade — HIL is now real bench evidence, cleaned of
+  vehicle-approval language:** evidence boundary (RC-190) — HIL results are
+  real low-voltage HIL / bench evidence scoped to this DUT / firmware /
+  harness / simulated-node setup, never vehicle-level control authority,
+  live-HV approval, road-test approval, or compliance proof without
+  engineering review + supplier confirmation + later gates; stricter result
+  categories (RC-191) — `…_NO_VEHICLE_AUTHORITY`, `HIL_HARD_BLOCK` (CAN_1
+  TXD activity / factory-bus transmit leakage), `HIL_INVALID_RUN` (missing
+  artifact package).
+- Bench-safety corrections: CAN-H/CAN-L 500 ms short is bench-only
+  (protected harness, simulated OEM nodes, current-limited; forbidden on a
+  live Ford network / customer vehicle) (RC-192); non-destructive TX fault
+  — controlled stuck-dominant/TXD through a protected path, no destructive
+  MCU/transceiver-pin shorting unless the fixture is designed for it
+  (RC-193); instrument calibration records added to the artifact package
+  (RC-194); mandatory Gate 05H pre-test safety checklist — no live HV / no
+  battery pack / no contactor coil unless part of the LV test /
+  current-limited supply / bench E-stop / fused DUT / wiring reviewed /
+  firmware hash / CAN_1 to sim nodes only / raw logging before fault
+  injection (RC-195).
+- **Gate 05I defined low-voltage (RC-196):** production-like LV bench
+  integration (real harness / VCU / BMS-PDU / inverter controller) with no
+  traction-battery HV, no vehicle road testing, no Ford factory bus
+  transmission — 05I must not jump to live HV or vehicle testing.
+- Corrected Gate 05H status = `HIL_VALIDATION_PROTOCOL_CREATED /
+  REAL_VCU_DUT_ALLOWED / LOW_VOLTAGE_HIL_ONLY /
+  PHYSICAL_TRANSCEIVER_EVIDENCE_REQUIRED / CAN_1_LISTEN_ONLY_PROOF_REQUIRED
+  / NO_LIVE_HV / NO_REAL_VEHICLE_NETWORK / NO_VEHICLE_TESTING /
+  NO_COMPLIANCE_AUTHORITY / PENDING_ENGINEERING_REVIEW`.
+- Nothing ingested; nothing marked Confirmed; no placeholder timing has
+  gate authority; scripts are pseudocode not production code; no vehicle /
+  live-HV / compliance authority; ODRs untouched. Next = Gate 05I (Physical
+  low-voltage Bench Integration).
+
 ## 2026-07-16 — RH batch 43 + review_40: Gate 05H v2 (HIL refinement; 05H-A/05H-B/05I split)
 
 - Archived batch_43 (Gate 05H v2) and review_40 1:1 (commit `c075641`).

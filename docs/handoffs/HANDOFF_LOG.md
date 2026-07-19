@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 43 + review_40 — Gate 05H v2 HIL refinement; 05H-A/05H-B/05I split)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 43 + review_40); awaiting the Gate 05I Physical Bench Proof batch or a supplier reply. (A byte-identical duplicate re-send of "43:75" arrived afterward — recorded as a PROVENANCE note, commit `58d155b`, no new work.)
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `c075641` (batch-43 archive); end commit: `960ff3c` (batch-43 reconciliation)
+- Work: updated `GATE05H_HIL_BENCH_TEST_PROTOCOL.md` to v2. RC-185..189 (no new CS). Section 51. Main upgrade (RC-185): 05H is not simulation-only → split 05H-A / 05H-B / 05I. Other corrections: ACK proof watches the VCU TX/TXD line (RC-186); CAN short bench-only (RC-187); Timing Authority field + `…_NO_GATE_AUTHORITY` returns (RC-188); LV rail profiles TestBenchProfileCandidate (RC-189). Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (invented-timing RC-116/133/169/174/180/188 — five artifacts); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/HV-shutdown ownership.
+
 ## 2026-07-16 — Claude Code — task complete (batch 42 + review_39 — Gate 05H HIL / Bench Test Protocol)
 
 ### (archived handoff)

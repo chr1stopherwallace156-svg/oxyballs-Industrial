@@ -288,6 +288,13 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-187 | **CAN-H/CAN-L short test is bench-only (owner review_40, hard warning)**: the FIU 500 ms CAN-H↔CAN-L short is **forbidden on a live Ford factory network**; it may run **only on a bench harness or simulated OEM-node network** | batch_43 (unsafe-if-on-live-bus) | n/a — test boundary rule | **ControlsSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` (reinforces RC-182) — lanes L7 |
 | RC-188 | **Timing Authority field + script return language (owner review_40)**: every HIL timing carries a **Timing Authority** label `SimulationSweepOnly / SupplierDataPending / HILObservedOnly` ("we observed 42.17 ms under this bench setup; this does not become the official safety limit"); scripts return **`HIL_OBSERVED_VALID_NO_GATE_AUTHORITY`** and **`HIL_NEEDS_REVIEW_NO_GATE_AUTHORITY`** (the latter replacing `MODEL_STRESS_FAILURE` unless the script crashed or violated a hard bench safety rule) | batch_43 (unlabeled timing / approval-sounding return) | n/a — parameter / test rule | **NoGateAuthority / ControlsSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` (extends RC-180/181) — lanes L7/L8 |
 | RC-189 | **LV bench-profile status labels (owner review_40)**: the HIL LV rail profiles (11.8–14.2 V, ≥20 V/ms slew, 0–5 V APPS) are plausible test setups but must be labeled **`TestBenchProfileCandidate / NotFinalVehicleRequirement / NeedsComponentSpec`** so they guide HIL setup without becoming final vehicle electrical requirements | batch_43 (unlabeled bench profile) | n/a — parameter rule | **NeedsSupplierData / TestBenchProfileCandidate** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7/L8 |
+| RC-190 | **HIL evidence is real but not vehicle authority (owner review_41)**: "timing limits, thresholds, and electrical behaviors mapped here constitute real HIL and bench tracking evidence" → **"measured here constitute real low-voltage HIL / bench evidence for this DUT, firmware version, harness, and simulated-node setup; they do not become vehicle-level control authority, live-HV approval, road-test approval, or compliance proof without engineering review, supplier confirmation where required, and later physical bench / vehicle gates"** | batch_44 (over-broad authority framing) | n/a — evidence-boundary rule | **ControlsSafety / NoVehicleAuthority** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7 |
+| RC-191 | **Stricter HIL result categories (owner review_41)**: `HIL_OBSERVED_VALID` → **`HIL_OBSERVED_VALID_NO_VEHICLE_AUTHORITY`**; review cases → **`HIL_NEEDS_REVIEW_NO_VEHICLE_AUTHORITY`** (incl. measured latency exceeding the configured threshold); dangerous bench violations (CAN_1 TXD activity, factory-bus transmit leakage) → **`HIL_HARD_BLOCK`**; missing artifact package → **`HIL_INVALID_RUN`** | batch_44 (approval-sounding categories) | n/a — test rule | **NoGateAuthority / ControlsSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` (extends RC-181/188) — lanes L7 |
+| RC-192 | **CAN-H/CAN-L 500 ms short is bench-only (owner review_41, hard rule)**: permitted **only on a protected HIL bench harness with simulated OEM nodes, current-limited equipment, and replaceable/protected transceivers**; **forbidden on a live Ford factory network or customer vehicle** | batch_44 (unsafe-if-on-live-bus) | n/a — test boundary rule | **ControlsSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` (strengthens RC-182/187) — lanes L7 |
+| RC-193 | **TX-pin fault must be non-destructive (owner review_41)**: "FIU shorts the VCU transceiver TX pin directly to Ground" → **"FIU injects a controlled stuck-dominant / stuck-TXD fault through a protected fault-injection path approved for the transceiver circuit"**; **direct destructive shorting of MCU/transceiver pins is forbidden unless the bench fixture is designed for that fault mode** (test the failure behavior, don't destroy hardware) | batch_44 (destructive test method) | n/a — test-safety rule | **ControlsSafety / HardwareSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7 |
+| RC-194 | **Instrument calibration records in the artifact package (owner review_41)**: since calibrated lab instruments are cited, every HIL run must record **oscilloscope serial/calibration date · CAN-analyzer serial/firmware · programmable-supply serial/calibration date · FIU hardware revision** | owner-promoted (extends RC-184) | n/a — proof rule | **ProofRequirement** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7 |
+| RC-195 | **Mandatory Gate 05H pre-test safety checklist (owner review_41, new rule)**: before any 05H run — **no live HV connected · no real battery pack · no real contactor coil unless explicitly part of the LV bench test · current-limited supply active · bench E-stop available · fused DUT supply · test-bench wiring reviewed · firmware hash recorded · CAN_1 connected only to simulated/bench OEM nodes · raw logging enabled before fault injection** | owner-promoted | n/a — bench-safety rule | **ControlsSafety / HardwareSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` — lanes L7 |
+| RC-196 | **Gate 05I is low-voltage only (owner review_41)**: Gate 05I (Physical Bench Integration) must **not** jump to live HV or vehicle testing → it means **production-like low-voltage bench integration** (real harness, real VCU, real or supplier-representative BMS/PDU controller, real inverter controller if possible) with **no traction-battery HV, no vehicle road testing, no Ford factory bus transmission** | owner-promoted | n/a — gate-scope rule | **GateStatus / ControlsSafety** — recorded in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md`; scoped in `GATE_RESEARCH_QUEUE.md` — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -3267,5 +3274,77 @@ LOTO/PPE). Queued in `GATE_RESEARCH_QUEUE.md`.
   no compliance authority; CAN_1 listen-only (bench/simulated, TXD-line
   proof); no HIL timing becomes a gate limit until a source/HIL requirement
   upgrades it; bench execution pending.
+- Nothing ingested; nothing marked Confirmed; scripts are illustrative
+  pseudocode, not production code; ODRs untouched.
+
+---
+
+## 52. Batch 44 + owner review_41 — Gate 05H v3 (physical HIL/bench evidence) (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_44_gate05h_v3_physical_hil_evidence.md`
+and `docs/research/raw/owner_reviews/review_41_batch_44_verdict.md`.
+Row additions: RC-190..RC-196 (no new CS). Deliverable **updated**:
+`docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md`. Owner: "the best Gate 05H
+version so far … the direction is right." (The Hunter had folded the
+review_40 fixes into the payload — the 05H-A/05H-B/05I framing, the physical
+DUT, the TXD-line scope proof, the configurable timeout — so this batch is
+the owner's honest-language + bench-safety cleanup.)
+
+**Note — duplicate "43:75" re-send handled just before this batch:** the
+owner re-sent the "43:75" message byte-identical; recorded as a
+duplicate-delivery note in PROVENANCE (no new evidence/rows/section), commit
+`58d155b`.
+
+### The upgrade — HIL is now real bench evidence, cleaned of vehicle-approval language
+
+- **Evidence boundary (RC-190):** HIL results are real low-voltage HIL /
+  bench evidence **scoped to this DUT / firmware / harness / simulated-node
+  setup** — never vehicle-level control authority, live-HV approval,
+  road-test approval, or compliance proof without engineering review +
+  supplier confirmation + later gates.
+- **Result categories (RC-191):** `…_NO_VEHICLE_AUTHORITY`,
+  `HIL_HARD_BLOCK` (CAN_1 TXD activity / factory-bus transmit leakage),
+  `HIL_INVALID_RUN` (missing artifact package).
+
+### Bench-safety corrections
+
+- **CAN short bench-only hard rule (RC-192):** protected harness, simulated
+  OEM nodes, current-limited; forbidden on a live Ford network / customer
+  vehicle.
+- **Non-destructive TX fault (RC-193):** controlled stuck-dominant/TXD fault
+  through a protected path; no destructive MCU/transceiver-pin shorting
+  unless the fixture is designed for it.
+- **Calibration records (RC-194)** + **mandatory pre-test safety checklist
+  (RC-195):** no live HV / no battery pack / no contactor coil unless part
+  of the LV test / current-limited supply / bench E-stop / fused DUT /
+  wiring reviewed / firmware hash / CAN_1 to sim nodes only / raw logging
+  before fault injection.
+- **Gate 05I is low-voltage only (RC-196):** production-like LV bench
+  integration (real harness/VCU/BMS-PDU/inverter controller); no
+  traction-battery HV, no vehicle road test, no Ford factory bus transmit.
+
+### Gate 05H status (owner review_41)
+
+`HIL_VALIDATION_PROTOCOL_CREATED` / `REAL_VCU_DUT_ALLOWED` /
+`LOW_VOLTAGE_HIL_ONLY` / `PHYSICAL_TRANSCEIVER_EVIDENCE_REQUIRED` /
+`CAN_1_LISTEN_ONLY_PROOF_REQUIRED` / `NO_LIVE_HV` / `NO_REAL_VEHICLE_NETWORK`
+/ `NO_VEHICLE_TESTING` / `NO_COMPLIANCE_AUTHORITY` /
+`PENDING_ENGINEERING_REVIEW`. After a real run, Gate 05H-B =
+`HIL_RUN_OBSERVED / RAW_LOGS_CAPTURED / ARTIFACT_PACKAGE_COMPLETE /
+ENGINEERING_REVIEW_PENDING / NO_VEHICLE_CLEARANCE`.
+
+### Next
+
+Owner: **Gate 05I — Physical (low-voltage) Bench Integration** (RC-196
+scope). Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- Low-voltage HIL only; real VCU DUT but no live HV / no real vehicle
+  network / no vehicle testing / no compliance authority; CAN_1 listen-only
+  (TXD-line proof); destructive fault injection only on a fixture designed
+  for it; no HIL timing becomes a gate limit until engineering review /
+  supplier confirmation upgrades it.
 - Nothing ingested; nothing marked Confirmed; scripts are illustrative
   pseudocode, not production code; ODRs untouched.

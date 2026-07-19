@@ -339,15 +339,35 @@ BENCH_EXECUTION_PENDING`. ACK proof now watches the VCU TX/TXD line
 TestBenchProfileCandidate (RC-189). Deliverable updated
 `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md`.
 
-## Gate 05I — Physical Bench Proof  · STATUS: NEXT (owner review_40)
+### Gate 05H v3 refinement (batch_44 + review_41)
 
-Physical bench proof with production-like wiring / harness / components —
-runs only after Gate 05H-B HIL bench observation + engineering review.
+Owner: "the best Gate 05H version so far." Now framed as **real low-voltage
+HIL / bench evidence** (real VCU DUT + transceivers + FIU + calibrated
+instruments), cleaned of vehicle-approval language. Corrected status:
+`HIL_VALIDATION_PROTOCOL_CREATED / REAL_VCU_DUT_ALLOWED / LOW_VOLTAGE_HIL_ONLY
+/ PHYSICAL_TRANSCEIVER_EVIDENCE_REQUIRED / CAN_1_LISTEN_ONLY_PROOF_REQUIRED /
+NO_LIVE_HV / NO_REAL_VEHICLE_NETWORK / NO_VEHICLE_TESTING /
+NO_COMPLIANCE_AUTHORITY / PENDING_ENGINEERING_REVIEW`. Corrections: evidence
+boundary — HIL results are DUT/firmware/harness-scoped, not vehicle/live-HV/
+compliance authority (RC-190); result categories `…_NO_VEHICLE_AUTHORITY` /
+`HIL_HARD_BLOCK` / `HIL_INVALID_RUN` (RC-191); CAN short bench-only hard rule
+(RC-192); non-destructive TX fault (RC-193); calibration records (RC-194);
+mandatory pre-test safety checklist (RC-195). Deliverable updated
+`docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md`.
 
-**Owner scope (review_40):** production-like harness/components; still **no
-vehicle and no live HV** without a staged safety plan + LOTO/PPE (RC-117).
-The transition is HIL bench observation → physical bench proof →
-(eventually, only after engineering sign-off) integrated testing.
+## Gate 05I — Physical (LOW-VOLTAGE) Bench Integration  · STATUS: NEXT (owner review_41)
+
+Production-like **low-voltage** bench integration — runs only after Gate
+05H-B HIL bench observation + engineering review. **Gate 05I must not jump
+to live HV or vehicle testing (RC-196).**
+
+**Owner scope (review_41):** real harness · real VCU · real or
+supplier-representative BMS/PDU controller · real inverter controller if
+possible — with **no traction-battery HV, no vehicle road testing, no Ford
+factory bus transmission**. The transition is HIL bench observation →
+production-like low-voltage bench integration → (eventually, only after
+engineering sign-off + a staged safety plan + LOTO/PPE) any HV/integrated
+testing.
 
 Enforce throughout — every proof bench/HIL, no vehicle, no live-HV without a
 staged safety plan + LOTO/PPE (RC-117); no timeout/threshold/HIL timing

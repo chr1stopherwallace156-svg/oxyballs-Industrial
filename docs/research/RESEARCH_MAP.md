@@ -371,28 +371,33 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_40):** **Gate 05I — Physical Bench
-Proof** (production-like wiring / harness / components; runs only after Gate
-05H-B HIL bench observation + engineering review; still **no vehicle and no
-live HV** without a staged safety plan + LOTO/PPE, RC-117). Gate 05H was
-split (RC-185): **05H-A** simulation script draft / **05H-B** low-voltage
-HIL bench execution with a real VCU (`HIL_BENCH_OBSERVED /
-NO_VEHICLE_CLEARANCE`) / **05I** physical bench proof (NEXT). Keep the
-ownership discipline — the VCU **coordinates** but owns nothing
-safety-critical (contactors / pre-charge / HV shutdown / torque authority)
-until the BMS/PDU supplier architecture proves it (BQ-27); CAN_1 stays
-listen-only (TXD-line proof, RC-186; bench-only fault injection, RC-187);
-EV-side outputs stay isolated; every proof is bench/HIL, no vehicle, no
-live-HV without a staged safety plan + LOTO/PPE (RC-117); **NEVER "PATS
-bypass"; no factory-cluster injection; no invented thresholds/timeouts as
-gate logic until a proof upgrades them (RC-173/179/180/188); report
-HIL-observed, never PASS (RC-181/188).** Verbatim scope in
-[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); Gate 05H HIL
-protocol in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` (timings
-SimulationSweepOnly / HILObservedOnly; permanent doctrine D-007:
-**Coordinator ≠ Owner**). **Gate 08C is parked**; Gate 07 artifacts + the
-15-mode FMEA registry stay open. Order after 05: Gate 06 deep dive → 09 →
-10 → 11.
+**Next expected batch (owner review_41):** **Gate 05I — Physical
+(low-voltage) Bench Integration** — production-like LV bench integration
+(real harness · real VCU · real or supplier-representative BMS/PDU · real
+inverter controller if possible) with **no traction-battery HV, no vehicle
+road testing, no Ford factory bus transmission**; Gate 05I **must not** jump
+to live HV or vehicle testing (RC-196). Runs only after Gate 05H-B HIL bench
+observation + engineering review; still no live HV without a staged safety
+plan + LOTO/PPE (RC-117). Gate 05H v3 is now framed as **real low-voltage
+HIL / bench evidence** (real VCU DUT), cleaned of vehicle-approval language —
+results are DUT/firmware/harness-scoped, never vehicle/live-HV/compliance
+authority (RC-190); result categories `…_NO_VEHICLE_AUTHORITY` /
+`HIL_HARD_BLOCK` / `HIL_INVALID_RUN` (RC-191); CAN short bench-only (RC-192);
+non-destructive TX fault (RC-193); calibration records (RC-194); mandatory
+pre-test safety checklist (RC-195). Keep the ownership discipline — the VCU
+**coordinates** but owns nothing safety-critical (contactors / pre-charge /
+HV shutdown / torque authority) until the BMS/PDU supplier architecture
+proves it (BQ-27); CAN_1 stays listen-only (TXD-line proof, RC-186;
+bench-only fault injection, RC-187/192); EV-side outputs stay isolated;
+**NEVER "PATS bypass"; no factory-cluster injection; no invented
+thresholds/timeouts as gate logic until a proof upgrades them
+(RC-173/179/180/188); report HIL-observed, never vehicle-authority
+(RC-190/191).** Verbatim scope in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); Gate 05H
+protocol in `docs/status/GATE05H_HIL_BENCH_TEST_PROTOCOL.md` (permanent
+doctrine D-007: **Coordinator ≠ Owner**). **Gate 08C is parked**; Gate 07
+artifacts + the 15-mode FMEA registry stay open. Order after 05: Gate 06
+deep dive → 09 → 10 → 11.
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.
