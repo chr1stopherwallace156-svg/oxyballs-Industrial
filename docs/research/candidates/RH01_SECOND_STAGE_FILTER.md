@@ -262,6 +262,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-161 | **OFF-state monitor scope (owner review_35)**: a truly asleep VCU cannot monitor much → VCU Role = **"MONITOR only if low-power supervisor mode is active; otherwise dormant."** Sleep-state monitoring may be owned by the **LV supervisor / BMS keep-alive** | batch_38 (over-stated monitor role) | n/a — ownership detail | **GateLogic** — recorded in `docs/status/GATE05D_OWNERSHIP_MATRIX.md` — lanes L7 |
 | RC-162 | **ACCESSORY thermal-pump limit (owner review_35)**: "power delivery to thermal cooling pumps" needs a limit → **pumps may run only if LV power budget + pump ownership + thermal-controller authority are verified**, so the VCU does not become the thermal-controller owner too early | batch_38 (unbounded output) | n/a — ownership limit | **NeedsSupplierData / ControlsSafety** — recorded in `docs/status/GATE05D_OWNERSHIP_MATRIX.md` — lanes L7/L8 |
 | RC-163 | **SERVICE_MODE physical-safety language (owner review_35)**: SERVICE_MODE must state that physical maintenance requires **HV de-energized + LOTO active + service disconnect removed (if applicable) + absence-of-voltage verification + technician signoff**; the VCU cannot make service "safe" by software alone | owner-promoted (extends RC-157) | n/a — controls-safety rule | **NoGoConditionCandidate / ControlsSafety** — recorded in `docs/status/GATE05D_OWNERSHIP_MATRIX.md` — lanes L7/L8 |
+| RC-164 | **Pre-charge ICD signal must be split (owner review_36)**: the batch_39 "Pre-Charge Inception Flag" mixes request + status + hardware actuation in one signal → decompose into **VCU_Precharge_Request** (VCU→BMS/PDU, transmit request only, BLOCKED until supplier protocol confirms request allowed), **BMS_Precharge_Status** (BMS/PDU→VCU, receive, MONITOR), **Precharge_Relay_Coil_Control** (BMS/PDU or hardwired safety controller→relay, hardware actuation, **BLOCKED for VCU unless supplier architecture explicitly assigns it**) | batch_39 (over-broad signal) | n/a — ICD rule | **ControlsSafety** — recorded in `docs/status/GATE05E_ICD_SIGNAL_AUTHORITY.md` (4a/4b/4c); links BQ-27 — lanes L7 |
+| RC-165 | **Emergency-shutdown ICD signal must be split + renamed (owner review_36)**: "Emergency Shutdown Inhibit Command" ("inhibit" wrongly reads as *preventing* shutdown) → decompose into **VCU_Torque_Zero_Request** (VCU/Inverter, CAN_2, pending inverter DBC + HIL), **VCU_Shutdown_Request_To_BMS** (owner BMS/PDU, VCU requester only, pending supplier protocol), **Hardwired_EStop_Open_Circuit** (owner hardwired safety loop, VCU monitor only, **no software override**), **BMS_Contactor_Open_Status** (owner BMS/PDU, VCU monitor, receive only) — keeps torque inhibit separate from HV de-energization | batch_39 (ambiguous signal) | n/a — ICD rule | **ControlsSafety** — recorded in `docs/status/GATE05E_ICD_SIGNAL_AUTHORITY.md` (7a/7b/7c/7d) — lanes L7 |
+| RC-166 | **Ford source controllers stay generic (owner review_36)**: batch_39's "Ford PCM / Accelerator Hub Module" and "Ford ABS / Brake Pedal Sensor Module" are **too specific** → use **"Ford factory module / UIM path — pending verification"** until the Ford source or a passive capture proves the exact module | batch_39 (unproven module attribution) | n/a — ICD rule | **NeedsFordExactSource / ListenOnlyCandidate** — recorded in `docs/status/GATE05E_ICD_SIGNAL_AUTHORITY.md` — lanes L7 |
+| RC-167 | **Listen-only proof requirement (owner review_36)**: a Ford-side listen-only claim requires **silent/listen-only interface mode + no ACK participation + no transmit mailbox enabled + capture log attached + hardware-configuration screenshot attached** (makes the "no transceiver ACK activation" artifact a hard rule; strengthens Gate 05A) | owner-promoted | n/a — proof rule | **ControlsSafety / ProofRequirement** — recorded in `docs/status/GATE05E_ICD_SIGNAL_AUTHORITY.md` — lanes L7 |
+| RC-168 | **Signal-decomposition doctrine (owner review_36)**: **a signal cannot be both a request and a hardware actuation unless the source document explicitly says so**; every safety-critical action decomposes into **request · status · feedback · hardware-actuation · fault** signals — one signal name may not imply more authority than it has | owner-promoted (extends D-007) | n/a — controls doctrine | **GateLogic / ControlsSafety** — recorded in `docs/status/GATE05E_ICD_SIGNAL_AUTHORITY.md` — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -2887,3 +2892,69 @@ verification status, proof artifact. Gate 05D says *who owns what*; Gate
   invented threshold; no factory-cluster injection; SERVICE_MODE requires
   LOTO / absence-of-voltage.
 - Nothing ingested; nothing marked Confirmed; ODRs untouched.
+
+---
+
+## 47. Batch 39 + owner review_36 — Gate 05E Interface Control Document / Signal Authority Table (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_39_gate05e_icd_signal_authority.md`
+and `docs/research/raw/owner_reviews/review_36_batch_39_verdict.md`.
+Row additions: RC-164..RC-168 (no new CS). Deliverable:
+`docs/status/GATE05E_ICD_SIGNAL_AUTHORITY.md` (10-row signal-authority
+table after the owner's splits + the ICD gate rule). Owner: "strong Gate
+05E draft."
+
+### The ICD gate rule (owner: "exactly right")
+
+`IF authority_status == UNVERIFIED_STAGE OR owner == PENDING →
+PHYSICAL_HARDWARE_DRIVE = BLOCKED, BUS_TRANSMISSION_FACTORY = BLOCKED,
+EVALUATION_MODE = SIMULATION_ICD_VERIFICATION_ONLY`. A signal never jumps
+from "mapped in software" to "allowed to control hardware."
+
+### Owner corrections
+
+- **Split pre-charge into three signals (RC-164):** request / status /
+  relay-coil control — only the supplier controller may own the coil
+  control; the VCU may not energize it unless supplier architecture
+  explicitly assigns that authority.
+- **Split emergency shutdown into four signals + drop "inhibit" (RC-165):**
+  torque-zero request / shutdown request to BMS / hardwired E-stop open
+  (no software override) / contactor-open status — torque inhibit stays
+  separate from HV de-energization.
+- **Ford source controllers stay generic (RC-166):** "Ford factory module
+  / UIM path — pending verification," not a named Ford PCM/ABS module,
+  until proven.
+- **Listen-only proof requirement (RC-167):** silent/listen-only mode + no
+  ACK participation + no transmit mailbox + capture log + hardware-config
+  screenshot.
+- **Signal-decomposition doctrine (RC-168):** a signal cannot be both a
+  request and a hardware actuation unless the source document explicitly
+  says so; every safety-critical action decomposes into request · status ·
+  feedback · hardware-actuation · fault.
+
+### Gate 05E status (owner review_36)
+
+`ICD_SIGNAL_BOUNDARIES_MAPPED` / `SIMULATION_ONLY` /
+`FORD_SIDE_LISTEN_ONLY` / `EV_SIDE_ISOLATED_CONTROL_PENDING` /
+`PRECHARGE_SIGNALS_NEED_SPLIT` / `SHUTDOWN_SIGNALS_NEED_SPLIT` /
+`NO_FACTORY_BUS_TRANSMISSION` / `NO_PHYSICAL_HARDWARE_DRIVE`. The
+pre-charge and shutdown splits are applied in the deliverable.
+
+### Next
+
+Owner: **Gate 05F — Network Boundary / Gateway Safety Rules** — define what
+the gateway is physically and logically allowed to do: which buses are
+physically isolated / listen-only / transmit-capable; which signals may
+cross Ford-side → EV-side and which are forbidden; gateway-crash behavior;
+CAN_2/CAN_3-silent behavior; proof that CAN_1 never transmits. Queued in
+`GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- Ford-side signals listen-only (no torque/braking authority); Ford
+  cluster + safety networks BLOCKED; EV torque on isolated CAN_2 only;
+  pre-charge / contactors PENDING supplier ownership (BQ-27); shutdown
+  split-ownership; hardwired E-stop takes no software override.
+- Nothing ingested; nothing marked Confirmed; no factory-bus transmission;
+  no physical-hardware drive; ODRs untouched.

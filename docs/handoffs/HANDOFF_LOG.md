@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 38 + review_35 — Gate 05D State Transition + Ownership Matrix)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 38 + review_35); awaiting Gate 05E Interface Control Document / Signal Authority Table or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `158dcba` (batch-38 archive); end commit: `92accb8` (batch-38 reconciliation)
+- Work: new `GATE05D_OWNERSHIP_MATRIX.md` (11-state ownership matrix + Final Responsibility Matrix). RC-160..163 (no new CS). Section 46. Permanent doctrine **D-007** (Coordinator ≠ Owner + Build Engine Authority Law). Corrections: READY_TO_DRIVE no torque, torque strictly in DRIVE_ENABLED (RC-160); OFF monitor-only-if-supervisor-awake (RC-161); ACCESSORY pump limits (RC-162); SERVICE_MODE LOTO/absence-of-voltage (RC-163); EMERGENCY_SHUTDOWN request HV de-energization. VCU owns nothing safety-critical (contactor/pre-charge/HV-shutdown/torque PENDING, BQ-27). Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner; Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/HV-shutdown ownership.
+
 ## 2026-07-16 — Claude Code — task complete (batch 37 + review_34 — Gate 05C Controls State Machine)
 
 ### (archived handoff)

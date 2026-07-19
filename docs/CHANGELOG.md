@@ -5,6 +5,41 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 39 + review_36: Gate 05E Interface Control Document / Signal Authority Table
+
+- Archived batch_39 (Gate 05E ICD) and review_36 1:1 (commit `4bdbe37`).
+  New rows RC-164..168 (no new CS). Section 47. New deliverable
+  `docs/status/GATE05E_ICD_SIGNAL_AUTHORITY.md` (10-row signal-authority
+  table after the owner's splits + the ICD gate rule). Owner: "strong Gate
+  05E draft."
+- **The ICD gate rule (owner: "exactly right"):** `IF authority_status ==
+  UNVERIFIED_STAGE OR owner == PENDING → PHYSICAL_HARDWARE_DRIVE = BLOCKED,
+  BUS_TRANSMISSION_FACTORY = BLOCKED, EVALUATION_MODE =
+  SIMULATION_ICD_VERIFICATION_ONLY`. A signal never jumps from "mapped in
+  software" to "allowed to control hardware."
+- Owner corrections: (1) **split pre-charge into three signals** —
+  VCU_Precharge_Request (transmit request, blocked until supplier
+  protocol), BMS_Precharge_Status (receive/monitor), Precharge_Relay_Coil_
+  Control (hardware actuation, blocked for VCU unless supplier arch
+  assigns it) (RC-164); (2) **split emergency shutdown into four signals**
+  and drop the confusing "inhibit" — VCU_Torque_Zero_Request,
+  VCU_Shutdown_Request_To_BMS, Hardwired_EStop_Open_Circuit (no software
+  override), BMS_Contactor_Open_Status (RC-165); (3) **Ford source
+  controllers stay generic** — "Ford factory module / UIM path — pending
+  verification" (RC-166); (4) **listen-only proof requirement** —
+  silent/listen-only mode + no ACK + no transmit mailbox + capture log +
+  hardware-config screenshot (RC-167); (5) **signal-decomposition
+  doctrine** — a signal cannot be both a request and a hardware actuation
+  unless the source says so; every safety-critical action decomposes into
+  request/status/feedback/actuation/fault (RC-168).
+- Gate 05E status = `ICD_SIGNAL_BOUNDARIES_MAPPED / SIMULATION_ONLY /
+  FORD_SIDE_LISTEN_ONLY / EV_SIDE_ISOLATED_CONTROL_PENDING /
+  PRECHARGE_SIGNALS_NEED_SPLIT / SHUTDOWN_SIGNALS_NEED_SPLIT /
+  NO_FACTORY_BUS_TRANSMISSION / NO_PHYSICAL_HARDWARE_DRIVE`.
+- Nothing ingested; nothing marked Confirmed; no factory-bus transmission;
+  no physical-hardware drive; ODRs untouched. Next = Gate 05F (Network
+  Boundary / Gateway Safety Rules).
+
 ## 2026-07-16 — RH batch 38 + review_35: Gate 05D State Transition + Ownership Matrix
 
 - Archived batch_38 (Gate 05D ownership matrix) and review_35 1:1 (commit

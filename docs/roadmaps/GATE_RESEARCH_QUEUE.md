@@ -240,42 +240,45 @@ LOTO/absence-of-voltage (RC-163); EMERGENCY_SHUTDOWN "request HV
 de-energization." The coordination principle + Build Engine Authority Law
 promoted to permanent doctrine (Decision Register **D-007**).
 
-## Gate 05E — Interface Control Document / Signal Authority Table  · STATUS: NEXT (owner review_35)
+## Gate 05E — Interface Control Document / Signal Authority Table  · STATUS: ICD_SIGNAL_BOUNDARIES_MAPPED / SIMULATION_ONLY (batch_39)
 
-Gate 05D says *who owns what*; Gate 05E says *what signal may cross which
-boundary* — preventing Ford-side monitoring signals from crossing into
-EV-side control without permission.
+Deliverable `docs/status/GATE05E_ICD_SIGNAL_AUTHORITY.md` (10-row signal-
+authority table after the owner's splits + the ICD gate rule). Status
+(review_36): `ICD_SIGNAL_BOUNDARIES_MAPPED / SIMULATION_ONLY /
+FORD_SIDE_LISTEN_ONLY / EV_SIDE_ISOLATED_CONTROL_PENDING /
+PRECHARGE_SIGNALS_NEED_SPLIT / SHUTDOWN_SIGNALS_NEED_SPLIT /
+NO_FACTORY_BUS_TRANSMISSION / NO_PHYSICAL_HARDWARE_DRIVE`. Owner: "strong
+Gate 05E draft." Corrections applied in the deliverable: split pre-charge
+into request/status/relay-coil-control (RC-164); split emergency shutdown
+into torque-zero/shutdown-request/hardwired-E-stop/contactor-open-status
+(RC-165); Ford sources stay generic "Ford factory module / UIM path —
+pending verification" (RC-166); listen-only proof requirement (RC-167);
+signal-decomposition doctrine — a signal cannot be both a request and a
+hardware actuation unless the source says so (RC-168). The ICD gate rule:
+`authority == UNVERIFIED_STAGE OR owner == PENDING → hardware drive +
+factory transmit BLOCKED, evaluation SIMULATION_ONLY`.
 
-**Owner scope (review_35) — per signal, map:**
+## Gate 05F — Network Boundary / Gateway Safety Rules  · STATUS: NEXT (owner review_36)
 
-> - Signal
-> - Source controller
-> - Destination controller
-> - Bus
-> - Direction
-> - Owner
-> - Requester
-> - Allowed use
-> - Blocked use
-> - Physical authority
-> - Verification status
-> - Proof artifact
+Gate 05E maps the signals; Gate 05F defines what the gateway is physically
+and logically allowed to do.
 
-**Owner example (verbatim):**
+**Owner scope (review_36) — the gateway rules must answer:**
 
-> Signal: M_EV_Torque_Command_Nm
-> Source: VCU
-> Destination: Inverter
-> Bus: CAN_2 isolated EV loop
-> Direction: Transmit
-> Owner: VCU/Inverter pending supplier DBC
-> Allowed use: isolated EV torque command after all enable checks
-> Blocked use: Ford factory network, unverified pedal pass-through
-> Physical authority: BLOCKED until DBC + HIL + controls review
+> - Which buses are physically isolated?
+> - Which buses are listen-only?
+> - Which buses can transmit?
+> - Which signals can cross from Ford-side to EV-side?
+> - Which signals are forbidden from crossing?
+> - What happens if the gateway crashes?
+> - What happens if CAN_2 or CAN_3 goes silent?
+> - What proof shows CAN_1 never transmits?
 
 Keep the ownership discipline — the VCU coordinates but owns nothing
-safety-critical until supplier/Ford docs prove it (BQ-27); Ford-side
-networks stay listen-only; EV-side outputs stay isolated.
+safety-critical until supplier/Ford docs prove it (BQ-27); CAN_1 stays
+listen-only; EV-side (CAN_2/CAN_3) outputs stay isolated; no factory-bus
+transmission; no physical-hardware drive while authority is
+UNVERIFIED_STAGE / owner PENDING (D-007 + the RC-168 decomposition rule).
 
 ## Gate 06 — Mechanical Mounting / Battery Enclosure  · STATUS: FIRST PASS DONE (batch_25)
 
