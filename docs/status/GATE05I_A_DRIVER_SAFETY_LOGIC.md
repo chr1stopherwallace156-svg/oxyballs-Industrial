@@ -5,12 +5,16 @@ conversion controls (Gate 05I-A, batch_46 + owner review_43). A sub-gate of
 Gate 05I: it verifies the driver-safety logic on the **low-voltage bench**
 before any vehicle or HV step. Bench evidence only; no vehicle authority.
 
-**Status (owner review_43/44): `BENCH_TEST_MATRIX_CREATED` /
-`LOW_VOLTAGE_BENCH_ONLY` / `DRIVER_INPUT_LOGIC_UNDER_TEST` /
-`SERVICE_CLEAR_RULES_DEFINED` / `ROOT_CAUSE_FLOW_DEFINED` / `NO_LIVE_HV` /
-`NO_VEHICLE_MOTION` / `NO_LIVE_FORD_CAN_TRANSMISSION` /
-`TIMING_VALUES_TARGET_PROFILE_ONLY` / `BENCH_EVIDENCE_PENDING` /
-`NO_VEHICLE_CLEARANCE`.** After successful runs: `BENCH_RUN_OBSERVED /
+**Status (owner review_43/44/45): `FINAL_BASELINE_MATRIX_CREATED` /
+`BENCH_TEST_MATRIX_CREATED` / `LOW_VOLTAGE_BENCH_ONLY` /
+`DRIVER_INPUT_LOGIC_UNDER_TEST` / `SERVICE_CLEAR_RULES_DEFINED` /
+`ROOT_CAUSE_FLOW_DEFINED` / `NO_LIVE_HV` / `NO_VEHICLE_MOTION` /
+`NO_LIVE_FORD_CAN_TRANSMISSION` / `TIMING_VALUES_TARGET_PROFILE_ONLY` /
+`BENCH_EVIDENCE_PENDING` / `NO_VEHICLE_CLEARANCE`.** In batch_48 the Hunter
+finally applied the **Expected-Safe-Output vs Blocked-Outputs (MUST NEVER
+OCCUR)** column split (RC-203/208 realized — owner: "the table structure is
+now the right Build Engine format"); the still-recurring "immediate" wording
+(RC-211) and bench-value labels (RC-212) stay applied here. After successful runs: `BENCH_RUN_OBSERVED /
 RAW_LOGS_CAPTURED / ARTIFACT_PACKAGE_COMPLETE / ENGINEERING_REVIEW_PENDING /
 NO_VEHICLE_CLEARANCE`. Owner (review_43): "the correct next subgate … very
 strong." Owner (review_44): "a very strong 05I-A + 05I-B package … the

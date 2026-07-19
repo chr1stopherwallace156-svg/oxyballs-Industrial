@@ -7,12 +7,18 @@ Gate 05I: where 05I-A proved the driver-safety *logic*, 05I-B proves the
 of the low-voltage integration harness. Strictly isolated, non-powered-HV
 bench; no vehicle.
 
-**Status (owner review_44): `MECHANICAL_INTERLOCK_MATRIX_CREATED` /
+**Status (owner review_44/45): `MECHANICAL_INTERLOCK_MATRIX_CREATED` /
 `PHYSICAL_SAFETY_LOOP_TESTS_DEFINED` / `PRODUCTION_INTENT_HARNESS_REQUIRED` /
 `BENCH_LOTO_REQUIRED` / `TARGET_CRITERIA_PENDING_SOURCE_REVIEW` /
-`NO_LIVE_HV` / `NO_VEHICLE_CLEARANCE`.** Owner: "the correct 'real harness'
-layer before anything touches the vehicle … still not vehicle/HV/road-test
-approval."
+`BENCH_EVIDENCE_PENDING` / `NO_LIVE_HV` / `NO_VEHICLE_CLEARANCE`.** Owner:
+"the correct 'real harness' layer before anything touches the vehicle …
+still not vehicle/HV/road-test approval." In batch_48 the 12-row matrix
+gained the **Expected-Safe-Output vs Blocked-Outputs (MUST NEVER OCCUR)**
+columns (RC-203/208); the "immediate" wording in the safe-output cells
+(e.g. E-stop "loop opens immediately", HVIL "immediate continuity break") is
+corrected to measured-behaviour language (RC-211), and the breach IF logic
+uses `approved_ground_limit` / `approved_datasheet_limit` variables
+(RC-209/212).
 
 ## Target-criteria doctrine (owner review_44, RC-208) — read first
 

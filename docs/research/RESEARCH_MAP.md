@@ -371,32 +371,38 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_44):** **Gate 05I-C — Low-Voltage
-Communications Integration** — the bench-only comms counterpart to 05I-A
-(logic) and 05I-B (mechanical): CAN_2 VCU↔inverter, CAN_3 VCU↔BMS/PDU,
-display-node comm, diagnostic-tool comm, heartbeat behaviour, message
-filtering, DBC version matching, wrong-DTC/wrong-ID rejection, bus load under
-maximum frame density, **no CAN_1 leakage during all communication tests**.
-Bench-only; no live HV, no vehicle motion, no Ford factory-bus transmission;
-CAN_1 stays listen-only with the TXD-line proof (RC-186/200); the VCU
-requests but does not own HV isolation — BMS/PDU/hardwired safety loop owns
-it (RC-205; BQ-27). Gate 05I-A (`GATE05I_A_DRIVER_SAFETY_LOGIC.md`) now adds
-`SERVICE_CLEAR_RULES_DEFINED / ROOT_CAUSE_FLOW_DEFINED` (the re-emit realized
-HVIL ownership RC-205, Service Clear Operational Law RC-206, RCA flow
-RC-207); Gate 05I-B (`GATE05I_B_MECHANICAL_INTERLOCKS.md`) is
-`MECHANICAL_INTERLOCK_MATRIX_CREATED` — numeric criteria are
-TARGET_BENCH_CRITERIA (RC-208), breach logic uses approved-limit variables
-(RC-209). **Gate 05J / live vehicle commissioning explicitly NOT YET.** Keep
-the ownership discipline — the VCU **coordinates** but owns nothing
-safety-critical (contactors / pre-charge / HV shutdown / torque authority)
-until the BMS/PDU supplier architecture proves it (BQ-27); CAN_1 stays
-listen-only; EV-side outputs stay isolated; **NEVER "PATS bypass"; no
-factory-cluster injection; no invented thresholds/timeouts/percentages as
-gate logic (RC-173/179/180/188/202/208); bench evidence only.** Verbatim
-scope in [`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md);
-permanent doctrine D-007: **Coordinator ≠ Owner**. **Gate 08C is parked**;
-Gate 07 artifacts + the 15-mode FMEA registry stay open. Order after 05:
-Gate 06 deep dive → 09 → 10 → 11.
+**Next expected batch (owner review_45):** **Gate 05I-C1 — Communication
+Network Integrity** (then **05I-C2 — Sleep/Wake/Parasitic Drain**) — the
+bench-only comms + sleep/wake counterpart to 05I-A (logic) and 05I-B
+(mechanical): CAN_2 VCU↔inverter, CAN_3 VCU↔BMS/PDU, display-node,
+diagnostic-tool/UDS, DBC version matching, heartbeat loss (configured target
+window), rejection of wrong arbitration ID / wrong PGN-source address /
+wrong DBC version / bad checksum / rolling-counter mismatch / out-of-range
+scaling / unexpected diagnostic request, high bus-load stress (>75%
+target), **CAN_1 no-leakage proof (TXD-line)**; then sleep/wake/parasitic
+drain (key-off sleep, charger-plug/service-tool/fault-event wake, node sleep
+behaviour, stuck-awake, brownout recovery, total sleep current, no
+unauthorized CAN_1 wake/transmit). **A DBC is a database/map, not a packet
+(RC-213).** Bench-only; no live HV, no vehicle motion, no Ford factory-bus
+transmission; CAN_1 stays listen-only + no leakage. Gate 05I-A
+(`GATE05I_A_DRIVER_SAFETY_LOGIC.md`) is `FINAL_BASELINE_MATRIX_CREATED` and
+Gate 05I-B (`GATE05I_B_MECHANICAL_INTERLOCKS.md`) is
+`MECHANICAL_INTERLOCK_MATRIX_CREATED` — both now carry the Expected-Safe-
+Output vs Blocked-Outputs column split (RC-203/208), "immediate" removed
+(RC-211), bench values are target profiles (RC-212), breach limits are
+variables (RC-209). Gate 05I-C (`GATE05I_C_COMMS_SLEEP_WAKE.md`) is
+`STARTED`, split C1/C2 (RC-214). **Gate 05J / live vehicle commissioning
+explicitly NOT YET.** Keep the ownership discipline — the VCU **coordinates**
+but owns nothing safety-critical (contactors / pre-charge / HV shutdown /
+torque authority) until the BMS/PDU supplier architecture proves it (BQ-27);
+CAN_1 stays listen-only; EV-side outputs stay isolated; **NEVER "PATS
+bypass"; no factory-cluster injection; no invented
+thresholds/timeouts/percentages/bus-loads as gate logic
+(RC-173/179/180/188/202/208/212); bench evidence only.** Verbatim scope in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); permanent
+doctrine D-007: **Coordinator ≠ Owner**. **Gate 08C is parked**; Gate 07
+artifacts + the 15-mode FMEA registry stay open. Order after 05: Gate 06
+deep dive → 09 → 10 → 11.
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

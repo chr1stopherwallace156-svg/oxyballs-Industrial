@@ -5,6 +5,42 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 48 + review_45: Gate 05I-A (final baseline) + 05I-B (refined) + 05I-C (Comms, split C1/C2)
+
+- Archived batch_48 and review_45 1:1 (commit `dfbf49e`). New rows
+  RC-210..214 (no new CS). Section 56. Deliverables:
+  `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` (updated),
+  `docs/status/GATE05I_B_MECHANICAL_INTERLOCKS.md` (updated),
+  `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (new). Owner: "very strong …
+  Gate 05I-C is the correct next move; the table structure is now the right
+  Build Engine format; the Service Clear Operational Law is excellent."
+- **The good — blocked-outputs column split finally landed (RC-203/208
+  realized):** 05I-A + 05I-B matrices now separate Expected Safe Output
+  ("CAN_2 torque → zero") from Blocked Outputs (MUST NEVER OCCUR: non-zero
+  torque post-fault, CAN_1 transmission, factory-cluster injection,
+  automatic fault clear, direct contactor control by VCU).
+- **Recurrences caught:** "immediate" wording still present (RC-211,
+  recurrence of RC-175/198/204) → measured-within-a-configured-window; hard
+  values still acting as rules (RC-212, ninth artifact of the
+  invented-values family) — all 05I-A/05I-B numbers + new >75% bus
+  utilization + >100 ms heartbeat → BENCH_TARGET_PROFILE / SUPPLIER_DATA_
+  PENDING / ENGINEERING_REVIEW_REQUIRED; breach limits are variables.
+- Other corrections: 05I-C intro "validated" → "matrices defined + bench
+  evidence collected" (RC-210); DBC terminology — a DBC is a database/map,
+  not a packet; reject wrong-arbitration-ID / wrong-PGN / wrong-DBC-version
+  / bad-checksum / rolling-counter / out-of-range / unexpected-diagnostic-
+  request (RC-213); Gate 05I-C split into 05I-C1 (Communication Network
+  Integrity) + 05I-C2 (Sleep/Wake/Parasitic Drain) (RC-214).
+- Status: 05I-A = `FINAL_BASELINE_MATRIX_CREATED / BENCH_EVIDENCE_PENDING`;
+  05I-B = `MECHANICAL_INTERLOCK_MATRIX_CREATED / BENCH_EVIDENCE_PENDING`;
+  05I-C = `STARTED / … / NETWORK_INTEGRITY_MATRIX_PENDING /
+  SLEEP_WAKE_MATRIX_PENDING / … / NO_VEHICLE_CLEARANCE`. Chain: logic →
+  interlocks → communications → sleep/wake → later physical bench
+  integration review.
+- Nothing ingested; nothing marked Confirmed; scripts are pseudocode not
+  production code; Gate 05J NOT YET; ODRs untouched. Next = Gate 05I-C1
+  (Communication Network Integrity).
+
 ## 2026-07-16 — RH batch 47 + review_44: Gate 05I-A (revised) + Gate 05I-B Mechanical Interlocks
 
 - Archived batch_47 (Gate 05I-A revised + Gate 05I-B) and review_44 1:1

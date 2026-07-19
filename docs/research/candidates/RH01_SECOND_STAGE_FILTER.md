@@ -308,6 +308,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-207 | **Failsafe block should be reviewable, not permanent (owner review_43)**: `VEHICLE_COMMISSIONING_APPROVAL = "PERMANENTLY_BLOCKED"` is too permanent → **`HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW`** + `SAFETY_CONFLATION_HALT`, then require **root-cause analysis + corrective action + repeat bench test + engineering signoff + versioned record** | batch_46 (over-permanent block) | n/a — process rule | **GateLogic / ControlsSafety** — recorded in `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` — lanes L7 |
 | RC-208 | **Bench values are target profiles / criteria (owner review_44, RECURRENCE of RC-202/203 — the Hunter re-emit did not apply them, and it adds new 05I-B criteria)**: the 05I-A values (>10% APPS skew, >25% accel, >5% shift, 13.5→8.5 V, ≥20 V/ms, 50 ms) STILL need `BENCH_TARGET_PROFILE / SUPPLIER_DATA_PENDING / CONTROLS_REVIEW_REQUIRED / NO_VEHICLE_AUTHORITY`, and the new 05I-B criteria (**<0.1 Ω** E-stop contact, **<0.02 Ω** ground, **≤20 ms** relay dropout, **5 A/10 A** fuses) need `TARGET_BENCH_CRITERIA / NEEDS_COMPONENT_DATASHEET / NEEDS_ENGINEERING_REVIEW` — "initial bench target only; final value pending supplier datasheet + controls-engineer review + bench evidence". Also the **"Blocked Outputs" column recurred mis-used** → Expected Safe Output (torque → zero) vs Blocked Outputs (non-zero torque after fault, CAN_1 transmission, factory-cluster injection, automatic fault clear, **direct contactor control by VCU**) | batch_47 (invented values / mislabeled column, recurrence) | n/a — parameter + schema rule | **NeedsSupplierData / NoGateAuthority** — recorded in `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` + `docs/status/GATE05I_B_MECHANICAL_INTERLOCKS.md` (extends RC-202/203) — lanes L7/L8 |
 | RC-209 | **05I-B breach logic must not hard-code limits (owner review_44)**: `IF ground_resistance_ohms >= 0.02 OR safety_relay_dropout_ms > 20.0` → **`IF ground_resistance_ohms >= approved_ground_limit OR safety_relay_dropout_ms > approved_datasheet_limit`** (limits are variables set from the approved datasheet / engineering review, not universal constants) → `HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW` | batch_47 (hard-coded limits) | n/a — gate-logic rule | **GateLogic / NoGateAuthority** — recorded in `docs/status/GATE05I_B_MECHANICAL_INTERLOCKS.md` (extends RC-207/208) — lanes L7/L8 |
+| RC-210 | **Gate 05I-C intro over-claims validation (owner review_45)**: "With safety logic and physical interlocks validated…" → **"After Gate 05I-A and 05I-B matrices are defined and bench evidence is collected…"** — the status is `MATRIX_CREATED / BENCH_EVIDENCE_PENDING`, not "validated" | batch_48 (over-claimed status) | n/a — status-language rule | **GateStatus / ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` — lanes L7 |
+| RC-211 | **"immediate" STILL present (owner review_45, RECURRENCE of RC-175/198/204)**: "command immediate zero-torque state", "trigger immediate shift to Neutral/Safe", "hardwired loop opens immediately", "immediate continuity break" → **"within configured bench target window / measured & compared against the approved target profile / final timing pending supplier datasheet + controls review + bench proof"** (measured behavior, not "instant") | batch_48 (unsafe timing word, recurrence) | n/a — controls-safety rule | **ControlsSafety / NeedsSupplierData** — recorded in `docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` + `docs/status/GATE05I_B_MECHANICAL_INTERLOCKS.md` — lanes L7/L8 |
+| RC-212 | **Hard values STILL act like rules (owner review_45, RECURRENCE of RC-202/208 — ninth artifact — + new values)**: >10% APPS, >25% accel, >5% shift, 13.5→8.5 V, ≥20 V/ms, 50 ms, <0.1 Ω, <0.02 Ω, ≤20 ms, plus **>75% bus utilization** + **>100 ms heartbeat timeout** = `BENCH_TARGET_PROFILE / SUPPLIER_DATA_PENDING / ENGINEERING_REVIEW_REQUIRED / NO_VEHICLE_AUTHORITY`; breach limits are variables (`approved_ground_limit` / `approved_datasheet_limit` / `approved_heartbeat_window`), not hard-coded constants | batch_48 (invented values, recurrence) | n/a — parameter rule | **NeedsSupplierData / NoGateAuthority** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (extends RC-202/208/209) — lanes L7/L8 |
+| RC-213 | **DBC terminology + rejection set (owner review_45)**: "wrong-DTC, wrong-ID, or corrupted DBC packet rejection" is wrong — **a DBC is a database/map that explains how to decode packets, not a packet** → verify rejection of **wrong arbitration ID / wrong PGN-source address / wrong DBC version / bad checksum / rolling-counter mismatch / out-of-range signal scaling / unexpected diagnostic request**; heartbeat line → "VCU torque command transitions toward zero after a configured heartbeat-loss target window; final timeout pending supplier docs + controls review + bench evidence" | batch_48 (terminology error) | n/a — controls rule | **GateLogic / ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` — lanes L7 |
+| RC-214 | **Gate 05I-C must include sleep/wake (owner review_45)**: split into **Gate 05I-C1 — Communication Network Integrity** (CAN_2/CAN_3, display, diagnostic/UDS, DBC version matching, heartbeat loss, wrong-ID rejection, checksum/rolling-counter rejection, high bus-load stress, CAN_1 no-leakage proof) + **Gate 05I-C2 — Sleep/Wake/Parasitic Drain** (key-off sleep entry, charger-plug/service-tool/fault-event wake, BMS/PDU + inverter + display sleep behaviour, stuck-awake detection, brownout recovery, total sleep-current measurement, no unauthorized CAN_1 wake/transmit) | owner-promoted | n/a — gate-scope rule | **GateStatus / ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md`; scoped in `GATE_RESEARCH_QUEUE.md` — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -3557,5 +3562,79 @@ comm tests). Queued in `GATE_RESEARCH_QUEUE.md`.
   transmission; production-intent harness; bench LOTO; the VCU requests but
   does not own HV isolation (BQ-27); no bench criterion becomes a rule until
   component datasheet + engineering review confirms it.
+- Nothing ingested; nothing marked Confirmed; scripts are illustrative
+  pseudocode, not production code; Gate 05J NOT YET; ODRs untouched.
+
+---
+
+## 56. Batch 48 + owner review_45 — Gate 05I-A (final baseline) + 05I-B (refined) + 05I-C (Comms, split C1/C2) (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_48_gate05ia_final_gate05ib_gate05ic_comms.md`
+and `docs/research/raw/owner_reviews/review_45_batch_48_verdict.md`.
+Row additions: RC-210..RC-214 (no new CS). Deliverables:
+`docs/status/GATE05I_A_DRIVER_SAFETY_LOGIC.md` (updated),
+`docs/status/GATE05I_B_MECHANICAL_INTERLOCKS.md` (updated),
+`docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (new). Owner: "very strong … Gate
+05I-C is the correct next move; the table structure is now the right Build
+Engine format; the Service Clear Operational Law is excellent — keep it
+permanently."
+
+### The good — the blocked-outputs column split finally landed (RC-203/208 realized)
+
+The re-emitted 05I-A + 05I-B matrices now separate **Expected Safe Output**
+(e.g. "CAN_2 torque → zero") from **Blocked Outputs (MUST NEVER OCCUR)**
+(non-zero torque post-fault, CAN_1 transmission, factory-cluster injection,
+automatic fault clear, direct contactor control by VCU). Owner: "that is the
+right Build Engine format."
+
+### Recurrences caught
+
+- **"immediate" wording (RC-211, recurrence of RC-175/198/204):** "command
+  immediate zero-torque", "trigger immediate shift", "loop opens
+  immediately", "immediate continuity break" → measured-within-a-configured-
+  window language.
+- **Hard values acting as rules (RC-212, ninth artifact of the
+  invented-values family):** all the 05I-A/05I-B numbers + the new **>75%
+  bus utilization** and **>100 ms heartbeat** → `BENCH_TARGET_PROFILE /
+  SUPPLIER_DATA_PENDING / ENGINEERING_REVIEW_REQUIRED`; breach limits are
+  variables.
+
+### Other corrections
+
+- **05I-C intro over-claim (RC-210):** "…validated" → "…matrices defined and
+  bench evidence collected" (status is MATRIX_CREATED / BENCH_EVIDENCE_
+  PENDING).
+- **DBC terminology (RC-213):** a DBC is a database/map, not a packet; reject
+  wrong-arbitration-ID / wrong-PGN / wrong-DBC-version / bad-checksum /
+  rolling-counter / out-of-range / unexpected-diagnostic-request; heartbeat
+  is a configured target window pending source review.
+- **Sleep/wake sub-gate (RC-214):** Gate 05I-C splits into **05I-C1**
+  (Communication Network Integrity) + **05I-C2** (Sleep/Wake/Parasitic
+  Drain).
+
+### Status (owner review_45)
+
+05I-A = `FINAL_BASELINE_MATRIX_CREATED / BENCH_EVIDENCE_PENDING`; 05I-B =
+`MECHANICAL_INTERLOCK_MATRIX_CREATED / BENCH_EVIDENCE_PENDING`; 05I-C =
+`STARTED / LOW_VOLTAGE_BENCH_ONLY / NETWORK_INTEGRITY_MATRIX_PENDING /
+SLEEP_WAKE_MATRIX_PENDING / DBC_VERSION_CONTROL_REQUIRED /
+HEARTBEAT_TARGETS_PENDING_SOURCE_REVIEW / NO_LIVE_HV / NO_VEHICLE_MOTION /
+NO_LIVE_FORD_CAN_TRANSMISSION / NO_VEHICLE_CLEARANCE`. Chain: logic →
+interlocks → communications → sleep/wake → later physical bench integration
+review.
+
+### Next
+
+Owner: **Gate 05I-C1 — Communication Network Integrity** (then 05I-C2
+Sleep/Wake/Parasitic Drain). Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- Bench-only; no live HV; no vehicle motion; no Ford factory-bus
+  transmission; CAN_1 listen-only + no leakage during any comm test; a DBC
+  is a database not a packet; no bench value becomes a rule until controls
+  review + supplier/DBC confirmation upgrades it; the VCU requests but does
+  not own HV isolation (BQ-27).
 - Nothing ingested; nothing marked Confirmed; scripts are illustrative
   pseudocode, not production code; Gate 05J NOT YET; ODRs untouched.

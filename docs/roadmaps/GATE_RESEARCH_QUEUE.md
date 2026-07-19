@@ -460,32 +460,52 @@ review_43 fixes (HVIL ownership RC-205, Service Clear Operational Law RC-206,
 RCA flow RC-207) — Gate 05I-A now adds `SERVICE_CLEAR_RULES_DEFINED /
 ROOT_CAUSE_FLOW_DEFINED`.
 
-## Gate 05I-C — Low-Voltage Communications Integration  · STATUS: NEXT (owner review_44)
+## Gate 05I-C — Low-Voltage Communication Network Integrity & Sleep/Wake Validation  · STATUS: STARTED, split C1/C2 (batch_48)
 
-Bench-only low-voltage communications integration — the comms counterpart to
-05I-A (logic) and 05I-B (mechanical).
+Deliverable `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md`. Status (review_45):
+`STARTED / LOW_VOLTAGE_BENCH_ONLY / NETWORK_INTEGRITY_MATRIX_PENDING /
+SLEEP_WAKE_MATRIX_PENDING / DBC_VERSION_CONTROL_REQUIRED /
+HEARTBEAT_TARGETS_PENDING_SOURCE_REVIEW / NO_LIVE_HV / NO_VEHICLE_MOTION /
+NO_LIVE_FORD_CAN_TRANSMISSION / NO_VEHICLE_CLEARANCE`. Owner: "Gate 05I-C is
+the correct next move … should also include sleep/wake." Corrections: intro
+"validated" → "matrices defined + bench evidence collected" (RC-210); no
+"immediate" (RC-211); bench values incl. >75% bus-util + >100 ms heartbeat
+are BENCH_TARGET_PROFILE (RC-212); a DBC is a database not a packet — reject
+wrong-ID / wrong-PGN / wrong-DBC-version / bad-checksum / rolling-counter /
+out-of-range / unexpected-diagnostic-request (RC-213). Split into 05I-C1 +
+05I-C2 (RC-214). (05I-A + 05I-B also gained the Expected-Safe-Output vs
+Blocked-Outputs column split, RC-203/208 realized.)
 
-**Owner scope (review_44) — verify:**
+## Gate 05I-C1 — Communication Network Integrity  · STATUS: NEXT (owner review_45)
+
+Bench-only per-signal comm-integrity matrix.
+
+**Owner scope (review_45) — verify:**
 
 > - CAN_2 VCU ↔ inverter logic board
 > - CAN_3 VCU ↔ BMS/PDU logic board
-> - display node communication
-> - diagnostic tool communication
-> - heartbeat behavior
-> - message filtering
+> - display node
+> - diagnostic tool / UDS
 > - DBC version matching
-> - wrong-DTC / wrong-ID rejection
-> - bus load under maximum frame density
-> - no CAN_1 leakage during all communication tests
+> - heartbeat loss (configured target window; final timeout pending source review)
+> - wrong arbitration ID / wrong PGN-source address / wrong DBC version rejection
+> - bad checksum / rolling-counter mismatch / out-of-range signal-scaling / unexpected-diagnostic-request rejection
+> - high bus-load stress (>75% utilization target)
+> - CAN_1 no-leakage proof (TXD-line)
+
+Then **Gate 05I-C2 — Sleep / Wake / Parasitic Drain** (key-off sleep entry,
+charger-plug/service-tool/fault-event wake, BMS/PDU + inverter + display
+sleep behaviour, stuck-awake detection, brownout recovery, total
+sleep-current measurement, no unauthorized CAN_1 wake/transmit).
 
 Enforce throughout — bench-only; no live HV, no vehicle motion, no Ford
 factory-bus transmission; CAN_1 stays listen-only with the TXD-line proof
-(RC-186/200), no leakage during any comm test; the VCU requests but does not
-own HV isolation (RC-205; BQ-27); no timing/threshold/bus-load number
+(RC-186/200), **no leakage during any comm test**; the VCU requests but does
+not own HV isolation (RC-205; BQ-27); no timing/threshold/bus-load number
 becomes a rule until controls review + supplier/DBC confirmation upgrades it
-(RC-202/208); BENCH result categories + HARD_BLOCKED_PENDING_ROOT_CAUSE_
-REVIEW (RC-197/207/209). **Gate 05J / live vehicle commissioning is NOT
-YET.**
+(RC-202/208/212); a DBC is a database not a packet (RC-213); BENCH result
+categories + HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW (RC-197/207/209). **Gate
+05J / live vehicle commissioning is NOT YET.**
 
 Enforce throughout — every proof bench/HIL, no vehicle, no live-HV without a
 staged safety plan + LOTO/PPE (RC-117); no timeout/threshold/HIL timing
