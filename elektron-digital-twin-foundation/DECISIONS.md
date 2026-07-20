@@ -882,3 +882,21 @@ Append-only record of digital twin foundation decisions.
   6. Live HV execution remains **NOT authorized** by this decision alone
 
 ---
+
+## DT-D053 — Mission D front suspension honesty gate
+
+- **Change-control record:** [`decisions/DT-D053_MISSION_D_FRONT_SUSPENSION_HONESTY_GATE.json`](decisions/DT-D053_MISSION_D_FRONT_SUSPENSION_HONESTY_GATE.json)
+- **decision_id:** `DT-D053`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-022`
+- **package:** [`research/vertical_slices/front_suspension_2019_f450/`](research/vertical_slices/front_suspension_2019_f450/)
+- **recommended_decision:** `MISSION_D_IN_PROGRESS_PRIMARY_SOURCE_PARTIAL`
+- **decision:**
+  1. Promote F-450/F-550 Chassis Cab **4x2** front axle type to **ASSERTION_EXTRACTED Monobeam** (SRC-CAND-000010 p.55)
+  2. Reject operator **standard FGAWR = 5600 lb** for Reg Cab 4x2 145.3 — Max Std is **4800 (6.8L) / 5200 (6.7L)**
+  3. Reject all operator **EXACT_MATCH** torque/camber/caster claims (WSM `SRC-CAND-000002` NOT_ACQUIRED)
+  4. Initialize `CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRONT-SUSPENSION` as **CANDIDATE**
+  5. Keep **MISN-000005** (Mission E) deferred; do **not** open Mission F; continue Mission D
+
+---

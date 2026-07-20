@@ -1,9 +1,9 @@
 {
   "document_id": "MISSION_REGISTER",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "status": "ACTIVE",
   "schema": "schemas/research-mission.schema.json",
-  "decision": "DT-D051",
+  "decision": "DT-D053",
   "next_id": "MISN-000006",
   "active_missions": [
     {
@@ -34,9 +34,10 @@
       "mission_id": "MISN-000004",
       "aliases": ["EDTS-MISN-004", "Subsystem-Mission-D"],
       "path": "research/missions/MISN-000004.json",
-      "completion_status": "NOT_STARTED",
+      "completion_status": "IN_PROGRESS",
       "primary_target": "4x2 front suspension / steering exact-config evidence",
-      "priority_note": "Selected after chassis frame datum lock (DT-D051)"
+      "priority_note": "DT-D053 honesty gate — Monobeam extracted; continue WSM/BAG/spring-code gaps",
+      "vertical_slice": "research/vertical_slices/front_suspension_2019_f450/"
     },
     {
       "mission_id": "MISN-000005",
@@ -55,7 +56,9 @@
     "MISN-000005"
   ],
   "notes": [
-    "Chassis frame brief: research/vertical_slices/chassis_frame_2019_f450/"
+    "Chassis frame brief: research/vertical_slices/chassis_frame_2019_f450/",
+    "Front suspension Mission D brief: research/vertical_slices/front_suspension_2019_f450/",
+    "Mission E remains deferred; Mission F not opened (next_id MISN-000006 reserved)"
   ],
   "relationship_graph": "research/relationship_graph/RELATIONSHIP_GRAPH_REGISTER.json"
 }

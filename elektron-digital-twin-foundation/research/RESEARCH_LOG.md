@@ -484,3 +484,25 @@ DT-D051 — frame brief locked; Mission D next (no invented suspension architect
 ### Status
 
 DT-D052 — HV package at `build_engine/gates/hv_commissioning/`; recommended evidence path remains MISN-000004 / Helm WSM-EWD in parallel.
+
+---
+
+## RL-022 — Mission D front suspension honesty gate
+
+- **Date:** 2026-07-20
+- **Layer:** front suspension / steering (MISN-000004)
+- **Agent:** Cursor Cloud Agent
+- **Question:** Can the operator Mission D dump be admitted as exact-config truth for CFG-2019-F450-REG-CAB-4X2-60CA-DRW?
+
+### Findings
+
+1. **Architecture:** SRC-CAND-000010 *Front Axle Specifications — 4x2* states F-450/F-550 **Monobeam** (Dana, forged steel, 7000/7500 max @ ground). F-350 contrast = Twin I-beam (**cross-config only**).
+2. **Track 74.8 in** re-affirmed (code I) — already ASSERTION_EXTRACTED in DT-D051.
+3. **FGAWR correction:** Reg Cab 4x2 145.3 Max Std Front GAWR = **4800 (6.8L) / 5200 (6.7L)** — operator **5600 baseline REJECTED**. 7500 path is option-dependent (Extra-HD front package).
+4. **Wheels/brakes:** 19.5×6 10-lug **225 mm** BCD, 225/70Rx19.5G, rotor **15.39/15.74**, dual-piston pin-slider — ASSERTION_EXTRACTED from fleet standard equipment / wheel specs.
+5. **Torques / alignment EXACT_MATCH table REJECTED** — WSM not acquired.
+6. **Next mission:** continue Mission D (BAG parse + WSM). Mission E stays deferred. Mission F not opened.
+
+### Status
+
+DT-D053 — `MISSION_D_IN_PROGRESS_PRIMARY_SOURCE_PARTIAL`; CNF-001 → partially resolved at series level.

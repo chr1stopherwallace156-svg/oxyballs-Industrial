@@ -6,10 +6,11 @@
 | Concern | Status |
 |---|---|
 | Chassis frame brief A/B | **DT-D051** — datums + dims ASSERTION_EXTRACTED |
-| SRC-CAND-000010 / 000011 | **ACQUIRED** (hashed) |
-| Frame CFGCOMP root | `CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME` |
-| Next subsystem | **MISN-000004** Mission D (4x2 steering/suspension) |
+| Mission D front suspension | **DT-D053** — Monobeam ASSERTION_EXTRACTED (series); **IN_PROGRESS** |
+| Operator FGAWR 5600 baseline | **REJECTED** (Max Std 4800/5200 for RC 4x2 145.3) |
+| Torque / alignment table | **REJECTED** — WSM not acquired |
 | Mission E | **MISN-000005** deferred |
+| Mission F | **Not opened** |
 | FL door slice | DT-D050 active; WSM/EWD still commercial |
 | HV commissioning doctrine | **DT-D052** — 05L-B/C cleaned; 05M staged draft |
 | HV live execution | **NOT authorized** |
@@ -18,4 +19,4 @@
 
 ## Change-control
 
-- `decisions/DT-D030_*.json` … `DT-D052_*.json`
+- `decisions/DT-D030_*.json` … `DT-D053_*.json`

@@ -1,6 +1,6 @@
 {
   "document_id": "SRC_CANDIDATE_REGISTER",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "status": "ACTIVE",
   "schema": "schemas/src-candidate.schema.json",
   "id_policy": {
@@ -22,8 +22,14 @@
   },
   "topics": {
     "FRONT_SUSPENSION_GEOMETRY": {
-      "architecture_status": "RESEARCH_REQUIRED",
-      "recommended_decision": "PRIMARY_SOURCE_REQUIRED"
+      "architecture_status": "ASSERTION_EXTRACTED_SERIES_MONOBEAM",
+      "recommended_decision": "MISSION_D_IN_PROGRESS_PRIMARY_SOURCE_PARTIAL",
+      "decision": "DT-D053",
+      "brief": "research/vertical_slices/front_suspension_2019_f450/ENGINEERING_EVIDENCE_BRIEF_D.json",
+      "notes": [
+        "Series F-450/F-550 4x2 Monobeam from SRC-CAND-000010 p.55",
+        "Instance verification + WSM torque still open"
+      ]
     },
     "DOOR_FL_ASSEMBLY": {
       "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
@@ -130,7 +136,10 @@
       "hash_status": "HASHED",
       "page_extraction_status": "NOT_EXECUTED",
       "metadata_title": "NHTSA Safety Recall 17S33 / RCMN-17V652-1463",
-      "aliases": ["SRC-003", "NHTSA-17S33"],
+      "aliases": [
+        "SRC-003",
+        "NHTSA-17S33"
+      ],
       "applicability": "PLATFORM_FAMILY_REFERENCE"
     },
     {
@@ -140,7 +149,9 @@
       "research_confidence_rc": 40,
       "acquisition_status": "NOT_ACQUIRED",
       "metadata_title": "2019 Super Duty Chassis Cab Sales Spec / Brochure (URL 404)",
-      "aliases": ["SRC-002"]
+      "aliases": [
+        "SRC-002"
+      ]
     },
     {
       "candidate_id": "SRC-CAND-000010",
@@ -151,7 +162,9 @@
       "hash_status": "HASHED",
       "page_extraction_status": "PARTIAL_EXECUTED",
       "metadata_title": "2019 F-350/F-450/F-550 Chassis Cabs Fleet Specs",
-      "aliases": ["SRC-BRIEF-2"]
+      "aliases": [
+        "SRC-BRIEF-2"
+      ]
     },
     {
       "candidate_id": "SRC-CAND-000011",
@@ -162,13 +175,15 @@
       "hash_status": "HASHED",
       "page_extraction_status": "PARTIAL_EXECUTED",
       "metadata_title": "2019 Super Duty Chassis Cab Brochure (Skeeter 2020/02)",
-      "aliases": ["SRC-BRIEF-3"]
+      "aliases": [
+        "SRC-BRIEF-3"
+      ]
     }
   ],
   "next_search_queue": [
     {
       "priority": 1,
-      "task": "MISN-000003 / MISN-000001: Acquire Motorcraft WSM 501-14 + EWD Cell 59 bytes (SRC-CAND-000002 / 000006) — human/Helm handoff",
+      "task": "MISN-000003 / MISN-000001: Acquire Motorcraft WSM 501-14 + EWD Cell 59 bytes (SRC-CAND-000002 / 000006) \u2014 human/Helm handoff",
       "lane": "LANE_SVC",
       "topic": "DOOR_FL_HARNESS",
       "expected_evidence": "Hashed OEM PDF bytes; no invented torque/pin values",
@@ -176,7 +191,10 @@
       "status": "ACTIVE",
       "decision": "DT-D050",
       "mission_id": "MISN-000003",
-      "gap_ids": ["KG-001", "KG-005"]
+      "gap_ids": [
+        "KG-001",
+        "KG-005"
+      ]
     },
     {
       "priority": 2,
