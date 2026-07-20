@@ -382,7 +382,8 @@ Replacement query model for **verified engineering claims**: traverse Evidence G
 | `research/missions/MISSION_REGISTER.json` | Research Mission Queue (`MISN-*`) |
 | `research/twin_passports/TWIN_PASSPORT_REGISTER.json` | Visual vs Engineering twin domain passports |
 | `research/evidence_matrices/` | Property→evidence count matrices (hashed acquired/required) |
-| `research/relationship_graph/RELATIONSHIP_GRAPH_REGISTER.json` | EGS-v1 typed relationship edges (`REL-*`) |
+| `research/relationship_graph/RELATIONSHIP_GRAPH_REGISTER.json` | EGS-v1 typed relationship edges (`REL-*`) — research ILLUSTRATIVE history |
+| `proposals/egs-v1/` | EGS-v1 proposal module (CMPINST endpoints, validation, graph queries) |
 | `research/media_candidates/MEDIA_CANDIDATE_REGISTER.json` | Video/photo media candidates |
 | `research/src_candidates/SRC_CANDIDATE_REGISTER.json` | Immutable `SRC-CAND-*` register + Next Search Queue |
 | `research/claims/CLAIM_REGISTER.json` | Hard Rule 15 major-claim index |
