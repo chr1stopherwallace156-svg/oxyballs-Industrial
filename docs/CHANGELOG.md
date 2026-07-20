@@ -5,6 +5,49 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 52 + review_49: Gate 05I-D (final) + Gate 05J Controlled Vehicle Fitment (No-HV)
+
+- Archived batch_52 (Gate 05I-D finalized + Gate 05J) and review_49 1:1
+  (commit `e188f68`). New rows RC-229..232 (no new CS). Section 60. New
+  deliverable `docs/status/GATE05J_VEHICLE_FITMENT.md` — the first rung of the
+  D-008 post-bench ladder and **the first gate where the conversion physically
+  touches the vehicle** (5-row no-HV in-chassis matrix + exit criteria). Owner:
+  "controlled vehicle fitment with no HV connected … make 05J clearly about
+  physical fitment + passive/no-HV chassis verification, not actual vehicle
+  commissioning yet."
+- **Gate 05J is fitment, not commissioning (RC-229):** the Hunter's "before any
+  low-voltage power-on checks are executed on-vehicle" framing conflicted with
+  05J already doing parasitic draw + CAN_1 silence with ignition on →
+  reworded to **"Gate 05J verifies controlled physical installation and
+  passive/no-HV in-chassis checks; it does not authorize active conversion
+  control, traction enable, live HV, vehicle movement, or road testing."** The
+  first formal LV vehicle power-on is deferred to **Gate 05K**.
+- **CAN_1 live-Ford connection precondition + passive-only (RC-230):** Gate 05J
+  is the first point the VCU CAN_1 transceiver touches the **live OEM Ford
+  CAN_1 network**. Permitted **only** after the Gate 05H listen-only proof +
+  Gate 05I-C CAN_1 silence proof (TXD monitored, no TX mailboxes, silent
+  register verified, no bench ACK). Procedure = **Ford baseline scan → connect
+  VCU passive listen-only → Ford post-connection scan → compare DTCs / network
+  errors / cluster warnings** (a clean cluster alone is insufficient — capture
+  baseline + post scan + TXD scope + CAN analyzer log + firmware/register
+  dump). Hard rule: passive listen-only only — no transmit path, no ACK, no
+  active error frames, no wake commands, no spoofed Ford modules.
+- **Parasitic draw separated OEM/conversion/total (RC-231):** the ≤4.0 mA is
+  the **conversion-added** target, not the whole truck — measure/log
+  `OEM_baseline_sleep_current` / `conversion_added_sleep_current` /
+  `total_vehicle_sleep_current` separately.
+- **Fitment values are target profiles + "live OEM Ford" wording (RC-232,
+  thirteenth artifact of the invented-values family):** 50/100 mm clearance,
+  <0.1 Ω ground bond, ≤4.0 mA, ≤2.0 s labelled `INITIAL_TARGET_PROFILE /
+  ENGINEERING_REVIEW_REQUIRED / FINAL_LIMIT_PENDING / NO_HV_AUTHORITY`;
+  "production-level Ford network channels" → "live OEM Ford CAN_1 network."
+- Gate 05J status `CONTROLLED_VEHICLE_FITMENT_STARTED / NO_HV_CONNECTED /
+  NO_TRACTION_ENABLE / NO_VEHICLE_MOTION / PASSIVE_CAN1_ONLY / …`. Exit
+  criteria permit **Gate 05K only** (LV Vehicle Power-On / No-HV
+  Commissioning) — no live HV, traction enable, vehicle movement, chassis
+  dyno, road testing, customer operation, or compliance claims (never
+  "certified safe," RC-224). Next: **Gate 05K**.
+
 ## 2026-07-16 — RH batch 51 + review_48: Gate 05I-D Integrated Fault Cascades + post-bench gate ladder (D-008)
 
 - Archived batch_51 (Gate 05I-D) and review_48 1:1 (commit `78c98cf`). New

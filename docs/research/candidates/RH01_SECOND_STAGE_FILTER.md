@@ -327,6 +327,10 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-226 | **Charger-plug-during-drive: detect + reject, not "ignore" (owner review_48)**: "VCU ignores charger pilot" → **"the VCU recognizes charger-plug active during the drive-state simulation, declares an illegal-state fault, drops the torque request to zero, blocks drive-enable logic, and blocks charge-path enablement until safe state is restored"** — you want it to detect and reject the impossible state, not ignore it | batch_51 (ignore vs reject) | n/a — controls-safety rule | **ControlsSafety** — recorded in `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md` — lanes L7 |
 | RC-227 | **E-stop cascade ownership cleanup (owner review_48)**: "direct hardware drop-out of all contactor logic power … VCU commands 0 Nm via software" must not imply software creates the physical safety → **"the hardwired E-stop loop owns the physical low-voltage interruption; the VCU observes feedback loss, commands torque-zero on isolated CAN_2 if still powered, logs the E-stop fault, and latches restart lockout"** | batch_51 (VCU over-ownership) | n/a — controls-safety rule | **ControlsSafety** — recorded in `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md` (extends RC-205) — lanes L7 |
 | RC-228 | **Sleep-current node vs total-system consistency (owner review_48)**: 05I-D-010's "≤1.0 mA" is the **VCU node** target, but the earlier section set the **total system** at ≤4.0 mA → keep **`VCU_sleep_current_target ≤1.0 mA`** separate from **`Total_system_sleep_current_target ≤4.0 mA`** (do not mix node-level and total-system targets); both bench-target-profiles | batch_51 (node/total conflation) | n/a — parameter rule | **NeedsSupplierData** — recorded in `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md` (extends RC-220) — lanes L7/L8 |
+| RC-229 | **Gate 05J is fitment + passive/no-HV verification, not commissioning (owner review_49)**: "before any low-voltage power-on checks are executed on-vehicle" conflicts with 05J already doing parasitic draw + CAN_1 silence with ignition on → **"Gate 05J verifies controlled physical installation and passive/no-HV in-chassis checks; it does not authorize active conversion control, traction enable, live HV, vehicle movement, or road testing"**; **Gate 05K is the first formal LV vehicle power-on / no-HV commissioning gate** | batch_52 (over-scoped gate) | n/a — gate-scope rule | **GateStatus / ControlsSafety** — recorded in `docs/status/GATE05J_VEHICLE_FITMENT.md`; links D-008 — lanes L7 |
+| RC-230 | **CAN_1 live-Ford connection precondition + passive-only rule (owner review_49)**: connecting the VCU CAN_1 transceiver to the **live OEM Ford CAN_1 network** (first done at Gate 05J) is permitted **only** after **Gate 05H listen-only proof + Gate 05I-C CAN_1 silence proof + TXD pin monitored + no TX mailboxes + silent register verified + no ACK on bench + Ford baseline scan before connection**; procedure = **Ford baseline scan → connect VCU passive listen-only → Ford post-connection scan → compare before/after DTCs/errors/warnings** (a "clean cluster" alone is insufficient — capture baseline + post scan + TXD scope + CAN analyzer log + firmware/register dump); the VCU may **only** connect **passive listen-only** — no transmit path / no ACK / no active error frames / no wake commands / no spoofed Ford modules | batch_52 (unguarded live-bus connection) | n/a — controls-safety rule | **ControlsSafety / ProofRequirement** — recorded in `docs/status/GATE05J_VEHICLE_FITMENT.md` (extends RC-136/142/148/186/216) — lanes L7 |
+| RC-231 | **Parasitic-draw must separate OEM/conversion/total (owner review_49)**: the ≤4.0 mA is the **conversion-added** target, not the whole truck (the Ford chassis has its own OEM sleep draw) → measure + log **`OEM_baseline_sleep_current` / `conversion_added_sleep_current` (≤4.0 mA target) / `total_vehicle_sleep_current`** separately; report Elektron's addition against the OEM baseline, not the whole-vehicle draw | batch_52 (draw conflation) | n/a — parameter rule | **NeedsSupplierData / ControlsSafety** — recorded in `docs/status/GATE05J_VEHICLE_FITMENT.md` — lanes L7/L8 |
+| RC-232 | **Gate 05J fitment values are target profiles + "live OEM Ford" wording (owner review_49, RECURRENCE — thirteenth artifact)**: 50 mm / 100 mm clearance, <0.1 Ω ground bond, ≤4.0 mA, ≤2.0 s = `INITIAL_TARGET_PROFILE / ENGINEERING_REVIEW_REQUIRED / FINAL_LIMIT_PENDING_SOURCE-TEST-VEHICLE-PACKAGE / NO_HV_AUTHORITY` (the real clearance rule depends on temperature / abrasion / movement-envelope / protection method); "production-level Ford network channels" → **"live OEM Ford CAN_1 network"** | batch_52 (invented values + naming) | n/a — parameter rule | **NeedsSupplierData / NoGateAuthority** — recorded in `docs/status/GATE05J_VEHICLE_FITMENT.md` (extends RC-220/225) — lanes L7/L8 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -3858,3 +3862,75 @@ Readiness** (D-008 ladder). Queued in `GATE_RESEARCH_QUEUE.md`.
 - Nothing ingested; nothing marked Confirmed; no compliance/certification
   claim; scripts are illustrative pseudocode, not production code; ODRs
   untouched.
+
+---
+
+## 60. Batch 52 + owner review_49 — Gate 05I-D (final) + Gate 05J Controlled Vehicle Fitment (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_52_gate05id_final_gate05j_fitment.md`
+and `docs/research/raw/owner_reviews/review_49_batch_52_verdict.md`.
+Row additions: RC-229..RC-232 (no new CS). Deliverable:
+`docs/status/GATE05J_VEHICLE_FITMENT.md`. Owner: "the right next boundary:
+controlled vehicle fitment with no HV connected."
+
+### 05I-D finalized
+
+The re-emit applied the review_48 fixes (05I-D-### IDs, no "immediate",
+charger-plug detect+reject, E-stop hardwired-loop ownership, VCU/total
+sleep-current separated, "permits engineering review for controlled
+low-voltage vehicle fitment only" exit language) — RC-224..228 realized.
+
+### Gate 05J — first physical-vehicle touch (NO HV)
+
+The conversion physically touches the vehicle for the first time (no HV
+connected/energized): mechanical/routing verification, grounding/shielding,
+in-chassis parasitic draw, HV LOTO, and — notably — the **first connection of
+the VCU CAN_1 transceiver to the live OEM Ford CAN_1 network in passive
+listen-only**. 5-row matrix + exit criteria.
+
+### Owner corrections
+
+- **05J is fitment, not commissioning (RC-229):** passive/no-HV in-chassis
+  checks only; Gate 05K is the first formal LV power-on gate.
+- **CAN_1 live-Ford connection precondition + passive-only (RC-230):** only
+  after the Gate 05H + 05I-C listen-only/silence proofs; Ford baseline scan →
+  connect passive → post-connection scan → compare; VCU passive listen-only
+  only (no transmit/ACK/error frames/wake/spoof). A clean cluster alone is
+  insufficient.
+- **Parasitic draw separated (RC-231):** OEM_baseline vs conversion_added
+  (≤4.0 mA target) vs total_vehicle.
+- **Fitment values are target profiles + "live OEM Ford" wording (RC-232,
+  thirteenth artifact):** 50/100 mm, <0.1 Ω, ≤4.0 mA, ≤2.0 s =
+  INITIAL_TARGET_PROFILE / ENGINEERING_REVIEW_REQUIRED.
+
+### Gate 05J status (owner review_49)
+
+`CONTROLLED_VEHICLE_FITMENT_STARTED / NO_HV_CONNECTED / NO_TRACTION_ENABLE /
+NO_VEHICLE_MOTION / PASSIVE_CAN1_ONLY / VCU_HARNESS_FITMENT_UNDER_REVIEW /
+GROUNDING_AND_SHIELDING_UNDER_REVIEW /
+IN_CHASSIS_PARASITIC_DRAW_BASELINE_REQUIRED / FORD_BASELINE_SCAN_REQUIRED /
+NO_ROAD_TEST_AUTHORITY / NO_CUSTOMER_OPERATION`. Permits **Gate 05K only**;
+does not authorize live HV / traction enable / vehicle movement / chassis-dyno
+/ road testing / customer operation / compliance claims.
+
+### Next
+
+Owner: **Gate 05K — Low-Voltage Vehicle Power-On / No-HV Commissioning**
+(ignition off/accessory/key-on/run, VCU + display wake, CAN_1 passive
+monitoring, CAN_2/CAN_3 isolated activity, diagnostic access, no HV contactor
+activity, no torque command, no Ford DTCs, parasitic draw after sleep,
+fault-latch behaviour in chassis). Then Gate 05L — Controlled HV
+First-Energization (engineer-approved only, D-008). Queued in
+`GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- No HV connected/energized through 05J-05K; the VCU connects to the live
+  OEM Ford CAN_1 only in passive listen-only after the bench proofs (RC-230);
+  parasitic draw separated OEM/conversion/total (RC-231); never "certified
+  safe" (RC-224); no fitment value becomes a rule until engineering review +
+  the vehicle package confirm it (RC-232); the VCU requests but does not own
+  HV isolation (BQ-27).
+- Nothing ingested; nothing marked Confirmed; no compliance/certification
+  claim; ODRs untouched.

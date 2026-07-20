@@ -371,24 +371,32 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_48):** **Gate 05J — Controlled Vehicle
-Fitment / No-HV Installation Readiness** — the first rung of the staged
-post-bench gate ladder (Decision Register **D-008**): install the
-VCU/harness physically in the vehicle with **no HV battery connected and no
-traction enable**; CAN_1 remains listen-only; verify grounds/shields,
-connector routing, no chafing, service access, LOTO, 12 V parasitic draw in
-the chassis, and no Ford bus disturbance. The ladder continues (later,
-engineer-gated): **Gate 05K** (LV Vehicle Power-On / No-HV Commissioning) →
+**Next expected batch (owner review_49):** **Gate 05K — Low-Voltage Vehicle
+Power-On / No-HV Commissioning** — the second rung of the staged post-bench
+gate ladder (Decision Register **D-008**), the **first formal low-voltage
+vehicle power-on gate** after Gate 05J fitment. Owner scope: ignition off ·
+accessory · key-on/run · VCU wake · display wake · CAN_1 passive monitoring ·
+CAN_2/CAN_3 isolated activity · diagnostic access · **no HV contactor
+activity · no torque command · no Ford DTCs** · parasitic draw after sleep ·
+fault-latch behaviour in the chassis. Still **no HV connected · no traction
+enable · no vehicle motion**. The ladder then continues (engineer-gated):
 **Gate 05L** (Controlled HV First-Energization, engineer-approved only,
-staged safety plan + LOTO/PPE). This **redefines the old "Gate 05J = live
-vehicle commissioning" placeholder** — HV first-energization is now Gate 05L,
-behind two no-HV gates; the Build Engine never marks a bench assembly
-"certified safe" (RC-224). Gate 05I-D (`GATE05I_D_INTEGRATED_FAULT_CASCADES.md`)
-is `INTEGRATED_FAULT_SEQUENCE_MATRIX_CREATED` — 10-row cascade matrix under
-CAN_1 silence; corrections: no "certified safe" (RC-224); 05I-D-### IDs +
-timing labels + no "immediate" (RC-225); charger-plug detect+reject (RC-226);
-E-stop hardwired loop owns interruption (RC-227); sleep-current node vs total
-(RC-228). Keep the ownership discipline — the VCU **coordinates** but owns
+staged safety plan + LOTO/PPE). Gate 05J
+(`GATE05J_VEHICLE_FITMENT.md`) is `CONTROLLED_VEHICLE_FITMENT_STARTED` /
+`NO_HV_CONNECTED` / `PASSIVE_CAN1_ONLY` — the first gate where the conversion
+physically touches the vehicle; 5-row no-HV in-chassis matrix (routing/chafing,
+ground bond, in-chassis parasitic draw, CAN_1 silence via Ford baseline→post
+scan, LOTO). Corrections: Gate 05J is fitment + passive/no-HV verification,
+**not** vehicle commissioning yet (RC-229); the CAN_1 connection to the **live
+OEM Ford CAN_1 network** is permitted **only** after the Gate 05H/05I-C
+listen-only proofs and only passive listen-only, with a Ford baseline scan →
+connect → post scan → compare procedure (RC-230); parasitic draw measured as
+three separate values — `OEM_baseline` / `conversion_added` (≤4.0 mA initial
+target) / `total_vehicle` (RC-231); fitment values are `INITIAL_TARGET_PROFILE
+/ ENGINEERING_REVIEW_REQUIRED / FINAL_LIMIT_PENDING` labels, not rules —
+thirteenth artifact of the invented-values family (RC-232); the Build Engine
+never marks a bench/fitment assembly "certified safe" (RC-224). Keep the
+ownership discipline — the VCU **coordinates** but owns
 nothing safety-critical (contactors / pre-charge / HV shutdown / torque
 authority) until the BMS/PDU supplier architecture proves it (BQ-27); CAN_1
 stays listen-only; EV-side outputs stay isolated; **NEVER "PATS bypass"; no

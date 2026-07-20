@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 51 + review_48 — Gate 05I-D Integrated Fault Cascades + post-bench gate ladder D-008)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 51 + review_48 — Gate 05I-D Integrated Fault Cascades + the post-bench gate ladder D-008); awaiting the Gate 05J Controlled Vehicle Fitment batch or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `78c98cf` (batch-51 archive); end commit: `3b17078` (batch-51 reconciliation)
+- Work: new deliverable `GATE05I_D_INTEGRATED_FAULT_CASCADES.md` (10-row integrated-fault-cascade matrix under global CAN_1 silence). RC-224..228 (no new CS); section 59; Decision **D-008** (staged post-bench gate ladder to HV). Critical correction (RC-224 + D-008): the Hunter's "certified safe for installation" exit line rejected → "eligible for engineering review for controlled low-voltage vehicle fitment only." Owner defined the ladder: Gate 05J (fitment, no-HV) → 05K (LV power-on, no-HV) → 05L (HV first-energization, engineer-approved only), redefining the old "05J = live commissioning" placeholder. Other fixes: 05D-### → 05I-D-### + timing labels + no "immediate" (RC-225, twelfth artifact); charger-plug detect+reject (RC-226); E-stop hardwired loop owns interruption (RC-227); sleep-current node vs total (RC-228). Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (invented-values RC-116/133/169/174/180/188/202/208/212/215/220/225 — twelve artifacts + "instant/immediate" RC-175/198/204/211/225 + "certified safe" RC-224); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/HV-shutdown ownership (BQ-27).
+
 ## 2026-07-16 — Claude Code — task complete (batch 50 + review_47 — Gate 05I-C v2, full 05I-C1 + 05I-C2)
 
 ### (archived handoff)

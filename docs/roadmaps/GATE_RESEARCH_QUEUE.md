@@ -514,35 +514,57 @@ physical interruption (RC-227); sleep-current node vs total-system (RC-228).
 The path from the LV bench to HV is **staged + engineer-gated** — no jump to
 live commissioning:
 
-## Gate 05J — Controlled Vehicle Fitment / No-HV Installation Readiness  · STATUS: NEXT (owner review_48)
+## Gate 05J — Controlled Vehicle Fitment / No-HV Installation Readiness  · STATUS: CONTROLLED_VEHICLE_FITMENT_STARTED (batch_52)
 
-Install the VCU/harness physically in the vehicle — **no HV battery, no
-traction enable.**
+Deliverable `docs/status/GATE05J_VEHICLE_FITMENT.md` (5-row fitment matrix +
+CAN_1 live-Ford precondition + exit criteria). The **first gate where the
+conversion physically touches the vehicle (no HV connected/energized)**.
+Status (review_49): `CONTROLLED_VEHICLE_FITMENT_STARTED / NO_HV_CONNECTED /
+NO_TRACTION_ENABLE / NO_VEHICLE_MOTION / PASSIVE_CAN1_ONLY /
+VCU_HARNESS_FITMENT_UNDER_REVIEW / GROUNDING_AND_SHIELDING_UNDER_REVIEW /
+IN_CHASSIS_PARASITIC_DRAW_BASELINE_REQUIRED / FORD_BASELINE_SCAN_REQUIRED /
+NO_ROAD_TEST_AUTHORITY / NO_CUSTOMER_OPERATION`. Owner: "controlled vehicle
+fitment with no HV connected." Corrections: 05J is fitment + passive/no-HV
+verification, not commissioning — 05K is the first formal LV power-on gate
+(RC-229); **CAN_1 connects to the live OEM Ford bus only in passive
+listen-only after the Gate 05H + 05I-C proofs, with a Ford baseline scan →
+connect → post-connection scan → compare (RC-230)**; parasitic draw separated
+OEM/conversion/total (RC-231); fitment values are INITIAL_TARGET_PROFILE +
+"live OEM Ford CAN_1 network" wording (RC-232). Permits **Gate 05K only**;
+never "certified safe" (RC-224).
 
-**Owner scope (review_48) — verify:**
+## Gate 05K — Low-Voltage Vehicle Power-On / No-HV Commissioning  · STATUS: NEXT (owner review_49)
 
-> - install VCU/harness physically in vehicle
-> - no HV battery connected
-> - no traction enable
-> - CAN_1 remains listen-only
-> - verify grounds / shields
-> - verify connector routing
-> - verify no chafing
-> - verify service access
-> - verify LOTO
-> - verify 12V parasitic draw in chassis
-> - verify no Ford bus disturbance
+The first formal low-voltage vehicle power-on gate — **still no HV, no
+traction enable, no vehicle motion.**
 
-Then, later and engineer-gated (D-008): **Gate 05K — Low-Voltage Vehicle
-Power-On / No-HV Commissioning**; **Gate 05L — Controlled HV
-First-Energization (engineer-approved only, after 05J + 05K, staged safety
-plan + LOTO/PPE, RC-117).**
+**Owner scope (review_49) — test:**
 
-Enforce throughout — no HV / no traction enable at 05J-05K; CAN_1 stays
-listen-only (TXD-pin proof, RC-186/216/219/221); the VCU requests but does
-not own HV isolation (RC-205; BQ-27); no timing/threshold becomes a rule
-until controls review + supplier confirmation upgrades it
-(RC-202/208/212/215/220/225); **never "certified safe" / no
+> - ignition off
+> - accessory
+> - key on / run
+> - VCU wake
+> - display wake
+> - CAN_1 passive monitoring
+> - CAN_2/CAN_3 isolated activity
+> - diagnostic access
+> - no HV contactor activity
+> - no torque command
+> - no Ford DTCs
+> - parasitic draw after sleep
+> - fault latch behavior in chassis
+
+Then, engineer-gated (D-008): **Gate 05L — Controlled HV First-Energization
+(engineer-approved only, after 05J + 05K, staged safety plan + LOTO/PPE,
+RC-117).**
+
+Enforce throughout — no HV / no traction enable / no vehicle motion at
+05J-05K; CAN_1 stays listen-only + passive on the live OEM Ford bus (TXD-pin
+proof + baseline/post scan, RC-186/216/230); the VCU requests but does not
+own HV isolation — the hardwired loop owns physical interruption (RC-205/227;
+BQ-27); no timing/threshold/fitment value becomes a rule until controls
+review + supplier/vehicle-package confirmation upgrades it
+(RC-202/208/212/215/220/225/232); **never "certified safe" / no
 compliance/certification claim (RC-224)**; every torque/contactor/HVIL/
 isolation/e-stop fault defaults to torque inhibit + restart lockout +
 engineering review (RC-179). **Gate 05L (HV first-energization) is
