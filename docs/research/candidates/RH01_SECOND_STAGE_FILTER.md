@@ -358,6 +358,13 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-257 | **05L-C-001 shutdown order is supplier-specific (owner review_53, extends RC-246)**: "main-positive first, then main-negative" is one architecture, not universal → **"the contactor opening sequence must follow the BMS/PDU supplier-defined shutdown architecture; initial expected sequence supplier-defined; blocked: any sequence that violates supplier contactor/PDU documentation, creates unintended DC-link persistence, or leaves an unsafe energized path"** | batch_56 (universal shutdown order) | BMS/PDU supplier shutdown architecture — **NeedsSupplierData** | **NeedsSupplierData / ControlsSafety** — recorded in `GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md` (05L-C-001; BQ-27) — lanes L7/L9 |
 | RC-258 | **05L-C-005 weld test is mislabeled — split false-positive vs false-negative (owner review_53)**: the title "No Weld Detection False Negatives" but the criterion tested false positives → **two tests: 05L-C-005A Weld-Detection False Positive (normal contactor bounce must not falsely trigger a weld fault) + 05L-C-005B Weld-Detection False Negative (a simulated welded feedback state is always detected and blocks re-energization)** | batch_56 (conflated weld test) | n/a — test-design rule | **TestCoverage / ControlsSafety** — recorded in `GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md` (05L-C-005A/B) — lanes L7 |
 | RC-259 | **The 05M traction phase must be STAGED — the first 05M gate is not "low-speed traction" (owner review_53, amends D-008 ladder)**: after 05L-C the traction phase splits **05M-A — Inverter Enable Readiness / Zero-Torque Validation → 05M-B — No-Load Motor Spin Validation → 05M-C — Controlled Low-Speed Traction Readiness**; the **first traction-inverter gate proves inverter enable with ZERO torque and ZERO rotation before any spin** — do not call the first 05M gate "low-speed traction" | batch_56 (premature traction naming) | n/a — gate-ladder rule | **GateStatus / ControlsSafety** — amends D-008; queued as Gate 05M-A NEXT in `GATE_RESEARCH_QUEUE.md` — lanes L7 |
+| RC-260 | **All numeric thresholds in Gates 05L-B/05L-C/05M-A are target profiles (owner review_54, RECURRENCE — eighteenth artifact)**: ≤50 ms contactor feedback, ΔV ≤5%, ≥95% V_batt, 500 ms pre-charge timeout, >60 V discharge, ≤20 ms E-stop dropout, ≤2 retry, 10 cycles, **50 ms inverter watchdog, 0 A phase current, 0% PWM, zero resolver drift** = `INITIAL_TARGET_PROFILE`; final limits require `SUPPLIER_DATA + ENGINEERING_REVIEW + LIVE_HV_TEST_PLAN_APPROVAL + BENCH/CHASSIS PROOF` | batch_57 (invented HV/inverter values) | n/a — parameter rule | **NeedsSupplierData / NoGateAuthority** — recorded in `docs/status/GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md` + `GATE05L_B_HV_FIRST_ENERGIZATION.md` (extends RC-245/252) — lanes L5/L7/L9 |
+| RC-261 | **Pre-charge RC-curve wording is too perfect (owner review_54)**: real systems show pack sag, sensor filtering, capacitance tolerance, leakage, bleeders, BMS/PDU measurement delays → **"V_caps rise must fall within the supplier-approved expected pre-charge envelope based on R_pre, C_link, V_batt, measurement tolerance, leakage paths, and BMS/PDU sampling delay; a simple RC curve V_caps(t)=V_batt(1−e^(−t/RC)) may be used as the first-order comparison model only"** | batch_57 (over-idealized curve) | supplier pre-charge envelope — **NeedsSupplierData** | **NeedsSupplierData / ControlsSafety** — fixed in `GATE05L_B_HV_FIRST_ENERGIZATION.md` (05L-B-002) — lanes L5/L7 |
+| RC-262 | **05L-B-007 E-stop failure wording must be explicit (owner review_54)**: the abort condition should read **"blocked / failure: automatic retry occurs after manual E-stop · dropout timing exceeds the supplier-approved target · contactor/pre-charge coil supply remains energised after E-stop"** — **no automatic retry after E-stop, ever** | batch_57 (vague abort wording) | n/a — controls-safety rule | **ControlsSafety / HardBlock** — fixed in `GATE05L_B_HV_FIRST_ENERGIZATION.md` (05L-B-007; extends RC-249) — lanes L7 |
+| RC-263 | **05L-C-001 shutdown order is STILL supplier-specific (owner review_54, RECURRENCE of RC-257 — Hunter re-emitted unfixed)**: "main-positive first, then main-negative" is not universal → **"the normal shutdown contactor sequence must follow the BMS/PDU supplier-defined shutdown architecture; blocked: any sequence that violates supplier documentation, leaves an unintended energized path, or prevents verified DC-link discharge"** | batch_57 (regression of RC-257) | BMS/PDU supplier shutdown architecture — **NeedsSupplierData** | **NeedsSupplierData / RegressionWatch** — `GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md` already holds the corrected wording (batch_56); M10 regression-scanner case — lanes L7/L9 |
+| RC-264 | **05L-C IMD fault injection STILL needs safe fixture wording (owner review_54, RECURRENCE of RC-256 — Hunter re-emitted unfixed)**: "inject a resistance path between DC+ and chassis ground" → **"isolation fault injection may only be performed using an approved, rated, current-limited HV isolation-test fixture or the IMD supplier-supported test method; manual ad-hoc resistance insertion onto live HV rails is forbidden"** (hard rule; NHTSA: assume HV energized) | batch_57 (regression of RC-256) | NHTSA EV HV-hazard — **NeedsExactSource** | **ControlsSafety / RegressionWatch** — `GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md` already holds the corrected wording (batch_56); M10 regression-scanner case — lanes L5/L7 |
+| RC-265 | **Gate 05M-A must not assume 0% PWM / enable real inverter switching (owner review_54)**: inverters define "enabled/ready/gate-enabled/torque-enabled/PWM-active" differently and **some switch even at zero torque** → **"Gate 05M-A validates the supplier-defined inverter ready / torque-disabled state; no traction torque command · no intentional motor rotation · no vehicle movement · no driver torque authority · no power-stage switching unless the supplier documentation explicitly defines it as part of a safe zero-torque readiness state and engineering approves it"** | batch_57 (assumed inverter safe state) | inverter supplier state definitions — **NeedsSupplierData** | **NeedsSupplierData / ControlsSafety** — recorded in `GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md` (inverter-state rule + 05M-A-004) — lanes L7/L9 |
+| RC-266 | **Gate 05M-A is readiness, not spin (owner review_54)**: 05M-A proves the inverter boots with a live DC bus, the VCU/inverter handshake is aligned, the inverter stays torque-disabled, phase-current sensors read within supplier offset limits, resolver feedback is plausible, watchdog loss forces the supplier-defined safe state, and **no unintended torque/rotation/current occurs**; **do not jump to 05M-B until 05M-A is proven** (05M-B is the first controlled no-load spin) | batch_57 (readiness-vs-spin scope) | n/a — gate-scope rule | **GateStatus / ControlsSafety** — recorded in `GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md` (what-05M-A-proves + exit) — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -4287,5 +4294,84 @@ before any spin) → 05M-B (no-load spin) → 05M-C (low-speed traction). Queued
   (RC-256); shutdown sequence supplier-specific (RC-257); weld detection split
   FP/FN (RC-258); no motor spin until Gate 05M (staged, after 05L-C, RC-259);
   never "certified safe" (RC-224).
+- Nothing ingested; nothing marked Confirmed; no motor spin; no compliance/
+  certification claim; ODRs untouched.
+
+## 65. Batch 57 + owner review_54 — Gate 05L-B/05L-C wording cleanups + Gate 05M-A Inverter Enable / Zero-Torque (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_57_gate05lbc_cleanups_gate05ma_inverter_enable.md`
+and `docs/research/raw/owner_reviews/review_54_batch_57_verdict.md`.
+Row additions: RC-260..RC-266 (no new CS). Deliverables:
+`docs/status/GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md` (new) +
+`docs/status/GATE05L_B_HV_FIRST_ENERGIZATION.md` (RC-261/262 wording). Owner:
+"the best version so far … the correct chain: 05L-A → 05L-B → 05L-C → 05M-A →
+05M-B."
+
+### Gate 05L-B/05L-C cleanups (three realized, two RECURRED)
+
+The Hunter realized RC-253 (05L-B-001 no V_caps=0.0 V), RC-254 (05L-B-004
+corrected timeout), RC-255 (dropout measured not "instant"), and RC-258 (weld
+005A/005B split). **But it RE-EMITTED RC-257 and RC-256 unfixed** — 05L-C-001
+still said "main-positive first" (RC-263) and 05L-C-004 still said "inject a
+resistance path … via test fixture" (RC-264). The `GATE05L_C_*` deliverable
+already held the corrected wording from batch_56, so no deliverable regressed;
+recorded as the two strongest M10 regression-scanner cases in the HV series.
+
+### Gate 05M-A — inverter enable readiness / zero-torque (NOT spin)
+
+The boundary between static HV distribution and dynamic inverter drive: HV bus
+live, inverter gating locked by software+hardware, handshake/sensor/zero-torque
+focus. 5-row matrix (05M-A-001 handshake, 002 phase-current offset, 003 static
+resolver baseline, 004 supplier-defined torque-disabled, 005 watchdog →
+Safe-Off).
+
+### Owner corrections
+
+- **All 05L-B/05L-C/05M-A numbers are target profiles (RC-260, eighteenth
+  artifact):** adds 50 ms watchdog, 0 A phase current, 0% PWM, zero resolver
+  drift; final limits require SUPPLIER_DATA + ENGINEERING_REVIEW +
+  LIVE_HV_TEST_PLAN_APPROVAL + BENCH/CHASSIS PROOF.
+- **RC-curve wording too perfect (RC-261):** supplier-approved pre-charge
+  envelope; RC curve is a first-order comparison model only.
+- **05L-B-007 E-stop failure wording explicit (RC-262):** no automatic retry
+  after E-stop, ever; coil supply must not remain energised.
+- **05L-C-001 shutdown order still supplier-specific (RC-263, RC-257
+  recurrence).**
+- **05L-C IMD fault injection still needs approved-fixture wording (RC-264,
+  RC-256 recurrence).**
+- **05M-A must not assume 0% PWM / real switching (RC-265):** validates the
+  supplier-defined inverter ready/torque-disabled state; no power-stage
+  switching unless the supplier defines it as safe + engineering approves.
+- **05M-A is readiness, not spin (RC-266):** proves boot/handshake/torque-
+  disabled/sensors/watchdog with no unintended torque/rotation/current; do not
+  jump to 05M-B until proven.
+
+### Gate 05M-A status (owner review_54)
+
+`DRAFT_CREATED / LIVE_HV_PRESENT / INVERTER_READY_STATE_UNDER_TEST /
+TORQUE_DISABLED_STATE_REQUIRED / NO_INTENTIONAL_MOTOR_ROTATION /
+NO_VEHICLE_MOVEMENT / NO_DRIVER_TORQUE_AUTHORITY /
+SUPPLIER_INVERTER_STATE_DEFINITIONS_REQUIRED / WATCHDOG_TARGETS_PENDING_
+SUPPLIER_DATA / PHASE_CURRENT_OFFSET_CHECK_REQUIRED / RESOLVER_BASELINE_CHECK_
+REQUIRED / NO_ROAD_TEST_AUTHORITY`. Permits **Gate 05M-B only**.
+
+### Next
+
+Owner: **Gate 05M-B — No-Load Motor Spin Validation** (first controlled no-load
+spin, motor uncoupled from the drivetrain: resolver offset-angle calibration,
+phase-rotation-sequence verification, phase-current harmonic monitoring,
+over-current protection). Only after 05M-A is proven. Then Gate 05M-C
+(Controlled Low-Speed Traction Readiness). Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- HV bus live, zero intentional rotation, torque-disabled at 05M-A
+  (RC-260..266); numbers are targets (RC-260); inverter state definitions
+  supplier-specific, no assumed 0% PWM (RC-265); VCU requests/monitors, the
+  inverter owns gating, BMS/PDU owns contactors/pre-charge, hardwired loop owns
+  emergency interruption (RC-247/205/227; BQ-27); no motor spin until Gate
+  05M-B, after 05M-A proven (RC-266); RC-263/264 regression watch; never
+  "certified safe" (RC-224).
 - Nothing ingested; nothing marked Confirmed; no motor spin; no compliance/
   certification claim; ODRs untouched.

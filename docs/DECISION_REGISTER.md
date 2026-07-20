@@ -110,6 +110,19 @@ later entry that references it.
   enable with ZERO torque and ZERO rotation before any spin — not "low-speed
   traction"** (RC-259). Full ladder: 05J → 05K → 05L-A → 05L-B → 05L-C → 05M-A
   → 05M-B → 05M-C (each engineer-approved).
+- **Amendment (owner review_54, batch_57, RC-260..266): Gate 05M-A created
+  (`GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md`) — inverter enable readiness /
+  zero-torque, HV bus live but readiness NOT spin.** All 05L-B/05L-C/05M-A
+  numbers are target profiles (RC-260); the pre-charge curve is judged against
+  a supplier envelope, not a perfect RC curve (RC-261); the E-stop path allows
+  no automatic retry ever (RC-262); the inverter enabled/ready/PWM-active state
+  is supplier-specific with no assumed 0% PWM and no power-stage switching
+  unless the supplier defines it safe + engineering approves (RC-265); 05M-A is
+  readiness not spin, and 05M-B is the first controlled no-load spin (RC-266).
+  Regression watch: the Hunter re-emitted the 05L-C shutdown-order (RC-257) and
+  IMD-fixture (RC-256) wording unfixed — recorded as RC-263/264, the strongest
+  M10 regression-scanner cases; the `GATE05L_C_*` deliverable already held the
+  corrected wording.
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the
@@ -119,7 +132,8 @@ later entry that references it.
   `docs/status/GATE05K_VEHICLE_POWER_ON.md`,
   `docs/status/GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md`,
   `docs/status/GATE05L_B_HV_FIRST_ENERGIZATION.md`,
-  `docs/status/GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md`. Supersedes nothing.
+  `docs/status/GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md`,
+  `docs/status/GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md`. Supersedes nothing.
 
 ## D-007 — Controls-authority doctrine: Coordinator ≠ Owner + Build Engine Authority Law
 

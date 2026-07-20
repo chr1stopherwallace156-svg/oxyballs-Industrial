@@ -626,31 +626,53 @@ rated, current-limited fixture only — no ad-hoc resistor on a live rail
 false-positive (005A) + false-negative (005B) (RC-258). Permits **Gate 05M-A
 only**.
 
-## Gate 05M-A — Inverter Enable Readiness / Zero-Torque Validation  · STATUS: NEXT (owner review_53)
+## Gate 05M-A — Inverter Enable Readiness / Zero-Torque Validation  · STATUS: DRAFT_CREATED / LIVE_HV_PRESENT (batch_57)
 
-Owner review_53: do **not** proceed to Gate 05M until 05L-C is fully defined,
-then the traction phase is **staged** — the first traction-inverter gate proves
-**inverter enable with ZERO torque and ZERO rotation before any spin** (do NOT
-call the first 05M gate "low-speed traction", RC-259).
+Deliverable `docs/status/GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md` — the
+boundary between static HV distribution (Gate 05L) and dynamic inverter drive:
+HV bus live, inverter gating locked by software+hardware, **readiness not
+spin** — no intentional motor rotation, no vehicle movement, no driver torque
+authority. 5-row matrix (05M-A-001 inverter power-up handshake, 002
+phase-current offset zeroing, 003 static resolver baseline, 004 supplier-defined
+torque-disabled verification, 005 watchdog disruption → supplier Safe-Off).
+Status (review_54): `DRAFT_CREATED / LIVE_HV_PRESENT /
+INVERTER_READY_STATE_UNDER_TEST / TORQUE_DISABLED_STATE_REQUIRED /
+NO_INTENTIONAL_MOTOR_ROTATION / NO_VEHICLE_MOVEMENT / NO_DRIVER_TORQUE_AUTHORITY
+/ SUPPLIER_INVERTER_STATE_DEFINITIONS_REQUIRED / WATCHDOG_TARGETS_PENDING_
+SUPPLIER_DATA / PHASE_CURRENT_OFFSET_CHECK_REQUIRED / RESOLVER_BASELINE_CHECK_
+REQUIRED / NO_ROAD_TEST_AUTHORITY`. Corrections (review_54): all numbers are
+target profiles (RC-260); the inverter enabled/ready/PWM-active state is
+supplier-specific, no assumed 0% PWM / no power-stage switching unless the
+supplier defines it safe + engineering approves (RC-265); 05M-A is readiness
+not spin (RC-266). Permits **Gate 05M-B only**.
 
-**Owner staged sub-ladder (review_53):**
+## Gate 05M-B — No-Load Motor Spin Validation  · STATUS: NEXT (owner review_54)
 
-> - 05M-A — Inverter Enable Readiness / Zero-Torque Validation
-> - 05M-B — No-Load Motor Spin Validation
-> - 05M-C — Controlled Low-Speed Traction Readiness
+The **first controlled no-load spin** — only after Gate 05M-A proves the
+inverter can be live, synchronised, torque-disabled, and fault-responsive
+**without unintended current or rotation** (RC-266). The motor shaft is
+uncoupled from the vehicle's secondary drivetrain.
 
-Enforce throughout — engineer-gated, live-HV, **05M-A is ZERO torque + ZERO
-rotation**: no motor spin, no vehicle movement, no road test, no traction
-command that produces rotation; no threshold (enable timing, torque-zero
-tolerance, fault-response window) is final gate logic until supplier docs +
-engineering review upgrade it (RC-252); the BMS/PDU owns contactor/pre-charge
-execution and the hardwired loop owns emergency interruption while the VCU
-requests/monitors (RC-247/205/227; BQ-27); the inverter/motor supplier data
-(DC-link, torque map, resolver/encoder, fault outputs) is required before any
-spin (BQ-27); the stored-energy discharge-wait rule applies after any exposure
-(RC-242); never "certified safe" / no compliance claim (RC-224). Only after
-05M-A → 05M-B (no-load spin) → 05M-C (controlled low-speed traction), each
-engineer-approved under a staged safety plan + LOTO/PPE (RC-117).
+**Owner scope (review_54) — that gate covers:**
+
+> - resolver offset-angle calibration under low-torque spin
+> - correct electrical phase-rotation-sequence verification
+> - phase-current harmonic-distortion monitoring
+> - hardware-layer over-current protection validation
+
+Enforce throughout — engineer-gated, live-HV, **motor uncoupled from the
+drivetrain (no vehicle movement, no road test)**; no threshold (spin speed,
+V/Hz limits, over-current trip, resolver offset) is final gate logic until
+supplier docs + engineering review + a live-HV test-plan approval upgrade it
+(RC-260); the inverter owns its gating/power stage per the supplier state
+machine, the BMS/PDU owns contactors/pre-charge, the hardwired loop owns
+emergency interruption, the VCU requests/monitors (RC-247/265/205/227; BQ-27);
+the inverter/motor supplier data (torque map, resolver/encoder offset,
+over-current spec, V/Hz limits) is required before spin (BQ-27); the
+stored-energy discharge-wait rule applies after any exposure (RC-242); never
+"certified safe" / no compliance claim (RC-224). Only after 05M-B → 05M-C
+(Controlled Low-Speed Traction Readiness), each engineer-approved under a
+staged safety plan + LOTO/PPE (RC-117).
 
 Enforce throughout — no HV / no traction enable / no vehicle motion at
 05J-05K; CAN_1 stays listen-only + passive on the live OEM Ford bus (TXD-pin

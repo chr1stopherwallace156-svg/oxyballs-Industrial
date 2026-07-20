@@ -5,6 +5,48 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 57 + review_54: Gate 05L-B/05L-C cleanups + Gate 05M-A Inverter Enable / Zero-Torque
+
+- Archived batch_57 (Gate 05L-B/05L-C cleanups + Gate 05M-A) and review_54 1:1
+  (commit `030a360`). New rows RC-260..266 (no new CS). Section 65. New
+  deliverable `docs/status/GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md` — the
+  boundary between static HV distribution and dynamic inverter drive: HV bus
+  live, inverter gating locked, **readiness NOT spin** (no intentional motor
+  rotation, no vehicle movement, no driver torque authority); 5-row matrix
+  (05M-A-001..005). `docs/status/GATE05L_B_HV_FIRST_ENERGIZATION.md` RC-261/262
+  wording. Owner: "the best version so far … the correct chain: 05L-A → 05L-B
+  → 05L-C → 05M-A → 05M-B."
+- The Hunter realized three 05L-B cleanups (V_caps not 0.0 V RC-253, corrected
+  timeout RC-254, dropout measured RC-255) and the weld FP/FN split (RC-258).
+  **Regression watch — RC-263/264:** it re-emitted the 05L-C shutdown-order
+  (RC-257) and IMD-fixture (RC-256) wording UNFIXED; the `GATE05L_C_*`
+  deliverable already held the corrected wording from batch_56 — recorded as
+  the two strongest M10 regression-scanner cases in the HV series.
+- **Owner corrections (RC-260..266):**
+  - RC-260 — all 05L-B/05L-C/05M-A numbers are target profiles (eighteenth
+    artifact; adds 50 ms watchdog, 0 A phase current, 0% PWM, zero resolver
+    drift): final limits require SUPPLIER_DATA + ENGINEERING_REVIEW +
+    LIVE_HV_TEST_PLAN_APPROVAL + BENCH/CHASSIS PROOF.
+  - RC-261 — pre-charge RC-curve wording too perfect → supplier-approved
+    pre-charge envelope; RC curve is a first-order comparison model only.
+  - RC-262 — 05L-B-007 E-stop failure wording explicit: no automatic retry
+    after E-stop ever; coil supply must not remain energised.
+  - RC-263 — 05L-C-001 shutdown order still supplier-specific (RC-257
+    recurrence).
+  - RC-264 — 05L-C IMD fault injection still needs approved-fixture wording
+    (RC-256 recurrence); no ad-hoc resistor on a live rail.
+  - RC-265 — 05M-A must not assume 0% PWM / enable real switching; validates
+    the supplier-defined inverter ready/torque-disabled state; no power-stage
+    switching unless the supplier defines it safe + engineering approves.
+  - RC-266 — 05M-A is readiness, not spin; do not jump to 05M-B until 05M-A is
+    proven.
+- Gate 05M-A status `DRAFT_CREATED / LIVE_HV_PRESENT /
+  INVERTER_READY_STATE_UNDER_TEST / TORQUE_DISABLED_STATE_REQUIRED / …`;
+  permits **Gate 05M-B only**. **D-008 amended.** RESEARCH_MAP +
+  GATE_RESEARCH_QUEUE next → **Gate 05M-B** (No-Load Motor Spin Validation).
+  Nothing Confirmed; no motor spin; never "certified safe" (RC-224); ODRs
+  untouched.
+
 ## 2026-07-16 — RH batch 56 + review_53: Gate 05L-B ownership realization + Gate 05L-C Shutdown/Discharge/Repeatability
 
 - Archived batch_56 (Gate 05L-B ownership/current-limit + Gate 05L-C) and
