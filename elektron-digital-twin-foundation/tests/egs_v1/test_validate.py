@@ -159,3 +159,24 @@ def test_collection_raises(synthetic_edges):
     with pytest.raises(EgsValidationError) as ei:
         validate_edge_collection([bad])
     assert ei.value.errors
+
+
+def test_contradicted_requires_conflicting_assertions(synthetic_edges):
+    edge = copy.deepcopy(synthetic_edges[0])
+    edge["claims"]["fastener_count"] = {
+        "value": None,
+        "status": "CONTRADICTED",
+        "evidence_assertion_ids": [],
+        "mandatory": False,
+    }
+    edge["verification_lifecycle"]["edge_status"] = "CONTRADICTED"
+    edge["verification_lifecycle"]["procedure_eligibility"] = (
+        "PROCEDURE_GENERATION_NOT_AUTHORIZED"
+    )
+    errors = validate_edge(edge)
+    assert any("conflicting_assertions" in e for e in errors)
+    edge["claims"]["fastener_count"]["conflicting_assertions"] = [
+        {"source_id": "EVD-A", "claimed_value": 4},
+        {"source_id": "EVD-B", "claimed_value": 3},
+    ]
+    assert validate_edge(edge) == []

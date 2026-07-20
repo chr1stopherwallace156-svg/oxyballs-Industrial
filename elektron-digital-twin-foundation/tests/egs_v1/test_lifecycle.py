@@ -30,3 +30,26 @@ def test_contradicted_aggregates():
         )
         == "CONTRADICTED"
     )
+
+
+def test_property_contradiction_blocks_edge():
+    claims = {
+        "relationship_existence": {
+            "status": "ASSERTION_VERIFIED",
+            "evidence_assertion_ids": ["EVD-1"],
+            "mandatory": True,
+        },
+        "fastener_count": {
+            "value": None,
+            "status": "CONTRADICTED",
+            "conflicting_assertions": [
+                {"source_id": "EVD-AFTERMARKET-MANUAL", "claimed_value": 4},
+                {"source_id": "EVD-OEM-PARTS-CATALOG", "claimed_value": 3},
+            ],
+            "mandatory": False,
+        },
+    }
+    assert aggregate_edge_status(claims) == "CONTRADICTED"
+    assert procedure_eligibility_for("CONTRADICTED") == (
+        "PROCEDURE_GENERATION_NOT_AUTHORIZED"
+    )

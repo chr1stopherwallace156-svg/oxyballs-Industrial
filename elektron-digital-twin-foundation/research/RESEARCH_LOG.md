@@ -397,3 +397,25 @@ DT-D047 — proposal module active; parallel MISN-000001 still needs EWD bytes.
 ### Status
 
 DT-D048 — `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY`; real F-450 promotion blocked pending WSM/EWD bytes.
+
+---
+
+## RL-018 — Research Execution Pipeline audit
+
+- **Date:** 2026-07-20
+- **Layer:** research execution / acquisition boundaries
+- **Agent:** Cursor Cloud Agent
+- **Question:** What can the research pipeline actually do across six honest dimensions — and where must humans/APIs/physical work take over?
+
+### Findings
+
+1. Acquisition = **PARTIALLY_AUTOMATED** (public OK; Helm/paywall/physical gated).
+2. Extraction = **AUTOMATED_TEXT_ONLY** until OCR/token-anchor verification for drawings/EWDs.
+3. Exact-vehicle isolation + contradiction logging = **FULLY_CAPABLE**.
+4. Graph templating = schema-gated; unbounded LLM edges rejected at intake.
+5. Assembly = **PROGRESSIVE_SYNTHESIS**; saturation estimates are not measured scores.
+6. Sprint 7 Physical Acquisition Plan = **template only**.
+
+### Status
+
+DT-D049 — pipeline boundaries locked; recommended decision still `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY`.

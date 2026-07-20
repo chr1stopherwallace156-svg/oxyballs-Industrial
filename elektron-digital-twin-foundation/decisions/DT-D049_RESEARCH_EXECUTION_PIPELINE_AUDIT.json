@@ -1,0 +1,37 @@
+{
+  "decision_id": "DT-D049",
+  "title": "Research Execution Pipeline capability & bottleneck audit; lock operational boundaries",
+  "date": "2026-07-20",
+  "approved_status": "ACCEPTED",
+  "recommended_decision": "EGS_V1_PROPOSAL_INFRASTRUCTURE_READY",
+  "handoff_scope": "Pipeline diagnostic EDTS-PIPELINE-AUDIT-2026-07; Physical Acquisition Plan Sprint 7 template only",
+  "scope": [
+    "research/pipeline/",
+    "proposals/egs-v1/ (contradiction claim pattern)",
+    "tools/evidence_acquisition/ (boundary reference)",
+    "RL-018"
+  ],
+  "reason": "Architecture rules alone do not acquire paywalled bytes or internal cavity geometry. An honest six-dimension audit prevents treating discovery/indexing as verification and prevents infinite digital-search loops.",
+  "decision": [
+    "Admit EDTS-PIPELINE-AUDIT-2026-07 as the authoritative Research Execution Pipeline capability & limitations record.",
+    "Lock operational boundaries: public discovery → SOURCE_DISCOVERED; SOURCE_ACQUIRED needs human/API credentials; ASSERTION_VERIFIED needs token-anchor (or equivalent) validation.",
+    "Reaffirm Exact-Vehicle Isolation and CONTRADICTED-without-smoothing as FULLY_CAPABLE pipeline strengths.",
+    "Reaffirm PARTIALLY_AUTOMATED acquisition and AUTOMATED_TEXT_ONLY extraction as current ceilings.",
+    "Require Research Saturation declaration before Physical Acquisition Plan (Sprint 7) execution; template only until then.",
+    "Saturation percentages in the audit are RESEARCH_ESTIMATE_NOT_MEASURED — not hashed coverage scores.",
+    "Keep all 2019 F-450 REL-REG edges REAL_DATA_PROMOTION_BLOCKED with PROCEDURE_GENERATION_NOT_AUTHORIZED until byte parsing, hashing, and token-anchor extraction are connected.",
+    "Recommended decision remains EGS_V1_PROPOSAL_INFRASTRUCTURE_READY (synthetic fixtures cleared; real promotion blocked).",
+    "Frozen kernel schemas unchanged."
+  ],
+  "related_decisions": ["DT-D048", "DT-D047", "DT-D032", "DT-D033"],
+  "change_control": {
+    "kernel_schema_change": false,
+    "component_passport_rc1_change": false,
+    "frozen_assembly_relationship_untouched": true,
+    "audit_record": "research/pipeline/EDTS-PIPELINE-AUDIT-2026-07.json"
+  },
+  "missing_evidence": [
+    "Helm Inc. / commercial OEM portal API integration",
+    "Ingested WSM 501-14 and EWD PDF bytes with token-anchor verification for CFG-000001"
+  ]
+}

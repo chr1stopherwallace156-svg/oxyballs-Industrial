@@ -2,7 +2,7 @@
 
 **Status:** `ACTIVE`  
 **Effective Date:** 2026-07-16  
-**Version:** `2.10.0`  
+**Version:** `2.11.0`  
 **Architecture host:** [EDTS_OS.md](EDTS_OS.md) v3.0.0+ (EDTS-OS)  
 **Isolation law:** [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
 **Binding for:** all research, acquisition, geometry development, and software logic operations under `elektron-digital-twin-foundation/`
@@ -18,7 +18,8 @@
 **Changelog from 2.6.0:** **Research Mission Queue (`MISN-*`)**; **Twin Domain Passports** (Visual vs Engineering); evidence coverage uses **hashed acquired/required counts** (not narrative “verified” cells).  
 **Changelog from 2.7.0:** **EGS-v1 Relationship Graph** — typed directional edges (non-kernel); frozen `assembly-relationship` schema untouched; illustrative edges ≠ verified procedures.  
 **Changelog from 2.8.0:** **EGS-v1 proposal module** (`proposals/egs-v1/`) — CMPINST-only endpoints, per-property evidence, applicability/lifecycle, graph queries; F-450 sample edges `CANDIDATE_UNVERIFIED` until primary evidence.  
-**Changelog from 2.9.0:** **EGS-1.0.0-proposal.2** — COMPDEF/CFGCOMP/CMPINST hierarchy; IFACE layer; PHYSICAL/FUNCTIONAL/PROCEDURAL planes; deterministic claim lifecycle; cycle classification; REL-REG audit `REAL_DATA_PROMOTION_BLOCKED`.
+**Changelog from 2.9.0:** **EGS-1.0.0-proposal.2** — COMPDEF/CFGCOMP/CMPINST hierarchy; IFACE layer; PHYSICAL/FUNCTIONAL/PROCEDURAL planes; deterministic claim lifecycle; cycle classification; REL-REG audit `REAL_DATA_PROMOTION_BLOCKED`.  
+**Changelog from 2.10.0:** **Research Execution Pipeline audit** (`EDTS-PIPELINE-AUDIT-2026-07`) — six-dimension capability/bottleneck lock; Sprint 7 physical acquisition template; paywall/physical limits explicit.
 
 ---
 
@@ -385,6 +386,7 @@ Replacement query model for **verified engineering claims**: traverse Evidence G
 | `research/evidence_matrices/` | Property→evidence count matrices (hashed acquired/required) |
 | `research/relationship_graph/RELATIONSHIP_GRAPH_REGISTER.json` | EGS-v1 typed relationship edges (`REL-*`) — research ILLUSTRATIVE history |
 | `proposals/egs-v1/` | EGS-1.0.0-proposal.2 module (CFGCOMP/IFACE hierarchy, planes, lifecycle, graph queries) |
+| `research/pipeline/EDTS-PIPELINE-AUDIT-2026-07.json` | Research Execution Pipeline capability & bottleneck audit |
 | `research/media_candidates/MEDIA_CANDIDATE_REGISTER.json` | Video/photo media candidates |
 | `research/src_candidates/SRC_CANDIDATE_REGISTER.json` | Immutable `SRC-CAND-*` register + Next Search Queue |
 | `research/claims/CLAIM_REGISTER.json` | Hard Rule 15 major-claim index |

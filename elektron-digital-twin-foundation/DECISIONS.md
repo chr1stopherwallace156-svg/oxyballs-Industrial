@@ -815,3 +815,20 @@ Append-only record of digital twin foundation decisions.
   5. Deterministic claim→lifecycle aggregation; cycle kinds never auto-resolved
   6. REL-REG-01..06 = **CANDIDATE_UNVERIFIED** / **REAL_DATA_PROMOTION_BLOCKED** / **PROCEDURE_GENERATION_NOT_AUTHORIZED**
 
+
+## DT-D049 — Research Execution Pipeline capability audit
+
+- **Change-control record:** [`decisions/DT-D049_RESEARCH_EXECUTION_PIPELINE_AUDIT.json`](decisions/DT-D049_RESEARCH_EXECUTION_PIPELINE_AUDIT.json)
+- **decision_id:** `DT-D049`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY`
+- **protocol_version:** `2.11.0`
+- **decision:**
+  1. Admit **EDTS-PIPELINE-AUDIT-2026-07** (six-dimension capability & bottleneck lock)
+  2. Public discovery → `SOURCE_DISCOVERED`; paywalls/physical = human/API limits
+  3. `ASSERTION_VERIFIED` requires token-anchor (or equivalent) validation
+  4. Contradictions → `CONTRADICTED` + KG — no generative smoothing
+  5. Research Saturation → Sprint 7 Physical Acquisition Plan template (not executed)
+  6. F-450 edges remain **REAL_DATA_PROMOTION_BLOCKED** / **PROCEDURE_GENERATION_NOT_AUTHORIZED**
+

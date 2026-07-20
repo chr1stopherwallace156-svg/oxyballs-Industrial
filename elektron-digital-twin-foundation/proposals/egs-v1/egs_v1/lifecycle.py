@@ -70,6 +70,11 @@ def aggregate_edge_status(claims: dict[str, Any], *, supersedes: str | None = No
     if ex_status == "REJECTED":
         return "REJECTED"
 
+    # Any claim CONTRADICTED → edge CONTRADICTED (no generative smoothing)
+    for key, claim in claims.items():
+        if isinstance(claim, dict) and _claim_status(claim) == "CONTRADICTED":
+            return "CONTRADICTED"
+
     if ex_status != VERIFIED_CLAIM:
         return "CANDIDATE_UNVERIFIED"
 

@@ -160,6 +160,18 @@
             "type": "array",
             "items": { "type": "string" }
           },
+          "conflicting_assertions": {
+            "type": "array",
+            "description": "Required when status=CONTRADICTED — retain both sides; never majority-vote blend",
+            "items": {
+              "type": "object",
+              "required": ["source_id", "claimed_value"],
+              "properties": {
+                "source_id": { "type": "string" },
+                "claimed_value": {}
+              }
+            }
+          },
           "mandatory": { "type": "boolean" },
           "notes": { "type": ["string", "null"] }
         }

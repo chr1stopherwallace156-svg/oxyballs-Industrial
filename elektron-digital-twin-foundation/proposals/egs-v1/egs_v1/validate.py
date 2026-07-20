@@ -212,6 +212,13 @@ def validate_edge(edge: dict[str, Any], *, require_schema_fields: bool = True) -
                         f"claims[{key}]: ASSERTION_VERIFIED requires "
                         "non-empty evidence_assertion_ids"
                     )
+                if st == "CONTRADICTED":
+                    conflicts = claim.get("conflicting_assertions")
+                    if not isinstance(conflicts, list) or len(conflicts) < 2:
+                        errors.append(
+                            f"claims[{key}]: CONTRADICTED requires conflicting_assertions "
+                            "with at least two sources (no generative smoothing)"
+                        )
 
     # Lifecycle aggregation consistency
     life = edge.get("verification_lifecycle")
