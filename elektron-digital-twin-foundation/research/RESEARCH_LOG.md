@@ -352,3 +352,25 @@ DT-D045 — **`CONTINUE_RESEARCH`** (acquire EWD).
 ### Status
 
 DT-D046 — schema handoff ready; parallel MISN-000001 still needs EWD bytes.
+
+---
+
+## RL-016 — EGS-v1 proposal module
+
+- **Date:** 2026-07-20
+- **Layer:** dependency graph / proposal implementation
+- **Agent:** Cursor Cloud Agent
+- **Question:** Implement EGS-v1 as a proposal module with CMPINST endpoints and graph queries without mutating frozen kernel schemas?
+
+### Findings
+
+1. **`proposals/egs-v1/`** delivered: proposal schema, validation rules, `RelationshipGraph` queries, synthetic fixtures, F-450 candidate sample.
+2. Endpoints enforced as **`CMPINST-*`**; AID/EDTS-COMP/ASSET rejected.
+3. Per-property evidence links + applicability + lifecycle; engineering props require `BOUND` evidence; `CANDIDATE_UNVERIFIED` forbids populated specs.
+4. F-450 sample edges recorded as **`CANDIDATE_UNVERIFIED`** with null engineering properties (no invented torque/connectors/fasteners/removal procedures).
+5. Unit tests (`tests/egs_v1/`) — **17 passed** on synthetic fixtures.
+6. Frozen `assembly-relationship.schema.json` **untouched**; research `REL-00000N` retained as ILLUSTRATIVE history only.
+
+### Status
+
+DT-D047 — proposal module active; parallel MISN-000001 still needs EWD bytes.

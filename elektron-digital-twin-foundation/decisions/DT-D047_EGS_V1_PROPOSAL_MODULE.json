@@ -1,0 +1,40 @@
+{
+  "decision_id": "DT-D047",
+  "title": "EGS-v1 proposal module — CMPINST endpoints, validation, graph queries; F-450 edges CANDIDATE_UNVERIFIED",
+  "date": "2026-07-20",
+  "approved_status": "ACCEPTED",
+  "recommended_decision": "PROPOSAL_MODULE_ACTIVE",
+  "handoff_scope": "Executable proposal package under proposals/egs-v1/ with synthetic fixtures and graph API",
+  "scope": [
+    "proposals/egs-v1/",
+    "tests/egs_v1/",
+    "research/relationship_graph/README.md",
+    "RL-016"
+  ],
+  "reason": "DT-D046 delivered research schema + illustrative EDTS-COMP edges. Implementation requires a non-kernel proposal module with CMPINST-only endpoints, per-property evidence links, applicability/lifecycle, validation rules, and graph queries — without inventing F-450 torque/connector/fastener/removal values or mutating frozen kernel schemas.",
+  "decision": [
+    "Authorize proposals/egs-v1/ as the authoritative EGS-v1 implementation home (schema + validate + RelationshipGraph).",
+    "Do NOT mutate frozen EDTS Kernel schemas including schemas/assembly-relationship.schema.json.",
+    "Relationship endpoints MUST be exact component-instance IDs (CMPINST-*). Reject AID-*, EDTS-COMP-*, ASSET-* as graph nodes.",
+    "Require typed relationship classes, property_evidence_links (incl. relationship_existence), applicability, and lifecycle_status.",
+    "Engineering properties (torque, fasteners, connectors, removal index) may populate only when matching evidence_status=BOUND; CANDIDATE_UNVERIFIED forbids populated engineering_properties.",
+    "Admit F-450 FL door sample edges as CANDIDATE_UNVERIFIED with null engineering_properties; draft subcomponent CMPINST IDs are research placeholders except CMPINST-VEH000001-DOOR-FL.",
+    "Use synthetic CMPINST-SYN-* fixtures for unit tests — never invent verified F-450 specs for tests.",
+    "Implement graph queries: direct_neighbors, dependency_traversal, impacted_component_traversal, find_cycles, topological_order.",
+    "Supersede research/relationship_graph/edges/ REL-00000N (EDTS-COMP nodes + illustrative torque claims) for implementation linking; retain as ILLUSTRATIVE research history only.",
+    "Frozen kernel and component-passport rc1 unchanged."
+  ],
+  "related_decisions": ["DT-D046", "DT-D045", "DT-D028"],
+  "change_control": {
+    "kernel_schema_change": false,
+    "component_passport_rc1_change": false,
+    "frozen_assembly_relationship_untouched": true,
+    "proposal_module": "proposals/egs-v1/",
+    "proposal_schema": "proposals/egs-v1/schema/relationship-edge.schema.json",
+    "research_schema_status": "SUPERSEDED_FOR_IMPLEMENTATION_BY_PROPOSAL_MODULE"
+  },
+  "tests": {
+    "path": "tests/egs_v1/",
+    "result": "17_PASSED"
+  }
+}

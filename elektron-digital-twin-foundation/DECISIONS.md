@@ -780,3 +780,21 @@ Append-only record of digital twin foundation decisions.
   5. **MISN-000002** (dashboard edges) + **KG-004** (hinge shims)
   6. Handoff = migration linking only — not verified teardown automation
 
+
+## DT-D047 — EGS-v1 proposal module (CMPINST graph)
+
+- **Change-control record:** [`decisions/DT-D047_EGS_V1_PROPOSAL_MODULE.json`](decisions/DT-D047_EGS_V1_PROPOSAL_MODULE.json)
+- **decision_id:** `DT-D047`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `PROPOSAL_MODULE_ACTIVE`
+- **protocol_version:** `2.9.0`
+- **decision:**
+  1. Authorize **`proposals/egs-v1/`** as executable EGS-v1 implementation home
+  2. Frozen kernel schemas **unchanged** (incl. assembly-relationship)
+  3. Endpoints = **`CMPINST-*` only** (reject AID / EDTS-COMP / ASSET)
+  4. Typed classes + per-property evidence + applicability + lifecycle + validation
+  5. F-450 sample edges = **`CANDIDATE_UNVERIFIED`**; no invented torque/connector/fastener/removal values
+  6. Synthetic fixtures for tests; graph queries (neighbors, dependency/impact BFS, cycles, topo)
+  7. Research `REL-00000N` edges superseded for implementation linking (remain ILLUSTRATIVE history)
+

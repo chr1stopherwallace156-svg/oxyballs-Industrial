@@ -4,15 +4,21 @@
   "status": "ACTIVE",
   "standard": "research/relationship_graph/EGS_v1_STANDARD.md",
   "schema": "schemas/relationship-graph-edge.egs-v1.schema.json",
+  "implementation_home": "proposals/egs-v1/",
+  "implementation_schema": "proposals/egs-v1/schema/relationship-edge.schema.json",
+  "implementation_decision": "DT-D047",
+  "research_schema_status": "SUPERSEDED_FOR_IMPLEMENTATION_BY_PROPOSAL_MODULE",
   "frozen_kernel_assembly_relationship": "schemas/assembly-relationship.schema.json",
   "kernel_policy": "DO_NOT_MUTATE_FROZEN_KERNEL \u2014 EGS-v1 is parallel research/ops graph",
-  "decision": "DT-D046",
-  "handoff_status": "IMPLEMENTATION_HANDOFF_READY",
-  "handoff_scope": "Schema + vocabulary + illustrative FL regulator edge suite for migration pipeline linking",
+  "decision": "DT-D047",
+  "prior_decision": "DT-D046",
+  "handoff_status": "PROPOSAL_MODULE_ACTIVE",
+  "handoff_scope": "Executable proposal module with CMPINST endpoints; research REL-* remain ILLUSTRATIVE history",
   "handoff_exclusions": [
-    "Do not promote ILLUSTRATIVE edges to VERIFIED_EVIDENCE",
+    "Do not promote ILLUSTRATIVE or CANDIDATE_UNVERIFIED edges to VERIFIED without hashed OEM",
     "Do not execute physical removal from illustrative sequence",
-    "Do not expand frozen assembly-relationship predicates under this handoff"
+    "Do not expand frozen assembly-relationship predicates under this handoff",
+    "Do not use AID/EDTS-COMP/ASSET IDs as graph endpoints in the proposal module"
   ],
   "locked_configuration": {
     "vehicle_instance_id": "VEH-000001",

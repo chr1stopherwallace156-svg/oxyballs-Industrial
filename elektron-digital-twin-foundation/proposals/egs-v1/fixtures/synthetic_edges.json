@@ -1,0 +1,202 @@
+[
+  {
+    "edge_id": "REL-EGS-900001",
+    "schema_version": "egs-v1.0.0-proposal",
+    "relationship_class": "MECHANICAL_STRUCTURAL",
+    "relationship_type": "BOLTED_TO",
+    "source_component_instance_id": "CMPINST-SYN-REGULATOR",
+    "target_component_instance_id": "CMPINST-SYN-DOOR-INNER",
+    "directionality": "FORWARD",
+    "vehicle_instance_id": "VEH-SYN-000001",
+    "configuration_id": "CFG-SYN-000001",
+    "configuration_fingerprint": null,
+    "lifecycle_status": "CANDIDATE_UNVERIFIED",
+    "applicability": {
+      "scope": "SYNTHETIC_FIXTURE",
+      "cab_config": null,
+      "option_codes": [],
+      "notes": "Synthetic only"
+    },
+    "property_evidence_links": [
+      {
+        "property_key": "relationship_existence",
+        "evidence_link_id": null,
+        "src_cand_id": null,
+        "evidence_status": "ABSENT",
+        "notes": "Fixture edge for graph tests"
+      }
+    ],
+    "engineering_properties": null,
+    "aliases": ["SYN-BOLTED"],
+    "notes": ["Synthetic fixture — no torque/fastener values"]
+  },
+  {
+    "edge_id": "REL-EGS-900002",
+    "schema_version": "egs-v1.0.0-proposal",
+    "relationship_class": "ELECTRICAL_FLUID",
+    "relationship_type": "CONNECTED_TO",
+    "source_component_instance_id": "CMPINST-SYN-HARNESS",
+    "target_component_instance_id": "CMPINST-SYN-REGULATOR",
+    "directionality": "FORWARD",
+    "vehicle_instance_id": "VEH-SYN-000001",
+    "configuration_id": "CFG-SYN-000001",
+    "configuration_fingerprint": null,
+    "lifecycle_status": "CANDIDATE_UNVERIFIED",
+    "applicability": {
+      "scope": "SYNTHETIC_FIXTURE",
+      "cab_config": null,
+      "option_codes": [],
+      "notes": null
+    },
+    "property_evidence_links": [
+      {
+        "property_key": "relationship_existence",
+        "evidence_link_id": null,
+        "src_cand_id": null,
+        "evidence_status": "ABSENT",
+        "notes": null
+      },
+      {
+        "property_key": "connector_interface",
+        "evidence_link_id": null,
+        "src_cand_id": null,
+        "evidence_status": "ABSENT",
+        "notes": "No connector pin count invented"
+      }
+    ],
+    "engineering_properties": null,
+    "aliases": ["SYN-CONNECTED"],
+    "notes": []
+  },
+  {
+    "edge_id": "REL-EGS-900003",
+    "schema_version": "egs-v1.0.0-proposal",
+    "relationship_class": "MECHANICAL_STRUCTURAL",
+    "relationship_type": "SUPPORTS",
+    "source_component_instance_id": "CMPINST-SYN-REGULATOR",
+    "target_component_instance_id": "CMPINST-SYN-GLASS",
+    "directionality": "FORWARD",
+    "vehicle_instance_id": "VEH-SYN-000001",
+    "configuration_id": "CFG-SYN-000001",
+    "configuration_fingerprint": null,
+    "lifecycle_status": "CANDIDATE_UNVERIFIED",
+    "applicability": {
+      "scope": "SYNTHETIC_FIXTURE",
+      "cab_config": null,
+      "option_codes": [],
+      "notes": null
+    },
+    "property_evidence_links": [
+      {
+        "property_key": "relationship_existence",
+        "evidence_link_id": null,
+        "src_cand_id": null,
+        "evidence_status": "ABSENT",
+        "notes": null
+      }
+    ],
+    "engineering_properties": null,
+    "aliases": ["SYN-SUPPORTS"],
+    "notes": []
+  },
+  {
+    "edge_id": "REL-EGS-900004",
+    "schema_version": "egs-v1.0.0-proposal",
+    "relationship_class": "PROCEDURAL",
+    "relationship_type": "BLOCKS_REMOVAL_OF",
+    "source_component_instance_id": "CMPINST-SYN-TRIM",
+    "target_component_instance_id": "CMPINST-SYN-REGULATOR",
+    "directionality": "FORWARD",
+    "vehicle_instance_id": "VEH-SYN-000001",
+    "configuration_id": "CFG-SYN-000001",
+    "configuration_fingerprint": null,
+    "lifecycle_status": "CANDIDATE_UNVERIFIED",
+    "applicability": {
+      "scope": "SYNTHETIC_FIXTURE",
+      "cab_config": null,
+      "option_codes": [],
+      "notes": null
+    },
+    "property_evidence_links": [
+      {
+        "property_key": "relationship_existence",
+        "evidence_link_id": null,
+        "src_cand_id": null,
+        "evidence_status": "ABSENT",
+        "notes": null
+      },
+      {
+        "property_key": "removal_precedence",
+        "evidence_link_id": null,
+        "src_cand_id": null,
+        "evidence_status": "ABSENT",
+        "notes": "No removal procedure text — type only"
+      }
+    ],
+    "engineering_properties": null,
+    "aliases": ["SYN-BLOCKS-TRIM"],
+    "notes": []
+  },
+  {
+    "edge_id": "REL-EGS-900005",
+    "schema_version": "egs-v1.0.0-proposal",
+    "relationship_class": "PROCEDURAL",
+    "relationship_type": "BLOCKS_REMOVAL_OF",
+    "source_component_instance_id": "CMPINST-SYN-GLASS",
+    "target_component_instance_id": "CMPINST-SYN-REGULATOR",
+    "directionality": "FORWARD",
+    "vehicle_instance_id": "VEH-SYN-000001",
+    "configuration_id": "CFG-SYN-000001",
+    "configuration_fingerprint": null,
+    "lifecycle_status": "CANDIDATE_UNVERIFIED",
+    "applicability": {
+      "scope": "SYNTHETIC_FIXTURE",
+      "cab_config": null,
+      "option_codes": [],
+      "notes": null
+    },
+    "property_evidence_links": [
+      {
+        "property_key": "relationship_existence",
+        "evidence_link_id": null,
+        "src_cand_id": null,
+        "evidence_status": "ABSENT",
+        "notes": null
+      }
+    ],
+    "engineering_properties": null,
+    "aliases": ["SYN-BLOCKS-GLASS"],
+    "notes": []
+  },
+  {
+    "edge_id": "REL-EGS-900006",
+    "schema_version": "egs-v1.0.0-proposal",
+    "relationship_class": "ELECTRICAL_FLUID",
+    "relationship_type": "PASSES_BEHIND",
+    "source_component_instance_id": "CMPINST-SYN-BEAM",
+    "target_component_instance_id": "CMPINST-SYN-REGULATOR",
+    "directionality": "FORWARD",
+    "vehicle_instance_id": "VEH-SYN-000001",
+    "configuration_id": "CFG-SYN-000001",
+    "configuration_fingerprint": null,
+    "lifecycle_status": "CANDIDATE_UNVERIFIED",
+    "applicability": {
+      "scope": "SYNTHETIC_FIXTURE",
+      "cab_config": null,
+      "option_codes": [],
+      "notes": null
+    },
+    "property_evidence_links": [
+      {
+        "property_key": "relationship_existence",
+        "evidence_link_id": null,
+        "src_cand_id": null,
+        "evidence_status": "ABSENT",
+        "notes": null
+      }
+    ],
+    "engineering_properties": null,
+    "aliases": ["SYN-PASSES-BEHIND"],
+    "notes": []
+  }
+]

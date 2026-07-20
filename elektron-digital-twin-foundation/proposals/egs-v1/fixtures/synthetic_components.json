@@ -1,0 +1,19 @@
+{
+  "document_id": "EGS_V1_SYNTHETIC_COMPONENTS",
+  "authority_status": "SYNTHETIC_FIXTURE_ONLY",
+  "notes": [
+    "Fixture component-instance IDs for unit tests. Not F-450 silo truth.",
+    "Do not copy into examples/2019_f450/ without Hard Rule 4."
+  ],
+  "vehicle_instance_id": "VEH-SYN-000001",
+  "configuration_id": "CFG-SYN-000001",
+  "components": [
+    {"component_instance_id": "CMPINST-SYN-DOOR-SHELL", "role": "outer_shell"},
+    {"component_instance_id": "CMPINST-SYN-DOOR-INNER", "role": "inner_panel"},
+    {"component_instance_id": "CMPINST-SYN-REGULATOR", "role": "window_regulator"},
+    {"component_instance_id": "CMPINST-SYN-HARNESS", "role": "door_harness"},
+    {"component_instance_id": "CMPINST-SYN-GLASS", "role": "door_glass"},
+    {"component_instance_id": "CMPINST-SYN-TRIM", "role": "interior_trim"},
+    {"component_instance_id": "CMPINST-SYN-BEAM", "role": "side_impact_beam"}
+  ]
+}
