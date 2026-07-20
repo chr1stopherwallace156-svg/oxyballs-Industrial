@@ -331,6 +331,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-230 | **CAN_1 live-Ford connection precondition + passive-only rule (owner review_49)**: connecting the VCU CAN_1 transceiver to the **live OEM Ford CAN_1 network** (first done at Gate 05J) is permitted **only** after **Gate 05H listen-only proof + Gate 05I-C CAN_1 silence proof + TXD pin monitored + no TX mailboxes + silent register verified + no ACK on bench + Ford baseline scan before connection**; procedure = **Ford baseline scan → connect VCU passive listen-only → Ford post-connection scan → compare before/after DTCs/errors/warnings** (a "clean cluster" alone is insufficient — capture baseline + post scan + TXD scope + CAN analyzer log + firmware/register dump); the VCU may **only** connect **passive listen-only** — no transmit path / no ACK / no active error frames / no wake commands / no spoofed Ford modules | batch_52 (unguarded live-bus connection) | n/a — controls-safety rule | **ControlsSafety / ProofRequirement** — recorded in `docs/status/GATE05J_VEHICLE_FITMENT.md` (extends RC-136/142/148/186/216) — lanes L7 |
 | RC-231 | **Parasitic-draw must separate OEM/conversion/total (owner review_49)**: the ≤4.0 mA is the **conversion-added** target, not the whole truck (the Ford chassis has its own OEM sleep draw) → measure + log **`OEM_baseline_sleep_current` / `conversion_added_sleep_current` (≤4.0 mA target) / `total_vehicle_sleep_current`** separately; report Elektron's addition against the OEM baseline, not the whole-vehicle draw | batch_52 (draw conflation) | n/a — parameter rule | **NeedsSupplierData / ControlsSafety** — recorded in `docs/status/GATE05J_VEHICLE_FITMENT.md` — lanes L7/L8 |
 | RC-232 | **Gate 05J fitment values are target profiles + "live OEM Ford" wording (owner review_49, RECURRENCE — thirteenth artifact)**: 50 mm / 100 mm clearance, <0.1 Ω ground bond, ≤4.0 mA, ≤2.0 s = `INITIAL_TARGET_PROFILE / ENGINEERING_REVIEW_REQUIRED / FINAL_LIMIT_PENDING_SOURCE-TEST-VEHICLE-PACKAGE / NO_HV_AUTHORITY` (the real clearance rule depends on temperature / abrasion / movement-envelope / protection method); "production-level Ford network channels" → **"live OEM Ford CAN_1 network"** | batch_52 (invented values + naming) | n/a — parameter rule | **NeedsSupplierData / NoGateAuthority** — recorded in `docs/status/GATE05J_VEHICLE_FITMENT.md` (extends RC-220/225) — lanes L7/L8 |
+| RC-233 | **Duplicate Gate 05K sections — keep the second (owner review_50)**: the Hunter delivered two Gate 05K sections; the earlier 5-test version (05K-001..005) conflicts with the cleaner 9-test second version (05K-001..009: ignition-off quiescent draw, accessory transition, key-on/run wake, CAN_1 passive monitoring, isolated CAN_2/CAN_3 comms, UDS session access, HV lockout enforcement, Ford system error immunity, in-chassis fault-latch survival) → **keep the second version; the first is archived-superseded** to avoid conflicting requirements | batch_53 (duplicate/conflicting spec) | n/a — evidence-hygiene rule | **EvidenceHygiene / GateStatus** — the deliverable `docs/status/GATE05K_VEHICLE_POWER_ON.md` uses the 9-test version; the first is preserved 1:1 in the raw archive only — lanes L7 |
+| RC-234 | **05J-003 parasitic-draw row must use the split wording (owner review_50, RECURRENCE of RC-231)**: the 05J-003 matrix row still read "Total sleep current draw must be ≤4.0 mA" → **`conversion_added_sleep_current` ≤4.0 mA initial chassis target; `OEM_baseline_sleep_current` and `total_vehicle_sleep_current` measured + logged separately** (`total_vehicle = OEM_baseline + conversion_added`) | batch_53 (draw conflation recurrence) | n/a — parameter rule | **NeedsSupplierData / ControlsSafety** — fixed in `docs/status/GATE05J_VEHICLE_FITMENT.md` 05J-003 (realizes RC-231 into the row) — lanes L7/L8 |
+| RC-235 | **Gate 05J/05K hard numbers are still target profiles (owner review_50, RECURRENCE — fourteenth artifact)**: 50 mm / 100 mm clearance, <0.1 Ω, ≤4.0 mA, ≤2.0 s, **≤200 ms module wake, ≤500 ms display wake, ≤50 ms UDS response, ≤0.5 V rail drop, ≤5% APPS channel correlation, ≤100 ms brake override** = `INITIAL_TARGET_PROFILE / ENGINEERING_REVIEW_REQUIRED / NO_HV_AUTHORITY / NO_VEHICLE_MOTION_AUTHORITY` — none is a universal final rule until sourced, measured, reviewed, and tied to the actual hardware | batch_53 (invented values — 05K set) | n/a — parameter rule | **NeedsSupplierData / NoGateAuthority** — recorded in `docs/status/GATE05K_VEHICLE_POWER_ON.md` (extends RC-220/225/232) — lanes L7/L8 |
+| RC-236 | **Gate 05K must explicitly block real HV contactor closure (owner review_50)**: even with the HV battery disconnected, the system must not practice real contactor actuation → **"All HV contactor coils must remain disconnected, replaced with approved dummy loads, or verified mechanically unable to close; no real HV contactor closure is permitted in Gate 05K"**; contactor drive pins monitored and held at 0.0 V under every driver input / illegal-state request | batch_53 (unguarded contactor actuation) | n/a — controls-safety rule | **ControlsSafety / HardBlock** — recorded in `docs/status/GATE05K_VEHICLE_POWER_ON.md` (05K-007; extends RC-150/152/157/158/171/205) — lanes L7 |
+| RC-237 | **Gate 05L must not open with "exact HV pre-charge timing" — split into 05L-A authorization first (owner review_50, amends D-008)**: Gate 05L is the first live-HV risk category → the ladder's 05L rung begins with **Gate 05L-A — HV First-Energization Authorization & Safety Readiness** (qualified HV personnel · written test plan · LOTO · PPE + insulated tools · emergency-stop plan · rescue/emergency-response plan · fire watch/exclusion zone · absence-of-voltage verification · HV connector/cable inspection · isolation-monitor readiness · pre-charge ownership confirmation · contactor ownership confirmation · test-instrument calibration · supplier documentation · hard-stop conditions · proof artifacts · signoff) **before** any energization sequence; no final pre-charge/voltage/insulation/contactor timing unless supplier docs or engineering review provide them; owner cited **OSHA LOTO** (authorized-employee lockout; circuits energized until LOTO/de-energize/ground; only qualified persons on energized parts) + **NHTSA EV HV-hazard** guidance (assume HV components energized) | batch_53 (premature HV timing) | OSHA 1910.147 / 1910.333 + NHTSA EV guidance — **NeedsExactSource** (owner-paraphrased, not archived) | **ControlsSafety / RegulatoryCandidate** — amends D-008; queued as Gate 05L-A NEXT in `GATE_RESEARCH_QUEUE.md` — lanes L5/L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -3932,5 +3937,91 @@ First-Energization (engineer-approved only, D-008). Queued in
   safe" (RC-224); no fitment value becomes a rule until engineering review +
   the vehicle package confirm it (RC-232); the VCU requests but does not own
   HV isolation (BQ-27).
+- Nothing ingested; nothing marked Confirmed; no compliance/certification
+  claim; ODRs untouched.
+
+## 61. Batch 53 + owner review_50 — Gate 05J cleanups + Gate 05K Low-Voltage Vehicle Power-On (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_53_gate05j_cleanups_gate05k_power_on.md`
+and `docs/research/raw/owner_reviews/review_50_batch_53_verdict.md`.
+Row additions: RC-233..RC-237 (no new CS). Deliverables:
+`docs/status/GATE05K_VEHICLE_POWER_ON.md` (new) +
+`docs/status/GATE05J_VEHICLE_FITMENT.md` (cleanups applied). Owner: "a strong
+Gate 05J → 05K transition … fitment first, low-voltage vehicle power-on
+second, HV later."
+
+### Gate 05J cleanups realized
+
+The Hunter re-emitted the Gate 05J CAN_1 connection prerequisites, the
+dual-stage Ford scan protocol (baseline → passive connect → post-connection
+scan → differential DTC/U-code analysis), and the parasitic-draw
+disambiguation (`OEM_baseline` / `conversion_added` ≤4.0 mA / `total_vehicle`
+with the sum equation) — RC-230/231 realized. Owner praised the CAN_1
+prerequisite section and the parasitic split as the strongest parts.
+
+### Gate 05K — first formal LV vehicle power-on (NO HV)
+
+The first power-on of the conversion inside the chassis, HV under LOTO. Built
+from the owner-preferred 9-test version (05K-001..009): ignition-off quiescent
+draw, accessory transition, key-on/run wake, CAN_1 passive monitoring, isolated
+CAN_2/CAN_3 comms, UDS session access, HV lockout enforcement, Ford system
+error immunity, in-chassis fault-latch survival across a power cycle — under
+the global precondition CAN_1 strictly listen-only (register + TXD proof).
+
+### Owner corrections
+
+- **Delete the duplicate older Gate 05K — keep the second 9-test version
+  (RC-233):** the earlier 5-test version conflicts; the deliverable uses the
+  9-test version, the first is archived-superseded (raw only).
+- **05J-003 parasitic-draw row wording (RC-234, recurrence of RC-231):**
+  "Total sleep current draw ≤4.0 mA" → conversion_added ≤4.0 mA + OEM_baseline
+  + total_vehicle measured/logged separately. Fixed in the 05J matrix row.
+- **Hard numbers still target profiles (RC-235, fourteenth artifact):** the
+  05K timings (≤200 ms wake, ≤500 ms display, ≤50 ms UDS, ≤0.5 V drop, ≤5%
+  APPS, ≤100 ms brake override) join the 05J set → INITIAL_TARGET_PROFILE /
+  ENGINEERING_REVIEW_REQUIRED / NO_HV_AUTHORITY / NO_VEHICLE_MOTION_AUTHORITY.
+- **05K must block real HV contactor closure (RC-236):** coils disconnected /
+  dummy loads / mechanically unable to close; no real contactor closure in
+  05K; drive pins held at 0.0 V.
+- **Gate 05L split — 05L-A authorization first (RC-237, amends D-008):** don't
+  open 05L with exact pre-charge timing; begin with Gate 05L-A HV
+  First-Energization Authorization & Safety Readiness (qualified personnel,
+  LOTO, PPE, insulated tools, e-stop, exclusion zone, fire/emergency plan,
+  absence-of-voltage verification, supplier docs, engineer signoff). Owner
+  cited OSHA LOTO + NHTSA EV HV-hazard guidance (NeedsExactSource —
+  owner-paraphrased, not archived).
+
+### Gate 05J / 05K status (owner review_50)
+
+- 05J: `CONTROLLED_VEHICLE_FITMENT_DEFINED / NO_HV_CONNECTED /
+  NO_TRACTION_ENABLE / NO_VEHICLE_MOTION / CAN_1_PASSIVE_ONLY /
+  FORD_BASELINE_SCAN_REQUIRED / FORD_POST_CONNECTION_SCAN_REQUIRED /
+  CONVERSION_ADDED_PARASITIC_DRAW_TRACKED / GROUNDING_AND_SHIELDING_UNDER_REVIEW
+  / NO_ROAD_TEST_AUTHORITY`.
+- 05K: `LOW_VOLTAGE_VEHICLE_POWER_ON_DEFINED / NO_HV_CONNECTED /
+  NO_REAL_HV_CONTACTOR_CLOSURE / NO_TRACTION_ENABLE / NO_VEHICLE_MOTION /
+  CAN_1_PASSIVE_MONITORING_ONLY / IN_CHASSIS_DRIVER_INPUTS_UNDER_TEST /
+  IN_CHASSIS_FAULT_LATCH_UNDER_TEST / FORD_DTC_DELTA_REQUIRED /
+  NO_ROAD_TEST_AUTHORITY`. Permits **Gate 05L-A only**.
+
+### Next
+
+Owner verbatim next prompt: **Gate 05L-A — Controlled HV First-Energization
+Authorization & Safety Readiness** — a pre-energization authorization gate; no
+final pre-charge/voltage/insulation/contactor timing unless supplier docs or
+engineering review provide them; no vehicle movement / road testing / customer
+operation / compliance claim; live HV only after engineer signoff +
+safety-protocol activation. Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- No HV connected/energized; no real HV contactor closure at 05K (RC-236); the
+  VCU connects to the live OEM Ford CAN_1 only in passive listen-only after the
+  bench proofs (RC-230); parasitic draw separated OEM/conversion/total
+  (RC-231/234); never "certified safe" (RC-224); no 05J/05K value becomes a
+  rule until engineering review + supplier/hardware confirm it (RC-235); Gate
+  05L is engineer-gated and begins with the 05L-A authorization gate
+  (RC-237/D-008); the VCU requests but does not own HV isolation (BQ-27).
 - Nothing ingested; nothing marked Confirmed; no compliance/certification
   claim; ODRs untouched.

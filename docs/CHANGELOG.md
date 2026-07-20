@@ -5,6 +5,51 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 53 + review_50: Gate 05J cleanups + Gate 05K Low-Voltage Vehicle Power-On (No-HV)
+
+- Archived batch_53 (Gate 05J cleanups + Gate 05K power-on) and review_50 1:1
+  (commit `465e2ad`). New rows RC-233..237 (no new CS). Section 61. New
+  deliverable `docs/status/GATE05K_VEHICLE_POWER_ON.md` — the second rung of
+  the D-008 ladder and the first formal LV vehicle power-on gate (9-test
+  matrix 05K-001..009, HV under LOTO). `docs/status/GATE05J_VEHICLE_FITMENT.md`
+  cleanups applied. Owner: "a strong Gate 05J → 05K transition … fitment
+  first, low-voltage vehicle power-on second, HV later."
+- **Gate 05K** built from the owner-preferred 9-test version (ignition-off
+  quiescent draw, accessory transition, key-on/run wake, CAN_1 passive
+  monitoring, isolated CAN_2/CAN_3 comms, UDS session access, HV lockout
+  enforcement, Ford system error immunity, in-chassis fault-latch survival
+  across a power cycle), CAN_1 strictly listen-only (register + TXD proof).
+- **Owner corrections (RC-233..237, no new CS):**
+  - RC-233 — two Gate 05K sections delivered; keep the cleaner 9-test second
+    version, the 5-test first version is archived-superseded (raw only).
+  - RC-234 — 05J-003 parasitic-draw row still read "Total sleep current draw
+    ≤4.0 mA" → conversion_added ≤4.0 mA + OEM_baseline + total_vehicle
+    measured/logged separately (recurrence of RC-231).
+  - RC-235 — 05J/05K hard numbers still target profiles (fourteenth artifact
+    of the invented-values family): 50/100 mm, <0.1 Ω, ≤4.0 mA, ≤2.0 s,
+    ≤200 ms wake, ≤500 ms display, ≤50 ms UDS, ≤0.5 V drop, ≤5% APPS,
+    ≤100 ms brake override → INITIAL_TARGET_PROFILE / ENGINEERING_REVIEW_
+    REQUIRED / NO_HV_AUTHORITY / NO_VEHICLE_MOTION_AUTHORITY.
+  - RC-236 — Gate 05K must explicitly block real HV contactor closure (coils
+    disconnected / dummy loads / mechanically unable to close; drive pins held
+    at 0.0 V) even with the HV battery disconnected.
+  - RC-237 — Gate 05L must not open with "exact HV pre-charge timing"; it
+    splits so it begins with **Gate 05L-A — HV First-Energization
+    Authorization & Safety Readiness** (qualified personnel, LOTO, PPE,
+    insulated tools, e-stop, exclusion zone, fire/emergency plan,
+    absence-of-voltage verification, supplier docs, engineer signoff) before
+    any energization sequence. Owner cited OSHA LOTO + NHTSA EV HV-hazard
+    guidance (NeedsExactSource — owner-paraphrased, not archived). **Amends
+    D-008.**
+- Gate 05J status → `CONTROLLED_VEHICLE_FITMENT_DEFINED / … /
+  CAN_1_PASSIVE_ONLY / FORD_POST_CONNECTION_SCAN_REQUIRED /
+  CONVERSION_ADDED_PARASITIC_DRAW_TRACKED / …`; exit criterion 7 adds
+  firmware/register dumps + reviewer signoffs. Gate 05K status
+  `LOW_VOLTAGE_VEHICLE_POWER_ON_DEFINED / NO_HV_CONNECTED /
+  NO_REAL_HV_CONTACTOR_CLOSURE / …`. RESEARCH_MAP + GATE_RESEARCH_QUEUE next →
+  **Gate 05L-A**. Nothing Confirmed; no HV; never "certified safe" (RC-224);
+  ODRs untouched.
+
 ## 2026-07-16 — RH batch 52 + review_49: Gate 05I-D (final) + Gate 05J Controlled Vehicle Fitment (No-HV)
 
 - Archived batch_52 (Gate 05I-D finalized + Gate 05J) and review_49 1:1

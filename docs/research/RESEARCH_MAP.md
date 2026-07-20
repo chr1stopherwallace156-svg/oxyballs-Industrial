@@ -371,31 +371,36 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_49):** **Gate 05K — Low-Voltage Vehicle
-Power-On / No-HV Commissioning** — the second rung of the staged post-bench
-gate ladder (Decision Register **D-008**), the **first formal low-voltage
-vehicle power-on gate** after Gate 05J fitment. Owner scope: ignition off ·
-accessory · key-on/run · VCU wake · display wake · CAN_1 passive monitoring ·
-CAN_2/CAN_3 isolated activity · diagnostic access · **no HV contactor
-activity · no torque command · no Ford DTCs** · parasitic draw after sleep ·
-fault-latch behaviour in the chassis. Still **no HV connected · no traction
-enable · no vehicle motion**. The ladder then continues (engineer-gated):
-**Gate 05L** (Controlled HV First-Energization, engineer-approved only,
-staged safety plan + LOTO/PPE). Gate 05J
-(`GATE05J_VEHICLE_FITMENT.md`) is `CONTROLLED_VEHICLE_FITMENT_STARTED` /
-`NO_HV_CONNECTED` / `PASSIVE_CAN1_ONLY` — the first gate where the conversion
-physically touches the vehicle; 5-row no-HV in-chassis matrix (routing/chafing,
-ground bond, in-chassis parasitic draw, CAN_1 silence via Ford baseline→post
-scan, LOTO). Corrections: Gate 05J is fitment + passive/no-HV verification,
-**not** vehicle commissioning yet (RC-229); the CAN_1 connection to the **live
-OEM Ford CAN_1 network** is permitted **only** after the Gate 05H/05I-C
-listen-only proofs and only passive listen-only, with a Ford baseline scan →
-connect → post scan → compare procedure (RC-230); parasitic draw measured as
-three separate values — `OEM_baseline` / `conversion_added` (≤4.0 mA initial
-target) / `total_vehicle` (RC-231); fitment values are `INITIAL_TARGET_PROFILE
-/ ENGINEERING_REVIEW_REQUIRED / FINAL_LIMIT_PENDING` labels, not rules —
-thirteenth artifact of the invented-values family (RC-232); the Build Engine
-never marks a bench/fitment assembly "certified safe" (RC-224). Keep the
+**Next expected batch (owner review_50):** **Gate 05L-A — Controlled HV
+First-Energization Authorization & Safety Readiness** — the pre-energization
+authorization gate, the first rung of the split Gate 05L (Decision Register
+**D-008**, amended review_50, RC-237). Gate 05L must **not** open with exact
+HV pre-charge timing; it begins with 05L-A. Owner verbatim scope: qualified HV
+personnel · written test plan · LOTO · PPE + insulated tools · emergency-stop
+plan · rescue/emergency-response plan · fire watch/exclusion zone ·
+absence-of-voltage verification · HV connector/cable inspection ·
+isolation-monitor readiness · pre-charge ownership confirmation · contactor
+ownership confirmation · test-instrument calibration · supplier documentation ·
+hard-stop conditions · proof artifacts · signoff — with **no final pre-charge/
+voltage/insulation/contactor timing unless supplier docs or engineering review
+provide them**; no vehicle movement · no road testing · no customer operation ·
+no compliance claim; live HV only after engineer signoff + safety-protocol
+activation. Owner cited OSHA LOTO + NHTSA EV HV-hazard guidance
+(NeedsExactSource). Only after 05L-A does the actual energization sequence
+(Gate 05L) get detailed. **Gate 05J** (`GATE05J_VEHICLE_FITMENT.md`) is
+`CONTROLLED_VEHICLE_FITMENT_DEFINED` / `NO_HV_CONNECTED` / `CAN_1_PASSIVE_ONLY`
+— the first gate where the conversion physically touches the vehicle (5-row
+no-HV in-chassis matrix). **Gate 05K** (`GATE05K_VEHICLE_POWER_ON.md`) is
+`LOW_VOLTAGE_VEHICLE_POWER_ON_DEFINED` / `NO_HV_CONNECTED` /
+`NO_REAL_HV_CONTACTOR_CLOSURE` — the first formal LV vehicle power-on gate
+(9-test matrix 05K-001..009; CAN_1 strictly listen-only; HV under LOTO). Batch
+53 corrections: keep the 9-test 05K version, delete the duplicate 5-test one
+(RC-233); 05J-003 uses conversion_added ≤4.0 mA + OEM_baseline + total_vehicle
+separately (RC-234); 05J/05K hard numbers are target profiles — fourteenth
+artifact of the invented-values family (RC-235); 05K blocks real HV contactor
+closure (RC-236); Gate 05L split into 05L-A first (RC-237). The Build Engine
+never marks a bench/fitment/power-on assembly "certified safe" (RC-224). Keep
+the
 ownership discipline — the VCU **coordinates** but owns
 nothing safety-critical (contactors / pre-charge / HV shutdown / torque
 authority) until the BMS/PDU supplier architecture proves it (BQ-27); CAN_1

@@ -10,15 +10,17 @@ authorize active conversion control, traction enable, live HV, vehicle
 movement, or road testing (RC-229). **No high-voltage system is connected or
 energized.**
 
-**Status (owner review_49): `CONTROLLED_VEHICLE_FITMENT_STARTED` /
+**Status (owner review_50): `CONTROLLED_VEHICLE_FITMENT_DEFINED` /
 `NO_HV_CONNECTED` / `NO_TRACTION_ENABLE` / `NO_VEHICLE_MOTION` /
-`PASSIVE_CAN1_ONLY` / `VCU_HARNESS_FITMENT_UNDER_REVIEW` /
-`GROUNDING_AND_SHIELDING_UNDER_REVIEW` /
-`IN_CHASSIS_PARASITIC_DRAW_BASELINE_REQUIRED` / `FORD_BASELINE_SCAN_REQUIRED`
-/ `NO_ROAD_TEST_AUTHORITY` / `NO_CUSTOMER_OPERATION`.** Owner: "the right
-next boundary: controlled vehicle fitment with no HV connected." Ladder:
-**05J (fitment) → 05K (LV power-on, no-HV) → 05L (HV first-energization,
-engineer-approved only)** (D-008).
+`CAN_1_PASSIVE_ONLY` / `FORD_BASELINE_SCAN_REQUIRED` /
+`FORD_POST_CONNECTION_SCAN_REQUIRED` /
+`CONVERSION_ADDED_PARASITIC_DRAW_TRACKED` /
+`GROUNDING_AND_SHIELDING_UNDER_REVIEW` / `NO_ROAD_TEST_AUTHORITY`.** Owner:
+"the right next boundary: controlled vehicle fitment with no HV connected."
+Ladder: **05J (fitment) → 05K (LV power-on, no-HV,
+`GATE05K_VEHICLE_POWER_ON.md`) → 05L-A (HV first-energization authorization &
+safety readiness) → 05L (HV first-energization, engineer-approved only)**
+(D-008, amended review_50).
 
 ## Target-value doctrine (owner review_49, RC-232) — read first
 
@@ -72,7 +74,7 @@ Do not confuse the conversion-added draw with the whole-vehicle draw.
 |---|---|---|---|---|
 | 05J-001 | physical routing & chafing audit | trace all LV wire paths; check full-lock/suspension travel | ≥50 mm from moving parts, ≥100 mm from heat, min bend radius (initial targets; final depends on temp/abrasion/movement/protection) | wire tension on full suspension travel / contact with moving chassis parts |
 | 05J-002 | ground-bond resistance | micro-ohmmeter VCU case + ground pins → primary chassis battery ground | <0.1 Ω (initial chassis-fitment target; final pending grounding architecture + instrument method + engineering review) | ground loop / R ≥ 0.1 Ω |
-| 05J-003 | in-chassis parasitic draw | current clamp/ammeter at 12 V battery; sleep transition | **conversion-added** ≤4.0 mA + total-vehicle vs OEM baseline (RC-231); sleep within ≤2.0 s (target) | conversion-added draw above target after sleep |
+| 05J-003 | in-chassis parasitic draw | current clamp/ammeter at 12 V battery; sleep transition | `conversion_added_sleep_current` ≤4.0 mA (initial chassis target); `OEM_baseline_sleep_current` and `total_vehicle_sleep_current` measured + logged separately (RC-231/234); sleep within ≤2.0 s (target) | conversion-added draw above target after sleep |
 | 05J-004 | CAN_1 silence (chassis verification) | **Ford baseline scan → connect VCU passive listen-only → Ford post-connection scan → compare (RC-230)**; monitor with a diagnostic scanner | zero VCU active frames / ACK / error frames on the live OEM Ford bus; no new OEM DTCs/cluster warnings vs baseline | VCU asserting dominant on Ford CAN / new Ford network DTCs or cluster errors |
 | 05J-005 | LOTO verification | physical audit of all HV connection points | all HV orange connectors unplugged/capped/tagged; MSD removed + locked | uncapped HV terminals / MSD installed or unlocked |
 
@@ -89,14 +91,14 @@ The system cannot exit Gate 05J unless:
 5. Conversion-added parasitic draw is measured and within the approved
    target.
 6. All HV connectors remain disconnected, capped, tagged, and locked out.
-7. All logs, photos, scans, scope traces, harness revisions, and signoffs
-   are archived.
+7. All logs, photos, scans, scope traces, **firmware/register dumps**,
+   harness revisions, and reviewer signoffs are archived (review_50).
 
-**Successful Gate 05J completion permits Gate 05K only** (Low-Voltage
-Vehicle Power-On / No-HV Commissioning). It does **not** authorize live HV
-connection · traction enable · vehicle movement · chassis dyno · road
-testing · customer operation · compliance claims. (Never "certified safe,"
-RC-224.)
+**Successful Gate 05J completion permits Gate 05K only**
+(`GATE05K_VEHICLE_POWER_ON.md` — Low-Voltage Vehicle Power-On / No-HV
+Commissioning). It does **not** authorize live HV connection · traction
+enable · vehicle movement · chassis dyno · road testing · customer operation ·
+compliance claims. (Never "certified safe," RC-224.)
 
 ## Standing checks
 

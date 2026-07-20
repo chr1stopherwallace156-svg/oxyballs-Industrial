@@ -40,15 +40,34 @@ later entry that references it.
      traction enable**; CAN_1 listen-only; verify grounds/shields, connector
      routing, no chafing, service access, LOTO, 12 V parasitic draw in the
      chassis, no Ford bus disturbance.
-  3. **Gate 05K — Low-Voltage Vehicle Power-On / No-HV Commissioning.**
+  3. **Gate 05K — Low-Voltage Vehicle Power-On / No-HV Commissioning** — no
+     HV, and **no real HV contactor closure** (coils disconnected / dummy
+     loads / mechanically blocked, RC-236).
   4. **Gate 05L — Controlled HV First-Energization** — engineer-approved
      only, after 05J + 05K, with a staged safety plan + LOTO/PPE (RC-117).
+- **Amendment (owner review_50, batch_53, RC-237): Gate 05L splits — the
+  05L rung must not open with "exact HV pre-charge timing."** It begins with
+  **Gate 05L-A — HV First-Energization Authorization & Safety Readiness**, a
+  pre-energization authorization gate (qualified HV personnel · written test
+  plan · LOTO · PPE + insulated tools · emergency-stop plan · rescue/emergency
+  response plan · fire watch/exclusion zone · absence-of-voltage verification
+  · HV connector/cable inspection · isolation-monitor readiness · pre-charge
+  ownership confirmation · contactor ownership confirmation · test-instrument
+  calibration · supplier documentation · hard-stop conditions · proof
+  artifacts · signoff), with **no final pre-charge/voltage/insulation/
+  contactor timing unless supplier docs or engineering review provide them**.
+  Only after 05L-A does the actual energization sequence (Gate 05L) get
+  detailed. Owner cited OSHA LOTO (authorized-employee lockout; circuits
+  energized until LOTO/de-energize/ground; only qualified persons on energized
+  parts) + NHTSA EV HV-hazard guidance (NeedsExactSource — owner-paraphrased,
+  not archived).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
-  05L**, engineer-approved, behind two no-HV fitment/power-on gates. Binds
-  the roadmap after Gate 05I-D. The Build Engine never marks a bench assembly
-  "certified safe" (RC-224). Recorded in
-  `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md`. Supersedes nothing.
+  05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the
+  05L-A authorization gate**. Binds the roadmap after Gate 05I-D. The Build
+  Engine never marks a bench assembly "certified safe" (RC-224). Recorded in
+  `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md`,
+  `docs/status/GATE05K_VEHICLE_POWER_ON.md`. Supersedes nothing.
 
 ## D-007 — Controls-authority doctrine: Coordinator ≠ Owner + Build Engine Authority Law
 

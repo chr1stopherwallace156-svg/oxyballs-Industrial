@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 52 + review_49 — Gate 05I-D final + Gate 05J Controlled Vehicle Fitment / No-HV)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 52 + review_49 — Gate 05I-D finalized + Gate 05J Controlled Vehicle Fitment / No-HV Installation Readiness); awaiting the Gate 05K Low-Voltage Vehicle Power-On batch or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `e188f68` (batch-52 archive); end commit: `a996f8e` (batch-52 reconciliation)
+- Work: new deliverable `GATE05J_VEHICLE_FITMENT.md` — the first rung of the D-008 post-bench ladder and the first gate where the conversion physically touches the vehicle (no HV): target-value doctrine, the CAN_1 live-Ford precondition + passive-only rule, the OEM/conversion/total parasitic-draw separation, a 5-row no-HV in-chassis matrix (05J-001..005), exit criteria permitting Gate 05K only. RC-229..232 (no new CS); section 60. Five owner corrections applied verbatim: 05J is fitment + passive/no-HV verification not commissioning (RC-229); CAN_1 live-Ford connection = passive listen-only after the 05H/05I-C proofs via Ford baseline→post scan compare (RC-230); parasitic draw separated OEM/conversion/total (RC-231); fitment values are target profiles + "live OEM Ford CAN_1 network" wording (RC-232, thirteenth artifact). Nothing Confirmed; no HV; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (invented-values RC-116/133/169/174/180/188/202/208/212/215/220/225/232 — thirteen artifacts + "instant/immediate" RC-175/198/204/211/225 + "certified safe" RC-224); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/HV-shutdown ownership (BQ-27).
+
 ## 2026-07-16 — Claude Code — task complete (batch 51 + review_48 — Gate 05I-D Integrated Fault Cascades + post-bench gate ladder D-008)
 
 ### (archived handoff)
