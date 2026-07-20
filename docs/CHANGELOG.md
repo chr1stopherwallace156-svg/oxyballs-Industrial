@@ -5,6 +5,47 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 59 + review_56: Gate 05L-B/05L-C/05M-A/05M-B cleanups + Gate 05M-C split
+
+- Archived batch_59 (Gate 05L-B/05L-C/05M-A/05M-B cleanups + Gate 05M-C
+  preview) and review_56 1:1 (commit `a3bdcd0`). New rows RC-273..278 (no new
+  CS). Section 67. **No new deliverable** — cleanups to `GATE05L_B/05L_C/05M_A/
+  05M_B` + the split of Gate 05M-C into 05M-C1/C2/C3. Owner: "very strong … the
+  architecture is now in the right order … a solid baseline path."
+- The Hunter realized RC-268 (05L-C supplier shutdown + feedback-mismatch),
+  RC-269 (05L-B pre-charge envelope), RC-270 (05M-A supplier tolerances), and
+  RC-272 (05M-B guarded/uncoupled boundary), and added four amendment rules.
+  **Regression watch — "Ready-to-Drive" re-emitted (RC-271→275)**, joining the
+  05L-C shutdown-order (3×) and RC-curve (2×) recurrences.
+- **Owner corrections (RC-273..278):**
+  - Global **Numeric Threshold Authority Rule** (RC-267 formalized): all
+    05L-B/05L-C/05M-A/05M-B numbers are INITIAL_TARGET_PROFILE; no gate
+    authority until tied to supplier docs + engineering review + calibrated
+    measurement method + raw proof + signed approval.
+  - RC-273 — 05L-B-005 no "absolute 0.0 V"/"immediately"; supplier OFF state
+    below the approved off-state leakage threshold.
+  - RC-274 — 05L-C-004 no "immediate"; isolation shutdown within the
+    supplier-defined IMD/BMS/PDU response window.
+  - RC-275 — 05M-A "Ready-to-Drive" recurrence (RC-271); supplier-defined
+    ready/torque-disabled state.
+  - RC-276 — 05M-B watchdog: coasting is not the failure; continuing to be
+    powered is.
+  - RC-277 — 05M-B over-speed via a supplier-supported test mode / pre-approved
+    calibration profile; no live safety-limit edit during rotation.
+  - RC-278 — Gate 05M-C split: 05M-C1 (coupled driveline static / lifted-wheel
+    readiness) → 05M-C2 (restricted creep) → 05M-C3 (controlled closed-area
+    low-speed movement); the first coupled test proves coupling/backlash/
+    wheel-speed/brake-override/torque-clamp with wheels lifted before any
+    open-floor movement.
+- Corrected status labels applied to 05L-B
+  (`CONTROLLED_HV_PRECHARGE_OBSERVATION_READY / SUPPLIER_LIMITS_REQUIRED …`),
+  05L-C (`HV_SHUTDOWN_DISCHARGE_REPEATABILITY_READY …`), 05M-A
+  (`INVERTER_READY_ZERO_TORQUE_VALIDATION_READY / TORQUE_DISABLED_STATE_ONLY …`),
+  05M-B (`NO_LOAD_MOTOR_SPIN_READY_FOR_DETAILING …`). **D-008 amended.**
+  RESEARCH_MAP + GATE_RESEARCH_QUEUE next → **Gate 05M-C1** (Coupled Driveline
+  Static / Lifted-Wheel Readiness). Nothing Confirmed; no wheel torque path; no
+  vehicle movement; never "certified safe" (RC-224); ODRs untouched.
+
 ## 2026-07-16 — RH batch 58 + review_55: Gate 05L-B/05L-C/05M-A cleanups + Gate 05M-B No-Load Motor Spin
 
 - Archived batch_58 (Gate 05L-B/05L-C/05M-A cleanups + Gate 05M-B) and

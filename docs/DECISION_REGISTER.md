@@ -141,6 +141,26 @@ later entry that references it.
   (RC-261→269) — the strongest M10 regression-scanner cases; the deliverables
   already hold the corrected wording. Full ladder unchanged: 05J → 05K → 05L-A
   → 05L-B → 05L-C → 05M-A → 05M-B → 05M-C (each engineer-approved).
+- **Amendment (owner review_56, batch_59, RC-273..278): the Numeric Threshold
+  Authority Rule is formalized and Gate 05M-C is SPLIT into 05M-C1 → 05M-C2 →
+  05M-C3.** All 05L-B/05L-C/05M-A/05M-B numbers are INITIAL_TARGET_PROFILE with
+  no gate authority until tied to supplier documentation + engineering review +
+  **calibrated measurement method** + raw proof artifact + signed approval
+  (RC-267 formalized). No-absolute-zero/"immediate" wording is removed:
+  05L-B-005 uses the supplier OFF state below the approved off-state leakage
+  threshold (RC-273); 05L-C-004 uses the supplier-defined IMD/BMS/PDU response
+  window (RC-274); 05M-A never says "Ready-to-Drive" (RC-275, a recurrence of
+  RC-271); 05M-B watchdog treats coasting as acceptable and only "still
+  powered" as the failure (RC-276); the 05M-B over-speed test uses a
+  supplier-supported test mode / pre-approved calibration profile, never a live
+  safety-limit edit during rotation (RC-277). **Gate 05M-C splits: 05M-C1
+  (Coupled Driveline Static / Lifted-Wheel Readiness — wheels lifted; proves
+  coupling, backlash, wheel-speed sensing, brake override, torque clamp) →
+  05M-C2 (Restricted Creep Torque Validation) → 05M-C3 (Controlled Closed-Area
+  Low-Speed Movement); no open-floor movement before 05M-C1 proves the coupled
+  mechanical/sensing/safety layer with the wheels lifted** (RC-278). Full
+  ladder: 05J → 05K → 05L-A → 05L-B → 05L-C → 05M-A → 05M-B → 05M-C1 → 05M-C2
+  → 05M-C3 (each engineer-approved).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the

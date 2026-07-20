@@ -9,15 +9,17 @@ normal shutdowns, emergency breaks, and active fault lockdowns reliably
 **before any traction rotation**. It is **live-HV** but still **ZERO motor RPM ·
 no inverter switching · no vehicle movement.**
 
-**Status (owner review_55): `HV_SHUTDOWN_DISCHARGE_REPEATABILITY_DEFINED` /
+**Status (owner review_56): `HV_SHUTDOWN_DISCHARGE_REPEATABILITY_READY` /
 `SUPPLIER_SHUTDOWN_SEQUENCE_REQUIRED` / `RATED_IMD_FIXTURE_REQUIRED` /
 `THERMAL_RECOVERY_REQUIRED` / `NO_INVERTER_SWITCHING` / `ZERO_MOTOR_RPM` /
-`NO_VEHICLE_MOVEMENT` / `NO_ROAD_TEST_AUTHORITY`.** Ladder: **05J → 05K → 05L-A
-→ 05L-B → 05L-C (THIS GATE) → 05M-A (inverter enable / zero-torque) → 05M-B
-(no-load spin) → 05M-C (controlled low-speed traction)** (D-008, amended
-review_55). (The shutdown contactor sequence is supplier-defined — "main-
-positive first" is a candidate, not a rule, RC-257/263/268; the Hunter has
-re-emitted the fixed order THREE times — regression watch.)
+`NO_TRACTION_COMMAND` / `NO_VEHICLE_MOVEMENT` / `NO_ROAD_TEST_AUTHORITY`.**
+Ladder: **05J → 05K → 05L-A → 05L-B → 05L-C (THIS GATE) → 05M-A (inverter
+enable / zero-torque) → 05M-B (no-load spin) → 05M-C1 (coupled driveline
+static / lifted-wheel) → 05M-C2 (restricted creep) → 05M-C3 (controlled
+closed-area low-speed movement)** (D-008, amended review_56). (The shutdown
+contactor sequence is supplier-defined — "main-positive first" is a candidate,
+not a rule, RC-257/263/268; the Hunter has re-emitted the fixed order THREE
+times — regression watch.)
 
 ## Value doctrine (owner review_53, RC-252) — read first
 
@@ -87,8 +89,10 @@ The system cannot exit Gate 05L-C unless:
 2. Pre-charge retry limits (≤2 target) and thermal cool-down timers are
    strictly enforced by the BMS/PDU firmware (targets only, RC-252).
 3. Active IMD fault injection — **via the approved current-limited fixture
-   only** (RC-256) — produces a reliable, timely isolation shutdown when an
-   isolation leak is introduced.
+   only** (RC-256) — produces an isolation shutdown **within the supplier-
+   defined IMD/BMS/PDU response window (RC-274, not "immediate" — IMD detection
+   has measurement time, filtering, CAN timing, and BMS/PDU decision delay)**
+   when an isolation leak is introduced.
 4. **Both** weld-detection checks pass: zero false positives from normal bounce
    **and** zero false negatives on a simulated weld (RC-258).
 5. The passive discharge window is mapped and scope-verified against the

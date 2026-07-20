@@ -646,45 +646,57 @@ supplier-specific, no assumed 0% PWM / no power-stage switching unless the
 supplier defines it safe + engineering approves (RC-265); 05M-A is readiness
 not spin (RC-266). Permits **Gate 05M-B only**.
 
-## Gate 05M-B — No-Load Motor Spin Validation  · STATUS: NO_LOAD_MOTOR_SPIN_DRAFTED (batch_58)
+## Gate 05M-B — No-Load Motor Spin Validation  · STATUS: NO_LOAD_MOTOR_SPIN_READY_FOR_DETAILING (batch_58 + cleanups batch_59)
 
 Deliverable `docs/status/GATE05M_B_NO_LOAD_MOTOR_SPIN.md` — the **first
 physical rotation of the traction motor**, shaft **uncoupled** from the
 drivetrain (driveshafts/axles/gearboxes): resolver offset-angle calibration,
 phase-rotation-sequence verification, balanced three-phase sine/THD audit,
-over-speed + watchdog-under-rotation trips. 5-row matrix (05M-B-001..005).
-Status (review_55): `NO_LOAD_MOTOR_SPIN_DRAFTED / MOTOR_UNCOUPLED_REQUIRED /
-GUARDED_SHAFT_REQUIRED / SUPPLIER_SPIN_PROFILE_REQUIRED /
-NO_DRIVELINE_TORQUE_PATH / NO_VEHICLE_MOVEMENT`. **Physical boundary (RC-272,
+over-speed (supplier-supported test mode, RC-277) + watchdog-under-rotation
+trips (coasting is not the failure, RC-276). 5-row matrix (05M-B-001..005).
+Status (review_56): `NO_LOAD_MOTOR_SPIN_READY_FOR_DETAILING /
+GUARDED_SHAFT_REQUIRED / MOTOR_UNCOUPLED_REQUIRED / SUPPLIER_SPIN_PROFILE_REQUIRED
+/ NO_DRIVELINE_TORQUE_PATH / NO_VEHICLE_MOVEMENT`. **Physical boundary (RC-272,
 HARD prerequisites):** guarded rotating shaft · no driveline attachment · no
 wheel torque path · no vehicle-movement path · emergency stop active ·
 exclusion zone active · supplier-defined spin profile only · no cabin driver
 pedal authority. All numbers (≤2% torque, 500 RPM, ±1.0° electrical, ≤3% phase
-balance, ≤50 ms watchdog) are `INITIAL_TARGET_PROFILE` pending supplier
-approval (RC-267). Spin commanded via the service/calibration tool, not driver
-pedal (RC-271). Permits **Gate 05M-C only**.
+balance, ≤50 ms watchdog) are `INITIAL_TARGET_PROFILE` pending supplier approval
+(RC-267/Numeric Threshold Authority Rule). Spin commanded via the service/
+calibration tool, not driver pedal (RC-271). Permits **Gate 05M-C1 only**.
 
-## Gate 05M-C — Controlled Low-Speed Traction Readiness  · STATUS: NEXT (owner review_55)
+## Gate 05M-C1 — Coupled Driveline Static / Lifted-Wheel Readiness  · STATUS: NEXT (owner review_56)
 
-The **last rung of the staged 05M phase** — the first point a wheel torque
-path is even contemplated, only after Gate 05M-B proves clean uncoupled
-rotation, resolver calibration, balanced phase currents, and the dynamic safety
-trips.
+Owner review_56: Gate 05M-C is **split** (RC-278) — do not jump to open-floor
+movement. The first coupled test proves the mechanical + sensing + safety layer
+**with the wheels lifted (no ground contact)** before any creep.
 
-Enforce throughout — engineer-gated, live-HV, **staged**: no road testing / no
-customer operation until proven; no threshold (traction torque limit, low-speed
-target, wheel-slip/creep limit, fault-response window) is final gate logic
-until supplier docs + engineering review + a live-HV test-plan approval + signed
-approval upgrade it (RC-267); the inverter owns its gating per the supplier
-state machine, the BMS/PDU owns contactors/pre-charge, the hardwired loop owns
-emergency interruption, the VCU requests/monitors (RC-247/265/205/227; BQ-27);
-the inverter/motor + driveline supplier data (torque map, gear ratio,
-axle/GAWR, brake/steering assist) is required before any wheel torque path
-(BQ-27); the stored-energy discharge-wait rule applies after any exposure
-(RC-242); no automatic retry after an E-stop (RC-262); never "certified safe" /
-no compliance claim (RC-224). Owner scope defined when the owner sends that
-batch. Then (later, well beyond Gate 05) the wider road/commissioning phases
-stay engineer-gated under a staged safety plan + LOTO/PPE (RC-117).
+**Owner scope (review_56) — the first coupled test proves:**
+
+> - mechanical coupling (driveline reconnected: driveshaft/axle/gearbox)
+> - driveline backlash / lash audit
+> - wheel-speed sensing
+> - brake override
+> - torque clamp
+> - wheels lifted / no ground contact / no vehicle movement path
+
+Enforce throughout — engineer-gated, live-HV, **wheels lifted, no ground
+contact, no vehicle-movement path**; the Numeric Threshold Authority Rule
+(RC-267) applies — no torque-clamp / creep-limit / backlash threshold is final
+gate logic until supplier docs + engineering review + calibrated measurement
+method + raw proof + signed approval upgrade it; the inverter owns its gating
+per the supplier state machine, the BMS/PDU owns contactors/pre-charge, the
+hardwired loop owns emergency interruption, the VCU requests/monitors
+(RC-247/265/205/227; BQ-27); the inverter/motor + driveline supplier data
+(torque map, gear ratio, axle/GAWR, wheel-speed, brake/steering assist) is
+required before any wheel torque path (BQ-27); the stored-energy discharge-wait
+rule applies after any exposure (RC-242); no automatic retry after an E-stop
+(RC-262); never "certified safe" / no compliance claim (RC-224). Only after
+05M-C1 → **05M-C2 (Restricted Creep Torque Validation)** → **05M-C3 (Controlled
+Closed-Area Low-Speed Movement)**, each engineer-approved under a staged safety
+plan + LOTO/PPE (RC-117); no open-floor / road testing / customer operation
+until proven. Then (later, well beyond Gate 05) the wider road/commissioning
+phases stay engineer-gated.
 
 Enforce throughout — no HV / no traction enable / no vehicle motion at
 05J-05K; CAN_1 stays listen-only + passive on the live OEM Ford bus (TXD-pin

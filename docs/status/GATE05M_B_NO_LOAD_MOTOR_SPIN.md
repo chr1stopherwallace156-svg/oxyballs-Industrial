@@ -12,12 +12,18 @@ electrical phase-rotation sequence, monitors phase-current balance/THD, and
 tests over-speed + watchdog trips **under a supplier-defined low-torque spin
 profile only** — there is **no wheel torque path and no vehicle-movement path.**
 
-**Status (owner review_55): `NO_LOAD_MOTOR_SPIN_DRAFTED` /
-`MOTOR_UNCOUPLED_REQUIRED` / `GUARDED_SHAFT_REQUIRED` /
+**Status (owner review_56): `NO_LOAD_MOTOR_SPIN_READY_FOR_DETAILING` /
+`GUARDED_SHAFT_REQUIRED` / `MOTOR_UNCOUPLED_REQUIRED` /
 `SUPPLIER_SPIN_PROFILE_REQUIRED` / `NO_DRIVELINE_TORQUE_PATH` /
 `NO_VEHICLE_MOVEMENT`.** Ladder: **05J → 05K → 05L-A → 05L-B → 05L-C → 05M-A →
-05M-B (THIS GATE — first no-load spin, motor uncoupled) → 05M-C (controlled
-low-speed traction readiness)** (D-008, amended review_55).
+05M-B (THIS GATE — first no-load spin, motor uncoupled) → 05M-C1 (coupled
+driveline static / lifted-wheel) → 05M-C2 (restricted creep) → 05M-C3
+(controlled closed-area low-speed movement)** (D-008, amended review_56).
+Numeric Threshold Authority Rule (RC-267): every value here is
+`INITIAL_TARGET_PROFILE` until tied to supplier docs + engineering review +
+calibrated measurement method + raw proof + signed approval. Watchdog/over-speed
+wording per RC-276/277 (coasting is not the failure; over-speed via a
+supplier-supported test mode only).
 
 ## Global value doctrine (owner review_55, RC-267) — read first
 
@@ -69,8 +75,8 @@ service/calibration tool, not driver pedal (RC-271).
 | 05M-B-001 | physical phase-rotation check | command a minimal torque request (≤2% nominal max target) via the service tool; observe shaft direction | physical rotation vector strictly matches the commanded software direction | the uncoupled shaft turns smoothly in the designated direction | shaft spinning backwards vs command / high-current shuddering or locking | video of shaft rotation + CAN command/feedback sync log |
 | 05M-B-002 | resolver angle-offset burn-in | run the inverter's automatic resolver-alignment routine via service diagnostic command | calculated offset within the **supplier** tolerance (±1.0° electrical target) across 3 consecutive iterations | offset stabilises; calibration parameter writes to NVM | inconsistent / wandering offset across sequential routines | diagnostic-tool confirmation + parameter memory dump |
 | 05M-B-003 | balanced phase sine/THD audit | spin at a constant low speed (500 RPM target); scope active phase-current lines | phase-current amplitudes across U/V/W balance within the **supplier** tolerance (≤3% target); THD within supplier specs | clean, symmetrical sinusoidal current waves | severely distorted/clipped waves / single-phase dropouts | high-bandwidth scope capture of phase-current probes |
-| 05M-B-004 | dynamic over-speed protection | spin up slowly; temporarily lower the software over-speed limit below current RPM | the inverter trips on over-speed within its supplier target, shuts down gating, drops to its supplier safe state | torque command → zero; shaft coasts freely to a stop (no active braking) | inverter failing to cross-check real RPM against the safety limit | CAN log: motor RPM vs inverter state bits during trip |
-| 05M-B-005 | watchdog loss under rotation | while the uncoupled shaft spins (500 RPM target), disconnect CAN_2 | the inverter power stage drops gating / disables torque within its supplier target (≤50 ms) of frame loss | motor → unpowered coast; inverter flags a critical comms-loss error | motor continuing to spin / holding its last active torque command | timestamped scope trace of bus drop vs phase-current decay |
+| 05M-B-004 | dynamic over-speed protection | **use a supplier-supported test mode or pre-approved calibration profile to trigger over-speed protection at a controlled low RPM (RC-277); live safety-limit modification during uncontrolled rotation is forbidden** | the inverter trips on over-speed within its supplier target, shuts down gating, drops to its supplier safe state | torque command → zero; shaft coasts freely to a stop (no active braking) | inverter failing to cross-check real RPM against the safety limit / live safety-limit edit during rotation | CAN log: motor RPM vs inverter state bits during trip |
+| 05M-B-005 | watchdog loss under rotation | while the uncoupled shaft spins (500 RPM target), disconnect CAN_2 | the inverter power stage drops gating / disables torque within its supplier target (≤50 ms) of frame loss | motor → unpowered coast; inverter flags a critical comms-loss error | **any of (RC-276 — coasting is NOT the failure, continuing to be powered is): the inverter continues actively driving the motor · phase current persists beyond the approved decay window · torque command remains active after watchdog loss · the inverter fails to enter its supplier-defined safe state** | timestamped scope trace of bus drop vs phase-current decay |
 
 ## Gate 05M-B exit criteria (owner review_55)
 
@@ -112,11 +118,15 @@ customer operation. (Never "certified safe," RC-224.)
   movement; no driver pedal authority; no "certified safe"/compliance claim;
   ODRs untouched.**
 
-## Next — Gate 05M-C (Controlled Low-Speed Traction Readiness)
+## Next — Gate 05M-C1 (Coupled Driveline Static / Lifted-Wheel Readiness)
 
-Owner review_55: only after 05M-B proves clean uncoupled rotation, resolver
-calibration, balanced phase currents, and the dynamic safety trips, Gate 05M-C
-is the **controlled low-speed traction readiness** gate — the first point a
-wheel torque path is even contemplated, still engineer-gated and staged (no
-road testing, no customer operation until proven). Its scope is defined when
-the owner sends that batch.
+Owner review_56: Gate 05M-C is **split** — do not jump to open-floor movement
+(RC-278). After 05M-B proves clean uncoupled rotation, the traction phase
+continues: **05M-C1 Coupled Driveline Static / Lifted-Wheel Readiness → 05M-C2
+Restricted Creep Torque Validation → 05M-C3 Controlled Closed-Area Low-Speed
+Movement.** The first coupled test (05M-C1) proves **mechanical coupling,
+driveline backlash, wheel-speed sensing, brake override, and torque clamp** —
+with the **wheels lifted / no ground contact** — *before* any open-floor
+operation. Each rung is engineer-gated, live-HV, staged (no road testing / no
+customer operation until proven). Its scope is defined when the owner sends
+that batch.

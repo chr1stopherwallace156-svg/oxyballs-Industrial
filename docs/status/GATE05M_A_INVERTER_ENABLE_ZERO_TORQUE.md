@@ -12,15 +12,17 @@ NO driver torque authority · NO power-stage switching unless the supplier
 documentation explicitly defines it as part of a safe zero-torque readiness
 state and engineering approves it.**
 
-**Status (owner review_55): `INVERTER_READY_ZERO_TORQUE_VALIDATION_DEFINED` /
-`LIVE_HV_PRESENT` / `TORQUE_DISABLED_STATE_REQUIRED` /
-`NO_INTENTIONAL_MOTOR_ROTATION` / `NO_DRIVER_TORQUE_AUTHORITY` /
+**Status (owner review_56): `INVERTER_READY_ZERO_TORQUE_VALIDATION_READY` /
+`LIVE_HV_PRESENT` / `TORQUE_DISABLED_STATE_ONLY` /
+`NO_DRIVER_TORQUE_AUTHORITY` / `NO_INTENTIONAL_MOTOR_ROTATION` /
 `NO_VEHICLE_MOVEMENT` / `SUPPLIER_INVERTER_STATE_DEFINITIONS_REQUIRED` /
 `WATCHDOG_TARGETS_PENDING_SUPPLIER_DATA` / `PHASE_CURRENT_OFFSET_CHECK_REQUIRED`
 / `RESOLVER_BASELINE_CHECK_REQUIRED` / `NO_ROAD_TEST_AUTHORITY`.** Ladder:
 **05J → 05K → 05L-A → 05L-B → 05L-C → 05M-A (THIS GATE — inverter enable /
-zero-torque readiness) → 05M-B (no-load motor spin) → 05M-C (controlled
-low-speed traction)** (D-008, amended review_55).
+zero-torque readiness) → 05M-B (no-load motor spin) → 05M-C1/C2/C3 (staged
+controlled low-speed traction)** (D-008, amended review_56). (05M-A-004 already
+uses the supplier-defined ready/torque-disabled wording — the Hunter re-emitted
+"Ready-to-Drive" in batch_59; RC-271→275 regression watch.)
 
 ## Value doctrine (owner review_54, RC-260) — read first
 

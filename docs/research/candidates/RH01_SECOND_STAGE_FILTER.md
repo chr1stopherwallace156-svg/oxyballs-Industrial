@@ -371,6 +371,12 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-270 | **Gate 05M-A needs tolerance wording, not perfect zero (owner review_55)**: "0.0 A / zero signal deviation / zero coupled EMI" is physically impossible (sensors always have noise) → **"within the supplier-defined zero-current threshold / within the supplier-defined resolver noise-drift tolerance / no torque-producing current beyond the approved threshold / no unintended shaft movement"** — bounded, explainable, supplier-approved noise | batch_58 (impossible perfect zero) | supplier sensor/resolver tolerances — **NeedsSupplierData** | **NeedsSupplierData / ControlsSafety** — fixed in `GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md` (05M-A-003/004) — lanes L7/L9 |
 | RC-271 | **Gate 05M-A must not say "Ready-to-Drive" (owner review_55)**: "step vehicle into an active Ready-to-Drive state" sounds like propulsion authority → **"step the inverter into its supplier-defined ready / torque-disabled state; driver torque authority remains masked; no traction command is enabled"** (keeps 05M-A clearly non-propulsive) | batch_58 (propulsion-sounding wording) | n/a — controls-safety wording rule | **ControlsSafety / NoGateAuthority** — fixed in `GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md` (05M-A-004) — lanes L7 |
 | RC-272 | **Gate 05M-B physical boundary must be stronger (owner review_55)**: "uncoupled from driveshafts/axles/gearboxes" is right but insufficient → 05M-B requires a **guarded rotating shaft · no driveline attachment · no wheel torque path · no vehicle-movement path · emergency stop active · exclusion zone active · supplier-defined spin profile only · no cabin driver pedal authority**; the ≤2% torque and 500 RPM values are **initial spin-profile targets pending supplier approval**, not final | batch_58 (weak spin boundary) | supplier spin profile — **NeedsSupplierData** | **ControlsSafety / HardBlock** — recorded in `GATE05M_B_NO_LOAD_MOTOR_SPIN.md` (physical boundary + matrix) — lanes L7/L9 |
+| RC-273 | **05L-B-005 must not use "absolute 0.0 V"/"immediately" (owner review_56, extends RC-270)**: literal zero + "immediate" violate the no-absolute-zero telemetry rule → **"coil drive lines remain in the supplier-defined OFF state and below the approved off-state leakage threshold; the power-up sequence is blocked before any coil-output enable command is issued"** | batch_59 (absolute-zero telemetry) | supplier off-state leakage threshold — **NeedsSupplierData** | **NeedsSupplierData / ControlsSafety** — fixed in `GATE05L_B_HV_FIRST_ENERGIZATION.md` (05L-B-005) — lanes L5/L7 |
+| RC-274 | **05L-C-004 must not say "immediate" isolation shutdown (owner review_56, "instant/immediate" RECURRENCE)**: IMD detection has real measurement time, filtering, CAN timing, and BMS/PDU decision delay → **"system isolation shutdown within the supplier-defined IMD/BMS/PDU response window"** (not "immediate") | batch_59 ("immediate" wording) | supplier IMD/BMS/PDU response window — **NeedsSupplierData** | **NeedsSupplierData / ControlsSafety** — fixed in `GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md` (exit criterion 3; extends RC-175/198/204/211/225/255) — lanes L5/L7 |
+| RC-275 | **05M-A STILL says "Ready-to-Drive" (owner review_56, RECURRENCE of RC-271)**: the Hunter re-emitted "step vehicle into an active Ready-to-Drive state" → **"step the inverter into its supplier-defined ready / torque-disabled state; driver torque authority remains masked; no traction command is enabled; no intentional motor rotation is permitted"** ("Ready-to-Drive" sounds like propulsion authority) | batch_59 (regression of RC-271) | n/a — controls-safety wording rule | **ControlsSafety / RegressionWatch** — `GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md` (05M-A-004) already holds the corrected wording; M10 regression-scanner case — lanes L7 |
+| RC-276 | **05M-B watchdog blocked-state is wrong — coasting is not the failure (owner review_56)**: "motor continuing to spin" is not a failure (an uncoupled shaft coasts from inertia after torque is removed) → blocked = **"the inverter continues actively driving the motor · phase current persists beyond the approved decay window · torque command remains active after watchdog loss · the inverter fails to enter its supplier-defined safe state"**; coasting is fine, **continuing to be powered is the failure** | batch_59 (wrong failure condition) | n/a — logic-correctness rule | **Correctness / ControlsSafety** — fixed in `GATE05M_B_NO_LOAD_MOTOR_SPIN.md` (05M-B-005) — lanes L7 |
+| RC-277 | **05M-B over-speed test must be supplier-supported (owner review_56)**: "temporarily lower the software over-speed limit below current RPM" reads like casually editing a safety limit while spinning → **"use a supplier-supported test mode or pre-approved calibration profile to trigger over-speed protection at a controlled low RPM; live safety-limit modification during uncontrolled rotation is forbidden"** | batch_59 (unsafe live-limit edit) | supplier test mode / calibration profile — **NeedsSupplierData** | **ControlsSafety / HardBlock** — fixed in `GATE05M_B_NO_LOAD_MOTOR_SPIN.md` (05M-B-004) — lanes L7/L9 |
+| RC-278 | **Gate 05M-C must be SPLIT before any real movement (owner review_56, amends D-008 ladder)**: the Hunter's 05M-C "wheels + gear reductions fully linked" jumps to open-floor movement → split **05M-C1 — Coupled Driveline Static / Lifted-Wheel Readiness → 05M-C2 — Restricted Creep Torque Validation → 05M-C3 — Controlled Closed-Area Low-Speed Movement**; the first coupled test (05M-C1) proves mechanical coupling, driveline backlash, wheel-speed sensing, brake override, and torque clamp **with the wheels lifted** before any open-floor operation | batch_59 (premature open-floor movement) | n/a — gate-ladder rule | **GateStatus / ControlsSafety** — amends D-008; queued as Gate 05M-C1 NEXT in `GATE_RESEARCH_QUEUE.md` — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -4461,5 +4467,80 @@ testing / no customer operation until proven). Only after 05M-B. Queued in
   gating, BMS/PDU owns contactors/pre-charge, hardwired loop owns emergency
   interruption, VCU requests/monitors (RC-247/265/205/227; BQ-27); never
   "certified safe" (RC-224).
+- Nothing ingested; nothing marked Confirmed; no wheel torque path; no vehicle
+  movement; no compliance/certification claim; ODRs untouched.
+
+## 67. Batch 59 + owner review_56 — Gate 05L-B/05L-C/05M-A/05M-B cleanups + Gate 05M-C split (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_59_gate05lbc_ma_mb_cleanups_gate05mc_preview.md`
+and `docs/research/raw/owner_reviews/review_56_batch_59_verdict.md`.
+Row additions: RC-273..RC-278 (no new CS). No new deliverable — cleanups to
+`GATE05L_B/05L_C/05M_A/05M_B` + the 05M-C split into 05M-C1/C2/C3. Owner: "very
+strong … the architecture is now in the right order … a solid baseline path."
+
+### Cleanups realized + recurrence
+
+The Hunter realized RC-268 (05L-C supplier shutdown + feedback-mismatch),
+RC-269 (05L-B pre-charge envelope), RC-270 (05M-A supplier tolerances), RC-272
+(05M-B guarded/uncoupled boundary), and added the four amendment rules. **But
+05M-A-004 re-emitted "Ready-to-Drive" (RC-271→275 regression)**, and it left
+"absolute 0.0 V"/"immediately" (05L-B-005), "immediate" (05L-C-004 exit),
+"motor continuing to spin" (05M-B-005), and the live over-speed-limit edit
+(05M-B-004). The deliverables already held the corrected 05M-A-004 wording.
+
+### Owner corrections
+
+- **Global Numeric Threshold Authority Rule (RC-267 formalized):** all
+  05L-B/05L-C/05M-A/05M-B numbers are INITIAL_TARGET_PROFILE; no gate authority
+  until tied to supplier docs + engineering review + calibrated measurement
+  method + raw proof + signed approval. Added as a header rule to the
+  deliverables.
+- **05L-B-005 no "absolute 0.0 V"/"immediately" (RC-273):** supplier-defined
+  OFF state below the approved off-state leakage threshold; blocked before any
+  coil-output enable command.
+- **05L-C-004 no "immediate" (RC-274):** isolation shutdown within the
+  supplier-defined IMD/BMS/PDU response window.
+- **05M-A "Ready-to-Drive" recurrence (RC-275):** supplier-defined
+  ready/torque-disabled state; driver torque authority masked.
+- **05M-B watchdog blocked-state (RC-276):** coasting is not the failure —
+  continuing to be powered (inverter actively driving / phase current beyond
+  decay window / torque active after watchdog loss / fails to reach safe state)
+  is.
+- **05M-B over-speed supplier-supported (RC-277):** supplier test mode /
+  pre-approved calibration profile at a controlled low RPM; no live safety-limit
+  edit during rotation.
+- **Gate 05M-C split (RC-278):** 05M-C1 (coupled driveline static /
+  lifted-wheel readiness) → 05M-C2 (restricted creep) → 05M-C3 (controlled
+  closed-area low-speed movement); the first coupled test proves coupling,
+  backlash, wheel-speed sensing, brake override, and torque clamp with wheels
+  lifted before any open-floor operation.
+
+### Corrected status labels (owner review_56)
+
+05L-B `CONTROLLED_HV_PRECHARGE_OBSERVATION_READY / SUPPLIER_LIMITS_REQUIRED /
+…`; 05L-C `HV_SHUTDOWN_DISCHARGE_REPEATABILITY_READY /
+SUPPLIER_SHUTDOWN_SEQUENCE_REQUIRED / RATED_IMD_FIXTURE_REQUIRED / …`; 05M-A
+`INVERTER_READY_ZERO_TORQUE_VALIDATION_READY / TORQUE_DISABLED_STATE_ONLY / …`;
+05M-B `NO_LOAD_MOTOR_SPIN_READY_FOR_DETAILING / GUARDED_SHAFT_REQUIRED /
+MOTOR_UNCOUPLED_REQUIRED / …`.
+
+### Next
+
+Owner: **Gate 05M-C1 — Coupled Driveline Static / Lifted-Wheel Readiness** (the
+first coupled test, wheels lifted, before any creep movement). Queued in
+`GATE_RESEARCH_QUEUE.md`. Then 05M-C2 (restricted creep) → 05M-C3 (controlled
+closed-area low-speed movement).
+
+### Standing checks
+
+- All 05L-B/05L-C/05M-A/05M-B numbers are INITIAL_TARGET_PROFILE (RC-267); no
+  "absolute zero"/"immediate" wording (RC-273/274); 05M-A never "Ready-to-Drive"
+  (RC-275); coasting is not the 05M-B failure (RC-276); over-speed via a
+  supplier-supported test mode only (RC-277); 05M-C split — wheels lifted before
+  any open-floor movement (RC-278); the inverter owns gating, BMS/PDU owns
+  contactors/pre-charge, hardwired loop owns emergency interruption, VCU
+  requests/monitors (RC-247/265/205/227; BQ-27); never "certified safe"
+  (RC-224).
 - Nothing ingested; nothing marked Confirmed; no wheel torque path; no vehicle
   movement; no compliance/certification claim; ODRs untouched.
