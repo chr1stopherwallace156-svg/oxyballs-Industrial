@@ -1,0 +1,29 @@
+{
+  "candidate_id": "SRC-CAND-000011",
+  "id_immutable": true,
+  "metadata": {
+    "title": "2019 Super Duty Chassis Cab Brochure (Skeeter mirror)",
+    "source_type": "OEM_BROCHURE",
+    "document_class": "MARKETING_PLUS_UPFIT_NARRATIVE",
+    "publisher": "Ford / third-party mirror",
+    "reported_year": 2019,
+    "legacy_aliases": ["SRC-BRIEF-3"]
+  },
+  "acquisition_status": "ACQUIRED",
+  "access_status": "ACQUIRED",
+  "egs_lifecycle_status": "SOURCE_ACQUIRED",
+  "research_confidence_rc": 65,
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "local_file_path": "research/incoming/chassis_frame_ab/SRC-CAND-000011_SkeeterFordChassis2019.pdf",
+  "source_url": "https://skeeteremergencyvehicles.com/wp-content/uploads/2020/02/SkeeterFordChassis2019.pdf",
+  "sha256": "sha256:f71e9eebf97ebe4f90ab5aaa5d780504e73df63d5008a7f5af8e4e35c8c6589f",
+  "hash_status": "HASHED",
+  "page_extraction_status": "PARTIAL_EXECUTED",
+  "evidence_status": "PLATFORM_FAMILY_MARKETING",
+  "notes": "Supports C-channel/upfitter narrative. Not sole authority for mm dimensions (use SRC-CAND-000010). Prior broken Skeeter URL demoted; this path acquired.",
+  "research_sprint": "RL-020",
+  "decision": "DT-D051",
+  "aliases": ["SRC-BRIEF-3"]
+}

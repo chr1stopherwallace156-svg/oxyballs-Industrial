@@ -5,17 +5,15 @@
 
 | Concern | Status |
 |---|---|
-| FL door vertical slice | **DT-D050 / RL-019** package active |
-| Scope lock | 2019 F-450 RC 4x2 DRW 145.3/60 — confirmed |
-| SRC-CAND-000001 (BAG) | **ACQUIRED** (hashed; parse pending) |
-| SRC-CAND-000008 (NHTSA 17S33) | **ACQUIRED** (PLATFORM_FAMILY_REFERENCE) |
-| SRC-CAND-000009 (brochure) | **NOT_ACQUIRED** (URL 404) |
-| WSM / EWD | **SOURCE_DISCOVERED** — MISN-000003 |
-| KG-001 / KG-005 | OPEN (pinout CONTR + regulator fasteners) |
+| Chassis frame brief A/B | **DT-D051** — datums + dims ASSERTION_EXTRACTED |
+| SRC-CAND-000010 / 000011 | **ACQUIRED** (hashed) |
+| Frame CFGCOMP root | `CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME` |
+| Next subsystem | **MISN-000004** Mission D (4x2 steering/suspension) |
+| Mission E | **MISN-000005** deferred |
+| FL door slice | DT-D050 active; WSM/EWD still commercial |
 | EGS / procedures | `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY` / **BLOCKED** |
-| Frozen assembly-relationship | **Unchanged** |
-| Kernel / rc1 | Unchanged |
+| Kernel | Unchanged |
 
 ## Change-control
 
-- `decisions/DT-D030_*.json` … `DT-D050_*.json`
+- `decisions/DT-D030_*.json` … `DT-D051_*.json`

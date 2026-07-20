@@ -1,0 +1,11 @@
+{
+  "source_id": "SRC-CAND-000011",
+  "title": "2019 Super Duty Chassis Cab Brochure (Skeeter mirror)",
+  "url": "https://skeeteremergencyvehicles.com/wp-content/uploads/2020/02/SkeeterFordChassis2019.pdf",
+  "local_file_path": "research/incoming/chassis_frame_ab/SRC-CAND-000011_SkeeterFordChassis2019.pdf",
+  "sha256": "sha256:f71e9eebf97ebe4f90ab5aaa5d780504e73df63d5008a7f5af8e4e35c8c6589f",
+  "byte_length": 4372621,
+  "acquisition_status": "SOURCE_ACQUIRED",
+  "hash_status": "HASHED",
+  "page_extraction_status": "NOT_EXECUTED"
+}

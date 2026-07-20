@@ -1,0 +1,31 @@
+{
+  "mission_id": "MISN-000004",
+  "id_immutable": true,
+  "aliases": ["EDTS-MISN-004", "Subsystem-Mission-D", "Mission-D"],
+  "title": "Subsystem Mission D — 4x2 Steering & Front Suspension",
+  "objective": "Document exact-configuration 4x2 front track hub, front axle architecture (do not invent Twin-I-Beam vs solid-axle without OEM cite), radius arms / links, and spring rate evidence for CFG-2019-F450-REG-CAB-4X2-60CA-DRW.",
+  "target_gap_ids": [],
+  "success_criteria": [
+    "Acquire/hash at least one OEM source stating 4x2 front axle architecture for 2019 Super Duty Chassis Cab F-450 (or exact silo).",
+    "Map CFGCOMP/IFACE nodes for hub, axle, radius arm, spring without borrowing 4x4-only geometry.",
+    "Record spring rates only with ASSERTION_EXTRACTED+token anchors — else UNRESOLVED.",
+    "No procedure generation authorization."
+  ],
+  "evidence_required": [
+    "Front axle architecture statement",
+    "Hub/bearing interface IDs",
+    "Radius arm / track bar attachments",
+    "Spring rate table or UNRESOLVED gaps"
+  ],
+  "completion_status": "NOT_STARTED",
+  "assigned_src_cand_ids": ["SRC-CAND-000001", "SRC-CAND-000002", "SRC-CAND-000010"],
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "research_sprint": "RL-020",
+  "decision": "DT-D051",
+  "priority_note": "Selected over Mission E (ICE removal) after chassis frame datum lock — aligns with existing FRONT_SUSPENSION_GEOMETRY research lane.",
+  "notes": [
+    "Do not invent Twin-I-Beam vs solid axle. Prior RL-007 left architecture RESEARCH_REQUIRED.",
+    "Mission E (ICE powertrain removal) deferred as MISN-000005 stub."
+  ]
+}

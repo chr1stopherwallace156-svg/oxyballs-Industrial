@@ -7,7 +7,7 @@
     "pattern": "SRC-CAND-######",
     "immutable_handle": true,
     "metadata_mutable": true,
-    "next_id": "SRC-CAND-000010"
+    "next_id": "SRC-CAND-000012"
   },
   "hard_rules": [
     "HR-EVI",
@@ -141,6 +141,28 @@
       "acquisition_status": "NOT_ACQUIRED",
       "metadata_title": "2019 Super Duty Chassis Cab Sales Spec / Brochure (URL 404)",
       "aliases": ["SRC-002"]
+    },
+    {
+      "candidate_id": "SRC-CAND-000010",
+      "path": "research/src_candidates/SRC-CAND-000010.json",
+      "topic": "CHASSIS_FRAME_DIMENSIONS",
+      "research_confidence_rc": 92,
+      "acquisition_status": "ACQUIRED",
+      "hash_status": "HASHED",
+      "page_extraction_status": "PARTIAL_EXECUTED",
+      "metadata_title": "2019 F-350/F-450/F-550 Chassis Cabs Fleet Specs",
+      "aliases": ["SRC-BRIEF-2"]
+    },
+    {
+      "candidate_id": "SRC-CAND-000011",
+      "path": "research/src_candidates/SRC-CAND-000011.json",
+      "topic": "CHASSIS_FRAME_UPFITTER",
+      "research_confidence_rc": 65,
+      "acquisition_status": "ACQUIRED",
+      "hash_status": "HASHED",
+      "page_extraction_status": "PARTIAL_EXECUTED",
+      "metadata_title": "2019 Super Duty Chassis Cab Brochure (Skeeter 2020/02)",
+      "aliases": ["SRC-BRIEF-3"]
     }
   ],
   "next_search_queue": [

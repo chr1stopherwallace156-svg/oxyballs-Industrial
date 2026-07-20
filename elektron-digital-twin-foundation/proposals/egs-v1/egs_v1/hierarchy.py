@@ -11,7 +11,7 @@ COMPDEF_RE = re.compile(r"^COMPDEF-[A-Z0-9-]+$")
 CFGCOMP_RE = re.compile(r"^CFGCOMP-[A-Z0-9-]+$")
 CMPINST_RE = re.compile(r"^CMPINST-[A-Z0-9-]+$")
 IFACE_RE = re.compile(
-    r"^IFACE-(CONNECTOR|GROMMET|MOUNT-HOLE|FLANGE|SERVICE-PORT)-[A-Z0-9-]+$"
+    r"^IFACE-(CONNECTOR|GROMMET|MOUNT-HOLE|FLANGE|SERVICE-PORT|UPFITTER|BODY-MOUNT|AXLE-DATUM|CAB-PLANE)-[A-Z0-9-]+$"
 )
 OP_RE = re.compile(r"^OP-[A-Z0-9-]+$")
 AID_RE = re.compile(r"^AID-", re.IGNORECASE)

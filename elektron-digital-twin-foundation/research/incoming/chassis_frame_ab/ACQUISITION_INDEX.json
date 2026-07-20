@@ -1,0 +1,27 @@
+{
+  "document_id": "CHASSIS_FRAME_AB_ACQUISITION_INDEX",
+  "sources": [
+    {
+      "source_id": "SRC-CAND-000010",
+      "title": "2019 F-350/F-450/F-550 Chassis Cabs Fleet Specs",
+      "url": "https://irp.cdn-website.com/8e9b3e0f/files/uploaded/2019%20F-350_450_550%20Chassis%20Cabs.pdf",
+      "local_file_path": "research/incoming/chassis_frame_ab/SRC-CAND-000010_2019_F350_450_550_Chassis_Cabs_Fleet_Spec.pdf",
+      "sha256": "sha256:7a92e4ea839a3a7d163e2c374e6cfde0a24d277e1ee40013217cc6b3cab9c030",
+      "byte_length": 3179008,
+      "acquisition_status": "SOURCE_ACQUIRED",
+      "hash_status": "HASHED",
+      "page_extraction_status": "PARTIAL_EXECUTED"
+    },
+    {
+      "source_id": "SRC-CAND-000011",
+      "title": "2019 Super Duty Chassis Cab Brochure (Skeeter mirror)",
+      "url": "https://skeeteremergencyvehicles.com/wp-content/uploads/2020/02/SkeeterFordChassis2019.pdf",
+      "local_file_path": "research/incoming/chassis_frame_ab/SRC-CAND-000011_SkeeterFordChassis2019.pdf",
+      "sha256": "sha256:f71e9eebf97ebe4f90ab5aaa5d780504e73df63d5008a7f5af8e4e35c8c6589f",
+      "byte_length": 4372621,
+      "acquisition_status": "SOURCE_ACQUIRED",
+      "hash_status": "HASHED",
+      "page_extraction_status": "NOT_EXECUTED"
+    }
+  ]
+}

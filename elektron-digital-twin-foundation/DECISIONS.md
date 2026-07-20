@@ -849,3 +849,18 @@ Append-only record of digital twin foundation decisions.
   5. No invented torque/voltage/hashes; parser fixtures synthetic only
   6. Saturation **PARTIALLY_SATURATED** — procedures **NOT_AUTHORIZED**
 
+
+## DT-D051 — Chassis frame Evidence Brief A/B + Mission D
+
+- **Change-control record:** [`decisions/DT-D051_CHASSIS_FRAME_EVIDENCE_BRIEF_AB.json`](decisions/DT-D051_CHASSIS_FRAME_EVIDENCE_BRIEF_AB.json)
+- **decision_id:** `DT-D051`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY`
+- **decision:**
+  1. Admit bumper-referenced datums + F-450 RC dimensional brief (fleet PDF page cites)
+  2. Acquire **SRC-CAND-000010** + **SRC-CAND-000011** (real SHA-256)
+  3. Initialize **CFGCOMP-…-FRAME** / rails / **IFACE-UPFITTER**
+  4. Select **MISN-000004** (Mission D front suspension); defer Mission E as **MISN-000005**
+  5. No invented axle architecture / spring rates
+

@@ -441,3 +441,24 @@ DT-D049 — pipeline boundaries locked; recommended decision still `EGS_V1_PROPO
 ### Status
 
 DT-D050 — vertical slice package ready; real promotion blocked pending Helm/WSM/EWD bytes.
+
+---
+
+## RL-020 — Chassis frame Evidence Brief A/B
+
+- **Date:** 2026-07-20
+- **Layer:** chassis frame / global datums
+- **Agent:** Cursor Cloud Agent
+- **Question:** Register exact-config bumper datums, frame C-channel/upfitter constraints, and track packaging from acquired fleet/brochure sources?
+
+### Findings
+
+1. **SRC-CAND-000010** fleet specs acquired+hashed; F-450 Regular Cab tables support WB/CA/overhang/track/H=34.2 (not F-350 34.1).
+2. Frame height curb **35.0/35.9** and loaded **28.7/28.6** (4x2) extracted from page 4 — dual values retained.
+3. **SRC-CAND-000011** Skeeter brochure acquired (prior URL path was 404); C-channel/upfitter rules DOCUMENT_SUPPORTED pending token anchors.
+4. Structural CFGCOMP/IFACE graph initialized; edges CANDIDATE_UNVERIFIED.
+5. **Option A selected** → MISN-000004; Mission E deferred MISN-000005.
+
+### Status
+
+DT-D051 — frame brief locked; Mission D next (no invented suspension architecture).

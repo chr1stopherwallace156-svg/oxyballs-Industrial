@@ -1,0 +1,136 @@
+{
+  "document_id": "CHASSIS_FRAME_CANDIDATE_EDGES",
+  "schema_version": "EGS-1.0.0-proposal.2",
+  "authority_status": "CANDIDATE_DOCUMENT_SUPPORTED",
+  "decision": "DT-D051",
+  "honesty_gate": [
+    "CONTAINS(frame, rail) is a modeling construct supported by OEM frame-rail width publication — not a workshop procedure.",
+    "Do not mark ASSERTION_VERIFIED without token anchors; use ASSERTION_EXTRACTED from fleet table extract.",
+    "procedure_eligibility remains NOT_AUTHORIZED."
+  ],
+  "edges": [
+    {
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T18:15:00Z",
+      "created_by": "EDTS-Chassis-Frame-AB",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-FRAME-CONTAINS-RAIL-LH",
+      "aliases": [],
+      "graph_plane": "PHYSICAL",
+      "relationship_class": "CONTAINS",
+      "source_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "target_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME-RAIL-LH",
+      "directionality": "FORWARD",
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
+        "notes": null
+      },
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": "Existence ASSERTION_EXTRACTED from F-450 RC frame rail width table — not ASSERTION_VERIFIED"
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "ASSERTION_EXTRACTED",
+          "evidence_assertion_ids": ["EVD-SRC-CAND-000010-P3-H-FRAME-RAIL-WIDTH"],
+          "mandatory": true,
+          "notes": "Supported by published H=34.2 frame rail width for F-450 Regular Cab"
+        }
+      },
+      "transient_state": null,
+      "notes": []
+    },
+    {
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T18:15:00Z",
+      "created_by": "EDTS-Chassis-Frame-AB",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-FRAME-CONTAINS-RAIL-RH",
+      "aliases": [],
+      "graph_plane": "PHYSICAL",
+      "relationship_class": "CONTAINS",
+      "source_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "target_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME-RAIL-RH",
+      "directionality": "FORWARD",
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
+        "notes": null
+      },
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": null
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "ASSERTION_EXTRACTED",
+          "evidence_assertion_ids": ["EVD-SRC-CAND-000010-P3-H-FRAME-RAIL-WIDTH"],
+          "mandatory": true,
+          "notes": null
+        }
+      },
+      "transient_state": null,
+      "notes": []
+    },
+    {
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T18:15:00Z",
+      "created_by": "EDTS-Chassis-Frame-AB",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-FRAME-HOSTS-UPFITTER",
+      "aliases": [],
+      "graph_plane": "PHYSICAL",
+      "relationship_class": "CONTAINS",
+      "source_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "target_node_id": "IFACE-UPFITTER-AFT-CAB",
+      "directionality": "FORWARD",
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
+        "notes": null
+      },
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": "Upfitter zone + drill/weld rules DOCUMENT_SUPPORTED pending token anchors"
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "SOURCE_DISCOVERED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
+          "notes": "Chassis Cab body-mount purpose"
+        }
+      },
+      "transient_state": null,
+      "notes": []
+    }
+  ]
+}

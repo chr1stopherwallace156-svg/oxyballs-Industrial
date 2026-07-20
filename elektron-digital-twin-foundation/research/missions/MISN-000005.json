@@ -1,0 +1,14 @@
+{
+  "mission_id": "MISN-000005",
+  "id_immutable": true,
+  "aliases": ["EDTS-MISN-005", "Subsystem-Mission-E", "Mission-E"],
+  "title": "Subsystem Mission E — ICE Powertrain Removal Mapping (DEFERRED)",
+  "objective": "Map factory cross-member extraction points, engine envelope clearances, fuel lines, and original mass distributions for EV conversion packaging — after Mission D front-suspension evidence is in progress.",
+  "completion_status": "NOT_STARTED",
+  "deferred": true,
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "research_sprint": "RL-020",
+  "decision": "DT-D051",
+  "notes": ["Deferred by DT-D051 in favor of MISN-000004. Do not invent mass/clearance values."]
+}

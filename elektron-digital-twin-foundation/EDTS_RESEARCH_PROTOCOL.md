@@ -2,7 +2,7 @@
 
 **Status:** `ACTIVE`  
 **Effective Date:** 2026-07-16  
-**Version:** `2.12.0`  
+**Version:** `2.13.0`  
 **Architecture host:** [EDTS_OS.md](EDTS_OS.md) v3.0.0+ (EDTS-OS)  
 **Isolation law:** [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
 **Binding for:** all research, acquisition, geometry development, and software logic operations under `elektron-digital-twin-foundation/`
@@ -20,7 +20,8 @@
 **Changelog from 2.8.0:** **EGS-v1 proposal module** (`proposals/egs-v1/`) — CMPINST-only endpoints, per-property evidence, applicability/lifecycle, graph queries; F-450 sample edges `CANDIDATE_UNVERIFIED` until primary evidence.  
 **Changelog from 2.9.0:** **EGS-1.0.0-proposal.2** — COMPDEF/CFGCOMP/CMPINST hierarchy; IFACE layer; PHYSICAL/FUNCTIONAL/PROCEDURAL planes; deterministic claim lifecycle; cycle classification; REL-REG audit `REAL_DATA_PROMOTION_BLOCKED`.  
 **Changelog from 2.10.0:** **Research Execution Pipeline audit** (`EDTS-PIPELINE-AUDIT-2026-07`) — six-dimension capability/bottleneck lock; Sprint 7 physical acquisition template; paywall/physical limits explicit.  
-**Changelog from 2.11.0:** **FL Door vertical-slice mission** — exact scope lock; public BAG/NHTSA bytes acquired+hashed; brochure URL demoted; MISN-000003 commercial handoff; KG-005; pinout contradiction logged.
+**Changelog from 2.11.0:** **FL Door vertical-slice mission** — exact scope lock; public BAG/NHTSA bytes acquired+hashed; brochure URL demoted; MISN-000003 commercial handoff; KG-005; pinout contradiction logged.  
+**Changelog from 2.12.0:** **Chassis frame Evidence Brief A/B** — bumper datums + F-450 RC fleet dims extracted; SRC-CAND-000010/11 acquired; Mission D (front suspension) opened; Mission E deferred.
 
 ---
 

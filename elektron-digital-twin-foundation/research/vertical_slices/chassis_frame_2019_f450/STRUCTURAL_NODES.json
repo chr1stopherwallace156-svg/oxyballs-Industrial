@@ -1,0 +1,69 @@
+{
+  "document_id": "CHASSIS_FRAME_STRUCTURAL_NODES",
+  "decision": "DT-D051",
+  "authority_status": "CANDIDATE_DOCUMENT_SUPPORTED",
+  "root_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+  "components": [
+    {
+      "compdef_id": "COMPDEF-FRAME-ASSEMBLY-CHASSIS-CAB",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "display_name": "2019 F-450 RC 4x2 60CA DRW Chassis Frame Assembly",
+      "verification_status": "CANDIDATE",
+      "physical_type": "FRAME_ASSEMBLY"
+    },
+    {
+      "compdef_id": "COMPDEF-FRAME-RAIL-LH",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME-RAIL-LH",
+      "display_name": "Left Frame Rail (aft-of-cab C-channel)",
+      "verification_status": "CANDIDATE",
+      "physical_type": "STRUCTURAL_RAIL"
+    },
+    {
+      "compdef_id": "COMPDEF-FRAME-RAIL-RH",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME-RAIL-RH",
+      "display_name": "Right Frame Rail (aft-of-cab C-channel)",
+      "verification_status": "CANDIDATE",
+      "physical_type": "STRUCTURAL_RAIL"
+    },
+    {
+      "compdef_id": "COMPDEF-FRAME-EXT-42",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME-EXT-42",
+      "display_name": "Optional 42.2 in Aft-of-Axle Frame Extension",
+      "verification_status": "CANDIDATE",
+      "physical_type": "FRAME_EXTENSION",
+      "option_dependent": true,
+      "notes": ["Not assumed on bare silo unless ordered"]
+    }
+  ],
+  "interfaces": [
+    {
+      "iface_id": "IFACE-UPFITTER-AFT-CAB",
+      "parent_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "interface_type": "UPFIT_BODY_MOUNT_ZONE",
+      "verification_status": "CANDIDATE",
+      "mating_capability": "BOLTED_BODY_MOUNT",
+      "constraints_ref": "ENGINEERING_EVIDENCE_BRIEF_AB.json#upfitter_constraints"
+    },
+    {
+      "iface_id": "IFACE-AXLE-DATUM-FRONT",
+      "parent_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "interface_type": "AXLE_DATUM",
+      "station_id": "X-038.3",
+      "verification_status": "CANDIDATE"
+    },
+    {
+      "iface_id": "IFACE-AXLE-DATUM-REAR",
+      "parent_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "interface_type": "AXLE_DATUM",
+      "station_id": "X-183.7",
+      "verification_status": "CANDIDATE"
+    },
+    {
+      "iface_id": "IFACE-CAB-PLANE-BACK",
+      "parent_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "interface_type": "CAB_REFERENCE_PLANE",
+      "station_id": "X-123.7",
+      "verification_status": "CANDIDATE"
+    }
+  ]
+}
