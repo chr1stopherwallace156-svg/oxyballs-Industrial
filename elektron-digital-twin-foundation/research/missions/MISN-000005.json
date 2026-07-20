@@ -3,12 +3,18 @@
   "id_immutable": true,
   "aliases": ["EDTS-MISN-005", "Subsystem-Mission-E", "Mission-E"],
   "title": "Subsystem Mission E — ICE Powertrain Removal Mapping (DEFERRED)",
-  "objective": "Map factory cross-member extraction points, engine envelope clearances, fuel lines, and original mass distributions for EV conversion packaging — after Mission D front-suspension evidence is in progress.",
+  "objective": "Map factory cross-member extraction points, engine envelope clearances, fuel lines, and original mass distributions for EV conversion packaging — after Mission D front-suspension evidence advances and MEPQ-001/002 are authorized for acquisition.",
   "completion_status": "NOT_STARTED",
   "deferred": true,
+  "target_mepq_ids": ["MEPQ-001", "MEPQ-002"],
+  "target_gap_ids": ["KG-006", "KG-007"],
   "bound_vehicle_instance_id": "VEH-000001",
   "bound_configuration_id": "CFG-000001",
-  "research_sprint": "RL-020",
-  "decision": "DT-D051",
-  "notes": ["Deferred by DT-D051 in favor of MISN-000004. Do not invent mass/clearance values."]
+  "research_sprint": "RL-023",
+  "decision": "DT-D054",
+  "notes": [
+    "Remains deferred (DT-D051/D053/D054). Option A not selected.",
+    "MEPQ-001/002 registered so ICE boundary gaps are not lost.",
+    "Do not invent mass/clearance/torque values."
+  ]
 }

@@ -1,0 +1,26 @@
+{
+  "gap_id": "KG-007",
+  "component": "Transmission cross-member / frame interface brackets",
+  "reported_oem_part_number": null,
+  "critical_need": "Exact hole coordinates, diameters, and web thicknesses for EDU mount reuse decision.",
+  "priority": "HIGH",
+  "possible_sources": [
+    "SRC-CAND-000001 BAG/BBLB frame charts",
+    "Licensed OEM CAD"
+  ],
+  "related_src_cand_ids": [
+    "SRC-CAND-000001"
+  ],
+  "related_mission_ids": [
+    "MISN-000005"
+  ],
+  "status": "BLOCKED",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "notes": [
+    "Linked MEPQ-002 (see research/mepq/).",
+    "Linked MEPQ-002. No hole dimensions invented.",
+    "BAG parse may partially advance without full Mission E."
+  ],
+  "decision": "DT-D054"
+}

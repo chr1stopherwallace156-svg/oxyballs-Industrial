@@ -1,0 +1,40 @@
+{
+  "mepq_id": "MEPQ-001",
+  "operator_alias": "MEPQ-2019-F450-ICE-REM-001",
+  "target_property": "Factory powertrain CG (x,y,z) and dry mass of stock engine/transmission assembly",
+  "system_context": "ICE removal / EV conversion weight distribution & battery packaging",
+  "affected_cfgcomp_ids": [
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK",
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION"
+  ],
+  "priority": "CRITICAL",
+  "status": "DEFERRED",
+  "inference_forbidden_reason": "CG and dry mass cannot be safely inferred from exterior geometry or marketing GVWR tables.",
+  "engineering_risk": "Incorrect post-conversion weight distribution; spring/battery packaging errors; FMVSS load-distribution risk if guessed.",
+  "best_source_tiers": [
+    {
+      "tier": 1,
+      "source_class": "Workshop Manual / OEM mass properties (if published)",
+      "src_cand_ids": ["SRC-CAND-000002"],
+      "notes": "Do not invent mass-property tables before WSM bytes exist."
+    },
+    {
+      "tier": 5,
+      "source_class": "Physical scale measurement of decommissioned core",
+      "notes": "Requires physical asset intake protocol; not executed."
+    }
+  ],
+  "related_gap_ids": ["KG-006"],
+  "related_mission_ids": ["MISN-000005"],
+  "acquisition_cost_vector": "COMMERCIAL_PAYWALL",
+  "high_roi_purchase_signal": true,
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "honesty_notes": [
+    "CFGCOMP engine/transmission IDs are placeholders — nodes not instantiated as verified.",
+    "Mission E (MISN-000005) remains deferred; this MEPQ is registered only.",
+    "No numerical CG/mass values admitted."
+  ],
+  "decision": "DT-D054",
+  "research_sprint": "RL-023"
+}

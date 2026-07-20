@@ -1,0 +1,62 @@
+{
+  "document_id": "MEPQ_REGISTER",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "schema": "schemas/mepq-item.schema.json",
+  "decision": "DT-D054",
+  "research_sprint": "RL-023",
+  "title": "Missing Evidence Procurement Queue",
+  "principle": "Inversion Principle — procure only evidence that cannot be safely inferred; documentation tiers are purchased when a downstream node requires EXACT_CONFIGURATION_MATCH evidence.",
+  "orthogonality": {
+    "KG": "what is unknown",
+    "MISN": "research directive to close gaps / acquire sources",
+    "AJR": "purchase clearance for a specific AID asset",
+    "MEPQ": "ranked evidence procurement items that cannot be inferred — links KG+MISN+SRC without inventing values"
+  },
+  "forbidden": [
+    "Invented torque / pinout / CG / mass / hole diameters",
+    "False confidence tiers (e.g. LEVEL_4_DOCUMENTED_OEM without hashed OEM bytes + token anchors)",
+    "Treating indexed URLs as acquired evidence",
+    "Auto-promoting COMPDEF→CFGCOMP without evidence gates"
+  ],
+  "next_id": "MEPQ-004",
+  "items": [
+    {
+      "mepq_id": "MEPQ-001",
+      "operator_alias": "MEPQ-2019-F450-ICE-REM-001",
+      "priority": "CRITICAL",
+      "status": "DEFERRED",
+      "path": "research/mepq/MEPQ-001.json",
+      "focus": "ICE powertrain CG + dry mass"
+    },
+    {
+      "mepq_id": "MEPQ-002",
+      "operator_alias": "MEPQ-2019-F450-FRAME-INT-002",
+      "priority": "HIGH",
+      "status": "DEFERRED",
+      "path": "research/mepq/MEPQ-002.json",
+      "focus": "Transmission cross-member interface geometry"
+    },
+    {
+      "mepq_id": "MEPQ-003",
+      "operator_alias": "MEPQ-2019-F450-ELEC-LV-003",
+      "priority": "CRITICAL",
+      "status": "QUEUED",
+      "path": "research/mepq/MEPQ-003.json",
+      "focus": "Cab-to-engine / firewall LV connector + CAN architecture (EWD)"
+    }
+  ],
+  "selected_next_deployment": {
+    "option": "B",
+    "mission": "MISN-000006",
+    "title": "Low-Voltage Gateway Interconnect discovery (EWD prep)",
+    "option_a_mission_e": "REMAIN_DEFERRED",
+    "rationale": "MEPQ-003 is critical and already gated on commercial EWD (MISN-000003). Option B maps open questions without inventing pinouts. Option A (ICE deconstruction) stays deferred with MEPQ-001/002 registered only."
+  },
+  "locked_configuration": {
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_id": "CFG-000001",
+    "proposal_configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+    "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943"
+  }
+}

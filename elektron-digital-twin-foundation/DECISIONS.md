@@ -900,3 +900,21 @@ Append-only record of digital twin foundation decisions.
   5. Keep **MISN-000005** (Mission E) deferred; do **not** open Mission F; continue Mission D
 
 ---
+
+## DT-D054 — MEPQ admitted; Option B Mission F; Option A deferred
+
+- **Change-control record:** [`decisions/DT-D054_MEPQ_OPTION_B_LV_GATEWAY.json`](decisions/DT-D054_MEPQ_OPTION_B_LV_GATEWAY.json)
+- **decision_id:** `DT-D054`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-023`
+- **recommended_decision:** `MEPQ_ACTIVE_OPTION_B_MISSION_F_DISCOVERY`
+- **decision:**
+  1. Admit **MEPQ** (`research/mepq/`) as orthogonal evidence-procurement queue under Inversion Principle
+  2. Register **MEPQ-001/002** DEFERRED with Mission E; **MEPQ-003** QUEUED for EWD
+  3. Select **Option B** → open **MISN-000006** (Mission F) as LV gateway **discovery only**
+  4. Keep **Option A / MISN-000005** deferred
+  5. Reject operator radius-arm passport `LEVEL_4_DOCUMENTED_OEM` / invented 301 N·m / unverified BBLB §4 cite
+  6. Expand **MISN-000003** to include **KG-008** / MEPQ-003
+
+---

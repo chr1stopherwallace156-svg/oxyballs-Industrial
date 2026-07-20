@@ -1,0 +1,59 @@
+{
+  "document_id": "LV_GATEWAY_OPEN_QUESTIONS",
+  "mission_id": "MISN-000006",
+  "decision": "DT-D054",
+  "mepq_id": "MEPQ-003",
+  "gap_id": "KG-008",
+  "authority_status": "CANDIDATE_OPEN_QUESTIONS_ONLY",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "locked_configuration": {
+    "proposal_configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+    "kernel_configuration_id": "CFG-000001",
+    "vehicle_instance_id": "VEH-000001"
+  },
+  "open_questions": [
+    {
+      "qid": "LVQ-001",
+      "question": "What is the OEM connector designation for the primary cab-to-engine / firewall pass-through used for powertrain control signals on this exact silo?",
+      "operator_candidate": "C127",
+      "status": "OPEN_OPERATOR_CANDIDATE",
+      "requires": ["EWD bytes SRC-CAND-000006"]
+    },
+    {
+      "qid": "LVQ-002",
+      "question": "Which harness family carries APPS (accelerator pedal position) from cab to PCM/engine bay on 2019 F-450 Chassis Cab 4x2?",
+      "status": "OPEN",
+      "requires": ["EWD"]
+    },
+    {
+      "qid": "LVQ-003",
+      "question": "Where are ignition-run / start discrete circuits exposed relative to the firewall interconnect?",
+      "status": "OPEN",
+      "requires": ["EWD"]
+    },
+    {
+      "qid": "LVQ-004",
+      "question": "Which CAN bus(es) cross the firewall (HS-CAN / MS-CAN / other) and where are termination resistors located?",
+      "status": "OPEN",
+      "requires": ["EWD"],
+      "forbidden": "Do not invent 60/120 ohm values"
+    },
+    {
+      "qid": "LVQ-005",
+      "question": "Which instrument-cluster feedback lines are required to avoid conversion-induced DTCs when ICE is removed?",
+      "status": "OPEN",
+      "requires": ["EWD", "conversion architecture review"],
+      "notes": "Answer is evidence-gated; no speculative splice map."
+    },
+    {
+      "qid": "LVQ-006",
+      "question": "What is the OBD-II / Smart Data Link Connector network topology attachment point relative to VCU integration?",
+      "status": "OPEN",
+      "requires": ["EWD"]
+    }
+  ],
+  "notes": [
+    "This file is an open-question inventory — not a wiring design.",
+    "Satisfying MEPQ-003 requires commercial EWD acquire + token-anchored extraction."
+  ]
+}

@@ -2,7 +2,7 @@
 
 **Status:** `ACTIVE`  
 **Effective Date:** 2026-07-16  
-**Version:** `2.14.0`  
+**Version:** `2.15.0`  
 **Architecture host:** [EDTS_OS.md](EDTS_OS.md) v3.0.0+ (EDTS-OS)  
 **Isolation law:** [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
 **Binding for:** all research, acquisition, geometry development, and software logic operations under `elektron-digital-twin-foundation/`
@@ -23,6 +23,7 @@
 **Changelog from 2.11.0:** **FL Door vertical-slice mission** — exact scope lock; public BAG/NHTSA bytes acquired+hashed; brochure URL demoted; MISN-000003 commercial handoff; KG-005; pinout contradiction logged.  
 **Changelog from 2.12.0:** **Chassis frame Evidence Brief A/B** — bumper datums + F-450 RC fleet dims extracted; SRC-CAND-000010/11 acquired; Mission D (front suspension) opened; Mission E deferred.
 **Changelog from 2.13.0:** **Mission D honesty gate** — F-450/F-550 4x2 Monobeam ASSERTION_EXTRACTED; operator FGAWR 5600 baseline rejected; torque EXACT_MATCH rejected; Mission E deferred / Mission F not opened.
+**Changelog from 2.14.0:** **MEPQ** admitted (Inversion Principle); Option B Mission F discovery opened; Option A/Mission E deferred with MEPQ-001/002; operator passport LEVEL_4 scrubbed.
 
 ---
 

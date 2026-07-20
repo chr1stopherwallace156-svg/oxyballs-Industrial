@@ -1,11 +1,11 @@
 {
   "document_id": "KNOWLEDGE_GAP_REGISTER",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "status": "ACTIVE",
   "schema": "schemas/knowledge-gap.schema.json",
-  "decision": "DT-D050",
-  "research_sprint": "RL-019",
-  "next_id": "KG-006",
+  "decision": "DT-D054",
+  "research_sprint": "RL-023",
+  "next_id": "KG-009",
   "gaps": [
     {
       "gap_id": "KG-001",
@@ -38,8 +38,29 @@
       "priority": "HIGH",
       "status": "OPEN",
       "path": "research/knowledge_gaps/KG-005.json",
-      "focus": "FL regulator mounting fastener/torque (operator mission KG-002 remapped)"
+      "focus": "FL regulator mounting fastener/torque"
+    },
+    {
+      "gap_id": "KG-006",
+      "priority": "CRITICAL",
+      "status": "BLOCKED",
+      "path": "research/knowledge_gaps/KG-006.json",
+      "focus": "ICE powertrain CG + dry mass (MEPQ-001 / Mission E deferred)"
+    },
+    {
+      "gap_id": "KG-007",
+      "priority": "HIGH",
+      "status": "BLOCKED",
+      "path": "research/knowledge_gaps/KG-007.json",
+      "focus": "Transmission cross-member interface geometry (MEPQ-002)"
+    },
+    {
+      "gap_id": "KG-008",
+      "priority": "CRITICAL",
+      "status": "OPEN",
+      "path": "research/knowledge_gaps/KG-008.json",
+      "focus": "Firewall/cab-engine LV connector + CAN (MEPQ-003 / Mission F)"
     }
   ],
-  "focus": "KG-001 via MISN-000001/000003; KG-005 via MISN-000003 WSM 501-14"
+  "focus": "KG-008 via MISN-000006 discovery + MISN-000003 EWD acquire; KG-001/005 still commercial; KG-006/007 deferred with Mission E"
 }

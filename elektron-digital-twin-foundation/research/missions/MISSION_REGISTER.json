@@ -1,10 +1,10 @@
 {
   "document_id": "MISSION_REGISTER",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "status": "ACTIVE",
   "schema": "schemas/research-mission.schema.json",
-  "decision": "DT-D053",
-  "next_id": "MISN-000006",
+  "decision": "DT-D054",
+  "next_id": "MISN-000007",
   "active_missions": [
     {
       "mission_id": "MISN-000001",
@@ -28,7 +28,7 @@
       "path": "research/missions/MISN-000003.json",
       "completion_status": "NOT_STARTED",
       "primary_target": "SRC-CAND-000002 + SRC-CAND-000006 commercial byte handoff",
-      "gap_ids": ["KG-001", "KG-005"]
+      "gap_ids": ["KG-001", "KG-005", "KG-008"]
     },
     {
       "mission_id": "MISN-000004",
@@ -36,7 +36,7 @@
       "path": "research/missions/MISN-000004.json",
       "completion_status": "IN_PROGRESS",
       "primary_target": "4x2 front suspension / steering exact-config evidence",
-      "priority_note": "DT-D053 honesty gate — Monobeam extracted; continue WSM/BAG/spring-code gaps",
+      "priority_note": "Continue — Monobeam extracted; WSM/BAG/spring gaps open",
       "vertical_slice": "research/vertical_slices/front_suspension_2019_f450/"
     },
     {
@@ -45,20 +45,34 @@
       "path": "research/missions/MISN-000005.json",
       "completion_status": "NOT_STARTED",
       "deferred": true,
-      "primary_target": "ICE powertrain removal mapping"
+      "primary_target": "ICE powertrain removal mapping",
+      "mepq_ids": ["MEPQ-001", "MEPQ-002"]
+    },
+    {
+      "mission_id": "MISN-000006",
+      "aliases": ["EDTS-MISN-006", "Subsystem-Mission-F"],
+      "path": "research/missions/MISN-000006.json",
+      "completion_status": "NOT_STARTED",
+      "primary_target": "LV gateway interconnect open questions (EWD prep)",
+      "mepq_ids": ["MEPQ-003"],
+      "gap_ids": ["KG-008"],
+      "vertical_slice": "research/vertical_slices/lv_gateway_2019_f450/",
+      "priority_note": "Option B selected (DT-D054) — discovery only"
     }
   ],
   "priority_order": [
     "MISN-000001",
     "MISN-000003",
     "MISN-000004",
+    "MISN-000006",
     "MISN-000002",
     "MISN-000005"
   ],
   "notes": [
+    "MEPQ register: research/mepq/",
+    "Option A (Mission E) deferred; Option B (Mission F) opened as discovery",
     "Chassis frame brief: research/vertical_slices/chassis_frame_2019_f450/",
-    "Front suspension Mission D brief: research/vertical_slices/front_suspension_2019_f450/",
-    "Mission E remains deferred; Mission F not opened (next_id MISN-000006 reserved)"
+    "Front suspension Mission D: research/vertical_slices/front_suspension_2019_f450/"
   ],
   "relationship_graph": "research/relationship_graph/RELATIONSHIP_GRAPH_REGISTER.json"
 }

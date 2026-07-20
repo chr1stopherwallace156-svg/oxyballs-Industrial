@@ -506,3 +506,25 @@ DT-D052 — HV package at `build_engine/gates/hv_commissioning/`; recommended ev
 ### Status
 
 DT-D053 — `MISSION_D_IN_PROGRESS_PRIMARY_SOURCE_PARTIAL`; CNF-001 → partially resolved at series level.
+
+---
+
+## RL-023 — MEPQ + Option B LV gateway discovery
+
+- **Date:** 2026-07-20
+- **Layer:** evidence procurement / LV gateway / ICE boundary registry
+- **Agent:** Cursor Cloud Agent
+- **Question:** How should the Inversion Principle / MEPQ and operator Component Passport example be admitted without inventing values, and which next-step option to deploy?
+
+### Findings
+
+1. **MEPQ** admitted as sibling of KG/MISN/AJR — procure only non-inferable evidence.
+2. **MEPQ-001/002** (ICE CG/mass, trans XMBR) registered **DEFERRED** with Mission E; **MEPQ-003** (LV firewall) **QUEUED**.
+3. **Option B selected** → **MISN-000006** Mission F discovery open questions (C127 remains OPERATOR_CANDIDATE).
+4. **Option A rejected for now** — Mission E stays deferred.
+5. Operator radius-arm passport scrubbed: reject LEVEL_4, 301 N·m TTY, KU5Z as verified, BBLB §4 unverified cite.
+6. MISN-000003 expanded to KG-008; commercial EWD still required before any pin ASSERTION_EXTRACTED.
+
+### Status
+
+DT-D054 — `MEPQ_ACTIVE_OPTION_B_MISSION_F_DISCOVERY`.

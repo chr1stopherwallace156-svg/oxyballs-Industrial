@@ -1,0 +1,37 @@
+{
+  "decision_id": "DT-D054",
+  "title": "MEPQ admitted; Option B Mission F opened; Option A Mission E remains deferred; operator radius-arm passport scrubbed",
+  "status": "ACCEPTED",
+  "date_utc": "2026-07-20",
+  "related_locks": ["RL-023"],
+  "summary": "Admit Missing Evidence Procurement Queue (MEPQ) as orthogonal evidence-procurement register under the Inversion Principle. Register MEPQ-001/002 (ICE CG/mass + trans XMBR) as DEFERRED with Mission E. Queue MEPQ-003 (LV firewall gateway) and open Mission F (MISN-000006) as discovery-only Option B. Reject operator PASSPORT radius-arm LEVEL_4 / invented torque/PN/BBLB Section 4 cite. Expand MISN-000003 to include KG-008.",
+  "accepted_artifacts": [
+    "schemas/mepq-item.schema.json",
+    "research/mepq/",
+    "research/knowledge_gaps/KG-006.json",
+    "research/knowledge_gaps/KG-007.json",
+    "research/knowledge_gaps/KG-008.json",
+    "research/missions/MISN-000006.json",
+    "research/vertical_slices/lv_gateway_2019_f450/",
+    "research/component_passports/scrubbed_examples/PASSPORT_RADIUS_ARM_LH_OPERATOR_SCRUB.json"
+  ],
+  "inversion_principle": "Procure only evidence that cannot be safely inferred; documentation tiers are purchased when a downstream node requires EXACT_CONFIGURATION_MATCH evidence.",
+  "orthogonality": {
+    "KG": "unknown",
+    "MISN": "research directive",
+    "AJR": "AID purchase clearance",
+    "MEPQ": "ranked non-inferable evidence procurement"
+  },
+  "option_selection": {
+    "option_a_ice_deconstruction": "REJECTED_FOR_NOW — MISN-000005 remains deferred; MEPQ-001/002 registered only",
+    "option_b_lv_gateway": "SELECTED — MISN-000006 discovery open questions; commercial EWD still via MISN-000003/000001"
+  },
+  "passport_scrub": {
+    "operator_example": "PASSPORT-2019-F450-RADIUS-ARM-LH",
+    "verdict": "REJECTED_AS_DOCUMENTED_OEM",
+    "rejected": ["KU5Z-3020-A as verified", "301 N·m / M18 TTY", "LEVEL_4_DOCUMENTED_OEM", "BBLB Section 4 unverified cite", "2017-2019 MY inheritance"]
+  },
+  "recommended_decision": "MEPQ_ACTIVE_OPTION_B_MISSION_F_DISCOVERY",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "geometry_extraction_authorized": false
+}

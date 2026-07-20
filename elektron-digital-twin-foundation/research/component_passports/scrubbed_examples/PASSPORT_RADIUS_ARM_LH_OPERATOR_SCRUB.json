@@ -1,0 +1,55 @@
+{
+  "document_id": "OPERATOR_PASSPORT_RADIUS_ARM_SCRUB",
+  "decision": "DT-D054",
+  "input_label": "PASSPORT-2019-F450-RADIUS-ARM-LH (operator example)",
+  "canonical_id_retained_as_candidate": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-RADIUS-ARM-LH",
+  "verdict": "REJECTED_AS_DOCUMENTED_OEM — re-admit only as CANDIDATE passport draft with nulls",
+  "rejected_fields": [
+    {
+      "field": "oem_engineering_number = KU5Z-3020-A",
+      "status": "CANDIDATE_UNVERIFIED",
+      "reason": "Parts catalog / WSM not acquired; bracketed Candidate cannot be promoted"
+    },
+    {
+      "field": "material_composition = Forged HSLA Steel",
+      "status": "CANDIDATE_UNVERIFIED",
+      "reason": "4x2 radius-arm material row truncated in fleet extract; 4x4 stamped HSLA must not be auto-copied"
+    },
+    {
+      "field": "IFACE-AXLE-CLEVIS fasteners M18 / torque 301 N·m / TTY mandatory",
+      "status": "REJECTED",
+      "reason": "WSM NOT_ACQUIRED. Same class as DT-D053 rejected EXACT_MATCH torques (222 lb-ft ≡ 301 N·m)."
+    },
+    {
+      "field": "confidence_level = LEVEL_4_DOCUMENTED_OEM",
+      "status": "REJECTED",
+      "reason": "Hard Rule 5 — no invented confidence tiers; RC ≠ engineering verification"
+    },
+    {
+      "field": "source_attribution = Ford Truck Body Builder Layout Book (2019), Section 4",
+      "status": "REJECTED_AS_VERIFIED_CITE",
+      "reason": "BBLB section cite without token-anchored local extract. SRC-CAND-000001 BAG acquired but this section not extracted for radius arm."
+    },
+    {
+      "field": "production_window = 2017-2019 MY Track",
+      "status": "REJECTED_AS_SILO_AUTHORITY",
+      "reason": "Multi-year inheritance forbidden as exact-config truth (HR-EVI)"
+    },
+    {
+      "field": "ev_lifecycle_state conversion_action = RETAIN_AS_IS with solid axle narrative",
+      "status": "CANDIDATE_DIRECTIONALLY_OK",
+      "correction": "Use OEM Monobeam vocabulary (DT-D053). Retain-as-is is a conversion hypothesis, not verified procedure."
+    }
+  ],
+  "admitted_honest_stub": {
+    "passport_family": "CSP_OR_PP_CANDIDATE_DRAFT_ONLY",
+    "canonical_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-RADIUS-ARM-LH",
+    "oem_engineering_number": null,
+    "mass_kg": null,
+    "cg": null,
+    "torque_nm": null,
+    "authority_status": "CANDIDATE_UNVERIFIED",
+    "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+    "evidence_required": ["SRC-CAND-000002 WSM", "SRC-CAND-000003 parts catalog", "optional physical scale"]
+  }
+}

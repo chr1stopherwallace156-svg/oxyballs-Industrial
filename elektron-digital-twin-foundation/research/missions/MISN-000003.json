@@ -6,20 +6,24 @@
     "MISN-003"
   ],
   "title": "Commercial OEM Source Acquisition & Handoff Directive",
-  "objective": "Acquire Motorcraft Workshop Manual Section 501-14 and Electrical Wiring Diagram (EWD) Cell 59 bytes to resolve KG-001 (pinout/routing) and KG-005 (regulator fasteners/torque).",
+  "objective": "Acquire Motorcraft Workshop Manual (incl. Section 501-14 and chassis/electrical sections as available) and Electrical Wiring Diagram (EWD) bytes to resolve KG-001 (door pinout/routing), KG-005 (regulator fasteners/torque), and KG-008 / MEPQ-003 (firewall LV gateway interconnect).",
   "target_gap_ids": [
     "KG-001",
-    "KG-005"
+    "KG-005",
+    "KG-008"
   ],
+  "target_mepq_ids": ["MEPQ-003"],
   "success_criteria": [
     "Deposit WSM 501-14 PDF bytes under research/incoming/ with SHA-256 + acquisition manifest.",
     "Deposit EWD Cell 59 (Power Windows) PDF bytes with SHA-256 + acquisition manifest.",
+    "Deposit or index EWD cells covering cab-to-engine / firewall pass-through once designation is confirmed from bytes (operator candidate C127 — not assumed).",
     "Run parser fixtures without inventing torque/pin values; claims remain ASSERTION_EXTRACTED until token-anchor ASSERTION_VERIFIED.",
-    "Do not promote any F-450 door edge to VERIFIED or authorize procedure generation."
+    "Do not promote any F-450 door or LV edge to VERIFIED or authorize procedure generation."
   ],
   "evidence_required": [
     "Section 501-14 regulator R&I torque table",
-    "EWD Cell 59 connector designation / pinout for FL door power window"
+    "EWD Cell 59 connector designation / pinout for FL door power window",
+    "EWD coverage of cab-to-engine / firewall interconnect (designation confirmed from bytes)"
   ],
   "completion_status": "NOT_STARTED",
   "assigned_src_cand_ids": [
@@ -29,12 +33,13 @@
   "assigned_aid_ids": [],
   "bound_vehicle_instance_id": "VEH-000001",
   "bound_configuration_id": "CFG-000001",
-  "research_sprint": "RL-019",
-  "decision": "DT-D050",
-  "priority_note": "Commercial paywall handoff — coordinates with MISN-000001 (EWD primary). Does not replace MISN-000001.",
+  "research_sprint": "RL-023",
+  "decision": "DT-D054",
+  "priority_note": "Commercial paywall handoff — coordinates with MISN-000001 (EWD primary) and MISN-000006 (LV gateway discovery). Does not replace either.",
   "cost_access_note": "Motorcraft / Helm reported ~$21.95/day access — human purchasing agent required",
   "notes": [
-    "Do not fabricate file hashes or torque values.",
-    "Ingestion pipeline fixtures prepared under research/incoming/fl_door_vertical_slice/ingestion_fixtures/."
+    "Do not fabricate file hashes or torque/pin values.",
+    "Ingestion pipeline fixtures prepared under research/incoming/fl_door_vertical_slice/ingestion_fixtures/.",
+    "Expanded under DT-D054 to also feed MEPQ-003 / KG-008."
   ]
 }
