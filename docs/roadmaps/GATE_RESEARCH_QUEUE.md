@@ -646,33 +646,45 @@ supplier-specific, no assumed 0% PWM / no power-stage switching unless the
 supplier defines it safe + engineering approves (RC-265); 05M-A is readiness
 not spin (RC-266). Permits **Gate 05M-B only**.
 
-## Gate 05M-B — No-Load Motor Spin Validation  · STATUS: NEXT (owner review_54)
+## Gate 05M-B — No-Load Motor Spin Validation  · STATUS: NO_LOAD_MOTOR_SPIN_DRAFTED (batch_58)
 
-The **first controlled no-load spin** — only after Gate 05M-A proves the
-inverter can be live, synchronised, torque-disabled, and fault-responsive
-**without unintended current or rotation** (RC-266). The motor shaft is
-uncoupled from the vehicle's secondary drivetrain.
+Deliverable `docs/status/GATE05M_B_NO_LOAD_MOTOR_SPIN.md` — the **first
+physical rotation of the traction motor**, shaft **uncoupled** from the
+drivetrain (driveshafts/axles/gearboxes): resolver offset-angle calibration,
+phase-rotation-sequence verification, balanced three-phase sine/THD audit,
+over-speed + watchdog-under-rotation trips. 5-row matrix (05M-B-001..005).
+Status (review_55): `NO_LOAD_MOTOR_SPIN_DRAFTED / MOTOR_UNCOUPLED_REQUIRED /
+GUARDED_SHAFT_REQUIRED / SUPPLIER_SPIN_PROFILE_REQUIRED /
+NO_DRIVELINE_TORQUE_PATH / NO_VEHICLE_MOVEMENT`. **Physical boundary (RC-272,
+HARD prerequisites):** guarded rotating shaft · no driveline attachment · no
+wheel torque path · no vehicle-movement path · emergency stop active ·
+exclusion zone active · supplier-defined spin profile only · no cabin driver
+pedal authority. All numbers (≤2% torque, 500 RPM, ±1.0° electrical, ≤3% phase
+balance, ≤50 ms watchdog) are `INITIAL_TARGET_PROFILE` pending supplier
+approval (RC-267). Spin commanded via the service/calibration tool, not driver
+pedal (RC-271). Permits **Gate 05M-C only**.
 
-**Owner scope (review_54) — that gate covers:**
+## Gate 05M-C — Controlled Low-Speed Traction Readiness  · STATUS: NEXT (owner review_55)
 
-> - resolver offset-angle calibration under low-torque spin
-> - correct electrical phase-rotation-sequence verification
-> - phase-current harmonic-distortion monitoring
-> - hardware-layer over-current protection validation
+The **last rung of the staged 05M phase** — the first point a wheel torque
+path is even contemplated, only after Gate 05M-B proves clean uncoupled
+rotation, resolver calibration, balanced phase currents, and the dynamic safety
+trips.
 
-Enforce throughout — engineer-gated, live-HV, **motor uncoupled from the
-drivetrain (no vehicle movement, no road test)**; no threshold (spin speed,
-V/Hz limits, over-current trip, resolver offset) is final gate logic until
-supplier docs + engineering review + a live-HV test-plan approval upgrade it
-(RC-260); the inverter owns its gating/power stage per the supplier state
-machine, the BMS/PDU owns contactors/pre-charge, the hardwired loop owns
+Enforce throughout — engineer-gated, live-HV, **staged**: no road testing / no
+customer operation until proven; no threshold (traction torque limit, low-speed
+target, wheel-slip/creep limit, fault-response window) is final gate logic
+until supplier docs + engineering review + a live-HV test-plan approval + signed
+approval upgrade it (RC-267); the inverter owns its gating per the supplier
+state machine, the BMS/PDU owns contactors/pre-charge, the hardwired loop owns
 emergency interruption, the VCU requests/monitors (RC-247/265/205/227; BQ-27);
-the inverter/motor supplier data (torque map, resolver/encoder offset,
-over-current spec, V/Hz limits) is required before spin (BQ-27); the
-stored-energy discharge-wait rule applies after any exposure (RC-242); never
-"certified safe" / no compliance claim (RC-224). Only after 05M-B → 05M-C
-(Controlled Low-Speed Traction Readiness), each engineer-approved under a
-staged safety plan + LOTO/PPE (RC-117).
+the inverter/motor + driveline supplier data (torque map, gear ratio,
+axle/GAWR, brake/steering assist) is required before any wheel torque path
+(BQ-27); the stored-energy discharge-wait rule applies after any exposure
+(RC-242); no automatic retry after an E-stop (RC-262); never "certified safe" /
+no compliance claim (RC-224). Owner scope defined when the owner sends that
+batch. Then (later, well beyond Gate 05) the wider road/commissioning phases
+stay engineer-gated under a staged safety plan + LOTO/PPE (RC-117).
 
 Enforce throughout — no HV / no traction enable / no vehicle motion at
 05J-05K; CAN_1 stays listen-only + passive on the live OEM Ford bus (TXD-pin

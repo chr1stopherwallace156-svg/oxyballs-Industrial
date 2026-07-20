@@ -12,15 +12,15 @@ NO driver torque authority · NO power-stage switching unless the supplier
 documentation explicitly defines it as part of a safe zero-torque readiness
 state and engineering approves it.**
 
-**Status (owner review_54): `DRAFT_CREATED` / `LIVE_HV_PRESENT` /
-`INVERTER_READY_STATE_UNDER_TEST` / `TORQUE_DISABLED_STATE_REQUIRED` /
-`NO_INTENTIONAL_MOTOR_ROTATION` / `NO_VEHICLE_MOVEMENT` /
-`NO_DRIVER_TORQUE_AUTHORITY` / `SUPPLIER_INVERTER_STATE_DEFINITIONS_REQUIRED` /
+**Status (owner review_55): `INVERTER_READY_ZERO_TORQUE_VALIDATION_DEFINED` /
+`LIVE_HV_PRESENT` / `TORQUE_DISABLED_STATE_REQUIRED` /
+`NO_INTENTIONAL_MOTOR_ROTATION` / `NO_DRIVER_TORQUE_AUTHORITY` /
+`NO_VEHICLE_MOVEMENT` / `SUPPLIER_INVERTER_STATE_DEFINITIONS_REQUIRED` /
 `WATCHDOG_TARGETS_PENDING_SUPPLIER_DATA` / `PHASE_CURRENT_OFFSET_CHECK_REQUIRED`
 / `RESOLVER_BASELINE_CHECK_REQUIRED` / `NO_ROAD_TEST_AUTHORITY`.** Ladder:
 **05J → 05K → 05L-A → 05L-B → 05L-C → 05M-A (THIS GATE — inverter enable /
 zero-torque readiness) → 05M-B (no-load motor spin) → 05M-C (controlled
-low-speed traction)** (D-008, amended review_54).
+low-speed traction)** (D-008, amended review_55).
 
 ## Value doctrine (owner review_54, RC-260) — read first
 
@@ -76,7 +76,7 @@ supplier-specific (RC-265). No intentional rotation; no torque authority.
 | 05M-A-001 | inverter power-up handshake | nominal HV power-up (per 05L-B/05L-C) → live DC bus; key to drive mode | inverter boots through its supplier state machine and reports its **supplier-defined Pre-Ready** on CAN_2 | handshake bits match; inverter awaits the authenticated enable token + interlock confirmation | inverter enabling gating paths automatically / comms timeout on boot | timestamped CAN trace of handshake bytes |
 | 05M-A-002 | phase-current sensor offset zeroing | with the power stage disabled, query the inverter phase-current calibration registers | offset drift ≤ the **supplier-defined** noise spec | inverter nulls analog offsets; baselines accepted | offset drift beyond supplier limits (sensor degradation) | UDS register calibration dump |
 | 05M-A-003 | static resolver baseline audit | monitor raw resolver position over a window with the shaft static | resolver electrical angle stable within the **supplier-defined** drift/noise tolerance (not literally "zero deviation") | correct static angle, no LV-coupled EMI | resolver drift / noise spikes while the shaft is locked | resolver telemetry trace |
-| 05M-A-004 | **supplier-defined torque-disabled verification (RC-265, not "enable to active / 0% PWM")** | VCU clamps the torque command at 0 Nm; validate the **supplier-defined torque-disabled ready state** — no power-stage switching unless the supplier defines it as a safe zero-torque state + engineering approves | actual motor phase current within the supplier zero-torque tolerance (0.0 A target); DC bus stable; the inverter stays in the supplier torque-disabled state | torque-disabled state holds; no phase current beyond tolerance; **no shaft movement** | inverter bridge switching / generating phase current / **any spontaneous shaft movement** | inverter phase-current trace + CAN command-byte log |
+| 05M-A-004 | **supplier-defined torque-disabled verification (RC-265/271, NOT "enable to active / 0% PWM / Ready-to-Drive")** | VCU clamps the torque command at 0 Nm; **step the inverter into its supplier-defined ready / torque-disabled state — driver torque authority remains masked, no traction command is enabled (RC-271, not "Ready-to-Drive")**; no power-stage switching unless the supplier defines it as a safe zero-torque state + engineering approves | **actual motor phase current within the supplier-defined zero-current threshold (RC-270, not literal 0.0 A); no torque-producing current beyond the approved threshold; no unintended shaft movement**; DC bus stable; the inverter stays in the supplier torque-disabled state | torque-disabled state holds; current within the supplier zero-current threshold; **no unintended shaft movement** | inverter bridge switching / torque-producing current beyond the supplier threshold / **any unintended shaft movement** | inverter phase-current trace + CAN command-byte log |
 | 05M-A-005 | watchdog disruption response | drop CAN_2 (unplug) during the Pre-Ready state | inverter → its **supplier-defined Safe-Off state** within the supplier target (≤50 ms target) of the last valid frame | inverter disables enable loops, drops drive flags, logs a comms-loss DTC | inverter holding last state / remaining in an active ready mode | scope capture of bus drop vs inverter fault-line transition |
 
 ## Gate 05M-A exit criteria (owner review_54)

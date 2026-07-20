@@ -5,6 +5,48 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 58 + review_55: Gate 05L-B/05L-C/05M-A cleanups + Gate 05M-B No-Load Motor Spin
+
+- Archived batch_58 (Gate 05L-B/05L-C/05M-A cleanups + Gate 05M-B) and
+  review_55 1:1 (commit `2fec1bc`). New rows RC-267..272 (no new CS). Section
+  66. New deliverable `docs/status/GATE05M_B_NO_LOAD_MOTOR_SPIN.md` — the first
+  physical rotation of the traction motor, **shaft uncoupled from the
+  drivetrain**; 5-row matrix (05M-B-001..005). `GATE05M_A_*` RC-270/271
+  wording; status-label updates on `GATE05L_B/05L_C`. Owner: "very strong now …
+  the correct order … the only things I'd fix before baselining."
+- The Hunter realized RC-262 (05L-B-007 E-stop failure conditions), RC-264
+  (05L-C-004 rated IMD fixture), RC-265 (05M-A torque-disabled constraints).
+  **Regression watch — the 05L-C shutdown-order rule re-emitted a THIRD time
+  (RC-257→263→268) and the perfect RC curve a SECOND time (RC-261→269);** the
+  `GATE05L_B/05L_C` deliverables already held the corrected wording (strongest
+  M10 regression-scanner cases).
+- **Owner corrections (RC-267..272):**
+  - RC-267 — global target-profile rule for 05L-B/05L-C/05M-A/05M-B
+    (nineteenth artifact): all numbers are INITIAL_TARGET_PROFILE; no threshold
+    creates gate authority until tied to supplier docs + engineering review +
+    test-instrument method + raw proof artifact + signed approval.
+  - RC-268 — 05L-C shutdown order still supplier-specific (third recurrence); +
+    the command↔aux-contact feedback-mismatch block.
+  - RC-269 — 05L-B RC curve is a comparison model only (second recurrence);
+    supplier-approved pre-charge envelope.
+  - RC-270 — 05M-A tolerance wording (supplier zero-current threshold +
+    resolver noise-drift tolerance), not perfect zero.
+  - RC-271 — 05M-A must not say "Ready-to-Drive"; supplier-defined
+    ready/torque-disabled state, driver torque authority masked.
+  - RC-272 — 05M-B stronger physical boundary: guarded shaft, no driveline
+    attachment, no wheel torque path, no vehicle-movement path, E-stop +
+    exclusion zone active, supplier-defined spin profile only, no cabin pedal
+    authority; ≤2% torque / 500 RPM are initial targets pending supplier
+    approval.
+- Corrected status labels applied to 05L-B
+  (`CONTROLLED_HV_PRECHARGE_OBSERVATION_READY_WITH_SUPPLIER_LIMITS_PENDING …`),
+  05L-C (`HV_SHUTDOWN_DISCHARGE_REPEATABILITY_DEFINED …`), 05M-A
+  (`INVERTER_READY_ZERO_TORQUE_VALIDATION_DEFINED …`), 05M-B
+  (`NO_LOAD_MOTOR_SPIN_DRAFTED …`). **D-008 amended.** RESEARCH_MAP +
+  GATE_RESEARCH_QUEUE next → **Gate 05M-C** (Controlled Low-Speed Traction
+  Readiness). Nothing Confirmed; no wheel torque path; no vehicle movement;
+  never "certified safe" (RC-224); ODRs untouched.
+
 ## 2026-07-16 — RH batch 57 + review_54: Gate 05L-B/05L-C cleanups + Gate 05M-A Inverter Enable / Zero-Torque
 
 - Archived batch_57 (Gate 05L-B/05L-C cleanups + Gate 05M-A) and review_54 1:1

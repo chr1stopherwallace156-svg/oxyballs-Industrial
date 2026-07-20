@@ -9,15 +9,15 @@ normal shutdowns, emergency breaks, and active fault lockdowns reliably
 **before any traction rotation**. It is **live-HV** but still **ZERO motor RPM ·
 no inverter switching · no vehicle movement.**
 
-**Status (owner review_53): `CORRECT_NEXT_GATE` / `LIVE_HV_PRESENT` /
-`ZERO_MOTOR_RPM` / `NO_INVERTER_SWITCHING` /
-`SHUTDOWN_SEQUENCE_PENDING_SUPPLIER_ARCHITECTURE` /
-`DISCHARGE_WINDOW_PENDING_SUPPLIER_DATA` / `IMD_FAULT_INJECTION_FIXTURE_REQUIRED`
-/ `RETRY_LIMIT_TARGET_ONLY` / `THERMAL_RECOVERY_TIMER_REQUIRED` /
-`NO_TRACTION_COMMAND` / `NO_VEHICLE_MOVEMENT` / `NO_ROAD_TEST_AUTHORITY`.**
-Ladder: **05J → 05K → 05L-A → 05L-B → 05L-C (THIS GATE) → (later, staged) 05M-A
-(inverter enable / zero-torque) → 05M-B (no-load spin) → 05M-C (controlled
-low-speed traction)** (D-008, amended review_53).
+**Status (owner review_55): `HV_SHUTDOWN_DISCHARGE_REPEATABILITY_DEFINED` /
+`SUPPLIER_SHUTDOWN_SEQUENCE_REQUIRED` / `RATED_IMD_FIXTURE_REQUIRED` /
+`THERMAL_RECOVERY_REQUIRED` / `NO_INVERTER_SWITCHING` / `ZERO_MOTOR_RPM` /
+`NO_VEHICLE_MOVEMENT` / `NO_ROAD_TEST_AUTHORITY`.** Ladder: **05J → 05K → 05L-A
+→ 05L-B → 05L-C (THIS GATE) → 05M-A (inverter enable / zero-torque) → 05M-B
+(no-load spin) → 05M-C (controlled low-speed traction)** (D-008, amended
+review_55). (The shutdown contactor sequence is supplier-defined — "main-
+positive first" is a candidate, not a rule, RC-257/263/268; the Hunter has
+re-emitted the fixed order THREE times — regression watch.)
 
 ## Value doctrine (owner review_53, RC-252) — read first
 
@@ -70,7 +70,7 @@ BMS/PDU owns execution (RC-247). No inverter switching; no motor rotation.
 
 | Test | Scenario | Procedure | Target (INITIAL_TARGET_PROFILE) | Expected safe output | Blocked (MUST NEVER OCCUR) | Proof |
 |---|---|---|---|---|---|---|
-| 05L-C-001 | normal coordinated shutdown | ignition-off power-down; monitor contactor drop sequence | contactor opening per the **supplier-defined** sequence (candidate: main-positive then main-negative within ≤50 ms) — RC-257 | bus decays cleanly via bleeders; no error codes on normal shutdown | any sequence violating supplier docs / creating DC-link persistence / leaving an unsafe energized path (RC-257) | timestamped CAN transaction trace |
+| 05L-C-001 | normal coordinated shutdown | ignition-off power-down; monitor contactor drop sequence | contactor opening per the **supplier-defined BMS/PDU shutdown architecture** (candidate: main-positive then main-negative within ≤50 ms target) — RC-257/263/268 | bus decays cleanly via bleeders; no error codes on normal shutdown | any sequence that violates supplier docs / leaves an unintended energized path / prevents verified DC-link discharge / **shows a command↔auxiliary-contact feedback mismatch (RC-268)** | timestamped CAN transaction trace |
 | 05L-C-002 | pre-charge retry-limit lockout | force pre-charge failure twice consecutively (temporary bleed path) | on the next attempt past the supplier/target limit (≤2), BMS/PDU refuses to drive pre-charge/negative coils | hard "pre-charge attempt lockout"; coils unpowered; persists across LV cycles; service-tool clear only | infinite consecutive pre-charge cycles allowed | VCU/BMS diagnostic status-register printout |
 | 05L-C-003 | thermal cool-down enforcement | successful pre-charge + shutdown, then immediate re-power request | BMS/PDU delays coil engagement until the **supplier** thermal-recovery timer expires | power-up pauses automatically until the cooling window is met | pre-charge relay closing before the thermal timer clears | microcontroller internal-variable timing log |
 | 05L-C-004 | live IMD fault isolation | inject an isolation fault DC+/DC− → chassis **only via an approved, rated, current-limited HV isolation-test fixture / IMD supplier method** (RC-256) — no ad-hoc resistor | IMD flags the isolation fault over CAN within the supplier-defined detection window | BMS/PDU acts on the IMD fault, opens contactor channels, latches an isolation-fault state | system ignoring active isolation faults / shutdown delayed past the safety limit | CAN trace: IMD fault flag vs contactor-open events |

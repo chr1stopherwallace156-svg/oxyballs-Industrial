@@ -371,26 +371,32 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_54):** **Gate 05M-B — No-Load Motor Spin
-Validation** — the **first controlled no-load spin**, only after Gate 05M-A
-proves the inverter can be live, synchronised, torque-disabled, and
-fault-responsive **without unintended current or rotation** (Decision Register
-**D-008**, amended review_54, RC-266). The motor shaft is uncoupled from the
-drivetrain. Owner scope: resolver offset-angle calibration under low-torque
-spin · electrical phase-rotation-sequence verification · phase-current
-harmonic monitoring · hardware over-current protection validation.
-Engineer-gated, live-HV, **motor uncoupled — no vehicle movement, no road
-test**; no threshold (spin speed, V/Hz, over-current trip, resolver offset) is
-final gate logic until supplier docs + engineering review + a live-HV test-plan
-approval upgrade it (RC-260); the inverter owns its gating per the supplier
-state machine (no assumed 0% PWM, RC-265), the BMS/PDU owns contactors/pre-
-charge, the hardwired loop owns emergency interruption, the VCU
-requests/monitors (RC-247/205/227; BQ-27); inverter/motor supplier data
-required before spin (BQ-27); never "certified safe" (RC-224). **Gate 05M-A**
-(`GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md`) is `DRAFT_CREATED` /
-`LIVE_HV_PRESENT` / `INVERTER_READY_STATE_UNDER_TEST` /
+**Next expected batch (owner review_55):** **Gate 05M-C — Controlled Low-Speed
+Traction Readiness** — the last rung of the staged 05M phase and the **first
+point a wheel torque path is even contemplated**, only after Gate 05M-B proves
+clean uncoupled rotation, resolver calibration, balanced phase currents, and
+the dynamic safety trips (Decision Register **D-008**, amended review_55).
+Engineer-gated, live-HV, **staged — no road testing / no customer operation
+until proven**; no threshold (traction torque limit, low-speed target,
+wheel-slip/creep limit, fault-response window) is final gate logic until
+supplier docs + engineering review + a live-HV test-plan approval + signed
+approval upgrade it (RC-267); the inverter owns its gating per the supplier
+state machine, the BMS/PDU owns contactors/pre-charge, the hardwired loop owns
+emergency interruption, the VCU requests/monitors (RC-247/265/205/227; BQ-27);
+the inverter/motor + driveline supplier data is required before any wheel
+torque path (BQ-27); never "certified safe" (RC-224). Owner scope defined when
+the owner sends that batch. **Gate 05M-B**
+(`GATE05M_B_NO_LOAD_MOTOR_SPIN.md`) is `NO_LOAD_MOTOR_SPIN_DRAFTED` /
+`MOTOR_UNCOUPLED_REQUIRED` / `GUARDED_SHAFT_REQUIRED` — the first physical
+rotation, motor uncoupled/guarded (5-row matrix 05M-B-001..005); review_55
+corrections: all numbers are INITIAL_TARGET_PROFILE (RC-267), and the physical
+boundary requires a guarded shaft / no driveline / no wheel or vehicle path /
+E-stop + exclusion zone / supplier spin profile / no pedal authority (RC-272).
+**Gate 05M-A**
+(`GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md`) is
+`INVERTER_READY_ZERO_TORQUE_VALIDATION_DEFINED` / `LIVE_HV_PRESENT` /
 `TORQUE_DISABLED_STATE_REQUIRED` — inverter enable **readiness, not spin**
-(5-row matrix 05M-A-001..005); review_54 corrections: all numbers are target
+(5-row matrix 05M-A-001..005); review_54/55 corrections: all numbers are target
 profiles (RC-260), the inverter ready/torque-disabled state is supplier-specific
 with no assumed 0% PWM (RC-265), 05M-A is readiness not spin (RC-266). **Gate
 05L-C**

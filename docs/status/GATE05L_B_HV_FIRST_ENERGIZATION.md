@@ -10,12 +10,15 @@ and software-controlled current-limited pre-charge closure. It is attempted
 movement.** It analyzes the DC-link capacitor voltage-rise curve, verifies
 contactor control synchronisation, and validates weld-detection — nothing more.
 
-**Status (owner review_53): `DRAFT_READY_WITH_REVISIONS` / `LIVE_HV_PRESENT` /
-`QUALIFIED_PERSONNEL_REQUIRED` / `BMS_PDU_CONTACTOR_OWNER_DEFINED` /
-`VCU_REQUESTER_MONITOR_ONLY` / `HARDWIRED_SAFETY_LOOP_OWNER_DEFINED` /
-`SUPPLIER_PRECHARGE_DATA_REQUIRED` / `PRECHARGE_CURRENT_LIMIT_REQUIRED` /
-`TIMING_THRESHOLDS_TARGET_ONLY` / `NO_INVERTER_SWITCHING` / `ZERO_MOTOR_RPM` /
-`NO_VEHICLE_MOVEMENT` / `NO_TRACTION_COMMAND` / `NO_ROAD_TEST_AUTHORITY`.**
+**Status (owner review_55): `CONTROLLED_HV_PRECHARGE_OBSERVATION_READY_WITH_SUPPLIER_LIMITS_PENDING`
+/ `LIVE_HV_PRESENT` / `NO_INVERTER_SWITCHING` / `ZERO_MOTOR_RPM` /
+`VCU_REQUESTER_MONITOR_ONLY` / `BMS_PDU_EXECUTION_OWNER` /
+`HARDWIRED_SAFETY_LOOP_OWNER_DEFINED` / `SUPPLIER_PRECHARGE_DATA_REQUIRED` /
+`PRECHARGE_CURRENT_LIMIT_REQUIRED` / `TIMING_THRESHOLDS_TARGET_ONLY` /
+`NO_TRACTION_COMMAND` / `NO_VEHICLE_MOVEMENT` / `NO_ROAD_TEST_AUTHORITY`.**
+(The pre-charge RC curve is a first-order comparison model only — the accepted
+envelope is supplier-approved, RC-261/269; the Hunter re-emitted the perfect
+curve in batch_58 — regression watch.)
 Ladder: **05J → 05K → 05L-A (authorization) → 05L-B (THIS GATE — first live HV,
 pre-charge observation only) → 05L-C (controlled HV shutdown/discharge/
 re-energization repeatability) → (later, staged) 05M-A (inverter enable /

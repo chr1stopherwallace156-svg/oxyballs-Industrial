@@ -123,6 +123,24 @@ later entry that references it.
   IMD-fixture (RC-256) wording unfixed — recorded as RC-263/264, the strongest
   M10 regression-scanner cases; the `GATE05L_C_*` deliverable already held the
   corrected wording.
+- **Amendment (owner review_55, batch_58, RC-267..272): Gate 05M-B created
+  (`GATE05M_B_NO_LOAD_MOTOR_SPIN.md`) — first physical rotation, motor
+  uncoupled/guarded; global target-profile rule + strengthened spin boundary.**
+  All 05L-B/05L-C/05M-A/05M-B numbers are INITIAL_TARGET_PROFILE, with no gate
+  authority until tied to supplier docs + engineering review + test-instrument
+  method + raw proof artifact + signed approval (RC-267); the 05L-C shutdown
+  order is supplier-defined with a command↔aux-contact feedback-mismatch block
+  (RC-268, third recurrence of RC-257); the pre-charge RC curve is a comparison
+  model only (RC-269, second recurrence of RC-261); 05M-A uses supplier
+  tolerance thresholds not perfect zero (RC-270) and never says "Ready-to-Drive"
+  (RC-271); **Gate 05M-B requires a guarded rotating shaft, no driveline
+  attachment, no wheel torque path, no vehicle-movement path, E-stop +
+  exclusion zone active, a supplier-defined spin profile only, and no cabin
+  driver pedal authority** (RC-272). Regression watch: the 05L-C shutdown-order
+  rule has recurred THREE times (RC-257→263→268) and the RC curve TWICE
+  (RC-261→269) — the strongest M10 regression-scanner cases; the deliverables
+  already hold the corrected wording. Full ladder unchanged: 05J → 05K → 05L-A
+  → 05L-B → 05L-C → 05M-A → 05M-B → 05M-C (each engineer-approved).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the
@@ -133,7 +151,8 @@ later entry that references it.
   `docs/status/GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md`,
   `docs/status/GATE05L_B_HV_FIRST_ENERGIZATION.md`,
   `docs/status/GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md`,
-  `docs/status/GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md`. Supersedes nothing.
+  `docs/status/GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md`,
+  `docs/status/GATE05M_B_NO_LOAD_MOTOR_SPIN.md`. Supersedes nothing.
 
 ## D-007 — Controls-authority doctrine: Coordinator ≠ Owner + Build Engine Authority Law
 
