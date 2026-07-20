@@ -32,3 +32,20 @@ Use [templates/APPROVAL_RECORD.md](templates/APPROVAL_RECORD.md) when recording.
 ## Approval history
 
 _None yet._
+
+---
+
+## Related doctrine (not an owner approval yet)
+
+### HV commissioning chain (DT-D052)
+
+**Package:** [`build_engine/gates/hv_commissioning/`](build_engine/gates/hv_commissioning/)
+
+| Gate | Doctrine status | Live execution |
+|------|-----------------|----------------|
+| 05L-B | Wording cleaned | **Not authorized** — needs LIVE_HV_TEST_PLAN_APPROVAL |
+| 05L-C | Cleaned & defined | **Not authorized** — must complete before any 05M |
+| 05M-A | Draft (torque-disabled readiness) | **Not authorized** — after 05L-C only |
+| 05M-B / 05M-C | Staged outlines | **Blocked** until prior gate exit |
+
+Owner sign-off for live HV remains separate from doctrine acceptance (DT-D052).

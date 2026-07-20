@@ -11,9 +11,11 @@
 | Next subsystem | **MISN-000004** Mission D (4x2 steering/suspension) |
 | Mission E | **MISN-000005** deferred |
 | FL door slice | DT-D050 active; WSM/EWD still commercial |
+| HV commissioning doctrine | **DT-D052** — 05L-B/C cleaned; 05M staged draft |
+| HV live execution | **NOT authorized** |
 | EGS / procedures | `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY` / **BLOCKED** |
 | Kernel | Unchanged |
 
 ## Change-control
 
-- `decisions/DT-D030_*.json` … `DT-D051_*.json`
+- `decisions/DT-D030_*.json` … `DT-D052_*.json`

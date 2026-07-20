@@ -462,3 +462,25 @@ DT-D050 — vertical slice package ready; real promotion blocked pending Helm/WS
 ### Status
 
 DT-D051 — frame brief locked; Mission D next (no invented suspension architecture).
+
+---
+
+## RL-021 — HV commissioning gates 05L-B / 05L-C cleanup + 05M staging
+
+- **Date:** 2026-07-20
+- **Layer:** Build Engine HV commissioning doctrine (EDTS mirror)
+- **Agent:** Cursor Cloud Agent
+- **Question:** Apply researcher/verdict cleanups to Gates 05L-B and 05L-C, and stage 05M-A/B/C without authorizing live HV or premature spin?
+
+### Findings
+
+1. **Ownership partition locked permanently:** VCU = request/monitor; BMS/PDU = contactor + pre-charge; hardwired safety loop = emergency coil-supply interrupt.
+2. **05L-B corrections applied:** no absolute \(V_{caps}=0.0\,\mathrm{V}\); RC = first-order envelope model only; timeout = fail-to-reach-before-expiry; E-stop = measured dropout vs supplier target, no “instantly,” no auto-retry.
+3. **05L-C corrections applied:** supplier-defined shutdown architecture (not universal Main+→Main−); IMD via approved current-limited fixture only; weld tests split **005A** (false positive) / **005B** (false negative).
+4. **Global rule:** all numerics in 05L-B / 05L-C / 05M-A are **INITIAL_TARGET_PROFILE** until SUPPLIER_DATA + ENGINEERING_REVIEW + LIVE_HV_TEST_PLAN_APPROVAL + bench/chassis proof.
+5. **05M-A draft:** inverter enable readiness / torque-disabled validation — no assumed 0% PWM, no intentional rotation, no vehicle movement, no driver torque authority.
+6. **Staging:** after 05L-C → 05M-A → 05M-B → 05M-C; do not jump to spin before 05M-A. Live HV execution **not** authorized by doctrine alone.
+
+### Status
+
+DT-D052 — HV package at `build_engine/gates/hv_commissioning/`; recommended evidence path remains MISN-000004 / Helm WSM-EWD in parallel.

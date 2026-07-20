@@ -864,3 +864,21 @@ Append-only record of digital twin foundation decisions.
   4. Select **MISN-000004** (Mission D front suspension); defer Mission E as **MISN-000005**
   5. No invented axle architecture / spring rates
 
+
+## DT-D052 — HV commissioning gates 05L-B / 05L-C cleaned; 05M staged
+
+- **Change-control record:** [`decisions/DT-D052_HV_COMMISSIONING_GATES_05L_05M.json`](decisions/DT-D052_HV_COMMISSIONING_GATES_05L_05M.json)
+- **decision_id:** `DT-D052`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-021`
+- **package:** [`build_engine/gates/hv_commissioning/`](build_engine/gates/hv_commissioning/)
+- **decision:**
+  1. Admit cleaned **05L-B** (first live current-limited pre-charge observation) and **05L-C** (shutdown / discharge / repeatability)
+  2. Lock permanent ownership: **VCU** = request/monitor; **BMS/PDU** = contactor + pre-charge; **hardwired safety loop** = emergency interrupt
+  3. All numeric thresholds = **INITIAL_TARGET_PROFILE** only until supplier + engineering + live HV test-plan approval
+  4. Stage **05M-A** as torque-disabled inverter readiness draft (not spin); stage **05M-B/C** outlines only
+  5. Hard staging: do **not** execute 05M until 05L-C complete; after 05L-C → **05M-A → 05M-B → 05M-C**
+  6. Live HV execution remains **NOT authorized** by this decision alone
+
+---
