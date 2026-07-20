@@ -953,3 +953,20 @@ Append-only record of digital twin foundation decisions.
   5. Select **Option 2** — Mission D Layer 1 focus; Option 1 already open (Mission F) with L1/L3 split for LV
 
 ---
+
+## DT-D057 — Reject fabricated Layer-1 dump
+
+- **Change-control record:** [`decisions/DT-D057_REJECT_FABRICATED_L1_DUMP.json`](decisions/DT-D057_REJECT_FABRICATED_L1_DUMP.json)
+- **decision_id:** `DT-D057`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-026`
+- **recommended_decision:** `FABRICATED_L1_DUMP_REJECTED_CONTINUE_MISSION_D_L1`
+- **decision:**
+  1. Reject operator “L1 Engineering Truth” block (frame section, MCS70 card, curb/GAWR, CG/mass, tolerances, loads, 515 Nm)
+  2. Reject EPAS rack as OEM for this silo — L1 remains hydraulic recirculating ball + damper
+  3. Treat dependent L2/L3 numbers as non-authoritative
+  4. Decline battery chemistry / kWh / 400V–800V tailoring until L1 honesty restored
+  5. Continue Mission D L1 + commercial WSM/EWD
+
+---

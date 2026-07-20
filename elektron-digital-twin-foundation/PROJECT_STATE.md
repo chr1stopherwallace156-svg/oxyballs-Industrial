@@ -5,14 +5,15 @@
 
 | Concern | Status |
 |---|---|
-| Three-layer graph protocol | **DT-D056 ACTIVE** (L1/L2/L3 non-inheriting) |
-| Next focus | **Mission D Layer 1** (Option 2) |
-| Mission F | Open — L1 harness vs L3 VCU taps |
+| Fabricated L1 dump | **DT-D057 REJECTED** |
+| Three-layer protocol | ACTIVE — enforced |
+| EPAS-as-OEM claim | **REJECTED** (hydraulic recirculating ball is L1) |
+| Battery chem / kWh / V | **Not accepted yet** |
+| Mission D L1 | Continue |
 | Mission E | Deferred |
-| MEPQ | 1 QUEUED / 6 DEFERRED |
 | Procedures | **BLOCKED** |
 | Kernel | Unchanged |
 
 ## Change-control
 
-- `decisions/DT-D030_*.json` … `DT-D056_*.json`
+- `decisions/DT-D030_*.json` … `DT-D057_*.json`

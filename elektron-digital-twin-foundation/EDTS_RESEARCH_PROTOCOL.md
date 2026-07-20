@@ -2,7 +2,7 @@
 
 **Status:** `ACTIVE`  
 **Effective Date:** 2026-07-16  
-**Version:** `2.17.0`  
+**Version:** `2.18.0`  
 **Architecture host:** [EDTS_OS.md](EDTS_OS.md) v3.0.0+ (EDTS-OS)  
 **Isolation law:** [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
 **Binding for:** all research, acquisition, geometry development, and software logic operations under `elektron-digital-twin-foundation/`
@@ -26,6 +26,7 @@
 **Changelog from 2.14.0:** **MEPQ** admitted (Inversion Principle); Option B Mission F discovery opened; Option A/Mission E deferred with MEPQ-001/002; operator passport LEVEL_4 scrubbed.
 **Changelog from 2.15.0:** **EV-DECON-PHASE2** honesty-gated (deferred conversion-intent); MEPQ-004/005 added; active MEPQ checklist exported; Mission E not authorized.
 **Changelog from 2.16.0:** **Three-Layer Graph Separation Protocol** (L1/L2/L3 non-inheriting); ICE decon refiled by layer; Mission D L1 focus selected; MEPQ-006/007 added.
+**Changelog from 2.17.0:** **Fabricated L1 dump rejected** (wrong curb/GAWR scale, EPAS vs hydraulic steering, invented material/load cards); performance-target tailoring declined until L1 honest.
 
 ---
 

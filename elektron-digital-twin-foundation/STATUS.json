@@ -1,8 +1,8 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.30.0",
-  "updated_at": "2026-07-20T20:25:00Z",
+  "version": "0.31.0",
+  "updated_at": "2026-07-20T20:35:00Z",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
   "phase": "EVIDENCE_ACQUISITION_IN_PROGRESS",
@@ -30,8 +30,8 @@
   "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "THREE_LAYER_ACTIVE (DT-D056). Option 2: Mission D L1 focus \u2014 spindle/linkage/alignment UNKNOWNs; parse BAG + acquire WSM/parts. Mission F remains open with L1/L3 split. Mission E deferred.",
-  "next_build_priority": "MISN004_LAYER1_FRONT_AXLE_TRUTH",
+  "next_action": "FABRICATED_L1_DUMP_REJECTED (DT-D057). Continue Mission D Layer 1 + MISN-000003 WSM/EWD. Do not tailor battery chemistry/kWh/voltage on invented curb/GAWR/EPAS. Three-layer protocol enforced.",
+  "next_build_priority": "MISN004_LAYER1_TRUTH_NO_FABRICATION",
   "door_fl_decision": "CANDIDATE_ACQUISITION_RECOMMENDED",
   "door_fl_physical_verification": "REQUIRED_EVENTUALLY",
   "door_fl_sprint": "research/sprints/RL-020_CHASSIS_FRAME_BRIEF_AB.md",
@@ -693,5 +693,9 @@
   "three_layer_protocol": "research/graph_layers/THREE_LAYER_SEPARATION_PROTOCOL.md",
   "three_layer_status": "ACTIVE",
   "mepq_006": "DEFERRED_AFT_HOLE_TOLERANCES",
-  "mepq_007": "DEFERRED_FRAME_DYNAMIC_LOADS"
+  "mepq_007": "DEFERRED_FRAME_DYNAMIC_LOADS",
+  "decision_dt_d057": "decisions/DT-D057_REJECT_FABRICATED_L1_DUMP.json",
+  "fabricated_l1_dump": "REJECTED",
+  "fabricated_l1_dump_doc": "research/graph_layers/REJECTED_FABRICATED_L1_DUMP_2026_07_20.json",
+  "performance_target_tailoring": "DECLINED_UNTIL_L1_HONEST"
 }

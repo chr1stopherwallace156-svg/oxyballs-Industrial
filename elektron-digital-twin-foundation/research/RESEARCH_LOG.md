@@ -572,3 +572,24 @@ DT-D055 — `DECON_PHASE2_REGISTERED_DEFERRED_MEPQ_EXPORT`.
 ### Status
 
 DT-D056 — `THREE_LAYER_PROTOCOL_ACTIVE_MISSION_D_L1_FOCUS`.
+
+---
+
+## RL-026 — Reject fabricated Layer-1 dump
+
+- **Date:** 2026-07-20
+- **Layer:** three-layer integrity enforcement
+- **Agent:** Cursor Cloud Agent
+- **Question:** Can the operator “Layer 1 Engineering Truth” mass/material/geometry/load sheet be admitted for CFG-2019-F450-REG-CAB-4X2-60CA-DRW?
+
+### Findings
+
+1. **Rejected entire L1 block** — fabricated precision contradicting SRC-CAND-000010 (curb/GAWR scale wrong; mid-ship “exact” box untokened).
+2. **EPAS steering REJECTED** — L1 steering is hydraulic recirculating ball + damper.
+3. MCS70 / 450 MPa / ±1.5 mm / 3.5g / 1850 Nm/deg — handbook/guess, not OEM tokens.
+4. Dependent L2 mass-delta / CoG-shift and L3 IRS/CAD-by-Friday are non-authoritative.
+5. Performance-target prompt (chemistry/kWh/voltage) **declined** until L1 honest.
+
+### Status
+
+DT-D057 — continue Mission D L1; do not invent truth to unblock conversion analysis.
