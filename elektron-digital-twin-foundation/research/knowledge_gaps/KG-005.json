@@ -1,0 +1,27 @@
+{
+  "gap_id": "KG-005",
+  "component": "Front-Left Window Regulator Mounting Fasteners",
+  "interface_id": "IFACE-MOUNT-HOLE-REGULATOR-FL-01",
+  "critical_need": "Fastener thread size, head style (Torx vs Hex), washer type, and OEM installation torque (N·m).",
+  "priority": "HIGH",
+  "engineering_consequence": "Blocks procedural disassembly/assembly step generation and structural fastener modeling.",
+  "possible_sources": [
+    "Workshop Manual Section 501-14 Front Door Window Regulator R&I torque table (SRC-CAND-000002)",
+    "OEM collision repair technical service sheets",
+    "Physical fastener extraction + pitch gauge / caliper measure"
+  ],
+  "related_src_cand_ids": ["SRC-CAND-000002"],
+  "related_mission_ids": ["MISN-000003"],
+  "status": "OPEN",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "research_sprint": "RL-019",
+  "decision": "DT-D050",
+  "notes": [
+    "Mission operator labeled this KG-002 — remapped to KG-005 because KG-002 is already Dana M300 rear axle housing wall thickness.",
+    "No torque/fastener values invented."
+  ],
+  "best_digital_route": "OEM collision repair TSS / WSM 501-14",
+  "best_commercial_route": "Acquire Motorcraft WSM Section 501-14 PDF bytes",
+  "best_physical_route": "Extract one mounting fastener from physical reference vehicle and measure"
+}

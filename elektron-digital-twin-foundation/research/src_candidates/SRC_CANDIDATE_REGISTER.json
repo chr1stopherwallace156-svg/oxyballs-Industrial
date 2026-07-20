@@ -7,7 +7,7 @@
     "pattern": "SRC-CAND-######",
     "immutable_handle": true,
     "metadata_mutable": true,
-    "next_id": "SRC-CAND-000008"
+    "next_id": "SRC-CAND-000010"
   },
   "hard_rules": [
     "HR-EVI",
@@ -45,13 +45,16 @@
       "path": "research/src_candidates/SRC-CAND-000001.json",
       "topic": "FRONT_SUSPENSION_GEOMETRY",
       "research_confidence_rc": 85,
-      "acquisition_status": "NOT_ACQUIRED",
-      "metadata_title": "2019 Super Duty Chassis Cab BBAS Guide",
+      "acquisition_status": "ACQUIRED",
+      "hash_status": "HASHED",
+      "page_extraction_status": "NOT_EXECUTED",
+      "metadata_title": "2019 Super Duty Chassis Cab BBAS Guide / Body Application Guide",
       "aliases": [
         "EDTS-OEM-001",
-        "CAND-FORD-BBAS-2019"
+        "CAND-FORD-BBAS-2019",
+        "SRC-001"
       ],
-      "topics_note": "Also applicable to DOOR_FL_ASSEMBLY / chassis layout (shared OEM)"
+      "topics_note": "Also applicable to DOOR_FL_ASSEMBLY / chassis layout (shared OEM). Bytes acquired RL-019."
     },
     {
       "candidate_id": "SRC-CAND-000002",
@@ -117,11 +120,44 @@
       "aliases": [
         "EDTS-OEM-005"
       ]
+    },
+    {
+      "candidate_id": "SRC-CAND-000008",
+      "path": "research/src_candidates/SRC-CAND-000008.json",
+      "topic": "DOOR_FL_ASSEMBLY",
+      "research_confidence_rc": 70,
+      "acquisition_status": "ACQUIRED",
+      "hash_status": "HASHED",
+      "page_extraction_status": "NOT_EXECUTED",
+      "metadata_title": "NHTSA Safety Recall 17S33 / RCMN-17V652-1463",
+      "aliases": ["SRC-003", "NHTSA-17S33"],
+      "applicability": "PLATFORM_FAMILY_REFERENCE"
+    },
+    {
+      "candidate_id": "SRC-CAND-000009",
+      "path": "research/src_candidates/SRC-CAND-000009.json",
+      "topic": "DOOR_FL_ASSEMBLY",
+      "research_confidence_rc": 40,
+      "acquisition_status": "NOT_ACQUIRED",
+      "metadata_title": "2019 Super Duty Chassis Cab Sales Spec / Brochure (URL 404)",
+      "aliases": ["SRC-002"]
     }
   ],
   "next_search_queue": [
     {
       "priority": 1,
+      "task": "MISN-000003 / MISN-000001: Acquire Motorcraft WSM 501-14 + EWD Cell 59 bytes (SRC-CAND-000002 / 000006) — human/Helm handoff",
+      "lane": "LANE_SVC",
+      "topic": "DOOR_FL_HARNESS",
+      "expected_evidence": "Hashed OEM PDF bytes; no invented torque/pin values",
+      "candidate_id": "SRC-CAND-000006",
+      "status": "ACTIVE",
+      "decision": "DT-D050",
+      "mission_id": "MISN-000003",
+      "gap_ids": ["KG-001", "KG-005"]
+    },
+    {
+      "priority": 2,
       "task": "MISN-000001: Acquire 2019 Super Duty Color EWD (SRC-CAND-000006) \u2014 hash + ingest door harness pages",
       "lane": "LANE_SVC",
       "topic": "DOOR_FL_HARNESS",
@@ -133,7 +169,7 @@
       "gap_id": "KG-001"
     },
     {
-      "priority": 2,
+      "priority": 3,
       "task": "KG-001: Acquire/hash EWD door harness pages (SRC-CAND-000006) + review MEDIA-000001 for clip routing cues",
       "lane": "LANE_SVC",
       "topic": "DOOR_FL_HARNESS",

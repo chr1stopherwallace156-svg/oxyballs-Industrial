@@ -5,16 +5,17 @@
 
 | Concern | Status |
 |---|---|
-| EGS proposal | **EGS-1.0.0-proposal.2** — `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY` |
-| Pipeline audit | **DT-D049** — `EDTS-PIPELINE-AUDIT-2026-07` boundaries locked |
-| F-450 REL-REG-01..06 | **REAL_DATA_PROMOTION_BLOCKED** / `CANDIDATE_UNVERIFIED` |
-| Acquisition ceiling | Public → `SOURCE_DISCOVERED`; paywall/physical = human/API |
-| Sprint 7 physical plan | **Template only** |
+| FL door vertical slice | **DT-D050 / RL-019** package active |
+| Scope lock | 2019 F-450 RC 4x2 DRW 145.3/60 — confirmed |
+| SRC-CAND-000001 (BAG) | **ACQUIRED** (hashed; parse pending) |
+| SRC-CAND-000008 (NHTSA 17S33) | **ACQUIRED** (PLATFORM_FAMILY_REFERENCE) |
+| SRC-CAND-000009 (brochure) | **NOT_ACQUIRED** (URL 404) |
+| WSM / EWD | **SOURCE_DISCOVERED** — MISN-000003 |
+| KG-001 / KG-005 | OPEN (pinout CONTR + regulator fasteners) |
+| EGS / procedures | `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY` / **BLOCKED** |
 | Frozen assembly-relationship | **Unchanged** |
-| Active missions | `MISN-000001` (EWD/KG-001) primary; `MISN-000002` secondary |
-| Geometry | `ABSENT` |
 | Kernel / rc1 | Unchanged |
 
 ## Change-control
 
-- `decisions/DT-D030_*.json` … `DT-D049_*.json`
+- `decisions/DT-D030_*.json` … `DT-D050_*.json`

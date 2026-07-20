@@ -1,23 +1,25 @@
 {
   "document_id": "KNOWLEDGE_GAP_REGISTER",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "status": "ACTIVE",
   "schema": "schemas/knowledge-gap.schema.json",
-  "decision": "DT-D046",
-  "research_sprint": "RL-015",
-  "next_id": "KG-005",
+  "decision": "DT-D050",
+  "research_sprint": "RL-019",
+  "next_id": "KG-006",
   "gaps": [
     {
       "gap_id": "KG-001",
       "priority": "CRITICAL",
       "status": "OPEN",
-      "path": "research/knowledge_gaps/KG-001.json"
+      "path": "research/knowledge_gaps/KG-001.json",
+      "focus": "FL door harness routing + C309 pinout (CONTR logged)"
     },
     {
       "gap_id": "KG-002",
       "priority": "HIGH",
       "status": "OPEN",
-      "path": "research/knowledge_gaps/KG-002.json"
+      "path": "research/knowledge_gaps/KG-002.json",
+      "focus": "Dana M300 rear axle housing wall thickness"
     },
     {
       "gap_id": "KG-003",
@@ -30,7 +32,14 @@
       "priority": "HIGH",
       "status": "OPEN",
       "path": "research/knowledge_gaps/KG-004.json"
+    },
+    {
+      "gap_id": "KG-005",
+      "priority": "HIGH",
+      "status": "OPEN",
+      "path": "research/knowledge_gaps/KG-005.json",
+      "focus": "FL regulator mounting fastener/torque (operator mission KG-002 remapped)"
     }
   ],
-  "focus": "KG-001 via MISN-000001 (EWD); KG-003/KG-004 secondary structural/fit gaps"
+  "focus": "KG-001 via MISN-000001/000003; KG-005 via MISN-000003 WSM 501-14"
 }

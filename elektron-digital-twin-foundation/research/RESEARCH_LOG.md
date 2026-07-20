@@ -419,3 +419,25 @@ DT-D048 — `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY`; real F-450 promotion blocked
 ### Status
 
 DT-D049 — pipeline boundaries locked; recommended decision still `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY`.
+
+---
+
+## RL-019 — FL Door vertical-slice mission
+
+- **Date:** 2026-07-20
+- **Layer:** FL door / exact-vehicle isolation
+- **Agent:** Cursor Cloud Agent
+- **Question:** Execute Front-Left Door vertical-slice research under locked 2019 F-450 Chassis Cab Regular Cab 4x2 DRW 145.3/60 without inheriting near-config truth?
+
+### Findings
+
+1. Scope lock confirmed; no pickup/Crew/4x4/2020+ inheritance as authoritative.
+2. **SRC-CAND-000001** (BAG) + **SRC-CAND-000008** (NHTSA 17S33) bytes acquired + hashed; parse PENDING.
+3. Brochure SRC-002 URL **HTTP 404** → **SRC-CAND-000009 NOT_ACQUIRED** (demoted from operator SOURCE_ACQUIRED).
+4. WSM/EWD still SOURCE_DISCOVERED; **MISN-000003** commercial handoff + ingestion fixtures.
+5. Candidate components/IFACE/edges recorded; C309 pin **CONTRADICTION**; operator KG-002 → **KG-005**.
+6. Invented 12 V EVD claim rejected; all procedures BLOCKED.
+
+### Status
+
+DT-D050 — vertical slice package ready; real promotion blocked pending Helm/WSM/EWD bytes.

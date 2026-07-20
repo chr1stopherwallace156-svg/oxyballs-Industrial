@@ -1,0 +1,43 @@
+{
+  "decision_id": "DT-D050",
+  "title": "FL Door vertical-slice mission — scope lock, public PDF acquire, MISN-000003 commercial handoff",
+  "date": "2026-07-20",
+  "approved_status": "ACCEPTED",
+  "recommended_decision": "EGS_V1_PROPOSAL_INFRASTRUCTURE_READY",
+  "handoff_scope": "Vertical slice package + ingestion fixtures; WSM/EWD still commercial",
+  "scope": [
+    "research/vertical_slices/fl_door_2019_f450/",
+    "research/incoming/fl_door_vertical_slice/",
+    "SRC-CAND-000001 ACQUIRED",
+    "SRC-CAND-000008 ACQUIRED",
+    "SRC-CAND-000009 NOT_ACQUIRED",
+    "KG-005",
+    "MISN-000003",
+    "RL-019"
+  ],
+  "reason": "Execute Front-Left Door vertical-slice research under exact-vehicle isolation with honest acquisition: deposit and hash public PDFs; demote broken brochure URL; keep Helm sources SOURCE_DISCOVERED; register pinout contradiction and fastener gap without inventing values.",
+  "decision": [
+    "Confirm scope lock: 2019 F-450 Chassis Cab Regular Cab 4x2 DRW 145.3 WB / 60 CA LHD bare cab-and-chassis only (CFG-000001 / CFG-2019-F450-REG-CAB-4X2-60CA-DRW).",
+    "Admit RF-001/RF-002 with acquired BAG + NHTSA bytes; page extraction PENDING_PARSER — no ASSERTION_VERIFIED content claims.",
+    "Mark SRC-CAND-000001 and SRC-CAND-000008 SOURCE_ACQUIRED with real SHA-256; SRC-CAND-000009 NOT_ACQUIRED (HTTP 404).",
+    "Keep SRC-CAND-000002 (WSM 501-14) and SRC-CAND-000006 (EWD) SOURCE_DISCOVERED / NOT_ACQUIRED.",
+    "Admit candidate CFGCOMP/IFACE nodes and EGS edges as CANDIDATE / REAL_DATA_PROMOTION_BLOCKED; MATES_WITH uses IFACE↔IFACE.",
+    "Log CONTR-2019-F450-DOOR-HARNESS-PINOUT; pin_count CONTRADICTED; do not majority-vote.",
+    "Extend KG-001 with contradiction link; admit KG-005 for regulator fasteners (operator KG-002 remapped — KG-002 remains Dana M300).",
+    "Authorize MISN-000003 commercial OEM acquisition handoff; prepare synthetic Motorcraft PDF parse fixtures with null hashes/values.",
+    "Reject invented EVD-PUBLIC-SPEC 12 V assertion — voltage_nominal remains UNRESOLVED.",
+    "Saturation PARTIALLY_SATURATED — free public lanes exhausted for internal cavity/torque.",
+    "Recommended decision EGS_V1_PROPOSAL_INFRASTRUCTURE_READY; procedure generation NOT_AUTHORIZED.",
+    "Frozen kernel schemas unchanged."
+  ],
+  "related_decisions": ["DT-D049", "DT-D048", "DT-D045", "DT-D041"],
+  "change_control": {
+    "kernel_schema_change": false,
+    "frozen_assembly_relationship_untouched": true,
+    "vertical_slice": "research/vertical_slices/fl_door_2019_f450/"
+  },
+  "acquired_hashes": {
+    "SRC-CAND-000001": "sha256:4c7a4bf129e91d0934cb1e7e160a3069c9486048ce643598cdd55504404df922",
+    "SRC-CAND-000008": "sha256:fb3eda01d0de7c892083a9de6986be0dd2781e2aef8de40e4e6c0af8d4a59fba"
+  }
+}

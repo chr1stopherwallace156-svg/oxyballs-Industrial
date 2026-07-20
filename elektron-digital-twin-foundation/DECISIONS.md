@@ -832,3 +832,20 @@ Append-only record of digital twin foundation decisions.
   5. Research Saturation → Sprint 7 Physical Acquisition Plan template (not executed)
   6. F-450 edges remain **REAL_DATA_PROMOTION_BLOCKED** / **PROCEDURE_GENERATION_NOT_AUTHORIZED**
 
+
+## DT-D050 — FL Door vertical-slice research mission
+
+- **Change-control record:** [`decisions/DT-D050_FL_DOOR_VERTICAL_SLICE.json`](decisions/DT-D050_FL_DOOR_VERTICAL_SLICE.json)
+- **decision_id:** `DT-D050`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY`
+- **protocol_version:** `2.12.0`
+- **decision:**
+  1. Confirm exact-vehicle **scope lock** for FL door vertical slice
+  2. **SOURCE_ACQUIRED** BAG + NHTSA (real SHA-256); brochure URL **404 → NOT_ACQUIRED**
+  3. WSM/EWD remain **SOURCE_DISCOVERED**; authorize **MISN-000003** commercial handoff
+  4. Candidate CFGCOMP/IFACE/edges locked; pinout **CONTRADICTION**; **KG-005** fastener gap
+  5. No invented torque/voltage/hashes; parser fixtures synthetic only
+  6. Saturation **PARTIALLY_SATURATED** — procedures **NOT_AUTHORIZED**
+

@@ -1,0 +1,231 @@
+{
+  "document_id": "FL_DOOR_VERTICAL_SLICE_CANDIDATE_EDGES",
+  "schema_version": "EGS-1.0.0-proposal.2",
+  "authority_status": "REAL_DATA_PROMOTION_BLOCKED",
+  "decision": "DT-D050",
+  "plane_mapping_notes": [
+    "Operator PHYSICAL_TOPOLOGY/FUNCTIONAL_TOPOLOGY/PROCEDURAL_TOPOLOGY map to EGS planes PHYSICAL/FUNCTIONAL/PROCEDURAL.",
+    "BLOCKS_ACCESS_TO remains PHYSICAL per proposal.2 (access occlusion is physical topology; procedural ordering uses MUST_PRECEDE).",
+    "MATES_WITH endpoints are IFACE↔IFACE (regulator-side C309B added) — not harness IFACE→CFGCOMP shortcut."
+  ],
+  "edges": [
+    {
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T14:58:00Z",
+      "created_by": "EDTS-FL-Door-Vertical-Slice",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-REGULATOR-TO-INNER-PANEL-01",
+      "aliases": ["REL-REG-01"],
+      "graph_plane": "PHYSICAL",
+      "relationship_class": "BOLTED_TO",
+      "source_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-REGULATOR-FL",
+      "target_node_id": "IFACE-MOUNT-HOLE-REGULATOR-FL-01",
+      "directionality": "FORWARD",
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
+        "notes": null
+      },
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": "Existence SOURCE_DISCOVERED; fastener/torque UNRESOLVED (KG-005)"
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "SOURCE_DISCOVERED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
+          "notes": null
+        },
+        "fastener_count": {
+          "value": null,
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": false,
+          "notes": null
+        },
+        "fastener_type": {
+          "value": null,
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": false,
+          "notes": null
+        },
+        "torque_specification": {
+          "value": null,
+          "unit": "Nm",
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": false,
+          "notes": null
+        }
+      },
+      "transient_state": null,
+      "notes": ["PROCEDURE_ELIGIBILITY BLOCKED"]
+    },
+    {
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T14:58:00Z",
+      "created_by": "EDTS-FL-Door-Vertical-Slice",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-HARNESS-TO-REGULATOR-C309",
+      "aliases": ["REL-REG-02"],
+      "graph_plane": "PHYSICAL",
+      "relationship_class": "MATES_WITH",
+      "source_node_id": "IFACE-CONNECTOR-DOOR-HARNESS-TO-REGULATOR-C309A",
+      "target_node_id": "IFACE-CONNECTOR-REGULATOR-FL-C309B",
+      "directionality": "FORWARD",
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
+        "notes": null
+      },
+      "verification_lifecycle": {
+        "edge_status": "CONTRADICTED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": "pin_count CONTRADICTED (CONTR-2019-F450-DOOR-HARNESS-PINOUT / KG-001); existence still unverified"
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "SOURCE_DISCOVERED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
+          "notes": null
+        },
+        "pin_count": {
+          "value": null,
+          "status": "CONTRADICTED",
+          "evidence_assertion_ids": [],
+          "conflicting_assertions": [
+            {
+              "source_id": "EVD-AFTERMARKET-F150-STREAM",
+              "claimed_value": "6-pin with anti-pinch module pins"
+            },
+            {
+              "source_id": "EVD-PARTS-CATALOG-BASE-XL-FLEET",
+              "claimed_value": "2-pin direct-power motor connector"
+            }
+          ],
+          "mandatory": false,
+          "notes": "See CONTR-2019-F450-DOOR-HARNESS-PINOUT — values not promoted"
+        },
+        "wire_gauge": {
+          "value": null,
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": false,
+          "notes": null
+        }
+      },
+      "transient_state": null,
+      "notes": ["Edge existence remains CANDIDATE_UNVERIFIED; pin_count CONTRADICTED blocks promotion"]
+    },
+    {
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T14:58:00Z",
+      "created_by": "EDTS-FL-Door-Vertical-Slice",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-HARNESS-POWER-TO-REGULATOR",
+      "aliases": [],
+      "graph_plane": "FUNCTIONAL",
+      "relationship_class": "SUPPLIES_POWER_TO",
+      "source_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-HARNESS-DOOR-FL",
+      "target_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-REGULATOR-FL",
+      "directionality": "FORWARD",
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
+        "notes": null
+      },
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": "12V nominal is platform assumption — not EWD-verified"
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "SOURCE_DISCOVERED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
+          "notes": null
+        },
+        "voltage_nominal": {
+          "value": null,
+          "unit": "V",
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": false,
+          "notes": "Operator proposed 12.0 V ASSERTION_EXTRACTED from invented EVD-PUBLIC-SPEC — rejected. Keep null until EWD Cell 59 hashed+parsed."
+        }
+      },
+      "transient_state": null,
+      "notes": []
+    },
+    {
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T14:58:00Z",
+      "created_by": "EDTS-FL-Door-Vertical-Slice",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-PROC-TRIM-BLOCKS-PORT",
+      "aliases": ["REL-REG-04"],
+      "graph_plane": "PHYSICAL",
+      "relationship_class": "BLOCKS_ACCESS_TO",
+      "source_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRIM-PANEL-FL",
+      "target_node_id": "IFACE-MOUNT-HOLE-REGULATOR-FL-01",
+      "directionality": "FORWARD",
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
+        "notes": null
+      },
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": null
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "SOURCE_DISCOVERED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
+          "notes": null
+        }
+      },
+      "transient_state": null,
+      "notes": ["Plane PHYSICAL per EGS-1.0.0-proposal.2; procedural sequencing would use MUST_PRECEDE OP-* edges"]
+    }
+  ]
+}

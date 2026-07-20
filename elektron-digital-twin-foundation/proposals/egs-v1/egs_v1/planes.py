@@ -25,6 +25,7 @@ PLANE_MEMBERSHIP: dict[str, str] = {
     # Plane 2 — Functional topology
     "TRANSMITS_LIN_DATA_TO": "FUNCTIONAL",
     "TRANSMITS_SIGNAL_TO": "FUNCTIONAL",
+    "SUPPLIES_POWER_TO": "FUNCTIONAL",
     # Plane 3 — Procedural
     "MUST_PRECEDE": "PROCEDURAL",
     "MUST_BE_DISCONNECTED_BEFORE": "PROCEDURAL",

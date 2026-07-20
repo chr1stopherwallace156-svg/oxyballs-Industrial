@@ -1,16 +1,14 @@
 {
   "document_id": "MISSION_REGISTER",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "status": "ACTIVE",
   "schema": "schemas/research-mission.schema.json",
-  "decision": "DT-D046",
-  "next_id": "MISN-000003",
+  "decision": "DT-D050",
+  "next_id": "MISN-000004",
   "active_missions": [
     {
       "mission_id": "MISN-000001",
-      "aliases": [
-        "EDTS-MISN-001"
-      ],
+      "aliases": ["EDTS-MISN-001"],
       "path": "research/missions/MISN-000001.json",
       "completion_status": "NOT_STARTED",
       "primary_target": "SRC-CAND-000006",
@@ -18,22 +16,31 @@
     },
     {
       "mission_id": "MISN-000002",
-      "aliases": [
-        "EDTS-MISN-002"
-      ],
+      "aliases": ["EDTS-MISN-002"],
       "path": "research/missions/MISN-000002.json",
       "completion_status": "NOT_STARTED",
       "primary_target": "EGS-v1 dashboard edge mapping",
       "gap_id": null,
       "priority_note": "Secondary to MISN-000001 / KG-001"
+    },
+    {
+      "mission_id": "MISN-000003",
+      "aliases": ["EDTS-MISN-003", "MISN-003"],
+      "path": "research/missions/MISN-000003.json",
+      "completion_status": "NOT_STARTED",
+      "primary_target": "SRC-CAND-000002 + SRC-CAND-000006 commercial byte handoff",
+      "gap_ids": ["KG-001", "KG-005"],
+      "priority_note": "Commercial OEM acquisition — coordinates with MISN-000001"
     }
   ],
   "notes": [
-    "Orchestration issues missions; silo CFG-000001 only."
+    "Orchestration issues missions; silo CFG-000001 only.",
+    "FL door vertical slice: research/vertical_slices/fl_door_2019_f450/"
   ],
   "relationship_graph": "research/relationship_graph/RELATIONSHIP_GRAPH_REGISTER.json",
   "priority_order": [
     "MISN-000001",
+    "MISN-000003",
     "MISN-000002"
   ]
 }

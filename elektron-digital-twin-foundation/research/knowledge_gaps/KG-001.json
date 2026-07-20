@@ -30,9 +30,23 @@
   "notes": [
     "Primary focus for CONTINUE_RESEARCH before recommending physical laser scan.",
     "Mirror option pinout contamination risk (8-pin vs 22-pin).",
-    "Assigned to MISN-000001 \u2014 primary resolution vector = SRC-CAND-000006 EWD acquire."
+    "Assigned to MISN-000001 — primary resolution vector = SRC-CAND-000006 EWD acquire.",
+    "RL-019: CONTR-2019-F450-DOOR-HARNESS-PINOUT (6-pin F-150 stream vs 2-pin Base XL fleet) logged — blocks C309 pin claim promotion.",
+    "Also targeted by MISN-000003 (commercial WSM 501-14 + EWD Cell 59 handoff)."
   ],
   "related_mission_ids": [
-    "MISN-000001"
-  ]
+    "MISN-000001",
+    "MISN-000003"
+  ],
+  "related_contradiction_ids": [
+    "CONTR-2019-F450-DOOR-HARNESS-PINOUT"
+  ],
+  "missing_properties": [
+    "Exact connector designation",
+    "Pin count",
+    "Wire colors",
+    "Anchor clip spatial coordinates inside aluminum door cavity"
+  ],
+  "research_sprint": "RL-019",
+  "decision": "DT-D050"
 }

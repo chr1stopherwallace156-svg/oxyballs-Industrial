@@ -1,0 +1,94 @@
+{
+  "document_id": "FL_DOOR_VERTICAL_SLICE_CANDIDATE_COMPONENTS",
+  "authority_status": "CANDIDATE",
+  "decision": "DT-D050",
+  "verification_lock": "No candidate promoted to VERIFIED",
+  "components": [
+    {
+      "compdef_id": "COMPDEF-FRONT-DOOR-INNER-STRUCTURE",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DOOR-INNER-FL",
+      "display_name": "Front-Left Door Inner Aluminum Stamping Structure",
+      "verification_status": "CANDIDATE",
+      "physical_type": "STRUCTURAL_STAMPING",
+      "material_claimed": "6000-series aluminum alloy (OEM marketing sometimes says military-grade — treat as MARKETING_CLAIM until BAG/WSM page cite)",
+      "material_claim_status": "CANDIDATE_UNVERIFIED"
+    },
+    {
+      "compdef_id": "COMPDEF-WINDOW-REGULATOR-POWER",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-REGULATOR-FL",
+      "display_name": "Front-Left Power Window Regulator Assembly",
+      "verification_status": "CANDIDATE",
+      "physical_type": "MECHANICAL_ACTUATOR",
+      "material_claimed": "Galvanized steel track with electric motor drive",
+      "material_claim_status": "CANDIDATE_UNVERIFIED"
+    },
+    {
+      "compdef_id": "COMPDEF-DOOR-HARNESS-CAB-SIDE",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-HARNESS-DOOR-FL",
+      "display_name": "Front-Left Door Wiring Harness Loom",
+      "verification_status": "CANDIDATE",
+      "physical_type": "ELECTRICAL_HARNESS",
+      "material_claimed": "Copper wire bundle, convoluted tubing, rubber A-pillar pass-through boot",
+      "material_claim_status": "CANDIDATE_UNVERIFIED",
+      "related_gap_ids": ["KG-001"]
+    },
+    {
+      "compdef_id": "COMPDEF-DOOR-LATCH-FL",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DOOR-LATCH-FL",
+      "display_name": "Front-Left Door Latch Assembly",
+      "verification_status": "CANDIDATE",
+      "physical_type": "MECHANICAL_LATCH",
+      "related_findings": ["RF-002"]
+    },
+    {
+      "compdef_id": "COMPDEF-CAB-SHELL",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB-SHELL",
+      "display_name": "Regular Cab Aluminum Cab Shell",
+      "verification_status": "CANDIDATE",
+      "physical_type": "BODY_STRUCTURE",
+      "related_findings": ["RF-001"]
+    },
+    {
+      "compdef_id": "COMPDEF-DOOR-TRIM-PANEL-FL",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRIM-PANEL-FL",
+      "display_name": "Front-Left Interior Door Trim Panel",
+      "verification_status": "CANDIDATE",
+      "physical_type": "INTERIOR_TRIM"
+    }
+  ],
+  "interfaces": [
+    {
+      "iface_id": "IFACE-MOUNT-HOLE-REGULATOR-FL-01",
+      "parent_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DOOR-INNER-FL",
+      "interface_type": "MECHANICAL_FASTENER_HOLE",
+      "verification_status": "CANDIDATE",
+      "mating_capability": "FASTENER_THREADED",
+      "related_gap_ids": ["KG-005"]
+    },
+    {
+      "iface_id": "IFACE-CONNECTOR-DOOR-HARNESS-TO-REGULATOR-C309A",
+      "parent_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-HARNESS-DOOR-FL",
+      "interface_type": "ELECTRICAL_CONNECTOR",
+      "verification_status": "CANDIDATE",
+      "mating_capability": "MULTI_PIN_PLUG",
+      "related_gap_ids": ["KG-001"],
+      "related_contradiction_ids": ["CONTR-2019-F450-DOOR-HARNESS-PINOUT"],
+      "notes": ["C309 designation is research placeholder until EWD Cell 59 acquired"]
+    },
+    {
+      "iface_id": "IFACE-CONNECTOR-REGULATOR-FL-C309B",
+      "parent_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-REGULATOR-FL",
+      "interface_type": "ELECTRICAL_CONNECTOR",
+      "verification_status": "CANDIDATE",
+      "mating_capability": "MULTI_PIN_PLUG",
+      "notes": ["Regulator-side mate for C309A — required by IFACE layer (no direct harness→regulator jump)"]
+    },
+    {
+      "iface_id": "IFACE-GROMMET-DOOR-A-PILLAR-PASS-THROUGH-FL",
+      "parent_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DOOR-INNER-FL",
+      "interface_type": "BODY_PASS_THROUGH_APERTURE",
+      "verification_status": "CANDIDATE",
+      "mating_capability": "WEATHERPROOF_SEAL"
+    }
+  ]
+}

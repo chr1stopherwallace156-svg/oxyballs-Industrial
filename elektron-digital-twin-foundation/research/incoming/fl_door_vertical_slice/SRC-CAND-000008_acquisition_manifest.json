@@ -1,0 +1,15 @@
+{
+  "source_id": "SRC-CAND-000008",
+  "title": "NHTSA Safety Recall 17S33 / RCMN-17V652-1463",
+  "url": "https://static.nhtsa.gov/odi/rcl/2017/RCMN-17V652-1463.pdf",
+  "local_file_path": "research/incoming/fl_door_vertical_slice/SRC-NHTSA-17S33_RCMN-17V652-1463.pdf",
+  "sha256": "sha256:fb3eda01d0de7c892083a9de6986be0dd2781e2aef8de40e4e6c0af8d4a59fba",
+  "byte_length": 3806396,
+  "acquisition_status": "SOURCE_ACQUIRED",
+  "hash_status": "HASHED",
+  "page_extraction_status": "NOT_EXECUTED",
+  "parser_status": "PENDING_PARSER",
+  "notes": [
+    "Bytes deposited and hashed. No ASSERTION_VERIFIED until token-anchor parse."
+  ]
+}

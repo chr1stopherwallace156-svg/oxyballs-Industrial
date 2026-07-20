@@ -1,0 +1,40 @@
+{
+  "mission_id": "MISN-000003",
+  "id_immutable": true,
+  "aliases": [
+    "EDTS-MISN-003",
+    "MISN-003"
+  ],
+  "title": "Commercial OEM Source Acquisition & Handoff Directive",
+  "objective": "Acquire Motorcraft Workshop Manual Section 501-14 and Electrical Wiring Diagram (EWD) Cell 59 bytes to resolve KG-001 (pinout/routing) and KG-005 (regulator fasteners/torque).",
+  "target_gap_ids": [
+    "KG-001",
+    "KG-005"
+  ],
+  "success_criteria": [
+    "Deposit WSM 501-14 PDF bytes under research/incoming/ with SHA-256 + acquisition manifest.",
+    "Deposit EWD Cell 59 (Power Windows) PDF bytes with SHA-256 + acquisition manifest.",
+    "Run parser fixtures without inventing torque/pin values; claims remain ASSERTION_EXTRACTED until token-anchor ASSERTION_VERIFIED.",
+    "Do not promote any F-450 door edge to VERIFIED or authorize procedure generation."
+  ],
+  "evidence_required": [
+    "Section 501-14 regulator R&I torque table",
+    "EWD Cell 59 connector designation / pinout for FL door power window"
+  ],
+  "completion_status": "NOT_STARTED",
+  "assigned_src_cand_ids": [
+    "SRC-CAND-000002",
+    "SRC-CAND-000006"
+  ],
+  "assigned_aid_ids": [],
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "research_sprint": "RL-019",
+  "decision": "DT-D050",
+  "priority_note": "Commercial paywall handoff — coordinates with MISN-000001 (EWD primary). Does not replace MISN-000001.",
+  "cost_access_note": "Motorcraft / Helm reported ~$21.95/day access — human purchasing agent required",
+  "notes": [
+    "Do not fabricate file hashes or torque values.",
+    "Ingestion pipeline fixtures prepared under research/incoming/fl_door_vertical_slice/ingestion_fixtures/."
+  ]
+}

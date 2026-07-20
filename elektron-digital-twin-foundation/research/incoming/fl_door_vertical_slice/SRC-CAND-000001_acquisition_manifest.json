@@ -1,0 +1,15 @@
+{
+  "source_id": "SRC-CAND-000001",
+  "title": "2019 Ford Body Application Guide",
+  "url": "https://xr793.com/wp-content/uploads/2020/03/2019-Ford-Body-Application-Guide.pdf",
+  "local_file_path": "research/incoming/fl_door_vertical_slice/SRC-CAND-000001_2019_Ford_Body_Application_Guide.pdf",
+  "sha256": "sha256:4c7a4bf129e91d0934cb1e7e160a3069c9486048ce643598cdd55504404df922",
+  "byte_length": 4708797,
+  "acquisition_status": "SOURCE_ACQUIRED",
+  "hash_status": "HASHED",
+  "page_extraction_status": "NOT_EXECUTED",
+  "parser_status": "PENDING_PARSER",
+  "notes": [
+    "Bytes deposited and hashed. No ASSERTION_VERIFIED until token-anchor parse."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "contradiction_id": "CONTR-2019-F450-DOOR-HARNESS-PINOUT",
+  "affected_property": "Connector Pin Count & Terminal Housing (Door Harness C309 Interface)",
+  "classification": "APPLICABILITY_MISMATCH / OPTION_DEPENDENT",
+  "bound_configuration_id": "CFG-000001",
+  "proposal_configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+  "affected_nodes": [
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-HARNESS-DOOR-FL",
+    "IFACE-CONNECTOR-DOOR-HARNESS-TO-REGULATOR-C309A",
+    "IFACE-CONNECTOR-REGULATOR-FL-C309B"
+  ],
+  "affected_edge_ids": ["EDGE-2019-F450-HARNESS-TO-REGULATOR-C309"],
+  "assertions": [
+    {
+      "label": "A",
+      "source": "Aftermarket Repair Guide / Generic F-150 Door Replacement Stream",
+      "claimed_value": "6-pin connector housing with integrated anti-pinch module pins",
+      "applicability": "2015-2020 Ford F-150 Lariat/King Ranch (Power Windows)",
+      "inheritance_to_silo": "NOT_INHERITED",
+      "record_class": "CROSS_CONFIGURATION_COMPARISON"
+    },
+    {
+      "label": "B",
+      "source": "Commercial Parts Catalog (Tasca OEM F-250/F-450 Base XL Fleet Group)",
+      "claimed_value": "2-pin direct-power motor connector (Manual lock/basic power window option)",
+      "applicability": "2017-2019 F-Series Chassis Cab Base XL Trim",
+      "inheritance_to_silo": "NOT_INHERITED_UNTIL_EWD_CROSSCHECK",
+      "record_class": "SOURCE_APPLICABILITY_CANDIDATE"
+    }
+  ],
+  "resolution_status": "UNRESOLVED",
+  "related_gap_ids": ["KG-001"],
+  "impact": "Blocks promotion of EDGE-2019-F450-HARNESS-TO-REGULATOR-C309 pin claims; procedure generation remains NOT_AUTHORIZED",
+  "decision": "DT-D050",
+  "research_sprint": "RL-019"
+}

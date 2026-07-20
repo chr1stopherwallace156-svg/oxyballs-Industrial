@@ -1,0 +1,88 @@
+{
+  "document_id": "FL_DOOR_VERTICAL_SLICE_SOURCE_LEDGER",
+  "decision": "DT-D050",
+  "research_sprint": "RL-019",
+  "honesty_gate": [
+    "SOURCE_ACQUIRED requires local bytes + SHA-256 in research/incoming/fl_door_vertical_slice/.",
+    "Operator-claimed Skeeter brochure URL returned HTTP 404 — recorded NOT_ACQUIRED (not SOURCE_ACQUIRED).",
+    "WSM/EWD remain SOURCE_DISCOVERED / NOT_ACQUIRED (Helm commercial) — hashes null.",
+    "PENDING_PARSER: acquired PDFs are hashed but page/token-anchor extraction NOT_EXECUTED — no ASSERTION_VERIFIED from content yet.",
+    "Mission SRC-001..005 aliases map to immutable SRC-CAND-* handles where applicable."
+  ],
+  "sources": [
+    {
+      "mission_source_alias": "SRC-001",
+      "source_id": "SRC-CAND-000001",
+      "title": "2019 Ford Body Application Guide",
+      "source_type": "Tier 1 (OEM BBAS)",
+      "url": "https://xr793.com/wp-content/uploads/2020/03/2019-Ford-Body-Application-Guide.pdf",
+      "lifecycle_status": "SOURCE_ACQUIRED",
+      "exact_applicability": "EXACT_CONFIGURATION_MATCH_CANDIDATE",
+      "cost_access": "Open Public PDF",
+      "sha256": "sha256:4c7a4bf129e91d0934cb1e7e160a3069c9486048ce643598cdd55504404df922",
+      "local_file_path": "research/incoming/fl_door_vertical_slice/SRC-CAND-000001_2019_Ford_Body_Application_Guide.pdf",
+      "page_extraction_status": "NOT_EXECUTED",
+      "parser_status": "PENDING_PARSER"
+    },
+    {
+      "mission_source_alias": "SRC-002",
+      "source_id": "SRC-CAND-000009",
+      "title": "2019 Super Duty Chassis Cab Sales Spec / Brochure",
+      "source_type": "Tier 1 (OEM Brochure)",
+      "url_claimed": "https://skeeteremergencyvehicles.com/.../SkeeterFordChassis2019.pdf",
+      "url_fetch_result": "HTTP_404_NOT_FOUND",
+      "lifecycle_status": "NOT_ACQUIRED",
+      "exact_applicability": "EXACT_CONFIGURATION_MATCH_CLAIMED_UNVERIFIED",
+      "cost_access": "Open Public PDF (URL broken at fetch time)",
+      "sha256": null,
+      "local_file_path": null,
+      "page_extraction_status": "NOT_EXECUTED",
+      "parser_status": null,
+      "notes": ["Do not mark SOURCE_ACQUIRED without bytes. Seek alternate official brochure URL."]
+    },
+    {
+      "mission_source_alias": "SRC-003",
+      "source_id": "SRC-CAND-000008",
+      "title": "NHTSA Safety Recall 17S33 Service Bulletin (RCMN-17V652-1463)",
+      "source_type": "Tier 3 (Gov/Regulatory)",
+      "url": "https://static.nhtsa.gov/odi/rcl/2017/RCMN-17V652-1463.pdf",
+      "lifecycle_status": "SOURCE_ACQUIRED",
+      "exact_applicability": "PLATFORM_FAMILY_REFERENCE",
+      "cost_access": "Open Public PDF",
+      "sha256": "sha256:fb3eda01d0de7c892083a9de6986be0dd2781e2aef8de40e4e6c0af8d4a59fba",
+      "local_file_path": "research/incoming/fl_door_vertical_slice/SRC-NHTSA-17S33_RCMN-17V652-1463.pdf",
+      "page_extraction_status": "NOT_EXECUTED",
+      "parser_status": "PENDING_PARSER",
+      "notes": [
+        "Covers 13th-gen F-150 / 4th-gen Super Duty aluminum cab platform family — NOT automatic silo truth for 2019 Chassis Cab without part-number cross-check."
+      ]
+    },
+    {
+      "mission_source_alias": "SRC-004",
+      "source_id": "SRC-CAND-000002",
+      "title": "Ford Workshop Manual Sec 501-14 (Door/Latch)",
+      "source_type": "Tier 1 (OEM Manual)",
+      "url_or_route": "Motorcraft Service / Helm Inc. Portal",
+      "lifecycle_status": "SOURCE_DISCOVERED",
+      "exact_applicability": "EXACT_CONFIGURATION_MATCH_CLAIMED",
+      "cost_access": "Commercial Purchase (~$21.95/day reported)",
+      "sha256": null,
+      "local_file_path": null,
+      "assigned_mission": "MISN-000003"
+    },
+    {
+      "mission_source_alias": "SRC-005",
+      "source_id": "SRC-CAND-000006",
+      "title": "2019 Super Duty Wiring Diagram Manual (EWD)",
+      "source_type": "Tier 1 (OEM EWD)",
+      "url_or_route": "Motorcraft Service / Helm Inc. Portal",
+      "lifecycle_status": "SOURCE_DISCOVERED",
+      "exact_applicability": "EXACT_CONFIGURATION_MATCH_CLAIMED",
+      "cost_access": "Commercial Purchase (~$21.95/day reported)",
+      "sha256": null,
+      "local_file_path": null,
+      "assigned_mission": "MISN-000001",
+      "notes": ["Primary vector for KG-001 pinout/routing"]
+    }
+  ]
+}
