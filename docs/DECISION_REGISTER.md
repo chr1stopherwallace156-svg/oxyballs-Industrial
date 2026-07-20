@@ -45,6 +45,9 @@ later entry that references it.
      loads / mechanically blocked, RC-236).
   4. **Gate 05L — Controlled HV First-Energization** — engineer-approved
      only, after 05J + 05K, with a staged safety plan + LOTO/PPE (RC-117).
+     Split into **05L-A** (authorization & safety readiness — no energization)
+     → **05L-B** (controlled HV first-energization / current-limited pre-charge
+     observation) per the review_50/51 amendment below.
 - **Amendment (owner review_50, batch_53, RC-237): Gate 05L splits — the
   05L rung must not open with "exact HV pre-charge timing."** It begins with
   **Gate 05L-A — HV First-Energization Authorization & Safety Readiness**, a
@@ -56,18 +59,32 @@ later entry that references it.
   calibration · supplier documentation · hard-stop conditions · proof
   artifacts · signoff), with **no final pre-charge/voltage/insulation/
   contactor timing unless supplier docs or engineering review provide them**.
-  Only after 05L-A does the actual energization sequence (Gate 05L) get
-  detailed. Owner cited OSHA LOTO (authorized-employee lockout; circuits
-  energized until LOTO/de-energize/ground; only qualified persons on energized
-  parts) + NHTSA EV HV-hazard guidance (NeedsExactSource — owner-paraphrased,
-  not archived).
+  Only after 05L-A does the actual energization sequence get detailed. Owner
+  cited OSHA LOTO (authorized-employee lockout; circuits energized until
+  LOTO/de-energize/ground; only qualified persons on energized parts) + NHTSA
+  EV HV-hazard guidance (NeedsExactSource — owner-paraphrased, not archived).
+- **Amendment (owner review_51, batch_54, RC-238..244): Gate 05L-A created
+  (`GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md`) — authorization only, no
+  energization; the energization step is Gate 05L-B.** 05L-A itself does not
+  energize: personnel are qualified/authorized (not "certified", RC-238), PPE
+  is voltage-matched and the gate blocks above rating (RC-239), fire assets are
+  AHJ/supplier-ERG-selected (RC-240), Live-Dead-Live uses an approved proving
+  source with a resolution-aware threshold (RC-241), a stored-energy discharge
+  wait guards DC-link caps (RC-242), IMD thresholds are supplier-defined
+  (RC-243), and the pre-charge test is low-voltage-only with no DC-link rise
+  (RC-244). **Gate 05L-B — Controlled HV First-Energization / Current-Limited
+  Pre-Charge Observation** is attempted only after a signed Gate 05L-A
+  authorization; it starts with a supplier-defined pre-charge target/timeout +
+  current-limited setup + remote observation, and no vehicle movement /
+  wheels-on-ground drive / road test / traction command / customer operation.
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the
   05L-A authorization gate**. Binds the roadmap after Gate 05I-D. The Build
   Engine never marks a bench assembly "certified safe" (RC-224). Recorded in
   `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md`,
-  `docs/status/GATE05K_VEHICLE_POWER_ON.md`. Supersedes nothing.
+  `docs/status/GATE05K_VEHICLE_POWER_ON.md`,
+  `docs/status/GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md`. Supersedes nothing.
 
 ## D-007 — Controls-authority doctrine: Coordinator ≠ Owner + Build Engine Authority Law
 

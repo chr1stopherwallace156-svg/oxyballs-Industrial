@@ -557,33 +557,62 @@ delta vs the 05J baseline) · in-chassis fault-latch survival across a power
 cycle. All target values are INITIAL_TARGET_PROFILE (RC-235); CAN_1 strictly
 listen-only (register + TXD proof). Permits **Gate 05L-A only**.
 
-## Gate 05L-A — Controlled HV First-Energization Authorization & Safety Readiness  · STATUS: NEXT (owner review_50)
+## Gate 05L-A — Controlled HV First-Energization Authorization & Safety Readiness  · STATUS: HV_AUTHORIZATION_GATE_CREATED (batch_54)
 
-The **pre-energization authorization gate** — the first rung of the split
-Gate 05L (RC-237 amends D-008). Gate 05L must **not** open with exact HV
-pre-charge timing; it begins with 05L-A. Owner cited **OSHA LOTO** +
-**NHTSA EV HV-hazard** guidance (NeedsExactSource — owner-paraphrased).
+Deliverable `docs/status/GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md` — the
+**pre-energization authorization gate**, the first rung of the split Gate 05L
+(RC-237 amends D-008). **The first gate that contemplates live HV — but NO HV
+energization.** Permanent rule (review_51): *no HV potential may be introduced
+to the chassis until every line item is physically verified, signed off, and
+archived.* 7-row matrix (05L-A-001..007: qualified personnel, PPE/tool
+certification, exclusion perimeter, Live-Dead-Live absence check, IMD
+readiness, hardwired E-stop verification, pre-charge loop integrity) + a
+12-item hard-stop list. Status (review_51):
+`HV_AUTHORIZATION_GATE_CREATED / NO_HV_ENERGIZATION / QUALIFIED_PERSONNEL_
+REQUIRED / LOTO_REQUIRED / LIVE_DEAD_LIVE_REQUIRED / PPE_VOLTAGE_RATING_REVIEW_
+REQUIRED / INSULATED_TOOLING_REQUIRED / IMD_READINESS_REQUIRED / ESTOP_
+HARDWIRED_PROOF_REQUIRED / PRECHARGE_OWNERSHIP_PENDING_CONFIRMATION / CONTACTOR_
+OWNERSHIP_PENDING_CONFIRMATION / SUPPLIER_DOCS_REQUIRED / EMERGENCY_RESPONSE_
+PLAN_REQUIRED / ENGINEERING_SIGNOFF_REQUIRED`. Corrections (review_51):
+qualified/authorized personnel not "certified" (RC-238); voltage-matched PPE,
+gate blocks above rating (RC-239); fire assets AHJ/supplier-ERG-selected
+(RC-240); Live-Dead-Live via an approved proving source + resolution-aware
+threshold, >0.5 V = INITIAL_AVV_ABORT_TARGET (RC-241); stored-energy discharge
+wait (RC-242); IMD supplier-defined thresholds (RC-243); pre-charge test
+low-voltage-only, no DC-link rise (RC-244). Owner cited **OSHA** electrical
+work-practice/LOTO + **NHTSA EV HV-hazard** guidance (NeedsExactSource —
+owner-paraphrased). Permits **Gate 05L-B only**, after signed engineering
+authorization; authorizes no energization by itself.
 
-**Owner verbatim next prompt:**
+## Gate 05L-B — Controlled HV First-Energization / Current-Limited Pre-Charge Observation  · STATUS: NEXT (owner review_51)
 
-> Begin Gate 05L-A: Controlled HV First-Energization Authorization & Safety
-> Readiness. Do not define final pre-charge timing, voltage thresholds,
-> insulation limits, or contactor timing unless supplier documents or
-> engineering review provide them. Create a pre-energization authorization
-> gate covering: qualified personnel · LOTO · PPE · insulated tools ·
-> emergency stop · exclusion zone · fire/emergency response plan ·
-> absence-of-voltage verification · HV connector/cable inspection · isolation
-> monitor readiness · pre-charge ownership confirmation · contactor ownership
-> confirmation · test instrument calibration · supplier documentation required
-> · hard stop conditions · proof artifacts · signoff requirements. Hard rules:
-> No vehicle movement · No road testing · No customer operation · No
-> compliance claim · Live HV may only proceed after engineering signoff and
-> safety protocol activation.
+The **first controlled live-HV sequence** — only after a signed engineering
+authorization out of Gate 05L-A. It must **not** start with final timing
+values.
 
-Then, only after 05L-A: **Gate 05L — Controlled HV First-Energization
-(engineer-approved only, staged safety plan + LOTO/PPE, RC-117; no final
-pre-charge/voltage/insulation/contactor timing until supplier docs or
-engineering review provide them).**
+**Owner scope (review_51) — start with:**
+
+> - supplier-defined pre-charge target
+> - supplier-defined timeout
+> - current-limited setup
+> - remote observation
+> - no vehicle movement
+> - no wheels-on-ground drive
+> - no road test
+> - no traction command
+> - no customer operation
+
+Enforce throughout — Gate 05L-B may only be attempted after Gate 05L-A signoff
++ safety-protocol activation (D-008); no final pre-charge / voltage-threshold /
+insulation-limit / contactor timing unless supplier docs or engineering review
+provide them (RC-237/241/243/244); the stored-energy discharge-wait rule
+applies after any exposure or failed attempt (RC-242); the VCU requests but
+does not own HV isolation — the hardwired loop owns physical interruption
+(RC-205/227; BQ-27); pre-charge/contactor ownership stays with the BMS/PDU
+supplier architecture until confirmed (BQ-27); never "certified safe" / no
+compliance claim (RC-224); no vehicle movement / wheels-on-ground drive / road
+test / traction command / customer operation. Then, engineer-gated, the wider
+HV commissioning continues only under a staged safety plan + LOTO/PPE (RC-117).
 
 Enforce throughout — no HV / no traction enable / no vehicle motion at
 05J-05K; CAN_1 stays listen-only + passive on the live OEM Ford bus (TXD-pin

@@ -336,6 +336,13 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-235 | **Gate 05J/05K hard numbers are still target profiles (owner review_50, RECURRENCE — fourteenth artifact)**: 50 mm / 100 mm clearance, <0.1 Ω, ≤4.0 mA, ≤2.0 s, **≤200 ms module wake, ≤500 ms display wake, ≤50 ms UDS response, ≤0.5 V rail drop, ≤5% APPS channel correlation, ≤100 ms brake override** = `INITIAL_TARGET_PROFILE / ENGINEERING_REVIEW_REQUIRED / NO_HV_AUTHORITY / NO_VEHICLE_MOTION_AUTHORITY` — none is a universal final rule until sourced, measured, reviewed, and tied to the actual hardware | batch_53 (invented values — 05K set) | n/a — parameter rule | **NeedsSupplierData / NoGateAuthority** — recorded in `docs/status/GATE05K_VEHICLE_POWER_ON.md` (extends RC-220/225/232) — lanes L7/L8 |
 | RC-236 | **Gate 05K must explicitly block real HV contactor closure (owner review_50)**: even with the HV battery disconnected, the system must not practice real contactor actuation → **"All HV contactor coils must remain disconnected, replaced with approved dummy loads, or verified mechanically unable to close; no real HV contactor closure is permitted in Gate 05K"**; contactor drive pins monitored and held at 0.0 V under every driver input / illegal-state request | batch_53 (unguarded contactor actuation) | n/a — controls-safety rule | **ControlsSafety / HardBlock** — recorded in `docs/status/GATE05K_VEHICLE_POWER_ON.md` (05K-007; extends RC-150/152/157/158/171/205) — lanes L7 |
 | RC-237 | **Gate 05L must not open with "exact HV pre-charge timing" — split into 05L-A authorization first (owner review_50, amends D-008)**: Gate 05L is the first live-HV risk category → the ladder's 05L rung begins with **Gate 05L-A — HV First-Energization Authorization & Safety Readiness** (qualified HV personnel · written test plan · LOTO · PPE + insulated tools · emergency-stop plan · rescue/emergency-response plan · fire watch/exclusion zone · absence-of-voltage verification · HV connector/cable inspection · isolation-monitor readiness · pre-charge ownership confirmation · contactor ownership confirmation · test-instrument calibration · supplier documentation · hard-stop conditions · proof artifacts · signoff) **before** any energization sequence; no final pre-charge/voltage/insulation/contactor timing unless supplier docs or engineering review provide them; owner cited **OSHA LOTO** (authorized-employee lockout; circuits energized until LOTO/de-energize/ground; only qualified persons on energized parts) + **NHTSA EV HV-hazard** guidance (assume HV components energized) | batch_53 (premature HV timing) | OSHA 1910.147 / 1910.333 + NHTSA EV guidance — **NeedsExactSource** (owner-paraphrased, not archived) | **ControlsSafety / RegulatoryCandidate** — amends D-008; queued as Gate 05L-A NEXT in `GATE_RESEARCH_QUEUE.md` — lanes L5/L7 |
+| RC-238 | **"certified HV technicians" → "qualified / authorized HV personnel" (owner review_51)**: "certified" is ambiguous without a certification body → **minimum two qualified and authorized HV personnel** with role evidence: documented HV training · task authorization · equipment-specific training · emergency-response briefing · assigned lead technician · assigned safety observer/safety buddy; fits OSHA's qualified-person work-practice language | batch_54 (ambiguous credential) | OSHA 1910.333/1910.332 qualified-person — **NeedsExactSource** (owner-paraphrased) | **ControlsSafety / RegulatoryCandidate** — recorded in `docs/status/GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md` (05L-A-001) — lanes L5 |
+| RC-239 | **PPE must be voltage-matched, not universal Class 0 (owner review_51)**: Class 0 (1000 V) is directionally right only for systems at/below that rating → **Class 0 minimum only if system max + task exposure are within rating; final PPE + tool + meter class must match pack max voltage, possible transient voltage, and the site electrical-safety review; if the system exceeds the glove/tool rating the gate must block** | batch_54 (universal PPE rating) | OSHA insulating-glove voltage-rating guidance — **NeedsExactSource** (owner-paraphrased) | **ControlsSafety / RegulatoryCandidate** — recorded in `GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md` (05L-A-002 + value doctrine) — lanes L5 |
+| RC-240 | **Fire/emergency response is not simply "Class D" (owner review_51)**: lithium-ion EV fire response is not a single extinguisher class → **assets selected by the facility safety officer / AHJ / fire marshal per battery chemistry, pack size, test configuration, and supplier emergency response guide**; the fire watch must include emergency shutoff plan · evacuation route · upwind/uphill staging (where applicable) · direct 911/fire-department protocol · battery supplier ERG · post-event quarantine/re-ignition monitoring plan; NHTSA: assume HV components energized, toxic/flammable gases + delayed re-ignition possible | batch_54 (over-simple fire spec) | NHTSA EV emergency-response guidance — **NeedsExactSource** (owner-paraphrased) | **ControlsSafety / RegulatoryCandidate** — recorded in `GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md` (§1 fire/emergency) — lanes L5 |
+| RC-241 | **Live-Dead-Live must not rely only on a 12 V source; absence threshold is resolution-aware (owner review_51, invented-values RECURRENCE — fifteenth artifact)**: proving on 12 V proves the meter alive but may not verify meter/range for HV → **use an approved proving/known source appropriate to the meter function + range per the site electrical-safety procedure**; "0.0 V exactly" → **"below the approved absence-of-voltage threshold, considering meter resolution/noise; any unexpected non-zero voltage triggers hard stop"**; the >0.5 V abort = `INITIAL_AVV_ABORT_TARGET / ENGINEERING_REVIEW_REQUIRED` (with ≥3 m radius, ±5% pre-charge R, >0.2 V leakage, ≥800 V reference as target profiles) | batch_54 (AVV method + invented threshold) | site electrical-safety procedure / OSHA verification-of-de-energization — **NeedsExactSource** | **ControlsSafety / NoGateAuthority** — recorded in `GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md` (05L-A-004 + value doctrine; extends RC-235) — lanes L5/L7 |
+| RC-242 | **Add a stored-energy discharge-wait rule (owner review_51)**: inverter DC-link capacitors can remain charged after the battery is isolated → **after any HV exposure or failed energization attempt, wait the supplier-defined discharge interval before touching/measuring internal HV nodes, then re-verify bus voltage with Live-Dead-Live before access** | batch_54 (missing stored-energy rule) | n/a — controls-safety rule (supplier discharge interval PENDING) | **ControlsSafety / NeedsSupplierData** — recorded in `GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md` (§3 stored-energy) — lanes L5 |
+| RC-243 | **IMD insulation status needs a supplier-defined threshold (owner review_51)**: "asserts high insulation resistance status / nominal" is a concept, not a rule → **"IMD reports no internal error and measured isolation status within the supplier-defined acceptable range; final insulation thresholds pending IMD supplier manual + system voltage + engineering review + applicable safety-standard mapping"** | batch_54 (unsourced insulation threshold) | IMD supplier manual + safety standard — **NeedsSupplierData / NeedsExactSource** | **NeedsSupplierData / ControlsSafety** — recorded in `GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md` (05L-A-005) — lanes L5/L9 |
+| RC-244 | **Pre-charge loop test in 05L-A is low-voltage logic/coil verification only (owner review_51)**: the pre-charge control-relay check is OK only with no HV present → **"pre-charge control response in 05L-A is low-voltage logic/coil verification only; no HV bus charging, no DC-link rise, and no live pre-charge event occurs in 05L-A"** (the live current-limited pre-charge belongs to Gate 05L-B) | batch_54 (premature pre-charge actuation) | n/a — gate-scope rule | **ControlsSafety / HardBlock** — recorded in `GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md` (05L-A-007; any DC-link rise = abort) — lanes L5/L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -4025,3 +4032,82 @@ safety-protocol activation. Queued in `GATE_RESEARCH_QUEUE.md`.
   (RC-237/D-008); the VCU requests but does not own HV isolation (BQ-27).
 - Nothing ingested; nothing marked Confirmed; no compliance/certification
   claim; ODRs untouched.
+
+## 62. Batch 54 + owner review_51 — Gate 05L-A HV First-Energization Authorization & Safety Readiness (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_54_gate05la_hv_authorization.md`
+and `docs/research/raw/owner_reviews/review_51_batch_54_verdict.md`.
+Row additions: RC-238..RC-244 (no new CS). Deliverable:
+`docs/status/GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md`. Owner: "the right
+move … a strong safety-readiness gate … keep 05L-A as authorization only. It
+does not energize."
+
+### Gate 05L-A — first gate that contemplates live HV (NO energization)
+
+The first rung of the split Gate 05L: a strict **pre-energization
+authorization gate**. Permanent rule (owner): *no high-voltage potential may
+be introduced to the vehicle chassis until every line item is physically
+verified, signed off, and archived.* Prerequisites across personnel/PPE/
+tooling/exclusion-zone/AVV/IMD/E-stop/pre-charge-ownership + a 7-row matrix
+(05L-A-001..007) with hard-stop columns + a 12-item hard-stop list. It decides
+only whether the system is allowed to *attempt* Gate 05L-B; it does not
+energize.
+
+### Owner corrections (safety, grounded in OSHA + NHTSA — NeedsExactSource)
+
+- **Qualified/authorized HV personnel, not "certified technicians" (RC-238):**
+  role evidence (documented HV training, task authorization, equipment-
+  specific training, emergency-response briefing, assigned lead + safety
+  observer).
+- **Voltage-matched PPE, not universal Class 0 (RC-239):** final PPE/tool/meter
+  class matches pack max + transient voltage + site review; the gate blocks
+  above their rating.
+- **Fire/emergency response is AHJ/supplier-ERG-selected (RC-240):** lithium-
+  ion is not simply "Class D"; fire watch adds shutoff plan, evacuation,
+  upwind/uphill staging, 911 protocol, supplier ERG, re-ignition monitoring.
+- **Live-Dead-Live via an approved proving source; resolution-aware threshold
+  (RC-241, fifteenth artifact):** not just a 12 V source; "0.0 V" → "below the
+  approved AVV threshold, meter resolution/noise considered"; >0.5 V =
+  INITIAL_AVV_ABORT_TARGET.
+- **Stored-energy discharge wait (RC-242):** DC-link caps stay charged after
+  isolation → wait the supplier-defined interval, re-verify with Live-Dead-
+  Live.
+- **IMD threshold is supplier-defined (RC-243):** not "nominal high insulation";
+  final thresholds pending supplier manual + system voltage + engineering
+  review + standard mapping.
+- **Pre-charge loop test is low-voltage-only (RC-244):** no HV bus charging,
+  no DC-link rise, no live pre-charge event in 05L-A.
+
+### Gate 05L-A status (owner review_51)
+
+`HV_AUTHORIZATION_GATE_CREATED / NO_HV_ENERGIZATION / QUALIFIED_PERSONNEL_
+REQUIRED / LOTO_REQUIRED / LIVE_DEAD_LIVE_REQUIRED / PPE_VOLTAGE_RATING_REVIEW_
+REQUIRED / INSULATED_TOOLING_REQUIRED / IMD_READINESS_REQUIRED / ESTOP_
+HARDWIRED_PROOF_REQUIRED / PRECHARGE_OWNERSHIP_PENDING_CONFIRMATION / CONTACTOR_
+OWNERSHIP_PENDING_CONFIRMATION / SUPPLIER_DOCS_REQUIRED / EMERGENCY_RESPONSE_
+PLAN_REQUIRED / ENGINEERING_SIGNOFF_REQUIRED`. Permits **Gate 05L-B only**
+after signed engineering authorization; authorizes no energization by itself.
+
+### Next
+
+Owner: **Gate 05L-B — Controlled HV First-Energization / Current-Limited
+Pre-Charge Observation** — the first controlled live-HV sequence, but not with
+final timing values: start with supplier-defined pre-charge target +
+supplier-defined timeout + current-limited setup + remote observation; no
+vehicle movement / wheels-on-ground drive / road test / traction command /
+customer operation. Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- NO HV energized in this gate (authorization only); personnel qualified/
+  authorized not vaguely "certified" (RC-238); PPE/tools voltage-matched, gate
+  blocks above rating (RC-239); fire assets AHJ/supplier-ERG-selected (RC-240);
+  Live-Dead-Live via approved proving source, resolution-aware threshold
+  (RC-241); stored-energy discharge wait (RC-242); IMD supplier-defined
+  thresholds (RC-243); pre-charge test low-voltage-only (RC-244); the VCU
+  requests but the hardwired loop owns physical interruption (RC-205/227;
+  BQ-27); OSHA/NHTSA citations NeedsExactSource (RC-237..244); never
+  "certified safe" (RC-224).
+- Nothing ingested; nothing marked Confirmed; no compliance/certification
+  claim; no HV energization; ODRs untouched.

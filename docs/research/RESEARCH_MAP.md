@@ -371,23 +371,29 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_50):** **Gate 05L-A — Controlled HV
-First-Energization Authorization & Safety Readiness** — the pre-energization
-authorization gate, the first rung of the split Gate 05L (Decision Register
-**D-008**, amended review_50, RC-237). Gate 05L must **not** open with exact
-HV pre-charge timing; it begins with 05L-A. Owner verbatim scope: qualified HV
-personnel · written test plan · LOTO · PPE + insulated tools · emergency-stop
-plan · rescue/emergency-response plan · fire watch/exclusion zone ·
-absence-of-voltage verification · HV connector/cable inspection ·
-isolation-monitor readiness · pre-charge ownership confirmation · contactor
-ownership confirmation · test-instrument calibration · supplier documentation ·
-hard-stop conditions · proof artifacts · signoff — with **no final pre-charge/
-voltage/insulation/contactor timing unless supplier docs or engineering review
-provide them**; no vehicle movement · no road testing · no customer operation ·
-no compliance claim; live HV only after engineer signoff + safety-protocol
-activation. Owner cited OSHA LOTO + NHTSA EV HV-hazard guidance
-(NeedsExactSource). Only after 05L-A does the actual energization sequence
-(Gate 05L) get detailed. **Gate 05J** (`GATE05J_VEHICLE_FITMENT.md`) is
+**Next expected batch (owner review_51):** **Gate 05L-B — Controlled HV
+First-Energization / Current-Limited Pre-Charge Observation** — the **first
+controlled live-HV sequence**, attempted only after a signed engineering
+authorization out of Gate 05L-A (Decision Register **D-008**, amended
+review_51). It must **not** start with final timing values. Owner verbatim
+scope: supplier-defined pre-charge target · supplier-defined timeout ·
+current-limited setup · remote observation — and **no vehicle movement · no
+wheels-on-ground drive · no road test · no traction command · no customer
+operation**. The stored-energy discharge-wait rule (RC-242) applies after any
+exposure/failed attempt; the VCU requests but does not own HV isolation
+(RC-205/227; BQ-27); no final pre-charge/voltage/insulation/contactor timing
+unless supplier docs or engineering review provide them (RC-237/241/243/244);
+never "certified safe" (RC-224). **Gate 05L-A**
+(`GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md`) is `HV_AUTHORIZATION_GATE_CREATED`
+/ `NO_HV_ENERGIZATION` — the first gate that contemplates live HV, a strict
+pre-energization authorization gate (7-row matrix 05L-A-001..007 + 12-item
+hard-stop list); review_51 corrections: qualified/authorized personnel not
+"certified" (RC-238), voltage-matched PPE (RC-239), AHJ/supplier-ERG fire
+assets (RC-240), Live-Dead-Live via an approved proving source + resolution-
+aware threshold (RC-241), stored-energy discharge wait (RC-242), IMD
+supplier-defined thresholds (RC-243), pre-charge test low-voltage-only
+(RC-244); owner cited OSHA + NHTSA guidance (NeedsExactSource). **Gate 05J**
+(`GATE05J_VEHICLE_FITMENT.md`) is
 `CONTROLLED_VEHICLE_FITMENT_DEFINED` / `NO_HV_CONNECTED` / `CAN_1_PASSIVE_ONLY`
 — the first gate where the conversion physically touches the vehicle (5-row
 no-HV in-chassis matrix). **Gate 05K** (`GATE05K_VEHICLE_POWER_ON.md`) is

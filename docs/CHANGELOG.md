@@ -5,6 +5,54 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 54 + review_51: Gate 05L-A HV First-Energization Authorization & Safety Readiness
+
+- Archived batch_54 (Gate 05L-A HV authorization) and review_51 1:1 (commit
+  `80f4680`). New rows RC-238..244 (no new CS). Section 62. New deliverable
+  `docs/status/GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md` — **the first gate
+  that contemplates live HV, a strict pre-energization authorization gate; NO
+  HV energization** (7-row matrix 05L-A-001..007 + 12-item hard-stop list +
+  exit criteria). Owner: "the right move … a strong safety-readiness gate …
+  keep 05L-A as authorization only. It does not energize."
+- **Permanent rule (owner):** *no high-voltage potential may be introduced to
+  the vehicle chassis until every line item is physically verified, signed
+  off, and archived.*
+- **Owner safety corrections (RC-238..244, grounded in OSHA electrical
+  work-practice/LOTO + NHTSA EV HV-hazard guidance — NeedsExactSource):**
+  - RC-238 — "certified HV technicians" → "qualified / authorized HV
+    personnel" with role evidence (documented HV training, task authorization,
+    equipment-specific training, emergency-response briefing, assigned lead +
+    safety observer).
+  - RC-239 — PPE/tools/meters are voltage-matched, not universal Class 0; the
+    gate blocks if the system exceeds the glove/tool rating.
+  - RC-240 — fire/emergency response assets are AHJ/facility-safety-officer/
+    fire-marshal-selected per battery chemistry/pack/config/supplier ERG (not
+    simply "Class D"); fire watch adds shutoff plan, evacuation route,
+    upwind/uphill staging, 911 protocol, supplier ERG, re-ignition monitoring.
+  - RC-241 — Live-Dead-Live uses an approved proving source appropriate to
+    meter function/range (not just a 12 V source); "0.0 V exactly" → "below
+    the approved AVV threshold, meter resolution/noise considered"; the >0.5 V
+    abort is INITIAL_AVV_ABORT_TARGET (fifteenth artifact of the
+    invented-values family).
+  - RC-242 — stored-energy discharge-wait rule: after any HV exposure or
+    failed energization attempt, wait the supplier-defined discharge interval
+    and re-verify with Live-Dead-Live (DC-link caps stay charged after
+    isolation).
+  - RC-243 — IMD isolation status is "within the supplier-defined acceptable
+    range," not "nominal high insulation"; final thresholds pending supplier
+    manual + system voltage + engineering review + standard mapping.
+  - RC-244 — the pre-charge loop test in 05L-A is low-voltage logic/coil
+    verification only; no HV bus charging, no DC-link rise, no live pre-charge
+    event.
+- Gate 05L-A status `HV_AUTHORIZATION_GATE_CREATED / NO_HV_ENERGIZATION / …`.
+  **D-008 amended** (Gate 05L splits: 05L-A authorization → 05L-B
+  energization). RESEARCH_MAP + GATE_RESEARCH_QUEUE next → **Gate 05L-B**
+  (Controlled HV First-Energization / Current-Limited Pre-Charge Observation —
+  supplier-defined pre-charge target/timeout, current-limited, remote
+  observation; no vehicle movement / wheels-on-ground drive / road test /
+  traction command / customer operation). Nothing Confirmed; no HV energized;
+  never "certified safe" (RC-224); ODRs untouched.
+
 ## 2026-07-16 — RH batch 53 + review_50: Gate 05J cleanups + Gate 05K Low-Voltage Vehicle Power-On (No-HV)
 
 - Archived batch_53 (Gate 05J cleanups + Gate 05K power-on) and review_50 1:1

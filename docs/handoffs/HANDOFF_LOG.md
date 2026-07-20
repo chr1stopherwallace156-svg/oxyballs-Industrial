@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 53 + review_50 — Gate 05J cleanups + Gate 05K Low-Voltage Vehicle Power-On / No-HV)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 53 + review_50 — Gate 05J cleanups + Gate 05K Low-Voltage Vehicle Power-On / No-HV Commissioning); awaiting the Gate 05L-A HV First-Energization Authorization batch or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `465e2ad` (batch-53 archive); end commit: `1b0fb90` (batch-53 reconciliation)
+- Work: new deliverable `GATE05K_VEHICLE_POWER_ON.md` — the second rung of the D-008 ladder and the first formal LV vehicle power-on gate (HV under LOTO): 9-row matrix (05K-001..009), CAN_1 strictly listen-only, no real HV contactor closure, exit criteria permitting Gate 05L-A only. `GATE05J_VEHICLE_FITMENT.md` cleanups applied (status → CONTROLLED_VEHICLE_FITMENT_DEFINED, 05J-003 row split, exit criterion 7 adds firmware/register dumps + signoffs). RC-233..237 (no new CS); section 61; D-008 amended (05L splits, 05K blocks real contactor closure). Five owner corrections: keep the 9-test 05K version delete the duplicate 5-test one (RC-233); 05J-003 parasitic-draw split wording (RC-234); 05J/05K hard numbers are target profiles — fourteenth artifact (RC-235); 05K blocks real HV contactor closure (RC-236); Gate 05L splits, begins with 05L-A authorization (RC-237, cites OSHA LOTO + NHTSA). Nothing Confirmed; no HV; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (invented-values RC-116/133/169/174/180/188/202/208/212/215/220/225/232/235 — fourteen artifacts + "instant/immediate" RC-175/198/204/211/225 + "certified safe" RC-224); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS + OSHA LOTO/NHTSA EV sources (RC-237) + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/HV-shutdown ownership (BQ-27).
+
 ## 2026-07-16 — Claude Code — task complete (batch 52 + review_49 — Gate 05I-D final + Gate 05J Controlled Vehicle Fitment / No-HV)
 
 ### (archived handoff)
