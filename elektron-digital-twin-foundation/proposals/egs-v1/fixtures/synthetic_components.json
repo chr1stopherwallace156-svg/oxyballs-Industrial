@@ -1,19 +1,29 @@
 {
-  "document_id": "EGS_V1_SYNTHETIC_COMPONENTS",
+  "document_id": "EGS_PROPOSAL2_SYNTHETIC_NODES",
   "authority_status": "SYNTHETIC_FIXTURE_ONLY",
+  "schema_version": "EGS-1.0.0-proposal.2",
   "notes": [
-    "Fixture component-instance IDs for unit tests. Not F-450 silo truth.",
-    "Do not copy into examples/2019_f450/ without Hard Rule 4."
+    "Synthetic CFGCOMP/IFACE/OP nodes for unit tests — not F-450 silo truth.",
+    "Hierarchy demo: COMPDEF → CFGCOMP (reference) → CMPINST (VIN) is documented only; edges use CFGCOMP/IFACE/OP."
   ],
-  "vehicle_instance_id": "VEH-SYN-000001",
+  "hierarchy_examples": {
+    "compdef": "COMPDEF-WINDOW-REGULATOR-FL",
+    "cfgcomp": "CFGCOMP-SYN-REGULATOR-FL",
+    "cmpinst_physical_only": "CMPINST-VIN-SYNTHETIC000000000-REGULATOR-FL"
+  },
   "configuration_id": "CFG-SYN-000001",
-  "components": [
-    {"component_instance_id": "CMPINST-SYN-DOOR-SHELL", "role": "outer_shell"},
-    {"component_instance_id": "CMPINST-SYN-DOOR-INNER", "role": "inner_panel"},
-    {"component_instance_id": "CMPINST-SYN-REGULATOR", "role": "window_regulator"},
-    {"component_instance_id": "CMPINST-SYN-HARNESS", "role": "door_harness"},
-    {"component_instance_id": "CMPINST-SYN-GLASS", "role": "door_glass"},
-    {"component_instance_id": "CMPINST-SYN-TRIM", "role": "interior_trim"},
-    {"component_instance_id": "CMPINST-SYN-BEAM", "role": "side_impact_beam"}
+  "nodes": [
+    {"node_id": "CFGCOMP-SYN-REGULATOR-FL", "kind": "CFGCOMP", "role": "window_regulator"},
+    {"node_id": "CFGCOMP-SYN-DOOR-INNER-FL", "kind": "CFGCOMP", "role": "inner_panel"},
+    {"node_id": "CFGCOMP-SYN-HARNESS-FL", "kind": "CFGCOMP", "role": "door_harness"},
+    {"node_id": "CFGCOMP-SYN-GLASS-FL", "kind": "CFGCOMP", "role": "door_glass"},
+    {"node_id": "CFGCOMP-SYN-TRIM-FL", "kind": "CFGCOMP", "role": "interior_trim"},
+    {"node_id": "CFGCOMP-SYN-BEAM-FL", "kind": "CFGCOMP", "role": "side_impact_beam"},
+    {"node_id": "IFACE-MOUNT-HOLE-SYN-DOOR-INNER-01", "kind": "IFACE", "role": "mount_hole"},
+    {"node_id": "IFACE-CONNECTOR-SYN-HARNESS-C309A", "kind": "IFACE", "role": "connector_male"},
+    {"node_id": "IFACE-CONNECTOR-SYN-REGULATOR-C309B", "kind": "IFACE", "role": "connector_female"},
+    {"node_id": "IFACE-SERVICE-PORT-SYN-DOOR-INNER", "kind": "IFACE", "role": "service_port"},
+    {"node_id": "OP-SYN-SECURE-GLASS-FL", "kind": "OP", "role": "procedure_op"},
+    {"node_id": "OP-SYN-UNBOLT-REGULATOR-FL", "kind": "OP", "role": "procedure_op"}
   ]
 }

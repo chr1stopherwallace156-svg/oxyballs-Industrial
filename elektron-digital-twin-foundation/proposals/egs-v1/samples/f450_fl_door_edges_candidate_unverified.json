@@ -1,264 +1,320 @@
 {
-  "document_id": "F450_FL_DOOR_EGS_EDGES_CANDIDATE_UNVERIFIED",
-  "authority_status": "CANDIDATE_UNVERIFIED",
-  "decision": "DT-D047",
+  "document_id": "F450_FL_DOOR_EGS_PROPOSAL2_REL_REG_AUDIT",
+  "schema_version": "EGS-1.0.0-proposal.2",
+  "authority_status": "REAL_DATA_PROMOTION_BLOCKED",
+  "recommended_decision": "EGS_V1_PROPOSAL_INFRASTRUCTURE_READY",
+  "decision": "DT-D048",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
   "locked_configuration": {
+    "kernel_configuration_id": "CFG-000001",
+    "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
     "vehicle_instance_id": "VEH-000001",
-    "configuration_id": "CFG-000001",
-    "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943"
+    "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+    "model_year": 2019
   },
   "honesty_gate": [
-    "Draft CMPINST-* subcomponent IDs below are research placeholders — only CMPINST-VEH000001-DOOR-FL exists in frozen examples.",
-    "No torque, fastener counts, connector pinouts, or removal procedure text are populated.",
-    "lifecycle_status remains CANDIDATE_UNVERIFIED until primary hashed evidence exists.",
-    "Supersedes narrative REL-REG illustrative engineering property claims in research/relationship_graph/edges/."
+    "All REL-REG-01..06 edges are CANDIDATE_UNVERIFIED with PROCEDURE_GENERATION_NOT_AUTHORIZED.",
+    "No torque, fastener counts, pinouts, or removal procedures populated as ASSERTION_VERIFIED.",
+    "SOURCE_DISCOVERED = indexed title / catalog listing only — not DOCUMENT_SUPPORTED / ASSERTION_VERIFIED.",
+    "CFGCOMP-* / IFACE-* / OP-* nodes are configuration-reference constructs — not VIN CMPINST-* physical instances.",
+    "Frozen kernel CFG-000001 aliased via kernel_configuration_id; proposal.2 uses descriptive CFG-2019-F450-* for exact scope lock.",
+    "Cross-year ranges forbidden on these edges; similarity lives only in CROSS_CONFIGURATION_COMPARISON candidates (none admitted here)."
   ],
-  "draft_component_instances": [
-    {
-      "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
-      "status": "KERNEL_EXAMPLE",
-      "notes": "Present in examples/2019_f450/"
-    },
-    {
-      "component_instance_id": "CMPINST-VEH000001-DOOR-FL-INNER",
-      "status": "RESEARCH_PLACEHOLDER",
-      "notes": "Not in frozen kernel examples"
-    },
-    {
-      "component_instance_id": "CMPINST-VEH000001-DOOR-FL-REGULATOR",
-      "status": "RESEARCH_PLACEHOLDER"
-    },
-    {
-      "component_instance_id": "CMPINST-VEH000001-DOOR-FL-HARNESS",
-      "status": "RESEARCH_PLACEHOLDER"
-    },
-    {
-      "component_instance_id": "CMPINST-VEH000001-DOOR-FL-GLASS",
-      "status": "RESEARCH_PLACEHOLDER"
-    },
-    {
-      "component_instance_id": "CMPINST-VEH000001-DOOR-FL-TRIM",
-      "status": "RESEARCH_PLACEHOLDER"
-    },
-    {
-      "component_instance_id": "CMPINST-VEH000001-DOOR-FL-INT-BEAM",
-      "status": "RESEARCH_PLACEHOLDER"
-    }
-  ],
+  "hierarchy_map": {
+    "COMPDEF-WINDOW-REGULATOR-FL": "conceptual",
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-REGULATOR-FL": "configuration_reference",
+    "CMPINST-VIN-1FD8X4GT1KDAXXXXX-REGULATOR-FL": "physical_asset_example_pattern_only_not_instantiated"
+  },
+  "audit_matrix_summary": {
+    "REL-REG-01": "CANDIDATE_UNVERIFIED / BLOCKED",
+    "REL-REG-02": "CANDIDATE_UNVERIFIED / BLOCKED",
+    "REL-REG-03": "CANDIDATE_UNVERIFIED / BLOCKED",
+    "REL-REG-04": "CANDIDATE_UNVERIFIED / BLOCKED",
+    "REL-REG-05": "CANDIDATE_UNVERIFIED / BLOCKED",
+    "REL-REG-06": "CANDIDATE_UNVERIFIED / BLOCKED"
+  },
   "edges": [
     {
-      "edge_id": "REL-EGS-000001",
-      "schema_version": "egs-v1.0.0-proposal",
-      "relationship_class": "MECHANICAL_STRUCTURAL",
-      "relationship_type": "BOLTED_TO",
-      "source_component_instance_id": "CMPINST-VEH000001-DOOR-FL-REGULATOR",
-      "target_component_instance_id": "CMPINST-VEH000001-DOOR-FL-INNER",
-      "directionality": "FORWARD",
-      "vehicle_instance_id": "VEH-000001",
-      "configuration_id": "CFG-000001",
-      "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
-      "lifecycle_status": "CANDIDATE_UNVERIFIED",
-      "applicability": {
-        "scope": "EXACT_CONFIGURATION",
-        "cab_config": "REGULAR_CAB",
-        "option_codes": [],
-        "notes": "Candidate structural attachment — no fastener specs until WSM hashed"
-      },
-      "property_evidence_links": [
-        {
-          "property_key": "relationship_existence",
-          "evidence_link_id": null,
-          "src_cand_id": "SRC-CAND-000002",
-          "evidence_status": "CLAIMED_UNHASHED",
-          "notes": "Operator cited WSM; bytes absent"
-        },
-        {
-          "property_key": "fastener_specification",
-          "evidence_link_id": null,
-          "src_cand_id": "SRC-CAND-000002",
-          "evidence_status": "ABSENT",
-          "notes": "Intentionally omitted — no invented bolt counts"
-        },
-        {
-          "property_key": "torque_specification",
-          "evidence_link_id": null,
-          "src_cand_id": null,
-          "evidence_status": "ABSENT",
-          "notes": "Intentionally omitted"
-        }
-      ],
-      "engineering_properties": null,
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T04:58:57Z",
+      "created_by": "EDTS-Research-Architect",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-REG-TO-INNER-DOOR-001",
       "aliases": ["REL-REG-01"],
-      "notes": ["CANDIDATE_UNVERIFIED — endpoints are research placeholder CMPINSTs except as noted"]
+      "graph_plane": "PHYSICAL",
+      "relationship_class": "BOLTED_TO",
+      "source_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-REGULATOR-FL",
+      "target_node_id": "IFACE-MOUNT-HOLE-DOOR-INNER-FL-01",
+      "directionality": "FORWARD",
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
+        "notes": "Exact 2019 configuration only — no 2017-2019 MY range"
+      },
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": "Existence SOURCE_DISCOVERED (index only); fastener/torque UNRESOLVED"
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "SOURCE_DISCOVERED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
+          "notes": "Reference found in index; document not ingested"
+        },
+        "fastener_count": {
+          "value": null,
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": false,
+          "notes": "Knowledge gap — does not invalidate existence claim structure"
+        },
+        "fastener_specification": {
+          "value": null,
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": false,
+          "notes": null
+        },
+        "torque_specification": {
+          "value": null,
+          "unit": "Nm",
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": false,
+          "notes": null
+        }
+      },
+      "transient_state": null,
+      "notes": ["REAL_DATA_PROMOTION_BLOCKED"]
     },
     {
-      "edge_id": "REL-EGS-000002",
-      "schema_version": "egs-v1.0.0-proposal",
-      "relationship_class": "ELECTRICAL_FLUID",
-      "relationship_type": "CONNECTED_TO",
-      "source_component_instance_id": "CMPINST-VEH000001-DOOR-FL-HARNESS",
-      "target_component_instance_id": "CMPINST-VEH000001-DOOR-FL-REGULATOR",
-      "directionality": "FORWARD",
-      "vehicle_instance_id": "VEH-000001",
-      "configuration_id": "CFG-000001",
-      "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
-      "lifecycle_status": "CANDIDATE_UNVERIFIED",
-      "applicability": {
-        "scope": "EXACT_CONFIGURATION",
-        "cab_config": "REGULAR_CAB",
-        "option_codes": [],
-        "notes": "Power window option assumed for this candidate edge — not VIN-proven"
-      },
-      "property_evidence_links": [
-        {
-          "property_key": "relationship_existence",
-          "evidence_link_id": null,
-          "src_cand_id": "SRC-CAND-000006",
-          "evidence_status": "CLAIMED_UNHASHED",
-          "notes": "EWD not acquired (MISN-000001)"
-        },
-        {
-          "property_key": "connector_interface",
-          "evidence_link_id": null,
-          "src_cand_id": "SRC-CAND-000006",
-          "evidence_status": "ABSENT",
-          "notes": "No pin-count invented"
-        }
-      ],
-      "engineering_properties": null,
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T04:58:57Z",
+      "created_by": "EDTS-Research-Architect",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-C309-MATES-001",
       "aliases": ["REL-REG-02"],
-      "notes": []
-    },
-    {
-      "edge_id": "REL-EGS-000003",
-      "schema_version": "egs-v1.0.0-proposal",
-      "relationship_class": "MECHANICAL_STRUCTURAL",
-      "relationship_type": "SUPPORTS",
-      "source_component_instance_id": "CMPINST-VEH000001-DOOR-FL-REGULATOR",
-      "target_component_instance_id": "CMPINST-VEH000001-DOOR-FL-GLASS",
+      "graph_plane": "PHYSICAL",
+      "relationship_class": "MATES_WITH",
+      "source_node_id": "IFACE-CONNECTOR-HARNESS-FL-C309A",
+      "target_node_id": "IFACE-CONNECTOR-REGULATOR-FL-C309B",
       "directionality": "FORWARD",
-      "vehicle_instance_id": "VEH-000001",
-      "configuration_id": "CFG-000001",
-      "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
-      "lifecycle_status": "CANDIDATE_UNVERIFIED",
-      "applicability": {
-        "scope": "EXACT_CONFIGURATION",
-        "cab_config": "REGULAR_CAB",
-        "option_codes": [],
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
         "notes": null
       },
-      "property_evidence_links": [
-        {
-          "property_key": "relationship_existence",
-          "evidence_link_id": null,
-          "src_cand_id": "SRC-CAND-000002",
-          "evidence_status": "CLAIMED_UNHASHED",
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": "EWD catalog listing identified — SOURCE_DISCOVERED only"
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "SOURCE_DISCOVERED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
+          "notes": "EWD catalog listing identified; bytes not ingested"
+        },
+        "pinout_terminal_specification": {
+          "value": null,
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": false,
           "notes": null
         }
-      ],
-      "engineering_properties": null,
-      "aliases": ["REL-REG-03"],
-      "notes": []
+      },
+      "transient_state": null,
+      "notes": ["Interface layer replaces direct Harness→Regulator jump"]
     },
     {
-      "edge_id": "REL-EGS-000004",
-      "schema_version": "egs-v1.0.0-proposal",
-      "relationship_class": "PROCEDURAL",
-      "relationship_type": "BLOCKS_REMOVAL_OF",
-      "source_component_instance_id": "CMPINST-VEH000001-DOOR-FL-TRIM",
-      "target_component_instance_id": "CMPINST-VEH000001-DOOR-FL-REGULATOR",
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T04:58:57Z",
+      "created_by": "EDTS-Research-Architect",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-REG-GUIDES-GLASS-001",
+      "aliases": ["REL-REG-03"],
+      "graph_plane": "PHYSICAL",
+      "relationship_class": "GUIDES_MOTION_OF",
+      "source_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-REGULATOR-FL",
+      "target_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-GLASS-FL",
       "directionality": "FORWARD",
-      "vehicle_instance_id": "VEH-000001",
-      "configuration_id": "CFG-000001",
-      "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
-      "lifecycle_status": "CANDIDATE_UNVERIFIED",
-      "applicability": {
-        "scope": "EXACT_CONFIGURATION",
-        "cab_config": "REGULAR_CAB",
-        "option_codes": [],
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
         "notes": null
       },
-      "property_evidence_links": [
-        {
-          "property_key": "relationship_existence",
-          "evidence_link_id": null,
-          "src_cand_id": "SRC-CAND-000002",
-          "evidence_status": "CLAIMED_UNHASHED",
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": null
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "SOURCE_DISCOVERED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
           "notes": null
         },
-        {
-          "property_key": "removal_precedence",
-          "evidence_link_id": null,
-          "src_cand_id": null,
-          "evidence_status": "ABSENT",
-          "notes": "No step text or precedence index populated"
+        "clamp_fastener": {
+          "value": null,
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": false,
+          "notes": null
         }
-      ],
-      "engineering_properties": null,
-      "aliases": ["REL-REG-04"],
-      "notes": []
+      },
+      "transient_state": null,
+      "notes": ["No window_position state on this structural/kinematic edge"]
     },
     {
-      "edge_id": "REL-EGS-000005",
-      "schema_version": "egs-v1.0.0-proposal",
-      "relationship_class": "PROCEDURAL",
-      "relationship_type": "BLOCKS_REMOVAL_OF",
-      "source_component_instance_id": "CMPINST-VEH000001-DOOR-FL-GLASS",
-      "target_component_instance_id": "CMPINST-VEH000001-DOOR-FL-REGULATOR",
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T04:58:57Z",
+      "created_by": "EDTS-Research-Architect",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-TRIM-BLOCKS-SERVICE-001",
+      "aliases": ["REL-REG-04"],
+      "graph_plane": "PHYSICAL",
+      "relationship_class": "BLOCKS_ACCESS_TO",
+      "source_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRIM-PANEL-FL",
+      "target_node_id": "IFACE-SERVICE-PORT-DOOR-INNER-FL",
       "directionality": "FORWARD",
-      "vehicle_instance_id": "VEH-000001",
-      "configuration_id": "CFG-000001",
-      "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
-      "lifecycle_status": "CANDIDATE_UNVERIFIED",
-      "applicability": {
-        "scope": "EXACT_CONFIGURATION",
-        "cab_config": "REGULAR_CAB",
-        "option_codes": [],
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
         "notes": null
       },
-      "property_evidence_links": [
-        {
-          "property_key": "relationship_existence",
-          "evidence_link_id": null,
-          "src_cand_id": "SRC-CAND-000002",
-          "evidence_status": "CLAIMED_UNHASHED",
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": null
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "SOURCE_DISCOVERED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
           "notes": null
         }
-      ],
-      "engineering_properties": null,
-      "aliases": ["REL-REG-05"],
+      },
+      "transient_state": null,
       "notes": []
     },
     {
-      "edge_id": "REL-EGS-000006",
-      "schema_version": "egs-v1.0.0-proposal",
-      "relationship_class": "ELECTRICAL_FLUID",
-      "relationship_type": "PASSES_BEHIND",
-      "source_component_instance_id": "CMPINST-VEH000001-DOOR-FL-INT-BEAM",
-      "target_component_instance_id": "CMPINST-VEH000001-DOOR-FL-REGULATOR",
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T04:58:57Z",
+      "created_by": "EDTS-Research-Architect",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-OP-GLASS-BEFORE-UNBOLT-001",
+      "aliases": ["REL-REG-05"],
+      "graph_plane": "PROCEDURAL",
+      "relationship_class": "MUST_PRECEDE",
+      "source_node_id": "OP-SECURE-GLASS-FL",
+      "target_node_id": "OP-UNBOLT-REGULATOR-FL",
       "directionality": "FORWARD",
-      "vehicle_instance_id": "VEH-000001",
-      "configuration_id": "CFG-000001",
-      "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
-      "lifecycle_status": "CANDIDATE_UNVERIFIED",
-      "applicability": {
-        "scope": "EXACT_CONFIGURATION",
-        "cab_config": "REGULAR_CAB",
-        "option_codes": [],
-        "notes": "Related to KG-003"
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
+        "notes": null
       },
-      "property_evidence_links": [
-        {
-          "property_key": "relationship_existence",
-          "evidence_link_id": null,
-          "src_cand_id": "SRC-CAND-000002",
-          "evidence_status": "CLAIMED_UNHASHED",
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": "Procedural plane — not a physical topology edge"
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "CANDIDATE_UNVERIFIED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
           "notes": null
         }
-      ],
-      "engineering_properties": null,
+      },
+      "transient_state": null,
+      "notes": ["PROCEDURE_GENERATION_NOT_AUTHORIZED"]
+    },
+    {
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T04:58:57Z",
+      "created_by": "EDTS-Research-Architect",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-REG-EXTRACTION-BEAM-001",
       "aliases": ["REL-REG-06"],
-      "notes": []
+      "graph_plane": "PHYSICAL",
+      "relationship_class": "EXTRACTION_PATH_PASSES_ADJACENT_TO",
+      "source_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-REGULATOR-FL",
+      "target_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-INT-BEAM-FL",
+      "directionality": "FORWARD",
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
+        "notes": null
+      },
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": "Existence UNRESOLVED_SOURCE_REQUIRED → CANDIDATE_UNVERIFIED"
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": null,
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
+          "notes": null
+        }
+      },
+      "transient_state": null,
+      "notes": ["REAL_DATA_PROMOTION_BLOCKED"]
     }
   ]
 }

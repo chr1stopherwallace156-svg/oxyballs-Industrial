@@ -5,16 +5,16 @@
 
 | Concern | Status |
 |---|---|
-| EGS-v1 relationship graph | **Proposal module active** — `proposals/egs-v1/` |
-| F-450 sample edges | **`CANDIDATE_UNVERIFIED`** (no invented eng specs) |
-| Research REL-00000N | **ILLUSTRATIVE history** (superseded for implementation) |
-| Recommended decision | **`PROPOSAL_MODULE_ACTIVE`** |
-| Active missions | `MISN-000001` (EWD/KG-001) primary; `MISN-000002` secondary |
-| KG-004 | OPEN HIGH (hinge shims) |
+| EGS proposal | **EGS-1.0.0-proposal.2** — `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY` |
+| F-450 REL-REG-01..06 | **REAL_DATA_PROMOTION_BLOCKED** / `CANDIDATE_UNVERIFIED` |
+| Node model | COMPDEF / CFGCOMP / CMPINST + IFACE / OP |
+| Graph planes | PHYSICAL · FUNCTIONAL · PROCEDURAL |
 | Frozen assembly-relationship | **Unchanged** |
+| Active missions | `MISN-000001` (EWD/KG-001) primary; `MISN-000002` secondary |
+| KG-004 | OPEN HIGH |
 | Geometry | `ABSENT` |
 | Kernel / rc1 | Unchanged |
 
 ## Change-control
 
-- `decisions/DT-D030_*.json` … `DT-D047_*.json`
+- `decisions/DT-D030_*.json` … `DT-D048_*.json`

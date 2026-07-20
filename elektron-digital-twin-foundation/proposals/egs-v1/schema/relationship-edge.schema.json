@@ -1,162 +1,190 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:edts:proposal:egs-v1:relationship-edge:1.0.0",
-  "title": "EGS-v1 Relationship Edge (Proposal)",
-  "description": "Non-kernel proposal schema. Does not modify frozen assembly-relationship.schema.json. Endpoints MUST be component-instance IDs (CMPINST-*), never AID/asset IDs. Engineering property values (torque, fastener counts, connectors, removal steps) require verified evidence links — omit when absent.",
+  "$id": "urn:edts:proposal:egs-1.0.0-proposal.2:relationship-edge",
+  "title": "EGS-1.0.0-proposal.2 Relationship Edge",
+  "description": "Non-kernel proposal schema. Does not modify frozen assembly-relationship.schema.json. Configuration-reference research edges connect CFGCOMP-/IFACE-/OP- nodes — never AID-* or physical VIN CMPINST-* as primary reference endpoints. Transient state parameters are forbidden on permanent structural edges.",
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "edge_id",
     "schema_version",
+    "record_version",
+    "edge_id",
+    "graph_plane",
     "relationship_class",
-    "relationship_type",
-    "source_component_instance_id",
-    "target_component_instance_id",
+    "source_node_id",
+    "target_node_id",
     "directionality",
-    "vehicle_instance_id",
-    "configuration_id",
-    "lifecycle_status",
-    "applicability",
-    "property_evidence_links"
+    "applicability_context",
+    "verification_lifecycle",
+    "claims"
   ],
   "properties": {
+    "schema_version": { "type": "string", "const": "EGS-1.0.0-proposal.2" },
+    "record_version": { "type": "integer", "minimum": 1 },
+    "created_at": { "type": ["string", "null"], "format": "date-time" },
+    "created_by": { "type": ["string", "null"] },
+    "updated_at": { "type": ["string", "null"], "format": "date-time" },
+    "supersedes_edge_id": { "type": ["string", "null"] },
     "edge_id": {
       "type": "string",
-      "pattern": "^REL-EGS-[0-9]{6}$"
+      "pattern": "^(EDGE|REL)-(EGS-)?[A-Z0-9-]+$"
     },
-    "schema_version": { "type": "string", "const": "egs-v1.0.0-proposal" },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "graph_plane": {
+      "type": "string",
+      "enum": ["PHYSICAL", "FUNCTIONAL", "PROCEDURAL"]
+    },
     "relationship_class": {
       "type": "string",
       "enum": [
-        "MECHANICAL_STRUCTURAL",
-        "ELECTRICAL_FLUID",
-        "KINEMATIC_GEOMETRIC",
-        "PROCEDURAL"
-      ]
-    },
-    "relationship_type": {
-      "type": "string",
-      "enum": [
         "BOLTED_TO",
+        "WELDED_TO",
         "MOUNTED_TO",
         "HINGES_ON",
         "SUPPORTS",
         "OVERLAPS",
         "CONTAINS",
-        "CONNECTED_TO",
+        "MATES_WITH",
+        "GUIDES_MOTION_OF",
+        "EXTRACTION_PATH_PASSES_ADJACENT_TO",
+        "BLOCKS_ACCESS_TO",
         "ROUTES_THROUGH",
         "PASSES_BEHIND",
-        "INTERFERES_WITH",
-        "SLIDES_ALONG",
+        "TRANSMITS_LIN_DATA_TO",
+        "TRANSMITS_SIGNAL_TO",
+        "MUST_PRECEDE",
+        "MUST_BE_DISCONNECTED_BEFORE",
+        "ACCESSIBLE_WHEN",
         "BLOCKS_REMOVAL_OF"
       ]
     },
-    "source_component_instance_id": {
+    "source_node_id": {
       "type": "string",
-      "pattern": "^CMPINST-[A-Z0-9-]+$",
-      "description": "Exact component-instance ID — never AID-* or marketplace asset IDs"
+      "description": "COMPDEF- / CFGCOMP- / IFACE- / OP- / CMPINST- (CMPINST only for PHYSICAL_ASSET_INSTANCE scope)"
     },
-    "target_component_instance_id": {
-      "type": "string",
-      "pattern": "^CMPINST-[A-Z0-9-]+$"
-    },
+    "target_node_id": { "type": "string" },
     "directionality": {
       "type": "string",
       "enum": ["FORWARD", "BACKWARD", "BIDIRECTIONAL"]
     },
-    "vehicle_instance_id": {
-      "type": "string",
-      "pattern": "^VEH-[A-Z0-9-]+$"
-    },
-    "configuration_id": {
-      "type": "string",
-      "pattern": "^CFG-[A-Z0-9-]+$"
-    },
-    "configuration_fingerprint": { "type": ["string", "null"] },
-    "lifecycle_status": {
-      "type": "string",
-      "enum": [
-        "CANDIDATE_UNVERIFIED",
-        "RESEARCH_CLAIM",
-        "DOCUMENT_SUPPORTED",
-        "VERIFIED",
-        "REJECTED",
-        "SUPERSEDED"
-      ]
-    },
-    "applicability": {
+    "applicability_context": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["scope"],
+      "required": ["scope_type"],
       "properties": {
-        "scope": {
+        "scope_type": {
           "type": "string",
-          "enum": ["EXACT_CONFIGURATION", "PLATFORM_BAND", "SYNTHETIC_FIXTURE", "UNKNOWN"]
+          "enum": [
+            "CONFIGURATION_REFERENCE",
+            "PHYSICAL_ASSET_INSTANCE",
+            "SYNTHETIC_FIXTURE",
+            "CROSS_CONFIGURATION_COMPARISON",
+            "SOURCE_APPLICABILITY_CANDIDATE"
+          ]
         },
-        "cab_config": { "type": ["string", "null"] },
-        "option_codes": {
-          "type": "array",
-          "items": { "type": "string" }
+        "configuration_id": { "type": ["string", "null"] },
+        "kernel_configuration_id": {
+          "type": ["string", "null"],
+          "description": "Optional alias to frozen kernel CFG-###### (e.g. CFG-000001)"
+        },
+        "model_year": { "type": ["integer", "null"] },
+        "model_year_range": {
+          "type": ["null"],
+          "description": "Forbidden on CONFIGURATION_REFERENCE — must be null; use CROSS_CONFIGURATION_COMPARISON records instead"
+        },
+        "vin": { "type": ["string", "null"] },
+        "inheritance": {
+          "type": "string",
+          "enum": ["NOT_INHERITED", "N/A"],
+          "default": "NOT_INHERITED"
         },
         "notes": { "type": ["string", "null"] }
       }
     },
-    "property_evidence_links": {
-      "type": "array",
-      "items": {
+    "verification_lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["edge_status", "procedure_eligibility"],
+      "properties": {
+        "edge_status": {
+          "type": "string",
+          "enum": [
+            "VERIFIED",
+            "PARTIALLY_VERIFIED",
+            "CANDIDATE_UNVERIFIED",
+            "CONTRADICTED",
+            "REJECTED",
+            "SUPERSEDED"
+          ]
+        },
+        "procedure_eligibility": {
+          "type": "string",
+          "enum": [
+            "PROCEDURE_GENERATION_AUTHORIZED",
+            "BLOCKED_UNVERIFIED_PROCEDURE",
+            "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+            "BLOCKED"
+          ]
+        },
+        "last_audited_date": { "type": ["string", "null"] },
+        "aggregation_notes": { "type": ["string", "null"] }
+      }
+    },
+    "claims": {
+      "type": "object",
+      "required": ["relationship_existence"],
+      "additionalProperties": {
         "type": "object",
-        "additionalProperties": false,
-        "required": ["property_key", "evidence_status"],
+        "required": ["status"],
         "properties": {
-          "property_key": {
+          "value": {},
+          "unit": { "type": ["string", "null"] },
+          "status": {
             "type": "string",
             "enum": [
-              "relationship_existence",
-              "directionality",
-              "torque_specification",
-              "fastener_specification",
-              "connector_interface",
-              "removal_precedence",
-              "kinematic_clearance",
-              "routing_path",
-              "other"
-            ]
-          },
-          "evidence_link_id": {
-            "type": ["string", "null"],
-            "pattern": "^EVL-[A-Z0-9-]+$"
-          },
-          "src_cand_id": { "type": ["string", "null"] },
-          "evidence_status": {
-            "type": "string",
-            "enum": [
-              "ABSENT",
-              "CLAIMED_UNHASHED",
-              "HASHED_UNAPPLIED",
-              "BOUND",
+              "UNRESOLVED_SOURCE_REQUIRED",
+              "SOURCE_DISCOVERED",
+              "SOURCE_ACQUIRED",
+              "SOURCE_APPLICABILITY_CONFIRMED",
+              "ASSERTION_EXTRACTED",
+              "ASSERTION_VERIFIED",
+              "CANDIDATE_UNVERIFIED",
+              "CONTRADICTED",
               "REJECTED"
             ]
           },
+          "evidence_assertion_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "mandatory": { "type": "boolean" },
           "notes": { "type": ["string", "null"] }
+        }
+      },
+      "properties": {
+        "relationship_existence": {
+          "type": "object",
+          "required": ["status"],
+          "properties": {
+            "value": { "type": ["boolean", "null"] },
+            "status": { "type": "string" },
+            "evidence_assertion_ids": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "mandatory": { "type": "boolean", "const": true },
+            "notes": { "type": ["string", "null"] }
+          }
         }
       }
     },
-    "engineering_properties": {
+    "transient_state": {
       "type": ["object", "null"],
-      "additionalProperties": false,
-      "description": "Omit or null unless verified evidence exists. Proposal validators reject populated torque/fastener/connector/removal fields when evidence_status is not BOUND.",
-      "properties": {
-        "torque_nm": { "type": ["number", "null"] },
-        "torque_tolerance": { "type": ["string", "null"] },
-        "fastener_id": { "type": ["string", "null"] },
-        "fastener_count": { "type": ["integer", "null"] },
-        "connector_description": { "type": ["string", "null"] },
-        "removal_precedence_index": { "type": ["integer", "null"] }
-      }
-    },
-    "aliases": {
-      "type": "array",
-      "items": { "type": "string" }
+      "description": "Allowed ONLY on ACCESSIBLE_WHEN / procedural precondition edges — forbidden on permanent structural classes",
+      "additionalProperties": true
     },
     "notes": {
       "type": "array",

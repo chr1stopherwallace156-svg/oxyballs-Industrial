@@ -1,26 +1,25 @@
-# Relationship Graph (EGS-v1)
+# Relationship Graph (EGS)
 
-Non-kernel dependency graph for **component-instance** nodes and typed edges.
+Non-kernel dependency graph with multi-level hierarchy, interface entities, and isolated graph planes.
 
-## Authoritative implementation (DT-D047)
+## Authoritative implementation (DT-D048)
 
 | Artifact | Path |
 |---|---|
 | Proposal module | [`proposals/egs-v1/`](../../proposals/egs-v1/) |
-| Proposal schema | `proposals/egs-v1/schema/relationship-edge.schema.json` |
-| Graph + validation | `proposals/egs-v1/egs_v1/` |
-| F-450 sample edges | `proposals/egs-v1/samples/f450_fl_door_edges_candidate_unverified.json` (`CANDIDATE_UNVERIFIED`) |
-| Tests | `tests/egs_v1/` |
+| Architecture | `proposals/egs-v1/EGS_1_0_0_PROPOSAL_2_ARCHITECTURE.md` |
+| Schema | `EGS-1.0.0-proposal.2` |
+| F-450 REL-REG audit | `proposals/egs-v1/samples/f450_fl_door_edges_candidate_unverified.json` |
+| Status | `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY` / edges `REAL_DATA_PROMOTION_BLOCKED` |
 
-**Endpoints must be `CMPINST-*`**, never `AID-*` / `EDTS-COMP-*` asset aliases. Frozen kernel `schemas/assembly-relationship.schema.json` is untouched.
+**Reference edges use `CFGCOMP-` / `IFACE-` / `OP-`**, not `AID-*` or VIN `CMPINST-*`. Frozen kernel `schemas/assembly-relationship.schema.json` is untouched.
 
-## Research history (DT-D046 / RL-015) — illustrative only
+## Research history
 
-| Artifact | Path | Status |
-|---|---|---|
-| Standard notes | `EGS_v1_STANDARD.md` | Research vocabulary |
-| Legacy research schema | `schemas/relationship-graph-edge.egs-v1.schema.json` | Superseded for implementation by proposal module |
-| Edges `REL-00000N` | `edges/` | `ILLUSTRATIVE_ONLY` (EDTS-COMP nodes) |
-| Register | `RELATIONSHIP_GRAPH_REGISTER.json` | Points at research edges |
+| Artifact | Status |
+|---|---|
+| DT-D046 illustrative `REL-00000N` (EDTS-COMP) | ILLUSTRATIVE history |
+| DT-D047 CMPINST-first proposal.1 | Superseded by proposal.2 hierarchy |
+| Legacy `schemas/relationship-graph-edge.egs-v1.schema.json` | Superseded for implementation |
 
-Do **not** promote illustrative research edges or candidate proposal samples to `VERIFIED` without hashed OEM evidence.
+Do **not** promote candidate edges or generate procedures without hashed OEM assertions.

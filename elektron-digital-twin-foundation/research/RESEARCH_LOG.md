@@ -374,3 +374,26 @@ DT-D046 — schema handoff ready; parallel MISN-000001 still needs EWD bytes.
 ### Status
 
 DT-D047 — proposal module active; parallel MISN-000001 still needs EWD bytes.
+
+---
+
+## RL-017 — EGS-1.0.0-proposal.2 architecture
+
+- **Date:** 2026-07-20
+- **Layer:** relationship engine architecture
+- **Agent:** Cursor Cloud Agent
+- **Question:** Refine EGS to separate conceptual/config/physical nodes, interface entities, graph planes, and deterministic evidence lifecycle?
+
+### Findings
+
+1. Three-tier hierarchy **COMPDEF → CFGCOMP → CMPINST** implemented; reference edges use CFGCOMP/IFACE/OP.
+2. IFACE layer (connector/grommet/mount-hole/flange/service-port) replaces direct harness→regulator shortcuts.
+3. PHYSICAL / FUNCTIONAL / PROCEDURAL planes isolated; transient state forbidden on structural edges.
+4. Exact-configuration scope lock forbids `model_year_range` on CONFIGURATION_REFERENCE.
+5. Claim pipeline SOURCE_DISCOVERED→ASSERTION_VERIFIED with automated edge_status aggregation.
+6. Cycle classifier reports HARD/CONDITIONAL/STATE_DEPENDENT/ALTERNATE_PATH — never auto-resolves.
+7. REL-REG-01..06 locked **CANDIDATE_UNVERIFIED** / **PROCEDURE_GENERATION_NOT_AUTHORIZED**; tests **27 passed**.
+
+### Status
+
+DT-D048 — `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY`; real F-450 promotion blocked pending WSM/EWD bytes.

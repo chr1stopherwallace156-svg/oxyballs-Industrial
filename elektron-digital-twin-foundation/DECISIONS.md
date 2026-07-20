@@ -798,3 +798,20 @@ Append-only record of digital twin foundation decisions.
   6. Synthetic fixtures for tests; graph queries (neighbors, dependency/impact BFS, cycles, topo)
   7. Research `REL-00000N` edges superseded for implementation linking (remain ILLUSTRATIVE history)
 
+
+## DT-D048 — EGS-1.0.0-proposal.2 architecture refinement
+
+- **Change-control record:** [`decisions/DT-D048_EGS_PROPOSAL_2_ARCHITECTURE.json`](decisions/DT-D048_EGS_PROPOSAL_2_ARCHITECTURE.json)
+- **decision_id:** `DT-D048`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY`
+- **protocol_version:** `2.10.0`
+- **decision:**
+  1. Authorize **EGS-1.0.0-proposal.2** (COMPDEF/CFGCOMP/CMPINST hierarchy + IFACE layer)
+  2. Frozen kernel schemas **unchanged**
+  3. Reference edges = **CFGCOMP-/IFACE-/OP-** only; exact MY scope lock (no year ranges)
+  4. PHYSICAL / FUNCTIONAL / PROCEDURAL plane isolation; no transient state on structural edges
+  5. Deterministic claim→lifecycle aggregation; cycle kinds never auto-resolved
+  6. REL-REG-01..06 = **CANDIDATE_UNVERIFIED** / **REAL_DATA_PROMOTION_BLOCKED** / **PROCEDURE_GENERATION_NOT_AUTHORIZED**
+
