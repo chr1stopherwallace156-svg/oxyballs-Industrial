@@ -1,0 +1,72 @@
+{
+  "document_id": "MEPQ_ACTIVE_CHECKLIST",
+  "version": "1.0.0",
+  "decision": "DT-D055",
+  "research_sprint": "RL-024",
+  "exported_at_utc": "2026-07-20T20:10:00Z",
+  "locked_configuration": {
+    "proposal_configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+    "kernel_configuration_id": "CFG-000001",
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943"
+  },
+  "option_selected": "2_EXPORT_ACTIVE_MEPQ",
+  "option_1_mission_f": "ALREADY_OPEN_MISN-000006",
+  "counts": {"QUEUED": 1, "DEFERRED": 4, "total": 5},
+  "items": [
+    {
+      "mepq_id": "MEPQ-003",
+      "operator_alias": "MEPQ-2019-F450-ELEC-LV-003",
+      "priority": "CRITICAL",
+      "status": "QUEUED",
+      "focus": "Firewall LV connector + CAN architecture",
+      "related_gap_ids": ["KG-008"],
+      "related_mission_ids": ["MISN-000006", "MISN-000003", "MISN-000001"],
+      "acquisition_cost_vector": "COMMERCIAL_PAYWALL",
+      "path": "research/mepq/MEPQ-003.json"
+    },
+    {
+      "mepq_id": "MEPQ-001",
+      "operator_alias": "MEPQ-2019-F450-ICE-REM-001",
+      "priority": "CRITICAL",
+      "status": "DEFERRED",
+      "focus": "ICE CG + dry mass",
+      "related_gap_ids": ["KG-006"],
+      "related_mission_ids": ["MISN-000005"],
+      "path": "research/mepq/MEPQ-001.json"
+    },
+    {
+      "mepq_id": "MEPQ-002",
+      "operator_alias": "MEPQ-2019-F450-FRAME-INT-002",
+      "priority": "HIGH",
+      "status": "DEFERRED",
+      "focus": "Transmission cross-member interfaces",
+      "related_gap_ids": ["KG-007"],
+      "related_mission_ids": ["MISN-000005"],
+      "path": "research/mepq/MEPQ-002.json"
+    },
+    {
+      "mepq_id": "MEPQ-004",
+      "operator_alias": "MEPQ-2019-F450-DECON-006",
+      "priority": "CRITICAL",
+      "status": "DEFERRED",
+      "focus": "Aft fuel-tank strap holes + torque",
+      "related_gap_ids": ["KG-009"],
+      "related_mission_ids": ["MISN-000005"],
+      "partial_evidence": "40 gal aft-of-axle tank capacity ASSERTION_EXTRACTED",
+      "path": "research/mepq/MEPQ-004.json"
+    },
+    {
+      "mepq_id": "MEPQ-005",
+      "operator_alias": "MEPQ-2019-F450-DECON-007",
+      "priority": "HIGH",
+      "status": "DEFERRED",
+      "focus": "Mid-chassis XMBR thickness / brackets",
+      "related_gap_ids": ["KG-010"],
+      "related_mission_ids": ["MISN-000005"],
+      "path": "research/mepq/MEPQ-005.json"
+    }
+  ],
+  "related_non_mepq_blockers": ["KG-001", "KG-005", "KG-FS-001", "KG-FS-002", "KG-FS-003", "KG-FS-004", "KG-FS-005"],
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED"
+}

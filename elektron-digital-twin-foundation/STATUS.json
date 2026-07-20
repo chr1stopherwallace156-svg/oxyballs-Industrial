@@ -1,8 +1,8 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.28.0",
-  "updated_at": "2026-07-20T20:05:00Z",
+  "version": "0.29.0",
+  "updated_at": "2026-07-20T20:15:00Z",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
   "phase": "EVIDENCE_ACQUISITION_IN_PROGRESS",
@@ -30,8 +30,8 @@
   "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "MEPQ_ACTIVE_OPTION_B: Mission F (MISN-000006) LV gateway open questions seeded. Parallel: continue Mission D; commercial EWD/WSM via MISN-000003/000001 for KG-008/MEPQ-003. Mission E remains deferred (MEPQ-001/002 registered only).",
-  "next_build_priority": "MISN006_LV_GATEWAY_DISCOVERY_PLUS_MISN003_EWD",
+  "next_action": "MEPQ export active (DT-D055 Option 2). Critical queued: MEPQ-003 via Mission F discovery + MISN-000003 EWD. Mission E remains deferred with Phase 2 intent registered. Continue Mission D in parallel.",
+  "next_build_priority": "MEPQ003_EWD_PLUS_MISSION_D_CONTINUE",
   "door_fl_decision": "CANDIDATE_ACQUISITION_RECOMMENDED",
   "door_fl_physical_verification": "REQUIRED_EVENTUALLY",
   "door_fl_sprint": "research/sprints/RL-020_CHASSIS_FRAME_BRIEF_AB.md",
@@ -680,5 +680,13 @@
   "misn_000006_status": "NOT_STARTED_DISCOVERY",
   "kg_006": "BLOCKED_DEFERRED_WITH_MISSION_E",
   "kg_007": "BLOCKED_DEFERRED_WITH_MISSION_E",
-  "kg_008": "OPEN_MEPQ003"
+  "kg_008": "OPEN_MEPQ003",
+  "decision_dt_d055": "decisions/DT-D055_EV_DECON_PHASE2_MEPQ_EXPORT.json",
+  "mepq_004": "DEFERRED_FUEL_TANK_STRAP_HOLES",
+  "mepq_005": "DEFERRED_MID_XMBR_THICKNESS",
+  "mepq_export": "research/mepq/exports/MEPQ_ACTIVE_CHECKLIST.md",
+  "ice_decon_phase2": "REGISTERED_DEFERRED_CONVERSION_INTENT_ONLY",
+  "ice_decon_phase2_slice": "research/vertical_slices/ice_decon_phase2_2019_f450/",
+  "kg_009": "BLOCKED_DEFERRED_WITH_MISSION_E",
+  "kg_010": "BLOCKED_DEFERRED_WITH_MISSION_E"
 }

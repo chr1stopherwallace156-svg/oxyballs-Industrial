@@ -1,10 +1,10 @@
 {
   "document_id": "MEPQ_REGISTER",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "ACTIVE",
   "schema": "schemas/mepq-item.schema.json",
-  "decision": "DT-D054",
-  "research_sprint": "RL-023",
+  "decision": "DT-D055",
+  "research_sprint": "RL-024",
   "title": "Missing Evidence Procurement Queue",
   "principle": "Inversion Principle — procure only evidence that cannot be safely inferred; documentation tiers are purchased when a downstream node requires EXACT_CONFIGURATION_MATCH evidence.",
   "orthogonality": {
@@ -17,9 +17,11 @@
     "Invented torque / pinout / CG / mass / hole diameters",
     "False confidence tiers (e.g. LEVEL_4_DOCUMENTED_OEM without hashed OEM bytes + token anchors)",
     "Treating indexed URLs as acquired evidence",
-    "Auto-promoting COMPDEF→CFGCOMP without evidence gates"
+    "Auto-promoting COMPDEF→CFGCOMP without evidence gates",
+    "Conflating bumper/axle station dimensions with packaging envelopes"
   ],
-  "next_id": "MEPQ-004",
+  "next_id": "MEPQ-006",
+  "active_export": "research/mepq/exports/MEPQ_ACTIVE_CHECKLIST.md",
   "items": [
     {
       "mepq_id": "MEPQ-001",
@@ -44,14 +46,30 @@
       "status": "QUEUED",
       "path": "research/mepq/MEPQ-003.json",
       "focus": "Cab-to-engine / firewall LV connector + CAN architecture (EWD)"
+    },
+    {
+      "mepq_id": "MEPQ-004",
+      "operator_alias": "MEPQ-2019-F450-DECON-006",
+      "priority": "CRITICAL",
+      "status": "DEFERRED",
+      "path": "research/mepq/MEPQ-004.json",
+      "focus": "Aft fuel-tank strap holes + torque"
+    },
+    {
+      "mepq_id": "MEPQ-005",
+      "operator_alias": "MEPQ-2019-F450-DECON-007",
+      "priority": "HIGH",
+      "status": "DEFERRED",
+      "path": "research/mepq/MEPQ-005.json",
+      "focus": "Mid-chassis XMBR thickness / brackets"
     }
   ],
   "selected_next_deployment": {
-    "option": "B",
-    "mission": "MISN-000006",
-    "title": "Low-Voltage Gateway Interconnect discovery (EWD prep)",
-    "option_a_mission_e": "REMAIN_DEFERRED",
-    "rationale": "MEPQ-003 is critical and already gated on commercial EWD (MISN-000003). Option B maps open questions without inventing pinouts. Option A (ICE deconstruction) stays deferred with MEPQ-001/002 registered only."
+    "option": "2_EXPORT_ACTIVE_MEPQ",
+    "mission_f": "ALREADY_OPEN_MISN-000006",
+    "mission_e": "REMAINS_DEFERRED",
+    "export_path": "research/mepq/exports/MEPQ_ACTIVE_CHECKLIST.md",
+    "rationale": "Phase 2 decon dump honesty-gated and registered under deferred Mission E. Mission F already open. Export consolidates all MEPQ for procurement prioritization."
   },
   "locked_configuration": {
     "vehicle_instance_id": "VEH-000001",

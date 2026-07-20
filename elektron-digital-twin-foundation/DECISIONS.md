@@ -918,3 +918,21 @@ Append-only record of digital twin foundation decisions.
   6. Expand **MISN-000003** to include **KG-008** / MEPQ-003
 
 ---
+
+## DT-D055 — EV-DECON-PHASE2 honesty gate + MEPQ export (Option 2)
+
+- **Change-control record:** [`decisions/DT-D055_EV_DECON_PHASE2_MEPQ_EXPORT.json`](decisions/DT-D055_EV_DECON_PHASE2_MEPQ_EXPORT.json)
+- **decision_id:** `DT-D055`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-024`
+- **recommended_decision:** `DECON_PHASE2_REGISTERED_DEFERRED_MEPQ_EXPORT`
+- **decision:**
+  1. Honesty-gate **EV-DECON-PHASE2**; admit remove/retain matrix as **conversion-intent candidates** under deferred Mission E only
+  2. Reject radiator envelope **38.3×30×8** (38.3 in = front overhang code B, not bay size)
+  3. Retain partial assertions: frame **H=34.2**, fuel tank **40 gal aft-of-axle std**
+  4. Register **MEPQ-004/005** + **KG-009/010**
+  5. Select **Option 2** — export consolidated MEPQ checklist; Option 1 skipped (Mission F already open)
+  6. Mission E teardown execution remains **NOT authorized**
+
+---

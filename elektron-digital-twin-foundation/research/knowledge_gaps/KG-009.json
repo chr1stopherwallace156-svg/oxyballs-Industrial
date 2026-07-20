@@ -1,0 +1,20 @@
+{
+  "gap_id": "KG-009",
+  "component": "Aft-of-axle fuel tank structural cross-straps / frame holes",
+  "reported_oem_part_number": null,
+  "critical_need": "Hole center coordinates, thread/hole diameter, and fastener torque for OEM tank straps — required before bolt-on rear HV subframe reuse.",
+  "priority": "CRITICAL",
+  "possible_sources": ["SRC-CAND-000002 WSM fuel tank/lines", "Physical frame measurement"],
+  "related_src_cand_ids": ["SRC-CAND-000002"],
+  "related_mission_ids": ["MISN-000005"],
+  "status": "BLOCKED",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "notes": [
+    "Linked MEPQ-004 (operator DECON-006).",
+    "Tank capacity 40 gal aft-of-axle std is ASSERTION_EXTRACTED; mount geometry is not.",
+    "Mission E deferred."
+  ],
+  "decision": "DT-D055",
+  "research_sprint": "RL-024"
+}

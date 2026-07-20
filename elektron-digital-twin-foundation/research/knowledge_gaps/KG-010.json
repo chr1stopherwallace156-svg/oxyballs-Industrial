@@ -1,0 +1,20 @@
+{
+  "gap_id": "KG-010",
+  "component": "Mid-chassis frame cross-members / fuel-line shield brackets",
+  "reported_oem_part_number": null,
+  "critical_need": "Wall thickness and bracket configuration for assessing HV cable-tray reuse loads.",
+  "priority": "HIGH",
+  "possible_sources": ["Collision repair manual", "SRC-CAND-000001 BAG", "SRC-CAND-000002 WSM"],
+  "related_src_cand_ids": ["SRC-CAND-000001", "SRC-CAND-000002"],
+  "related_mission_ids": ["MISN-000005"],
+  "status": "BLOCKED",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "notes": [
+    "Linked MEPQ-005 (operator DECON-007).",
+    "No sheet thicknesses admitted.",
+    "Mission E deferred."
+  ],
+  "decision": "DT-D055",
+  "research_sprint": "RL-024"
+}

@@ -5,16 +5,16 @@
 
 | Concern | Status |
 |---|---|
-| MEPQ | **DT-D054** ACTIVE — Inversion Principle |
-| Option B / Mission F | **MISN-000006** opened (LV discovery only) |
-| Option A / Mission E | **Deferred** — MEPQ-001/002 registered |
-| MEPQ-003 / KG-008 | QUEUED / OPEN — needs EWD |
-| Mission D | IN_PROGRESS (Monobeam extracted) |
-| Operator radius-arm passport | **Scrubbed** — LEVEL_4 / torques rejected |
-| HV live execution | **NOT authorized** |
-| EGS / procedures | **BLOCKED** |
+| MEPQ export | **DT-D055** — `research/mepq/exports/MEPQ_ACTIVE_CHECKLIST.md` |
+| MEPQ-003 | **QUEUED** (EWD / Mission F) |
+| MEPQ-001/002/004/005 | **DEFERRED** (Mission E) |
+| EV-DECON-PHASE2 | Registered as conversion-intent only — **not authorized** |
+| Mission F | Already open (`MISN-000006`) |
+| Mission E | **Deferred** |
+| Mission D | IN_PROGRESS |
+| Procedures | **BLOCKED** |
 | Kernel | Unchanged |
 
 ## Change-control
 
-- `decisions/DT-D030_*.json` … `DT-D054_*.json`
+- `decisions/DT-D030_*.json` … `DT-D055_*.json`

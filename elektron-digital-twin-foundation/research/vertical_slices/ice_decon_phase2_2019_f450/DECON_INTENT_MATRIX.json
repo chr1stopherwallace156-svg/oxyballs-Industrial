@@ -1,0 +1,73 @@
+{
+  "document_id": "ICE_DECON_PHASE2_INTENT_MATRIX",
+  "decision": "DT-D055",
+  "mission_id": "MISN-000005",
+  "authority_status": "CONVERSION_INTENT_CANDIDATE_DEFERRED",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "geometry_extraction_authorized": false,
+  "locked_configuration": {
+    "proposal_configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+    "kernel_configuration_id": "CFG-000001",
+    "vehicle_instance_id": "VEH-000001"
+  },
+  "items": [
+    {
+      "compdef_id": "COMPDEF-COOLING-RADIATOR",
+      "intent": "MUST_REMOVE",
+      "status": "CONVERSION_INTENT_CANDIDATE",
+      "evidence": "NONE_FOR_FASTENERS",
+      "notes": ["Do not use invented 38.3×30×8 envelope"]
+    },
+    {
+      "compdef_id": "COMPDEF-HVAC-CONDENSER",
+      "intent": "RETAIN_AND_REPURPOSE",
+      "status": "CONVERSION_INTENT_CANDIDATE",
+      "evidence": "NONE",
+      "notes": ["Refrigerant loop continuity is a design hypothesis, not verified procedure"]
+    },
+    {
+      "compdef_id": "COMPDEF-COOLING-TOC",
+      "intent": "MUST_REMOVE",
+      "status": "CONVERSION_INTENT_CANDIDATE"
+    },
+    {
+      "compdef_id": "COMPDEF-COOLING-PS",
+      "intent": "MUST_REMOVE",
+      "status": "CONVERSION_INTENT_CANDIDATE",
+      "related_gap": "PS cooler fitting size / mount pitch unresolved"
+    },
+    {
+      "compdef_id": "COMPDEF-FUEL-TANK-AFT",
+      "intent": "MUST_REMOVE",
+      "status": "CONVERSION_INTENT_CANDIDATE",
+      "evidence_partial": {
+        "capacity": "40 gallon aft-of-axle (std) ASSERTION_EXTRACTED SRC-CAND-000010 p.48",
+        "frame_width_in": "34.2 ASSERTION_EXTRACTED"
+      },
+      "mepq_ids": ["MEPQ-004"]
+    },
+    {
+      "compdef_id": "COMPDEF-FUEL-LINES",
+      "intent": "MUST_REMOVE",
+      "status": "CONVERSION_INTENT_CANDIDATE"
+    },
+    {
+      "compdef_id": "COMPDEF-EXHAUST-PIPING",
+      "intent": "MUST_REMOVE",
+      "status": "CONVERSION_INTENT_CANDIDATE"
+    },
+    {
+      "compdef_id": "COMPDEF-EXHAUST-AFTERTREATMENT",
+      "intent": "MUST_REMOVE",
+      "status": "CONVERSION_INTENT_CANDIDATE",
+      "notes": ["Primarily relevant to 6.7L diesel configurations"]
+    }
+  ],
+  "iface_candidates": [
+    {
+      "iface_id": "IFACE-CHARGE-PORT",
+      "status": "CONVERSION_INTENT_CANDIDATE",
+      "notes": ["Do not assume cab filler door exists on bare Chassis Cab; upfitter-dependent"]
+    }
+  ]
+}

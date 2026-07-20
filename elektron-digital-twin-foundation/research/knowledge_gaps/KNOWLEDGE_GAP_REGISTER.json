@@ -1,11 +1,11 @@
 {
   "document_id": "KNOWLEDGE_GAP_REGISTER",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "status": "ACTIVE",
   "schema": "schemas/knowledge-gap.schema.json",
-  "decision": "DT-D054",
-  "research_sprint": "RL-023",
-  "next_id": "KG-009",
+  "decision": "DT-D055",
+  "research_sprint": "RL-024",
+  "next_id": "KG-011",
   "gaps": [
     {
       "gap_id": "KG-001",
@@ -60,7 +60,21 @@
       "status": "OPEN",
       "path": "research/knowledge_gaps/KG-008.json",
       "focus": "Firewall/cab-engine LV connector + CAN (MEPQ-003 / Mission F)"
+    },
+    {
+      "gap_id": "KG-009",
+      "priority": "CRITICAL",
+      "status": "BLOCKED",
+      "path": "research/knowledge_gaps/KG-009.json",
+      "focus": "Aft fuel-tank strap holes + torque (MEPQ-004)"
+    },
+    {
+      "gap_id": "KG-010",
+      "priority": "HIGH",
+      "status": "BLOCKED",
+      "path": "research/knowledge_gaps/KG-010.json",
+      "focus": "Mid-chassis XMBR thickness (MEPQ-005)"
     }
   ],
-  "focus": "KG-008 via MISN-000006 discovery + MISN-000003 EWD acquire; KG-001/005 still commercial; KG-006/007 deferred with Mission E"
+  "focus": "MEPQ-003 QUEUED (EWD); Mission F discovery open; Mission E deferred with MEPQ-001/002/004/005; export research/mepq/exports/MEPQ_ACTIVE_CHECKLIST.md"
 }

@@ -528,3 +528,25 @@ DT-D053 — `MISSION_D_IN_PROGRESS_PRIMARY_SOURCE_PARTIAL`; CNF-001 → partiall
 ### Status
 
 DT-D054 — `MEPQ_ACTIVE_OPTION_B_MISSION_F_DISCOVERY`.
+
+---
+
+## RL-024 — EV-DECON-PHASE2 honesty gate + MEPQ checklist export
+
+- **Date:** 2026-07-20
+- **Layer:** ICE deconstruction boundary (deferred) / MEPQ consolidation
+- **Agent:** Cursor Cloud Agent
+- **Question:** Can EV-DECON-PHASE2 lower chassis/fluidic purge be admitted as executable teardown truth, and which next option to take?
+
+### Findings
+
+1. Phase 2 registered as **deferred conversion-intent** under Mission E — not authorized teardown.
+2. **Rejected:** radiator bay 38.3×30×8 (overhang conflation); M8/M10/M12/torque/hanger counts without WSM; “knowledge graph complete.”
+3. **Retained partial:** H=34.2 frame width; 40 gal aft-of-axle tank (SRC-CAND-000010 p.48).
+4. New **MEPQ-004/005** (fuel strap holes; mid XMBR thickness) + KG-009/010.
+5. **Option 2 selected** — checklist at `research/mepq/exports/MEPQ_ACTIVE_CHECKLIST.md` (1 QUEUED / 4 DEFERRED).
+6. Option 1 skipped — Mission F already open (MISN-000006).
+
+### Status
+
+DT-D055 — `DECON_PHASE2_REGISTERED_DEFERRED_MEPQ_EXPORT`.

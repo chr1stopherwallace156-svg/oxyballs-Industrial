@@ -70,7 +70,9 @@
   ],
   "notes": [
     "MEPQ register: research/mepq/",
-    "Option A (Mission E) deferred; Option B (Mission F) opened as discovery",
+    "MEPQ active export: research/mepq/exports/MEPQ_ACTIVE_CHECKLIST.md",
+    "EV-DECON-PHASE2: research/vertical_slices/ice_decon_phase2_2019_f450/ (deferred conversion-intent)",
+    "Option A (Mission E) deferred; Option B (Mission F) open as discovery",
     "Chassis frame brief: research/vertical_slices/chassis_frame_2019_f450/",
     "Front suspension Mission D: research/vertical_slices/front_suspension_2019_f450/"
   ],
