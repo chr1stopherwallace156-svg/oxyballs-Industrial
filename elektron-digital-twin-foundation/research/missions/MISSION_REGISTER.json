@@ -1,6 +1,6 @@
 {
   "document_id": "MISSION_REGISTER",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "status": "ACTIVE",
   "schema": "schemas/research-mission.schema.json",
   "decision": "DT-D056",
@@ -36,8 +36,9 @@
       "path": "research/missions/MISN-000004.json",
       "completion_status": "IN_PROGRESS",
       "primary_target": "4x2 front suspension / steering exact-config evidence",
-      "priority_note": "Continue — Monobeam extracted; WSM/BAG/spring gaps open",
-      "vertical_slice": "research/vertical_slices/front_suspension_2019_f450/"
+      "priority_note": "DT-D056 Option 2 — Layer 1 focus (spindle/linkage/alignment UNKNOWN)",
+      "vertical_slice": "research/vertical_slices/front_suspension_2019_f450/",
+      "layer_focus": "L1_VEHICLE_ENGINEERING_TRUTH"
     },
     {
       "mission_id": "MISN-000005",
@@ -46,7 +47,7 @@
       "completion_status": "NOT_STARTED",
       "deferred": true,
       "primary_target": "ICE powertrain removal mapping",
-      "mepq_ids": ["MEPQ-001", "MEPQ-002"]
+      "mepq_ids": ["MEPQ-001", "MEPQ-002", "MEPQ-004", "MEPQ-005", "MEPQ-006", "MEPQ-007"]
     },
     {
       "mission_id": "MISN-000006",
@@ -57,13 +58,13 @@
       "mepq_ids": ["MEPQ-003"],
       "gap_ids": ["KG-008"],
       "vertical_slice": "research/vertical_slices/lv_gateway_2019_f450/",
-      "priority_note": "Option B selected (DT-D054) — discovery only"
+      "priority_note": "Open — enforce L1 harness truth vs L3 VCU tap proposals (DT-D056)"
     }
   ],
   "priority_order": [
+    "MISN-000004",
     "MISN-000001",
     "MISN-000003",
-    "MISN-000004",
     "MISN-000006",
     "MISN-000002",
     "MISN-000005"
