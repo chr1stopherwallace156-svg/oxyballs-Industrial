@@ -5,6 +5,43 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 51 + review_48: Gate 05I-D Integrated Fault Cascades + post-bench gate ladder (D-008)
+
+- Archived batch_51 (Gate 05I-D) and review_48 1:1 (commit `78c98cf`). New
+  rows RC-224..228 (no new CS). Decision **D-008** added. Section 59. New
+  deliverable `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md` (10-row
+  integrated-fault-cascade matrix + exit criteria). Owner: "the correct next
+  gate … testing the system as a system."
+- **The critical correction — never "certified safe" (RC-224 + D-008):** the
+  Hunter's exit line "the low-voltage bench assembly is certified safe for
+  installation into the physical vehicle chassis" was rejected → "eligible
+  for engineering review for controlled low-voltage vehicle fitment only;
+  does not authorize live HV / vehicle movement / road testing / chassis-dyno
+  / customer operation / factory Ford bus transmission / compliance or
+  certification claims." The owner defined a **staged post-bench gate ladder
+  (D-008): Gate 05J** (Controlled Vehicle Fitment / No-HV Installation
+  Readiness — no HV battery, no traction enable, CAN_1 listen-only, verify
+  grounds/shields/routing/no-chafing/service-access/LOTO/12 V parasitic
+  draw/no Ford bus disturbance) **→ Gate 05K** (LV Vehicle Power-On / No-HV
+  Commissioning) **→ Gate 05L** (Controlled HV First-Energization,
+  engineer-approved only). This **redefines the old "Gate 05J = live vehicle
+  commissioning" placeholder** — HV is now Gate 05L, behind two no-HV gates.
+- Other corrections: test IDs 05D-### → 05I-D-### + timing labels + no
+  "immediate" (RC-225, twelfth artifact of the invented-values family);
+  charger-plug detect+reject not "ignore" (RC-226); E-stop hardwired loop
+  owns physical interruption, VCU observes/commands/logs/latches (RC-227);
+  sleep-current node (≤1.0 mA VCU) vs total-system (≤4.0 mA) consistency
+  (RC-228).
+- Gate 05I-D status = `INTEGRATED_FAULT_SEQUENCE_MATRIX_CREATED /
+  LOW_VOLTAGE_BENCH_ONLY / REAL_VCU_DUT_REQUIRED /
+  SUPPLIER_LOGIC_BOARDS_REQUIRED / CAN_1_SILENCE_REQUIRED_DURING_ALL_CASCADES
+  / TIMING_TARGETS_PENDING_SOURCE_REVIEW / NO_LIVE_HV / NO_VEHICLE_MOTION /
+  NO_LIVE_FORD_CAN_TRANSMISSION / NO_VEHICLE_CLEARANCE`.
+- Nothing ingested; nothing marked Confirmed; no "certified safe"/compliance
+  claim; scripts are pseudocode not production code; no live HV before Gate
+  05L engineer approval; ODRs untouched. Next = Gate 05J (Controlled Vehicle
+  Fitment / No-HV Installation Readiness).
+
 ## 2026-07-16 — RH batch 50 + review_47: Gate 05I-C v2 (full 05I-C1 + 05I-C2)
 
 - Archived batch_50 (Gate 05I-C v2) and review_47 1:1 (commit `fa3e411`).

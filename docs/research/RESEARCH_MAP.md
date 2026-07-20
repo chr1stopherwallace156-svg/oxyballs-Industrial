@@ -371,39 +371,35 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_47):** **Gate 05I-D — Low-Voltage
-End-to-End Bench Run / Integrated Fault Cascades** — stop testing one thing
-at a time; subject the fully integrated LV architecture (VCU + BMS logic +
-inverter logic + display + simulator interfaces, running dynamically) to the
-12 coordinated off-nominal cascades: accel+brake override · torque+HVIL open
-· torque+BMS no-discharge · torque+inverter fault · torque+CAN_2 heartbeat
-loss · charge-plug during drive · E-stop during active torque · brownout
-during fault latch · service-clear during active fault · sleep with a
-stuck-awake node · **CAN_1 silence during every cascade** · **display warning
-during every cascade**. The integration counterpart after 05I-A (logic),
-05I-B (mechanical), and 05I-C (comms + sleep/wake). Bench-only; no live HV,
-no vehicle motion, no Ford factory-bus transmission; CAN_1 stays listen-only
-+ no leakage (TXD-pin proof, RC-186/216/219/221). Gate 05I-C
-(`GATE05I_C_COMMS_SLEEP_WAKE.md`) is v2 `NETWORK_INTEGRITY_MATRIX_CREATED /
-SLEEP_WAKE_MATRIX_CREATED / DBC_VERSION_HASH_REQUIRED /
-APPLICATION_LAYER_VALIDATION_DEFINED / PHYSICAL_CAN_FAULT_INJECTION_DEFINED`
-— values are BENCH_TARGET_PROFILE + per-node sleep current (RC-220), CAN_1
-diagram simulated/protected only (RC-221), physical/protocol vs app-layer
-fault-injection (RC-222), brownout NVM-save needs early-warning hardware
-(RC-223); DBC version hash enforced (RC-218). 05I-A/05I-B/05I-C all carry the
-Expected-Safe-Output vs Blocked-Outputs split; a DBC is a database not a
-packet (RC-213). **Gate 05J / live vehicle commissioning explicitly NOT
-YET.** Keep the ownership discipline — the VCU **coordinates** but owns
+**Next expected batch (owner review_48):** **Gate 05J — Controlled Vehicle
+Fitment / No-HV Installation Readiness** — the first rung of the staged
+post-bench gate ladder (Decision Register **D-008**): install the
+VCU/harness physically in the vehicle with **no HV battery connected and no
+traction enable**; CAN_1 remains listen-only; verify grounds/shields,
+connector routing, no chafing, service access, LOTO, 12 V parasitic draw in
+the chassis, and no Ford bus disturbance. The ladder continues (later,
+engineer-gated): **Gate 05K** (LV Vehicle Power-On / No-HV Commissioning) →
+**Gate 05L** (Controlled HV First-Energization, engineer-approved only,
+staged safety plan + LOTO/PPE). This **redefines the old "Gate 05J = live
+vehicle commissioning" placeholder** — HV first-energization is now Gate 05L,
+behind two no-HV gates; the Build Engine never marks a bench assembly
+"certified safe" (RC-224). Gate 05I-D (`GATE05I_D_INTEGRATED_FAULT_CASCADES.md`)
+is `INTEGRATED_FAULT_SEQUENCE_MATRIX_CREATED` — 10-row cascade matrix under
+CAN_1 silence; corrections: no "certified safe" (RC-224); 05I-D-### IDs +
+timing labels + no "immediate" (RC-225); charger-plug detect+reject (RC-226);
+E-stop hardwired loop owns interruption (RC-227); sleep-current node vs total
+(RC-228). Keep the ownership discipline — the VCU **coordinates** but owns
 nothing safety-critical (contactors / pre-charge / HV shutdown / torque
 authority) until the BMS/PDU supplier architecture proves it (BQ-27); CAN_1
 stays listen-only; EV-side outputs stay isolated; **NEVER "PATS bypass"; no
-factory-cluster injection; no invented
-thresholds/timeouts/percentages/bus-loads/currents as gate logic
-(RC-173/179/180/188/202/208/212/215/220); bench evidence only.** Verbatim
-scope in [`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md);
-permanent doctrine D-007: **Coordinator ≠ Owner**. **Gate 08C is parked**;
-Gate 07 artifacts + the 15-mode FMEA registry stay open. Order after 05:
-Gate 06 deep dive → 09 → 10 → 11.
+factory-cluster injection; no invented thresholds/timeouts/percentages as
+gate logic (RC-173/179/180/188/202/208/212/215/220/225); no "certified safe"
+/ compliance claim (RC-224); no live HV before Gate 05L engineer approval
+(D-008).** Verbatim scope in
+[`GATE_RESEARCH_QUEUE.md`](../roadmaps/GATE_RESEARCH_QUEUE.md); permanent
+doctrine D-007: **Coordinator ≠ Owner**; D-008: **staged post-bench gate
+ladder to HV**. **Gate 08C is parked**; Gate 07 artifacts + the 15-mode FMEA
+registry stay open. Order after 05: Gate 06 deep dive → 09 → 10 → 11.
 
 **Supplier follow-up cadence (owner):** if no response 7 days after a
 letter is sent, follow up; repeat weekly until answered or redirected.

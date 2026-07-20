@@ -494,36 +494,59 @@ current (RC-220); CAN_1 diagram simulated/protected only (RC-221);
 physical/protocol vs app-layer fault-injection wording (RC-222); brownout
 NVM-save needs early-warning hardware (RC-223).
 
-## Gate 05I-D — Low-Voltage End-to-End Bench Run / Integrated Fault Cascades  · STATUS: NEXT (owner review_47)
+## Gate 05I-D — Low-Voltage End-to-End Bench Run / Integrated Fault Cascades  · STATUS: INTEGRATED_FAULT_SEQUENCE_MATRIX_CREATED (batch_51)
 
-Stop testing one thing at a time — subject the fully integrated low-voltage
-architecture (VCU + BMS logic + inverter logic + display + simulator
-interfaces, running dynamically in real-time) to coordinated off-nominal
-**fault cascades**.
+Deliverable `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md` (10-row
+integrated-fault-cascade matrix + exit criteria). Status (review_48):
+`INTEGRATED_FAULT_SEQUENCE_MATRIX_CREATED / LOW_VOLTAGE_BENCH_ONLY /
+REAL_VCU_DUT_REQUIRED / SUPPLIER_LOGIC_BOARDS_REQUIRED /
+CAN_1_SILENCE_REQUIRED_DURING_ALL_CASCADES / TIMING_TARGETS_PENDING_SOURCE_
+REVIEW / NO_LIVE_HV / NO_VEHICLE_MOTION / NO_LIVE_FORD_CAN_TRANSMISSION /
+NO_VEHICLE_CLEARANCE`. Owner: "testing the system as a system." **Critical
+correction: never "certified safe"** → "eligible for engineering review for
+controlled low-voltage vehicle fitment only" (RC-224). Other corrections:
+test IDs 05D-### → 05I-D-### + timing labels + no "immediate" (RC-225);
+charger-plug detect+reject not "ignore" (RC-226); E-stop hardwired loop owns
+physical interruption (RC-227); sleep-current node vs total-system (RC-228).
 
-**Owner scope (review_47) — the 12 cascades:**
+## The post-bench gate ladder (Decision Register D-008)
 
-> - active accelerator + brake override
-> - active torque request + HVIL open
-> - active torque request + BMS no-discharge
-> - active torque request + inverter fault
-> - active torque request + CAN_2 heartbeat loss
-> - charge-plug inserted during drive state
-> - E-stop during active torque request
-> - brownout during fault latch
-> - service-clear attempt during active fault
-> - sleep request with a stuck-awake node
-> - CAN_1 silence during every cascade
-> - display warning during every cascade
+The path from the LV bench to HV is **staged + engineer-gated** — no jump to
+live commissioning:
 
-Enforce throughout — bench-only; no live HV, no vehicle motion, no Ford
-factory-bus transmission; CAN_1 stays listen-only with the TXD-line proof +
-no leakage (RC-186/216/219); the VCU requests but does not own HV isolation
-(RC-205; BQ-27); no timing/threshold/bus-load/current becomes a rule until
-controls review + supplier/DBC confirmation upgrades it (RC-202/208/212/215);
-a DBC is a database not a packet + version-hash enforced (RC-213/218); BENCH
-result categories + HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW (RC-197/207/209).
-**Gate 05J / live vehicle commissioning is NOT YET.**
+## Gate 05J — Controlled Vehicle Fitment / No-HV Installation Readiness  · STATUS: NEXT (owner review_48)
+
+Install the VCU/harness physically in the vehicle — **no HV battery, no
+traction enable.**
+
+**Owner scope (review_48) — verify:**
+
+> - install VCU/harness physically in vehicle
+> - no HV battery connected
+> - no traction enable
+> - CAN_1 remains listen-only
+> - verify grounds / shields
+> - verify connector routing
+> - verify no chafing
+> - verify service access
+> - verify LOTO
+> - verify 12V parasitic draw in chassis
+> - verify no Ford bus disturbance
+
+Then, later and engineer-gated (D-008): **Gate 05K — Low-Voltage Vehicle
+Power-On / No-HV Commissioning**; **Gate 05L — Controlled HV
+First-Energization (engineer-approved only, after 05J + 05K, staged safety
+plan + LOTO/PPE, RC-117).**
+
+Enforce throughout — no HV / no traction enable at 05J-05K; CAN_1 stays
+listen-only (TXD-pin proof, RC-186/216/219/221); the VCU requests but does
+not own HV isolation (RC-205; BQ-27); no timing/threshold becomes a rule
+until controls review + supplier confirmation upgrades it
+(RC-202/208/212/215/220/225); **never "certified safe" / no
+compliance/certification claim (RC-224)**; every torque/contactor/HVIL/
+isolation/e-stop fault defaults to torque inhibit + restart lockout +
+engineering review (RC-179). **Gate 05L (HV first-energization) is
+engineer-approved only, NOT before 05J + 05K.**
 
 Enforce throughout — every proof bench/HIL, no vehicle, no live-HV without a
 staged safety plan + LOTO/PPE (RC-117); no timeout/threshold/HIL timing

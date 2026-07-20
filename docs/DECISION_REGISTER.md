@@ -17,6 +17,39 @@ later entry that references it.
 
 ---
 
+## D-008 — Staged post-bench gate ladder to HV: no jump to live commissioning
+
+- Date: 2026-07-16
+- Status: Accepted
+- Context: Through the Gate 05I low-voltage bench series (05I-A logic → 05I-B
+  interlocks → 05I-C comms/sleep-wake → 05I-D integrated fault cascades), the
+  Hunter's Gate 05I-D exit language read "the low-voltage bench assembly is
+  certified safe for installation into the physical vehicle chassis,
+  initiating the physical commissioning phases." In owner review_48 the owner
+  rejected "certified safe" and the direct jump from bench to live
+  commissioning, and defined a staged, gated path instead.
+- Decision: The path from the low-voltage bench to high voltage is a
+  **staged ladder, each stage engineer-gated**:
+  1. **Gate 05I-D** completion permits **engineering review for controlled
+     low-voltage vehicle fitment only** — never "certified safe," and it does
+     not authorize live HV, vehicle movement, road testing, chassis-dyno
+     testing, customer operation, factory Ford bus transmission, or
+     compliance/certification claims.
+  2. **Gate 05J — Controlled Vehicle Fitment / No-HV Installation
+     Readiness:** install the VCU/harness physically; **no HV battery, no
+     traction enable**; CAN_1 listen-only; verify grounds/shields, connector
+     routing, no chafing, service access, LOTO, 12 V parasitic draw in the
+     chassis, no Ford bus disturbance.
+  3. **Gate 05K — Low-Voltage Vehicle Power-On / No-HV Commissioning.**
+  4. **Gate 05L — Controlled HV First-Energization** — engineer-approved
+     only, after 05J + 05K, with a staged safety plan + LOTO/PPE (RC-117).
+- Consequences: Redefines the earlier "Gate 05J = live vehicle
+  commissioning" placeholder — HV first-energization is pushed to **Gate
+  05L**, engineer-approved, behind two no-HV fitment/power-on gates. Binds
+  the roadmap after Gate 05I-D. The Build Engine never marks a bench assembly
+  "certified safe" (RC-224). Recorded in
+  `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md`. Supersedes nothing.
+
 ## D-007 — Controls-authority doctrine: Coordinator ≠ Owner + Build Engine Authority Law
 
 - Date: 2026-07-16

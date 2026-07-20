@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 50 + review_47 — Gate 05I-C v2, full 05I-C1 + 05I-C2)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 50 + review_47); awaiting the Gate 05I-D Integrated Fault Cascades batch or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `fa3e411` (batch-50 archive); end commit: `7ef34b7` (batch-50 reconciliation)
+- Work: updated `GATE05I_C_COMMS_SLEEP_WAKE.md` to v2 (05I-C1 physical/protocol + app-layer + matrix; 05I-C2 per-node sleep current + matrix; CAN_1 simulated-only diagram; brownout early-warning). RC-220..223 (no new CS). Section 58. review_46 fixes realized (C1/C2 split, TXD-pin ACK proof RC-216, physical/protocol vs app-layer RC-217, DBC version hash RC-218). Recurrence + new: values BENCH_TARGET_PROFILE + per-node sleep current (RC-220); CAN_1 diagram simulated/protected only (RC-221); fault-injection wording (RC-222); brownout early-warning hardware (RC-223). Nothing Confirmed; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (invented-values RC-116/133/169/174/180/188/202/208/212/215/220 — eleven artifacts + "immediate" pattern RC-175/198/204/211); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305a/105 + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/HV-shutdown ownership.
+
 ## 2026-07-16 — Claude Code — task complete (batch 49 + review_46 — Gate 05I-C full comms + sleep/wake matrix, "48:75 B follow-up")
 
 ### (archived handoff)

@@ -322,6 +322,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-221 | **"Production CAN_1" diagram → simulated/protected only (owner review_47)**: "[Production CAN_1] → physical cut → VCU CAN_1 Transceiver" could read as a real Ford network nearby → **"[Simulated OEM CAN_1 Traffic / Protected Bench Harness] … physical isolation barrier … VCU CAN_1 Transceiver — passive listen-only, TXD monitored"** + **"No live Ford vehicle network may be connected during Gate 05I-C"** | batch_50 (misleading diagram) | n/a — test boundary rule | **ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (reinforces RC-219) — lanes L7 |
 | RC-222 | **Physical/protocol vs application fault-injection wording (owner review_47)**: bad CRC / bit-stuffing / form / bit errors are **physical/protocol-layer faults injected with a CAN fault-injection tool capable of corrupting frames below the application layer** (rejected by the CAN controller hardware); wrong ID / wrong source address / wrong DLC / bad alive counter / bad app checksum / out-of-range decoded values are **application-layer validation tests** — do not conflate the two test types | batch_50 (test-layer conflation) | n/a — controls rule | **GateLogic / ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (reinforces RC-217) — lanes L7 |
 | RC-223 | **Brownout NVM-save needs early-warning hardware (owner review_47)**: "VCU must save NVM variables before 6.0 V shutdown" only works with adequate warning/time/energy reserve → **"VCU shall preserve NVM integrity during brownout; if a graceful save is required, the early-warning threshold + hold-up capacitance + write-time budget + memory endurance must be verified"**; initial bench profile 6.0 V drop / 9.0 V recovery; final values pending VCU hardware design + bench proof | batch_50 (unproven hardware assumption) | n/a — hardware rule | **NeedsHardwareProof / ControlsSafety** — recorded in `docs/status/GATE05I_C_COMMS_SLEEP_WAKE.md` (extends RC-183) — lanes L7/L8 |
+| RC-224 | **Never "certified safe" — Gate 05I-D exit language (owner review_48)**: "the low-voltage bench assembly is **certified safe for installation** into the physical vehicle chassis" is too strong → **"the assembly becomes eligible for engineering review for controlled physical vehicle fitment; successful Gate 05I-D completion permits engineering review for controlled low-voltage vehicle fitment only"** — it does **not** authorize live HV connection / vehicle movement / road testing / chassis-dyno testing / customer operation / factory Ford bus transmission / compliance or certification claims | batch_51 (overclaimed "certified safe") | n/a — compliance-language rule | **NoComplianceClaim / ControlsSafety** — recorded in `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md`; links D-008 — lanes L7 |
+| RC-225 | **Gate 05I-D test-ID naming + timing labels + no "immediate" (owner review_48, RECURRENCE of RC-220/215 — twelfth artifact — + RC-211)**: test IDs **`05D-###` → `05I-D-###`** (gate-naming consistency); the timings (≤100 ms, ≤50 ms, ≤20 ms, <10 ms, ≤5.0 s, ≤1.0 mA) = `BENCH_TARGET_PROFILE / SUPPLIER_DATA_PENDING / ENGINEERING_REVIEW_REQUIRED / NO_VEHICLE_AUTHORITY`; **"immediately override/drops/suspended" → "within the configured bench target window; measured by timestamped CAN/scope trace; pending approved timing threshold"** | batch_51 (naming + invented timing + "immediate", recurrence) | n/a — parameter / naming rule | **NeedsSupplierData / NoGateAuthority** — recorded in `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md` (extends RC-215/220/211) — lanes L7/L8 |
+| RC-226 | **Charger-plug-during-drive: detect + reject, not "ignore" (owner review_48)**: "VCU ignores charger pilot" → **"the VCU recognizes charger-plug active during the drive-state simulation, declares an illegal-state fault, drops the torque request to zero, blocks drive-enable logic, and blocks charge-path enablement until safe state is restored"** — you want it to detect and reject the impossible state, not ignore it | batch_51 (ignore vs reject) | n/a — controls-safety rule | **ControlsSafety** — recorded in `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md` — lanes L7 |
+| RC-227 | **E-stop cascade ownership cleanup (owner review_48)**: "direct hardware drop-out of all contactor logic power … VCU commands 0 Nm via software" must not imply software creates the physical safety → **"the hardwired E-stop loop owns the physical low-voltage interruption; the VCU observes feedback loss, commands torque-zero on isolated CAN_2 if still powered, logs the E-stop fault, and latches restart lockout"** | batch_51 (VCU over-ownership) | n/a — controls-safety rule | **ControlsSafety** — recorded in `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md` (extends RC-205) — lanes L7 |
+| RC-228 | **Sleep-current node vs total-system consistency (owner review_48)**: 05I-D-010's "≤1.0 mA" is the **VCU node** target, but the earlier section set the **total system** at ≤4.0 mA → keep **`VCU_sleep_current_target ≤1.0 mA`** separate from **`Total_system_sleep_current_target ≤4.0 mA`** (do not mix node-level and total-system targets); both bench-target-profiles | batch_51 (node/total conflation) | n/a — parameter rule | **NeedsSupplierData** — recorded in `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md` (extends RC-220) — lanes L7/L8 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -3780,3 +3785,76 @@ detailing 05I-D next. Queued in `GATE_RESEARCH_QUEUE.md`.
   but does not own HV isolation (BQ-27).
 - Nothing ingested; nothing marked Confirmed; scripts are illustrative
   pseudocode, not production code; Gate 05J NOT YET; ODRs untouched.
+
+---
+
+## 59. Batch 51 + owner review_48 — Gate 05I-D Integrated Fault Cascades + the post-bench gate ladder (D-008) (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_51_gate05id_integrated_fault_cascades.md`
+and `docs/research/raw/owner_reviews/review_48_batch_51_verdict.md`.
+Row additions: RC-224..RC-228 (no new CS). Decision **D-008** added.
+Deliverable: `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md`. Owner:
+"the correct next gate … you are now testing the system as a system."
+
+### Gate 05I-D — the integration layer
+
+A 10-row integrated-fault-cascade matrix (accel+brake override, torque+HVIL
+open, torque+BMS no-discharge, torque+inverter fault, torque+CAN_2 heartbeat
+loss, charge-plug during drive, E-stop during active torque, brownout during
+fault latch, service-clear during fault, sleep with stuck-awake node) under
+the global constraint **CAN_1 silence (TXD pin at Vcc, 0 frames) logged
+across every cascade**, + exit criteria.
+
+### The critical correction — never "certified safe" (RC-224 + D-008)
+
+The Hunter's exit line "the low-voltage bench assembly is **certified safe
+for installation** into the physical vehicle chassis" was rejected →
+"eligible for **engineering review for controlled low-voltage vehicle
+fitment only**; does not authorize live HV / vehicle movement / road testing
+/ chassis-dyno / customer operation / factory Ford bus transmission /
+compliance or certification claims." The owner then defined a **staged
+post-bench gate ladder (Decision Register D-008): Gate 05J** (Controlled
+Vehicle Fitment / No-HV Installation Readiness — no HV battery, no traction
+enable, CAN_1 listen-only, verify grounds/shields/routing/no-chafing/service-
+access/LOTO/12 V parasitic draw/no Ford bus disturbance) **→ Gate 05K**
+(LV Vehicle Power-On / No-HV Commissioning) **→ Gate 05L** (Controlled HV
+First-Energization, engineer-approved only). This redefines the old "Gate
+05J = live vehicle commissioning" placeholder — HV is now Gate 05L, behind
+two no-HV gates.
+
+### Other corrections
+
+- **Test IDs + timing labels + no "immediate" (RC-225, twelfth artifact):**
+  `05D-###` → `05I-D-###`; all timings BENCH_TARGET_PROFILE; measured
+  windows.
+- **Charger-plug detect + reject (RC-226):** the VCU recognizes and rejects
+  the illegal state, never "ignores" it.
+- **E-stop ownership (RC-227):** the hardwired loop owns physical
+  interruption; the VCU observes/commands-torque-zero/logs/latches.
+- **Sleep-current node vs total (RC-228):** VCU node ≤1.0 mA separate from
+  total-system ≤4.0 mA.
+
+### Gate 05I-D status (owner review_48)
+
+`INTEGRATED_FAULT_SEQUENCE_MATRIX_CREATED / LOW_VOLTAGE_BENCH_ONLY /
+REAL_VCU_DUT_REQUIRED / SUPPLIER_LOGIC_BOARDS_REQUIRED /
+CAN_1_SILENCE_REQUIRED_DURING_ALL_CASCADES / TIMING_TARGETS_PENDING_SOURCE_
+REVIEW / NO_LIVE_HV / NO_VEHICLE_MOTION / NO_LIVE_FORD_CAN_TRANSMISSION /
+NO_VEHICLE_CLEARANCE`.
+
+### Next
+
+Owner: **Gate 05J — Controlled Vehicle Fitment / No-HV Installation
+Readiness** (D-008 ladder). Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- Bench-only through 05I-D; the ladder to HV is staged + engineer-gated
+  (D-008); never "certified safe" (RC-224); CAN_1 silent + logged during
+  every cascade; the hardwired E-stop loop owns physical interruption; no
+  bench value becomes a rule until controls review + supplier confirmation
+  upgrades it; the VCU requests but does not own HV isolation (BQ-27).
+- Nothing ingested; nothing marked Confirmed; no compliance/certification
+  claim; scripts are illustrative pseudocode, not production code; ODRs
+  untouched.
