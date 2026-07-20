@@ -350,6 +350,14 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-249 | **Add a manual E-stop abort row for the first live-HV gate (owner review_52)**: timeout + weld sim are not enough — the first live-HV gate must prove the human abort path → **05L-B-007 Manual Abort During Pre-Charge: press E-stop during pre-charge → the hardwired loop interrupts the contactor/pre-charge control path, the VCU logs the abort if still powered, the BMS/PDU goes to its supplier-defined safe state, NO automatic retry**; proof = control-line-drop scope trace + CAN log + HV bus decay + E-stop timestamp | batch_55 (missing human abort proof) | n/a — controls-safety rule | **ControlsSafety / ProofRequirement** — recorded in `GATE05L_B_HV_FIRST_ENERGIZATION.md` (05L-B-007; extends RC-205/227) — lanes L7 |
 | RC-250 | **Do not jump to Gate 05M after 05L-B — insert Gate 05L-C first (owner review_52, amends D-008 ladder)**: after first energization the next gate is **Gate 05L-C — Controlled HV Shutdown, Discharge, and Re-Energization Repeatability** (normal shutdown · emergency shutdown · stored-energy discharge · restart lockout · pre-charge retry limits · IMD fault response · contactor-feedback consistency · no weld false negatives · repeat-cycle stability); inverter enable / motor spin (Gate 05M) only after 05L-C | batch_55 (premature jump to spin) | n/a — gate-ladder rule | **GateStatus / ControlsSafety** — amends D-008; queued as Gate 05L-C NEXT in `GATE_RESEARCH_QUEUE.md` — lanes L7 |
 | RC-251 | **IMD insulation thresholds remain candidate/pending (owner review_52, extends RC-243)**: the Hunter's "final insulation resistance thresholds (e.g., 100 Ω/V or 500 Ω/V)" are **candidate values, not rules** → pending the IMD supplier operational manual + absolute system operating voltage + internal engineering review + applicable safety-standard mapping (FMVSS 305 or ISO 6469-3); IMD must report zero internal errors + isolation within the supplier-defined range | batch_55 (unsourced insulation numbers) | IMD supplier manual + FMVSS 305 / ISO 6469-3 — **NeedsSupplierData / NeedsExactSource** | **NeedsSupplierData / RegulatoryCandidate** — recorded in `GATE05L_B_HV_FIRST_ENERGIZATION.md` (value doctrine) + `GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md` (05L-A-005) — lanes L5/L9 |
+| RC-252 | **Gate 05L-B/05L-C timing/voltage numbers are target profiles, not final gate logic (owner review_53, RECURRENCE — seventeenth artifact)**: ≤50 ms contactor feedback, ΔV ≤5%, ≥95% V_batt, ≤500 ms pre-charge timeout, >60 V discharge, ≤20 ms E-stop dropout, ≤2 retry attempts, 10 repeat cycles = `INITIAL_TARGET_PROFILE / SUPPLIER_DATA_REQUIRED / ENGINEERING_REVIEW_REQUIRED / LIVE_HV_AUTHORITY_PENDING` → "final thresholds are supplier-defined and engineering-approved; initial target values may be used for observation and test planning only" | batch_56 (invented HV timing/voltage) | n/a — parameter rule | **NeedsSupplierData / NoGateAuthority** — recorded in `GATE05L_B_HV_FIRST_ENERGIZATION.md` + `docs/status/GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md` (extends RC-245) — lanes L5/L7/L9 |
+| RC-253 | **05L-B-001 must not require V_caps = 0.0 V (owner review_53)**: depending on inverter/PDU topology, sensing, leakage paths, or measurement reference, exact zero may not hold → **"no unintended DC-link rise beyond the approved leakage/noise threshold; V_caps behaviour must match supplier-defined topology expectations"** (safer than demanding exactly zero) | batch_56 (impossible exact-zero) | n/a — parameter rule (extends RC-241) | **ControlsSafety / NeedsSupplierData** — fixed in `GATE05L_B_HV_FIRST_ENERGIZATION.md` (05L-B-001) — lanes L5/L7 |
+| RC-254 | **05L-B-004 timeout wording is backwards (owner review_53)**: "time counter crosses ≤500 ms timeout limit" is inverted — a timeout is when elapsed time **exceeds** the limit → **"if V_caps fails to reach the supplier-defined pre-charge completion threshold before the supplier-defined timeout expires, the BMS/PDU aborts, opens contactor/pre-charge outputs, logs the pre-charge-timeout DTC, and blocks retry per approved policy; initial observation target 500 ms, final timeout supplier-defined"** | batch_56 (inverted timeout logic) | n/a — logic-correctness rule | **Correctness / ControlsSafety** — fixed in `GATE05L_B_HV_FIRST_ENERGIZATION.md` (05L-B-004) — lanes L7 |
+| RC-255 | **E-stop must not say "instantly" (owner review_53, "instant/immediate" RECURRENCE)**: "all contactors drop out instantly" → **"the hardwired safety loop interrupts the contactor/pre-charge coil supply; dropout timing is measured and compared against the supplier-approved dropout target; no automatic retry is permitted"** ("instant" is never a clean engineering word) | batch_56 ("instant" wording) | n/a — measurement rule | **ControlsSafety / NoGateAuthority** — fixed in `GATE05L_B_HV_FIRST_ENERGIZATION.md` (05L-B-007; extends RC-175/198/204/211/225) — lanes L7 |
+| RC-256 | **05L-C IMD fault injection needs strict fixture language (owner review_53)**: "inject a resistance path between DC+ and chassis ground" must not read like manually attaching a resistor to a live HV rail → **"isolation fault injection may only be performed using an approved, rated, current-limited HV isolation-test fixture or the IMD supplier-supported test method; manual ad-hoc resistance insertion onto live HV rails is forbidden"** (NHTSA: assume HV energized; exposed HV components present shock hazards) | batch_56 (dangerous ad-hoc injection) | NHTSA EV HV-hazard — **NeedsExactSource** (owner-paraphrased) | **ControlsSafety / HardBlock** — recorded in `GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md` (05L-C-004) — lanes L5/L7 |
+| RC-257 | **05L-C-001 shutdown order is supplier-specific (owner review_53, extends RC-246)**: "main-positive first, then main-negative" is one architecture, not universal → **"the contactor opening sequence must follow the BMS/PDU supplier-defined shutdown architecture; initial expected sequence supplier-defined; blocked: any sequence that violates supplier contactor/PDU documentation, creates unintended DC-link persistence, or leaves an unsafe energized path"** | batch_56 (universal shutdown order) | BMS/PDU supplier shutdown architecture — **NeedsSupplierData** | **NeedsSupplierData / ControlsSafety** — recorded in `GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md` (05L-C-001; BQ-27) — lanes L7/L9 |
+| RC-258 | **05L-C-005 weld test is mislabeled — split false-positive vs false-negative (owner review_53)**: the title "No Weld Detection False Negatives" but the criterion tested false positives → **two tests: 05L-C-005A Weld-Detection False Positive (normal contactor bounce must not falsely trigger a weld fault) + 05L-C-005B Weld-Detection False Negative (a simulated welded feedback state is always detected and blocks re-energization)** | batch_56 (conflated weld test) | n/a — test-design rule | **TestCoverage / ControlsSafety** — recorded in `GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md` (05L-C-005A/B) — lanes L7 |
+| RC-259 | **The 05M traction phase must be STAGED — the first 05M gate is not "low-speed traction" (owner review_53, amends D-008 ladder)**: after 05L-C the traction phase splits **05M-A — Inverter Enable Readiness / Zero-Torque Validation → 05M-B — No-Load Motor Spin Validation → 05M-C — Controlled Low-Speed Traction Readiness**; the **first traction-inverter gate proves inverter enable with ZERO torque and ZERO rotation before any spin** — do not call the first 05M gate "low-speed traction" | batch_56 (premature traction naming) | n/a — gate-ladder rule | **GateStatus / ControlsSafety** — amends D-008; queued as Gate 05M-A NEXT in `GATE_RESEARCH_QUEUE.md` — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -4197,5 +4205,87 @@ enable / motor spin (Gate 05M) only after 05L-C. Queued in
   (RC-247/205/227; BQ-27); stored-energy discharge wait (RC-242); IMD
   thresholds supplier/standard-pending (RC-243/251); human E-stop abort proven,
   no auto retry (RC-249); never "certified safe" (RC-224).
+- Nothing ingested; nothing marked Confirmed; no motor spin; no compliance/
+  certification claim; ODRs untouched.
+
+## 64. Batch 56 + owner review_53 — Gate 05L-B ownership realization + Gate 05L-C Shutdown/Discharge/Repeatability (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_56_gate05lb_ownership_gate05lc_repeatability.md`
+and `docs/research/raw/owner_reviews/review_53_batch_56_verdict.md`.
+Row additions: RC-252..RC-259 (no new CS). Deliverables:
+`docs/status/GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md` (new) +
+`docs/status/GATE05L_B_HV_FIRST_ENERGIZATION.md` (ownership realized +
+cleanups). Owner: "a big improvement … you corrected the ownership problem,
+fixed the jump from 05L-B to 05L-C."
+
+### Gate 05L-B ownership + current-limit realized
+
+The Hunter re-emitted the control-ownership partition (VCU = Requester/Monitor;
+**BMS/PDU owns the contactor + pre-charge execution state machines**; hardwired
+loop owns the emergency-interruption path — RC-247 realized), the pre-charge
+current-limit prerequisites (R_pre, E_pulse, C_link, V_batt_max, I_peak,
+thermal-recovery interval, retry ≤2 — RC-248 realized), and the 05L-B matrix
+recast per-test into Request/Owner/Feedback/Measured-HV/Abort columns incl. the
+added 05L-B-007 manual-abort row (RC-249 realized). 05L-B status →
+`DRAFT_READY_WITH_REVISIONS`.
+
+### Gate 05L-C — shutdown/discharge/repeatability before motor spin
+
+Repeat-cycle stability + off-nominal fault handling of the HV sequencing loop,
+live-HV but **zero motor RPM**: normal shutdown, retry-limit lockout, thermal
+cool-down, live IMD fault isolation, weld-detection over cycles. 6-row matrix
+(05L-C-001..004, 005A/005B after the split).
+
+### Owner corrections
+
+- **Numbers are target profiles (RC-252, seventeenth artifact):** ≤50 ms, ΔV
+  ≤5%, ≥95%, ≤500 ms, >60 V, ≤20 ms E-stop, ≤2 retry, 10 cycles →
+  INITIAL_TARGET_PROFILE / SUPPLIER_DATA_REQUIRED / ENGINEERING_REVIEW_REQUIRED
+  / LIVE_HV_AUTHORITY_PENDING.
+- **05L-B-001 must not require V_caps = 0.0 V (RC-253):** no unintended DC-link
+  rise beyond the approved leakage/noise threshold; match supplier topology.
+- **05L-B-004 timeout wording backwards (RC-254):** a timeout = elapsed exceeds
+  the limit; fail-to-reach-threshold-before-expiry → abort/open/log/block.
+- **E-stop not "instantly" (RC-255):** measured dropout vs the supplier-approved
+  target; no auto retry.
+- **05L-C IMD fault injection via approved fixture only (RC-256):** no ad-hoc
+  resistor on a live rail.
+- **05L-C-001 shutdown order supplier-specific (RC-257):** not universal
+  main-positive-first; blocked if it creates DC-link persistence / unsafe path.
+- **05L-C-005 weld test split (RC-258):** 005A false-positive (bounce) + 005B
+  false-negative (simulated weld always detected, blocks re-energization).
+- **Stage the 05M phase (RC-259):** 05M-A inverter-enable/zero-torque → 05M-B
+  no-load spin → 05M-C low-speed traction; the first 05M gate proves inverter
+  enable with ZERO torque + ZERO rotation, not "low-speed traction."
+
+### Gate 05L-B / 05L-C status (owner review_53)
+
+- 05L-B: `DRAFT_READY_WITH_REVISIONS / LIVE_HV_PRESENT /
+  BMS_PDU_CONTACTOR_OWNER_DEFINED / VCU_REQUESTER_MONITOR_ONLY /
+  HARDWIRED_SAFETY_LOOP_OWNER_DEFINED / PRECHARGE_CURRENT_LIMIT_REQUIRED /
+  TIMING_THRESHOLDS_TARGET_ONLY / NO_INVERTER_SWITCHING / ZERO_MOTOR_RPM / …`.
+- 05L-C: `CORRECT_NEXT_GATE / LIVE_HV_PRESENT / ZERO_MOTOR_RPM /
+  NO_INVERTER_SWITCHING / SHUTDOWN_SEQUENCE_PENDING_SUPPLIER_ARCHITECTURE /
+  DISCHARGE_WINDOW_PENDING_SUPPLIER_DATA / IMD_FAULT_INJECTION_FIXTURE_REQUIRED
+  / RETRY_LIMIT_TARGET_ONLY / THERMAL_RECOVERY_TIMER_REQUIRED / …`. Permits
+  **Gate 05M-A only**.
+
+### Next
+
+Owner: **Gate 05M-A — Inverter Enable Readiness / Zero-Torque Validation** (the
+first traction-inverter gate — inverter enable with ZERO torque + ZERO rotation
+before any spin) → 05M-B (no-load spin) → 05M-C (low-speed traction). Queued in
+`GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- Live-HV, zero motor RPM, no inverter switching, no vehicle movement through
+  05L-B/05L-C (RC-252..259); numbers are targets not rules (RC-252); the
+  BMS/PDU owns execution, VCU requests/monitors, hardwired loop owns emergency
+  interruption (RC-247/205/227; BQ-27); IMD injection via approved fixture only
+  (RC-256); shutdown sequence supplier-specific (RC-257); weld detection split
+  FP/FN (RC-258); no motor spin until Gate 05M (staged, after 05L-C, RC-259);
+  never "certified safe" (RC-224).
 - Nothing ingested; nothing marked Confirmed; no motor spin; no compliance/
   certification claim; ODRs untouched.

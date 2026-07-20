@@ -95,6 +95,21 @@ later entry that references it.
   repeat-cycle stability). **Gate 05M (Traction Inverter Control Loop /
   Low-Speed Spin) is deferred — NOT before 05L-C** (RC-250). Full ladder:
   05J → 05K → 05L-A → 05L-B → 05L-C → (later, engineer-approved) 05M.
+- **Amendment (owner review_53, batch_56, RC-252..259): Gate 05L-C created
+  (`GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md`) — live-HV, zero motor RPM; and the
+  05M traction phase is STAGED.** 05L-B/05L-C thresholds are target profiles
+  pending supplier docs + engineering review (RC-252); the E-stop dropout is
+  measured not "instant" (RC-255); the V_caps=0.0 V and inverted-timeout
+  wordings are fixed (RC-253/254); IMD fault injection uses an approved
+  current-limited fixture only — never an ad-hoc resistor on a live rail
+  (RC-256); the contactor shutdown sequence is supplier-specific (RC-257); weld
+  detection splits into false-positive (005A) + false-negative (005B) checks
+  (RC-258). **The 05M rung splits: 05M-A (Inverter Enable Readiness /
+  Zero-Torque Validation) → 05M-B (No-Load Motor Spin Validation) → 05M-C
+  (Controlled Low-Speed Traction Readiness); the first 05M gate proves inverter
+  enable with ZERO torque and ZERO rotation before any spin — not "low-speed
+  traction"** (RC-259). Full ladder: 05J → 05K → 05L-A → 05L-B → 05L-C → 05M-A
+  → 05M-B → 05M-C (each engineer-approved).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the
@@ -103,7 +118,8 @@ later entry that references it.
   `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md`,
   `docs/status/GATE05K_VEHICLE_POWER_ON.md`,
   `docs/status/GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md`,
-  `docs/status/GATE05L_B_HV_FIRST_ENERGIZATION.md`. Supersedes nothing.
+  `docs/status/GATE05L_B_HV_FIRST_ENERGIZATION.md`,
+  `docs/status/GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md`. Supersedes nothing.
 
 ## D-007 — Controls-authority doctrine: Coordinator ≠ Owner + Build Engine Authority Law
 

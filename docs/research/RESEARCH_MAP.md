@@ -371,29 +371,33 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_52):** **Gate 05L-C — Controlled HV
-Shutdown, Discharge, and Re-Energization Repeatability** — the gate inserted
-after first energization and **before any motor spin** (Decision Register
-**D-008**, amended review_52, RC-250). Owner verbatim scope: normal shutdown ·
-emergency shutdown · stored-energy discharge · restart lockout · pre-charge
-retry limits · IMD fault response · contactor-feedback consistency · no
-weld-detection false negatives · repeat-cycle stability. Still engineer-gated,
-live-HV, **no motor spin · no inverter switching · no vehicle movement**; no
-threshold (discharge time, retry limit, IMD trip) is final gate logic until
-supplier docs + engineering review upgrade it (RC-245/248/251); the
-stored-energy discharge-wait rule (RC-242) applies after any exposure/failed
-attempt; the VCU requests but the BMS/PDU owns contactor/pre-charge execution
-and the hardwired loop owns emergency interruption (RC-247/205/227; BQ-27);
-never "certified safe" (RC-224). Only after Gate 05L-C may Gate 05M (traction
-inverter / low-speed spin) even be considered. **Gate 05L-B**
-(`GATE05L_B_HV_FIRST_ENERGIZATION.md`) is `DRAFT_CREATED` / `LIVE_HV_PRESENT` —
-the **first gate with live HV present**, purely observational (no inverter
-switching, zero motor RPM); 7-row matrix (05L-B-001..007) including the manual
-E-stop abort; review_52 corrections: thresholds are initial bench targets only
-(RC-245), contactor sequence is supplier-specific (RC-246), VCU =
-requester/monitor while the BMS/PDU owns execution (RC-247), "current-limited"
-needs a real current-limit definition (RC-248), added the E-stop abort row
-(RC-249), IMD thresholds candidate/pending (RC-251). **Gate 05L-A**
+**Next expected batch (owner review_53):** **Gate 05M-A — Inverter Enable
+Readiness / Zero-Torque Validation** — the first rung of the **staged** 05M
+traction phase (Decision Register **D-008**, amended review_53, RC-259). The
+first traction-inverter gate proves **inverter enable with ZERO torque and ZERO
+rotation before any spin** — the owner explicitly forbids calling the first 05M
+gate "low-speed traction". Staged sub-ladder: **05M-A (inverter enable /
+zero-torque) → 05M-B (no-load motor spin) → 05M-C (controlled low-speed
+traction)**. Engineer-gated, live-HV, **no motor rotation, no vehicle movement,
+no road test, no torque-producing command**; no threshold is final gate logic
+until supplier docs + engineering review upgrade it (RC-252); the BMS/PDU owns
+contactor/pre-charge execution and the hardwired loop owns emergency
+interruption while the VCU requests/monitors (RC-247/205/227; BQ-27); the
+inverter/motor supplier data is required before any spin (BQ-27); never
+"certified safe" (RC-224). **Gate 05L-C**
+(`GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md`) is
+`SHUTDOWN_REPEATABILITY_MATRIX_CREATED` / `LIVE_HV_PRESENT` / `ZERO_MOTOR_RPM` —
+the shutdown/discharge/repeatability gate (6-row matrix 05L-C-001..004 +
+005A/005B); review_53 corrections: numbers are target profiles (RC-252), IMD
+fault injection via an approved current-limited fixture only (RC-256), shutdown
+order supplier-specific (RC-257), weld test split FP/FN (RC-258). **Gate 05L-B**
+(`GATE05L_B_HV_FIRST_ENERGIZATION.md`) is `DRAFT_READY_WITH_REVISIONS` /
+`LIVE_HV_PRESENT` — the **first gate with live HV present**, purely
+observational (no inverter switching, zero motor RPM); ownership realized (VCU
+requester/monitor, BMS/PDU owns execution, hardwired loop owns emergency
+interruption, RC-247); review_53 cleanups: numbers are targets (RC-252),
+V_caps≠0.0 V (RC-253), timeout wording fixed (RC-254), E-stop not "instant"
+(RC-255). **Gate 05L-A**
 (`GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md`) is `HV_AUTHORIZATION_GATE_CREATED`
 / `NO_HV_ENERGIZATION` — the strict pre-energization authorization gate
 (review_51 corrections RC-238..244). **Gate 05J**

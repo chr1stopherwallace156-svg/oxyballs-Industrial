@@ -10,17 +10,28 @@ and software-controlled current-limited pre-charge closure. It is attempted
 movement.** It analyzes the DC-link capacitor voltage-rise curve, verifies
 contactor control synchronisation, and validates weld-detection — nothing more.
 
-**Status (owner review_52): `DRAFT_CREATED` / `LIVE_HV_PRESENT` /
-`QUALIFIED_PERSONNEL_REQUIRED` / `SUPPLIER_PRECHARGE_DATA_REQUIRED` /
-`CONTACTOR_SEQUENCE_PENDING_SUPPLIER_ARCHITECTURE` /
-`VCU_AUTHORITY_REQUESTER_ONLY_UNLESS_DOCUMENTED` / `NO_INVERTER_SWITCHING` /
-`ZERO_MOTOR_RPM` / `NO_VEHICLE_MOVEMENT` / `NO_ROAD_TEST` /
-`NO_TRACTION_COMMAND` / `TIMING_THRESHOLDS_TARGET_ONLY` /
-`ENGINEERING_REVIEW_REQUIRED`.** Ladder: **05J → 05K → 05L-A (authorization) →
-05L-B (THIS GATE — first live HV, pre-charge observation only) → 05L-C
-(controlled HV shutdown/discharge/re-energization repeatability) → (later) 05M
-(traction inverter / low-speed spin, NOT before 05L-C)** (D-008, amended
-review_52).
+**Status (owner review_53): `DRAFT_READY_WITH_REVISIONS` / `LIVE_HV_PRESENT` /
+`QUALIFIED_PERSONNEL_REQUIRED` / `BMS_PDU_CONTACTOR_OWNER_DEFINED` /
+`VCU_REQUESTER_MONITOR_ONLY` / `HARDWIRED_SAFETY_LOOP_OWNER_DEFINED` /
+`SUPPLIER_PRECHARGE_DATA_REQUIRED` / `PRECHARGE_CURRENT_LIMIT_REQUIRED` /
+`TIMING_THRESHOLDS_TARGET_ONLY` / `NO_INVERTER_SWITCHING` / `ZERO_MOTOR_RPM` /
+`NO_VEHICLE_MOVEMENT` / `NO_TRACTION_COMMAND` / `NO_ROAD_TEST_AUTHORITY`.**
+Ladder: **05J → 05K → 05L-A (authorization) → 05L-B (THIS GATE — first live HV,
+pre-charge observation only) → 05L-C (controlled HV shutdown/discharge/
+re-energization repeatability) → (later, staged) 05M-A (inverter enable /
+zero-torque) → 05M-B (no-load spin) → 05M-C (controlled low-speed traction)**
+(D-008, amended review_53).
+
+**Ownership confirmed (owner review_53, RC-247 realized):** the **BMS/PDU is
+the logical + physical owner** of the contactor + pre-charge execution state
+machines; the **VCU is Requester/Monitor only** (broadcasts HV_Enable_Request
+over CAN_2/CAN_3, never drives the HV contactor coils unless a supplier
+architecture assigns it direct authority); the **hardwired safety loop is the
+absolute owner of the emergency-interruption path**, bypassing all software.
+**Current-limit prerequisites are formally declared** (R_pre, E_pulse, C_link,
+V_batt_max, I_peak = V_batt_max/R_pre, thermal-recovery interval, retry limit
+≤2 target) — the gate stays blocked until they are extracted from datasheets
+and engineering-approved (RC-248).
 
 ## Blocking prerequisites — 05L-B stays BLOCKED without these (owner review_52)
 
@@ -84,13 +95,13 @@ switching; zero motor RPM.
 
 | Test | Scenario | Request → owner | Trigger | Expected safety cascade | Target (INITIAL_BENCH_TARGET) | Blocked (IMMEDIATE ABORT) | Proof |
 |---|---|---|---|---|---|---|---|
-| 05L-B-001 | main-negative closure | VCU **requests** → BMS/PDU **owns** (per supplier arch, RC-246/247) | power-up command via calibration interface (post 05L-A signoff) | the owning controller closes main-negative per the supplier sequence; poll aux feedback | contactor closes within the supplier-defined window (≤50 ms target); V_caps stays 0.0 V | main-positive closing prematurely / pre-charge engaging out of the supplier order | high-speed CAN log: contactor state bytes vs timing |
+| 05L-B-001 | main-negative closure | VCU **requests** → BMS/PDU **owns** (per supplier arch, RC-246/247) | power-up command via calibration interface (post 05L-A signoff) | the owning controller closes main-negative per the supplier sequence; poll aux feedback | contactor closes within the supplier-defined window (≤50 ms target); **no unintended DC-link rise beyond the approved leakage/noise threshold; V_caps behaviour matches supplier-defined topology expectations (RC-253, not "exactly 0.0 V")** | main-positive closing prematurely / pre-charge engaging out of the supplier order | high-speed CAN log: contactor state bytes vs timing |
 | 05L-B-002 | pre-charge inrush & curve audit | VCU requests → BMS/PDU owns | close the pre-charge relay; monitor DC-link via CAN + HV scope | current through the current-limited resistor charges C_link; V_caps rises on a clean RC curve V_caps(t)=V_batt(1−e^(−t/RC)) | V_caps reaches the **supplier-defined completion threshold** (≥95% target) within the **supplier-defined timeout** (≤500 ms target) | flat-line (0 V rise) / instantaneous spike (0 ms short-circuit) | HV differential scope capture of the DC-link rise |
 | 05L-B-003 | delta-V threshold validation | VCU requests → BMS/PDU owns | allow V_caps to reach the matching boundary (≤5% ΔV target) | main-positive close request permitted **only after** the ΔV criterion is met | main-positive requested only after ΔV ≤ (supplier/target) | main-positive closing when ΔV above target (arcing/pitting risk) | time-correlated trace of V_batt, V_caps, main-positive command |
-| 05L-B-004 | pre-charge timeout protection | VCU requests → BMS/PDU owns; hardwired loop backstops | inject mock bleed resistance so V_caps cannot reach the target | the owning controller detects the timeout exceeded without the delta match | pre-charge relay opens at the supplier-defined limit (≤500 ms target); main-positive blocked; fault latched | pre-charge loop energised indefinitely (resistor thermal burnout) | CAN error trace: pre-charge timeout DTC |
+| 05L-B-004 | pre-charge timeout protection | VCU requests → BMS/PDU owns; hardwired loop backstops | inject mock bleed resistance so V_caps cannot reach the target | **if V_caps fails to reach the supplier-defined completion threshold *before* the supplier-defined timeout *expires* (RC-254, a timeout = elapsed time exceeds the limit), the BMS/PDU aborts** | BMS/PDU opens contactor/pre-charge outputs, logs the pre-charge-timeout DTC, blocks retry per approved policy; initial observation target 500 ms, final timeout supplier-defined | pre-charge loop energised indefinitely (resistor thermal burnout) | CAN error trace: pre-charge timeout DTC |
 | 05L-B-005 | contactor weld-fault simulation | VCU monitors; BMS/PDU owns pre-flight logic | short an aux feedback loop; assert logic-high on main-positive feedback before power-up | pre-flight all-open check detects the state mismatch, refuses to cycle control lines, latches a weld fault | all contactor drive commands blocked from going high; drive lines stay 0.0 V | power-up proceeding with an active weld feedback fault | UDS fault-register printout: contactor-weld DTC |
 | 05L-B-006 | passive stored-energy discharge | BMS/PDU owns contactor open; passive bleeder decays | emergency software shutdown or ignition OFF from the energized observational state | main contactors open cleanly; C_link energy passively bleeds; stored-energy wait (RC-242) applies before access | DC bus below the **supplier-defined discharge window** (≤60 V target) within the supplier time budget | bus staying high (>60 V target) beyond the approved budget with no warning | continuous scope capture of voltage decay vs time |
-| 05L-B-007 | **manual abort during pre-charge (owner review_52, RC-249)** | human → **hardwired safety loop owns** the interruption; VCU logs; BMS/PDU → safe state | **press E-stop during pre-charge observation** | the hardwired loop interrupts the contactor/pre-charge control path; the VCU logs the abort if still powered; the BMS/PDU transitions to its supplier-defined safe state; **no automatic retry** | control-line drop within the hardwired-loop response (measured latency, RC-175); no auto-restart | E-stop does not interrupt the control path / any automatic retry | scope trace of control-line drop + CAN log + HV bus decay + E-stop event timestamp |
+| 05L-B-007 | **manual abort during pre-charge (owner review_52/53, RC-249/255)** | human → **hardwired safety loop owns** the interruption; VCU logs; BMS/PDU → safe state | **press E-stop during pre-charge observation** | the hardwired safety loop **interrupts the contactor/pre-charge coil supply** (not "instantly", RC-255); the VCU logs the abort if still powered; the BMS/PDU transitions to its supplier-defined safe state; **no automatic retry** | **dropout timing is measured and compared against the supplier-approved dropout target** (≤20 ms initial target, RC-252); no auto-restart | E-stop does not interrupt the coil supply / any automatic retry | scope trace of control-line drop + CAN log + HV bus decay + E-stop event timestamp |
 
 ## Gate 05L-B exit criteria (owner review_52)
 

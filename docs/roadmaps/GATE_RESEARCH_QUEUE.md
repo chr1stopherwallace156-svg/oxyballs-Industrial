@@ -584,7 +584,7 @@ work-practice/LOTO + **NHTSA EV HV-hazard** guidance (NeedsExactSource —
 owner-paraphrased). Permits **Gate 05L-B only**, after signed engineering
 authorization; authorizes no energization by itself.
 
-## Gate 05L-B — Controlled HV First-Energization / Current-Limited Pre-Charge Observation  · STATUS: DRAFT_CREATED / LIVE_HV_PRESENT (batch_55)
+## Gate 05L-B — Controlled HV First-Energization / Current-Limited Pre-Charge Observation  · STATUS: DRAFT_READY_WITH_REVISIONS / LIVE_HV_PRESENT (batch_55 + ownership realized batch_56)
 
 Deliverable `docs/status/GATE05L_B_HV_FIRST_ENERGIZATION.md` — the **first
 gate with LIVE HV PRESENT**: first LOTO-pin removal + MSD connect + software-
@@ -607,36 +607,50 @@ row (RC-249); IMD thresholds candidate/pending (RC-251). Permits **Gate 05L-C
 only**; does not authorize motor spin / inverter switching / traction command /
 vehicle movement / chassis dyno / road testing / customer operation.
 
-## Gate 05L-C — Controlled HV Shutdown, Discharge, and Re-Energization Repeatability  · STATUS: NEXT (owner review_52)
+## Gate 05L-C — Controlled HV Shutdown, Discharge, and Re-Energization Repeatability  · STATUS: SHUTDOWN_REPEATABILITY_MATRIX_CREATED / LIVE_HV_PRESENT (batch_56)
 
-Owner review_52: do **not** jump to Gate 05M — insert Gate 05L-C first. After
-first energization, prove the **shutdown/discharge/repeatability** layer before
-any inverter enable or motor spin.
+Deliverable `docs/status/GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md` — repeat-cycle
+stability + off-nominal fault handling of the HV sequencing loop, **live-HV but
+zero motor RPM / no inverter switching / no vehicle movement**. 6-row matrix
+(05L-C-001 normal coordinated shutdown, 002 pre-charge retry-limit lockout, 003
+thermal cool-down enforcement, 004 live IMD fault isolation via approved
+fixture, 005A weld-detection false-positive, 005B weld-detection false-negative).
+Status (review_53): `CORRECT_NEXT_GATE / LIVE_HV_PRESENT / ZERO_MOTOR_RPM /
+NO_INVERTER_SWITCHING / SHUTDOWN_SEQUENCE_PENDING_SUPPLIER_ARCHITECTURE /
+DISCHARGE_WINDOW_PENDING_SUPPLIER_DATA / IMD_FAULT_INJECTION_FIXTURE_REQUIRED /
+RETRY_LIMIT_TARGET_ONLY / THERMAL_RECOVERY_TIMER_REQUIRED / NO_TRACTION_COMMAND
+/ NO_VEHICLE_MOVEMENT / NO_ROAD_TEST_AUTHORITY`. Corrections (review_53):
+numbers are target profiles (RC-252); IMD fault injection via an approved,
+rated, current-limited fixture only — no ad-hoc resistor on a live rail
+(RC-256); shutdown order is supplier-specific (RC-257); weld test split into
+false-positive (005A) + false-negative (005B) (RC-258). Permits **Gate 05M-A
+only**.
 
-**Owner scope (review_52) — that gate proves:**
+## Gate 05M-A — Inverter Enable Readiness / Zero-Torque Validation  · STATUS: NEXT (owner review_53)
 
-> - normal shutdown
-> - emergency shutdown
-> - stored-energy discharge
-> - restart lockout
-> - pre-charge retry limits
-> - IMD fault response
-> - contactor feedback consistency
-> - no weld detection false negatives
-> - repeat cycle stability
+Owner review_53: do **not** proceed to Gate 05M until 05L-C is fully defined,
+then the traction phase is **staged** — the first traction-inverter gate proves
+**inverter enable with ZERO torque and ZERO rotation before any spin** (do NOT
+call the first 05M gate "low-speed traction", RC-259).
 
-Enforce throughout — engineer-gated, live-HV, **still no motor spin / no
-inverter switching / no vehicle movement**; no threshold (discharge time,
-retry limit, IMD trip) is final gate logic until supplier docs + engineering
-review upgrade it (RC-245/248/251); the stored-energy discharge-wait rule
-applies after any exposure or failed attempt (RC-242); the VCU requests but
-does not own contactor/pre-charge/HV isolation — the BMS/PDU owns execution,
-the hardwired loop owns emergency interruption (RC-247/205/227; BQ-27); the
-human E-stop abort path stays proven with no auto retry (RC-249); never
-"certified safe" / no compliance claim (RC-224). **Only after Gate 05L-C** may
-Gate 05M (Traction Inverter Control Loop & Low-Speed Spin Validation) even be
-considered — under controlled spin profiles, engineer-approved, staged safety
-plan + LOTO/PPE (RC-117/RC-250).
+**Owner staged sub-ladder (review_53):**
+
+> - 05M-A — Inverter Enable Readiness / Zero-Torque Validation
+> - 05M-B — No-Load Motor Spin Validation
+> - 05M-C — Controlled Low-Speed Traction Readiness
+
+Enforce throughout — engineer-gated, live-HV, **05M-A is ZERO torque + ZERO
+rotation**: no motor spin, no vehicle movement, no road test, no traction
+command that produces rotation; no threshold (enable timing, torque-zero
+tolerance, fault-response window) is final gate logic until supplier docs +
+engineering review upgrade it (RC-252); the BMS/PDU owns contactor/pre-charge
+execution and the hardwired loop owns emergency interruption while the VCU
+requests/monitors (RC-247/205/227; BQ-27); the inverter/motor supplier data
+(DC-link, torque map, resolver/encoder, fault outputs) is required before any
+spin (BQ-27); the stored-energy discharge-wait rule applies after any exposure
+(RC-242); never "certified safe" / no compliance claim (RC-224). Only after
+05M-A → 05M-B (no-load spin) → 05M-C (controlled low-speed traction), each
+engineer-approved under a staged safety plan + LOTO/PPE (RC-117).
 
 Enforce throughout — no HV / no traction enable / no vehicle motion at
 05J-05K; CAN_1 stays listen-only + passive on the live OEM Ford bus (TXD-pin

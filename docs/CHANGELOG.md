@@ -5,6 +5,53 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 56 + review_53: Gate 05L-B ownership realization + Gate 05L-C Shutdown/Discharge/Repeatability
+
+- Archived batch_56 (Gate 05L-B ownership/current-limit + Gate 05L-C) and
+  review_53 1:1 (commit `4a6e9ee`). New rows RC-252..259 (no new CS). Section
+  64. New deliverable `docs/status/GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md` —
+  repeat-cycle stability + off-nominal fault handling of the HV sequencing loop
+  (live-HV, **zero motor RPM, no inverter switching**); 6-row matrix
+  (05L-C-001..004, 005A/005B). `docs/status/GATE05L_B_HV_FIRST_ENERGIZATION.md`
+  ownership realized + cleanups. Owner: "a big improvement … you corrected the
+  ownership problem, fixed the jump from 05L-B to 05L-C."
+- **Gate 05L-B ownership realized:** VCU = Requester/Monitor only; **BMS/PDU
+  owns the contactor + pre-charge execution state machines**; the hardwired
+  safety loop owns the emergency-interruption path (RC-247). Current-limit
+  prerequisites formally declared (R_pre, E_pulse, C_link, V_batt_max, I_peak,
+  thermal-recovery interval, retry ≤2) — gate blocked until engineering-approved
+  (RC-248). Status → `DRAFT_READY_WITH_REVISIONS`.
+- **Owner corrections (RC-252..259):**
+  - RC-252 — 05L-B/05L-C numbers (≤50 ms, ΔV ≤5%, ≥95%, ≤500 ms, >60 V, ≤20 ms
+    E-stop, ≤2 retry, 10 cycles) are target profiles only (seventeenth artifact
+    of the invented-values family): INITIAL_TARGET_PROFILE / SUPPLIER_DATA_
+    REQUIRED / ENGINEERING_REVIEW_REQUIRED / LIVE_HV_AUTHORITY_PENDING.
+  - RC-253 — 05L-B-001 must not require V_caps = 0.0 V → "no unintended DC-link
+    rise beyond the approved leakage/noise threshold; match supplier topology."
+  - RC-254 — 05L-B-004 timeout wording was backwards (a timeout = elapsed
+    exceeds the limit); corrected to fail-to-reach-threshold-before-expiry →
+    abort/open/log/block.
+  - RC-255 — E-stop must not say "instantly"; measured dropout vs the
+    supplier-approved target, no auto retry.
+  - RC-256 — 05L-C IMD fault injection only via an approved, rated,
+    current-limited HV isolation-test fixture / IMD supplier method; manual
+    ad-hoc resistance insertion onto live HV rails is forbidden (NHTSA).
+  - RC-257 — 05L-C-001 shutdown order is supplier-specific (not universal
+    main-positive-first); blocked if it creates DC-link persistence / an unsafe
+    energized path.
+  - RC-258 — 05L-C-005 weld test split into 005A false-positive (bounce must
+    not falsely trigger) + 005B false-negative (simulated weld always detected,
+    blocks re-energization).
+  - RC-259 — the 05M traction phase is staged: 05M-A (inverter enable /
+    zero-torque) → 05M-B (no-load spin) → 05M-C (low-speed traction); the first
+    05M gate proves inverter enable with ZERO torque + ZERO rotation, not
+    "low-speed traction."
+- Gate 05L-C status `SHUTDOWN_REPEATABILITY_MATRIX_CREATED / LIVE_HV_PRESENT /
+  ZERO_MOTOR_RPM / …`; permits **Gate 05M-A only**. **D-008 amended** (ladder:
+  05J → 05K → 05L-A → 05L-B → 05L-C → 05M-A → 05M-B → 05M-C). RESEARCH_MAP +
+  GATE_RESEARCH_QUEUE next → **Gate 05M-A**. Nothing Confirmed; no motor spin;
+  never "certified safe" (RC-224); ODRs untouched.
+
 ## 2026-07-16 — RH batch 55 + review_52: Gate 05L-B Controlled HV First-Energization / Current-Limited Pre-Charge Observation
 
 - Archived batch_55 (Gate 05L-B) and review_52 1:1 (commit `6a4c351`). New
