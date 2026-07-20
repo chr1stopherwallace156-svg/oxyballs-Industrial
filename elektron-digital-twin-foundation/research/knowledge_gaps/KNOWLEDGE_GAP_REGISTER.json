@@ -1,11 +1,11 @@
 {
   "document_id": "KNOWLEDGE_GAP_REGISTER",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "status": "ACTIVE",
   "schema": "schemas/knowledge-gap.schema.json",
-  "decision": "DT-D055",
+  "decision": "DT-D056",
   "research_sprint": "RL-024",
-  "next_id": "KG-011",
+  "next_id": "KG-013",
   "gaps": [
     {
       "gap_id": "KG-001",
@@ -74,7 +74,21 @@
       "status": "BLOCKED",
       "path": "research/knowledge_gaps/KG-010.json",
       "focus": "Mid-chassis XMBR thickness (MEPQ-005)"
+    },
+    {
+      "gap_id": "KG-011",
+      "priority": "CRITICAL",
+      "status": "BLOCKED",
+      "path": "research/knowledge_gaps/KG-011.json",
+      "focus": "Aft hole tolerances (MEPQ-006)"
+    },
+    {
+      "gap_id": "KG-012",
+      "priority": "CRITICAL",
+      "status": "BLOCKED",
+      "path": "research/knowledge_gaps/KG-012.json",
+      "focus": "Frame dynamic loads (MEPQ-007)"
     }
   ],
-  "focus": "MEPQ-003 QUEUED (EWD); Mission F discovery open; Mission E deferred with MEPQ-001/002/004/005; export research/mepq/exports/MEPQ_ACTIVE_CHECKLIST.md"
+  "focus": "Three-layer protocol active; Mission D L1 focus; MEPQ-003 QUEUED; Mission E deferred"
 }

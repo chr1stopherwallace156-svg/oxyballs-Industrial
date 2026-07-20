@@ -550,3 +550,25 @@ DT-D054 — `MEPQ_ACTIVE_OPTION_B_MISSION_F_DISCOVERY`.
 ### Status
 
 DT-D055 — `DECON_PHASE2_REGISTERED_DEFERRED_MEPQ_EXPORT`.
+
+---
+
+## RL-025 — Three-layer graph separation + Mission D L1 focus
+
+- **Date:** 2026-07-20
+- **Layer:** graph architecture / Mission D truth discipline
+- **Agent:** Cursor Cloud Agent
+- **Question:** How to lock L1/L2/L3 separation on ICE decon reprocessing, and which next target under those constraints?
+
+### Findings
+
+1. **Three-Layer Protocol** admitted — L2/L3 must not pollute L1.
+2. ICE decon refiled: L1 truth (with UNKNOWNs), L2 estimates (38.3 box stays estimate), L3 battery proposal.
+3. L1 scrub: radiator material/manufacturing rejected; fuel capacity restored to **ASSERTION_EXTRACTED** 40 gal aft-of-axle std.
+4. **MEPQ-006/007** registered (metrology tolerances; frame loads).
+5. **Option 2 selected** — Mission D L1 focus (spindle #, linkage, alignment UNKNOWN).
+6. Option 1 already open — Mission F continues with L1 harness vs L3 VCU taps.
+
+### Status
+
+DT-D056 — `THREE_LAYER_PROTOCOL_ACTIVE_MISSION_D_L1_FOCUS`.

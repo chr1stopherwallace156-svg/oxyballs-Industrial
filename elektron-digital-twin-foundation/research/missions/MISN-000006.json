@@ -1,11 +1,19 @@
 {
   "mission_id": "MISN-000006",
   "id_immutable": true,
-  "aliases": ["EDTS-MISN-006", "Subsystem-Mission-F", "Mission-F"],
-  "title": "Subsystem Mission F — Low-Voltage Gateway Interconnect Discovery (EWD Prep)",
-  "objective": "Map cab-to-frame / cab-to-engine harness families and define exact open questions for the Electrical Wiring Diagram manual — without inventing connector pinouts, CAN resistances, or splice procedures.",
-  "target_gap_ids": ["KG-008"],
-  "target_mepq_ids": ["MEPQ-003"],
+  "aliases": [
+    "EDTS-MISN-006",
+    "Subsystem-Mission-F",
+    "Mission-F"
+  ],
+  "title": "Subsystem Mission F \u2014 Low-Voltage Gateway Interconnect Discovery (EWD Prep)",
+  "objective": "Map cab-to-frame / cab-to-engine harness families and define exact open questions for the Electrical Wiring Diagram manual \u2014 without inventing connector pinouts, CAN resistances, or splice procedures.",
+  "target_gap_ids": [
+    "KG-008"
+  ],
+  "target_mepq_ids": [
+    "MEPQ-003"
+  ],
   "success_criteria": [
     "Produce an open-question inventory of LV gateway interconnects (connector candidates, network names, APPS/ignition/cluster touchpoints) with SOURCE_DISCOVERED / CANDIDATE status only.",
     "Bind each open question to MEPQ-003 / KG-008 and to SRC-CAND-000006 (EWD) + MISN-000003 commercial handoff.",
@@ -18,15 +26,24 @@
   ],
   "completion_status": "NOT_STARTED",
   "deferred": false,
-  "assigned_src_cand_ids": ["SRC-CAND-000006", "SRC-CAND-000002"],
+  "assigned_src_cand_ids": [
+    "SRC-CAND-000006",
+    "SRC-CAND-000002"
+  ],
   "bound_vehicle_instance_id": "VEH-000001",
   "bound_configuration_id": "CFG-000001",
   "research_sprint": "RL-023",
   "decision": "DT-D054",
-  "priority_note": "Option B selected. Parallel to Mission D — does not replace MISN-000003 commercial EWD acquire. Does not un-defer Mission E.",
+  "priority_note": "Option B selected. Parallel to Mission D \u2014 does not replace MISN-000003 commercial EWD acquire. Does not un-defer Mission E.",
   "notes": [
     "Discovery mission only until EWD bytes land.",
     "Operator connector ID C127 remains OPERATOR_CANDIDATE.",
-    "Coordinates with MISN-000001 (EWD primary) and MISN-000003 (commercial handoff)."
-  ]
+    "Coordinates with MISN-000001 (EWD primary) and MISN-000003 (commercial handoff).",
+    "DT-D056: Keep EV controller tap ideas in Layer 3; Layer 1 = factory harness truth only."
+  ],
+  "layer_protocol": "THREE_LAYER_SEPARATION",
+  "layer_rules": {
+    "L1": "OEM harness/connector/CAN topology facts only (after EWD)",
+    "L3": "VCU tap / splice / conversion routing proposals \u2014 never promote to L1 without evidence"
+  }
 }

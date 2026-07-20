@@ -1,0 +1,99 @@
+{
+  "document_id": "ICE_DECON_PHASE2_L1_TRUTH",
+  "layer": "L1_VEHICLE_ENGINEERING_TRUTH",
+  "decision": "DT-D056",
+  "mission_id": "MISN-000005",
+  "mission_status": "DEFERRED",
+  "authority_note": "Only OEM-token facts or explicit UNKNOWN. Operator material/manufacturing narratives demoted.",
+  "nodes": [
+    {
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
+      "existence": {
+        "status": "PLATFORM_EXPECTED_NOT_INSTANCE_VERIFIED",
+        "notes": "Radiator expected on ICE Chassis Cab; not ASSERTION_VERIFIED via WSM/photo for VEH-000001."
+      },
+      "functional_role": {
+        "value": "ICE coolant heat rejection",
+        "status": "CANDIDATE_FUNCTIONAL_DESCRIPTION"
+      },
+      "interfaces": [
+        {
+          "iface_id": "IFACE-RAD-LOWER-MOUNTS",
+          "description": "Lower radiator-to-structure interfaces (operator: pin-and-bushing into forward towers)",
+          "status": "CANDIDATE_UNVERIFIED",
+          "count": "UNKNOWN",
+          "fastener_spec": "UNKNOWN"
+        },
+        {
+          "iface_id": "IFACE-RAD-UPPER-BRACE",
+          "description": "Upper attachment to core support (operator: two fasteners)",
+          "status": "CANDIDATE_UNVERIFIED",
+          "fastener_count": "UNKNOWN",
+          "fastener_spec": "UNKNOWN"
+        }
+      ],
+      "dimensions": "UNKNOWN",
+      "mass": "UNKNOWN",
+      "cg": "UNKNOWN",
+      "material_composition": {
+        "operator_claim": "Aluminum core; glass-filled nylon end tanks",
+        "status": "REJECTED_FROM_L1",
+        "reason": "No token-anchored OEM cite for exact silo; leave UNKNOWN until WSM/parts/physical"
+      },
+      "manufacturing_method": {
+        "operator_claim": "Core brazing; injection-molded tanks; crimped headers",
+        "status": "REJECTED_FROM_L1",
+        "reason": "Process narrative without OEM evidence"
+      },
+      "mepq_related": ["MEPQ-001"]
+    },
+    {
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
+      "existence": {
+        "status": "ASSERTION_EXTRACTED_SERIES",
+        "notes": "F-450 Chassis Cab standard equipment lists aft-of-axle fuel tank."
+      },
+      "functional_role": {
+        "value": "Liquid fuel storage",
+        "status": "DOCUMENT_SUPPORTED"
+      },
+      "capacity": {
+        "value": "40 gallon aft-of-axle mounted tank (std)",
+        "status": "ASSERTION_EXTRACTED",
+        "token_anchor": {
+          "source_id": "SRC-CAND-000010",
+          "page_extract": 48,
+          "section": "Standard Equipment — F-450 Chassis Cab — FUEL TANK"
+        },
+        "notes": [
+          "Operator marked capacity UNKNOWN pending VIN — incorrect demotion for series std.",
+          "Physical VIN/build sheet still required to confirm dual-tank diesel option vs std single 40 gal aft.",
+          "Alternate: 26.5 gal midship + 40 gal aft dual (diesel) also listed — option-dependent."
+        ]
+      },
+      "spatial_location": {
+        "value": "Aft of rear axle centerline; between frame rails",
+        "status": "DOCUMENT_SUPPORTED",
+        "frame_width_context_in": {
+          "value_in": 34.2,
+          "status": "ASSERTION_EXTRACTED",
+          "token_anchor": {"source_id": "SRC-CAND-000010", "code": "H"}
+        }
+      },
+      "frame_attachment": {
+        "description": "Supported by strap bands to frame vertical webs (operator: two curved straps)",
+        "status": "CANDIDATE_UNVERIFIED",
+        "strap_count": "UNKNOWN",
+        "hole_geometry": "UNKNOWN",
+        "clamp_preload": "UNKNOWN"
+      },
+      "mepq_related": ["MEPQ-004", "MEPQ-006"]
+    }
+  ],
+  "explicitly_not_on_l1": [
+    "MUST_REMOVE / RETAIN_AND_REPURPOSE",
+    "38.3×30×8 packaging box",
+    "Battery cradle proposals",
+    "Confidence percentages"
+  ]
+}

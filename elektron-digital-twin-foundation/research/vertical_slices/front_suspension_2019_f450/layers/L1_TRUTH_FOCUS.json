@@ -1,0 +1,96 @@
+{
+  "document_id": "MISSION_D_L1_TRUTH_FOCUS",
+  "layer": "L1_VEHICLE_ENGINEERING_TRUTH",
+  "decision": "DT-D056",
+  "mission_id": "MISN-000004",
+  "option_selected": 2,
+  "focus": "Establish Layer 1 truth only for 4x2 front axle / steering / linkage — no L2 estimates or L3 EV routing.",
+  "locked_configuration": {
+    "proposal_configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+    "kernel_configuration_id": "CFG-000001",
+    "vehicle_instance_id": "VEH-000001"
+  },
+  "admitted_l1_facts": [
+    {
+      "attr": "front_axle_type_4x2",
+      "value": "Monobeam",
+      "status": "ASSERTION_EXTRACTED",
+      "source": "SRC-CAND-000010 p.55"
+    },
+    {
+      "attr": "front_axle_make_material",
+      "value": "Dana / Forged Steel",
+      "status": "ASSERTION_EXTRACTED",
+      "source": "SRC-CAND-000010 p.55"
+    },
+    {
+      "attr": "front_track_I",
+      "value_in": 74.8,
+      "status": "ASSERTION_EXTRACTED",
+      "source": "SRC-CAND-000010 code I"
+    },
+    {
+      "attr": "spring_centers_in",
+      "value_in": 46.45,
+      "status": "ASSERTION_EXTRACTED",
+      "source": "SRC-CAND-000010 p.55"
+    },
+    {
+      "attr": "steering_type",
+      "value": "Hydraulic power assisted recirculating ball with steering damper",
+      "status": "ASSERTION_EXTRACTED",
+      "source": "SRC-CAND-000010 p.48"
+    },
+    {
+      "attr": "front_axle_datum_station",
+      "value": "X-038.3 (front overhang / axle centerline)",
+      "status": "ASSERTION_EXTRACTED",
+      "source": "SRC-CAND-000010 code B"
+    }
+  ],
+  "explicit_unknowns_l1": [
+    {
+      "attr": "spindle_casting_oem_number",
+      "status": "UNKNOWN",
+      "requires": ["SRC-CAND-000003 parts catalog", "physical casting read"]
+    },
+    {
+      "attr": "linkage_topology_haltenberger_detail",
+      "status": "UNKNOWN",
+      "requires": ["SRC-CAND-000002 WSM"]
+    },
+    {
+      "attr": "ball_joint_torque_and_castle_nut_spec",
+      "status": "UNKNOWN",
+      "requires": ["SRC-CAND-000002 WSM"]
+    },
+    {
+      "attr": "camber_caster_toe_specs",
+      "status": "UNKNOWN",
+      "requires": ["SRC-CAND-000002 WSM"]
+    },
+    {
+      "attr": "radius_arm_count_material_4x2",
+      "status": "UNKNOWN",
+      "notes": "4x2 table extract truncated; do not copy 4x4 stamped HSLA"
+    },
+    {
+      "attr": "structural_load_paths_jounce_braking",
+      "status": "UNKNOWN",
+      "notes": "OEM load limits are L1 if published; otherwise MEPQ-007 — do not invent on L1"
+    }
+  ],
+  "forbidden_on_this_pass": [
+    "drop-forged beam as primary term (use Monobeam)",
+    "L2 packaging estimates",
+    "L3 EV motor mount proposals",
+    "Invented spindle casting numbers",
+    "Confidence %"
+  ],
+  "next_actions": [
+    "Parse SRC-CAND-000001 BAG for front axle/steering layout pages",
+    "Acquire SRC-CAND-000002 WSM for linkage/alignment/torque",
+    "Acquire SRC-CAND-000003 for spindle/casting numbers",
+    "Keep all EV controller / EDU ideas in L3 only"
+  ]
+}

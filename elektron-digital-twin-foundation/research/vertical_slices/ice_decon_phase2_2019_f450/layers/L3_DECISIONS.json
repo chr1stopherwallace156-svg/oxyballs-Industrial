@@ -1,0 +1,28 @@
+{
+  "document_id": "ICE_DECON_PHASE2_L3_DECISIONS",
+  "layer": "L3_ENGINEERING_DECISIONS",
+  "decision": "DT-D056",
+  "authority_status": "PROPOSAL_ONLY",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "nodes": [
+    {
+      "prop_id": "PROP-2019-F450-EV-CONV-BATTERY-AFT",
+      "target_envelope": "ANL-2019-F450-AFT-AXLE-BAY",
+      "proposed_placement": "PROP-HV-PACK-01 high-voltage battery array (aft)",
+      "mechanical_strategy": "Custom bolt-on cradle using existing OEM vertical web holes (if metrology closes MEPQ-004/006)",
+      "constraints_and_risks": [
+        "Zero drilling of prohibited upfitter horizontal flanges",
+        "Rear-impact FEA required before release",
+        "Debris/rock strike shielding for DRW track",
+        "Lower drop-out serviceability without removing structural cross-members"
+      ],
+      "blocked_by_mepq": ["MEPQ-004", "MEPQ-006", "MEPQ-007"],
+      "not_oem_truth": true
+    },
+    {
+      "prop_id": "PROP-DECON-INTENT-COOLING-FUEL-EXHAUST",
+      "note": "MUST_REMOVE / RETAIN_AND_REPURPOSE matrix lives here or as conversion-intent — never on L1",
+      "ref": "research/vertical_slices/ice_decon_phase2_2019_f450/DECON_INTENT_MATRIX.json"
+    }
+  ]
+}

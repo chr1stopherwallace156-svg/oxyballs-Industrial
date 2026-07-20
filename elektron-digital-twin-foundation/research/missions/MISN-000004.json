@@ -1,14 +1,24 @@
 {
   "mission_id": "MISN-000004",
   "id_immutable": true,
-  "aliases": ["EDTS-MISN-004", "Subsystem-Mission-D", "Mission-D"],
-  "title": "Subsystem Mission D — 4x2 Steering & Front Suspension",
+  "aliases": [
+    "EDTS-MISN-004",
+    "Subsystem-Mission-D",
+    "Mission-D"
+  ],
+  "title": "Subsystem Mission D \u2014 4x2 Steering & Front Suspension",
   "objective": "Document exact-configuration 4x2 front track hub, front axle architecture (do not invent Twin-I-Beam vs solid-axle without OEM cite), radius arms / links, and spring rate evidence for CFG-2019-F450-REG-CAB-4X2-60CA-DRW.",
-  "target_gap_ids": ["KG-FS-001", "KG-FS-002", "KG-FS-003", "KG-FS-004", "KG-FS-005"],
+  "target_gap_ids": [
+    "KG-FS-001",
+    "KG-FS-002",
+    "KG-FS-003",
+    "KG-FS-004",
+    "KG-FS-005"
+  ],
   "success_criteria": [
     "Acquire/hash at least one OEM source stating 4x2 front axle architecture for 2019 Super Duty Chassis Cab F-450 (or exact silo).",
     "Map CFGCOMP/IFACE nodes for hub, axle, radius arm, spring without borrowing 4x4-only geometry.",
-    "Record spring rates only with ASSERTION_EXTRACTED+token anchors — else UNRESOLVED.",
+    "Record spring rates only with ASSERTION_EXTRACTED+token anchors \u2014 else UNRESOLVED.",
     "No procedure generation authorization."
   ],
   "evidence_required": [
@@ -22,20 +32,31 @@
     "DT-D053: F-450/F-550 4x2 front axle type ASSERTION_EXTRACTED as Monobeam from SRC-CAND-000010 p.55.",
     "Front track 74.8 in re-affirmed.",
     "Operator FGAWR baseline 5600 REJECTED for Reg Cab 4x2 145.3 (Max Std 4800/5200).",
-    "Torque/alignment EXACT_MATCH table REJECTED — WSM NOT_ACQUIRED.",
-    "CFGCOMP-…-FRONT-SUSPENSION initialized CANDIDATE.",
+    "Torque/alignment EXACT_MATCH table REJECTED \u2014 WSM NOT_ACQUIRED.",
+    "CFGCOMP-\u2026-FRONT-SUSPENSION initialized CANDIDATE.",
     "Remaining: BAG parse, WSM acquire, spring codes, radius-arm 4x2 detail, linkage diagram."
   ],
-  "assigned_src_cand_ids": ["SRC-CAND-000001", "SRC-CAND-000002", "SRC-CAND-000003", "SRC-CAND-000010", "SRC-CAND-000011"],
+  "assigned_src_cand_ids": [
+    "SRC-CAND-000001",
+    "SRC-CAND-000002",
+    "SRC-CAND-000003",
+    "SRC-CAND-000010",
+    "SRC-CAND-000011"
+  ],
   "bound_vehicle_instance_id": "VEH-000001",
   "bound_configuration_id": "CFG-000001",
-  "research_sprint": "RL-022",
-  "decision": "DT-D053",
+  "research_sprint": "RL-025",
+  "decision": "DT-D056",
   "vertical_slice": "research/vertical_slices/front_suspension_2019_f450/",
-  "priority_note": "Continue Mission D — do not open Mission E or F as substitute.",
+  "priority_note": "Continue Mission D \u2014 do not open Mission E or F as substitute.",
   "notes": [
     "OEM vocabulary locked to Monobeam (not invented 'solid beam' as primary term).",
     "Mission E (ICE powertrain removal) remains deferred as MISN-000005.",
-    "Mission F (LV/network) not opened; would be MISN-000006 if authorized later."
-  ]
+    "Mission F (LV/network) not opened; would be MISN-000006 if authorized later.",
+    "DT-D056 Option 2: Layer 1 focus only \u2014 spindle casting #, linkage topology, alignment/torque remain UNKNOWN until WSM/parts.",
+    "Do not place L2 packaging estimates or L3 EDU mounts on Mission D L1 nodes.",
+    "OEM vocabulary: Monobeam (not drop-forged beam as primary term)."
+  ],
+  "layer_focus": "L1_VEHICLE_ENGINEERING_TRUTH",
+  "l1_focus_path": "research/vertical_slices/front_suspension_2019_f450/layers/L1_TRUTH_FOCUS.json"
 }

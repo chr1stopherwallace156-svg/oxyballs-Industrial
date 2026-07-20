@@ -30,3 +30,13 @@ This phase is **registered as a deferred conversion-intent trace**, not an autho
 | [`OPERATOR_CLAIM_SCRUB.json`](OPERATOR_CLAIM_SCRUB.json) | Honesty demotions |
 | [`DECON_INTENT_MATRIX.json`](DECON_INTENT_MATRIX.json) | Candidate remove/retain matrix |
 | [`STRUCTURAL_NODES.json`](STRUCTURAL_NODES.json) | Candidate COMPDEF/CFGCOMP stubs |
+
+## Three-layer refile (DT-D056)
+
+| Layer | Path |
+|---|---|
+| L1 Truth | [`layers/L1_TRUTH.json`](layers/L1_TRUTH.json) |
+| L2 Analysis | [`layers/L2_ANALYSIS.json`](layers/L2_ANALYSIS.json) |
+| L3 Decisions | [`layers/L3_DECISIONS.json`](layers/L3_DECISIONS.json) |
+
+Protocol: [`../../../graph_layers/THREE_LAYER_SEPARATION_PROTOCOL.md`](../../../graph_layers/THREE_LAYER_SEPARATION_PROTOCOL.md)

@@ -1,26 +1,27 @@
 {
   "document_id": "MEPQ_REGISTER",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "status": "ACTIVE",
   "schema": "schemas/mepq-item.schema.json",
-  "decision": "DT-D055",
-  "research_sprint": "RL-024",
+  "decision": "DT-D056",
+  "research_sprint": "RL-025",
   "title": "Missing Evidence Procurement Queue",
-  "principle": "Inversion Principle — procure only evidence that cannot be safely inferred; documentation tiers are purchased when a downstream node requires EXACT_CONFIGURATION_MATCH evidence.",
+  "principle": "Inversion Principle \u2014 procure only evidence that cannot be safely inferred; documentation tiers are purchased when a downstream node requires EXACT_CONFIGURATION_MATCH evidence.",
   "orthogonality": {
     "KG": "what is unknown",
     "MISN": "research directive to close gaps / acquire sources",
     "AJR": "purchase clearance for a specific AID asset",
-    "MEPQ": "ranked evidence procurement items that cannot be inferred — links KG+MISN+SRC without inventing values"
+    "MEPQ": "ranked evidence procurement items that cannot be inferred \u2014 links KG+MISN+SRC without inventing values"
   },
   "forbidden": [
     "Invented torque / pinout / CG / mass / hole diameters",
     "False confidence tiers (e.g. LEVEL_4_DOCUMENTED_OEM without hashed OEM bytes + token anchors)",
     "Treating indexed URLs as acquired evidence",
-    "Auto-promoting COMPDEF→CFGCOMP without evidence gates",
-    "Conflating bumper/axle station dimensions with packaging envelopes"
+    "Auto-promoting COMPDEF\u2192CFGCOMP without evidence gates",
+    "Conflating bumper/axle station dimensions with packaging envelopes",
+    "L2/L3 values written into L1 nodes"
   ],
-  "next_id": "MEPQ-006",
+  "next_id": "MEPQ-008",
   "active_export": "research/mepq/exports/MEPQ_ACTIVE_CHECKLIST.md",
   "items": [
     {
@@ -62,19 +63,36 @@
       "status": "DEFERRED",
       "path": "research/mepq/MEPQ-005.json",
       "focus": "Mid-chassis XMBR thickness / brackets"
+    },
+    {
+      "mepq_id": "MEPQ-006",
+      "operator_alias": "MEPQ-2019-F450-METROLOGY-008",
+      "priority": "CRITICAL",
+      "status": "DEFERRED",
+      "path": "research/mepq/MEPQ-006.json",
+      "focus": "Aft rail hole tolerances / flatness / edge distance"
+    },
+    {
+      "mepq_id": "MEPQ-007",
+      "operator_alias": "MEPQ-2019-F450-LOADS-009",
+      "priority": "CRITICAL",
+      "status": "DEFERRED",
+      "path": "research/mepq/MEPQ-007.json",
+      "focus": "Frame dynamic load / torsion / jounce-rebound limits"
     }
   ],
   "selected_next_deployment": {
-    "option": "2_EXPORT_ACTIVE_MEPQ",
-    "mission_f": "ALREADY_OPEN_MISN-000006",
-    "mission_e": "REMAINS_DEFERRED",
-    "export_path": "research/mepq/exports/MEPQ_ACTIVE_CHECKLIST.md",
-    "rationale": "Phase 2 decon dump honesty-gated and registered under deferred Mission E. Mission F already open. Export consolidates all MEPQ for procurement prioritization."
+    "option": 2,
+    "mission": "MISN-000004",
+    "focus": "Mission D Layer 1 truth",
+    "option_1_mission_f": "ALREADY_OPEN_MISN-000006",
+    "rationale": "Three-layer protocol active; continue front-axle L1 unknowns. Mission F stays open with L1/L3 split."
   },
   "locked_configuration": {
     "vehicle_instance_id": "VEH-000001",
     "configuration_id": "CFG-000001",
     "proposal_configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
     "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943"
-  }
+  },
+  "three_layer_protocol": "research/graph_layers/THREE_LAYER_SEPARATION_PROTOCOL.md"
 }

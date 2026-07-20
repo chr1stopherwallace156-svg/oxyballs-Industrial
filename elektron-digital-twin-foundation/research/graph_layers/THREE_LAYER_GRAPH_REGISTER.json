@@ -1,0 +1,46 @@
+{
+  "document_id": "THREE_LAYER_GRAPH_REGISTER",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "decision": "DT-D056",
+  "research_sprint": "RL-025",
+  "protocol": "research/graph_layers/THREE_LAYER_SEPARATION_PROTOCOL.md",
+  "layers": {
+    "L1_VEHICLE_ENGINEERING_TRUTH": {
+      "write_policy": "OEM_TOKEN_OR_EXPLICIT_UNKNOWN_ONLY",
+      "inherits_from": [],
+      "packages": [
+        "research/vertical_slices/ice_decon_phase2_2019_f450/layers/L1_TRUTH.json",
+        "research/vertical_slices/front_suspension_2019_f450/layers/L1_TRUTH_FOCUS.json"
+      ]
+    },
+    "L2_ENGINEERING_ANALYSIS": {
+      "write_policy": "DERIVED_ESTIMATE_OR_SIMULATION_REQUIRED",
+      "inherits_from": ["L1_VEHICLE_ENGINEERING_TRUTH"],
+      "inherits_mode": "READ_ONLY",
+      "packages": [
+        "research/vertical_slices/ice_decon_phase2_2019_f450/layers/L2_ANALYSIS.json"
+      ]
+    },
+    "L3_ENGINEERING_DECISIONS": {
+      "write_policy": "PROPOSAL_ONLY",
+      "inherits_from": ["L1_VEHICLE_ENGINEERING_TRUTH", "L2_ENGINEERING_ANALYSIS"],
+      "inherits_mode": "READ_ONLY",
+      "packages": [
+        "research/vertical_slices/ice_decon_phase2_2019_f450/layers/L3_DECISIONS.json"
+      ]
+    }
+  },
+  "forbidden": [
+    "L2/L3 values written into L1",
+    "Confidence % on L1 nodes",
+    "MUST_REMOVE / RETAIN on L1 (those are L3 or conversion-intent)",
+    "Packaging envelope dimensions on L1 without OEM/scan tokens"
+  ],
+  "selected_next_target": {
+    "option": 2,
+    "mission": "MISN-000004",
+    "focus": "Mission D Layer 1 — front axle steering/linkage truth only",
+    "option_1_mission_f": "ALREADY_OPEN_MISN-000006 — continue with L1/L3 separation when mapping LV"
+  }
+}

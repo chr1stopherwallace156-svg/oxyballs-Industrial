@@ -1,8 +1,8 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.29.0",
-  "updated_at": "2026-07-20T20:15:00Z",
+  "version": "0.30.0",
+  "updated_at": "2026-07-20T20:25:00Z",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
   "phase": "EVIDENCE_ACQUISITION_IN_PROGRESS",
@@ -30,8 +30,8 @@
   "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "MEPQ export active (DT-D055 Option 2). Critical queued: MEPQ-003 via Mission F discovery + MISN-000003 EWD. Mission E remains deferred with Phase 2 intent registered. Continue Mission D in parallel.",
-  "next_build_priority": "MEPQ003_EWD_PLUS_MISSION_D_CONTINUE",
+  "next_action": "THREE_LAYER_ACTIVE (DT-D056). Option 2: Mission D L1 focus \u2014 spindle/linkage/alignment UNKNOWNs; parse BAG + acquire WSM/parts. Mission F remains open with L1/L3 split. Mission E deferred.",
+  "next_build_priority": "MISN004_LAYER1_FRONT_AXLE_TRUTH",
   "door_fl_decision": "CANDIDATE_ACQUISITION_RECOMMENDED",
   "door_fl_physical_verification": "REQUIRED_EVENTUALLY",
   "door_fl_sprint": "research/sprints/RL-020_CHASSIS_FRAME_BRIEF_AB.md",
@@ -688,5 +688,10 @@
   "ice_decon_phase2": "REGISTERED_DEFERRED_CONVERSION_INTENT_ONLY",
   "ice_decon_phase2_slice": "research/vertical_slices/ice_decon_phase2_2019_f450/",
   "kg_009": "BLOCKED_DEFERRED_WITH_MISSION_E",
-  "kg_010": "BLOCKED_DEFERRED_WITH_MISSION_E"
+  "kg_010": "BLOCKED_DEFERRED_WITH_MISSION_E",
+  "decision_dt_d056": "decisions/DT-D056_THREE_LAYER_GRAPH_SEPARATION.json",
+  "three_layer_protocol": "research/graph_layers/THREE_LAYER_SEPARATION_PROTOCOL.md",
+  "three_layer_status": "ACTIVE",
+  "mepq_006": "DEFERRED_AFT_HOLE_TOLERANCES",
+  "mepq_007": "DEFERRED_FRAME_DYNAMIC_LOADS"
 }

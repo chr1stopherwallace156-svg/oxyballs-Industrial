@@ -5,16 +5,14 @@
 
 | Concern | Status |
 |---|---|
-| MEPQ export | **DT-D055** — `research/mepq/exports/MEPQ_ACTIVE_CHECKLIST.md` |
-| MEPQ-003 | **QUEUED** (EWD / Mission F) |
-| MEPQ-001/002/004/005 | **DEFERRED** (Mission E) |
-| EV-DECON-PHASE2 | Registered as conversion-intent only — **not authorized** |
-| Mission F | Already open (`MISN-000006`) |
-| Mission E | **Deferred** |
-| Mission D | IN_PROGRESS |
+| Three-layer graph protocol | **DT-D056 ACTIVE** (L1/L2/L3 non-inheriting) |
+| Next focus | **Mission D Layer 1** (Option 2) |
+| Mission F | Open — L1 harness vs L3 VCU taps |
+| Mission E | Deferred |
+| MEPQ | 1 QUEUED / 6 DEFERRED |
 | Procedures | **BLOCKED** |
 | Kernel | Unchanged |
 
 ## Change-control
 
-- `decisions/DT-D030_*.json` … `DT-D055_*.json`
+- `decisions/DT-D030_*.json` … `DT-D056_*.json`

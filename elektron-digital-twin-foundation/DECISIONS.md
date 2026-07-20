@@ -936,3 +936,20 @@ Append-only record of digital twin foundation decisions.
   6. Mission E teardown execution remains **NOT authorized**
 
 ---
+
+## DT-D056 — Three-layer graph separation; Mission D L1 focus
+
+- **Change-control record:** [`decisions/DT-D056_THREE_LAYER_GRAPH_SEPARATION.json`](decisions/DT-D056_THREE_LAYER_GRAPH_SEPARATION.json)
+- **decision_id:** `DT-D056`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-025`
+- **recommended_decision:** `THREE_LAYER_PROTOCOL_ACTIVE_MISSION_D_L1_FOCUS`
+- **decision:**
+  1. Lock **Three-Layer Separation Protocol** (L1 Truth / L2 Analysis / L3 Decisions) with non-inheritance
+  2. Refile ICE decon Phase 2 into layer packages; scrub L1 pollution (radiator material/process; restore fuel **40 gal** ASSERTION_EXTRACTED)
+  3. Keep 38.3×30×8 and battery cradle in **L2/L3 only**
+  4. Register **MEPQ-006/007** + **KG-011/012**
+  5. Select **Option 2** — Mission D Layer 1 focus; Option 1 already open (Mission F) with L1/L3 split for LV
+
+---

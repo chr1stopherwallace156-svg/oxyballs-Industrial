@@ -1,0 +1,19 @@
+{
+  "gap_id": "KG-012",
+  "component": "Frame rail dynamic load / torsion / jounce-rebound limits",
+  "reported_oem_part_number": null,
+  "critical_need": "OEM or tested structural load envelopes for L2 FEA under concentrated battery mass.",
+  "priority": "CRITICAL",
+  "possible_sources": ["OEM structural standards", "Frame engineering bulletins"],
+  "related_src_cand_ids": [],
+  "related_mission_ids": ["MISN-000005"],
+  "status": "BLOCKED",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "notes": [
+    "Linked MEPQ-007 (operator LOADS-009).",
+    "Do not invent load cases on L1."
+  ],
+  "decision": "DT-D056",
+  "research_sprint": "RL-025"
+}

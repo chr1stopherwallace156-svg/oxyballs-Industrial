@@ -1,0 +1,19 @@
+{
+  "gap_id": "KG-011",
+  "component": "Aft frame rail vertical-web hole metrology (tolerance / flatness / edge distance)",
+  "reported_oem_part_number": null,
+  "critical_need": "Positional tolerances and edge-distance limits for bolt-on aft cradle plates — distinct from hole-center coordinates (KG-009).",
+  "priority": "CRITICAL",
+  "possible_sources": ["Frame dimension charts", "On-chassis CMM"],
+  "related_src_cand_ids": ["SRC-CAND-000001"],
+  "related_mission_ids": ["MISN-000005"],
+  "status": "BLOCKED",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "notes": [
+    "Linked MEPQ-006 (operator METROLOGY-008).",
+    "Mission E deferred; L3 battery proposal blocked on this metrology."
+  ],
+  "decision": "DT-D056",
+  "research_sprint": "RL-025"
+}
