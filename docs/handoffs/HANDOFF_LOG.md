@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 59 + review_56 — Gate 05L-B/05L-C/05M-A/05M-B cleanups + Gate 05M-C split)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 59 + review_56 — Gate 05L-B/05L-C/05M-A/05M-B wording cleanups + the Gate 05M-C split into 05M-C1/C2/C3); awaiting the Gate 05M-C1 Coupled Driveline Static / Lifted-Wheel Readiness batch or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `a3bdcd0` (batch-59 archive); end commit: `0c1a2d1` (batch-59 reconciliation)
+- Work: no new deliverable — cleanups to four existing gates + the 05M-C split. RC-273..278 (no new CS); section 67; D-008 amended (Numeric Threshold Authority Rule formalized; 05M-C split). Seven owner corrections: global Numeric Threshold Authority Rule (RC-267 formalized); 05L-B-005 no absolute-zero (RC-273); 05L-C-004 no "immediate" (RC-274); 05M-A "Ready-to-Drive" recurrence (RC-275); 05M-B watchdog coasting-not-failure (RC-276); 05M-B over-speed supplier-supported (RC-277); Gate 05M-C split into 05M-C1/C2/C3 (RC-278). Corrected status labels on all four gates. Nothing Confirmed; no wheel torque path; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (invented-values family through RC-267 — nineteen artifacts + "instant/immediate" RC-175..274 + "certified safe" RC-224 + the RC-257→263→268 (3×), RC-256→264, RC-261→269 (2×), RC-271→275 recurrences); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305/105 + OSHA/NHTSA/ISO 6469-3 sources (RC-237..278) + IMD supplier manual + pre-charge/contactor datasheets + DC-link capacitance + discharge/thermal interval + off-state leakage + IMD response window + inverter state definitions + phase-current/resolver/watchdog/over-speed + torque map + supplier spin profile + driveline (gear ratio, axle/GAWR, wheel-speed, brake/steering) data + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/contactor/HV-shutdown ownership (BQ-27).
+
 ## 2026-07-16 — Claude Code — task complete (batch 58 + review_55 — Gate 05L-B/05L-C/05M-A cleanups + Gate 05M-B No-Load Motor Spin)
 
 ### (archived handoff)

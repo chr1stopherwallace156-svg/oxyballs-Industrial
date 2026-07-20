@@ -371,23 +371,32 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_56):** **Gate 05M-C1 — Coupled Driveline
-Static / Lifted-Wheel Readiness** — the **first coupled test** of the split 05M-C
-phase (Decision Register **D-008**, amended review_56, RC-278). Gate 05M-C is
-split (do not jump to open-floor movement): **05M-C1 (coupled driveline static /
-lifted-wheel) → 05M-C2 (restricted creep torque) → 05M-C3 (controlled
-closed-area low-speed movement)**. The first coupled test proves — **with the
-wheels lifted / no ground contact** — mechanical coupling, driveline backlash,
-wheel-speed sensing, brake override, and torque clamp before any creep.
-Engineer-gated, live-HV, **wheels lifted, no ground contact, no vehicle-movement
-path**; the Numeric Threshold Authority Rule (RC-267) applies — no torque-clamp/
-creep/backlash threshold is final gate logic until supplier docs + engineering
-review + calibrated measurement method + raw proof + signed approval upgrade it;
-the inverter owns its gating per the supplier state machine, the BMS/PDU owns
-contactors/pre-charge, the hardwired loop owns emergency interruption, the VCU
-requests/monitors (RC-247/265/205/227; BQ-27); the inverter/motor + driveline
-supplier data is required before any wheel torque path (BQ-27); never "certified
-safe" (RC-224). Owner scope defined when the owner sends that batch. **Gate
+**Next expected batch (owner review_57):** **Gate 05M-C2 — Restricted Creep
+Torque Validation** — the **first ground contact** of the split 05M-C phase
+(Decision Register **D-008**, amended review_57), only after Gate 05M-C1 proves
+the coupled/lifted mechanical + sensing + safety layer. **The test surface must
+be a flat, controlled, closed area with predictable traction — NOT a default
+"low-friction" surface (RC-283)** — with clear runout distance, wheel
+chocks/barriers staged, spotters outside the movement path, and a remote E-stop
+available; anti-rollback logic + highly restrictive torque ramp-rate (dI/dt)
+limits + breakaway-torque baselines under tire load. Engineer-gated, live-HV,
+**first ground contact, closed controlled area only, no public road, no
+customer operation**; the Numeric Threshold Authority Rule (RC-267) applies — no
+creep-torque / dI/dt / breakaway / anti-rollback threshold is final gate logic
+until supplier docs + engineering review + calibrated measurement method + raw
+proof + signed approval upgrade it; wheel-speed stays read-only, not
+traction-control authority (RC-282); the inverter owns its gating, the BMS/PDU
+owns contactors/pre-charge, the hardwired loop + service brakes own the stopping
+path, the VCU requests/monitors (RC-247/265/205/227; BQ-27); no manual restraint
+of rotating parts (RC-279); never "certified safe" (RC-224). Owner scope defined
+when the owner sends that batch. **Gate 05M-C1**
+(`GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`) is
+`COUPLED_DRIVELINE_LIFTED_WHEEL_READINESS_DEFINED` / `RATED_LIFT_OR_STANDS_REQUIRED`
+/ `NO_GROUND_CONTACT` — the first coupled test, wheels lifted (5-row matrix
+05M-C1-001..005); review_57 safety corrections: no manual restraint of rotating
+parts — rated fixtures only (RC-279), the Lifted Chassis Safety Rule (RC-280),
+brake override within the approved window (RC-281), wheel-speed read-only
+(RC-282). **Gate
 05M-B** (`GATE05M_B_NO_LOAD_MOTOR_SPIN.md`) is
 `NO_LOAD_MOTOR_SPIN_READY_FOR_DETAILING` / `GUARDED_SHAFT_REQUIRED` /
 `MOTOR_UNCOUPLED_REQUIRED` — the first physical rotation, motor uncoupled/guarded

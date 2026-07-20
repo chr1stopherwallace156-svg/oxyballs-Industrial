@@ -4,69 +4,61 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-16
-- Reason for handoff: task complete (batch 59 + review_56 — Gate 05L-B/05L-C/
-  05M-A/05M-B wording cleanups + the Gate 05M-C split into 05M-C1/C2/C3);
-  awaiting the Gate 05M-C1 Coupled Driveline Static / Lifted-Wheel Readiness
-  batch or a supplier reply
+- Reason for handoff: task complete (batch 60 + review_57 — Gate 05M-B watchdog
+  cleanup + Gate 05M-C1 Coupled Driveline Static / Lifted-Wheel Readiness);
+  awaiting the Gate 05M-C2 Restricted Creep Torque Validation batch or a
+  supplier reply
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `a3bdcd0` — Archive raw RH batch 59 + review_56 1:1
+- Start commit: `ad3f489` — Archive raw RH batch 60 + review_57 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- **No new deliverable this batch** — cleanups to four existing deliverables +
-  the Gate 05M-C split:
-  - `docs/status/GATE05L_B_HV_FIRST_ENERGIZATION.md` — added the **Numeric
-    Threshold Authority Rule** header (RC-267); 05L-B-005 wording (RC-273, no
-    "absolute 0.0 V"/"immediately"); status → `CONTROLLED_HV_PRECHARGE_OBSERVATION_READY
-    / SUPPLIER_LIMITS_REQUIRED / …`.
-  - `docs/status/GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md` — 05L-C-004 exit
-    wording (RC-274, IMD/BMS/PDU response window, not "immediate"); status →
-    `HV_SHUTDOWN_DISCHARGE_REPEATABILITY_READY / …`.
-  - `docs/status/GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md` — status →
-    `INVERTER_READY_ZERO_TORQUE_VALIDATION_READY / TORQUE_DISABLED_STATE_ONLY /
-    …` (05M-A-004 already held the non-"Ready-to-Drive" wording; RC-271→275
-    regression watch).
-  - `docs/status/GATE05M_B_NO_LOAD_MOTOR_SPIN.md` — 05M-B-005 watchdog wording
-    (RC-276, coasting is not the failure); 05M-B-004 over-speed via a
-    supplier-supported test mode (RC-277); status →
-    `NO_LOAD_MOTOR_SPIN_READY_FOR_DETAILING / …`; the "Next" section split into
-    05M-C1/C2/C3 (RC-278).
-- Files changed (reconciliation commit): those four deliverables,
-  `docs/DECISION_REGISTER.md` (**D-008 amended** — Numeric Threshold Authority
-  Rule formalized; 05M-C split), `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md`
-  (RC-273..278; section 67 — no new CS), `docs/research/RESEARCH_MAP.md`
-  ("next" → Gate 05M-C1), `docs/roadmaps/GATE_RESEARCH_QUEUE.md` (05M-B
-  READY_FOR_DETAILING; 05M-C1 → NEXT + 05M-C2/C3), `docs/CHANGELOG.md`, handoff
-  files. (Raw archives `batch_59_gate05lbc_ma_mb_cleanups_gate05mc_preview.md`,
-  `review_56_batch_59_verdict.md`, PROVENANCE committed separately as
-  `a3bdcd0`.)
-- Summary: the Hunter realized the supplier-shutdown, pre-charge-envelope,
-  05M-A-tolerance, and 05M-B-boundary corrections, but **re-emitted
-  "Ready-to-Drive" (RC-271→275)** and left "absolute 0.0 V"/"immediate"
-  wording. Seven owner corrections applied verbatim: **the global Numeric
-  Threshold Authority Rule (RC-267 formalized)**; **05L-B-005 no absolute-zero
-  (RC-273)**; **05L-C-004 no "immediate" (RC-274)**; **05M-A not "Ready-to-Drive"
-  (RC-275)**; **05M-B watchdog — coasting is not the failure (RC-276)**; **05M-B
-  over-speed supplier-supported (RC-277)**; **Gate 05M-C split into 05M-C1/C2/C3
-  (RC-278)**. **Nothing ingested; nothing Confirmed; no wheel torque path; no
-  vehicle movement; no "certified safe"/compliance claim; ODRs untouched.**
+- New file: **`docs/status/GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`** — the first
+  rung of the split 05M-C phase and the **first coupled test**: the traction
+  motor coupled to gearbox/half-shafts/hubs/wheels but the **driven axle lifted
+  + locked, zero ground contact**. Numeric Threshold Authority Rule, the Lifted
+  Chassis Safety Rule (RC-280), the no-manual-restraint HARD BLOCK (RC-279), the
+  wheel-speed read-only rule (RC-282), a 5-row matrix (05M-C1-001..005), and
+  exit criteria permitting Gate 05M-C2 only.
+- Updated: **`docs/status/GATE05M_B_NO_LOAD_MOTOR_SPIN.md`** — status →
+  `NO_LOAD_MOTOR_SPIN_VALIDATION_DEFINED …` (05M-B-004/005 already held the
+  corrected watchdog/over-speed wording; RC-277 regression watch noted).
+- Files changed (reconciliation commit): those two deliverables,
+  `docs/DECISION_REGISTER.md` (**D-008 amended** — 05M-C1 created; rotating-
+  machinery + lift safety rules), `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md`
+  (RC-279..283; section 68 — no new CS), `docs/research/RESEARCH_MAP.md`
+  ("next" → Gate 05M-C2), `docs/roadmaps/GATE_RESEARCH_QUEUE.md` (05M-C1
+  DEFINED; 05M-C2 → NEXT), `docs/CHANGELOG.md`, handoff files. (Raw archives
+  `batch_60_gate05mb_cleanup_gate05mc1_lifted.md`,
+  `review_57_batch_60_verdict.md`, PROVENANCE committed separately as
+  `ad3f489`.)
+- Summary: Gate 05M-C1 introduced (coupled driveline, wheels lifted). Five owner
+  safety corrections applied verbatim: **the SAFETY-CRITICAL removal of
+  "hand-lock one lifted wheel" — rated fixtures only, no hands near rotating
+  parts ever (RC-279)**; **the Lifted Chassis Safety Rule — rated lift/stands
+  per GVWR/axle load, guarded zones, no personnel inline, no one under the
+  vehicle during energized rotation (RC-280)**; **brake override within the
+  approved response window, not "instantly" (RC-281)**; **wheel-speed data
+  read-only, not traction-control authority (RC-282)**; **Gate 05M-C2 uses a
+  controlled predictable-traction surface, not a default low-friction one
+  (RC-283)**. **Nothing ingested; nothing Confirmed; no ground contact; no
+  open-floor movement; no "certified safe"/compliance claim; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_59/review_56 archives are 1:1 against the owner's
-  chat ("58:75"); the seven RC-273..278 corrections + the Numeric Threshold
-  Authority Rule + the corrected status labels + the D-008 05M-C split match
-  the owner's verdict; nothing marked Confirmed; no wheel torque path or vehicle
-  movement authorized
+- Verified vs claimed: batch_60/review_57 archives are 1:1 against the owner's
+  chat ("59:75"); the Gate 05M-C1 status + the five RC-279..283 corrections +
+  the corrected status labels + the D-008 amendment match the owner's verdict;
+  nothing marked Confirmed; no ground contact or movement authorized
 
 ## State
 
@@ -83,72 +75,78 @@
   CONTROLLED_HV_PRECHARGE_OBSERVATION_READY; 05L-C
   HV_SHUTDOWN_DISCHARGE_REPEATABILITY_READY; 05M-A
   INVERTER_READY_ZERO_TORQUE_VALIDATION_READY; 05M-B
-  NO_LOAD_MOTOR_SPIN_READY_FOR_DETAILING (`GATE05M_B_NO_LOAD_MOTOR_SPIN.md`);
-  Gate 05M-C1 (coupled driveline static / lifted-wheel readiness) NEXT → 05M-C2
-  (restricted creep) → 05M-C3 (controlled closed-area low-speed movement) per
-  D-008 (amended review_56)**; 07 v0.1 / 07B / 07C v0.4 PARKED; 08
-  FMEA_REGISTRY_CREATED (15 modes); 08B PARKED; **08C
+  NO_LOAD_MOTOR_SPIN_VALIDATION_DEFINED; 05M-C1
+  COUPLED_DRIVELINE_LIFTED_WHEEL_READINESS_DEFINED / NO_GROUND_CONTACT
+  (`GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`); Gate 05M-C2 (restricted creep,
+  first ground contact) NEXT → 05M-C3 (controlled closed-area low-speed
+  movement) per D-008 (amended review_57)**; 07 v0.1 / 07B / 07C v0.4 PARKED;
+  08 FMEA_REGISTRY_CREATED (15 modes); 08B PARKED; **08C
   SIMULATION_SWEEP_MATRIX_CREATED — PARKED_FOR_SUPPLIER_DATA**. Order after
   05: 06 deep dive → 09 → 10 → 11.
 - Build artifacts: all `docs/status/GATE05*` files (through
-  `GATE05M_B_NO_LOAD_MOTOR_SPIN.md`), `MASS_LEDGER.md`,
+  `GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`), `MASS_LEDGER.md`,
   `AXLE_CG_CALCULATOR.md`, `FMEA_REGISTRY.md`, `DRAFT_VALIDATION_08C.md`.
 - Doctrine: **D-007** (controls-authority) + **D-008** (staged post-bench
   gate ladder to HV; never "certified safe"; amended — 05J → 05K → 05L-A →
   05L-B → 05L-C → 05M-A → 05M-B → 05M-C1 → 05M-C2 → 05M-C3; each
-  engineer-approved) + the **Numeric Threshold Authority Rule** (RC-267
-  formalized: all 05L-B/05L-C/05M-A/05M-B numbers are INITIAL_TARGET_PROFILE
-  with no gate authority until tied to supplier docs + engineering review +
-  calibrated measurement method + raw proof + signed approval) + RC-168 + the
+  engineer-approved) + the **Numeric Threshold Authority Rule** (RC-267:
+  05L-B/05L-C/05M-A/05M-B/05M-C1 numbers are INITIAL_TARGET_PROFILE with no
+  gate authority until tied to supplier docs + engineering review + calibrated
+  measurement method + raw proof + signed approval) + RC-168 + the
   invented-values family through RC-267 + RC-190/191/197 (HIL/bench is
   evidence, not vehicle authority) + RC-205/227/247/265 (VCU requests/monitors;
-  BMS/PDU owns contactor/pre-charge; the inverter owns its gating per its
-  supplier state machine; hardwired loop owns physical interruption) + RC-206
+  BMS/PDU owns contactor/pre-charge; the inverter owns its gating; hardwired
+  loop + service brakes own the stopping/interruption path) + RC-206
   (service-clear never clears active safety faults) + RC-213/218 (a DBC is a
   database, version hash enforced) + RC-224 (never "certified safe") + the Gate
-  05x chain RC-229..278 bind all Gate 05x + downstream controls work.
+  05x chain RC-229..283 (incl. **RC-279 no manual restraint of rotating parts,
+  RC-280 lifted-chassis safety, RC-282 wheel-speed read-only**) bind all Gate
+  05x + downstream controls work.
 - Open owner decisions (accumulated): (1) elektron-os-clean; (2) index.html;
   (3) L2; (4) L4; (5) L6; (6) L9 lane name; (7) Artifact Intake Form; (8)
   M10 forbidden-phrase + regression scanner (invented-values family through
   RC-267 — nineteen artifacts — the "instant/immediate" pattern
-  RC-175/198/204/211/225/255/274, "certified safe" RC-224, and the **RC-257→263
-  →268 (3×), RC-256→264, RC-261→269 (2×), RC-271→275 recurrences** — the
-  strongest scanner cases); (9)(10)(11) Dana / ZF / Ford-Lee letters; (12)
-  supplier reminder; (13) official Ford BBLB + IVM + FMVSS 305a/305/105 + OSHA
-  electrical/LOTO + NHTSA EV + ISO 6469-3 sources (RC-237..278, NeedsExactSource)
-  + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier BMS/inverter/
-  VCU/DC-DC/charger DBCs + **IMD supplier manual + pre-charge resistor/contactor
+  RC-175/198/204/211/225/255/274/281, "certified safe" RC-224, and the
+  **RC-257→263→268 (3×), RC-256→264, RC-261→269 (2×), RC-271→275, RC-277
+  recurrences** — the strongest scanner cases); (9)(10)(11) Dana / ZF /
+  Ford-Lee letters; (12) supplier reminder; (13) official Ford BBLB + IVM +
+  FMVSS 305a/305/105 + OSHA electrical/LOTO + NHTSA EV + ISO 6469-3 + rated-
+  lift/stand + rotating-machinery-guarding sources (RC-237..283,
+  NeedsExactSource) + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs +
+  **Ford ABS/ESC wheel-speed authorization (RC-282)** + supplier BMS/inverter/
+  VCU/DC-DC/charger DBCs + IMD supplier manual + pre-charge/contactor
   datasheets + DC-link capacitance + discharge/thermal-recovery interval +
-  off-state leakage threshold + IMD/BMS/PDU response window + inverter state
-  definitions + phase-current/resolver/watchdog/over-speed spec + torque map +
-  supplier spin profile + driveline (gear ratio, axle/GAWR, wheel-speed,
-  brake/steering) data for 05L-B/C/05M (RC-242..278; BQ-27)**; (14) brake
-  engineer for FMVSS 105; (15) confirm donor is 7.3L gas (001A) + donor data;
-  (16) inverter/BMS firmware timing + HV safety plan; (17) firmware signoff
-  (BQ-26); (18) BMS/PDU pre-charge + contactor + HV-shutdown ownership (BQ-27).
+  off-state leakage + IMD response window + inverter state definitions +
+  phase-current/resolver/watchdog/over-speed + torque map + supplier spin
+  profile + driveline (gear ratio, axle/GAWR, wheel-speed, brake-override
+  response window, brake/steering) data for 05L-B/C/05M (RC-242..283; BQ-27);
+  (14) brake engineer for FMVSS 105; (15) confirm donor is 7.3L gas (001A) +
+  donor data; (16) inverter/BMS firmware timing + HV safety plan; (17) firmware
+  signoff (BQ-26); (18) BMS/PDU pre-charge + contactor + HV-shutdown ownership
+  (BQ-27).
 
 ## Next exact action
 
-Expected next inputs, in any order: (a) the **Gate 05M-C1 Coupled Driveline
-Static / Lifted-Wheel Readiness batch** (scope in `GATE_RESEARCH_QUEUE.md`;
-05M-B in `GATE05M_B_NO_LOAD_MOTOR_SPIN.md`; ladder in D-008) — the first
-coupled test of the split 05M-C phase, proving mechanical coupling, driveline
-backlash, wheel-speed sensing, brake override, and torque clamp **with the
-wheels lifted / no ground contact** before any creep. **Enforce: engineer-
-gated, live-HV, wheels lifted, NO ground contact / NO vehicle-movement path /
-NO road testing / NO customer operation; the Numeric Threshold Authority Rule
-(RC-267) — no torque-clamp / creep / backlash threshold is final gate logic
-until tied to supplier docs + engineering review + calibrated measurement
-method + raw proof + signed approval; the inverter owns its gating per the
-supplier state machine, the BMS/PDU owns contactors/pre-charge, the hardwired
-loop owns emergency interruption, the VCU requests/monitors (RC-247/265/205/227;
-BQ-27); the inverter/motor + driveline supplier data (torque map, gear ratio,
-axle/GAWR, wheel-speed, brake/steering assist) is required before any wheel
-torque path (BQ-27); the stored-energy discharge-wait rule applies after any
-exposure (RC-242); no automatic retry after an E-stop (RC-262/276); never
-"certified safe" / compliance claim (RC-224); OSHA/NHTSA/FMVSS 305/ISO 6469-3
-citations are NeedsExactSource; NEVER "PATS bypass"; nothing Confirmed.** Only
-after 05M-C1 → 05M-C2 (restricted creep) → 05M-C3 (controlled closed-area
+Expected next inputs, in any order: (a) the **Gate 05M-C2 Restricted Creep
+Torque Validation batch** (scope in `GATE_RESEARCH_QUEUE.md`; 05M-C1 in
+`GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`; ladder in D-008) — the **first ground
+contact**, restricted low-speed creep, only after Gate 05M-C1. **Enforce:
+engineer-gated, live-HV, first ground contact on a FLAT, CONTROLLED, CLOSED
+surface with PREDICTABLE TRACTION — never a default "low-friction" surface
+(RC-283); clear runout distance, wheel chocks/barriers staged, spotters
+outside the movement path, remote E-stop available, anti-rollback logic +
+restrictive dI/dt torque ramp-rate limits + breakaway-torque baselines; NO
+public road / NO customer operation; the Numeric Threshold Authority Rule
+(RC-267) — no creep-torque / dI/dt / breakaway / anti-rollback threshold is
+final gate logic until tied to supplier docs + engineering review + calibrated
+measurement method + raw proof + signed approval; wheel-speed stays read-only,
+not traction-control authority (RC-282); the inverter owns its gating, the
+BMS/PDU owns contactors/pre-charge, the hardwired loop + service brakes own the
+stopping path, the VCU requests/monitors + enforces the clamp (RC-247/265/205/
+227; BQ-27); no manual restraint of rotating parts (RC-279); no automatic retry
+after an E-stop (RC-262); never "certified safe" / compliance claim (RC-224);
+OSHA/NHTSA/FMVSS/ISO citations are NeedsExactSource; NEVER "PATS bypass";
+nothing Confirmed.** Only after 05M-C2 → 05M-C3 (controlled closed-area
 low-speed movement). (b) The **Gate 06 deep dive** (Mechanical Mounting /
 Battery Enclosure) per the standing order after Gate 05 (06 → 09 → 10 → 11).
 (c) A Gate 08C reopen if supplier thresholds land. (d) Gate 08B reopen if
@@ -158,11 +156,12 @@ reply — archive 1:1, reconcile, move the matching BQ to the Resolution log.
 7/14/21-day clock. Enforce throughout: nothing Confirmed; no
 compliance/"safe"/"certified" claim; NEVER "PATS bypass" or bus spoofing;
 NEVER invent a threshold / timeout / percentage / criterion / current /
-clearance / AVV / pre-charge / discharge / inverter / spin / creep threshold or
-grant a placeholder pass-block; no Ford signal is confirmed until an official
-source proves it; the VCU does not own HV shutdown or inverter gating until
-supplier architecture confirms it; keep diesel data out of the 001A gas model
-(D-006).
+clearance / AVV / pre-charge / discharge / inverter / spin / creep / dI/dt
+threshold or grant a placeholder pass-block; no Ford signal is confirmed until
+an official source proves it; wheel-speed/ABS/ESC data never becomes
+traction-control authority without Ford authorization; the VCU does not own HV
+shutdown or inverter gating until supplier architecture confirms it; keep
+diesel data out of the 001A gas model (D-006).
 
 ## Forbidden actions
 
@@ -187,53 +186,62 @@ supplier architecture confirms it; keep diesel data out of the 001A gas model
   05K power-on target profiles RC-235; the Gate 05L-A safety-readiness + AVV
   threshold RC-241; the Gate 05L-B/05L-C pre-charge/contactor/discharge/retry
   targets RC-245/252; the Gate 05M-A/05M-B inverter/spin targets RC-260/267;
-  the IMD 100/500 Ω/V candidates RC-251; the OSHA/NHTSA/FMVSS-305/ISO-6469-3
-  paraphrase RC-237..278).
+  the Gate 05M-C1 lifted targets — ≤1% pulse / 100 RPM / ≤5% wheel-speed /
+  ≤5% torque clamp RC-267; the IMD 100/500 Ω/V candidates RC-251; the OSHA/
+  NHTSA/FMVSS-305/ISO-6469-3 + rated-lift/rotating-machinery paraphrase
+  RC-237..283).
 - Do not mix 6.7L diesel weight/CG into the 7.3L gas model (D-006).
 - **Gate 05 (D-007 + D-008 + the Numeric Threshold Authority Rule + RC-168 +
   the invented-values family through RC-267 + RC-190/191/197 + RC-205/206/213/
-  218/224/227/229/230/231/236/237..278 bind): authorized/listen-only only — no
+  218/224/227/229/230/231/236/237..283 bind): authorized/listen-only only — no
   anti-theft bypass, no fake/spoofed ABS/ESC messages, no transmit onto factory
-  Ford safety buses without approval (RC-136/142/148); accel-pedal never drives
-  inverter torque directly (RC-141/146) and stays masked through 05M-A/05M-B/
-  05M-C (RC-271/272/275); no factory-cluster warning injection (RC-151); the
-  VCU requests/monitors but does not own pre-charge / HV shutdown / contactors
-  / HV isolation / inverter gating — the BMS/PDU owns contactor/pre-charge
-  execution, the inverter owns its gating per its supplier state machine, and
-  the hardwired loop owns physical interruption (RC-150/152/157/158/164/165/
-  171/205/227/247/265; BQ-27); no real HV contactor closure at Gate 05K
-  (RC-236); Gate 05L-A does not energize (RC-244); Gate 05L-B is live-HV but
-  observational only (RC-245..250); the pre-charge/shutdown sequence is
-  supplier-specific (RC-246/257/263/268) with a command↔aux-contact
-  feedback-mismatch block (RC-268); no "absolute 0.0 V"/"immediately" wording —
-  supplier OFF state below the approved off-state leakage threshold (RC-273),
-  isolation shutdown within the supplier IMD/BMS/PDU response window (RC-274);
-  "current-limited" needs a real current-limit definition (RC-248); V_caps
-  matches supplier topology not exact 0.0 V (RC-253) and the pre-charge rise is
-  judged against a supplier envelope not a perfect RC curve (RC-261/269);
-  timeout logic is elapsed-exceeds-limit (RC-254); the E-stop dropout is
-  measured not "instant" and allows no automatic retry ever (RC-255/262/249);
-  05L-C IMD fault injection uses an approved current-limited fixture only —
-  never an ad-hoc resistor on a live rail (RC-256/264); weld detection splits
-  false-positive vs false-negative (RC-258); Gate 05M-A is inverter-enable
-  READINESS not spin — supplier-defined ready/torque-disabled state (never
-  "Ready-to-Drive", RC-271/275), tolerance thresholds not perfect zero (RC-270),
-  no assumed 0% PWM / no power-stage switching unless the supplier defines it
-  safe + engineering approves (RC-265/266); Gate 05M-B is the first physical
-  rotation with the motor UNCOUPLED + GUARDED — no driveline attachment / no
-  wheel torque path / no vehicle-movement path / E-stop + exclusion zone active
-  / supplier-defined spin profile only / no cabin pedal authority (RC-272);
-  coasting is not the 05M-B watchdog failure — continuing to be powered is
-  (RC-276); the 05M-B over-speed test uses a supplier-supported test mode / a
-  pre-approved calibration profile, never a live safety-limit edit during
-  rotation (RC-277); Gate 05M-C is split 05M-C1 (coupled driveline static /
-  lifted-wheel — wheels lifted, proves coupling/backlash/wheel-speed/brake-
-  override/torque-clamp) → 05M-C2 (restricted creep) → 05M-C3 (controlled
-  closed-area low-speed movement), with no open-floor movement before 05M-C1
-  (RC-278); all numeric values across 05L-B/05L-C/05M-A/05M-B are
-  INITIAL_TARGET_PROFILE with no gate authority until tied to supplier docs +
-  engineering review + calibrated measurement method + raw proof + signed
-  approval (RC-267); the 05M traction phase is staged (RC-259/278); Ford
+  Ford safety buses without approval (RC-136/142/148); **wheel-speed/ABS/ESC
+  data is read-only / verification only and never becomes traction-control
+  authority without Ford-authorized documentation + engineering review
+  (RC-282)**; accel-pedal never drives inverter torque directly (RC-141/146)
+  and stays masked through 05M-A/05M-B (RC-271/272/275) except the explicit
+  pedal-clamp test 05M-C1-004; no factory-cluster warning injection (RC-151);
+  the VCU requests/monitors but does not own pre-charge / HV shutdown /
+  contactors / HV isolation / inverter gating — the BMS/PDU owns
+  contactor/pre-charge execution, the inverter owns its gating per its supplier
+  state machine, and the hardwired loop + service brakes own the physical
+  interruption / stopping path (RC-150/152/157/158/164/165/171/205/227/247/265;
+  BQ-27); no real HV contactor closure at Gate 05K (RC-236); Gate 05L-A does
+  not energize (RC-244); Gate 05L-B is live-HV but observational only
+  (RC-245..250); the pre-charge/shutdown sequence is supplier-specific
+  (RC-246/257/263/268) with a command↔aux-contact feedback-mismatch block
+  (RC-268); no "absolute 0.0 V"/"immediately"/"instant" wording — supplier OFF
+  state below the approved off-state leakage threshold (RC-273), isolation
+  shutdown within the supplier IMD/BMS/PDU response window (RC-274), brake
+  override within the approved brake-override response window (RC-281),
+  E-stop/torque latency measured (RC-175/255); "current-limited" needs a real
+  current-limit definition (RC-248); V_caps matches supplier topology not exact
+  0.0 V (RC-253) and the pre-charge rise is judged against a supplier envelope
+  not a perfect RC curve (RC-261/269); timeout logic is elapsed-exceeds-limit
+  (RC-254); the E-stop dropout is measured, allows no automatic retry ever
+  (RC-255/262/249); 05L-C IMD fault injection uses an approved current-limited
+  fixture only — never an ad-hoc resistor on a live rail (RC-256/264); weld
+  detection splits false-positive vs false-negative (RC-258); Gate 05M-A is
+  inverter-enable READINESS not spin — supplier-defined ready/torque-disabled
+  state (never "Ready-to-Drive", RC-271/275), tolerance thresholds not perfect
+  zero (RC-270), no assumed 0% PWM / no power-stage switching unless the
+  supplier defines it safe + engineering approves (RC-265/266); Gate 05M-B is
+  the first physical rotation with the motor UNCOUPLED + GUARDED (RC-272),
+  coasting is not the watchdog failure — continuing to be powered is (RC-276),
+  over-speed via a supplier-supported test mode not a live safety-limit edit
+  (RC-277); Gate 05M-C is split 05M-C1 (coupled, wheels lifted) → 05M-C2 (first
+  ground contact) → 05M-C3 (RC-278); **Gate 05M-C1 forbids manual restraint of
+  rotating parts — rated mechanical wheel restraint / differential / hub-locking
+  fixture only, no hands near rotating wheels/shafts/hubs/belts/couplers ever
+  (RC-279); it runs only on a rated chassis lift / rated heavy-duty stands per
+  GVWR/axle load, secured against roll, guarded rotation zones, no personnel
+  inline, no one under the vehicle during energized rotation (RC-280)**; Gate
+  05M-C2 (first ground contact) uses a flat/controlled/closed
+  predictable-traction surface with runout, chocks/barriers, spotters outside
+  the path, and a remote E-stop — never a default low-friction surface
+  (RC-283); all numeric values across 05L-B..05M-C1 are INITIAL_TARGET_PROFILE
+  with no gate authority until tied to supplier docs + engineering review +
+  calibrated measurement method + raw proof + signed approval (RC-267); Ford
   signals don't gate real state transitions (RC-155); torque command stays
   strictly in DRIVE_ENABLED (RC-160); SERVICE_MODE + UDS service-clear require
   safe/neutral + LOTO / absence-of-voltage and must never clear active
@@ -252,33 +260,27 @@ supplier architecture confirms it; keep diesel data out of the 001A gas model
   DC-link caps (RC-242); PPE/tools/meters are voltage-matched, the gate blocks
   above rating (RC-239); personnel are qualified/authorized not "certified"
   (RC-238); fire assets are AHJ/supplier-ERG-selected (RC-240); Live-Dead-Live
-  uses an approved proving source + resolution-aware threshold (RC-241); no
-  "instant"/"immediate" mechanical/E-stop/torque/isolation action — measured
-  latency / supplier response window (RC-175/198/204/211/225/255/274);
-  power-loss safe-state + brownout NVM-save measured/hardware-verified not
-  assumed (RC-183/223); HIL scripts report `…_NO_VEHICLE_AUTHORITY` /
-  `HIL_HARD_BLOCK`, Gate 05I* report BENCH categories, never PASS
-  (RC-181/188/191/197); HIL/bench results are not vehicle/live-HV/compliance
-  authority and **never "certified safe"** (RC-190/224); every run produces the
-  proof-artifact package + calibration records (RC-184/194) + pre-test safety
-  checklist (RC-195); expected-safe-output ≠ blocked-output (RC-203/208); a
-  hard block is `HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW` (RC-207); breach limits
-  are variables not hard-coded constants (RC-209/215); Gate 05H split
-  05H-A/05H-B/05I (RC-185); Gate 05I low-voltage only (RC-196/199); Gate
-  05I-A..05I-D are bench-only (RC-201/214); Gate 05J is fitment (RC-229); keep
-  the 9-test Gate 05K version (RC-233); the post-bench ladder is staged +
-  engineer-gated — 05J/05K no-HV, 05L-A authorization (no energization), 05L-B
-  first-energization (observational), 05L-C shutdown/discharge/repeatability,
-  05M-A (inverter enable / zero-torque readiness) → 05M-B (no-load spin,
-  uncoupled/guarded) → 05M-C1 (coupled, wheels lifted) → 05M-C2 (restricted
-  creep) → 05M-C3 (closed-area low-speed movement) (D-008; RC-237..278); every
-  torque / contactor / BMS-discharge / HVIL / isolation / e-stop fault defaults
-  toward torque inhibit + restart lockout + engineering review (RC-179).**
+  uses an approved proving source + resolution-aware threshold (RC-241); HIL
+  scripts report `…_NO_VEHICLE_AUTHORITY` / `HIL_HARD_BLOCK`, Gate 05I* report
+  BENCH categories, never PASS (RC-181/188/191/197); HIL/bench results are not
+  vehicle/live-HV/compliance authority and **never "certified safe"**
+  (RC-190/224); every run produces the proof-artifact package + calibration
+  records (RC-184/194) + pre-test safety checklist (RC-195);
+  expected-safe-output ≠ blocked-output (RC-203/208); a hard block is
+  `HARD_BLOCKED_PENDING_ROOT_CAUSE_REVIEW` (RC-207); breach limits are variables
+  not hard-coded constants (RC-209/215); the post-bench ladder is staged +
+  engineer-gated — 05J/05K no-HV, 05L-A authorization, 05L-B first-energization
+  (observational), 05L-C shutdown/discharge/repeatability, 05M-A (inverter
+  enable / zero-torque readiness) → 05M-B (no-load spin, uncoupled/guarded) →
+  05M-C1 (coupled, wheels lifted) → 05M-C2 (first ground contact) → 05M-C3
+  (closed-area low-speed movement) (D-008; RC-237..283); every torque /
+  contactor / BMS-discharge / HVIL / isolation / e-stop fault defaults toward
+  torque inhibit + restart lockout + engineering review (RC-179).**
 - Do not recommend or run live-HV fault testing beyond the staged,
-  engineer-gated scope of Gate 05L-B/05L-C/05M-A/05M-B; no wheel torque path or
-  vehicle movement before Gate 05M-C1 (wheels lifted) / 05M-C3 (closed-area);
-  no track/road testing; staged testing only (RC-117) with LOTO/PPE/engineering
-  signoff.
+  engineer-gated scope; no ground contact / wheel torque path before Gate
+  05M-C2 (05M-C1 is wheels-lifted only); no open-floor / track / road testing
+  before Gate 05M-C3 / later road phases; staged testing only (RC-117) with
+  LOTO/PPE/engineering signoff; no manual restraint of rotating parts (RC-279).
 - Do not let the Build Engine claim compliance or mark anything safe /
   "certified safe" (RC-224).
 - Do not let quantum-inspired material gate or approve anything.

@@ -12,18 +12,20 @@ electrical phase-rotation sequence, monitors phase-current balance/THD, and
 tests over-speed + watchdog trips **under a supplier-defined low-torque spin
 profile only** — there is **no wheel torque path and no vehicle-movement path.**
 
-**Status (owner review_56): `NO_LOAD_MOTOR_SPIN_READY_FOR_DETAILING` /
-`GUARDED_SHAFT_REQUIRED` / `MOTOR_UNCOUPLED_REQUIRED` /
+**Status (owner review_57): `NO_LOAD_MOTOR_SPIN_VALIDATION_DEFINED` /
+`MOTOR_UNCOUPLED_REQUIRED` / `GUARDED_SHAFT_REQUIRED` /
 `SUPPLIER_SPIN_PROFILE_REQUIRED` / `NO_DRIVELINE_TORQUE_PATH` /
 `NO_VEHICLE_MOVEMENT`.** Ladder: **05J → 05K → 05L-A → 05L-B → 05L-C → 05M-A →
 05M-B (THIS GATE — first no-load spin, motor uncoupled) → 05M-C1 (coupled
 driveline static / lifted-wheel) → 05M-C2 (restricted creep) → 05M-C3
-(controlled closed-area low-speed movement)** (D-008, amended review_56).
+(controlled closed-area low-speed movement)** (D-008, amended review_57).
 Numeric Threshold Authority Rule (RC-267): every value here is
 `INITIAL_TARGET_PROFILE` until tied to supplier docs + engineering review +
 calibrated measurement method + raw proof + signed approval. Watchdog/over-speed
 wording per RC-276/277 (coasting is not the failure; over-speed via a
-supplier-supported test mode only).
+supplier-supported test mode only — the Hunter re-emitted the live-limit-edit
+wording in batch_60, RC-277 regression watch; 05M-B-004 already holds the
+corrected wording).
 
 ## Global value doctrine (owner review_55, RC-267) — read first
 

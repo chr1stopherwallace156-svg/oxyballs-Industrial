@@ -665,38 +665,62 @@ balance, ≤50 ms watchdog) are `INITIAL_TARGET_PROFILE` pending supplier approv
 (RC-267/Numeric Threshold Authority Rule). Spin commanded via the service/
 calibration tool, not driver pedal (RC-271). Permits **Gate 05M-C1 only**.
 
-## Gate 05M-C1 — Coupled Driveline Static / Lifted-Wheel Readiness  · STATUS: NEXT (owner review_56)
+## Gate 05M-C1 — Coupled Driveline Static / Lifted-Wheel Readiness  · STATUS: COUPLED_DRIVELINE_LIFTED_WHEEL_READINESS_DEFINED (batch_60)
 
-Owner review_56: Gate 05M-C is **split** (RC-278) — do not jump to open-floor
-movement. The first coupled test proves the mechanical + sensing + safety layer
-**with the wheels lifted (no ground contact)** before any creep.
+Deliverable `docs/status/GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md` — the first
+coupled test: the traction motor coupled to gearbox/half-shafts/hubs/wheels but
+the **driven axle lifted + locked, zero ground contact**. 5-row matrix
+(05M-C1-001 backlash mapping, 002 elevated wheel-speed parity, 003
+brake-override, 004 micro-scale torque clamp, 005 lifted asymmetry/differential
+scan). Status (review_57): `COUPLED_DRIVELINE_LIFTED_WHEEL_READINESS_DEFINED /
+RATED_LIFT_OR_STANDS_REQUIRED / ROTATING_WHEEL_GUARDS_REQUIRED / NO_GROUND_CONTACT
+/ NO_OPEN_FLOOR_MOVEMENT / NO_CAN_1_CONTROL_AUTHORITY / BRAKE_OVERRIDE_REQUIRED /
+MICRO_TORQUE_LIMIT_TARGET_ONLY`. Safety corrections (review_57): **"hand-lock one
+lifted wheel" forbidden — rated mechanical wheel restraint / differential / hub-
+locking fixture only, no hands near rotating parts ever (RC-279)**; the Lifted
+Chassis Safety Rule — rated lift/heavy-duty stands per GVWR/axle load, secured
+against roll, guards, no personnel inline, no one under the vehicle during
+energized rotation (RC-280); brake override within the approved response window,
+not "instantly" (RC-281); wheel-speed data read-only, not traction-control
+authority (RC-282); every value INITIAL_TARGET_PROFILE (RC-267). Permits **Gate
+05M-C2 only**.
 
-**Owner scope (review_56) — the first coupled test proves:**
+## Gate 05M-C2 — Restricted Creep Torque Validation  · STATUS: NEXT (owner review_57)
 
-> - mechanical coupling (driveline reconnected: driveshaft/axle/gearbox)
-> - driveline backlash / lash audit
-> - wheel-speed sensing
-> - brake override
-> - torque clamp
-> - wheels lifted / no ground contact / no vehicle movement path
+The **first ground contact** — restricted low-speed creep, only after Gate
+05M-C1 proves the coupled/lifted mechanical + sensing + safety layer. **The test
+surface must be a flat, controlled, closed area with predictable traction — NOT
+a default "low-friction" surface (RC-283)** (low-friction causes wheel slip /
+weird ABS/ESC reactions / poor steering-brake feedback; intentional low-friction
+testing is a separate future gate).
 
-Enforce throughout — engineer-gated, live-HV, **wheels lifted, no ground
-contact, no vehicle-movement path**; the Numeric Threshold Authority Rule
-(RC-267) applies — no torque-clamp / creep-limit / backlash threshold is final
-gate logic until supplier docs + engineering review + calibrated measurement
-method + raw proof + signed approval upgrade it; the inverter owns its gating
-per the supplier state machine, the BMS/PDU owns contactors/pre-charge, the
-hardwired loop owns emergency interruption, the VCU requests/monitors
-(RC-247/265/205/227; BQ-27); the inverter/motor + driveline supplier data
-(torque map, gear ratio, axle/GAWR, wheel-speed, brake/steering assist) is
-required before any wheel torque path (BQ-27); the stored-energy discharge-wait
-rule applies after any exposure (RC-242); no automatic retry after an E-stop
-(RC-262); never "certified safe" / no compliance claim (RC-224). Only after
-05M-C1 → **05M-C2 (Restricted Creep Torque Validation)** → **05M-C3 (Controlled
-Closed-Area Low-Speed Movement)**, each engineer-approved under a staged safety
-plan + LOTO/PPE (RC-117); no open-floor / road testing / customer operation
-until proven. Then (later, well beyond Gate 05) the wider road/commissioning
-phases stay engineer-gated.
+**Owner scope (review_57) — required conditions:**
+
+> - flat, controlled, closed test surface with predictable traction
+> - clear runout distance
+> - wheel chocks / barriers staged
+> - spotters positioned outside the movement path
+> - remote E-stop available
+> - anti-rollback logic + highly restrictive torque ramp-rate (dI/dt) limits
+> - breakaway-torque baselines under tire load
+
+Enforce throughout — engineer-gated, live-HV, **first ground contact, closed
+controlled area only, no public road, no customer operation**; status target
+`RESTRICTED_CREEP_TORQUE_CONCEPT_STARTED / GROUND_CONTACT_PRESENT /
+CLOSED_CONTROLLED_TEST_AREA_REQUIRED / REMOTE_ESTOP_REQUIRED / SPOTTERS_REQUIRED
+/ NO_PUBLIC_ROAD / NO_CUSTOMER_OPERATION`; the Numeric Threshold Authority Rule
+(RC-267) applies — no creep-torque / dI/dt / breakaway / anti-rollback threshold
+is final gate logic until supplier docs + engineering review + calibrated
+measurement method + raw proof + signed approval upgrade it; wheel-speed stays
+read-only, not traction-control authority (RC-282); the inverter owns its gating,
+the BMS/PDU owns contactors/pre-charge, the hardwired loop + service brakes own
+the stopping path, the VCU requests/monitors + enforces the clamp
+(RC-247/265/205/227; BQ-27); no manual restraint of rotating parts (RC-279);
+never "certified safe" / no compliance claim (RC-224). Only after 05M-C2 →
+**05M-C3 (Controlled Closed-Area Low-Speed Movement)**, engineer-approved under a
+staged safety plan + LOTO/PPE (RC-117); no open-floor / road testing / customer
+operation until proven. Then (later, well beyond Gate 05) the wider
+road/commissioning phases stay engineer-gated.
 
 Enforce throughout — no HV / no traction enable / no vehicle motion at
 05J-05K; CAN_1 stays listen-only + passive on the live OEM Ford bus (TXD-pin

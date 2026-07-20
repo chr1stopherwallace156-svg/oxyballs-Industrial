@@ -5,6 +5,45 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 60 + review_57: Gate 05M-B cleanup + Gate 05M-C1 Coupled Driveline / Lifted-Wheel Readiness
+
+- Archived batch_60 (Gate 05M-B cleanup + Gate 05M-C1 + Gate 05M-C2 preview)
+  and review_57 1:1 (commit `ad3f489`). New rows RC-279..283 (no new CS).
+  Section 68. New deliverable `docs/status/GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`
+  — the first coupled test: the traction motor coupled to gearbox/half-shafts/
+  hubs/wheels but the **driven axle lifted + locked, zero ground contact**;
+  5-row matrix (05M-C1-001..005). `GATE05M_B` status label. Owner: "a strong
+  next stage … the right risk progression: 05M-B uncoupled → 05M-C1 coupled but
+  wheels lifted → 05M-C2 first restricted ground creep."
+- The Hunter realized RC-276 (05M-B-005 coasting-not-failure) but re-emitted
+  the 05M-B over-speed live-limit-edit wording (RC-277 recurrence); the
+  `GATE05M_B` deliverable already held the corrected supplier-supported wording.
+- **Owner safety corrections (RC-279..283):**
+  - RC-279 (SAFETY-CRITICAL) — "hand-lock one lifted wheel" is forbidden; use a
+    rated mechanical wheel restraint / differential / hub-locking fixture only;
+    no hands near rotating wheels/shafts/hubs/belts/couplers, ever.
+  - RC-280 — the Lifted Chassis Safety Rule: rated chassis lift or rated
+    heavy-duty stands approved for the GVWR/axle load; secured against roll;
+    suspension droop accounted for; guarded rotation zones; no personnel
+    inline; no one under the vehicle during energized rotation tests.
+  - RC-281 — 05M-C1 brake override within the approved response window, not
+    "instantly."
+  - RC-282 — wheel-speed data is read-only / verification only; factory ABS/ESC
+    never becomes traction-control authority without Ford-authorized docs +
+    engineering review (extends CAN_1 listen-only RC-172/230).
+  - RC-283 — Gate 05M-C2 (first ground contact) uses a flat, controlled, closed
+    surface with predictable traction, runout, chocks/barriers, spotters
+    outside the path, and a remote E-stop — never a default low-friction
+    surface.
+  - Numeric Threshold Authority Rule (RC-267) applied to 05M-B/05M-C1.
+- Corrected status labels applied to 05M-B
+  (`NO_LOAD_MOTOR_SPIN_VALIDATION_DEFINED …`) and 05M-C1
+  (`COUPLED_DRIVELINE_LIFTED_WHEEL_READINESS_DEFINED / RATED_LIFT_OR_STANDS_REQUIRED
+  / NO_GROUND_CONTACT …`). **D-008 amended.** RESEARCH_MAP + GATE_RESEARCH_QUEUE
+  next → **Gate 05M-C2** (Restricted Creep Torque Validation). Nothing
+  Confirmed; no ground contact; no open-floor movement; never "certified safe"
+  (RC-224); ODRs untouched.
+
 ## 2026-07-16 — RH batch 59 + review_56: Gate 05L-B/05L-C/05M-A/05M-B cleanups + Gate 05M-C split
 
 - Archived batch_59 (Gate 05L-B/05L-C/05M-A/05M-B cleanups + Gate 05M-C

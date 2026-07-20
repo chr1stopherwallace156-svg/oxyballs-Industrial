@@ -377,6 +377,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-276 | **05M-B watchdog blocked-state is wrong — coasting is not the failure (owner review_56)**: "motor continuing to spin" is not a failure (an uncoupled shaft coasts from inertia after torque is removed) → blocked = **"the inverter continues actively driving the motor · phase current persists beyond the approved decay window · torque command remains active after watchdog loss · the inverter fails to enter its supplier-defined safe state"**; coasting is fine, **continuing to be powered is the failure** | batch_59 (wrong failure condition) | n/a — logic-correctness rule | **Correctness / ControlsSafety** — fixed in `GATE05M_B_NO_LOAD_MOTOR_SPIN.md` (05M-B-005) — lanes L7 |
 | RC-277 | **05M-B over-speed test must be supplier-supported (owner review_56)**: "temporarily lower the software over-speed limit below current RPM" reads like casually editing a safety limit while spinning → **"use a supplier-supported test mode or pre-approved calibration profile to trigger over-speed protection at a controlled low RPM; live safety-limit modification during uncontrolled rotation is forbidden"** | batch_59 (unsafe live-limit edit) | supplier test mode / calibration profile — **NeedsSupplierData** | **ControlsSafety / HardBlock** — fixed in `GATE05M_B_NO_LOAD_MOTOR_SPIN.md` (05M-B-004) — lanes L7/L9 |
 | RC-278 | **Gate 05M-C must be SPLIT before any real movement (owner review_56, amends D-008 ladder)**: the Hunter's 05M-C "wheels + gear reductions fully linked" jumps to open-floor movement → split **05M-C1 — Coupled Driveline Static / Lifted-Wheel Readiness → 05M-C2 — Restricted Creep Torque Validation → 05M-C3 — Controlled Closed-Area Low-Speed Movement**; the first coupled test (05M-C1) proves mechanical coupling, driveline backlash, wheel-speed sensing, brake override, and torque clamp **with the wheels lifted** before any open-floor operation | batch_59 (premature open-floor movement) | n/a — gate-ladder rule | **GateStatus / ControlsSafety** — amends D-008; queued as Gate 05M-C1 NEXT in `GATE_RESEARCH_QUEUE.md` — lanes L7 |
+| RC-279 | **"Hand-lock one lifted wheel" is forbidden (owner review_57, SAFETY-CRITICAL)**: manual hand restraint near rotating driveline components is dangerous → **"use an approved mechanical wheel restraint / differential test fixture / rated hub-locking fixture; manual hand restraint near rotating driveline components is forbidden — no hands near rotating wheels, shafts, hubs, belts, or couplers, ever"** | batch_60 (dangerous manual restraint) | n/a — controls-safety rule (rotating-machinery guarding) | **ControlsSafety / HardBlock** — recorded in `docs/status/GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md` (05M-C1-005 + no-manual-restraint rule) — lanes L4/L7 |
+| RC-280 | **Gate 05M-C1 Lifted Chassis Safety Rule (owner review_57)**: the vehicle coupled to lifted wheels is a major mechanical hazard → 05M-C1 may **only** run on a **rated chassis lift or rated heavy-duty stands approved for the vehicle GVWR/axle load**; secured against roll; suspension droop accounted for; wheel-rotation zones guarded; **no personnel inline with rotating tires/shafts/hubs; no person may be under the vehicle while energized rotation tests are active**; E-stop + exclusion zone active | batch_60 (missing lift safety) | rated-lift/stand + rotating-machinery guarding — **NeedsExactSource** (owner-paraphrased) | **ControlsSafety / HardBlock** — recorded in `GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md` (Lifted Chassis Safety Rule) — lanes L4/L7 |
+| RC-281 | **05M-C1 brake-override must not say "instantly"/"immediately" (owner review_57, "instant/immediate" RECURRENCE)**: "the VCU must instantly clear traction torque / brake activation immediately overrides" → **"the VCU clears traction torque commands within the approved brake-override response window; inverter phase current decays within the approved threshold; the mechanical brakes slow/stop the lifted wheels without the inverter fighting the service brakes"** | batch_60 ("instantly" wording) | supplier/engineering brake-override response window — **NeedsSupplierData** | **NeedsSupplierData / ControlsSafety** — fixed in `GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md` (05M-C1-003; extends RC-175/198/204/211/225/255/274) — lanes L7 |
+| RC-282 | **Wheel-speed data is read-only, not control authority (owner review_57, extends RC-172/230)**: "the VCU pulls speed data independently from ABS/wheel encoders" conflicts with CAN_1 listen-only / no-factory-injection → **"wheel-speed data may be observed only through an authorized read-only path, passive logging path, or independent external instrumentation; factory ABS/ESC data must not become traction-control authority unless Ford-authorized documentation + engineering review approve it"**; for now wheel-speed parity is **verification, not control authority** | batch_60 (factory-bus control authority) | Ford ABS/ESC authorization — **NeedsExactSource / NeedsVehicleSpecificBBLB** | **ControlsSafety / ProofRequirement** — recorded in `GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md` (wheel-speed read-only rule + 05M-C1-002) — lanes L7 |
+| RC-283 | **Gate 05M-C2 must not default to a "low-friction surface" (owner review_57)**: low-friction causes wheel slip / weird ABS/ESC reactions / poor steering-brake feedback → for first ground movement use **"a flat, controlled, closed test surface with predictable traction, clear runout distance, wheel chocks/barriers staged, spotters positioned outside the movement path, and remote E-stop available"**; intentional low-friction testing is a **separate future gate** | batch_60 (unsafe default surface) | n/a — controls-safety rule | **ControlsSafety / GateStatus** — recorded in `GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md` (Next — 05M-C2) + queued in `GATE_RESEARCH_QUEUE.md` — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -4543,4 +4548,81 @@ closed-area low-speed movement).
   requests/monitors (RC-247/265/205/227; BQ-27); never "certified safe"
   (RC-224).
 - Nothing ingested; nothing marked Confirmed; no wheel torque path; no vehicle
+  movement; no compliance/certification claim; ODRs untouched.
+
+## 68. Batch 60 + owner review_57 — Gate 05M-B cleanup + Gate 05M-C1 Coupled Driveline / Lifted-Wheel Readiness (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_60_gate05mb_cleanup_gate05mc1_lifted.md`
+and `docs/research/raw/owner_reviews/review_57_batch_60_verdict.md`.
+Row additions: RC-279..RC-283 (no new CS). Deliverable:
+`docs/status/GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md` (new) + `GATE05M_B` status
+label. Owner: "a strong next stage … the right risk progression: 05M-B
+uncoupled → 05M-C1 coupled but wheels lifted → 05M-C2 first restricted ground
+creep."
+
+### Gate 05M-B watchdog realized
+
+The Hunter realized RC-276 (05M-B-005 coasting-not-failure blocked states). But
+05M-B-004 re-emitted "temporarily lower the software over-speed limit" (RC-277
+recurrence); the `GATE05M_B` deliverable already held the supplier-supported
+wording.
+
+### Gate 05M-C1 — first coupled test, wheels LIFTED
+
+The traction motor coupled to gearbox/half-shafts/hubs/wheels, but the **driven
+axle lifted + locked, zero ground contact**: backlash/drag mapping,
+wheel-speed-parity audit, micro-scale torque clamp (≤5%), brake-override
+interlock. 5-row matrix (05M-C1-001..005).
+
+### Owner corrections
+
+- **BIGGEST — "hand-lock one lifted wheel" forbidden (RC-279, SAFETY-CRITICAL):**
+  rated mechanical wheel restraint / differential fixture / hub-locking fixture
+  only; no hands near rotating wheels/shafts/hubs/belts/couplers, ever.
+- **Lifted Chassis Safety Rule (RC-280):** rated lift/heavy-duty stands
+  approved for the GVWR/axle load; secured against roll; suspension droop
+  accounted; guarded rotation zones; no personnel inline; no one under the
+  vehicle during energized rotation.
+- **No "instantly"/"immediately" in brake override (RC-281):** within the
+  approved brake-override response window; phase current decays within the
+  approved threshold.
+- **Wheel-speed data is read-only (RC-282):** authorized read-only / passive
+  logging / independent instrumentation; factory ABS/ESC not traction-control
+  authority without Ford-authorized docs + engineering review; verification not
+  control.
+- **05M-C2 not default "low-friction" (RC-283):** flat, controlled, closed
+  surface with predictable traction, runout, chocks/barriers, spotters outside
+  the path, remote E-stop; low-friction is a separate future gate.
+- **Numeric Threshold Authority Rule applies (RC-267):** ≤1% pulse, 100 RPM,
+  ≤5% wheel-speed tolerance, ≤5% torque clamp are INITIAL_TARGET_PROFILE.
+
+### Corrected status labels (owner review_57)
+
+05M-B `NO_LOAD_MOTOR_SPIN_VALIDATION_DEFINED / MOTOR_UNCOUPLED_REQUIRED / …`;
+05M-C1 `COUPLED_DRIVELINE_LIFTED_WHEEL_READINESS_DEFINED /
+RATED_LIFT_OR_STANDS_REQUIRED / ROTATING_WHEEL_GUARDS_REQUIRED / NO_GROUND_CONTACT
+/ NO_OPEN_FLOOR_MOVEMENT / NO_CAN_1_CONTROL_AUTHORITY / BRAKE_OVERRIDE_REQUIRED /
+MICRO_TORQUE_LIMIT_TARGET_ONLY`; 05M-C2 `RESTRICTED_CREEP_TORQUE_CONCEPT_STARTED
+/ GROUND_CONTACT_PRESENT / CLOSED_CONTROLLED_TEST_AREA_REQUIRED /
+REMOTE_ESTOP_REQUIRED / SPOTTERS_REQUIRED / NO_PUBLIC_ROAD / NO_CUSTOMER_OPERATION`.
+
+### Next
+
+Owner: **Gate 05M-C2 — Restricted Creep Torque Validation** (the first ground
+contact, restricted low-speed creep, on a controlled closed surface with
+predictable traction). Only after 05M-C1. Then Gate 05M-C3 (Controlled
+Closed-Area Low-Speed Movement). Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- Driven axle lifted, zero ground contact, no open-floor movement at 05M-C1
+  (RC-279..283); rated lift/stands + guards + no personnel inline / under the
+  vehicle (RC-280); no manual restraint of rotating parts (RC-279); wheel-speed
+  read-only not control (RC-282); brake override within the approved window
+  (RC-281); every value INITIAL_TARGET_PROFILE (RC-267); the inverter owns
+  gating, BMS/PDU owns contactors/pre-charge, hardwired loop + service brakes
+  own the stopping path, VCU requests/monitors (RC-247/265/205/227; BQ-27);
+  never "certified safe" (RC-224).
+- Nothing ingested; nothing marked Confirmed; no ground contact; no open-floor
   movement; no compliance/certification claim; ODRs untouched.

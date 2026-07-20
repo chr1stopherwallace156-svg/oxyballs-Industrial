@@ -161,6 +161,24 @@ later entry that references it.
   mechanical/sensing/safety layer with the wheels lifted** (RC-278). Full
   ladder: 05J → 05K → 05L-A → 05L-B → 05L-C → 05M-A → 05M-B → 05M-C1 → 05M-C2
   → 05M-C3 (each engineer-approved).
+- **Amendment (owner review_57, batch_60, RC-279..283): Gate 05M-C1 created
+  (`GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`) — first coupled test, driven axle
+  LIFTED with zero ground contact; hard rotating-machinery + lift safety
+  rules.** **No manual restraint of rotating parts — rated mechanical wheel
+  restraint / differential / hub-locking fixture only, no hands near rotating
+  wheels/shafts/hubs/belts/couplers ever (RC-279).** The **Lifted Chassis
+  Safety Rule (RC-280)** — 05M-C1 runs only on a rated chassis lift or rated
+  heavy-duty stands approved for the vehicle GVWR/axle load, secured against
+  roll, suspension droop accounted for, wheel-rotation zones guarded, no
+  personnel inline with rotating tires/shafts/hubs, and **no person under the
+  vehicle while energized rotation tests are active**. Brake override is within
+  the approved response window, not "instantly" (RC-281); **wheel-speed data is
+  read-only / verification only — factory ABS/ESC never becomes traction-control
+  authority without Ford-authorized documentation + engineering review
+  (RC-282)**; Gate 05M-C2 (first ground contact) uses a flat, controlled, closed
+  surface with predictable traction, runout, chocks/barriers, spotters outside
+  the path, and a remote E-stop — never a default low-friction surface (RC-283,
+  a separate future gate if ever tested).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the
@@ -172,7 +190,8 @@ later entry that references it.
   `docs/status/GATE05L_B_HV_FIRST_ENERGIZATION.md`,
   `docs/status/GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md`,
   `docs/status/GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md`,
-  `docs/status/GATE05M_B_NO_LOAD_MOTOR_SPIN.md`. Supersedes nothing.
+  `docs/status/GATE05M_B_NO_LOAD_MOTOR_SPIN.md`,
+  `docs/status/GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`. Supersedes nothing.
 
 ## D-007 — Controls-authority doctrine: Coordinator ≠ Owner + Build Engine Authority Law
 
