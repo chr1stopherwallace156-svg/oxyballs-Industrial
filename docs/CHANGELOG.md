@@ -5,6 +5,54 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 55 + review_52: Gate 05L-B Controlled HV First-Energization / Current-Limited Pre-Charge Observation
+
+- Archived batch_55 (Gate 05L-B) and review_52 1:1 (commit `6a4c351`). New
+  rows RC-245..251 (no new CS). Section 63. New deliverable
+  `docs/status/GATE05L_B_HV_FIRST_ENERGIZATION.md` — **the first gate with LIVE
+  HV PRESENT**, purely observational (first LOTO-pin removal + MSD connect +
+  current-limited pre-charge closure; **no inverter switching, zero motor RPM,
+  no vehicle movement**), attempted only after a signed Gate 05L-A
+  authorization. 7-row matrix (05L-B-001..007) + exit criteria. Owner: "the
+  right next direction, but too aggressive in a few spots … do not proceed to
+  05M yet."
+- The 05L-A cleanups were re-emitted and realized: the stored-energy discharge
+  mandate (RC-242) and the IMD isolation-resistance disambiguation (RC-243) —
+  with candidate final insulation thresholds (100 Ω/V or 500 Ω/V) recorded as
+  pending (RC-251).
+- **Owner corrections (RC-245..251):**
+  - RC-245 — 05L-B thresholds (≥95% pre-charge, ≤500 ms timeout, ≤50 ms
+    feedback, ≤60 V discharge, ≤5% ΔV) are initial bench targets only →
+    supplier-defined completion threshold + timeout; SUPPLIER_DATA_PENDING /
+    ENGINEERING_REVIEW_REQUIRED (sixteenth artifact of the invented-values
+    family).
+  - RC-246 — contactor sequence is supplier-specific (negative-first /
+    positive-first / pre-charge-first / integrated BDU-PDU), not universal;
+    final needs the supplier wiring diagram + controls-engineer approval.
+  - RC-247 — the VCU does not own contactor/pre-charge closure unless the
+    supplier architecture assigns it: VCU = REQUESTER/MONITOR, BMS/PDU likely
+    owns execution, the hardwired loop owns emergency interruption; each test
+    split request/owner/feedback/response/abort.
+  - RC-248 — "current-limited" needs a real current-limit definition
+    (SUPPLIER_DEFINED/ENGINEERING_APPROVED: resistor R, pulse energy, DC-link
+    C, pack max V, peak pre-charge current, thermal-recovery interval, retry
+    limit); 05L-B blocked without them.
+  - RC-249 — added the manual E-stop abort row (05L-B-007): hardwired loop
+    interrupts, VCU logs if powered, BMS/PDU → safe state, no auto retry; the
+    first live-HV gate must prove the human abort path.
+  - RC-250 — do not jump to Gate 05M; insert Gate 05L-C (Controlled HV
+    Shutdown, Discharge, and Re-Energization Repeatability); inverter/spin only
+    after 05L-C.
+  - RC-251 — IMD insulation thresholds (candidate 100/500 Ω/V) pending the IMD
+    supplier manual + system voltage + engineering review + FMVSS 305/ISO
+    6469-3 mapping.
+- Gate 05L-B status `DRAFT_CREATED / LIVE_HV_PRESENT / … /
+  VCU_AUTHORITY_REQUESTER_ONLY_UNLESS_DOCUMENTED / NO_INVERTER_SWITCHING /
+  ZERO_MOTOR_RPM / …`; permits **Gate 05L-C only**. **D-008 amended** (ladder:
+  05J → 05K → 05L-A → 05L-B → 05L-C → (later) 05M). RESEARCH_MAP +
+  GATE_RESEARCH_QUEUE next → **Gate 05L-C**. Nothing Confirmed; no motor spin;
+  never "certified safe" (RC-224); ODRs untouched.
+
 ## 2026-07-16 — RH batch 54 + review_51: Gate 05L-A HV First-Energization Authorization & Safety Readiness
 
 - Archived batch_54 (Gate 05L-A HV authorization) and review_51 1:1 (commit

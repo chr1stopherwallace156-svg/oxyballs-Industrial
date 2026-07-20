@@ -77,6 +77,24 @@ later entry that references it.
   authorization; it starts with a supplier-defined pre-charge target/timeout +
   current-limited setup + remote observation, and no vehicle movement /
   wheels-on-ground drive / road test / traction command / customer operation.
+- **Amendment (owner review_52, batch_55, RC-245..251): Gate 05L-B created
+  (`GATE05L_B_HV_FIRST_ENERGIZATION.md`) — the first gate with LIVE HV PRESENT,
+  observational only (no inverter switching, zero motor RPM); insert Gate 05L-C
+  before any motor spin.** 05L-B thresholds (95%/500 ms/50 ms/60 V/5% ΔV) are
+  initial bench targets pending supplier docs + engineering review (RC-245);
+  the contactor sequence is supplier-specific (RC-246); the VCU is
+  requester/monitor while the BMS/PDU owns contactor/pre-charge execution and
+  the hardwired loop owns emergency interruption (RC-247); "current-limited"
+  requires a real current-limit definition or 05L-B stays blocked (RC-248); a
+  manual E-stop abort path must be proven (RC-249); IMD thresholds
+  (candidate 100/500 Ω/V) pend the supplier manual + FMVSS 305/ISO 6469-3
+  (RC-251). **The ladder gains Gate 05L-C — Controlled HV Shutdown, Discharge,
+  and Re-Energization Repeatability** (normal + emergency shutdown,
+  stored-energy discharge, restart lockout, pre-charge retry limits, IMD fault
+  response, contactor-feedback consistency, no weld false negatives,
+  repeat-cycle stability). **Gate 05M (Traction Inverter Control Loop /
+  Low-Speed Spin) is deferred — NOT before 05L-C** (RC-250). Full ladder:
+  05J → 05K → 05L-A → 05L-B → 05L-C → (later, engineer-approved) 05M.
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the
@@ -84,7 +102,8 @@ later entry that references it.
   Engine never marks a bench assembly "certified safe" (RC-224). Recorded in
   `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md`,
   `docs/status/GATE05K_VEHICLE_POWER_ON.md`,
-  `docs/status/GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md`. Supersedes nothing.
+  `docs/status/GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md`,
+  `docs/status/GATE05L_B_HV_FIRST_ENERGIZATION.md`. Supersedes nothing.
 
 ## D-007 — Controls-authority doctrine: Coordinator ≠ Owner + Build Engine Authority Law
 

@@ -371,28 +371,32 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_51):** **Gate 05L-B — Controlled HV
-First-Energization / Current-Limited Pre-Charge Observation** — the **first
-controlled live-HV sequence**, attempted only after a signed engineering
-authorization out of Gate 05L-A (Decision Register **D-008**, amended
-review_51). It must **not** start with final timing values. Owner verbatim
-scope: supplier-defined pre-charge target · supplier-defined timeout ·
-current-limited setup · remote observation — and **no vehicle movement · no
-wheels-on-ground drive · no road test · no traction command · no customer
-operation**. The stored-energy discharge-wait rule (RC-242) applies after any
-exposure/failed attempt; the VCU requests but does not own HV isolation
-(RC-205/227; BQ-27); no final pre-charge/voltage/insulation/contactor timing
-unless supplier docs or engineering review provide them (RC-237/241/243/244);
-never "certified safe" (RC-224). **Gate 05L-A**
+**Next expected batch (owner review_52):** **Gate 05L-C — Controlled HV
+Shutdown, Discharge, and Re-Energization Repeatability** — the gate inserted
+after first energization and **before any motor spin** (Decision Register
+**D-008**, amended review_52, RC-250). Owner verbatim scope: normal shutdown ·
+emergency shutdown · stored-energy discharge · restart lockout · pre-charge
+retry limits · IMD fault response · contactor-feedback consistency · no
+weld-detection false negatives · repeat-cycle stability. Still engineer-gated,
+live-HV, **no motor spin · no inverter switching · no vehicle movement**; no
+threshold (discharge time, retry limit, IMD trip) is final gate logic until
+supplier docs + engineering review upgrade it (RC-245/248/251); the
+stored-energy discharge-wait rule (RC-242) applies after any exposure/failed
+attempt; the VCU requests but the BMS/PDU owns contactor/pre-charge execution
+and the hardwired loop owns emergency interruption (RC-247/205/227; BQ-27);
+never "certified safe" (RC-224). Only after Gate 05L-C may Gate 05M (traction
+inverter / low-speed spin) even be considered. **Gate 05L-B**
+(`GATE05L_B_HV_FIRST_ENERGIZATION.md`) is `DRAFT_CREATED` / `LIVE_HV_PRESENT` —
+the **first gate with live HV present**, purely observational (no inverter
+switching, zero motor RPM); 7-row matrix (05L-B-001..007) including the manual
+E-stop abort; review_52 corrections: thresholds are initial bench targets only
+(RC-245), contactor sequence is supplier-specific (RC-246), VCU =
+requester/monitor while the BMS/PDU owns execution (RC-247), "current-limited"
+needs a real current-limit definition (RC-248), added the E-stop abort row
+(RC-249), IMD thresholds candidate/pending (RC-251). **Gate 05L-A**
 (`GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md`) is `HV_AUTHORIZATION_GATE_CREATED`
-/ `NO_HV_ENERGIZATION` — the first gate that contemplates live HV, a strict
-pre-energization authorization gate (7-row matrix 05L-A-001..007 + 12-item
-hard-stop list); review_51 corrections: qualified/authorized personnel not
-"certified" (RC-238), voltage-matched PPE (RC-239), AHJ/supplier-ERG fire
-assets (RC-240), Live-Dead-Live via an approved proving source + resolution-
-aware threshold (RC-241), stored-energy discharge wait (RC-242), IMD
-supplier-defined thresholds (RC-243), pre-charge test low-voltage-only
-(RC-244); owner cited OSHA + NHTSA guidance (NeedsExactSource). **Gate 05J**
+/ `NO_HV_ENERGIZATION` — the strict pre-energization authorization gate
+(review_51 corrections RC-238..244). **Gate 05J**
 (`GATE05J_VEHICLE_FITMENT.md`) is
 `CONTROLLED_VEHICLE_FITMENT_DEFINED` / `NO_HV_CONNECTED` / `CAN_1_PASSIVE_ONLY`
 — the first gate where the conversion physically touches the vehicle (5-row
