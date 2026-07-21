@@ -1097,3 +1097,20 @@ Append-only record of digital twin foundation decisions.
   6. **Zero production code mutation** in this pass
 
 ---
+
+## DT-D065 — Repository implementation audit (spec vs code)
+
+- **Change-control record:** [`decisions/DT-D065_IMPLEMENTATION_AUDIT.json`](decisions/DT-D065_IMPLEMENTATION_AUDIT.json)
+- **decision_id:** `DT-D065`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-034`
+- **recommended_decision:** `AUDIT_COMPLETE_PRIORITIZE_P0_GLB_OR_P2_VPIC`
+- **decision:**
+  1. Admit implementation audit artifacts proving spec↔code gap
+  2. VPR-2 interaction + JSON domains = implemented; PostgreSQL / vPIC / scan / Open3D = missing
+  3. GLB gate tooling verified offline only; no runtime GLB load
+  4. Open-source backlog remains NOT STARTED (zero pipeline code)
+  5. Rule: documentation ≠ implementation; update audit with each implementation PR
+
+---

@@ -739,3 +739,23 @@ DT-D063 — `SPEC_3D_001_ACCEPTED_GLB_NOT_YET_ACQUIRED`.
 
 DT-D064 — `OPEN_SOURCE_RESEARCH_PACK_ACCEPTED_BACKLOG_NOT_EXECUTED`.
 
+---
+
+## RL-034 — Repository implementation audit
+
+- **Date:** 2026-07-21
+- **Layer:** honesty / traceability
+- **Agent:** Cursor Cloud Agent
+- **Question:** What exists in code vs what specs/decisions claim?
+
+### Findings
+
+1. Four audit artifacts: IMPLEMENTATION_AUDIT, MISSING_FEATURES, NEXT_IMPLEMENTATION_PRIORITY, TRACEABILITY_MATRIX.
+2. VPR-2 R3F + JSON stores implemented; GLB/vPIC/scan/Open3D missing.
+3. `verify:mesh` + `build` pass; no viewer unit tests.
+4. Recommend P0 GLB slice or P2 vPIC before new features.
+
+### Status
+
+DT-D065 — `AUDIT_COMPLETE_PRIORITIZE_P0_GLB_OR_P2_VPIC`.
+

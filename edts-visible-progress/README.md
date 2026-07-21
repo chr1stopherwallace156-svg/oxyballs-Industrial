@@ -4,7 +4,11 @@ Honest baseline (DT-D061 / DT-D062 / DT-D063). **Not production-ready.**
 
 Real **React Three Fiber** WebGL scene (not CSS cards). Procedural truck-shaped placeholders; no GLB binary yet.
 
-## Audit
+## Audit (implementation truth)
+
+Foundation repo audit (DT-D065): [`IMPLEMENTATION_AUDIT.md`](../elektron-digital-twin-foundation/IMPLEMENTATION_AUDIT.md) · [`MISSING_FEATURES.md`](../elektron-digital-twin-foundation/MISSING_FEATURES.md) · [`NEXT_IMPLEMENTATION_PRIORITY.md`](../elektron-digital-twin-foundation/NEXT_IMPLEMENTATION_PRIORITY.md)
+
+## Audit (prototype scope)
 
 See [`PROTOTYPE_STATUS.md`](PROTOTYPE_STATUS.md).
 

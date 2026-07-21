@@ -35,6 +35,8 @@ SIM records remain `mass_kg: null`. Handoff sample kg values quarantined in
 
 User can orbit a truck-shaped R3F scene, hover/select/isolate/search/inspect ≥5 meshes.
 
+**Implementation truth:** See foundation [`IMPLEMENTATION_AUDIT.md`](../elektron-digital-twin-foundation/IMPLEMENTATION_AUDIT.md) — procedural meshes only; no GLB; manifest verifier offline.
+
 ## GLB acquisition (DT-D063)
 
 Gate accepted: `EDTS-SPEC-3D-001`. Manifest + `verifyMeshMapping` + QA checklist ready.  

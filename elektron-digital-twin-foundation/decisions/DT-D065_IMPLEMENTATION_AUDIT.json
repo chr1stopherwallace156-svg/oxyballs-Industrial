@@ -1,0 +1,29 @@
+{
+  "decision_id": "DT-D065",
+  "title": "Repository implementation audit against specs (spec vs code proof)",
+  "status": "ACCEPTED",
+  "date_utc": "2026-07-21",
+  "related_locks": ["RL-034"],
+  "summary": "Admit full repository implementation audit proving difference between specifications and executable code. Artifacts: IMPLEMENTATION_AUDIT.md, MISSING_FEATURES.md, NEXT_IMPLEMENTATION_PRIORITY.md, IMPLEMENTATION_TRACEABILITY_MATRIX.md. Finding: VPR-2 R3F interaction + JSON domain stores are IMPLEMENTED; GLB admit gate tooling is PARTIAL/VERIFIED offline only; open-source scan/vPIC/Open3D/mobile backlog is NOT STARTED with zero production code; DT-D063 GLB binary NOT_ACQUIRED. Rule: documentation alone does not count as implementation.",
+  "accepted_artifacts": [
+    "IMPLEMENTATION_AUDIT.md",
+    "MISSING_FEATURES.md",
+    "NEXT_IMPLEMENTATION_PRIORITY.md",
+    "IMPLEMENTATION_TRACEABILITY_MATRIX.md"
+  ],
+  "audit_findings": {
+    "vpr2_r3f_interaction": "IMPLEMENTED",
+    "glb_runtime_load": "MISSING",
+    "mesh_mapping_offline_verifier": "VERIFIED_SMOKE_ONLY",
+    "postgresql_persistence": "MISSING",
+    "vpic_resolver": "MISSING",
+    "mobile_scan_arkit": "MISSING",
+    "open3d_icp_pipeline": "MISSING",
+    "apriltag_scale": "MISSING",
+    "open_source_backlog_execution": false
+  },
+  "recommended_decision": "AUDIT_COMPLETE_PRIORITIZE_P0_GLB_OR_P2_VPIC",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "geometry_extraction_authorized": false,
+  "kernel_mutation": false
+}

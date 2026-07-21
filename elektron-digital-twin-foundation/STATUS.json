@@ -1,8 +1,8 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.38.0",
-  "updated_at": "2026-07-21T05:20:00Z",
+  "version": "0.39.0",
+  "updated_at": "2026-07-21T07:45:00Z",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
   "phase": "EVIDENCE_ACQUISITION_IN_PROGRESS",
@@ -30,8 +30,8 @@
   "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "Open-source research pack accepted (DT-D064). Backlog not executed. Next: acquire GLB per SPEC-3D-001 and/or begin Sprint 1–2 (schema + vPIC) deliberately. Axle disabled. Continue Mission D L1 + WSM/EWD.",
-  "next_build_priority": "CHOOSE_GLB_ACQUIRE_OR_SPRINT1_SCHEMA_VPIC",
+  "next_action": "Implementation audit complete (DT-D065). True state: VPR-2 R3F+JSON implemented; GLB/vPIC/scan/Open3D missing. Next: P0 GLB slice OR P2 vPIC per NEXT_IMPLEMENTATION_PRIORITY.md — do not add features without updating audit.",
+  "next_build_priority": "P0_GLB_VERTICAL_SLICE_OR_P2_VPIC",
   "door_fl_decision": "CANDIDATE_ACQUISITION_RECOMMENDED",
   "door_fl_physical_verification": "REQUIRED_EVENTUALLY",
   "door_fl_sprint": "research/sprints/RL-020_CHASSIS_FRAME_BRIEF_AB.md",
@@ -738,5 +738,11 @@
   "metric_isolation": "NERF_SPLAT_VISUALIZATION_ONLY",
   "scan_quarantine_until_config_lock": true,
   "open_source_backlog_executed": false,
-  "visible_progress_r2_sprint_033": "research/sprints/RL-033_OPEN_SOURCE_RESEARCH_PACK.md"
+  "visible_progress_r2_sprint_033": "research/sprints/RL-033_OPEN_SOURCE_RESEARCH_PACK.md",
+  "decision_dt_d065": "decisions/DT-D065_IMPLEMENTATION_AUDIT.json",
+  "implementation_audit": "IMPLEMENTATION_AUDIT.md",
+  "missing_features": "MISSING_FEATURES.md",
+  "next_implementation_priority": "NEXT_IMPLEMENTATION_PRIORITY.md",
+  "implementation_traceability_matrix": "IMPLEMENTATION_TRACEABILITY_MATRIX.md",
+  "visible_progress_r2_sprint_034": "research/sprints/RL-034_IMPLEMENTATION_AUDIT.md"
 }
