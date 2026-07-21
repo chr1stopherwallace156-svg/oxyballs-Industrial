@@ -390,6 +390,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-289 | **Gate 05M-C2 matrix needs Proof Artifact + Authority Status + Build Engine Status columns (owner review_59)**: the 05M-C2 matrix must carry the same evidence structure as earlier gates → each row gets a **Proof Artifact** (time-synced APPS/brake/CAN torque-command log + phase-current-decay trace + vehicle-speed trace + video record + test-lead signoff), an **Authority Status** (`RESTRICTED_CREEP_ONLY / NO_NORMAL_DRIVING_AUTHORITY`), and a **Build Engine Status** (candidate/target — nothing Confirmed) | batch_62 (missing evidence structure) | n/a — evidence-structure rule | **EvidenceHygiene / ProofRequirement** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (status block + matrix) — lanes L7 |
 | RC-290 | **A "hard reset" is too weak for a failed-creep / motion-related fault (owner review_59)**: "blocks re-energization or creep retries until a hard reset occurs" → **"blocks re-energization or creep retries until diagnostic review + fault-source correction + approved service clear + engineering/test-lead authorization"** — a hard reset alone must not clear a motion fault | batch_62 (weak fault recovery) | n/a — controls-safety rule | **ControlsSafety / HardBlock** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2C + exit criterion 8; extends RC-163/206/207) — lanes L7 |
 | RC-291 | **Gate 05M-C2 must not automatically "unlock 15 km/h" (owner review_59)**: "unlocking track-surface speeds up to 15 km/h" is too strong → **"permits engineering review for Gate 05M-C3 controlled closed-area low-speed movement; any speed ceiling in 05M-C3 remains `INITIAL_TARGET_PROFILE` until engineering-approved"** — 15 km/h is not automatic just because 05M-C2 passed | batch_62 (auto speed-unlock) | supplier/engineering speed ceiling — **NeedsSupplierData** | **GateStatus / NoGateAuthority** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (exit authorization) — lanes L7 |
+| RC-292 | **The `Authority Status` column must NOT read "Approved by &lt;role&gt;" (owner review_61)**: none of the 05M-C2A/05M-C2B tests has been executed, so "Approved by Lead Controls Engineer / Safety Director / …" falsely implies a passed/signed result → each row instead names a **`Required Approver: <role>`** and carries **`Authority Status: SIGNOFF_REQUIRED / NOT_EXECUTED`** + **`Build Engine Status: PENDING_EXECUTION`** | batch_64 (premature "Approved by" wording) | n/a — evidence-hygiene rule | **EvidenceHygiene / NoPrematureSignoff** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (evidence-structure block + status: `REQUIRED_APPROVERS_DEFINED`) — extends RC-289 — lanes L7 |
+| RC-293 | **The Numeric Threshold Authority Rule applies to Gate 05M-C2A / 05M-C2B (owner review_61, extends RC-267)**: all numeric values — 0–5% APPS dead-band, ≤20 Nm/sec `dT_command/dt`, ≤30 Nm creep clamp, 15–25 Nm breakaway, ≤5% parity, ≤10 Nm brake-hold request, ≤1 m creep distance, <2° incline — are `INITIAL_TARGET_PROFILE` unless upgraded to `SUPPLIER_DEFINED`/`ENGINEERING_APPROVED`. **No threshold creates gate authority until tied to supplier data + calibrated measurement method + proof artifact + engineering signoff** | batch_64 (rule needed above the new split) | supplier/engineering thresholds — **NeedsSupplierData** | **ThresholdAuthority / NoGateAuthority** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (Numeric Threshold Authority Rule) — extends RC-267/284 — lanes L7 |
+| RC-294 | **15–25 Nm breakaway is an EXPECTED range, NOT a final pass envelope (owner review_61, extends RC-287)**: for a heavy F-450/F-550 15–25 Nm may be too light depending on gearing, tire load, brake drag, axle ratio, grade, tire pressure, drivetrain config → "confirming controlled steps within the 15–25 Nm breakaway envelope" becomes **"mapping the actual breakaway torque baseline; values outside the initial expected range trigger NEEDS_REVIEW / MECHANICAL_BINDING_CHECK, not automatic failure"** | batch_64 (range treated as pass gate) | supplier/engineering breakaway baseline — **NeedsSupplierData** | **MeasurementDoctrine / NoAutoFail** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-003 + exit criterion 1) — extends RC-287 — lanes L7 |
+| RC-295 | **Replace "absolute control" / "completely active" with measurable thresholds (owner review_61, extends RC-288)**: "vehicle crawls forward under absolute control" → **"within approved creep-speed, torque, and runout limits"**; "full steering and braking assistance remains completely active" → **"steering and braking assist remain within approved pressure, voltage, and response thresholds"** — no unmeasurable absolutes in a safety-critical spec | batch_64 (unmeasurable absolutes) | n/a — measurement-language rule | **MeasurementDoctrine / NoAbsolutes** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-003 + 05M-C2A-011) — extends RC-288 — lanes L7 |
+| RC-296 | **Static brake-hold needs a measurable displacement threshold (owner review_61)**: "mechanical service brakes must completely hold the vehicle static" → **"vehicle displacement remains below the approved measurement threshold during the brake-hold torque request"** — measurable via wheel-speed / hub marker / video / external position sensor, not an unmeasurable "completely hold static" | batch_64 (unmeasurable brake-hold) | supplier/engineering displacement threshold — **NeedsSupplierData** | **MeasurementDoctrine / MeasurableThreshold** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-001 + exit criterion 1) — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -4826,5 +4831,80 @@ Owner: **Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement** (unchanged;
   Precondition (RC-285), CAN_1 listen-only (RC-172/230), wheel-speed read-only
   (RC-282), no auto retry after E-stop (RC-262), every number
   INITIAL_TARGET_PROFILE (RC-267); never "certified safe" (RC-224).
+- Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
+  no customer operation; no compliance/certification claim; ODRs untouched.
+
+## 72. Batch 64 ("62:75") + owner review_61 — Gate 05M-C1/05M-C2A/05M-C2B corrected re-emit + 5 pre-baseline cleanups (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_64_gate05mc1_mc2ab_corrected.md`
+and `docs/research/raw/owner_reviews/review_61_batch_64_verdict.md`.
+**Row additions: RC-292..RC-296 (no new CS).** No new deliverable — five
+corrections applied to `GATE05M_C2_RESTRICTED_CREEP.md`. Owner: "this is much
+better … you applied the big safety fixes correctly."
+
+### Regression finally cleared
+
+After three batches of re-emitting the same defects (§§70–71), the Hunter
+**finally applied all eight previously-corrected fixes**: the RC-279 hand-lock
+line is removed (→ "approved mechanical wheel restraint, rated hub-locking
+fixture, or differential test fixture" + "manual hand restraint … strictly
+forbidden"); `dT_command/dt` (RC-284); the supplier zero-torque threshold on
+the dead-band (RC-288); response-window language on E-stop / brake-override /
+neutral (RC-288); diagnostic-review-not-hard-reset fault latching (RC-290);
+rollback split into a PROVISIONAL 05M-C2B (RC-286); the `Proof Artifact` +
+`Authority Status` + `Build Engine Status` columns (RC-289); and no auto
+"unlock 15 km/h" (RC-291). The owner confirmed the big safety fixes are
+correct.
+
+### Five new pre-baseline cleanups (RC-292..296)
+
+1. **RC-292 — no premature "Approved by."** The new Authority Status column
+   read "Approved by Lead Controls Engineer / Safety Director / …", but no test
+   has been executed → each row names a `Required Approver: <role>` with
+   `Authority Status: SIGNOFF_REQUIRED / NOT_EXECUTED` + `Build Engine Status:
+   PENDING_EXECUTION`. Status adds `REQUIRED_APPROVERS_DEFINED` +
+   `PROOF_ARTIFACTS_DEFINED`.
+2. **RC-293 — Numeric Threshold Authority Rule over the new split.** 0–5% APPS,
+   ≤20 Nm/sec `dT_command/dt`, ≤30 Nm clamp, 15–25 Nm breakaway, ≤5% parity,
+   ≤10 Nm brake-hold, ≤1 m creep, <2° incline all `INITIAL_TARGET_PROFILE`
+   until sourced (extends RC-267).
+3. **RC-294 — 15–25 Nm breakaway is an expected range, not a pass envelope.**
+   May be too light for an F-450/F-550; map the actual baseline, out-of-range →
+   NEEDS_REVIEW / MECHANICAL_BINDING_CHECK, not auto-fail (extends RC-287).
+4. **RC-295 — measurable thresholds replace absolutes.** "absolute control" →
+   "within approved creep-speed, torque, and runout limits"; "completely active"
+   → "within approved pressure, voltage, and response thresholds" (extends
+   RC-288).
+5. **RC-296 — brake-hold displacement threshold.** "completely hold static" →
+   "displacement remains below the approved measurement threshold" (measurable
+   via wheel-speed / hub marker / video / external position sensor).
+
+### Regression-scanner significance (M10)
+
+The three-batch regression chain (§§70–71: 3× RC-279 safety-critical + two
+full-draft 05M-C2 regressions) is now **cleared** — the Hunter converged on the
+corrected wording. The chain remains the strongest standing case for the owner's
+M10 forbidden-phrase/regression scanner (it took three re-issues to land), but
+this batch is convergence, not regression.
+
+### Next
+
+Owner: **Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement** (speed/ramp
+still `INITIAL_TARGET_PROFILE` only, RC-291/293 — no auto-unlock). 05M-C2A/C2B
+is "clean enough to baseline" after these five. Queued in
+`GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- Five corrections applied verbatim to `GATE05M_C2_RESTRICTED_CREEP.md`
+  (RC-292..296); the corrected 05M-C1/05M-C2A/05M-C2B wording holds
+  (RC-279/282/283/284/286/288/289/290/291); Required Approver not "Approved by"
+  (RC-292); every number INITIAL_TARGET_PROFILE (RC-267/293); breakaway a range
+  not a pass gate (RC-294); measurable thresholds not absolutes (RC-295/296);
+  first powered ground contact, restricted creep only, Ground Movement
+  Precondition (RC-285), CAN_1 listen-only (RC-172/230), wheel-speed read-only
+  (RC-282), no auto retry after E-stop (RC-262); never "certified safe"
+  (RC-224).
 - Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
   no customer operation; no compliance/certification claim; ODRs untouched.

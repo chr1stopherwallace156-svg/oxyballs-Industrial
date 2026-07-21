@@ -711,11 +711,20 @@ Authority Status + Build Engine Status columns (RC-289); a failed-creep /
 motion fault needs diagnostic review + fault-source correction + approved
 service clear + engineering/test-lead authorization, not a hard reset (RC-290);
 no automatic "unlock 15 km/h" — 05M-C3 speed ceiling is INITIAL_TARGET_PROFILE
-(RC-291). **Full-draft regression watch: the batch_62 re-emit reverted every
-review_58 correction at once (RC-279 safety-critical + RC-283/284/286/288); the
-deliverable did NOT regress.** Permits **Gate 05M-C3 only** (after 05M-C2A/B/C).
+(RC-291). Baseline cleanups (review_61, RC-292..296): Authority Status names a
+`Required Approver` with `SIGNOFF_REQUIRED / NOT_EXECUTED` + `PENDING_EXECUTION`,
+never "Approved by" (RC-292); Numeric Threshold Authority Rule over 05M-C2A/C2B
+(RC-293); 15–25 Nm breakaway an expected range, not a pass envelope — out-of-range
+NEEDS_REVIEW not auto-fail (RC-294); measurable thresholds not "absolute
+control"/"completely active" (RC-295); static brake-hold displacement threshold
+(RC-296); status adds `REQUIRED_APPROVERS_DEFINED` + `PROOF_ARTIFACTS_DEFINED`;
+05M-C2B = `PROVISIONAL_LOCKED / UNLOCKS_ONLY_AFTER_05M_C2A_SIGNOFF / …`.
+**Regression cleared (batch_64): after the batch_62/63 full-draft regressions
+(RC-279 safety-critical + RC-283/284/286/288), the Hunter finally applied all
+eight prior fixes; the deliverable never regressed.** Owner: 05M-C2A/C2B is
+"clean enough to baseline." Permits **Gate 05M-C3 only** (after 05M-C2A/B/C).
 
-## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: NEXT (owner review_58)
+## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: NEXT (owner review_61)
 
 The **last rung of the split 05M-C phase** — controlled closed-area low-speed
 movement, only after Gate 05M-C2 (05M-C2A flat-ground creep → 05M-C2B

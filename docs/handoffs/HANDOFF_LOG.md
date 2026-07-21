@@ -13,6 +13,57 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — batch 63 ("61:75") + review_60: Gate 05M-C1/05M-C2 re-emit (continued regression, no new corrections)
+
+### Session
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 63 "61:75" + review_60 — Gate
+  05M-C1/05M-C2 re-emit; continued regression, NO new corrections); awaiting
+  the Gate 05M-C3 Controlled Closed-Area Low-Speed Movement batch or a supplier
+  reply
+
+### Git state
+
+- Branch: `claude/docs-structure-large-projects-b6vxx5`
+- **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
+- Start commit: `54625c0` — Archive raw RH batch 63 + review_60 1:1
+- End commit: `128f9de` — Reconcile RH batch 63 + review_60
+- Working tree at handoff: clean (everything committed)
+
+### Work performed
+
+- **No new deliverable, no new RC rows, no deliverable changes** — continued
+  regression with no new corrections. The Hunter re-emitted Gate 05M-C1 + Gate
+  05M-C2 still carrying the previously-corrected defects (RC-279 hand-lock,
+  third recurrence; `dQ/dt` RC-284; "absolute 0 Nm"/"immediate stop"/"immediately
+  revoke" RC-288; "hard reset" RC-290; rollback in first gate RC-286; missing
+  evidence columns RC-289; auto "15 km/h" RC-291). The owner re-issued the
+  identical eight corrections — every one already applied.
+- Files changed (reconciliation commit `128f9de`):
+  `RH01_SECOND_STAGE_FILTER.md` (section 71 — recurrence note, no new RC rows),
+  `CHANGELOG.md`, handoff files. Raw archives + PROVENANCE committed as
+  `54625c0`. No changes to `GATE05M_C1_*` / `GATE05M_C2_*` (already correct),
+  `DECISION_REGISTER.md`, `RESEARCH_MAP.md`, or `GATE_RESEARCH_QUEUE.md`.
+- Third RC-279 (physical-safety-hazard) recurrence and continued full-draft
+  regression pattern — strongest standing M10 regression-scanner case; no
+  register inflation.
+
+### Verification
+
+- Tests run: none — no test suite exists in this repository
+- Verified vs claimed: batch_63/review_60 archives 1:1 against the owner's chat
+  ("61:75"); recurrence recorded (RC-279/283/284/286/288/289/290/291 re-emitted,
+  deliverables unchanged, no new corrections, no new RC rows); nothing marked
+  Confirmed; no movement authorized
+
+*(Full State / Next-action / Forbidden-actions content for this handoff is
+preserved in git history at commit `128f9de`; the current live copy carries the
+batch 64 update.)*
+
+---
+
 ## 2026-07-16 — Claude Code — task complete (batch 62 "60:60" + review_59 — Gate 05M-C2 re-emit / full-draft regression + 3 new cleanups)
 
 ### (archived handoff)

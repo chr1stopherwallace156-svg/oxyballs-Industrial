@@ -11,35 +11,50 @@ testing: **restricted creep only, this is not a normal driving gate.** It is
 Recovery.** Flat-ground creep is proven first; rollback/incline is deferred to
 05M-C2B.
 
-**Status (owner review_59): `FIRST_GROUND_CONTACT_POWERED_MOVEMENT_GATE` /
+**Status (05M-C2A, owner review_59/61): `FIRST_GROUND_CONTACT_POWERED_MOVEMENT_GATE` /
 `LIVE_HV_PRESENT` / `GROUND_CONTACT_PRESENT` / `RESTRICTED_CREEP_ONLY` /
 `PREDICTABLE_TRACTION_SURFACE_REQUIRED` / `REMOTE_ESTOP_REQUIRED` /
 `SPOTTERS_REQUIRED` / `BRAKE_ASSIST_VERIFICATION_REQUIRED` /
 `STEERING_ASSIST_VERIFICATION_REQUIRED` / `CAN_1_PASSIVE_ONLY` /
 `TORQUE_CLAMP_INITIAL_TARGET_ONLY` / `RAMP_RATE_INITIAL_TARGET_ONLY` /
+`REQUIRED_APPROVERS_DEFINED` / `PROOF_ARTIFACTS_DEFINED` /
 `FAULT_LATCH_REQUIRED` / `NO_PUBLIC_ROAD` / `NO_CUSTOMER_OPERATION` /
-`NO_NORMAL_DRIVING_AUTHORITY`.** Ladder: **… → 05M-C1 (coupled, wheels lifted)
-→ 05M-C2 (THIS GATE — first ground contact; 05M-C2A → 05M-C2B → 05M-C2C) →
-05M-C3 (controlled closed-area low-speed movement)** (D-008, amended review_59).
+`NO_NORMAL_DRIVING_AUTHORITY`** (owner review_61 added
+`REQUIRED_APPROVERS_DEFINED` + `PROOF_ARTIFACTS_DEFINED`, RC-292).**
+**Status (05M-C2B, owner review_61): `PROVISIONAL_LOCKED` /
+`UNLOCKS_ONLY_AFTER_05M_C2A_SIGNOFF` / `GROUND_CONTACT_PRESENT` /
+`CONTROLLED_INCLINE_ONLY` / `ROLLBACK_LIMITS_SUPPLIER_OR_ENGINEERING_APPROVED` /
+`NO_PUBLIC_ROAD` / `NO_CUSTOMER_OPERATION`.** Ladder: **… → 05M-C1 (coupled,
+wheels lifted) → 05M-C2 (THIS GATE — first ground contact; 05M-C2A → 05M-C2B →
+05M-C2C) → 05M-C3 (controlled closed-area low-speed movement)** (D-008, amended
+review_59).
 
 **Every matrix row carries a Proof Artifact + Authority Status + Build Engine
 Status (owner review_59, RC-289)** — the same evidence structure as earlier
 gates. Proof artifacts include the time-synced APPS/brake/CAN torque-command
 log, phase-current-decay trace, vehicle-speed trace, video record, and the
-test-lead signoff; **Authority Status = `RESTRICTED_CREEP_ONLY /
-NO_NORMAL_DRIVING_AUTHORITY`; Build Engine Status = candidate/target
-(nothing Confirmed).**
+test-lead signoff. **The Authority Status column must NOT read "Approved by
+&lt;role&gt;" (owner review_61, RC-292) — none of these tests has been
+executed, so "Approved by" would falsely imply a passed/signed result.
+Instead each row names a `Required Approver: <role>` and carries
+`Authority Status: SIGNOFF_REQUIRED / NOT_EXECUTED` and
+`Build Engine Status: PENDING_EXECUTION`.** The gate-level authority stays
+`RESTRICTED_CREEP_ONLY / NO_NORMAL_DRIVING_AUTHORITY`; Build Engine Status =
+candidate/target (nothing Confirmed).
 
-## Numeric Threshold Authority Rule (RC-267/RC-284) — read first
+## Numeric Threshold Authority Rule (RC-267/RC-284/RC-293) — read first
 
-**All numeric values in Gate 05M-C2 are `INITIAL_TARGET_PROFILE` unless
-upgraded to `SUPPLIER_DEFINED` or `ENGINEERING_APPROVED`** with supplier
-documentation + engineering review + calibrated measurement method + raw proof
-artifact + signed approval: the 0–5% APPS dead-band, the **`dT_command/dt` ≤20
-Nm/sec torque ramp-rate (RC-284 — torque ramp rate `dT/dt`, NOT charge/heat
-`dQ/dt`)**, the ≤30 Nm creep clamp, the 15–25 Nm breakaway expectation, the
-≤5% wheel-speed parity, the 2 km/h slip / 3 km/h creep / <2° incline. No value
-creates gate authority until sourced.
+**All numeric values in Gate 05M-C2A / 05M-C2B are `INITIAL_TARGET_PROFILE`
+unless upgraded to `SUPPLIER_DEFINED` or `ENGINEERING_APPROVED`** (owner
+review_61, RC-293) with supplier documentation + engineering review +
+calibrated measurement method + raw proof artifact + signed approval: the
+0–5% APPS dead-band, the **`dT_command/dt` ≤20 Nm/sec torque ramp-rate
+(RC-284 — torque ramp rate `dT/dt`, NOT charge/heat `dQ/dt`)**, the ≤30 Nm
+creep clamp, the 15–25 Nm breakaway range, the ≤5% wheel-speed parity, the
+≤10 Nm brake-hold request, the ≤1 m creep distance, the <2° incline, and the
+2 km/h slip / 3 km/h creep. **No threshold creates gate authority until tied
+to supplier data, a calibrated measurement method, a proof artifact, and
+engineering signoff.**
 
 ## Test-surface rule (owner review_58, RC-283 re-emphasized) — HARD BLOCK
 
@@ -83,9 +98,9 @@ surface and the RC-285 Ground Movement Precondition hold for every test.
 
 | Test | Element | Procedure | Target (INITIAL_TARGET_PROFILE) | Expected safe output | Blocked (MUST NEVER OCCUR) |
 |---|---|---|---|---|---|
-| 05M-C2A-001 | static brake-hold | service brakes fully applied; shift to Drive; apply minor torque (≤10 Nm target) | wheel-speed + hub placement tracked | mechanical service brakes hold the vehicle static against the request | any tire creep / rollout / brake slippage |
+| 05M-C2A-001 | static brake-hold | service brakes fully applied; shift to Drive; apply minor torque (≤10 Nm target) | wheel-speed + hub placement tracked | **vehicle displacement remains below the approved measurement threshold during the brake-hold torque request (owner review_61, RC-296 — measurable via wheel-speed / hub marker / video / external position sensor, not "completely hold static")** | displacement above the approved threshold / brake slippage |
 | 05M-C2A-002 | pedal dead-band | sweep APPS 0–5% travel | **torque request stays within the supplier-defined zero-torque threshold (RC-288, not "absolute 0 Nm")** | no torque below the dead-band | torque produced within the dead-band |
-| 05M-C2A-003 | forward creep + breakaway map | release brake; allow a tiny forward creep step (≤1 m target) | measure breakaway-torque baseline (15–25 Nm target) | driveline overcomes static friction smoothly; crawls under control | surging / hopping / accelerating past crawl; **breakaway above the approved clamp → NEEDS_REVIEW / MECHANICAL_BINDING_CHECK, not an auto "binding" diagnosis (RC-287)** |
+| 05M-C2A-003 | forward creep + breakaway map | release brake; allow a tiny forward creep step (≤1 m target) | **map the actual breakaway-torque baseline (15–25 Nm is an EXPECTED range, not a pass envelope — RC-294; may be too light for an F-450/F-550 given gearing / tire load / brake drag / axle ratio / grade / tire pressure)** | **driveline overcomes static friction smoothly; vehicle crawls forward within approved creep-speed, torque, and runout limits (owner review_61, RC-295 — not "absolute control")** | surging / hopping / accelerating past crawl; **breakaway outside the initial expected range → NEEDS_REVIEW / MECHANICAL_BINDING_CHECK, not automatic failure (RC-294/287)** |
 | 05M-C2A-004 | reverse creep | stop; shift to Reverse; tiny reverse creep step (≤1 m target) | verify direction params + rearward breakaway consistency | smooth reverse crawl; matching directional velocity logged | erratic reverse acceleration / direction mismatch vs command |
 | 05M-C2A-005 | accelerator-map clamp | step the pedal past 50% travel for <500 ms | VCU command limits + inverter current tracked | torque + scaling stay clamped at the ≤30 Nm target | torque/current breaking past the clamp |
 | 05M-C2A-006 | torque ramp-rate limit (`dT_command/dt`) | step the pedal rapidly 0→20% travel | **VCU torque output rises per the approved `dT_command/dt` limiter (≤20 Nm/sec target), not raw pedal slope (RC-284)** | current rises slowly + predictably; no step-functions | sudden unfiltered current spikes / un-attenuated torque steps |
@@ -93,7 +108,7 @@ surface and the RC-285 Ground Movement Precondition hold for every test.
 | 05M-C2A-008 | E-stop during creep | at steady creep, actuate the hardwired/remote E-stop | hardwired loop interrupts coil supply within the engineering-approved window | **inverter torque command → zero + phase current decays within the supplier-approved response window (RC-288, not "instantly"); HV bus drops; vehicle coasts or is braked manually per test plan** | inverter continues actively driving / any automatic retry after E-stop (RC-262) |
 | 05M-C2A-009 | shifter-neutral interrupt | at steady forward creep, shift PRND → Neutral | VCU revokes the inverter enable/torque bit over the control bus | inverter → standby/disabled within the response window; torque → 0 Nm | inverter maintaining torque / bridge switching in Neutral |
 | 05M-C2A-010 | wheel-speed / motor parity | log wheel-speed (read-only, RC-282) vs resolver velocity across crawl cycles | parity within the ≤5% target window | parity bit valid; no mismatches | mismatch beyond the tolerance / wheel-speed used as control authority (RC-282) |
-| 05M-C2A-011 | steering / brake assist | cycle the steering wheel + check booster pressures before/during crawl | 12 V aux nets hold power to steering/brake assist nodes | full steering + braking assist active throughout | heavy steering / diminished braking from a 12 V brownout |
+| 05M-C2A-011 | steering / brake assist | cycle the steering wheel + check booster pressures before/during crawl | 12 V aux nets hold power to steering/brake assist nodes | **steering and braking assist remain within approved pressure, voltage, and response thresholds (owner review_61, RC-295 — not "completely active")** | heavy steering / diminished braking from a 12 V brownout |
 | 05M-C2A-012 | CAN_1 passive integrity | continuous bus audit of CAN_1 across all creep blocks | the instrumentation node transmits zero frames onto CAN_1 | CAN_1 strictly listen-only/passive; zero injected frames/errors | any active frame / error onto the production CAN_1 bus |
 
 ## Gate 05M-C2B — Controlled Incline / Rollback Hold Validation (deferred subgate)
@@ -119,9 +134,13 @@ approved service clear + engineering/test-lead authorization.**
 
 The system cannot exit Gate 05M-C2 (and proceed to Gate 05M-C3) unless:
 
-1. Static brake-holds and bidirectional flat-ground creep are mapped, with
-   controlled forward/reverse steps within the breakaway envelope (15–25 Nm
-   target, RC-267).
+1. Static brake-holds and bidirectional flat-ground creep are mapped by
+   **measuring the actual breakaway-torque baseline (owner review_61, RC-294)** —
+   15–25 Nm is an EXPECTED range, not a final pass envelope (it may be too light
+   for an F-450/F-550); values outside the initial expected range trigger
+   NEEDS_REVIEW / MECHANICAL_BINDING_CHECK, not automatic failure (RC-294/287).
+   Static brake-hold displacement stays below the approved measurement
+   threshold (RC-296).
 2. The APPS dead-band, the ≤30 Nm clamp, and the `dT_command/dt` ≤20 Nm/sec
    ramp-rate are validated under real vehicle inertia (targets only, RC-284).
 3. Brake-override, shifter-neutral, and remote/hardwired E-stop loops drop
@@ -164,6 +183,16 @@ engineering-approved.** (Never "certified safe," RC-224.)
   contactors/pre-charge, the hardwired loop + service brakes own the stopping
   path, the VCU requests/monitors + enforces the clamp (RC-247/265/205/227;
   BQ-27); never "certified safe" (RC-224).
+- **Pre-baseline cleanups (owner review_61):** the Authority Status column
+  names a `Required Approver` with `SIGNOFF_REQUIRED / NOT_EXECUTED` +
+  `PENDING_EXECUTION` — never "Approved by" (no test executed yet, RC-292);
+  every threshold (0–5% APPS, ≤20 Nm/sec `dT_command/dt`, ≤30 Nm clamp, 15–25
+  Nm breakaway, ≤5% parity, ≤10 Nm brake-hold, ≤1 m creep, <2° incline) is
+  `INITIAL_TARGET_PROFILE` until sourced (RC-293); 15–25 Nm breakaway is an
+  expected range, not a pass envelope — out-of-range → NEEDS_REVIEW, not
+  auto-fail (RC-294); measurable thresholds replace "absolute control" /
+  "completely active" (RC-295); static brake-hold uses a displacement
+  threshold, not "completely hold static" (RC-296).
 - **Nothing ingested; nothing Confirmed; no normal driving; no public road; no
   customer operation; no "certified safe"/compliance claim; ODRs untouched.**
 

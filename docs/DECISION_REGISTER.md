@@ -212,6 +212,26 @@ later entry that references it.
   RC-283/284/286/288) — the strongest M10 regression-scanner case; the
   `GATE05M_C2_*` + `GATE05M_C1_*` deliverables already hold the corrected
   wording and did NOT regress.
+- **Amendment (owner review_61, batch_64 "62:75", RC-292..296): Gate
+  05M-C2A/05M-C2B pre-baseline cleanups — regression cleared.** After three
+  batches (batch_62/63) of re-emitting the same defects, the Hunter finally
+  applied all eight prior fixes (hand-lock removed, `dT_command/dt`, zero-torque
+  threshold, response-window E-stop/neutral, diagnostic-review fault latch,
+  rollback split to a PROVISIONAL 05M-C2B, Proof/Authority/Build-Engine-Status
+  columns, no auto-15-km/h). Five new cleanups baseline the split gate: the
+  Authority Status column names a `Required Approver` with `SIGNOFF_REQUIRED /
+  NOT_EXECUTED` + `Build Engine Status: PENDING_EXECUTION` — never "Approved by"
+  (no test executed, RC-292); the Numeric Threshold Authority Rule governs every
+  05M-C2A/C2B value (RC-293); 15–25 Nm breakaway is an EXPECTED range, not a
+  pass envelope — out-of-range → NEEDS_REVIEW, not auto-fail (RC-294);
+  measurable thresholds replace "absolute control"/"completely active" (RC-295);
+  static brake-hold uses a displacement threshold, not "completely hold static"
+  (RC-296). 05M-C2A status adds `REQUIRED_APPROVERS_DEFINED` +
+  `PROOF_ARTIFACTS_DEFINED`; 05M-C2B status = `PROVISIONAL_LOCKED /
+  UNLOCKS_ONLY_AFTER_05M_C2A_SIGNOFF / CONTROLLED_INCLINE_ONLY /
+  ROLLBACK_LIMITS_SUPPLIER_OR_ENGINEERING_APPROVED / …`. Owner: 05M-C2A/C2B is
+  "clean enough to baseline"; next = Gate 05M-C3 with speed/ramp
+  `INITIAL_TARGET_PROFILE` only (RC-291/293).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the

@@ -371,12 +371,15 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_58):** **Gate 05M-C3 — Controlled
+**Next expected batch (owner review_61):** **Gate 05M-C3 — Controlled
 Closed-Area Low-Speed Movement** — the last rung of the split 05M-C phase
-(Decision Register **D-008**, amended review_58), only after Gate 05M-C2
+(Decision Register **D-008**, amended review_61), only after Gate 05M-C2
 (05M-C2A flat-ground creep → 05M-C2B incline/rollback → 05M-C2C faulted-creep
-recovery) is proven. The Hunter's "track-surface speeds up to 15 km/h" is an
-`INITIAL_TARGET_PROFILE` pending supplier + engineering approval (RC-267).
+recovery) is proven. Owner review_61: Gate 05M-C2A/C2B is now "clean enough to
+baseline" (the eight prior fixes finally landed + five new cleanups RC-292..296
+applied). The Hunter's "track-surface speeds up to 15 km/h" is an
+`INITIAL_TARGET_PROFILE` pending supplier + engineering approval (RC-267/291/293
+— no auto-unlock).
 Engineer-gated, live-HV, **closed controlled area only, no public road, no
 customer operation, no normal-driving authority**; the Ground Movement
 Precondition (RC-285) + predictable-traction surface (RC-283) + spotters +
@@ -392,7 +395,10 @@ ground-contact gate, split 05M-C2A/B/C (12-row 05M-C2A matrix); review_58
 corrections: predictable-traction surface not low-friction (RC-283),
 `dT_command/dt` not `dQ/dt` (RC-284), the Ground Movement Precondition (RC-285),
 the 05M-C2A/B/C split (RC-286), breakaway → NEEDS_REVIEW (RC-287), no
-absolute-zero/instant wording (RC-288). **Gate 05M-C1**
+absolute-zero/instant wording (RC-288); review_61 baseline cleanups: Required
+Approver not "Approved by" (RC-292), Numeric Threshold Authority Rule (RC-293),
+15–25 Nm an expected range not a pass envelope (RC-294), measurable thresholds
+not absolutes (RC-295), brake-hold displacement threshold (RC-296). **Gate 05M-C1**
 (`GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`) is
 `COUPLED_DRIVELINE_LIFTED_WHEEL_READINESS_DEFINED` / `RATED_LIFT_OR_STANDS_REQUIRED`
 / `NO_GROUND_CONTACT` — the first coupled test, wheels lifted (5-row matrix

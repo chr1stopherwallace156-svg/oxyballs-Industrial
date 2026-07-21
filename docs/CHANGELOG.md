@@ -5,6 +5,32 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 64 ("62:75") + review_61: Gate 05M-C1/05M-C2A/05M-C2B corrected re-emit + 5 pre-baseline cleanups
+
+- Archived batch_64 (Gate 05M-C1 + newly-split 05M-C2A/05M-C2B, now applying
+  all eight previously-corrected fixes) and review_61 1:1 (commit `a1bb83e`);
+  PROVENANCE row inserted newest-first. Owner: "this is much better … you
+  applied the big safety fixes correctly."
+- **Regression cleared:** after three batches (§§70–71: 3× RC-279
+  safety-critical + two full-draft 05M-C2 regressions), the Hunter finally
+  applied the hand-lock removal, `dT_command/dt`, zero-torque threshold,
+  response-window E-stop/neutral, diagnostic-review fault latch, rollback split
+  (05M-C2B), the Proof/Authority/Build-Engine-Status columns, and no
+  auto-15-km/h.
+- **RC-292..296 added; five corrections applied verbatim to
+  `GATE05M_C2_RESTRICTED_CREEP.md`:** Authority Status names a `Required
+  Approver` with `SIGNOFF_REQUIRED / NOT_EXECUTED` + `PENDING_EXECUTION`, never
+  "Approved by" (RC-292); Numeric Threshold Authority Rule over 05M-C2A/C2B
+  (RC-293); 15–25 Nm breakaway is an expected range, not a pass envelope →
+  out-of-range NEEDS_REVIEW, not auto-fail (RC-294); measurable thresholds
+  replace "absolute control"/"completely active" (RC-295); static brake-hold
+  displacement threshold, not "completely hold static" (RC-296). Status adds
+  `REQUIRED_APPROVERS_DEFINED` + `PROOF_ARTIFACTS_DEFINED`; 05M-C2B status =
+  `PROVISIONAL_LOCKED / UNLOCKS_ONLY_AFTER_05M_C2A_SIGNOFF / …`.
+- RH01 section 72; D-008 amended (review_61); handoff rotated. Next = Gate
+  05M-C3 (speed/ramp `INITIAL_TARGET_PROFILE` only, RC-291/293). Nothing
+  Confirmed; no normal driving; no public road; ODRs untouched.
+
 ## 2026-07-16 — RH batch 63 ("61:75") + review_60: Gate 05M-C1/05M-C2 re-emit (continued regression, no new corrections)
 
 - Archived batch_63 (Gate 05M-C1 + 05M-C2 re-emit) and review_60 1:1 (commit
