@@ -438,6 +438,17 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-337 | **Steering-signal validity state matrix (owner review_66)**: a frozen/old steering value must not keep authorizing torque → **`VALID` operate within the approved cell · `DEGRADED` further derate or inhibit progression · `IMPLAUSIBLE` torque-inhibit request + fault latch · `UNAVAILABLE` no steering-dependent envelope expansion · `STALE` treat as invalid after the approved timeout** | batch_70 (no steering failure handling) | supplier steering-signal spec — **NeedsSupplierData** | **ControlsSafety / SteeringValidity** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3D validity matrix) — extends RC-323 — lanes L7 |
 | RC-338 | **Complete the C3E fault escalation hierarchy (owner review_66, extends RC-324)**: the hierarchy was announced but not listed → **Level 1 single fault** (APPS plausibility · steering invalid/stale · wheel-speed disagreement · inverter heartbeat loss · BMS charge-permission removal · brake/steering-assist-not-ready · aux-voltage low · test-boundary alert · E-stop) → **Level 2 repeated single** (latch consistency · no auto-retry · thermal/recovery) → **Level 3 approved paired** (signal+comms loss · assist+torque request · regen+charge-permission removal · steering-plausibility+wheel-speed disagreement · low-voltage+propulsion request) → **Level 4 compound** (only after L1–3 signed passes + formal hazard review; approved rationale per pair, no random combining) | batch_70 (hierarchy missing) | engineering hazard review — **NeedsSupplierData** | **TestSafety / FaultHierarchy** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3E hierarchy) — extends RC-324 — lanes L7 |
 | RC-339 | **Test Result Validity Rule (owner review_66, extends RC-325)**: a signed result applies ONLY to the archived hardware config / firmware-software hashes / calibration hashes / DBC version / test-cell limits / vehicle mass-loading / tire configuration / instrumentation set / environmental window → any change triggers **`IMPACT_REVIEW_REQUIRED`**, after which the prior result is graded **`REUSABLE` / `PARTIALLY_REUSABLE` / `REPEAT_TEST_REQUIRED` / `INVALIDATED`** (governs firmware updates + inverter swaps) | batch_70 (no result-validity binding) | n/a — evidence-hygiene rule | **EvidenceHygiene / ResultValidity** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Test Result Validity Rule) — extends RC-325 — lanes L7 |
+| RC-340 | **Insert + govern the actual `L_min` equation (owner review_67, extends RC-313/327)**: Revision 03 said "calculated via the following structural model" without full governance → **`L_min = L_acceleration + L_stabilization + L_braking_target + L_worst_case_coast_or_stop + L_response_allowance + L_measurement_uncertainty + L_containment_margin`**, with a **no-double-counting** rule (if foundation-brake stopping distance already includes driver/control response, don't add it again), a `distance_component_method` enum (`MEASURED` / `CALCULATED` / `SUPPLIER_DEFINED` / `ENGINEERING_APPROVED` / `INITIAL_TARGET_PROFILE`), and **no `RunoutCalculations_ID` may authorize movement if any required distance component is `MISSING_SOURCE` / `UNVERIFIED` / `INITIAL_TARGET_PROFILE_ONLY`** | batch_71 (equation governance thin) | facility/engineering runout calc — **NeedsSupplierData** | **TestSafety / RunoutEquation** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (RunoutCalculation_ID schema — `L_min`) — extends RC-313/327 — lanes L7 |
+| RC-341 | **The ±2 Nm zero-regen residual is a candidate, not a universal constant (owner review_67, extends RC-331)**: a fixed ±2 Nm cannot apply across inverters / current sensors / motor sizes / torque estimators / speeds / field-control states → **`Regeneration Command State: ZERO_REGEN_REQUEST`; measured torque feedback + phase-current must remain within the supplier-defined or engineering-approved zero-regeneration tracking envelope**; classify ±2 Nm as `ZERO_REGEN_RESIDUAL_INITIAL_TARGET_PROFILE`; "active field weakening" is a higher-speed strategy whose relevance to this low-speed gate depends on the actual inverter/motor strategy | batch_71 (universal ±2 Nm) | supplier zero-regen tracking envelope — **NeedsSupplierData** | **MeasurementDoctrine / ResidualCandidate** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3B regen baseline) — extends RC-331 — lanes L7 |
+| RC-342 | **Remove the circular C3A→C3B evidence dependency (owner review_67, extends RC-330)**: C3A-006 "decelerates within the approved C3B-derived envelope" references an envelope that does not exist during the FIRST C3A run → split **C3A BOS acceptance** (traction command removed within the response window · torque feedback + phase current decay within the approved envelope · driver maintains foundation-brake control · no propulsion opposition to braking) from a later **C3A/C3B correlation review** (compare against the *signed* C3B stopping envelope); C3A must not depend on downstream-gate evidence to execute | batch_71 (circular gate dependency) | supplier BOS + brake-distance spec — **NeedsSupplierData** | **GateSequencing / NoCircularDependency** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3A-006) — extends RC-330 — lanes L7 |
+| RC-343 | **Remove "immediate" from the steering-state matrix → response windows (owner review_67, extends RC-337)**: "immediate further derating" / "immediate torque-inhibit request" conflict with the response-window doctrine → **`DEGRADED`: derating within the approved degraded-state response window; `IMPLAUSIBLE`: torque-inhibit within the approved steering-fault response window + NVM latch** | batch_71 ("immediate" reintroduced) | supplier steering-fault response window — **NeedsSupplierData** | **MeasurementDoctrine / ResponseWindow** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3D steering matrix) — extends RC-288/337 — lanes L7 |
+| RC-344 | **Define `STALE` by signal freshness, not an unchanged value (owner review_67, extends RC-337)**: → `STALE` = timestamp age / alive counter / update cadence / freshness indicator exceeds its approved limit; **a constant but freshly-updated valid steering value is NOT stale** (a steering signal can legitimately stay unchanged while driving straight) | batch_71 (unchanged-value = stale) | supplier steering-signal freshness spec — **NeedsSupplierData** | **ControlsSafety / SignalFreshness** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3D STALE) — extends RC-337 — lanes L7 |
+| RC-345 | **C3A-007 uses the supplier-defined Neutral zero-propulsion envelope (owner review_67, extends RC-310)**: "propulsion torque falls to zero" → **"propulsion torque remains within the supplier-defined Neutral zero-propulsion envelope"**; blocked = active propulsion request still asserted · torque-producing current exceeds the approved Neutral envelope · inverter state contradicts supplier-defined Neutral behaviour · unintended vehicle acceleration persists | batch_71 (literal-zero Neutral) | supplier Neutral envelope — **NeedsSupplierData** | **ControlsSafety / NeutralEnvelope** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3A-007) — extends RC-310 — lanes L7 |
+| RC-346 | **C3C-007 fault-latch ownership, not "latches natively" (owner review_67, extends RC-335)**: define ownership → **the Inverter reports its comms/fault state where supported; the VCU removes the regen request + records the operational fault latch; the Build Engine stores the event/evidence/clearance authorization; automatic regen restoration is blocked until the supplier-defined recovery + approved service-clear**; an **inverter communication loss is distinct from a verified inverter shutdown** — if comms disappear the VCU cannot assume what the inverter is physically doing (independent current/torque evidence required) | batch_71 ("latches natively" ambiguous) | supplier fault-latch + recovery spec — **NeedsSupplierData** | **ControlsSafety / FaultOwnership** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3C-007 ownership) — extends RC-335 — lanes L7 |
+| RC-347 | **C3E fault-execution-domain classification (owner review_67)**: **a fault being listed in C3E does NOT automatically authorize its physical injection during vehicle movement** → every listed fault carries a `FAULT_EXECUTION_DOMAIN` of `SIL_ONLY` / `HIL_ONLY` / `STATIC_VEHICLE_ONLY` / `LIFTED_WHEEL_ONLY` / `LOWEST_MOVING_CELL_ALLOWED` / `HIGHER_CELL_ALLOWED_AFTER_SIGNED_PASS` (brake/steering-assist-not-ready proven HIL/static first, steering assist never intentionally removed while moving; low-voltage HIL/bounded first) | batch_71 (listed = injectable-while-moving) | engineering execution-domain approval — **NeedsSupplierData** | **TestSafety / ExecutionDomain** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3E execution-domain) — extends RC-324 — lanes L7 |
+| RC-348 | **Paired/compound-fault prerequisites + order/timing (owner review_67, extends RC-324)**: Level 3/4 need more than a general rationale → a `PairedFaultAuthorization_ID` + `HazardAnalysis_ID` + fault-order definition + common-cause assessment + expected response sequence + abort method + independent containment + runout-validity + thermal-state + configuration hash + required approvers; **fault order + timing offsets are stored** (`low-voltage → comms-loss` may differ from `comms-loss → low-voltage`) | batch_71 (no paired-fault prereqs) | engineering hazard review — **NeedsSupplierData** | **TestSafety / PairedFaultAuthorization** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3E paired/compound prereqs) — extends RC-324 — lanes L7 |
+| RC-349 | **Invalidated results are preserved, not "cleared" (owner review_67, extends RC-339 + Constitution Art. I)**: "INVALIDATED — Data cleared" would delete evidence → **`INVALIDATED_FOR_CURRENT_CONFIGURATION`** — the old result stays archived + traceable but cannot authorize the new configuration; lifecycle historical result preserved → applicability revoked → replacement testing linked → supersession chain recorded | batch_71 (invalidated = cleared) | n/a — evidence-immutability rule | **EvidenceHygiene / NoEvidenceDeletion** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Test Result Validity Rule) — extends RC-339 — lanes L7 |
+| RC-350 | **Full `TestCellAuthorization_ID` schema (owner review_67, extends RC-314)**: cell progression is fundamental, so define the record → `subgate_id` · `cell_number` · max speed/positive-torque/negative-torque/torque-rate/jerk/test-distance · allowed steering band · allowed regen state · allowed fault set · `RunoutCalculations_ID` · `ConfigurationPacket_ID` · `previous_cell_signed_result` · `thermal_state_requirement` · surface/environmental window · authorization expiry · required approvers · **status** (`DRAFT` → `APPROVAL_REQUIRED` → `AUTHORIZED` → `ACTIVE` → `SUSPENDED` → `COMPLETED` → `REVOKED` → `SUPERSEDED`) | batch_71 (cell record undefined) | engineering cell authorization — **NeedsSupplierData** | **GateStatus / CellAuthorizationSchema** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (TestCellAuthorization_ID schema) — extends RC-314 — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -5397,6 +5408,91 @@ remain NeedsSupplierData.
   C3E hierarchy (RC-338); result-validity binding (RC-339); steering angle
   observation-only (RC-323); factory ABS/ESC never consumed as control without
   Ford authorization (RC-282/319); every number INITIAL_TARGET_PROFILE
+  (RC-267/293/300); nothing `SIGNED_PASS`; never "certified safe" (RC-224).
+- Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
+  no customer operation; no compliance/certification claim; ODRs untouched.
+
+## 79. Batch 71 ("69:75") + owner review_67 — Gate 05M-C3 Revision 03 + 11 pre-baseline corrections (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_71_gate05mc3_revision03.md`
+and `docs/research/raw/owner_reviews/review_67_batch_71_verdict.md`.
+**Row additions: RC-340..RC-350 (no new CS).** No new deliverable — corrections
+applied to `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`. Owner: "Revision 03 is the
+strongest version so far … I would now call it a formal engineering baseline
+candidate, but not quite baseline-locked yet."
+
+### Revision 03 — the 13 batch_70 corrections applied
+
+The Hunter delivered Gate 05M-C3 Revision 03, which applies RC-327..339: the full
+RunoutCalculations_ID field tree, the Test Result Validity & Configuration Lock
+Rule, the Regenerative Command Baseline, the stepped-cell pipeline, the C3A-005
+command envelope, the split C3A-006 BOS/foundation-brake result, C3A-009B marked
+LOCKED, the C3C coexistence/blending lanes, the C3C-004 BMS authority, the
+no-arbitrary-injection C3C-005, the C3C-007 driver/brake response, the
+steering-signal state matrix, and the listed C3E fault hierarchy.
+
+### Eleven pre-baseline corrections (RC-340..350)
+
+1. **RC-340** — insert + govern the actual `L_min` equation (7 terms) with a
+   no-double-count rule, a `distance_component_method` enum, and a
+   movement-authorization gate.
+2. **RC-341** — the ±2 Nm zero-regen residual is a candidate
+   (`ZERO_REGEN_RESIDUAL_INITIAL_TARGET_PROFILE`), not a universal constant;
+   `ZERO_REGEN_REQUEST` + supplier zero-regeneration tracking envelope.
+3. **RC-342** — remove the circular C3A→C3B evidence dependency; C3A BOS
+   acceptance stands alone, C3A/C3B correlation is a later review.
+4. *(owner item 4 — C3A-009B contradictory status)* already applied via RC-328
+   (`APPROVAL_REQUIRED`/`LOCKED`/`NOT_ELIGIBLE`, block
+   `EXTERNAL_TRACKING_CONTROL_AUTHORITY_NOT_ESTABLISHED`, dual approver) — **no
+   new RC row.**
+5. **RC-343** — remove "immediate" from the steering states → approved
+   degraded-state / steering-fault response windows.
+6. **RC-344** — define `STALE` by signal freshness (timestamp age / alive counter
+   / cadence), not an unchanged value.
+7. **RC-345** — C3A-007 uses the supplier-defined Neutral zero-propulsion envelope
+   (+ blocked states), not "torque → zero".
+8. **RC-346** — C3C-007 fault-latch ownership (Inverter/VCU/Build Engine) +
+   comms-loss ≠ verified shutdown, not "latches natively".
+9. **RC-347** — C3E `FAULT_EXECUTION_DOMAIN` classification: a listed fault does
+   not authorize physical injection during motion.
+10. **RC-348** — paired/compound-fault prerequisites (`PairedFaultAuthorization_ID`
+    + `HazardAnalysis_ID` + fault-order/timing).
+11. **RC-349** — invalidated evidence is preserved
+    (`INVALIDATED_FOR_CURRENT_CONFIGURATION`), never cleared (Constitution Art. I).
+12. **RC-350** — full `TestCellAuthorization_ID` schema + lifecycle
+    (`DRAFT`→…→`SUPERSEDED`).
+
+Status: `FORMAL_BASELINE_CANDIDATE / REVISION_03_APPLIED / RUNOUT_SCHEMA_DEFINED /
+RUNOUT_EQUATION_DEFINED / CONFIGURATION_VALIDITY_RULE_DEFINED /
+HISTORICAL_EVIDENCE_RETENTION_REQUIRED / STEPPED_CELL_ESCALATION_DEFINED /
+TEST_CELL_AUTHORIZATION_SCHEMA_DEFINED / C3A_C3B_DEPENDENCY_RESOLVED /
+C3A_EXTERNAL_CONTROL_INTEGRATION_LOCKED / C3C_REGEN_COEXISTENCE_DEFINED /
+C3C_COORDINATED_BLENDING_LOCKED / C3D_STEERING_STATE_MATRIX_DEFINED /
+C3E_FAULT_HIERARCHY_DEFINED / C3E_EXECUTION_DOMAIN_CLASSIFICATION_DEFINED /
+NUMERIC_LIMITS_INITIAL_TARGET_PROFILE / FORMAL_ENGINEERING_REVIEW_REQUIRED /
+NO_PUBLIC_ROAD / NO_CUSTOMER_OPERATION / NO_NORMAL_DRIVING_AUTHORITY`. Post-edit
+label: `GATE_05M_C3_REVISION_03_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` —
+"the procedure architecture is ready for controlled multidisciplinary review, not
+that physical movement/braking/regen/fault validation has passed."
+
+### Next
+
+Owner: proceed toward **05M-C3A execution + Envelope Cell 1 authorization** (each
+a `TestCellAuthorization_ID`, RC-350) and the formal engineering baseline review.
+Ford ABS/ESC interface, inverter/BMS regen + isolation architecture,
+tire/axle/geometry, and thermal-sensor data remain NeedsSupplierData.
+
+### Standing checks
+
+- 11 corrections applied verbatim to `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`
+  (RC-340..350); `L_min` equation + governance (RC-340); ±2 Nm a candidate
+  (RC-341); no circular C3A→C3B dependency (RC-342); no "immediate" steering
+  wording (RC-343); `STALE` by freshness (RC-344); supplier Neutral envelope
+  (RC-345); explicit fault ownership + comms-loss ≠ shutdown (RC-346); C3E
+  execution-domain classification (RC-347); paired-fault prerequisites (RC-348);
+  invalidated evidence preserved (RC-349); `TestCellAuthorization_ID` schema
+  (RC-350); C3A-009B stays LOCKED (RC-328); every number INITIAL_TARGET_PROFILE
   (RC-267/293/300); nothing `SIGNED_PASS`; never "certified safe" (RC-224).
 - Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
   no customer operation; no compliance/certification claim; ODRs untouched.

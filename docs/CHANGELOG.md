@@ -5,6 +5,37 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 71 ("69:75") + review_67: Gate 05M-C3 Revision 03 + 11 pre-baseline corrections
+
+- Archived batch_71 (Gate 05M-C3 Revision 03) and review_67 1:1 (commit
+  `abca1d6`); PROVENANCE row inserted newest-first. Owner: "Revision 03 is the
+  strongest version so far … a formal engineering baseline candidate."
+- **Revision 03 applied the 13 batch_70 corrections (RC-327..339)** — full
+  RunoutCalculations_ID field tree, Test Result Validity & Configuration Lock
+  Rule, Regenerative Command Baseline, stepped-cell pipeline, C3A-005 command
+  envelope, split C3A-006 result, C3A-009B LOCKED, C3C coexistence/blending lanes,
+  C3C-004 BMS authority, no-arbitrary-injection C3C-005, C3C-007 driver/brake
+  response, steering-signal state matrix, listed C3E hierarchy.
+- **RC-340..350 added; 11 corrections applied verbatim to
+  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`:** insert + govern the actual `L_min`
+  equation (RC-340); ±2 Nm zero-regen residual a candidate not universal (RC-341);
+  remove the circular C3A→C3B dependency (RC-342); remove "immediate" from
+  steering states (RC-343); define `STALE` by signal freshness (RC-344);
+  supplier-defined Neutral envelope (RC-345); C3C-007 fault ownership + comms-loss
+  ≠ shutdown (RC-346); C3E fault-execution-domain classification (RC-347);
+  paired/compound-fault prerequisites + order/timing (RC-348); preserve
+  invalidated evidence `INVALIDATED_FOR_CURRENT_CONFIGURATION` (RC-349); full
+  `TestCellAuthorization_ID` schema (RC-350). (The C3A-009B contradiction fix was
+  already applied via RC-328.)
+- Status upgrades to `FORMAL_BASELINE_CANDIDATE / REVISION_03_APPLIED / … /
+  C3E_EXECUTION_DOMAIN_CLASSIFICATION_DEFINED`; post-edit label
+  `GATE_05M_C3_REVISION_03_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` — ready
+  for controlled multidisciplinary review, not physical-pass evidence.
+- RH01 section 79; D-008 amended (review_67); RESEARCH_MAP + GATE_RESEARCH_QUEUE
+  updated; handoff rotated. Next = 05M-C3A execution + Envelope Cell 1
+  authorization / formal engineering baseline review. Nothing Confirmed; no
+  normal driving; no public road; ODRs untouched.
+
 ## 2026-07-16 — RH batch 70 ("68:75") + review_66: Gate 05M-C3 Revision 02 + 13 pre-baseline corrections
 
 - Archived batch_70 (Gate 05M-C3 Revision 02) and review_66 1:1 (commit

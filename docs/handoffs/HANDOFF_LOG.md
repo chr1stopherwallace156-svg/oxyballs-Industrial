@@ -13,6 +13,56 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — batch 70 ("68:75") + review_66: Gate 05M-C3 Revision 02 (RC-327..339)
+
+### Session
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 70 "68:75" + review_66 — Gate 05M-C3
+  Revision 02; 13 pre-baseline corrections RC-327..339 applied); gate labels
+  `GATE_05M_C3_REVISION_02_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW`
+
+### Git state
+
+- Branch: `claude/docs-structure-large-projects-b6vxx5`
+- **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
+- Start commit: `31647fd` — Archive raw RH batch 70 + review_66 1:1
+- End commit: `f5917df` — Reconcile RH batch 70 + review_66
+- Working tree at handoff: clean (everything committed)
+
+### Work performed
+
+- **Gate 05M-C3 Revision 02 — RC-327..339 applied verbatim to
+  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`.** The Hunter delivered Revision 02
+  (applying the 14 batch_68 corrections RC-313..326); the owner added 13 further
+  corrections: complete the RunoutCalculation_ID field list + `L_min` (RC-327);
+  keep C3A-009B `LOCKED` (RC-328); command envelope not "linear" (RC-329); BOS ≠
+  foundation-brake stop (RC-330); regen-disabled a command state (RC-331);
+  coexistence ≠ blending (RC-332); BMS-permission not high SOC (RC-333); no
+  arbitrary bus injection (RC-334); C3C-007 driver/brake response (RC-335); no
+  premature C3D numbers (RC-336); steering-signal validity states (RC-337); listed
+  C3E fault hierarchy (RC-338); Test Result Validity Rule (RC-339).
+- Post-edit label
+  `GATE_05M_C3_REVISION_02_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW`.
+- Files changed (reconciliation commit `f5917df`): `RH01_SECOND_STAGE_FILTER.md`
+  (RC-327..339 + section 78), `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`,
+  `DECISION_REGISTER.md` (D-008 review_66 amendment), `RESEARCH_MAP.md`,
+  `GATE_RESEARCH_QUEUE.md`, `CHANGELOG.md`, handoff files. Raw archives +
+  PROVENANCE committed as `31647fd`.
+
+### Verification
+
+- Tests run: none — no test suite exists in this repository
+- Verified vs claimed: batch_70/review_66 archives 1:1 against the owner's chat
+  ("68:75"); all 13 corrections (RC-327..339) applied verbatim; C3A-009B LOCKED;
+  nothing marked `SIGNED_PASS`/Confirmed; no movement authorized
+
+*(Full State / Next-action / Forbidden-actions content preserved in git history
+at commit `f5917df`; the current live copy carries the batch 71 update.)*
+
+---
+
 ## 2026-07-16 — Claude Code — delivery "67:75": duplicate re-send of batch 68 (no new corrections, no new RC rows)
 
 ### Session

@@ -336,6 +336,28 @@ later entry that references it.
   `GATE_05M_C3_REVISION_02_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` — the
   procedure architecture is mature, NOT evidence any physical vehicle has passed
   (nothing Confirmed).
+- **Amendment (owner review_67, batch_71 "69:75", RC-340..350): Gate 05M-C3
+  Revision 03 — formal baseline candidate.** The Hunter delivered Revision 03
+  (applying RC-327..339) and the owner added 11 corrections: insert + govern the
+  actual `L_min` equation (no-double-count rule, `distance_component_method`
+  enum, movement-authorization gate, RC-340); the ±2 Nm zero-regen residual is a
+  candidate, not universal (RC-341); remove the circular C3A→C3B evidence
+  dependency (RC-342); remove "immediate" from the steering states → response
+  windows (RC-343); define `STALE` by signal freshness, not an unchanged value
+  (RC-344); C3A-007 supplier-defined Neutral zero-propulsion envelope (RC-345);
+  C3C-007 explicit fault ownership + comms-loss ≠ verified shutdown (RC-346); C3E
+  `FAULT_EXECUTION_DOMAIN` classification — a listed fault does not authorize
+  physical injection during motion (RC-347); paired/compound-fault prerequisites
+  + order/timing (RC-348); invalidated evidence preserved
+  (`INVALIDATED_FOR_CURRENT_CONFIGURATION`), never cleared (RC-349); and a full
+  `TestCellAuthorization_ID` schema + lifecycle (RC-350). The C3A-009B
+  contradiction fix was already applied via RC-328. Status upgrades to
+  `FORMAL_BASELINE_CANDIDATE / REVISION_03_APPLIED / … /
+  C3E_EXECUTION_DOMAIN_CLASSIFICATION_DEFINED`. Post-edit label:
+  `GATE_05M_C3_REVISION_03_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` — the
+  procedure architecture is ready for controlled multidisciplinary review, NOT
+  evidence physical movement/braking/regen/fault validation has passed (nothing
+  Confirmed).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the
