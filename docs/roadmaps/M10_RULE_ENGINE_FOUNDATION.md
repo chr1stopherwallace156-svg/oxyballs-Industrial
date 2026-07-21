@@ -1,8 +1,10 @@
 # M10 — Deterministic Rule Engine Foundation (plan-of-record)
 
-**Status: PLANNED — NOT STARTED. This is the plan-of-record for the M10 phase, not
-an implementation.** It captures the owner's M10 directive (directive_03, label
-"75:75") as the authoritative build plan for when the M10 phase is formally opened.
+**Status: IN PROGRESS — the owner opened this bounded M10 scope (Decision Register
+D-011).** This is the plan-of-record and the authoritative build plan; the
+implementation lives under `engine/`. Scope is bounded to the Gate 05M-C3
+Deterministic Rule Engine Foundation (directive_03); the broad Revision 07
+baseline-schema M10 (`M10_IMPLEMENTATION.md`) and ODR-001..ODR-003 remain gated.
 
 > **Governance gate (READ FIRST).** M10 is production code. Under the active
 > governance state — Engineering Constitution, `CLAUDE.md`, `AGENTS.md`, and the

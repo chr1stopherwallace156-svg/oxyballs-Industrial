@@ -17,6 +17,43 @@ later entry that references it.
 
 ---
 
+## D-011 — Owner opens the M10 gate for the Gate 05M-C3 Deterministic Rule Engine Foundation (bounded scope)
+
+- Date: 2026-07-21
+- Status: Accepted (extends D-010)
+- Context: Following D-010 (ingestion complete; M10 directed but gate not opened),
+  the owner explicitly chose to **build M10 in this session now**. Opening M10 is a
+  formal phase transition that this entry records transparently (not silently).
+  Note the pre-existing `M10_IMPLEMENTATION.md` roadmap defines a **broader** M10 —
+  implementing the entire Revision 07 baseline schema set — whose entry conditions
+  (full `rev07/00_BASELINE_INDEX.md` consolidation + explicit owner resolution of
+  ODR-001..ODR-003) are **NOT met**.
+- Decision: Open a **bounded** M10 scope only — the **Gate 05M-C3 Deterministic
+  Rule Engine Foundation** of owner directive_03, whose source specification (Gate
+  05M-C3 Revision 08, RC-313..425) **is** frozen and complete. This scope is
+  buildable now without inventing engineering values or resolving ODRs, because it
+  implements the *governance/enforcement structure* (schemas, state machines,
+  runout math, append-only ledger, config-lock, block reasons), not any
+  vehicle-specific engineering value. Explicitly still gated / NOT part of this
+  scope: (a) resolving ODR-001..ODR-003; (b) implementing the broad Revision 07
+  baseline modules (`M10_IMPLEMENTATION.md`) — those remain pending their entry
+  conditions; (c) any real approval, `SIGNED_PASS`, or engineering value — seed
+  data contains none (RC-355/389); (d) M11. The active roadmap for the bounded
+  scope is `M10_RULE_ENGINE_FOUNDATION.md`.
+- Consequences: Lifts the "no production code / no M10" bar **only for the bounded
+  Gate 05M-C3 rule-engine scope**. The rule engine is the mechanical enforcement of
+  the Engineering Constitution — Article I (immutable evidence → append-only
+  ledger), Article III (no AI authority), Article IV (deterministic state machines),
+  Article V (configuration locking), Article VI (version everything → versioned
+  migrations), Article VII (unknown data has no authority → `INITIAL_TARGET_PROFILE`
+  cannot authorize). Building it strengthens, rather than bypasses, the guardrails.
+  Updates `CLAUDE.md`, `AI_INSTRUCTIONS.md`, `CURRENT_PHASE.md` (transparently, this
+  entry as the record). Code lives under `engine/`. Nothing Confirmed; no
+  engineering values invented; ODRs untouched. Recorded in `CLAUDE.md`,
+  `docs/AI_INSTRUCTIONS.md`, `docs/status/CURRENT_PHASE.md`,
+  `docs/roadmaps/M10_RULE_ENGINE_FOUNDATION.md`,
+  `docs/status/IMPLEMENTATION_LEDGER.md`.
+
 ## D-010 — Rev 07 ingestion sequence complete; Gate 05M-C3 Rev 08 frozen as the M10 source spec; owner directs the M10 phase (gate NOT yet opened)
 
 - Date: 2026-07-21

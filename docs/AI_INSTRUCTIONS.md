@@ -14,9 +14,15 @@ subordinate only to the
 2. **This file** — permanent operating rules.
 3. **The active specification** — currently
    [`specifications/Revision_07.md`](specifications/Revision_07.md).
-4. **The current roadmap** — currently
-   [`roadmaps/REV07_SOURCE_INGESTION.md`](roadmaps/REV07_SOURCE_INGESTION.md)
-   (M10 does not begin until that phase completes).
+4. **The current roadmap** — the Rev 07 ingestion batch sequence is
+   complete (75/75). The owner has opened a **bounded M10 scope**
+   ([`roadmaps/M10_RULE_ENGINE_FOUNDATION.md`](roadmaps/M10_RULE_ENGINE_FOUNDATION.md),
+   Decision Register D-011): the Gate 05M-C3 Deterministic Rule Engine
+   Foundation, whose frozen source spec is Gate 05M-C3 Revision 08
+   (RC-313..425). Its production code lives under `engine/`. The broad
+   Revision 07 baseline-schema M10
+   ([`roadmaps/M10_IMPLEMENTATION.md`](roadmaps/M10_IMPLEMENTATION.md))
+   and ODR-001..ODR-003 resolution remain gated (entry conditions unmet).
 
 ## Hard rules
 
