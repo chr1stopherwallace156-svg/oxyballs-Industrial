@@ -699,3 +699,23 @@ DT-D061 — `VPR2_PROTOTYPE_CLAIMS_CORRECTED_NEXT_IS_REAL_MESH`.
 
 DT-D062 — `VPR2_BASELINE_ACCEPTED_NEXT_GLB_MAPPING`.
 
+---
+
+## RL-032 — GLB acquisition specification (EDTS-SPEC-3D-001)
+
+- **Date:** 2026-07-21
+- **Layer:** asset acquisition / VPR-2 Tier-2 gate
+- **Agent:** Cursor Cloud Agent
+- **Question:** What criteria gate purchasing or authoring the demonstrator GLB?
+
+### Findings
+
+1. Spec locked: config boundary, GLB metrics, CRS (front-axle origin), GEO_ separation, PBR/ORM.
+2. Manifest + `verifyMeshMapping()` + QA checklist required before Tier-2 admit.
+3. PROXY powertrain naming; no aluminum-in-name; no invented mass/freeze.
+4. Object-store path reserved empty; procedural R3F remains visual.
+
+### Status
+
+DT-D063 — `SPEC_3D_001_ACCEPTED_GLB_NOT_YET_ACQUIRED`.
+

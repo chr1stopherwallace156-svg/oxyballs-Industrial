@@ -1,12 +1,20 @@
 # EDTS VPR-2 — Architecture & Interaction Prototype
 
-Honest baseline (DT-D061 / DT-D062). **Not production-ready.**
+Honest baseline (DT-D061 / DT-D062 / DT-D063). **Not production-ready.**
 
-Real **React Three Fiber** WebGL scene (not CSS cards). Procedural truck-shaped placeholders; no GLB yet.
+Real **React Three Fiber** WebGL scene (not CSS cards). Procedural truck-shaped placeholders; no GLB binary yet.
 
 ## Audit
 
 See [`PROTOTYPE_STATUS.md`](PROTOTYPE_STATUS.md).
+
+## GLB acquisition gate
+
+- Spec: [`../elektron-digital-twin-foundation/specs/EDTS-SPEC-3D-001_GLB_ACQUISITION.md`](../elektron-digital-twin-foundation/specs/EDTS-SPEC-3D-001_GLB_ACQUISITION.md)
+- Manifest: [`src/data/mesh_mapping_manifest.json`](src/data/mesh_mapping_manifest.json)
+- Verifier: [`src/data/verifyMeshMapping.ts`](src/data/verifyMeshMapping.ts)
+- Checklist: [`qa/GLB_ACCEPTANCE_CHECKLIST.md`](qa/GLB_ACCEPTANCE_CHECKLIST.md)
+- Object-store placeholder: [`public/assets/glb/`](public/assets/glb/) (empty until QA pass)
 
 ## Run
 

@@ -1060,3 +1060,22 @@ Append-only record of digital twin foundation decisions.
   5. Next milestone: real GLB/mesh mapping to `comp_id`
 
 ---
+
+## DT-D063 — EDTS-SPEC-3D-001 GLB acquisition & authoring gate
+
+- **Change-control record:** [`decisions/DT-D063_GLB_ACQUISITION_SPEC.json`](decisions/DT-D063_GLB_ACQUISITION_SPEC.json)
+- **decision_id:** `DT-D063`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-032`
+- **recommended_decision:** `SPEC_3D_001_ACCEPTED_GLB_NOT_YET_ACQUIRED`
+- **decision:**
+  1. Accept `EDTS-SPEC-3D-001` as the Tier-2 GLB purchase/authoring gate for VPR-2
+  2. Config boundary = `CFG-2019-F450-REG-CAB-4X2-60CA-DRW` (bare cab-and-chassis)
+  3. Require separable `GEO_*` nodes + `mesh_mapping_manifest.json` + `verifyMeshMapping()` before admit
+  4. CRS: meters, +Y up, front-axle origin; budgets &lt;25 MB / ≤150k tris / ≤30 materials
+  5. Prefer PROXY powertrain names; alias vendor 6.7L/6R140 as OPTION_DEPENDENT
+  6. Acquisition ≠ geometry freeze / ASSERTION_VERIFIED / invented mass / procedures
+  7. No GLB binary in-repo until QA pass — procedural placeholders remain
+
+---

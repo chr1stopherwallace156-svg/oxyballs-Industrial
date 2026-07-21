@@ -1,6 +1,7 @@
 /**
  * Mesh ↔ component registry for the R3F scene.
  * Scene groups set userData.compId; search/camera resolve via this map + scene.traverse.
+ * GLB node names resolve via mesh_mapping_manifest.json (EDTS-SPEC-3D-001 / DT-D063).
  */
 export type MeshRegistryEntry = {
   comp_id: string
@@ -33,3 +34,11 @@ export function clearMeshRegistry() {
   byComp.clear()
   byRole.clear()
 }
+
+export {
+  verifyMeshMapping,
+  getCompIdForMeshNode,
+  listRequiredMeshNodes,
+  ingestManifestIntoRegistry,
+  runVerifyMeshMappingSelfCheck,
+} from './verifyMeshMapping'

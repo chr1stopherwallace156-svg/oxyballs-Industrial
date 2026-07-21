@@ -35,6 +35,11 @@ SIM records remain `mass_kg: null`. Handoff sample kg values quarantined in
 
 User can orbit a truck-shaped R3F scene, hover/select/isolate/search/inspect ≥5 meshes.
 
+## GLB acquisition (DT-D063)
+
+Gate accepted: `EDTS-SPEC-3D-001`. Manifest + `verifyMeshMapping` + QA checklist ready.  
+**GLB binary:** not acquired. Tier-2 path `public/assets/glb/` remains empty.
+
 ## Next milestone
 
-Map real GLB/high-fidelity assets to `comp_id` with object-store refs — still no invented mass/VERIFIED geometry.
+Acquire/author GLB per SPEC-3D-001 → map ≥5 `comp_id`s — still no invented mass/VERIFIED geometry.

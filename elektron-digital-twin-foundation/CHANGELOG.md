@@ -6,6 +6,7 @@ All notable changes to the digital twin foundation. Append-only.
 
 ### Added
 
+- **DT-D063 / RL-032** — EDTS-SPEC-3D-001 GLB acquisition gate; mesh_mapping_manifest + verifyMeshMapping + QA checklist (no GLB binary yet)
 - **DT-D062 / RL-031** — VPR-2 corrected baseline accepted (3-tier storage; audit lock; mass quarantine)
 - **DT-D061 / RL-030** — VPR-2 claim corrections; multi-maturity; SQL schema draft
 - **DT-D060 / RL-029** — Normalized COMP/GEO/EVD/EGS/SIM/UI + hover-first UI
@@ -16,7 +17,7 @@ All notable changes to the digital twin foundation. Append-only.
 
 - Visible Progress: **Architecture & Interaction Prototype**
 - R3F viewport ✔ · persistence ❌ · axle DISABLED · storyboard only
-- Next: **GLB/mesh mapping**
+- Next: **acquire/author GLB per SPEC-3D-001 → map ≥5 comp_ids**
 
 ## 2026-07-16
 
