@@ -5,6 +5,40 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-21 — RH batch 73 ("71:75") + owner review_69: Gate 05M-C3 Revision 05 (RC-369..382)
+
+- Archived RH batch 73 + owner review_69 1:1 (commit `e0837c6`) — owner label
+  "71:75": re-issued batch_72 corrections + a detailed verdict on Gate 05M-C3
+  **Revision 05**, classified `FORMAL_ENGINEERING_BASELINE_CANDIDATE` ("the
+  strongest and most internally consistent version yet"). New PROVENANCE row +
+  `owner_reviews/review_69_batch_73_verdict.md` (16 items verbatim).
+- **14 corrections applied to `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`
+  (Revision 05) + RH01 RC-369..382 + D-008 amendment (review_69):** units + hard
+  validation on every numeric authorization field (RC-369); immutable
+  `AuthorizationTransition_ID` audit events + `SUSPENDED → AUTHORIZED` revalidation
+  (RC-370); `COMPLETED` ≠ `SIGNED_PASS`, "COMPLETED shall not clear a gate"
+  (RC-371); a `RunoutAggregationResult` summary with hard blocks (RC-372);
+  distance boundary/geometry validation (RC-373); append-only evidence —
+  annotations are new linked records, never overwrites (RC-374); the zero-regen
+  residual envelope conditioned by operating state + `ZERO_REGEN_REQUEST` command
+  state (RC-375); C3A-008 separate E-stop outcomes (RC-376); C3C-007 measurement
+  uncertainty + channel health, not "definitively" (RC-377); deterministic
+  steering-state precedence (RC-378); steering fault recovery rules — no
+  auto-restore of propulsion (RC-379); per-fault `FaultExecutionAuthorization_ID`
+  (RC-380); paired-fault result + lifecycle fields (RC-381); and the explicit
+  no-claim rule (RC-382).
+- Owner items 1 (`L_min` equation transcription) and 5 (prefilled approvals) were
+  **already clean** in the deliverable (RC-340/351, RC-355) — noted, no duplicate
+  RC row minted.
+- Deliverable relabelled
+  `GATE_05M_C3_REVISION_05_READY_FOR_CONTROLLED_MULTIDISCIPLINARY_BASELINE_REVIEW`
+  — the validation architecture is nearly ready to freeze while all physical pass
+  claims remain correctly unproven. Every value stays `INITIAL_TARGET_PROFILE`;
+  nothing Confirmed; no public road / no customer operation / no compliance claim;
+  ODRs untouched; no production code / no M10 during ingestion.
+
+---
+
 ## 2026-07-21 — Owner directive_02 (side-bar): fault-record & error-library architecture (D-009)
 
 - Archived owner directive_02 1:1 (commit `304fa9c`) — the finished Build Engine

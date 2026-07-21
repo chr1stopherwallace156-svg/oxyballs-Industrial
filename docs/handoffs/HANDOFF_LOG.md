@@ -13,6 +13,47 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-21 — Claude Code — owner directive_02 (side-bar): fault-record & error-library architecture (D-009, RC-364..368)
+
+### Session
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-21
+- Reason for handoff: task complete (owner directive_02 side-bar — fault-record &
+  error-library architecture; new doctrine artifact
+  `docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md` + Decision Register D-009 + RH01
+  RC-364..368); doctrine only, no M10/production code; awaiting the 05M-C3A
+  execution / Envelope-Cell-1 batch or a supplier reply
+
+### Git state
+
+- Branch: `claude/docs-structure-large-projects-b6vxx5`
+- Agent owner: Claude Code (single-writer rule, AGENTS.md)
+- Start commit: `304fa9c` — Archive owner directive_02 1:1
+- End commit: `06b10e5` — Reconcile owner directive_02 (D-009, RC-364..368)
+- Working tree at handoff: clean (everything committed)
+
+### Work performed
+
+- Owner directive_02 (side-bar) — fault-record & error-library architecture,
+  captured as DOCTRINE (not a numbered "N:75" batch, not production code). New
+  doctrine artifact `docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md`, Decision
+  Register D-009, RH01 RC-364..368 + section 81. Guardrails: doctrine only (no
+  M10/production code during ingestion); every example ID/envelope/percentage in
+  the directive is an owner ILLUSTRATIVE PLACEHOLDER → `INITIAL_TARGET_PROFILE`;
+  directive archived 1:1 (Constitution Art. I). Gate 05M-C3 stayed at Revision 04.
+- Nothing ingested; nothing Confirmed; no normal driving; no public road; no
+  customer operation; no "certified safe"/compliance claim; ODRs untouched.
+
+### Note
+
+Full prior handoff content (state snapshot, doctrine chain RC-168..368, open owner
+decisions, forbidden actions, receiving-agent checklist) is preserved in the
+batch-72 entry below and forward-carried into the batch-73 `CURRENT_HANDOFF.md`;
+this entry records the directive_02 delta.
+
+---
+
 ## 2026-07-16 — Claude Code — batch 72 ("70:75") + review_68: Gate 05M-C3 Revision 04 (RC-351..363)
 
 ### Session

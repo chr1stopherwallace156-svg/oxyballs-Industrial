@@ -371,23 +371,26 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_68):** **Gate 05M-C3A execution / Envelope
-Cell 1 authorization + formal engineering baseline review** (Decision Register
-**D-008**, amended review_68). Gate 05M-C3 (Controlled Closed-Area Low-Speed
-Movement, `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`) is now at **Revision 04** — the
-Hunter applied the review_67 corrections (RC-340..350) and the owner added 13
-review_68 corrections (RC-351..363: preserve distance-component values not
-zero-clamp; Distance Accounting Integrity Rule + component schema; immutable
-result lifecycle; `TestCellAuthorization` status transitions; procedure approval
-requires real signatures; ±2 Nm strictly non-authoritative + DC-bus; measurable
-C3A-006 braking; C3A-009B block prerequisites; independent physical evidence
-after comms loss; steering validity vs freshness; execution arrows are review
-paths; tighter moving-fault limits; full `PairedFaultAuthorization_ID` schema).
-It now labels
-`GATE_05M_C3_REVISION_04_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` — the
-controlled procedure architecture is ready for multidisciplinary engineering
-review; it does NOT mean any vehicle / calibration / brake system / regeneration
-strategy / moving fault test has physically passed (nothing Confirmed). Every
+**Next expected batch (owner review_69):** **Gate 05M-C3A execution / Envelope
+Cell 1 authorization + controlled multidisciplinary baseline review** (Decision
+Register **D-008**, amended review_69). Gate 05M-C3 (Controlled Closed-Area
+Low-Speed Movement, `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`) is now at **Revision
+05** — the owner classified it `FORMAL_ENGINEERING_BASELINE_CANDIDATE` ("the
+strongest and most internally consistent version yet") and added 16 items → 14
+review_69 corrections (RC-369..382: units + hard validation on authorization
+fields; immutable `AuthorizationTransition_ID` audit + `SUSPENDED → AUTHORIZED`
+revalidation; `COMPLETED` ≠ `SIGNED_PASS`; `RunoutAggregationResult` summary +
+hard blocks; distance boundary/geometry validation; append-only evidence;
+regen residual conditioned by operating state + `ZERO_REGEN_REQUEST` command
+state; C3A-008 separate E-stop outcomes; C3C-007 uncertainty + channel health;
+deterministic steering-state precedence; steering fault recovery; per-fault
+`FaultExecutionAuthorization_ID`; paired-fault lifecycle fields; the explicit
+no-claim rule — owner items 1 & 5 were already clean). It now labels
+`GATE_05M_C3_REVISION_05_READY_FOR_CONTROLLED_MULTIDISCIPLINARY_BASELINE_REVIEW` —
+the validation architecture is nearly ready to freeze while all physical pass
+claims remain correctly unproven; it does NOT mean any vehicle / calibration /
+brake system / regeneration strategy / moving fault test has physically passed
+(nothing Confirmed). Every
 number stays `INITIAL_TARGET_PROFILE` (RC-267/291/293/300 — no auto-unlock,
 cell-by-cell escalation RC-314/350/354), steering angle is observation/derating
 only (RC-323/337, no torque-vectoring), C3A-009B external-control authority stays

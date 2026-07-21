@@ -749,7 +749,7 @@ post-edit label
 procedure is ready to be reviewed and controlled, not physical-pass evidence.
 Permits **Gate 05M-C3 only** (after 05M-C2A/B/C).
 
-## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: REVISION 04 — formal baseline candidate (owner review_68, batch_72)
+## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: REVISION 05 — formal baseline candidate, ready for controlled multidisciplinary baseline review (owner review_69, batch_73)
 
 Deliverable `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md` — the **last rung of
 the split 05M-C phase**, only after Gate 05M-C2 is proven. Built as **five linear
@@ -810,11 +810,26 @@ freshness (RC-360); execution arrows are review paths (RC-361); tighter
 moving-fault limits (RC-362); full `PairedFaultAuthorization_ID` schema (RC-363).
 Status becomes `FORMAL_BASELINE_CANDIDATE / REVISION_04_APPLIED / … /
 MULTI_FAULT_AUTHORIZATION_SCHEMA_DEFINED`; post-edit label
-`GATE_05M_C3_REVISION_04_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW`. **NEXT =
-05M-C3A execution + Envelope Cell 1 authorization (signed `TestCellAuthorization_ID`)
-+ formal engineering baseline review.** The Hunter's "15 km/h" is an
-`INITIAL_TARGET_PROFILE` pending supplier + engineering approval
-(RC-267/291/293/300 — no auto-unlock).
+`GATE_05M_C3_REVISION_04_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW`.
+**Revision 05 (review_69, RC-369..382):** units + hard validation constraints on
+every numeric authorization field (RC-369); immutable `AuthorizationTransition_ID`
+audit events + `SUSPENDED → AUTHORIZED` revalidation (RC-370); `COMPLETED` ≠
+`SIGNED_PASS`, "`COMPLETED` shall not clear a gate" (RC-371); `RunoutAggregationResult`
+summary + hard blocks (RC-372); distance boundary/geometry validation (RC-373);
+append-only evidence — annotations are new linked records (RC-374); regen residual
+conditioned by operating state + `ZERO_REGEN_REQUEST` command state (RC-375);
+C3A-008 separate E-stop outcomes (RC-376); C3C-007 measurement uncertainty +
+channel health (RC-377); deterministic steering-state precedence (RC-378);
+steering fault recovery rules (RC-379); per-fault `FaultExecutionAuthorization_ID`
+(RC-380); paired-fault result + lifecycle fields (RC-381); explicit no-claim rule
+(RC-382). Owner items 1 & 5 were already clean (RC-340/351, RC-355). Status
+becomes `FORMAL_BASELINE_CANDIDATE / REVISION_05_APPLIED / … / NO_CLAIM_RULE_DEFINED`;
+post-edit label
+`GATE_05M_C3_REVISION_05_READY_FOR_CONTROLLED_MULTIDISCIPLINARY_BASELINE_REVIEW`.
+**NEXT = 05M-C3A execution + Envelope Cell 1 authorization (signed
+`TestCellAuthorization_ID`) + controlled multidisciplinary baseline review.** The
+Hunter's "15 km/h" is an `INITIAL_TARGET_PROFILE` pending supplier + engineering
+approval (RC-267/291/293/300 — no auto-unlock).
 
 Enforce throughout — engineer-gated, live-HV, **closed controlled area only, no
 public road, no customer operation, no normal-driving authority**; the Numeric

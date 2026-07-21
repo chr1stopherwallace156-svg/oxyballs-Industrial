@@ -4,52 +4,53 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-21
-- Reason for handoff: task complete (owner directive_02 side-bar — fault-record &
-  error-library architecture; new doctrine artifact
-  `docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md` + Decision Register D-009 + RH01
-  RC-364..368); doctrine only, no M10/production code; awaiting the 05M-C3A
-  execution / Envelope-Cell-1 batch or a supplier reply
+- Reason for handoff: task complete (RH batch 73 "71:75" + owner review_69 — Gate
+  05M-C3 Revision 05; 14 corrections RC-369..382 applied to
+  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`); awaiting the 05M-C3A execution /
+  Envelope-Cell-1 batch or a supplier reply
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `304fa9c` — Archive owner directive_02 1:1
+- Start commit: `e0837c6` — Archive RH batch 73 + owner review_69 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- **Owner directive_02 (side-bar) — fault-record & error-library architecture,
-  captured as DOCTRINE (not a numbered "N:75" batch, not production code).** The
-  owner directed that the finished Build Engine must record faults as structured,
-  configuration-bound evidence (`FaultRecord_ID` + full identity + Telemetry
-  Synchronicity Packet + applicability envelope), never a bare "Error: torque too
-  high" conclusion. I proposed the formalization, the owner confirmed ("Write
-  that now"), and I wrote it up:
-  - **New doctrine artifact `docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md`** — the
-    `FaultRecord_ID` shape; the 7-level identity hierarchy (VehicleFamily →
-    Platform → VehicleConfiguration → ConversionPackage → IndividualVehicle →
-    TestConfiguration → FaultRecord); the four-layer error library (only layer-1
-    definitions reusable; layers 2–4 configuration-bound); similarity-is-review-
-    only; VIN/label seeds upper IDs only.
-  - **Decision Register `D-009`** binds it to RC-325/326/339/353/361 + D-006.
-  - **RH01 RC-364..368 + section 81:** structured evidence not conclusions
-    (RC-364); layered identity (RC-365); four-layer library (RC-366); similarity
-    is review-only, never auto-reuse across platforms (RC-367); scan proposes /
-    config-lock proves (RC-368).
-- **Guardrails applied:** doctrine only — NOT an implemented M10 fault library
-  (no production code / no M10 during Rev 07 ingestion); every example ID /
-  envelope / similarity percentage in the directive is an owner ILLUSTRATIVE
-  PLACEHOLDER → `INITIAL_TARGET_PROFILE`, no invented values; donor 7.3L gas
-  (001A) still to confirm (BQ-27). Directive archived 1:1 (Constitution Art. I).
-- Files changed (reconciliation commit): `docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md`
-  (NEW), `DECISION_REGISTER.md` (D-009), `RH01_SECOND_STAGE_FILTER.md`
-  (RC-364..368 + section 81), `CHANGELOG.md`, handoff files. The directive archive
-  `directive_02_fault_record_error_library_architecture.md` was committed
-  separately as `304fa9c`. No Gate-05x deliverable changed; Gate 05M-C3 stays at
-  Revision 04.
+- **RH batch 73 ("71:75") + owner review_69 — Gate 05M-C3 Revision 05.** The owner
+  re-issued the batch_72 corrections and delivered a detailed verdict on Revision
+  05, classifying it `FORMAL_ENGINEERING_BASELINE_CANDIDATE` ("the strongest and
+  most internally consistent version yet"). 16 items → **14 new corrections**
+  (owner items 1 & 5 were already clean — RC-340/351 and RC-355):
+  - Archived 1:1 (commit `e0837c6`): `research_hunter/batch_73_gate05mc3_revision05.md`,
+    `owner_reviews/review_69_batch_73_verdict.md`, new PROVENANCE row (newest-first).
+  - **Applied RC-369..382 to `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`:**
+    units + hard validation on every numeric authorization field (RC-369);
+    immutable `AuthorizationTransition_ID` audit events + `SUSPENDED → AUTHORIZED`
+    revalidation (RC-370); `COMPLETED` ≠ `SIGNED_PASS` (RC-371);
+    `RunoutAggregationResult` summary + hard blocks (RC-372); distance
+    boundary/geometry validation (RC-373); append-only evidence (RC-374); regen
+    residual conditioned by operating state + `ZERO_REGEN_REQUEST` command state
+    (RC-375); C3A-008 separate E-stop outcomes (RC-376); C3C-007 measurement
+    uncertainty + channel health (RC-377); deterministic steering-state precedence
+    (RC-378); steering fault recovery rules (RC-379); per-fault
+    `FaultExecutionAuthorization_ID` (RC-380); paired-fault result + lifecycle
+    fields (RC-381); explicit no-claim rule (RC-382).
+  - **RH01 RC-369..382 + section 82; D-008 amendment (review_69); RESEARCH_MAP,
+    GATE_RESEARCH_QUEUE, CHANGELOG** updated. Deliverable relabelled
+    `GATE_05M_C3_REVISION_05_READY_FOR_CONTROLLED_MULTIDISCIPLINARY_BASELINE_REVIEW`.
+- **Guardrails applied:** every schema field / unit example / precedence order /
+  distance figure stays `INITIAL_TARGET_PROFILE` / `NeedsSupplierData`; nothing
+  gained pass/fail authority (RC-267/293/300); the no-claim rule (RC-382) makes
+  the closed-area boundary explicit; append-only rule (RC-374) restates
+  Constitution Art. I; already-clean owner items 1 & 5 noted, no duplicate rows.
+- Files changed (reconciliation commit): `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`,
+  `RH01_SECOND_STAGE_FILTER.md` (RC-369..382 + section 82), `DECISION_REGISTER.md`
+  (D-008 amendment), `RESEARCH_MAP.md`, `GATE_RESEARCH_QUEUE.md`, `CHANGELOG.md`,
+  handoff files. Archives were committed separately as `e0837c6`.
 - **Nothing ingested; nothing Confirmed; no normal driving; no public road; no
   customer operation; no "certified safe"/compliance claim; ODRs untouched; no
   production code / no M10.**
@@ -58,11 +59,11 @@
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: directive_02 archived 1:1 against the owner's side-bar
-  message; the doctrine artifact + D-009 + RC-364..368 restate the directive and
-  map it to existing doctrine (RC-325/326/339/353/361 + D-006) without inventing
-  values (all example IDs/percentages flagged as placeholders); captured as
-  doctrine only, no M10/production code; nothing marked Confirmed
+- Verified vs claimed: batch 73 + review_69 archived 1:1 against the owner's
+  "71:75" message; RC-369..382 restate the owner's 14 corrections verbatim and are
+  recorded in both RH01 (rows + section 82) and the deliverable; owner items 1 & 5
+  confirmed already-clean (RC-340/351, RC-355) so no duplicate rows minted; every
+  value stays `INITIAL_TARGET_PROFILE`; nothing marked Confirmed
 
 ## State
 
@@ -94,15 +95,20 @@
   review_64, NOT physical-pass evidence); **05M-C3 CREATED —
   MODULAR_ARCHITECTURE_DEFINED / NO_TORQUE_VECTORING_AUTHORITY /
   NO_ACTIVE_ABS_ESC_AUTHORITY / RUNOUT_CALCULATION_REQUIRED /
-  NO_NORMAL_DRIVING_AUTHORITY — REVISION_04_APPLIED / FORMAL_BASELINE_CANDIDATE /
+  NO_NORMAL_DRIVING_AUTHORITY — REVISION_05_APPLIED / FORMAL_BASELINE_CANDIDATE /
   C3A_EXTERNAL_CONTROL_INTEGRATION_LOCKED / AUTHORIZATION_TRANSITION_RULES_DEFINED
-  / PROCEDURE_SIGNATURE_REQUIRED / IMMUTABLE_EVIDENCE_PRESERVATION_DEFINED /
-  MULTI_FAULT_AUTHORIZATION_SCHEMA_DEFINED per review_68
+  / AUTHORIZATION_TRANSITION_AUDIT_DEFINED / AUTHORIZATION_FIELD_UNITS_AND_VALIDATION_DEFINED
+  / COMPLETED_NOT_SIGNED_PASS_RULE_DEFINED / RUNOUT_AGGREGATION_RESULT_SCHEMA_DEFINED
+  / DISTANCE_GEOMETRY_VALIDATION_DEFINED / APPEND_ONLY_ANNOTATION_RULE_DEFINED /
+  C3D_STATE_PRECEDENCE_AND_RECOVERY_DEFINED / FAULT_EXECUTION_AUTHORIZATION_SCHEMA_DEFINED
+  / PAIRED_FAULT_LIFECYCLE_FIELDS_DEFINED / NO_CLAIM_RULE_DEFINED /
+  PROCEDURE_SIGNATURE_REQUIRED / IMMUTABLE_EVIDENCE_PRESERVATION_DEFINED /
+  MULTI_FAULT_AUTHORIZATION_SCHEMA_DEFINED per review_69
   (`GATE05M_C3_CLOSED_AREA_MOVEMENT.md`, five linear subgates 05M-C3A→C3E; labels
-  `GATE_05M_C3_REVISION_04_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` per
-  review_68, NOT physical-pass evidence); 05M-C3A execution + Envelope-Cell-1
-  authorization (signed `TestCellAuthorization_ID`) + formal engineering baseline
-  review NEXT per D-008 (amended review_68)**; 07 v0.1 / 07B / 07C v0.4 PARKED; 08
+  `GATE_05M_C3_REVISION_05_READY_FOR_CONTROLLED_MULTIDISCIPLINARY_BASELINE_REVIEW`
+  per review_69, NOT physical-pass evidence); 05M-C3A execution + Envelope-Cell-1
+  authorization (signed `TestCellAuthorization_ID`) + controlled multidisciplinary
+  baseline review NEXT per D-008 (amended review_69)**; 07 v0.1 / 07B / 07C v0.4 PARKED; 08
   FMEA_REGISTRY_CREATED (15 modes); 08B PARKED; **08C
   SIMULATION_SWEEP_MATRIX_CREATED — PARKED_FOR_SUPPLIER_DATA**. Order after
   05: 06 deep dive → 09 → 10 → 11.
@@ -116,8 +122,8 @@
   (controls-authority) + **D-008** (staged post-bench
   gate ladder to HV; never "certified safe"; amended review_65 — 05J → 05K →
   05L-A → 05L-B → 05L-C → 05M-A → 05M-B → 05M-C1 → 05M-C2 (05M-C2A → 05M-C2B →
-  05M-C2C) → 05M-C3 (05M-C3A → 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E; Revision 04
-  per review_68); each engineer-approved) + the **Numeric Threshold Authority
+  05M-C2C) → 05M-C3 (05M-C3A → 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E; Revision 05
+  per review_69); each engineer-approved) + the **Numeric Threshold Authority
   Rule** (RC-267/293/300) + RC-168 + the invented-values family through RC-267 +
   RC-190/191/197
   (HIL/bench is evidence, not vehicle authority) + RC-205/227/247/265 (VCU
@@ -173,8 +179,17 @@
   not conclusions, RC-365 multi-level vehicle identity hierarchy, RC-366
   four-layer error library only layer-1 reusable, RC-367 similarity is review-only
   not auto-reuse, RC-368 VIN/label seeds upper IDs only / config must be measured
-  (RC-364..368 = D-009 fault-library doctrine)**) bind all Gate 05x + downstream
-  controls work.
+  (RC-364..368 = D-009 fault-library doctrine), RC-369 authorization-field units +
+  hard validation, RC-370 immutable authorization-transition audit, RC-371
+  COMPLETED ≠ SIGNED_PASS, RC-372 RunoutAggregationResult + hard blocks, RC-373
+  distance boundary/geometry validation, RC-374 append-only evidence, RC-375 regen
+  residual conditioned by operating state / ZERO_REGEN_REQUEST command state,
+  RC-376 C3A-008 separate E-stop outcomes, RC-377 C3C-007 measurement uncertainty +
+  channel health, RC-378 deterministic steering-state precedence, RC-379 steering
+  fault recovery rules, RC-380 per-fault FaultExecutionAuthorization_ID, RC-381
+  paired-fault result + lifecycle fields, RC-382 no-claim rule
+  (RC-369..382 = Gate 05M-C3 Revision 05, review_69)**) bind all Gate 05x +
+  downstream controls work.
 - Open owner decisions (accumulated): (1) elektron-os-clean; (2) index.html;
   (3) L2; (4) L4; (5) L6; (6) L9 lane name; (7) Artifact Intake Form; (8)
   M10 forbidden-phrase + regression scanner (invented-values family through

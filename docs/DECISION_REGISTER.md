@@ -437,6 +437,28 @@ later entry that references it.
   engineering review; it does NOT mean any vehicle / calibration / brake system /
   regeneration strategy / moving fault test has physically passed (nothing
   Confirmed).
+- **Amendment (owner review_69, batch_73 "71:75", RC-369..382): Gate 05M-C3
+  Revision 05 — controlled-validation-architecture hardening.** The owner
+  classifies Revision 05 as `FORMAL_ENGINEERING_BASELINE_CANDIDATE` ("the
+  strongest and most internally consistent version yet") and issues 16 items → 14
+  new corrections (owner items 1 & 5 were already clean — RC-340/351 and RC-355):
+  units + hard validation constraints on every numeric authorization field
+  (RC-369); immutable `AuthorizationTransition_ID` audit events + `SUSPENDED →
+  AUTHORIZED` revalidation (RC-370); `COMPLETED` ≠ `SIGNED_PASS`, "`COMPLETED`
+  SHALL NOT CLEAR A GATE" (RC-371); a `RunoutAggregationResult` summary with hard
+  blocks (RC-372); distance boundary ordering + geometry validation (RC-373);
+  append-only evidence — annotations are new linked records (RC-374); the
+  zero-regen residual envelope conditioned by operating state + `ZERO_REGEN_REQUEST`
+  command state (RC-375); C3A-008 separate E-stop outcomes (RC-376); C3C-007
+  measurement-uncertainty wording + channel health (RC-377); deterministic
+  steering-state precedence (RC-378); steering fault recovery rules (RC-379);
+  `FaultExecutionAuthorization_ID` per specific fault (RC-380); paired-fault result
+  + lifecycle fields + versioned response-sequence map (RC-381); and the explicit
+  no-claim rule (RC-382). Status upgrades to `FORMAL_BASELINE_CANDIDATE /
+  REVISION_05_APPLIED / … / NO_CLAIM_RULE_DEFINED`. Post-edit label:
+  `GATE_05M_C3_REVISION_05_READY_FOR_CONTROLLED_MULTIDISCIPLINARY_BASELINE_REVIEW`
+  — the validation architecture is nearly ready to freeze while all physical pass
+  claims remain correctly unproven (nothing Confirmed).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the
