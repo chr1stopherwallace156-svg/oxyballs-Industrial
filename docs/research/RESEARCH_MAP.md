@@ -371,7 +371,19 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_72):** **Gate 05M-C3A execution / Envelope
+**INGESTION SEQUENCE COMPLETE (75/75).** The terminal "75:75" delivery (owner
+directive_03, Decision Register **D-010**) closed the Research Hunter batch
+sequence and directed the **M10 — Deterministic Rule Engine Foundation** phase.
+Gate 05M-C3 Revision 08 (RC-313..425) is the **frozen source specification** for
+M10; the owner's M10 plan-of-record is `docs/roadmaps/M10_RULE_ENGINE_FOUNDATION.md`.
+**M10 is production code and is NOT started** — opening the M10 phase is a formal
+governance gate (active-roadmap pointer move + proposed `AI_INSTRUCTIONS.md` /
+`CLAUDE.md` update + owner confirmation of who executes the build; the directive
+routes the prompt to "your coding agent"). No production code / no M10 work runs
+until that gate is opened (D-010).
+
+**Prior next-batch pointer (superseded by the phase transition — retained for
+history) — expected batch (owner review_72):** **Gate 05M-C3A execution / Envelope
 Cell 1 authorization** (Decision Register **D-008**, amended review_72). Gate
 05M-C3 (Controlled Closed-Area Low-Speed Movement,
 `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`) is now at **Revision 08** — the owner called

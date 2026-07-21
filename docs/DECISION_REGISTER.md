@@ -17,6 +17,51 @@ later entry that references it.
 
 ---
 
+## D-010 — Rev 07 ingestion sequence complete; Gate 05M-C3 Rev 08 frozen as the M10 source spec; owner directs the M10 phase (gate NOT yet opened)
+
+- Date: 2026-07-21
+- Status: Accepted (phase-transition recorded; M10 execution pending a formal gate)
+- Context: The Research Hunter "N:75" ingestion sequence reached its terminal
+  delivery "75:75" (owner directive_03). Unlike batches 1–74, "75:75" carries no
+  Gate 05M-C3 schema draft and no review verdict — it is an owner phase-transition
+  directive declaring the ingestion phase complete and directing **M10 —
+  Deterministic Rule Engine Foundation** as the next milestone (M10A schema
+  normalization → M10H HIL readiness), with a table list, hard-block rules +
+  machine-readable block reasons, the canonical `L_min` equation "in code", a
+  coding-agent prompt, required negative tests, and `npm run migrate/seed/verify/
+  test/build` completion criteria. This intersects a standing guardrail: the
+  Engineering Constitution, `CLAUDE.md`, and `AGENTS.md` forbid production code and
+  M10 work during the Rev 07 ingestion phase (active roadmap
+  `REV07_SOURCE_INGESTION.md`).
+- Decision: (1) Record that the Rev 07 ingestion batch sequence is **complete
+  (75/75)**. (2) Designate **Gate 05M-C3 Revision 08**
+  (`GATE05M_C3_CLOSED_AREA_MOVEMENT.md`, RC-313..425) as the **frozen source
+  specification** for M10 (the owner's directive names "Revision 07"; the
+  deliverable carries those rules through Revision 08). (3) Archive the M10
+  directive 1:1 (`owner_directives/directive_03_m10_rule_engine_phase.md`) and
+  capture the owner's M10 plan as the **plan-of-record**
+  (`docs/roadmaps/M10_RULE_ENGINE_FOUNDATION.md`). (4) **Do NOT begin M10 production
+  code from this session.** Opening the M10 phase is a formal governance transition
+  requiring: the active-roadmap pointer to move from `REV07_SOURCE_INGESTION.md` to
+  the M10 roadmap; a proposed update to the `AI_INSTRUCTIONS.md` operating manual +
+  the `CLAUDE.md` "no M10 / no production code" rule (proposed, never silently
+  rewritten — Constitution); and explicit owner confirmation of who executes the
+  build (the directive routes the prompt to "your coding agent"). Until that gate is
+  opened, M10 remains PLANNED / NOT STARTED.
+- Consequences: Closes the ingestion phase's batch intake and freezes the Gate
+  05M-C3 governance specification (RC-313..425) as the authority M10 will implement.
+  Binds the M10 build — whenever opened — to the frozen doctrine: database first,
+  no AI authority, `INITIAL_TARGET_PROFILE` has no movement/pass/fail/release
+  authority (RC-267/412), append-only signed evidence (RC-374/410/422/423),
+  separated authorization/execution/result statuses (RC-371/387/408), cross-record
+  configuration equality (RC-409/421/425), a machine-readable block reason per
+  rejection, and nothing "certified safe" (RC-224). Sets M11 (Platform 001 Open
+  Data Register + Supplier Closure) as the phase after M10. Supersedes nothing;
+  does not by itself lift the no-M10 guardrail — that requires the owner to open the
+  gate. Recorded in `docs/roadmaps/M10_RULE_ENGINE_FOUNDATION.md`,
+  `docs/research/raw/owner_directives/directive_03_m10_rule_engine_phase.md`,
+  `docs/research/RESEARCH_MAP.md`, `docs/research/raw/research_hunter/PROVENANCE.md`.
+
 ## D-009 — Fault-record & error-library architecture: layered identity, four-layer library, similarity-is-review-only
 
 - Date: 2026-07-21

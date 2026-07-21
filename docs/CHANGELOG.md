@@ -5,6 +5,33 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-21 — Owner directive_03 ("75:75"): ingestion complete, M10 phase directed (D-010)
+
+- Archived owner directive_03 1:1 (commit `b958cb7`) — the terminal "75:75"
+  delivery is an owner **phase-transition directive**, not a Gate 05M-C3 schema
+  draft or review verdict: the Rev 07 ingestion sequence is declared complete and
+  **M10 — Deterministic Rule Engine Foundation** is directed (M10A schema
+  normalization → M10H HIL readiness), with a full table list, hard-block rules +
+  machine-readable block reasons, the canonical `L_min` equation "in code", a
+  coding-agent prompt, required negative tests, and `npm run migrate/seed/verify/
+  test/build` completion criteria.
+- **New Decision Register `D-010` + plan-of-record roadmap
+  `docs/roadmaps/M10_RULE_ENGINE_FOUNDATION.md`:** records that the Rev 07 ingestion
+  batch sequence is complete (75/75); designates **Gate 05M-C3 Revision 08**
+  (RC-313..425) as the **frozen source specification** for M10; and captures the
+  owner's M10 plan as plan-of-record.
+- **GOVERNANCE — M10 NOT started.** M10 is production code, forbidden during the
+  Rev 07 ingestion phase (CLAUDE.md / Constitution / AGENTS.md). Opening M10 is a
+  formal gate: active-roadmap pointer move + a proposed `AI_INSTRUCTIONS.md` /
+  `CLAUDE.md` update (proposed, never silently rewritten) + explicit owner
+  confirmation of who executes the build (the directive routes the prompt to "your
+  coding agent"). Until the gate is opened, M10 remains PLANNED / NOT STARTED. No
+  production code was written; RESEARCH_MAP next-batch pointer + PROVENANCE + handoff
+  updated to reflect the phase transition. Nothing ingested as Confirmed; ODRs
+  untouched.
+
+---
+
 ## 2026-07-21 — RH batch 76 ("74:75") + owner review_72: Gate 05M-C3 Revision 08 (RC-412..425)
 
 - Archived RH batch 76 + owner review_72 1:1 (commit `95a4a09`) — owner label

@@ -4,81 +4,71 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-21
-- Reason for handoff: task complete (RH batch 76 "74:75" + owner review_72 — Gate
-  05M-C3 Revision 08; 14 corrections RC-412..425 applied to
-  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`); awaiting the 05M-C3A execution /
-  Envelope-Cell-1 batch or a supplier reply
+- Reason for handoff: **PHASE TRANSITION** — the terminal "75:75" delivery (owner
+  directive_03) closed the Rev 07 ingestion sequence (75/75) and directed the M10
+  phase. Recorded as governance (D-010 + M10 plan-of-record); **M10 production code
+  is NOT started** and is gated pending a formal opening of the M10 phase. Awaiting
+  the owner's decision on who executes the M10 build.
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `95a4a09` — Archive RH batch 76 + owner review_72 1:1
+- Start commit: `b958cb7` — Archive owner directive_03 ("75:75") 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- **RH batch 76 ("74:75") + owner review_72 — Gate 05M-C3 Revision 08.** The owner
-  re-issued the review_71 corrections, delivered the Hunter's re-emit ("Global
-  Engineering Safety Amendments (Revision 07)", a nine-section normalized
-  relational-database spec), and gave a detailed verdict designating the status
-  **`ARCHITECTURE_MATURE / CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE /
-  DATABASE_IMPLEMENTATION_NOT_YET_COMPLETE`.** 20 items → **14 new corrections**
-  (owner items 1, 2, 4, 7, 8, 9 targeted the Hunter's OCR-corrupted text or
-  restated already-applied rules):
-  - Archived 1:1 (commit `95a4a09`): `research_hunter/batch_76_gate05mc3_revision07_schema.md`,
-    `owner_reviews/review_72_batch_76_verdict.md`, new PROVENANCE row (newest-first).
-  - **Applied RC-412..425 to `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`:**
-    added TestCell constraints + authority-class eligibility (RC-412); transition
-    table is the source of truth over the diagram (RC-413); expanded
-    SUSPENDED→AUTHORIZED revalidation set + artifact requirement (RC-414); explicit
-    `TestExecution` schema (RC-415); TestResult cardinality corrected (RC-416);
-    junction-table composite keys (RC-417); `allowed_regen_state` enum (RC-418);
-    `FaultDefinition` registry (RC-419); `VehicleComponentInstance` config linkage
-    (RC-420); cross-record vehicle-identity equality (RC-421); append-only
-    enforcement mechanics (RC-422); cryptographic hash-chain spec (RC-423);
-    automatic expiry behaviour (RC-424); configuration-change transaction rule
-    (RC-425).
-  - **RH01 RC-412..425 + section 85; D-008 amendment (review_72); RESEARCH_MAP,
-    GATE_RESEARCH_QUEUE, CHANGELOG** updated. Deliverable updated to Revision 08
-    and relabelled
-    `GATE_05M_C3_REVISION_08_CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE`.
-- **Guardrails applied:** every schema field / enum / FK stays
-  `INITIAL_TARGET_PROFILE` / `NeedsSupplierData`; the authority-class gate (RC-412)
-  is the schema teeth of the Numeric Threshold Authority Rule (RC-267/300);
-  **RC-415/416/417/419/420/421/422/423/425 + the owner's downstream SQL schema →
-  migrations → triggers → rule-engine → negative tests → SIL → HIL → signed evidence
-  are captured as relational-schema DOCTRINE — NOT built as an M10 database / rule
-  engine / test suite during Rev 07 ingestion** (the "Relational-schema doctrine"
-  section was expanded); `FaultDefinition` (RC-419) is the D-009 layer-1 parent;
-  `VehicleComponentInstance` config link (RC-420) + cross-record vehicle identity
-  (RC-421) enforce D-006; already-clean owner items 1/2/4/7/8/9 noted, no duplicate
-  rows.
-- Files changed (reconciliation commit): `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`,
-  `RH01_SECOND_STAGE_FILTER.md` (RC-412..425 + section 85), `DECISION_REGISTER.md`
-  (D-008 amendment), `RESEARCH_MAP.md`, `GATE_RESEARCH_QUEUE.md`, `CHANGELOG.md`,
-  handoff files. Archives were committed separately as `95a4a09`.
+- **Owner directive_03 ("75:75") — M10 phase-transition directive.** The terminal
+  "75:75" delivery is NOT a Gate 05M-C3 schema draft or a review verdict — it is an
+  owner directive declaring the Rev 07 ingestion sequence complete ("The next phase
+  is implementation, not more Gate 05M-C3 writing") and directing **M10 —
+  Deterministic Rule Engine Foundation** (M10A schema normalization → M10H HIL
+  readiness), with a full table list, hard-block rules + machine-readable block
+  reasons, the canonical `L_min` equation "in code", a coding-agent prompt, required
+  negative tests, and `npm run migrate/seed/verify/test/build` completion criteria.
+  - Archived 1:1 (commit `b958cb7`):
+    `owner_directives/directive_03_m10_rule_engine_phase.md` + a cross-reference
+    PROVENANCE row for the "75:75" slot.
+  - **Governance reconciliation (NO production code):** new Decision Register
+    **D-010** (ingestion complete 75/75; Gate 05M-C3 Revision 08 = frozen source
+    spec; M10 directed but the gate not yet opened); new plan-of-record roadmap
+    `docs/roadmaps/M10_RULE_ENGINE_FOUNDATION.md` (captures the owner's M10A–M10H
+    plan, doctrine, completion criteria, tied to RC-313..425); RESEARCH_MAP (ingestion
+    complete; next = M10 gate), CHANGELOG, handoff updated.
+- **Governance boundary held.** M10 is production code, forbidden during the Rev 07
+  ingestion phase (CLAUDE.md / Constitution / AGENTS.md). Opening M10 is a formal
+  gate requiring: the active-roadmap pointer to move from `REV07_SOURCE_INGESTION.md`
+  to `M10_RULE_ENGINE_FOUNDATION.md`; a **proposed** (never silent) update to
+  `AI_INSTRUCTIONS.md` + the `CLAUDE.md` "no M10 / no production code" rule; and
+  explicit owner confirmation of who executes the build (the directive routes the
+  prompt to "your coding agent"). No SQL / TypeScript / tests / migrations were
+  written. No `CLAUDE.md` / `AI_INSTRUCTIONS.md` edits were made (proposal pending).
 - **Nothing ingested; nothing Confirmed; no normal driving; no public road; no
   customer operation; no "certified safe"/compliance claim; ODRs untouched; no
   production code / no M10.**
 
 ## Verification
 
-- Tests run: none — no test suite exists in this repository
+- Tests run: none — no test suite exists in this repository (and none was created;
+  M10 test scaffolding is deferred pending the phase gate)
 - Test results: n/a
-- Verified vs claimed: batch 76 + review_72 archived 1:1 against the owner's
-  "74:75" message; RC-412..425 restate the owner's 14 corrections verbatim and are
-  recorded in both RH01 (rows + section 85) and the deliverable; owner items 1, 2,
-  4, 7, 8, 9 confirmed already-clean/already-applied (Hunter OCR-corrupted text or
-  RC-340/351/375/383/399/355/389/403) so no duplicate rows minted; the SQL schema /
-  triggers / rule-engine / SIL-HIL work is deferred M10 doctrine; every value stays
-  `INITIAL_TARGET_PROFILE`; nothing marked Confirmed
+- Verified vs claimed: directive_03 archived 1:1 against the owner's "75:75"
+  message; the phase transition is recorded in D-010 + the M10 plan-of-record
+  roadmap without writing any production code; the frozen source spec is Gate
+  05M-C3 Revision 08 (RC-313..425); the no-M10/no-production-code guardrail is
+  explicitly held and the gate-opening requirements are documented; nothing marked
+  Confirmed
 
 ## State
 
-- Current phase: Revision 07 Source Ingestion and Consolidation
+- Current phase: Revision 07 Source Ingestion and Consolidation — **batch intake
+  COMPLETE (75/75); owner has directed the M10 phase (D-010), but the M10 gate is
+  NOT yet opened, so the active phase/roadmap remains `REV07_SOURCE_INGESTION.md`
+  until the owner formally transitions it.** M10 plan-of-record:
+  `docs/roadmaps/M10_RULE_ENGINE_FOUNDATION.md`.
 - Blockers: B-001 (ingestion); B-002 (.gov/CARB); B-003/B-004
   (BLOCKED_PENDING_SUPPLIER_DATA); Gate 04 BLOCKED_PENDING_SUPPLIER_
   RESPONSE. Supplier-only values parked in
@@ -290,7 +280,19 @@
 
 ## Next exact action
 
-Expected next inputs, in any order: (a) the **Gate 05M-C3 Controlled Closed-Area
+**PHASE-TRANSITION DECISION PENDING (owner).** The Rev 07 ingestion batch sequence
+is complete (75/75) and the owner directed the M10 phase (directive_03, D-010). The
+next action is the owner's: decide whether to **open the M10 phase** — which
+requires moving the active-roadmap pointer to `M10_RULE_ENGINE_FOUNDATION.md`,
+approving a proposed update to `AI_INSTRUCTIONS.md` + the `CLAUDE.md` "no M10 / no
+production code" rule (proposed, never silently rewritten), and confirming who
+executes the build (the directive routes the prompt to "your coding agent") — OR
+keep the frozen spec as governance and hand the M10 build to a separate coding
+agent. **Do NOT write M10 production code until the gate is opened.** The frozen
+source spec is Gate 05M-C3 Revision 08 (`GATE05M_C3_CLOSED_AREA_MOVEMENT.md`,
+RC-313..425); the M10 plan-of-record is `docs/roadmaps/M10_RULE_ENGINE_FOUNDATION.md`.
+
+Other still-possible inputs, in any order: (a) the **Gate 05M-C3 Controlled Closed-Area
 Low-Speed Movement batch** (scope in `GATE_RESEARCH_QUEUE.md`; 05M-C2 in
 `GATE05M_C2_RESTRICTED_CREEP.md`; ladder in D-008) — the last rung of the split
 05M-C phase, only after Gate 05M-C2 (05M-C2A flat-ground creep → 05M-C2B

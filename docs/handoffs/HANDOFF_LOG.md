@@ -13,6 +13,53 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-21 — Claude Code — batch 76 ("74:75") + review_72: Gate 05M-C3 Revision 08 (RC-412..425)
+
+### Session
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-21
+- Reason for handoff: task complete (RH batch 76 "74:75" + owner review_72 — Gate
+  05M-C3 Revision 08; 14 corrections RC-412..425 applied); awaiting the terminal
+  "75:75" delivery or the 05M-C3A execution batch
+
+### Git state
+
+- Branch: `claude/docs-structure-large-projects-b6vxx5`
+- Agent owner: Claude Code (single-writer rule, AGENTS.md)
+- Start commit: `95a4a09` — Archive RH batch 76 + owner review_72 1:1
+- End commit: `3742438` — Reconcile RH batch 76 + review_72 (RC-412..425)
+- Working tree at handoff: clean (everything committed)
+
+### Work performed
+
+- RH batch 76 ("74:75") + owner review_72 — Gate 05M-C3 Revision 08. Owner
+  designated `CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE /
+  DATABASE_IMPLEMENTATION_NOT_YET_COMPLETE`; 20 items → 14 new corrections (owner
+  items 1, 2, 4, 7, 8, 9 already clean/applied). Applied RC-412..425: added TestCell
+  constraints + authority-class eligibility (412); transition table source of truth
+  (413); expanded SUSPENDED→AUTHORIZED revalidation + artifact (414); TestExecution
+  schema (415); TestResult cardinality (416); junction composite keys (417);
+  allowed_regen_state enum (418); FaultDefinition registry (419);
+  VehicleComponentInstance config link (420); cross-record vehicle identity (421);
+  append-only mechanics (422); hash-chain spec (423); automatic expiry (424);
+  configuration-change transaction (425). RH01 RC-412..425 + section 85; D-008
+  amendment (review_72); RESEARCH_MAP, GATE_RESEARCH_QUEUE, CHANGELOG updated;
+  Relational-schema doctrine section expanded (DOCTRINE only, not M10/production
+  code). Deliverable relabelled
+  `GATE_05M_C3_REVISION_08_CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE`.
+- Nothing ingested; nothing Confirmed; no normal driving; no public road; no
+  customer operation; no "certified safe"/compliance claim; ODRs untouched.
+
+### Note
+
+Full state snapshot, doctrine chain (RC-168..425), open owner decisions, forbidden
+actions, and the receiving-agent checklist are forward-carried into the
+`CURRENT_HANDOFF.md` (which the terminal "75:75" M10 phase-transition rotated);
+this entry records the batch-76 delta.
+
+---
+
 ## 2026-07-21 — Claude Code — batch 75 ("73:75") + review_71: Gate 05M-C3 Revision 07 (RC-398..411)
 
 ### Session
