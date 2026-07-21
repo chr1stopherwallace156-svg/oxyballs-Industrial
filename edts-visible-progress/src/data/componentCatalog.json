@@ -1,14 +1,16 @@
 {
   "release": "EDTS_VISIBLE_PROGRESS_R1",
   "decision": "DT-D058",
+  "schema": "component-panel-v1-honest",
   "locked_configuration": {
     "proposal_configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
     "kernel_configuration_id": "CFG-000001",
     "vehicle_instance_id": "VEH-000001",
-    "summary": "2019 Ford F-450 Chassis Cab Regular Cab 4x2 DRW 145.3 WB / 60 CA"
+    "summary": "2019 Ford F-450 Chassis Cab Regular Cab 4x2 DRW 145.3 WB / 60 CA",
+    "model_year": 2019
   },
   "honesty": {
-    "note": "All meshes are procedural PLACEHOLDER_GEOMETRY unless stated otherwise. Known dimensions below are ASSERTION_EXTRACTED from SRC-CAND-000010 only. No invented torque, materials, or mounting hole geometry.",
+    "note": "Meshes are procedural PLACEHOLDER_GEOMETRY or DESIGN_PROPOSAL unless badge says otherwise. Layout dims ASSERTION_EXTRACTED from SRC-CAND-000010 only. No invented torque, materials, mounts, kWh, or kW.",
     "known_dimensions_in": {
       "wheelbase": { "value": 145.3, "status": "ASSERTION_EXTRACTED", "source": "SRC-CAND-000010" },
       "front_track": { "value": 74.8, "status": "ASSERTION_EXTRACTED", "source": "SRC-CAND-000010" },
@@ -16,270 +18,1088 @@
       "front_overhang": { "value": 38.3, "status": "ASSERTION_EXTRACTED", "source": "SRC-CAND-000010" },
       "cab_to_axle": { "value": 60.0, "status": "ASSERTION_EXTRACTED", "source": "SRC-CAND-000010" },
       "bumper_to_back_of_cab": { "value": 123.7, "status": "ASSERTION_EXTRACTED", "source": "SRC-CAND-000010" }
-    }
+    },
+    "handoff_sample_rejected": [
+      "VERIFIED badges for frame/cab/axle without ASSERTION_VERIFIED OEM CAD",
+      "Invented 110 kWh pack / 250 kW EDU / 1,100 lb engine mass",
+      "Aluminum cab shell asserted as VERIFIED without material card",
+      "6.7L Power Stroke / 6R140 as definitive without instance option confirmation",
+      "Fabricated page-level citations not backed by acquired hashed sources"
+    ]
+  },
+  "badge_colors": {
+    "VERIFIED": "#10B981",
+    "PHYSICALLY_MEASURED": "#06B6D4",
+    "ESTIMATED": "#F59E0B",
+    "PLACEHOLDER_GEOMETRY": "#6B7280",
+    "DESIGN_PROPOSAL": "#8B5CF6",
+    "UNKNOWN": "#EF4444",
+    "BLOCKED": "#DC2626"
   },
   "states": ["FACTORY_ICE", "DECONSTRUCTION", "EV_PROPOSAL"],
+  "scene_tree": [
+    {
+      "id": "FACTORY_CHASSIS_FRAME",
+      "label": "Factory Chassis Frame",
+      "component_ids": ["CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME"]
+    },
+    {
+      "id": "FACTORY_CAB_BODY",
+      "label": "Factory Cab & Body",
+      "component_ids": ["CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB"]
+    },
+    {
+      "id": "FACTORY_RUNNING_GEAR",
+      "label": "Factory Running Gear",
+      "component_ids": [
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR"
+      ]
+    },
+    {
+      "id": "FACTORY_ICE_POWERTRAIN",
+      "label": "Factory ICE Powertrain (extractable)",
+      "component_ids": [
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK",
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT",
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING"
+      ]
+    },
+    {
+      "id": "FACTORY_ELECTRICAL_BLOCKED",
+      "label": "Factory Electrical (blocked)",
+      "component_ids": ["BLOCK-LV-GATEWAY"]
+    },
+    {
+      "id": "EV_CONVERSION_PROPOSAL",
+      "label": "EV Conversion Proposal",
+      "component_ids": [
+        "PROP-HV-PACK-01",
+        "PROP-EDU-REAR-01",
+        "PROP-INVERTER-01",
+        "PROP-DCDC-01",
+        "PROP-LTR-01",
+        "PROP-CCS-PORT-01"
+      ]
+    }
+  ],
   "components": [
     {
       "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
       "display_name": "Chassis Frame (C-channel aft of cab)",
       "family": "FACTORY",
       "category": "STRUCTURE",
+      "scene_group": "FACTORY_CHASSIS_FRAME",
+      "decon_group": "RETAINED",
       "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
       "configuration_applicability": "EXACT_CONFIGURATION_MATCH",
-      "evidence_status": "PARTIAL — rail width/WB ASSERTION_EXTRACTED; mesh placeholder",
-      "known_interfaces": ["IFACE-UPFITTER-AFT-CAB", "IFACE-AXLE-DATUM-FRONT", "IFACE-AXLE-DATUM-REAR"],
-      "missing_properties": ["hole metrology", "web thickness", "material grade card"],
-      "mepq_blockers": ["MEPQ-002", "MEPQ-005", "MEPQ-006", "MEPQ-007"],
+      "evidence_ledger": [
+        {
+          "claim": "Wheelbase 145.3 in for this configuration",
+          "source_id": "SRC-CAND-000010",
+          "status": "ASSERTION_EXTRACTED"
+        },
+        {
+          "claim": "Frame rail outside width H = 34.2 in",
+          "source_id": "SRC-CAND-000010",
+          "status": "ASSERTION_EXTRACTED"
+        },
+        {
+          "claim": "C-channel web thickness / hole metrology / material grade card",
+          "source_id": "NOT_ACQUIRED",
+          "status": "NOT_ACQUIRED"
+        }
+      ],
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-UPFITTER-AFT-CAB",
+          "class": "STRUCTURAL_DATUM",
+          "target_component": null,
+          "status": "DOCUMENT_SUPPORTED"
+        },
+        {
+          "interface_id": "IFACE-AXLE-DATUM-FRONT",
+          "class": "STRUCTURAL_DATUM",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+          "status": "DOCUMENT_SUPPORTED"
+        },
+        {
+          "interface_id": "IFACE-AXLE-DATUM-REAR",
+          "class": "STRUCTURAL_DATUM",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
+          "status": "DOCUMENT_SUPPORTED"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Hole metrology along C-channel web",
+          "knowledge_gap_id": "KG-011",
+          "required_action": "Physical CMM / laser scan on reference vehicle"
+        },
+        {
+          "property": "Web thickness / material grade card",
+          "knowledge_gap_id": "KG-012",
+          "required_action": "Acquire OEM frame drawing or measure physical asset"
+        },
+        {
+          "property": "Dynamic frame load allowables",
+          "knowledge_gap_id": null,
+          "required_action": "MEPQ-007 — deferred until Mission E authorized"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "PACKAGING",
+          "code": "MEPQ-005",
+          "description": "Mid crossmember thickness UNKNOWN — blocks cradle bracket assumptions"
+        },
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-006",
+          "description": "Aft hole metrology tolerances UNKNOWN"
+        },
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-007",
+          "description": "Frame dynamic load allowables UNKNOWN"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": []
+      },
       "layer": "L1",
       "visible_in": ["FACTORY_ICE", "DECONSTRUCTION", "EV_PROPOSAL"],
       "removable": false,
-      "geometry_role": "frame"
+      "geometry_role": "frame",
+      "explode_vector": [0, -0.2, 0],
+      "geometry_type": "Stylized volumetric proxy — rail length uses extracted WB/overhang"
     },
     {
       "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB",
       "display_name": "Regular Cab Shell",
       "family": "FACTORY",
       "category": "BODY",
+      "scene_group": "FACTORY_CAB_BODY",
+      "decon_group": "RETAINED",
       "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
       "configuration_applicability": "EXACT_CONFIGURATION_MATCH",
-      "evidence_status": "Bumper-to-back-of-cab length ASSERTION_EXTRACTED; cab shell mesh placeholder",
-      "known_interfaces": ["IFACE-CAB-PLANE-BACK"],
-      "missing_properties": ["cab exterior CAD", "door apertures"],
+      "evidence_ledger": [
+        {
+          "claim": "Bumper-to-back-of-cab 123.7 in",
+          "source_id": "SRC-CAND-000010",
+          "status": "ASSERTION_EXTRACTED"
+        },
+        {
+          "claim": "Cab exterior CAD / material card / door apertures",
+          "source_id": "NOT_ACQUIRED",
+          "status": "NOT_ACQUIRED"
+        }
+      ],
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-CAB-PLANE-BACK",
+          "class": "STRUCTURAL_DATUM",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+          "status": "DOCUMENT_SUPPORTED"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Cab exterior CAD envelope",
+          "knowledge_gap_id": "KG-001",
+          "required_action": "Acquire OEM body CAD or scan physical cab"
+        },
+        {
+          "property": "Material grade / wall thickness card",
+          "knowledge_gap_id": null,
+          "required_action": "Do not assert aluminum or steel without OEM token"
+        }
+      ],
       "mepq_blockers": [],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": []
+      },
       "layer": "L1",
       "visible_in": ["FACTORY_ICE", "DECONSTRUCTION", "EV_PROPOSAL"],
       "removable": false,
-      "geometry_role": "cab"
+      "geometry_role": "cab",
+      "explode_vector": [0, 1.2, 0],
+      "geometry_type": "Stylized volumetric proxy"
     },
     {
       "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
       "display_name": "Front Axle — Monobeam (4x2)",
       "family": "FACTORY",
       "category": "SUSPENSION",
+      "scene_group": "FACTORY_RUNNING_GEAR",
+      "decon_group": "RETAINED",
       "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
       "configuration_applicability": "SERIES_F450_F550_CHASSIS_CAB_4X2",
-      "evidence_status": "Architecture Monobeam ASSERTION_EXTRACTED; geometry placeholder",
-      "known_interfaces": ["IFACE-AXLE-DATUM-FRONT"],
-      "missing_properties": ["spindle casting number", "linkage topology detail", "alignment specs"],
+      "evidence_ledger": [
+        {
+          "claim": "4x2 front axle architecture = Monobeam (Dana, forged steel)",
+          "source_id": "SRC-CAND-000010 p.55",
+          "status": "ASSERTION_EXTRACTED"
+        },
+        {
+          "claim": "Spindle casting number / linkage topology / alignment specs",
+          "source_id": "NOT_ACQUIRED",
+          "status": "UNKNOWN"
+        }
+      ],
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-AXLE-DATUM-FRONT",
+          "class": "STRUCTURAL_DATUM",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+          "status": "DOCUMENT_SUPPORTED"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Spindle casting number",
+          "knowledge_gap_id": null,
+          "required_action": "Mission D L1 — extract from WSM/parts catalog"
+        },
+        {
+          "property": "Linkage topology detail + alignment specs",
+          "knowledge_gap_id": null,
+          "required_action": "Acquire WSM; do not invent torques"
+        }
+      ],
       "mepq_blockers": [],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": []
+      },
       "layer": "L1",
       "visible_in": ["FACTORY_ICE", "DECONSTRUCTION", "EV_PROPOSAL"],
       "removable": false,
-      "geometry_role": "front_axle"
+      "geometry_role": "front_axle",
+      "explode_vector": [0.4, -0.5, 0],
+      "geometry_type": "Stylized volumetric proxy — architecture extracted, mesh not"
     },
     {
       "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
-      "display_name": "Rear Axle — DRW Live Axle",
+      "display_name": "Rear Axle — DRW Live Axle (Dana M300 class)",
       "family": "FACTORY",
       "category": "DRIVELINE",
+      "scene_group": "FACTORY_RUNNING_GEAR",
+      "decon_group": "RETAINED",
       "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
       "configuration_applicability": "EXACT_CONFIGURATION_MATCH",
-      "evidence_status": "Dana M300 class referenced in fleet docs; mesh placeholder — wall thickness KG-002 OPEN",
-      "known_interfaces": ["IFACE-AXLE-DATUM-REAR"],
-      "missing_properties": ["housing wall thickness", "exact ratio for VEH-000001"],
-      "mepq_blockers": [],
+      "evidence_ledger": [
+        {
+          "claim": "Dana M300 class referenced for Super Duty DRW fleet docs",
+          "source_id": "FLEET_DOCS_CANDIDATE",
+          "status": "CANDIDATE_UNVERIFIED"
+        },
+        {
+          "claim": "Exact ratio / housing wall thickness for VEH-000001",
+          "source_id": "NOT_ACQUIRED",
+          "status": "UNKNOWN"
+        }
+      ],
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-AXLE-DATUM-REAR",
+          "class": "STRUCTURAL_DATUM",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+          "status": "DOCUMENT_SUPPORTED"
+        },
+        {
+          "interface_id": "IFACE-FLANGE-DRIVESHAFT-REAR-INPUT",
+          "class": "MECHANICALLY_COUPLED_TO",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT",
+          "status": "OPERATOR_CANDIDATE"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Housing wall thickness",
+          "knowledge_gap_id": "KG-002",
+          "required_action": "Physical measurement or supplier drawing"
+        },
+        {
+          "property": "Exact pinion flange bolt circle / spline",
+          "knowledge_gap_id": "KG-012",
+          "required_action": "Caliper/CMM on reference vehicle"
+        },
+        {
+          "property": "Exact axle ratio for VEH-000001",
+          "knowledge_gap_id": null,
+          "required_action": "Door sticker / axle tag / build sheet"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-ENG-004",
+          "description": "Custom EV driveshaft adapter flange cannot be designed until pinion flange BCD/spline measured"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": ["CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT"]
+      },
       "layer": "L1",
       "visible_in": ["FACTORY_ICE", "DECONSTRUCTION", "EV_PROPOSAL"],
       "removable": false,
-      "geometry_role": "rear_axle"
+      "geometry_role": "rear_axle",
+      "explode_vector": [-0.4, -0.5, 0],
+      "geometry_type": "Stylized volumetric proxy — not supplier CAD"
     },
     {
       "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
       "display_name": "Wheels / Tires (19.5 DRW)",
       "family": "FACTORY",
       "category": "WHEELS",
+      "scene_group": "FACTORY_RUNNING_GEAR",
+      "decon_group": "RETAINED",
       "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
       "configuration_applicability": "EXACT_CONFIGURATION_MATCH",
-      "evidence_status": "19.5×6 10-lug 225 mm BCD + 225/70R19.5G ASSERTION_EXTRACTED; mesh placeholder",
-      "known_interfaces": ["IFACE-WHEEL-MOUNT-FRONT"],
-      "missing_properties": ["lug torque (WSM NOT_ACQUIRED)", "tire brand"],
+      "evidence_ledger": [
+        {
+          "claim": "19.5×6 10-lug 225 mm BCD + 225/70R19.5G",
+          "source_id": "SRC-CAND-000010",
+          "status": "ASSERTION_EXTRACTED"
+        },
+        {
+          "claim": "Lug torque",
+          "source_id": "WSM_NOT_ACQUIRED",
+          "status": "NOT_ACQUIRED"
+        }
+      ],
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-WHEEL-MOUNT-FRONT",
+          "class": "BOLTED_TO",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+          "status": "DOCUMENT_SUPPORTED"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Lug nut torque",
+          "knowledge_gap_id": null,
+          "required_action": "Acquire WSM — do not invent torque"
+        }
+      ],
       "mepq_blockers": [],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": []
+      },
       "layer": "L1",
       "visible_in": ["FACTORY_ICE", "DECONSTRUCTION", "EV_PROPOSAL"],
       "removable": false,
-      "geometry_role": "wheels"
-    },
-    {
-      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK",
-      "display_name": "ICE Engine Assembly",
-      "family": "FACTORY",
-      "category": "POWERTRAIN",
-      "data_status": "PLACEHOLDER_GEOMETRY",
-      "configuration_applicability": "OPTION_DEPENDENT",
-      "evidence_status": "Existence expected; mass/CG UNKNOWN (MEPQ-001)",
-      "known_interfaces": [],
-      "missing_properties": ["dry/wet mass", "CG x,y,z", "mount hole pattern"],
-      "mepq_blockers": ["MEPQ-001"],
-      "layer": "L1",
-      "visible_in": ["FACTORY_ICE", "DECONSTRUCTION"],
-      "removable": true,
-      "decon_intent": "MUST_REMOVE",
-      "geometry_role": "engine"
-    },
-    {
-      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
-      "display_name": "Transmission",
-      "family": "FACTORY",
-      "category": "POWERTRAIN",
-      "data_status": "PLACEHOLDER_GEOMETRY",
-      "configuration_applicability": "OPTION_DEPENDENT",
-      "evidence_status": "Existence expected; mass/CG UNKNOWN",
-      "known_interfaces": [],
-      "missing_properties": ["mass", "CG", "cross-member interfaces"],
-      "mepq_blockers": ["MEPQ-001", "MEPQ-002"],
-      "layer": "L1",
-      "visible_in": ["FACTORY_ICE", "DECONSTRUCTION"],
-      "removable": true,
-      "decon_intent": "MUST_REMOVE",
-      "geometry_role": "transmission"
-    },
-    {
-      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
-      "display_name": "Engine Radiator",
-      "family": "FACTORY",
-      "category": "THERMAL",
-      "data_status": "PLACEHOLDER_GEOMETRY",
-      "configuration_applicability": "PLATFORM_EXPECTED",
-      "evidence_status": "Dimensions/mass/fasteners UNKNOWN on L1",
-      "known_interfaces": ["IFACE-RAD-LOWER-MOUNTS", "IFACE-RAD-UPPER-BRACE"],
-      "missing_properties": ["envelope dims", "fastener specs", "material"],
-      "mepq_blockers": [],
-      "layer": "L1",
-      "visible_in": ["FACTORY_ICE", "DECONSTRUCTION"],
-      "removable": true,
-      "decon_intent": "MUST_REMOVE",
-      "geometry_role": "radiator"
-    },
-    {
-      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
-      "display_name": "Aft-of-Axle Fuel Tank",
-      "family": "FACTORY",
-      "category": "FUEL",
-      "data_status": "PLACEHOLDER_GEOMETRY",
-      "configuration_applicability": "EXACT_CONFIGURATION_MATCH",
-      "evidence_status": "40 gal aft-of-axle std ASSERTION_EXTRACTED; strap hole geometry UNKNOWN",
-      "known_interfaces": ["IFACE-FUEL-TANK-STRAP-AFT"],
-      "missing_properties": ["strap hole coordinates", "torque", "tolerances"],
-      "mepq_blockers": ["MEPQ-004", "MEPQ-006"],
-      "layer": "L1",
-      "visible_in": ["FACTORY_ICE", "DECONSTRUCTION"],
-      "removable": true,
-      "decon_intent": "MUST_REMOVE",
-      "geometry_role": "fuel_tank"
-    },
-    {
-      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING",
-      "display_name": "Exhaust / Aftertreatment",
-      "family": "FACTORY",
-      "category": "EXHAUST",
-      "data_status": "PLACEHOLDER_GEOMETRY",
-      "configuration_applicability": "OPTION_DEPENDENT",
-      "evidence_status": "Diesel aftertreatment config-dependent; mesh placeholder",
-      "known_interfaces": [],
-      "missing_properties": ["hanger locations", "envelope"],
-      "mepq_blockers": [],
-      "layer": "L1",
-      "visible_in": ["FACTORY_ICE", "DECONSTRUCTION"],
-      "removable": true,
-      "decon_intent": "MUST_REMOVE",
-      "geometry_role": "exhaust"
+      "geometry_role": "wheels",
+      "explode_vector": [0, -0.8, 0],
+      "geometry_type": "Stylized volumetric proxy — track from extracted front track"
     },
     {
       "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR",
       "display_name": "Steering Gear (Recirculating Ball)",
       "family": "FACTORY",
       "category": "STEERING",
+      "scene_group": "FACTORY_RUNNING_GEAR",
+      "decon_group": "RETAINED",
       "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
       "configuration_applicability": "EXACT_CONFIGURATION_MATCH",
-      "evidence_status": "Hydraulic recirculating ball + damper ASSERTION_EXTRACTED — NOT EPAS",
+      "evidence_ledger": [
+        {
+          "claim": "Hydraulic recirculating ball + damper — NOT EPAS",
+          "source_id": "SRC-CAND-000010 / DT-D057",
+          "status": "ASSERTION_EXTRACTED"
+        }
+      ],
       "known_interfaces": [],
-      "missing_properties": ["exact mount pattern", "damper attach coords"],
+      "missing_properties": [
+        {
+          "property": "Exact mount pattern / damper attach coords",
+          "knowledge_gap_id": null,
+          "required_action": "Physical measure or WSM"
+        }
+      ],
       "mepq_blockers": [],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": []
+      },
       "layer": "L1",
       "visible_in": ["FACTORY_ICE", "DECONSTRUCTION", "EV_PROPOSAL"],
       "removable": false,
-      "geometry_role": "steering"
+      "geometry_role": "steering",
+      "explode_vector": [0.3, 0.5, 0.5],
+      "geometry_type": "Stylized volumetric proxy"
     },
     {
-      "id": "PROP-HV-PACK-01",
-      "display_name": "Proposed HV Battery Array (Aft)",
-      "family": "EV_PROPOSAL",
-      "category": "HV_ENERGY",
-      "data_status": "DESIGN_PROPOSAL",
-      "configuration_applicability": "CONVERSION_PROPOSAL",
-      "evidence_status": "L3 proposal only — blocked on fuel-strap metrology & frame loads",
-      "known_interfaces": [],
-      "missing_properties": ["pack kWh", "chemistry", "cradle hole match", "crash FEA"],
-      "mepq_blockers": ["MEPQ-004", "MEPQ-006", "MEPQ-007"],
-      "layer": "L3",
-      "visible_in": ["EV_PROPOSAL"],
-      "removable": false,
-      "geometry_role": "ev_battery"
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK",
+      "display_name": "ICE Engine Assembly",
+      "family": "FACTORY",
+      "category": "POWERTRAIN",
+      "scene_group": "FACTORY_ICE_POWERTRAIN",
+      "decon_group": "EXTRACTED",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "OPTION_DEPENDENT",
+      "evidence_ledger": [
+        {
+          "claim": "Engine family option-dependent (6.7L diesel OR 6.8L gas per GAWR tables) — instance not locked",
+          "source_id": "SRC-CAND-000010 FGAWR tables",
+          "status": "ASSERTION_EXTRACTED"
+        },
+        {
+          "claim": "Dry/wet mass and CG",
+          "source_id": "MEPQ-001",
+          "status": "UNKNOWN"
+        }
+      ],
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-ENGINE-TO-TRANS",
+          "class": "MECHANICALLY_COUPLED_TO",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+          "status": "OPERATOR_CANDIDATE"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Dry/wet mass and CG x,y,z",
+          "knowledge_gap_id": null,
+          "required_action": "MEPQ-001 — do not invent mass (handoff 1,100 lb rejected)"
+        },
+        {
+          "property": "Mount hole pattern",
+          "knowledge_gap_id": null,
+          "required_action": "Physical measure or OEM mount drawing"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-001",
+          "description": "ICE CG/mass UNKNOWN — extraction procedure mass estimate blocked"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": ["CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION"],
+        "must_disconnect_before": [
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING",
+          "BLOCK-LV-GATEWAY"
+        ]
+      },
+      "layer": "L1",
+      "visible_in": ["FACTORY_ICE", "DECONSTRUCTION"],
+      "removable": true,
+      "decon_intent": "MUST_REMOVE",
+      "geometry_role": "engine",
+      "explode_vector": [0.9, 0.6, 0],
+      "geometry_type": "Stylized volumetric proxy — not Power Stroke envelope CAD"
     },
     {
-      "id": "PROP-EDU-REAR-01",
-      "display_name": "Proposed Electric Drive Unit",
-      "family": "EV_PROPOSAL",
-      "category": "HV_DRIVE",
-      "data_status": "DESIGN_PROPOSAL",
-      "configuration_applicability": "CONVERSION_PROPOSAL",
-      "evidence_status": "L3 proposal — mount reuse of trans XMBR UNKNOWN",
-      "known_interfaces": [],
-      "missing_properties": ["EDU model", "torque", "mount pattern", "cooling ports"],
-      "mepq_blockers": ["MEPQ-002", "MEPQ-001"],
-      "layer": "L3",
-      "visible_in": ["EV_PROPOSAL"],
-      "removable": false,
-      "geometry_role": "ev_edu"
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+      "display_name": "Transmission",
+      "family": "FACTORY",
+      "category": "POWERTRAIN",
+      "scene_group": "FACTORY_ICE_POWERTRAIN",
+      "decon_group": "EXTRACTED",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "OPTION_DEPENDENT",
+      "evidence_ledger": [
+        {
+          "claim": "Transmission model for VEH-000001 not instance-locked (6R140 candidate only)",
+          "source_id": "NOT_ACQUIRED",
+          "status": "CANDIDATE_UNVERIFIED"
+        }
+      ],
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-TRANS-OUTPUT-TO-DRIVESHAFT",
+          "class": "MECHANICALLY_COUPLED_TO",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT",
+          "status": "OPERATOR_CANDIDATE"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Mass / CG / cross-member interfaces",
+          "knowledge_gap_id": null,
+          "required_action": "MEPQ-001 / MEPQ-002"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-001",
+          "description": "Powertrain CG/mass UNKNOWN"
+        },
+        {
+          "domain": "PACKAGING",
+          "code": "MEPQ-002",
+          "description": "Transmission crossmember reuse for EDU UNKNOWN"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": ["CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT"],
+        "must_disconnect_before": ["CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK"]
+      },
+      "layer": "L1",
+      "visible_in": ["FACTORY_ICE", "DECONSTRUCTION"],
+      "removable": true,
+      "decon_intent": "MUST_REMOVE",
+      "geometry_role": "transmission",
+      "explode_vector": [0.5, 0.3, 0],
+      "geometry_type": "Stylized volumetric proxy"
     },
     {
-      "id": "PROP-INVERTER-01",
-      "display_name": "Proposed Traction Inverter",
-      "family": "EV_PROPOSAL",
-      "category": "HV_POWER_ELECTRONICS",
-      "data_status": "DESIGN_PROPOSAL",
-      "configuration_applicability": "CONVERSION_PROPOSAL",
-      "evidence_status": "L3 proposal — packaging envelope not OEM-verified",
-      "known_interfaces": [],
-      "missing_properties": ["envelope", "HV/LV connectors", "coolant ports"],
-      "mepq_blockers": ["MEPQ-003"],
-      "layer": "L3",
-      "visible_in": ["EV_PROPOSAL"],
-      "removable": false,
-      "geometry_role": "ev_inverter"
-    },
-    {
-      "id": "PROP-LTR-01",
-      "display_name": "Proposed Low-Temp Radiator (LTR)",
-      "family": "EV_PROPOSAL",
-      "category": "THERMAL",
-      "data_status": "DESIGN_PROPOSAL",
-      "configuration_applicability": "CONVERSION_PROPOSAL",
-      "evidence_status": "L3 — forward bay envelope is L2 estimate only (not L1)",
-      "known_interfaces": [],
-      "missing_properties": ["size", "mount points"],
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT",
+      "display_name": "Driveshaft (ICE)",
+      "family": "FACTORY",
+      "category": "DRIVELINE",
+      "scene_group": "FACTORY_ICE_POWERTRAIN",
+      "decon_group": "EXTRACTED",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "OPTION_DEPENDENT",
+      "evidence_ledger": [
+        {
+          "claim": "2-piece driveline topology not ASSERTION_VERIFIED for this instance",
+          "source_id": "NOT_ACQUIRED",
+          "status": "UNKNOWN"
+        }
+      ],
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-FLANGE-DRIVESHAFT-REAR-INPUT",
+          "class": "MECHANICALLY_COUPLED_TO",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
+          "status": "OPERATOR_CANDIDATE"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Piece count / lengths / flange BCD",
+          "knowledge_gap_id": "KG-012",
+          "required_action": "Physical measure on reference vehicle"
+        }
+      ],
       "mepq_blockers": [],
-      "layer": "L3",
-      "visible_in": ["EV_PROPOSAL"],
-      "removable": false,
-      "geometry_role": "ev_ltr"
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": [
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR"
+        ]
+      },
+      "layer": "L1",
+      "visible_in": ["FACTORY_ICE", "DECONSTRUCTION"],
+      "removable": true,
+      "decon_intent": "MUST_REMOVE",
+      "geometry_role": "driveshaft",
+      "explode_vector": [0, -0.4, 0.6],
+      "geometry_type": "Stylized volumetric proxy"
+    },
+    {
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
+      "display_name": "Engine Radiator / ICE Cooling Stack",
+      "family": "FACTORY",
+      "category": "THERMAL",
+      "scene_group": "FACTORY_ICE_POWERTRAIN",
+      "decon_group": "EXTRACTED",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "PLATFORM_EXPECTED",
+      "evidence_ledger": [
+        {
+          "claim": "Radiator envelope dims/mass/fasteners UNKNOWN on L1 (38.3×30×8 rejected as overhang-code false positive)",
+          "source_id": "DT-D055 / DT-D056",
+          "status": "UNKNOWN"
+        }
+      ],
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-RAD-LOWER-MOUNTS",
+          "class": "BOLTED_TO",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+          "status": "OPERATOR_CANDIDATE"
+        },
+        {
+          "interface_id": "IFACE-RAD-UPPER-BRACE",
+          "class": "BOLTED_TO",
+          "target_component": null,
+          "status": "UNKNOWN"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Envelope dims / fastener specs / material",
+          "knowledge_gap_id": "KG-009",
+          "required_action": "Physical measure — do not reuse rejected 38.3 box as radiator size"
+        }
+      ],
+      "mepq_blockers": [],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": ["CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK"]
+      },
+      "layer": "L1",
+      "visible_in": ["FACTORY_ICE", "DECONSTRUCTION"],
+      "removable": true,
+      "decon_intent": "MUST_REMOVE",
+      "geometry_role": "radiator",
+      "explode_vector": [1.1, 0.2, 0],
+      "geometry_type": "Stylized volumetric proxy"
+    },
+    {
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
+      "display_name": "Aft-of-Axle Fuel Tank (40 gal std)",
+      "family": "FACTORY",
+      "category": "FUEL",
+      "scene_group": "FACTORY_ICE_POWERTRAIN",
+      "decon_group": "EXTRACTED",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "EXACT_CONFIGURATION_MATCH",
+      "evidence_ledger": [
+        {
+          "claim": "40 gal aft-of-axle standard fuel tank",
+          "source_id": "SRC-CAND-000010",
+          "status": "ASSERTION_EXTRACTED"
+        },
+        {
+          "claim": "Strap hole coordinates / torque / tolerances",
+          "source_id": "MEPQ-004",
+          "status": "UNKNOWN"
+        }
+      ],
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-FUEL-TANK-STRAP-AFT",
+          "class": "BOLTED_TO",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+          "status": "DOCUMENT_SUPPORTED"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Strap hole coordinates",
+          "knowledge_gap_id": "KG-009",
+          "required_action": "MEPQ-004 physical metrology"
+        },
+        {
+          "property": "Hole tolerances",
+          "knowledge_gap_id": "KG-011",
+          "required_action": "MEPQ-006"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "PACKAGING",
+          "code": "MEPQ-004",
+          "description": "Fuel tank strap holes UNKNOWN — blocks aft HV cradle hole match"
+        },
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-006",
+          "description": "Aft hole metrology tolerances UNKNOWN"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": ["PROP-HV-PACK-01"],
+        "must_disconnect_before": []
+      },
+      "layer": "L1",
+      "visible_in": ["FACTORY_ICE", "DECONSTRUCTION"],
+      "removable": true,
+      "decon_intent": "MUST_REMOVE",
+      "geometry_role": "fuel_tank",
+      "explode_vector": [-0.9, -0.4, 0],
+      "geometry_type": "Stylized volumetric proxy — capacity extracted, strap holes not"
+    },
+    {
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING",
+      "display_name": "Exhaust / Aftertreatment",
+      "family": "FACTORY",
+      "category": "EXHAUST",
+      "scene_group": "FACTORY_ICE_POWERTRAIN",
+      "decon_group": "EXTRACTED",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "OPTION_DEPENDENT",
+      "evidence_ledger": [
+        {
+          "claim": "Diesel aftertreatment config-dependent; envelope UNKNOWN",
+          "source_id": "NOT_ACQUIRED",
+          "status": "UNKNOWN"
+        }
+      ],
+      "known_interfaces": [],
+      "missing_properties": [
+        {
+          "property": "Hanger locations / envelope",
+          "knowledge_gap_id": null,
+          "required_action": "Physical survey on instance"
+        }
+      ],
+      "mepq_blockers": [],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": ["CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK"]
+      },
+      "layer": "L1",
+      "visible_in": ["FACTORY_ICE", "DECONSTRUCTION"],
+      "removable": true,
+      "decon_intent": "MUST_REMOVE",
+      "geometry_role": "exhaust",
+      "explode_vector": [0, -0.3, 0.9],
+      "geometry_type": "Stylized volumetric proxy"
     },
     {
       "id": "BLOCK-LV-GATEWAY",
       "display_name": "LV Gateway / Firewall Interconnect",
       "family": "FACTORY",
       "category": "ELECTRICAL",
+      "scene_group": "FACTORY_ELECTRICAL_BLOCKED",
+      "decon_group": "RETAINED",
       "data_status": "BLOCKED",
+      "procedure_eligibility": "BLOCKED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
       "configuration_applicability": "EXACT_CONFIGURATION_MATCH",
-      "evidence_status": "Pinout UNKNOWN — EWD NOT_ACQUIRED (MEPQ-003 / KG-008)",
+      "evidence_ledger": [
+        {
+          "claim": "Pinout / connector designation UNKNOWN — EWD NOT_ACQUIRED",
+          "source_id": "MEPQ-003 / KG-008",
+          "status": "NOT_ACQUIRED"
+        }
+      ],
       "known_interfaces": [],
-      "missing_properties": ["connector designation", "pinout", "CAN termination"],
-      "mepq_blockers": ["MEPQ-003"],
+      "missing_properties": [
+        {
+          "property": "Connector designation / pinout / CAN termination",
+          "knowledge_gap_id": "KG-008",
+          "required_action": "Acquire commercial EWD (MISN-000003 / Mission F discovery)"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "ELECTRICAL",
+          "code": "MEPQ-003",
+          "description": "LV firewall/CAN interconnect blocked until EWD acquired"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": ["PROP-INVERTER-01", "PROP-DCDC-01"],
+        "must_disconnect_before": []
+      },
       "layer": "L1",
       "visible_in": ["FACTORY_ICE", "DECONSTRUCTION", "EV_PROPOSAL"],
       "removable": false,
-      "geometry_role": "lv_gateway"
+      "geometry_role": "lv_gateway",
+      "explode_vector": [0.2, 0.9, 0],
+      "geometry_type": "Blocked placeholder — no pin geometry claimed"
+    },
+    {
+      "id": "PROP-HV-PACK-01",
+      "display_name": "Proposed HV Battery Enclosure (aft / midship candidate)",
+      "family": "EV_PROPOSAL",
+      "category": "HV_ENERGY",
+      "scene_group": "EV_CONVERSION_PROPOSAL",
+      "decon_group": "EV_PROPOSAL",
+      "data_status": "DESIGN_PROPOSAL",
+      "procedure_eligibility": "PROPOSAL_ONLY",
+      "data_classification": "EV_CONVERSION_PROPOSAL",
+      "configuration_applicability": "CONVERSION_PROPOSAL",
+      "evidence_ledger": [
+        {
+          "claim": "L3 packaging proposal only — kWh/chemistry/voltage NOT accepted (DT-D057)",
+          "source_id": "DT-D057 / DT-D058",
+          "status": "L3_PROPOSAL_ONLY"
+        }
+      ],
+      "known_interfaces": [],
+      "missing_properties": [
+        {
+          "property": "Pack energy (kWh), chemistry, voltage class",
+          "knowledge_gap_id": null,
+          "required_action": "Declined until L1 frame/fuel-strap honesty restored — handoff 110 kWh rejected"
+        },
+        {
+          "property": "Cradle hole match to aft strap pattern",
+          "knowledge_gap_id": "KG-009",
+          "required_action": "MEPQ-004"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "PACKAGING",
+          "code": "MEPQ-004",
+          "description": "Blocked on fuel-strap hole metrology"
+        },
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-006",
+          "description": "Aft hole tolerances UNKNOWN"
+        },
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-007",
+          "description": "Frame dynamic loads UNKNOWN"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": ["CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT"]
+      },
+      "layer": "L3",
+      "visible_in": ["EV_PROPOSAL"],
+      "removable": false,
+      "geometry_role": "ev_battery",
+      "explode_vector": [0, -1.0, 0],
+      "geometry_type": "Bounding envelope proposal — no kWh claimed"
+    },
+    {
+      "id": "PROP-EDU-REAR-01",
+      "display_name": "Proposed Electric Drive Unit",
+      "family": "EV_PROPOSAL",
+      "category": "HV_DRIVE",
+      "scene_group": "EV_CONVERSION_PROPOSAL",
+      "decon_group": "EV_PROPOSAL",
+      "data_status": "DESIGN_PROPOSAL",
+      "procedure_eligibility": "PROPOSAL_ONLY",
+      "data_classification": "EV_CONVERSION_PROPOSAL",
+      "configuration_applicability": "CONVERSION_PROPOSAL",
+      "evidence_ledger": [
+        {
+          "claim": "L3 proposal — EDU model/kW/torque NOT selected (handoff 250 kW rejected)",
+          "source_id": "DT-D058",
+          "status": "L3_PROPOSAL_ONLY"
+        }
+      ],
+      "known_interfaces": [],
+      "missing_properties": [
+        {
+          "property": "EDU model, continuous/peak power, torque, mount pattern",
+          "knowledge_gap_id": null,
+          "required_action": "Vendor shortlist after MEPQ-001/002 and pinion flange metrology"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "PACKAGING",
+          "code": "MEPQ-002",
+          "description": "Trans crossmember reuse UNKNOWN"
+        },
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-ENG-004",
+          "description": "Adapter flange to Dana M300 input requires measured BCD/spline"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": [
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT"
+        ]
+      },
+      "layer": "L3",
+      "visible_in": ["EV_PROPOSAL"],
+      "removable": false,
+      "geometry_role": "ev_edu",
+      "explode_vector": [-0.6, 0.4, 0],
+      "geometry_type": "Bounding envelope proposal — no kW claimed"
+    },
+    {
+      "id": "PROP-INVERTER-01",
+      "display_name": "Proposed Traction Inverter",
+      "family": "EV_PROPOSAL",
+      "category": "HV_POWER_ELECTRONICS",
+      "scene_group": "EV_CONVERSION_PROPOSAL",
+      "decon_group": "EV_PROPOSAL",
+      "data_status": "DESIGN_PROPOSAL",
+      "procedure_eligibility": "PROPOSAL_ONLY",
+      "data_classification": "EV_CONVERSION_PROPOSAL",
+      "configuration_applicability": "CONVERSION_PROPOSAL",
+      "evidence_ledger": [
+        {
+          "claim": "L3 packaging envelope only",
+          "source_id": "DT-D058",
+          "status": "L3_PROPOSAL_ONLY"
+        }
+      ],
+      "known_interfaces": [],
+      "missing_properties": [
+        {
+          "property": "Envelope / HV-LV connectors / coolant ports",
+          "knowledge_gap_id": "KG-008",
+          "required_action": "Blocked on LV gateway EWD (MEPQ-003)"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "ELECTRICAL",
+          "code": "MEPQ-003",
+          "description": "LV/CAN integration blocked until EWD"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": ["BLOCK-LV-GATEWAY"]
+      },
+      "layer": "L3",
+      "visible_in": ["EV_PROPOSAL"],
+      "removable": false,
+      "geometry_role": "ev_inverter",
+      "explode_vector": [0.8, 0.7, 0],
+      "geometry_type": "Bounding envelope proposal"
+    },
+    {
+      "id": "PROP-DCDC-01",
+      "display_name": "Proposed DC-DC Converter",
+      "family": "EV_PROPOSAL",
+      "category": "HV_POWER_ELECTRONICS",
+      "scene_group": "EV_CONVERSION_PROPOSAL",
+      "decon_group": "EV_PROPOSAL",
+      "data_status": "DESIGN_PROPOSAL",
+      "procedure_eligibility": "PROPOSAL_ONLY",
+      "data_classification": "EV_CONVERSION_PROPOSAL",
+      "configuration_applicability": "CONVERSION_PROPOSAL",
+      "evidence_ledger": [
+        {
+          "claim": "L3 presence placeholder — rating/vendor UNKNOWN",
+          "source_id": "DT-D058",
+          "status": "L3_PROPOSAL_ONLY"
+        }
+      ],
+      "known_interfaces": [],
+      "missing_properties": [
+        {
+          "property": "Power rating / package / LV bus integration",
+          "knowledge_gap_id": "KG-008",
+          "required_action": "MEPQ-003 EWD + LV architecture study"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "ELECTRICAL",
+          "code": "MEPQ-003",
+          "description": "LV bus integration blocked until EWD"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": ["BLOCK-LV-GATEWAY"]
+      },
+      "layer": "L3",
+      "visible_in": ["EV_PROPOSAL"],
+      "removable": false,
+      "geometry_role": "ev_dcdc",
+      "explode_vector": [0.5, 0.8, 0.4],
+      "geometry_type": "Bounding envelope proposal"
+    },
+    {
+      "id": "PROP-LTR-01",
+      "display_name": "Proposed Low-Temp Radiator / Heat Exchanger",
+      "family": "EV_PROPOSAL",
+      "category": "THERMAL",
+      "scene_group": "EV_CONVERSION_PROPOSAL",
+      "decon_group": "EV_PROPOSAL",
+      "data_status": "DESIGN_PROPOSAL",
+      "procedure_eligibility": "PROPOSAL_ONLY",
+      "data_classification": "EV_CONVERSION_PROPOSAL",
+      "configuration_applicability": "CONVERSION_PROPOSAL",
+      "evidence_ledger": [
+        {
+          "claim": "Forward bay envelope is L2 estimate only — not L1",
+          "source_id": "DT-D056",
+          "status": "L3_PROPOSAL_ONLY"
+        }
+      ],
+      "known_interfaces": [],
+      "missing_properties": [
+        {
+          "property": "Size / mount points / coolant loop topology",
+          "knowledge_gap_id": null,
+          "required_action": "Thermal packaging study after radiator bay measured"
+        }
+      ],
+      "mepq_blockers": [],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": ["CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR"]
+      },
+      "layer": "L3",
+      "visible_in": ["EV_PROPOSAL"],
+      "removable": false,
+      "geometry_role": "ev_ltr",
+      "explode_vector": [1.0, 0.3, 0],
+      "geometry_type": "Bounding envelope proposal"
+    },
+    {
+      "id": "PROP-CCS-PORT-01",
+      "display_name": "Proposed CCS Charge Port Interface",
+      "family": "EV_PROPOSAL",
+      "category": "HV_CHARGE",
+      "scene_group": "EV_CONVERSION_PROPOSAL",
+      "decon_group": "EV_PROPOSAL",
+      "data_status": "DESIGN_PROPOSAL",
+      "procedure_eligibility": "PROPOSAL_ONLY",
+      "data_classification": "EV_CONVERSION_PROPOSAL",
+      "configuration_applicability": "CONVERSION_PROPOSAL",
+      "evidence_ledger": [
+        {
+          "claim": "Charge inlet location/vendor UNKNOWN — proposal marker only",
+          "source_id": "DT-D058",
+          "status": "L3_PROPOSAL_ONLY"
+        }
+      ],
+      "known_interfaces": [],
+      "missing_properties": [
+        {
+          "property": "Inlet standard / side / cable routing / interlock",
+          "knowledge_gap_id": null,
+          "required_action": "Body packaging study — no invented inlet coords"
+        }
+      ],
+      "mepq_blockers": [],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": []
+      },
+      "layer": "L3",
+      "visible_in": ["EV_PROPOSAL"],
+      "removable": false,
+      "geometry_role": "ev_ccs",
+      "explode_vector": [0.3, 0.6, 1.0],
+      "geometry_type": "Bounding envelope proposal"
     }
   ]
 }

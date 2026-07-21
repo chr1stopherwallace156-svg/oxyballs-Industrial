@@ -986,5 +986,6 @@ Append-only record of digital twin foundation decisions.
   4. Scale layout only to ASSERTION_EXTRACTED dimensions from SRC-CAND-000010
   5. Do **not** authorize L10 public demo, procedure generation, geometry freeze, or kernel mutation
   6. Continue Mission D L1 + WSM/EWD in parallel; refine catalog as evidence arrives
+  7. Admit handoff architecture (badge colors, scene tree, evidence ledger, decon/EV visuals) while rejecting sample JSX fabricated VERIFIED / kWh / kW / mass claims
 
 ---

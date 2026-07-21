@@ -3,9 +3,9 @@ import type { VehicleState } from '../types'
 import { StatusBadge } from './StatusBadge'
 
 const STATES: { id: VehicleState; label: string; blurb: string }[] = [
-  { id: 'FACTORY_ICE', label: 'Factory ICE', blurb: 'As-built donor layout' },
-  { id: 'DECONSTRUCTION', label: 'Deconstruction', blurb: 'Remove ICE support systems' },
-  { id: 'EV_PROPOSAL', label: 'EV Proposal', blurb: 'L3 design proposals only' },
+  { id: 'FACTORY_ICE', label: '1. Factory ICE', blurb: 'As-built donor baseline' },
+  { id: 'DECONSTRUCTION', label: '2. Deconstruction', blurb: 'Extract ICE systems' },
+  { id: 'EV_PROPOSAL', label: '3. EV Proposal', blurb: 'L3 design proposals only' },
 ]
 
 export function Toolbar() {
@@ -21,6 +21,8 @@ export function Toolbar() {
     hiddenIds,
     removedIds,
     toggleRemoved,
+    resetTransforms,
+    selectedId,
   } = useDemo()
 
   return (
@@ -28,7 +30,10 @@ export function Toolbar() {
       <div className="brand-block">
         <p className="brand">ELEKTRON · EDTS</p>
         <h1>Visible Progress Release 1</h1>
-        <p className="config">{catalog.locked_configuration.proposal_configuration_id}</p>
+        <div className="lock-chip">
+          <span>LOCK</span>
+          <code>{catalog.locked_configuration.proposal_configuration_id}</code>
+        </div>
       </div>
 
       <div className="state-tabs" role="tablist" aria-label="Vehicle state">
@@ -48,7 +53,7 @@ export function Toolbar() {
       </div>
 
       <label className="explode">
-        <span>Explode</span>
+        <span>Exploded view · {Math.round(explode * 100)}%</span>
         <input
           type="range"
           min={0}
@@ -59,35 +64,56 @@ export function Toolbar() {
         />
       </label>
 
+      <button type="button" className="reset-btn" onClick={resetTransforms}>
+        Reset transforms
+      </button>
+
       <div className="part-rail">
-        <p className="rail-title">Parts</p>
-        <ul>
-          {catalog.components
-            .filter((c) => c.visible_in.includes(state))
-            .map((c) => {
-              const gone =
-                hiddenIds.has(c.id) ||
-                (state === 'DECONSTRUCTION' && removedIds.has(c.id))
-              return (
-                <li key={c.id} className={gone ? 'gone' : ''}>
-                  <button type="button" className="part-btn" onClick={() => setSelectedId(c.id)}>
-                    <span className={`fam fam-${c.family}`}>{c.family === 'EV_PROPOSAL' ? 'EV' : 'OEM'}</span>
-                    <span className="part-name">{c.display_name}</span>
-                    <StatusBadge status={c.data_status} />
-                  </button>
-                  <div className="mini-actions">
-                    <button type="button" onClick={() => toggleHidden(c.id)}>
-                      {hiddenIds.has(c.id) ? 'Show' : 'Hide'}
-                    </button>
-                    {c.removable && state === 'DECONSTRUCTION' && (
-                      <button type="button" onClick={() => toggleRemoved(c.id)}>
-                        {removedIds.has(c.id) ? 'Restore' : 'Remove'}
-                      </button>
-                    )}
-                  </div>
-                </li>
-              )
-            })}
+        <p className="rail-title">Scene tree</p>
+        <ul className="scene-tree">
+          {catalog.scene_tree.map((group) => {
+            const comps = group.component_ids
+              .map((id) => catalog.components.find((c) => c.id === id))
+              .filter((c): c is NonNullable<typeof c> => !!c && c.visible_in.includes(state))
+            if (!comps.length) return null
+            return (
+              <li key={group.id} className="tree-group">
+                <p className="tree-group-label">{group.label}</p>
+                <ul>
+                  {comps.map((c) => {
+                    const gone =
+                      hiddenIds.has(c.id) ||
+                      (c.removable && removedIds.has(c.id))
+                    return (
+                      <li key={c.id} className={gone ? 'gone' : ''}>
+                        <button
+                          type="button"
+                          className={`part-btn ${selectedId === c.id ? 'selected' : ''}`}
+                          onClick={() => setSelectedId(c.id)}
+                        >
+                          <span className={`fam fam-${c.family}`}>
+                            {c.family === 'EV_PROPOSAL' ? 'EV' : c.decon_group === 'EXTRACTED' ? 'X' : 'OEM'}
+                          </span>
+                          <span className="part-name">{c.display_name}</span>
+                          <StatusBadge status={c.data_status} />
+                        </button>
+                        <div className="mini-actions">
+                          <button type="button" onClick={() => toggleHidden(c.id)}>
+                            {hiddenIds.has(c.id) ? 'Show' : 'Hide'}
+                          </button>
+                          {c.removable && state === 'DECONSTRUCTION' && (
+                            <button type="button" onClick={() => toggleRemoved(c.id)}>
+                              {removedIds.has(c.id) ? 'Restore' : 'Remove'}
+                            </button>
+                          )}
+                        </div>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </li>
+            )
+          })}
         </ul>
         <p className="tiny muted">{visibleComponents.length} meshes in view</p>
       </div>

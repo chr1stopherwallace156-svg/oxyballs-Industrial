@@ -1,4 +1,5 @@
 import type { DataStatus } from '../types'
+import { BADGE_COLORS } from '../types'
 
 const LABELS: Record<DataStatus, string> = {
   VERIFIED: 'VERIFIED',
@@ -11,9 +12,14 @@ const LABELS: Record<DataStatus, string> = {
 }
 
 export function StatusBadge({ status }: { status: DataStatus }) {
+  const color = BADGE_COLORS[status]
   return (
-    <span className={`badge badge-${status}`} title={status}>
-      <span className="badge-dot" aria-hidden />
+    <span
+      className={`badge badge-${status}`}
+      title={status}
+      style={{ color, borderColor: color }}
+    >
+      <span className="badge-dot" aria-hidden style={{ background: color }} />
       {LABELS[status]}
     </span>
   )

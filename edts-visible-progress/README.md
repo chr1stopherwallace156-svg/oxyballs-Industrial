@@ -1,31 +1,28 @@
 # EDTS Visible Progress — Release 1
 
-Interactive 3D demonstrator for the Elektron Digital Twin System (EDTS).
+Interactive 3D demonstrator + component evidence explorer for the Elektron Digital Twin System.
 
-**Not engineering truth.** Meshes are stylized / `PLACEHOLDER_GEOMETRY` unless a badge says otherwise. Exact layout dimensions used for axle spacing / track / frame width / overhang come only from `ASSERTION_EXTRACTED` tokens (SRC-CAND-000010). No invented torque, materials, or mounting-hole geometry.
+**Not engineering truth.** Meshes are stylized `PLACEHOLDER_GEOMETRY` or `DESIGN_PROPOSAL` unless a badge says otherwise. Exact layout dimensions (WB / track / frame width / overhang / BOC) come only from `ASSERTION_EXTRACTED` tokens (SRC-CAND-000010).
 
-## Locked vehicle
+## Canonical configuration lock
 
-2019 Ford F-450 Chassis Cab · Regular Cab · 4x2 · DRW · 145.3 WB / 60 CA
+```
+CFG-2019-F450-REG-CAB-4X2-60CA-DRW
+```
 
-- Kernel: `VEH-000001` / `CFG-000001`
-- Proposal: `CFG-2019-F450-REG-CAB-4X2-60CA-DRW`
-- Decision: **DT-D058**
+Kernel: `VEH-000001` / `CFG-000001` · Decision: **DT-D058**
 
-## States
+## Architecture
 
-| State | Purpose |
+| Layer | Role |
 |---|---|
-| **Factory ICE** | As-built donor layout (factory family) |
-| **Deconstruction** | Interactively hide/remove ICE support systems |
-| **EV Proposal** | L3 design proposals only (visually distinct from OEM) |
+| Factory ICE | As-built donor baseline |
+| Deconstruction | Retained (translucent) vs extracted (pulse) + dependency lines |
+| EV Proposal | Muted factory retained + high-vis L3 proposal pack |
+| Controls | Select · isolate · hide · remove · explode 0–1 |
+| Passport panel | ID, lock, evidence ledger, interfaces, KG gaps, MEPQ |
 
-## Interaction
-
-- Click any major component to inspect
-- Hide / remove (decon) / explode via toolbar + inspector
-- Side panel: component ID, configuration applicability, evidence status, known interfaces, missing properties, MEPQ blockers
-- Data-status badges: `VERIFIED` · `PHYSICALLY_MEASURED` · `ESTIMATED` · `PLACEHOLDER_GEOMETRY` · `DESIGN_PROPOSAL` · `UNKNOWN` · `BLOCKED`
+Badge colors match the Release 1 handoff table. **Statuses stay honest** — the sample JSX that marked frame/cab/axle `VERIFIED` and invented 110 kWh / 250 kW / 1,100 lb was **rejected** (see `catalog.honesty.handoff_sample_rejected`).
 
 ## Run
 
@@ -37,13 +34,12 @@ npm run dev
 
 Build: `npm run build` → `dist/`
 
-## Architecture
+## Data
 
-- Vite + React + TypeScript + React Three Fiber
-- Component catalog: `src/data/componentCatalog.json` (honest metadata; refine without rewriting the viewer)
-- Scene uses extracted inches→meters for WB / track / frame H / overhang / BOC only; cross-sections remain placeholders
-- Lives **outside** the frozen EDTS Kernel — parallel visual lane
+- Catalog / passport models: `src/data/componentCatalog.json`
+- Scene tree + evidence ledger + MEPQ/KG fields are catalog-driven (refine without rewriting the viewer)
+- Outside frozen EDTS Kernel — parallel visual lane
 
-## Honesty contract
+## Non-claims
 
-See `catalog.honesty` and foundation decision DT-D058. This release does **not** authorize L10 public demo, procedure generation, or geometry freeze.
+Not VERIFIED geometry · not L10 public demo · not procedure generation · not geometry freeze.

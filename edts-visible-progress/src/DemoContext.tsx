@@ -1,8 +1,8 @@
-import { createContext, useContext, useMemo, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react'
 import catalogJson from './data/componentCatalog.json'
 import type { Catalog, TwinComponent, VehicleState } from './types'
 
-const catalog = catalogJson as Catalog
+const catalog = catalogJson as unknown as Catalog
 
 export type DemoContextValue = {
   catalog: Catalog
@@ -16,8 +16,11 @@ export type DemoContextValue = {
   toggleRemoved: (id: string) => void
   explode: number
   setExplode: (n: number) => void
+  resetTransforms: () => void
   visibleComponents: TwinComponent[]
   selected: TwinComponent | null
+  isolatedId: string | null
+  setIsolatedId: (id: string | null) => void
 }
 
 const DemoContext = createContext<DemoContextValue | null>(null)
@@ -28,23 +31,24 @@ export function DemoProvider({ children }: { children: ReactNode }) {
   const [hiddenIds, setHiddenIds] = useState<Set<string>>(() => new Set())
   const [removedIds, setRemovedIds] = useState<Set<string>>(() => new Set())
   const [explode, setExplode] = useState(0)
+  const [isolatedId, setIsolatedId] = useState<string | null>(null)
+
+  const resetTransforms = useCallback(() => {
+    setHiddenIds(new Set())
+    setRemovedIds(new Set())
+    setExplode(0)
+    setIsolatedId(null)
+  }, [])
 
   const visibleComponents = useMemo(() => {
     return catalog.components.filter((c) => {
       if (!c.visible_in.includes(state)) return false
       if (hiddenIds.has(c.id)) return false
-      if (state === 'DECONSTRUCTION' && c.removable && removedIds.has(c.id)) return false
-      if (state === 'DECONSTRUCTION' && c.removable && !removedIds.has(c.id)) {
-        // In deconstruction, show removable parts until user removes them;
-        // also auto-suggest they can be removed — still visible initially.
-        return true
-      }
-      if (state !== 'FACTORY_ICE' && c.removable && c.visible_in.length === 1) {
-        // ICE-only parts stay out of EV proposal automatically via visible_in
-      }
+      if (removedIds.has(c.id) && c.removable) return false
+      if (isolatedId && c.id !== isolatedId) return false
       return true
     })
-  }, [state, hiddenIds, removedIds])
+  }, [state, hiddenIds, removedIds, isolatedId])
 
   const selected = useMemo(
     () => catalog.components.find((c) => c.id === selectedId) ?? null,
@@ -57,11 +61,10 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     setState: (s) => {
       setState(s)
       setSelectedId(null)
-      if (s === 'FACTORY_ICE') setRemovedIds(new Set())
-      if (s === 'DECONSTRUCTION') {
-        // Start decon with ICE parts still present for interactive removal
-        setRemovedIds(new Set())
-      }
+      setIsolatedId(null)
+      setRemovedIds(new Set())
+      setHiddenIds(new Set())
+      setExplode(0)
     },
     selectedId,
     setSelectedId,
@@ -85,8 +88,11 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     },
     explode,
     setExplode,
+    resetTransforms,
     visibleComponents,
     selected,
+    isolatedId,
+    setIsolatedId,
   }
 
   return <DemoContext.Provider value={value}>{children}</DemoContext.Provider>

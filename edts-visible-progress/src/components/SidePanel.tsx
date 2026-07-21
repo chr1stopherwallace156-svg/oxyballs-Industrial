@@ -11,17 +11,23 @@ export function SidePanel() {
     toggleRemoved,
     hiddenIds,
     removedIds,
+    isolatedId,
+    setIsolatedId,
   } = useDemo()
 
   if (!selected) {
     return (
       <aside className="side-panel empty">
-        <p className="eyebrow">Component inspector</p>
+        <p className="eyebrow">Component passport</p>
         <h2>Select a part</h2>
         <p className="muted">
-          Click any mesh in the viewport. Factory parts and EV proposals stay
-          visually separated. Badges always show evidence honesty — not confidence %.
+          Click any mesh. Factory and EV proposal families stay separated. Badges show evidence
+          honesty — not confidence %.
         </p>
+        <div className="lock-chip">
+          <span>LOCK</span>
+          <code>{catalog.locked_configuration.proposal_configuration_id}</code>
+        </div>
         <div className="honesty-box">
           <strong>Honesty</strong>
           <p>{catalog.honesty.note}</p>
@@ -42,6 +48,7 @@ export function SidePanel() {
 
   const isHidden = hiddenIds.has(selected.id)
   const isRemoved = removedIds.has(selected.id)
+  const isIsolated = isolatedId === selected.id
 
   return (
     <aside className="side-panel">
@@ -49,34 +56,60 @@ export function SidePanel() {
         Clear
       </button>
       <p className="eyebrow">
-        {selected.family === 'EV_PROPOSAL' ? 'EV proposal · L3' : 'Factory · ' + selected.layer}
+        {selected.family === 'EV_PROPOSAL'
+          ? 'EV proposal · L3'
+          : `Factory · ${selected.layer} · ${selected.decon_group}`}
       </p>
       <h2>{selected.display_name}</h2>
-      <StatusBadge status={selected.data_status} />
+      <div className="badge-row">
+        <StatusBadge status={selected.data_status} />
+        <span className="elig-pill">{selected.procedure_eligibility}</span>
+      </div>
 
       <section>
         <h3>Component ID</h3>
         <code className="id-block">{selected.id}</code>
+        <p className="tiny muted">{selected.data_classification}</p>
       </section>
 
       <section>
         <h3>Configuration applicability</h3>
-        <p>{selected.configuration_applicability}</p>
-        <p className="tiny muted">{catalog.locked_configuration.summary}</p>
+        <div className="lock-chip compact">
+          <span>LOCK</span>
+          <code>{catalog.locked_configuration.proposal_configuration_id}</code>
+        </div>
+        <p>
+          <strong>{selected.configuration_applicability}</strong>
+        </p>
+        <p className="tiny muted">
+          MY {catalog.locked_configuration.model_year} · {catalog.locked_configuration.summary}
+        </p>
       </section>
 
       <section>
-        <h3>Evidence status</h3>
-        <p>{selected.evidence_status}</p>
+        <h3>Evidence ledger</h3>
+        <ul className="ledger">
+          {selected.evidence_ledger.map((e, i) => (
+            <li key={i}>
+              <span className={`claim-status status-${e.status}`}>{e.status}</span>
+              <p>{e.claim}</p>
+              <code>{e.source_id}</code>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section>
         <h3>Known interfaces</h3>
         {selected.known_interfaces.length ? (
-          <ul>
-            {selected.known_interfaces.map((i) => (
-              <li key={i}>
-                <code>{i}</code>
+          <ul className="iface-list">
+            {selected.known_interfaces.map((iface) => (
+              <li key={iface.interface_id}>
+                <code>{iface.interface_id}</code>
+                <span className="tiny muted">
+                  {iface.class}
+                  {iface.target_component ? ` → ${iface.target_component}` : ''} · {iface.status}
+                </span>
               </li>
             ))}
           </ul>
@@ -86,11 +119,15 @@ export function SidePanel() {
       </section>
 
       <section>
-        <h3>Missing properties</h3>
+        <h3>Missing properties / knowledge gaps</h3>
         {selected.missing_properties.length ? (
-          <ul>
-            {selected.missing_properties.map((m) => (
-              <li key={m}>{m}</li>
+          <ul className="gap-list">
+            {selected.missing_properties.map((m, i) => (
+              <li key={i}>
+                <p>{m.property}</p>
+                {m.knowledge_gap_id && <code className="kg">{m.knowledge_gap_id}</code>}
+                <span className="tiny muted">{m.required_action}</span>
+              </li>
             ))}
           </ul>
         ) : (
@@ -103,8 +140,11 @@ export function SidePanel() {
         {selected.mepq_blockers.length ? (
           <ul className="mepq">
             {selected.mepq_blockers.map((m) => (
-              <li key={m}>
-                <code>{m}</code>
+              <li key={m.code}>
+                <code>
+                  {m.code} · {m.domain}
+                </code>
+                <p>{m.description}</p>
               </li>
             ))}
           </ul>
@@ -113,13 +153,43 @@ export function SidePanel() {
         )}
       </section>
 
+      {(selected.dependency_highlights.blocks_access_to.length > 0 ||
+        selected.dependency_highlights.must_disconnect_before.length > 0) && (
+        <section>
+          <h3>Dependency highlights</h3>
+          {selected.dependency_highlights.blocks_access_to.length > 0 && (
+            <p className="tiny">
+              <strong>BLOCKS_ACCESS_TO:</strong>{' '}
+              {selected.dependency_highlights.blocks_access_to.join(', ')}
+            </p>
+          )}
+          {selected.dependency_highlights.must_disconnect_before.length > 0 && (
+            <p className="tiny">
+              <strong>MUST_DISCONNECT_BEFORE:</strong>{' '}
+              {selected.dependency_highlights.must_disconnect_before.join(', ')}
+            </p>
+          )}
+        </section>
+      )}
+
+      <section>
+        <h3>Geometry type</h3>
+        <p className="tiny muted">{selected.geometry_type}</p>
+      </section>
+
       <div className="actions">
         <button type="button" onClick={() => toggleHidden(selected.id)}>
           {isHidden ? 'Show' : 'Hide'}
         </button>
+        <button
+          type="button"
+          onClick={() => setIsolatedId(isIsolated ? null : selected.id)}
+        >
+          {isIsolated ? 'Un-isolate' : 'Isolate'}
+        </button>
         {selected.removable && state === 'DECONSTRUCTION' && (
           <button type="button" className="danger" onClick={() => toggleRemoved(selected.id)}>
-            {isRemoved ? 'Restore' : 'Remove'}
+            {isRemoved ? 'Restore' : 'Remove / Extract'}
           </button>
         )}
       </div>

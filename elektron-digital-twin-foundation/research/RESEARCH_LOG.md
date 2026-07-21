@@ -606,9 +606,10 @@ DT-D057 — continue Mission D L1; do not invent truth to unblock conversion ana
 ### Findings
 
 1. **DT-D058** admits Visible Progress R1 as provisional visual only.
-2. App at `edts-visible-progress/` — Factory ICE / Deconstruction / EV Proposal; select/hide/remove/explode; data-status badges; inspector with MEPQ blockers.
+2. App at `edts-visible-progress/` — Factory ICE / Deconstruction / EV Proposal; select/hide/isolate/remove/explode; data-status badges; passport inspector with evidence ledger, KG, MEPQ.
 3. Layout uses ASSERTION_EXTRACTED dims only; meshes are PLACEHOLDER_GEOMETRY / DESIGN_PROPOSAL / BLOCKED.
-4. Does **not** authorize L10 demo, procedures, or geometry freeze. DT-D057 fabrication rejection unchanged.
+4. Handoff sample JSX that claimed VERIFIED frame/cab/axle and invented 110 kWh / 250 kW / 1,100 lb **rejected**; architecture (states, badges, scene tree, panel schema) **admitted**.
+5. Does **not** authorize L10 demo, procedures, or geometry freeze. DT-D057 fabrication rejection unchanged.
 
 ### Status
 
