@@ -5,8 +5,8 @@ import { HEATMAP_COLORS, type DataStatus } from '../types'
 const MODES: { id: ViewMode; label: string }[] = [
   { id: 'INSPECT', label: 'Inspect' },
   { id: 'HEATMAP', label: 'Heatmap' },
-  { id: 'TIMELINE', label: 'Surgery' },
-  { id: 'SIMULATION', label: 'Mass / CG' },
+  { id: 'TIMELINE', label: 'Storyboard' },
+  { id: 'SIMULATION', label: 'Mass (disabled)' },
 ]
 
 export function SearchBar() {
@@ -74,7 +74,9 @@ export function TimelineRail() {
     <div className="timeline-rail surgery">
       <div className="timeline-head">
         <strong>{timeline.title}</strong>
-        <p>{timeline.honesty}</p>
+        <p>
+          <span className="storyboard-tag">{timeline.kind ?? 'STORYBOARD'}</span> {timeline.honesty}
+        </p>
       </div>
       <input
         type="range"
@@ -108,44 +110,56 @@ export function TimelineRail() {
 }
 
 export function SimulationPanel() {
-  const { viewMode, simulation, massEngine } = useDemo()
+  const { viewMode, massEngine, catalog } = useDemo()
   if (viewMode !== 'SIMULATION') return null
-  const fmt = (n: number | null, unit: string) =>
-    n == null ? 'UNKNOWN' : `${typeof n === 'number' ? n.toFixed(1) : n} ${unit}`
 
   return (
     <div className="sim-panel">
-      <strong>{simulation.title}</strong>
+      <strong>Demonstration mass subset</strong>
       <span className="sim-status">{massEngine.status}</span>
-      <p>{massEngine.note}</p>
+      <p>
+        Represented mass coverage is <em>incomplete</em>. Axle reactions are{' '}
+        <strong>disabled</strong> until a full vehicle mass basis exists (not seven
+        selected parts).
+      </p>
       <dl>
         <div>
-          <dt>Total mass</dt>
-          <dd>{fmt(massEngine.total_mass_kg, 'kg')}</dd>
-        </div>
-        <div>
-          <dt>Front axle</dt>
-          <dd>{fmt(massEngine.front_axle_kg, 'kg')}</dd>
-        </div>
-        <div>
-          <dt>Rear axle</dt>
-          <dd>{fmt(massEngine.rear_axle_kg, 'kg')}</dd>
-        </div>
-        <div>
-          <dt>CG Z</dt>
-          <dd>{fmt(massEngine.cg_z_m, 'm')}</dd>
-        </div>
-        <div>
-          <dt>Mass coverage</dt>
+          <dt>Known/assumed represented mass</dt>
           <dd>
-            {massEngine.components_with_mass}/{massEngine.components_with_mass + massEngine.components_missing_mass}
+            {massEngine.total_mass_kg == null ? '— (none measured)' : `${massEngine.total_mass_kg.toFixed(1)} kg`}
           </dd>
         </div>
+        <div>
+          <dt>Coverage</dt>
+          <dd>
+            {massEngine.components_with_mass}/
+            {massEngine.components_with_mass + massEngine.components_missing_mass} components measured
+          </dd>
+        </div>
+        <div>
+          <dt>Front axle reaction</dt>
+          <dd>Disabled</dd>
+        </div>
+        <div>
+          <dt>Rear axle reaction</dt>
+          <dd>Disabled</dd>
+        </div>
+        <div>
+          <dt>CG (longitudinal)</dt>
+          <dd>Disabled</dd>
+        </div>
+        <div>
+          <dt>Wheelbase basis</dt>
+          <dd>145.3 in ASSERTION_EXTRACTED</dd>
+        </div>
       </dl>
-      <p className="tiny muted">Requires: {simulation.required_before_enable.join(' · ')}</p>
+      <p className="tiny muted">{massEngine.note}</p>
       <p className="tiny">
-        Handoff sample masses (420/490/520 kg…) and live axle formulas are <em>rejected</em> until
-        SIM records are measured.
+        Axis convention: longitudinal X (forward +), vertical Y up, lateral Z right — CG longitudinal
+        uses X once measured (not invented Z shortcuts).
+      </p>
+      <p className="tiny muted">
+        Prototype: {catalog.prototype_status?.physics_engine ?? 'DISABLED_UNTIL_MASS_COVERAGE'}
       </p>
     </div>
   )

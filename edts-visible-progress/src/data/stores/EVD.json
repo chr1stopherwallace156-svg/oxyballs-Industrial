@@ -61,7 +61,15 @@
           "code": "MEPQ-007",
           "description": "Frame dynamic load allowables UNKNOWN"
         }
-      ]
+      ],
+      "maturity": {
+        "identity_status": "DOCUMENT_SUPPORTED",
+        "geometry_status": "PLACEHOLDER",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_OR_BLOCKED"
+      },
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB",
@@ -92,7 +100,15 @@
           "required_action": "Do not assert aluminum or steel without OEM token"
         }
       ],
-      "mepq_blockers": []
+      "mepq_blockers": [],
+      "maturity": {
+        "identity_status": "DOCUMENT_SUPPORTED",
+        "geometry_status": "PLACEHOLDER",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL"
+      },
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
@@ -123,7 +139,15 @@
           "required_action": "Acquire WSM; do not invent torques"
         }
       ],
-      "mepq_blockers": []
+      "mepq_blockers": [],
+      "maturity": {
+        "identity_status": "DOCUMENT_SUPPORTED",
+        "geometry_status": "PLACEHOLDER",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL"
+      },
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
@@ -165,7 +189,15 @@
           "code": "MEPQ-ENG-004",
           "description": "Custom EV driveshaft adapter flange cannot be designed until pinion flange BCD/spline measured"
         }
-      ]
+      ],
+      "maturity": {
+        "identity_status": "EXPECTED_PLATFORM",
+        "geometry_status": "PLACEHOLDER",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_OR_BLOCKED"
+      },
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
@@ -191,7 +223,15 @@
           "required_action": "Acquire WSM — do not invent torque"
         }
       ],
-      "mepq_blockers": []
+      "mepq_blockers": [],
+      "maturity": {
+        "identity_status": "DOCUMENT_SUPPORTED",
+        "geometry_status": "PLACEHOLDER",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL"
+      },
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR",
@@ -212,7 +252,15 @@
           "required_action": "Physical measure or WSM"
         }
       ],
-      "mepq_blockers": []
+      "mepq_blockers": [],
+      "maturity": {
+        "identity_status": "DOCUMENT_SUPPORTED",
+        "geometry_status": "PLACEHOLDER",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL"
+      },
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK",
@@ -249,7 +297,15 @@
           "code": "MEPQ-001",
           "description": "ICE CG/mass UNKNOWN — extraction procedure mass estimate blocked"
         }
-      ]
+      ],
+      "maturity": {
+        "identity_status": "DOCUMENT_SUPPORTED",
+        "geometry_status": "PLACEHOLDER",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_OR_BLOCKED"
+      },
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
@@ -281,7 +337,15 @@
           "code": "MEPQ-002",
           "description": "Transmission crossmember reuse for EDU UNKNOWN"
         }
-      ]
+      ],
+      "maturity": {
+        "identity_status": "EXPECTED_PLATFORM",
+        "geometry_status": "PLACEHOLDER",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_OR_BLOCKED"
+      },
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT",
@@ -302,7 +366,15 @@
           "required_action": "Physical measure on reference vehicle"
         }
       ],
-      "mepq_blockers": []
+      "mepq_blockers": [],
+      "maturity": {
+        "identity_status": "EXPECTED_PLATFORM",
+        "geometry_status": "PLACEHOLDER",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL"
+      },
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
@@ -323,7 +395,15 @@
           "required_action": "Physical measure — do not reuse rejected 38.3 box as radiator size"
         }
       ],
-      "mepq_blockers": []
+      "mepq_blockers": [],
+      "maturity": {
+        "identity_status": "EXPECTED_PLATFORM",
+        "geometry_status": "PLACEHOLDER",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL"
+      },
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
@@ -365,7 +445,15 @@
           "code": "MEPQ-006",
           "description": "Aft hole metrology tolerances UNKNOWN"
         }
-      ]
+      ],
+      "maturity": {
+        "identity_status": "DOCUMENT_SUPPORTED",
+        "geometry_status": "PLACEHOLDER",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_OR_BLOCKED"
+      },
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING",
@@ -386,7 +474,15 @@
           "required_action": "Physical survey on instance"
         }
       ],
-      "mepq_blockers": []
+      "mepq_blockers": [],
+      "maturity": {
+        "identity_status": "EXPECTED_PLATFORM",
+        "geometry_status": "PLACEHOLDER",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL"
+      },
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
     },
     "EVD-BLOCK-LV-GATEWAY": {
       "evd_id": "EVD-BLOCK-LV-GATEWAY",
@@ -413,7 +509,15 @@
           "code": "MEPQ-003",
           "description": "LV firewall/CAN interconnect blocked until EWD acquired"
         }
-      ]
+      ],
+      "maturity": {
+        "identity_status": "IDENTITY_KNOWN_INTERFACES_BLOCKED",
+        "geometry_status": "PLACEHOLDER",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_OR_BLOCKED"
+      },
+      "primary_display_badge": "BLOCKED"
     },
     "EVD-PROP-HV-PACK-01": {
       "evd_id": "EVD-PROP-HV-PACK-01",
@@ -455,7 +559,15 @@
           "code": "MEPQ-007",
           "description": "Frame dynamic loads UNKNOWN"
         }
-      ]
+      ],
+      "maturity": {
+        "identity_status": "PROPOSAL_ONLY",
+        "geometry_status": "DESIGN_PROPOSAL_ENVELOPE",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_OR_BLOCKED"
+      },
+      "primary_display_badge": "DESIGN_PROPOSAL"
     },
     "EVD-PROP-EDU-REAR-01": {
       "evd_id": "EVD-PROP-EDU-REAR-01",
@@ -487,7 +599,15 @@
           "code": "MEPQ-ENG-004",
           "description": "Adapter flange to Dana M300 input requires measured BCD/spline"
         }
-      ]
+      ],
+      "maturity": {
+        "identity_status": "PROPOSAL_ONLY",
+        "geometry_status": "DESIGN_PROPOSAL_ENVELOPE",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_OR_BLOCKED"
+      },
+      "primary_display_badge": "DESIGN_PROPOSAL"
     },
     "EVD-PROP-INVERTER-01": {
       "evd_id": "EVD-PROP-INVERTER-01",
@@ -514,7 +634,15 @@
           "code": "MEPQ-003",
           "description": "LV/CAN integration blocked until EWD"
         }
-      ]
+      ],
+      "maturity": {
+        "identity_status": "PROPOSAL_ONLY",
+        "geometry_status": "DESIGN_PROPOSAL_ENVELOPE",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_OR_BLOCKED"
+      },
+      "primary_display_badge": "DESIGN_PROPOSAL"
     },
     "EVD-PROP-DCDC-01": {
       "evd_id": "EVD-PROP-DCDC-01",
@@ -541,7 +669,15 @@
           "code": "MEPQ-003",
           "description": "LV bus integration blocked until EWD"
         }
-      ]
+      ],
+      "maturity": {
+        "identity_status": "PROPOSAL_ONLY",
+        "geometry_status": "DESIGN_PROPOSAL_ENVELOPE",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_OR_BLOCKED"
+      },
+      "primary_display_badge": "DESIGN_PROPOSAL"
     },
     "EVD-PROP-LTR-01": {
       "evd_id": "EVD-PROP-LTR-01",
@@ -562,7 +698,15 @@
           "required_action": "Thermal packaging study after radiator bay measured"
         }
       ],
-      "mepq_blockers": []
+      "mepq_blockers": [],
+      "maturity": {
+        "identity_status": "PROPOSAL_ONLY",
+        "geometry_status": "DESIGN_PROPOSAL_ENVELOPE",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL"
+      },
+      "primary_display_badge": "DESIGN_PROPOSAL"
     },
     "EVD-PROP-CCS-PORT-01": {
       "evd_id": "EVD-PROP-CCS-PORT-01",
@@ -583,7 +727,15 @@
           "required_action": "Body packaging study — no invented inlet coords"
         }
       ],
-      "mepq_blockers": []
+      "mepq_blockers": [],
+      "maturity": {
+        "identity_status": "PROPOSAL_ONLY",
+        "geometry_status": "DESIGN_PROPOSAL_ENVELOPE",
+        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL"
+      },
+      "primary_display_badge": "DESIGN_PROPOSAL"
     }
   }
 }

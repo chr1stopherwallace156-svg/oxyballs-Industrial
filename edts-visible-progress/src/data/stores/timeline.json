@@ -1,8 +1,8 @@
 {
   "store": "TIMELINE",
   "id": "TL-SURGERY-ICE-TO-EV-R2",
-  "title": "Surgery Mode — ICE teardown → EV proposal",
-  "honesty": "Visual procedural narrative only. NOT an authorized WSM service procedure. No invented fastener torque or drain volumes.",
+  "title": "Surgery Mode — storyboard timeline (non-authoritative)",
+  "honesty": "STORYBOARD ONLY. Not topological-sort procedure generation. Not WSM-authorized. Visual narrative for demonstration.",
   "steps": [
     {
       "id": "S00",
@@ -107,5 +107,6 @@
       "add_proposal": true,
       "note": "Battery envelope is DESIGN_PROPOSAL only"
     }
-  ]
+  ],
+  "kind": "STORYBOARD"
 }

@@ -1,0 +1,27 @@
+{
+  "decision_id": "DT-D061",
+  "title": "Correct VPR-2 claims: prototype status matrix; tables not microservices; multi-maturity; mass/axle disabled; keep R3F",
+  "status": "ACCEPTED",
+  "date_utc": "2026-07-21",
+  "related_locks": ["RL-030"],
+  "summary": "Retract overclaims of production-ready R2 / five independent databases / shader/procedure engines. Honest label: EDTS VPR-2 Architecture and Interaction Prototype. Keep real R3F procedural truck (not CSS cards). Domains = normalized tables in one DB + object store + client view-state. Separate identity/geometry/placement/mass/interface maturity. Mass and axle outputs disabled until coverage. Timeline = storyboard. Next milestone = GLB/mesh mapping with orbit/select/search/inspect for ≥5 components.",
+  "accepted_artifacts": [
+    "edts-visible-progress/PROTOTYPE_STATUS.md",
+    "edts-visible-progress/src/data/schema/vpr2_normalized.sql",
+    "edts-visible-progress/src/data/ARCHITECTURE.md"
+  ],
+  "claim_corrections": [
+    "Six domains, implemented as tables — not five independent DBs",
+    "R3F scene exists with procedural meshes — not CSS mock; GLB not yet",
+    "Camera Box3 framing prototyped — not full occlusion-aware traversal",
+    "Heatmap = mesh material override prototype — not custom GLSL shader",
+    "Timeline = storyboard — not topological procedure engine",
+    "Mass/axle = disabled — not demonstration engineering results",
+    "Multi-dimension maturity required — single badge insufficient"
+  ],
+  "next_milestone": "Map real GLB or higher-fidelity meshes to ≥5 comp_ids; orbit, hover, select, isolate, search-frame, evidence panel — no invented mass/VERIFIED geometry",
+  "recommended_decision": "VPR2_PROTOTYPE_CLAIMS_CORRECTED_NEXT_IS_REAL_MESH",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "geometry_extraction_authorized": false,
+  "kernel_mutation": false
+}

@@ -658,3 +658,24 @@ DT-D059 — `FIVE_STORE_SCALE_PATH_PLUS_VIEWER_MODES`.
 
 DT-D060 — `R2_NORMALIZED_HOVER_FIRST_MASS_ENGINE_BLOCKED`.
 
+---
+
+## RL-030 — VPR-2 claim corrections
+
+- **Date:** 2026-07-21
+- **Layer:** honesty / prototype labeling
+- **Agent:** Cursor Cloud Agent
+- **Question:** Are VPR-2 production / 5-DB / shader / physics claims accurate?
+
+### Findings
+
+1. Operator assessment accepted — architecture strong; claims overstated.
+2. Honest label: **Architecture and Interaction Prototype**.
+3. Domains = tables not microservices; SQL schema drafted.
+4. R3F procedural truck kept; camera Box3 framing improved; multi-maturity statuses added.
+5. Mass/axle disabled; storyboard labeled; next milestone = real mesh/GLB mapping.
+
+### Status
+
+DT-D061 — `VPR2_PROTOTYPE_CLAIMS_CORRECTED_NEXT_IS_REAL_MESH`.
+

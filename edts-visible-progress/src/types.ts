@@ -107,6 +107,13 @@ export interface TwinComponent {
   geo_id: string
   evd_id: string
   sim_id: string
+  maturity: {
+    identity_status: string
+    geometry_status: string
+    placement_status: string
+    mass_status: string
+    interface_status: string
+  }
 }
 
 export interface SceneTreeNode {
@@ -131,6 +138,7 @@ export interface TimelineDoc {
   id: string
   title: string
   honesty: string
+  kind?: string
   steps: TimelineStep[]
 }
 
@@ -173,9 +181,10 @@ export interface Catalog {
   states: VehicleState[]
   scene_tree: SceneTreeNode[]
   search_aliases: Record<string, string[]>
-  chrome_policy: string
-  components: TwinComponent[]
-}
+    chrome_policy: string
+    components: TwinComponent[]
+    prototype_status?: Record<string, string>
+  }
 
 /** Handoff badge / confidence heatmap colors. */
 export const BADGE_COLORS: Record<DataStatus, string> = {

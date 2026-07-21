@@ -1,7 +1,7 @@
 {
-  "release": "EDTS_VISIBLE_PROGRESS_R2",
-  "decision": "DT-D060",
-  "schema": "edts-r2-normalized-6db-v1",
+  "release": "EDTS_VPR2_ARCHITECTURE_INTERACTION_PROTOTYPE",
+  "decision": "DT-D061",
+  "schema": "edts-vpr2-prototype-normalized-tables-v1",
   "architecture": [
     "COMP",
     "GEO",
@@ -64,11 +64,32 @@
       "VERIFIED/PHYSICALLY_MEASURED badges without evidence",
       "110 kWh / 250 kW product claims",
       "Aluminum cab / 6.7L definitive without instance lock"
+    ],
+    "vpr2_claim_corrections": [
+      "Not production-ready",
+      "Not five independent database services",
+      "Not a photoreal GLB truck yet — procedural R3F placeholders",
+      "Timeline is storyboard, not topological procedure engine",
+      "Mass/CG axle loads disabled until coverage complete",
+      "Multi-dimension maturity replaces single-badge overclaim"
     ]
   },
   "states": [
     "FACTORY_ICE",
     "DECONSTRUCTION",
     "EV_PROPOSAL"
-  ]
+  ],
+  "prototype_status": {
+    "label": "EDTS VPR-2 Architecture and Interaction Prototype",
+    "data_domain_separation": "PROTOTYPED_IN_MEMORY_JSON",
+    "real_database_persistence": "NOT_IMPLEMENTED",
+    "relationship_graph": "PROTOTYPED_EDGE_LIST_JSON",
+    "three_js_scene": "IMPLEMENTED_PROCEDURAL_MESHES_NO_GLB",
+    "smart_camera_traversal": "PROTOTYPED_ANCHOR_AND_BOX3",
+    "physics_engine": "DISABLED_UNTIL_MASS_COVERAGE",
+    "procedure_engine": "STORYBOARD_ONLY",
+    "confidence_visualization": "MESH_MATERIAL_OVERRIDE_PROTOTYPE",
+    "microservices": "NOT_ADOPTED_USE_NORMALIZED_TABLES"
+  },
+  "architecture_note": "Six domain TABLES (COMP/GEO/EVD/EGS/SIM/UI) in one persistence target — not six independent database services."
 }

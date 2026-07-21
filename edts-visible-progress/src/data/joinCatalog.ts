@@ -82,6 +82,13 @@ export function joinCatalog(): Catalog {
       mass_kg: (s.mass_kg as number | null) ?? null,
       cg_m: (s.cg_m as number[] | null) ?? null,
       mass_status: String(s.mass_status ?? 'UNKNOWN'),
+      maturity: (e.maturity as TwinComponent['maturity']) ?? {
+        identity_status: 'UNKNOWN',
+        geometry_status: 'PLACEHOLDER',
+        placement_status: 'UNKNOWN',
+        mass_status: 'UNKNOWN',
+        interface_status: 'UNKNOWN',
+      },
       known_interfaces,
       dependency_highlights: { blocks_access_to, must_disconnect_before },
       geometry_role: String(g.geometry_role ?? 'unknown'),
@@ -103,6 +110,7 @@ export function joinCatalog(): Catalog {
     search_aliases: uiStore.search_aliases as Record<string, string[]>,
     chrome_policy: String(uiStore.chrome_policy),
     components,
+    prototype_status: (manifest as { prototype_status?: Record<string, string> }).prototype_status,
   }
 }
 

@@ -221,6 +221,7 @@ function Selectable({
     <group
       ref={groupRef}
       position={pos}
+      userData={{ compId: component.id, geometryRole: component.geometry_role }}
       onClick={(e: ThreeEvent<MouseEvent>) => {
         e.stopPropagation()
         onSelect(component.id)
@@ -281,6 +282,7 @@ function FramePart(p: PartProps) {
   const y = 0.55
   const z = FRAME_W / 2
   const midX = (FRONT_BUMPER_X + REAR_AXLE_X - 1.2) / 2
+  const aftEnd = REAR_AXLE_X - 1.2
   return (
     <Selectable {...p} position={[0, 0, 0]}>
       <mesh position={[midX, y, z]} castShadow>
@@ -297,6 +299,15 @@ function FramePart(p: PartProps) {
           <Mat {...p} />
         </mesh>
       ))}
+      {/* Aft chassis-cab open rails — silhouette cue for CA/body builder zone */}
+      <mesh position={[(BACK_OF_CAB_X + aftEnd) / 2, y + 0.08, z]} castShadow>
+        <boxGeometry args={[Math.abs(BACK_OF_CAB_X - aftEnd), 0.06, 0.06]} />
+        <Mat {...p} />
+      </mesh>
+      <mesh position={[(BACK_OF_CAB_X + aftEnd) / 2, y + 0.08, -z]} castShadow>
+        <boxGeometry args={[Math.abs(BACK_OF_CAB_X - aftEnd), 0.06, 0.06]} />
+        <Mat {...p} />
+      </mesh>
     </Selectable>
   )
 }
@@ -304,14 +315,27 @@ function FramePart(p: PartProps) {
 function CabPart(p: PartProps) {
   const cabLen = BOC - FRONT_OH * 0.15
   const cabX = (FRONT_BUMPER_X + BACK_OF_CAB_X) / 2 - 0.15
+  const hoodLen = FRONT_OH * 0.55
   return (
     <Selectable {...p} position={[cabX, 1.15, 0]}>
+      {/* Cab shell */}
       <RoundedBox args={[cabLen * 0.55, 1.15, TRACK * 0.85]} radius={0.06} castShadow>
         <Mat {...p} />
       </RoundedBox>
+      {/* Windshield plane */}
       <mesh position={[0.35, 0.25, 0]}>
         <boxGeometry args={[cabLen * 0.28, 0.55, TRACK * 0.78]} />
         <meshStandardMaterial color={COLORS.glass} transparent opacity={0.28} />
+      </mesh>
+      {/* Hood — still placeholder, improves truck silhouette */}
+      <mesh position={[cabLen * 0.28 + hoodLen * 0.35, -0.25, 0]} castShadow>
+        <boxGeometry args={[hoodLen, 0.35, TRACK * 0.72]} />
+        <Mat {...p} />
+      </mesh>
+      {/* Front bumper bar */}
+      <mesh position={[cabLen * 0.28 + hoodLen * 0.85, -0.55, 0]} castShadow>
+        <boxGeometry args={[0.12, 0.22, TRACK * 0.9]} />
+        <Mat {...p} />
       </mesh>
     </Selectable>
   )
@@ -605,8 +629,8 @@ function Vehicle() {
 }
 
 function FocusCamera() {
-  const { focusTarget, focusNonce, catalog } = useDemo()
-  const { camera } = useThree()
+  const { focusTarget, focusNonce } = useDemo()
+  const { camera, scene } = useThree()
   const controls = useThree((s) => s.controls) as unknown as {
     target: THREE.Vector3
     update: () => void
@@ -621,23 +645,32 @@ function FocusCamera() {
 
   useEffect(() => {
     if (!focusTarget) return
-    const comp = catalog.components.find((c) => c.id === focusTarget)
-    if (!comp) return
-    const anchor = ROLE_ANCHOR[comp.geometry_role] ?? [0, 0.8, 0]
-    const target = new THREE.Vector3(...anchor)
-    const offset = new THREE.Vector3(3.2, 2.1, 3.4)
+    let obj: THREE.Object3D | null = null
+    scene.traverse((o) => {
+      if (o.userData?.compId === focusTarget) obj = o
+    })
+    if (!obj) return
+
+    const box = new THREE.Box3().setFromObject(obj)
+    const sphere = new THREE.Sphere()
+    box.getBoundingSphere(sphere)
+    const target = sphere.center.clone()
+    const dist = Math.max(sphere.radius * 3.2, 2.4)
+    const dir = new THREE.Vector3(0.85, 0.45, 0.9).normalize()
+    const toCam = target.clone().add(dir.multiplyScalar(dist))
+
     anim.current = {
       fromCam: camera.position.clone(),
-      toCam: target.clone().add(offset),
+      toCam,
       fromTarget: controls?.target.clone() ?? new THREE.Vector3(0, 0.8, 0),
       toTarget: target,
       t: 0,
     }
-  }, [focusTarget, focusNonce, catalog.components, camera, controls])
+  }, [focusTarget, focusNonce, camera, controls, scene])
 
   useFrame((_, dt) => {
     if (!anim.current) return
-    anim.current.t = Math.min(1, anim.current.t + dt * 1.6)
+    anim.current.t = Math.min(1, anim.current.t + dt * 1.55)
     const k = 1 - Math.pow(1 - anim.current.t, 3)
     camera.position.lerpVectors(anim.current.fromCam, anim.current.toCam, k)
     if (controls) {

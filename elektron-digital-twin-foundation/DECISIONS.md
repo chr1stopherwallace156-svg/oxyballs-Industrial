@@ -1025,3 +1025,21 @@ Append-only record of digital twin foundation decisions.
   6. Photoreal STEP/LOD pipeline deferred
 
 ---
+
+## DT-D061 — VPR-2 claim corrections (prototype honesty)
+
+- **Change-control record:** [`decisions/DT-D061_VPR2_CLAIM_CORRECTIONS.json`](decisions/DT-D061_VPR2_CLAIM_CORRECTIONS.json)
+- **decision_id:** `DT-D061`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-030`
+- **recommended_decision:** `VPR2_PROTOTYPE_CLAIMS_CORRECTED_NEXT_IS_REAL_MESH`
+- **decision:**
+  1. Relabel as **Architecture and Interaction Prototype** — not completed Release 2
+  2. Six domains = normalized **tables** in one DB — not independent microservices
+  3. Keep R3F procedural truck; do not regress to CSS cards
+  4. Multi-dimension maturity (identity/geometry/placement/mass/interface)
+  5. Mass/axle outputs disabled; timeline = storyboard; heatmap = material override prototype
+  6. Next milestone: map real GLB/meshes to ≥5 components with orbit/select/search/inspect
+
+---

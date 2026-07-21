@@ -2,7 +2,7 @@
   "store": "UI",
   "schema": "edts-r2-ui-v1",
   "primary_key": "view_id",
-  "chrome_policy": "APPLE_HOVER_FIRST",
+  "chrome_policy": "HOVER_FIRST_PROTOTYPE",
   "default_viewport": "CLEAN_NO_LABELS",
   "hover_reveals": [
     "name_tag",
@@ -280,5 +280,6 @@
     "HEATMAP",
     "TIMELINE",
     "SIMULATION"
-  ]
+  ],
+  "claim_level": "PROTOTYPE_NOT_PREMIUM_FINAL"
 }

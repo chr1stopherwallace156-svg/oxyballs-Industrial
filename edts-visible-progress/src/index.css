@@ -1108,3 +1108,41 @@ body,
 .timeline-rail.surgery {
   border-radius: 14px;
 }
+
+.maturity-grid {
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.maturity-grid > div {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 8px;
+  font-size: 0.72rem;
+  border-bottom: 1px solid rgba(120, 170, 200, 0.1);
+  padding-bottom: 4px;
+}
+
+.maturity-grid dt {
+  color: var(--muted);
+}
+
+.maturity-grid dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  word-break: break-word;
+  color: #cbd5e1;
+}
+
+.storyboard-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  padding: 1px 5px;
+  margin-right: 6px;
+}

@@ -6,16 +6,16 @@ All notable changes to the digital twin foundation. Append-only.
 
 ### Added
 
-- **DT-D060 / RL-029** — Visible Progress R2 normalized COMP/GEO/EVD/EGS/SIM/UI + hover-first UI + null-safe mass engine
-- **DT-D059 / RL-028** — Five-store data architecture + Timeline / Search / Heatmap / Simulation scaffold
-- **DT-D058 / RL-027** — EDTS Visible Progress Release 1 (provisional interactive 3D demonstrator)
-- App: `edts-visible-progress/` (Vite + React Three Fiber)
+- **DT-D061 / RL-030** — VPR-2 claim corrections; multi-maturity; SQL schema draft; prototype status matrix
+- **DT-D060 / RL-029** — Normalized COMP/GEO/EVD/EGS/SIM/UI + hover-first UI
+- **DT-D059 / RL-028** — Timeline / Search / Heatmap / Simulation scaffold
+- **DT-D058 / RL-027** — Visible Progress R1 interactive 3D demonstrator
 
 ### Status
 
-- Visible Progress: **R2** provisional visual (not VERIFIED geometry; L10 demo not authorized)
-- Simulation mass/CG: **BLOCKED_UNTIL_MASS_EVIDENCE**
-- Mission D L1 + WSM/EWD continue in parallel
+- Visible Progress: **Architecture & Interaction Prototype** (not production Release 2)
+- Next visual milestone: **real mesh/GLB mapping** on existing R3F scene
+- Mass/axle: **DISABLED** · Timeline: **STORYBOARD**
 
 ## 2026-07-16
 

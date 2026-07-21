@@ -5,15 +5,16 @@
 
 | Concern | Status |
 |---|---|
-| Visible Progress | **R2** (DT-D060) COMP/GEO/EVD/EGS/SIM/UI |
-| Hover-first viewport | Active |
-| Mass / CG engine | **Blocked** until measured SIM |
-| Invented sample masses | **Rejected** |
-| Photoreal truck | Deferred |
-| Fabricated L1 dump | **DT-D057 REJECTED** |
-| Procedures | **BLOCKED** |
+| Visible Progress | **VPR-2 Architecture & Interaction Prototype** (DT-D061) |
+| Claims | Corrected — not production-ready |
+| Persistence | SQL schema drafted; JSON in-memory prototype |
+| Microservices | **Not adopted** |
+| R3F scene | Procedural truck meshes (no GLB yet) |
+| Mass / axle | **Disabled** |
+| Timeline | Storyboard only |
+| Next milestone | Map real GLB/meshes to ≥5 components |
 | Kernel | Unchanged |
 
 ## Change-control
 
-- `decisions/DT-D030_*.json` … `DT-D060_*.json`
+- `decisions/DT-D030_*.json` … `DT-D061_*.json`
