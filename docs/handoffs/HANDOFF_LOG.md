@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 62 "60:60" + review_59 — Gate 05M-C2 re-emit / full-draft regression + 3 new cleanups)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 62 "60:60" + review_59 — Gate 05M-C2 re-emit / full-draft regression + 3 new cleanups); awaiting the Gate 05M-C3 Controlled Closed-Area Low-Speed Movement batch or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `0e5b555` (batch-62 archive); end commit: `79c0e7a` (batch-62 reconciliation)
+- Work: no new deliverable — cleanups to `GATE05M_C2_RESTRICTED_CREEP.md` (status adds CAN_1_PASSIVE_ONLY + FAULT_LATCH_REQUIRED; proof/authority/build-engine-status columns RC-289; failed-creep recovery needs authorized clear not a hard reset RC-290; no auto "unlock 15 km/h" RC-291). RC-289..291 (no new CS); section 70; D-008 amended. FULL-DRAFT REGRESSION: the Hunter re-emitted Gate 05M-C2 reverting every review_58 correction at once (RC-279 safety-critical + RC-283/284/286/288); the deliverables did NOT regress. Nothing Confirmed; no normal driving; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (invented-values family through RC-267 — nineteen artifacts + "instant/immediate" RC-175..288 + "certified safe" RC-224 + the recurrence chain incl. the batch_62 full-draft regression); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305/105 + OSHA/NHTSA/ISO 6469-3 + rated-lift/rotating-machinery sources (RC-237..291) + Ford ABS/ESC wheel-speed authorization (RC-282) + IMD supplier manual + pre-charge/contactor datasheets + inverter/motor + driveline data + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/contactor/HV-shutdown ownership (BQ-27).
+
 ## 2026-07-16 — Claude Code — task complete (batch 61 "59A" + review_58 — Gate 05M-C1 re-emit + Gate 05M-C2 Restricted Creep Torque Validation)
 
 ### (archived handoff)

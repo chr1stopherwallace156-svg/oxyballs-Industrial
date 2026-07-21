@@ -4775,3 +4775,56 @@ Owner: **Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement** (unchanged;
   227; BQ-27); never "certified safe" (RC-224).
 - Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
   no customer operation; no compliance/certification claim; ODRs untouched.
+
+## 71. Batch 63 ("61:75") + owner review_60 — Gate 05M-C1/05M-C2 re-emit (continued regression, NO new corrections) (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_63_gate05mc1_mc2_reemit_regression.md`
+and `docs/research/raw/owner_reviews/review_60_batch_63_verdict.md`.
+**Row additions: NONE.** No new deliverable, no new RC rows, no deliverable
+changes. Owner: "the direction is right, but this draft did not fully apply the
+last cleanup yet … a few hard safety wording issues that need to be fixed
+before baselining 05M-C2."
+
+### Continued regression — no new corrections
+
+The Hunter re-emitted Gate 05M-C1 + Gate 05M-C2 and **still carries the same
+previously-corrected defects**: 05M-C1-005 "hand-lock one lifted wheel"
+(RC-279 — SAFETY-CRITICAL, its **third recurrence** in the ground-movement
+series), `dQ/dt` (RC-284), "absolute 0 Nm" (RC-288), the E-stop "immediate
+stop" (RC-288), the neutral-interrupt "immediately revoke" (RC-288), "hard
+reset" recovery (RC-290), rollback inside the first gate (RC-286), and no
+Proof/Authority/Build-Engine-Status columns (RC-289). The Hunter DID apply
+wheel-speed read-only (RC-282) and a couple of response-window phrasings. The
+owner re-issued the **identical eight corrections** — every one already applied
+to the deliverables. **No RC rows are added (they would be duplicates of
+RC-279/282/283/284/286/288/289/290/291); the deliverables
+`GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md` + `GATE05M_C2_RESTRICTED_CREEP.md`
+already hold the corrected wording and did NOT regress.**
+
+### Regression-scanner significance (M10)
+
+This is now the third time RC-279 (a genuine physical-safety hazard —
+"hand-lock one lifted wheel") has recurred in the ground-movement series, and
+the second consecutive full-draft regression of Gate 05M-C2. The corrected
+wording lives only in the deliverables, not in the Hunter output — the strongest
+standing case for the owner's M10 forbidden-phrase/regression scanner. Recorded
+here (and in PROVENANCE) as an evidence-tracked recurrence, with no register
+inflation.
+
+### Next
+
+Owner: **Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement** (unchanged;
+15 km/h is INITIAL_TARGET_PROFILE, RC-291 — no auto-unlock). Queued in
+`GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- No deliverable changed; the corrected 05M-C1/05M-C2 wording holds
+  (RC-279/282/283/284/286/288/289/290/291); first powered ground contact,
+  restricted creep only, predictable-traction closed surface, Ground Movement
+  Precondition (RC-285), CAN_1 listen-only (RC-172/230), wheel-speed read-only
+  (RC-282), no auto retry after E-stop (RC-262), every number
+  INITIAL_TARGET_PROFILE (RC-267); never "certified safe" (RC-224).
+- Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
+  no customer operation; no compliance/certification claim; ODRs untouched.

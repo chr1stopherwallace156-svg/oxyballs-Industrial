@@ -4,60 +4,56 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-16
-- Reason for handoff: task complete (batch 62 "60:60" + review_59 — Gate
-  05M-C2 re-emit / full-draft regression + 3 new cleanups); awaiting the Gate
-  05M-C3 Controlled Closed-Area Low-Speed Movement batch or a supplier reply
+- Reason for handoff: task complete (batch 63 "61:75" + review_60 — Gate
+  05M-C1/05M-C2 re-emit; continued regression, NO new corrections); awaiting
+  the Gate 05M-C3 Controlled Closed-Area Low-Speed Movement batch or a supplier
+  reply
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `0e5b555` — Archive raw RH batch 62 + review_59 1:1
+- Start commit: `54625c0` — Archive raw RH batch 63 + review_60 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- **No new deliverable** — cleanups to **`docs/status/GATE05M_C2_RESTRICTED_CREEP.md`**:
-  status adds `CAN_1_PASSIVE_ONLY` + `FAULT_LATCH_REQUIRED`; the matrix now
-  documents Proof Artifact + Authority Status + Build Engine Status columns
-  (RC-289); the 05M-C2C faulted-creep recovery requires diagnostic review +
-  fault-source correction + approved service clear + engineering/test-lead
-  authorization, not a hard reset (RC-290); the exit authorization no longer
-  auto-"unlocks 15 km/h" — engineering review only, speed ceiling
-  INITIAL_TARGET_PROFILE (RC-291).
-- Files changed (reconciliation commit): that deliverable,
-  `docs/DECISION_REGISTER.md` (**D-008 amended** — review_59 cleanups +
-  full-draft regression watch), `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md`
-  (RC-289..291; section 70 — no new CS), `docs/roadmaps/GATE_RESEARCH_QUEUE.md`
-  (05M-C2 status → review_59), `docs/CHANGELOG.md`, handoff files. (Raw archives
-  `batch_62_gate05mc2_reemit_regression.md`, `review_59_batch_62_verdict.md`,
-  PROVENANCE committed separately as `0e5b555`.)
-- Summary: **FULL-DRAFT REGRESSION.** The Hunter re-answered the Gate 05M-C2
-  question with a draft that **lost every review_58 correction at once** —
-  low-friction surface (RC-283), `dQ/dt` (RC-284), "absolute 0 Nm" + "immediate
-  stop" (RC-288), rollback in the first gate (RC-286), and the 05M-C1
-  "hand-lock one lifted wheel" line (RC-279 — SAFETY-CRITICAL). The owner
-  re-issued every correction; the `GATE05M_C2_*` + `GATE05M_C1_*` deliverables
-  already held the corrected wording and did NOT regress. Three genuinely new
-  corrections applied: **proof/authority/build-engine-status columns (RC-289)**;
-  **failed-creep recovery needs authorized clear, not a hard reset (RC-290)**;
-  **no auto "unlock 15 km/h" (RC-291)**. This is the strongest M10
-  regression-scanner case in the series (an entire gate draft reverting to a
-  pre-correction version). **Nothing ingested; nothing Confirmed; no normal
-  driving; no public road; no customer operation; no "certified safe"/
+- **No new deliverable, no new RC rows, no deliverable changes** — this batch
+  is a **continued regression** with no new corrections. The Hunter re-emitted
+  Gate 05M-C1 + Gate 05M-C2 and **still carries the previously-corrected
+  defects**: 05M-C1-005 "hand-lock one lifted wheel" (RC-279 — SAFETY-CRITICAL,
+  third recurrence), `dQ/dt` (RC-284), "absolute 0 Nm" (RC-288), "immediate
+  stop" (RC-288), "immediately revoke" (RC-288), "hard reset" recovery
+  (RC-290), rollback in the first gate (RC-286), missing evidence columns
+  (RC-289), and auto "15 km/h" in the 05M-C3 preview (RC-291). The owner
+  re-issued the identical eight corrections — every one already applied to the
+  deliverables in prior batches.
+- Files changed (reconciliation commit):
+  `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (section 71 — a
+  recurrence note, **no new RC rows**), `docs/CHANGELOG.md`, handoff files.
+  (Raw archives `batch_63_gate05mc1_mc2_reemit_regression.md`,
+  `review_60_batch_63_verdict.md`, PROVENANCE committed separately as
+  `54625c0`.) No changes to `GATE05M_C1_*` / `GATE05M_C2_*` (already correct),
+  `DECISION_REGISTER.md`, `RESEARCH_MAP.md`, or `GATE_RESEARCH_QUEUE.md`.
+- Summary: I archived the re-emit 1:1 as evidence and recorded the recurrence
+  against the existing RC-279/282/283/284/286/288/289/290/291 — **no duplicate
+  RC rows** (register integrity). The deliverables already hold the corrected
+  wording and did NOT regress. This is the third RC-279 (physical-safety-hazard)
+  recurrence and the continued full-draft regression pattern — the strongest
+  standing M10 regression-scanner case. **Nothing ingested; nothing Confirmed;
+  no normal driving; no public road; no customer operation; no "certified safe"/
   compliance claim; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_62/review_59 archives are 1:1 against the owner's
-  chat ("60:60"); the full-draft regression is recorded (RC-279/283/284/286/288
-  re-emitted, deliverables unchanged); the three new RC-289..291 corrections +
-  the CAN_1_PASSIVE_ONLY/FAULT_LATCH_REQUIRED status additions match the owner's
-  verdict; nothing marked Confirmed; no movement authorized
+- Verified vs claimed: batch_63/review_60 archives are 1:1 against the owner's
+  chat ("61:75"); the continued regression is recorded (RC-279/283/284/286/288/
+  289/290/291 re-emitted, deliverables unchanged, no new corrections, no new RC
+  rows); nothing marked Confirmed; no movement authorized
 
 ## State
 

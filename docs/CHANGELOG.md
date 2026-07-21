@@ -5,6 +5,31 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 63 ("61:75") + review_60: Gate 05M-C1/05M-C2 re-emit (continued regression, no new corrections)
+
+- Archived batch_63 (Gate 05M-C1 + 05M-C2 re-emit) and review_60 1:1 (commit
+  `54625c0`). **No new RC rows, no new deliverable, no deliverable changes** —
+  RH01 section 71 records the recurrence only. Owner: "the direction is right,
+  but this draft did not fully apply the last cleanup yet."
+- **Continued regression:** the Hunter re-emitted both gates and **still carries
+  the previously-corrected defects** — 05M-C1-005 "hand-lock one lifted wheel"
+  (RC-279 — SAFETY-CRITICAL, third recurrence), `dQ/dt` (RC-284), "absolute
+  0 Nm" (RC-288), "immediate stop" (RC-288), "immediately revoke" (RC-288),
+  "hard reset" recovery (RC-290), rollback in the first gate (RC-286), missing
+  evidence columns (RC-289), auto "15 km/h" in the 05M-C3 preview (RC-291). The
+  owner re-issued the identical eight corrections — all already applied. The
+  deliverables `GATE05M_C1_*` + `GATE05M_C2_*` did NOT regress.
+- No register inflation: adding duplicate RC rows for already-recorded
+  corrections would violate register integrity, so the recurrence is tracked
+  in PROVENANCE + RH01 section 71 against the existing
+  RC-279/282/283/284/286/288/289/290/291. This is the strongest standing M10
+  regression-scanner case (three RC-279 recurrences + two consecutive
+  full-draft 05M-C2 regressions).
+- RESEARCH_MAP + GATE_RESEARCH_QUEUE next remains → **Gate 05M-C3** (Controlled
+  Closed-Area Low-Speed Movement; 15 km/h INITIAL_TARGET_PROFILE, no
+  auto-unlock). Nothing Confirmed; no normal driving; no public road; no
+  customer operation; never "certified safe" (RC-224); ODRs untouched.
+
 ## 2026-07-16 — RH batch 62 ("60:60") + review_59: Gate 05M-C2 re-emit (full-draft regression) + 3 new cleanups
 
 - Archived batch_62 (Gate 05M-C2 re-emit) and review_59 1:1 (commit
