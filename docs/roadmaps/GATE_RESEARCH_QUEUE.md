@@ -749,7 +749,7 @@ post-edit label
 procedure is ready to be reviewed and controlled, not physical-pass evidence.
 Permits **Gate 05M-C3 only** (after 05M-C2A/B/C).
 
-## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: REVISION 06 — core governance architecture mature, ready for controlled specification freeze (owner review_70, batch_74)
+## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: REVISION 07 — safety architecture mature + relational-schema doctrine defined, ready for controlled specification freeze (owner review_71, batch_75)
 
 Deliverable `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md` — the **last rung of
 the split 05M-C phase**, only after Gate 05M-C2 is proven. Built as **five linear
@@ -844,6 +844,25 @@ SCOPE_LIMITATION_NO_REUSE_DEFINED`; post-edit label
 `GATE_05M_C3_REVISION_06_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE`. The owner's
 downstream `DATABASE_SCHEMA_IMPLEMENTATION → RULE_ENGINE_TESTS → HIL_VALIDATION` is
 M10/production work NOT performed during Rev 07 ingestion.
+**Revision 07 (review_71, RC-398..411):** the owner regressed the status to
+`NOT_READY_FOR_SCHEMA_FREEZE` over schema-normalization + status-model defects, then
+14 corrections re-reached freeze readiness — additional test-distance bounds
+(RC-398); status-dependent validation (RC-399); arrays → junction tables (RC-400);
+derived L_min membership + frozen snapshot (RC-401); `authority_status` enum +
+approver reference (RC-402); complete independent-sensor failure response (RC-403);
+E-stop per-outcome result decomposition (RC-404); paired-fault component FK →
+`VehicleComponentInstance` not `DistanceComponent` (RC-405); one-to-many
+test-attempt model (RC-406); test-result attempt identity + applicability (RC-407);
+explicit allowed-transition table + no `ACTIVE→COMPLETED` edge (RC-408);
+cross-record configuration equality (RC-409); append-only INSERT-only enforcement
+(RC-410); exact-binding scope statement (RC-411). Owner items 1/2/5/6/10/11 targeted
+the Hunter's OCR-corrupted copy or restated already-applied rules. RC-400/406/407/409/410
++ the downstream `DATABASE MIGRATION → RULE ENGINE IMPLEMENTATION → AUTOMATED
+CONSTRAINT TESTING → SIL/HIL EVIDENCE` are relational-schema doctrine only — NOT
+built as M10/production code during ingestion. Status becomes
+`FORMAL_BASELINE_CANDIDATE / SAFETY_ARCHITECTURE_MATURE / REVISION_07_APPLIED /
+RELATIONAL_SCHEMA_DOCTRINE_DEFINED / … / EXACT_BINDING_SCOPE_DEFINED`; post-edit
+label `GATE_05M_C3_REVISION_07_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE`.
 **NEXT = 05M-C3A execution + Envelope Cell 1 authorization (signed
 `TestCellAuthorization_ID`).** The Hunter's "15 km/h" is an
 `INITIAL_TARGET_PROFILE` pending supplier + engineering approval

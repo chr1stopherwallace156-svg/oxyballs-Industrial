@@ -13,6 +13,55 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-21 — Claude Code — batch 74 ("72:75") + review_70: Gate 05M-C3 Revision 06 (RC-383..397)
+
+### Session
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-21
+- Reason for handoff: task complete (RH batch 74 "72:75" + owner review_70 — Gate
+  05M-C3 Revision 06; 15 corrections RC-383..397 applied); awaiting the 05M-C3A
+  execution / Envelope-Cell-1 batch or a supplier reply
+
+### Git state
+
+- Branch: `claude/docs-structure-large-projects-b6vxx5`
+- Agent owner: Claude Code (single-writer rule, AGENTS.md)
+- Start commit: `531671f` — Archive RH batch 74 + owner review_70 1:1
+- End commit: `9d6ed8f` — Reconcile RH batch 74 + review_70 (RC-383..397)
+- Working tree at handoff: clean (everything committed)
+
+### Work performed
+
+- RH batch 74 ("72:75") + owner review_70 — Gate 05M-C3 Revision 06. Owner placed
+  it "at formal baseline-candidate quality … strong, deterministic,
+  database-centered"; 17 items → 15 new corrections (owner items 1 & 3 targeted the
+  Hunter's OCR/typographical text only). Applied RC-383..397 to
+  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`: complete overlap enforcement + full
+  movement-block conditions (383); `allowed_steering_band` bounded record + angle
+  frame (384); unit controlled enum + canonical-SI (385); activation preconditions
+  + single-ACTIVE (386); COMPLETED → execution status, three enums separated (387);
+  EXPIRED state (388); ProcedureApproval_ID signed record (389); C3A-008 E-stop
+  raw-trace (390); IndependentSensorHealthResult schema (391); deterministic
+  three-axis steering resolution (392); per-state steering recovery (393);
+  FaultExecutionAuthorization lifecycle fields (394); paired faults keyed by exact
+  fault IDs (395); database FK enforcement (396); scope-limitation no-reuse (397).
+  RH01 RC-383..397 + section 83; D-008 amendment (review_70); RESEARCH_MAP,
+  GATE_RESEARCH_QUEUE, CHANGELOG updated. Deliverable relabelled
+  `GATE_05M_C3_REVISION_06_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE`. Captured the
+  DB-FK enforcement + owner's downstream schema/rule-engine/HIL sequence as
+  DOCTRINE only, not M10/production code.
+- Nothing ingested; nothing Confirmed; no normal driving; no public road; no
+  customer operation; no "certified safe"/compliance claim; ODRs untouched.
+
+### Note
+
+Full state snapshot, doctrine chain (RC-168..397), open owner decisions, forbidden
+actions, and the receiving-agent checklist are forward-carried into the batch-75
+`CURRENT_HANDOFF.md`; this entry records the batch-74 delta.
+
+---
+
 ## 2026-07-21 — Claude Code — batch 73 ("71:75") + review_69: Gate 05M-C3 Revision 05 (RC-369..382)
 
 ### Session

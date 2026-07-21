@@ -4,8 +4,8 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-21
-- Reason for handoff: task complete (RH batch 74 "72:75" + owner review_70 — Gate
-  05M-C3 Revision 06; 15 corrections RC-383..397 applied to
+- Reason for handoff: task complete (RH batch 75 "73:75" + owner review_71 — Gate
+  05M-C3 Revision 07; 14 corrections RC-398..411 applied to
   `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`); awaiting the 05M-C3A execution /
   Envelope-Cell-1 batch or a supplier reply
 
@@ -13,50 +13,52 @@
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `531671f` — Archive RH batch 74 + owner review_70 1:1
+- Start commit: `ac612a2` — Archive RH batch 75 + owner review_71 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- **RH batch 74 ("72:75") + owner review_70 — Gate 05M-C3 Revision 06.** The owner
-  re-issued the review_69 corrections, delivered the Hunter's re-emit ("Global
-  Engineering Safety Amendments (Revision 05)"), and gave a detailed verdict
-  placing Gate 05M-C3 "at formal baseline-candidate quality … strong,
-  deterministic, database-centered." 17 items → **15 new corrections** (owner items
-  1 & 3 targeted the Hunter's OCR/typographical text only — already clean/canonical
-  in the deliverable, RC-340/351 + canonical field names):
-  - Archived 1:1 (commit `531671f`): `research_hunter/batch_74_gate05mc3_revision05_amendments.md`,
-    `owner_reviews/review_70_batch_74_verdict.md`, new PROVENANCE row (newest-first).
-  - **Applied RC-383..397 to `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`:**
-    complete overlap enforcement + full `PHYSICAL_MOVEMENT_BLOCKED` conditions
-    (RC-383); `allowed_steering_band` bounded min/max record + angle frame
-    (RC-384); `unit` controlled enum + canonical-SI comparison (RC-385);
-    `AUTHORIZED → ACTIVE` activation preconditions + single-ACTIVE rule (RC-386);
-    `COMPLETED` moved to execution status, three status enums separated (RC-387);
-    `EXPIRED` authorization state (RC-388); `ProcedureApproval_ID` signed record
-    (RC-389); C3A-008 E-stop raw-trace timestamps (RC-390);
-    `IndependentSensorHealthResult` schema + invalid-channel → UNKNOWN (RC-391);
-    deterministic three-axis steering resolution (RC-392); per-state steering
-    recovery model (RC-393); `FaultExecutionAuthorization_ID` lifecycle fields
-    (RC-394); paired faults keyed by exact fault IDs (RC-395); database
-    foreign-key enforcement (RC-396); scope-limitation no-reuse clause (RC-397).
-  - **RH01 RC-383..397 + section 83; D-008 amendment (review_70); RESEARCH_MAP,
-    GATE_RESEARCH_QUEUE, CHANGELOG** updated. Deliverable relabelled
-    `GATE_05M_C3_REVISION_06_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE`.
-- **Guardrails applied:** every schema field / unit enum / status enum stays
+- **RH batch 75 ("73:75") + owner review_71 — Gate 05M-C3 Revision 07.** The owner
+  re-issued the review_70 corrections, delivered the Hunter's re-emit ("Global
+  Engineering Safety Amendments (Revision 06)", delivered twice — a cleaner copy +
+  an OCR-corrupted copy), and gave a detailed verdict that **regressed the status
+  to `FORMAL_BASELINE_CANDIDATE / NOT_READY_FOR_SCHEMA_FREEZE`** over
+  implementation-level defects (schema normalization, missing rule restoration,
+  status-model cleanup). 20 items → **14 new corrections** (owner items 1, 2, 5, 6,
+  10, 11 targeted the Hunter's OCR-corrupted copy or restated already-applied
+  rules):
+  - Archived 1:1 (commit `ac612a2`): `research_hunter/batch_75_gate05mc3_revision06_schema.md`,
+    `owner_reviews/review_71_batch_75_verdict.md`, new PROVENANCE row (newest-first).
+  - **Applied RC-398..411 to `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`:**
+    additional test-distance bounds (RC-398); status-dependent validation (RC-399);
+    arrays → junction tables (RC-400); derived L_min membership + frozen snapshot
+    (RC-401); `authority_status` enum + approver reference (RC-402); complete
+    independent-sensor failure response (RC-403); E-stop per-outcome result
+    decomposition (RC-404); paired-fault component FK → `VehicleComponentInstance`
+    not `DistanceComponent` (RC-405); one-to-many test-attempt model (RC-406);
+    test-result attempt identity + applicability (RC-407); explicit
+    allowed-transition table + no `ACTIVE→COMPLETED` edge (RC-408); cross-record
+    configuration equality (RC-409); append-only INSERT-only enforcement (RC-410);
+    exact-binding scope statement (RC-411).
+  - **RH01 RC-398..411 + section 84; D-008 amendment (review_71); RESEARCH_MAP,
+    GATE_RESEARCH_QUEUE, CHANGELOG** updated. Deliverable updated to Revision 07
+    and relabelled
+    `GATE_05M_C3_REVISION_07_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE`.
+- **Guardrails applied:** every schema field / enum / FK stays
   `INITIAL_TARGET_PROFILE` / `NeedsSupplierData`; nothing gained pass/fail
-  authority (RC-267/293/300); **RC-396 database FK enforcement + the owner's
-  downstream `DATABASE_SCHEMA_IMPLEMENTATION → RULE_ENGINE_TESTS → HIL_VALIDATION`
-  are captured as DOCTRINE for a future production phase — NOT built as M10/
-  production code during Rev 07 ingestion**; the scope/no-reuse rule (RC-397)
-  restates the closed-area boundary; already-clean text items 1 & 3 noted, no
-  duplicate rows.
+  authority (RC-267/293/300); **RC-400/406/407/409/410 + the owner's downstream
+  `DATABASE MIGRATION → RULE ENGINE IMPLEMENTATION → AUTOMATED CONSTRAINT TESTING →
+  SIL/HIL EVIDENCE` are captured as relational-schema DOCTRINE — NOT built as an
+  M10 database / rule engine during Rev 07 ingestion** (a new "Relational-schema
+  doctrine" section holds the junction-table / test-attempt / cross-record-equality
+  requirements); RC-410 restates Constitution Art. I as INSERT-only; already-clean
+  owner items 1/2/5/6/10/11 noted, no duplicate rows.
 - Files changed (reconciliation commit): `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`,
-  `RH01_SECOND_STAGE_FILTER.md` (RC-383..397 + section 83), `DECISION_REGISTER.md`
+  `RH01_SECOND_STAGE_FILTER.md` (RC-398..411 + section 84), `DECISION_REGISTER.md`
   (D-008 amendment), `RESEARCH_MAP.md`, `GATE_RESEARCH_QUEUE.md`, `CHANGELOG.md`,
-  handoff files. Archives were committed separately as `531671f`.
+  handoff files. Archives were committed separately as `ac612a2`.
 - **Nothing ingested; nothing Confirmed; no normal driving; no public road; no
   customer operation; no "certified safe"/compliance claim; ODRs untouched; no
   production code / no M10.**
@@ -65,13 +67,13 @@
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch 74 + review_70 archived 1:1 against the owner's
-  "72:75" message; RC-383..397 restate the owner's 15 corrections verbatim and are
-  recorded in both RH01 (rows + section 83) and the deliverable; owner items 1 & 3
-  confirmed already-clean (Hunter OCR/typographical text only; deliverable uses the
-  clean 7-term `L_min` equation + canonical field names) so no duplicate rows
-  minted; the eventual schema/rule-engine/HIL work is deferred M10; every value
-  stays `INITIAL_TARGET_PROFILE`; nothing marked Confirmed
+- Verified vs claimed: batch 75 + review_71 archived 1:1 against the owner's
+  "73:75" message; RC-398..411 restate the owner's 14 corrections verbatim and are
+  recorded in both RH01 (rows + section 84) and the deliverable; owner items 1, 2,
+  5, 6, 10, 11 confirmed already-clean/already-applied (Hunter OCR-corrupted copy or
+  RC-340/351/375/383/387/388/355/389) so no duplicate rows minted; the junction-table
+  / rule-engine / SIL-HIL work is deferred M10 doctrine; every value stays
+  `INITIAL_TARGET_PROFILE`; nothing marked Confirmed
 
 ## State
 
@@ -103,29 +105,37 @@
   review_64, NOT physical-pass evidence); **05M-C3 CREATED —
   MODULAR_ARCHITECTURE_DEFINED / NO_TORQUE_VECTORING_AUTHORITY /
   NO_ACTIVE_ABS_ESC_AUTHORITY / RUNOUT_CALCULATION_REQUIRED /
-  NO_NORMAL_DRIVING_AUTHORITY — REVISION_06_APPLIED / FORMAL_BASELINE_CANDIDATE /
-  CORE_GOVERNANCE_ARCHITECTURE_MATURE / READY_FOR_CONTROLLED_SPECIFICATION_FREEZE /
+  NO_NORMAL_DRIVING_AUTHORITY — REVISION_07_APPLIED / FORMAL_BASELINE_CANDIDATE /
+  SAFETY_ARCHITECTURE_MATURE / RELATIONAL_SCHEMA_DOCTRINE_DEFINED /
+  READY_FOR_CONTROLLED_SPECIFICATION_FREEZE /
   C3A_EXTERNAL_CONTROL_INTEGRATION_LOCKED / AUTHORIZATION_TRANSITION_RULES_DEFINED
-  / AUTHORIZATION_TRANSITION_AUDIT_DEFINED / AUTHORIZATION_FIELD_UNITS_AND_VALIDATION_DEFINED
+  / TRANSITION_RULE_TABLE_DEFINED / AUTHORIZATION_TRANSITION_AUDIT_DEFINED /
+  AUTHORIZATION_FIELD_UNITS_AND_VALIDATION_DEFINED / STATUS_DEPENDENT_VALIDATION_DEFINED
   / UNIT_ENUM_AND_CANONICAL_CONVERSION_DEFINED / AUTHORIZATION_ACTIVATION_RULES_DEFINED
   / AUTHORIZATION_EXPIRY_STATE_DEFINED / RESULT_STATUS_SEPARATED /
   PROCEDURE_APPROVAL_RECORD_DEFINED / RUNOUT_BLOCK_RULES_DEFINED /
-  ESTOP_RAW_TRACE_DEFINED / INDEPENDENT_SENSOR_HEALTH_SCHEMA_DEFINED /
-  STEERING_RESOLUTION_DETERMINISTIC_DEFINED / STEERING_RECOVERY_MODEL_DEFINED /
-  FAULT_EXECUTION_LIFECYCLE_FIELDS_DEFINED / DATABASE_FOREIGN_KEY_ENFORCEMENT_DEFINED
-  / SCOPE_LIMITATION_NO_REUSE_DEFINED / COMPLETED_NOT_SIGNED_PASS_RULE_DEFINED /
+  RUNOUT_MEMBERSHIP_DERIVED_DEFINED / AUTHORITY_STATUS_ENUM_DEFINED /
+  ESTOP_RAW_TRACE_DEFINED / ESTOP_RESULT_DECOMPOSED_DEFINED /
+  INDEPENDENT_SENSOR_HEALTH_SCHEMA_DEFINED / SENSOR_FAILURE_RESPONSE_COMPLETE_DEFINED
+  / STEERING_RESOLUTION_DETERMINISTIC_DEFINED / STEERING_RECOVERY_MODEL_DEFINED /
+  FAULT_EXECUTION_LIFECYCLE_FIELDS_DEFINED / PAIRED_FAULT_COMPONENT_REGISTRY_CORRECTED
+  / DATABASE_FOREIGN_KEY_ENFORCEMENT_DEFINED / ARRAY_TO_JUNCTION_TABLE_DOCTRINE_DEFINED
+  / TEST_ATTEMPT_MODEL_DOCTRINE_DEFINED / CROSS_RECORD_CONFIG_EQUALITY_DEFINED /
+  APPEND_ONLY_INSERT_ENFORCEMENT_DOCTRINE_DEFINED / SCOPE_LIMITATION_NO_REUSE_DEFINED
+  / EXACT_BINDING_SCOPE_DEFINED / COMPLETED_NOT_SIGNED_PASS_RULE_DEFINED /
   RUNOUT_AGGREGATION_RESULT_SCHEMA_DEFINED / DISTANCE_GEOMETRY_VALIDATION_DEFINED /
   APPEND_ONLY_ANNOTATION_RULE_DEFINED / FAULT_EXECUTION_AUTHORIZATION_SCHEMA_DEFINED
   / PAIRED_FAULT_LIFECYCLE_FIELDS_DEFINED / NO_CLAIM_RULE_DEFINED /
   PROCEDURE_SIGNATURE_REQUIRED / IMMUTABLE_EVIDENCE_PRESERVATION_DEFINED /
-  MULTI_FAULT_AUTHORIZATION_SCHEMA_DEFINED per review_70
+  MULTI_FAULT_AUTHORIZATION_SCHEMA_DEFINED per review_71
   (`GATE05M_C3_CLOSED_AREA_MOVEMENT.md`, five linear subgates 05M-C3A→C3E; labels
-  `GATE_05M_C3_REVISION_06_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE`
-  per review_70, NOT physical-pass evidence; the owner's downstream
-  DATABASE_SCHEMA_IMPLEMENTATION → RULE_ENGINE_TESTS → HIL_VALIDATION is deferred
-  M10/production, NOT built during ingestion); 05M-C3A execution + Envelope-Cell-1
+  `GATE_05M_C3_REVISION_07_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE`
+  per review_71, NOT physical-pass evidence; the owner's downstream DATABASE
+  MIGRATION → RULE ENGINE IMPLEMENTATION → AUTOMATED CONSTRAINT TESTING → SIL/HIL
+  EVIDENCE + the relational-schema doctrine are deferred M10/production, NOT built
+  during ingestion); 05M-C3A execution + Envelope-Cell-1
   authorization (signed `TestCellAuthorization_ID`) NEXT per D-008 (amended
-  review_70)**; 07 v0.1 / 07B / 07C v0.4 PARKED; 08
+  review_71)**; 07 v0.1 / 07B / 07C v0.4 PARKED; 08
   FMEA_REGISTRY_CREATED (15 modes); 08B PARKED; **08C
   SIMULATION_SWEEP_MATRIX_CREATED — PARKED_FOR_SUPPLIER_DATA**. Order after
   05: 06 deep dive → 09 → 10 → 11.
@@ -139,8 +149,8 @@
   (controls-authority) + **D-008** (staged post-bench
   gate ladder to HV; never "certified safe"; amended review_65 — 05J → 05K →
   05L-A → 05L-B → 05L-C → 05M-A → 05M-B → 05M-C1 → 05M-C2 (05M-C2A → 05M-C2B →
-  05M-C2C) → 05M-C3 (05M-C3A → 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E; Revision 06
-  per review_70); each engineer-approved) + the **Numeric Threshold Authority
+  05M-C2C) → 05M-C3 (05M-C3A → 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E; Revision 07
+  per review_71); each engineer-approved) + the **Numeric Threshold Authority
   Rule** (RC-267/293/300) + RC-168 + the invented-values family through RC-267 +
   RC-190/191/197
   (HIL/bench is evidence, not vehicle authority) + RC-205/227/247/265 (VCU
@@ -217,7 +227,20 @@
   keyed by exact fault IDs, RC-396 database foreign-key enforcement, RC-397 scope
   limitation + no-reuse clause (RC-383..397 = Gate 05M-C3 Revision 06, review_70 —
   the eventual schema/rule-engine/HIL implementation is deferred M10/production,
-  not built during ingestion)**) bind all Gate 05x + downstream controls work.
+  not built during ingestion), RC-398 additional test-distance bounds, RC-399
+  status-dependent validation, RC-400 arrays → junction tables, RC-401 derived
+  L_min membership + frozen snapshot, RC-402 authority_status enum + approver
+  reference, RC-403 complete independent-sensor failure response, RC-404 E-stop
+  per-outcome result decomposition, RC-405 paired-fault component FK →
+  VehicleComponentInstance not DistanceComponent, RC-406 one-to-many test-attempt
+  model, RC-407 test-result attempt identity + applicability, RC-408 explicit
+  allowed-transition table + no ACTIVE→COMPLETED authorization edge, RC-409
+  cross-record configuration equality, RC-410 append-only INSERT-only enforcement,
+  RC-411 exact-binding scope statement (RC-398..411 = Gate 05M-C3 Revision 07,
+  review_71 — the junction-table / test-attempt / rule-engine / SIL-HIL
+  implementation is deferred M10/production, captured as relational-schema doctrine
+  only, not built during ingestion)**) bind all Gate 05x + downstream controls
+  work.
 - Open owner decisions (accumulated): (1) elektron-os-clean; (2) index.html;
   (3) L2; (4) L4; (5) L6; (6) L9 lane name; (7) Artifact Intake Form; (8)
   M10 forbidden-phrase + regression scanner (invented-values family through

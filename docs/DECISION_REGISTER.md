@@ -488,6 +488,34 @@ later entry that references it.
   → HIL_VALIDATION` — is M10/production work and is NOT performed during Rev 07
   ingestion** (CLAUDE.md); the frozen specification stays a governance document
   until the owner opens the production phase (nothing Confirmed).
+- **Amendment (owner review_71, batch_75 "73:75", RC-398..411): Gate 05M-C3
+  Revision 07 — schema normalization + status-model cleanup.** The owner calls
+  Revision 06 "structurally mature and very close to specification freeze" but
+  **regresses the status to `FORMAL_BASELINE_CANDIDATE / NOT_READY_FOR_SCHEMA_FREEZE`**
+  over "implementation-level defects … primarily schema normalization, missing rule
+  restoration, and status-model cleanup," and issues 20 items → 14 new corrections
+  (owner items 1, 2, 5, 6, 10, 11 targeted the Hunter's OCR-corrupted copy or
+  restated already-applied rules — clean `L_min` RC-340/351, full block list
+  RC-383, COMPLETED-as-execution RC-387, `EXPIRED` RC-388, ZeroRegenEnvelope
+  RC-375, `ProcedureApproval_ID` RC-355/389): additional test-distance bounds
+  (RC-398); status-dependent validation (RC-399); arrays → junction tables
+  (RC-400); derived L_min membership + frozen snapshot (RC-401); `authority_status`
+  enum + approver reference (RC-402); complete independent-sensor failure response
+  (RC-403); E-stop per-outcome result decomposition (RC-404); paired-fault
+  component FK → `VehicleComponentInstance` not `DistanceComponent` (RC-405);
+  one-to-many test-attempt model (RC-406); test-result attempt identity +
+  applicability (RC-407); explicit allowed-transition table + no `ACTIVE→COMPLETED`
+  authorization edge (RC-408); cross-record configuration equality (RC-409);
+  append-only INSERT-only enforcement (RC-410); and the exact-binding scope
+  statement (RC-411). RC-400/406/407/409/410 + the owner's downstream `DATABASE
+  MIGRATION → RULE ENGINE IMPLEMENTATION → AUTOMATED CONSTRAINT TESTING → SIL/HIL
+  EVIDENCE` are captured as **relational-schema doctrine only — NOT built as M10/
+  production code during Rev 07 ingestion** (CLAUDE.md). Status upgrades to
+  `FORMAL_BASELINE_CANDIDATE / SAFETY_ARCHITECTURE_MATURE / REVISION_07_APPLIED /
+  RELATIONAL_SCHEMA_DOCTRINE_DEFINED / … / EXACT_BINDING_SCOPE_DEFINED`. Post-edit
+  label: `GATE_05M_C3_REVISION_07_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE` — the
+  safety architecture is mature and the relational-schema doctrine is defined while
+  all physical pass claims remain correctly unproven (nothing Confirmed).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the

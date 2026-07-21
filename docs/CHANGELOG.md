@@ -5,6 +5,47 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-21 — RH batch 75 ("73:75") + owner review_71: Gate 05M-C3 Revision 07 (RC-398..411)
+
+- Archived RH batch 75 + owner review_71 1:1 (commit `ac612a2`) — owner label
+  "73:75": re-issued review_70 corrections, the Hunter's re-emit ("Global
+  Engineering Safety Amendments (Revision 06)", delivered twice — a cleaner copy +
+  an OCR-corrupted copy), and a detailed "My response" with 20 items that
+  **regressed the status to `FORMAL_BASELINE_CANDIDATE / NOT_READY_FOR_SCHEMA_FREEZE`**
+  over schema-normalization + status-model defects. New PROVENANCE row +
+  `owner_reviews/review_71_batch_75_verdict.md` (20 items verbatim).
+- **14 corrections applied to `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`
+  (Revision 07) + RH01 RC-398..411 + D-008 amendment (review_71):** additional
+  test-distance bounds (RC-398); status-dependent validation (RC-399); arrays →
+  junction tables (RC-400); derived L_min component membership + frozen snapshot
+  (RC-401); `authority_status` controlled enum + approver reference (RC-402);
+  complete independent-sensor failure response — UNKNOWN / INVALID_TEST /
+  MOVEMENT_AUTHORITY BLOCKED / FAULT_ESCALATION PROHIBITED / ENGINEERING_REVIEW
+  (RC-403); E-stop result decomposed into ten per-outcome pass/fail results
+  (RC-404); paired-fault component FK → `VehicleComponentInstance` registry, not
+  `DistanceComponent` (RC-405); one-to-many test-attempt model (RC-406);
+  test-result attempt identity + applicability (RC-407); explicit
+  allowed-transition table with `EXPIRED` + no `ACTIVE→COMPLETED` authorization
+  edge (RC-408); cross-record `ConfigurationPacket`/vehicle/platform equality
+  (RC-409); append-only INSERT-only enforcement (RC-410); exact-binding scope
+  statement (RC-411).
+- Owner items 1, 2, 5, 6, 10, 11 targeted the Hunter's OCR-corrupted copy or
+  restated already-applied rules (clean `L_min` RC-340/351; full block list
+  RC-383; COMPLETED-as-execution RC-387; `EXPIRED` RC-388; ZeroRegenEnvelope
+  RC-375; `ProcedureApproval_ID` RC-355/389) — noted, no duplicate RC rows minted.
+- **RC-400/406/407/409/410 + the owner's downstream `DATABASE MIGRATION → RULE
+  ENGINE IMPLEMENTATION → AUTOMATED CONSTRAINT TESTING → SIL/HIL EVIDENCE` are
+  captured as relational-schema DOCTRINE only — NOT built as an M10 database or
+  rule engine during Rev 07 ingestion (CLAUDE.md).** A new "Relational-schema
+  doctrine" section in the deliverable holds the junction-table / test-attempt /
+  cross-record-equality requirements.
+- Deliverable relabelled
+  `GATE_05M_C3_REVISION_07_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE`. Every value
+  stays `INITIAL_TARGET_PROFILE`; nothing Confirmed; no public road / no customer
+  operation / no compliance claim; ODRs untouched.
+
+---
+
 ## 2026-07-21 — RH batch 74 ("72:75") + owner review_70: Gate 05M-C3 Revision 06 (RC-383..397)
 
 - Archived RH batch 74 + owner review_70 1:1 (commit `531671f`) — owner label
