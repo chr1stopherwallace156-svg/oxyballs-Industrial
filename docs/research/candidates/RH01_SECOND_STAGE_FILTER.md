@@ -4908,3 +4908,63 @@ is "clean enough to baseline" after these five. Queued in
   (RC-224).
 - Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
   no customer operation; no compliance/certification claim; ODRs untouched.
+
+## 73. Batch 65 ("63:75") + owner review_62 — Gate 05M-C2A/05M-C2B convergence re-emit (corrections 3/4/5 applied, NO new corrections) (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_65_gate05mc2ab_convergence.md`
+and `docs/research/raw/owner_reviews/review_62_batch_65_verdict.md`.
+**Row additions: NONE.** No new deliverable, no new RC rows, no deliverable
+changes. Owner: "Gate 05M-C2A / C2B is clean enough to baseline, and the next
+gate should be 05M-C3."
+
+### Convergence — corrections 3/4/5 applied
+
+The owner re-issued review_61 corrections 3/4/5 and the Hunter **applied all
+three** in this draft (already applied to `GATE05M_C2_RESTRICTED_CREEP.md` in
+batch 64):
+
+- **RC-294** — 05M-C2A-002 now "map the empirical breakaway torque baseline;
+  values outside expected targets trigger MECHANICAL_BINDING_CHECK" (an expected
+  range, not a pass envelope).
+- **RC-295** — 05M-C2A-002 "crawls forward within approved creep-speed, torque,
+  and runout limits" + 05M-C2A-010 "steering and braking assist remain within
+  approved pressure, voltage, and response thresholds" (no "absolute control" /
+  "completely active").
+- **RC-296** — 05M-C2A-001 "vehicle displacement remains below approved
+  measurement threshold during brake-hold torque request."
+
+The E-stop / neutral / fault-latch rows keep the response-window +
+diagnostic-review wording (RC-288/290) and rollback stays in the PROVISIONAL
+05M-C2B (RC-286). **No new corrections → no new RC rows; the deliverable already
+holds RC-294/295/296 and did not change.**
+
+### Residual (evidence-tracked, no new RC row)
+
+The Hunter's `Authority Status` column **still reads "Approved by &lt;role&gt;"** —
+the RC-292 Required-Approver correction (review_61: no "Approved by" because no
+test is executed yet → `Required Approver` + `SIGNOFF_REQUIRED / NOT_EXECUTED` +
+`PENDING_EXECUTION`) is **not applied in this draft**, and the draft carries no
+explicit Numeric Threshold Authority Rule statement (RC-293). **The deliverable
+already carries both and is ahead of the Hunter output; no register inflation
+(RC-292/293 already exist).** This is a partial-application note for the M10
+scanner, not a regression: the safety-critical wording (RC-294/295/296) landed;
+only the evidence-hygiene "Approved by" label lags.
+
+### Next
+
+Owner: **Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement** (speed/ramp
+still `INITIAL_TARGET_PROFILE` only, RC-291/293 — no auto-unlock). 05M-C2A/C2B
+is baseline-ready. Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- No deliverable changed; the corrected 05M-C2A/05M-C2B wording holds
+  (RC-286/288/290/292/293/294/295/296); corrections 3/4/5 (RC-294/295/296) are
+  now mirrored in the Hunter output; the "Approved by" residual (RC-292) is
+  recorded, not re-registered; first powered ground contact, restricted creep
+  only, Ground Movement Precondition (RC-285), CAN_1 listen-only (RC-172/230),
+  wheel-speed read-only (RC-282), no auto retry after E-stop (RC-262); every
+  number INITIAL_TARGET_PROFILE (RC-267/293); never "certified safe" (RC-224).
+- Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
+  no customer operation; no compliance/certification claim; ODRs untouched.

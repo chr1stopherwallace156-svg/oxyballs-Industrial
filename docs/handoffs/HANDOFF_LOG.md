@@ -13,6 +13,60 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — batch 64 ("62:75") + review_61: Gate 05M-C1/05M-C2A/05M-C2B corrected re-emit + 5 pre-baseline cleanups (regression cleared, RC-292..296)
+
+### Session
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 64 "62:75" + review_61 — Gate
+  05M-C1/05M-C2A/05M-C2B corrected re-emit; regression CLEARED + 5 pre-baseline
+  cleanups RC-292..296 applied); awaiting the Gate 05M-C3 batch or a supplier
+  reply
+
+### Git state
+
+- Branch: `claude/docs-structure-large-projects-b6vxx5`
+- **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
+- Start commit: `a1bb83e` — Archive raw RH batch 64 + review_61 1:1
+- End commit: `a19d1c7` — Reconcile RH batch 64 + review_61
+- Working tree at handoff: clean (everything committed)
+
+### Work performed
+
+- **Regression cleared + five corrections applied.** After three batches
+  (batch_62/63) of re-emitting the same defects, the Hunter FINALLY applied all
+  eight prior fixes (hand-lock removed, `dT_command/dt`, zero-torque threshold,
+  response-window E-stop/neutral, diagnostic-review fault latch, rollback split
+  to a PROVISIONAL 05M-C2B, Proof/Authority/Build-Engine-Status columns, no
+  auto-15-km/h). Owner: "this is much better … you applied the big safety fixes
+  correctly."
+- **RC-292..296 added; five corrections applied verbatim to
+  `GATE05M_C2_RESTRICTED_CREEP.md`:** Required Approver not "Approved by"
+  (RC-292); Numeric Threshold Authority Rule over 05M-C2A/C2B (RC-293); 15–25 Nm
+  breakaway an expected range not a pass envelope (RC-294); measurable thresholds
+  not "absolute control"/"completely active" (RC-295); static brake-hold
+  displacement threshold (RC-296). Status adds `REQUIRED_APPROVERS_DEFINED` +
+  `PROOF_ARTIFACTS_DEFINED`; 05M-C2B = `PROVISIONAL_LOCKED / …`.
+- Files changed (reconciliation commit `a19d1c7`): `RH01_SECOND_STAGE_FILTER.md`
+  (RC-292..296 + section 72), `GATE05M_C2_RESTRICTED_CREEP.md`,
+  `DECISION_REGISTER.md` (D-008 review_61 amendment), `RESEARCH_MAP.md`,
+  `GATE_RESEARCH_QUEUE.md`, `CHANGELOG.md`, handoff files. Raw archives +
+  PROVENANCE committed as `a1bb83e`.
+
+### Verification
+
+- Tests run: none — no test suite exists in this repository
+- Verified vs claimed: batch_64/review_61 archives 1:1 against the owner's chat
+  ("62:75"); the eight prior corrections confirmed applied in the raw payload
+  (regression cleared) and the five new cleanups (RC-292..296) applied verbatim
+  to the deliverable; nothing marked Confirmed; no movement authorized
+
+*(Full State / Next-action / Forbidden-actions content preserved in git history
+at commit `a19d1c7`; the current live copy carries the batch 65 update.)*
+
+---
+
 ## 2026-07-16 — Claude Code — batch 63 ("61:75") + review_60: Gate 05M-C1/05M-C2 re-emit (continued regression, no new corrections)
 
 ### Session

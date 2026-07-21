@@ -5,6 +5,27 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 65 ("63:75") + review_62: Gate 05M-C2A/05M-C2B convergence re-emit (corrections 3/4/5 applied, no new corrections)
+
+- Archived batch_65 (Gate 05M-C2A/05M-C2B re-emit) and review_62 1:1 (commit
+  `ca512b0`); PROVENANCE row inserted newest-first. Owner: "Gate 05M-C2A / C2B
+  is clean enough to baseline, and the next gate should be 05M-C3."
+- **Convergence — no new RC rows, no deliverable changes.** The Hunter applied
+  review_61 corrections 3/4/5, already applied to
+  `GATE05M_C2_RESTRICTED_CREEP.md` in batch 64: breakaway is an empirical
+  baseline → MECHANICAL_BINDING_CHECK not auto-fail (RC-294); measurable
+  creep-speed/torque/runout + pressure/voltage/response thresholds replace
+  "absolute control"/"completely active" (RC-295); static brake-hold
+  displacement threshold (RC-296).
+- **Residual (recorded, not re-registered):** the Hunter's Authority Status
+  column still reads "Approved by <role>" — the RC-292 Required-Approver
+  correction is not applied in the draft, and the draft has no explicit Numeric
+  Threshold Authority Rule (RC-293); the deliverable already carries both and is
+  ahead of the draft. RH01 section 73 records the convergence + residual with no
+  register inflation.
+- Next = Gate 05M-C3 (speed/ramp `INITIAL_TARGET_PROFILE` only, RC-291/293).
+  Nothing Confirmed; no normal driving; no public road; ODRs untouched.
+
 ## 2026-07-16 — RH batch 64 ("62:75") + review_61: Gate 05M-C1/05M-C2A/05M-C2B corrected re-emit + 5 pre-baseline cleanups
 
 - Archived batch_64 (Gate 05M-C1 + newly-split 05M-C2A/05M-C2B, now applying

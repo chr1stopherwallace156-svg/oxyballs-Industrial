@@ -4,48 +4,44 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-16
-- Reason for handoff: task complete (batch 64 "62:75" + review_61 — Gate
-  05M-C1/05M-C2A/05M-C2B corrected re-emit; regression CLEARED + 5 pre-baseline
-  cleanups RC-292..296 applied); awaiting the Gate 05M-C3 Controlled Closed-Area
-  Low-Speed Movement batch or a supplier reply
+- Reason for handoff: task complete (batch 65 "63:75" + review_62 — Gate
+  05M-C2A/05M-C2B convergence re-emit; corrections 3/4/5 applied, NO new
+  corrections, NO new RC rows); 05M-C2A/C2B baseline-ready; awaiting the Gate
+  05M-C3 Controlled Closed-Area Low-Speed Movement batch or a supplier reply
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `a1bb83e` — Archive raw RH batch 64 + review_61 1:1
+- Start commit: `ca512b0` — Archive raw RH batch 65 + review_62 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- **Regression cleared + five corrections applied.** After three batches
-  (batch_62/63) of re-emitting the same defects, the Hunter FINALLY applied all
-  eight previously-corrected fixes: RC-279 hand-lock removed (→ approved
-  mechanical restraint / rated hub-locking / differential fixture), `dT_command/dt`
-  (RC-284), supplier zero-torque threshold on the dead-band (RC-288),
-  response-window E-stop/brake-override/neutral (RC-288), diagnostic-review
-  fault latch not hard reset (RC-290), rollback split into a PROVISIONAL 05M-C2B
-  (RC-286), the Proof/Authority/Build-Engine-Status columns (RC-289), and no
-  auto-15-km/h (RC-291). Owner: "this is much better … you applied the big
-  safety fixes correctly."
-- **RC-292..296 added; five corrections applied VERBATIM to
-  `GATE05M_C2_RESTRICTED_CREEP.md`:** (1) Authority Status names a `Required
-  Approver` with `SIGNOFF_REQUIRED / NOT_EXECUTED` + `PENDING_EXECUTION`, never
-  "Approved by" (RC-292); (2) Numeric Threshold Authority Rule over 05M-C2A/C2B
-  (RC-293); (3) 15–25 Nm breakaway is an EXPECTED range, not a pass envelope —
-  out-of-range → NEEDS_REVIEW, not auto-fail (RC-294); (4) measurable thresholds
-  replace "absolute control"/"completely active" (RC-295); (5) static brake-hold
-  displacement threshold, not "completely hold static" (RC-296). Status adds
-  `REQUIRED_APPROVERS_DEFINED` + `PROOF_ARTIFACTS_DEFINED`; 05M-C2B status =
-  `PROVISIONAL_LOCKED / UNLOCKS_ONLY_AFTER_05M_C2A_SIGNOFF / …`.
-- Files changed (reconciliation commit): `RH01_SECOND_STAGE_FILTER.md`
-  (RC-292..296 + section 72), `GATE05M_C2_RESTRICTED_CREEP.md` (5 corrections),
-  `DECISION_REGISTER.md` (D-008 review_61 amendment), `RESEARCH_MAP.md`,
-  `GATE_RESEARCH_QUEUE.md`, `CHANGELOG.md`, handoff files. Raw archives
-  `batch_64_gate05mc1_mc2ab_corrected.md`, `review_61_batch_64_verdict.md`,
-  PROVENANCE committed separately as `a1bb83e`.
+- **Convergence batch — no new corrections, no new RC rows, no deliverable
+  changes.** The owner re-issued review_61 corrections 3/4/5 and the Hunter
+  **applied all three** (already applied to `GATE05M_C2_RESTRICTED_CREEP.md` in
+  batch 64): 05M-C2A-002 "map the empirical breakaway torque baseline; values
+  outside expected targets trigger MECHANICAL_BINDING_CHECK" + "crawls forward
+  within approved creep-speed, torque, and runout limits" (RC-294/295);
+  05M-C2A-010 "steering and braking assist remain within approved pressure,
+  voltage, and response thresholds" (RC-295); 05M-C2A-001 "vehicle displacement
+  remains below approved measurement threshold during brake-hold torque request"
+  (RC-296). Owner: "Gate 05M-C2A / C2B is clean enough to baseline, and the next
+  gate should be 05M-C3."
+- **Residual (recorded, NOT re-registered):** the Hunter's `Authority Status`
+  column STILL reads "Approved by &lt;role&gt;" — the RC-292 Required-Approver
+  correction (review_61) is not applied in the draft, and the draft has no
+  explicit Numeric Threshold Authority Rule (RC-293). The deliverable already
+  carries RC-292/293 and is ahead of the Hunter output; no register inflation.
+- Files changed (reconciliation commit): `RH01_SECOND_STAGE_FILTER.md` (section
+  73 — convergence + residual note, **no new RC rows**), `CHANGELOG.md`, handoff
+  files. Raw archives `batch_65_gate05mc2ab_convergence.md`,
+  `review_62_batch_65_verdict.md`, PROVENANCE committed separately as `ca512b0`.
+  No changes to `GATE05M_C2_RESTRICTED_CREEP.md` (already correct + ahead),
+  `DECISION_REGISTER.md`, `RESEARCH_MAP.md`, or `GATE_RESEARCH_QUEUE.md`.
 - **Nothing ingested; nothing Confirmed; no normal driving; no public road; no
   customer operation; no "certified safe"/compliance claim; ODRs untouched.**
 
@@ -53,11 +49,11 @@
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_64/review_61 archives are 1:1 against the owner's
-  chat ("62:75"); the eight prior corrections are confirmed applied in the raw
-  payload (regression cleared) and the five new cleanups (RC-292..296) are
-  applied verbatim to the deliverable; nothing marked Confirmed; no movement
-  authorized
+- Verified vs claimed: batch_65/review_62 archives are 1:1 against the owner's
+  chat ("63:75"); corrections 3/4/5 confirmed applied in the raw payload and
+  already held by the deliverable (RC-294/295/296); the "Approved by" residual
+  (RC-292 not applied in the Hunter draft) recorded without a duplicate RC row;
+  nothing marked Confirmed; no movement authorized
 
 ## State
 
@@ -116,8 +112,11 @@
   **RC-257→263→268, RC-256→264, RC-261→269, RC-271→275, RC-277, RC-279 (safety-
   critical), RC-283 recurrences — the batch_62/63 FULL-DRAFT regression
   (RC-279/283/284/286/288 reverted, then re-emitted a third time), the strongest
-  scanner case in the series, **now CLEARED at batch_64 (the Hunter converged on
-  the corrected wording after three re-issues)**); (9)(10)(11)
+  scanner case in the series, **CLEARED at batch_64 (the Hunter converged on the
+  corrected wording after three re-issues); at batch_65 the Hunter applied
+  corrections 3/4/5 (RC-294/295/296) but STILL left "Approved by <role>" in the
+  Authority Status column (RC-292 partial non-application) — a lingering
+  evidence-hygiene residual, deliverable already ahead**); (9)(10)(11)
   Dana / ZF / Ford-Lee letters; (12) supplier reminder; (13) official Ford BBLB
   + IVM + FMVSS 305a/305/105 + OSHA electrical/LOTO + NHTSA EV + ISO 6469-3 +
   rated-lift/rotating-machinery sources (RC-237..288, NeedsExactSource) + paid
