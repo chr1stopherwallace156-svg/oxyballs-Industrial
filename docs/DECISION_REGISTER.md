@@ -17,6 +17,60 @@ later entry that references it.
 
 ---
 
+## D-009 — Fault-record & error-library architecture: layered identity, four-layer library, similarity-is-review-only
+
+- Date: 2026-07-21
+- Status: Accepted
+- Context: The owner directed (owner directive_02, side-bar) that the finished
+  Build Engine must never emit a bare conclusion ("Error: torque too high") and
+  must instead record faults as structured, configuration-bound evidence, with a
+  layered vehicle identity and an error library that does not blindly reuse
+  findings across platforms. This formalizes doctrine already emerging from the
+  Test Configuration Lock Rule (RC-325), the Test Result Validity Rule
+  (RC-339/353), the Telemetry Synchronicity Packet (RC-326), platform separation
+  (D-006), and the "arrow is a review path, not authorization" rule (RC-361).
+- Decision (doctrine only — NOT production code / NOT M10 during Rev 07
+  ingestion; captured in `docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md`):
+  1. **A fault is structured evidence, not a bare conclusion (RC-364):** every
+     fault is a `FaultRecord_ID` binding the observation to the platform +
+     conversion configuration + the Telemetry Synchronicity Packet (RC-326) + an
+     explicit "applicable only to this configuration / not automatically to a
+     different year/inverter/axle/tire/firmware/mass" envelope. A fault record is
+     a result that happened to be a failure and inherits RC-325/339/353.
+  2. **Multi-level vehicle identity hierarchy (RC-365):** `VehicleFamily_ID` →
+     `Platform_ID` → `VehicleConfiguration_ID` → `ConversionPackage_ID` →
+     `IndividualVehicle_ID` → `TestConfiguration_ID` → `FaultRecord_ID`. Same
+     family ≠ same configuration; same model year ≠ same axle/brake/CAN layout;
+     same conversion package ≠ same physical vehicle; same fault code ≠ same root
+     cause (generalizes D-006).
+  3. **Four-layer error library (RC-366):** layer 1 fault *definitions* are
+     reusable concepts; layers 2 (platform manifestations), 3 (individual fault
+     events), and 4 (lessons + prevention rules) are configuration-bound and
+     never reused by default; layer-4 prevention rules are engineering-approved
+     only.
+  4. **Similarity is a routing input to engineering review, NEVER an
+     authorization (RC-367):** a similarity/applicability score sorts prior
+     records into `REUSABLE_WITHOUT_MODIFICATION` / `REUSABLE_AFTER_VERIFICATION`
+     / `CANDIDATE_REFERENCE_ONLY` / `NOT_APPLICABLE` / `CONFLICTING_EVIDENCE`, but
+     never self-authorizes reuse (extends RC-361/282); the score itself is a
+     candidate value under the Numeric Threshold Authority Rule
+     (RC-267/293/300).
+  5. **VIN/label scans seed the upper IDs only (RC-368):** VIN decodes
+     family/platform, the FMVSS certification label gives GVWR/GAWR + OE
+     tire/pressure + build date; neither reveals calibration/firmware hashes,
+     measured mass/axle loading, current tire condition, or the conversion
+     package — so `ConfigurationPacket_ID` / `TestConfiguration_ID` must be
+     independently measured, never inferred from the label (RC-325 proves; the
+     scan proposes).
+- Consequences: Binds all future fault-recording, error-library, and
+  cross-vehicle-applicability work; no fault finding auto-applies across a
+  configuration boundary. All example IDs / envelopes / similarity percentages
+  in the directive are `INITIAL_TARGET_PROFILE` placeholders — no invented
+  values ingested; donor 7.3L gas (001A) still to confirm (BQ-27). Recorded in
+  `docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md`; source directive archived 1:1 at
+  `docs/research/raw/owner_directives/directive_02_fault_record_error_library_architecture.md`.
+  Supersedes nothing; extends D-006 and RC-325/326/339/353/361.
+
 ## D-008 — Staged post-bench gate ladder to HV: no jump to live commissioning
 
 - Date: 2026-07-16

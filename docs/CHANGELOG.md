@@ -5,6 +5,30 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-21 — Owner directive_02 (side-bar): fault-record & error-library architecture (D-009)
+
+- Archived owner directive_02 1:1 (commit `304fa9c`) — the finished Build Engine
+  must record faults as structured, configuration-bound evidence
+  (`FaultRecord_ID` + full identity + Telemetry Synchronicity Packet +
+  applicability envelope), never a bare "Error: torque too high" conclusion.
+- **New doctrine artifact `docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md` +
+  Decision Register `D-009` + RH01 RC-364..368:** a 7-level vehicle identity
+  hierarchy (VehicleFamily → Platform → VehicleConfiguration → ConversionPackage
+  → IndividualVehicle → TestConfiguration → FaultRecord, RC-365); a four-layer
+  error library where only layer-1 definitions are reusable and layers 2–4 are
+  configuration-bound (RC-366); similarity is a review-routing input only, never
+  auto-reuse across platforms (RC-367); VIN/label scans seed the upper IDs only —
+  the configuration must be independently measured (RC-368); faults are
+  structured evidence, not conclusions (RC-364).
+- Maps onto existing doctrine: Test Configuration Lock (RC-325), Test Result
+  Validity (RC-339/353), Telemetry Synchronicity Packet (RC-326), platform
+  separation (D-006), and the arrow-is-a-review-path rule (RC-361).
+- **Guardrails:** doctrine only — NOT an implemented M10 fault library (no
+  production code / no M10 during Rev 07 ingestion); every example ID / envelope
+  / similarity percentage is an `INITIAL_TARGET_PROFILE` placeholder, no invented
+  values; donor 7.3L gas (001A) still to confirm (BQ-27). Nothing Confirmed; ODRs
+  untouched.
+
 ## 2026-07-16 — RH batch 72 ("70:75") + review_68: Gate 05M-C3 Revision 04 + 13 pre-baseline corrections
 
 - Archived batch_72 (Gate 05M-C3 Revision 04) and review_68 1:1 (commit

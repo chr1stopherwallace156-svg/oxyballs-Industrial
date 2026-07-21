@@ -13,6 +13,57 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — batch 72 ("70:75") + review_68: Gate 05M-C3 Revision 04 (RC-351..363)
+
+### Session
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 72 "70:75" + review_68 — Gate 05M-C3
+  Revision 04; 13 pre-baseline corrections RC-351..363 applied); gate labels
+  `GATE_05M_C3_REVISION_04_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW`
+
+### Git state
+
+- Branch: `claude/docs-structure-large-projects-b6vxx5`
+- **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
+- Start commit: `2f9fe2b` — Archive raw RH batch 72 + review_68 1:1
+- End commit: `0e8608a` — Reconcile RH batch 72 + review_68
+- Working tree at handoff: clean (everything committed)
+
+### Work performed
+
+- **Gate 05M-C3 Revision 04 — RC-351..363 applied verbatim to
+  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`.** The Hunter delivered Revision 04
+  (applying RC-340..350); the owner added 13 database-semantics/authorization
+  corrections: preserve distance-component values not zero-clamp (RC-351);
+  distance accounting integrity (RC-352); immutable result lifecycle (RC-353);
+  authorization status transitions (RC-354); procedure approval needs signatures
+  (RC-355); ±2 Nm non-authoritative + DC-bus (RC-356); measurable C3A-006 braking
+  (RC-357); C3A-009B block prerequisites (RC-358); independent evidence after
+  comms loss (RC-359); steering validity vs freshness (RC-360); execution arrows
+  are review paths (RC-361); tighter moving-fault limits (RC-362); full
+  `PairedFaultAuthorization_ID` schema (RC-363).
+- Post-edit label
+  `GATE_05M_C3_REVISION_04_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW`.
+- Files changed (reconciliation commit `0e8608a`): `RH01_SECOND_STAGE_FILTER.md`
+  (RC-351..363 + section 80), `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`,
+  `DECISION_REGISTER.md` (D-008 review_68 amendment), `RESEARCH_MAP.md`,
+  `GATE_RESEARCH_QUEUE.md`, `CHANGELOG.md`, handoff files. Raw archives +
+  PROVENANCE committed as `2f9fe2b`.
+
+### Verification
+
+- Tests run: none — no test suite exists in this repository
+- Verified vs claimed: batch_72/review_68 archives 1:1 against the owner's chat
+  ("70:75"); all 13 corrections (RC-351..363) applied verbatim; nothing marked
+  `SIGNED_PASS`/Confirmed; no movement authorized
+
+*(Full State / Next-action / Forbidden-actions content preserved in git history
+at commit `0e8608a`; the current live copy carries the directive_02 update.)*
+
+---
+
 ## 2026-07-16 — Claude Code — batch 71 ("69:75") + review_67: Gate 05M-C3 Revision 03 (RC-340..350)
 
 ### Session

@@ -462,6 +462,11 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-361 | **Execution-domain arrows are review paths, not automatic authorization (owner review_68, extends RC-347)**: `HIL → STATIC_VEHICLE_ONLY → LOWEST_MOVING_CELL_ALLOWED` could be misread as auto-authorization → the Execution Domain Progression Rule: each transition requires the prior-domain `SIGNED_PASS` + approved injection method + updated hazard analysis + valid runout calc + active `TestCellAuthorization` + configuration lock + test-lead authorization | batch_72 (arrows imply auto-progression) | engineering domain approval — **NeedsSupplierData** | **TestSafety / DomainProgression** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Execution Domain Progression Rule) — extends RC-347 — lanes L7 |
 | RC-362 | **Tighter moving-fault limits (owner review_68, extends RC-347)**: brake-assist-not-ready moving is blocked by default (only via a simulated status input, **never physically removing actual braking assistance**); steering-assist-not-ready is **never removed while moving** (bounded logical status simulation while real assist stays physically available); aux-voltage-low moving supply tests need a minimum guaranteed brake-assist voltage + minimum guaranteed steering-assist voltage + independent supply protection + hardware undervoltage limits + abort threshold + recovery behaviour, **never crossing into actual loss of steering/brake assistance** | batch_72 (moving-fault under-bounded) | supplier assist + supply spec — **NeedsSupplierData** | **TestSafety / MovingFaultLimits** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (tighter moving-fault limits) — extends RC-347 — lanes L7 |
 | RC-363 | **Full `PairedFaultAuthorization_ID` field schema + reverse-order-is-separate (owner review_68, extends RC-348)**: `primary_fault_id` · `secondary_fault_id` · `fault_order` · `inter_fault_delay_ms` · `injection_method` · `expected_state_sequence` · `abort_trigger` · `abort_owner` · `containment_method` · `allowed_execution_domain` · `active_test_cell` · `HazardAnalysis_ID` · `ConfigurationPacket_ID` · `RunoutCalculations_ID` · `required_approvers` · `status`; the reverse ordering is a SEPARATE record (`LOW_VOLTAGE_THEN_CAN_LOSS` ≠ `CAN_LOSS_THEN_LOW_VOLTAGE`) | batch_72 (paired-fault fields undefined) | engineering hazard review — **NeedsSupplierData** | **TestSafety / PairedFaultSchema** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (PairedFaultAuthorization_ID schema) — extends RC-348 — lanes L7 |
+| RC-364 | **A fault is structured evidence, NOT a bare conclusion (owner directive_02, D-009)**: the finished system must never emit "Error: torque too high" → a **`FaultRecord_ID`** binds the observation to the platform + conversion configuration + the Telemetry Synchronicity Packet (RC-326) + an explicit "applicable only to this configuration / NOT automatically to a different year/inverter/axle/tire/firmware/mass" envelope; a fault record is a result that happened to be a failure and inherits the config-lock + result-validity rules | directive_02 (bare-conclusion errors) | n/a — architecture doctrine | **FaultDoctrine / StructuredEvidence** — recorded in `docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md` §1 + D-009 — extends RC-325/326/339/353 — lanes L7 |
+| RC-365 | **Multi-level vehicle identity hierarchy (owner directive_02, D-009)**: a vehicle is never identified only as "2023 F-550" → `VehicleFamily_ID` → `Platform_ID` → `VehicleConfiguration_ID` → `ConversionPackage_ID` → `IndividualVehicle_ID` → `TestConfiguration_ID` → `FaultRecord_ID`; same family ≠ same configuration, same model year ≠ same axle/brake/CAN layout, same conversion package ≠ same physical vehicle, same fault code ≠ same root cause | directive_02 (flat identity) | supplier/engineering platform IDs — **NeedsSupplierData** | **FaultDoctrine / IdentityHierarchy** — recorded in `docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md` §2 + D-009 — generalizes D-006 — lanes L7 |
+| RC-366 | **Four-layer error library — only layer 1 reusable (owner directive_02, D-009)**: layer 1 fault *definitions* (APPS disagreement, pre-charge timeout, contactor feedback mismatch, inverter heartbeat loss, resolver plausibility, wheel-speed disagreement, brake-assist undervoltage, steering-assist pressure loss, cooling-flow-below-threshold, phase-current overshoot, unexpected-torque-in-Neutral, CAN_1-transmission-detected) are reusable concepts; layers 2 (platform manifestations), 3 (individual fault events), 4 (lessons + prevention rules) are **configuration-bound, never reused by default**; layer-4 prevention rules are engineering-approved only | directive_02 (undivided library) | n/a — architecture doctrine | **FaultDoctrine / FourLayerLibrary** — recorded in `docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md` §3 + D-009 — lanes L7 |
+| RC-367 | **Similarity is a routing input to engineering review, NEVER an authorization (owner directive_02, D-009, extends RC-361/282)**: an applicability/similarity score sorts prior records into `REUSABLE_WITHOUT_MODIFICATION` / `REUSABLE_AFTER_VERIFICATION` / `CANDIDATE_REFERENCE_ONLY` / `NOT_APPLICABLE` / `CONFLICTING_EVIDENCE`, but never self-authorizes reuse — the system must never auto-apply a 2022 F-450 fault to a 2023 F-550 merely because both are Super Duty; the score itself is a candidate value under the Numeric Threshold Authority Rule (RC-267/293/300) | directive_02 (blind reuse risk) | supplier/engineering similarity model — **NeedsSupplierData** | **FaultDoctrine / SimilarityIsReviewOnly** — recorded in `docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md` §4 + D-009 — extends RC-361/282/267 — lanes L7 |
+| RC-368 | **VIN/label scans seed the upper IDs only; the configuration must be measured (owner directive_02, D-009, extends RC-325)**: VIN decodes family/platform, the FMVSS certification label gives GVWR/GAWR + OE tire/pressure + build date; **neither reveals** calibration/firmware hashes, measured mass/axle loading, current tire condition, or the conversion package → the `ConfigurationPacket_ID` / `TestConfiguration_ID` must be independently captured + measured, never inferred from the label (the scan proposes; the Test Configuration Lock proves) | directive_02 (label-inferred config) | Ford VIN/label decode + measured config — **NeedsSupplierData** | **EvidenceHygiene / ScanProposesLockProves** — recorded in `docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md` §5 + D-009 — extends RC-325 — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -5598,3 +5603,60 @@ architecture, tire/axle/geometry, and thermal-sensor data remain NeedsSupplierDa
   safe" (RC-224).
 - Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
   no customer operation; no compliance/certification claim; ODRs untouched.
+
+## 81. Owner directive_02 (side-bar) — Fault-record & error-library architecture (D-009) (2026-07-21)
+
+Raw source:
+`docs/research/raw/owner_directives/directive_02_fault_record_error_library_architecture.md`
+(owner architecture directive, NOT a numbered "N:75" research batch).
+**Row additions: RC-364..RC-368 (no new CS). New doctrine artifact
+`docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md` + Decision Register D-009.**
+
+### What the directive establishes
+
+The finished Build Engine must record faults as **structured, configuration-bound
+evidence** (a `FaultRecord_ID` with full identity + Telemetry Synchronicity
+Packet + an explicit applicability envelope), never as a bare conclusion. It
+requires a **7-level identity hierarchy** (VehicleFamily → Platform →
+VehicleConfiguration → ConversionPackage → IndividualVehicle → TestConfiguration
+→ FaultRecord), a **four-layer error library** (only layer-1 definitions
+reusable; manifestations/events/lessons are configuration-bound), **similarity as
+a review-routing input only** (never auto-reuse across platforms), and
+**VIN/label scans that seed the upper IDs only** (the configuration must be
+independently measured). Reconciled as RC-364..368.
+
+### How it maps to existing doctrine (not a new invention)
+
+- Config-bound fault records = the Test Configuration Lock Rule (RC-325) + the
+  Test Result Validity Rule (RC-339/353); a fault is a result that failed.
+- The observed-signal list = the Telemetry Synchronicity Packet (RC-326).
+- "Not automatically applicable to a different platform" = D-006 (platform
+  separation) generalized + RC-282 (a Ford-side signal is not authoritative
+  across platforms).
+- "Similarity is a review path, not authorization" = the same rule as the C3E
+  execution-domain arrows (RC-361); the score is a candidate value under the
+  Numeric Threshold Authority Rule (RC-267/293/300).
+
+### Guardrails applied
+
+- **Doctrine only** — captured in `docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md`
+  as an architecture requirement; NOT implemented as an M10 fault library (no
+  production code / no M10 during Rev 07 ingestion, CLAUDE.md).
+- **No invented values** — every example ID (`FORD_F550_2023_7.3_GAS_169WB_…`,
+  `ELK_PLATFORM001_POWERTRAIN_R03`), envelope, and similarity percentage
+  (72%/96%/88%) is an owner ILLUSTRATIVE PLACEHOLDER → `INITIAL_TARGET_PROFILE`,
+  never ingested as fact; real values become ODRs / supplier-data. Donor 7.3L gas
+  (001A) still to confirm (BQ-27).
+- Directive archived 1:1 (Constitution Art. I). Proposed + owner-confirmed before
+  writing (side-bar, not silently added). Nothing marked Confirmed.
+
+### Standing checks
+
+- New doctrine artifact + D-009 + RC-364..368; fault records are structured
+  evidence not conclusions (RC-364); layered identity (RC-365); four-layer
+  library, only layer 1 reusable (RC-366); similarity is review-only (RC-367);
+  scan proposes, config-lock proves (RC-368); all example values placeholders;
+  extends D-006 + RC-325/326/339/353/361/282.
+- Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
+  no customer operation; no compliance/certification claim; ODRs untouched; no
+  production code / no M10 during ingestion.
