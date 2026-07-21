@@ -5,6 +5,35 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 70 ("68:75") + review_66: Gate 05M-C3 Revision 02 + 13 pre-baseline corrections
+
+- Archived batch_70 (Gate 05M-C3 Revision 02) and review_66 1:1 (commit
+  `31647fd`); PROVENANCE row inserted newest-first. Owner: "Revision 02 is very
+  strong and materially safer … mature enough for formal engineering review."
+- **Revision 02 applied the 14 batch_68 corrections (RC-313..326)** — the
+  RunoutCalculations_ID artifact, Config Lock Rule, Telemetry Clock & Sync
+  Mandate, stepped cell escalation, C3A-009A/009B split, revised governor test,
+  rewritten C3B-004, contact thermocouples, C3C two-lane rule, road-wheel
+  geometry, cell-based C3E escalation.
+- **RC-327..339 added; 13 corrections applied verbatim to
+  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`:** complete the RunoutCalculation_ID field
+  list + `L_min` (RC-327); keep C3A-009B `LOCKED` (RC-328); command envelope not
+  "linear" (RC-329); BOS ≠ foundation-brake stop (RC-330); regen-disabled a
+  command state (RC-331); coexistence ≠ blending (RC-332); BMS-permission not high
+  SOC (RC-333); no arbitrary bus injection (RC-334); driver/brake response after
+  regen loss (RC-335); no premature C3D numbers / "immediate" (RC-336);
+  steering-signal validity states (RC-337); listed C3E fault hierarchy L1–L4
+  (RC-338); Test Result Validity Rule (RC-339).
+- Status upgrades to `PROCEDURE_ARCHITECTURE_MATURE / REVISION_02_APPLIED / … /
+  C3A_EXTERNAL_CONTROL_INTEGRATION_LOCKED / FORMAL_ENGINEERING_REVIEW_REQUIRED`;
+  post-edit label
+  `GATE_05M_C3_REVISION_02_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` — the
+  architecture is mature, not physical-pass evidence.
+- RH01 section 78; D-008 amended (review_66); RESEARCH_MAP + GATE_RESEARCH_QUEUE
+  updated; handoff rotated. Next = 05M-C3A execution + Envelope Cell 1
+  authorization / formal engineering baseline review. Nothing Confirmed; no
+  normal driving; no public road; ODRs untouched.
+
 ## 2026-07-16 — RH delivery "67:75": duplicate re-send of batch 68 ("66:75") — no new corrections, no new RC rows
 
 - Recorded delivery "67:75" as a **duplicate re-send of batch_68** (commit

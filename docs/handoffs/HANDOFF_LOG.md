@@ -13,6 +13,51 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — delivery "67:75": duplicate re-send of batch 68 (no new corrections, no new RC rows)
+
+### Session
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (delivery "67:75" — DUPLICATE re-send of
+  batch 68 "66:75"; PROVENANCE "no separate file" note only, NO new RC rows, NO
+  deliverable changes); Gate 05M-C3 stays
+  `GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW`
+
+### Git state
+
+- Branch: `claude/docs-structure-large-projects-b6vxx5`
+- **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
+- Start commit: `188bdfc` — Record delivery "67:75" as a duplicate (PROVENANCE note)
+- End commit: `ff54f30` — Reconcile RH delivery "67:75" (duplicate)
+- Working tree at handoff: clean (everything committed)
+
+### Work performed
+
+- **Duplicate re-send — no new RC rows, no deliverable changes.** Delivery
+  "67:75" is content-identical to batch_68: same owner framing, same Gate 05M-C3
+  modular sequence (still carrying the 14 uncorrected items), and the same
+  14-correction verdict. All 14 corrections (RC-313..326) were already applied to
+  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` in batch 68.
+- Recorded a PROVENANCE "no separate file" note (content preserved 1:1 in the
+  batch_68 archive); no re-archive. RH01 section 77 records the duplicate.
+  Flagged to the owner as a likely mis-send.
+- Files changed (reconciliation commit `ff54f30`): `RH01_SECOND_STAGE_FILTER.md`
+  (section 77), `CHANGELOG.md`, handoff files. PROVENANCE note committed as
+  `188bdfc`.
+
+### Verification
+
+- Tests run: none — no test suite exists in this repository
+- Verified vs claimed: delivery "67:75" confirmed content-identical to batch_68;
+  the deliverable already holds RC-313..326; no duplicate RC rows added; nothing
+  marked `SIGNED_PASS`/Confirmed; no movement authorized
+
+*(Full State / Next-action / Forbidden-actions content preserved in git history
+at commit `ff54f30`; the current live copy carries the batch 70 update.)*
+
+---
+
 ## 2026-07-16 — Claude Code — batch 68 ("66:75") + review_65: NEW GATE 05M-C3 (Closed-Area Movement, modular C3A–C3E) + 14 corrections (RC-313..326)
 
 ### Session

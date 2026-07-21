@@ -10,21 +10,26 @@ is built as **five linear modular subgates**, NOT one large "track movement"
 gate (owner review_65), so straight-line propulsion, braking, regeneration,
 steering, and fault behaviour are never approved together prematurely.
 
-**Status (owner review_65): `MODULAR_ARCHITECTURE_DEFINED` /
+**Status (owner review_65/66): `PROCEDURE_ARCHITECTURE_MATURE` /
+`REVISION_02_APPLIED` / `MODULAR_ARCHITECTURE_DEFINED` /
 `GLOBAL_AUDIT_SCHEMA_DEFINED` / `TELEMETRY_PACKET_DEFINED` /
-`CONFIGURATION_LOCK_REQUIRED` / `TIME_SYNCHRONIZATION_REQUIREMENTS_PENDING` /
-`C3A_STRAIGHT_LINE_PROCEDURE_DRAFTED` /
-`C3B_FOUNDATION_BRAKE_PROCEDURE_NEEDS_REVISION` /
-`C3C_REGEN_INTERFACE_AUTHORITY_PENDING` / `C3D_KINEMATIC_CELL_VALUES_PENDING` /
-`C3E_FAULT_ESCALATION_MATRIX_PENDING` / `NUMERIC_LIMITS_INITIAL_TARGET_PROFILE` /
-`RUNOUT_CALCULATION_REQUIRED` / `NO_ACTIVE_ABS_ESC_AUTHORITY` /
-`NO_TORQUE_VECTORING_AUTHORITY` / `NO_PUBLIC_ROAD` / `NO_CUSTOMER_OPERATION` /
-`NO_NORMAL_DRIVING_AUTHORITY`.** After all fourteen review_65 corrections the
-gate labels `GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW`
-— **the procedure architecture is ready for disciplined engineering review, NOT
-evidence that the physical vehicle has passed** (nothing Confirmed). Ladder: **…
-→ 05M-C2 (05M-C2A → 05M-C2B → 05M-C2C) → 05M-C3 (THIS GATE — 05M-C3A → 05M-C3B →
-05M-C3C → 05M-C3D → 05M-C3E)** (D-008, amended review_65).
+`TELEMETRY_SYNC_DEFINED` / `CONFIGURATION_LOCK_DEFINED` /
+`CELL_ESCALATION_DEFINED` / `RUNOUT_ARTIFACT_SCHEMA_INCOMPLETE` /
+`RUNOUT_CALCULATION_REQUIRED` / `C3A_PATH_OBSERVATION_READY` /
+`C3A_EXTERNAL_CONTROL_INTEGRATION_LOCKED` /
+`C3B_FOUNDATION_BRAKE_BASELINE_DEFINED` /
+`C3C_REGEN_CONTROL_OWNERSHIP_PARTIALLY_PENDING` /
+`C3D_CELL_VALUES_PENDING_APPROVAL` / `C3E_FAULT_HIERARCHY_INCOMPLETE` /
+`NUMERIC_LIMITS_INITIAL_TARGET_PROFILE` / `FORMAL_ENGINEERING_REVIEW_REQUIRED` /
+`NO_ACTIVE_ABS_ESC_AUTHORITY` / `NO_TORQUE_VECTORING_AUTHORITY` /
+`NO_PUBLIC_ROAD` / `NO_CUSTOMER_OPERATION` / `NO_NORMAL_DRIVING_AUTHORITY`.**
+After the fourteen review_65 corrections (RC-313..326, Revision 02) and the
+thirteen review_66 corrections (RC-327..339) the gate labels
+`GATE_05M_C3_REVISION_02_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` — **the
+procedure architecture is mature, NOT evidence that any physical vehicle has
+passed it** (nothing Confirmed). Ladder: **… → 05M-C2 (05M-C2A → 05M-C2B →
+05M-C2C) → 05M-C3 (THIS GATE — 05M-C3A → 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E)**
+(D-008, amended review_66).
 
 ## Linear progression (owner review_65) — HARD BLOCK
 
@@ -97,6 +102,26 @@ dropped-frame detection · sensor-latency compensation · start/stop event marke
 Otherwise a brake event, torque removal, phase-current decay, and actual
 deceleration may appear incorrectly ordered.
 
+### RunoutCalculation_ID artifact schema (owner review_65/66, RC-313/327) — HARD BLOCK
+
+The fixed 50 m fallback is deprecated (RC-313). No track movement occurs without
+a linked `RunoutCalculation_ID` artifact whose **required fields (owner
+review_66, RC-327)** are: vehicle test mass · front and rear axle loading ·
+authorized test-cell speed · authorized traction torque · authorized torque ramp
+rate · maximum expected acceleration · driver response allowance ·
+software/control response allowance · torque-removal coast distance ·
+foundation-brake stopping distance · surface grade · surface condition +
+estimated friction range · tire size / pressure / condition / temperature ·
+wind + ambient conditions where relevant · position-measurement uncertainty ·
+braking-distance measurement uncertainty · required containment margin ·
+acceleration zone length · stabilization zone length · braking target zone ·
+post-target runout · physical restraint / barrier plan · engineering calculation
+revision · required approver + signed authorization. The minimum clear length is
+**`L_min` = acceleration zone + stabilization zone + planned braking distance +
+worst-case coast/stop allowance + uncertainty allowance + approved containment
+margin.** Until the field list + `L_min` are fully populated the schema is
+`RUNOUT_ARTIFACT_SCHEMA_INCOMPLETE`.
+
 ### Test Configuration Lock Rule (owner review_65, RC-325) — HARD BLOCK
 
 Every C3 run archives: **VCU firmware hash · inverter firmware/version ·
@@ -105,6 +130,16 @@ test-cell limits · vehicle mass + axle-load record · tire size/pressure/condit
 · ambient + surface conditions · instrumentation IDs + calibration status.** Any
 change invalidates reuse of a previous result unless an engineering impact review
 explicitly allows it.
+
+### Test Result Validity Rule (owner review_66, RC-339) — HARD BLOCK
+
+Because configurations are locked, **a signed result applies ONLY to the archived
+hardware configuration · firmware/software hashes · calibration hashes · active
+DBC version · test-cell limits · vehicle mass/loading · tire configuration ·
+instrumentation set · environmental window.** Any change triggers
+`IMPACT_REVIEW_REQUIRED`, after which the prior result is graded **`REUSABLE` /
+`PARTIALLY_REUSABLE` / `REPEAT_TEST_REQUIRED` / `INVALIDATED`.** This governs
+firmware updates and inverter swaps.
 
 ### Cell-by-cell operating-envelope escalation (owner review_65, RC-314) — HARD BLOCK
 
@@ -141,7 +176,9 @@ km/h · ramp ≤40 Nm/sec · traction ≤80 Nm.
 
 Every row below sits at `Procedure Approval Status: APPROVED_FOR_CONTROLLED_EXECUTION`
 · `Execution Status: NOT_EXECUTED` · `Result Signoff Status: NOT_ELIGIBLE`
-(nothing executed).
+(nothing executed) — **except C3A-009B, which stays `APPROVAL_REQUIRED` /
+`LOCKED` / `NOT_ELIGIBLE` until external-tracking control authority is
+established (RC-328).**
 
 | Test | Element | Procedure | Expected safe output | Blocked (MUST NEVER OCCUR) | Required Approver |
 |---|---|---|---|---|---|
@@ -149,12 +186,12 @@ Every row below sits at `Procedure Approval Status: APPROVED_FOR_CONTROLLED_EXEC
 | C3A-002 | straight-line forward | commanded forward path (per the authorized cell) with steering centred; track drift via external markers vs VCU coordinates | stable linear path; tracking predictable | abrupt lateral pull / uncommanded yaw | Chassis Dynamics Lead |
 | C3A-003 | straight-line reverse | commanded reverse path (per the authorized cell) with steering centred; verify reverse-direction register + tracking | rearward path predictable; velocity registers match command | commanded↔actual vector discrepancy | Test Lead |
 | C3A-004 | speed-ceiling enforcement | **prove the governor FIRST via HIL/SIL, lifted-wheel/dyno, or a temporarily lowered physical ceiling; then on track issue a commanded speed/torque request exceeding the currently authorized ceiling while approaching from below and verify torque attenuation begins before physical speed crosses the authorized limit (RC-315 — do NOT depend on nearly crossing the highest permitted speed)** | attenuation begins before the boundary; speed capped at the authorized ceiling | velocity overshoot past the authorized governor / first confirmation attempted only at the max cell | Systems Safety Lead |
-| C3A-005 | torque ramp + accel correlation | step pedal per the authorized cell; check command slope vs the ≤40 Nm/sec target; map against physical acceleration (separate but related quantities) | commands rise within the envelope; acceleration corresponds to the mass model | sudden step-function commands bypassing the rate filter | Systems Engineer |
-| C3A-006 | brake override (straight) | while tracking forward, firmly apply the service brake | traction torque clears within the approved BOS response window; vehicle stops on foundation brakes | inverter commanding drive current against active brakes | Controls Director |
+| C3A-005 | torque command envelope + accel correlation | step pedal per the authorized cell; check the command trajectory against the approved envelope; map against physical acceleration (separate but related quantities) | **commanded torque remains within the approved time-domain command envelope, including torque-rate and jerk limits where applicable (owner review_66, RC-329 — the approved profile may be a nonlinear rate/jerk limiter, S-curve, speed-dependent map, or filtered ramp; NOT "commands rise linearly"); track `T_command`, `dT/dt`, `d²T/dt²`, reported torque, phase current, longitudinal acceleration, jerk** | sudden step-function commands bypassing the rate/jerk filter | Systems Engineer |
+| C3A-006 | brake override (straight) | while tracking forward, firmly apply the service brake | **BOS result: the traction request is removed within the approved response window; foundation-brake result: the vehicle decelerates and stops within the approved C3B-derived distance envelope (owner review_66, RC-330 — the two outcomes are separate; a BOS test proves torque removal, not automatically a complete stop)** | inverter commanding drive current against active brakes | Controls Director |
 | C3A-007 | neutral interruption | at straight-line forward crawl, shift PRND → Neutral | torque-producing current drops within the window; propulsion torque → zero | torque-producing current / active drive command persisting in Neutral (RC-310) | Test Lead |
 | C3A-008 | E-stop / torque removal | at steady forward speed, actuate the remote/hardwired E-stop | **hardwired loop forces the supplier-defined emergency torque-inhibit + HV-isolation response (RC-309, architecture-dependent); inverter current decays within the approved window** | delayed torque removal / uncoordinated loop response / auto contactor-open outside the approved fault class | Safety Director |
-| C3A-009A | path-deviation **observation** | external survey/camera system records deviation vs internal steering signals and provides a **test-team abort indication** | deviation is logged; the test team can abort manually | reliance on a steering-angle signal alone for deviation (RC-316) | Systems Safety Lead |
-| C3A-009B | path-deviation **torque-inhibit integration** | **only after** the external system interface, latency, signal validity, failure modes, and control authority are formally approved: the external system drives an automatic VCU torque-inhibit | VCU drops torque to zero on a validated path error | any automatic VCU authority granted to the external system before its interface/latency/validity/failure-modes/authority are approved (RC-316) | Systems Safety Lead + Controls Director |
+| C3A-009A | path-deviation **observation** (`PENDING_EXECUTION`) | external survey/camera system records deviation vs internal steering signals and provides a **test-team abort indication** | deviation is logged; the test team can abort manually | reliance on a steering-angle signal alone for deviation (RC-316) | Systems Safety Lead |
+| C3A-009B | path-deviation **torque-inhibit integration** — **`LOCKED`** | **`Procedure Approval Status: APPROVAL_REQUIRED` · `Execution Status: LOCKED` · `Result Signoff Status: NOT_ELIGIBLE` · Build-Engine block `EXTERNAL_TRACKING_CONTROL_AUTHORITY_NOT_ESTABLISHED` (owner review_66, RC-328).** It may NOT proceed as automatic VCU control authority until the external-system interface, latency, signal validity, and failure modes are formally approved (only then does the external system drive an automatic VCU torque-inhibit) | VCU drops torque to zero on a validated path error — **only once unlocked** | any automatic VCU authority granted to the external system before its interface/latency/validity/failure-modes/authority are approved (RC-316/328) | Systems Safety Lead + Controls Director |
 | C3A-010 | repeated-run consistency | 5 consecutive straight-line accel/decel sequences within the authorized cell | metrics tightly grouped within approved boundaries | tracking-latency drift / thermal accumulation / erratic response | Calibration Engineer |
 
 **External tracking is EVIDENCE + human-abort support, not automatic VCU
@@ -164,8 +201,13 @@ positioning), not a steering-angle signal alone.**
 
 ## Subgate 05M-C3B — Coast-Down + Foundation Brakes
 
-Establishes the pure mechanical-deceleration + natural-drag baseline. **Regen
-stays disabled (0 Nm target) throughout.** Covers: C3B-001 zero-torque coast-down
+Establishes the pure mechanical-deceleration + natural-drag baseline. **Regen is a
+control state, not a literal measurement value (owner review_66, RC-331):
+`Regeneration Command State: DISABLED`; allowed negative torque within the
+supplier-defined zero-regen / no-command tolerance only** (measurement noise,
+drag torque, inverter estimation error, and supplier-defined switching behaviour
+still exist — "0 Nm" is a command, not a guaranteed reading). Covers: C3B-001
+zero-torque coast-down
 (rolling-resistance / drag model) · C3B-002 foundation-brake stops (mechanical
 friction only) · C3B-003 brake-assist stability under repeated stops (no 12 V
 brownout) · **C3B-004 (rewritten, RC-317)** · C3B-005 stopping-distance
@@ -217,6 +259,32 @@ ABS/ESC-related condition · C3C-007 regen fault → foundation braking.
   nonlinear by design). Track separately: requested regen torque · actual regen
   torque · hydraulic pressure · vehicle deceleration · deceleration jerk · pedal
   position · wheel-speed disagreement · BMS charge-current limit.
+- **C3C-003 is coexistence observation, not integrated brake blending (owner
+  review_66, RC-332):** the crossover row is renamed **Brake/Regeneration
+  Coexistence Observation** — "master-cylinder pressure overlays with inverter
+  braking torque" must not imply an integrated blend controller already exists.
+  **Lane 1 — independent regen + normal friction braking: observe coexistence
+  only. Lane 2 — coordinated brake blending: `BLOCKED` until the pedal model,
+  pressure model, deceleration target, failure modes, and control ownership are
+  formally approved.**
+- **C3C-004 regen availability is BMS-permission-bounded, not a generic high SOC
+  (owner review_66, RC-333):** regen availability is bounded by the **active BMS
+  charge-power/current permission, pack voltage, cell-voltage ceiling,
+  temperature state, contactor state, and supplier-defined operating limits** —
+  the authority is the BMS permission, not a generic SOC percentage.
+- **C3C-005 uses no arbitrary bus injection (owner review_66, RC-334):** a
+  charge-acceptance restriction is asserted via a **supplier-supported test mode,
+  an approved signal-substitution fixture, a HIL interface, or bounded
+  conversion-side simulation — NO guessed or unauthorized BMS message injection**
+  (extends the bounded fault-injection rule RC-297).
+- **C3C-007 needs an explicit driver/brake response (owner review_66, RC-335):**
+  on a simulated inverter comms fault during regen — **regen request removed · no
+  lingering torque-producing or braking current outside the approved decay
+  envelope · driver warning asserted · foundation-brake authority remains
+  available · the driver applies the service brake per the test plan · the fault
+  latches · no automatic regen restoration.** Do NOT imply an automatic transition
+  to mechanical braking unless a validated automatic brake-actuation system
+  actually exists.
 
 ## Subgate 05M-C3D — Steering-Angle / Propulsion-Envelope Map
 
@@ -228,17 +296,20 @@ envelope. Boundaries are partitioned into distinct test cells.
 
 **No numeric angles, speeds, or torque limits are populated until linked to track
 geometry, tire sizing, axle ratios, supplier boundaries, and formal engineering
-approval (owner review_65, RC-322):** each cell's Max Traction Request / Max Ramp
-Rate reads `CELL_VALUE_PENDING_APPROVAL`; the wheel-speed envelope reads
-`KINEMATIC_MODEL_PENDING`; the "Immediate Torque Cutout" abort becomes
-"**torque-inhibit response within the approved response window**".
+approval (owner review_65/66, RC-322/336):** the wheel-speed envelope reads
+`KINEMATIC_MODEL_PENDING_APPROVAL`; Max Regen Request reads
+`DISABLED_COMMAND_STATE`; the Abort Response reads
+`TORQUE_INHIBIT_WITHIN_APPROVED_RESPONSE_WINDOW` (no "Immediate"); Max Traction
+Request / Max Ramp Rate read `TEST_CELL_VALUE_PENDING_APPROVAL`. No `≤5% parity`,
+literal `0 Nm`, "Hard Clamped", or "Immediate Torque Cutout" appears in the cell
+table (RC-336).
 
-| Speed band | Steering-angle band | Max traction request | Max regen request | Abort response | Authority status |
-|---|---|---|---|---|---|
-| initial low-speed cell | near-center | `CELL_VALUE_PENDING_APPROVAL` | disabled (0 Nm) | zero propulsion request | `INITIAL_TARGET_PROFILE` |
-| initial low-speed cell | moderate turn | `CELL_VALUE_PENDING_APPROVAL` (further derated) | disabled (0 Nm) | zero propulsion request | `INITIAL_TARGET_PROFILE` |
-| initial low-speed cell | high steering angle | minimum / blocked pending proof | disabled (0 Nm) | torque-inhibit response within the approved response window | `BLOCKED_PENDING_TEST` |
-| any band | implausible steering signal | zero propulsion request | zero regen request | `HARD_BLOCK` | `HARD_BLOCK` |
+| Speed band | Steering-angle band | Max traction / ramp | Max regen request | Wheel-speed envelope | Abort response | Authority status |
+|---|---|---|---|---|---|---|
+| initial low-speed cell | near-center | `TEST_CELL_VALUE_PENDING_APPROVAL` | `DISABLED_COMMAND_STATE` | `KINEMATIC_MODEL_PENDING_APPROVAL` | `TORQUE_INHIBIT_WITHIN_APPROVED_RESPONSE_WINDOW` | `INITIAL_TARGET_PROFILE` |
+| initial low-speed cell | moderate turn | `TEST_CELL_VALUE_PENDING_APPROVAL` (further derated) | `DISABLED_COMMAND_STATE` | `KINEMATIC_MODEL_PENDING_APPROVAL` | `TORQUE_INHIBIT_WITHIN_APPROVED_RESPONSE_WINDOW` | `INITIAL_TARGET_PROFILE` |
+| initial low-speed cell | high steering angle | minimum / blocked pending proof | `DISABLED_COMMAND_STATE` | `KINEMATIC_MODEL_PENDING_APPROVAL` | `TORQUE_INHIBIT_WITHIN_APPROVED_RESPONSE_WINDOW` | `BLOCKED_PENDING_TEST` |
+| any band | implausible steering signal | zero propulsion request | zero regen request | n/a | `HARD_BLOCK` | `HARD_BLOCK` |
 
 **C3D kinematic inputs (owner review_65, RC-323) — road-wheel geometry, not
 steering-wheel angle alone:** steering-wheel angle · steering ratio · measured or
@@ -246,6 +317,17 @@ derived road-wheel angle · wheelbase · front/rear track width · tire rolling
 radius · axle ratio · differential type · expected inner/outer wheel-speed ratio
 · vehicle yaw rate (if independently measured). For a chassis-cab platform,
 body/upfit loading affects tire deflection and tracking.
+
+**C3D steering-signal validity state matrix (owner review_66, RC-337) — a
+frozen/old steering value must NOT keep authorizing torque:**
+
+| Steering-signal state | Authority |
+|---|---|
+| `VALID` | operate within the approved cell |
+| `DEGRADED` | further derate or inhibit envelope progression |
+| `IMPLAUSIBLE` | torque-inhibit request + fault latch |
+| `UNAVAILABLE` | no steering-dependent envelope expansion |
+| `STALE` | treat as invalid after the approved timeout |
 
 ## Subgate 05M-C3E — Closed-Area Fault + Abort Sequences
 
@@ -259,9 +341,25 @@ blocked pending an engineering diagnostic clear (RC-290).
 begin at the **lowest signed operating-envelope cell**, NOT automatically at 15
 km/h. No fault repeats at a higher cell until: the lower cell has `SIGNED_PASS` ·
 fault containment is proven · runout remains valid · thermal state is acceptable
-· the test lead separately authorizes escalation. Fault order: **single fault →
-repeated single fault → paired fault → compound fault** — never a jump straight
-to multiple faults at the highest provisional speed.
+· the test lead separately authorizes escalation.
+
+**C3E Fault Escalation Hierarchy (owner review_66, RC-338) — the hierarchy is now
+listed, not just announced:**
+
+- **Level 1 — single fault:** APPS plausibility fault · steering signal
+  invalid/stale · wheel-speed disagreement · inverter heartbeat loss · BMS
+  charge-permission removal · brake-assist-not-ready · steering-assist-not-ready ·
+  auxiliary-voltage low · test-boundary alert · E-stop activation.
+- **Level 2 — repeated single fault:** repeat each approved Level 1 fault across
+  the permitted cells; verify latch consistency · no auto-retry · thermal/recovery
+  state.
+- **Level 3 — approved paired fault:** signal fault + communication loss · assist
+  fault + torque request · regen request + charge-permission removal · steering
+  plausibility fault + wheel-speed disagreement · low-voltage event + active
+  propulsion request.
+- **Level 4 — compound fault:** only after Level 1–3 signed passes **and a formal
+  hazard review**; every pair needs an approved rationale — **faults are never
+  combined randomly.**
 
 ## Standing checks
 
@@ -279,15 +377,34 @@ to multiple faults at the highest provisional speed.
   architecture dictates (RC-309); regen is supplemental, foundation brakes primary
   (RC-321); no "instant/immediate" wording (RC-288/320); never "certified safe"
   (RC-224).**
+- **Revision 02 record-integrity cleanups (owner review_66, RC-327..339):** the
+  full `RunoutCalculation_ID` field list + `L_min` equation (RC-327); C3A-009B
+  stays `LOCKED` until external-tracking control authority is established
+  (RC-328); the torque command is judged against an approved time-domain envelope
+  (torque-rate + jerk), not "linear" (RC-329); BOS torque removal is separate from
+  the foundation-brake stop (RC-330); regen-disabled is a command state, not a
+  literal 0 Nm reading (RC-331); C3C-003 is coexistence observation, with true
+  brake blending BLOCKED until modelled (RC-332); regen availability is
+  BMS-permission-bounded, not a generic high SOC (RC-333); no arbitrary bus
+  injection — supplier/HIL/fixture/bounded-sim only (RC-334); C3C-007 has an
+  explicit driver/brake response, no assumed auto-brake (RC-335); C3D carries no
+  premature numbers / no "immediate" (RC-336); steering-signal validity states
+  VALID/DEGRADED/IMPLAUSIBLE/UNAVAILABLE/STALE (RC-337); the C3E fault hierarchy
+  is listed L1–L4 (RC-338); the Test Result Validity Rule ties a signed result to
+  its archived configuration (RC-339).
 - **Nothing ingested; nothing Confirmed; no normal driving; no public road; no
   customer operation; no "certified safe"/compliance claim; ODRs untouched.**
 
-## Next — formal engineering review
+## Next — formal engineering baseline review
 
-After the fourteen review_65 corrections the gate labels
-`GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — the
-roadmap is mature enough for disciplined engineering review, **not** physical
-pass evidence. Subgate execution and cell authorizations are defined when the
-owner sends those batches; supplier data (Ford ABS/ESC interface, inverter/BMS
-regen + isolation architecture, tire/axle/geometry, thermal sensors) remains
-NeedsSupplierData.
+After the fourteen review_65 corrections (Revision 02, RC-313..326) and the
+thirteen review_66 corrections (RC-327..339) the gate labels
+`GATE_05M_C3_REVISION_02_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` — the
+procedure architecture is mature, **not** physical-pass evidence. Remaining
+schema completions are tracked by the status flags
+(`RUNOUT_ARTIFACT_SCHEMA_INCOMPLETE` now has its field list + `L_min`;
+`C3C_REGEN_CONTROL_OWNERSHIP_PARTIALLY_PENDING`; `C3D_CELL_VALUES_PENDING_APPROVAL`;
+`C3E_FAULT_HIERARCHY_INCOMPLETE` now lists L1–L4). Subgate execution and cell
+authorizations are defined when the owner sends those batches; supplier data
+(Ford ABS/ESC interface, inverter/BMS regen + isolation architecture,
+tire/axle/geometry, thermal sensors) remains NeedsSupplierData.

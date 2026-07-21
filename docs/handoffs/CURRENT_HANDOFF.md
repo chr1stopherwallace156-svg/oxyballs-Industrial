@@ -4,41 +4,60 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-16
-- Reason for handoff: task complete (delivery "67:75" — DUPLICATE re-send of
-  batch 68 "66:75"; PROVENANCE "no separate file" note only, NO new RC rows, NO
-  deliverable changes); Gate 05M-C3 stays
-  `GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW`;
+- Reason for handoff: task complete (batch 70 "68:75" + review_66 — Gate 05M-C3
+  Revision 02; 13 pre-baseline corrections RC-327..339 applied); gate labels
+  `GATE_05M_C3_REVISION_02_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW`;
   awaiting the 05M-C3A execution / Envelope-Cell-1 batch or a supplier reply
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `188bdfc` — Record delivery "67:75" as a duplicate of batch 68
-  (PROVENANCE note only)
+- Start commit: `31647fd` — Archive raw RH batch 70 + review_66 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- **Duplicate re-send — no new RC rows, no deliverable changes.** Delivery
-  "67:75" is content-identical to batch_68: the same owner framing (QUESTION
-  ASKED), the same Gate 05M-C3 modular sequence (still carrying the 14 uncorrected
-  items — C3A-001 "≥50 m", C3B-004 "40 Nm then brake", C3C-005/006
-  "instantly"/"immediately", the premature C3D numbers, C3E "faults at 15 km/h"),
-  and the same "MY responds" verdict (the identical 14 corrections). **All 14
-  corrections (RC-313..326) were already applied to
-  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` in batch 68**, so there is nothing new to
-  register or correct.
-- Recorded a PROVENANCE "no separate file" note (content preserved 1:1 in the
-  batch_68 archive); **no re-archive.** Flagged to the owner as a likely mis-send
-  / duplicate paste.
-- Files changed (reconciliation commit): `RH01_SECOND_STAGE_FILTER.md` (section
-  77 — duplicate note, **no new RC rows**), `CHANGELOG.md`, handoff files. The
-  PROVENANCE note was committed separately as `188bdfc`. No changes to
-  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (already correct), `DECISION_REGISTER.md`,
-  `RESEARCH_MAP.md`, or `GATE_RESEARCH_QUEUE.md`.
+- **Gate 05M-C3 Revision 02 — RC-327..339 applied verbatim to
+  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`.** The Hunter delivered Revision 02, which
+  applies the 14 batch_68 corrections (RC-313..326); the owner's verdict ("very
+  strong and materially safer") added 13 further record-integrity/procedure
+  corrections:
+  - **RC-327** complete the RunoutCalculation_ID field list + `L_min` equation.
+  - **RC-328** C3A-009B stays `LOCKED` (`APPROVAL_REQUIRED`/`LOCKED`/`NOT_ELIGIBLE`,
+    block `EXTERNAL_TRACKING_CONTROL_AUTHORITY_NOT_ESTABLISHED`).
+  - **RC-329** torque command judged against an approved time-domain envelope
+    (torque-rate + jerk), not "linear".
+  - **RC-330** separate the BOS result (torque removed) from the foundation-brake
+    result (stops within the C3B-derived envelope).
+  - **RC-331** regen-disabled is a `Regeneration Command State: DISABLED`, not a
+    literal 0 Nm.
+  - **RC-332** C3C-003 is Brake/Regeneration Coexistence Observation; true
+    blending BLOCKED until modelled.
+  - **RC-333** regen availability BMS-permission-bounded, not a generic high SOC.
+  - **RC-334** no arbitrary bus injection — supplier/HIL/fixture/bounded-sim only.
+  - **RC-335** C3C-007 explicit driver/brake response; no assumed auto-brake.
+  - **RC-336** remove residual C3D numbers + "immediate".
+  - **RC-337** steering-signal validity states VALID/DEGRADED/IMPLAUSIBLE/
+    UNAVAILABLE/STALE.
+  - **RC-338** listed C3E fault hierarchy L1 single → L2 repeated → L3 paired →
+    L4 compound.
+  - **RC-339** Test Result Validity Rule (signed result binds to its archived
+    config).
+- Status upgrades to `PROCEDURE_ARCHITECTURE_MATURE / REVISION_02_APPLIED / … /
+  C3A_EXTERNAL_CONTROL_INTEGRATION_LOCKED / FORMAL_ENGINEERING_REVIEW_REQUIRED`;
+  post-edit label
+  `GATE_05M_C3_REVISION_02_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` — **the
+  procedure architecture is mature, NOT evidence any physical vehicle has passed**
+  (nothing Confirmed).
+- Files changed (reconciliation commit): `RH01_SECOND_STAGE_FILTER.md`
+  (RC-327..339 + section 78), `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (13
+  corrections), `DECISION_REGISTER.md` (D-008 review_66 amendment),
+  `RESEARCH_MAP.md`, `GATE_RESEARCH_QUEUE.md`, `CHANGELOG.md`, handoff files. Raw
+  archives `batch_70_gate05mc3_revision02.md`, `review_66_batch_70_verdict.md`,
+  PROVENANCE committed separately as `31647fd`.
 - **Nothing ingested; nothing Confirmed; no normal driving; no public road; no
   customer operation; no "certified safe"/compliance claim; ODRs untouched.**
 
@@ -46,12 +65,11 @@
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: delivery "67:75" confirmed content-identical to batch_68
-  (same framing / same Gate 05M-C3 payload / same 14-correction verdict); the
-  deliverable already holds RC-313..326 (spot-checked: Runout Calculation Record,
-  brakes-never-fight-sustained-torque C3B-004, `CELL_VALUE_PENDING_APPROVAL`,
-  lowest-signed-cell C3E, `SCREENING_EVIDENCE`); no duplicate RC rows added;
-  nothing marked `SIGNED_PASS`/Confirmed; no movement authorized
+- Verified vs claimed: batch_70/review_66 archives are 1:1 against the owner's
+  chat ("68:75"); Revision 02's application of RC-313..326 is reflected, and all
+  13 new corrections (RC-327..339) are applied verbatim to the deliverable;
+  C3A-009B is LOCKED, the C3D map carries no premature numbers, the C3E hierarchy
+  is listed L1–L4; nothing marked `SIGNED_PASS`/Confirmed; no movement authorized
 
 ## State
 
@@ -83,12 +101,13 @@
   review_64, NOT physical-pass evidence); **05M-C3 CREATED —
   MODULAR_ARCHITECTURE_DEFINED / NO_TORQUE_VECTORING_AUTHORITY /
   NO_ACTIVE_ABS_ESC_AUTHORITY / RUNOUT_CALCULATION_REQUIRED /
-  NO_NORMAL_DRIVING_AUTHORITY (`GATE05M_C3_CLOSED_AREA_MOVEMENT.md`, five linear
-  subgates 05M-C3A→C3E; labels
-  `GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW` per
-  review_65, NOT physical-pass evidence); 05M-C3A execution + Envelope-Cell-1
-  authorization NEXT per D-008 (amended review_65)**; 07 v0.1 / 07B / 07C v0.4
-  PARKED; 08
+  NO_NORMAL_DRIVING_AUTHORITY — REVISION_02_APPLIED / PROCEDURE_ARCHITECTURE_MATURE
+  / C3A_EXTERNAL_CONTROL_INTEGRATION_LOCKED per review_66
+  (`GATE05M_C3_CLOSED_AREA_MOVEMENT.md`, five linear subgates 05M-C3A→C3E; labels
+  `GATE_05M_C3_REVISION_02_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` per
+  review_66, NOT physical-pass evidence); 05M-C3A execution + Envelope-Cell-1
+  authorization + formal engineering baseline review NEXT per D-008 (amended
+  review_66)**; 07 v0.1 / 07B / 07C v0.4 PARKED; 08
   FMEA_REGISTRY_CREATED (15 modes); 08B PARKED; **08C
   SIMULATION_SWEEP_MATRIX_CREATED — PARKED_FOR_SUPPLIER_DATA**. Order after
   05: 06 deep dive → 09 → 10 → 11.
@@ -98,9 +117,9 @@
 - Doctrine: **D-007** (controls-authority) + **D-008** (staged post-bench
   gate ladder to HV; never "certified safe"; amended review_65 — 05J → 05K →
   05L-A → 05L-B → 05L-C → 05M-A → 05M-B → 05M-C1 → 05M-C2 (05M-C2A → 05M-C2B →
-  05M-C2C) → 05M-C3 (05M-C3A → 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E); each
-  engineer-approved) + the **Numeric Threshold Authority Rule** (RC-267/293/300)
-  + RC-168 + the invented-values family through RC-267 +
+  05M-C2C) → 05M-C3 (05M-C3A → 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E; Revision 02
+  per review_66); each engineer-approved) + the **Numeric Threshold Authority
+  Rule** (RC-267/293/300) + RC-168 + the invented-values family through RC-267 +
   RC-190/191/197
   (HIL/bench is evidence, not vehicle authority) + RC-205/227/247/265 (VCU
   requests/monitors; BMS/PDU owns contactor/pre-charge; the inverter owns its
@@ -132,8 +151,14 @@
   two-lane rule, RC-320 no instant/immediate regen, RC-321 brake-blend
   continuity/jerk envelope, RC-322 no premature C3D numbers, RC-323 road-wheel
   geometry not SWA alone, RC-324 C3E cell-based fault escalation, RC-325 test
-  configuration lock, RC-326 telemetry time-synchronization**) bind all Gate 05x +
-  downstream controls work.
+  configuration lock, RC-326 telemetry time-synchronization, RC-327 full runout
+  field list + L_min, RC-328 C3A-009B stays LOCKED, RC-329 approved command
+  envelope not "linear", RC-330 BOS ≠ foundation-brake stop, RC-331 regen-disabled
+  a command state, RC-332 coexistence ≠ brake blending, RC-333 BMS-permission not
+  high-SOC, RC-334 no arbitrary bus injection, RC-335 driver/brake response after
+  regen loss, RC-336 no premature C3D numbers, RC-337 steering-signal validity
+  states, RC-338 listed C3E fault hierarchy, RC-339 test-result validity rule**)
+  bind all Gate 05x + downstream controls work.
 - Open owner decisions (accumulated): (1) elektron-os-clean; (2) index.html;
   (3) L2; (4) L4; (5) L6; (6) L9 lane name; (7) Artifact Intake Form; (8)
   M10 forbidden-phrase + regression scanner (invented-values family through

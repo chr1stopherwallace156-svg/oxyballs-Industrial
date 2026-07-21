@@ -313,6 +313,29 @@ later entry that references it.
   05L-A → 05L-B → 05L-C → 05M-A → 05M-B → 05M-C1 → 05M-C2 (05M-C2A → 05M-C2B →
   05M-C2C) → 05M-C3 (05M-C3A → 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E); each
   engineer-approved, never "certified safe" (RC-224).
+- **Amendment (owner review_66, batch_70 "68:75", RC-327..339): Gate 05M-C3
+  Revision 02 + record-integrity/procedure completions.** The Hunter delivered
+  Gate 05M-C3 Revision 02 (applying RC-313..326) and the owner added 13
+  corrections: complete the RunoutCalculation_ID field list + `L_min` equation
+  (RC-327); C3A-009B stays `LOCKED` until external-tracking control authority is
+  established (RC-328); the torque command is judged against an approved
+  time-domain envelope (torque-rate + jerk), not "linear" (RC-329); BOS torque
+  removal is separate from the foundation-brake stop (RC-330); regen-disabled is a
+  `Regeneration Command State: DISABLED`, not a literal 0 Nm (RC-331); C3C-003 is
+  coexistence observation with true brake blending BLOCKED until modelled
+  (RC-332); regen availability is BMS-permission-bounded, not a generic high SOC
+  (RC-333); no arbitrary internal-bus injection — supplier/HIL/fixture/bounded-sim
+  only (RC-334); C3C-007 has an explicit driver/brake response, no assumed
+  auto-brake (RC-335); the C3D table carries no premature numbers / no "immediate"
+  (RC-336); a steering-signal validity matrix VALID/DEGRADED/IMPLAUSIBLE/
+  UNAVAILABLE/STALE (RC-337); the C3E fault hierarchy is listed L1–L4 (RC-338);
+  and a Test Result Validity Rule binds a signed result to its archived
+  configuration (RC-339). Status upgrades to `PROCEDURE_ARCHITECTURE_MATURE /
+  REVISION_02_APPLIED / … / C3A_EXTERNAL_CONTROL_INTEGRATION_LOCKED / … /
+  FORMAL_ENGINEERING_REVIEW_REQUIRED`. Post-edit label:
+  `GATE_05M_C3_REVISION_02_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` — the
+  procedure architecture is mature, NOT evidence any physical vehicle has passed
+  (nothing Confirmed).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the

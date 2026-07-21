@@ -371,23 +371,25 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_65):** **Gate 05M-C3 subgate execution /
-cell authorizations — C3A first** (Decision Register **D-008**, amended
-review_65). Gate 05M-C3 (Controlled Closed-Area Low-Speed Movement) is now
-**created** (`GATE05M_C3_CLOSED_AREA_MOVEMENT.md`) as five linear subgates —
-**05M-C3A** straight-line tracking → **05M-C3B** coast-down + foundation brakes →
-**05M-C3C** restricted regeneration → **05M-C3D** steering-angle /
-propulsion-envelope map → **05M-C3E** closed-area fault + abort. After the 14
-review_65 corrections (RC-313..326) it labels
-`GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — the
-architecture is ready for engineering review, NOT physical-pass evidence
-(nothing Confirmed). The next batch is expected to detail **05M-C3A execution +
-Envelope Cell 1 authorization**; every number stays `INITIAL_TARGET_PROFILE`
-(RC-267/291/293/300 — no auto-unlock, cell-by-cell escalation RC-314), steering
-angle is observation/derating only (RC-323, no torque-vectoring), and factory
-ABS/ESC stays authoritative (RC-282/319). Ford ABS/ESC interface, inverter/BMS
-regen + isolation architecture, tire/axle/geometry, and thermal-sensor data are
-NeedsSupplierData.
+**Next expected batch (owner review_66):** **Gate 05M-C3A execution / Envelope
+Cell 1 authorization + formal engineering baseline review** (Decision Register
+**D-008**, amended review_66). Gate 05M-C3 (Controlled Closed-Area Low-Speed
+Movement, `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`) is now at **Revision 02** — the
+Hunter applied the 14 review_65 corrections (RC-313..326) and the owner added 13
+review_66 corrections (RC-327..339: complete RunoutCalculation_ID field list +
+`L_min`; C3A-009B stays LOCKED; command envelope not "linear"; BOS ≠ stop;
+regen-disabled a command state; coexistence ≠ blending; BMS-permission not high
+SOC; no arbitrary bus injection; driver/brake response after regen loss; no
+premature C3D numbers; steering-signal validity states; listed C3E fault
+hierarchy; Test Result Validity Rule). It now labels
+`GATE_05M_C3_REVISION_02_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` — the
+architecture is mature, NOT physical-pass evidence (nothing Confirmed). Every
+number stays `INITIAL_TARGET_PROFILE` (RC-267/291/293/300 — no auto-unlock,
+cell-by-cell escalation RC-314), steering angle is observation/derating only
+(RC-323/337, no torque-vectoring), C3A-009B external-control authority stays
+LOCKED (RC-328), and factory ABS/ESC stays authoritative (RC-282/319/333). Ford
+ABS/ESC interface, inverter/BMS regen + isolation architecture,
+tire/axle/geometry, and thermal-sensor data are NeedsSupplierData.
 Engineer-gated, live-HV, **closed controlled area only, no public road, no
 customer operation, no normal-driving authority**; the Ground Movement
 Precondition (RC-285) + predictable-traction surface (RC-283) + spotters +
