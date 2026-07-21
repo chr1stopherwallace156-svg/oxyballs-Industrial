@@ -6,6 +6,7 @@ All notable changes to the digital twin foundation. Append-only.
 
 ### Added
 
+- **DT-D064 / RL-033** — Open-source max-leverage research pack (8 docs); quantum REFERENCE_ONLY; backlog planning only; zero prod code mutation
 - **DT-D063 / RL-032** — EDTS-SPEC-3D-001 GLB acquisition gate; mesh_mapping_manifest + verifyMeshMapping + QA checklist (no GLB binary yet)
 - **DT-D062 / RL-031** — VPR-2 corrected baseline accepted (3-tier storage; audit lock; mass quarantine)
 - **DT-D061 / RL-030** — VPR-2 claim corrections; multi-maturity; SQL schema draft
@@ -17,7 +18,7 @@ All notable changes to the digital twin foundation. Append-only.
 
 - Visible Progress: **Architecture & Interaction Prototype**
 - R3F viewport ✔ · persistence ❌ · axle DISABLED · storyboard only
-- Next: **acquire/author GLB per SPEC-3D-001 → map ≥5 comp_ids**
+- Next: **execute backlog Sprint 1–2 planning OR acquire GLB per SPEC-3D-001** (research pack does not complete either)
 
 ## 2026-07-16
 

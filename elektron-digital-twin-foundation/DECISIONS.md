@@ -1079,3 +1079,21 @@ Append-only record of digital twin foundation decisions.
   7. No GLB binary in-repo until QA pass — procedural placeholders remain
 
 ---
+
+## DT-D064 — Open-source maximum-leverage research pack (non-invasive)
+
+- **Change-control record:** [`decisions/DT-D064_OPEN_SOURCE_RESEARCH_PACK.json`](decisions/DT-D064_OPEN_SOURCE_RESEARCH_PACK.json)
+- **decision_id:** `DT-D064`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-033`
+- **recommended_decision:** `OPEN_SOURCE_RESEARCH_PACK_ACCEPTED_BACKLOG_NOT_EXECUTED`
+- **decision:**
+  1. Admit `research/open_source/` pack (ecosystem index, mobile pipeline, capture SOP, ICP/QA, vPIC resolver, math methods, quantum assessment, 90-day backlog)
+  2. Metric isolation: NeRF/splats = `VISUALIZATION_ONLY`; metrics via scale-anchored Open3D/COLMAP + AprilTags
+  3. Quarantine scans until vPIC + door-jamb confirm `CFG-2019-F450-REG-CAB-4X2-60CA-DRW`
+  4. Quantum/QAOA = `REFERENCE_ONLY` — classical ILP for placement optimization
+  5. Backlog is planning only — sprint checkboxes not executed by this decision
+  6. **Zero production code mutation** in this pass
+
+---

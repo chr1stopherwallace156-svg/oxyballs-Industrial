@@ -1,8 +1,8 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.37.0",
-  "updated_at": "2026-07-21T03:40:00Z",
+  "version": "0.38.0",
+  "updated_at": "2026-07-21T05:20:00Z",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
   "phase": "EVIDENCE_ACQUISITION_IN_PROGRESS",
@@ -30,8 +30,8 @@
   "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "EDTS-SPEC-3D-001 accepted (DT-D063). Acquire/author GLB per gate; verifyMeshMapping before Tier-2. Map ≥5 comp_ids. Axle disabled. Continue Mission D L1 + WSM/EWD.",
-  "next_build_priority": "ACQUIRE_GLB_PER_SPEC_3D_001",
+  "next_action": "Open-source research pack accepted (DT-D064). Backlog not executed. Next: acquire GLB per SPEC-3D-001 and/or begin Sprint 1–2 (schema + vPIC) deliberately. Axle disabled. Continue Mission D L1 + WSM/EWD.",
+  "next_build_priority": "CHOOSE_GLB_ACQUIRE_OR_SPRINT1_SCHEMA_VPIC",
   "door_fl_decision": "CANDIDATE_ACQUISITION_RECOMMENDED",
   "door_fl_physical_verification": "REQUIRED_EVENTUALLY",
   "door_fl_sprint": "research/sprints/RL-020_CHASSIS_FRAME_BRIEF_AB.md",
@@ -731,5 +731,12 @@
   "mesh_mapping_manifest": "edts-visible-progress/src/data/mesh_mapping_manifest.json",
   "glb_status": "NOT_ACQUIRED",
   "glb_tier2_path": "edts-visible-progress/public/assets/glb/",
-  "visible_progress_r2_sprint_032": "research/sprints/RL-032_GLB_ACQUISITION_SPEC.md"
+  "visible_progress_r2_sprint_032": "research/sprints/RL-032_GLB_ACQUISITION_SPEC.md",
+  "decision_dt_d064": "decisions/DT-D064_OPEN_SOURCE_RESEARCH_PACK.json",
+  "open_source_research_pack": "research/open_source/README.md",
+  "quantum_pipeline_status": "REFERENCE_ONLY_REJECTED",
+  "metric_isolation": "NERF_SPLAT_VISUALIZATION_ONLY",
+  "scan_quarantine_until_config_lock": true,
+  "open_source_backlog_executed": false,
+  "visible_progress_r2_sprint_033": "research/sprints/RL-033_OPEN_SOURCE_RESEARCH_PACK.md"
 }

@@ -1,0 +1,37 @@
+{
+  "decision_id": "DT-D064",
+  "title": "Accept open-source maximum-leverage research pack; zero production code mutation",
+  "status": "ACCEPTED",
+  "date_utc": "2026-07-21",
+  "related_locks": ["RL-033"],
+  "summary": "Admit non-invasive research pack documenting open-source toolchain catalog, mobile scan pipeline, capture SOP, ICP/QA gates, vPIC resolver rules, mathematical methods (WLS/RANSAC/symmetry), quantum REFERENCE_ONLY disposition, and 90-day backlog. Metric isolation locked: NeRF/splats VISUALIZATION_ONLY; metrics via scale-anchored Open3D/COLMAP+AprilTags. Configuration quarantine until vPIC+label match CFG-2019-F450-REG-CAB-4X2-60CA-DRW. Quantum/QAOA rejected from active pipeline. Backlog is planning only — sprint tasks not executed. Zero production code mutation in this pass.",
+  "accepted_artifacts": [
+    "research/open_source/README.md",
+    "research/open_source/OPEN_SOURCE_ECOSYSTEM_INDEX.md",
+    "research/open_source/MOBILE_SCAN_PIPELINE.md",
+    "research/open_source/VEHICLE_SCAN_CAPTURE_PROTOCOL.md",
+    "research/open_source/SCAN_REGISTRATION_AND_QA_SPEC.md",
+    "research/open_source/VIN_CONFIGURATION_RESOLVER_SPEC.md",
+    "research/open_source/MATHEMATICAL_METHODS_REGISTRY.md",
+    "research/open_source/QUANTUM_APPLICABILITY_ASSESSMENT.md",
+    "research/open_source/90_DAY_IMPLEMENTATION_BACKLOG.md"
+  ],
+  "operational_rules": {
+    "metric_isolation": "VISUALIZATION_ONLY_FOR_NERF_SPLATS",
+    "configuration_lock": "QUARANTINE_UNTIL_VPIC_AND_LABEL_MATCH",
+    "quantum": "REFERENCE_ONLY_REJECT_PIPELINE",
+    "production_code_mutation": false,
+    "backlog_execution": false
+  },
+  "recommended_decision": "OPEN_SOURCE_RESEARCH_PACK_ACCEPTED_BACKLOG_NOT_EXECUTED",
+  "geometry_extraction_authorized": false,
+  "geometry_freeze_authorized": false,
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "kernel_mutation": false,
+  "honesty": [
+    "Accuracy envelopes are capability assessments not VEH-000001 measurements",
+    "Quantum timings illustrative — not EDTS lab runs",
+    "Do not invent GVWR/GAWR defaults; physical label intake still required",
+    "Symmetry method uses +Z centerline normal under SPEC-3D-001 CRS"
+  ]
+}

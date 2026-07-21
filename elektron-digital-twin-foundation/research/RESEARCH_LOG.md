@@ -719,3 +719,23 @@ DT-D062 — `VPR2_BASELINE_ACCEPTED_NEXT_GLB_MAPPING`.
 
 DT-D063 — `SPEC_3D_001_ACCEPTED_GLB_NOT_YET_ACQUIRED`.
 
+---
+
+## RL-033 — Open-source maximum-leverage research pack
+
+- **Date:** 2026-07-21
+- **Layer:** research / toolchain / scan pipeline (non-invasive)
+- **Agent:** Cursor Cloud Agent
+- **Question:** Max-leverage open-source path for EDTS without production mutation?
+
+### Findings
+
+1. Eight-document pack under `research/open_source/` admitted.
+2. REUSE_DIRECTLY: COLMAP, Open3D, RTAB-Map, R3F, vPIC; Nerfstudio viz-only; Quantum rejected from pipeline.
+3. Metric isolation + config quarantine rules locked.
+4. 90-day backlog proposed; **not executed**; no production code changes.
+
+### Status
+
+DT-D064 — `OPEN_SOURCE_RESEARCH_PACK_ACCEPTED_BACKLOG_NOT_EXECUTED`.
+
