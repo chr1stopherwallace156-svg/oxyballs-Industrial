@@ -386,7 +386,10 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-285 | **Ground Movement Precondition before any creep torque (owner review_58)**: this is the first time the vehicle can actually roll → **no creep torque may be commanded unless service-brake function + brake assist + steering assist are verified, the E-stop is armed + the remote E-stop active, spotters + runout path clear, the torque clamp + ramp-rate limit active, and the engineer/test-lead gives explicit start authorization** | batch_61 (missing movement precondition) | n/a — controls-safety hard-block | **ControlsSafety / HardBlock** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (Ground Movement Precondition) — lanes L7 |
 | RC-286 | **Gate 05M-C2 must be SPLIT — rollback/incline out of the first ground-contact gate (owner review_58, amends D-008 ladder)**: → **05M-C2A Flat-Ground Restricted Creep → 05M-C2B Controlled Incline / Rollback Hold Validation → 05M-C2C Faulted Creep Recovery**; do flat-ground creep first, mark rollback/incline PROVISIONAL until 05M-C2A passes | batch_61 (rollback in first gate) | n/a — gate-ladder rule | **GateStatus / ControlsSafety** — amends D-008; recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A/B/C structure) — lanes L7 |
 | RC-287 | **Breakaway-torque above the clamp is NEEDS_REVIEW, not an auto "mechanical binding" diagnosis (owner review_58)**: 05M-C2-002 "breakaway >30 Nm indicates mechanical binding" → **"breakaway above the approved creep clamp triggers `NEEDS_REVIEW` / `MECHANICAL_BINDING_CHECK`, not an automatic final diagnosis"** — it could be tire pressure, slope, brake drag, gear ratio, curb weight, axle load, or calibration | batch_61 (premature auto-diagnosis) | n/a — diagnostic-logic rule | **Correctness / ControlsSafety** — fixed in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-003) — lanes L7/L10 |
-| RC-288 | **05M-C2 must drop "absolute 0 Nm" + "instantly" wording (owner review_58, no-absolute-zero + instant/immediate RECURRENCE)**: 05M-C2-001 "absolute 0 Nm" → "torque request remains within the supplier-defined zero-torque threshold"; 05M-C2-005 E-stop "torque drops to zero instantly" → "the inverter torque command transitions to zero and phase current decays within the supplier-approved response window; the vehicle coasts or is braked manually per the test plan" | batch_61 (absolute-zero + instant wording) | supplier zero-torque threshold / response window — **NeedsSupplierData** | **NeedsSupplierData / ControlsSafety** — fixed in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-002/008; extends RC-270/273/281) — lanes L7 |
+| RC-288 | **05M-C2 must drop "absolute 0 Nm" + "instantly" wording (owner review_58, no-absolute-zero + instant/immediate RECURRENCE)**: 05M-C2-001 "absolute 0 Nm" → "torque request remains within the supplier-defined zero-torque threshold"; 05M-C2-005 E-stop "torque drops to zero instantly" → "the inverter torque command transitions to zero and phase current decays within the supplier-approved response window; the vehicle coasts or is braked manually per the test plan" | batch_61 (absolute-zero + instant wording) — **RE-EMITTED again in batch_62 (full-draft regression)** | supplier zero-torque threshold / response window — **NeedsSupplierData** | **NeedsSupplierData / RegressionWatch** — fixed in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-002/008; extends RC-270/273/281) — lanes L7 |
+| RC-289 | **Gate 05M-C2 matrix needs Proof Artifact + Authority Status + Build Engine Status columns (owner review_59)**: the 05M-C2 matrix must carry the same evidence structure as earlier gates → each row gets a **Proof Artifact** (time-synced APPS/brake/CAN torque-command log + phase-current-decay trace + vehicle-speed trace + video record + test-lead signoff), an **Authority Status** (`RESTRICTED_CREEP_ONLY / NO_NORMAL_DRIVING_AUTHORITY`), and a **Build Engine Status** (candidate/target — nothing Confirmed) | batch_62 (missing evidence structure) | n/a — evidence-structure rule | **EvidenceHygiene / ProofRequirement** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (status block + matrix) — lanes L7 |
+| RC-290 | **A "hard reset" is too weak for a failed-creep / motion-related fault (owner review_59)**: "blocks re-energization or creep retries until a hard reset occurs" → **"blocks re-energization or creep retries until diagnostic review + fault-source correction + approved service clear + engineering/test-lead authorization"** — a hard reset alone must not clear a motion fault | batch_62 (weak fault recovery) | n/a — controls-safety rule | **ControlsSafety / HardBlock** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2C + exit criterion 8; extends RC-163/206/207) — lanes L7 |
+| RC-291 | **Gate 05M-C2 must not automatically "unlock 15 km/h" (owner review_59)**: "unlocking track-surface speeds up to 15 km/h" is too strong → **"permits engineering review for Gate 05M-C3 controlled closed-area low-speed movement; any speed ceiling in 05M-C3 remains `INITIAL_TARGET_PROFILE` until engineering-approved"** — 15 km/h is not automatic just because 05M-C2 passed | batch_62 (auto speed-unlock) | supplier/engineering speed ceiling — **NeedsSupplierData** | **GateStatus / NoGateAuthority** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (exit authorization) — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -4707,5 +4710,68 @@ Queued in `GATE_RESEARCH_QUEUE.md`.
   contactors/pre-charge, hardwired loop + service brakes own the stopping path,
   VCU requests/monitors (RC-247/265/205/227; BQ-27); never "certified safe"
   (RC-224).
+- Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
+  no customer operation; no compliance/certification claim; ODRs untouched.
+
+## 70. Batch 62 ("60:60") + owner review_59 — Gate 05M-C2 re-emit (full-draft regression) + 3 new cleanups (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_62_gate05mc2_reemit_regression.md`
+and `docs/research/raw/owner_reviews/review_59_batch_62_verdict.md`.
+Row additions: RC-289..RC-291 (no new CS). No new deliverable — cleanups to
+`GATE05M_C2_RESTRICTED_CREEP.md`. Owner: "Gate 05M-C2 is the right next gate …
+strong … but it still has a few cleanup items before it becomes baseline."
+
+### FULL-DRAFT REGRESSION — strongest M10 regression-scanner case
+
+The Hunter re-answered the Gate 05M-C2 question with a draft that **lost ALL
+the review_58 corrections at once**: low-friction surface (RC-283), `dQ/dt`
+(RC-284), "absolute 0 Nm" + "immediate stop" (RC-288), rollback in the first
+gate (RC-286), and the 05M-C1 "hand-lock one lifted wheel" line (RC-279 —
+SAFETY-CRITICAL). The owner re-issued every correction. The `GATE05M_C2_*` +
+`GATE05M_C1_*` deliverables already hold the corrected wording and did NOT
+regress. This is the strongest case yet for the M10 regression scanner (an
+entire gate reverting to a pre-correction version).
+
+### New owner corrections (beyond the re-issued ones)
+
+- **Proof/Authority/Build-Engine-Status columns (RC-289):** the 05M-C2 matrix
+  carries the same evidence structure as earlier gates — Proof Artifact
+  (time-synced APPS/brake/CAN log + phase-current-decay trace + speed trace +
+  video + test-lead signoff), Authority Status (RESTRICTED_CREEP_ONLY /
+  NO_NORMAL_DRIVING_AUTHORITY), Build Engine Status (candidate/target).
+- **Failed-creep recovery needs review, not a hard reset (RC-290):**
+  re-energization/creep retries stay blocked until diagnostic review +
+  fault-source correction + approved service clear + engineering/test-lead
+  authorization.
+- **No auto "unlock 15 km/h" (RC-291):** permits engineering review for 05M-C3
+  only; any speed ceiling remains INITIAL_TARGET_PROFILE until
+  engineering-approved.
+
+### Gate 05M-C2 status (owner review_59)
+
+Adds `CAN_1_PASSIVE_ONLY` + `FAULT_LATCH_REQUIRED` to the review_58 set:
+`FIRST_GROUND_CONTACT_POWERED_MOVEMENT_GATE / … / CAN_1_PASSIVE_ONLY /
+TORQUE_CLAMP_INITIAL_TARGET_ONLY / RAMP_RATE_INITIAL_TARGET_ONLY /
+FAULT_LATCH_REQUIRED / NO_PUBLIC_ROAD / NO_CUSTOMER_OPERATION /
+NO_NORMAL_DRIVING_AUTHORITY`. Permits **Gate 05M-C3 only** (after 05M-C2A/B/C).
+
+### Next
+
+Owner: **Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement** (unchanged;
+15 km/h is INITIAL_TARGET_PROFILE, RC-291). Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- The full-draft regression changed no deliverable — the corrected 05M-C2/05M-C1
+  wording holds (RC-279/283/284/286/288); new: proof/authority columns (RC-289),
+  failed-creep recovery needs authorized clear not a hard reset (RC-290), no auto
+  speed-unlock (RC-291); first powered ground contact, restricted creep only,
+  predictable-traction closed surface, Ground Movement Precondition (RC-285),
+  CAN_1 listen-only (RC-172/230), wheel-speed read-only (RC-282), no auto retry
+  after E-stop (RC-262), every number INITIAL_TARGET_PROFILE (RC-267); the
+  inverter owns gating, BMS/PDU owns contactors/pre-charge, hardwired loop +
+  service brakes own the stopping path, VCU requests/monitors (RC-247/265/205/
+  227; BQ-27); never "certified safe" (RC-224).
 - Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
   no customer operation; no compliance/certification claim; ODRs untouched.

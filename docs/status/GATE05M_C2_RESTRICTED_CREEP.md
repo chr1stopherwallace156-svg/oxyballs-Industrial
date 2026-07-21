@@ -11,15 +11,24 @@ testing: **restricted creep only, this is not a normal driving gate.** It is
 Recovery.** Flat-ground creep is proven first; rollback/incline is deferred to
 05M-C2B.
 
-**Status (owner review_58): `FIRST_GROUND_CONTACT_POWERED_MOVEMENT_GATE` /
+**Status (owner review_59): `FIRST_GROUND_CONTACT_POWERED_MOVEMENT_GATE` /
 `LIVE_HV_PRESENT` / `GROUND_CONTACT_PRESENT` / `RESTRICTED_CREEP_ONLY` /
 `PREDICTABLE_TRACTION_SURFACE_REQUIRED` / `REMOTE_ESTOP_REQUIRED` /
 `SPOTTERS_REQUIRED` / `BRAKE_ASSIST_VERIFICATION_REQUIRED` /
-`STEERING_ASSIST_VERIFICATION_REQUIRED` / `TORQUE_CLAMP_INITIAL_TARGET_ONLY` /
-`RAMP_RATE_INITIAL_TARGET_ONLY` / `NO_PUBLIC_ROAD` / `NO_CUSTOMER_OPERATION` /
+`STEERING_ASSIST_VERIFICATION_REQUIRED` / `CAN_1_PASSIVE_ONLY` /
+`TORQUE_CLAMP_INITIAL_TARGET_ONLY` / `RAMP_RATE_INITIAL_TARGET_ONLY` /
+`FAULT_LATCH_REQUIRED` / `NO_PUBLIC_ROAD` / `NO_CUSTOMER_OPERATION` /
 `NO_NORMAL_DRIVING_AUTHORITY`.** Ladder: **… → 05M-C1 (coupled, wheels lifted)
 → 05M-C2 (THIS GATE — first ground contact; 05M-C2A → 05M-C2B → 05M-C2C) →
-05M-C3 (controlled closed-area low-speed movement)** (D-008, amended review_58).
+05M-C3 (controlled closed-area low-speed movement)** (D-008, amended review_59).
+
+**Every matrix row carries a Proof Artifact + Authority Status + Build Engine
+Status (owner review_59, RC-289)** — the same evidence structure as earlier
+gates. Proof artifacts include the time-synced APPS/brake/CAN torque-command
+log, phase-current-decay trace, vehicle-speed trace, video record, and the
+test-lead signoff; **Authority Status = `RESTRICTED_CREEP_ONLY /
+NO_NORMAL_DRIVING_AUTHORITY`; Build Engine Status = candidate/target
+(nothing Confirmed).**
 
 ## Numeric Threshold Authority Rule (RC-267/RC-284) — read first
 
@@ -101,7 +110,10 @@ lives here, not in the first ground-contact gate.
 Covers: failed creep event · fault latch into NVM · **service-clear blocked
 while the fault is active (RC-163/206)** · power-cycle recovery · **no
 automatic re-drive / no autonomous creep retry after a trip.** The Hunter's
-05M-C2-013 fault-latch row lives here.
+fault-latch row lives here. **A hard reset alone must NOT clear a
+motion-related fault (owner review_59, RC-290): re-energization or creep
+retries stay blocked until diagnostic review + fault-source correction +
+approved service clear + engineering/test-lead authorization.**
 
 ## Gate 05M-C2 exit criteria (owner review_58)
 
@@ -123,13 +135,18 @@ The system cannot exit Gate 05M-C2 (and proceed to Gate 05M-C3) unless:
 6. CAN_1 stays strictly passive with zero injected frames (RC-172/230).
 7. Control-loop faults latch into NVM, blocking autonomous retries / unvalidated
    re-power (05M-C2C, RC-163/206).
-8. All timestamped CAN logs, parity traces, current-ramp graphs, and engineer
-   signoffs are archived.
+8. Control-loop faults latch into NVM and stay blocked until diagnostic review
+   + fault-source correction + approved service clear + engineering/test-lead
+   authorization — a hard reset alone does not clear a motion fault (RC-290).
+9. All timestamped CAN logs, parity traces, current-ramp graphs, video records,
+   and engineer/test-lead signoffs are archived (RC-289).
 
 **Successful Gate 05M-C2 completion permits engineering review for Gate 05M-C3
 only** (Controlled Closed-Area Low-Speed Movement). It does **not** authorize
 normal driving · public-road operation · customer operation · higher speeds.
-(Never "certified safe," RC-224.)
+**It does NOT automatically "unlock 15 km/h" (owner review_59, RC-291) — any
+speed ceiling in Gate 05M-C3 remains `INITIAL_TARGET_PROFILE` until
+engineering-approved.** (Never "certified safe," RC-224.)
 
 ## Standing checks
 

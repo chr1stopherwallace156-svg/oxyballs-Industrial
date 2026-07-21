@@ -4,64 +4,60 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-16
-- Reason for handoff: task complete (batch 61 "59A" + review_58 — Gate 05M-C1
-  re-emit + Gate 05M-C2 Restricted Creep Torque Validation, the first powered
-  ground-contact movement gate); awaiting the Gate 05M-C3 Controlled Closed-Area
-  Low-Speed Movement batch or a supplier reply
+- Reason for handoff: task complete (batch 62 "60:60" + review_59 — Gate
+  05M-C2 re-emit / full-draft regression + 3 new cleanups); awaiting the Gate
+  05M-C3 Controlled Closed-Area Low-Speed Movement batch or a supplier reply
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `54aa6d8` — Archive raw RH batch 61 + review_58 1:1
+- Start commit: `0e5b555` — Archive raw RH batch 62 + review_59 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- New file: **`docs/status/GATE05M_C2_RESTRICTED_CREEP.md`** — the **first
-  powered ground-contact movement gate** (tires touch the ground under live
-  traction, restricted creep only), **split 05M-C2A (Flat-Ground Restricted
-  Creep, 12-row matrix 05M-C2A-001..012) / 05M-C2B (Controlled Incline /
-  Rollback Hold) / 05M-C2C (Faulted Creep Recovery)**. Numeric Threshold
-  Authority Rule, the test-surface rule (predictable traction, not
-  low-friction), the Ground Movement Precondition (RC-285), the torque
-  ramp-rate/clamp doctrine (`dT_command/dt`), and exit criteria permitting Gate
-  05M-C3 only.
+- **No new deliverable** — cleanups to **`docs/status/GATE05M_C2_RESTRICTED_CREEP.md`**:
+  status adds `CAN_1_PASSIVE_ONLY` + `FAULT_LATCH_REQUIRED`; the matrix now
+  documents Proof Artifact + Authority Status + Build Engine Status columns
+  (RC-289); the 05M-C2C faulted-creep recovery requires diagnostic review +
+  fault-source correction + approved service clear + engineering/test-lead
+  authorization, not a hard reset (RC-290); the exit authorization no longer
+  auto-"unlocks 15 km/h" — engineering review only, speed ceiling
+  INITIAL_TARGET_PROFILE (RC-291).
 - Files changed (reconciliation commit): that deliverable,
-  `docs/DECISION_REGISTER.md` (**D-008 amended** — 05M-C2 created + A/B/C
-  split), `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` (RC-284..288;
-  section 69 — no new CS), `docs/research/RESEARCH_MAP.md` ("next" → Gate
-  05M-C3), `docs/roadmaps/GATE_RESEARCH_QUEUE.md` (05M-C2
-  FIRST_GROUND_CONTACT_POWERED_MOVEMENT_GATE; 05M-C3 → NEXT),
-  `docs/CHANGELOG.md`, handoff files. (Raw archives
-  `batch_61_gate05mc1_reemit_gate05mc2_creep.md`,
-  `review_58_batch_61_verdict.md`, PROVENANCE committed separately as
-  `54aa6d8`.)
-- Summary: Gate 05M-C2 introduced — the first time the vehicle can physically
-  roll under power. Six owner corrections applied verbatim: **predictable-
-  traction surface, not low-friction (RC-283 re-emphasized)**; **`dT/dt` not
-  `dQ/dt` (RC-284)**; **all numbers INITIAL_TARGET_PROFILE (RC-267)**; **the
-  Ground Movement Precondition — brake/brake-assist/steering-assist verified,
-  E-stop armed + remote active, spotters + runout clear, clamp + ramp active,
-  engineer/test-lead explicit start authorization (RC-285)**; **split
-  05M-C2A/B/C, rollback/incline deferred (RC-286)**; **breakaway → NEEDS_REVIEW
-  not auto-diagnosis (RC-287)**; **no "absolute 0 Nm"/"instantly" wording
-  (RC-288)**. **CRITICAL regression watch:** the Hunter re-emitted the
-  05M-C1-005 "hand-lock one lifted wheel" line (RC-279 — the deliverable already
-  holds the corrected rated-fixture wording). **Nothing ingested; nothing
-  Confirmed; no normal driving; no public road; no customer operation; no
-  "certified safe"/compliance claim; ODRs untouched.**
+  `docs/DECISION_REGISTER.md` (**D-008 amended** — review_59 cleanups +
+  full-draft regression watch), `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md`
+  (RC-289..291; section 70 — no new CS), `docs/roadmaps/GATE_RESEARCH_QUEUE.md`
+  (05M-C2 status → review_59), `docs/CHANGELOG.md`, handoff files. (Raw archives
+  `batch_62_gate05mc2_reemit_regression.md`, `review_59_batch_62_verdict.md`,
+  PROVENANCE committed separately as `0e5b555`.)
+- Summary: **FULL-DRAFT REGRESSION.** The Hunter re-answered the Gate 05M-C2
+  question with a draft that **lost every review_58 correction at once** —
+  low-friction surface (RC-283), `dQ/dt` (RC-284), "absolute 0 Nm" + "immediate
+  stop" (RC-288), rollback in the first gate (RC-286), and the 05M-C1
+  "hand-lock one lifted wheel" line (RC-279 — SAFETY-CRITICAL). The owner
+  re-issued every correction; the `GATE05M_C2_*` + `GATE05M_C1_*` deliverables
+  already held the corrected wording and did NOT regress. Three genuinely new
+  corrections applied: **proof/authority/build-engine-status columns (RC-289)**;
+  **failed-creep recovery needs authorized clear, not a hard reset (RC-290)**;
+  **no auto "unlock 15 km/h" (RC-291)**. This is the strongest M10
+  regression-scanner case in the series (an entire gate draft reverting to a
+  pre-correction version). **Nothing ingested; nothing Confirmed; no normal
+  driving; no public road; no customer operation; no "certified safe"/
+  compliance claim; ODRs untouched.**
 
 ## Verification
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_61/review_58 archives are 1:1 against the owner's
-  chat ("59A"); the Gate 05M-C2 status + the six RC-284..288 corrections + the
-  05M-C2A/B/C split + the D-008 amendment match the owner's verdict; nothing
-  marked Confirmed; no movement authorized (05M-C2 is defined, engineer-gated)
+- Verified vs claimed: batch_62/review_59 archives are 1:1 against the owner's
+  chat ("60:60"); the full-draft regression is recorded (RC-279/283/284/286/288
+  re-emitted, deliverables unchanged); the three new RC-289..291 corrections +
+  the CAN_1_PASSIVE_ONLY/FAULT_LATCH_REQUIRED status additions match the owner's
+  verdict; nothing marked Confirmed; no movement authorized
 
 ## State
 
@@ -81,9 +77,10 @@
   NO_LOAD_MOTOR_SPIN_VALIDATION_DEFINED; 05M-C1
   COUPLED_DRIVELINE_LIFTED_WHEEL_READINESS_DEFINED / NO_GROUND_CONTACT; 05M-C2
   FIRST_GROUND_CONTACT_POWERED_MOVEMENT_GATE / GROUND_CONTACT_PRESENT /
-  RESTRICTED_CREEP_ONLY (`GATE05M_C2_RESTRICTED_CREEP.md`, split 05M-C2A/B/C);
-  Gate 05M-C3 (controlled closed-area low-speed movement) NEXT per D-008
-  (amended review_58)**; 07 v0.1 / 07B / 07C v0.4 PARKED; 08
+  RESTRICTED_CREEP_ONLY / CAN_1_PASSIVE_ONLY / FAULT_LATCH_REQUIRED
+  (`GATE05M_C2_RESTRICTED_CREEP.md`, split 05M-C2A/B/C); Gate 05M-C3
+  (controlled closed-area low-speed movement) NEXT per D-008 (amended
+  review_59)**; 07 v0.1 / 07B / 07C v0.4 PARKED; 08
   FMEA_REGISTRY_CREATED (15 modes); 08B PARKED; **08C
   SIMULATION_SWEEP_MATRIX_CREATED — PARKED_FOR_SUPPLIER_DATA**. Order after
   05: 06 deep dive → 09 → 10 → 11.
@@ -100,17 +97,20 @@
   gating; hardwired loop + service brakes own the stopping/interruption path) +
   RC-206 (service-clear never clears active safety faults) + RC-213/218 (a DBC
   is a database, version hash enforced) + RC-224 (never "certified safe") + the
-  Gate 05x chain RC-229..288 (incl. **RC-279 no manual restraint of rotating
+  Gate 05x chain RC-229..291 (incl. **RC-279 no manual restraint of rotating
   parts, RC-280 lifted-chassis safety, RC-282 wheel-speed read-only, RC-285
-  Ground Movement Precondition, RC-286 05M-C2A/B/C split**) bind all Gate 05x +
-  downstream controls work.
+  Ground Movement Precondition, RC-286 05M-C2A/B/C split, RC-289 proof/authority
+  columns, RC-290 authorized fault clear not a hard reset, RC-291 no auto
+  speed-unlock**) bind all Gate 05x + downstream controls work.
 - Open owner decisions (accumulated): (1) elektron-os-clean; (2) index.html;
   (3) L2; (4) L4; (5) L6; (6) L9 lane name; (7) Artifact Intake Form; (8)
   M10 forbidden-phrase + regression scanner (invented-values family through
   RC-267 — nineteen artifacts — the "instant/immediate" pattern
   RC-175/198/204/211/225/255/274/281/288, "certified safe" RC-224, and the
   **RC-257→263→268, RC-256→264, RC-261→269, RC-271→275, RC-277, RC-279 (safety-
-  critical), RC-283 recurrences** — the strongest scanner cases); (9)(10)(11)
+  critical), RC-283 recurrences — and now the batch_62 FULL-DRAFT regression
+  (RC-279/283/284/286/288 all reverted at once), the strongest scanner case in
+  the series**); (9)(10)(11)
   Dana / ZF / Ford-Lee letters; (12) supplier reminder; (13) official Ford BBLB
   + IVM + FMVSS 305a/305/105 + OSHA electrical/LOTO + NHTSA EV + ISO 6469-3 +
   rated-lift/rotating-machinery sources (RC-237..288, NeedsExactSource) + paid

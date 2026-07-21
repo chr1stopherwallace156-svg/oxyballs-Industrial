@@ -198,6 +198,20 @@ later entry that references it.
   the low-friction surface (RC-283); the deliverables already hold the corrected
   wording.** Full ladder: 05J → 05K → 05L-A → 05L-B → 05L-C → 05M-A → 05M-B →
   05M-C1 → 05M-C2 (05M-C2A → 05M-C2B → 05M-C2C) → 05M-C3 (each engineer-approved).
+- **Amendment (owner review_59, batch_62 "60:60", RC-289..291): Gate 05M-C2
+  cleanups — evidence columns, fault recovery, and no auto speed-unlock.** The
+  05M-C2 matrix carries Proof Artifact + Authority Status + Build Engine Status
+  columns like earlier gates (RC-289); a failed-creep / motion-related fault
+  stays blocked until diagnostic review + fault-source correction + approved
+  service clear + engineering/test-lead authorization — a hard reset alone must
+  not clear it (RC-290); Gate 05M-C2 completion does NOT automatically "unlock
+  15 km/h" — it permits engineering review for Gate 05M-C3 only, and any speed
+  ceiling stays INITIAL_TARGET_PROFILE until engineering-approved (RC-291).
+  **Full-draft regression watch:** the batch_62 Hunter re-emit of Gate 05M-C2
+  reverted EVERY review_58 correction at once (RC-279 safety-critical +
+  RC-283/284/286/288) — the strongest M10 regression-scanner case; the
+  `GATE05M_C2_*` + `GATE05M_C1_*` deliverables already hold the corrected
+  wording and did NOT regress.
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the

@@ -691,12 +691,13 @@ Deliverable `docs/status/GATE05M_C2_RESTRICTED_CREEP.md` — the **first powered
 ground-contact movement gate**: tires touch the ground under live traction for
 the first time, restricted creep only. **Split (RC-286): 05M-C2A Flat-Ground
 Restricted Creep (12-row matrix 05M-C2A-001..012) → 05M-C2B Controlled Incline /
-Rollback Hold Validation → 05M-C2C Faulted Creep Recovery.** Status (review_58):
+Rollback Hold Validation → 05M-C2C Faulted Creep Recovery.** Status (review_59):
 `FIRST_GROUND_CONTACT_POWERED_MOVEMENT_GATE / LIVE_HV_PRESENT /
 GROUND_CONTACT_PRESENT / RESTRICTED_CREEP_ONLY / PREDICTABLE_TRACTION_SURFACE_REQUIRED
 / REMOTE_ESTOP_REQUIRED / SPOTTERS_REQUIRED / BRAKE_ASSIST_VERIFICATION_REQUIRED /
-STEERING_ASSIST_VERIFICATION_REQUIRED / TORQUE_CLAMP_INITIAL_TARGET_ONLY /
-RAMP_RATE_INITIAL_TARGET_ONLY / NO_PUBLIC_ROAD / NO_CUSTOMER_OPERATION /
+STEERING_ASSIST_VERIFICATION_REQUIRED / CAN_1_PASSIVE_ONLY /
+TORQUE_CLAMP_INITIAL_TARGET_ONLY / RAMP_RATE_INITIAL_TARGET_ONLY /
+FAULT_LATCH_REQUIRED / NO_PUBLIC_ROAD / NO_CUSTOMER_OPERATION /
 NO_NORMAL_DRIVING_AUTHORITY`. Corrections (review_58): predictable-traction
 surface, not low-friction (RC-283); `dT_command/dt` not `dQ/dt` (RC-284); the
 Ground Movement Precondition — brake/brake-assist/steering-assist verified,
@@ -705,7 +706,14 @@ engineer/test-lead explicit start authorization (RC-285); rollback/incline
 deferred to 05M-C2B (RC-286); breakaway above the clamp → NEEDS_REVIEW not an
 auto diagnosis (RC-287); no "absolute 0 Nm"/"instantly" wording (RC-288); all
 numbers INITIAL_TARGET_PROFILE (RC-267); wheel-speed read-only (RC-282); CAN_1
-listen-only (RC-172/230). Permits **Gate 05M-C3 only** (after 05M-C2A/B/C).
+listen-only (RC-172/230). Cleanups (review_59): matrix carries Proof Artifact +
+Authority Status + Build Engine Status columns (RC-289); a failed-creep /
+motion fault needs diagnostic review + fault-source correction + approved
+service clear + engineering/test-lead authorization, not a hard reset (RC-290);
+no automatic "unlock 15 km/h" — 05M-C3 speed ceiling is INITIAL_TARGET_PROFILE
+(RC-291). **Full-draft regression watch: the batch_62 re-emit reverted every
+review_58 correction at once (RC-279 safety-critical + RC-283/284/286/288); the
+deliverable did NOT regress.** Permits **Gate 05M-C3 only** (after 05M-C2A/B/C).
 
 ## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: NEXT (owner review_58)
 

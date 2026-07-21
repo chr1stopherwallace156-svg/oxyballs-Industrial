@@ -5,6 +5,36 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 62 ("60:60") + review_59: Gate 05M-C2 re-emit (full-draft regression) + 3 new cleanups
+
+- Archived batch_62 (Gate 05M-C2 re-emit) and review_59 1:1 (commit
+  `0e5b555`). New rows RC-289..291 (no new CS). Section 70. **No new deliverable
+  — cleanups to `docs/status/GATE05M_C2_RESTRICTED_CREEP.md`.** Owner: "Gate
+  05M-C2 is the right next gate … strong … but it still has a few cleanup items
+  before it becomes baseline."
+- **FULL-DRAFT REGRESSION — strongest M10 regression-scanner case:** the Hunter
+  re-answered the Gate 05M-C2 question with a draft that **lost every review_58
+  correction at once** — low-friction surface (RC-283), `dQ/dt` (RC-284),
+  "absolute 0 Nm" + "immediate stop" (RC-288), rollback in the first gate
+  (RC-286), and the 05M-C1 "hand-lock one lifted wheel" line (RC-279 —
+  SAFETY-CRITICAL). The owner re-issued every correction. The `GATE05M_C2_*` +
+  `GATE05M_C1_*` deliverables already held the corrected wording and did NOT
+  regress.
+- **New owner corrections (RC-289..291):**
+  - RC-289 — the 05M-C2 matrix carries Proof Artifact + Authority Status +
+    Build Engine Status columns (same evidence structure as earlier gates).
+  - RC-290 — a failed-creep / motion-related fault stays blocked until
+    diagnostic review + fault-source correction + approved service clear +
+    engineering/test-lead authorization; a hard reset alone does not clear it.
+  - RC-291 — Gate 05M-C2 completion does NOT automatically "unlock 15 km/h";
+    it permits engineering review for 05M-C3 only, and any speed ceiling stays
+    INITIAL_TARGET_PROFILE until engineering-approved.
+- Gate 05M-C2 status adds `CAN_1_PASSIVE_ONLY` + `FAULT_LATCH_REQUIRED`.
+  **D-008 amended.** RESEARCH_MAP + GATE_RESEARCH_QUEUE next remains → **Gate
+  05M-C3** (Controlled Closed-Area Low-Speed Movement). Nothing Confirmed; no
+  normal driving; no public road; no customer operation; never "certified safe"
+  (RC-224); ODRs untouched.
+
 ## 2026-07-16 — RH batch 61 ("59A") + review_58: Gate 05M-C1 re-emit + Gate 05M-C2 Restricted Creep Torque Validation
 
 - Archived batch_61 (Gate 05M-C1 re-emit + Gate 05M-C2) and review_58 1:1

@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 61 "59A" + review_58 — Gate 05M-C1 re-emit + Gate 05M-C2 Restricted Creep Torque Validation)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 61 "59A" + review_58 — Gate 05M-C1 re-emit + Gate 05M-C2 Restricted Creep Torque Validation, the first powered ground-contact movement gate); awaiting the Gate 05M-C3 Controlled Closed-Area Low-Speed Movement batch or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `54aa6d8` (batch-61 archive); end commit: `c9fa4a7` (batch-61 reconciliation)
+- Work: new deliverable `GATE05M_C2_RESTRICTED_CREEP.md` — the first powered ground-contact movement gate, split 05M-C2A (Flat-Ground Restricted Creep, 12-row matrix) / 05M-C2B (Controlled Incline / Rollback Hold) / 05M-C2C (Faulted Creep Recovery). RC-284..288 (no new CS); section 69; D-008 amended (05M-C2 created + A/B/C split). Six owner corrections: `dT/dt` not `dQ/dt` (RC-284); the Ground Movement Precondition (RC-285); split 05M-C2A/B/C (RC-286); breakaway → NEEDS_REVIEW not auto-diagnosis (RC-287); no absolute-zero/instant wording (RC-288); predictable-traction surface not low-friction (RC-283). CRITICAL regression watch: the Hunter re-emitted the 05M-C1-005 "hand-lock one lifted wheel" line (RC-279); the deliverable already holds the corrected wording. Nothing Confirmed; no normal driving; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (invented-values family through RC-267 — nineteen artifacts + "instant/immediate" RC-175..288 + "certified safe" RC-224 + the RC-257→263→268, RC-256→264, RC-261→269, RC-271→275, RC-277, RC-279 (safety-critical), RC-283 recurrences); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305/105 + OSHA/NHTSA/ISO 6469-3 + rated-lift/rotating-machinery sources (RC-237..288) + Ford ABS/ESC wheel-speed authorization (RC-282) + IMD supplier manual + pre-charge/contactor datasheets + inverter/motor + driveline (gear ratio, axle/GAWR, wheel-speed, brake-override window, steering/brake assist, creep torque/ramp/breakaway) data + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/contactor/HV-shutdown ownership (BQ-27).
+
 ## 2026-07-16 — Claude Code — task complete (batch 60 + review_57 — Gate 05M-B cleanup + Gate 05M-C1 Coupled Driveline / Lifted-Wheel Readiness)
 
 ### (archived handoff)
