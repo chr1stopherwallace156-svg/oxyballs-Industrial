@@ -749,7 +749,7 @@ post-edit label
 procedure is ready to be reviewed and controlled, not physical-pass evidence.
 Permits **Gate 05M-C3 only** (after 05M-C2A/B/C).
 
-## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: REVISION 05 — formal baseline candidate, ready for controlled multidisciplinary baseline review (owner review_69, batch_73)
+## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: REVISION 06 — core governance architecture mature, ready for controlled specification freeze (owner review_70, batch_74)
 
 Deliverable `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md` — the **last rung of
 the split 05M-C phase**, only after Gate 05M-C2 is proven. Built as **five linear
@@ -826,10 +826,28 @@ steering fault recovery rules (RC-379); per-fault `FaultExecutionAuthorization_I
 becomes `FORMAL_BASELINE_CANDIDATE / REVISION_05_APPLIED / … / NO_CLAIM_RULE_DEFINED`;
 post-edit label
 `GATE_05M_C3_REVISION_05_READY_FOR_CONTROLLED_MULTIDISCIPLINARY_BASELINE_REVIEW`.
+**Revision 06 (review_70, RC-383..397):** complete overlap enforcement + full
+`PHYSICAL_MOVEMENT_BLOCKED` conditions (RC-383); `allowed_steering_band` bounded
+min/max record + angle frame (RC-384); `unit` controlled enum + canonical-SI
+comparison (RC-385); `AUTHORIZED → ACTIVE` activation preconditions + single-ACTIVE
+(RC-386); `COMPLETED` moved to execution status, three enums separated (RC-387);
+`EXPIRED` authorization state (RC-388); `ProcedureApproval_ID` signed record
+(RC-389); C3A-008 E-stop raw-trace timestamps (RC-390); `IndependentSensorHealthResult`
+schema + invalid-channel → UNKNOWN (RC-391); deterministic three-axis steering
+resolution (RC-392); per-state steering recovery model (RC-393);
+`FaultExecutionAuthorization_ID` lifecycle fields (RC-394); paired faults keyed by
+exact fault IDs (RC-395); database foreign-key enforcement (RC-396); scope-limitation
+no-reuse clause (RC-397). Owner items 1 & 3 targeted the Hunter's OCR/typographical
+text only (already clean/canonical). Status becomes `FORMAL_BASELINE_CANDIDATE /
+CORE_GOVERNANCE_ARCHITECTURE_MATURE / REVISION_06_APPLIED / … /
+SCOPE_LIMITATION_NO_REUSE_DEFINED`; post-edit label
+`GATE_05M_C3_REVISION_06_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE`. The owner's
+downstream `DATABASE_SCHEMA_IMPLEMENTATION → RULE_ENGINE_TESTS → HIL_VALIDATION` is
+M10/production work NOT performed during Rev 07 ingestion.
 **NEXT = 05M-C3A execution + Envelope Cell 1 authorization (signed
-`TestCellAuthorization_ID`) + controlled multidisciplinary baseline review.** The
-Hunter's "15 km/h" is an `INITIAL_TARGET_PROFILE` pending supplier + engineering
-approval (RC-267/291/293/300 — no auto-unlock).
+`TestCellAuthorization_ID`).** The Hunter's "15 km/h" is an
+`INITIAL_TARGET_PROFILE` pending supplier + engineering approval
+(RC-267/291/293/300 — no auto-unlock).
 
 Enforce throughout — engineer-gated, live-HV, **closed controlled area only, no
 public road, no customer operation, no normal-driving authority**; the Numeric

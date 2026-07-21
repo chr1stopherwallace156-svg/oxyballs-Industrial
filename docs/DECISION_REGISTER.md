@@ -459,6 +459,35 @@ later entry that references it.
   `GATE_05M_C3_REVISION_05_READY_FOR_CONTROLLED_MULTIDISCIPLINARY_BASELINE_REVIEW`
   — the validation architecture is nearly ready to freeze while all physical pass
   claims remain correctly unproven (nothing Confirmed).
+- **Amendment (owner review_70, batch_74 "72:75", RC-383..397): Gate 05M-C3
+  Revision 06 — implementation-correctness hardening toward specification
+  freeze.** The owner places Revision 05 "at formal baseline-candidate quality …
+  strong, deterministic, database-centered," notes the remaining problems "are no
+  longer conceptual — they are text corruption, incomplete rules, and a few
+  schema/status inconsistencies," and issues 17 items → 15 new corrections (owner
+  items 1 & 3 targeted the Hunter's OCR/typographical text only, already
+  clean/canonical in the deliverable): complete overlap enforcement + full
+  `PHYSICAL_MOVEMENT_BLOCKED` conditions (RC-383); `allowed_steering_band` bounded
+  min/max record + angle frame (RC-384); `unit` controlled enum + canonical-SI
+  comparison (RC-385); `AUTHORIZED → ACTIVE` activation preconditions +
+  single-ACTIVE rule (RC-386); `COMPLETED` moved to execution status, three enums
+  separated (RC-387); `EXPIRED` authorization state (RC-388); `ProcedureApproval_ID`
+  signed record (RC-389); C3A-008 E-stop raw-trace timestamps + profile artifacts
+  (RC-390); `IndependentSensorHealthResult` schema + invalid-channel → UNKNOWN
+  (RC-391); deterministic three-axis steering resolution (RC-392); per-state
+  steering recovery model (RC-393); `FaultExecutionAuthorization_ID` lifecycle
+  fields (RC-394); paired faults keyed by exact fault IDs (RC-395); database
+  foreign-key enforcement (RC-396); and the scope-limitation no-reuse clause
+  (RC-397). Status upgrades to `FORMAL_BASELINE_CANDIDATE /
+  CORE_GOVERNANCE_ARCHITECTURE_MATURE / REVISION_06_APPLIED / … /
+  SCOPE_LIMITATION_NO_REUSE_DEFINED`. Post-edit label:
+  `GATE_05M_C3_REVISION_06_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE` — the
+  controlled-validation architecture is mature and ready to freeze the
+  specification while all physical pass claims remain correctly unproven. **The
+  owner's downstream sequence — `DATABASE_SCHEMA_IMPLEMENTATION → RULE_ENGINE_TESTS
+  → HIL_VALIDATION` — is M10/production work and is NOT performed during Rev 07
+  ingestion** (CLAUDE.md); the frozen specification stays a governance document
+  until the owner opens the production phase (nothing Confirmed).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the

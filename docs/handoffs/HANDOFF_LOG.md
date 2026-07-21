@@ -13,6 +13,53 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-21 — Claude Code — batch 73 ("71:75") + review_69: Gate 05M-C3 Revision 05 (RC-369..382)
+
+### Session
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-21
+- Reason for handoff: task complete (RH batch 73 "71:75" + owner review_69 — Gate
+  05M-C3 Revision 05; 14 corrections RC-369..382 applied); awaiting the 05M-C3A
+  execution / Envelope-Cell-1 batch or a supplier reply
+
+### Git state
+
+- Branch: `claude/docs-structure-large-projects-b6vxx5`
+- Agent owner: Claude Code (single-writer rule, AGENTS.md)
+- Start commit: `e0837c6` — Archive RH batch 73 + owner review_69 1:1
+- End commit: `73f3c6f` — Reconcile RH batch 73 + review_69 (RC-369..382)
+- Working tree at handoff: clean (everything committed)
+
+### Work performed
+
+- RH batch 73 ("71:75") + owner review_69 — Gate 05M-C3 Revision 05. Owner
+  classified it `FORMAL_ENGINEERING_BASELINE_CANDIDATE` ("the strongest and most
+  internally consistent version yet"); 16 items → 14 new corrections (owner items 1
+  & 5 already clean — RC-340/351, RC-355). Applied RC-369..382 to
+  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`: authorization-field units + hard validation
+  (369); immutable `AuthorizationTransition_ID` audit + `SUSPENDED→AUTHORIZED`
+  revalidation (370); `COMPLETED` ≠ `SIGNED_PASS` (371); `RunoutAggregationResult`
+  + hard blocks (372); distance boundary/geometry validation (373); append-only
+  evidence (374); regen residual conditioned by operating state + `ZERO_REGEN_REQUEST`
+  (375); C3A-008 separate E-stop outcomes (376); C3C-007 uncertainty + channel
+  health (377); deterministic steering-state precedence (378); steering fault
+  recovery (379); per-fault `FaultExecutionAuthorization_ID` (380); paired-fault
+  lifecycle fields (381); no-claim rule (382). RH01 RC-369..382 + section 82; D-008
+  amendment (review_69); RESEARCH_MAP, GATE_RESEARCH_QUEUE, CHANGELOG updated.
+  Deliverable relabelled
+  `GATE_05M_C3_REVISION_05_READY_FOR_CONTROLLED_MULTIDISCIPLINARY_BASELINE_REVIEW`.
+- Nothing ingested; nothing Confirmed; no normal driving; no public road; no
+  customer operation; no "certified safe"/compliance claim; ODRs untouched.
+
+### Note
+
+Full state snapshot, doctrine chain (RC-168..382), open owner decisions, forbidden
+actions, and the receiving-agent checklist are forward-carried into the batch-74
+`CURRENT_HANDOFF.md`; this entry records the batch-73 delta.
+
+---
+
 ## 2026-07-21 — Claude Code — owner directive_02 (side-bar): fault-record & error-library architecture (D-009, RC-364..368)
 
 ### Session

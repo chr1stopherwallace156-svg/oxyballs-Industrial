@@ -10,8 +10,9 @@ is built as **five linear modular subgates**, NOT one large "track movement"
 gate (owner review_65), so straight-line propulsion, braking, regeneration,
 steering, and fault behaviour are never approved together prematurely.
 
-**Status (owner review_65/66/67/68/69): `FORMAL_BASELINE_CANDIDATE` /
-`REVISION_05_APPLIED` / `MODULAR_ARCHITECTURE_DEFINED` /
+**Status (owner review_65/66/67/68/69/70): `FORMAL_BASELINE_CANDIDATE` /
+`CORE_GOVERNANCE_ARCHITECTURE_MATURE` / `REVISION_06_APPLIED` /
+`READY_FOR_CONTROLLED_SPECIFICATION_FREEZE` / `MODULAR_ARCHITECTURE_DEFINED` /
 `GLOBAL_AUDIT_SCHEMA_DEFINED` / `TELEMETRY_PACKET_DEFINED` /
 `TELEMETRY_SYNC_DEFINED` / `CONFIGURATION_VALIDITY_RULE_DEFINED` /
 `IMMUTABLE_EVIDENCE_PRESERVATION_DEFINED` / `LEDGER_LIFECYCLE_DEFINED` /
@@ -38,21 +39,33 @@ steering, and fault behaviour are never approved together prematurely.
 `C3D_STATE_PRECEDENCE_AND_RECOVERY_DEFINED` /
 `FAULT_EXECUTION_AUTHORIZATION_SCHEMA_DEFINED` /
 `PAIRED_FAULT_LIFECYCLE_FIELDS_DEFINED` / `NO_CLAIM_RULE_DEFINED` /
+`RUNOUT_BLOCK_RULES_DEFINED` / `UNIT_ENUM_AND_CANONICAL_CONVERSION_DEFINED` /
+`STEERING_BAND_BOUNDED_RECORD_DEFINED` / `AUTHORIZATION_ACTIVATION_RULES_DEFINED` /
+`AUTHORIZATION_EXPIRY_STATE_DEFINED` / `RESULT_STATUS_SEPARATED` /
+`PROCEDURE_APPROVAL_RECORD_DEFINED` / `ESTOP_RAW_TRACE_DEFINED` /
+`INDEPENDENT_SENSOR_HEALTH_SCHEMA_DEFINED` /
+`STEERING_RESOLUTION_DETERMINISTIC_DEFINED` / `STEERING_RECOVERY_MODEL_DEFINED` /
+`FAULT_EXECUTION_LIFECYCLE_FIELDS_DEFINED` / `PAIRED_FAULT_EXACT_FAULT_IDS_DEFINED` /
+`DATABASE_FOREIGN_KEY_ENFORCEMENT_DEFINED` / `SCOPE_LIMITATION_NO_REUSE_DEFINED` /
 `NUMERIC_LIMITS_INITIAL_TARGET_PROFILE` / `FORMAL_ENGINEERING_REVIEW_REQUIRED` /
 `NO_ACTIVE_ABS_ESC_AUTHORITY` / `NO_TORQUE_VECTORING_AUTHORITY` /
 `NO_PUBLIC_ROAD` / `NO_CUSTOMER_OPERATION` / `NO_NORMAL_DRIVING_AUTHORITY`.**
 After the fourteen review_65 corrections (RC-313..326), the thirteen review_66
 corrections (RC-327..339, Revision 02), the eleven review_67 corrections
 (RC-340..350, Revision 03), the thirteen review_68 corrections (RC-351..363,
-Revision 04) and the fourteen review_69 corrections (RC-369..382, Revision 05 —
-items 1 & 5 of the owner's sixteen were already clean) the gate labels
-`GATE_05M_C3_REVISION_05_READY_FOR_CONTROLLED_MULTIDISCIPLINARY_BASELINE_REVIEW` —
-**the validation architecture is nearly ready to freeze, while all physical pass
-claims remain correctly unproven; it does NOT mean any vehicle / calibration /
-brake system / regeneration strategy / moving fault test has physically passed**
-(nothing Confirmed).
+Revision 04), the fourteen review_69 corrections (RC-369..382, Revision 05 —
+items 1 & 5 already clean) and the fifteen review_70 corrections (RC-383..397,
+Revision 06 — owner items 1 & 3 targeted the Hunter's OCR/typographical text only,
+already clean/canonical here) the gate labels
+`GATE_05M_C3_REVISION_06_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE` —
+**the controlled-validation architecture is mature and ready to freeze the
+specification, while all physical pass claims remain correctly unproven; it does
+NOT mean any vehicle / calibration / brake system / regeneration strategy / moving
+fault test has physically passed** (nothing Confirmed). The owner's downstream
+sequence — `DATABASE_SCHEMA_IMPLEMENTATION → RULE_ENGINE_TESTS → HIL_VALIDATION` —
+is M10/production work and is **NOT performed during Rev 07 ingestion**.
 Ladder: **… → 05M-C2 (05M-C2A → 05M-C2B → 05M-C2C) → 05M-C3 (THIS GATE — 05M-C3A
-→ 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E)** (D-008, amended review_69).
+→ 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E)** (D-008, amended review_70).
 
 ## Linear progression (owner review_65) — HARD BLOCK
 
@@ -92,6 +105,15 @@ preceding subgate reaches `SIGNED_PASS` across all ledger items:
   Status: APPROVAL_REQUIRED` · `Execution Status: NOT_EXECUTED` · `Result Signoff
   Status: NOT_ELIGIBLE`** (no procedure is pre-approved on paper). The subgate
   matrices show the target field layout, not a granted approval.
+- **Procedure approval is a signed record, not a document default (owner
+  review_70, RC-389):** `PAS: APPROVED_FOR_CONTROLLED_EXECUTION` may be populated
+  ONLY from a **`ProcedureApproval_ID`** record — `test_id` · `procedure_revision`
+  · `approver_identity` · `approval_scope` · `approval_timestamp` ·
+  `signature_hash` · `authorization_expiry` · `linked_hazard_analysis` · `status`.
+  **Until that record exists every row stays `PAS: APPROVAL_REQUIRED` / `ES:
+  NOT_EXECUTED` / `RSS: NOT_ELIGIBLE`.** The prefilled
+  `APPROVED_FOR_CONTROLLED_EXECUTION` values in the Revision-05 matrices are the
+  *target* state, populated only from a signed `ProcedureApproval_ID`.
 - **Numeric Threshold Authority Rule (RC-267/293/300):** every number here
   (`V_max` ≤15 km/h, ≤40 Nm/sec ramp, ≤80 Nm traction, ≤5 Nm min-regen, ≤10 Nm
   regen cap, ≤5% parity, and all C3D cell values) is `INITIAL_TARGET_PROFILE`
@@ -212,6 +234,31 @@ the approved measurement tolerance. A component marked
 must have `included_in_L_min = true` and `included_within_component_id = null`. The
 database **rejects** any inconsistent combination.
 
+**Complete overlap enforcement + full movement-block conditions (owner review_70,
+RC-383) — HARD BLOCK.** The overlap rules are enforced in full, not left as
+schema shape:
+
+```
+IF overlap_review_status = INCLUDED_IN_OTHER_COMPONENT:
+  included_in_L_min             = false
+  included_within_component_id  IS NOT NULL
+  referenced host component     EXISTS
+  host component belongs to the SAME RunoutCalculations_ID
+IF overlap_review_status = INCLUDED_SEPARATELY:
+  included_in_L_min             = true
+  included_within_component_id  IS NULL
+```
+
+**`PHYSICAL_MOVEMENT_BLOCKED` if ANY of:** `available_track_length <
+calculated_L_min` · `remaining_margin < approved_minimum_margin` ·
+`overlap_check_result != PASS` · `unit_consistency_result != PASS` ·
+`required_component_completion_result != PASS` · `authorization_status !=
+SIGNED_RELEASE` · a `ConfigurationPacket_ID` mismatch exists · the
+`TestCellAuthorization_ID` is not `ACTIVE` · any required component is
+`MISSING_SOURCE`, `UNVERIFIED`, `INITIAL_TARGET_PROFILE_ONLY`, or
+`BLOCKED_PENDING_REVIEW`. The schemas are not "complete" until these enforcement
+lines exist.
+
 ### Test Configuration Lock Rule (owner review_65, RC-325) — HARD BLOCK
 
 Every C3 run archives: **VCU firmware hash · inverter firmware/version ·
@@ -283,6 +330,23 @@ another expects m/s. The record is rejected unless **all** of these hold:
 `authorization_expiry > activation_timestamp` ·
 `RunoutCalculations.ConfigurationPacket_ID == TestCellAuthorization.ConfigurationPacket_ID`.
 
+**`unit` is a controlled enum + canonical-SI comparison (owner review_70, RC-385)
+— HARD BLOCK:** `unit` is NOT an unrestricted string. It is drawn from a
+controlled enum — **`m` · `m/s` · `m/s^2` · `m/s^3` · `Nm` · `Nm/s` · `Nm/s^2` ·
+`deg` · `deg/s` · `rad` · `rad/s` · `A` · `A/s` · `V` · `V/s` · `Pa` · `kPa` ·
+`bar` · `ms` · `s` · `kg` · `percent`** — and every value is converted to internal
+**canonical SI units before any comparison.** The **display unit may vary; the
+database comparison unit must be canonical**, so a value stored/displayed in km/h
+is compared in m/s and never mixed.
+
+**`allowed_steering_band` is a bounded record, not one number (owner review_70,
+RC-384) — HARD BLOCK:** a steering band needs lower and upper boundaries and an
+explicit angle frame — `minimum_angle` · `maximum_angle` · `unit` ·
+`reference_frame` · `authority_class` · `source_artifact_id` · `uncertainty`. The
+angle type is declared as **`STEERING_WHEEL_ANGLE` / `ROAD_WHEEL_ANGLE` /
+`DERIVED_ROAD_WHEEL_ANGLE`** (RC-323) so steering-wheel degrees and road-wheel
+degrees are never accidentally mixed in the same field.
+
 **Every authorization transition is an immutable audit event (owner review_69,
 RC-370) — HARD BLOCK:** a status change may never be silently overwritten. Each
 transition creates an `AuthorizationTransition_ID` record: `TestCellAuthorization_ID`
@@ -319,6 +383,40 @@ REVOKED           → SUPERSEDED
 - **`REVOKED`** — the authorization may no longer be used.
 - **`SUPERSEDED`** — a newer authorization replaces it, but the historical record
   remains.
+
+**Revision 06 status-model refinement (owner review_70, RC-387) — HARD BLOCK:**
+`COMPLETED` belongs to **execution**, not authorization, so the three concepts
+each carry their own enum and are never conflated:
+
+```
+Authorization Status : DRAFT · APPROVAL_REQUIRED · AUTHORIZED · ACTIVE ·
+                       SUSPENDED · REVOKED · SUPERSEDED · EXPIRED
+Execution Status     : NOT_STARTED · PENDING · EXECUTING · EXECUTED ·
+                       ABORTED · COMPLETED
+Result Status        : NOT_ELIGIBLE · NEEDS_REVIEW · INVALID_TEST ·
+                       SIGNED_FAIL · SIGNED_PASS
+```
+
+The RC-354 transition diagram above is retained as the prior-revision baseline;
+under RC-387 the terminal `COMPLETED` node is read as the **execution** session
+ending (Execution Status = `COMPLETED`) while the authorization itself moves
+`ACTIVE → SUPERSEDED | EXPIRED`. `COMPLETED` still never clears a gate (RC-371).
+
+**`EXPIRED` authorization state (owner review_70, RC-388) — HARD BLOCK:** because
+each authorization carries an `authorization_expiry`, expiry is an explicit state.
+**When `current_time >= authorization_expiry`, `AUTHORIZED` or `SUSPENDED` →
+`EXPIRED`.** An `EXPIRED` record **cannot become `ACTIVE`** without a new approval
+or a superseding authorization.
+
+**Authorization activation preconditions (owner review_70, RC-386) — HARD BLOCK:**
+`AUTHORIZED → ACTIVE` is permitted **only if ALL** hold — the current timestamp is
+before `authorization_expiry` · `ConfigurationPacket_ID` is unchanged ·
+`RunoutAggregationResult = SIGNED_RELEASE` · the environmental window is valid ·
+the thermal state is valid · a prior-cell `SIGNED_PASS` exists where required · the
+required procedure approval exists · required personnel are assigned · emergency
+and containment systems are ready. **Only one `TestCellAuthorization_ID` may be
+`ACTIVE` for the same vehicle / subgate / test session at one time** — no
+conflicting active operating limits.
 
 ### Cell-by-cell operating-envelope escalation (owner review_65, RC-314) — HARD BLOCK
 
@@ -382,6 +480,18 @@ established (RC-328/358).**
 authority, until C3A-009B's interface is formally approved (RC-316). Path
 deviation is measured by independent means (survey marks / camera / calibrated
 positioning), not a steering-angle signal alone.**
+
+**C3A-008 E-stop keeps the raw trace, not a single slope (owner review_70,
+RC-390) — HARD BLOCK.** The RC-376 separate-outcome fields are recorded as
+**timestamps + profile artifacts, not reduced to one rate** — a single
+`phase_current_decay` (A/ms) or `DC_bus_decay` (V/ms) slope does not fully
+describe behaviour. Store: `event_trigger_timestamp` ·
+`torque_inhibit_request_timestamp` · `phase_current_below_threshold_timestamp` ·
+`phase_current_peak_after_event` · `phase_current_decay_profile_artifact_id` ·
+`inverter_state_before` · `inverter_state_after` · `HV_isolation_start_timestamp` ·
+`contactor_feedback_open_timestamp` · `DC_bus_voltage_profile_artifact_id` ·
+`vehicle_speed_at_event` · `vehicle_stop_or_controlled_deceleration_result`. The
+raw trace is retained rather than collapsed into a single number.
 
 ## Subgate 05M-C3B — Coast-Down + Foundation Brakes
 
@@ -509,6 +619,16 @@ ABS/ESC-related condition · C3C-007 regen fault → foundation braking.
   range and calibration valid · DC-bus sensor valid · speed sensor valid · time
   synchronization valid · no saturation or dropped data.** An "independent" sensor
   that is out of range or unsynchronized is not evidence.
+- **`IndependentSensorHealthResult` is a formal record (owner review_70,
+  RC-391) — HARD BLOCK:** channel health is captured, not left as an open
+  question — `current_probe_calibration_status` · `current_probe_range_valid` ·
+  `DC_bus_sensor_status` · `DC_bus_sensor_range_valid` · `motor_speed_sensor_status`
+  · `wheel_speed_sensor_status` · `time_sync_status` · `maximum_time_sync_error` ·
+  `dropped_frame_count` · `dropped_frame_rate` · `saturation_detected` ·
+  `clipping_detected` · `sensor_fault_detected` · `result_status`. **If any
+  required independent channel is invalid, `INVERTER_PHYSICAL_STATE = UNKNOWN` and
+  `TEST_RESULT = INVALID_TEST` or `NEEDS_REVIEW`** — an unhealthy channel cannot
+  resolve the comms-loss unknown state (RC-359).
 
 ## Subgate 05M-C3D — Steering-Angle / Propulsion-Envelope Map
 
@@ -569,12 +689,44 @@ and freshness are computed independently and mapped through an engineering-appro
 decision table. The exact priority is engineering-approved, but it **must be
 deterministic** (the same inputs always resolve to the same state).
 
+**Deterministic three-axis resolution — no catch-all row (owner review_70,
+RC-392) — HARD BLOCK:** the earlier "Any/Any → UNAVAILABLE" style row would
+technically override every other row, so the resolution is computed from three
+explicit input axes and a fixed order, not a lookup row: `availability_state`
+(`AVAILABLE` / `UNAVAILABLE`) · `freshness_state` (`FRESH` / `STALE`) ·
+`validity_state` (`VALID` / `DEGRADED` / `IMPLAUSIBLE`).
+
+```
+if   availability_state == UNAVAILABLE: UNAVAILABLE
+elif freshness_state    == STALE:       STALE
+elif validity_state     == IMPLAUSIBLE: IMPLAUSIBLE_BUT_FRESH
+elif validity_state     == DEGRADED:    VALID_BUT_DEGRADED
+else:                                   VALID_AND_FRESH
+```
+
+This is directly hard-codable and testable, and it removes the catch-all
+ambiguity while preserving the RC-378 precedence order.
+
 **Steering fault recovery rules (owner review_69, RC-379) — HARD BLOCK:** **no
 steering fault state may automatically restore propulsion authority.** Recovery
 requires **ALL** of: signal freshness restored · plausibility restored for the
 approved stabilization interval · fault-source review · an approved recovery state
 transition · no active conflicting fault · test-lead authorization where required.
 **For latched faults, a service clear is required — never automatic recovery.**
+
+**Per-state recovery model — temporary derating vs latched (owner review_70,
+RC-393) — HARD BLOCK:** recovery differs by resolved state, and **no state
+silently restores propulsion authority while a conflicting fault remains
+active**:
+
+- **`VALID_BUT_DEGRADED`** — may return after the approved stabilization interval
+  **if not latched**.
+- **`IMPLAUSIBLE_BUT_FRESH`** — **latched**; requires diagnostic review + an
+  approved clear.
+- **`STALE`** — requires freshness recovery + stabilization; a **service clear**
+  is required if the fault policy marks it latched.
+- **`UNAVAILABLE`** — movement stays blocked until the source is restored and
+  verified.
 
 ## Subgate 05M-C3E — Closed-Area Fault + Abort Sequences
 
@@ -635,6 +787,13 @@ record: `fault_id` · `execution_domain` · `injection_method` ·
 `TestCellAuthorization_ID` · `RunoutCalculations_ID` · `expected_response` ·
 `abort_conditions` · `containment_method` · `required_approvers` · `status`.
 
+**`FaultExecutionAuthorization_ID` also carries execution/result lifecycle fields
+(owner review_70, RC-394) — HARD BLOCK:** so a single-fault record is governed as
+tightly as a paired-fault record, it additionally carries `procedure_revision` ·
+`procedure_approval_status` · `execution_status` · `result_signoff_status` ·
+`authorization_expiry` · `configuration_impact_status` · `supersession_id` ·
+`injection_fixture_id`.
+
 **Tighter moving-fault limits (owner review_68, RC-362) — HARD BLOCK.**
 **Brake-assist-not-ready:** moving execution is blocked by default; a moving test
 occurs only if engineering can **simulate the status input WITHOUT physically
@@ -666,6 +825,22 @@ BLOCK:** the `PairedFaultAuthorization_ID` record additionally carries
 `replacement_or_supersession_id`. The **`expected_response_sequence_map` must be
 versioned and validated — NOT arbitrary ungoverned JSON.**
 
+**Paired faults are keyed by exact fault IDs, not only component IDs (owner
+review_70, RC-395) — HARD BLOCK:** because one component can exhibit many distinct
+failure modes, the record carries **`fault_1_id` · `fault_2_id`** (optionally
+retaining `fault_1_component_id` · `fault_2_component_id`). The `fault_1_id` /
+`fault_2_id` combination must identify the exact failure mode, not merely the
+affected component.
+
+**Database foreign-key enforcement — no orphaned references (owner review_70,
+RC-396) — HARD BLOCK:** all critical IDs are foreign-key constrained —
+`RunoutCalculations_ID` · `ConfigurationPacket_ID` · `TestCellAuthorization_ID` ·
+`HazardAnalysis_ID` · `previous_cell_signed_result_id` · `source_artifact_id` ·
+`proof_artifact_id` · `ProcedureApproval_ID` · `FaultExecutionAuthorization_ID` ·
+`PairedFaultAuthorization_ID`. **A record with an orphaned reference is
+hard-blocked** (this is doctrine for the eventual M10 schema, not production code
+built during ingestion).
+
 ## No-claim rule (owner review_69, RC-382) — HARD RULE
 
 **Completion of Gate 05M-C3 does NOT establish:** public-road approval ·
@@ -673,6 +848,15 @@ regulatory compliance · production release · customer-operation authority ·
 full-speed validation · durability validation · crashworthiness · certified brake
 performance. **It only establishes performance within the exact signed
 closed-area test envelope and configuration.**
+
+**Scope limitation, restated for the schema (owner review_70, RC-397):** a
+`SIGNED_PASS` within Gate 05M-C3 proves **only that the exact archived vehicle
+configuration performed within the signed closed-area operating envelope under the
+recorded conditions.** It does not establish public-road authorization ·
+regulatory compliance · production release · customer-operation authorization ·
+full-speed performance · durability · crashworthiness · certified braking
+compliance · **and NO reuse on another vehicle or configuration** (a signed result
+is configuration-bound, RC-339/349; platform separation, D-006).
 
 ## Standing checks
 
@@ -758,22 +942,53 @@ closed-area test envelope and configuration.**
   lifecycle fields and a versioned `expected_response_sequence_map` (RC-381); and
   the explicit no-claim rule bounds any completion to the signed closed-area
   envelope (RC-382).
+- **Revision 06 implementation-correctness cleanups (owner review_70,
+  RC-383..397):** the overlap rules + full `PHYSICAL_MOVEMENT_BLOCKED` conditions
+  are enforced in text, not just schema-shaped (RC-383); `allowed_steering_band` is
+  a bounded min/max record with an explicit angle frame (RC-384); `unit` is a
+  controlled enum with canonical-SI comparison (RC-385); `AUTHORIZED → ACTIVE`
+  carries activation preconditions + a single-ACTIVE rule (RC-386); `COMPLETED` is
+  an execution state and the three status enums are separated (RC-387); an
+  `EXPIRED` authorization state is added (RC-388); procedure approval is a signed
+  `ProcedureApproval_ID` record (RC-389); C3A-008 E-stop keeps the raw trace +
+  timestamps, not a single slope (RC-390); `IndependentSensorHealthResult` is a
+  formal record and an invalid channel forces `INVERTER_PHYSICAL_STATE = UNKNOWN`
+  (RC-391); steering resolution is a deterministic three-axis computation with no
+  catch-all row (RC-392); a per-state recovery model separates temporary derating
+  from latched faults (RC-393); `FaultExecutionAuthorization_ID` gains
+  execution/result lifecycle fields (RC-394); paired faults are keyed by exact
+  `fault_1_id`/`fault_2_id` (RC-395); all critical IDs are foreign-key constrained
+  with orphaned references hard-blocked (RC-396); and the scope limitation adds the
+  explicit no-reuse-on-another-configuration clause (RC-397). Owner items 1
+  (`L_min` OCR text) and 3 (typographical field-name corruption) targeted the
+  Hunter's delivered text only — already clean/canonical here (RC-340/351 + the
+  canonical field names throughout).
 - **Nothing ingested; nothing Confirmed; no normal driving; no public road; no
-  customer operation; no "certified safe"/compliance claim; ODRs untouched.**
+  customer operation; no "certified safe"/compliance claim; ODRs untouched; no
+  production code / no M10 during ingestion (the owner's downstream
+  `DATABASE_SCHEMA_IMPLEMENTATION → RULE_ENGINE_TESTS → HIL_VALIDATION` is deferred
+  M10/production work).**
 
-## Next — formal engineering baseline review
+## Next — controlled specification freeze
 
 After the fourteen review_65 corrections (RC-313..326), the thirteen review_66
 corrections (Revision 02, RC-327..339), the eleven review_67 corrections
 (Revision 03, RC-340..350), the thirteen review_68 corrections (Revision 04,
-RC-351..363) and the fourteen review_69 corrections (Revision 05, RC-369..382 —
-items 1 & 5 already clean) the gate labels
-`GATE_05M_C3_REVISION_05_READY_FOR_CONTROLLED_MULTIDISCIPLINARY_BASELINE_REVIEW` —
-the validation architecture is nearly ready to freeze, while all physical pass
-claims remain correctly unproven; it does **not** mean any vehicle / calibration /
-brake system / regeneration strategy / moving fault test has physically passed.
-Subgate execution and cell authorizations (each a `TestCellAuthorization_ID`,
-RC-350/354, with per-field units + validation RC-369 and immutable transitions
-RC-370) are defined when the owner sends those batches; supplier data (Ford
-ABS/ESC interface, inverter/BMS regen + isolation architecture, tire/axle/geometry,
-thermal sensors) remains NeedsSupplierData.
+RC-351..363), the fourteen review_69 corrections (Revision 05, RC-369..382 —
+items 1 & 5 already clean) and the fifteen review_70 corrections (Revision 06,
+RC-383..397 — owner items 1 & 3 targeted the Hunter's OCR/typographical text only)
+the gate labels
+`GATE_05M_C3_REVISION_06_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE` — the
+controlled-validation architecture is mature and ready to freeze the specification,
+while all physical pass claims remain correctly unproven; it does **not** mean any
+vehicle / calibration / brake system / regeneration strategy / moving fault test
+has physically passed. **The owner's downstream sequence — controlled
+specification freeze → `DATABASE_SCHEMA_IMPLEMENTATION` → `RULE_ENGINE_TESTS` →
+`HIL_VALIDATION` — is M10/production work and is NOT performed during Rev 07
+ingestion** (CLAUDE.md); the frozen specification stays a governance document until
+the owner opens the production phase. Subgate execution and cell authorizations
+(each a `TestCellAuthorization_ID`, RC-350/354, with per-field units + validation
+RC-369/385, immutable transitions RC-370, activation preconditions RC-386, and the
+`EXPIRED` state RC-388) are defined when the owner sends those batches; supplier
+data (Ford ABS/ESC interface, inverter/BMS regen + isolation architecture,
+tire/axle/geometry, thermal sensors) remains NeedsSupplierData.

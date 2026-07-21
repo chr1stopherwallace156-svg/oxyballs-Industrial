@@ -5,6 +5,45 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-21 — RH batch 74 ("72:75") + owner review_70: Gate 05M-C3 Revision 06 (RC-383..397)
+
+- Archived RH batch 74 + owner review_70 1:1 (commit `531671f`) — owner label
+  "72:75": re-issued review_69 corrections, the Hunter's re-emit ("Global
+  Engineering Safety Amendments (Revision 05)"), and a detailed "My verdict" with
+  17 items placing Gate 05M-C3 "at formal baseline-candidate quality … strong,
+  deterministic, database-centered." New PROVENANCE row +
+  `owner_reviews/review_70_batch_74_verdict.md` (17 items verbatim).
+- **15 corrections applied to `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`
+  (Revision 06) + RH01 RC-383..397 + D-008 amendment (review_70):** complete
+  overlap enforcement + full `PHYSICAL_MOVEMENT_BLOCKED` conditions (RC-383);
+  `allowed_steering_band` bounded min/max record + angle frame (RC-384); `unit`
+  controlled enum + canonical-SI comparison (RC-385); `AUTHORIZED → ACTIVE`
+  activation preconditions + single-ACTIVE rule (RC-386); `COMPLETED` moved to
+  execution status, three status enums separated (RC-387); `EXPIRED` authorization
+  state (RC-388); `ProcedureApproval_ID` signed record (RC-389); C3A-008 E-stop
+  raw-trace timestamps + profile artifacts (RC-390); `IndependentSensorHealthResult`
+  schema, invalid channel → `INVERTER_PHYSICAL_STATE = UNKNOWN` (RC-391);
+  deterministic three-axis steering resolution, no catch-all row (RC-392);
+  per-state steering recovery model (RC-393); `FaultExecutionAuthorization_ID`
+  execution/result lifecycle fields (RC-394); paired faults keyed by exact
+  `fault_1_id`/`fault_2_id` (RC-395); database foreign-key enforcement, orphaned
+  references hard-blocked (RC-396); and the scope-limitation no-reuse clause
+  (RC-397).
+- Owner items 1 (`L_min` equation OCR text) and 3 (typographical field-name
+  corruption) targeted the Hunter's delivered text only — **already
+  clean/canonical** in the deliverable (RC-340/351 + canonical field names). Noted,
+  no duplicate RC rows minted.
+- Deliverable relabelled
+  `GATE_05M_C3_REVISION_06_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE` — the
+  controlled-validation architecture is mature and ready to freeze the
+  specification while all physical pass claims remain correctly unproven. **The
+  owner's downstream sequence — `DATABASE_SCHEMA_IMPLEMENTATION → RULE_ENGINE_TESTS
+  → HIL_VALIDATION` — is M10/production work and is NOT performed during Rev 07
+  ingestion.** Every value stays `INITIAL_TARGET_PROFILE`; nothing Confirmed; no
+  public road / no customer operation / no compliance claim; ODRs untouched.
+
+---
+
 ## 2026-07-21 — RH batch 73 ("71:75") + owner review_69: Gate 05M-C3 Revision 05 (RC-369..382)
 
 - Archived RH batch 73 + owner review_69 1:1 (commit `e0837c6`) — owner label

@@ -4,8 +4,8 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-21
-- Reason for handoff: task complete (RH batch 73 "71:75" + owner review_69 — Gate
-  05M-C3 Revision 05; 14 corrections RC-369..382 applied to
+- Reason for handoff: task complete (RH batch 74 "72:75" + owner review_70 — Gate
+  05M-C3 Revision 06; 15 corrections RC-383..397 applied to
   `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`); awaiting the 05M-C3A execution /
   Envelope-Cell-1 batch or a supplier reply
 
@@ -13,44 +13,50 @@
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `e0837c6` — Archive RH batch 73 + owner review_69 1:1
+- Start commit: `531671f` — Archive RH batch 74 + owner review_70 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- **RH batch 73 ("71:75") + owner review_69 — Gate 05M-C3 Revision 05.** The owner
-  re-issued the batch_72 corrections and delivered a detailed verdict on Revision
-  05, classifying it `FORMAL_ENGINEERING_BASELINE_CANDIDATE` ("the strongest and
-  most internally consistent version yet"). 16 items → **14 new corrections**
-  (owner items 1 & 5 were already clean — RC-340/351 and RC-355):
-  - Archived 1:1 (commit `e0837c6`): `research_hunter/batch_73_gate05mc3_revision05.md`,
-    `owner_reviews/review_69_batch_73_verdict.md`, new PROVENANCE row (newest-first).
-  - **Applied RC-369..382 to `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`:**
-    units + hard validation on every numeric authorization field (RC-369);
-    immutable `AuthorizationTransition_ID` audit events + `SUSPENDED → AUTHORIZED`
-    revalidation (RC-370); `COMPLETED` ≠ `SIGNED_PASS` (RC-371);
-    `RunoutAggregationResult` summary + hard blocks (RC-372); distance
-    boundary/geometry validation (RC-373); append-only evidence (RC-374); regen
-    residual conditioned by operating state + `ZERO_REGEN_REQUEST` command state
-    (RC-375); C3A-008 separate E-stop outcomes (RC-376); C3C-007 measurement
-    uncertainty + channel health (RC-377); deterministic steering-state precedence
-    (RC-378); steering fault recovery rules (RC-379); per-fault
-    `FaultExecutionAuthorization_ID` (RC-380); paired-fault result + lifecycle
-    fields (RC-381); explicit no-claim rule (RC-382).
-  - **RH01 RC-369..382 + section 82; D-008 amendment (review_69); RESEARCH_MAP,
+- **RH batch 74 ("72:75") + owner review_70 — Gate 05M-C3 Revision 06.** The owner
+  re-issued the review_69 corrections, delivered the Hunter's re-emit ("Global
+  Engineering Safety Amendments (Revision 05)"), and gave a detailed verdict
+  placing Gate 05M-C3 "at formal baseline-candidate quality … strong,
+  deterministic, database-centered." 17 items → **15 new corrections** (owner items
+  1 & 3 targeted the Hunter's OCR/typographical text only — already clean/canonical
+  in the deliverable, RC-340/351 + canonical field names):
+  - Archived 1:1 (commit `531671f`): `research_hunter/batch_74_gate05mc3_revision05_amendments.md`,
+    `owner_reviews/review_70_batch_74_verdict.md`, new PROVENANCE row (newest-first).
+  - **Applied RC-383..397 to `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`:**
+    complete overlap enforcement + full `PHYSICAL_MOVEMENT_BLOCKED` conditions
+    (RC-383); `allowed_steering_band` bounded min/max record + angle frame
+    (RC-384); `unit` controlled enum + canonical-SI comparison (RC-385);
+    `AUTHORIZED → ACTIVE` activation preconditions + single-ACTIVE rule (RC-386);
+    `COMPLETED` moved to execution status, three status enums separated (RC-387);
+    `EXPIRED` authorization state (RC-388); `ProcedureApproval_ID` signed record
+    (RC-389); C3A-008 E-stop raw-trace timestamps (RC-390);
+    `IndependentSensorHealthResult` schema + invalid-channel → UNKNOWN (RC-391);
+    deterministic three-axis steering resolution (RC-392); per-state steering
+    recovery model (RC-393); `FaultExecutionAuthorization_ID` lifecycle fields
+    (RC-394); paired faults keyed by exact fault IDs (RC-395); database
+    foreign-key enforcement (RC-396); scope-limitation no-reuse clause (RC-397).
+  - **RH01 RC-383..397 + section 83; D-008 amendment (review_70); RESEARCH_MAP,
     GATE_RESEARCH_QUEUE, CHANGELOG** updated. Deliverable relabelled
-    `GATE_05M_C3_REVISION_05_READY_FOR_CONTROLLED_MULTIDISCIPLINARY_BASELINE_REVIEW`.
-- **Guardrails applied:** every schema field / unit example / precedence order /
-  distance figure stays `INITIAL_TARGET_PROFILE` / `NeedsSupplierData`; nothing
-  gained pass/fail authority (RC-267/293/300); the no-claim rule (RC-382) makes
-  the closed-area boundary explicit; append-only rule (RC-374) restates
-  Constitution Art. I; already-clean owner items 1 & 5 noted, no duplicate rows.
+    `GATE_05M_C3_REVISION_06_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE`.
+- **Guardrails applied:** every schema field / unit enum / status enum stays
+  `INITIAL_TARGET_PROFILE` / `NeedsSupplierData`; nothing gained pass/fail
+  authority (RC-267/293/300); **RC-396 database FK enforcement + the owner's
+  downstream `DATABASE_SCHEMA_IMPLEMENTATION → RULE_ENGINE_TESTS → HIL_VALIDATION`
+  are captured as DOCTRINE for a future production phase — NOT built as M10/
+  production code during Rev 07 ingestion**; the scope/no-reuse rule (RC-397)
+  restates the closed-area boundary; already-clean text items 1 & 3 noted, no
+  duplicate rows.
 - Files changed (reconciliation commit): `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`,
-  `RH01_SECOND_STAGE_FILTER.md` (RC-369..382 + section 82), `DECISION_REGISTER.md`
+  `RH01_SECOND_STAGE_FILTER.md` (RC-383..397 + section 83), `DECISION_REGISTER.md`
   (D-008 amendment), `RESEARCH_MAP.md`, `GATE_RESEARCH_QUEUE.md`, `CHANGELOG.md`,
-  handoff files. Archives were committed separately as `e0837c6`.
+  handoff files. Archives were committed separately as `531671f`.
 - **Nothing ingested; nothing Confirmed; no normal driving; no public road; no
   customer operation; no "certified safe"/compliance claim; ODRs untouched; no
   production code / no M10.**
@@ -59,11 +65,13 @@
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch 73 + review_69 archived 1:1 against the owner's
-  "71:75" message; RC-369..382 restate the owner's 14 corrections verbatim and are
-  recorded in both RH01 (rows + section 82) and the deliverable; owner items 1 & 5
-  confirmed already-clean (RC-340/351, RC-355) so no duplicate rows minted; every
-  value stays `INITIAL_TARGET_PROFILE`; nothing marked Confirmed
+- Verified vs claimed: batch 74 + review_70 archived 1:1 against the owner's
+  "72:75" message; RC-383..397 restate the owner's 15 corrections verbatim and are
+  recorded in both RH01 (rows + section 83) and the deliverable; owner items 1 & 3
+  confirmed already-clean (Hunter OCR/typographical text only; deliverable uses the
+  clean 7-term `L_min` equation + canonical field names) so no duplicate rows
+  minted; the eventual schema/rule-engine/HIL work is deferred M10; every value
+  stays `INITIAL_TARGET_PROFILE`; nothing marked Confirmed
 
 ## State
 
@@ -95,20 +103,29 @@
   review_64, NOT physical-pass evidence); **05M-C3 CREATED —
   MODULAR_ARCHITECTURE_DEFINED / NO_TORQUE_VECTORING_AUTHORITY /
   NO_ACTIVE_ABS_ESC_AUTHORITY / RUNOUT_CALCULATION_REQUIRED /
-  NO_NORMAL_DRIVING_AUTHORITY — REVISION_05_APPLIED / FORMAL_BASELINE_CANDIDATE /
+  NO_NORMAL_DRIVING_AUTHORITY — REVISION_06_APPLIED / FORMAL_BASELINE_CANDIDATE /
+  CORE_GOVERNANCE_ARCHITECTURE_MATURE / READY_FOR_CONTROLLED_SPECIFICATION_FREEZE /
   C3A_EXTERNAL_CONTROL_INTEGRATION_LOCKED / AUTHORIZATION_TRANSITION_RULES_DEFINED
   / AUTHORIZATION_TRANSITION_AUDIT_DEFINED / AUTHORIZATION_FIELD_UNITS_AND_VALIDATION_DEFINED
-  / COMPLETED_NOT_SIGNED_PASS_RULE_DEFINED / RUNOUT_AGGREGATION_RESULT_SCHEMA_DEFINED
-  / DISTANCE_GEOMETRY_VALIDATION_DEFINED / APPEND_ONLY_ANNOTATION_RULE_DEFINED /
-  C3D_STATE_PRECEDENCE_AND_RECOVERY_DEFINED / FAULT_EXECUTION_AUTHORIZATION_SCHEMA_DEFINED
+  / UNIT_ENUM_AND_CANONICAL_CONVERSION_DEFINED / AUTHORIZATION_ACTIVATION_RULES_DEFINED
+  / AUTHORIZATION_EXPIRY_STATE_DEFINED / RESULT_STATUS_SEPARATED /
+  PROCEDURE_APPROVAL_RECORD_DEFINED / RUNOUT_BLOCK_RULES_DEFINED /
+  ESTOP_RAW_TRACE_DEFINED / INDEPENDENT_SENSOR_HEALTH_SCHEMA_DEFINED /
+  STEERING_RESOLUTION_DETERMINISTIC_DEFINED / STEERING_RECOVERY_MODEL_DEFINED /
+  FAULT_EXECUTION_LIFECYCLE_FIELDS_DEFINED / DATABASE_FOREIGN_KEY_ENFORCEMENT_DEFINED
+  / SCOPE_LIMITATION_NO_REUSE_DEFINED / COMPLETED_NOT_SIGNED_PASS_RULE_DEFINED /
+  RUNOUT_AGGREGATION_RESULT_SCHEMA_DEFINED / DISTANCE_GEOMETRY_VALIDATION_DEFINED /
+  APPEND_ONLY_ANNOTATION_RULE_DEFINED / FAULT_EXECUTION_AUTHORIZATION_SCHEMA_DEFINED
   / PAIRED_FAULT_LIFECYCLE_FIELDS_DEFINED / NO_CLAIM_RULE_DEFINED /
   PROCEDURE_SIGNATURE_REQUIRED / IMMUTABLE_EVIDENCE_PRESERVATION_DEFINED /
-  MULTI_FAULT_AUTHORIZATION_SCHEMA_DEFINED per review_69
+  MULTI_FAULT_AUTHORIZATION_SCHEMA_DEFINED per review_70
   (`GATE05M_C3_CLOSED_AREA_MOVEMENT.md`, five linear subgates 05M-C3A→C3E; labels
-  `GATE_05M_C3_REVISION_05_READY_FOR_CONTROLLED_MULTIDISCIPLINARY_BASELINE_REVIEW`
-  per review_69, NOT physical-pass evidence); 05M-C3A execution + Envelope-Cell-1
-  authorization (signed `TestCellAuthorization_ID`) + controlled multidisciplinary
-  baseline review NEXT per D-008 (amended review_69)**; 07 v0.1 / 07B / 07C v0.4 PARKED; 08
+  `GATE_05M_C3_REVISION_06_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE`
+  per review_70, NOT physical-pass evidence; the owner's downstream
+  DATABASE_SCHEMA_IMPLEMENTATION → RULE_ENGINE_TESTS → HIL_VALIDATION is deferred
+  M10/production, NOT built during ingestion); 05M-C3A execution + Envelope-Cell-1
+  authorization (signed `TestCellAuthorization_ID`) NEXT per D-008 (amended
+  review_70)**; 07 v0.1 / 07B / 07C v0.4 PARKED; 08
   FMEA_REGISTRY_CREATED (15 modes); 08B PARKED; **08C
   SIMULATION_SWEEP_MATRIX_CREATED — PARKED_FOR_SUPPLIER_DATA**. Order after
   05: 06 deep dive → 09 → 10 → 11.
@@ -122,8 +139,8 @@
   (controls-authority) + **D-008** (staged post-bench
   gate ladder to HV; never "certified safe"; amended review_65 — 05J → 05K →
   05L-A → 05L-B → 05L-C → 05M-A → 05M-B → 05M-C1 → 05M-C2 (05M-C2A → 05M-C2B →
-  05M-C2C) → 05M-C3 (05M-C3A → 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E; Revision 05
-  per review_69); each engineer-approved) + the **Numeric Threshold Authority
+  05M-C2C) → 05M-C3 (05M-C3A → 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E; Revision 06
+  per review_70); each engineer-approved) + the **Numeric Threshold Authority
   Rule** (RC-267/293/300) + RC-168 + the invented-values family through RC-267 +
   RC-190/191/197
   (HIL/bench is evidence, not vehicle authority) + RC-205/227/247/265 (VCU
@@ -188,8 +205,19 @@
   channel health, RC-378 deterministic steering-state precedence, RC-379 steering
   fault recovery rules, RC-380 per-fault FaultExecutionAuthorization_ID, RC-381
   paired-fault result + lifecycle fields, RC-382 no-claim rule
-  (RC-369..382 = Gate 05M-C3 Revision 05, review_69)**) bind all Gate 05x +
-  downstream controls work.
+  (RC-369..382 = Gate 05M-C3 Revision 05, review_69), RC-383 complete overlap
+  enforcement + full movement-block conditions, RC-384 allowed_steering_band
+  bounded record + angle frame, RC-385 unit controlled enum + canonical-SI
+  comparison, RC-386 authorization activation preconditions + single-ACTIVE, RC-387
+  COMPLETED is an execution state / three status enums separated, RC-388 EXPIRED
+  authorization state, RC-389 ProcedureApproval_ID signed record, RC-390 C3A-008
+  E-stop raw-trace timestamps, RC-391 IndependentSensorHealthResult schema, RC-392
+  deterministic three-axis steering resolution, RC-393 per-state steering recovery
+  model, RC-394 FaultExecutionAuthorization lifecycle fields, RC-395 paired faults
+  keyed by exact fault IDs, RC-396 database foreign-key enforcement, RC-397 scope
+  limitation + no-reuse clause (RC-383..397 = Gate 05M-C3 Revision 06, review_70 —
+  the eventual schema/rule-engine/HIL implementation is deferred M10/production,
+  not built during ingestion)**) bind all Gate 05x + downstream controls work.
 - Open owner decisions (accumulated): (1) elektron-os-clean; (2) index.html;
   (3) L2; (4) L4; (5) L6; (6) L9 lane name; (7) Artifact Intake Form; (8)
   M10 forbidden-phrase + regression scanner (invented-values family through

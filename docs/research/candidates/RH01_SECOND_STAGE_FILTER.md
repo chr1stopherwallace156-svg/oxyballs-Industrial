@@ -481,6 +481,21 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-380 | **`FaultExecutionAuthorization_ID` (owner review_69, extends RC-347/361)**: a general execution-domain matrix does not authorize a specific fault execution — each needs `fault_id` · `execution_domain` · `injection_method` · `previous_domain_signed_result` · `HazardAnalysis_ID` · `ConfigurationPacket_ID` · `TestCellAuthorization_ID` · `RunoutCalculations_ID` · `expected_response` · `abort_conditions` · `containment_method` · `required_approvers` · `status` | batch_73 (matrix mistaken for per-fault authorization) | engineering hazard review — **NeedsSupplierData** | **TestSafety / FaultExecutionAuthorization** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Subgate 05M-C3E) — extends RC-347/361 — lanes L7 |
 | RC-381 | **Paired-fault result + lifecycle fields (owner review_69, extends RC-363)**: `PairedFaultAuthorization_ID` gains `allowed_execution_domain` · `active_test_cell_id` · `injection_fixture_id` · `procedure_revision` · `procedure_approval_status` · `execution_status` · `result_signoff_status` · `authorization_expiry` · `configuration_impact_status` · `replacement_or_supersession_id`; the `expected_response_sequence_map` must be **versioned and validated, NOT arbitrary ungoverned JSON** | batch_73 (paired-fault lifecycle undefined) | engineering hazard review — **NeedsSupplierData** | **TestSafety / PairedFaultLifecycle** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Subgate 05M-C3E) — extends RC-363 — lanes L7 |
 | RC-382 | **No-claim rule (owner review_69, extends RC-224)**: completion of Gate 05M-C3 does NOT establish public-road approval · regulatory compliance · production release · customer-operation authority · full-speed validation · durability validation · crashworthiness · certified brake performance — **it only establishes performance within the exact signed closed-area test envelope and configuration** | batch_73 (completion over-read as release) | engineering governance — internal | **NoClaim / ClosedAreaEnvelopeOnly** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (No-claim rule) — extends RC-224 — lanes L7 |
+| RC-383 | **Complete overlap enforcement + full movement-block conditions (owner review_70, extends RC-372/373)**: `INCLUDED_IN_OTHER_COMPONENT` ⇒ referenced host EXISTS + host belongs to the SAME `RunoutCalculations_ID`; `PHYSICAL_MOVEMENT_BLOCKED` if `available_track_length < calculated_L_min` · `remaining_margin < approved_minimum_margin` · `overlap_check_result != PASS` · `unit_consistency_result != PASS` · `required_component_completion_result != PASS` · `authorization_status != SIGNED_RELEASE` · ConfigurationPacket mismatch · TestCellAuthorization not ACTIVE · any component `MISSING_SOURCE`/`UNVERIFIED`/`INITIAL_TARGET_PROFILE_ONLY`/`BLOCKED_PENDING_REVIEW` — schemas are not complete until enforcement lines exist | batch_74 (schema shape without enforcement) | engineering runout logic — **NeedsSupplierData** | **TestSafety / RunoutBlockEnforcement** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Distance Accounting Integrity Rule) — extends RC-372/373 — lanes L7 |
+| RC-384 | **`allowed_steering_band` is a bounded record, not one number (owner review_70, extends RC-323/350)**: `minimum_angle` · `maximum_angle` · `unit` · `reference_frame` · `authority_class` · `source_artifact_id` · `uncertainty`; angle type `STEERING_WHEEL_ANGLE` / `ROAD_WHEEL_ANGLE` / `DERIVED_ROAD_WHEEL_ANGLE` so steering-wheel and road-wheel degrees never mix | batch_74 (single-value steering band) | controls engineering — **NeedsSupplierData** | **TestSafety / SteeringBandBoundedRecord** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (TestCellAuthorization_ID schema) — extends RC-323/350 — lanes L7 |
+| RC-385 | **`unit` is a controlled enum + canonical-SI comparison (owner review_70, extends RC-369)**: unit drawn from a fixed enum (m · m/s · m/s^2 · m/s^3 · Nm · Nm/s · Nm/s^2 · deg · deg/s · rad · rad/s · A · A/s · V · V/s · Pa · kPa · bar · ms · s · kg · percent); every value converted to canonical SI before comparison — display unit may vary, comparison unit must be canonical | batch_74 (unrestricted unit string) | engineering software validation — **NeedsSupplierData** | **TestSafety / UnitEnumCanonicalSI** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (TestCellAuthorization_ID schema) — extends RC-369 — lanes L7 |
+| RC-386 | **Authorization activation preconditions + single-ACTIVE rule (owner review_70, extends RC-354/370)**: `AUTHORIZED → ACTIVE` only if before expiry · ConfigurationPacket unchanged · `RunoutAggregationResult = SIGNED_RELEASE` · environment/thermal valid · prior-cell SIGNED_PASS where required · procedure approval exists · personnel assigned · emergency/containment ready; only ONE `TestCellAuthorization_ID` ACTIVE per vehicle/subgate/session | batch_74 (activation ungated) | engineering governance — **NeedsSupplierData** | **TestSafety / AuthorizationActivationRules** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (TestCellAuthorization_ID schema) — extends RC-354/370 — lanes L7 |
+| RC-387 | **`COMPLETED` is an execution state, three status enums separated (owner review_70, extends RC-354/371)**: Authorization (DRAFT/APPROVAL_REQUIRED/AUTHORIZED/ACTIVE/SUSPENDED/REVOKED/SUPERSEDED/EXPIRED) · Execution (NOT_STARTED/PENDING/EXECUTING/EXECUTED/ABORTED/COMPLETED) · Result (NOT_ELIGIBLE/NEEDS_REVIEW/INVALID_TEST/SIGNED_FAIL/SIGNED_PASS); `COMPLETED` never clears a gate (RC-371) | batch_74 (COMPLETED in authorization enum) | engineering governance — **NeedsSupplierData** | **TestSafety / StatusModelSeparation** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (TestCellAuthorization_ID schema) — extends RC-354/371 — lanes L7 |
+| RC-388 | **`EXPIRED` authorization state (owner review_70, extends RC-354/369)**: `current_time >= authorization_expiry` ⇒ `AUTHORIZED`|`SUSPENDED` → `EXPIRED`; an EXPIRED record cannot become ACTIVE without a new or superseding approval | batch_74 (expiry field with no state) | engineering governance — **NeedsSupplierData** | **TestSafety / AuthorizationExpiryState** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (TestCellAuthorization_ID schema) — extends RC-354/369 — lanes L7 |
+| RC-389 | **`ProcedureApproval_ID` signed record (owner review_70, extends RC-355)**: `PAS: APPROVED_FOR_CONTROLLED_EXECUTION` populated ONLY from `ProcedureApproval_ID` (`test_id` · `procedure_revision` · `approver_identity` · `approval_scope` · `approval_timestamp` · `signature_hash` · `authorization_expiry` · `linked_hazard_analysis` · `status`); until it exists PAS APPROVAL_REQUIRED / ES NOT_EXECUTED / RSS NOT_ELIGIBLE | batch_74 (prefilled approvals as document default) | engineering governance — **NeedsSupplierData** | **TestSafety / ProcedureApprovalRecord** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (global governance) — extends RC-355 — lanes L7 |
+| RC-390 | **C3A-008 E-stop keeps the raw trace, not a single slope (owner review_70, extends RC-376)**: store `event_trigger_timestamp` · `torque_inhibit_request_timestamp` · `phase_current_below_threshold_timestamp` · `phase_current_peak_after_event` · `phase_current_decay_profile_artifact_id` · `inverter_state_before/after` · `HV_isolation_start_timestamp` · `contactor_feedback_open_timestamp` · `DC_bus_voltage_profile_artifact_id` · `vehicle_speed_at_event` · `vehicle_stop_or_controlled_deceleration_result` | batch_74 (single-rate reduction) | supplier E-stop architecture — **NeedsSupplierData** | **EvidenceHygiene / EstopRawTrace** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Subgate 05M-C3A) — extends RC-376 — lanes L7 |
+| RC-391 | **`IndependentSensorHealthResult` formal record (owner review_70, extends RC-359/377)**: `current_probe_calibration_status` · `current_probe_range_valid` · `DC_bus_sensor_status` · `DC_bus_sensor_range_valid` · `motor_speed_sensor_status` · `wheel_speed_sensor_status` · `time_sync_status` · `maximum_time_sync_error` · `dropped_frame_count` · `dropped_frame_rate` · `saturation_detected` · `clipping_detected` · `sensor_fault_detected` · `result_status`; any invalid required channel ⇒ `INVERTER_PHYSICAL_STATE = UNKNOWN`, `TEST_RESULT = INVALID_TEST`\|`NEEDS_REVIEW` | batch_74 (sensor health an open question) | measurement engineering — **NeedsSupplierData** | **EvidenceHygiene / IndependentSensorHealth** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Subgate 05M-C3C) — extends RC-359/377 — lanes L7 |
+| RC-392 | **Deterministic three-axis steering resolution (owner review_70, extends RC-360/378)**: `availability_state` (AVAILABLE/UNAVAILABLE) · `freshness_state` (FRESH/STALE) · `validity_state` (VALID/DEGRADED/IMPLAUSIBLE) resolved by fixed order (UNAVAILABLE → STALE → IMPLAUSIBLE_BUT_FRESH → VALID_BUT_DEGRADED → VALID_AND_FRESH), removing the catch-all "Any/Any → UNAVAILABLE" ambiguity | batch_74 (catch-all row overrides all) | controls engineering — **NeedsSupplierData** | **TestSafety / SteeringResolutionDeterministic** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Subgate 05M-C3D) — extends RC-360/378 — lanes L7 |
+| RC-393 | **Per-state steering recovery model (owner review_70, extends RC-379)**: `VALID_BUT_DEGRADED` may return after stabilization if not latched; `IMPLAUSIBLE_BUT_FRESH` latched (diagnostic review + approved clear); `STALE` needs freshness recovery + stabilization (service clear if latched); `UNAVAILABLE` blocked until source restored; no state silently restores propulsion while a conflicting fault is active | batch_74 (recovery undefined per state) | controls engineering — **NeedsSupplierData** | **TestSafety / SteeringRecoveryModel** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Subgate 05M-C3D) — extends RC-379 — lanes L7 |
+| RC-394 | **FaultExecutionAuthorization execution/result lifecycle fields (owner review_70, extends RC-380)**: adds `procedure_revision` · `procedure_approval_status` · `execution_status` · `result_signoff_status` · `authorization_expiry` · `configuration_impact_status` · `supersession_id` · `injection_fixture_id` so a single-fault record is governed as tightly as a paired-fault record | batch_74 (single-fault less governed than paired) | engineering hazard review — **NeedsSupplierData** | **TestSafety / FaultExecutionLifecycle** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Subgate 05M-C3E) — extends RC-380 — lanes L7 |
+| RC-395 | **Paired faults keyed by exact fault IDs (owner review_70, extends RC-363/381)**: `fault_1_id` · `fault_2_id` (optionally retain `fault_1_component_id`/`fault_2_component_id`) — the combination must identify the exact failure mode, since one component has many failure modes | batch_74 (component IDs only) | engineering hazard review — **NeedsSupplierData** | **TestSafety / PairedFaultExactIDs** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Subgate 05M-C3E) — extends RC-363/381 — lanes L7 |
+| RC-396 | **Database foreign-key enforcement, no orphaned references (owner review_70, extends RC-372/380/381)**: `RunoutCalculations_ID` · `ConfigurationPacket_ID` · `TestCellAuthorization_ID` · `HazardAnalysis_ID` · `previous_cell_signed_result_id` · `source_artifact_id` · `proof_artifact_id` · `ProcedureApproval_ID` · `FaultExecutionAuthorization_ID` · `PairedFaultAuthorization_ID` FK-constrained; orphaned reference hard-blocked (doctrine for the eventual M10 schema, not production code during ingestion) | batch_74 (orphaned refs possible) | engineering software validation — **NeedsSupplierData** | **TestSafety / ForeignKeyEnforcement** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Subgate 05M-C3E) — extends RC-372/380/381 — lanes L7 |
+| RC-397 | **Scope limitation restated for the schema + no reuse (owner review_70, extends RC-382/339/D-006)**: a `SIGNED_PASS` proves only the exact archived configuration performed within the signed closed-area envelope under the recorded conditions; establishes no public-road / regulatory / production / customer / full-speed / durability / crashworthiness / certified-brake authority AND **no reuse on another vehicle or configuration** | batch_74 (reuse not excluded) | engineering governance — internal | **NoClaim / ScopeLimitationNoReuse** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (No-claim rule) — extends RC-382/339 + D-006 — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -5749,6 +5764,91 @@ minted for them.
   `GATE_05M_C3_REVISION_05_READY_FOR_CONTROLLED_MULTIDISCIPLINARY_BASELINE_REVIEW`;
   D-008 amended (review_69). The validation architecture is nearly ready to
   freeze while all physical pass claims remain correctly unproven.
+- Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
+  no customer operation; no compliance/certification claim; ODRs untouched; no
+  production code / no M10 during ingestion.
+
+## 83. Batch 74 ("72:75") + owner review_70 — Gate 05M-C3 Revision 05 amendments + 15 implementation-correctness corrections (2026-07-21)
+
+Raw source:
+`docs/research/raw/research_hunter/batch_74_gate05mc3_revision05_amendments.md`
+(owner framing / re-issued review_69 corrections + the Hunter's re-emit "Global
+Engineering Safety Amendments (Revision 05)") + owner verdict
+`docs/research/raw/owner_reviews/review_70_batch_74_verdict.md` (label "72:75").
+**Row additions: RC-383..RC-397 (no new CS).** No new deliverable — corrections
+applied to `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Revision 06).
+
+### What the owner delivered
+
+The owner's verdict places Gate 05M-C3 "at formal baseline-candidate quality …
+strong, deterministic, database-centered," confirming the RC-369..382 control
+chain landed (ConfigurationPacket → RunoutCalculations → RunoutAggregationResult →
+TestCellAuthorization → procedure approval → controlled execution → synchronized
+evidence → result signoff → configuration impact review; authorization ≠ execution
+≠ passed ≠ gate cleared). The owner then states the remaining problems "are no
+longer conceptual — they are text corruption, incomplete rules, and a few
+schema/status inconsistencies" and issues **17 items → 15 new corrections.** Owner
+items **1** (the `L_min` equation OCR text) and **3** (typographical field-name
+corruption) target the Hunter's *delivered text only* — both are already
+clean/canonical in the deliverable (RC-340/351 for the equation; canonical field
+names throughout the RC-369..382 edits) — so no duplicate RC row was minted for
+them.
+
+### The 15 corrections (RC-383..397)
+
+1. **RC-383** — complete overlap enforcement (host EXISTS + same
+   `RunoutCalculations_ID`) + the full `PHYSICAL_MOVEMENT_BLOCKED` condition list
+   (incl. `authorization_status != SIGNED_RELEASE`, ConfigurationPacket mismatch,
+   TestCellAuthorization not ACTIVE, `BLOCKED_PENDING_REVIEW`).
+2. **RC-384** — `allowed_steering_band` as a bounded min/max record + explicit
+   angle frame (STEERING_WHEEL / ROAD_WHEEL / DERIVED_ROAD_WHEEL).
+3. **RC-385** — `unit` controlled enum + canonical-SI comparison.
+4. **RC-386** — `AUTHORIZED → ACTIVE` activation preconditions + single-ACTIVE per
+   vehicle/subgate/session.
+5. **RC-387** — `COMPLETED` is an execution state; the three status enums
+   (Authorization / Execution / Result) are separated.
+6. **RC-388** — `EXPIRED` authorization state + expiry rule.
+7. **RC-389** — `ProcedureApproval_ID` signed record; no document-default
+   approvals.
+8. **RC-390** — C3A-008 E-stop raw-trace timestamps + profile artifacts, not a
+   single slope.
+9. **RC-391** — `IndependentSensorHealthResult` schema; invalid channel ⇒
+   `INVERTER_PHYSICAL_STATE = UNKNOWN` / `INVALID_TEST`|`NEEDS_REVIEW`.
+10. **RC-392** — deterministic three-axis steering resolution (availability /
+    freshness / validity), no catch-all row.
+11. **RC-393** — per-state steering recovery model (temporary derating vs
+    latched).
+12. **RC-394** — `FaultExecutionAuthorization_ID` execution/result lifecycle
+    fields.
+13. **RC-395** — paired faults keyed by exact `fault_1_id`/`fault_2_id`.
+14. **RC-396** — database foreign-key enforcement; orphaned references
+    hard-blocked.
+15. **RC-397** — scope limitation restated + explicit no-reuse-on-another-vehicle/
+    configuration clause.
+
+### Guardrails applied
+
+- **No invented values** — every schema field, unit example, and enum carried into
+  the deliverable stays `INITIAL_TARGET_PROFILE` / `NeedsSupplierData`; nothing is
+  marked Confirmed and no value gains pass/fail authority (RC-267/293/300).
+- **No M10 / no production code** — RC-396 database FK enforcement, the eventual
+  schema, rule-engine tests, and HIL validation are captured as **doctrine** for a
+  future production phase; the owner's stated downstream sequence
+  (`DATABASE_SCHEMA_IMPLEMENTATION → RULE_ENGINE_TESTS → HIL_VALIDATION`) is NOT
+  performed during Rev 07 ingestion (CLAUDE.md).
+- **Text-corruption items are the Hunter's, not ours** — items 1 & 3 confirm the
+  deliverable already uses the clean 7-term `L_min` equation and canonical field
+  names; noted without minting duplicate rows.
+- **Evidence immutable** — archives committed 1:1 and separately from this
+  reconciliation.
+
+### Standing checks
+
+- RC-383..397 added; deliverable relabelled
+  `GATE_05M_C3_REVISION_06_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE`; D-008
+  amended (review_70). The controlled-validation architecture is mature and ready
+  to freeze the specification while all physical pass claims remain correctly
+  unproven.
 - Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
   no customer operation; no compliance/certification claim; ODRs untouched; no
   production code / no M10 during ingestion.
