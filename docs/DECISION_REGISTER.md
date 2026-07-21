@@ -358,6 +358,31 @@ later entry that references it.
   procedure architecture is ready for controlled multidisciplinary review, NOT
   evidence physical movement/braking/regen/fault validation has passed (nothing
   Confirmed).
+- **Amendment (owner review_68, batch_72 "70:75", RC-351..363): Gate 05M-C3
+  Revision 04 — database semantics + authorization hygiene.** The Hunter
+  delivered Revision 04 (applying RC-340..350) and the owner added 13
+  corrections: preserve distance-component values, never zero-clamp overlaps
+  (RC-351); Distance Accounting Integrity Rule + component schema (RC-352); the
+  immutable result lifecycle `SIGNED_RESULT → … → SUPERSEDED_FOR_CURRENT_CONFIGURATION`
+  (RC-353); `TestCellAuthorization` status transition rules — no `DRAFT`→`ACTIVE`
+  jump (RC-354); procedure approval requires a real named-approver signature,
+  otherwise `APPROVAL_REQUIRED` (RC-355); the ±2 Nm residual is strictly
+  non-authoritative + DC-bus current tracked + field-weakening justification
+  removed (RC-356); C3A-006 measures brake input / assist state / hydraulic
+  pressure (RC-357); C3A-009B carries a `BlockReason` + seven unlock prerequisites
+  (RC-358); after inverter comms loss independent physical evidence is required
+  (RC-359); steering validity and freshness are separate axes (RC-360);
+  execution-domain arrows are review paths, not automatic authorization (RC-361);
+  tighter moving brake/steer-assist + aux-voltage fault limits (RC-362); and the
+  full `PairedFaultAuthorization_ID` schema + reverse-order-is-separate rule
+  (RC-363). (Owner item 1, the `L_min` transcription cleanup, was already clean in
+  the deliverable.) Status upgrades to `FORMAL_BASELINE_CANDIDATE /
+  REVISION_04_APPLIED / … / MULTI_FAULT_AUTHORIZATION_SCHEMA_DEFINED`. Post-edit
+  label: `GATE_05M_C3_REVISION_04_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` —
+  the controlled procedure architecture is ready for multidisciplinary
+  engineering review; it does NOT mean any vehicle / calibration / brake system /
+  regeneration strategy / moving fault test has physically passed (nothing
+  Confirmed).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the

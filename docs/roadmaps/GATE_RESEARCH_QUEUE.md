@@ -749,7 +749,7 @@ post-edit label
 procedure is ready to be reviewed and controlled, not physical-pass evidence.
 Permits **Gate 05M-C3 only** (after 05M-C2A/B/C).
 
-## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: REVISION 03 — formal baseline candidate (owner review_67, batch_71)
+## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: REVISION 04 — formal baseline candidate (owner review_68, batch_72)
 
 Deliverable `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md` — the **last rung of
 the split 05M-C phase**, only after Gate 05M-C2 is proven. Built as **five linear
@@ -798,9 +798,21 @@ prerequisites + order/timing (RC-348); preserve invalidated evidence (RC-349);
 full `TestCellAuthorization_ID` schema (RC-350). Status becomes
 `FORMAL_BASELINE_CANDIDATE / REVISION_03_APPLIED / … /
 C3E_EXECUTION_DOMAIN_CLASSIFICATION_DEFINED`; post-edit label
-`GATE_05M_C3_REVISION_03_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW`. **NEXT =
-05M-C3A execution + Envelope Cell 1 authorization (`TestCellAuthorization_ID`) +
-formal engineering baseline review.** The Hunter's "15 km/h" is an
+`GATE_05M_C3_REVISION_03_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW`.
+**Revision 04 (review_68, RC-351..363):** preserve distance-component values not
+zero-clamp (RC-351); Distance Accounting Integrity Rule + component schema
+(RC-352); immutable result lifecycle (RC-353); `TestCellAuthorization` status
+transitions (RC-354); procedure approval requires real signatures (RC-355);
+±2 Nm strictly non-authoritative + DC-bus + remove field-weakening (RC-356);
+measurable C3A-006 braking (RC-357); C3A-009B block prerequisites (RC-358);
+independent physical evidence after comms loss (RC-359); steering validity vs
+freshness (RC-360); execution arrows are review paths (RC-361); tighter
+moving-fault limits (RC-362); full `PairedFaultAuthorization_ID` schema (RC-363).
+Status becomes `FORMAL_BASELINE_CANDIDATE / REVISION_04_APPLIED / … /
+MULTI_FAULT_AUTHORIZATION_SCHEMA_DEFINED`; post-edit label
+`GATE_05M_C3_REVISION_04_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW`. **NEXT =
+05M-C3A execution + Envelope Cell 1 authorization (signed `TestCellAuthorization_ID`)
++ formal engineering baseline review.** The Hunter's "15 km/h" is an
 `INITIAL_TARGET_PROFILE` pending supplier + engineering approval
 (RC-267/291/293/300 — no auto-unlock).
 

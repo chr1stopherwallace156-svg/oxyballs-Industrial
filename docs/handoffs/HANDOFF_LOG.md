@@ -13,6 +13,57 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — batch 71 ("69:75") + review_67: Gate 05M-C3 Revision 03 (RC-340..350)
+
+### Session
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 71 "69:75" + review_67 — Gate 05M-C3
+  Revision 03; 11 pre-baseline corrections RC-340..350 applied); gate labels
+  `GATE_05M_C3_REVISION_03_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW`
+
+### Git state
+
+- Branch: `claude/docs-structure-large-projects-b6vxx5`
+- **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
+- Start commit: `abca1d6` — Archive raw RH batch 71 + review_67 1:1
+- End commit: `856035b` — Reconcile RH batch 71 + review_67
+- Working tree at handoff: clean (everything committed)
+
+### Work performed
+
+- **Gate 05M-C3 Revision 03 — RC-340..350 applied verbatim to
+  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`.** The Hunter delivered Revision 03
+  (applying the 13 batch_70 corrections RC-327..339); the owner added 11 further
+  corrections: insert + govern the actual `L_min` equation (RC-340); ±2 Nm
+  zero-regen residual a candidate (RC-341); remove the circular C3A→C3B dependency
+  (RC-342); remove "immediate" from steering states (RC-343); define `STALE` by
+  signal freshness (RC-344); supplier-defined Neutral envelope (RC-345); C3C-007
+  fault ownership + comms-loss ≠ shutdown (RC-346); C3E fault-execution-domain
+  classification (RC-347); paired/compound-fault prerequisites (RC-348); preserve
+  invalidated evidence (RC-349); full `TestCellAuthorization_ID` schema (RC-350).
+  The C3A-009B contradiction fix was already applied via RC-328.
+- Post-edit label
+  `GATE_05M_C3_REVISION_03_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW`.
+- Files changed (reconciliation commit `856035b`): `RH01_SECOND_STAGE_FILTER.md`
+  (RC-340..350 + section 79), `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`,
+  `DECISION_REGISTER.md` (D-008 review_67 amendment), `RESEARCH_MAP.md`,
+  `GATE_RESEARCH_QUEUE.md`, `CHANGELOG.md`, handoff files. Raw archives +
+  PROVENANCE committed as `abca1d6`.
+
+### Verification
+
+- Tests run: none — no test suite exists in this repository
+- Verified vs claimed: batch_71/review_67 archives 1:1 against the owner's chat
+  ("69:75"); all 11 corrections (RC-340..350) applied verbatim; nothing marked
+  `SIGNED_PASS`/Confirmed; no movement authorized
+
+*(Full State / Next-action / Forbidden-actions content preserved in git history
+at commit `856035b`; the current live copy carries the batch 72 update.)*
+
+---
+
 ## 2026-07-16 — Claude Code — batch 70 ("68:75") + review_66: Gate 05M-C3 Revision 02 (RC-327..339)
 
 ### Session

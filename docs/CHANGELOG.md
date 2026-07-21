@@ -5,6 +5,38 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 72 ("70:75") + review_68: Gate 05M-C3 Revision 04 + 13 pre-baseline corrections
+
+- Archived batch_72 (Gate 05M-C3 Revision 04) and review_68 1:1 (commit
+  `2f9fe2b`); PROVENANCE row inserted newest-first. Owner: "Revision 04 is very
+  strong and is now close to a controlled engineering baseline."
+- **Revision 04 applied the 11 batch_71 corrections (RC-340..350)** — the `L_min`
+  equation, `distance_component_method` enum, movement-authorization gate,
+  `TestCellAuthorization_ID` archetype + status enum,
+  `INVALIDATED_FOR_CURRENT_CONFIGURATION`, ±2 Nm residual candidate, split C3A-006
+  + C3A/C3B correlation, supplier-defined Neutral, C3C-007 ownership matrix +
+  comms-loss cross-validation, steering freshness STALE, fault execution-domain
+  tags, paired-fault prerequisites. C3A-009B cleanly `APPROVAL_REQUIRED`/`LOCKED`.
+- **RC-351..363 added; 13 corrections applied verbatim to
+  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`:** preserve distance-component values, no
+  zero-clamp (RC-351); Distance Accounting Integrity Rule + component schema
+  (RC-352); immutable result lifecycle (RC-353); `TestCellAuthorization` status
+  transitions (RC-354); procedure approval requires real signatures (RC-355);
+  ±2 Nm strictly non-authoritative + DC-bus current + remove field-weakening
+  (RC-356); measurable C3A-006 braking control (RC-357); C3A-009B block
+  prerequisites (RC-358); independent physical evidence after comms loss (RC-359);
+  steering validity vs freshness (RC-360); execution arrows are review paths
+  (RC-361); tighter moving-fault limits (RC-362); full `PairedFaultAuthorization_ID`
+  schema (RC-363). (The `L_min` transcription cleanup was already clean.)
+- Status upgrades to `FORMAL_BASELINE_CANDIDATE / REVISION_04_APPLIED / … /
+  MULTI_FAULT_AUTHORIZATION_SCHEMA_DEFINED`; post-edit label
+  `GATE_05M_C3_REVISION_04_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` — ready
+  for multidisciplinary engineering review, not physical-pass evidence.
+- RH01 section 80; D-008 amended (review_68); RESEARCH_MAP + GATE_RESEARCH_QUEUE
+  updated; handoff rotated. Next = 05M-C3A execution + Envelope Cell 1
+  authorization / formal engineering baseline review. Nothing Confirmed; no
+  normal driving; no public road; ODRs untouched.
+
 ## 2026-07-16 — RH batch 71 ("69:75") + review_67: Gate 05M-C3 Revision 03 + 11 pre-baseline corrections
 
 - Archived batch_71 (Gate 05M-C3 Revision 03) and review_67 1:1 (commit

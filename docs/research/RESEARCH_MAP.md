@@ -371,27 +371,30 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_67):** **Gate 05M-C3A execution / Envelope
+**Next expected batch (owner review_68):** **Gate 05M-C3A execution / Envelope
 Cell 1 authorization + formal engineering baseline review** (Decision Register
-**D-008**, amended review_67). Gate 05M-C3 (Controlled Closed-Area Low-Speed
-Movement, `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`) is now at **Revision 03** — the
-Hunter applied the review_66 corrections (RC-327..339) and the owner added 11
-review_67 corrections (RC-340..350: insert + govern the actual `L_min` equation;
-±2 Nm zero-regen residual a candidate; remove the circular C3A→C3B dependency;
-remove "immediate" from steering states; define `STALE` by signal freshness;
-supplier-defined Neutral envelope; C3C-007 fault ownership + comms-loss ≠
-shutdown; C3E fault-execution-domain classification; paired/compound-fault
-prerequisites; preserve invalidated evidence; full `TestCellAuthorization_ID`
-schema). It now labels
-`GATE_05M_C3_REVISION_03_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` — the
-architecture is ready for controlled multidisciplinary review, NOT physical-pass
-evidence (nothing Confirmed). Every number stays `INITIAL_TARGET_PROFILE`
-(RC-267/291/293/300 — no auto-unlock, cell-by-cell escalation RC-314/350),
-steering angle is observation/derating only (RC-323/337, no torque-vectoring),
-C3A-009B external-control authority stays LOCKED (RC-328), and factory ABS/ESC
-stays authoritative (RC-282/319/333). Ford ABS/ESC interface, inverter/BMS regen
-+ isolation architecture, tire/axle/geometry, and thermal-sensor data are
-NeedsSupplierData.
+**D-008**, amended review_68). Gate 05M-C3 (Controlled Closed-Area Low-Speed
+Movement, `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`) is now at **Revision 04** — the
+Hunter applied the review_67 corrections (RC-340..350) and the owner added 13
+review_68 corrections (RC-351..363: preserve distance-component values not
+zero-clamp; Distance Accounting Integrity Rule + component schema; immutable
+result lifecycle; `TestCellAuthorization` status transitions; procedure approval
+requires real signatures; ±2 Nm strictly non-authoritative + DC-bus; measurable
+C3A-006 braking; C3A-009B block prerequisites; independent physical evidence
+after comms loss; steering validity vs freshness; execution arrows are review
+paths; tighter moving-fault limits; full `PairedFaultAuthorization_ID` schema).
+It now labels
+`GATE_05M_C3_REVISION_04_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` — the
+controlled procedure architecture is ready for multidisciplinary engineering
+review; it does NOT mean any vehicle / calibration / brake system / regeneration
+strategy / moving fault test has physically passed (nothing Confirmed). Every
+number stays `INITIAL_TARGET_PROFILE` (RC-267/291/293/300 — no auto-unlock,
+cell-by-cell escalation RC-314/350/354), steering angle is observation/derating
+only (RC-323/337, no torque-vectoring), C3A-009B external-control authority stays
+LOCKED (RC-328/358), procedures are not pre-approved without signatures (RC-355),
+and factory ABS/ESC stays authoritative (RC-282/319/333). Ford ABS/ESC interface,
+inverter/BMS regen + isolation architecture, tire/axle/geometry, and
+thermal-sensor data are NeedsSupplierData.
 Engineer-gated, live-HV, **closed controlled area only, no public road, no
 customer operation, no normal-driving authority**; the Ground Movement
 Precondition (RC-285) + predictable-traction surface (RC-283) + spotters +
