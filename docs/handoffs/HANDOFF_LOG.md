@@ -13,6 +13,54 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — batch 65 ("63:75") + review_62: Gate 05M-C2A/05M-C2B convergence (corrections 3/4/5 applied, no new corrections)
+
+### Session
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 65 "63:75" + review_62 — Gate
+  05M-C2A/05M-C2B convergence; corrections 3/4/5 applied, NO new corrections, NO
+  new RC rows); 05M-C2A/C2B baseline-ready; awaiting the Gate 05M-C3 batch or a
+  supplier reply
+
+### Git state
+
+- Branch: `claude/docs-structure-large-projects-b6vxx5`
+- **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
+- Start commit: `ca512b0` — Archive raw RH batch 65 + review_62 1:1
+- End commit: `60d3c34` — Reconcile RH batch 65 + review_62
+- Working tree at handoff: clean (everything committed)
+
+### Work performed
+
+- **Convergence batch — no new corrections, no new RC rows, no deliverable
+  changes.** The owner re-issued review_61 corrections 3/4/5 and the Hunter
+  applied all three (already applied to `GATE05M_C2_RESTRICTED_CREEP.md` in batch
+  64): empirical breakaway → MECHANICAL_BINDING_CHECK not auto-fail (RC-294);
+  measurable creep-speed/torque/runout + pressure/voltage/response thresholds
+  (RC-295); brake-hold displacement threshold (RC-296).
+- **Residual (recorded, not re-registered):** the Hunter's Authority Status
+  column still read "Approved by <role>" — RC-292 Required-Approver not applied
+  in the draft, no explicit Numeric Threshold Authority Rule (RC-293); the
+  deliverable already carried both and was ahead of the draft.
+- Files changed (reconciliation commit `60d3c34`): `RH01_SECOND_STAGE_FILTER.md`
+  (section 73), `CHANGELOG.md`, handoff files. Raw archives + PROVENANCE
+  committed as `ca512b0`.
+
+### Verification
+
+- Tests run: none — no test suite exists in this repository
+- Verified vs claimed: batch_65/review_62 archives 1:1 against the owner's chat
+  ("63:75"); corrections 3/4/5 confirmed applied and already held by the
+  deliverable (RC-294/295/296); the "Approved by" residual recorded without a
+  duplicate RC row; nothing marked Confirmed; no movement authorized
+
+*(Full State / Next-action / Forbidden-actions content preserved in git history
+at commit `60d3c34`; the current live copy carries the batch 66 update.)*
+
+---
+
 ## 2026-07-16 — Claude Code — batch 64 ("62:75") + review_61: Gate 05M-C1/05M-C2A/05M-C2B corrected re-emit + 5 pre-baseline cleanups (regression cleared, RC-292..296)
 
 ### Session

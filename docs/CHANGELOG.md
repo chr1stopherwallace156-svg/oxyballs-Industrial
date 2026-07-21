@@ -5,6 +5,37 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 66 ("64:75") + review_63: Gate 05M-C2A/05M-C2B baseline-candidate + 10 record-integrity/measurement-authority corrections
+
+- Archived batch_66 (Gate 05M-C2A/05M-C2B baseline-candidate re-emit) and
+  review_63 1:1 (commit `30ee754`); PROVENANCE row inserted newest-first. Owner:
+  "this is essentially at baseline-candidate quality now … the actual gate logic
+  is no longer the main weakness."
+- **RC-297..306 added; ten corrections applied verbatim to
+  `GATE05M_C2_RESTRICTED_CREEP.md`:** bounded/supplier-supported/simulation
+  fault injection (RC-297); brake+steering assist as a pre-movement HARD
+  interlock + monitored, and the block itself tested (RC-298/306); four-field
+  approval record — `Required Approver` / `Procedure Approval Status` /
+  `Execution Status` / `Result Signoff Status`, a GLOBAL rule, no `SIGNED_PASS`
+  until `EXECUTED` (RC-299); expanded Numeric Threshold Authority linkage
+  (RC-300); software "Restricted Creep Torque Clamp" not "hard/absolute clamp"
+  (RC-301); dual-channel APPS plausibility (RC-302); torque-rate ≠
+  current-response validation (RC-303); electrical CAN_1 passivity (RC-304); C2B
+  Rollback Containment Rule + hill-hold ≠ parking-hold (RC-305).
+- Status: 05M-C2A adds `BASELINE_CANDIDATE / PROCEDURE_REVIEW_REQUIRED /
+  BRAKE_ASSIST_INTERLOCK_REQUIRED / STEERING_ASSIST_INTERLOCK_REQUIRED /
+  NUMERIC_LIMITS_INITIAL_TARGET_PROFILE / CONTROLLED_FAULT_INJECTION_ONLY /
+  NO_PHYSICAL_PASS_CLAIM_UNTIL_EXECUTED`; 05M-C2B adds
+  `UNLOCKS_ONLY_AFTER_C2A_SIGNED_PASS / ROLLBACK_CONTAINMENT_PLAN_REQUIRED /
+  SECONDARY_RESTRAINT_REQUIRED / TEMPORARY_HILL_HOLD_ONLY /
+  PARKING_HOLD_AUTHORITY_NOT_GRANTED`. Post-edit label:
+  `GATE_05M_C2A_C2B_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — a procedure
+  baseline, not physical-pass evidence.
+- RH01 section 74; D-008 amended (review_63); RESEARCH_MAP + GATE_RESEARCH_QUEUE
+  updated; handoff rotated. Next = Gate 05M-C3 (speed/ramp under engineering
+  manual + proof artifacts only, RC-291/293/300). Nothing Confirmed; no normal
+  driving; no public road; ODRs untouched.
+
 ## 2026-07-16 — RH batch 65 ("63:75") + review_62: Gate 05M-C2A/05M-C2B convergence re-emit (corrections 3/4/5 applied, no new corrections)
 
 - Archived batch_65 (Gate 05M-C2A/05M-C2B re-emit) and review_62 1:1 (commit

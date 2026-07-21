@@ -395,6 +395,16 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-294 | **15–25 Nm breakaway is an EXPECTED range, NOT a final pass envelope (owner review_61, extends RC-287)**: for a heavy F-450/F-550 15–25 Nm may be too light depending on gearing, tire load, brake drag, axle ratio, grade, tire pressure, drivetrain config → "confirming controlled steps within the 15–25 Nm breakaway envelope" becomes **"mapping the actual breakaway torque baseline; values outside the initial expected range trigger NEEDS_REVIEW / MECHANICAL_BINDING_CHECK, not automatic failure"** | batch_64 (range treated as pass gate) | supplier/engineering breakaway baseline — **NeedsSupplierData** | **MeasurementDoctrine / NoAutoFail** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-003 + exit criterion 1) — extends RC-287 — lanes L7 |
 | RC-295 | **Replace "absolute control" / "completely active" with measurable thresholds (owner review_61, extends RC-288)**: "vehicle crawls forward under absolute control" → **"within approved creep-speed, torque, and runout limits"**; "full steering and braking assistance remains completely active" → **"steering and braking assist remain within approved pressure, voltage, and response thresholds"** — no unmeasurable absolutes in a safety-critical spec | batch_64 (unmeasurable absolutes) | n/a — measurement-language rule | **MeasurementDoctrine / NoAbsolutes** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-003 + 05M-C2A-011) — extends RC-288 — lanes L7 |
 | RC-296 | **Static brake-hold needs a measurable displacement threshold (owner review_61)**: "mechanical service brakes must completely hold the vehicle static" → **"vehicle displacement remains below the approved measurement threshold during the brake-hold torque request"** — measurable via wheel-speed / hub marker / video / external position sensor, not an unmeasurable "completely hold static" | batch_64 (unmeasurable brake-hold) | supplier/engineering displacement threshold — **NeedsSupplierData** | **MeasurementDoctrine / MeasurableThreshold** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-001 + exit criterion 1) — lanes L7 |
+| RC-297 | **Bounded fault-injection rule (owner review_63)**: "artificially inject a minor tracking fault" must not imply random live fault creation on a moving vehicle → **"use a pre-approved, supplier-supported, or simulation-controlled fault-injection method to create a bounded tracking fault during restricted creep"**; random live hardware fault creation or uncontrolled wiring disconnection while moving is strictly forbidden | batch_66 (unsafe fault injection wording) | n/a — test-safety rule | **TestSafety / BoundedFaultInjection** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (bounded fault-injection rule + 05M-C2C + status `CONTROLLED_FAULT_INJECTION_ONLY`) — lanes L7 |
+| RC-298 | **Brake + steering assist are a pre-movement HARD interlock, not just a check (owner review_63)**: **"no creep torque may be commanded by the VCU or executed by the inverter until brake assist and steering assist have passed formal pre-movement verification"** — auxiliary power / booster / steering-assist status registers are active soft-start prerequisites; the same channels are continuously monitored during creep for voltage sag / pressure drop | batch_66 (assist was verify-only) | supplier/engineering assist thresholds — **NeedsSupplierData** | **ControlsSafety / PreMovementInterlock** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (Pre-Movement Assistance Interlock + 05M-C2A-002/003/011 + status `BRAKE_ASSIST_INTERLOCK_REQUIRED`/`STEERING_ASSIST_INTERLOCK_REQUIRED`) — extends RC-285 — lanes L7 |
+| RC-299 | **Separate procedure approval from result signoff — four-field approval model (owner review_63, GLOBAL Build Engine rule, extends RC-292)**: a row marked `PENDING_EXECUTION`/`STAGED FOR LOG` that also says "Approved by <role>" is a contradictory record → each row carries **`Required Approver`** + **`Procedure Approval Status`** (`APPROVAL_REQUIRED` → `APPROVED_FOR_CONTROLLED_EXECUTION`) + **`Execution Status`** (`NOT_EXECUTED` → `PENDING_EXECUTION` → `EXECUTED`) + **`Result Signoff Status`** (`NOT_ELIGIBLE` → `SIGNED_PASS`/`SIGNED_FAIL`/`NEEDS_REVIEW`); no `SIGNED_PASS` exists until executed | batch_66 ("Approved by" on unexecuted tests) | n/a — evidence-hygiene rule | **EvidenceHygiene / ApprovalVsSignoff** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (approval/execution record model + status `NO_PHYSICAL_PASS_CLAIM_UNTIL_EXECUTED`) — extends RC-292 — lanes L7 |
+| RC-300 | **Numeric Threshold Authority Rule expanded linkage (owner review_63, extends RC-267/293)**: no threshold has **pass, fail, block, or movement authority** until linked to **a source or engineering calculation + the applicable hardware/software configuration + a calibrated measurement method + an uncertainty/tolerance + a proof artifact + an approved procedure revision + a signed engineering authorization** — until then the value is a target, never a criterion | batch_66 (values sound final) | supplier/engineering thresholds — **NeedsSupplierData** | **ThresholdAuthority / FullLinkage** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (Numeric Threshold Authority Rule) — extends RC-267/293 — lanes L7 |
+| RC-301 | **Rename "Absolute Creep Torque Clamp" → "Restricted Creep Torque Clamp" (owner review_63)**: "hard-clamped at a defensive boundary" → **"software-limited to the approved restricted-creep boundary"**, and "breaking past the hard safety clamp" → **"exceeding the approved restricted-creep torque limit"** — "hard clamp" wrongly implies a hardware-independent safety mechanism when it is a VCU software limit | batch_66 (misleading "hard/absolute clamp") | n/a — nomenclature rule | **Nomenclature / SoftwareLimitNotHardClamp** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (clamp doctrine + 05M-C2A-005) — lanes L7 |
+| RC-302 | **APPS Dead-Band Acceptance Rule — dual-channel plausibility (owner review_63)**: a normalized pedal percentage alone cannot authorize torque → zero-torque eligibility requires **both APPS channels within approved idle ranges + channel correlation within tolerance + no stuck-high/implausible-transition fault + the approved idle-stabilization time + valid brake/steering preconditions** | batch_66 (single-% dead-band) | supplier APPS channel spec — **NeedsSupplierData** | **ControlsSafety / DualChannelPlausibility** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (APPS Dead-Band Acceptance Rule + 05M-C2A-002) — lanes L7 |
+| RC-303 | **Separate torque-rate validation from phase-current-response validation (owner review_63)**: "inverter phase current development slope must reflect the linear ≤20 Nm/sec constraint" conflates two things → **"VCU commanded torque must remain within the approved `dT_command/dt` envelope; measured inverter torque feedback and phase-current response must remain within the supplier-approved tracking envelope for that command profile"** (torque estimate, current-loop behaviour, motor constants, speed, filtering, saturation differ); store commanded slope + reported torque slope + phase-current rise/decay + DC-bus current + vehicle acceleration | batch_66 (torque slope = current slope) | supplier tracking envelope — **NeedsSupplierData** | **MeasurementDoctrine / TorqueVsCurrent** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-006) — lanes L7 |
+| RC-304 | **Define CAN_1 passivity electrically, not "zero errors" (owner review_63)**: a listen-only analyzer may observe pre-existing OEM network errors it did not cause → "zero network collisions or errors are injected" → **"instrumentation produces no dominant-bit transmission, acknowledgement, error flag, wake request, diagnostic request, or other active influence on CAN_1; any observed OEM network errors are separately logged and attributed — their mere presence does not prove instrumentation transmission"** | batch_66 (imprecise passivity) | n/a — network-integrity rule | **NetworkIntegrity / ElectricalPassivity** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-012) — extends RC-172/230/282 — lanes L7 |
+| RC-305 | **C2B Rollback Containment Rule + hill-hold ≠ parking-hold (owner review_63)**: before any incline service-brake release, **downhill runout clear + independent secondary restraint/capture + remote E-stop active + driver ready to reapply brake + max rollback distance defined + max hold duration defined + thermal limits defined + no reliance on traction torque as the sole parking restraint**; temporary hill-hold assistance and a parking-hold function are NOT the same — the traction system must not substitute for a mechanical parking brake unless formally designed and approved | batch_66 (unbounded incline rollback test) | supplier/engineering rollback + hold limits — **NeedsSupplierData** | **ControlsSafety / RollbackContainment** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2B + status `ROLLBACK_CONTAINMENT_PLAN_REQUIRED`/`SECONDARY_RESTRAINT_REQUIRED`/`TEMPORARY_HILL_HOLD_ONLY`/`PARKING_HOLD_AUTHORITY_NOT_GRANTED`) — lanes L7 |
+| RC-306 | **Prove the assistance interlock inhibits torque — new test 05M-C2A-010B (owner review_63)**: verifying assistance is present is not enough → via an approved bounded simulation / low-voltage method, assert brake-assist-not-ready · steering-assist-not-ready · aux-voltage-below-approved-window and require **the VCU stays torque-inhibited and records the specific blocking reason**; any traction enable while a required assistance-ready state is invalid is blocked — the prerequisite becomes a tested interlock, not an assumption | batch_66 (interlock assumed, not tested) | supplier assist-ready registers — **NeedsSupplierData** | **ControlsSafety / TestedInterlock** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-011B) — extends RC-298 — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -4966,5 +4976,87 @@ is baseline-ready. Queued in `GATE_RESEARCH_QUEUE.md`.
   only, Ground Movement Precondition (RC-285), CAN_1 listen-only (RC-172/230),
   wheel-speed read-only (RC-282), no auto retry after E-stop (RC-262); every
   number INITIAL_TARGET_PROFILE (RC-267/293); never "certified safe" (RC-224).
+- Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
+  no customer operation; no compliance/certification claim; ODRs untouched.
+
+## 74. Batch 66 ("64:75") + owner review_63 — Gate 05M-C2A/05M-C2B baseline-candidate + 10 record-integrity/measurement-authority corrections (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_66_gate05mc2ab_baseline_candidate.md`
+and `docs/research/raw/owner_reviews/review_63_batch_66_verdict.md`.
+**Row additions: RC-297..RC-306 (no new CS).** No new deliverable — ten
+corrections applied to `GATE05M_C2_RESTRICTED_CREEP.md`. Owner: "this is
+essentially at baseline-candidate quality now … the actual gate logic is no
+longer the main weakness."
+
+### Framing corrections applied (become doctrine)
+
+The Hunter applied the owner's framing corrections 4/5/6: the "hard safety
+clamp" → "exceeding the approved restricted-creep torque limit" (folded into
+RC-301); **bounded / supplier-supported / simulation-controlled fault
+injection** (RC-297); and **brake/steering assist as a pre-movement interlock +
+monitored check** (RC-298). The owner: "no creep torque before brake and
+steering assist verification" and "no random live hardware fault creation while
+the vehicle is moving" — "those close two major holes."
+
+### Eight verdict corrections (RC-299..306)
+
+1. **RC-299 — four-field approval model (GLOBAL rule).** "Approved by <role>" on
+   an unexecuted row is contradictory → `Required Approver` + `Procedure Approval
+   Status` + `Execution Status` + `Result Signoff Status`; no `SIGNED_PASS` until
+   `EXECUTED`.
+2. **RC-300 — expanded Numeric Threshold Authority linkage.** No threshold has
+   pass/fail/block/movement authority until linked to source-or-calc + hw/sw
+   config + calibrated method + uncertainty + proof + procedure revision + signed
+   authorization.
+3. **RC-301 — rename the clamp.** "Absolute/Hard Creep Torque Clamp" → software
+   "Restricted Creep Torque Clamp" (a VCU software limit, not a
+   hardware-independent mechanism).
+4. **RC-302 — dual-channel APPS plausibility.** A single normalized % cannot
+   authorize torque; both channels + correlation + no stuck-high + idle-stab time
+   + valid brake/steering preconditions.
+5. **RC-303 — torque-rate ≠ current-response.** Commanded torque within the
+   `dT_command/dt` envelope; measured torque feedback + phase current within the
+   supplier tracking envelope; store both slopes + DC-bus current + accel.
+6. **RC-304 — CAN_1 passivity defined electrically.** No dominant-bit tx / ACK /
+   error flag / wake / diag request; observed OEM errors logged + attributed, not
+   assumed to be instrumentation.
+7. **RC-305 — C2B Rollback Containment Rule.** Runout clear + secondary restraint
+   + remote E-stop + driver ready + max rollback distance/hold duration/thermal
+   limits + no traction-torque-as-sole-parking-restraint; hill-hold ≠
+   parking-hold.
+8. **RC-306 — Assistance Interlock Inhibition test (05M-C2A-010B).** Assert
+   assist-not-ready / aux-voltage-low → VCU stays torque-inhibited and records the
+   blocking reason; the interlock is tested, not assumed.
+
+Corrected status: 05M-C2A adds `BASELINE_CANDIDATE / PROCEDURE_REVIEW_REQUIRED /
+BRAKE_ASSIST_INTERLOCK_REQUIRED / STEERING_ASSIST_INTERLOCK_REQUIRED /
+NUMERIC_LIMITS_INITIAL_TARGET_PROFILE / CONTROLLED_FAULT_INJECTION_ONLY /
+NO_PHYSICAL_PASS_CLAIM_UNTIL_EXECUTED`; 05M-C2B adds
+`UNLOCKS_ONLY_AFTER_C2A_SIGNED_PASS / ROLLBACK_CONTAINMENT_PLAN_REQUIRED /
+SECONDARY_RESTRAINT_REQUIRED / TEMPORARY_HILL_HOLD_ONLY /
+PARKING_HOLD_AUTHORITY_NOT_GRANTED`. Post-edit label:
+`GATE_05M_C2A_C2B_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — a **procedure
+baseline, not evidence that the physical vehicle has passed** (nothing
+Confirmed).
+
+### Next
+
+Owner: **Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement**, "but only as
+controlled closed-area movement with speed/ramp targets still under engineering
+manual and artifact" (RC-291/293/300 — no auto-unlock; explicit manual
+calibration + completed proof artifacts). Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- Ten corrections applied verbatim to `GATE05M_C2_RESTRICTED_CREEP.md`
+  (RC-297..306); four-field approval record (RC-299), expanded numeric-authority
+  linkage (RC-300), software Restricted Creep Torque Clamp (RC-301), dual-channel
+  APPS (RC-302), torque-rate ≠ current-response (RC-303), electrical CAN
+  passivity (RC-304), C2B rollback containment + hill-hold ≠ parking-hold
+  (RC-305), tested assistance interlock (RC-298/306), bounded fault injection
+  (RC-297); nothing marked `SIGNED_PASS` (`NO_PHYSICAL_PASS_CLAIM_UNTIL_EXECUTED`);
+  every number INITIAL_TARGET_PROFILE (RC-267/293/300); never "certified safe"
+  (RC-224).
 - Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
   no customer operation; no compliance/certification claim; ODRs untouched.

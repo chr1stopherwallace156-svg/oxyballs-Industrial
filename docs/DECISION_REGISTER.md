@@ -232,6 +232,33 @@ later entry that references it.
   ROLLBACK_LIMITS_SUPPLIER_OR_ENGINEERING_APPROVED / …`. Owner: 05M-C2A/C2B is
   "clean enough to baseline"; next = Gate 05M-C3 with speed/ramp
   `INITIAL_TARGET_PROFILE` only (RC-291/293).
+- **Amendment (owner review_63, batch_66 "64:75", RC-297..306): Gate
+  05M-C2A/05M-C2B reach baseline-candidate — record-integrity + measurement
+  authority.** The Hunter applied the framing corrections (bounded fault
+  injection RC-297; brake/steering pre-movement interlock RC-298) and the owner
+  added eight verdict corrections: the approval record splits into four fields
+  so procedure approval ≠ result signoff — `Required Approver` / `Procedure
+  Approval Status` / `Execution Status` / `Result Signoff Status`, a GLOBAL
+  Build Engine rule, and no `SIGNED_PASS` until `EXECUTED` (RC-299); the Numeric
+  Threshold Authority Rule links every value to source/calc + config +
+  calibrated method + uncertainty + proof + procedure revision + signed
+  authorization (RC-300); the clamp is renamed the software "Restricted Creep
+  Torque Clamp", not a "hard/absolute clamp" (RC-301); zero-torque needs
+  dual-channel APPS plausibility (RC-302); torque-rate and phase-current-response
+  are validated separately (RC-303); CAN_1 passivity is defined electrically
+  (RC-304); 05M-C2B gains a Rollback Containment Rule and hill-hold ≠
+  parking-hold (RC-305); and a new 05M-C2A-010B test proves the assistance
+  interlock actually inhibits torque (RC-306). 05M-C2A status adds
+  `BASELINE_CANDIDATE / PROCEDURE_REVIEW_REQUIRED / BRAKE_ASSIST_INTERLOCK_REQUIRED
+  / STEERING_ASSIST_INTERLOCK_REQUIRED / NUMERIC_LIMITS_INITIAL_TARGET_PROFILE /
+  CONTROLLED_FAULT_INJECTION_ONLY / NO_PHYSICAL_PASS_CLAIM_UNTIL_EXECUTED`;
+  05M-C2B adds `UNLOCKS_ONLY_AFTER_C2A_SIGNED_PASS / ROLLBACK_CONTAINMENT_PLAN_REQUIRED
+  / SECONDARY_RESTRAINT_REQUIRED / TEMPORARY_HILL_HOLD_ONLY /
+  PARKING_HOLD_AUTHORITY_NOT_GRANTED`. Post-edit label:
+  `GATE_05M_C2A_C2B_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — a procedure
+  baseline, NOT evidence the physical vehicle has passed (nothing Confirmed).
+  Next = Gate 05M-C3 with speed/ramp under engineering manual + proof artifacts
+  only (RC-291/293/300).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the

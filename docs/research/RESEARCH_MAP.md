@@ -371,15 +371,20 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_61):** **Gate 05M-C3 — Controlled
+**Next expected batch (owner review_63):** **Gate 05M-C3 — Controlled
 Closed-Area Low-Speed Movement** — the last rung of the split 05M-C phase
-(Decision Register **D-008**, amended review_61), only after Gate 05M-C2
+(Decision Register **D-008**, amended review_63), only after Gate 05M-C2
 (05M-C2A flat-ground creep → 05M-C2B incline/rollback → 05M-C2C faulted-creep
-recovery) is proven. Owner review_61: Gate 05M-C2A/C2B is now "clean enough to
-baseline" (the eight prior fixes finally landed + five new cleanups RC-292..296
-applied). The Hunter's "track-surface speeds up to 15 km/h" is an
-`INITIAL_TARGET_PROFILE` pending supplier + engineering approval (RC-267/291/293
-— no auto-unlock).
+recovery) is proven. Owner review_63: Gate 05M-C2A/C2B is a **baseline
+candidate** — after the ten record-integrity/measurement-authority corrections
+(RC-297..306) it labels
+`GATE_05M_C2A_C2B_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW`, a procedure
+baseline, NOT physical-pass evidence (nothing Confirmed). Owner: proceed to
+05M-C3 "but only as controlled closed-area movement with speed/ramp targets
+still under engineering manual and artifact" — the Hunter's "15 km/h" is an
+`INITIAL_TARGET_PROFILE` pending supplier + engineering approval
+(RC-267/291/293/300 — no auto-unlock, explicit manual calibration + completed
+proof artifacts).
 Engineer-gated, live-HV, **closed controlled area only, no public road, no
 customer operation, no normal-driving authority**; the Ground Movement
 Precondition (RC-285) + predictable-traction surface (RC-283) + spotters +
@@ -398,7 +403,13 @@ the 05M-C2A/B/C split (RC-286), breakaway → NEEDS_REVIEW (RC-287), no
 absolute-zero/instant wording (RC-288); review_61 baseline cleanups: Required
 Approver not "Approved by" (RC-292), Numeric Threshold Authority Rule (RC-293),
 15–25 Nm an expected range not a pass envelope (RC-294), measurable thresholds
-not absolutes (RC-295), brake-hold displacement threshold (RC-296). **Gate 05M-C1**
+not absolutes (RC-295), brake-hold displacement threshold (RC-296); review_63
+baseline-candidate corrections: bounded fault injection (RC-297), brake/steering
+pre-movement interlock + tested inhibition (RC-298/306), four-field approval
+record (RC-299), expanded numeric-authority linkage (RC-300), software Restricted
+Creep Torque Clamp (RC-301), dual-channel APPS (RC-302), torque-rate ≠
+current-response (RC-303), electrical CAN passivity (RC-304), C2B rollback
+containment + hill-hold ≠ parking-hold (RC-305). **Gate 05M-C1**
 (`GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`) is
 `COUPLED_DRIVELINE_LIFTED_WHEEL_READINESS_DEFINED` / `RATED_LIFT_OR_STANDS_REQUIRED`
 / `NO_GROUND_CONTACT` — the first coupled test, wheels lifted (5-row matrix

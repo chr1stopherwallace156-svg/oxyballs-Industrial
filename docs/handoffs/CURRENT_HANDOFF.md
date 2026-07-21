@@ -4,44 +4,55 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-16
-- Reason for handoff: task complete (batch 65 "63:75" + review_62 — Gate
-  05M-C2A/05M-C2B convergence re-emit; corrections 3/4/5 applied, NO new
-  corrections, NO new RC rows); 05M-C2A/C2B baseline-ready; awaiting the Gate
-  05M-C3 Controlled Closed-Area Low-Speed Movement batch or a supplier reply
+- Reason for handoff: task complete (batch 66 "64:75" + review_63 — Gate
+  05M-C2A/05M-C2B baseline-candidate; 10 record-integrity/measurement-authority
+  corrections RC-297..306 applied); gate pair labels
+  `GATE_05M_C2A_C2B_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW`; awaiting the
+  Gate 05M-C3 Controlled Closed-Area Low-Speed Movement batch or a supplier reply
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `ca512b0` — Archive raw RH batch 65 + review_62 1:1
+- Start commit: `30ee754` — Archive raw RH batch 66 + review_63 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- **Convergence batch — no new corrections, no new RC rows, no deliverable
-  changes.** The owner re-issued review_61 corrections 3/4/5 and the Hunter
-  **applied all three** (already applied to `GATE05M_C2_RESTRICTED_CREEP.md` in
-  batch 64): 05M-C2A-002 "map the empirical breakaway torque baseline; values
-  outside expected targets trigger MECHANICAL_BINDING_CHECK" + "crawls forward
-  within approved creep-speed, torque, and runout limits" (RC-294/295);
-  05M-C2A-010 "steering and braking assist remain within approved pressure,
-  voltage, and response thresholds" (RC-295); 05M-C2A-001 "vehicle displacement
-  remains below approved measurement threshold during brake-hold torque request"
-  (RC-296). Owner: "Gate 05M-C2A / C2B is clean enough to baseline, and the next
-  gate should be 05M-C3."
-- **Residual (recorded, NOT re-registered):** the Hunter's `Authority Status`
-  column STILL reads "Approved by &lt;role&gt;" — the RC-292 Required-Approver
-  correction (review_61) is not applied in the draft, and the draft has no
-  explicit Numeric Threshold Authority Rule (RC-293). The deliverable already
-  carries RC-292/293 and is ahead of the Hunter output; no register inflation.
-- Files changed (reconciliation commit): `RH01_SECOND_STAGE_FILTER.md` (section
-  73 — convergence + residual note, **no new RC rows**), `CHANGELOG.md`, handoff
-  files. Raw archives `batch_65_gate05mc2ab_convergence.md`,
-  `review_62_batch_65_verdict.md`, PROVENANCE committed separately as `ca512b0`.
-  No changes to `GATE05M_C2_RESTRICTED_CREEP.md` (already correct + ahead),
-  `DECISION_REGISTER.md`, `RESEARCH_MAP.md`, or `GATE_RESEARCH_QUEUE.md`.
+- **Baseline-candidate batch — RC-297..306 applied verbatim to
+  `GATE05M_C2_RESTRICTED_CREEP.md`.** The Hunter reached "baseline-candidate
+  quality" (applied framing corrections: bounded fault injection RC-297;
+  brake/steering pre-movement interlock RC-298), and the owner's verdict added
+  eight further record-integrity/measurement-authority corrections:
+  - **RC-299** four-field approval record (`Required Approver` / `Procedure
+    Approval Status` / `Execution Status` / `Result Signoff Status`) — a GLOBAL
+    Build Engine rule; no `SIGNED_PASS` until `EXECUTED`.
+  - **RC-300** expanded Numeric Threshold Authority linkage (source/calc + config
+    + calibrated method + uncertainty + proof + procedure revision + signed auth).
+  - **RC-301** software `Restricted Creep Torque Clamp`, not "hard/absolute clamp".
+  - **RC-302** dual-channel APPS plausibility (a single % can't authorize torque).
+  - **RC-303** torque-rate ≠ phase-current-response validation.
+  - **RC-304** electrical CAN_1 passivity (no dominant-bit tx/ACK/error/wake/diag;
+    OEM errors attributed, not assumed to be instrumentation).
+  - **RC-305** C2B Rollback Containment Rule + hill-hold ≠ parking-hold.
+  - **RC-306** new 05M-C2A-010B — prove the assistance interlock inhibits torque.
+- Status: 05M-C2A adds `BASELINE_CANDIDATE / PROCEDURE_REVIEW_REQUIRED /
+  BRAKE_ASSIST_INTERLOCK_REQUIRED / STEERING_ASSIST_INTERLOCK_REQUIRED /
+  NUMERIC_LIMITS_INITIAL_TARGET_PROFILE / CONTROLLED_FAULT_INJECTION_ONLY /
+  NO_PHYSICAL_PASS_CLAIM_UNTIL_EXECUTED`; 05M-C2B adds
+  `UNLOCKS_ONLY_AFTER_C2A_SIGNED_PASS / ROLLBACK_CONTAINMENT_PLAN_REQUIRED /
+  SECONDARY_RESTRAINT_REQUIRED / TEMPORARY_HILL_HOLD_ONLY /
+  PARKING_HOLD_AUTHORITY_NOT_GRANTED`. Post-edit label:
+  `GATE_05M_C2A_C2B_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — a **procedure
+  baseline, not evidence the physical vehicle has passed** (nothing Confirmed).
+- Files changed (reconciliation commit): `RH01_SECOND_STAGE_FILTER.md`
+  (RC-297..306 + section 74), `GATE05M_C2_RESTRICTED_CREEP.md` (10 corrections),
+  `DECISION_REGISTER.md` (D-008 review_63 amendment), `RESEARCH_MAP.md`,
+  `GATE_RESEARCH_QUEUE.md`, `CHANGELOG.md`, handoff files. Raw archives
+  `batch_66_gate05mc2ab_baseline_candidate.md`, `review_63_batch_66_verdict.md`,
+  PROVENANCE committed separately as `30ee754`.
 - **Nothing ingested; nothing Confirmed; no normal driving; no public road; no
   customer operation; no "certified safe"/compliance claim; ODRs untouched.**
 
@@ -49,11 +60,12 @@
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_65/review_62 archives are 1:1 against the owner's
-  chat ("63:75"); corrections 3/4/5 confirmed applied in the raw payload and
-  already held by the deliverable (RC-294/295/296); the "Approved by" residual
-  (RC-292 not applied in the Hunter draft) recorded without a duplicate RC row;
-  nothing marked Confirmed; no movement authorized
+- Verified vs claimed: batch_66/review_63 archives are 1:1 against the owner's
+  chat ("64:75"); all ten corrections (RC-297..306) applied verbatim to the
+  deliverable (four-field approval, expanded numeric-authority linkage, clamp
+  rename, dual-channel APPS, torque-rate ≠ current, electrical CAN passivity,
+  C2B containment, tested assistance interlock, bounded fault injection);
+  nothing marked `SIGNED_PASS`/Confirmed; no movement authorized
 
 ## State
 
@@ -73,12 +85,15 @@
   NO_LOAD_MOTOR_SPIN_VALIDATION_DEFINED; 05M-C1
   COUPLED_DRIVELINE_LIFTED_WHEEL_READINESS_DEFINED / NO_GROUND_CONTACT; 05M-C2
   FIRST_GROUND_CONTACT_POWERED_MOVEMENT_GATE / GROUND_CONTACT_PRESENT /
-  RESTRICTED_CREEP_ONLY / CAN_1_PASSIVE_ONLY / REQUIRED_APPROVERS_DEFINED /
-  PROOF_ARTIFACTS_DEFINED / FAULT_LATCH_REQUIRED
-  (`GATE05M_C2_RESTRICTED_CREEP.md`, split 05M-C2A/B/C — "clean enough to
-  baseline" per review_61); Gate 05M-C3 (controlled closed-area low-speed
-  movement) NEXT per D-008 (amended review_61)**; 07 v0.1 / 07B / 07C v0.4
-  PARKED; 08
+  RESTRICTED_CREEP_ONLY / CAN_1_PASSIVE_ONLY / BASELINE_CANDIDATE /
+  PROCEDURE_REVIEW_REQUIRED / BRAKE_ASSIST_INTERLOCK_REQUIRED /
+  STEERING_ASSIST_INTERLOCK_REQUIRED / CONTROLLED_FAULT_INJECTION_ONLY /
+  NO_PHYSICAL_PASS_CLAIM_UNTIL_EXECUTED
+  (`GATE05M_C2_RESTRICTED_CREEP.md`, split 05M-C2A/B/C — labels
+  `GATE_05M_C2A_C2B_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW` per review_63,
+  a procedure baseline NOT physical-pass evidence); Gate 05M-C3 (controlled
+  closed-area low-speed movement) NEXT per D-008 (amended review_63)**; 07 v0.1 /
+  07B / 07C v0.4 PARKED; 08
   FMEA_REGISTRY_CREATED (15 modes); 08B PARKED; **08C
   SIMULATION_SWEEP_MATRIX_CREATED — PARKED_FOR_SUPPLIER_DATA**. Order after
   05: 06 deep dive → 09 → 10 → 11.
@@ -96,14 +111,20 @@
   gating; hardwired loop + service brakes own the stopping/interruption path) +
   RC-206 (service-clear never clears active safety faults) + RC-213/218 (a DBC
   is a database, version hash enforced) + RC-224 (never "certified safe") + the
-  Gate 05x chain RC-229..296 (incl. **RC-279 no manual restraint of rotating
+  Gate 05x chain RC-229..306 (incl. **RC-279 no manual restraint of rotating
   parts, RC-280 lifted-chassis safety, RC-282 wheel-speed read-only, RC-285
   Ground Movement Precondition, RC-286 05M-C2A/B/C split, RC-289 proof/authority
   columns, RC-290 authorized fault clear not a hard reset, RC-291 no auto
   speed-unlock, RC-292 Required Approver not "Approved by", RC-293 Numeric
   Threshold Authority Rule, RC-294 breakaway a range not a pass gate, RC-295
-  measurable thresholds not absolutes, RC-296 brake-hold displacement
-  threshold**) bind all Gate 05x + downstream controls work.
+  measurable thresholds not absolutes, RC-296 brake-hold displacement threshold,
+  RC-297 bounded fault injection, RC-298 brake/steering pre-movement interlock,
+  RC-299 four-field approval record (procedure approval ≠ result signoff, GLOBAL),
+  RC-300 expanded numeric-authority linkage, RC-301 software Restricted Creep
+  Torque Clamp not "hard/absolute", RC-302 dual-channel APPS plausibility, RC-303
+  torque-rate ≠ current-response, RC-304 electrical CAN passivity, RC-305 C2B
+  rollback containment + hill-hold ≠ parking-hold, RC-306 tested assistance
+  interlock**) bind all Gate 05x + downstream controls work.
 - Open owner decisions (accumulated): (1) elektron-os-clean; (2) index.html;
   (3) L2; (4) L4; (5) L6; (6) L9 lane name; (7) Artifact Intake Form; (8)
   M10 forbidden-phrase + regression scanner (invented-values family through
@@ -113,10 +134,11 @@
   critical), RC-283 recurrences — the batch_62/63 FULL-DRAFT regression
   (RC-279/283/284/286/288 reverted, then re-emitted a third time), the strongest
   scanner case in the series, **CLEARED at batch_64 (the Hunter converged on the
-  corrected wording after three re-issues); at batch_65 the Hunter applied
-  corrections 3/4/5 (RC-294/295/296) but STILL left "Approved by <role>" in the
-  Authority Status column (RC-292 partial non-application) — a lingering
-  evidence-hygiene residual, deliverable already ahead**); (9)(10)(11)
+  corrected wording after three re-issues); the batch_65 "Approved by" residual
+  (RC-292) is now formally superseded at batch_66 by the RC-299 four-field
+  approval record — `Required Approver` / `Procedure Approval Status` /
+  `Execution Status` / `Result Signoff Status`, a GLOBAL Build Engine rule so
+  procedure approval is never confused with result signoff**); (9)(10)(11)
   Dana / ZF / Ford-Lee letters; (12) supplier reminder; (13) official Ford BBLB
   + IVM + FMVSS 305a/305/105 + OSHA electrical/LOTO + NHTSA EV + ISO 6469-3 +
   rated-lift/rotating-machinery sources (RC-237..288, NeedsExactSource) + paid

@@ -721,10 +721,23 @@ control"/"completely active" (RC-295); static brake-hold displacement threshold
 05M-C2B = `PROVISIONAL_LOCKED / UNLOCKS_ONLY_AFTER_05M_C2A_SIGNOFF / …`.
 **Regression cleared (batch_64): after the batch_62/63 full-draft regressions
 (RC-279 safety-critical + RC-283/284/286/288), the Hunter finally applied all
-eight prior fixes; the deliverable never regressed.** Owner: 05M-C2A/C2B is
-"clean enough to baseline." Permits **Gate 05M-C3 only** (after 05M-C2A/B/C).
+eight prior fixes; the deliverable never regressed.** Baseline-candidate
+corrections (review_63, RC-297..306): bounded fault injection (RC-297);
+brake/steering pre-movement HARD interlock + tested inhibition 05M-C2A-010B
+(RC-298/306); four-field approval record — `Required Approver` / `Procedure
+Approval Status` / `Execution Status` / `Result Signoff Status`, a GLOBAL rule,
+no `SIGNED_PASS` until `EXECUTED` (RC-299); expanded Numeric Threshold Authority
+linkage (RC-300); software `Restricted Creep Torque Clamp` not "hard/absolute
+clamp" (RC-301); dual-channel APPS plausibility (RC-302); torque-rate ≠
+current-response (RC-303); electrical CAN_1 passivity (RC-304); C2B Rollback
+Containment Rule + hill-hold ≠ parking-hold (RC-305). Status adds
+`BASELINE_CANDIDATE / PROCEDURE_REVIEW_REQUIRED / *_INTERLOCK_REQUIRED /
+CONTROLLED_FAULT_INJECTION_ONLY / NO_PHYSICAL_PASS_CLAIM_UNTIL_EXECUTED`;
+post-edit label `GATE_05M_C2A_C2B_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW`
+— a procedure baseline, not physical-pass evidence. Permits **Gate 05M-C3 only**
+(after 05M-C2A/B/C).
 
-## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: NEXT (owner review_61)
+## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: NEXT (owner review_63)
 
 The **last rung of the split 05M-C phase** — controlled closed-area low-speed
 movement, only after Gate 05M-C2 (05M-C2A flat-ground creep → 05M-C2B
