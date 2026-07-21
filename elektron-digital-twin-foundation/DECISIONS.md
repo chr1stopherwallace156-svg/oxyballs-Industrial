@@ -970,3 +970,21 @@ Append-only record of digital twin foundation decisions.
   5. Continue Mission D L1 + commercial WSM/EWD
 
 ---
+
+## DT-D058 — EDTS Visible Progress Release 1 (provisional visual)
+
+- **Change-control record:** [`decisions/DT-D058_VISIBLE_PROGRESS_R1.json`](decisions/DT-D058_VISIBLE_PROGRESS_R1.json)
+- **decision_id:** `DT-D058`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-027`
+- **recommended_decision:** `VISIBLE_PROGRESS_R1_PROVISIONAL_VISUAL_ONLY`
+- **decision:**
+  1. Admit interactive 3D demonstrator at `edts-visible-progress/` (Factory ICE / Deconstruction / EV Proposal)
+  2. Require data-status badges + inspector (ID, applicability, evidence, interfaces, missing props, MEPQ)
+  3. Use PLACEHOLDER_GEOMETRY / DESIGN_PROPOSAL — no invented torque, materials, or mounts
+  4. Scale layout only to ASSERTION_EXTRACTED dimensions from SRC-CAND-000010
+  5. Do **not** authorize L10 public demo, procedure generation, geometry freeze, or kernel mutation
+  6. Continue Mission D L1 + WSM/EWD in parallel; refine catalog as evidence arrives
+
+---

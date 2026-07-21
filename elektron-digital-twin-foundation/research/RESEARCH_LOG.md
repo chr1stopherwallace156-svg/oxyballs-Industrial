@@ -593,3 +593,23 @@ DT-D056 — `THREE_LAYER_PROTOCOL_ACTIVE_MISSION_D_L1_FOCUS`.
 ### Status
 
 DT-D057 — continue Mission D L1; do not invent truth to unblock conversion analysis.
+
+---
+
+## RL-027 — EDTS Visible Progress Release 1
+
+- **Date:** 2026-07-21
+- **Layer:** visual demonstrator (non-kernel parallel lane)
+- **Agent:** Cursor Cloud Agent
+- **Question:** Can EDTS ship an interactive 3D demonstrator before complete vehicle research without inventing engineering truth?
+
+### Findings
+
+1. **DT-D058** admits Visible Progress R1 as provisional visual only.
+2. App at `edts-visible-progress/` — Factory ICE / Deconstruction / EV Proposal; select/hide/remove/explode; data-status badges; inspector with MEPQ blockers.
+3. Layout uses ASSERTION_EXTRACTED dims only; meshes are PLACEHOLDER_GEOMETRY / DESIGN_PROPOSAL / BLOCKED.
+4. Does **not** authorize L10 demo, procedures, or geometry freeze. DT-D057 fabrication rejection unchanged.
+
+### Status
+
+DT-D058 — `VISIBLE_PROGRESS_R1_PROVISIONAL_VISUAL_ONLY`. Continue Mission D L1 + WSM/EWD in parallel.

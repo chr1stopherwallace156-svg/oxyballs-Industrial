@@ -2,6 +2,20 @@
 
 All notable changes to the digital twin foundation. Append-only.
 
+## 2026-07-21
+
+### Added
+
+- **DT-D058 / RL-027** — EDTS Visible Progress Release 1 (provisional interactive 3D demonstrator)
+- App: `edts-visible-progress/` (Vite + React Three Fiber)
+- Honest component catalog with data-status badges and MEPQ blockers
+- Factory ICE / Deconstruction / EV Proposal states
+
+### Status
+
+- Visible Progress R1: **PROVISIONAL_VISUAL_ONLY** (not VERIFIED geometry; L10 demo not authorized)
+- Mission D L1 + WSM/EWD continue in parallel
+
 ## 2026-07-16
 
 ### Added

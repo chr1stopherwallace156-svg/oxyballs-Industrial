@@ -1,0 +1,30 @@
+{
+  "decision_id": "DT-D058",
+  "title": "Admit EDTS Visible Progress Release 1 as provisional interactive visual demonstrator",
+  "status": "ACCEPTED",
+  "date_utc": "2026-07-21",
+  "related_locks": ["RL-027"],
+  "summary": "Ship an interactive 3D demonstrator (Factory ICE / Deconstruction / EV Proposal) using procedural PLACEHOLDER_GEOMETRY scaled only to ASSERTION_EXTRACTED layout dimensions. Does not invent torque, materials, mounts, or claim VERIFIED geometry. Does not authorize L10 public demo, procedure generation, or geometry freeze. Viewer is a non-kernel parallel lane that can refine as evidence arrives.",
+  "accepted_artifacts": [
+    "edts-visible-progress/",
+    "edts-visible-progress/src/data/componentCatalog.json",
+    "edts-visible-progress/README.md"
+  ],
+  "honesty_constraints": [
+    "All meshes default PLACEHOLDER_GEOMETRY or DESIGN_PROPOSAL / BLOCKED",
+    "Layout dims only from SRC-CAND-000010 ASSERTION_EXTRACTED tokens",
+    "Factory vs EV proposal families visually and metadata-separated",
+    "MEPQ blockers surfaced in inspector — not papered over",
+    "No kernel schema mutation"
+  ],
+  "not_authorized": [
+    "L10_PUBLIC_DEMO",
+    "PROCEDURE_GENERATION",
+    "GEOMETRY_FREEZE",
+    "ASSERTION_VERIFIED_MESH_CLAIM"
+  ],
+  "recommended_decision": "VISIBLE_PROGRESS_R1_PROVISIONAL_VISUAL_ONLY",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "geometry_extraction_authorized": false,
+  "kernel_mutation": false
+}
