@@ -1,0 +1,622 @@
+{
+  "store": "EVIDENCE",
+  "records": {
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "evidence_ledger": [
+        {
+          "claim": "Wheelbase 145.3 in for this configuration",
+          "source_id": "SRC-CAND-000010",
+          "status": "ASSERTION_EXTRACTED"
+        },
+        {
+          "claim": "Frame rail outside width H = 34.2 in",
+          "source_id": "SRC-CAND-000010",
+          "status": "ASSERTION_EXTRACTED"
+        },
+        {
+          "claim": "C-channel web thickness / hole metrology / material grade card",
+          "source_id": "NOT_ACQUIRED",
+          "status": "NOT_ACQUIRED"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Hole metrology along C-channel web",
+          "knowledge_gap_id": "KG-011",
+          "required_action": "Physical CMM / laser scan on reference vehicle"
+        },
+        {
+          "property": "Web thickness / material grade card",
+          "knowledge_gap_id": "KG-012",
+          "required_action": "Acquire OEM frame drawing or measure physical asset"
+        },
+        {
+          "property": "Dynamic frame load allowables",
+          "knowledge_gap_id": null,
+          "required_action": "MEPQ-007 — deferred until Mission E authorized"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "PACKAGING",
+          "code": "MEPQ-005",
+          "description": "Mid crossmember thickness UNKNOWN — blocks cradle bracket assumptions"
+        },
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-006",
+          "description": "Aft hole metrology tolerances UNKNOWN"
+        },
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-007",
+          "description": "Frame dynamic load allowables UNKNOWN"
+        }
+      ],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "evidence_ledger": [
+        {
+          "claim": "Bumper-to-back-of-cab 123.7 in",
+          "source_id": "SRC-CAND-000010",
+          "status": "ASSERTION_EXTRACTED"
+        },
+        {
+          "claim": "Cab exterior CAD / material card / door apertures",
+          "source_id": "NOT_ACQUIRED",
+          "status": "NOT_ACQUIRED"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Cab exterior CAD envelope",
+          "knowledge_gap_id": "KG-001",
+          "required_action": "Acquire OEM body CAD or scan physical cab"
+        },
+        {
+          "property": "Material grade / wall thickness card",
+          "knowledge_gap_id": null,
+          "required_action": "Do not assert aluminum or steel without OEM token"
+        }
+      ],
+      "mepq_blockers": [],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "evidence_ledger": [
+        {
+          "claim": "4x2 front axle architecture = Monobeam (Dana, forged steel)",
+          "source_id": "SRC-CAND-000010 p.55",
+          "status": "ASSERTION_EXTRACTED"
+        },
+        {
+          "claim": "Spindle casting number / linkage topology / alignment specs",
+          "source_id": "NOT_ACQUIRED",
+          "status": "UNKNOWN"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Spindle casting number",
+          "knowledge_gap_id": null,
+          "required_action": "Mission D L1 — extract from WSM/parts catalog"
+        },
+        {
+          "property": "Linkage topology detail + alignment specs",
+          "knowledge_gap_id": null,
+          "required_action": "Acquire WSM; do not invent torques"
+        }
+      ],
+      "mepq_blockers": [],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "evidence_ledger": [
+        {
+          "claim": "Dana M300 class referenced for Super Duty DRW fleet docs",
+          "source_id": "FLEET_DOCS_CANDIDATE",
+          "status": "CANDIDATE_UNVERIFIED"
+        },
+        {
+          "claim": "Exact ratio / housing wall thickness for VEH-000001",
+          "source_id": "NOT_ACQUIRED",
+          "status": "UNKNOWN"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Housing wall thickness",
+          "knowledge_gap_id": "KG-002",
+          "required_action": "Physical measurement or supplier drawing"
+        },
+        {
+          "property": "Exact pinion flange bolt circle / spline",
+          "knowledge_gap_id": "KG-012",
+          "required_action": "Caliper/CMM on reference vehicle"
+        },
+        {
+          "property": "Exact axle ratio for VEH-000001",
+          "knowledge_gap_id": null,
+          "required_action": "Door sticker / axle tag / build sheet"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-ENG-004",
+          "description": "Custom EV driveshaft adapter flange cannot be designed until pinion flange BCD/spline measured"
+        }
+      ],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "evidence_ledger": [
+        {
+          "claim": "19.5×6 10-lug 225 mm BCD + 225/70R19.5G",
+          "source_id": "SRC-CAND-000010",
+          "status": "ASSERTION_EXTRACTED"
+        },
+        {
+          "claim": "Lug torque",
+          "source_id": "WSM_NOT_ACQUIRED",
+          "status": "NOT_ACQUIRED"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Lug nut torque",
+          "knowledge_gap_id": null,
+          "required_action": "Acquire WSM — do not invent torque"
+        }
+      ],
+      "mepq_blockers": [],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "evidence_ledger": [
+        {
+          "claim": "Hydraulic recirculating ball + damper — NOT EPAS",
+          "source_id": "SRC-CAND-000010 / DT-D057",
+          "status": "ASSERTION_EXTRACTED"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Exact mount pattern / damper attach coords",
+          "knowledge_gap_id": null,
+          "required_action": "Physical measure or WSM"
+        }
+      ],
+      "mepq_blockers": [],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "evidence_ledger": [
+        {
+          "claim": "Engine family option-dependent (6.7L diesel OR 6.8L gas per GAWR tables) — instance not locked",
+          "source_id": "SRC-CAND-000010 FGAWR tables",
+          "status": "ASSERTION_EXTRACTED"
+        },
+        {
+          "claim": "Dry/wet mass and CG",
+          "source_id": "MEPQ-001",
+          "status": "UNKNOWN"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Dry/wet mass and CG x,y,z",
+          "knowledge_gap_id": null,
+          "required_action": "MEPQ-001 — do not invent mass (handoff 1,100 lb rejected)"
+        },
+        {
+          "property": "Mount hole pattern",
+          "knowledge_gap_id": null,
+          "required_action": "Physical measure or OEM mount drawing"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-001",
+          "description": "ICE CG/mass UNKNOWN — extraction procedure mass estimate blocked"
+        }
+      ],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "evidence_ledger": [
+        {
+          "claim": "Transmission model for VEH-000001 not instance-locked (6R140 candidate only)",
+          "source_id": "NOT_ACQUIRED",
+          "status": "CANDIDATE_UNVERIFIED"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Mass / CG / cross-member interfaces",
+          "knowledge_gap_id": null,
+          "required_action": "MEPQ-001 / MEPQ-002"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-001",
+          "description": "Powertrain CG/mass UNKNOWN"
+        },
+        {
+          "domain": "PACKAGING",
+          "code": "MEPQ-002",
+          "description": "Transmission crossmember reuse for EDU UNKNOWN"
+        }
+      ],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "evidence_ledger": [
+        {
+          "claim": "2-piece driveline topology not ASSERTION_VERIFIED for this instance",
+          "source_id": "NOT_ACQUIRED",
+          "status": "UNKNOWN"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Piece count / lengths / flange BCD",
+          "knowledge_gap_id": "KG-012",
+          "required_action": "Physical measure on reference vehicle"
+        }
+      ],
+      "mepq_blockers": [],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "evidence_ledger": [
+        {
+          "claim": "Radiator envelope dims/mass/fasteners UNKNOWN on L1 (38.3×30×8 rejected as overhang-code false positive)",
+          "source_id": "DT-D055 / DT-D056",
+          "status": "UNKNOWN"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Envelope dims / fastener specs / material",
+          "knowledge_gap_id": "KG-009",
+          "required_action": "Physical measure — do not reuse rejected 38.3 box as radiator size"
+        }
+      ],
+      "mepq_blockers": [],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "evidence_ledger": [
+        {
+          "claim": "40 gal aft-of-axle standard fuel tank",
+          "source_id": "SRC-CAND-000010",
+          "status": "ASSERTION_EXTRACTED"
+        },
+        {
+          "claim": "Strap hole coordinates / torque / tolerances",
+          "source_id": "MEPQ-004",
+          "status": "UNKNOWN"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Strap hole coordinates",
+          "knowledge_gap_id": "KG-009",
+          "required_action": "MEPQ-004 physical metrology"
+        },
+        {
+          "property": "Hole tolerances",
+          "knowledge_gap_id": "KG-011",
+          "required_action": "MEPQ-006"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "PACKAGING",
+          "code": "MEPQ-004",
+          "description": "Fuel tank strap holes UNKNOWN — blocks aft HV cradle hole match"
+        },
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-006",
+          "description": "Aft hole metrology tolerances UNKNOWN"
+        }
+      ],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING",
+      "data_status": "PLACEHOLDER_GEOMETRY",
+      "procedure_eligibility": "BLOCKED",
+      "evidence_ledger": [
+        {
+          "claim": "Diesel aftertreatment config-dependent; envelope UNKNOWN",
+          "source_id": "NOT_ACQUIRED",
+          "status": "UNKNOWN"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Hanger locations / envelope",
+          "knowledge_gap_id": null,
+          "required_action": "Physical survey on instance"
+        }
+      ],
+      "mepq_blockers": [],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "BLOCK-LV-GATEWAY": {
+      "component_id": "BLOCK-LV-GATEWAY",
+      "data_status": "BLOCKED",
+      "procedure_eligibility": "BLOCKED",
+      "evidence_ledger": [
+        {
+          "claim": "Pinout / connector designation UNKNOWN — EWD NOT_ACQUIRED",
+          "source_id": "MEPQ-003 / KG-008",
+          "status": "NOT_ACQUIRED"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Connector designation / pinout / CAN termination",
+          "knowledge_gap_id": "KG-008",
+          "required_action": "Acquire commercial EWD (MISN-000003 / Mission F discovery)"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "ELECTRICAL",
+          "code": "MEPQ-003",
+          "description": "LV firewall/CAN interconnect blocked until EWD acquired"
+        }
+      ],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "PROP-HV-PACK-01": {
+      "component_id": "PROP-HV-PACK-01",
+      "data_status": "DESIGN_PROPOSAL",
+      "procedure_eligibility": "PROPOSAL_ONLY",
+      "evidence_ledger": [
+        {
+          "claim": "L3 packaging proposal only — kWh/chemistry/voltage NOT accepted (DT-D057)",
+          "source_id": "DT-D057 / DT-D058",
+          "status": "L3_PROPOSAL_ONLY"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Pack energy (kWh), chemistry, voltage class",
+          "knowledge_gap_id": null,
+          "required_action": "Declined until L1 frame/fuel-strap honesty restored — handoff 110 kWh rejected"
+        },
+        {
+          "property": "Cradle hole match to aft strap pattern",
+          "knowledge_gap_id": "KG-009",
+          "required_action": "MEPQ-004"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "PACKAGING",
+          "code": "MEPQ-004",
+          "description": "Blocked on fuel-strap hole metrology"
+        },
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-006",
+          "description": "Aft hole tolerances UNKNOWN"
+        },
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-007",
+          "description": "Frame dynamic loads UNKNOWN"
+        }
+      ],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "PROP-EDU-REAR-01": {
+      "component_id": "PROP-EDU-REAR-01",
+      "data_status": "DESIGN_PROPOSAL",
+      "procedure_eligibility": "PROPOSAL_ONLY",
+      "evidence_ledger": [
+        {
+          "claim": "L3 proposal — EDU model/kW/torque NOT selected (handoff 250 kW rejected)",
+          "source_id": "DT-D058",
+          "status": "L3_PROPOSAL_ONLY"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "EDU model, continuous/peak power, torque, mount pattern",
+          "knowledge_gap_id": null,
+          "required_action": "Vendor shortlist after MEPQ-001/002 and pinion flange metrology"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "PACKAGING",
+          "code": "MEPQ-002",
+          "description": "Trans crossmember reuse UNKNOWN"
+        },
+        {
+          "domain": "ENGINEERING",
+          "code": "MEPQ-ENG-004",
+          "description": "Adapter flange to Dana M300 input requires measured BCD/spline"
+        }
+      ],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "PROP-INVERTER-01": {
+      "component_id": "PROP-INVERTER-01",
+      "data_status": "DESIGN_PROPOSAL",
+      "procedure_eligibility": "PROPOSAL_ONLY",
+      "evidence_ledger": [
+        {
+          "claim": "L3 packaging envelope only",
+          "source_id": "DT-D058",
+          "status": "L3_PROPOSAL_ONLY"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Envelope / HV-LV connectors / coolant ports",
+          "knowledge_gap_id": "KG-008",
+          "required_action": "Blocked on LV gateway EWD (MEPQ-003)"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "ELECTRICAL",
+          "code": "MEPQ-003",
+          "description": "LV/CAN integration blocked until EWD"
+        }
+      ],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "PROP-DCDC-01": {
+      "component_id": "PROP-DCDC-01",
+      "data_status": "DESIGN_PROPOSAL",
+      "procedure_eligibility": "PROPOSAL_ONLY",
+      "evidence_ledger": [
+        {
+          "claim": "L3 presence placeholder — rating/vendor UNKNOWN",
+          "source_id": "DT-D058",
+          "status": "L3_PROPOSAL_ONLY"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Power rating / package / LV bus integration",
+          "knowledge_gap_id": "KG-008",
+          "required_action": "MEPQ-003 EWD + LV architecture study"
+        }
+      ],
+      "mepq_blockers": [
+        {
+          "domain": "ELECTRICAL",
+          "code": "MEPQ-003",
+          "description": "LV bus integration blocked until EWD"
+        }
+      ],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "PROP-LTR-01": {
+      "component_id": "PROP-LTR-01",
+      "data_status": "DESIGN_PROPOSAL",
+      "procedure_eligibility": "PROPOSAL_ONLY",
+      "evidence_ledger": [
+        {
+          "claim": "Forward bay envelope is L2 estimate only — not L1",
+          "source_id": "DT-D056",
+          "status": "L3_PROPOSAL_ONLY"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Size / mount points / coolant loop topology",
+          "knowledge_gap_id": null,
+          "required_action": "Thermal packaging study after radiator bay measured"
+        }
+      ],
+      "mepq_blockers": [],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    },
+    "PROP-CCS-PORT-01": {
+      "component_id": "PROP-CCS-PORT-01",
+      "data_status": "DESIGN_PROPOSAL",
+      "procedure_eligibility": "PROPOSAL_ONLY",
+      "evidence_ledger": [
+        {
+          "claim": "Charge inlet location/vendor UNKNOWN — proposal marker only",
+          "source_id": "DT-D058",
+          "status": "L3_PROPOSAL_ONLY"
+        }
+      ],
+      "missing_properties": [
+        {
+          "property": "Inlet standard / side / cable routing / interlock",
+          "knowledge_gap_id": null,
+          "required_action": "Body packaging study — no invented inlet coords"
+        }
+      ],
+      "mepq_blockers": [],
+      "mass_kg": null,
+      "cg_m": null,
+      "mass_status": "UNKNOWN"
+    }
+  }
+}

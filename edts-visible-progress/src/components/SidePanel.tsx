@@ -177,6 +177,15 @@ export function SidePanel() {
         <p className="tiny muted">{selected.geometry_type}</p>
       </section>
 
+      <section>
+        <h3>Mass / CG (simulation)</h3>
+        <p className="tiny">
+          mass_kg: {selected.mass_kg == null ? 'null' : selected.mass_kg} · status:{' '}
+          <code>{selected.mass_status}</code>
+        </p>
+        <p className="tiny muted">Blocked until PHYSICALLY_MEASURED / VERIFIED — no invented axle deltas.</p>
+      </section>
+
       <div className="actions">
         <button type="button" onClick={() => toggleHidden(selected.id)}>
           {isHidden ? 'Show' : 'Hide'}

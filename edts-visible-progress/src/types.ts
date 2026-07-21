@@ -16,6 +16,8 @@ export type ProcedureEligibility =
   | 'PROPOSAL_ONLY'
   | 'BLOCKED'
 
+export type ViewMode = 'INSPECT' | 'HEATMAP' | 'TIMELINE' | 'SIMULATION'
+
 export type EvidenceClaimStatus =
   | 'ASSERTION_VERIFIED'
   | 'ASSERTION_EXTRACTED'
@@ -77,6 +79,9 @@ export interface TwinComponent {
   geometry_role: string
   explode_vector: number[]
   geometry_type: string
+  mass_kg: number | null
+  cg_m: number[] | null
+  mass_status: string
 }
 
 export interface SceneTreeNode {
@@ -85,10 +90,45 @@ export interface SceneTreeNode {
   component_ids: string[]
 }
 
+export interface TimelineStep {
+  id: string
+  label: string
+  state: VehicleState
+  action: string
+  remove: string[]
+  focus?: string
+  add_proposal?: boolean
+  note: string
+}
+
+export interface TimelineDoc {
+  store: string
+  id: string
+  title: string
+  honesty: string
+  steps: TimelineStep[]
+}
+
+export interface SimulationDoc {
+  store: string
+  id: string
+  title: string
+  status: string
+  honesty: string
+  required_before_enable: string[]
+  demo_fields: {
+    front_axle_delta_kg: number | null
+    rear_axle_delta_kg: number | null
+    cg_shift_mm: number | null
+  }
+  interacting_component_id: string | null
+}
+
 export interface Catalog {
   release: string
   decision: string
   schema: string
+  architecture: string[]
   locked_configuration: {
     proposal_configuration_id: string
     kernel_configuration_id: string
@@ -107,10 +147,12 @@ export interface Catalog {
   badge_colors: Record<DataStatus, string>
   states: VehicleState[]
   scene_tree: SceneTreeNode[]
+  search_aliases: Record<string, string[]>
+  chrome_policy: string
   components: TwinComponent[]
 }
 
-/** Handoff badge color table (UI chrome only — does not change evidence maturity). */
+/** Handoff badge / confidence heatmap colors. */
 export const BADGE_COLORS: Record<DataStatus, string> = {
   VERIFIED: '#10B981',
   PHYSICALLY_MEASURED: '#06B6D4',
@@ -121,5 +163,15 @@ export const BADGE_COLORS: Record<DataStatus, string> = {
   BLOCKED: '#DC2626',
 }
 
-/** Convert inches to meters for Three.js scene. */
+/** Heatmap rank: green → red by research completeness (not confidence %). */
+export const HEATMAP_COLORS: Record<DataStatus, string> = {
+  VERIFIED: '#10B981',
+  PHYSICALLY_MEASURED: '#34D399',
+  ESTIMATED: '#F59E0B',
+  DESIGN_PROPOSAL: '#FB923C',
+  PLACEHOLDER_GEOMETRY: '#F97316',
+  UNKNOWN: '#EF4444',
+  BLOCKED: '#991B1B',
+}
+
 export const IN_TO_M = 0.0254

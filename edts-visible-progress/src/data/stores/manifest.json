@@ -1,0 +1,66 @@
+{
+  "release": "EDTS_VISIBLE_PROGRESS_R1",
+  "decision": "DT-D058",
+  "schema": "edts-five-store-v1",
+  "architecture": [
+    "COMPONENT_INDEX",
+    "GEOMETRY",
+    "EVIDENCE",
+    "RELATIONSHIPS",
+    "UI"
+  ],
+  "locked_configuration": {
+    "proposal_configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+    "kernel_configuration_id": "CFG-000001",
+    "vehicle_instance_id": "VEH-000001",
+    "summary": "2019 Ford F-450 Chassis Cab Regular Cab 4x2 DRW 145.3 WB / 60 CA",
+    "model_year": 2019
+  },
+  "honesty": {
+    "note": "Meshes are procedural PLACEHOLDER_GEOMETRY or DESIGN_PROPOSAL unless badge says otherwise. Layout dims ASSERTION_EXTRACTED from SRC-CAND-000010 only. No invented torque, materials, mounts, kWh, or kW.",
+    "known_dimensions_in": {
+      "wheelbase": {
+        "value": 145.3,
+        "status": "ASSERTION_EXTRACTED",
+        "source": "SRC-CAND-000010"
+      },
+      "front_track": {
+        "value": 74.8,
+        "status": "ASSERTION_EXTRACTED",
+        "source": "SRC-CAND-000010"
+      },
+      "frame_rail_outside_width": {
+        "value": 34.2,
+        "status": "ASSERTION_EXTRACTED",
+        "source": "SRC-CAND-000010"
+      },
+      "front_overhang": {
+        "value": 38.3,
+        "status": "ASSERTION_EXTRACTED",
+        "source": "SRC-CAND-000010"
+      },
+      "cab_to_axle": {
+        "value": 60,
+        "status": "ASSERTION_EXTRACTED",
+        "source": "SRC-CAND-000010"
+      },
+      "bumper_to_back_of_cab": {
+        "value": 123.7,
+        "status": "ASSERTION_EXTRACTED",
+        "source": "SRC-CAND-000010"
+      }
+    },
+    "handoff_sample_rejected": [
+      "VERIFIED badges for frame/cab/axle without ASSERTION_VERIFIED OEM CAD",
+      "Invented 110 kWh pack / 250 kW EDU / 1,100 lb engine mass",
+      "Aluminum cab shell asserted as VERIFIED without material card",
+      "6.7L Power Stroke / 6R140 as definitive without instance option confirmation",
+      "Fabricated page-level citations not backed by acquired hashed sources"
+    ]
+  },
+  "states": [
+    "FACTORY_ICE",
+    "DECONSTRUCTION",
+    "EV_PROPOSAL"
+  ]
+}

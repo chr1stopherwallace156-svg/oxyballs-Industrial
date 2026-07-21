@@ -1,6 +1,7 @@
 import { useDemo } from '../DemoContext'
 import type { VehicleState } from '../types'
 import { StatusBadge } from './StatusBadge'
+import { ModeBar, SearchBar } from './ModePanels'
 
 const STATES: { id: VehicleState; label: string; blurb: string }[] = [
   { id: 'FACTORY_ICE', label: '1. Factory ICE', blurb: 'As-built donor baseline' },
@@ -23,6 +24,7 @@ export function Toolbar() {
     toggleRemoved,
     resetTransforms,
     selectedId,
+    focusComponent,
   } = useDemo()
 
   return (
@@ -34,7 +36,11 @@ export function Toolbar() {
           <span>LOCK</span>
           <code>{catalog.locked_configuration.proposal_configuration_id}</code>
         </div>
+        <p className="tiny muted arch-note">{catalog.architecture.join(' · ')}</p>
       </div>
+
+      <SearchBar />
+      <ModeBar />
 
       <div className="state-tabs" role="tablist" aria-label="Vehicle state">
         {STATES.map((s) => (
@@ -81,18 +87,20 @@ export function Toolbar() {
                 <p className="tree-group-label">{group.label}</p>
                 <ul>
                   {comps.map((c) => {
-                    const gone =
-                      hiddenIds.has(c.id) ||
-                      (c.removable && removedIds.has(c.id))
+                    const gone = hiddenIds.has(c.id) || (c.removable && removedIds.has(c.id))
                     return (
                       <li key={c.id} className={gone ? 'gone' : ''}>
                         <button
                           type="button"
                           className={`part-btn ${selectedId === c.id ? 'selected' : ''}`}
-                          onClick={() => setSelectedId(c.id)}
+                          onClick={() => focusComponent(c.id)}
                         >
                           <span className={`fam fam-${c.family}`}>
-                            {c.family === 'EV_PROPOSAL' ? 'EV' : c.decon_group === 'EXTRACTED' ? 'X' : 'OEM'}
+                            {c.family === 'EV_PROPOSAL'
+                              ? 'EV'
+                              : c.decon_group === 'EXTRACTED'
+                                ? 'X'
+                                : 'OEM'}
                           </span>
                           <span className="part-name">{c.display_name}</span>
                           <StatusBadge status={c.data_status} />
@@ -116,6 +124,9 @@ export function Toolbar() {
           })}
         </ul>
         <p className="tiny muted">{visibleComponents.length} meshes in view</p>
+        <button type="button" className="ghost" onClick={() => setSelectedId(null)}>
+          Deselect
+        </button>
       </div>
     </header>
   )

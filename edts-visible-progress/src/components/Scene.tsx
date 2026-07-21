@@ -1,4 +1,4 @@
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import { type ThreeEvent } from '@react-three/fiber'
 import {
   ContactShadows,
@@ -7,10 +7,16 @@ import {
   OrbitControls,
   RoundedBox,
 } from '@react-three/drei'
-import { useMemo, useRef, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, type ReactNode } from 'react'
 import * as THREE from 'three'
 import { useDemo } from '../DemoContext'
-import { IN_TO_M, type TwinComponent, type VehicleState } from '../types'
+import {
+  HEATMAP_COLORS,
+  IN_TO_M,
+  type TwinComponent,
+  type VehicleState,
+  type ViewMode,
+} from '../types'
 
 /** ASSERTION_EXTRACTED layout dims only (SRC-CAND-000010). Cross-sections are placeholders. */
 const WB = 145.3 * IN_TO_M
@@ -26,13 +32,10 @@ const BACK_OF_CAB_X = FRONT_BUMPER_X - BOC
 
 const COLORS = {
   oem: '#6b7585',
-  oemDark: '#3d4654',
   oemLight: '#9aa3b2',
-  cab: '#c5ccd6',
   glass: '#8ec8ff',
   ev: '#A855F7',
   evAlt: '#F97316',
-  hv: '#e8873a',
   blocked: '#DC2626',
   retained: '#10B981',
   extracted: '#EF4444',
@@ -40,7 +43,29 @@ const COLORS = {
   ground: '#0a1218',
 }
 
-type VisualMode = {
+export const ROLE_ANCHOR: Record<string, [number, number, number]> = {
+  frame: [0, 0.55, 0],
+  cab: [(FRONT_BUMPER_X + BACK_OF_CAB_X) / 2, 1.15, 0],
+  front_axle: [FRONT_AXLE_X, 0.5, 0],
+  rear_axle: [REAR_AXLE_X, 0.5, 0],
+  wheels: [0, 0.42, 0],
+  engine: [FRONT_AXLE_X + 0.35, 0.95, 0],
+  transmission: [FRONT_AXLE_X - 0.55, 0.75, 0],
+  driveshaft: [(FRONT_AXLE_X + REAR_AXLE_X) / 2, 0.48, 0],
+  radiator: [FRONT_BUMPER_X - 0.25, 0.9, 0],
+  fuel_tank: [REAR_AXLE_X - 0.85, 0.55, 0],
+  exhaust: [0.2, 0.45, -FRAME_W / 2 - 0.15],
+  steering: [FRONT_AXLE_X + 0.15, 0.7, FRAME_W / 2 + 0.05],
+  ev_battery: [REAR_AXLE_X - 0.15, 0.5, 0],
+  ev_edu: [REAR_AXLE_X + 0.55, 0.65, 0],
+  ev_inverter: [FRONT_AXLE_X + 0.2, 0.95, 0],
+  ev_dcdc: [FRONT_AXLE_X - 0.35, 1.05, 0.35],
+  ev_ltr: [FRONT_BUMPER_X - 0.2, 0.85, 0],
+  ev_ccs: [BACK_OF_CAB_X + 0.05, 1.05, TRACK * 0.38],
+  lv_gateway: [BACK_OF_CAB_X + 0.15, 0.95, 0.25],
+}
+
+type VisualModeResult = {
   color: string
   opacity: number
   emissive: string
@@ -51,7 +76,19 @@ type VisualMode = {
 function visualFor(
   component: TwinComponent,
   state: VehicleState,
-): VisualMode {
+  viewMode: ViewMode,
+): VisualModeResult {
+  if (viewMode === 'HEATMAP') {
+    const color = HEATMAP_COLORS[component.data_status]
+    return {
+      color,
+      opacity: 0.92,
+      emissive: color,
+      emissiveIntensity: 0.45,
+      pulse: component.data_status === 'BLOCKED' || component.data_status === 'UNKNOWN',
+    }
+  }
+
   if (state === 'DECONSTRUCTION') {
     if (component.decon_group === 'EXTRACTED') {
       return {
@@ -64,9 +101,9 @@ function visualFor(
     }
     return {
       color: COLORS.retained,
-      opacity: 0.45,
+      opacity: 0.4,
       emissive: COLORS.retained,
-      emissiveIntensity: 0.12,
+      emissiveIntensity: 0.1,
       pulse: false,
     }
   }
@@ -82,13 +119,12 @@ function visualFor(
     }
     return {
       color: COLORS.mutedFactory,
-      opacity: 0.55,
+      opacity: 0.5,
       emissive: '#000000',
       emissiveIntensity: 0,
       pulse: false,
     }
   }
-  // Factory ICE
   if (component.data_status === 'BLOCKED') {
     return {
       color: COLORS.blocked,
@@ -102,7 +138,7 @@ function visualFor(
     color: component.decon_group === 'EXTRACTED' ? COLORS.oem : COLORS.oemLight,
     opacity: 0.92,
     emissive: '#1a2030',
-    emissiveIntensity: 0.12,
+    emissiveIntensity: 0.1,
     pulse: false,
   }
 }
@@ -110,17 +146,23 @@ function visualFor(
 type PartProps = {
   component: TwinComponent
   selected: boolean
+  hovered: boolean
   onSelect: (id: string) => void
+  onHover: (id: string | null) => void
   explode: number
   state: VehicleState
+  viewMode: ViewMode
 }
 
 function Selectable({
   component,
   selected,
+  hovered,
   onSelect,
+  onHover,
   explode,
   state,
+  viewMode,
   children,
   position = [0, 0, 0],
 }: PartProps & {
@@ -128,7 +170,7 @@ function Selectable({
   position?: [number, number, number]
 }) {
   const groupRef = useRef<THREE.Group>(null)
-  const visual = visualFor(component, state)
+  const visual = visualFor(component, state, viewMode)
   const ex = component.explode_vector[0] ?? 0
   const ey = component.explode_vector[1] ?? 0
   const ez = component.explode_vector[2] ?? 0
@@ -154,25 +196,28 @@ function Selectable({
     })
   })
 
-  const handle = (e: ThreeEvent<MouseEvent>) => {
-    e.stopPropagation()
-    onSelect(component.id)
-  }
+  const showLabel = selected || hovered
 
   return (
     <group
       ref={groupRef}
       position={pos}
-      onClick={handle}
-      onPointerOver={() => {
+      onClick={(e: ThreeEvent<MouseEvent>) => {
+        e.stopPropagation()
+        onSelect(component.id)
+      }}
+      onPointerOver={(e: ThreeEvent<PointerEvent>) => {
+        e.stopPropagation()
         document.body.style.cursor = 'pointer'
+        onHover(component.id)
       }}
       onPointerOut={() => {
         document.body.style.cursor = 'default'
+        onHover(null)
       }}
     >
       {children}
-      {selected && (
+      {showLabel && (
         <Html distanceFactor={12} position={[0, 0.55, 0]} center>
           <div className="floating-label">
             {component.display_name}
@@ -187,18 +232,20 @@ function Selectable({
 function Mat({
   component,
   state,
+  viewMode,
   colorOverride,
 }: {
   component: TwinComponent
   state: VehicleState
+  viewMode: ViewMode
   colorOverride?: string
 }) {
-  const v = visualFor(component, state)
+  const v = visualFor(component, state, viewMode)
   return (
     <meshStandardMaterial
       color={colorOverride ?? v.color}
-      metalness={0.25}
-      roughness={0.55}
+      metalness={viewMode === 'HEATMAP' ? 0.1 : 0.25}
+      roughness={viewMode === 'HEATMAP' ? 0.35 : 0.55}
       transparent
       opacity={v.opacity}
       emissive={v.emissive}
@@ -216,16 +263,16 @@ function FramePart(p: PartProps) {
     <Selectable {...p} position={[0, 0, 0]}>
       <mesh position={[midX, y, z]} castShadow>
         <boxGeometry args={[railLen, 0.18, 0.09]} />
-        <Mat component={p.component} state={p.state} />
+        <Mat {...p} />
       </mesh>
       <mesh position={[midX, y, -z]} castShadow>
         <boxGeometry args={[railLen, 0.18, 0.09]} />
-        <Mat component={p.component} state={p.state} />
+        <Mat {...p} />
       </mesh>
       {[-1.2, -0.2, 0.8, 1.8].map((x, i) => (
         <mesh key={i} position={[x, y, 0]}>
           <boxGeometry args={[0.08, 0.12, FRAME_W]} />
-          <Mat component={p.component} state={p.state} />
+          <Mat {...p} />
         </mesh>
       ))}
     </Selectable>
@@ -238,11 +285,11 @@ function CabPart(p: PartProps) {
   return (
     <Selectable {...p} position={[cabX, 1.15, 0]}>
       <RoundedBox args={[cabLen * 0.55, 1.15, TRACK * 0.85]} radius={0.06} castShadow>
-        <Mat component={p.component} state={p.state} />
+        <Mat {...p} />
       </RoundedBox>
       <mesh position={[0.35, 0.25, 0]}>
         <boxGeometry args={[cabLen * 0.28, 0.55, TRACK * 0.78]} />
-        <meshStandardMaterial color={COLORS.glass} transparent opacity={0.3} />
+        <meshStandardMaterial color={COLORS.glass} transparent opacity={0.28} />
       </mesh>
     </Selectable>
   )
@@ -250,22 +297,20 @@ function CabPart(p: PartProps) {
 
 function Wheel({
   position,
-  component,
-  state,
+  p,
 }: {
   position: [number, number, number]
-  component: TwinComponent
-  state: VehicleState
+  p: PartProps
 }) {
   return (
     <group position={position} rotation={[0, 0, Math.PI / 2]}>
       <mesh castShadow>
         <cylinderGeometry args={[0.42, 0.42, 0.22, 24]} />
-        <Mat component={component} state={state} colorOverride="#222831" />
+        <Mat {...p} colorOverride="#222831" />
       </mesh>
       <mesh>
         <cylinderGeometry args={[0.22, 0.22, 0.24, 16]} />
-        <Mat component={component} state={state} />
+        <Mat {...p} />
       </mesh>
     </group>
   )
@@ -276,41 +321,30 @@ function WheelsPart(p: PartProps) {
   const dual = 0.28
   return (
     <Selectable {...p} position={[0, 0, 0]}>
-      <Wheel position={[FRONT_AXLE_X, 0.42, half]} component={p.component} state={p.state} />
-      <Wheel position={[FRONT_AXLE_X, 0.42, -half]} component={p.component} state={p.state} />
-      <Wheel position={[REAR_AXLE_X, 0.42, half]} component={p.component} state={p.state} />
-      <Wheel position={[REAR_AXLE_X, 0.42, half - dual]} component={p.component} state={p.state} />
-      <Wheel position={[REAR_AXLE_X, 0.42, -half]} component={p.component} state={p.state} />
-      <Wheel
-        position={[REAR_AXLE_X, 0.42, -(half - dual)]}
-        component={p.component}
-        state={p.state}
-      />
+      <Wheel position={[FRONT_AXLE_X, 0.42, half]} p={p} />
+      <Wheel position={[FRONT_AXLE_X, 0.42, -half]} p={p} />
+      <Wheel position={[REAR_AXLE_X, 0.42, half]} p={p} />
+      <Wheel position={[REAR_AXLE_X, 0.42, half - dual]} p={p} />
+      <Wheel position={[REAR_AXLE_X, 0.42, -half]} p={p} />
+      <Wheel position={[REAR_AXLE_X, 0.42, -(half - dual)]} p={p} />
     </Selectable>
   )
 }
 
-function FrontAxlePart(p: PartProps) {
+function BoxPart({
+  p,
+  position,
+  args,
+}: {
+  p: PartProps
+  position: [number, number, number]
+  args: [number, number, number]
+}) {
   return (
-    <Selectable {...p} position={[FRONT_AXLE_X, 0.5, 0]}>
+    <Selectable {...p} position={position}>
       <mesh castShadow>
-        <boxGeometry args={[0.16, 0.14, TRACK * 0.92]} />
-        <Mat component={p.component} state={p.state} />
-      </mesh>
-    </Selectable>
-  )
-}
-
-function RearAxlePart(p: PartProps) {
-  return (
-    <Selectable {...p} position={[REAR_AXLE_X, 0.5, 0]}>
-      <mesh castShadow>
-        <boxGeometry args={[0.22, 0.18, TRACK * 0.95]} />
-        <Mat component={p.component} state={p.state} />
-      </mesh>
-      <mesh position={[0, 0.12, 0]}>
-        <sphereGeometry args={[0.2, 16, 16]} />
-        <Mat component={p.component} state={p.state} />
+        <boxGeometry args={args} />
+        <Mat {...p} />
       </mesh>
     </Selectable>
   )
@@ -320,21 +354,14 @@ function EnginePart(p: PartProps) {
   return (
     <Selectable {...p} position={[FRONT_AXLE_X + 0.35, 0.95, 0]}>
       <RoundedBox args={[0.85, 0.7, 0.7]} radius={0.04} castShadow>
-        <Mat component={p.component} state={p.state} />
+        <Mat {...p} />
       </RoundedBox>
     </Selectable>
   )
 }
 
 function TransmissionPart(p: PartProps) {
-  return (
-    <Selectable {...p} position={[FRONT_AXLE_X - 0.55, 0.75, 0]}>
-      <mesh castShadow>
-        <boxGeometry args={[0.7, 0.35, 0.4]} />
-        <Mat component={p.component} state={p.state} />
-      </mesh>
-    </Selectable>
-  )
+  return <BoxPart p={p} position={[FRONT_AXLE_X - 0.55, 0.75, 0]} args={[0.7, 0.35, 0.4]} />
 }
 
 function DriveshaftPart(p: PartProps) {
@@ -344,21 +371,14 @@ function DriveshaftPart(p: PartProps) {
     <Selectable {...p} position={[mid, 0.48, 0]}>
       <mesh castShadow rotation={[0, 0, Math.PI / 2]}>
         <cylinderGeometry args={[0.05, 0.05, Math.abs(len), 12]} />
-        <Mat component={p.component} state={p.state} />
+        <Mat {...p} />
       </mesh>
     </Selectable>
   )
 }
 
 function RadiatorPart(p: PartProps) {
-  return (
-    <Selectable {...p} position={[FRONT_BUMPER_X - 0.25, 0.9, 0]}>
-      <mesh castShadow>
-        <boxGeometry args={[0.12, 0.7, 0.85]} />
-        <Mat component={p.component} state={p.state} />
-      </mesh>
-    </Selectable>
-  )
+  return <BoxPart p={p} position={[FRONT_BUMPER_X - 0.25, 0.9, 0]} args={[0.12, 0.7, 0.85]} />
 }
 
 function FuelTankPart(p: PartProps) {
@@ -366,7 +386,7 @@ function FuelTankPart(p: PartProps) {
     <Selectable {...p} position={[REAR_AXLE_X - 0.85, 0.55, 0]}>
       <mesh castShadow rotation={[0, 0, Math.PI / 2]}>
         <cylinderGeometry args={[0.28, 0.28, 1.1, 24]} />
-        <Mat component={p.component} state={p.state} />
+        <Mat {...p} />
       </mesh>
     </Selectable>
   )
@@ -377,11 +397,11 @@ function ExhaustPart(p: PartProps) {
     <Selectable {...p} position={[0.2, 0.45, -FRAME_W / 2 - 0.15]}>
       <mesh castShadow rotation={[0, 0, Math.PI / 2]}>
         <cylinderGeometry args={[0.06, 0.06, 2.8, 12]} />
-        <Mat component={p.component} state={p.state} />
+        <Mat {...p} />
       </mesh>
       <mesh position={[-0.6, 0.1, 0]}>
         <boxGeometry args={[0.5, 0.25, 0.25]} />
-        <Mat component={p.component} state={p.state} />
+        <Mat {...p} />
       </mesh>
     </Selectable>
   )
@@ -389,10 +409,31 @@ function ExhaustPart(p: PartProps) {
 
 function SteeringPart(p: PartProps) {
   return (
-    <Selectable {...p} position={[FRONT_AXLE_X + 0.15, 0.7, FRAME_W / 2 + 0.05]}>
+    <BoxPart p={p} position={[FRONT_AXLE_X + 0.15, 0.7, FRAME_W / 2 + 0.05]} args={[0.25, 0.2, 0.18]} />
+  )
+}
+
+function FrontAxlePart(p: PartProps) {
+  return (
+    <Selectable {...p} position={[FRONT_AXLE_X, 0.5, 0]}>
       <mesh castShadow>
-        <boxGeometry args={[0.25, 0.2, 0.18]} />
-        <Mat component={p.component} state={p.state} />
+        <boxGeometry args={[0.16, 0.14, TRACK * 0.92]} />
+        <Mat {...p} />
+      </mesh>
+    </Selectable>
+  )
+}
+
+function RearAxlePart(p: PartProps) {
+  return (
+    <Selectable {...p} position={[REAR_AXLE_X, 0.5, 0]}>
+      <mesh castShadow>
+        <boxGeometry args={[0.22, 0.18, TRACK * 0.95]} />
+        <Mat {...p} />
+      </mesh>
+      <mesh position={[0, 0.12, 0]}>
+        <sphereGeometry args={[0.2, 16, 16]} />
+        <Mat {...p} />
       </mesh>
     </Selectable>
   )
@@ -402,7 +443,7 @@ function EvBatteryPart(p: PartProps) {
   return (
     <Selectable {...p} position={[REAR_AXLE_X - 0.15, 0.5, 0]}>
       <RoundedBox args={[1.6, 0.28, FRAME_W * 0.95]} radius={0.03} castShadow>
-        <Mat component={p.component} state={p.state} />
+        <Mat {...p} />
       </RoundedBox>
     </Selectable>
   )
@@ -413,7 +454,7 @@ function EvEduPart(p: PartProps) {
     <Selectable {...p} position={[REAR_AXLE_X + 0.55, 0.65, 0]}>
       <mesh castShadow>
         <cylinderGeometry args={[0.28, 0.28, 0.55, 24]} />
-        <Mat component={p.component} state={p.state} />
+        <Mat {...p} />
       </mesh>
     </Selectable>
   )
@@ -423,54 +464,28 @@ function EvInverterPart(p: PartProps) {
   return (
     <Selectable {...p} position={[FRONT_AXLE_X + 0.2, 0.95, 0]}>
       <RoundedBox args={[0.55, 0.22, 0.4]} radius={0.02} castShadow>
-        <Mat component={p.component} state={p.state} />
+        <Mat {...p} />
       </RoundedBox>
     </Selectable>
   )
 }
 
 function EvDcdcPart(p: PartProps) {
-  return (
-    <Selectable {...p} position={[FRONT_AXLE_X - 0.35, 1.05, 0.35]}>
-      <mesh castShadow>
-        <boxGeometry args={[0.28, 0.16, 0.22]} />
-        <Mat component={p.component} state={p.state} />
-      </mesh>
-    </Selectable>
-  )
+  return <BoxPart p={p} position={[FRONT_AXLE_X - 0.35, 1.05, 0.35]} args={[0.28, 0.16, 0.22]} />
 }
 
 function EvLtrPart(p: PartProps) {
-  return (
-    <Selectable {...p} position={[FRONT_BUMPER_X - 0.2, 0.85, 0]}>
-      <mesh castShadow>
-        <boxGeometry args={[0.1, 0.55, 0.7]} />
-        <Mat component={p.component} state={p.state} />
-      </mesh>
-    </Selectable>
-  )
+  return <BoxPart p={p} position={[FRONT_BUMPER_X - 0.2, 0.85, 0]} args={[0.1, 0.55, 0.7]} />
 }
 
 function EvCcsPart(p: PartProps) {
   return (
-    <Selectable {...p} position={[BACK_OF_CAB_X + 0.05, 1.05, TRACK * 0.38]}>
-      <mesh castShadow>
-        <boxGeometry args={[0.08, 0.28, 0.18]} />
-        <Mat component={p.component} state={p.state} />
-      </mesh>
-    </Selectable>
+    <BoxPart p={p} position={[BACK_OF_CAB_X + 0.05, 1.05, TRACK * 0.38]} args={[0.08, 0.28, 0.18]} />
   )
 }
 
 function LvGatewayPart(p: PartProps) {
-  return (
-    <Selectable {...p} position={[BACK_OF_CAB_X + 0.15, 0.95, 0.25]}>
-      <mesh castShadow>
-        <boxGeometry args={[0.12, 0.2, 0.25]} />
-        <Mat component={p.component} state={p.state} />
-      </mesh>
-    </Selectable>
-  )
+  return <BoxPart p={p} position={[BACK_OF_CAB_X + 0.15, 0.95, 0.25]} args={[0.12, 0.2, 0.25]} />
 }
 
 const ROLE_MAP: Record<string, (p: PartProps) => ReactNode> = {
@@ -495,42 +510,16 @@ const ROLE_MAP: Record<string, (p: PartProps) => ReactNode> = {
   lv_gateway: LvGatewayPart,
 }
 
-/** Approximate world anchors for dependency lines (not surveyed mounts). */
-const ROLE_ANCHOR: Record<string, [number, number, number]> = {
-  frame: [0, 0.55, 0],
-  cab: [(FRONT_BUMPER_X + BACK_OF_CAB_X) / 2, 1.15, 0],
-  front_axle: [FRONT_AXLE_X, 0.5, 0],
-  rear_axle: [REAR_AXLE_X, 0.5, 0],
-  wheels: [0, 0.42, 0],
-  engine: [FRONT_AXLE_X + 0.35, 0.95, 0],
-  transmission: [FRONT_AXLE_X - 0.55, 0.75, 0],
-  driveshaft: [(FRONT_AXLE_X + REAR_AXLE_X) / 2, 0.48, 0],
-  radiator: [FRONT_BUMPER_X - 0.25, 0.9, 0],
-  fuel_tank: [REAR_AXLE_X - 0.85, 0.55, 0],
-  exhaust: [0.2, 0.45, -FRAME_W / 2 - 0.15],
-  steering: [FRONT_AXLE_X + 0.15, 0.7, FRAME_W / 2 + 0.05],
-  ev_battery: [REAR_AXLE_X - 0.15, 0.5, 0],
-  ev_edu: [REAR_AXLE_X + 0.55, 0.65, 0],
-  ev_inverter: [FRONT_AXLE_X + 0.2, 0.95, 0],
-  ev_dcdc: [FRONT_AXLE_X - 0.35, 1.05, 0.35],
-  ev_ltr: [FRONT_BUMPER_X - 0.2, 0.85, 0],
-  ev_ccs: [BACK_OF_CAB_X + 0.05, 1.05, TRACK * 0.38],
-  lv_gateway: [BACK_OF_CAB_X + 0.15, 0.95, 0.25],
-}
-
 function DependencyLines() {
-  const { selected, catalog, state, visibleComponents } = useDemo()
-  if (!selected || state !== 'DECONSTRUCTION') return null
-
+  const { selected, catalog, state, visibleComponents, viewMode } = useDemo()
+  if (!selected || state !== 'DECONSTRUCTION' || viewMode === 'HEATMAP') return null
   const from = ROLE_ANCHOR[selected.geometry_role]
   if (!from) return null
-
   const ids = [
     ...selected.dependency_highlights.blocks_access_to,
     ...selected.dependency_highlights.must_disconnect_before,
   ]
   const visibleIds = new Set(visibleComponents.map((c) => c.id))
-
   return (
     <group>
       {ids.map((id) => {
@@ -556,7 +545,16 @@ function DependencyLines() {
 }
 
 function Vehicle() {
-  const { visibleComponents, selectedId, setSelectedId, explode, state } = useDemo()
+  const {
+    visibleComponents,
+    selectedId,
+    setSelectedId,
+    hoveredId,
+    setHoveredId,
+    explode,
+    state,
+    viewMode,
+  } = useDemo()
 
   return (
     <group>
@@ -568,9 +566,12 @@ function Vehicle() {
             key={c.id}
             component={c}
             selected={selectedId === c.id}
+            hovered={hoveredId === c.id}
             onSelect={setSelectedId}
+            onHover={setHoveredId}
             explode={explode}
             state={state}
+            viewMode={viewMode}
           />
         )
       })}
@@ -578,72 +579,91 @@ function Vehicle() {
   )
 }
 
+function FocusCamera() {
+  const { focusTarget, focusNonce, catalog } = useDemo()
+  const { camera } = useThree()
+  const controls = useThree((s) => s.controls) as unknown as {
+    target: THREE.Vector3
+    update: () => void
+  } | null
+  const anim = useRef<{
+    fromCam: THREE.Vector3
+    toCam: THREE.Vector3
+    fromTarget: THREE.Vector3
+    toTarget: THREE.Vector3
+    t: number
+  } | null>(null)
+
+  useEffect(() => {
+    if (!focusTarget) return
+    const comp = catalog.components.find((c) => c.id === focusTarget)
+    if (!comp) return
+    const anchor = ROLE_ANCHOR[comp.geometry_role] ?? [0, 0.8, 0]
+    const target = new THREE.Vector3(...anchor)
+    const offset = new THREE.Vector3(3.2, 2.1, 3.4)
+    anim.current = {
+      fromCam: camera.position.clone(),
+      toCam: target.clone().add(offset),
+      fromTarget: controls?.target.clone() ?? new THREE.Vector3(0, 0.8, 0),
+      toTarget: target,
+      t: 0,
+    }
+  }, [focusTarget, focusNonce, catalog.components, camera, controls])
+
+  useFrame((_, dt) => {
+    if (!anim.current) return
+    anim.current.t = Math.min(1, anim.current.t + dt * 1.6)
+    const k = 1 - Math.pow(1 - anim.current.t, 3)
+    camera.position.lerpVectors(anim.current.fromCam, anim.current.toCam, k)
+    if (controls) {
+      controls.target.lerpVectors(anim.current.fromTarget, anim.current.toTarget, k)
+      controls.update()
+    }
+    if (anim.current.t >= 1) anim.current = null
+  })
+
+  return null
+}
+
 function DatumGuides() {
+  const { viewMode } = useDemo()
+  if (viewMode === 'HEATMAP') return null
   return (
     <group>
       <mesh position={[FRONT_AXLE_X, 0.02, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.35, 0.38, 32]} />
-        <meshBasicMaterial color="#3B9EFF" transparent opacity={0.5} />
+        <meshBasicMaterial color="#3B9EFF" transparent opacity={0.35} />
       </mesh>
       <mesh position={[REAR_AXLE_X, 0.02, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <ringGeometry args={[0.35, 0.38, 32]} />
-        <meshBasicMaterial color="#3B9EFF" transparent opacity={0.5} />
-      </mesh>
-      <mesh position={[0, 0.015, TRACK / 2 + 0.35]}>
-        <boxGeometry args={[WB, 0.01, 0.02]} />
-        <meshBasicMaterial color="#2f9ed8" transparent opacity={0.35} />
+        <meshBasicMaterial color="#3B9EFF" transparent opacity={0.35} />
       </mesh>
     </group>
-  )
-}
-
-function StateLegend3D() {
-  const { state } = useDemo()
-  if (state === 'FACTORY_ICE') return null
-  return (
-    <Html position={[-3.2, 2.6, 0]} style={{ pointerEvents: 'none' }}>
-      <div className="state-legend-3d">
-        {state === 'DECONSTRUCTION' && (
-          <>
-            <span className="sl-retained">Retained (translucent)</span>
-            <span className="sl-extracted">Extracted (pulse)</span>
-          </>
-        )}
-        {state === 'EV_PROPOSAL' && (
-          <>
-            <span className="sl-muted">Factory retained (muted)</span>
-            <span className="sl-ev">EV proposal (high-vis)</span>
-          </>
-        )}
-      </div>
-    </Html>
   )
 }
 
 export function Scene() {
   return (
     <>
-      <color attach="background" args={['#061018']} />
-      <fog attach="fog" args={['#061018', 14, 32]} />
-      <ambientLight intensity={0.4} />
+      <color attach="background" args={['#050a10']} />
+      <fog attach="fog" args={['#050a10', 16, 34]} />
+      <ambientLight intensity={0.35} />
       <directionalLight
         castShadow
         position={[6, 10, 4]}
-        intensity={1.4}
+        intensity={1.35}
         shadow-mapSize={[2048, 2048]}
       />
-      <directionalLight position={[-5, 4, -3]} intensity={0.45} color="#8ec8ff" />
-      <pointLight position={[FRONT_BUMPER_X, 2.2, 0]} intensity={0.55} color="#5eb8e8" />
+      <directionalLight position={[-5, 4, -3]} intensity={0.4} color="#8ec8ff" />
       <Vehicle />
       <DependencyLines />
       <DatumGuides />
-      <StateLegend3D />
-      <ContactShadows position={[0, 0.001, 0]} opacity={0.55} scale={16} blur={2.5} />
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
+      <FocusCamera />
+      <ContactShadows position={[0, 0.001, 0]} opacity={0.5} scale={16} blur={2.5} />
+      <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[40, 40]} />
         <meshStandardMaterial color={COLORS.ground} roughness={1} metalness={0} />
       </mesh>
-      <gridHelper args={[20, 40, '#1e2a3a', '#15202c']} position={[0, 0.002, 0]} />
       <OrbitControls
         makeDefault
         target={[0, 0.8, 0]}

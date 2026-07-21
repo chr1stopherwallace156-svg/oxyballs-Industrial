@@ -1,0 +1,111 @@
+{
+  "store": "TIMELINE",
+  "id": "TL-ICE-TO-EV-R1",
+  "title": "ICE deconstruction → EV proposal (demonstrator sequence)",
+  "honesty": "Sequence is a visual narrative for the demonstrator only. Not an authorized service procedure (PROCEDURE_GENERATION_NOT_AUTHORIZED). Steps do not invent torque or fastener order.",
+  "steps": [
+    {
+      "id": "S00",
+      "label": "Factory ICE baseline",
+      "state": "FACTORY_ICE",
+      "action": "RESET",
+      "remove": [],
+      "add_proposal": false,
+      "note": "As-built donor layout"
+    },
+    {
+      "id": "S01",
+      "label": "Enter deconstruction",
+      "state": "DECONSTRUCTION",
+      "action": "STATE",
+      "remove": [],
+      "add_proposal": false,
+      "note": "Retained structure translucent; extractables pulse"
+    },
+    {
+      "id": "S02",
+      "label": "Clear cooling stack access",
+      "state": "DECONSTRUCTION",
+      "action": "REMOVE",
+      "remove": [
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR"
+      ],
+      "focus": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
+      "note": "Radiator/cooling stack removed (visual). Hose/drain torque UNKNOWN — not simulated."
+    },
+    {
+      "id": "S03",
+      "label": "Disconnect exhaust path",
+      "state": "DECONSTRUCTION",
+      "action": "REMOVE",
+      "remove": [
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING"
+      ],
+      "focus": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING",
+      "note": "Aftertreatment path cleared (visual)"
+    },
+    {
+      "id": "S04",
+      "label": "Remove driveshaft",
+      "state": "DECONSTRUCTION",
+      "action": "REMOVE",
+      "remove": [
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT"
+      ],
+      "focus": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT",
+      "note": "ICE driveline decoupling (visual)"
+    },
+    {
+      "id": "S05",
+      "label": "Extract transmission",
+      "state": "DECONSTRUCTION",
+      "action": "REMOVE",
+      "remove": [
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION"
+      ],
+      "focus": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+      "note": "Mass/CG UNKNOWN (MEPQ-001) — no axle load delta claimed"
+    },
+    {
+      "id": "S06",
+      "label": "Extract engine",
+      "state": "DECONSTRUCTION",
+      "action": "REMOVE",
+      "remove": [
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK"
+      ],
+      "focus": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK",
+      "note": "Engine out (visual). Crane mass UNKNOWN."
+    },
+    {
+      "id": "S07",
+      "label": "Remove aft fuel tank",
+      "state": "DECONSTRUCTION",
+      "action": "REMOVE",
+      "remove": [
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT"
+      ],
+      "focus": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
+      "note": "Clears aft package volume; strap holes still UNKNOWN (MEPQ-004)"
+    },
+    {
+      "id": "S08",
+      "label": "EV proposal overlay",
+      "state": "EV_PROPOSAL",
+      "action": "STATE",
+      "remove": [],
+      "add_proposal": true,
+      "note": "L3 proposal pack appears — no kWh/kW claimed"
+    },
+    {
+      "id": "S09",
+      "label": "Focus proposed HV enclosure",
+      "state": "EV_PROPOSAL",
+      "action": "FOCUS",
+      "remove": [],
+      "focus": "PROP-HV-PACK-01",
+      "add_proposal": true,
+      "note": "Battery envelope is DESIGN_PROPOSAL only"
+    }
+  ]
+}

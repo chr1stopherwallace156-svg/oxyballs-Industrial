@@ -1,0 +1,17 @@
+{
+  "store": "SIMULATION",
+  "id": "SIM-AXLE-LOAD-R1",
+  "title": "Axle load / CG shift scaffold",
+  "status": "BLOCKED_UNTIL_MASS_EVIDENCE",
+  "honesty": "Front/rear axle deltas and CG shift require measured or ASSERTION_VERIFIED component masses. MEPQ-001 remains UNKNOWN. Do not invent ±32 kg or 18 mm.",
+  "required_before_enable": [
+    "MEPQ-001",
+    "component mass_kg PHYSICALLY_MEASURED or VERIFIED"
+  ],
+  "demo_fields": {
+    "front_axle_delta_kg": null,
+    "rear_axle_delta_kg": null,
+    "cg_shift_mm": null
+  },
+  "interacting_component_id": null
+}

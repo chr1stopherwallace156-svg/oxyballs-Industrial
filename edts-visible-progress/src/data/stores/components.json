@@ -1,0 +1,348 @@
+{
+  "store": "COMPONENT_INDEX",
+  "records": {
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME": {
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "display_name": "Chassis Frame (C-channel aft of cab)",
+      "family": "FACTORY",
+      "category": "STRUCTURE",
+      "scene_group": "FACTORY_CHASSIS_FRAME",
+      "decon_group": "RETAINED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "EXACT_CONFIGURATION_MATCH",
+      "layer": "L1",
+      "visible_in": [
+        "FACTORY_ICE",
+        "DECONSTRUCTION",
+        "EV_PROPOSAL"
+      ],
+      "removable": false,
+      "decon_intent": null,
+      "geometry_role": "frame"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB": {
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB",
+      "display_name": "Regular Cab Shell",
+      "family": "FACTORY",
+      "category": "BODY",
+      "scene_group": "FACTORY_CAB_BODY",
+      "decon_group": "RETAINED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "EXACT_CONFIGURATION_MATCH",
+      "layer": "L1",
+      "visible_in": [
+        "FACTORY_ICE",
+        "DECONSTRUCTION",
+        "EV_PROPOSAL"
+      ],
+      "removable": false,
+      "decon_intent": null,
+      "geometry_role": "cab"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM": {
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "display_name": "Front Axle — Monobeam (4x2)",
+      "family": "FACTORY",
+      "category": "SUSPENSION",
+      "scene_group": "FACTORY_RUNNING_GEAR",
+      "decon_group": "RETAINED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "SERIES_F450_F550_CHASSIS_CAB_4X2",
+      "layer": "L1",
+      "visible_in": [
+        "FACTORY_ICE",
+        "DECONSTRUCTION",
+        "EV_PROPOSAL"
+      ],
+      "removable": false,
+      "decon_intent": null,
+      "geometry_role": "front_axle"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR": {
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
+      "display_name": "Rear Axle — DRW Live Axle (Dana M300 class)",
+      "family": "FACTORY",
+      "category": "DRIVELINE",
+      "scene_group": "FACTORY_RUNNING_GEAR",
+      "decon_group": "RETAINED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "EXACT_CONFIGURATION_MATCH",
+      "layer": "L1",
+      "visible_in": [
+        "FACTORY_ICE",
+        "DECONSTRUCTION",
+        "EV_PROPOSAL"
+      ],
+      "removable": false,
+      "decon_intent": null,
+      "geometry_role": "rear_axle"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS": {
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
+      "display_name": "Wheels / Tires (19.5 DRW)",
+      "family": "FACTORY",
+      "category": "WHEELS",
+      "scene_group": "FACTORY_RUNNING_GEAR",
+      "decon_group": "RETAINED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "EXACT_CONFIGURATION_MATCH",
+      "layer": "L1",
+      "visible_in": [
+        "FACTORY_ICE",
+        "DECONSTRUCTION",
+        "EV_PROPOSAL"
+      ],
+      "removable": false,
+      "decon_intent": null,
+      "geometry_role": "wheels"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR": {
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR",
+      "display_name": "Steering Gear (Recirculating Ball)",
+      "family": "FACTORY",
+      "category": "STEERING",
+      "scene_group": "FACTORY_RUNNING_GEAR",
+      "decon_group": "RETAINED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "EXACT_CONFIGURATION_MATCH",
+      "layer": "L1",
+      "visible_in": [
+        "FACTORY_ICE",
+        "DECONSTRUCTION",
+        "EV_PROPOSAL"
+      ],
+      "removable": false,
+      "decon_intent": null,
+      "geometry_role": "steering"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK": {
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK",
+      "display_name": "ICE Engine Assembly",
+      "family": "FACTORY",
+      "category": "POWERTRAIN",
+      "scene_group": "FACTORY_ICE_POWERTRAIN",
+      "decon_group": "EXTRACTED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "OPTION_DEPENDENT",
+      "layer": "L1",
+      "visible_in": [
+        "FACTORY_ICE",
+        "DECONSTRUCTION"
+      ],
+      "removable": true,
+      "decon_intent": "MUST_REMOVE",
+      "geometry_role": "engine"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION": {
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+      "display_name": "Transmission",
+      "family": "FACTORY",
+      "category": "POWERTRAIN",
+      "scene_group": "FACTORY_ICE_POWERTRAIN",
+      "decon_group": "EXTRACTED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "OPTION_DEPENDENT",
+      "layer": "L1",
+      "visible_in": [
+        "FACTORY_ICE",
+        "DECONSTRUCTION"
+      ],
+      "removable": true,
+      "decon_intent": "MUST_REMOVE",
+      "geometry_role": "transmission"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT": {
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT",
+      "display_name": "Driveshaft (ICE)",
+      "family": "FACTORY",
+      "category": "DRIVELINE",
+      "scene_group": "FACTORY_ICE_POWERTRAIN",
+      "decon_group": "EXTRACTED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "OPTION_DEPENDENT",
+      "layer": "L1",
+      "visible_in": [
+        "FACTORY_ICE",
+        "DECONSTRUCTION"
+      ],
+      "removable": true,
+      "decon_intent": "MUST_REMOVE",
+      "geometry_role": "driveshaft"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR": {
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
+      "display_name": "Engine Radiator / ICE Cooling Stack",
+      "family": "FACTORY",
+      "category": "THERMAL",
+      "scene_group": "FACTORY_ICE_POWERTRAIN",
+      "decon_group": "EXTRACTED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "PLATFORM_EXPECTED",
+      "layer": "L1",
+      "visible_in": [
+        "FACTORY_ICE",
+        "DECONSTRUCTION"
+      ],
+      "removable": true,
+      "decon_intent": "MUST_REMOVE",
+      "geometry_role": "radiator"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT": {
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
+      "display_name": "Aft-of-Axle Fuel Tank (40 gal std)",
+      "family": "FACTORY",
+      "category": "FUEL",
+      "scene_group": "FACTORY_ICE_POWERTRAIN",
+      "decon_group": "EXTRACTED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "EXACT_CONFIGURATION_MATCH",
+      "layer": "L1",
+      "visible_in": [
+        "FACTORY_ICE",
+        "DECONSTRUCTION"
+      ],
+      "removable": true,
+      "decon_intent": "MUST_REMOVE",
+      "geometry_role": "fuel_tank"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING": {
+      "id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING",
+      "display_name": "Exhaust / Aftertreatment",
+      "family": "FACTORY",
+      "category": "EXHAUST",
+      "scene_group": "FACTORY_ICE_POWERTRAIN",
+      "decon_group": "EXTRACTED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "OPTION_DEPENDENT",
+      "layer": "L1",
+      "visible_in": [
+        "FACTORY_ICE",
+        "DECONSTRUCTION"
+      ],
+      "removable": true,
+      "decon_intent": "MUST_REMOVE",
+      "geometry_role": "exhaust"
+    },
+    "BLOCK-LV-GATEWAY": {
+      "id": "BLOCK-LV-GATEWAY",
+      "display_name": "LV Gateway / Firewall Interconnect",
+      "family": "FACTORY",
+      "category": "ELECTRICAL",
+      "scene_group": "FACTORY_ELECTRICAL_BLOCKED",
+      "decon_group": "RETAINED",
+      "data_classification": "FACTORY_OEM_COMPONENT",
+      "configuration_applicability": "EXACT_CONFIGURATION_MATCH",
+      "layer": "L1",
+      "visible_in": [
+        "FACTORY_ICE",
+        "DECONSTRUCTION",
+        "EV_PROPOSAL"
+      ],
+      "removable": false,
+      "decon_intent": null,
+      "geometry_role": "lv_gateway"
+    },
+    "PROP-HV-PACK-01": {
+      "id": "PROP-HV-PACK-01",
+      "display_name": "Proposed HV Battery Enclosure (aft / midship candidate)",
+      "family": "EV_PROPOSAL",
+      "category": "HV_ENERGY",
+      "scene_group": "EV_CONVERSION_PROPOSAL",
+      "decon_group": "EV_PROPOSAL",
+      "data_classification": "EV_CONVERSION_PROPOSAL",
+      "configuration_applicability": "CONVERSION_PROPOSAL",
+      "layer": "L3",
+      "visible_in": [
+        "EV_PROPOSAL"
+      ],
+      "removable": false,
+      "decon_intent": null,
+      "geometry_role": "ev_battery"
+    },
+    "PROP-EDU-REAR-01": {
+      "id": "PROP-EDU-REAR-01",
+      "display_name": "Proposed Electric Drive Unit",
+      "family": "EV_PROPOSAL",
+      "category": "HV_DRIVE",
+      "scene_group": "EV_CONVERSION_PROPOSAL",
+      "decon_group": "EV_PROPOSAL",
+      "data_classification": "EV_CONVERSION_PROPOSAL",
+      "configuration_applicability": "CONVERSION_PROPOSAL",
+      "layer": "L3",
+      "visible_in": [
+        "EV_PROPOSAL"
+      ],
+      "removable": false,
+      "decon_intent": null,
+      "geometry_role": "ev_edu"
+    },
+    "PROP-INVERTER-01": {
+      "id": "PROP-INVERTER-01",
+      "display_name": "Proposed Traction Inverter",
+      "family": "EV_PROPOSAL",
+      "category": "HV_POWER_ELECTRONICS",
+      "scene_group": "EV_CONVERSION_PROPOSAL",
+      "decon_group": "EV_PROPOSAL",
+      "data_classification": "EV_CONVERSION_PROPOSAL",
+      "configuration_applicability": "CONVERSION_PROPOSAL",
+      "layer": "L3",
+      "visible_in": [
+        "EV_PROPOSAL"
+      ],
+      "removable": false,
+      "decon_intent": null,
+      "geometry_role": "ev_inverter"
+    },
+    "PROP-DCDC-01": {
+      "id": "PROP-DCDC-01",
+      "display_name": "Proposed DC-DC Converter",
+      "family": "EV_PROPOSAL",
+      "category": "HV_POWER_ELECTRONICS",
+      "scene_group": "EV_CONVERSION_PROPOSAL",
+      "decon_group": "EV_PROPOSAL",
+      "data_classification": "EV_CONVERSION_PROPOSAL",
+      "configuration_applicability": "CONVERSION_PROPOSAL",
+      "layer": "L3",
+      "visible_in": [
+        "EV_PROPOSAL"
+      ],
+      "removable": false,
+      "decon_intent": null,
+      "geometry_role": "ev_dcdc"
+    },
+    "PROP-LTR-01": {
+      "id": "PROP-LTR-01",
+      "display_name": "Proposed Low-Temp Radiator / Heat Exchanger",
+      "family": "EV_PROPOSAL",
+      "category": "THERMAL",
+      "scene_group": "EV_CONVERSION_PROPOSAL",
+      "decon_group": "EV_PROPOSAL",
+      "data_classification": "EV_CONVERSION_PROPOSAL",
+      "configuration_applicability": "CONVERSION_PROPOSAL",
+      "layer": "L3",
+      "visible_in": [
+        "EV_PROPOSAL"
+      ],
+      "removable": false,
+      "decon_intent": null,
+      "geometry_role": "ev_ltr"
+    },
+    "PROP-CCS-PORT-01": {
+      "id": "PROP-CCS-PORT-01",
+      "display_name": "Proposed CCS Charge Port Interface",
+      "family": "EV_PROPOSAL",
+      "category": "HV_CHARGE",
+      "scene_group": "EV_CONVERSION_PROPOSAL",
+      "decon_group": "EV_PROPOSAL",
+      "data_classification": "EV_CONVERSION_PROPOSAL",
+      "configuration_applicability": "CONVERSION_PROPOSAL",
+      "layer": "L3",
+      "visible_in": [
+        "EV_PROPOSAL"
+      ],
+      "removable": false,
+      "decon_intent": null,
+      "geometry_role": "ev_ccs"
+    }
+  }
+}

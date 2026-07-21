@@ -1,0 +1,39 @@
+{
+  "decision_id": "DT-D059",
+  "title": "Admit five-store data split + Timeline / Search / Heatmap / Simulation scaffold",
+  "status": "ACCEPTED",
+  "date_utc": "2026-07-21",
+  "related_locks": ["RL-028"],
+  "summary": "Split Visible Progress data into Component / Geometry / Evidence / Relationships / UI stores for scale. Admit Timeline surgery narrative (not authorized procedure), Search+camera focus, evidence-maturity heatmap, and Simulation scaffold blocked until mass/CG evidence (reject invented ±32 kg / 18 mm). Minimal hover-reveal chrome policy. Photoreal truck deferred until acquired assets.",
+  "accepted_artifacts": [
+    "edts-visible-progress/src/data/stores/",
+    "edts-visible-progress/src/data/joinCatalog.ts",
+    "edts-visible-progress/src/data/ARCHITECTURE.md"
+  ],
+  "architecture": [
+    "COMPONENT_INDEX",
+    "GEOMETRY",
+    "EVIDENCE",
+    "RELATIONSHIPS",
+    "UI"
+  ],
+  "features_admitted": [
+    "TIMELINE_VISUAL_NARRATIVE",
+    "SEARCH_FOCUS_CAMERA",
+    "EVIDENCE_MATURITY_HEATMAP",
+    "SIMULATION_SCAFFOLD_BLOCKED"
+  ],
+  "explicit_rejections": [
+    "Invented axle load deltas (±32 kg) without measured mass",
+    "Invented CG shift (18 mm) without CG evidence",
+    "Timeline as authorized service procedure"
+  ],
+  "deferred": [
+    "Photoreal truck mesh / Apple-minimal final chrome",
+    "Live mass-transfer simulation enablement"
+  ],
+  "recommended_decision": "FIVE_STORE_SCALE_PATH_PLUS_VIEWER_MODES",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "geometry_extraction_authorized": false,
+  "kernel_mutation": false
+}

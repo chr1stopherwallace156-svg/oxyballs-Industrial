@@ -1,0 +1,271 @@
+{
+  "store": "UI",
+  "badge_colors": {
+    "VERIFIED": "#10B981",
+    "PHYSICALLY_MEASURED": "#06B6D4",
+    "ESTIMATED": "#F59E0B",
+    "PLACEHOLDER_GEOMETRY": "#6B7280",
+    "DESIGN_PROPOSAL": "#8B5CF6",
+    "UNKNOWN": "#EF4444",
+    "BLOCKED": "#DC2626"
+  },
+  "scene_tree": [
+    {
+      "id": "FACTORY_CHASSIS_FRAME",
+      "label": "Factory Chassis Frame",
+      "component_ids": [
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME"
+      ]
+    },
+    {
+      "id": "FACTORY_CAB_BODY",
+      "label": "Factory Cab & Body",
+      "component_ids": [
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB"
+      ]
+    },
+    {
+      "id": "FACTORY_RUNNING_GEAR",
+      "label": "Factory Running Gear",
+      "component_ids": [
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR"
+      ]
+    },
+    {
+      "id": "FACTORY_ICE_POWERTRAIN",
+      "label": "Factory ICE Powertrain (extractable)",
+      "component_ids": [
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK",
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT",
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
+        "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING"
+      ]
+    },
+    {
+      "id": "FACTORY_ELECTRICAL_BLOCKED",
+      "label": "Factory Electrical (blocked)",
+      "component_ids": [
+        "BLOCK-LV-GATEWAY"
+      ]
+    },
+    {
+      "id": "EV_CONVERSION_PROPOSAL",
+      "label": "EV Conversion Proposal",
+      "component_ids": [
+        "PROP-HV-PACK-01",
+        "PROP-EDU-REAR-01",
+        "PROP-INVERTER-01",
+        "PROP-DCDC-01",
+        "PROP-LTR-01",
+        "PROP-CCS-PORT-01"
+      ]
+    }
+  ],
+  "search_aliases": {
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME": [
+      "Chassis Frame (C-channel aft of cab)",
+      "STRUCTURE",
+      "frame",
+      "FACTORY",
+      "RETAINED",
+      "chassis",
+      "channel",
+      "aft",
+      "cab"
+    ],
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB": [
+      "Regular Cab Shell",
+      "BODY",
+      "cab",
+      "FACTORY",
+      "RETAINED",
+      "regular",
+      "shell"
+    ],
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM": [
+      "Front Axle — Monobeam (4x2)",
+      "SUSPENSION",
+      "front_axle",
+      "FACTORY",
+      "RETAINED",
+      "front",
+      "axle",
+      "monobeam",
+      "4x2"
+    ],
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR": [
+      "Rear Axle — DRW Live Axle (Dana M300 class)",
+      "DRIVELINE",
+      "rear_axle",
+      "FACTORY",
+      "RETAINED",
+      "rear",
+      "axle",
+      "drw",
+      "live",
+      "dana",
+      "m300",
+      "class"
+    ],
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS": [
+      "Wheels / Tires (19.5 DRW)",
+      "WHEELS",
+      "wheels",
+      "FACTORY",
+      "RETAINED",
+      "tires",
+      "19.5",
+      "drw"
+    ],
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR": [
+      "Steering Gear (Recirculating Ball)",
+      "STEERING",
+      "steering",
+      "FACTORY",
+      "RETAINED",
+      "gear",
+      "recirculating",
+      "ball"
+    ],
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK": [
+      "ICE Engine Assembly",
+      "POWERTRAIN",
+      "engine",
+      "FACTORY",
+      "EXTRACTED",
+      "ice",
+      "assembly"
+    ],
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION": [
+      "Transmission",
+      "POWERTRAIN",
+      "transmission",
+      "FACTORY",
+      "EXTRACTED"
+    ],
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT": [
+      "Driveshaft (ICE)",
+      "DRIVELINE",
+      "driveshaft",
+      "FACTORY",
+      "EXTRACTED",
+      "ice"
+    ],
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR": [
+      "Engine Radiator / ICE Cooling Stack",
+      "THERMAL",
+      "radiator",
+      "FACTORY",
+      "EXTRACTED",
+      "engine",
+      "ice",
+      "cooling",
+      "stack"
+    ],
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT": [
+      "Aft-of-Axle Fuel Tank (40 gal std)",
+      "FUEL",
+      "fuel_tank",
+      "FACTORY",
+      "EXTRACTED",
+      "aft",
+      "axle",
+      "fuel",
+      "tank",
+      "gal",
+      "std"
+    ],
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING": [
+      "Exhaust / Aftertreatment",
+      "EXHAUST",
+      "exhaust",
+      "FACTORY",
+      "EXTRACTED",
+      "aftertreatment"
+    ],
+    "BLOCK-LV-GATEWAY": [
+      "LV Gateway / Firewall Interconnect",
+      "ELECTRICAL",
+      "lv_gateway",
+      "FACTORY",
+      "RETAINED",
+      "gateway",
+      "firewall",
+      "interconnect"
+    ],
+    "PROP-HV-PACK-01": [
+      "Proposed HV Battery Enclosure (aft / midship candidate)",
+      "HV_ENERGY",
+      "ev_battery",
+      "EV_PROPOSAL",
+      "proposed",
+      "battery",
+      "enclosure",
+      "aft",
+      "midship",
+      "candidate"
+    ],
+    "PROP-EDU-REAR-01": [
+      "Proposed Electric Drive Unit",
+      "HV_DRIVE",
+      "ev_edu",
+      "EV_PROPOSAL",
+      "proposed",
+      "electric",
+      "drive",
+      "unit"
+    ],
+    "PROP-INVERTER-01": [
+      "Proposed Traction Inverter",
+      "HV_POWER_ELECTRONICS",
+      "ev_inverter",
+      "EV_PROPOSAL",
+      "proposed",
+      "traction",
+      "inverter"
+    ],
+    "PROP-DCDC-01": [
+      "Proposed DC-DC Converter",
+      "HV_POWER_ELECTRONICS",
+      "ev_dcdc",
+      "EV_PROPOSAL",
+      "proposed",
+      "converter"
+    ],
+    "PROP-LTR-01": [
+      "Proposed Low-Temp Radiator / Heat Exchanger",
+      "THERMAL",
+      "ev_ltr",
+      "EV_PROPOSAL",
+      "proposed",
+      "low",
+      "temp",
+      "radiator",
+      "heat",
+      "exchanger"
+    ],
+    "PROP-CCS-PORT-01": [
+      "Proposed CCS Charge Port Interface",
+      "HV_CHARGE",
+      "ev_ccs",
+      "EV_PROPOSAL",
+      "proposed",
+      "ccs",
+      "charge",
+      "port",
+      "interface"
+    ]
+  },
+  "view_modes": [
+    "INSPECT",
+    "HEATMAP",
+    "TIMELINE",
+    "SIMULATION"
+  ],
+  "chrome_policy": "MINIMAL_HOVER_REVEAL"
+}
