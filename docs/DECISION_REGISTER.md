@@ -516,6 +516,36 @@ later entry that references it.
   label: `GATE_05M_C3_REVISION_07_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE` — the
   safety architecture is mature and the relational-schema doctrine is defined while
   all physical pass claims remain correctly unproven (nothing Confirmed).
+- **Amendment (owner review_72, batch_76 "74:75", RC-412..425): Gate 05M-C3
+  Revision 08 — schema completion + relational integrity.** The owner calls
+  Revision 07 "the point where Gate 05M-C3 should stop expanding narratively and
+  move into implementation … mature enough for a controlled specification freeze,"
+  designating `CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE /
+  DATABASE_IMPLEMENTATION_NOT_YET_COMPLETE`, and issues 20 items → 14 new
+  corrections (owner items 1, 2, 4, 7, 8, 9 targeted the Hunter's OCR-corrupted
+  text or restated already-applied rules — clean `L_min` RC-340/351, full block
+  list RC-383, status-dependent validation RC-399, ZeroRegenEnvelope RC-375,
+  `ProcedureApproval_ID` RC-355/389, complete sensor-failure response RC-403):
+  added TestCell constraints + authority-class eligibility (RC-412); transition
+  table is the source of truth over the diagram (RC-413); expanded
+  SUSPENDED→AUTHORIZED revalidation set + artifact requirement (RC-414); explicit
+  `TestExecution` schema (RC-415); TestResult cardinality corrected (RC-416);
+  junction-table composite keys (RC-417); `allowed_regen_state` enum (RC-418);
+  `FaultDefinition` registry (RC-419, the layer-1 parent of the D-009 error
+  library); `VehicleComponentInstance` configuration linkage (RC-420, D-006);
+  cross-record vehicle-identity equality (RC-421, D-006); append-only enforcement
+  mechanics (RC-422); cryptographic hash-chain specification (RC-423); automatic
+  expiry behaviour (RC-424); and a configuration-change transaction rule (RC-425).
+  RC-415/416/417/419/420/421/422/423/425 + the owner's downstream SQL schema +
+  migrations → triggers → rule-engine → negative tests → seed unapproved → SIL →
+  HIL → signed evidence are captured as **relational-schema doctrine only — NOT
+  built as M10/production code during Rev 07 ingestion** (CLAUDE.md). Status
+  upgrades to `FORMAL_BASELINE_CANDIDATE / SAFETY_ARCHITECTURE_MATURE /
+  REVISION_08_APPLIED / CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE / … /
+  CONFIGURATION_CHANGE_TRANSACTION_DEFINED`. Post-edit label:
+  `GATE_05M_C3_REVISION_08_CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE` — the safety
+  architecture is mature and the relational-schema doctrine is complete while all
+  physical pass claims remain correctly unproven (nothing Confirmed).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the

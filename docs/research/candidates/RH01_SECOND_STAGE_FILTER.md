@@ -510,6 +510,20 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-409 | **Cross-record configuration equality (owner review_71, extends RC-369/396)**: FKs prove existence but not same-configuration → hard-check `ConfigurationPacket_ID` equal across RunoutCalculations = RunoutAggregationResult = TestCellAuthorization = TestExecution = FaultExecutionAuthorization, plus the same equality on vehicle/build ID and platform ID (D-006) | batch_75 (linked records may span configs) | engineering DB architecture — **NeedsSupplierData** | **TestSafety / CrossRecordConfigEquality** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Relational-schema doctrine) — extends RC-369/396 + D-006 — lanes L7 |
 | RC-410 | **Append-only INSERT-only enforcement (owner review_71, extends RC-374)**: raw artifacts / signed results / transition events / signoff records are INSERT-only (no UPDATE path on a signed row); corrections only via Annotation / Supersession / ApplicabilityChange / ImpactReview / ReplacementResult (schema doctrine, not production code during ingestion) | batch_75 (immutability not technically enforced) | engineering DB architecture — internal (Constitution Art. I) | **EvidenceHygiene / AppendOnlyInsertEnforcement** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (immutable result lifecycle) — extends RC-374 — lanes L7 |
 | RC-411 | **Exact-binding scope statement (owner review_71, extends RC-397/382/339)**: a `SIGNED_PASS` applies ONLY to the exact VIN/build record · `ConfigurationPacket_ID` · software/calibration hashes · test-cell envelope · mass/loading + tire config · environmental/surface window · approved procedure revision; establishes no public-road / regulatory / certified-brake / production / customer / full-speed / durability / crashworthiness authority and **no reuse on another vehicle**; any change re-opens the Test Result Validity Rule | batch_75 (scope still broad) | engineering governance — internal | **NoClaim / ExactBindingScope** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (No-claim rule) — extends RC-397/382/339 — lanes L7 |
+| RC-412 | **Added TestCell constraints + authority-class eligibility (owner review_72, extends RC-369/398/402)**: `maximum_test_distance.value > 0` · `allowed_steering_band.minimum_angle <= maximum_angle`; every AUTHORIZED/ACTIVE safety boundary needs an eligible `authority_class` (`ENGINEERING_APPROVED`/`SUPPLIER_DEFINED`/`ARTIFACT_DEFINED`) — an `INITIAL_TARGET_PROFILE` value can never authorize physical movement (schema teeth of the Numeric Threshold Authority Rule) | batch_76 (constraints incomplete + no authority-class gate) | engineering software validation — **NeedsSupplierData** | **TestSafety / AuthorityClassEligibility** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (TestCellAuthorization_ID schema) — extends RC-369/398/402 + RC-267 — lanes L7 |
+| RC-413 | **Transition table is source of truth over the diagram (owner review_72, extends RC-408)**: no `ACTIVE → SUPERSEDED` (`ACTIVE → SUSPENDED\|REVOKED` only); a controlled `AUTHORIZED → SUPERSEDED` is permitted ONLY when a newer authorization explicitly replaces it AND it never became ACTIVE; any diagram is rendered to match the table; every other illegal transition rejected | batch_76 (diagram-table conflict) | engineering governance — **NeedsSupplierData** | **TestSafety / TransitionTableSourceOfTruth** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (TestCellAuthorization_ID schema) — extends RC-408 — lanes L7 |
+| RC-414 | **Expanded SUSPENDED→AUTHORIZED revalidation set + artifact requirement (owner review_72, extends RC-370)**: revalidation set adds surface condition · personnel assignments · instrumentation calibration · containment + E-stop readiness (to configuration/runout/environment/thermal/procedure-revision/expiry); **each item must produce an artifact or signed check record** | batch_76 (revalidation list truncated) | engineering governance — **NeedsSupplierData** | **TestSafety / SuspendedRevalidationSet** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (TestCellAuthorization_ID schema) — extends RC-370 — lanes L7 |
+| RC-415 | **`TestExecution` schema (owner review_72, extends RC-406)**: `TestExecution_ID` · `TestCellAuthorization_ID` · `ConfigurationPacket_ID` · `procedure_revision` · `attempt_number` · `execution_status` · `start/end_timestamp` · `operator_id` · `test_session_id` · `telemetry_packet_id` · `abort_reason_id`; `TestCellAuthorization 1:N TestExecution`, `TestExecution 1:1 TestResult`; revisions append annotation/applicability/supersession | batch_76 (TestExecution referenced but undefined) | engineering DB architecture — **NeedsSupplierData** | **TestSafety / TestExecutionSchema** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Relational-schema doctrine) — extends RC-406 — lanes L7 |
+| RC-416 | **TestResult cardinality correction (owner review_72, extends RC-406/415)**: TestResult is NOT 1:1 with authorization; `TestCellAuthorization 1:N TestExecution`, `TestExecution 1:1 TestResult` (or `1:N TestResultRevision`); a signed result is never overwritten | batch_76 (ER shows both 1:N and 1:1) | engineering DB architecture — **NeedsSupplierData** | **TestSafety / TestResultCardinality** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Relational-schema doctrine) — extends RC-406/415 — lanes L7 |
+| RC-417 | **Junction-table composite primary keys (owner review_72, extends RC-400)**: `RunoutAggregationComponent (RunoutAggregationResult_ID, component_id)` · `TestCellRequiredApprover (TestCellAuthorization_ID, approver_role_id)` · `TestCellAllowedFault (TestCellAuthorization_ID, fault_id)` · `AuthorizationTransitionEvidence (AuthorizationTransition_ID, artifact_id)` · `FaultAuthorizationAbortCondition (FaultExecutionAuthorization_ID, abort_condition_id)` — blocks duplicate memberships | batch_76 (junction tables keyless) | engineering DB architecture — **NeedsSupplierData** | **TestSafety / JunctionCompositeKeys** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Relational-schema doctrine) — extends RC-400 — lanes L7 |
+| RC-418 | **`allowed_regen_state` controlled enum (owner review_72, extends RC-354)**: `ZERO_REGEN_REQUEST` / `REGEN_MONITOR_ONLY` / `RESTRICTED_REGEN_ALLOWED` / `COEXISTENCE_OBSERVATION_ALLOWED` / `COORDINATED_BLEND_BLOCKED` / `REGEN_PROHIBITED`; one approved state per authorization (or a governed relationship table), never unrestricted text | batch_76 (regen state a free string) | engineering governance — **NeedsSupplierData** | **TestSafety / AllowedRegenStateEnum** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (TestCellAuthorization_ID schema) — extends RC-354 — lanes L7 |
+| RC-419 | **`FaultDefinition` registry (owner review_72, extends RC-364/380 + D-009)**: `fault_id` is a FK into a controlled `FaultDefinition` (`fault_code` · `fault_name` · `fault_domain` · `description` · `detection_method` · `default_severity` · `default_execution_domain` · `default_latch_policy` · `required_evidence_profile_id` · `applicability_scope` · `status` · `revision`) — the layer-1 parent onto which the D-009 error library attaches config-bound events/manifestations (RC-366) | batch_76 (fault_id parent undefined) | engineering DB architecture — **NeedsSupplierData** | **TestSafety / FaultDefinitionRegistry** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Subgate 05M-C3E) — extends RC-364/380 + D-009 — lanes L7 |
+| RC-420 | **`VehicleComponentInstance` configuration linkage (owner review_72, extends RC-405 + D-006)**: registry also carries `ConfigurationPacket_ID` · `IndividualVehicle_ID` · `platform_id` · `installation_location` · `software_or_firmware_version` · `supplier_part_number` · `status`; serial + hardware revision alone do not establish the conversion configuration | batch_76 (component instance had no config link) | engineering DB architecture — **NeedsSupplierData** | **TestSafety / VehicleComponentConfigLink** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Subgate 05M-C3E) — extends RC-405 + D-006 — lanes L7 |
+| RC-421 | **Cross-record equality extends to vehicle identity (owner review_72, extends RC-409/D-006)**: the equality chain requires the same `IndividualVehicle_ID` + `VehicleBuild_ID` + `PlatformConfiguration_ID` (not just `ConfigurationPacket_ID`) across RunoutCalculations / RunoutAggregationResult / TestCellAuthorization / TestExecution / FaultExecutionAuthorization / PairedFaultAuthorization / TestResult; a record spanning two vehicles/builds is rejected | batch_76 (equality only on config packet) | engineering DB architecture — **NeedsSupplierData** | **TestSafety / CrossRecordVehicleIdentity** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Relational-schema doctrine) — extends RC-409 + D-006 — lanes L7 |
+| RC-422 | **Append-only enforcement mechanics (owner review_72, extends RC-374/410)**: UPDATE/DELETE rejection triggers · signed-record state locks · content hashes · previous-record hash links · immutable artifact storage; signed evidence tables INSERT-only (UPDATE/DELETE blocked); changes appended as new records (schema doctrine, not production code during ingestion) | batch_76 (immutability not technically enforced) | engineering DB architecture — internal (Constitution Art. I) | **EvidenceHygiene / AppendOnlyMechanics** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (immutable result lifecycle) — extends RC-374/410 — lanes L7 |
+| RC-423 | **Cryptographic hash-chain specification (owner review_72, extends RC-410/422)**: `record_hash = SHA256(canonical_record_content + previous_record_hash + artifact_hashes + timestamp + signer_identity)` over a defined canonical serialization (ordering + encoding); provides tamper evidence but does NOT replace identity authentication or secure backups (doctrine only) | batch_76 (hash linking unspecified) | engineering DB architecture — internal | **EvidenceHygiene / HashChainSpecification** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (immutable result lifecycle) — extends RC-410/422 — lanes L7 |
+| RC-424 | **Automatic expiry behaviour (owner review_72, extends RC-388/408)**: at `current_time >= authorization_expiry`, `AUTHORIZED`/`SUSPENDED → EXPIRED` fire automatically; an ACTIVE cell defaults to `ACTIVE → SUSPENDED` at a defined safe stopping boundary (never indefinite continuation past expiry) | batch_76 (expiry timestamp had no automatic behaviour) | engineering governance — **NeedsSupplierData** | **TestSafety / AutomaticExpiryBehaviour** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (TestCellAuthorization_ID schema) — extends RC-388/408 — lanes L7 |
+| RC-425 | **Configuration-change transaction rule (owner review_72, extends RC-353/409)**: a configuration-hash change atomically drives active TestCellAuthorizations → SUSPENDED\|REVOKED, signed results → `INVALIDATED_FOR_CURRENT_CONFIGURATION`, active fault authorizations → SUSPENDED, RunoutAggregationResults → `REVOKED_PENDING_RECALCULATION`, movement authority → BLOCKED, auto-create `ImpactReview_ID`; historical evidence unchanged (append-only) | batch_76 (config change had no cascade rule) | engineering DB architecture — **NeedsSupplierData** | **TestSafety / ConfigurationChangeTransaction** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Relational-schema doctrine) — extends RC-353/409 — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -5955,6 +5969,99 @@ RC rows were minted for them.
   `NOT_READY_FOR_SCHEMA_FREEZE`; applying the 14 corrections resolves the
   `_REQUIRED`/`_MISSING` items and re-reaches specification-freeze readiness while
   all physical pass claims remain correctly unproven.
+- Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
+  no customer operation; no compliance/certification claim; ODRs untouched; no
+  production code / no M10 during ingestion.
+
+## 85. Batch 76 ("74:75") + owner review_72 — Gate 05M-C3 Revision 07 relational-schema amendment + 14 schema-completion corrections (2026-07-21)
+
+Raw source:
+`docs/research/raw/research_hunter/batch_76_gate05mc3_revision07_schema.md` (owner
+framing / re-issued review_71 corrections + the Hunter's re-emit "Global
+Engineering Safety Amendments (Revision 07)", a nine-section normalized
+relational-database spec) + owner verdict
+`docs/research/raw/owner_reviews/review_72_batch_76_verdict.md` (label "74:75").
+**Row additions: RC-412..RC-425 (no new CS).** No new deliverable — corrections
+applied to `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Revision 08).
+
+### What the owner delivered
+
+The owner's verdict calls Revision 07 "the point where Gate 05M-C3 should stop
+expanding narratively and move into implementation … mature enough for a controlled
+specification freeze," designating the status
+`ARCHITECTURE_MATURE / CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE /
+DATABASE_IMPLEMENTATION_NOT_YET_COMPLETE`. The owner confirms Revision 07's
+deterministic structure and its strongest improvements (arrays → junction tables;
+component references corrected to a vehicle-component registry; auth/exec/result
+separated; test attempts preserved; expiration; runout snapshot; fault-execution
+authorization; E-stop decomposition; deterministic steering resolution;
+cross-record configuration equality; scope limits; stated pipeline), then issues
+**20 items → 14 new corrections.** Owner items **1, 2, 4, 7, 8, 9** target the
+Hunter's OCR-corrupted text or restate already-applied rules — the deliverable
+already has the clean 7-term `L_min` (RC-340/351), the full
+`PHYSICAL_MOVEMENT_BLOCKED` list (RC-383), status-dependent validation (RC-399),
+the ZeroRegenEnvelope dimensions (RC-375), default `APPROVAL_REQUIRED` +
+`ProcedureApproval_ID` (RC-355/389), and the complete sensor-failure response
+(RC-403) — so no duplicate RC rows were minted.
+
+### The 14 corrections (RC-412..425)
+
+1. **RC-412** — added TestCell constraints (`maximum_test_distance > 0`, steering
+   min ≤ max) + authority-class eligibility (an `INITIAL_TARGET_PROFILE` value
+   cannot authorize movement).
+2. **RC-413** — the transition TABLE is the source of truth over any diagram
+   (no `ACTIVE → SUPERSEDED`; controlled `AUTHORIZED → SUPERSEDED` pre-activation).
+3. **RC-414** — expanded SUSPENDED→AUTHORIZED revalidation set + each item produces
+   an artifact/signed check record.
+4. **RC-415** — explicit `TestExecution` schema (`TestCellAuthorization 1:N
+   TestExecution 1:1 TestResult`).
+5. **RC-416** — TestResult cardinality corrected (never 1:1 with authorization; a
+   signed result is never overwritten).
+6. **RC-417** — junction-table composite primary keys (block duplicate memberships).
+7. **RC-418** — `allowed_regen_state` controlled enum.
+8. **RC-419** — `FaultDefinition` registry (the controlled parent for `fault_id`;
+   ties to the D-009 error library).
+9. **RC-420** — `VehicleComponentInstance` configuration linkage
+   (ConfigurationPacket/IndividualVehicle/platform/…).
+10. **RC-421** — cross-record equality extends to
+    `IndividualVehicle_ID`/`VehicleBuild_ID`/`PlatformConfiguration_ID`.
+11. **RC-422** — append-only enforcement mechanics (triggers, state-locks,
+    hash-links; INSERT-only signed evidence tables).
+12. **RC-423** — cryptographic hash-chain specification + canonical serialization.
+13. **RC-424** — automatic expiry behaviour (`AUTHORIZED`/`SUSPENDED → EXPIRED`;
+    ACTIVE → SUSPENDED at a safe stopping boundary).
+14. **RC-425** — configuration-change transaction rule (suspend/invalidate
+    dependents + auto-create `ImpactReview_ID`; historical evidence unchanged).
+
+### Guardrails applied
+
+- **No M10 / no production code** — RC-415/416/417/419/420/421/422/423/425 and the
+  owner's stated implementation pipeline (SQL schema + migrations → triggers +
+  cross-record validation → rule-engine functions → negative tests → seed
+  unapproved → SIL → HIL → signed evidence) are captured as **relational-schema
+  doctrine** for a future production phase; nothing is built as an M10 database,
+  rule engine, or test suite during Rev 07 ingestion (CLAUDE.md). The
+  "Relational-schema doctrine" section in the deliverable was expanded to hold the
+  TestExecution / cardinality / composite-key / vehicle-identity /
+  configuration-change requirements.
+- **No invented values** — every schema field, enum, and FK stays
+  `INITIAL_TARGET_PROFILE` / `NeedsSupplierData`; nothing is Confirmed; the
+  authority-class gate (RC-412) is the schema teeth of the Numeric Threshold
+  Authority Rule (RC-267/300).
+- **Ties to existing doctrine** — `FaultDefinition` (RC-419) is the layer-1 parent
+  of the D-009 fault-library architecture; `VehicleComponentInstance` config link
+  (RC-420) + cross-record vehicle identity (RC-421) enforce D-006 platform
+  separation.
+- **Evidence immutable** — RC-422/423 restate Constitution Art. I as INSERT-only +
+  hash-chained; archives committed 1:1 and separately from this reconciliation.
+
+### Standing checks
+
+- RC-412..425 added; deliverable updated to Revision 08 and relabelled
+  `GATE_05M_C3_REVISION_08_CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE`; D-008
+  amended (review_72). The safety architecture is mature and the relational-schema
+  doctrine is complete; `DATABASE_IMPLEMENTATION_NOT_YET_COMPLETE` reflects that
+  the enforcement is described, not built (deferred M10).
 - Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
   no customer operation; no compliance/certification claim; ODRs untouched; no
   production code / no M10 during ingestion.

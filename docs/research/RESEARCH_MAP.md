@@ -371,28 +371,29 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_71):** **Gate 05M-C3A execution / Envelope
-Cell 1 authorization** (Decision Register **D-008**, amended review_71). Gate
+**Next expected batch (owner review_72):** **Gate 05M-C3A execution / Envelope
+Cell 1 authorization** (Decision Register **D-008**, amended review_72). Gate
 05M-C3 (Controlled Closed-Area Low-Speed Movement,
-`GATE05M_C3_CLOSED_AREA_MOVEMENT.md`) is now at **Revision 07** — the owner called
-Revision 06 "structurally mature and very close to specification freeze" but
-**regressed the status to `NOT_READY_FOR_SCHEMA_FREEZE`** over implementation-level
-defects (schema normalization, missing rule restoration, status-model cleanup) and
-added 20 items → 14 review_71 corrections (RC-398..411: additional test-distance
-bounds; status-dependent validation; arrays → junction tables; derived L_min
-membership + frozen snapshot; `authority_status` enum + approver reference;
-complete independent-sensor failure response; E-stop per-outcome result
-decomposition; paired-fault component FK → `VehicleComponentInstance` not
-`DistanceComponent`; one-to-many test-attempt model; test-result attempt identity +
-applicability; explicit allowed-transition table + no `ACTIVE→COMPLETED` edge;
-cross-record configuration equality; append-only INSERT-only enforcement;
-exact-binding scope statement — owner items 1/2/5/6/10/11 targeted the Hunter's
-OCR-corrupted copy or restated already-applied rules). It now labels
-`GATE_05M_C3_REVISION_07_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE` — the safety
-architecture is mature and the relational-schema doctrine is defined while all
-physical pass claims remain correctly unproven; the owner's downstream `DATABASE
-MIGRATION → RULE ENGINE IMPLEMENTATION → AUTOMATED CONSTRAINT TESTING → SIL/HIL
-EVIDENCE` is M10/production work NOT performed during Rev 07 ingestion; it does NOT
+`GATE05M_C3_CLOSED_AREA_MOVEMENT.md`) is now at **Revision 08** — the owner called
+Revision 07 "the point where Gate 05M-C3 should stop expanding narratively and move
+into implementation … mature enough for a controlled specification freeze,"
+designating `CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE /
+DATABASE_IMPLEMENTATION_NOT_YET_COMPLETE`, and added 20 items → 14 review_72
+corrections (RC-412..425: added TestCell constraints + authority-class eligibility;
+transition table is the source of truth over the diagram; expanded
+SUSPENDED→AUTHORIZED revalidation set + artifact requirement; explicit
+`TestExecution` schema; TestResult cardinality corrected; junction-table composite
+keys; `allowed_regen_state` enum; `FaultDefinition` registry; `VehicleComponentInstance`
+configuration linkage; cross-record vehicle-identity equality; append-only
+enforcement mechanics; cryptographic hash-chain specification; automatic expiry
+behaviour; configuration-change transaction rule — owner items 1/2/4/7/8/9 targeted
+the Hunter's OCR-corrupted copy or restated already-applied rules). It now labels
+`GATE_05M_C3_REVISION_08_CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE` — the safety
+architecture is mature and the relational-schema doctrine is complete while all
+physical pass claims remain correctly unproven; the owner's downstream SQL schema →
+migrations → triggers → rule-engine → negative tests → SIL → HIL → signed evidence
+is M10/production work NOT performed during Rev 07 ingestion
+(`DATABASE_IMPLEMENTATION_NOT_YET_COMPLETE` = described, not built); it does NOT
 mean any vehicle / calibration / brake system / regeneration strategy / moving
 fault test has physically passed (nothing Confirmed). Every
 number stays `INITIAL_TARGET_PROFILE` (RC-267/291/293/300 — no auto-unlock,

@@ -13,6 +13,55 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-21 — Claude Code — batch 75 ("73:75") + review_71: Gate 05M-C3 Revision 07 (RC-398..411)
+
+### Session
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-21
+- Reason for handoff: task complete (RH batch 75 "73:75" + owner review_71 — Gate
+  05M-C3 Revision 07; 14 corrections RC-398..411 applied); awaiting the 05M-C3A
+  execution / Envelope-Cell-1 batch or a supplier reply
+
+### Git state
+
+- Branch: `claude/docs-structure-large-projects-b6vxx5`
+- Agent owner: Claude Code (single-writer rule, AGENTS.md)
+- Start commit: `ac612a2` — Archive RH batch 75 + owner review_71 1:1
+- End commit: `ef3205f` — Reconcile RH batch 75 + review_71 (RC-398..411)
+- Working tree at handoff: clean (everything committed)
+
+### Work performed
+
+- RH batch 75 ("73:75") + owner review_71 — Gate 05M-C3 Revision 07. Owner called
+  Revision 06 "structurally mature and very close to specification freeze" but
+  regressed the status to `NOT_READY_FOR_SCHEMA_FREEZE` over schema-normalization +
+  status-model defects; 20 items → 14 new corrections (owner items 1, 2, 5, 6, 10,
+  11 already clean/applied). Applied RC-398..411 to
+  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`: additional test-distance bounds (398);
+  status-dependent validation (399); arrays → junction tables (400); derived L_min
+  membership + frozen snapshot (401); authority_status enum + approver reference
+  (402); complete sensor-failure response (403); E-stop per-outcome decomposition
+  (404); paired-fault FK → VehicleComponentInstance (405); one-to-many test-attempt
+  model (406); test-result attempt identity + applicability (407); explicit
+  transition table + no ACTIVE→COMPLETED edge (408); cross-record configuration
+  equality (409); append-only INSERT-only enforcement (410); exact-binding scope
+  statement (411). RH01 RC-398..411 + section 84; D-008 amendment (review_71);
+  RESEARCH_MAP, GATE_RESEARCH_QUEUE, CHANGELOG updated. Deliverable relabelled
+  `GATE_05M_C3_REVISION_07_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE`. Added a
+  "Relational-schema doctrine" section (junction tables / test-attempt /
+  cross-record equality) as DOCTRINE only — not M10/production code.
+- Nothing ingested; nothing Confirmed; no normal driving; no public road; no
+  customer operation; no "certified safe"/compliance claim; ODRs untouched.
+
+### Note
+
+Full state snapshot, doctrine chain (RC-168..411), open owner decisions, forbidden
+actions, and the receiving-agent checklist are forward-carried into the batch-76
+`CURRENT_HANDOFF.md`; this entry records the batch-75 delta.
+
+---
+
 ## 2026-07-21 — Claude Code — batch 74 ("72:75") + review_70: Gate 05M-C3 Revision 06 (RC-383..397)
 
 ### Session

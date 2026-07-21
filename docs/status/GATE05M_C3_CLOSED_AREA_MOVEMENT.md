@@ -10,10 +10,10 @@ is built as **five linear modular subgates**, NOT one large "track movement"
 gate (owner review_65), so straight-line propulsion, braking, regeneration,
 steering, and fault behaviour are never approved together prematurely.
 
-**Status (owner review_65/66/67/68/69/70/71): `FORMAL_BASELINE_CANDIDATE` /
-`SAFETY_ARCHITECTURE_MATURE` / `REVISION_07_APPLIED` /
-`READY_FOR_CONTROLLED_SPECIFICATION_FREEZE` / `RELATIONAL_SCHEMA_DOCTRINE_DEFINED` /
-`MODULAR_ARCHITECTURE_DEFINED` /
+**Status (owner review_65/66/67/68/69/70/71/72): `FORMAL_BASELINE_CANDIDATE` /
+`SAFETY_ARCHITECTURE_MATURE` / `REVISION_08_APPLIED` /
+`CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE` / `RELATIONAL_SCHEMA_DOCTRINE_DEFINED` /
+`DATABASE_IMPLEMENTATION_DEFERRED_M10` / `MODULAR_ARCHITECTURE_DEFINED` /
 `GLOBAL_AUDIT_SCHEMA_DEFINED` / `TELEMETRY_PACKET_DEFINED` /
 `TELEMETRY_SYNC_DEFINED` / `CONFIGURATION_VALIDITY_RULE_DEFINED` /
 `IMMUTABLE_EVIDENCE_PRESERVATION_DEFINED` / `LEDGER_LIFECYCLE_DEFINED` /
@@ -54,7 +54,14 @@ steering, and fault behaviour are never approved together prematurely.
 `APPEND_ONLY_INSERT_ENFORCEMENT_DOCTRINE_DEFINED` /
 `SENSOR_FAILURE_RESPONSE_COMPLETE_DEFINED` / `ESTOP_RESULT_DECOMPOSED_DEFINED` /
 `PAIRED_FAULT_COMPONENT_REGISTRY_CORRECTED` / `TRANSITION_RULE_TABLE_DEFINED` /
-`EXACT_BINDING_SCOPE_DEFINED` /
+`EXACT_BINDING_SCOPE_DEFINED` / `AUTHORITY_CLASS_ELIGIBILITY_DEFINED` /
+`TRANSITION_TABLE_SOURCE_OF_TRUTH_DEFINED` / `SUSPENDED_REVALIDATION_SET_EXPANDED` /
+`TEST_EXECUTION_SCHEMA_DEFINED` / `TEST_RESULT_CARDINALITY_CORRECTED` /
+`JUNCTION_COMPOSITE_KEYS_DEFINED` / `ALLOWED_REGEN_STATE_ENUM_DEFINED` /
+`FAULT_DEFINITION_REGISTRY_DEFINED` / `VEHICLE_COMPONENT_CONFIG_LINK_DEFINED` /
+`CROSS_RECORD_VEHICLE_IDENTITY_DEFINED` / `APPEND_ONLY_MECHANICS_DEFINED` /
+`HASH_CHAIN_SPECIFICATION_DEFINED` / `AUTOMATIC_EXPIRY_BEHAVIOR_DEFINED` /
+`CONFIGURATION_CHANGE_TRANSACTION_DEFINED` /
 `NUMERIC_LIMITS_INITIAL_TARGET_PROFILE` / `FORMAL_ENGINEERING_REVIEW_REQUIRED` /
 `NO_ACTIVE_ABS_ESC_AUTHORITY` / `NO_TORQUE_VECTORING_AUTHORITY` /
 `NO_PUBLIC_ROAD` / `NO_CUSTOMER_OPERATION` / `NO_NORMAL_DRIVING_AUTHORITY`.**
@@ -64,20 +71,24 @@ corrections (RC-327..339, Revision 02), the eleven review_67 corrections
 Revision 04), the fourteen review_69 corrections (RC-369..382, Revision 05 —
 items 1 & 5 already clean), the fifteen review_70 corrections (RC-383..397,
 Revision 06 — owner items 1 & 3 targeted the Hunter's OCR/typographical text only)
-and the fourteen review_71 corrections (RC-398..411, Revision 07 — schema
-normalization + status-model cleanup; owner items 1/2/5/6/10/11 targeted the
-Hunter's OCR-corrupted copy or restated already-applied rules) the gate labels
-`GATE_05M_C3_REVISION_07_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE` —
-**the safety architecture is mature and the relational-schema doctrine is defined,
-ready to freeze the specification, while all physical pass claims remain correctly
-unproven; it does NOT mean any vehicle / calibration / brake system / regeneration
-strategy / moving fault test has physically passed** (nothing Confirmed). The
-owner's downstream sequence — controlled specification freeze → `DATABASE
-MIGRATION` → `RULE ENGINE IMPLEMENTATION` → `AUTOMATED CONSTRAINT TESTING` →
-`SIL/HIL EVIDENCE` — is M10/production work and is **NOT performed during Rev 07
-ingestion**; the relational-schema requirements are captured as doctrine only.
+the fourteen review_71 corrections (RC-398..411, Revision 07 — schema
+normalization + status-model cleanup) and the fourteen review_72 corrections
+(RC-412..425, Revision 08 — schema-completion + relational-integrity; owner items
+1/2/4/7/8/9 targeted the Hunter's OCR-corrupted text or restated already-applied
+rules) the gate labels
+`GATE_05M_C3_REVISION_08_CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE` —
+**the safety architecture is mature and the relational-schema doctrine is complete,
+a candidate for controlled specification freeze, while all physical pass claims
+remain correctly unproven; it does NOT mean any vehicle / calibration / brake
+system / regeneration strategy / moving fault test has physically passed** (nothing
+Confirmed). The owner's downstream sequence — SQL schema + migrations → triggers +
+cross-record validation → rule-engine functions → negative tests → seed unapproved
+→ SIL → HIL → signed evidence — is M10/production work and is **NOT performed
+during Rev 07 ingestion**; the relational-schema requirements are captured as
+doctrine only, and `DATABASE_IMPLEMENTATION_NOT_YET_COMPLETE` reflects that the
+enforcement is described, not yet built.
 Ladder: **… → 05M-C2 (05M-C2A → 05M-C2B → 05M-C2C) → 05M-C3 (THIS GATE — 05M-C3A
-→ 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E)** (D-008, amended review_71).
+→ 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E)** (D-008, amended review_72).
 
 ## Linear progression (owner review_65) — HARD BLOCK
 
@@ -340,13 +351,29 @@ new linked record: `Annotation` / `Supersession` / `ApplicabilityChange` /
 `ImpactReview` / `ReplacementResult`. (Enforcement mechanism is captured as
 schema doctrine; it is NOT built as production code during Rev 07 ingestion.)
 
+**Append-only enforcement mechanics (owner review_72, RC-422) — HARD BLOCK
+(doctrine for the eventual M10 schema):** "immutable" is enforced technically, not
+by intent — via `UPDATE`/`DELETE` rejection triggers · signed-record state locks ·
+content hashes · previous-record hash links · immutable artifact storage paths. On
+signed evidence tables **`INSERT` is allowed; `UPDATE` and `DELETE` are blocked** —
+changes are appended as new records.
+
+**Cryptographic hash-chain specification (owner review_72, RC-423) — doctrine:**
+each record's tamper-evidence hash is
+`record_hash = SHA256(canonical_record_content + previous_record_hash +
+artifact_hashes + timestamp + signer_identity)`, over a **defined canonical
+serialization** (canonical ordering + encoding — without it the same record can
+hash differently). This provides tamper evidence but **does not replace identity
+authentication or secure backups**. (Doctrine only — not implemented as production
+code during ingestion.)
+
 ### TestCellAuthorization_ID schema (owner review_67/68, RC-350/354) — HARD BLOCK
 
 Because cell progression is fundamental (RC-314), each cell is authorized by an
 explicit **`TestCellAuthorization_ID`** record: `subgate_id` · `cell_number` ·
 `maximum_speed` · `maximum_positive_torque` · `maximum_negative_torque` ·
 `maximum_torque_rate` · `maximum_jerk` · `maximum_test_distance` · allowed
-steering band · allowed regen state · allowed fault set · `RunoutCalculations_ID`
+steering band · `allowed_regen_state` (enum, RC-418) · allowed fault set · `RunoutCalculations_ID`
 · `ConfigurationPacket_ID` · `previous_cell_signed_result` ·
 `thermal_state_requirement` · surface/environmental window · authorization expiry
 · required approvers · **status** (`DRAFT` / `APPROVAL_REQUIRED` / `AUTHORIZED` /
@@ -371,6 +398,15 @@ computed envelope — `maximum_test_distance.value <= available_track_length` an
 `maximum_test_distance.value <= calculated authorized movement envelope` — so a
 cell can never authorize more distance than the track or the runout math permits.
 
+**Further constraints + authority-class eligibility (owner review_72, RC-412) —
+HARD BLOCK:** two more constraints are enforced — `maximum_test_distance.value > 0`
+and `allowed_steering_band.minimum_angle <= allowed_steering_band.maximum_angle`.
+**And every safety boundary used to reach `AUTHORIZED` or `ACTIVE` must carry an
+eligible `authority_class` — `ENGINEERING_APPROVED` / `SUPPLIER_DEFINED` /
+`ARTIFACT_DEFINED` (where permitted). An `INITIAL_TARGET_PROFILE` value can never
+authorize physical movement** (this is the schema-level teeth of the Numeric
+Threshold Authority Rule, RC-267/300).
+
 **Status-dependent validation — a DRAFT is not held to ACTIVE requirements (owner
 review_71, RC-399) — HARD BLOCK:** the record's required-field set escalates with
 its status so a legitimate draft is never rejected for missing live data:
@@ -391,6 +427,12 @@ controlled enum — **`m` · `m/s` · `m/s^2` · `m/s^3` · `Nm` · `Nm/s` · `N
 database comparison unit must be canonical**, so a value stored/displayed in km/h
 is compared in m/s and never mixed.
 
+**`allowed_regen_state` is a controlled enum (owner review_72, RC-418) — HARD
+BLOCK:** one approved state per authorization (or a governed relationship table) —
+`ZERO_REGEN_REQUEST` / `REGEN_MONITOR_ONLY` / `RESTRICTED_REGEN_ALLOWED` /
+`COEXISTENCE_OBSERVATION_ALLOWED` / `COORDINATED_BLEND_BLOCKED` / `REGEN_PROHIBITED`
+— never unrestricted text.
+
 **`allowed_steering_band` is a bounded record, not one number (owner review_70,
 RC-384) — HARD BLOCK:** a steering band needs lower and upper boundaries and an
 explicit angle frame — `minimum_angle` · `maximum_angle` · `unit` ·
@@ -407,6 +449,14 @@ transition creates an `AuthorizationTransition_ID` record: `TestCellAuthorizatio
 requires explicit revalidation of** configuration · runout · environment · thermal
 state · procedure revision · authorization expiry — a suspended authorization
 never silently resumes.
+
+**Expanded suspended-revalidation set + artifact requirement (owner review_72,
+RC-414) — HARD BLOCK:** the `SUSPENDED → AUTHORIZED` revalidation set is
+`ConfigurationPacket` · `RunoutAggregationResult` · environmental window ·
+**surface condition** · thermal state · procedure revision · authorization expiry ·
+**personnel assignments** · **instrumentation calibration** · **containment + E-stop
+readiness**. **Every item must produce an artifact or a signed check record** — a
+revalidation is not "done" until it is evidenced.
 
 **`COMPLETED` does not mean passed (owner review_69, RC-371) — HARD BLOCK:** three
 statuses stay strictly separate — **Authorization status** (`… COMPLETED`) ·
@@ -477,17 +527,32 @@ transition is rejected**, and `EXPIRED` is a first-class node:
 ```
 DRAFT             → APPROVAL_REQUIRED
 APPROVAL_REQUIRED → AUTHORIZED | DRAFT
-AUTHORIZED        → ACTIVE | SUSPENDED | REVOKED | EXPIRED
+AUTHORIZED        → ACTIVE | SUSPENDED | REVOKED | EXPIRED | SUPERSEDED*
 ACTIVE            → SUSPENDED | REVOKED
 SUSPENDED         → AUTHORIZED | REVOKED | EXPIRED
 REVOKED           → SUPERSEDED
 EXPIRED           → SUPERSEDED
 ```
 
+**The transition TABLE is the single source of truth — the diagram never is (owner
+review_72, RC-413) — HARD BLOCK:** any state diagram is rendered to match the table
+(no `ACTIVE → SUPERSEDED` edge; `ACTIVE → SUSPENDED | REVOKED` only). The
+`AUTHORIZED → SUPERSEDED*` edge is a **controlled option**: permitted **only when a
+newer authorization explicitly replaces it AND it has never become `ACTIVE`** (a
+replacement issued before activation). Every other illegal transition is rejected.
+
 **Execution completion must NOT mutate an authorization into `COMPLETED`** — the
 `ACTIVE → COMPLETED` authorization edge of the RC-354 diagram is removed; session
 completion lives entirely in Execution Status (`… → EXECUTED`, RC-387), never in
 Authorization Status.
+
+**Automatic expiry behaviour (owner review_72, RC-424) — HARD BLOCK:** when
+`current_time >= authorization_expiry`, `AUTHORIZED → EXPIRED` and `SUSPENDED →
+EXPIRED` fire automatically. **If a cell is already `ACTIVE` at expiry the default
+is `ACTIVE → SUSPENDED` at a defined safe stopping boundary** — never indefinite
+continuation; whether the active run may finish to that boundary is an
+engineering-approved parameter, but unbounded continuation past expiry is
+forbidden.
 
 ### Cell-by-cell operating-envelope escalation (owner review_65, RC-314) — HARD BLOCK
 
@@ -928,6 +993,23 @@ steering-assist unit · DC/DC converter · wheel-speed sensor), **NOT** a
 `DistanceComponent`, which represents track geometry. Pointing a fault at track
 geometry is a relational error and is rejected.
 
+**`VehicleComponentInstance` carries configuration linkage (owner review_72,
+RC-420) — HARD BLOCK:** a serial number + hardware revision alone do not establish
+which conversion configuration a component belongs to, so the registry also carries
+`ConfigurationPacket_ID` · `IndividualVehicle_ID` · `platform_id` ·
+`installation_location` · `software_or_firmware_version` · `supplier_part_number` ·
+`status`. This binds each fault to a specific vehicle/platform/config (D-006).
+
+**`fault_id` resolves to a `FaultDefinition` registry (owner review_72, RC-419) —
+HARD BLOCK:** `fault_id` is not a free string — it is a FK into a controlled
+**`FaultDefinition`** table: `fault_id` · `fault_code` · `fault_name` ·
+`fault_domain` · `description` · `detection_method` · `default_severity` ·
+`default_execution_domain` · `default_latch_policy` · `required_evidence_profile_id`
+· `applicability_scope` · `status` · `revision`. This is the controlled parent onto
+which the future vehicle-specific error library (D-009) attaches events and
+platform manifestations — layer-1 definitions reusable, layers 2–4
+configuration-bound (RC-366).
+
 **Database foreign-key enforcement — no orphaned references (owner review_70,
 RC-396) — HARD BLOCK:** all critical IDs are foreign-key constrained —
 `RunoutCalculations_ID` · `ConfigurationPacket_ID` · `TestCellAuthorization_ID` ·
@@ -937,11 +1019,14 @@ RC-396) — HARD BLOCK:** all critical IDs are foreign-key constrained —
 hard-blocked** (this is doctrine for the eventual M10 schema, not production code
 built during ingestion).
 
-## Relational-schema doctrine (owner review_71, Revision 07) — for the eventual M10 schema
+## Relational-schema doctrine (owner review_71/72, Revision 07/08) — for the eventual M10 schema
 
 **These are schema-normalization requirements captured as DOCTRINE. They are NOT
 implemented as production code / an M10 database during Rev 07 ingestion
-(CLAUDE.md); they define what the eventual schema MUST be.**
+(CLAUDE.md); they define what the eventual schema MUST be. The owner's downstream
+sequence — SQL schema + migrations → triggers + cross-record validation →
+rule-engine functions → negative tests → seed unapproved → SIL → HIL → signed
+evidence — is all deferred M10/production work.**
 
 - **Arrays → junction tables (RC-400) — HARD BLOCK:** JSON/array fields cannot
   enforce foreign-key integrity (especially in SQLite), so the array-valued fields
@@ -969,6 +1054,37 @@ implemented as production code / an M10 database during Rev 07 ingestion
   `RunoutAggregationResult` = `TestCellAuthorization` = `TestExecution` =
   `FaultExecutionAuthorization` — and the same equality on **vehicle/build ID and
   platform ID** (D-006 platform separation). Mismatched configuration is rejected.
+- **`TestExecution` schema + cardinality (owner review_72, RC-415/416) — HARD
+  BLOCK:** the `TestExecution` entity is explicit — `TestExecution_ID` ·
+  `TestCellAuthorization_ID` · `ConfigurationPacket_ID` · `procedure_revision` ·
+  `attempt_number` · `execution_status` · `start_timestamp` · `end_timestamp` ·
+  `operator_id` · `test_session_id` · `telemetry_packet_id` · `abort_reason_id`.
+  The cardinality is **`TestCellAuthorization 1:N TestExecution`** and
+  **`TestExecution 1:1 TestResult`** (or `TestExecution 1:N TestResultRevision` when
+  result revisions are needed) — TestResult is NEVER 1:1 with the authorization, and
+  a signed result is never overwritten (revisions append `TestResultAnnotation` /
+  `TestResultApplicabilityChange` / `TestResultSupersession`).
+- **Junction tables need composite primary keys (owner review_72, RC-417) — HARD
+  BLOCK:** each junction table has a composite PK so duplicate memberships cannot be
+  inserted — `RunoutAggregationComponent (RunoutAggregationResult_ID, component_id)`
+  · `TestCellRequiredApprover (TestCellAuthorization_ID, approver_role_id)` ·
+  `TestCellAllowedFault (TestCellAuthorization_ID, fault_id)` ·
+  `AuthorizationTransitionEvidence (AuthorizationTransition_ID, artifact_id)` ·
+  `FaultAuthorizationAbortCondition (FaultExecutionAuthorization_ID, abort_condition_id)`.
+- **Cross-record equality extends to vehicle identity (owner review_72, RC-421) —
+  HARD BLOCK:** the equality chain is not `ConfigurationPacket_ID` alone — it also
+  requires the **same `IndividualVehicle_ID`, same `VehicleBuild_ID`, and same
+  `PlatformConfiguration_ID`** across `RunoutCalculations` · `RunoutAggregationResult`
+  · `TestCellAuthorization` · `TestExecution` · `FaultExecutionAuthorization` ·
+  `PairedFaultAuthorization` · `TestResult`. Any record spanning two vehicles/builds
+  is rejected (D-006).
+- **Configuration-change transaction rule (owner review_72, RC-425) — HARD BLOCK:**
+  when a configuration hash changes, one atomic transaction fires — active
+  `TestCellAuthorization`s → `SUSPENDED` or `REVOKED`; signed results →
+  `INVALIDATED_FOR_CURRENT_CONFIGURATION`; active fault authorizations →
+  `SUSPENDED`; `RunoutAggregationResult`s → `REVOKED_PENDING_RECALCULATION`;
+  movement authority → `BLOCKED`; an `ImpactReview_ID` is auto-created.
+  **Historical evidence remains unchanged** (append-only, RC-374/410).
 
 ## No-claim rule (owner review_69, RC-382) — HARD RULE
 
@@ -1126,11 +1242,33 @@ Validity Rule (RC-339/349).
   restated already-applied rules (clean `L_min` RC-340/351; full block list
   RC-383; COMPLETED-as-execution RC-387; `EXPIRED` RC-388; ZeroRegenEnvelope
   RC-375; `ProcedureApproval_ID` RC-355/389) — no duplicate rows.
+- **Revision 08 schema-completion + relational-integrity cleanups (owner
+  review_72, RC-412..425):** added TestCell constraints (`maximum_test_distance > 0`,
+  steering min≤max) + authority-class eligibility so an `INITIAL_TARGET_PROFILE`
+  value cannot authorize movement (RC-412); the transition TABLE is the source of
+  truth (no `ACTIVE → SUPERSEDED`; controlled `AUTHORIZED → SUPERSEDED` pre-activation)
+  (RC-413); the SUSPENDED→AUTHORIZED revalidation set is expanded + each item
+  produces an artifact (RC-414); the `TestExecution` schema is explicit (RC-415)
+  with corrected `TestCellAuthorization 1:N TestExecution 1:1 TestResult` cardinality
+  (RC-416); junction tables carry composite primary keys (RC-417);
+  `allowed_regen_state` is a controlled enum (RC-418); `fault_id` resolves to a
+  `FaultDefinition` registry (RC-419); `VehicleComponentInstance` carries
+  configuration linkage (RC-420); cross-record equality extends to
+  `IndividualVehicle_ID`/`VehicleBuild_ID`/`PlatformConfiguration_ID` (RC-421);
+  append-only is enforced via triggers/state-locks/hash-links (RC-422); a
+  cryptographic hash-chain spec is defined (RC-423); automatic expiry drives
+  `AUTHORIZED`/`SUSPENDED → EXPIRED` and an ACTIVE cell to `SUSPENDED` at a safe
+  boundary (RC-424); and a configuration-change transaction rule suspends/invalidates
+  the dependent records and auto-creates an `ImpactReview_ID` (RC-425). Owner items
+  1, 2, 4, 7, 8, 9 targeted the Hunter's OCR-corrupted copy or restated
+  already-applied rules (clean `L_min` RC-340/351; full block list RC-383;
+  status-dependent validation RC-399; ZeroRegenEnvelope RC-375; `ProcedureApproval_ID`
+  RC-355/389; complete sensor-failure response RC-403) — no duplicate rows.
 - **Nothing ingested; nothing Confirmed; no normal driving; no public road; no
   customer operation; no "certified safe"/compliance claim; ODRs untouched; no
   production code / no M10 during ingestion (the relational-schema doctrine +
-  the owner's downstream `DATABASE MIGRATION → RULE ENGINE IMPLEMENTATION →
-  AUTOMATED CONSTRAINT TESTING → SIL/HIL EVIDENCE` are deferred M10/production
+  the owner's downstream SQL schema → migrations → triggers → rule-engine →
+  negative tests → SIL → HIL → signed evidence are deferred M10/production
   work).**
 
 ## Next — controlled specification freeze
@@ -1141,23 +1279,25 @@ corrections (Revision 02, RC-327..339), the eleven review_67 corrections
 RC-351..363), the fourteen review_69 corrections (Revision 05, RC-369..382 —
 items 1 & 5 already clean), the fifteen review_70 corrections (Revision 06,
 RC-383..397 — owner items 1 & 3 targeted the Hunter's OCR/typographical text only)
-and the fourteen review_71 corrections (Revision 07, RC-398..411 — schema
-normalization + status-model cleanup; owner items 1/2/5/6/10/11 already
-clean/applied) the gate labels
-`GATE_05M_C3_REVISION_07_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE` — the safety
-architecture is mature and the relational-schema doctrine is defined, ready to
-freeze the specification, while all physical pass claims remain correctly unproven;
-it does **not** mean any vehicle / calibration / brake system / regeneration
-strategy / moving fault test has physically passed. **The owner's downstream
-sequence — controlled specification freeze → `DATABASE MIGRATION` → `RULE ENGINE
-IMPLEMENTATION` → `AUTOMATED CONSTRAINT TESTING` → `SIL/HIL EVIDENCE` — is
-M10/production work and is NOT performed during Rev 07 ingestion** (CLAUDE.md); the
-frozen specification and the relational-schema doctrine stay governance documents
-until the owner opens the production phase. Subgate execution and cell
-authorizations (each a `TestCellAuthorization_ID`, RC-350/354, with per-field units
-+ validation RC-369/385/398, status-dependent required fields RC-399, immutable
-transitions RC-370, the explicit transition table RC-408, activation preconditions
-RC-386, and the `EXPIRED` state RC-388) are defined when the owner sends those
-batches; supplier data (Ford ABS/ESC interface, inverter/BMS regen + isolation
-architecture,
+the fourteen review_71 corrections (Revision 07, RC-398..411 — schema
+normalization + status-model cleanup) and the fourteen review_72 corrections
+(Revision 08, RC-412..425 — schema-completion + relational-integrity; owner items
+1/2/4/7/8/9 already clean/applied) the gate labels
+`GATE_05M_C3_REVISION_08_CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE` — the safety
+architecture is mature and the relational-schema doctrine is complete, a candidate
+for controlled specification freeze, while all physical pass claims remain correctly
+unproven; it does **not** mean any vehicle / calibration / brake system /
+regeneration strategy / moving fault test has physically passed. **The owner's
+downstream sequence — correct the malformed/missing rules → SQL schema + migrations
+→ triggers + cross-record validation → rule-engine functions → negative tests →
+seed unapproved → SIL → HIL → signed evidence — is M10/production work and is NOT
+performed during Rev 07 ingestion** (CLAUDE.md); the specification-freeze candidate
+and the relational-schema doctrine stay governance documents until the owner opens
+the production phase (`DATABASE_IMPLEMENTATION_NOT_YET_COMPLETE` = described, not
+built). Subgate execution and cell authorizations (each a `TestCellAuthorization_ID`,
+RC-350/354, with per-field units + validation RC-369/385/398/412, status-dependent
+required fields RC-399, immutable transitions RC-370, the explicit transition table
+RC-408/413, activation preconditions RC-386, the `EXPIRED` state RC-388, and
+automatic expiry RC-424) are defined when the owner sends those batches; supplier
+data (Ford ABS/ESC interface, inverter/BMS regen + isolation architecture,
 tire/axle/geometry, thermal sensors) remains NeedsSupplierData.

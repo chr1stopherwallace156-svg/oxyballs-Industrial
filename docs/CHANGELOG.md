@@ -5,6 +5,50 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-21 — RH batch 76 ("74:75") + owner review_72: Gate 05M-C3 Revision 08 (RC-412..425)
+
+- Archived RH batch 76 + owner review_72 1:1 (commit `95a4a09`) — owner label
+  "74:75": re-issued review_71 corrections, the Hunter's re-emit ("Global
+  Engineering Safety Amendments (Revision 07)", a nine-section normalized
+  relational-database spec), and a detailed "My RESPONSE" with 20 items
+  designating the status `CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE /
+  DATABASE_IMPLEMENTATION_NOT_YET_COMPLETE`. New PROVENANCE row +
+  `owner_reviews/review_72_batch_76_verdict.md` (20 items verbatim).
+- **14 corrections applied to `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`
+  (Revision 08) + RH01 RC-412..425 + D-008 amendment (review_72):** added TestCell
+  constraints + authority-class eligibility so an `INITIAL_TARGET_PROFILE` value
+  cannot authorize movement (RC-412); the transition TABLE is the source of truth
+  over the diagram (RC-413); expanded SUSPENDED→AUTHORIZED revalidation set +
+  artifact requirement (RC-414); explicit `TestExecution` schema (RC-415);
+  TestResult cardinality corrected — never 1:1 with authorization (RC-416);
+  junction-table composite primary keys (RC-417); `allowed_regen_state` controlled
+  enum (RC-418); `FaultDefinition` registry — the layer-1 parent for `fault_id`,
+  tying to the D-009 error library (RC-419); `VehicleComponentInstance`
+  configuration linkage (RC-420); cross-record equality extended to
+  `IndividualVehicle_ID`/`VehicleBuild_ID`/`PlatformConfiguration_ID` (RC-421);
+  append-only enforcement mechanics — triggers/state-locks/hash-links, INSERT-only
+  (RC-422); cryptographic hash-chain specification (RC-423); automatic expiry
+  behaviour (RC-424); configuration-change transaction rule (RC-425).
+- Owner items 1, 2, 4, 7, 8, 9 targeted the Hunter's OCR-corrupted copy or
+  restated already-applied rules (clean `L_min` RC-340/351; full block list
+  RC-383; status-dependent validation RC-399; ZeroRegenEnvelope RC-375;
+  `ProcedureApproval_ID` RC-355/389; complete sensor-failure response RC-403) —
+  noted, no duplicate RC rows minted.
+- **RC-415/416/417/419/420/421/422/423/425 + the owner's downstream SQL schema →
+  migrations → triggers → rule-engine → negative tests → seed unapproved → SIL →
+  HIL → signed evidence are captured as relational-schema DOCTRINE only — NOT built
+  as an M10 database, rule engine, or test suite during Rev 07 ingestion
+  (CLAUDE.md).** The "Relational-schema doctrine" section was expanded to hold the
+  TestExecution / cardinality / composite-key / vehicle-identity /
+  configuration-change requirements.
+- Deliverable relabelled
+  `GATE_05M_C3_REVISION_08_CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE`
+  (`DATABASE_IMPLEMENTATION_NOT_YET_COMPLETE` = described, not built). Every value
+  stays `INITIAL_TARGET_PROFILE`; nothing Confirmed; no public road / no customer
+  operation / no compliance claim; ODRs untouched.
+
+---
+
 ## 2026-07-21 — RH batch 75 ("73:75") + owner review_71: Gate 05M-C3 Revision 07 (RC-398..411)
 
 - Archived RH batch 75 + owner review_71 1:1 (commit `ac612a2`) — owner label

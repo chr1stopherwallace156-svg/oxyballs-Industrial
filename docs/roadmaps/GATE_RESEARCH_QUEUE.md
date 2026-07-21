@@ -749,7 +749,7 @@ post-edit label
 procedure is ready to be reviewed and controlled, not physical-pass evidence.
 Permits **Gate 05M-C3 only** (after 05M-C2A/B/C).
 
-## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: REVISION 07 — safety architecture mature + relational-schema doctrine defined, ready for controlled specification freeze (owner review_71, batch_75)
+## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: REVISION 08 — safety architecture mature + relational-schema doctrine complete, controlled-specification-freeze candidate (owner review_72, batch_76)
 
 Deliverable `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md` — the **last rung of
 the split 05M-C phase**, only after Gate 05M-C2 is proven. Built as **five linear
@@ -863,6 +863,25 @@ built as M10/production code during ingestion. Status becomes
 `FORMAL_BASELINE_CANDIDATE / SAFETY_ARCHITECTURE_MATURE / REVISION_07_APPLIED /
 RELATIONAL_SCHEMA_DOCTRINE_DEFINED / … / EXACT_BINDING_SCOPE_DEFINED`; post-edit
 label `GATE_05M_C3_REVISION_07_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE`.
+**Revision 08 (review_72, RC-412..425):** the owner designated Revision 07
+`CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE / DATABASE_IMPLEMENTATION_NOT_YET_COMPLETE`,
+then 14 corrections completed the schema — added TestCell constraints +
+authority-class eligibility (RC-412); transition table is source of truth (RC-413);
+expanded SUSPENDED→AUTHORIZED revalidation set + artifact requirement (RC-414);
+`TestExecution` schema (RC-415); TestResult cardinality corrected (RC-416);
+junction-table composite keys (RC-417); `allowed_regen_state` enum (RC-418);
+`FaultDefinition` registry (RC-419); `VehicleComponentInstance` config linkage
+(RC-420); cross-record vehicle-identity equality (RC-421); append-only enforcement
+mechanics (RC-422); hash-chain specification (RC-423); automatic expiry behaviour
+(RC-424); configuration-change transaction rule (RC-425). Owner items 1/2/4/7/8/9
+targeted the Hunter's OCR-corrupted copy or restated already-applied rules.
+RC-415/416/417/419/420/421/422/423/425 + the owner's downstream SQL schema →
+migrations → triggers → rule-engine → negative tests → SIL → HIL → signed evidence
+are relational-schema doctrine only — NOT built as M10/production code during
+ingestion. Status becomes `FORMAL_BASELINE_CANDIDATE / SAFETY_ARCHITECTURE_MATURE /
+REVISION_08_APPLIED / CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE / … /
+CONFIGURATION_CHANGE_TRANSACTION_DEFINED`; post-edit label
+`GATE_05M_C3_REVISION_08_CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE`.
 **NEXT = 05M-C3A execution + Envelope Cell 1 authorization (signed
 `TestCellAuthorization_ID`).** The Hunter's "15 km/h" is an
 `INITIAL_TARGET_PROFILE` pending supplier + engineering approval
