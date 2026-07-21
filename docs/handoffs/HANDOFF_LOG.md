@@ -13,6 +13,65 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — batch 68 ("66:75") + review_65: NEW GATE 05M-C3 (Closed-Area Movement, modular C3A–C3E) + 14 corrections (RC-313..326)
+
+### Session
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 68 "66:75" + review_65 — NEW GATE
+  05M-C3 Closed-Area Low-Speed Movement, modular subgates C3A–C3E; 14 corrections
+  RC-313..326 applied); gate labels
+  `GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW`;
+  awaiting the 05M-C3A execution / Envelope-Cell-1 batch or a supplier reply
+
+### Git state
+
+- Branch: `claude/docs-structure-large-projects-b6vxx5`
+- **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
+- Start commit: `db796b9` — Archive raw RH batch 68 + review_65 1:1
+- End commit: `2228c89` — Reconcile RH batch 68 + review_65
+- Working tree at handoff: clean (everything committed)
+
+### Work performed
+
+- **NEW GATE 05M-C3 created — `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`.**
+  The Hunter applied the batch_67 corrections (RC-307..312) globally and delivered
+  Gate 05M-C3 (Controlled Closed-Area Low-Speed Movement) as five linear subgates:
+  05M-C3A straight-line tracking → 05M-C3B coast-down + foundation brakes (regen
+  disabled) → 05M-C3C restricted regeneration (supplemental only) → 05M-C3D
+  steering-angle / propulsion-envelope map (observation/derating, NOT
+  torque-vectoring) → 05M-C3E closed-area fault + abort. Includes the Telemetry
+  Synchronicity Packet and the Critical Abort Hierarchy.
+- **RC-313..326 applied verbatim:** approved Runout Calculation Record not a
+  hard-coded 50 m (RC-313); cell-by-cell envelope escalation (RC-314); governor
+  proven off-track first (RC-315); split path-deviation observation vs
+  torque-inhibit (RC-316); SAFETY-CRITICAL C3B-004 rewrite — brakes never fight
+  sustained torque (RC-317); contact thermocouples over IR (RC-318); ABS/ESC
+  two-lane rule (RC-319); no "instant/immediate" regen (RC-320); brake-blend
+  continuity/jerk envelope (RC-321); remove premature C3D numbers (RC-322);
+  road-wheel geometry (RC-323); C3E cell-based fault escalation (RC-324); Test
+  Configuration Lock Rule (RC-325); telemetry time-synchronization (RC-326).
+- Post-edit label
+  `GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW`.
+- Files changed (reconciliation commit `2228c89`): `RH01_SECOND_STAGE_FILTER.md`
+  (RC-313..326 + section 76), NEW `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`,
+  `DECISION_REGISTER.md` (D-008 review_65 amendment + Recorded-in list),
+  `RESEARCH_MAP.md`, `GATE_RESEARCH_QUEUE.md`, `CHANGELOG.md`, handoff files. Raw
+  archives + PROVENANCE committed as `db796b9`.
+
+### Verification
+
+- Tests run: none — no test suite exists in this repository
+- Verified vs claimed: batch_68/review_65 archives 1:1 against the owner's chat
+  ("66:75"); the new Gate 05M-C3 deliverable applies all 14 corrections verbatim;
+  nothing marked `SIGNED_PASS`/Confirmed; no movement authorized
+
+*(Full State / Next-action / Forbidden-actions content preserved in git history
+at commit `2228c89`; the current live copy carries the "67:75" duplicate update.)*
+
+---
+
 ## 2026-07-16 — Claude Code — batch 67 ("65:75") + review_64: Gate 05M-C2A/05M-C2B procedure baseline (RC-307..312)
 
 ### Session

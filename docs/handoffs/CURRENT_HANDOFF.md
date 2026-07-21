@@ -4,9 +4,9 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-16
-- Reason for handoff: task complete (batch 68 "66:75" + review_65 — NEW GATE
-  05M-C3 Closed-Area Low-Speed Movement, modular subgates C3A–C3E; 14 corrections
-  RC-313..326 applied); gate labels
+- Reason for handoff: task complete (delivery "67:75" — DUPLICATE re-send of
+  batch 68 "66:75"; PROVENANCE "no separate file" note only, NO new RC rows, NO
+  deliverable changes); Gate 05M-C3 stays
   `GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW`;
   awaiting the 05M-C3A execution / Envelope-Cell-1 batch or a supplier reply
 
@@ -14,54 +14,31 @@
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `db796b9` — Archive raw RH batch 68 + review_65 1:1
+- Start commit: `188bdfc` — Record delivery "67:75" as a duplicate of batch 68
+  (PROVENANCE note only)
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- **NEW GATE 05M-C3 created — `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`.**
-  The Hunter applied the batch_67 corrections (RC-307..312) globally and delivered
-  Gate 05M-C3 (Controlled Closed-Area Low-Speed Movement) as **five linear
-  subgates** the owner recommended: **05M-C3A** straight-line tracking (10-row
-  matrix, four-field per row) → **05M-C3B** coast-down + foundation brakes (regen
-  disabled) → **05M-C3C** restricted regeneration (supplemental only) →
-  **05M-C3D** steering-angle / propulsion-envelope map (observation/derating, NOT
-  torque-vectoring) → **05M-C3E** closed-area fault + abort. Includes the
-  Telemetry Synchronicity Packet and the Critical Abort Hierarchy.
-- **RC-313..326 added; 14 corrections applied verbatim:**
-  - **RC-313** approved Runout Calculation Record + `RunoutCalculation_ID`, not a
-    hard-coded 50 m.
-  - **RC-314** cell-by-cell envelope escalation; each cell a separate
-    `TestCellAuthorization`.
-  - **RC-315** governor proven first via HIL/SIL/lifted-wheel/dyno/lowered ceiling.
-  - **RC-316** split path-deviation observation (C3A-009A) vs torque-inhibit
-    integration (C3A-009B).
-  - **RC-317** SAFETY-CRITICAL: C3B-004 rewritten so brakes never fight sustained
-    propulsion torque; BOS-latency fault only in HIL/bounded, never moving.
-  - **RC-318** contact thermocouples the thermal authority; IR = `SCREENING_EVIDENCE`.
-  - **RC-319** ABS/ESC regen-removal two-lane rule (Lane A Ford-authorized; Lane B
-    conversion-side, no transmit/impersonate).
-  - **RC-320** no "instant/immediate" regen → response window.
-  - **RC-321** brake blending not "linear" → continuity/jerk envelope.
-  - **RC-322** remove premature C3D numbers → `CELL_VALUE_PENDING_APPROVAL`.
-  - **RC-323** C3D road-wheel geometry, not SWA alone.
-  - **RC-324** C3E cell-based fault escalation from the lowest signed cell.
-  - **RC-325** Test Configuration Lock Rule (firmware/calibration/DBC hashes + …).
-  - **RC-326** telemetry data-synchronization proof (common clock, sampling rates …).
-- Status: `MODULAR_ARCHITECTURE_DEFINED / … / RUNOUT_CALCULATION_REQUIRED /
-  NO_ACTIVE_ABS_ESC_AUTHORITY / NO_TORQUE_VECTORING_AUTHORITY / NO_PUBLIC_ROAD /
-  NO_CUSTOMER_OPERATION / NO_NORMAL_DRIVING_AUTHORITY`. Post-edit label:
-  `GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — **the
-  procedure architecture is ready for disciplined engineering review, NOT
-  evidence the physical vehicle has passed** (nothing Confirmed).
-- Files changed (reconciliation commit): `RH01_SECOND_STAGE_FILTER.md`
-  (RC-313..326 + section 76), NEW `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`,
-  `DECISION_REGISTER.md` (D-008 review_65 amendment + Recorded-in list),
-  `RESEARCH_MAP.md`, `GATE_RESEARCH_QUEUE.md`, `CHANGELOG.md`, handoff files. Raw
-  archives `batch_68_gate05mc3_modular_sequence.md`,
-  `review_65_batch_68_verdict.md`, PROVENANCE committed separately as `db796b9`.
+- **Duplicate re-send — no new RC rows, no deliverable changes.** Delivery
+  "67:75" is content-identical to batch_68: the same owner framing (QUESTION
+  ASKED), the same Gate 05M-C3 modular sequence (still carrying the 14 uncorrected
+  items — C3A-001 "≥50 m", C3B-004 "40 Nm then brake", C3C-005/006
+  "instantly"/"immediately", the premature C3D numbers, C3E "faults at 15 km/h"),
+  and the same "MY responds" verdict (the identical 14 corrections). **All 14
+  corrections (RC-313..326) were already applied to
+  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` in batch 68**, so there is nothing new to
+  register or correct.
+- Recorded a PROVENANCE "no separate file" note (content preserved 1:1 in the
+  batch_68 archive); **no re-archive.** Flagged to the owner as a likely mis-send
+  / duplicate paste.
+- Files changed (reconciliation commit): `RH01_SECOND_STAGE_FILTER.md` (section
+  77 — duplicate note, **no new RC rows**), `CHANGELOG.md`, handoff files. The
+  PROVENANCE note was committed separately as `188bdfc`. No changes to
+  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (already correct), `DECISION_REGISTER.md`,
+  `RESEARCH_MAP.md`, or `GATE_RESEARCH_QUEUE.md`.
 - **Nothing ingested; nothing Confirmed; no normal driving; no public road; no
   customer operation; no "certified safe"/compliance claim; ODRs untouched.**
 
@@ -69,10 +46,12 @@
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_68/review_65 archives are 1:1 against the owner's
-  chat ("66:75"); the new Gate 05M-C3 deliverable applies all 14 corrections
-  (RC-313..326) verbatim; the Hunter's global RC-307..312 application is
-  reflected; nothing marked `SIGNED_PASS`/Confirmed; no movement authorized
+- Verified vs claimed: delivery "67:75" confirmed content-identical to batch_68
+  (same framing / same Gate 05M-C3 payload / same 14-correction verdict); the
+  deliverable already holds RC-313..326 (spot-checked: Runout Calculation Record,
+  brakes-never-fight-sustained-torque C3B-004, `CELL_VALUE_PENDING_APPROVAL`,
+  lowest-signed-cell C3E, `SCREENING_EVIDENCE`); no duplicate RC rows added;
+  nothing marked `SIGNED_PASS`/Confirmed; no movement authorized
 
 ## State
 

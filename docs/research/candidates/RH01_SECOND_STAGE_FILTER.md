@@ -5254,3 +5254,51 @@ NeedsSupplierData.
   safe" (RC-224).
 - Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
   no customer operation; no compliance/certification claim; ODRs untouched.
+
+## 77. Delivery "67:75" + owner review (duplicate re-send of batch 68 — NO new corrections, NO new RC rows) (2026-07-16)
+
+Raw source: **no separate file** — content-identical to batch 68, preserved 1:1
+in `docs/research/raw/research_hunter/batch_68_gate05mc3_modular_sequence.md` +
+`docs/research/raw/owner_reviews/review_65_batch_68_verdict.md` (see the
+PROVENANCE "no separate file" note for delivery "67:75").
+**Row additions: NONE.** No new deliverable, no new RC rows, no deliverable
+changes.
+
+### Duplicate re-send
+
+The "67:75" delivery re-sends the batch_68 Gate 05M-C3 message verbatim: the same
+owner framing (QUESTION ASKED — the review_64 items + the C3 subgate
+recommendation), the same RESEARCHER RESPOND (the Gate 05M-C3 modular sequence
+C3A–C3E, still carrying the 14 uncorrected items — C3A-001 "≥50 m", C3B-004
+"40 Nm then brake", C3C-005/006 "instantly"/"immediately", the premature C3D
+numbers, C3E "faults at 15 km/h"), and the same "MY responds" verdict (the
+identical 14 corrections). **All 14 corrections (RC-313..326) were already
+applied to `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` in batch 68**, so there is
+nothing new to register or correct: the deliverable already holds the approved
+Runout Calculation Record (RC-313), cell-by-cell escalation (RC-314), the
+off-track governor proof (RC-315), the observation/torque-inhibit split (RC-316),
+the SAFETY-CRITICAL C3B-004 rewrite (RC-317), contact-thermocouples-over-IR
+(RC-318), the ABS/ESC two-lane rule (RC-319), response-window regen (RC-320), the
+brake-blend continuity/jerk envelope (RC-321), `CELL_VALUE_PENDING_APPROVAL`
+(RC-322), road-wheel geometry (RC-323), cell-based C3E escalation (RC-324), the
+Test Configuration Lock Rule (RC-325), and telemetry time-synchronization
+(RC-326). Flagged to the owner as a likely mis-send / duplicate paste. Recorded
+here (and in PROVENANCE) as an evidence-tracked duplicate delivery, with no
+register inflation and no re-archive.
+
+### Next
+
+Unchanged — **05M-C3A execution + Envelope Cell 1 authorization** (owner
+review_65). Gate 05M-C3 remains
+`GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW`.
+
+### Standing checks
+
+- No deliverable changed; the corrected Gate 05M-C3 wording holds
+  (RC-313..326); duplicate delivery recorded, not re-registered; steering angle
+  observation/derating only, never torque-vectoring (RC-323); factory ABS/ESC
+  never consumed as control without Ford authorization (RC-282/319); brakes never
+  fight sustained torque (RC-317); every number INITIAL_TARGET_PROFILE
+  (RC-267/293/300); nothing `SIGNED_PASS`; never "certified safe" (RC-224).
+- Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
+  no customer operation; no compliance/certification claim; ODRs untouched.

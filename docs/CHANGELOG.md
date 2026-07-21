@@ -5,6 +5,19 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH delivery "67:75": duplicate re-send of batch 68 ("66:75") — no new corrections, no new RC rows
+
+- Recorded delivery "67:75" as a **duplicate re-send of batch_68** (commit
+  `188bdfc`, PROVENANCE "no separate file" note): content-identical owner framing
+  + Gate 05M-C3 modular sequence (still carrying the 14 uncorrected items) + the
+  identical 14-correction verdict. Content preserved 1:1 in the batch_68 archive;
+  no re-archive.
+- **No new RC rows, no deliverable changes** — all 14 corrections (RC-313..326)
+  were already applied to `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` in batch 68. RH01
+  section 77 records the duplicate; flagged to the owner as a likely mis-send.
+- Next unchanged = 05M-C3A execution + Envelope Cell 1 authorization. Nothing
+  Confirmed; no normal driving; no public road; ODRs untouched.
+
 ## 2026-07-16 — RH batch 68 ("66:75") + review_65: NEW GATE 05M-C3 (Closed-Area Movement, modular C3A–C3E) + 14 corrections
 
 - Archived batch_68 (Gate 05M-C3 modular subgate sequence) and review_65 1:1
