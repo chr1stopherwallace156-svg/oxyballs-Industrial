@@ -10,14 +10,24 @@ Can EDTS ship an interactive 3D demonstrator before complete vehicle research, w
 
 ## Answer
 
-Yes — as a **provisional visual lane**:
+Yes — as a **provisional visual lane** implementing the Release 1 handoff architecture:
 
 1. Procedural stylized truck scaled to extracted WB / track / frame width / overhang / BOC only.
-2. Three states: Factory ICE, Deconstruction, EV Proposal.
-3. Per-component select / hide / remove / explode.
-4. Mandatory data-status badges + inspector (ID, applicability, evidence, interfaces, missing props, MEPQ).
-5. Factory vs EV proposal separation (family + color + catalog).
+2. Three states: Factory ICE, Deconstruction (retained translucent / extracted pulse + dependency lines), EV Proposal (muted factory + high-vis L3 pack).
+3. Per-component select / isolate / hide / remove / explode.
+4. Mandatory data-status badges (handoff color table) + passport inspector (evidence ledger, interfaces, KG, MEPQ).
+5. Scene tree hierarchy from catalog.
 6. Catalog-driven metadata so evidence upgrades do not require viewer rewrite.
+
+## Handoff sample rejections
+
+The sample `EDTSDemonstrator.jsx` data that claimed:
+
+- `VERIFIED` frame / cab / Dana axle without ASSERTION_VERIFIED CAD
+- Invented **110 kWh** pack / **250 kW** EDU / **1,100 lb** engine mass
+- Aluminum cab as verified material
+
+…is **rejected**. Architecture and UI schema are admitted; fabricated precision is not.
 
 ## Non-claims
 
