@@ -1,9 +1,11 @@
 # EDTS Implementation Traceability Matrix
 
-**Audit date:** 2026-07-21  
-**Rule:** Each row links a **requirement** → **code artifact** → **test** → **status**. Empty code/test cells mean **MISSING** or **NOT STARTED**.
+**Audit date:** 2026-07-21 (DT-D066 axes)  
+**Rule:** Each row links a **requirement** → **code artifact** → **test** → **status**. Empty code/test cells mean **MISSING** or **NOT STARTED**.  
+**Proof:** Prefer [`IMPLEMENTATION_EVIDENCE.md`](IMPLEMENTATION_EVIDENCE.md) for Implemented / Tested / Verified columns.
 
-Status: 🔵 VERIFIED · ✅ IMPLEMENTED · 🟡 PARTIAL · 🔴 MISSING · ⚪ NOT STARTED
+Presence status: ✅ IMPLEMENTED · 🟡 PARTIAL · 🔴 MISSING · ⚪ NOT STARTED  
+Quality axes: ✅ Implemented · 🧪 Tested · 📐 Verified (see evidence file; legacy 🔵 = ✅+🧪 without 📐)
 
 ---
 

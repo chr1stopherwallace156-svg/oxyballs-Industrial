@@ -1,8 +1,9 @@
 # EDTS Next Implementation Priority
 
-**Based on:** [`IMPLEMENTATION_AUDIT.md`](IMPLEMENTATION_AUDIT.md) + [`MISSING_FEATURES.md`](MISSING_FEATURES.md)  
-**Date:** 2026-07-21  
-**Principle:** Close spec↔code drift before adding new surface area. Prefer one vertical slice to **VERIFIED** over many **PARTIAL** stubs.
+**Based on:** [`IMPLEMENTATION_AUDIT.md`](IMPLEMENTATION_AUDIT.md) · [`IMPLEMENTATION_EVIDENCE.md`](IMPLEMENTATION_EVIDENCE.md) · [`MISSING_FEATURES.md`](MISSING_FEATURES.md)  
+**Date:** 2026-07-21 (DT-D066)  
+**Principle:** Close spec↔code drift before adding new surface area. Prefer one vertical slice to **📐 Verified** over many untested ✅ stubs.  
+**Lock:** Do **P0 GLB** before PostgreSQL, Open3D, ARKit, AprilTags, or quantum research — those systems are easier to evaluate once the viewer runs on a real segmented vehicle.
 
 ---
 
@@ -20,9 +21,9 @@
 | P0.4 | Fail build or CI if manifest nodes missing when GLB path set | MF-004 | Extend `verify:mesh` or add `verify:glb` |
 | P0.5 | Fill `GLB_ACCEPTANCE_CHECKLIST.md` for first asset | Audit gap | Human + script metrics (tris, materials) |
 
-**Acceptance:** Load GLB → hover/select/isolate/search on **≥5** manifest-mapped components → `verifyMeshMapping` pass → checklist signed.
+**Acceptance (📐 for P0 slice):** Load GLB → hover/select/isolate/search on **≥5** manifest-mapped components → `verifyMeshMapping` pass → checklist signed → evidence records updated for EVD-FEAT-003/004/008/010.
 
-**Do not:** Invent mass, assert VERIFIED geometry, or skip QA gates.
+**Do not:** Invent mass, assert OEM STEP / measured geometry, or skip QA gates.
 
 ---
 

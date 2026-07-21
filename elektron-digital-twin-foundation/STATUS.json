@@ -1,8 +1,8 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.39.0",
-  "updated_at": "2026-07-21T07:45:00Z",
+  "version": "0.40.0",
+  "updated_at": "2026-07-21T23:55:00Z",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
   "phase": "EVIDENCE_ACQUISITION_IN_PROGRESS",
@@ -30,8 +30,8 @@
   "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "Implementation audit complete (DT-D065). True state: VPR-2 R3F+JSON implemented; GLB/vPIC/scan/Open3D missing. Next: P0 GLB slice OR P2 vPIC per NEXT_IMPLEMENTATION_PRIORITY.md — do not add features without updating audit.",
-  "next_build_priority": "P0_GLB_VERTICAL_SLICE_OR_P2_VPIC",
+  "next_action": "Evidence ledger active (DT-D066). Axes: Implemented/Tested/Verified. Next: P0 GLB vertical slice before Postgres/Open3D/ARKit. Update IMPLEMENTATION_EVIDENCE.md with every green check. No false OEM STEP claims.",
+  "next_build_priority": "P0_GLB_VERTICAL_SLICE",
   "door_fl_decision": "CANDIDATE_ACQUISITION_RECOMMENDED",
   "door_fl_physical_verification": "REQUIRED_EVENTUALLY",
   "door_fl_sprint": "research/sprints/RL-020_CHASSIS_FRAME_BRIEF_AB.md",
@@ -744,5 +744,21 @@
   "missing_features": "MISSING_FEATURES.md",
   "next_implementation_priority": "NEXT_IMPLEMENTATION_PRIORITY.md",
   "implementation_traceability_matrix": "IMPLEMENTATION_TRACEABILITY_MATRIX.md",
-  "visible_progress_r2_sprint_034": "research/sprints/RL-034_IMPLEMENTATION_AUDIT.md"
+  "visible_progress_r2_sprint_034": "research/sprints/RL-034_IMPLEMENTATION_AUDIT.md",
+  "decision_dt_d066": "decisions/DT-D066_IMPLEMENTATION_EVIDENCE_MATURITY.json",
+  "implementation_evidence": "IMPLEMENTATION_EVIDENCE.md",
+  "maturity_axes": "IMPLEMENTED_TESTED_VERIFIED",
+  "category_progress": {
+    "viewer": 90,
+    "vehicle_assets": 10,
+    "runtime_mapping": 25,
+    "vin_pipeline": 0,
+    "mobile_capture": 0,
+    "registration": 0,
+    "digital_twin_evidence_ui": 35,
+    "persistence": 5,
+    "vpr2_test_harness": 15
+  },
+  "hard_rule_no_false_oem_step": true,
+  "visible_progress_r2_sprint_035": "research/sprints/RL-035_IMPLEMENTATION_EVIDENCE_MATURITY.md"
 }

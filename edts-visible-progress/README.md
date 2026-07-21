@@ -6,7 +6,12 @@ Real **React Three Fiber** WebGL scene (not CSS cards). Procedural truck-shaped 
 
 ## Audit (implementation truth)
 
-Foundation repo audit (DT-D065): [`IMPLEMENTATION_AUDIT.md`](../elektron-digital-twin-foundation/IMPLEMENTATION_AUDIT.md) · [`MISSING_FEATURES.md`](../elektron-digital-twin-foundation/MISSING_FEATURES.md) · [`NEXT_IMPLEMENTATION_PRIORITY.md`](../elektron-digital-twin-foundation/NEXT_IMPLEMENTATION_PRIORITY.md)
+Foundation (DT-D065 / DT-D066):
+
+- [`IMPLEMENTATION_AUDIT.md`](../elektron-digital-twin-foundation/IMPLEMENTATION_AUDIT.md)
+- [`IMPLEMENTATION_EVIDENCE.md`](../elektron-digital-twin-foundation/IMPLEMENTATION_EVIDENCE.md) — Implemented / Tested / Verified
+- [`MISSING_FEATURES.md`](../elektron-digital-twin-foundation/MISSING_FEATURES.md)
+- [`NEXT_IMPLEMENTATION_PRIORITY.md`](../elektron-digital-twin-foundation/NEXT_IMPLEMENTATION_PRIORITY.md) — **P0 = real GLB**
 
 ## Audit (prototype scope)
 

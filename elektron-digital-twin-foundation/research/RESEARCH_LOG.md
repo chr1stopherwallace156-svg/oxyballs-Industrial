@@ -759,3 +759,23 @@ DT-D064 — `OPEN_SOURCE_RESEARCH_PACK_ACCEPTED_BACKLOG_NOT_EXECUTED`.
 
 DT-D065 — `AUDIT_COMPLETE_PRIORITIZE_P0_GLB_OR_P2_VPIC`.
 
+---
+
+## RL-035 — Implementation evidence ledger & three-axis maturity
+
+- **Date:** 2026-07-21
+- **Layer:** honesty / process
+- **Agent:** Cursor Cloud Agent
+- **Question:** Separate Implemented vs Tested vs Verified; require proof for green checks?
+
+### Findings
+
+1. `IMPLEMENTATION_EVIDENCE.md` + audit axes + category % admitted.
+2. Most VPR-2 features: ✅ Implemented, ✖ Tested, ✖ Verified.
+3. Mesh smoke + build: ✅ 🧪 but not 📐 engineering AC.
+4. P0 GLB remains highest-value unlock.
+
+### Status
+
+DT-D066 — `EVIDENCE_LEDGER_ACTIVE_P0_GLB_FIRST`.
+

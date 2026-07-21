@@ -1,50 +1,79 @@
 # EDTS Implementation Audit
 
-**Audit date:** 2026-07-21  
+**Audit date:** 2026-07-21 (revised DT-D066 — three-axis maturity + evidence)  
 **Method:** Repository inspection — specifications compared to files, imports, runtime wiring, builds, and automated checks. **Documentation alone does not count as implementation.**  
 **Canonical config:** `CFG-2019-F450-REG-CAB-4X2-60CA-DRW`  
-**Auditor basis:** `git` tree at branch `cursor/reference-lock-l00-d881`; commands run: `npm run verify:mesh`, `npm run build` (VPR-2).
+**Auditor basis:** `git` tree at branch `cursor/reference-lock-l00-d881`; commands run: `npm run verify:mesh`, `npm run build` (VPR-2).  
+**Evidence ledger:** [`IMPLEMENTATION_EVIDENCE.md`](IMPLEMENTATION_EVIDENCE.md) — every ✅ must cite code / test / acceptance.
 
-## Status legend
+## Hard rules (permanent)
+
+1. **Documentation ≠ implementation.**  
+2. **Implemented ≠ Tested ≠ Verified** — three independent axes (see below).  
+3. **No false OEM STEP / measured claims.** Placeholders stay labeled; visualization ≠ metrology.  
+4. Viewer framework success does **not** imply digital-twin completeness.
+
+## Status legend (presence)
 
 | Symbol | Status | Meaning |
 |---|---|---|
-| 🔵 | **VERIFIED** | Implemented **and** covered by automated acceptance test in repo |
-| ✅ | **IMPLEMENTED** | Code exists, builds, wired in app or CLI — manual/smoke only |
-| 🟡 | **PARTIAL** | Some code or schema exists; incomplete or not wired |
-| 🔴 | **MISSING** | Required by accepted spec/decision; no implementation found |
-| ⚪ | **NOT STARTED** | Planned in research/backlog only; explicitly not executed |
+| ✅ | **IMPLEMENTED** | Code exists, builds, wired |
+| 🟡 | **PARTIAL** | Incomplete or not fully wired |
+| 🔴 | **MISSING** | Spec/decision requires it; no code |
+| ⚪ | **NOT STARTED** | Research/backlog only |
+
+## Maturity axes (quality — orthogonal to presence)
+
+| Axis | Symbol | Meaning |
+|---|---|---|
+| Implemented | ✅ / ✖ | Code present and wired |
+| Tested | 🧪 / ✖ | Automated or recorded test in repo |
+| Verified | 📐 / ✖ | Meets engineering acceptance criteria |
+
+**Example:** Box3 camera framing → Implemented ✅ · Tested ✖ · Verified ✖ (unproven on large GLBs).  
+**Example:** `verifyMeshMapping` smoke → Implemented ✅ · Tested 🧪 · Verified ✖ (not full SPEC-3D-001 gate).
+
+Legacy single-cell 🔵 meant “implemented + smoke test” — prefer explicit ✅🧪📐 columns in new rows; see evidence file.
+
+## Category progress
+
+| Category | Progress |
+|---|---:|
+| Viewer | 90% |
+| Vehicle assets | 10% |
+| Runtime mapping | 25% |
+| VIN pipeline | 0% |
+| Mobile capture | 0% |
+| Registration | 0% |
+| Digital twin evidence UI | 35% |
+| Persistence | 5% |
+| VPR-2 test harness | 15% |
+
+Highest-value unlock: **real SPEC-3D-001 GLB** (assets 10% → unlocks selection/isolation/mapping proof).
 
 ---
 
 ## 1. VPR-2 viewer & interaction (`edts-visible-progress/`)
 
-| Feature | Expected | Status | Evidence | Notes |
-|---|---|---|---|---|
-| R3F Canvas | React Three Fiber WebGL scene | ✅ | `src/App.tsx`, `src/components/Scene.tsx` | Builds; dev server runs |
-| Procedural truck meshes | Placeholder geometry until GLB | ✅ | `Scene.tsx` (`ROLE_MAP`, 19 `*Part` components) | Not OEM/GLB |
-| GLB loading | `useGLTF` / GLTFLoader | 🔴 | **No import** in `src/` | Spec gate exists; no loader |
-| Real GLB asset | SPEC-3D-001 `.glb` in Tier-2 | 🔴 | `public/assets/glb/` — README only | `glb_status: NOT_ACQUIRED` |
-| Mesh mapping manifest | 15 `GEO_*` → `comp_id` | ✅ | `src/data/mesh_mapping_manifest.json` | Static JSON |
-| `verifyMeshMapping()` | Node parser for GLB admit | 🔵 | `src/data/verifyMeshMapping.ts`, `scripts/smoke-verify-mesh.mjs` | `npm run verify:mesh` passes; **not** called from app |
-| Runtime manifest ingest | GLB nodes → registry | 🔴 | `ingestManifestIntoRegistry()` **uncalled** | Scene uses `registerMesh()` per procedural part |
-| Mesh registry | `comp_id` ↔ `geometry_role` | 🟡 | `src/data/meshRegistry.ts`, `Scene.tsx` `registerMesh` | Re-exports dead; no GLB binding |
-| Hover | Pointer over + label | ✅ | `Scene.tsx` `Selectable` | R3F pointer events |
-| Selection | Click select + miss clear | ✅ | `Scene.tsx`, `App.tsx` `onPointerMissed` | |
-| Dim unrelated | Opacity on non-selected | ✅ | `DemoContext.tsx`, `Scene.tsx` | |
-| Isolation | Filter visible components | ✅ | `DemoContext.tsx`, `SidePanel.tsx` | |
-| Explode | Slider × `explode_vector` | ✅ | `Toolbar.tsx`, `GEO.json`, `Scene.tsx` | |
-| Hide / remove | Storyboard + toolbar | ✅ | `DemoContext.tsx`, `timeline.json` | |
-| Camera framing | Box3 fit + lerp | ✅ | `Scene.tsx` `FocusCamera` | Search + scene tree + timeline focus |
-| Search | Filter + focus camera | ✅ | `ModePanels.tsx` `SearchBar` | |
-| Evidence heatmap | Material color by `data_status` | ✅ | `Scene.tsx`, `ModePanels.tsx` | **Not** custom GLSL; not 5-axis maturity colors |
-| Storyboard timeline | Step slider + remove/focus | ✅ | `ModePanels.tsx`, `stores/timeline.json` | `STORYBOARD_ONLY` — not WSM procedures |
-| Simulation panel | Mass display | 🟡 | `ModePanels.tsx`, `massEngine.ts` | Always `BLOCKED_UNTIL_MASS_EVIDENCE` |
-| Maturity passport | Sidebar 5-axis matrix | ✅ | `SidePanel.tsx`, `joinCatalog.ts`, `EVD.json` | |
-| Evidence ledger UI | Citations in sidebar | ✅ | `SidePanel.tsx` | From JSON |
-| Vehicle states | Factory / Decon / EV | ✅ | `DemoContext.tsx`, `manifest.json` | |
-| Unit / E2E tests (viewer) | Vitest/Playwright | 🔴 | **No** `*.test.ts` in VPR-2 | Only mesh smoke script |
-| Typecheck + production build | `tsc -b && vite build` | 🔵 | `package.json` `build` | Passes on audit date |
+| Feature | Impl | Test | Verif | Evidence ID | Notes |
+|---|---|---|---|---|---|
+| R3F Canvas + OrbitControls | ✅ | ✖ | ✖ | EVD-FEAT-001 | Framework layer — not “twin complete” |
+| Procedural truck meshes | ✅ | ✖ | ✖ | EVD-FEAT-002 | PLACEHOLDER — not OEM STEP |
+| GLB loading (`useGLTF`) | ✖ | ✖ | ✖ | — | Highest-value gap |
+| Real GLB asset (Tier-2) | ✖ | ✖ | ✖ | — | `glb_status: NOT_ACQUIRED` |
+| Mesh mapping manifest | ✅ | 🧪 | ✖ | EVD-FEAT-007 | Static map |
+| `verifyMeshMapping()` offline | ✅ | 🧪 | ✖ | EVD-FEAT-008 | Smoke only; not full SPEC gate |
+| Runtime GEO_ → CFGCOMP ingest | ✖ | ✖ | ✖ | — | `ingestManifestIntoRegistry` uncalled |
+| Mesh registry (procedural) | ✅ | ✖ | ✖ | EVD-FEAT-010 | Partial — no GLB binding |
+| Hover / select / isolate / explode | ✅ | ✖ | ✖ | EVD-FEAT-003 | Unproven on real GLB |
+| Box3 camera framing | ✅ | ✖ | ✖ | EVD-FEAT-004 | May fail on large assemblies |
+| Search | ✅ | ✖ | ✖ | EVD-FEAT-003 | |
+| Evidence heatmap (`data_status`) | ✅ | ✖ | ✖ | — | Not 5-axis maturity colors |
+| Storyboard timeline | ✅ | ✖ | ✖ | — | Not WSM procedures |
+| Simulation / mass panel | ✅ | ✖ | ✖ | EVD-FEAT-011 | Correctly BLOCKED |
+| Maturity passport / ledger | ✅ | ✖ | ✖ | EVD-FEAT-005 | JSON evidence only |
+| Viewer unit/E2E tests | ✖ | ✖ | ✖ | — | |
+| Production build | ✅ | 🧪 | ✖ | EVD-FEAT-009 | Compile ≠ engineering AC |
 
 ---
 
@@ -212,9 +241,10 @@ No `npm test` script exists in VPR-2.
 
 ## Related artifacts
 
+- [`IMPLEMENTATION_EVIDENCE.md`](IMPLEMENTATION_EVIDENCE.md) — proof ledger (✅ / 🧪 / 📐)  
 - [`MISSING_FEATURES.md`](MISSING_FEATURES.md) — consolidated gap list  
 - [`NEXT_IMPLEMENTATION_PRIORITY.md`](NEXT_IMPLEMENTATION_PRIORITY.md) — recommended build order  
 - [`IMPLEMENTATION_TRACEABILITY_MATRIX.md`](IMPLEMENTATION_TRACEABILITY_MATRIX.md) — requirement → code → test  
 - VPR-2 self-audit: [`edts-visible-progress/PROTOTYPE_STATUS.md`](../edts-visible-progress/PROTOTYPE_STATUS.md)
 
-**Rule going forward:** New specs must cite this audit or update it in the same PR that adds implementation.
+**Rule going forward:** New specs must cite this audit or update it in the same PR that adds implementation. Promoting a feature to 📐 Verified requires an evidence record update.

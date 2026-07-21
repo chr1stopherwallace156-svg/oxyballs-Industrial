@@ -1114,3 +1114,20 @@ Append-only record of digital twin foundation decisions.
   5. Rule: documentation ≠ implementation; update audit with each implementation PR
 
 ---
+
+## DT-D066 — Three-axis maturity + IMPLEMENTATION_EVIDENCE ledger
+
+- **Change-control record:** [`decisions/DT-D066_IMPLEMENTATION_EVIDENCE_MATURITY.json`](decisions/DT-D066_IMPLEMENTATION_EVIDENCE_MATURITY.json)
+- **decision_id:** `DT-D066`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-035`
+- **recommended_decision:** `EVIDENCE_LEDGER_ACTIVE_P0_GLB_FIRST`
+- **decision:**
+  1. Track every feature on **Implemented / Tested / Verified** independently
+  2. Admit `IMPLEMENTATION_EVIDENCE.md` — every ✅ cites code, test, acceptance
+  3. Publish numeric category progress (Viewer 90% · Assets 10% · Mapping 25% · VIN/scan/ICP 0%)
+  4. Permanent: **no false OEM STEP / measured claims**; viewer ≠ twin complete
+  5. Confirm **P0 GLB** before PostgreSQL / Open3D / ARKit / AprilTags / quantum
+
+---
