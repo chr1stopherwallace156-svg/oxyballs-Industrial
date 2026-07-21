@@ -13,6 +13,63 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — batch 66 ("64:75") + review_63: Gate 05M-C2A/05M-C2B baseline-candidate + 10 corrections (RC-297..306)
+
+### Session
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 66 "64:75" + review_63 — Gate
+  05M-C2A/05M-C2B baseline-candidate; 10 record-integrity/measurement-authority
+  corrections RC-297..306 applied); gate pair labels
+  `GATE_05M_C2A_C2B_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW`; awaiting the
+  Gate 05M-C3 batch or a supplier reply
+
+### Git state
+
+- Branch: `claude/docs-structure-large-projects-b6vxx5`
+- **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
+- Start commit: `30ee754` — Archive raw RH batch 66 + review_63 1:1
+- End commit: `0a5c13a` — Reconcile RH batch 66 + review_63
+- Working tree at handoff: clean (everything committed)
+
+### Work performed
+
+- **Baseline-candidate batch — RC-297..306 applied verbatim to
+  `GATE05M_C2_RESTRICTED_CREEP.md`.** The Hunter applied the framing corrections
+  (bounded fault injection RC-297; brake/steering pre-movement interlock RC-298);
+  the owner added eight verdict corrections: four-field approval record (RC-299,
+  GLOBAL rule); expanded Numeric Threshold Authority linkage (RC-300); software
+  Restricted Creep Torque Clamp (RC-301); dual-channel APPS plausibility
+  (RC-302); torque-rate ≠ current-response (RC-303); electrical CAN passivity
+  (RC-304); C2B rollback containment + hill-hold ≠ parking-hold (RC-305); new
+  05M-C2A-010B assistance-interlock inhibition test (RC-306).
+- Status: 05M-C2A adds `BASELINE_CANDIDATE / PROCEDURE_REVIEW_REQUIRED /
+  BRAKE_ASSIST_INTERLOCK_REQUIRED / STEERING_ASSIST_INTERLOCK_REQUIRED /
+  NUMERIC_LIMITS_INITIAL_TARGET_PROFILE / CONTROLLED_FAULT_INJECTION_ONLY /
+  NO_PHYSICAL_PASS_CLAIM_UNTIL_EXECUTED`; 05M-C2B adds
+  `UNLOCKS_ONLY_AFTER_C2A_SIGNED_PASS / ROLLBACK_CONTAINMENT_PLAN_REQUIRED /
+  SECONDARY_RESTRAINT_REQUIRED / TEMPORARY_HILL_HOLD_ONLY /
+  PARKING_HOLD_AUTHORITY_NOT_GRANTED`. Label
+  `GATE_05M_C2A_C2B_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW`.
+- Files changed (reconciliation commit `0a5c13a`): `RH01_SECOND_STAGE_FILTER.md`
+  (RC-297..306 + section 74), `GATE05M_C2_RESTRICTED_CREEP.md`,
+  `DECISION_REGISTER.md` (D-008 review_63 amendment), `RESEARCH_MAP.md`,
+  `GATE_RESEARCH_QUEUE.md`, `CHANGELOG.md`, handoff files. Raw archives +
+  PROVENANCE committed as `30ee754`.
+
+### Verification
+
+- Tests run: none — no test suite exists in this repository
+- Verified vs claimed: batch_66/review_63 archives 1:1 against the owner's chat
+  ("64:75"); all ten corrections (RC-297..306) applied verbatim; nothing marked
+  `SIGNED_PASS`/Confirmed; no movement authorized
+
+*(Full State / Next-action / Forbidden-actions content preserved in git history
+at commit `0a5c13a`; the current live copy carries the batch 67 update.)*
+
+---
+
 ## 2026-07-16 — Claude Code — batch 65 ("63:75") + review_62: Gate 05M-C2A/05M-C2B convergence (corrections 3/4/5 applied, no new corrections)
 
 ### Session

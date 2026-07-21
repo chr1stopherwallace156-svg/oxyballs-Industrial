@@ -259,6 +259,30 @@ later entry that references it.
   baseline, NOT evidence the physical vehicle has passed (nothing Confirmed).
   Next = Gate 05M-C3 with speed/ramp under engineering manual + proof artifacts
   only (RC-291/293/300).
+- **Amendment (owner review_64, batch_67 "65:75", RC-307..312): Gate
+  05M-C2A/05M-C2B procedure baseline — final make-it-impossible-to-misread
+  pass.** The Hunter converged on all of RC-297..306 (incl. the split
+  05M-C2A-005A/005B rows); the owner added six corrections plus a new
+  `INVALID_TEST` signoff value (RC-299 ext.): the APPS preconditions read "within
+  their approved operating windows", not "completely valid" (RC-307);
+  phase-current response is judged against the supplier tracking envelope with
+  expected latency/filtering/bandwidth included, not "without lagging" (RC-308);
+  the E-stop forces the supplier-defined torque-inhibit + HV-isolation response,
+  contactor coil-supply interruption only where the architecture requires it —
+  not a universal rule (RC-309); Neutral is defined by zero propulsion torque,
+  not a universal ban on bridge switching (RC-310); 05M-C2B gains a rollback
+  abort rule — exceed the approved distance/speed → latch `FAIL`/`NEEDS_REVIEW`,
+  no automatic second attempt (RC-311); and the brake-hold uses the "approved
+  test torque profile" (≤10 Nm), not "full torque application" (RC-312). 05M-C2A
+  upgrades `PROCEDURE_REVIEW_REQUIRED` → `FORMAL_ENGINEERING_REVIEW_REQUIRED` and
+  adds `DUAL_CHANNEL_APPS_PLAUSIBILITY_REQUIRED / CAN_1_ELECTRICALLY_PASSIVE_ONLY
+  / PROCEDURE_APPROVAL_REQUIRED / EXECUTION_NOT_YET_PROVEN /
+  RESULT_SIGNOFF_NOT_YET_ELIGIBLE`; 05M-C2B adds `ROLLBACK_ABORT_RULE_REQUIRED /
+  PARKING_RESTRAINT_AUTHORITY_NOT_GRANTED`. Post-edit label:
+  `GATE_05M_C2A_C2B_PROCEDURE_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — the
+  procedure is ready to be reviewed and controlled, NOT evidence the physical
+  vehicle has passed (nothing Confirmed). Next = Gate 05M-C3, speed/ramp under
+  engineering manual + proof artifacts only (RC-291/293/300).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the

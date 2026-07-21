@@ -5,6 +5,38 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 67 ("65:75") + review_64: Gate 05M-C2A/05M-C2B procedure baseline + 6 pre-lock corrections
+
+- Archived batch_67 (Gate 05M-C2A/05M-C2B procedure-baseline re-emit) and
+  review_64 1:1 (commit `8d6a94b`); PROVENANCE row inserted newest-first. Owner:
+  "this is now legitimately strong enough to call a formal baseline candidate."
+- **Convergence:** the Hunter now carries all of RC-297..306 (incl. the split
+  05M-C2A-005A/005B torque-command vs phase-current rows). **Two residuals**
+  recorded, not re-registered: the draft still shows "Approved by <role>"
+  (RC-299) and lacks an explicit Numeric Threshold Authority Rule (RC-300) — both
+  already in the deliverable. The owner extended RC-299 with a new `INVALID_TEST`
+  signoff value and RC-300's authority list with "release".
+- **RC-307..312 added; six corrections applied verbatim to
+  `GATE05M_C2_RESTRICTED_CREEP.md`:** APPS preconditions "within their approved
+  operating windows", not "completely valid" (RC-307); phase-current response
+  judged against the supplier tracking envelope with expected latency included
+  (RC-308); architecture-dependent E-stop, not universal contactor interruption
+  (RC-309); Neutral defined by zero propulsion torque, not a universal switching
+  ban (RC-310); C2B rollback abort rule — latch `FAIL`/`NEEDS_REVIEW`, no
+  automatic second attempt (RC-311); brake-hold "approved test torque profile",
+  not "full torque application" (RC-312).
+- Status: 05M-C2A upgrades to `FORMAL_ENGINEERING_REVIEW_REQUIRED` and adds
+  `DUAL_CHANNEL_APPS_PLAUSIBILITY_REQUIRED / CAN_1_ELECTRICALLY_PASSIVE_ONLY /
+  PROCEDURE_APPROVAL_REQUIRED / EXECUTION_NOT_YET_PROVEN /
+  RESULT_SIGNOFF_NOT_YET_ELIGIBLE`; 05M-C2B adds `ROLLBACK_ABORT_RULE_REQUIRED /
+  PARKING_RESTRAINT_AUTHORITY_NOT_GRANTED`. Post-edit label:
+  `GATE_05M_C2A_C2B_PROCEDURE_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — the
+  procedure is ready to be reviewed and controlled, not physical-pass evidence.
+- RH01 section 75; D-008 amended (review_64); RESEARCH_MAP + GATE_RESEARCH_QUEUE
+  updated; handoff rotated. Next = Gate 05M-C3 (speed/ramp under engineering
+  manual + proof artifacts only). Nothing Confirmed; no normal driving; no
+  public road; ODRs untouched.
+
 ## 2026-07-16 — RH batch 66 ("64:75") + review_63: Gate 05M-C2A/05M-C2B baseline-candidate + 10 record-integrity/measurement-authority corrections
 
 - Archived batch_66 (Gate 05M-C2A/05M-C2B baseline-candidate re-emit) and

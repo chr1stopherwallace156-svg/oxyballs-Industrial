@@ -730,14 +730,26 @@ no `SIGNED_PASS` until `EXECUTED` (RC-299); expanded Numeric Threshold Authority
 linkage (RC-300); software `Restricted Creep Torque Clamp` not "hard/absolute
 clamp" (RC-301); dual-channel APPS plausibility (RC-302); torque-rate ≠
 current-response (RC-303); electrical CAN_1 passivity (RC-304); C2B Rollback
-Containment Rule + hill-hold ≠ parking-hold (RC-305). Status adds
-`BASELINE_CANDIDATE / PROCEDURE_REVIEW_REQUIRED / *_INTERLOCK_REQUIRED /
-CONTROLLED_FAULT_INJECTION_ONLY / NO_PHYSICAL_PASS_CLAIM_UNTIL_EXECUTED`;
-post-edit label `GATE_05M_C2A_C2B_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW`
-— a procedure baseline, not physical-pass evidence. Permits **Gate 05M-C3 only**
-(after 05M-C2A/B/C).
+Containment Rule + hill-hold ≠ parking-hold (RC-305). Pre-lock corrections
+(review_64, RC-307..312 + `INVALID_TEST`): measurable APPS operating windows not
+"completely valid" (RC-307); phase-current response inside a supplier tracking
+envelope with expected latency, split as 05M-C2A-006A/006B (RC-308);
+architecture-dependent E-stop, not universal contactor interruption (RC-309);
+Neutral by zero propulsion torque, not a universal switching ban (RC-310); C2B
+rollback abort rule latching `FAIL`/`NEEDS_REVIEW`, no automatic second attempt
+(RC-311); brake-hold "approved test torque profile" not "full torque" (RC-312).
+Status adds `BASELINE_CANDIDATE / FORMAL_ENGINEERING_REVIEW_REQUIRED /
+DUAL_CHANNEL_APPS_PLAUSIBILITY_REQUIRED / *_INTERLOCK_REQUIRED /
+CAN_1_ELECTRICALLY_PASSIVE_ONLY / CONTROLLED_FAULT_INJECTION_ONLY /
+PROCEDURE_APPROVAL_REQUIRED / EXECUTION_NOT_YET_PROVEN /
+RESULT_SIGNOFF_NOT_YET_ELIGIBLE / NO_PHYSICAL_PASS_CLAIM_UNTIL_EXECUTED`; 05M-C2B
+adds `ROLLBACK_ABORT_RULE_REQUIRED / PARKING_RESTRAINT_AUTHORITY_NOT_GRANTED`;
+post-edit label
+`GATE_05M_C2A_C2B_PROCEDURE_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — the
+procedure is ready to be reviewed and controlled, not physical-pass evidence.
+Permits **Gate 05M-C3 only** (after 05M-C2A/B/C).
 
-## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: NEXT (owner review_63)
+## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: NEXT (owner review_64)
 
 The **last rung of the split 05M-C phase** — controlled closed-area low-speed
 movement, only after Gate 05M-C2 (05M-C2A flat-ground creep → 05M-C2B

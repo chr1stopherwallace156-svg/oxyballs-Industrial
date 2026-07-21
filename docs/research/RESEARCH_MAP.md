@@ -371,20 +371,20 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_63):** **Gate 05M-C3 — Controlled
+**Next expected batch (owner review_64):** **Gate 05M-C3 — Controlled
 Closed-Area Low-Speed Movement** — the last rung of the split 05M-C phase
-(Decision Register **D-008**, amended review_63), only after Gate 05M-C2
+(Decision Register **D-008**, amended review_64), only after Gate 05M-C2
 (05M-C2A flat-ground creep → 05M-C2B incline/rollback → 05M-C2C faulted-creep
-recovery) is proven. Owner review_63: Gate 05M-C2A/C2B is a **baseline
-candidate** — after the ten record-integrity/measurement-authority corrections
-(RC-297..306) it labels
-`GATE_05M_C2A_C2B_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW`, a procedure
-baseline, NOT physical-pass evidence (nothing Confirmed). Owner: proceed to
-05M-C3 "but only as controlled closed-area movement with speed/ramp targets
-still under engineering manual and artifact" — the Hunter's "15 km/h" is an
-`INITIAL_TARGET_PROFILE` pending supplier + engineering approval
-(RC-267/291/293/300 — no auto-unlock, explicit manual calibration + completed
-proof artifacts).
+recovery) is proven. Owner review_64: Gate 05M-C2A/C2B is a **procedure
+baseline** — after the batch_66 record-integrity corrections (RC-297..306) and
+the batch_67 pre-lock corrections (RC-307..312 + `INVALID_TEST`) it labels
+`GATE_05M_C2A_C2B_PROCEDURE_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW`, "the
+procedure is ready to be reviewed and controlled, not that the physical vehicle
+has passed it" (nothing Confirmed). Owner: proceed to 05M-C3 "only as controlled
+closed-area movement with speed/ramp targets still under engineering manual and
+artifact" — the Hunter's "15 km/h" is an `INITIAL_TARGET_PROFILE` pending
+supplier + engineering approval (RC-267/291/293/300 — no auto-unlock, explicit
+manual calibration + completed proof artifacts).
 Engineer-gated, live-HV, **closed controlled area only, no public road, no
 customer operation, no normal-driving authority**; the Ground Movement
 Precondition (RC-285) + predictable-traction surface (RC-283) + spotters +
@@ -409,7 +409,11 @@ pre-movement interlock + tested inhibition (RC-298/306), four-field approval
 record (RC-299), expanded numeric-authority linkage (RC-300), software Restricted
 Creep Torque Clamp (RC-301), dual-channel APPS (RC-302), torque-rate ≠
 current-response (RC-303), electrical CAN passivity (RC-304), C2B rollback
-containment + hill-hold ≠ parking-hold (RC-305). **Gate 05M-C1**
+containment + hill-hold ≠ parking-hold (RC-305); review_64 pre-lock corrections:
+measurable APPS windows (RC-307), current-loop latency envelope (RC-308),
+architecture-dependent E-stop (RC-309), zero-propulsion-torque Neutral (RC-310),
+rollback abort rule (RC-311), test-torque-not-full-torque brake-hold (RC-312).
+**Gate 05M-C1**
 (`GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`) is
 `COUPLED_DRIVELINE_LIFTED_WHEEL_READINESS_DEFINED` / `RATED_LIFT_OR_STANDS_REQUIRED`
 / `NO_GROUND_CONTACT` — the first coupled test, wheels lifted (5-row matrix

@@ -405,6 +405,12 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-304 | **Define CAN_1 passivity electrically, not "zero errors" (owner review_63)**: a listen-only analyzer may observe pre-existing OEM network errors it did not cause → "zero network collisions or errors are injected" → **"instrumentation produces no dominant-bit transmission, acknowledgement, error flag, wake request, diagnostic request, or other active influence on CAN_1; any observed OEM network errors are separately logged and attributed — their mere presence does not prove instrumentation transmission"** | batch_66 (imprecise passivity) | n/a — network-integrity rule | **NetworkIntegrity / ElectricalPassivity** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-012) — extends RC-172/230/282 — lanes L7 |
 | RC-305 | **C2B Rollback Containment Rule + hill-hold ≠ parking-hold (owner review_63)**: before any incline service-brake release, **downhill runout clear + independent secondary restraint/capture + remote E-stop active + driver ready to reapply brake + max rollback distance defined + max hold duration defined + thermal limits defined + no reliance on traction torque as the sole parking restraint**; temporary hill-hold assistance and a parking-hold function are NOT the same — the traction system must not substitute for a mechanical parking brake unless formally designed and approved | batch_66 (unbounded incline rollback test) | supplier/engineering rollback + hold limits — **NeedsSupplierData** | **ControlsSafety / RollbackContainment** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2B + status `ROLLBACK_CONTAINMENT_PLAN_REQUIRED`/`SECONDARY_RESTRAINT_REQUIRED`/`TEMPORARY_HILL_HOLD_ONLY`/`PARKING_HOLD_AUTHORITY_NOT_GRANTED`) — lanes L7 |
 | RC-306 | **Prove the assistance interlock inhibits torque — new test 05M-C2A-010B (owner review_63)**: verifying assistance is present is not enough → via an approved bounded simulation / low-voltage method, assert brake-assist-not-ready · steering-assist-not-ready · aux-voltage-below-approved-window and require **the VCU stays torque-inhibited and records the specific blocking reason**; any traction enable while a required assistance-ready state is invalid is blocked — the prerequisite becomes a tested interlock, not an assumption | batch_66 (interlock assumed, not tested) | supplier assist-ready registers — **NeedsSupplierData** | **ControlsSafety / TestedInterlock** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-011B) — extends RC-298 — lanes L7 |
+| RC-307 | **"Completely valid" is not measurable — APPS preconditions need operating windows (owner review_64, extends RC-295)**: "all brake/steering preconditions remain completely valid" → **"all required brake-assist, steering-assist, auxiliary-voltage, and motion-authority prerequisites remain within their approved operating windows"** — the measurability rule (RC-295) applies to the new dual-channel APPS rule too | batch_67 (unmeasurable "completely valid") | supplier assist operating windows — **NeedsSupplierData** | **MeasurementDoctrine / OperatingWindows** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (APPS Dead-Band Acceptance Rule) — extends RC-295/302 — lanes L7 |
+| RC-308 | **Current-loop latency belongs inside an approved envelope, not "without lagging" (owner review_64, extends RC-303)**: "phase current rise must dynamically map to `dT_command/dt` without lagging or oscillating" is too direct — lag from command filtering, current-loop bandwidth, torque estimation, bus voltage, motor speed, and sampling delay is expected → **"measured inverter torque feedback and phase-current response must remain within the supplier-approved dynamic tracking envelope for the commanded `dT_command/dt` profile; expected latency, filtering, current-loop bandwidth, and measurement delay are included in the acceptance envelope"**; blocked = phase-current overshoot beyond envelope / sustained oscillation / unexplained delay beyond the response window / torque-feedback divergence / command-current polarity mismatch | batch_67 (over-strict current tracking) | supplier tracking envelope + latency spec — **NeedsSupplierData** | **MeasurementDoctrine / LatencyEnvelope** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-006B) — extends RC-303 — lanes L7 |
+| RC-309 | **E-stop response is architecture-dependent, not a universal contactor interruption (owner review_64)**: "hardwired safety loop interrupts contactor/control supply path" wrongly universalises one architecture → **"the hardwired safety loop forces the supplier-defined emergency torque-inhibit and HV-isolation response; where the approved architecture requires contactor coil-supply interruption, the hardwired loop performs that within the approved response window"** — avoids conflicting with a supplier's inverter/BMS/PDU shutdown sequencing | batch_67 (universal contactor-open rule) | supplier E-stop / shutdown architecture — **NeedsSupplierData** | **ControlsSafety / ArchitectureDependent** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-008) — extends D-007 / RC-247/265 — lanes L7 |
+| RC-310 | **Neutral is defined by zero propulsion torque, not a universal ban on bridge switching (owner review_64)**: blocking "any bridge switching while in Neutral" is wrong — supplier logic may switch for controlled zero-torque / diagnostics / field control → block **torque-producing current while Neutral is valid · active drive command still asserted · propulsion torque persisting · inverter state inconsistent with the supplier-defined Neutral behaviour** | batch_67 (over-broad Neutral block) | supplier-defined Neutral behaviour — **NeedsSupplierData** | **ControlsSafety / NeutralDefinition** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-009) — lanes L7 |
+| RC-311 | **C2B needs a rollback test abort rule (owner review_64, extends RC-305)**: if rollback exceeds the approved distance or speed threshold → **driver reapplies the service brake · independent restraint captures movement if required · torque command is removed · the test is latched `FAIL` / `NEEDS_REVIEW` · and no automatic second attempt is permitted** | batch_67 (no rollback abort path) | supplier/engineering rollback distance + speed limits — **NeedsSupplierData** | **ControlsSafety / RollbackAbort** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2B abort rule + status `ROLLBACK_ABORT_RULE_REQUIRED`) — extends RC-305 — lanes L7 |
+| RC-312 | **"Full torque application" → "approved brake-hold test torque profile" (owner review_64)**: the static brake-hold uses a restricted ≤10 Nm request, not full motor torque, so "during full torque application" is misleading → **"during the approved brake-hold test torque profile"** | batch_67 (ambiguous "full torque") | supplier/engineering brake-hold torque profile — **NeedsSupplierData** | **Nomenclature / TestTorqueNotFullTorque** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-001) — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -5058,5 +5064,85 @@ calibration + completed proof artifacts). Queued in `GATE_RESEARCH_QUEUE.md`.
   (RC-297); nothing marked `SIGNED_PASS` (`NO_PHYSICAL_PASS_CLAIM_UNTIL_EXECUTED`);
   every number INITIAL_TARGET_PROFILE (RC-267/293/300); never "certified safe"
   (RC-224).
+- Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
+  no customer operation; no compliance/certification claim; ODRs untouched.
+
+## 75. Batch 67 ("65:75") + owner review_64 — Gate 05M-C2A/05M-C2B procedure baseline + 6 pre-lock corrections (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_67_gate05mc2ab_procedure_baseline.md`
+and `docs/research/raw/owner_reviews/review_64_batch_67_verdict.md`.
+**Row additions: RC-307..RC-312 (no new CS); `INVALID_TEST` folded into
+RC-299.** No new deliverable — corrections applied to
+`GATE05M_C2_RESTRICTED_CREEP.md`. Owner: "this is now legitimately strong enough
+to call a formal baseline candidate … the technical architecture is largely
+there."
+
+### Convergence on the batch_66 corrections
+
+The Hunter now carries all of RC-297..306: the software Restricted Creep Torque
+Clamp (RC-301), the Dual-Channel APPS Plausibility Framework (RC-302), the
+electrical CAN passivity rule (RC-304), the C2B Rollback Containment Rule
+(RC-305), the **split 05M-C2A-005A (torque-command ramp-rate) / 005B
+(phase-current response)** rows (RC-303), the 05M-C2A-010B assistance-interlock
+inhibition test (RC-306), the pre-movement assistance interlock (RC-298), and
+bounded fault injection (RC-297).
+
+### Two residuals (recorded, RC-299/300 already in the deliverable)
+
+The Hunter's draft **still shows "Approved by <role>"** (RC-299 four-field
+approval model not applied in the draft) and **still lacks an explicit Numeric
+Threshold Authority Rule** (RC-300). Both are already applied in the
+deliverable — it is ahead of the draft. The owner extended RC-299 with a new
+**`INVALID_TEST`** Result-Signoff value (folded into the deliverable's approval
+model, no new RC number) and extended RC-300's authority list with "release"
+authority.
+
+### Six new pre-lock corrections (RC-307..312)
+
+1. **RC-307** — "completely valid" → "within their approved operating windows"
+   (measurability rule applied to the new APPS dual-channel rule).
+2. **RC-308** — current-loop latency belongs inside the supplier-approved
+   tracking envelope (expected lag from filtering / bandwidth / estimation /
+   sampling), with explicit overshoot/oscillation/delay/divergence/polarity
+   blocked states.
+3. **RC-309** — E-stop forces the supplier-defined torque-inhibit + HV-isolation
+   response; contactor coil-supply interruption only where the architecture
+   requires it (not a universal rule).
+4. **RC-310** — Neutral defined by zero propulsion torque, not a universal ban on
+   bridge switching (supplier logic may switch for zero-torque / diagnostics /
+   field control).
+5. **RC-311** — C2B rollback abort rule: exceed the approved distance/speed →
+   driver reapplies brake · restraint captures · torque removed · latch
+   `FAIL`/`NEEDS_REVIEW` · no automatic second attempt.
+6. **RC-312** — brake-hold uses the "approved test torque profile" (≤10 Nm), not
+   "full torque application".
+
+Corrected status: 05M-C2A upgrades `PROCEDURE_REVIEW_REQUIRED` →
+`FORMAL_ENGINEERING_REVIEW_REQUIRED` and adds
+`DUAL_CHANNEL_APPS_PLAUSIBILITY_REQUIRED / CAN_1_ELECTRICALLY_PASSIVE_ONLY /
+PROCEDURE_APPROVAL_REQUIRED / EXECUTION_NOT_YET_PROVEN /
+RESULT_SIGNOFF_NOT_YET_ELIGIBLE`; 05M-C2B adds `ROLLBACK_ABORT_RULE_REQUIRED /
+PARKING_RESTRAINT_AUTHORITY_NOT_GRANTED`. Post-edit label:
+`GATE_05M_C2A_C2B_PROCEDURE_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — "the
+procedure is ready to be reviewed and controlled, not that the physical vehicle
+has passed it."
+
+### Next
+
+Owner: **Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement**, speed/ramp
+under strict engineering restriction, managed by explicit manual calibration +
+completed proof artifacts only (RC-291/293/300 — no auto-unlock). Queued in
+`GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- Six corrections applied verbatim to `GATE05M_C2_RESTRICTED_CREEP.md`
+  (RC-307..312) + `INVALID_TEST` (RC-299 ext.); measurable APPS windows
+  (RC-307), current-loop latency envelope (RC-308), architecture-dependent
+  E-stop (RC-309), zero-propulsion-torque Neutral (RC-310), rollback abort rule
+  (RC-311), test-torque-not-full-torque brake-hold (RC-312); nothing marked
+  `SIGNED_PASS` (`NO_PHYSICAL_PASS_CLAIM_UNTIL_EXECUTED`); every number
+  INITIAL_TARGET_PROFILE (RC-267/293/300); never "certified safe" (RC-224).
 - Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
   no customer operation; no compliance/certification claim; ODRs untouched.
