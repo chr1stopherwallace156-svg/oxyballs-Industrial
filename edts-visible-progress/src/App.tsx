@@ -5,50 +5,24 @@ import { Scene } from './components/Scene'
 import { SidePanel } from './components/SidePanel'
 import { Toolbar } from './components/Toolbar'
 import {
+  FloatingChrome,
   HeatmapLegend,
   SimulationPanel,
   TimelineRail,
 } from './components/ModePanels'
 import './index.css'
 
-function ConfigLockOverlay() {
-  const { catalog, hoveredId, selectedId } = useDemo()
-  const quiet = !hoveredId && !selectedId
-  return (
-    <div className={`config-lock-overlay ${quiet ? 'quiet' : ''}`}>
-      <span>LOCK</span>
-      <code>{catalog.locked_configuration.proposal_configuration_id}</code>
-    </div>
-  )
-}
-
-function HonestyStrip() {
-  const { catalog, hoveredId, selectedId, viewMode } = useDemo()
-  if (viewMode === 'HEATMAP') return null
-  const quiet = !hoveredId && !selectedId
-  const d = catalog.honesty.known_dimensions_in
-  return (
-    <div className={`honesty-strip ${quiet ? 'quiet' : ''}`}>
-      <strong>Honesty</strong>
-      <span>
-        Hover a part for passport. WB {d.wheelbase.value}&quot; · track {d.front_track.value}&quot; ·
-        frame H {d.frame_rail_outside_width.value}&quot; extracted. Five-store architecture · no
-        invented mass/CG.
-      </span>
-    </div>
-  )
-}
-
 function AppShell() {
-  const { setSelectedId, state, viewMode, setHoveredId } = useDemo()
+  const { setSelectedId, state, viewMode, setHoveredId, selectedId, hoveredId } = useDemo()
+  const quiet = !hoveredId && !selectedId
   return (
-    <div className="app minimal" data-state={state} data-mode={viewMode}>
+    <div className="app minimal r2" data-state={state} data-mode={viewMode}>
       <Toolbar />
-      <ConfigLockOverlay />
+      <FloatingChrome />
       <HeatmapLegend />
-      <HonestyStrip />
       <TimelineRail />
       <SimulationPanel />
+      <div className={`hint-idle ${quiet ? 'show' : ''}`}>Hover a part · click to inspect</div>
       <div className="viewport">
         <Canvas
           shadows

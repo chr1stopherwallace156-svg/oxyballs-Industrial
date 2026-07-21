@@ -1,12 +1,13 @@
 {
-  "release": "EDTS_VISIBLE_PROGRESS_R1",
-  "decision": "DT-D058",
-  "schema": "edts-five-store-v1",
+  "release": "EDTS_VISIBLE_PROGRESS_R2",
+  "decision": "DT-D060",
+  "schema": "edts-r2-normalized-6db-v1",
   "architecture": [
-    "COMPONENT_INDEX",
-    "GEOMETRY",
-    "EVIDENCE",
-    "RELATIONSHIPS",
+    "COMP",
+    "GEO",
+    "EVD",
+    "EGS",
+    "SIM",
     "UI"
   ],
   "locked_configuration": {
@@ -56,6 +57,13 @@
       "Aluminum cab shell asserted as VERIFIED without material card",
       "6.7L Power Stroke / 6R140 as definitive without instance option confirmation",
       "Fabricated page-level citations not backed by acquired hashed sources"
+    ],
+    "r2_sample_rejected": [
+      "Invented SIM masses 420/310/490/140/380/520/110 kg",
+      "Live axle load formula using invented masses",
+      "VERIFIED/PHYSICALLY_MEASURED badges without evidence",
+      "110 kWh / 250 kW product claims",
+      "Aluminum cab / 6.7L definitive without instance lock"
     ]
   },
   "states": [

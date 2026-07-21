@@ -147,6 +147,7 @@ type PartProps = {
   component: TwinComponent
   selected: boolean
   hovered: boolean
+  dimmed: boolean
   onSelect: (id: string) => void
   onHover: (id: string | null) => void
   explode: number
@@ -154,10 +155,27 @@ type PartProps = {
   viewMode: ViewMode
 }
 
+function GlassOutline({ active }: { active: boolean }) {
+  if (!active) return null
+  return (
+    <mesh>
+      <sphereGeometry args={[0.55, 24, 24]} />
+      <meshBasicMaterial
+        color="#93C5FD"
+        transparent
+        opacity={0.12}
+        depthWrite={false}
+        wireframe={false}
+      />
+    </mesh>
+  )
+}
+
 function Selectable({
   component,
   selected,
   hovered,
+  dimmed,
   onSelect,
   onHover,
   explode,
@@ -185,7 +203,7 @@ function Selectable({
   ]
 
   useFrame(({ clock }) => {
-    if (!groupRef.current || !visual.pulse) return
+    if (!groupRef.current || !visual.pulse || dimmed) return
     const t = 0.75 + Math.sin(clock.elapsedTime * 3.2) * 0.25
     groupRef.current.traverse((obj) => {
       const mesh = obj as THREE.Mesh
@@ -196,6 +214,7 @@ function Selectable({
     })
   })
 
+  // Apple-style: labels ONLY on hover or selection (heatmap may show status via color alone)
   const showLabel = selected || hovered
 
   return (
@@ -217,9 +236,10 @@ function Selectable({
       }}
     >
       {children}
+      <GlassOutline active={(hovered || selected) && !dimmed} />
       {showLabel && (
         <Html distanceFactor={12} position={[0, 0.55, 0]} center>
-          <div className="floating-label">
+          <div className="floating-label glass">
             {component.display_name}
             <em style={{ color: visual.color }}>{component.data_status}</em>
           </div>
@@ -234,22 +254,24 @@ function Mat({
   state,
   viewMode,
   colorOverride,
+  dimmed,
 }: {
   component: TwinComponent
   state: VehicleState
   viewMode: ViewMode
   colorOverride?: string
+  dimmed?: boolean
 }) {
   const v = visualFor(component, state, viewMode)
   return (
     <meshStandardMaterial
       color={colorOverride ?? v.color}
-      metalness={viewMode === 'HEATMAP' ? 0.1 : 0.25}
-      roughness={viewMode === 'HEATMAP' ? 0.35 : 0.55}
+      metalness={viewMode === 'HEATMAP' ? 0.1 : 0.28}
+      roughness={viewMode === 'HEATMAP' ? 0.35 : 0.5}
       transparent
-      opacity={v.opacity}
+      opacity={dimmed ? 0.18 : v.opacity}
       emissive={v.emissive}
-      emissiveIntensity={v.emissiveIntensity}
+      emissiveIntensity={dimmed ? 0 : v.emissiveIntensity}
     />
   )
 }
@@ -554,6 +576,7 @@ function Vehicle() {
     explode,
     state,
     viewMode,
+    dimUnrelated,
   } = useDemo()
 
   return (
@@ -561,12 +584,14 @@ function Vehicle() {
       {visibleComponents.map((c) => {
         const Comp = ROLE_MAP[c.geometry_role]
         if (!Comp) return null
+        const dimmed = dimUnrelated && selectedId !== null && selectedId !== c.id
         return (
           <Comp
             key={c.id}
             component={c}
             selected={selectedId === c.id}
             hovered={hoveredId === c.id}
+            dimmed={dimmed}
             onSelect={setSelectedId}
             onHover={setHoveredId}
             explode={explode}

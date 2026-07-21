@@ -53,6 +53,28 @@ export interface MepqBlocker {
   description: string
 }
 
+export interface GraphEdge {
+  edge_id: string
+  class: string
+  interface_id: string | null
+  source_comp_id: string
+  target_comp_id: string | null
+  status: string
+  kind: string
+}
+
+export interface SimRecord {
+  sim_id: string
+  comp_id: string
+  mass_kg: number | null
+  cg_m: number[] | null
+  inertia: null
+  front_axle_share: number | null
+  rear_axle_share: number | null
+  mass_status: string
+  mass_source: string | null
+}
+
 export interface TwinComponent {
   id: string
   display_name: string
@@ -82,6 +104,9 @@ export interface TwinComponent {
   mass_kg: number | null
   cg_m: number[] | null
   mass_status: string
+  geo_id: string
+  evd_id: string
+  sim_id: string
 }
 
 export interface SceneTreeNode {

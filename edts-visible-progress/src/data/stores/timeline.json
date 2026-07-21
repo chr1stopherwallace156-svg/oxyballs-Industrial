@@ -1,8 +1,8 @@
 {
   "store": "TIMELINE",
-  "id": "TL-ICE-TO-EV-R1",
-  "title": "ICE deconstruction → EV proposal (demonstrator sequence)",
-  "honesty": "Sequence is a visual narrative for the demonstrator only. Not an authorized service procedure (PROCEDURE_GENERATION_NOT_AUTHORIZED). Steps do not invent torque or fastener order.",
+  "id": "TL-SURGERY-ICE-TO-EV-R2",
+  "title": "Surgery Mode — ICE teardown → EV proposal",
+  "honesty": "Visual procedural narrative only. NOT an authorized WSM service procedure. No invented fastener torque or drain volumes.",
   "steps": [
     {
       "id": "S00",

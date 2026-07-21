@@ -5,17 +5,17 @@ import { HEATMAP_COLORS, type DataStatus } from '../types'
 const MODES: { id: ViewMode; label: string }[] = [
   { id: 'INSPECT', label: 'Inspect' },
   { id: 'HEATMAP', label: 'Heatmap' },
-  { id: 'TIMELINE', label: 'Timeline' },
-  { id: 'SIMULATION', label: 'Simulation' },
+  { id: 'TIMELINE', label: 'Surgery' },
+  { id: 'SIMULATION', label: 'Mass / CG' },
 ]
 
 export function SearchBar() {
-  const { searchQuery, setSearchQuery, searchHits, focusComponent, catalog } = useDemo()
+  const { searchQuery, setSearchQuery, searchHits, focusComponent } = useDemo()
   return (
-    <div className="search-bar">
+    <div className="search-bar pill">
       <input
         type="search"
-        placeholder="Search components… e.g. fuel tank"
+        placeholder="Search… fuel tank, frame, battery"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         aria-label="Search components"
@@ -30,9 +30,6 @@ export function SearchBar() {
                 onClick={() => {
                   focusComponent(c.id)
                   setSearchQuery('')
-                  if (!c.visible_in.includes(catalog.states[0])) {
-                    /* focus still selects; state may need switch — handled below */
-                  }
                 }}
               >
                 <span>{c.display_name}</span>
@@ -74,7 +71,7 @@ export function TimelineRail() {
   if (viewMode !== 'TIMELINE') return null
   const step = timeline.steps[timelineStep]
   return (
-    <div className="timeline-rail">
+    <div className="timeline-rail surgery">
       <div className="timeline-head">
         <strong>{timeline.title}</strong>
         <p>{timeline.honesty}</p>
@@ -111,31 +108,44 @@ export function TimelineRail() {
 }
 
 export function SimulationPanel() {
-  const { viewMode, simulation } = useDemo()
+  const { viewMode, simulation, massEngine } = useDemo()
   if (viewMode !== 'SIMULATION') return null
-  const f = simulation.demo_fields
+  const fmt = (n: number | null, unit: string) =>
+    n == null ? 'UNKNOWN' : `${typeof n === 'number' ? n.toFixed(1) : n} ${unit}`
+
   return (
     <div className="sim-panel">
       <strong>{simulation.title}</strong>
-      <span className="sim-status">{simulation.status}</span>
-      <p>{simulation.honesty}</p>
+      <span className="sim-status">{massEngine.status}</span>
+      <p>{massEngine.note}</p>
       <dl>
         <div>
-          <dt>Front axle Δ</dt>
-          <dd>{f.front_axle_delta_kg == null ? 'UNKNOWN' : `${f.front_axle_delta_kg} kg`}</dd>
+          <dt>Total mass</dt>
+          <dd>{fmt(massEngine.total_mass_kg, 'kg')}</dd>
         </div>
         <div>
-          <dt>Rear axle Δ</dt>
-          <dd>{f.rear_axle_delta_kg == null ? 'UNKNOWN' : `${f.rear_axle_delta_kg} kg`}</dd>
+          <dt>Front axle</dt>
+          <dd>{fmt(massEngine.front_axle_kg, 'kg')}</dd>
         </div>
         <div>
-          <dt>CG shift</dt>
-          <dd>{f.cg_shift_mm == null ? 'UNKNOWN' : `${f.cg_shift_mm} mm`}</dd>
+          <dt>Rear axle</dt>
+          <dd>{fmt(massEngine.rear_axle_kg, 'kg')}</dd>
+        </div>
+        <div>
+          <dt>CG Z</dt>
+          <dd>{fmt(massEngine.cg_z_m, 'm')}</dd>
+        </div>
+        <div>
+          <dt>Mass coverage</dt>
+          <dd>
+            {massEngine.components_with_mass}/{massEngine.components_with_mass + massEngine.components_missing_mass}
+          </dd>
         </div>
       </dl>
       <p className="tiny muted">Requires: {simulation.required_before_enable.join(' · ')}</p>
       <p className="tiny">
-        Example ±32 kg / 18 mm from feedback is <em>not</em> shown — mass evidence missing (MEPQ-001).
+        Handoff sample masses (420/490/520 kg…) and live axle formulas are <em>rejected</em> until
+        SIM records are measured.
       </p>
     </div>
   )
@@ -153,6 +163,28 @@ export function HeatmapLegend() {
           {s.replaceAll('_', ' ')}
         </span>
       ))}
+    </div>
+  )
+}
+
+/** Floating Apple-style top chrome over the viewport only. */
+export function FloatingChrome() {
+  const { catalog, viewMode, setViewMode } = useDemo()
+  return (
+    <div className="floating-chrome">
+      <SearchBar />
+      <div className="floating-actions">
+        <button
+          type="button"
+          className={viewMode === 'HEATMAP' ? 'hm-active' : ''}
+          onClick={() => setViewMode(viewMode === 'HEATMAP' ? 'INSPECT' : 'HEATMAP')}
+        >
+          {viewMode === 'HEATMAP' ? 'Heatmap: ON' : 'Confidence Heatmap'}
+        </button>
+        <span className="lock-pill">
+          LOCK {catalog.locked_configuration.proposal_configuration_id}
+        </span>
+      </div>
     </div>
   )
 }

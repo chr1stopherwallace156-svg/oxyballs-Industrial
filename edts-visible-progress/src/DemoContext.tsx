@@ -7,6 +7,7 @@ import {
   type ReactNode,
 } from 'react'
 import { joinCatalog, simulation, timeline } from './data/joinCatalog'
+import { computeMassEngine, type MassEngineResult } from './data/massEngine'
 import type {
   Catalog,
   SimulationDoc,
@@ -51,6 +52,8 @@ export type DemoContextValue = {
   setTimelineStep: (i: number) => void
   applyTimelineStep: (i: number) => void
   chromeMinimal: boolean
+  massEngine: MassEngineResult
+  dimUnrelated: boolean
 }
 
 const DemoContext = createContext<DemoContextValue | null>(null)
@@ -87,54 +90,52 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     setIsolatedId(null)
   }, [])
 
-  const focusComponent = useCallback((id: string) => {
-    const comp = catalog.components.find((c) => c.id === id)
-    if (comp && !comp.visible_in.includes(state)) {
-      // Prefer EV proposal for EV parts, else first listed state
-      const next =
-        comp.visible_in.find((s) => s === 'EV_PROPOSAL') ??
-        comp.visible_in.find((s) => s === 'DECONSTRUCTION') ??
-        comp.visible_in[0]
-      if (next) {
-        setState(next)
-        setRemovedIds(new Set())
-        setHiddenIds(new Set())
+  const focusComponent = useCallback(
+    (id: string) => {
+      const comp = catalog.components.find((c) => c.id === id)
+      if (comp && !comp.visible_in.includes(state)) {
+        const next =
+          comp.visible_in.find((s) => s === 'EV_PROPOSAL') ??
+          comp.visible_in.find((s) => s === 'DECONSTRUCTION') ??
+          comp.visible_in[0]
+        if (next) {
+          setState(next)
+          setRemovedIds(new Set())
+          setHiddenIds(new Set())
+        }
       }
-    }
-    setSelectedId(id)
-    setFocusTarget(id)
-    setFocusNonce((n) => n + 1)
-  }, [state])
-
-  const applyTimelineStep = useCallback(
-    (i: number) => {
-      const step = timeline.steps[i]
-      if (!step) return
-      setTimelineStep(i)
-      setViewMode('TIMELINE')
-      setState(step.state)
-      setIsolatedId(null)
-      setExplode(0)
-
-      // Cumulative removals through this step
-      const removed = new Set<string>()
-      for (let s = 0; s <= i; s++) {
-        for (const id of timeline.steps[s].remove) removed.add(id)
-      }
-      setRemovedIds(removed)
-      setHiddenIds(new Set())
-
-      if (step.focus) {
-        setSelectedId(step.focus)
-        setFocusTarget(step.focus)
-        setFocusNonce((n) => n + 1)
-      } else {
-        setSelectedId(null)
-        setFocusTarget(null)
-      }
+      setSelectedId(id)
+      setFocusTarget(id)
+      setFocusNonce((n) => n + 1)
     },
-    [],
+    [state],
   )
+
+  const applyTimelineStep = useCallback((i: number) => {
+    const step = timeline.steps[i]
+    if (!step) return
+    setTimelineStep(i)
+    setViewMode('TIMELINE')
+    setState(step.state)
+    setIsolatedId(null)
+    setExplode(0)
+
+    const removed = new Set<string>()
+    for (let s = 0; s <= i; s++) {
+      for (const id of timeline.steps[s].remove) removed.add(id)
+    }
+    setRemovedIds(removed)
+    setHiddenIds(new Set())
+
+    if (step.focus) {
+      setSelectedId(step.focus)
+      setFocusTarget(step.focus)
+      setFocusNonce((n) => n + 1)
+    } else {
+      setSelectedId(null)
+      setFocusTarget(null)
+    }
+  }, [])
 
   const visibleComponents = useMemo(() => {
     return catalog.components.filter((c) => {
@@ -155,6 +156,8 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     () => searchComponents(searchQuery, catalog.components, catalog.search_aliases),
     [searchQuery],
   )
+
+  const massEngine = useMemo(() => computeMassEngine(visibleComponents), [visibleComponents])
 
   const value: DemoContextValue = {
     catalog,
@@ -211,6 +214,8 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     setTimelineStep,
     applyTimelineStep,
     chromeMinimal: true,
+    massEngine,
+    dimUnrelated: Boolean(selectedId),
   }
 
   return <DemoContext.Provider value={value}>{children}</DemoContext.Provider>
