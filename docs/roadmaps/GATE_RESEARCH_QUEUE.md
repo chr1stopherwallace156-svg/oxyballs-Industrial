@@ -685,42 +685,52 @@ not "instantly" (RC-281); wheel-speed data read-only, not traction-control
 authority (RC-282); every value INITIAL_TARGET_PROFILE (RC-267). Permits **Gate
 05M-C2 only**.
 
-## Gate 05M-C2 — Restricted Creep Torque Validation  · STATUS: NEXT (owner review_57)
+## Gate 05M-C2 — Restricted Creep Torque Validation  · STATUS: FIRST_GROUND_CONTACT_POWERED_MOVEMENT_GATE (batch_61)
 
-The **first ground contact** — restricted low-speed creep, only after Gate
-05M-C1 proves the coupled/lifted mechanical + sensing + safety layer. **The test
-surface must be a flat, controlled, closed area with predictable traction — NOT
-a default "low-friction" surface (RC-283)** (low-friction causes wheel slip /
-weird ABS/ESC reactions / poor steering-brake feedback; intentional low-friction
-testing is a separate future gate).
+Deliverable `docs/status/GATE05M_C2_RESTRICTED_CREEP.md` — the **first powered
+ground-contact movement gate**: tires touch the ground under live traction for
+the first time, restricted creep only. **Split (RC-286): 05M-C2A Flat-Ground
+Restricted Creep (12-row matrix 05M-C2A-001..012) → 05M-C2B Controlled Incline /
+Rollback Hold Validation → 05M-C2C Faulted Creep Recovery.** Status (review_58):
+`FIRST_GROUND_CONTACT_POWERED_MOVEMENT_GATE / LIVE_HV_PRESENT /
+GROUND_CONTACT_PRESENT / RESTRICTED_CREEP_ONLY / PREDICTABLE_TRACTION_SURFACE_REQUIRED
+/ REMOTE_ESTOP_REQUIRED / SPOTTERS_REQUIRED / BRAKE_ASSIST_VERIFICATION_REQUIRED /
+STEERING_ASSIST_VERIFICATION_REQUIRED / TORQUE_CLAMP_INITIAL_TARGET_ONLY /
+RAMP_RATE_INITIAL_TARGET_ONLY / NO_PUBLIC_ROAD / NO_CUSTOMER_OPERATION /
+NO_NORMAL_DRIVING_AUTHORITY`. Corrections (review_58): predictable-traction
+surface, not low-friction (RC-283); `dT_command/dt` not `dQ/dt` (RC-284); the
+Ground Movement Precondition — brake/brake-assist/steering-assist verified,
+E-stop armed + remote active, spotters + runout clear, clamp + ramp active,
+engineer/test-lead explicit start authorization (RC-285); rollback/incline
+deferred to 05M-C2B (RC-286); breakaway above the clamp → NEEDS_REVIEW not an
+auto diagnosis (RC-287); no "absolute 0 Nm"/"instantly" wording (RC-288); all
+numbers INITIAL_TARGET_PROFILE (RC-267); wheel-speed read-only (RC-282); CAN_1
+listen-only (RC-172/230). Permits **Gate 05M-C3 only** (after 05M-C2A/B/C).
 
-**Owner scope (review_57) — required conditions:**
+## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: NEXT (owner review_58)
 
-> - flat, controlled, closed test surface with predictable traction
-> - clear runout distance
-> - wheel chocks / barriers staged
-> - spotters positioned outside the movement path
-> - remote E-stop available
-> - anti-rollback logic + highly restrictive torque ramp-rate (dI/dt) limits
-> - breakaway-torque baselines under tire load
+The **last rung of the split 05M-C phase** — controlled closed-area low-speed
+movement, only after Gate 05M-C2 (05M-C2A flat-ground creep → 05M-C2B
+incline/rollback → 05M-C2C faulted-creep recovery) is proven. The Hunter's
+"track-surface speeds up to 15 km/h" is an `INITIAL_TARGET_PROFILE` pending
+supplier + engineering approval (RC-267).
 
-Enforce throughout — engineer-gated, live-HV, **first ground contact, closed
-controlled area only, no public road, no customer operation**; status target
-`RESTRICTED_CREEP_TORQUE_CONCEPT_STARTED / GROUND_CONTACT_PRESENT /
-CLOSED_CONTROLLED_TEST_AREA_REQUIRED / REMOTE_ESTOP_REQUIRED / SPOTTERS_REQUIRED
-/ NO_PUBLIC_ROAD / NO_CUSTOMER_OPERATION`; the Numeric Threshold Authority Rule
-(RC-267) applies — no creep-torque / dI/dt / breakaway / anti-rollback threshold
-is final gate logic until supplier docs + engineering review + calibrated
-measurement method + raw proof + signed approval upgrade it; wheel-speed stays
-read-only, not traction-control authority (RC-282); the inverter owns its gating,
-the BMS/PDU owns contactors/pre-charge, the hardwired loop + service brakes own
-the stopping path, the VCU requests/monitors + enforces the clamp
-(RC-247/265/205/227; BQ-27); no manual restraint of rotating parts (RC-279);
-never "certified safe" / no compliance claim (RC-224). Only after 05M-C2 →
-**05M-C3 (Controlled Closed-Area Low-Speed Movement)**, engineer-approved under a
-staged safety plan + LOTO/PPE (RC-117); no open-floor / road testing / customer
-operation until proven. Then (later, well beyond Gate 05) the wider
-road/commissioning phases stay engineer-gated.
+Enforce throughout — engineer-gated, live-HV, **closed controlled area only, no
+public road, no customer operation, no normal-driving authority**; the Numeric
+Threshold Authority Rule (RC-267) applies — no speed / torque / distance / fault
+threshold is final gate logic until supplier docs + engineering review +
+calibrated measurement method + raw proof + signed approval upgrade it; the
+Ground Movement Precondition (RC-285) + predictable-traction surface (RC-283) +
+spotters + remote E-stop hold; wheel-speed stays read-only (RC-282); CAN_1
+listen-only (RC-172/230); the inverter owns its gating, the BMS/PDU owns
+contactors/pre-charge, the hardwired loop + service brakes own the stopping
+path, the VCU requests/monitors + enforces the clamp (RC-247/265/205/227;
+BQ-27); no manual restraint of rotating parts (RC-279); no automatic retry after
+an E-stop (RC-262); never "certified safe" / no compliance claim (RC-224). Owner
+scope defined when the owner sends that batch. Then (later, well beyond Gate 05)
+the wider road/commissioning phases stay engineer-gated under a staged safety
+plan + LOTO/PPE (RC-117); no public-road or customer operation until fully
+proven.
 
 Enforce throughout — no HV / no traction enable / no vehicle motion at
 05J-05K; CAN_1 stays listen-only + passive on the live OEM Ford bus (TXD-pin

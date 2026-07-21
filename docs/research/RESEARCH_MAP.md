@@ -371,25 +371,28 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_57):** **Gate 05M-C2 — Restricted Creep
-Torque Validation** — the **first ground contact** of the split 05M-C phase
-(Decision Register **D-008**, amended review_57), only after Gate 05M-C1 proves
-the coupled/lifted mechanical + sensing + safety layer. **The test surface must
-be a flat, controlled, closed area with predictable traction — NOT a default
-"low-friction" surface (RC-283)** — with clear runout distance, wheel
-chocks/barriers staged, spotters outside the movement path, and a remote E-stop
-available; anti-rollback logic + highly restrictive torque ramp-rate (dI/dt)
-limits + breakaway-torque baselines under tire load. Engineer-gated, live-HV,
-**first ground contact, closed controlled area only, no public road, no
-customer operation**; the Numeric Threshold Authority Rule (RC-267) applies — no
-creep-torque / dI/dt / breakaway / anti-rollback threshold is final gate logic
-until supplier docs + engineering review + calibrated measurement method + raw
-proof + signed approval upgrade it; wheel-speed stays read-only, not
-traction-control authority (RC-282); the inverter owns its gating, the BMS/PDU
-owns contactors/pre-charge, the hardwired loop + service brakes own the stopping
-path, the VCU requests/monitors (RC-247/265/205/227; BQ-27); no manual restraint
-of rotating parts (RC-279); never "certified safe" (RC-224). Owner scope defined
-when the owner sends that batch. **Gate 05M-C1**
+**Next expected batch (owner review_58):** **Gate 05M-C3 — Controlled
+Closed-Area Low-Speed Movement** — the last rung of the split 05M-C phase
+(Decision Register **D-008**, amended review_58), only after Gate 05M-C2
+(05M-C2A flat-ground creep → 05M-C2B incline/rollback → 05M-C2C faulted-creep
+recovery) is proven. The Hunter's "track-surface speeds up to 15 km/h" is an
+`INITIAL_TARGET_PROFILE` pending supplier + engineering approval (RC-267).
+Engineer-gated, live-HV, **closed controlled area only, no public road, no
+customer operation, no normal-driving authority**; the Ground Movement
+Precondition (RC-285) + predictable-traction surface (RC-283) + spotters +
+remote E-stop hold; wheel-speed stays read-only (RC-282); CAN_1 listen-only
+(RC-172/230); the inverter owns its gating, the BMS/PDU owns contactors/
+pre-charge, the hardwired loop + service brakes own the stopping path, the VCU
+requests/monitors (RC-247/265/205/227; BQ-27); no manual restraint of rotating
+parts (RC-279); never "certified safe" (RC-224). Owner scope defined when the
+owner sends that batch. **Gate 05M-C2**
+(`GATE05M_C2_RESTRICTED_CREEP.md`) is `FIRST_GROUND_CONTACT_POWERED_MOVEMENT_GATE`
+/ `GROUND_CONTACT_PRESENT` / `RESTRICTED_CREEP_ONLY` — the first powered
+ground-contact gate, split 05M-C2A/B/C (12-row 05M-C2A matrix); review_58
+corrections: predictable-traction surface not low-friction (RC-283),
+`dT_command/dt` not `dQ/dt` (RC-284), the Ground Movement Precondition (RC-285),
+the 05M-C2A/B/C split (RC-286), breakaway → NEEDS_REVIEW (RC-287), no
+absolute-zero/instant wording (RC-288). **Gate 05M-C1**
 (`GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`) is
 `COUPLED_DRIVELINE_LIFTED_WHEEL_READINESS_DEFINED` / `RATED_LIFT_OR_STANDS_REQUIRED`
 / `NO_GROUND_CONTACT` — the first coupled test, wheels lifted (5-row matrix

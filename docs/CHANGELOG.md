@@ -5,6 +5,45 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 61 ("59A") + review_58: Gate 05M-C1 re-emit + Gate 05M-C2 Restricted Creep Torque Validation
+
+- Archived batch_61 (Gate 05M-C1 re-emit + Gate 05M-C2) and review_58 1:1
+  (commit `54aa6d8`). New rows RC-284..288 (no new CS). Section 69. New
+  deliverable `docs/status/GATE05M_C2_RESTRICTED_CREEP.md` — the **first powered
+  ground-contact movement gate** (tires touch the ground under live traction),
+  **split 05M-C2A (Flat-Ground Restricted Creep, 12-row matrix) / 05M-C2B
+  (Controlled Incline / Rollback Hold) / 05M-C2C (Faulted Creep Recovery)**.
+  Owner: "yes, proceed with Gate 05M-C2 — but this draft needs a few important
+  corrections … this is now the first powered ground-contact movement gate."
+- **CRITICAL regression:** the Hunter re-emitted the 05M-C1-005 "hand-lock one
+  lifted wheel" line — the exact SAFETY-CRITICAL instruction rejected in
+  review_57 (RC-279); the `GATE05M_C1_*` deliverable already holds the corrected
+  rated-fixture wording and did NOT regress. The low-friction-surface default
+  (RC-283) also re-appeared in the 05M-C2 body.
+- **Owner corrections (RC-284..288):**
+  - RC-284 — torque ramp rate is `dT_command/dt`, not `dQ/dt`; the limiter acts
+    on VCU torque output, not raw pedal slope.
+  - RC-285 — the Ground Movement Precondition: no creep torque unless
+    brake/brake-assist/steering-assist verified, E-stop armed + remote active,
+    spotters + runout clear, clamp + ramp active, engineer/test-lead explicit
+    start authorization.
+  - RC-286 — split 05M-C2 into 05M-C2A/B/C; rollback/incline deferred out of the
+    first ground-contact gate.
+  - RC-287 — breakaway torque above the clamp → NEEDS_REVIEW /
+    MECHANICAL_BINDING_CHECK, not an automatic "binding" diagnosis.
+  - RC-288 — no "absolute 0 Nm"/"instantly" wording; supplier zero-torque
+    threshold + response window.
+  - Numeric Threshold Authority Rule (RC-267) + predictable-traction surface
+    (RC-283) applied.
+- Gate 05M-C2 status `FIRST_GROUND_CONTACT_POWERED_MOVEMENT_GATE /
+  GROUND_CONTACT_PRESENT / RESTRICTED_CREEP_ONLY / PREDICTABLE_TRACTION_SURFACE_REQUIRED
+  / BRAKE_ASSIST_VERIFICATION_REQUIRED / STEERING_ASSIST_VERIFICATION_REQUIRED /
+  … / NO_NORMAL_DRIVING_AUTHORITY`; permits **Gate 05M-C3 only** (after
+  05M-C2A/B/C). **D-008 amended.** RESEARCH_MAP + GATE_RESEARCH_QUEUE next →
+  **Gate 05M-C3** (Controlled Closed-Area Low-Speed Movement). Nothing
+  Confirmed; no normal driving; no public road; no customer operation; never
+  "certified safe" (RC-224); ODRs untouched.
+
 ## 2026-07-16 — RH batch 60 + review_57: Gate 05M-B cleanup + Gate 05M-C1 Coupled Driveline / Lifted-Wheel Readiness
 
 - Archived batch_60 (Gate 05M-B cleanup + Gate 05M-C1 + Gate 05M-C2 preview)

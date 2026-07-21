@@ -381,7 +381,12 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-280 | **Gate 05M-C1 Lifted Chassis Safety Rule (owner review_57)**: the vehicle coupled to lifted wheels is a major mechanical hazard → 05M-C1 may **only** run on a **rated chassis lift or rated heavy-duty stands approved for the vehicle GVWR/axle load**; secured against roll; suspension droop accounted for; wheel-rotation zones guarded; **no personnel inline with rotating tires/shafts/hubs; no person may be under the vehicle while energized rotation tests are active**; E-stop + exclusion zone active | batch_60 (missing lift safety) | rated-lift/stand + rotating-machinery guarding — **NeedsExactSource** (owner-paraphrased) | **ControlsSafety / HardBlock** — recorded in `GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md` (Lifted Chassis Safety Rule) — lanes L4/L7 |
 | RC-281 | **05M-C1 brake-override must not say "instantly"/"immediately" (owner review_57, "instant/immediate" RECURRENCE)**: "the VCU must instantly clear traction torque / brake activation immediately overrides" → **"the VCU clears traction torque commands within the approved brake-override response window; inverter phase current decays within the approved threshold; the mechanical brakes slow/stop the lifted wheels without the inverter fighting the service brakes"** | batch_60 ("instantly" wording) | supplier/engineering brake-override response window — **NeedsSupplierData** | **NeedsSupplierData / ControlsSafety** — fixed in `GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md` (05M-C1-003; extends RC-175/198/204/211/225/255/274) — lanes L7 |
 | RC-282 | **Wheel-speed data is read-only, not control authority (owner review_57, extends RC-172/230)**: "the VCU pulls speed data independently from ABS/wheel encoders" conflicts with CAN_1 listen-only / no-factory-injection → **"wheel-speed data may be observed only through an authorized read-only path, passive logging path, or independent external instrumentation; factory ABS/ESC data must not become traction-control authority unless Ford-authorized documentation + engineering review approve it"**; for now wheel-speed parity is **verification, not control authority** | batch_60 (factory-bus control authority) | Ford ABS/ESC authorization — **NeedsExactSource / NeedsVehicleSpecificBBLB** | **ControlsSafety / ProofRequirement** — recorded in `GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md` (wheel-speed read-only rule + 05M-C1-002) — lanes L7 |
-| RC-283 | **Gate 05M-C2 must not default to a "low-friction surface" (owner review_57)**: low-friction causes wheel slip / weird ABS/ESC reactions / poor steering-brake feedback → for first ground movement use **"a flat, controlled, closed test surface with predictable traction, clear runout distance, wheel chocks/barriers staged, spotters positioned outside the movement path, and remote E-stop available"**; intentional low-friction testing is a **separate future gate** | batch_60 (unsafe default surface) | n/a — controls-safety rule | **ControlsSafety / GateStatus** — recorded in `GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md` (Next — 05M-C2) + queued in `GATE_RESEARCH_QUEUE.md` — lanes L7 |
+| RC-283 | **Gate 05M-C2 must not default to a "low-friction surface" (owner review_57)**: low-friction causes wheel slip / weird ABS/ESC reactions / poor steering-brake feedback → for first ground movement use **"a flat, controlled, closed test surface with predictable traction, clear runout distance, wheel chocks/barriers staged, spotters positioned outside the movement path, and remote E-stop available"**; intentional low-friction testing is a **separate future gate** | batch_60 (unsafe default surface) — **RE-DEFAULTED in the batch_61 05M-C2 body (recurrence)** | n/a — controls-safety rule | **ControlsSafety / RegressionWatch** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (test-surface rule) + `GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md` — lanes L7 |
+| RC-284 | **Torque ramp-rate is `dT/dt`, not `dQ/dt` (owner review_58)**: "Q" reads as charge/heat/generalized quantity; the torque-command slope is **`dT_command/dt`** → "Torque Ramp-Rate Filter: `dT_command/dt`; rapid APPS input is permitted only as a controlled test input; the VCU torque output rises per the approved ramp-rate limiter, not raw pedal slope"; the ≤20 Nm/sec ramp + ≤30 Nm clamp are `INITIAL_TARGET_PROFILE` | batch_61 (wrong ramp-rate symbol + raw-pedal-slope) | n/a — notation + control-logic rule | **Correctness / ControlsSafety** — recorded in `docs/status/GATE05M_C2_RESTRICTED_CREEP.md` (ramp-rate doctrine; 05M-C2A-006) — lanes L7 |
+| RC-285 | **Ground Movement Precondition before any creep torque (owner review_58)**: this is the first time the vehicle can actually roll → **no creep torque may be commanded unless service-brake function + brake assist + steering assist are verified, the E-stop is armed + the remote E-stop active, spotters + runout path clear, the torque clamp + ramp-rate limit active, and the engineer/test-lead gives explicit start authorization** | batch_61 (missing movement precondition) | n/a — controls-safety hard-block | **ControlsSafety / HardBlock** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (Ground Movement Precondition) — lanes L7 |
+| RC-286 | **Gate 05M-C2 must be SPLIT — rollback/incline out of the first ground-contact gate (owner review_58, amends D-008 ladder)**: → **05M-C2A Flat-Ground Restricted Creep → 05M-C2B Controlled Incline / Rollback Hold Validation → 05M-C2C Faulted Creep Recovery**; do flat-ground creep first, mark rollback/incline PROVISIONAL until 05M-C2A passes | batch_61 (rollback in first gate) | n/a — gate-ladder rule | **GateStatus / ControlsSafety** — amends D-008; recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A/B/C structure) — lanes L7 |
+| RC-287 | **Breakaway-torque above the clamp is NEEDS_REVIEW, not an auto "mechanical binding" diagnosis (owner review_58)**: 05M-C2-002 "breakaway >30 Nm indicates mechanical binding" → **"breakaway above the approved creep clamp triggers `NEEDS_REVIEW` / `MECHANICAL_BINDING_CHECK`, not an automatic final diagnosis"** — it could be tire pressure, slope, brake drag, gear ratio, curb weight, axle load, or calibration | batch_61 (premature auto-diagnosis) | n/a — diagnostic-logic rule | **Correctness / ControlsSafety** — fixed in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-003) — lanes L7/L10 |
+| RC-288 | **05M-C2 must drop "absolute 0 Nm" + "instantly" wording (owner review_58, no-absolute-zero + instant/immediate RECURRENCE)**: 05M-C2-001 "absolute 0 Nm" → "torque request remains within the supplier-defined zero-torque threshold"; 05M-C2-005 E-stop "torque drops to zero instantly" → "the inverter torque command transitions to zero and phase current decays within the supplier-approved response window; the vehicle coasts or is braked manually per the test plan" | batch_61 (absolute-zero + instant wording) | supplier zero-torque threshold / response window — **NeedsSupplierData** | **NeedsSupplierData / ControlsSafety** — fixed in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-002/008; extends RC-270/273/281) — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -4626,3 +4631,81 @@ Closed-Area Low-Speed Movement). Queued in `GATE_RESEARCH_QUEUE.md`.
   never "certified safe" (RC-224).
 - Nothing ingested; nothing marked Confirmed; no ground contact; no open-floor
   movement; no compliance/certification claim; ODRs untouched.
+
+## 69. Batch 61 ("59A") + owner review_58 — Gate 05M-C1 re-emit + Gate 05M-C2 Restricted Creep Torque Validation (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_61_gate05mc1_reemit_gate05mc2_creep.md`
+and `docs/research/raw/owner_reviews/review_58_batch_61_verdict.md`.
+Row additions: RC-284..RC-288 (no new CS). Deliverable:
+`docs/status/GATE05M_C2_RESTRICTED_CREEP.md` (new, structured 05M-C2A/B/C).
+Owner: "yes, proceed with Gate 05M-C2 — but this draft needs a few important
+corrections … this is now the first powered ground-contact movement gate."
+
+### CRITICAL regression — "hand-lock one lifted wheel" re-emitted
+
+The Hunter re-emitted the 05M-C1-005 "Hand-lock one lifted wheel safely" line —
+the exact SAFETY-CRITICAL instruction the owner rejected in review_57 (RC-279).
+The `GATE05M_C1_*` deliverable already holds the corrected rated-fixture-only
+wording and did NOT regress. Recorded as the strongest safety-critical M10
+regression-scanner case. The low-friction-surface default (RC-283) also
+re-appeared in the 05M-C2 body.
+
+### Gate 05M-C2 — first powered ground-contact movement gate
+
+Tires touch the ground under live traction for the first time — restricted
+creep only, not normal driving. **Split (RC-286): 05M-C2A Flat-Ground
+Restricted Creep → 05M-C2B Controlled Incline/Rollback Hold → 05M-C2C Faulted
+Creep Recovery.**
+
+### Owner corrections
+
+- **Predictable-traction surface, not low-friction (RC-283 re-emphasized):**
+  flat/controlled/closed with runout, chocks/barriers, spotters outside the
+  path, remote E-stop; low-friction is a separate future gate.
+- **`dT/dt` not `dQ/dt` (RC-284):** torque ramp rate; the limiter acts on VCU
+  torque output, not raw pedal slope.
+- **All numbers INITIAL_TARGET_PROFILE (RC-267):** dead-band, ramp, clamp,
+  breakaway, slip, creep, incline.
+- **Ground Movement Precondition (RC-285):** no creep torque unless brake/brake-
+  assist/steering-assist verified, E-stop armed + remote active, spotters +
+  runout clear, clamp + ramp active, engineer/test-lead explicit start
+  authorization.
+- **Split 05M-C2A/B/C — rollback/incline out of the first gate (RC-286).**
+- **Breakaway above the clamp → NEEDS_REVIEW / MECHANICAL_BINDING_CHECK, not an
+  auto diagnosis (RC-287).**
+- **No "absolute 0 Nm"/"instantly" wording (RC-288):** supplier zero-torque
+  threshold + response window.
+
+### Gate 05M-C2 status (owner review_58)
+
+`FIRST_GROUND_CONTACT_POWERED_MOVEMENT_GATE / LIVE_HV_PRESENT /
+GROUND_CONTACT_PRESENT / RESTRICTED_CREEP_ONLY /
+PREDICTABLE_TRACTION_SURFACE_REQUIRED / REMOTE_ESTOP_REQUIRED / SPOTTERS_REQUIRED
+/ BRAKE_ASSIST_VERIFICATION_REQUIRED / STEERING_ASSIST_VERIFICATION_REQUIRED /
+TORQUE_CLAMP_INITIAL_TARGET_ONLY / RAMP_RATE_INITIAL_TARGET_ONLY / NO_PUBLIC_ROAD
+/ NO_CUSTOMER_OPERATION / NO_NORMAL_DRIVING_AUTHORITY`. Permits **Gate 05M-C3
+only** (after 05M-C2A/B/C).
+
+### Next
+
+Owner: **Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement** (the Hunter's
+"track-surface speeds up to 15 km/h" is INITIAL_TARGET_PROFILE pending supplier
++ engineering approval). Only after 05M-C2 (05M-C2A → 05M-C2B → 05M-C2C).
+Queued in `GATE_RESEARCH_QUEUE.md`.
+
+### Standing checks
+
+- First powered ground contact, restricted creep only, flat predictable-
+  traction closed surface (not low-friction, RC-283), Ground Movement
+  Precondition gates every creep command (RC-285), torque clamped + ramp-limited
+  `dT_command/dt` (RC-284), rollback/incline deferred to 05M-C2B (RC-286),
+  breakaway → NEEDS_REVIEW not auto-diagnosis (RC-287), no absolute-zero/instant
+  wording (RC-288), wheel-speed read-only (RC-282), CAN_1 listen-only
+  (RC-172/230), no auto retry after E-stop (RC-262), every number
+  INITIAL_TARGET_PROFILE (RC-267); the inverter owns gating, BMS/PDU owns
+  contactors/pre-charge, hardwired loop + service brakes own the stopping path,
+  VCU requests/monitors (RC-247/265/205/227; BQ-27); never "certified safe"
+  (RC-224).
+- Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
+  no customer operation; no compliance/certification claim; ODRs untouched.

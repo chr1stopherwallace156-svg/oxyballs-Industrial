@@ -13,6 +13,18 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — task complete (batch 60 + review_57 — Gate 05M-B cleanup + Gate 05M-C1 Coupled Driveline / Lifted-Wheel Readiness)
+
+### (archived handoff)
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 60 + review_57 — Gate 05M-B watchdog cleanup + Gate 05M-C1 Coupled Driveline Static / Lifted-Wheel Readiness); awaiting the Gate 05M-C2 Restricted Creep Torque Validation batch or a supplier reply
+- Branch: `claude/docs-structure-large-projects-b6vxx5`; owner: Claude Code
+- Start commit: `ad3f489` (batch-60 archive); end commit: `43f883e` (batch-60 reconciliation)
+- Work: new deliverable `GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md` (first coupled test, driven axle lifted + locked, zero ground contact; 5-row matrix + Lifted Chassis Safety Rule). `GATE05M_B` status label. RC-279..283 (no new CS); section 68; D-008 amended (05M-C1 created). Five owner safety corrections: SAFETY-CRITICAL removal of "hand-lock one lifted wheel" — rated fixtures only (RC-279); Lifted Chassis Safety Rule (RC-280); brake override within approved window not "instantly" (RC-281); wheel-speed read-only not control authority (RC-282); 05M-C2 predictable-traction not low-friction (RC-283). Nothing Confirmed; no ground contact; ODRs untouched.
+- Open owner decisions carried forward: elektron-os-clean; index.html; L2/L4/L6 modules; L9 lane name; Artifact Intake Form; M10 regression scanner (invented-values family through RC-267 — nineteen artifacts + "instant/immediate" RC-175..281 + "certified safe" RC-224 + the RC-257→263→268, RC-256→264, RC-261→269, RC-271→275, RC-277, RC-279/283 recurrences); Dana/ZF/Ford-Lee letters; supplier reminder; official Ford BBLB + IVM + FMVSS 305/105 + OSHA/NHTSA/ISO 6469-3 + rated-lift/rotating-machinery sources (RC-237..283) + Ford ABS/ESC wheel-speed authorization (RC-282) + IMD supplier manual + pre-charge/contactor datasheets + inverter/motor + driveline (gear ratio, axle/GAWR, wheel-speed, brake-override window, brake/steering) data + paid Gate 08B standards + Ford UIM/BBAS/J1939 docs + supplier DBCs; brake engineer; confirm donor 7.3L gas; inverter/BMS timing + HV safety plan; firmware signoff; BMS/PDU pre-charge/contactor/HV-shutdown ownership (BQ-27).
+
 ## 2026-07-16 — Claude Code — task complete (batch 59 + review_56 — Gate 05L-B/05L-C/05M-A/05M-B cleanups + Gate 05M-C split)
 
 ### (archived handoff)

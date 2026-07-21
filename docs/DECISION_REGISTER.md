@@ -179,6 +179,25 @@ later entry that references it.
   surface with predictable traction, runout, chocks/barriers, spotters outside
   the path, and a remote E-stop — never a default low-friction surface (RC-283,
   a separate future gate if ever tested).
+- **Amendment (owner review_58, batch_61 "59A", RC-284..288): Gate 05M-C2
+  created (`GATE05M_C2_RESTRICTED_CREEP.md`) — the first powered ground-contact
+  movement gate — and SPLIT into 05M-C2A/B/C.** Torque ramp rate is
+  `dT_command/dt` (not `dQ/dt`), acting on VCU torque output not raw pedal slope
+  (RC-284); a **Ground Movement Precondition** gates every creep command —
+  service-brake + brake-assist + steering-assist verified, E-stop armed + remote
+  active, spotters + runout clear, torque clamp + ramp-rate limit active, and
+  the engineer/test-lead's explicit start authorization (RC-285); Gate 05M-C2
+  splits **05M-C2A (Flat-Ground Restricted Creep) → 05M-C2B (Controlled Incline
+  / Rollback Hold) → 05M-C2C (Faulted Creep Recovery)**, with rollback/incline
+  deferred out of the first ground-contact gate (RC-286); breakaway torque above
+  the clamp triggers `NEEDS_REVIEW` / `MECHANICAL_BINDING_CHECK`, not an
+  automatic "binding" diagnosis (RC-287); "absolute 0 Nm" → the supplier-defined
+  zero-torque threshold and "instantly" → the supplier-approved response window
+  (RC-288). **Regression watch: the Hunter re-emitted the 05M-C1-005
+  "hand-lock one lifted wheel" line (RC-279 — SAFETY-CRITICAL) and re-defaulted
+  the low-friction surface (RC-283); the deliverables already hold the corrected
+  wording.** Full ladder: 05J → 05K → 05L-A → 05L-B → 05L-C → 05M-A → 05M-B →
+  05M-C1 → 05M-C2 (05M-C2A → 05M-C2B → 05M-C2C) → 05M-C3 (each engineer-approved).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the
@@ -191,7 +210,8 @@ later entry that references it.
   `docs/status/GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md`,
   `docs/status/GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md`,
   `docs/status/GATE05M_B_NO_LOAD_MOTOR_SPIN.md`,
-  `docs/status/GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`. Supersedes nothing.
+  `docs/status/GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`,
+  `docs/status/GATE05M_C2_RESTRICTED_CREEP.md`. Supersedes nothing.
 
 ## D-007 — Controls-authority doctrine: Coordinator ≠ Owner + Build Engine Authority Law
 
