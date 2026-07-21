@@ -5,6 +5,38 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-16 — RH batch 68 ("66:75") + review_65: NEW GATE 05M-C3 (Closed-Area Movement, modular C3A–C3E) + 14 corrections
+
+- Archived batch_68 (Gate 05M-C3 modular subgate sequence) and review_65 1:1
+  (commit `db796b9`); PROVENANCE row inserted newest-first. Owner: "this is a
+  major improvement and the C3 architecture is now correctly modular."
+- **NEW deliverable `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`** — Gate
+  05M-C3 (Controlled Closed-Area Low-Speed Movement) built as five linear
+  subgates: **05M-C3A** straight-line tracking → **05M-C3B** coast-down +
+  foundation brakes (regen disabled) → **05M-C3C** restricted regeneration
+  (supplemental only) → **05M-C3D** steering-angle / propulsion-envelope map
+  (observation/derating, NOT torque-vectoring) → **05M-C3E** closed-area fault +
+  abort. Includes the Telemetry Synchronicity Packet and the Critical Abort
+  Hierarchy. The Hunter applied the batch_67 corrections (RC-307..312) globally.
+- **RC-313..326 added; 14 corrections applied verbatim:** approved Runout
+  Calculation Record not a hard-coded 50 m (RC-313); cell-by-cell envelope
+  escalation (RC-314); governor proven first off-track (RC-315); split
+  path-deviation observation vs torque-inhibit (RC-316); C3B-004 rewritten so
+  brakes never fight sustained torque, SAFETY-CRITICAL (RC-317); contact
+  thermocouples over IR (RC-318); ABS/ESC two-lane rule (RC-319); no
+  "instant/immediate" regen (RC-320); brake-blend continuity/jerk envelope not
+  "linear" (RC-321); remove premature C3D numbers (RC-322); road-wheel geometry
+  not SWA alone (RC-323); C3E cell-based fault escalation (RC-324); Test
+  Configuration Lock Rule (RC-325); telemetry time-synchronization proof (RC-326).
+- Post-edit label
+  `GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — the
+  procedure architecture is ready for disciplined engineering review, not
+  physical-pass evidence.
+- RH01 section 76; D-008 amended (review_65, ladder extended to 05M-C3A..C3E);
+  RESEARCH_MAP + GATE_RESEARCH_QUEUE updated; handoff rotated. Next = subgate
+  execution / cell authorizations (C3A first). Nothing Confirmed; no normal
+  driving; no public road; ODRs untouched.
+
 ## 2026-07-16 — RH batch 67 ("65:75") + review_64: Gate 05M-C2A/05M-C2B procedure baseline + 6 pre-lock corrections
 
 - Archived batch_67 (Gate 05M-C2A/05M-C2B procedure-baseline re-emit) and

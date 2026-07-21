@@ -749,13 +749,34 @@ post-edit label
 procedure is ready to be reviewed and controlled, not physical-pass evidence.
 Permits **Gate 05M-C3 only** (after 05M-C2A/B/C).
 
-## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: NEXT (owner review_64)
+## Gate 05M-C3 — Controlled Closed-Area Low-Speed Movement  · STATUS: CREATED — modular C3A–C3E (owner review_65, batch_68)
 
-The **last rung of the split 05M-C phase** — controlled closed-area low-speed
-movement, only after Gate 05M-C2 (05M-C2A flat-ground creep → 05M-C2B
-incline/rollback → 05M-C2C faulted-creep recovery) is proven. The Hunter's
-"track-surface speeds up to 15 km/h" is an `INITIAL_TARGET_PROFILE` pending
-supplier + engineering approval (RC-267).
+Deliverable `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md` — the **last rung of
+the split 05M-C phase**, only after Gate 05M-C2 is proven. Built as **five linear
+subgates** (owner review_65): **05M-C3A** straight-line low-speed tracking (10-row
+matrix, four-field per row) → **05M-C3B** coast-down + foundation brakes (regen
+disabled) → **05M-C3C** restricted regeneration (supplemental only) → **05M-C3D**
+steering-angle / propulsion-envelope map (observation/derating, `NO_TORQUE_VECTORING_AUTHORITY`)
+→ **05M-C3E** closed-area fault + abort (cell-escalated). Strictly linear — no
+subgate unlocks without the prior one's `SIGNED_PASS`. Includes the Telemetry
+Synchronicity Packet + data-sync proof (RC-326), the Test Configuration Lock Rule
+(RC-325), cell-by-cell envelope escalation (RC-314), and the Critical Abort
+Hierarchy. 14 review_65 corrections applied (RC-313..326): Runout Calculation
+Record not a hard-coded 50 m (RC-313); governor proven off-track first (RC-315);
+path-deviation observation vs torque-inhibit split (RC-316); **C3B-004 rewritten
+so brakes never fight sustained torque — SAFETY-CRITICAL (RC-317)**; contact
+thermocouples over IR (RC-318); ABS/ESC two-lane rule (RC-319); no
+"instant/immediate" regen (RC-320); brake-blend continuity/jerk envelope (RC-321);
+premature C3D numbers → `CELL_VALUE_PENDING_APPROVAL` (RC-322); road-wheel geometry
+not SWA alone (RC-323); C3E cell-based fault escalation (RC-324). Status:
+`MODULAR_ARCHITECTURE_DEFINED / … / RUNOUT_CALCULATION_REQUIRED /
+NO_ACTIVE_ABS_ESC_AUTHORITY / NO_TORQUE_VECTORING_AUTHORITY / NO_PUBLIC_ROAD /
+NO_CUSTOMER_OPERATION / NO_NORMAL_DRIVING_AUTHORITY`; post-edit label
+`GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — the
+architecture is ready for engineering review, NOT physical-pass evidence.
+**NEXT = 05M-C3A execution + Envelope Cell 1 authorization.** The Hunter's
+"15 km/h" is an `INITIAL_TARGET_PROFILE` pending supplier + engineering approval
+(RC-267/291/293/300 — no auto-unlock).
 
 Enforce throughout — engineer-gated, live-HV, **closed controlled area only, no
 public road, no customer operation, no normal-driving authority**; the Numeric

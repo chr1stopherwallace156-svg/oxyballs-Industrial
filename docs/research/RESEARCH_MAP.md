@@ -371,20 +371,23 @@ supplier-independent plan with the owner's verbatim prompts lives in
 10. Supplier Second-Source Comparison Gate
 11. Business / Fleet Readiness Scan Package
 
-**Next expected batch (owner review_64):** **Gate 05M-C3 — Controlled
-Closed-Area Low-Speed Movement** — the last rung of the split 05M-C phase
-(Decision Register **D-008**, amended review_64), only after Gate 05M-C2
-(05M-C2A flat-ground creep → 05M-C2B incline/rollback → 05M-C2C faulted-creep
-recovery) is proven. Owner review_64: Gate 05M-C2A/C2B is a **procedure
-baseline** — after the batch_66 record-integrity corrections (RC-297..306) and
-the batch_67 pre-lock corrections (RC-307..312 + `INVALID_TEST`) it labels
-`GATE_05M_C2A_C2B_PROCEDURE_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW`, "the
-procedure is ready to be reviewed and controlled, not that the physical vehicle
-has passed it" (nothing Confirmed). Owner: proceed to 05M-C3 "only as controlled
-closed-area movement with speed/ramp targets still under engineering manual and
-artifact" — the Hunter's "15 km/h" is an `INITIAL_TARGET_PROFILE` pending
-supplier + engineering approval (RC-267/291/293/300 — no auto-unlock, explicit
-manual calibration + completed proof artifacts).
+**Next expected batch (owner review_65):** **Gate 05M-C3 subgate execution /
+cell authorizations — C3A first** (Decision Register **D-008**, amended
+review_65). Gate 05M-C3 (Controlled Closed-Area Low-Speed Movement) is now
+**created** (`GATE05M_C3_CLOSED_AREA_MOVEMENT.md`) as five linear subgates —
+**05M-C3A** straight-line tracking → **05M-C3B** coast-down + foundation brakes →
+**05M-C3C** restricted regeneration → **05M-C3D** steering-angle /
+propulsion-envelope map → **05M-C3E** closed-area fault + abort. After the 14
+review_65 corrections (RC-313..326) it labels
+`GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — the
+architecture is ready for engineering review, NOT physical-pass evidence
+(nothing Confirmed). The next batch is expected to detail **05M-C3A execution +
+Envelope Cell 1 authorization**; every number stays `INITIAL_TARGET_PROFILE`
+(RC-267/291/293/300 — no auto-unlock, cell-by-cell escalation RC-314), steering
+angle is observation/derating only (RC-323, no torque-vectoring), and factory
+ABS/ESC stays authoritative (RC-282/319). Ford ABS/ESC interface, inverter/BMS
+regen + isolation architecture, tire/axle/geometry, and thermal-sensor data are
+NeedsSupplierData.
 Engineer-gated, live-HV, **closed controlled area only, no public road, no
 customer operation, no normal-driving authority**; the Ground Movement
 Precondition (RC-285) + predictable-traction surface (RC-283) + spotters +

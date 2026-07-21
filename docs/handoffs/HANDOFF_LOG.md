@@ -13,6 +13,63 @@ newest first. Entries are evidence: never edited, never deleted
 
 ---
 
+## 2026-07-16 — Claude Code — batch 67 ("65:75") + review_64: Gate 05M-C2A/05M-C2B procedure baseline (RC-307..312)
+
+### Session
+
+- From agent: Claude Code
+- Date (UTC): 2026-07-16
+- Reason for handoff: task complete (batch 67 "65:75" + review_64 — Gate
+  05M-C2A/05M-C2B procedure baseline; 6 pre-lock corrections RC-307..312 +
+  `INVALID_TEST` applied); gate pair labels
+  `GATE_05M_C2A_C2B_PROCEDURE_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW`;
+  awaiting the Gate 05M-C3 batch or a supplier reply
+
+### Git state
+
+- Branch: `claude/docs-structure-large-projects-b6vxx5`
+- **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
+- Start commit: `8d6a94b` — Archive raw RH batch 67 + review_64 1:1
+- End commit: `2c1a57b` — Reconcile RH batch 67 + review_64
+- Working tree at handoff: clean (everything committed)
+
+### Work performed
+
+- **Procedure-baseline batch — RC-307..312 applied verbatim to
+  `GATE05M_C2_RESTRICTED_CREEP.md`.** The Hunter converged on all of RC-297..306
+  (incl. the split 05M-C2A-005A/005B rows). Two residuals recorded, not
+  re-registered: the draft still shows "Approved by <role>" (RC-299) and lacks an
+  explicit Numeric Threshold Authority Rule (RC-300) — both already in the
+  deliverable. The owner extended RC-299 with `INVALID_TEST` and RC-300 with
+  "release". Six new corrections: measurable APPS windows (RC-307); current-loop
+  latency envelope, 05M-C2A-006B (RC-308); architecture-dependent E-stop (RC-309);
+  Neutral by zero propulsion torque (RC-310); C2B rollback abort rule (RC-311);
+  brake-hold "approved test torque profile" (RC-312).
+- Status: 05M-C2A → `FORMAL_ENGINEERING_REVIEW_REQUIRED` +
+  `DUAL_CHANNEL_APPS_PLAUSIBILITY_REQUIRED / CAN_1_ELECTRICALLY_PASSIVE_ONLY /
+  PROCEDURE_APPROVAL_REQUIRED / EXECUTION_NOT_YET_PROVEN /
+  RESULT_SIGNOFF_NOT_YET_ELIGIBLE`; 05M-C2B adds `ROLLBACK_ABORT_RULE_REQUIRED /
+  PARKING_RESTRAINT_AUTHORITY_NOT_GRANTED`. Label
+  `GATE_05M_C2A_C2B_PROCEDURE_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW`.
+- Files changed (reconciliation commit `2c1a57b`): `RH01_SECOND_STAGE_FILTER.md`
+  (RC-307..312 + section 75), `GATE05M_C2_RESTRICTED_CREEP.md`,
+  `DECISION_REGISTER.md` (D-008 review_64 amendment), `RESEARCH_MAP.md`,
+  `GATE_RESEARCH_QUEUE.md`, `CHANGELOG.md`, handoff files. Raw archives +
+  PROVENANCE committed as `8d6a94b`.
+
+### Verification
+
+- Tests run: none — no test suite exists in this repository
+- Verified vs claimed: batch_67/review_64 archives 1:1 against the owner's chat
+  ("65:75"); the two residuals recorded without duplicate rows; all six new
+  corrections + `INVALID_TEST` applied verbatim; nothing marked
+  `SIGNED_PASS`/Confirmed; no movement authorized
+
+*(Full State / Next-action / Forbidden-actions content preserved in git history
+at commit `2c1a57b`; the current live copy carries the batch 68 update.)*
+
+---
+
 ## 2026-07-16 — Claude Code — batch 66 ("64:75") + review_63: Gate 05M-C2A/05M-C2B baseline-candidate + 10 corrections (RC-297..306)
 
 ### Session

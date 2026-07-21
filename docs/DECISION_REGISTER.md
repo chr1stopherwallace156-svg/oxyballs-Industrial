@@ -283,6 +283,36 @@ later entry that references it.
   procedure is ready to be reviewed and controlled, NOT evidence the physical
   vehicle has passed (nothing Confirmed). Next = Gate 05M-C3, speed/ramp under
   engineering manual + proof artifacts only (RC-291/293/300).
+- **Amendment (owner review_65, batch_68 "66:75", RC-313..326): Gate 05M-C3
+  (Closed-Area Low-Speed Movement) created as a modular subgate sequence.** The
+  Hunter applied the batch_67 corrections (RC-307..312) globally and delivered
+  Gate 05M-C3 as **five linear subgates** the owner recommended — **05M-C3A
+  Straight-Line Low-Speed Tracking → 05M-C3B Coast-Down + Foundation Brakes →
+  05M-C3C Restricted Regeneration → 05M-C3D Steering-Angle / Propulsion-Envelope
+  Map → 05M-C3E Closed-Area Fault + Abort Sequences** — with strictly linear
+  progression (no unlock without the prior subgate's `SIGNED_PASS`), the
+  Telemetry Synchronicity Packet, and the Critical Abort Hierarchy. Steering
+  angle is an observation/derating input only, NOT torque-vectoring authority
+  (`NO_TORQUE_VECTORING_AUTHORITY`); factory ABS/ESC stays authoritative
+  (`NO_ACTIVE_ABS_ESC_AUTHORITY`); a path deviation / software fault must not
+  auto-open HV contactors unless the approved architecture dictates. The owner
+  added 14 corrections (RC-313..326): approved Runout Calculation Record not a
+  hard-coded 50 m (RC-313); cell-by-cell envelope escalation (RC-314); governor
+  proven first off-track (RC-315); split path-deviation observation vs
+  torque-inhibit (RC-316); C3B-004 rewritten so brakes never fight sustained
+  torque, SAFETY-CRITICAL (RC-317); contact thermocouples over IR (RC-318);
+  ABS/ESC two-lane rule (RC-319); no "instant/immediate" regen (RC-320); brake
+  blend continuity/jerk envelope not "linear" (RC-321); remove premature C3D
+  numbers (RC-322); road-wheel geometry not SWA alone (RC-323); C3E cell-based
+  fault escalation (RC-324); Test Configuration Lock Rule (RC-325); telemetry
+  time-synchronization proof (RC-326). Post-edit label:
+  `GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — the
+  procedure architecture is ready for disciplined engineering review, NOT
+  evidence the physical vehicle has passed (nothing Confirmed). New deliverable
+  `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`. Full ladder: 05J → 05K →
+  05L-A → 05L-B → 05L-C → 05M-A → 05M-B → 05M-C1 → 05M-C2 (05M-C2A → 05M-C2B →
+  05M-C2C) → 05M-C3 (05M-C3A → 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E); each
+  engineer-approved, never "certified safe" (RC-224).
 - Consequences: Redefines the earlier "Gate 05J = live vehicle
   commissioning" placeholder — HV first-energization is pushed to **Gate
   05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the
@@ -296,7 +326,8 @@ later entry that references it.
   `docs/status/GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md`,
   `docs/status/GATE05M_B_NO_LOAD_MOTOR_SPIN.md`,
   `docs/status/GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`,
-  `docs/status/GATE05M_C2_RESTRICTED_CREEP.md`. Supersedes nothing.
+  `docs/status/GATE05M_C2_RESTRICTED_CREEP.md`,
+  `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`. Supersedes nothing.
 
 ## D-007 — Controls-authority doctrine: Coordinator ≠ Owner + Build Engine Authority Law
 

@@ -411,6 +411,20 @@ this execution environment (HTTP 403 via network proxy) — see B-002.
 | RC-310 | **Neutral is defined by zero propulsion torque, not a universal ban on bridge switching (owner review_64)**: blocking "any bridge switching while in Neutral" is wrong — supplier logic may switch for controlled zero-torque / diagnostics / field control → block **torque-producing current while Neutral is valid · active drive command still asserted · propulsion torque persisting · inverter state inconsistent with the supplier-defined Neutral behaviour** | batch_67 (over-broad Neutral block) | supplier-defined Neutral behaviour — **NeedsSupplierData** | **ControlsSafety / NeutralDefinition** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-009) — lanes L7 |
 | RC-311 | **C2B needs a rollback test abort rule (owner review_64, extends RC-305)**: if rollback exceeds the approved distance or speed threshold → **driver reapplies the service brake · independent restraint captures movement if required · torque command is removed · the test is latched `FAIL` / `NEEDS_REVIEW` · and no automatic second attempt is permitted** | batch_67 (no rollback abort path) | supplier/engineering rollback distance + speed limits — **NeedsSupplierData** | **ControlsSafety / RollbackAbort** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2B abort rule + status `ROLLBACK_ABORT_RULE_REQUIRED`) — extends RC-305 — lanes L7 |
 | RC-312 | **"Full torque application" → "approved brake-hold test torque profile" (owner review_64)**: the static brake-hold uses a restricted ≤10 Nm request, not full motor torque, so "during full torque application" is misleading → **"during the approved brake-hold test torque profile"** | batch_67 (ambiguous "full torque") | supplier/engineering brake-hold torque profile — **NeedsSupplierData** | **Nomenclature / TestTorqueNotFullTorque** — recorded in `GATE05M_C2_RESTRICTED_CREEP.md` (05M-C2A-001) — lanes L7 |
+| RC-313 | **Runout distance needs an approved Runout Calculation Record, not a hard-coded 50 m (owner review_65)**: C3A-001 "clear linear runway ≥50 m past braking target" → **"the required clear path + post-target runout is established by the approved Runout Calculation Record for the exact test cell; a 50 m path is an `INITIAL_FACILITY_TARGET` only and cannot authorize execution by itself"**; add a `RunoutCalculation_ID` artifact (test mass · authorized speed · torque/ramp · coast distance · foundation-brake distance · response allowance · surface/grade · uncertainty · safety margin · containment plan) | batch_68 (hard-coded runout) | facility/engineering runout calc — **NeedsSupplierData** | **TestSafety / RunoutCalculation** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3A-001) — extends RC-300 — lanes L7 |
+| RC-314 | **Cell-by-cell operating-envelope escalation (owner review_65)**: C3A must not begin at the max provisional cell (15 km/h / 80 Nm / 40 Nm/sec are `INITIAL_TARGET_PROFILE`) → stepped authorization **Envelope Cell 1 (minimal) → Cell 2 (expanded) → Cell 3 (higher)**, and **passing one cell does not unlock the next — each needs a separate `TestCellAuthorization`** | batch_68 (start at max cell) | engineering cell authorization — **NeedsSupplierData** | **GateStatus / StepwiseEnvelope** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (cell-escalation rule) — lanes L7 |
+| RC-315 | **Speed-governor test must not depend on nearly crossing the max speed (owner review_65)**: "maintain full safe pedal input until the VCU approaches 15 km/h" → **"issue a commanded speed/torque request exceeding the authorized ceiling while approaching from below; verify torque attenuation begins before physical speed crosses the authorized limit"**; prove the governor FIRST via HIL/SIL, lifted-wheel/dyno, or a temporarily lowered ceiling, then controlled track confirmation | batch_68 (aggressive governor test) | supplier/engineering governor cal — **NeedsSupplierData** | **TestSafety / GovernorProof** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3A-004) — lanes L7 |
+| RC-316 | **Separate path-deviation OBSERVATION from automatic VCU torque authority (owner review_65)**: an external tracking system may drive an automatic VCU torque-inhibit only if it is integrated into the safety loop and validated for timing/integrity/failure-detection/authority → split **C3A-009A Path-Deviation Observation** (external system = evidence + human-abort support) and **C3A-009B Path-Deviation Torque-Inhibit Integration** (only after the interface, latency, signal validity, failure modes, and control authority are formally approved); external cameras/survey are not automatic VCU authority until then | batch_68 (external system given control authority) | interface validation + engineering approval — **NeedsSupplierData** | **ControlsSafety / ObservationVsAuthority** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3A-009A/009B) — lanes L7 |
+| RC-317 | **Brakes must not fight sustained propulsion torque — C3B-004 rewrite (owner review_65, SAFETY-CRITICAL)**: "apply 40 Nm traction, then brake, prove brakes stall the motor even with simulated VCU latency" → **"Brake Override with Minimal Authorized Propulsion Request": apply the lowest approved request → apply the service brake → verify BOS removes the torque command within the approved response window → after removal, independently measure foundation-brake stopping; a simulated BOS-latency fault is evaluated in HIL / another bounded method, NEVER on a physically moving vehicle**; blocked = sustained propulsion torque after a brake request / phase current outside the decay envelope / foundation brakes forced to stall a persistent motor output / physical simulation of a hazardous BOS delay during motion | batch_68 (brakes vs sustained torque) | supplier BOS response spec — **NeedsSupplierData** | **TestSafety / NoBrakeVsTorque** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3B-004) — lanes L7 |
+| RC-318 | **Brake temperature: contact thermocouples are the authority, IR is supplemental (owner review_65)**: infrared alone is distorted by emissivity / angle / airflow / shielding / rotor construction / timing → **calibrated contact thermocouples or approved embedded sensors are the thermal authority; IR is supplemental and IR-only results are labelled `SCREENING_EVIDENCE` / `NOT_FINAL_THERMAL_AUTHORITY`** | batch_68 (IR-only thermal) | calibrated thermal sensors — **NeedsSupplierData** | **MeasurementDoctrine / ThermalAuthority** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3B-006) — lanes L7 |
+| RC-319 | **ABS/ESC-related regen removal — two-lane rule, factory signals are not automatic control inputs (owner review_65, extends RC-282)**: "factory traction-control flag commands regen to zero" implies consuming factory signals as control → **Lane A (approved factory status path) usable only with Ford-authorized documentation + formal interface approval; Lane B (conversion-side independent wheel-slip plausibility) via approved independent sensors / bounded simulation, without transmitting to or impersonating ABS/ESC**; factory ABS/ESC stays authoritative but Elektron may not consume every observed message as a safety command | batch_68 (factory flag as control) | Ford ABS/ESC interface authorization — **NeedsSupplierData** | **NetworkIntegrity / FactorySignalAuthority** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3C two-lane rule) — extends RC-282 — lanes L7 |
+| RC-320 | **Remove "instantly"/"immediately" from C3C regen inhibit (owner review_65, extends RC-288)**: "pulls back regeneration requests instantly" / "immediately commands regen to zero" → **"within the supplier-defined or engineering-approved regen-inhibit response window"** | batch_68 (instant regen inhibit) | supplier regen-inhibit response window — **NeedsSupplierData** | **MeasurementDoctrine / ResponseWindow** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3C-005/006) — extends RC-288 — lanes L7 |
+| RC-321 | **Brake blending is not assumed "linear" (owner review_65)**: "transition states remain smooth and linear" → **"the transition remains within the approved deceleration continuity, pedal-response, pressure-response, and jerk envelope"** (blending may be nonlinear by design); track requested regen torque · actual regen torque · hydraulic pressure · vehicle deceleration · deceleration jerk · pedal position · wheel-speed disagreement · BMS charge-current limit | batch_68 (assumed-linear blend) | supplier brake-blend envelope — **NeedsSupplierData** | **MeasurementDoctrine / BlendContinuity** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3C-003) — lanes L7 |
+| RC-322 | **Remove premature numbers from the C3D map (owner review_65, extends RC-300)**: the C3D cell table populated ≤40 Nm / ≤40 Nm/s / ≤20 Nm/s / ≤5% while the paragraph says none should be populated → **`CELL_VALUE_PENDING_APPROVAL` for Max Traction Request + Max Ramp Rate, `KINEMATIC_MODEL_PENDING` for the wheel-speed envelope**; "Immediate Torque Cutout" → **"torque-inhibit response within the approved response window"** | batch_68 (premature C3D numbers) | engineering cell values — **NeedsSupplierData** | **ThresholdAuthority / CellPendingApproval** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3D map) — extends RC-300 — lanes L7 |
+| RC-323 | **C3D needs road-wheel geometry, not steering-wheel angle alone (owner review_65)**: the steering map needs **steering-wheel angle · steering ratio · measured or derived road-wheel angle · wheelbase · front/rear track width · tire rolling radius · axle ratio · differential type · expected inner/outer wheel-speed ratio · vehicle yaw rate (if independently measured)**; chassis-cab body/upfit loading affects tire deflection and tracking; steering angle stays an observation/derating input, NOT torque-vectoring authority | batch_68 (SWA-only steering map) | vehicle geometry + tire/axle data — **NeedsSupplierData** | **ControlsSafety / RoadWheelKinematics** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3D kinematic inputs) — lanes L7 |
+| RC-324 | **C3E faults start at the lowest signed cell, not automatically at 15 km/h (owner review_65)**: → **cell-based escalation: faults begin at the lowest signed operating-envelope cell; no fault repeats at a higher cell until the lower cell has `SIGNED_PASS` + fault containment proven + runout valid + thermal acceptable + test-lead authorization**; fault order single → repeated single → paired → compound, never a jump to multiple faults at the highest provisional speed | batch_68 (all faults at max speed) | engineering escalation authorization — **NeedsSupplierData** | **TestSafety / CellEscalation** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (C3E escalation) — lanes L7 |
+| RC-325 | **Test Configuration Lock Rule (owner review_65)**: every C3 run archives **VCU firmware hash · inverter firmware/version · BMS/PDU firmware/version · calibration-file hash · DBC/version hash · active test-cell limits · vehicle mass + axle-load · tire size/pressure/condition · ambient + surface conditions · instrumentation IDs + calibration status**; any change invalidates reuse of a previous result unless an engineering impact review explicitly allows it | batch_68 (no config lock) | config/firmware records — **NeedsSupplierData** | **EvidenceHygiene / ConfigurationLock** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (Test Configuration Lock Rule) — extends RC-213/218 — lanes L7 |
+| RC-326 | **Telemetry data-synchronization proof (owner review_65)**: the telemetry packet is not evidence until synchronized → **all channels share an approved common clock or documented time-alignment**, with per-signal sampling rates · timestamp source · maximum synchronization error · dropped-frame detection · sensor-latency compensation · start/stop event markers — otherwise a brake event, torque removal, phase-current decay, and actual deceleration may appear incorrectly ordered | batch_68 (unsynchronized telemetry) | instrumentation time-base spec — **NeedsSupplierData** | **EvidenceHygiene / TimeSynchronization** — recorded in `GATE05M_C3_CLOSED_AREA_MOVEMENT.md` (data-synchronization requirement) — lanes L7 |
 
 ## 3. Downgraded claims (kept downgraded — NOT SourceClaims)
 
@@ -5144,5 +5158,99 @@ completed proof artifacts only (RC-291/293/300 — no auto-unlock). Queued in
   (RC-311), test-torque-not-full-torque brake-hold (RC-312); nothing marked
   `SIGNED_PASS` (`NO_PHYSICAL_PASS_CLAIM_UNTIL_EXECUTED`); every number
   INITIAL_TARGET_PROFILE (RC-267/293/300); never "certified safe" (RC-224).
+- Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
+  no customer operation; no compliance/certification claim; ODRs untouched.
+
+## 76. Batch 68 ("66:75") + owner review_65 — NEW GATE 05M-C3 (Closed-Area Movement, modular C3A–C3E) + 14 corrections (2026-07-16)
+
+Raw sources:
+`docs/research/raw/research_hunter/batch_68_gate05mc3_modular_sequence.md`
+and `docs/research/raw/owner_reviews/review_65_batch_68_verdict.md`.
+**Row additions: RC-313..RC-326 (no new CS). NEW deliverable
+`GATE05M_C3_CLOSED_AREA_MOVEMENT.md`.** Owner: "this is a major improvement and
+the C3 architecture is now correctly modular … the biggest remaining issues are
+concentrated in a few test procedures."
+
+### New gate — Gate 05M-C3, modular subgates
+
+The Hunter applied the batch_67 corrections (RC-307..312) globally and delivered
+**Gate 05M-C3 (Closed-Area Low-Speed Movement) as five linear subgates** the
+owner recommended: **05M-C3A** straight-line tracking (10-row matrix,
+four-field per row) → **05M-C3B** coast-down + foundation brakes (regen disabled)
+→ **05M-C3C** restricted regeneration (supplemental only) → **05M-C3D**
+steering-angle / propulsion-envelope map (steering angle as observation/derating,
+NOT torque-vectoring; ABS/ESC factory-authoritative) → **05M-C3E** closed-area
+fault + abort sequences. Progression is strictly linear (no unlock without the
+prior subgate's `SIGNED_PASS`). Includes the Telemetry Synchronicity Packet and
+the Critical Abort Hierarchy (Driver / VCU / Inverter / BMS-PDU / Hardwired
+E-stop / Track team; a path deviation must not auto-open contactors unless the
+approved architecture dictates isolation).
+
+### Fourteen corrections (RC-313..326)
+
+1. **RC-313** — C3A-001 runout: an approved Runout Calculation Record +
+   `RunoutCalculation_ID`, not a hard-coded 50 m.
+2. **RC-314** — cell-by-cell operating-envelope escalation; each cell a separate
+   `TestCellAuthorization`, passing one does not unlock the next.
+3. **RC-315** — governor test proven first via HIL/SIL / lifted-wheel/dyno /
+   lowered ceiling; verify attenuation before crossing, not by approaching the
+   max.
+4. **RC-316** — split path-deviation observation (C3A-009A, evidence + human
+   abort) from torque-inhibit integration (C3A-009B, only after interface
+   approval).
+5. **RC-317** — SAFETY-CRITICAL: C3B-004 rewritten so brakes never fight
+   sustained propulsion torque; BOS-latency fault only in HIL/bounded, never on a
+   moving vehicle.
+6. **RC-318** — contact thermocouples / embedded sensors are the thermal
+   authority; IR is `SCREENING_EVIDENCE` / `NOT_FINAL_THERMAL_AUTHORITY`.
+7. **RC-319** — ABS/ESC regen-removal two-lane rule (Lane A Ford-authorized
+   factory path; Lane B conversion-side plausibility, no transmit/impersonate).
+8. **RC-320** — remove "instant/immediate" from C3C regen inhibit → response
+   window.
+9. **RC-321** — brake blending is not "linear" → continuity / pedal / pressure /
+   jerk envelope.
+10. **RC-322** — remove premature C3D numbers → `CELL_VALUE_PENDING_APPROVAL` /
+    `KINEMATIC_MODEL_PENDING`; "Immediate Torque Cutout" → response window.
+11. **RC-323** — C3D needs road-wheel geometry (steering ratio, road-wheel angle,
+    wheelbase, track, tire radius, axle ratio, diff type, inner/outer wheel-speed
+    ratio, yaw rate), not SWA alone.
+12. **RC-324** — C3E cell-based fault escalation from the lowest signed cell;
+    single → repeated → paired → compound.
+13. **RC-325** — Test Configuration Lock Rule (firmware/calibration/DBC hashes +
+    cell limits + mass/axle + tire + ambient/surface + instrumentation).
+14. **RC-326** — telemetry data-synchronization proof (common clock, sampling
+    rates, timestamp source, max sync error, dropped-frame detection, latency
+    compensation, start/stop markers).
+
+Status: `MODULAR_ARCHITECTURE_DEFINED / GLOBAL_AUDIT_SCHEMA_DEFINED /
+TELEMETRY_PACKET_DEFINED / CONFIGURATION_LOCK_REQUIRED /
+TIME_SYNCHRONIZATION_REQUIREMENTS_PENDING / C3A_STRAIGHT_LINE_PROCEDURE_DRAFTED /
+C3B_FOUNDATION_BRAKE_PROCEDURE_NEEDS_REVISION / C3C_REGEN_INTERFACE_AUTHORITY_PENDING
+/ C3D_KINEMATIC_CELL_VALUES_PENDING / C3E_FAULT_ESCALATION_MATRIX_PENDING /
+NUMERIC_LIMITS_INITIAL_TARGET_PROFILE / RUNOUT_CALCULATION_REQUIRED /
+NO_ACTIVE_ABS_ESC_AUTHORITY / NO_TORQUE_VECTORING_AUTHORITY / NO_PUBLIC_ROAD /
+NO_CUSTOMER_OPERATION / NO_NORMAL_DRIVING_AUTHORITY`. Post-edit label:
+`GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — "not
+physically passed, but the roadmap itself mature enough for disciplined
+engineering review."
+
+### Next
+
+Owner: proceed to **subgate execution / cell authorizations** when the owner
+sends those batches (C3A first). Ford ABS/ESC interface, inverter/BMS regen +
+isolation architecture, tire/axle/geometry, and thermal-sensor data remain
+NeedsSupplierData.
+
+### Standing checks
+
+- New gate deliverable `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`; 14 corrections
+  applied verbatim (RC-313..326); steering angle observation/derating only, never
+  torque-vectoring (RC-323); factory ABS/ESC never consumed as control without
+  Ford authorization (RC-282/319); CAN_1 electrically passive (RC-304); no
+  auto-contactor-open on a fault unless the architecture dictates (RC-309); regen
+  supplemental, foundation brakes primary (RC-321); brakes never fight sustained
+  torque (RC-317); no "instant/immediate" wording (RC-288/320); every number
+  INITIAL_TARGET_PROFILE (RC-267/293/300); nothing `SIGNED_PASS`; never "certified
+  safe" (RC-224).
 - Nothing ingested; nothing marked Confirmed; no normal driving; no public road;
   no customer operation; no compliance/certification claim; ODRs untouched.

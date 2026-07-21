@@ -4,58 +4,64 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-16
-- Reason for handoff: task complete (batch 67 "65:75" + review_64 — Gate
-  05M-C2A/05M-C2B procedure baseline; 6 pre-lock corrections RC-307..312 +
-  `INVALID_TEST` applied); gate pair labels
-  `GATE_05M_C2A_C2B_PROCEDURE_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW`;
-  awaiting the Gate 05M-C3 Controlled Closed-Area Low-Speed Movement batch or a
-  supplier reply
+- Reason for handoff: task complete (batch 68 "66:75" + review_65 — NEW GATE
+  05M-C3 Closed-Area Low-Speed Movement, modular subgates C3A–C3E; 14 corrections
+  RC-313..326 applied); gate labels
+  `GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW`;
+  awaiting the 05M-C3A execution / Envelope-Cell-1 batch or a supplier reply
 
 ## Git state
 
 - Branch: `claude/docs-structure-large-projects-b6vxx5`
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
-- Start commit: `8d6a94b` — Archive raw RH batch 67 + review_64 1:1
+- Start commit: `db796b9` — Archive raw RH batch 68 + review_65 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1`
 - Working tree at handoff: clean (everything committed)
 
 ## Work performed
 
-- **Procedure-baseline batch — RC-307..312 applied verbatim to
-  `GATE05M_C2_RESTRICTED_CREEP.md`.** The Hunter converged on all of RC-297..306
-  (incl. the split 05M-C2A-005A/005B rows). **Two residuals** recorded, not
-  re-registered: the draft still shows "Approved by <role>" (RC-299) and lacks an
-  explicit Numeric Threshold Authority Rule (RC-300) — both already in the
-  deliverable, which is ahead. The owner extended RC-299 with a new
-  `INVALID_TEST` signoff value and RC-300 with "release" authority. Six new
-  corrections:
-  - **RC-307** APPS preconditions "within their approved operating windows", not
-    "completely valid".
-  - **RC-308** phase-current response judged against the supplier tracking
-    envelope with expected latency/filtering/bandwidth included (05M-C2A-006B).
-  - **RC-309** E-stop forces the supplier-defined torque-inhibit + HV-isolation
-    response; contactor interruption only where the architecture requires it.
-  - **RC-310** Neutral defined by zero propulsion torque, not a universal ban on
-    bridge switching.
-  - **RC-311** C2B rollback abort rule — latch `FAIL`/`NEEDS_REVIEW`, no automatic
-    second attempt.
-  - **RC-312** brake-hold "approved test torque profile", not "full torque".
-- Status: 05M-C2A upgrades `PROCEDURE_REVIEW_REQUIRED` →
-  `FORMAL_ENGINEERING_REVIEW_REQUIRED` and adds
-  `DUAL_CHANNEL_APPS_PLAUSIBILITY_REQUIRED / CAN_1_ELECTRICALLY_PASSIVE_ONLY /
-  PROCEDURE_APPROVAL_REQUIRED / EXECUTION_NOT_YET_PROVEN /
-  RESULT_SIGNOFF_NOT_YET_ELIGIBLE`; 05M-C2B adds `ROLLBACK_ABORT_RULE_REQUIRED /
-  PARKING_RESTRAINT_AUTHORITY_NOT_GRANTED`. Post-edit label:
-  `GATE_05M_C2A_C2B_PROCEDURE_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW` —
-  **the procedure is ready to be reviewed and controlled, NOT evidence the
-  physical vehicle has passed** (nothing Confirmed).
+- **NEW GATE 05M-C3 created — `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`.**
+  The Hunter applied the batch_67 corrections (RC-307..312) globally and delivered
+  Gate 05M-C3 (Controlled Closed-Area Low-Speed Movement) as **five linear
+  subgates** the owner recommended: **05M-C3A** straight-line tracking (10-row
+  matrix, four-field per row) → **05M-C3B** coast-down + foundation brakes (regen
+  disabled) → **05M-C3C** restricted regeneration (supplemental only) →
+  **05M-C3D** steering-angle / propulsion-envelope map (observation/derating, NOT
+  torque-vectoring) → **05M-C3E** closed-area fault + abort. Includes the
+  Telemetry Synchronicity Packet and the Critical Abort Hierarchy.
+- **RC-313..326 added; 14 corrections applied verbatim:**
+  - **RC-313** approved Runout Calculation Record + `RunoutCalculation_ID`, not a
+    hard-coded 50 m.
+  - **RC-314** cell-by-cell envelope escalation; each cell a separate
+    `TestCellAuthorization`.
+  - **RC-315** governor proven first via HIL/SIL/lifted-wheel/dyno/lowered ceiling.
+  - **RC-316** split path-deviation observation (C3A-009A) vs torque-inhibit
+    integration (C3A-009B).
+  - **RC-317** SAFETY-CRITICAL: C3B-004 rewritten so brakes never fight sustained
+    propulsion torque; BOS-latency fault only in HIL/bounded, never moving.
+  - **RC-318** contact thermocouples the thermal authority; IR = `SCREENING_EVIDENCE`.
+  - **RC-319** ABS/ESC regen-removal two-lane rule (Lane A Ford-authorized; Lane B
+    conversion-side, no transmit/impersonate).
+  - **RC-320** no "instant/immediate" regen → response window.
+  - **RC-321** brake blending not "linear" → continuity/jerk envelope.
+  - **RC-322** remove premature C3D numbers → `CELL_VALUE_PENDING_APPROVAL`.
+  - **RC-323** C3D road-wheel geometry, not SWA alone.
+  - **RC-324** C3E cell-based fault escalation from the lowest signed cell.
+  - **RC-325** Test Configuration Lock Rule (firmware/calibration/DBC hashes + …).
+  - **RC-326** telemetry data-synchronization proof (common clock, sampling rates …).
+- Status: `MODULAR_ARCHITECTURE_DEFINED / … / RUNOUT_CALCULATION_REQUIRED /
+  NO_ACTIVE_ABS_ESC_AUTHORITY / NO_TORQUE_VECTORING_AUTHORITY / NO_PUBLIC_ROAD /
+  NO_CUSTOMER_OPERATION / NO_NORMAL_DRIVING_AUTHORITY`. Post-edit label:
+  `GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — **the
+  procedure architecture is ready for disciplined engineering review, NOT
+  evidence the physical vehicle has passed** (nothing Confirmed).
 - Files changed (reconciliation commit): `RH01_SECOND_STAGE_FILTER.md`
-  (RC-307..312 + section 75), `GATE05M_C2_RESTRICTED_CREEP.md` (6 corrections +
-  `INVALID_TEST`), `DECISION_REGISTER.md` (D-008 review_64 amendment),
+  (RC-313..326 + section 76), NEW `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`,
+  `DECISION_REGISTER.md` (D-008 review_65 amendment + Recorded-in list),
   `RESEARCH_MAP.md`, `GATE_RESEARCH_QUEUE.md`, `CHANGELOG.md`, handoff files. Raw
-  archives `batch_67_gate05mc2ab_procedure_baseline.md`,
-  `review_64_batch_67_verdict.md`, PROVENANCE committed separately as `8d6a94b`.
+  archives `batch_68_gate05mc3_modular_sequence.md`,
+  `review_65_batch_68_verdict.md`, PROVENANCE committed separately as `db796b9`.
 - **Nothing ingested; nothing Confirmed; no normal driving; no public road; no
   customer operation; no "certified safe"/compliance claim; ODRs untouched.**
 
@@ -63,11 +69,10 @@
 
 - Tests run: none — no test suite exists in this repository
 - Test results: n/a
-- Verified vs claimed: batch_67/review_64 archives are 1:1 against the owner's
-  chat ("65:75"); the Hunter converged on RC-297..306; the two residuals
-  (RC-299/300 not in the draft) recorded without duplicate rows; all six new
-  corrections (RC-307..312) + `INVALID_TEST` applied verbatim to the deliverable;
-  nothing marked `SIGNED_PASS`/Confirmed; no movement authorized
+- Verified vs claimed: batch_68/review_65 archives are 1:1 against the owner's
+  chat ("66:75"); the new Gate 05M-C3 deliverable applies all 14 corrections
+  (RC-313..326) verbatim; the Hunter's global RC-307..312 application is
+  reflected; nothing marked `SIGNED_PASS`/Confirmed; no movement authorized
 
 ## State
 
@@ -96,20 +101,27 @@
   / PARKING_RESTRAINT_AUTHORITY_NOT_GRANTED
   (`GATE05M_C2_RESTRICTED_CREEP.md`, split 05M-C2A/B/C — labels
   `GATE_05M_C2A_C2B_PROCEDURE_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW` per
-  review_64, the procedure ready to be reviewed/controlled, NOT physical-pass
-  evidence); Gate 05M-C3 (controlled closed-area low-speed movement) NEXT per
-  D-008 (amended review_64)**; 07 v0.1 / 07B / 07C v0.4 PARKED; 08
+  review_64, NOT physical-pass evidence); **05M-C3 CREATED —
+  MODULAR_ARCHITECTURE_DEFINED / NO_TORQUE_VECTORING_AUTHORITY /
+  NO_ACTIVE_ABS_ESC_AUTHORITY / RUNOUT_CALCULATION_REQUIRED /
+  NO_NORMAL_DRIVING_AUTHORITY (`GATE05M_C3_CLOSED_AREA_MOVEMENT.md`, five linear
+  subgates 05M-C3A→C3E; labels
+  `GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW` per
+  review_65, NOT physical-pass evidence); 05M-C3A execution + Envelope-Cell-1
+  authorization NEXT per D-008 (amended review_65)**; 07 v0.1 / 07B / 07C v0.4
+  PARKED; 08
   FMEA_REGISTRY_CREATED (15 modes); 08B PARKED; **08C
   SIMULATION_SWEEP_MATRIX_CREATED — PARKED_FOR_SUPPLIER_DATA**. Order after
   05: 06 deep dive → 09 → 10 → 11.
 - Build artifacts: all `docs/status/GATE05*` files (through
-  `GATE05M_C2_RESTRICTED_CREEP.md`), `MASS_LEDGER.md`,
+  `GATE05M_C3_CLOSED_AREA_MOVEMENT.md`), `MASS_LEDGER.md`,
   `AXLE_CG_CALCULATOR.md`, `FMEA_REGISTRY.md`, `DRAFT_VALIDATION_08C.md`.
 - Doctrine: **D-007** (controls-authority) + **D-008** (staged post-bench
-  gate ladder to HV; never "certified safe"; amended review_61 — 05J → 05K →
+  gate ladder to HV; never "certified safe"; amended review_65 — 05J → 05K →
   05L-A → 05L-B → 05L-C → 05M-A → 05M-B → 05M-C1 → 05M-C2 (05M-C2A → 05M-C2B →
-  05M-C2C) → 05M-C3; each engineer-approved) + the **Numeric Threshold Authority
-  Rule** (RC-267/293) + RC-168 + the invented-values family through RC-267 +
+  05M-C2C) → 05M-C3 (05M-C3A → 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E); each
+  engineer-approved) + the **Numeric Threshold Authority Rule** (RC-267/293/300)
+  + RC-168 + the invented-values family through RC-267 +
   RC-190/191/197
   (HIL/bench is evidence, not vehicle authority) + RC-205/227/247/265 (VCU
   requests/monitors; BMS/PDU owns contactor/pre-charge; the inverter owns its
@@ -133,7 +145,15 @@
   RC-308 current-loop latency inside an approved envelope, RC-309
   architecture-dependent E-stop not universal contactor-open, RC-310 Neutral =
   zero propulsion torque not universal switching ban, RC-311 C2B rollback abort
-  rule, RC-312 test-torque-not-full-torque brake-hold**) bind all Gate 05x +
+  rule, RC-312 test-torque-not-full-torque brake-hold, RC-313 approved runout
+  calc not hard-coded 50 m, RC-314 cell-by-cell envelope escalation, RC-315
+  governor proven off-track first, RC-316 path-deviation observation vs
+  torque-inhibit split, RC-317 brakes never fight sustained torque
+  (SAFETY-CRITICAL), RC-318 contact thermocouples over IR, RC-319 ABS/ESC
+  two-lane rule, RC-320 no instant/immediate regen, RC-321 brake-blend
+  continuity/jerk envelope, RC-322 no premature C3D numbers, RC-323 road-wheel
+  geometry not SWA alone, RC-324 C3E cell-based fault escalation, RC-325 test
+  configuration lock, RC-326 telemetry time-synchronization**) bind all Gate 05x +
   downstream controls work.
 - Open owner decisions (accumulated): (1) elektron-os-clean; (2) index.html;
   (3) L2; (4) L4; (5) L6; (6) L9 lane name; (7) Artifact Intake Form; (8)
