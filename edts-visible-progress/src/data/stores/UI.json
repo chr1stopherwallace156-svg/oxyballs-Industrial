@@ -281,5 +281,7 @@
     "TIMELINE",
     "SIMULATION"
   ],
-  "claim_level": "PROTOTYPE_NOT_PREMIUM_FINAL"
+  "claim_level": "PROTOTYPE_NOT_PREMIUM_FINAL",
+  "heatmap_label": "Confidence Visualization",
+  "timeline_label": "STORYBOARD TIMELINE"
 }

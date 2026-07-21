@@ -1,28 +1,40 @@
-# EDTS VPR-2 — Architecture & Interaction Prototype
+# EDTS VPR-2 Architecture and Interaction Prototype
 
-**Honest label:** Architecture and Interaction Prototype — **not** a completed Release 2 product.
+**Audit date:** 2026-07-21  
+**Release identifier:** `EDTS VPR-2 Architecture and Interaction Prototype`
 
-| Concern | Status |
+## System status audit
+
+| Item | Status |
 |---|---|
-| Data-domain separation | **PROTOTYPED** (in-memory JSON tables COMP/GEO/EVD/EGS/SIM/UI) |
-| Real database persistence | **NOT IMPLEMENTED** (SQL schema drafted only) |
-| Six independent DB services | **NOT ADOPTED** — one DB with normalized tables |
-| Relationship graph | **PROTOTYPED** edge list JSON (not procedure engine) |
-| Three.js / R3F scene | **IMPLEMENTED** procedural meshes — **no GLB yet** |
-| Smart camera framing | **PROTOTYPED** (Box3 from scene object + OrbitControls tween) |
-| Physics / axle loads | **DISABLED** until mass coverage |
-| Procedure engine | **STORYBOARD ONLY** |
-| Confidence visualization | **MESH material override** prototype (not a custom GLSL shader) |
-| Photoreal / Apple-final UI | **NOT ACHIEVED** |
+| Domain separation strategy (6 domains) | ✔ PROTOTYPED |
+| Relational DB persistence | ❌ NOT IMPLEMENTED (in-memory JSON reference data) |
+| EGS graph traversal engine | ❌ NOT IMPLEMENTED (storyboard array + edge list) |
+| Real-time axle calculations | ❌ DISABLED (incomplete vehicle mass basis) |
+| Procedure generation | ❌ DISABLED (needs graph + OEM docs) |
+| React Three Fiber viewport | ✔ IMPLEMENTED (Canvas + meshes + raycasting) |
+| Camera bounding-box traversal | ✔ IMPLEMENTED (Box3 + OrbitControls tween) |
+| WebGL material confidence overlay | ✔ IMPLEMENTED (meshStandardMaterial color swap) |
 
-## What works today
+## Storage (3 tiers — not 6 microservices)
 
-Open the app → orbit a **truck-shaped** procedural F-450 chassis-cab silhouette → hover → select → isolate → search → passport with **multi-dimension maturity**.
+1. **Relational** — normalized tables (SQL draft); JSON prototype today  
+2. **Object store** — GLB / STEP / scans / PDFs (empty until acquired)  
+3. **Client view state** — selection, hover, mode, storyboard step, camera  
 
-## What does not
+## Property maturity matrix (orthogonal)
 
-OEM STEP claims · measured axle loads · topological surgery · GLB streaming · microservice mesh.
+Identity · Geometry · Placement · Mass · Interface — never one badge for all.
 
-## Next milestone (acceptance)
+## Mass safety
 
-Map a real GLB (or higher-fidelity mesh set) to ≥5 `comp_id`s with raycast select, material highlight, Box3 camera frame, and evidence panel — without inventing mass or VERIFIED geometry.
+SIM records remain `mass_kg: null`. Handoff sample kg values quarantined in  
+`stores/ASSUMPTION_DEMO_MASS_SUBSET.json` (`DISABLED_BY_DEFAULT`, not loaded as truth).
+
+## Acceptance (current)
+
+User can orbit a truck-shaped R3F scene, hover/select/isolate/search/inspect ≥5 meshes.
+
+## Next milestone
+
+Map real GLB/high-fidelity assets to `comp_id` with object-store refs — still no invented mass/VERIFIED geometry.

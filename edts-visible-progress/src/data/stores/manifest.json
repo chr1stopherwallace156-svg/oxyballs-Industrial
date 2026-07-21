@@ -1,6 +1,6 @@
 {
   "release": "EDTS_VPR2_ARCHITECTURE_INTERACTION_PROTOTYPE",
-  "decision": "DT-D061",
+  "decision": "DT-D062",
   "schema": "edts-vpr2-prototype-normalized-tables-v1",
   "architecture": [
     "COMP",
@@ -81,15 +81,20 @@
   ],
   "prototype_status": {
     "label": "EDTS VPR-2 Architecture and Interaction Prototype",
-    "data_domain_separation": "PROTOTYPED_IN_MEMORY_JSON",
-    "real_database_persistence": "NOT_IMPLEMENTED",
-    "relationship_graph": "PROTOTYPED_EDGE_LIST_JSON",
-    "three_js_scene": "IMPLEMENTED_PROCEDURAL_MESHES_NO_GLB",
-    "smart_camera_traversal": "PROTOTYPED_ANCHOR_AND_BOX3",
-    "physics_engine": "DISABLED_UNTIL_MASS_COVERAGE",
-    "procedure_engine": "STORYBOARD_ONLY",
-    "confidence_visualization": "MESH_MATERIAL_OVERRIDE_PROTOTYPE",
-    "microservices": "NOT_ADOPTED_USE_NORMALIZED_TABLES"
+    "domain_separation_strategy": "PROTOTYPED",
+    "relational_db_persistence": "NOT_IMPLEMENTED",
+    "egs_graph_traversal_engine": "NOT_IMPLEMENTED",
+    "realtime_axle_calculations": "DISABLED",
+    "procedure_generation": "DISABLED",
+    "react_three_fiber_viewport": "IMPLEMENTED",
+    "camera_bounding_box_traversal": "IMPLEMENTED",
+    "webgl_material_confidence_overlay": "IMPLEMENTED"
   },
-  "architecture_note": "Six domain TABLES (COMP/GEO/EVD/EGS/SIM/UI) in one persistence target — not six independent database services."
+  "architecture_note": "Six domain TABLES (COMP/GEO/EVD/EGS/SIM/UI) in one persistence target — not six independent database services.",
+  "storage_tiers": {
+    "tier_1": "RELATIONAL_DB_NORMALIZED_TABLES",
+    "tier_2": "OBJECT_STORE_GLB_STEP_PDF_SCANS",
+    "tier_3": "CLIENT_VIEW_STATE",
+    "note": "Six domains map into three physical tiers — not six microservices."
+  }
 }

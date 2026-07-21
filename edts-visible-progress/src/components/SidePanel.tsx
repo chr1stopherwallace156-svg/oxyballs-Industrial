@@ -74,30 +74,33 @@ export function SidePanel() {
       </div>
 
       <section>
-        <h3>Maturity dimensions</h3>
+        <h3>Property maturity matrix</h3>
         <dl className="maturity-grid">
           <div>
             <dt>Identity</dt>
-            <dd>{selected.maturity.identity_status}</dd>
+            <dd>{selected.maturity_matrix.identity_status}</dd>
           </div>
           <div>
             <dt>Geometry</dt>
-            <dd>{selected.maturity.geometry_status}</dd>
+            <dd>{selected.maturity_matrix.geometry_status}</dd>
           </div>
           <div>
             <dt>Placement</dt>
-            <dd>{selected.maturity.placement_status}</dd>
+            <dd>{selected.maturity_matrix.placement_status}</dd>
           </div>
           <div>
             <dt>Mass</dt>
-            <dd>{selected.maturity.mass_status}</dd>
+            <dd>{selected.maturity_matrix.mass_status}</dd>
           </div>
           <div>
-            <dt>Interfaces</dt>
-            <dd>{selected.maturity.interface_status}</dd>
+            <dt>Interface</dt>
+            <dd>{selected.maturity_matrix.interface_status}</dd>
           </div>
         </dl>
-        <p className="tiny muted">One badge cannot certify all properties — see dimensions above.</p>
+        <p className="tiny muted">
+          Orthogonal statuses — one badge cannot certify identity, geometry, placement, mass, and
+          interfaces together.
+        </p>
       </section>
 
       <section>

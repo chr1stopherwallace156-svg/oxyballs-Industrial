@@ -114,6 +114,15 @@ export interface TwinComponent {
     mass_status: string
     interface_status: string
   }
+  /** Alias used in passport UI — same object as maturity. */
+  maturity_matrix: {
+    identity_status: string
+    geometry_status: string
+    placement_status: string
+    mass_status: string
+    interface_status: string
+  }
+  confidence_overlay_color?: string
 }
 
 export interface SceneTreeNode {
@@ -181,10 +190,11 @@ export interface Catalog {
   states: VehicleState[]
   scene_tree: SceneTreeNode[]
   search_aliases: Record<string, string[]>
-    chrome_policy: string
-    components: TwinComponent[]
-    prototype_status?: Record<string, string>
-  }
+  chrome_policy: string
+  components: TwinComponent[]
+  prototype_status?: Record<string, string>
+  storage_tiers?: Record<string, string>
+}
 
 /** Handoff badge / confidence heatmap colors. */
 export const BADGE_COLORS: Record<DataStatus, string> = {

@@ -1,0 +1,28 @@
+{
+  "decision_id": "DT-D062",
+  "title": "Accept VPR-2 corrected baseline: 6 domains / 3 tiers; R3F audit; quarantine assumption masses",
+  "status": "ACCEPTED",
+  "date_utc": "2026-07-21",
+  "related_locks": ["RL-031"],
+  "summary": "Accept operator reality-check handoff. Confirm EDTS VPR-2 Architecture and Interaction Prototype status audit. Six domains in three storage tiers (relational, object store, client state) — not six microservices. Orthogonal maturity matrix vocabulary locked. Keep implemented R3F Canvas, Box3 camera, material confidence overlay. Axle disabled. Assumption demo masses quarantined and not loaded as SIM truth. Next milestone remains real GLB/mesh mapping.",
+  "accepted_artifacts": [
+    "edts-visible-progress/PROTOTYPE_STATUS.md",
+    "edts-visible-progress/src/data/ARCHITECTURE.md",
+    "edts-visible-progress/src/data/stores/ASSUMPTION_DEMO_MASS_SUBSET.json",
+    "edts-visible-progress/src/data/meshRegistry.ts"
+  ],
+  "audit": {
+    "domain_separation": "PROTOTYPED",
+    "relational_persistence": "NOT_IMPLEMENTED",
+    "egs_traversal": "NOT_IMPLEMENTED",
+    "axle_calculations": "DISABLED",
+    "procedure_generation": "DISABLED",
+    "r3f_viewport": "IMPLEMENTED",
+    "box3_camera": "IMPLEMENTED",
+    "material_confidence_overlay": "IMPLEMENTED"
+  },
+  "recommended_decision": "VPR2_BASELINE_ACCEPTED_NEXT_GLB_MAPPING",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "geometry_extraction_authorized": false,
+  "kernel_mutation": false
+}

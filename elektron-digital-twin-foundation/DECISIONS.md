@@ -1043,3 +1043,20 @@ Append-only record of digital twin foundation decisions.
   6. Next milestone: map real GLB/meshes to ≥5 components with orbit/select/search/inspect
 
 ---
+
+## DT-D062 — VPR-2 corrected baseline accepted (3-tier storage)
+
+- **Change-control record:** [`decisions/DT-D062_VPR2_BASELINE_ACCEPTED.json`](decisions/DT-D062_VPR2_BASELINE_ACCEPTED.json)
+- **decision_id:** `DT-D062`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-031`
+- **recommended_decision:** `VPR2_BASELINE_ACCEPTED_NEXT_GLB_MAPPING`
+- **decision:**
+  1. Accept corrected VPR-2 prototype audit (R3F ✔ · persistence ❌ · axle disabled · storyboard only)
+  2. Six domains → three storage tiers (relational / object / client) — not microservices
+  3. Orthogonal maturity matrix vocabulary locked
+  4. Quarantine assumption demo masses; do not load into SIM as truth
+  5. Next milestone: real GLB/mesh mapping to `comp_id`
+
+---

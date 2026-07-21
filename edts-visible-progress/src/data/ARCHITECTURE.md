@@ -1,19 +1,15 @@
-# Five-/six-domain architecture (corrected)
+# VPR-2 architecture — 6 domains, 3 storage tiers
 
-**Six domain tables** in **one** persistence target (SQLite → Postgres).  
-**Not** six independent database services.
+```
+TIER 1 RELATIONAL DB          TIER 2 OBJECT STORE           TIER 3 CLIENT STATE
+(components, claims,          (GLB, STEP, scans,            (selected, hovered,
+ relationships, mass_props,    PDFs, textures,               mode, heatmap,
+ procedures)                   measurements)                 storyboard, camera)
+```
 
-| Domain | Store file | Responsibility |
-|---|---|---|
-| COMP | `COMP.json` | Component identity |
-| GEO | `GEO.json` | Geometry metadata / future mesh refs |
-| EVD | `EVD.json` | Evidence + multi-dimension maturity |
-| EGS | `EGS.json` | Relationship edges |
-| SIM | `SIM.json` | Mass/CG — null until measured |
-| UI | `UI.json` | Client view-context defaults |
+Six **logical domains** (COMP / GEO / EVD / EGS / SIM / UI+ops) map into three **physical** tiers.
 
-SQL draft: [`schema/vpr2_normalized.sql`](schema/vpr2_normalized.sql).
+At 50k components, bottlenecks are draw calls, LOD streaming, raycasting, and client memory — not row lookups on indexed tables.
 
-Binary assets (GLB/STEP/PDF/scans) → object storage / filesystem — not in the relational rows.
-
-Client view-state (hover/select/mode/timeline/camera) stays in the React app — not a seventh DB.
+SQL draft: [`schema/vpr2_normalized.sql`](schema/vpr2_normalized.sql)  
+In-memory prototype stores: `stores/COMP.json` … `SIM.json` + `UI.json`

@@ -82,13 +82,25 @@ export function joinCatalog(): Catalog {
       mass_kg: (s.mass_kg as number | null) ?? null,
       cg_m: (s.cg_m as number[] | null) ?? null,
       mass_status: String(s.mass_status ?? 'UNKNOWN'),
-      maturity: (e.maturity as TwinComponent['maturity']) ?? {
-        identity_status: 'UNKNOWN',
-        geometry_status: 'PLACEHOLDER',
-        placement_status: 'UNKNOWN',
-        mass_status: 'UNKNOWN',
-        interface_status: 'UNKNOWN',
-      },
+      maturity: (e.maturity_matrix as TwinComponent['maturity']) ??
+        (e.maturity as TwinComponent['maturity']) ?? {
+          identity_status: 'UNVERIFIED_CANDIDATE',
+          geometry_status: 'PLACEHOLDER_GEOMETRY',
+          placement_status: 'UNPLACED',
+          mass_status: 'UNKNOWN',
+          interface_status: 'UNMAPPED',
+        },
+      maturity_matrix: (e.maturity_matrix as TwinComponent['maturity_matrix']) ??
+        (e.maturity as TwinComponent['maturity_matrix']) ?? {
+          identity_status: 'UNVERIFIED_CANDIDATE',
+          geometry_status: 'PLACEHOLDER_GEOMETRY',
+          placement_status: 'UNPLACED',
+          mass_status: 'UNKNOWN',
+          interface_status: 'UNMAPPED',
+        },
+      confidence_overlay_color: e.confidence_overlay_color
+        ? String(e.confidence_overlay_color)
+        : undefined,
       known_interfaces,
       dependency_highlights: { blocks_access_to, must_disconnect_before },
       geometry_role: String(g.geometry_role ?? 'unknown'),
@@ -111,6 +123,7 @@ export function joinCatalog(): Catalog {
     chrome_policy: String(uiStore.chrome_policy),
     components,
     prototype_status: (manifest as { prototype_status?: Record<string, string> }).prototype_status,
+    storage_tiers: (manifest as { storage_tiers?: Record<string, string> }).storage_tiers,
   }
 }
 

@@ -679,3 +679,23 @@ DT-D060 — `R2_NORMALIZED_HOVER_FIRST_MASS_ENGINE_BLOCKED`.
 
 DT-D061 — `VPR2_PROTOTYPE_CLAIMS_CORRECTED_NEXT_IS_REAL_MESH`.
 
+---
+
+## RL-031 — VPR-2 corrected baseline accepted
+
+- **Date:** 2026-07-21
+- **Layer:** prototype baseline lock
+- **Agent:** Cursor Cloud Agent
+- **Question:** Accept corrected 6-domain / 3-tier / R3F audit as the project baseline?
+
+### Findings
+
+1. Audit locked in `PROTOTYPE_STATUS.md` (R3F/Box3/material overlay implemented; persistence/graph/axle/procedures not).
+2. Assumption kg values quarantined — not SIM truth.
+3. Orthogonal maturity matrix vocabulary aligned.
+4. Next milestone unchanged: GLB/mesh mapping.
+
+### Status
+
+DT-D062 — `VPR2_BASELINE_ACCEPTED_NEXT_GLB_MAPPING`.
+

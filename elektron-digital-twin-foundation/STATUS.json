@@ -1,8 +1,8 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.35.0",
-  "updated_at": "2026-07-21T03:15:00Z",
+  "version": "0.36.0",
+  "updated_at": "2026-07-21T03:25:00Z",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
   "phase": "EVIDENCE_ACQUISITION_IN_PROGRESS",
@@ -30,7 +30,7 @@
   "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "VPR-2 claims corrected (DT-D061). Prototype only. Next milestone: map real GLB/meshes to ≥5 comp_ids on existing R3F scene. Mass/axle remain disabled. Continue Mission D L1 + WSM/EWD.",
+  "next_action": "VPR-2 baseline accepted (DT-D062). Prototype audit locked. Next: map real GLB/meshes to ≥5 comp_ids. Axle disabled. Assumption masses quarantined. Continue Mission D L1 + WSM/EWD.",
   "next_build_priority": "REAL_MESH_GLB_MAPPING_ON_R3F",
   "door_fl_decision": "CANDIDATE_ACQUISITION_RECOMMENDED",
   "door_fl_physical_verification": "REQUIRED_EVENTUALLY",
@@ -719,5 +719,11 @@
   "normalized_sql_schema": "edts-visible-progress/src/data/schema/vpr2_normalized.sql",
   "axle_load_display": "DISABLED",
   "procedure_timeline_kind": "STORYBOARD_ONLY",
-  "next_visual_milestone": "GLB_OR_MESH_MAP_TO_COMP_ID_GTE_5"
+  "next_visual_milestone": "GLB_OR_MESH_MAP_TO_COMP_ID_GTE_5",
+  "decision_dt_d062": "decisions/DT-D062_VPR2_BASELINE_ACCEPTED.json",
+  "storage_tiers": "RELATIONAL_OBJECT_CLIENT",
+  "assumption_demo_masses": "QUARANTINED_NOT_LOADED",
+  "r3f_viewport": "IMPLEMENTED",
+  "box3_camera_traversal": "IMPLEMENTED",
+  "material_confidence_overlay": "IMPLEMENTED"
 }

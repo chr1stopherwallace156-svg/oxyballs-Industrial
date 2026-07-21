@@ -73,7 +73,7 @@ export function TimelineRail() {
   return (
     <div className="timeline-rail surgery">
       <div className="timeline-head">
-        <strong>{timeline.title}</strong>
+        <strong>STORYBOARD TIMELINE</strong>
         <p>
           <span className="storyboard-tag">{timeline.kind ?? 'STORYBOARD'}</span> {timeline.honesty}
         </p>
@@ -115,51 +115,40 @@ export function SimulationPanel() {
 
   return (
     <div className="sim-panel">
-      <strong>Demonstration mass subset</strong>
+      <div className="text-[10px] text-amber-400 font-bold uppercase tracking-wider">
+        Demonstration mass subset
+      </div>
+      <strong className="block mt-1">Incomplete vehicle mass basis</strong>
       <span className="sim-status">{massEngine.status}</span>
-      <p>
-        Represented mass coverage is <em>incomplete</em>. Axle reactions are{' '}
-        <strong>disabled</strong> until a full vehicle mass basis exists (not seven
-        selected parts).
-      </p>
       <dl>
         <div>
-          <dt>Known/assumed represented mass</dt>
+          <dt>Represented sub-mass</dt>
           <dd>
-            {massEngine.total_mass_kg == null ? '— (none measured)' : `${massEngine.total_mass_kg.toFixed(1)} kg`}
+            {massEngine.total_mass_kg == null
+              ? '— kg (none measured in SIM)'
+              : `${massEngine.total_mass_kg.toFixed(1)} kg`}
           </dd>
         </div>
         <div>
           <dt>Coverage</dt>
           <dd>
-            {massEngine.components_with_mass}/
-            {massEngine.components_with_mass + massEngine.components_missing_mass} components measured
+            Incomplete · {massEngine.components_with_mass} measured /{' '}
+            {massEngine.components_missing_mass} unknown
           </dd>
         </div>
         <div>
-          <dt>Front axle reaction</dt>
-          <dd>Disabled</dd>
-        </div>
-        <div>
-          <dt>Rear axle reaction</dt>
-          <dd>Disabled</dd>
-        </div>
-        <div>
-          <dt>CG (longitudinal)</dt>
-          <dd>Disabled</dd>
-        </div>
-        <div>
-          <dt>Wheelbase basis</dt>
-          <dd>145.3 in ASSERTION_EXTRACTED</dd>
+          <dt>Axle reaction calculations</dt>
+          <dd>DISABLED</dd>
         </div>
       </dl>
-      <p className="tiny muted">{massEngine.note}</p>
-      <p className="tiny">
-        Axis convention: longitudinal X (forward +), vertical Y up, lateral Z right — CG longitudinal
-        uses X once measured (not invented Z shortcuts).
+      <p className="tiny muted">
+        Quarantined assumption numbers live in{' '}
+        <code>ASSUMPTION_DEMO_MASS_SUBSET.json</code> and are not loaded into SIM. Invented handoff
+        kg values are not shown as engineering results.
       </p>
       <p className="tiny muted">
-        Prototype: {catalog.prototype_status?.physics_engine ?? 'DISABLED_UNTIL_MASS_COVERAGE'}
+        {catalog.storage_tiers?.note ??
+          'Six domains → three storage tiers (relational · object · client state).'}
       </p>
     </div>
   )
@@ -193,7 +182,7 @@ export function FloatingChrome() {
           className={viewMode === 'HEATMAP' ? 'hm-active' : ''}
           onClick={() => setViewMode(viewMode === 'HEATMAP' ? 'INSPECT' : 'HEATMAP')}
         >
-          {viewMode === 'HEATMAP' ? 'Heatmap: ON' : 'Confidence Heatmap'}
+          {viewMode === 'HEATMAP' ? 'Heatmap: ACTIVE' : 'Confidence Visualization'}
         </button>
         <span className="lock-pill">
           LOCK {catalog.locked_configuration.proposal_configuration_id}

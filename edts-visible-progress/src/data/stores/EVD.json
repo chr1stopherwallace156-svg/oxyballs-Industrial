@@ -63,13 +63,21 @@
         }
       ],
       "maturity": {
-        "identity_status": "DOCUMENT_SUPPORTED",
-        "geometry_status": "PLACEHOLDER",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "SUPPLIER_REPORTED",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL_OR_BLOCKED"
+        "interface_status": "PARTIAL_EVIDENCE"
       },
-      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY",
+      "maturity_matrix": {
+        "identity_status": "SUPPLIER_REPORTED",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_EVIDENCE"
+      },
+      "confidence_overlay_color": "#F59E0B"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB",
@@ -102,13 +110,21 @@
       ],
       "mepq_blockers": [],
       "maturity": {
-        "identity_status": "DOCUMENT_SUPPORTED",
-        "geometry_status": "PLACEHOLDER",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "SUPPLIER_REPORTED",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL"
+        "interface_status": "PARTIAL_EVIDENCE"
       },
-      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY",
+      "maturity_matrix": {
+        "identity_status": "SUPPLIER_REPORTED",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_EVIDENCE"
+      },
+      "confidence_overlay_color": "#F59E0B"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
@@ -141,13 +157,21 @@
       ],
       "mepq_blockers": [],
       "maturity": {
-        "identity_status": "DOCUMENT_SUPPORTED",
-        "geometry_status": "PLACEHOLDER",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "SUPPLIER_REPORTED",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL"
+        "interface_status": "PARTIAL_EVIDENCE"
       },
-      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY",
+      "maturity_matrix": {
+        "identity_status": "SUPPLIER_REPORTED",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_EVIDENCE"
+      },
+      "confidence_overlay_color": "#F59E0B"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
@@ -191,13 +215,21 @@
         }
       ],
       "maturity": {
-        "identity_status": "EXPECTED_PLATFORM",
-        "geometry_status": "PLACEHOLDER",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL_OR_BLOCKED"
+        "interface_status": "PARTIAL_EVIDENCE"
       },
-      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY",
+      "maturity_matrix": {
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_EVIDENCE"
+      },
+      "confidence_overlay_color": "#F59E0B"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
@@ -225,13 +257,21 @@
       ],
       "mepq_blockers": [],
       "maturity": {
-        "identity_status": "DOCUMENT_SUPPORTED",
-        "geometry_status": "PLACEHOLDER",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "SUPPLIER_REPORTED",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL"
+        "interface_status": "PARTIAL_EVIDENCE"
       },
-      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY",
+      "maturity_matrix": {
+        "identity_status": "SUPPLIER_REPORTED",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_EVIDENCE"
+      },
+      "confidence_overlay_color": "#F59E0B"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR",
@@ -254,13 +294,21 @@
       ],
       "mepq_blockers": [],
       "maturity": {
-        "identity_status": "DOCUMENT_SUPPORTED",
-        "geometry_status": "PLACEHOLDER",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "SUPPLIER_REPORTED",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL"
+        "interface_status": "PARTIAL_EVIDENCE"
       },
-      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY",
+      "maturity_matrix": {
+        "identity_status": "SUPPLIER_REPORTED",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_EVIDENCE"
+      },
+      "confidence_overlay_color": "#F59E0B"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK",
@@ -299,13 +347,21 @@
         }
       ],
       "maturity": {
-        "identity_status": "DOCUMENT_SUPPORTED",
-        "geometry_status": "PLACEHOLDER",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "SUPPLIER_REPORTED",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL_OR_BLOCKED"
+        "interface_status": "PARTIAL_EVIDENCE"
       },
-      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY",
+      "maturity_matrix": {
+        "identity_status": "SUPPLIER_REPORTED",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_EVIDENCE"
+      },
+      "confidence_overlay_color": "#F59E0B"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
@@ -339,13 +395,21 @@
         }
       ],
       "maturity": {
-        "identity_status": "EXPECTED_PLATFORM",
-        "geometry_status": "PLACEHOLDER",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL_OR_BLOCKED"
+        "interface_status": "PARTIAL_EVIDENCE"
       },
-      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY",
+      "maturity_matrix": {
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_EVIDENCE"
+      },
+      "confidence_overlay_color": "#F59E0B"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT",
@@ -368,13 +432,21 @@
       ],
       "mepq_blockers": [],
       "maturity": {
-        "identity_status": "EXPECTED_PLATFORM",
-        "geometry_status": "PLACEHOLDER",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL"
+        "interface_status": "PARTIAL_EVIDENCE"
       },
-      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY",
+      "maturity_matrix": {
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_EVIDENCE"
+      },
+      "confidence_overlay_color": "#F59E0B"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
@@ -397,13 +469,21 @@
       ],
       "mepq_blockers": [],
       "maturity": {
-        "identity_status": "EXPECTED_PLATFORM",
-        "geometry_status": "PLACEHOLDER",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL"
+        "interface_status": "PARTIAL_EVIDENCE"
       },
-      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY",
+      "maturity_matrix": {
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_EVIDENCE"
+      },
+      "confidence_overlay_color": "#F59E0B"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
@@ -447,13 +527,21 @@
         }
       ],
       "maturity": {
-        "identity_status": "DOCUMENT_SUPPORTED",
-        "geometry_status": "PLACEHOLDER",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "SUPPLIER_REPORTED",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL_OR_BLOCKED"
+        "interface_status": "PARTIAL_EVIDENCE"
       },
-      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY",
+      "maturity_matrix": {
+        "identity_status": "SUPPLIER_REPORTED",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_EVIDENCE"
+      },
+      "confidence_overlay_color": "#F59E0B"
     },
     "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING": {
       "evd_id": "EVD-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING",
@@ -476,13 +564,21 @@
       ],
       "mepq_blockers": [],
       "maturity": {
-        "identity_status": "EXPECTED_PLATFORM",
-        "geometry_status": "PLACEHOLDER",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL"
+        "interface_status": "PARTIAL_EVIDENCE"
       },
-      "primary_display_badge": "PLACEHOLDER_GEOMETRY"
+      "primary_display_badge": "PLACEHOLDER_GEOMETRY",
+      "maturity_matrix": {
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_EVIDENCE"
+      },
+      "confidence_overlay_color": "#F59E0B"
     },
     "EVD-BLOCK-LV-GATEWAY": {
       "evd_id": "EVD-BLOCK-LV-GATEWAY",
@@ -511,13 +607,21 @@
         }
       ],
       "maturity": {
-        "identity_status": "IDENTITY_KNOWN_INTERFACES_BLOCKED",
-        "geometry_status": "PLACEHOLDER",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL_OR_BLOCKED"
+        "interface_status": "UNMAPPED"
       },
-      "primary_display_badge": "BLOCKED"
+      "primary_display_badge": "BLOCKED",
+      "maturity_matrix": {
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "PROVISIONAL_ESTIMATE",
+        "mass_status": "UNKNOWN",
+        "interface_status": "UNMAPPED"
+      },
+      "confidence_overlay_color": "#EF4444"
     },
     "EVD-PROP-HV-PACK-01": {
       "evd_id": "EVD-PROP-HV-PACK-01",
@@ -561,13 +665,21 @@
         }
       ],
       "maturity": {
-        "identity_status": "PROPOSAL_ONLY",
-        "geometry_status": "DESIGN_PROPOSAL_ENVELOPE",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "UNPLACED",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL_OR_BLOCKED"
+        "interface_status": "PARTIAL_EVIDENCE"
       },
-      "primary_display_badge": "DESIGN_PROPOSAL"
+      "primary_display_badge": "DESIGN_PROPOSAL",
+      "maturity_matrix": {
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "UNPLACED",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_EVIDENCE"
+      },
+      "confidence_overlay_color": "#8B5CF6"
     },
     "EVD-PROP-EDU-REAR-01": {
       "evd_id": "EVD-PROP-EDU-REAR-01",
@@ -601,13 +713,21 @@
         }
       ],
       "maturity": {
-        "identity_status": "PROPOSAL_ONLY",
-        "geometry_status": "DESIGN_PROPOSAL_ENVELOPE",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "UNPLACED",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL_OR_BLOCKED"
+        "interface_status": "PARTIAL_EVIDENCE"
       },
-      "primary_display_badge": "DESIGN_PROPOSAL"
+      "primary_display_badge": "DESIGN_PROPOSAL",
+      "maturity_matrix": {
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "UNPLACED",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_EVIDENCE"
+      },
+      "confidence_overlay_color": "#8B5CF6"
     },
     "EVD-PROP-INVERTER-01": {
       "evd_id": "EVD-PROP-INVERTER-01",
@@ -636,13 +756,21 @@
         }
       ],
       "maturity": {
-        "identity_status": "PROPOSAL_ONLY",
-        "geometry_status": "DESIGN_PROPOSAL_ENVELOPE",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "UNPLACED",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL_OR_BLOCKED"
+        "interface_status": "PARTIAL_EVIDENCE"
       },
-      "primary_display_badge": "DESIGN_PROPOSAL"
+      "primary_display_badge": "DESIGN_PROPOSAL",
+      "maturity_matrix": {
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "UNPLACED",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_EVIDENCE"
+      },
+      "confidence_overlay_color": "#8B5CF6"
     },
     "EVD-PROP-DCDC-01": {
       "evd_id": "EVD-PROP-DCDC-01",
@@ -671,13 +799,21 @@
         }
       ],
       "maturity": {
-        "identity_status": "PROPOSAL_ONLY",
-        "geometry_status": "DESIGN_PROPOSAL_ENVELOPE",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "UNPLACED",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL_OR_BLOCKED"
+        "interface_status": "PARTIAL_EVIDENCE"
       },
-      "primary_display_badge": "DESIGN_PROPOSAL"
+      "primary_display_badge": "DESIGN_PROPOSAL",
+      "maturity_matrix": {
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "UNPLACED",
+        "mass_status": "UNKNOWN",
+        "interface_status": "PARTIAL_EVIDENCE"
+      },
+      "confidence_overlay_color": "#8B5CF6"
     },
     "EVD-PROP-LTR-01": {
       "evd_id": "EVD-PROP-LTR-01",
@@ -700,13 +836,21 @@
       ],
       "mepq_blockers": [],
       "maturity": {
-        "identity_status": "PROPOSAL_ONLY",
-        "geometry_status": "DESIGN_PROPOSAL_ENVELOPE",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "UNPLACED",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL"
+        "interface_status": "UNMAPPED"
       },
-      "primary_display_badge": "DESIGN_PROPOSAL"
+      "primary_display_badge": "DESIGN_PROPOSAL",
+      "maturity_matrix": {
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "UNPLACED",
+        "mass_status": "UNKNOWN",
+        "interface_status": "UNMAPPED"
+      },
+      "confidence_overlay_color": "#8B5CF6"
     },
     "EVD-PROP-CCS-PORT-01": {
       "evd_id": "EVD-PROP-CCS-PORT-01",
@@ -729,13 +873,21 @@
       ],
       "mepq_blockers": [],
       "maturity": {
-        "identity_status": "PROPOSAL_ONLY",
-        "geometry_status": "DESIGN_PROPOSAL_ENVELOPE",
-        "placement_status": "PROVISIONAL_LAYOUT_FROM_EXTRACTED_DATUMS",
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "UNPLACED",
         "mass_status": "UNKNOWN",
-        "interface_status": "PARTIAL"
+        "interface_status": "UNMAPPED"
       },
-      "primary_display_badge": "DESIGN_PROPOSAL"
+      "primary_display_badge": "DESIGN_PROPOSAL",
+      "maturity_matrix": {
+        "identity_status": "UNVERIFIED_CANDIDATE",
+        "geometry_status": "PLACEHOLDER_GEOMETRY",
+        "placement_status": "UNPLACED",
+        "mass_status": "UNKNOWN",
+        "interface_status": "UNMAPPED"
+      },
+      "confidence_overlay_color": "#8B5CF6"
     }
   }
 }

@@ -1,0 +1,16 @@
+{
+  "kind": "ASSUMPTION_SANDBOX_ONLY",
+  "status": "DISABLED_BY_DEFAULT",
+  "honesty": "These kg values are NOT measured and MUST NOT appear as engineering results. Axle reactions remain DISABLED. Included only to document rejected sample numbers.",
+  "rejected_from_handoff_sample": true,
+  "masses_kg": {
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME": 420,
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB": 310,
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK": 490,
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION": 140,
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR": 380,
+    "PROP-HV-PACK-01": 520,
+    "PROP-EDU-REAR-01": 110
+  },
+  "axle_reactions": "DISABLED"
+}

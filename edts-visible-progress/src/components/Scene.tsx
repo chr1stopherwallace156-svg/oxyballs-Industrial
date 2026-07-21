@@ -10,13 +10,8 @@ import {
 import { useEffect, useMemo, useRef, type ReactNode } from 'react'
 import * as THREE from 'three'
 import { useDemo } from '../DemoContext'
-import {
-  HEATMAP_COLORS,
-  IN_TO_M,
-  type TwinComponent,
-  type VehicleState,
-  type ViewMode,
-} from '../types'
+import { HEATMAP_COLORS, IN_TO_M, type TwinComponent, type VehicleState, type ViewMode } from '../types'
+import { registerMesh } from '../data/meshRegistry'
 
 /** ASSERTION_EXTRACTED layout dims only (SRC-CAND-000010). Cross-sections are placeholders. */
 const WB = 145.3 * IN_TO_M
@@ -79,7 +74,8 @@ function visualFor(
   viewMode: ViewMode,
 ): VisualModeResult {
   if (viewMode === 'HEATMAP') {
-    const color = HEATMAP_COLORS[component.data_status]
+    const color =
+      component.confidence_overlay_color ?? HEATMAP_COLORS[component.data_status]
     return {
       color,
       opacity: 0.92,
@@ -606,6 +602,7 @@ function Vehicle() {
   return (
     <group>
       {visibleComponents.map((c) => {
+        registerMesh(c.id, c.geometry_role)
         const Comp = ROLE_MAP[c.geometry_role]
         if (!Comp) return null
         const dimmed = dimUnrelated && selectedId !== null && selectedId !== c.id
