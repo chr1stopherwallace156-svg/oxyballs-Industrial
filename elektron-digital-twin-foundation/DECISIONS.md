@@ -989,3 +989,21 @@ Append-only record of digital twin foundation decisions.
   7. Admit handoff architecture (badge colors, scene tree, evidence ledger, decon/EV visuals) while rejecting sample JSX fabricated VERIFIED / kWh / kW / mass claims
 
 ---
+
+## DT-D059 — Five-store scale path + Timeline / Search / Heatmap / Simulation scaffold
+
+- **Change-control record:** [`decisions/DT-D059_FIVE_STORE_VIEWER_MODES.json`](decisions/DT-D059_FIVE_STORE_VIEWER_MODES.json)
+- **decision_id:** `DT-D059`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-028`
+- **recommended_decision:** `FIVE_STORE_SCALE_PATH_PLUS_VIEWER_MODES`
+- **decision:**
+  1. Split Visible Progress data into Component / Geometry / Evidence / Relationships / UI stores
+  2. Admit Timeline visual narrative (not authorized procedure)
+  3. Admit Search + camera focus
+  4. Admit evidence-maturity heatmap (not confidence %)
+  5. Scaffold Simulation with null axle/CG deltas — reject invented ±32 kg / 18 mm until mass evidence
+  6. Minimal hover-reveal chrome; photoreal truck deferred
+
+---

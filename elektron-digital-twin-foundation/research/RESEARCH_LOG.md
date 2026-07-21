@@ -614,3 +614,26 @@ DT-D057 — continue Mission D L1; do not invent truth to unblock conversion ana
 ### Status
 
 DT-D058 — `VISIBLE_PROGRESS_R1_PROVISIONAL_VISUAL_ONLY`. Continue Mission D L1 + WSM/EWD in parallel.
+
+---
+
+## RL-028 — Five-store scale path + viewer modes
+
+- **Date:** 2026-07-21
+- **Layer:** visual demonstrator architecture
+- **Agent:** Cursor Cloud Agent
+- **Question:** How to scale past monolithic component blobs and add Timeline / Search / Heatmap / Simulation without inventing mass/CG?
+
+### Findings
+
+1. **Five stores** admitted (Component / Geometry / Evidence / Relationships / UI) via `edts-visible-progress/src/data/stores/`.
+2. Timeline = visual surgery narrative only — **not** authorized procedure.
+3. Search focuses camera + opens passport.
+4. Heatmap colors by evidence maturity (green→red).
+5. Simulation scaffold shows axle/CG as **UNKNOWN** — ±32 kg / 18 mm rejected until MEPQ-001.
+6. Photoreal / final Apple chrome deferred.
+
+### Status
+
+DT-D059 — `FIVE_STORE_SCALE_PATH_PLUS_VIEWER_MODES`.
+

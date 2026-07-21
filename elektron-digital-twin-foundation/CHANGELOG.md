@@ -6,6 +6,7 @@ All notable changes to the digital twin foundation. Append-only.
 
 ### Added
 
+- **DT-D059 / RL-028** — Five-store data architecture + Timeline / Search / Heatmap / Simulation scaffold
 - **DT-D058 / RL-027** — EDTS Visible Progress Release 1 (provisional interactive 3D demonstrator)
 - App: `edts-visible-progress/` (Vite + React Three Fiber)
 - Honest component catalog with data-status badges and MEPQ blockers
@@ -14,6 +15,7 @@ All notable changes to the digital twin foundation. Append-only.
 ### Status
 
 - Visible Progress R1: **PROVISIONAL_VISUAL_ONLY** (not VERIFIED geometry; L10 demo not authorized)
+- Simulation mass/CG: **BLOCKED_UNTIL_MASS_EVIDENCE**
 - Mission D L1 + WSM/EWD continue in parallel
 
 ## 2026-07-16

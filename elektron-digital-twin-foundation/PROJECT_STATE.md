@@ -5,17 +5,17 @@
 
 | Concern | Status |
 |---|---|
-| Visible Progress R1 | **DT-D058** provisional visual only (`edts-visible-progress/`) |
+| Visible Progress R1 | **DT-D058** provisional visual (`edts-visible-progress/`) |
+| Five-store + modes | **DT-D059** Component/Geometry/Evidence/Relationships/UI |
+| Timeline / Search / Heatmap | Admitted |
+| Simulation axle/CG | **Blocked** until mass evidence |
+| Photoreal truck | Deferred |
 | Fabricated L1 dump | **DT-D057 REJECTED** |
-| Three-layer protocol | ACTIVE — enforced |
-| EPAS-as-OEM claim | **REJECTED** (hydraulic recirculating ball is L1) |
-| Battery chem / kWh / V | **Not accepted yet** |
-| Mission D L1 | Continue |
-| Mission E | Deferred |
+| Three-layer protocol | ACTIVE |
 | Procedures | **BLOCKED** |
 | L10 public demo | **Not authorized** |
 | Kernel | Unchanged |
 
 ## Change-control
 
-- `decisions/DT-D030_*.json` … `DT-D058_*.json`
+- `decisions/DT-D030_*.json` … `DT-D059_*.json`
