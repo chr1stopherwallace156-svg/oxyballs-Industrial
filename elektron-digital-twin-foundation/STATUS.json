@@ -1,8 +1,8 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.33.0",
-  "updated_at": "2026-07-21T02:50:00Z",
+  "version": "0.34.0",
+  "updated_at": "2026-07-21T03:00:00Z",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
   "phase": "EVIDENCE_ACQUISITION_IN_PROGRESS",
@@ -30,7 +30,7 @@
   "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "FIVE_STORE + viewer modes admitted (DT-D059). Visible Progress R1 remains provisional visual. Continue Mission D Layer 1 + MISN-000003 WSM/EWD. Simulation axle/CG deltas stay UNKNOWN until mass evidence. Photoreal truck deferred.",
+  "next_action": "Visible Progress R2 normalized architecture admitted (DT-D060). Mass/CG engine remains BLOCKED until measured SIM records. Continue Mission D L1 + WSM/EWD. Photoreal truck deferred.",
   "next_build_priority": "MISN004_LAYER1_TRUTH_PLUS_VISIBLE_PROGRESS_REFINEMENT",
   "door_fl_decision": "CANDIDATE_ACQUISITION_RECOMMENDED",
   "door_fl_physical_verification": "REQUIRED_EVENTUALLY",
@@ -704,8 +704,13 @@
   "visible_progress_r1_sprint": "research/sprints/RL-027_VISIBLE_PROGRESS_R1.md",
   "l10_public_demo": "NOT_AUTHORIZED_BY_DT_D058",
   "decision_dt_d059": "decisions/DT-D059_FIVE_STORE_VIEWER_MODES.json",
-  "visible_progress_architecture": "FIVE_STORE_V1",
+  "visible_progress_architecture": "R2_COMP_GEO_EVD_EGS_SIM_UI",
   "visible_progress_modes": ["INSPECT", "HEATMAP", "TIMELINE", "SIMULATION"],
   "simulation_axle_cg": "BLOCKED_UNTIL_MASS_EVIDENCE",
-  "visible_progress_r1_sprint_028": "research/sprints/RL-028_FIVE_STORE_VIEWER_MODES.md"
+  "visible_progress_r1_sprint_028": "research/sprints/RL-028_FIVE_STORE_VIEWER_MODES.md",
+  "decision_dt_d060": "decisions/DT-D060_R2_NORMALIZED_ARCHITECTURE.json",
+  "visible_progress_release": "R2",
+  "visible_progress_r2_sprint": "research/sprints/RL-029_R2_NORMALIZED_ARCHITECTURE.md",
+  "hover_first_viewport": "ACTIVE",
+  "invented_sample_masses": "REJECTED"
 }

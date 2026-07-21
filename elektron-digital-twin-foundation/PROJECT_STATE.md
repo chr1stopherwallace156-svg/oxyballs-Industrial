@@ -5,17 +5,15 @@
 
 | Concern | Status |
 |---|---|
-| Visible Progress R1 | **DT-D058** provisional visual (`edts-visible-progress/`) |
-| Five-store + modes | **DT-D059** Component/Geometry/Evidence/Relationships/UI |
-| Timeline / Search / Heatmap | Admitted |
-| Simulation axle/CG | **Blocked** until mass evidence |
+| Visible Progress | **R2** (DT-D060) COMP/GEO/EVD/EGS/SIM/UI |
+| Hover-first viewport | Active |
+| Mass / CG engine | **Blocked** until measured SIM |
+| Invented sample masses | **Rejected** |
 | Photoreal truck | Deferred |
 | Fabricated L1 dump | **DT-D057 REJECTED** |
-| Three-layer protocol | ACTIVE |
 | Procedures | **BLOCKED** |
-| L10 public demo | **Not authorized** |
 | Kernel | Unchanged |
 
 ## Change-control
 
-- `decisions/DT-D030_*.json` … `DT-D059_*.json`
+- `decisions/DT-D030_*.json` … `DT-D060_*.json`

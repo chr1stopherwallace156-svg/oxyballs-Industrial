@@ -1,24 +1,26 @@
-# Five-store architecture (scale path)
+# EDTS R2 — Normalized database architecture
 
-Monolithic component blobs do not scale to tens of thousands of objects.
+Six decoupled stores linked by foreign keys. Each scales independently toward 50k+ parts.
 
-EDTS Visible Progress joins five stores at runtime:
+```
+COMP (comp_id)
+  ├── GEO  (geo_id  → comp_id)   mesh / LOD / STEP / transforms
+  ├── EVD  (evd_id  → comp_id)   evidence ledger / KG / MEPQ
+  ├── SIM  (sim_id  → comp_id)   mass / CG / axle shares (null until measured)
+  └── EGS  (edge_id)             BOLTED_TO / MUST_DISCONNECT_BEFORE / …
+UI   view context, search aliases, chrome policy
+```
 
-| Store | File | Owns |
+| Store | File | Primary key |
 |---|---|---|
-| **COMPONENT_INDEX** | `stores/components.json` | Identity, family, category, visibility, removaibility |
-| **GEOMETRY** | `stores/geometry.json` | Role, explode vector, geometry type / mesh handle |
-| **EVIDENCE** | `stores/evidence.json` | Data-status, ledger, KG gaps, MEPQ, mass/CG (null until measured) |
-| **RELATIONSHIPS** | `stores/relationships.json` | Interfaces, dependency highlights |
-| **UI** | `stores/ui.json` | Scene tree, search aliases, chrome policy, badge colors |
+| COMP | `COMP.json` | `comp_id` |
+| GEO | `GEO.json` | `geo_id` |
+| EVD | `EVD.json` | `evd_id` |
+| EGS | `EGS.json` | `edge_id` |
+| SIM | `SIM.json` | `sim_id` |
+| UI | `UI.json` | view context |
 
-Plus companion docs (not joined into every node):
+`joinCatalog.ts` builds a transient view for the React/Three viewer.
+`massEngine.ts` only computes totals when every active SIM record has measured/verified mass — invented sample kg values are rejected (DT-D060).
 
-| Store | File | Owns |
-|---|---|---|
-| **TIMELINE** | `stores/timeline.json` | Surgery sequence steps |
-| **SIMULATION** | `stores/simulation.json` | Axle/CG scaffold — blocked until mass evidence |
-
-`joinCatalog.ts` builds a transient `TwinComponent` view for the R1 viewer. Future backends can replace JSON files with indexed DB / graph shards without rewriting the React scene.
-
-Legacy `componentCatalog.json` remains as a frozen snapshot for audit; **authoritative edits go in `stores/`**.
+Legacy `components.json` / `geometry.json` / … are superseded.

@@ -1,40 +1,32 @@
-# EDTS Visible Progress — Release 1
+# EDTS Visible Progress — Release 2 (architecture)
 
-Interactive 3D demonstrator + component evidence explorer for the Elektron Digital Twin System.
+Normalized 6-store digital twin viewer for `CFG-2019-F450-REG-CAB-4X2-60CA-DRW`.
 
-**Not engineering truth.** Meshes are stylized `PLACEHOLDER_GEOMETRY` or `DESIGN_PROPOSAL` unless a badge says otherwise.
+**Decisions:** DT-D058 (R1 visual) · DT-D059 (five-store path) · **DT-D060 (R2 normalized + hover-first)**
 
-## Canonical lock
+## Databases
 
-`CFG-2019-F450-REG-CAB-4X2-60CA-DRW` · DT-D058 / DT-D059
+COMP · GEO · EVD · EGS · SIM · UI — see [`src/data/ARCHITECTURE.md`](src/data/ARCHITECTURE.md)
 
-## Five-store architecture (scale path)
+## Interaction (Apple-style)
 
-See [`src/data/ARCHITECTURE.md`](src/data/ARCHITECTURE.md).
-
-Component · Geometry · Evidence · Relationships · UI — joined at runtime. Authoritative edits live under `src/data/stores/`.
+- Default: clean model — **no** persistent labels/badges
+- Hover: glass outline + name + data-status
+- Select: dims unrelated parts · opens passport · shows interface edges
 
 ## Modes
 
-| Mode | What it does |
+| Mode | Behavior |
 |---|---|
-| **Inspect** | Select / isolate / hide / remove / explode |
-| **Heatmap** | Color by evidence maturity (green → red) |
-| **Timeline** | ICE→EV surgery narrative (visual only — not a WSM procedure) |
-| **Simulation** | Axle/CG scaffold — **blocked** until mass evidence (no invented ±32 kg) |
+| Inspect | Select / hide / remove / explode |
+| Heatmap | Evidence maturity shader |
+| Surgery | Step timeline ICE→EV (visual narrative only) |
+| Mass / CG | Live engine — **blocked** until measured masses |
 
-## Search
+## Honesty
 
-Type e.g. `fuel tank` → camera focuses · part highlights · passport opens.
-
-## Minimal chrome
-
-Labels appear on **hover / select**. Quiet overlays when idle. Photoreal truck deferred until acquired assets.
-
-## Run
+Sample `EDTSDemonstratorV2.jsx` invented masses (420/490/520 kg…), axle formulas, and VERIFIED badges **rejected**. Photoreal truck deferred until acquired assets.
 
 ```bash
-cd edts-visible-progress
-npm install
-npm run dev
+cd edts-visible-progress && npm install && npm run dev
 ```

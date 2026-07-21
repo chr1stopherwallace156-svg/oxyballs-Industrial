@@ -1007,3 +1007,21 @@ Append-only record of digital twin foundation decisions.
   6. Minimal hover-reveal chrome; photoreal truck deferred
 
 ---
+
+## DT-D060 — Visible Progress R2 normalized COMP/GEO/EVD/EGS/SIM/UI
+
+- **Change-control record:** [`decisions/DT-D060_R2_NORMALIZED_ARCHITECTURE.json`](decisions/DT-D060_R2_NORMALIZED_ARCHITECTURE.json)
+- **decision_id:** `DT-D060`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-029`
+- **recommended_decision:** `R2_NORMALIZED_HOVER_FIRST_MASS_ENGINE_BLOCKED`
+- **decision:**
+  1. Promote to R2 normalized stores with foreign keys (COMP/GEO/EVD/EGS/SIM/UI)
+  2. Default viewport: no persistent labels — hover/select only
+  3. Admit Surgery timeline, search focus, evidence heatmap
+  4. Wire mass engine but keep outputs UNKNOWN until measured SIM records
+  5. Reject sample invented masses / axle formulas / premature VERIFIED badges
+  6. Photoreal STEP/LOD pipeline deferred
+
+---

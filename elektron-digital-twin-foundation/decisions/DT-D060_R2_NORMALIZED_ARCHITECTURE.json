@@ -1,0 +1,42 @@
+{
+  "decision_id": "DT-D060",
+  "title": "Admit EDTS Visible Progress R2 normalized COMP/GEO/EVD/EGS/SIM/UI architecture with hover-first UI; reject invented SIM masses",
+  "status": "ACCEPTED",
+  "date_utc": "2026-07-21",
+  "related_locks": ["RL-029"],
+  "summary": "Promote Visible Progress to R2 normalized databases (COMP, GEO, EVD, EGS, SIM, UI) with foreign keys. Admit Apple-style hover-first viewport, Surgery timeline, search focus, evidence heatmap, and honest mass engine that returns UNKNOWN until measured. Reject EDTSDemonstratorV2 sample invented masses, live axle formulas, and premature VERIFIED badges. Photoreal mesh deferred.",
+  "accepted_artifacts": [
+    "edts-visible-progress/src/data/stores/COMP.json",
+    "edts-visible-progress/src/data/stores/GEO.json",
+    "edts-visible-progress/src/data/stores/EVD.json",
+    "edts-visible-progress/src/data/stores/EGS.json",
+    "edts-visible-progress/src/data/stores/SIM.json",
+    "edts-visible-progress/src/data/stores/UI.json",
+    "edts-visible-progress/src/data/massEngine.ts",
+    "edts-visible-progress/src/data/ARCHITECTURE.md"
+  ],
+  "architecture": ["COMP", "GEO", "EVD", "EGS", "SIM", "UI"],
+  "features_admitted": [
+    "HOVER_FIRST_VIEWPORT",
+    "SELECTION_DIM_UNRELATED",
+    "SURGERY_TIMELINE",
+    "SEARCH_CAMERA_FOCUS",
+    "EVIDENCE_HEATMAP",
+    "MASS_ENGINE_NULL_SAFE"
+  ],
+  "explicit_rejections": [
+    "Invented SIM masses 420/310/490/140/380/520/110 kg",
+    "Live front/rear axle loads derived from invented masses",
+    "VERIFIED/PHYSICALLY_MEASURED without ASSERTION_VERIFIED / measured evidence",
+    "110 kWh / 250 kW product claims",
+    "Timeline as authorized WSM procedure"
+  ],
+  "deferred": [
+    "Photoreal truck / STEP LOD pipeline",
+    "Live axle load once masses + datum model exist"
+  ],
+  "recommended_decision": "R2_NORMALIZED_HOVER_FIRST_MASS_ENGINE_BLOCKED",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "geometry_extraction_authorized": false,
+  "kernel_mutation": false
+}

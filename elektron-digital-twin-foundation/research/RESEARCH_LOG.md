@@ -637,3 +637,24 @@ DT-D058 — `VISIBLE_PROGRESS_R1_PROVISIONAL_VISUAL_ONLY`. Continue Mission D L1
 
 DT-D059 — `FIVE_STORE_SCALE_PATH_PLUS_VIEWER_MODES`.
 
+---
+
+## RL-029 — Visible Progress R2 normalized architecture
+
+- **Date:** 2026-07-21
+- **Layer:** visual demonstrator R2
+- **Agent:** Cursor Cloud Agent
+- **Question:** How to deliver enterprise-grade normalized DBs + Apple-style hover UI + live mass engine without inventing physics?
+
+### Findings
+
+1. **COMP/GEO/EVD/EGS/SIM/UI** stores with foreign keys admitted.
+2. Hover-first viewport: labels only on hover/select; selection dims unrelated.
+3. Mass engine computes only when all active SIM masses are measured/verified — otherwise **BLOCKED**.
+4. Sample V2 invented kg / axle formulas / VERIFIED badges **rejected**.
+5. Surgery / Search / Heatmap retained from DT-D059.
+
+### Status
+
+DT-D060 — `R2_NORMALIZED_HOVER_FIRST_MASS_ENGINE_BLOCKED`.
+

@@ -6,15 +6,14 @@ All notable changes to the digital twin foundation. Append-only.
 
 ### Added
 
+- **DT-D060 / RL-029** — Visible Progress R2 normalized COMP/GEO/EVD/EGS/SIM/UI + hover-first UI + null-safe mass engine
 - **DT-D059 / RL-028** — Five-store data architecture + Timeline / Search / Heatmap / Simulation scaffold
 - **DT-D058 / RL-027** — EDTS Visible Progress Release 1 (provisional interactive 3D demonstrator)
 - App: `edts-visible-progress/` (Vite + React Three Fiber)
-- Honest component catalog with data-status badges and MEPQ blockers
-- Factory ICE / Deconstruction / EV Proposal states
 
 ### Status
 
-- Visible Progress R1: **PROVISIONAL_VISUAL_ONLY** (not VERIFIED geometry; L10 demo not authorized)
+- Visible Progress: **R2** provisional visual (not VERIFIED geometry; L10 demo not authorized)
 - Simulation mass/CG: **BLOCKED_UNTIL_MASS_EVIDENCE**
 - Mission D L1 + WSM/EWD continue in parallel
 
