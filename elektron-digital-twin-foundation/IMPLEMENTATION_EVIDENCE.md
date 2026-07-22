@@ -37,7 +37,7 @@ Estimates from DT-D065 audit + this evidence pass. **Not** marketing maturity of
 | Viewer (framework + interaction) | **90%** | R3F, orbit, hover/select/isolate/explode/search/Box3/passport wired; no automated UI tests; no real GLB stress |
 | Vehicle assets (SPEC-3D-001 GLB) | **10%** | Gate docs + empty Tier-2 path; no binary |
 | Runtime mapping (GEO_ → CFGCOMP) | **25%** | Manifest + offline verifier + procedural `registerMesh`; no GLB ingest |
-| VIN pipeline (vPIC + label) | **0%** | Specs only |
+| VIN pipeline | **35%** | Resolver Implemented+Tested; no label OCR / physical confirm |
 | Mobile capture (ARKit / `.edts-scan`) | **0%** | Specs only |
 | Registration (Open3D / ICP / QA) | **0%** | Specs only |
 | Digital twin evidence (passport / ledger / maturity) | **35%** | UI + JSON evidence stores; no measured geometry promotion path |
@@ -210,6 +210,22 @@ Estimates from DT-D065 audit + this evidence pass. **Not** marketing maturity of
 
 ---
 
+## EVD-FEAT-012 — VIN configuration resolver (DT-D067)
+
+| Field | Value |
+|---|---|
+| Feature | NHTSA vPIC VIN validate → decode → normalize → compare → persist → report |
+| Implemented | ✅ |
+| Tested | 🧪 (`edts-vin-resolver` vitest, 19 tests) |
+| Verified | ✖ — **not** engineering twin / geometry / CONFIGURATION_CONFIRMED |
+| Evidence | `edts-vin-resolver/src/vin/*`, `scripts/resolve-vin.ts` |
+| Demo | `cd edts-vin-resolver && npm run vin -- 1HTKHPVK8KH805188` |
+| Test | `npm test` · fixture + offline · opt-in `npm run vin:test-live` |
+| Acceptance | Exit 0; evidence/vehicle/report written; International VIN → REJECTED_REFERENCE_MATCH vs F-450 CFG |
+| Reviewer | DT-D067 |
+
+---
+
 ## Explicit non-evidence (must stay red)
 
 | Feature | Implemented | Tested | Verified | Note |
@@ -217,7 +233,7 @@ Estimates from DT-D065 audit + this evidence pass. **Not** marketing maturity of
 | Real SPEC-3D-001 GLB | ✖ | ✖ | ✖ | Highest-value unlock |
 | `useGLTF` runtime load | ✖ | ✖ | ✖ | |
 | GEO_ → CFGCOMP ingest from GLB | ✖ | ✖ | ✖ | |
-| NHTSA vPIC resolver | ✖ | ✖ | ✖ | |
+| NHTSA vPIC resolver | ✅ | 🧪 | ✖ | Library+CLI; not geometry Verified |
 | Mobile ARKit / AprilTag | ✖ | ✖ | ✖ | |
 | Open3D ICP / RMS QA | ✖ | ✖ | ✖ | |
 | PostgreSQL Tier-1 | ✖ | ✖ | ✖ | SQL draft ≠ implemented |

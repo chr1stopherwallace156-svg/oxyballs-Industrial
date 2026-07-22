@@ -44,14 +44,14 @@
 
 **Goal:** Quarantine pipeline enforced in code, not prose.
 
-| Order | Task | Closes |
-|---|---|---|
-| P2.1 | Python `NHTSAVpicResolver` + match matrix | MF-010, MF-011 |
-| P2.2 | Unit tests: reject 4×4, Crew Cab, Pickup | MF-013 |
-| P2.3 | Door-jamb OCR fallback (optional parallel) | MF-012 |
-| P2.4 | Wire intake schema to instance record | MF-014 |
+| Order | Task | Closes | Status |
+|---|---|---|---|
+| P2.1 | Python/TS `NHTSAVpicResolver` + match matrix | MF-010, MF-011 | ✅ DT-D067 (`edts-vin-resolver`) |
+| P2.2 | Unit tests — reject 4×4 / Crew / manufacturer mismatch | MF-013 | ✅ |
+| P2.3 | Door-jamb OCR fallback (optional parallel) | MF-012 | 🔴 open |
+| P2.4 | Wire intake schema to instance record | MF-014 | 🟡 candidate `VEH-{VIN}.json` only |
 
-**Acceptance:** Sample VIN fixtures → EXACT_MATCH / CROSS_* / NOT_APPLICABLE with tests.
+**Acceptance:** Sample VIN fixtures → EXACT_CANDIDATE / NO_MATCH / REJECTED_REFERENCE_MATCH with tests — **met for vPIC path**. Physical label OCR still open.
 
 ---
 

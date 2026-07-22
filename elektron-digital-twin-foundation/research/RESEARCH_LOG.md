@@ -779,3 +779,22 @@ DT-D065 — `AUDIT_COMPLETE_PRIORITIZE_P0_GLB_OR_P2_VPIC`.
 
 DT-D066 — `EVIDENCE_LEDGER_ACTIVE_P0_GLB_FIRST`.
 
+---
+
+## RL-036 — VIN configuration resolver
+
+- **Date:** 2026-07-22
+- **Layer:** vehicle identification / vPIC
+- **Agent:** Cursor Cloud Agent
+- **Question:** Can EDTS resolve a VIN from the terminal without inventing engineering claims?
+
+### Findings
+
+1. Package `edts-vin-resolver` with CLI + library pipeline.
+2. Live decode of `1HTKHPVK8KH805188` → International/GM medium-duty; rejects F-450 CFG.
+3. 19 unit/fixture tests pass; geometry/config not Verified from VIN.
+
+### Status
+
+DT-D067 — `VIN_RESOLVER_IMPLEMENTED_TESTED_NOT_GEOMETRY_VERIFIED`.
+

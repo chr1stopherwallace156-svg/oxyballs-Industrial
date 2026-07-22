@@ -1,0 +1,19 @@
+{
+  "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+  "display_name": "2019 Ford F-450 Super Duty Chassis Cab Regular Cab 4x2 DRW 145.3 WB / 60 CA",
+  "make": ["FORD", "Ford"],
+  "manufacturer_contains": ["FORD"],
+  "model_year": 2019,
+  "model_patterns": ["F-450", "F450", "F-450 Super Duty", "Super Duty"],
+  "body_class_patterns": ["Chassis Cab", "Incomplete - Chassis Cab"],
+  "body_class_reject_patterns": ["Pickup"],
+  "cab_type_patterns": ["Regular", "Single Cab", "Conventional"],
+  "drive_type_patterns": ["4x2", "4X2", "RWD", "Rear Wheel"],
+  "rear_wheels": "DRW",
+  "wheelbase_in": 145.3,
+  "cab_to_axle_in": 60.0,
+  "notes": [
+    "Canonical EDTS locked reference configuration",
+    "WB/CA are EXPECTATIONS for physical verification — not auto-confirmed by VIN"
+  ]
+}

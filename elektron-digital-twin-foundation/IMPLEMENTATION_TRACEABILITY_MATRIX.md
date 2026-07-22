@@ -133,6 +133,21 @@ Quality axes: ✅ Implemented · 🧪 Tested · 📐 Verified (see evidence file
 
 ---
 
+## DT-D067 — VIN configuration resolver
+
+| Req ID | Requirement | Code | Test | Status |
+|---|---|---|---|---|
+| D067-01 | validateVin (length/IOQ/check digit) | `edts-vin-resolver/src/vin/validateVin.ts` | `tests/vin/validateVin.test.ts` | ✅🧪 |
+| D067-02 | DecodeVinValuesExtended transport | `decodeVpic.ts` | fixtures + opt-in live | ✅🧪 |
+| D067-03 | Normalize nulls / no invention | `normalizeVpic.ts` | `normalizeVpic.test.ts` | ✅🧪 |
+| D067-04 | CFG compare UNKNOWN≠MATCH | `resolveConfiguration.ts` | `resolveConfiguration.test.ts` | ✅🧪 |
+| D067-05 | Persist evidence/vehicle/report | `persistVinEvidence.ts` | `mismatch.test.ts` | ✅🧪 |
+| D067-06 | CLI `npm run vin` | `scripts/resolve-vin.ts` | live smoke | ✅ |
+| D067-07 | Never CONFIGURATION_CONFIRMED from VIN | `pipeline.ts` / VehicleRecord | mismatch tests | ✅🧪 |
+| D067-08 | Geometry / WB / CA Verified | — | — | ✖ forbidden |
+
+---
+
 ## Kernel / EAE (out of VPR-2 scope but in repo)
 
 | Req ID | Requirement | Code | Test | Status |

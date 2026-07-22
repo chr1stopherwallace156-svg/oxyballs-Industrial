@@ -1,0 +1,7 @@
+{
+  "configurations": [
+    "CFG-2019-F450-REG-CAB-4X2-60CA-DRW"
+  ],
+  "decision": "DT-D067",
+  "note": "Registry index — loaders enumerate *.json excluding this file"
+}

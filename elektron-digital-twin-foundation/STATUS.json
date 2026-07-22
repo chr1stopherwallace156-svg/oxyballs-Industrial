@@ -1,8 +1,8 @@
 {
   "$schema": "./schemas/project-status.schema.json",
   "project": "elektron-digital-twin-foundation",
-  "version": "0.40.0",
-  "updated_at": "2026-07-21T23:55:00Z",
+  "version": "0.41.0",
+  "updated_at": "2026-07-22T00:25:00Z",
   "active_layer": "L01",
   "active_layer_name": "Exterior",
   "phase": "EVIDENCE_ACQUISITION_IN_PROGRESS",
@@ -30,7 +30,7 @@
   "l00_readiness": "L00_VISUAL_INTAKE_READY_RUNTIME_NOT_READY",
   "reconciliation_result": "REFERENCE_CONFIGURATION_BLOCKED",
   "closure_result": "L00_CLOSURE_REJECTED",
-  "next_action": "Evidence ledger active (DT-D066). Axes: Implemented/Tested/Verified. Next: P0 GLB vertical slice before Postgres/Open3D/ARKit. Update IMPLEMENTATION_EVIDENCE.md with every green check. No false OEM STEP claims.",
+  "next_action": "VIN resolver shipped (DT-D067) — Implemented+Tested, not geometry Verified. Next remains P0 GLB vertical slice. Update evidence ledger with every green check.",
   "next_build_priority": "P0_GLB_VERTICAL_SLICE",
   "door_fl_decision": "CANDIDATE_ACQUISITION_RECOMMENDED",
   "door_fl_physical_verification": "REQUIRED_EVENTUALLY",
@@ -752,7 +752,7 @@
     "viewer": 90,
     "vehicle_assets": 10,
     "runtime_mapping": 25,
-    "vin_pipeline": 0,
+    "vin_pipeline": 35,
     "mobile_capture": 0,
     "registration": 0,
     "digital_twin_evidence_ui": 35,
@@ -760,5 +760,9 @@
     "vpr2_test_harness": 15
   },
   "hard_rule_no_false_oem_step": true,
-  "visible_progress_r2_sprint_035": "research/sprints/RL-035_IMPLEMENTATION_EVIDENCE_MATURITY.md"
+  "visible_progress_r2_sprint_035": "research/sprints/RL-035_IMPLEMENTATION_EVIDENCE_MATURITY.md",
+  "decision_dt_d067": "decisions/DT-D067_VIN_CONFIGURATION_RESOLVER.json",
+  "vin_resolver_package": "edts-vin-resolver/",
+  "vin_pipeline_status": "IMPLEMENTED_TESTED_NOT_GEOMETRY_VERIFIED",
+  "visible_progress_r2_sprint_036": "research/sprints/RL-036_VIN_CONFIGURATION_RESOLVER.md"
 }

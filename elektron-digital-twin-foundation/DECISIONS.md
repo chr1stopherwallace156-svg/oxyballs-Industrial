@@ -1131,3 +1131,21 @@ Append-only record of digital twin foundation decisions.
   5. Confirm **P0 GLB** before PostgreSQL / Open3D / ARKit / AprilTags / quantum
 
 ---
+
+## DT-D067 — EDTS VIN Configuration Resolver
+
+- **Change-control record:** [`decisions/DT-D067_VIN_CONFIGURATION_RESOLVER.json`](decisions/DT-D067_VIN_CONFIGURATION_RESOLVER.json)
+- **decision_id:** `DT-D067`
+- **date:** 2026-07-22
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-036`
+- **recommended_decision:** `VIN_RESOLVER_IMPLEMENTED_TESTED_NOT_GEOMETRY_VERIFIED`
+- **decision:**
+  1. Admit package `edts-vin-resolver` with `npm run vin -- <VIN>`
+  2. Official NHTSA `DecodeVinValuesExtended` only — preserve raw evidence + SHA-256
+  3. Normalize without inventing fields; UNKNOWN ≠ MATCH
+  4. Compare to registered CFGs; International example → REJECTED_REFERENCE_MATCH vs F-450 lock
+  5. Persist vehicle candidate + markdown report; never `CONFIGURATION_CONFIRMED` from VIN alone
+  6. Three-axis: Implemented ✅ · Tested 🧪 · engineering Verified ✖
+
+---

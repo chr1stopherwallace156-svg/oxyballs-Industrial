@@ -42,7 +42,7 @@ Legacy single-cell 🔵 meant “implemented + smoke test” — prefer explicit
 | Viewer | 90% |
 | Vehicle assets | 10% |
 | Runtime mapping | 25% |
-| VIN pipeline | 0% |
+| VIN pipeline | 35% |
 | Mobile capture | 0% |
 | Registration | 0% |
 | Digital twin evidence UI | 35% |

@@ -17,6 +17,15 @@ Interactive 3D demonstrator (provisional visual — not engineering truth):
 cd edts-visible-progress && npm install && npm run dev
 ```
 
+## VIN resolver (DT-D067)
+
+```bash
+cd edts-vin-resolver && npm install && npm run vin -- 1HTKHPVK8KH805188
+```
+
+Creates configuration **candidates** from NHTSA vPIC — not geometry-verified twins.
+See [`edts-vin-resolver/README.md`](edts-vin-resolver/README.md).
+
 ## Website
 
 Static site: [`index.html`](index.html)

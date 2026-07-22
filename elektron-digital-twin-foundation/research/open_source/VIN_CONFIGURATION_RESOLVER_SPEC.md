@@ -3,7 +3,7 @@
 **Pack:** EDTS Open-Source Maximum-Leverage Research Mission  
 **Canonical lock target:** `CFG-2019-F450-REG-CAB-4X2-60CA-DRW`  
 **Decision:** DT-D064  
-**Status:** Research integration spec — no production resolver code this pass.
+**Status:** Research integration spec — **superseded for implementation by DT-D067** (`edts-vin-resolver`). This document remains the design source; executable code lives in the package.
 
 Cross-link: existing field protocol [`../../VIN_AND_LABEL_CAPTURE_PROTOCOL.md`](../../VIN_AND_LABEL_CAPTURE_PROTOCOL.md).
 

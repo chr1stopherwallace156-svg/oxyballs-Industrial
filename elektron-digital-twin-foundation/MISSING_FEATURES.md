@@ -24,11 +24,11 @@ Status key: 🔴 **MISSING** · ⚪ **NOT STARTED** (planned/docs only)
 
 | ID | Feature | Status | Spec |
 |---|---|---|---|
-| MF-010 | NHTSA vPIC batch client | 🔴 | `VIN_CONFIGURATION_RESOLVER_SPEC.md` |
-| MF-011 | CFG match normalization filter | 🔴 | same |
-| MF-012 | Door-jamb OCR fallback | 🔴 | same + `VIN_AND_LABEL_CAPTURE_PROTOCOL.md` |
-| MF-013 | vPIC mismatch unit tests | 🔴 | backlog Sprint 2.4 |
-| MF-014 | Physical asset intake workflow | 🔴 | `PHYSICAL_ASSET_INTAKE_SCHEMA.json` — schema only |
+| MF-010 | NHTSA vPIC batch client | ✅ | `edts-vin-resolver` — DecodeVinValuesExtended |
+| MF-011 | CFG match normalization filter | ✅ | `resolveConfiguration.ts` |
+| MF-012 | Door-jamb OCR fallback | 🔴 | still missing |
+| MF-013 | vPIC mismatch unit tests | ✅ | `tests/vin/mismatch.test.ts` |
+| MF-014 | Physical asset intake workflow | 🔴 | vehicle record candidate only |
 
 ---
 
