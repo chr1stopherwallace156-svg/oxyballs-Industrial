@@ -1,10 +1,18 @@
 # M10 — Deterministic Rule Engine Foundation (plan-of-record)
 
-**Status: IN PROGRESS — the owner opened this bounded M10 scope (Decision Register
-D-011).** This is the plan-of-record and the authoritative build plan; the
-implementation lives under `engine/`. Scope is bounded to the Gate 05M-C3
-Deterministic Rule Engine Foundation (directive_03); the broad Revision 07
-baseline-schema M10 (`M10_IMPLEMENTATION.md`) and ODR-001..ODR-003 remain gated.
+**Status: M10A–M10F COMPLETE + VERIFIED (D-011); M10G/M10H PENDING.** The
+implementation lives under `engine/`; the rule→code→test map + completion-criteria
+results are in `engine/IMPLEMENTATION_REPORT.md`, and the ledger record is
+`docs/status/IMPLEMENTATION_LEDGER.md` (L-002, Verified with a re-runnable command).
+All five completion-criteria scripts pass (`npm run migrate/seed/verify/test/build`).
+Scope is bounded to the Gate 05M-C3 Deterministic Rule Engine Foundation
+(directive_03); the broad Revision 07 baseline-schema M10 (`M10_IMPLEMENTATION.md`),
+ODR-001..ODR-003, and M11 remain gated. **M10G (SIL validation) and M10H (HIL
+readiness) are NOT done** — they need a SIL/HIL environment and supplier data
+(NeedsSupplierData; BQ-27).
+
+Re-verify from the repo root:
+`cd engine && npm ci && npm run migrate && npm run seed && npm run verify && npm test && npm run build`
 
 > **Governance gate (READ FIRST).** M10 is production code. Under the active
 > governance state — Engineering Constitution, `CLAUDE.md`, `AGENTS.md`, and the

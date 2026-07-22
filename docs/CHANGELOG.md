@@ -5,6 +5,31 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-22 — M10 (bounded) built + verified: Gate 05M-C3 Deterministic Rule Engine Foundation (D-011, L-002)
+
+- The owner opened the bounded M10 gate (D-011) and directed the build in-session.
+  Implemented the Gate 05M-C3 rule engine under `engine/` from the frozen Rev 08
+  spec (RC-313..425). Stack: `node:sqlite` + TypeScript + `node:test` (minimal deps).
+- **M10A–M10F complete + verified.** All five completion-criteria scripts PASS:
+  `npm run migrate` (2 migrations, 30 tables) · `npm run seed` (draft seed, 0
+  approvals / 0 passes) · `npm run verify` (13/13 rule checks) · `npm test` (25/25)
+  · `npm run build` (tsc clean). Re-runnable from repo root: `cd engine && npm ci &&
+  npm run migrate && npm run seed && npm run verify && npm test && npm run build`.
+- Mechanically enforces the Constitution + frozen spec: normalized schema + FKs +
+  junction composite keys (M10A); deterministic authorization state machine + hard
+  blocks with machine-readable reasons (M10B); canonical L_min runout engine with
+  frozen snapshot + signed release (M10C); configuration-lock cascade (M10D);
+  append-only signed-evidence triggers + hash-chain (M10E); a negative test per
+  hard block (M10F). Rule→code→test map: `engine/IMPLEMENTATION_REPORT.md`; ledger:
+  `docs/status/IMPLEMENTATION_LEDGER.md` (L-002, Verified).
+- **Boundary held.** Bounded scope only (D-011). NOT done / still gated: M10G SIL,
+  M10H HIL (need a SIL/HIL environment + supplier data, NeedsSupplierData); the
+  broad Revision 07 baseline-schema M10 (`M10_IMPLEMENTATION.md`); ODR-001..ODR-003;
+  M11. No engineering values invented; seed contains no real approvals or passes;
+  no UI.
+
+---
+
 ## 2026-07-21 — Owner directive_03 ("75:75"): ingestion complete, M10 phase directed (D-010)
 
 - Archived owner directive_03 1:1 (commit `b958cb7`) — the terminal "75:75"

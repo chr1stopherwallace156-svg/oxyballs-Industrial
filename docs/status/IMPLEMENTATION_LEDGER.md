@@ -42,3 +42,25 @@ in the entry.
 
 *(No M10 or other production implementation entries exist — none has
 begun. The first such entry must start as `Claimed`.)*
+
+---
+
+## L-002 — M10 (bounded): Gate 05M-C3 Deterministic Rule Engine Foundation
+
+- Date: 2026-07-22
+- Agent: Claude Code
+- Status: Verified
+- Commits: the M10 gate-open commit (`bbab237`) + the engine implementation
+  commit(s) on `claude/docs-structure-large-projects-b6vxx5` (see `git log`)
+- Evidence: **re-runnable** — from the repo root:
+  `cd engine && npm ci && npm run migrate && npm run seed && npm run verify && npm test && npm run build`
+  → all five report `PASS` (migrate: 30 tables; seed: 0 approvals/0 passes;
+  verify: 13/13 rule checks; test: 25/25; build: clean). Rule→code→test map in
+  `engine/IMPLEMENTATION_REPORT.md`. Scope + boundary in Decision Register D-011.
+- Verified by: Claude Code 2026-07-22 via the cited command sequence (any agent or
+  the owner can re-run it to reproduce the PASS output). Scope is the **bounded**
+  Gate 05M-C3 rule engine (schema/state-machine/runout/config-lock/append-only +
+  negative tests, M10A–M10F). NOT verified / not in scope: M10G SIL, M10H HIL
+  (need a SIL/HIL environment + supplier data), the broad Revision 07 baseline
+  M10 (`M10_IMPLEMENTATION.md`), ODR-001..ODR-003, M11 — all remain gated. No
+  engineering values invented; seed contains no real approvals or passes.

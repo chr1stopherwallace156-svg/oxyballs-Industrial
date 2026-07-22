@@ -1,0 +1,22 @@
+{
+  "name": "elektron-build-engine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "M10 Deterministic Rule Engine Foundation for Gate 05M-C3 (frozen source spec: Gate 05M-C3 Revision 08, RC-313..425). Enforces the Engineering Constitution mechanically. No AI authority; INITIAL_TARGET_PROFILE has no authority; signed evidence is append-only.",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "migrate": "npm run build && node --no-warnings dist/scripts/migrate.js",
+    "seed": "npm run build && node --no-warnings dist/scripts/seed.js",
+    "verify": "npm run build && node --no-warnings dist/scripts/verify.js",
+    "test": "npm run build && node --no-warnings --test \"dist/test/*.test.js\"",
+    "clean": "rm -rf dist data/engine.db"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "@types/node": "^22.10.0"
+  }
+}
