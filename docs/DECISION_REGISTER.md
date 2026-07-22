@@ -17,6 +17,44 @@ later entry that references it.
 
 ---
 
+## D-015 — Open the Platform 001 Build Package v0.1 vertical slice (bounded, DRAFT-only)
+
+- Date: 2026-07-22
+- Status: Accepted (extends D-011/D-013; distinct from the gated M11)
+- Context: The owner directed a focused vertical slice — the first visible
+  end-to-end Build Engine workflow — turning the locked Platform 001 configuration
+  into a controlled engineering output (identity → engineering-data evaluation →
+  compatibility evaluation → deterministic blockers → draft BOM → build-package
+  report). The directive explicitly forbids approval/release/authorization claims,
+  broad UI, digital-twin, HIL, physical authorization, and inventing any value.
+- Decision: Built the slice as a NEW layer above M10 (`engine/src/platform/`,
+  `migrations/005_platform_package.sql`, `scripts/platform001.ts`,
+  `test/platform.test.ts`, `verify/packageAttack.ts`) without modifying M10
+  behavior. Governance boundary held and recorded: this slice **creates** and tracks
+  OpenDataRequirements and leaves every unknown explicitly unresolved — it does NOT
+  resolve ODR-001..ODR-003, does NOT enter supplier data or any real engineering
+  value, and does NOT open M11 (`M11_OPEN_DATA_REGISTER.md` stays gated). The only
+  externally supplied values are the owner-locked Platform 001 identity/geometry
+  (nominal, marked not-physically-verified, with a source_authority recorded). A
+  build package is CHECK-locked to `DRAFT_INCOMPLETE` — APPROVED/RELEASED/
+  AUTHORIZED_FOR_BUILD/AUTHORIZED_FOR_HV are structurally impossible. All decisions,
+  ids, and hashes are deterministic functions of canonical inputs. Two proven
+  reproducible defects found during the build were corrected with regression tests:
+  (a) build-package status must be un-approvable (DB CHECK) and (b) child-row ids
+  must be scoped by build_package_id to avoid a global-PK collision between two
+  coexisting packages.
+- Consequences: `npm run platform001:generate` produces
+  `engine/output/platform-001/build-package.{md,json}` — a DRAFT package with 20
+  BOM categories (19 UNSELECTED, 1 BLOCKED), 6 compatibility evaluations (4 PASS, 1
+  FAIL, 1 BLOCKED_MISSING_DATA), 7 open ODRs (registered ODR-004..010), and 24
+  deterministic release blockers. 54/54 tests pass (40 M10 + 14 Platform 001); the
+  package attack harness is 9/9 BLOCKED; M10 attack/determinism are unchanged.
+  **Honest status: DRAFT_INCOMPLETE — not an approval, not prototype/procurement
+  readiness, not a safety claim.** Next research target: baseline axle weights +
+  GVWR for the donor (ODR-004..006), tied to BQ-27 donor confirmation.
+
+---
+
 ## D-014 — M10 final evidence-pack reconciliation: finding-count reconciled; two proven defects (atomicity, O(n) join) corrected
 
 - Date: 2026-07-22

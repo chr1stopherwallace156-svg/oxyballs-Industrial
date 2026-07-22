@@ -139,3 +139,30 @@ begun. The first such entry must start as `Claimed`.)*
   (bounded)` — prototype-grade, NOT production, NOT HIL-ready** (D-014). M11 not
   started; ODR-001..003 open; the broad rev07 baseline M10, M10G SIL, M10H HIL
   remain gated; seed still 0 approvals/0 passes. No engineering value invented.
+
+---
+
+## L-006 — Platform 001 Build Package v0.1 (vertical slice)
+
+- Date: 2026-07-22
+- Agent: Claude Code
+- Status: Verified
+- Commits: the Platform 001 slice commit on `claude/docs-structure-large-projects-b6vxx5`
+  (see `git log`), on top of `d44b6bd`
+- Evidence: **re-runnable** — from `engine/`:
+  `npm run migrate && npm test && npm run build && npm run verify:attack &&
+  npm run verify:determinism && npm run verify:attack:package && npm run platform001:generate`
+  → migrate PASS (5 migrations, 40 tables); **test 54/54**; build clean; M10 attack
+  11/12 BLOCKED (A9 residual, unchanged); M10 determinism ALL PASS; package attack
+  **9/9 BLOCKED, 0 findings**; generate PASS (DRAFT_INCOMPLETE, determinism PASS).
+  Generated artifact: `engine/output/platform-001/build-package.{md,json}`
+  (`BP_PLATFORM-001_d64d1b6a434a`). Milestone record: `docs/status/PLATFORM_001_STATUS.md`.
+- Verified by: Claude Code 2026-07-22 via the cited commands (re-runnable). Built the
+  first end-to-end Build Engine workflow as a NEW layer above M10 (no M10 behavior
+  change). A build package is CHECK-locked to `DRAFT_INCOMPLETE` (no approval status
+  possible); every unknown becomes a tracked ODR + deterministic block reason; all
+  decisions/ids/hashes are deterministic. Two proven defects fixed with regression
+  tests (un-approvable status; package-scoped child ids). **Honest status:
+  DRAFT_INCOMPLETE — NOT an approval, NOT prototype/procurement readiness, NOT a
+  safety claim** (D-015). No engineering value invented; no supplier data entered;
+  ODR-001..003 untouched; M11 not started; 7 new open ODRs registered (ODR-004..010).

@@ -4,7 +4,29 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-22
-- Reason for handoff: **M10 FINAL EVIDENCE-PACK RECONCILIATION (owner final
+- Reason for handoff: **PLATFORM 001 BUILD PACKAGE v0.1 — VERTICAL SLICE BUILT
+  (owner directive; D-015, L-006).** The first visible end-to-end Build Engine
+  workflow now exists as a NEW layer above M10 (`engine/src/platform/`,
+  `migrations/005_platform_package.sql` — 7 tables, `scripts/platform001.ts`,
+  `test/platform.test.ts`, `verify/packageAttack.ts`). `npm run platform001:generate`
+  loads the locked 2019 Ford F-450 SD Chassis Cab config and produces a controlled
+  DRAFT_INCOMPLETE build package → `engine/output/platform-001/build-package.{md,json}`
+  (`BP_PLATFORM-001_d64d1b6a434a`): vehicle identity MATCHED, revision LOCKED, 20 BOM
+  categories (19 UNSELECTED / 1 BLOCKED), 6 compatibility evaluations (4 PASS / 1 FAIL
+  / 1 BLOCKED_MISSING_DATA), 7 open ODRs, 24 deterministic release blockers. Status is
+  CHECK-locked to DRAFT_INCOMPLETE (no approval status possible); every unknown → a
+  tracked ODR + block reason; a missing value is NULL, never zero; all ids/hashes
+  deterministic (regeneration self-check PASS). **54/54 tests** (40 M10 + 14 slice);
+  package attack **9/9 BLOCKED**; **M10 attack/determinism unchanged** (12 probes / A9
+  residual; ALL DETERMINISTIC). Two proven defects fixed with regression tests
+  (un-approvable package status; package-scoped child ids). **No engineering value
+  invented; no supplier data entered; ODR-001..003 untouched; M11 not started.**
+  Governance: `docs/status/PLATFORM_001_STATUS.md`, D-015, L-006, ODR-004..010.
+  **Next research target: baseline axle weights + GVWR for the donor (ODR-004..006),
+  tied to BQ-27 donor confirmation.** Honest status: DRAFT_INCOMPLETE — not an
+  approval, not prototype/procurement readiness, not a safety claim.
+
+- (prior) — **M10 FINAL EVIDENCE-PACK RECONCILIATION (owner final
   directive; D-014, L-005).** Produced `engine/EVIDENCE_PACK.md` answering all 10
   owner items with reproducible evidence: (1) finding count reconciled = **6 groups
   / 7 probes** (state-machine group = A1+A2); (2) full A1–A12 matrix; (3–4) exact
@@ -58,11 +80,14 @@
 - Start commit: `b958cb7` — Archive owner directive_03 ("75:75") 1:1
 - End commit: the commit containing this handoff update — verify with
   `git log -1` (M10 build: `594936c`; gate-open: `bbab237`; adversarial
-  verification: `c97b3ac`; this reconciliation is the newest commit)
+  verification: `c97b3ac`; evidence-pack reconciliation: `d44b6bd`; the Platform 001
+  slice is the newest commit)
 - Working tree at handoff: clean (everything committed). `engine/dist`,
-  `engine/node_modules`, `engine/data` are gitignored build/runtime artifacts.
-- Migrations now number **4** (`004_join_indexes.sql` added this round); 33 tables
-  (004 adds indexes only, no tables).
+  `engine/node_modules`, `engine/data` are gitignored build/runtime artifacts;
+  `engine/output/platform-001/` (the generated build package) IS committed as the
+  demonstration deliverable.
+- Migrations now number **5** (`005_platform_package.sql` added this round); **40
+  tables** (33 M10 + 7 Platform 001).
 
 ## Work performed
 

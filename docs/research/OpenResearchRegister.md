@@ -51,3 +51,66 @@ reference to the evidence; entries are never deleted.
 - Blocks: Revision 07 modules (see Baseline Index); M10 evidence store
   and configuration lock storage.
 - Resolution evidence: —
+
+---
+
+> **Platform 001 Build Package v0.1 open-data requirements (ODR-004..ODR-010).**
+> These are surfaced deterministically by the build-package generator
+> (`npm run platform001:generate`) as the DB-level `OpenDataRequirement` rows for
+> the locked Platform 001 configuration. They are **engineering-data** requirements
+> for one specific donor platform and are **entirely distinct from ODR-001..ODR-003**
+> (the gated Revision 07 governance ODRs, which remain untouched). None of these may
+> be resolved by guessing a value; each requires the evidence named, tied to a
+> confirmed donor identity (BQ-27). Resolving them does NOT resolve ODR-001..003 and
+> does NOT open M11.
+
+## ODR-004 — Baseline front axle weight (2019 F-450 SD Chassis Cab, RegCab 4x2 DRW)
+
+- Filed: 2026-07-22
+- Status: Open
+- Blocks: axle-loading analysis; traction-battery/motor mass budgeting; Platform 001 package release.
+- Resolution evidence: — (Ford door-jamb label / body-builder guide, or calibrated scale measurement)
+
+## ODR-005 — Baseline rear axle weight (2019 F-450 SD Chassis Cab, RegCab 4x2 DRW)
+
+- Filed: 2026-07-22
+- Status: Open
+- Blocks: axle-loading analysis; Platform 001 package release.
+- Resolution evidence: — (Ford door-jamb label / body-builder guide, or calibrated scale measurement)
+
+## ODR-006 — GVWR (2019 F-450 SD Chassis Cab, RegCab 4x2 DRW)
+
+- Filed: 2026-07-22
+- Status: Open
+- Blocks: load-budget checks; Platform 001 package release.
+- Resolution evidence: — (Ford door-jamb label / body-builder guide)
+
+## ODR-007 — Physical frame geometry measurement of the donor
+
+- Filed: 2026-07-22
+- Status: Open
+- Blocks: mounting-envelope analysis; Platform 001 package release. Nominal
+  geometry (wheelbase 145.3 in, cab-to-axle 60 in) is the owner-locked reference,
+  NOT a physical measurement.
+- Resolution evidence: — (calibrated physical measurement on the donor)
+
+## ODR-008 — Traction-motor dimensions
+
+- Filed: 2026-07-22
+- Status: Open
+- Blocks: motor mounting/packaging compatibility; Platform 001 package release.
+- Resolution evidence: — (motor supplier documentation)
+
+## ODR-009 — Traction-motor mass
+
+- Filed: 2026-07-22
+- Status: Open
+- Blocks: axle-loading analysis; Platform 001 package release.
+- Resolution evidence: — (motor supplier documentation)
+
+## ODR-010 — Traction-motor supplier documentation (verification)
+
+- Filed: 2026-07-22
+- Status: Open
+- Blocks: any motor candidate leaving UNVERIFIED; Platform 001 package release.
+- Resolution evidence: — (motor supplier datasheet / engineering documentation)

@@ -5,6 +5,38 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-22 — Platform 001 Build Package v0.1 vertical slice (D-015, L-006)
+
+- Built the first visible end-to-end Build Engine workflow as a NEW layer above M10
+  (`engine/src/platform/`, `migrations/005_platform_package.sql` — 7 tables,
+  `scripts/platform001.ts`, `test/platform.test.ts`, `verify/packageAttack.ts`).
+  M10 behavior is unchanged (its attack/determinism/tests all still pass).
+- `npm run platform001:generate` loads the locked 2019 Ford F-450 Super Duty
+  Chassis Cab reference configuration and generates a controlled engineering
+  output: vehicle identity, configuration status, compatibility evaluations,
+  open-data requirements, deterministic block reasons, a draft BOM, and a
+  build-package report (`engine/output/platform-001/build-package.{md,json}`).
+- A build package is CHECK-locked to `DRAFT_INCOMPLETE` — APPROVED/RELEASED/
+  AUTHORIZED_FOR_BUILD/AUTHORIZED_FOR_HV are structurally impossible. Every missing
+  input becomes a tracked `OpenDataRequirement` + a deterministic block reason; a
+  missing value is stored as NULL (never zero/assumed). All decisions, ids, and
+  hashes are deterministic functions of canonical inputs (self-checked by
+  regeneration).
+- Generated result: 20 BOM categories (19 UNSELECTED, 1 BLOCKED), 6 compatibility
+  evaluations (4 PASS, 1 FAIL, 1 BLOCKED_MISSING_DATA), 7 open ODRs (registered
+  ODR-004..010), 24 release blockers. Tests: **54/54** (40 M10 + 14 Platform 001).
+  Package attack harness: 9/9 BLOCKED.
+- Additive unit definitions (`in`, `mm`, `lb`) added to the shared unit model —
+  definitions, not engineering values. Two proven defects fixed with regression
+  tests (un-approvable package status; package-scoped child ids).
+- **No engineering value invented; no supplier data entered; ODR-001..ODR-003
+  untouched; M11 not started.** Honest status: DRAFT_INCOMPLETE — not an approval,
+  not prototype/procurement readiness, not a safety claim.
+- Governance: `docs/status/PLATFORM_001_STATUS.md` (new), Decision Register D-015,
+  Implementation Ledger L-006, Open Research Register ODR-004..010.
+
+---
+
 ## 2026-07-22 — M10 final evidence-pack reconciliation + two proven-defect fixes (D-014, L-005)
 
 - Produced `engine/EVIDENCE_PACK.md` answering the owner's 10 reconciliation items

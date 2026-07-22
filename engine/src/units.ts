@@ -4,12 +4,12 @@
  */
 
 export type Unit =
-  | 'm' | 'm/s' | 'm/s^2' | 'm/s^3'
+  | 'm' | 'mm' | 'in' | 'm/s' | 'm/s^2' | 'm/s^3'
   | 'Nm' | 'Nm/s' | 'Nm/s^2'
   | 'deg' | 'deg/s' | 'rad' | 'rad/s'
   | 'A' | 'A/s' | 'V' | 'V/s'
   | 'Pa' | 'kPa' | 'bar'
-  | 'ms' | 's' | 'kg' | 'percent';
+  | 'ms' | 's' | 'kg' | 'lb' | 'percent';
 
 export type AuthorityClass =
   | 'MEASURED' | 'CALCULATED' | 'SUPPLIER_DEFINED' | 'ENGINEERING_APPROVED' | 'INITIAL_TARGET_PROFILE';
@@ -26,6 +26,8 @@ interface UnitSpec { dimension: Dimension; toCanonical: number; canonicalUnit: U
 
 const UNITS: Record<Unit, UnitSpec> = {
   m:        { dimension: 'length', toCanonical: 1, canonicalUnit: 'm' },
+  mm:       { dimension: 'length', toCanonical: 0.001, canonicalUnit: 'm' },
+  in:       { dimension: 'length', toCanonical: 0.0254, canonicalUnit: 'm' },
   'm/s':    { dimension: 'velocity', toCanonical: 1, canonicalUnit: 'm/s' },
   'm/s^2':  { dimension: 'acceleration', toCanonical: 1, canonicalUnit: 'm/s^2' },
   'm/s^3':  { dimension: 'jerk', toCanonical: 1, canonicalUnit: 'm/s^3' },
@@ -46,6 +48,7 @@ const UNITS: Record<Unit, UnitSpec> = {
   ms:       { dimension: 'time', toCanonical: 0.001, canonicalUnit: 's' },
   s:        { dimension: 'time', toCanonical: 1, canonicalUnit: 's' },
   kg:       { dimension: 'mass', toCanonical: 1, canonicalUnit: 'kg' },
+  lb:       { dimension: 'mass', toCanonical: 0.45359237, canonicalUnit: 'kg' },
   percent:  { dimension: 'ratio', toCanonical: 0.01, canonicalUnit: 'percent' },
 };
 
