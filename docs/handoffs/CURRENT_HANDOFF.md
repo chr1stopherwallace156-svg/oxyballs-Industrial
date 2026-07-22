@@ -3,12 +3,14 @@
 ## Session
 
 - From agent: Claude Code
-- Date (UTC): 2026-07-21
-- Reason for handoff: **PHASE TRANSITION** — the terminal "75:75" delivery (owner
-  directive_03) closed the Rev 07 ingestion sequence (75/75) and directed the M10
-  phase. Recorded as governance (D-010 + M10 plan-of-record); **M10 production code
-  is NOT started** and is gated pending a formal opening of the M10 phase. Awaiting
-  the owner's decision on who executes the M10 build.
+- Date (UTC): 2026-07-22
+- Reason for handoff: **M10 (bounded) BUILT + VERIFIED.** After the "75:75" phase
+  transition (D-010), the owner opened the bounded M10 gate (D-011) and directed
+  the build in-session. The Gate 05M-C3 Deterministic Rule Engine Foundation
+  (M10A–M10F) is implemented under `engine/` and verified — all five
+  completion-criteria scripts PASS (`npm run migrate/seed/verify/test/build`;
+  ledger L-002, Verified). M10G (SIL) + M10H (HIL) are the next steps and remain
+  pending (need a SIL/HIL environment + supplier data).
 
 ## Git state
 
@@ -16,8 +18,9 @@
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
 - Start commit: `b958cb7` — Archive owner directive_03 ("75:75") 1:1
 - End commit: the commit containing this handoff update — verify with
-  `git log -1`
-- Working tree at handoff: clean (everything committed)
+  `git log -1` (M10 build: `594936c`; gate-open: `bbab237`)
+- Working tree at handoff: clean (everything committed). `engine/dist`,
+  `engine/node_modules`, `engine/data` are gitignored build/runtime artifacts.
 
 ## Work performed
 
@@ -64,11 +67,13 @@
 
 ## State
 
-- Current phase: Revision 07 Source Ingestion and Consolidation — **batch intake
-  COMPLETE (75/75); owner has directed the M10 phase (D-010), but the M10 gate is
-  NOT yet opened, so the active phase/roadmap remains `REV07_SOURCE_INGESTION.md`
-  until the owner formally transitions it.** M10 plan-of-record:
-  `docs/roadmaps/M10_RULE_ENGINE_FOUNDATION.md`.
+- Current phase: **M10 (bounded) — Gate 05M-C3 Deterministic Rule Engine
+  Foundation** (owner opened the gate, D-011; ingestion batch intake complete
+  75/75, D-010). M10A–M10F are built + verified under `engine/` (ledger L-002);
+  M10G SIL + M10H HIL pending. Roadmap: `docs/roadmaps/M10_RULE_ENGINE_FOUNDATION.md`;
+  phase file `docs/status/CURRENT_PHASE.md`. Frozen source spec: Gate 05M-C3
+  Revision 08 (RC-313..425). The broad Rev 07 baseline-schema M10
+  (`M10_IMPLEMENTATION.md`), ODR-001..ODR-003, and M11 remain gated.
 - Blockers: B-001 (ingestion); B-002 (.gov/CARB); B-003/B-004
   (BLOCKED_PENDING_SUPPLIER_DATA); Gate 04 BLOCKED_PENDING_SUPPLIER_
   RESPONSE. Supplier-only values parked in
@@ -280,17 +285,20 @@
 
 ## Next exact action
 
-**PHASE-TRANSITION DECISION PENDING (owner).** The Rev 07 ingestion batch sequence
-is complete (75/75) and the owner directed the M10 phase (directive_03, D-010). The
-next action is the owner's: decide whether to **open the M10 phase** — which
-requires moving the active-roadmap pointer to `M10_RULE_ENGINE_FOUNDATION.md`,
-approving a proposed update to `AI_INSTRUCTIONS.md` + the `CLAUDE.md` "no M10 / no
-production code" rule (proposed, never silently rewritten), and confirming who
-executes the build (the directive routes the prompt to "your coding agent") — OR
-keep the frozen spec as governance and hand the M10 build to a separate coding
-agent. **Do NOT write M10 production code until the gate is opened.** The frozen
-source spec is Gate 05M-C3 Revision 08 (`GATE05M_C3_CLOSED_AREA_MOVEMENT.md`,
-RC-313..425); the M10 plan-of-record is `docs/roadmaps/M10_RULE_ENGINE_FOUNDATION.md`.
+**M10 (bounded) is built + verified (D-011, L-002).** The Gate 05M-C3 rule engine
+lives under `engine/`; re-verify with `cd engine && npm ci && npm run migrate &&
+npm run seed && npm run verify && npm test && npm run build` (all PASS). The
+rule→code→test map is `engine/IMPLEMENTATION_REPORT.md`.
+
+The next actions, owner-gated: (i) **M10G — SIL validation** and **M10H — HIL
+readiness** (directive_03) — need a SIL/HIL environment + supplier data
+(NeedsSupplierData; BQ-27); do NOT fabricate SIL/HIL results. (ii) After M10 fully
+passes, **M11 — Platform 001 Open Data Register and Supplier Closure**
+(`M11_OPEN_DATA_REGISTER.md`) — fill in the exact F-450/F-550 supplier data + resolve
+BQ-01..BQ-27; this is where real engineering values enter, owner-approved. Still
+gated (do NOT start without the owner opening them): the broad Rev 07 baseline-schema
+M10 (`M10_IMPLEMENTATION.md`, entry conditions unmet), ODR-001..ODR-003, M11.
+**Never invent an engineering value; seed/DB carry no real approvals or passes.**
 
 Other still-possible inputs, in any order: (a) the **Gate 05M-C3 Controlled Closed-Area
 Low-Speed Movement batch** (scope in `GATE_RESEARCH_QUEUE.md`; 05M-C2 in
