@@ -4,7 +4,28 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-22
-- Reason for handoff: **M10 ADVERSARIALLY VERIFIED + M10.1-HARDENED (directive_04,
+- Reason for handoff: **M10 FINAL EVIDENCE-PACK RECONCILIATION (owner final
+  directive; D-014, L-005).** Produced `engine/EVIDENCE_PACK.md` answering all 10
+  owner items with reproducible evidence: (1) finding count reconciled = **6 groups
+  / 7 probes** (state-machine group = A1+A2); (2) full A1–A12 matrix; (3–4) exact
+  commit/branch/status + verbatim `migrate/verify:attack/verify:determinism/
+  verify:perf/test/build` outputs; (5) benchmark methodology (median/p95 +
+  `EXPLAIN QUERY PLAN`) — which **exposed a proven O(n) join defect** (`SCAN rc`),
+  fixed by `migrations/004_join_indexes.sql` (two non-semantic FK indexes; 100k
+  per-query ~16.5 ms → ~0.013 ms); (6) EvidenceLedger threat model (detects
+  delete/reorder/mutate within a trusted writer; does NOT prove authorship;
+  PKI + external anchoring deferred); (7) VIN finding = `IndividualVehicle.vin TEXT`
+  (001) + partial-unique fix (003); (8) **verified + fixed the M1 atomicity defect**
+  — `applyTransition`/`activate`/`aggregate` now wrap their writes in a nestable
+  SAVEPOINT `atomic()` (`src/db.ts`) so transition + status + ledger (and the runout
+  snapshot) commit/roll back as one unit, proven by a new rollback test. **Now
+  40/40 tests** (was 39). `VERIFICATION_REPORT.md` M1/R5/Phase-6 updated. **M11 not
+  started; no HIL/physical-safety claim; ODR-001..003 open; seed 0 approvals/0
+  passes.** Honest status unchanged: prototype-grade, deterministic, tamper-evident
+  records foundation — NOT production-grade. Next: the M10.1 backlog + separately
+  M10G SIL / M10H HIL.
+
+- (prior) — **M10 ADVERSARIALLY VERIFIED + M10.1-HARDENED (directive_04,
   D-013, L-004).** Built an attack/perf/determinism harness (`engine/verify/`),
   found 6 real weaknesses (2 Critical/2 High/2 Medium), **fixed 5** via DB-level
   hardening (`migrations/003_hardening.sql`: state-machine + activation-precondition
@@ -36,9 +57,12 @@
 - **Agent owner: Claude Code** (single-writer rule, AGENTS.md)
 - Start commit: `b958cb7` — Archive owner directive_03 ("75:75") 1:1
 - End commit: the commit containing this handoff update — verify with
-  `git log -1` (M10 build: `594936c`; gate-open: `bbab237`)
+  `git log -1` (M10 build: `594936c`; gate-open: `bbab237`; adversarial
+  verification: `c97b3ac`; this reconciliation is the newest commit)
 - Working tree at handoff: clean (everything committed). `engine/dist`,
   `engine/node_modules`, `engine/data` are gitignored build/runtime artifacts.
+- Migrations now number **4** (`004_join_indexes.sql` added this round); 33 tables
+  (004 adds indexes only, no tables).
 
 ## Work performed
 
@@ -303,10 +327,17 @@
 
 ## Next exact action
 
-**M10 (bounded) is built + verified (D-011, L-002).** The Gate 05M-C3 rule engine
-lives under `engine/`; re-verify with `cd engine && npm ci && npm run migrate &&
-npm run seed && npm run verify && npm test && npm run build` (all PASS). The
-rule→code→test map is `engine/IMPLEMENTATION_REPORT.md`.
+**M10 (bounded) is built, verified, adversarially hardened, and
+evidence-pack-reconciled (D-011/D-013/D-014; L-002/L-004/L-005).** The Gate
+05M-C3 rule engine lives under `engine/`; re-verify with `cd engine && npm ci &&
+npm run migrate && npm run seed && npm run verify && npm test && npm run build`
+(all PASS; **40/40 tests**, 4 migrations / 33 tables). Adversarial re-verify:
+`npm run verify:attack && npm run verify:determinism && npm run verify:perf`
+(11/12 BLOCKED, A9 residual; ALL DETERMINISTIC; perf fully index-driven). The
+rule→code→test map is `engine/IMPLEMENTATION_REPORT.md`; the adversarial findings +
+scores are `engine/VERIFICATION_REPORT.md`; the final 10-item reconciliation
+(finding count, A1–A12 matrix, benchmark methodology, ledger threat model, VIN
+schema, atomicity proof) is `engine/EVIDENCE_PACK.md`.
 
 The next actions, owner-gated: (i) **M10G — SIL validation** and **M10H — HIL
 readiness** (directive_03) — need a SIL/HIL environment + supplier data

@@ -17,6 +17,40 @@ later entry that references it.
 
 ---
 
+## D-014 — M10 final evidence-pack reconciliation: finding-count reconciled; two proven defects (atomicity, O(n) join) corrected
+
+- Date: 2026-07-22
+- Status: Accepted (extends D-013)
+- Context: The owner commissioned a final evidence-pack reconciliation of the M10
+  adversarial verification (10 numbered items), forbidding architecture change
+  unless a *new reproducible defect* is found, and forbidding M11 / any HIL claim.
+- Decision: Produced `engine/EVIDENCE_PACK.md` answering all 10 items with
+  reproducible evidence. (1) Reconciled the count: **6 finding groups (root causes)
+  spanning 7 probes** — the state-machine group covers A1+A2. (2) Full A1–A12 matrix
+  (setup, attack op, baseline vs final, corrective path, linked test). (3)–(4)
+  Recorded exact commit/branch/status and verbatim `migrate/verify:attack/
+  verify:determinism/verify:perf/test/build` outputs. (5) Documented benchmark
+  methodology (env, dataset, 1,000-iteration median/p95, `EXPLAIN QUERY PLAN`),
+  which **exposed a proven defect**: the benchmarked join planned `SCAN rc` → O(n).
+  (6) Documented the EvidenceLedger threat model (detects deletion/reorder/mutation
+  within a trusted writer; does NOT prove authorship; PKI + external anchoring
+  deferred). (7) Identified the VIN finding as `IndividualVehicle.vin TEXT`
+  (nullable, un-indexed) in `001`, fixed by the partial unique index in `003`. (8)
+  Verified and **corrected the atomicity defect** (finding M1): `applyTransition`/
+  `activate`/`aggregate` issued multiple un-wrapped writes; added a nestable
+  SAVEPOINT `atomic()` helper so transition + status + ledger (and the runout
+  snapshot) commit or roll back as one unit, proven by a new rollback test. Because
+  both the O(n) join and the atomicity gap were *proven reproducible defects*, they
+  were corrected: `migrations/004_join_indexes.sql` (two non-semantic FK indexes)
+  and the `atomic()` wrapper — no rule, result, or state semantics changed.
+- Consequences: 40/40 tests pass (was 39; +1 M1 rollback test); post-004 the join
+  is fully index-driven (100k per-query ~16.5 ms → ~0.013 ms); `VERIFICATION_REPORT.md`
+  M1/R5/Phase-6 updated. **M11 not started; no HIL/physical-safety claim; ODR-001..003
+  still open; seed still 0 approvals/0 passes.** Honest status unchanged: prototype-grade,
+  deterministic, tamper-evident records foundation — not production-grade.
+
+---
+
 ## D-013 — M10 adversarial verification (directive_04): 6 findings, 5 fixed by DB hardening, 1 residual; prototype-not-production
 
 - Date: 2026-07-22

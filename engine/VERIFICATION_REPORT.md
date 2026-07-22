@@ -54,7 +54,7 @@ records/governance foundation. No software test establishes physical HV safety.
 | Time / clock trust | MEDIUM | Expiry uses a caller-supplied `now`; a rolled-back clock resurrects an expired authorization (probe A9). | An in-process caller can defeat expiry. | **Residual** — needs an attested/monotonic time source; the injectable `now` is a test seam. Accept-risk + M10.1. | **OPEN** |
 | Normalization / FK integrity | INFO | 3NF; all critical refs FK-constrained; junction tables with composite PKs; orphan inserts rejected (A7). | — | — | OK |
 | Rule engine determinism | INFO | Pure functions; no RNG in decisions; `now` injected; identical input → identical output (Phase 4). | — | — | OK |
-| Transaction safety | MEDIUM | `applyConfigurationChange` is transactional; `aggregate()` / `activate()` issue multiple writes **without** an explicit outer transaction. | A mid-sequence failure could leave partial state. | M10.1: wrap multi-write service ops in `BEGIN/COMMIT`. | OPEN |
+| Transaction safety | MEDIUM | Pre-fix, `aggregate()` / `activate()` / `applyTransition()` issued multiple writes **without** an explicit outer transaction (`applyConfigurationChange` was already transactional). | A mid-sequence failure could leave partial state (orphan transition, ledger entry for a status that never landed, result with a partial snapshot). | **FIXED** — nestable `atomic()` SAVEPOINT wrapper (`src/db.ts`) around `applyTransition`/`activate`/`aggregate` writes. Proof: test `M1 atomicity …` (rollback leaves no orphan row). See `EVIDENCE_PACK.md` Item 8. | **FIXED** |
 | Signatures | HIGH (design) | `signature_hash` / signoff are opaque strings; no real cryptographic signature verification (no PKI). | Approvals are trust-by-string. | M10.1: real signing (per-approver keys) + verification. | OPEN |
 | Concurrency model | MEDIUM | `node:sqlite` `DatabaseSync` is single-connection synchronous; multi-process concurrency (WAL, busy-timeout, ret/serialize) is not configured or tested. | Multi-writer deployments unproven. | M10.1: WAL + busy_timeout + documented single-writer or serialized-writer model. | OPEN |
 | Telemetry scale | MEDIUM | `TelemetryLog` is a hash-anchored stub; no payload schema/validation, no partition/archival. | Millions of rows unmanaged. | M10.1: telemetry ingestion + partition/archival (Phase 6). | DEFERRED_WITH_BLOCK |
@@ -123,16 +123,28 @@ decisions).
 
 ## Phase 6 — Performance (`npm run verify:perf`, node:sqlite single file)
 
-| vehicles | rows | insert (ms) | indexed join (ms/query) | db size |
-|---:|---:|---:|---:|---:|
-| 10 | 40 | 5 | 0.036 | 0.32 MB |
-| 100 | 400 | 6 | 0.041 | 0.34 MB |
-| 1,000 | 4,000 | 19 | 0.198 | 0.61 MB |
-| 10,000 | 40,000 | 138 | 1.81 | 3.18 MB |
-| 100,000 | 400,000 | 1,351 | 25.2 | 31 MB |
+**Update (final reconciliation):** the perf harness now reports **median + p95**
+(1,000 per-query samples) and captures **`EXPLAIN QUERY PLAN`**. Doing so exposed
+a proven defect — the benchmarked join planned `SCAN rc` (full scan of
+`RunoutCalculations`), so per-query time was **O(n)** (100k → ~16.5 ms), not the
+O(log n) previously claimed. Root cause: two FK columns on the join path were
+unindexed. **Migration `004_join_indexes.sql`** (`idx_config_packet_vehicle`,
+`idx_runout_calc_config`) makes the plan fully index-driven; per-query time is now
+~constant. Full methodology + before/after plans in `EVIDENCE_PACK.md` Item 5.
 
-Indexed FK joins scale ~O(log n); bulk insert is transaction-bound. **Bottlenecks
-at scale:** telemetry rows (unbounded), and the single-file/single-writer model.
+Post-004 (mean / median / p95 per query):
+
+| vehicles | rows | insert (ms) | join mean (ms) | join p95 (ms) | db size |
+|---:|---:|---:|---:|---:|---:|
+| 10 | 40 | 5 | 0.0060 | 0.0093 | 0.33 MB |
+| 100 | 400 | 5 | 0.0060 | 0.0069 | 0.34 MB |
+| 1,000 | 4,000 | 16 | 0.0061 | 0.0105 | 0.64 MB |
+| 10,000 | 40,000 | 107 | 0.0098 | 0.0185 | 3.48 MB |
+| 100,000 | 400,000 | 1,028 | 0.0134 | 0.0201 | 34.32 MB |
+
+Indexed FK joins now scale ~O(log n) (verified by the query plan); bulk insert is
+transaction-bound. **Bottlenecks at scale:** telemetry rows (unbounded), and the
+single-file/single-writer model.
 **Recommended:** WAL mode; per-vehicle/per-session archival of closed telemetry;
 scheduled `VACUUM`; file-copy backup + `.backup`/restore test in CI; a partition
 (or separate DB per platform/fleet) strategy for >100k vehicles.
@@ -206,7 +218,7 @@ at millions of rows/day (needs a time-series store, not `TelemetryLog`).
 ## Medium Improvements
 
 - **M1 — Wrap `aggregate()`/`activate()` in explicit transactions** (partial-commit
-  safety).
+  safety). **DONE** (SAVEPOINT `atomic()`; test `M1 atomicity …`; `EVIDENCE_PACK.md` Item 8).
 - **M2 — Clock trust (A9):** attested/monotonic time source; treat wall-clock as
   untrusted for expiry.
 - **M3 — Telemetry ingestion + partition/archival** (Phase 6).
@@ -241,7 +253,7 @@ at millions of rows/day (needs a time-series store, not `TelemetryLog`).
 | R2 | Multi-writer corruption (no WAL) | Med (if deployed multi-user) | High | WAL + single-writer policy (H2) | Before any multi-user use |
 | R3 | Opaque signatures forged upstream | Med | High | PKI (H1) | Before real approvals |
 | R4 | Telemetry growth degrades DB | Med at scale | Medium | Partition/archival (M3) | Before fleet telemetry |
-| R5 | Power-loss partial commit | Low | Medium | Transactions (M1) + crash tests (M4) | Before production |
+| R5 | Power-loss partial commit | Low | Medium | Transactions (M1) **DONE** (SAVEPOINT `atomic()`); crash/power-loss/disk-full tests (M4) still pending | Before production |
 | R6 | Overclaiming readiness | — | High | This report + honest status labels | Standing |
 
 ---

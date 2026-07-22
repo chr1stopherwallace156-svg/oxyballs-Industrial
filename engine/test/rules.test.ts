@@ -1,7 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { freshMemoryDb } from '../src/db';
+import { freshMemoryDb, atomic } from '../src/db';
+import { appendLedger } from '../src/ledger';
 import { BlockReason } from '../src/blockReasons';
 import { buildAuthorizedChain, insertBase } from '../src/fixtures';
 import {
@@ -454,6 +455,43 @@ test('review_73 pt 17: RunoutAggregationComponent snapshot cannot be deleted', (
   buildAuthorizedChain(db); // aggregate() froze a snapshot
   const row = db.prepare('SELECT distance_component_id FROM RunoutAggregationComponent LIMIT 1').get() as any;
   expectThrowsMessage(() => db.prepare('DELETE FROM RunoutAggregationComponent WHERE distance_component_id = ?').run(row.distance_component_id), 'APPEND_ONLY_VIOLATION');
+});
+
+// ── FINDING M1 (atomicity): transition + status + ledger are one unit ─────────
+test('M1 atomicity: a failure mid-unit leaves no orphan transition or ledger row (SAVEPOINT rollback)', () => {
+  const db = freshMemoryDb();
+  const ids = buildAuthorizedChain(db);
+  const tcaId = ids.testCellAuthorizationId;
+  const status0 = (db.prepare('SELECT status FROM TestCellAuthorization WHERE test_cell_authorization_id=?').get(tcaId) as any).status;
+  const trans0 = (db.prepare('SELECT COUNT(*) c FROM AuthorizationTransition WHERE test_cell_authorization_id=?').get(tcaId) as any).c;
+  const ledg0 = (db.prepare('SELECT COUNT(*) c FROM EvidenceLedger').get() as any).c;
+
+  // Reproduce applyTransition's exact write set (INSERT transition + UPDATE status +
+  // appendLedger), then throw AFTER all three writes — the precise M1 defect scenario.
+  assert.throws(() => atomic(db, () => {
+    const tid = `AT_${tcaId}_rollback`;
+    db.prepare(
+      `INSERT INTO AuthorizationTransition
+        (authorization_transition_id, test_cell_authorization_id, from_status, to_status, transition_reason, actor_identity, timestamp)
+       VALUES (?,?,?,?,?,?,?)`,
+    ).run(tid, tcaId, status0, 'SUSPENDED', 'injected failure', 'test', new Date().toISOString());
+    db.prepare('UPDATE TestCellAuthorization SET status=? WHERE test_cell_authorization_id=?').run('SUSPENDED', tcaId);
+    appendLedger(db, 'AuthorizationTransition', tid, { tcaId }, 'test');
+    throw new Error('INJECTED_MID_UNIT_FAILURE');
+  }), /INJECTED_MID_UNIT_FAILURE/);
+
+  // Nothing persisted: status unchanged, no orphan transition, no orphan ledger row.
+  const status1 = (db.prepare('SELECT status FROM TestCellAuthorization WHERE test_cell_authorization_id=?').get(tcaId) as any).status;
+  const trans1 = (db.prepare('SELECT COUNT(*) c FROM AuthorizationTransition WHERE test_cell_authorization_id=?').get(tcaId) as any).c;
+  const ledg1 = (db.prepare('SELECT COUNT(*) c FROM EvidenceLedger').get() as any).c;
+  assert.equal(status1, status0);
+  assert.equal(trans1, trans0);
+  assert.equal(ledg1, ledg0);
+
+  // And the DB is still usable afterwards — a real activation still commits atomically.
+  activate(db, tcaId, 'test.lead');
+  const status2 = (db.prepare('SELECT status FROM TestCellAuthorization WHERE test_cell_authorization_id=?').get(tcaId) as any).status;
+  assert.equal(status2, 'ACTIVE');
 });
 
 // ── Automatic expiry sweep (RC-424) ──────────────────────────────────────────

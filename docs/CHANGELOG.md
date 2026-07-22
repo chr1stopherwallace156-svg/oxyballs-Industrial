@@ -5,6 +5,36 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-22 — M10 final evidence-pack reconciliation + two proven-defect fixes (D-014, L-005)
+
+- Produced `engine/EVIDENCE_PACK.md` answering the owner's 10 reconciliation items
+  with reproducible evidence.
+- **Finding count reconciled:** 6 finding groups (root causes) spanning 7 probes —
+  the state-machine group covers A1+A2. Built the full A1–A12 matrix (setup, attack
+  op, baseline vs final, corrective path, linked test).
+- **Benchmark methodology** added to `engine/verify/perf.ts`: 1,000-iteration
+  median + p95 per query and `EXPLAIN QUERY PLAN` capture. This **exposed a proven
+  O(n) defect** — the benchmarked 3-way join planned `SCAN rc` (full scan of
+  RunoutCalculations). Fixed by `engine/migrations/004_join_indexes.sql` (two
+  non-semantic FK indexes: `idx_config_packet_vehicle`, `idx_runout_calc_config`);
+  the plan is now fully index-driven and 100k per-query time dropped ~16.5 ms →
+  ~0.013 ms.
+- **Atomicity (finding M1) verified + fixed:** `applyTransition`/`activate`/
+  `aggregate` previously issued multiple un-wrapped writes. Added a nestable
+  SAVEPOINT `atomic()` helper (`engine/src/db.ts`) so the transition + status
+  update + evidence-ledger append (and the runout snapshot) commit or roll back as
+  one unit; proven by a new rollback test. Now **40/40 tests** (was 39).
+- Documented the **EvidenceLedger threat model** (detects deletion/reorder/mutation
+  within a trusted writer; does NOT prove authorship; PKI + external anchoring
+  deferred) and pinned the **VIN finding** to `IndividualVehicle.vin TEXT` (001) +
+  the partial-unique fix (003).
+- `engine/VERIFICATION_REPORT.md` updated (M1 → FIXED, R5, Phase-6 perf table).
+  **No new engineering values; seed still 0 approvals / 0 passes; M11 not started;
+  no HIL/physical-safety claim; ODR-001..003 remain open.** Only additions:
+  non-semantic indexes, a transaction wrapper, a test, and documentation.
+
+---
+
 ## 2026-07-22 — M10 adversarial verification + M10.1 hardening (directive_04, D-013, L-004)
 
 - Archived owner directive_04 (commit `7a59cf0`): an independent adversarial M10

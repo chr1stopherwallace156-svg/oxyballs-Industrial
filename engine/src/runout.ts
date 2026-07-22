@@ -1,4 +1,4 @@
-import { DB, sha256, canonicalSerialize } from './db';
+import { DB, sha256, canonicalSerialize, atomic } from './db';
 import { BlockReason, BlockError, block } from './blockReasons';
 import { isComponentAuthorityEligible } from './units';
 
@@ -173,25 +173,30 @@ export function aggregate(db: DB, input: AggregateInput): AggregateResult {
   );
 
   const id = `RAR_${calculationHash.slice(0, 16)}`;
-  db.prepare(
-    `INSERT INTO RunoutAggregationResult
-      (runout_aggregation_result_id, runout_calculations_id, configuration_packet_id,
-       test_cell_authorization_id, calculated_l_min, available_track_length, remaining_margin,
-       approved_minimum_margin, overlap_check_result, unit_consistency_result,
-       required_component_completion_result, calculation_version, calculation_hash, authorization_status)
-     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?, 'DRAFT')`,
-  ).run(
-    id, input.runoutCalculationsId, input.configurationPacketId, input.testCellAuthorizationId,
-    calculatedLmin, input.availableTrackLength, remainingMargin, input.approvedMinimumMargin,
-    overlapCheckResult, unitConsistencyResult, requiredComponentCompletionResult,
-    input.calculationVersion ?? '1', calculationHash,
-  );
+  // FINDING M1 (atomicity): the aggregation result and its frozen component-membership
+  // snapshot are one indivisible unit. If the snapshot loop fails partway, the whole
+  // aggregation rolls back — never a result row with a partial/absent frozen snapshot.
+  atomic(db, () => {
+    db.prepare(
+      `INSERT INTO RunoutAggregationResult
+        (runout_aggregation_result_id, runout_calculations_id, configuration_packet_id,
+         test_cell_authorization_id, calculated_l_min, available_track_length, remaining_margin,
+         approved_minimum_margin, overlap_check_result, unit_consistency_result,
+         required_component_completion_result, calculation_version, calculation_hash, authorization_status)
+       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?, 'DRAFT')`,
+    ).run(
+      id, input.runoutCalculationsId, input.configurationPacketId, input.testCellAuthorizationId,
+      calculatedLmin, input.availableTrackLength, remainingMargin, input.approvedMinimumMargin,
+      overlapCheckResult, unitConsistencyResult, requiredComponentCompletionResult,
+      input.calculationVersion ?? '1', calculationHash,
+    );
 
-  // RC-400/417: freeze the component membership snapshot (junction, composite PK).
-  const ins = db.prepare(
-    'INSERT INTO RunoutAggregationComponent (runout_aggregation_result_id, distance_component_id) VALUES (?,?)',
-  );
-  for (const cid of componentIds) ins.run(id, cid);
+    // RC-400/417: freeze the component membership snapshot (junction, composite PK).
+    const ins = db.prepare(
+      'INSERT INTO RunoutAggregationComponent (runout_aggregation_result_id, distance_component_id) VALUES (?,?)',
+    );
+    for (const cid of componentIds) ins.run(id, cid);
+  });
 
   return {
     runoutAggregationResultId: id,

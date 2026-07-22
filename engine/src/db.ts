@@ -66,6 +66,30 @@ export function freshMemoryDb(): DB {
   return db;
 }
 
+let savepointCounter = 0;
+
+/**
+ * Run `fn` inside a SAVEPOINT so every write it performs commits or rolls back
+ * as one unit (Article IV — deterministic state, no partial mutations). Uses
+ * named SAVEPOINTs rather than BEGIN/COMMIT so callers can nest atomic() inside
+ * an already-open atomic() (e.g. activate() wrapping applyTransition()). On any
+ * throw the block is rolled back to the savepoint and re-raised, leaving no
+ * orphaned AuthorizationTransition/EvidenceLedger rows behind.
+ */
+export function atomic<T>(db: DB, fn: () => T): T {
+  const name = `sp_${++savepointCounter}`;
+  db.exec(`SAVEPOINT ${name}`);
+  try {
+    const result = fn();
+    db.exec(`RELEASE ${name}`);
+    return result;
+  } catch (e) {
+    db.exec(`ROLLBACK TO ${name}`);
+    db.exec(`RELEASE ${name}`);
+    throw e;
+  }
+}
+
 export function sha256(s: string): string {
   return createHash('sha256').update(s).digest('hex');
 }

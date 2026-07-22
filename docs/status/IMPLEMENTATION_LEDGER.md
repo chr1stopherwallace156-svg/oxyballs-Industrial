@@ -109,3 +109,33 @@ begun. The first such entry must start as `Claimed`.)*
   foundation — NOT production-grade; software does NOT establish physical safety**
   (D-013). M10G SIL, M10H HIL, the broad rev07 baseline M10, ODR-001..003, and M11
   remain gated; M11 not started.
+
+---
+
+## L-005 — M10 final evidence-pack reconciliation + two proven-defect fixes
+
+- Date: 2026-07-22
+- Agent: Claude Code
+- Status: Verified
+- Commits: the reconciliation commit on `claude/docs-structure-large-projects-b6vxx5`
+  (see `git log`), on top of `c97b3ac`
+- Evidence: **re-runnable** — from `engine/`:
+  `npm run migrate && npm run verify:attack && npm run verify:determinism &&
+  npm run verify:perf && npm test && npm run build` → migrate PASS (4 migrations,
+  33 tables); attack 11/12 BLOCKED (A9 residual); determinism ALL PASS; perf
+  fully index-driven (100k join ~0.013 ms/query, median+p95 reported, query plan
+  captured); **test 40/40**; build exit 0. Full 10-item answer in
+  `engine/EVIDENCE_PACK.md`.
+- Verified by: Claude Code 2026-07-22 via the cited commands (re-runnable). This
+  round: (1) reconciled the finding count to **6 groups / 7 probes**; (2) built the
+  full A1–A12 matrix; (3–4) recorded exact commit/branch/status + verbatim command
+  outputs; (5) added median/p95 + `EXPLAIN QUERY PLAN` to `verify:perf`, exposing a
+  **proven O(n) join defect** fixed by `migrations/004_join_indexes.sql` (two
+  non-semantic FK indexes); (6) documented the EvidenceLedger threat model; (7)
+  pinned the VIN finding to `IndividualVehicle.vin` (001) + partial-unique fix
+  (003); (8) verified and **fixed the M1 atomicity defect** with a nestable SAVEPOINT
+  `atomic()` wrapper around `applyTransition`/`activate`/`aggregate`, proven by a new
+  rollback test. **Honest status unchanged: `M10 IMPLEMENTATION FOUNDATION VERIFIED
+  (bounded)` — prototype-grade, NOT production, NOT HIL-ready** (D-014). M11 not
+  started; ODR-001..003 open; the broad rev07 baseline M10, M10G SIL, M10H HIL
+  remain gated; seed still 0 approvals/0 passes. No engineering value invented.

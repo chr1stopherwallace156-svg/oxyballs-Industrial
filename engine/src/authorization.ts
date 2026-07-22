@@ -1,4 +1,4 @@
-import { DB } from './db';
+import { DB, atomic } from './db';
 import { BlockReason, block, BlockError } from './blockReasons';
 import { AuthStatus, assertTransition, isExpired } from './stateMachine';
 import { assertRunoutValid } from './runout';
@@ -104,15 +104,21 @@ export function assertConfigEquality(db: DB, tcaId: string): void {
 
 /** Record an immutable transition event (RC-370) and update the TCA status. */
 function applyTransition(db: DB, tcaId: string, from: AuthStatus, to: AuthStatus, actor: string, reason: string): void {
-  const tid = `AT_${tcaId}_${Date.now()}_${Math.floor(Math.random() * 1e6)}`;
-  db.prepare(
-    `INSERT INTO AuthorizationTransition
-      (authorization_transition_id, test_cell_authorization_id, from_status, to_status, transition_reason, actor_identity, timestamp)
-     VALUES (?,?,?,?,?,?,?)`,
-  ).run(tid, tcaId, from, to, reason, actor, new Date().toISOString());
-  db.prepare('UPDATE TestCellAuthorization SET status = ? WHERE test_cell_authorization_id = ?').run(to, tcaId);
-  // FINDING A12: chain the transition event into the verifiable evidence ledger.
-  appendLedger(db, 'AuthorizationTransition', tid, { tcaId, from, to, reason, actor }, actor);
+  // FINDING M1 (atomicity): the transition event, the status update and the
+  // evidence-ledger append are one indivisible unit. If any statement (or a
+  // trigger it fires) throws, the whole set rolls back — no orphaned
+  // AuthorizationTransition row, no ledger entry for a status that never landed.
+  atomic(db, () => {
+    const tid = `AT_${tcaId}_${Date.now()}_${Math.floor(Math.random() * 1e6)}`;
+    db.prepare(
+      `INSERT INTO AuthorizationTransition
+        (authorization_transition_id, test_cell_authorization_id, from_status, to_status, transition_reason, actor_identity, timestamp)
+       VALUES (?,?,?,?,?,?,?)`,
+    ).run(tid, tcaId, from, to, reason, actor, new Date().toISOString());
+    db.prepare('UPDATE TestCellAuthorization SET status = ? WHERE test_cell_authorization_id = ?').run(to, tcaId);
+    // FINDING A12: chain the transition event into the verifiable evidence ledger.
+    appendLedger(db, 'AuthorizationTransition', tid, { tcaId, from, to, reason, actor }, actor);
+  });
 }
 
 /** RC-386: at most one ACTIVE TestCellAuthorization per vehicle/subgate/session. */
@@ -181,10 +187,15 @@ export function activate(db: DB, tcaId: string, actor: string, now: Date = new D
   assertSingleActive(db, tcaId);
 
   assertTransition('AUTHORIZED', 'ACTIVE');
-  applyTransition(db, tcaId, 'AUTHORIZED', 'ACTIVE', actor, 'activation preconditions satisfied');
-  if (!tca.activation_timestamp)
-    db.prepare('UPDATE TestCellAuthorization SET activation_timestamp = ? WHERE test_cell_authorization_id = ?')
-      .run(now.toISOString(), tcaId);
+  // Activation writes (status transition + ledger append + activation timestamp)
+  // commit or roll back together (FINDING M1). applyTransition() nests its own
+  // SAVEPOINT inside this one.
+  atomic(db, () => {
+    applyTransition(db, tcaId, 'AUTHORIZED', 'ACTIVE', actor, 'activation preconditions satisfied');
+    if (!tca.activation_timestamp)
+      db.prepare('UPDATE TestCellAuthorization SET activation_timestamp = ? WHERE test_cell_authorization_id = ?')
+        .run(now.toISOString(), tcaId);
+  });
 }
 
 /**
