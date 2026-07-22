@@ -17,6 +17,42 @@ later entry that references it.
 
 ---
 
+## D-013 — M10 adversarial verification (directive_04): 6 findings, 5 fixed by DB hardening, 1 residual; prototype-not-production
+
+- Date: 2026-07-22
+- Status: Accepted (extends D-011/D-012)
+- Context: The owner commissioned an independent adversarial verification
+  (directive_04) to break the bounded M10 rule engine, requiring reproducible,
+  evidence-based findings and forbidding redesign unless a flaw is proven.
+- Decision: Built a runnable adversarial harness (`engine/verify/attack.ts`,
+  `perf.ts`, `determinism.ts`; npm scripts `verify:attack/perf/determinism`) that
+  probes the live engine. It found **6 real weaknesses** — **Critical:** the
+  authorization state machine + activation preconditions were enforced only in the
+  service layer, so a direct SQL write bypassed them (A1/A2); **High:** NULL-session
+  single-active was racy (A6) and the cryptographic evidence chain was defined but
+  unenforced (A12); **Medium:** a revoked runout release could be resurrected (A4)
+  and VIN was non-unique (A8). Because these flaws were *proven*, they were
+  corrected by DB-level hardening (`migrations/003_hardening.sql`): a data-driven
+  state-transition trigger, an activation-precondition trigger, an
+  initial-status-insert guard, NULL-safe single-active triggers, revoked-runout +
+  RunoutAggregationResult immutability triggers, a `vin` unique index, and an
+  append-only `EvidenceLedger` with a `verifyLedgerChain()` routine wired into
+  every authorization transition. **One residual finding (A9 — expiry trusts a
+  caller-supplied clock) is accepted-risk / M10.1** (needs an attested time source).
+  Adopt the honest verdict: **prototype-grade, deterministic, tamper-evident records
+  foundation — NOT production-grade, and NOT an establishment of physical safety.**
+- Consequences: Post-hardening the engine passes 11/12 attack probes (A9 residual),
+  39/39 tests, determinism ALL PASS, and perf is measured to 100k vehicles. The
+  verification report `engine/VERIFICATION_REPORT.md` records severity-rated
+  findings, /100 scores (Architecture 82 · Safety[data-integrity] 80 · Database 85
+  · Enterprise readiness 46 · Production readiness 34), a technical-debt report, a
+  risk register, and a prioritized **M10.1 backlog** (PKI signatures; concurrency
+  WAL/single-writer; extend the ledger to all signed records; transaction-wrap
+  aggregate/activate; attested time; telemetry ingestion + archival; integer-mm
+  geometry). M10G SIL, M10H HIL, the broad rev07 baseline M10, ODR-001..003, and
+  M11 remain gated; M11 not started. Recorded in `engine/VERIFICATION_REPORT.md`,
+  `docs/status/IMPLEMENTATION_LEDGER.md` (L-004), and the directive_04 archive.
+
 ## D-012 — M10 audit round: self-audit vs owner review_73; honest status is FOUNDATION VERIFIED, not COMPLETE/FROZEN/HIL-READY
 
 - Date: 2026-07-22

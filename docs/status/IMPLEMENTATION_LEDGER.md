@@ -87,3 +87,25 @@ begun. The first such entry must start as `Claimed`.)*
   HIL, TelemetryLog payload validation (DEFERRED_WITH_BLOCK), the broad rev07
   baseline M10, ODR-001..003, and M11 remain gated. No software test proves
   hardware safety.
+
+---
+
+## L-004 — M10 adversarial verification + M10.1 hardening (directive_04)
+
+- Date: 2026-07-22
+- Agent: Claude Code
+- Status: Verified
+- Commits: the directive_04 archive (`7a59cf0`) + the verification/hardening engine
+  commit on `claude/docs-structure-large-projects-b6vxx5` (see `git log`)
+- Evidence: **re-runnable** — `cd engine && npm ci && npm run verify:attack &&
+  npm run verify:determinism && npm run verify:perf && npm test` →
+  attack 11/12 BLOCKED (A9 clock = documented residual); determinism ALL PASS;
+  perf measured to 100k vehicles; **39/39 tests**. Full report
+  `engine/VERIFICATION_REPORT.md`; findings + scores + risk register + M10.1 backlog.
+- Verified by: Claude Code 2026-07-22 via the cited harness commands (any agent or
+  the owner can re-run to reproduce). 6 proven weaknesses found; 5 fixed by
+  DB-level hardening (`migrations/003_hardening.sql`); 1 residual (A9) accepted-risk.
+  **Honest verdict: prototype-grade, deterministic, tamper-evident records
+  foundation — NOT production-grade; software does NOT establish physical safety**
+  (D-013). M10G SIL, M10H HIL, the broad rev07 baseline M10, ODR-001..003, and M11
+  remain gated; M11 not started.

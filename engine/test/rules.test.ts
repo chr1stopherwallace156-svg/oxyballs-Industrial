@@ -360,18 +360,92 @@ test('review_73 pt 7: TestCellAuthorization.previous_cell_signed_result_id FK is
     base.platformConfigId, 'TR_NONEXISTENT', 'DRAFT'), 'FOREIGN KEY');
 });
 
-// ── review_73 pt 15: DB partial-unique index blocks a 2nd ACTIVE cell ─────────
-test('review_73 pt 15: DB index blocks a second ACTIVE cell for the same vehicle/subgate/session', () => {
+// ── directive_04 hardening: a post-authoring state cannot be INSERTed directly ─
+test('HARDENING: a ready-made ACTIVE cell cannot be inserted directly (must transition)', () => {
   const db = freshMemoryDb();
   const base = insertBase(db);
-  const insTca = (id: string) => db.prepare(
+  expectThrowsMessage(() => db.prepare(
     `INSERT INTO TestCellAuthorization(test_cell_authorization_id, subgate_id, cell_number, configuration_packet_id,
       individual_vehicle_id, vehicle_build_id, platform_configuration_id, test_session_id, status)
-     VALUES (?,?,?,?,?,?,?,?,?)`,
-  ).run(id, '05M-C3A', 1, base.configurationPacketId, base.individualVehicleId, base.vehicleBuildId,
-    base.platformConfigId, 'TS_SHARED', 'ACTIVE');
-  insTca('TCA_ACT_A');
-  expectThrowsMessage(() => insTca('TCA_ACT_B'), 'UNIQUE');
+     VALUES (?,?,?,?,?,?,?,?,'ACTIVE')`,
+  ).run('TCA_ACT', '05M-C3A', 1, base.configurationPacketId, base.individualVehicleId, base.vehicleBuildId,
+    base.platformConfigId, 'TS'), 'ILLEGAL_INITIAL_STATUS');
+});
+
+// ── directive_04 hardening: activation preconditions enforced at the DB ───────
+test('HARDENING A1: AUTHORIZED->ACTIVE with an unreleased runout is blocked by the DB', () => {
+  const db = freshMemoryDb();
+  const ids = buildAuthorizedChain(db, { signRunout: false }); // runout DRAFT, cell AUTHORIZED
+  expectThrowsMessage(() => db.prepare("UPDATE TestCellAuthorization SET status='ACTIVE' WHERE test_cell_authorization_id=?")
+    .run(ids.testCellAuthorizationId), 'ACTIVATION_PRECONDITIONS_NOT_MET');
+});
+
+// ── directive_04 hardening: DB single-active via the UPDATE path ──────────────
+test('HARDENING A6: DB blocks a second cell transitioning to ACTIVE on the same vehicle/subgate/session', () => {
+  const db = freshMemoryDb();
+  const a = buildAuthorizedChain(db);
+  activate(db, a.testCellAuthorizationId, 'x'); // first cell ACTIVE
+  const b = buildAuthorizedChain(db);
+  // give b the same vehicle/subgate/session identity as a (b keeps its own runout+procedure)
+  db.prepare('UPDATE TestCellAuthorization SET individual_vehicle_id=?, subgate_id=?, test_session_id=? WHERE test_cell_authorization_id=?')
+    .run(a.individualVehicleId, '05M-C3A', a.testSessionId, b.testCellAuthorizationId);
+  db.prepare('UPDATE TestCellAuthorization SET test_session_id=? WHERE test_cell_authorization_id=?').run(a.testSessionId, a.testCellAuthorizationId);
+  expectThrowsMessage(() => db.prepare("UPDATE TestCellAuthorization SET status='ACTIVE' WHERE test_cell_authorization_id=?")
+    .run(b.testCellAuthorizationId), 'MULTIPLE_ACTIVE_TEST_CELLS');
+});
+
+// ── directive_04 hardening: DB-level enforcement (migration 003) ─────────────
+test('HARDENING A1: a direct SQL DRAFT->ACTIVE jump is rejected by the DB state-machine trigger', () => {
+  const db = freshMemoryDb();
+  const base = insertBase(db);
+  db.prepare(`INSERT INTO TestCellAuthorization(test_cell_authorization_id,subgate_id,cell_number,configuration_packet_id,individual_vehicle_id,vehicle_build_id,platform_configuration_id,status) VALUES (?,?,?,?,?,?,?,?)`)
+    .run('TCA_D','05M-C3A',1,base.configurationPacketId,base.individualVehicleId,base.vehicleBuildId,base.platformConfigId,'DRAFT');
+  expectThrowsMessage(() => db.prepare("UPDATE TestCellAuthorization SET status='ACTIVE' WHERE test_cell_authorization_id='TCA_D'").run(), 'ILLEGAL_STATE_TRANSITION');
+});
+
+test('HARDENING A2: a SUPERSEDED cell (reached via legal transitions) cannot be resurrected to ACTIVE', () => {
+  const db = freshMemoryDb();
+  const base = insertBase(db);
+  db.prepare(`INSERT INTO TestCellAuthorization(test_cell_authorization_id,subgate_id,cell_number,configuration_packet_id,individual_vehicle_id,vehicle_build_id,platform_configuration_id,status) VALUES (?,?,?,?,?,?,?,'AUTHORIZED')`)
+    .run('TCA_R','05M-C3A',1,base.configurationPacketId,base.individualVehicleId,base.vehicleBuildId,base.platformConfigId);
+  db.prepare("UPDATE TestCellAuthorization SET status='REVOKED' WHERE test_cell_authorization_id='TCA_R'").run();     // AUTHORIZED -> REVOKED (legal)
+  db.prepare("UPDATE TestCellAuthorization SET status='SUPERSEDED' WHERE test_cell_authorization_id='TCA_R'").run();  // REVOKED -> SUPERSEDED (legal)
+  expectThrowsMessage(() => db.prepare("UPDATE TestCellAuthorization SET status='ACTIVE' WHERE test_cell_authorization_id='TCA_R'").run(), 'ILLEGAL_STATE_TRANSITION');
+});
+
+test('HARDENING A4: a REVOKED_PENDING_RECALCULATION runout cannot be resurrected to SIGNED_RELEASE', () => {
+  const db = freshMemoryDb();
+  const ids = buildAuthorizedChain(db);
+  activate(db, ids.testCellAuthorizationId, 'x');
+  applyConfigurationChange(db, ids.configurationPacketId, 'firmware changed');
+  expectThrowsMessage(() => db.prepare("UPDATE RunoutAggregationResult SET authorization_status='SIGNED_RELEASE' WHERE runout_aggregation_result_id=?").run(ids.runoutAggregationResultId), 'RUNOUT_RELEASE_RESURRECTION_FORBIDDEN');
+});
+
+test('HARDENING: a direct NULL-session ACTIVE insert is forbidden', () => {
+  const db = freshMemoryDb();
+  const b = insertBase(db);
+  expectThrowsMessage(() => db.prepare(`INSERT INTO TestCellAuthorization(test_cell_authorization_id,subgate_id,cell_number,configuration_packet_id,individual_vehicle_id,vehicle_build_id,platform_configuration_id,test_session_id,status) VALUES (?,?,?,?,?,?,?,NULL,'ACTIVE')`)
+    .run('N1','05M-C3A',1,b.configurationPacketId,b.individualVehicleId,b.vehicleBuildId,b.platformConfigId), 'ILLEGAL_INITIAL_STATUS');
+});
+
+test('HARDENING A8: VIN maps to at most one IndividualVehicle', () => {
+  const db = freshMemoryDb();
+  db.prepare('INSERT INTO IndividualVehicle(individual_vehicle_id,vin,platform_id) VALUES (?,?,?)').run('IVa','VIN-X','P');
+  expectThrowsMessage(() => db.prepare('INSERT INTO IndividualVehicle(individual_vehicle_id,vin,platform_id) VALUES (?,?,?)').run('IVb','VIN-X','P'), 'UNIQUE');
+});
+
+test('HARDENING A12: evidence hash chain verifies and detects tampering', async () => {
+  const { verifyLedgerChain } = await import('../src/ledger');
+  const db = freshMemoryDb();
+  const ids = buildAuthorizedChain(db);
+  activate(db, ids.testCellAuthorizationId, 'x'); // appends a ledger row
+  const good = verifyLedgerChain(db);
+  assert.equal(good.ok, true);
+  assert.ok(good.length >= 1);
+  // forge a row with a wrong prev_hash (INSERT is allowed; the chain must detect it)
+  db.prepare(`INSERT INTO EvidenceLedger(record_type,record_id,content_hash,prev_hash,record_hash,signer_identity,created_at) VALUES ('X','forged','h','WRONG_PREV','rh','attacker',?)`).run(new Date().toISOString());
+  const bad = verifyLedgerChain(db);
+  assert.equal(bad.ok, false);
 });
 
 // ── review_73 pt 17: the frozen runout snapshot is append-only ───────────────

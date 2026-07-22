@@ -13,6 +13,9 @@
     "seed": "npm run build && node --no-warnings dist/scripts/seed.js",
     "verify": "npm run build && node --no-warnings dist/scripts/verify.js",
     "test": "npm run build && node --no-warnings --test \"dist/test/*.test.js\"",
+    "verify:attack": "npm run build && node --no-warnings dist/verify/attack.js",
+    "verify:perf": "npm run build && node --no-warnings dist/verify/perf.js",
+    "verify:determinism": "npm run build && node --no-warnings dist/verify/determinism.js",
     "clean": "rm -rf dist data/engine.db"
   },
   "devDependencies": {

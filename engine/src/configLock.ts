@@ -1,5 +1,6 @@
 import { DB } from './db';
 import { appendAnnotation } from './results';
+import { appendLedger } from './ledger';
 
 /**
  * M10D — Configuration-lock enforcement (RC-353/425). A configuration-hash change
@@ -22,6 +23,7 @@ function recordTransition(db: DB, tcaId: string, from: string, to: string, reaso
      VALUES (?,?,?,?,?,?,?)`,
   ).run(tid, tcaId, from, to, reason, 'system:config-change', new Date().toISOString());
   db.prepare('UPDATE TestCellAuthorization SET status = ? WHERE test_cell_authorization_id = ?').run(to, tcaId);
+  appendLedger(db, 'AuthorizationTransition', tid, { tcaId, from, to, reason, actor: 'system:config-change' }, 'system:config-change');
 }
 
 export function applyConfigurationChange(db: DB, configurationPacketId: string, reason: string): ConfigChangeResult {

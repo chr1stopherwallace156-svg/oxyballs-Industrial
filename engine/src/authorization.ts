@@ -3,6 +3,7 @@ import { BlockReason, block, BlockError } from './blockReasons';
 import { AuthStatus, assertTransition, isExpired } from './stateMachine';
 import { assertRunoutValid } from './runout';
 import { AuthorityClass, Unit, toCanonical, isAuthorityClassEligible } from './units';
+import { appendLedger } from './ledger';
 
 interface FieldRow { value: number; unit: Unit; authority_class: AuthorityClass; }
 
@@ -110,6 +111,8 @@ function applyTransition(db: DB, tcaId: string, from: AuthStatus, to: AuthStatus
      VALUES (?,?,?,?,?,?,?)`,
   ).run(tid, tcaId, from, to, reason, actor, new Date().toISOString());
   db.prepare('UPDATE TestCellAuthorization SET status = ? WHERE test_cell_authorization_id = ?').run(to, tcaId);
+  // FINDING A12: chain the transition event into the verifiable evidence ledger.
+  appendLedger(db, 'AuthorizationTransition', tid, { tcaId, from, to, reason, actor }, actor);
 }
 
 /** RC-386: at most one ACTIVE TestCellAuthorization per vehicle/subgate/session. */

@@ -4,7 +4,21 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-07-22
-- Reason for handoff: **M10 (bounded) BUILT, VERIFIED, and AUDIT-HARDENED.** After
+- Reason for handoff: **M10 ADVERSARIALLY VERIFIED + M10.1-HARDENED (directive_04,
+  D-013, L-004).** Built an attack/perf/determinism harness (`engine/verify/`),
+  found 6 real weaknesses (2 Critical/2 High/2 Medium), **fixed 5** via DB-level
+  hardening (`migrations/003_hardening.sql`: state-machine + activation-precondition
+  + single-active triggers, revoked-runout + evidence-ledger immutability, VIN
+  uniqueness, verifiable hash chain), and left **1 residual** (clock trust,
+  accepted-risk). Post-hardening: 11/12 attack probes BLOCKED, 39/39 tests,
+  determinism ALL PASS, perf to 100k vehicles. Full report
+  `engine/VERIFICATION_REPORT.md` (findings + /100 scores + risk register + M10.1
+  backlog). Honest verdict: **prototype-grade records foundation, NOT
+  production-grade; software does not establish physical safety.** Next: the M10.1
+  backlog (PKI, concurrency/WAL, transaction-wrap, attested time, telemetry) and
+  separately M10G SIL / M10H HIL. **M11 not started.**
+
+- (prior) — **M10 (bounded) BUILT, VERIFIED, and AUDIT-HARDENED.** After
   the "75:75" phase transition (D-010) the owner opened the bounded M10 gate
   (D-011) and directed the build; the Gate 05M-C3 rule engine (M10A–M10F) is under
   `engine/` (L-002). The owner then relayed a coding-agent M10 draft (which

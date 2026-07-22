@@ -5,6 +5,35 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-22 — M10 adversarial verification + M10.1 hardening (directive_04, D-013, L-004)
+
+- Archived owner directive_04 (commit `7a59cf0`): an independent adversarial M10
+  verification (8 phases) requiring reproducible, evidence-based findings.
+- Built a runnable attack/perf/determinism harness under `engine/verify/` (npm
+  scripts `verify:attack`, `verify:perf`, `verify:determinism`) that probes the
+  live engine. **Found 6 real weaknesses** — Critical: state machine +
+  activation preconditions were service-enforced only (a direct SQL write
+  bypassed them); High: NULL-session single-active was racy, and the evidence hash
+  chain was defined but unenforced; Medium: revoked-runout resurrection, and VIN
+  non-uniqueness.
+- **Fixed 5 by DB-level hardening** (`engine/migrations/003_hardening.sql`):
+  data-driven state-transition trigger, activation-precondition trigger,
+  initial-status-insert guard, NULL-safe single-active triggers, revoked-runout +
+  RunoutAggregationResult immutability triggers, `vin` unique index, and an
+  append-only `EvidenceLedger` + `verifyLedgerChain()` (src/ledger.ts) wired into
+  every authorization transition. **1 residual** (A9 — expiry trusts a
+  caller-supplied clock) is accepted-risk / M10.1.
+- Post-hardening: **11/12 attack probes BLOCKED**, **39/39 tests**, determinism
+  **ALL PASS**, perf measured to 100k vehicles (25 ms/indexed-join, 31 MB). Full
+  report `engine/VERIFICATION_REPORT.md` (severity findings, /100 scores,
+  technical-debt report, risk register, prioritized M10.1 backlog).
+- **Honest verdict:** prototype-grade, deterministic, tamper-evident **records**
+  foundation — NOT production-grade; software does NOT establish physical safety.
+  M10G SIL, M10H HIL, the broad rev07 baseline M10, ODR-001..003, and M11 remain
+  gated; **M11 not started.**
+
+---
+
 ## 2026-07-22 — M10 audit round: self-audit vs owner review_73 + gap-fixes (D-012, L-003)
 
 - Archived (commit `c0f026f`) a coding-agent M10 draft (which over-claimed "M10
