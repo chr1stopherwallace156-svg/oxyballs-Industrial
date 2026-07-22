@@ -29,6 +29,7 @@ interface DistanceComponentRow {
   zone_end_reference: number;
   distance_component_value: number;
   distance_component_method: string;
+  distance_component_type: string | null;
   uncertainty_m: number;
   included_in_l_min: number;
   included_within_component_id: string | null;
@@ -43,6 +44,8 @@ export interface AggregateInput {
   availableTrackLength: number;
   approvedMinimumMargin: number;
   calculationVersion?: string;
+  /** review_73 pt 10: L_min term categories that must be present among eligible components. */
+  requiredTypes?: string[];
 }
 
 export interface AggregateResult {
@@ -101,6 +104,36 @@ export function aggregate(db: DB, input: AggregateInput): AggregateResult {
     }
   }
 
+  // review_73 pt 11: circular nesting detection (A includes B includes A ...).
+  for (const start of all) {
+    const seen = new Set<string>();
+    let cur: DistanceComponentRow | undefined = start;
+    while (cur && cur.included_within_component_id) {
+      if (seen.has(cur.distance_component_id)) {
+        throw new BlockError(BlockReason.OVERLAP_HOST_INVALID, `circular nesting at ${cur.distance_component_id}`);
+      }
+      seen.add(cur.distance_component_id);
+      cur = byId.get(cur.included_within_component_id);
+    }
+  }
+
+  // review_73 pt 11: two separately-included components covering the same physical
+  // metre (overlapping [start,end) ranges) would double-count the track.
+  const separate = all.filter((c) => c.included_in_l_min === 1 && c.overlap_review_status === 'INCLUDED_SEPARATELY');
+  for (let i = 0; i < separate.length; i += 1) {
+    for (let j = i + 1; j < separate.length; j += 1) {
+      const a = separate[i]; const b = separate[j];
+      const overlapLen = Math.min(a.zone_end_reference, b.zone_end_reference) - Math.max(a.zone_start_reference, b.zone_start_reference);
+      if (overlapLen > 1e-9) {
+        overlapPass = false;
+        throw new BlockError(
+          BlockReason.OVERLAP_CHECK_FAILED,
+          `${a.distance_component_id} and ${b.distance_component_id} both count the same track segment (overlap ${overlapLen} m)`,
+        );
+      }
+    }
+  }
+
   // Required-component completion (RC-383): a component marked for inclusion but
   // carrying an ineligible authority status is an incomplete required component.
   const requiredIncomplete = all.some(
@@ -116,6 +149,14 @@ export function aggregate(db: DB, input: AggregateInput): AggregateResult {
   const eligible = all.filter(
     (c) => c.included_in_l_min === 1 && isComponentAuthorityEligible(c.authority_status),
   );
+
+  // review_73 pt 10: verify all required L_min term categories are present.
+  if (input.requiredTypes && input.requiredTypes.length > 0) {
+    const present = new Set(eligible.map((c) => c.distance_component_type).filter((t): t is string => !!t));
+    const missing = input.requiredTypes.filter((t) => !present.has(t));
+    block(missing.length === 0, BlockReason.REQUIRED_COMPONENT_INCOMPLETE, `missing L_min terms: ${missing.join(', ')}`);
+  }
+
   const calculatedLmin = eligible.reduce((s, c) => s + c.distance_component_value, 0);
   const remainingMargin = input.availableTrackLength - calculatedLmin;
 

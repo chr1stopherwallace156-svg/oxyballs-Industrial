@@ -23,10 +23,10 @@ export function insertBase(db: DB, opts: { platform?: string } = {}): BaseIds {
   const vehicleBuildId = uid('VB');
   const individualVehicleId = uid('IV');
   const configurationPacketId = uid('CP');
-  db.prepare('INSERT INTO VehicleBuild(vehicle_build_id, platform_configuration_id, status) VALUES (?,?,?)')
-    .run(vehicleBuildId, platformConfigId, 'ACTIVE');
-  db.prepare('INSERT INTO IndividualVehicle(individual_vehicle_id, vin, vehicle_build_id, platform_id, status) VALUES (?,?,?,?,?)')
-    .run(individualVehicleId, uid('VIN'), vehicleBuildId, platformConfigId, 'ACTIVE');
+  db.prepare('INSERT INTO IndividualVehicle(individual_vehicle_id, vin, platform_id, status) VALUES (?,?,?,?)')
+    .run(individualVehicleId, uid('VIN'), platformConfigId, 'ACTIVE');
+  db.prepare('INSERT INTO VehicleBuild(vehicle_build_id, individual_vehicle_id, platform_configuration_id, status) VALUES (?,?,?,?)')
+    .run(vehicleBuildId, individualVehicleId, platformConfigId, 'ACTIVE');
   db.prepare(
     `INSERT INTO ConfigurationPacket(configuration_packet_id, individual_vehicle_id, vehicle_build_id,
       platform_configuration_id, config_hash, status, created_at) VALUES (?,?,?,?,?,?,?)`,
@@ -77,14 +77,14 @@ export function buildAuthorizedChain(db: DB, opts: ChainOptions = {}): ChainIds 
   const c2 = uid('DC');
   db.prepare(
     `INSERT INTO DistanceComponent(distance_component_id, runout_calculations_id, zone_start_reference, zone_end_reference,
-      distance_component_value, distance_component_method, uncertainty_m, included_in_l_min, included_within_component_id,
-      overlap_review_status, authority_status) VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
-  ).run(c1, runoutCalculationsId, 0, 10, 10, 'ENGINEERING_APPROVED', 0.5, 1, null, 'INCLUDED_SEPARATELY', componentAuthority);
+      distance_component_value, distance_component_method, distance_component_type, uncertainty_m, included_in_l_min,
+      included_within_component_id, overlap_review_status, authority_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`,
+  ).run(c1, runoutCalculationsId, 0, 10, 10, 'ENGINEERING_APPROVED', 'L_braking_target', 0.5, 1, null, 'INCLUDED_SEPARATELY', componentAuthority);
   db.prepare(
     `INSERT INTO DistanceComponent(distance_component_id, runout_calculations_id, zone_start_reference, zone_end_reference,
-      distance_component_value, distance_component_method, uncertainty_m, included_in_l_min, included_within_component_id,
-      overlap_review_status, authority_status) VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
-  ).run(c2, runoutCalculationsId, 10, 30, 20, 'ENGINEERING_APPROVED', 0.5, 1, null, 'INCLUDED_SEPARATELY', componentAuthority);
+      distance_component_value, distance_component_method, distance_component_type, uncertainty_m, included_in_l_min,
+      included_within_component_id, overlap_review_status, authority_status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`,
+  ).run(c2, runoutCalculationsId, 10, 30, 20, 'ENGINEERING_APPROVED', 'L_worst_case_coast_or_stop', 0.5, 1, null, 'INCLUDED_SEPARATELY', componentAuthority);
 
   const agg = aggregate(db, {
     runoutCalculationsId,

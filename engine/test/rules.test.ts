@@ -74,21 +74,62 @@ test('NEG: aggregate with no components blocks', () => {
   }), BlockReason.MISSING_RUNOUT_COMPONENT);
 });
 
-// ── NEGATIVE 5: malformed geometry (RC-373) ──────────────────────────────────
-test('NEG: distance component whose value != (end-start) blocks', () => {
+// ── NEGATIVE 5: malformed geometry — now rejected at the SQL layer (review_73 pt 9)
+test('NEG: distance component whose value != (end-start) is rejected by the DB CHECK', () => {
   const db = freshMemoryDb();
   const base = insertBase(db);
   db.prepare('INSERT INTO RunoutCalculations(runout_calculations_id, configuration_packet_id, status, created_at) VALUES (?,?,?,?)')
     .run('RC_BAD', base.configurationPacketId, 'DRAFT', new Date().toISOString());
-  db.prepare(
+  expectThrowsMessage(() => db.prepare(
     `INSERT INTO DistanceComponent(distance_component_id, runout_calculations_id, zone_start_reference, zone_end_reference,
       distance_component_value, distance_component_method, uncertainty_m, included_in_l_min, included_within_component_id,
       overlap_review_status, authority_status) VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
-  ).run('DC_BAD', 'RC_BAD', 0, 10, 999, 'ENGINEERING_APPROVED', 0.5, 1, null, 'INCLUDED_SEPARATELY', 'ENGINEERING_APPROVED');
+  ).run('DC_BAD', 'RC_BAD', 0, 10, 999, 'ENGINEERING_APPROVED', 0.5, 1, null, 'INCLUDED_SEPARATELY', 'ENGINEERING_APPROVED'),
+    'CHECK constraint failed');
+});
+
+// ── review_73 pt 9: ARTIFACT_DEFINED requires proof_artifact_id (SQL CHECK) ───
+test('NEG: ARTIFACT_DEFINED component without proof_artifact_id is rejected by the DB', () => {
+  const db = freshMemoryDb();
+  const base = insertBase(db);
+  db.prepare('INSERT INTO RunoutCalculations(runout_calculations_id, configuration_packet_id, status, created_at) VALUES (?,?,?,?)')
+    .run('RC_PA', base.configurationPacketId, 'DRAFT', new Date().toISOString());
+  expectThrowsMessage(() => db.prepare(
+    `INSERT INTO DistanceComponent(distance_component_id, runout_calculations_id, zone_start_reference, zone_end_reference,
+      distance_component_value, distance_component_method, uncertainty_m, included_in_l_min, included_within_component_id,
+      overlap_review_status, authority_status) VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
+  ).run('DC_PA', 'RC_PA', 0, 10, 10, 'ENGINEERING_APPROVED', 0.5, 1, null, 'INCLUDED_SEPARATELY', 'ARTIFACT_DEFINED'),
+    'CHECK constraint failed');
+});
+
+// ── review_73 pt 11: two separately-included components double-count the track ─
+test('NEG: two INCLUDED_SEPARATELY components covering the same metre block (OVERLAP_CHECK_FAILED)', () => {
+  const db = freshMemoryDb();
+  const base = insertBase(db);
+  db.prepare('INSERT INTO RunoutCalculations(runout_calculations_id, configuration_packet_id, status, created_at) VALUES (?,?,?,?)')
+    .run('RC_DUP', base.configurationPacketId, 'DRAFT', new Date().toISOString());
+  const mk = (id: string, s: number, e: number) => db.prepare(
+    `INSERT INTO DistanceComponent(distance_component_id, runout_calculations_id, zone_start_reference, zone_end_reference,
+      distance_component_value, distance_component_method, uncertainty_m, included_in_l_min, included_within_component_id,
+      overlap_review_status, authority_status) VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
+  ).run(id, 'RC_DUP', s, e, e - s, 'ENGINEERING_APPROVED', 0.5, 1, null, 'INCLUDED_SEPARATELY', 'ENGINEERING_APPROVED');
+  mk('DC_A', 0, 10);
+  mk('DC_B', 5, 15); // overlaps DC_A on [5,10]
   expectBlock(() => aggregate(db, {
-    runoutCalculationsId: 'RC_BAD', configurationPacketId: base.configurationPacketId,
+    runoutCalculationsId: 'RC_DUP', configurationPacketId: base.configurationPacketId,
     testCellAuthorizationId: null, availableTrackLength: 100, approvedMinimumMargin: 5,
-  }), BlockReason.DISTANCE_GEOMETRY_INVALID);
+  }), BlockReason.OVERLAP_CHECK_FAILED);
+});
+
+// ── review_73 pt 10: required L_min term category missing ─────────────────────
+test('NEG: aggregate blocks when a required L_min term category is absent', () => {
+  const db = freshMemoryDb();
+  const ids = buildAuthorizedChain(db, { signRunout: false }); // has L_braking_target + L_worst_case_coast_or_stop
+  expectBlock(() => aggregate(db, {
+    runoutCalculationsId: ids.runoutCalculationsId, configurationPacketId: ids.configurationPacketId,
+    testCellAuthorizationId: null, availableTrackLength: 100, approvedMinimumMargin: 5,
+    requiredTypes: ['L_acceleration', 'L_braking_target'], // L_acceleration is missing
+  }), BlockReason.REQUIRED_COMPONENT_INCOMPLETE);
 });
 
 // ── NEGATIVE 6: overlap host belongs to a different RunoutCalculations (RC-383)
@@ -301,9 +342,44 @@ test('RC-417: duplicate junction membership is rejected by the composite key', (
 // ── Foreign key enforcement ──────────────────────────────────────────────────
 test('foreign keys are enforced (invalid FK rejected)', () => {
   const db = freshMemoryDb();
+  const base = insertBase(db);
   expectThrowsMessage(() => db.prepare(
-    'INSERT INTO IndividualVehicle(individual_vehicle_id, vehicle_build_id, platform_id) VALUES (?,?,?)',
-  ).run('IV_X', 'VB_NONEXISTENT', 'P'), 'FOREIGN KEY');
+    'INSERT INTO VehicleBuild(vehicle_build_id, individual_vehicle_id, platform_configuration_id) VALUES (?,?,?)',
+  ).run('VB_X', 'IV_NONEXISTENT', base.platformConfigId), 'FOREIGN KEY');
+});
+
+// ── review_73 pt 7: previous_cell_signed_result_id FK enforced (forward ref) ──
+test('review_73 pt 7: TestCellAuthorization.previous_cell_signed_result_id FK is enforced', () => {
+  const db = freshMemoryDb();
+  const base = insertBase(db);
+  expectThrowsMessage(() => db.prepare(
+    `INSERT INTO TestCellAuthorization(test_cell_authorization_id, subgate_id, cell_number, configuration_packet_id,
+      individual_vehicle_id, vehicle_build_id, platform_configuration_id, previous_cell_signed_result_id, status)
+     VALUES (?,?,?,?,?,?,?,?,?)`,
+  ).run('TCA_FK', '05M-C3A', 1, base.configurationPacketId, base.individualVehicleId, base.vehicleBuildId,
+    base.platformConfigId, 'TR_NONEXISTENT', 'DRAFT'), 'FOREIGN KEY');
+});
+
+// ── review_73 pt 15: DB partial-unique index blocks a 2nd ACTIVE cell ─────────
+test('review_73 pt 15: DB index blocks a second ACTIVE cell for the same vehicle/subgate/session', () => {
+  const db = freshMemoryDb();
+  const base = insertBase(db);
+  const insTca = (id: string) => db.prepare(
+    `INSERT INTO TestCellAuthorization(test_cell_authorization_id, subgate_id, cell_number, configuration_packet_id,
+      individual_vehicle_id, vehicle_build_id, platform_configuration_id, test_session_id, status)
+     VALUES (?,?,?,?,?,?,?,?,?)`,
+  ).run(id, '05M-C3A', 1, base.configurationPacketId, base.individualVehicleId, base.vehicleBuildId,
+    base.platformConfigId, 'TS_SHARED', 'ACTIVE');
+  insTca('TCA_ACT_A');
+  expectThrowsMessage(() => insTca('TCA_ACT_B'), 'UNIQUE');
+});
+
+// ── review_73 pt 17: the frozen runout snapshot is append-only ───────────────
+test('review_73 pt 17: RunoutAggregationComponent snapshot cannot be deleted', () => {
+  const db = freshMemoryDb();
+  buildAuthorizedChain(db); // aggregate() froze a snapshot
+  const row = db.prepare('SELECT distance_component_id FROM RunoutAggregationComponent LIMIT 1').get() as any;
+  expectThrowsMessage(() => db.prepare('DELETE FROM RunoutAggregationComponent WHERE distance_component_id = ?').run(row.distance_component_id), 'APPEND_ONLY_VIOLATION');
 });
 
 // ── Automatic expiry sweep (RC-424) ──────────────────────────────────────────

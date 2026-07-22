@@ -7,18 +7,21 @@
 -- Identity / configuration (RC-325/409/421, D-006 platform separation)
 -- ─────────────────────────────────────────────────────────────────────────────
 
-CREATE TABLE VehicleBuild (
-  vehicle_build_id            TEXT PRIMARY KEY,
-  platform_configuration_id   TEXT NOT NULL,
-  description                 TEXT,
-  status                      TEXT NOT NULL DEFAULT 'DRAFT'
-);
-
+-- IndividualVehicle 1:N VehicleBuild 1:N ConfigurationPacket (review_73 pt 5):
+-- a vehicle may undergo multiple builds/configuration revisions over time.
 CREATE TABLE IndividualVehicle (
   individual_vehicle_id       TEXT PRIMARY KEY,
   vin                         TEXT,
-  vehicle_build_id            TEXT NOT NULL REFERENCES VehicleBuild(vehicle_build_id),
   platform_id                 TEXT NOT NULL,
+  status                      TEXT NOT NULL DEFAULT 'DRAFT'
+);
+
+CREATE TABLE VehicleBuild (
+  vehicle_build_id            TEXT PRIMARY KEY,
+  individual_vehicle_id       TEXT NOT NULL REFERENCES IndividualVehicle(individual_vehicle_id),
+  platform_configuration_id   TEXT NOT NULL,
+  description                 TEXT,
+  build_timestamp             TEXT,
   status                      TEXT NOT NULL DEFAULT 'DRAFT'
 );
 
@@ -172,6 +175,10 @@ CREATE TABLE DistanceComponent (
   distance_component_value     REAL NOT NULL,
   distance_component_method    TEXT NOT NULL CHECK (distance_component_method IN
                                 ('MEASURED','CALCULATED','SUPPLIER_DEFINED','ENGINEERING_APPROVED','INITIAL_TARGET_PROFILE')),
+  -- review_73 pt 10: the canonical L_min term this component represents
+  distance_component_type      TEXT CHECK (distance_component_type IN
+                                ('L_acceleration','L_stabilization','L_braking_target','L_worst_case_coast_or_stop',
+                                 'L_response_allowance','L_measurement_uncertainty','L_containment_margin','OTHER')),
   uncertainty_m               REAL NOT NULL DEFAULT 0,
   included_in_l_min           INTEGER NOT NULL CHECK (included_in_l_min IN (0,1)),
   included_within_component_id TEXT REFERENCES DistanceComponent(distance_component_id),
@@ -182,14 +189,18 @@ CREATE TABLE DistanceComponent (
   authority_status            TEXT NOT NULL CHECK (authority_status IN
                                 ('DRAFT','MISSING_SOURCE','UNVERIFIED','INITIAL_TARGET_PROFILE_ONLY',
                                  'ARTIFACT_DEFINED','ENGINEERING_APPROVED','REVOKED','SUPERSEDED')),
-  -- RC-373 geometry: end >= start (value reconciliation checked in service layer w/ uncertainty)
+  -- RC-373 geometry: end >= start
   CHECK (zone_end_reference >= zone_start_reference),
+  -- review_73 pt 9: value ≈ (end - start) within uncertainty, enforced at the schema
+  CHECK (abs(distance_component_value - (zone_end_reference - zone_start_reference)) <= uncertainty_m + 0.000001),
   -- RC-373 overlap consistency
   CHECK (
     (overlap_review_status = 'INCLUDED_IN_OTHER_COMPONENT' AND included_in_l_min = 0 AND included_within_component_id IS NOT NULL)
     OR (overlap_review_status = 'INCLUDED_SEPARATELY' AND included_in_l_min = 1 AND included_within_component_id IS NULL)
     OR (overlap_review_status IN ('NOT_APPLICABLE','BLOCKED_PENDING_REVIEW'))
-  )
+  ),
+  -- review_73 pt 8: ARTIFACT_DEFINED requires a linked proof artifact
+  CHECK (authority_status != 'ARTIFACT_DEFINED' OR proof_artifact_id IS NOT NULL)
 );
 
 CREATE TABLE RunoutAggregationResult (
@@ -252,7 +263,9 @@ CREATE TABLE TestCellAuthorization (
   configuration_packet_id     TEXT NOT NULL REFERENCES ConfigurationPacket(configuration_packet_id),
   runout_aggregation_result_id TEXT REFERENCES RunoutAggregationResult(runout_aggregation_result_id),
   procedure_approval_id       TEXT REFERENCES ProcedureApproval(procedure_approval_id),
-  previous_cell_signed_result_id TEXT,   -- FK to TestResult (added after TestResult exists)
+  -- review_73 pt 7: FK to TestResult (SQLite permits a forward reference; the parent
+  -- table is created later in this same migration and the FK is enforced at INSERT).
+  previous_cell_signed_result_id TEXT REFERENCES TestResult(test_result_id),
   requires_previous_signed_pass INTEGER NOT NULL DEFAULT 0 CHECK (requires_previous_signed_pass IN (0,1)),
   thermal_state_requirement   TEXT,
   surface_environmental_window TEXT,
@@ -407,9 +420,11 @@ CREATE TABLE PairedFaultAuthorization (
                                  'LOWEST_MOVING_CELL_ALLOWED','HIGHER_CELL_ALLOWED_AFTER_SIGNED_PASS')),
   active_test_cell_id         TEXT NOT NULL REFERENCES TestCellAuthorization(test_cell_authorization_id),
   injection_fixture_id        TEXT,
-  fault_1_id                  TEXT NOT NULL,
+  -- review_73 pt 20: fault ids reference the FaultDefinition registry;
+  -- component ids reference the vehicle-component registry (RC-405).
+  fault_1_id                  TEXT NOT NULL REFERENCES FaultDefinition(fault_id),
   fault_1_component_id        TEXT REFERENCES VehicleComponentInstance(component_id),
-  fault_2_id                  TEXT NOT NULL,
+  fault_2_id                  TEXT NOT NULL REFERENCES FaultDefinition(fault_id),
   fault_2_component_id        TEXT REFERENCES VehicleComponentInstance(component_id),
   target_injection_order      TEXT NOT NULL CHECK (target_injection_order IN ('FAULT_1_THEN_FAULT_2','FAULT_2_THEN_FAULT_1')),
   inter_fault_timing_offset_ms REAL,
@@ -431,3 +446,17 @@ CREATE TABLE PairedFaultAuthorization (
   configuration_packet_hash   TEXT,
   common_cause_failure_assessment_id TEXT
 );
+
+-- review_73 pt 15: DB-level defence-in-depth — at most one ACTIVE cell per
+-- (vehicle, subgate, session). A partial UNIQUE index enforces it for non-NULL
+-- sessions; the service check (assertSingleActive) also covers the NULL-session case.
+CREATE UNIQUE INDEX ux_single_active_cell
+  ON TestCellAuthorization (individual_vehicle_id, subgate_id, test_session_id)
+  WHERE status = 'ACTIVE' AND test_session_id IS NOT NULL;
+
+-- Join indexes (review_73 §3.4 parity)
+CREATE INDEX idx_dist_comp_calc ON DistanceComponent(runout_calculations_id);
+CREATE INDEX idx_runout_agg_calc ON RunoutAggregationResult(runout_calculations_id);
+CREATE INDEX idx_test_result_exec ON TestResult(test_execution_id);
+CREATE INDEX idx_test_exec_session ON TestExecution(test_session_id);
+CREATE INDEX idx_auth_transition_tca ON AuthorizationTransition(test_cell_authorization_id);

@@ -5,6 +5,33 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-22 — M10 audit round: self-audit vs owner review_73 + gap-fixes (D-012, L-003)
+
+- Archived (commit `c0f026f`) a coding-agent M10 draft (which over-claimed "M10
+  Complete / SPECIFICATION FREEZE / HIL READY") + the owner's 24-point audit
+  (review_73) demanding real `migrate/seed/verify/test/build` output, a
+  Revision-07-to-code traceability matrix, gap-fixes, and no overclaiming — with
+  "do not start M11".
+- **Self-audited the actual `engine/` implementation against all 24 points** (D-012)
+  and resolved the genuine gaps that applied to it, each with a test:
+  `IndividualVehicle 1:N VehicleBuild` (pt 5); `previous_cell_signed_result_id` FK
+  (pt 7); `proof_artifact_id` + ARTIFACT_DEFINED SQL CHECK (pt 8); geometry
+  `value ≈ end−start` CHECK moved into SQL (pt 9); `distance_component_type` enum +
+  required-category verification (pt 10); spatial-overlap + circular-nesting
+  detection (pt 11); DB partial-unique index for single-active (pt 15);
+  RunoutAggregationComponent snapshot append-only (pt 17); paired-fault fault-id
+  FKs → FaultDefinition (pt 20). The other points were already satisfied by the
+  L-002 build; TelemetryLog payload validation (pt 19) is DEFERRED_WITH_BLOCK.
+- **Honest status adopted: `M10 IMPLEMENTATION FOUNDATION VERIFIED (bounded)` — NOT
+  `M10 COMPLETE`, NOT `DATABASE FROZEN`, NOT `HIL READY`.** All five
+  completion-criteria scripts pass (migrate 30 tables; seed 0 approvals/0 passes;
+  verify 13/13; **test 31/31**; build clean). Point-by-point audit + traceability
+  matrix in `engine/IMPLEMENTATION_REPORT.md`; ledger L-003 (Verified). M10G SIL,
+  M10H HIL, the broad rev07-baseline M10, ODR-001..003, and M11 remain gated. No
+  software test proves hardware safety; **M11 not started.**
+
+---
+
 ## 2026-07-22 — M10 (bounded) built + verified: Gate 05M-C3 Deterministic Rule Engine Foundation (D-011, L-002)
 
 - The owner opened the bounded M10 gate (D-011) and directed the build in-session.

@@ -1,10 +1,15 @@
 # M10 — Deterministic Rule Engine Foundation (plan-of-record)
 
-**Status: M10A–M10F COMPLETE + VERIFIED (D-011); M10G/M10H PENDING.** The
-implementation lives under `engine/`; the rule→code→test map + completion-criteria
-results are in `engine/IMPLEMENTATION_REPORT.md`, and the ledger record is
-`docs/status/IMPLEMENTATION_LEDGER.md` (L-002, Verified with a re-runnable command).
-All five completion-criteria scripts pass (`npm run migrate/seed/verify/test/build`).
+**Status: M10 IMPLEMENTATION FOUNDATION VERIFIED (bounded, audit-hardened) —
+NOT `M10 COMPLETE`, NOT `DATABASE FROZEN`, NOT `HIL READY` (D-011 + D-012);
+M10G/M10H PENDING.** M10A–M10F are implemented + verified under `engine/`; the
+owner review_73 24-point audit was answered by self-audit + gap-fixes (pts
+5/7/8/9/10/11/15/17/20 resolved, each tested) and a Revision-07-to-code
+traceability matrix — see `engine/IMPLEMENTATION_REPORT.md` (§ "Audit response").
+Ledger: `docs/status/IMPLEMENTATION_LEDGER.md` (L-002, L-003, Verified). All five
+completion-criteria scripts pass (`npm run migrate/seed/verify/test/build`;
+**31 tests**). Full M10 freeze remains pending M10G SIL + M10H HIL + owner sign-off.
+**No software test proves hardware safety.**
 Scope is bounded to the Gate 05M-C3 Deterministic Rule Engine Foundation
 (directive_03); the broad Revision 07 baseline-schema M10 (`M10_IMPLEMENTATION.md`),
 ODR-001..ODR-003, and M11 remain gated. **M10G (SIL validation) and M10H (HIL

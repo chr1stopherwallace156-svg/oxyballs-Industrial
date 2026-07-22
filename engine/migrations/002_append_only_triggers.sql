@@ -33,6 +33,13 @@ BEGIN SELECT RAISE(ABORT, 'APPEND_ONLY_VIOLATION:TestResultAnnotation is INSERT-
 CREATE TRIGGER trg_tra_no_delete BEFORE DELETE ON TestResultAnnotation
 BEGIN SELECT RAISE(ABORT, 'APPEND_ONLY_VIOLATION:TestResultAnnotation is INSERT-only'); END;
 
+-- ── RunoutAggregationComponent: the frozen calculation snapshot is INSERT-only
+--    (review_73 pt 17 — the component membership that built L_min must not change).
+CREATE TRIGGER trg_rac_no_update BEFORE UPDATE ON RunoutAggregationComponent
+BEGIN SELECT RAISE(ABORT, 'APPEND_ONLY_VIOLATION:RunoutAggregationComponent snapshot is INSERT-only'); END;
+CREATE TRIGGER trg_rac_no_delete BEFORE DELETE ON RunoutAggregationComponent
+BEGIN SELECT RAISE(ABORT, 'APPEND_ONLY_VIOLATION:RunoutAggregationComponent snapshot is INSERT-only'); END;
+
 -- ── TestResult: a SIGNED result is frozen (RC-374). Pre-sign rows may still be
 --    edited (e.g. NEEDS_REVIEW -> SIGNED_PASS); once SIGNED_PASS/SIGNED_FAIL the
 --    row is immutable and DELETE is always blocked. Applicability changes and

@@ -17,6 +17,41 @@ later entry that references it.
 
 ---
 
+## D-012 — M10 audit round: self-audit vs owner review_73; honest status is FOUNDATION VERIFIED, not COMPLETE/FROZEN/HIL-READY
+
+- Date: 2026-07-22
+- Status: Accepted (extends D-011)
+- Context: The owner relayed a separate coding-agent M10 implementation draft that
+  over-claimed "M10 Complete / SPECIFICATION FREEZE / HIL READY", plus a 24-point
+  audit (review_73) refusing to accept a pasted narrative as proof and demanding
+  real `migrate/seed/verify/test/build` output, a Revision-07-to-code traceability
+  matrix, gap-fixes, and a caution against overclaiming — with "do not start M11".
+  The audit target for THIS repo is the actual `engine/` implementation (L-002),
+  not the coding-agent draft.
+- Decision: Perform the self-audit against all 24 points and record it honestly.
+  (1) Confirm the engine runs — all five completion-criteria scripts PASS
+  (re-runnable). (2) Resolve the genuine gaps that applied to `engine/`:
+  `IndividualVehicle 1:N VehicleBuild` (pt 5); `previous_cell_signed_result_id` FK
+  (pt 7); `proof_artifact_id` + ARTIFACT_DEFINED SQL CHECK (pt 8); geometry
+  `value ≈ end−start` CHECK moved into SQL (pt 9); `distance_component_type` enum +
+  required-category verification (pt 10); spatial-overlap + circular-nesting
+  detection (pt 11); DB partial-unique index for single-active (pt 15);
+  RunoutAggregationComponent snapshot append-only (pt 17); paired-fault
+  `fault_1_id/fault_2_id` FK → FaultDefinition (pt 20) — each with a test.
+  (3) Classify the remainder (traceability matrix in `engine/IMPLEMENTATION_REPORT.md`);
+  TelemetryLog payload validation (pt 19) is DEFERRED_WITH_BLOCK. (4) **Adopt the
+  honest status: `M10 IMPLEMENTATION FOUNDATION VERIFIED (bounded)` — NOT
+  `M10 COMPLETE`, NOT `DATABASE FROZEN`, NOT `HIL READY`.** Full M10 freeze remains
+  pending M10G SIL + M10H HIL + owner sign-off. **Do NOT start M11.**
+- Consequences: Confirms the Build Engine's `engine/` never over-claimed (L-002
+  already read "M10A–M10F verified; M10G/H pending"); the audit hardened the schema
+  (FKs, CHECKs, partial index, snapshot immutability) and added tests (25 → 31). No
+  software test proves hardware safety; successful software verification may permit
+  engineering review for M11 data population and later HIL-readiness planning only.
+  Recorded in `engine/IMPLEMENTATION_REPORT.md` (audit + traceability matrix),
+  `docs/status/IMPLEMENTATION_LEDGER.md` (L-003), `docs/roadmaps/M10_RULE_ENGINE_FOUNDATION.md`,
+  and the batch_77/review_73 archives. Supersedes nothing.
+
 ## D-011 — Owner opens the M10 gate for the Gate 05M-C3 Deterministic Rule Engine Foundation (bounded scope)
 
 - Date: 2026-07-21

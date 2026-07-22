@@ -64,3 +64,26 @@ begun. The first such entry must start as `Claimed`.)*
   (need a SIL/HIL environment + supplier data), the broad Revision 07 baseline
   M10 (`M10_IMPLEMENTATION.md`), ODR-001..ODR-003, M11 — all remain gated. No
   engineering values invented; seed contains no real approvals or passes.
+
+---
+
+## L-003 — M10 audit round (self-audit vs owner review_73) + gap-fixes
+
+- Date: 2026-07-22
+- Agent: Claude Code
+- Status: Verified
+- Commits: the audit-archive commit (`c0f026f`) + the audit gap-fix engine commit
+  on `claude/docs-structure-large-projects-b6vxx5` (see `git log`)
+- Evidence: **re-runnable** — `cd engine && npm ci && npm run migrate && npm run
+  seed && npm run verify && npm test && npm run build` → all PASS (migrate 30
+  tables; seed 0 approvals/0 passes; verify 13/13; **test 31/31**; build clean).
+  Point-by-point audit + Revision-07-to-code traceability matrix in
+  `engine/IMPLEMENTATION_REPORT.md` (§ "Audit response — owner review_73").
+- Verified by: Claude Code 2026-07-22 via the cited commands (re-runnable). This
+  round resolved the genuine gaps that applied to `engine/` (review_73 pts
+  5/7/8/9/10/11/15/17/20), each with a test, and classified the remainder.
+  **Honest status: `M10 IMPLEMENTATION FOUNDATION VERIFIED (bounded)` — NOT
+  `M10 COMPLETE`, NOT `DATABASE FROZEN`, NOT `HIL READY`** (D-012). M10G SIL, M10H
+  HIL, TelemetryLog payload validation (DEFERRED_WITH_BLOCK), the broad rev07
+  baseline M10, ODR-001..003, and M11 remain gated. No software test proves
+  hardware safety.
