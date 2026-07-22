@@ -1,0 +1,91 @@
+6aee8e6 DT-D067: EDTS VIN configuration resolver (NHTSA vPIC CLI)
+a192be2 DT-D066: Three-axis maturity + IMPLEMENTATION_EVIDENCE ledger
+ddf7dc9 DT-D065: Repository implementation audit (spec vs code)
+2e46d9b DT-D064: Admit open-source research pack (non-invasive)
+6e6cd04 DT-D063: Accept EDTS-SPEC-3D-001 GLB acquisition gate
+6913e36 DT-D062: Accept VPR-2 corrected baseline (3-tier, R3F audit)
+c64ba48 DT-D061: Correct VPR-2 claims; multi-maturity; keep R3F prototype honest
+1f47c8b docs: DT-D060/RL-029 R2 architecture decision trail and README
+af1f011 DT-D060: Visible Progress R2 normalized COMP/GEO/EVD/EGS/SIM/UI
+831f51b docs: DT-D059/RL-028 STATUS, DECISIONS, and Visible Progress README
+703cdcf DT-D059: Five-store architecture + Timeline/Search/Heatmap/Simulation
+906e7ca docs: update RL-027 sprint for handoff architecture admission
+7b14319 DT-D058: Admit handoff architecture into Visible Progress R1
+b3b8e5e chore: remove unused Vite boilerplate assets from Visible Progress R1
+c5528f4 DT-D058/RL-027: EDTS Visible Progress Release 1 demonstrator
+322d6e4 DT-D057/RL-026: Reject fabricated Layer-1 mass/material/load dump
+355c291 Complete mission register DT-D056 L1 priority and MEPQ links
+e643452 Align mission register with DT-D056 Mission D L1 priority
+60678fb DT-D056/RL-025: Lock three-layer graph separation; Mission D L1 focus
+37a0be9 DT-D055/RL-024: Gate EV-DECON-PHASE2; export active MEPQ checklist
+7129d37 DT-D054/RL-023: Admit MEPQ; open Mission F LV discovery (Option B)
+c82d7aa Update L1 Q3: series Monobeam partially resolves CNF-001
+498b34e DT-D053/RL-022: Mission D honesty gate — Monobeam extracted
+e1f61b1 Add build_engine README pointer for HV commissioning package
+a3edb05 DT-D052/RL-021: Clean HV gates 05L-B/C; stage 05M torque-disabled chain
+118dfd5 RL-020/DT-D051: Chassis frame evidence brief A/B; open Mission D
+7279560 RL-019/DT-D050: FL door vertical-slice mission with honest acquires
+a61d2ac RL-018/DT-D049: Research Execution Pipeline capability audit
+d76f82b RL-017/DT-D048: EGS-1.0.0-proposal.2 architecture refinement
+dbd16e3 docs: point protocol register at proposals/egs-v1 module
+fd52815 RL-016/DT-D047: EGS-v1 proposal module with CMPINST graph
+7b7c6ef RL-015: EGS-v1 relationship graph schema handoff
+b60eb7c RL-014: mission queue, twin VIS/ENG passports, honest evidence counts
+3406950 Document DT-D044 in DECISIONS, protocol v2.6.0 homes, RESEARCH_LOG
+b4eb50d RL-013: CSP maturity trackers, KG register, Hum3D HOLD_REJECTED
+778b705 RL-012: deconstructed supplier sourcing + AJR purchase gate
+dcd8f5b RL-011: Asset Intelligence Database — every asset gets an AID passport
+2a3f276 RL-010 honesty gate: demote OEM VERIFIED labels; draft door component inventory
+2ffbb7a Adopt Hard Rule 14/15: profile reference vocabulary and claim records
+3265f42 Sync STATUS for DT-D039 FL door acquisition priority
+c71566c Record RL-008 FL door sprint: acquisition recommended
+4e63c48 Sync STATUS and AGENTS for Hard Rule 13 / SRC-CAND posture
+3150d67 Adopt Hard Rule 13 with immutable SRC-CAND IDs and RC hunt scores
+0dc6bc7 Record RL-006 front suspension sprint: PRIMARY_SOURCE_REQUIRED
+0640c4d Harden EAE CORE identity, integrity conflict, and ZIP quarantine
+24eb91d Implement and validate EAE CORE INGESTION v0
+b41371d Accept DT-D034: refine EAE specs; prioritize CORE INGESTION
+16905c4 Audit EAE honestly; add proposals, fixtures, and readiness gate
+5b7b01d Add Evidence Acquisition Engine and run honest door-candidate sprint
+3ab24c3 Formalize DT-D030/D031 change control; isolate illustrative examples
+5b6ea0b Audit rc1 passport sufficiency with executed validation evidence
+bc3e1b1 Refresh KERNEL_TEST_RESULTS timestamp after passport honesty revalidation
+ee85ad2 Keep rc1 passport schema frozen; add v1.1 proposal only
+14a878b Add Hard Rule 11 and prioritize door Component Passport
+f3a99f8 Lock kernel v1.0.0-rc1 milestone freeze (DT-D028)
+7c044e7 Integrate Component-First Acquisition into Hard Rule 0
+180a781 Finalize kernel v1.0.0-rc1 freeze and block door slice on missing asset
+5be3f89 Remove fingerprint __pycache__ from version control
+a59a4e2 Execute EDTS Kernel v1.0.0-rc1 validation suites
+4ea7920 Materialize Kernel v1.0.0-rc1 validation package
+cb9c00a Release EDTS Kernel v1.0.0-rc1 with configuration fingerprints
+a639ae4 Elevate Exact Vehicle Isolation to constitutional HR-EVI law
+1b052ef Revise EDTS kernel for exact-vehicle isolation
+887a599 Activate EDTS Kernel vertical slice on F-450 FL door
+521bf9a Add EDTS-OS platform blueprint and identity/version master schema
+f0ea777 Activate EDTS-OS v3: Component First, Evidence Graph, passports
+76c78ad Activate EDTS Research Protocol and Teams A-D pipeline
+2164718 Reset Source Pack 01 to unverified candidate templates
+d941d65 Engage L1 Source Pack 01 document-supported extractions
+6df8a3d Merge origin/main into L1 research branch
+24e1a5b Align L1 acquisition schemas for empirical intake
+3b03061 Add L1 reference acquisition queue; block on source access
+803ad4a Apply L1 adversarial audit; require factual verification
+2a8db87 Add L1 exterior visual reference research foundation
+5c3aeb8 Deprecate unit registry V3 Complete; fix STATUS duplicate key
+8ec5d88 Freeze L00 specs: clean quaternion report, dynamic cameras, SI current base
+b59d8ea Regression audit: fix TF-FAIL-001 quaternion; runtime honesty gate
+f3c3f5c Separate glTF asset frame from Three.js scene; transform registry V3
+954a77d Fix blocking math errors: transforms, formulas, clearance v2
+74b1c95 Add FORMULA_AND_SYMBOL_STANDARD and update core governance docs
+bbf1385 Refactor L00 governance: registries, schemas v4, physical intake readiness
+edc3b5a Record L00 closure rejection and adversarial audit corrections
+09ddf7b Add EDTS research governance + Layer 0 closure template standards
+2511afd Add FIRST_PRINCIPLES_REVIEW.md: architecture-only assessment with classifications (constitutional/spec/revise/research), contradictions/undefined terms, and prescriptive next steps. No edits applied to FIRST_PRINCIPLES.md.
+77c49c8 FIRST_PRINCIPLES: update to include Universal Object Rule (6 pillars), Knowledge Engine terminology, time/state transitions, scientific verification model, and dossier 'Scientific Certainty & Assumptions' section.
+7cd0638 Add FIRST_PRINCIPLES.md — EDTS constitutional base (ontology, verification tiers, naming, knowledge-graph structure, cognitive layers, dossier template).
+3358101 L00: add Applicability sections and Engineering Impact scaffolds; add front-suspension geometry research scaffold (RESEARCH_REQUIRED) without importing unverified values.
+76803fe L00 configuration reconciliation: REFERENCE_CONFIGURATION_BLOCKED
+e5c4ae4 Add DESIGN_PHILOSOPHY and VISION; expand L00 approval checklist; include L00 GAP_ANALYSIS per EDTS completeness audit (no new data).
+d010dc1 EDTS L00: add required deliverables (reference, sources, geometry options, dimension db, material standard, hierarchy, legal, approval). Mark unknowns as UNVERIFIED/RESEARCH_REQUIRED with OEM citations planned via BBAS.
+e063090 Add elektron-digital-twin-foundation scaffold and L00 Reference Lock

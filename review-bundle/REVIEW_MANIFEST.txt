@@ -1,0 +1,57 @@
+EDTS repository review package
+==============================
+
+Branch:  cursor/reference-lock-l00-d881
+Commit:  6aee8e6 — DT-D067: EDTS VIN configuration resolver (NHTSA vPIC CLI)
+Base:    main @ 675e48a (Deconstructed supplier sourcing + AJR #3)
+Packed:  2026-07-22
+
+Contents (source only)
+----------------------
+- README.md, index.html
+- edts-vin-resolver/          VIN CLI + library (DT-D067)
+- edts-visible-progress/      VPR-2 R3F prototype
+- elektron-digital-twin-foundation/   specs, decisions, research, audits
+
+Excluded
+--------
+- .git/
+- **/node_modules/
+- **/dist/
+- .cursor/
+
+How to review locally
+---------------------
+1. Unzip
+2. cd edts-vin-resolver && npm install && npm test && npm run vin -- 1HTKHPVK8KH805188
+3. cd edts-visible-progress && npm install && npm run verify:mesh && npm run build
+4. Read elektron-digital-twin-foundation/IMPLEMENTATION_AUDIT.md
+   and IMPLEMENTATION_EVIDENCE.md first for true vs documented state
+
+Open merge note (not included as conflicted tree)
+-------------------------------------------------
+Merging origin/main left 9 complicated same-entity truth conflicts
+(STATUS.json, PROJECT_STATE.md, AID/SRC acquisition statuses, etc.).
+Simple append conflicts were resolved earlier; merge was aborted so this
+ZIP is a clean branch tip without conflict markers.
+
+PR: https://github.com/chr1stopherwallace156-svg/Elektron-Indsutrial/pull/4
+
+Additional files in review-bundle/ (this folder)
+-----------------------------------------------
+REVIEW_MANIFEST.txt
+IMPLEMENTATION_AUDIT.md
+IMPLEMENTATION_EVIDENCE.md
+STATUS.json
+PROJECT_STATE.md
+UNMERGED_TRUTH_CONFLICTS.md
+pull-request-4.diff          (local git diff origin/main...HEAD; gh API rejected >300 files)
+pull-request-4.stat.txt
+pull-request-4.files.txt
+pull-request-4.commits.txt
+diff-edts-vin-resolver.diff
+diff-edts-visible-progress.diff
+diff-audit-core.diff
+Elektron-Indsutrial-cursor-reference-lock-l00-d881-review.zip  (~13 MB full source)
+
+Note: GitHub `gh pr diff 4` returned HTTP 406 (diff >300 files). Local git diff is the authoritative PR-equivalent patch.
