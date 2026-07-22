@@ -17,7 +17,7 @@ import { validatePlatformConfig } from './platform001';
 import { runRules, EvaluationDraft } from './rules';
 import { generateOdrs, OdrDraft } from './odr';
 import { generateBom, BomDraft } from './bom';
-import { BlockReasonRecord, PackageBlockReason, renderBlocker } from './blockReasons';
+import { BlockReasonRecord, PackageBlockReason, renderBlocker, blockerCategory, BlockerCategory } from './blockReasons';
 
 export interface GenerateOptions { requestedRevision?: string; now?: Date; }
 
@@ -33,11 +33,13 @@ export interface PackageSummary {
   odrs: OdrDraft[];
   bom: BomDraft[];
   blockers: string[];        // rendered tokens, sorted
+  structuredBlockers: { token: string; category: BlockerCategory }[];
   counts: {
     claimsByStatus: Record<string, number>;
     evalByResult: Record<string, number>;
     bomByStatus: Record<string, number>;
     odrOpen: number;
+    blockersByCategory: Record<string, number>;
   };
 }
 
@@ -100,7 +102,15 @@ export function generateBuildPackage(db: DB, opts: GenerateOptions = {}): Packag
   for (const e of evaluations) if (e.blocker) blockerRecords.push(e.blocker);
   for (const b of bom) blockerRecords.push(...b.blockers);
   for (const o of odrs) { const rb = odrBlocker(o); if (rb) blockerRecords.push(rb); }
-  const blockers = [...new Set(blockerRecords.map(renderBlocker))].sort();
+  // Dedupe by rendered token, keeping each blocker's effort category.
+  const blockerByToken = new Map<string, { token: string; category: BlockerCategory }>();
+  for (const r of blockerRecords) {
+    const token = renderBlocker(r);
+    if (!blockerByToken.has(token)) blockerByToken.set(token, { token, category: blockerCategory(r.code) });
+  }
+  const structuredBlockers = [...blockerByToken.values()].sort((a, b) => a.token.localeCompare(b.token));
+  const blockers = structuredBlockers.map((b) => b.token);
+  const blockersByCategory = tally(structuredBlockers, (b) => b.category);
 
   // Deterministic package content (excludes timestamps) → package_hash.
   const content = {
@@ -112,6 +122,7 @@ export function generateBuildPackage(db: DB, opts: GenerateOptions = {}): Packag
     odrs: odrs.map((o) => ({ odrId: o.odrId, category: o.category, subject: o.subject, status: 'OPEN' })),
     bom: bom.map((b) => ({ category: b.category, status: b.selectionStatus, selected: b.selectedComponentId ?? null, blockers: b.blockers.map(renderBlocker).sort() })),
     block_reasons: blockers,
+    blocker_categories: blockersByCategory,
   };
   const packageHash = sha256(canonicalSerialize(content as any));
 
@@ -121,6 +132,7 @@ export function generateBuildPackage(db: DB, opts: GenerateOptions = {}): Packag
     evalByResult: tally(evaluations, (e) => e.result),
     bomByStatus: tally(bom, (b) => b.selectionStatus),
     odrOpen: odrs.length,
+    blockersByCategory,
   };
 
   // Persist everything as ONE atomic unit (rollback prevents partial packages).
@@ -140,7 +152,7 @@ export function generateBuildPackage(db: DB, opts: GenerateOptions = {}): Packag
       JSON.stringify(bom.map((b) => ({ category: b.category, selected: b.selectedComponentId, status: b.selectionStatus }))),
       JSON.stringify(bom), JSON.stringify(content.evaluations),
       JSON.stringify(odrs.map((o) => ({ odrId: o.odrId, category: o.category, subject: o.subject }))),
-      JSON.stringify(blockers), now, ENGINE_VERSION, inputHash, packageHash,
+      JSON.stringify(structuredBlockers), now, ENGINE_VERSION, inputHash, packageHash,
     );
 
     for (const e of evaluations) {
@@ -181,6 +193,6 @@ export function generateBuildPackage(db: DB, opts: GenerateOptions = {}): Packag
   return {
     buildPackageId: packageId, platformId: platform.platform_id, platformRevision: platform.revision,
     status: 'DRAFT_INCOMPLETE', inputHash, packageHash, engineVersion: ENGINE_VERSION,
-    evaluations, odrs, bom, blockers, counts,
+    evaluations, odrs, bom, blockers, structuredBlockers, counts,
   };
 }

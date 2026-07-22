@@ -44,6 +44,10 @@ exact work queue. It makes **no** approval claim.
   identical `input_hash`, `package_hash`, and ids (self-checked by regeneration).
 - **Report + artifact (`src/platform/report.ts`):** all counts are read back from
   the database, not hard-coded.
+- **Release blockers are categorized** by effort bucket — RESEARCH /
+  CONFIGURATION / COMPONENTS / VERIFICATION — so the report tells you *where* effort
+  belongs, not just a flat count. Each blocker carries its category; the counts are
+  part of the deterministic, hashed package content.
 - **Additive unit definitions (`src/units.ts`):** `in`, `mm` (length), `lb` (mass)
   — unit *definitions*, not engineering values; purely additive to M10.
 - **Tests (`test/platform.test.ts`, 14):** database integration tests, not mocks.
@@ -81,7 +85,8 @@ Environment: Node v22.22.2, npm 10.9.7, Linux 6.18.5 x86_64. From `engine/`:
 - `input_hash`: `d64d1b6a434aa71b877a4dbed8923711b983fb350800478d2f252298e589c7a1`
 - Generated result: **20 BOM categories** (19 UNSELECTED, 1 BLOCKED), **6
   compatibility evaluations** (4 PASS, 1 FAIL, 1 BLOCKED_MISSING_DATA), **7 open
-  ODRs**, **24 release blockers**.
+  ODRs**, **24 release blockers** categorized as **RESEARCH 3 · CONFIGURATION 0 ·
+  COMPONENTS 19 · VERIFICATION 2** (effort is dominated by component selection).
 
 ## Unresolved open-data requirements (7 OPEN)
 
@@ -107,6 +112,27 @@ BLOCKED (unverified + missing dimensions/mass), baseline axle weights and GVWR a
 unknown, and the frame geometry is nominal (not physically measured). That is the
 correct, honest state — the engine has converted missing knowledge into an exact,
 ordered work queue rather than a false green light.
+
+## Roadmap (owner-noted, NOT built this milestone)
+
+Recorded so the next agent knows the intended direction. None of these is started;
+each stays subordinate to the Engineering Constitution (no invented values, every
+unknown → ODR, no approval/safety claims).
+
+- **Platform Calculator Library** — reusable deterministic engineering calculators,
+  each consuming EngineeringClaims + verified inputs and emitting BLOCKED_MISSING_DATA
+  when inputs are absent: Weight → CG → Range → Cooling → Voltage Drop → HV Fuse →
+  Pump Flow → Cable Ampacity → Payload → Braking → Gradeability. These become new
+  compatibility rule inputs; they must never compute against missing/assumed data.
+- **Functional digital twin (not photorealistic)** — click a component → see its
+  BOM slot, weight, mounts, cooling, and linked evidence. A read-only view over the
+  existing package tables; grants no write authority that bypasses the DB checks.
+- **Build Package v0.2** — extend the report to: Platform → Selected Components →
+  Compatibility → Calculations → Warnings → Installation Order → QC Checklist →
+  Commissioning Checklist (still DRAFT_INCOMPLETE; no approval).
+- **Prototype workflow** — guided intake: truck arrives → scan → measure → photos →
+  disassembly → issue found → evidence → continue → final validation, each step
+  appending immutable evidence (reuse the M10 append-only + hash-chain doctrine).
 
 ## Next recommended research target
 

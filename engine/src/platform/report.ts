@@ -4,6 +4,7 @@
  * report and the machine artifact reflect exactly what was persisted.
  */
 import { DB } from '../db';
+import { BLOCKER_CATEGORIES, BlockerCategory } from './blockReasons';
 
 const NOT_AUTHORIZED = [
   'DRAFT — INCOMPLETE',
@@ -25,7 +26,8 @@ export interface ReportData {
   compat: { pass: number; fail: number; blockedMissing: number; notApplicable: number; total: number };
   odrOpen: number;
   odrList: any[];
-  blockers: string[];
+  blockers: { token: string; category: BlockerCategory }[];
+  blockersByCategory: Record<BlockerCategory, number>;
 }
 
 export function collectReportData(db: DB, packageId: string): ReportData {
@@ -55,9 +57,11 @@ export function collectReportData(db: DB, packageId: string): ReportData {
   };
   const odrOpen = count(db, "SELECT COUNT(*) c FROM OpenDataRequirement WHERE build_package_id=? AND status='OPEN'", packageId);
   const odrList = db.prepare('SELECT odr_id, category, subject, required_evidence_type, status FROM OpenDataRequirement WHERE build_package_id=? ORDER BY category, subject').all(packageId) as any[];
-  const blockers = JSON.parse(pkg.block_reasons) as string[];
+  const blockers = JSON.parse(pkg.block_reasons) as { token: string; category: BlockerCategory }[];
+  const blockersByCategory = Object.fromEntries(BLOCKER_CATEGORIES.map((c) => [c, 0])) as Record<BlockerCategory, number>;
+  for (const b of blockers) blockersByCategory[b.category] = (blockersByCategory[b.category] ?? 0) + 1;
 
-  return { pkg, platform, claims, bom, compat, odrOpen, odrList, blockers };
+  return { pkg, platform, claims, bom, compat, odrOpen, odrList, blockers, blockersByCategory };
 }
 
 export function renderMarkdown(d: ReportData): string {
@@ -111,9 +115,26 @@ export function renderMarkdown(d: ReportData): string {
   L.push(`- **${d.pkg.status}**`);
   L.push('');
   L.push('## Release blockers');
-  if (d.blockers.length === 0) L.push('- (none)');
-  for (const b of d.blockers) L.push(`- ${b}`);
+  L.push(`- Total: ${d.blockers.length}`);
   L.push('');
+  L.push('| Category | Count | Meaning |');
+  L.push('|---|---:|---|');
+  const meaning: Record<BlockerCategory, string> = {
+    RESEARCH: 'obtain a value / document (specs, weights, supplier data)',
+    CONFIGURATION: 'the platform / config setup is wrong or incomplete',
+    COMPONENTS: 'select a component (or replace a superseded one)',
+    VERIFICATION: 'physically measure / verify something already present',
+  };
+  for (const c of BLOCKER_CATEGORIES) L.push(`| ${c} | ${d.blockersByCategory[c]} | ${meaning[c]} |`);
+  L.push('');
+  if (d.blockers.length === 0) { L.push('- (none)'); L.push(''); }
+  for (const c of BLOCKER_CATEGORIES) {
+    const inCat = d.blockers.filter((b) => b.category === c);
+    if (inCat.length === 0) continue;
+    L.push(`**${c} (${inCat.length})**`);
+    for (const b of inCat) L.push(`- ${b.token}`);
+    L.push('');
+  }
   L.push('## What prevents release');
   L.push('This package is a controlled DRAFT. It is **not** an approval and makes **no**');
   L.push('claim that the conversion is safe, complete, or authorized. Release is blocked');
@@ -136,8 +157,11 @@ export function buildJsonArtifact(db: DB, packageId: string): Record<string, unk
       status: d.pkg.status, engine_version: d.pkg.engine_version, generated_at: d.pkg.generated_at,
       input_hash: d.pkg.input_hash, package_hash: d.pkg.package_hash,
     },
-    counts: { claims: d.claims, bom: d.bom, compatibility: d.compat, open_data_requirements_open: d.odrOpen },
-    release_blockers: d.blockers,
+    counts: {
+      claims: d.claims, bom: d.bom, compatibility: d.compat,
+      open_data_requirements_open: d.odrOpen, blockers_by_category: d.blockersByCategory,
+    },
+    release_blockers: { total: d.blockers.length, by_category: d.blockersByCategory, items: d.blockers },
     compatibility_evaluations: evaluations,
     open_data_requirements: odrs,
     bom_items: bom,

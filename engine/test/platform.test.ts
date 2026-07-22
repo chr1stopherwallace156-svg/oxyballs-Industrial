@@ -154,7 +154,27 @@ test('platform: report counts match persisted database records', () => {
   assert.equal(d.odrOpen, r.counts.odrOpen);
 });
 
-// 14 — transaction rollback prevents partial package creation
+// 15 — release blockers are categorized and the category counts sum to the total
+test('platform: release blockers are categorized (Research/Configuration/Components/Verification)', () => {
+  const db = setup();
+  const r = generateBuildPackage(db);
+  const byCat = r.counts.blockersByCategory;
+  const sum = Object.values(byCat).reduce((a, b) => a + b, 0);
+  assert.equal(sum, r.blockers.length);
+  // every structured blocker carries a known category
+  const known = new Set(['RESEARCH', 'CONFIGURATION', 'COMPONENTS', 'VERIFICATION']);
+  assert.ok(r.structuredBlockers.every((b) => known.has(b.category)));
+  // the seeded locked config: most blockers are unselected components; motor drives
+  // RESEARCH (dims/mass) + VERIFICATION (unverified); axle weights drive RESEARCH.
+  assert.ok((byCat.COMPONENTS ?? 0) >= 1);
+  assert.ok((byCat.RESEARCH ?? 0) >= 1);
+  assert.ok((byCat.VERIFICATION ?? 0) >= 1);
+  // the report exposes the same category counts read back from the DB
+  const d = collectReportData(db, r.buildPackageId);
+  assert.deepEqual(d.blockersByCategory, { ...{ RESEARCH: 0, CONFIGURATION: 0, COMPONENTS: 0, VERIFICATION: 0 }, ...byCat });
+});
+
+// 16 — transaction rollback prevents partial package creation
 test('platform: a mid-persist failure rolls back — no partial package', () => {
   const db = setup();
   const r = generateBuildPackage(db);

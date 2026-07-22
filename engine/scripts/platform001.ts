@@ -48,7 +48,8 @@ function main(): void {
   console.log(`[platform001] bom               = ${JSON.stringify(first.counts.bomByStatus)}`);
   console.log(`[platform001] open ODRs         = ${first.counts.odrOpen}`);
   console.log(`[platform001] release blockers  = ${first.blockers.length}`);
-  for (const b of first.blockers) console.log(`[platform001]   - ${b}`);
+  console.log(`[platform001]   by category     = ${JSON.stringify(first.counts.blockersByCategory)}`);
+  for (const b of first.structuredBlockers) console.log(`[platform001]   - [${b.category}] ${b.token}`);
   console.log(`[platform001] report            = ${MD_PATH}`);
   console.log(`[platform001] artifact          = ${JSON_PATH}`);
   if (!deterministic) { console.error('[platform001] FAIL — non-deterministic output'); process.exit(1); }

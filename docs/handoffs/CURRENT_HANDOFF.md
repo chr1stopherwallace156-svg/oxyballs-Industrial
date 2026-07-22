@@ -25,6 +25,11 @@
   **Next research target: baseline axle weights + GVWR for the donor (ODR-004..006),
   tied to BQ-27 donor confirmation.** Honest status: DRAFT_INCOMPLETE — not an
   approval, not prototype/procurement readiness, not a safety claim.
+  **Follow-up (same milestone):** release blockers are now CATEGORIZED by effort
+  bucket (RESEARCH 3 · CONFIGURATION 0 · COMPONENTS 19 · VERIFICATION 2) in the
+  report + artifact + summary (55/55 tests). The owner's forward roadmap (Platform
+  Calculator Library, functional digital twin, Build Package v0.2, guided prototype
+  workflow) is recorded in `PLATFORM_001_STATUS.md` but NOT built.
 
 - (prior) — **M10 FINAL EVIDENCE-PACK RECONCILIATION (owner final
   directive; D-014, L-005).** Produced `engine/EVIDENCE_PACK.md` answering all 10

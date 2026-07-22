@@ -31,6 +31,37 @@ export enum PackageBlockReason {
 
 export type BlockScope = 'PLATFORM' | 'COMPONENT' | 'PACKAGE';
 
+/**
+ * Effort category for a blocker, so the report tells you WHERE effort belongs
+ * instead of just how many blockers exist:
+ *   RESEARCH      — a value/document must be obtained (specs, weights, supplier data)
+ *   CONFIGURATION — the platform/config setup itself is wrong or incomplete
+ *   COMPONENTS    — a component must be selected (or a superseded one replaced)
+ *   VERIFICATION  — something present must be physically measured / verified
+ */
+export type BlockerCategory = 'RESEARCH' | 'CONFIGURATION' | 'COMPONENTS' | 'VERIFICATION';
+
+export const BLOCKER_CATEGORIES: readonly BlockerCategory[] =
+  ['RESEARCH', 'CONFIGURATION', 'COMPONENTS', 'VERIFICATION'] as const;
+
+const BLOCKER_CATEGORY: Record<PackageBlockReason, BlockerCategory> = {
+  [PackageBlockReason.REQUIRED_PLATFORM_DATA_MISSING]: 'RESEARCH',
+  [PackageBlockReason.BASELINE_AXLE_WEIGHT_REQUIRED]: 'RESEARCH',
+  [PackageBlockReason.DIMENSIONS_REQUIRED]: 'RESEARCH',
+  [PackageBlockReason.MASS_REQUIRED]: 'RESEARCH',
+  [PackageBlockReason.UNKNOWN_UNIT]: 'CONFIGURATION',
+  [PackageBlockReason.PLATFORM_REVISION_CHANGED]: 'CONFIGURATION',
+  [PackageBlockReason.SOURCE_AUTHORITY_MISSING]: 'CONFIGURATION',
+  [PackageBlockReason.CANDIDATE_NOT_SELECTED]: 'COMPONENTS',
+  [PackageBlockReason.SUPERSEDED_COMPONENT_SELECTED]: 'COMPONENTS',
+  [PackageBlockReason.PHYSICAL_FRAME_MEASUREMENT_REQUIRED]: 'VERIFICATION',
+  [PackageBlockReason.COMPONENT_UNVERIFIED]: 'VERIFICATION',
+};
+
+export function blockerCategory(code: PackageBlockReason): BlockerCategory {
+  return BLOCKER_CATEGORY[code];
+}
+
 export interface BlockReasonRecord {
   code: PackageBlockReason;
   scope: BlockScope;

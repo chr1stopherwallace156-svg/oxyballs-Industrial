@@ -12,9 +12,9 @@
     "platform_revision": "R1",
     "status": "DRAFT_INCOMPLETE",
     "engine_version": "platform-slice-0.1.0",
-    "generated_at": "2026-07-22T07:36:40.402Z",
+    "generated_at": "2026-07-22T08:02:21.515Z",
     "input_hash": "d64d1b6a434aa71b877a4dbed8923711b983fb350800478d2f252298e589c7a1",
-    "package_hash": "82bfad662a898ee1a38b53e5fa26f7e8c44bf3d75536704d11d55a7eef50e5e7"
+    "package_hash": "76ddce5254507eed09ee23a502038974e7c5fc2af8117513aa85dd30e4bb9034"
   },
   "counts": {
     "claims": {
@@ -37,34 +37,121 @@
       "notApplicable": 0,
       "total": 6
     },
-    "open_data_requirements_open": 7
+    "open_data_requirements_open": 7,
+    "blockers_by_category": {
+      "RESEARCH": 3,
+      "CONFIGURATION": 0,
+      "COMPONENTS": 19,
+      "VERIFICATION": 2
+    }
   },
-  "release_blockers": [
-    "BLOCKED:BASELINE_AXLE_WEIGHT_REQUIRED",
-    "BLOCKED:BATTERY_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:CHARGER_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:CHARGE_INLET_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:CONTACTORS_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:CONTAINMENT_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:COOLING_PUMPS_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:DCDC_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:DRIVE_INTERFACE_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:EXPANSION_TANK_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:HEAT_EXCHANGER_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:HV_CABLING_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:HV_FUSES_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:HV_JUNCTION_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:INSTRUMENTATION_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:INVERTER_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:LV_HARNESS_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:MOTOR_COMPONENT_UNVERIFIED",
-    "BLOCKED:MOTOR_DIMENSIONS_REQUIRED",
-    "BLOCKED:MOTOR_MASS_REQUIRED",
-    "BLOCKED:MOUNTING_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:PHYSICAL_FRAME_MEASUREMENT_REQUIRED",
-    "BLOCKED:PRECHARGE_CANDIDATE_NOT_SELECTED",
-    "BLOCKED:VCU_CANDIDATE_NOT_SELECTED"
-  ],
+  "release_blockers": {
+    "total": 24,
+    "by_category": {
+      "RESEARCH": 3,
+      "CONFIGURATION": 0,
+      "COMPONENTS": 19,
+      "VERIFICATION": 2
+    },
+    "items": [
+      {
+        "token": "BLOCKED:BASELINE_AXLE_WEIGHT_REQUIRED",
+        "category": "RESEARCH"
+      },
+      {
+        "token": "BLOCKED:BATTERY_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:CHARGE_INLET_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:CHARGER_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:CONTACTORS_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:CONTAINMENT_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:COOLING_PUMPS_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:DCDC_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:DRIVE_INTERFACE_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:EXPANSION_TANK_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:HEAT_EXCHANGER_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:HV_CABLING_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:HV_FUSES_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:HV_JUNCTION_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:INSTRUMENTATION_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:INVERTER_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:LV_HARNESS_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:MOTOR_COMPONENT_UNVERIFIED",
+        "category": "VERIFICATION"
+      },
+      {
+        "token": "BLOCKED:MOTOR_DIMENSIONS_REQUIRED",
+        "category": "RESEARCH"
+      },
+      {
+        "token": "BLOCKED:MOTOR_MASS_REQUIRED",
+        "category": "RESEARCH"
+      },
+      {
+        "token": "BLOCKED:MOUNTING_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:PHYSICAL_FRAME_MEASUREMENT_REQUIRED",
+        "category": "VERIFICATION"
+      },
+      {
+        "token": "BLOCKED:PRECHARGE_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:VCU_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      }
+    ]
+  },
   "compatibility_evaluations": [
     {
       "evaluation_id": "EVAL_4a28fa3897042d29",

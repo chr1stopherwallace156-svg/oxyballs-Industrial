@@ -5,6 +5,21 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-22 — Platform 001: categorize release blockers by effort bucket (D-015)
+
+- The build-package report no longer shows a flat "24 blockers." Every release
+  blocker is now categorized — **RESEARCH / CONFIGURATION / COMPONENTS /
+  VERIFICATION** — so the report shows *where* effort belongs. For the locked
+  Platform 001 config: RESEARCH 3, CONFIGURATION 0, COMPONENTS 19, VERIFICATION 2.
+- Category is carried on each blocker, included in the deterministic hashed package
+  content, persisted in `BuildPackage.block_reasons`, surfaced in the markdown
+  report (summary table + grouped lists) and the JSON artifact, and printed by
+  `npm run platform001:generate`. Tests: **55/55** (added a categorization test).
+- Recorded the owner's forward roadmap (NOT built): Platform Calculator Library
+  (Weight→CG→Range→…→Gradeability), a functional digital twin, Build Package v0.2
+  (adds Calculations/Warnings/Installation Order/QC/Commissioning checklists), and
+  the guided prototype workflow. See `docs/status/PLATFORM_001_STATUS.md`.
+
 ## 2026-07-22 — Platform 001 Build Package v0.1 vertical slice (D-015, L-006)
 
 - Built the first visible end-to-end Build Engine workflow as a NEW layer above M10
