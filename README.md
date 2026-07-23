@@ -8,7 +8,8 @@ This repository holds coordinated bodies of work plus the public site:
   evidence-governed engine for vehicle-conversion validation.
 - **Digital Twin Foundation** — [`elektron-digital-twin-foundation/`](elektron-digital-twin-foundation/README.md).
   Layer-governed 3D digital-twin documentation. Current stage: **L00 Reference Lock**.
-- **Developer Environment (EDE)** — root `scripts/`, `config/`, `dev/`, plus `docs/cto`, `docs/runbooks`, and related manifests.
+- **Local Runtime** — macOS offline installers (`.command`), `scripts/setup-macos.sh`, `scripts/doctor.sh`, sealed `scripts/backup.sh` → `.local/backups/`.
+- **Developer Environment (EDE)** — `scripts/setup.sh`, `scripts/dev/ede/`, `config/`, `dev/`, plus `docs/cto`, `docs/runbooks`, and related manifests.
   Reproducible workstation bootstrap (`./scripts/setup.sh` / `npm run setup`). Additive infrastructure only.
 - **Website** — static site: [`index.html`](index.html).
 
@@ -27,9 +28,11 @@ Clone → configure workstation:
 ./scripts/setup.sh
 # or
 npm run setup
-npm run doctor
+npm run ede:doctor
 npm run dashboard
 ```
+
+EDE commands are namespaced (`ede:doctor`, `ede:snapshot`). Generic `npm run doctor` / `npm run backup` belong to the **Local Runtime**.
 
 See [`ENVIRONMENT.md`](ENVIRONMENT.md), [`docs/README.md`](docs/README.md) (EDE index), and [`PROJECT_MANIFEST.json`](PROJECT_MANIFEST.json).  
 EDE does **not** move application folders.
@@ -73,10 +76,13 @@ AGENTS.md                         Cross-agent rules + handoff protocol
 .cursor/rules/                    Cursor rule mirroring AGENTS.md
 ENVIRONMENT.md                    EDE required tooling / versions
 PROJECT_MANIFEST.json             EDE folder ownership map
-package.json                      EDE root scripts (setup/doctor/verify)
+package.json                      Root scripts: runtime doctor/backup + EDE ede:* 
 index.html                        Public static site
 elektron-digital-twin-foundation/ Layer-governed 3D digital-twin docs (L00 Reference Lock)
-scripts/ config/ dev/             EDE workstation bootstrap + checks
+scripts/doctor.sh backup.sh       Local Runtime operator tools → .local/backups/
+scripts/dev/ede/                  EDE workstation doctor + development snapshot
+artifacts/ede-snapshots/          EDE development snapshots (gitignored)
+scripts/setup.sh config/ dev/     EDE workstation bootstrap + checks
 docs/
     ENGINEERING_CONSTITUTION.md   Rules that rarely change (Articles I–VIII)
     AI_INSTRUCTIONS.md            How AI tooling must behave

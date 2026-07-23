@@ -16,5 +16,6 @@ npm run db:health
 ## Rules
 
 - Never commit production dumps.  
-- Backups go under the configured backup directory (see `npm run backup`).  
+- EDE scaffold snapshots go under `artifacts/ede-snapshots/` (see `npm run ede:snapshot`).  
+- Runtime DB recovery archives go under `.local/backups/` (see `npm run backup`).  
 - Schema changes belong to the owning application package with migrations.

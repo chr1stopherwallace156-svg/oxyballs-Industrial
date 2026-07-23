@@ -47,9 +47,23 @@ source .venv/bin/activate
 
 ## Node workspace
 
-Root `package.json` owns EDE scripts only. Application packages keep their own `package.json` files and must not be relocated by EDE.
+Root `package.json` exposes:
 
-## Verification
+| Command | Product | Purpose |
+|---|---|---|
+| `npm run doctor` / `npm run backup` | Local Runtime | Operator runtime health + sealed `.local/backups/` |
+| `npm run ede:doctor` / `npm run ede:snapshot` | EDE | Workstation checks + `artifacts/ede-snapshots/` |
+| `npm run setup` / `npm run verify` | EDE | Clone bootstrap + pre-push checks |
+
+Application packages keep their own `package.json` files and must not be relocated by EDE.
+
+## Verification (EDE workstation)
+
+```bash
+npm run ede:doctor
+```
+
+## Verification (Local Runtime)
 
 ```bash
 npm run doctor

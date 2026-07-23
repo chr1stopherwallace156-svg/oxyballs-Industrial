@@ -1,6 +1,6 @@
 export default [
   {
-    ignores: ['node_modules/**', '.venv/**', 'backups/**', 'logs/**', 'elektron-digital-twin-foundation/**', 'edts-*/**'],
+    ignores: ['node_modules/**', '.venv/**', 'backups/**', 'artifacts/**', 'logs/**', '.local/**', 'elektron-digital-twin-foundation/**', 'engine/**', 'edts-*/**'],
   },
   {
     files: ['**/*.{js,mjs,cjs}'],

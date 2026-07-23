@@ -17,6 +17,45 @@ later entry that references it.
 
 ---
 
+## D-017 — Local-runtime hardening (RC2) + admit runtime tooling to the frozen structure
+
+- Date: 2026-07-23
+- Status: Accepted (amends the D-016 structure freeze)
+- Context: Independent review of the local-runtime package (RC1) approved it
+  conditionally and required a final hardening pass before it could be authoritative:
+  the destructive `npm run clean`, fail-open restore, non-atomic DB replacement,
+  imprecise determinism wording, and missing regression coverage all had to be fixed,
+  then the hardening branch merged to `main` and both deliverables rebuilt from that
+  main commit with the git bundle's HEAD on hardened main.
+- Decision:
+  1. **Engine:** `npm run clean` now removes only `dist/` (never the database); a new
+     explicit `npm run reset:database` (`engine/scripts/resetDatabase.ts`) is the only
+     command that may delete the DB — it shows the path, makes + verifies a backup
+     first, aborts if the backup fails, and requires typed `RESET` confirmation.
+  2. **Restore (`scripts/restore.sh`) fails closed:** a failed pre-restore safety
+     backup aborts; the database is restored via a temp file + `PRAGMA integrity_check`
+     (run through Node — no `sqlite3` CLI needed) + **atomic rename**; a corrupt
+     restored DB aborts leaving the active DB byte-for-byte unchanged; a failed
+     post-restore integrity/build/test yields `OUTCOME: FAIL` and non-zero exit — and
+     "Restore complete" prints only on success.
+  3. **Determinism wording** corrected in `GENERATED_ARTIFACTS.md`: canonical
+     `input_hash`/`package_hash`/`build_package_id` are identical across runs; the
+     rendered output FILE checksum varies because `generated_at` is intentionally
+     excluded from the canonical hash. Covered by an engine test.
+  4. **Regression coverage:** engine tests (canonical-hash stability while timestamp
+     differs; `clean` never references the DB; `reset:database` exists) → **58 tests**;
+     plus `scripts/self-test.sh` proving the four restore/clean safety behaviors.
+  5. **Structure-freeze amendment:** the local-runtime tooling is admitted to the
+     canonical layout at the repository root — `scripts/`, the six `*.command`
+     launchers, `LOCAL_SETUP.md`/`LOCAL_OPERATIONS.md`/`OFFLINE_OPERATION.md`/
+     `BACKUP_AND_RECOVERY.md`/`GENERATED_ARTIFACTS.md`/`README-LOCAL-RUNTIME.md`, and
+     `.nvmrc`/`.node-version`. Bundle-time-only artifacts (`vendor/`, `.local/`,
+     `IMMUTABLE_PAYLOAD_CHECKSUMS.sha256`) are gitignored, not tracked.
+- Consequences: the hardening branch is merged to `main`; both deliverables are
+  rebuilt from the resulting main commit with the git bundle default checkout on
+  hardened `main`. **macOS Apple Silicon / Intel device acceptance remains pending
+  (cannot be run from the Linux build environment).** No approval/safety claim.
+
 ## D-016 — Merge PR #1 as v0.1.0-rc1; adopt the release roadmap; freeze repository structure
 
 - Date: 2026-07-23

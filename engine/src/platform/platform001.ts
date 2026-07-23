@@ -106,9 +106,38 @@ export function validatePlatformConfig(db: DB, platformId: string = PLATFORM_001
   if (mismatched.length > 0) throw new Error(`PLATFORM_CONFIG_MISMATCH:${mismatched.join(',')}`);
 }
 
+/**
+ * Delete every Platform 001 build package and its children in foreign-key-safe
+ * order (BomItem → CompatibilityEvaluation → OpenDataRequirement → BuildPackage).
+ * Scoped strictly to Platform-001 packages; unrelated platforms and all core M10
+ * tables (EvidenceLedger, IndividualVehicle, VehicleBuild, TestResult, signoffs,
+ * authorizations, telemetry…) are left completely intact. Caller supplies the
+ * transaction (used inside seedPlatform001's atomic block).
+ */
+export function clearPlatform001Derived(db: DB): void {
+  const pkgIds = db
+    .prepare('SELECT build_package_id FROM BuildPackage WHERE platform_id = ?')
+    .all(PLATFORM_001.platform_id)
+    .map((r: any) => r.build_package_id as string);
+  for (const pid of pkgIds) {
+    db.prepare('DELETE FROM BomItem WHERE build_package_id = ?').run(pid);
+    db.prepare('DELETE FROM CompatibilityEvaluation WHERE build_package_id = ?').run(pid);
+    db.prepare('DELETE FROM OpenDataRequirement WHERE build_package_id = ?').run(pid);
+    db.prepare('DELETE FROM BuildPackage WHERE build_package_id = ?').run(pid);
+  }
+}
+
 export function seedPlatform001(db: DB): void {
   atomic(db, () => {
     const now = new Date().toISOString();
+
+    // Clear the prior Platform 001 DERIVED build-package records first, in
+    // foreign-key-safe order, so a re-seed on a persistent database does not fail
+    // an FK constraint (BomItem/CompatibilityEvaluation/BomItem reference the
+    // candidate + platform rows we are about to replace). This deletes ONLY
+    // Platform-001 build packages and their children — it never touches unrelated
+    // core tables (EvidenceLedger, IndividualVehicle, TestResult, authorizations…).
+    clearPlatform001Derived(db);
 
     // Clear platform-scoped rows for a clean, deterministic re-seed.
     db.prepare('DELETE FROM EngineeringClaim WHERE platform_id = ?').run(PLATFORM_001.platform_id);

@@ -14,14 +14,17 @@ This repository includes a **version-controlled workstation bootstrap**.
 npm run setup
 ```
 
-## Daily commands
+## Daily commands (EDE)
 
 ```bash
-npm run doctor      # health check
-npm run dashboard   # terminal summary
-npm run backup      # timestamped backup
-npm run verify      # pre-push verification
+npm run ede:doctor     # workstation health check
+npm run dashboard      # terminal summary
+npm run ede:snapshot   # development snapshot (CTO docs/config/scaffold)
+npm run verify         # EDE doctor + shared repo checks
 ```
+
+**Do not use** `npm run doctor` / `npm run backup` for EDE — those are **Local Runtime**
+operator tools (`scripts/doctor.sh`, `scripts/backup.sh` → `.local/backups/`).
 
 After setup, shell aliases (when you `source config/shell/elektron-aliases.sh`):
 
@@ -29,10 +32,12 @@ After setup, shell aliases (when you `source config/shell/elektron-aliases.sh`):
 |---|---|
 | `elektron-start` | Print dashboard + next steps |
 | `elektron-test` | Run available tests |
-| `elektron-build` | Run available builds |
+| `elektron-build` | Run EDE verify |
 | `elektron-db` | Database health |
-| `elektron-doctor` | `npm run doctor` |
-| `elektron-backup` | `npm run backup` |
+| `elektron-ede-doctor` | `npm run ede:doctor` |
+| `elektron-ede-snapshot` | `npm run ede:snapshot` |
+| `elektron-runtime-doctor` | `npm run doctor` (local runtime) |
+| `elektron-runtime-backup` | `npm run backup` (local runtime) |
 
 ## Layout (additive)
 

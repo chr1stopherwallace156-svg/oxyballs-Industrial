@@ -15,7 +15,7 @@ Turn a clean Mac into an Elektron workstation using only repository scripts.
 
 ```bash
 ./scripts/setup.sh
-npm run doctor
+npm run ede:doctor
 ```
 
 7. Open the folder in Cursor/VS Code; install recommended extensions when prompted.  

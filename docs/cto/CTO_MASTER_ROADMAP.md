@@ -15,7 +15,7 @@ Reproducible Elektron engineering workstations + trustworthy EDTS/capture pipeli
 
 | Track | Current focus | Next gate |
 |---|---|---|
-| EDE | Workstation bootstrap in-repo | `npm run doctor` green on clean machine |
+| EDE | Workstation bootstrap in-repo | `npm run ede:doctor` green on clean machine |
 | EDTS foundation | Kernel / EAE / importer | Merge XREPO-CAP-EDTS importer; tag importer baseline |
 | Capture iOS | Phase 1 runtime pending device | Physical still → XREPO-0001/0002 |
 | Visible Progress / VIN | Prototype / research tooling | Keep isolated from capture contract |

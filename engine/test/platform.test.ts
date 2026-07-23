@@ -1,7 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { freshMemoryDb, atomic } from '../src/db';
+import { mkdtempSync, rmSync, readFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { freshMemoryDb, atomic, openDatabase, migrate } from '../src/db';
 import {
   seedPlatform001, validatePlatformConfig, generateBuildPackage, collectReportData,
   BOM_CATEGORIES, PLATFORM_001, ENGINE_VERSION,
@@ -172,6 +175,77 @@ test('platform: release blockers are categorized (Research/Configuration/Compone
   // the report exposes the same category counts read back from the DB
   const d = collectReportData(db, r.buildPackageId);
   assert.deepEqual(d.blockersByCategory, { ...{ RESEARCH: 0, CONFIGURATION: 0, COMPONENTS: 0, VERIFICATION: 0 }, ...byCat });
+});
+
+// 17 — PERSISTENT FILE DB: regenerating twice is idempotent, non-destructive, and
+//      never fails an FK constraint; unrelated core records are preserved.
+test('platform: repeat generation on a PERSISTENT file DB preserves unrelated data (no rm, no FK error)', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'elektron-persist-'));
+  const dbPath = join(dir, 'engine.db');
+  try {
+    const db = openDatabase(dbPath);
+    migrate(db);
+
+    // Sentinel records in unrelated CORE tables that must survive regeneration.
+    db.prepare('INSERT INTO IndividualVehicle(individual_vehicle_id,vin,platform_id) VALUES (?,?,?)')
+      .run('IV-SENTINEL', 'VIN-SENTINEL-001', 'PLATFORM-001');
+    db.prepare('INSERT INTO VehicleBuild(vehicle_build_id,individual_vehicle_id,platform_configuration_id) VALUES (?,?,?)')
+      .run('VB-SENTINEL', 'IV-SENTINEL', 'PLATFORM_001A');
+    db.prepare(`INSERT INTO EvidenceLedger(record_type,record_id,content_hash,prev_hash,record_hash,signer_identity,created_at)
+                VALUES ('SENTINEL','R-SENTINEL','ch','','rh','sentinel.signer',?)`).run(new Date().toISOString());
+
+    // First generation.
+    seedPlatform001(db);
+    const a = generateBuildPackage(db);
+    // Second generation on the SAME persistent DB — this used to throw
+    // 'FOREIGN KEY constraint failed'. It must now succeed and be identical.
+    seedPlatform001(db);
+    const b = generateBuildPackage(db);
+
+    assert.equal(a.buildPackageId, b.buildPackageId);
+    assert.equal(a.packageHash, b.packageHash);        // deterministic across runs
+    assert.equal(a.inputHash, b.inputHash);
+
+    // Unrelated core records are fully intact (nothing was wiped).
+    assert.equal((db.prepare("SELECT COUNT(*) c FROM EvidenceLedger WHERE record_id='R-SENTINEL'").get() as any).c, 1);
+    assert.equal((db.prepare("SELECT COUNT(*) c FROM IndividualVehicle WHERE individual_vehicle_id='IV-SENTINEL'").get() as any).c, 1);
+    assert.equal((db.prepare("SELECT COUNT(*) c FROM VehicleBuild WHERE vehicle_build_id='VB-SENTINEL'").get() as any).c, 1);
+
+    // Platform data is correctly present (re-seeded, single copy).
+    assert.equal((db.prepare("SELECT COUNT(*) c FROM VehiclePlatform WHERE platform_id='PLATFORM-001'").get() as any).c, 1);
+    assert.equal((db.prepare("SELECT COUNT(*) c FROM BuildPackage WHERE platform_id='PLATFORM-001'").get() as any).c, 1);
+    db.close();
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+// 18 — determinism wording: canonical hashes are identical across runs even though
+//      the generated_at TIMESTAMP (excluded from the canonical hash) differs.
+test('platform: canonical package_hash is stable while generated_at may differ', () => {
+  const db = freshMemoryDb();
+  seedPlatform001(db);
+  const a = generateBuildPackage(db, { now: new Date('2026-01-01T00:00:00.000Z') });
+  const genA = (db.prepare('SELECT generated_at FROM BuildPackage WHERE build_package_id=?').get(a.buildPackageId) as any).generated_at;
+  const b = generateBuildPackage(db, { now: new Date('2026-12-31T23:59:59.000Z') });
+  const genB = (db.prepare('SELECT generated_at FROM BuildPackage WHERE build_package_id=?').get(b.buildPackageId) as any).generated_at;
+  // Canonical engineering identity is stable...
+  assert.equal(a.inputHash, b.inputHash);
+  assert.equal(a.packageHash, b.packageHash);
+  assert.equal(a.buildPackageId, b.buildPackageId);
+  // ...but the rendered timestamp (deliberately excluded from the canonical hash) changed.
+  assert.notEqual(genA, genB);
+});
+
+// 19 — safety: `npm run clean` must NEVER delete the operational database.
+test('engine: the clean script removes only build output, never data/engine.db', () => {
+  const pkg = JSON.parse(readFileSync(join(process.cwd(), 'package.json'), 'utf8'));
+  const clean = String(pkg.scripts.clean);
+  assert.ok(!/data\/engine\.db/.test(clean), `clean must not reference the database; got: ${clean}`);
+  assert.ok(!/engine\.db/.test(clean), `clean must not touch any .db; got: ${clean}`);
+  assert.match(clean, /\bdist\b/); // it should still clean the build output
+  // A separate, explicit destructive command must exist for database reset.
+  assert.ok(pkg.scripts['reset:database'], 'an explicit reset:database script must exist');
 });
 
 // 16 — transaction rollback prevents partial package creation

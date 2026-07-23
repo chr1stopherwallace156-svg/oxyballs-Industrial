@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$ROOT"
 
-EXCLUDE='(^\.git/|node_modules/|\.venv/|vendor/|Pods/|DerivedData/|logs/|backups/|dev/checks/no-secrets\.sh$|\.md$|\.json$)'
+EXCLUDE='(^\.git/|node_modules/|\.venv/|vendor/|Pods/|DerivedData/|logs/|backups/|artifacts/|\.local/|dev/checks/no-secrets\.sh$|\.md$|\.json$)'
 
 FOUND=0
 while IFS= read -r -d '' f; do

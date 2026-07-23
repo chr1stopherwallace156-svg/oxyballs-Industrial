@@ -1,0 +1,17 @@
+{
+  "schema_id": "CaptureContractVendorProvenance",
+  "schema_version": "1.0.0",
+  "source_repository": "elektron-capture-ios",
+  "source_tag": "capture-ios-phase1-directive-v0.1.4",
+  "source_commit": "338d4369dc166d23b909767d435997fd4a07e760",
+  "source_remote_url": null,
+  "source_remote_url_status": "PENDING_MANUAL_GITHUB_PUBLISH",
+  "capture_origin_version": "0.1.4",
+  "contract_bundle_digest": "8fb3e27f716225f9f585370ceb337e628f821f26dd1bfe4deb1042120c09de21",
+  "vendored_at": "2026-07-23T04:51:52Z",
+  "notes": [
+    "EDTS loads these contracts by digest; do not recreate status ownership mappings.",
+    "After elektron-capture-ios is published, set source_remote_url without changing contract file bytes or moving capture tags.",
+    "contract_bundle_digest covers CONTRACT_FILES only (not this provenance file, not CONTRACT_BUNDLE_MANIFEST.json)."
+  ]
+}

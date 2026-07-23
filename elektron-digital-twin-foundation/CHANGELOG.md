@@ -2,6 +2,24 @@
 
 All notable changes to the digital twin foundation. Append-only.
 
+## 2026-07-23
+
+### Added
+
+- **XREPO-CAP-EDTS-0001 / 0002** — Capture `.edts-pkg` importer under `eae/importers/xrepo_cap_edts/`
+  - Vendored `elektron-capture-ios` 0.1.4 contracts + status-owner registry digests
+  - `VENDOR_PROVENANCE.json` pins `capture-ios-phase1-directive-v0.1.4` @ `338d436` + bundle digest
+  - Dual-gate result (`canonical_compatibility` / `secure_ingestion` / `committed` / reason codes)
+  - Synthetic golden package + negative and hostile fixtures
+  - Atomic stage+promote commit (`edts_commitment.json` co-located); idempotent re-ingest
+  - Compatibility + iOS Phase 1 gap reports under `verification/xrepo_cap_edts/`
+
+### Status
+
+- Capture-ios tags unchanged (do not move)
+- Next: publish capture repo; then minimal iOS Phase 1 still
+
+
 ## 2026-07-16
 
 ### Added

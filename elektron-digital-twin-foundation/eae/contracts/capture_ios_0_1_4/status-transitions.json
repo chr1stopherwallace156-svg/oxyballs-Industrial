@@ -1,0 +1,29 @@
+{
+  "schema_id": "StatusTransitions",
+  "schema_version": "1.0.0",
+  "owner": "elektron-capture-ios",
+  "contract_ownership": "JOINT_CAPTURE_EDTS",
+  "status": "DRAFT",
+  "notes": [
+    "Derived from Docs/Architecture/STATUS_TAXONOMY.md in elektron-capture-ios 0.1.4.",
+    "Capture may only traverse capture-side runtime transitions.",
+    "EDTS alone may traverse ingest transitions and assign INGESTED_INTEGRITY_VERIFIED / CONTENT_UNVERIFIED."
+  ],
+  "capture_side_runtime": [
+    ["CAPTURE_CREATED", "CAPTURE_PERSISTED"],
+    ["CAPTURE_PERSISTED", "CAPTURE_HASHED"],
+    ["CAPTURE_HASHED", "CAPTURE_SEALED"],
+    ["CAPTURE_SEALED", "PACKAGE_EXPORTED"]
+  ],
+  "edts_side_runtime": [
+    ["PACKAGE_RECEIVED", "PACKAGE_QUARANTINED"],
+    ["PACKAGE_QUARANTINED", "PACKAGE_VALIDATED"],
+    ["PACKAGE_QUARANTINED", "REJECTED"],
+    ["PACKAGE_VALIDATED", "VERIFIED_TRANSPORT_INTEGRITY"],
+    ["PACKAGE_VALIDATED", "REJECTED"],
+    ["VERIFIED_TRANSPORT_INTEGRITY", "INGESTED_INTEGRITY_VERIFIED"],
+    ["INGESTED_INTEGRITY_VERIFIED", "COMMITTED_UNVERIFIED_EVIDENCE"]
+  ],
+  "terminal_edts_content": ["CONTENT_UNVERIFIED"],
+  "forbidden_capture_assertions": "ALL_WITH_OWNER_EDTS"
+}

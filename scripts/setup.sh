@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# setup.sh — Configure an Elektron workstation from a clean clone.
+# Product scope: Elektron Development Environment (EDE)
+# Purpose: Configure a source-workstation from a clean clone.
+# Not the macOS offline installer (see scripts/setup-macos.sh / Install Elektron.command).
 # Usage: ./scripts/setup.sh
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -20,5 +22,8 @@ bash "$ROOT/scripts/setup/link-editor-config.sh"
 echo
 echo "Setup complete. Next:"
 echo "  source config/shell/elektron-aliases.sh"
-echo "  npm run doctor"
+echo "  npm run ede:doctor"
 echo "  npm run dashboard"
+echo
+echo "Note: npm run doctor / npm run backup are Local Runtime tools."
+echo "      EDE uses npm run ede:doctor / npm run ede:snapshot."

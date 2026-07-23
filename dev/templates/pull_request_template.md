@@ -9,7 +9,7 @@
 
 ## Verification
 
-- [ ] `npm run doctor`
+- [ ] `npm run ede:doctor`
 - [ ] `npm run verify` (if releasing)
 
 ## Risk notes

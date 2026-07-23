@@ -4,16 +4,37 @@ node_modules/
 venv/
 __pycache__/
 *.py[cod]
+*.pyc
 .pytest_cache/
 .mypy_cache/
 
-# Logs & backups
+# Local runtime state — rebuilt by Install Elektron.command; never committed.
+.local/
+
+# Offline dependency vendor (regenerated at package time from the lockfiles; large
+# binary cache/wheels are not tracked — they are produced when building a runtime bundle).
+/vendor/
+
+# Bundle-time integrity manifests (generated when packaging a runtime bundle)
+IMMUTABLE_PAYLOAD_CHECKSUMS.sha256
+/CHECKSUMS.sha256
+
+# Engine build + runtime artifacts (engine has its own .gitignore too)
+engine/dist/
+engine/data/
+
+# Logs & development snapshots (EDE)
 logs/*.log
 logs/*.sqlite
 logs/*.sqlite-*
 !logs/.gitkeep
+artifacts/ede-snapshots/*
+!artifacts/ede-snapshots/.gitkeep
+# Legacy generic backup dir (do not use; runtime → .local/backups/, EDE → artifacts/ede-snapshots/)
 backups/
 *.bak
+*.log
+*.tmp
 
 # Editor / OS
 .DS_Store
