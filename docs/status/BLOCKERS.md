@@ -15,6 +15,44 @@ Active blockers and what unblocks them. Entries are closed by marking
 
 ---
 
+## B-005 — A9 TRUSTED-TIME / CLOCK-ROLLBACK AUTHORIZATION BYPASS (engine)
+
+- Filed: 2026-07-23 (adversarial harness A9; confirmed by independent review)
+- Status: Active — **accepted-risk for the current scope; must be fixed before the
+  engine holds any authoritative safety/time role.**
+- Finding: expiry uses a caller-supplied `now` (an injectable test seam), so an
+  in-process caller can pass an earlier timestamp and make an EXPIRED authorization
+  appear valid again. `npm run verify:attack` reports this as `A9 — BYPASS
+  (BYPASS-IS-FINDING)` and, by design, exits 0 with one open finding recorded
+  (11/12 BLOCKED) rather than failing the command. Cross-referenced:
+  `engine/VERIFICATION_REPORT.md` (risk R1, M10.1 backlog M2), D-013/D-014.
+- Blocks (must be closed BEFORE any of these): HV energization authorization;
+  vehicle activation; time-limited test permissions; safety-critical approval /
+  expiry transitions. **Does NOT block** the local-runtime package, deterministic
+  Platform 001 generation, or a non-authoritative camera rehearsal shoot.
+- Unblocked by: removing ordinary callers' ability to supply authoritative time —
+  use a trusted monotonic or system/server-controlled timestamp for expiry, and
+  keep expiry transitions as append-only events (so a rollback cannot silently
+  "un-expire" an authorization). Then A9 must flip to BLOCKED with a regression test.
+
+## B-004b — RC2 local-runtime hardening backlog (non-blocking refinements)
+
+- Filed: 2026-07-23 (independent review, RC2)
+- Status: Active — **non-blocking**; enter the next hardening pass, not an RC gate.
+- Items:
+  1. **Live-SQLite backup:** `scripts/backup.sh` copies `engine.db` as a plain file.
+     Fine while nothing writes concurrently; once the engine is an active service,
+     use SQLite's online-backup API or `VACUUM INTO` and account for WAL/journal state.
+  2. **Backup filename resolution:** names use `YYYYMMDD-HHMMSS` (1-second). Two
+     backups in the same second could collide — add milliseconds / a collision-safe
+     suffix.
+  3. **Platform-seed delete-and-reinsert:** derived package rows are deleted FK-safe,
+     but the platform/claim/candidate rows are delete-then-recreated. Safe for the
+     present schema; as EDTS lineage grows, prefer versioned UPSERT / supersession so
+     future references to claim/candidate identities cannot create a new FK conflict.
+- Unblocked by: implementing the above in a future engine/runtime hardening commit
+  with regression tests; none gates the current package or Mac/iPhone validation.
+
 ## B-003 — POWERTRAIN_COMPATIBILITY_REVIEW_REQUIRED
 
 - Filed: 2026-07-15 (owner directive, review_11)
