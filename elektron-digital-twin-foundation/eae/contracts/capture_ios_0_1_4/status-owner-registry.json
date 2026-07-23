@@ -1,0 +1,32 @@
+{
+  "schema_id": "StatusOwnerRegistry",
+  "schema_version": "1.0.0",
+  "owner": "elektron-capture-ios",
+  "contract_ownership": "JOINT_CAPTURE_EDTS",
+  "status": "DRAFT",
+  "notes": [
+    "Capture client may only assert statuses with owner CAPTURE.",
+    "EDTS alone may assert statuses with owner EDTS.",
+    "PHASE_1_DIRECTIVE_APPROVED ≠ PHASE_1_IMPLEMENTATION_COMPLETE."
+  ],
+  "statuses": [
+    { "code": "CAPTURE_CREATED", "owner": "CAPTURE", "plane": "runtime_capture" },
+    { "code": "CAPTURE_PERSISTED", "owner": "CAPTURE", "plane": "runtime_capture" },
+    { "code": "CAPTURE_HASHED", "owner": "CAPTURE", "plane": "runtime_capture" },
+    { "code": "CAPTURE_SEALED", "owner": "CAPTURE", "plane": "runtime_capture" },
+    { "code": "PACKAGE_EXPORTED", "owner": "CAPTURE", "plane": "runtime_capture" },
+    { "code": "PACKAGE_RECEIVED", "owner": "EDTS", "plane": "runtime_ingest" },
+    { "code": "PACKAGE_QUARANTINED", "owner": "EDTS", "plane": "runtime_ingest" },
+    { "code": "PACKAGE_VALIDATED", "owner": "EDTS", "plane": "runtime_ingest" },
+    { "code": "REJECTED", "owner": "EDTS", "plane": "runtime_ingest" },
+    { "code": "VERIFIED_TRANSPORT_INTEGRITY", "owner": "EDTS", "plane": "runtime_ingest" },
+    { "code": "INGESTED_INTEGRITY_VERIFIED", "owner": "EDTS", "plane": "runtime_ingest" },
+    { "code": "CONTENT_UNVERIFIED", "owner": "EDTS", "plane": "runtime_ingest" },
+    { "code": "COMMITTED_UNVERIFIED_EVIDENCE", "owner": "EDTS", "plane": "runtime_ingest" },
+    { "code": "PACKAGE_EXPORT_READY", "owner": "CAPTURE", "plane": "repository_implementation" },
+    { "code": "EDTS_COMPATIBLE", "owner": "JOINT", "plane": "repository_implementation" },
+    { "code": "PHASE_1_DIRECTIVE_APPROVED", "owner": "CAPTURE", "plane": "phase_governance" },
+    { "code": "PHASE_1_IMPLEMENTATION_COMPLETE", "owner": "CAPTURE", "plane": "phase_governance" },
+    { "code": "APPROVED_FOR_PHASE_1_PREPARATION", "owner": "CAPTURE", "plane": "phase_governance" }
+  ]
+}

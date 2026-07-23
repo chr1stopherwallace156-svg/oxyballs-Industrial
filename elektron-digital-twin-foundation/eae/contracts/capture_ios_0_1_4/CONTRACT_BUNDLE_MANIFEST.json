@@ -1,0 +1,20 @@
+{
+  "bundle_digest": "8fb3e27f716225f9f585370ceb337e628f821f26dd1bfe4deb1042120c09de21",
+  "capture_origin_version": "0.1.4",
+  "contract_digests": {
+    "CaptureDeviceProvenance": "752e92f3475be9f425db7b0c12cafe3c7f095e7b34e7bbfcbff5e64d9176a626",
+    "EvidenceManifest": "b58429842f064337eda1aad9ae2e3d6aedbf0c0e4a804e46e0e643b8dd848b9f",
+    "IngestionStatus": "35b342af260ebc5e5fd85d6d64f2c66cbc9c99f85243e000cb74e61fd2c2f0ff",
+    "PackageInventory": "1a369f0311e0a8cbd507c496d1d8bd5ed5c0a5b88e3f5796b5f62086a4e9a4f1",
+    "StatusOwnerRegistry": "afec15e3b2905c8bbd55a34f52fe0f53a4997c35a3ebebfef09412dcba9c4cb3",
+    "StatusTransitions": "0eca64eb3586cfda70c86c650a009e8c6be880c4c0aec6735747719422857765"
+  },
+  "notes": [
+    "EDTS must load these digests; do not recreate status ownership mappings."
+  ],
+  "registry_schema_version": "1.0.0",
+  "schema_id": "CaptureContractBundleManifest",
+  "schema_version": "1.0.0",
+  "source_commit": "338d4369dc166d23b909767d435997fd4a07e760",
+  "source_tag": "capture-ios-phase1-directive-v0.1.4"
+}
