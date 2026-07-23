@@ -4,5 +4,6 @@ ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 mkdir -p "$ROOT/.githooks"
 cp -f "$ROOT/scripts/git/pre-commit" "$ROOT/.githooks/pre-commit"
 chmod +x "$ROOT/.githooks/pre-commit" "$ROOT/scripts/git/pre-commit"
-git -C "$ROOT" config --local core.hooksPath "$ROOT/.githooks"
+# Relative hooksPath so the same clone works on every machine.
+git -C "$ROOT" config --local core.hooksPath .githooks
 echo "git hooks installed → .githooks/pre-commit"
