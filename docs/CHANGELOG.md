@@ -5,6 +5,27 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-23 — Engine hardening: non-destructive Platform 001 regeneration (reviewable, not merged)
+
+- **Fixed a real defect** found during local-runtime acceptance: running
+  `platform001:generate` twice against a **persistent** database threw
+  `FOREIGN KEY constraint failed`. Root cause: `seedPlatform001` deleted the
+  platform/candidate/claim rows while the previous run's build-package children
+  (BomItem, CompatibilityEvaluation, OpenDataRequirement, BuildPackage) still
+  referenced them.
+- **Correct fix (no database deletion):** new `clearPlatform001Derived(db)` deletes
+  only the prior **Platform-001** build packages + children in FK-safe order
+  (BomItem → CompatibilityEvaluation → OpenDataRequirement → BuildPackage) inside
+  `seedPlatform001`'s existing single transaction, before the platform rows are
+  replaced. It never touches unrelated core tables (EvidenceLedger,
+  IndividualVehicle, VehicleBuild, TestResult, signoffs, authorizations, telemetry).
+- **Regression test (persistent file DB, not in-memory):** generates Platform 001
+  twice → identical package hash, no FK error, and asserts sentinel EvidenceLedger /
+  IndividualVehicle / VehicleBuild rows survive. Tests: **56/56**.
+- Supersedes the local-runtime launcher workaround that deleted `engine/data/engine.db`;
+  the raw command is now safely re-runnable on a persistent database.
+- Prepared as a reviewable branch commit; **not merged to main** (awaiting approval).
+
 ## 2026-07-23 — Merge PR #1 → main as v0.1.0-rc1; release roadmap; structure freeze (D-016)
 
 - Merged PR #1 (the Build Engine + governance branch) into `main`. Verified additive:
