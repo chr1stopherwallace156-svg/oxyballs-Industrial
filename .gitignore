@@ -1,0 +1,24 @@
+# Local runtime state — rebuilt by Install Elektron.command; never committed.
+.local/
+
+# Offline dependency vendor (regenerated at package time from the lockfiles; large
+# binary cache/wheels are not tracked — they are produced when building a runtime bundle).
+/vendor/
+
+# Bundle-time integrity manifests (generated when packaging a runtime bundle)
+IMMUTABLE_PAYLOAD_CHECKSUMS.sha256
+/CHECKSUMS.sha256
+
+# Engine build + runtime artifacts (engine has its own .gitignore too)
+engine/dist/
+engine/data/
+node_modules/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+__pycache__/
+*.pyc

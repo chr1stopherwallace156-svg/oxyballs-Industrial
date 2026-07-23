@@ -30,6 +30,12 @@ CLAUDE.md                          Session entry pointer
 MERGE_REPORT_PR1.md                Pre-merge gate record for PR #1
 index.html                         Public static site
 .cursor/                           Cursor rules mirroring AGENTS.md
+# Local-runtime tooling (admitted by D-017) — the repo root IS the runnable local app:
+scripts/                           Local runtime shell scripts (setup/doctor/verify/backup/restore/self-test)
+*.command                          Double-clickable macOS launchers (Install/Start/Verify/Generate/Backup/Restore)
+LOCAL_SETUP.md LOCAL_OPERATIONS.md OFFLINE_OPERATION.md BACKUP_AND_RECOVERY.md GENERATED_ARTIFACTS.md README-LOCAL-RUNTIME.md
+.nvmrc .node-version               Node version pins
+# Bundle-time-only, gitignored (NOT tracked): vendor/  .local/  IMMUTABLE_PAYLOAD_CHECKSUMS.sha256
 elektron-digital-twin-foundation/  Layer-governed 3D digital-twin docs (owner: twin lead; PR #2/#3)
 docs/
     ENGINEERING_CONSTITUTION.md    Rules that rarely change

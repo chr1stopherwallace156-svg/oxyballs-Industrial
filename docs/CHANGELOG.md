@@ -5,6 +5,48 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-23 — Local-runtime hardening RC2 + runtime tooling in-repo (D-017)
+
+- **`npm run clean` no longer deletes the database** — it removes only `dist/`. New
+  explicit **`npm run reset:database`** (`engine/scripts/resetDatabase.ts`) is the
+  only DB-deleting command: shows the path, makes + verifies a backup first, aborts
+  if the backup fails, requires typed `RESET`.
+- **Restore fails closed** (`scripts/restore.sh`): failed pre-restore backup aborts;
+  DB restored via temp file + `integrity_check` (Node, no `sqlite3` CLI) + **atomic
+  rename**; corrupt restored DB aborts leaving the active DB unchanged; failed
+  post-restore checks → `OUTCOME: FAIL` + non-zero exit; "Restore complete" only on success.
+- **Determinism wording corrected** (`GENERATED_ARTIFACTS.md`): canonical
+  `package_hash`/`input_hash`/`build_package_id` are identical across runs; the output
+  FILE checksum varies because `generated_at` is excluded from the canonical hash.
+- **Regression coverage:** engine tests → **58** (canonical-hash stability vs.
+  timestamp; `clean` never touches the DB; `reset:database` exists) + `scripts/self-test.sh`
+  proving the four restore/clean safety behaviors (12 checks, FULL_PASS on Linux).
+- **Runtime tooling admitted to the repo** at root (D-017 amends the D-016 structure
+  freeze): `scripts/`, six `*.command` launchers, the LOCAL_* docs, `.nvmrc`/`.node-version`.
+  `vendor/`, `.local/`, and `IMMUTABLE_PAYLOAD_CHECKSUMS.sha256` are gitignored.
+- macOS Apple Silicon / Intel device acceptance remains **pending** (built + tested on Linux only).
+
+## 2026-07-23 — Engine hardening: non-destructive Platform 001 regeneration (reviewable, not merged)
+
+- **Fixed a real defect** found during local-runtime acceptance: running
+  `platform001:generate` twice against a **persistent** database threw
+  `FOREIGN KEY constraint failed`. Root cause: `seedPlatform001` deleted the
+  platform/candidate/claim rows while the previous run's build-package children
+  (BomItem, CompatibilityEvaluation, OpenDataRequirement, BuildPackage) still
+  referenced them.
+- **Correct fix (no database deletion):** new `clearPlatform001Derived(db)` deletes
+  only the prior **Platform-001** build packages + children in FK-safe order
+  (BomItem → CompatibilityEvaluation → OpenDataRequirement → BuildPackage) inside
+  `seedPlatform001`'s existing single transaction, before the platform rows are
+  replaced. It never touches unrelated core tables (EvidenceLedger,
+  IndividualVehicle, VehicleBuild, TestResult, signoffs, authorizations, telemetry).
+- **Regression test (persistent file DB, not in-memory):** generates Platform 001
+  twice → identical package hash, no FK error, and asserts sentinel EvidenceLedger /
+  IndividualVehicle / VehicleBuild rows survive. Tests: **56/56**.
+- Supersedes the local-runtime launcher workaround that deleted `engine/data/engine.db`;
+  the raw command is now safely re-runnable on a persistent database.
+- Prepared as a reviewable branch commit; **not merged to main** (awaiting approval).
+
 ## 2026-07-23 — Merge PR #1 → main as v0.1.0-rc1; release roadmap; structure freeze (D-016)
 
 - Merged PR #1 (the Build Engine + governance branch) into `main`. Verified additive:
