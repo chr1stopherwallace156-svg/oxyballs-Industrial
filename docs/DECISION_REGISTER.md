@@ -1,0 +1,989 @@
+# DECISION REGISTER
+
+Record of engineering decisions with lasting consequences. Entries are
+append-only: a decision is never edited or removed, only superseded by a
+later entry that references it.
+
+**Entry format:**
+
+```
+## D-NNN — <short title>
+- Date: YYYY-MM-DD
+- Status: Accepted | Superseded by D-NNN
+- Context: why the decision was needed
+- Decision: what was decided
+- Consequences: what this binds or unblocks
+```
+
+---
+
+## D-016 — Merge PR #1 as v0.1.0-rc1; adopt the release roadmap; freeze repository structure
+
+- Date: 2026-07-23
+- Status: Accepted
+- Context: PR #1 (the full Build Engine + governance branch) was ready to merge into
+  `main` alongside the separately-merged digital-twin foundation (PRs #2/#3). The
+  owner approved the merge after a final review of `MERGE_REPORT_PR1.md`, chose a
+  release-candidate tag (Prototype 001 does not physically exist, so a final `v0.1.0`
+  would overstate readiness), revised the version roadmap, and asked to freeze the
+  repository structure.
+- Decision:
+  1. **Merge PR #1** into `main`. Verified additive and safe: GitHub's PR diff is
+     +51,794 / −1 across 275 files (three-dot from merge-base `baf6aa9`); the merge
+     preserves all of `elektron-digital-twin-foundation/` (main's work). The only
+     conflict, `README.md`, was resolved intentionally into a single deliberate front
+     door (take the branch version, which already contains main's content).
+  2. **Tag the merge commit `v0.1.0-rc1`** — "Engineering Foundation (release
+     candidate)." Not a final release: the software foundation is strong but the
+     product is still being validated.
+  3. **Adopt the release roadmap** (`docs/roadmaps/RELEASE_ROADMAP.md`): v0.1
+     Engineering Foundation · v0.2 Platform 001 Engineering · v0.3 Reference Vehicle
+     Characterization · v0.4 Prototype 001 Assembly · v0.5 Prototype Validation ·
+     v0.6 Pilot Customer · v1.0 Commercial Engineering Platform. Pre-product
+     milestones tag as `-rcN`; a milestone goes final only when its defining evidence
+     exists.
+  4. **Freeze the repository structure** (`docs/STRUCTURE_FREEZE.md`): the current
+     top-level and second-level layout is canonical. Adding/renaming/moving/removing
+     a directory requires a Decision Register entry and a paired `README.md` +
+     `STRUCTURE_FREEZE.md` update — never silently. Every directory must answer why it
+     exists, who owns it, when it is used, and which milestone introduced it.
+- Consequences: `main` now carries the Engineering Foundation + Platform 001 Build
+  Package alongside the digital-twin foundation. `v0.1.0-rc1` marks the release
+  candidate. Structure is frozen; the release roadmap is the shared vocabulary for
+  progress. No tag or release asserts approval, procurement, or physical safety.
+
+---
+
+## D-015 — Open the Platform 001 Build Package v0.1 vertical slice (bounded, DRAFT-only)
+
+- Date: 2026-07-22
+- Status: Accepted (extends D-011/D-013; distinct from the gated M11)
+- Context: The owner directed a focused vertical slice — the first visible
+  end-to-end Build Engine workflow — turning the locked Platform 001 configuration
+  into a controlled engineering output (identity → engineering-data evaluation →
+  compatibility evaluation → deterministic blockers → draft BOM → build-package
+  report). The directive explicitly forbids approval/release/authorization claims,
+  broad UI, digital-twin, HIL, physical authorization, and inventing any value.
+- Decision: Built the slice as a NEW layer above M10 (`engine/src/platform/`,
+  `migrations/005_platform_package.sql`, `scripts/platform001.ts`,
+  `test/platform.test.ts`, `verify/packageAttack.ts`) without modifying M10
+  behavior. Governance boundary held and recorded: this slice **creates** and tracks
+  OpenDataRequirements and leaves every unknown explicitly unresolved — it does NOT
+  resolve ODR-001..ODR-003, does NOT enter supplier data or any real engineering
+  value, and does NOT open M11 (`M11_OPEN_DATA_REGISTER.md` stays gated). The only
+  externally supplied values are the owner-locked Platform 001 identity/geometry
+  (nominal, marked not-physically-verified, with a source_authority recorded). A
+  build package is CHECK-locked to `DRAFT_INCOMPLETE` — APPROVED/RELEASED/
+  AUTHORIZED_FOR_BUILD/AUTHORIZED_FOR_HV are structurally impossible. All decisions,
+  ids, and hashes are deterministic functions of canonical inputs. Two proven
+  reproducible defects found during the build were corrected with regression tests:
+  (a) build-package status must be un-approvable (DB CHECK) and (b) child-row ids
+  must be scoped by build_package_id to avoid a global-PK collision between two
+  coexisting packages.
+- Consequences: `npm run platform001:generate` produces
+  `engine/output/platform-001/build-package.{md,json}` — a DRAFT package with 20
+  BOM categories (19 UNSELECTED, 1 BLOCKED), 6 compatibility evaluations (4 PASS, 1
+  FAIL, 1 BLOCKED_MISSING_DATA), 7 open ODRs (registered ODR-004..010), and 24
+  deterministic release blockers. 54/54 tests pass (40 M10 + 14 Platform 001); the
+  package attack harness is 9/9 BLOCKED; M10 attack/determinism are unchanged.
+  **Honest status: DRAFT_INCOMPLETE — not an approval, not prototype/procurement
+  readiness, not a safety claim.** Next research target: baseline axle weights +
+  GVWR for the donor (ODR-004..006), tied to BQ-27 donor confirmation.
+
+---
+
+## D-014 — M10 final evidence-pack reconciliation: finding-count reconciled; two proven defects (atomicity, O(n) join) corrected
+
+- Date: 2026-07-22
+- Status: Accepted (extends D-013)
+- Context: The owner commissioned a final evidence-pack reconciliation of the M10
+  adversarial verification (10 numbered items), forbidding architecture change
+  unless a *new reproducible defect* is found, and forbidding M11 / any HIL claim.
+- Decision: Produced `engine/EVIDENCE_PACK.md` answering all 10 items with
+  reproducible evidence. (1) Reconciled the count: **6 finding groups (root causes)
+  spanning 7 probes** — the state-machine group covers A1+A2. (2) Full A1–A12 matrix
+  (setup, attack op, baseline vs final, corrective path, linked test). (3)–(4)
+  Recorded exact commit/branch/status and verbatim `migrate/verify:attack/
+  verify:determinism/verify:perf/test/build` outputs. (5) Documented benchmark
+  methodology (env, dataset, 1,000-iteration median/p95, `EXPLAIN QUERY PLAN`),
+  which **exposed a proven defect**: the benchmarked join planned `SCAN rc` → O(n).
+  (6) Documented the EvidenceLedger threat model (detects deletion/reorder/mutation
+  within a trusted writer; does NOT prove authorship; PKI + external anchoring
+  deferred). (7) Identified the VIN finding as `IndividualVehicle.vin TEXT`
+  (nullable, un-indexed) in `001`, fixed by the partial unique index in `003`. (8)
+  Verified and **corrected the atomicity defect** (finding M1): `applyTransition`/
+  `activate`/`aggregate` issued multiple un-wrapped writes; added a nestable
+  SAVEPOINT `atomic()` helper so transition + status + ledger (and the runout
+  snapshot) commit or roll back as one unit, proven by a new rollback test. Because
+  both the O(n) join and the atomicity gap were *proven reproducible defects*, they
+  were corrected: `migrations/004_join_indexes.sql` (two non-semantic FK indexes)
+  and the `atomic()` wrapper — no rule, result, or state semantics changed.
+- Consequences: 40/40 tests pass (was 39; +1 M1 rollback test); post-004 the join
+  is fully index-driven (100k per-query ~16.5 ms → ~0.013 ms); `VERIFICATION_REPORT.md`
+  M1/R5/Phase-6 updated. **M11 not started; no HIL/physical-safety claim; ODR-001..003
+  still open; seed still 0 approvals/0 passes.** Honest status unchanged: prototype-grade,
+  deterministic, tamper-evident records foundation — not production-grade.
+
+---
+
+## D-013 — M10 adversarial verification (directive_04): 6 findings, 5 fixed by DB hardening, 1 residual; prototype-not-production
+
+- Date: 2026-07-22
+- Status: Accepted (extends D-011/D-012)
+- Context: The owner commissioned an independent adversarial verification
+  (directive_04) to break the bounded M10 rule engine, requiring reproducible,
+  evidence-based findings and forbidding redesign unless a flaw is proven.
+- Decision: Built a runnable adversarial harness (`engine/verify/attack.ts`,
+  `perf.ts`, `determinism.ts`; npm scripts `verify:attack/perf/determinism`) that
+  probes the live engine. It found **6 real weaknesses** — **Critical:** the
+  authorization state machine + activation preconditions were enforced only in the
+  service layer, so a direct SQL write bypassed them (A1/A2); **High:** NULL-session
+  single-active was racy (A6) and the cryptographic evidence chain was defined but
+  unenforced (A12); **Medium:** a revoked runout release could be resurrected (A4)
+  and VIN was non-unique (A8). Because these flaws were *proven*, they were
+  corrected by DB-level hardening (`migrations/003_hardening.sql`): a data-driven
+  state-transition trigger, an activation-precondition trigger, an
+  initial-status-insert guard, NULL-safe single-active triggers, revoked-runout +
+  RunoutAggregationResult immutability triggers, a `vin` unique index, and an
+  append-only `EvidenceLedger` with a `verifyLedgerChain()` routine wired into
+  every authorization transition. **One residual finding (A9 — expiry trusts a
+  caller-supplied clock) is accepted-risk / M10.1** (needs an attested time source).
+  Adopt the honest verdict: **prototype-grade, deterministic, tamper-evident records
+  foundation — NOT production-grade, and NOT an establishment of physical safety.**
+- Consequences: Post-hardening the engine passes 11/12 attack probes (A9 residual),
+  39/39 tests, determinism ALL PASS, and perf is measured to 100k vehicles. The
+  verification report `engine/VERIFICATION_REPORT.md` records severity-rated
+  findings, /100 scores (Architecture 82 · Safety[data-integrity] 80 · Database 85
+  · Enterprise readiness 46 · Production readiness 34), a technical-debt report, a
+  risk register, and a prioritized **M10.1 backlog** (PKI signatures; concurrency
+  WAL/single-writer; extend the ledger to all signed records; transaction-wrap
+  aggregate/activate; attested time; telemetry ingestion + archival; integer-mm
+  geometry). M10G SIL, M10H HIL, the broad rev07 baseline M10, ODR-001..003, and
+  M11 remain gated; M11 not started. Recorded in `engine/VERIFICATION_REPORT.md`,
+  `docs/status/IMPLEMENTATION_LEDGER.md` (L-004), and the directive_04 archive.
+
+## D-012 — M10 audit round: self-audit vs owner review_73; honest status is FOUNDATION VERIFIED, not COMPLETE/FROZEN/HIL-READY
+
+- Date: 2026-07-22
+- Status: Accepted (extends D-011)
+- Context: The owner relayed a separate coding-agent M10 implementation draft that
+  over-claimed "M10 Complete / SPECIFICATION FREEZE / HIL READY", plus a 24-point
+  audit (review_73) refusing to accept a pasted narrative as proof and demanding
+  real `migrate/seed/verify/test/build` output, a Revision-07-to-code traceability
+  matrix, gap-fixes, and a caution against overclaiming — with "do not start M11".
+  The audit target for THIS repo is the actual `engine/` implementation (L-002),
+  not the coding-agent draft.
+- Decision: Perform the self-audit against all 24 points and record it honestly.
+  (1) Confirm the engine runs — all five completion-criteria scripts PASS
+  (re-runnable). (2) Resolve the genuine gaps that applied to `engine/`:
+  `IndividualVehicle 1:N VehicleBuild` (pt 5); `previous_cell_signed_result_id` FK
+  (pt 7); `proof_artifact_id` + ARTIFACT_DEFINED SQL CHECK (pt 8); geometry
+  `value ≈ end−start` CHECK moved into SQL (pt 9); `distance_component_type` enum +
+  required-category verification (pt 10); spatial-overlap + circular-nesting
+  detection (pt 11); DB partial-unique index for single-active (pt 15);
+  RunoutAggregationComponent snapshot append-only (pt 17); paired-fault
+  `fault_1_id/fault_2_id` FK → FaultDefinition (pt 20) — each with a test.
+  (3) Classify the remainder (traceability matrix in `engine/IMPLEMENTATION_REPORT.md`);
+  TelemetryLog payload validation (pt 19) is DEFERRED_WITH_BLOCK. (4) **Adopt the
+  honest status: `M10 IMPLEMENTATION FOUNDATION VERIFIED (bounded)` — NOT
+  `M10 COMPLETE`, NOT `DATABASE FROZEN`, NOT `HIL READY`.** Full M10 freeze remains
+  pending M10G SIL + M10H HIL + owner sign-off. **Do NOT start M11.**
+- Consequences: Confirms the Build Engine's `engine/` never over-claimed (L-002
+  already read "M10A–M10F verified; M10G/H pending"); the audit hardened the schema
+  (FKs, CHECKs, partial index, snapshot immutability) and added tests (25 → 31). No
+  software test proves hardware safety; successful software verification may permit
+  engineering review for M11 data population and later HIL-readiness planning only.
+  Recorded in `engine/IMPLEMENTATION_REPORT.md` (audit + traceability matrix),
+  `docs/status/IMPLEMENTATION_LEDGER.md` (L-003), `docs/roadmaps/M10_RULE_ENGINE_FOUNDATION.md`,
+  and the batch_77/review_73 archives. Supersedes nothing.
+
+## D-011 — Owner opens the M10 gate for the Gate 05M-C3 Deterministic Rule Engine Foundation (bounded scope)
+
+- Date: 2026-07-21
+- Status: Accepted (extends D-010)
+- Context: Following D-010 (ingestion complete; M10 directed but gate not opened),
+  the owner explicitly chose to **build M10 in this session now**. Opening M10 is a
+  formal phase transition that this entry records transparently (not silently).
+  Note the pre-existing `M10_IMPLEMENTATION.md` roadmap defines a **broader** M10 —
+  implementing the entire Revision 07 baseline schema set — whose entry conditions
+  (full `rev07/00_BASELINE_INDEX.md` consolidation + explicit owner resolution of
+  ODR-001..ODR-003) are **NOT met**.
+- Decision: Open a **bounded** M10 scope only — the **Gate 05M-C3 Deterministic
+  Rule Engine Foundation** of owner directive_03, whose source specification (Gate
+  05M-C3 Revision 08, RC-313..425) **is** frozen and complete. This scope is
+  buildable now without inventing engineering values or resolving ODRs, because it
+  implements the *governance/enforcement structure* (schemas, state machines,
+  runout math, append-only ledger, config-lock, block reasons), not any
+  vehicle-specific engineering value. Explicitly still gated / NOT part of this
+  scope: (a) resolving ODR-001..ODR-003; (b) implementing the broad Revision 07
+  baseline modules (`M10_IMPLEMENTATION.md`) — those remain pending their entry
+  conditions; (c) any real approval, `SIGNED_PASS`, or engineering value — seed
+  data contains none (RC-355/389); (d) M11. The active roadmap for the bounded
+  scope is `M10_RULE_ENGINE_FOUNDATION.md`.
+- Consequences: Lifts the "no production code / no M10" bar **only for the bounded
+  Gate 05M-C3 rule-engine scope**. The rule engine is the mechanical enforcement of
+  the Engineering Constitution — Article I (immutable evidence → append-only
+  ledger), Article III (no AI authority), Article IV (deterministic state machines),
+  Article V (configuration locking), Article VI (version everything → versioned
+  migrations), Article VII (unknown data has no authority → `INITIAL_TARGET_PROFILE`
+  cannot authorize). Building it strengthens, rather than bypasses, the guardrails.
+  Updates `CLAUDE.md`, `AI_INSTRUCTIONS.md`, `CURRENT_PHASE.md` (transparently, this
+  entry as the record). Code lives under `engine/`. Nothing Confirmed; no
+  engineering values invented; ODRs untouched. Recorded in `CLAUDE.md`,
+  `docs/AI_INSTRUCTIONS.md`, `docs/status/CURRENT_PHASE.md`,
+  `docs/roadmaps/M10_RULE_ENGINE_FOUNDATION.md`,
+  `docs/status/IMPLEMENTATION_LEDGER.md`.
+
+## D-010 — Rev 07 ingestion sequence complete; Gate 05M-C3 Rev 08 frozen as the M10 source spec; owner directs the M10 phase (gate NOT yet opened)
+
+- Date: 2026-07-21
+- Status: Accepted (phase-transition recorded; M10 execution pending a formal gate)
+- Context: The Research Hunter "N:75" ingestion sequence reached its terminal
+  delivery "75:75" (owner directive_03). Unlike batches 1–74, "75:75" carries no
+  Gate 05M-C3 schema draft and no review verdict — it is an owner phase-transition
+  directive declaring the ingestion phase complete and directing **M10 —
+  Deterministic Rule Engine Foundation** as the next milestone (M10A schema
+  normalization → M10H HIL readiness), with a table list, hard-block rules +
+  machine-readable block reasons, the canonical `L_min` equation "in code", a
+  coding-agent prompt, required negative tests, and `npm run migrate/seed/verify/
+  test/build` completion criteria. This intersects a standing guardrail: the
+  Engineering Constitution, `CLAUDE.md`, and `AGENTS.md` forbid production code and
+  M10 work during the Rev 07 ingestion phase (active roadmap
+  `REV07_SOURCE_INGESTION.md`).
+- Decision: (1) Record that the Rev 07 ingestion batch sequence is **complete
+  (75/75)**. (2) Designate **Gate 05M-C3 Revision 08**
+  (`GATE05M_C3_CLOSED_AREA_MOVEMENT.md`, RC-313..425) as the **frozen source
+  specification** for M10 (the owner's directive names "Revision 07"; the
+  deliverable carries those rules through Revision 08). (3) Archive the M10
+  directive 1:1 (`owner_directives/directive_03_m10_rule_engine_phase.md`) and
+  capture the owner's M10 plan as the **plan-of-record**
+  (`docs/roadmaps/M10_RULE_ENGINE_FOUNDATION.md`). (4) **Do NOT begin M10 production
+  code from this session.** Opening the M10 phase is a formal governance transition
+  requiring: the active-roadmap pointer to move from `REV07_SOURCE_INGESTION.md` to
+  the M10 roadmap; a proposed update to the `AI_INSTRUCTIONS.md` operating manual +
+  the `CLAUDE.md` "no M10 / no production code" rule (proposed, never silently
+  rewritten — Constitution); and explicit owner confirmation of who executes the
+  build (the directive routes the prompt to "your coding agent"). Until that gate is
+  opened, M10 remains PLANNED / NOT STARTED.
+- Consequences: Closes the ingestion phase's batch intake and freezes the Gate
+  05M-C3 governance specification (RC-313..425) as the authority M10 will implement.
+  Binds the M10 build — whenever opened — to the frozen doctrine: database first,
+  no AI authority, `INITIAL_TARGET_PROFILE` has no movement/pass/fail/release
+  authority (RC-267/412), append-only signed evidence (RC-374/410/422/423),
+  separated authorization/execution/result statuses (RC-371/387/408), cross-record
+  configuration equality (RC-409/421/425), a machine-readable block reason per
+  rejection, and nothing "certified safe" (RC-224). Sets M11 (Platform 001 Open
+  Data Register + Supplier Closure) as the phase after M10. Supersedes nothing;
+  does not by itself lift the no-M10 guardrail — that requires the owner to open the
+  gate. Recorded in `docs/roadmaps/M10_RULE_ENGINE_FOUNDATION.md`,
+  `docs/research/raw/owner_directives/directive_03_m10_rule_engine_phase.md`,
+  `docs/research/RESEARCH_MAP.md`, `docs/research/raw/research_hunter/PROVENANCE.md`.
+
+## D-009 — Fault-record & error-library architecture: layered identity, four-layer library, similarity-is-review-only
+
+- Date: 2026-07-21
+- Status: Accepted
+- Context: The owner directed (owner directive_02, side-bar) that the finished
+  Build Engine must never emit a bare conclusion ("Error: torque too high") and
+  must instead record faults as structured, configuration-bound evidence, with a
+  layered vehicle identity and an error library that does not blindly reuse
+  findings across platforms. This formalizes doctrine already emerging from the
+  Test Configuration Lock Rule (RC-325), the Test Result Validity Rule
+  (RC-339/353), the Telemetry Synchronicity Packet (RC-326), platform separation
+  (D-006), and the "arrow is a review path, not authorization" rule (RC-361).
+- Decision (doctrine only — NOT production code / NOT M10 during Rev 07
+  ingestion; captured in `docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md`):
+  1. **A fault is structured evidence, not a bare conclusion (RC-364):** every
+     fault is a `FaultRecord_ID` binding the observation to the platform +
+     conversion configuration + the Telemetry Synchronicity Packet (RC-326) + an
+     explicit "applicable only to this configuration / not automatically to a
+     different year/inverter/axle/tire/firmware/mass" envelope. A fault record is
+     a result that happened to be a failure and inherits RC-325/339/353.
+  2. **Multi-level vehicle identity hierarchy (RC-365):** `VehicleFamily_ID` →
+     `Platform_ID` → `VehicleConfiguration_ID` → `ConversionPackage_ID` →
+     `IndividualVehicle_ID` → `TestConfiguration_ID` → `FaultRecord_ID`. Same
+     family ≠ same configuration; same model year ≠ same axle/brake/CAN layout;
+     same conversion package ≠ same physical vehicle; same fault code ≠ same root
+     cause (generalizes D-006).
+  3. **Four-layer error library (RC-366):** layer 1 fault *definitions* are
+     reusable concepts; layers 2 (platform manifestations), 3 (individual fault
+     events), and 4 (lessons + prevention rules) are configuration-bound and
+     never reused by default; layer-4 prevention rules are engineering-approved
+     only.
+  4. **Similarity is a routing input to engineering review, NEVER an
+     authorization (RC-367):** a similarity/applicability score sorts prior
+     records into `REUSABLE_WITHOUT_MODIFICATION` / `REUSABLE_AFTER_VERIFICATION`
+     / `CANDIDATE_REFERENCE_ONLY` / `NOT_APPLICABLE` / `CONFLICTING_EVIDENCE`, but
+     never self-authorizes reuse (extends RC-361/282); the score itself is a
+     candidate value under the Numeric Threshold Authority Rule
+     (RC-267/293/300).
+  5. **VIN/label scans seed the upper IDs only (RC-368):** VIN decodes
+     family/platform, the FMVSS certification label gives GVWR/GAWR + OE
+     tire/pressure + build date; neither reveals calibration/firmware hashes,
+     measured mass/axle loading, current tire condition, or the conversion
+     package — so `ConfigurationPacket_ID` / `TestConfiguration_ID` must be
+     independently measured, never inferred from the label (RC-325 proves; the
+     scan proposes).
+- Consequences: Binds all future fault-recording, error-library, and
+  cross-vehicle-applicability work; no fault finding auto-applies across a
+  configuration boundary. All example IDs / envelopes / similarity percentages
+  in the directive are `INITIAL_TARGET_PROFILE` placeholders — no invented
+  values ingested; donor 7.3L gas (001A) still to confirm (BQ-27). Recorded in
+  `docs/doctrine/FAULT_LIBRARY_ARCHITECTURE.md`; source directive archived 1:1 at
+  `docs/research/raw/owner_directives/directive_02_fault_record_error_library_architecture.md`.
+  Supersedes nothing; extends D-006 and RC-325/326/339/353/361.
+
+## D-008 — Staged post-bench gate ladder to HV: no jump to live commissioning
+
+- Date: 2026-07-16
+- Status: Accepted
+- Context: Through the Gate 05I low-voltage bench series (05I-A logic → 05I-B
+  interlocks → 05I-C comms/sleep-wake → 05I-D integrated fault cascades), the
+  Hunter's Gate 05I-D exit language read "the low-voltage bench assembly is
+  certified safe for installation into the physical vehicle chassis,
+  initiating the physical commissioning phases." In owner review_48 the owner
+  rejected "certified safe" and the direct jump from bench to live
+  commissioning, and defined a staged, gated path instead.
+- Decision: The path from the low-voltage bench to high voltage is a
+  **staged ladder, each stage engineer-gated**:
+  1. **Gate 05I-D** completion permits **engineering review for controlled
+     low-voltage vehicle fitment only** — never "certified safe," and it does
+     not authorize live HV, vehicle movement, road testing, chassis-dyno
+     testing, customer operation, factory Ford bus transmission, or
+     compliance/certification claims.
+  2. **Gate 05J — Controlled Vehicle Fitment / No-HV Installation
+     Readiness:** install the VCU/harness physically; **no HV battery, no
+     traction enable**; CAN_1 listen-only; verify grounds/shields, connector
+     routing, no chafing, service access, LOTO, 12 V parasitic draw in the
+     chassis, no Ford bus disturbance.
+  3. **Gate 05K — Low-Voltage Vehicle Power-On / No-HV Commissioning** — no
+     HV, and **no real HV contactor closure** (coils disconnected / dummy
+     loads / mechanically blocked, RC-236).
+  4. **Gate 05L — Controlled HV First-Energization** — engineer-approved
+     only, after 05J + 05K, with a staged safety plan + LOTO/PPE (RC-117).
+     Split into **05L-A** (authorization & safety readiness — no energization)
+     → **05L-B** (controlled HV first-energization / current-limited pre-charge
+     observation) per the review_50/51 amendment below.
+- **Amendment (owner review_50, batch_53, RC-237): Gate 05L splits — the
+  05L rung must not open with "exact HV pre-charge timing."** It begins with
+  **Gate 05L-A — HV First-Energization Authorization & Safety Readiness**, a
+  pre-energization authorization gate (qualified HV personnel · written test
+  plan · LOTO · PPE + insulated tools · emergency-stop plan · rescue/emergency
+  response plan · fire watch/exclusion zone · absence-of-voltage verification
+  · HV connector/cable inspection · isolation-monitor readiness · pre-charge
+  ownership confirmation · contactor ownership confirmation · test-instrument
+  calibration · supplier documentation · hard-stop conditions · proof
+  artifacts · signoff), with **no final pre-charge/voltage/insulation/
+  contactor timing unless supplier docs or engineering review provide them**.
+  Only after 05L-A does the actual energization sequence get detailed. Owner
+  cited OSHA LOTO (authorized-employee lockout; circuits energized until
+  LOTO/de-energize/ground; only qualified persons on energized parts) + NHTSA
+  EV HV-hazard guidance (NeedsExactSource — owner-paraphrased, not archived).
+- **Amendment (owner review_51, batch_54, RC-238..244): Gate 05L-A created
+  (`GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md`) — authorization only, no
+  energization; the energization step is Gate 05L-B.** 05L-A itself does not
+  energize: personnel are qualified/authorized (not "certified", RC-238), PPE
+  is voltage-matched and the gate blocks above rating (RC-239), fire assets are
+  AHJ/supplier-ERG-selected (RC-240), Live-Dead-Live uses an approved proving
+  source with a resolution-aware threshold (RC-241), a stored-energy discharge
+  wait guards DC-link caps (RC-242), IMD thresholds are supplier-defined
+  (RC-243), and the pre-charge test is low-voltage-only with no DC-link rise
+  (RC-244). **Gate 05L-B — Controlled HV First-Energization / Current-Limited
+  Pre-Charge Observation** is attempted only after a signed Gate 05L-A
+  authorization; it starts with a supplier-defined pre-charge target/timeout +
+  current-limited setup + remote observation, and no vehicle movement /
+  wheels-on-ground drive / road test / traction command / customer operation.
+- **Amendment (owner review_52, batch_55, RC-245..251): Gate 05L-B created
+  (`GATE05L_B_HV_FIRST_ENERGIZATION.md`) — the first gate with LIVE HV PRESENT,
+  observational only (no inverter switching, zero motor RPM); insert Gate 05L-C
+  before any motor spin.** 05L-B thresholds (95%/500 ms/50 ms/60 V/5% ΔV) are
+  initial bench targets pending supplier docs + engineering review (RC-245);
+  the contactor sequence is supplier-specific (RC-246); the VCU is
+  requester/monitor while the BMS/PDU owns contactor/pre-charge execution and
+  the hardwired loop owns emergency interruption (RC-247); "current-limited"
+  requires a real current-limit definition or 05L-B stays blocked (RC-248); a
+  manual E-stop abort path must be proven (RC-249); IMD thresholds
+  (candidate 100/500 Ω/V) pend the supplier manual + FMVSS 305/ISO 6469-3
+  (RC-251). **The ladder gains Gate 05L-C — Controlled HV Shutdown, Discharge,
+  and Re-Energization Repeatability** (normal + emergency shutdown,
+  stored-energy discharge, restart lockout, pre-charge retry limits, IMD fault
+  response, contactor-feedback consistency, no weld false negatives,
+  repeat-cycle stability). **Gate 05M (Traction Inverter Control Loop /
+  Low-Speed Spin) is deferred — NOT before 05L-C** (RC-250). Full ladder:
+  05J → 05K → 05L-A → 05L-B → 05L-C → (later, engineer-approved) 05M.
+- **Amendment (owner review_53, batch_56, RC-252..259): Gate 05L-C created
+  (`GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md`) — live-HV, zero motor RPM; and the
+  05M traction phase is STAGED.** 05L-B/05L-C thresholds are target profiles
+  pending supplier docs + engineering review (RC-252); the E-stop dropout is
+  measured not "instant" (RC-255); the V_caps=0.0 V and inverted-timeout
+  wordings are fixed (RC-253/254); IMD fault injection uses an approved
+  current-limited fixture only — never an ad-hoc resistor on a live rail
+  (RC-256); the contactor shutdown sequence is supplier-specific (RC-257); weld
+  detection splits into false-positive (005A) + false-negative (005B) checks
+  (RC-258). **The 05M rung splits: 05M-A (Inverter Enable Readiness /
+  Zero-Torque Validation) → 05M-B (No-Load Motor Spin Validation) → 05M-C
+  (Controlled Low-Speed Traction Readiness); the first 05M gate proves inverter
+  enable with ZERO torque and ZERO rotation before any spin — not "low-speed
+  traction"** (RC-259). Full ladder: 05J → 05K → 05L-A → 05L-B → 05L-C → 05M-A
+  → 05M-B → 05M-C (each engineer-approved).
+- **Amendment (owner review_54, batch_57, RC-260..266): Gate 05M-A created
+  (`GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md`) — inverter enable readiness /
+  zero-torque, HV bus live but readiness NOT spin.** All 05L-B/05L-C/05M-A
+  numbers are target profiles (RC-260); the pre-charge curve is judged against
+  a supplier envelope, not a perfect RC curve (RC-261); the E-stop path allows
+  no automatic retry ever (RC-262); the inverter enabled/ready/PWM-active state
+  is supplier-specific with no assumed 0% PWM and no power-stage switching
+  unless the supplier defines it safe + engineering approves (RC-265); 05M-A is
+  readiness not spin, and 05M-B is the first controlled no-load spin (RC-266).
+  Regression watch: the Hunter re-emitted the 05L-C shutdown-order (RC-257) and
+  IMD-fixture (RC-256) wording unfixed — recorded as RC-263/264, the strongest
+  M10 regression-scanner cases; the `GATE05L_C_*` deliverable already held the
+  corrected wording.
+- **Amendment (owner review_55, batch_58, RC-267..272): Gate 05M-B created
+  (`GATE05M_B_NO_LOAD_MOTOR_SPIN.md`) — first physical rotation, motor
+  uncoupled/guarded; global target-profile rule + strengthened spin boundary.**
+  All 05L-B/05L-C/05M-A/05M-B numbers are INITIAL_TARGET_PROFILE, with no gate
+  authority until tied to supplier docs + engineering review + test-instrument
+  method + raw proof artifact + signed approval (RC-267); the 05L-C shutdown
+  order is supplier-defined with a command↔aux-contact feedback-mismatch block
+  (RC-268, third recurrence of RC-257); the pre-charge RC curve is a comparison
+  model only (RC-269, second recurrence of RC-261); 05M-A uses supplier
+  tolerance thresholds not perfect zero (RC-270) and never says "Ready-to-Drive"
+  (RC-271); **Gate 05M-B requires a guarded rotating shaft, no driveline
+  attachment, no wheel torque path, no vehicle-movement path, E-stop +
+  exclusion zone active, a supplier-defined spin profile only, and no cabin
+  driver pedal authority** (RC-272). Regression watch: the 05L-C shutdown-order
+  rule has recurred THREE times (RC-257→263→268) and the RC curve TWICE
+  (RC-261→269) — the strongest M10 regression-scanner cases; the deliverables
+  already hold the corrected wording. Full ladder unchanged: 05J → 05K → 05L-A
+  → 05L-B → 05L-C → 05M-A → 05M-B → 05M-C (each engineer-approved).
+- **Amendment (owner review_56, batch_59, RC-273..278): the Numeric Threshold
+  Authority Rule is formalized and Gate 05M-C is SPLIT into 05M-C1 → 05M-C2 →
+  05M-C3.** All 05L-B/05L-C/05M-A/05M-B numbers are INITIAL_TARGET_PROFILE with
+  no gate authority until tied to supplier documentation + engineering review +
+  **calibrated measurement method** + raw proof artifact + signed approval
+  (RC-267 formalized). No-absolute-zero/"immediate" wording is removed:
+  05L-B-005 uses the supplier OFF state below the approved off-state leakage
+  threshold (RC-273); 05L-C-004 uses the supplier-defined IMD/BMS/PDU response
+  window (RC-274); 05M-A never says "Ready-to-Drive" (RC-275, a recurrence of
+  RC-271); 05M-B watchdog treats coasting as acceptable and only "still
+  powered" as the failure (RC-276); the 05M-B over-speed test uses a
+  supplier-supported test mode / pre-approved calibration profile, never a live
+  safety-limit edit during rotation (RC-277). **Gate 05M-C splits: 05M-C1
+  (Coupled Driveline Static / Lifted-Wheel Readiness — wheels lifted; proves
+  coupling, backlash, wheel-speed sensing, brake override, torque clamp) →
+  05M-C2 (Restricted Creep Torque Validation) → 05M-C3 (Controlled Closed-Area
+  Low-Speed Movement); no open-floor movement before 05M-C1 proves the coupled
+  mechanical/sensing/safety layer with the wheels lifted** (RC-278). Full
+  ladder: 05J → 05K → 05L-A → 05L-B → 05L-C → 05M-A → 05M-B → 05M-C1 → 05M-C2
+  → 05M-C3 (each engineer-approved).
+- **Amendment (owner review_57, batch_60, RC-279..283): Gate 05M-C1 created
+  (`GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`) — first coupled test, driven axle
+  LIFTED with zero ground contact; hard rotating-machinery + lift safety
+  rules.** **No manual restraint of rotating parts — rated mechanical wheel
+  restraint / differential / hub-locking fixture only, no hands near rotating
+  wheels/shafts/hubs/belts/couplers ever (RC-279).** The **Lifted Chassis
+  Safety Rule (RC-280)** — 05M-C1 runs only on a rated chassis lift or rated
+  heavy-duty stands approved for the vehicle GVWR/axle load, secured against
+  roll, suspension droop accounted for, wheel-rotation zones guarded, no
+  personnel inline with rotating tires/shafts/hubs, and **no person under the
+  vehicle while energized rotation tests are active**. Brake override is within
+  the approved response window, not "instantly" (RC-281); **wheel-speed data is
+  read-only / verification only — factory ABS/ESC never becomes traction-control
+  authority without Ford-authorized documentation + engineering review
+  (RC-282)**; Gate 05M-C2 (first ground contact) uses a flat, controlled, closed
+  surface with predictable traction, runout, chocks/barriers, spotters outside
+  the path, and a remote E-stop — never a default low-friction surface (RC-283,
+  a separate future gate if ever tested).
+- **Amendment (owner review_58, batch_61 "59A", RC-284..288): Gate 05M-C2
+  created (`GATE05M_C2_RESTRICTED_CREEP.md`) — the first powered ground-contact
+  movement gate — and SPLIT into 05M-C2A/B/C.** Torque ramp rate is
+  `dT_command/dt` (not `dQ/dt`), acting on VCU torque output not raw pedal slope
+  (RC-284); a **Ground Movement Precondition** gates every creep command —
+  service-brake + brake-assist + steering-assist verified, E-stop armed + remote
+  active, spotters + runout clear, torque clamp + ramp-rate limit active, and
+  the engineer/test-lead's explicit start authorization (RC-285); Gate 05M-C2
+  splits **05M-C2A (Flat-Ground Restricted Creep) → 05M-C2B (Controlled Incline
+  / Rollback Hold) → 05M-C2C (Faulted Creep Recovery)**, with rollback/incline
+  deferred out of the first ground-contact gate (RC-286); breakaway torque above
+  the clamp triggers `NEEDS_REVIEW` / `MECHANICAL_BINDING_CHECK`, not an
+  automatic "binding" diagnosis (RC-287); "absolute 0 Nm" → the supplier-defined
+  zero-torque threshold and "instantly" → the supplier-approved response window
+  (RC-288). **Regression watch: the Hunter re-emitted the 05M-C1-005
+  "hand-lock one lifted wheel" line (RC-279 — SAFETY-CRITICAL) and re-defaulted
+  the low-friction surface (RC-283); the deliverables already hold the corrected
+  wording.** Full ladder: 05J → 05K → 05L-A → 05L-B → 05L-C → 05M-A → 05M-B →
+  05M-C1 → 05M-C2 (05M-C2A → 05M-C2B → 05M-C2C) → 05M-C3 (each engineer-approved).
+- **Amendment (owner review_59, batch_62 "60:60", RC-289..291): Gate 05M-C2
+  cleanups — evidence columns, fault recovery, and no auto speed-unlock.** The
+  05M-C2 matrix carries Proof Artifact + Authority Status + Build Engine Status
+  columns like earlier gates (RC-289); a failed-creep / motion-related fault
+  stays blocked until diagnostic review + fault-source correction + approved
+  service clear + engineering/test-lead authorization — a hard reset alone must
+  not clear it (RC-290); Gate 05M-C2 completion does NOT automatically "unlock
+  15 km/h" — it permits engineering review for Gate 05M-C3 only, and any speed
+  ceiling stays INITIAL_TARGET_PROFILE until engineering-approved (RC-291).
+  **Full-draft regression watch:** the batch_62 Hunter re-emit of Gate 05M-C2
+  reverted EVERY review_58 correction at once (RC-279 safety-critical +
+  RC-283/284/286/288) — the strongest M10 regression-scanner case; the
+  `GATE05M_C2_*` + `GATE05M_C1_*` deliverables already hold the corrected
+  wording and did NOT regress.
+- **Amendment (owner review_61, batch_64 "62:75", RC-292..296): Gate
+  05M-C2A/05M-C2B pre-baseline cleanups — regression cleared.** After three
+  batches (batch_62/63) of re-emitting the same defects, the Hunter finally
+  applied all eight prior fixes (hand-lock removed, `dT_command/dt`, zero-torque
+  threshold, response-window E-stop/neutral, diagnostic-review fault latch,
+  rollback split to a PROVISIONAL 05M-C2B, Proof/Authority/Build-Engine-Status
+  columns, no auto-15-km/h). Five new cleanups baseline the split gate: the
+  Authority Status column names a `Required Approver` with `SIGNOFF_REQUIRED /
+  NOT_EXECUTED` + `Build Engine Status: PENDING_EXECUTION` — never "Approved by"
+  (no test executed, RC-292); the Numeric Threshold Authority Rule governs every
+  05M-C2A/C2B value (RC-293); 15–25 Nm breakaway is an EXPECTED range, not a
+  pass envelope — out-of-range → NEEDS_REVIEW, not auto-fail (RC-294);
+  measurable thresholds replace "absolute control"/"completely active" (RC-295);
+  static brake-hold uses a displacement threshold, not "completely hold static"
+  (RC-296). 05M-C2A status adds `REQUIRED_APPROVERS_DEFINED` +
+  `PROOF_ARTIFACTS_DEFINED`; 05M-C2B status = `PROVISIONAL_LOCKED /
+  UNLOCKS_ONLY_AFTER_05M_C2A_SIGNOFF / CONTROLLED_INCLINE_ONLY /
+  ROLLBACK_LIMITS_SUPPLIER_OR_ENGINEERING_APPROVED / …`. Owner: 05M-C2A/C2B is
+  "clean enough to baseline"; next = Gate 05M-C3 with speed/ramp
+  `INITIAL_TARGET_PROFILE` only (RC-291/293).
+- **Amendment (owner review_63, batch_66 "64:75", RC-297..306): Gate
+  05M-C2A/05M-C2B reach baseline-candidate — record-integrity + measurement
+  authority.** The Hunter applied the framing corrections (bounded fault
+  injection RC-297; brake/steering pre-movement interlock RC-298) and the owner
+  added eight verdict corrections: the approval record splits into four fields
+  so procedure approval ≠ result signoff — `Required Approver` / `Procedure
+  Approval Status` / `Execution Status` / `Result Signoff Status`, a GLOBAL
+  Build Engine rule, and no `SIGNED_PASS` until `EXECUTED` (RC-299); the Numeric
+  Threshold Authority Rule links every value to source/calc + config +
+  calibrated method + uncertainty + proof + procedure revision + signed
+  authorization (RC-300); the clamp is renamed the software "Restricted Creep
+  Torque Clamp", not a "hard/absolute clamp" (RC-301); zero-torque needs
+  dual-channel APPS plausibility (RC-302); torque-rate and phase-current-response
+  are validated separately (RC-303); CAN_1 passivity is defined electrically
+  (RC-304); 05M-C2B gains a Rollback Containment Rule and hill-hold ≠
+  parking-hold (RC-305); and a new 05M-C2A-010B test proves the assistance
+  interlock actually inhibits torque (RC-306). 05M-C2A status adds
+  `BASELINE_CANDIDATE / PROCEDURE_REVIEW_REQUIRED / BRAKE_ASSIST_INTERLOCK_REQUIRED
+  / STEERING_ASSIST_INTERLOCK_REQUIRED / NUMERIC_LIMITS_INITIAL_TARGET_PROFILE /
+  CONTROLLED_FAULT_INJECTION_ONLY / NO_PHYSICAL_PASS_CLAIM_UNTIL_EXECUTED`;
+  05M-C2B adds `UNLOCKS_ONLY_AFTER_C2A_SIGNED_PASS / ROLLBACK_CONTAINMENT_PLAN_REQUIRED
+  / SECONDARY_RESTRAINT_REQUIRED / TEMPORARY_HILL_HOLD_ONLY /
+  PARKING_HOLD_AUTHORITY_NOT_GRANTED`. Post-edit label:
+  `GATE_05M_C2A_C2B_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — a procedure
+  baseline, NOT evidence the physical vehicle has passed (nothing Confirmed).
+  Next = Gate 05M-C3 with speed/ramp under engineering manual + proof artifacts
+  only (RC-291/293/300).
+- **Amendment (owner review_64, batch_67 "65:75", RC-307..312): Gate
+  05M-C2A/05M-C2B procedure baseline — final make-it-impossible-to-misread
+  pass.** The Hunter converged on all of RC-297..306 (incl. the split
+  05M-C2A-005A/005B rows); the owner added six corrections plus a new
+  `INVALID_TEST` signoff value (RC-299 ext.): the APPS preconditions read "within
+  their approved operating windows", not "completely valid" (RC-307);
+  phase-current response is judged against the supplier tracking envelope with
+  expected latency/filtering/bandwidth included, not "without lagging" (RC-308);
+  the E-stop forces the supplier-defined torque-inhibit + HV-isolation response,
+  contactor coil-supply interruption only where the architecture requires it —
+  not a universal rule (RC-309); Neutral is defined by zero propulsion torque,
+  not a universal ban on bridge switching (RC-310); 05M-C2B gains a rollback
+  abort rule — exceed the approved distance/speed → latch `FAIL`/`NEEDS_REVIEW`,
+  no automatic second attempt (RC-311); and the brake-hold uses the "approved
+  test torque profile" (≤10 Nm), not "full torque application" (RC-312). 05M-C2A
+  upgrades `PROCEDURE_REVIEW_REQUIRED` → `FORMAL_ENGINEERING_REVIEW_REQUIRED` and
+  adds `DUAL_CHANNEL_APPS_PLAUSIBILITY_REQUIRED / CAN_1_ELECTRICALLY_PASSIVE_ONLY
+  / PROCEDURE_APPROVAL_REQUIRED / EXECUTION_NOT_YET_PROVEN /
+  RESULT_SIGNOFF_NOT_YET_ELIGIBLE`; 05M-C2B adds `ROLLBACK_ABORT_RULE_REQUIRED /
+  PARKING_RESTRAINT_AUTHORITY_NOT_GRANTED`. Post-edit label:
+  `GATE_05M_C2A_C2B_PROCEDURE_BASELINE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — the
+  procedure is ready to be reviewed and controlled, NOT evidence the physical
+  vehicle has passed (nothing Confirmed). Next = Gate 05M-C3, speed/ramp under
+  engineering manual + proof artifacts only (RC-291/293/300).
+- **Amendment (owner review_65, batch_68 "66:75", RC-313..326): Gate 05M-C3
+  (Closed-Area Low-Speed Movement) created as a modular subgate sequence.** The
+  Hunter applied the batch_67 corrections (RC-307..312) globally and delivered
+  Gate 05M-C3 as **five linear subgates** the owner recommended — **05M-C3A
+  Straight-Line Low-Speed Tracking → 05M-C3B Coast-Down + Foundation Brakes →
+  05M-C3C Restricted Regeneration → 05M-C3D Steering-Angle / Propulsion-Envelope
+  Map → 05M-C3E Closed-Area Fault + Abort Sequences** — with strictly linear
+  progression (no unlock without the prior subgate's `SIGNED_PASS`), the
+  Telemetry Synchronicity Packet, and the Critical Abort Hierarchy. Steering
+  angle is an observation/derating input only, NOT torque-vectoring authority
+  (`NO_TORQUE_VECTORING_AUTHORITY`); factory ABS/ESC stays authoritative
+  (`NO_ACTIVE_ABS_ESC_AUTHORITY`); a path deviation / software fault must not
+  auto-open HV contactors unless the approved architecture dictates. The owner
+  added 14 corrections (RC-313..326): approved Runout Calculation Record not a
+  hard-coded 50 m (RC-313); cell-by-cell envelope escalation (RC-314); governor
+  proven first off-track (RC-315); split path-deviation observation vs
+  torque-inhibit (RC-316); C3B-004 rewritten so brakes never fight sustained
+  torque, SAFETY-CRITICAL (RC-317); contact thermocouples over IR (RC-318);
+  ABS/ESC two-lane rule (RC-319); no "instant/immediate" regen (RC-320); brake
+  blend continuity/jerk envelope not "linear" (RC-321); remove premature C3D
+  numbers (RC-322); road-wheel geometry not SWA alone (RC-323); C3E cell-based
+  fault escalation (RC-324); Test Configuration Lock Rule (RC-325); telemetry
+  time-synchronization proof (RC-326). Post-edit label:
+  `GATE_05M_C3_PROCEDURE_ARCHITECTURE_READY_FOR_FORMAL_ENGINEERING_REVIEW` — the
+  procedure architecture is ready for disciplined engineering review, NOT
+  evidence the physical vehicle has passed (nothing Confirmed). New deliverable
+  `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`. Full ladder: 05J → 05K →
+  05L-A → 05L-B → 05L-C → 05M-A → 05M-B → 05M-C1 → 05M-C2 (05M-C2A → 05M-C2B →
+  05M-C2C) → 05M-C3 (05M-C3A → 05M-C3B → 05M-C3C → 05M-C3D → 05M-C3E); each
+  engineer-approved, never "certified safe" (RC-224).
+- **Amendment (owner review_66, batch_70 "68:75", RC-327..339): Gate 05M-C3
+  Revision 02 + record-integrity/procedure completions.** The Hunter delivered
+  Gate 05M-C3 Revision 02 (applying RC-313..326) and the owner added 13
+  corrections: complete the RunoutCalculation_ID field list + `L_min` equation
+  (RC-327); C3A-009B stays `LOCKED` until external-tracking control authority is
+  established (RC-328); the torque command is judged against an approved
+  time-domain envelope (torque-rate + jerk), not "linear" (RC-329); BOS torque
+  removal is separate from the foundation-brake stop (RC-330); regen-disabled is a
+  `Regeneration Command State: DISABLED`, not a literal 0 Nm (RC-331); C3C-003 is
+  coexistence observation with true brake blending BLOCKED until modelled
+  (RC-332); regen availability is BMS-permission-bounded, not a generic high SOC
+  (RC-333); no arbitrary internal-bus injection — supplier/HIL/fixture/bounded-sim
+  only (RC-334); C3C-007 has an explicit driver/brake response, no assumed
+  auto-brake (RC-335); the C3D table carries no premature numbers / no "immediate"
+  (RC-336); a steering-signal validity matrix VALID/DEGRADED/IMPLAUSIBLE/
+  UNAVAILABLE/STALE (RC-337); the C3E fault hierarchy is listed L1–L4 (RC-338);
+  and a Test Result Validity Rule binds a signed result to its archived
+  configuration (RC-339). Status upgrades to `PROCEDURE_ARCHITECTURE_MATURE /
+  REVISION_02_APPLIED / … / C3A_EXTERNAL_CONTROL_INTEGRATION_LOCKED / … /
+  FORMAL_ENGINEERING_REVIEW_REQUIRED`. Post-edit label:
+  `GATE_05M_C3_REVISION_02_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` — the
+  procedure architecture is mature, NOT evidence any physical vehicle has passed
+  (nothing Confirmed).
+- **Amendment (owner review_67, batch_71 "69:75", RC-340..350): Gate 05M-C3
+  Revision 03 — formal baseline candidate.** The Hunter delivered Revision 03
+  (applying RC-327..339) and the owner added 11 corrections: insert + govern the
+  actual `L_min` equation (no-double-count rule, `distance_component_method`
+  enum, movement-authorization gate, RC-340); the ±2 Nm zero-regen residual is a
+  candidate, not universal (RC-341); remove the circular C3A→C3B evidence
+  dependency (RC-342); remove "immediate" from the steering states → response
+  windows (RC-343); define `STALE` by signal freshness, not an unchanged value
+  (RC-344); C3A-007 supplier-defined Neutral zero-propulsion envelope (RC-345);
+  C3C-007 explicit fault ownership + comms-loss ≠ verified shutdown (RC-346); C3E
+  `FAULT_EXECUTION_DOMAIN` classification — a listed fault does not authorize
+  physical injection during motion (RC-347); paired/compound-fault prerequisites
+  + order/timing (RC-348); invalidated evidence preserved
+  (`INVALIDATED_FOR_CURRENT_CONFIGURATION`), never cleared (RC-349); and a full
+  `TestCellAuthorization_ID` schema + lifecycle (RC-350). The C3A-009B
+  contradiction fix was already applied via RC-328. Status upgrades to
+  `FORMAL_BASELINE_CANDIDATE / REVISION_03_APPLIED / … /
+  C3E_EXECUTION_DOMAIN_CLASSIFICATION_DEFINED`. Post-edit label:
+  `GATE_05M_C3_REVISION_03_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` — the
+  procedure architecture is ready for controlled multidisciplinary review, NOT
+  evidence physical movement/braking/regen/fault validation has passed (nothing
+  Confirmed).
+- **Amendment (owner review_68, batch_72 "70:75", RC-351..363): Gate 05M-C3
+  Revision 04 — database semantics + authorization hygiene.** The Hunter
+  delivered Revision 04 (applying RC-340..350) and the owner added 13
+  corrections: preserve distance-component values, never zero-clamp overlaps
+  (RC-351); Distance Accounting Integrity Rule + component schema (RC-352); the
+  immutable result lifecycle `SIGNED_RESULT → … → SUPERSEDED_FOR_CURRENT_CONFIGURATION`
+  (RC-353); `TestCellAuthorization` status transition rules — no `DRAFT`→`ACTIVE`
+  jump (RC-354); procedure approval requires a real named-approver signature,
+  otherwise `APPROVAL_REQUIRED` (RC-355); the ±2 Nm residual is strictly
+  non-authoritative + DC-bus current tracked + field-weakening justification
+  removed (RC-356); C3A-006 measures brake input / assist state / hydraulic
+  pressure (RC-357); C3A-009B carries a `BlockReason` + seven unlock prerequisites
+  (RC-358); after inverter comms loss independent physical evidence is required
+  (RC-359); steering validity and freshness are separate axes (RC-360);
+  execution-domain arrows are review paths, not automatic authorization (RC-361);
+  tighter moving brake/steer-assist + aux-voltage fault limits (RC-362); and the
+  full `PairedFaultAuthorization_ID` schema + reverse-order-is-separate rule
+  (RC-363). (Owner item 1, the `L_min` transcription cleanup, was already clean in
+  the deliverable.) Status upgrades to `FORMAL_BASELINE_CANDIDATE /
+  REVISION_04_APPLIED / … / MULTI_FAULT_AUTHORIZATION_SCHEMA_DEFINED`. Post-edit
+  label: `GATE_05M_C3_REVISION_04_READY_FOR_FORMAL_ENGINEERING_BASELINE_REVIEW` —
+  the controlled procedure architecture is ready for multidisciplinary
+  engineering review; it does NOT mean any vehicle / calibration / brake system /
+  regeneration strategy / moving fault test has physically passed (nothing
+  Confirmed).
+- **Amendment (owner review_69, batch_73 "71:75", RC-369..382): Gate 05M-C3
+  Revision 05 — controlled-validation-architecture hardening.** The owner
+  classifies Revision 05 as `FORMAL_ENGINEERING_BASELINE_CANDIDATE` ("the
+  strongest and most internally consistent version yet") and issues 16 items → 14
+  new corrections (owner items 1 & 5 were already clean — RC-340/351 and RC-355):
+  units + hard validation constraints on every numeric authorization field
+  (RC-369); immutable `AuthorizationTransition_ID` audit events + `SUSPENDED →
+  AUTHORIZED` revalidation (RC-370); `COMPLETED` ≠ `SIGNED_PASS`, "`COMPLETED`
+  SHALL NOT CLEAR A GATE" (RC-371); a `RunoutAggregationResult` summary with hard
+  blocks (RC-372); distance boundary ordering + geometry validation (RC-373);
+  append-only evidence — annotations are new linked records (RC-374); the
+  zero-regen residual envelope conditioned by operating state + `ZERO_REGEN_REQUEST`
+  command state (RC-375); C3A-008 separate E-stop outcomes (RC-376); C3C-007
+  measurement-uncertainty wording + channel health (RC-377); deterministic
+  steering-state precedence (RC-378); steering fault recovery rules (RC-379);
+  `FaultExecutionAuthorization_ID` per specific fault (RC-380); paired-fault result
+  + lifecycle fields + versioned response-sequence map (RC-381); and the explicit
+  no-claim rule (RC-382). Status upgrades to `FORMAL_BASELINE_CANDIDATE /
+  REVISION_05_APPLIED / … / NO_CLAIM_RULE_DEFINED`. Post-edit label:
+  `GATE_05M_C3_REVISION_05_READY_FOR_CONTROLLED_MULTIDISCIPLINARY_BASELINE_REVIEW`
+  — the validation architecture is nearly ready to freeze while all physical pass
+  claims remain correctly unproven (nothing Confirmed).
+- **Amendment (owner review_70, batch_74 "72:75", RC-383..397): Gate 05M-C3
+  Revision 06 — implementation-correctness hardening toward specification
+  freeze.** The owner places Revision 05 "at formal baseline-candidate quality …
+  strong, deterministic, database-centered," notes the remaining problems "are no
+  longer conceptual — they are text corruption, incomplete rules, and a few
+  schema/status inconsistencies," and issues 17 items → 15 new corrections (owner
+  items 1 & 3 targeted the Hunter's OCR/typographical text only, already
+  clean/canonical in the deliverable): complete overlap enforcement + full
+  `PHYSICAL_MOVEMENT_BLOCKED` conditions (RC-383); `allowed_steering_band` bounded
+  min/max record + angle frame (RC-384); `unit` controlled enum + canonical-SI
+  comparison (RC-385); `AUTHORIZED → ACTIVE` activation preconditions +
+  single-ACTIVE rule (RC-386); `COMPLETED` moved to execution status, three enums
+  separated (RC-387); `EXPIRED` authorization state (RC-388); `ProcedureApproval_ID`
+  signed record (RC-389); C3A-008 E-stop raw-trace timestamps + profile artifacts
+  (RC-390); `IndependentSensorHealthResult` schema + invalid-channel → UNKNOWN
+  (RC-391); deterministic three-axis steering resolution (RC-392); per-state
+  steering recovery model (RC-393); `FaultExecutionAuthorization_ID` lifecycle
+  fields (RC-394); paired faults keyed by exact fault IDs (RC-395); database
+  foreign-key enforcement (RC-396); and the scope-limitation no-reuse clause
+  (RC-397). Status upgrades to `FORMAL_BASELINE_CANDIDATE /
+  CORE_GOVERNANCE_ARCHITECTURE_MATURE / REVISION_06_APPLIED / … /
+  SCOPE_LIMITATION_NO_REUSE_DEFINED`. Post-edit label:
+  `GATE_05M_C3_REVISION_06_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE` — the
+  controlled-validation architecture is mature and ready to freeze the
+  specification while all physical pass claims remain correctly unproven. **The
+  owner's downstream sequence — `DATABASE_SCHEMA_IMPLEMENTATION → RULE_ENGINE_TESTS
+  → HIL_VALIDATION` — is M10/production work and is NOT performed during Rev 07
+  ingestion** (CLAUDE.md); the frozen specification stays a governance document
+  until the owner opens the production phase (nothing Confirmed).
+- **Amendment (owner review_71, batch_75 "73:75", RC-398..411): Gate 05M-C3
+  Revision 07 — schema normalization + status-model cleanup.** The owner calls
+  Revision 06 "structurally mature and very close to specification freeze" but
+  **regresses the status to `FORMAL_BASELINE_CANDIDATE / NOT_READY_FOR_SCHEMA_FREEZE`**
+  over "implementation-level defects … primarily schema normalization, missing rule
+  restoration, and status-model cleanup," and issues 20 items → 14 new corrections
+  (owner items 1, 2, 5, 6, 10, 11 targeted the Hunter's OCR-corrupted copy or
+  restated already-applied rules — clean `L_min` RC-340/351, full block list
+  RC-383, COMPLETED-as-execution RC-387, `EXPIRED` RC-388, ZeroRegenEnvelope
+  RC-375, `ProcedureApproval_ID` RC-355/389): additional test-distance bounds
+  (RC-398); status-dependent validation (RC-399); arrays → junction tables
+  (RC-400); derived L_min membership + frozen snapshot (RC-401); `authority_status`
+  enum + approver reference (RC-402); complete independent-sensor failure response
+  (RC-403); E-stop per-outcome result decomposition (RC-404); paired-fault
+  component FK → `VehicleComponentInstance` not `DistanceComponent` (RC-405);
+  one-to-many test-attempt model (RC-406); test-result attempt identity +
+  applicability (RC-407); explicit allowed-transition table + no `ACTIVE→COMPLETED`
+  authorization edge (RC-408); cross-record configuration equality (RC-409);
+  append-only INSERT-only enforcement (RC-410); and the exact-binding scope
+  statement (RC-411). RC-400/406/407/409/410 + the owner's downstream `DATABASE
+  MIGRATION → RULE ENGINE IMPLEMENTATION → AUTOMATED CONSTRAINT TESTING → SIL/HIL
+  EVIDENCE` are captured as **relational-schema doctrine only — NOT built as M10/
+  production code during Rev 07 ingestion** (CLAUDE.md). Status upgrades to
+  `FORMAL_BASELINE_CANDIDATE / SAFETY_ARCHITECTURE_MATURE / REVISION_07_APPLIED /
+  RELATIONAL_SCHEMA_DOCTRINE_DEFINED / … / EXACT_BINDING_SCOPE_DEFINED`. Post-edit
+  label: `GATE_05M_C3_REVISION_07_READY_FOR_CONTROLLED_SPECIFICATION_FREEZE` — the
+  safety architecture is mature and the relational-schema doctrine is defined while
+  all physical pass claims remain correctly unproven (nothing Confirmed).
+- **Amendment (owner review_72, batch_76 "74:75", RC-412..425): Gate 05M-C3
+  Revision 08 — schema completion + relational integrity.** The owner calls
+  Revision 07 "the point where Gate 05M-C3 should stop expanding narratively and
+  move into implementation … mature enough for a controlled specification freeze,"
+  designating `CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE /
+  DATABASE_IMPLEMENTATION_NOT_YET_COMPLETE`, and issues 20 items → 14 new
+  corrections (owner items 1, 2, 4, 7, 8, 9 targeted the Hunter's OCR-corrupted
+  text or restated already-applied rules — clean `L_min` RC-340/351, full block
+  list RC-383, status-dependent validation RC-399, ZeroRegenEnvelope RC-375,
+  `ProcedureApproval_ID` RC-355/389, complete sensor-failure response RC-403):
+  added TestCell constraints + authority-class eligibility (RC-412); transition
+  table is the source of truth over the diagram (RC-413); expanded
+  SUSPENDED→AUTHORIZED revalidation set + artifact requirement (RC-414); explicit
+  `TestExecution` schema (RC-415); TestResult cardinality corrected (RC-416);
+  junction-table composite keys (RC-417); `allowed_regen_state` enum (RC-418);
+  `FaultDefinition` registry (RC-419, the layer-1 parent of the D-009 error
+  library); `VehicleComponentInstance` configuration linkage (RC-420, D-006);
+  cross-record vehicle-identity equality (RC-421, D-006); append-only enforcement
+  mechanics (RC-422); cryptographic hash-chain specification (RC-423); automatic
+  expiry behaviour (RC-424); and a configuration-change transaction rule (RC-425).
+  RC-415/416/417/419/420/421/422/423/425 + the owner's downstream SQL schema +
+  migrations → triggers → rule-engine → negative tests → seed unapproved → SIL →
+  HIL → signed evidence are captured as **relational-schema doctrine only — NOT
+  built as M10/production code during Rev 07 ingestion** (CLAUDE.md). Status
+  upgrades to `FORMAL_BASELINE_CANDIDATE / SAFETY_ARCHITECTURE_MATURE /
+  REVISION_08_APPLIED / CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE / … /
+  CONFIGURATION_CHANGE_TRANSACTION_DEFINED`. Post-edit label:
+  `GATE_05M_C3_REVISION_08_CONTROLLED_SPECIFICATION_FREEZE_CANDIDATE` — the safety
+  architecture is mature and the relational-schema doctrine is complete while all
+  physical pass claims remain correctly unproven (nothing Confirmed).
+- Consequences: Redefines the earlier "Gate 05J = live vehicle
+  commissioning" placeholder — HV first-energization is pushed to **Gate
+  05L**, engineer-approved, behind two no-HV fitment/power-on gates **and the
+  05L-A authorization gate**. Binds the roadmap after Gate 05I-D. The Build
+  Engine never marks a bench assembly "certified safe" (RC-224). Recorded in
+  `docs/status/GATE05I_D_INTEGRATED_FAULT_CASCADES.md`,
+  `docs/status/GATE05K_VEHICLE_POWER_ON.md`,
+  `docs/status/GATE05L_A_HV_ENERGIZATION_AUTHORIZATION.md`,
+  `docs/status/GATE05L_B_HV_FIRST_ENERGIZATION.md`,
+  `docs/status/GATE05L_C_HV_SHUTDOWN_REPEATABILITY.md`,
+  `docs/status/GATE05M_A_INVERTER_ENABLE_ZERO_TORQUE.md`,
+  `docs/status/GATE05M_B_NO_LOAD_MOTOR_SPIN.md`,
+  `docs/status/GATE05M_C1_COUPLED_DRIVELINE_LIFTED.md`,
+  `docs/status/GATE05M_C2_RESTRICTED_CREEP.md`,
+  `docs/status/GATE05M_C3_CLOSED_AREA_MOVEMENT.md`. Supersedes nothing.
+
+## D-007 — Controls-authority doctrine: Coordinator ≠ Owner + Build Engine Authority Law
+
+- Date: 2026-07-16
+- Status: Accepted
+- Context: Through the Gate 05 controls work (05A–05D), a recurring risk
+  appeared of the VCU quietly being treated as the owner of every
+  safety-critical action (pre-charge, main contactors, HV shutdown, torque,
+  Ford cluster/ABS-ESC), simply because it can see the signals or
+  coordinate the state machine. In owner review_35 (batch_38, Gate 05D) the
+  owner elevated the coordination principle to "a permanent Build Engine
+  doctrine line."
+- Decision: Adopt as permanent Build Engine doctrine —
+  **Coordinator ≠ Owner · Requesting ≠ Commanding · Monitoring ≠ Approving ·
+  Seeing a signal ≠ having authority to act on it** — paired with the
+  **Build Engine Authority Law:** *No state transition may become
+  physical-control authority until every action inside that transition has
+  an assigned owner, an allowed requester, a blocked-controller list, and a
+  proof artifact. If ownership is unknown, the VCU may simulate, monitor, or
+  request only — it may not directly control.* A state may be **simulated**
+  while ownership is pending; it may **not control physical hardware** until
+  every action inside it has owner · requester · monitor · blocked
+  controllers · proof artifact · verified source · test status.
+- Consequences: Binds all controls gates (Gate 05x and downstream). Every
+  state/action must carry an ownership label; the VCU coordinates but owns
+  nothing safety-critical without documentation (contactor / pre-charge /
+  HV-shutdown / torque ownership remain PENDING supplier architecture,
+  BQ-27). Ford-side factory networks stay listen-only unless officially
+  authorized; EV-side outputs stay isolated. Recorded in
+  `docs/status/GATE05D_OWNERSHIP_MATRIX.md`. Supersedes nothing.
+
+## D-006 — Split the donor platform: 001A (7.3L gas) vs 001B (6.7L diesel)
+
+- Date: 2026-07-16
+- Status: Accepted
+- Context: The batch_26 Gate 07 payload introduced factory-component CG
+  and weight data for a **6.7L Power Stroke diesel + 10R140**
+  transmission, but the active build direction is the **7.3L gas**
+  F-450/F-550 chassis cab. Diesel and gas powertrains differ in mass and
+  CG, so mixing them would corrupt the weight/axle/CG model.
+- Decision: Formalize two donor platforms — **Platform 001A =
+  F-450/F-550 7.3L gas** (the active direction) and **Platform 001B =
+  F-450/F-550 6.7L diesel** (separate, only if the donor is actually
+  diesel). Removed-component weight and CG data must be tagged to the
+  correct platform; diesel data may not enter the 001A model unless the
+  donor truck is diesel.
+- Consequences: Gate 07 (and the removed-mass ledger, Gate 07B) tracks
+  component weights per platform; the engine/trans CG blocker (BQ-13) is
+  a 001A gas value, not a diesel one. Binds which weight/CG figures are
+  valid inputs; supersedes nothing.
+
+## D-005 — Park supplier-only questions; proceed with supplier-independent research
+
+- Date: 2026-07-16
+- Status: Accepted
+- Context: Gate 04 (and the powertrain gates) reached
+  BLOCKED_PENDING_SUPPLIER_RESPONSE / BLOCKED_PENDING_SUPPLIER_DATA. The
+  supplier letters are drafted but not yet sent (sending is an owner
+  action), so the final numbers could be days or weeks away. Waiting
+  idle wastes the interval; guessing the values would violate the
+  Constitution.
+- Decision: (1) Adopt a **park-and-proceed** operating rule — a gate
+  that is blocked only on a supplier value is marked
+  BLOCKED_PENDING_SUPPLIER_RESPONSE, its open question is logged in the
+  new **Blocked Questions Ledger** (`docs/status/BLOCKED_QUESTIONS_LEDGER.md`,
+  owner-specified 8-field structure), and research continues on the
+  supplier-*independent* work: test plans, failure-mode logic, controls,
+  mechanical mounting, and weight. (2) Adopt the owner's ordered,
+  supplier-independent research plan — **Gate 04B → 04C → 05 → 06 →
+  07 → 08** — captured with verbatim prompts in
+  `docs/roadmaps/GATE_RESEARCH_QUEUE.md`. (3) Supplier data closes final
+  numbers only; nothing researched in the interim may be marked
+  Confirmed, claim compliance, or state the vehicle is safe.
+- Consequences: the project is never idle on supplier latency; every
+  parked value has a home, a follow-up date, and an explicit
+  "alternative research allowed" path, so no blocked question is lost;
+  the 7-day follow-up clock starts on each letter's actual send date.
+  Supersedes nothing; extends the review_16 gate roadmap ordering.
+
+## D-004 — Handoff fallback triggers, branch single-writer rule, deferred validity hashes
+
+- Date: 2026-07-15
+- Status: Accepted
+- Context: "Nearing usage/context limits" is not reliably
+  self-detectable by an agent, so continuity could fail on a missed
+  prediction; and the protocol could still fail if two agents edited
+  the same branch simultaneously.
+- Decision: (1) Operational fallback triggers — a handoff is also
+  mandatory after every completed source-ingestion batch, every
+  meaningful commit, every two hours of uninterrupted work, any
+  unresolved contradiction recorded, and any dirty working tree before
+  switching agents. (2) Branch single-writer rule — only one agent may
+  own and modify an active branch at a time; ownership lives in the
+  handoff's `Agent owner` field; transfer requires commit-or-document,
+  push, END_COMMIT, and owner reassignment; receivers must not edit
+  until ownership names them. (3) Handoff validity hashes
+  (handoff_file_hash, active_spec_hash, implementation_ledger_hash,
+  blockers_file_hash) are deferred to M10 start — an enhancement, not
+  a blocker; source ingestion is not delayed for it.
+- Consequences: Continuity no longer depends on usage prediction;
+  concurrent-edit conflicts are a protocol violation with a defined
+  transfer procedure; the hash enhancement is tracked in the M10
+  roadmap so it cannot be silently forgotten.
+
+## D-003 — Install the Elektron cross-agent handoff protocol
+
+- Date: 2026-07-15
+- Status: Accepted
+- Context: Multiple AI agents (Claude Code, Cursor) work in this
+  repository across sessions with practical context limits. Without a
+  shared handoff format, state is lost between agents and completion
+  claims go unverified.
+- Decision: One handoff format for all agents, defined in `AGENTS.md`
+  (mirrored for Cursor in `.cursor/rules/elektron-build-engine.mdc`)
+  with the template in `docs/handoffs/templates/`. Handoffs are
+  mandatory before stopping, nearing usage/context limits, switching
+  agents, or completing a milestone, and must include branch, start/end
+  commit, files changed, tests run, test results, blockers, next exact
+  action, and forbidden actions. Receiving agents verify git status,
+  commit hash, active spec, and tests before modifying files. Work is
+  never marked complete on agent statements alone — verification
+  evidence goes in `docs/status/IMPLEMENTATION_LEDGER.md`. Phase truth
+  lives in `docs/status/CURRENT_PHASE.md`; blockers in
+  `docs/status/BLOCKERS.md`. `HANDOFF_LOG.md` is append-only evidence.
+- Consequences: Any agent can resume from a cold start by reading
+  `CURRENT_HANDOFF.md` and re-verifying. Unverified completion claims
+  are structurally visible as `Claimed` ledger entries.
+
+## D-002 — Modularize Revision 07; add source-ingestion phase before M10
+
+- Date: 2026-07-15
+- Status: Accepted
+- Context: A single enormous Revision_07.md would be hard to review,
+  version, and supersede. The approved Revision 07 doctrine exists as
+  ~75 raw research exchanges that must be consolidated, not pasted in
+  as-is.
+- Decision: Revision 07 is constituted by modules 00–12 under
+  `docs/specifications/rev07/`, indexed by `Revision_07.md` and
+  `00_BASELINE_INDEX.md`; no module may override the Engineering
+  Constitution. A dedicated phase — Revision 07 Source Ingestion and
+  Consolidation (`roadmaps/REV07_SOURCE_INGESTION.md`) — precedes M10:
+  raw batches are archived immutably under `docs/research/raw/`, then
+  consolidated per module with full traceability. ODR-001..ODR-003 may
+  not be resolved until all batches are processed, contradictions
+  reviewed, the Baseline Index is complete, and the owner explicitly
+  approves. No production code during ingestion.
+- Consequences: M10 entry conditions now depend on the ingestion phase.
+  Raw research is evidence (immutable); consolidated modules are the
+  only path from research to active doctrine.
+
+## D-001 — Adopt entry-point documentation structure
+
+- Date: 2026-07-15
+- Status: Accepted
+- Context: Engineering doctrine will grow to hundreds of pages; a single
+  README cannot hold it and remain maintainable.
+- Decision: The README is the entry point only. Doctrine is split into
+  the Engineering Constitution (stable rules), AI Instructions
+  (operating manual), versioned specifications (one active), roadmaps
+  (per milestone), and research registers, all under `/docs`.
+- Consequences: Exactly one specification is marked
+  `ACTIVE_SPECIFICATION` at a time; superseded revisions are archived in
+  place. README baseline updates are made by proposal at milestone
+  boundaries, never silently.

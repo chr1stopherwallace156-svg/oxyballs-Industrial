@@ -1,3 +1,7 @@
+# Docs index
+
+This tree holds **Build Engine governance** (constitution, specs, research, status — see root `README.md`) and **EDE** workstation docs (`cto/`, `runbooks/`, `architecture/`, `contracts/`, `history/`). They coexist by subdirectory; EDE does not relocate Build Engine documents.
+
 # Elektron Developer Environment (EDE)
 
 This repository includes a **version-controlled workstation bootstrap**.
