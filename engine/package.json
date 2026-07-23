@@ -18,7 +18,8 @@
     "verify:determinism": "npm run build && node --no-warnings dist/verify/determinism.js",
     "verify:attack:package": "npm run build && node --no-warnings dist/verify/packageAttack.js",
     "platform001:generate": "npm run build && node --no-warnings dist/scripts/platform001.js",
-    "clean": "rm -rf dist data/engine.db"
+    "clean": "rm -rf dist",
+    "reset:database": "npm run build && node --no-warnings dist/scripts/resetDatabase.js"
   },
   "devDependencies": {
     "typescript": "^5.9.3",

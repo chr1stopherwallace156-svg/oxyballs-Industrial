@@ -5,6 +5,27 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-23 — Local-runtime hardening RC2 + runtime tooling in-repo (D-017)
+
+- **`npm run clean` no longer deletes the database** — it removes only `dist/`. New
+  explicit **`npm run reset:database`** (`engine/scripts/resetDatabase.ts`) is the
+  only DB-deleting command: shows the path, makes + verifies a backup first, aborts
+  if the backup fails, requires typed `RESET`.
+- **Restore fails closed** (`scripts/restore.sh`): failed pre-restore backup aborts;
+  DB restored via temp file + `integrity_check` (Node, no `sqlite3` CLI) + **atomic
+  rename**; corrupt restored DB aborts leaving the active DB unchanged; failed
+  post-restore checks → `OUTCOME: FAIL` + non-zero exit; "Restore complete" only on success.
+- **Determinism wording corrected** (`GENERATED_ARTIFACTS.md`): canonical
+  `package_hash`/`input_hash`/`build_package_id` are identical across runs; the output
+  FILE checksum varies because `generated_at` is excluded from the canonical hash.
+- **Regression coverage:** engine tests → **58** (canonical-hash stability vs.
+  timestamp; `clean` never touches the DB; `reset:database` exists) + `scripts/self-test.sh`
+  proving the four restore/clean safety behaviors (12 checks, FULL_PASS on Linux).
+- **Runtime tooling admitted to the repo** at root (D-017 amends the D-016 structure
+  freeze): `scripts/`, six `*.command` launchers, the LOCAL_* docs, `.nvmrc`/`.node-version`.
+  `vendor/`, `.local/`, and `IMMUTABLE_PAYLOAD_CHECKSUMS.sha256` are gitignored.
+- macOS Apple Silicon / Intel device acceptance remains **pending** (built + tested on Linux only).
+
 ## 2026-07-23 — Engine hardening: non-destructive Platform 001 regeneration (reviewable, not merged)
 
 - **Fixed a real defect** found during local-runtime acceptance: running

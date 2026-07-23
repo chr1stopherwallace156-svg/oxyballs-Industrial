@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { mkdtempSync, rmSync } from 'node:fs';
+import { mkdtempSync, rmSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { freshMemoryDb, atomic, openDatabase, migrate } from '../src/db';
@@ -218,6 +218,34 @@ test('platform: repeat generation on a PERSISTENT file DB preserves unrelated da
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
+});
+
+// 18 — determinism wording: canonical hashes are identical across runs even though
+//      the generated_at TIMESTAMP (excluded from the canonical hash) differs.
+test('platform: canonical package_hash is stable while generated_at may differ', () => {
+  const db = freshMemoryDb();
+  seedPlatform001(db);
+  const a = generateBuildPackage(db, { now: new Date('2026-01-01T00:00:00.000Z') });
+  const genA = (db.prepare('SELECT generated_at FROM BuildPackage WHERE build_package_id=?').get(a.buildPackageId) as any).generated_at;
+  const b = generateBuildPackage(db, { now: new Date('2026-12-31T23:59:59.000Z') });
+  const genB = (db.prepare('SELECT generated_at FROM BuildPackage WHERE build_package_id=?').get(b.buildPackageId) as any).generated_at;
+  // Canonical engineering identity is stable...
+  assert.equal(a.inputHash, b.inputHash);
+  assert.equal(a.packageHash, b.packageHash);
+  assert.equal(a.buildPackageId, b.buildPackageId);
+  // ...but the rendered timestamp (deliberately excluded from the canonical hash) changed.
+  assert.notEqual(genA, genB);
+});
+
+// 19 — safety: `npm run clean` must NEVER delete the operational database.
+test('engine: the clean script removes only build output, never data/engine.db', () => {
+  const pkg = JSON.parse(readFileSync(join(process.cwd(), 'package.json'), 'utf8'));
+  const clean = String(pkg.scripts.clean);
+  assert.ok(!/data\/engine\.db/.test(clean), `clean must not reference the database; got: ${clean}`);
+  assert.ok(!/engine\.db/.test(clean), `clean must not touch any .db; got: ${clean}`);
+  assert.match(clean, /\bdist\b/); // it should still clean the build output
+  // A separate, explicit destructive command must exist for database reset.
+  assert.ok(pkg.scripts['reset:database'], 'an explicit reset:database script must exist');
 });
 
 // 16 — transaction rollback prevents partial package creation
