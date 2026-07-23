@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# pre-commit — repository health before commit
+set -euo pipefail
+ROOT="$(git rev-parse --show-toplevel)"
+bash "$ROOT/dev/checks/run-all.sh"

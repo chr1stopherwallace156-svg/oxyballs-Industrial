@@ -1,0 +1,38 @@
+# Dependencies / envs
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Logs & backups
+logs/*.log
+logs/*.sqlite
+logs/*.sqlite-*
+!logs/.gitkeep
+backups/
+*.bak
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+
+# Secrets / local overrides
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+
+# Build artifacts
+dist/
+build/
+coverage/
+.turbo/
+
+# EDE local
+.githooks/
