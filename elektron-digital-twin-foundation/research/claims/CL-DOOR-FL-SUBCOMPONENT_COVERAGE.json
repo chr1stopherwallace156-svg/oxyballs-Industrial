@@ -1,0 +1,78 @@
+{
+  "document_id": "CL-DOOR-FL-SUBCOMPONENT_COVERAGE",
+  "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+  "vehicle_instance_id": "VEH-000001",
+  "configuration_id": "CFG-000001",
+  "status": "RESEARCH_CLAIMS_NOT_LOCALLY_VERIFIED",
+  "research_sprint": "RL-010",
+  "rows": [
+    {
+      "subcomponent": "Outer Door Skin / Shell",
+      "reported_oem_id": "FL3Z-1520125-A or FL3Z-1520125-B",
+      "public_cad_presence": "CLAIMED_ON_CAND_000043_GRAB_NOT_ACQUIRED",
+      "draft_passport": "EDTS-COMP-FL-SHELL",
+      "project_status": "CANDIDATE"
+    },
+    {
+      "subcomponent": "Hinge Assembly",
+      "reported_oem_id": "HC3Z-2826800-A",
+      "public_cad_presence": "MISSING_OR_MERGED",
+      "draft_passport": "EDTS-COMP-FL-HINGE",
+      "project_status": "DOCUMENT_HUNT"
+    },
+    {
+      "subcomponent": "Door Latch Cable Outer",
+      "reported_oem_id": "HC3Z-15221A00-F",
+      "public_cad_presence": "ABSENT_IN_PUBLIC_ASSETS"
+    },
+    {
+      "subcomponent": "Door Latch Cable Inner",
+      "reported_oem_id": "HC3Z-15221A01-G",
+      "public_cad_presence": "ABSENT_IN_PUBLIC_ASSETS"
+    },
+    {
+      "subcomponent": "Window Regulator & Motor",
+      "reported_oem_id": "FL3Z-1523201-A (reported)",
+      "public_cad_presence": "ABSENT_CONNECTOR_UNVERIFIED",
+      "draft_passport": "EDTS-COMP-FL-REGULATOR",
+      "project_status": "CANDIDATE"
+    },
+    {
+      "subcomponent": "Door Trim Panel",
+      "reported_oem_id": "HC3Z-2823943-MA (power windows gray \u2014 trim-dependent)",
+      "public_cad_presence": "TRIM_LEVEL_MATCH_REQUIRED"
+    },
+    {
+      "subcomponent": "Door Latch Bracket",
+      "reported_oem_id": "HC3Z-2543350 series",
+      "public_cad_presence": "ABSENT_IN_STANDARD_ASSETS"
+    },
+    {
+      "subcomponent": "Driver Door Wire Harness",
+      "reported_oem_id": "HC3Z-14631-A (power/tow option claim)",
+      "public_cad_presence": "ABSENT_IN_PUBLIC_ASSETS",
+      "draft_passport": "EDTS-COMP-FL-HARNESS",
+      "project_status": "RESEARCH_REQUIRED"
+    },
+    {
+      "subcomponent": "Power Telescoping Tow Mirror",
+      "reported_oem_id": "HC3Z-17683-BA (OPTION_DEPENDENT)",
+      "public_cad_presence": "MARKETPLACE_VISUAL_CANDIDATE_CAND_000044_TS",
+      "draft_passport": "EDTS-COMP-FL-MIRROR",
+      "project_status": "CANDIDATE"
+    },
+    {
+      "subcomponent": "Glass Run Weatherstrip",
+      "reported_oem_id": "FL3Z-1521597-A",
+      "public_cad_presence": "ABSENT_IN_PUBLIC_ASSETS",
+      "project_status": "RESEARCH_REQUIRED"
+    }
+  ],
+  "notes": [
+    "Part numbers are research claims from RL-008/RL-010. No local parts-catalog page hashes yet (Hard Rule 6).",
+    "Narrative CROSS_VERIFIED / 90% complete labels rejected (DT-D041).",
+    "Blocking gap: inner cavity stampings / harness routing \u2014 PHYSICAL_VERIFICATION_REQUIRED.",
+    "Draft passports: research/component_passports/ (ILLUSTRATIVE_ONLY)."
+  ],
+  "decision": "DT-D041"
+}

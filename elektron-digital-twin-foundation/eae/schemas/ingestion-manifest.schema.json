@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:eae:ingestion-manifest:1.0.0",
+  "title": "EAE CORE INGESTION Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_version",
+    "asset_id",
+    "source_kind",
+    "original_filename",
+    "detected_format",
+    "format_detection_method",
+    "format_detection_confidence",
+    "file_size_bytes",
+    "sha256",
+    "ingestion_policy_version",
+    "integrity_status",
+    "quarantine_status",
+    "created_at",
+    "content_address"
+  ],
+  "properties": {
+    "manifest_version": { "type": "string", "const": "1.0.0" },
+    "asset_id": {
+      "type": "string",
+      "pattern": "^AST-[0-9a-f]{64}$"
+    },
+    "source_kind": { "type": "string", "enum": ["LOCAL_FIXTURE", "LOCAL_FILE"] },
+    "original_filename": { "type": "string", "minLength": 1 },
+    "detected_format": { "type": "string", "enum": ["OBJ", "GLB"] },
+    "format_detection_method": {
+      "type": "string",
+      "enum": ["CONTENT_HEURISTIC", "BINARY_MAGIC"]
+    },
+    "format_detection_confidence": {
+      "type": "string",
+      "enum": ["HIGH", "MEDIUM", "LOW", "NONE"]
+    },
+    "file_size_bytes": { "type": "integer", "minimum": 0 },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "Full 64-char lowercase hex digest; never abbreviated"
+    },
+    "ingestion_policy_version": { "type": "string", "const": "1.0.0" },
+    "integrity_status": { "type": "string", "enum": ["PASS"] },
+    "quarantine_status": { "type": "string", "enum": ["CLEARED"] },
+    "created_at": { "type": "string", "minLength": 1 },
+    "content_address": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

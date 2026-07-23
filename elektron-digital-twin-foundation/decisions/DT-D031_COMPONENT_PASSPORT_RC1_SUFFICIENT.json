@@ -1,0 +1,43 @@
+{
+  "decision_id": "DT-D031",
+  "title": "Component Passport rc1 sufficient — executed validation",
+  "date": "2026-07-16",
+  "approved_status": "ACCEPTED",
+  "scope": [
+    "schemas/component-passport.schema.json",
+    "examples/2019_f450/door-fl-component-passport.example.json",
+    "proposals/component-passport-v1.1.schema.json",
+    "Lane A candidate catalog vs passport fields"
+  ],
+  "reason": "Draft claimed COMPONENT_PASSPORT_V1_1_PROPOSAL_REQUIRED and introduced non-rc1 fields plus an abbreviated fingerprint. Executed validation against the frozen schema showed the active door passport PASSes and the hypothetical initial example FAILs. rc1 is sufficient for the blocked/missing-asset state.",
+  "decision": [
+    "Final status: COMPONENT_PASSPORT_RC1_SUFFICIENT.",
+    "Do not create door-fl-component-passport.initial.example.json with non-rc1 fields.",
+    "Reject abbreviated fingerprints; require full CFG-000001 digest equality when fingerprint is copied.",
+    "Keep candidate assets authoritative in L1_LANE_A_ASSET_CATALOG.json.",
+    "Keep geometry_asset_ids / evidence_link_ids / interaction_ids empty when no usable records exist.",
+    "Park v1.1 as OPTIONAL_FUTURE_PROPOSAL / NOT_ACTIVATED / EMPIRICAL_TRIGGER_REQUIRED.",
+    "Do not use allOf against rc1 additionalProperties:false as an extension method without validator proof."
+  ],
+  "affected_files": [
+    "verification/results/component-passport-rc1-validation.json",
+    "verification/results/COMPONENT_PASSPORT_EXISTING_SCHEMA_AUDIT.md",
+    "proposals/COMPONENT_PASSPORT_REVISION_DECISION.md",
+    "proposals/COMPONENT_PASSPORT_V1_1_EXTENSION_PROPOSAL.md",
+    "proposals/COMPONENT_RELATIONSHIP_SEPARATION_STANDARD_PROPOSAL.md",
+    "examples/2019_f450/door-fl-component-passport.example.json",
+    "STATUS.json",
+    "DECISIONS.md"
+  ],
+  "validation_evidence": [
+    "verification/results/component-passport-rc1-validation.json",
+    "verification/results/COMPONENT_PASSPORT_EXISTING_SCHEMA_AUDIT.md"
+  ],
+  "related_decisions": ["DT-D028", "DT-D030"],
+  "final_status": "COMPONENT_PASSPORT_RC1_SUFFICIENT",
+  "change_control": {
+    "kernel_schema_change": false,
+    "runtime_activation": false,
+    "proposal_only": true
+  }
+}

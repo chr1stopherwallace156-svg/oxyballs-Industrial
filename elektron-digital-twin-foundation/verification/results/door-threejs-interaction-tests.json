@@ -1,0 +1,101 @@
+{
+  "suite": "door-threejs-interaction-tests",
+  "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+  "runtime": "python3",
+  "total": 8,
+  "passed": 0,
+  "failed": 0,
+  "blocked": 8,
+  "suite_pass_or_fail": "BLOCKED",
+  "block_reason": "CANDIDATE_NOT_ACQUIRED",
+  "results": [
+    {
+      "test_id": "DOOR-3D-001",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Geometry loads",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-3D-002",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Material renders",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-3D-003",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Initial transform stored",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-3D-004",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Parent cab assembly correct",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-3D-005",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Component selectable / highlight",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-3D-006",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Isolation hides unrelated nodes",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-3D-007",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "OPEN_CLOSE_PREVIEW provisional hinge",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-3D-008",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "REMOVAL_PREVIEW VISUAL_PREVIEW_ONLY",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    }
+  ]
+}

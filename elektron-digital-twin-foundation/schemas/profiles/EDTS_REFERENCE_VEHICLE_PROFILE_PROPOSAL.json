@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EDTS_Reference_Vehicle_Locked_Profile",
+  "type": "object",
+  "properties": {
+    "reference_vehicle_id": { "type": "string", "const": "EDTS-REF-VEHICLE-01" },
+    "platform_profile_reference": { "type": "string", "const": "F450_Platform_General_Profile" },
+    "locked_configuration": {
+      "type": "object",
+      "properties": {
+        "cab_style": { "type": "string", "const": "REGULAR_CAB" },
+        "drivetrain": { "type": "string", "const": "4X2" },
+        "wheelbase_inches": { "type": "number", "const": 145.3 },
+        "cab_to_axle_inches": { "type": "number", "const": 60.0 },
+        "rear_wheels": { "type": "string", "const": "DRW" },
+        "engine_type": { "type": "string", "const": "6.7L_POWERSTROKE_V8_DIESEL" },
+        "engine_calibration_hp": { "type": "number", "const": 330.0 },
+        "engine_calibration_torque_lbft": { "type": "number", "const": 750.0 }
+      },
+      "required": [
+        "cab_style",
+        "drivetrain",
+        "wheelbase_inches",
+        "cab_to_axle_inches",
+        "rear_wheels",
+        "engine_type",
+        "engine_calibration_hp",
+        "engine_calibration_torque_lbft"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": ["reference_vehicle_id", "platform_profile_reference", "locked_configuration"],
+  "additionalProperties": false
+}

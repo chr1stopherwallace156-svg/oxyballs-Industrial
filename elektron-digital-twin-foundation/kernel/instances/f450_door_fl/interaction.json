@@ -1,0 +1,11 @@
+{
+  "interaction_id": "INT-00001",
+  "entity_id": "CMP-FORD-SD-DOOR-FL-001",
+  "selectable": true,
+  "isolatable": true,
+  "removable": true,
+  "pivot_status": "NOT_DEFINED",
+  "pivot_axis": null,
+  "exploded_offset_mm": null,
+  "notes": "Flags enabled for acceptance T04/T05 design; runtime NOT_EXECUTED until mesh + pivot exist. Do not invent hinge mm."
+}

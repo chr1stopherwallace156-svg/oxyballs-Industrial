@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Component mapping example",
+  "description": "Production file created at L03 completion as assets/component-mapping.json",
+  "reference_vehicle_id": "ref-f450-2019-rc-8ft-4x2",
+  "components": [
+    {
+      "component_id": "oem.engine.6p7_ps",
+      "name": "6.7L Power Stroke V8",
+      "layer": "L03",
+      "parent_id": "L03_ROOT",
+      "category": "powertrain",
+      "removable": true,
+      "disassembly_order": 10,
+      "geometry_source_ids": ["src.ford.bblas.sd_bblb"],
+      "accuracy_tier": "B"
+    },
+    {
+      "component_id": "oem.transmission.6r140",
+      "name": "6-speed TorqShift automatic",
+      "layer": "L03",
+      "parent_id": "L03_ROOT",
+      "category": "powertrain",
+      "removable": true,
+      "disassembly_order": 20,
+      "geometry_source_ids": ["src.ford.bblas.sd_bblb"],
+      "accuracy_tier": "B"
+    },
+    {
+      "component_id": "chassis.frame.rail_lh",
+      "name": "Frame rail — left hand",
+      "layer": "L02",
+      "parent_id": "L02_ROOT",
+      "category": "chassis",
+      "removable": false,
+      "disassembly_order": null,
+      "geometry_source_ids": ["src.scan.frame_rails"],
+      "accuracy_tier": "A"
+    }
+  ]
+}

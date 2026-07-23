@@ -1,0 +1,33 @@
+{
+  "document_id": "AJR_REGISTER",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "schema": "schemas/acquisition-justification-report.schema.json",
+  "home": "research/asset_intelligence/ajr/",
+  "decision": "DT-D043",
+  "next_id": "AJR-000003",
+  "policy": {
+    "purchase_requires": [
+      "AJR",
+      "purchase_clearance=CLEARED"
+    ],
+    "visual_only_without_new_engineering_data": "REJECT_AS_CANDIDATE",
+    "missing_url": "BLOCKED"
+  },
+  "reports": [
+    {
+      "ajr_id": "AJR-000001",
+      "asset_id": "AID-000009",
+      "path": "research/asset_intelligence/ajr/AJR-000001.json",
+      "purchase_clearance": "NOT_CLEARED",
+      "decision": "CONTINUE_RESEARCH"
+    },
+    {
+      "ajr_id": "AJR-000002",
+      "asset_id": "AID-000010",
+      "path": "research/asset_intelligence/ajr/AJR-000002.json",
+      "purchase_clearance": "NOT_CLEARED",
+      "decision": "CONTINUE_RESEARCH"
+    }
+  ]
+}

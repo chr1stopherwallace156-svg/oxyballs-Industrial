@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "provisional_target_class": {
+      "type": "string",
+      "enum": ["PROVISIONAL_TARGET_A", "PROVISIONAL_TARGET_B", "PROVISIONAL_TARGET_C", "PROVISIONAL_TARGET_D"]
+    },
+    "calculated_uncertainty_limit": { "type": "number" }
+  },
+  "required": ["provisional_target_class"],
+  "additionalProperties": false
+}

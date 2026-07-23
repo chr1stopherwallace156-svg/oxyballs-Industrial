@@ -1,0 +1,286 @@
+{
+  "catalog_id": "L1_LANE_A_ASSET_CATALOG",
+  "schema_note": "Operational Lane A register (not a frozen kernel schema expansion). Fields follow L1_PARALLEL_LANES.md catalog template plus Component-First Acquisition target components.",
+  "updated_at": "2026-07-16T21:10:00Z",
+  "exact_vehicle_silo": {
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_id": "CFG-000001",
+    "locked_configuration": "2019 Ford F-450 Chassis Cab Regular Cab 4x2 DRW 145.3 WB / 60 CA"
+  },
+  "component_first_acquisition": {
+    "status": "ACTIVE",
+    "rule": "Hard Rule 0 corollary + Hard Rule 11 \u2014 Evidence Acquisition Efficiency",
+    "search_levels": [
+      "COMPLETE_VEHICLE",
+      "INDIVIDUAL_COMPONENT"
+    ],
+    "preference": "Evaluate exact complete-vehicle assets first when discovered; otherwise acquire component-by-component. Never forbid complete-vehicle search.",
+    "primary_component_targets": [
+      "CMPINST-VEH000001-DOOR-FL",
+      "ASMINST-VEH000001-CAB"
+    ],
+    "admission_rule": "Candidate assets do not enter the exact-vehicle silo until Hard Rule 4 lifecycle + HR-EVI verification; similarity and generation match are discovery-only.",
+    "next_build_priority": "COMPONENT_PASSPORT_PP-VEH000001-DOOR-FL-001"
+  },
+  "authorized_search_lanes": [
+    {
+      "lane_id": "LANE-A-CGT",
+      "platform": "CGTrader",
+      "objective": "Exterior cab / door mesh candidates for VEH-000001",
+      "status": "AUTHORIZED",
+      "notes": "Prior documentation referenced ASSET-00031 as a Grade B marketplace candidate; physical bytes remain CANDIDATE_NOT_ACQUIRED."
+    },
+    {
+      "lane_id": "LANE-A-GRAB",
+      "platform": "GrabCAD",
+      "objective": "Separable front-door CAD (STEP/IGES) for part-number / interface comparison",
+      "status": "AUTHORIZED",
+      "notes": "No verified GrabCAD URL or local file admitted yet. Do not invent listing URLs."
+    },
+    {
+      "lane_id": "LANE-A-FORD-PARTS",
+      "platform": "Ford Parts / OEM exploded diagrams",
+      "objective": "2019 Super Duty front door part-number and mounting interface evidence",
+      "status": "AUTHORIZED",
+      "notes": "Parts diagrams are Tier A/C candidates only after local artifact acquisition; generation-band diagrams alone are not CONFIGURATION_MATCHED."
+    },
+    {
+      "lane_id": "LANE-A-VISUAL",
+      "platform": "eBay Motors / dealer / auction walkarounds",
+      "objective": "High-res Regular Cab Chassis Cab visual references (Tier E)",
+      "status": "AUTHORIZED",
+      "notes": "Visual references support silhouette studies only; not geometry assets."
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": "ASSET-00031",
+      "candidate_asset_id": "CAND-00031-CGT",
+      "marketplace": "CGTrader",
+      "url": null,
+      "url_status": "NOT_RECORDED",
+      "claimed_year_range": "2017-2019",
+      "claimed_body": "Regular Cab Super Duty exterior / cab shell",
+      "reported_vehicle": "2019 Ford F-450 Regular Cab (unverified marketplace claim)",
+      "asset_type": "3D_MODEL",
+      "file_format": null,
+      "license": "REQUIRES_COUNSEL_REVIEW",
+      "grade": "B",
+      "price_condition": "UNKNOWN",
+      "downloadable_status": "CANDIDATE_NOT_ACQUIRED",
+      "local_file_path": "research/incoming/l01_lane_a_assets/ASSET-00031/",
+      "file_exists": false,
+      "sha256": null,
+      "visible_component_separation": "UNKNOWN_UNTIL_INGEST",
+      "front_left_door_presence": "CLAIMED_UNVERIFIED",
+      "target_component_instance_ids": [
+        "CMPINST-VEH000001-DOOR-FL",
+        "ASMINST-VEH000001-CAB"
+      ],
+      "estimated_configuration_match": "VISUAL_GENERATION_MATCH",
+      "evidence_status": "DISCOVERED",
+      "availability_audit": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json",
+      "evaluation_doc": "layers/L01/L1_ASSET_EVALUATION_ASSET-00031.md",
+      "notes": "Authoritative availability audit: CANDIDATE_NOT_ACQUIRED. No GLB/GLTF/FBX/OBJ bytes. Do not fabricate mesh inventory, hash, or marketplace URL. Cab shell usable only after ingest + keep/discard map; pickup-style rear structure discard candidate.",
+      "maps_to_aid": "AID-000005"
+    },
+    {
+      "asset_id": null,
+      "candidate_asset_id": "CAND-771-GRAB",
+      "marketplace": "GrabCAD",
+      "url": null,
+      "url_status": "NOT_RECORDED",
+      "claimed_year_range": "2017",
+      "claimed_body": "Super Duty front door CAD (STEP) \u2014 discovery claim",
+      "reported_vehicle": "2017 Super Duty Front Door (unverified listing claim)",
+      "asset_type": "CAD",
+      "file_format": "STEP",
+      "license": "UNKNOWN",
+      "grade": "C",
+      "price_condition": "UNKNOWN",
+      "downloadable_status": "CANDIDATE_NOT_ACQUIRED",
+      "local_file_path": null,
+      "file_exists": false,
+      "sha256": null,
+      "visible_component_separation": "UNKNOWN_UNTIL_INGEST",
+      "front_left_door_presence": "CLAIMED_UNVERIFIED",
+      "target_component_instance_ids": [
+        "CMPINST-VEH000001-DOOR-FL"
+      ],
+      "estimated_configuration_match": "PART_NUMBER_COMPARISON_PENDING",
+      "evidence_status": "DISCOVERED",
+      "availability_audit": null,
+      "evaluation_doc": null,
+      "notes": "Tracked as a component-level discovery candidate only. No verified URL, local bytes, or geometry-asset registration. Related-year CAD remains discovery-only under HR-EVI until configuration match is proven. Do not invent listing URLs or promote to GEO-*.",
+      "maps_to_aid": "AID-000006"
+    },
+    {
+      "asset_id": null,
+      "candidate_asset_id": "CAND-000042-EOG",
+      "legacy_aliases": [
+        "EDTS-CAND-002",
+        "C-002"
+      ],
+      "marketplace": "CGTrader",
+      "publisher_reported": "outlawtransport",
+      "url": "https://www.cgtrader.com/3d-models/vehicle/truck/ford-f350-f550-super-duty-dually-eog-complete-model",
+      "url_status": "URL_FETCH_CONFIRMED",
+      "claimed_year_range": "2017-2022 band (unverified)",
+      "claimed_body": "F-350 to F-550 Super Duty Dually / Chassis Cab complete model (reported)",
+      "reported_vehicle": "Ford F-350\u2013F-550 Super Duty Dually (EOG listing claim)",
+      "asset_type": "3D_MODEL",
+      "file_format": "BLEND/OBJ/FBX/DAE/STL (listing)",
+      "license": "ROYALTY_FREE_CLAIMED_REQUIRES_COUNSEL_REVIEW",
+      "grade": "B",
+      "price_condition": "REPORTED_55_30_USD_SALE",
+      "downloadable_status": "CANDIDATE_NOT_ACQUIRED",
+      "local_file_path": null,
+      "file_exists": false,
+      "sha256": null,
+      "visible_component_separation": "UNLIKELY_RENDER_MESH",
+      "front_left_door_presence": "CLAIMED_SHELL_ONLY_UNVERIFIED",
+      "target_component_instance_ids": [
+        "CMPINST-VEH000001-DOOR-FL",
+        "ASMINST-VEH000001-CAB"
+      ],
+      "estimated_configuration_match": "VISUAL_PLATFORM_BAND_ONLY",
+      "evidence_status": "DISCOVERED",
+      "lifecycle_note": "DISCOVERED -> SKU_URL_CONFIRMED -> AWAITING_PURCHASE (visual complete-vehicle INPUT)",
+      "availability_audit": null,
+      "evaluation_doc": "research/asset_intelligence/passports/AID-000002.json",
+      "notes": "RL-011 / DT-D042. SKU URL fetch-confirmed. Platform band F350\u2013F550 \u2014 not exact CFG-000001. Facade/inner-structure gap remains. Intelligence passport: AID-000002. No GEO promotion.",
+      "marketplace_id": "6371726",
+      "maps_to_aid": "AID-000002"
+    },
+    {
+      "asset_id": null,
+      "candidate_asset_id": "EDTS-CAND-001",
+      "maps_to_src_cand": "SRC-CAND-000004",
+      "marketplace": "GetOutlines",
+      "url": "https://getoutlines.com/vector-drawings/30637/2017-2022-ford-f-450-super-duty-drawings",
+      "url_status": "URL_RECORDED",
+      "claimed_year_range": "2017-2022",
+      "claimed_body": "F-450 Super Duty Chassis Cab Regular Cab CA 60 DRW vector blueprint (listing title includes Facelift '20 band)",
+      "reported_vehicle": "2017 Ford F-450 Super Duty 4 Gen Facelift '20 Chassis Cab Regular Cab CA 60 DRW",
+      "asset_type": "VECTOR_2D_REFERENCE",
+      "file_format": "EPS/SVG/AI/CDR (reported)",
+      "license": "COMMERCIAL_PURCHASE",
+      "grade": "C",
+      "price_condition": "REPORTED_24_00_USD",
+      "downloadable_status": "CANDIDATE_NOT_ACQUIRED",
+      "local_file_path": null,
+      "file_exists": false,
+      "sha256": null,
+      "visible_component_separation": "N_A_2D",
+      "front_left_door_presence": "EXTERIOR_PROFILE_ONLY",
+      "target_component_instance_ids": [
+        "CMPINST-VEH000001-DOOR-FL",
+        "ASMINST-VEH000001-CAB"
+      ],
+      "estimated_configuration_match": "EXTERIOR_PROPORTION_CANDIDATE",
+      "evidence_status": "DISCOVERED",
+      "lifecycle_note": "DISCOVERED -> URL_RECORDED -> AWAITING_PURCHASE (PROFILE_REFERENCE INPUT \u2014 DT-D042)",
+      "availability_audit": null,
+      "evaluation_doc": "research/asset_intelligence/passports/AID-000001.json",
+      "notes": "Authoritative machine records: SRC-CAND-000004 + AID-000001. Hard Rule 14: PROFILE_REFERENCE \u2014 NEVER ground-truth geometry. Acquisition INPUT not answer.",
+      "maps_to_aid": "AID-000001"
+    },
+    {
+      "asset_id": null,
+      "candidate_asset_id": "CAND-000043-GRAB",
+      "legacy_aliases": [
+        "EDTS-COMP-CAD-001"
+      ],
+      "marketplace": "GrabCAD",
+      "publisher_reported": "Ford_Alum_Design (reported \u2014 not verified)",
+      "url": null,
+      "url_status": "NOT_RECORDED_DO_NOT_INVENT",
+      "marketplace_id": null,
+      "claimed_year_range": "2015 F-150 listing claim (outer skin dimensional match claimed for 2019 F-450)",
+      "claimed_body": "F-Series aluminum front door outer shell STEP/SLDPRT",
+      "reported_vehicle": "2015 F-150 Front Door (uploader claim)",
+      "asset_type": "CAD",
+      "file_format": "STEP / SLDPRT (reported)",
+      "license": "UNKNOWN_OPEN_COMMUNITY_CLAIM",
+      "grade": "C",
+      "price_condition": "REPORTED_FREE",
+      "downloadable_status": "CANDIDATE_NOT_ACQUIRED",
+      "local_file_path": null,
+      "file_exists": false,
+      "sha256": null,
+      "visible_component_separation": "OUTER_SHELL_CLAIMED",
+      "front_left_door_presence": "CLAIMED_UNVERIFIED",
+      "target_component_instance_ids": [
+        "CMPINST-VEH000001-DOOR-FL"
+      ],
+      "estimated_configuration_match": "COMPARISON_REFERENCE_OUTER_SKIN_CANDIDATE",
+      "evidence_status": "DISCOVERED",
+      "lifecycle_note": "DISCOVERED -> SOURCE_CLAIMED -> AWAITING_URL_AND_BYTES (DT-D041)",
+      "availability_audit": null,
+      "evaluation_doc": "research/sprints/RL-010_OEM_DOOR_COMPONENT_SATURATION_HONEST.md",
+      "mismatches_risks": [
+        "Uploaded as 2015 F-150; interior weld-nut / trim fastener map may differ on Super Duty",
+        "CL-001 outer-shell interchange remains CANDIDATE \u2014 not auto GEO admission"
+      ],
+      "notes": "RL-010 / DT-D041. No verified GrabCAD URL in payload (Hard Rule 6). Evaluation NOT_EXECUTED until physical payload bytes.",
+      "maps_to_aid": "AID-000003"
+    },
+    {
+      "asset_id": null,
+      "candidate_asset_id": "CAND-000044-TS",
+      "legacy_aliases": [
+        "EDTS-COMP-CAD-002"
+      ],
+      "marketplace": "TurboSquid",
+      "url": null,
+      "url_status": "MARKETPLACE_ID_REPORTED_URL_NOT_VERIFIED",
+      "marketplace_id": "1598273",
+      "claimed_year_range": "unspecified",
+      "claimed_body": "Tow Mirror Assembly (Manual Fold/Telescope) STEP/IGES \u2014 visual mesh claim",
+      "reported_vehicle": "Super Duty tow mirror (listing claim)",
+      "asset_type": "3D_MODEL",
+      "file_format": "STEP / IGES (reported)",
+      "license": "COMMERCIAL_PURCHASE",
+      "grade": "D",
+      "price_condition": "REPORTED_39_00_USD",
+      "downloadable_status": "CANDIDATE_NOT_ACQUIRED",
+      "local_file_path": null,
+      "file_exists": false,
+      "sha256": null,
+      "visible_component_separation": "EXTERIOR_VISUAL_ONLY",
+      "front_left_door_presence": "MIRROR_ASSEMBLY_ONLY",
+      "target_component_instance_ids": [
+        "CMPINST-VEH000001-DOOR-FL"
+      ],
+      "estimated_configuration_match": "VISUAL_EXTERIOR_ONLY",
+      "evidence_status": "DISCOVERED",
+      "lifecycle_note": "DISCOVERED -> CONFIGURATION_EVALUATED (low engineering utility; exterior visual only)",
+      "availability_audit": null,
+      "evaluation_doc": "research/sprints/RL-010_OEM_DOOR_COMPONENT_SATURATION_HONEST.md",
+      "mismatches_risks": [
+        "Lacks internal mounting plates, wire conduits, structural brackets",
+        "Option-dependent \u2014 do not assume power telescope on base XL"
+      ],
+      "notes": "RL-010 / DT-D041. Marketplace ID recorded from operator sprint; full URL not invented. Suitable only for visual exterior rendering after license review.",
+      "maps_to_aid": "AID-000004"
+    }
+  ],
+  "rejected_proposal_artifacts": [
+    "L1_ASSET_ACQUISITION_SEARCH_LOG.md",
+    "L1_ASSET_CANDIDATE_DATABASE.json",
+    "L1_DOOR_FL_CANDIDATE_SHORTLIST.md",
+    "L1_CAB_SHELL_CANDIDATE_SHORTLIST.md",
+    "L1_EXACT_VS_RELATED_ASSET_REGISTER.json",
+    "L1_ASSET_ACQUISITION_GAPS.md",
+    "L1_NEXT_ACQUISITION_ACTIONS.md"
+  ],
+  "rejection_reason": "Redundant with RESEARCH_LOG, this catalog, per-asset evaluation/audit, HR-EVI + cross-vehicle-comparison schema, L1 gap matrix, and REFERENCE_ACQUISITION_QUEUE / STATUS. Example marketplace URLs in the proposal are not admitted (Hard Rule 6).",
+  "acquisition_status": "F450_DOOR_FL_CANDIDATES_TRACKED_NOT_ACQUIRED",
+  "evidence_acquisition_engine": "tools/evidence_acquisition/",
+  "evidence_acquisition_latest_run": "verification/results/evidence-acquisition-engine-run.json",
+  "evidence_acquisition_posture": "EVIDENCE_ACQUISITION_IN_PROGRESS",
+  "door_vertical_slice_gate": "F450_DOOR_FL_VERTICAL_SLICE_BLOCKED_BY_MISSING_ASSET",
+  "pipeline_note": "AID intelligence DB active (DT-D042). AID-000001 Outlines URL recorded; AID-000002 CGTrader SKU URL_FETCH_CONFIRMED. AID-000003 GrabCAD URL still missing. Passport geometry remains ABSENT; no auto-update.",
+  "asset_intelligence_register": "research/asset_intelligence/ASSET_INTELLIGENCE_REGISTER.json",
+  "asset_intelligence_note": "DT-D042: AID passports hold intelligence depth; this catalog remains thin marketplace pointers. URLs are acquisition inputs, not answers."
+}

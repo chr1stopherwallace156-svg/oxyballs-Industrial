@@ -1,0 +1,55 @@
+{
+  "document_id": "COVERAGE_MATRIX_DRAFT",
+  "authority_status": "RESEARCH_DRAFT_ESTIMATES_ONLY",
+  "hard_rule_5_note": "Coverage cells are qualitative hunt estimates — not engineering confidence percentages",
+  "research_sprint": "RL-010",
+  "decision": "DT-D041",
+  "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+  "rows": [
+    {
+      "passport_draft_id": "EDTS-COMP-FL-SHELL",
+      "component": "Outer Door Skin",
+      "visual_estimate": "HIGH_DRAFT",
+      "engineering_estimate": "MEDIUM_DRAFT",
+      "evidence_estimate": "MEDIUM_DRAFT",
+      "geometry_estimate": "MEDIUM_DRAFT_NO_LOCAL_BYTES",
+      "missing_structural_areas": ["Inner reinforcement / crash beam geometries"],
+      "scan_required": false,
+      "project_status": "CANDIDATE",
+      "rejected_narrative_label": "CROSS_VERIFIED"
+    },
+    {
+      "passport_draft_id": "EDTS-COMP-FL-REGULATOR",
+      "component": "Window Regulator",
+      "visual_estimate": "LOW",
+      "engineering_estimate": "LOW",
+      "evidence_estimate": "MEDIUM_DRAFT",
+      "geometry_estimate": "ZERO_NO_BYTES",
+      "missing_structural_areas": ["Motor housing", "Gear mesh", "Scissor arms"],
+      "scan_required": true,
+      "project_status": "CANDIDATE"
+    },
+    {
+      "passport_draft_id": "EDTS-COMP-FL-HARNESS",
+      "component": "Door Harness",
+      "visual_estimate": "NEAR_ZERO",
+      "engineering_estimate": "LOW",
+      "evidence_estimate": "MEDIUM_DRAFT_PN_CLAIM",
+      "geometry_estimate": "ZERO_NO_BYTES",
+      "missing_structural_areas": ["Wire run routing", "Boot seal", "Connector molds"],
+      "scan_required": true,
+      "project_status": "RESEARCH_REQUIRED"
+    },
+    {
+      "passport_draft_id": "EDTS-COMP-FL-HINGE",
+      "component": "Door Hinges",
+      "visual_estimate": "MEDIUM_DRAFT",
+      "engineering_estimate": "MEDIUM_DRAFT",
+      "evidence_estimate": "MEDIUM_DRAFT",
+      "geometry_estimate": "LOW_DRAFT",
+      "missing_structural_areas": ["Bushing clearances", "Pin tolerance specs"],
+      "scan_required": false,
+      "project_status": "DOCUMENT_HUNT"
+    }
+  ]
+}

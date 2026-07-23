@@ -1,0 +1,33 @@
+{
+  "$id": "urn:edts:component-passport:frame_145:v1-deprecated-alias",
+  "$schema": "../schemas/component-passport-os-v1.schema.json",
+  "hard_rule_0": "COMPONENT_FIRST",
+  "component_id": "CMP-FR-145",
+  "deprecated": true,
+  "canonical_component_id": "CMP-SD-FRAME-001",
+  "canonical_passport": "components/CMP_SD_FRAME_001.json",
+  "name": "DEPRECATED_ALIAS_F450_145_3_Frame_Stub",
+  "current_version": 1,
+  "compatibility": {
+    "platforms": ["F-450_2017_2022_CHASSIS_CAB"],
+    "body_styles": ["REGULAR_CAB"],
+    "compatibility_status": "DEPRECATED_ALIAS"
+  },
+  "geometry_status": {
+    "mesh_source": null,
+    "mesh_lifecycle": "PLACEHOLDER",
+    "notes": "Do not extend this file. Use CMP-SD-FRAME-001 + variant VAR-145_3-WB-60-CA."
+  },
+  "materials_profile": {},
+  "runtime_capabilities": {
+    "removal_logic_enabled": false,
+    "interactivity_actions": [],
+    "interactivity_status": "NOT_STARTED"
+  },
+  "evidence_graph_links": ["PAR-FR-001"],
+  "meta": {
+    "last_engineering_review": "2026-07-16",
+    "review_status": "REJECTED",
+    "notes": "Superseded by CMP-SD-FRAME-001 per EDTS-OS Architecture Blueprint component-first remap."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "candidate_asset_id": "CAND-771-GRAB",
+  "asset_id": null,
+  "execution_timestamp": "2026-07-16T17:45:26.406619+00:00",
+  "run_id": "run_20260716T174526Z",
+  "pipeline": "Evidence Acquisition Engine",
+  "target_component_instance_ids": [
+    "CMPINST-VEH000001-DOOR-FL"
+  ],
+  "source_url": null,
+  "url_status": "NOT_RECORDED",
+  "local_files": [],
+  "lifecycle_status": "DISCOVERED",
+  "pipeline_stage_reached": "ACQUIRE",
+  "passport_updated": false,
+  "passport_update_reason": "Deferred until ACQUIRED + hashed + parsed + inventoried (DT-D030/D031).",
+  "primary_risk": "Unknown hierarchy (may be merged mesh without logical separation).",
+  "outputs": {
+    "asset_manifest": "research/incoming/l01_lane_a_assets/CAND-771-GRAB/pipeline/run_20260716T174526Z/asset_manifest.json",
+    "asset_hash_record": "research/incoming/l01_lane_a_assets/CAND-771-GRAB/pipeline/run_20260716T174526Z/asset_hash_record.json",
+    "metadata_record": "research/incoming/l01_lane_a_assets/CAND-771-GRAB/pipeline/run_20260716T174526Z/metadata_record.json",
+    "mesh_inventory": "research/incoming/l01_lane_a_assets/CAND-771-GRAB/pipeline/run_20260716T174526Z/mesh_inventory.json",
+    "door_extractability_report": "research/incoming/l01_lane_a_assets/CAND-771-GRAB/pipeline/run_20260716T174526Z/door_extractability_report.md"
+  },
+  "pipeline_status": "BLOCKED_BY_MISSING_SOURCE_URL",
+  "block_reason": "No source URL recorded and no local bytes under staging/source/. Acquisition cannot proceed without inventing a URL (Hard Rule 6)."
+}

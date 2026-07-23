@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EDTS_Root_Claim_Schema_V6",
+  "_supersedes": "schemas/CLAIM_REGISTRY_CORE_SCHEMA_V5_PROPOSAL.json",
+  "type": "object",
+  "properties": {
+    "claim_id": { "type": "string", "pattern": "^CLM-[0-9]{5}$" },
+    "claim_type": { "$ref": "claim/claim-types.schema.json" },
+    "subject_entity_id": { "type": "string" },
+    "property_id": { "type": "string" },
+    "metadata": { "$ref": "claim/metadata.schema.json" },
+    "provenance": { "$ref": "claim/provenance.schema.json" },
+    "applicability": { "$ref": "claim/applicability.schema.json" },
+    "spatial_context": { "$ref": "claim/spatial-context.schema.json" },
+    "value": { "$ref": "claim/value.schema.json" },
+    "units": { "$ref": "claim/units.schema.json" },
+    "uncertainty": { "$ref": "claim/uncertainty.schema.json" },
+    "evidence": { "$ref": "claim/evidence-links.schema.json" },
+    "review_status": { "$ref": "claim/review-status.schema.json" },
+    "temporal_validity": { "$ref": "claim/temporal-validity.schema.json" },
+    "supersession": { "$ref": "claim/supersession.schema.json" }
+  },
+  "required": [
+    "claim_id",
+    "claim_type",
+    "subject_entity_id",
+    "property_id",
+    "metadata",
+    "provenance",
+    "value",
+    "units",
+    "uncertainty",
+    "evidence"
+  ],
+  "additionalProperties": false
+}

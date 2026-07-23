@@ -1,0 +1,79 @@
+{
+  "suite": "door-runtime-isolation-tests",
+  "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+  "runtime": "python3",
+  "total": 6,
+  "passed": 0,
+  "failed": 0,
+  "blocked": 6,
+  "suite_pass_or_fail": "BLOCKED",
+  "block_reason": "CANDIDATE_NOT_ACQUIRED",
+  "results": [
+    {
+      "test_id": "DOOR-ISO-001",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Door resolves only under VEH-000001 + CFG-000001",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-ISO-002",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Lookup without vehicle ID fails",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-ISO-003",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Lookup without configuration ID fails",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-ISO-004",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Wrong vehicle ID fails",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-ISO-005",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Wrong fingerprint fails",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    },
+    {
+      "test_id": "DOOR-ISO-006",
+      "execution_timestamp": "2026-07-16T16:54:09.333199+00:00",
+      "runtime": "python3",
+      "execution_status": "BLOCKED",
+      "expected_result": "Canonical-name-only lookup fails",
+      "actual_result": "ASSET-00031 CANDIDATE_NOT_ACQUIRED \u2014 no mesh bytes",
+      "pass_or_fail": "BLOCKED",
+      "error_message": "Missing real geometry asset; acquisition required before execution",
+      "evidence_file": "research/incoming/l01_lane_a_assets/ASSET-00031/ASSET_AVAILABILITY_AUDIT.json"
+    }
+  ]
+}

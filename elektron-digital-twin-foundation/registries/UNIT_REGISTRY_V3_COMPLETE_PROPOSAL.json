@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_name": "EDTS_Controlled_Unit_Vocabulary_V3_Complete",
+  "_deprecation": {
+    "status": "SUPERSEDED",
+    "reason": "Incorrectly listed electrical charge as a base dimension; use V3 Core with electric current (A)",
+    "superseded_by": "registries/UNIT_REGISTRY_V3_CORE_PROPOSAL.json"
+  },
+  "description": "Superseded. Prefer UNIT_REGISTRY_V3_CORE_PROPOSAL.json (SI base dimensions with electric current).",
+  "base_dimensions": {
+    "length": { "si_base_unit": "m" },
+    "mass": { "si_base_unit": "kg" },
+    "time": { "si_base_unit": "s" },
+    "temperature": { "si_base_unit": "K" },
+    "electrical_charge": { "si_base_unit": "C", "_error_note": "NOT an SI base dimension — see V3 Core" }
+  },
+  "units": {
+    "UNIT-MM": { "symbol": "mm", "dimension": "length", "canonical_unit_id": "UNIT-M", "conversion_multiplier": 0.001 },
+    "UNIT-M": { "symbol": "m", "dimension": "length", "canonical_unit_id": "UNIT-M", "conversion_multiplier": 1.0 }
+  }
+}

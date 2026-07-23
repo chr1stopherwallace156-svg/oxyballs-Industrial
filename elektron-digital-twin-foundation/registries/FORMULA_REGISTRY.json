@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_name": "EDTS_Core_Mathematical_Formula_Registry",
+  "formulas": {
+    "CLR-001": {
+      "name": "Required Clearance Envelope",
+      "expression": "C_required = U_meas + V_mfg + M_dyn + M_thermal + S_safety",
+      "variables": {
+        "C_required": "UNIT-MM",
+        "U_meas": "UNIT-MM",
+        "V_mfg": "UNIT-MM",
+        "M_dyn": "UNIT-MM",
+        "M_thermal": "UNIT-MM",
+        "S_safety": "UNIT-MM"
+      }
+    },
+    "CLR-002": {
+      "name": "Design Acceptance Clearance Condition",
+      "expression": "C_available > C_required",
+      "variables": {
+        "C_available": "UNIT-MM",
+        "C_required": "UNIT-MM"
+      }
+    }
+  }
+}

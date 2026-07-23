@@ -1,0 +1,8 @@
+{
+  "entity_id": "ASM-FORD-SD-CAB-001",
+  "entity_type": "ASSEMBLY",
+  "canonical_name": "super_duty_cab_assembly",
+  "lifecycle_status": "DISCOVERED",
+  "schema_version": "1.0.0",
+  "notes": "Placeholder parent assembly for door IS_PART_OF relationship. Not a full cab twin."
+}

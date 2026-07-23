@@ -1,0 +1,52 @@
+{
+  "$id": "urn:edts:schema:public-manifest:v1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_PUBLIC_REFERENCE_IMAGE_MANIFEST",
+  "project": "2019_FORD_F450_CHASSIS_CAB_145_3",
+  "manifest_status": "DRAFT_PROPOSAL",
+  "milestone": "L1_SOURCE_PACK_01",
+  "source_pack_verification": "L1_SOURCE_PACK_01_NOT_VERIFIED",
+  "notes": [
+    "Images staged externally; not redistributed from this repo.",
+    "usage_status NOT_EVALUATED until counsel/license review and visual QA.",
+    "Does not substitute for OEM PDF verification."
+  ],
+  "categories": {
+    "dealer_inventory_harvests": [
+      {
+        "manifest_item_id": "REF-PUB-001",
+        "source_origin": "Commercial Truck Trader Listing Archive",
+        "retrieval_date": "2026-07-16",
+        "creator_publisher": "Middleton Ford Commercial Fleet Sales",
+        "local_copy_status": "DOWNLOADED_TO_STAGE",
+        "usage_status": "NOT_EVALUATED",
+        "external_distribution": "PROHIBITED_PENDING_REVIEW",
+        "local_storage_destination": "research/reference_images/public_harvests/REF-PUB-001/",
+        "target_features": [
+          "axle_housing_clearance",
+          "cab_roof_lamp_spacing",
+          "rear_frame_web_condition"
+        ],
+        "configuration_match_notes": "2019 F-450 Regular Cab 4x2 DRW 145.3 WB, clean frame cut behind cab."
+      }
+    ],
+    "auction_listings": [
+      {
+        "manifest_item_id": "REF-PUB-002",
+        "source_origin": "Copart Salvage Portal - Yard Lot Archive",
+        "retrieval_date": "2026-07-16",
+        "creator_publisher": "Copart USA - Indianapolis North Lot",
+        "local_copy_status": "DOWNLOADED_TO_STAGE",
+        "usage_status": "NOT_EVALUATED",
+        "external_distribution": "PROHIBITED_PENDING_REVIEW",
+        "local_storage_destination": "research/reference_images/public_harvests/REF-PUB-002/",
+        "target_features": [
+          "front_monobeam_axle_linkage_4x2",
+          "exhaust_exit_path",
+          "wheel_pcd_radial_studs"
+        ],
+        "configuration_match_notes": "Undamaged front clip, left side layout of monobeam non-driving axle clear."
+      }
+    ]
+  }
+}

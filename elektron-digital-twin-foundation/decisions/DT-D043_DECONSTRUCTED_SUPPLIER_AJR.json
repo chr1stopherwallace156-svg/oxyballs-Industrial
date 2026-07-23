@@ -1,0 +1,36 @@
+{
+  "decision_id": "DT-D043",
+  "title": "Deconstructed assembly sourcing + supplier-first lane + AJR purchase gate",
+  "date": "2026-07-16",
+  "approved_status": "ACCEPTED",
+  "recommended_decision": "CONTINUE_RESEARCH",
+  "scope": [
+    "research/sourcing/",
+    "research/asset_intelligence/ajr/",
+    "schemas/acquisition-justification-report.schema.json",
+    "schemas/asset-intelligence-passport.schema.json",
+    "AID-000009",
+    "AID-000010",
+    "AID-000011",
+    "EDTS_RESEARCH_PROTOCOL.md",
+    "RL-012"
+  ],
+  "reason": "Pivot from complete-vehicle marketplace collection to modular component hubs and Tier-1 supplier channels, with a mandatory Acquisition Justification Report before spend.",
+  "decision": [
+    "Adopt Deconstructed Assembly Sourcing: assemble the twin from best-documented sub-system assets under Assembly Orchestrator hubs — never inherit a marketplace vehicle as silo truth.",
+    "Authorize Supplier-First Research Lane (LANE_SUPPLIER) targeting Tier-1 docs/CAD for axle, steering, brake, fuel, HVAC hubs — matrix is hunt draft, not verified evidence.",
+    "Extend AID schema to 1.1.0 with supplier_hub, ajr_id, match_tri_state, component_coverage_lists, and optional score_claims (RESEARCH_CLAIM/LISTING_CLAIM only until bytes).",
+    "Authorize AJR gate: purchase requires AJR with purchase_clearance=CLEARED; visual-only duplicates without new engineering data → REJECT.",
+    "Register AID-000009/000010/000011 for M300 axle, TAS65 steering, Hum3D door shell claims; demote SPECIFICATION_READY/SOURCE_VERIFIED/0.9x scores without URLs/bytes.",
+    "AJR-000001 and AJR-000002 drafted but BLOCKED / NOT_CLEARED — recommended decision CONTINUE_RESEARCH.",
+    "Front axle architecture decision remains PRIMARY_SOURCE_REQUIRED (DT-D037).",
+    "Frozen kernel and component-passport rc1 unchanged."
+  ],
+  "related_decisions": ["DT-D027", "DT-D029", "DT-D037", "DT-D042", "DT-D041", "DT-D039"],
+  "change_control": {
+    "kernel_schema_change": false,
+    "component_passport_rc1_change": false,
+    "aid_schema": "1.1.0",
+    "new_non_kernel_schema": "schemas/acquisition-justification-report.schema.json"
+  }
+}

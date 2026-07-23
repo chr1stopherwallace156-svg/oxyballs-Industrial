@@ -1,0 +1,35 @@
+{
+  "decision_id": "DT-D038",
+  "title": "Hard Rule 13 + immutable SRC-CAND IDs + Research Confidence protocol",
+  "date": "2026-07-16",
+  "approved_status": "ACCEPTED",
+  "protocol_version": "2.2.0",
+  "scope": [
+    "EDTS_RESEARCH_PROTOCOL.md",
+    "research/src_candidates/",
+    "schemas/src-candidate.schema.json",
+    "front suspension hunt for VEH-000001/CFG-000001"
+  ],
+  "reason": "Candidate discovery must not terminate research. Source IDs must be immutable handles. Search prioritization needs an RC score with Reasoning Log that does not revive deprecated engineering confidence percentages.",
+  "decision": [
+    "Adopt Hard Rule 13 — Research Never Stops at One Source.",
+    "Adopt immutable SRC-CAND-###### IDs; metadata is mutable; year/type not encoded in ID.",
+    "Adopt Research Confidence (RC 0–100) + Reasoning Log for SRC-CAND hunt prioritization only.",
+    "RC must not promote Hard Rule 4 stages or authorize geometry freeze/extraction.",
+    "Register SRC-CAND-000001/000002/000003 as NOT_ACQUIRED for front suspension topic.",
+    "Legacy CAND-FORD-BBAS-2019 / CAND-FORD-SM-2019 become aliases only.",
+    "DT-D037 PRIMARY_SOURCE_REQUIRED remains in force; prioritize acquiring SRC-CAND-000001.",
+    "Frozen kernel and component-passport rc1 unchanged."
+  ],
+  "related_decisions": ["DT-D037"],
+  "validation_evidence": [
+    "research/src_candidates/SRC_CANDIDATE_REGISTER.json",
+    "research/sprints/RL-007_HARD_RULE_13_SRC_CAND_FRONT_SUSPENSION.md",
+    "EDTS_RESEARCH_PROTOCOL.md"
+  ],
+  "change_control": {
+    "kernel_schema_change": false,
+    "component_passport_rc1_change": false,
+    "geometry_extraction": false
+  }
+}

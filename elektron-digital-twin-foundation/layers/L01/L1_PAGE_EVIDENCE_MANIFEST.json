@@ -1,0 +1,69 @@
+{
+  "$id": "urn:edts:schema:page-evidence-manifest:v1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_PAGE_EVIDENCE_MANIFEST",
+  "project": "2019_FORD_F450_CHASSIS_CAB_145_3",
+  "verification_run": "L1_RESET_TO_CANDIDATE",
+  "verification_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
+  "notes": [
+    "Prior page numbers, table headings, and verbatim excerpts from Source Pack 01 engagement are voided.",
+    "Do not restore citations until files exist and reviewer_status is set after inspection."
+  ],
+  "evidence_entries": [
+    {
+      "extraction_id": "EXT-L1-101",
+      "source_id": "SRC-L1-001",
+      "pdf_page_index": null,
+      "printed_page_number": null,
+      "screenshot_evidence_id": null,
+      "exact_table_heading": null,
+      "short_exact_text_excerpt": null,
+      "reviewer_status": "NOT_VERIFIED_FILE_ABSENT",
+      "review_timestamp": null
+    },
+    {
+      "extraction_id": "EXT-L1-102",
+      "source_id": "SRC-L1-001",
+      "pdf_page_index": null,
+      "printed_page_number": null,
+      "screenshot_evidence_id": null,
+      "exact_table_heading": null,
+      "short_exact_text_excerpt": null,
+      "reviewer_status": "NOT_VERIFIED_FILE_ABSENT",
+      "review_timestamp": null
+    },
+    {
+      "extraction_id": "EXT-L1-103",
+      "source_id": "SRC-L1-001",
+      "pdf_page_index": null,
+      "printed_page_number": null,
+      "screenshot_evidence_id": null,
+      "exact_table_heading": null,
+      "short_exact_text_excerpt": null,
+      "reviewer_status": "NOT_VERIFIED_FILE_ABSENT",
+      "review_timestamp": null
+    },
+    {
+      "extraction_id": "EXT-L1-104",
+      "source_id": "SRC-L1-002",
+      "pdf_page_index": null,
+      "printed_page_number": null,
+      "screenshot_evidence_id": null,
+      "exact_table_heading": null,
+      "short_exact_text_excerpt": null,
+      "reviewer_status": "NOT_VERIFIED_FILE_ABSENT",
+      "review_timestamp": null
+    },
+    {
+      "extraction_id": "EXT-L1-105",
+      "source_id": "SRC-L1-003",
+      "pdf_page_index": null,
+      "printed_page_number": null,
+      "screenshot_evidence_id": null,
+      "exact_table_heading": null,
+      "short_exact_text_excerpt": null,
+      "reviewer_status": "NOT_VERIFIED_FILE_ABSENT",
+      "review_timestamp": null
+    }
+  ]
+}

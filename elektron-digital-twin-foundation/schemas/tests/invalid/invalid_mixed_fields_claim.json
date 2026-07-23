@@ -1,0 +1,40 @@
+{
+  "claim_id": "CLM-00002",
+  "claim_type": "DIMENSION",
+  "subject_entity_id": "ford_f450_2019_frame",
+  "property_id": "frame_rail_width_front",
+  "schema_version": "5.0.0",
+  "metadata": {
+    "recorded_at": "2026-07-16T10:00:00Z",
+    "asserted_at": "2026-07-16T10:00:00Z",
+    "effective_from": null,
+    "effective_until": null,
+    "supersedes_claim_id": null,
+    "review_status": "PROVISIONAL",
+    "reviewed_by": "USR-001",
+    "intended_use": "Invalid Test Case"
+  },
+  "provenance": {
+    "source_locator": "Internal Test",
+    "verification_method": "UNVERIFIED",
+    "source_hash": null
+  },
+  "spatial_context": {
+    "coordinate_frame_id": "EDTS_ISO_ALIGNED_VEHICLE_FRAME",
+    "datum_id": "DTM-DSN-001",
+    "measurement_axis": "Y"
+  },
+  "claim_value": {
+    "value_structure": "SCALAR",
+    "source_value": "868.7",
+    "source_unit_id": "UNIT-MM",
+    "canonical_unit_id": "UNIT-MM"
+  },
+  "value_details": {
+    "scalar_value": 868.7,
+    "vector_value": [1.0, 2.0, 3.0]
+  },
+  "uncertainty_and_tolerances": {
+    "accuracy_class": "MAC-D"
+  }
+}

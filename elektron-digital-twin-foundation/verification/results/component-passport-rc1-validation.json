@@ -1,0 +1,45 @@
+{
+  "suite": "component-passport-rc1-validation",
+  "execution_timestamp": "2026-07-16T17:34:29.839014+00:00",
+  "runtime": "python3+jsonschema==4.26.0",
+  "schema_path": "schemas/component-passport.schema.json",
+  "schema_sha256": "sha256:0fbf42e74552f1b3dce905030c0f6b32b26fe66fa2438ae9e5365b35fa7332ce",
+  "example_path": "examples/2019_f450/door-fl-component-passport.example.json",
+  "authoritative_cfg_path": "examples/2019_f450/exact-configuration.example.json",
+  "authoritative_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "example_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "fingerprint_equals_cfg": true,
+  "silo_fingerprint_mismatches": [],
+  "rc1_defined_properties": [
+    "component_instance_id",
+    "configuration_fingerprint",
+    "configuration_id",
+    "links",
+    "notes",
+    "passport_id",
+    "schema_version",
+    "status_summary",
+    "vehicle_instance_id"
+  ],
+  "rc1_links_properties": [
+    "evidence_link_ids",
+    "geometry_asset_ids",
+    "interaction_ids",
+    "relationship_ids"
+  ],
+  "additionalProperties": false,
+  "pass_or_fail": "PASS",
+  "validation_errors": [],
+  "rejected_draft_initial_example": {
+    "note": "examples/2019_f450/door-fl-component-passport.initial.example.json was NOT created \u2014 fields not in rc1",
+    "hypothetical_pass_or_fail": "FAIL",
+    "hypothetical_errors": [
+      "Additional properties are not allowed ('assembly_relationship_ids', 'candidate_asset_ids', 'engineering_state', 'evidence_link_ids', 'geometry_asset_ids', 'procedure_dependency_ids', 'scoring', 'status', 'validation_result_ids' were unexpected)",
+      "'sha256:d84f86f3...' is not valid under any of the given schemas",
+      "'PAS-CMPINST-VEH000001-DOOR-FL' does not match '^PP-[A-Z0-9-]+$'"
+    ],
+    "abbreviated_fingerprint_rejected": true
+  },
+  "final_status": "COMPONENT_PASSPORT_RC1_SUFFICIENT",
+  "suite_pass_or_fail": "PASS"
+}

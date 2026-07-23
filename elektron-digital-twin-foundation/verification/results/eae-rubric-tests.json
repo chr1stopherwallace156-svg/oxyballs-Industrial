@@ -1,0 +1,80 @@
+{
+  "suite": "eae-rubric-tests",
+  "execution_timestamp": "2026-07-16T17:56:40.369250+00:00",
+  "runtime": "python3",
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "suite_pass_or_fail": "PASS",
+  "results": [
+    {
+      "test_id": "EAE-RUB-001",
+      "execution_timestamp": "2026-07-16T17:56:40.369053+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "missing inputs => null NOT_EXECUTED",
+      "actual_result": "{\"aggregate\": null, \"confidence\": \"NOT_EVALUATED\"}",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-RUB-002",
+      "execution_timestamp": "2026-07-16T17:56:40.369071+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "partial missing stays null (role-aware mesh suite)",
+      "actual_result": "{\"topo\": {\"metric_id\": \"MVR-001-TOPOLOGY_SUITE\", \"score\": null, \"scoring_status\": \"NOT_EXECUTED\", \"evaluation_status\": \"NOT_EXECUTED\", \"missing_inputs\": [\"geometry_role\", \"non_manifold_edge_count\", \"degenerate_triangle_count\", \"zero_area_face_count\", \"duplicate_vertex_ratio\", \"flipped_normal_ratio\", \"disconnected_island_count\", \"boundary_edge_count\", \"self_intersection_flag\"], \"formula\": \"Weighted role profile over topology diagnostics; OPEN_SURFACE/VISUAL_SHELL/SCAN_REFERENCE do not require watertight (boundary_edge_count may be >0). CLOSED_SOLID/COLLISION_MESH may require boundary_edge_count==0 and self_intersection_flag==false.\"}, \"poly\": {\"metric_id\": \"MVR-002-POLY_EFFICIENCY\", \"score\": null, \"scoring_status\": \"NOT_EXECUTED\", \"evaluation_status\": \"NOT_EXECUTED\", \"missing_inputs\": [\"geometry_role\"], \"formula\": \"clamp01(1 - abs(polygon_count - target_poly_budget) / max(target_poly_budget, 1))\"}}",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-RUB-002b",
+      "execution_timestamp": "2026-07-16T17:56:40.369101+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "OPEN_SURFACE allows poly scoring; topology remains NOT_EXECUTED until diagnostics",
+      "actual_result": "{\"topo\": {\"metric_id\": \"MVR-001-TOPOLOGY_SUITE\", \"score\": null, \"scoring_status\": \"NOT_EXECUTED\", \"evaluation_status\": \"NOT_EXECUTED\", \"missing_inputs\": [\"non_manifold_edge_count\", \"degenerate_triangle_count\", \"zero_area_face_count\", \"duplicate_vertex_ratio\", \"flipped_normal_ratio\", \"disconnected_island_count\", \"boundary_edge_count\", \"self_intersection_flag\"], \"formula\": \"Weighted role profile over topology diagnostics; OPEN_SURFACE/VISUAL_SHELL/SCAN_REFERENCE do not require watertight (boundary_edge_count may be >0). CLOSED_SOLID/COLLISION_MESH may require boundary_edge_count==0 and self_intersection_flag==false.\"}, \"poly\": {\"metric_id\": \"MVR-002-POLY_EFFICIENCY\", \"score\": 1.0, \"scoring_status\": \"EVALUATED\", \"evaluation_status\": \"EVALUATED\", \"missing_inputs\": [], \"formula\": \"clamp01(1 - abs(polygon_count - target_poly_budget) / max(target_poly_budget, 1))\"}, \"cov\": 0.75}",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-RUB-003",
+      "execution_timestamp": "2026-07-16T17:56:40.369194+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "CAD evaluates when comparable; nominal=0 NOT_EXECUTED; large error clamps to 0",
+      "actual_result": "{\"agg\": 0.985, \"zero_tol\": {\"metric_id\": \"CER-001-TOLERANCE\", \"score\": null, \"scoring_status\": \"NOT_EXECUTED\", \"evaluation_status\": \"NOT_EXECUTED\", \"missing_inputs\": [], \"formula\": \"If abs(nominal_dim)==0 \\u2192 NOT_EXECUTED. Else relative_error=abs(measured_dim-nominal_dim)/abs(nominal_dim); score=max(0, 1-relative_error).\"}, \"clamp\": {\"metric_id\": \"CER-001-TOLERANCE\", \"score\": 0.0, \"scoring_status\": \"EVALUATED\", \"evaluation_status\": \"EVALUATED\", \"missing_inputs\": [], \"formula\": \"If abs(nominal_dim)==0 \\u2192 NOT_EXECUTED. Else relative_error=abs(measured_dim-nominal_dim)/abs(nominal_dim); score=max(0, 1-relative_error).\"}}",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-RUB-004",
+      "execution_timestamp": "2026-07-16T17:56:40.369245+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "rubric profiles exist for mapping",
+      "actual_result": "{\"OBJ\": \"MESH_VISUAL_RUBRIC\", \"STEP\": \"CAD_ENGINEERING_RUBRIC\", \"SCAN\": \"SCAN_REFERENCE_RUBRIC\", \"DEALER_PHOTO\": \"PHOTO_REFERENCE_RUBRIC\", \"OEM_MANUAL\": \"DOCUMENT_EVIDENCE_RUBRIC\"}",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-RUB-005",
+      "execution_timestamp": "2026-07-16T17:56:40.369247+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "real candidates not scored",
+      "actual_result": "SKIPPED_BY_POLICY",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "research/incoming/l01_lane_a_assets/"
+    }
+  ],
+  "notes": [
+    "CAND-00031-CGT and CAND-771-GRAB intentionally not scored (NOT_ACQUIRED)."
+  ]
+}

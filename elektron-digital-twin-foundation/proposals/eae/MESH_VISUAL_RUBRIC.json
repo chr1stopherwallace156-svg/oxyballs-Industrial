@@ -1,0 +1,92 @@
+{
+  "rubric_id": "MESH_VISUAL_RUBRIC",
+  "rubric_version": "1.1.0-draft",
+  "status": "DRAFT",
+  "activation": "NOT_ACTIVATED",
+  "notes": [
+    "Do not use Manifold_Faces/Total_Faces as a sole quality score.",
+    "Classify geometry_role before applying topology checks.",
+    "Watertight is NOT always required (door skin / trim / scan patch may be OPEN_SURFACE)."
+  ],
+  "geometry_role_enum": [
+    "CLOSED_SOLID",
+    "OPEN_SURFACE",
+    "SCAN_REFERENCE",
+    "VISUAL_SHELL",
+    "COLLISION_MESH"
+  ],
+  "role_gate": {
+    "required_inputs": ["geometry_role"],
+    "missing_data_behavior": "All topology metrics NOT_EXECUTED until geometry_role is set"
+  },
+  "applicable_evidence_types": ["GLB", "GLTF", "FBX", "OBJ", "USD"],
+  "metrics": [
+    {
+      "metric_id": "MVR-000-ROLE_DECLARED",
+      "meaning": "Geometry role classified before topology scoring",
+      "applicable_evidence_types": ["GLB", "GLTF", "FBX", "OBJ"],
+      "required_inputs": ["geometry_role"],
+      "formula": "1.0 if geometry_role in enum else null",
+      "formula_id": "IDENTITY_FLOAT",
+      "units": "ratio_0_1",
+      "weight": 0.0,
+      "missing_data_behavior": "score=null; evaluation_status=NOT_EXECUTED",
+      "pass_threshold": 1.0,
+      "fail_threshold": 0.0,
+      "evidence_requirements": ["explicit geometry_role on inventory record"]
+    },
+    {
+      "metric_id": "MVR-001-TOPOLOGY_SUITE",
+      "meaning": "Role-appropriate topology suite (not a single manifold-face ratio)",
+      "applicable_evidence_types": ["GLB", "GLTF", "FBX", "OBJ"],
+      "required_inputs": [
+        "geometry_role",
+        "non_manifold_edge_count",
+        "degenerate_triangle_count",
+        "zero_area_face_count",
+        "duplicate_vertex_ratio",
+        "flipped_normal_ratio",
+        "disconnected_island_count",
+        "boundary_edge_count",
+        "self_intersection_flag"
+      ],
+      "formula": "Weighted role profile over topology diagnostics; OPEN_SURFACE/VISUAL_SHELL/SCAN_REFERENCE do not require watertight (boundary_edge_count may be >0). CLOSED_SOLID/COLLISION_MESH may require boundary_edge_count==0 and self_intersection_flag==false.",
+      "formula_id": "ROLE_TOPOLOGY_PROFILE",
+      "units": "ratio_0_1",
+      "weight": 0.4,
+      "missing_data_behavior": "score=null; evaluation_status=NOT_EXECUTED — never coerce missing diagnostics to 0.0",
+      "pass_threshold": 0.7,
+      "fail_threshold": 0.3,
+      "evidence_requirements": ["parser topology diagnostics", "declared geometry_role"],
+      "explicitly_insufficient_alone": ["Manifold_Faces/Total_Faces"]
+    },
+    {
+      "metric_id": "MVR-002-POLY_EFFICIENCY",
+      "meaning": "Polygon budget fitness for visual LOD role",
+      "applicable_evidence_types": ["GLB", "GLTF", "FBX", "OBJ"],
+      "required_inputs": ["polygon_count", "target_poly_budget", "geometry_role"],
+      "formula": "clamp01(1 - abs(polygon_count - target_poly_budget) / max(target_poly_budget, 1))",
+      "formula_id": "POLY_BUDGET_RELATIVE",
+      "units": "ratio_0_1",
+      "weight": 0.3,
+      "missing_data_behavior": "score=null; evaluation_status=NOT_EXECUTED",
+      "pass_threshold": 0.5,
+      "fail_threshold": 0.2,
+      "evidence_requirements": ["parsed mesh statistics", "LOD budget"]
+    },
+    {
+      "metric_id": "MVR-003-PROVENANCE",
+      "meaning": "Normalized provenance class for visual sources",
+      "applicable_evidence_types": ["GLB", "GLTF", "FBX", "OBJ"],
+      "required_inputs": ["provenance_score"],
+      "formula": "identity provenance_score in [0,1]",
+      "formula_id": "IDENTITY_FLOAT",
+      "units": "ratio_0_1",
+      "weight": 0.3,
+      "missing_data_behavior": "score=null; evaluation_status=NOT_EXECUTED",
+      "pass_threshold": 0.4,
+      "fail_threshold": 0.1,
+      "evidence_requirements": ["source class declaration"]
+    }
+  ]
+}

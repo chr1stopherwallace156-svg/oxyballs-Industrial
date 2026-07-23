@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_SOURCE_BASELINE_CLOSURE_RULES",
+  "version": "1.2.0",
+  "status": "ACTIVE",
+  "milestone": "L1_SOURCE_PACK_01",
+  "source_pack_01_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
+  "action_taken": "RESET_TO_CANDIDATE_TEMPLATES",
+  "gate_status": "L1_DOCUMENT_ACQUISITION_READY",
+  "public_reference_search_gate": "L1_PUBLIC_REFERENCE_SEARCH_READY",
+  "modeling_baseline_status": "NOT_YET_APPROVED_FOR_GEOMETRY_FREEZE",
+  "reference_acquisition_activity_status": "RESET_TO_CANDIDATE_TEMPLATES",
+  "closure_rules": {
+    "physical_fact_closure": "At least one directly applicable, verified authoritative OEM source, with zero unresolved conflicting authoritative sources, supplemented by physical confirmation once a GRADE-A or GRADE-B reference vehicle is inspected.",
+    "project_specification_closure": "Visual and geometric modeling tolerances (e.g., visual_model_error <= 2.0 mm) must be justified by delivery requirements and target capture capabilities, rather than being forced to match nominal OEM blueprint tolerances.",
+    "visual_acceptance_closure": "Rendered shader parameters (roughness, metallic, coating type) must be mapped to PROVISIONAL_VISUAL_TUNING and calibrated through controlled reference photography under consistent lighting conditions."
+  },
+  "source_pack_01_progress": {
+    "files_present": false,
+    "hash_computation_status": "NOT_EXECUTED",
+    "page_evidence_status": "NOT_VERIFIED_FILE_ABSENT",
+    "document_supported_claims": [],
+    "candidate_claims": ["CLM-L1-001", "CLM-L1-002", "CLM-L1-003", "CLM-L1-004", "CLM-L1-005"],
+    "physical_confirmation": "PENDING",
+    "parallel_lanes_authorized": ["LANE_A", "LANE_B"]
+  }
+}

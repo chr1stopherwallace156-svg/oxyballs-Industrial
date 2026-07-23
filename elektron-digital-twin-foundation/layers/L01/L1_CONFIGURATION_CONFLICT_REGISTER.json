@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_CONFIGURATION_CONFLICT_REGISTER",
+  "version": "1.1.0",
+  "status": "ACTIVE",
+  "purpose": "Track conflicting information across official and unofficial specs so the digital twin is built to actual 2019 F-450 parameters, not generic Super Duty specs.",
+  "unresolved_conflicts": [
+    {
+      "conflict_id": "CNF-001-FRONT-SUSPENSION-TYPE",
+      "description": "Unresolved exact-vehicle question: does 2019 F-450 Chassis Cab Regular Cab 4x2 DRW 145.3/60 use a non-driving solid beam/monobeam front axle, or Twin-I-Beam (or another architecture)? No architectural decision has been reached.",
+      "contradicting_sources": [
+        {
+          "source_name": "Generic Auto Specification Aggregators",
+          "claim": "Front Suspension: Twin-I-Beam Independent Coil Spring (4x2) — third-party aggregator text",
+          "ranking": "LOW",
+          "evidence_status": "CANDIDATE_ASSERTION",
+          "notes": "Not bound to hashed OEM pages for this silo."
+        },
+        {
+          "source_name": "Ford BBAS / Chassis Cab specifications (hunt target CAND-FORD-BBAS-2019)",
+          "claim": "OEM may document a wide-track monobeam / solid non-driving axle for heavy F-450 chassis cabs — UNVERIFIED until local bytes + page extract exist",
+          "ranking": "HUNT_TARGET_NOT_ACQUIRED",
+          "evidence_status": "NOT_ACQUIRED",
+          "notes": "Do not treat as AUTHORITATIVE. Prior DOCUMENT_SUPPORTED-style citations voided (file absent)."
+        },
+        {
+          "source_name": "Ford F-Super Duty Service Manual (hunt target CAND-FORD-SM-2019)",
+          "claim": "Service procedures may cover 4x2 and 4x4 — architecture claim NOT_EXECUTED",
+          "ranking": "HUNT_TARGET_NOT_ACQUIRED",
+          "evidence_status": "NOT_ACQUIRED",
+          "notes": "High cross-contamination risk if 4x4 driven-beam pages are applied to 4x2."
+        }
+      ],
+      "mitigation_reconciliation": "DT-D037/D038 · RL-006/007: PRIMARY_SOURCE_REQUIRED + Hard Rule 13. Architecture = RESEARCH_REQUIRED. SRC-CAND-000001/2/3 NOT_ACQUIRED. RC scores are hunt priority only. No geometry extraction. VIN-filtered parts match required before CONFIGURATION_MATCH. Do not inherit 4x4 or 169.3 in WB mounts.",
+      "status": "OPEN_PRIMARY_SOURCE_REQUIRED",
+      "preferred_resolution_candidate": null,
+      "architecture_decision_status": "RESEARCH_REQUIRED",
+      "document_extraction_id": null,
+      "page_evidence_status": "NOT_VERIFIED_FILE_ABSENT",
+      "research_sprint": "RL-007",
+      "decision_ids": ["DT-D037", "DT-D038"],
+      "candidate_ids": ["SRC-CAND-000001", "SRC-CAND-000002", "SRC-CAND-000003"]
+    },
+    {
+      "conflict_id": "CNF-002-TIRE-BRAND-AND-MODEL",
+      "description": "Standard Ford fleet order guides list tires as standard 225/70R19.5G tires, but the actual tire brand (e.g., Continental, Michelin, Goodyear) can vary by factory batch and trim choice.",
+      "contradicting_sources": [
+        {
+          "source_name": "Ford Fleet Order Guide (2019)",
+          "claim": "Tire: 225/70R19.5G standard black-sidewall highway tread",
+          "ranking": "AUTHORITATIVE_HUNT_TARGET",
+          "evidence_status": "NOT_ACQUIRED_OR_UNVERIFIED"
+        },
+        {
+          "source_name": "Digital Twin Reference Dossier",
+          "claim": "Tire: Continental Hybrid HS3 225/70R19.5",
+          "ranking": "SPECIFIC_ASSET_DEPENDENT",
+          "evidence_status": "CANDIDATE_ASSERTION"
+        }
+      ],
+      "mitigation_reconciliation": "Factory tire size is modeled generically as 225/70R19.5 only when separately evidenced. Continental Hybrid HS3 is noted as reference-vehicle-specific and must be verified by sidewall inspection.",
+      "status": "OPEN_MONITORING"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_name": "EDTS_Controlled_Unit_Vocabulary_V3_Core",
+  "_supersedes": [
+    "registries/UNIT_REGISTRY_V2_PROPOSAL.json",
+    "registries/UNIT_REGISTRY_V3_COMPLETE_PROPOSAL.json"
+  ],
+  "description": "Core unit registry specifying SI base dimensions and derived conversions. Base dimensions use electric current (A), not electrical charge.",
+  "base_dimensions": {
+    "length": { "si_base_unit": "m" },
+    "mass": { "si_base_unit": "kg" },
+    "time": { "si_base_unit": "s" },
+    "electric_current": { "si_base_unit": "A" },
+    "thermodynamic_temperature": { "si_base_unit": "K" },
+    "amount_of_substance": { "si_base_unit": "mol" },
+    "luminous_intensity": { "si_base_unit": "cd" }
+  },
+  "derived_dimensions": {
+    "force": { "derivation": "kg * m * s^-2" },
+    "pressure": { "derivation": "kg * m^-1 * s^-2" },
+    "electrical_charge": { "derivation": "A * s" },
+    "resistance": { "derivation": "kg * m^2 * s^-3 * A^-2" }
+  },
+  "units": {
+    "UNIT-M": { "symbol": "m", "dimension": "length", "canonical_unit_id": "UNIT-M", "conversion_multiplier": 1.0 },
+    "UNIT-MM": { "symbol": "mm", "dimension": "length", "canonical_unit_id": "UNIT-M", "conversion_multiplier": 0.001 },
+    "UNIT-CM": { "symbol": "cm", "dimension": "length", "canonical_unit_id": "UNIT-M", "conversion_multiplier": 0.01 },
+    "UNIT-KG": { "symbol": "kg", "dimension": "mass", "canonical_unit_id": "UNIT-KG", "conversion_multiplier": 1.0 },
+    "UNIT-SECOND": { "symbol": "s", "dimension": "time", "canonical_unit_id": "UNIT-SECOND", "conversion_multiplier": 1.0 },
+    "UNIT-AMPERE": { "symbol": "A", "dimension": "electric_current", "canonical_unit_id": "UNIT-AMPERE", "conversion_multiplier": 1.0 },
+    "UNIT-K": { "symbol": "K", "dimension": "thermodynamic_temperature", "canonical_unit_id": "UNIT-K", "conversion_multiplier": 1.0 },
+    "UNIT-DEGC": { "symbol": "degC", "dimension": "thermodynamic_temperature", "canonical_unit_id": "UNIT-K", "conversion_multiplier": 1.0, "conversion_offset": 273.15 },
+    "UNIT-PA": { "symbol": "Pa", "dimension": "pressure", "canonical_unit_id": "UNIT-PA", "conversion_multiplier": 1.0 },
+    "UNIT-PSI": { "symbol": "psi", "dimension": "pressure", "canonical_unit_id": "UNIT-PA", "conversion_multiplier": 6894.757 },
+    "UNIT-COULOMB": { "symbol": "C", "dimension": "electrical_charge", "canonical_unit_id": "UNIT-COULOMB", "conversion_multiplier": 1.0 },
+    "UNIT-OHM": { "symbol": "Ohm", "dimension": "resistance", "canonical_unit_id": "UNIT-OHM", "conversion_multiplier": 1.0 },
+    "UNIT-MILLIOHM": { "symbol": "mOhm", "dimension": "resistance", "canonical_unit_id": "UNIT-OHM", "conversion_multiplier": 0.001 },
+    "UNIT-MEGAOHM": { "symbol": "MOhm", "dimension": "resistance", "canonical_unit_id": "UNIT-OHM", "conversion_multiplier": 1000000.0 },
+    "UNIT-DIMENSIONLESS": { "symbol": "1", "dimension": "dimensionless", "canonical_unit_id": "UNIT-DIMENSIONLESS", "conversion_multiplier": 1.0 },
+    "UNIT-PERCENT": { "symbol": "%", "dimension": "dimensionless", "canonical_unit_id": "UNIT-DIMENSIONLESS", "conversion_multiplier": 0.01 }
+  }
+}

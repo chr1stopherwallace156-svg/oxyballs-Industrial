@@ -1,0 +1,37 @@
+{
+  "decision_id": "DT-D035",
+  "title": "EAE CORE INGESTION v0 — local file accept/hash/manifest/idempotency",
+  "date": "2026-07-16",
+  "approved_status": "ACCEPTED",
+  "scope": [
+    "eae/core/",
+    "tests/eae/",
+    "verification/eae_core/",
+    "verification/results/EAE_CORE_INGESTION_IMPLEMENTATION_REPORT.md"
+  ],
+  "reason": "Prove safe local acceptance, type/hash determination, reproducible manifests, and duplicate-free registry before any scoring or remote acquisition.",
+  "decision": [
+    "Implement modular eae/core ingestion for local files only (.obj required; .glb allowlisted).",
+    "Idempotency means same bytes + same ingestion_policy_version → same asset identity and no duplicate authoritative registry entry; repeats may log ALREADY_INGESTED with state_mutation false.",
+    "Distinguish ACCEPTED, REJECT_UNSUPPORTED, QUARANTINE_TYPE_MISMATCH, REJECT_MALFORMED, REJECT_SECURITY, ALREADY_INGESTED.",
+    "Do not activate rubrics, mutate passports, download remotes, or expand frozen rc1 schemas.",
+    "Authoritative status after suite execution is recorded in EAE_CORE_INGESTION_IMPLEMENTATION_REPORT.md."
+  ],
+  "out_of_scope": [
+    "remote marketplace acquisition",
+    "FBX",
+    "STEP",
+    "geometry scoring",
+    "passport mutation",
+    "event streams"
+  ],
+  "validation_evidence": [
+    "verification/results/eae-core-ingestion-tests.json",
+    "verification/results/EAE_CORE_INGESTION_IMPLEMENTATION_REPORT.md"
+  ],
+  "change_control": {
+    "kernel_schema_change": false,
+    "component_passport_rc1_change": false,
+    "rubric_activation": false
+  }
+}

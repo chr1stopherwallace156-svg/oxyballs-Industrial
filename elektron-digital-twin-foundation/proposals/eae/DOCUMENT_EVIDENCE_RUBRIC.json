@@ -1,0 +1,37 @@
+{
+  "rubric_id": "DOCUMENT_EVIDENCE_RUBRIC",
+  "rubric_version": "1.0.0-proposal",
+  "status": "PROPOSAL_NOT_ACTIVATED",
+  "applicable_evidence_types": ["OEM_MANUAL", "PARTS_CATALOG", "SERVICE_PROCEDURE", "WIRING_DIAGRAM", "TORQUE_CHART"],
+  "activation": "EMPIRICAL_TRIGGER_REQUIRED",
+  "metrics": [
+    {
+      "metric_id": "DOC_TIER",
+      "meaning": "Evidence tier authority normalized to 0-1",
+      "applicable_evidence_types": ["OEM_MANUAL", "PARTS_CATALOG", "SERVICE_PROCEDURE"],
+      "required_inputs": ["tier_score"],
+      "formula": "identity",
+      "formula_id": "IDENTITY_FLOAT",
+      "units": "ratio_0_1",
+      "weight": 0.5,
+      "missing_data_behavior": "score=null; scoring_status=NOT_EXECUTED",
+      "pass_threshold": 0.7,
+      "fail_threshold": 0.3,
+      "evidence_requirements": ["tier classification", "local file bytes"]
+    },
+    {
+      "metric_id": "DOC_CONFIG_MATCH",
+      "meaning": "Document applicability to exact configuration",
+      "applicable_evidence_types": ["OEM_MANUAL", "PARTS_CATALOG", "SERVICE_PROCEDURE"],
+      "required_inputs": ["config_match_score"],
+      "formula": "identity",
+      "formula_id": "IDENTITY_FLOAT",
+      "units": "ratio_0_1",
+      "weight": 0.5,
+      "missing_data_behavior": "score=null; scoring_status=NOT_EXECUTED",
+      "pass_threshold": 0.7,
+      "fail_threshold": 0.3,
+      "evidence_requirements": ["configuration match review"]
+    }
+  ]
+}

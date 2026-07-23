@@ -1,0 +1,21 @@
+{
+  "draft_passport_id": "EDTS-COMP-FL-MIRROR",
+  "authority_status": "ILLUSTRATIVE_ONLY",
+  "component_class": "Power Telescoping Tow Mirror",
+  "reported_oem_part_number": "HC3Z-17683-BA",
+  "bound_component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "option_gate": "OPTION_DEPENDENT — not assumed on base/manual mirror configs",
+  "related_candidates": ["CAND-000044-TS", "EDTS-COMP-CAD-002"],
+  "downstream_role_draft": "Exterior visual footprint; map to 22-pin pigtail only after EWD + option proof",
+  "geometry_status": "ABSENT",
+  "engineering_utility": "LOW_EXTERIOR_VISUAL_ONLY_UNTIL_STRUCTURAL_PROOF",
+  "project_confidence_status": "CANDIDATE",
+  "forbidden": [
+    "Assume present on every Regular Cab silo build",
+    "Treat marketplace mesh as structural twin"
+  ],
+  "research_sprint": "RL-010",
+  "decision": "DT-D041"
+}

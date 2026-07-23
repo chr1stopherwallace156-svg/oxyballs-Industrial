@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "registry_name": "EDTS_L1_Exterior_Landmark_Registry_V2",
+  "version": "2.0.0",
+  "status": "DRAFT",
+  "supersedes": "L1_EXTERIOR_LANDMARK_REGISTRY_PROPOSAL.json",
+  "classification_standard": "L1_LANDMARK_CLASSIFICATION_STANDARD.md",
+  "description": "Spatial anchors separated by landmark class so visual indicators are not treated as core engineering datums.",
+  "landmarks": [
+    {
+      "landmark_id": "LMK-FRAME-REAR-LH",
+      "associated_object_id": "OBJ-FRAME-RAIL-LH",
+      "landmark_class": "SCAN_REGISTRATION_LANDMARK",
+      "human_description": "Top outer rear corner of the left-hand C-channel frame rail.",
+      "coordinate_frame": "EDTS_ISO_ALIGNED_VEHICLE_FRAME",
+      "surface_definition": "Point intersection of the vertical outer web, top flange, and rear cut edge",
+      "removable_or_variable": false,
+      "occlusion_risk": "LOW",
+      "configuration_dependency": "NONE",
+      "repeatability_basis": "Fixed stamped-and-cut steel edge frame",
+      "expected_repeatability_mm": 2.0,
+      "physical_verification_status": "PHYSICAL_VERIFICATION_PENDING"
+    },
+    {
+      "landmark_id": "LMK-WHEEL-HUB-FL-VISUAL",
+      "associated_object_id": "OBJ-RIM-FRONT-LH",
+      "landmark_class": "VISUAL_POSE_LANDMARK",
+      "human_description": "Center of the front left outer wheel hub cover center ornament.",
+      "coordinate_frame": "EDTS_ISO_ALIGNED_VEHICLE_FRAME",
+      "surface_definition": "Center of the embossed logo on the removable plastic/metal center cap",
+      "removable_or_variable": true,
+      "occlusion_risk": "LOW",
+      "configuration_dependency": "TRIM_PACKAGE_DEPENDENT",
+      "repeatability_basis": "Dependent on the fitment of the removable trim cap",
+      "expected_repeatability_mm": 5.0,
+      "physical_verification_status": "PHYSICAL_VERIFICATION_PENDING"
+    },
+    {
+      "landmark_id": "LMK-AXLE-FRONT-CTR",
+      "associated_object_id": "OBJ-FRONT-AXLE-ASSEMBLY",
+      "landmark_class": "ENGINEERING_DATUM_LANDMARK",
+      "human_description": "Centerpoint of the front axle face at the lateral centerline (theoretical).",
+      "coordinate_frame": "EDTS_ISO_ALIGNED_VEHICLE_FRAME",
+      "surface_definition": "Geometric center of the axle beam face / spindle axis plane intersection",
+      "removable_or_variable": false,
+      "occlusion_risk": "HIGH",
+      "configuration_dependency": "FRONT_AXLE_CANDIDATE_MONOBEAM",
+      "repeatability_basis": "Design geometry after verified SRC page evidence + physical confirmation",
+      "expected_repeatability_mm": 5.0,
+      "physical_verification_status": "NOT_VERIFIED_FILE_ABSENT"
+    }
+  ]
+}

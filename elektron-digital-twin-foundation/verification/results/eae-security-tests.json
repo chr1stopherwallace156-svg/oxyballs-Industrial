@@ -1,0 +1,99 @@
+{
+  "suite": "eae-security-tests",
+  "execution_timestamp": "2026-07-16T17:56:40.368721+00:00",
+  "runtime": "python3",
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "suite_pass_or_fail": "PASS",
+  "results": [
+    {
+      "test_id": "EAE-SEC-001",
+      "execution_timestamp": "2026-07-16T17:56:40.367884+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "path traversal zip unsafe",
+      "actual_result": "safe=False unsafe=['../escape.txt']",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/verification/evidence_acquisition/fixtures/evil.zip"
+    },
+    {
+      "test_id": "EAE-SEC-002",
+      "execution_timestamp": "2026-07-16T17:56:40.368247+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "evil zip extract rejected",
+      "actual_result": "Unsafe zip entries rejected: ['../escape.txt']",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/verification/evidence_acquisition/fixtures/evil.zip"
+    },
+    {
+      "test_id": "EAE-SEC-003",
+      "execution_timestamp": "2026-07-16T17:56:40.368304+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "misleading extension detected",
+      "actual_result": "{\"path\": \"/workspace/elektron-digital-twin-foundation/verification/evidence_acquisition/fixtures/fake.fbx\", \"extension_claim\": \"fbx\", \"detected_type\": \"OBJ\", \"extension_matches_content\": false, \"misleading_extension\": true}",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": "/workspace/elektron-digital-twin-foundation/verification/evidence_acquisition/fixtures/fake.fbx"
+    },
+    {
+      "test_id": "EAE-SEC-004",
+      "execution_timestamp": "2026-07-16T17:56:40.368715+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "safe zip extracts",
+      "actual_result": "[\"inner/valid.obj\"]",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-PARSE-001",
+      "execution_timestamp": "2026-07-16T17:56:40.367477+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "valid OBJ PASS",
+      "actual_result": "{\"status\": \"PASS\", \"format\": \"OBJ\", \"vertex_count\": 3, \"face_count\": 1, \"objects\": [\"Door_Front_Left\"], \"errors\": []}",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-PARSE-002",
+      "execution_timestamp": "2026-07-16T17:56:40.367510+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "malformed OBJ FAIL",
+      "actual_result": "{\"status\": \"FAIL\", \"format\": \"OBJ\", \"vertex_count\": 0, \"face_count\": 0, \"objects\": [], \"errors\": [\"line 1: malformed vertex\", \"line 2: malformed face\"]}",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-PARSE-003",
+      "execution_timestamp": "2026-07-16T17:56:40.367550+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "valid glTF PASS",
+      "actual_result": "{\"n\": 1}",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    },
+    {
+      "test_id": "EAE-PARSE-004",
+      "execution_timestamp": "2026-07-16T17:56:40.367578+00:00",
+      "runtime": "python3",
+      "execution_status": "EXECUTED",
+      "expected_result": "valid GLB PASS",
+      "actual_result": "{\"status\": \"PASS\", \"format\": \"GLB\", \"node_count\": 1, \"mesh_count\": 0, \"material_count\": 0, \"nodes\": [{\"index\": 0, \"name\": \"Cab\", \"mesh\": null}], \"meshes\": [], \"errors\": [], \"glb_version\": 2}",
+      "pass_or_fail": "PASS",
+      "error_message": null,
+      "evidence_file": null
+    }
+  ]
+}

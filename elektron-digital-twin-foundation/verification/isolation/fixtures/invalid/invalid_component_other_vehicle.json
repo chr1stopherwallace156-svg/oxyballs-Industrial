@@ -1,0 +1,17 @@
+{
+  "component_instance_id": "CMPINST-VEH999999-DOOR-FL",
+  "component_definition_id": "CMPDEF-DOOR-FRONT-LH-0001",
+  "vehicle_instance_id": "VEH-999999",
+  "configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "parent_assembly_instance_id": "ASMINST-VEH000001-CAB",
+  "location_code": "FRONT_LEFT",
+  "instance_status": "DISCOVERED",
+  "engineering_verification_status": "NOT_EVALUATED",
+  "geometry_asset_ids": [
+    "GEO-VEH000001-DOOR-FL-001"
+  ],
+  "evidence_link_ids": [],
+  "schema_version": "1.0.0",
+  "fingerprint_status": "COMPUTED"
+}

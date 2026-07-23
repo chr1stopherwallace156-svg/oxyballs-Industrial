@@ -1,0 +1,25 @@
+{
+  "decision_id": "DT-D036",
+  "title": "EAE CORE — physical identity, integrity conflict, expanded ZIP quarantine",
+  "date": "2026-07-16",
+  "approved_status": "ACCEPTED",
+  "scope": ["eae/core/", "tests/eae/", "verification/results/EAE_CORE_INGESTION_IMPLEMENTATION_REPORT.md"],
+  "reason": "Refine CORE INGESTION after path approval: policy is evaluation metadata only; conflicting manifests must not be overwritten; expand archive security tests.",
+  "decision": [
+    "Physical content identity is the complete SHA-256 of source bytes.",
+    "ingestion_policy_version does not create a second physical asset; evaluation logs are separate.",
+    "Equivalent existing manifest → ALREADY_INGESTED; different existing manifest at same identity → REGISTRY_INTEGRITY_CONFLICT.",
+    "ZIP inspection covers ../, absolute, Windows traversal, symlink, duplicate destinations, and excessive compression ratio.",
+    "Frozen kernel and component-passport rc1 remain unchanged."
+  ],
+  "validation_evidence": [
+    "verification/results/eae-core-ingestion-tests.json",
+    "verification/results/EAE_CORE_INGESTION_IMPLEMENTATION_REPORT.md",
+    "verification/results/eae-core-kernel-freeze-audit.json"
+  ],
+  "final_status": "EDTS_EAE_CORE_INGESTION_VALIDATED",
+  "change_control": {
+    "kernel_schema_change": false,
+    "component_passport_rc1_change": false
+  }
+}

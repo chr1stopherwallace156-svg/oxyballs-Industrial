@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_PUBLIC_REFERENCE_IMAGE_MANIFEST_PROPOSAL",
+  "project": "2019_FORD_F450_CHASSIS_CAB_145_3",
+  "manifest_status": "SUPERSEDED_BY_L1_PUBLIC_REFERENCE_IMAGE_MANIFEST",
+  "superseded_by": "L1_PUBLIC_REFERENCE_IMAGE_MANIFEST.json",
+  "notes": [
+    "SUPERSEDED by Source Pack 01 manifest. Retained as planning trail with example URL placeholders."
+  ],
+  "categories": {
+    "dealer_inventory_harvests": [
+      {
+        "manifest_item_id": "REF-PUB-001",
+        "description": "2019 Ford F-450 DRW 4x2 Regular Cab chassis walkaround photos",
+        "source_url": "https://www.commercialtrucktrader.com/example-listing-10293",
+        "source_url_status": "EXAMPLE_PLACEHOLDER",
+        "target_features": [
+          "axle_housing_clearance",
+          "cab_roof_lamp_spacing",
+          "fuel_tank_fill_neck_path"
+        ],
+        "local_storage_destination": "research/reference_images/public_harvests/REF-PUB-001/",
+        "acquired": false,
+        "license_restriction": "FAIR_USE_INTERNAL_NON_COMMERCIAL_RESEARCH",
+        "counsel_review_required": true
+      }
+    ],
+    "auction_listings": [
+      {
+        "manifest_item_id": "REF-PUB-002",
+        "description": "Copart raw chassis undercarriage rear suspension salvage listing photos",
+        "source_url": "https://www.copart.com/example-salvage-f450",
+        "source_url_status": "EXAMPLE_PLACEHOLDER",
+        "target_features": [
+          "frame_inner_corridor",
+          "exhaust_exit_path",
+          "spare_tire_carrier_presence"
+        ],
+        "local_storage_destination": "research/reference_images/public_harvests/REF-PUB-002/",
+        "acquired": false,
+        "license_restriction": "FAIR_USE_INTERNAL_NON_COMMERCIAL_RESEARCH",
+        "counsel_review_required": true
+      }
+    ],
+    "oem_press_and_fleet_brochures": [
+      {
+        "manifest_item_id": "REF-PUB-003",
+        "description": "2019 Super Duty Chassis Cab press-kit / fleet brochure exterior profiles",
+        "source_url": null,
+        "source_url_status": "PENDING_HUNT",
+        "target_features": [
+          "panel_line_reference_board",
+          "grille_and_bumper_package",
+          "mirror_and_flare_silhouette"
+        ],
+        "local_storage_destination": "research/reference_images/public_harvests/REF-PUB-003/",
+        "acquired": false,
+        "license_restriction": "FAIR_USE_INTERNAL_NON_COMMERCIAL_RESEARCH",
+        "counsel_review_required": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,244 @@
+{
+  "suite": "eae-implementation-audit",
+  "execution_timestamp": "2026-07-16T17:56:40.369267+00:00",
+  "audit_method": "code_inspection_plus_executable_fixtures",
+  "overclaim_corrected": "Prior 'EAE operational' language overstated readiness; this audit is authoritative.",
+  "capabilities": [
+    {
+      "capability": "candidate_registration",
+      "implementation_files": [
+        "tools/evidence_acquisition/run_evidence_acquisition.py"
+      ],
+      "tests": [],
+      "execution_status": "PARTIAL",
+      "supported_formats": [],
+      "known_limitations": [
+        "Reads existing Lane A catalog only; no candidate_registration.json writer"
+      ]
+    },
+    {
+      "capability": "url_source_verification",
+      "implementation_files": [
+        "tools/evidence_acquisition/run_evidence_acquisition.py"
+      ],
+      "tests": [],
+      "execution_status": "NOT_IMPLEMENTED",
+      "supported_formats": [
+        "http/https"
+      ],
+      "known_limitations": [
+        "No HTTP HEAD/GET verification; only null/sidecar presence check"
+      ]
+    },
+    {
+      "capability": "acquisition_download",
+      "implementation_files": [],
+      "tests": [],
+      "execution_status": "NOT_IMPLEMENTED",
+      "supported_formats": [],
+      "known_limitations": [
+        "No network download implementation"
+      ]
+    },
+    {
+      "capability": "quarantine_safe_extraction",
+      "implementation_files": [
+        "tools/evidence_acquisition/eae_core/quarantine.py"
+      ],
+      "tests": [
+        "eae-security-tests"
+      ],
+      "execution_status": "IMPLEMENTED",
+      "supported_formats": [
+        "ZIP"
+      ],
+      "known_limitations": [
+        "Only ZIP path-traversal checks; no antivirus"
+      ]
+    },
+    {
+      "capability": "sha256_hashing",
+      "implementation_files": [
+        "tools/evidence_acquisition/eae_core/hashutil.py"
+      ],
+      "tests": [
+        "eae-idempotency-tests"
+      ],
+      "execution_status": "IMPLEMENTED",
+      "supported_formats": [
+        "any file"
+      ],
+      "known_limitations": []
+    },
+    {
+      "capability": "file_type_detection",
+      "implementation_files": [
+        "tools/evidence_acquisition/eae_core/detect.py"
+      ],
+      "tests": [
+        "eae-security-tests"
+      ],
+      "execution_status": "PARTIAL",
+      "supported_formats": [
+        "GLB",
+        "GLTF",
+        "OBJ",
+        "ZIP",
+        "STEP sniff"
+      ],
+      "known_limitations": [
+        "FBX not parsed; extension-only warning"
+      ]
+    },
+    {
+      "capability": "metadata_inspection",
+      "implementation_files": [
+        "tools/evidence_acquisition/run_evidence_acquisition.py"
+      ],
+      "tests": [],
+      "execution_status": "PARTIAL",
+      "supported_formats": [
+        "GLB",
+        "GLTF",
+        "OBJ",
+        "STEP header",
+        "ZIP list"
+      ],
+      "known_limitations": [
+        "Exporter/author often null"
+      ]
+    },
+    {
+      "capability": "fbx_parsing",
+      "implementation_files": [],
+      "tests": [],
+      "execution_status": "NOT_IMPLEMENTED",
+      "supported_formats": [
+        "FBX"
+      ],
+      "known_limitations": [
+        "No FBX SDK/parser"
+      ]
+    },
+    {
+      "capability": "obj_parsing",
+      "implementation_files": [
+        "tools/evidence_acquisition/eae_core/parse_obj.py"
+      ],
+      "tests": [
+        "parse smoke in suite"
+      ],
+      "execution_status": "IMPLEMENTED",
+      "supported_formats": [
+        "OBJ"
+      ],
+      "known_limitations": [
+        "Limited validation"
+      ]
+    },
+    {
+      "capability": "gltf_glb_parsing",
+      "implementation_files": [
+        "tools/evidence_acquisition/eae_core/parse_gltf.py"
+      ],
+      "tests": [
+        "parse smoke in suite"
+      ],
+      "execution_status": "IMPLEMENTED",
+      "supported_formats": [
+        "GLTF",
+        "GLB"
+      ],
+      "known_limitations": [
+        "No binary buffer geometry decode"
+      ]
+    },
+    {
+      "capability": "step_cad_inspection",
+      "implementation_files": [
+        "tools/evidence_acquisition/run_evidence_acquisition.py"
+      ],
+      "tests": [],
+      "execution_status": "NOT_IMPLEMENTED",
+      "supported_formats": [
+        "STEP"
+      ],
+      "known_limitations": [
+        "Header sniff only in runner; no B-rep walk"
+      ]
+    },
+    {
+      "capability": "hierarchy_inventory",
+      "implementation_files": [
+        "tools/evidence_acquisition/run_evidence_acquisition.py"
+      ],
+      "tests": [],
+      "execution_status": "PARTIAL",
+      "supported_formats": [
+        "GLTF nodes",
+        "OBJ objects"
+      ],
+      "known_limitations": [
+        "Name-heuristic door detection only"
+      ]
+    },
+    {
+      "capability": "rubric_evaluation",
+      "implementation_files": [
+        "tools/evidence_acquisition/eae_core/rubric.py",
+        "proposals/eae/*_RUBRIC.json"
+      ],
+      "tests": [
+        "eae-rubric-tests"
+      ],
+      "execution_status": "PARTIAL",
+      "supported_formats": [
+        "profile-driven"
+      ],
+      "known_limitations": [
+        "Not activated for real candidates; missing inputs => null"
+      ]
+    },
+    {
+      "capability": "immutable_event_creation",
+      "implementation_files": [
+        "tools/evidence_acquisition/eae_core/events.py",
+        "proposals/eae/PASSPORT_APPEND_ONLY_EVENT_MODEL.md"
+      ],
+      "tests": [
+        "eae-idempotency-tests"
+      ],
+      "execution_status": "PARTIAL",
+      "supported_formats": [
+        "proposal model"
+      ],
+      "known_limitations": [
+        "Not wired to frozen rc1 passport"
+      ]
+    },
+    {
+      "capability": "current_state_projection",
+      "implementation_files": [
+        "tools/evidence_acquisition/eae_core/events.py"
+      ],
+      "tests": [
+        "eae-idempotency-tests"
+      ],
+      "execution_status": "PARTIAL",
+      "supported_formats": [
+        "proposal model"
+      ],
+      "known_limitations": [
+        "Not runtime-authoritative"
+      ]
+    }
+  ],
+  "suite_cross_check": {
+    "security": "PASS",
+    "idempotency": "PASS",
+    "rubric": "PASS",
+    "parse_smoke_failed": 0
+  },
+  "final_status": "EDTS_EAE_SPECIFICATION_READY_IMPLEMENTATION_PENDING",
+  "candidate_state_path": "verification/results/eae-candidate-state.json"
+}

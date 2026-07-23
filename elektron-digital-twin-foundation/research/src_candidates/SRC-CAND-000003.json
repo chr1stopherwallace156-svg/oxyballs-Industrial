@@ -1,0 +1,44 @@
+{
+  "candidate_id": "SRC-CAND-000003",
+  "id_immutable": true,
+  "metadata": {
+    "title": "2019 F-450 Parts Catalog (Front Axle)",
+    "source_type": "OEM_PARTS",
+    "document_class": "PARTS_CATALOG",
+    "publisher": "Ford",
+    "reported_year": 2019,
+    "legacy_aliases": []
+  },
+  "acquisition_status": "NOT_ACQUIRED",
+  "access_status": "NOT_ACQUIRED",
+  "research_confidence_rc": 75,
+  "reasoning_log": [
+    {
+      "at": "2026-07-16T19:30:00Z",
+      "rc": 75,
+      "note": "Parts catalog can yield knuckle/radius-arm/axle PNs for CONFIGURATION_MATCH cross-check. Prefer VIN-filtered inquiry (LANE_PRT). Does not alone prove architecture. Bytes/access absent."
+    }
+  ],
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "local_file_path": null,
+  "sha256": null,
+  "hash_status": "NOT_EXECUTED",
+  "page_extraction_status": "NOT_EXECUTED",
+  "evidence_status": "CANDIDATE",
+  "related_source_registry_id": null,
+  "closes_conflicts": ["CNF-001-FRONT-SUSPENSION-TYPE"],
+  "closes_questions": ["Q3"],
+  "parallel_lanes_triggered": ["LANE_PRT", "LANE_A_DOC", "LANE_VIS"],
+  "forbidden_uses_until_acquired": [
+    "geometry_acceptance_without_VIN_filtered_match",
+    "architecture_decision_from_PN_alone"
+  ],
+  "notes": [
+    "Risk mitigation: parts metadata must match VIN-filtered catalog inquiry before CONFIGURATION_MATCH.",
+    "Hard Rule 13: parts lane runs in parallel with BBAS/service hunt — does not wait for full closure of Lane A."
+  ],
+  "research_sprint": "RL-007",
+  "decision": "DT-D038"
+}

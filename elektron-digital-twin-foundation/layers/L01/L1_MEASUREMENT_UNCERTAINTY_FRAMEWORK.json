@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_MEASUREMENT_UNCERTAINTY_FRAMEWORK",
+  "version": "1.0.0",
+  "status": "DRAFT",
+  "purpose": "Prevent misleading precision on an assembled, loaded utility vehicle",
+  "related_definitions": "L1_STRUCTURAL_MEASUREMENT_DEFINITIONS.md",
+  "measurement_quality_standards": {
+    "instrument_resolution": {
+      "digital_caliper_300mm": "0.01 mm",
+      "laser_distance_meter": "1.00 mm",
+      "digital_angle_gauge": "0.05 degree"
+    },
+    "instrument_calibration_uncertainty": {
+      "digital_caliper_300mm": "+/- 0.03 mm",
+      "laser_distance_meter": "+/- 1.50 mm"
+    },
+    "measurement_process_uncertainty": {
+      "body_panel_gaps": "+/- 0.50 mm",
+      "chassis_frame_spans": "+/- 1.00 mm",
+      "wheel_center_alignment": "+/- 1.50 mm",
+      "ground_to_chassis_clearances": "+/- 5.00 mm"
+    },
+    "target_measurement_uncertainty": {
+      "critical_dimensional_twin_tolerances": {
+        "wheelbase_deviation_limit": "2.0 mm",
+        "front_track_deviation_limit": "3.0 mm",
+        "tolerance_class": "PROVISIONAL_PROJECT_SPECIFICATION",
+        "note": "These are project delivery / capture capability targets, not assumed OEM blueprint tolerances. See L1_SOURCE_BASELINE_CLOSURE_CRITERIA.md project_specification_closure."
+      }
+    }
+  }
+}

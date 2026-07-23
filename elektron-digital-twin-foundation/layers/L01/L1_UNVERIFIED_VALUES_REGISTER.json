@@ -1,0 +1,39 @@
+{
+  "$id": "urn:edts:schema:unverified-register:v1",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "document_id": "L1_UNVERIFIED_VALUES_REGISTER",
+  "project": "2019_FORD_F450_CHASSIS_CAB_145_3",
+  "version": "1.1.0",
+  "milestone": "L1_SOURCE_PACK_01",
+  "verification_status": "L1_SOURCE_PACK_01_NOT_VERIFIED",
+  "purpose": "Hold provisional or rejected-as-baseline values that must not enter the L1 exterior dimensional lock. Material/durometer items deferred to L2.",
+  "unverified_values": [
+    {
+      "parameter_id": "UNV-L1-001",
+      "parameter_name": "front_radius_arm_bushing_durometer",
+      "provisional_value": "75A_SHORE",
+      "status": "DEFERRED_TO_L2",
+      "confidence": "LOW",
+      "resolution_type": "PHYSICAL_TEST_OR_OEM_ENGINEERING_DRAWING",
+      "impact": "Low visual/dimensional impact. Removed from L1 exterior baseline noise."
+    },
+    {
+      "parameter_id": "UNV-L1-002",
+      "parameter_name": "cab_mounting_bushings_material_roughness",
+      "provisional_value": "0.18",
+      "status": "DEFERRED_TO_L2",
+      "confidence": "LOW",
+      "resolution_type": "CONTROLLED_PHOTOGRAPHY_CALIBRATION",
+      "impact": "Underbody material representation deferred with L2 metrology/visual stack."
+    },
+    {
+      "parameter_id": "UNV-L1-003",
+      "parameter_name": "sheet_metal_clear_coat_thickness",
+      "provisional_value": "0.12_MM",
+      "status": "DEFERRED_TO_L2",
+      "confidence": "LOW",
+      "resolution_type": "PHYSICAL_COATING_MEASUREMENT",
+      "impact": "Shader provisional tuning may continue under PROVISIONAL_VISUAL_TUNING without L1 baseline lock."
+    }
+  ]
+}

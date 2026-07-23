@@ -1,0 +1,11 @@
+{
+  "$schema": "../../schemas/vehicle-instance.schema.json",
+  "$id": "urn:edts:example:vehicle:VEH-000001",
+  "vehicle_instance_id": "VEH-000001",
+  "configuration_id": "CFG-000001",
+  "instance_scope": "CONFIGURATION_REFERENCE",
+  "physical_asset_status": "NOT_ASSIGNED",
+  "vin": null,
+  "schema_version": "1.0.0",
+  "notes": "Configuration-reference silo only. Physical VIN not assigned."
+}

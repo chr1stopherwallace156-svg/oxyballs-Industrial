@@ -1,0 +1,204 @@
+{
+  "document_id": "ASSET_INTELLIGENCE_REGISTER",
+  "version": "1.1.0",
+  "status": "ACTIVE",
+  "schema": "schemas/asset-intelligence-passport.schema.json",
+  "home": "research/asset_intelligence/",
+  "decision": "DT-D043",
+  "research_sprint": "RL-012",
+  "id_policy": {
+    "pattern": "AID-######",
+    "immutable_handle": true,
+    "next_id": "AID-000012"
+  },
+  "locked_configuration": {
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_id": "CFG-000001",
+    "summary": "2019 Ford F-450 Chassis Cab Regular Cab 4x2 DRW 145.3 WB / 60 CA",
+    "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943"
+  },
+  "relationship_to_dt_d027": "DT-D027 rejected redundant shortlist files (L1_ASSET_CANDIDATE_DATABASE.json et al.). AID is a different artifact: structured per-asset intelligence passports. Lane A catalog remains the thin marketplace pointer register.",
+  "relationship_to_scoring": "Ordinals remain primary pre-bytes triage. Optional score_claims (0\u20131) are RESEARCH_CLAIM/LISTING_CLAIM only. EVALUATED scores require local bytes. Numeric EAE rubric engines remain NOT_AUTHORIZED_UNTIL_ACQUIRED (DT-D029).",
+  "posture": "DECONSTRUCTED_SOURCING_AJR_GATED_INPUTS_NOT_ANSWERS",
+  "assets": [
+    {
+      "asset_id": "AID-000001",
+      "path": "research/asset_intelligence/passports/AID-000001.json",
+      "title": "2017 Ford F-450 Super Duty 4 Gen Facelift '20 Chassis Cab \u2219 Regular Cab CA 60\" \u2219 DRW Blueprint",
+      "edts_role": "PROFILE_REFERENCE",
+      "exact_configuration_match": "EXTERIOR_PROPORTION_CANDIDATE",
+      "acquired": "NOT_ACQUIRED",
+      "aliases": [
+        "EDTS-CAND-001",
+        "C-001",
+        "SRC-CAND-000004"
+      ],
+      "url_status": "URL_RECORDED"
+    },
+    {
+      "asset_id": "AID-000002",
+      "path": "research/asset_intelligence/passports/AID-000002.json",
+      "title": "Ford F350 - F550 Super Duty Dually EOG - Complete Model",
+      "edts_role": "VISUAL_CANDIDATE",
+      "exact_configuration_match": "PLATFORM_BAND",
+      "acquired": "NOT_ACQUIRED",
+      "aliases": [
+        "EDTS-CAND-002",
+        "C-002",
+        "CAND-000042-EOG"
+      ],
+      "url_status": "URL_FETCH_CONFIRMED"
+    },
+    {
+      "asset_id": "AID-000003",
+      "path": "research/asset_intelligence/passports/AID-000003.json",
+      "title": "F-Series Aluminum Door Outer Shell (GrabCAD claim \u2014 2015 F-150 Front Door)",
+      "edts_role": "CAD_CANDIDATE",
+      "exact_configuration_match": "COMPARISON_REFERENCE",
+      "acquired": "NOT_ACQUIRED",
+      "aliases": [
+        "EDTS-COMP-CAD-001",
+        "CAND-000043-GRAB"
+      ],
+      "url_status": "NOT_RECORDED"
+    },
+    {
+      "asset_id": "AID-000004",
+      "path": "research/asset_intelligence/passports/AID-000004.json",
+      "title": "Super Duty Tow Mirror Assembly (TurboSquid ID 1598273)",
+      "edts_role": "VISUAL_CANDIDATE",
+      "exact_configuration_match": "UNKNOWN",
+      "acquired": "NOT_ACQUIRED",
+      "aliases": [
+        "EDTS-COMP-CAD-002",
+        "CAND-000044-TS"
+      ],
+      "url_status": "MARKETPLACE_ID_ONLY"
+    },
+    {
+      "asset_id": "AID-000005",
+      "path": "research/asset_intelligence/passports/AID-000005.json",
+      "title": "2017-2019 Regular Cab Super Duty exterior / cab shell (marketplace claim)",
+      "edts_role": "VISUAL_CANDIDATE",
+      "exact_configuration_match": "VISUAL_GENERATION",
+      "acquired": "NOT_ACQUIRED",
+      "aliases": [
+        "ASSET-00031",
+        "CAND-00031-CGT"
+      ],
+      "url_status": "NOT_RECORDED"
+    },
+    {
+      "asset_id": "AID-000006",
+      "path": "research/asset_intelligence/passports/AID-000006.json",
+      "title": "2017 Super Duty Front Door CAD STEP (discovery claim)",
+      "edts_role": "CAD_CANDIDATE",
+      "exact_configuration_match": "COMPARISON_REFERENCE",
+      "acquired": "NOT_ACQUIRED",
+      "aliases": [
+        "CAND-771-GRAB"
+      ],
+      "url_status": "NOT_RECORDED"
+    },
+    {
+      "asset_id": "AID-000007",
+      "path": "research/asset_intelligence/passports/AID-000007.json",
+      "title": "Outlines F-450 Super Duty Chassis Cab blueprint \u2014 Regular Cab Chassis Cab CA 108 (related listing)",
+      "edts_role": "ACQUISITION_INPUT",
+      "exact_configuration_match": "NONE",
+      "acquired": "NOT_ACQUIRED",
+      "aliases": [
+        "OUTLINES-30638"
+      ],
+      "url_status": "INCOMPLETE_SLUG_DO_NOT_INVENT"
+    },
+    {
+      "asset_id": "AID-000008",
+      "path": "research/asset_intelligence/passports/AID-000008.json",
+      "title": "Outlines F-450 Super Duty Chassis Cab blueprint \u2014 Regular Cab Chassis Cab CA 120 (related listing)",
+      "edts_role": "ACQUISITION_INPUT",
+      "exact_configuration_match": "NONE",
+      "acquired": "NOT_ACQUIRED",
+      "aliases": [
+        "OUTLINES-30639"
+      ],
+      "url_status": "INCOMPLETE_SLUG_DO_NOT_INVENT"
+    },
+    {
+      "asset_id": "AID-000009",
+      "path": "research/asset_intelligence/passports/AID-000009.json",
+      "title": "Spicer M300 DRW Rear Axle Assembly CAD (supplier-channel claim)",
+      "edts_role": "SUPPLIER_CAD_CANDIDATE",
+      "exact_configuration_match": "UNKNOWN",
+      "acquired": "NOT_ACQUIRED",
+      "aliases": [
+        "AID-AXLE-M300-01",
+        "CMP-AXL-M300-CAND"
+      ],
+      "url_status": "NOT_RECORDED",
+      "ajr_id": "AJR-000001",
+      "assembly_hub": "REAR_AXLE"
+    },
+    {
+      "asset_id": "AID-000010",
+      "path": "research/asset_intelligence/passports/AID-000010.json",
+      "title": "ZF TRW TAS65 Hydraulic Steering Gearbox (catalog claim)",
+      "edts_role": "SUPPLIER_CAD_CANDIDATE",
+      "exact_configuration_match": "UNKNOWN",
+      "acquired": "NOT_ACQUIRED",
+      "aliases": [
+        "AID-STEER-GEAR-03"
+      ],
+      "url_status": "NOT_RECORDED",
+      "ajr_id": "AJR-000002",
+      "assembly_hub": "STEERING"
+    },
+    {
+      "asset_id": "AID-000011",
+      "path": "research/asset_intelligence/passports/AID-000011.json",
+      "title": "F-Series Driver Door Shell \u2014 Hum3D F-150 Door Group Extract (claim)",
+      "edts_role": "VISUAL_CANDIDATE",
+      "exact_configuration_match": "COMPARISON_REFERENCE",
+      "acquired": "NOT_ACQUIRED",
+      "aliases": [
+        "AID-DOOR-SHELL-01"
+      ],
+      "url_status": "NOT_RECORDED",
+      "ajr_id": null,
+      "assembly_hub": "FL_DOOR"
+    }
+  ],
+  "acquisition_priority_suggested": [
+    "AID-000001",
+    "AID-000009",
+    "AID-000010",
+    "AID-000003",
+    "AID-000011",
+    "AID-000002"
+  ],
+  "alias_map": {
+    "EDTS-CAND-001": "AID-000001",
+    "SRC-CAND-000004": "AID-000001",
+    "EDTS-CAND-002": "AID-000002",
+    "CAND-000042-EOG": "AID-000002",
+    "EDTS-COMP-CAD-001": "AID-000003",
+    "CAND-000043-GRAB": "AID-000003",
+    "EDTS-COMP-CAD-002": "AID-000004",
+    "CAND-000044-TS": "AID-000004",
+    "ASSET-00031": "AID-000005",
+    "CAND-00031-CGT": "AID-000005",
+    "CAND-771-GRAB": "AID-000006",
+    "AID-AXLE-M300-01": "AID-000009",
+    "AID-STEER-GEAR-03": "AID-000010",
+    "AID-DOOR-SHELL-01": "AID-000011"
+  },
+  "notes": [
+    "Every new internet asset discovery should create or update an AID-* passport.",
+    "Promote listing claims to evaluated ordinals only after local parse.",
+    "Never set exact_configuration_match=CONFIGURATION_MATCHED from a marketplace title alone.",
+    "RL-012 / DT-D043: supplier hub candidates added; AJR required before purchase; score_claims are not EVALUATED."
+  ],
+  "ajr_register": "research/asset_intelligence/ajr/AJR_REGISTER.json",
+  "sourcing_model": "research/sourcing/DECONSTRUCTED_ASSEMBLY_SOURCING.md",
+  "supplier_matrix": "research/sourcing/TIER1_SUPPLIER_MATRIX_2019_F450.json"
+}

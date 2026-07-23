@@ -1,0 +1,104 @@
+{
+  "asset_id": "AID-000004",
+  "id_immutable": true,
+  "schema_version": "1.0.0",
+  "authority_status": "RESEARCH_OPERATIONAL",
+  "aliases": [
+    "EDTS-COMP-CAD-002",
+    "CAND-000044-TS"
+  ],
+  "title": "Super Duty Tow Mirror Assembly (TurboSquid ID 1598273)",
+  "source": {
+    "platform": "TurboSquid",
+    "publisher": null,
+    "url": null,
+    "url_status": "MARKETPLACE_ID_ONLY",
+    "marketplace_id": "1598273",
+    "access_condition": "Commercial \u2014 reported $39 USD"
+  },
+  "vehicle": {
+    "reported_make": "Ford",
+    "reported_model": "Super Duty (tow mirror)",
+    "reported_year_range": "unspecified",
+    "reported_body": "Mirror assembly",
+    "listing_claim_summary": "Manual fold/telescope tow mirror STEP/IGES \u2014 visual mesh"
+  },
+  "configuration": {
+    "reported_cab": null,
+    "reported_ca_in": null,
+    "reported_wheelbase_in": null,
+    "reported_drivetrain": null,
+    "reported_rear_wheels": null,
+    "notes": "OPTION_DEPENDENT \u2014 power telescope not assumed on base XL"
+  },
+  "exact_configuration_match": "UNKNOWN",
+  "geometry_types": [
+    "STEP",
+    "IGES"
+  ],
+  "completeness": {
+    "exterior": "PARTIAL",
+    "interior": "NOT_APPLICABLE",
+    "mechanical": "NONE",
+    "electrical": "NONE",
+    "hierarchy_quality": "NONE",
+    "mesh_separation": "NONE",
+    "topology_quality": "NOT_EVALUATED",
+    "evaluation_basis": "LISTING_ONLY"
+  },
+  "usefulness": {
+    "engineering": "NONE",
+    "visual": "PARTIAL"
+  },
+  "license": {
+    "status": "COMMERCIAL_PURCHASE",
+    "terms_summary": null
+  },
+  "price": {
+    "status": "PAID",
+    "amount_usd": 39.0,
+    "currency_note": "Reported"
+  },
+  "lifecycle": {
+    "discovered": true,
+    "acquired": "NOT_ACQUIRED",
+    "parsed": "NOT_EXECUTED",
+    "verified": "NOT_EXECUTED"
+  },
+  "component_coverage": [
+    {
+      "target": "EDTS-COMP-FL-MIRROR",
+      "presence": "CLAIMED",
+      "notes": "Exterior visual only"
+    },
+    {
+      "target": "Mounting plates / conduits",
+      "presence": "ABSENT"
+    }
+  ],
+  "known_deficiencies": [
+    "Full listing URL not recorded (do not invent)",
+    "Lacks structural brackets and wire routing",
+    "Low engineering utility"
+  ],
+  "evidence_links": [
+    {
+      "kind": "LANE_A_CATALOG",
+      "ref": "layers/L01/L1_LANE_A_ASSET_CATALOG.json#CAND-000044-TS"
+    },
+    {
+      "kind": "SPRINT",
+      "ref": "research/sprints/RL-011_ASSET_INTELLIGENCE_DATABASE.md"
+    }
+  ],
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "related_asset_ids": [],
+  "maps_to_src_cand": null,
+  "maps_to_candidate_asset_id": "CAND-000044-TS",
+  "edts_role": "VISUAL_CANDIDATE",
+  "research_sprint": "RL-011",
+  "decision": "DT-D042",
+  "notes": []
+}

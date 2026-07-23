@@ -1,0 +1,45 @@
+{
+  "suite": "eae-core-ingestion",
+  "execution_timestamp": "2026-07-16T18:18:02.674389+00:00",
+  "runtime": {
+    "python": "3.12.3",
+    "python_full": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "pytest": "9.1.1"
+  },
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "pytest",
+    "/workspace/elektron-digital-twin-foundation/tests/eae",
+    "-q",
+    "--tb=short"
+  ],
+  "exit_code": 0,
+  "summary_line": "35 passed in 0.20s",
+  "total": 35,
+  "passed": 35,
+  "failed": 0,
+  "skipped": 0,
+  "suite_pass_or_fail": "PASS",
+  "final_status": "EDTS_EAE_CORE_INGESTION_VALIDATED",
+  "stdout": "...................................                                      [100%]\n35 passed in 0.20s\n",
+  "stderr": "",
+  "implementation_paths": [
+    "eae/core/ingest.py",
+    "eae/core/hashing.py",
+    "eae/core/detection.py",
+    "eae/core/quarantine.py",
+    "eae/core/manifest.py",
+    "eae/core/registry.py",
+    "eae/core/errors.py",
+    "eae/core/policy.py",
+    "eae/schemas/ingestion-manifest.schema.json",
+    "tests/eae/"
+  ],
+  "frozen_kernel_unchanged": true,
+  "evidence": {
+    "tests_json": "verification/results/eae-core-ingestion-tests.json",
+    "report": "verification/results/EAE_CORE_INGESTION_IMPLEMENTATION_REPORT.md"
+  }
+}

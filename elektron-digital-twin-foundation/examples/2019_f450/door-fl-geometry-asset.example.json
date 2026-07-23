@@ -1,0 +1,20 @@
+{
+  "$schema": "../../schemas/geometry-asset.schema.json",
+  "$id": "urn:edts:example:geometry:GEO-VEH000001-DOOR-FL-001",
+  "geometry_asset_id": "GEO-VEH000001-DOOR-FL-001",
+  "component_instance_id": "CMPINST-VEH000001-DOOR-FL",
+  "format": "GLB",
+  "asset_role": "PROVISIONAL_VISUAL",
+  "validation_status": "NOT_EXECUTED",
+  "catalog_asset_id": "ASSET-00031",
+  "local_path": null,
+  "file_exists": false,
+  "objective_metrics": {
+    "triangle_count": null,
+    "bounding_box_mm": null,
+    "non_manifold": null,
+    "texture_count": null
+  },
+  "schema_version": "1.0.0",
+  "notes": "Dormant seed only: file_exists false. Not a usable geometry asset. Do not link from the component passport until ACQUIRED→HASHED→PARSED→COMPONENT_INVENTORIED→ROLE_EVALUATED. Component-instance listing may remain for kernel referential seed; passport geometry_asset_ids stays empty."
+}

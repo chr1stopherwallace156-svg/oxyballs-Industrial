@@ -1,0 +1,29 @@
+{
+  "document_id": "F450_DOOR_FL_EVIDENCE_LINKS",
+  "entity_id": "CMP-FORD-SD-DOOR-FL-001",
+  "policy": "First evidence link must be asset-backed geometry (EVL-00001). OEM BBAS/WSM links are secondary stubs until file_exists.",
+  "links": [
+    {
+      "evidence_link_id": "EVL-00001",
+      "entity_id": "CMP-FORD-SD-DOOR-FL-001",
+      "source_id": "SRC-ASSET-00031",
+      "relationship": "SUPPORTS_GEOMETRY",
+      "verification_status": "CANDIDATE",
+      "file_exists": false,
+      "page_evidence_asserted": false,
+      "linked_geometry_asset_id": "GEO-00001",
+      "notes": "PRIMARY first evidence link. ASSET-00031 Grade B cab shell contains the FL door region. Mesh bytes not yet archived under research/incoming — CANDIDATE until ingest metrics run."
+    },
+    {
+      "evidence_link_id": "EVL-00002",
+      "entity_id": "CMP-FORD-SD-DOOR-FL-001",
+      "source_id": "SRC-BBAS-2019-SD",
+      "source_alias": "SRC-OEM-001 / SRC-L1-001",
+      "relationship": "SUPPORTS_DIMENSION",
+      "verification_status": "AWAITING_FILE",
+      "file_exists": false,
+      "page_evidence_asserted": false,
+      "notes": "SECONDARY stub only — not the first link. Do not assert page quotes. Promote after PDF hash + page evidence."
+    }
+  ]
+}

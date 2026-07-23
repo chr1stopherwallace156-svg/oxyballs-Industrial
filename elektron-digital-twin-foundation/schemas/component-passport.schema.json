@@ -1,0 +1,131 @@
+{
+  "title": "EDTS Component Passport",
+  "type": "object",
+  "required": [
+    "passport_id",
+    "component_instance_id",
+    "vehicle_instance_id",
+    "configuration_id",
+    "status_summary",
+    "schema_version"
+  ],
+  "properties": {
+    "passport_id": {
+      "type": "string",
+      "pattern": "^PP-[A-Z0-9-]+$"
+    },
+    "component_instance_id": {
+      "type": "string",
+      "pattern": "^CMPINST-[A-Z0-9-]+$"
+    },
+    "vehicle_instance_id": {
+      "type": "string",
+      "pattern": "^VEH-[A-Z0-9-]+$"
+    },
+    "configuration_id": {
+      "type": "string",
+      "pattern": "^CFG-[A-Z0-9-]+$"
+    },
+    "configuration_fingerprint": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      ]
+    },
+    "status_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence",
+        "geometry",
+        "interaction"
+      ],
+      "properties": {
+        "evidence": {
+          "type": "string",
+          "enum": [
+            "ABSENT",
+            "CANDIDATE",
+            "AWAITING_FILE",
+            "NORMALIZED",
+            "VERIFIED",
+            "UNKNOWN",
+            "NOT_EVALUATED",
+            "REQUIRES_EVIDENCE"
+          ]
+        },
+        "geometry": {
+          "type": "string",
+          "enum": [
+            "ABSENT",
+            "PROVISIONAL",
+            "DIMENSIONAL_CANDIDATE",
+            "ENGINEERING_VERIFIED",
+            "UNKNOWN",
+            "NOT_EVALUATED"
+          ]
+        },
+        "interaction": {
+          "type": "string",
+          "enum": [
+            "ABSENT",
+            "PROTOTYPE",
+            "VISUAL_PREVIEW_ONLY",
+            "CALIBRATED",
+            "ENGINEERING_VERIFIED",
+            "UNKNOWN",
+            "NOT_EVALUATED"
+          ]
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "evidence_link_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "geometry_asset_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relationship_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "interaction_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:schema:component-passport:v1",
+  "additionalProperties": false
+}

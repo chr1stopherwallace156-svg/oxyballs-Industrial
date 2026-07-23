@@ -1,0 +1,35 @@
+{
+  "asset_id": "ASSET-00031",
+  "audit_timestamp": "2026-07-16T16:55:00Z",
+  "audit_status": "CANDIDATE_NOT_ACQUIRED",
+  "source_url": null,
+  "local_file_path": "research/incoming/l01_lane_a_assets/ASSET-00031/",
+  "file_exists": false,
+  "file_format": null,
+  "file_size_bytes": null,
+  "sha256": null,
+  "mesh_names": [],
+  "material_names": [],
+  "texture_files": [],
+  "bounding_box": null,
+  "polygon_count": null,
+  "vertex_count": null,
+  "vehicle_configuration_reported_by_source": null,
+  "visual_inspection_status": "NOT_EXECUTED",
+  "components_potentially_reusable": [],
+  "components_rejected": [],
+  "front_left_door_separately_extractable": "UNKNOWN",
+  "notes": [
+    "Prior documentation treated ASSET-00031 as a Grade B candidate marketplace asset.",
+    "Physical search found evaluation markdown only; no GLB/GLTF/FBX/OBJ bytes under the repo.",
+    "Directory research/incoming/l01_lane_a_assets/ASSET-00031/ did not exist prior to this audit staging path creation; it contains no mesh files.",
+    "Do not fabricate geometry or metadata. Next step is asset acquisition, not geometry adaptation."
+  ],
+  "evidence": {
+    "evaluation_doc": "layers/L01/L1_ASSET_EVALUATION_ASSET-00031.md",
+    "search_commands": [
+      "find . -iname '*00031*'",
+      "find . -iname '*.glb' -o -iname '*.gltf' -o -iname '*.fbx' -o -iname '*.obj'"
+    ]
+  }
+}

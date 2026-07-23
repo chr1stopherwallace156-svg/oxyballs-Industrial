@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EDTS_Claim_Registry_Schema",
+  "description": "Represents a single, atomic, verifiable engineering claim within EDTS.",
+  "type": "object",
+  "properties": {
+    "claim_id": {
+      "type": "string",
+      "pattern": "^CLM-L[0-9]{2}-[0-9]{4}$",
+      "description": "Globally unique alphanumeric claim identifier (e.g., CLM-L00-0001)."
+    },
+    "subject": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$",
+      "description": "Standardized snake_case subject key matching the EDTS vocabulary."
+    },
+    "value": {
+      "type": ["number", "string", "boolean"],
+      "description": "The exact parameter value of the claim."
+    },
+    "unit": {
+      "type": "string",
+      "enum": ["mm", "inch", "deg", "rad", "Nm", "kg", "lbs", "psi", "V", "A", "Hz", "PBR_Texture", "Boolean", "N/A"],
+      "description": "Standard metric unit."
+    },
+    "applicability": {
+      "type": "object",
+      "properties": {
+        "model_year": { "type": "integer" },
+        "model": { "type": "string" },
+        "cab": { "type": "string" },
+        "drive": { "type": "string" },
+        "rear_wheels": { "type": "string" }
+      },
+      "required": ["model_year", "model", "cab", "drive", "rear_wheels"]
+    },
+    "claim_type": {
+      "type": "string",
+      "enum": ["nominal_design", "measured_physical", "telemetry_stream", "relationship_definition"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["DRAFT", "PENDING_VERIFICATION", "CROSS_REFERENCED", "SUPERSEDED", "CONTRADICTED"]
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^SRC-[0-9]{3}$"
+      },
+      "minItems": 1
+    },
+    "tolerance": {
+      "type": ["number", "null"],
+      "description": "Manufacturing or measurement tolerance value (symmetric ±)."
+    },
+    "physical_verification": {
+      "type": "string",
+      "enum": ["PENDING", "VERIFIED", "FAILED", "EXEMPT"]
+    }
+  },
+  "required": ["claim_id", "subject", "value", "unit", "applicability", "claim_type", "status", "sources", "tolerance", "physical_verification"]
+}
+

@@ -1,0 +1,132 @@
+{
+  "title": "EDTS Component Instance",
+  "description": "Vehicle-bound component instance. Lookup requires vehicle_instance_id + configuration_id + component_instance_id.",
+  "type": "object",
+  "required": [
+    "component_instance_id",
+    "vehicle_instance_id",
+    "configuration_id",
+    "instance_status",
+    "engineering_verification_status",
+    "schema_version"
+  ],
+  "properties": {
+    "component_instance_id": {
+      "type": "string",
+      "pattern": "^CMPINST-[A-Z0-9-]+$"
+    },
+    "component_definition_id": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^CMPDEF-[A-Z0-9-]+$"
+        }
+      ]
+    },
+    "vehicle_instance_id": {
+      "type": "string",
+      "pattern": "^VEH-[A-Z0-9-]+$"
+    },
+    "configuration_id": {
+      "type": "string",
+      "pattern": "^CFG-[A-Z0-9-]+$"
+    },
+    "configuration_fingerprint": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      ]
+    },
+    "parent_assembly_instance_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "location_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "instance_status": {
+      "type": "string",
+      "enum": [
+        "DISCOVERED",
+        "REGISTERED",
+        "PROVISIONAL",
+        "VERIFIED",
+        "REJECTED",
+        "UNKNOWN",
+        "NOT_EVALUATED"
+      ]
+    },
+    "engineering_verification_status": {
+      "type": "string",
+      "enum": [
+        "NOT_EVALUATED",
+        "REQUIRES_EVIDENCE",
+        "CANDIDATE",
+        "VERIFIED",
+        "REJECTED",
+        "UNKNOWN"
+      ]
+    },
+    "geometry_asset_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_link_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "fingerprint_status": {
+      "type": "string",
+      "enum": [
+        "NOT_COMPUTED",
+        "COMPUTED",
+        "INVALID",
+        "NOT_EVALUATED"
+      ]
+    }
+  },
+  "not": {
+    "anyOf": [
+      {
+        "required": [
+          "model_year_range"
+        ]
+      },
+      {
+        "required": [
+          "platform_family"
+        ]
+      }
+    ]
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:schema:component-instance:v1",
+  "additionalProperties": false
+}
