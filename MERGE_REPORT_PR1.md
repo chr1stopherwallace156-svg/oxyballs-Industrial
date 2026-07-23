@@ -1,11 +1,11 @@
 # MERGE REPORT — PR #1
 
 **PR:** `claude/docs-structure-large-projects-b6vxx5` → `main`
-**Scope:** 180 commits · 273 files added · 1 file to resolve (README)
-**Base (merge-base):** `baf6aa9` · **Branch head:** `e27ac21`
-**Recommendation:** **Merge is safe once the README is intentionally resolved** (a
-resolved README is included on the branch — see *README Conflict*). Nothing on the
-branch deletes or overwrites main's work.
+**Scope:** additive · GitHub PR diff +51,794 / −1 across 275 files (three-dot from merge-base)
+**Base (merge-base):** `baf6aa9` · **Release tag:** `v0.1.0-rc1`
+**Recommendation:** **Merge is safe.** The README is resolved intentionally on the
+branch; nothing on the branch deletes or overwrites main's work (the digital-twin
+foundation is preserved in full).
 
 > This report is a pre-merge gate. It makes no approval/safety claim about the
 > conversion itself — the Build Engine remains DRAFT-only.
@@ -172,19 +172,29 @@ which milestone introduced it.**
 
 If a future folder can't fill this row, challenge whether it belongs.
 
-## Proposed Release Tagging
+## Release Tagging (adopted — see `docs/roadmaps/RELEASE_ROADMAP.md`, D-016)
 
-Formal, milestone-anchored tags (create at/after merge to `main`):
+This merge is tagged **`v0.1.0-rc1` — Engineering Foundation (release candidate)**.
+It is a candidate, not a final: Prototype 001 does not physically exist, so the tag
+communicates "engineering-ready, not product-proven."
 
-| Tag | Name | Anchors |
-|---|---|---|
-| `v0.1.0` | Engineering Foundation Complete | Governance + M10 rule engine + adversarial verification + evidence pack |
-| `v0.2.0` | Platform Engineering | Platform 001 Build Package (config → blockers → BOM → report) + blocker categorization |
-| `v0.3.0` | Reference Vehicle Characterization | Baseline axle weights/GVWR closed (ODR-004..006) + first calculators (Weight→CG) — **not yet built** |
+Adopted version line (pre-product milestones tag as `-rcN`):
 
-Recommendation: on merge, tag the merge commit `v0.1.0` **and** `v0.2.0` (both
-milestones are already on this branch), then open `v0.3.0` as the next target. Tags
-are annotated and point at `main`, not this branch.
+| Version | Name |
+|---|---|
+| v0.1 | Engineering Foundation |
+| v0.2 | Platform 001 Engineering |
+| v0.3 | Reference Vehicle Characterization |
+| v0.4 | Prototype 001 Assembly |
+| v0.5 | Prototype Validation |
+| v0.6 | Pilot Customer |
+| v1.0 | Commercial Engineering Platform |
+
+## Repository Structure Freeze (declared — see `docs/STRUCTURE_FREEZE.md`, D-016)
+
+Effective at this merge, the top-level and second-level directory layout is frozen.
+Adding/renaming/moving/removing a directory requires a Decision Register entry plus a
+paired `README.md` + `STRUCTURE_FREEZE.md` update — never silently.
 
 ---
 
@@ -194,4 +204,4 @@ are annotated and point at `main`, not this branch.
 - [ ] Reviewer has read this report + `PLATFORM_001_STATUS.md`
 - [ ] `cd engine && npm ci && npm test` green on a clean checkout (55/55)
 - [ ] Confirm `elektron-digital-twin-foundation/` present in the merged tree
-- [ ] Tag `v0.1.0` + `v0.2.0` after merge
+- [ ] Tag the merge commit `v0.1.0-rc1` after merge

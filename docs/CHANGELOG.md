@@ -5,6 +5,21 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-23 — Merge PR #1 → main as v0.1.0-rc1; release roadmap; structure freeze (D-016)
+
+- Merged PR #1 (the Build Engine + governance branch) into `main`. Verified additive:
+  GitHub PR diff +51,794 / −1 across 275 files; all of `elektron-digital-twin-foundation/`
+  (PRs #2/#3) preserved. README resolved intentionally into one deliberate front door.
+- Tagged the merge commit **`v0.1.0-rc1` — Engineering Foundation (release candidate)**.
+  A candidate, not a final: Prototype 001 does not physically exist.
+- Adopted the release roadmap (`docs/roadmaps/RELEASE_ROADMAP.md`): v0.1 Engineering
+  Foundation · v0.2 Platform 001 Engineering · v0.3 Reference Vehicle Characterization ·
+  v0.4 Prototype 001 Assembly · v0.5 Prototype Validation · v0.6 Pilot Customer ·
+  v1.0 Commercial Engineering Platform. Pre-product milestones tag as `-rcN`.
+- Declared a **repository structure freeze** (`docs/STRUCTURE_FREEZE.md`): the current
+  layout is canonical; directory changes require a Decision Register entry + paired
+  README/STRUCTURE_FREEZE update. Pre-merge gate recorded in `MERGE_REPORT_PR1.md`.
+
 ## 2026-07-22 — Platform 001: categorize release blockers by effort bucket (D-015)
 
 - The build-package report no longer shows a flat "24 blockers." Every release

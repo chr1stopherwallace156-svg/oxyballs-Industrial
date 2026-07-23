@@ -17,6 +17,43 @@ later entry that references it.
 
 ---
 
+## D-016 — Merge PR #1 as v0.1.0-rc1; adopt the release roadmap; freeze repository structure
+
+- Date: 2026-07-23
+- Status: Accepted
+- Context: PR #1 (the full Build Engine + governance branch) was ready to merge into
+  `main` alongside the separately-merged digital-twin foundation (PRs #2/#3). The
+  owner approved the merge after a final review of `MERGE_REPORT_PR1.md`, chose a
+  release-candidate tag (Prototype 001 does not physically exist, so a final `v0.1.0`
+  would overstate readiness), revised the version roadmap, and asked to freeze the
+  repository structure.
+- Decision:
+  1. **Merge PR #1** into `main`. Verified additive and safe: GitHub's PR diff is
+     +51,794 / −1 across 275 files (three-dot from merge-base `baf6aa9`); the merge
+     preserves all of `elektron-digital-twin-foundation/` (main's work). The only
+     conflict, `README.md`, was resolved intentionally into a single deliberate front
+     door (take the branch version, which already contains main's content).
+  2. **Tag the merge commit `v0.1.0-rc1`** — "Engineering Foundation (release
+     candidate)." Not a final release: the software foundation is strong but the
+     product is still being validated.
+  3. **Adopt the release roadmap** (`docs/roadmaps/RELEASE_ROADMAP.md`): v0.1
+     Engineering Foundation · v0.2 Platform 001 Engineering · v0.3 Reference Vehicle
+     Characterization · v0.4 Prototype 001 Assembly · v0.5 Prototype Validation ·
+     v0.6 Pilot Customer · v1.0 Commercial Engineering Platform. Pre-product
+     milestones tag as `-rcN`; a milestone goes final only when its defining evidence
+     exists.
+  4. **Freeze the repository structure** (`docs/STRUCTURE_FREEZE.md`): the current
+     top-level and second-level layout is canonical. Adding/renaming/moving/removing
+     a directory requires a Decision Register entry and a paired `README.md` +
+     `STRUCTURE_FREEZE.md` update — never silently. Every directory must answer why it
+     exists, who owns it, when it is used, and which milestone introduced it.
+- Consequences: `main` now carries the Engineering Foundation + Platform 001 Build
+  Package alongside the digital-twin foundation. `v0.1.0-rc1` marks the release
+  candidate. Structure is frozen; the release roadmap is the shared vocabulary for
+  progress. No tag or release asserts approval, procurement, or physical safety.
+
+---
+
 ## D-015 — Open the Platform 001 Build Package v0.1 vertical slice (bounded, DRAFT-only)
 
 - Date: 2026-07-22
