@@ -1,16 +1,15 @@
-# Pass 1 — HARD STOP (await operator approval before Pass 2)
+# Pass 1 approval package — HARD STOP
 
-Tip: `f739c3687f009367f24fc8d64ff247dc04e9117a`
-
-Commits:
-- `4a954b7` fix(canonical): Unicode escaping + inventory validator
-- `f739c36` docs(pass1): non-ASCII policy + inventory classification + hard-stop gates
-
-Tags untouched.
+Tip: `9c35de663f3a64543738b57bc49426cd46256da0`  
+Parent: `597ebb3db4317024a41e701412e1b635c0d6ce1e`  
+Baseline: `31513ac1b12626e89020f8ac998247b68d84f1d6`
 
 ```
-485a49dac172f280c271f9260a3dcd11bb2ea9b91e81cc67d4fb796b9fa7a9ca  elektron-capture-ios-complete.bundle
-7a50f8e945a2e31212e7511f8f90e4f66d06239cf000a17d1b345447ef93302d  elektron-capture-ios-working-tree.zip
+ae40b27146750ab879b59a299fe98f817f2449d7012a426d55338fc0d289d45c  elektron-capture-ios-complete.bundle
+85db178d7fb24dea593a4480140acfc0cbccf844ba14293b954fe44d2c64612b  elektron-capture-ios-working-tree.zip
 ```
 
-Cloud `swift test`: 51 executed, 1 skipped, 0 failures.
+Fresh-clone `swift test` log: `fresh-clone-swift-test.log`  
+Full evidence: `PASS1_APPROVAL_EVIDENCE/`
+
+Do **not** start Pass 2 until operator approval after independent verification.
