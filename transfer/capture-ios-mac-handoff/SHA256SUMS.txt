@@ -1,0 +1,4 @@
+ae40b27146750ab879b59a299fe98f817f2449d7012a426d55338fc0d289d45c  elektron-capture-ios-complete.bundle
+85db178d7fb24dea593a4480140acfc0cbccf844ba14293b954fe44d2c64612b  elektron-capture-ios-working-tree.zip
+63721a127835c73dcb3897eb203dda5d9436408a5bd07fbf4986ed5507a5098d  elektron-capture-ios-c3581d04.bundle
+77baf9f91f066745492d542028fd7e3e5deafa7501d7311d1893466b23b7f47b  elektron-capture-ios-c3581d04-working-tree.zip
