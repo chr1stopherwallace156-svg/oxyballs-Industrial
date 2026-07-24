@@ -1,7 +1,21 @@
 # capture-ios Mac handoff
 
-> **Mac re-clone:** if your local `origin` still points at `elektron-capture-ios-005382b.bundle`, see [`MAC_CLONE_FROM_BUNDLE.md`](MAC_CLONE_FROM_BUNDLE.md) for commit-pinned bundles + SHA-256 + clone commands (Industrial `4b6ccc1` and capture-iOS `c59b84d`).
+## Current — Pass 2 `import ElektronCapture` fix
 
+| Field | Value |
+|------|---------|
+| Capture branch | `cursor/pass2-import-elektroncapture-d881` |
+| Tip | `0e1408141df1580b8f4638c8c83b58c626b64152` |
+| Parent | `c59b84da7795373a3f160245fee34325ce000523` |
+
+| File | SHA-256 |
+|------|---------|
+| `elektron-capture-ios-pass2-import-0e14081.bundle` | `24dfd54dc8d19fbdbfa1391a3b787304b43603b990c0979793da4d14f4964cd6` |
+| `elektron-capture-ios-pass2-import-0e14081-working-tree.zip` | `42685b0304c0a36d91cb1b9c5bc6ad6b271f0c2eefe8e33c709734213092e6d7` |
+
+See [`MAC_CLONE_FROM_BUNDLE.md`](MAC_CLONE_FROM_BUNDLE.md). One-line fix: `import ElektronCapture` in `Phase1CaptureRootView.swift`. Product link already present.
+
+---
 
 ## Current — Pass 2 share-presentation fix (P2-004)
 

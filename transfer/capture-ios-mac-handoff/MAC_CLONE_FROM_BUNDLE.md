@@ -1,60 +1,49 @@
-# Mac re-clone instructions (replace stale 005382b origin)
+# Mac re-clone instructions
 
-Your local `elektron-capture-ios-new` points at an old bundle (`…-005382b.bundle`).  
-`git fetch origin` cannot reach Pass 2. Use one of the options below.
+## Current — Pass 2 import fix (Xcode unresolved types)
 
-## Option A — Capture-iOS Pass 2 tip (for Xcode) — recommended
+**Root cause:** `Phase1CaptureRootView.swift` used public `ElektronCapture` types without `import ElektronCapture`.  
+**Fix tip:** `0e1408141df1580b8f4638c8c83b58c626b64152`  
+**Parent:** `c59b84da7795373a3f160245fee34325ce000523`  
+**Branch:** `cursor/pass2-import-elektroncapture-d881`
 
-Commit tip: `c59b84da7795373a3f160245fee34325ce000523`  
-Branch: `cursor/pass2-share-presentation-d881`  
-Bundle: `elektron-capture-ios-pass2-share-c59b84d.bundle`  
-SHA-256: `f8987343830e8e91f8d607f57fd0393a1a1208164866e0a689b20afb7fc7bd8f`
+| File | SHA-256 |
+|------|---------|
+| `elektron-capture-ios-pass2-import-0e14081.bundle` | `24dfd54dc8d19fbdbfa1391a3b787304b43603b990c0979793da4d14f4964cd6` |
+| `elektron-capture-ios-pass2-import-0e14081-working-tree.zip` | `42685b0304c0a36d91cb1b9c5bc6ad6b271f0c2eefe8e33c709734213092e6d7` |
 
 ```bash
 cd ~/Downloads
-shasum -a 256 elektron-capture-ios-pass2-share-c59b84d.bundle
-# expect f8987343830e8e91f8d607f57fd0393a1a1208164866e0a689b20afb7fc7bd8f
+shasum -a 256 elektron-capture-ios-pass2-import-0e14081.bundle
+# expect 24dfd54dc8d19fbdbfa1391a3b787304b43603b990c0979793da4d14f4964cd6
 
-git clone elektron-capture-ios-pass2-share-c59b84d.bundle elektron-capture-ios-pass2-share
-cd elektron-capture-ios-pass2-share
-git checkout cursor/pass2-share-presentation-d881
-git rev-parse HEAD   # expect c59b84da7795373a3f160245fee34325ce000523
+git clone elektron-capture-ios-pass2-import-0e14081.bundle elektron-capture-ios-pass2-import
+cd elektron-capture-ios-pass2-import
+git checkout cursor/pass2-import-elektroncapture-d881
+git rev-parse HEAD   # expect 0e1408141df1580b8f4638c8c83b58c626b64152
+grep -n "import ElektronCapture" Apps/Phase1StillCapture/Phase1CaptureRootView.swift
+# expect: 3:import ElektronCapture
+
+# Mac verification
+xcodebuild -workspace Phase1StillCapture.xcworkspace \
+  -scheme Phase1StillCapture \
+  -destination 'generic/platform=iOS' \
+  clean build
+
 open Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj
 ```
 
-Do **not** keep using the old `005382b` remote. This clone’s `origin` is the new bundle.
+App target already links product `ElektronCapture` in `project.pbxproj` (unchanged). Types were **not** duplicated into the app target.
 
-## Option B — Industrial handoff branch (includes merge `4b6ccc1`)
+## Prior — share-presentation tip `c59b84d` (missing RootView import)
 
-Commit tip: `4b6ccc1f1383035c65e71e73aeabf42de3b6bf38`  
-Branch: `cursor/pass2-share-presentation-handoff-d881`  
-Bundle: `oxyballs-industrial-pass2-share-handoff-4b6ccc1.bundle`  
-SHA-256: `3d21389ef1478c5bff70403d42d5308acddd82932e236b0c834018c0bacabbdd`
+Use only for archaeology. Prefer `0e14081` above for Xcode.
 
-```bash
-cd ~/Downloads
-shasum -a 256 oxyballs-industrial-pass2-share-handoff-4b6ccc1.bundle
-# expect 3d21389ef1478c5bff70403d42d5308acddd82932e236b0c834018c0bacabbdd
-
-git clone oxyballs-industrial-pass2-share-handoff-4b6ccc1.bundle oxyballs-industrial-pass2-handoff
-cd oxyballs-industrial-pass2-handoff
-git checkout cursor/pass2-share-presentation-handoff-d881
-git rev-parse HEAD   # expect 4b6ccc1f1383035c65e71e73aeabf42de3b6bf38
-```
-
-Transfer artifacts (including Option A’s capture-ios bundle) live under  
-`transfer/capture-ios-mac-handoff/`.
-
-## Option C — Clone Industrial from GitHub (branch already pushed)
+## Industrial GitHub
 
 ```bash
 git clone https://github.com/chr1stopherwallace156-svg/oxyballs-Industrial.git
 cd oxyballs-Industrial
-git fetch origin cursor/pass2-share-presentation-handoff-d881
-git checkout cursor/pass2-share-presentation-handoff-d881
-git rev-parse HEAD   # expect 4b6ccc1f1383035c65e71e73aeabf42de3b6bf38
+git fetch origin cursor/pass2-import-elektroncapture-handoff-d881
+git checkout cursor/pass2-import-elektroncapture-handoff-d881
 ```
-
-Legacy redirect: `https://github.com/chr1stopherwallace156-svg/Elektron-Indsutrial`
-
-Capture-iOS has **no** GitHub write remote in this environment; use Option A’s bundle for the app tip.
