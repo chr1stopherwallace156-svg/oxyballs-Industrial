@@ -1,0 +1,5 @@
+CAPTURE_TIP=7b9d118af7bb61583cf279b1f70afd202c327ba9
+SHA256=0a784973dc69cf763edc04056f3ae2f8d839f7aeaa86fc559010f9510b5d264a
+CLASSIFICATION=relative-path derivation defect (macOS /var vs /private/var aliasing)
+FIX=PackageRelativePath.key used by builder/validator/zip/test
+LINUX_SWIFT_TEST=81 tests, 1 skipped, 0 failures
