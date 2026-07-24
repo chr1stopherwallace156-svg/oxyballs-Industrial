@@ -1,20 +1,21 @@
 # capture-ios Mac handoff
 
-## Current — Pass 2 import fix + discrepancy evidence
+## Current — Pass 2 import root-cause tip `d41e513` (**HARD STOP**)
 
 | Field | Value |
 |------|---------|
-| Tip | `8fef5dce2a0099ad4311085d00192e945b10a861` |
-| Code fix | `0e1408141df1580b8f4638c8c83b58c626b64152` (`import ElektronCapture` in RootView) |
-| Claim level | Leading hypothesis pending Mac `xcodebuild` + `-showBuildSettings` |
+| Tip | `d41e513f90475aff9d6b9699bd4545c4969c8746` |
+| Code fix | `0e14081` — `import ElektronCapture` in RootView |
+| Product linkage | Present in pbxproj (not the failure mode) |
+| Linux | `HANDOFF_LAYOUT_OK` + `HANDOFF_XCODE_BUILD_SKIPPED` |
+| Mac still required | `HANDOFF_XCODE_BUILD_OK` + physical export verification |
 
 | File | SHA-256 |
 |------|---------|
-| `elektron-capture-ios-pass2-import-8fef5dc.bundle` | `84418ba59797fe77d1a1917c7b3375171807b51dd5fdf0b00f9131910037b8f8` |
-| `elektron-capture-ios-pass2-import-8fef5dc-working-tree.zip` | `c557afbf9bc539a501fbd9f664c2b6f3af264a92f0f20ce6b4f06df7747e5a35` |
+| `elektron-capture-ios-pass2-import-d41e513.bundle` | `5551e6affaa12a2986516fb74a41a24f3722b2c118204f4cbeadb56cbd6cc209` |
+| `elektron-capture-ios-pass2-import-d41e513-working-tree.zip` | `91c20bd3479609a110ba35c349b9d486b7e63638165ad18b08cd8382575cda60` |
 
-Evidence: `PASS2_IMPORT_FIX_EVIDENCE/` (`ROOT_CAUSE_SWIFT_BUILD_VS_XCODE.md`).  
-Clone: [`MAC_CLONE_FROM_BUNDLE.md`](MAC_CLONE_FROM_BUNDLE.md).
+See [`MAC_CLONE_FROM_BUNDLE.md`](MAC_CLONE_FROM_BUNDLE.md) and `PASS2_IMPORT_FIX_EVIDENCE/HARD_STOP.md`.
 
 ---
 
