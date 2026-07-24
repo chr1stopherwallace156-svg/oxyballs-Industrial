@@ -1,26 +1,23 @@
-# Phase 1C Evidence Library — Mac handoff
+# Phase 1C Evidence Library (Revised) — Mac handoff
 
-- Capture-iOS tip (branch HEAD): `8bf0e1776d747448dd654feb9ca2fe4cb8a50b4d`
-- Feature commit: `e03fbc61330a5d1812e44ff29afc7d66befa0ccb`
-- ZIP: `DOWNLOAD-elektron-capture-ios-phase1c-evidence-library.zip`
-- SHA-256: `1c06c282125220dfa5c932716cab43a6fe87fd8e5250f49160eb5e981b4f3741`
+- Status: `PHASE_1C_IMPLEMENTED_PENDING_DEVICE_VALIDATION`
+- Capture-iOS tip: `4012df2dff631b161682b1273df9e51c403431ec`
+- ZIP SHA-256: `16c8c63f584c6eb67305f6cc55e901243cc012b3ec0dde0e8371c766cdde63b6`
+- Download: `DOWNLOAD-elektron-capture-ios-phase1c-evidence-library.zip`
 
-## What this is
+## Architecture
 
-Persistent local Evidence Library under Application Support. Portable `.edts-pkg` export unchanged.
+- Truth: `captures/<id>/artifact_original.jpg` (write-once)
+- Index: rebuildable catalog; relative paths only
+- Staging: `.staging/<id>-<uuid>/` → read-back SHA → rename `captures/<id>/`
+- States: capture · storage · package · export · integrity (orthogonal)
+- Portable `.edts-pkg` export unchanged
 
 ## Linux verified
 
-- `swift test` — 74 tests, 1 skip, 0 failures (includes EvidenceLibraryTests)
-- Mac `xcodebuild` / physical device: **HANDOFF_XCODE_BUILD_SKIPPED** / manual
+- `swift test` — 76 tests, 1 skip, 0 failures
+- Mac xcodebuild / physical device: **pending** (do not claim `PHASE_1C_COMPLETE`)
 
-## Open
+## Device matrix (operator)
 
-```bash
-unzip DOWNLOAD-elektron-capture-ios-phase1c-evidence-library.zip
-cd elektron-capture-ios
-make doctor
-open Phase1StillCapture.xcworkspace
-```
-
-Tabs: Capture | Evidence Library
+Force-quit, reboot, Airplane Mode, multi-capture isolation, package payload SHA, Share cancel — see Docs/Capture/PHASE_1C_EVIDENCE_LIBRARY.md

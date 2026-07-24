@@ -1,18 +1,2 @@
-# Capture-iOS downloadable handoff ZIPs
-# Pass 2 share-presentation fix (P2-004) — current
-5669a1dae55baad26759c2bdc55896a05a1a30dab7873f2777619984953f8d6e  elektron-capture-ios-pass2-share-complete.bundle
-086e1b9828bc1d1b661dc1aaf0f54078817ca46ee31cd21841b5bf489de3a379  elektron-capture-ios-pass2-share-working-tree.zip
-
-# Pass 2 prior tip e33bb21
-c07777b2a94255c80e29319b777a6ef8e3d1e3a69c150c85e52905f0284ece47  elektron-capture-ios-pass2-complete.bundle
-9da3f2bbe4a93776bd390996b466084be7d231d9762769bba5f01d8857eb320e  elektron-capture-ios-pass2-working-tree.zip
-
-# Pass 1 operator-approved (main #18)
-ae40b27146750ab879b59a299fe98f817f2449d7012a426d55338fc0d289d45c  elektron-capture-ios-complete.bundle
-85db178d7fb24dea593a4480140acfc0cbccf844ba14293b954fe44d2c64612b  elektron-capture-ios-working-tree.zip
-
-# Historical tip c3581d04 (PR #10)
-63721a127835c73dcb3897eb203dda5d9436408a5bd07fbf4986ed5507a5098d  elektron-capture-ios-c3581d04.bundle
-77baf9f91f066745492d542028fd7e3e5deafa7501d7311d1893466b23b7f47b  elektron-capture-ios-c3581d04-working-tree.zip
-1c06c282125220dfa5c932716cab43a6fe87fd8e5250f49160eb5e981b4f3741  DOWNLOAD-elektron-capture-ios-phase1c-evidence-library.zip
-1c06c282125220dfa5c932716cab43a6fe87fd8e5250f49160eb5e981b4f3741  transfer/capture-ios-mac-handoff/elektron-capture-ios-phase1c-evidence-library.zip
+16c8c63f584c6eb67305f6cc55e901243cc012b3ec0dde0e8371c766cdde63b6  DOWNLOAD-elektron-capture-ios-phase1c-evidence-library.zip
+16c8c63f584c6eb67305f6cc55e901243cc012b3ec0dde0e8371c766cdde63b6  transfer/capture-ios-mac-handoff/elektron-capture-ios-phase1c-evidence-library.zip
