@@ -182,4 +182,17 @@ This proves the **Swift/producer fixture layout** (not only the Python `package_
 - PR #5’s **XREPO adapter** is the concrete `.edts-pkg` importer; the **general EAE core is not**.  
 - Vendored contract **digests match** the capture directive tag for all shared schema files found on both sides.  
 - Capture’s **synthetic Phase 1 `.edts-pkg` already dual-gate PASSes** and commits with the required integrity/content status pair.  
-- Remaining gaps are **publish, physical device, canonical cross-lang proof, and status-transitions file ownership** — not a missing second capture system.
+- Remaining gaps are **publish, physical device, canonical cross-lang proof, and status-transitions ownership decision** — not a missing second capture system.
+
+---
+
+## 10. Follow-ups applied (2026-07-24) — still no contract redesign
+
+| Item | Action | Status |
+|---|---|---|
+| Stale gap report | Rewrote `IOS_PHASE1_GAP_REPORT.md` with status matrix | Done |
+| Status-transitions | `STATUS_TRANSITIONS_OWNERSHIP.md` — do **not** copy file into producer | Decision pending |
+| Cross-lang canonical JSON | Corpus + Python byte lock + Swift test (local capture clone) | Python PASS; Swift **UNVERIFIED** (no toolchain here) |
+| Predicted unicode escape mismatch | Documented (`ensure_ascii=True` vs Swift UTF-8) | Needs Mac run / policy decision |
+| Capture GitHub publish | Still blocked — human must create remote | **PENDING** |
+| Physical rehearsal photos | Not started (requires published app on device) | Blocked on Xcode/device |

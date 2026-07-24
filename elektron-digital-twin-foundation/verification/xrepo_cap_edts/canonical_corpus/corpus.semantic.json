@@ -1,0 +1,26 @@
+{
+  "z_last": "should-sort-first-alphabetically-wait-z-is-last",
+  "ascii": "Elektron",
+  "unicode": "électron",
+  "escaped": "line\nquote\"slash\\",
+  "empty_string": "",
+  "null_value": null,
+  "true_value": true,
+  "false_value": false,
+  "integer": 42,
+  "negative_integer": -42,
+  "zero": 0,
+  "array": [
+    3,
+    2,
+    1
+  ],
+  "nested": {
+    "z": 1,
+    "a": 2
+  },
+  "empty_object": {},
+  "empty_array": [],
+  "timestamp_utc": "2026-07-23T05:00:00.000Z",
+  "finite_float": 1.5
+}
