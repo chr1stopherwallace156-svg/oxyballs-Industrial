@@ -1,0 +1,14 @@
+# capture-ios Mac handoff — lifecycle / black-frame candidate
+
+Tip: `413dfe59efd567777e16d289d4f054d30c571fac`
+
+## SHA-256
+
+```
+1f39196a90e5e9d875bf47d093105b7f407a9faa52b39b207ba7536e2b2766a6  elektron-capture-ios-lifecycle.bundle
+1f39196a90e5e9d875bf47d093105b7f407a9faa52b39b207ba7536e2b2766a6  elektron-capture-ios-complete.bundle
+ecab86c7b5b067e7661997b2338727e45f96d9c99f4a9fdc9a19c34fa7939a81  elektron-capture-ios-lifecycle.zip
+ecab86c7b5b067e7661997b2338727e45f96d9c99f4a9fdc9a19c34fa7939a81  elektron-capture-ios-working-tree.zip
+```
+
+Not validated. Phase 1 incomplete.
