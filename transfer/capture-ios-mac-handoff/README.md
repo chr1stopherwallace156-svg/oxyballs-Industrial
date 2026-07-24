@@ -1,5 +1,8 @@
 # capture-ios Mac handoff
 
+> **Mac re-clone:** if your local `origin` still points at `elektron-capture-ios-005382b.bundle`, see [`MAC_CLONE_FROM_BUNDLE.md`](MAC_CLONE_FROM_BUNDLE.md) for commit-pinned bundles + SHA-256 + clone commands (Industrial `4b6ccc1` and capture-iOS `c59b84d`).
+
+
 ## Current — Pass 2 share-presentation fix (P2-004)
 
 **Status:** submitted for operator device verification — share/AirDrop/Files hardening  
