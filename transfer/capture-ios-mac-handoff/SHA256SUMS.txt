@@ -1,0 +1,2 @@
+485a49dac172f280c271f9260a3dcd11bb2ea9b91e81cc67d4fb796b9fa7a9ca  elektron-capture-ios-complete.bundle
+7a50f8e945a2e31212e7511f8f90e4f66d06239cf000a17d1b345447ef93302d  elektron-capture-ios-working-tree.zip
