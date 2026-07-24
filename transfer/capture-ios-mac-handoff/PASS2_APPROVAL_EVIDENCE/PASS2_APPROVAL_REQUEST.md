@@ -15,7 +15,7 @@ Pass 1 gates remain in force (operator-approved tip `9c35de6`).
 |---|---|
 | Pass 1 approved tip (parent baseline for Pass 2) | `9c35de663f3a64543738b57bc49426cd46256da0` |
 | Pass 2 implementation | `a47739f1472e0e33779ed709a65adc4bb0ec72c4` |
-| Pass 2 evidence tip | *(see `IDENTITY.txt` after evidence commit)* |
+| Pass 2 evidence tip | `e33bb212368858aeddb34743bb0947e84576bd23` |
 
 Branch: `cursor/pass2-preview-review-gate-d881`
 
