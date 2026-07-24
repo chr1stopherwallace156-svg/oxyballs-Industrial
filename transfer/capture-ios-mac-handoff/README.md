@@ -1,55 +1,20 @@
 # capture-ios Mac handoff
 
-## Current — Pass 2 `import ElektronCapture` fix
+## Current — Pass 2 import fix + discrepancy evidence
 
 | Field | Value |
 |------|---------|
-| Capture branch | `cursor/pass2-import-elektroncapture-d881` |
-| Tip | `0e1408141df1580b8f4638c8c83b58c626b64152` |
-| Parent | `c59b84da7795373a3f160245fee34325ce000523` |
+| Tip | `8fef5dce2a0099ad4311085d00192e945b10a861` |
+| Code fix | `0e1408141df1580b8f4638c8c83b58c626b64152` (`import ElektronCapture` in RootView) |
+| Claim level | Leading hypothesis pending Mac `xcodebuild` + `-showBuildSettings` |
 
 | File | SHA-256 |
 |------|---------|
-| `elektron-capture-ios-pass2-import-0e14081.bundle` | `24dfd54dc8d19fbdbfa1391a3b787304b43603b990c0979793da4d14f4964cd6` |
-| `elektron-capture-ios-pass2-import-0e14081-working-tree.zip` | `42685b0304c0a36d91cb1b9c5bc6ad6b271f0c2eefe8e33c709734213092e6d7` |
+| `elektron-capture-ios-pass2-import-8fef5dc.bundle` | `84418ba59797fe77d1a1917c7b3375171807b51dd5fdf0b00f9131910037b8f8` |
+| `elektron-capture-ios-pass2-import-8fef5dc-working-tree.zip` | `c557afbf9bc539a501fbd9f664c2b6f3af264a92f0f20ce6b4f06df7747e5a35` |
 
-See [`MAC_CLONE_FROM_BUNDLE.md`](MAC_CLONE_FROM_BUNDLE.md). One-line fix: `import ElektronCapture` in `Phase1CaptureRootView.swift`. Product link already present.
-
----
-
-## Current — Pass 2 share-presentation fix (P2-004)
-
-**Status:** submitted for operator device verification — share/AirDrop/Files hardening  
-Preserves Pass 1 gates and Pass 2 freeze rules. Does **not** re-encode `artifact_original.jpg`.
-
-| Field | Value |
-|------|---------|
-| Capture branch | `cursor/pass2-share-presentation-d881` |
-| Tip | `c59b84da7795373a3f160245fee34325ce000523` |
-| Parent (Pass 2 evidence tip) | `e33bb212368858aeddb34743bb0947e84576bd23` |
-| Pass 1 approved ancestor | `9c35de663f3a64543738b57bc49426cd46256da0` |
-
-| File | SHA-256 |
-|------|---------|
-| `elektron-capture-ios-pass2-share-complete.bundle` | `5669a1dae55baad26759c2bdc55896a05a1a30dab7873f2777619984953f8d6e` |
-| `elektron-capture-ios-pass2-share-working-tree.zip` | `086e1b9828bc1d1b661dc1aaf0f54078817ca46ee31cd21841b5bf489de3a379` |
-
-Fresh-clone: `pass2-share-fresh-clone-swift-test.log` — **66 executed, 1 skipped, 0 failures**; `HANDOFF_LAYOUT_OK`  
-Evidence: `PASS2_SHARE_FIX_EVIDENCE/`  
-Device checklist (updated Share/ZIP rows): see capture-ios `Docs/Evidence/PASS2_DEVICE_VALIDATION.md`
-
-```bash
-git clone elektron-capture-ios-pass2-share-complete.bundle elektron-capture-ios-pass2-share
-cd elektron-capture-ios-pass2-share
-git checkout cursor/pass2-share-presentation-d881
-git rev-parse HEAD   # expect c59b84da7795373a3f160245fee34325ce000523
-open Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj
-```
-
-After export on device use:
-1. **Share .edts-pkg** (AirDrop)
-2. **Save .edts-pkg to Files**
-3. **Export as ZIP copy** (diagnostic; same bytes, `.zip` extension; canonical `.edts-pkg` kept)
+Evidence: `PASS2_IMPORT_FIX_EVIDENCE/` (`ROOT_CAUSE_SWIFT_BUILD_VS_XCODE.md`).  
+Clone: [`MAC_CLONE_FROM_BUNDLE.md`](MAC_CLONE_FROM_BUNDLE.md).
 
 ---
 
