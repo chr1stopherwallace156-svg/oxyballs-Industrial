@@ -1,13 +1,16 @@
-# Pass 1 only — canonical Unicode + inventory (awaiting review before Pass 2)
+# Pass 1 — HARD STOP (await operator approval before Pass 2)
 
-Tip: `4a954b7b440b51002e364f8ae944c2a156fe1eea`  
-Parent baseline: `31513ac`  
-Tags untouched: `capture-ios-phase0-approved-v0.1.3`, `capture-ios-phase1-directive-v0.1.4`
+Tip: `f739c3687f009367f24fc8d64ff247dc04e9117a`
+
+Commits:
+- `4a954b7` fix(canonical): Unicode escaping + inventory validator
+- `f739c36` docs(pass1): non-ASCII policy + inventory classification + hard-stop gates
+
+Tags untouched.
 
 ```
-f4aa5821c5594f9a46f5dfdb27230cb269c91955a1ec663593838f384ecc7414  elektron-capture-ios-complete.bundle
-34901bb460a9815f8e3e4946064816336e6570b95ae14d948e433cd1e95d0e17  elektron-capture-ios-working-tree.zip
+485a49dac172f280c271f9260a3dcd11bb2ea9b91e81cc67d4fb796b9fa7a9ca  elektron-capture-ios-complete.bundle
+7a50f8e945a2e31212e7511f8f90e4f66d06239cf000a17d1b345447ef93302d  elektron-capture-ios-working-tree.zip
 ```
 
-Cloud: 51 tests, 1 skipped, 0 failures.  
-Mac must confirm Darwin `CrossLanguageCanonicalJSONTests` (parse path) also passes.
+Cloud `swift test`: 51 executed, 1 skipped, 0 failures.
