@@ -1,5 +1,6 @@
-CAPTURE_TIP=7b9d118af7bb61583cf279b1f70afd202c327ba9
-SHA256=0a784973dc69cf763edc04056f3ae2f8d839f7aeaa86fc559010f9510b5d264a
-CLASSIFICATION=relative-path derivation defect (macOS /var vs /private/var aliasing)
-FIX=PackageRelativePath.key used by builder/validator/zip/test
+CAPTURE_TIP=8da8bbb328807e4b6990f539c20d31d994f92a48
+SHA256=56b8d32328388bd71f4e55cbe58fa60cdc3b1dbddc61d3854ee1d7aa70bb75e3
+CLASSIFICATION=relative-path derivation defect (macOS /var vs /private/var)
+FIX=PackageRelativePath.key in builder/validator/zip/test
+DIAG=EDTS_INV_PATH_DIAG=1 only (temporary INV_DIAG prints removed)
 LINUX_SWIFT_TEST=81 tests, 1 skipped, 0 failures
