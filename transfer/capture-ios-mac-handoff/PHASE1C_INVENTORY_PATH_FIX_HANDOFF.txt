@@ -1,6 +1,5 @@
-CAPTURE_TIP=8da8bbb328807e4b6990f539c20d31d994f92a48
-SHA256=56b8d32328388bd71f4e55cbe58fa60cdc3b1dbddc61d3854ee1d7aa70bb75e3
-CLASSIFICATION=relative-path derivation defect (macOS /var vs /private/var)
-FIX=PackageRelativePath.key in builder/validator/zip/test
-DIAG=EDTS_INV_PATH_DIAG=1 only (temporary INV_DIAG prints removed)
-LINUX_SWIFT_TEST=81 tests, 1 skipped, 0 failures
+CAPTURE_TIP=83368e648b54cd9a3e48f8db530a074ab49fb9e5
+SHA256=c67cda506a2f46836f63ce7f99533dda77bcef51fb69c023ebf361b19abc252b
+CLASSIFICATION=relative-path derivation defect (proven via printed sets; not empty declaration set)
+EVIDENCE=Docs/Evidence/INVENTORY_VALIDATION_FAILURE_EVIDENCE_REPORT.md
+LINUX_SWIFT_TEST=see suite log; 0 failures
