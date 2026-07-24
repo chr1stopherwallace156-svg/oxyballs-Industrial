@@ -1,6 +1,12 @@
-# Downloadable ZIP (preferred if bundle fails)
+# CURRENT download ZIP (e37f5b7 — public CameraPreviewView)
+4ba0fea7b810ca8e1a61686f85bfe47d42bf1b1dad8e7c4261d924a19e037e94  DOWNLOAD-elektron-capture-ios-pass2-import.zip
+4ba0fea7b810ca8e1a61686f85bfe47d42bf1b1dad8e7c4261d924a19e037e94  elektron-capture-ios-pass2-preview-public-e37f5b7.zip
+c694b9be2b5288d33e2565988c18efb759b4ac97616bf47b7e34bec9ae5d54bc  elektron-capture-ios-pass2-preview-public-e37f5b7.bundle
+
+# SUPERSEDED — tip d41e513 ZIP (missing public CameraPreviewView)
+9ee9951f1ac916d6a30d1c4de0f27fac0de077db91b3b8f1366c6d74219105a4  elektron-capture-ios-pass2-import-d41e513.zip  # DO NOT USE
+
 9ee9951f1ac916d6a30d1c4de0f27fac0de077db91b3b8f1366c6d74219105a4  elektron-capture-ios-pass2-import-d41e513.zip
-9ee9951f1ac916d6a30d1c4de0f27fac0de077db91b3b8f1366c6d74219105a4  DOWNLOAD-elektron-capture-ios-pass2-import.zip
 
 # Pass 2 import root-cause tip d41e513
 5551e6affaa12a2986516fb74a41a24f3722b2c118204f4cbeadb56cbd6cc209  elektron-capture-ios-pass2-import-d41e513.bundle

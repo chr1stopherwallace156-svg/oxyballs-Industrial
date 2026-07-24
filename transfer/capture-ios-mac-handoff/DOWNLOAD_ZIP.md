@@ -1,42 +1,22 @@
-# Download ZIP (no git bundle required)
-
-## File
-`elektron-capture-ios-pass2-import-d41e513.zip`  
-(also copied as `DOWNLOAD-elektron-capture-ios-pass2-import.zip`)
+# Download ZIP (regenerated after CameraPreviewView public fix)
 
 | Field | Value |
 |------|---------|
-| Tip contents | `d41e513f90475aff9d6b9699bd4545c4969c8746` |
-| SHA-256 | `9ee9951f1ac916d6a30d1c4de0f27fac0de077db91b3b8f1366c6d74219105a4` |
-| Format | `git archive` ZIP of the capture-iOS tree (no `.git`) |
-
-## GitHub download (Industrial handoff branch)
-
-After this commit is pushed, download from:
-
-https://github.com/chr1stopherwallace156-svg/oxyballs-Industrial/raw/cursor/pass2-import-elektroncapture-handoff-d881/transfer/capture-ios-mac-handoff/DOWNLOAD-elektron-capture-ios-pass2-import.zip
-
-or:
-
-https://github.com/chr1stopherwallace156-svg/oxyballs-Industrial/raw/cursor/pass2-import-elektroncapture-handoff-d881/transfer/capture-ios-mac-handoff/elektron-capture-ios-pass2-import-d41e513.zip
-
-(If the rename redirect applies, the same path under `Elektron-Indsutrial` also works.)
-
-## On Mac
+| Capture tip inside ZIP | `e37f5b7b14009bfdc71ca3145975c8e5db2976ac` |
+| ZIP | `DOWNLOAD-elektron-capture-ios-pass2-import.zip` |
+| SHA-256 | `4ba0fea7b810ca8e1a61686f85bfe47d42bf1b1dad8e7c4261d924a19e037e94` |
+| Includes `public struct CameraPreviewView` | **YES** (regenerated after access-control fix) |
+| Prior ZIP `9ee9951f…` / Industrial `50b5f8e` | **NO** — that was tip `d41e513` without this fix |
 
 ```bash
 cd ~/Downloads
 shasum -a 256 DOWNLOAD-elektron-capture-ios-pass2-import.zip
-# expect 9ee9951f1ac916d6a30d1c4de0f27fac0de077db91b3b8f1366c6d74219105a4
-
+# expect 4ba0fea7b810ca8e1a61686f85bfe47d42bf1b1dad8e7c4261d924a19e037e94
 unzip DOWNLOAD-elektron-capture-ios-pass2-import.zip
 cd elektron-capture-ios
-grep -n "import ElektronCapture" Apps/Phase1StillCapture/Phase1CaptureRootView.swift
-# expect: 3:import ElektronCapture
-
+grep -n "public struct CameraPreviewView" App/Capture/AVFoundation/CameraPreviewView.swift
 open Apps/Phase1StillCapture/Phase1StillCapture.xcworkspace
-# or:
-./Scripts/verify-xcode-handoff.sh
+./Scripts/verify-xcode-handoff.sh   # Mac: HANDOFF_XCODE_BUILD_OK
 ```
 
-This ZIP is a source tree snapshot (no git history). For git operations use the `.bundle` if you can obtain it later.
+Physical-device export remains HARD STOP until Mac verification.
