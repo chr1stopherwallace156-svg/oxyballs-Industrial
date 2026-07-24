@@ -1,5 +1,11 @@
 # capture-ios Mac handoff
 
+
+> **Prefer ZIP download:** [`DOWNLOAD-elektron-capture-ios-pass2-import.zip`](DOWNLOAD-elektron-capture-ios-pass2-import.zip)  
+> SHA-256 `9ee9951f1ac916d6a30d1c4de0f27fac0de077db91b3b8f1366c6d74219105a4` — tip `d41e513` (includes `import ElektronCapture`).  
+> Details: [`DOWNLOAD_ZIP.md`](DOWNLOAD_ZIP.md)
+
+
 ## Current — Pass 2 import root-cause tip `d41e513` (**HARD STOP**)
 
 | Field | Value |
