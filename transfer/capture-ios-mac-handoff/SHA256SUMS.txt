@@ -1,0 +1,7 @@
+# Pass 2 handoff (pending operator approval)
+c07777b2a94255c80e29319b777a6ef8e3d1e3a69c150c85e52905f0284ece47  elektron-capture-ios-pass2-complete.bundle
+9da3f2bbe4a93776bd390996b466084be7d231d9762769bba5f01d8857eb320e  elektron-capture-ios-pass2-working-tree.zip
+
+# Historical on this branch (from main PR #10)
+63721a127835c73dcb3897eb203dda5d9436408a5bd07fbf4986ed5507a5098d  elektron-capture-ios-complete.bundle
+77baf9f91f066745492d542028fd7e3e5deafa7501d7311d1893466b23b7f47b  elektron-capture-ios-c3581d04-working-tree.zip
