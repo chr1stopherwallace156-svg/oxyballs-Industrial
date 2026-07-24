@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
-# Create a timestamped, checksum-sealed backup of local runtime state into
-# .local/backups/. Source is recoverable from the git bundle / source ZIP, so this
-# captures the state unique to THIS install (database + outputs). Fails loudly if
-# sealing fails — never produces an unsealed backup.
+# Product scope: Elektron Local Runtime
+# Purpose: Create a checksum-sealed, restore-compatible archive of installed
+# runtime state (engine.db, .local data/outputs) under .local/backups/.
+# Not an EDE development snapshot (use scripts/dev/ede/snapshot.sh / npm run ede:snapshot).
+#
+# Source is recoverable from the git bundle / source ZIP, so this captures the
+# state unique to THIS install. Fails loudly if sealing fails — never produces
+# an unsealed backup.
 set -euo pipefail
 . "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/_common.sh"
 
