@@ -1,3 +1,6 @@
+# Developer help system ZIP (capture tip 880969a)
+42e879a135f580a8cbe82393bd4ecbbf189a8aecb7ff7ce6d4bb3fd07ed3dbfb  DOWNLOAD-elektron-capture-ios-developer-help.zip
+
 # CURRENT download ZIP (e37f5b7 — public CameraPreviewView)
 4ba0fea7b810ca8e1a61686f85bfe47d42bf1b1dad8e7c4261d924a19e037e94  DOWNLOAD-elektron-capture-ios-pass2-import.zip
 4ba0fea7b810ca8e1a61686f85bfe47d42bf1b1dad8e7c4261d924a19e037e94  elektron-capture-ios-pass2-preview-public-e37f5b7.zip
