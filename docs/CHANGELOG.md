@@ -5,6 +5,24 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-25 — Capture-iOS Phase 1C Mac handoff squash-merged (#23)
+
+- Squash-merged PR **#23** into `main`: Phase 1C freeze-prep + Commit B staging
+  artifacts under `transfer/capture-ios-mac-handoff/` and root
+  `DOWNLOAD-elektron-capture-ios-phase1c-evidence-library.zip`.
+- **Freeze-prep tip** (Phase 1 only — no `Specifications/` / `Research/`):
+  `cursor/phase1c-freeze-commit-a-d881` @ `c3dea9f…`; ZIP/bundle SHA-256
+  `eb2603f1…` / `ccf2494a…`. Status remains
+  `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_REPOSITORY_EQUIVALENCE_AND_FREEZE`
+  — not `PHASE_1C_COMPLETE` until authoritative git equivalence, Commit A,
+  remote tag `v1.0.0-phase1c`, and GitHub protection.
+- **Commit B+ staging** (Specs 1–6 correction pass; not for freeze tag):
+  `elektron-capture-ios-phase1c-commit-b-staging.{zip,bundle}`; gate
+  `BASELINE_APPROVAL_PENDING_FINAL_SIGN_OFF`.
+- Digests: `transfer/capture-ios-mac-handoff/SHA256SUMS.txt`. Guides:
+  `PHASE1C_CORRECTION_HANDOFF.md`, `PHASE1C_FREEZE_HANDOFF.txt`,
+  `V2_SPECS_1_TO_6_HANDOFF.md`.
+
 ## 2026-07-23 — Local-runtime hardening RC2 + runtime tooling in-repo (D-017)
 
 - **`npm run clean` no longer deletes the database** — it removes only `dist/`. New
