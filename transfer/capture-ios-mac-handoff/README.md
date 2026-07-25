@@ -2,29 +2,55 @@
 
 ## Track A — Phase 1 freeze
 
-**Status:** `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_REPOSITORY_EQUIVALENCE_AND_FREEZE`  
-**Lineage:** `cursor/phase1c-freeze-commit-a-d881`
+**Status:**   
+**Lineage:** 
 
 | Artifact | SHA-256 |
 |---|---|
-| freeze-prep.zip | `8990c7407e742fc47f75770c57d18a7f4d1f0e7ccfddc2159c88a85f24855e7f` |
-| freeze-prep.bundle | `3116f4b7ca43ca5aad0857c62a631c277072e28615b7e81a7bcbeca9deb869f1` |
+| freeze-prep.zip |  |
+| freeze-prep.bundle |  |
 
 ## Track B — Specs & two-stage handoff
 
-**Status:** `BASELINE_APPROVAL_PENDING_FINAL_ARCHITECTURAL_REVIEW`  
-**Spike:** `IR_0001_EXECUTION_NOT_YET_AUTHORIZED`  
-**Lineage:** `cursor/phase1c-evidence-library-handoff-d881` @ `dcc8c62` (`dcc8c62c3ee1e84754f9e12a6a8cc55d772681a7`)
+**Status:**   
+**Spike:**   
+**Lineage:**  @  ()
 
 | Field | Value |
 |---|---|
 | Handoff | HANDOFF-0034 |
-| Stage 1 | `HANDOFF_METADATA_COMMITTED` |
-| Stage 2 | `dist-HANDOFF-0034/` — `DIGESTS_VERIFIED` + `RESTORATION_TEST_PASSED` |
-| ZIP SHA-256 | `6b6640f56d6dcd87ee9aa053e8453342cec2bb281dcf28f6593d9dfc8539053a` |
-| Bundle SHA-256 | `efb18d954fd7aaaa96084760d5aeb5f1a388bdb9d54d489809393dc90dfbc7e1` |
+| Stage 1 |  |
+| Stage 2 |  —  +  |
+| ZIP SHA-256 |  |
+| Bundle SHA-256 |  |
 
-```bash
-make handoff-prepare && git commit
-make handoff-package   # → dist/HANDOFF-XXXX/
-```
+==> BASE_REF=main
+==> CHANGELOG.md differs from main
+==> CHANGE-XXXX record present/changed vs main
+==> Preparing tracked metadata HANDOFF-0035 @ d78446b (cursor/phase1c-evidence-library-handoff-d881) tree=clean
+==> Running swift test for validation summary
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'debug.xctest' passed at 2026-07-25 04:56:35.621
+Executed 89 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.543 (0.543) seconds
+Test Suite 'All tests' passed at 2026-07-25 04:56:35.621
+Executed 89 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.543 (0.543) seconds
+inventory files=33
+history appended HANDOFF-0035
+
+HANDOFF_METADATA_PREPARED HANDOFF-0035
+Stage 1 complete. Review, commit tracked metadata, then:
+  make handoff-package
+Package output will be external: dist/HANDOFF-0035/
+On branch cursor/phase1c-evidence-library-handoff-d881
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   Docs/Handoffs/HANDOFF_HISTORY.md
+	modified:   Handoff/Docs/Handoffs/HANDOFF_HISTORY.md
+	modified:   Handoff/HANDOFF.md
+	modified:   Handoff/OPEN_ITEMS.md
+	modified:   Handoff/PACKAGE_INVENTORY.json
+	modified:   Handoff/REPOSITORY_STATE.md
+	modified:   Handoff/VALIDATION_SUMMARY.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
