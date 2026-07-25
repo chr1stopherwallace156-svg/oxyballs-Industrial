@@ -1,22 +1,22 @@
 # capture-ios Mac handoff
 
-## Current — Phase 1C freeze correction (pending authoritative tag)
+## Current — Phase 1C pending authoritative Git freeze
 
-**Status:** `PHASE_1C_COMPLETE_PENDING_REPOSITORY_COMMIT_AND_TAG`  
-Premature COMPLETE / `v1.0.0-phase1c` from ZIP-without-`.git` retracted. See `PHASE1C_CORRECTION_HANDOFF.md`.
+**Status:** `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_GIT_FREEZE`  
+See `PHASE1C_CORRECTION_HANDOFF.md`. Do **not** declare `PHASE_1C_COMPLETE` / `v1.0.0-phase1c` from the ZIP alone.
 
 | Field | Value |
 |------|---------|
 | Capture branch | `cursor/phase1c-evidence-library-d881` |
-| Tip | `85a175ebdae083eaf37d7f633389159952b6b2d1` |
-| Working-tree ZIP SHA-256 | `f22997e29c9f8c90ba813aed6ebe617f8d5472a8d0e822e58c0a901e0c4fb39d` |
-| Git bundle SHA-256 | `1d0f94936a986985aa8c4252d9e89712a9b1ca3b4eb70fb6a50985c09fd4243d` |
+| Tip | `c83145db4c62bc89926c6550eb7312d1a9617685` |
+| Working-tree ZIP SHA-256 | `2d0c9e93fe534f9e0e92b532266abe5f3dbeb4dd184869f99c8b7772163a30dd` |
+| Git bundle SHA-256 | `0d66b10f5151fc45325e04150dba4491fd6a67690b4a82e01269ddabe3f9600c` |
 
 ```bash
 git clone elektron-capture-ios-phase1c-evidence-library.bundle elektron-capture-ios
 cd elektron-capture-ios
 git checkout cursor/phase1c-evidence-library-d881
-git rev-parse HEAD   # expect 85a175ebdae083eaf37d7f633389159952b6b2d1
+git rev-parse HEAD   # expect c83145db4c62bc89926c6550eb7312d1a9617685
 make open
 ```
 
