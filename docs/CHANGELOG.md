@@ -5,6 +5,14 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-25 — Capture-iOS handoff governance + regenerated Commit B package
+
+- Installed permanent rule: `IMPLEMENTATION_COMPLETE` requires CHANGELOG +
+  `HANDOFF_REFRESH` + hash verification (`make handoff` / `make handoff-verify`).
+- Without handoff refresh: `IMPLEMENTED_PENDING_HANDOFF_REFRESH`.
+- Regenerated Commit B staging ZIP/bundle + `transfer/.../Handoff/` docs tree.
+- Phase 1C freeze status unchanged (still pending authoritative equivalence/tag).
+
 ## 2026-07-25 — Capture-iOS Phase 1C Mac handoff squash-merged (#23)
 
 - Squash-merged PR **#23** into `main`: Phase 1C freeze-prep + Commit B staging

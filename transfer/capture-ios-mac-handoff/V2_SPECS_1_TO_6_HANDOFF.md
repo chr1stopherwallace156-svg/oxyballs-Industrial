@@ -1,14 +1,14 @@
-# Capture v2 Specs 1–6 — Commit B+ staging (correction pass)
+# Capture v2 Specs + handoff governance — Commit B+ staging
 
+**Handoff:** `HANDOFF_GENERATED` / `HANDOFF_VERIFIED` (`make handoff`)  
 **Gate:** `BASELINE_APPROVAL_PENDING_FINAL_SIGN_OFF`  
-**Not yet:** `V2_SPECIFICATIONS_1_TO_6_BASELINE_APPROVED`
+**Phase 1C:** use freeze-prep tip for Commit A / tag — not this package.
 
 | Field | Value |
 |------|---------|
-| Tip | `e5b1a1ea09b3f48b5f2b975576cfe3b6c8c775fb` |
+| Tip | `707bb2f83bbf2daa3f612b025382913841a9f4f3` |
 | Branch | `cursor/phase1c-evidence-library-d881` |
-| ZIP SHA-256 | `60a4f7c8b775876ee261b0767a1acd76f1196695737024dfbe8402e370ad8989` |
-| Bundle SHA-256 | `00f7a333a71a4578deb6ec50125d8660caa3e23ccfb97406ee808a58e5527f37` |
+| ZIP SHA-256 | `6b5db1a0500e17a079dc79b5cc4074ceb52f244ec4b36f518309592e9eebfe60` |
+| Bundle SHA-256 | `8ceaf571d017ef2e5fe0525a4e3fcc276e37524d898c70f0153cd38e2f6dfc4f` |
 
-Correction pass applied (12 items). Registry: `Specifications/V2_CROSS_SPEC_ENTITY_STATE_REGISTRY.md`.  
-Freeze tag: use freeze-prep tip only.
+See `Handoff/HANDOFF.md`, `CHANGELOG_AND_HANDOFF_GOVERNANCE.md`.
