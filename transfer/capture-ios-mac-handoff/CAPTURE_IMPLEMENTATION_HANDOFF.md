@@ -12,6 +12,7 @@
 
 ## What changed?
 
+- Full engineering audit package (`CHANGE-0007`): `Docs/Audits/*` (executive + 14 specialty reports + gap matrix)
 - Canonical five-artifact memory architecture (`CHANGE-0006`): `CAPTURE_IMPLEMENTATION_HANDOFF.md`, `KNOWLEDGE_PACKAGE/`, `ekp-capture-<sha>.zip`
 - Formalized three-tier knowledge artifacts: implementation handoff, `PROJECT_STATE`, EKP  
 - Added `REPOSITORY_MEMORY.md` diary and EKP packaging contract (`CHANGE-0005`)  
@@ -42,13 +43,13 @@ Coding sessions need a small, volatile memory file; other subsystems need a comp
 
 | Item | Value |
 |---|---|
-| Capture branch | `cursor/ekp-knowledge-artifacts-d881` |
-| Parent tip | `d78446b` (two-stage handoff) |
-| Industrial (prior) | PR #25 two-stage handoff; PR #23/#24 freeze + changelog |
+| Capture branch | `cursor/capture-v2-engineering-audit-d881` (from `cursor/ekp-knowledge-artifacts-d881` @ `b5fe020`) |
+| Parent tip | `b5fe020` (EKP-CAPTURE-0002 / five-artifact tip) |
+| Industrial (prior) | PR #25 two-stage handoff; PR #23/#24 freeze + changelog; PR #26 EKP |
 
 ## What tests ran?
 
-- Expect `swift test`: 89 executed / 0 failures (1 skipped) on prepare  
+- `swift test` on audit host: **89 executed / 0 failures (1 skipped)**  
 - `xcodebuild`: Mac-only; not claimed here  
 
 ## What failed?
@@ -58,9 +59,10 @@ Coding sessions need a small, volatile memory file; other subsystems need a comp
 
 ## What is next?
 
-1. Mac Track A freeze (equivalence → Commit A → `v1.0.0-phase1c`)  
-2. Specs architectural review → `CHANGE-0003`  
-3. After each implementation: refresh this file + `PROJECT_STATE.md` + memory entry → `make ekp-package` when a full knowledge snapshot is required  
+1. Read `Docs/Audits/FINAL_GAP_MATRIX.md` + `Docs/Audits/ROADMAP.md` before coding  
+2. Mac Track A freeze (equivalence → Commit A → `v1.0.0-phase1c`)  
+3. Specs architectural review → `CHANGE-0003`  
+4. After each implementation: refresh this file + `PROJECT_STATE.md` + memory entry → `make ekp-package` when a full knowledge snapshot is required  
 
 ## Known problems
 

@@ -263,3 +263,26 @@ Should Capture keep a single handoff document for all memory jobs?
 When a second subsystem publishes an EKP and EMKP aggregation begins.
 
 ---
+
+## DECISION-0014: Engineering audit package as baseline map
+
+- **Date:** 2026-07-25
+- **Status:** APPROVED
+- **Context:** Multiple weeks of Capture work left status recoverable only from chat memory and scattered docs.
+- **Related:** `CHANGE-0007`, `Docs/Audits/`
+
+### Question
+How should “where does Capture v2 stand?” be answered without relying on session memory?
+
+### Decision
+Publish and maintain an evidence-backed engineering audit suite under `Docs/Audits/`. Treat `FINAL_GAP_MATRIX.md` + `ROADMAP.md` as the planning surface until superseded by a later audit revision. The audit does **not** grant baseline approval, IR authorization, or Phase 1 freeze.
+
+### Rationale
+1. Specs, stubs, and Phase 1 runtime are easy to confuse without a single evidence map.
+2. Roadmap order (freeze → baseline → IR → implementation) must be pinned in-repo.
+3. External prompt remaps of Spec IDs must lose to `Specifications/README.md` + audit traceability.
+
+### Future Review Trigger
+After Phase 1 freeze tag and/or Specs baseline (`CHANGE-0003`), regenerate or amend the audit package.
+
+---
