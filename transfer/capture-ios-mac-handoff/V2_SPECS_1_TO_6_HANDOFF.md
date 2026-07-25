@@ -1,16 +1,14 @@
-# Capture v2 Specs 1–6 — Commit B+ staging handoff
+# Capture v2 Specs 1–6 — Commit B+ staging (correction pass)
 
-**Role:** Commit B+ staging only — **not** Phase 1 freeze tag material.
+**Gate:** `BASELINE_APPROVAL_PENDING_FINAL_SIGN_OFF`  
+**Not yet:** `V2_SPECIFICATIONS_1_TO_6_BASELINE_APPROVED`
 
 | Field | Value |
 |------|---------|
+| Tip | `e5b1a1ea09b3f48b5f2b975576cfe3b6c8c775fb` |
 | Branch | `cursor/phase1c-evidence-library-d881` |
-| Tip | `0c5b92a96c7647d026bfd85587ba54c44e2d601b` |
-| ZIP SHA-256 | `7a2ad9f6c048375b7674b9705a165da9605bd502bc15f5f582f3c0a8ab2f24a7` |
-| Bundle SHA-256 | `74f5da4111d9730a5dd6b7e219dd14282334003098126733e032446fd9eecd63` |
-| Spec gate | `V2_SPECIFICATIONS_1_TO_6_BASELINE_APPROVED` |
-| Spike gate | `AUTHORIZED_FOR_IR_0001_EXECUTION` |
+| ZIP SHA-256 | `60a4f7c8b775876ee261b0767a1acd76f1196695737024dfbe8402e370ad8989` |
+| Bundle SHA-256 | `00f7a333a71a4578deb6ec50125d8660caa3e23ccfb97406ee808a58e5527f37` |
 
-Freeze-prep (Commit A): `cursor/phase1c-freeze-commit-a-d881` / `elektron-capture-ios-phase1c-freeze-prep.bundle`
-
-Review: `Specifications/V2_SPECS_1_TO_6_CONSISTENCY_REVIEW.md`
+Correction pass applied (12 items). Registry: `Specifications/V2_CROSS_SPEC_ENTITY_STATE_REGISTRY.md`.  
+Freeze tag: use freeze-prep tip only.

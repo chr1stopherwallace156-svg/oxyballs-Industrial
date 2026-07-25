@@ -26,25 +26,27 @@ Also mirrored as `elektron-capture-ios-phase1c-evidence-library.zip` / `.bundle`
 
 ---
 
+
 ## Also — Commit B+ staging (Specs 1–6; after remote freeze tag)
 
-**Not for `v1.0.0-phase1c`.** Specs 4–6 `DRAFT_FOR_BASELINE_REVIEW`; gate `V2_SPECIFICATIONS_1_TO_6_BASELINE_APPROVED` / `AUTHORIZED_FOR_IR_0001_EXECUTION`.
+**Not for `v1.0.0-phase1c`.** Correction pass applied. Gate: `BASELINE_APPROVAL_PENDING_FINAL_SIGN_OFF` (**not** `BASELINE_APPROVED`).
 
 | Field | Value |
 |------|---------|
 | Branch | `cursor/phase1c-evidence-library-d881` |
-| Tip | `0c5b92a96c7647d026bfd85587ba54c44e2d601b` |
-| ZIP SHA-256 | `7a2ad9f6c048375b7674b9705a165da9605bd502bc15f5f582f3c0a8ab2f24a7` |
-| Bundle SHA-256 | `74f5da4111d9730a5dd6b7e219dd14282334003098126733e032446fd9eecd63` |
+| Tip | `e5b1a1ea09b3f48b5f2b975576cfe3b6c8c775fb` |
+| ZIP SHA-256 | `60a4f7c8b775876ee261b0767a1acd76f1196695737024dfbe8402e370ad8989` |
+| Bundle SHA-256 | `00f7a333a71a4578deb6ec50125d8660caa3e23ccfb97406ee808a58e5527f37` |
 
 ```bash
 git clone elektron-capture-ios-phase1c-commit-b-staging.bundle elektron-capture-ios-v2-specs
 cd elektron-capture-ios-v2-specs
 git checkout cursor/phase1c-evidence-library-d881
-git rev-parse HEAD   # expect 0c5b92a96c7647d026bfd85587ba54c44e2d601b
+git rev-parse HEAD   # expect e5b1a1ea09b3f48b5f2b975576cfe3b6c8c775fb
 ```
 
 See `V2_SPECS_1_TO_6_HANDOFF.md`.
+
 
 ## Prior — Pass 2 share-presentation fix (P2-004)
 
