@@ -14,13 +14,15 @@ answer: *“Tell me everything about Capture.”* without replaying thousands of
 
 | Artifact | File / output | Audience | Cadence |
 |---|---|---|---|
-| Implementation handoff | `IMPLEMENTATION_HANDOFF.md` | Next coding session | Every implementation |
-| Executive snapshot | `PROJECT_STATE.md` | “What’s going on?” (< 2 min) | Every implementation |
+| Executive snapshot | `PROJECT_STATE.md` | “What’s going on?” (< 2 min) | Gate / milestone transitions |
+| Session memory | `CAPTURE_IMPLEMENTATION_HANDOFF.md` | Next coding session | Every PR / commit series |
 | Repository memory | `REPOSITORY_MEMORY.md` | Process/status diary | Significant events |
 | Decision history | `Docs/Decisions/DECISION_LOG.md` | Why choices were made | When deciding |
 | Changelog / change records | `CHANGELOG.md`, `Docs/Changes/` | What shipped | Every change |
 | Distribution handoff | `dist/HANDOFF-XXXX/` | Verified zip/bundle of tip | When packaging commits |
-| **EKP** | `dist/EKP-CAPTURE-XXXX/` + `capture-ekp-*.zip` | Other subsystems / full understanding | When a knowledge snapshot is required |
+| **EKP** | `dist/EKP-CAPTURE-XXXX/` + `ekp-capture-<commit_sha>.zip` | Other subsystems / full understanding | When a knowledge snapshot is required |
+
+Canonical diagram: `Docs/Governance/FIVE_CORE_MEMORY_ARTIFACTS.md`
 
 ---
 
@@ -45,7 +47,7 @@ Capture/
 ├── Instructions/            # runbooks / freeze protocol
 ├── Build/                   # Package.swift pointers, Makefile help
 ├── Git/                     # REPOSITORY_STATE, recent commits summary
-├── Handoffs/                # IMPLEMENTATION_HANDOFF + Docs/Handoffs
+├── Handoffs/                # CAPTURE_IMPLEMENTATION_HANDOFF + Docs/Handoffs
 ├── Decision History/        # copy of Decisions
 ├── API/                     # Docs/Integration when present
 ├── Schemas/                 # pointers / selected schema docs
@@ -61,8 +63,8 @@ Envelope root also includes:
 ```text
 dist/EKP-CAPTURE-<id>/
 ├── Capture/ …                 # tree above
-├── capture-ekp-<commit>.zip   # full EKP tree archive
-├── capture-ekp-<commit>.bundle
+├── ekp-capture-<commit_sha>.zip
+├── ekp-capture-<commit_sha>.bundle
 ├── VERIFICATION_REPORT.md
 └── SHA256SUMS.txt
 ```
@@ -74,7 +76,7 @@ dist/EKP-CAPTURE-<id>/
 Same anti-circularity rule as handoffs:
 
 ```bash
-make ekp-prepare    # refresh living docs + KnowledgePackage/ index (commit)
+make ekp-prepare    # refresh living docs + KNOWLEDGE_PACKAGE/ index (commit)
 make ekp-package    # clean HEAD → dist/EKP-CAPTURE-<id>/
 ```
 

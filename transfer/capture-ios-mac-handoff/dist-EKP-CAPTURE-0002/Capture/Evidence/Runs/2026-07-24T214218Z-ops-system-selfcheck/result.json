@@ -1,0 +1,8 @@
+{
+  "status": "pass",
+  "workflow": "ops-system-selfcheck",
+  "utc": "2026-07-24T21:42:18Z",
+  "note": "meta verify",
+  "claims_physical_device_success": false,
+  "claims_phase_approved": false
+}

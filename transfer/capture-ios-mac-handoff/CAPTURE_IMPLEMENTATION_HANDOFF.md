@@ -1,6 +1,6 @@
-# IMPLEMENTATION_HANDOFF-0001 — Capture coding-session memory
+# CAPTURE_IMPLEMENTATION_HANDOFF-0001 — Session memory
 
-**Status:** `IMPLEMENTATION_HANDOFF_0001`  
+**Status:** `CAPTURE_IMPLEMENTATION_HANDOFF_0001`  
 **Kind:** Development handoff (Capture-only) — **not** the Elektron Knowledge Package  
 **For:** The next coding session / agent turn  
 **Regenerate:** `make ekp-prepare` or `make handoff-prepare` (then commit)
@@ -12,6 +12,7 @@
 
 ## What changed?
 
+- Canonical five-artifact memory architecture (`CHANGE-0006`): `CAPTURE_IMPLEMENTATION_HANDOFF.md`, `KNOWLEDGE_PACKAGE/`, `ekp-capture-<sha>.zip`
 - Formalized three-tier knowledge artifacts: implementation handoff, `PROJECT_STATE`, EKP  
 - Added `REPOSITORY_MEMORY.md` diary and EKP packaging contract (`CHANGE-0005`)  
 - Prior tip already had two-stage `handoff-prepare` / `handoff-package` (`CHANGE-0004`, HANDOFF-0034)
@@ -24,12 +25,12 @@ Coding sessions need a small, volatile memory file; other subsystems need a comp
 
 | Path | Role |
 |---|---|
-| `IMPLEMENTATION_HANDOFF.md` | This file (session memory) |
+| `CAPTURE_IMPLEMENTATION_HANDOFF.md` | This file (session memory) |
 | `PROJECT_STATE.md` | Executive snapshot |
 | `REPOSITORY_MEMORY.md` | Repository diary |
 | `Docs/Decisions/DECISION_LOG.md` | Why decisions were made |
 | `Docs/Governance/ELEKTRON_KNOWLEDGE_PACKAGE.md` | EKP contract |
-| `KnowledgePackage/` | Tracked EKP index / Overview stubs |
+| `KNOWLEDGE_PACKAGE/` | Tracked EKP index / Overview stubs |
 | `Scripts/ekp-prepare.sh` / `Scripts/ekp-package.sh` | EKP two-stage automation |
 
 ## Which specs?
@@ -92,7 +93,7 @@ See `CHANGELOG.md` [Unreleased] for `CHANGE-0005` (EKP / living memory artifacts
 
 | Field | Value |
 |---|---|
-| handoffID | `IMPLEMENTATION_HANDOFF-0001` |
+| handoffID | `CAPTURE_IMPLEMENTATION_HANDOFF-0001` |
 | previousID | `HANDOFF-0034` (distribution handoff series) |
 | projectStatus | Track A pending freeze; Track B baseline review pending |
 | remainingGates | See `PROJECT_STATE.md` |

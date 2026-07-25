@@ -32,21 +32,24 @@ make handoff-package   # → dist/HANDOFF-XXXX/
 Single-shot `make handoff` is retired. Digests live under `dist-HANDOFF-0034/`, not in tracked `Handoff/`.
 
 
-## Elektron Knowledge Package (EKP-CAPTURE-0001)
+## Canonical five-core memory artifacts (CHANGE-0006)
 
-Not a coding-session handoff. Full subsystem knowledge snapshot.
+| Artifact | Path |
+|---|---|
+| Executive | `PROJECT_STATE.md` |
+| Session | `CAPTURE_IMPLEMENTATION_HANDOFF.md` |
+| Journal | `REPOSITORY_MEMORY.md` |
+| Decisions | `Docs/Decisions/DECISION_LOG.md` |
+| EKP | `dist-EKP-CAPTURE-0002/` + `ekp-capture-<sha>.zip` |
+
+See `FIVE_CORE_MEMORY_ARTIFACTS.md`.
+
+## EKP-CAPTURE-0002 @ Capture `b5fe020`
 
 | Field | Value |
 |---|---|
-| Capture tip | `792f6b4` |
-| Envelope | `dist-EKP-CAPTURE-0001/` |
-| ZIP | `capture-ekp-792f6b42430b87f7bbd09c88e922b4594436f579.zip` |
-| ZIP SHA-256 | `2750ee0120def1ba56dd0ed831b5518de6f6f44e15ea8cd2f0b6191d1e1a10b4` |
-| Bundle SHA-256 | `3ff9a04b1de00b9cc72c9a58df3faffa9e16b5fe4d3625b309a8729e0ab6be00` |
-| Living docs | `PROJECT_STATE.md`, `IMPLEMENTATION_HANDOFF.md`, `REPOSITORY_MEMORY.md` |
-
-```bash
-make ekp-prepare && git commit
-make ekp-package   # → dist/EKP-CAPTURE-XXXX/
-```
+| ZIP | `ekp-capture-b5fe020c508e4588c90a865560e1ba783900fa4b.zip` |
+| ZIP SHA-256 | `fa567bcb9825d2f959b9ee37c65b986ec13518ad35a133bd1d73fb3a191136f9` |
+| Bundle SHA-256 | `8538f6449bec51ec7bc976966ed22a2ee6a44c7fe5714d2d50edbf69d7d90d2d` |
+| Gates | `DIGESTS_VERIFIED` + `RESTORATION_TEST_PASSED` |
 
