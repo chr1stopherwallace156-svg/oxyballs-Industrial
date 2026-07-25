@@ -1,6 +1,30 @@
 # capture-ios Mac handoff
 
-## Current — Pass 2 share-presentation fix (P2-004)
+## Current — Phase 1C freeze correction (pending authoritative tag)
+
+**Status:** `PHASE_1C_COMPLETE_PENDING_REPOSITORY_COMMIT_AND_TAG`  
+Premature COMPLETE / `v1.0.0-phase1c` from ZIP-without-`.git` retracted. See `PHASE1C_CORRECTION_HANDOFF.md`.
+
+| Field | Value |
+|------|---------|
+| Capture branch | `cursor/phase1c-evidence-library-d881` |
+| Tip | `85a175ebdae083eaf37d7f633389159952b6b2d1` |
+| Working-tree ZIP SHA-256 | `f22997e29c9f8c90ba813aed6ebe617f8d5472a8d0e822e58c0a901e0c4fb39d` |
+| Git bundle SHA-256 | `1d0f94936a986985aa8c4252d9e89712a9b1ca3b4eb70fb6a50985c09fd4243d` |
+
+```bash
+git clone elektron-capture-ios-phase1c-evidence-library.bundle elektron-capture-ios
+cd elektron-capture-ios
+git checkout cursor/phase1c-evidence-library-d881
+git rev-parse HEAD   # expect 85a175ebdae083eaf37d7f633389159952b6b2d1
+make open
+```
+
+Also: root `DOWNLOAD-elektron-capture-ios-phase1c-evidence-library.zip` (same bytes as transfer ZIP).
+
+---
+
+## Prior — Pass 2 share-presentation fix (P2-004)
 
 **Status:** submitted for operator device verification — share/AirDrop/Files hardening  
 Preserves Pass 1 gates and Pass 2 freeze rules. Does **not** re-encode `artifact_original.jpg`.
@@ -18,21 +42,14 @@ Preserves Pass 1 gates and Pass 2 freeze rules. Does **not** re-encode `artifact
 | `elektron-capture-ios-pass2-share-working-tree.zip` | `086e1b9828bc1d1b661dc1aaf0f54078817ca46ee31cd21841b5bf489de3a379` |
 
 Fresh-clone: `pass2-share-fresh-clone-swift-test.log` — **66 executed, 1 skipped, 0 failures**; `HANDOFF_LAYOUT_OK`  
-Evidence: `PASS2_SHARE_FIX_EVIDENCE/`  
-Device checklist (updated Share/ZIP rows): see capture-ios `Docs/Evidence/PASS2_DEVICE_VALIDATION.md`
+Evidence: `PASS2_SHARE_FIX_EVIDENCE/`
 
 ```bash
 git clone elektron-capture-ios-pass2-share-complete.bundle elektron-capture-ios-pass2-share
 cd elektron-capture-ios-pass2-share
 git checkout cursor/pass2-share-presentation-d881
 git rev-parse HEAD   # expect c59b84da7795373a3f160245fee34325ce000523
-open Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj
 ```
-
-After export on device use:
-1. **Share .edts-pkg** (AirDrop)
-2. **Save .edts-pkg to Files**
-3. **Export as ZIP copy** (diagnostic; same bytes, `.zip` extension; canonical `.edts-pkg` kept)
 
 ---
 
