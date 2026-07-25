@@ -1,18 +1,18 @@
-# HANDOFF-0029 — Elektron Capture iOS Handoff
+# HANDOFF-0030 — Elektron Capture iOS Handoff
 
 | Field | Value |
 |------|---------|
 | Status | `HANDOFF_GENERATED` (run `make handoff-verify` → `HANDOFF_VERIFIED`) |
-| Generated (UTC) | 2026-07-25T04:45:30Z |
+| Generated (UTC) | 2026-07-25T04:47:35Z |
 | Branch | `cursor/phase1c-evidence-library-d881` |
-| Commit | `b5f86171192b724c195cb7a7b1474ca72b1f72ac` |
+| Commit | `cfd0b86bc8c88bcc5645241a242f063b72996c8b` |
 | Working tree | clean |
 | Phase 1C | `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_GIT_FREEZE` |
 | Capture v2 | `BASELINE_APPROVAL_PENDING_FINAL_SIGN_OFF` |
 
 ## What changed?
 
-See `CHANGELOG.md` [Unreleased] and `Docs/Handoffs/HANDOFF_HISTORY.md` (HANDOFF-0029).
+See `CHANGELOG.md` [Unreleased] and `Docs/Handoffs/HANDOFF_HISTORY.md` (HANDOFF-0030).
 
 ## Why did it change?
 
@@ -21,11 +21,11 @@ governance, Capture v2 Specs 1–6 correction pass, and permanent changelog/hand
 
 ## When did it change?
 
-2026-07-25T04:45:30Z (handoff generation). Underlying commits through `b5f8617`.
+2026-07-25T04:47:35Z (handoff generation). Underlying commits through `cfd0b86`.
 
 ## Which files changed?
 
-See git history ending at `b5f86171192b724c195cb7a7b1474ca72b1f72ac` and `PACKAGE_INVENTORY.json` for packaged paths.
+See git history ending at `cfd0b86bc8c88bcc5645241a242f063b72996c8b` and `PACKAGE_INVENTORY.json` for packaged paths.
 
 ## Which contracts or behaviors changed?
 
@@ -37,19 +37,19 @@ See git history ending at `b5f86171192b724c195cb7a7b1474ca72b1f72ac` and `PACKAG
 
 ## Which commit and PR contain it?
 
-- Capture commit: `b5f86171192b724c195cb7a7b1474ca72b1f72ac`
+- Capture commit: `cfd0b86bc8c88bcc5645241a242f063b72996c8b`
 - Industrial delivery: PR #23 (merged), PR #24 (changelog); refresh this handoff into `transfer/capture-ios-mac-handoff/`
 
 ## What was tested?
 
-Executed 89 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.968 (0.968) seconds
+Executed 89 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.418 (0.418) seconds
 
 ## What evidence was produced?
 
 - This `Handoff/` tree
-- Source ZIP SHA-256: `6b5db1a0500e17a079dc79b5cc4074ceb52f244ec4b36f518309592e9eebfe60`
-- Git bundle SHA-256: `8ceaf571d017ef2e5fe0525a4e3fcc276e37524d898c70f0153cd38e2f6dfc4f`
-- Inventory SHA-256: `9e2daa2a4950babab1b158083678e3956b950af534d74f279107bcc959d306bf`
+- Source ZIP SHA-256: `1c20c17e0ed6fdbea62207fe784908f916c7330cf5e60fff3339c8b588e9f1a9`
+- Git bundle SHA-256: `4ac3c884f7ad011c8596adeb70cbce58c732f1a1d05d5bf5ee1c1fda0b3c0b73`
+- Inventory SHA-256: `3e1a7343a7a8ef7b4f1fde1d23bd862e1e174af7e5264a50eb872ea2290da2f6`
 
 ## What remains pending?
 
@@ -66,9 +66,9 @@ See `OPEN_ITEMS.md`. Phase 1C is **not** frozen.
 
 | Artifact | SHA-256 |
 |----------|---------|
-| `elektron-capture-ios-handoff-b5f8617.zip` | `6b5db1a0500e17a079dc79b5cc4074ceb52f244ec4b36f518309592e9eebfe60` |
-| `elektron-capture-ios-handoff-b5f8617.bundle` | `8ceaf571d017ef2e5fe0525a4e3fcc276e37524d898c70f0153cd38e2f6dfc4f` |
-| `PACKAGE_INVENTORY.json` | `9e2daa2a4950babab1b158083678e3956b950af534d74f279107bcc959d306bf` |
+| `elektron-capture-ios-handoff-cfd0b86.zip` | `1c20c17e0ed6fdbea62207fe784908f916c7330cf5e60fff3339c8b588e9f1a9` |
+| `elektron-capture-ios-handoff-cfd0b86.bundle` | `4ac3c884f7ad011c8596adeb70cbce58c732f1a1d05d5bf5ee1c1fda0b3c0b73` |
+| `PACKAGE_INVENTORY.json` | `3e1a7343a7a8ef7b4f1fde1d23bd862e1e174af7e5264a50eb872ea2290da2f6` |
 
 Full list: `SHA256SUMS.txt`.
 

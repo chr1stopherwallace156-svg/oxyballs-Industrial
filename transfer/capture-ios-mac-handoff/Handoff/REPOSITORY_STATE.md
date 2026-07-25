@@ -2,10 +2,10 @@
 
 | Field | Value |
 |------|---------|
-| Handoff ID | HANDOFF-0029 |
-| Generated (UTC) | 2026-07-25T04:45:30Z |
+| Handoff ID | HANDOFF-0030 |
+| Generated (UTC) | 2026-07-25T04:47:35Z |
 | Branch | `cursor/phase1c-evidence-library-d881` |
-| Commit | `b5f86171192b724c195cb7a7b1474ca72b1f72ac` |
+| Commit | `cfd0b86bc8c88bcc5645241a242f063b72996c8b` |
 | Working tree | clean |
 | Remote | `NONE` |
 | Host | `Linux x86_64` |

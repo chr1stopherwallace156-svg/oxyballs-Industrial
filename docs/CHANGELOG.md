@@ -5,6 +5,14 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-07-25 — Official adoption: changelog/handoff governance (CHANGE-0001)
+
+- Four operating rules + completion state machine adopted in capture-ios
+  (`Docs/Governance/CHANGELOG_AND_HANDOFF_GOVERNANCE.md`).
+- Regenerated Commit B handoff (`HANDOFF_VERIFIED`) with updated digests.
+- Specs 1–6 remain `BASELINE_APPROVAL_PENDING_FINAL_SIGN_OFF` (not approved).
+- Phase 1C freeze still pending authoritative equivalence/tag.
+
 ## 2026-07-25 — Capture-iOS handoff governance + regenerated Commit B package
 
 - Installed permanent rule: `IMPLEMENTATION_COMPLETE` requires CHANGELOG +

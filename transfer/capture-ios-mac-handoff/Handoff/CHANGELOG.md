@@ -18,13 +18,16 @@ All notable changes to **elektron-capture-ios** only.
 - Incident record: `Docs/Incidents/PHASE_1_RUNTIME_INCIDENT_001.md` (P1R-001) + ADR-001.
 
 ### Added
-- Changelog + handoff governance (`Docs/Governance/CHANGELOG_AND_HANDOFF_GOVERNANCE.md`):
-  `IMPLEMENTATION_COMPLETE` requires CHANGELOG + `HANDOFF_REFRESH` + hash verification;
-  without handoff refresh → `IMPLEMENTED_PENDING_HANDOFF_REFRESH`.
+- Changelog + handoff governance **officially adopted** as primary engineering rule
+  (`Docs/Governance/CHANGELOG_AND_HANDOFF_GOVERNANCE.md`, `CHANGE-0001`,
+  `CURSOR_OPERATING_RULES.md` § Changelog and handoff completion):
+  state machine `IMPLEMENTED_PENDING_HANDOFF_REFRESH` → `IMPLEMENTATION_COMPLETE`;
+  four rules (changelog / handoff / verified hashes / authoritative tag).
 - `make handoff` / `make handoff-verify` (`Scripts/generate-handoff.sh`,
   `Scripts/verify-handoff-package.sh`) regenerate `Handoff/` (HANDOFF.md, inventory,
   ZIP, Git bundle, SHA256SUMS) and append `Docs/Handoffs/HANDOFF_HISTORY.md`.
 - PR template checklist: `.github/PULL_REQUEST_TEMPLATE.md` (changelog + handoff gates).
+- Change records directory: `Docs/Changes/` (starts at `CHANGE-0001`).
 - Phase 1C Persistent Local Evidence Library (`App/Phase1/EvidenceLibrary/`, write-once
   `artifact_original.jpg`, orthogonal state dimensions, export under library root).
 - ADR + decision log **P1-004** Canonical Identity Pattern; unit tests

@@ -1,12 +1,17 @@
 {
   "schemaVersion": "1.0.0",
   "packageKind": "elektron-capture-ios-handoff",
-  "fileCount": 26,
+  "fileCount": 28,
   "files": [
     {
       "path": "CHANGELOG.md",
-      "bytes": 9085,
-      "sha256": "2e0ac56f05bcc7462dfdada79ba32f220b6b0619f65a85bf493ff3e014f27f05"
+      "bytes": 9293,
+      "sha256": "846602b7c10bf7c26a76b93e408fd329678d471ea897d12a7f29500c58acf7d6"
+    },
+    {
+      "path": "CURSOR_OPERATING_RULES.md",
+      "bytes": 7094,
+      "sha256": "9b6f2a857ffc244d06fad6049162a03c96402a7a7f9896cc8a8fb2a6f08f82a1"
     },
     {
       "path": "Docs/Capture/PHASE_1C_FINAL_VALIDATION.md",
@@ -24,14 +29,19 @@
       "sha256": "5060b0f2c23ea042edf106f257135c78846df3db7ca6a21d7f18facfe6561f97"
     },
     {
+      "path": "Docs/Changes/CHANGE-0001-changelog-handoff-governance.md",
+      "bytes": 1697,
+      "sha256": "54860e674125a40989df06e930f063a7848ff2cbb0ac6096f0e4b0aca5e64c08"
+    },
+    {
       "path": "Docs/Governance/CHANGELOG_AND_HANDOFF_GOVERNANCE.md",
-      "bytes": 1784,
-      "sha256": "14444d6b5647e1b3079f21de40ec8e7dd0f4554b681e214123e0ea75cdf5b0bd"
+      "bytes": 7239,
+      "sha256": "b42fd161fde871e8ccf32e178a1928f9eeddd4482d555f28668a77d3e132cb07"
     },
     {
       "path": "Docs/Handoffs/HANDOFF_HISTORY.md",
-      "bytes": 1909,
-      "sha256": "cfd5045660046d5b001d8766c137f4e99baeb7c59911e67d05806d1a7cdd942f"
+      "bytes": 2525,
+      "sha256": "01b9e737404ec6f2bf34da8a458da446cfef3ad5cb9177afc21449e41de79685"
     },
     {
       "path": "OPEN_ITEMS.md",
@@ -46,7 +56,7 @@
     {
       "path": "REPOSITORY_STATE.md",
       "bytes": 1710,
-      "sha256": "6e41f9456b7e52c9b8c9c396fa5fe1713b778f5113cd45e1df5a627e9243c4d4"
+      "sha256": "0855f8e0af10254327cf4774e48795e0224ac78b4fc3c130edbe65c8a60783e9"
     },
     {
       "path": "Research/Deferred/SemanticMattes/README.md",
@@ -131,7 +141,7 @@
     {
       "path": "VALIDATION_SUMMARY.md",
       "bytes": 568,
-      "sha256": "b4eef95ddf67da1d7d4005d01519d207d3fc0ea5865de951810a4a7e03f33e1b"
+      "sha256": "140775550cbdc66ee4c8316b4f8c91c6071069f65444f8a8b1a38d5a596a1f93"
     }
   ]
 }

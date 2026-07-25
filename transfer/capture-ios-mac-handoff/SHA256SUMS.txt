@@ -3,5 +3,5 @@ eb2603f1e6a47f0b62ad988397a9385c20711d49539d3eb01e93b98f82f3afb3  transfer/captu
 eb2603f1e6a47f0b62ad988397a9385c20711d49539d3eb01e93b98f82f3afb3  transfer/capture-ios-mac-handoff/elektron-capture-ios-phase1c-freeze-prep.zip
 ccf2494adc83237c6a823634a990cf1341e4eaeff5c773903612d6965dedf753  transfer/capture-ios-mac-handoff/elektron-capture-ios-phase1c-evidence-library.bundle
 ccf2494adc83237c6a823634a990cf1341e4eaeff5c773903612d6965dedf753  transfer/capture-ios-mac-handoff/elektron-capture-ios-phase1c-freeze-prep.bundle
-6b5db1a0500e17a079dc79b5cc4074ceb52f244ec4b36f518309592e9eebfe60  transfer/capture-ios-mac-handoff/elektron-capture-ios-phase1c-commit-b-staging.zip
-8ceaf571d017ef2e5fe0525a4e3fcc276e37524d898c70f0153cd38e2f6dfc4f  transfer/capture-ios-mac-handoff/elektron-capture-ios-phase1c-commit-b-staging.bundle
+1c20c17e0ed6fdbea62207fe784908f916c7330cf5e60fff3339c8b588e9f1a9  transfer/capture-ios-mac-handoff/elektron-capture-ios-phase1c-commit-b-staging.zip
+4ac3c884f7ad011c8596adeb70cbce58c732f1a1d05d5bf5ee1c1fda0b3c0b73  transfer/capture-ios-mac-handoff/elektron-capture-ios-phase1c-commit-b-staging.bundle
