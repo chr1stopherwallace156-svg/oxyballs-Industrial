@@ -1,8 +1,13 @@
-CAPTURE_TIP=c3dea9f8164704c8323d2c539133283bad4d6a18
-CAPTURE_BRANCH=cursor/phase1c-freeze-commit-a-d881
-STATUS=PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_REPOSITORY_EQUIVALENCE_AND_FREEZE
-TREE=Phase1_only (no Specifications/Research)
-PROTOCOL=Docs/Capture/PHASE_1C_FREEZE_COMMIT_SEPARATION.md
-ZIP_SHA256=eb2603f1e6a47f0b62ad988397a9385c20711d49539d3eb01e93b98f82f3afb3
-BUNDLE_SHA256=ccf2494adc83237c6a823634a990cf1341e4eaeff5c773903612d6965dedf753
-COMMIT_B_STAGING=cursor/phase1c-evidence-library-d881@a0b8299052743cb9fdaac970f9417800d6113aef (Specs 1-6 + IR-0001 — AFTER remote tag only)
+PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_REPOSITORY_EQUIVALENCE_AND_FREEZE
+
+Commit A tip (freeze-prep): 658fde7 (cursor/phase1c-freeze-commit-a-d881)
+Includes CHANGE-0001; excludes Specifications/ Research/ CHANGE-0002.
+
+Freeze-prep ZIP SHA-256:
+8990c7407e742fc47f75770c57d18a7f4d1f0e7ccfddc2159c88a85f24855e7f
+
+Freeze-prep bundle SHA-256:
+3116f4b7ca43ca5aad0857c62a631c277072e28615b7e81a7bcbeca9deb869f1
+
+Sequence: equivalence → fill validation → Commit A → tag v1.0.0-phase1c → push → verify → PHASE_1_FROZEN
+Then Commit B.

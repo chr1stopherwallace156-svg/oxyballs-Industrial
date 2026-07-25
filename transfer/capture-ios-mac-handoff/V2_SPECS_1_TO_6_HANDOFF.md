@@ -1,14 +1,15 @@
-# Capture v2 Specs 1–6 — Commit B+ staging (correction pass)
+# Capture v2 Specs — Commit B staging handoff
 
-**Gate:** `BASELINE_APPROVAL_PENDING_FINAL_SIGN_OFF`  
-**Not yet:** `V2_SPECIFICATIONS_1_TO_6_BASELINE_APPROVED`
+**Status:**
+```text
+V2_SPECIFICATIONS_4_TO_6_DRAFTED
+CROSS_SPEC_REVIEW_COMPLETED_WITH_REQUIRED_CORRECTIONS
+CORRECTION_PASS_APPLIED
+BASELINE_APPROVAL_PENDING_FINAL_ARCHITECTURAL_REVIEW
+```
 
-| Field | Value |
-|------|---------|
-| Tip | `e5b1a1ea09b3f48b5f2b975576cfe3b6c8c775fb` |
-| Branch | `cursor/phase1c-evidence-library-d881` |
-| ZIP SHA-256 | `60a4f7c8b775876ee261b0767a1acd76f1196695737024dfbe8402e370ad8989` |
-| Bundle SHA-256 | `00f7a333a71a4578deb6ec50125d8660caa3e23ccfb97406ee808a58e5527f37` |
+**CHANGE-0002:** Capture v2 Specifications 1–6 hardening and twelve-point correction pass  
+`IMPLEMENTED` / `FINAL_ARCHITECTURAL_REVIEW_PENDING` / `NOT_BASELINE_APPROVED`
 
-Correction pass applied (12 items). Registry: `Specifications/V2_CROSS_SPEC_ENTITY_STATE_REGISTRY.md`.  
-Freeze tag: use freeze-prep tip only.
+Do **not** tag `v1.0.0-phase1c` from this tip. Apply only after remote Phase 1 tag.
+Future `CHANGE-0003` records baseline approval + IR-0001 authorization after review.
