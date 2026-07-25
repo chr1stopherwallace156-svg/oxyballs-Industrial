@@ -1,9 +1,8 @@
-# capture-ios-mac-handoff digests — 2026-07-25T04:56:10Z
-# Track A = freeze-prep. Track B = HANDOFF-0034 two-stage package.
+# 2026-07-25T04:56:24Z
 8990c7407e742fc47f75770c57d18a7f4d1f0e7ccfddc2159c88a85f24855e7f  elektron-capture-ios-phase1c-freeze-prep.zip
 3116f4b7ca43ca5aad0857c62a631c277072e28615b7e81a7bcbeca9deb869f1  elektron-capture-ios-phase1c-freeze-prep.bundle
-fcd40dad195b24d3bb946ec1503924b456dfd59d7d80ff7fa6729b8cb42ca9fb  elektron-capture-ios-phase1c-commit-b-staging.zip
-ae1a9165173c55c30cc21573e50671e9905926c8bf6a5c39d969be13800ea6e2  elektron-capture-ios-phase1c-commit-b-staging.bundle
-fcd40dad195b24d3bb946ec1503924b456dfd59d7d80ff7fa6729b8cb42ca9fb  elektron-capture-ios-phase1c-evidence-library.zip
-ae1a9165173c55c30cc21573e50671e9905926c8bf6a5c39d969be13800ea6e2  elektron-capture-ios-phase1c-evidence-library.bundle
-fcd40dad195b24d3bb946ec1503924b456dfd59d7d80ff7fa6729b8cb42ca9fb  ../DOWNLOAD-elektron-capture-ios-phase1c-evidence-library.zip
+6b6640f56d6dcd87ee9aa053e8453342cec2bb281dcf28f6593d9dfc8539053a  elektron-capture-ios-phase1c-commit-b-staging.zip
+efb18d954fd7aaaa96084760d5aeb5f1a388bdb9d54d489809393dc90dfbc7e1  elektron-capture-ios-phase1c-commit-b-staging.bundle
+6b6640f56d6dcd87ee9aa053e8453342cec2bb281dcf28f6593d9dfc8539053a  elektron-capture-ios-phase1c-evidence-library.zip
+efb18d954fd7aaaa96084760d5aeb5f1a388bdb9d54d489809393dc90dfbc7e1  elektron-capture-ios-phase1c-evidence-library.bundle
+6b6640f56d6dcd87ee9aa053e8453342cec2bb281dcf28f6593d9dfc8539053a  ../DOWNLOAD-elektron-capture-ios-phase1c-evidence-library.zip

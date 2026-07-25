@@ -162,24 +162,22 @@ fi
 ## 5. Deterministic digests & isolated restoration
 
 ```bash
-find "dist/handoff-${HANDOFF_ID}" \
-  -type f \
-  ! -name 'SHA256SUMS.txt' \
-  ! -name 'SHA256SUMS.txt.tmp' \
-  -print0 |
+find "dist/${HANDOFF_ID}/payload" \
+     "dist/${HANDOFF_ID}/elektron-capture-${COMMIT_SHA}.zip" \
+     "dist/${HANDOFF_ID}/elektron-capture-${COMMIT_SHA}.bundle" \
+  -type f -print0 |
 LC_ALL=C sort -z |
-xargs -0 shasum -a 256 > "dist/handoff-${HANDOFF_ID}/SHA256SUMS.txt"
+xargs -0 shasum -a 256 > "dist/${HANDOFF_ID}/SHA256SUMS.txt"
 ```
 
-(Implementation hashes `payload/` + zip + bundle explicitly; excludes
-`SHA256SUMS.txt` and `VERIFICATION_REPORT.md` from the digest list.)
+(`SHA256SUMS.txt` and `VERIFICATION_REPORT.md` are excluded from the digest list.)
 
 Restoration:
 
 ```bash
 VERIFY_DIR="$(mktemp -d)"
 trap 'rm -rf "$VERIFY_DIR"' EXIT
-git clone "dist/handoff-${HANDOFF_ID}/elektron-capture-${COMMIT_SHA}.bundle" "$VERIFY_DIR/restored-repo"
+git clone "dist/${HANDOFF_ID}/elektron-capture-${COMMIT_SHA}.bundle" "$VERIFY_DIR/restored-repo"
 git -C "$VERIFY_DIR/restored-repo" fsck --full
 # HEAD must equal packaged COMMIT_SHA
 ```
