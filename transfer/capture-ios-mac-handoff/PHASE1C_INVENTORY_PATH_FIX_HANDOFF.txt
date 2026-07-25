@@ -1,5 +1,6 @@
-CAPTURE_TIP=83368e648b54cd9a3e48f8db530a074ab49fb9e5
-SHA256=c67cda506a2f46836f63ce7f99533dda77bcef51fb69c023ebf361b19abc252b
-CLASSIFICATION=relative-path derivation defect (proven via printed sets; not empty declaration set)
-EVIDENCE=Docs/Evidence/INVENTORY_VALIDATION_FAILURE_EVIDENCE_REPORT.md
-LINUX_SWIFT_TEST=see suite log; 0 failures
+CAPTURE_TIP=b50bb84154b5dfd1f12081ab65ec861b0d7be970
+SHA256=
+GUARDRAIL=Tests/Unit/CanonicalPathInvariantTests.swift
+ERROR=Docs/ErrorLibrary/ERR-EDTS-0007.md
+STATUS=PHASE_1C_IMPLEMENTED_PENDING_MAC_AND_DEVICE_VALIDATION
+LINUX_SWIFT_TEST=see suite; 0 failures
