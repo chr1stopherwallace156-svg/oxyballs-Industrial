@@ -1,0 +1,14 @@
+{
+  "project": "elektron-capture-ios",
+  "handoff": "pass2-operations-guardrail",
+  "package_product": "ElektronCapture",
+  "workspace": "Phase1StillCapture.xcworkspace",
+  "scheme": "Phase1StillCapture",
+  "expected_invariants": [
+    "Apps/Phase1StillCapture/*.swift that use package types must import ElektronCapture",
+    "CameraPreviewView must be public in App/Capture/AVFoundation/CameraPreviewView.swift",
+    "Open Phase1StillCapture.xcworkspace (root), not the .xcodeproj alone",
+    "swift build compiles package only; xcodebuild compiles the app"
+  ],
+  "notes": "expected_tip is informational; verify with git rev-parse HEAD when .git exists"
+}
