@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Status | **PENDING** — not frozen |
-| Milestone | `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_GIT_FREEZE` |
+| Milestone | `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_REPOSITORY_EQUIVALENCE_AND_FREEZE` |
 | Short | `PHASE_1C_VALIDATION_PASSED_PENDING_REPOSITORY_TAG` |
 | Tag | *None authoritative* until `v1.0.0-phase1c` exists on `origin` |
 | Validation record | `Docs/Capture/PHASE_1C_FINAL_VALIDATION.md` |

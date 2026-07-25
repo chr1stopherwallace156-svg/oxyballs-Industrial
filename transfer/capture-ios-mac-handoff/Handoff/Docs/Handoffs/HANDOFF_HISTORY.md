@@ -4,6 +4,42 @@ Append-only. Newest entries at the top. Do not rewrite prior handoff digests.
 
 ---
 
+## HANDOFF-0033 — 2026-07-25
+
+- Previous handoff: HANDOFF-0032
+- Capture tip: `19400c293fb3486c1d2df4e7ea59873ca5ec260c` (`cursor/phase1c-evidence-library-d881`)
+- Summary: Regenerated handoff package via `make handoff` / `Scripts/generate-handoff.sh`.
+- ZIP SHA-256: `cebf8687f104fb28f0936fbac5a4ec3da22e6e636f14abb61f02cb49cfe070d0`
+- Bundle SHA-256: `cebd33e2b7e005b0be1affc2e2fc484112087660cbdfe5138d4f20a71ce5aa80`
+- Validation: Executed 89 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.419 (0.419) seconds
+- Remaining gate: Phase 1C Commit A + remote tag; Specs final architectural review (CHANGE-0003 later).
+
+---
+
+## HANDOFF-0032 — 2026-07-25
+
+- Previous handoff: HANDOFF-0031
+- Capture tip: `d5715010522edde979254684fb8274468e931721` (`cursor/phase1c-evidence-library-d881`)
+- Summary: Regenerated handoff package via `make handoff` / `Scripts/generate-handoff.sh`.
+- ZIP SHA-256: `697358623e84afa7bd4e09eab4d624d9dfe50f7ae966950102499bc174864e99`
+- Bundle SHA-256: `2f36d4c3a3c2d532c2fa0a7689f7795cd5b0ac2612aadfc696e30b9fffd1b765`
+- Validation: Executed 89 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.535 (0.535) seconds
+- Remaining gate: Phase 1C Commit A + remote tag; Specs final architectural review (CHANGE-0003 later).
+
+---
+
+## HANDOFF-0031 — 2026-07-25
+
+- Previous handoff: HANDOFF-0030
+- Capture tip: `702b477ee0957d07747a09d3dd51605535ea26b1` (`cursor/phase1c-evidence-library-d881`)
+- Summary: Regenerated handoff package via `make handoff` / `Scripts/generate-handoff.sh`.
+- ZIP SHA-256: `f02ccfb8dd16767ea5dd319cc31729ce1f007d6f5b43b85b7bdb340cabea2328`
+- Bundle SHA-256: `71e0b67264573ff98edf408c71a10bf3c80126507a247c975b878103fa984816`
+- Validation: 	 Executed 89 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.834 (0.834) seconds
+- Remaining gate: Phase 1C Commit A + remote tag; Specs final architectural review (CHANGE-0003 later).
+
+---
+
 ## HANDOFF-0030 — 2026-07-25
 
 - Previous handoff: HANDOFF-0029

@@ -18,22 +18,30 @@ All notable changes to **elektron-capture-ios** only.
 - Incident record: `Docs/Incidents/PHASE_1_RUNTIME_INCIDENT_001.md` (P1R-001) + ADR-001.
 
 ### Added
+- `CHANGE-0001` (Commit A / freeze-prep): Phase 1C completion retraction, freeze
+  preparation, and Commit A isolation — `IMPLEMENTED` / `FREEZE_EXECUTION_PENDING`.
+  Tag `v1.0.0-phase1c` must not include v2 files.
+- `CHANGE-0002` (Commit B): Capture v2 Specifications 1–6 hardening and twelve-point
+  correction pass — `IMPLEMENTED` / `FINAL_ARCHITECTURAL_REVIEW_PENDING` /
+  `NOT_BASELINE_APPROVED`. Future `CHANGE-0003` only after architectural review.
+- `Docs/Changes/TEMPLATE.md` for subsequent change records.
 - Changelog + handoff governance **officially adopted** as primary engineering rule
-  (`Docs/Governance/CHANGELOG_AND_HANDOFF_GOVERNANCE.md`, `CHANGE-0001`,
+  (`Docs/Governance/CHANGELOG_AND_HANDOFF_GOVERNANCE.md`,
   `CURSOR_OPERATING_RULES.md` § Changelog and handoff completion):
-  state machine `IMPLEMENTED_PENDING_HANDOFF_REFRESH` → `IMPLEMENTATION_COMPLETE`;
-  four rules (changelog / handoff / verified hashes / authoritative tag).
+  completion requires change record + regenerated handoff + verified hashes;
+  intermediate state `IMPLEMENTED_PENDING_CHANGE_DOCUMENTATION_AND_HANDOFF`;
+  four invariants (changelog / handoff / verified hashes / authoritative tag).
 - `make handoff` / `make handoff-verify` (`Scripts/generate-handoff.sh`,
   `Scripts/verify-handoff-package.sh`) regenerate `Handoff/` (HANDOFF.md, inventory,
   ZIP, Git bundle, SHA256SUMS) and append `Docs/Handoffs/HANDOFF_HISTORY.md`.
-- PR template checklist: `.github/PULL_REQUEST_TEMPLATE.md` (changelog + handoff gates).
-- Change records directory: `Docs/Changes/` (starts at `CHANGE-0001`).
+- PR template: Change Governance + Handoff Governance checklists
+  (`.github/PULL_REQUEST_TEMPLATE.md`).
 - Phase 1C Persistent Local Evidence Library (`App/Phase1/EvidenceLibrary/`, write-once
   `artifact_original.jpg`, orthogonal state dimensions, export under library root).
 - ADR + decision log **P1-004** Canonical Identity Pattern; unit tests
   `CanonicalPathInvariantTests` / `CanonicalPackageIdentityTests`.
 - Phase 1C freeze-prep docs: `PHASE_1C_FINAL_VALIDATION.md` (evidence-only template),
-  `PHASE_1C_FREEZE_COMMIT_SEPARATION.md` (Commit A = validation only; Commit B = v2 specs
+  `PHASE_1C_FREEZE_COMMIT_SEPARATION.md` (Commit A = Phase 1 freeze only; Commit B = v2
   after remote tag; ZIP≠git equivalence protocol).
 - Capture v2 specification suite under `Specifications/` (EC-V2-SPEC-001…006), cross-spec
   entity/state registry, consistency review (correction pass applied).
@@ -52,14 +60,15 @@ All notable changes to **elektron-capture-ios** only.
   `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_REPOSITORY_EQUIVALENCE_AND_FREEZE`
   (premature `PHASE_1C_COMPLETE` / `v1.0.0-phase1c` claims retracted until authoritative clone
   equivalence, Commit A, remote annotated tag, and GitHub protection).
-- Capture v2 gate: `BASELINE_APPROVAL_PENDING_FINAL_SIGN_OFF` after Specs 4–6 correction pass
+- Capture v2 gate: `BASELINE_APPROVAL_PENDING_FINAL_ARCHITECTURAL_REVIEW` after Specs 4–6 correction pass
   (not yet `V2_SPECIFICATIONS_1_TO_6_BASELINE_APPROVED` / not yet `AUTHORIZED_FOR_IR_0001_EXECUTION`).
 - Linux / Mac suite: **89** tests executed, 0 failures (1 skipped) on current tip.
 
 ### Notes
 - Freeze tag must be cut from Phase 1–only tree (`cursor/phase1c-freeze-commit-a-d881`); do not
-  include `Specifications/` / `Research/` in Commit A / `v1.0.0-phase1c`.
-- Specs 1–6 + IR-0001 staging live on `cursor/phase1c-evidence-library-d881` (Commit B+).
+  include `Specifications/`, `Research/`, or `CHANGE-0002` in Commit A / `v1.0.0-phase1c`.
+- Specs 1–6 + IR-0001 + governance staging live on `cursor/phase1c-evidence-library-d881`
+  (Commit B+). Do not claim Specs baseline approval until `CHANGE-0003`.
 
 ## [0.1.4] - 2026-07-23
 

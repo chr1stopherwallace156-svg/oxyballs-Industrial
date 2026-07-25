@@ -1,103 +1,135 @@
-# CHANGELOG AND HANDOFF GOVERNANCE
+# CHANGE DOCUMENTATION AND HANDOFF GOVERNANCE RULE
 
 **Status:** Officially adopted — primary repository engineering rule  
 **Enforcement:** `make handoff` + `make handoff-verify` required before `IMPLEMENTATION_COMPLETE`
 
-This closes the loop between committed trees and distributable handoff artifacts.
-Code or specs must not drift away from the `.zip`, `.bundle`, and `SHA256SUMS.txt`
-deliverables.
+No feature, contract, schema, status, workflow, evidence format, sensor behavior,
+quality rule, repository structure, research conclusion, or release state is
+considered complete until:
 
-Every meaningful code, specification, contract, schema, workflow, status,
-test, validation, evidence, or repository-governance change must update:
+1. the implementation or specification is complete;
+2. required tests are complete;
+3. required evidence is recorded;
+4. `CHANGELOG.md` is updated;
+5. a detailed `Docs/Changes/CHANGE-XXXX.md` record is created when required;
+6. the handoff package is regenerated;
+7. the handoff inventory and SHA-256 manifest are regenerated;
+8. all handoff digests are independently verified;
+9. remaining limitations and pending gates are documented.
 
-1. `CHANGELOG.md`
-2. The relevant detailed change record (`Docs/Changes/CHANGE-XXXX.md`)
-3. The handoff package (`Handoff/`)
-4. The handoff manifest and file inventory
-5. The SHA-256 digest list
-6. The handoff status summary
+These artifacts should be updated within the same pull request or coordinated
+commit series as the underlying change.
 
-These updates must occur in the same pull request or implementation commit
-series as the underlying change.
+Until all requirements pass, the work remains:
 
-A change is not complete merely because the source code or specification was
-updated. It remains `IMPLEMENTED_PENDING_CHANGE_DOCUMENTATION_AND_HANDOFF`
-(or `IMPLEMENTED_PENDING_HANDOFF_REFRESH`) until the changelog and handoff
-artifacts accurately reflect the new state.
-
----
-
-## 1. State machine invariants
-
-```text
-                  ┌────────────────────────────────────────────────────────┐
-                  │        IMPLEMENTED_PENDING_HANDOFF_REFRESH             │
-                  └───────────────────────────┬────────────────────────────┘
-                                              │
-    Requires:                                 │
-    • IMPLEMENTATION / SPEC                   │
-    • TESTS                                   │ + CHANGELOG (CHANGELOG.md + CHANGE-XXXX)
-    • EVIDENCE                                │ + HANDOFF_REFRESH (ZIP + Bundle + Inventory)
-                                              │ + HASH_VERIFICATION (SHA256SUMS.txt)
-                                              ▼
-                  ┌────────────────────────────────────────────────────────┐
-                  │                 IMPLEMENTATION_COMPLETE                │
-                  └────────────────────────────────────────────────────────┘
-```
-
-### Completion formula
-
-```text
-IMPLEMENTATION_COMPLETE
-requires
-IMPLEMENTATION
-+ TESTS
-+ EVIDENCE
-+ CHANGELOG
-+ HANDOFF_REFRESH
-+ HASH_VERIFICATION
-```
-
-Without the updated handoff:
-
-```text
-IMPLEMENTED_PENDING_HANDOFF_REFRESH
-```
+`IMPLEMENTED_PENDING_CHANGE_DOCUMENTATION_AND_HANDOFF`
 
 ---
 
-## 2. The four operating rules
-
-### I. NO CHANGE WITHOUT CHANGELOG
-
-Every change to code, contracts, schemas, quality rules, or project status must
-update `CHANGELOG.md` and the appropriate `Docs/Changes/CHANGE-XXXX.md` record.
-
-### II. NO COMPLETION WITHOUT HANDOFF
-
-No task transitions to `IMPLEMENTATION_COMPLETE` without running the handoff
-pipeline to regenerate `Handoff/`, the source snapshot `.zip`, the `.bundle`,
-and the package inventory.
-
-### III. NO HANDOFF WITHOUT VERIFIED HASHES
-
-Every handoff artifact must be digested via `sha256sum` / `shasum -a 256`,
-recorded in `SHA256SUMS.txt`, and verified via automated unpack/hash check
-(`make handoff-verify`). Placeholders (`[INSERT]`, unverified `VERIFIED_PASS`
-presented as fact) fail the gate.
-
-### IV. NO RELEASE WITHOUT AUTHORITATIVE TAG
-
-Release baselines (e.g. Phase 1) remain
-`PENDING_AUTHORITATIVE_REPOSITORY_EQUIVALENCE_AND_FREEZE` until Commit A is
-verified on host hardware, the annotated tag (e.g. `v1.0.0-phase1c`) is created,
-pushed, and remote branch/tag protection is active.
+## Permanent invariants
 
 ```text
 NO CHANGE WITHOUT CHANGELOG
 NO COMPLETION WITHOUT HANDOFF
 NO HANDOFF WITHOUT VERIFIED HASHES
 NO RELEASE WITHOUT AUTHORITATIVE TAG
+```
+
+---
+
+## 1. Completion state machine
+
+```text
+CODE_OR_SPEC_COMPLETE
++ TESTS_COMPLETE
++ EVIDENCE_COMPLETE
++ CHANGELOG_COMPLETE
++ CHANGE_RECORD_COMPLETE
++ HANDOFF_REFRESHED
++ HANDOFF_HASHES_VERIFIED
+= IMPLEMENTATION_COMPLETE
+```
+
+Intermediate state when implementation/spec work exists but documentation or
+handoff is incomplete:
+
+```text
+IMPLEMENTED_PENDING_CHANGE_DOCUMENTATION_AND_HANDOFF
+```
+
+```text
+                  ┌────────────────────────────────────────────────────────┐
+                  │ IMPLEMENTED_PENDING_CHANGE_DOCUMENTATION_AND_HANDOFF   │
+                  └───────────────────────────┬────────────────────────────┘
+                                              │
+    Requires:                                 │
+    • CODE_OR_SPEC_COMPLETE                   │
+    • TESTS_COMPLETE                          │
+    • EVIDENCE_COMPLETE                       │
+    • CHANGELOG_COMPLETE                      │
+    • CHANGE_RECORD_COMPLETE                  │
+    • HANDOFF_REFRESHED                       │
+    • HANDOFF_HASHES_VERIFIED                 │
+                                              ▼
+                  ┌────────────────────────────────────────────────────────┐
+                  │                 IMPLEMENTATION_COMPLETE                │
+                  └────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 2. Required handoff records
+
+The governance rule explicitly controls:
+
+```text
+HANDOFF.md
+HANDOFF_HISTORY.md
+CHANGELOG.md
+Docs/Changes/CHANGE-XXXX.md
+PACKAGE_INVENTORY.json
+REPOSITORY_STATE.md
+VALIDATION_SUMMARY.md
+OPEN_ITEMS.md
+SHA256SUMS.txt
+source ZIP
+Git bundle
+```
+
+Every handoff must identify:
+
+```text
+handoffID
+generatedAt
+sourceCommit
+sourceBranch
+workingTreeState
+previousHandoffID
+changeRange
+includedChangeIDs
+includedPRs
+projectStatus
+validationStatus
+artifactHashes
+remainingGates
+```
+
+Canonical package layout:
+
+```text
+Handoff/
+├── HANDOFF.md
+├── CHANGELOG.md
+├── SHA256SUMS.txt
+├── PACKAGE_INVENTORY.json
+├── REPOSITORY_STATE.md
+├── VALIDATION_SUMMARY.md
+├── OPEN_ITEMS.md
+├── STATUS.txt
+├── Specifications/
+├── Research/
+├── Docs/
+└── artifacts/          # source ZIP + Git bundle (gitignored binaries)
 ```
 
 ---
@@ -120,67 +152,89 @@ The pipeline must:
 2. Record whether the working tree is clean  
 3. Read current project status  
 4. Require `CHANGELOG.md` present (and updated in the same change series)  
-5. Generate `HANDOFF.md`  
-6. Generate `PACKAGE_INVENTORY.json`  
-7. Copy approved documentation and evidence  
-8. Create the source ZIP  
-9. Create the Git bundle  
-10. Generate complete SHA-256 digests  
-11. Verify every digest  
-12. Fail if placeholders or stale COMPLETE claims exist without pending caveats  
-13. Append `Docs/Handoffs/HANDOFF_HISTORY.md`  
+5. Require change records under `Docs/Changes/` when required  
+6. Generate `HANDOFF.md` with the identity fields above  
+7. Generate `PACKAGE_INVENTORY.json`  
+8. Copy approved documentation and evidence  
+9. Create the source ZIP  
+10. Create the Git bundle  
+11. Generate complete SHA-256 digests  
+12. Verify every digest  
+13. Fail if placeholders are presented as verified evidence  
+14. Append `Docs/Handoffs/HANDOFF_HISTORY.md`  
 
 ---
 
-## 4. Canonical handoff structure
+## 4. Commit A / Commit B release boundary
+
+### Commit A — Phase 1 freeze only (tag `v1.0.0-phase1c`)
+
+Allowed:
 
 ```text
-Handoff/
-├── HANDOFF.md
-├── CHANGELOG.md
-├── SHA256SUMS.txt
-├── PACKAGE_INVENTORY.json
-├── REPOSITORY_STATE.md
-├── VALIDATION_SUMMARY.md
-├── OPEN_ITEMS.md
-├── STATUS.txt
-├── Specifications/
-├── Research/
-├── Docs/
-└── artifacts/          # source ZIP + Git bundle (gitignored binaries)
+CHANGELOG.md
+Docs/Changes/CHANGE-0001-phase1c-freeze-preparation.md
+Docs/Capture/PHASE_1C_FINAL_VALIDATION.md
+Phase 1 validation evidence references
+Phase 1 status corrections
 ```
 
-### `HANDOFF.md` must answer
+Not allowed:
 
 ```text
-What changed?
-Why did it change?
-When did it change?
-Which files changed?
-Which contracts or behaviors changed?
-Which commit and PR contain it?
-What was tested?
-What evidence was produced?
-What remains pending?
-What must the next person do?
-Which artifacts and hashes are authoritative?
+Specifications/
+Research/
+IR-0001/
+CHANGE-0002 covering Specs 1–6
+v2 baseline promotion records
 ```
+
+Sequence:
+
+```text
+Commit A
+→ tag v1.0.0-phase1c
+→ push tag
+→ verify remote tag
+→ PHASE_1_FROZEN
+```
+
+### Commit B — v2 governance and specifications (after Phase 1 tag)
+
+```text
+Docs/Changes/TEMPLATE.md
+Docs/Changes/CHANGE-0002-v2-specification-hardening.md
+Specifications/
+Research/
+IR-0001 scaffolding
+architecture index
+entity/state registry
+handoff automation
+PR-template governance
+```
+
+`CHANGE-0002` status remains `NOT_BASELINE_APPROVED` until a later
+`CHANGE-0003` records baseline approval and IR-0001 authorization.
 
 ---
 
-## 5. Handoff history
+## 5. Change-record numbering (current)
 
-Do not silently overwrite handoff history. Append to
-`Docs/Handoffs/HANDOFF_HISTORY.md` on every regeneration.
+| ID | Title | Status |
+|---|---|---|
+| `CHANGE-0001` | Phase 1C completion retraction, freeze preparation, and Commit A isolation | `IMPLEMENTED` / `FREEZE_EXECUTION_PENDING` |
+| `CHANGE-0002` | Capture v2 Specifications 1–6 hardening and twelve-point correction pass | `IMPLEMENTED` / `FINAL_ARCHITECTURAL_REVIEW_PENDING` / `NOT_BASELINE_APPROVED` |
+| `CHANGE-0003` | Capture v2 Specifications 1–6 baseline approval and IR-0001 authorization | **Future only** — create after architectural review passes |
 
 ---
 
 ## 6. PR gate
 
-See `.github/PULL_REQUEST_TEMPLATE.md` — changelog + handoff checklist required.
+See `.github/PULL_REQUEST_TEMPLATE.md` — Change Governance + Handoff Governance
+checklists required.
 
 No future pull request or commit series is marked complete without passing
-`make handoff` and `make handoff-verify`.
+`make handoff` and `make handoff-verify` when handoff artifacts are in scope.
 
 ---
 
@@ -201,14 +255,14 @@ BRANCH: cursor/phase1c-freeze-commit-a-d881 (Phase 1 only — no Specs/Research)
 STATUS: V2_SPECIFICATIONS_4_TO_6_DRAFTED
         CROSS_SPEC_REVIEW_COMPLETED_WITH_REQUIRED_CORRECTIONS
         CORRECTION_PASS_APPLIED
-        BASELINE_APPROVAL_PENDING_FINAL_SIGN_OFF
-REMAINING GATE: Final baseline sign-off → AUTHORIZED_FOR_IR_0001_EXECUTION
-                → IR-0001 on device → make handoff
+        BASELINE_APPROVAL_PENDING_FINAL_ARCHITECTURAL_REVIEW
+REMAINING GATE: Final architectural review → CHANGE-0003
+                → AUTHORIZED_FOR_IR_0001_EXECUTION → IR-0001 on device
 BRANCH: cursor/phase1c-evidence-library-d881
 ```
 
 **Not yet declared:** `V2_SPECIFICATIONS_1_TO_6_BASELINE_APPROVED` /
-`AUTHORIZED_FOR_IR_0001_EXECUTION` (correction pass complete; final sign-off pending).
+`AUTHORIZED_FOR_IR_0001_EXECUTION`.
 
 ### Handoff package status (when pipeline succeeds)
 

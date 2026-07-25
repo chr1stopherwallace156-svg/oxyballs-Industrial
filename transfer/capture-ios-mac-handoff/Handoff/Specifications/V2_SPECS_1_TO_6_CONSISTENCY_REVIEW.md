@@ -6,7 +6,7 @@
 | Current result | `CROSS_SPEC_REVIEW_COMPLETED_WITH_REQUIRED_CORRECTIONS` |
 | Correction pass | **Applied** (semantic mattes, capability identity, lifecycle split, EvidenceValue, clocks, transforms, packaging typo, processing classes, override authority, determinism profile) |
 | Registry | `V2_CROSS_SPEC_ENTITY_STATE_REGISTRY.md` |
-| Gate | `BASELINE_APPROVAL_PENDING_CORRECTION_PASS` → pending **final sign-off** |
+| Gate | `BASELINE_APPROVAL_PENDING_FINAL_ARCHITECTURAL_REVIEW` |
 
 ## Why baseline was not approved
 
@@ -41,7 +41,7 @@ Those are addressed in the correction pass. Baseline approval still requires exp
 V2_SPECIFICATIONS_4_TO_6_DRAFTED
 CROSS_SPEC_REVIEW_COMPLETED_WITH_REQUIRED_CORRECTIONS
 CORRECTION_PASS_APPLIED
-BASELINE_APPROVAL_PENDING_FINAL_SIGN_OFF
+BASELINE_APPROVAL_PENDING_FINAL_ARCHITECTURAL_REVIEW
 ```
 
 **Do not use yet:**

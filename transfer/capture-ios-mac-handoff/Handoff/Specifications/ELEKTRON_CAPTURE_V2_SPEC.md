@@ -5,7 +5,7 @@
 | Document ID | EC-V2-SPEC-001 |
 | Status | **V2_CORE_SPECS_1_TO_3_HARDENED** |
 | Specs 4–6 | `V2_SPECIFICATIONS_4_TO_6_DRAFTED` + correction pass applied |
-| Gate | `BASELINE_APPROVAL_PENDING_CORRECTION_PASS` / pending final sign-off |
+| Gate | `BASELINE_APPROVAL_PENDING_FINAL_ARCHITECTURAL_REVIEW` |
 | Depends on | Phase 1A/1C contracts in tree; freeze tag `v1.0.0-phase1c` when authoritative |
 | Next | Final baseline sign-off → `AUTHORIZED_FOR_IR_0001_EXECUTION` |
 
@@ -143,7 +143,7 @@ Thermal impact remains **`UNMEASURED`** until profiled in Integration Reports. D
 
 Phase 1A package layout, canonical JSON, hashing, inventory self-hash omit, and Canonical Identity path keys remain authoritative until a versioned ADR changes them. Declaring Phase 1 **frozen** still requires the checklist in `Docs/Capture/PHASE_1C_FINAL_VALIDATION.md`.
 
-Production v2 actor/camera modules must not land until Specs 1–6 are `BASELINE_APPROVED`, IR-0001 is executed as an isolated spike with measured results, and an implementation directive is issued. **Do not** treat drafts as baseline-approved while `BASELINE_APPROVAL_PENDING_CORRECTION_PASS` remains.
+Production v2 actor/camera modules must not land until Specs 1–6 are `BASELINE_APPROVED`, IR-0001 is executed as an isolated spike with measured results, and an implementation directive is issued. **Do not** treat drafts as baseline-approved while `BASELINE_APPROVAL_PENDING_FINAL_ARCHITECTURAL_REVIEW` remains.
 
 ## 11. Acceptance Gates (v2 stages)
 

@@ -1,62 +1,72 @@
 {
   "schemaVersion": "1.0.0",
   "packageKind": "elektron-capture-ios-handoff",
-  "fileCount": 28,
+  "fileCount": 30,
   "files": [
     {
       "path": "CHANGELOG.md",
-      "bytes": 9293,
-      "sha256": "846602b7c10bf7c26a76b93e408fd329678d471ea897d12a7f29500c58acf7d6"
+      "bytes": 9919,
+      "sha256": "e0a208b66fce80e1297d9040362bf36a853e1e5be4106e9305325cab7472fc18"
     },
     {
       "path": "CURSOR_OPERATING_RULES.md",
-      "bytes": 7094,
-      "sha256": "9b6f2a857ffc244d06fad6049162a03c96402a7a7f9896cc8a8fb2a6f08f82a1"
+      "bytes": 7167,
+      "sha256": "f9987b02e0b1ef081d93ee20284f58439fc72792354a97ae3412c89cde280500"
     },
     {
       "path": "Docs/Capture/PHASE_1C_FINAL_VALIDATION.md",
-      "bytes": 6447,
-      "sha256": "72310d386efb6c6216450f3924f343681a3d21e4a58c1597d42c91e25f6813a1"
+      "bytes": 6470,
+      "sha256": "c008f97ffe5a71ad151bb70192934a274eebd9bb91c58b26fbe805780e9dc1bf"
     },
     {
       "path": "Docs/Capture/PHASE_1C_FREEZE_COMMIT_SEPARATION.md",
-      "bytes": 812,
-      "sha256": "42b060ed553af7416ef85d029ccc5d67ec9343015f227b2c7e7338f38a5f05fa"
+      "bytes": 1586,
+      "sha256": "7812c9930e43905e7f6bec4de85bc7e1d44e021572415e2797eaa97ae6b5cd28"
     },
     {
       "path": "Docs/Capture/PHASE_1_FREEZE.md",
-      "bytes": 1446,
-      "sha256": "5060b0f2c23ea042edf106f257135c78846df3db7ca6a21d7f18facfe6561f97"
+      "bytes": 1469,
+      "sha256": "dba3cac01529f5b3594c8a8d15508c5dd02f2fed57d09b4ab0fd32904c65025d"
     },
     {
-      "path": "Docs/Changes/CHANGE-0001-changelog-handoff-governance.md",
-      "bytes": 1697,
-      "sha256": "54860e674125a40989df06e930f063a7848ff2cbb0ac6096f0e4b0aca5e64c08"
+      "path": "Docs/Changes/CHANGE-0001-phase1c-freeze-preparation.md",
+      "bytes": 3914,
+      "sha256": "5123fdd04b9305608a0685484a8dbda11b65d19d6cffe5893964550d9ff13f64"
+    },
+    {
+      "path": "Docs/Changes/CHANGE-0002-v2-specification-hardening.md",
+      "bytes": 2961,
+      "sha256": "be3e14c46021238f47f3b49c508f037a1491a9a1d4f2fe6d689614345f93221e"
+    },
+    {
+      "path": "Docs/Changes/TEMPLATE.md",
+      "bytes": 973,
+      "sha256": "b52f9472db35d8e4c9bf4621cca6e97b1169951c6129f3b30ff18c16d7c0e5c4"
     },
     {
       "path": "Docs/Governance/CHANGELOG_AND_HANDOFF_GOVERNANCE.md",
-      "bytes": 7239,
-      "sha256": "b42fd161fde871e8ccf32e178a1928f9eeddd4482d555f28668a77d3e132cb07"
+      "bytes": 7949,
+      "sha256": "1bf7c66fc75091ae924278108215e45c8991081ef0a4817fa39371b18b532401"
     },
     {
       "path": "Docs/Handoffs/HANDOFF_HISTORY.md",
-      "bytes": 2525,
-      "sha256": "01b9e737404ec6f2bf34da8a458da446cfef3ad5cb9177afc21449e41de79685"
+      "bytes": 4423,
+      "sha256": "de09d3b52a0f46dd37c482078e0785612eb18034ae60294e8528709497044576"
     },
     {
       "path": "OPEN_ITEMS.md",
-      "bytes": 466,
-      "sha256": "be1eca10e0dbe21ad025a45236be619136befaf115c137043c624aa60ab60100"
+      "bytes": 584,
+      "sha256": "3e24380ad8c3dc834bf1933f1e1fdf56ed223e346f874042b4b99daac5b517a5"
     },
     {
       "path": "PHASE_1C_FINAL_VALIDATION.md",
-      "bytes": 615,
-      "sha256": "936d2bab0c64e9f6e1ce402167d4949b3a12dd70cee47103b0709e23acd1830d"
+      "bytes": 638,
+      "sha256": "611d05df046500414c276c8da8b64de174c08bd56d09da24ddc355f4d3300e26"
     },
     {
       "path": "REPOSITORY_STATE.md",
-      "bytes": 1710,
-      "sha256": "0855f8e0af10254327cf4774e48795e0224ac78b4fc3c130edbe65c8a60783e9"
+      "bytes": 1956,
+      "sha256": "387ec3fdea3266e5ffd9ae978dd428189c0d85d9b367b039a4ed51f6b20ba753"
     },
     {
       "path": "Research/Deferred/SemanticMattes/README.md",
@@ -65,8 +75,8 @@
     },
     {
       "path": "Research/IntegrationReports/IR-0001-AVFoundation-Manual-Exposure-and-Focus.md",
-      "bytes": 3286,
-      "sha256": "25db7e0bfb2b610f850b82a97014de45fa4ea94db771e99803899d0860b4330f"
+      "bytes": 3298,
+      "sha256": "1ac2aff8f2d5c709e22215faa1c6c25a268d250a3738e6173380862518461beb"
     },
     {
       "path": "Research/README.md",
@@ -90,33 +100,33 @@
     },
     {
       "path": "Specifications/CAPTURE_DEVICE_CAPABILITY_MATRIX.md",
-      "bytes": 7557,
-      "sha256": "f444cbc1a5b1be5b9dbe89084ebb24ce1383a446a6f09b2e9efab5769271766d"
+      "bytes": 7568,
+      "sha256": "698e0d8b52b21dfe9cb7a7fbe7c8e05bd74763f18fe92456f59ab12191a5c557"
     },
     {
       "path": "Specifications/CAPTURE_QUALITY_POLICY.md",
-      "bytes": 5861,
-      "sha256": "745619462a63875fb2fe398dad4e6ebeae61af070a24d698126ab25dc27c35a5"
+      "bytes": 5872,
+      "sha256": "e874cbd510a581a26674bc7af4b4a4c9558071c956d7ba28bad0ee5a269cc9b7"
     },
     {
       "path": "Specifications/CAPTURE_SENSOR_FRAMEWORK.md",
-      "bytes": 6705,
-      "sha256": "c361c2a5ca18d50eef04959083ef03c6bd7d32b4a34fe7edfbb61e1ec0db7035"
+      "bytes": 6716,
+      "sha256": "a347b7117cbf8a2ef113090b8edaeef79f3abbe892745d0ae9137bd56892982d"
     },
     {
       "path": "Specifications/CAPTURE_TELEMETRY_CONTRACT.md",
-      "bytes": 8297,
-      "sha256": "9f8e46026c44347138c42cb9ee80a4870d05dd90cb5c79e3e6b2cc4dfd5531bc"
+      "bytes": 8308,
+      "sha256": "48ea92a11a5fdea6d42854fb0a48c4c7726c53c9868237da991758ed012d1b59"
     },
     {
       "path": "Specifications/CAPTURE_V2_DOMAIN_MODEL.md",
-      "bytes": 6181,
-      "sha256": "8fab4b9790a497ea573aa69e100df5d15e5bbd7d6cdb4c1ca71a8ea2d51fd01d"
+      "bytes": 6192,
+      "sha256": "41aece404a9c3e869a966bd08c4b23c095476bc1ad3fc74c645387454499a32f"
     },
     {
       "path": "Specifications/ELEKTRON_CAPTURE_V2_SPEC.md",
-      "bytes": 8211,
-      "sha256": "b896733c3980d2123d292208e3c75bcadd5ece56936e9cc85ae88eda144ddfb5"
+      "bytes": 8208,
+      "sha256": "deae758a3b12161482d12b377ee5c3f4ee19b979d5781d4aceadad550039692a"
     },
     {
       "path": "Specifications/GITHUB_INTEGRATION_REVIEW_TEMPLATE.md",
@@ -125,23 +135,23 @@
     },
     {
       "path": "Specifications/README.md",
-      "bytes": 1386,
-      "sha256": "5eacaadc785d86acf8fb577b61f57d173cd17ff1900e2baaaf6103c269ee7112"
+      "bytes": 1421,
+      "sha256": "d24113c6a1f68faf3d766b2c5982557e108d3fff9b8488b3388cc8f5307b2517"
     },
     {
       "path": "Specifications/V2_CROSS_SPEC_ENTITY_STATE_REGISTRY.md",
-      "bytes": 4047,
-      "sha256": "f20dc7aecc13dd74ba3b4d4147ffb1bdb1c47aa7829cdc35fe1e47d0d9fa39cf"
+      "bytes": 4093,
+      "sha256": "c5e329b091245f81c0ba94f26482443e8a943ccfd1f646f2a1f8852918135719"
     },
     {
       "path": "Specifications/V2_SPECS_1_TO_6_CONSISTENCY_REVIEW.md",
-      "bytes": 2611,
-      "sha256": "f88ff6eac39e0d237368da2ce93c33d79ee68d0cc47b32b4935fb0a999730625"
+      "bytes": 2603,
+      "sha256": "203a16b0855cc7613a0fd0c4eca3dd704c4338405f4ca8fd81991a70ec89adab"
     },
     {
       "path": "VALIDATION_SUMMARY.md",
-      "bytes": 568,
-      "sha256": "140775550cbdc66ee4c8316b4f8c91c6071069f65444f8a8b1a38d5a596a1f93"
+      "bytes": 603,
+      "sha256": "e2f6b6c2eed49880a3c1f508021ba6a20fe7df77af92f6d78fc09c5f4a65d28d"
     }
   ]
 }

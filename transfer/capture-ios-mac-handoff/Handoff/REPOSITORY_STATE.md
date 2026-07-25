@@ -2,19 +2,23 @@
 
 | Field | Value |
 |------|---------|
-| Handoff ID | HANDOFF-0030 |
-| Generated (UTC) | 2026-07-25T04:47:35Z |
+| Handoff ID | HANDOFF-0033 |
+| Generated (UTC) | 2026-07-25T04:51:51Z |
 | Branch | `cursor/phase1c-evidence-library-d881` |
-| Commit | `cfd0b86bc8c88bcc5645241a242f063b72996c8b` |
-| Working tree | clean |
+| Commit | `19400c293fb3486c1d2df4e7ea59873ca5ec260c` |
+| Working tree | dirty |
 | Remote | `NONE` |
 | Host | `Linux x86_64` |
 
 ```text
  D Handoff/CHANGELOG.md
+ D Handoff/CURSOR_OPERATING_RULES.md
  D Handoff/Docs/Capture/PHASE_1C_FINAL_VALIDATION.md
  D Handoff/Docs/Capture/PHASE_1C_FREEZE_COMMIT_SEPARATION.md
  D Handoff/Docs/Capture/PHASE_1_FREEZE.md
+ D Handoff/Docs/Changes/CHANGE-0001-phase1c-freeze-preparation.md
+ D Handoff/Docs/Changes/CHANGE-0002-v2-specification-hardening.md
+ D Handoff/Docs/Changes/TEMPLATE.md
  D Handoff/Docs/Governance/CHANGELOG_AND_HANDOFF_GOVERNANCE.md
  D Handoff/Docs/Handoffs/HANDOFF_HISTORY.md
  D Handoff/HANDOFF.md
@@ -41,4 +45,5 @@
  D Handoff/Specifications/V2_CROSS_SPEC_ENTITY_STATE_REGISTRY.md
  D Handoff/Specifications/V2_SPECS_1_TO_6_CONSISTENCY_REVIEW.md
  D Handoff/VALIDATION_SUMMARY.md
+ M Tests/Unit/EvidenceLibraryTests.swift
 ```

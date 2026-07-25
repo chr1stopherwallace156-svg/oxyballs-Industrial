@@ -3,7 +3,7 @@
 **Document ID:** EC-V2-SPEC-005  
 **Status:** `DRAFT_FOR_BASELINE_REVIEW` — correction pass applied  
 **Applies To:** Capture v2.0A and later  
-**Gate:** `BASELINE_APPROVAL_PENDING_CORRECTION_PASS`  
+**Gate:** `BASELINE_APPROVAL_PENDING_FINAL_ARCHITECTURAL_REVIEW`  
 **Depends on:** EC-V2-SPEC-001, EC-V2-SPEC-002, EC-V2-SPEC-003  
 **Production code:** None
 

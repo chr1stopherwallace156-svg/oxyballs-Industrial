@@ -1,12 +1,15 @@
-# Capture v2 Specs + handoff governance — Commit B+ staging
+# Capture v2 Specs — Commit B staging handoff
 
-**Handoff:** `HANDOFF_GENERATED` / `HANDOFF_VERIFIED`  
-**Governance:** Officially adopted (CHANGE-0001)  
-**Specs gate:** `BASELINE_APPROVAL_PENDING_FINAL_SIGN_OFF` (**not** BASELINE_APPROVED)  
-**Phase 1C:** freeze-prep tip for Commit A only
+**Status:**
+```text
+V2_SPECIFICATIONS_4_TO_6_DRAFTED
+CROSS_SPEC_REVIEW_COMPLETED_WITH_REQUIRED_CORRECTIONS
+CORRECTION_PASS_APPLIED
+BASELINE_APPROVAL_PENDING_FINAL_ARCHITECTURAL_REVIEW
+```
 
-| Field | Value |
-|------|---------|
-| Tip | `d6f8ec384594500d818157c1f06ac810f00953da` |
-| ZIP SHA-256 | `1c20c17e0ed6fdbea62207fe784908f916c7330cf5e60fff3339c8b588e9f1a9` |
-| Bundle SHA-256 | `4ac3c884f7ad011c8596adeb70cbce58c732f1a1d05d5bf5ee1c1fda0b3c0b73` |
+**CHANGE-0002:** Capture v2 Specifications 1–6 hardening and twelve-point correction pass  
+`IMPLEMENTED` / `FINAL_ARCHITECTURAL_REVIEW_PENDING` / `NOT_BASELINE_APPROVED`
+
+Do **not** tag `v1.0.0-phase1c` from this tip. Apply only after remote Phase 1 tag.
+Future `CHANGE-0003` records baseline approval + IR-0001 authorization after review.

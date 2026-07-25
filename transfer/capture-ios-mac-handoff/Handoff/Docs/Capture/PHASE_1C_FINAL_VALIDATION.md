@@ -2,7 +2,7 @@
 
 * **Project:** Elektron Capture (`elektron-capture-ios`)
 * **Phase:** Phase 1C — Still Capture & Evidence Package Baseline
-* **Status:** `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_GIT_FREEZE`
+* **Status:** `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_REPOSITORY_EQUIVALENCE_AND_FREEZE`
 * **Short status:** `PHASE_1C_VALIDATION_PASSED_PENDING_REPOSITORY_TAG`
 * **Validation Date:** July 24, 2026
 * **Record corrected:** July 25, 2026 (ZIP-snapshot freeze claims retracted)

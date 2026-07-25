@@ -9,7 +9,7 @@
 | **License & Language** | Apple SDK / Swift |
 | **Status** | `APPROVED_FOR_ISOLATED_SPIKE` — execution after Specs 1–6 `BASELINE_APPROVED` |
 | **Spike folder** | `Research/Spikes/IR-0001/` (**non-production** only) |
-| **Spec gate** | `BASELINE_APPROVAL_PENDING_FINAL_SIGN_OFF` (not yet `BASELINE_APPROVED`) |
+| **Spec gate** | `BASELINE_APPROVAL_PENDING_FINAL_ARCHITECTURAL_REVIEW` (not yet `BASELINE_APPROVED`) |
 
 ## 2. Technical Evaluation
 
