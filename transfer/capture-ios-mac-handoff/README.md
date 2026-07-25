@@ -30,3 +30,23 @@ make handoff-package   # → dist/HANDOFF-XXXX/
 ```
 
 Single-shot `make handoff` is retired. Digests live under `dist-HANDOFF-0034/`, not in tracked `Handoff/`.
+
+
+## Elektron Knowledge Package (EKP-CAPTURE-0001)
+
+Not a coding-session handoff. Full subsystem knowledge snapshot.
+
+| Field | Value |
+|---|---|
+| Capture tip | `792f6b4` |
+| Envelope | `dist-EKP-CAPTURE-0001/` |
+| ZIP | `capture-ekp-792f6b42430b87f7bbd09c88e922b4594436f579.zip` |
+| ZIP SHA-256 | `2750ee0120def1ba56dd0ed831b5518de6f6f44e15ea8cd2f0b6191d1e1a10b4` |
+| Bundle SHA-256 | `3ff9a04b1de00b9cc72c9a58df3faffa9e16b5fe4d3625b309a8729e0ab6be00` |
+| Living docs | `PROJECT_STATE.md`, `IMPLEMENTATION_HANDOFF.md`, `REPOSITORY_MEMORY.md` |
+
+```bash
+make ekp-prepare && git commit
+make ekp-package   # → dist/EKP-CAPTURE-XXXX/
+```
+
