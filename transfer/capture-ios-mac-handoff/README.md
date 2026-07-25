@@ -1,6 +1,54 @@
 # capture-ios Mac handoff
 
-## Current — Pass 2 share-presentation fix (P2-004)
+## Current — Phase 1C freeze-prep (Commit A isolation)
+
+**Status:** `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_REPOSITORY_EQUIVALENCE_AND_FREEZE`  
+**Tree:** Phase 1 only — **no** `Specifications/` / `Research/` (keeps `v1.0.0-phase1c` clean).
+
+| Field | Value |
+|------|---------|
+| Branch | `cursor/phase1c-freeze-commit-a-d881` |
+| Tip | `c3dea9f8164704c8323d2c539133283bad4d6a18` |
+| ZIP SHA-256 | `eb2603f1e6a47f0b62ad988397a9385c20711d49539d3eb01e93b98f82f3afb3` |
+| Bundle SHA-256 | `ccf2494adc83237c6a823634a990cf1341e4eaeff5c773903612d6965dedf753` |
+| Commit B staging (after remote tag) | `cursor/phase1c-evidence-library-d881` @ `a0b8299052743cb9fdaac970f9417800d6113aef` |
+
+```bash
+git clone elektron-capture-ios-phase1c-freeze-prep.bundle elektron-capture-ios
+cd elektron-capture-ios
+git checkout cursor/phase1c-freeze-commit-a-d881
+git rev-parse HEAD   # expect c3dea9f8164704c8323d2c539133283bad4d6a18
+# Equivalence check → fill validation → Commit A → tag v1.0.0-phase1c → push
+```
+
+Protocol: `Docs/Capture/PHASE_1C_FREEZE_COMMIT_SEPARATION.md`  
+Also mirrored as `elektron-capture-ios-phase1c-evidence-library.zip` / `.bundle` and root `DOWNLOAD-…`.
+
+---
+
+
+## Also — Commit B+ staging (Specs 1–6; after remote freeze tag)
+
+**Not for `v1.0.0-phase1c`.** Correction pass applied. Gate: `BASELINE_APPROVAL_PENDING_FINAL_SIGN_OFF` (**not** `BASELINE_APPROVED`).
+
+| Field | Value |
+|------|---------|
+| Branch | `cursor/phase1c-evidence-library-d881` |
+| Tip | `e5b1a1ea09b3f48b5f2b975576cfe3b6c8c775fb` |
+| ZIP SHA-256 | `60a4f7c8b775876ee261b0767a1acd76f1196695737024dfbe8402e370ad8989` |
+| Bundle SHA-256 | `00f7a333a71a4578deb6ec50125d8660caa3e23ccfb97406ee808a58e5527f37` |
+
+```bash
+git clone elektron-capture-ios-phase1c-commit-b-staging.bundle elektron-capture-ios-v2-specs
+cd elektron-capture-ios-v2-specs
+git checkout cursor/phase1c-evidence-library-d881
+git rev-parse HEAD   # expect e5b1a1ea09b3f48b5f2b975576cfe3b6c8c775fb
+```
+
+See `V2_SPECS_1_TO_6_HANDOFF.md`.
+
+
+## Prior — Pass 2 share-presentation fix (P2-004)
 
 **Status:** submitted for operator device verification — share/AirDrop/Files hardening  
 Preserves Pass 1 gates and Pass 2 freeze rules. Does **not** re-encode `artifact_original.jpg`.
@@ -18,21 +66,14 @@ Preserves Pass 1 gates and Pass 2 freeze rules. Does **not** re-encode `artifact
 | `elektron-capture-ios-pass2-share-working-tree.zip` | `086e1b9828bc1d1b661dc1aaf0f54078817ca46ee31cd21841b5bf489de3a379` |
 
 Fresh-clone: `pass2-share-fresh-clone-swift-test.log` — **66 executed, 1 skipped, 0 failures**; `HANDOFF_LAYOUT_OK`  
-Evidence: `PASS2_SHARE_FIX_EVIDENCE/`  
-Device checklist (updated Share/ZIP rows): see capture-ios `Docs/Evidence/PASS2_DEVICE_VALIDATION.md`
+Evidence: `PASS2_SHARE_FIX_EVIDENCE/`
 
 ```bash
 git clone elektron-capture-ios-pass2-share-complete.bundle elektron-capture-ios-pass2-share
 cd elektron-capture-ios-pass2-share
 git checkout cursor/pass2-share-presentation-d881
 git rev-parse HEAD   # expect c59b84da7795373a3f160245fee34325ce000523
-open Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj
 ```
-
-After export on device use:
-1. **Share .edts-pkg** (AirDrop)
-2. **Save .edts-pkg to Files**
-3. **Export as ZIP copy** (diagnostic; same bytes, `.zip` extension; canonical `.edts-pkg` kept)
 
 ---
 
