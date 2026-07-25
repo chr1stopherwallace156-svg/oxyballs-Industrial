@@ -1,29 +1,28 @@
 # capture-ios Mac handoff
 
-## Current — Phase 1C pending authoritative Git freeze
+## Current — Phase 1C pending freeze + v2 Specs 1–6
 
-**Status:** `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_GIT_FREEZE`  
-See `PHASE1C_CORRECTION_HANDOFF.md`. Do **not** declare `PHASE_1C_COMPLETE` / `v1.0.0-phase1c` from the ZIP alone.
+**Phase 1C:** `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_GIT_FREEZE`  
+**v2:** Specs 1–3 hardened; Specs 4–6 drafted; IR-0001 spike scaffolded (non-production).
 
 | Field | Value |
 |------|---------|
 | Capture branch | `cursor/phase1c-evidence-library-d881` |
-| Tip | `c83145db4c62bc89926c6550eb7312d1a9617685` |
-| Working-tree ZIP SHA-256 | `2d0c9e93fe534f9e0e92b532266abe5f3dbeb4dd184869f99c8b7772163a30dd` |
-| Git bundle SHA-256 | `0d66b10f5151fc45325e04150dba4491fd6a67690b4a82e01269ddabe3f9600c` |
+| Tip | `a0b8299052743cb9fdaac970f9417800d6113aef` |
+| Working-tree ZIP SHA-256 | `12295bffbdd22d4925525d808cbf120e5fa0dfc057633050a5be904e65d0602d` |
+| Git bundle SHA-256 | `24aa60c86efcf7d00935f872ebc347b52bf9bf5664c75ff24ca552c3d1fe6039` |
 
 ```bash
 git clone elektron-capture-ios-phase1c-evidence-library.bundle elektron-capture-ios
 cd elektron-capture-ios
 git checkout cursor/phase1c-evidence-library-d881
-git rev-parse HEAD   # expect c83145db4c62bc89926c6550eb7312d1a9617685
+git rev-parse HEAD   # expect a0b8299052743cb9fdaac970f9417800d6113aef
 make open
 ```
 
 Also: root `DOWNLOAD-elektron-capture-ios-phase1c-evidence-library.zip` (same bytes as transfer ZIP).
 
 ---
-
 ## Prior — Pass 2 share-presentation fix (P2-004)
 
 **Status:** submitted for operator device verification — share/AirDrop/Files hardening  

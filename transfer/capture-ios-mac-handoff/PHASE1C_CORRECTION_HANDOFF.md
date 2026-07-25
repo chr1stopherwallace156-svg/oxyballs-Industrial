@@ -1,22 +1,14 @@
-# Phase 1C — Pending authoritative Git freeze
+# Phase 1C + Capture v2 specs handoff
 
-**Status:** `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_GIT_FREEZE`
+**Phase 1C status:** `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_GIT_FREEZE`
+
+**v2 gate:** Specs 1–3 hardened (`V2_SPEC_BASELINE_REVIEW`); Specs 4–6 drafted; IR-0001 isolated under `Research/Spikes/IR-0001/`.
 
 | Field | Value |
 |------|---------|
-| Capture branch | `cursor/phase1c-evidence-library-d881` |
-| Tip | `c83145db4c62bc89926c6550eb7312d1a9617685` |
-| Working-tree ZIP SHA-256 | `2d0c9e93fe534f9e0e92b532266abe5f3dbeb4dd184869f99c8b7772163a30dd` |
-| Git bundle SHA-256 | `0d66b10f5151fc45325e04150dba4491fd6a67690b4a82e01269ddabe3f9600c` |
-| Toolchain (operator log) | Xcode 26.6 / Swift 6.3.3 / iPhoneOS 26.5 SDK |
+| Tip | `a0b8299052743cb9fdaac970f9417800d6113aef` |
+| Branch | `cursor/phase1c-evidence-library-d881` |
+| ZIP SHA-256 | `12295bffbdd22d4925525d808cbf120e5fa0dfc057633050a5be904e65d0602d` |
+| Bundle SHA-256 | `24aa60c86efcf7d00935f872ebc347b52bf9bf5664c75ff24ca552c3d1fe6039` |
 
-## Authoritative path
-
-```bash
-git clone elektron-capture-ios-phase1c-evidence-library.bundle elektron-capture-ios
-cd elektron-capture-ios
-git checkout cursor/phase1c-evidence-library-d881
-git rev-parse HEAD   # expect c83145db4c62bc89926c6550eb7312d1a9617685
-# Fill Docs/Capture/PHASE_1C_FINAL_VALIDATION.md digests + evidence, then commit + tag + push
-make open
-```
+Clone the **bundle** for authoritative git work. No production v2 camera/actor code in this tip.
