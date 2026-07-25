@@ -1,26 +1,28 @@
 # capture-ios Mac handoff
 
-## Current — Phase 1C pending freeze + v2 Specs 1–6
+## Current — Phase 1C freeze-prep (Commit A isolation)
 
-**Phase 1C:** `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_GIT_FREEZE`  
-**v2:** Specs 1–3 hardened; Specs 4–6 drafted; IR-0001 spike scaffolded (non-production).
+**Status:** `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_REPOSITORY_EQUIVALENCE_AND_FREEZE`  
+**Tree:** Phase 1 only — **no** `Specifications/` / `Research/` (keeps `v1.0.0-phase1c` clean).
 
 | Field | Value |
 |------|---------|
-| Capture branch | `cursor/phase1c-evidence-library-d881` |
-| Tip | `a0b8299052743cb9fdaac970f9417800d6113aef` |
-| Working-tree ZIP SHA-256 | `12295bffbdd22d4925525d808cbf120e5fa0dfc057633050a5be904e65d0602d` |
-| Git bundle SHA-256 | `24aa60c86efcf7d00935f872ebc347b52bf9bf5664c75ff24ca552c3d1fe6039` |
+| Branch | `cursor/phase1c-freeze-commit-a-d881` |
+| Tip | `c3dea9f8164704c8323d2c539133283bad4d6a18` |
+| ZIP SHA-256 | `eb2603f1e6a47f0b62ad988397a9385c20711d49539d3eb01e93b98f82f3afb3` |
+| Bundle SHA-256 | `ccf2494adc83237c6a823634a990cf1341e4eaeff5c773903612d6965dedf753` |
+| Commit B staging (after remote tag) | `cursor/phase1c-evidence-library-d881` @ `a0b8299052743cb9fdaac970f9417800d6113aef` |
 
 ```bash
-git clone elektron-capture-ios-phase1c-evidence-library.bundle elektron-capture-ios
+git clone elektron-capture-ios-phase1c-freeze-prep.bundle elektron-capture-ios
 cd elektron-capture-ios
-git checkout cursor/phase1c-evidence-library-d881
-git rev-parse HEAD   # expect a0b8299052743cb9fdaac970f9417800d6113aef
-make open
+git checkout cursor/phase1c-freeze-commit-a-d881
+git rev-parse HEAD   # expect c3dea9f8164704c8323d2c539133283bad4d6a18
+# Equivalence check → fill validation → Commit A → tag v1.0.0-phase1c → push
 ```
 
-Also: root `DOWNLOAD-elektron-capture-ios-phase1c-evidence-library.zip` (same bytes as transfer ZIP).
+Protocol: `Docs/Capture/PHASE_1C_FREEZE_COMMIT_SEPARATION.md`  
+Also mirrored as `elektron-capture-ios-phase1c-evidence-library.zip` / `.bundle` and root `DOWNLOAD-…`.
 
 ---
 ## Prior — Pass 2 share-presentation fix (P2-004)
