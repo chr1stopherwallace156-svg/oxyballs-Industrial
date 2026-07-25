@@ -25,6 +25,27 @@ Protocol: `Docs/Capture/PHASE_1C_FREEZE_COMMIT_SEPARATION.md`
 Also mirrored as `elektron-capture-ios-phase1c-evidence-library.zip` / `.bundle` and root `DOWNLOAD-…`.
 
 ---
+
+## Also — Commit B+ staging (Specs 1–6; after remote freeze tag)
+
+**Not for `v1.0.0-phase1c`.** Specs 4–6 `DRAFT_FOR_BASELINE_REVIEW`; gate `V2_SPECIFICATIONS_1_TO_6_BASELINE_APPROVED` / `AUTHORIZED_FOR_IR_0001_EXECUTION`.
+
+| Field | Value |
+|------|---------|
+| Branch | `cursor/phase1c-evidence-library-d881` |
+| Tip | `0c5b92a96c7647d026bfd85587ba54c44e2d601b` |
+| ZIP SHA-256 | `7a2ad9f6c048375b7674b9705a165da9605bd502bc15f5f582f3c0a8ab2f24a7` |
+| Bundle SHA-256 | `74f5da4111d9730a5dd6b7e219dd14282334003098126733e032446fd9eecd63` |
+
+```bash
+git clone elektron-capture-ios-phase1c-commit-b-staging.bundle elektron-capture-ios-v2-specs
+cd elektron-capture-ios-v2-specs
+git checkout cursor/phase1c-evidence-library-d881
+git rev-parse HEAD   # expect 0c5b92a96c7647d026bfd85587ba54c44e2d601b
+```
+
+See `V2_SPECS_1_TO_6_HANDOFF.md`.
+
 ## Prior — Pass 2 share-presentation fix (P2-004)
 
 **Status:** submitted for operator device verification — share/AirDrop/Files hardening  
