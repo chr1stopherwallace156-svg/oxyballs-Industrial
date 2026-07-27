@@ -2,25 +2,19 @@
 
 | Field | Value |
 |---|---|
-| Capture tip | `fe5b66e` |
-| Industrial branch | `cursor/sprint-2-3-foundation-audit-d881` |
+| Capture tip | `5841a57` |
+| Branch | `cursor/sprint-2-3-foundation-audit-d881` |
 | ZIP | `DOWNLOAD-elektron-capture-ios-sprint-2-3-foundation.zip` |
-| SHA-256 | `b458efc28ce5a98ee8d35336a67ea267b3a35ddbb2109054408a4879ec384d2f` |
+| SHA-256 | `7d961f411d70fdc73c2e954c60af859dd1b831b4852e3eb4db668ce1b5926229` |
+| Sprint complete | **false** (blocked: clean_app_compilation / xcodebuild) |
 
-## What landed (Phases A–E)
+## Bounded scope landed
 
-| Phase | Artifact |
-|---|---|
-| A | `Docs/Capture/SPRINT_2_3_PHASE_A_WRITER_INVENTORY.md` — complete durable writer map |
-| B | `Docs/Decisions/ADR-SESSION-REVISION-OCC.md` (S2-004) — `expectedRevision` + repository-only `N+1` |
-| C | `save(_:expectedRevision:)` at current/multi-session stores; side-effect-free reject; interleaving tests |
-| D | Recovery ADR + **monotonicity** (`R < H` refuse overwrite) |
-| E | `Docs/Capture/SPRINT_2_3_PHASE_E_TARGET_AND_CI_STATUS.md` — adversarial Xcode targets ABSENT; Mac CI PENDING |
-
-## Gate
-
-- `make hardening-verify`: **325** executed, **1** skipped, **0** failures
-- `xcodebuild`: **NOT RUN**
+- Phases A–F contract: `SPRINT_2_3_SUCCESS_GATE.md`
+- S2-004 `expectedRevision` OCC + `SessionRecoveryGate` (`R ≤ H ⇒ reject`)
+- Phase F manifest: `Docs/Evidence/SPRINT_2_3/sprint_2_3_execution_manifest.json`
+- `ElektronCoreHardeningTests` SPM present; AppIntegration/UITests ABSENT
+- Journal / reconstruction pipelines **DEFERRED**
 
 ## Download
 
