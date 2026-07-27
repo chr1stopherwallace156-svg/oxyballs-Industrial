@@ -39,7 +39,8 @@ SPRINT_2_1_ARCHITECTURE.md                             🔒 LOCKED
         │
         ▼  STOP until Sprint 2.3 success gate COMPLETE
 Phase 3  Spatial & Sensor Platform (capture + package only)
-        │   Architecture: `Docs/Architecture/PHASE_3_SPATIAL_PLATFORM_ARCHITECTURE.md`
+        │   Architecture v1.1.0: `Docs/Architecture/PHASE_3_SPATIAL_PLATFORM_ARCHITECTURE.md`
+        │   Normative: SpatialSensorCoordinator + discrete sources; dual clocks; Capability Model
         │   Out of scope: mesh / SfM / densification / CAD verdicts / AI segmentation
         ▼
 Phases 4–8  Reconstruction · fusion · alignment · semantics     deferred

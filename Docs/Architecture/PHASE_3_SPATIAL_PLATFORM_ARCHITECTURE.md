@@ -3,14 +3,55 @@
 | Field | Value |
 |---|---|
 | Status | **ARCHITECTURE_DRAFT — IMPLEMENTATION GATED** |
-| Version | 1.0.0 |
+| Version | **1.1.0** |
 | Date | 2026-07-27 |
 | Path | `Docs/Architecture/PHASE_3_SPATIAL_PLATFORM_ARCHITECTURE.md` |
 | Applies to | `elektron-capture-ios` Phase 3 |
-| Prerequisite | Sprint 2.3 success gate closed (**Mac `xcodebuild` PASSED**); OCC / authoritative commit contracts remain in force |
+| Prerequisite | Sprint 2.3 success gate closed (**Mac `xcodebuild` PASSED** on `Phase1StillCapture`); OCC / authoritative commit contracts remain in force |
 | Related | `COORDINATE_FRAME_STANDARD.md`, `TIMESTAMP_STANDARD.md`, `SYSTEM_BOUNDARIES.md`, `ENGINEERING_GUARDRAILS.md`, `ADR-SESSION-REVISION-OCC.md` (S2-004), `ADR-SESSION-RECOVERY-AND-QUARANTINE.md` |
+| Supersedes | Draft 1.0.0 monolithic `SensorManager` sketch (composition model below is normative) |
 
-**This document is an architectural blueprint only.** It must not be treated as authorization to land production ARKit / AVFoundation / LiDAR workflows. Zero production or test code is required to accept this draft.
+**This document is an architectural blueprint only.** It does not authorize production ARKit / AVFoundation / LiDAR workflows. **Zero Swift code, test files, or build-setting changes** are in scope for this pass.
+
+---
+
+## 0. Blueprint (normative topology)
+
+```text
+                    [ Apple Framework Adapters ]
+              (ARKit / AVFoundation / CoreMotion)
+                               │
+                               ▼
+                  [ Composable Sensor Sources ]
+   ┌───────────────────┬───────────────────┬───────────────────┐
+   │   CameraSource    │    DepthSource    │   MotionSource    │
+   └───────────────────┴───────────────────┴───────────────────┘
+                               │
+                               ▼
+                [ SpatialSensorCoordinator ]
+             (Capability & Interruption Aware)
+                               │
+                               ▼
+               [ Spatial Capture Session Builder ]
+                  (Monotonic & Wall Clocks)
+                               │
+                               ▼
+                  [ Evidence Package Builder ]
+  ┌─────────────────────────────────────────────────────────┐
+  │ Canonical Spatial Manifest (JSON)                        │
+  │ ├── Capability Record & Device Floor                    │
+  │ ├── Coordinate Frame Registry (Explicit Semantics)       │
+  │ ├── Synchronization & Clock Correlation Matrix         │
+  │ └── Hash-Indexed Artifact References (SHA-256)          │
+  ├─────────────────────────────────────────────────────────┤
+  │ External Binary Payloads                                │
+  │ ├── Raw RGB Images (.heic / .png)                        │
+  │ ├── Binary Depth & Confidence Maps (.bin / .raw)        │
+  │ └── Motion & Pose Sample Batches (.bin)                 │
+  └─────────────────────────────────────────────────────────┘
+```
+
+**Core philosophy:** bounded sensor acquisition and spatial packaging only. Reconstruction, SfM, meshing, densification, CAD verdicts, and AI remain **strictly deferred to Phase 4+**.
 
 ---
 
@@ -18,364 +59,326 @@
 
 ### 1.1 Mission
 
-Acquire **deterministic spatial evidence datasets** — images, pose metadata, LiDAR/depth maps, IMU/motion samples, and calibration — and package them so downstream phases can trust provenance, time, and geometry **without re-deriving missing sensor truth**.
+Acquire **deterministic spatial evidence datasets** — images, pose metadata, depth/LiDAR (when capable), IMU/motion samples, and calibration — and package them so Phases 4–5 can trust provenance, time, and geometry **without inventing missing sensor truth**.
 
 Phase 3 does **not** reconstruct the world. It **captures and packages** what the sensors observed.
 
-```text
-Physical vehicle
-  → SensorManager (ARKit / AVFoundation / CoreMotion)
-  → Spatial Capture Pipeline
-  → Spatial Evidence Package + SpatialManifest
-  → Evidence Repository / EDTS intake
-```
-
-### 1.2 In scope (Phase 3)
+### 1.2 In scope
 
 | ID | Workstream | Deliverable class |
 |---|---|---|
-| **3.1** | Sensor abstraction | `SensorManager` + typed stream contracts |
-| **3.2** | Spatial capture session | `SpatialCaptureSession` lifecycle + frame records |
-| **3.3** | Calibration framework | Intrinsics \(K\), distortion, extrinsic relationships |
-| **3.4** | Photogrammetry capture | Raw multi-view images + per-frame pose / \(K\) |
-| **3.5** | LiDAR / depth capture | Raw depth (or depth maps) + confidence + pose |
-| **3.6** | Spatial manifest | Deterministic hashes, coordinate frames, OCC-safe package identity |
+| **3.1** | Composable sensor sources + coordinator | `CameraSource` / `DepthSource` / `MotionSource` + `SpatialSensorCoordinator` |
+| **3.2** | Spatial capture session builder | Dual-clock session; frame/sample indices |
+| **3.3** | Calibration framework | Intrinsics \(K\), distortion, extrinsics; lineage to AV calibration |
+| **3.4** | Photogrammetry capture | Raw multi-view RGB + per-frame pose / \(K\) |
+| **3.5** | Depth / LiDAR capture | Raw depth + confidence + pose (**capability-gated**) |
+| **3.6** | Spatial manifest + package | Canonical JSON index + external binaries + OCC |
 
 ### 1.3 Explicitly out of scope (Phases 4–8+)
 
-| Deferred capability | Target phase (indicative) |
+| Deferred | Phase |
 |---|---|
-| Mesh generation / surface reconstruction | Phase 4+ |
-| Structure-from-Motion (SfM) / dense point clouds | Phase 4+ |
-| Point-cloud densification / fusion solvers | Phase 5+ |
-| CAD / vehicle-frame alignment as engineering verdict | Phase 6+ |
-| AI segmentation / semantic labeling | Phase 7–8+ |
-| Certified metrology claims from ARKit/LiDAR alone | **Never by default** (`GUIDANCE_ESTIMATE`) |
+| Mesh generation / surface reconstruction | 4+ |
+| Structure-from-Motion / dense reconstruction | 4+ |
+| Point-cloud densification / fusion solvers | 5+ |
+| CAD / vehicle-frame engineering alignment verdicts | 6+ |
+| AI segmentation / semantics | 7–8+ |
+| Certified metrology from ARKit/LiDAR alone | **Never by default** (`GUIDANCE_ESTIMATE`) |
 
-### 1.4 Authority posture (non-negotiable)
+### 1.4 Authority & Phase 2 integrity
 
-- ARKit / LiDAR / visual-inertial pose default to **`GUIDANCE_ESTIMATE`**, never unlabeled certified metrology.
-- Capture owns evidence acquisition; it does **not** authorize conversions, designs, structural adequacy, or Build Engine policy (`SYSTEM_BOUNDARIES.md`).
-- Sprint 2.3 OCC lessons apply to spatial package commits: repository-assigned revision / sequence tokens; no silent LWW; no adopt-before-durable-persist.
+- Pose / depth default authority: **`GUIDANCE_ESTIMATE`**.
+- Capture does not authorize conversions, designs, or Build Engine policy (`SYSTEM_BOUNDARIES.md`).
+- Sprint 2.3 OCC posture is preserved at spatial scale: repository-assigned sequence tokens, no silent LWW, no adopt-before-durable-persist, sealed packages never overwritten in place.
+- **High-frequency payloads stay out of canonical JSON** so manifest hashing remains tractable and OCC digests stay stable as datasets grow.
 
 ---
 
-## 2. Layered architecture
-
-### 2.1 Hardware → abstraction → storage
-
-```text
-┌──────────────────┐
-│ ARKit            │
-├──────────────────┤
-│ AVFoundation     │ ──► [ SensorManager ] ──► [ Spatial Capture Pipeline ]
-├──────────────────┤              │                        │
-│ CoreMotion       │              │                        ▼
-└──────────────────┘              │              [ SpatialEvidencePackage ]
-                                  │                        │
-                                  ▼                        ▼
-                         capability probes          [ SpatialManifest ]
-                         (DeviceCapability*)                 │
-                                                             ▼
-                                                  Evidence Repository
-                                                  (domain never imports
-                                                   ARKit / AVFoundation)
-```
-
-### 2.2 Dependency rule
+## 2. Layering & dependency rules
 
 | Layer | May depend on | Must not depend on |
 |---|---|---|
-| Domain / Evidence Repository | Spatial **contracts** (DTO / protocols) | ARKit, AVFoundation, CoreMotion, RealityKit |
-| Sensor adapters (`App/Spatial`, `App/Capture`, `App/Motion`, `App/Calibration`) | Apple frameworks + contracts | EDTS DB, Build Engine |
-| UI / guided overlay | SensorManager façade + presentation DTOs | Raw framework session objects (prefer ports) |
+| Domain / Evidence Repository | Spatial **contracts** only | ARKit, AVFoundation, CoreMotion, RealityKit |
+| Framework adapters | Apple SDKs | Domain stores, EDTS, Build Engine |
+| Composable sources | Adapters + contracts | UI, inspection ViewModels |
+| `SpatialSensorCoordinator` | Sources + Capability Model | Direct UIKit/SwiftUI |
+| Package builder | Contracts + file I/O ports | Apple sensor sessions |
 
-`EvidenceRepository` (and Sprint 2 session stores) consume **already-normalized** spatial records. They never open an `ARSession`.
+Evidence Repository never opens an `ARSession`. It only accepts sealed package references and sample indices.
 
-### 2.3 Existing scaffolding (status today)
+### 2.1 Existing scaffolding (today)
 
-| Path | Role today | Phase 3 expectation |
+| Path | Today | Phase 3 role |
 |---|---|---|
-| `App/Spatial/*` | README stubs; excluded from SPM library | Become adapter implementations behind `SensorManager` |
-| `App/Motion/*` | README stubs | CoreMotion recorder + timestamp alignment |
-| `App/Calibration/*` | README stubs; AVCameraCalibration-first | Intrinsics / distortion pipeline |
-| `DeviceCapabilitySnapshotProviding` | LiDAR / depth capability probe | Feed SensorManager capability gate |
+| `App/Spatial/*` | README stubs; SPM-excluded | ARKit adapter + pose/depth source backing |
+| `App/Motion/*` | README stubs | CoreMotion adapter → `MotionSource` |
+| `App/Calibration/*` | README stubs; AVCameraCalibration-first | Calibration lock + derivative lineage |
+| `DeviceCapabilitySnapshotProviding` | LiDAR/depth probes | Feeds Capability Model / device floor |
 
 ---
 
-## 3. Phase 3.1 — Sensor abstraction (`SensorManager`)
+## 3. Phase 3.1 — Composable sensor composition
 
-### 3.1 Mission
+### 3.1 Rejected: monolithic `SensorManager`
 
-Unify Apple framework churn behind a single capture-facing port so domain logic is insulated from ARKit / AVFoundation / CoreMotion API drift.
+A single god-object that owns camera + depth + motion + interruption + capability conflates failure domains and forces LiDAR-shaped APIs onto non-LiDAR devices. **Normative design is composition.**
 
-### 3.2 Port sketch (contracts — not production code)
+### 3.2 Discrete sources
+
+| Source | Primary adapters | Emits |
+|---|---|---|
+| `CameraSource` | AVFoundation (+ ARKit camera frames when armed) | RGB frame refs, exposure metadata, calibration hooks |
+| `DepthSource` | ARKit scene depth / LiDAR path | Depth + confidence buffers **or** explicit `unavailable` |
+| `MotionSource` | CoreMotion (+ ARKit pose when armed) | IMU windows, pose samples |
+
+Each source:
+
+- Declares its **required capability floor** subset
+- Surfaces **interruption** / tracking-loss events for its domain only
+- Never writes package bytes directly (coordinator → session builder → package builder)
+
+### 3.3 `SpatialSensorCoordinator`
+
+Responsibilities:
+
+1. **Compose** the active source set from plan/capability requirements  
+2. Apply **Capability Model** before arming streams (fail closed or labeled demo — never silent)  
+3. Fan-in source events into an ordered capture timeline  
+4. Propagate **interruptions** (backgrounding, thermal, tracking reset, permission loss) without corrupting sealed state  
+5. Expose a narrow façade to the Spatial Capture Session Builder  
 
 ```text
-SensorManager
-  ├─ prepare(configuration: SpatialCaptureConfiguration) throws
-  ├─ startStreams(mask: SensorStreamMask) throws
-  ├─ stopStreams()
-  ├─ currentCapability: SpatialSensorCapability
-  └─ events: AsyncSequence<SensorEvent>
-
-SensorStreamMask: photo | videoFrame | depth | pose | imu | calibration
-
-SensorEvent (discriminated):
-  .frame(SpatialFrameSample)
-  .depth(SpatialDepthSample)
-  .pose(SpatialPoseSample)
-  .imu(SpatialIMUSample)
-  .calibration(SpatialCalibrationSample)
-  .trackingState(SpatialTrackingState)
-  .fault(SpatialSensorFault)
+SpatialSensorCoordinator
+  ├─ resolveCapabilities() -> SpatialCapabilityRecord
+  ├─ arm(sources: SourceMask) throws  // capability-checked
+  ├─ disarm()
+  ├─ events: AsyncSequence<CoordinatorEvent>
+  └─ interruptionPolicy: InterruptionPolicy
 ```
 
-### 3.3 Adapter map
-
-| Apple API | Adapter responsibility | Output contract |
-|---|---|---|
-| ARKit | World tracking, camera pose, optional scene depth | `SpatialPoseSample`, optional `SpatialDepthSample` |
-| AVFoundation | Photo / video frames, exposure metadata, calibration data when available | `SpatialFrameSample`, `SpatialCalibrationSample` |
-| CoreMotion | Accelerometer / gyro / attitude windows | `SpatialIMUSample` |
-
-### 3.4 Capability gate
-
-Before engineering spatial capture:
-
-1. Resolve `DeviceCapabilitySnapshot` / `SpatialSensorCapability`.
-2. If required streams (e.g. LiDAR depth for a LiDAR plan point) are unsupported → **refuse** engineering capture or enter labeled **demo** mode (never silent degrade).
-3. v1 target profile remains a controlled LiDAR-equipped iPhone Pro class device unless a later ADR widens the matrix.
+UI and inspection coordinators speak to `SpatialSensorCoordinator`, not to ARKit/AVFoundation types.
 
 ---
 
-## 4. Phase 3.2 — Spatial capture session
+## 4. Capability Model (non-LiDAR gracefulness)
 
-### 4.1 Session role
+### 4.1 Device floor vs. feature options
 
-`SpatialCaptureSession` is the **unit of field acquisition** for spatial evidence. It is distinct from (but may reference) an `InspectionSession`:
-
-| Concept | Owns |
+| Concept | Meaning |
 |---|---|
-| `InspectionSession` | Plan assignment, progression, evidence bindings, lifecycle OCC (Sprint 2) |
-| `SpatialCaptureSession` | Sensor streams, frame sequence, calibration snapshot, spatial package identity |
+| **Device floor** | Minimum profile required for a given capture mode (e.g. “RGB+pose guidance” vs “RGB+depth engineering”) |
+| **Feature option** | Optional stream (depth, high-rate IMU) that may be `supported` / `unsupported` / `denied` / `unavailable_runtime` |
 
-Binding rule: a spatial session **may** carry `inspectionSessionID` + optional `inspectionPointID` when created under guided inspection. Spatial packaging must not invent inspection authority.
+Non-LiDAR hardware is a **first-class path**, not an afterthought:
 
-### 4.2 Lifecycle (sketch)
+- Plans that **require** depth refuse engineering capture on non-LiDAR with an explicit reason code.  
+- Plans that **allow** RGB+pose-only proceed with `DepthSource` recorded as `unsupported` in the Capability Record — **no fake depth artifacts**.  
+- Demo / unsupported modes must be **labeled**; never indistinguishable from engineering capture.
 
-```text
-idle
-  → preparing (capability + calibration lock)
-  → capturing (streams active)
-  → finalizing (flush samples, hash artifacts, write manifest)
-  → sealed (immutable package on disk)
-  → failed / canceled
-```
+### 4.2 `SpatialCapabilityRecord` (manifest section)
 
-Sealed packages are **append-only at the package identity**. Corrections create a **new** spatial package id (same posture as capture-id retake / soft-delete quarantine — never overwrite originals in place).
+Minimum fields:
 
-### 4.3 `SpatialCaptureSession` contract fields (minimum)
+- Device model class / capability snapshot digest  
+- Per-source support matrix (`CameraSource`, `DepthSource`, `MotionSource`)  
+- Armed vs. required mask  
+- Refusal / demo reason codes when below floor  
+- Authority defaults (`GUIDANCE_ESTIMATE`)
+
+Capability Record is hashed into the sealed package so downstream consumers can see what was physically possible at capture time.
+
+---
+
+## 5. Clocks — monotonic capture vs wall epoch
+
+### 5.1 Separation rule
+
+| Clock | Role | Used for |
+|---|---|---|
+| **Monotonic capture clock** | Ordering and sync within a session | Frame-to-frame deltas, RGB↔depth association, IMU windowing |
+| **Wall-clock epoch** | Human/audit anchoring (UTC when available) | Package `createdAt` / `sealedAt`, export labels |
+
+**Forbidden:** using wall clock as the sole ordering key for high-rate samples, or comparing `arkit_frame`, `avfoundation_capture`, and `core_motion` domains without an explicit correlation record (`TIMESTAMP_STANDARD.md`).
+
+### 5.2 Synchronization & clock correlation matrix (manifest)
+
+The canonical manifest includes a **correlation matrix / mapping table**:
+
+| From domain | To domain | Method | Residual / uncertainty | Valid interval |
+|---|---|---|---|---|
+| `avfoundation_capture` | monotonic session | documented | required | session span |
+| `arkit_frame` | monotonic session | documented | required | session span |
+| `core_motion` | monotonic session | documented | required | session span |
+| monotonic session | `wall` UTC | documented | required | epoch anchors only |
+
+Do not claim “exact camera/IMU sync” without a named validation method and residual.
+
+---
+
+## 6. Coordinate frames — explicit matrix semantics
+
+Anonymous \(4\times4\) matrices are **rejected**. Every pose/transform record must carry (`COORDINATE_FRAME_STANDARD.md`):
 
 | Field | Requirement |
 |---|---|
-| `spatialSessionID` | Stable typed id |
-| `schemaVersion` | Explicit int/semver for envelope |
-| `createdAt` / `sealedAt` | Timestamp + `clock_domain` per `TIMESTAMP_STANDARD.md` |
-| `deviceCapabilityDigest` | Hash of capability snapshot used to authorize capture |
-| `calibrationID` | References locked calibration record |
-| `coordinateFrameSet` | Declared frames used in this session |
-| `streamMask` | Which sensors were armed |
-| `inspectionSessionID` | Optional link |
-| `revision` / package sequence | OCC token for package commits (repository-assigned; see §7) |
-
----
-
-## 5. Per-frame / per-sample metadata (Phase 3.2 & 3.4–3.5)
-
-Every retained sample declares enough geometry and time for Phase 4+ to avoid post-hoc guessing.
-
-### 5.1 `SpatialFrameSample` (image / video frame)
-
-| Member | Spec |
-|---|---|
-| `sampleID` | Stable id |
-| `timestamp` | Prefer **monotonic nanoseconds** in declared `clock_domain` (`avfoundation_capture` or `arkit_frame`) + optional wall mapping |
-| `imageArtifactRef` | Package-relative path to original bytes |
-| `intrinsicsK` | \(3 \times 3\) camera matrix |
-| `distortion` | Model id + parameter vector (AVCameraCalibration-first; OpenCV coeffs are derivatives only) |
-| `extrinsicPose` | \(4 \times 4\) transform with full frame semantics (`COORDINATE_FRAME_STANDARD.md`) |
-| `imageSizePx` | Width / height |
-| `exposure` / ISO / lens | When available from AV metadata |
-| `authority` | Default `GUIDANCE_ESTIMATE` unless a later calibration ADR elevates |
-
-### 5.2 `SpatialDepthSample` (LiDAR / scene depth)
-
-| Member | Spec |
-|---|---|
-| `sampleID` | Stable id |
-| `timestamp` | Same sync rules as frames |
-| `depthArtifactRef` | Raw depth map / point buffer path |
-| `confidenceArtifactRef` | Optional confidence map |
-| `pose` | Pose at depth epoch |
-| `depthUnit` | Meter |
-| `alignment` | Explicit relationship to paired RGB frame id (if any) |
-| `authority` | `GUIDANCE_ESTIMATE` |
-
-### 5.3 `SpatialPoseSample`
-
-| Member | Spec |
-|---|---|
-| `source_frame` / `target_frame` | Never anonymous |
+| `source_frame` / `target_frame` | From registry (e.g. `camera` → `arkit_world`) |
 | `matrix_layout` | `column_major` \| `row_major` |
-| `handedness` | Explicit (ARKit world is typically right-handed; record, do not assume silently) |
+| `handedness` | Explicit (do not assume ARKit convention silently) |
 | `translation_unit` | Meter |
 | `timestamp` + `clock_domain` | Required |
-| `trackingQuality` | Enum + optional residual |
-| `authority` | `GUIDANCE_ESTIMATE` |
+| `authority` | Default `GUIDANCE_ESTIMATE` |
+| `trackingQuality` / uncertainty | When available |
 
-### 5.4 `SpatialIMUSample`
+### 6.1 Frame registry (manifest)
 
-Windowed CoreMotion evidence: capture timestamp, window start/end, sample count, clock domain `core_motion`, mapping residual to camera/ARKit domain when a mapping exists. Do **not** claim exact camera/IMU sync without a documented validation method (`TIMESTAMP_STANDARD.md`).
+Sealed packages embed the **Coordinate Frame Registry** used for that session (frame ids + axis/handedness notes). Downstream Phase 4+ must not guess conventions.
 
----
-
-## 6. Phase 3.3 — Calibration & determinism contracts
-
-### 6.1 Calibration record
-
-`SpatialCalibrationSample` / calibration lock record must include:
-
-- Intrinsics \(K\)
-- Distortion model + parameters
-- Extrinsic relationships needed for RGB↔depth (when both armed)
-- Capture of `AVCameraCalibrationData` fields when present (canonical source)
-- `calibrationAuthority` and device/capability linkage
-
-OpenCV-style coefficients, if produced, are **derivatives** with lineage back to AV calibration — never unlabeled replacements.
-
-### 6.2 Verification checks (Phase 3 acceptance, not recon)
-
-| Check | Requirement |
-|---|---|
-| RGB↔depth time sync | Document tolerance; fail closed or flag if exceeded |
-| Pose continuity | Detect tracking resets; mark affected samples |
-| Frame semantics | Reject anonymous \(4 \times 4\) without `source_frame`/`target_frame` |
-| Handedness / axis | Persist explicit convention; no silent flip |
-| Capability match | Sealed package must hash the capability snapshot used |
-
-### 6.3 Coordinate frames
-
-Reuse `COORDINATE_FRAME_STANDARD.md` frame ids (`arkit_world`, `camera`, `device`, `vehicle`, …). Phase 3 **records** transforms; it does not invent `edts_canonical` alignments as certified truth.
+Frame-to-frame relationships (RGB camera ↔ depth camera extrinsics, device ↔ ARKit world) are **named edges** in that registry, not implied by file adjacency.
 
 ---
 
-## 7. Phase 3.6 — Spatial manifest, hashing & OCC
+## 7. Spatial Capture Session Builder
 
-### 7.1 `SpatialManifest`
+### 7.1 Role
 
-Package-level index that makes a spatial dataset auditable:
+Consumes coordinator events and builds an in-progress session index:
 
-| Section | Contents |
-|---|---|
-| Identity | `spatialSessionID`, schema version, sealed timestamp |
-| Artifacts | Path, media type, byte size, content hash |
-| Samples | Frame / depth / pose / IMU indices with sample digests |
-| Calibration | Calibration record hash |
-| Capability | Device capability digest |
-| Integrity | Manifest digest over canonical encoding |
-| Linkage | Optional inspection session / point ids |
+- Assigns sample ids  
+- Stamps **monotonic** capture times  
+- Attaches wall epoch only at defined anchors  
+- Enforces capability-consistent sample sets (no orphan “required” depth when depth unsupported)  
+- Hands a finalize request to the Evidence Package Builder  
 
-### 7.2 Hashing rules
-
-- Artifact bytes: content-addressed hash (algorithm id versioned, e.g. `sha256`).
-- Manifest: hash of **canonical JSON** of the manifest payload (exclude self-digest field), algorithm id versioned — same spirit as S2-002 / envelope integrity.
-- Never treat Swift `Hasher` / `hashValue` as persisted identity.
-
-### 7.3 OCC / persistence rules for spatial packages
-
-Aligned with Sprint 2.3 S2-004:
-
-1. Durable writes go through a **repository boundary** (spatial package store), not ad-hoc file drops from UI.
-2. Sequence / revision tokens are **repository-assigned**; callers supply `expectedRevision` (or equivalent).
-3. Rejected commits are side-effect free (no adopt, no partial promote).
-4. Different package identity replacement is explicit — no silent overwrite of sealed packages.
-5. Recovery must not install a lower package revision over a higher durable head (monotonicity).
-6. Soft-delete / supersede quarantines originals; retake = new ids.
-
-### 7.4 Evidence unit upgrade
-
-| Legacy (Phase 1 still) | Phase 3 spatial unit |
-|---|---|
-| Flat photo + sidecar metadata | `SpatialEvidencePackage` = originals + depth/pose/IMU + calibration + `SpatialManifest` |
-| Optional inspection context | Explicit linkage fields; still not EDTS authority |
-
-Downstream Phase 4 photogrammetry and Phase 5 LiDAR fusion **must not** need to invent missing \(K\), poses, or sync — if Phase 3 sealed correctly.
-
----
-
-## 8. Data flow (end-to-end)
+### 7.2 Lifecycle
 
 ```text
-1. Technician starts guided point (InspectionSession) requiring spatial evidence
-2. SensorManager.prepare + capability gate
-3. Calibration lock recorded
-4. Streams emit SensorEvent → Capture Pipeline normalizes to Spatial*Sample
-5. Originals written to package staging (atomic I/O)
-6. Finalize → SpatialManifest + integrity digests
-7. Repository commit (expectedRevision) → sealed package
-8. Inspection binding references spatial package / sample ids (domain)
-9. Export / EDTS intake consumes sealed package only
+idle → preparing (capability + calibration lock)
+    → capturing
+    → finalizing (flush binaries, write manifest, hash)
+    → sealed | failed | canceled
 ```
 
-Failure at step 6–7: no inspection binding to a partial package; staging quarantined per recovery ADR disposition (when implemented).
+Interruptions during `capturing` mark affected sample ranges; they must not silently rewrite already-flushed originals.
+
+### 7.3 Linkage to inspection
+
+Optional `inspectionSessionID` / `inspectionPointID`. Spatial packaging does not invent inspection authority. Inspection bindings reference **sealed** package / sample ids only.
 
 ---
 
-## 9. Subsystem → artifact map
+## 8. Calibration (Phase 3.3)
 
-| Subsystem | Phase 3 target artifact | Why early |
+- Prefer **AVCameraCalibrationData** as canonical intrinsics/distortion source when present.  
+- OpenCV-style coefficients are **derived artifacts** with lineage pointers back to the AV calibration record — never unlabeled replacements.  
+- RGB↔depth extrinsics recorded as explicit frame-registry edges when both streams armed.  
+- Calibration lock is hashed into the manifest.
+
+---
+
+## 9. Evidence package structure (Phase 3.6)
+
+### 9.1 Split: canonical JSON vs external binaries
+
+| In canonical Spatial Manifest (JSON) | External binary payloads |
+|---|---|
+| Capability Record & device floor | Raw RGB (`.heic` / `.png`) |
+| Coordinate Frame Registry | Depth & confidence maps (`.bin` / `.raw`) |
+| Clock correlation matrix | Motion & pose sample batches (`.bin`) |
+| Sample indices + metadata summaries | Calibration sidecars if binary |
+| SHA-256 (or versioned algo) content hashes + package-relative paths | — |
+| Package identity, schema version, OCC revision | — |
+
+**High-frequency time series and image/depth rasters must not be inlined into canonical JSON.** Manifest entries are hash-indexed references only.
+
+### 9.2 Lineage-preserving derived artifacts
+
+| Rule | Requirement |
+|---|---|
+| Originals | Immutable once sealed; soft-delete → quarantine (never overwrite in place) |
+| Derivatives | New artifact ids; must declare `derivedFrom` hash(es) + transform method id |
+| Retake | New spatial package / sample ids (same posture as Phase 1 evidence retake) |
+
+This keeps Phase 2 OCC and hash-integrity guarantees intact as spatial volume grows.
+
+### 9.3 Hashing & OCC
+
+- Artifact bytes: content hash with versioned algorithm id (e.g. `sha256`).  
+- Manifest digest: hash of **canonical JSON** of the manifest payload excluding the self-digest field.  
+- Package commits use repository-assigned revision / sequence tokens; callers supply `expectedRevision` (S2-004 posture).  
+- Rejected commits: side-effect free.  
+- Recovery must not install lower package revision over higher durable head.  
+- Swift `Hasher` / `hashValue` forbidden for persisted identity.
+
+### 9.4 Per-sample metadata retained in the index (not the raster)
+
+Even with binaries externalized, the manifest index must still carry enough for Phase 4+:
+
+- Monotonic timestamp (+ clock domain)  
+- Intrinsics \(K\) / distortion ref  
+- Extrinsic pose with full frame semantics  
+- Depth alignment to RGB sample id (when both present)  
+- Authority + tracking quality  
+
+---
+
+## 10. End-to-end data flow
+
+```text
+1. Guided point requests spatial evidence (InspectionSession)
+2. Coordinator.resolveCapabilities → Capability Record
+3. Below floor? refuse or labeled demo; else arm sources
+4. Calibration lock
+5. Sources emit → Coordinator → Session Builder (monotonic timeline)
+6. Package Builder writes external binaries atomically
+7. Write canonical Spatial Manifest + digests
+8. Repository commit (expectedRevision) → sealed package
+9. Inspection binding references sealed ids only
+10. Export / EDTS intake consumes sealed package only
+```
+
+Failure before seal: no inspection binding to partial packages; staging disposition follows recovery ADR (quarantine when implemented).
+
+---
+
+## 11. Subsystem → artifact map
+
+| Subsystem | Phase 3 artifact | Why early |
 |---|---|---|
-| 3.1 Sensor abstraction | Unified stream interfaces | Decouples domain from OS API churn |
-| 3.3 Calibration | \(K\) + distortion + extrinsics lineage | Prevents Phase 4 recalibration archaeology |
-| 3.4 Photogrammetry capture | Raw views + pose + \(K\) | Immutable multi-view evidence |
-| 3.5 LiDAR / depth | Raw depth + confidence + pose | Immutable depth evidence |
-| 3.6 Spatial manifest | Hashes + frames + OCC | Preserves auditability across spatial datasets |
+| Composable sources + coordinator | Unified, capability-aware streams | OS API isolation + interruption hygiene |
+| Capability Model | Device floor + support matrix | Honest non-LiDAR operation |
+| Dual clocks + correlation matrix | Sync without wall-clock abuse | Deterministic temporal joins |
+| Frame registry | Explicit matrix semantics | No anonymous transforms |
+| Calibration | \(K\), distortion, extrinsics lineage | Phase 4 does not reverse-engineer cameras |
+| Manifest + binaries | Hash-indexed package | OCC/hash integrity at spatial scale |
 
 ---
 
-## 10. Implementation gates (when coding is allowed)
+## 12. Implementation gates (coding not authorized yet)
 
-Do **not** begin Phase 3 production coding until:
+Phase 3 production coding starts only when **all** hold:
 
-1. Sprint 2.3 success gate invariant 5: Mac `xcodebuild` **PASSED** in execution manifest  
-2. This architecture draft reviewed / accepted (status → `ARCHITECTURE_ACCEPTED`)  
-3. Narrow ADR(s) for: spatial package schema version, hash algorithm ids, RGB↔depth sync tolerance  
-4. Sensor adapters land behind ports with capability fail-closed tests  
+1. Sprint 2.3 success gate: Mac `xcodebuild` on `Phase1StillCapture` **PASSED** and recorded in `sprint_2_3_execution_manifest.json`  
+2. This architecture reaches `ARCHITECTURE_ACCEPTED`  
+3. Narrow ADRs for: spatial package schema version, hash algorithm ids, RGB↔depth sync tolerance, device-floor matrix  
 
-Suggested first implementation slices (post-acceptance):
+Suggested post-acceptance slices:
 
-1. Contracts-only Swift package target (no ARKit link in domain)  
-2. File-backed `SpatialPackageStore` with OCC + manifest hashing (simulator fixtures)  
-3. AVFoundation photo path + calibration lock  
-4. ARKit pose path (guidance authority)  
-5. Depth path on LiDAR devices only  
-
----
-
-## 11. Deferred work reminder
-
-Broader app integration UITests, device validation harnesses, transaction journal engines, and session-JSON quarantine **implementation** remain Sprint 2.3 / follow-on hardening tracks. They are **not** Phase 3 spatial scope, but Phase 3 packaging must remain compatible with those recovery/OCC invariants.
+1. Contracts-only target (no Apple frameworks in domain)  
+2. Package builder + OCC store with fixture binaries  
+3. `CameraSource` + calibration lock  
+4. `MotionSource` / pose path (`GUIDANCE_ESTIMATE`)  
+5. `DepthSource` on LiDAR floor only  
 
 ---
 
-## 12. Document control
+## 13. Document control
 
 | Change | Rule |
 |---|---|
-| Widen device matrix | New ADR |
+| Reintroduce monolithic SensorManager as sole API | **Rejected** — coordinator + sources remain normative |
+| Inline high-rate samples into manifest JSON | **Rejected** |
 | Elevate authority above `GUIDANCE_ESTIMATE` | New ADR + validation evidence |
-| Add mesh/SfM into Phase 3 | **Rejected** — belongs in Phase 4+ |
-| Mutate sealed package in place | **Forbidden** |
+| Add mesh/SfM into Phase 3 | **Rejected** — Phase 4+ |
+| Mutate sealed package / originals in place | **Forbidden** |
 
-**Classification while draft:** `PHASE_3_ARCHITECTURE_DRAFT_IMPLEMENTATION_PENDING`
+**Classification:** `PHASE_3_ARCHITECTURE_DRAFT_IMPLEMENTATION_PENDING`
