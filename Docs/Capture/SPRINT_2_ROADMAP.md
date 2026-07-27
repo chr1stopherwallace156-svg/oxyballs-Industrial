@@ -39,8 +39,8 @@ SPRINT_2_1_ARCHITECTURE.md                             🔒 LOCKED
         │
         ▼  STOP until Sprint 2.3 success gate COMPLETE
 Phase 3  Spatial & Sensor Platform (capture + package only)
-        │   Architecture v1.2.0: `Docs/Architecture/PHASE_3_SPATIAL_PLATFORM_ARCHITECTURE.md`
-        │   Normative: evidence permanent / twin ephemeral; lifecycle FSM; hardware-neutral adapters
+        │   Architecture v1.3.0: `Docs/Architecture/PHASE_3_SPATIAL_PLATFORM_ARCHITECTURE.md`
+        │   Normative: custody≠package bytes; dual FSMs; typed verified gateway; typed envelopes
         │   Out of scope: mesh / SfM / densification / CAD verdicts / AI segmentation
         ▼
 Phases 4–8  Reconstruction · fusion · alignment · semantics     deferred
