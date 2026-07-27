@@ -1,25 +1,25 @@
-# Phase 3 — Spatial & Sensor Platform Architecture
+# Phase 3 — Definitive Charter: Spatial Evidence Acquisition & Packaging
 
 | Field | Value |
 |---|---|
-| Status | **ARCHITECTURE_DRAFT — IMPLEMENTATION GATED** |
-| Version | **1.4.0** |
+| Status | **DEFINITIVE CHARTER — IMPLEMENTATION GATED** |
+| Version | **1.5.0** |
 | Date | 2026-07-27 |
 | Path | `Docs/Architecture/PHASE_3_SPATIAL_PLATFORM_ARCHITECTURE.md` |
 | Applies to | `elektron-capture-ios` Phase 3 |
 | Prerequisite | Sprint 2.3 success gate closed (**Mac `xcodebuild` PASSED** on `Phase1StillCapture`); Phase 0–2.3 contracts remain authoritative |
-| Related | `COORDINATE_FRAME_STANDARD.md`, `TIMESTAMP_STANDARD.md`, `SYSTEM_BOUNDARIES.md`, `ENGINEERING_GUARDRAILS.md`, `ADR-SESSION-REVISION-OCC.md` (S2-004), `ADR-SESSION-RECOVERY-AND-QUARANTINE.md` |
-| Supersedes | Drafts 1.0.0–1.3.0 (determinism boundary, package closure, schema longevity, dual quarantine scopes, and honest gateway phrasing below are normative) |
+| Related | `COORDINATE_FRAME_STANDARD.md`, `TIMESTAMP_STANDARD.md`, `SYSTEM_BOUNDARIES.md`, `ENGINEERING_GUARDRAILS.md`, `STATUS_TAXONOMY.md`, `ADR-SESSION-REVISION-OCC.md`, `ADR-SESSION-RECOVERY-AND-QUARANTINE.md`, `Docs/Architecture/PHASE_3_FORMAL_ARCHITECTURE_AUDIT.md` |
+| Supersedes | Drafts 1.0.0–1.4.0 |
 
-**This document is an architectural charter / engineering constitution.** It does not authorize production ARKit / AVFoundation / LiDAR workflows. **Zero Swift code, test files, or build-setting changes** are in scope for this pass.
+**This document is the Phase 3 engineering constitution.** It does not authorize production ARKit / AVFoundation / LiDAR workflows. **Zero Swift feature code** until charter acceptance, Sprint 2.3 Mac gate, Formal Architecture Audit closure, and required ADRs.
 
-**Next action after acceptance:** architecture audit against every Phase 0–2.3 contract — list conflicts and new ADR requirements — then approve the first Phase 3 vertical slice **only** after those conflicts are resolved. Do **not** jump straight to production coding.
+**Strategic next step:** Formal Architecture Audit (`PHASE_3_FORMAL_ARCHITECTURE_AUDIT.md`) — map every contract in this charter against Phase 0–2.3, document conflicts/ADRs, then draft the synthetic vertical-slice harness. **Not** immediate production coding.
 
 ---
 
-## 0. Core philosophy & authority chain
+## 0. Core mission & authority chain
 
-> **The raw Spatial Evidence Package is permanent, immutable, and authoritative; the digital twin / mesh is ephemeral, versioned, and derived.**
+The purpose of Phase 3 is to establish an **uncompromised line of sight** between physical observation and persistent evidence. Output from Phase 3 is the **single source of truth** for all downstream spatial processing, reconstruction, and visualization.
 
 ```text
 Observation
@@ -31,48 +31,40 @@ Versioned interpretation
 User-facing presentation
 ```
 
-A mesh, AR overlay, or AI conclusion must **never** be confused with the original physical evidence.
+**No** derived mesh, neural representation, AI analysis, or AR overlay may ever overwrite, mutate, or be confused with the primary spatial evidence.
 
-Phase 3 owns **acquisition, synchronization, representation, persistence, and packaging** of evidence — not reconstruction. SfM, meshing, densification, CAD verdicts, and AI remain **strictly deferred to Phase 4+**.
+> **The raw Spatial Evidence Package is permanent, immutable, and authoritative; the digital twin / mesh is ephemeral, versioned, and derived.**
 
-**Critical trap corrected:** never write custody statuses such as `VERIFIED` into the package manifest JSON. Hashing a file and then modifying that same file to record verification creates a **circular hash-invalidation loop**. Package bytes and custody state are **decoupled** (§2).
+Phase 3 establishes deterministic **acquisition, synchronization, representation, persistence, and packaging** of spatial sensor evidence. Reconstruction, SfM, meshing, densification, CAD alignment, and AI segmentation remain **strictly deferred to Phase 4+**.
 
-### 0.1 Determinism boundary
-
-Phase 3 guarantees **deterministic identifiers, ordering, serialization, manifest construction, package layout, hash calculation, and verification** for a fixed set of captured bytes and metadata.
-
-Phase 3 does **not** claim that separate physical capture runs will produce identical sensor observations or identical compressed media bytes. Physical scene, sensor noise, compression, exposure, device motion, and OS timing vary.
-
-**Normative priority statement:**
-
-> Deterministic representation, ordering, serialization, identity, and verification take precedence over premature optimization. Physical sensor observations are not assumed to be repeatable across separate capture runs.
+**Hash-stability trap (corrected):** never write custody statuses such as `VERIFIED` into the hashed package manifest. Package bytes and custody state are decoupled (§2).
 
 ---
 
-## 1. Normative invariants
+## 1. Core invariants
 
-| # | Invariant |
-|---|---|
-| **1** | Evidence package bytes are immutable after the `PACKAGED` boundary; custody status never mutates those bytes or their content hashes. |
-| **2** | Every derived artifact has complete, **hash-bound** lineage to its source evidence package (`sourcePackageHash` + pipeline identity). Hash linkage proves **content** linkage — **not** authorship, authorization, or non-repudiation. Digital signatures / attestations are a **separate future decision** (§15). |
-| **3** | Phase 4+ production entry points consume evidence only via `VerifiedSpatialEvidencePackage` (§5). |
-| **4** | Domain contracts are hardware-neutral; vendor SDKs stop at adapter boundaries. |
-| **5** | High-frequency payloads stay out of canonical JSON; manifests carry hash-indexed references only. |
-| **6** | Pose / depth default authority remains `GUIDANCE_ESTIMATE` unless elevated by ADR + validation evidence. |
-| **7** | Sprint 2.3 OCC posture holds: `expectedRevision`, no silent LWW, no adopt-before-durable-persist. |
-| **8** | **Package closure:** a packaged dataset is closed under its manifest — every authoritative artifact is referenced and verified; every referenced artifact exists and matches its declared metadata; no unreferenced authoritative payload is present (§11.2). |
-| **9** | **Schema longevity:** historical evidence is interpreted only under its declared schema and semantic version; incompatible schemas fail explicitly rather than being silently reinterpreted (§12). |
+| # | Name | Statement |
+|---|---|---|
+| **1** | **Determinism Boundary** | Deterministic representation, ordering, serialization, identity, and verification take precedence over runtime optimization. Physical sensor observations are **not** assumed to be repeatable across separate physical capture runs. |
+| **2** | **Hash-Bound Lineage** | Every derived artifact has complete, hash-bound lineage to its source spatial evidence package. Hash-binding proves **content** lineage; authorization, authorship, and non-repudiation are deferred to explicit attestation/signature layers. |
+| **3** | **Boundary Isolation (`PACKAGED`)** | `PACKAGED` is a **boundary transition event and immutable package condition**, not a mutable custody status stored inside a package manifest. |
+| **4** | **Scoped Quarantines** | Acquisition failures and custody validation failures are strictly isolated: `DraftAcquisitionStatus.quarantined` vs `EvidenceCustodyStatus.quarantined`. Each record stores reason + deciding authority. **Do not** emit the EDTS-owned status code `PACKAGE_QUARANTINED` from Capture (`STATUS_TAXONOMY.md` / `status-owner-registry.json`). |
+| **5** | **Module-Enforced Consumption** | Supported Phase 4+ production entry points strictly require a `VerifiedSpatialEvidencePackage`. Direct filesystem, raw URL, or draft-based consumption is prohibited by Swift module visibility boundaries, API contracts, and architecture unit tests. (Swift cannot make arbitrary FS access physically impossible; intentional bypass remains possible — hence module/API/test enforcement.) |
+| **6** | **Strict Hardware Abstraction** | All **supported** physical and synthetic sensor sources (per the versioned Hardware Matrix §5) interact solely through capability-aware, hardware-neutral adapters. |
+| **7** | **Deterministic Failure** | System stability requires deterministic failure modes. Every interruption, permission denial, or validation error yields an explicit, non-recoverable, or cleanly recoverable diagnostic state. |
+| **8** | **Package Closure** | A finalized Spatial Evidence Package is closed under its canonical manifest: every referenced artifact exists; every artifact matches its declared byte length and SHA-256; every authoritative payload is referenced exactly once; temporary/staging/orphan files are excluded; package verification is independent of mutable custody status. |
+| **9** | **Schema Longevity & Versioning** | Every package and record must declare an explicit schema version and semantic contract. Historical coordinate, timing, calibration, and capability semantics must never be silently reinterpreted under newer assumptions; unsupported or incompatible schemas fail explicitly. |
+
+**Also preserved from Phase 0–2.3 (non-renumbered locks):**
+
+- Default pose/depth authority: `GUIDANCE_ESTIMATE`  
+- Sprint 2.3 OCC: `expectedRevision`, repository-assigned sequence, side-effect-free reject  
+- High-frequency payloads out of canonical JSON  
+- Soft-delete never overwrites sealed originals in place  
 
 ---
 
 ## 2. Immutable package vs mutable custody
-
-### 2.1 Hash-stability rule
-
-| Artifact | Mutability | Contents |
-|---|---|---|
-| **`SpatialEvidencePackage`** | **Immutable** after `PACKAGED` | Canonical manifest JSON + external binary payloads. Content hash stable for archival life. |
-| **`EvidenceCustodyRecord`** | **Mutable** | Repository-owned custody (`UNVERIFIED` → `VERIFIED` → `ARCHIVED`, or failure/quarantine). References package by **content hash**. Status changes **never** alter package bytes. |
 
 ```text
 ┌─────────────────────────────────────────┐
@@ -87,458 +79,211 @@ Phase 3 does **not** claim that separate physical capture runs will produce iden
 └─────────────────────────────────────────┘
 ```
 
-**`PACKAGED` is a boundary event and package condition, not a mutable custody status stored inside the package manifest.**
-
-### 2.2 Forbidden patterns
-
-| Pattern | Why rejected |
+| Artifact | Rule |
 |---|---|
-| Writing custody fields into hashed `manifest.json` after seal | Circular hash-invalidation |
-| Mutating package bytes to “upgrade” authority/calibration | Breaks forensic permanence |
-| Soft-delete by overwriting sealed payloads | Use scoped quarantine + media policy |
-| Treating path presence as proof of verification | Only custody + typed verified handle |
+| **`SpatialEvidencePackage`** | Immutable after `PACKAGED`. Content hash stable for archival life. Manifest contains **no** mutable custody status. |
+| **`EvidenceCustodyRecord`** | Mutable; repository-owned; references package by content hash. Status changes never alter package bytes. |
 
 ---
 
-## 3. Dual lifecycles (strict presentation)
-
-Three distinct concerns — **do not collapse into one status list**.
-
-### 3.1 Draft acquisition lifecycle
-
-Operates on a **draft session / staging workspace**:
+## 3. Explicit lifecycles & boundary events
 
 ```text
-CAPTURING → CAPTURE_COMPLETE → VALIDATING
+[ DRAFT ACQUISITION LIFECYCLE ]
+  CAPTURING → CAPTURE_COMPLETE → VALIDATING → [ DraftAcquisitionStatus.quarantined ]
+                 │                    │
+                 │                    └→ VALIDATION_FAILED / CANCELLED / INTERRUPTED
+                 ↓
+======================= [ BOUNDARY EVENT: PACKAGED ] =======================
+                 ↓
+[ IMMUTABLE EVIDENCE CUSTODY LIFECYCLE ]
+  UNVERIFIED → VERIFIED → ARCHIVED
+                └→ EvidenceCustodyStatus.quarantined / VERIFICATION_FAILED
 ```
 
-**Draft failure / disposition** (`DraftAcquisitionStatus`):
+### 3.1 Draft acquisition
 
-| State | Meaning | Authority |
-|---|---|---|
-| `INTERRUPTED` | OS / thermal / tracking / permission stop; resume or abort per policy | Capture session / coordinator |
-| `CANCELLED` | Operator or system cancel before seal | Capture session |
-| `VALIDATION_FAILED` | Bounds / schema / capability / hash-prep failed | Package builder / validator |
-| `DRAFT_QUARANTINED` | Staging retained for forensics; not sealable without explicit recovery | Draft recovery / quarantine policy |
+| State | Meaning |
+|---|---|
+| `CAPTURING` | Streams open |
+| `CAPTURE_COMPLETE` | Streams flushed |
+| `VALIDATING` | Hashes, bounds, schema, closure prep |
+| `INTERRUPTED` / `CANCELLED` / `VALIDATION_FAILED` | Explicit draft failure modes |
+| `DraftAcquisitionStatus.quarantined` | Draft held; not sealable without recovery authority |
 
-### 3.2 Package boundary
+### 3.2 Boundary event: `PACKAGED`
 
-```text
-                    PACKAGED
-         (immutable bytes + content hash created)
-```
+Immutable bytes + canonical manifest + content hash created. **Not** a custody enum value inside the manifest.
 
-- Seal succeeds only after validation passes and **package closure** (§11.2) holds.  
-- After `PACKAGED`, there are **no writers** to package blobs.  
-- `PACKAGED` is **not** stored as a mutable field inside the hashed manifest’s custody section (there is no custody section in the manifest).
+### 3.3 Custody (`EvidenceCustodyRecord`)
 
-### 3.3 Custody lifecycle (`EvidenceCustodyRecord`)
+| State | Meaning |
+|---|---|
+| `UNVERIFIED` | Sealed; integrity not yet confirmed |
+| `VERIFIED` | Closure + hashes OK; typed verified handle may issue |
+| `VERIFICATION_FAILED` | Integrity/schema/closure failed; bytes unchanged |
+| `EvidenceCustodyStatus.quarantined` | Capture-side custody hold (namespaced; **≠** EDTS `PACKAGE_QUARANTINED`) |
+| `ARCHIVED` | Historical retention of a previously verified package |
 
-```text
-UNVERIFIED → VERIFIED → ARCHIVED
-              └→ VERIFICATION_FAILED
-              └→ PACKAGE_QUARANTINED
-```
-
-| State | Meaning | Authority |
-|---|---|---|
-| `UNVERIFIED` | Package exists; integrity not yet confirmed (or not yet run) | Repository default after seal |
-| `VERIFIED` | Closure + hash checks passed; typed verified handle may be issued | Repository verification |
-| `VERIFICATION_FAILED` | Integrity/schema/closure failed; bytes unchanged; not Phase 4+ consumable | Repository verification |
-| `PACKAGE_QUARANTINED` | Held out of normal consumption; bytes unchanged; reason + deciding authority recorded | Custody / recovery policy |
-| `ARCHIVED` | Historical retention of a previously verified package; bytes unchanged | Retention policy |
-
-### 3.4 Quarantine scopes (no ambiguity)
-
-| Scope | Name | Owns the decision | Typical reasons |
-|---|---|---|---|
-| Draft | `DRAFT_QUARANTINED` / `DraftAcquisitionStatus.quarantined` | Draft/session recovery path | Incomplete capture, suspected staging corruption, operator hold |
-| Package | `PACKAGE_QUARANTINED` / `EvidenceCustodyStatus.quarantined` | Custody/repository path | Hash mismatch, policy hold, incident response |
-
-Every quarantine record must store **why** and **which authority** decided.
-
-### 3.5 Derived artifact lifecycle (separate)
+### 3.4 Derived artifact lifecycle (separate)
 
 ```text
 DERIVATION_REQUESTED → PROCESSING → DERIVED → DERIVED_VERIFIED
                                          └→ SUPERSEDED | ARCHIVED
 ```
 
-| Rule | Requirement |
-|---|---|
-| Lineage | `sourcePackageHash`, `pipeline_version`, `timestamp`, method id |
-| Source mutation | **Never** |
-| Proof strength | Hash-bound content linkage only; signatures/attestations separate (§15) |
-| Source access | Only via `VerifiedSpatialEvidencePackage` |
+Derivatives store `sourcePackageHash`, `pipeline_version`, `timestamp`, method id. Source package never mutates.
 
 ---
 
-## 4. Blueprint (normative topology)
+## 4. Topology & sensor layer
 
 ```text
-        [ Typed SpatialSensorAdapter implementations ]
-     (ARKit / AVFoundation / CoreMotion today;
-      GigE / thermal / structured-light later — if in support matrix)
-                           │
-     SpatialSampleEnvelope<CameraSample | DepthSample | …>
-              (AsyncThrowingStream — typed payloads)
-                           │
-              [ ClockSynchronizer ]
-                           │
-            [ SpatialSensorCoordinator ]
-                           │
-           [ Spatial Capture Session Builder ]  ← draft FSM
-                           │
-              [ Evidence Package Builder ]      ← PACKAGED boundary + closure
-                           │
-              SpatialEvidencePackage (immutable)
-                           ▲
-              EvidenceCustodyRecord (mutable)
-                           │
-        VerifiedSpatialEvidencePackage handle
-                           │
-     [ Derived product lifecycle — separate FSM ]
+Typed SpatialSensorAdapter implementations
+        → SpatialSampleEnvelope<Camera|Depth|Motion|Pose Sample>
+        → ClockSynchronizer
+        → SpatialSensorCoordinator (capability stages)
+        → Spatial Capture Session Builder (draft FSM)
+        → Evidence Package Builder (PACKAGED + closure)
+        → SpatialEvidencePackage + EvidenceCustodyRecord
+        → VerifiedSpatialEvidencePackage (Phase 4+ entry)
+        → Derived product FSM (separate)
 ```
 
----
+### 4.1 Typed envelopes (not mega-sample)
 
-## 5. Type-safe access control (honest guarantee)
+Prefer `CameraSensorAdapter` / `DepthSensorAdapter` / `MotionSensorAdapter` / `PoseSensorAdapter` emitting `AsyncThrowingStream<SpatialSampleEnvelope<Payload>, Error>`. Reject optional-heavy `SpatialFrameSample` soup.
 
-### 5.1 Normative production rule
+### 4.2 Capability stages
 
-Supported Phase 4+ **production entry points must require `VerifiedSpatialEvidencePackage`**. Direct URL- or draft-based consumption is **prohibited by module boundaries, API design, and executable architecture tests**.
+**Declared → Activated → Observed → Final Outcome** (final outcome frozen into immutable package snapshot at seal).
 
-### 5.2 Caveat (no overpromise)
+Non-LiDAR and degraded hardware are first-class: no fake depth; optional stream drops must not fail valid RGB/IMU sessions.
 
-Swift cannot make arbitrary filesystem access physically impossible. A developer could still intentionally bypass the intended API. The charter therefore requires:
+### 4.3 Time, frames, calibration
 
-- Module boundaries that do not export draft paths to Phase 4+ targets  
-- API surfaces typed to verified handles only  
-- Executable architecture / boundary tests that fail the build or gate when forbidden call patterns are introduced in supported modules  
+- Monotonic acquisition nanoseconds vs wall-clock epochs + correlation matrix  
+- Every \(4\times4\): source/destination frame, units, handedness, matrix storage order, optical-axis conventions, clock domain, authority  
+- Raw calibration vs derived adjustments separated; raw never overwritten in sealed package  
 
-“Physically unreadable folders” is **not** the control plane.
+### 4.4 Payload isolation
 
-### 5.3 Gateway shape (illustrative)
-
-```text
-protocol VerifiedSpatialEvidenceProviding {
-    func verifiedPackage(id: PackageID) async throws -> VerifiedSpatialEvidencePackage
-}
-
-struct VerifiedSpatialEvidencePackage { /* repository-issued opaque handle */ }
-```
-
-`ARCHIVED` remains consumable only when the repository still issues a verified-class handle.
+Canonical JSON = schema identity, capability final outcome, frame registry, clock correlation, sample indices, hash-indexed paths. Binaries external (RGB, depth, confidence, motion/pose).
 
 ---
 
-## 6. Mission & boundaries
+## 5. Hardware & capability validation matrix
 
-### 6.1 In scope
+Invariant 6 is meaningful only with a **checked-in, versioned** matrix (path fixed at kickoff, e.g. `Docs/Architecture/PHASE_3_SUPPORTED_DEVICE_MATRIX.md`).
 
-| ID | Workstream |
+| Target/Class | Minimum OS | RGB | Camera Poses | IMU / Motion | Depth / LiDAR | Simulator Behavior | Degraded / Unsupported Modes |
+|---|---|---|---|---|---|---|---|
+| Non-LiDAR iPhone | iOS 17.0+ | Yes | Monocular | Yes | None | Mock RGB / Motion | Graceful fallback (no depth stream) |
+| LiDAR iPhone / iPad | iOS 17.0+ | Yes | Full VIO | Yes | Hardware Depth | Mock Depth Stream | Explicit sensor recovery on frame drop |
+| Synthetic / Simulator | macOS / iOS Sim | Synthetic | Mock Trajectory | Synthetic | Generated Point Cloud | Deterministic Replay | Replay harness mode only |
+
+Physical / capability-class gate requires evidence across **all three** rows — one device is not enough.
+
+---
+
+## 6. Phase 3 completion criteria
+
+To declare Phase 3 complete and unfreeze production execution beyond the gated vertical slice, the system must demonstrate:
+
+### 6.1 Hardware matrix validation
+
+All three capability classes in §5 exercised with recorded evidence (or honest `BLOCKED_HOST_CAPABILITY` — never a false pass).
+
+### 6.2 Failure-path proof suite
+
+Automated verification proving expected failures across:
+
+- [ ] Hardware permission denials (Camera / Motion / Location)  
+- [ ] Unsupported hardware gracefully falling back or halting with explicit status  
+- [ ] In-flight interruptions (incoming calls, lock screen, background transitions)  
+- [ ] User-initiated cancellations during active capture or package serialization  
+- [ ] Low storage space / I/O write failures during draft streaming  
+- [ ] Corrupted payload detection and SHA-256 hash mismatches during verification  
+- [ ] Incomplete finalization / missing / orphan file checks (package closure)  
+- [ ] Stale repository revision (OCC) or schema version mismatches  
+
+Phase 3 is trustworthy when it **fails deterministically**, not only when it succeeds.
+
+### 6.3 Success-path summary
+
+Draft → validate → `PACKAGED` (closure) → custody `UNVERIFIED` → `VERIFIED` without mutating bytes → verified handle issuance → adapters only for matrix-listed sources → schema version present → OCC path green on authorized hosts.
+
+---
+
+## 7. Lineage, OCC & schema
+
+| Topic | Rule |
 |---|---|
-| **3.1** | Hardware-neutral typed adapters, envelopes, sources, `ClockSynchronizer`, coordinator |
-| **3.2** | Draft acquisition FSM, `PACKAGED` boundary, `EvidenceCustodyRecord`, verified gateway |
-| **3.3** | Calibration — raw vs derived separation |
-| **3.4** | Photogrammetry capture (RGB + pose / \(K\)) |
-| **3.5** | Depth/ranging capture (capability-gated) |
-| **3.6** | Manifest + binaries + OCC + package closure + schema versioning |
-| **3.7** | Versioned **Supported Device Matrix** + failure-path completion gates |
-
-### 6.2 Out of scope (Phases 4–8+)
-
-Mesh / SfM / densification / CAD verdicts / AI segmentation / certified metrology from phone LiDAR by default.
-
-### 6.3 Phase 0–2.3 integrity
-
-OCC, inspection envelope contracts, and recovery ADR trajectory remain authoritative. Spatial packaging extends them — it does not redefine them silently.
+| Derived lineage | `sourcePackageHash` + pipeline identity; hash ≠ authorship |
+| Package OCC | Extend S2-004 posture; callers supply `expectedRevision` |
+| Custody OCC | **Requires ADR** before implementation — must not overload `InspectionSession.revision` |
+| Schema | Spatial package schema version **distinct** from inspection envelope v1 and DeviceCapabilitySnapshot `1.0.0` |
+| Canonical JSON | Deterministic serialization for manifest digests (`Docs/Validation/CANONICAL_JSON.md`) |
 
 ---
 
-## 7. Layering & dependency rules
-
-| Layer | May depend on | Must not depend on |
-|---|---|---|
-| Domain / Evidence Repository | Spatial **contracts** only | Vendor SDKs |
-| Adapter implementations | Vendor SDKs | Domain stores, EDTS, Build Engine, twin pipelines |
-| Typed sources / coordinator | Contracts + capability stages | UI; vendor types in public API |
-| Package builder | Contracts + file I/O ports | Live sensor sessions; reconstruction engines |
-| Phase 4+ engines | `VerifiedSpatialEvidenceProviding` | Draft URLs; unverified packages |
-
-Existing scaffolding (`App/Spatial/*`, `App/Motion/*`, `App/Calibration/*`, `DeviceCapabilitySnapshotProviding`) becomes adapter/capability backing — still SPM-gated until implementation is authorized.
-
----
-
-## 8. Hardware-neutral typed sensor layer
-
-### 8.1 Design rule
-
-Apple frameworks are the **first adapter implementations**, not the domain vocabulary. Future hardware fits only if listed (or explicitly extended) in the **Supported Device Matrix** (§14).
-
-### 8.2 Rejected: optional-heavy mega-sample
-
-Prefer typed adapters emitting `SpatialSampleEnvelope<CameraSample>`, `SpatialSampleEnvelope<DepthSample>`, etc., over `AsyncThrowingStream` (or equivalent throwing sequences).
-
-### 8.3 Composable sources
-
-`CameraSource`, `DepthSource`, `MotionSource`, `PoseSource`, `ClockSynchronizer` — compose under `SpatialSensorCoordinator`. No monolithic `SensorManager` as sole API.
-
----
-
-## 9. Capability & interruption lifecycle
-
-Four stages: **Declared → Activated → Observed → Final Outcome** (final outcome frozen into the immutable package capability snapshot at seal).
-
-Non-LiDAR and degraded hardware are first-class: no fake depth; optional stream drops must not fail valid RGB/IMU sessions; interruptions mark sample ranges without rewriting sealed bytes.
-
----
-
-## 10. Time, frames & calibration
-
-### 10.1 Clocks
-
-Monotonic acquisition nanoseconds for ordering/sync; wall-clock epochs for audit anchors. Correlation matrix required (method, residual, valid interval). Wall clock is never the sole high-rate ordering key.
-
-### 10.2 Frames
-
-Every \(4\times4\) carries source/destination frame ids, units, handedness, matrix storage order, optical-axis conventions when cameras are involved, timestamp + clock domain, authority, and quality/uncertainty when available. Anonymous matrices rejected.
-
-### 10.3 Calibration
-
-Raw vendor calibration is evidence (or hash-referenced sidecar). Derived/reprocessed adjustments are separate lineage artifacts — never overwrite raw calibration in the sealed package.
-
----
-
-## 11. Payload isolation, closure & hashing
-
-### 11.1 Manifest vs binaries
-
-Canonical JSON: schema/package identity, capability final-outcome snapshot, frame registry, clock correlation, sample indices, hash-indexed paths. **No mutable custody status.**
-
-External payloads: RGB, depth, confidence, motion/pose batches, binary calibration sidecars.
-
-### 11.2 Package closure invariant
-
-A finalized Spatial Evidence Package is **closed under its canonical manifest**:
-
-- every referenced artifact exists;  
-- every artifact matches its declared byte length and SHA-256 (or versioned algo);  
-- every authoritative payload is referenced **exactly once**;  
-- temporary, staging, and orphan files are excluded;  
-- package verification is **independent** of mutable custody status.
-
-Verification recomputes closure + hashes and updates **custody only**.
-
-### 11.3 Suggested layout
-
-```text
-spatial-package/
-  manifest.json
-  payloads/{rgb,depth,confidence,motion,pose}/…
-  calibration/…
-```
-
-### 11.4 OCC
-
-Package commits use repository-assigned revision tokens and `expectedRevision`. Rejected commits are side-effect free. Swift `Hasher` / `hashValue` forbidden for persisted identity.
-
----
-
-## 12. Schema longevity
-
-Every package and record must declare a **schema version and semantic contract**.
-
-| Requirement | Rule |
-|---|---|
-| Schema version | Present on every manifest and custody/derived record schema in use |
-| Backward compatibility | Documented policy per major/minor |
-| Unknown fields | Explicit ignore-or-fail policy (no silent semantic invention) |
-| Unsupported version | **Fail explicitly** |
-| Migration | Versioned, testable, recorded |
-| Semantics | Historical coordinate, timing, calibration, and capability meanings must **never** be silently reinterpreted under newer assumptions |
-
-A future Phase 6 implementation must not guess what a 2026 transform meant.
-
----
-
-## 13. Lineage (hash-bound, not “cryptographic authorship”)
-
-| Claim | Allowed? |
-|---|---|
-| Derivative references parent by content hash | **Required** |
-| Hash proves the bytes of the source package | **Yes** (given algorithm + closure) |
-| Hash alone proves who created the derivative | **No** |
-| Hash alone provides non-repudiation | **No** |
-
-Future authenticity (signatures, attestations, notarized custody) → Decision Register / ADR — not implied by SHA-256 references.
-
----
-
-## 14. Supported Device Matrix
-
-“All supported hardware sources operate behind hardware-neutral adapters” is meaningful **only** with a checked-in, versioned matrix.
-
-### 14.1 Required fields (mechanism)
-
-The architecture requires a versioned support matrix (path to be fixed at implementation kickoff, e.g. `Docs/Architecture/PHASE_3_SUPPORTED_DEVICE_MATRIX.md` or equivalent JSON) covering at least:
-
-| Field | Purpose |
-|---|---|
-| Device family / class | e.g. non-LiDAR iPhone class, LiDAR iPhone/iPad class |
-| Minimum OS | Floor for that row |
-| RGB availability | supported / unsupported / degraded |
-| Pose availability | idem |
-| Motion (IMU) availability | idem |
-| Depth / LiDAR availability | idem |
-| Simulator / synthetic adapter behavior | what is emulated vs refused |
-| Degraded modes | thermal, background, permission-limited |
-| Unsupported modes | explicit refusals |
-| Physical validation status | unvalidated / validated / blocked |
-
-### 14.2 Physical-device / capability-class gate
-
-One device is **not** enough. At minimum, Phase 3 completion validation must distinguish:
-
-1. A **supported non-LiDAR iPhone** class  
-2. A **supported LiDAR-capable iPhone or iPad** class  
-3. **Simulator or synthetic adapter** validation  
-
-This proves optional depth is truly modeled rather than accidentally assumed.
-
----
-
-## 15. Completion criteria (success **and** failure paths)
-
-Phase 3 is not complete merely because a good capture works. The platform is trustworthy when it **fails deterministically**.
-
-### 15.1 Success-path gates (summary)
-
-- Draft → validate → `PACKAGED` with closure  
-- Custody `UNVERIFIED` → `VERIFIED` without mutating bytes  
-- Verified handle issuance; inspection binding only to verified ids  
-- Adapters for matrix-listed sources; high-frequency data externalized  
-- Schema version present; OCC commit path green on authorized hosts  
-
-### 15.2 Failure-path gates (required)
-
-Executable / harness evidence for deterministic handling of at least:
-
-| Failure class | Expected posture |
-|---|---|
-| Permission denial | No silent partial engineering package; labeled refusal / draft disposition |
-| Non-LiDAR device | Depth unsupported honest; RGB/IMU path per matrix |
-| Interruption and resume | Ranges marked; no sealed-byte rewrite |
-| Cancellation | `CANCELLED` / no false `VERIFIED` |
-| Low storage or write failure | Fail closed; no half-sealed “verified” package |
-| Corrupted artifact detection | `VERIFICATION_FAILED` or `PACKAGE_QUARANTINED`; bytes unchanged |
-| Hash mismatch | idem |
-| Incomplete finalization | Never `PACKAGED` / never verified handle |
-| Stale repository revision | OCC reject; side-effect free |
-| Background transition | Interruption policy; no corrupt seal |
-
-### 15.3 Host honesty
-
-Missing Xcode / device capability → `BLOCKED_HOST_CAPABILITY` (or equivalent) — never a false pass.
-
----
-
-## 16. End-to-end data flow
-
-```text
-1. Request spatial evidence
-2. Declared → Activated capabilities (matrix-aware)
-3. CAPTURING via typed throwing envelope streams
-4. CAPTURE_COMPLETE → VALIDATING
-   (or INTERRUPTED / CANCELLED / VALIDATION_FAILED / DRAFT_QUARANTINED)
-5. Seal → PACKAGED (closure + content hash; immutable)
-6. Custody UNVERIFIED → VERIFIED | VERIFICATION_FAILED | PACKAGE_QUARANTINED
-7. Issue VerifiedSpatialEvidencePackage only on VERIFIED (or archived-verified policy)
-8. Bind / export / Phase 4+ only via verified handle
-9. Derived: DERIVATION_REQUESTED → … (hash-bound lineage; source untouched)
-10. Optional custody ARCHIVED
-```
-
----
-
-## 17. Implementation sequence (post-acceptance, post-audit)
+## 8. Implementation sequence (post-audit, post-ADR)
 
 1. Shared domain contracts (ids, clocks, frames, envelopes, capability stages, schema version types)  
-2. Draft acquisition state machine (including scoped draft quarantine)  
-3. Package builder + closure + content hashing (manifest without custody fields)  
-4. `EvidenceCustodyRecord` + OCC (`UNVERIFIED`/`VERIFIED`/…)  
-5. `VerifiedSpatialEvidenceProviding` + module/boundary/architecture tests  
+2. Draft acquisition state machine (scoped draft quarantine)  
+3. Package builder + closure + hashing (manifest without custody fields)  
+4. `EvidenceCustodyRecord` + OCC (namespaced custody vocabulary)  
+5. `VerifiedSpatialEvidenceProviding` + module/architecture tests  
 6. `ClockSynchronizer` + correlation records  
 7. First Apple adapters (Camera / Motion / Pose) + raw calibration lock  
-8. Depth path + **Supported Device Matrix** rows for non-LiDAR and LiDAR classes  
+8. Depth path + matrix rows for non-LiDAR and LiDAR classes  
 9. Simulator/synthetic + failure-path harness + multi-class device evidence  
 
 ---
 
-## 18. Implementation gates (coding not authorized yet)
+## 9. Implementation gates
 
-All must hold:
+All must hold before Phase 3 production coding:
 
 1. Sprint 2.3 Mac `xcodebuild` on `Phase1StillCapture` **PASSED** and recorded  
 2. This charter reaches `ARCHITECTURE_ACCEPTED`  
-3. **Architecture audit** vs Phase 0–2.3 complete; conflicts resolved or ADRs filed  
-4. ADRs filed where Decision Register marks `REQUIRES_ADR_BEFORE_IMPLEMENTATION`  
-5. First vertical slice scope approved explicitly  
+3. Formal Architecture Audit closed (conflicts resolved or ADRs filed)  
+4. P0 ADRs from the audit Decision Register filed  
+5. First vertical slice scope approved (synthetic driver preferred)  
 
 ---
 
-## 19. Decision Register
+## 10. Decision Register (charter-level)
 
-| Topic | Classification | Notes |
-|---|---|---|
-| S2-004 OCC / `expectedRevision` | `LOCKED_FROM_EXISTING_CONTRACT` | |
-| Inspection snapshot hashing / envelope v1 | `LOCKED_FROM_EXISTING_CONTRACT` | Do not conflate with spatial schema |
-| `GUIDANCE_ESTIMATE` default authority | `LOCKED_FROM_EXISTING_CONTRACT` | |
-| Coordinate / timestamp standards | `LOCKED_FROM_EXISTING_CONTRACT` | |
-| Determinism boundary (representation ≠ physical replay) | `PROPOSED_FOR_PHASE_3` | |
-| Custody ≠ package bytes; `PACKAGED` boundary | `PROPOSED_FOR_PHASE_3` | |
-| Dual quarantine scopes | `PROPOSED_FOR_PHASE_3` | |
-| Package closure invariant | `PROPOSED_FOR_PHASE_3` | |
-| Schema longevity / explicit fail on incompatible version | `PROPOSED_FOR_PHASE_3` | |
-| Hash-bound lineage (not authorship) | `PROPOSED_FOR_PHASE_3` | |
-| Typed verified gateway + architecture tests | `PROPOSED_FOR_PHASE_3` | |
-| Typed envelopes + throwing streams | `PROPOSED_FOR_PHASE_3` | |
-| Capability stages Declared→Final Outcome | `PROPOSED_FOR_PHASE_3` | |
-| Supported Device Matrix mechanism + fields | `PROPOSED_FOR_PHASE_3` | |
-| Failure-path completion gates | `PROPOSED_FOR_PHASE_3` | |
-| Spatial package schema version id | `REQUIRES_ADR_BEFORE_IMPLEMENTATION` | |
-| Hash algorithm id versioning | `REQUIRES_ADR_BEFORE_IMPLEMENTATION` | |
-| RGB↔depth sync tolerance | `REQUIRES_ADR_BEFORE_IMPLEMENTATION` | |
-| Device-floor engineering vs guidance modes | `REQUIRES_ADR_BEFORE_IMPLEMENTATION` | |
-| Custody OCC / concurrency tokens | `REQUIRES_ADR_BEFORE_IMPLEMENTATION` | |
-| Digital signatures / attestations for lineage authorship | `REQUIRES_ADR_BEFORE_IMPLEMENTATION` | Separate from hashing |
-| Unknown-field & migration policy details | `REQUIRES_ADR_BEFORE_IMPLEMENTATION` | |
-| Mesh / SfM / densification / CAD / AI | `DEFERRED_TO_LATER_PHASE` | |
-| Non-matrix hardware (GigE, thermal, …) | `DEFERRED_TO_LATER_PHASE` | Protocol must not block later rows |
-| Certified metrology from phone LiDAR | `DEFERRED_TO_LATER_PHASE` | |
-| Full journal replay / multi-stage quarantine UX | `DEFERRED_TO_LATER_PHASE` | |
+| Topic | Classification |
+|---|---|
+| S2-004 OCC / S2-002 snapshot hashing / envelope v1 / `GUIDANCE_ESTIMATE` / frame & time standards / soft-delete | `LOCKED_FROM_EXISTING_CONTRACT` |
+| Determinism boundary; `PACKAGED` vs custody; scoped quarantines; package closure; schema longevity; hash-bound lineage; typed gateway; typed envelopes; capability stages; hardware matrix; failure-path suite | `PROPOSED_FOR_PHASE_3` |
+| Capture custody vocabulary vs EDTS `PACKAGE_QUARANTINED`; `PACKAGED` vs `.edts-pkg` / `CAPTURE_SEALED`; inspection binding to verified spatial ids; custody OCC; spatial schema id; hash algo id for closure; capability stages vs `DeviceCapabilitySnapshot`; RGB↔depth sync; signatures/attestations | `REQUIRES_ADR_BEFORE_IMPLEMENTATION` |
+| Mesh/SfM/CAD/AI; non-matrix hardware; certified phone-LiDAR metrology; full journal / multi-stage quarantine UX | `DEFERRED_TO_LATER_PHASE` |
+
+Full conflict detail: `Docs/Architecture/PHASE_3_FORMAL_ARCHITECTURE_AUDIT.md`.
 
 ---
 
-## 20. Document control
+## 11. Document control
 
 | Change | Rule |
 |---|---|
-| Claim bit-for-bit repeatability of physical captures | **Rejected** — use determinism boundary |
-| Call hash lineage “cryptographic authorship / non-repudiation” | **Rejected** — hash-bound content linkage only |
+| Claim bit-for-bit repeatability of physical captures | **Rejected** |
+| Treat hash lineage as authorship / non-repudiation | **Rejected** |
 | Store mutable custody inside hashed manifest | **Forbidden** |
-| List `PACKAGED` as a mutable custody status | **Rejected** — boundary event / package condition |
-| Ambiguous single `QUARANTINED` across draft and package | **Rejected** — scoped names |
+| List `PACKAGED` as a mutable custody status | **Rejected** |
+| Emit EDTS `PACKAGE_QUARANTINED` from Capture custody | **Forbidden** |
+| Ambiguous single `quarantined` across draft, media soft-delete, and custody | **Rejected** — scoped names |
 | Promise OS-enforced “physically unreadable” drafts | **Rejected** — module/API/architecture-test guarantee |
 | “Supported hardware” without versioned matrix | **Rejected** |
-| Declare Phase 3 complete on success-path only | **Rejected** — failure-path gates required |
-| Single-device validation for capability model | **Rejected** — multi-class gate |
+| Complete Phase 3 on success-path only | **Rejected** |
+| Single-device validation for capability model | **Rejected** |
 | Silent reinterpretation of historical schemas | **Forbidden** |
-| Single FSM with `REPROCESSED` on source package | **Rejected** |
-| Mega optional `SpatialFrameSample` | **Rejected** |
 | Mesh/SfM inside Phase 3 | **Rejected** |
 | Mutate sealed package bytes in place | **Forbidden** |
 
-**Classification:** `PHASE_3_ARCHITECTURE_DRAFT_IMPLEMENTATION_PENDING`
+**Classification:** `PHASE_3_DEFINITIVE_CHARTER_IMPLEMENTATION_PENDING`
 
-**Post-acceptance next step:** architecture audit vs Phase 0–2.3 → ADR gap list → first vertical slice approval — **not** immediate production coding.
+**Post-acceptance next step:** Formal Architecture Audit → ADR gap list → synthetic vertical-slice harness approval — **not** immediate production coding.
