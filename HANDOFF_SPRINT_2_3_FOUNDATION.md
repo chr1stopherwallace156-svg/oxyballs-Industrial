@@ -2,17 +2,25 @@
 
 | Field | Value |
 |---|---|
-| Capture tip | `59a59cc` |
+| Capture tip | `fe5b66e` |
 | Industrial branch | `cursor/sprint-2-3-foundation-audit-d881` |
 | ZIP | `DOWNLOAD-elektron-capture-ios-sprint-2-3-foundation.zip` |
-| SHA-256 | `1a56e01fe000b4314d6c1da6a476be58f3e8276d398ae762ca6a5e91b6588885` |
+| SHA-256 | `b458efc28ce5a98ee8d35336a67ea267b3a35ddbb2109054408a4879ec384d2f` |
 
-## What landed
+## What landed (Phases A–E)
 
-1. **Foundation audit** (code-authoritative): `Docs/Capture/SPRINT_2_3_FOUNDATION_AUDIT.md`
-2. **Revision OCC**: `SessionRevisionGuard` + `staleRevisionConflict` at current/multi-session stores
-3. **Recovery ADR** (policy only): `Docs/Decisions/ADR-SESSION-RECOVERY-AND-QUARANTINE.md` — no journal engine yet
-4. Package gate: **322** tests executed, **1** skipped, **0** failures (`make hardening-verify`); `xcodebuild` NOT RUN
+| Phase | Artifact |
+|---|---|
+| A | `Docs/Capture/SPRINT_2_3_PHASE_A_WRITER_INVENTORY.md` — complete durable writer map |
+| B | `Docs/Decisions/ADR-SESSION-REVISION-OCC.md` (S2-004) — `expectedRevision` + repository-only `N+1` |
+| C | `save(_:expectedRevision:)` at current/multi-session stores; side-effect-free reject; interleaving tests |
+| D | Recovery ADR + **monotonicity** (`R < H` refuse overwrite) |
+| E | `Docs/Capture/SPRINT_2_3_PHASE_E_TARGET_AND_CI_STATUS.md` — adversarial Xcode targets ABSENT; Mac CI PENDING |
+
+## Gate
+
+- `make hardening-verify`: **325** executed, **1** skipped, **0** failures
+- `xcodebuild`: **NOT RUN**
 
 ## Download
 
