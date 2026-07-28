@@ -1,31 +1,30 @@
-# Sprint 2.3 — Phase1StillCapture errorText build-gate repair
+# Sprint 2.3 — Phase1StillCapture Mac build-gate repairs
 
 | Field | Value |
 |---|---|
-| Capture tip | `40e25e6` |
-| Status | Package tests **PASSED** (338 executed, 1 skipped, 0 failures). Mac `xcodebuild` **BLOCKED_HOST_CAPABILITY** on Linux cloud agent. |
+| Capture tip | `0bf622d` |
+| Package tests | **PASSED** (338 executed, 1 skipped, 0 failures) |
+| Mac `xcodebuild` | Re-run on Mac (Linux host = `BLOCKED_HOST_CAPABILITY`) |
 | ZIP | `DOWNLOAD-elektron-capture-ios-sprint-2-3-xcodebuild-errortext.zip` |
 
-## Root cause
+## Repair 1 — private(set) errorText (accepted)
 
-`InspectionSessionViewModel.errorText` is `@Published private(set)`, but presentation code assigned it from outside the type (`AppSessionContainer`, `InspectionReviewView`), which fails compilation under Xcode.
+- Kept `@Published private(set) var errorText`
+- Added `presentError(_:)` / `clearError()`
+- Replaced external writes in `AppSessionContainer` / `InspectionReviewView`
 
-## Repair
+## Repair 2 — SwiftUI type-check timeout
 
-- Keep `private(set)`
-- Add `presentError(_:)` / `clearError()`
-- Replace external writes with those methods
-- Leave `EvidenceLibraryViews` model `errorText` writable (unrelated type)
+**File:** `Apps/Phase1StillCapture/EvidenceLibraryViews.swift` (`InspectionEvidenceGroupDetailView`)
 
-## External mutations replaced
+**Why the checker struggled:** one `body` expression combined a large `List` ViewBuilder (nested `ForEach` / `Section` / `Menu` / `Task` / `EvidenceActionModifier`) with a long chain of navigation, toolbar, confirmationDialog, sheet, and alert modifiers. Generic inference cost exploded; Xcode reported the failure near the add-required-photo `Button` (~line 481).
 
-1. `Apps/Phase1StillCapture/AppSessionContainer.swift` — identity-divergence → `presentError(...)`
-2. `Apps/Phase1StillCapture/InspectionReviewView.swift` — alert Binding set → `clearError()`
-3. `Apps/Phase1StillCapture/InspectionReviewView.swift` — OK button → `clearError()`
+**What changed:** split into staged computed properties and `@ViewBuilder` helpers (`detailRoot`, `inspectionList`, `pointSection`, `pointActionsMenu`, `detailWithNavigation`, `detailWithSheetsAndAlerts`, `detailWithConfirmationDialogs`). Behavior preserved.
 
-## Mac gate (run on Mac)
+## Mac gate
 
 ```bash
+cd /path/to/elektron-capture-ios
 set -o pipefail
 xcodebuild \
   -project Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj \
@@ -34,7 +33,3 @@ xcodebuild \
   CODE_SIGNING_ALLOWED=NO \
   clean build 2>&1 | tee build.log
 ```
-
-## Classification (this host)
-
-`SPRINT_2_3_MAC_XCODEBUILD_FAILED` — blocked: host lacks `xcodebuild` (`BLOCKED_HOST_CAPABILITY`). Repair is compiled-in Capture tip `40e25e6`; Mac must re-run the gate to claim PASSED.
