@@ -9,29 +9,41 @@
 
 | Field | Value |
 |---|---|
-| **Document ID** | `ELEK-QUAL-STD-0000-v1.0` |
+| **Document ID** | `ELEK-QUAL-STD-0000-v1.0` (authored) · governed as `ELEK-QUAL-STD-0000` |
+| **Repository version** | `0.1.0` |
+| **Lifecycle state** | `CONTROLLED_BASELINE` |
+| **Validation state** | `PENDING_VALIDATION` |
 | **Classification** | Enterprise Engineering Standard / Single Source of Truth |
 | **Authored target status** | Validated Release (v1.0) — *see Repository Governance Status below* |
 | **Effective date (authored)** | 2026-07-28 |
 | **Owner** | ELEKTRON Enterprise Architecture & Standards Board (EASB) |
+| **Acting authority** | Founder / Acting Enterprise Architecture Authority |
 | **Canonical source** | `docs/standards/EES/ELEK-QUAL-STD-0000.md` (this file) |
 
-> ### ⚠ Repository Governance Status — DRAFT (not yet Validated)
+> **⚠ Repository Governance Status — CONTROLLED_BASELINE (validation pending)**
 >
 > The document body below preserves the **authored** content verbatim, including its
 > self-declared *"Validated Release (v1.0)"* target status. Within **this
-> repository's** lifecycle (see §3.1) the artifact is currently **DRAFT**.
+> repository's** lifecycle the artifact is a **CONTROLLED_BASELINE** at version
+> **0.1.0**, with validation state **PENDING_VALIDATION** (see §3.1).
 >
-> By the EES's **own** rules it cannot be marked VALIDATED yet: §3.1 reserves
-> `VALIDATED (v1.0.0+)` for empirically verified, approved designs, and §7.2 requires
-> the sign-off chain **Author (Lead Architect) → Reviewer (Director of Quality) →
-> Final Approval (Enterprise Review Board)**. None of those approvals has been
-> recorded in-repo, and no validation evidence artifact is attached. Per Principle 1
-> (*Evidence Before Assumption*), an unbacked "Validated" claim is an assumption.
+> A CONTROLLED_BASELINE is a reviewed, change-controlled working target — **not** a
+> VALIDATED release. By the EES's **own** rules it cannot be marked VALIDATED yet:
+> §3.1 reserves `VALIDATED (v1.0.0+)` for empirically verified, approved designs, and
+> §7.2 requires the sign-off chain **Author (Lead Architect) → Reviewer (Director of
+> Quality) → Final Approval (Enterprise Architecture & Standards Board, EASB)**. None
+> of those approvals has been recorded in-repo, and no validation evidence artifact is
+> attached. Per Principle 1 (*Evidence Before Assumption*), an unbacked "Validated"
+> claim is an assumption.
+>
+> This baseline was promoted under the authority of the **Founder / Acting Enterprise
+> Architecture Authority** (Decision D-019) — an honest interim authority, not a
+> fabricated staffed board.
 >
 > Machine-readable status lives in [`document-metadata.json`](document-metadata.json)
-> (`lifecycle_state: "DRAFT"`, all approvals `null`). Promotion to VALIDATED requires
-> the §7.2 approvals plus recorded evidence — see [`HANDOFF.md`](HANDOFF.md) and
+> (`lifecycle_state: "CONTROLLED_BASELINE"`, `validation_state: "PENDING_VALIDATION"`,
+> all §7.2 approvals `null`). Promotion to VALIDATED requires the §7.2 approvals plus
+> recorded evidence — see [`HANDOFF.md`](HANDOFF.md) and
 > [`KNOWN_LIMITATIONS.md`](KNOWN_LIMITATIONS.md).
 
 ---
@@ -332,17 +344,18 @@ constraints designed to protect system integrity.
 
 ---
 
-## Section 7 — Enterprise Governance & Review Board
+## Section 7 — Enterprise Governance & Standards Board
 
-### 7.1 Enterprise Architecture Review Board (ERB)
+### 7.1 Enterprise Architecture & Standards Board (EASB)
 
-The Enterprise Architecture Review Board (ERB) is the governing body authorized to
-maintain enterprise standards, enforce configuration discipline, and approve baseline
-promotions.
+The Enterprise Architecture & Standards Board (EASB) is the governing body authorized
+to maintain enterprise standards, enforce configuration discipline, and approve
+baseline promotions. *(Currently constituted as the Founder / Acting Enterprise
+Architecture Authority pending a staffed board — see `document-metadata.json`.)*
 
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
-│           ENTERPRISE ARCHITECTURE REVIEW BOARD  (ERB)                  │
+│              ENTERPRISE ARCHITECTURE & STANDARDS BOARD (EASB)              │
 ├──────────────────────────────────────────────────────────────────────┤
 │  MEMBERSHIP                                                            │
 │    • Chief Executive Officer          Executive Lead                   │
@@ -363,11 +376,11 @@ promotions.
 
 | Document / Asset Class | Target State | Author / Originator | Reviewer | Final Approval Authority |
 |---|---|---|---|---|
-| Enterprise Standards (EES) | Validated v1.0 | Lead Architect | Director of Quality | Enterprise Review Board (ERB) |
+| Enterprise Standards (EES) | Validated v1.0 | Lead Architect | Director of Quality | Enterprise Architecture & Standards Board (EASB) |
 | WorkCore Platform Specs | Validated v1.0 | Powertrain Lead | Chief Technology Officer | Chief Operating Officer (COO) |
 | Software Schemas & EDP | Validated v1.0 | Software Architect | Lead Data Engineer | Chief Technology Officer (CTO) |
 | Operational Shop SOPs | Validated v1.0 | Manufacturing Lead | Shop Floor Manager | VP of Manufacturing |
-| Engineering Change Order | Active ECO | Lead Engineer | Quality Engineering | ERB Representative |
+| Engineering Change Order | Active ECO | Lead Engineer | Quality Engineering | EASB Representative |
 
 ---
 
@@ -387,9 +400,10 @@ promotions.
 - **ePTO (Electric Power Take-Off):** An onboard high-voltage inverter and motor
   system that drives hydraulic pumps or auxiliary tools without idling an internal
   combustion engine.
-- **Enterprise Architecture Review Board (ERB):** The executive engineering body
+- **Enterprise Architecture & Standards Board (EASB):** The executive engineering body
   holding sole authority over document promotions, standard revisions, and
-  cross-domain change orders.
+  cross-domain change orders. Currently constituted as the Founder / Acting Enterprise
+  Architecture Authority pending a staffed board.
 - **Fleet Readiness Index (FRI):** An algorithmic score generated by FIOS evaluating
   a commercial fleet's operational, financial, and electrical grid suitability for
   electrification.

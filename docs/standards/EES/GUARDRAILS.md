@@ -19,14 +19,18 @@ Non-negotiable negative constraints protecting the integrity of this volume, per
 
 ## Volume-specific guardrails (EES governance)
 
-- **NEVER** treat the hosted or `generated/` HTML as the canonical source. The
-  Markdown master is authoritative; the HTML is derived.
-- **NEVER** mark this standard `VALIDATED` (or set `document_version` to a `1.x.x`
-  release line) unless all three §7.2 approvals are recorded in
-  `document-metadata.json` **and** validation evidence is attached. Absent evidence, a
-  "Validated" label is a prohibited fabricated approval.
-- **NEVER** edit the authored doctrine text to resolve an ambiguity (e.g. EASB vs
-  ERB) silently — surface it in `KNOWN_LIMITATIONS.md` and change only by proposal.
+- **NEVER** treat the hosted or `generated/` HTML as the canonical source, and
+  **NEVER** hand-edit the generated HTML. The Markdown master is authoritative; the
+  HTML is derived — regenerate it with `make standards-generate`. (`make
+  standards-verify` check 11 byte-compares and will fail on any drift.)
+- **NEVER** mark this standard `VALIDATED` (or set `version` to a `1.x.x` release line)
+  unless all three §7.2 approvals are recorded in `document-metadata.json` **and**
+  validation evidence is attached. Absent evidence, a "Validated" label is a prohibited
+  fabricated approval. (The verifier enforces this: a `0.x` version cannot be VALIDATED,
+  and VALIDATED requires all approvals non-null.)
+- **NEVER** edit the authored doctrine text to resolve an ambiguity silently — surface
+  it in `KNOWN_LIMITATIONS.md` and change only by proposal / Decision entry (as the
+  EASB/ERB naming was resolved via D-019 / EES-ADR-0005).
 - **NEVER** add, rename, or move a repository directory to house EES content without a
   Decision Register entry and paired `STRUCTURE_FREEZE.md` + `README.md` updates
   (structure freeze D-016).

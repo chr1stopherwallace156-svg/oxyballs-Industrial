@@ -8,53 +8,53 @@ the volume-scoped handoff; the repository-wide handoff is
 
 | | |
 |---|---|
-| Lifecycle state | **DRAFT** (repo-governing; per EES §3.1) |
+| Version | **0.1.0** |
+| Lifecycle state | **CONTROLLED_BASELINE** (per EES §3.1, change-controlled BASELINE band) |
+| Validation state | **PENDING_VALIDATION** — no evidence attached |
+| Authority | Founder / Acting Enterprise Architecture Authority (honest interim) |
 | Authored target | "Validated Release (v1.0)" |
-| Validation state | **PENDING** — no evidence attached |
-| Approvals (§7.2) | Author `null` · Reviewer `null` · ERB `null` |
+| Approvals (§7.2) | Author `null` · Reviewer `null` · EASB `null` |
 | Branch | `claude/docs-structure-large-projects-b6vxx5` |
-| Introduced by | Decision D-018 |
+| Introduced / promoted by | Decision D-018 / D-019 |
+| Phase-0 gate | `make standards-verify` = 12/12 PASS → `PHASE_0_EES_CONTROLLED_BASELINE_COMPLETE` |
 
-## What was done
+## What was done (Phase 0)
 
 - Established the EES as canonical, version-controlled source under
   `docs/standards/EES/` (Markdown master + machine-readable metadata + two JSON
-  schemas + the 11-artifact companion ecosystem).
-- Preserved the authored content verbatim in meaning; added only governance framing.
-- Recorded the standard as **DRAFT** rather than Validated, with the reason encoded in
-  both the master's banner and `document-metadata.json`.
-- Filed D-018 and updated `STRUCTURE_FREEZE.md` + `README.md` to admit the new
-  `docs/standards/` directory to the frozen layout.
-- Re-labeled the hosted HTML as a derived presentation artifact and vendored a copy
-  under `generated/`.
+  schemas + the 11-artifact companion ecosystem). [D-018]
+- Promoted to **CONTROLLED_BASELINE / v0.1.0 / PENDING_VALIDATION** with distinct
+  metadata fields; recorded the honest interim promoting authority. [D-019]
+- **Normalized the governing body to EASB** across master, metadata, and generated
+  HTML; preserved historical records. [EES-ADR-0005]
+- Added a **deterministic HTML generator** (`scripts/generate_standards_html.py`) and a
+  **12-check local verifier** (`scripts/verify_standards.sh` +
+  `verify_standards_checks.py`), exposed as `make standards-verify`; CI at
+  `.github/workflows/lint-standards.yml` calls only that target.
 
-## Open risks
+## Open risks / still-open items
 
-1. **Internal naming inconsistency (owner-authored).** The masthead names the owner
-   **EASB** (Enterprise Architecture & Standards *Board*) while §7 names the governing
-   body **ERB** (Enterprise Architecture Review *Board*). Preserved as-authored;
-   **not** silently reconciled. Owner must confirm whether these are one body (typo)
-   or two distinct bodies. Tracked in `KNOWN_LIMITATIONS.md`.
-2. **Self-referential validation.** The EES defines the very approval process (§7.2)
-   that would validate the EES. Bootstrapping v1.0 requires the owner to act as / seat
-   the ERB and record the first sign-off.
-3. **No enforcement yet.** The JSON schemas exist but nothing runs them in CI, so the
-   guardrails and metadata are advisory until wired up (see `FUTURE_WORK.md`).
+1. **Not validated.** Still a controlled baseline; the §7.2 chain (Author → Director of
+   Quality → EASB) has not run and no evidence is attached. VALIDATED is gated on that.
+2. **Self-referential validation.** The EES defines the §7.2 process that would
+   validate the EES; bootstrapping VALIDATED v1.0 requires seating/acting as the EASB
+   and recording the first sign-off with evidence.
+3. **Generator/validator are bounded.** Both cover the constructs currently in use
+   (Markdown subset; draft-07 subset) — extend them if the master gains new constructs
+   or the schema gains new keywords (`KNOWN_LIMITATIONS.md` #5, #7).
 
 ## Immediate next steps (owner-gated)
 
-1. Resolve the EASB vs ERB naming question.
-2. Decide the true starting lifecycle state (keep DRAFT, or promote to BASELINE as a
-   reviewed working target — still short of VALIDATED).
-3. If/when the ERB approval chain is exercised, record the three §7.2 sign-offs in
-   `document-metadata.json`, attach the validation evidence, and only then promote to
-   VALIDATED (via an ECO / Decision entry).
-4. Optional: add CI to validate `document-metadata.json` against its schema and to
-   regenerate the HTML from the Markdown master.
+1. When ready to validate: exercise the §7.2 sign-off chain, record the three approvals
+   in `document-metadata.json` (each with role/identity/date/evidence), attach the
+   validation evidence artifact(s), and promote to VALIDATED via an ECO / Decision
+   entry. The verifier will refuse VALIDATED until all three approvals are non-null.
+2. Optional hardening in `ROADMAP.md` (e.g. tighten OBJ-ID patterns against real data;
+   extend the generator/validator as needed).
 
 ## Do not
 
-- Do not treat `generated/…​.html` as the source.
+- Do not treat `generated/ELEK-QUAL-STD-0000.html` as the source, or hand-edit it —
+  regenerate via `make standards-generate`.
 - Do not mark the standard VALIDATED without the §7.2 approvals + evidence.
-- Do not edit the authored content to "fix" the EASB/ERB inconsistency without owner
-  direction — surface it, don't silently rewrite.
+- Do not begin Volume I as part of this phase.

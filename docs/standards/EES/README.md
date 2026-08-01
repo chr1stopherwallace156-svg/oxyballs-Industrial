@@ -17,18 +17,32 @@ architectural, and business documentation across the ELEKTRON enterprise ecosyst
 3. [`ARCHITECTURAL_INTENT.md`](ARCHITECTURAL_INTENT.md) — why it is shaped this way.
 4. [`HANDOFF.md`](HANDOFF.md) — current status, open risks, next steps.
 
-## Current status — DRAFT (not Validated)
+## Current status — CONTROLLED_BASELINE (validation pending)
 
 | | |
 |---|---|
-| Lifecycle state (repo) | **DRAFT** — see [`document-metadata.json`](document-metadata.json) |
+| Version | **0.1.0** |
+| Lifecycle state (repo) | **CONTROLLED_BASELINE** — see [`document-metadata.json`](document-metadata.json) |
+| Validation state | **PENDING_VALIDATION** |
+| Authority | Founder / Acting Enterprise Architecture Authority (honest interim) |
 | Authored target status | "Validated Release (v1.0)" — *target, not achieved* |
-| Why not Validated | §7.2 sign-off chain (Author → Director of Quality → ERB) not recorded; no validation evidence attached (Principle 1) |
-| Introduced by | Decision [`D-018`](../../DECISION_REGISTER.md) |
+| Why not Validated | §7.2 sign-off chain (Author → Director of Quality → EASB) not recorded; no validation evidence attached (Principle 1) |
+| Introduced by / promoted by | Decisions [`D-018`](../../DECISION_REGISTER.md) / [`D-019`](../../DECISION_REGISTER.md) |
 
-Promotion to VALIDATED is gated on the §7.2 approvals plus recorded evidence. Until
-then, treat every figure and status inside as a **working target**, per the EES's own
-lifecycle rules (§3.1).
+A CONTROLLED_BASELINE is a reviewed, change-controlled working target — **not** a
+VALIDATED release. Promotion to VALIDATED is gated on the §7.2 approvals plus recorded
+evidence. Until then, treat every figure and status inside as a **working target**,
+per the EES's own lifecycle rules (§3.1).
+
+## Verify this volume
+
+```
+make standards-verify
+```
+
+Runs the 12-check Phase-0 gate (schema, companions, IDs, vocabulary, EASB
+consistency, header agreement, link integrity, and deterministic HTML regeneration).
+The same command runs in CI (`.github/workflows/lint-standards.yml`).
 
 ## Directory contents
 
@@ -52,8 +66,11 @@ docs/standards/EES/
 │   └── canonical-object-id.schema.json
 └── generated/
     ├── README.md              "generated — do not edit by hand"
-    └── ELEK-QUAL-STD-0000.v1.0.html   Presentation artifact (derived)
+    └── ELEK-QUAL-STD-0000.html   Presentation artifact (derived, reproducible)
 ```
+
+The HTML is produced by `scripts/generate_standards_html.py` and is byte-reproducible;
+never hand-edit it. Regenerate with `make standards-generate`.
 
 ## Relationship to the rest of the repository
 

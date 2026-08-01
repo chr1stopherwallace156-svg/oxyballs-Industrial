@@ -7,34 +7,44 @@
   "sequence": "0000",
   "classification": "Enterprise Engineering Standard / Single Source of Truth",
   "canonical_source": "docs/standards/EES/ELEK-QUAL-STD-0000.md",
+  "version": "0.1.0",
+  "lifecycle_state": "CONTROLLED_BASELINE",
+  "validation_state": "PENDING_VALIDATION",
+  "authority": "Founder / Acting Enterprise Architecture Authority",
   "authored": {
     "target_version": "1.0.0",
     "declared_status": "Validated Release (v1.0)",
     "effective_date": "2026-07-28",
     "owner": "ELEKTRON Enterprise Architecture & Standards Board (EASB)",
-    "note": "declared_status is the AUTHORED target state, not an achieved repository state. See repository.lifecycle_state for the governing status."
+    "note": "declared_status is the AUTHORED target state, not an achieved repository state. See lifecycle_state / validation_state for the governing status."
   },
   "repository": {
-    "lifecycle_state": "DRAFT",
-    "document_version": "0.1.0-draft",
-    "validation_state": "PENDING",
-    "reason": "Not VALIDATED: the EES's own s3.1 reserves VALIDATED for empirically verified, approved designs, and s7.2 requires the Author -> Reviewer -> ERB sign-off chain. No approvals or validation evidence are recorded in-repo (Principle 1: Evidence Before Assumption).",
+    "reason": "CONTROLLED_BASELINE, not VALIDATED: a CONTROLLED_BASELINE is a reviewed, change-controlled working target (EES s3.1 BASELINE band, v0.1.x-v0.9.x). VALIDATED requires the s7.2 Author -> Reviewer -> EASB sign-off chain plus attached evidence, none of which is recorded in-repo (Principle 1: Evidence Before Assumption).",
     "introduced_by": "docs/DECISION_REGISTER.md#D-018",
+    "controlled_baseline_by": "docs/DECISION_REGISTER.md#D-019",
     "first_committed_branch": "claude/docs-structure-large-projects-b6vxx5"
+  },
+  "baseline_promotion": {
+    "target_state": "CONTROLLED_BASELINE",
+    "authorized_by": "Founder / Acting Enterprise Architecture Authority",
+    "decision": "D-019",
+    "date": "2026-08-01",
+    "note": "Honest interim authority. This authorizes a controlled baseline only; it is NOT a VALIDATED release approval and does not substitute for the s7.2 chain."
   },
   "approvals": {
     "author": null,
     "reviewer": null,
-    "final_approval_erb": null
+    "final_approval_easb": null
   },
   "evidence_attachments": [],
   "generated_artifacts": [
     {
-      "path": "docs/standards/EES/generated/ELEK-QUAL-STD-0000.v1.0.html",
+      "path": "docs/standards/EES/generated/ELEK-QUAL-STD-0000.html",
       "kind": "presentation-html",
       "derived_from": "docs/standards/EES/ELEK-QUAL-STD-0000.md",
+      "generator": "scripts/generate_standards_html.py",
       "authoritative": false,
-      "note": "Presentation-layer publication artifact. Not the canonical source; regenerate from the Markdown master."
+      "note": "Deterministic presentation output. Not the canonical source. Regenerate via 'make standards-verify' / the generator; never hand-edit."
     }
   ],
   "companion_ecosystem": [

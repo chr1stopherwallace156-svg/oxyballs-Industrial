@@ -3,17 +3,23 @@
 Files in this directory are **generated presentation output**, not source.
 
 - **Canonical source:** [`../ELEK-QUAL-STD-0000.md`](../ELEK-QUAL-STD-0000.md)
-- **This file:** `ELEK-QUAL-STD-0000.v1.0.html` — a self-contained, offline-viewable
-  HTML rendering of the standard (all CSS/JS inline; opens in any browser, no sign-in).
+- **Generator:** `scripts/generate_standards_html.py` (deterministic, stdlib-only)
+- **This file:** `ELEK-QUAL-STD-0000.html` — a self-contained, offline-viewable HTML
+  rendering (all CSS inline; opens in any browser, no sign-in). It stamps the canonical
+  source path, document ID + version, and the source commit SHA, and carries a
+  "DERIVED — DO NOT EDIT" notice.
 
 Rules:
 
 - Do **not** treat anything here as authoritative (`authoritative: false` in
   `../document-metadata.json`).
-- Do **not** hand-edit these files. Change the Markdown master, then refresh the HTML.
-- The filename carries `v1.0` to match the authored document ID; the **governing**
-  lifecycle state is still DRAFT (see the master's banner and `../HANDOFF.md`).
+- Do **not** hand-edit these files. Change the Markdown master, then regenerate:
+  `make standards-generate`.
+- Regeneration is **byte-reproducible**: `make standards-verify` (check 11) rebuilds
+  the HTML from the current master + metadata and byte-compares it against the
+  checked-in file. A hand-edit here, or a master edit committed without regenerating,
+  fails the gate.
 
-> Note: this HTML was hand-authored to match the master and is not yet produced by a
-> deterministic generator, so it can drift from source until the generator in
-> `../ROADMAP.md` exists. When in doubt, the Markdown master wins.
+> The `v1.0` in the document ID is the **authored** target; the governing lifecycle
+> state is **CONTROLLED_BASELINE / v0.1.0 / PENDING_VALIDATION** (see the master banner
+> and `../HANDOFF.md`). The Markdown master always wins.

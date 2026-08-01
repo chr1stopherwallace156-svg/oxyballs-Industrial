@@ -2,10 +2,20 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://elektron.local/schemas/document-metadata.schema.json",
   "title": "ELEKTRON Document Metadata",
-  "description": "Machine-readable governance metadata for an ELEKTRON document (ELEK-ID). Records the authored target state and the enforced repository lifecycle/approval state separately, so a 'Validated' claim can never outrun its evidence.",
+  "description": "Machine-readable governance metadata for an ELEKTRON document (ELEK-ID). Records the authored target state and the enforced repository lifecycle/validation state as distinct fields, so a 'Validated' claim can never outrun its evidence.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["elek_id", "title", "domain", "class", "canonical_source", "repository", "approvals"],
+  "required": [
+    "elek_id",
+    "title",
+    "domain",
+    "class",
+    "canonical_source",
+    "version",
+    "lifecycle_state",
+    "validation_state",
+    "approvals"
+  ],
   "properties": {
     "$schema": { "type": "string" },
     "elek_id": {
@@ -28,6 +38,29 @@
       "type": "string",
       "description": "Repo-relative path to the authoritative Markdown master."
     },
+    "version": {
+      "type": "string",
+      "description": "Repository version. A 0.x.x version must not be paired with lifecycle_state VALIDATED.",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "lifecycle_state": {
+      "type": "string",
+      "description": "Governing lifecycle state. Extends EES s3.1 with CONTROLLED_BASELINE (a change-controlled BASELINE).",
+      "enum": [
+        "DRAFT",
+        "BASELINE",
+        "CONTROLLED_BASELINE",
+        "VALIDATED",
+        "LEGACY",
+        "DEPRECATED",
+        "ARCHIVED"
+      ]
+    },
+    "validation_state": {
+      "type": "string",
+      "enum": ["PENDING", "PENDING_VALIDATION", "IN_REVIEW", "SATISFIED", "VALIDATED"]
+    },
+    "authority": { "type": "string" },
     "authored": {
       "type": "object",
       "additionalProperties": false,
@@ -42,32 +75,33 @@
     "repository": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["lifecycle_state", "validation_state"],
       "properties": {
-        "lifecycle_state": {
-          "type": "string",
-          "description": "Governing lifecycle state per EES s3.1.",
-          "enum": ["DRAFT", "BASELINE", "VALIDATED", "LEGACY", "DEPRECATED", "ARCHIVED"]
-        },
-        "document_version": { "type": "string" },
-        "validation_state": {
-          "type": "string",
-          "enum": ["PENDING", "IN_REVIEW", "SATISFIED"]
-        },
         "reason": { "type": "string" },
         "introduced_by": { "type": "string" },
+        "controlled_baseline_by": { "type": "string" },
         "first_committed_branch": { "type": "string" }
+      }
+    },
+    "baseline_promotion": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "target_state": { "type": "string" },
+        "authorized_by": { "type": "string" },
+        "decision": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "note": { "type": "string" }
       }
     },
     "approvals": {
       "type": "object",
       "description": "Per EES s7.2. A null value means the approval has not been recorded. VALIDATED requires all three non-null.",
       "additionalProperties": false,
-      "required": ["author", "reviewer", "final_approval_erb"],
+      "required": ["author", "reviewer", "final_approval_easb"],
       "properties": {
         "author": { "$ref": "#/$defs/signoff" },
         "reviewer": { "$ref": "#/$defs/signoff" },
-        "final_approval_erb": { "$ref": "#/$defs/signoff" }
+        "final_approval_easb": { "$ref": "#/$defs/signoff" }
       }
     },
     "evidence_attachments": {
@@ -83,6 +117,7 @@
           "path": { "type": "string" },
           "kind": { "type": "string" },
           "derived_from": { "type": "string" },
+          "generator": { "type": "string" },
           "authoritative": { "type": "boolean" },
           "note": { "type": "string" }
         }

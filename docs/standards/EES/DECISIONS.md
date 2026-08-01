@@ -68,3 +68,28 @@ Entries are append-only and immutable; a decision is superseded, never edited.
   an explicit "derived from examples" flag.
 - **Consequences:** Doctrine is never silently altered; owner resolves the naming
   question before VALIDATED promotion.
+
+## EES-ADR-0005 — Standardize the governing body as EASB; promote to CONTROLLED_BASELINE
+
+- **Status:** ACCEPTED (supersedes EES-ADR-0004's *deferral* of the naming question)
+- **Date:** 2026-08-01
+- **Context:** Phase 0 closure (repository decision D-019). The owner directed
+  standardizing exclusively on **Enterprise Architecture & Standards Board (EASB)** and
+  promoting the document to a controlled baseline with an honest interim authority.
+- **Options considered:**
+  1. Keep both names / keep deferring. *(Rejected — violates Principle 2; leaves a
+     governance ambiguity in doctrine.)*
+  2. Standardize on EASB; treat prior ERB usage as the same body; preserve history.
+     **[CHOSEN]**
+- **Decision:**
+  - Replace `ERB` with `EASB` (`Enterprise Architecture & Standards Board`) in the
+    canonical master, `document-metadata.json`, and the generated HTML. Rename the
+    metadata approval key `final_approval_erb` → `final_approval_easb`.
+  - Set `version 0.1.0`, `lifecycle_state CONTROLLED_BASELINE`,
+    `validation_state PENDING_VALIDATION`; record the promoting authority as
+    `Founder / Acting Enterprise Architecture Authority`.
+  - Do **not** rewrite historical records (repository D-018 entry, EES-ADR-0004,
+    `LESSONS_LEARNED.md`): they legitimately record the prior discrepancy.
+- **Consequences:** The EASB/ERB ambiguity is resolved going forward; the verifier's
+  EASB-consistency check enforces it on canonical/metadata/HTML. VALIDATED still
+  requires the §7.2 chain + evidence. `KNOWN_LIMITATIONS.md` #1 is marked RESOLVED.

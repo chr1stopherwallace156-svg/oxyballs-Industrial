@@ -17,6 +17,55 @@ later entry that references it.
 
 ---
 
+## D-019 — Close EES Phase 0: CONTROLLED_BASELINE promotion, EASB normalization, verifiable derivation
+
+- Date: 2026-08-01
+- Status: Accepted (amends the D-016 structure freeze; builds on D-018)
+- Context: The EES (`ELEK-QUAL-STD-0000`) had landed as canonical source (D-018) at
+  DRAFT with two authored ambiguities recorded but unresolved. Phase 0 closure
+  required: (a) separating structural completeness from empirical validation in the
+  metadata vocabulary; (b) standardizing the governing-body name; (c) making the
+  derived HTML provably reproducible so it can never silently diverge from source;
+  and (d) an honest statement of who currently holds approval authority — without
+  inventing a staffed board or claiming a validation that has not occurred.
+- Decision:
+  1. **CONTROLLED_BASELINE promotion.** Set distinct metadata fields `version: 0.1.0`,
+     `lifecycle_state: CONTROLLED_BASELINE`, `validation_state: PENDING_VALIDATION`.
+     `CONTROLLED_BASELINE` is a change-controlled refinement of the EES §3.1 BASELINE
+     band (v0.1.x–v0.9.x): a reviewed working target, explicitly **not** VALIDATED.
+     The verifier enforces that no `0.x` version and no un-approved document may claim
+     VALIDATED.
+  2. **Honest interim authority.** Record the promoting authority as
+     `Founder / Acting Enterprise Architecture Authority` (a `baseline_promotion`
+     block in the metadata). This authorizes a controlled baseline only; it does not
+     substitute for the §7.2 Author → Reviewer → EASB sign-off chain, which remains
+     `null` pending real evidence.
+  3. **EASB terminology normalization.** Standardize the governing body as
+     **Enterprise Architecture & Standards Board (EASB)** across the canonical master,
+     metadata, and generated HTML (resolves the D-018 EASB/ERB ambiguity; supersedes
+     EES-ADR-0004 via EES-ADR-0005). Historical records (this register's D-018 entry,
+     immutable EES-ADRs, LESSONS_LEARNED) are preserved, not silently rewritten.
+  4. **Reproducible publication engine.** Add a deterministic Markdown+metadata → HTML
+     generator (`scripts/generate_standards_html.py`) whose output stamps the canonical
+     source path, document ID/version, and source commit SHA, and carries a
+     "DERIVED — DO NOT EDIT" notice. The checked-in HTML is regenerated from it and is
+     byte-reproducible.
+  5. **Local-first verification gate.** Add `scripts/verify_standards.sh` (+ its
+     `scripts/verify_standards_checks.py` helper) enforcing 12 checks, exposed as the
+     canonical command `make standards-verify`. CI (`.github/workflows/lint-standards.yml`)
+     only calls that target — validation rules never live in the workflow YAML, so
+     local and CI cannot drift.
+  6. **Structure-freeze amendment.** Admit the top-level `Makefile` and the
+     `.github/workflows/` directory to the canonical layout (the new `scripts/*`
+     verifier/generator files live under the already-admitted `scripts/`). Paired
+     `STRUCTURE_FREEZE.md` + `README.md` updates accompany this entry.
+- Consequences: Phase 0 closes at `PHASE_0_EES_CONTROLLED_BASELINE_COMPLETE`
+  (`make standards-verify` = 12/12 PASS locally). The HTML is a verifiable derivation
+  of the Markdown master. Promotion to VALIDATED still requires the §7.2 approvals +
+  attached evidence via a future decision/ECO. No engineering value, ODR, Build Engine
+  artifact, or M10/M11 scope changed; no approval/procurement/safety claim; Volume I
+  not begun.
+
 ## D-018 — Admit `docs/standards/` to the frozen structure; land the EES as canonical source
 
 - Date: 2026-08-01

@@ -30,8 +30,10 @@ CLAUDE.md                          Session entry pointer
 MERGE_REPORT_PR1.md                Pre-merge gate record for PR #1
 index.html                         Public static site
 .cursor/                           Cursor rules mirroring AGENTS.md
+Makefile                           Canonical local commands (admitted by D-019); e.g. `make standards-verify`
+.github/workflows/                 CI workflows (admitted by D-019); call `make` targets only, no inline rules
 # Local-runtime tooling (admitted by D-017) — the repo root IS the runnable local app:
-scripts/                           Local runtime shell scripts (setup/doctor/verify/backup/restore/self-test)
+scripts/                           Local runtime shell scripts (setup/doctor/verify/backup/restore/self-test) + standards verifier/generator (D-019)
 *.command                          Double-clickable macOS launchers (Install/Start/Verify/Generate/Backup/Restore)
 LOCAL_SETUP.md LOCAL_OPERATIONS.md OFFLINE_OPERATION.md BACKUP_AND_RECOVERY.md GENERATED_ARTIFACTS.md README-LOCAL-RUNTIME.md
 .nvmrc .node-version               Node version pins

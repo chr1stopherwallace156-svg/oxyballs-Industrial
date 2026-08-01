@@ -22,7 +22,7 @@ and shows what is verified vs. pending.
 | §5.2 Battery Passport (5 attachments) | master §5.2 | Present (5/5) |
 | §6 Companion ecosystem (11 artifacts) | master §6 **and** this directory's 11 files | Present + materialized |
 | §6.1 Master Guardrails (6) | master §6.1 + `GUARDRAILS.md` | Present (6/6) |
-| §7.1 ERB (membership + authority) | master §7.1 | Present |
+| §7.1 EASB (membership + authority) | master §7.1 | Present (normalized to EASB, D-019) |
 | §7.2 Sign-off & ECO matrix (5 rows) | master §7.2 + `document-metadata.json` approvals | Present; approvals `null` |
 | §8 Glossary (8 terms) | master §8 | Present (8/8) |
 
@@ -31,15 +31,25 @@ and shows what is verified vs. pending.
 | Requirement | Where recorded | Status |
 |---|---|---|
 | New directory admitted to frozen structure | `docs/DECISION_REGISTER.md` D-018; `docs/STRUCTURE_FREEZE.md`; `README.md` | Done |
+| Makefile + `.github/workflows/` admitted | `docs/DECISION_REGISTER.md` D-019; `STRUCTURE_FREEZE.md`; `README.md` | Done |
 | What changed / why / files added | `CHANGELOG.md`, `HANDOFF.md` | Done |
-| Lifecycle state (DRAFT) + reason | `document-metadata.json`, master banner, `DECISIONS.md` EES-ADR-0002 | Done |
+| Lifecycle state (CONTROLLED_BASELINE) + reason | `document-metadata.json`, master banner, `DECISIONS.md` EES-ADR-0002/0005 | Done |
+| Distinct state fields (version/lifecycle/validation) | `document-metadata.json`; master header table | Done (agreement enforced by verifier check 7) |
+| Honest interim authority | `document-metadata.json` `baseline_promotion` | Done |
+| EASB terminology normalization | master, metadata, generated HTML | Done (enforced by verifier check 6) |
 | Approval chain (§7.2) | `document-metadata.json` `approvals` (all `null`) | **Pending** |
 | Validation evidence | `document-metadata.json` `evidence_attachments` (empty) | **Pending** |
-| Schema enforcement in CI | — | **Pending** (`ROADMAP.md`) |
+| Schema enforcement | `make standards-verify` + `.github/workflows/lint-standards.yml` | Done (draft-07 subset) |
+| Reproducible HTML derivation | `scripts/generate_standards_html.py`; verifier check 11 | Done (byte-identical) |
 
 ## Verification performed this change
 
-- JSON well-formedness of `document-metadata.json` and both schemas — see
-  `HANDOFF.md` / commit validation output.
-- Companion ecosystem completeness: 11/11 files materialized (§6).
-- No engineering value, ODR, or Build Engine artifact modified.
+- `make standards-verify` → **12/12 PASS** (`PHASE_0_EES_CONTROLLED_BASELINE_COMPLETE`):
+  schema conformance, 11 companions, unique ELEK-IDs, OBJ-ID formats, lifecycle/validation
+  vocabulary + honesty rules, EASB consistency, header agreement, markdown link
+  integrity, derived/non-authoritative HTML, embedded source SHA, deterministic
+  regeneration (byte-identical), no HTML-only edits.
+- Deterministic generation proof: regeneration to a temp dir byte-compared equal to the
+  checked-in HTML (verifier check 11).
+- No engineering value, ODR, Build Engine artifact, or M10/M11 scope modified; Volume I
+  not begun.

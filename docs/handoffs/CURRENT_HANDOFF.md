@@ -4,7 +4,31 @@
 
 - From agent: Claude Code
 - Date (UTC): 2026-08-01
-- Reason for handoff: **ELEKTRON ENTERPRISE STANDARDS (EES) LANDED AS CANONICAL
+- Reason for handoff: **EES PHASE 0 CLOSED — CONTROLLED_BASELINE + VERIFIABLE
+  DERIVATION (owner directive; D-019, EES-ADR-0005).** The EES
+  (`ELEK-QUAL-STD-0000`) is promoted to distinct governance fields **version 0.1.0 /
+  lifecycle_state CONTROLLED_BASELINE / validation_state PENDING_VALIDATION** — a
+  change-controlled working target, explicitly **not** VALIDATED (all §7.2 approvals
+  `null`, no evidence attached). Promotion authority recorded honestly as **Founder /
+  Acting Enterprise Architecture Authority** (metadata `baseline_promotion`), not a
+  fabricated board. Governing body **normalized to Enterprise Architecture & Standards
+  Board (EASB)** across the canonical master + metadata + generated HTML (resolves the
+  D-018 EASB/ERB ambiguity; historical records preserved). Added a **deterministic
+  publication engine** (`scripts/generate_standards_html.py`) whose HTML stamps
+  canonical path + doc ID/version + source commit SHA + "DERIVED — DO NOT EDIT"
+  (generated file renamed `generated/ELEK-QUAL-STD-0000.html`), and a **local-first
+  verification gate** (`scripts/verify_standards.sh` + `verify_standards_checks.py`,
+  12 checks) exposed as **`make standards-verify`**; CI
+  (`.github/workflows/lint-standards.yml`) calls only that target (no rules in YAML).
+  Structure freeze amended (D-019) to admit `Makefile` + `.github/workflows/`.
+  **`make standards-verify` = 12/12 PASS → `PHASE_0_EES_CONTROLLED_BASELINE_COMPLETE`.**
+  CI status: not executed in this environment (no runner); will run on push. Open
+  (owner-gated): run the §7.2 approvals + attach evidence before any VALIDATED
+  promotion. Docs-governance only — **no engineering value / ODR / Build Engine
+  artifact / M10 / M11 touched; Volume I not begun; no approval/procurement/safety
+  claim.**
+
+- (prior) — **ELEKTRON ENTERPRISE STANDARDS (EES) LANDED AS CANONICAL
   SOURCE (owner directive; D-018, EES-ADR-0001..0004).** The EES
   (`ELEK-QUAL-STD-0000`) — previously only an owner-authored document + a hosted HTML
   artifact — is now version-controlled canonical source under

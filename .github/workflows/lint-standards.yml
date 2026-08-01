@@ -1,0 +1,38 @@
+name: lint-standards
+
+# Enforce the ELEKTRON standards Phase-0 gate. CI intentionally only invokes the
+# local canonical command (`make standards-verify`); all validation rules live in
+# scripts/, never in this YAML, so local and CI runs cannot drift.
+
+on:
+  push:
+    paths:
+      - 'docs/standards/**'
+      - 'scripts/verify_standards.sh'
+      - 'scripts/verify_standards_checks.py'
+      - 'scripts/generate_standards_html.py'
+      - 'Makefile'
+      - '.github/workflows/lint-standards.yml'
+  pull_request:
+    paths:
+      - 'docs/standards/**'
+      - 'scripts/verify_standards.sh'
+      - 'scripts/verify_standards_checks.py'
+      - 'scripts/generate_standards_html.py'
+      - 'Makefile'
+      - '.github/workflows/lint-standards.yml'
+
+jobs:
+  standards:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Verify ELEKTRON standards
+        run: make standards-verify

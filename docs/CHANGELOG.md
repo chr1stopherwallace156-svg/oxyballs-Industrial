@@ -5,6 +5,30 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-08-01 — EES Phase 0 closed: CONTROLLED_BASELINE + verifiable derivation (D-019)
+
+- **Lifecycle promotion** (distinct fields): `version 0.1.0`,
+  `lifecycle_state CONTROLLED_BASELINE`, `validation_state PENDING_VALIDATION`. Still
+  **not** VALIDATED — the §7.2 approvals remain `null` and no evidence is attached.
+- **Honest interim authority**: promotion recorded under
+  `Founder / Acting Enterprise Architecture Authority` (metadata `baseline_promotion`),
+  not a fabricated staffed board.
+- **EASB normalization**: governing body standardized as **Enterprise Architecture &
+  Standards Board (EASB)** in the canonical master, metadata, and generated HTML
+  (resolves the D-018 EASB/ERB ambiguity; EES-ADR-0005). Historical records preserved.
+- **Reproducible publication engine**: `scripts/generate_standards_html.py` renders the
+  master → HTML deterministically, stamping canonical path + doc ID/version + source
+  commit SHA + a "DERIVED — DO NOT EDIT" notice. Generated file renamed
+  `generated/ELEK-QUAL-STD-0000.html`.
+- **Local-first gate**: `scripts/verify_standards.sh` (+ `verify_standards_checks.py`)
+  enforces 12 checks; exposed as **`make standards-verify`**; CI
+  (`.github/workflows/lint-standards.yml`) calls only that target (no rules in YAML).
+- **Structure freeze**: top-level `Makefile` and `.github/workflows/` admitted (D-019
+  amends D-016; paired `STRUCTURE_FREEZE.md` + `README.md` updates).
+- **Result**: `make standards-verify` = 12/12 PASS →
+  `PHASE_0_EES_CONTROLLED_BASELINE_COMPLETE`. No engineering value / ODR / Build Engine
+  artifact / M10 / M11 touched; Volume I not begun; no approval/procurement/safety claim.
+
 ## 2026-08-01 — ELEKTRON Enterprise Standards (EES) landed as canonical source (D-018)
 
 - **New second-level directory `docs/standards/`** admitted to the frozen structure

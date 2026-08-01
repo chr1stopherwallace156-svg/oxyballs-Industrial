@@ -3,25 +3,30 @@
 Planned development for the EES volume. Nothing here is committed or approved; items
 advance only by owner direction and (for VALIDATED promotion) the §7.2 chain.
 
+## Done in Phase 0 (D-019)
+
+- ~~EASB vs ERB naming~~ — **resolved**; standardized on EASB (EES-ADR-0005).
+- ~~Elect starting state~~ — promoted to **CONTROLLED_BASELINE / v0.1.0**.
+- ~~Schema/OBJ-ID/HTML enforcement in CI~~ — **`make standards-verify`** (12 checks) +
+  `.github/workflows/lint-standards.yml`.
+- ~~Deterministic HTML generator~~ — `scripts/generate_standards_html.py`; byte-compared
+  in verifier check 11.
+- ~~Fail VALIDATED with any `null` approval~~ — enforced by verifier check 5.
+
 ## Near-term (unblocks VALIDATED)
 
-- Owner resolves the **EASB vs ERB** naming question (`KNOWN_LIMITATIONS.md` #1).
-- Owner elects the true starting state: keep **DRAFT** or promote to **BASELINE**
-  (reviewed working target).
-- Seat / designate the ERB and record the first §7.2 sign-off chain (Author →
-  Director of Quality → ERB) in `document-metadata.json`.
+- Seat / designate the EASB and record the first §7.2 sign-off chain (Author →
+  Director of Quality → EASB) in `document-metadata.json`.
 - Attach the validation evidence artifact that backs the promotion, then promote to
-  **VALIDATED v1.0** via an ECO / Decision entry.
+  **VALIDATED v1.0** via an ECO / Decision entry (the verifier enforces the honesty
+  rule until then).
 
-## Medium-term (enforcement + tooling)
+## Medium-term (hardening)
 
-- CI check: validate `document-metadata.json` against
-  `schemas/document-metadata.schema.json` on every push.
-- CI check: validate any committed OBJ-IDs against
-  `schemas/canonical-object-id.schema.json`.
-- Deterministic HTML generator: regenerate `generated/…​.html` from the Markdown
-  master so the presentation artifact can never drift from source.
-- Lint: fail a build that marks a document VALIDATED with any `null` §7.2 approval.
+- Tighten `canonical-object-id.schema.json` patterns against real issued IDs
+  (`KNOWN_LIMITATIONS.md` #6).
+- Extend the generator/validator only as the master gains new Markdown constructs or
+  the schema gains new keywords (`KNOWN_LIMITATIONS.md` #5, #7).
 
 ## Long-term (scale to the full EEA)
 

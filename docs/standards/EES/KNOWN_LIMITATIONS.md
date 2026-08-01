@@ -3,24 +3,29 @@
 Honest gap analysis for the EES volume. Assumptions, unresolved questions, and pending
 validation. Recording a limitation does not resolve it.
 
-## 1. EASB vs ERB naming inconsistency (authored)
+## 1. EASB vs ERB naming inconsistency (authored) — RESOLVED (D-019, EES-ADR-0005)
 
-The masthead names the owner **ELEKTRON Enterprise Architecture & Standards Board
-(EASB)**; §7.1/§7.2 name the governing body **Enterprise Architecture Review Board
-(ERB)**. It is unclear whether these are the same body (a typo) or two distinct
-bodies. Preserved as-authored; **owner must resolve** before VALIDATED promotion.
+*Historical:* the masthead named the owner **Enterprise Architecture & Standards Board
+(EASB)** while §7 named the governing body **Enterprise Architecture Review Board
+(ERB)**. *Resolution:* standardized exclusively on **EASB** across the canonical
+master, metadata, and generated HTML. The verifier's EASB-consistency check now
+enforces it. Historical records are preserved (repository D-018, EES-ADR-0004,
+`LESSONS_LEARNED.md`).
 
-## 2. Not Validated — no approval evidence
+## 2. Not Validated — no approval evidence (still open)
 
-The document is DRAFT. The §7.2 sign-off chain (Author → Director of Quality → ERB)
-has not run and no validation evidence is attached. All `approvals` are `null`. The
-authored "Validated Release (v1.0)" is a *target*, not an achieved state.
+The document is a **CONTROLLED_BASELINE (v0.1.0, PENDING_VALIDATION)**, not VALIDATED.
+The §7.2 sign-off chain (Author → Director of Quality → EASB) has not run and no
+validation evidence is attached; all `approvals` are `null`. The authored "Validated
+Release (v1.0)" remains a *target*, not an achieved state.
 
-## 3. Self-referential bootstrap
+## 3. Self-referential bootstrap (still open)
 
 The EES defines the approval process (§7.2) required to validate the EES itself.
-Promoting it to v1.0 requires the owner to seat/act as the ERB and record the first
-sign-off — a governance bootstrap that has not occurred.
+Promoting it to VALIDATED v1.0 requires seating/acting as the EASB and recording the
+first sign-off chain with evidence — a governance bootstrap that has not occurred. The
+current CONTROLLED_BASELINE was promoted under the honest interim **Founder / Acting
+Enterprise Architecture Authority** (D-019), which does not substitute for that chain.
 
 ## 4. `ELEK-ID` template is derived, not authored
 
@@ -28,11 +33,14 @@ The literal format `ELEK-<DOM>-<SUB>-<SEQ>-v<VERSION>` is inferred from the issu
 examples (§2.1). If the intended template differs, §2.1 must be corrected. Flagged
 in-line in the master.
 
-## 5. Schemas are advisory, not enforced
+## 5. Schema enforcement — ADDRESSED (D-019), with a caveat
 
-`schemas/*.json` exist but no CI runs them. Metadata and OBJ-IDs could drift from the
-schemas without a build failure until enforcement is added (see `FUTURE_WORK.md` /
-`ROADMAP.md`).
+`make standards-verify` (and CI) now validates `document-metadata.json` against its
+schema and checks OBJ-ID formats on every run, so metadata/ID drift fails the gate.
+*Caveat:* the validator in `scripts/verify_standards_checks.py` implements a **draft-07
+subset** (type, required, additionalProperties, enum, pattern, items, oneOf, $ref,
+format=date), not a full JSON-Schema engine. It covers the constructs these schemas
+use; exotic keywords would be silently ignored.
 
 ## 6. Regex encodings are pragmatic, not exhaustive
 
@@ -41,11 +49,14 @@ schemas without a build failure until enforcement is added (see `FUTURE_WORK.md`
 patterns do not yet cover; treat the schema as a first approximation to be tightened
 against real data.
 
-## 7. Presentation HTML can drift
+## 7. Presentation HTML drift — RESOLVED (D-019)
 
-`generated/…​.html` was hand-authored to match the master, not produced by a
-deterministic generator. Until a generator exists, edits to the master require a
-manual HTML refresh, and the two can silently diverge.
+The HTML is now produced by the deterministic generator
+`scripts/generate_standards_html.py` and byte-compared against a fresh regeneration in
+check 11 of `make standards-verify`. A hand-edit to the HTML, or a master/metadata edit
+committed without regenerating, fails the gate — so source and presentation cannot
+silently diverge. The generator renders a bounded Markdown subset (the constructs the
+master uses); adding new Markdown constructs to the master may require extending it.
 
 ## 8. Scope boundary
 

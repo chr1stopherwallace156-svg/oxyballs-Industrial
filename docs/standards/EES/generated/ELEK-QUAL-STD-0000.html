@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- GENERATED FILE - DO NOT EDIT BY HAND. -->
+<!-- Regenerate: scripts/generate_standards_html.py (or `make standards-verify`). -->
+<!-- source-canonical: docs/standards/EES/ELEK-QUAL-STD-0000.md -->
+<!-- source-elek-id: ELEK-QUAL-STD-0000 -->
+<!-- source-version: 0.1.0 -->
+<!-- source-commit-sha: 9f4be635adae24513f8b082943fca5305d9b8152 -->
+<title>ELEKTRON Enterprise Standards (EES) v0.1.0 (DERIVED)</title>
+<style>
+:root{--ground:#F5F7FA;--surface:#FFFFFF;--surface-2:#EDF1F6;--ink:#0F172A;--ink-2:#334155;--ink-3:#64748B;--line:#D5DEE8;--slate:#1E293B;--accent:#0284C7;--good:#0F766E;--warn:#B45309;--crit:#B91C1C;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:Arial,"Helvetica Neue",Helvetica,system-ui,sans-serif;--maxw:60rem;--bp-bg:#0F172A;--bp-ink:#93C5FD;--bp-line:#1E3A5F;}
+@media (prefers-color-scheme:dark){:root{--ground:#0B1120;--surface:#111a2b;--surface-2:#152034;--ink:#E7EDF5;--ink-2:#B7C4D6;--ink-3:#8697AD;--line:#243450;--accent:#38BDF8;--bp-bg:#0A1424;--bp-ink:#7DD3FC;--bp-line:#1E3A5F;}}
+:root[data-theme="light"]{--ground:#F5F7FA;--surface:#FFFFFF;--surface-2:#EDF1F6;--ink:#0F172A;--ink-2:#334155;--ink-3:#64748B;--line:#D5DEE8;--accent:#0284C7;--bp-bg:#0F172A;--bp-ink:#93C5FD;}
+:root[data-theme="dark"]{--ground:#0B1120;--surface:#111a2b;--surface-2:#152034;--ink:#E7EDF5;--ink-2:#B7C4D6;--ink-3:#8697AD;--line:#243450;--accent:#38BDF8;--bp-bg:#0A1424;--bp-ink:#7DD3FC;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.62}
+.shell{max-width:var(--maxw);margin:0 auto;padding:0 1.5rem 5rem}
+.derived{background:var(--slate);color:#E2E8F0;border-bottom:2px solid var(--accent);font-family:var(--mono);font-size:.7rem}
+.derived .in{max-width:var(--maxw);margin:0 auto;padding:.5rem 1.5rem;display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;justify-content:space-between}
+.derived b{color:#fff}
+.derived .warn{color:#FBBF24;font-weight:700;letter-spacing:.1em}
+h1{font-size:clamp(1.8rem,4vw,2.7rem);letter-spacing:-.02em;margin:2.4rem 0 .6rem;text-wrap:balance}
+h2{font-size:clamp(1.3rem,3vw,1.8rem);letter-spacing:-.015em;margin:2.6rem 0 1rem;padding-top:.6rem;border-top:1px solid var(--line);text-wrap:balance}
+h3{font-size:1.12rem;margin:1.8rem 0 .6rem;color:var(--ink)}
+p{margin:0 0 1rem;color:var(--ink-2);max-width:44rem}
+a{color:var(--accent)}
+strong{color:var(--ink);font-weight:700}
+code{font-family:var(--mono);font-size:.86em;background:var(--surface-2);padding:.08em .38em;border-radius:4px;color:var(--accent);border:1px solid var(--line)}
+hr{border:none;border-top:1px solid var(--line);margin:2rem 0 0}
+ul,ol{color:var(--ink-2);max-width:44rem;padding-left:1.3rem}
+li{margin:.3rem 0}
+.tablewrap{overflow-x:auto;margin:1.2rem 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.86rem;background:var(--surface);min-width:32rem}
+th{background:var(--slate);color:#E2E8F0;font-family:var(--mono);font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;font-weight:700;padding:.6rem .85rem;border-bottom:2px solid var(--accent)}
+td{padding:.55rem .85rem;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top}
+tr:last-child td{border-bottom:none}
+th.center,td.center{text-align:center}
+th.right,td.right{text-align:right;font-variant-numeric:tabular-nums}
+th.left,td.left{text-align:left}
+pre.blueprint{background:var(--bp-bg);border:1px solid var(--bp-line);border-radius:10px;padding:1.1rem 1.2rem;margin:1.2rem 0;overflow-x:auto;font-family:var(--mono);font-size:.76rem;line-height:1.5;color:var(--bp-ink);white-space:pre}
+blockquote.callout{background:color-mix(in srgb,var(--accent) 8%,var(--surface));border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line));border-left:3px solid var(--accent);border-radius:8px;padding:.4rem 1.1rem;margin:1.4rem 0}
+blockquote.callout p{color:var(--ink-2)}
+nav.toc{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1rem 1.2rem;margin:1.6rem 0}
+nav.toc h2{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 .6rem;border:none;padding:0}
+nav.toc ol{list-style:none;padding:0;margin:0;columns:2;column-gap:2rem}
+nav.toc li{break-inside:avoid;margin:.1rem 0}
+nav.toc a{text-decoration:none;color:var(--ink-2);font-size:.86rem}
+nav.toc a:hover{color:var(--accent)}
+footer{margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--line);font-family:var(--mono);font-size:.72rem;color:var(--ink-3)}
+footer .k{color:var(--accent)}
+@media (max-width:640px){nav.toc ol{columns:1}}
+</style>
+</head>
+<body>
+<div class="derived"><div class="in"><span class="warn">DERIVED - DO NOT EDIT</span><span><b>Source:</b> docs/standards/EES/ELEK-QUAL-STD-0000.md</span><span><b>ELEK-QUAL-STD-0000</b> v0.1.0 &middot; CONTROLLED_BASELINE / PENDING_VALIDATION</span><span><b>Commit:</b> 9f4be635adae24513f8b082943fca5305d9b8152</span></div></div>
+<div class="shell">
+<nav class="toc"><h2>Contents</h2><ol><li><a href="#executive-summary-purpose">Executive Summary &amp; Purpose</a></li><li><a href="#section-1-core-enterprise-principles">Section 1 — Core Enterprise Principles</a></li><li><a href="#section-2-document-identification-object-naming-standards">Section 2 — Document Identification &amp; Object Naming Standards</a></li><li><a href="#section-3-version-control-lifecycle-deprecation-policy">Section 3 — Version Control, Lifecycle &amp; Deprecation Policy</a></li><li><a href="#section-4-end-to-end-requirements-traceability">Section 4 — End-to-End Requirements Traceability</a></li><li><a href="#section-5-evidence-verification-standard">Section 5 — Evidence &amp; Verification Standard</a></li><li><a href="#section-6-mandatory-companion-artifact-ecosystem">Section 6 — Mandatory Companion Artifact Ecosystem</a></li><li><a href="#section-7-enterprise-governance-standards-board">Section 7 — Enterprise Governance &amp; Standards Board</a></li><li><a href="#section-8-master-canonical-glossary">Section 8 — Master Canonical Glossary</a></li></ol></nav>
+<h1>ELEKTRON Enterprise Standards (EES)</h1>
+<div class="tablewrap"><table><thead><tr><th class="left">Field</th><th class="left">Value</th></tr></thead><tbody><tr><td class="left"><strong>Document ID</strong></td><td class="left"><code>ELEK-QUAL-STD-0000-v1.0</code> (authored) · governed as <code>ELEK-QUAL-STD-0000</code></td></tr><tr><td class="left"><strong>Repository version</strong></td><td class="left"><code>0.1.0</code></td></tr><tr><td class="left"><strong>Lifecycle state</strong></td><td class="left"><code>CONTROLLED_BASELINE</code></td></tr><tr><td class="left"><strong>Validation state</strong></td><td class="left"><code>PENDING_VALIDATION</code></td></tr><tr><td class="left"><strong>Classification</strong></td><td class="left">Enterprise Engineering Standard / Single Source of Truth</td></tr><tr><td class="left"><strong>Authored target status</strong></td><td class="left">Validated Release (v1.0) — <em>see Repository Governance Status below</em></td></tr><tr><td class="left"><strong>Effective date (authored)</strong></td><td class="left">2026-07-28</td></tr><tr><td class="left"><strong>Owner</strong></td><td class="left">ELEKTRON Enterprise Architecture &amp; Standards Board (EASB)</td></tr><tr><td class="left"><strong>Acting authority</strong></td><td class="left">Founder / Acting Enterprise Architecture Authority</td></tr><tr><td class="left"><strong>Canonical source</strong></td><td class="left"><code>docs/standards/EES/ELEK-QUAL-STD-0000.md</code> (this file)</td></tr></tbody></table></div>
+<blockquote class="callout"><p><strong>⚠ Repository Governance Status — CONTROLLED_BASELINE (validation pending)</strong></p><p>The document body below preserves the <strong>authored</strong> content verbatim, including its self-declared <em>"Validated Release (v1.0)"</em> target status. Within <strong>this repository's</strong> lifecycle the artifact is a <strong>CONTROLLED_BASELINE</strong> at version <strong>0.1.0</strong>, with validation state <strong>PENDING_VALIDATION</strong> (see §3.1).</p><p>A CONTROLLED_BASELINE is a reviewed, change-controlled working target — <strong>not</strong> a VALIDATED release. By the EES's <strong>own</strong> rules it cannot be marked VALIDATED yet: §3.1 reserves <code>VALIDATED (v1.0.0+)</code> for empirically verified, approved designs, and §7.2 requires the sign-off chain <strong>Author (Lead Architect) → Reviewer (Director of Quality) → Final Approval (Enterprise Architecture &amp; Standards Board, EASB)</strong>. None of those approvals has been recorded in-repo, and no validation evidence artifact is attached. Per Principle 1 (<em>Evidence Before Assumption</em>), an unbacked "Validated" claim is an assumption.</p><p>This baseline was promoted under the authority of the <strong>Founder / Acting Enterprise Architecture Authority</strong> (Decision D-019) — an honest interim authority, not a fabricated staffed board.</p><p>Machine-readable status lives in <a href="document-metadata.json"><code>document-metadata.json</code></a> (<code>lifecycle_state: "CONTROLLED_BASELINE"</code>, <code>validation_state: "PENDING_VALIDATION"</code>, all §7.2 approvals <code>null</code>). Promotion to VALIDATED requires the §7.2 approvals plus recorded evidence — see <a href="HANDOFF.md"><code>HANDOFF.md</code></a> and <a href="KNOWN_LIMITATIONS.md"><code>KNOWN_LIMITATIONS.md</code></a>.</p></blockquote>
+<hr>
+<h2 id="executive-summary-purpose">Executive Summary &amp; Purpose</h2>
+<p>The ELEKTRON Enterprise Standards (EES) document serves as the foundational constitution governing all technical, operational, architectural, and business documentation across the ELEKTRON enterprise ecosystem.</p>
+<p>As ELEKTRON transitions from initial conceptual designs to a scalable industrial product company, every physical product, software module, operational SOP, and data asset must adhere to the same rigorous configuration discipline. The standards established herein are intended to support disciplined engineering, complete end-to-end traceability, configuration management, and scalable documentation practices suitable for enterprise manufacturing environments across all eight volumes of the ELEKTRON Enterprise Architecture (EEA).</p>
+<hr>
+<h2 id="section-1-core-enterprise-principles">Section 1 — Core Enterprise Principles</h2>
+<p>Every engineering decision, software commit, physical assembly step, and policy draft within ELEKTRON must align with the following eight foundational principles:</p>
+<ol><li><strong>Evidence Before Assumption</strong> — Unverified data is an assumption. No engineering claim, health rating, or software state change is valid without raw, verifiable evidence artifacts attached to an immutable ID.</li><li><strong>One Source of Truth</strong> — Duplicate data stores and divergent documents are prohibited. Every entity, parameter, and requirement exists in exactly one canonical location within the Enterprise Data Platform (EDP).</li><li><strong>Configuration Before Customization</strong> — System flexibility must be achieved through modular, declarative configuration manifests rather than one-off physical or programmatic code branches.</li><li><strong>Traceability Across the Complete Lifecycle</strong> — Every deployed vehicle component, software release, and physical inspection must trace continuously back to its parent engineering requirement and customer mission profile.</li><li><strong>Documentation is Part of the Product</strong> — Physical hardware or software shipped without compliant, version-controlled documentation and evidence passports is incomplete and unapproved for deployment.</li><li><strong>Every Change Must Be Attributable</strong> — Cryptographic or role-authenticated sign-offs are mandatory for all Engineering Change Orders (ECOs), software commits, and quality shop gates. Anonymous or untracked changes are strictly forbidden.</li><li><strong>Safety-Critical Information Requires Validation</strong> — High-voltage systems, brake interface logic, and steering control systems require dual-signoff physical and empirical validation before advancing from Baseline to Validated status.</li><li><strong>Reuse Before Reinvention</strong> — Common software modules, hardware subframes, and diagnostic protocols must leverage standardized, validated platform assets across all WorkCore platforms (e.g., WC-450, WC-550) before bespoke designs are permitted.</li></ol>
+<hr>
+<h2 id="section-2-document-identification-object-naming-standards">Section 2 — Document Identification &amp; Object Naming Standards</h2>
+<h3 id="2-1-structural-document-identifier-system-elek-id">2.1 Structural Document Identifier System (ELEK-ID)</h3>
+<p>Every official document, specification, schematic, software manifest, and SOP within ELEKTRON must carry a unique, deterministic ELEKTRON Document Identifier (ELEK-ID).</p>
+<p>The pattern is evident across every issued identifier — <code>ELEK-&lt;DOM&gt;-&lt;SUB&gt;-&lt;SEQ&gt;-v&lt;VERSION&gt;</code>, e.g. <code>ELEK-QUAL-STD-0000-v1.0</code> or <code>ELEK-ARCH-ADR-0007-v1.0</code>. <em>(The format string is derived from the issued examples below; the authoring source states the registries, not the literal template.)</em></p>
+<p><strong>Domain (<code>&lt;DOM&gt;</code>) Code Registry</strong></p>
+<div class="tablewrap"><table><thead><tr><th class="left">Domain Code</th><th class="left">Description</th><th class="left">Scope / Allocation</th></tr></thead><tbody><tr><td class="left"><code>CORP</code></td><td class="left">Corporate &amp; Governance</td><td class="left">Executive policy, investor relations, enterprise constitution</td></tr><tr><td class="left"><code>ARCH</code></td><td class="left">System Architecture</td><td class="left">Enterprise Architecture (EEA), EDP, Cloud &amp; Edge schemas</td></tr><tr><td class="left"><code>HARD</code></td><td class="left">Hardware &amp; Powertrain</td><td class="left">Chassis conversions, battery enclosures, ePTO, cooling</td></tr><tr><td class="left"><code>SOFT</code></td><td class="left">Software &amp; Firmware</td><td class="left">EIOS modules, FIOS algorithms, Digital Twin, CAN pipelines</td></tr><tr><td class="left"><code>MANU</code></td><td class="left">Manufacturing &amp; Shop</td><td class="left">SOPs, station layouts, quality gates, assembly tooling</td></tr><tr><td class="left"><code>FLTE</code></td><td class="left">Fleet &amp; FIOS Operations</td><td class="left">Fleet Readiness Index, dossiers, customer onboarding</td></tr><tr><td class="left"><code>SUPP</code></td><td class="left">Supply Chain &amp; Logistics</td><td class="left">Vendor qualifications, BOM manifests, inventory rules</td></tr><tr><td class="left"><code>QUAL</code></td><td class="left">Quality &amp; Compliance</td><td class="left">HVIP certifications, ISO alignment, test evidence</td></tr></tbody></table></div>
+<p><strong>Sub-domain / Class (<code>&lt;SUB&gt;</code>) Code Registry</strong></p>
+<div class="tablewrap"><table><thead><tr><th class="left">Class Code</th><th class="left">Category</th><th class="left">Primary Purpose</th></tr></thead><tbody><tr><td class="left"><code>STD</code></td><td class="left">Standard / Manual</td><td class="left">Authoritative enterprise rules (e.g., EES-STD)</td></tr><tr><td class="left"><code>SPEC</code></td><td class="left">Specification</td><td class="left">Technical requirements for hardware or software</td></tr><tr><td class="left"><code>SOP</code></td><td class="left">Standard Operating Procedure</td><td class="left">Step-by-step physical or operational instructions</td></tr><tr><td class="left"><code>ADR</code></td><td class="left">Architecture Decision Record</td><td class="left">Immutable record of major architectural design choices</td></tr><tr><td class="left"><code>MANI</code></td><td class="left">Manifest</td><td class="left">Config files, Bill of Materials (BOM), system manifests</td></tr><tr><td class="left"><code>DOS</code></td><td class="left">Dossier</td><td class="left">Customer or fleet-specific intelligence reports</td></tr><tr><td class="left"><code>REPO</code></td><td class="left">Report / Validation</td><td class="left">Test results, evidence logs, compliance reports</td></tr></tbody></table></div>
+<h3 id="2-2-canonical-entity-object-identifier-standard">2.2 Canonical Entity &amp; Object Identifier Standard</h3>
+<p>To prevent data fragmentation inside the Enterprise Data Platform (EDP), all software schemas, database keys, physical serial tags, and digital twin nodes must utilize standardized Canonical Object Identifiers (OBJ-ID):</p>
+<div class="tablewrap"><table><thead><tr><th class="left">Entity Code</th><th class="left">Entity Category</th><th class="left">Example Canonical Object ID</th><th class="left">Target Scope</th></tr></thead><tbody><tr><td class="left"><code>VEH</code></td><td class="left">Converted Vehicle Node</td><td class="left"><code>VEH-2026-8F92A1</code></td><td class="left">Digital Twin vehicle master record</td></tr><tr><td class="left"><code>BATT</code></td><td class="left">Battery Pack Assembly</td><td class="left"><code>BATT-2026-0041B2</code></td><td class="left">High-voltage pack &amp; Battery Passport</td></tr><tr><td class="left"><code>MTR</code></td><td class="left">Traction / ePTO Motor</td><td class="left"><code>MTR-2026-9C31E4</code></td><td class="left">Physical electric motor assembly</td></tr><tr><td class="left"><code>INV</code></td><td class="left">Inverter / Motor Controller</td><td class="left"><code>INV-2026-11A9C8</code></td><td class="left">Power electronics unit</td></tr><tr><td class="left"><code>FW</code></td><td class="left">Firmware Build Release</td><td class="left"><code>FW-SOFT-v1.4.2</code></td><td class="left">Compiled binary flashed to ECU</td></tr><tr><td class="left"><code>HAR</code></td><td class="left">High-Voltage Wiring Harness</td><td class="left"><code>HAR-2026-3A41D9</code></td><td class="left">Manufactured harness assembly</td></tr><tr><td class="left"><code>ECO</code></td><td class="left">Engineering Change Order</td><td class="left"><code>ECO-2026-000142</code></td><td class="left">Formal hardware/software change request</td></tr><tr><td class="left"><code>SUP</code></td><td class="left">Qualified Supplier / Vendor</td><td class="left"><code>SUP-VEND-00108A</code></td><td class="left">Supply chain vendor entity</td></tr><tr><td class="left"><code>TECH</code></td><td class="left">Certified Shop Technician</td><td class="left"><code>TECH-OPER-000412</code></td><td class="left">Authenticated operator badge ID</td></tr><tr><td class="left"><code>FLEET</code></td><td class="left">Commercial Fleet Customer</td><td class="left"><code>FLEET-CUST-00008F</code></td><td class="left">FIOS customer organization entity</td></tr><tr><td class="left"><code>SITE</code></td><td class="left">Manufacturing / Service Facility</td><td class="left"><code>SITE-FAC-000001</code></td><td class="left">Physical shop or plant location</td></tr></tbody></table></div>
+<h3 id="2-3-architecture-decision-records-adr-specification">2.3 Architecture Decision Records (ADR) Specification</h3>
+<p>Major technical choices must be captured in an immutable Architecture Decision Record (ADR). ADRs prevent historical guesswork and document the exact context, tradeoffs, and evidence that shaped the enterprise architecture.</p>
+<pre class="blueprint">┌──────────────────────────────────────────────────────────────────────┐
+│ ADR ID:  ELEK-ARCH-ADR-0007-v1.0                                       │
+│ TITLE:   Selection of Modular Bolt-On Subframe for WorkCore-450        │
+│ STATUS:  APPROVED   ·   SUPERSEDES: ELEK-ARCH-ADR-0002                 │
+├──────────────────────────────────────────────────────────────────────┤
+│ CONTEXT:  Direct weld modifications to Ford F-450 frame rails void OEM │
+│           structural warranties and limit manufacturing throughput.    │
+├──────────────────────────────────────────────────────────────────────┤
+│ OPTIONS CONSIDERED:                                                    │
+│   1. Direct-to-chassis bracket welding  (High labor · voids OEM)       │
+│   2. Fully custom fabricated ladder chassis  (Prohibitive tooling)     │
+│   3. Modular bolt-on subframe via OEM shear plate holes  [CHOSEN]      │
+├──────────────────────────────────────────────────────────────────────┤
+│ DECISION:  Adopt Modular Bolt-On Subframe using Grade 8 fasteners.     │
+│            EVIDENCE ATTACHED: EVI-LAB-2026-FEA-089 (Structural FEA).   │
+├──────────────────────────────────────────────────────────────────────┤
+│ CONSEQUENCES:  Eliminates welding on shop floor · reduces installation │
+│                labor 4.5 h/chassis · maintains OEM warranty.           │
+└──────────────────────────────────────────────────────────────────────┘</pre>
+<hr>
+<h2 id="section-3-version-control-lifecycle-deprecation-policy">Section 3 — Version Control, Lifecycle &amp; Deprecation Policy</h2>
+<h3 id="3-1-document-lifecycle-states">3.1 Document Lifecycle States</h3>
+<p>All documentation, hardware BOMs, and software schemas follow a deterministic lifecycle progression with formal state transitions:</p>
+<pre class="blueprint">[ DRAFT ] → [ BASELINE v0.1 ] → [ VALIDATED v1.0 ] → [ LEGACY ] → [ DEPRECATED ] → [ ARCHIVED ]</pre>
+<ul><li><strong>DRAFT (v0.0.x)</strong> — Working proposals under active creation; non-binding.</li><li><strong>BASELINE (v0.1.x – v0.9.x)</strong> — Reviewed architectural designs. Numerical values are locked as <em>Working Targets</em> for prototyping and sourcing.</li><li><strong>VALIDATED (v1.0.0+)</strong> — Physically tested and empirically verified designs. Approved for serial production and customer deployment.</li><li><strong>LEGACY</strong> — Superseded by a newer release (e.g., v2.0), but actively supported in deployed field units.</li><li><strong>DEPRECATED</strong> — Phase-out notice issued. Prohibited for new builds; supported only for active service contracts until end-of-life.</li><li><strong>ARCHIVED</strong> — Read-only historical reference. Fully withdrawn from operational use.</li></ul>
+<h3 id="3-2-deprecation-eol-schedule">3.2 Deprecation &amp; EOL Schedule</h3>
+<p>When an enterprise asset, API, component, or SOP transitions to DEPRECATED, an explicit deprecation notice must be attached to its EDP master record:</p>
+<pre class="blueprint">┌──────────────────────────────────────────────────────────────────────┐
+│  DEPRECATION NOTICE                                                    │
+│  ASSET ID:             ELEK-HARD-SPEC-0012 (Gen-1 Battery Bracket)     │
+│  DEPRECATION DATE:     2026-08-01                                      │
+│  MANDATORY RETIREMENT: 2027-02-01                                      │
+│  SUPERSEDING ASSET:    ELEK-HARD-SPEC-0045 (Gen-2 Quick-Release)       │
+│  REASON:               Gen-2 reduces service removal 120m → 15m.       │
+└──────────────────────────────────────────────────────────────────────┘</pre>
+<hr>
+<h2 id="section-4-end-to-end-requirements-traceability">Section 4 — End-to-End Requirements Traceability</h2>
+<p>Every physical and digital asset within ELEKTRON must maintain unbroken bi-directional traceability linking executive mission targets directly to field operational telemetry.</p>
+<pre class="blueprint">        REQUIREMENTS TRACEABILITY CHAIN  (Digital Thread)
+        ═════════════════════════════════════════════════
+
+  1. CUSTOMER / MISSION REQUIREMENT   REQ-CUST-0042
+        │                             8-hour zero-emission ePTO operation
+        ▼
+  2. ENGINEERING SPECIFICATION        ELEK-HARD-SPEC-0450
+        │                             80 kWh HV Battery + 20 kW ePTO
+        ▼
+  3. CAD / HARDWARE MODEL             CAD-SUB-450-REV-C
+        │                             Subframe &amp; Battery Enclosure
+        ▼
+  4. MANUFACTURING BOM                BOM-WC450-PWR-v1.2
+        │                             Specified cells &amp; inverter IDs
+        ▼
+  5. MANUFACTURING SOP                ELEK-MANU-SOP-0041
+        │                             Battery Pack Installation
+        ▼
+  6. SHOP QUALITY INSPECTION          EVI-IMG-2026-9912
+        │                             3D mesh &amp; torque check log
+        ▼
+  7. DIGITAL TWIN &amp; TELEMETRY         EVI-TLM-2026-8812
+        │                             Continuous CAN power output log
+        ▼
+  8. FIOS FIELD VALIDATION            DOS-FLEET-0012
+                                      Fleet Readiness Index verification</pre>
+<p>If any link in this chain breaks (e.g., an assembly step exists without a corresponding requirement, or a field telemetry metric cannot be traced back to an engineering spec), the asset is flagged as <strong>Non-Compliant</strong> within the Enterprise Data Platform.</p>
+<hr>
+<h2 id="section-5-evidence-verification-standard">Section 5 — Evidence &amp; Verification Standard</h2>
+<h3 id="5-1-evidence-artifact-classification-matrix">5.1 Evidence Artifact Classification Matrix</h3>
+<p>No quality gate, health rating, or configuration transition is valid without an explicit Evidence Artifact:</p>
+<div class="tablewrap"><table><thead><tr><th class="left">Evidence Type ID</th><th class="left">Category</th><th class="left">Valid Sources &amp; Formats</th><th class="left">Storage / Ledger Location</th></tr></thead><tbody><tr><td class="left"><code>EVI-IMG</code></td><td class="left">Visual / Spatial Data</td><td class="left">LiDAR point clouds, 3D mesh captures, high-res photos</td><td class="left">ELEKTRON Media Store / Digital Twin</td></tr><tr><td class="left"><code>EVI-TLM</code></td><td class="left">Telemetry Data</td><td class="left">CAN bus logs (.dbc parsed), high-voltage isolation logs</td><td class="left">Enterprise Data Platform (EDP)</td></tr><tr><td class="left"><code>EVI-LAB</code></td><td class="left">Physical Test Data</td><td class="left">Battery capacity discharge curve, thermal camera capture</td><td class="left">Quality System / Battery Passport</td></tr><tr><td class="left"><code>EVI-DOC</code></td><td class="left">Third-Party Compliance</td><td class="left">HVIP approval letter, DOT inspection certificate, ISO audit</td><td class="left">Compliance Vault</td></tr><tr><td class="left"><code>EVI-SIG</code></td><td class="left">Digital Sign-off</td><td class="left">Operator cryptographic sign-off, technician badge ID</td><td class="left">Audit Trail / EIOS Ledger</td></tr></tbody></table></div>
+<h3 id="5-2-battery-passport-evidence-protocol">5.2 Battery Passport Evidence Protocol</h3>
+<p>Every high-voltage pack integrated into a WorkCore platform must be issued a digital Battery Passport (<code>BATT-YYYY-UUID</code>). Pack certification requires five mandatory evidence attachments:</p>
+<pre class="blueprint">                       ┌───────────────────────────────┐
+                       │   ELEKTRON BATTERY PASSPORT    │
+                       │   ID:  BATT-2026-88942A        │
+                       └───────────────┬───────────────┘
+                                       │
+      ┌────────────────┬───────────────┼───────────────┬────────────────┐
+      ▼                ▼               ▼               ▼                ▼
+ Visual / Frame   Capacity / IR   HV Isolation   Pressure / Seal   Thermal Scan
+ Inspection       Discharge Log   Resistance     Coolant Test      Image Array
+ (EVI-IMG)        (EVI-TLM)       (EVI-LAB)       (EVI-LAB)         (EVI-IMG)</pre>
+<hr>
+<h2 id="section-6-mandatory-companion-artifact-ecosystem">Section 6 — Mandatory Companion Artifact Ecosystem</h2>
+<p>To prevent context loss and establish a knowledge-preserving engineering system, no master document volume or specification is complete in isolation. Every volume within the ELEKTRON Enterprise Architecture suite must be published alongside a standardized 11-artifact companion directory:</p>
+<pre class="blueprint">Volume-I-Enterprise-Core/
+├── README.md                 &lt;-- Quick-start orientation, scope, required reading
+├── ARCHITECTURAL_INTENT.md   &lt;-- Detailed rationale, trade-offs, design philosophy
+├── CHANGELOG.md              &lt;-- System impact log (Hardware, Software, Safety)
+├── DECISIONS.md              &lt;-- Architecture Decision Records (ADR index)
+├── GUARDRAILS.md             &lt;-- Explicit negative rules ("Never Do These Things")
+├── HANDOFF.md                &lt;-- Operational status, open risks, immediate next steps
+├── ROADMAP.md                &lt;-- Planned near/medium/long-term development
+├── FUTURE_WORK.md            &lt;-- Speculative research &amp; uncommitted proposals
+├── KNOWN_LIMITATIONS.md      &lt;-- Honest gap analysis, assumptions, pending tests
+├── TRACEABILITY.md           &lt;-- Requirements to verification mapping matrix
+└── LESSONS_LEARNED.md        &lt;-- Empirical findings post-milestone deployment</pre>
+<h3 id="6-1-guardrail-protocol-guardrails-md-standard">6.1 Guardrail Protocol (<code>GUARDRAILS.md</code>) Standard</h3>
+<p>Every volume's <code>GUARDRAILS.md</code> file must explicitly list non-negotiable negative constraints designed to protect system integrity.</p>
+<p><strong>Master Enterprise Guardrails (Mandatory Across All Volumes):</strong></p>
+<ul><li><strong>NEVER</strong> delete raw evidence files (<code>EVI-*</code>) or overwrite historical test logs.</li><li><strong>NEVER</strong> reuse a Battery Passport ID (<code>BATT-*</code>) or Vehicle ID (<code>VEH-*</code>).</li><li><strong>NEVER</strong> modify a VALIDATED v1.0 document, BOM, or code module without executing a formal Engineering Change Order (ECO).</li><li><strong>NEVER</strong> commit hardcoded values, calibration parameters, or connection credentials directly into source repositories; all configuration must use declarative manifests (<code>.yaml</code>/<code>.json</code>).</li><li><strong>NEVER</strong> bypass high-voltage safety isolation checks (<code>EVI-LAB</code>) prior to pack energization.</li><li><strong>NEVER</strong> treat BASELINE v0.1 cost, weight, or range figures as committed production values.</li></ul>
+<hr>
+<h2 id="section-7-enterprise-governance-standards-board">Section 7 — Enterprise Governance &amp; Standards Board</h2>
+<h3 id="7-1-enterprise-architecture-standards-board-easb">7.1 Enterprise Architecture &amp; Standards Board (EASB)</h3>
+<p>The Enterprise Architecture &amp; Standards Board (EASB) is the governing body authorized to maintain enterprise standards, enforce configuration discipline, and approve baseline promotions. <em>(Currently constituted as the Founder / Acting Enterprise Architecture Authority pending a staffed board — see <code>document-metadata.json</code>.)</em></p>
+<pre class="blueprint">┌──────────────────────────────────────────────────────────────────────┐
+│              ENTERPRISE ARCHITECTURE &amp; STANDARDS BOARD (EASB)              │
+├──────────────────────────────────────────────────────────────────────┤
+│  MEMBERSHIP                                                            │
+│    • Chief Executive Officer          Executive Lead                   │
+│    • Chief Technology Officer         System Architecture Lead         │
+│    • Chief Operating Officer          Manufacturing &amp; Supply Chain     │
+│    • Lead Enterprise Architect        Standards Officer                │
+│    • Director of Quality &amp; Compliance Safety &amp; Certification           │
+├──────────────────────────────────────────────────────────────────────┤
+│  SCOPE OF AUTHORITY                                                    │
+│    1. Approval of all Major Version promotions (v0.9 → v1.0 Validated) │
+│    2. Authorization of cross-volume Engineering Change Orders (ECOs)   │
+│    3. Modifications to the ELEKTRON Enterprise Standards (EES)         │
+│    4. Final arbitration on canonical object naming and DB schemas      │
+└──────────────────────────────────────────────────────────────────────┘</pre>
+<h3 id="7-2-master-sign-off-eco-approval-matrix">7.2 Master Sign-off &amp; ECO Approval Matrix</h3>
+<div class="tablewrap"><table><thead><tr><th class="left">Document / Asset Class</th><th class="left">Target State</th><th class="left">Author / Originator</th><th class="left">Reviewer</th><th class="left">Final Approval Authority</th></tr></thead><tbody><tr><td class="left">Enterprise Standards (EES)</td><td class="left">Validated v1.0</td><td class="left">Lead Architect</td><td class="left">Director of Quality</td><td class="left">Enterprise Architecture &amp; Standards Board (EASB)</td></tr><tr><td class="left">WorkCore Platform Specs</td><td class="left">Validated v1.0</td><td class="left">Powertrain Lead</td><td class="left">Chief Technology Officer</td><td class="left">Chief Operating Officer (COO)</td></tr><tr><td class="left">Software Schemas &amp; EDP</td><td class="left">Validated v1.0</td><td class="left">Software Architect</td><td class="left">Lead Data Engineer</td><td class="left">Chief Technology Officer (CTO)</td></tr><tr><td class="left">Operational Shop SOPs</td><td class="left">Validated v1.0</td><td class="left">Manufacturing Lead</td><td class="left">Shop Floor Manager</td><td class="left">VP of Manufacturing</td></tr><tr><td class="left">Engineering Change Order</td><td class="left">Active ECO</td><td class="left">Lead Engineer</td><td class="left">Quality Engineering</td><td class="left">EASB Representative</td></tr></tbody></table></div>
+<hr>
+<h2 id="section-8-master-canonical-glossary">Section 8 — Master Canonical Glossary</h2>
+<ul><li><strong>Architecture Decision Record (ADR):</strong> An immutable document capturing the context, options, decision, and consequences of a major architectural choice.</li><li><strong>Battery Passport:</strong> An immutable digital ledger (<code>BATT-*</code>) tracking the origin, capacity history, health logs, testing evidence, and active state of a specific high-voltage battery pack.</li><li><strong>Canonical Object Identifier (OBJ-ID):</strong> A standardized, globally unique key assigned to physical assets, software builds, and organizations inside the Enterprise Data Platform.</li><li><strong>Digital Thread:</strong> The continuous, unbroken record of data linking customer requirements, engineering specs, assembly SOPs, shop evidence, telemetry, and field service history.</li><li><strong>ePTO (Electric Power Take-Off):</strong> An onboard high-voltage inverter and motor system that drives hydraulic pumps or auxiliary tools without idling an internal combustion engine.</li><li><strong>Enterprise Architecture &amp; Standards Board (EASB):</strong> The executive engineering body holding sole authority over document promotions, standard revisions, and cross-domain change orders. Currently constituted as the Founder / Acting Enterprise Architecture Authority pending a staffed board.</li><li><strong>Fleet Readiness Index (FRI):</strong> An algorithmic score generated by FIOS evaluating a commercial fleet's operational, financial, and electrical grid suitability for electrification.</li><li><strong>WorkCore:</strong> ELEKTRON's proprietary modular conversion platform designed for medium- and heavy-duty commercial truck chassis (e.g., WorkCore-450, WorkCore-550).</li></ul>
+<hr>
+<p><em>End of Standard — ELEKTRON Enterprise Standards (EES) v1.0.</em></p>
+<p><em>This foundational document is intended as the frozen, governing rulebook for all subsequent volumes of the ELEKTRON Enterprise Architecture (EEA). Its promotion to that frozen/VALIDATED status is gated on the §7.2 approval chain; until then it is tracked as DRAFT in this repository (see the governance banner above).</em></p>
+<footer><div>DERIVED presentation artifact - not the canonical source.</div><div><span class="k">Canonical:</span> docs/standards/EES/ELEK-QUAL-STD-0000.md</div><div><span class="k">Document:</span> ELEK-QUAL-STD-0000 v0.1.0 (CONTROLLED_BASELINE / PENDING_VALIDATION)</div><div><span class="k">Source commit:</span> 9f4be635adae24513f8b082943fca5305d9b8152</div><div><span class="k">Generator:</span> scripts/generate_standards_html.py</div></footer>
+</div>
+</body>
+</html>

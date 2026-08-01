@@ -53,6 +53,8 @@ README.md                         Entry point (this file)
 AGENTS.md                         Cross-agent rules + handoff protocol
 .cursor/rules/                    Cursor rule mirroring AGENTS.md
 index.html                        Public static site
+Makefile                          Canonical local commands (make standards-verify; D-019)
+.github/workflows/                CI workflows — call make targets only (D-019)
 elektron-digital-twin-foundation/ Layer-governed 3D digital-twin docs (L00 Reference Lock)
 docs/
     ENGINEERING_CONSTITUTION.md   Rules that rarely change (Articles I–VIII)
