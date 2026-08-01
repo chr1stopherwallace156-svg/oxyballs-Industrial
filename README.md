@@ -65,6 +65,7 @@ docs/
     research/                     Open research register, source claims, immutable raw batches
     roadmaps/                     Per-milestone plans (M10, M11, ingestion, gates)
     specifications/               Revision 07 (active) + its modules
+    standards/                    Enterprise standards volumes (EES = docs/standards/EES/; D-018)
     status/                       Phase, ledger, blockers, PLATFORM_001_STATUS
 engine/
     migrations/                   Versioned SQL schema (001..005)

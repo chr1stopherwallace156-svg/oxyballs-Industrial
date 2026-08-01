@@ -1,0 +1,53 @@
+{
+  "$schema": "./schemas/document-metadata.schema.json",
+  "elek_id": "ELEK-QUAL-STD-0000",
+  "title": "ELEKTRON Enterprise Standards (EES)",
+  "domain": "QUAL",
+  "class": "STD",
+  "sequence": "0000",
+  "classification": "Enterprise Engineering Standard / Single Source of Truth",
+  "canonical_source": "docs/standards/EES/ELEK-QUAL-STD-0000.md",
+  "authored": {
+    "target_version": "1.0.0",
+    "declared_status": "Validated Release (v1.0)",
+    "effective_date": "2026-07-28",
+    "owner": "ELEKTRON Enterprise Architecture & Standards Board (EASB)",
+    "note": "declared_status is the AUTHORED target state, not an achieved repository state. See repository.lifecycle_state for the governing status."
+  },
+  "repository": {
+    "lifecycle_state": "DRAFT",
+    "document_version": "0.1.0-draft",
+    "validation_state": "PENDING",
+    "reason": "Not VALIDATED: the EES's own s3.1 reserves VALIDATED for empirically verified, approved designs, and s7.2 requires the Author -> Reviewer -> ERB sign-off chain. No approvals or validation evidence are recorded in-repo (Principle 1: Evidence Before Assumption).",
+    "introduced_by": "docs/DECISION_REGISTER.md#D-018",
+    "first_committed_branch": "claude/docs-structure-large-projects-b6vxx5"
+  },
+  "approvals": {
+    "author": null,
+    "reviewer": null,
+    "final_approval_erb": null
+  },
+  "evidence_attachments": [],
+  "generated_artifacts": [
+    {
+      "path": "docs/standards/EES/generated/ELEK-QUAL-STD-0000.v1.0.html",
+      "kind": "presentation-html",
+      "derived_from": "docs/standards/EES/ELEK-QUAL-STD-0000.md",
+      "authoritative": false,
+      "note": "Presentation-layer publication artifact. Not the canonical source; regenerate from the Markdown master."
+    }
+  ],
+  "companion_ecosystem": [
+    "README.md",
+    "ARCHITECTURAL_INTENT.md",
+    "CHANGELOG.md",
+    "DECISIONS.md",
+    "GUARDRAILS.md",
+    "HANDOFF.md",
+    "ROADMAP.md",
+    "FUTURE_WORK.md",
+    "KNOWN_LIMITATIONS.md",
+    "TRACEABILITY.md",
+    "LESSONS_LEARNED.md"
+  ]
+}

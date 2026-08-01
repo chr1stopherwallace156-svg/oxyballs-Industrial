@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://elektron.local/schemas/canonical-object-id.schema.json",
+  "title": "ELEKTRON Canonical Object Identifier (OBJ-ID)",
+  "description": "Validates a Canonical Object Identifier per EES s2.2. Every physical asset, software build, organization, and digital-twin node in the Enterprise Data Platform (EDP) carries exactly one OBJ-ID.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["object_id", "entity_code"],
+  "properties": {
+    "object_id": {
+      "type": "string",
+      "description": "The full canonical identifier string.",
+      "pattern": "^(VEH|BATT|MTR|INV|HAR)-[0-9]{4}-[0-9A-F]{6}$|^FW-SOFT-v[0-9]+\\.[0-9]+\\.[0-9]+$|^ECO-[0-9]{4}-[0-9]{6}$|^SUP-VEND-[0-9]{5}[0-9A-F]$|^TECH-OPER-[0-9]{6}$|^FLEET-CUST-[0-9]{5}[0-9A-F]$|^SITE-FAC-[0-9]{6}$"
+    },
+    "entity_code": {
+      "type": "string",
+      "enum": ["VEH", "BATT", "MTR", "INV", "FW", "HAR", "ECO", "SUP", "TECH", "FLEET", "SITE"]
+    },
+    "entity_category": { "type": "string" },
+    "target_scope": { "type": "string" }
+  },
+  "examples": [
+    { "object_id": "VEH-2026-8F92A1", "entity_code": "VEH", "entity_category": "Converted Vehicle Node", "target_scope": "Digital Twin vehicle master record" },
+    { "object_id": "BATT-2026-0041B2", "entity_code": "BATT", "entity_category": "Battery Pack Assembly", "target_scope": "High-voltage pack & Battery Passport" },
+    { "object_id": "FW-SOFT-v1.4.2", "entity_code": "FW", "entity_category": "Firmware Build Release", "target_scope": "Compiled binary flashed to ECU" },
+    { "object_id": "ECO-2026-000142", "entity_code": "ECO", "entity_category": "Engineering Change Order", "target_scope": "Formal hardware/software change request" },
+    { "object_id": "TECH-OPER-000412", "entity_code": "TECH", "entity_category": "Certified Shop Technician", "target_scope": "Authenticated operator badge ID" }
+  ]
+}

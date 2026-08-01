@@ -49,6 +49,7 @@ docs/
     research/                      Open research register, source claims, immutable raw batches
     roadmaps/                      Per-milestone + release roadmaps
     specifications/                Active revision (07) + modules
+    standards/                     Enterprise standards volumes (owner: EASB; D-018). EES = docs/standards/EES/
     status/                        Phase, ledger, blockers, platform status
 engine/
     migrations/                    Versioned SQL schema (001..)

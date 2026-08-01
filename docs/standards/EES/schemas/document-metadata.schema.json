@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://elektron.local/schemas/document-metadata.schema.json",
+  "title": "ELEKTRON Document Metadata",
+  "description": "Machine-readable governance metadata for an ELEKTRON document (ELEK-ID). Records the authored target state and the enforced repository lifecycle/approval state separately, so a 'Validated' claim can never outrun its evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["elek_id", "title", "domain", "class", "canonical_source", "repository", "approvals"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "elek_id": {
+      "type": "string",
+      "description": "Document identifier without version suffix.",
+      "pattern": "^ELEK-[A-Z]{3,5}-[A-Z]{3,4}-[0-9]{4}$"
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "domain": {
+      "type": "string",
+      "enum": ["CORP", "ARCH", "HARD", "SOFT", "MANU", "FLTE", "SUPP", "QUAL"]
+    },
+    "class": {
+      "type": "string",
+      "enum": ["STD", "SPEC", "SOP", "ADR", "MANI", "DOS", "REPO"]
+    },
+    "sequence": { "type": "string", "pattern": "^[0-9]{4}$" },
+    "classification": { "type": "string" },
+    "canonical_source": {
+      "type": "string",
+      "description": "Repo-relative path to the authoritative Markdown master."
+    },
+    "authored": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "target_version": { "type": "string" },
+        "declared_status": { "type": "string" },
+        "effective_date": { "type": "string", "format": "date" },
+        "owner": { "type": "string" },
+        "note": { "type": "string" }
+      }
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lifecycle_state", "validation_state"],
+      "properties": {
+        "lifecycle_state": {
+          "type": "string",
+          "description": "Governing lifecycle state per EES s3.1.",
+          "enum": ["DRAFT", "BASELINE", "VALIDATED", "LEGACY", "DEPRECATED", "ARCHIVED"]
+        },
+        "document_version": { "type": "string" },
+        "validation_state": {
+          "type": "string",
+          "enum": ["PENDING", "IN_REVIEW", "SATISFIED"]
+        },
+        "reason": { "type": "string" },
+        "introduced_by": { "type": "string" },
+        "first_committed_branch": { "type": "string" }
+      }
+    },
+    "approvals": {
+      "type": "object",
+      "description": "Per EES s7.2. A null value means the approval has not been recorded. VALIDATED requires all three non-null.",
+      "additionalProperties": false,
+      "required": ["author", "reviewer", "final_approval_erb"],
+      "properties": {
+        "author": { "$ref": "#/$defs/signoff" },
+        "reviewer": { "$ref": "#/$defs/signoff" },
+        "final_approval_erb": { "$ref": "#/$defs/signoff" }
+      }
+    },
+    "evidence_attachments": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^EVI-[A-Z]{3}-" }
+    },
+    "generated_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": { "type": "string" },
+          "kind": { "type": "string" },
+          "derived_from": { "type": "string" },
+          "authoritative": { "type": "boolean" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "companion_ecosystem": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "$defs": {
+    "signoff": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["role", "identity", "date"],
+          "properties": {
+            "role": { "type": "string" },
+            "identity": { "type": "string", "pattern": "^TECH-OPER-[0-9A-F]{6}$" },
+            "date": { "type": "string", "format": "date" },
+            "evidence": { "type": "string", "pattern": "^EVI-SIG-" }
+          }
+        }
+      ]
+    }
+  }
+}

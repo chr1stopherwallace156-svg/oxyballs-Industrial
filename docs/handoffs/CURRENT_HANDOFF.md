@@ -3,8 +3,29 @@
 ## Session
 
 - From agent: Claude Code
-- Date (UTC): 2026-07-22
-- Reason for handoff: **PLATFORM 001 BUILD PACKAGE v0.1 — VERTICAL SLICE BUILT
+- Date (UTC): 2026-08-01
+- Reason for handoff: **ELEKTRON ENTERPRISE STANDARDS (EES) LANDED AS CANONICAL
+  SOURCE (owner directive; D-018, EES-ADR-0001..0004).** The EES
+  (`ELEK-QUAL-STD-0000`) — previously only an owner-authored document + a hosted HTML
+  artifact — is now version-controlled canonical source under
+  `docs/standards/EES/`: the Markdown master (`ELEK-QUAL-STD-0000.md`, faithful
+  Sections 1–8 + summary + glossary), `document-metadata.json`, two JSON schemas
+  (`schemas/`), the full **11-artifact companion ecosystem**, and the HTML retained as
+  a **derived, non-authoritative** artifact under `generated/`. New second-level
+  directory `docs/standards/` admitted to the frozen structure via **D-018** (paired
+  `STRUCTURE_FREEZE.md` + `README.md` updates; `docs/CHANGELOG.md` entry). Lifecycle
+  state recorded as **DRAFT, not Validated** — the authored "Validated Release (v1.0)"
+  is the *target*; per the EES's own §3.1/§7.2 and Principle 1, VALIDATED needs the
+  Author → Director of Quality → ERB sign-off chain + attached evidence (all approvals
+  `null`). Authored inconsistencies (EASB vs ERB naming; the derived `ELEK-ID`
+  template) are **surfaced, not silently fixed** (`KNOWN_LIMITATIONS.md`).
+  Docs-governance only — **no engineering value / ODR / Build Engine artifact / M10 /
+  M11 touched; no approval/procurement/safety claim.** Open (owner-gated): resolve
+  EASB/ERB; elect DRAFT vs BASELINE; run §7.2 approvals + evidence before any VALIDATED
+  promotion; optionally add schema-validation CI + a deterministic HTML generator
+  (`docs/standards/EES/{HANDOFF,ROADMAP}.md`).
+
+- (prior) — **PLATFORM 001 BUILD PACKAGE v0.1 — VERTICAL SLICE BUILT
   (owner directive; D-015, L-006).** The first visible end-to-end Build Engine
   workflow now exists as a NEW layer above M10 (`engine/src/platform/`,
   `migrations/005_platform_package.sql` — 7 tables, `scripts/platform001.ts`,

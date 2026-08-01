@@ -17,6 +17,42 @@ later entry that references it.
 
 ---
 
+## D-018 — Admit `docs/standards/` to the frozen structure; land the EES as canonical source
+
+- Date: 2026-08-01
+- Status: Accepted (amends the D-016 structure freeze)
+- Context: The ELEKTRON Enterprise Standards (EES, `ELEK-QUAL-STD-0000`) existed only
+  as an owner-authored document and a hosted HTML presentation artifact — neither a
+  version-controlled, reviewable, attributable source. The canonical source must live
+  in the repository as Markdown + machine-readable metadata + JSON schemas, with the
+  full companion artifact ecosystem the EES itself mandates (§6). Placing it requires a
+  new directory, and the repository is under the D-016 structure freeze.
+- Decision:
+  1. **Admit a new second-level directory `docs/standards/`** to the canonical layout,
+     with the EES as its first volume at `docs/standards/EES/`. Four questions
+     (STRUCTURE_FREEZE): *why* — canonical home for enterprise standards; *who* — the
+     Enterprise Architecture & Standards Board (owner); *when* — authoring, reviewing,
+     and governing any `*-STD-*` document; *what milestone* — the EES initiative (this
+     entry). `schemas/` and `generated/` are co-located **inside** the volume (not new
+     top-level dirs) to minimize freeze churn (see EES-ADR-0003).
+  2. **Land the EES canonical source**: `ELEK-QUAL-STD-0000.md` (faithful Markdown of
+     the authored Sections 1–8 + summary + glossary), `document-metadata.json`, two
+     JSON schemas, the 11-artifact companion ecosystem, and a labeled derived HTML
+     under `generated/`.
+  3. **Record lifecycle state as DRAFT, not Validated.** The authored "Validated
+     Release (v1.0)" is preserved as the *target*; per the EES's own §3.1/§7.2 and
+     Principle 1, VALIDATED requires the Author → Director of Quality → ERB sign-off
+     chain plus attached evidence, none of which exists in-repo. All approvals `null`.
+  4. **Preserve authored content; surface inconsistencies** (EASB vs ERB naming; the
+     derived `ELEK-ID` template) via the volume's `KNOWN_LIMITATIONS.md`/`HANDOFF.md`
+     rather than silently editing doctrine.
+- Consequences: `docs/standards/` is now part of the frozen layout (paired
+  `STRUCTURE_FREEZE.md` + `README.md` updates in this change). The EES is a governed,
+  diffable source; the HTML is a derived artifact. Promotion to VALIDATED is gated on
+  the §7.2 approvals + evidence via a future decision/ECO. This change asserts **no**
+  engineering value, approval, or safety claim, and touches no Build Engine artifact,
+  ODR, or M10/M11 scope.
+
 ## D-017 — Local-runtime hardening (RC2) + admit runtime tooling to the frozen structure
 
 - Date: 2026-07-23

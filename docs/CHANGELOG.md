@@ -5,6 +5,26 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-08-01 — ELEKTRON Enterprise Standards (EES) landed as canonical source (D-018)
+
+- **New second-level directory `docs/standards/`** admitted to the frozen structure
+  (D-018 amends D-016; paired `STRUCTURE_FREEZE.md` + `README.md` updates).
+- **EES canonical source** created at `docs/standards/EES/`: `ELEK-QUAL-STD-0000.md`
+  (faithful Markdown of the authored Sections 1–8 + summary + glossary),
+  `document-metadata.json`, `schemas/{document-metadata,canonical-object-id}.schema.json`,
+  and the full 11-artifact companion ecosystem (README, ARCHITECTURAL_INTENT,
+  CHANGELOG, DECISIONS, GUARDRAILS, HANDOFF, ROADMAP, FUTURE_WORK, KNOWN_LIMITATIONS,
+  TRACEABILITY, LESSONS_LEARNED).
+- **HTML re-scoped as derived**: the hosted/standalone HTML is retained under
+  `docs/standards/EES/generated/` and labeled non-authoritative; the Markdown master
+  is the single source of truth.
+- **Lifecycle state = DRAFT, not Validated.** The authored "Validated Release (v1.0)"
+  is preserved as the *target* only; per the EES's own §3.1/§7.2 and Principle 1,
+  VALIDATED requires the Author → Director of Quality → ERB sign-off chain plus
+  attached evidence (all approvals `null`).
+- **No engineering value, ODR, Build Engine artifact, or M10/M11 scope touched.** This
+  is documentation governance only; no approval/procurement/safety claim.
+
 ## 2026-07-23 — Local-runtime hardening RC2 + runtime tooling in-repo (D-017)
 
 - **`npm run clean` no longer deletes the database** — it removes only `dist/`. New
