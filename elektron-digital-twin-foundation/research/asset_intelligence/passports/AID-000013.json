@@ -1,0 +1,119 @@
+{
+  "asset_id": "AID-000013",
+  "id_immutable": true,
+  "schema_version": "1.1.0",
+  "authority_status": "RESEARCH_OPERATIONAL",
+  "aliases": [
+    "AID-ENG-0082"
+  ],
+  "title": "F-Series Driver Side Aluminum Door Assembly Engineering Geometry (GrabCAD claim)",
+  "source": {
+    "platform": "GrabCAD Core Engineering Reference (reported)",
+    "publisher": null,
+    "url": null,
+    "url_status": "NOT_RECORDED",
+    "marketplace_id": null,
+    "access_condition": "Reported free \u2014 URL required"
+  },
+  "vehicle": {
+    "reported_make": "Ford",
+    "reported_model": "F-Series",
+    "reported_year_range": "unspecified",
+    "reported_body": "Driver door engineering geometry",
+    "listing_claim_summary": "STEP/NURBS engineering passport candidate"
+  },
+  "configuration": {
+    "reported_cab": null,
+    "reported_ca_in": null,
+    "reported_wheelbase_in": null,
+    "reported_drivetrain": null,
+    "reported_rear_wheels": null,
+    "notes": "CL-001 crossover may apply to outer skin only"
+  },
+  "exact_configuration_match": "COMPARISON_REFERENCE",
+  "match_tri_state": {
+    "value": "conditional",
+    "crossover_validation_requirements": [
+      "CL-001 verification",
+      "Datum alignment to EDTS frames"
+    ]
+  },
+  "geometry_types": [
+    "STEP"
+  ],
+  "completeness": {
+    "exterior": "PARTIAL",
+    "interior": "NOT_EVALUATED",
+    "mechanical": "NOT_EVALUATED",
+    "electrical": "NONE",
+    "hierarchy_quality": "NOT_EVALUATED",
+    "mesh_separation": "NOT_EVALUATED",
+    "topology_quality": "NOT_EVALUATED",
+    "evaluation_basis": "LISTING_ONLY"
+  },
+  "usefulness": {
+    "engineering": "PARTIAL",
+    "visual": "LOW"
+  },
+  "license": {
+    "status": "UNKNOWN",
+    "terms_summary": null
+  },
+  "price": {
+    "status": "FREE_CLAIMED",
+    "amount_usd": 0.0,
+    "currency_note": null
+  },
+  "lifecycle": {
+    "discovered": true,
+    "acquired": "NOT_ACQUIRED",
+    "parsed": "NOT_EXECUTED",
+    "verified": "NOT_EXECUTED"
+  },
+  "component_coverage": [
+    {
+      "target": "EDTS-COMP-FL-SHELL engineering",
+      "presence": "CLAIMED"
+    },
+    {
+      "target": "Inner impact beam",
+      "presence": "UNKNOWN",
+      "notes": "KG-003"
+    }
+  ],
+  "known_deficiencies": [
+    "SOURCE_VERIFIED rejected \u2014 no URL/hash",
+    "Related to AID-000003 GrabCAD hunt \u2014 may be duplicate channel"
+  ],
+  "evidence_links": [
+    {
+      "kind": "RELATED_LISTING",
+      "ref": "AID-000003"
+    },
+    {
+      "kind": "OTHER",
+      "ref": "research/twin_passports/TWIN-ENG-000001.json",
+      "note": "Engineering twin passport"
+    },
+    {
+      "kind": "SPRINT",
+      "ref": "research/sprints/RL-014_MISSION_TWIN_EVIDENCE_COUNTS.md"
+    }
+  ],
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "related_asset_ids": [
+    "AID-000003"
+  ],
+  "maps_to_src_cand": null,
+  "maps_to_candidate_asset_id": null,
+  "edts_role": "CAD_CANDIDATE",
+  "assembly_hub": "FL_DOOR",
+  "ajr_id": null,
+  "research_sprint": "RL-014",
+  "decision": "DT-D045",
+  "notes": [
+    "Assigned to Engineering twin profile only. Not acquired."
+  ]
+}

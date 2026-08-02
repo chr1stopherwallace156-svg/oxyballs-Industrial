@@ -1,0 +1,18 @@
+{
+  "project": "elektron-capture-ios",
+  "handoff": "phase1c-architecture-clarification",
+  "package_product": "ElektronCapture",
+  "workspace": "Phase1StillCapture.xcworkspace",
+  "scheme": "Phase1StillCapture",
+  "phase_status": "PHASE_1C_IMPLEMENTED_PENDING_MAC_AND_DEVICE_VALIDATION",
+  "expected_invariants": [
+    "Evidence files on disk are authoritative; index is rebuildable catalog only",
+    "Index stores library-root-relative paths only",
+    "Staging commit: .staging \u2192 read-back SHA \u2192 rename captures/<id>",
+    "storageState=STORED_LOCALLY only after read-back + commit rename",
+    "Orthogonal capture/storage/package/export/integrity states",
+    "artifact_original.jpg write-once; retakes get new capture-id",
+    ".edts-pkg Documents export remains the portable Phase 1A format"
+  ],
+  "notes": "PHASE_1C_COMPLETE requires physical-device acceptance evidence"
+}

@@ -1,0 +1,235 @@
+{
+  "store": "SIM",
+  "schema": "edts-r2-sim-v1",
+  "primary_key": "sim_id",
+  "foreign_keys": [
+    "comp_id"
+  ],
+  "status": "BLOCKED_UNTIL_MASS_EVIDENCE",
+  "honesty": "All mass_kg / cg_m / axle weights are null until PHYSICALLY_MEASURED or VERIFIED. Handoff sample masses (420/310/490/140/380/520/110 kg) and live axle formulas REJECTED.",
+  "rejected_sample_masses_kg": {
+    "note": "EDTSDemonstratorV2.jsx invented values — not admitted",
+    "values": [
+      420,
+      310,
+      490,
+      140,
+      380,
+      520,
+      110
+    ]
+  },
+  "wheelbase_m": 3.69062,
+  "wheelbase_status": "ASSERTION_EXTRACTED",
+  "records": {
+    "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME": {
+      "sim_id": "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB": {
+      "sim_id": "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM": {
+      "sim_id": "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR": {
+      "sim_id": "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS": {
+      "sim_id": "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR": {
+      "sim_id": "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK": {
+      "sim_id": "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION": {
+      "sim_id": "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT": {
+      "sim_id": "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR": {
+      "sim_id": "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT": {
+      "sim_id": "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING": {
+      "sim_id": "SIM-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-BLOCK-LV-GATEWAY": {
+      "sim_id": "SIM-BLOCK-LV-GATEWAY",
+      "comp_id": "BLOCK-LV-GATEWAY",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-PROP-HV-PACK-01": {
+      "sim_id": "SIM-PROP-HV-PACK-01",
+      "comp_id": "PROP-HV-PACK-01",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-PROP-EDU-REAR-01": {
+      "sim_id": "SIM-PROP-EDU-REAR-01",
+      "comp_id": "PROP-EDU-REAR-01",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-PROP-INVERTER-01": {
+      "sim_id": "SIM-PROP-INVERTER-01",
+      "comp_id": "PROP-INVERTER-01",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-PROP-DCDC-01": {
+      "sim_id": "SIM-PROP-DCDC-01",
+      "comp_id": "PROP-DCDC-01",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-PROP-LTR-01": {
+      "sim_id": "SIM-PROP-LTR-01",
+      "comp_id": "PROP-LTR-01",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    },
+    "SIM-PROP-CCS-PORT-01": {
+      "sim_id": "SIM-PROP-CCS-PORT-01",
+      "comp_id": "PROP-CCS-PORT-01",
+      "mass_kg": null,
+      "cg_m": null,
+      "inertia": null,
+      "front_axle_share": null,
+      "rear_axle_share": null,
+      "mass_status": "UNKNOWN",
+      "mass_source": null
+    }
+  }
+}

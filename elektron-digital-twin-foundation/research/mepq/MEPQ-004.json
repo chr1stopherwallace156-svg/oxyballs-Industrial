@@ -1,0 +1,41 @@
+{
+  "mepq_id": "MEPQ-004",
+  "operator_alias": "MEPQ-2019-F450-DECON-006",
+  "target_property": "Aft-of-axle fuel tank strap frame hole center coordinates, thread/hole diameter, and fastener torque",
+  "system_context": "Rear HV battery subframe reuse of OEM fuel-tank strap holes without flange drilling",
+  "affected_cfgcomp_ids": [
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME-RAIL-LH",
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME-RAIL-RH"
+  ],
+  "priority": "CRITICAL",
+  "status": "DEFERRED",
+  "inference_forbidden_reason": "Hole coordinates, thread size, and torque cannot be inferred from tank capacity or frame width alone.",
+  "engineering_risk": "Wrong bolt-on battery subframe; forbidden upfitter flange drilling if guessed.",
+  "best_source_tiers": [
+    {
+      "tier": 1,
+      "source_class": "Workshop Manual fuel tank and lines (operator cites §310-01 — section ID unverified until bytes)",
+      "src_cand_ids": ["SRC-CAND-000002"],
+      "notes": "Do not treat operator section number as verified until WSM acquired."
+    },
+    {
+      "tier": 5,
+      "source_class": "Physical coordinate measurement of aft frame rails",
+      "notes": "Physical asset intake required."
+    }
+  ],
+  "related_gap_ids": ["KG-009"],
+  "related_mission_ids": ["MISN-000005"],
+  "acquisition_cost_vector": "COMMERCIAL_PAYWALL",
+  "high_roi_purchase_signal": true,
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "honesty_notes": [
+    "40 gal aft-of-axle tank existence/capacity ASSERTION_EXTRACTED; mount geometry still missing.",
+    "Deferred with Mission E — registered so gap is not lost.",
+    "No M10/M12 or torque values admitted."
+  ],
+  "decision": "DT-D055",
+  "research_sprint": "RL-024"
+}

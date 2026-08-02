@@ -1,0 +1,82 @@
+{
+  "document_id": "FL_REGULATOR_REMOVAL_SEQUENCE_ILLUSTRATIVE",
+  "authority_status": "ILLUSTRATIVE_ONLY",
+  "target_node": "EDTS-COMP-FL-REGULATOR",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "query_edge_types": [
+    "BLOCKS_REMOVAL_OF",
+    "CONNECTED_TO",
+    "SUPPORTS",
+    "BOLTED_TO",
+    "PASSES_BEHIND"
+  ],
+  "operator_claimed_validation": "Verified procedural removal sequence \u2014 REJECTED",
+  "project_validation_status": "NOT_EXECUTED",
+  "honesty_gate": [
+    "Sequence derived from ILLUSTRATIVE edges only.",
+    "OEM WSM/EWD bytes absent \u2014 do not treat as service procedure.",
+    "Missing verified ROUTES_THROUGH/PASSES_BEHIND for harness may cause damage if followed physically."
+  ],
+  "steps": [
+    {
+      "order": 1,
+      "clears_edges": [
+        "REL-000004"
+      ],
+      "aliases_cleared": [
+        "REL-REG-04"
+      ],
+      "action_claim": "Extract interior trim panel; disconnect switch harness",
+      "status": "ILLUSTRATIVE"
+    },
+    {
+      "order": 2,
+      "clears_edges": [
+        "REL-000002"
+      ],
+      "aliases_cleared": [
+        "REL-REG-02"
+      ],
+      "action_claim": "Unplug 6-pin regulator motor connector",
+      "status": "ILLUSTRATIVE"
+    },
+    {
+      "order": 3,
+      "clears_edges": [
+        "REL-000003",
+        "REL-000005"
+      ],
+      "aliases_cleared": [
+        "REL-REG-03",
+        "REL-REG-05"
+      ],
+      "action_claim": "Loosen sash clamps; extract glass upward through weatherstrip",
+      "status": "ILLUSTRATIVE"
+    },
+    {
+      "order": 4,
+      "clears_edges": [
+        "REL-000001"
+      ],
+      "aliases_cleared": [
+        "REL-REG-01"
+      ],
+      "action_claim": "Remove three M6 structural bolts securing regulator to inner shell",
+      "status": "ILLUSTRATIVE"
+    },
+    {
+      "order": 5,
+      "preserves_edges": [
+        "REL-000006"
+      ],
+      "aliases_preserved": [
+        "REL-REG-06"
+      ],
+      "action_claim": "Extract regulator past side-impact beam without contacting beam",
+      "status": "ILLUSTRATIVE"
+    }
+  ],
+  "research_sprint": "RL-015",
+  "decision": "DT-D046"
+}

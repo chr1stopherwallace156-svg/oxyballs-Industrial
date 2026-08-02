@@ -1,0 +1,38 @@
+{
+  "Count": 1,
+  "Message": "Results returned successfully. FIXTURE — not a live decode.",
+  "SearchCriteria": "VIN(s): 1FDUF4HT0KDA00001",
+  "Results": [
+    {
+      "Make": "FORD",
+      "Manufacturer": "FORD MOTOR COMPANY",
+      "Model": "F-450",
+      "ModelYear": "2019",
+      "Series": "Super Duty",
+      "Trim": "XL",
+      "BodyClass": "Incomplete - Chassis Cab (Single Cab)",
+      "VehicleType": "INCOMPLETE VEHICLE",
+      "BodyCabType": "Regular",
+      "CabType": "",
+      "DriveType": "4x2",
+      "AxleConfiguration": "",
+      "Axles": "",
+      "GVWR": "Class 4: 14,001 - 16,000 lb (6,350 - 7,258 kg)",
+      "EngineManufacturer": "Ford",
+      "EngineModel": "",
+      "EngineCylinders": "8",
+      "DisplacementL": "6.7",
+      "FuelTypePrimary": "Diesel",
+      "PlantCity": "",
+      "PlantState": "",
+      "PlantCountry": "UNITED STATES (USA)",
+      "ErrorCode": "0",
+      "ErrorText": "0 - VIN decoded clean. Check Digit (9th position) is correct",
+      "AdditionalErrorText": "",
+      "VIN": "1FDUF4HT0KDA00001",
+      "MakeID": "460",
+      "ManufacturerId": "976",
+      "ModelID": "1807"
+    }
+  ]
+}

@@ -1,0 +1,273 @@
+{
+  "document_id": "FRONT_SUSPENSION_ENGINEERING_EVIDENCE_BRIEF_D",
+  "title": "Subsystem Mission D — Front Chassis / Steering / Suspension Evidence Brief",
+  "decision": "DT-D053",
+  "research_sprint": "RL-022",
+  "mission_id": "MISN-000004",
+  "mission_status": "IN_PROGRESS",
+  "recommended_decision": "MISSION_D_IN_PROGRESS_PRIMARY_SOURCE_PARTIAL",
+  "locked_configuration": {
+    "proposal_configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+    "kernel_configuration_id": "CFG-000001",
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+    "summary": "2019 Ford F-450 Chassis Cab Regular Cab 4x2 DRW 145.3 WB / 60 CA"
+  },
+  "pollution_filter": {
+    "rejected_as_authoritative": [
+      "pickup body platforms",
+      "4x4 live front axle geometry as 4x2 truth",
+      "F-350 Twin I-beam as F-450 architecture",
+      "F-550/F-600 GAWR rows as F-450 baseline",
+      "2020+ / 2026 model-year blogs",
+      "2013 Chassis Cab brochure as 2019 silo authority",
+      "CarBuzz / CarsDirect aggregator pages",
+      "generic ford.ca commercial landing pages without hashed local bytes",
+      "operator EXACT_MATCH torque / alignment tables without WSM"
+    ]
+  },
+  "sources": [
+    {
+      "cite": "SRC-CAND-000010",
+      "lifecycle_status": "SOURCE_ACQUIRED",
+      "sha256": "sha256:7a92e4ea839a3a7d163e2c374e6cfde0a24d277e1ee40013217cc6b3cab9c030",
+      "role": "Primary dimensional + chassis specs authority for this brief",
+      "local_file": "research/incoming/chassis_frame_ab/SRC-CAND-000010_2019_F350_450_550_Chassis_Cabs_Fleet_Spec.pdf"
+    },
+    {
+      "cite": "SRC-CAND-000011",
+      "lifecycle_status": "SOURCE_ACQUIRED",
+      "sha256": "sha256:f71e9eebf97ebe4f90ab5aaa5d780504e73df63d5008a7f5af8e4e35c8c6589f",
+      "role": "PLATFORM_FAMILY_MARKETING — FGAWR package narrative only",
+      "local_file": "research/incoming/chassis_frame_ab/SRC-CAND-000011_SkeeterFordChassis2019.pdf"
+    },
+    {
+      "cite": "SRC-CAND-000001",
+      "lifecycle_status": "SOURCE_ACQUIRED",
+      "sha256": "sha256:4c7a4bf129e91d0934cb1e7e160a3069c9486048ce643598cdd55504404df922",
+      "role": "BBAS/BAG — parse for suspension still PENDING",
+      "page_extraction_status": "NOT_EXECUTED"
+    },
+    {
+      "cite": "SRC-CAND-000002",
+      "lifecycle_status": "SOURCE_DISCOVERED",
+      "acquisition_status": "NOT_ACQUIRED",
+      "role": "WSM required for torque / alignment / linkage topology verification"
+    },
+    {
+      "cite": "SRC-CAND-000003",
+      "lifecycle_status": "SOURCE_DISCOVERED",
+      "acquisition_status": "NOT_ACQUIRED",
+      "role": "Front axle parts catalog"
+    }
+  ],
+  "architecture": {
+    "attr": "front_axle_type_4x2",
+    "value": "Monobeam",
+    "make": "Dana",
+    "material": "Forged Steel",
+    "max_rating_at_ground_lbs": "7000/7500",
+    "spring_centers_in": 46.45,
+    "status": "ASSERTION_EXTRACTED",
+    "applicability": "SERIES_F450_F550_CHASSIS_CAB_4X2",
+    "token_anchor": {
+      "source_id": "SRC-CAND-000010",
+      "section": "Front Axle Specifications — 4x2",
+      "page_extract": 55,
+      "series_model": "F-450/F-550"
+    },
+    "standard_equipment_corroboration": {
+      "front_axle_type": "Monobeam, Dana Super 60",
+      "capacity_rating_at_ground_lbs": 7000,
+      "token_anchor": {"source_id": "SRC-CAND-000010", "section": "Standard Equipment — F-450 Chassis Cab", "page_extract": 48},
+      "status": "ASSERTION_EXTRACTED",
+      "notes": [
+        "Axle capacity @ ground ≠ vehicle Max Std FGAWR for a given spring package.",
+        "Do not treat 7000 lb axle capacity as the vehicle's assigned FGAWR."
+      ]
+    },
+    "cross_configuration_comparison": {
+      "f350_4x2_front_axle_type": "Twin I-beam w/Ball Joint Spindle",
+      "status": "ASSERTION_EXTRACTED",
+      "applicability": "CROSS_CONFIGURATION_COMPARISON_ONLY",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "section": "Front Axle Specifications — 4x2", "page_extract": 55, "series_model": "F-350"},
+      "notes": ["Must not be inherited as F-450 silo architecture."]
+    },
+    "honesty_notes": [
+      "Operator phrasing 'non-driven drop-forged steel solid beam' is directionally consistent with OEM 'Monobeam' / 'Forged Steel' but must use OEM vocabulary (Monobeam) going forward.",
+      "4x2 Monobeam is non-driving relative to 4x4 live monobeam — do not import 4x4 live-spindle geometry.",
+      "Radius-arm count/material on 4x2 table row is layout-truncated in text extract; treat radius-arm detail as DOCUMENT_SUPPORTED existence + CANDIDATE detail pending clearer token or WSM/parts."
+    ]
+  },
+  "track_and_packaging": [
+    {
+      "attr": "front_track_I",
+      "value_in": 74.8,
+      "value_mm": 1899.92,
+      "status": "ASSERTION_EXTRACTED",
+      "applicability": "EXACT_CONFIGURATION_MATCH",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "code": "I", "page_extract": 3},
+      "notes": ["Already locked in chassis frame brief DT-D051; re-affirmed for Mission D."]
+    },
+    {
+      "attr": "front_axle_track_class",
+      "value": "Wide-track (F-450/F-550) vs narrow-track (F-350)",
+      "status": "DOCUMENT_SUPPORTED",
+      "applicability": "PLATFORM_FAMILY_MARKETING",
+      "evidence_source_ids": ["SRC-CAND-000011"],
+      "notes": ["Marketing label; dimensional authority remains front_track_I=74.8 from SRC-CAND-000010."]
+    }
+  ],
+  "fgawr": {
+    "exact_silo_max_std_front_gawr": [
+      {
+        "cab": "Regular Cab",
+        "drive": "4x2",
+        "wb_in": 145.3,
+        "engine": "6.8L",
+        "max_std_front_gawr_lbs": 4800,
+        "status": "ASSERTION_EXTRACTED",
+        "token_anchor": {"source_id": "SRC-CAND-000010", "section": "F-450 DRW Chassis Cab Weight Ratings", "page_extract": 28}
+      },
+      {
+        "cab": "Regular Cab",
+        "drive": "4x2",
+        "wb_in": 145.3,
+        "engine": "6.7L",
+        "max_std_front_gawr_lbs": 5200,
+        "status": "ASSERTION_EXTRACTED",
+        "token_anchor": {"source_id": "SRC-CAND-000010", "section": "F-450 DRW Chassis Cab Weight Ratings", "page_extract": 28}
+      }
+    ],
+    "operator_claim_standard_5600_lbs": {
+      "status": "REJECTED_AS_BASELINE",
+      "reason": "For Reg Cab 4x2 145.3 F-450, Max Std Front GAWR is 4800 (6.8L) or 5200 (6.7L), not 5600. 5600 appears in Available Front GAWR upgrade columns (Heavy-/Extra Heavy-Service paths), not as the universal baseline."
+    },
+    "available_upgrade_path": {
+      "packages_named_in_sources": [
+        "Heavy-Service Suspension Package",
+        "Extra Heavy-Service Suspension Package",
+        "Extra Heavy Duty Front End Suspension",
+        "Extra-Heavy-Duty Front-End Suspension Package (brochure)"
+      ],
+      "available_front_gawr_includes_lbs": [5600, 6000, 6500, 7000, 7500],
+      "status": "ASSERTION_EXTRACTED_PARTIAL",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "section": "Available Front GAWR — F-450 Chassis Cabs", "page_extract": 37},
+      "brochure_corroboration": {
+        "source_id": "SRC-CAND-000011",
+        "claim": "Extra-Heavy-Duty Front-End Suspension Package (F-450/F-550): upgraded front axle and 7,500-lb front springs/GAWR rating",
+        "status": "DOCUMENT_SUPPORTED",
+        "applicability": "PLATFORM_FAMILY_MARKETING_OPTION_DEPENDENT"
+      },
+      "notes": [
+        "Physical vehicle FGAWR requires door-jamb / certification label intake — still unverified on VEH-000001.",
+        "Do not invent spring codes for the bare reference until label or order sheet is acquired."
+      ]
+    }
+  },
+  "suspension_components": [
+    {
+      "attr": "front_springs",
+      "value": "Coil, Assigned Rating",
+      "status": "ASSERTION_EXTRACTED",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "section": "Standard Equipment — F-450 Chassis Cab", "page_extract": 49},
+      "rejected_operator_detail": "single-stage variable-rate — not token-anchored; leave UNRESOLVED"
+    },
+    {
+      "attr": "shock_absorbers",
+      "value": "Gas-type",
+      "diameter_in": 1.38,
+      "status": "ASSERTION_EXTRACTED",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "page_extract": 49}
+    },
+    {
+      "attr": "stabilizer_bar_front_rear_mm",
+      "value": "35/31 (Gas & Diesel)",
+      "status": "ASSERTION_EXTRACTED",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "page_extract": 49},
+      "notes": ["Existence of front stabilizer affirmed; end-link / bushing topology remains CANDIDATE without WSM/parts."]
+    },
+    {
+      "attr": "radius_arms",
+      "existence": "EXPECTED_ON_MONOBEAM_ARCHITECTURE",
+      "status": "DOCUMENT_SUPPORTED",
+      "detail_status": "CANDIDATE_UNVERIFIED",
+      "notes": [
+        "4x4 front axle table lists Radius Arms No. 2 (stamped HSLA) — do not auto-copy to 4x2.",
+        "4x2 F-450/F-550 row text extract is truncated for radius-arm count/material."
+      ]
+    }
+  ],
+  "steering": [
+    {
+      "attr": "steering_type",
+      "value": "Hydraulic power assisted steering with recirculating ball gear and steering damper",
+      "status": "ASSERTION_EXTRACTED",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "page_extract": 48}
+    },
+    {
+      "attr": "linkage_topology_haltenberger",
+      "status": "CANDIDATE_UNVERIFIED",
+      "notes": ["Operator narrative retained as candidate only until WSM/parts diagram acquired."]
+    }
+  ],
+  "hubs_wheels_brakes": [
+    {
+      "attr": "tires_standard_f450",
+      "value": "Six, 225/70Rx19.5G",
+      "status": "ASSERTION_EXTRACTED",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "page_extract": 49}
+    },
+    {
+      "attr": "wheels_standard_f450",
+      "value": "Six, 10-hole Disc, 19.5 in x 6 in RW Steel",
+      "status": "ASSERTION_EXTRACTED",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "page_extract": 49}
+    },
+    {
+      "attr": "wheel_bolt_circle_f450_f550_drw",
+      "bolt_circle_mm": 225,
+      "bolt_circle_in": 8.85,
+      "stud_count": 10,
+      "wheel_size": "19.5 x 6.0 RW",
+      "status": "ASSERTION_EXTRACTED",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "section": "Wheel Specifications", "page_extract": 65}
+    },
+    {
+      "attr": "front_rotor_diameter_in",
+      "value": 15.39,
+      "rear_rotor_diameter_in": 15.74,
+      "status": "ASSERTION_EXTRACTED",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "page_extract": 48}
+    },
+    {
+      "attr": "caliper_type",
+      "value": "Dual-piston Pin-slider Calipers, Bolt-on Adapters, Wraparound Tie Bars",
+      "status": "ASSERTION_EXTRACTED",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "page_extract": 48}
+    }
+  ],
+  "rejected_exact_match_installation_table": {
+    "status": "REJECTED",
+    "reason": "No Workshop Manual bytes (SRC-CAND-000002 NOT_ACQUIRED). Torque and alignment figures cannot be EXACT_MATCH or ASSERTION_VERIFIED.",
+    "rejected_claims": [
+      {"iface": "Wheel lug nut torque", "operator_value": "150 lb-ft (204 N·m)", "status": "NOT_ACQUIRED"},
+      {"iface": "Radius arm rear pivot bolt torque", "operator_value": "222 lb-ft (301 N·m)", "status": "NOT_ACQUIRED"},
+      {"iface": "Tie-rod castle nut torque", "operator_value": "85 lb-ft (115 N·m)", "status": "NOT_ACQUIRED"},
+      {"iface": "Front camber target", "operator_value": "+0.25°", "status": "NOT_ACQUIRED"},
+      {"iface": "Total caster target", "operator_value": "+3.5° to +4.5°", "status": "NOT_ACQUIRED"}
+    ]
+  },
+  "cfgcomp_root": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRONT-SUSPENSION",
+  "authority_status": "CANDIDATE_PARTIAL_ASSERTION_EXTRACTED",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "geometry_extraction_authorized": false,
+  "next_actions": [
+    "Parse SRC-CAND-000001 BAG for front suspension / axle layout pages",
+    "Acquire SRC-CAND-000002 WSM (via MISN-000003 commercial path) for torque, alignment, linkage",
+    "Acquire SRC-CAND-000003 parts catalog if needed for hub/arm part IDs",
+    "Physical label intake for actual VEH-000001 FGAWR / spring codes",
+    "Keep MISN-000005 (Mission E) deferred",
+    "Do not open Mission F as replacement for incomplete Mission D"
+  ]
+}
