@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:proposal:egs-1.0.0-proposal.2:relationship-edge",
+  "title": "EGS-1.0.0-proposal.2 Relationship Edge",
+  "description": "Non-kernel proposal schema. Does not modify frozen assembly-relationship.schema.json. Configuration-reference research edges connect CFGCOMP-/IFACE-/OP- nodes — never AID-* or physical VIN CMPINST-* as primary reference endpoints. Transient state parameters are forbidden on permanent structural edges.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record_version",
+    "edge_id",
+    "graph_plane",
+    "relationship_class",
+    "source_node_id",
+    "target_node_id",
+    "directionality",
+    "applicability_context",
+    "verification_lifecycle",
+    "claims"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "EGS-1.0.0-proposal.2" },
+    "record_version": { "type": "integer", "minimum": 1 },
+    "created_at": { "type": ["string", "null"], "format": "date-time" },
+    "created_by": { "type": ["string", "null"] },
+    "updated_at": { "type": ["string", "null"], "format": "date-time" },
+    "supersedes_edge_id": { "type": ["string", "null"] },
+    "edge_id": {
+      "type": "string",
+      "pattern": "^(EDGE|REL)-(EGS-)?[A-Z0-9-]+$"
+    },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "graph_plane": {
+      "type": "string",
+      "enum": ["PHYSICAL", "FUNCTIONAL", "PROCEDURAL"]
+    },
+    "relationship_class": {
+      "type": "string",
+      "enum": [
+        "BOLTED_TO",
+        "WELDED_TO",
+        "MOUNTED_TO",
+        "HINGES_ON",
+        "SUPPORTS",
+        "OVERLAPS",
+        "CONTAINS",
+        "MATES_WITH",
+        "GUIDES_MOTION_OF",
+        "EXTRACTION_PATH_PASSES_ADJACENT_TO",
+        "BLOCKS_ACCESS_TO",
+        "ROUTES_THROUGH",
+        "PASSES_BEHIND",
+        "TRANSMITS_LIN_DATA_TO",
+        "TRANSMITS_SIGNAL_TO",
+        "SUPPLIES_POWER_TO",
+        "MUST_PRECEDE",
+        "MUST_BE_DISCONNECTED_BEFORE",
+        "ACCESSIBLE_WHEN",
+        "BLOCKS_REMOVAL_OF"
+      ]
+    },
+    "source_node_id": {
+      "type": "string",
+      "description": "COMPDEF- / CFGCOMP- / IFACE- / OP- / CMPINST- (CMPINST only for PHYSICAL_ASSET_INSTANCE scope)"
+    },
+    "target_node_id": { "type": "string" },
+    "directionality": {
+      "type": "string",
+      "enum": ["FORWARD", "BACKWARD", "BIDIRECTIONAL"]
+    },
+    "applicability_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope_type"],
+      "properties": {
+        "scope_type": {
+          "type": "string",
+          "enum": [
+            "CONFIGURATION_REFERENCE",
+            "PHYSICAL_ASSET_INSTANCE",
+            "SYNTHETIC_FIXTURE",
+            "CROSS_CONFIGURATION_COMPARISON",
+            "SOURCE_APPLICABILITY_CANDIDATE"
+          ]
+        },
+        "configuration_id": { "type": ["string", "null"] },
+        "kernel_configuration_id": {
+          "type": ["string", "null"],
+          "description": "Optional alias to frozen kernel CFG-###### (e.g. CFG-000001)"
+        },
+        "model_year": { "type": ["integer", "null"] },
+        "model_year_range": {
+          "type": ["null"],
+          "description": "Forbidden on CONFIGURATION_REFERENCE — must be null; use CROSS_CONFIGURATION_COMPARISON records instead"
+        },
+        "vin": { "type": ["string", "null"] },
+        "inheritance": {
+          "type": "string",
+          "enum": ["NOT_INHERITED", "N/A"],
+          "default": "NOT_INHERITED"
+        },
+        "notes": { "type": ["string", "null"] }
+      }
+    },
+    "verification_lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["edge_status", "procedure_eligibility"],
+      "properties": {
+        "edge_status": {
+          "type": "string",
+          "enum": [
+            "VERIFIED",
+            "PARTIALLY_VERIFIED",
+            "CANDIDATE_UNVERIFIED",
+            "CONTRADICTED",
+            "REJECTED",
+            "SUPERSEDED"
+          ]
+        },
+        "procedure_eligibility": {
+          "type": "string",
+          "enum": [
+            "PROCEDURE_GENERATION_AUTHORIZED",
+            "BLOCKED_UNVERIFIED_PROCEDURE",
+            "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+            "BLOCKED"
+          ]
+        },
+        "last_audited_date": { "type": ["string", "null"] },
+        "aggregation_notes": { "type": ["string", "null"] }
+      }
+    },
+    "claims": {
+      "type": "object",
+      "required": ["relationship_existence"],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["status"],
+        "properties": {
+          "value": {},
+          "unit": { "type": ["string", "null"] },
+          "status": {
+            "type": "string",
+            "enum": [
+              "UNRESOLVED_SOURCE_REQUIRED",
+              "SOURCE_DISCOVERED",
+              "SOURCE_ACQUIRED",
+              "SOURCE_APPLICABILITY_CONFIRMED",
+              "ASSERTION_EXTRACTED",
+              "ASSERTION_VERIFIED",
+              "CANDIDATE_UNVERIFIED",
+              "CONTRADICTED",
+              "REJECTED"
+            ]
+          },
+          "evidence_assertion_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "conflicting_assertions": {
+            "type": "array",
+            "description": "Required when status=CONTRADICTED — retain both sides; never majority-vote blend",
+            "items": {
+              "type": "object",
+              "required": ["source_id", "claimed_value"],
+              "properties": {
+                "source_id": { "type": "string" },
+                "claimed_value": {}
+              }
+            }
+          },
+          "mandatory": { "type": "boolean" },
+          "notes": { "type": ["string", "null"] }
+        }
+      },
+      "properties": {
+        "relationship_existence": {
+          "type": "object",
+          "required": ["status"],
+          "properties": {
+            "value": { "type": ["boolean", "null"] },
+            "status": { "type": "string" },
+            "evidence_assertion_ids": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "mandatory": { "type": "boolean", "const": true },
+            "notes": { "type": ["string", "null"] }
+          }
+        }
+      }
+    },
+    "transient_state": {
+      "type": ["object", "null"],
+      "description": "Allowed ONLY on ACCESSIBLE_WHEN / procedural precondition edges — forbidden on permanent structural classes",
+      "additionalProperties": true
+    },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

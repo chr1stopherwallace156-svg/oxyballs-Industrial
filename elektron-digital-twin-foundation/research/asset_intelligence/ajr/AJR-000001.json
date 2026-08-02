@@ -36,10 +36,11 @@
   "source_url_status": "NOT_RECORDED",
   "bound_vehicle_instance_id": "VEH-000001",
   "bound_configuration_id": "CFG-000001",
-  "research_sprint": "RL-012",
+  "research_sprint": "RL-013",
   "decision_ref": "DT-D043",
   "notes": [
     "AJR drafted but cannot GENERATE_AJR_AND_PURCHASE until listing URL + uniqueness + engineering-data checks execute.",
-    "Next: locate real GrabCAD/Dana URL \u2192 re-run AJR gates \u2192 then clear or reject."
+    "Next: locate real GrabCAD/Dana URL \u2192 re-run AJR gates \u2192 then clear or reject.",
+    "RL-013: Operator later claimed ACQUIRED/PARSED \u2014 rejected; clearance still NOT_CLEARED."
   ]
 }

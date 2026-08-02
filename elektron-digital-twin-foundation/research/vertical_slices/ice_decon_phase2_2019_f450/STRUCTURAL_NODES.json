@@ -1,0 +1,78 @@
+{
+  "document_id": "ICE_DECON_PHASE2_STRUCTURAL_NODES",
+  "decision": "DT-D055",
+  "authority_status": "CANDIDATE_DEFERRED",
+  "root_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-THERMAL-FUEL-DECON",
+  "components": [
+    {
+      "compdef_id": "COMPDEF-THERMAL-FUEL-DECON-BOUNDARY",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-THERMAL-FUEL-DECON",
+      "verification_status": "CANDIDATE",
+      "physical_type": "CONVERSION_BOUNDARY_ASSEMBLY"
+    },
+    {
+      "compdef_id": "COMPDEF-COOLING-RADIATOR",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
+      "verification_status": "CANDIDATE",
+      "decon_intent": "MUST_REMOVE"
+    },
+    {
+      "compdef_id": "COMPDEF-HVAC-CONDENSER",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-HVAC-CONDENSER",
+      "verification_status": "CANDIDATE",
+      "decon_intent": "RETAIN_AND_REPURPOSE"
+    },
+    {
+      "compdef_id": "COMPDEF-COOLING-TOC",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-TOC",
+      "verification_status": "CANDIDATE",
+      "decon_intent": "MUST_REMOVE"
+    },
+    {
+      "compdef_id": "COMPDEF-COOLING-PS",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-PS",
+      "verification_status": "CANDIDATE",
+      "decon_intent": "MUST_REMOVE"
+    },
+    {
+      "compdef_id": "COMPDEF-FUEL-TANK-AFT",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
+      "verification_status": "CANDIDATE",
+      "decon_intent": "MUST_REMOVE",
+      "partial_evidence": "40 gal aft-of-axle std (SRC-CAND-000010)"
+    },
+    {
+      "compdef_id": "COMPDEF-FUEL-LINES",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-LINES",
+      "verification_status": "CANDIDATE",
+      "decon_intent": "MUST_REMOVE"
+    },
+    {
+      "compdef_id": "COMPDEF-EXHAUST-PIPING",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING",
+      "verification_status": "CANDIDATE",
+      "decon_intent": "MUST_REMOVE"
+    },
+    {
+      "compdef_id": "COMPDEF-EXHAUST-AFTERTREATMENT",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-AFTERTREATMENT",
+      "verification_status": "CANDIDATE",
+      "decon_intent": "MUST_REMOVE",
+      "option_dependent": true
+    }
+  ],
+  "interfaces": [
+    {
+      "iface_id": "IFACE-FUEL-TANK-STRAP-AFT",
+      "parent_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "verification_status": "CANDIDATE",
+      "torque_status": "NOT_ACQUIRED",
+      "mepq_id": "MEPQ-004"
+    },
+    {
+      "iface_id": "IFACE-CHARGE-PORT",
+      "verification_status": "CONVERSION_INTENT_CANDIDATE",
+      "notes": ["Upfitter/body dependent on Chassis Cab"]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "media_id": "MEDIA-000001",
+  "title": "2017\u20132022 Super Duty driver door panel removal walkthrough (operator-described)",
+  "media_type": "VIDEO",
+  "topic": "FL_DOOR_PANEL_REMOVAL_HARNESS_CLIPS",
+  "supports_gaps": [
+    "KG-001"
+  ],
+  "reported_year_range": "2017-2022 Super Duty",
+  "content_claim": "Inner panel surface, wiring pigtails, door handle cables, harness clips",
+  "url": "https://www.youtube.com/watch?v=8NceOGwgQ-0",
+  "url_status": "DISCOVERED_VIA_SEARCH_CANDIDATE",
+  "url_notes": "Operator described a Super Duty door-panel removal walkthrough without pasting a URL. This YouTube ID was discovered via search as a matching 2017\u20132019 Super Duty door-panel removal video (Jimmi Jammer install). Confirm it is the intended media before treating as authoritative. Do not invent alternate IDs.",
+  "evidence_status": "CANDIDATE",
+  "lifecycle": {
+    "acquired": "NOT_ACQUIRED",
+    "hashed": "NOT_EXECUTED",
+    "frame_extract": "NOT_EXECUTED"
+  },
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "research_sprint": "RL-013",
+  "decision": "DT-D044",
+  "forbidden_uses": [
+    "Treat as measured harness coordinates",
+    "Close KG-001 without frame extracts + local hash + optional physical confirm"
+  ],
+  "notes": [
+    "Useful visual reference for clip locations only after timestamped frame capture."
+  ]
+}

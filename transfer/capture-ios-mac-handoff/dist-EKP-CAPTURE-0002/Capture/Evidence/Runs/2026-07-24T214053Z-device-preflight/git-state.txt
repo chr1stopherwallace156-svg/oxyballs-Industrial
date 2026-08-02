@@ -1,0 +1,25 @@
+880969a0f35faae9b744dd4e960444e9229164fa
+## cursor/operations-guardrail-system-d881
+ M HELP.md
+ M Makefile
+ M Scripts/help.sh
+?? .repository-identity.json
+?? Docs/ERROR_DICTIONARY.md
+?? Docs/Evidence/Runs/
+?? Docs/VERIFICATION_STATES.md
+?? Docs/Verification/
+?? OPERATIONS_MANUAL.md
+?? Scripts/device-preflight.sh
+?? Scripts/diagnose.sh
+?? Scripts/doctor.sh
+?? Scripts/evidence-status.sh
+?? Scripts/open-workspace.sh
+?? Scripts/ops-lib.sh
+?? Scripts/package-check.sh
+?? Scripts/record-device-validation.sh
+?? Scripts/repair-derived-data.sh
+?? Scripts/repair-package-cache.sh
+?? Scripts/repo-locator.sh
+?? Scripts/verify-handoff.sh
+?? Scripts/verify-operations-system.sh
+880969a docs: add developer help system (HELP.md, help.sh, Makefile)

@@ -728,3 +728,424 @@ Append-only record of digital twin foundation decisions.
   5. Demote SPECIFICATION_READY / SOURCE_VERIFIED / 0.9x narrative scores without bytes
   6. Front axle remains `PRIMARY_SOURCE_REQUIRED`; kernel/rc1 unchanged
 
+
+## DT-D044 — Component Sourcing Passports + Knowledge Gaps + Hum3D HOLD_REJECTED
+
+- **Change-control record:** [`decisions/DT-D044_COMPONENT_SOURCING_KG_AJR.json`](decisions/DT-D044_COMPONENT_SOURCING_KG_AJR.json)
+- **decision_id:** `DT-D044`
+- **date:** 2026-07-19
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `CONTINUE_RESEARCH` (focus KG-001)
+- **protocol_version:** `2.6.0`
+- **decision:**
+  1. Authorize `CSP-*` maturity trackers — operator % = draft estimates only
+  2. Authorize Knowledge Gap Register — **KG-001 CRITICAL**, KG-002 HIGH
+  3. **AJR-000003 `HOLD_REJECTED`** — do not buy $79 Hum3D door shell
+  4. Reject M300 `ACQUIRED→PARSED` / Exact Match=Yes without bytes
+  5. MEDIA-000001 door-panel video candidate for KG-001 (search-discovered; confirm intended media)
+  6. Kernel/rc1 unchanged
+
+
+## DT-D045 — Mission queue + twin VIS/ENG + honest evidence counts
+
+- **Change-control record:** [`decisions/DT-D045_MISSION_TWIN_EVIDENCE_COUNTS.json`](decisions/DT-D045_MISSION_TWIN_EVIDENCE_COUNTS.json)
+- **decision_id:** `DT-D045`
+- **date:** 2026-07-19
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `CONTINUE_RESEARCH`
+- **protocol_version:** `2.7.0`
+- **active_mission:** `MISN-000001` → acquire `SRC-CAND-000006` (EWD) for KG-001
+- **decision:**
+  1. Authorize Research Mission Queue (`MISN-*`)
+  2. Split Visual / Engineering twin passports (`TWIN-VIS-*` / `TWIN-ENG-*`)
+  3. Evidence coverage = hashed acquired/required counts — demote narrative “verified” cells
+  4. Reject Dana supplier 8/8 complete; reject ENG SOURCE_VERIFIED / VIS CONFIGURATION_EVALUATED without URLs
+  5. Register **KG-003** (inner impact beam) OPEN
+  6. Kernel/rc1 unchanged
+
+
+## DT-D046 — EGS-v1 relationship graph schema handoff
+
+- **Change-control record:** [`decisions/DT-D046_EGS_V1_RELATIONSHIP_GRAPH.json`](decisions/DT-D046_EGS_V1_RELATIONSHIP_GRAPH.json)
+- **decision_id:** `DT-D046`
+- **date:** 2026-07-19
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `IMPLEMENTATION_HANDOFF_READY` (schema package)
+- **protocol_version:** `2.8.0`
+- **decision:**
+  1. Authorize **EGS-v1** non-kernel edge schema + closed vocabulary
+  2. Frozen `assembly-relationship.schema.json` **unchanged**
+  3. REL-REG suite + removal sequence = **ILLUSTRATIVE_ONLY** (OEM not hashed)
+  4. Property confidence fields on evidence matrix — demote false VERIFIED cells
+  5. **MISN-000002** (dashboard edges) + **KG-004** (hinge shims)
+  6. Handoff = migration linking only — not verified teardown automation
+
+
+## DT-D047 — EGS-v1 proposal module (CMPINST graph)
+
+- **Change-control record:** [`decisions/DT-D047_EGS_V1_PROPOSAL_MODULE.json`](decisions/DT-D047_EGS_V1_PROPOSAL_MODULE.json)
+- **decision_id:** `DT-D047`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `PROPOSAL_MODULE_ACTIVE`
+- **protocol_version:** `2.9.0`
+- **decision:**
+  1. Authorize **`proposals/egs-v1/`** as executable EGS-v1 implementation home
+  2. Frozen kernel schemas **unchanged** (incl. assembly-relationship)
+  3. Endpoints = **`CMPINST-*` only** (reject AID / EDTS-COMP / ASSET)
+  4. Typed classes + per-property evidence + applicability + lifecycle + validation
+  5. F-450 sample edges = **`CANDIDATE_UNVERIFIED`**; no invented torque/connector/fastener/removal values
+  6. Synthetic fixtures for tests; graph queries (neighbors, dependency/impact BFS, cycles, topo)
+  7. Research `REL-00000N` edges superseded for implementation linking (remain ILLUSTRATIVE history)
+
+
+## DT-D048 — EGS-1.0.0-proposal.2 architecture refinement
+
+- **Change-control record:** [`decisions/DT-D048_EGS_PROPOSAL_2_ARCHITECTURE.json`](decisions/DT-D048_EGS_PROPOSAL_2_ARCHITECTURE.json)
+- **decision_id:** `DT-D048`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY`
+- **protocol_version:** `2.10.0`
+- **decision:**
+  1. Authorize **EGS-1.0.0-proposal.2** (COMPDEF/CFGCOMP/CMPINST hierarchy + IFACE layer)
+  2. Frozen kernel schemas **unchanged**
+  3. Reference edges = **CFGCOMP-/IFACE-/OP-** only; exact MY scope lock (no year ranges)
+  4. PHYSICAL / FUNCTIONAL / PROCEDURAL plane isolation; no transient state on structural edges
+  5. Deterministic claim→lifecycle aggregation; cycle kinds never auto-resolved
+  6. REL-REG-01..06 = **CANDIDATE_UNVERIFIED** / **REAL_DATA_PROMOTION_BLOCKED** / **PROCEDURE_GENERATION_NOT_AUTHORIZED**
+
+
+## DT-D049 — Research Execution Pipeline capability audit
+
+- **Change-control record:** [`decisions/DT-D049_RESEARCH_EXECUTION_PIPELINE_AUDIT.json`](decisions/DT-D049_RESEARCH_EXECUTION_PIPELINE_AUDIT.json)
+- **decision_id:** `DT-D049`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY`
+- **protocol_version:** `2.11.0`
+- **decision:**
+  1. Admit **EDTS-PIPELINE-AUDIT-2026-07** (six-dimension capability & bottleneck lock)
+  2. Public discovery → `SOURCE_DISCOVERED`; paywalls/physical = human/API limits
+  3. `ASSERTION_VERIFIED` requires token-anchor (or equivalent) validation
+  4. Contradictions → `CONTRADICTED` + KG — no generative smoothing
+  5. Research Saturation → Sprint 7 Physical Acquisition Plan template (not executed)
+  6. F-450 edges remain **REAL_DATA_PROMOTION_BLOCKED** / **PROCEDURE_GENERATION_NOT_AUTHORIZED**
+
+
+## DT-D050 — FL Door vertical-slice research mission
+
+- **Change-control record:** [`decisions/DT-D050_FL_DOOR_VERTICAL_SLICE.json`](decisions/DT-D050_FL_DOOR_VERTICAL_SLICE.json)
+- **decision_id:** `DT-D050`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY`
+- **protocol_version:** `2.12.0`
+- **decision:**
+  1. Confirm exact-vehicle **scope lock** for FL door vertical slice
+  2. **SOURCE_ACQUIRED** BAG + NHTSA (real SHA-256); brochure URL **404 → NOT_ACQUIRED**
+  3. WSM/EWD remain **SOURCE_DISCOVERED**; authorize **MISN-000003** commercial handoff
+  4. Candidate CFGCOMP/IFACE/edges locked; pinout **CONTRADICTION**; **KG-005** fastener gap
+  5. No invented torque/voltage/hashes; parser fixtures synthetic only
+  6. Saturation **PARTIALLY_SATURATED** — procedures **NOT_AUTHORIZED**
+
+
+## DT-D051 — Chassis frame Evidence Brief A/B + Mission D
+
+- **Change-control record:** [`decisions/DT-D051_CHASSIS_FRAME_EVIDENCE_BRIEF_AB.json`](decisions/DT-D051_CHASSIS_FRAME_EVIDENCE_BRIEF_AB.json)
+- **decision_id:** `DT-D051`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **recommended_decision:** `EGS_V1_PROPOSAL_INFRASTRUCTURE_READY`
+- **decision:**
+  1. Admit bumper-referenced datums + F-450 RC dimensional brief (fleet PDF page cites)
+  2. Acquire **SRC-CAND-000010** + **SRC-CAND-000011** (real SHA-256)
+  3. Initialize **CFGCOMP-…-FRAME** / rails / **IFACE-UPFITTER**
+  4. Select **MISN-000004** (Mission D front suspension); defer Mission E as **MISN-000005**
+  5. No invented axle architecture / spring rates
+
+
+## DT-D052 — HV commissioning gates 05L-B / 05L-C cleaned; 05M staged
+
+- **Change-control record:** [`decisions/DT-D052_HV_COMMISSIONING_GATES_05L_05M.json`](decisions/DT-D052_HV_COMMISSIONING_GATES_05L_05M.json)
+- **decision_id:** `DT-D052`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-021`
+- **package:** [`build_engine/gates/hv_commissioning/`](build_engine/gates/hv_commissioning/)
+- **decision:**
+  1. Admit cleaned **05L-B** (first live current-limited pre-charge observation) and **05L-C** (shutdown / discharge / repeatability)
+  2. Lock permanent ownership: **VCU** = request/monitor; **BMS/PDU** = contactor + pre-charge; **hardwired safety loop** = emergency interrupt
+  3. All numeric thresholds = **INITIAL_TARGET_PROFILE** only until supplier + engineering + live HV test-plan approval
+  4. Stage **05M-A** as torque-disabled inverter readiness draft (not spin); stage **05M-B/C** outlines only
+  5. Hard staging: do **not** execute 05M until 05L-C complete; after 05L-C → **05M-A → 05M-B → 05M-C**
+  6. Live HV execution remains **NOT authorized** by this decision alone
+
+---
+
+## DT-D053 — Mission D front suspension honesty gate
+
+- **Change-control record:** [`decisions/DT-D053_MISSION_D_FRONT_SUSPENSION_HONESTY_GATE.json`](decisions/DT-D053_MISSION_D_FRONT_SUSPENSION_HONESTY_GATE.json)
+- **decision_id:** `DT-D053`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-022`
+- **package:** [`research/vertical_slices/front_suspension_2019_f450/`](research/vertical_slices/front_suspension_2019_f450/)
+- **recommended_decision:** `MISSION_D_IN_PROGRESS_PRIMARY_SOURCE_PARTIAL`
+- **decision:**
+  1. Promote F-450/F-550 Chassis Cab **4x2** front axle type to **ASSERTION_EXTRACTED Monobeam** (SRC-CAND-000010 p.55)
+  2. Reject operator **standard FGAWR = 5600 lb** for Reg Cab 4x2 145.3 — Max Std is **4800 (6.8L) / 5200 (6.7L)**
+  3. Reject all operator **EXACT_MATCH** torque/camber/caster claims (WSM `SRC-CAND-000002` NOT_ACQUIRED)
+  4. Initialize `CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRONT-SUSPENSION` as **CANDIDATE**
+  5. Keep **MISN-000005** (Mission E) deferred; do **not** open Mission F; continue Mission D
+
+---
+
+## DT-D054 — MEPQ admitted; Option B Mission F; Option A deferred
+
+- **Change-control record:** [`decisions/DT-D054_MEPQ_OPTION_B_LV_GATEWAY.json`](decisions/DT-D054_MEPQ_OPTION_B_LV_GATEWAY.json)
+- **decision_id:** `DT-D054`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-023`
+- **recommended_decision:** `MEPQ_ACTIVE_OPTION_B_MISSION_F_DISCOVERY`
+- **decision:**
+  1. Admit **MEPQ** (`research/mepq/`) as orthogonal evidence-procurement queue under Inversion Principle
+  2. Register **MEPQ-001/002** DEFERRED with Mission E; **MEPQ-003** QUEUED for EWD
+  3. Select **Option B** → open **MISN-000006** (Mission F) as LV gateway **discovery only**
+  4. Keep **Option A / MISN-000005** deferred
+  5. Reject operator radius-arm passport `LEVEL_4_DOCUMENTED_OEM` / invented 301 N·m / unverified BBLB §4 cite
+  6. Expand **MISN-000003** to include **KG-008** / MEPQ-003
+
+---
+
+## DT-D055 — EV-DECON-PHASE2 honesty gate + MEPQ export (Option 2)
+
+- **Change-control record:** [`decisions/DT-D055_EV_DECON_PHASE2_MEPQ_EXPORT.json`](decisions/DT-D055_EV_DECON_PHASE2_MEPQ_EXPORT.json)
+- **decision_id:** `DT-D055`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-024`
+- **recommended_decision:** `DECON_PHASE2_REGISTERED_DEFERRED_MEPQ_EXPORT`
+- **decision:**
+  1. Honesty-gate **EV-DECON-PHASE2**; admit remove/retain matrix as **conversion-intent candidates** under deferred Mission E only
+  2. Reject radiator envelope **38.3×30×8** (38.3 in = front overhang code B, not bay size)
+  3. Retain partial assertions: frame **H=34.2**, fuel tank **40 gal aft-of-axle std**
+  4. Register **MEPQ-004/005** + **KG-009/010**
+  5. Select **Option 2** — export consolidated MEPQ checklist; Option 1 skipped (Mission F already open)
+  6. Mission E teardown execution remains **NOT authorized**
+
+---
+
+## DT-D056 — Three-layer graph separation; Mission D L1 focus
+
+- **Change-control record:** [`decisions/DT-D056_THREE_LAYER_GRAPH_SEPARATION.json`](decisions/DT-D056_THREE_LAYER_GRAPH_SEPARATION.json)
+- **decision_id:** `DT-D056`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-025`
+- **recommended_decision:** `THREE_LAYER_PROTOCOL_ACTIVE_MISSION_D_L1_FOCUS`
+- **decision:**
+  1. Lock **Three-Layer Separation Protocol** (L1 Truth / L2 Analysis / L3 Decisions) with non-inheritance
+  2. Refile ICE decon Phase 2 into layer packages; scrub L1 pollution (radiator material/process; restore fuel **40 gal** ASSERTION_EXTRACTED)
+  3. Keep 38.3×30×8 and battery cradle in **L2/L3 only**
+  4. Register **MEPQ-006/007** + **KG-011/012**
+  5. Select **Option 2** — Mission D Layer 1 focus; Option 1 already open (Mission F) with L1/L3 split for LV
+
+---
+
+## DT-D057 — Reject fabricated Layer-1 dump
+
+- **Change-control record:** [`decisions/DT-D057_REJECT_FABRICATED_L1_DUMP.json`](decisions/DT-D057_REJECT_FABRICATED_L1_DUMP.json)
+- **decision_id:** `DT-D057`
+- **date:** 2026-07-20
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-026`
+- **recommended_decision:** `FABRICATED_L1_DUMP_REJECTED_CONTINUE_MISSION_D_L1`
+- **decision:**
+  1. Reject operator “L1 Engineering Truth” block (frame section, MCS70 card, curb/GAWR, CG/mass, tolerances, loads, 515 Nm)
+  2. Reject EPAS rack as OEM for this silo — L1 remains hydraulic recirculating ball + damper
+  3. Treat dependent L2/L3 numbers as non-authoritative
+  4. Decline battery chemistry / kWh / 400V–800V tailoring until L1 honesty restored
+  5. Continue Mission D L1 + commercial WSM/EWD
+
+---
+
+## DT-D058 — EDTS Visible Progress Release 1 (provisional visual)
+
+- **Change-control record:** [`decisions/DT-D058_VISIBLE_PROGRESS_R1.json`](decisions/DT-D058_VISIBLE_PROGRESS_R1.json)
+- **decision_id:** `DT-D058`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-027`
+- **recommended_decision:** `VISIBLE_PROGRESS_R1_PROVISIONAL_VISUAL_ONLY`
+- **decision:**
+  1. Admit interactive 3D demonstrator at `edts-visible-progress/` (Factory ICE / Deconstruction / EV Proposal)
+  2. Require data-status badges + inspector (ID, applicability, evidence, interfaces, missing props, MEPQ)
+  3. Use PLACEHOLDER_GEOMETRY / DESIGN_PROPOSAL — no invented torque, materials, or mounts
+  4. Scale layout only to ASSERTION_EXTRACTED dimensions from SRC-CAND-000010
+  5. Do **not** authorize L10 public demo, procedure generation, geometry freeze, or kernel mutation
+  6. Continue Mission D L1 + WSM/EWD in parallel; refine catalog as evidence arrives
+  7. Admit handoff architecture (badge colors, scene tree, evidence ledger, decon/EV visuals) while rejecting sample JSX fabricated VERIFIED / kWh / kW / mass claims
+
+---
+
+## DT-D059 — Five-store scale path + Timeline / Search / Heatmap / Simulation scaffold
+
+- **Change-control record:** [`decisions/DT-D059_FIVE_STORE_VIEWER_MODES.json`](decisions/DT-D059_FIVE_STORE_VIEWER_MODES.json)
+- **decision_id:** `DT-D059`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-028`
+- **recommended_decision:** `FIVE_STORE_SCALE_PATH_PLUS_VIEWER_MODES`
+- **decision:**
+  1. Split Visible Progress data into Component / Geometry / Evidence / Relationships / UI stores
+  2. Admit Timeline visual narrative (not authorized procedure)
+  3. Admit Search + camera focus
+  4. Admit evidence-maturity heatmap (not confidence %)
+  5. Scaffold Simulation with null axle/CG deltas — reject invented ±32 kg / 18 mm until mass evidence
+  6. Minimal hover-reveal chrome; photoreal truck deferred
+
+---
+
+## DT-D060 — Visible Progress R2 normalized COMP/GEO/EVD/EGS/SIM/UI
+
+- **Change-control record:** [`decisions/DT-D060_R2_NORMALIZED_ARCHITECTURE.json`](decisions/DT-D060_R2_NORMALIZED_ARCHITECTURE.json)
+- **decision_id:** `DT-D060`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-029`
+- **recommended_decision:** `R2_NORMALIZED_HOVER_FIRST_MASS_ENGINE_BLOCKED`
+- **decision:**
+  1. Promote to R2 normalized stores with foreign keys (COMP/GEO/EVD/EGS/SIM/UI)
+  2. Default viewport: no persistent labels — hover/select only
+  3. Admit Surgery timeline, search focus, evidence heatmap
+  4. Wire mass engine but keep outputs UNKNOWN until measured SIM records
+  5. Reject sample invented masses / axle formulas / premature VERIFIED badges
+  6. Photoreal STEP/LOD pipeline deferred
+
+---
+
+## DT-D061 — VPR-2 claim corrections (prototype honesty)
+
+- **Change-control record:** [`decisions/DT-D061_VPR2_CLAIM_CORRECTIONS.json`](decisions/DT-D061_VPR2_CLAIM_CORRECTIONS.json)
+- **decision_id:** `DT-D061`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-030`
+- **recommended_decision:** `VPR2_PROTOTYPE_CLAIMS_CORRECTED_NEXT_IS_REAL_MESH`
+- **decision:**
+  1. Relabel as **Architecture and Interaction Prototype** — not completed Release 2
+  2. Six domains = normalized **tables** in one DB — not independent microservices
+  3. Keep R3F procedural truck; do not regress to CSS cards
+  4. Multi-dimension maturity (identity/geometry/placement/mass/interface)
+  5. Mass/axle outputs disabled; timeline = storyboard; heatmap = material override prototype
+  6. Next milestone: map real GLB/meshes to ≥5 components with orbit/select/search/inspect
+
+---
+
+## DT-D062 — VPR-2 corrected baseline accepted (3-tier storage)
+
+- **Change-control record:** [`decisions/DT-D062_VPR2_BASELINE_ACCEPTED.json`](decisions/DT-D062_VPR2_BASELINE_ACCEPTED.json)
+- **decision_id:** `DT-D062`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-031`
+- **recommended_decision:** `VPR2_BASELINE_ACCEPTED_NEXT_GLB_MAPPING`
+- **decision:**
+  1. Accept corrected VPR-2 prototype audit (R3F ✔ · persistence ❌ · axle disabled · storyboard only)
+  2. Six domains → three storage tiers (relational / object / client) — not microservices
+  3. Orthogonal maturity matrix vocabulary locked
+  4. Quarantine assumption demo masses; do not load into SIM as truth
+  5. Next milestone: real GLB/mesh mapping to `comp_id`
+
+---
+
+## DT-D063 — EDTS-SPEC-3D-001 GLB acquisition & authoring gate
+
+- **Change-control record:** [`decisions/DT-D063_GLB_ACQUISITION_SPEC.json`](decisions/DT-D063_GLB_ACQUISITION_SPEC.json)
+- **decision_id:** `DT-D063`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-032`
+- **recommended_decision:** `SPEC_3D_001_ACCEPTED_GLB_NOT_YET_ACQUIRED`
+- **decision:**
+  1. Accept `EDTS-SPEC-3D-001` as the Tier-2 GLB purchase/authoring gate for VPR-2
+  2. Config boundary = `CFG-2019-F450-REG-CAB-4X2-60CA-DRW` (bare cab-and-chassis)
+  3. Require separable `GEO_*` nodes + `mesh_mapping_manifest.json` + `verifyMeshMapping()` before admit
+  4. CRS: meters, +Y up, front-axle origin; budgets &lt;25 MB / ≤150k tris / ≤30 materials
+  5. Prefer PROXY powertrain names; alias vendor 6.7L/6R140 as OPTION_DEPENDENT
+  6. Acquisition ≠ geometry freeze / ASSERTION_VERIFIED / invented mass / procedures
+  7. No GLB binary in-repo until QA pass — procedural placeholders remain
+
+---
+
+## DT-D064 — Open-source maximum-leverage research pack (non-invasive)
+
+- **Change-control record:** [`decisions/DT-D064_OPEN_SOURCE_RESEARCH_PACK.json`](decisions/DT-D064_OPEN_SOURCE_RESEARCH_PACK.json)
+- **decision_id:** `DT-D064`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-033`
+- **recommended_decision:** `OPEN_SOURCE_RESEARCH_PACK_ACCEPTED_BACKLOG_NOT_EXECUTED`
+- **decision:**
+  1. Admit `research/open_source/` pack (ecosystem index, mobile pipeline, capture SOP, ICP/QA, vPIC resolver, math methods, quantum assessment, 90-day backlog)
+  2. Metric isolation: NeRF/splats = `VISUALIZATION_ONLY`; metrics via scale-anchored Open3D/COLMAP + AprilTags
+  3. Quarantine scans until vPIC + door-jamb confirm `CFG-2019-F450-REG-CAB-4X2-60CA-DRW`
+  4. Quantum/QAOA = `REFERENCE_ONLY` — classical ILP for placement optimization
+  5. Backlog is planning only — sprint checkboxes not executed by this decision
+  6. **Zero production code mutation** in this pass
+
+---
+
+## DT-D065 — Repository implementation audit (spec vs code)
+
+- **Change-control record:** [`decisions/DT-D065_IMPLEMENTATION_AUDIT.json`](decisions/DT-D065_IMPLEMENTATION_AUDIT.json)
+- **decision_id:** `DT-D065`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-034`
+- **recommended_decision:** `AUDIT_COMPLETE_PRIORITIZE_P0_GLB_OR_P2_VPIC`
+- **decision:**
+  1. Admit implementation audit artifacts proving spec↔code gap
+  2. VPR-2 interaction + JSON domains = implemented; PostgreSQL / vPIC / scan / Open3D = missing
+  3. GLB gate tooling verified offline only; no runtime GLB load
+  4. Open-source backlog remains NOT STARTED (zero pipeline code)
+  5. Rule: documentation ≠ implementation; update audit with each implementation PR
+
+---
+
+## DT-D066 — Three-axis maturity + IMPLEMENTATION_EVIDENCE ledger
+
+- **Change-control record:** [`decisions/DT-D066_IMPLEMENTATION_EVIDENCE_MATURITY.json`](decisions/DT-D066_IMPLEMENTATION_EVIDENCE_MATURITY.json)
+- **decision_id:** `DT-D066`
+- **date:** 2026-07-21
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-035`
+- **recommended_decision:** `EVIDENCE_LEDGER_ACTIVE_P0_GLB_FIRST`
+- **decision:**
+  1. Track every feature on **Implemented / Tested / Verified** independently
+  2. Admit `IMPLEMENTATION_EVIDENCE.md` — every ✅ cites code, test, acceptance
+  3. Publish numeric category progress (Viewer 90% · Assets 10% · Mapping 25% · VIN/scan/ICP 0%)
+  4. Permanent: **no false OEM STEP / measured claims**; viewer ≠ twin complete
+  5. Confirm **P0 GLB** before PostgreSQL / Open3D / ARKit / AprilTags / quantum
+
+---
+
+## DT-D067 — EDTS VIN Configuration Resolver
+
+- **Change-control record:** [`decisions/DT-D067_VIN_CONFIGURATION_RESOLVER.json`](decisions/DT-D067_VIN_CONFIGURATION_RESOLVER.json)
+- **decision_id:** `DT-D067`
+- **date:** 2026-07-22
+- **approved_status:** `ACCEPTED`
+- **related_lock:** `RL-036`
+- **recommended_decision:** `VIN_RESOLVER_IMPLEMENTED_TESTED_NOT_GEOMETRY_VERIFIED`
+- **decision:**
+  1. Admit package `edts-vin-resolver` with `npm run vin -- <VIN>`
+  2. Official NHTSA `DecodeVinValuesExtended` only — preserve raw evidence + SHA-256
+  3. Normalize without inventing fields; UNKNOWN ≠ MATCH
+  4. Compare to registered CFGs; International example → REJECTED_REFERENCE_MATCH vs F-450 lock
+  5. Persist vehicle candidate + markdown report; never `CONFIGURATION_CONFIRMED` from VIN alone
+  6. Three-axis: Implemented ✅ · Tested 🧪 · engineering Verified ✖
+
+---

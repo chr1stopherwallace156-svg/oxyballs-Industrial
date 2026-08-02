@@ -1,0 +1,4 @@
+# Review bundle contents that are too large for routine git commits.
+# Full packages live under /opt/cursor/artifacts/ in the cloud agent environment.
+Elektron-Indsutrial-*.zip
+pull-request-4.diff
