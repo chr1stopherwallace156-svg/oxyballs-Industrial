@@ -1,0 +1,11 @@
+# Commit message template (git config commit.template)
+
+# <type>(<scope>): <summary>
+#
+# Types: feat|fix|docs|chore|test|refactor|ede
+# Scopes: ede|foundation|capture|site|ci
+#
+# Why this change is needed:
+# 
+# Risk / rollback notes:
+# 
