@@ -1,0 +1,7 @@
+CAPTURE_TIP=016da835182c288c4179759f0e0f2d8dccc60103
+ZIP=elektron-capture-ios-phase1c-evidence-library.zip
+SHA256=0e31d3d2611ee54d90722a1b7e3168580e428ebf4e1156a7572c98ff36c30f3a
+CHANGE=test-only INV_DIAG instrumentation in testPackageBuildInventoryAndExtension
+PRODUCTION_CODE=unchanged
+MAC_RUN=swift test --filter Phase1RuntimeTests.testPackageBuildInventoryAndExtension
+LOOK_FOR=INV_DIAG FIRST_UNDECLARED

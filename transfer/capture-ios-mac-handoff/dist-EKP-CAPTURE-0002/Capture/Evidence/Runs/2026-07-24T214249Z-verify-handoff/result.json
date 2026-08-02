@@ -1,0 +1,8 @@
+{
+  "status": "pass",
+  "workflow": "verify-handoff",
+  "utc": "2026-07-24T21:42:50Z",
+  "note": "Automated only. Physical device + export + PHASE_APPROVED still manual.",
+  "claims_physical_device_success": false,
+  "claims_phase_approved": false
+}

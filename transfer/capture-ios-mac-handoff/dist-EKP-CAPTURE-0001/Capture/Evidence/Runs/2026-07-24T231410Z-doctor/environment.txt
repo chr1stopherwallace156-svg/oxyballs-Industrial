@@ -1,0 +1,4 @@
+utc=2026-07-24T23:14:10Z
+command=Scripts/doctor.sh
+host=Linux x86_64
+pwd=/home/ubuntu/Elektron/elektron-capture-ios

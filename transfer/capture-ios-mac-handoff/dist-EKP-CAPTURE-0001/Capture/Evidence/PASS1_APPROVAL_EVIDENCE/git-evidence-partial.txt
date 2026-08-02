@@ -1,0 +1,43 @@
+=== PASS 1 EVIDENCE PACKAGE ===
+generated_utc=2026-07-24T17:00:14Z
+
+=== HEAD (pre final docs commit — will refresh) ===
+f739c3687f009367f24fc8d64ff247dc04e9117a
+=== PARENT of HEAD ===
+4a954b7b440b51002e364f8ae944c2a156fe1eea
+=== BASELINE ===
+31513ac1b12626e89020f8ac998247b68d84f1d6
+
+=== git log baseline..HEAD ===
+f739c36 docs(pass1): record non-ASCII escaping policy and inventory classification
+4a954b7 fix(canonical): resolve Unicode byte normalization and inventory test failures
+
+=== git show --summary HEAD ===
+commit f739c3687f009367f24fc8d64ff247dc04e9117a
+Author: Cursor Agent <cursoragent@cursor.com>
+Date:   Fri Jul 24 06:03:59 2026 +0000
+
+    docs(pass1): record non-ASCII escaping policy and inventory classification
+    
+    Document ensure_ascii \\uXXXX as the reviewed byte policy (not NFC/NFD).
+    Classify inventory defects (NSNumber bridging + completeness) without
+    weakening gates. Hard-stop Pass 2 until operator approval.
+
+ Docs/Capture/PHASED_EXECUTION_GATES.md             | 76 ++++++++++++++++++++++
+ .../PACKAGE_INVENTORY_PASS1_CLASSIFICATION.md      | 35 ++++++++++
+ Docs/Validation/CANONICAL_JSON.md                  |  2 +-
+ Docs/Validation/CANONICAL_NON_ASCII_POLICY.md      | 45 +++++++++++++
+ 4 files changed, 157 insertions(+), 1 deletion(-)
+ create mode 100644 Docs/Capture/PHASED_EXECUTION_GATES.md
+ create mode 100644 Docs/Evidence/PACKAGE_INVENTORY_PASS1_CLASSIFICATION.md
+ create mode 100644 Docs/Validation/CANONICAL_NON_ASCII_POLICY.md
+
+=== git diff --stat BASELINE..HEAD ===
+ App/Application/CanonicalJSON.swift                |  33 +++-
+ App/Phase1/CaptureSidePackageValidator.swift       |  42 ++++-
+ Docs/Capture/PHASED_EXECUTION_GATES.md             |  76 +++++++++
+ .../PACKAGE_INVENTORY_PASS1_CLASSIFICATION.md      |  35 ++++
+ Docs/Validation/CANONICAL_JSON.md                  |   2 +-
+ Docs/Validation/CANONICAL_NON_ASCII_POLICY.md      |  45 ++++++
+ Tests/Unit/Pass1CanonicalInventoryTests.swift      | 180 +++++++++++++++++++++
+ 7 files changed, 409 insertions(+), 4 deletions(-)

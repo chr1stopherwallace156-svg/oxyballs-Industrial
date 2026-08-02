@@ -1,0 +1,938 @@
+Building for debugging...
+[0/16] Write sources
+[3/16] Copying Fixtures
+[4/16] Write swift-version--6040B813AC8AD1FC.txt
+[6/42] Emitting module ElektronCapture
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:4:14: warning: stored property 'fixtureDirectory' of 'Sendable'-conforming struct 'LocalCapturePlanProvider' has non-sendable type 'URL?'
+  public var fixtureDirectory: URL?
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:28:14: warning: stored property 'isoFormatter' of 'Sendable'-conforming struct 'FileEvidenceExporter' has non-sendable type 'ISO8601DateFormatter'
+  public var isoFormatter: ISO8601DateFormatter
+             ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:4:14: warning: stored property 'fileURL' of 'Sendable'-conforming struct 'PersistedArtifact' has non-sendable type 'URL'
+  public var fileURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:41:15: warning: stored property 'formatter' of 'Sendable'-conforming struct 'CaptureClockService' has non-sendable type 'ISO8601DateFormatter'
+  private let formatter: ISO8601DateFormatter
+              ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:4:14: warning: stored property 'packageDirectoryURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageDirectoryURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:5:14: warning: stored property 'packageZipURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageZipURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:26:14: warning: stored property 'workRoot' of 'Sendable'-conforming struct 'Phase1CaptureCoordinator' has non-sendable type 'URL'
+  public var workRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[7/50] Compiling ElektronCapture MotionSampleService.swift
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:26:14: warning: stored property 'workRoot' of 'Sendable'-conforming struct 'Phase1CaptureCoordinator' has non-sendable type 'URL'
+  public var workRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[8/50] Compiling ElektronCapture PackageInventoryBuilder.swift
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:26:14: warning: stored property 'workRoot' of 'Sendable'-conforming struct 'Phase1CaptureCoordinator' has non-sendable type 'URL'
+  public var workRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[9/50] Compiling ElektronCapture Phase1CaptureCoordinator.swift
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:26:14: warning: stored property 'workRoot' of 'Sendable'-conforming struct 'Phase1CaptureCoordinator' has non-sendable type 'URL'
+  public var workRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[10/50] Compiling ElektronCapture Phase1RuntimeError.swift
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:26:14: warning: stored property 'workRoot' of 'Sendable'-conforming struct 'Phase1CaptureCoordinator' has non-sendable type 'URL'
+  public var workRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[11/50] Compiling ElektronCapture ZipPackageWriter.swift
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:26:14: warning: stored property 'workRoot' of 'Sendable'-conforming struct 'Phase1CaptureCoordinator' has non-sendable type 'URL'
+  public var workRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[12/50] Compiling ElektronCapture ContentHasher.swift
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:26:14: warning: stored property 'workRoot' of 'Sendable'-conforming struct 'Phase1CaptureCoordinator' has non-sendable type 'URL'
+  public var workRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[13/50] Compiling ElektronCapture MockAttestationVerifier.swift
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:26:14: warning: stored property 'workRoot' of 'Sendable'-conforming struct 'Phase1CaptureCoordinator' has non-sendable type 'URL'
+  public var workRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[14/50] Compiling ElektronCapture ImmutableFileStore.swift
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:26:14: warning: stored property 'workRoot' of 'Sendable'-conforming struct 'Phase1CaptureCoordinator' has non-sendable type 'URL'
+  public var workRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/Phase1CaptureCoordinator.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[15/50] Compiling ElektronCapture ArtifactHashingService.swift
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:4:14: warning: stored property 'fileURL' of 'Sendable'-conforming struct 'PersistedArtifact' has non-sendable type 'URL'
+  public var fileURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:41:15: warning: stored property 'formatter' of 'Sendable'-conforming struct 'CaptureClockService' has non-sendable type 'ISO8601DateFormatter'
+  private let formatter: ISO8601DateFormatter
+              ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:4:14: warning: stored property 'packageDirectoryURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageDirectoryURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:5:14: warning: stored property 'packageZipURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageZipURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+[16/50] Compiling ElektronCapture ArtifactPersistenceService.swift
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:4:14: warning: stored property 'fileURL' of 'Sendable'-conforming struct 'PersistedArtifact' has non-sendable type 'URL'
+  public var fileURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:41:15: warning: stored property 'formatter' of 'Sendable'-conforming struct 'CaptureClockService' has non-sendable type 'ISO8601DateFormatter'
+  private let formatter: ISO8601DateFormatter
+              ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:4:14: warning: stored property 'packageDirectoryURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageDirectoryURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:5:14: warning: stored property 'packageZipURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageZipURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+[17/50] Compiling ElektronCapture CanonicalJSONEncoder.swift
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:4:14: warning: stored property 'fileURL' of 'Sendable'-conforming struct 'PersistedArtifact' has non-sendable type 'URL'
+  public var fileURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:41:15: warning: stored property 'formatter' of 'Sendable'-conforming struct 'CaptureClockService' has non-sendable type 'ISO8601DateFormatter'
+  private let formatter: ISO8601DateFormatter
+              ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:4:14: warning: stored property 'packageDirectoryURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageDirectoryURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:5:14: warning: stored property 'packageZipURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageZipURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+[18/50] Compiling ElektronCapture CaptureClockService.swift
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:4:14: warning: stored property 'fileURL' of 'Sendable'-conforming struct 'PersistedArtifact' has non-sendable type 'URL'
+  public var fileURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:41:15: warning: stored property 'formatter' of 'Sendable'-conforming struct 'CaptureClockService' has non-sendable type 'ISO8601DateFormatter'
+  private let formatter: ISO8601DateFormatter
+              ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:4:14: warning: stored property 'packageDirectoryURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageDirectoryURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:5:14: warning: stored property 'packageZipURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageZipURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+[19/50] Compiling ElektronCapture CaptureSidePackageValidator.swift
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:4:14: warning: stored property 'fileURL' of 'Sendable'-conforming struct 'PersistedArtifact' has non-sendable type 'URL'
+  public var fileURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:41:15: warning: stored property 'formatter' of 'Sendable'-conforming struct 'CaptureClockService' has non-sendable type 'ISO8601DateFormatter'
+  private let formatter: ISO8601DateFormatter
+              ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:4:14: warning: stored property 'packageDirectoryURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageDirectoryURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:5:14: warning: stored property 'packageZipURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageZipURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+[20/50] Compiling ElektronCapture DeviceProvenanceService.swift
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:4:14: warning: stored property 'fileURL' of 'Sendable'-conforming struct 'PersistedArtifact' has non-sendable type 'URL'
+  public var fileURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:41:15: warning: stored property 'formatter' of 'Sendable'-conforming struct 'CaptureClockService' has non-sendable type 'ISO8601DateFormatter'
+  private let formatter: ISO8601DateFormatter
+              ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:4:14: warning: stored property 'packageDirectoryURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageDirectoryURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:5:14: warning: stored property 'packageZipURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageZipURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+[21/50] Compiling ElektronCapture EvidenceManifestBuilder.swift
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:4:14: warning: stored property 'fileURL' of 'Sendable'-conforming struct 'PersistedArtifact' has non-sendable type 'URL'
+  public var fileURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:41:15: warning: stored property 'formatter' of 'Sendable'-conforming struct 'CaptureClockService' has non-sendable type 'ISO8601DateFormatter'
+  private let formatter: ISO8601DateFormatter
+              ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:4:14: warning: stored property 'packageDirectoryURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageDirectoryURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:5:14: warning: stored property 'packageZipURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageZipURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+[22/50] Compiling ElektronCapture EvidencePackageBuilder.swift
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:4:14: warning: stored property 'fileURL' of 'Sendable'-conforming struct 'PersistedArtifact' has non-sendable type 'URL'
+  public var fileURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/ArtifactPersistenceService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:41:15: warning: stored property 'formatter' of 'Sendable'-conforming struct 'CaptureClockService' has non-sendable type 'ISO8601DateFormatter'
+  private let formatter: ISO8601DateFormatter
+              ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Phase1/CaptureClockService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:4:14: warning: stored property 'packageDirectoryURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageDirectoryURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/tmp/pass1-fresh-clone/App/Phase1/EvidencePackageBuilder.swift:5:14: warning: stored property 'packageZipURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageZipURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+[23/50] Compiling ElektronCapture AuthorityGuard.swift
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: warning: unknown operating system for build configuration 'os'
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'iOS'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  iOS
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'Windows'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  Windows
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:4:14: warning: stored property 'fixtureDirectory' of 'Sendable'-conforming struct 'LocalCapturePlanProvider' has non-sendable type 'URL?'
+  public var fixtureDirectory: URL?
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[24/50] Compiling ElektronCapture CanonicalJSON.swift
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: warning: unknown operating system for build configuration 'os'
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'iOS'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  iOS
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'Windows'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  Windows
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:4:14: warning: stored property 'fixtureDirectory' of 'Sendable'-conforming struct 'LocalCapturePlanProvider' has non-sendable type 'URL?'
+  public var fixtureDirectory: URL?
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[25/50] Compiling ElektronCapture EvidenceManifestValidator.swift
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: warning: unknown operating system for build configuration 'os'
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'iOS'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  iOS
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'Windows'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  Windows
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:4:14: warning: stored property 'fixtureDirectory' of 'Sendable'-conforming struct 'LocalCapturePlanProvider' has non-sendable type 'URL?'
+  public var fixtureDirectory: URL?
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[26/50] Compiling ElektronCapture LocalCapturePlanProvider.swift
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: warning: unknown operating system for build configuration 'os'
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'iOS'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  iOS
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'Windows'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  Windows
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:4:14: warning: stored property 'fixtureDirectory' of 'Sendable'-conforming struct 'LocalCapturePlanProvider' has non-sendable type 'URL?'
+  public var fixtureDirectory: URL?
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[27/50] Compiling ElektronCapture RuntimeEnvironment.swift
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: warning: unknown operating system for build configuration 'os'
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'iOS'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  iOS
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'Windows'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  Windows
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:4:14: warning: stored property 'fixtureDirectory' of 'Sendable'-conforming struct 'LocalCapturePlanProvider' has non-sendable type 'URL?'
+  public var fixtureDirectory: URL?
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[28/50] Compiling ElektronCapture Phase1CameraServices.swift
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: warning: unknown operating system for build configuration 'os'
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'iOS'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  iOS
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'Windows'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  Windows
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:4:14: warning: stored property 'fixtureDirectory' of 'Sendable'-conforming struct 'LocalCapturePlanProvider' has non-sendable type 'URL?'
+  public var fixtureDirectory: URL?
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[29/50] Compiling ElektronCapture CaptureError.swift
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: warning: unknown operating system for build configuration 'os'
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'iOS'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  iOS
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'Windows'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  Windows
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:4:14: warning: stored property 'fixtureDirectory' of 'Sendable'-conforming struct 'LocalCapturePlanProvider' has non-sendable type 'URL?'
+  public var fixtureDirectory: URL?
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[30/50] Compiling ElektronCapture CaptureDeviceProvenance.swift
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: warning: unknown operating system for build configuration 'os'
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'iOS'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  iOS
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'Windows'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  Windows
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:4:14: warning: stored property 'fixtureDirectory' of 'Sendable'-conforming struct 'LocalCapturePlanProvider' has non-sendable type 'URL?'
+  public var fixtureDirectory: URL?
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[31/50] Compiling ElektronCapture CaptureSessionState.swift
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: warning: unknown operating system for build configuration 'os'
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'iOS'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  iOS
+/tmp/pass1-fresh-clone/App/Application/CanonicalJSON.swift:120:67: note: did you mean 'Windows'?
+        #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                                  ^~~~~~~~
+                                                                  Windows
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:4:14: warning: stored property 'fixtureDirectory' of 'Sendable'-conforming struct 'LocalCapturePlanProvider' has non-sendable type 'URL?'
+  public var fixtureDirectory: URL?
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/tmp/pass1-fresh-clone/App/Application/LocalCapturePlanProvider.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[32/50] Compiling ElektronCapture CaptureSideStatus.swift
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:28:14: warning: stored property 'isoFormatter' of 'Sendable'-conforming struct 'FileEvidenceExporter' has non-sendable type 'ISO8601DateFormatter'
+  public var isoFormatter: ISO8601DateFormatter
+             ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[33/50] Compiling ElektronCapture Contracts.swift
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:28:14: warning: stored property 'isoFormatter' of 'Sendable'-conforming struct 'FileEvidenceExporter' has non-sendable type 'ISO8601DateFormatter'
+  public var isoFormatter: ISO8601DateFormatter
+             ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[34/50] Compiling ElektronCapture EvidenceAuthority.swift
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:28:14: warning: stored property 'isoFormatter' of 'Sendable'-conforming struct 'FileEvidenceExporter' has non-sendable type 'ISO8601DateFormatter'
+  public var isoFormatter: ISO8601DateFormatter
+             ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[35/50] Compiling ElektronCapture LocalCaptureSession.swift
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:28:14: warning: stored property 'isoFormatter' of 'Sendable'-conforming struct 'FileEvidenceExporter' has non-sendable type 'ISO8601DateFormatter'
+  public var isoFormatter: ISO8601DateFormatter
+             ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[36/50] Compiling ElektronCapture Phase1ArtifactTypes.swift
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:28:14: warning: stored property 'isoFormatter' of 'Sendable'-conforming struct 'FileEvidenceExporter' has non-sendable type 'ISO8601DateFormatter'
+  public var isoFormatter: ISO8601DateFormatter
+             ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[37/50] Compiling ElektronCapture CaptureProtocols.swift
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:28:14: warning: stored property 'isoFormatter' of 'Sendable'-conforming struct 'FileEvidenceExporter' has non-sendable type 'ISO8601DateFormatter'
+  public var isoFormatter: ISO8601DateFormatter
+             ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[38/50] Compiling ElektronCapture MockEDTSClient.swift
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:28:14: warning: stored property 'isoFormatter' of 'Sendable'-conforming struct 'FileEvidenceExporter' has non-sendable type 'ISO8601DateFormatter'
+  public var isoFormatter: ISO8601DateFormatter
+             ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[39/50] Compiling ElektronCapture FileEvidenceExporter.swift
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:28:14: warning: stored property 'isoFormatter' of 'Sendable'-conforming struct 'FileEvidenceExporter' has non-sendable type 'ISO8601DateFormatter'
+  public var isoFormatter: ISO8601DateFormatter
+             ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/tmp/pass1-fresh-clone/App/Export/FileEvidenceExporter.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[40/51] Wrapping AST for ElektronCapture for debugging
+[42/58] Emitting module ElektronCaptureGoldenTests
+[43/58] Compiling ElektronCaptureGoldenTests GoldenEvidencePackageTests.swift
+[44/59] Compiling ElektronCaptureTests Pass1CanonicalInventoryTests.swift
+[46/60] Compiling ElektronCaptureTests resource_bundle_accessor.swift
+[46/60] Wrapping AST for ElektronCaptureGoldenTests for debugging
+[48/60] Compiling ElektronCaptureTests Phase1RuntimeTests.swift
+/tmp/pass1-fresh-clone/Tests/Unit/Phase1RuntimeTests.swift:174:63: warning: unknown operating system for build configuration 'os'
+    #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                              ^
+/tmp/pass1-fresh-clone/Tests/Unit/Phase1RuntimeTests.swift:174:63: note: did you mean 'iOS'?
+    #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                              ^~~~~~~~
+                                                              iOS
+/tmp/pass1-fresh-clone/Tests/Unit/Phase1RuntimeTests.swift:174:63: note: did you mean 'Windows'?
+    #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                              ^~~~~~~~
+                                                              Windows
+[49/60] Compiling ElektronCaptureTests CrossLanguageCanonicalJSONTests.swift
+[50/60] Compiling ElektronCaptureTests FoundationTests.swift
+[51/60] Emitting module ElektronCaptureTests
+[52/61] /tmp/pass1-fresh-clone/.build/x86_64-unknown-linux-gnu/debug/ElektronCapturePackageDiscoveredTests.derived/all-discovered-tests.swift
+[53/61] Write sources
+[54/61] Wrapping AST for ElektronCaptureTests for debugging
+[56/65] Compiling ElektronCapturePackageDiscoveredTests all-discovered-tests.swift
+[57/65] Emitting module ElektronCapturePackageDiscoveredTests
+[58/65] Compiling ElektronCapturePackageDiscoveredTests ElektronCaptureTests.swift
+[59/65] Compiling ElektronCapturePackageDiscoveredTests ElektronCaptureGoldenTests.swift
+[60/66] /tmp/pass1-fresh-clone/.build/x86_64-unknown-linux-gnu/debug/ElektronCapturePackageTests.derived/runner.swift
+[61/66] Write sources
+[62/66] Wrapping AST for ElektronCapturePackageDiscoveredTests for debugging
+[64/68] Compiling ElektronCapturePackageTests runner.swift
+[65/68] Emitting module ElektronCapturePackageTests
+[66/69] Wrapping AST for ElektronCapturePackageTests for debugging
+[67/69] Write Objects.LinkFileList
+[68/69] Linking ElektronCapturePackageTests.xctest
+Build complete! (4.53s)
+Test Suite 'All tests' started at 2026-07-24 17:02:01.770
+Test Suite 'debug.xctest' started at 2026-07-24 17:02:01.771
+Test Suite 'GoldenEvidencePackageTests' started at 2026-07-24 17:02:01.771
+Test Case 'GoldenEvidencePackageTests.testGoldenPackageHashesMatchManifest' started at 2026-07-24 17:02:01.771
+Test Case 'GoldenEvidencePackageTests.testGoldenPackageHashesMatchManifest' passed (0.001 seconds)
+Test Case 'GoldenEvidencePackageTests.testPackageMetaDeclaresCompatibility' started at 2026-07-24 17:02:01.772
+Test Case 'GoldenEvidencePackageTests.testPackageMetaDeclaresCompatibility' passed (0.001 seconds)
+Test Suite 'GoldenEvidencePackageTests' passed at 2026-07-24 17:02:01.773
+Executed 2 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'AuthorityGuardTests' started at 2026-07-24 17:02:01.773
+Test Case 'AuthorityGuardTests.testAllowsNeutralText' started at 2026-07-24 17:02:01.773
+Test Case 'AuthorityGuardTests.testAllowsNeutralText' passed (0.0 seconds)
+Test Case 'AuthorityGuardTests.testRejectsForbiddenClaims' started at 2026-07-24 17:02:01.773
+Test Case 'AuthorityGuardTests.testRejectsForbiddenClaims' passed (0.0 seconds)
+Test Suite 'AuthorityGuardTests' passed at 2026-07-24 17:02:01.773
+Executed 2 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'CaptureSessionStateMachineTests' started at 2026-07-24 17:02:01.773
+Test Case 'CaptureSessionStateMachineTests.testGuidanceAuthorityDefaultForPose' started at 2026-07-24 17:02:01.773
+Test Case 'CaptureSessionStateMachineTests.testGuidanceAuthorityDefaultForPose' passed (0.0 seconds)
+Test Case 'CaptureSessionStateMachineTests.testIllegalTransitionThrows' started at 2026-07-24 17:02:01.773
+Test Case 'CaptureSessionStateMachineTests.testIllegalTransitionThrows' passed (0.0 seconds)
+Test Case 'CaptureSessionStateMachineTests.testLegalTransition' started at 2026-07-24 17:02:01.773
+Test Case 'CaptureSessionStateMachineTests.testLegalTransition' passed (0.0 seconds)
+Test Suite 'CaptureSessionStateMachineTests' passed at 2026-07-24 17:02:01.773
+Executed 3 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'CaptureSideStatusTests' started at 2026-07-24 17:02:01.773
+Test Case 'CaptureSideStatusTests.testAcceptsCaptureSideStatuses' started at 2026-07-24 17:02:01.773
+Test Case 'CaptureSideStatusTests.testAcceptsCaptureSideStatuses' passed (0.0 seconds)
+Test Case 'CaptureSideStatusTests.testDirectiveApprovedIsNotImplementationComplete' started at 2026-07-24 17:02:01.773
+Test Case 'CaptureSideStatusTests.testDirectiveApprovedIsNotImplementationComplete' passed (0.0 seconds)
+Test Case 'CaptureSideStatusTests.testRejectsAllRegistryEdtsOwnedStatuses' started at 2026-07-24 17:02:01.773
+Test Case 'CaptureSideStatusTests.testRejectsAllRegistryEdtsOwnedStatuses' passed (0.0 seconds)
+Test Suite 'CaptureSideStatusTests' passed at 2026-07-24 17:02:01.773
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'ContentHasherTests' started at 2026-07-24 17:02:01.773
+Test Case 'ContentHasherTests.testSha256KnownVector' started at 2026-07-24 17:02:01.773
+Test Case 'ContentHasherTests.testSha256KnownVector' passed (0.0 seconds)
+Test Suite 'ContentHasherTests' passed at 2026-07-24 17:02:01.774
+Executed 1 test, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'CrossLanguageCanonicalJSONTests' started at 2026-07-24 17:02:01.774
+Test Case 'CrossLanguageCanonicalJSONTests.testSwiftCanonicalBytesMatchPythonGolden' started at 2026-07-24 17:02:01.774
+/tmp/pass1-fresh-clone/Tests/Unit/CrossLanguageCanonicalJSONTests.swift:16: CrossLanguageCanonicalJSONTests.testSwiftCanonicalBytesMatchPythonGolden : Test skipped - CROSS_LANGUAGE_CANONICAL_JSON gate requires Darwin JSONSerialization boolean identity
+Test Case 'CrossLanguageCanonicalJSONTests.testSwiftCanonicalBytesMatchPythonGolden' skipped (0.0 seconds)
+Test Suite 'CrossLanguageCanonicalJSONTests' passed at 2026-07-24 17:02:01.774
+	 Executed 1 test, with 1 test skipped and 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'EvidenceManifestValidatorTests' started at 2026-07-24 17:02:01.774
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONIndependentOfInsertionOrder' started at 2026-07-24 17:02:01.774
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONIndependentOfInsertionOrder' passed (0.001 seconds)
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONRejectsNonFinite' started at 2026-07-24 17:02:01.774
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONRejectsNonFinite' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONStable' started at 2026-07-24 17:02:01.774
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONStable' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsAnonymousPoseFrames' started at 2026-07-24 17:02:01.775
+Test Case 'EvidenceManifestValidatorTests.testRejectsAnonymousPoseFrames' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsDerivativeWithoutParent' started at 2026-07-24 17:02:01.775
+Test Case 'EvidenceManifestValidatorTests.testRejectsDerivativeWithoutParent' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsEmptyHash' started at 2026-07-24 17:02:01.775
+Test Case 'EvidenceManifestValidatorTests.testRejectsEmptyHash' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsEngineeringVerifiedFromCapture' started at 2026-07-24 17:02:01.775
+Test Case 'EvidenceManifestValidatorTests.testRejectsEngineeringVerifiedFromCapture' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsForbiddenClaimEmbeddedInExportValidation' started at 2026-07-24 17:02:01.775
+Test Case 'EvidenceManifestValidatorTests.testRejectsForbiddenClaimEmbeddedInExportValidation' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsMeasurementWithoutUnit' started at 2026-07-24 17:02:01.775
+Test Case 'EvidenceManifestValidatorTests.testRejectsMeasurementWithoutUnit' passed (0.1 seconds)
+Test Suite 'EvidenceManifestValidatorTests' passed at 2026-07-24 17:02:01.875
+Executed 9 tests, with 0 failures (0 unexpected) in 0.102 (0.102) seconds
+Test Suite 'ImmutableFileStoreTests' started at 2026-07-24 17:02:01.875
+Test Case 'ImmutableFileStoreTests.testWriteImmutablePreventsOverwrite' started at 2026-07-24 17:02:01.875
+Test Case 'ImmutableFileStoreTests.testWriteImmutablePreventsOverwrite' passed (0.003 seconds)
+Test Suite 'ImmutableFileStoreTests' passed at 2026-07-24 17:02:01.878
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.003 (0.003) seconds
+Test Suite 'MockEDTSClientTests' started at 2026-07-24 17:02:01.878
+Test Case 'MockEDTSClientTests.testAdapterMocksLabeled' started at 2026-07-24 17:02:01.878
+Test Case 'MockEDTSClientTests.testAdapterMocksLabeled' passed (0.0 seconds)
+Test Case 'MockEDTSClientTests.testBuiltinPlanLoads' started at 2026-07-24 17:02:01.879
+Test Case 'MockEDTSClientTests.testBuiltinPlanLoads' passed (0.0 seconds)
+Test Case 'MockEDTSClientTests.testMockIsLabeled' started at 2026-07-24 17:02:01.879
+Test Case 'MockEDTSClientTests.testMockIsLabeled' passed (0.0 seconds)
+Test Case 'MockEDTSClientTests.testSubmitAcceptsEvidenceManifestPresence' started at 2026-07-24 17:02:01.879
+Test Case 'MockEDTSClientTests.testSubmitAcceptsEvidenceManifestPresence' passed (0.002 seconds)
+Test Case 'MockEDTSClientTests.testSubmitRejectsMissingManifest' started at 2026-07-24 17:02:01.881
+Test Case 'MockEDTSClientTests.testSubmitRejectsMissingManifest' passed (0.001 seconds)
+Test Suite 'MockEDTSClientTests' passed at 2026-07-24 17:02:01.882
+Executed 5 tests, with 0 failures (0 unexpected) in 0.003 (0.003) seconds
+Test Suite 'Pass1CanonicalInventoryTests' started at 2026-07-24 17:02:01.882
+Test Case 'Pass1CanonicalInventoryTests.testInventoryValidatorAcceptsNSNumberByteSize' started at 2026-07-24 17:02:01.882
+Test Case 'Pass1CanonicalInventoryTests.testInventoryValidatorAcceptsNSNumberByteSize' passed (0.007 seconds)
+Test Case 'Pass1CanonicalInventoryTests.testInventoryValidatorFlagsUndeclaredPath' started at 2026-07-24 17:02:01.889
+Test Case 'Pass1CanonicalInventoryTests.testInventoryValidatorFlagsUndeclaredPath' passed (0.005 seconds)
+Test Case 'Pass1CanonicalInventoryTests.testSwiftLiteralCorpusMatchesPythonGoldenBytes' started at 2026-07-24 17:02:01.894
+Test Case 'Pass1CanonicalInventoryTests.testSwiftLiteralCorpusMatchesPythonGoldenBytes' passed (0.001 seconds)
+Test Case 'Pass1CanonicalInventoryTests.testUnicodeEnsureAsciiEscapes' started at 2026-07-24 17:02:01.896
+Test Case 'Pass1CanonicalInventoryTests.testUnicodeEnsureAsciiEscapes' passed (0.0 seconds)
+Test Suite 'Pass1CanonicalInventoryTests' passed at 2026-07-24 17:02:01.896
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.014 (0.014) seconds
+Test Suite 'Phase1RuntimeTests' started at 2026-07-24 17:02:01.896
+Test Case 'Phase1RuntimeTests.testCalibrationUnavailableByDefault' started at 2026-07-24 17:02:01.896
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+Test Case 'Phase1RuntimeTests.testCalibrationUnavailableByDefault' passed (0.015 seconds)
+Test Case 'Phase1RuntimeTests.testCanonicalJSONAcceptsUInt64Leaf' started at 2026-07-24 17:02:01.911
+Test Case 'Phase1RuntimeTests.testCanonicalJSONAcceptsUInt64Leaf' passed (0.0 seconds)
+Test Case 'Phase1RuntimeTests.testCanonicalJSONRejectsBoxedNilOptional' started at 2026-07-24 17:02:01.911
+Test Case 'Phase1RuntimeTests.testCanonicalJSONRejectsBoxedNilOptional' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testCanonicalManifestMatchesPythonGoldenBytes' started at 2026-07-24 17:02:01.912
+Test Case 'Phase1RuntimeTests.testCanonicalManifestMatchesPythonGoldenBytes' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testCanonicalManifestRoundTrip' started at 2026-07-24 17:02:01.913
+Test Case 'Phase1RuntimeTests.testCanonicalManifestRoundTrip' passed (0.002 seconds)
+Test Case 'Phase1RuntimeTests.testCaptureSideValidatorDoesNotClaimEdtsGates' started at 2026-07-24 17:02:01.914
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+Test Case 'Phase1RuntimeTests.testCaptureSideValidatorDoesNotClaimEdtsGates' passed (0.02 seconds)
+Test Case 'Phase1RuntimeTests.testEndToEndPackageWithPhysicalDeviceNilOptionals' started at 2026-07-24 17:02:01.934
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+Test Case 'Phase1RuntimeTests.testEndToEndPackageWithPhysicalDeviceNilOptionals' passed (0.015 seconds)
+Test Case 'Phase1RuntimeTests.testFailureCleanupRemovesIncompletePackage' started at 2026-07-24 17:02:01.949
+Test Case 'Phase1RuntimeTests.testFailureCleanupRemovesIncompletePackage' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testHashMismatchOnCorruptReadback' started at 2026-07-24 17:02:01.950
+Test Case 'Phase1RuntimeTests.testHashMismatchOnCorruptReadback' passed (0.002 seconds)
+Test Case 'Phase1RuntimeTests.testLifecycleStatusesAreCaptureOwned' started at 2026-07-24 17:02:01.952
+Test Case 'Phase1RuntimeTests.testLifecycleStatusesAreCaptureOwned' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testPackageBuildInventoryAndExtension' started at 2026-07-24 17:02:01.952
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+Test Case 'Phase1RuntimeTests.testPackageBuildInventoryAndExtension' passed (0.013 seconds)
+Test Case 'Phase1RuntimeTests.testPhysicalDeviceProvenanceDictionaryCanonicalizes' started at 2026-07-24 17:02:01.966
+[Phase1Capture] stage=test_buggy_optional event=preflight_unsupported_values lidar_available type=Optional<Bool> describing=nil reflecting=nil
+[Phase1Capture] stage=test_buggy_optional event=canonicalization_failed stage=test_buggy_optional | swiftErrorType=CaptureError | describing=packageInvalid("Unsupported JSON type Optional<Bool> (nil Optional boxed as Any; use NSNull() or omit the key). value=nil") | reflecting=ElektronCapture.CaptureError.packageInvalid("Unsupported JSON type Optional<Bool> (nil Optional boxed as Any; use NSNull() or omit the key). value=nil") | localizedDescription=The operation could not be completed. (ElektronCapture.CaptureError error 1.) | unsupportedValues=lidar_available type=Optional<Bool> describing=nil
+[Phase1Capture] stage=test_buggy_optional event=preflight_unsupported_values lidar_available type=Optional<Bool> describing=nil reflecting=nil
+[Phase1Capture] stage=test_buggy_optional event=canonicalization_failed stage=test_buggy_optional | swiftErrorType=CaptureError | describing=packageInvalid("Unsupported JSON type Optional<Bool> (nil Optional boxed as Any; use NSNull() or omit the key). value=nil") | reflecting=ElektronCapture.CaptureError.packageInvalid("Unsupported JSON type Optional<Bool> (nil Optional boxed as Any; use NSNull() or omit the key). value=nil") | localizedDescription=The operation could not be completed. (ElektronCapture.CaptureError error 1.) | unsupportedValues=lidar_available type=Optional<Bool> describing=nil
+Test Case 'Phase1RuntimeTests.testPhysicalDeviceProvenanceDictionaryCanonicalizes' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testPhysicalDeviceStatusPayloadWithClockCanonicalizes' started at 2026-07-24 17:02:01.967
+Test Case 'Phase1RuntimeTests.testPhysicalDeviceStatusPayloadWithClockCanonicalizes' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testReadbackSha256MatchesStreamingHash' started at 2026-07-24 17:02:01.968
+Test Case 'Phase1RuntimeTests.testReadbackSha256MatchesStreamingHash' passed (0.002 seconds)
+Test Case 'Phase1RuntimeTests.testReasonCodesAreStable' started at 2026-07-24 17:02:01.970
+Test Case 'Phase1RuntimeTests.testReasonCodesAreStable' passed (0.0 seconds)
+Test Case 'Phase1RuntimeTests.testStatusOwnerRejectsEdtsCodes' started at 2026-07-24 17:02:01.970
+Test Case 'Phase1RuntimeTests.testStatusOwnerRejectsEdtsCodes' passed (0.0 seconds)
+Test Suite 'Phase1RuntimeTests' passed at 2026-07-24 17:02:01.970
+Executed 16 tests, with 0 failures (0 unexpected) in 0.074 (0.074) seconds
+Test Suite 'ProductionConfigurationGuardTests' started at 2026-07-24 17:02:01.970
+Test Case 'ProductionConfigurationGuardTests.testDevelopmentAllowsMocks' started at 2026-07-24 17:02:01.970
+Test Case 'ProductionConfigurationGuardTests.testDevelopmentAllowsMocks' passed (0.0 seconds)
+Test Case 'ProductionConfigurationGuardTests.testProductionRejectsMocks' started at 2026-07-24 17:02:01.970
+Test Case 'ProductionConfigurationGuardTests.testProductionRejectsMocks' passed (0.0 seconds)
+Test Case 'ProductionConfigurationGuardTests.testTestAllowsMocks' started at 2026-07-24 17:02:01.971
+Test Case 'ProductionConfigurationGuardTests.testTestAllowsMocks' passed (0.0 seconds)
+Test Suite 'ProductionConfigurationGuardTests' passed at 2026-07-24 17:02:01.971
+Executed 3 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'UncertainValueTests' started at 2026-07-24 17:02:01.971
+Test Case 'UncertainValueTests.testUnknownUncertaintyWhenNil' started at 2026-07-24 17:02:01.971
+Test Case 'UncertainValueTests.testUnknownUncertaintyWhenNil' passed (0.0 seconds)
+Test Suite 'UncertainValueTests' passed at 2026-07-24 17:02:01.971
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'debug.xctest' passed at 2026-07-24 17:02:01.971
+Executed 51 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.2 (0.2) seconds
+Test Suite 'All tests' passed at 2026-07-24 17:02:01.971
+Executed 51 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.2 (0.2) seconds

@@ -1,0 +1,65 @@
+{
+  "twin_passport_id": "TWIN-ENG-000001",
+  "domain": "ENGINEERING",
+  "aliases": [
+    "AID-ENG-0082",
+    "EDTS-COMP-FL-SHELL-ENGINEERING"
+  ],
+  "component_alias": "EDTS-COMP-FL-SHELL",
+  "related_csp_id": "CSP-000001",
+  "related_aid_ids": [
+    "AID-000013"
+  ],
+  "authority_status": "ILLUSTRATIVE_ONLY",
+  "fields": {
+    "datum_references": {
+      "value": "Primary A rear cab seal surface; secondary B lower hinge plate (operator claim)",
+      "status": "RESEARCH_CLAIM",
+      "note": null
+    },
+    "dimensional_tolerances": {
+      "value": "\u00b10.5 mm exterior curves (operator claim)",
+      "status": "RESEARCH_CLAIM",
+      "note": "No OEM stamping boundary sheet hashed"
+    },
+    "mass_profile_kg": {
+      "value": 11.24,
+      "status": "RESEARCH_CLAIM",
+      "note": "Calculated/claimed mass \u2014 NOT physical scale teardown"
+    },
+    "coordinate_system_alignment": {
+      "value": "True Vehicle Grid Origin at front axle centerline (operator claim)",
+      "status": "RESEARCH_CLAIM",
+      "note": "Must bind to EDTS coordinate registry \u2014 not assumed from marketplace origin"
+    },
+    "material_specification": {
+      "value": "6000-series aluminum alloy (operator claim \u2014 'military-grade' marketing language demoted)",
+      "status": "RESEARCH_CLAIM",
+      "note": null
+    },
+    "mating_interfaces": {
+      "value": "Outer-to-inner hem flange crimp line (operator claim)",
+      "status": "RESEARCH_CLAIM",
+      "note": null
+    },
+    "fastener_definitions": {
+      "value": "Four M10 body-to-hinge bolts; adhesive anti-flutter tracks (operator claim)",
+      "status": "RESEARCH_CLAIM",
+      "note": "Torque pending SRC-CAND-000002"
+    },
+    "mounting_brackets": {
+      "value": "Mirror stiffener plates manual/power (operator claim)",
+      "status": "RESEARCH_CLAIM",
+      "note": "Option-dependent \u2014 mirror config isolation required"
+    }
+  },
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "research_sprint": "RL-014",
+  "decision": "DT-D045",
+  "notes": [
+    "SOURCE_VERIFIED rejected for AID-ENG-0082 \u2014 no GrabCAD URL/bytes.",
+    "Do not use visual mesh origin as engineering datum without transform evidence."
+  ]
+}

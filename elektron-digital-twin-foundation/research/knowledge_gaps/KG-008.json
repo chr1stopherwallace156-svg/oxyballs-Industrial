@@ -1,0 +1,30 @@
+{
+  "gap_id": "KG-008",
+  "component": "Cab-to-engine / firewall pass-through harness connector (operator candidate C127)",
+  "reported_oem_part_number": null,
+  "critical_need": "Hardwire pinout, circuit designations, CAN-bus termination architecture for VCU integration.",
+  "priority": "CRITICAL",
+  "possible_sources": [
+    "Ford EWD (SRC-CAND-000006)",
+    "WSM electrical sections"
+  ],
+  "related_src_cand_ids": [
+    "SRC-CAND-000006",
+    "SRC-CAND-000002"
+  ],
+  "related_mission_ids": [
+    "MISN-000001",
+    "MISN-000003",
+    "MISN-000006"
+  ],
+  "status": "OPEN",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "notes": [
+    "Linked MEPQ-003 (see research/mepq/).",
+    "Linked MEPQ-003.",
+    "Connector designation C127 is OPERATOR_CANDIDATE until EWD confirms.",
+    "Do not invent pin maps or terminal resistance values."
+  ],
+  "decision": "DT-D054"
+}
