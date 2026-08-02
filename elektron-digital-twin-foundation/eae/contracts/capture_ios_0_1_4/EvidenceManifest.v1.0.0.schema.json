@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://elektron.local/contracts/evidence-manifest/1.0.0",
+  "title": "EvidenceManifest",
+  "version": "1.0.0",
+  "owner": "elektron-capture-ios",
+  "contract_ownership": "JOINT_CAPTURE_EDTS",
+  "status": "DRAFT",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "schema_version",
+    "session_id",
+    "capture_app_version",
+    "created_at_utc",
+    "clock_domain",
+    "artifacts"
+  ],
+  "properties": {
+    "manifest_version": { "type": "string" },
+    "schema_id": { "const": "EvidenceManifest" },
+    "schema_version": { "const": "1.0.0" },
+    "record_id": { "type": "string" },
+    "session_id": { "type": "string", "minLength": 1 },
+    "capture_app_version": { "type": "string", "minLength": 1 },
+    "created_at_utc": { "type": "string", "minLength": 1 },
+    "clock_domain": { "type": "string", "minLength": 1 },
+    "device_profile_id": { "type": ["string", "null"] },
+    "capture_plan_id": { "type": ["string", "null"] },
+    "capture_identity": { "type": "object" },
+    "spatial_context": { "type": "object" },
+    "engineering_link": { "type": "object" },
+    "provenance": { "type": "object" },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  },
+  "$defs": {
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "relative_path",
+        "sha256",
+        "media_type",
+        "captured_at_utc",
+        "clock_domain",
+        "authority",
+        "is_original"
+      ],
+      "properties": {
+        "artifact_id": { "type": "string", "minLength": 1 },
+        "relative_path": { "type": "string", "minLength": 1 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "media_type": { "type": "string", "minLength": 1 },
+        "captured_at_utc": { "type": "string", "minLength": 1 },
+        "clock_domain": { "type": "string", "minLength": 1 },
+        "coordinate_frame": { "type": ["string", "null"] },
+        "authority": {
+          "type": "string",
+          "enum": [
+            "RAW_OBSERVATION",
+            "DEVICE_REPORTED",
+            "GUIDANCE_ESTIMATE",
+            "ALGORITHM_ESTIMATE",
+            "PHYSICAL_REFERENCE",
+            "FIELD_VALIDATED",
+            "REJECTED",
+            "UNKNOWN"
+          ],
+          "description": "ENGINEERING_VERIFIED is prohibited in capture-emitted manifests"
+        },
+        "is_original": { "type": "boolean" },
+        "parent_artifact_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "is_original": { "const": false } } },
+          "then": {
+            "required": ["parent_artifact_ids"],
+            "properties": {
+              "parent_artifact_ids": { "type": "array", "minItems": 1 }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

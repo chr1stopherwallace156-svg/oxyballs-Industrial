@@ -1,0 +1,433 @@
+{
+  "disclaimer": [
+    "DRAFT — INCOMPLETE",
+    "NOT AUTHORIZED FOR PROCUREMENT",
+    "NOT AUTHORIZED FOR FABRICATION",
+    "NOT AUTHORIZED FOR INSTALLATION",
+    "NOT AUTHORIZED FOR ENERGIZATION"
+  ],
+  "build_package": {
+    "build_package_id": "BP_PLATFORM-001_d64d1b6a434a",
+    "platform_id": "PLATFORM-001",
+    "platform_revision": "R1",
+    "status": "DRAFT_INCOMPLETE",
+    "engine_version": "platform-slice-0.1.0",
+    "generated_at": "2026-07-22T08:02:21.515Z",
+    "input_hash": "d64d1b6a434aa71b877a4dbed8923711b983fb350800478d2f252298e589c7a1",
+    "package_hash": "76ddce5254507eed09ee23a502038974e7c5fc2af8117513aa85dd30e4bb9034"
+  },
+  "counts": {
+    "claims": {
+      "verifiedDocument": 0,
+      "verifiedPhysical": 0,
+      "unverified": 5,
+      "conflict": 0,
+      "total": 5
+    },
+    "bom": {
+      "resolved": 0,
+      "blocked": 1,
+      "unselected": 19,
+      "total": 20
+    },
+    "compatibility": {
+      "pass": 4,
+      "fail": 1,
+      "blockedMissing": 1,
+      "notApplicable": 0,
+      "total": 6
+    },
+    "open_data_requirements_open": 7,
+    "blockers_by_category": {
+      "RESEARCH": 3,
+      "CONFIGURATION": 0,
+      "COMPONENTS": 19,
+      "VERIFICATION": 2
+    }
+  },
+  "release_blockers": {
+    "total": 24,
+    "by_category": {
+      "RESEARCH": 3,
+      "CONFIGURATION": 0,
+      "COMPONENTS": 19,
+      "VERIFICATION": 2
+    },
+    "items": [
+      {
+        "token": "BLOCKED:BASELINE_AXLE_WEIGHT_REQUIRED",
+        "category": "RESEARCH"
+      },
+      {
+        "token": "BLOCKED:BATTERY_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:CHARGE_INLET_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:CHARGER_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:CONTACTORS_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:CONTAINMENT_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:COOLING_PUMPS_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:DCDC_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:DRIVE_INTERFACE_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:EXPANSION_TANK_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:HEAT_EXCHANGER_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:HV_CABLING_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:HV_FUSES_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:HV_JUNCTION_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:INSTRUMENTATION_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:INVERTER_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:LV_HARNESS_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:MOTOR_COMPONENT_UNVERIFIED",
+        "category": "VERIFICATION"
+      },
+      {
+        "token": "BLOCKED:MOTOR_DIMENSIONS_REQUIRED",
+        "category": "RESEARCH"
+      },
+      {
+        "token": "BLOCKED:MOTOR_MASS_REQUIRED",
+        "category": "RESEARCH"
+      },
+      {
+        "token": "BLOCKED:MOUNTING_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:PHYSICAL_FRAME_MEASUREMENT_REQUIRED",
+        "category": "VERIFICATION"
+      },
+      {
+        "token": "BLOCKED:PRECHARGE_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      },
+      {
+        "token": "BLOCKED:VCU_CANDIDATE_NOT_SELECTED",
+        "category": "COMPONENTS"
+      }
+    ]
+  },
+  "compatibility_evaluations": [
+    {
+      "evaluation_id": "EVAL_4a28fa3897042d29",
+      "rule_id": "RULE_PLATFORM_SOURCE_AUTHORITY",
+      "component_candidate_id": null,
+      "result": "PASS",
+      "block_reason": null
+    },
+    {
+      "evaluation_id": "EVAL_6f4b021d27a9c17d",
+      "rule_id": "RULE_PLATFORM_WHEELBASE_PRESENT",
+      "component_candidate_id": null,
+      "result": "PASS",
+      "block_reason": null
+    },
+    {
+      "evaluation_id": "EVAL_84643ecd7909b2f1",
+      "rule_id": "RULE_COMPONENT_ENGINEERING_STATUS",
+      "component_candidate_id": "CC-P001-MOTOR-SLOT",
+      "result": "FAIL",
+      "block_reason": "BLOCKED:MOTOR_COMPONENT_UNVERIFIED"
+    },
+    {
+      "evaluation_id": "EVAL_bd45f018625a8bf8",
+      "rule_id": "RULE_PLATFORM_REVISION_LOCK",
+      "component_candidate_id": null,
+      "result": "PASS",
+      "block_reason": null
+    },
+    {
+      "evaluation_id": "EVAL_c68e1b8fc51de196",
+      "rule_id": "RULE_COMPONENT_DIMENSIONS_PRESENT",
+      "component_candidate_id": "CC-P001-MOTOR-SLOT",
+      "result": "BLOCKED_MISSING_DATA",
+      "block_reason": "BLOCKED:MOTOR_DIMENSIONS_REQUIRED"
+    },
+    {
+      "evaluation_id": "EVAL_dabf993e3a0d6cee",
+      "rule_id": "RULE_COMPONENT_APPLICABILITY",
+      "component_candidate_id": "CC-P001-MOTOR-SLOT",
+      "result": "PASS",
+      "block_reason": null
+    }
+  ],
+  "open_data_requirements": [
+    {
+      "odr_id": "ODR_1ff7630463115e92",
+      "category": "COMPONENT_MASS",
+      "subject": "TRACTION_MOTOR",
+      "reason": "component candidate CC-P001-MOTOR-SLOT has no mass",
+      "required_for_rule": null,
+      "required_evidence_type": "SUPPLIER_DOCUMENTATION",
+      "status": "OPEN",
+      "blocking_scope": "COMPONENT"
+    },
+    {
+      "odr_id": "ODR_2b88fc1cb89f5e89",
+      "category": "PHYSICAL_MEASUREMENT",
+      "subject": "vehicle_frame_geometry",
+      "reason": "platform geometry is nominal (owner-locked reference), not physically measured on the donor",
+      "required_for_rule": null,
+      "required_evidence_type": "PHYSICAL_MEASUREMENT",
+      "status": "OPEN",
+      "blocking_scope": "PLATFORM"
+    },
+    {
+      "odr_id": "ODR_b07b84ac90a2807e",
+      "category": "COMPONENT_DIMENSIONS",
+      "subject": "TRACTION_MOTOR",
+      "reason": "component candidate CC-P001-MOTOR-SLOT has no dimensions",
+      "required_for_rule": "RULE_COMPONENT_DIMENSIONS_PRESENT",
+      "required_evidence_type": "SUPPLIER_DOCUMENTATION",
+      "status": "OPEN",
+      "blocking_scope": "COMPONENT"
+    },
+    {
+      "odr_id": "ODR_b0d74e951a6a6763",
+      "category": "BASELINE_AXLE_WEIGHT",
+      "subject": "baseline_front_axle_weight",
+      "reason": "engineering claim 'baseline_front_axle_weight' has no verified value (status RESEARCH_REQUIRED)",
+      "required_for_rule": null,
+      "required_evidence_type": "MANUFACTURER_DOCUMENT_OR_SCALE_MEASUREMENT",
+      "status": "OPEN",
+      "blocking_scope": "PLATFORM"
+    },
+    {
+      "odr_id": "ODR_b56dfa9811a54a04",
+      "category": "SUPPLIER_DOCUMENTATION",
+      "subject": "TRACTION_MOTOR",
+      "reason": "component candidate CC-P001-MOTOR-SLOT is UNVERIFIED; needs supplier documentation",
+      "required_for_rule": "RULE_COMPONENT_ENGINEERING_STATUS",
+      "required_evidence_type": "SUPPLIER_DOCUMENTATION",
+      "status": "OPEN",
+      "blocking_scope": "COMPONENT"
+    },
+    {
+      "odr_id": "ODR_d09e027ca5148d20",
+      "category": "BASELINE_AXLE_WEIGHT",
+      "subject": "baseline_rear_axle_weight",
+      "reason": "engineering claim 'baseline_rear_axle_weight' has no verified value (status RESEARCH_REQUIRED)",
+      "required_for_rule": null,
+      "required_evidence_type": "MANUFACTURER_DOCUMENT_OR_SCALE_MEASUREMENT",
+      "status": "OPEN",
+      "blocking_scope": "PLATFORM"
+    },
+    {
+      "odr_id": "ODR_f3a12fa0d16d71a4",
+      "category": "BASELINE_AXLE_WEIGHT",
+      "subject": "gvwr",
+      "reason": "engineering claim 'gvwr' has no verified value (status RESEARCH_REQUIRED)",
+      "required_for_rule": null,
+      "required_evidence_type": "MANUFACTURER_DOCUMENT_OR_SCALE_MEASUREMENT",
+      "status": "OPEN",
+      "blocking_scope": "PLATFORM"
+    }
+  ],
+  "bom_items": [
+    {
+      "bom_item_id": "BOM_9d0a82189a7db197",
+      "category": "CHARGE_INLET",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:CHARGE_INLET_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_f28c7297bcba04ec",
+      "category": "CONTACTORS",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:CONTACTORS_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_d68174def74eda95",
+      "category": "COOLING_HEAT_EXCHANGER",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:HEAT_EXCHANGER_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_32683d5d6a349269",
+      "category": "COOLING_PUMPS",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:COOLING_PUMPS_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_0fae5b73435d6b0a",
+      "category": "DC_DC_CONVERTER",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:DCDC_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_aed6c91f15594903",
+      "category": "EXPANSION_TANK",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:EXPANSION_TANK_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_fda10091dd50622f",
+      "category": "HV_CABLING",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:HV_CABLING_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_e3ae1c08649d3d42",
+      "category": "HV_FUSES",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:HV_FUSES_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_b3e94d27ac9ea4ba",
+      "category": "HV_JUNCTION",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:HV_JUNCTION_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_27b385e578bd8367",
+      "category": "INSTRUMENTATION",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:INSTRUMENTATION_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_b76ff19f860cc5d5",
+      "category": "INVERTER",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:INVERTER_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_580023238eb5b17f",
+      "category": "LOW_VOLTAGE_HARNESS",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:LV_HARNESS_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_11443672a876b9e4",
+      "category": "MOUNTING_STRUCTURE",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:MOUNTING_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_0d1b73e76b15fa31",
+      "category": "ONBOARD_CHARGER",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:CHARGER_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_7867a909ac9c0c92",
+      "category": "PRECHARGE",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:PRECHARGE_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_0dc930853afb07ad",
+      "category": "PROTECTION_AND_CONTAINMENT",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:CONTAINMENT_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_7ede1451c20b38a1",
+      "category": "REDUCTION_OR_TRANSMISSION_INTERFACE",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:DRIVE_INTERFACE_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_86e67a1261a2d210",
+      "category": "TRACTION_BATTERY",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:BATTERY_CANDIDATE_NOT_SELECTED\"]"
+    },
+    {
+      "bom_item_id": "BOM_d99152befc49666c",
+      "category": "TRACTION_MOTOR",
+      "selected_component_id": "CC-P001-MOTOR-SLOT",
+      "selection_status": "BLOCKED",
+      "open_data_requirements": "[\"ODR_1ff7630463115e92\",\"ODR_b07b84ac90a2807e\",\"ODR_b56dfa9811a54a04\"]",
+      "block_reasons": "[\"BLOCKED:MOTOR_COMPONENT_UNVERIFIED\",\"BLOCKED:MOTOR_DIMENSIONS_REQUIRED\"]"
+    },
+    {
+      "bom_item_id": "BOM_135c4cdc6ae509ae",
+      "category": "VEHICLE_CONTROL_UNIT",
+      "selected_component_id": null,
+      "selection_status": "UNSELECTED",
+      "open_data_requirements": "[]",
+      "block_reasons": "[\"BLOCKED:VCU_CANDIDATE_NOT_SELECTED\"]"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+4012df2dff631b161682b1273df9e51c403431ec
+## cursor/phase1c-evidence-library-d881
+ M App/Phase1/EvidenceLibrary/EvidenceLibraryIntegrity.swift
+ M App/Phase1/EvidenceLibrary/EvidenceLibraryModels.swift
+ M App/Phase1/EvidenceLibrary/EvidenceLibraryPaths.swift
+ M App/Phase1/EvidenceLibrary/EvidenceLibraryStore.swift
+ M Apps/Phase1StillCapture/EvidenceLibraryViews.swift
+ M Tests/Unit/EvidenceLibraryTests.swift
+?? Docs/Capture/PHASE_1C_ARCHITECTURE_CLARIFICATION.md
+4012df2 fix(phase1c): staging commit, orthogonal state, relative-path index

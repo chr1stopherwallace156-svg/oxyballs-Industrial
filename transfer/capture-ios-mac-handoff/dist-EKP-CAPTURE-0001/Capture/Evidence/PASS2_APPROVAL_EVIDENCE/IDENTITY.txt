@@ -1,0 +1,19 @@
+# Pass 2 tip identity
+
+| Field | Value |
+|---|---|
+| Branch | `cursor/pass2-preview-review-gate-d881` |
+| Pass 1 approved parent | `9c35de663f3a64543738b57bc49426cd46256da0` |
+| Pass 2 implementation commit | `a47739f1472e0e33779ed709a65adc4bb0ec72c4` |
+| Pass 2 evidence tip (HEAD) | `89dc4f3be59c9721459bb8ca200847575aaff3af` |
+| Evidence tip parent | `a6a2397694c5a6bc3cf514f8809c79d3f5c7b8f8` |
+| `swift test` | 61 executed, 1 skipped (Linux CrossLanguage parse), 0 failures |
+| `verify-xcode-handoff.sh` | HANDOFF_LAYOUT_OK |
+| Device validation | PROCEDURE_SUBMITTED — PENDING_OPERATOR_MAC |
+| Bundle / ZIP SHA-256 | See Industrial handoff SHA256SUMS.txt after mint |
+
+Verification:
+```bash
+git rev-parse HEAD   # expect 89dc4f3be59c9721459bb8ca200847575aaff3af
+git merge-base --is-ancestor 9c35de663f3a64543738b57bc49426cd46256da0 HEAD && echo PASS1_ANCESTOR_OK
+```

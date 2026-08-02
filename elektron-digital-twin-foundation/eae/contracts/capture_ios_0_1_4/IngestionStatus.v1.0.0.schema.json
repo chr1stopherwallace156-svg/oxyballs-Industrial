@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://elektron.local/contracts/ingestion-status/1.0.0",
+  "title": "IngestionStatus",
+  "version": "1.0.0",
+  "owner": "elektron-capture-ios",
+  "contract_ownership": "EDTS_OWNED_REQUEST",
+  "status": "DRAFT",
+  "description": "EDTS-owned ingestion lifecycle. Capture may display these tokens; it must not invent Build Engine outcomes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_id", "schema_version", "ingestion_id", "status"],
+  "properties": {
+    "schema_id": { "const": "IngestionStatus" },
+    "schema_version": { "const": "1.0.0" },
+    "ingestion_id": { "type": "string", "minLength": 1 },
+    "status": {
+      "type": "string",
+      "enum": [
+        "RECEIVED",
+        "QUARANTINED",
+        "VALIDATING",
+        "REJECTED",
+        "VERIFIED_TRANSPORT_INTEGRITY",
+        "COMMITTED_UNVERIFIED_EVIDENCE",
+        "INGESTED_INTEGRITY_VERIFIED"
+      ]
+    },
+    "content_verification": {
+      "type": "string",
+      "enum": ["CONTENT_UNVERIFIED", "NOT_APPLICABLE"]
+    },
+    "http_semantics": {
+      "type": "string",
+      "enum": ["CREATED_201", "ACCEPTED_202", "OTHER"],
+      "description": "Informational; success is defined by status, not HTTP code alone"
+    },
+    "rejection_code": { "type": ["string", "null"] },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  }
+}

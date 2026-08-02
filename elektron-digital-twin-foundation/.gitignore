@@ -1,1 +1,4 @@
 __pycache__/
+
+# XREPO suite ephemeral outputs
+verification/xrepo_cap_edts/results/

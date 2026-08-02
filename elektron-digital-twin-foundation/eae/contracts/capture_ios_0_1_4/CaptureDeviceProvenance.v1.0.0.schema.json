@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://elektron.local/contracts/capture-device-provenance/1.0.0",
+  "title": "CaptureDeviceProvenance",
+  "version": "1.0.0",
+  "owner": "elektron-capture-ios",
+  "contract_ownership": "CAPTURE_OWNED_OUTPUT",
+  "status": "DRAFT",
+  "description": "Long-lived provenance for which approved capture installation produced a package. Authoritative identity uses stable machine-readable IDs (device_profile_id, hardware_model_identifier, lens_profile_id, enrollment/installation IDs). Never use technician-renamed phone names as identity. Do not include raw serial numbers or unrelated personal device identifiers unless explicitly required and reviewed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "schema_version",
+    "device_profile_id",
+    "hardware_model_identifier",
+    "device_display_name",
+    "ios_version",
+    "app_version",
+    "evidence_schema_version",
+    "capture_installation_id"
+  ],
+  "properties": {
+    "schema_id": { "const": "CaptureDeviceProvenance" },
+    "schema_version": { "const": "1.0.0" },
+    "device_profile_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable Elektron approved-device profile ID, e.g. CAP-DEVICE-IP17PRO-001"
+    },
+    "hardware_model_identifier": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable platform/model identifier (not a user-editable device name)"
+    },
+    "device_display_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable approved label for UI/reports only — not authoritative identity"
+    },
+    "ios_version": { "type": "string", "minLength": 1 },
+    "camera_profile_id": { "type": ["string", "null"] },
+    "camera_position": { "type": ["string", "null"] },
+    "lens_profile_id": {
+      "type": ["string", "null"],
+      "description": "Stable lens profile ID, e.g. LENS-WIDE-001"
+    },
+    "lens_display_name": {
+      "type": ["string", "null"],
+      "description": "Optional display label for the lens; not authoritative"
+    },
+    "lidar_available": { "type": ["boolean", "null"] },
+    "calibration_profile_id": { "type": ["string", "null"] },
+    "calibration_version": { "type": ["string", "null"] },
+    "app_version": { "type": "string", "minLength": 1 },
+    "evidence_schema_version": { "type": "string", "minLength": 1 },
+    "capture_plan_schema_version": { "type": ["string", "null"] },
+    "portable_package_version": { "type": ["string", "null"] },
+    "capture_installation_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Elektron installation ID for this enrolled capture app instance"
+    },
+    "device_enrollment_id": {
+      "type": ["string", "null"],
+      "description": "Elektron enrollment record ID — preferred over raw serials"
+    },
+    "app_attest_key_id": { "type": ["string", "null"] },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  }
+}

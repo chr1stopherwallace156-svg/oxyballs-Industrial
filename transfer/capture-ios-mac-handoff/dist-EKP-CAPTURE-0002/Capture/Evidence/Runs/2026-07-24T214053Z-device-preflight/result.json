@@ -1,0 +1,8 @@
+{
+  "status": "pass",
+  "workflow": "device-preflight",
+  "utc": "2026-07-24T21:40:53Z",
+  "note": "Ready for Command-R only if all critical checks PASS. Manual DEVICE_APP_LAUNCHED still required.",
+  "claims_physical_device_success": false,
+  "claims_phase_approved": false
+}
