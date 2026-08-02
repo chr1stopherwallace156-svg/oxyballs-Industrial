@@ -1,0 +1,30 @@
+{
+  "candidate_id": "SRC-CAND-000009",
+  "id_immutable": true,
+  "metadata": {
+    "title": "2019 Super Duty Chassis Cab Sales Spec / Brochure (claimed)",
+    "source_type": "OEM_BROCHURE",
+    "document_class": "SALES_SPEC",
+    "publisher": "Ford / third-party mirror",
+    "reported_year": 2019,
+    "legacy_aliases": ["SRC-002"]
+  },
+  "acquisition_status": "NOT_ACQUIRED",
+  "access_status": "NOT_ACQUIRED",
+  "egs_lifecycle_status": "NOT_ACQUIRED",
+  "research_confidence_rc": 40,
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+  "local_file_path": null,
+  "source_url_claimed": "https://skeeteremergencyvehicles.com/.../SkeeterFordChassis2019.pdf",
+  "url_fetch_result": "HTTP_404_NOT_FOUND",
+  "sha256": null,
+  "hash_status": "NOT_EXECUTED",
+  "page_extraction_status": "NOT_EXECUTED",
+  "evidence_status": "CANDIDATE",
+  "notes": "Operator listed SOURCE_ACQUIRED — demoted. URL returned 404 at acquisition attempt 2026-07-20. Do not invent hash.",
+  "research_sprint": "RL-019",
+  "decision": "DT-D050",
+  "aliases": ["SRC-002"]
+}

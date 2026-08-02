@@ -19,6 +19,27 @@ All notable changes to the digital twin foundation. Append-only.
 - Capture-ios tags unchanged (do not move)
 - Next: publish capture repo; then minimal iOS Phase 1 still
 
+## 2026-07-21
+
+### Added
+
+- **DT-D067 / RL-036** — `edts-vin-resolver`: NHTSA vPIC CLI (`npm run vin`), evidence persist, CFG compare, tests (not geometry Verified)
+- **DT-D066 / RL-035** — Three-axis maturity (Implemented/Tested/Verified); `IMPLEMENTATION_EVIDENCE.md`; category progress %; P0 GLB first confirmed
+- **DT-D065 / RL-034** — Full repository implementation audit (spec vs code); traceability matrix; missing features; priority order
+- **DT-D064 / RL-033** — Open-source max-leverage research pack (8 docs); quantum REFERENCE_ONLY; backlog planning only; zero prod code mutation
+- **DT-D063 / RL-032** — EDTS-SPEC-3D-001 GLB acquisition gate; mesh_mapping_manifest + verifyMeshMapping + QA checklist (no GLB binary yet)
+- **DT-D062 / RL-031** — VPR-2 corrected baseline accepted (3-tier storage; audit lock; mass quarantine)
+- **DT-D061 / RL-030** — VPR-2 claim corrections; multi-maturity; SQL schema draft
+- **DT-D060 / RL-029** — Normalized COMP/GEO/EVD/EGS/SIM/UI + hover-first UI
+- **DT-D059 / RL-028** — Timeline / Search / Heatmap / Simulation scaffold
+- **DT-D058 / RL-027** — Visible Progress interactive 3D demonstrator
+
+### Status
+
+- Visible Progress: **Architecture & Interaction Prototype**
+- R3F viewport ✔ · persistence ❌ · axle DISABLED · storyboard only
+- Next: **execute backlog Sprint 1–2 planning OR acquire GLB per SPEC-3D-001** (research pack does not complete either)
+
 
 ## 2026-07-16
 

@@ -1,0 +1,45 @@
+{
+  "decision_id": "DT-D048",
+  "title": "EGS-1.0.0-proposal.2 architecture — CFGCOMP hierarchy, IFACE layer, plane isolation, lifecycle aggregation",
+  "date": "2026-07-20",
+  "approved_status": "ACCEPTED",
+  "recommended_decision": "EGS_V1_PROPOSAL_INFRASTRUCTURE_READY",
+  "handoff_scope": "Proposal.2 engine infrastructure cleared for synthetic-fixture implementation; F-450 edges REAL_DATA_PROMOTION_BLOCKED",
+  "scope": [
+    "proposals/egs-v1/",
+    "tests/egs_v1/",
+    "research/relationship_graph/",
+    "RL-017"
+  ],
+  "reason": "Prevent confusion between reference designs and physical vehicles, stop cross-configuration leaks, model physical interfaces explicitly, isolate physical/functional/procedural planes, and enforce deterministic evidence lifecycle before any procedure generation.",
+  "decision": [
+    "Authorize EGS-1.0.0-proposal.2 as the active proposal schema/module under proposals/egs-v1/.",
+    "Do NOT mutate frozen EDTS Kernel schemas including schemas/assembly-relationship.schema.json.",
+    "Three-tier hierarchy: COMPDEF- (conceptual), CFGCOMP- (configuration reference), CMPINST- (VIN physical). Research/reference edges connect CFGCOMP-/IFACE-/OP- only.",
+    "Reject AID-*/ASSET-*/EDTS-COMP-* endpoints; reject CMPINST-* on CONFIGURATION_REFERENCE edges.",
+    "Exact-vehicle scope lock: CONFIGURATION_REFERENCE forbids model_year_range; cross-year similarity only via CROSS_CONFIGURATION_COMPARISON / SOURCE_APPLICABILITY_CANDIDATE with NOT_INHERITED.",
+    "Physical interface layer IFACE-CONNECTOR/GROMMET/MOUNT-HOLE/FLANGE/SERVICE-PORT as intermediate nodes.",
+    "Separate PHYSICAL / FUNCTIONAL / PROCEDURAL planes; forbid transient_state on permanent structural edges.",
+    "Flexible claims: structural classes require only relationship_existence; missing torque/fastener/pinout = knowledge gaps.",
+    "Deterministic edge_status aggregation from claim statuses (SOURCE_DISCOVERED…ASSERTION_VERIFIED); unread index ≠ verified.",
+    "Cycle engine reports HARD_CYCLE / CONDITIONAL_CYCLE / STATE_DEPENDENT_CYCLE / ALTERNATE_PATH_REQUIRED — never auto-resolve.",
+    "Admit REL-REG-01..06 sample edges as CANDIDATE_UNVERIFIED with PROCEDURE_GENERATION_NOT_AUTHORIZED / REAL_DATA_PROMOTION_BLOCKED.",
+    "Recommended decision EGS_V1_PROPOSAL_INFRASTRUCTURE_READY (synthetic fixtures cleared; real F-450 promotion blocked until WSM/EWD hashed+parsed)."
+  ],
+  "related_decisions": ["DT-D047", "DT-D046", "DT-D028"],
+  "change_control": {
+    "kernel_schema_change": false,
+    "component_passport_rc1_change": false,
+    "frozen_assembly_relationship_untouched": true,
+    "proposal_module": "proposals/egs-v1/",
+    "schema_version": "EGS-1.0.0-proposal.2"
+  },
+  "tests": {
+    "path": "tests/egs_v1/",
+    "result": "27_PASSED"
+  },
+  "missing_evidence": [
+    "2019 Super Duty Workshop Manual Section 501-14 PDF bytes (NOT_ACQUIRED)",
+    "2019 Super Duty EWD PDF bytes (NOT_ACQUIRED)"
+  ]
+}

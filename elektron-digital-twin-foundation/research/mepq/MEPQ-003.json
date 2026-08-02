@@ -1,0 +1,34 @@
+{
+  "mepq_id": "MEPQ-003",
+  "operator_alias": "MEPQ-2019-F450-ELEC-LV-003",
+  "target_property": "Firewall / cab-to-engine harness pass-through connector pinout, circuit designations, and CAN termination architecture",
+  "system_context": "LV gateway for VCU splice / APPS / ignition / cluster without invented DTCs map",
+  "affected_cfgcomp_ids": [
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-HARNESS-CAB-TO-ENGINE"
+  ],
+  "priority": "CRITICAL",
+  "status": "QUEUED",
+  "inference_forbidden_reason": "Pinout and CAN termination cannot be inferred from geometry or marketing literature.",
+  "engineering_risk": "Wrong splice → DTCs, unsafe inhibit logic, non-functional conversion controls.",
+  "best_source_tiers": [
+    {
+      "tier": 1,
+      "source_class": "Ford Electrical Wiring Diagram Manual (EWD)",
+      "src_cand_ids": ["SRC-CAND-000006"],
+      "notes": "Commercial handoff via MISN-000001/000003. Connector ID 'C127' is OPERATOR_CANDIDATE only until EWD bytes confirm designation."
+    }
+  ],
+  "related_gap_ids": ["KG-008"],
+  "related_mission_ids": ["MISN-000003", "MISN-000006", "MISN-000001"],
+  "acquisition_cost_vector": "COMMERCIAL_PAYWALL",
+  "high_roi_purchase_signal": true,
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "honesty_notes": [
+    "Do not invent C127 pin map. Operator connector ID retained as candidate label only.",
+    "Harness CFGCOMP is placeholder until EWD-backed initialization.",
+    "Option B (Mission F) opens discovery questions that feed this MEPQ — does not satisfy it."
+  ],
+  "decision": "DT-D054",
+  "research_sprint": "RL-023"
+}

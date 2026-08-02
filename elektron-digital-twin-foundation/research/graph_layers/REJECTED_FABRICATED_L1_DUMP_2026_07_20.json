@@ -1,0 +1,136 @@
+{
+  "document_id": "REJECTED_FABRICATED_L1_DUMP_2026_07_20",
+  "decision": "DT-D057",
+  "research_sprint": "RL-026",
+  "verdict": "REJECTED_ENTIRE_L1_BLOCK",
+  "reason": "Presented as Layer 1 Vehicle Engineering Truth but contains invented precision metrics that contradict ASSERTION_EXTRACTED exact-config evidence and invent material/mass/load properties without OEM tokens.",
+  "locked_configuration": {
+    "proposal_configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+    "kernel_configuration_id": "CFG-000001",
+    "vehicle_instance_id": "VEH-000001"
+  },
+  "protocol_violation": "THREE_LAYER_SEPARATION — L2/L3 content and fabrications must not be labeled L1",
+  "rejected_l1_claims": [
+    {
+      "claim": "Frame rail 50×120 mm nominal C-channel",
+      "status": "REJECTED",
+      "notes": "No token for this cross-section. Known L1: outside frame rail width H=34.2 in (ASSERTION_EXTRACTED). Fleet text: boxed under cab, rear open C, 50,000 psi steel — not a verified 50×120 mm profile."
+    },
+    {
+      "claim": "Mid-ship envelope exactly 1420×780×410 mm",
+      "status": "REJECTED",
+      "notes": "Fabricated 'exactly' dimensions. No BAG/BBLB/scan token. L2 estimate only if ever reintroduced with explicit CALCULATED_ESTIMATE + method."
+    },
+    {
+      "claim": "Rear axle jounce travel 115 mm",
+      "status": "REJECTED",
+      "notes": "UNKNOWN without WSM/suspension specs."
+    },
+    {
+      "claim": "Driveline tunnel 320→180 mm",
+      "status": "REJECTED",
+      "notes": "UNKNOWN — no OEM token."
+    },
+    {
+      "claim": "Frame material MCS70 HSLA; Sy 450 MPa; Sut 550 MPa; E 210 GPa; ν 0.29",
+      "status": "REJECTED_FROM_L1",
+      "notes": "Generic steel handbook dump. Fleet cites 50,000 psi steel narrative — not MCS70 grade card. Leave material grade/properties UNKNOWN until OEM structural doc."
+    },
+    {
+      "claim": "Base curb mass 2140 kg",
+      "status": "REJECTED_CONTRADICTED",
+      "notes": "≈4718 lb — far below F-450 Chassis Cab Reg Cab 4x2 145.3 fleet curb totals (~6641–7390 lb / ~3010–3350 kg depending on engine). Wrong vehicle class scale."
+    },
+    {
+      "claim": "FAWR 1180 kg / RAWR 1270 kg",
+      "status": "REJECTED_CONTRADICTED",
+      "notes": "≈2600/2800 lb. Extracted Max Std Front GAWR for Reg Cab 4x2 145.3 is 4800 lb (6.8L) / 5200 lb (6.7L). Operator values are not F-450 Class 4."
+    },
+    {
+      "claim": "Engine+trans 385 kg wet; exhaust+fuel 92 kg; CoG 740 mm / 1220 mm",
+      "status": "REJECTED",
+      "notes": "Directly invents MEPQ-001 unknowns. Remain UNKNOWN."
+    },
+    {
+      "claim": "Hole TP ±1.5 mm; width ±3.0 mm; bracket ±0.5 mm",
+      "status": "REJECTED",
+      "notes": "Tolerance invention. MEPQ-006 still OPEN/DEFERRED."
+    },
+    {
+      "claim": "Max engine torque 515 Nm @ 3000 RPM",
+      "status": "REJECTED",
+      "notes": "≈380 lb-ft — not an admitted F-450 Chassis Cab diesel/gas vocational rating for this silo. Leave UNKNOWN pending OEM powertrain sheet for ordered engine."
+    },
+    {
+      "claim": "Peak vertical 3.5g; torsional stiffness 1850 Nm/deg",
+      "status": "REJECTED",
+      "notes": "Invented operational loads. MEPQ-007 remains DEFERRED."
+    }
+  ],
+  "rejected_l2_contaminants_mislabelable_as_truth": [
+    {
+      "claim": "Steering rack Keep — standalone 12V EPAS + CAN heartbeat",
+      "status": "REJECTED_ARCHITECTURE",
+      "correction": "L1 ASSERTION_EXTRACTED: hydraulic power assisted recirculating ball gear with steering damper (SRC-CAND-000010 p.48). EPAS rack is wrong platform assumption for this Chassis Cab silo."
+    },
+    {
+      "claim": "Net mass delta +143 kg; CoG −85 mm; bias 55:45→48:52",
+      "status": "REJECTED_AS_ANALYSIS_ON_FAKE_L1",
+      "notes": "Analysis built on rejected curb/mass inputs."
+    }
+  ],
+  "rejected_l3_premature_execution": [
+    {
+      "claim": "Replace live rear axle with independent suspension module",
+      "status": "REJECTED_AS_BASELINE_DECISION",
+      "notes": "Contradicts locked DRW Chassis Cab architecture direction without owner/engineering decision record. Remains PROPOSAL-class only if ever reopened — not baseline."
+    },
+    {
+      "claim": "CAD STEP files by Friday",
+      "status": "REJECTED_SCHEDULE_FICTION",
+      "notes": "No geometry extraction authorized; L1 mounting holes UNKNOWN."
+    }
+  ],
+  "mepq_q_table_scrub": [
+    {
+      "operator_id": "Q1",
+      "question": "EPAS CAN protocol for factory steering rack",
+      "edts_status": "REJECTED_WRONG_ARCHITECTURE",
+      "correction": "Ask instead about hydraulic steering / damper / any OEM assist control interfaces AFTER EWD/WSM — not EPAS rack protocol."
+    },
+    {
+      "operator_id": "Q2",
+      "question": "Rear crossmember vs 2500 Nm EV motor torque",
+      "edts_status": "L2_QUESTION_ONLY",
+      "notes": "Valid analysis question but motor torque and crossmember capacity both UNKNOWN on L1. Links MEPQ-007 / Mission E deferred. Do not invent capacity."
+    },
+    {
+      "operator_id": "Q3",
+      "question": "Bolt-hole tolerance on crossmember 4",
+      "edts_status": "MAPS_TO_MEPQ-006_OR_004",
+      "notes": "Already covered conceptually; 'crossmember 4' index not OEM-verified."
+    },
+    {
+      "operator_id": "Q4",
+      "question": "Cabin heater core max temp",
+      "edts_status": "OPEN_CANDIDATE_GAP",
+      "notes": "May register later as MEPQ if prioritized; not admitted with fake confidence %."
+    }
+  ],
+  "performance_target_prompt_response": {
+    "battery_chemistry": "NOT_ACCEPTED_YET",
+    "kwh_range": "NOT_ACCEPTED_YET",
+    "voltage_architecture": "NOT_ACCEPTED_YET",
+    "reason": "Cannot tailor L2/L3 performance analysis on fabricated L1. Restore L1 honesty first (Mission D L1 + commercial WSM/EWD + physical intake)."
+  },
+  "admitted_l1_reminders": [
+    "Outside frame rail width H=34.2 in ASSERTION_EXTRACTED",
+    "Front track I=74.8 in ASSERTION_EXTRACTED",
+    "Front axle 4x2 Monobeam ASSERTION_EXTRACTED",
+    "Steering: hydraulic recirculating ball + damper ASSERTION_EXTRACTED",
+    "Fuel tank 40 gal aft-of-axle std ASSERTION_EXTRACTED",
+    "Max Std Front GAWR Reg Cab 4x2 145.3: 4800 lb (6.8L) / 5200 lb (6.7L) ASSERTION_EXTRACTED",
+    "Powertrain CG/mass: UNKNOWN (MEPQ-001)",
+    "Frame hole tolerances / dynamic loads: UNKNOWN (MEPQ-006/007)"
+  ]
+}
