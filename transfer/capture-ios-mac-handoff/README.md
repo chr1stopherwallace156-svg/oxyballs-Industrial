@@ -139,3 +139,50 @@ open Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj
 # Then fill Docs/Incidents/PHASE_1_RUNTIME_INCIDENT_001.md Acceptance Evidence
 ```
 
+## Historical — fresh P1R-001 retest CANDIDATE (`4bc8ae65`)
+
+**Not** a physically validated release snapshot. Artifacts landed on `main` via #14; README section restored here.
+
+| Field | Value |
+|---|---|
+| Capture tip | `4bc8ae65be8c287c211aeab7b2ae7ba1dfd29e0d` |
+| Branch | `cursor/canonicalization-failed-repair-d881` |
+| Status | P1R-001 OPEN / `PENDING_PHYSICAL_DEVICE_RETEST` |
+| Bundle | `elektron-capture-ios-4bc8ae65.bundle` |
+| Bundle SHA-256 | `8765944f8c159ae3c26fbf496a0bc3a6a0abf7d93757d36118d69f6eaa3f8e00` |
+| ZIP | `elektron-capture-ios-4bc8ae65-working-tree.zip` |
+| ZIP SHA-256 | `d126abe3709f29297d326a49c6bcede2b4c6699c918b62a885d263d4ccc20a6e` |
+| Reject | `bb93af515087c6a2c7fe77e2a0ed93b22406e8415a8f3eb931ad4963dcf276b7` |
+
+```bash
+git clone elektron-capture-ios-4bc8ae65.bundle elektron-capture-ios
+cd elektron-capture-ios
+git checkout cursor/canonicalization-failed-repair-d881
+swift test
+open Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj
+```
+
+## Historical — CANDIDATE pin `005382b` (local package handoff harden)
+
+**Not validated.** P1R-001 remains open until physical Capture & Export proof. Prefer pin-named files; do **not** use generic `elektron-capture-ios-complete.bundle` / `elektron-capture-ios-working-tree.zip` for this tip (those names hold later handoff bytes on `main`).
+
+| Field | Value |
+|---|---|
+| Capture tip | `005382b06c0e88053aad298f4e4650cd45f49306` |
+| Subject | fix(xcode): harden local ElektronCapture package handoff |
+| Bundle | `elektron-capture-ios-005382b.bundle` |
+| Bundle SHA-256 | `b04157c9e3060e7c218f2d70bf97c3f8f2e340d671da4d85bc510b9f74ecd7db` |
+| ZIP | `elektron-capture-ios-005382b.zip` |
+| ZIP SHA-256 | `863b070fa1be9d9fc62b31d683219d0ff265dde3c72b205e0e9b984004830c1d` |
+| Manifest | `CANDIDATE_HANDOFF_MANIFEST.md` |
+| Reject | `bb93af515087c6a2c7fe77e2a0ed93b22406e8415a8f3eb931ad4963dcf276b7` |
+
+```bash
+git clone elektron-capture-ios-005382b.bundle elektron-capture-ios-005382b
+cd elektron-capture-ios-005382b
+git rev-parse HEAD   # must be 005382b06c0e88053aad298f4e4650cd45f49306
+./Scripts/verify-xcode-handoff.sh
+swift test
+open Apps/Phase1StillCapture/Phase1StillCapture.xcworkspace
+```
+
