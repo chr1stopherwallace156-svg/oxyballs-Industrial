@@ -2,6 +2,11 @@
 
 Gas-to-EV conversion services — Victorville, CA.
 
+**Start here:** [`START_HERE.md`](START_HERE.md) · [`SYSTEM_MAP.md`](SYSTEM_MAP.md) · [`CURRENT_STATE.md`](CURRENT_STATE.md) · [`RUNBOOK.md`](RUNBOOK.md)
+
+> **Reality check:** `READY_FOR_ONE_VEHICLE_REFERENCE_PILOT = YES` · `READY_FOR_COMPLETE_DIGITAL_TWIN = NO`  
+> Pilot doctrine: [`Docs/Architecture/VEHICLE_001_REFERENCE_PILOT.md`](Docs/Architecture/VEHICLE_001_REFERENCE_PILOT.md)
+
 This repository holds coordinated bodies of work plus the public site:
 
 - **Build Engine** — `engine/` (code) + `docs/` governance trees (constitution, specs, research, status). A deterministic,
@@ -72,6 +77,7 @@ specifications under [`/docs`](docs/). It is updated **by proposal, never silent
 
 ## Read in this order
 
+0. [START_HERE.md](START_HERE.md) — 30-second role router (then CURRENT_STATE / SYSTEM_MAP / RUNBOOK)
 1. [Engineering Constitution](docs/ENGINEERING_CONSTITUTION.md) — rules that almost never change
 2. [Project Instructions](docs/AI_INSTRUCTIONS.md) — permanent operating manual for AI assistance
 3. [Current Revision Specification](docs/specifications/Revision_07.md) — the active engineering doctrine
