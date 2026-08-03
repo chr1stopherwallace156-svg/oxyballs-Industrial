@@ -17,6 +17,32 @@ later entry that references it.
 
 ---
 
+## D-021 — Dual status planes + Phase 3.2–3.6 roadmap (source may advance)
+
+- Date: 2026-08-03
+- Status: Accepted (proposed on draft PR)
+- Context: Mac/iPhone unavailable; advancing Apple source without false VALIDATION claims requires an explicit split.
+- Decision:
+  1. Track IMPLEMENTATION_STATE and VALIDATION_STATE independently for every Phase 3 sprint.
+  2. Sprints 3.2–3.5: source MAY advance; Linux fixtures REQUIRED; Mac compilation and physical runtime PENDING; production validation claims FORBIDDEN.
+  3. Sprint 3.6 concentrates Mac compile sweep + simulator + physical iPhone promotion for accumulated adapters.
+  4. Authoritative backlog: `Docs/Architecture/PHASE_3_VALIDATION_BACKLOG.md`.
+- Consequences: PR merges for 3.2–3.5 may be classified `SOURCE_FOUNDATION_MERGED` / `APPLE_RUNTIME_UNVALIDATED` without waiting for hardware.
+
+## D-019 — Sprint 3.1 RGB/motion production adapter foundation (draft PR)
+
+- Date: 2026-08-03
+- Status: Accepted (proposed; Mac/device gates remain PENDING; merge class SOURCE_FOUNDATION_MERGED / APPLE_RUNTIME_UNVALIDATED)
+- Context: After PR #55 synthetic spatial evidence, production RGB/motion requires Apple-only adapters without contaminating Foundation-portable domain code, and without claiming Mac/device PASS without evidence. Controllable Linux packages must not use physical `SPKG-DEVICE-*` identities.
+- Decision:
+  1. Split charter prerequisites: synthetic scope (audit+ADRs) vs production Apple **validation claim** (xcodebuild+device smoke; concentrated in Sprint 3.6).
+  2. Dual status planes: IMPLEMENTATION_STATE vs VALIDATION_STATE; Sprints 3.2–3.5 may advance source with Linux fixtures while Mac/device remain PENDING.
+  3. `CameraSensorAdapter` / `MotionSensorAdapter` are Foundation protocols; AVFoundation/CoreMotion live only under `App/AppleSensors` with `#if canImport`.
+  4. Fixture packages use `SPKG-FIXTURE-RGBMOTION-*` / `SESS-FIXTURE-RGBMOTION-*`, adapters `fixture.*`, authority `TEST_FIXTURE`, `host_claim=NO_PHYSICAL_DEVICE_EXECUTION`. Pose/depth remain `NOT_REQUESTED`.
+  5. Controllable adapters prove failure matrix on Linux; physical package claims require Sprint 3.6 device evidence (`SPKG-DEVICE-*` reserved).
+- Consequences: Sprint 3.2+ source may proceed without Mac; Sprint 3.6 remains the promotion gate.
+
+
 ## D-018 — Phase 3 Sprint 3.0 synthetic spatial slice + audit provenance (PR #55)
 
 - Date: 2026-08-03
