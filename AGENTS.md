@@ -4,6 +4,8 @@
 (Claude Code, Cursor, and any other tool). All agents follow the same
 rules and the same handoff format — no agent-specific exceptions.
 
+**First open:** [`START_HERE.md`](START_HERE.md) → [`CURRENT_STATE.md`](CURRENT_STATE.md).
+
 ## Order of authority
 
 1. [`docs/ENGINEERING_CONSTITUTION.md`](docs/ENGINEERING_CONSTITUTION.md)

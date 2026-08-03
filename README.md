@@ -2,6 +2,11 @@
 
 Gas-to-EV conversion services — Victorville, CA.
 
+**Start here:** [`START_HERE.md`](START_HERE.md) · [`SYSTEM_MAP.md`](SYSTEM_MAP.md) · [`CURRENT_STATE.md`](CURRENT_STATE.md) · [`RUNBOOK.md`](RUNBOOK.md)
+
+> **Reality check:** `MANUAL_STAGE_1_EVIDENCE_PILOT = AUTHORIZED` · `CAPTURE_APP_VALIDATED_STAGE_1_EXECUTION = PENDING_MAC_XCODEBUILD_AND_DEVICE_GATE` · `READY_FOR_COMPLETE_DIGITAL_TWIN = NO`  
+> Pilot doctrine: [`Docs/Architecture/VEHICLE_001_REFERENCE_PILOT.md`](Docs/Architecture/VEHICLE_001_REFERENCE_PILOT.md) (`VEH-000001` / `PILOT-000001` / `STAGE_1_EVIDENCE_ONLY`)
+
 This repository holds coordinated bodies of work plus the public site:
 
 - **Build Engine** — `engine/` (code) + `docs/` governance trees (constitution, specs, research, status). A deterministic,
@@ -25,13 +30,13 @@ Interactive 3D demonstrator (provisional visual — not engineering truth):
 [`edts-visible-progress/`](edts-visible-progress/README.md). Decision **DT-D058**.
 
 ```bash
-cd edts-visible-progress && npm install && npm run dev
+cd edts-visible-progress && npm ci && npm run dev
 ```
 
 ## VIN resolver (DT-D067)
 
 ```bash
-cd edts-vin-resolver && npm install && npm run vin -- 1HTKHPVK8KH805188
+cd edts-vin-resolver && npm ci && npm run vin -- 1HTKHPVK8KH805188
 ```
 
 Creates configuration **candidates** from NHTSA vPIC — not geometry-verified twins.
@@ -72,6 +77,7 @@ specifications under [`/docs`](docs/). It is updated **by proposal, never silent
 
 ## Read in this order
 
+0. [START_HERE.md](START_HERE.md) — 30-second role router (then CURRENT_STATE / SYSTEM_MAP / RUNBOOK)
 1. [Engineering Constitution](docs/ENGINEERING_CONSTITUTION.md) — rules that almost never change
 2. [Project Instructions](docs/AI_INSTRUCTIONS.md) — permanent operating manual for AI assistance
 3. [Current Revision Specification](docs/specifications/Revision_07.md) — the active engineering doctrine
