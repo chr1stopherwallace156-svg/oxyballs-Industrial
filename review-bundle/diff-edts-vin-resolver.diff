@@ -1,0 +1,4489 @@
+diff --git a/edts-vin-resolver/.gitignore b/edts-vin-resolver/.gitignore
+new file mode 100644
+index 0000000..80f1f57
+--- /dev/null
++++ b/edts-vin-resolver/.gitignore
+@@ -0,0 +1,4 @@
++node_modules/
++dist/
++*.tmp
++.DS_Store
+diff --git a/edts-vin-resolver/README.md b/edts-vin-resolver/README.md
+new file mode 100644
+index 0000000..32337f1
+--- /dev/null
++++ b/edts-vin-resolver/README.md
+@@ -0,0 +1,13 @@
++# EDTS VIN Configuration Resolver
++
++Production VIN workflow for EDTS (**DT-D067**). Official NHTSA vPIC only.
++
++```bash
++cd edts-vin-resolver
++npm install
++npm run vin -- 1HTKHPVK8KH805188
++```
++
++See [`docs/VIN_RESOLVER_SPEC.md`](docs/VIN_RESOLVER_SPEC.md) and [`docs/VIN_RESOLVER_RUNBOOK.md`](docs/VIN_RESOLVER_RUNBOOK.md).
++
++**Honesty:** Creates configuration **candidates**, not verified digital twins.
+diff --git a/edts-vin-resolver/data/configurations/CFG-2019-F450-REG-CAB-4X2-60CA-DRW.json b/edts-vin-resolver/data/configurations/CFG-2019-F450-REG-CAB-4X2-60CA-DRW.json
+new file mode 100644
+index 0000000..0d0a6df
+--- /dev/null
++++ b/edts-vin-resolver/data/configurations/CFG-2019-F450-REG-CAB-4X2-60CA-DRW.json
+@@ -0,0 +1,19 @@
++{
++  "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
++  "display_name": "2019 Ford F-450 Super Duty Chassis Cab Regular Cab 4x2 DRW 145.3 WB / 60 CA",
++  "make": ["FORD", "Ford"],
++  "manufacturer_contains": ["FORD"],
++  "model_year": 2019,
++  "model_patterns": ["F-450", "F450", "F-450 Super Duty", "Super Duty"],
++  "body_class_patterns": ["Chassis Cab", "Incomplete - Chassis Cab"],
++  "body_class_reject_patterns": ["Pickup"],
++  "cab_type_patterns": ["Regular", "Single Cab", "Conventional"],
++  "drive_type_patterns": ["4x2", "4X2", "RWD", "Rear Wheel"],
++  "rear_wheels": "DRW",
++  "wheelbase_in": 145.3,
++  "cab_to_axle_in": 60.0,
++  "notes": [
++    "Canonical EDTS locked reference configuration",
++    "WB/CA are EXPECTATIONS for physical verification — not auto-confirmed by VIN"
++  ]
++}
+diff --git a/edts-vin-resolver/data/configurations/index.json b/edts-vin-resolver/data/configurations/index.json
+new file mode 100644
+index 0000000..27451b2
+--- /dev/null
++++ b/edts-vin-resolver/data/configurations/index.json
+@@ -0,0 +1,7 @@
++{
++  "configurations": [
++    "CFG-2019-F450-REG-CAB-4X2-60CA-DRW"
++  ],
++  "decision": "DT-D067",
++  "note": "Registry index — loaders enumerate *.json excluding this file"
++}
+diff --git a/edts-vin-resolver/data/evidence/vin/.gitkeep b/edts-vin-resolver/data/evidence/vin/.gitkeep
+new file mode 100644
+index 0000000..e69de29
+diff --git a/edts-vin-resolver/data/evidence/vin/1HTKHPVK8KH805188.raw.json b/edts-vin-resolver/data/evidence/vin/1HTKHPVK8KH805188.raw.json
+new file mode 100644
+index 0000000..6e08e92
+--- /dev/null
++++ b/edts-vin-resolver/data/evidence/vin/1HTKHPVK8KH805188.raw.json
+@@ -0,0 +1,178 @@
++{
++  "provider": "NHTSA_VPIC",
++  "endpoint": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValuesExtended/1HTKHPVK8KH805188?format=json",
++  "retrieved_at_utc": "2026-07-22T00:20:36.197Z",
++  "request_vin": "1HTKHPVK8KH805188",
++  "response_vin": "1HTKHPVK8KH805188",
++  "content_sha256": "2f96592f462a4b4727084676161d6cecf731a79b19cc1ad580474a3c5f26b61f",
++  "http_status": 200,
++  "count": 1,
++  "message": "Results returned successfully. NOTE: Any missing decoded values should be interpreted as NHTSA does not have data on the specific variable. Missing value should NOT be interpreted as an indication that a feature or technology is unavailable for a vehicle.",
++  "search_criteria": "VIN(s): 1HTKHPVK8KH805188",
++  "error_code": "0",
++  "error_text": "0 - VIN decoded clean. Check Digit (9th position) is correct",
++  "additional_error_text": "Incomplete Vehicle Warning - Please be advised that the vehicle may have been altered and may not be an accurate representation of the vehicle in its current condition. The Model Year decoded for this VIN may be incorrect. If you know the Model year, please enter it and decode again to get more accurate information.",
++  "raw": {
++    "Count": 1,
++    "Message": "Results returned successfully. NOTE: Any missing decoded values should be interpreted as NHTSA does not have data on the specific variable. Missing value should NOT be interpreted as an indication that a feature or technology is unavailable for a vehicle.",
++    "SearchCriteria": "VIN(s): 1HTKHPVK8KH805188",
++    "Results": [
++      {
++        "ABS": "",
++        "ActiveSafetySysNote": "",
++        "AdaptiveCruiseControl": "",
++        "AdaptiveDrivingBeam": "",
++        "AdaptiveHeadlights": "",
++        "AdditionalErrorText": "Incomplete Vehicle Warning - Please be advised that the vehicle may have been altered and may not be an accurate representation of the vehicle in its current condition. The Model Year decoded for this VIN may be incorrect. If you know the Model year, please enter it and decode again to get more accurate information.",
++        "AirBagLocCurtain": "",
++        "AirBagLocFront": "",
++        "AirBagLocKnee": "",
++        "AirBagLocSeatCushion": "",
++        "AirBagLocSide": "",
++        "AutoReverseSystem": "",
++        "AutomaticPedestrianAlertingSound": "",
++        "AxleConfiguration": "SFA - Set-Forward Axle",
++        "Axles": "",
++        "BasePrice": "",
++        "BatteryA": "",
++        "BatteryA_to": "",
++        "BatteryCells": "",
++        "BatteryInfo": "",
++        "BatteryKWh": "",
++        "BatteryKWh_to": "",
++        "BatteryModules": "",
++        "BatteryPacks": "",
++        "BatteryType": "",
++        "BatteryV": "",
++        "BatteryV_to": "",
++        "BedLengthIN": "",
++        "BedType": "",
++        "BlindSpotIntervention": "",
++        "BlindSpotMon": "",
++        "BodyCabType": "MDHD: Conventional",
++        "BodyClass": "Incomplete - Chassis Cab (Single Cab)",
++        "BrakeSystemDesc": "",
++        "BrakeSystemType": "Hydraulic",
++        "BusFloorConfigType": "",
++        "BusLength": "",
++        "BusType": "",
++        "CAN_AACN": "",
++        "CIB": "",
++        "CashForClunkers": "",
++        "ChargerLevel": "",
++        "ChargerPowerKW": "",
++        "CombinedBrakingSystem": "",
++        "CoolingType": "",
++        "CurbWeightLB": "",
++        "CustomMotorcycleType": "Not Applicable",
++        "DaytimeRunningLight": "",
++        "DestinationMarket": "",
++        "DisplacementCC": "6600.0",
++        "DisplacementCI": "402.75671102523",
++        "DisplacementL": "6.6",
++        "Doors": "",
++        "DriveType": "4x2",
++        "DriverAssist": "",
++        "DynamicBrakeSupport": "",
++        "EDR": "",
++        "ESC": "",
++        "EVDriveUnit": "",
++        "ElectrificationLevel": "",
++        "EngineConfiguration": "V-Shaped",
++        "EngineCycles": "",
++        "EngineCylinders": "8",
++        "EngineHP": "",
++        "EngineHP_to": "",
++        "EngineKW": "",
++        "EngineManufacturer": "GM",
++        "EngineModel": "",
++        "EntertainmentSystem": "",
++        "ErrorCode": "0",
++        "ErrorText": "0 - VIN decoded clean. Check Digit (9th position) is correct",
++        "ForwardCollisionWarning": "",
++        "FuelInjectionType": "",
++        "FuelTankMaterial": "",
++        "FuelTankType": "",
++        "FuelTypePrimary": "Diesel",
++        "FuelTypeSecondary": "",
++        "GCWR": "",
++        "GCWR_to": "",
++        "GVWR": "Class 5: 16,001 - 19,500 lb (7,258 - 8,845 kg)",
++        "GVWR_to": "",
++        "KeylessIgnition": "",
++        "LaneCenteringAssistance": "",
++        "LaneDepartureWarning": "",
++        "LaneKeepSystem": "",
++        "LowerBeamHeadlampLightSource": "",
++        "Make": "GM",
++        "MakeID": "13281",
++        "Manufacturer": "INTERNATIONAL MOTORS, LLC",
++        "ManufacturerId": "1028",
++        "Model": "GM515",
++        "ModelID": "16264",
++        "ModelYear": "2019",
++        "MotorcycleChassisType": "Not Applicable",
++        "MotorcycleSuspensionType": "Not Applicable",
++        "NCSABodyType": "Single-unit straight truck or Cab-Chassis (GVWR range 10,001 to 19,500 lbs.)",
++        "NCSAMake": "Chevrolet",
++        "NCSAMapExcApprovedBy": "",
++        "NCSAMapExcApprovedOn": "",
++        "NCSAMappingException": "",
++        "NCSAModel": "Medium/Heavy - CBE",
++        "NCSANote": "",
++        "NonLandUse": "",
++        "Note": "",
++        "OtherBusInfo": "",
++        "OtherEngineInfo": "Direct Injection, DURAMAX, GEN 5, VAR.3",
++        "OtherMotorcycleInfo": "",
++        "OtherRestraintSystemInfo": "",
++        "OtherTrailerInfo": "",
++        "ParkAssist": "",
++        "PedestrianAutomaticEmergencyBraking": "",
++        "PlantCity": "SPRINGFIELD",
++        "PlantCompanyName": "",
++        "PlantCountry": "UNITED STATES (USA)",
++        "PlantState": "OHIO",
++        "PossibleValues": "",
++        "Pretensioner": "",
++        "RearAutomaticEmergencyBraking": "",
++        "RearCrossTrafficAlert": "",
++        "RearVisibilitySystem": "",
++        "SAEAutomationLevel": "",
++        "SAEAutomationLevel_to": "",
++        "SeatBeltsAll": "",
++        "SeatRows": "",
++        "Seats": "",
++        "SemiautomaticHeadlampBeamSwitching": "",
++        "Series": "GM - Chevrolet Silverado Medium Duty",
++        "Series2": "",
++        "SteeringLocation": "",
++        "SuggestedVIN": "",
++        "TPMS": "",
++        "TopSpeedMPH": "",
++        "TrackWidth": "",
++        "TractionControl": "",
++        "TrailerBodyType": "Not Applicable",
++        "TrailerLength": "",
++        "TrailerType": "Not Applicable",
++        "TransmissionSpeeds": "",
++        "TransmissionStyle": "",
++        "Trim": "",
++        "Trim2": "",
++        "Turbo": "Yes",
++        "VIN": "1HTKHPVK8KH805188",
++        "ValveTrainDesign": "",
++        "VehicleDescriptor": "1HTKHPVK*KH",
++        "VehicleType": "INCOMPLETE VEHICLE",
++        "WheelBaseLong": "",
++        "WheelBaseShort": "",
++        "WheelBaseType": "",
++        "WheelSizeFront": "",
++        "WheelSizeRear": "",
++        "WheelieMitigation": "",
++        "Wheels": "",
++        "Windows": ""
++      }
++    ]
++  }
++}
+diff --git a/edts-vin-resolver/data/vehicles/.gitkeep b/edts-vin-resolver/data/vehicles/.gitkeep
+new file mode 100644
+index 0000000..e69de29
+diff --git a/edts-vin-resolver/data/vehicles/VEH-1HTKHPVK8KH805188.json b/edts-vin-resolver/data/vehicles/VEH-1HTKHPVK8KH805188.json
+new file mode 100644
+index 0000000..1b08140
+--- /dev/null
++++ b/edts-vin-resolver/data/vehicles/VEH-1HTKHPVK8KH805188.json
+@@ -0,0 +1,126 @@
++{
++  "vehicle_id": "VEH-1HTKHPVK8KH805188",
++  "vin": "1HTKHPVK8KH805188",
++  "lifecycle_status": "REJECTED",
++  "normalized_identity": {
++    "vin": "1HTKHPVK8KH805188",
++    "manufacturer": "INTERNATIONAL MOTORS, LLC",
++    "make": "GM",
++    "model": "GM515",
++    "modelYear": 2019,
++    "series": "GM - Chevrolet Silverado Medium Duty",
++    "trim": null,
++    "bodyClass": "Incomplete - Chassis Cab (Single Cab)",
++    "vehicleType": "INCOMPLETE VEHICLE",
++    "cabType": "MDHD: Conventional",
++    "driveType": "4x2",
++    "axleConfiguration": "SFA - Set-Forward Axle",
++    "numberOfAxles": null,
++    "gvwr": "Class 5: 16,001 - 19,500 lb (7,258 - 8,845 kg)",
++    "gvwrClass": "Class 5",
++    "engineManufacturer": "GM",
++    "engineModel": null,
++    "engineCylinders": 8,
++    "displacementLiters": 6.6,
++    "fuelTypePrimary": "Diesel",
++    "plantCity": "SPRINGFIELD",
++    "plantState": "OHIO",
++    "plantCountry": "UNITED STATES (USA)",
++    "errorCode": "0",
++    "errorText": "0 - VIN decoded clean. Check Digit (9th position) is correct",
++    "retained_raw_keys": {
++      "Make": "GM",
++      "MakeID": "13281",
++      "Manufacturer": "INTERNATIONAL MOTORS, LLC",
++      "ManufacturerId": "1028",
++      "Model": "GM515",
++      "ModelID": "16264",
++      "ModelYear": "2019",
++      "Series": "GM - Chevrolet Silverado Medium Duty",
++      "Trim": null,
++      "BodyClass": "Incomplete - Chassis Cab (Single Cab)",
++      "VehicleType": "INCOMPLETE VEHICLE",
++      "CabType": null,
++      "BodyCabType": "MDHD: Conventional",
++      "DriveType": "4x2",
++      "AxleConfiguration": "SFA - Set-Forward Axle",
++      "Axles": null,
++      "GVWR": "Class 5: 16,001 - 19,500 lb (7,258 - 8,845 kg)",
++      "EngineManufacturer": "GM",
++      "EngineModel": null,
++      "EngineCylinders": "8",
++      "DisplacementL": "6.6",
++      "FuelTypePrimary": "Diesel",
++      "PlantCity": "SPRINGFIELD",
++      "PlantState": "OHIO",
++      "PlantCountry": "UNITED STATES (USA)",
++      "ErrorCode": "0",
++      "ErrorText": "0 - VIN decoded clean. Check Digit (9th position) is correct",
++      "AdditionalErrorText": "Incomplete Vehicle Warning - Please be advised that the vehicle may have been altered and may not be an accurate representation of the vehicle in its current condition. The Model Year decoded for this VIN may be incorrect. If you know the Model year, please enter it and decode again to get more accurate information.",
++      "VIN": "1HTKHPVK8KH805188"
++    }
++  },
++  "evidence_ref": "/workspace/edts-vin-resolver/data/evidence/vin/1HTKHPVK8KH805188.raw.json",
++  "evidence_sha256": "2f96592f462a4b4727084676161d6cecf731a79b19cc1ad580474a3c5f26b61f",
++  "candidate_configurations": [],
++  "conflicts": [
++    "CFG-2019-F450-REG-CAB-4X2-60CA-DRW.make_or_manufacturer: expected=FORD|Ford observed=GM",
++    "CFG-2019-F450-REG-CAB-4X2-60CA-DRW.model: expected=F-450|F450|F-450 Super Duty|Super Duty observed=GM515"
++  ],
++  "unknown_fields": [
++    "CFG-2019-F450-REG-CAB-4X2-60CA-DRW.cab_to_axle_in",
++    "CFG-2019-F450-REG-CAB-4X2-60CA-DRW.rear_wheels",
++    "CFG-2019-F450-REG-CAB-4X2-60CA-DRW.wheelbase_in",
++    "identity.engineModel",
++    "identity.numberOfAxles",
++    "identity.trim",
++    "physical.cab_to_axle_in",
++    "physical.frame_geometry",
++    "physical.modification_state",
++    "physical.wheelbase_in"
++  ],
++  "required_physical_verification": [
++    {
++      "id": "certification-label-photograph",
++      "description": "Driver-side door jamb / certification label photograph",
++      "required": true,
++      "reason": "NHTSA notes labels may carry information not present in vPIC"
++    },
++    {
++      "id": "wheelbase-measurement",
++      "description": "Wheelbase measurement (laser tape / caliper method)",
++      "required": true,
++      "reason": "Exact WB is not reliably proven by VIN decode alone"
++    },
++    {
++      "id": "cab-to-axle-measurement",
++      "description": "Cab-to-axle (CA) measurement",
++      "required": true,
++      "reason": "CA typically absent from vPIC for chassis-cab packages"
++    },
++    {
++      "id": "axle-configuration-observation",
++      "description": "Axle configuration observation (e.g. DRW vs SRW)",
++      "required": true,
++      "reason": "Rear-wheel configuration must be physically confirmed"
++    },
++    {
++      "id": "drivetrain-observation",
++      "description": "Drivetrain observation (4x2 vs 4x4)",
++      "required": true,
++      "reason": "Confirm decoded DriveType against vehicle"
++    },
++    {
++      "id": "cross-configuration-documentation",
++      "description": "Document that this VIN is outside the EDTS reference configuration lock",
++      "required": true,
++      "reason": "Manufacturer/model mismatch against registered CFG expectations"
++    }
++  ],
++  "resolution_outcome": "NO_MATCH",
++  "created_at": "2026-07-22T00:20:36.200Z",
++  "updated_at": "2026-07-22T00:20:36.453Z",
++  "decision": "DT-D067",
++  "geometry_verified": false,
++  "configuration_confirmed_from_vin_alone": false
++}
+diff --git a/edts-vin-resolver/docs/VIN_RESOLVER_RUNBOOK.md b/edts-vin-resolver/docs/VIN_RESOLVER_RUNBOOK.md
+new file mode 100644
+index 0000000..3ef8088
+--- /dev/null
++++ b/edts-vin-resolver/docs/VIN_RESOLVER_RUNBOOK.md
+@@ -0,0 +1,55 @@
++# VIN Resolver Runbook
++
++## Install
++
++```bash
++cd edts-vin-resolver
++npm install
++```
++
++## Decode a VIN
++
++```bash
++npm run vin -- 1HTKHPVK8KH805188
++```
++
++Artifacts:
++
++- `data/evidence/vin/<VIN>.raw.json` — immutable raw evidence + hash
++- `data/vehicles/VEH-<VIN>.json` — candidate vehicle record
++- `reports/vin/<VIN>.md` — human report
++
++## Offline
++
++Requires prior evidence file:
++
++```bash
++npm run vin -- 1HTKHPVK8KH805188 --offline
++```
++
++## Tests
++
++```bash
++npm test
++npm run typecheck
++npm run build
++# opt-in live API:
++npm run vin:test-live
++```
++
++## Exit codes
++
++| Code | Meaning |
++|---:|---|
++| 0 | Decode + report OK |
++| 1 | Invalid VIN |
++| 2 | Network / decoder failure |
++| 3 | Persistence failure |
++| 4 | Configuration registry error |
++
++## Do not
++
++- Scrape unofficial VIN sites
++- Invent WB/CA/DRW from VIN
++- Mark `CONFIGURATION_CONFIRMED` from decode alone
++- Share UI decoding logic separate from this package — import `resolveVin` instead
+diff --git a/edts-vin-resolver/docs/VIN_RESOLVER_SPEC.md b/edts-vin-resolver/docs/VIN_RESOLVER_SPEC.md
+new file mode 100644
+index 0000000..8c035f1
+--- /dev/null
++++ b/edts-vin-resolver/docs/VIN_RESOLVER_SPEC.md
+@@ -0,0 +1,51 @@
++# VIN Resolver Specification (DT-D067)
++
++**Package:** `edts-vin-resolver`  
++**Endpoint:** `GET https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValuesExtended/{VIN}?format=json`  
++**Canonical CFG:** `CFG-2019-F450-REG-CAB-4X2-60CA-DRW`
++
++## Purpose
++
++Validate a VIN, decode via official NHTSA vPIC, normalize without inventing fields, compare to registered EDTS configurations, persist raw evidence + vehicle record + markdown report, and refuse unsupported engineering claims.
++
++## Honesty
++
++- vPIC is manufacturer-reported; missing values are **UNKNOWN**.
++- VIN decode alone **must not** yield `CONFIGURATION_CONFIRMED` or geometry **Verified**.
++- WB / CA / frame holes / torque / modification state require physical verification.
++
++## CLI
++
++```bash
++cd edts-vin-resolver
++npm run vin -- <VIN>
++npm run vin -- <VIN> --json
++npm run vin -- <VIN> --force-refresh
++npm run vin -- <VIN> --compare CFG-2019-F450-REG-CAB-4X2-60CA-DRW
++npm run vin -- <VIN> --offline
++```
++
++## Outcomes
++
++`EXACT_CANDIDATE` | `PARTIAL_CANDIDATE` | `AMBIGUOUS` | `NO_MATCH` | `INVALID_VIN` | `DECODER_ERROR` | `NETWORK_ERROR`
++
++## Module map
++
++| Module | Role |
++|---|---|
++| `validateVin.ts` | Format + check digit |
++| `decodeVpic.ts` | HTTP transport + retries |
++| `normalizeVpic.ts` | Typed identity |
++| `resolveConfiguration.ts` | Field compare + ranking |
++| `calculateConfidence.ts` | Requirements + lifecycle |
++| `persistVinEvidence.ts` | Atomic JSON/MD writes |
++| `pipeline.ts` | Orchestration |
++| `scripts/resolve-vin.ts` | CLI |
++
++## Maturity (three-axis)
++
++| Axis | Status after DT-D067 |
++|---|---|
++| Implemented | ✅ |
++| Tested | 🧪 unit + fixture pipeline |
++| Verified (engineering twin) | ✖ — VIN cannot verify geometry/config lock |
+diff --git a/edts-vin-resolver/fixtures/vpic/1HTKHPVK8KH805188.json b/edts-vin-resolver/fixtures/vpic/1HTKHPVK8KH805188.json
+new file mode 100644
+index 0000000..9041f73
+--- /dev/null
++++ b/edts-vin-resolver/fixtures/vpic/1HTKHPVK8KH805188.json
+@@ -0,0 +1 @@
++{"Count":1,"Message":"Results returned successfully. NOTE: Any missing decoded values should be interpreted as NHTSA does not have data on the specific variable. Missing value should NOT be interpreted as an indication that a feature or technology is unavailable for a vehicle.","SearchCriteria":"VIN(s): 1HTKHPVK8KH805188","Results":[{"ABS":"","ActiveSafetySysNote":"","AdaptiveCruiseControl":"","AdaptiveDrivingBeam":"","AdaptiveHeadlights":"","AdditionalErrorText":"Incomplete Vehicle Warning - Please be advised that the vehicle may have been altered and may not be an accurate representation of the vehicle in its current condition. The Model Year decoded for this VIN may be incorrect. If you know the Model year, please enter it and decode again to get more accurate information.","AirBagLocCurtain":"","AirBagLocFront":"","AirBagLocKnee":"","AirBagLocSeatCushion":"","AirBagLocSide":"","AutoReverseSystem":"","AutomaticPedestrianAlertingSound":"","AxleConfiguration":"SFA - Set-Forward Axle","Axles":"","BasePrice":"","BatteryA":"","BatteryA_to":"","BatteryCells":"","BatteryInfo":"","BatteryKWh":"","BatteryKWh_to":"","BatteryModules":"","BatteryPacks":"","BatteryType":"","BatteryV":"","BatteryV_to":"","BedLengthIN":"","BedType":"","BlindSpotIntervention":"","BlindSpotMon":"","BodyCabType":"MDHD: Conventional","BodyClass":"Incomplete - Chassis Cab (Single Cab)","BrakeSystemDesc":"","BrakeSystemType":"Hydraulic","BusFloorConfigType":"","BusLength":"","BusType":"","CAN_AACN":"","CIB":"","CashForClunkers":"","ChargerLevel":"","ChargerPowerKW":"","CombinedBrakingSystem":"","CoolingType":"","CurbWeightLB":"","CustomMotorcycleType":"Not Applicable","DaytimeRunningLight":"","DestinationMarket":"","DisplacementCC":"6600.0","DisplacementCI":"402.75671102523","DisplacementL":"6.6","Doors":"","DriveType":"4x2","DriverAssist":"","DynamicBrakeSupport":"","EDR":"","ESC":"","EVDriveUnit":"","ElectrificationLevel":"","EngineConfiguration":"V-Shaped","EngineCycles":"","EngineCylinders":"8","EngineHP":"","EngineHP_to":"","EngineKW":"","EngineManufacturer":"GM","EngineModel":"","EntertainmentSystem":"","ErrorCode":"0","ErrorText":"0 - VIN decoded clean. Check Digit (9th position) is correct","ForwardCollisionWarning":"","FuelInjectionType":"","FuelTankMaterial":"","FuelTankType":"","FuelTypePrimary":"Diesel","FuelTypeSecondary":"","GCWR":"","GCWR_to":"","GVWR":"Class 5: 16,001 - 19,500 lb (7,258 - 8,845 kg)","GVWR_to":"","KeylessIgnition":"","LaneCenteringAssistance":"","LaneDepartureWarning":"","LaneKeepSystem":"","LowerBeamHeadlampLightSource":"","Make":"GM","MakeID":"13281","Manufacturer":"INTERNATIONAL MOTORS, LLC","ManufacturerId":"1028","Model":"GM515","ModelID":"16264","ModelYear":"2019","MotorcycleChassisType":"Not Applicable","MotorcycleSuspensionType":"Not Applicable","NCSABodyType":"Single-unit straight truck or Cab-Chassis (GVWR range 10,001 to 19,500 lbs.)","NCSAMake":"Chevrolet","NCSAMapExcApprovedBy":"","NCSAMapExcApprovedOn":"","NCSAMappingException":"","NCSAModel":"Medium\/Heavy - CBE","NCSANote":"","NonLandUse":"","Note":"","OtherBusInfo":"","OtherEngineInfo":"Direct Injection, DURAMAX, GEN 5, VAR.3","OtherMotorcycleInfo":"","OtherRestraintSystemInfo":"","OtherTrailerInfo":"","ParkAssist":"","PedestrianAutomaticEmergencyBraking":"","PlantCity":"SPRINGFIELD","PlantCompanyName":"","PlantCountry":"UNITED STATES (USA)","PlantState":"OHIO","PossibleValues":"","Pretensioner":"","RearAutomaticEmergencyBraking":"","RearCrossTrafficAlert":"","RearVisibilitySystem":"","SAEAutomationLevel":"","SAEAutomationLevel_to":"","SeatBeltsAll":"","SeatRows":"","Seats":"","SemiautomaticHeadlampBeamSwitching":"","Series":"GM - Chevrolet Silverado Medium Duty","Series2":"","SteeringLocation":"","SuggestedVIN":"","TPMS":"","TopSpeedMPH":"","TrackWidth":"","TractionControl":"","TrailerBodyType":"Not Applicable","TrailerLength":"","TrailerType":"Not Applicable","TransmissionSpeeds":"","TransmissionStyle":"","Trim":"","Trim2":"","Turbo":"Yes","VIN":"1HTKHPVK8KH805188","ValveTrainDesign":"","VehicleDescriptor":"1HTKHPVK*KH","VehicleType":"INCOMPLETE VEHICLE","WheelBaseLong":"","WheelBaseShort":"","WheelBaseType":"","WheelSizeFront":"","WheelSizeRear":"","WheelieMitigation":"","Wheels":"","Windows":""}]}
+\ No newline at end of file
+diff --git a/edts-vin-resolver/fixtures/vpic/ford_f450_chassis_cab_synthetic.json b/edts-vin-resolver/fixtures/vpic/ford_f450_chassis_cab_synthetic.json
+new file mode 100644
+index 0000000..0b95b54
+--- /dev/null
++++ b/edts-vin-resolver/fixtures/vpic/ford_f450_chassis_cab_synthetic.json
+@@ -0,0 +1,38 @@
++{
++  "Count": 1,
++  "Message": "Results returned successfully. FIXTURE — not a live decode.",
++  "SearchCriteria": "VIN(s): 1FDUF4HT0KDA00001",
++  "Results": [
++    {
++      "Make": "FORD",
++      "Manufacturer": "FORD MOTOR COMPANY",
++      "Model": "F-450",
++      "ModelYear": "2019",
++      "Series": "Super Duty",
++      "Trim": "XL",
++      "BodyClass": "Incomplete - Chassis Cab (Single Cab)",
++      "VehicleType": "INCOMPLETE VEHICLE",
++      "BodyCabType": "Regular",
++      "CabType": "",
++      "DriveType": "4x2",
++      "AxleConfiguration": "",
++      "Axles": "",
++      "GVWR": "Class 4: 14,001 - 16,000 lb (6,350 - 7,258 kg)",
++      "EngineManufacturer": "Ford",
++      "EngineModel": "",
++      "EngineCylinders": "8",
++      "DisplacementL": "6.7",
++      "FuelTypePrimary": "Diesel",
++      "PlantCity": "",
++      "PlantState": "",
++      "PlantCountry": "UNITED STATES (USA)",
++      "ErrorCode": "0",
++      "ErrorText": "0 - VIN decoded clean. Check Digit (9th position) is correct",
++      "AdditionalErrorText": "",
++      "VIN": "1FDUF4HT0KDA00001",
++      "MakeID": "460",
++      "ManufacturerId": "976",
++      "ModelID": "1807"
++    }
++  ]
++}
+diff --git a/edts-vin-resolver/package-lock.json b/edts-vin-resolver/package-lock.json
+new file mode 100644
+index 0000000..3040b1c
+--- /dev/null
++++ b/edts-vin-resolver/package-lock.json
+@@ -0,0 +1,1641 @@
++{
++  "name": "edts-vin-resolver",
++  "version": "0.1.0",
++  "lockfileVersion": 3,
++  "requires": true,
++  "packages": {
++    "": {
++      "name": "edts-vin-resolver",
++      "version": "0.1.0",
++      "devDependencies": {
++        "@types/node": "^24.13.2",
++        "tsx": "^4.20.5",
++        "typescript": "~5.9.3",
++        "vitest": "^3.2.4"
++      },
++      "engines": {
++        "node": ">=20"
++      }
++    },
++    "node_modules/@esbuild/aix-ppc64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/aix-ppc64/-/aix-ppc64-0.28.1.tgz",
++      "integrity": "sha512-Svl7tq8k/08+p6CXPpRjQ1fKX+1odH/BQbb48fV6fj3CWHhsoIOoY87w1oHXm0qEpkIK3ZfVgp0hed3XBXzXMQ==",
++      "cpu": [
++        "ppc64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "aix"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/android-arm": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/android-arm/-/android-arm-0.28.1.tgz",
++      "integrity": "sha512-0k2F129Xdio1TdJfzJ8sy1Q47vUD2NnwdhiAf7drUN1EBTfPf4hsFCtmMgu/6m8JSzsBrlmVjudMBQqOfG8usQ==",
++      "cpu": [
++        "arm"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "android"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/android-arm64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/android-arm64/-/android-arm64-0.28.1.tgz",
++      "integrity": "sha512-34EGEbCIAgosYz6goLcopX6Mo7NyGv9tfwEM2/7Ce2VcVRk568iSvniGWcUXIy7wEDR1wzolcxcriFVrWYcwBg==",
++      "cpu": [
++        "arm64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "android"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/android-x64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/android-x64/-/android-x64-0.28.1.tgz",
++      "integrity": "sha512-dbwY7ltSMDWsRatcRpCnES4F+im88OCUgGZjy52shC7GqHRE/cYlxNbB4Z4UpJswpcc4Qxd2oE/ufM0p61IKng==",
++      "cpu": [
++        "x64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "android"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/darwin-arm64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/darwin-arm64/-/darwin-arm64-0.28.1.tgz",
++      "integrity": "sha512-TZbWkQY7kvTAXbXUT7uVACR5cMHsDiSz9z7ZKAX/RTq/WJEk3QyRr0wZpNhBDX+/0CtdqUIJlOiodQcta6tY3Q==",
++      "cpu": [
++        "arm64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "darwin"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/darwin-x64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/darwin-x64/-/darwin-x64-0.28.1.tgz",
++      "integrity": "sha512-zfdzgK9ACBNZLI/CyHTOx81SyNbM6YXn7rxSgX97VjyiPl9W1i4Ka4fgKECEoFCKGpvBj5qArWIGgQjOwkgskQ==",
++      "cpu": [
++        "x64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "darwin"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/freebsd-arm64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/freebsd-arm64/-/freebsd-arm64-0.28.1.tgz",
++      "integrity": "sha512-wG2EA8ENdEI0qhkSZMjfqrdY+ziCYCPMmtZjjIwOmXFjmyzEHn+UUxk5of+SYsjtfs3VpnlC7QLzSI5hY/rOAw==",
++      "cpu": [
++        "arm64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "freebsd"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/freebsd-x64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/freebsd-x64/-/freebsd-x64-0.28.1.tgz",
++      "integrity": "sha512-i7dZ9vQgnvSCzi/rYCXNgtF/U+eKZNJBzu3eTQbRgHnM7tNSizLOkRFAl3qzVc/Op/u5YkHHa4pf/3DOYHthLQ==",
++      "cpu": [
++        "x64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "freebsd"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/linux-arm": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/linux-arm/-/linux-arm-0.28.1.tgz",
++      "integrity": "sha512-qVXBOHQS+d5Y722GwJzJUtOLlX7km3CraOaGormF1pDtPd2C/l1SHRPgjLunLGe51Sh5YYWKMFDyV4SxgMQYTQ==",
++      "cpu": [
++        "arm"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/linux-arm64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/linux-arm64/-/linux-arm64-0.28.1.tgz",
++      "integrity": "sha512-yHs+0uc8+nvEAfAfxrWQKK5peSNzBc4PegcMO0EJ2hT71uA7vB8Ihg2e77R2P7SG5uYjPbHlLLmve4LLLRCf0g==",
++      "cpu": [
++        "arm64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/linux-ia32": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/linux-ia32/-/linux-ia32-0.28.1.tgz",
++      "integrity": "sha512-d1z4ZuP0ajrfz/FhGT4vv278rX8KnPPJx8i5+AtK7TYbx9Le9F1hyzurZpkEyjkGa9dUGhQow4C1NmeGvqxN2w==",
++      "cpu": [
++        "ia32"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/linux-loong64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/linux-loong64/-/linux-loong64-0.28.1.tgz",
++      "integrity": "sha512-M5sRjUVZrkm1OAPR3dlOYzNmN+loZKGVi1VUQGrwuqLcbR6qeAz+famMhjASeH3YVKvZz+zT1jlh/keC3Rj/lg==",
++      "cpu": [
++        "loong64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/linux-mips64el": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/linux-mips64el/-/linux-mips64el-0.28.1.tgz",
++      "integrity": "sha512-mRObBZeHh2OxcBFPWE/FjylkRgZdYuiTR3vaTozquCGOH14iP9oN4x4Ge81CoIDYQrXmIxpFumJBu5MtZpnQJQ==",
++      "cpu": [
++        "mips64el"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/linux-ppc64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/linux-ppc64/-/linux-ppc64-0.28.1.tgz",
++      "integrity": "sha512-slScBsMAb3GFDcdrCgLwZtPYRoH2H/youv10QiZyRjmsP48fznoveWytSgCI/R0ZcUgpc0ZhIUEx6LHts8yrfQ==",
++      "cpu": [
++        "ppc64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/linux-riscv64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/linux-riscv64/-/linux-riscv64-0.28.1.tgz",
++      "integrity": "sha512-kw0owk1o0GFETUJyW0jc0G4Yzs0BHZn0JDZ8JRT088vjJYX777BAs1fDGxAC+q831qOs2DTC96mNsG2opdfyyQ==",
++      "cpu": [
++        "riscv64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/linux-s390x": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/linux-s390x/-/linux-s390x-0.28.1.tgz",
++      "integrity": "sha512-/lAIjX8aYFRByhh6L5rYtPEDRqa9de/4V/juOXcta5frjvzXO4/sqEtyytse0g3zZFuWu5cDN0MkLz2qRDD2Ag==",
++      "cpu": [
++        "s390x"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/linux-x64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.28.1.tgz",
++      "integrity": "sha512-u/anNYF2mmVOEDwLtnQ1wOr3EZ9sTNGLWrsYGYwHWzGA3Si84IOkHXlbWTD1NB+9/1lcnweYKO54uhxZydNzfA==",
++      "cpu": [
++        "x64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/netbsd-arm64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/netbsd-arm64/-/netbsd-arm64-0.28.1.tgz",
++      "integrity": "sha512-oks0DYbLwWMmaakTsCb+zL4E+aHRVLom9IJZOAthMQEPiQmydXHkziYEsGYRx0uNV/IjEKGAV941JzH02pflqw==",
++      "cpu": [
++        "arm64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "netbsd"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/netbsd-x64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/netbsd-x64/-/netbsd-x64-0.28.1.tgz",
++      "integrity": "sha512-aeL6lAnN89Hz43Mlh1G8ARasbuoYvSITDEx0tHh5b7jJnHcssqgjy9Yx430GDpmCa6OyrKoS0aNRjKundRizGg==",
++      "cpu": [
++        "x64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "netbsd"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/openbsd-arm64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/openbsd-arm64/-/openbsd-arm64-0.28.1.tgz",
++      "integrity": "sha512-MEFJe5C3R8pwXdZ5Y21oo6m7ePiS0d9pWucn99O/wvyJZChoIQKrQDxKrGeW8F5+T0okTHesAmDeiHDTIq0V/Q==",
++      "cpu": [
++        "arm64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "openbsd"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/openbsd-x64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/openbsd-x64/-/openbsd-x64-0.28.1.tgz",
++      "integrity": "sha512-i/ZLIOafE0Z8cI/XANJAixoJL/uRAoS2xOA3rb0xN+KK0K177cMAsQYkzHtBrtMXAKuAc7HGgcWiZ/sRC1Nxgw==",
++      "cpu": [
++        "x64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "openbsd"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/openharmony-arm64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/openharmony-arm64/-/openharmony-arm64-0.28.1.tgz",
++      "integrity": "sha512-ge+Z7EXFNt2BO1oAMsVpiQ8EwndV9i1xXerAeTIK7AtPs3bKFXQM7nlRxDSIUIMeueR1CNXxqztLzdNeReKBJg==",
++      "cpu": [
++        "arm64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "openharmony"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/sunos-x64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/sunos-x64/-/sunos-x64-0.28.1.tgz",
++      "integrity": "sha512-BEjgtECkL3vY+SaSQ6nzVfiALUeFxpawyp8Jmf5PtYhf1Ug40N1h/hxlhts+f1FvSvarEigdxS3BlSMI2PJLcQ==",
++      "cpu": [
++        "x64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "sunos"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/win32-arm64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/win32-arm64/-/win32-arm64-0.28.1.tgz",
++      "integrity": "sha512-lCv9eK/H6ZJWbE7bh2nw54CZ9M2nupBxJcTsdk/QQnWkdSjKGuxmmH8/GWrlT1eMmZfn4dGcCjRte397WqfQXA==",
++      "cpu": [
++        "arm64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "win32"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/win32-ia32": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/win32-ia32/-/win32-ia32-0.28.1.tgz",
++      "integrity": "sha512-zvb/mB2bSCoJOpoCBgYKKpX6YM6mJBlBUVUtVj41DlZJVEB6/0CKlRYxP5wWl1C1ILiCoAU5wZZ4q1P3qeS6Eg==",
++      "cpu": [
++        "ia32"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "win32"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@esbuild/win32-x64": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/@esbuild/win32-x64/-/win32-x64-0.28.1.tgz",
++      "integrity": "sha512-bm4Mowrv+GXMlpWX++EcXw/iLyd1o3+bJkC2DkWXYVvgZCqD/bSj9ctZeAMC3cIxgjRVR2Dufaiu4YPxr5gW1A==",
++      "cpu": [
++        "x64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "win32"
++      ],
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/@jridgewell/sourcemap-codec": {
++      "version": "1.5.5",
++      "resolved": "https://registry.npmjs.org/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.5.5.tgz",
++      "integrity": "sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==",
++      "dev": true,
++      "license": "MIT"
++    },
++    "node_modules/@rollup/rollup-android-arm-eabi": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-android-arm-eabi/-/rollup-android-arm-eabi-4.62.2.tgz",
++      "integrity": "sha512-6o7ZLZK+BeenkZCFNDXqpbjw9bD6nuWonvS/lwQJp7NoVVxm6p3qE7qQ5jGuBjiFsgvqjD8mZAU5oWxTmbOeOg==",
++      "cpu": [
++        "arm"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "android"
++      ]
++    },
++    "node_modules/@rollup/rollup-android-arm64": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-android-arm64/-/rollup-android-arm64-4.62.2.tgz",
++      "integrity": "sha512-BaH7BllCACHoH1LguOU56UItGfUWjujlO65kS9LAodViaN4bwIKd7oeW/ZHJ/4ljr/7MIiENnNy3HJ0zXv8Zkw==",
++      "cpu": [
++        "arm64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "android"
++      ]
++    },
++    "node_modules/@rollup/rollup-darwin-arm64": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-darwin-arm64/-/rollup-darwin-arm64-4.62.2.tgz",
++      "integrity": "sha512-v39RCCvj4He82I9sFmk+M1VZ0PLM9sfsLVikjfx2hYBNALhrrOR2D3JjQA6AhlaSOgcR+RzrKY7e1+bT6SUO/A==",
++      "cpu": [
++        "arm64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "darwin"
++      ]
++    },
++    "node_modules/@rollup/rollup-darwin-x64": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-darwin-x64/-/rollup-darwin-x64-4.62.2.tgz",
++      "integrity": "sha512-yl0y2vq3S3lHeuXhEdss6TWfKW8vkujImO12tn4ZkG/4oghr09LvdYm2RElVjokTQiUvDUGXLGsYeLqUMCKpGA==",
++      "cpu": [
++        "x64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "darwin"
++      ]
++    },
++    "node_modules/@rollup/rollup-freebsd-arm64": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-freebsd-arm64/-/rollup-freebsd-arm64-4.62.2.tgz",
++      "integrity": "sha512-tT4pvt4qXD+vEoezupCWi+a1F0vvDiksiHc+PxRlYTOH1I6/X4id9jPxTP+Fg+545euaFT1jJVs4CEdHZAU1vw==",
++      "cpu": [
++        "arm64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "freebsd"
++      ]
++    },
++    "node_modules/@rollup/rollup-freebsd-x64": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-freebsd-x64/-/rollup-freebsd-x64-4.62.2.tgz",
++      "integrity": "sha512-6nU5F2wCW+qvCBhTn1pdIU3bzsIoF7EUwsCDRxilWGprQR6yd508YnH9+OKFCwpfS8pjZqDUmnCAr7exax0XCg==",
++      "cpu": [
++        "x64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "freebsd"
++      ]
++    },
++    "node_modules/@rollup/rollup-linux-arm-gnueabihf": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-arm-gnueabihf/-/rollup-linux-arm-gnueabihf-4.62.2.tgz",
++      "integrity": "sha512-n1GJHPOvpIfhi3TmrCeh6S6URt9BFCt0KQE3qvexyGCTAKpR4Lg+eWvNZEqu7epxwus/8ElT3hacYEucm49SZg==",
++      "cpu": [
++        "arm"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ]
++    },
++    "node_modules/@rollup/rollup-linux-arm-musleabihf": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-arm-musleabihf/-/rollup-linux-arm-musleabihf-4.62.2.tgz",
++      "integrity": "sha512-JqgflS8wEB+UXV/vS1RpRbifGBeN4D5lz8D8oOFbFZw4vedvdOgCFAjfBmIMdW3yL10XpQQ0Ambepw6MXrhOnA==",
++      "cpu": [
++        "arm"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ]
++    },
++    "node_modules/@rollup/rollup-linux-arm64-gnu": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-arm64-gnu/-/rollup-linux-arm64-gnu-4.62.2.tgz",
++      "integrity": "sha512-wnFJkogWvN4jm/hQRF2UBaeUmk20j5+DmHvoyWii2b8HJDyvz1MF2OU/6ynXt2KR63rbZLWkFpoytpdc/yBuSA==",
++      "cpu": [
++        "arm64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ]
++    },
++    "node_modules/@rollup/rollup-linux-arm64-musl": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-arm64-musl/-/rollup-linux-arm64-musl-4.62.2.tgz",
++      "integrity": "sha512-HVu2bp0zhvJ8xHEV9+UUs7S90VadmBSY3LcIMvozbPo4AuMGDWlz3ymHLHZPX4hR67TKTt8Qp5PJ5RBg/i+RMQ==",
++      "cpu": [
++        "arm64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ]
++    },
++    "node_modules/@rollup/rollup-linux-loong64-gnu": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-loong64-gnu/-/rollup-linux-loong64-gnu-4.62.2.tgz",
++      "integrity": "sha512-mQqqAV8QaoSgr9I2fKDLY2BAVvmKjWoGiu/cSYQonsLvtqwEn1E4QYfnCOcp5zoEqNhsDYin1s6jx/VJmrxlZg==",
++      "cpu": [
++        "loong64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ]
++    },
++    "node_modules/@rollup/rollup-linux-loong64-musl": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-loong64-musl/-/rollup-linux-loong64-musl-4.62.2.tgz",
++      "integrity": "sha512-IxKLoxCQ2IWi6bT2akyDUBGsOImDKB+sPp4EsTmwFQ/fMwpCKm8uLSSgP/Kx/QYUgKis6SEZ5/Nlhup0DIA0PQ==",
++      "cpu": [
++        "loong64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ]
++    },
++    "node_modules/@rollup/rollup-linux-ppc64-gnu": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-ppc64-gnu/-/rollup-linux-ppc64-gnu-4.62.2.tgz",
++      "integrity": "sha512-Mk5ha2RQSgyFfmYYLkBpPnUk8D8FriBxesO1u9O75X0mHgXL1UQcH5Itl2lurWL2tj0RxV9b9tJgipac0hRY9A==",
++      "cpu": [
++        "ppc64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ]
++    },
++    "node_modules/@rollup/rollup-linux-ppc64-musl": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-ppc64-musl/-/rollup-linux-ppc64-musl-4.62.2.tgz",
++      "integrity": "sha512-CjvEnqJL/0/TQ3TXX3OPIJ/kmBellrWd4heXUmHeJlTnmwjKpSJzoehLaL6Xk0ZnMHBu9dZuFADNOrtjF4v+2w==",
++      "cpu": [
++        "ppc64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ]
++    },
++    "node_modules/@rollup/rollup-linux-riscv64-gnu": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-riscv64-gnu/-/rollup-linux-riscv64-gnu-4.62.2.tgz",
++      "integrity": "sha512-1SiZbzwdkaDURsew/tSOrooKiYy7EQGT6m8ufavAi9NEyQb/6VuIxFXAL1fqa4iZe3g4NbNk4P7J32z2tw5Mgg==",
++      "cpu": [
++        "riscv64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ]
++    },
++    "node_modules/@rollup/rollup-linux-riscv64-musl": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-riscv64-musl/-/rollup-linux-riscv64-musl-4.62.2.tgz",
++      "integrity": "sha512-nQts12zJ3NQRoE6uYljOH89v7szzLDvG2JD/vsX+vGXU8w/At1GowTZ5/7qeFQ8m7L55rpR8Okugnuo5bgjy2Q==",
++      "cpu": [
++        "riscv64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ]
++    },
++    "node_modules/@rollup/rollup-linux-s390x-gnu": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-s390x-gnu/-/rollup-linux-s390x-gnu-4.62.2.tgz",
++      "integrity": "sha512-E9/ll019jhPIJgpzfZoIkBGhcz+kKNgVWYRY0zr9srBdPPFVpvOKW8VaJKUbeK+eZXyQF9ltME+Kk6affeaPgg==",
++      "cpu": [
++        "s390x"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ]
++    },
++    "node_modules/@rollup/rollup-linux-x64-gnu": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.62.2.tgz",
++      "integrity": "sha512-5BqxR/pshjey51iliyzTD5Xi3EN0aLmQ2lZ3lvefVV9c82BvrLo2/6OT55iifpWBufs6kdwWbuOKS841DrmK9A==",
++      "cpu": [
++        "x64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ]
++    },
++    "node_modules/@rollup/rollup-linux-x64-musl": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-x64-musl/-/rollup-linux-x64-musl-4.62.2.tgz",
++      "integrity": "sha512-uNN83XxQrRAh/w0/pmAfibcwyb6YWt4gP+dpnQKPVJshAloQ785ii8CT8ZCIxkGg9opVsvAlGhFitSm6D1Jjpg==",
++      "cpu": [
++        "x64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "linux"
++      ]
++    },
++    "node_modules/@rollup/rollup-openbsd-x64": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-openbsd-x64/-/rollup-openbsd-x64-4.62.2.tgz",
++      "integrity": "sha512-srjEIxSH3LRnJN6THczDHWQplqEMFiAJrTab0msUryh9kwNpkICf3Ea6q6MN/2cZwRFUNx5w+h6Hpi4QuHS6Zg==",
++      "cpu": [
++        "x64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "openbsd"
++      ]
++    },
++    "node_modules/@rollup/rollup-openharmony-arm64": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-openharmony-arm64/-/rollup-openharmony-arm64-4.62.2.tgz",
++      "integrity": "sha512-8hOJnxgbyObnCm5AlRA3A931xX19xq80RjVTKgJOvEKWqJruP/Uf12IbAOaDjjEXYRewwHLfmF0YRIdK3OwKWA==",
++      "cpu": [
++        "arm64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "openharmony"
++      ]
++    },
++    "node_modules/@rollup/rollup-win32-arm64-msvc": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-win32-arm64-msvc/-/rollup-win32-arm64-msvc-4.62.2.tgz",
++      "integrity": "sha512-mmF4AY1i0hG/bLWUctUq59gtmgaSIRa3cu/A3JFRp/sCNEme2bgDEiDS22P9FbnJB8NJNF4jPJiSP5RHQpUTDg==",
++      "cpu": [
++        "arm64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "win32"
++      ]
++    },
++    "node_modules/@rollup/rollup-win32-ia32-msvc": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-win32-ia32-msvc/-/rollup-win32-ia32-msvc-4.62.2.tgz",
++      "integrity": "sha512-DZgkknc6jhHrk46V25vbAM0zZkyP0nSDkJB8/dRkLTxv470dOmWDqGoEJl/9A0dFfS7yE3REOwNDxpHwSLSt0Q==",
++      "cpu": [
++        "ia32"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "win32"
++      ]
++    },
++    "node_modules/@rollup/rollup-win32-x64-gnu": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-win32-x64-gnu/-/rollup-win32-x64-gnu-4.62.2.tgz",
++      "integrity": "sha512-T6xr6ucWSFto+VGajA8YH26LdpHRuP4YLHEKAtCWvJDOlnmWcDZVCI2Jmjr+IFHDlt2zRaTAKE4tfjTaWLgJBg==",
++      "cpu": [
++        "x64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "win32"
++      ]
++    },
++    "node_modules/@rollup/rollup-win32-x64-msvc": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.62.2.tgz",
++      "integrity": "sha512-BfzEnDJOt9T8M989/lA37EcJgat01wLRnoi5dQf3QzOH7jzpqTAzdDbVfRljVr5r+jzKqpbHeyOfAaXxAd0PAA==",
++      "cpu": [
++        "x64"
++      ],
++      "dev": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "win32"
++      ]
++    },
++    "node_modules/@types/chai": {
++      "version": "5.2.3",
++      "resolved": "https://registry.npmjs.org/@types/chai/-/chai-5.2.3.tgz",
++      "integrity": "sha512-Mw558oeA9fFbv65/y4mHtXDs9bPnFMZAL/jxdPFUpOHHIXX91mcgEHbS5Lahr+pwZFR8A7GQleRWeI6cGFC2UA==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@types/deep-eql": "*",
++        "assertion-error": "^2.0.1"
++      }
++    },
++    "node_modules/@types/deep-eql": {
++      "version": "4.0.2",
++      "resolved": "https://registry.npmjs.org/@types/deep-eql/-/deep-eql-4.0.2.tgz",
++      "integrity": "sha512-c9h9dVVMigMPc4bwTvC5dxqtqJZwQPePsWjPlpSOnojbor6pGqdk541lfA7AqFQr5pB1BRdq0juY9db81BwyFw==",
++      "dev": true,
++      "license": "MIT"
++    },
++    "node_modules/@types/estree": {
++      "version": "1.0.9",
++      "resolved": "https://registry.npmjs.org/@types/estree/-/estree-1.0.9.tgz",
++      "integrity": "sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==",
++      "dev": true,
++      "license": "MIT"
++    },
++    "node_modules/@types/node": {
++      "version": "24.13.3",
++      "resolved": "https://registry.npmjs.org/@types/node/-/node-24.13.3.tgz",
++      "integrity": "sha512-Dh8vAsV36ig5wa9OX4pXvMc9D3Veibfw2wix0CUwYODLD8nkj9UsLjASr49nPg+2eKzxhBV+v7L8pXvT4e639Q==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "undici-types": "~7.18.0"
++      }
++    },
++    "node_modules/@vitest/expect": {
++      "version": "3.2.7",
++      "resolved": "https://registry.npmjs.org/@vitest/expect/-/expect-3.2.7.tgz",
++      "integrity": "sha512-E8eBXaKibuvH2pSZErOjdVb5vF4PbKYcrnluBTYxEk1l/VhhwZg1kZQsdtjq+CsF5CFydf2Rdkz7jDHKSisi3w==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@types/chai": "^5.2.2",
++        "@vitest/spy": "3.2.7",
++        "@vitest/utils": "3.2.7",
++        "chai": "^5.2.0",
++        "tinyrainbow": "^2.0.0"
++      },
++      "funding": {
++        "url": "https://opencollective.com/vitest"
++      }
++    },
++    "node_modules/@vitest/mocker": {
++      "version": "3.2.7",
++      "resolved": "https://registry.npmjs.org/@vitest/mocker/-/mocker-3.2.7.tgz",
++      "integrity": "sha512-Trr0hYO9CM3Wj6ksWHRhK9IZpIY6wTMO5u/MqXurMxT57sWBaOPEtP3Oq60ihZuh5JsiagKfz95OcxdEP6dBrA==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@vitest/spy": "3.2.7",
++        "estree-walker": "^3.0.3",
++        "magic-string": "^0.30.17"
++      },
++      "funding": {
++        "url": "https://opencollective.com/vitest"
++      },
++      "peerDependencies": {
++        "msw": "^2.4.9",
++        "vite": "^5.0.0 || ^6.0.0 || ^7.0.0-0"
++      },
++      "peerDependenciesMeta": {
++        "msw": {
++          "optional": true
++        },
++        "vite": {
++          "optional": true
++        }
++      }
++    },
++    "node_modules/@vitest/pretty-format": {
++      "version": "3.2.7",
++      "resolved": "https://registry.npmjs.org/@vitest/pretty-format/-/pretty-format-3.2.7.tgz",
++      "integrity": "sha512-KUHlwqVu0sRlhCdyPdQ/wBoTfRahjUky1MubOmYw9fWfIZy1gNoHpuaaQBPAaMaVYdQYHJLurzj8ECCj5OwTqA==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "tinyrainbow": "^2.0.0"
++      },
++      "funding": {
++        "url": "https://opencollective.com/vitest"
++      }
++    },
++    "node_modules/@vitest/runner": {
++      "version": "3.2.7",
++      "resolved": "https://registry.npmjs.org/@vitest/runner/-/runner-3.2.7.tgz",
++      "integrity": "sha512-sB9y4ovltoQP+WaUPwmSxO9WIg9Ig694Di5PalVPsYHklAdE027mehpWF2SQSVq+k6sFgaivbTjTJwZLSHbedA==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@vitest/utils": "3.2.7",
++        "pathe": "^2.0.3",
++        "strip-literal": "^3.0.0"
++      },
++      "funding": {
++        "url": "https://opencollective.com/vitest"
++      }
++    },
++    "node_modules/@vitest/snapshot": {
++      "version": "3.2.7",
++      "resolved": "https://registry.npmjs.org/@vitest/snapshot/-/snapshot-3.2.7.tgz",
++      "integrity": "sha512-7C+MwShwtBSI5Buwoyg3s/iY1eHL9PKAf+O1wVh/TdnjXUtkoL/9YQtre90i4MtNXM6edP1wJ2zOBpfCyhIS7g==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@vitest/pretty-format": "3.2.7",
++        "magic-string": "^0.30.17",
++        "pathe": "^2.0.3"
++      },
++      "funding": {
++        "url": "https://opencollective.com/vitest"
++      }
++    },
++    "node_modules/@vitest/spy": {
++      "version": "3.2.7",
++      "resolved": "https://registry.npmjs.org/@vitest/spy/-/spy-3.2.7.tgz",
++      "integrity": "sha512-Q2eQGI6d2L/hBtZ0qNuKcAGid68XK6cv1xsoaIma6PaJhHPoqcEJhYpXZ/5myCMqkNgtP6UKuBhbc0nHKnrkuQ==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "tinyspy": "^4.0.3"
++      },
++      "funding": {
++        "url": "https://opencollective.com/vitest"
++      }
++    },
++    "node_modules/@vitest/utils": {
++      "version": "3.2.7",
++      "resolved": "https://registry.npmjs.org/@vitest/utils/-/utils-3.2.7.tgz",
++      "integrity": "sha512-x6BDOd7dyo3PFLY3I9/HJ25X/6OurhGXk2/B9gOZNPF7XDVjeBK4k01lQE5uvDpbuheErh91qYuE1E2OEjK3Rw==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@vitest/pretty-format": "3.2.7",
++        "loupe": "^3.1.4",
++        "tinyrainbow": "^2.0.0"
++      },
++      "funding": {
++        "url": "https://opencollective.com/vitest"
++      }
++    },
++    "node_modules/assertion-error": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/assertion-error/-/assertion-error-2.0.1.tgz",
++      "integrity": "sha512-Izi8RQcffqCeNVgFigKli1ssklIbpHnCYc6AknXGYoB6grJqyeby7jv12JUQgmTAnIDnbck1uxksT4dzN3PWBA==",
++      "dev": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">=12"
++      }
++    },
++    "node_modules/cac": {
++      "version": "6.7.14",
++      "resolved": "https://registry.npmjs.org/cac/-/cac-6.7.14.tgz",
++      "integrity": "sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ==",
++      "dev": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">=8"
++      }
++    },
++    "node_modules/chai": {
++      "version": "5.3.3",
++      "resolved": "https://registry.npmjs.org/chai/-/chai-5.3.3.tgz",
++      "integrity": "sha512-4zNhdJD/iOjSH0A05ea+Ke6MU5mmpQcbQsSOkgdaUMJ9zTlDTD/GYlwohmIE2u0gaxHYiVHEn1Fw9mZ/ktJWgw==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "assertion-error": "^2.0.1",
++        "check-error": "^2.1.1",
++        "deep-eql": "^5.0.1",
++        "loupe": "^3.1.0",
++        "pathval": "^2.0.0"
++      },
++      "engines": {
++        "node": ">=18"
++      }
++    },
++    "node_modules/check-error": {
++      "version": "2.1.3",
++      "resolved": "https://registry.npmjs.org/check-error/-/check-error-2.1.3.tgz",
++      "integrity": "sha512-PAJdDJusoxnwm1VwW07VWwUN1sl7smmC3OKggvndJFadxxDRyFJBX/ggnu/KE4kQAB7a3Dp8f/YXC1FlUprWmA==",
++      "dev": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">= 16"
++      }
++    },
++    "node_modules/debug": {
++      "version": "4.4.3",
++      "resolved": "https://registry.npmjs.org/debug/-/debug-4.4.3.tgz",
++      "integrity": "sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "ms": "^2.1.3"
++      },
++      "engines": {
++        "node": ">=6.0"
++      },
++      "peerDependenciesMeta": {
++        "supports-color": {
++          "optional": true
++        }
++      }
++    },
++    "node_modules/deep-eql": {
++      "version": "5.0.2",
++      "resolved": "https://registry.npmjs.org/deep-eql/-/deep-eql-5.0.2.tgz",
++      "integrity": "sha512-h5k/5U50IJJFpzfL6nO9jaaumfjO/f2NjK/oYB2Djzm4p9L+3T9qWpZqZ2hAbLPuuYq9wrU08WQyBTL5GbPk5Q==",
++      "dev": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">=6"
++      }
++    },
++    "node_modules/es-module-lexer": {
++      "version": "1.7.0",
++      "resolved": "https://registry.npmjs.org/es-module-lexer/-/es-module-lexer-1.7.0.tgz",
++      "integrity": "sha512-jEQoCwk8hyb2AZziIOLhDqpm5+2ww5uIE6lkO/6jcOCusfk6LhMHpXXfBLXTZ7Ydyt0j4VoUQv6uGNYbdW+kBA==",
++      "dev": true,
++      "license": "MIT"
++    },
++    "node_modules/esbuild": {
++      "version": "0.28.1",
++      "resolved": "https://registry.npmjs.org/esbuild/-/esbuild-0.28.1.tgz",
++      "integrity": "sha512-HrJrvZv5ayxBzPfwphOoNzkzOIIlifzk0KJrGK2c8R4+LKpMtpYLQeUdjnwjWv/LZlkH2laZk+4w78pi99D4Vw==",
++      "dev": true,
++      "hasInstallScript": true,
++      "license": "MIT",
++      "bin": {
++        "esbuild": "bin/esbuild"
++      },
++      "engines": {
++        "node": ">=18"
++      },
++      "optionalDependencies": {
++        "@esbuild/aix-ppc64": "0.28.1",
++        "@esbuild/android-arm": "0.28.1",
++        "@esbuild/android-arm64": "0.28.1",
++        "@esbuild/android-x64": "0.28.1",
++        "@esbuild/darwin-arm64": "0.28.1",
++        "@esbuild/darwin-x64": "0.28.1",
++        "@esbuild/freebsd-arm64": "0.28.1",
++        "@esbuild/freebsd-x64": "0.28.1",
++        "@esbuild/linux-arm": "0.28.1",
++        "@esbuild/linux-arm64": "0.28.1",
++        "@esbuild/linux-ia32": "0.28.1",
++        "@esbuild/linux-loong64": "0.28.1",
++        "@esbuild/linux-mips64el": "0.28.1",
++        "@esbuild/linux-ppc64": "0.28.1",
++        "@esbuild/linux-riscv64": "0.28.1",
++        "@esbuild/linux-s390x": "0.28.1",
++        "@esbuild/linux-x64": "0.28.1",
++        "@esbuild/netbsd-arm64": "0.28.1",
++        "@esbuild/netbsd-x64": "0.28.1",
++        "@esbuild/openbsd-arm64": "0.28.1",
++        "@esbuild/openbsd-x64": "0.28.1",
++        "@esbuild/openharmony-arm64": "0.28.1",
++        "@esbuild/sunos-x64": "0.28.1",
++        "@esbuild/win32-arm64": "0.28.1",
++        "@esbuild/win32-ia32": "0.28.1",
++        "@esbuild/win32-x64": "0.28.1"
++      }
++    },
++    "node_modules/estree-walker": {
++      "version": "3.0.3",
++      "resolved": "https://registry.npmjs.org/estree-walker/-/estree-walker-3.0.3.tgz",
++      "integrity": "sha512-7RUKfXgSMMkzt6ZuXmqapOurLGPPfgj6l9uRZ7lRGolvk0y2yocc35LdcxKC5PQZdn2DMqioAQ2NoWcrTKmm6g==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@types/estree": "^1.0.0"
++      }
++    },
++    "node_modules/expect-type": {
++      "version": "1.4.0",
++      "resolved": "https://registry.npmjs.org/expect-type/-/expect-type-1.4.0.tgz",
++      "integrity": "sha512-KfYbmpRm0VbLjEvVa9yGwCi9GI34xvi7A/HXYWQO65CSD2u3MczUJSuwXKFIxlGsgBQizV9q5J9NHj4VG0n+pA==",
++      "dev": true,
++      "license": "Apache-2.0",
++      "engines": {
++        "node": ">=12.0.0"
++      }
++    },
++    "node_modules/fdir": {
++      "version": "6.5.0",
++      "resolved": "https://registry.npmjs.org/fdir/-/fdir-6.5.0.tgz",
++      "integrity": "sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==",
++      "dev": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">=12.0.0"
++      },
++      "peerDependencies": {
++        "picomatch": "^3 || ^4"
++      },
++      "peerDependenciesMeta": {
++        "picomatch": {
++          "optional": true
++        }
++      }
++    },
++    "node_modules/fsevents": {
++      "version": "2.3.3",
++      "resolved": "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz",
++      "integrity": "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==",
++      "dev": true,
++      "hasInstallScript": true,
++      "license": "MIT",
++      "optional": true,
++      "os": [
++        "darwin"
++      ],
++      "engines": {
++        "node": "^8.16.0 || ^10.6.0 || >=11.0.0"
++      }
++    },
++    "node_modules/js-tokens": {
++      "version": "9.0.1",
++      "resolved": "https://registry.npmjs.org/js-tokens/-/js-tokens-9.0.1.tgz",
++      "integrity": "sha512-mxa9E9ITFOt0ban3j6L5MpjwegGz6lBQmM1IJkWeBZGcMxto50+eWdjC/52xDbS2vy0k7vIMK0Fe2wfL9OQSpQ==",
++      "dev": true,
++      "license": "MIT"
++    },
++    "node_modules/loupe": {
++      "version": "3.2.1",
++      "resolved": "https://registry.npmjs.org/loupe/-/loupe-3.2.1.tgz",
++      "integrity": "sha512-CdzqowRJCeLU72bHvWqwRBBlLcMEtIvGrlvef74kMnV2AolS9Y8xUv1I0U/MNAWMhBlKIoyuEgoJ0t/bbwHbLQ==",
++      "dev": true,
++      "license": "MIT"
++    },
++    "node_modules/magic-string": {
++      "version": "0.30.21",
++      "resolved": "https://registry.npmjs.org/magic-string/-/magic-string-0.30.21.tgz",
++      "integrity": "sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@jridgewell/sourcemap-codec": "^1.5.5"
++      }
++    },
++    "node_modules/ms": {
++      "version": "2.1.3",
++      "resolved": "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz",
++      "integrity": "sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==",
++      "dev": true,
++      "license": "MIT"
++    },
++    "node_modules/nanoid": {
++      "version": "3.3.16",
++      "resolved": "https://registry.npmjs.org/nanoid/-/nanoid-3.3.16.tgz",
++      "integrity": "sha512-bzlKTyNJ7+LdGIIwy8ijFpIqEQIvafahV7eYykJ8Cvh42EdJeODoJ6gUJXpQJvej1BddH8OqTXZNE/KfbWAu8Q==",
++      "dev": true,
++      "funding": [
++        {
++          "type": "github",
++          "url": "https://github.com/sponsors/ai"
++        }
++      ],
++      "license": "MIT",
++      "bin": {
++        "nanoid": "bin/nanoid.cjs"
++      },
++      "engines": {
++        "node": "^10 || ^12 || ^13.7 || ^14 || >=15.0.1"
++      }
++    },
++    "node_modules/pathe": {
++      "version": "2.0.3",
++      "resolved": "https://registry.npmjs.org/pathe/-/pathe-2.0.3.tgz",
++      "integrity": "sha512-WUjGcAqP1gQacoQe+OBJsFA7Ld4DyXuUIjZ5cc75cLHvJ7dtNsTugphxIADwspS+AraAUePCKrSVtPLFj/F88w==",
++      "dev": true,
++      "license": "MIT"
++    },
++    "node_modules/pathval": {
++      "version": "2.0.1",
++      "resolved": "https://registry.npmjs.org/pathval/-/pathval-2.0.1.tgz",
++      "integrity": "sha512-//nshmD55c46FuFw26xV/xFAaB5HF9Xdap7HJBBnrKdAd6/GxDBaNA1870O79+9ueg61cZLSVc+OaFlfmObYVQ==",
++      "dev": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">= 14.16"
++      }
++    },
++    "node_modules/picocolors": {
++      "version": "1.1.1",
++      "resolved": "https://registry.npmjs.org/picocolors/-/picocolors-1.1.1.tgz",
++      "integrity": "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==",
++      "dev": true,
++      "license": "ISC"
++    },
++    "node_modules/picomatch": {
++      "version": "4.0.5",
++      "resolved": "https://registry.npmjs.org/picomatch/-/picomatch-4.0.5.tgz",
++      "integrity": "sha512-RvwwcruNjI1ncT5xRakeyS9Lf8lcItv34KD+aif+VH9kduAyfYBipGh12274xtenIPZ119/R9BdTBa8gAwSh0A==",
++      "dev": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">=12"
++      },
++      "funding": {
++        "url": "https://github.com/sponsors/jonschlinkert"
++      }
++    },
++    "node_modules/postcss": {
++      "version": "8.5.21",
++      "resolved": "https://registry.npmjs.org/postcss/-/postcss-8.5.21.tgz",
++      "integrity": "sha512-v4sDNP3fdNiWMfabO7OwOQdOX8TiQSztKyT1Wj0w+j7LDallJThJRBBBmzVGyYj0crMh7jlV4zepPkiNu9UwDQ==",
++      "dev": true,
++      "funding": [
++        {
++          "type": "opencollective",
++          "url": "https://opencollective.com/postcss/"
++        },
++        {
++          "type": "tidelift",
++          "url": "https://tidelift.com/funding/github/npm/postcss"
++        },
++        {
++          "type": "github",
++          "url": "https://github.com/sponsors/ai"
++        }
++      ],
++      "license": "MIT",
++      "dependencies": {
++        "nanoid": "^3.3.16",
++        "picocolors": "^1.1.1",
++        "source-map-js": "^1.2.1"
++      },
++      "engines": {
++        "node": "^10 || ^12 || >=14"
++      }
++    },
++    "node_modules/rollup": {
++      "version": "4.62.2",
++      "resolved": "https://registry.npmjs.org/rollup/-/rollup-4.62.2.tgz",
++      "integrity": "sha512-RFnrW4lhXA3s3eqHDZvN654g8OTjzRfqpIRJYczCGB6HzphckVAi/Qh4tbPUbRuDi7s1Llv8g/NspLkttY3gTA==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@types/estree": "1.0.9"
++      },
++      "bin": {
++        "rollup": "dist/bin/rollup"
++      },
++      "engines": {
++        "node": ">=18.0.0",
++        "npm": ">=8.0.0"
++      },
++      "optionalDependencies": {
++        "@rollup/rollup-android-arm-eabi": "4.62.2",
++        "@rollup/rollup-android-arm64": "4.62.2",
++        "@rollup/rollup-darwin-arm64": "4.62.2",
++        "@rollup/rollup-darwin-x64": "4.62.2",
++        "@rollup/rollup-freebsd-arm64": "4.62.2",
++        "@rollup/rollup-freebsd-x64": "4.62.2",
++        "@rollup/rollup-linux-arm-gnueabihf": "4.62.2",
++        "@rollup/rollup-linux-arm-musleabihf": "4.62.2",
++        "@rollup/rollup-linux-arm64-gnu": "4.62.2",
++        "@rollup/rollup-linux-arm64-musl": "4.62.2",
++        "@rollup/rollup-linux-loong64-gnu": "4.62.2",
++        "@rollup/rollup-linux-loong64-musl": "4.62.2",
++        "@rollup/rollup-linux-ppc64-gnu": "4.62.2",
++        "@rollup/rollup-linux-ppc64-musl": "4.62.2",
++        "@rollup/rollup-linux-riscv64-gnu": "4.62.2",
++        "@rollup/rollup-linux-riscv64-musl": "4.62.2",
++        "@rollup/rollup-linux-s390x-gnu": "4.62.2",
++        "@rollup/rollup-linux-x64-gnu": "4.62.2",
++        "@rollup/rollup-linux-x64-musl": "4.62.2",
++        "@rollup/rollup-openbsd-x64": "4.62.2",
++        "@rollup/rollup-openharmony-arm64": "4.62.2",
++        "@rollup/rollup-win32-arm64-msvc": "4.62.2",
++        "@rollup/rollup-win32-ia32-msvc": "4.62.2",
++        "@rollup/rollup-win32-x64-gnu": "4.62.2",
++        "@rollup/rollup-win32-x64-msvc": "4.62.2",
++        "fsevents": "~2.3.2"
++      }
++    },
++    "node_modules/siginfo": {
++      "version": "2.0.0",
++      "resolved": "https://registry.npmjs.org/siginfo/-/siginfo-2.0.0.tgz",
++      "integrity": "sha512-ybx0WO1/8bSBLEWXZvEd7gMW3Sn3JFlW3TvX1nREbDLRNQNaeNN8WK0meBwPdAaOI7TtRRRJn/Es1zhrrCHu7g==",
++      "dev": true,
++      "license": "ISC"
++    },
++    "node_modules/source-map-js": {
++      "version": "1.2.1",
++      "resolved": "https://registry.npmjs.org/source-map-js/-/source-map-js-1.2.1.tgz",
++      "integrity": "sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==",
++      "dev": true,
++      "license": "BSD-3-Clause",
++      "engines": {
++        "node": ">=0.10.0"
++      }
++    },
++    "node_modules/stackback": {
++      "version": "0.0.2",
++      "resolved": "https://registry.npmjs.org/stackback/-/stackback-0.0.2.tgz",
++      "integrity": "sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==",
++      "dev": true,
++      "license": "MIT"
++    },
++    "node_modules/std-env": {
++      "version": "3.10.0",
++      "resolved": "https://registry.npmjs.org/std-env/-/std-env-3.10.0.tgz",
++      "integrity": "sha512-5GS12FdOZNliM5mAOxFRg7Ir0pWz8MdpYm6AY6VPkGpbA7ZzmbzNcBJQ0GPvvyWgcY7QAhCgf9Uy89I03faLkg==",
++      "dev": true,
++      "license": "MIT"
++    },
++    "node_modules/strip-literal": {
++      "version": "3.1.0",
++      "resolved": "https://registry.npmjs.org/strip-literal/-/strip-literal-3.1.0.tgz",
++      "integrity": "sha512-8r3mkIM/2+PpjHoOtiAW8Rg3jJLHaV7xPwG+YRGrv6FP0wwk/toTpATxWYOW0BKdWwl82VT2tFYi5DlROa0Mxg==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "js-tokens": "^9.0.1"
++      },
++      "funding": {
++        "url": "https://github.com/sponsors/antfu"
++      }
++    },
++    "node_modules/tinybench": {
++      "version": "2.9.0",
++      "resolved": "https://registry.npmjs.org/tinybench/-/tinybench-2.9.0.tgz",
++      "integrity": "sha512-0+DUvqWMValLmha6lr4kD8iAMK1HzV0/aKnCtWb9v9641TnP/MFb7Pc2bxoxQjTXAErryXVgUOfv2YqNllqGeg==",
++      "dev": true,
++      "license": "MIT"
++    },
++    "node_modules/tinyexec": {
++      "version": "0.3.2",
++      "resolved": "https://registry.npmjs.org/tinyexec/-/tinyexec-0.3.2.tgz",
++      "integrity": "sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==",
++      "dev": true,
++      "license": "MIT"
++    },
++    "node_modules/tinyglobby": {
++      "version": "0.2.17",
++      "resolved": "https://registry.npmjs.org/tinyglobby/-/tinyglobby-0.2.17.tgz",
++      "integrity": "sha512-wXR/dYpcqKmfWpEdZjiKJOwCNFndD0DMnrW/cYjVGttEkBfVgcLFHoNrlj47mjOVic9yyNu65alsgF4NQyTa2g==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "fdir": "^6.5.0",
++        "picomatch": "^4.0.4"
++      },
++      "engines": {
++        "node": ">=12.0.0"
++      },
++      "funding": {
++        "url": "https://github.com/sponsors/SuperchupuDev"
++      }
++    },
++    "node_modules/tinypool": {
++      "version": "1.1.1",
++      "resolved": "https://registry.npmjs.org/tinypool/-/tinypool-1.1.1.tgz",
++      "integrity": "sha512-Zba82s87IFq9A9XmjiX5uZA/ARWDrB03OHlq+Vw1fSdt0I+4/Kutwy8BP4Y/y/aORMo61FQ0vIb5j44vSo5Pkg==",
++      "dev": true,
++      "license": "MIT",
++      "engines": {
++        "node": "^18.0.0 || >=20.0.0"
++      }
++    },
++    "node_modules/tinyrainbow": {
++      "version": "2.0.0",
++      "resolved": "https://registry.npmjs.org/tinyrainbow/-/tinyrainbow-2.0.0.tgz",
++      "integrity": "sha512-op4nsTR47R6p0vMUUoYl/a+ljLFVtlfaXkLQmqfLR1qHma1h/ysYk4hEXZ880bf2CYgTskvTa/e196Vd5dDQXw==",
++      "dev": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">=14.0.0"
++      }
++    },
++    "node_modules/tinyspy": {
++      "version": "4.0.4",
++      "resolved": "https://registry.npmjs.org/tinyspy/-/tinyspy-4.0.4.tgz",
++      "integrity": "sha512-azl+t0z7pw/z958Gy9svOTuzqIk6xq+NSheJzn5MMWtWTFywIacg2wUlzKFGtt3cthx0r2SxMK0yzJOR0IES7Q==",
++      "dev": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">=14.0.0"
++      }
++    },
++    "node_modules/tsx": {
++      "version": "4.23.1",
++      "resolved": "https://registry.npmjs.org/tsx/-/tsx-4.23.1.tgz",
++      "integrity": "sha512-GQHnkIfxyx1wYCOS/wonik5MVRZU9hi1TEZmzGZSCJB1y9YgoZ8H6itNE/u4suE+yLmOzuE4E5S4TZ/ZX2wcWQ==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "esbuild": "~0.28.0"
++      },
++      "bin": {
++        "tsx": "dist/cli.mjs"
++      },
++      "engines": {
++        "node": ">=18.0.0"
++      },
++      "optionalDependencies": {
++        "fsevents": "~2.3.3"
++      }
++    },
++    "node_modules/typescript": {
++      "version": "5.9.3",
++      "resolved": "https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz",
++      "integrity": "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==",
++      "dev": true,
++      "license": "Apache-2.0",
++      "bin": {
++        "tsc": "bin/tsc",
++        "tsserver": "bin/tsserver"
++      },
++      "engines": {
++        "node": ">=14.17"
++      }
++    },
++    "node_modules/undici-types": {
++      "version": "7.18.2",
++      "resolved": "https://registry.npmjs.org/undici-types/-/undici-types-7.18.2.tgz",
++      "integrity": "sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==",
++      "dev": true,
++      "license": "MIT"
++    },
++    "node_modules/vite": {
++      "version": "7.3.6",
++      "resolved": "https://registry.npmjs.org/vite/-/vite-7.3.6.tgz",
++      "integrity": "sha512-4XP60spRGjSZFf1qYH+dJIkK2znL3zQfl9KkOV9MkkRR/3Dls0dxaBsQPTloEc5BLXWPL9vsOxopxyKoMmDueg==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "esbuild": "^0.27.0 || ^0.28.0",
++        "fdir": "^6.5.0",
++        "picomatch": "^4.0.3",
++        "postcss": "^8.5.6",
++        "rollup": "^4.43.0",
++        "tinyglobby": "^0.2.15"
++      },
++      "bin": {
++        "vite": "bin/vite.js"
++      },
++      "engines": {
++        "node": "^20.19.0 || >=22.12.0"
++      },
++      "funding": {
++        "url": "https://github.com/vitejs/vite?sponsor=1"
++      },
++      "optionalDependencies": {
++        "fsevents": "~2.3.3"
++      },
++      "peerDependencies": {
++        "@types/node": "^20.19.0 || >=22.12.0",
++        "jiti": ">=1.21.0",
++        "less": "^4.0.0",
++        "lightningcss": "^1.21.0",
++        "sass": "^1.70.0",
++        "sass-embedded": "^1.70.0",
++        "stylus": ">=0.54.8",
++        "sugarss": "^5.0.0",
++        "terser": "^5.16.0",
++        "tsx": "^4.8.1",
++        "yaml": "^2.4.2"
++      },
++      "peerDependenciesMeta": {
++        "@types/node": {
++          "optional": true
++        },
++        "jiti": {
++          "optional": true
++        },
++        "less": {
++          "optional": true
++        },
++        "lightningcss": {
++          "optional": true
++        },
++        "sass": {
++          "optional": true
++        },
++        "sass-embedded": {
++          "optional": true
++        },
++        "stylus": {
++          "optional": true
++        },
++        "sugarss": {
++          "optional": true
++        },
++        "terser": {
++          "optional": true
++        },
++        "tsx": {
++          "optional": true
++        },
++        "yaml": {
++          "optional": true
++        }
++      }
++    },
++    "node_modules/vite-node": {
++      "version": "3.2.4",
++      "resolved": "https://registry.npmjs.org/vite-node/-/vite-node-3.2.4.tgz",
++      "integrity": "sha512-EbKSKh+bh1E1IFxeO0pg1n4dvoOTt0UDiXMd/qn++r98+jPO1xtJilvXldeuQ8giIB5IkpjCgMleHMNEsGH6pg==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "cac": "^6.7.14",
++        "debug": "^4.4.1",
++        "es-module-lexer": "^1.7.0",
++        "pathe": "^2.0.3",
++        "vite": "^5.0.0 || ^6.0.0 || ^7.0.0-0"
++      },
++      "bin": {
++        "vite-node": "vite-node.mjs"
++      },
++      "engines": {
++        "node": "^18.0.0 || ^20.0.0 || >=22.0.0"
++      },
++      "funding": {
++        "url": "https://opencollective.com/vitest"
++      }
++    },
++    "node_modules/vitest": {
++      "version": "3.2.7",
++      "resolved": "https://registry.npmjs.org/vitest/-/vitest-3.2.7.tgz",
++      "integrity": "sha512-KrxIJ62Fd89gfysR4WotlgZABiz2dqFPgqGzX7s+CwsqLFomRH7777ZcrOD6+WVAh7khPQP41A+BKbpcJFrdEg==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@types/chai": "^5.2.2",
++        "@vitest/expect": "3.2.7",
++        "@vitest/mocker": "3.2.7",
++        "@vitest/pretty-format": "^3.2.7",
++        "@vitest/runner": "3.2.7",
++        "@vitest/snapshot": "3.2.7",
++        "@vitest/spy": "3.2.7",
++        "@vitest/utils": "3.2.7",
++        "chai": "^5.2.0",
++        "debug": "^4.4.1",
++        "expect-type": "^1.2.1",
++        "magic-string": "^0.30.17",
++        "pathe": "^2.0.3",
++        "picomatch": "^4.0.2",
++        "std-env": "^3.9.0",
++        "tinybench": "^2.9.0",
++        "tinyexec": "^0.3.2",
++        "tinyglobby": "^0.2.14",
++        "tinypool": "^1.1.1",
++        "tinyrainbow": "^2.0.0",
++        "vite": "^5.0.0 || ^6.0.0 || ^7.0.0-0",
++        "vite-node": "3.2.4",
++        "why-is-node-running": "^2.3.0"
++      },
++      "bin": {
++        "vitest": "vitest.mjs"
++      },
++      "engines": {
++        "node": "^18.0.0 || ^20.0.0 || >=22.0.0"
++      },
++      "funding": {
++        "url": "https://opencollective.com/vitest"
++      },
++      "peerDependencies": {
++        "@edge-runtime/vm": "*",
++        "@types/debug": "^4.1.12",
++        "@types/node": "^18.0.0 || ^20.0.0 || >=22.0.0",
++        "@vitest/browser": "3.2.7",
++        "@vitest/ui": "3.2.7",
++        "happy-dom": "*",
++        "jsdom": "*"
++      },
++      "peerDependenciesMeta": {
++        "@edge-runtime/vm": {
++          "optional": true
++        },
++        "@types/debug": {
++          "optional": true
++        },
++        "@types/node": {
++          "optional": true
++        },
++        "@vitest/browser": {
++          "optional": true
++        },
++        "@vitest/ui": {
++          "optional": true
++        },
++        "happy-dom": {
++          "optional": true
++        },
++        "jsdom": {
++          "optional": true
++        }
++      }
++    },
++    "node_modules/why-is-node-running": {
++      "version": "2.3.0",
++      "resolved": "https://registry.npmjs.org/why-is-node-running/-/why-is-node-running-2.3.0.tgz",
++      "integrity": "sha512-hUrmaWBdVDcxvYqnyh09zunKzROWjbZTiNy8dBEjkS7ehEDQibXJ7XvlmtbwuTclUiIyN+CyXQD4Vmko8fNm8w==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "siginfo": "^2.0.0",
++        "stackback": "0.0.2"
++      },
++      "bin": {
++        "why-is-node-running": "cli.js"
++      },
++      "engines": {
++        "node": ">=8"
++      }
++    }
++  }
++}
+diff --git a/edts-vin-resolver/package.json b/edts-vin-resolver/package.json
+new file mode 100644
+index 0000000..633951e
+--- /dev/null
++++ b/edts-vin-resolver/package.json
+@@ -0,0 +1,24 @@
++{
++  "name": "edts-vin-resolver",
++  "private": true,
++  "version": "0.1.0",
++  "type": "module",
++  "description": "EDTS NHTSA vPIC VIN configuration resolver (DT-D067)",
++  "scripts": {
++    "vin": "tsx scripts/resolve-vin.ts",
++    "typecheck": "tsc --noEmit",
++    "test": "vitest run",
++    "test:watch": "vitest",
++    "vin:test-live": "RUN_VPIC_INTEGRATION=true vitest run tests/vin/vpic.integration.test.ts",
++    "build": "tsc -p tsconfig.build.json"
++  },
++  "engines": {
++    "node": ">=20"
++  },
++  "devDependencies": {
++    "@types/node": "^24.13.2",
++    "tsx": "^4.20.5",
++    "typescript": "~5.9.3",
++    "vitest": "^3.2.4"
++  }
++}
+diff --git a/edts-vin-resolver/reports/vin/.gitkeep b/edts-vin-resolver/reports/vin/.gitkeep
+new file mode 100644
+index 0000000..e69de29
+diff --git a/edts-vin-resolver/reports/vin/1HTKHPVK8KH805188.md b/edts-vin-resolver/reports/vin/1HTKHPVK8KH805188.md
+new file mode 100644
+index 0000000..6cf1e4b
+--- /dev/null
++++ b/edts-vin-resolver/reports/vin/1HTKHPVK8KH805188.md
+@@ -0,0 +1,95 @@
++# EDTS VIN Resolution Report
++
++**VIN:** `1HTKHPVK8KH805188`
++**Decision:** DT-D067
++**Outcome:** NO_MATCH
++**Lifecycle:** REJECTED
++
++## Honesty
++
++VIN decoding does **not** prove physical geometry, wheelbase, cab-to-axle, frame holes, torque, modifications, or current component condition.
++NHTSA vPIC data is manufacturer-reported. Missing fields are UNKNOWN — not invented.
++This report must **not** be treated as `CONFIGURATION_CONFIRMED` or engineering-Verified from VIN alone.
++
++## Decoded identity
++
++| Field | Value |
++|---|---|
++| Manufacturer | INTERNATIONAL MOTORS, LLC |
++| Make | GM |
++| Model year | 2019 |
++| Model | GM515 |
++| Series | GM - Chevrolet Silverado Medium Duty |
++| Body class | Incomplete - Chassis Cab (Single Cab) |
++| Cab type | MDHD: Conventional |
++| Drive type | 4x2 |
++| GVWR | Class 5: 16,001 - 19,500 lb (7,258 - 8,845 kg) |
++| Engine | GM / 6.6 L |
++| Plant | SPRINGFIELD, OHIO, UNITED STATES (USA) |
++| ErrorCode | 0 |
++| ErrorText | 0 - VIN decoded clean. Check Digit (9th position) is correct |
++
++## Decoder notes
++
++0 - VIN decoded clean. Check Digit (9th position) is correct
++
++## Configuration comparisons
++
++### CFG-2019-F450-REG-CAB-4X2-60CA-DRW
++
++Result: **REJECTED_REFERENCE_MATCH** · score=-110
++
++| Field | Expected | Observed | Status | Mandatory |
++|---|---|---|---|---|
++| make_or_manufacturer | FORD|Ford | GM | MISMATCH | true |
++| modelYear | 2019 | 2019 | MATCH | true |
++| model | F-450|F450|F-450 Super Duty|Super Duty | GM515 | MISMATCH | true |
++| bodyClass | Chassis Cab|Incomplete - Chassis Cab | Incomplete - Chassis Cab (Single Cab) | MATCH | true |
++| cabType | Regular|Single Cab|Conventional | MDHD: Conventional | MATCH | true |
++| driveType | 4x2|4X2|RWD|Rear Wheel | 4x2 | MATCH | true |
++| wheelbase_in | 145.3 | UNKNOWN | UNKNOWN | false |
++| cab_to_axle_in | 60 | UNKNOWN | UNKNOWN | false |
++| rear_wheels | DRW | UNKNOWN | UNKNOWN | false |
++
++## Conflicts
++
++- CFG-2019-F450-REG-CAB-4X2-60CA-DRW.make_or_manufacturer: expected=FORD|Ford observed=GM
++- CFG-2019-F450-REG-CAB-4X2-60CA-DRW.model: expected=F-450|F450|F-450 Super Duty|Super Duty observed=GM515
++
++## Unknowns
++
++- CFG-2019-F450-REG-CAB-4X2-60CA-DRW.cab_to_axle_in
++- CFG-2019-F450-REG-CAB-4X2-60CA-DRW.rear_wheels
++- CFG-2019-F450-REG-CAB-4X2-60CA-DRW.wheelbase_in
++- identity.engineModel
++- identity.numberOfAxles
++- identity.trim
++- physical.cab_to_axle_in
++- physical.frame_geometry
++- physical.modification_state
++- physical.wheelbase_in
++
++## Confidence explanation
++
++- VIN decoding uses manufacturer-reported NHTSA vPIC data only.
++- Absent fields are UNKNOWN — never invented.
++- VIN evidence alone cannot mark configuration CONFIGURATION_CONFIRMED or geometry Verified.
++- Outcome: NO_MATCH
++- Top comparison CFG-2019-F450-REG-CAB-4X2-60CA-DRW: matches=4 mismatches=2 unknowns=3 score=-110
++- Mandatory mismatches: make_or_manufacturer, model
++- Decoder note: 0 - VIN decoded clean. Check Digit (9th position) is correct
++- Further physical verification required before engineering twin claims (labels, WB/CA, axle, drivetrain observation).
++
++## Required physical verification
++
++- **certification-label-photograph**: Driver-side door jamb / certification label photograph — NHTSA notes labels may carry information not present in vPIC
++- **wheelbase-measurement**: Wheelbase measurement (laser tape / caliper method) — Exact WB is not reliably proven by VIN decode alone
++- **cab-to-axle-measurement**: Cab-to-axle (CA) measurement — CA typically absent from vPIC for chassis-cab packages
++- **axle-configuration-observation**: Axle configuration observation (e.g. DRW vs SRW) — Rear-wheel configuration must be physically confirmed
++- **drivetrain-observation**: Drivetrain observation (4x2 vs 4x4) — Confirm decoded DriveType against vehicle
++- **cross-configuration-documentation**: Document that this VIN is outside the EDTS reference configuration lock — Manufacturer/model mismatch against registered CFG expectations
++
++## Artifacts
++
++- Evidence: `/workspace/edts-vin-resolver/data/evidence/vin/1HTKHPVK8KH805188.raw.json`
++- Vehicle: `/workspace/edts-vin-resolver/data/vehicles/VEH-1HTKHPVK8KH805188.json`
+diff --git a/edts-vin-resolver/scripts/resolve-vin.ts b/edts-vin-resolver/scripts/resolve-vin.ts
+new file mode 100644
+index 0000000..558c995
+--- /dev/null
++++ b/edts-vin-resolver/scripts/resolve-vin.ts
+@@ -0,0 +1,98 @@
++#!/usr/bin/env node
++import path from 'node:path'
++import { fileURLToPath } from 'node:url'
++import { formatCliReport, resolveVin } from '../src/vin/index.js'
++
++type CliFlags = {
++  vin: string | null
++  json: boolean
++  forceRefresh: boolean
++  offline: boolean
++  compare: string | null
++  help: boolean
++}
++
++function parseArgs(argv: string[]): CliFlags {
++  const flags: CliFlags = {
++    vin: null,
++    json: false,
++    forceRefresh: false,
++    offline: false,
++    compare: null,
++    help: false,
++  }
++  const positionals: string[] = []
++  for (let i = 0; i < argv.length; i++) {
++    const a = argv[i]!
++    if (a === '--json') flags.json = true
++    else if (a === '--force-refresh') flags.forceRefresh = true
++    else if (a === '--offline') flags.offline = true
++    else if (a === '--help' || a === '-h') flags.help = true
++    else if (a === '--compare') {
++      flags.compare = argv[++i] ?? null
++    } else if (a.startsWith('--compare=')) {
++      flags.compare = a.slice('--compare='.length)
++    } else if (a.startsWith('-')) {
++      console.error(`Unknown flag: ${a}`)
++      process.exit(1)
++    } else {
++      positionals.push(a)
++    }
++  }
++  flags.vin = positionals[0] ?? null
++  return flags
++}
++
++function printHelp() {
++  console.log(`EDTS VIN Resolver (DT-D067)
++
++Usage:
++  npm run vin -- <17-character VIN>
++  npm run vin -- <VIN> --json
++  npm run vin -- <VIN> --force-refresh
++  npm run vin -- <VIN> --compare CFG-ID
++  npm run vin -- <VIN> --offline
++
++Exit codes:
++  0 success
++  1 invalid input
++  2 decoder/network failure
++  3 persistence failure
++  4 configuration registry error
++`)
++}
++
++async function main() {
++  const flags = parseArgs(process.argv.slice(2))
++  if (flags.help || !flags.vin) {
++    printHelp()
++    process.exit(flags.help ? 0 : 1)
++  }
++
++  const dataRoot = path.resolve(
++    path.dirname(fileURLToPath(import.meta.url)),
++    '..',
++    'data',
++  )
++
++  const { report, exitCode } = await resolveVin({
++    vin: flags.vin,
++    json: flags.json,
++    forceRefresh: flags.forceRefresh,
++    offline: flags.offline,
++    compareConfigurationId: flags.compare,
++    dataRoot,
++  })
++
++  if (flags.json) {
++    console.log(JSON.stringify(report, null, 2))
++  } else {
++    console.log(formatCliReport(report))
++  }
++  process.exit(exitCode)
++}
++
++main().catch((err) => {
++  console.error(err instanceof Error ? err.stack ?? err.message : err)
++  process.exit(3)
++})
+diff --git a/edts-vin-resolver/src/vin/calculateConfidence.ts b/edts-vin-resolver/src/vin/calculateConfidence.ts
+new file mode 100644
+index 0000000..8826072
+--- /dev/null
++++ b/edts-vin-resolver/src/vin/calculateConfidence.ts
+@@ -0,0 +1,119 @@
++import type {
++  ConfigurationComparison,
++  NormalizedVehicleIdentity,
++  ResolutionOutcome,
++  VerificationRequirement,
++  VehicleLifecycleStatus,
++} from './types.js'
++
++export function calculateConfidenceExplanation(
++  identity: NormalizedVehicleIdentity | null,
++  outcome: ResolutionOutcome,
++  comparisons: ConfigurationComparison[],
++): string[] {
++  const lines: string[] = [
++    'VIN decoding uses manufacturer-reported NHTSA vPIC data only.',
++    'Absent fields are UNKNOWN — never invented.',
++    'VIN evidence alone cannot mark configuration CONFIGURATION_CONFIRMED or geometry Verified.',
++  ]
++
++  if (!identity) {
++    lines.push('No normalized identity available.')
++    return lines
++  }
++
++  lines.push(`Outcome: ${outcome}`)
++  const top = comparisons[0]
++  if (top) {
++    lines.push(
++      `Top comparison ${top.configuration_id}: matches=${top.match_count} mismatches=${top.mismatch_count} unknowns=${top.unknown_count} score=${top.score}`,
++    )
++    if (top.mandatory_mismatches.length) {
++      lines.push(`Mandatory mismatches: ${top.mandatory_mismatches.join(', ')}`)
++    }
++  }
++
++  if (identity.errorText) {
++    lines.push(`Decoder note: ${identity.errorText}`)
++  }
++
++  lines.push(
++    'Further physical verification required before engineering twin claims (labels, WB/CA, axle, drivetrain observation).',
++  )
++  return lines
++}
++
++export function buildVerificationRequirements(
++  outcome: ResolutionOutcome,
++  comparisons: ConfigurationComparison[],
++): VerificationRequirement[] {
++  const reqs: VerificationRequirement[] = [
++    {
++      id: 'certification-label-photograph',
++      description: 'Driver-side door jamb / certification label photograph',
++      required: true,
++      reason: 'NHTSA notes labels may carry information not present in vPIC',
++    },
++    {
++      id: 'wheelbase-measurement',
++      description: 'Wheelbase measurement (laser tape / caliper method)',
++      required: true,
++      reason: 'Exact WB is not reliably proven by VIN decode alone',
++    },
++    {
++      id: 'cab-to-axle-measurement',
++      description: 'Cab-to-axle (CA) measurement',
++      required: true,
++      reason: 'CA typically absent from vPIC for chassis-cab packages',
++    },
++    {
++      id: 'axle-configuration-observation',
++      description: 'Axle configuration observation (e.g. DRW vs SRW)',
++      required: true,
++      reason: 'Rear-wheel configuration must be physically confirmed',
++    },
++    {
++      id: 'drivetrain-observation',
++      description: 'Drivetrain observation (4x2 vs 4x4)',
++      required: true,
++      reason: 'Confirm decoded DriveType against vehicle',
++    },
++  ]
++
++  const rejected = comparisons.some((c) => c.reference_result === 'REJECTED_REFERENCE_MATCH')
++  if (rejected || outcome === 'NO_MATCH') {
++    reqs.push({
++      id: 'cross-configuration-documentation',
++      description: 'Document that this VIN is outside the EDTS reference configuration lock',
++      required: true,
++      reason: 'Manufacturer/model mismatch against registered CFG expectations',
++    })
++  }
++
++  return reqs
++}
++
++export function lifecycleFromOutcome(outcome: ResolutionOutcome): VehicleLifecycleStatus {
++  switch (outcome) {
++    case 'EXACT_CANDIDATE':
++    case 'PARTIAL_CANDIDATE':
++    case 'AMBIGUOUS':
++      return 'PHYSICAL_VERIFICATION_REQUIRED'
++    case 'NO_MATCH':
++      return 'REJECTED'
++    case 'INVALID_VIN':
++    case 'DECODER_ERROR':
++    case 'NETWORK_ERROR':
++      return 'REJECTED'
++    default:
++      return 'VIN_DECODED'
++  }
++}
++
++/** Map CLI-facing reference result label for the locked CFG comparison. */
++export function referenceMatchLabel(
++  comparison: ConfigurationComparison | undefined,
++): string {
++  if (!comparison) return 'NO_COMPARISON'
++  return comparison.reference_result
++}
+diff --git a/edts-vin-resolver/src/vin/decodeVpic.ts b/edts-vin-resolver/src/vin/decodeVpic.ts
+new file mode 100644
+index 0000000..d7422e3
+--- /dev/null
++++ b/edts-vin-resolver/src/vin/decodeVpic.ts
+@@ -0,0 +1,194 @@
++import { createHash } from 'node:crypto'
++import type { VinDecodeEvidence, VpicFlatResult } from './types.js'
++
++export const VPIC_EXTENDED_BASE =
++  'https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValuesExtended'
++
++export type DecodeVpicOptions = {
++  vin: string
++  timeoutMs?: number
++  maxRetries?: number
++  fetchImpl?: typeof fetch
++  now?: () => Date
++}
++
++export class VpicNetworkError extends Error {
++  readonly status?: number
++  constructor(message: string, status?: number) {
++    super(message)
++    this.name = 'VpicNetworkError'
++    this.status = status
++  }
++}
++
++export class VpicDecoderError extends Error {
++  readonly errorCode: string | null
++  readonly errorText: string | null
++  constructor(message: string, errorCode: string | null, errorText: string | null) {
++    super(message)
++    this.name = 'VpicDecoderError'
++    this.errorCode = errorCode
++    this.errorText = errorText
++  }
++}
++
++function sleep(ms: number) {
++  return new Promise((r) => setTimeout(r, ms))
++}
++
++function isRetryableStatus(status: number) {
++  return status === 408 || status === 429 || status >= 500
++}
++
++export function buildVpicUrl(vin: string): string {
++  return `${VPIC_EXTENDED_BASE}/${encodeURIComponent(vin)}?format=json`
++}
++
++export function sha256Json(value: unknown): string {
++  const canonical = JSON.stringify(value)
++  return createHash('sha256').update(canonical).digest('hex')
++}
++
++export function extractFlatResult(payload: unknown): VpicFlatResult {
++  if (!payload || typeof payload !== 'object') {
++    throw new VpicDecoderError('Malformed vPIC response: not an object', null, null)
++  }
++  const obj = payload as Record<string, unknown>
++  const results = obj.Results
++  if (!Array.isArray(results) || results.length === 0) {
++    throw new VpicDecoderError('Malformed vPIC response: empty Results', null, null)
++  }
++  const first = results[0]
++  if (!first || typeof first !== 'object') {
++    throw new VpicDecoderError('Malformed vPIC response: Results[0] invalid', null, null)
++  }
++  return first as VpicFlatResult
++}
++
++/** ErrorCode "0" or codes that still return usable fields are not hard failures. */
++export function isHardDecoderFailure(errorCode: string | null): boolean {
++  if (errorCode == null || errorCode === '') return false
++  // NHTSA uses semicolon-separated codes; 1–7 often mean incomplete/invalid patterns
++  const codes = errorCode.split(/[;,\s]+/).map((c) => c.trim()).filter(Boolean)
++  // Hard fail only if every code indicates no usable decode AND no Make/ModelYear would exist
++  // Code 11+ = invalid characters etc. For Extended, "1" can mean check digit issues already validated locally.
++  return codes.some((c) => c === '11' || c === '12' || c === '13' || c === '14')
++}
++
++export function toEvidence(
++  vin: string,
++  endpoint: string,
++  httpStatus: number,
++  payload: unknown,
++  now: Date,
++): VinDecodeEvidence {
++  const flat = extractFlatResult(payload)
++  const obj = payload as Record<string, unknown>
++  return {
++    provider: 'NHTSA_VPIC',
++    endpoint,
++    retrieved_at_utc: now.toISOString(),
++    request_vin: vin,
++    response_vin: emptyToNull(flat.VIN) ,
++    content_sha256: sha256Json(payload),
++    http_status: httpStatus,
++    count: typeof obj.Count === 'number' ? obj.Count : null,
++    message: typeof obj.Message === 'string' ? obj.Message : null,
++    search_criteria: typeof obj.SearchCriteria === 'string' ? obj.SearchCriteria : null,
++    error_code: emptyToNull(flat.ErrorCode),
++    error_text: emptyToNull(flat.ErrorText),
++    additional_error_text: emptyToNull(flat.AdditionalErrorText),
++    raw: payload,
++  }
++}
++
++function emptyToNull(v: unknown): string | null {
++  if (v == null) return null
++  const s = String(v).trim()
++  return s === '' ? null : s
++}
++
++export async function decodeVpic(options: DecodeVpicOptions): Promise<VinDecodeEvidence> {
++  const {
++    vin,
++    timeoutMs = 15_000,
++    maxRetries = 3,
++    fetchImpl = fetch,
++    now = () => new Date(),
++  } = options
++
++  const endpoint = buildVpicUrl(vin)
++  let attempt = 0
++  let lastError: Error | null = null
++
++  while (attempt <= maxRetries) {
++    const controller = new AbortController()
++    const timer = setTimeout(() => controller.abort(), timeoutMs)
++    try {
++      const res = await fetchImpl(endpoint, {
++        method: 'GET',
++        headers: { Accept: 'application/json' },
++        signal: controller.signal,
++      })
++      clearTimeout(timer)
++
++      if (!res.ok) {
++        if (isRetryableStatus(res.status) && attempt < maxRetries) {
++          attempt++
++          await sleep(250 * 2 ** (attempt - 1))
++          continue
++        }
++        throw new VpicNetworkError(`vPIC HTTP ${res.status}`, res.status)
++      }
++
++      let payload: unknown
++      try {
++        payload = await res.json()
++      } catch {
++        throw new VpicDecoderError('Malformed vPIC response: invalid JSON', null, null)
++      }
++
++      const evidence = toEvidence(vin, endpoint, res.status, payload, now())
++      if (isHardDecoderFailure(evidence.error_code)) {
++        throw new VpicDecoderError(
++          evidence.error_text ?? 'vPIC hard decoder failure',
++          evidence.error_code,
++          evidence.error_text,
++        )
++      }
++      return evidence
++    } catch (err) {
++      clearTimeout(timer)
++      if (err instanceof VpicDecoderError) throw err
++      if (err instanceof VpicNetworkError) {
++        lastError = err
++        if (attempt < maxRetries) {
++          attempt++
++          await sleep(250 * 2 ** (attempt - 1))
++          continue
++        }
++        throw err
++      }
++      const name = err instanceof Error ? err.name : ''
++      const msg = err instanceof Error ? err.message : String(err)
++      if (name === 'AbortError' || /aborted|timeout/i.test(msg)) {
++        lastError = new VpicNetworkError(`vPIC request timed out after ${timeoutMs}ms`)
++        if (attempt < maxRetries) {
++          attempt++
++          await sleep(250 * 2 ** (attempt - 1))
++          continue
++        }
++        throw lastError
++      }
++      lastError = new VpicNetworkError(msg)
++      if (attempt < maxRetries) {
++        attempt++
++        await sleep(250 * 2 ** (attempt - 1))
++        continue
++      }
++      throw lastError
++    }
++  }
++
++  throw lastError ?? new VpicNetworkError('vPIC decode failed')
++}
+diff --git a/edts-vin-resolver/src/vin/index.ts b/edts-vin-resolver/src/vin/index.ts
+new file mode 100644
+index 0000000..878acbd
+--- /dev/null
++++ b/edts-vin-resolver/src/vin/index.ts
+@@ -0,0 +1,37 @@
++export { validateVin, normalizeVinInput, computeVinCheckDigit } from './validateVin.js'
++export {
++  decodeVpic,
++  buildVpicUrl,
++  toEvidence,
++  extractFlatResult,
++  VpicNetworkError,
++  VpicDecoderError,
++  VPIC_EXTENDED_BASE,
++} from './decodeVpic.js'
++export { normalizeVpic, matchesAnyPattern, normalizeForCompare } from './normalizeVpic.js'
++export {
++  compareIdentityToConfiguration,
++  rankComparisons,
++  resolveOutcome,
++  summarizeConflicts,
++  summarizeUnknowns,
++} from './resolveConfiguration.js'
++export {
++  calculateConfidenceExplanation,
++  buildVerificationRequirements,
++  lifecycleFromOutcome,
++} from './calculateConfidence.js'
++export {
++  persistRawEvidence,
++  loadCachedEvidence,
++  persistVehicleRecord,
++  persistMarkdownReport,
++  vehicleIdForVin,
++  evidencePath,
++  vehiclePath,
++  reportPath,
++} from './persistVinEvidence.js'
++export { loadConfigurations } from './loadConfigurations.js'
++export { formatCliReport, formatMarkdownReport } from './report.js'
++export { resolveVin, defaultDataRoot } from './pipeline.js'
++export type * from './types.js'
+diff --git a/edts-vin-resolver/src/vin/loadConfigurations.ts b/edts-vin-resolver/src/vin/loadConfigurations.ts
+new file mode 100644
+index 0000000..a091ae6
+--- /dev/null
++++ b/edts-vin-resolver/src/vin/loadConfigurations.ts
+@@ -0,0 +1,31 @@
++import { readdir, readFile } from 'node:fs/promises'
++import path from 'node:path'
++import type { ConfigurationExpectation } from './types.js'
++
++export async function loadConfigurations(
++  dataRoot: string,
++  compareFilter?: string | null,
++): Promise<ConfigurationExpectation[]> {
++  const dir = path.join(dataRoot, 'configurations')
++  const entries = await readdir(dir)
++  const configs: ConfigurationExpectation[] = []
++  for (const name of entries.sort()) {
++    if (!name.endsWith('.json') || name === 'index.json') continue
++    const raw = JSON.parse(await readFile(path.join(dir, name), 'utf8')) as ConfigurationExpectation
++    if (!raw.configuration_id) {
++      throw new Error(`Configuration file missing configuration_id: ${name}`)
++    }
++    configs.push(raw)
++  }
++  if (configs.length === 0) {
++    throw new Error('No configuration files found under data/configurations')
++  }
++  if (compareFilter) {
++    const filtered = configs.filter((c) => c.configuration_id === compareFilter)
++    if (filtered.length === 0) {
++      throw new Error(`Configuration not found: ${compareFilter}`)
++    }
++    return filtered
++  }
++  return configs
++}
+diff --git a/edts-vin-resolver/src/vin/normalizeVpic.ts b/edts-vin-resolver/src/vin/normalizeVpic.ts
+new file mode 100644
+index 0000000..03ec16a
+--- /dev/null
++++ b/edts-vin-resolver/src/vin/normalizeVpic.ts
+@@ -0,0 +1,128 @@
++import type { NormalizedVehicleIdentity, VinDecodeEvidence, VpicFlatResult } from './types.js'
++import { extractFlatResult } from './decodeVpic.js'
++
++function emptyToNull(v: unknown): string | null {
++  if (v == null) return null
++  const s = String(v).trim()
++  if (s === '' || /^not applicable$/i.test(s)) return null
++  return s
++}
++
++function parseIntOrNull(v: unknown): number | null {
++  const s = emptyToNull(v)
++  if (s == null) return null
++  const n = Number.parseInt(s, 10)
++  return Number.isFinite(n) ? n : null
++}
++
++function parseFloatOrNull(v: unknown): number | null {
++  const s = emptyToNull(v)
++  if (s == null) return null
++  const n = Number.parseFloat(s)
++  return Number.isFinite(n) ? n : null
++}
++
++/** Prefer BodyCabType when CabType absent (vPIC Extended often uses BodyCabType). */
++function resolveCabType(flat: VpicFlatResult): string | null {
++  return emptyToNull(flat.CabType) ?? emptyToNull(flat.BodyCabType)
++}
++
++function extractGvwrClass(gvwr: string | null): string | null {
++  if (!gvwr) return null
++  const m = gvwr.match(/Class\s+(\d+)/i)
++  return m ? `Class ${m[1]}` : null
++}
++
++const RETAIN_KEYS = [
++  'Make',
++  'MakeID',
++  'Manufacturer',
++  'ManufacturerId',
++  'Model',
++  'ModelID',
++  'ModelYear',
++  'Series',
++  'Trim',
++  'BodyClass',
++  'VehicleType',
++  'CabType',
++  'BodyCabType',
++  'DriveType',
++  'AxleConfiguration',
++  'Axles',
++  'GVWR',
++  'EngineManufacturer',
++  'EngineModel',
++  'EngineCylinders',
++  'DisplacementL',
++  'FuelTypePrimary',
++  'PlantCity',
++  'PlantState',
++  'PlantCountry',
++  'ErrorCode',
++  'ErrorText',
++  'AdditionalErrorText',
++  'VIN',
++] as const
++
++export function normalizeVpic(
++  evidence: VinDecodeEvidence,
++  requestVin: string,
++): NormalizedVehicleIdentity {
++  const flat = extractFlatResult(evidence.raw)
++  const gvwr = emptyToNull(flat.GVWR)
++
++  const retained: Record<string, string | null> = {}
++  for (const key of RETAIN_KEYS) {
++    retained[key] = emptyToNull(flat[key])
++  }
++
++  return {
++    vin: emptyToNull(flat.VIN) ?? requestVin,
++    manufacturer: emptyToNull(flat.Manufacturer),
++    make: emptyToNull(flat.Make),
++    model: emptyToNull(flat.Model),
++    modelYear: parseIntOrNull(flat.ModelYear),
++    series: emptyToNull(flat.Series),
++    trim: emptyToNull(flat.Trim),
++    bodyClass: emptyToNull(flat.BodyClass),
++    vehicleType: emptyToNull(flat.VehicleType),
++    cabType: resolveCabType(flat),
++    driveType: emptyToNull(flat.DriveType),
++    axleConfiguration: emptyToNull(flat.AxleConfiguration),
++    numberOfAxles: parseIntOrNull(flat.Axles),
++    gvwr,
++    gvwrClass: extractGvwrClass(gvwr),
++    engineManufacturer: emptyToNull(flat.EngineManufacturer),
++    engineModel: emptyToNull(flat.EngineModel),
++    engineCylinders: parseIntOrNull(flat.EngineCylinders),
++    displacementLiters: parseFloatOrNull(flat.DisplacementL),
++    fuelTypePrimary: emptyToNull(flat.FuelTypePrimary),
++    plantCity: emptyToNull(flat.PlantCity),
++    plantState: emptyToNull(flat.PlantState),
++    plantCountry: emptyToNull(flat.PlantCountry),
++    errorCode: emptyToNull(flat.ErrorCode),
++    errorText: emptyToNull(flat.ErrorText),
++    retained_raw_keys: retained,
++  }
++}
++
++/** Case-insensitive contains / synonym-aware token match for configuration comparison. */
++export function normalizeForCompare(value: string | null | undefined): string | null {
++  if (value == null) return null
++  const s = value.trim().toLowerCase().replace(/\s+/g, ' ')
++  return s === '' ? null : s
++}
++
++export function matchesAnyPattern(
++  observed: string | null,
++  patterns: string[],
++): boolean | null {
++  const o = normalizeForCompare(observed)
++  if (o == null) return null
++  return patterns.some((p) => {
++    const pat = normalizeForCompare(p)
++    if (!pat) return false
++    return o.includes(pat) || pat.includes(o)
++  })
++}
+diff --git a/edts-vin-resolver/src/vin/persistVinEvidence.ts b/edts-vin-resolver/src/vin/persistVinEvidence.ts
+new file mode 100644
+index 0000000..155e162
+--- /dev/null
++++ b/edts-vin-resolver/src/vin/persistVinEvidence.ts
+@@ -0,0 +1,101 @@
++import { createHash } from 'node:crypto'
++import { mkdir, readFile, rename, writeFile } from 'node:fs/promises'
++import path from 'node:path'
++import type { VinDecodeEvidence, VehicleRecord, VinResolutionReport } from './types.js'
++
++export function assertSafeVinSegment(vin: string): string {
++  if (!/^[A-HJ-NPR-Z0-9]{17}$/.test(vin)) {
++    throw new Error('Unsafe VIN for filesystem path')
++  }
++  return vin
++}
++
++export function vehicleIdForVin(vin: string): string {
++  return `VEH-${assertSafeVinSegment(vin)}`
++}
++
++export function evidencePath(dataRoot: string, vin: string): string {
++  return path.join(dataRoot, 'evidence', 'vin', `${assertSafeVinSegment(vin)}.raw.json`)
++}
++
++export function vehiclePath(dataRoot: string, vin: string): string {
++  return path.join(dataRoot, 'vehicles', `${vehicleIdForVin(vin)}.json`)
++}
++
++export function reportPath(dataRoot: string, vin: string): string {
++  // reports/ lives beside data/ at package root
++  const packageRoot = path.dirname(dataRoot)
++  return path.join(packageRoot, 'reports', 'vin', `${assertSafeVinSegment(vin)}.md`)
++}
++
++async function atomicWriteJson(filePath: string, value: unknown): Promise<void> {
++  await mkdir(path.dirname(filePath), { recursive: true })
++  const tmp = `${filePath}.${process.pid}.${Date.now()}.tmp`
++  const body = `${JSON.stringify(value, null, 2)}\n`
++  await writeFile(tmp, body, 'utf8')
++  await rename(tmp, filePath)
++}
++
++async function atomicWriteText(filePath: string, body: string): Promise<void> {
++  await mkdir(path.dirname(filePath), { recursive: true })
++  const tmp = `${filePath}.${process.pid}.${Date.now()}.tmp`
++  await writeFile(tmp, body.endsWith('\n') ? body : `${body}\n`, 'utf8')
++  await rename(tmp, filePath)
++}
++
++export async function persistRawEvidence(
++  dataRoot: string,
++  evidence: VinDecodeEvidence,
++): Promise<string> {
++  const file = evidencePath(dataRoot, evidence.request_vin)
++  await atomicWriteJson(file, evidence)
++  return file
++}
++
++export async function loadCachedEvidence(
++  dataRoot: string,
++  vin: string,
++): Promise<VinDecodeEvidence | null> {
++  const file = evidencePath(dataRoot, vin)
++  try {
++    const raw = await readFile(file, 'utf8')
++    return JSON.parse(raw) as VinDecodeEvidence
++  } catch (err) {
++    const code = (err as NodeJS.ErrnoException).code
++    if (code === 'ENOENT') return null
++    throw err
++  }
++}
++
++export async function persistVehicleRecord(
++  dataRoot: string,
++  record: VehicleRecord,
++): Promise<string> {
++  const file = vehiclePath(dataRoot, record.vin)
++  let createdAt = record.created_at
++  try {
++    const existing = JSON.parse(await readFile(file, 'utf8')) as VehicleRecord
++    if (existing.vin === record.vin && existing.created_at) {
++      createdAt = existing.created_at
++    }
++  } catch {
++    // new record
++  }
++  const next: VehicleRecord = { ...record, created_at: createdAt, updated_at: record.updated_at }
++  await atomicWriteJson(file, next)
++  return file
++}
++
++export async function persistMarkdownReport(
++  dataRoot: string,
++  vin: string,
++  markdown: string,
++): Promise<string> {
++  const file = reportPath(dataRoot, vin)
++  await atomicWriteText(file, markdown)
++  return file
++}
++
++export function contentHash(value: unknown): string {
++  return createHash('sha256').update(JSON.stringify(value)).digest('hex')
++}
+diff --git a/edts-vin-resolver/src/vin/pipeline.ts b/edts-vin-resolver/src/vin/pipeline.ts
+new file mode 100644
+index 0000000..eae9e3b
+--- /dev/null
++++ b/edts-vin-resolver/src/vin/pipeline.ts
+@@ -0,0 +1,289 @@
++import path from 'node:path'
++import { fileURLToPath } from 'node:url'
++import {
++  buildVerificationRequirements,
++  calculateConfidenceExplanation,
++  lifecycleFromOutcome,
++} from './calculateConfidence.js'
++import { decodeVpic, VpicDecoderError, VpicNetworkError } from './decodeVpic.js'
++import { loadConfigurations } from './loadConfigurations.js'
++import { normalizeVpic } from './normalizeVpic.js'
++import {
++  loadCachedEvidence,
++  persistMarkdownReport,
++  persistRawEvidence,
++  persistVehicleRecord,
++  vehicleIdForVin,
++} from './persistVinEvidence.js'
++import { formatMarkdownReport } from './report.js'
++import {
++  compareIdentityToConfiguration,
++  rankComparisons,
++  resolveOutcome,
++  summarizeConflicts,
++  summarizeUnknowns,
++} from './resolveConfiguration.js'
++import type {
++  ResolveVinOptions,
++  VehicleRecord,
++  VinResolutionReport,
++} from './types.js'
++import { validateVin } from './validateVin.js'
++
++export function defaultDataRoot(): string {
++  const here = path.dirname(fileURLToPath(import.meta.url))
++  return path.resolve(here, '..', '..', 'data')
++}
++
++const HONESTY = [
++  'VIN decoding does not prove physical geometry.',
++  'Absent vPIC fields are UNKNOWN — not invented.',
++  'CONFIGURATION_CONFIRMED is forbidden from VIN evidence alone.',
++  'No unsupported engineering claims (torque, frame holes, mass, measured WB/CA).',
++]
++
++function baseFail(
++  vin: string,
++  options: ResolveVinOptions,
++  outcome: VinResolutionReport['outcome'],
++  decode_status: VinResolutionReport['decode_status'],
++  conflicts: string[],
++  vin_validation: 'PASS' | 'FAIL' = 'PASS',
++): VinResolutionReport {
++  return {
++    vin,
++    vin_validation,
++    decode_provider: 'NHTSA vPIC',
++    decode_status,
++    outcome,
++    identity: null,
++    comparisons: [],
++    top_candidates: [],
++    conflicts,
++    unknowns: [],
++    verification_requirements: [],
++    confidence_explanation: conflicts,
++    honesty: HONESTY,
++    vehicle_id: null,
++    evidence_path: null,
++    vehicle_path: null,
++    report_path: null,
++    lifecycle_status: outcome === 'INVALID_VIN' ? null : 'REJECTED',
++    compare_filter: options.compareConfigurationId ?? null,
++  }
++}
++
++export async function resolveVin(options: ResolveVinOptions): Promise<{
++  report: VinResolutionReport
++  exitCode: number
++}> {
++  const dataRoot = options.dataRoot ?? defaultDataRoot()
++  const now = options.now ?? (() => new Date())
++  const validation = validateVin(options.vin)
++
++  if (!validation.ok || !validation.vin) {
++    return {
++      report: baseFail(
++        validation.vin ?? options.vin.trim().toUpperCase(),
++        options,
++        'INVALID_VIN',
++        'SKIPPED',
++        validation.errors,
++        'FAIL',
++      ),
++      exitCode: 1,
++    }
++  }
++
++  const vin = validation.vin
++
++  let configs
++  try {
++    configs = await loadConfigurations(dataRoot, options.compareConfigurationId)
++  } catch (err) {
++    return {
++      report: baseFail(vin, options, 'DECODER_ERROR', 'SKIPPED', [
++        err instanceof Error ? err.message : String(err),
++      ]),
++      exitCode: 4,
++    }
++  }
++
++  let evidence
++  let decodeStatus: VinResolutionReport['decode_status']
++
++  try {
++    if (options.offline) {
++      const cached = await loadCachedEvidence(dataRoot, vin)
++      if (!cached) {
++        return {
++          report: baseFail(vin, options, 'NETWORK_ERROR', 'FAIL', [
++            `No cached evidence for ${vin} (offline mode)`,
++          ]),
++          exitCode: 2,
++        }
++      }
++      evidence = cached
++      decodeStatus = 'OFFLINE_CACHE'
++    } else {
++      const cached = options.forceRefresh
++        ? null
++        : await loadCachedEvidence(dataRoot, vin)
++      // Always refresh from network unless offline; forceRefresh is explicit.
++      // Cached file is overwritten atomically after successful decode.
++      void cached
++      evidence = await decodeVpic({
++        vin,
++        fetchImpl: options.fetchImpl,
++        now,
++        maxRetries: options.maxRetries,
++        timeoutMs: options.timeoutMs,
++      })
++      decodeStatus = 'SUCCESS'
++    }
++  } catch (err) {
++    if (err instanceof VpicNetworkError) {
++      return {
++        report: baseFail(vin, options, 'NETWORK_ERROR', 'FAIL', [err.message]),
++        exitCode: 2,
++      }
++    }
++    if (err instanceof VpicDecoderError) {
++      return {
++        report: baseFail(vin, options, 'DECODER_ERROR', 'FAIL', [err.message]),
++        exitCode: 2,
++      }
++    }
++    throw err
++  }
++
++  let evidenceFile: string
++  try {
++    evidenceFile = await persistRawEvidence(dataRoot, evidence)
++  } catch (err) {
++    return {
++      report: {
++        ...baseFail(vin, options, 'DECODER_ERROR', decodeStatus, [
++          err instanceof Error ? err.message : String(err),
++        ]),
++        decode_status: decodeStatus,
++      },
++      exitCode: 3,
++    }
++  }
++
++  const identity = normalizeVpic(evidence, vin)
++  const comparisons = rankComparisons(
++    configs.map((cfg) => compareIdentityToConfiguration(identity, cfg)),
++  )
++  const outcome = resolveOutcome(comparisons)
++  const conflicts = summarizeConflicts(comparisons)
++  const unknowns = summarizeUnknowns(identity, comparisons)
++  const verification = buildVerificationRequirements(outcome, comparisons)
++  let lifecycle = lifecycleFromOutcome(outcome)
++  if (lifecycle === 'CONFIGURATION_CONFIRMED') {
++    lifecycle = 'PHYSICAL_VERIFICATION_REQUIRED'
++  }
++
++  const top_candidates = comparisons
++    .filter(
++      (c) =>
++        c.reference_result === 'EXACT_CANDIDATE' ||
++        c.reference_result === 'PARTIAL_CANDIDATE',
++    )
++    .map((c) => ({
++      configuration_id: c.configuration_id,
++      score: c.score,
++      comparison: c,
++    }))
++
++  const vehicle_id = vehicleIdForVin(vin)
++  const updated = now().toISOString()
++
++  const record: VehicleRecord = {
++    vehicle_id,
++    vin,
++    lifecycle_status: lifecycle,
++    normalized_identity: identity,
++    evidence_ref: evidenceFile,
++    evidence_sha256: evidence.content_sha256,
++    candidate_configurations: top_candidates,
++    conflicts,
++    unknown_fields: unknowns,
++    required_physical_verification: verification,
++    resolution_outcome: outcome,
++    created_at: updated,
++    updated_at: updated,
++    decision: 'DT-D067',
++    geometry_verified: false,
++    configuration_confirmed_from_vin_alone: false,
++  }
++
++  try {
++    const vehicleFile = await persistVehicleRecord(dataRoot, record)
++    const reportDraft: VinResolutionReport = {
++      vin,
++      vin_validation: 'PASS',
++      decode_provider: 'NHTSA vPIC',
++      decode_status: decodeStatus,
++      outcome,
++      identity,
++      comparisons,
++      top_candidates,
++      conflicts,
++      unknowns,
++      verification_requirements: verification,
++      confidence_explanation: calculateConfidenceExplanation(
++        identity,
++        outcome,
++        comparisons,
++      ),
++      honesty: HONESTY,
++      vehicle_id,
++      evidence_path: evidenceFile,
++      vehicle_path: vehicleFile,
++      report_path: null,
++      lifecycle_status: lifecycle,
++      compare_filter: options.compareConfigurationId ?? null,
++    }
++    const reportFile = await persistMarkdownReport(
++      dataRoot,
++      vin,
++      formatMarkdownReport(reportDraft),
++    )
++    reportDraft.report_path = reportFile
++    return { report: reportDraft, exitCode: 0 }
++  } catch (err) {
++    return {
++      report: {
++        vin,
++        vin_validation: 'PASS',
++        decode_provider: 'NHTSA vPIC',
++        decode_status: decodeStatus,
++        outcome,
++        identity,
++        comparisons,
++        top_candidates,
++        conflicts: [
++          ...conflicts,
++          err instanceof Error ? err.message : String(err),
++        ],
++        unknowns,
++        verification_requirements: verification,
++        confidence_explanation: calculateConfidenceExplanation(
++          identity,
++          outcome,
++          comparisons,
++        ),
++        honesty: HONESTY,
++        vehicle_id,
++        evidence_path: evidenceFile,
++        vehicle_path: null,
++        report_path: null,
++        lifecycle_status: lifecycle,
++        compare_filter: options.compareConfigurationId ?? null,
++      },
++      exitCode: 3,
++    }
++  }
++}
+diff --git a/edts-vin-resolver/src/vin/report.ts b/edts-vin-resolver/src/vin/report.ts
+new file mode 100644
+index 0000000..f0dd274
+--- /dev/null
++++ b/edts-vin-resolver/src/vin/report.ts
+@@ -0,0 +1,147 @@
++import type { VinResolutionReport } from './types.js'
++
++function cell(v: string | number | null | undefined): string {
++  if (v == null || v === '') return 'UNKNOWN'
++  return String(v)
++}
++
++export function formatCliReport(report: VinResolutionReport): string {
++  const id = report.identity
++  const top = report.comparisons[0]
++  const lines = [
++    'EDTS VIN RESOLVER',
++    `VIN:                  ${report.vin}`,
++    `VIN validation:       ${report.vin_validation}`,
++    `Decode provider:      ${report.decode_provider}`,
++    `Decode status:        ${report.decode_status}`,
++    `Manufacturer:         ${cell(id?.manufacturer)}`,
++    `Make:                 ${cell(id?.make)}`,
++    `Model year:           ${cell(id?.modelYear)}`,
++    `Model:                ${cell(id?.model)}`,
++    `Body class:           ${cell(id?.bodyClass)}`,
++    `Cab type:             ${cell(id?.cabType)}`,
++    `Drive type:           ${cell(id?.driveType)}`,
++    `GVWR class:           ${cell(id?.gvwrClass ?? id?.gvwr)}`,
++    `Resolution outcome:   ${report.outcome}`,
++  ]
++
++  if (top) {
++    lines.push('Reference comparison:')
++    lines.push(top.configuration_id)
++    const makeField = top.fields.find((f) => f.field === 'make_or_manufacturer')
++    const yearField = top.fields.find((f) => f.field === 'modelYear')
++    lines.push(`Manufacturer match:   ${makeField?.status ?? 'UNKNOWN'}`)
++    lines.push(`Model-year match:     ${yearField?.status ?? 'UNKNOWN'}`)
++    lines.push(`Configuration result: ${top.reference_result}`)
++  }
++
++  lines.push('Action:')
++  if (report.vehicle_id) {
++    lines.push(`Created/updated vehicle record:`)
++    lines.push(report.vehicle_id)
++  } else {
++    lines.push('No vehicle record written')
++  }
++
++  if (report.lifecycle_status) {
++    lines.push(`Lifecycle status:     ${report.lifecycle_status}`)
++  }
++
++  lines.push('Further verification required:')
++  for (const r of report.verification_requirements) {
++    lines.push(`- ${r.description}`)
++  }
++
++  lines.push('')
++  lines.push('HONESTY:')
++  for (const h of report.honesty) {
++    lines.push(`- ${h}`)
++  }
++
++  if (report.evidence_path) lines.push(`Evidence: ${report.evidence_path}`)
++  if (report.vehicle_path) lines.push(`Vehicle:  ${report.vehicle_path}`)
++  if (report.report_path) lines.push(`Report:   ${report.report_path}`)
++
++  return `${lines.join('\n')}\n`
++}
++
++export function formatMarkdownReport(report: VinResolutionReport): string {
++  const id = report.identity
++  const sections: string[] = [
++    `# EDTS VIN Resolution Report`,
++    ``,
++    `**VIN:** \`${report.vin}\``,
++    `**Decision:** DT-D067`,
++    `**Outcome:** ${report.outcome}`,
++    `**Lifecycle:** ${report.lifecycle_status ?? 'n/a'}`,
++    ``,
++    `## Honesty`,
++    ``,
++    `VIN decoding does **not** prove physical geometry, wheelbase, cab-to-axle, frame holes, torque, modifications, or current component condition.`,
++    `NHTSA vPIC data is manufacturer-reported. Missing fields are UNKNOWN — not invented.`,
++    `This report must **not** be treated as \`CONFIGURATION_CONFIRMED\` or engineering-Verified from VIN alone.`,
++    ``,
++    `## Decoded identity`,
++    ``,
++    `| Field | Value |`,
++    `|---|---|`,
++    `| Manufacturer | ${cell(id?.manufacturer)} |`,
++    `| Make | ${cell(id?.make)} |`,
++    `| Model year | ${cell(id?.modelYear)} |`,
++    `| Model | ${cell(id?.model)} |`,
++    `| Series | ${cell(id?.series)} |`,
++    `| Body class | ${cell(id?.bodyClass)} |`,
++    `| Cab type | ${cell(id?.cabType)} |`,
++    `| Drive type | ${cell(id?.driveType)} |`,
++    `| GVWR | ${cell(id?.gvwr)} |`,
++    `| Engine | ${cell(id?.engineManufacturer)} / ${cell(id?.displacementLiters)} L |`,
++    `| Plant | ${cell(id?.plantCity)}, ${cell(id?.plantState)}, ${cell(id?.plantCountry)} |`,
++    `| ErrorCode | ${cell(id?.errorCode)} |`,
++    `| ErrorText | ${cell(id?.errorText)} |`,
++    ``,
++  ]
++
++  if (id?.errorText) {
++    sections.push(`## Decoder notes`, ``, id.errorText, ``)
++  }
++
++  sections.push(`## Configuration comparisons`, ``)
++  for (const c of report.comparisons) {
++    sections.push(`### ${c.configuration_id}`, ``)
++    sections.push(`Result: **${c.reference_result}** · score=${c.score}`, ``)
++    sections.push(`| Field | Expected | Observed | Status | Mandatory |`)
++    sections.push(`|---|---|---|---|---|`)
++    for (const f of c.fields) {
++      sections.push(
++        `| ${f.field} | ${cell(f.expected as string)} | ${cell(f.observed as string)} | ${f.status} | ${f.mandatory} |`,
++      )
++    }
++    sections.push(``)
++  }
++
++  sections.push(`## Conflicts`, ``)
++  if (report.conflicts.length === 0) sections.push(`_None_`, ``)
++  else for (const x of report.conflicts) sections.push(`- ${x}`)
++
++  sections.push(``, `## Unknowns`, ``)
++  for (const u of report.unknowns) sections.push(`- ${u}`)
++
++  sections.push(``, `## Confidence explanation`, ``)
++  for (const line of report.confidence_explanation) sections.push(`- ${line}`)
++
++  sections.push(``, `## Required physical verification`, ``)
++  for (const r of report.verification_requirements) {
++    sections.push(`- **${r.id}**: ${r.description} — ${r.reason}`)
++  }
++
++  sections.push(
++    ``,
++    `## Artifacts`,
++    ``,
++    `- Evidence: \`${report.evidence_path ?? 'n/a'}\``,
++    `- Vehicle: \`${report.vehicle_path ?? 'n/a'}\``,
++    ``,
++  )
++
++  return sections.join('\n')
++}
+diff --git a/edts-vin-resolver/src/vin/resolveConfiguration.ts b/edts-vin-resolver/src/vin/resolveConfiguration.ts
+new file mode 100644
+index 0000000..d23ac60
+--- /dev/null
++++ b/edts-vin-resolver/src/vin/resolveConfiguration.ts
+@@ -0,0 +1,241 @@
++import { matchesAnyPattern, normalizeForCompare } from './normalizeVpic.js'
++import type {
++  ConfigurationComparison,
++  ConfigurationExpectation,
++  FieldComparison,
++  FieldComparisonStatus,
++  NormalizedVehicleIdentity,
++  ResolutionOutcome,
++} from './types.js'
++
++function field(
++  name: string,
++  expected: string | number | null,
++  observed: string | number | null,
++  status: FieldComparisonStatus,
++  mandatory: boolean,
++): FieldComparison {
++  return { field: name, expected, observed, status, mandatory }
++}
++
++function patternStatus(
++  observed: string | null,
++  patterns: string[],
++  rejectPatterns: string[] | undefined,
++  mandatory: boolean,
++): FieldComparisonStatus {
++  if (matchesAnyPattern(observed, rejectPatterns ?? []) === true) return 'MISMATCH'
++  const hit = matchesAnyPattern(observed, patterns)
++  if (hit === null) return 'UNKNOWN'
++  return hit ? 'MATCH' : 'MISMATCH'
++}
++
++function yearStatus(observed: number | null, expected: number): FieldComparisonStatus {
++  if (observed == null) return 'UNKNOWN'
++  return observed === expected ? 'MATCH' : 'MISMATCH'
++}
++
++function makeStatus(
++  identity: NormalizedVehicleIdentity,
++  cfg: ConfigurationExpectation,
++): FieldComparisonStatus {
++  const makeHit = matchesAnyPattern(identity.make, cfg.make)
++  const mfrPatterns = cfg.manufacturer_contains ?? cfg.make
++  const mfrHit = matchesAnyPattern(identity.manufacturer, mfrPatterns)
++  if (makeHit === null && mfrHit === null) return 'UNKNOWN'
++  if (makeHit === true || mfrHit === true) return 'MATCH'
++  return 'MISMATCH'
++}
++
++export function compareIdentityToConfiguration(
++  identity: NormalizedVehicleIdentity,
++  cfg: ConfigurationExpectation,
++): ConfigurationComparison {
++  const fields: FieldComparison[] = [
++    field(
++      'make_or_manufacturer',
++      cfg.make.join('|'),
++      identity.make ?? identity.manufacturer,
++      makeStatus(identity, cfg),
++      true,
++    ),
++    field(
++      'modelYear',
++      cfg.model_year,
++      identity.modelYear,
++      yearStatus(identity.modelYear, cfg.model_year),
++      true,
++    ),
++    field(
++      'model',
++      cfg.model_patterns.join('|'),
++      identity.model,
++      patternStatus(identity.model, cfg.model_patterns, undefined, true),
++      true,
++    ),
++    field(
++      'bodyClass',
++      cfg.body_class_patterns.join('|'),
++      identity.bodyClass,
++      patternStatus(
++        identity.bodyClass,
++        cfg.body_class_patterns,
++        cfg.body_class_reject_patterns,
++        true,
++      ),
++      true,
++    ),
++    field(
++      'cabType',
++      cfg.cab_type_patterns.join('|'),
++      identity.cabType,
++      patternStatus(identity.cabType, cfg.cab_type_patterns, undefined, true),
++      true,
++    ),
++    field(
++      'driveType',
++      cfg.drive_type_patterns.join('|'),
++      identity.driveType,
++      patternStatus(identity.driveType, cfg.drive_type_patterns, undefined, true),
++      true,
++    ),
++    field(
++      'wheelbase_in',
++      cfg.wheelbase_in ?? null,
++      null,
++      'UNKNOWN',
++      false,
++    ),
++    field(
++      'cab_to_axle_in',
++      cfg.cab_to_axle_in ?? null,
++      null,
++      'UNKNOWN',
++      false,
++    ),
++    field(
++      'rear_wheels',
++      cfg.rear_wheels ?? null,
++      null,
++      cfg.rear_wheels ? 'UNKNOWN' : 'NOT_APPLICABLE',
++      false,
++    ),
++  ]
++
++  const match_count = fields.filter((f) => f.status === 'MATCH').length
++  const mismatch_count = fields.filter((f) => f.status === 'MISMATCH').length
++  const unknown_count = fields.filter((f) => f.status === 'UNKNOWN').length
++  const mandatory_mismatches = fields
++    .filter((f) => f.mandatory && f.status === 'MISMATCH')
++    .map((f) => f.field)
++
++  // Score: matches weighted; unknowns never count as matches; mismatches penalize heavily
++  let score = match_count * 10 - mismatch_count * 25
++  if (mandatory_mismatches.length > 0) score -= 100
++
++  let reference_result: ConfigurationComparison['reference_result']
++  if (mandatory_mismatches.length > 0) {
++    reference_result = 'REJECTED_REFERENCE_MATCH'
++  } else if (
++    fields.filter((f) => f.mandatory).every((f) => f.status === 'MATCH')
++  ) {
++    reference_result = 'EXACT_CANDIDATE'
++  } else if (match_count > 0 && mismatch_count === 0) {
++    reference_result = 'PARTIAL_CANDIDATE'
++  } else if (match_count === 0 && mismatch_count === 0) {
++    reference_result = 'INSUFFICIENT_EVIDENCE'
++  } else {
++    reference_result = 'PARTIAL_CANDIDATE'
++  }
++
++  const rank_key = [
++    String(score).padStart(5, '0'),
++    String(match_count).padStart(2, '0'),
++    String(100 - mismatch_count).padStart(3, '0'),
++    cfg.configuration_id,
++  ].join('|')
++
++  return {
++    configuration_id: cfg.configuration_id,
++    display_name: cfg.display_name,
++    fields,
++    match_count,
++    mismatch_count,
++    unknown_count,
++    mandatory_mismatches,
++    score,
++    rank_key,
++    reference_result,
++  }
++}
++
++export function rankComparisons(
++  comparisons: ConfigurationComparison[],
++): ConfigurationComparison[] {
++  return [...comparisons].sort((a, b) => {
++    if (b.score !== a.score) return b.score - a.score
++    return a.configuration_id.localeCompare(b.configuration_id)
++  })
++}
++
++export function resolveOutcome(
++  comparisons: ConfigurationComparison[],
++): ResolutionOutcome {
++  const ranked = rankComparisons(comparisons)
++  const viable = ranked.filter(
++    (c) =>
++      c.reference_result === 'EXACT_CANDIDATE' ||
++      c.reference_result === 'PARTIAL_CANDIDATE',
++  )
++  if (viable.length === 0) return 'NO_MATCH'
++  const top = viable[0]!
++  const tied = viable.filter((c) => c.score === top.score && c.reference_result === top.reference_result)
++  if (tied.length > 1 && top.reference_result === 'EXACT_CANDIDATE') return 'AMBIGUOUS'
++  if (tied.length > 1 && top.score > 0) return 'AMBIGUOUS'
++  if (top.reference_result === 'EXACT_CANDIDATE') return 'EXACT_CANDIDATE'
++  return 'PARTIAL_CANDIDATE'
++}
++
++export function summarizeConflicts(comparisons: ConfigurationComparison[]): string[] {
++  const out: string[] = []
++  for (const c of comparisons) {
++    for (const f of c.fields) {
++      if (f.status === 'MISMATCH') {
++        out.push(
++          `${c.configuration_id}.${f.field}: expected=${String(f.expected)} observed=${String(f.observed)}`,
++        )
++      }
++    }
++  }
++  return out
++}
++
++export function summarizeUnknowns(
++  identity: NormalizedVehicleIdentity,
++  comparisons: ConfigurationComparison[],
++): string[] {
++  const unknowns = new Set<string>()
++  for (const [k, v] of Object.entries(identity)) {
++    if (v == null && k !== 'retained_raw_keys') unknowns.add(`identity.${k}`)
++  }
++  for (const c of comparisons) {
++    for (const f of c.fields) {
++      if (f.status === 'UNKNOWN') unknowns.add(`${c.configuration_id}.${f.field}`)
++    }
++  }
++  // Geometry / CA never from VIN
++  unknowns.add('physical.wheelbase_in')
++  unknowns.add('physical.cab_to_axle_in')
++  unknowns.add('physical.frame_geometry')
++  unknowns.add('physical.modification_state')
++  return [...unknowns].sort()
++}
++
++export function assertUnknownIsNotMatch(status: FieldComparisonStatus): void {
++  if (status === 'MATCH' && status !== 'MATCH') {
++    // unreachable guard for tests to import philosophy
++  }
++  if (normalizeForCompare(null) !== null) {
++    throw new Error('null must not normalize to a matchable string')
++  }
++}
+diff --git a/edts-vin-resolver/src/vin/types.ts b/edts-vin-resolver/src/vin/types.ts
+new file mode 100644
+index 0000000..1515cac
+--- /dev/null
++++ b/edts-vin-resolver/src/vin/types.ts
+@@ -0,0 +1,184 @@
++/** EDTS VIN resolver domain types (DT-D067). Missing values are null — never guessed. */
++
++export type FieldComparisonStatus = 'MATCH' | 'MISMATCH' | 'UNKNOWN' | 'NOT_APPLICABLE'
++
++export type ResolutionOutcome =
++  | 'EXACT_CANDIDATE'
++  | 'PARTIAL_CANDIDATE'
++  | 'AMBIGUOUS'
++  | 'NO_MATCH'
++  | 'INVALID_VIN'
++  | 'DECODER_ERROR'
++  | 'NETWORK_ERROR'
++
++export type VehicleLifecycleStatus =
++  | 'VIN_DECODED'
++  | 'CONFIGURATION_CANDIDATE'
++  | 'PHYSICAL_VERIFICATION_REQUIRED'
++  | 'CONFIGURATION_CONFIRMED'
++  | 'REJECTED'
++
++export type VinValidationResult = {
++  ok: boolean
++  vin: string | null
++  errors: string[]
++  checkDigitValid: boolean | null
++}
++
++export type VpicFlatResult = Record<string, string | number | null | undefined>
++
++export type VinDecodeEvidence = {
++  provider: 'NHTSA_VPIC'
++  endpoint: string
++  retrieved_at_utc: string
++  request_vin: string
++  response_vin: string | null
++  content_sha256: string
++  http_status: number
++  count: number | null
++  message: string | null
++  search_criteria: string | null
++  error_code: string | null
++  error_text: string | null
++  additional_error_text: string | null
++  raw: unknown
++}
++
++export type NormalizedVehicleIdentity = {
++  vin: string
++  manufacturer: string | null
++  make: string | null
++  model: string | null
++  modelYear: number | null
++  series: string | null
++  trim: string | null
++  bodyClass: string | null
++  vehicleType: string | null
++  cabType: string | null
++  driveType: string | null
++  axleConfiguration: string | null
++  numberOfAxles: number | null
++  gvwr: string | null
++  gvwrClass: string | null
++  engineManufacturer: string | null
++  engineModel: string | null
++  engineCylinders: number | null
++  displacementLiters: number | null
++  fuelTypePrimary: string | null
++  plantCity: string | null
++  plantState: string | null
++  plantCountry: string | null
++  errorCode: string | null
++  errorText: string | null
++  /** Original Variable-style flat keys retained for audit */
++  retained_raw_keys: Record<string, string | null>
++}
++
++export type ConfigurationExpectation = {
++  configuration_id: string
++  display_name: string
++  make: string[]
++  manufacturer_contains?: string[]
++  model_year: number
++  model_patterns: string[]
++  body_class_patterns: string[]
++  body_class_reject_patterns?: string[]
++  cab_type_patterns: string[]
++  drive_type_patterns: string[]
++  rear_wheels?: string | null
++  wheelbase_in?: number | null
++  cab_to_axle_in?: number | null
++  notes?: string[]
++}
++
++export type FieldComparison = {
++  field: string
++  expected: string | number | null
++  observed: string | number | null
++  status: FieldComparisonStatus
++  mandatory: boolean
++}
++
++export type ConfigurationComparison = {
++  configuration_id: string
++  display_name: string
++  fields: FieldComparison[]
++  match_count: number
++  mismatch_count: number
++  unknown_count: number
++  mandatory_mismatches: string[]
++  score: number
++  rank_key: string
++  reference_result:
++    | 'EXACT_CANDIDATE'
++    | 'PARTIAL_CANDIDATE'
++    | 'REJECTED_REFERENCE_MATCH'
++    | 'INSUFFICIENT_EVIDENCE'
++}
++
++export type ConfigurationCandidate = {
++  configuration_id: string
++  score: number
++  comparison: ConfigurationComparison
++}
++
++export type VerificationRequirement = {
++  id: string
++  description: string
++  required: boolean
++  reason: string
++}
++
++export type VinResolutionReport = {
++  vin: string
++  vin_validation: 'PASS' | 'FAIL'
++  decode_provider: 'NHTSA vPIC'
++  decode_status: 'SUCCESS' | 'FAIL' | 'OFFLINE_CACHE' | 'SKIPPED'
++  outcome: ResolutionOutcome
++  identity: NormalizedVehicleIdentity | null
++  comparisons: ConfigurationComparison[]
++  top_candidates: ConfigurationCandidate[]
++  conflicts: string[]
++  unknowns: string[]
++  verification_requirements: VerificationRequirement[]
++  confidence_explanation: string[]
++  honesty: string[]
++  vehicle_id: string | null
++  evidence_path: string | null
++  vehicle_path: string | null
++  report_path: string | null
++  lifecycle_status: VehicleLifecycleStatus | null
++  compare_filter: string | null
++}
++
++export type VehicleRecord = {
++  vehicle_id: string
++  vin: string
++  lifecycle_status: VehicleLifecycleStatus
++  normalized_identity: NormalizedVehicleIdentity
++  evidence_ref: string
++  evidence_sha256: string
++  candidate_configurations: ConfigurationCandidate[]
++  conflicts: string[]
++  unknown_fields: string[]
++  required_physical_verification: VerificationRequirement[]
++  resolution_outcome: ResolutionOutcome
++  created_at: string
++  updated_at: string
++  decision: 'DT-D067'
++  geometry_verified: false
++  configuration_confirmed_from_vin_alone: false
++}
++
++export type ResolveVinOptions = {
++  vin: string
++  offline?: boolean
++  forceRefresh?: boolean
++  compareConfigurationId?: string | null
++  json?: boolean
++  dataRoot?: string
++  fetchImpl?: typeof fetch
++  now?: () => Date
++  maxRetries?: number
++  timeoutMs?: number
++}
+diff --git a/edts-vin-resolver/src/vin/validateVin.ts b/edts-vin-resolver/src/vin/validateVin.ts
+new file mode 100644
+index 0000000..0443f57
+--- /dev/null
++++ b/edts-vin-resolver/src/vin/validateVin.ts
+@@ -0,0 +1,67 @@
++import type { VinValidationResult } from './types.js'
++
++const VIN_REGEX = /^[A-HJ-NPR-Z0-9]{17}$/
++
++/** ISO 3779 transliteration for check digit. */
++const TRANSLITERATION: Record<string, number> = {
++  A: 1, B: 2, C: 3, D: 4, E: 5, F: 6, G: 7, H: 8,
++  J: 1, K: 2, L: 3, M: 4, N: 5, P: 7, R: 9,
++  S: 2, T: 3, U: 4, V: 5, W: 6, X: 7, Y: 8, Z: 9,
++  '0': 0, '1': 1, '2': 2, '3': 3, '4': 4,
++  '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,
++}
++
++const WEIGHTS = [8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2]
++
++export function normalizeVinInput(raw: string): string {
++  return raw.trim().toUpperCase().replace(/[\s-]/g, '')
++}
++
++export function computeVinCheckDigit(vin17: string): string {
++  let sum = 0
++  for (let i = 0; i < 17; i++) {
++    const ch = vin17[i]!
++    const value = TRANSLITERATION[ch]
++    if (value === undefined) throw new Error(`Cannot transliterate '${ch}'`)
++    sum += value * WEIGHTS[i]!
++  }
++  const rem = sum % 11
++  return rem === 10 ? 'X' : String(rem)
++}
++
++export function validateVin(raw: string): VinValidationResult {
++  const errors: string[] = []
++  const vin = normalizeVinInput(raw)
++
++  if (!vin) {
++    return { ok: false, vin: null, errors: ['VIN is empty'], checkDigitValid: null }
++  }
++  if (vin.length !== 17) {
++    errors.push(`VIN length must be 17 (got ${vin.length})`)
++  }
++  if (/[IOQ]/.test(vin)) {
++    errors.push('VIN must not contain I, O, or Q')
++  }
++  if (!/^[A-Z0-9]+$/.test(vin)) {
++    errors.push('VIN must contain only A–Z and 0–9')
++  } else if (vin.length === 17 && !VIN_REGEX.test(vin)) {
++    errors.push('VIN contains forbidden characters')
++  }
++
++  let checkDigitValid: boolean | null = null
++  if (errors.length === 0 && VIN_REGEX.test(vin)) {
++    const expected = computeVinCheckDigit(vin)
++    const actual = vin[8]!
++    checkDigitValid = expected === actual
++    if (!checkDigitValid) {
++      errors.push(`Invalid check digit at position 9 (expected ${expected}, got ${actual})`)
++    }
++  }
++
++  return {
++    ok: errors.length === 0,
++    vin: errors.length === 0 ? vin : vin || null,
++    errors,
++    checkDigitValid,
++  }
++}
+diff --git a/edts-vin-resolver/tests/vin/mismatch.test.ts b/edts-vin-resolver/tests/vin/mismatch.test.ts
+new file mode 100644
+index 0000000..5b4e554
+--- /dev/null
++++ b/edts-vin-resolver/tests/vin/mismatch.test.ts
+@@ -0,0 +1,146 @@
++import { mkdtemp, mkdir, writeFile, readFile, cp } from 'node:fs/promises'
++import os from 'node:os'
++import path from 'node:path'
++import { fileURLToPath } from 'node:url'
++import { describe, expect, it } from 'vitest'
++import { toEvidence } from '../../src/vin/decodeVpic.js'
++import { resolveVin } from '../../src/vin/pipeline.js'
++import { persistRawEvidence, loadCachedEvidence } from '../../src/vin/persistVinEvidence.js'
++
++const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
++
++async function tempDataRoot() {
++  const dir = await mkdtemp(path.join(os.tmpdir(), 'edts-vin-'))
++  const data = path.join(dir, 'data')
++  await mkdir(path.join(data, 'configurations'), { recursive: true })
++  await mkdir(path.join(data, 'evidence', 'vin'), { recursive: true })
++  await mkdir(path.join(data, 'vehicles'), { recursive: true })
++  await mkdir(path.join(dir, 'reports', 'vin'), { recursive: true })
++  await cp(
++    path.join(root, 'data/configurations/CFG-2019-F450-REG-CAB-4X2-60CA-DRW.json'),
++    path.join(data, 'configurations/CFG-2019-F450-REG-CAB-4X2-60CA-DRW.json'),
++  )
++  return data
++}
++
++describe('mismatch + pipeline fixtures', () => {
++  it('manufacturer mismatch → REJECTED_REFERENCE_MATCH / NO_MATCH via pipeline', async () => {
++    const dataRoot = await tempDataRoot()
++    const payload = JSON.parse(
++      await readFile(path.join(root, 'fixtures/vpic/1HTKHPVK8KH805188.json'), 'utf8'),
++    )
++    const { report, exitCode } = await resolveVin({
++      vin: '1HTKHPVK8KH805188',
++      dataRoot,
++      fetchImpl: async () =>
++        new Response(JSON.stringify(payload), {
++          status: 200,
++          headers: { 'Content-Type': 'application/json' },
++        }),
++    })
++    expect(exitCode).toBe(0)
++    expect(report.outcome).toBe('NO_MATCH')
++    expect(report.comparisons[0]?.reference_result).toBe('REJECTED_REFERENCE_MATCH')
++    expect(report.lifecycle_status).toBe('REJECTED')
++    expect(report.honesty.some((h) => /geometry/i.test(h))).toBe(true)
++    expect(report.vehicle_id).toBe('VEH-1HTKHPVK8KH805188')
++  })
++
++  it('network timeout surfaces NETWORK_ERROR', async () => {
++    const dataRoot = await tempDataRoot()
++    const { report, exitCode } = await resolveVin({
++      vin: '1HTKHPVK8KH805188',
++      dataRoot,
++      maxRetries: 0,
++      timeoutMs: 50,
++      fetchImpl: async () => {
++        const err = new Error('aborted')
++        err.name = 'AbortError'
++        throw err
++      },
++    })
++    expect(exitCode).toBe(2)
++    expect(report.outcome).toBe('NETWORK_ERROR')
++  })
++
++  it('malformed API response → DECODER_ERROR', async () => {
++    const dataRoot = await tempDataRoot()
++    const { report, exitCode } = await resolveVin({
++      vin: '1HTKHPVK8KH805188',
++      dataRoot,
++      fetchImpl: async () =>
++        new Response(JSON.stringify({ Count: 1, Results: [] }), { status: 200 }),
++    })
++    expect(exitCode).toBe(2)
++    expect(report.outcome).toBe('DECODER_ERROR')
++  })
++
++  it('offline uses cache and fails honestly when missing', async () => {
++    const dataRoot = await tempDataRoot()
++    const miss = await resolveVin({
++      vin: '1HTKHPVK8KH805188',
++      dataRoot,
++      offline: true,
++    })
++    expect(miss.exitCode).toBe(2)
++
++    const payload = JSON.parse(
++      await readFile(path.join(root, 'fixtures/vpic/1HTKHPVK8KH805188.json'), 'utf8'),
++    )
++    const evidence = toEvidence(
++      '1HTKHPVK8KH805188',
++      'fixture',
++      200,
++      payload,
++      new Date('2026-07-22T00:00:00Z'),
++    )
++    await persistRawEvidence(dataRoot, evidence)
++    const hit = await resolveVin({
++      vin: '1HTKHPVK8KH805188',
++      dataRoot,
++      offline: true,
++    })
++    expect(hit.exitCode).toBe(0)
++    expect(hit.report.decode_status).toBe('OFFLINE_CACHE')
++  })
++
++  it('repeat execution is idempotent on vehicle_id and preserves created_at', async () => {
++    const dataRoot = await tempDataRoot()
++    const payload = JSON.parse(
++      await readFile(path.join(root, 'fixtures/vpic/1HTKHPVK8KH805188.json'), 'utf8'),
++    )
++    const fetchImpl: typeof fetch = async () =>
++      new Response(JSON.stringify(payload), { status: 200 })
++
++    const a = await resolveVin({
++      vin: '1HTKHPVK8KH805188',
++      dataRoot,
++      fetchImpl,
++      now: () => new Date('2026-07-22T01:00:00Z'),
++    })
++    const b = await resolveVin({
++      vin: '1HTKHPVK8KH805188',
++      dataRoot,
++      fetchImpl,
++      now: () => new Date('2026-07-22T02:00:00Z'),
++    })
++    expect(a.report.vehicle_id).toBe(b.report.vehicle_id)
++    const record = JSON.parse(
++      await readFile(path.join(dataRoot, 'vehicles/VEH-1HTKHPVK8KH805188.json'), 'utf8'),
++    )
++    expect(record.created_at).toBe('2026-07-22T01:00:00.000Z')
++    expect(record.updated_at).toBe('2026-07-22T02:00:00.000Z')
++    expect(record.configuration_confirmed_from_vin_alone).toBe(false)
++    expect(record.geometry_verified).toBe(false)
++  })
++
++  it('atomic persistence writes readable JSON evidence', async () => {
++    const dataRoot = await tempDataRoot()
++    const payload = { Count: 1, Message: 'ok', Results: [{ VIN: '1HTKHPVK8KH805188', ErrorCode: '0', ErrorText: '0', Make: 'GM', ModelYear: '2019' }] }
++    const evidence = toEvidence('1HTKHPVK8KH805188', 'fixture', 200, payload, new Date())
++    const p = await persistRawEvidence(dataRoot, evidence)
++    const loaded = await loadCachedEvidence(dataRoot, '1HTKHPVK8KH805188')
++    expect(loaded?.content_sha256).toBe(evidence.content_sha256)
++    expect(p).toContain('1HTKHPVK8KH805188.raw.json')
++  })
++})
+diff --git a/edts-vin-resolver/tests/vin/normalizeVpic.test.ts b/edts-vin-resolver/tests/vin/normalizeVpic.test.ts
+new file mode 100644
+index 0000000..9d34934
+--- /dev/null
++++ b/edts-vin-resolver/tests/vin/normalizeVpic.test.ts
+@@ -0,0 +1,50 @@
++import { readFileSync } from 'node:fs'
++import path from 'node:path'
++import { fileURLToPath } from 'node:url'
++import { describe, expect, it } from 'vitest'
++import { toEvidence } from '../../src/vin/decodeVpic.js'
++import { normalizeVpic, matchesAnyPattern } from '../../src/vin/normalizeVpic.js'
++
++const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
++
++describe('normalizeVpic', () => {
++  it('maps empty strings to null', () => {
++    const payload = JSON.parse(
++      readFileSync(path.join(root, 'fixtures/vpic/ford_f450_chassis_cab_synthetic.json'), 'utf8'),
++    )
++    const evidence = toEvidence('1FDUF4HT0KDA00001', 'fixture', 200, payload, new Date('2026-07-22T00:00:00Z'))
++    const id = normalizeVpic(evidence, '1FDUF4HT0KDA00001')
++    expect(id.make).toBe('FORD')
++    expect(id.modelYear).toBe(2019)
++    expect(id.cabType).toBe('Regular')
++    expect(id.trim).toBe('XL')
++    expect(id.engineModel).toBeNull()
++    expect(id.gvwrClass).toBe('Class 4')
++  })
++
++  it('treats empty vPIC values as null — never guessed', () => {
++    const payload = {
++      Count: 1,
++      Message: 'ok',
++      Results: [
++        {
++          VIN: '1HTKHPVK8KH805188',
++          Make: '',
++          Model: '',
++          ModelYear: '2019',
++          ErrorCode: '0',
++          ErrorText: '0 - VIN decoded clean. Check Digit (9th position) is correct',
++        },
++      ],
++    }
++    const evidence = toEvidence('1HTKHPVK8KH805188', 'fixture', 200, payload, new Date())
++    const id = normalizeVpic(evidence, '1HTKHPVK8KH805188')
++    expect(id.make).toBeNull()
++    expect(id.model).toBeNull()
++    expect(id.modelYear).toBe(2019)
++  })
++
++  it('UNKNOWN pattern match returns null (not true)', () => {
++    expect(matchesAnyPattern(null, ['FORD'])).toBeNull()
++  })
++})
+diff --git a/edts-vin-resolver/tests/vin/resolveConfiguration.test.ts b/edts-vin-resolver/tests/vin/resolveConfiguration.test.ts
+new file mode 100644
+index 0000000..f913dab
+--- /dev/null
++++ b/edts-vin-resolver/tests/vin/resolveConfiguration.test.ts
+@@ -0,0 +1,108 @@
++import { readFileSync } from 'node:fs'
++import path from 'node:path'
++import { fileURLToPath } from 'node:url'
++import { describe, expect, it } from 'vitest'
++import { toEvidence } from '../../src/vin/decodeVpic.js'
++import { normalizeVpic } from '../../src/vin/normalizeVpic.js'
++import {
++  compareIdentityToConfiguration,
++  resolveOutcome,
++  rankComparisons,
++} from '../../src/vin/resolveConfiguration.js'
++import type { ConfigurationExpectation } from '../../src/vin/types.js'
++
++const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
++const cfg = JSON.parse(
++  readFileSync(
++    path.join(root, 'data/configurations/CFG-2019-F450-REG-CAB-4X2-60CA-DRW.json'),
++    'utf8',
++  ),
++) as ConfigurationExpectation
++
++describe('resolveConfiguration', () => {
++  it('rejects manufacturer mismatch even when model year matches', () => {
++    const payload = JSON.parse(
++      readFileSync(path.join(root, 'fixtures/vpic/1HTKHPVK8KH805188.json'), 'utf8'),
++    )
++    const evidence = toEvidence('1HTKHPVK8KH805188', 'fixture', 200, payload, new Date())
++    const id = normalizeVpic(evidence, '1HTKHPVK8KH805188')
++    const cmp = compareIdentityToConfiguration(id, cfg)
++    const make = cmp.fields.find((f) => f.field === 'make_or_manufacturer')!
++    const year = cmp.fields.find((f) => f.field === 'modelYear')!
++    expect(year.status).toBe('MATCH')
++    expect(make.status).toBe('MISMATCH')
++    expect(cmp.reference_result).toBe('REJECTED_REFERENCE_MATCH')
++    expect(resolveOutcome([cmp])).toBe('NO_MATCH')
++  })
++
++  it('UNKNOWN does not equal MATCH', () => {
++    const payload = {
++      Count: 1,
++      Message: 'ok',
++      Results: [
++        {
++          VIN: '1FDUF4HT0KDA00001',
++          Make: 'FORD',
++          Manufacturer: 'FORD MOTOR COMPANY',
++          Model: 'F-450',
++          ModelYear: '2019',
++          BodyClass: '',
++          DriveType: '',
++          BodyCabType: '',
++          ErrorCode: '0',
++          ErrorText: '0 - ok',
++        },
++      ],
++    }
++    const id = normalizeVpic(
++      toEvidence('1FDUF4HT0KDA00001', 'fixture', 200, payload, new Date()),
++      '1FDUF4HT0KDA00001',
++    )
++    const cmp = compareIdentityToConfiguration(id, cfg)
++    const body = cmp.fields.find((f) => f.field === 'bodyClass')!
++    expect(body.status).toBe('UNKNOWN')
++    expect(body.status).not.toBe('MATCH')
++    expect(cmp.reference_result).not.toBe('EXACT_CANDIDATE')
++  })
++
++  it('scores Ford chassis cab synthetic as EXACT_CANDIDATE', () => {
++    const payload = JSON.parse(
++      readFileSync(
++        path.join(root, 'fixtures/vpic/ford_f450_chassis_cab_synthetic.json'),
++        'utf8',
++      ),
++    )
++    const id = normalizeVpic(
++      toEvidence('1FDUF4HT0KDA00001', 'fixture', 200, payload, new Date()),
++      '1FDUF4HT0KDA00001',
++    )
++    const cmp = compareIdentityToConfiguration(id, cfg)
++    expect(cmp.reference_result).toBe('EXACT_CANDIDATE')
++    expect(resolveOutcome([cmp])).toBe('EXACT_CANDIDATE')
++  })
++
++  it('handles ambiguous equal top scores deterministically', () => {
++    const cfg2: ConfigurationExpectation = {
++      ...cfg,
++      configuration_id: 'CFG-2019-F450-ALT',
++      display_name: 'Alt',
++    }
++    const payload = JSON.parse(
++      readFileSync(
++        path.join(root, 'fixtures/vpic/ford_f450_chassis_cab_synthetic.json'),
++        'utf8',
++      ),
++    )
++    const id = normalizeVpic(
++      toEvidence('1FDUF4HT0KDA00001', 'fixture', 200, payload, new Date()),
++      '1FDUF4HT0KDA00001',
++    )
++    const a = compareIdentityToConfiguration(id, cfg)
++    const b = compareIdentityToConfiguration(id, cfg2)
++    const ranked = rankComparisons([b, a])
++    expect(resolveOutcome([a, b])).toBe('AMBIGUOUS')
++    expect(ranked[0]!.configuration_id < ranked[1]!.configuration_id || ranked[0]!.score >= ranked[1]!.score).toBe(
++      true,
++    )
++  })
++})
+diff --git a/edts-vin-resolver/tests/vin/validateVin.test.ts b/edts-vin-resolver/tests/vin/validateVin.test.ts
+new file mode 100644
+index 0000000..78d3e73
+--- /dev/null
++++ b/edts-vin-resolver/tests/vin/validateVin.test.ts
+@@ -0,0 +1,41 @@
++import { describe, expect, it } from 'vitest'
++import { computeVinCheckDigit, validateVin } from '../../src/vin/validateVin.js'
++
++describe('validateVin', () => {
++  it('accepts a valid 17-character VIN with correct check digit', () => {
++    const r = validateVin('1HTKHPVK8KH805188')
++    expect(r.ok).toBe(true)
++    expect(r.vin).toBe('1HTKHPVK8KH805188')
++    expect(r.checkDigitValid).toBe(true)
++  })
++
++  it('rejects invalid length', () => {
++    const r = validateVin('1HTKHPVK8KH80518')
++    expect(r.ok).toBe(false)
++    expect(r.errors.some((e) => /length/i.test(e))).toBe(true)
++  })
++
++  it('rejects forbidden characters I/O/Q', () => {
++    expect(validateVin('1IOQHPVK8KH805188').ok).toBe(false)
++    expect(validateVin('1HTKHPVK8KH80518O').errors.join(' ')).toMatch(/I, O, or Q/)
++  })
++
++  it('rejects invalid check digit', () => {
++    const base = '1HTKHPVK8KH805188'
++    const bad = `${base.slice(0, 8)}0${base.slice(9)}`
++    const r = validateVin(bad)
++    expect(r.ok).toBe(false)
++    expect(r.checkDigitValid).toBe(false)
++  })
++
++  it('normalizes whitespace and lowercase', () => {
++    const r = validateVin(' 1htkhpvk8kh805188 ')
++    expect(r.ok).toBe(true)
++    expect(r.vin).toBe('1HTKHPVK8KH805188')
++  })
++
++  it('computeVinCheckDigit matches position 9', () => {
++    const vin = '1HTKHPVK8KH805188'
++    expect(computeVinCheckDigit(vin)).toBe(vin[8])
++  })
++})
+diff --git a/edts-vin-resolver/tests/vin/vpic.integration.test.ts b/edts-vin-resolver/tests/vin/vpic.integration.test.ts
+new file mode 100644
+index 0000000..3358ab3
+--- /dev/null
++++ b/edts-vin-resolver/tests/vin/vpic.integration.test.ts
+@@ -0,0 +1,16 @@
++import { describe, expect, it } from 'vitest'
++import { validateVin } from '../../src/vin/validateVin.js'
++import { decodeVpic } from '../../src/vin/decodeVpic.js'
++import { normalizeVpic } from '../../src/vin/normalizeVpic.js'
++
++const runLive = process.env.RUN_VPIC_INTEGRATION === 'true'
++
++describe.runIf(runLive)('vPIC live integration (opt-in)', () => {
++  it('decodes 1HTKHPVK8KH805188', async () => {
++    expect(validateVin('1HTKHPVK8KH805188').ok).toBe(true)
++    const evidence = await decodeVpic({ vin: '1HTKHPVK8KH805188', maxRetries: 1 })
++    const id = normalizeVpic(evidence, '1HTKHPVK8KH805188')
++    expect(id.modelYear).toBe(2019)
++    expect(id.manufacturer).toBeTruthy()
++  }, 30_000)
++})
+diff --git a/edts-vin-resolver/tsconfig.build.json b/edts-vin-resolver/tsconfig.build.json
+new file mode 100644
+index 0000000..0248a6b
+--- /dev/null
++++ b/edts-vin-resolver/tsconfig.build.json
+@@ -0,0 +1,5 @@
++{
++  "extends": "./tsconfig.json",
++  "include": ["src/**/*"],
++  "exclude": ["dist", "node_modules", "tests", "scripts"]
++}
+diff --git a/edts-vin-resolver/tsconfig.json b/edts-vin-resolver/tsconfig.json
+new file mode 100644
+index 0000000..f270493
+--- /dev/null
++++ b/edts-vin-resolver/tsconfig.json
+@@ -0,0 +1,18 @@
++{
++  "compilerOptions": {
++    "target": "ES2022",
++    "module": "NodeNext",
++    "moduleResolution": "NodeNext",
++    "strict": true,
++    "esModuleInterop": true,
++    "skipLibCheck": true,
++    "forceConsistentCasingInFileNames": true,
++    "resolveJsonModule": true,
++    "declaration": true,
++    "outDir": "dist",
++    "rootDir": ".",
++    "types": ["node"]
++  },
++  "include": ["src/**/*", "scripts/**/*", "tests/**/*"],
++  "exclude": ["dist", "node_modules"]
++}
+diff --git a/edts-vin-resolver/vitest.config.ts b/edts-vin-resolver/vitest.config.ts
+new file mode 100644
+index 0000000..d5e4807
+--- /dev/null
++++ b/edts-vin-resolver/vitest.config.ts
+@@ -0,0 +1,9 @@
++import { defineConfig } from 'vitest/config'
++
++export default defineConfig({
++  test: {
++    environment: 'node',
++    include: ['tests/**/*.test.ts'],
++    exclude: ['tests/**/*.integration.test.ts'],
++  },
++})

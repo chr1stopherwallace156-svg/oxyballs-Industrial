@@ -1,0 +1,61 @@
+=== git log --oneline 31513ac1b12626e89020f8ac998247b68d84f1d6..HEAD ===
+597ebb3 docs(pass1): point IDENTITY.txt at final evidence tip
+60d74fb docs(pass1): refresh swift-test-full.log against evidence tip
+00b88a2 docs(pass1): attach IDENTITY and git-evidence for tip SHA
+b8065ea docs(pass1): Decision Log, evidence standard, and approval package
+f739c36 docs(pass1): record non-ASCII escaping policy and inventory classification
+4a954b7 fix(canonical): resolve Unicode byte normalization and inventory test failures
+
+=== git diff --stat 31513ac1b12626e89020f8ac998247b68d84f1d6..HEAD ===
+ App/Application/CanonicalJSON.swift                |  33 +++-
+ App/Phase1/CaptureSidePackageValidator.swift       |  42 ++++-
+ Docs/Capture/PASS_APPROVAL_EVIDENCE_STANDARD.md    |  61 +++++++
+ Docs/Capture/PHASED_EXECUTION_GATES.md             |  88 ++++++++++
+ Docs/Decisions/DECISION_LOG.md                     |  70 ++++++++
+ .../PACKAGE_INVENTORY_PASS1_CLASSIFICATION.md      |  35 ++++
+ Docs/Evidence/PASS1_APPROVAL_EVIDENCE/IDENTITY.txt |   5 +
+ .../PASS1_APPROVAL_REQUEST.md                      | 143 ++++++++++++++++
+ .../git-evidence-partial.txt                       |  43 +++++
+ .../PASS1_APPROVAL_EVIDENCE/git-evidence.txt       |  76 +++++++++
+ .../PASS1_APPROVAL_EVIDENCE/swift-test-full.log    | 164 +++++++++++++++++++
+ .../PASS1_APPROVAL_EVIDENCE/tests-name-status.txt  |   1 +
+ Docs/Validation/CANONICAL_JSON.md                  |   2 +-
+ Docs/Validation/CANONICAL_NON_ASCII_POLICY.md      |  45 ++++++
+ Tests/Unit/Pass1CanonicalInventoryTests.swift      | 180 +++++++++++++++++++++
+ 15 files changed, 984 insertions(+), 4 deletions(-)
+
+=== git diff --name-status 31513ac1b12626e89020f8ac998247b68d84f1d6..HEAD ===
+M	App/Application/CanonicalJSON.swift
+M	App/Phase1/CaptureSidePackageValidator.swift
+A	Docs/Capture/PASS_APPROVAL_EVIDENCE_STANDARD.md
+A	Docs/Capture/PHASED_EXECUTION_GATES.md
+A	Docs/Decisions/DECISION_LOG.md
+A	Docs/Evidence/PACKAGE_INVENTORY_PASS1_CLASSIFICATION.md
+A	Docs/Evidence/PASS1_APPROVAL_EVIDENCE/IDENTITY.txt
+A	Docs/Evidence/PASS1_APPROVAL_EVIDENCE/PASS1_APPROVAL_REQUEST.md
+A	Docs/Evidence/PASS1_APPROVAL_EVIDENCE/git-evidence-partial.txt
+A	Docs/Evidence/PASS1_APPROVAL_EVIDENCE/git-evidence.txt
+A	Docs/Evidence/PASS1_APPROVAL_EVIDENCE/swift-test-full.log
+A	Docs/Evidence/PASS1_APPROVAL_EVIDENCE/tests-name-status.txt
+M	Docs/Validation/CANONICAL_JSON.md
+A	Docs/Validation/CANONICAL_NON_ASCII_POLICY.md
+A	Tests/Unit/Pass1CanonicalInventoryTests.swift
+
+=== git log -1 --format=fuller ===
+commit 597ebb3db4317024a41e701412e1b635c0d6ce1e
+Author:     Cursor Agent <cursoragent@cursor.com>
+AuthorDate: Fri Jul 24 17:01:25 2026 +0000
+Commit:     Cursor Agent <cursoragent@cursor.com>
+CommitDate: Fri Jul 24 17:01:25 2026 +0000
+
+    docs(pass1): point IDENTITY.txt at final evidence tip
+
+=== git show --summary HEAD ===
+commit 597ebb3db4317024a41e701412e1b635c0d6ce1e
+Author: Cursor Agent <cursoragent@cursor.com>
+Date:   Fri Jul 24 17:01:25 2026 +0000
+
+    docs(pass1): point IDENTITY.txt at final evidence tip
+
+ Docs/Evidence/PASS1_APPROVAL_EVIDENCE/IDENTITY.txt | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)

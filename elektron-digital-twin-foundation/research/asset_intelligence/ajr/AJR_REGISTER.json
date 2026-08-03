@@ -4,8 +4,8 @@
   "status": "ACTIVE",
   "schema": "schemas/acquisition-justification-report.schema.json",
   "home": "research/asset_intelligence/ajr/",
-  "decision": "DT-D043",
-  "next_id": "AJR-000003",
+  "decision": "DT-D044",
+  "next_id": "AJR-000004",
   "policy": {
     "purchase_requires": [
       "AJR",
@@ -28,6 +28,18 @@
       "path": "research/asset_intelligence/ajr/AJR-000002.json",
       "purchase_clearance": "NOT_CLEARED",
       "decision": "CONTINUE_RESEARCH"
+    },
+    {
+      "ajr_id": "AJR-000003",
+      "asset_id": "AID-000011",
+      "path": "research/asset_intelligence/ajr/AJR-000003.json",
+      "purchase_clearance": "REJECTED",
+      "decision": "HOLD_REJECTED",
+      "operator_alias": "AJR-001 / HOLD_REJECTED"
     }
+  ],
+  "notes": [
+    "AJR-000003: Hum3D paid door shell HOLD_REJECTED (visual duplicate of free F-150 crossover path).",
+    "AJR-000001 M300 remains NOT_CLEARED \u2014 operator ACQUIRED claim rejected (no bytes)."
   ]
 }

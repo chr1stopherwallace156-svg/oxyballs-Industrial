@@ -1,0 +1,31 @@
+{
+  "decision_id": "DT-D056",
+  "title": "Three-layer graph separation locked; ICE decon refiled L1/L2/L3; Option 2 Mission D L1 focus",
+  "status": "ACCEPTED",
+  "date_utc": "2026-07-20",
+  "related_locks": ["RL-025"],
+  "summary": "Admit Three-Layer Knowledge Graph Separation Protocol (L1 Truth / L2 Analysis / L3 Decisions) with non-inheritance. Re-file ICE decon Phase 2 into layer packages; scrub remaining L1 pollution (radiator material/manufacturing; restore fuel capacity ASSERTION_EXTRACTED). Register MEPQ-006/007. Select Option 2 — continue Mission D with Layer 1 focus. Option 1 Mission F already open — apply same L1/L3 split for LV taps.",
+  "accepted_artifacts": [
+    "research/graph_layers/THREE_LAYER_SEPARATION_PROTOCOL.md",
+    "research/graph_layers/THREE_LAYER_GRAPH_REGISTER.json",
+    "research/vertical_slices/ice_decon_phase2_2019_f450/layers/",
+    "research/vertical_slices/front_suspension_2019_f450/layers/",
+    "research/mepq/MEPQ-006.json",
+    "research/mepq/MEPQ-007.json",
+    "research/knowledge_gaps/KG-011.json",
+    "research/knowledge_gaps/KG-012.json"
+  ],
+  "l1_scrub_highlights": [
+    "Radiator material/manufacturing REJECTED_FROM_L1 → UNKNOWN",
+    "Fuel tank capacity restored to ASSERTION_EXTRACTED 40 gal aft-of-axle std (not UNKNOWN)",
+    "38.3×30×8 remains L2 CALCULATED_ESTIMATE only",
+    "MUST_REMOVE / battery cradle remain L3"
+  ],
+  "option_selection": {
+    "option_1_mission_f": "ALREADY_OPEN — enforce L1 harness truth vs L3 VCU tap proposals",
+    "option_2_mission_d_l1": "SELECTED — spindle/linkage/load-path UNKNOWNs; no invented casting numbers"
+  },
+  "recommended_decision": "THREE_LAYER_PROTOCOL_ACTIVE_MISSION_D_L1_FOCUS",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "kernel_schemas_mutated": false
+}
