@@ -1,0 +1,49 @@
+{
+  "document_id": "ICE_DECON_PHASE2_L2_ANALYSIS",
+  "layer": "L2_ENGINEERING_ANALYSIS",
+  "decision": "DT-D056",
+  "read_only_inputs_from_l1": [
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
+    "chassis frame datums X-038.3 / frame width H"
+  ],
+  "nodes": [
+    {
+      "anl_id": "ANL-2019-F450-FORWARD-BAY-ENVELOPE",
+      "derived_parameter": "Spatial packaging volume (forward bay)",
+      "status": "CALCULATED_ESTIMATE",
+      "estimated_box_bounds_in": {
+        "width": 38.3,
+        "height": 30.0,
+        "depth": 8.0,
+        "honesty": "NOT_OEM_TRUTH — width figure historically conflated with front overhang code B (38.3 in). Treat entire box as LOW-confidence estimate only."
+      },
+      "estimate_index": {
+        "value": 62,
+        "meaning": "Hunt/estimate index only — Hard Rule 5: NOT engineering verification %",
+        "status": "L2_ONLY"
+      },
+      "required_verification": ["Tier 4 laser scan of engine bay", "OEM CAD if licensed"],
+      "must_not_promote_to_l1": true
+    },
+    {
+      "anl_id": "ANL-2019-F450-DECON-MASS-BIAS",
+      "derived_parameter": "Mass properties mutation after ICE/fuel/exhaust removal",
+      "status": "SIMULATION_REQUIRED",
+      "input_gaps": ["MEPQ-001 dry mass/CG", "accessory masses UNKNOWN"],
+      "structural_objectives": [
+        "Spring deflection / weight bias shifts",
+        "Frame twist / rail shear under Class 4 jounce-rebound-braking — requires OEM or tested load inputs (MEPQ-007)"
+      ],
+      "must_not_promote_to_l1": true
+    },
+    {
+      "anl_id": "ANL-2019-F450-AFT-AXLE-BAY",
+      "derived_parameter": "Vacated aft-axle bay envelope after fuel tank removal",
+      "status": "CONCEPTUAL_ENVELOPE",
+      "depends_on_l1": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
+      "geometry": "UNKNOWN pending scan / strap-hole metrology (MEPQ-004/006)",
+      "must_not_promote_to_l1": true
+    }
+  ]
+}

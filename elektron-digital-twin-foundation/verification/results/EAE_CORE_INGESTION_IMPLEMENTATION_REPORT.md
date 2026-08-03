@@ -1,6 +1,6 @@
 # EAE_CORE_INGESTION_IMPLEMENTATION_REPORT
 
-**execution_timestamp:** `2026-07-16T18:18:02.674389+00:00`  
+**execution_timestamp:** `2026-08-02T22:01:13.426303+00:00`  
 **final_status:** `EDTS_EAE_CORE_INGESTION_VALIDATED`
 
 ## Implementation paths
@@ -30,13 +30,13 @@
 ## Tests executed
 
 ```
-35 passed in 0.20s
+62 passed, 1 warning in 0.35s
 ```
 
 | Metric | Count |
 |---|---|
-| Total parsed | 35 |
-| Passed | 35 |
+| Total parsed | 62 |
+| Passed | 62 |
 | Failed | 0 |
 | Skipped | 0 |
 | Suite | PASS |
@@ -93,8 +93,14 @@ Git check clean: `True`.
 ## stdout (pytest)
 
 ```
-...................................                                      [100%]
-35 passed in 0.20s
+..............................................................           [100%]
+=============================== warnings summary ===============================
+tests/eae/test_xrepo_cap_edts_0002.py::test_hostile_duplicate_entry
+  /usr/lib/python3.12/zipfile/__init__.py:1620: UserWarning: Duplicate name: 'manifest.json'
+    return self._open_to_write(zinfo, force_zip64=force_zip64)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+62 passed, 1 warning in 0.35s
 
 ```
 

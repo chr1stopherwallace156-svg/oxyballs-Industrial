@@ -1,0 +1,46 @@
+{
+  "document_id": "FL_DOOR_VERTICAL_SLICE_RESEARCH_FINDINGS",
+  "decision": "DT-D050",
+  "research_sprint": "RL-019",
+  "findings": [
+    {
+      "finding_id": "RF-001",
+      "title": "Body Application Guide Dimensional & Structural Verification",
+      "exact_claim": "The 2019 F-450 Regular Cab 4x2 Chassis Cab with 60 in CA features a 145.3-inch wheelbase; Body Application Guide / chassis literature address high-strength aluminum-alloy cab shell and fully-boxed high-strength steel front frame section at the platform literature level.",
+      "affected_node": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB-SHELL",
+      "sources": ["SRC-CAND-000001"],
+      "source_lifecycle_status": "SOURCE_ACQUIRED",
+      "exact_source_location": "https://xr793.com/wp-content/uploads/2020/03/2019-Ford-Body-Application-Guide.pdf",
+      "local_bytes": "research/incoming/fl_door_vertical_slice/SRC-CAND-000001_2019_Ford_Body_Application_Guide.pdf",
+      "sha256": "sha256:4c7a4bf129e91d0934cb1e7e160a3069c9486048ce643598cdd55504404df922",
+      "applicability_status": "EXACT_CONFIGURATION_MATCH_CANDIDATE",
+      "claim_status": "DOCUMENT_BYTES_ACQUIRED_PARSE_PENDING",
+      "tier": "Tier 1 OEM Body Builder Literature",
+      "limitations": [
+        "Page/token-anchor extraction NOT_EXECUTED — do not promote ASSERTION_VERIFIED from unread PDF.",
+        "Operator brochure SRC-002 NOT_ACQUIRED (URL 404) — not used as supporting hash.",
+        "Does not contain internal door cavity panel stamping thickness.",
+        "Wheelbase/CA values also locked in kernel CFG-000001 examples — BAG confirms hunt target, not geometry freeze."
+      ]
+    },
+    {
+      "finding_id": "RF-002",
+      "title": "Door Panel Safety Recall Field Procedure & Fastener Identification",
+      "exact_claim": "F-Series aluminum doors utilize interior door handle release cables, water shields, and lock rod grommet configurations susceptible to water intrusion; reassembly guidance includes hand-tightening front door latch and window run retainers during preliminary positioning (recall service literature).",
+      "affected_node": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DOOR-LATCH-FL",
+      "sources": ["SRC-CAND-000008"],
+      "source_lifecycle_status": "SOURCE_ACQUIRED",
+      "exact_source_location": "https://static.nhtsa.gov/odi/rcl/2017/RCMN-17V652-1463.pdf",
+      "local_bytes": "research/incoming/fl_door_vertical_slice/SRC-NHTSA-17S33_RCMN-17V652-1463.pdf",
+      "sha256": "sha256:fb3eda01d0de7c892083a9de6986be0dd2781e2aef8de40e4e6c0af8d4a59fba",
+      "applicability_status": "PLATFORM_FAMILY_REFERENCE",
+      "claim_status": "PARTIALLY_APPLICABLE_PENDING_PART_CROSSCHECK",
+      "tier": "Tier 3 Government / OEM Recall Document",
+      "limitations": [
+        "PLATFORM_FAMILY_REFERENCE — not EXACT_CONFIGURATION silo truth until 2019 Chassis Cab part-number cross-check.",
+        "Parse NOT_EXECUTED — latch/cable procedure text not token-anchored.",
+        "Requires exact harness clip location verification via EWD/WSM (SRC-CAND-000006 / 000002)."
+      ]
+    }
+  ]
+}

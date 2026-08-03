@@ -1,0 +1,320 @@
+{
+  "document_id": "F450_FL_DOOR_EGS_PROPOSAL2_REL_REG_AUDIT",
+  "schema_version": "EGS-1.0.0-proposal.2",
+  "authority_status": "REAL_DATA_PROMOTION_BLOCKED",
+  "recommended_decision": "EGS_V1_PROPOSAL_INFRASTRUCTURE_READY",
+  "decision": "DT-D048",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "locked_configuration": {
+    "kernel_configuration_id": "CFG-000001",
+    "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+    "model_year": 2019
+  },
+  "honesty_gate": [
+    "All REL-REG-01..06 edges are CANDIDATE_UNVERIFIED with PROCEDURE_GENERATION_NOT_AUTHORIZED.",
+    "No torque, fastener counts, pinouts, or removal procedures populated as ASSERTION_VERIFIED.",
+    "SOURCE_DISCOVERED = indexed title / catalog listing only — not DOCUMENT_SUPPORTED / ASSERTION_VERIFIED.",
+    "CFGCOMP-* / IFACE-* / OP-* nodes are configuration-reference constructs — not VIN CMPINST-* physical instances.",
+    "Frozen kernel CFG-000001 aliased via kernel_configuration_id; proposal.2 uses descriptive CFG-2019-F450-* for exact scope lock.",
+    "Cross-year ranges forbidden on these edges; similarity lives only in CROSS_CONFIGURATION_COMPARISON candidates (none admitted here)."
+  ],
+  "hierarchy_map": {
+    "COMPDEF-WINDOW-REGULATOR-FL": "conceptual",
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-REGULATOR-FL": "configuration_reference",
+    "CMPINST-VIN-1FD8X4GT1KDAXXXXX-REGULATOR-FL": "physical_asset_example_pattern_only_not_instantiated"
+  },
+  "audit_matrix_summary": {
+    "REL-REG-01": "CANDIDATE_UNVERIFIED / BLOCKED",
+    "REL-REG-02": "CANDIDATE_UNVERIFIED / BLOCKED",
+    "REL-REG-03": "CANDIDATE_UNVERIFIED / BLOCKED",
+    "REL-REG-04": "CANDIDATE_UNVERIFIED / BLOCKED",
+    "REL-REG-05": "CANDIDATE_UNVERIFIED / BLOCKED",
+    "REL-REG-06": "CANDIDATE_UNVERIFIED / BLOCKED"
+  },
+  "edges": [
+    {
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T04:58:57Z",
+      "created_by": "EDTS-Research-Architect",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-REG-TO-INNER-DOOR-001",
+      "aliases": ["REL-REG-01"],
+      "graph_plane": "PHYSICAL",
+      "relationship_class": "BOLTED_TO",
+      "source_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-REGULATOR-FL",
+      "target_node_id": "IFACE-MOUNT-HOLE-DOOR-INNER-FL-01",
+      "directionality": "FORWARD",
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
+        "notes": "Exact 2019 configuration only — no 2017-2019 MY range"
+      },
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": "Existence SOURCE_DISCOVERED (index only); fastener/torque UNRESOLVED"
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "SOURCE_DISCOVERED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
+          "notes": "Reference found in index; document not ingested"
+        },
+        "fastener_count": {
+          "value": null,
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": false,
+          "notes": "Knowledge gap — does not invalidate existence claim structure"
+        },
+        "fastener_specification": {
+          "value": null,
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": false,
+          "notes": null
+        },
+        "torque_specification": {
+          "value": null,
+          "unit": "Nm",
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": false,
+          "notes": null
+        }
+      },
+      "transient_state": null,
+      "notes": ["REAL_DATA_PROMOTION_BLOCKED"]
+    },
+    {
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T04:58:57Z",
+      "created_by": "EDTS-Research-Architect",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-C309-MATES-001",
+      "aliases": ["REL-REG-02"],
+      "graph_plane": "PHYSICAL",
+      "relationship_class": "MATES_WITH",
+      "source_node_id": "IFACE-CONNECTOR-HARNESS-FL-C309A",
+      "target_node_id": "IFACE-CONNECTOR-REGULATOR-FL-C309B",
+      "directionality": "FORWARD",
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
+        "notes": null
+      },
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": "EWD catalog listing identified — SOURCE_DISCOVERED only"
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "SOURCE_DISCOVERED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
+          "notes": "EWD catalog listing identified; bytes not ingested"
+        },
+        "pinout_terminal_specification": {
+          "value": null,
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": false,
+          "notes": null
+        }
+      },
+      "transient_state": null,
+      "notes": ["Interface layer replaces direct Harness→Regulator jump"]
+    },
+    {
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T04:58:57Z",
+      "created_by": "EDTS-Research-Architect",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-REG-GUIDES-GLASS-001",
+      "aliases": ["REL-REG-03"],
+      "graph_plane": "PHYSICAL",
+      "relationship_class": "GUIDES_MOTION_OF",
+      "source_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-REGULATOR-FL",
+      "target_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-GLASS-FL",
+      "directionality": "FORWARD",
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
+        "notes": null
+      },
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": null
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "SOURCE_DISCOVERED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
+          "notes": null
+        },
+        "clamp_fastener": {
+          "value": null,
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": false,
+          "notes": null
+        }
+      },
+      "transient_state": null,
+      "notes": ["No window_position state on this structural/kinematic edge"]
+    },
+    {
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T04:58:57Z",
+      "created_by": "EDTS-Research-Architect",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-TRIM-BLOCKS-SERVICE-001",
+      "aliases": ["REL-REG-04"],
+      "graph_plane": "PHYSICAL",
+      "relationship_class": "BLOCKS_ACCESS_TO",
+      "source_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRIM-PANEL-FL",
+      "target_node_id": "IFACE-SERVICE-PORT-DOOR-INNER-FL",
+      "directionality": "FORWARD",
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
+        "notes": null
+      },
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": null
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "SOURCE_DISCOVERED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
+          "notes": null
+        }
+      },
+      "transient_state": null,
+      "notes": []
+    },
+    {
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T04:58:57Z",
+      "created_by": "EDTS-Research-Architect",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-OP-GLASS-BEFORE-UNBOLT-001",
+      "aliases": ["REL-REG-05"],
+      "graph_plane": "PROCEDURAL",
+      "relationship_class": "MUST_PRECEDE",
+      "source_node_id": "OP-SECURE-GLASS-FL",
+      "target_node_id": "OP-UNBOLT-REGULATOR-FL",
+      "directionality": "FORWARD",
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
+        "notes": null
+      },
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": "Procedural plane — not a physical topology edge"
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": true,
+          "status": "CANDIDATE_UNVERIFIED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
+          "notes": null
+        }
+      },
+      "transient_state": null,
+      "notes": ["PROCEDURE_GENERATION_NOT_AUTHORIZED"]
+    },
+    {
+      "schema_version": "EGS-1.0.0-proposal.2",
+      "record_version": 1,
+      "created_at": "2026-07-20T04:58:57Z",
+      "created_by": "EDTS-Research-Architect",
+      "supersedes_edge_id": null,
+      "edge_id": "EDGE-2019-F450-REG-EXTRACTION-BEAM-001",
+      "aliases": ["REL-REG-06"],
+      "graph_plane": "PHYSICAL",
+      "relationship_class": "EXTRACTION_PATH_PASSES_ADJACENT_TO",
+      "source_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-REGULATOR-FL",
+      "target_node_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-INT-BEAM-FL",
+      "directionality": "FORWARD",
+      "applicability_context": {
+        "scope_type": "CONFIGURATION_REFERENCE",
+        "configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+        "kernel_configuration_id": "CFG-000001",
+        "model_year": 2019,
+        "model_year_range": null,
+        "vin": null,
+        "inheritance": "NOT_INHERITED",
+        "notes": null
+      },
+      "verification_lifecycle": {
+        "edge_status": "CANDIDATE_UNVERIFIED",
+        "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+        "last_audited_date": "2026-07-20",
+        "aggregation_notes": "Existence UNRESOLVED_SOURCE_REQUIRED → CANDIDATE_UNVERIFIED"
+      },
+      "claims": {
+        "relationship_existence": {
+          "value": null,
+          "status": "UNRESOLVED_SOURCE_REQUIRED",
+          "evidence_assertion_ids": [],
+          "mandatory": true,
+          "notes": null
+        }
+      },
+      "transient_state": null,
+      "notes": ["REAL_DATA_PROMOTION_BLOCKED"]
+    }
+  ]
+}

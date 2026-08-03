@@ -1,0 +1,37 @@
+{
+  "mepq_id": "MEPQ-007",
+  "operator_alias": "MEPQ-2019-F450-LOADS-009",
+  "target_property": "OEM or tested max dynamic bending moments, torsion parameters, and frame rail vertical jounce/rebound load limits at GVWR-relevant states",
+  "system_context": "L2 FEA of frame under concentrated HV battery mass (ANL-DECON-MASS-BIAS / PROP-BATTERY-AFT)",
+  "affected_cfgcomp_ids": [
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME"
+  ],
+  "priority": "CRITICAL",
+  "status": "DEFERRED",
+  "inference_forbidden_reason": "Structural load envelopes cannot be safely invented from GVWR marketing tables alone.",
+  "engineering_risk": "Underspecified FEA → false safety; overconservative guess → blocked packaging — either way not L1.",
+  "best_source_tiers": [
+    {
+      "tier": 3,
+      "source_class": "OEM fastener & structural standards / frame engineering bulletins",
+      "notes": "Not acquired; license/NDA may apply"
+    },
+    {
+      "tier": 2,
+      "source_class": "Published frame engineering data if configuration-applicable"
+    }
+  ],
+  "related_gap_ids": ["KG-012"],
+  "related_mission_ids": ["MISN-000005"],
+  "acquisition_cost_vector": "OEM_LICENSE",
+  "high_roi_purchase_signal": true,
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "honesty_notes": [
+    "Hours-saved / blocking-level metadata are management estimates — not admitted as engineering truth.",
+    "Until acquired, L2 status remains SIMULATION_REQUIRED with UNKNOWN OEM load inputs.",
+    "Deferred — does not authorize physical battery integration testing."
+  ],
+  "decision": "DT-D056",
+  "research_sprint": "RL-025"
+}

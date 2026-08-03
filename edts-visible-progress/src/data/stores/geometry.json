@@ -1,0 +1,195 @@
+{
+  "store": "GEOMETRY",
+  "records": {
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "geometry_role": "frame",
+      "explode_vector": [
+        0,
+        -0.2,
+        0
+      ],
+      "geometry_type": "Stylized volumetric proxy — rail length uses extracted WB/overhang"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB",
+      "geometry_role": "cab",
+      "explode_vector": [
+        0,
+        1.2,
+        0
+      ],
+      "geometry_type": "Stylized volumetric proxy"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "geometry_role": "front_axle",
+      "explode_vector": [
+        0.4,
+        -0.5,
+        0
+      ],
+      "geometry_type": "Stylized volumetric proxy — architecture extracted, mesh not"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
+      "geometry_role": "rear_axle",
+      "explode_vector": [
+        -0.4,
+        -0.5,
+        0
+      ],
+      "geometry_type": "Stylized volumetric proxy — not supplier CAD"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
+      "geometry_role": "wheels",
+      "explode_vector": [
+        0,
+        -0.8,
+        0
+      ],
+      "geometry_type": "Stylized volumetric proxy — track from extracted front track"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR",
+      "geometry_role": "steering",
+      "explode_vector": [
+        0.3,
+        0.5,
+        0.5
+      ],
+      "geometry_type": "Stylized volumetric proxy"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK",
+      "geometry_role": "engine",
+      "explode_vector": [
+        0.9,
+        0.6,
+        0
+      ],
+      "geometry_type": "Stylized volumetric proxy — not Power Stroke envelope CAD"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+      "geometry_role": "transmission",
+      "explode_vector": [
+        0.5,
+        0.3,
+        0
+      ],
+      "geometry_type": "Stylized volumetric proxy"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT",
+      "geometry_role": "driveshaft",
+      "explode_vector": [
+        0,
+        -0.4,
+        0.6
+      ],
+      "geometry_type": "Stylized volumetric proxy"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
+      "geometry_role": "radiator",
+      "explode_vector": [
+        1.1,
+        0.2,
+        0
+      ],
+      "geometry_type": "Stylized volumetric proxy"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
+      "geometry_role": "fuel_tank",
+      "explode_vector": [
+        -0.9,
+        -0.4,
+        0
+      ],
+      "geometry_type": "Stylized volumetric proxy — capacity extracted, strap holes not"
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING",
+      "geometry_role": "exhaust",
+      "explode_vector": [
+        0,
+        -0.3,
+        0.9
+      ],
+      "geometry_type": "Stylized volumetric proxy"
+    },
+    "BLOCK-LV-GATEWAY": {
+      "component_id": "BLOCK-LV-GATEWAY",
+      "geometry_role": "lv_gateway",
+      "explode_vector": [
+        0.2,
+        0.9,
+        0
+      ],
+      "geometry_type": "Blocked placeholder — no pin geometry claimed"
+    },
+    "PROP-HV-PACK-01": {
+      "component_id": "PROP-HV-PACK-01",
+      "geometry_role": "ev_battery",
+      "explode_vector": [
+        0,
+        -1,
+        0
+      ],
+      "geometry_type": "Bounding envelope proposal — no kWh claimed"
+    },
+    "PROP-EDU-REAR-01": {
+      "component_id": "PROP-EDU-REAR-01",
+      "geometry_role": "ev_edu",
+      "explode_vector": [
+        -0.6,
+        0.4,
+        0
+      ],
+      "geometry_type": "Bounding envelope proposal — no kW claimed"
+    },
+    "PROP-INVERTER-01": {
+      "component_id": "PROP-INVERTER-01",
+      "geometry_role": "ev_inverter",
+      "explode_vector": [
+        0.8,
+        0.7,
+        0
+      ],
+      "geometry_type": "Bounding envelope proposal"
+    },
+    "PROP-DCDC-01": {
+      "component_id": "PROP-DCDC-01",
+      "geometry_role": "ev_dcdc",
+      "explode_vector": [
+        0.5,
+        0.8,
+        0.4
+      ],
+      "geometry_type": "Bounding envelope proposal"
+    },
+    "PROP-LTR-01": {
+      "component_id": "PROP-LTR-01",
+      "geometry_role": "ev_ltr",
+      "explode_vector": [
+        1,
+        0.3,
+        0
+      ],
+      "geometry_type": "Bounding envelope proposal"
+    },
+    "PROP-CCS-PORT-01": {
+      "component_id": "PROP-CCS-PORT-01",
+      "geometry_role": "ev_ccs",
+      "explode_vector": [
+        0.3,
+        0.6,
+        1
+      ],
+      "geometry_type": "Bounding envelope proposal"
+    }
+  }
+}

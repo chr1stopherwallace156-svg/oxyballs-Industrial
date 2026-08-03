@@ -1,0 +1,35 @@
+{
+  "mission_id": "MISN-000001",
+  "id_immutable": true,
+  "aliases": [
+    "EDTS-MISN-001"
+  ],
+  "objective": "Resolve KG-001 (Driver-Side Front Door Harness Routing & Interface Topology).",
+  "target_gap_ids": [
+    "KG-001"
+  ],
+  "success_criteria": [
+    "Acquire one (1) verified OEM vehicle-line wiring source (local bytes + SHA-256 + Hard Rule 4 progress).",
+    "OR acquire two (2) verified Tier-1 supplier connector/routing specification layouts (hashed).",
+    "OR ingest one (1) physical asset teardown or laser scan payload (hashed)."
+  ],
+  "evidence_required": [
+    "Spatial routing logic",
+    "Chassis-to-cab connector clip boundaries",
+    "Inline pigtail point definitions"
+  ],
+  "completion_status": "NOT_STARTED",
+  "assigned_src_cand_ids": [
+    "SRC-CAND-000006"
+  ],
+  "assigned_aid_ids": [],
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "research_sprint": "RL-014",
+  "decision": "DT-D045",
+  "notes": [
+    "Primary assignment: acquire 2019 Super Duty EWD (SRC-CAND-000006 / EDTS-OEM-004).",
+    "Verified = local hashed bytes \u2014 not URL indexing or narrative count cells.",
+    "MEDIA-000001 may support discovery but does not alone satisfy success criteria."
+  ]
+}
