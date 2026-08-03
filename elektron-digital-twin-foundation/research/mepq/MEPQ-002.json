@@ -1,0 +1,41 @@
+{
+  "mepq_id": "MEPQ-002",
+  "operator_alias": "MEPQ-2019-F450-FRAME-INT-002",
+  "target_property": "Transmission cross-member frame interface coordinates, hole diameters, and web thicknesses",
+  "system_context": "EDU / subframe reuse vs custom cross-member design",
+  "affected_cfgcomp_ids": [
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME-RAIL-LH",
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME-RAIL-RH",
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-XMBR-TRANS"
+  ],
+  "priority": "HIGH",
+  "status": "DEFERRED",
+  "inference_forbidden_reason": "Hole patterns and web thickness are not inferable from bumper-plane station datums alone.",
+  "engineering_risk": "Field drilling / wrong EDU mounts; structural parameter violation if guessed.",
+  "best_source_tiers": [
+    {
+      "tier": 1,
+      "source_class": "Body Builder Layout Book / Frame Dimension Charts",
+      "src_cand_ids": ["SRC-CAND-000001"],
+      "notes": "BAG acquired but suspension/frame interface page parse for XMBR not executed."
+    },
+    {
+      "tier": 3,
+      "source_class": "Supplier/OEM CAD (license-gated)",
+      "notes": "OEM CAD stays out of git unless counsel approves (DT-D003)."
+    }
+  ],
+  "related_gap_ids": ["KG-007"],
+  "related_mission_ids": ["MISN-000005"],
+  "acquisition_cost_vector": "OEM_LICENSE",
+  "high_roi_purchase_signal": true,
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "honesty_notes": [
+    "XMBR-TRANS CFGCOMP is a placeholder candidate ID only.",
+    "No hole diameters or web thicknesses admitted.",
+    "Deferred with Mission E; may also be advanced via BAG parse under Mission D/frame work if pages exist."
+  ],
+  "decision": "DT-D054",
+  "research_sprint": "RL-023"
+}

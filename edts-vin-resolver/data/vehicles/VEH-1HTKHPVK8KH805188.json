@@ -1,0 +1,126 @@
+{
+  "vehicle_id": "VEH-1HTKHPVK8KH805188",
+  "vin": "1HTKHPVK8KH805188",
+  "lifecycle_status": "REJECTED",
+  "normalized_identity": {
+    "vin": "1HTKHPVK8KH805188",
+    "manufacturer": "INTERNATIONAL MOTORS, LLC",
+    "make": "GM",
+    "model": "GM515",
+    "modelYear": 2019,
+    "series": "GM - Chevrolet Silverado Medium Duty",
+    "trim": null,
+    "bodyClass": "Incomplete - Chassis Cab (Single Cab)",
+    "vehicleType": "INCOMPLETE VEHICLE",
+    "cabType": "MDHD: Conventional",
+    "driveType": "4x2",
+    "axleConfiguration": "SFA - Set-Forward Axle",
+    "numberOfAxles": null,
+    "gvwr": "Class 5: 16,001 - 19,500 lb (7,258 - 8,845 kg)",
+    "gvwrClass": "Class 5",
+    "engineManufacturer": "GM",
+    "engineModel": null,
+    "engineCylinders": 8,
+    "displacementLiters": 6.6,
+    "fuelTypePrimary": "Diesel",
+    "plantCity": "SPRINGFIELD",
+    "plantState": "OHIO",
+    "plantCountry": "UNITED STATES (USA)",
+    "errorCode": "0",
+    "errorText": "0 - VIN decoded clean. Check Digit (9th position) is correct",
+    "retained_raw_keys": {
+      "Make": "GM",
+      "MakeID": "13281",
+      "Manufacturer": "INTERNATIONAL MOTORS, LLC",
+      "ManufacturerId": "1028",
+      "Model": "GM515",
+      "ModelID": "16264",
+      "ModelYear": "2019",
+      "Series": "GM - Chevrolet Silverado Medium Duty",
+      "Trim": null,
+      "BodyClass": "Incomplete - Chassis Cab (Single Cab)",
+      "VehicleType": "INCOMPLETE VEHICLE",
+      "CabType": null,
+      "BodyCabType": "MDHD: Conventional",
+      "DriveType": "4x2",
+      "AxleConfiguration": "SFA - Set-Forward Axle",
+      "Axles": null,
+      "GVWR": "Class 5: 16,001 - 19,500 lb (7,258 - 8,845 kg)",
+      "EngineManufacturer": "GM",
+      "EngineModel": null,
+      "EngineCylinders": "8",
+      "DisplacementL": "6.6",
+      "FuelTypePrimary": "Diesel",
+      "PlantCity": "SPRINGFIELD",
+      "PlantState": "OHIO",
+      "PlantCountry": "UNITED STATES (USA)",
+      "ErrorCode": "0",
+      "ErrorText": "0 - VIN decoded clean. Check Digit (9th position) is correct",
+      "AdditionalErrorText": "Incomplete Vehicle Warning - Please be advised that the vehicle may have been altered and may not be an accurate representation of the vehicle in its current condition. The Model Year decoded for this VIN may be incorrect. If you know the Model year, please enter it and decode again to get more accurate information.",
+      "VIN": "1HTKHPVK8KH805188"
+    }
+  },
+  "evidence_ref": "/workspace/edts-vin-resolver/data/evidence/vin/1HTKHPVK8KH805188.raw.json",
+  "evidence_sha256": "2f96592f462a4b4727084676161d6cecf731a79b19cc1ad580474a3c5f26b61f",
+  "candidate_configurations": [],
+  "conflicts": [
+    "CFG-2019-F450-REG-CAB-4X2-60CA-DRW.make_or_manufacturer: expected=FORD|Ford observed=GM",
+    "CFG-2019-F450-REG-CAB-4X2-60CA-DRW.model: expected=F-450|F450|F-450 Super Duty|Super Duty observed=GM515"
+  ],
+  "unknown_fields": [
+    "CFG-2019-F450-REG-CAB-4X2-60CA-DRW.cab_to_axle_in",
+    "CFG-2019-F450-REG-CAB-4X2-60CA-DRW.rear_wheels",
+    "CFG-2019-F450-REG-CAB-4X2-60CA-DRW.wheelbase_in",
+    "identity.engineModel",
+    "identity.numberOfAxles",
+    "identity.trim",
+    "physical.cab_to_axle_in",
+    "physical.frame_geometry",
+    "physical.modification_state",
+    "physical.wheelbase_in"
+  ],
+  "required_physical_verification": [
+    {
+      "id": "certification-label-photograph",
+      "description": "Driver-side door jamb / certification label photograph",
+      "required": true,
+      "reason": "NHTSA notes labels may carry information not present in vPIC"
+    },
+    {
+      "id": "wheelbase-measurement",
+      "description": "Wheelbase measurement (laser tape / caliper method)",
+      "required": true,
+      "reason": "Exact WB is not reliably proven by VIN decode alone"
+    },
+    {
+      "id": "cab-to-axle-measurement",
+      "description": "Cab-to-axle (CA) measurement",
+      "required": true,
+      "reason": "CA typically absent from vPIC for chassis-cab packages"
+    },
+    {
+      "id": "axle-configuration-observation",
+      "description": "Axle configuration observation (e.g. DRW vs SRW)",
+      "required": true,
+      "reason": "Rear-wheel configuration must be physically confirmed"
+    },
+    {
+      "id": "drivetrain-observation",
+      "description": "Drivetrain observation (4x2 vs 4x4)",
+      "required": true,
+      "reason": "Confirm decoded DriveType against vehicle"
+    },
+    {
+      "id": "cross-configuration-documentation",
+      "description": "Document that this VIN is outside the EDTS reference configuration lock",
+      "required": true,
+      "reason": "Manufacturer/model mismatch against registered CFG expectations"
+    }
+  ],
+  "resolution_outcome": "NO_MATCH",
+  "created_at": "2026-07-22T00:20:36.200Z",
+  "updated_at": "2026-07-22T00:20:36.453Z",
+  "decision": "DT-D067",
+  "geometry_verified": false,
+  "configuration_confirmed_from_vin_alone": false
+}

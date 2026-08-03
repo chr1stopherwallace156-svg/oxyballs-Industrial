@@ -1,0 +1,26 @@
+{
+  "gap_id": "KG-006",
+  "component": "Factory ICE engine + transmission assembly (mass properties)",
+  "reported_oem_part_number": null,
+  "critical_need": "Dry mass and CG (x,y,z) of stock powertrain for post-conversion weight distribution \u2014 cannot be inferred.",
+  "priority": "CRITICAL",
+  "possible_sources": [
+    "SRC-CAND-000002 WSM mass properties if present",
+    "Physical scale of decommissioned core"
+  ],
+  "related_src_cand_ids": [
+    "SRC-CAND-000002"
+  ],
+  "related_mission_ids": [
+    "MISN-000005"
+  ],
+  "status": "BLOCKED",
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "notes": [
+    "Linked MEPQ-001 (see research/mepq/).",
+    "Linked MEPQ-001. Mission E deferred \u2014 gap registered only.",
+    "No numerical mass/CG values admitted."
+  ],
+  "decision": "DT-D054"
+}

@@ -2,7 +2,7 @@
 
 **Status:** `ACTIVE`  
 **Effective Date:** 2026-07-16  
-**Version:** `2.5.0`  
+**Version:** `2.18.0`  
 **Architecture host:** [EDTS_OS.md](EDTS_OS.md) v3.0.0+ (EDTS-OS)  
 **Isolation law:** [documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md](documentation/HARD_RULE_EXACT_VEHICLE_ISOLATION.md)  
 **Binding for:** all research, acquisition, geometry development, and software logic operations under `elektron-digital-twin-foundation/`
@@ -13,7 +13,20 @@
 **Changelog from 2.1.2:** **Hard Rule 13** — Research Never Stops at One Source; **Research Confidence (RC)** for SRC-CAND search prioritization (not engineering verification %); immutable **`SRC-CAND-######`** IDs.  
 **Changelog from 2.2.0:** **Hard Rule 15** — Every Major Claim Must Have Its Own Claim Record; vector blueprints are **2D dimensional / profile reference**, never “ground-truth geometry.”  
 **Changelog from 2.3.0:** **Hard Rule 16** — Asset Intelligence Database; every internet asset gets an `AID-*` passport; listing URLs are acquisition **inputs**, not answers.  
-**Changelog from 2.4.0:** **Hard Rule 17** — Deconstructed Assembly Sourcing + Supplier-First Lane + **AJR** purchase gate.
+**Changelog from 2.4.0:** **Hard Rule 17** — Deconstructed Assembly Sourcing + Supplier-First Lane + **AJR** purchase gate.  
+**Changelog from 2.5.0:** **Component Sourcing Passports (`CSP-*`)** + **Knowledge Gap Register (`KG-*`)**; operator maturity % bars = research draft estimates only.  
+**Changelog from 2.6.0:** **Research Mission Queue (`MISN-*`)**; **Twin Domain Passports** (Visual vs Engineering); evidence coverage uses **hashed acquired/required counts** (not narrative “verified” cells).  
+**Changelog from 2.7.0:** **EGS-v1 Relationship Graph** — typed directional edges (non-kernel); frozen `assembly-relationship` schema untouched; illustrative edges ≠ verified procedures.  
+**Changelog from 2.8.0:** **EGS-v1 proposal module** (`proposals/egs-v1/`) — CMPINST-only endpoints, per-property evidence, applicability/lifecycle, graph queries; F-450 sample edges `CANDIDATE_UNVERIFIED` until primary evidence.  
+**Changelog from 2.9.0:** **EGS-1.0.0-proposal.2** — COMPDEF/CFGCOMP/CMPINST hierarchy; IFACE layer; PHYSICAL/FUNCTIONAL/PROCEDURAL planes; deterministic claim lifecycle; cycle classification; REL-REG audit `REAL_DATA_PROMOTION_BLOCKED`.  
+**Changelog from 2.10.0:** **Research Execution Pipeline audit** (`EDTS-PIPELINE-AUDIT-2026-07`) — six-dimension capability/bottleneck lock; Sprint 7 physical acquisition template; paywall/physical limits explicit.  
+**Changelog from 2.11.0:** **FL Door vertical-slice mission** — exact scope lock; public BAG/NHTSA bytes acquired+hashed; brochure URL demoted; MISN-000003 commercial handoff; KG-005; pinout contradiction logged.  
+**Changelog from 2.12.0:** **Chassis frame Evidence Brief A/B** — bumper datums + F-450 RC fleet dims extracted; SRC-CAND-000010/11 acquired; Mission D (front suspension) opened; Mission E deferred.
+**Changelog from 2.13.0:** **Mission D honesty gate** — F-450/F-550 4x2 Monobeam ASSERTION_EXTRACTED; operator FGAWR 5600 baseline rejected; torque EXACT_MATCH rejected; Mission E deferred / Mission F not opened.
+**Changelog from 2.14.0:** **MEPQ** admitted (Inversion Principle); Option B Mission F discovery opened; Option A/Mission E deferred with MEPQ-001/002; operator passport LEVEL_4 scrubbed.
+**Changelog from 2.15.0:** **EV-DECON-PHASE2** honesty-gated (deferred conversion-intent); MEPQ-004/005 added; active MEPQ checklist exported; Mission E not authorized.
+**Changelog from 2.16.0:** **Three-Layer Graph Separation Protocol** (L1/L2/L3 non-inheriting); ICE decon refiled by layer; Mission D L1 focus selected; MEPQ-006/007 added.
+**Changelog from 2.17.0:** **Fabricated L1 dump rejected** (wrong curb/GAWR scale, EPAS vs hydraulic steering, invented material/load cards); performance-target tailoring declined until L1 honest.
 
 ---
 
@@ -373,6 +386,15 @@ Replacement query model for **verified engineering claims**: traverse Evidence G
 | `research/asset_intelligence/ajr/AJR_REGISTER.json` | Hard Rule 17 Acquisition Justification Reports |
 | `research/sourcing/DECONSTRUCTED_ASSEMBLY_SOURCING.md` | Assembly Orchestrator / deconstructed sourcing model |
 | `research/sourcing/TIER1_SUPPLIER_MATRIX_2019_F450.json` | Tier-1 supplier hunt matrix |
+| `research/component_sourcing/COMPONENT_SOURCING_REGISTER.json` | Component Sourcing Passports (`CSP-*`) + maturity channels |
+| `research/knowledge_gaps/KNOWLEDGE_GAP_REGISTER.json` | Knowledge Gap Register (`KG-*`) |
+| `research/missions/MISSION_REGISTER.json` | Research Mission Queue (`MISN-*`) |
+| `research/twin_passports/TWIN_PASSPORT_REGISTER.json` | Visual vs Engineering twin domain passports |
+| `research/evidence_matrices/` | Property→evidence count matrices (hashed acquired/required) |
+| `research/relationship_graph/RELATIONSHIP_GRAPH_REGISTER.json` | EGS-v1 typed relationship edges (`REL-*`) — research ILLUSTRATIVE history |
+| `proposals/egs-v1/` | EGS-1.0.0-proposal.2 module (CFGCOMP/IFACE hierarchy, planes, lifecycle, graph queries) |
+| `research/pipeline/EDTS-PIPELINE-AUDIT-2026-07.json` | Research Execution Pipeline capability & bottleneck audit |
+| `research/media_candidates/MEDIA_CANDIDATE_REGISTER.json` | Video/photo media candidates |
 | `research/src_candidates/SRC_CANDIDATE_REGISTER.json` | Immutable `SRC-CAND-*` register + Next Search Queue |
 | `research/claims/CLAIM_REGISTER.json` | Hard Rule 15 major-claim index |
 | `layers/L01/L1_SOURCE_PACK_01_AUTHENTICITY_AUDIT.md` | Pack verification posture |

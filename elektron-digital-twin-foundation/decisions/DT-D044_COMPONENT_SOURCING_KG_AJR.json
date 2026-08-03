@@ -1,0 +1,40 @@
+{
+  "decision_id": "DT-D044",
+  "title": "Component Sourcing Passports + Knowledge Gap Register; Hum3D HOLD_REJECTED; demote M300 ACQUIRED",
+  "date": "2026-07-19",
+  "approved_status": "ACCEPTED",
+  "recommended_decision": "CONTINUE_RESEARCH",
+  "scope": [
+    "research/component_sourcing/",
+    "research/knowledge_gaps/",
+    "research/media_candidates/",
+    "AJR-000003",
+    "AID-000009",
+    "AID-000011",
+    "CSP-000001",
+    "CSP-000002",
+    "CSP-000003",
+    "KG-001",
+    "KG-002",
+    "RL-013"
+  ],
+  "reason": "Component-centric maturity tracking and explicit knowledge gaps are required. Operator claimed M300 ACQUIRED/PARSED and 100% channel saturation without local evidence — honesty gate demotes those. Paid Hum3D door shell fails AJR duplication check.",
+  "decision": [
+    "Authorize Component Sourcing Passports (CSP-######) with channel maturity trackers; operator % bars = RESEARCH_DRAFT_ESTIMATE only (Hard Rule 5).",
+    "Authorize Knowledge Gap Register; KG-001 CRITICAL (door harness routing), KG-002 HIGH (M300 wall thickness).",
+    "Accept AJR-000003 HOLD_REJECTED for AID-000011 / AID-COMP-01 ($79 Hum3D) — visual duplicate of free F-150 crossover path (CL-001 still CANDIDATE).",
+    "Reject operator AID-COMP-02 ACQUIRED→PARSED and Exact Match=Yes — AID-000009 remains NOT_ACQUIRED / AJR NOT_CLEARED.",
+    "Record MEDIA-000001 as search-discovered door-panel removal video candidate for KG-001 (confirm intended media before authority).",
+    "Recommended decision CONTINUE_RESEARCH focused on KG-001 before physical scan authorization.",
+    "Frozen kernel and component-passport rc1 unchanged."
+  ],
+  "related_decisions": ["DT-D043", "DT-D042", "DT-D041", "DT-D040", "DT-D039"],
+  "change_control": {
+    "kernel_schema_change": false,
+    "component_passport_rc1_change": false,
+    "new_schemas": [
+      "schemas/component-sourcing-passport.schema.json",
+      "schemas/knowledge-gap.schema.json"
+    ]
+  }
+}
