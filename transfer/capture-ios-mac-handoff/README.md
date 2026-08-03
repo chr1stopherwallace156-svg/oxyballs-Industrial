@@ -67,3 +67,26 @@ See `FIVE_CORE_MEMORY_ARTIFACTS.md`.
 
 One-line verdict: Phase 1 still-capture runtime is real and unit-tested; Capture v2 Specs 1–6 are documentation-only; Phase 1 is **not** frozen in git.
 
+## Historical — CANONICALIZATION_FAILED Mac export (`1b132f41`)
+
+Preserved under commit-scoped names so they do not overwrite the generic `elektron-capture-ios-complete.bundle` / `elektron-capture-ios-working-tree.zip` paths used by later handoffs.
+
+| Field | Value |
+|---|---|
+| Capture tip | `1b132f4183d66d791ef94773201e3387cd2da747` |
+| Branch | `cursor/canonicalization-failed-repair-d881` |
+| Bundle | `elektron-capture-ios-1b132f41.bundle` |
+| Bundle SHA-256 | `d13b317fe34f01f5924b8a1f31ee8d1d3755cd7feec450c45f769ac86aa9c892` |
+| ZIP | `elektron-capture-ios-1b132f41-working-tree.zip` |
+| ZIP SHA-256 | `f122dc26d79874afd2281d73c564edd6a05fef497710753e0844f797c9ffc7c5` |
+| Reject | `bb93af515087c6a2c7fe77e2a0ed93b22406e8415a8f3eb931ad4963dcf276b7` |
+
+```bash
+git clone elektron-capture-ios-1b132f41.bundle elektron-capture-ios
+cd elektron-capture-ios
+git checkout cursor/canonicalization-failed-repair-d881
+open Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj
+```
+
+Root cause: nil `Optional` fields in `capture_device.json` encoded as `NSNull` (was boxed as `Any` → `CanonicalJSON` rejected `Optional.none`).
+
