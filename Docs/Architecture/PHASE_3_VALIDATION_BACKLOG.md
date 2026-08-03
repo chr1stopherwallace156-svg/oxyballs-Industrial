@@ -47,3 +47,12 @@ After 3.6 evidence: `APPLE_COMPILED` / `SIMULATOR_VALIDATED` / `PHYSICAL_DEVICE_
 ## Explicit Phase 3 non-goals
 
 mesh · photogrammetry · point-cloud interpretation · CAD alignment · component segmentation · engineering twin (Phase 4+)
+
+## Sprint 3.3 — Depth / RGB-depth (Linux complete; Apple deferred)
+
+- [x] Foundation depth contracts + validators (Linux)
+- [x] Primary camera+depth fixture + non-LiDAR UNAVAILABLE_DEVICE fixture
+- [x] Digest law (`fixture_payload_content_sha256` / manifest / closure)
+- [ ] Mac `xcodebuild` compile of `AppleARKitDepthSensorAdapter` (Sprint 3.6)
+- [ ] Physical LiDAR / sceneDepth runtime evidence (Sprint 3.6)
+- [ ] Production validation claim (FORBIDDEN until 3.6)
