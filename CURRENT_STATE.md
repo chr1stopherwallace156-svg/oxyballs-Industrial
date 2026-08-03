@@ -4,7 +4,7 @@
 
 ```text
 source_main_baseline_sha     = fdb95734a7460e5bb28f0a69bfc4561776476a7a
-state_change_pr              = Sprint 3.4 (proposed)
+state_change_pr              = #59 (Sprint 3.4 multi-stream orchestration)
 state_change_status          = PROPOSED_IN_DRAFT_PR
 updated_at                   = 2026-08-03T23:10:00Z
 maintained_by                = Industrial Phase 3 maintainers
