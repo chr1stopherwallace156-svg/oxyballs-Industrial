@@ -1,4 +1,28 @@
+# 2026-07-25T04:56:24Z
+8990c7407e742fc47f75770c57d18a7f4d1f0e7ccfddc2159c88a85f24855e7f  elektron-capture-ios-phase1c-freeze-prep.zip
+3116f4b7ca43ca5aad0857c62a631c277072e28615b7e81a7bcbeca9deb869f1  elektron-capture-ios-phase1c-freeze-prep.bundle
+6b6640f56d6dcd87ee9aa053e8453342cec2bb281dcf28f6593d9dfc8539053a  elektron-capture-ios-phase1c-commit-b-staging.zip
+efb18d954fd7aaaa96084760d5aeb5f1a388bdb9d54d489809393dc90dfbc7e1  elektron-capture-ios-phase1c-commit-b-staging.bundle
+6b6640f56d6dcd87ee9aa053e8453342cec2bb281dcf28f6593d9dfc8539053a  elektron-capture-ios-phase1c-evidence-library.zip
+efb18d954fd7aaaa96084760d5aeb5f1a388bdb9d54d489809393dc90dfbc7e1  elektron-capture-ios-phase1c-evidence-library.bundle
+6b6640f56d6dcd87ee9aa053e8453342cec2bb281dcf28f6593d9dfc8539053a  ../DOWNLOAD-elektron-capture-ios-phase1c-evidence-library.zip
+# EKP-CAPTURE-0001
+2750ee0120def1ba56dd0ed831b5518de6f6f44e15ea8cd2f0b6191d1e1a10b4  dist-EKP-CAPTURE-0001/capture-ekp-792f6b42430b87f7bbd09c88e922b4594436f579.zip
+3ff9a04b1de00b9cc72c9a58df3faffa9e16b5fe4d3625b309a8729e0ab6be00  dist-EKP-CAPTURE-0001/capture-ekp-792f6b42430b87f7bbd09c88e922b4594436f579.bundle
+2750ee0120def1ba56dd0ed831b5518de6f6f44e15ea8cd2f0b6191d1e1a10b4  ../DOWNLOAD-elektron-capture-ekp.zip
+
+# EKP-CAPTURE-0002
+fa567bcb9825d2f959b9ee37c65b986ec13518ad35a133bd1d73fb3a191136f9  dist-EKP-CAPTURE-0002/ekp-capture-b5fe020c508e4588c90a865560e1ba783900fa4b.zip
+8538f6449bec51ec7bc976966ed22a2ee6a44c7fe5714d2d50edbf69d7d90d2d  dist-EKP-CAPTURE-0002/ekp-capture-b5fe020c508e4588c90a865560e1ba783900fa4b.bundle
+fa567bcb9825d2f959b9ee37c65b986ec13518ad35a133bd1d73fb3a191136f9  ../DOWNLOAD-elektron-capture-ekp.zip
+
+# CHANGE-0007 engineering audit @ Capture 58d4ba0
+be6767806d09f5b9be9c0f251cec6cd57a763ff4e2325eb57ae9c9a2005a5886  ../DOWNLOAD-elektron-capture-v2-engineering-audit.zip
+
+# CANDIDATE handoff pin 005382b (not physically validated)
 b04157c9e3060e7c218f2d70bf97c3f8f2e340d671da4d85bc510b9f74ecd7db  elektron-capture-ios-005382b.bundle
-b04157c9e3060e7c218f2d70bf97c3f8f2e340d671da4d85bc510b9f74ecd7db  elektron-capture-ios-complete.bundle
 863b070fa1be9d9fc62b31d683219d0ff265dde3c72b205e0e9b984004830c1d  elektron-capture-ios-005382b.zip
-863b070fa1be9d9fc62b31d683219d0ff265dde3c72b205e0e9b984004830c1d  elektron-capture-ios-working-tree.zip
+
+# fresh P1R-001 retest CANDIDATE 4bc8ae65 (artifacts on main via #14)
+8765944f8c159ae3c26fbf496a0bc3a6a0abf7d93757d36118d69f6eaa3f8e00  elektron-capture-ios-4bc8ae65.bundle
+d126abe3709f29297d326a49c6bcede2b4c6699c918b62a885d263d4ccc20a6e  elektron-capture-ios-4bc8ae65-working-tree.zip

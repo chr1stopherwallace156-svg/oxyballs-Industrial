@@ -1,0 +1,7 @@
+CAPTURE_TIP=88d9a9b51dbec386eea379170c8ea99fa9c0e83c
+SHA256=3d7685d0ae59852eee9f64115ca3b6c5522858db93bf6f9aad2567e5fe0e8b2c
+PATTERN=Canonical Identity (ADR + P1-004)
+GUARDRAIL=CanonicalPackageIdentityTests + CanonicalPathInvariantTests
+ERROR=Docs/ErrorLibrary/ERR-EDTS-0007.md
+STATUS=PHASE_1C_IMPLEMENTED_PENDING_MAC_AND_DEVICE_VALIDATION
+LINUX_SWIFT_TEST=89 tests, 1 skipped, 0 failures

@@ -1,0 +1,17 @@
+=== verify-xcode-handoff @ /tmp/pass2-share-wt-302692/elektron-capture-ios ===
+PASS: Package.swift exists at repo root
+PASS: Package exports product ElektronCapture
+PASS: Phase1StillCapture.xcodeproj exists
+PASS: pbxproj productName = ElektronCapture
+PASS: pbxproj has XCLocalSwiftPackageReference
+PASS: relativePath '../..' resolves to repo root with Package.swift
+PASS: App sources import ElektronCapture
+PASS: App-level xcworkspace present
+PASS: Root xcworkspace present
+
+HANDOFF_LAYOUT_OK
+Open either:
+  open Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj
+  open Apps/Phase1StillCapture/Phase1StillCapture.xcworkspace
+  open Phase1StillCapture.xcworkspace
+If Xcode still shows Missing package product: File → Packages → Reset Package Caches, then resolve.

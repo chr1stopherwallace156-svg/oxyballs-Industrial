@@ -32,20 +32,17 @@
 
 **Exact config only:** 2019 F-450 Chassis Cab · Regular Cab · 4x2 · DRW · 145.3 in WB / 60 in CA (`VEH-000001` / `CFG-000001`).
 
-**Sprint RL-006 / RL-007 · DT-D037 / DT-D038:**
-- Architecture status = **`RESEARCH_REQUIRED`** — **no decision**
-- Hard Rule 13 active: discovering one source opens parallel lanes (does not close research)
-- Immutable candidates: `SRC-CAND-000001` (BBAS, RC 85), `SRC-CAND-000002` (WSM, RC 90), `SRC-CAND-000003` (Parts, RC 75) — all **`NOT_ACQUIRED`**
-- Uploaded “F-450 Suspension Geometry Research” file review = **`NOT_EXECUTED`**
-- No claims at `VERIFIED_EVIDENCE`
-- Decision posture: **`PRIMARY_SOURCE_REQUIRED`**
-- Geometry extraction: **forbidden** until `SRC-CAND-000001` (or equivalent Tier A) acquired + applicability verified
-
-**Risks:** marketplace 4x2↔4x4 mislabel; 169.3 in WB contamination; F-350 4x2 ≠ F-450 4x2 inheritance
+**Sprint RL-022 · DT-D053 (supersedes open posture of DT-D037 for series type):**
+- Series architecture = **`ASSERTION_EXTRACTED` Monobeam** (SRC-CAND-000010 Front Axle Specs — 4x2, F-450/F-550)
+- F-350 Twin I-beam = **cross-configuration comparison only**
+- Still **not** `ASSERTION_VERIFIED` for the physical VEH-000001 instance (BAG parse + label/WSM remain)
+- WSM `SRC-CAND-000002` still **NOT_ACQUIRED** — torque/alignment blocked
+- Geometry extraction: still **forbidden** until instance verification path closes
+- Mission: `MISN-000004` **IN_PROGRESS**
 
 **Impact:** `FRONT_AXLE_*` object identity, landmark `LMK-AXLE-FRONT-CTR`, front suspension hierarchy
 
-**Status:** OPEN — prioritize locate/acquire `SRC-CAND-000001`; keep parallel lanes tasked
+**Status:** PARTIALLY_RESOLVED (series) — continue Mission D instance verification
 
 ---
 

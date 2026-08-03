@@ -1,0 +1,67 @@
+{
+  "document_id": "MEPQ_ACTIVE_CHECKLIST",
+  "version": "1.1.0",
+  "decision": "DT-D056",
+  "research_sprint": "RL-025",
+  "exported_at_utc": "2026-07-20T20:20:00Z",
+  "three_layer_protocol": "research/graph_layers/THREE_LAYER_SEPARATION_PROTOCOL.md",
+  "option_selected": "2_MISSION_D_L1_FOCUS",
+  "option_1_mission_f": "ALREADY_OPEN_MISN-000006",
+  "counts": {
+    "QUEUED": 1,
+    "DEFERRED": 6,
+    "total": 7
+  },
+  "items": [
+    {
+      "mepq_id": "MEPQ-003",
+      "priority": "CRITICAL",
+      "status": "QUEUED",
+      "focus": "Firewall LV + CAN",
+      "layer_need": "L1 after EWD"
+    },
+    {
+      "mepq_id": "MEPQ-001",
+      "priority": "CRITICAL",
+      "status": "DEFERRED",
+      "focus": "ICE CG + dry mass",
+      "layer_need": "L1 mass props"
+    },
+    {
+      "mepq_id": "MEPQ-002",
+      "priority": "HIGH",
+      "status": "DEFERRED",
+      "focus": "Trans XMBR geometry",
+      "layer_need": "L1"
+    },
+    {
+      "mepq_id": "MEPQ-004",
+      "priority": "CRITICAL",
+      "status": "DEFERRED",
+      "focus": "Fuel strap holes + torque",
+      "layer_need": "L1"
+    },
+    {
+      "mepq_id": "MEPQ-005",
+      "priority": "HIGH",
+      "status": "DEFERRED",
+      "focus": "Mid XMBR thickness",
+      "layer_need": "L1"
+    },
+    {
+      "mepq_id": "MEPQ-006",
+      "priority": "CRITICAL",
+      "status": "DEFERRED",
+      "focus": "Aft hole tolerances/flatness",
+      "layer_need": "L1 metrology"
+    },
+    {
+      "mepq_id": "MEPQ-007",
+      "priority": "CRITICAL",
+      "status": "DEFERRED",
+      "focus": "Frame dynamic loads",
+      "layer_need": "L1 loads for L2 FEA"
+    }
+  ],
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED"
+}
