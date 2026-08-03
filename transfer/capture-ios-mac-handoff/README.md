@@ -186,3 +186,27 @@ swift test
 open Apps/Phase1StillCapture/Phase1StillCapture.xcworkspace
 ```
 
+## Historical — lifecycle / black-frame CANDIDATE (`413dfe5`)
+
+**Not** Phase 1 complete. Black-frame root cause remains **UNDER INSTRUMENTATION**. Prefer pin-named files; do **not** use generic `elektron-capture-ios-complete.bundle` / `elektron-capture-ios-working-tree.zip` for this tip.
+
+| Field | Value |
+|---|---|
+| Capture tip | `413dfe59efd567777e16d289d4f054d30c571fac` |
+| Subject | feat(capture): lifecycle logs, preview shutter, black-frame guard |
+| Bundle | `elektron-capture-ios-lifecycle.bundle` |
+| Bundle SHA-256 | `1f39196a90e5e9d875bf47d093105b7f407a9faa52b39b207ba7536e2b2766a6` |
+| ZIP | `elektron-capture-ios-lifecycle.zip` |
+| ZIP SHA-256 | `ecab86c7b5b067e7661997b2338727e45f96d9c99f4a9fdc9a19c34fa7939a81` |
+| Manifest | `CANDIDATE_HANDOFF_MANIFEST_413dfe5.md` |
+| Cloud `swift test` | 58 executed, 1 skipped, 0 failures |
+
+```bash
+git clone elektron-capture-ios-lifecycle.bundle elektron-capture-ios-lifecycle
+cd elektron-capture-ios-lifecycle
+git rev-parse HEAD   # must be 413dfe59efd567777e16d289d4f054d30c571fac
+./Scripts/verify-xcode-handoff.sh
+swift test
+open Apps/Phase1StillCapture/Phase1StillCapture.xcworkspace
+```
+

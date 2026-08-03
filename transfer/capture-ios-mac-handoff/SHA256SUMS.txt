@@ -26,3 +26,7 @@ b04157c9e3060e7c218f2d70bf97c3f8f2e340d671da4d85bc510b9f74ecd7db  elektron-captu
 # fresh P1R-001 retest CANDIDATE 4bc8ae65 (artifacts on main via #14)
 8765944f8c159ae3c26fbf496a0bc3a6a0abf7d93757d36118d69f6eaa3f8e00  elektron-capture-ios-4bc8ae65.bundle
 d126abe3709f29297d326a49c6bcede2b4c6699c918b62a885d263d4ccc20a6e  elektron-capture-ios-4bc8ae65-working-tree.zip
+
+# CANDIDATE lifecycle/black-frame tip 413dfe5 (not Phase 1 complete)
+1f39196a90e5e9d875bf47d093105b7f407a9faa52b39b207ba7536e2b2766a6  elektron-capture-ios-lifecycle.bundle
+ecab86c7b5b067e7661997b2338727e45f96d9c99f4a9fdc9a19c34fa7939a81  elektron-capture-ios-lifecycle.zip
