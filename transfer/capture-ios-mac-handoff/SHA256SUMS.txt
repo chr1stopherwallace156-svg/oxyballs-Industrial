@@ -30,3 +30,7 @@ d126abe3709f29297d326a49c6bcede2b4c6699c918b62a885d263d4ccc20a6e  elektron-captu
 # CANDIDATE lifecycle/black-frame tip 413dfe5 (not Phase 1 complete)
 1f39196a90e5e9d875bf47d093105b7f407a9faa52b39b207ba7536e2b2766a6  elektron-capture-ios-lifecycle.bundle
 ecab86c7b5b067e7661997b2338727e45f96d9c99f4a9fdc9a19c34fa7939a81  elektron-capture-ios-lifecycle.zip
+
+# CANDIDATE professional UX tip 2f61be34 (not Phase 1 complete)
+412ee5ed69803a27603122090dc0471ec7faff365801990937b1464d5d7ab99a  elektron-capture-ios-pro-ux.bundle
+26940209b3ba3c3e99f34b1eba7a0a0382f9e37ccc55789e80061d07839b08bd  elektron-capture-ios-pro-ux.zip
