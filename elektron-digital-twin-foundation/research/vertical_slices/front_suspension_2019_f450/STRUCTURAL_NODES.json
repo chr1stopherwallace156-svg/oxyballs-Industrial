@@ -1,0 +1,163 @@
+{
+  "document_id": "FRONT_SUSPENSION_STRUCTURAL_NODES",
+  "decision": "DT-D053",
+  "mission_id": "MISN-000004",
+  "authority_status": "CANDIDATE_PARTIAL",
+  "root_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRONT-SUSPENSION",
+  "parent_frame_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+  "components": [
+    {
+      "compdef_id": "COMPDEF-FRONT-SUSPENSION-ASSEMBLY",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRONT-SUSPENSION",
+      "display_name": "2019 F-450 RC 4x2 60CA DRW Front Suspension Assembly",
+      "verification_status": "CANDIDATE",
+      "physical_type": "SUSPENSION_ASSEMBLY"
+    },
+    {
+      "compdef_id": "COMPDEF-FRONT-AXLE-MONOBEAM",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "display_name": "Front Axle — Monobeam (Dana / forged steel)",
+      "verification_status": "ASSERTION_EXTRACTED_SERIES",
+      "physical_type": "AXLE_BEAM",
+      "architecture_note": "OEM vocabulary: Monobeam. Operator alias SOLID_BEAM mapped here — do not invent Twin-I-Beam for F-450.",
+      "aliases_operator": ["COMPDEF-FRONT-AXLE-SOLID"]
+    },
+    {
+      "compdef_id": "COMPDEF-FRONT-AXLE-WIDE-TRACK",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-WIDE-TRACK",
+      "display_name": "Wide-Track Front Axle Classification (F-450/F-550)",
+      "verification_status": "DOCUMENT_SUPPORTED",
+      "physical_type": "AXLE_TRACK_CLASS",
+      "notes": ["Dimensional truth is front_track_I=74.8 in from SRC-CAND-000010"]
+    },
+    {
+      "compdef_id": "COMPDEF-COIL-SPRING-FL",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COIL-FL",
+      "display_name": "Front Coil Spring LH",
+      "verification_status": "CANDIDATE",
+      "physical_type": "SPRING",
+      "rate_status": "UNRESOLVED"
+    },
+    {
+      "compdef_id": "COMPDEF-COIL-SPRING-FR",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COIL-FR",
+      "display_name": "Front Coil Spring RH",
+      "verification_status": "CANDIDATE",
+      "physical_type": "SPRING",
+      "rate_status": "UNRESOLVED"
+    },
+    {
+      "compdef_id": "COMPDEF-RADIUS-ARM-LH",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-RADIUS-ARM-LH",
+      "display_name": "Radius Arm LH",
+      "verification_status": "CANDIDATE",
+      "physical_type": "LOCATING_ARM"
+    },
+    {
+      "compdef_id": "COMPDEF-RADIUS-ARM-RH",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-RADIUS-ARM-RH",
+      "display_name": "Radius Arm RH",
+      "verification_status": "CANDIDATE",
+      "physical_type": "LOCATING_ARM"
+    },
+    {
+      "compdef_id": "COMPDEF-STAB-BAR-FRONT",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STAB-BAR-FRONT",
+      "display_name": "Front Stabilizer Bar",
+      "verification_status": "CANDIDATE",
+      "physical_type": "ANTI_ROLL_BAR",
+      "diameter_mm_asserted": 35,
+      "diameter_status": "ASSERTION_EXTRACTED_SERIES"
+    },
+    {
+      "compdef_id": "COMPDEF-SHOCK-FL",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-SHOCK-FL",
+      "display_name": "Front Shock Absorber LH",
+      "verification_status": "CANDIDATE",
+      "physical_type": "DAMPER"
+    },
+    {
+      "compdef_id": "COMPDEF-SHOCK-FR",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-SHOCK-FR",
+      "display_name": "Front Shock Absorber RH",
+      "verification_status": "CANDIDATE",
+      "physical_type": "DAMPER"
+    },
+    {
+      "compdef_id": "COMPDEF-STEERING-GEAR",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR",
+      "display_name": "Recirculating-Ball Power Steering Gear",
+      "verification_status": "CANDIDATE",
+      "physical_type": "STEERING_GEAR"
+    },
+    {
+      "compdef_id": "COMPDEF-STEERING-DAMPER",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-DAMPER",
+      "display_name": "Steering Damper",
+      "verification_status": "CANDIDATE",
+      "physical_type": "STEERING_DAMPER"
+    },
+    {
+      "compdef_id": "COMPDEF-HUB-FRONT",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-HUB-FRONT",
+      "display_name": "Front Hub Assembly (10-lug / 225 mm BCD class)",
+      "verification_status": "CANDIDATE",
+      "physical_type": "HUB"
+    },
+    {
+      "compdef_id": "COMPDEF-PKG-EXTRA-HD-FRONT-SUSP",
+      "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-PKG-EXTRA-HD-FRONT",
+      "display_name": "Extra Heavy-Duty / Extra Heavy-Service Front Suspension Package (option)",
+      "verification_status": "CANDIDATE",
+      "physical_type": "OPTION_PACKAGE",
+      "option_dependent": true,
+      "aliases_operator": ["COMPDEF-PKG-HDFRONT"],
+      "notes": ["Not assumed present on bare reference VEH-000001"]
+    }
+  ],
+  "interfaces": [
+    {
+      "iface_id": "IFACE-AXLE-DATUM-FRONT",
+      "parent_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "interface_type": "AXLE_DATUM",
+      "station_id": "X-038.3",
+      "verification_status": "CANDIDATE",
+      "notes": ["Inherited from chassis frame brief; mating target for monobeam axle."]
+    },
+    {
+      "iface_id": "IFACE-RADIUS-ARM-FRAME-PIVOT-LH",
+      "parent_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME-RAIL-LH",
+      "interface_type": "BUSHED_PIVOT",
+      "verification_status": "CANDIDATE",
+      "torque_status": "NOT_ACQUIRED"
+    },
+    {
+      "iface_id": "IFACE-RADIUS-ARM-FRAME-PIVOT-RH",
+      "parent_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME-RAIL-RH",
+      "interface_type": "BUSHED_PIVOT",
+      "verification_status": "CANDIDATE",
+      "torque_status": "NOT_ACQUIRED"
+    },
+    {
+      "iface_id": "IFACE-COIL-SPRING-FRAME-BUCKET-FL",
+      "parent_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "interface_type": "SPRING_SEAT",
+      "verification_status": "CANDIDATE"
+    },
+    {
+      "iface_id": "IFACE-COIL-SPRING-FRAME-BUCKET-FR",
+      "parent_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "interface_type": "SPRING_SEAT",
+      "verification_status": "CANDIDATE"
+    },
+    {
+      "iface_id": "IFACE-WHEEL-MOUNT-FRONT",
+      "parent_cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-HUB-FRONT",
+      "interface_type": "WHEEL_MOUNT",
+      "bolt_circle_mm": 225,
+      "stud_count": 10,
+      "verification_status": "ASSERTION_EXTRACTED_SERIES",
+      "torque_status": "NOT_ACQUIRED"
+    }
+  ]
+}

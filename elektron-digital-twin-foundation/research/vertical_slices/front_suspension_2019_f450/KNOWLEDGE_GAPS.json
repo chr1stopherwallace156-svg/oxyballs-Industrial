@@ -1,0 +1,47 @@
+{
+  "document_id": "FRONT_SUSPENSION_KNOWLEDGE_GAPS",
+  "decision": "DT-D053",
+  "mission_id": "MISN-000004",
+  "gaps": [
+    {
+      "gap_id": "KG-FS-001",
+      "title": "Workshop Manual torque & alignment values",
+      "severity": "HIGH",
+      "blocks": ["procedure generation", "EXACT_MATCH fastener table"],
+      "required_source": "SRC-CAND-000002",
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "KG-FS-002",
+      "title": "4x2 radius-arm count/material token clarity",
+      "severity": "MEDIUM",
+      "blocks": ["radius arm CFGCOMP verification"],
+      "required_source": "SRC-CAND-000010 clearer extract / SRC-CAND-000001 / SRC-CAND-000003",
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "KG-FS-003",
+      "title": "Spring rate / spring code for VEH-000001",
+      "severity": "HIGH",
+      "blocks": ["exact FGAWR assignment", "coil COMPDEF rates"],
+      "required_source": "Physical certification label + order sheet",
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "KG-FS-004",
+      "title": "Steering linkage topology diagram",
+      "severity": "MEDIUM",
+      "blocks": ["Haltenberger claim verification"],
+      "required_source": "SRC-CAND-000002 or parts catalog",
+      "status": "OPEN"
+    },
+    {
+      "gap_id": "KG-FS-005",
+      "title": "BAG page parse for front suspension layout",
+      "severity": "HIGH",
+      "blocks": ["layout coordinates", "BBAS corroboration"],
+      "required_source": "SRC-CAND-000001 page extraction",
+      "status": "OPEN"
+    }
+  ]
+}

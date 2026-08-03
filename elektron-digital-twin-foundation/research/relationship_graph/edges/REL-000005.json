@@ -1,0 +1,52 @@
+{
+  "edge_id": "REL-000005",
+  "id_immutable": true,
+  "aliases": [
+    "REL-REG-05"
+  ],
+  "schema_version": "egs-v1.0.0",
+  "relationship_type": "BLOCKS_REMOVAL_OF",
+  "source_node": "EDTS-COMP-FL-GLASS",
+  "target_node": "EDTS-COMP-FL-REGULATOR",
+  "directionality": "FORWARD",
+  "vehicle_silo_context": {
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_id": "CFG-000001",
+    "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+    "model_year": "2019",
+    "platform": "Super Duty F-450 Chassis Cab",
+    "cab_config": "Regular Cab"
+  },
+  "edge_engineering_properties": {
+    "torque_specification": {
+      "value": null,
+      "unit": null,
+      "tolerance": null,
+      "status": "NOT_EXECUTED"
+    },
+    "fastener_id_reference": null,
+    "fastener_count": null,
+    "connector_claim": null,
+    "notes": null
+  },
+  "procedural_weight": {
+    "removal_precedence_index": 3,
+    "status": "ILLUSTRATIVE"
+  },
+  "evidence_verification": {
+    "source_id_alias": "EDTS-OEM-003",
+    "src_cand_id": "SRC-CAND-000002",
+    "workshop_manual_section_claim": "Section 501-14 claim",
+    "evidence_confidence": "ILLUSTRATIVE_ONLY",
+    "local_hash_status": "ABSENT",
+    "operator_claimed_confidence": "VERIFIED_EVIDENCE",
+    "honesty_note": "Operator claimed VERIFIED_EVIDENCE via EDTS-OEM-003; SRC-CAND SRC-CAND-000002 has no local hashed bytes \u2014 demoted to ILLUSTRATIVE_ONLY / RESEARCH_CLAIM. Not admitted as silo removal truth."
+  },
+  "authority_status": "ILLUSTRATIVE_ONLY",
+  "research_sprint": "RL-015",
+  "decision": "DT-D046",
+  "notes": [
+    "Part of REL-REG illustrative suite for FL window regulator dependency demo.",
+    "Do not generate field procedures until evidence_confidence upgrades with hashed OEM pages."
+  ]
+}

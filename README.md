@@ -2,18 +2,59 @@
 
 Gas-to-EV conversion services — Victorville, CA.
 
-This repository holds two coordinated bodies of work plus the public site:
+This repository holds coordinated bodies of work plus the public site:
 
-- **Build Engine** — `engine/` (code) + `docs/` (governance). A deterministic,
+- **Build Engine** — `engine/` (code) + `docs/` governance trees (constitution, specs, research, status). A deterministic,
   evidence-governed engine for vehicle-conversion validation.
 - **Digital Twin Foundation** — [`elektron-digital-twin-foundation/`](elektron-digital-twin-foundation/README.md).
-  Layer-governed 3D digital-twin documentation. Current stage: **L00 Reference Lock**.
+  Layer-governed 3D digital-twin documentation. Current stage: **L00 Reference Lock**
+  (locked vehicle) + evidence acquisition.
+- **Local Runtime** — macOS offline installers (`.command`), `scripts/setup-macos.sh`, `scripts/doctor.sh`, sealed `scripts/backup.sh` → `.local/backups/`.
+- **Developer Environment (EDE)** — `scripts/setup.sh`, `scripts/dev/ede/`, `config/`, `dev/`, plus `docs/cto`, `docs/runbooks`, and related manifests.
+  Reproducible workstation bootstrap (`./scripts/setup.sh` / `npm run setup`). Additive infrastructure only.
 - **Website** — static site: [`index.html`](index.html).
 
 > **Nothing may bypass guardrails, state machines, evidence requirements, or
 > configuration locking.** The Build Engine turns missing knowledge into an exact
 > work queue; it does not approve, certify, or claim safety. All build packages are
 > DRAFT until evidence closes them.
+
+## Visible Progress (Release 1)
+
+Interactive 3D demonstrator (provisional visual — not engineering truth):
+[`edts-visible-progress/`](edts-visible-progress/README.md). Decision **DT-D058**.
+
+```bash
+cd edts-visible-progress && npm install && npm run dev
+```
+
+## VIN resolver (DT-D067)
+
+```bash
+cd edts-vin-resolver && npm install && npm run vin -- 1HTKHPVK8KH805188
+```
+
+Creates configuration **candidates** from NHTSA vPIC — not geometry-verified twins.
+See [`edts-vin-resolver/README.md`](edts-vin-resolver/README.md).
+
+---
+
+## Developer environment (EDE)
+
+Clone → configure workstation:
+
+```bash
+./scripts/setup.sh
+# or
+npm run setup
+npm run ede:doctor
+npm run dashboard
+```
+
+EDE commands are namespaced (`ede:doctor`, `ede:snapshot`). Generic `npm run doctor` / `npm run backup` belong to the **Local Runtime**.
+
+See [`ENVIRONMENT.md`](ENVIRONMENT.md), [`docs/README.md`](docs/README.md) (EDE index), and [`PROJECT_MANIFEST.json`](PROJECT_MANIFEST.json).  
+EDE does **not** move application folders.
 
 ---
 
@@ -52,8 +93,17 @@ npm run platform001:generate   # writes output/platform-001/build-package.{md,js
 README.md                         Entry point (this file)
 AGENTS.md                         Cross-agent rules + handoff protocol
 .cursor/rules/                    Cursor rule mirroring AGENTS.md
+ENVIRONMENT.md                    EDE required tooling / versions
+PROJECT_MANIFEST.json             EDE folder ownership map
+package.json                      Root scripts: runtime doctor/backup + EDE ede:* 
 index.html                        Public static site
 elektron-digital-twin-foundation/ Layer-governed 3D digital-twin docs (L00 Reference Lock)
+edts-visible-progress/            Interactive 3D demonstrator (DT-D058)
+edts-vin-resolver/                NHTSA vPIC VIN → CFG candidate CLI (DT-D067)
+scripts/doctor.sh backup.sh       Local Runtime operator tools → .local/backups/
+scripts/dev/ede/                  EDE workstation doctor + development snapshot
+artifacts/ede-snapshots/          EDE development snapshots (gitignored)
+scripts/setup.sh config/ dev/     EDE workstation bootstrap + checks
 docs/
     ENGINEERING_CONSTITUTION.md   Rules that rarely change (Articles I–VIII)
     AI_INSTRUCTIONS.md            How AI tooling must behave
@@ -66,6 +116,8 @@ docs/
     roadmaps/                     Per-milestone plans (M10, M11, ingestion, gates)
     specifications/               Revision 07 (active) + its modules
     status/                       Phase, ledger, blockers, PLATFORM_001_STATUS
+    cto/ runbooks/ architecture/  EDE CTO docs + runbooks (additive)
+    contracts/ history/           EDE contract + history indexes
 engine/
     migrations/                   Versioned SQL schema (001..005)
     src/                          Rule engine + platform build-package layer

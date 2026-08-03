@@ -1,0 +1,1 @@
+A	Tests/Unit/Pass1CanonicalInventoryTests.swift

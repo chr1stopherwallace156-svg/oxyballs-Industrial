@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:schema:twin-domain-passport:1.0.0",
+  "title": "EDTS Twin Domain Passport (Visual or Engineering)",
+  "description": "Visual and Engineering twin registries are independent. Speculative LOD/mass/material values are RESEARCH_CLAIM or NOT_EXECUTED until hashed evidence exists.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "twin_passport_id",
+    "domain",
+    "component_alias",
+    "bound_vehicle_instance_id",
+    "bound_configuration_id",
+    "authority_status"
+  ],
+  "properties": {
+    "twin_passport_id": {
+      "type": "string",
+      "pattern": "^TWIN-(VIS|ENG)-[0-9]{6}$"
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "VISUAL",
+        "ENGINEERING"
+      ]
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "component_alias": {
+      "type": "string"
+    },
+    "related_csp_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "related_aid_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "authority_status": {
+      "type": "string",
+      "enum": [
+        "RESEARCH_OPERATIONAL",
+        "ILLUSTRATIVE_ONLY"
+      ]
+    },
+    "fields": {
+      "type": "object"
+    },
+    "bound_vehicle_instance_id": {
+      "type": "string"
+    },
+    "bound_configuration_id": {
+      "type": "string"
+    },
+    "configuration_fingerprint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "research_sprint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "decision": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

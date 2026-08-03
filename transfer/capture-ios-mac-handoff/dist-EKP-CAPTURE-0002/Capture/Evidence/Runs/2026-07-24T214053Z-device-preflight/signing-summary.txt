@@ -1,0 +1,3 @@
+# No secrets. Team ID presence only.
+security tool unavailable
+DEVELOPMENT_TEAM key present in pbxproj (value redacted from evidence)
