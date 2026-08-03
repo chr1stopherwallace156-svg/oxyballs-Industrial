@@ -113,3 +113,29 @@ open Docs/Incidents/PHASE_1_RUNTIME_INCIDENT_001.md
 open Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj
 ```
 
+## Historical — P1R-001 retest CANDIDATE (`cca69f88`)
+
+**Not** a physically validated release snapshot. Preserved under commit-scoped names so they do not overwrite the generic handoff bundle/zip paths.
+
+| Field | Value |
+|---|---|
+| Capture tip | `cca69f88a7ffe1d4323da4da3bfc12126eb88977` |
+| Branch | `cursor/canonicalization-failed-repair-d881` |
+| Incident | P1R-001 OPEN / `PENDING_PHYSICAL_DEVICE_RETEST` |
+| Bundle | `elektron-capture-ios-cca69f88.bundle` |
+| Bundle SHA-256 | `b29ac788c227e85f7050d13dee655725f20fb31494111b906b38dfd8e54c81f1` |
+| ZIP | `elektron-capture-ios-cca69f88-working-tree.zip` |
+| ZIP SHA-256 | `efe71f14f032b5004cc9927bfdecb091338ab786afe508779e0057e5b1dc2e0e` |
+| Reject | `bb93af515087c6a2c7fe77e2a0ed93b22406e8415a8f3eb931ad4963dcf276b7` |
+
+```bash
+git clone elektron-capture-ios-cca69f88.bundle elektron-capture-ios
+cd elektron-capture-ios
+git checkout cursor/canonicalization-failed-repair-d881
+# or: git checkout cca69f88a7ffe1d4323da4da3bfc12126eb88977
+swift test
+open Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj
+# Build → Install on iPhone → Capture & Export
+# Then fill Docs/Incidents/PHASE_1_RUNTIME_INCIDENT_001.md Acceptance Evidence
+```
+
