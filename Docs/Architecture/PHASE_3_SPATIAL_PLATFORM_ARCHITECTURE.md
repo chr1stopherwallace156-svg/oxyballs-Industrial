@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Status | **DEFINITIVE CHARTER — IMPLEMENTATION GATED** |
+| Status | **ARCHITECTURE_ACCEPTED — SYNTHETIC SLICE AUTHORIZED** |
 | Version | **1.5.0** |
 | Date | 2026-07-27 |
 | Path | `Docs/Architecture/PHASE_3_SPATIAL_PLATFORM_ARCHITECTURE.md` |
@@ -11,7 +11,7 @@
 | Related | `COORDINATE_FRAME_STANDARD.md`, `TIMESTAMP_STANDARD.md`, `SYSTEM_BOUNDARIES.md`, `ENGINEERING_GUARDRAILS.md`, `STATUS_TAXONOMY.md`, `ADR-SESSION-REVISION-OCC.md`, `ADR-SESSION-RECOVERY-AND-QUARANTINE.md`, `Docs/Architecture/PHASE_3_FORMAL_ARCHITECTURE_AUDIT.md` |
 | Supersedes | Drafts 1.0.0–1.4.0 |
 
-**This document is the Phase 3 engineering constitution.** It does not authorize production ARKit / AVFoundation / LiDAR workflows. **Zero Swift feature code** until charter acceptance, Sprint 2.3 Mac gate, Formal Architecture Audit closure, and required ADRs.
+**This document is the Phase 3 engineering constitution.** It does not authorize production ARKit / AVFoundation / LiDAR workflows. **Foundation-portable synthetic Swift** authorized after audit closure + P0 ADRs (Sprint 3.0). Production ARKit/AVFoundation/LiDAR adapters remain gated until Mac xcodebuild success is recorded.
 
 **Strategic next step:** Formal Architecture Audit (`PHASE_3_FORMAL_ARCHITECTURE_AUDIT.md`) — map every contract in this charter against Phase 0–2.3, document conflicts/ADRs, then draft the synthetic vertical-slice harness. **Not** immediate production coding.
 
@@ -284,6 +284,6 @@ Full conflict detail: `Docs/Architecture/PHASE_3_FORMAL_ARCHITECTURE_AUDIT.md`.
 | Mesh/SfM inside Phase 3 | **Rejected** |
 | Mutate sealed package bytes in place | **Forbidden** |
 
-**Classification:** `PHASE_3_DEFINITIVE_CHARTER_IMPLEMENTATION_PENDING`
+**Classification:** `ARCHITECTURE_ACCEPTED` (Sprint 3.0 synthetic vertical slice). Apple sensor adapters remain gated on Mac xcodebuild + later sprints.
 
 **Post-acceptance next step:** Formal Architecture Audit → ADR gap list → synthetic vertical-slice harness approval — **not** immediate production coding.

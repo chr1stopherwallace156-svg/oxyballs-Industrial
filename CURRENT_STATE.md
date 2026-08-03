@@ -40,7 +40,7 @@ Do **not** market or document a “complete engineering digital twin.”
 
 | Subsystem | Current reality | Blockers / notes |
 |---|---|---|
-| **Capture iOS** | Multi-sprint handoffs landed in Industrial (`transfer/` + versioned `DOWNLOAD-*.zip`). Inspection/session work through Sprint 2.x delivered as Mac packages. | Physical Mac `xcodebuild` / device retest gates still pending for several candidates. Phase 3 spatial coding **not** authorized until Sprint 2.3 Mac gate + charter/ADR gates. Mutable `*-latest.zip` aliases are **not** authoritative. |
+| **Capture iOS** | Sprint 3.0 synthetic spatial slice delivered as versioned ZIP; Foundation Linux tests green. Apple adapters gated. | Physical Mac `xcodebuild` / device still `BLOCKED_HOST_CAPABILITY` on Linux agents. Do not treat `*-latest.zip` as authoritative. |
 | **EDTS Kernel / Foundation** | Exact-vehicle **kernel validated and frozen** (`kernel_state: VALIDATED_AND_FROZEN`). **Active layer: L01 Exterior.** L01 research draft **complete** (`L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`). | Source verification, physical acquisition, and geometry freeze **pending**. Not a verified engineering twin mesh. |
 | **EAE / XREPO ingest** | EDTS EAE core ingestion validated; full executable EAE product surface still incomplete. Capture↔EDTS package importer / digest gates exist in-repo. | Treat as validated ingestion paths + gaps, not a finished engine product. |
 | **Build Engine** | Bounded M10 Gate 05M-C3 foundation built under `engine/`. Platform 001 Build Package v0.1 = **`DRAFT_INCOMPLETE`**. | No approval / procurement / fabrication / energization claim. Open data still blocks completeness. |
