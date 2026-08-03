@@ -4,7 +4,7 @@
 
 ```text
 source_main_baseline_sha     = 185120496a64a6e56b95dc3ea409f09064398e25
-state_change_pr              = Sprint 3.5 (proposed)
+state_change_pr              = #60 (Sprint 3.5 quality/coverage/guidance)
 state_change_status          = PROPOSED_IN_DRAFT_PR
 updated_at                   = 2026-08-03T23:35:00Z
 maintained_by                = Industrial Phase 3 maintainers
