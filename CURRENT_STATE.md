@@ -4,7 +4,7 @@
 
 ```text
 source_main_baseline_sha     = 0c18e2c6789ec6ac289006c80b115efb68cbe327
-state_change_pr              = Sprint 3.6 (proposed; Apple host BLOCKED)
+state_change_pr              = #61 (Sprint 3.6 Apple gate; Apple host BLOCKED)
 state_change_status          = PROPOSED_IN_DRAFT_PR
 updated_at                   = 2026-08-03T23:46:00Z
 maintained_by                = Industrial Phase 3 maintainers
