@@ -1,0 +1,36 @@
+{
+  "decision_id": "DT-D051",
+  "title": "Chassis frame Engineering Evidence Brief A/B; acquire fleet+brochure PDFs; open Mission D",
+  "date": "2026-07-20",
+  "approved_status": "ACCEPTED",
+  "recommended_decision": "EGS_V1_PROPOSAL_INFRASTRUCTURE_READY",
+  "scope": [
+    "research/vertical_slices/chassis_frame_2019_f450/",
+    "research/incoming/chassis_frame_ab/",
+    "SRC-CAND-000010",
+    "SRC-CAND-000011",
+    "MISN-000004",
+    "MISN-000005",
+    "RL-020"
+  ],
+  "reason": "Lock global bumper-referenced datums and F-450 Regular Cab dimensional evidence from acquired fleet specs, initialize frame CFGCOMP/IFACE graph, and choose next subsystem mission without inventing suspension architecture.",
+  "decision": [
+    "Admit Engineering Evidence Brief A/B under CFG-2019-F450-REG-CAB-4X2-60CA-DRW with pollution filter (no pickup/4x4/alt-WB/F-350 track inheritance).",
+    "Acquire+hash SRC-CAND-000010 (fleet specs) and SRC-CAND-000011 (Skeeter 2020/02 brochure path).",
+    "Mark dimensional claims ASSERTION_EXTRACTED with page cites from F-450 Regular Cab tables; record dual curb/loaded frame-height values (35.0/35.9 and 28.7/28.6).",
+    "Register CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME + rails + IFACE-UPFITTER; edges CANDIDATE_UNVERIFIED / PROCEDURE_GENERATION_NOT_AUTHORIZED.",
+    "HSLA 50 ksi and upfitter drill/weld rules remain DOCUMENT_SUPPORTED_PENDING_TOKEN_ANCHOR.",
+    "Select Option A: authorize MISN-000004 (4x2 Steering & Front Suspension). Defer Option B as MISN-000005.",
+    "Do not invent Twin-I-Beam vs solid-axle architecture in this decision.",
+    "Frozen kernel schemas unchanged."
+  ],
+  "related_decisions": ["DT-D050", "DT-D049", "DT-D037", "DT-D038"],
+  "change_control": {
+    "kernel_schema_change": false,
+    "frozen_assembly_relationship_untouched": true
+  },
+  "acquired_hashes": {
+    "SRC-CAND-000010": "sha256:7a92e4ea839a3a7d163e2c374e6cfde0a24d277e1ee40013217cc6b3cab9c030",
+    "SRC-CAND-000011": "sha256:f71e9eebf97ebe4f90ab5aaa5d780504e73df63d5008a7f5af8e4e35c8c6589f"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "decision_id": "DT-D057",
+  "title": "Reject fabricated Layer-1 dump; reinforce three-layer integrity; refuse performance-target tailoring on fake L1",
+  "status": "ACCEPTED",
+  "date_utc": "2026-07-20",
+  "related_locks": ["RL-026"],
+  "summary": "Reject operator block presented as Layer 1 Engineering Truth. Claims invent frame section, material grade card, curb/GAWR at wrong vehicle scale, powertrain CG/mass, tolerances, loads, and EPAS steering architecture that contradicts ASSERTION_EXTRACTED hydraulic recirculating-ball steering. L2/L3 built on that dump are non-authoritative. Do not accept battery chemistry/kWh/voltage tailoring until L1 honesty is restored.",
+  "accepted_artifacts": [
+    "research/graph_layers/REJECTED_FABRICATED_L1_DUMP_2026_07_20.json",
+    "research/graph_layers/REJECTED_FABRICATED_L1_DUMP.md"
+  ],
+  "protocol_reinforced": "research/graph_layers/THREE_LAYER_SEPARATION_PROTOCOL.md",
+  "key_corrections": [
+    "Steering remains hydraulic recirculating ball + damper — not EPAS rack",
+    "Curb/FAWR operator values contradicted by SRC-CAND-000010 F-450 tables",
+    "MEPQ-001/006/007 unknowns remain UNKNOWN — not filled by invention",
+    "Q1 EPAS CAN question REJECTED_WRONG_ARCHITECTURE"
+  ],
+  "performance_targets_prompt": "DECLINED_UNTIL_L1_HONEST",
+  "recommended_decision": "FABRICATED_L1_DUMP_REJECTED_CONTINUE_MISSION_D_L1",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "geometry_extraction_authorized": false
+}

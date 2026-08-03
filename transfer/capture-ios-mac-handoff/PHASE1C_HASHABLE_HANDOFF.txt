@@ -1,0 +1,13 @@
+CAPTURE_TIP=d9b44e5b088780b2313cd6aac300438acb1ae914
+ZIP=elektron-capture-ios-phase1c-evidence-library.zip
+SHA256=01963b7d17927ee5e91653b5fba9eca8119e4cc5b208eb43f48be431b7e316a8
+BYTES=446564
+STAMP=20260724T231630Z
+STATUS=PHASE_1C_IMPLEMENTED_PENDING_MAC_AND_DEVICE_VALIDATION
+CHANGE=Hashable synthesis for EvidenceLibraryIndexRecord (NavigationLink)
+INVENTORY=no production change; builder matches Phase 1 contract on tip
+LINUX_SWIFT_TEST=80 tests, 1 skipped, 0 failures
+LINUX_MAKE_VERIFY=HANDOFF_LAYOUT_OK + HANDOFF_XCODE_BUILD_SKIPPED
+DIAG=Docs/Evidence/HASHABLE_AND_INVENTORY_DIAGNOSTIC_REPORT.md
+AUTHORITATIVE_WORKSPACE=Phase1StillCapture.xcworkspace (repo root)
+MAC_XCODEBUILD=xcodebuild -workspace Phase1StillCapture.xcworkspace -scheme Phase1StillCapture -destination 'generic/platform=iOS' build

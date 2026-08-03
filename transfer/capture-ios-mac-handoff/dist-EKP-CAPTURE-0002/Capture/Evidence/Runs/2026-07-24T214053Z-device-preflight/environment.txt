@@ -1,0 +1,3 @@
+command: make device-preflight
+repo: /home/ubuntu/Elektron/elektron-capture-ios
+started: 2026-07-24T21:40:53Z
