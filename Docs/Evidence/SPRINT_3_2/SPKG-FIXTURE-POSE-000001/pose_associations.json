@@ -1,0 +1,1 @@
+{"associations":[{"association_id":"assoc-0","authority":"TEST_FIXTURE","camera_sample_id":"cam-0","method":"explicit_fixture_binding","pose_sample_id":"pose-0"},{"association_id":"assoc-1","authority":"TEST_FIXTURE","camera_sample_id":"cam-1","method":"explicit_fixture_binding","pose_sample_id":"pose-1"}]}
