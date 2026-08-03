@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ELEKTRON Vehicle Assessment Dossier</title>
+  <style>
+    @page { size: A4; margin: 20mm; }
+    body {
+      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+      color: #1e293b;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .header {
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .brand { font-size: 24px; font-weight: 800; letter-spacing: 0.04em; color: #0c4a6e; }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      background: #f1f5f9;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 12px;
+    }
+    .status-pass { background: #dcfce7; color: #166534; }
+    .status-warn { background: #fef3c7; color: #92400e; }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .photo-card { border: 1px solid #e2e8f0; overflow: hidden; }
+    .photo-card img { width: 100%; height: 160px; object-fit: cover; display: block; background: #e2e8f0; }
+    .photo-caption { font-size: 11px; color: #64748b; padding: 6px 8px; background: #fff; }
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    th, td { padding: 8px; border-bottom: 1px solid #e2e8f0; text-align: left; }
+    th { background: #f1f5f9; }
+    .footer {
+      margin-top: 32px;
+      font-size: 10px;
+      color: #94a3b8;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="brand">ELEKTRON</div>
+      <div style="font-size: 12px; color: #64748b;">Vehicle Electrification &amp; Assessment Platform</div>
+    </div>
+    <div style="text-align: right;">
+      <div style="font-size: 14px; font-weight: 700;">REPORT ID: {{report.id}}</div>
+      <div style="font-size: 11px; color: #64748b;">Generated: {{report.timestamp}}</div>
+    </div>
+  </div>
+
+  <section>
+    <h2>1. Executive Summary</h2>
+    <p>
+      This <strong>{{vehicle.year}} {{vehicle.make}} {{vehicle.model}}</strong>
+      (VIN: <code>{{vehicle.vin}}</code>) has undergone a formal inspection and spatial
+      envelope analysis. Based on current structural condition and duty-cycle metrics,
+      this vehicle is rated:
+      <span class="status-badge status-pass">{{assessment.suitability_rating}}</span>
+    </p>
+  </section>
+
+  <section>
+    <h2>2. Vehicle Profile &amp; Operational Baseline</h2>
+    <div class="meta-grid">
+      <div><strong>Make / Model:</strong> {{vehicle.make}} {{vehicle.model}}</div>
+      <div><strong>GVWR:</strong> {{vehicle.gvwr}} lbs</div>
+      <div><strong>Current Powertrain:</strong> {{vehicle.powertrain}}</div>
+      <div><strong>Odometer:</strong> {{vehicle.odometer}} miles</div>
+      <div><strong>Fleet Role:</strong> {{vehicle.fleet_role}}</div>
+      <div><strong>Primary Duty Cycle:</strong> {{vehicle.duty_cycle}}</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. Key Inspection Observations</h2>
+    <div class="photo-grid">
+      {{#each inspection_photos}}
+      <div class="photo-card">
+        {{#if this.url}}
+        <img src="{{this.url}}" alt="{{this.label}}" />
+        {{else}}
+        <div style="height:160px;display:flex;align-items:center;justify-content:center;color:#64748b;">No image URI</div>
+        {{/if}}
+        <div class="photo-caption">{{this.label}} — Validated {{this.timestamp}}</div>
+      </div>
+      {{/each}}
+    </div>
+  </section>
+
+  <section>
+    <h2>4. Recommended Electrification Pathway</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Option</th>
+          <th>Architecture</th>
+          <th>Est. Range</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each pathways}}
+        <tr>
+          <td>{{this.option}}</td>
+          <td>{{this.architecture}}</td>
+          <td>{{this.est_range}}</td>
+          <td style="color:#0c4a6e;font-weight:600;">{{this.status}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </section>
+
+  <div class="footer">
+    ELEKTRON SYSTEM GENERATED DRAFT — CANONICAL DATA SOURCE SHA: {{report.source_hash}}
+  </div>
+</body>
+</html>

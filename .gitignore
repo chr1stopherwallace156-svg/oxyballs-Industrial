@@ -30,6 +30,8 @@ logs/*.sqlite-*
 !logs/.gitkeep
 artifacts/ede-snapshots/*
 !artifacts/ede-snapshots/.gitkeep
+artifacts/reports/*
+!artifacts/reports/.gitkeep
 # Legacy generic backup dir (do not use; runtime → .local/backups/, EDE → artifacts/ede-snapshots/)
 backups/
 *.bak
