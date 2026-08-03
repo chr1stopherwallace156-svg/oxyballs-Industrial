@@ -17,6 +17,22 @@ later entry that references it.
 
 ---
 
+## D-022 — Sprint 3.3 depth and RGB/depth association (Foundation/fixture)
+
+- Date: 2026-08-03
+- Status: Proposed
+- Activation: Upon merge of the Sprint 3.3 PR
+- Context: Depth acquisition, calibration, and RGB/depth association are required before Sprint 3.6 Apple LiDAR validation; non-LiDAR devices must remain a truthful supported mode without synthesized depth.
+- Decision:
+  1. Expand `DepthSample` with explicit geometry, units, invalid-value encoding, epoch fields, and authority separation (`evidence_origin_authority` vs `depth_estimate_authority=GUIDANCE_ESTIMATE`).
+  2. Capability outcomes distinguish `NOT_REQUESTED`, `UNAVAILABLE_DEVICE`, `UNAVAILABLE_CONFIGURATION`, `ACTIVATION_FAILED`, and `INTERRUPTED_AFTER_ACTIVATION`; unavailable/not-requested depth never produces payloads, calibrations, associations, depth frames/transforms, or adapter success claims.
+  3. `DepthCalibration` records intrinsics/scale/frames/transform/epoch with `characterization_status=PENDING_CHARACTERIZATION` and `system_tolerance=NO_SYSTEM_TOLERANCE_ASSIGNED` — no universal phone-depth metrology claim.
+  4. `RGBDepthAssociationRecord` requires explicit `ClockCorrelation`, calibration, frames, transform, and matching epoch/session/world-origin revision; cross-clock joins without correlation fail closed.
+  5. Primary fixture `SPKG-FIXTURE-CAMERA-DEPTH-*` acquires camera+depth; motion/pose remain `NOT_REQUESTED`. Non-LiDAR fixture `SPKG-FIXTURE-NONLIDAR-DEPTH-*` proves `UNAVAILABLE_DEVICE`.
+  6. Apple ARKit depth lives only under `App/AppleSensors/AppleARKitDepthSensorAdapter.swift` with `#if canImport(ARKit)` → `APPLE_DEPTH_SOURCE_CANDIDATE_UNCOMPILED` on Linux.
+  7. Digest law preserved: `fixture_payload_content_sha256`, `fixture_manifest_sha256`, `fixture_package_closure_sha256` (`sha256-canonical-inventory-v1`).
+- Consequences: Sprint 3.6 still required for physical depth validation; Sprint 3.4 orchestration and Phase 4 reconstruction remain out of scope; APPLE_RUNTIME_UNVALIDATED until 3.6.
+
 ## D-021 — Dual status planes + Phase 3.2–3.6 roadmap (source may advance)
 
 - Date: 2026-08-03
