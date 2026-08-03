@@ -1,0 +1,35 @@
+{
+  "decision_id": "DT-D046",
+  "title": "EGS-v1 relationship graph schema handoff; illustrative FL regulator edges; demote VERIFIED edge claims",
+  "date": "2026-07-19",
+  "approved_status": "ACCEPTED",
+  "recommended_decision": "IMPLEMENTATION_HANDOFF_READY",
+  "handoff_scope": "EGS-v1 schema + vocabulary + illustrative edge suite for migration pipeline",
+  "scope": [
+    "schemas/relationship-graph-edge.egs-v1.schema.json",
+    "research/relationship_graph/",
+    "MISN-000002",
+    "KG-004",
+    "evidence matrix property confidence",
+    "RL-015"
+  ],
+  "reason": "Digital twin needs typed directional edges for mechanical/electrical/procedural dependencies. Operator claimed VERIFIED_EVIDENCE on edges and validated removal sequence while OEM WSM/EWD remain NOT_ACQUIRED — schema can hand off; instances stay ILLUSTRATIVE.",
+  "decision": [
+    "Authorize EDTS Relationship Graph Standard EGS-v1 as non-kernel research/ops schema — do NOT mutate frozen schemas/assembly-relationship.schema.json.",
+    "Closed edge vocabulary only (BOLTED_TO, MOUNTED_TO, HINGES_ON, SUPPORTS, OVERLAPS, CONTAINS, CONNECTED_TO, ROUTES_THROUGH, PASSES_BEHIND, INTERFERES_WITH, SLIDES_ALONG, BLOCKS_REMOVAL_OF).",
+    "Admit REL-000001..000007 (aliases REL-REG-01..06 + REL-FL-DOOR-0104) as ILLUSTRATIVE_ONLY; demote operator VERIFIED_EVIDENCE / DOCUMENT_SUPPORTED without hashed SRC-CAND bytes.",
+    "Regulator removal sequence is ILLUSTRATIVE_ONLY / NOT_EXECUTED as workshop procedure.",
+    "Upgrade evidence matrix with property_confidence fields; demote operator VERIFIED/OEM_VERIFIED/SIMULATION_VERIFIED cells without hashes.",
+    "Create MISN-000002 (dashboard edge mapping) NOT_STARTED — secondary to MISN-000001 / KG-001.",
+    "Register KG-004 (hinge shim interfaces) OPEN HIGH.",
+    "Recommended decision IMPLEMENTATION_HANDOFF_READY for schema package to migration pipeline — not for verified silo removal automation.",
+    "Frozen kernel and component-passport rc1 unchanged."
+  ],
+  "related_decisions": ["DT-D045", "DT-D044", "DT-D043", "DT-D028"],
+  "change_control": {
+    "kernel_schema_change": false,
+    "component_passport_rc1_change": false,
+    "frozen_assembly_relationship_untouched": true,
+    "new_non_kernel_schema": "schemas/relationship-graph-edge.egs-v1.schema.json"
+  }
+}
