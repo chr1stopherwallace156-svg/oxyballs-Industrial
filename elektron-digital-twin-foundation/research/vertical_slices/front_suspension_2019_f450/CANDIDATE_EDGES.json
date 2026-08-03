@@ -1,0 +1,99 @@
+{
+  "document_id": "FRONT_SUSPENSION_CANDIDATE_EDGES",
+  "decision": "DT-D053",
+  "mission_id": "MISN-000004",
+  "edge_authority": "CANDIDATE_UNVERIFIED",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "edges": [
+    {
+      "edge_id": "REL-FS-001",
+      "kind": "PHYSICAL",
+      "relationship": "MOUNTS_TO",
+      "from": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "to": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "via_iface": "IFACE-AXLE-DATUM-FRONT",
+      "edge_status": "CANDIDATE_UNVERIFIED"
+    },
+    {
+      "edge_id": "REL-FS-002",
+      "kind": "PHYSICAL",
+      "relationship": "LOCATES",
+      "from": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-RADIUS-ARM-LH",
+      "to": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "edge_status": "CANDIDATE_UNVERIFIED"
+    },
+    {
+      "edge_id": "REL-FS-003",
+      "kind": "PHYSICAL",
+      "relationship": "LOCATES",
+      "from": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-RADIUS-ARM-RH",
+      "to": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "edge_status": "CANDIDATE_UNVERIFIED"
+    },
+    {
+      "edge_id": "REL-FS-004",
+      "kind": "PHYSICAL",
+      "relationship": "SUPPORTS",
+      "from": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COIL-FL",
+      "to": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "edge_status": "CANDIDATE_UNVERIFIED"
+    },
+    {
+      "edge_id": "REL-FS-005",
+      "kind": "PHYSICAL",
+      "relationship": "SUPPORTS",
+      "from": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COIL-FR",
+      "to": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "edge_status": "CANDIDATE_UNVERIFIED"
+    },
+    {
+      "edge_id": "REL-FS-006",
+      "kind": "PHYSICAL",
+      "relationship": "DAMPENS",
+      "from": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-SHOCK-FL",
+      "to": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "edge_status": "CANDIDATE_UNVERIFIED"
+    },
+    {
+      "edge_id": "REL-FS-007",
+      "kind": "PHYSICAL",
+      "relationship": "DAMPENS",
+      "from": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-SHOCK-FR",
+      "to": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "edge_status": "CANDIDATE_UNVERIFIED"
+    },
+    {
+      "edge_id": "REL-FS-008",
+      "kind": "PHYSICAL",
+      "relationship": "STABILIZES",
+      "from": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STAB-BAR-FRONT",
+      "to": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "edge_status": "CANDIDATE_UNVERIFIED"
+    },
+    {
+      "edge_id": "REL-FS-009",
+      "kind": "PHYSICAL",
+      "relationship": "STEERS",
+      "from": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR",
+      "to": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "edge_status": "CANDIDATE_UNVERIFIED",
+      "notes": ["Linkage path Haltenberger detail not verified"]
+    },
+    {
+      "edge_id": "REL-FS-010",
+      "kind": "PHYSICAL",
+      "relationship": "MOUNTS_TO",
+      "from": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-HUB-FRONT",
+      "to": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "edge_status": "CANDIDATE_UNVERIFIED"
+    },
+    {
+      "edge_id": "REL-FS-011",
+      "kind": "FUNCTIONAL",
+      "relationship": "BELONGS_TO_ASSEMBLY",
+      "from": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "to": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRONT-SUSPENSION",
+      "edge_status": "CANDIDATE_UNVERIFIED"
+    }
+  ]
+}

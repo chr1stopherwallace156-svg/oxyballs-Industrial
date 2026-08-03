@@ -1,0 +1,58 @@
+{
+  "document_id": "ICE_DECON_PHASE2_OPERATOR_CLAIM_SCRUB",
+  "decision": "DT-D055",
+  "mission_id": "MISN-000005",
+  "mission_status": "DEFERRED",
+  "operator_label": "EV-DECON-PHASE2",
+  "claims": [
+    {
+      "claim": "Knowledge graph integration complete; bound to CFGCOMP-…-THERMAL-FUEL-DECON",
+      "edts_status": "REJECTED_AS_COMPLETE",
+      "correction": "CFGCOMP root initialized as CANDIDATE only. Mission E deferred. No procedure authorization."
+    },
+    {
+      "claim": "Radiator packaging envelope ≈ 38.3 in wide × 30 in high × 8 in deep",
+      "edts_status": "REJECTED",
+      "correction": "38.3 in is ASSERTION_EXTRACTED front overhang (code B / X-038.3 front axle station), not radiator core support bay width/height/depth. 30×8 figures lack token anchors."
+    },
+    {
+      "claim": "Dual lower rubber isolating pins + two M8 flanged bolts to composite upper core support",
+      "edts_status": "CANDIDATE_UNVERIFIED",
+      "correction": "Fastener class/count/torque require WSM (SRC-CAND-000002). Not admitted as fact."
+    },
+    {
+      "claim": "A/C condenser RETAIN_AND_REPURPOSE; TOC/PS MUST_REMOVE",
+      "edts_status": "CONVERSION_INTENT_CANDIDATE",
+      "correction": "Allowed as conversion planning hypothesis only — not OEM teardown authority."
+    },
+    {
+      "claim": "40-gallon polyethylene aft-of-axle tank between 34.2 in C-channel rails",
+      "edts_status": "PARTIAL_ASSERTION_EXTRACTED",
+      "supported": [
+        {"attr": "fuel_tank_capacity_std", "value": "40 gallon aft-of-axle mounted tank (std)", "source": "SRC-CAND-000010 p.48 F-450 Chassis Cab"},
+        {"attr": "outside_frame_rail_width_H", "value_in": 34.2, "source": "SRC-CAND-000010 code H"}
+      ],
+      "unverified": ["polyethylene material claim", "exactly two cross-straps", "M10 or M12 fastener class", "nested squarely narrative"]
+    },
+    {
+      "claim": "Fuel filler → IFACE-CHARGE-PORT for J1772/CCS",
+      "edts_status": "CONVERSION_INTENT_CANDIDATE",
+      "correction": "Logical packaging hypothesis only. Chassis Cab may not have pickup-style cab filler door; upfitter body dependent. No charge-port IFACE verified."
+    },
+    {
+      "claim": "Exhaust on four rubber slip-hangers along RH rail; mass shift requires leaf spring recalibration",
+      "edts_status": "CANDIDATE_UNVERIFIED",
+      "correction": "Hanger count/location and spring recalibration claims lack WSM/engineering calc evidence."
+    },
+    {
+      "claim": "SCR/DPF/catalyst MUST_REMOVE yields HV cable plane",
+      "edts_status": "CONVERSION_INTENT_CANDIDATE",
+      "correction": "Diesel aftertreatment presence is configuration-dependent (6.7L). Envelope numbers not extracted here."
+    },
+    {
+      "claim": "PS cooler mount pitch on 4x2 drop-forged beam unresolved",
+      "edts_status": "ACCEPTED_AS_GAP",
+      "correction": "Use OEM Monobeam vocabulary. Gap registered conceptually under cooling purge; prefer explicit MEPQ if elevated."
+    }
+  ]
+}

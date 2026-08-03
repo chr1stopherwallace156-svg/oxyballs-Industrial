@@ -1,0 +1,153 @@
+{
+  "document_id": "EDTS-PIPELINE-AUDIT-2026-07",
+  "title": "Research Execution Pipeline Capability & Limitations Audit",
+  "format": "System Diagnostic Record",
+  "source": "EDTS Core Architecture Audit",
+  "cost": "Free (Internal Architecture Metric)",
+  "date": "2026-07-20",
+  "decision": "DT-D049",
+  "research_sprint": "RL-018",
+  "authority_status": "ARCHITECTURE_BOUNDARY_LOCKED",
+  "authority_notes": [
+    "Status applies to operational-boundary claims about the pipeline itself — grounded in repository EGS-1.0.0-proposal.2 + EAE docs/code.",
+    "Does NOT promote any 2019 F-450 REL-REG edge, torque, fastener, connector, or geometry claim to VERIFIED.",
+    "Saturation percentages below are RESEARCH_ESTIMATE_NOT_MEASURED — not instrumented coverage scores."
+  ],
+  "recommended_decision": "EGS_V1_PROPOSAL_INFRASTRUCTURE_READY",
+  "promotion_lock": {
+    "f450_edges": "REAL_DATA_PROMOTION_BLOCKED",
+    "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+    "condition": "Physical evidence ingestion pipeline (byte parsing, hashing, token-anchor extraction) must be connected before real-world promotion"
+  },
+  "architecture_dependencies": [
+    "proposals/egs-v1/ (EGS-1.0.0-proposal.2)",
+    "research/asset_intelligence/",
+    "research/component_passports/",
+    "research/evidence_matrices/",
+    "tools/evidence_acquisition/",
+    "documentation/EVIDENCE_ACQUISITION_ENGINE.md"
+  ],
+  "automated_ai_capabilities": [
+    "Multi-lane discovery",
+    "Scope Lock gating (CONFIGURATION_REFERENCE)",
+    "Contradiction tracking (CONTRADICTED + KG)",
+    "Schema-compliant JSON graph templating"
+  ],
+  "hard_human_api_limits": [
+    "Paid paywalls (e.g. Helm Inc. Motorcraft Service)",
+    "Physical teardowns/scans",
+    "Proprietary Tier 1 CAD",
+    "Direct physical measurement"
+  ],
+  "dimensions": [
+    {
+      "id": 1,
+      "name": "Primary Evidence Acquisition",
+      "verdict": "Partially. Fully automated for public OEM/Government records; gated for commercial & physical evidence.",
+      "capability_status": "PARTIALLY_AUTOMATED",
+      "primary_failure_vector": "Paid paywalls & physical assets",
+      "mitigation": "SOURCE_DISCOVERED handoff to human/purchasing agent or credentialed crawler",
+      "what_works": "Discover/index/extract from public Tier A/B sources (NHTSA, Ford BBAS guides, USPTO, public TSBs, open parts APIs, open CAD repos) when URLs are real and reachable.",
+      "bottleneck": "Cannot independently bypass commercial paywalls or dealer service logins.",
+      "operational_boundary": "Pipeline pushes documents to SOURCE_DISCOVERED; SOURCE_ACQUIRED requires crawler+API keys or human-in-the-loop byte handoff."
+    },
+    {
+      "id": 2,
+      "name": "Assertion Extraction",
+      "verdict": "High accuracy on structured text & tables; requires OCR verification on complex engineering drawings.",
+      "capability_status": "AUTOMATED_TEXT_ONLY",
+      "primary_failure_vector": "Visual ambiguity in scanned PDFs / EWDs",
+      "mitigation": "Token-anchor cross-referencing & OCR validation before ASSERTION_VERIFIED",
+      "what_works": "Deterministic parse of text, parts catalogs, explicit workshop tables into EGS claims.",
+      "bottleneck": "Spatial routing from non-vector EWD PDFs and multi-view assembly drawings.",
+      "operational_boundary": "Extracted claims start as ASSERTION_EXTRACTED; ASSERTION_VERIFIED requires validation rule (e.g. token anchors in source PDF)."
+    },
+    {
+      "id": 3,
+      "name": "Exact-Vehicle Isolation",
+      "verdict": "Yes. One of the pipeline's strongest capabilities.",
+      "capability_status": "FULLY_CAPABLE",
+      "primary_failure_vector": "Human pressure to borrow near-config data",
+      "mitigation": "Hard configuration locks on CFGCOMP- nodes; CROSS_CONFIGURATION_COMPARISON + NOT_INHERITED",
+      "what_works": "Pass 1 Scope Lock refuses merging 2018 F-250 Crew Cab 4x4 into CFG-2019-F450-REG-CAB-4X2-60CA-DRW.",
+      "bottleneck": null,
+      "operational_boundary": "Cross-model/year data isolated; inheritance explicitly blocked on authoritative edges."
+    },
+    {
+      "id": 4,
+      "name": "Contradiction Resolution",
+      "verdict": "Yes, by design. Logs conflicts rather than guessing.",
+      "capability_status": "FULLY_CAPABLE",
+      "primary_failure_vector": "Generative AI smoothing / majority voting",
+      "mitigation": "Force CONTRADICTED status, PROCEDURE_GENERATION_NOT_AUTHORIZED, open KG-XXX",
+      "what_works": "Conflicting assertions retained as structural evidence with conflicting_assertions arrays.",
+      "bottleneck": null,
+      "operational_boundary": "No majority-vote blend; contradiction blocks procedure generation."
+    },
+    {
+      "id": 5,
+      "name": "Graph Generation Efficiency",
+      "verdict": "Yes via automated schema templating; validation requires structured parsing engines.",
+      "capability_status": "AUTOMATED_SCHEMA_TEMPLATES",
+      "primary_failure_vector": "Schema drift & hallucinated edges",
+      "mitigation": "Strict JSON-Schema + egs_v1.validate at intake; reject unlinked assertions",
+      "what_works": "Template CFGCOMP-/IFACE-/claim structures from raw assertions without hand-writing thousands of nodes.",
+      "bottleneck": "Unbounded LLMs invent plausible edges if not schema-gated.",
+      "operational_boundary": "Failed structural syntax or unlinked assertions rejected at intake."
+    },
+    {
+      "id": 6,
+      "name": "Complete Assembly Representation",
+      "verdict": "Incrementally. Evidence-backed assembly — not an artificial complete-looking model.",
+      "capability_status": "PROGRESSIVE_SYNTHESIS",
+      "primary_failure_vector": "Expecting 100% digital saturation from web search",
+      "mitigation": "Declare Research Saturation → Physical Acquisition Plan (Sprint 7)",
+      "what_works": "Stitch CFGCOMP- passports through IFACE- into multi-layer twin planes.",
+      "bottleneck": "Public search cannot yield internal cavity geometry, exact harness routing, stamping thickness.",
+      "operational_boundary": "Never fabricate completeness; hand off to physical acquisition where digital evidence is exhausted."
+    }
+  ],
+  "research_saturation_estimates": {
+    "status": "RESEARCH_ESTIMATE_NOT_MEASURED",
+    "public_external_visual_and_oem_parts": {
+      "approx_range_percent": [80, 90],
+      "notes": "Estimate only — not a hashed evidence coverage score"
+    },
+    "internal_cavity_and_harness_routing": {
+      "approx_range_percent": [0, 20],
+      "notes": "Estimate only — physical scan/teardown required for progress"
+    }
+  },
+  "contradiction_example_pattern": {
+    "fastener_count": {
+      "value": null,
+      "status": "CONTRADICTED",
+      "conflicting_assertions": [
+        { "source_id": "EVD-AFTERMARKET-MANUAL", "claimed_value": 4 },
+        { "source_id": "EVD-OEM-PARTS-CATALOG", "claimed_value": 3 }
+      ]
+    }
+  },
+  "missing_evidence": [
+    "Direct API integration with commercial OEM manual portals (Helm Inc.) for SOURCE_DISCOVERED → SOURCE_ACQUIRED byte conversion",
+    "Connected token-anchor assertion verification against ingested WSM/EWD PDF bytes for VEH-000001 / CFG-000001",
+    "Physical Acquisition Plan Sprint 7 execution artifacts (scan/teardown) — template only until saturation declared on a subsystem"
+  ],
+  "risks": [
+    {
+      "id": "OVER_RELIANCE_DIGITAL_DISCOVERY",
+      "summary": "Infinite web-search loops seeking 100% internal geometry",
+      "mitigation": "Declare Research Saturation; trigger Physical Acquisition Plan"
+    },
+    {
+      "id": "PAYLOAD_INGESTION_WITHOUT_ANCHORS",
+      "summary": "Inserting ASSERTION_EXTRACTED fastener/torque without token anchors",
+      "mitigation": "ASSERTION_VERIFIED requires validation rule; keep PROCEDURE_GENERATION_NOT_AUTHORIZED"
+    }
+  ],
+  "paths": {
+    "human_readable": "research/pipeline/RESEARCH_EXECUTION_PIPELINE_AUDIT.md",
+    "physical_acquisition_plan_template": "research/pipeline/PHYSICAL_ACQUISITION_PLAN_SPRINT7_TEMPLATE.md",
+    "decision": "decisions/DT-D049_RESEARCH_EXECUTION_PIPELINE_AUDIT.json"
+  }
+}

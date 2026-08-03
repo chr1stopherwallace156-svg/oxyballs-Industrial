@@ -22,6 +22,7 @@ Capture v2 Specs 1–6 — **drafted + correction pass; baseline review pending*
 |---|---|
 | Track A (freeze) | `cursor/phase1c-freeze-commit-a-d881` |
 | Track B (specs + knowledge) | `cursor/ekp-knowledge-artifacts-d881` (from `cursor/phase1c-evidence-library-handoff-d881`) |
+| Engineering audit | `cursor/capture-v2-engineering-audit-d881` → `Docs/Audits/` (`CHANGE-0007`) |
 | Latest implementation handoff | `CAPTURE_IMPLEMENTATION_HANDOFF-0001` → `CAPTURE_IMPLEMENTATION_HANDOFF.md` |
 | Latest distribution handoff | `HANDOFF-0034` → `dist/HANDOFF-0034/` |
 
@@ -73,17 +74,19 @@ IR_0001_EXECUTION_NOT_YET_AUTHORIZED
 
 1. Operator Mac: Track A freeze sequence  
 2. Architectural review → `CHANGE-0003` when ready  
-3. Keep `CAPTURE_IMPLEMENTATION_HANDOFF.md` + `PROJECT_STATE.md` current every implementation  
+3. Follow `Docs/Audits/ROADMAP.md` / `Docs/Audits/FINAL_GAP_MATRIX.md` (do not invent v2 runtime before gates)  
+4. Keep `CAPTURE_IMPLEMENTATION_HANDOFF.md` + `PROJECT_STATE.md` current every implementation  
 
 ## Recent tests / validation
 
-- Linux/Mac package suite: **89 executed, 0 failures** (1 skipped) typical  
+- Linux SPM (`CHANGE-0007` audit host): **89 executed, 0 failures** (1 skipped)  
 - Physical device matrix: **placeholders remain** in `PHASE_1C_FINAL_VALIDATION.md`  
 
 ## Pending reviews
 
 - Specs 1–6 final architectural review  
 - Phase 1C authoritative repository equivalence  
+- Consume engineering audit package under `Docs/Audits/`  
 
 ---
 

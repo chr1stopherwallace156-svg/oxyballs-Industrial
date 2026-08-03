@@ -7,6 +7,16 @@ Append newest entries at the top. Do not rewrite history; correct with a later e
 
 ---
 
+## Memory Entry 2026-07-25 — Full Capture v2 engineering audit
+
+- **Impacted Area:** Engineering baseline, planning, governance clarity
+- **Event:** Published evidence-backed due-diligence suite under `Docs/Audits/` (`CHANGE-0007`) covering git health, architecture, spec traceability, implementation reality, runtime flow, tests, security, performance, debt, and roadmap.
+- **Reason:** Stop relying on session memory for “where Capture stands”; create a durable map before baseline / IR-0001 / further implementation.
+- **Architectural Impact:** No Swift runtime change. Confirms Phase 1 spine is real; Specs 1–6 are documentation-only; SPM-excluded stub trees are not features.
+- **Next Required Action:** Execute Track A freeze on Mac; architectural review → future `CHANGE-0003`; follow `Docs/Audits/ROADMAP.md`.
+
+------
+
 ## Memory Entry 2026-07-25 — Canonical five-artifact memory architecture
 
 - **Impacted Area:** Documentation architecture, EKP packaging, session persistence
