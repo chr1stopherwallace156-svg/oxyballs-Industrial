@@ -1,0 +1,338 @@
+[
+  {
+    "schema_version": "EGS-1.0.0-proposal.2",
+    "record_version": 1,
+    "created_at": "2026-07-20T12:00:00Z",
+    "created_by": "EGS-SYNTHETIC-FIXTURE",
+    "supersedes_edge_id": null,
+    "edge_id": "REL-EGS-900001",
+    "aliases": ["SYN-BOLTED"],
+    "graph_plane": "PHYSICAL",
+    "relationship_class": "BOLTED_TO",
+    "source_node_id": "CFGCOMP-SYN-REGULATOR-FL",
+    "target_node_id": "IFACE-MOUNT-HOLE-SYN-DOOR-INNER-01",
+    "directionality": "FORWARD",
+    "applicability_context": {
+      "scope_type": "SYNTHETIC_FIXTURE",
+      "configuration_id": "CFG-SYN-000001",
+      "kernel_configuration_id": null,
+      "model_year": null,
+      "model_year_range": null,
+      "vin": null,
+      "inheritance": "NOT_INHERITED",
+      "notes": "Synthetic only"
+    },
+    "verification_lifecycle": {
+      "edge_status": "CANDIDATE_UNVERIFIED",
+      "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+      "last_audited_date": "2026-07-20",
+      "aggregation_notes": null
+    },
+    "claims": {
+      "relationship_existence": {
+        "value": true,
+        "status": "SOURCE_DISCOVERED",
+        "evidence_assertion_ids": [],
+        "mandatory": true,
+        "notes": "Fixture"
+      },
+      "torque_specification": {
+        "value": null,
+        "unit": "Nm",
+        "status": "UNRESOLVED_SOURCE_REQUIRED",
+        "evidence_assertion_ids": [],
+        "mandatory": false,
+        "notes": "Knowledge gap — does not invalidate existence edge"
+      }
+    },
+    "transient_state": null,
+    "notes": ["Synthetic fixture — no real torque"]
+  },
+  {
+    "schema_version": "EGS-1.0.0-proposal.2",
+    "record_version": 1,
+    "created_at": "2026-07-20T12:00:00Z",
+    "created_by": "EGS-SYNTHETIC-FIXTURE",
+    "supersedes_edge_id": null,
+    "edge_id": "REL-EGS-900002",
+    "aliases": ["SYN-MATES"],
+    "graph_plane": "PHYSICAL",
+    "relationship_class": "MATES_WITH",
+    "source_node_id": "IFACE-CONNECTOR-SYN-HARNESS-C309A",
+    "target_node_id": "IFACE-CONNECTOR-SYN-REGULATOR-C309B",
+    "directionality": "FORWARD",
+    "applicability_context": {
+      "scope_type": "SYNTHETIC_FIXTURE",
+      "configuration_id": "CFG-SYN-000001",
+      "kernel_configuration_id": null,
+      "model_year": null,
+      "model_year_range": null,
+      "vin": null,
+      "inheritance": "NOT_INHERITED",
+      "notes": null
+    },
+    "verification_lifecycle": {
+      "edge_status": "CANDIDATE_UNVERIFIED",
+      "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+      "last_audited_date": "2026-07-20",
+      "aggregation_notes": null
+    },
+    "claims": {
+      "relationship_existence": {
+        "value": true,
+        "status": "SOURCE_DISCOVERED",
+        "evidence_assertion_ids": [],
+        "mandatory": true,
+        "notes": null
+      }
+    },
+    "transient_state": null,
+    "notes": ["Interface layer — no direct harness→regulator shortcut"]
+  },
+  {
+    "schema_version": "EGS-1.0.0-proposal.2",
+    "record_version": 1,
+    "created_at": "2026-07-20T12:00:00Z",
+    "created_by": "EGS-SYNTHETIC-FIXTURE",
+    "supersedes_edge_id": null,
+    "edge_id": "REL-EGS-900003",
+    "aliases": ["SYN-GUIDES"],
+    "graph_plane": "PHYSICAL",
+    "relationship_class": "GUIDES_MOTION_OF",
+    "source_node_id": "CFGCOMP-SYN-REGULATOR-FL",
+    "target_node_id": "CFGCOMP-SYN-GLASS-FL",
+    "directionality": "FORWARD",
+    "applicability_context": {
+      "scope_type": "SYNTHETIC_FIXTURE",
+      "configuration_id": "CFG-SYN-000001",
+      "kernel_configuration_id": null,
+      "model_year": null,
+      "model_year_range": null,
+      "vin": null,
+      "inheritance": "NOT_INHERITED",
+      "notes": null
+    },
+    "verification_lifecycle": {
+      "edge_status": "CANDIDATE_UNVERIFIED",
+      "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+      "last_audited_date": "2026-07-20",
+      "aggregation_notes": null
+    },
+    "claims": {
+      "relationship_existence": {
+        "value": true,
+        "status": "SOURCE_DISCOVERED",
+        "evidence_assertion_ids": [],
+        "mandatory": true,
+        "notes": null
+      }
+    },
+    "transient_state": null,
+    "notes": []
+  },
+  {
+    "schema_version": "EGS-1.0.0-proposal.2",
+    "record_version": 1,
+    "created_at": "2026-07-20T12:00:00Z",
+    "created_by": "EGS-SYNTHETIC-FIXTURE",
+    "supersedes_edge_id": null,
+    "edge_id": "REL-EGS-900004",
+    "aliases": ["SYN-BLOCKS-ACCESS"],
+    "graph_plane": "PHYSICAL",
+    "relationship_class": "BLOCKS_ACCESS_TO",
+    "source_node_id": "CFGCOMP-SYN-TRIM-FL",
+    "target_node_id": "IFACE-SERVICE-PORT-SYN-DOOR-INNER",
+    "directionality": "FORWARD",
+    "applicability_context": {
+      "scope_type": "SYNTHETIC_FIXTURE",
+      "configuration_id": "CFG-SYN-000001",
+      "kernel_configuration_id": null,
+      "model_year": null,
+      "model_year_range": null,
+      "vin": null,
+      "inheritance": "NOT_INHERITED",
+      "notes": null
+    },
+    "verification_lifecycle": {
+      "edge_status": "CANDIDATE_UNVERIFIED",
+      "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+      "last_audited_date": "2026-07-20",
+      "aggregation_notes": null
+    },
+    "claims": {
+      "relationship_existence": {
+        "value": true,
+        "status": "SOURCE_DISCOVERED",
+        "evidence_assertion_ids": [],
+        "mandatory": true,
+        "notes": null
+      }
+    },
+    "transient_state": null,
+    "notes": []
+  },
+  {
+    "schema_version": "EGS-1.0.0-proposal.2",
+    "record_version": 1,
+    "created_at": "2026-07-20T12:00:00Z",
+    "created_by": "EGS-SYNTHETIC-FIXTURE",
+    "supersedes_edge_id": null,
+    "edge_id": "REL-EGS-900005",
+    "aliases": ["SYN-MUST-PRECEDE"],
+    "graph_plane": "PROCEDURAL",
+    "relationship_class": "MUST_PRECEDE",
+    "source_node_id": "OP-SYN-SECURE-GLASS-FL",
+    "target_node_id": "OP-SYN-UNBOLT-REGULATOR-FL",
+    "directionality": "FORWARD",
+    "applicability_context": {
+      "scope_type": "SYNTHETIC_FIXTURE",
+      "configuration_id": "CFG-SYN-000001",
+      "kernel_configuration_id": null,
+      "model_year": null,
+      "model_year_range": null,
+      "vin": null,
+      "inheritance": "NOT_INHERITED",
+      "notes": null
+    },
+    "verification_lifecycle": {
+      "edge_status": "CANDIDATE_UNVERIFIED",
+      "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+      "last_audited_date": "2026-07-20",
+      "aggregation_notes": null
+    },
+    "claims": {
+      "relationship_existence": {
+        "value": true,
+        "status": "CANDIDATE_UNVERIFIED",
+        "evidence_assertion_ids": [],
+        "mandatory": true,
+        "notes": null
+      }
+    },
+    "transient_state": null,
+    "notes": ["Procedural plane isolated from physical"]
+  },
+  {
+    "schema_version": "EGS-1.0.0-proposal.2",
+    "record_version": 1,
+    "created_at": "2026-07-20T12:00:00Z",
+    "created_by": "EGS-SYNTHETIC-FIXTURE",
+    "supersedes_edge_id": null,
+    "edge_id": "REL-EGS-900006",
+    "aliases": ["SYN-EXTRACTION"],
+    "graph_plane": "PHYSICAL",
+    "relationship_class": "EXTRACTION_PATH_PASSES_ADJACENT_TO",
+    "source_node_id": "CFGCOMP-SYN-REGULATOR-FL",
+    "target_node_id": "CFGCOMP-SYN-BEAM-FL",
+    "directionality": "FORWARD",
+    "applicability_context": {
+      "scope_type": "SYNTHETIC_FIXTURE",
+      "configuration_id": "CFG-SYN-000001",
+      "kernel_configuration_id": null,
+      "model_year": null,
+      "model_year_range": null,
+      "vin": null,
+      "inheritance": "NOT_INHERITED",
+      "notes": null
+    },
+    "verification_lifecycle": {
+      "edge_status": "CANDIDATE_UNVERIFIED",
+      "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+      "last_audited_date": "2026-07-20",
+      "aggregation_notes": null
+    },
+    "claims": {
+      "relationship_existence": {
+        "value": null,
+        "status": "UNRESOLVED_SOURCE_REQUIRED",
+        "evidence_assertion_ids": [],
+        "mandatory": true,
+        "notes": null
+      }
+    },
+    "transient_state": null,
+    "notes": []
+  },
+  {
+    "schema_version": "EGS-1.0.0-proposal.2",
+    "record_version": 1,
+    "created_at": "2026-07-20T12:00:00Z",
+    "created_by": "EGS-SYNTHETIC-FIXTURE",
+    "supersedes_edge_id": null,
+    "edge_id": "REL-EGS-900007",
+    "aliases": ["SYN-OWN-MOUNT"],
+    "graph_plane": "PHYSICAL",
+    "relationship_class": "MOUNTED_TO",
+    "source_node_id": "CFGCOMP-SYN-HARNESS-FL",
+    "target_node_id": "IFACE-CONNECTOR-SYN-HARNESS-C309A",
+    "directionality": "FORWARD",
+    "applicability_context": {
+      "scope_type": "SYNTHETIC_FIXTURE",
+      "configuration_id": "CFG-SYN-000001",
+      "kernel_configuration_id": null,
+      "model_year": null,
+      "model_year_range": null,
+      "vin": null,
+      "inheritance": "NOT_INHERITED",
+      "notes": null
+    },
+    "verification_lifecycle": {
+      "edge_status": "CANDIDATE_UNVERIFIED",
+      "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+      "last_audited_date": "2026-07-20",
+      "aggregation_notes": null
+    },
+    "claims": {
+      "relationship_existence": {
+        "value": true,
+        "status": "SOURCE_DISCOVERED",
+        "evidence_assertion_ids": [],
+        "mandatory": true,
+        "notes": null
+      }
+    },
+    "transient_state": null,
+    "notes": ["Harness owns connector interface entity"]
+  },
+  {
+    "schema_version": "EGS-1.0.0-proposal.2",
+    "record_version": 1,
+    "created_at": "2026-07-20T12:00:00Z",
+    "created_by": "EGS-SYNTHETIC-FIXTURE",
+    "supersedes_edge_id": null,
+    "edge_id": "REL-EGS-900008",
+    "aliases": ["SYN-OWN-REG-CONN"],
+    "graph_plane": "PHYSICAL",
+    "relationship_class": "MOUNTED_TO",
+    "source_node_id": "CFGCOMP-SYN-REGULATOR-FL",
+    "target_node_id": "IFACE-CONNECTOR-SYN-REGULATOR-C309B",
+    "directionality": "FORWARD",
+    "applicability_context": {
+      "scope_type": "SYNTHETIC_FIXTURE",
+      "configuration_id": "CFG-SYN-000001",
+      "kernel_configuration_id": null,
+      "model_year": null,
+      "model_year_range": null,
+      "vin": null,
+      "inheritance": "NOT_INHERITED",
+      "notes": null
+    },
+    "verification_lifecycle": {
+      "edge_status": "CANDIDATE_UNVERIFIED",
+      "procedure_eligibility": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+      "last_audited_date": "2026-07-20",
+      "aggregation_notes": null
+    },
+    "claims": {
+      "relationship_existence": {
+        "value": true,
+        "status": "SOURCE_DISCOVERED",
+        "evidence_assertion_ids": [],
+        "mandatory": true,
+        "notes": null
+      }
+    },
+    "transient_state": null,
+    "notes": []
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "name": "elektron-industrial-ede",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Elektron root scripts — local runtime (doctor/backup) + EDE workstation (ede:*)",
+  "scripts": {
+    "setup": "bash ./scripts/setup.sh",
+    "bootstrap": "bash ./scripts/bootstrap.sh",
+    "doctor": "bash ./scripts/doctor.sh",
+    "backup": "bash ./scripts/backup.sh",
+    "ede:doctor": "bash ./scripts/dev/ede/doctor.sh",
+    "ede:snapshot": "bash ./scripts/dev/ede/snapshot.sh",
+    "update": "bash ./scripts/update.sh",
+    "verify": "bash ./scripts/verify.sh",
+    "dashboard": "bash ./scripts/dev/dashboard.sh",
+    "db:health": "bash ./scripts/database/health.sh",
+    "check": "bash ./dev/checks/run-all.sh",
+    "format:check": "bash ./dev/checks/formatting.sh",
+    "lint": "eslint . --ext .js,.mjs,.cjs --max-warnings 0 || true"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "eslint": "^9.9.0",
+    "prettier": "^3.3.3"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "edts-vin-resolver",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "EDTS NHTSA vPIC VIN configuration resolver (DT-D067)",
+  "scripts": {
+    "vin": "tsx scripts/resolve-vin.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "vin:test-live": "RUN_VPIC_INTEGRATION=true vitest run tests/vin/vpic.integration.test.ts",
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.2",
+    "tsx": "^4.20.5",
+    "typescript": "~5.9.3",
+    "vitest": "^3.2.4"
+  }
+}

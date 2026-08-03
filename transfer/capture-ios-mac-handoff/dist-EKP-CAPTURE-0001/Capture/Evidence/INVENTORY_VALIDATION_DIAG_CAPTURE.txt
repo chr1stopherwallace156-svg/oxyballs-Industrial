@@ -1,0 +1,92 @@
+=== INV_DIAG testPackageBuildInventoryAndExtension ===
+INV_DIAG classification_hypothesis = relative-path derivation defect (symlink aliasing)
+INV_DIAG package_root.raw = /tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001
+INV_DIAG package_root.standardized = /tmp/phase1-tests-EE931D7C-E6FE-475D-815F-73EB5DE623D5/EVD-TEST-PKG-001
+INV_DIAG package_root.symlink_resolved = /tmp/phase1-tests-EE931D7C-E6FE-475D-815F-73EB5DE623D5/EVD-TEST-PKG-001
+INV_DIAG package_root.absoluteString = file:///tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/
+INV_DIAG macos_path_aliasing raw_has_/var/=false raw_has_/private/var/=false resolved_has_/private/var/=false raw_ne_resolved=true
+INV_DIAG comparison_key = PackageRelativePath.key (symlink-resolved package-relative)
+INV_DIAG discovered_count = 8
+INV_DIAG decoded_inventory_entries = 7
+INV_DIAG normalized_declared_paths = 7
+INV_DIAG declaration_set_empty = false
+INV_DIAG disk[0].absolute_url = file:///tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/manifest.json
+INV_DIAG disk[0].absolute_path = /tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/manifest.json
+INV_DIAG disk[0].absolute_resolved = /tmp/phase1-tests-EE931D7C-E6FE-475D-815F-73EB5DE623D5/EVD-TEST-PKG-001/manifest.json
+INV_DIAG disk[0].relative_naive_prefix_strip = manifest.json
+INV_DIAG disk[0].relative_standardized_prefix_strip = manifest.json
+INV_DIAG disk[0].relative_key = manifest.json
+INV_DIAG disk[0].naive_broke=false key_absolute=false
+INV_DIAG disk[1].absolute_url = file:///tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/package_inventory.json
+INV_DIAG disk[1].absolute_path = /tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/package_inventory.json
+INV_DIAG disk[1].absolute_resolved = /tmp/phase1-tests-EE931D7C-E6FE-475D-815F-73EB5DE623D5/EVD-TEST-PKG-001/package_inventory.json
+INV_DIAG disk[1].relative_naive_prefix_strip = package_inventory.json
+INV_DIAG disk[1].relative_standardized_prefix_strip = package_inventory.json
+INV_DIAG disk[1].relative_key = package_inventory.json
+INV_DIAG disk[1].naive_broke=false key_absolute=false
+INV_DIAG disk[2].absolute_url = file:///tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/capture_device.json
+INV_DIAG disk[2].absolute_path = /tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/capture_device.json
+INV_DIAG disk[2].absolute_resolved = /tmp/phase1-tests-EE931D7C-E6FE-475D-815F-73EB5DE623D5/EVD-TEST-PKG-001/capture_device.json
+INV_DIAG disk[2].relative_naive_prefix_strip = capture_device.json
+INV_DIAG disk[2].relative_standardized_prefix_strip = capture_device.json
+INV_DIAG disk[2].relative_key = capture_device.json
+INV_DIAG disk[2].naive_broke=false key_absolute=false
+INV_DIAG disk[3].absolute_url = file:///tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/package_status.json
+INV_DIAG disk[3].absolute_path = /tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/package_status.json
+INV_DIAG disk[3].absolute_resolved = /tmp/phase1-tests-EE931D7C-E6FE-475D-815F-73EB5DE623D5/EVD-TEST-PKG-001/package_status.json
+INV_DIAG disk[3].relative_naive_prefix_strip = package_status.json
+INV_DIAG disk[3].relative_standardized_prefix_strip = package_status.json
+INV_DIAG disk[3].relative_key = package_status.json
+INV_DIAG disk[3].naive_broke=false key_absolute=false
+INV_DIAG disk[4].absolute_url = file:///tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/payload/artifact_original.jpg
+INV_DIAG disk[4].absolute_path = /tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/payload/artifact_original.jpg
+INV_DIAG disk[4].absolute_resolved = /tmp/phase1-tests-EE931D7C-E6FE-475D-815F-73EB5DE623D5/EVD-TEST-PKG-001/payload/artifact_original.jpg
+INV_DIAG disk[4].relative_naive_prefix_strip = payload/artifact_original.jpg
+INV_DIAG disk[4].relative_standardized_prefix_strip = payload/artifact_
+original.jpg
+INV_DIAG disk[4].relative_key = payload/artifact_original.jpg
+INV_DIAG disk[4].naive_broke=false key_absolute=false
+INV_DIAG disk[5].absolute_url = file:///tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/sidecars/camera_calibration.json
+INV_DIAG disk[5].absolute_path = /tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/sidecars/camera_calibration.json
+INV_DIAG disk[5].absolute_resolved = /tmp/phase1-tests-EE931D7C-E6FE-475D-815F-73EB5DE623D5/EVD-TEST-PKG-001/sidecars/camera_calibration.json
+INV_DIAG disk[5].relative_naive_prefix_strip = sidecars/camera_calibration.json
+INV_DIAG disk[5].relative_standardized_prefix_strip = sidecars/camera_calibration.json
+INV_DIAG disk[5].relative_key = sidecars/camera_calibration.json
+INV_DIAG disk[5].naive_broke=false key_absolute=false
+INV_DIAG disk[6].absolute_url = file:///tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/sidecars/motion_orientation.json
+INV_DIAG disk[6].absolute_path = /tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/sidecars/motion_orientation.json
+INV_DIAG disk[6].absolute_resolved = /tmp/phase1-tests-EE931D7C-E6FE-475D-815F-73EB5DE623D5/EVD-TEST-PKG-001/sidecars/motion_orientation.json
+INV_DIAG disk[6].relative_naive_prefix_strip = sidecars/motion_orientation.json
+INV_DIAG disk[6].relative_standardized_prefix_strip = sidecars/motion_orientation.json
+INV_DIAG disk[6].relative_key = sidecars/motion_orientation.json
+INV_DIAG disk[6].naive_broke=false key_absolute=false
+INV_DIAG disk[7].absolute_url = file:///tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/sidecars/avcapture_metadata.json
+INV_DIAG disk[7].absolute_path = /tmp/phase1-alias-2A76248D-D1B8-4919-BBF0-76034BA42622/EVD-TEST-PKG-001/sidecars/avcapture_metadata.json
+INV_DIAG disk[7].absolute_resolved = /tmp/phase1-tests-EE931D7C-E6FE-475D-815F-73EB5DE623D5/EVD-TEST-PKG-001/sidecars/avcapture_metadata.json
+INV_DIAG disk[7].relative_naive_prefix_strip = sidecars/avcapture_metadata.json
+INV_DIAG disk[7].relative_standardized_prefix_strip = sidecars/avcapture_metadata.json
+INV_DIAG disk[7].relative_key = sidecars/avcapture_metadata.json
+INV_DIAG disk[7].naive_broke=false key_absolute=false
+INV_DIAG declared[0].raw = capture_device.json
+INV_DIAG declared[0].normalized = capture_device.json
+INV_DIAG declared[1].raw = manifest.json
+INV_DIAG declared[1].normalized = manifest.json
+INV_DIAG declared[2].raw = package_status.json
+INV_DIAG declared[2].normalized = package_status.json
+INV_DIAG declared[3].raw = payload/artifact_original.jpg
+INV_DIAG declared[3].normalized = payload/artifact_original.jpg
+INV_DIAG declared[4].raw = sidecars/avcapture_metadata.json
+INV_DIAG declared[4].normalized = sidecars/avcapture_metadata.json
+INV_DIAG declared[5].raw = sidecars/camera_calibration.json
+INV_DIAG declared[5].normalized = sidecars/camera_calibration.json
+INV_DIAG declared[6].raw = sidecars/motion_orientation.json
+INV_DIAG declared[6].normalized = sidecars/motion_orientation.json
+INV_DIAG lookup key=manifest.json paths.contains=true naive=manifest.json naive.contains=true
+INV_DIAG lookup key=capture_device.json paths.contains=true naive=capture_device.json naive.contains=true
+INV_DIAG lookup key=package_status.json paths.contains=true naive=package_status.json naive.contains=true
+INV_DIAG lookup key=payload/artifact_original.jpg paths.contains=true naive=payload/artifact_original.jpg naive.contains=true
+INV_DIAG lookup key=sidecars/camera_calibration.json paths.contains=true naive=sidecars/camera_calibration.json naive.contains=true
+INV_DIAG lookup key=sidecars/motion_orientation.json paths.contains=true naive=sidecars/motion_orientation.json naive.contains=true
+INV_DIAG lookup key=sidecars/avcapture_metadata.json paths.contains=true naive=sidecars/avcapture_metadata.json naive.contains=true
+INV_DIAG FIRST_UNDECLARED = <none>
+=== INV_DIAG END ===

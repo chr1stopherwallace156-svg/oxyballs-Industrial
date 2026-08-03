@@ -1,0 +1,318 @@
+[0/1] Planning build
+Building for debugging...
+[0/12] Write sources
+[2/12] Write swift-version--6040B813AC8AD1FC.txt
+[4/14] Emitting module ElektronCapture
+/home/ubuntu/Elektron/elektron-capture-ios/App/Application/LocalCapturePlanProvider.swift:4:14: warning: stored property 'fixtureDirectory' of 'Sendable'-conforming struct 'LocalCapturePlanProvider' has non-sendable type 'URL?'
+  public var fixtureDirectory: URL?
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/home/ubuntu/Elektron/elektron-capture-ios/App/Application/LocalCapturePlanProvider.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/home/ubuntu/Elektron/elektron-capture-ios/App/Export/FileEvidenceExporter.swift:28:14: warning: stored property 'isoFormatter' of 'Sendable'-conforming struct 'FileEvidenceExporter' has non-sendable type 'ISO8601DateFormatter'
+  public var isoFormatter: ISO8601DateFormatter
+             ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/home/ubuntu/Elektron/elektron-capture-ios/App/Export/FileEvidenceExporter.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/home/ubuntu/Elektron/elektron-capture-ios/App/Phase1/ArtifactPersistenceService.swift:4:14: warning: stored property 'fileURL' of 'Sendable'-conforming struct 'PersistedArtifact' has non-sendable type 'URL'
+  public var fileURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/home/ubuntu/Elektron/elektron-capture-ios/App/Phase1/ArtifactPersistenceService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/home/ubuntu/Elektron/elektron-capture-ios/App/Phase1/CaptureClockService.swift:41:15: warning: stored property 'formatter' of 'Sendable'-conforming struct 'CaptureClockService' has non-sendable type 'ISO8601DateFormatter'
+  private let formatter: ISO8601DateFormatter
+              ^
+Foundation.ISO8601DateFormatter:1:12: note: class 'ISO8601DateFormatter' does not conform to the 'Sendable' protocol
+open class ISO8601DateFormatter : Formatter, NSSecureCoding {
+           ^
+/home/ubuntu/Elektron/elektron-capture-ios/App/Phase1/CaptureClockService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/home/ubuntu/Elektron/elektron-capture-ios/App/Phase1/EvidencePackageBuilder.swift:4:14: warning: stored property 'packageDirectoryURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageDirectoryURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/home/ubuntu/Elektron/elektron-capture-ios/App/Phase1/EvidencePackageBuilder.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/home/ubuntu/Elektron/elektron-capture-ios/App/Phase1/EvidencePackageBuilder.swift:5:14: warning: stored property 'packageZipURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageZipURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/home/ubuntu/Elektron/elektron-capture-ios/App/Phase1/Phase1CaptureCoordinator.swift:26:14: warning: stored property 'workRoot' of 'Sendable'-conforming struct 'Phase1CaptureCoordinator' has non-sendable type 'URL'
+  public var workRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/home/ubuntu/Elektron/elektron-capture-ios/App/Phase1/Phase1CaptureCoordinator.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[5/14] Compiling ElektronCapture PackageTransportShareSupport.swift
+[6/15] Wrapping AST for ElektronCapture for debugging
+[8/23] Compiling ElektronCaptureTests Pass2PreviewReviewGateTests.swift
+[9/24] Compiling ElektronCaptureGoldenTests GoldenEvidencePackageTests.swift
+[10/24] Emitting module ElektronCaptureGoldenTests
+[12/24] Compiling ElektronCaptureTests PackageTransportShareSupportTests.swift
+[13/24] Compiling ElektronCaptureTests Pass1CanonicalInventoryTests.swift
+[14/24] Compiling ElektronCaptureTests CrossLanguageCanonicalJSONTests.swift
+[15/24] Compiling ElektronCaptureTests FoundationTests.swift
+[16/24] Emitting module ElektronCaptureTests
+[17/24] Compiling ElektronCaptureTests Phase1RuntimeTests.swift
+/home/ubuntu/Elektron/elektron-capture-ios/Tests/Unit/Phase1RuntimeTests.swift:174:63: warning: unknown operating system for build configuration 'os'
+    #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                              ^
+/home/ubuntu/Elektron/elektron-capture-ios/Tests/Unit/Phase1RuntimeTests.swift:174:63: note: did you mean 'iOS'?
+    #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                              ^~~~~~~~
+                                                              iOS
+/home/ubuntu/Elektron/elektron-capture-ios/Tests/Unit/Phase1RuntimeTests.swift:174:63: note: did you mean 'Windows'?
+    #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS) || os(visionOS)
+                                                              ^~~~~~~~
+                                                              Windows
+[18/25] /home/ubuntu/Elektron/elektron-capture-ios/.build/x86_64-unknown-linux-gnu/debug/ElektronCapturePackageDiscoveredTests.derived/all-discovered-tests.swift
+[19/26] Write sources
+[20/26] Wrapping AST for ElektronCaptureTests for debugging
+[22/30] Compiling ElektronCapturePackageDiscoveredTests all-discovered-tests.swift
+[23/30] Compiling ElektronCapturePackageDiscoveredTests ElektronCaptureTests.swift
+[24/30] Compiling ElektronCapturePackageDiscoveredTests ElektronCaptureGoldenTests.swift
+[25/30] Emitting module ElektronCapturePackageDiscoveredTests
+[26/31] /home/ubuntu/Elektron/elektron-capture-ios/.build/x86_64-unknown-linux-gnu/debug/ElektronCapturePackageTests.derived/runner.swift
+[27/32] Write sources
+[28/32] Wrapping AST for ElektronCapturePackageDiscoveredTests for debugging
+[30/34] Compiling ElektronCapturePackageTests runner.swift
+[31/34] Emitting module ElektronCapturePackageTests
+[32/34] Write Objects.LinkFileList
+[33/34] Linking ElektronCapturePackageTests.xctest
+Build complete! (2.37s)
+Test Suite 'All tests' started at 2026-07-24 17:58:19.953
+Test Suite 'debug.xctest' started at 2026-07-24 17:58:19.954
+Test Suite 'AuthorityGuardTests' started at 2026-07-24 17:58:19.954
+Test Case 'AuthorityGuardTests.testAllowsNeutralText' started at 2026-07-24 17:58:19.954
+Test Case 'AuthorityGuardTests.testAllowsNeutralText' passed (0.001 seconds)
+Test Case 'AuthorityGuardTests.testRejectsForbiddenClaims' started at 2026-07-24 17:58:19.955
+Test Case 'AuthorityGuardTests.testRejectsForbiddenClaims' passed (0.0 seconds)
+Test Suite 'AuthorityGuardTests' passed at 2026-07-24 17:58:19.955
+Executed 2 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'CaptureSessionStateMachineTests' started at 2026-07-24 17:58:19.955
+Test Case 'CaptureSessionStateMachineTests.testGuidanceAuthorityDefaultForPose' started at 2026-07-24 17:58:19.955
+Test Case 'CaptureSessionStateMachineTests.testGuidanceAuthorityDefaultForPose' passed (0.0 seconds)
+Test Case 'CaptureSessionStateMachineTests.testIllegalTransitionThrows' started at 2026-07-24 17:58:19.955
+Test Case 'CaptureSessionStateMachineTests.testIllegalTransitionThrows' passed (0.0 seconds)
+Test Case 'CaptureSessionStateMachineTests.testLegalTransition' started at 2026-07-24 17:58:19.955
+Test Case 'CaptureSessionStateMachineTests.testLegalTransition' passed (0.0 seconds)
+Test Suite 'CaptureSessionStateMachineTests' passed at 2026-07-24 17:58:19.955
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'CaptureSideStatusTests' started at 2026-07-24 17:58:19.955
+Test Case 'CaptureSideStatusTests.testAcceptsCaptureSideStatuses' started at 2026-07-24 17:58:19.955
+Test Case 'CaptureSideStatusTests.testAcceptsCaptureSideStatuses' passed (0.0 seconds)
+Test Case 'CaptureSideStatusTests.testDirectiveApprovedIsNotImplementationComplete' started at 2026-07-24 17:58:19.955
+Test Case 'CaptureSideStatusTests.testDirectiveApprovedIsNotImplementationComplete' passed (0.0 seconds)
+Test Case 'CaptureSideStatusTests.testRejectsAllRegistryEdtsOwnedStatuses' started at 2026-07-24 17:58:19.955
+Test Case 'CaptureSideStatusTests.testRejectsAllRegistryEdtsOwnedStatuses' passed (0.0 seconds)
+Test Suite 'CaptureSideStatusTests' passed at 2026-07-24 17:58:19.955
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'ContentHasherTests' started at 2026-07-24 17:58:19.955
+Test Case 'ContentHasherTests.testSha256KnownVector' started at 2026-07-24 17:58:19.955
+Test Case 'ContentHasherTests.testSha256KnownVector' passed (0.001 seconds)
+Test Suite 'ContentHasherTests' passed at 2026-07-24 17:58:19.956
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'CrossLanguageCanonicalJSONTests' started at 2026-07-24 17:58:19.956
+Test Case 'CrossLanguageCanonicalJSONTests.testSwiftCanonicalBytesMatchPythonGolden' started at 2026-07-24 17:58:19.956
+/home/ubuntu/Elektron/elektron-capture-ios/Tests/Unit/CrossLanguageCanonicalJSONTests.swift:16: CrossLanguageCanonicalJSONTests.testSwiftCanonicalBytesMatchPythonGolden : Test skipped - CROSS_LANGUAGE_CANONICAL_JSON gate requires Darwin JSONSerialization boolean identity
+Test Case 'CrossLanguageCanonicalJSONTests.testSwiftCanonicalBytesMatchPythonGolden' skipped (0.0 seconds)
+Test Suite 'CrossLanguageCanonicalJSONTests' passed at 2026-07-24 17:58:19.956
+	 Executed 1 test, with 1 test skipped and 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'EvidenceManifestValidatorTests' started at 2026-07-24 17:58:19.956
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONIndependentOfInsertionOrder' started at 2026-07-24 17:58:19.956
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONIndependentOfInsertionOrder' passed (0.001 seconds)
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONRejectsNonFinite' started at 2026-07-24 17:58:19.957
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONRejectsNonFinite' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONStable' started at 2026-07-24 17:58:19.957
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONStable' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsAnonymousPoseFrames' started at 2026-07-24 17:58:19.957
+Test Case 'EvidenceManifestValidatorTests.testRejectsAnonymousPoseFrames' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsDerivativeWithoutParent' started at 2026-07-24 17:58:19.957
+Test Case 'EvidenceManifestValidatorTests.testRejectsDerivativeWithoutParent' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsEmptyHash' started at 2026-07-24 17:58:19.957
+Test Case 'EvidenceManifestValidatorTests.testRejectsEmptyHash' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsEngineeringVerifiedFromCapture' started at 2026-07-24 17:58:19.957
+Test Case 'EvidenceManifestValidatorTests.testRejectsEngineeringVerifiedFromCapture' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsForbiddenClaimEmbeddedInExportValidation' started at 2026-07-24 17:58:19.958
+Test Case 'EvidenceManifestValidatorTests.testRejectsForbiddenClaimEmbeddedInExportValidation' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsMeasurementWithoutUnit' started at 2026-07-24 17:58:19.958
+Test Case 'EvidenceManifestValidatorTests.testRejectsMeasurementWithoutUnit' passed (0.0 seconds)
+Test Suite 'EvidenceManifestValidatorTests' passed at 2026-07-24 17:58:19.958
+Executed 9 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'ImmutableFileStoreTests' started at 2026-07-24 17:58:19.958
+Test Case 'ImmutableFileStoreTests.testWriteImmutablePreventsOverwrite' started at 2026-07-24 17:58:19.958
+Test Case 'ImmutableFileStoreTests.testWriteImmutablePreventsOverwrite' passed (0.002 seconds)
+Test Suite 'ImmutableFileStoreTests' passed at 2026-07-24 17:58:19.959
+Executed 1 test, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'MockEDTSClientTests' started at 2026-07-24 17:58:19.959
+Test Case 'MockEDTSClientTests.testAdapterMocksLabeled' started at 2026-07-24 17:58:19.959
+Test Case 'MockEDTSClientTests.testAdapterMocksLabeled' passed (0.0 seconds)
+Test Case 'MockEDTSClientTests.testBuiltinPlanLoads' started at 2026-07-24 17:58:19.959
+Test Case 'MockEDTSClientTests.testBuiltinPlanLoads' passed (0.0 seconds)
+Test Case 'MockEDTSClientTests.testMockIsLabeled' started at 2026-07-24 17:58:19.959
+Test Case 'MockEDTSClientTests.testMockIsLabeled' passed (0.0 seconds)
+Test Case 'MockEDTSClientTests.testSubmitAcceptsEvidenceManifestPresence' started at 2026-07-24 17:58:19.960
+Test Case 'MockEDTSClientTests.testSubmitAcceptsEvidenceManifestPresence' passed (0.001 seconds)
+Test Case 'MockEDTSClientTests.testSubmitRejectsMissingManifest' started at 2026-07-24 17:58:19.961
+Test Case 'MockEDTSClientTests.testSubmitRejectsMissingManifest' passed (0.0 seconds)
+Test Suite 'MockEDTSClientTests' passed at 2026-07-24 17:58:19.961
+Executed 5 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'PackageTransportShareSupportTests' started at 2026-07-24 17:58:19.961
+Test Case 'PackageTransportShareSupportTests.testDiagnosticZipCopyIsByteIdenticalAndPreservesCanonical' started at 2026-07-24 17:58:19.961
+Test Case 'PackageTransportShareSupportTests.testDiagnosticZipCopyIsByteIdenticalAndPreservesCanonical' passed (0.002 seconds)
+Test Case 'PackageTransportShareSupportTests.testDiagnosticZipDoesNotTouchPackageDirectoryArtifact' started at 2026-07-24 17:58:19.963
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c
+Test Case 'PackageTransportShareSupportTests.testDiagnosticZipDoesNotTouchPackageDirectoryArtifact' passed (0.015 seconds)
+Test Case 'PackageTransportShareSupportTests.testPrepareShareableStagesCopyWithoutMutatingCanonical' started at 2026-07-24 17:58:19.978
+Test Case 'PackageTransportShareSupportTests.testPrepareShareableStagesCopyWithoutMutatingCanonical' passed (0.001 seconds)
+Test Case 'PackageTransportShareSupportTests.testRequireEdtsPkgRejectsDirectory' started at 2026-07-24 17:58:19.980
+Test Case 'PackageTransportShareSupportTests.testRequireEdtsPkgRejectsDirectory' passed (0.0 seconds)
+Test Case 'PackageTransportShareSupportTests.testRequireEdtsPkgRejectsWrongExtension' started at 2026-07-24 17:58:19.980
+Test Case 'PackageTransportShareSupportTests.testRequireEdtsPkgRejectsWrongExtension' passed (0.002 seconds)
+Test Suite 'PackageTransportShareSupportTests' passed at 2026-07-24 17:58:19.982
+	 Executed 5 tests, with 0 failures (0 unexpected) in 0.021 (0.021) seconds
+Test Suite 'Pass1CanonicalInventoryTests' started at 2026-07-24 17:58:19.982
+Test Case 'Pass1CanonicalInventoryTests.testInventoryValidatorAcceptsNSNumberByteSize' started at 2026-07-24 17:58:19.982
+Test Case 'Pass1CanonicalInventoryTests.testInventoryValidatorAcceptsNSNumberByteSize' passed (0.004 seconds)
+Test Case 'Pass1CanonicalInventoryTests.testInventoryValidatorFlagsUndeclaredPath' started at 2026-07-24 17:58:19.986
+Test Case 'Pass1CanonicalInventoryTests.testInventoryValidatorFlagsUndeclaredPath' passed (0.006 seconds)
+Test Case 'Pass1CanonicalInventoryTests.testSwiftLiteralCorpusMatchesPythonGoldenBytes' started at 2026-07-24 17:58:19.992
+Test Case 'Pass1CanonicalInventoryTests.testSwiftLiteralCorpusMatchesPythonGoldenBytes' passed (0.001 seconds)
+Test Case 'Pass1CanonicalInventoryTests.testUnicodeEnsureAsciiEscapes' started at 2026-07-24 17:58:19.993
+Test Case 'Pass1CanonicalInventoryTests.testUnicodeEnsureAsciiEscapes' passed (0.0 seconds)
+Test Suite 'Pass1CanonicalInventoryTests' passed at 2026-07-24 17:58:19.993
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.011 (0.011) seconds
+Test Suite 'Pass2PreviewReviewGateTests' started at 2026-07-24 17:58:19.993
+Test Case 'Pass2PreviewReviewGateTests.testExportApprovedDetectsTamperedFrozenSha' started at 2026-07-24 17:58:19.993
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159
+Test Case 'Pass2PreviewReviewGateTests.testExportApprovedDetectsTamperedFrozenSha' passed (0.001 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testExportApprovedHashInvariance' started at 2026-07-24 17:58:19.994
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c
+Test Case 'Pass2PreviewReviewGateTests.testExportApprovedHashInvariance' passed (0.014 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testExportFailureReturnsToApproved' started at 2026-07-24 17:58:20.008
+Test Case 'Pass2PreviewReviewGateTests.testExportFailureReturnsToApproved' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testFreezeFromDelegateBytesComputesShaImmediately' started at 2026-07-24 17:58:20.008
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159
+Test Case 'Pass2PreviewReviewGateTests.testFreezeFromDelegateBytesComputesShaImmediately' passed (0.001 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testFreezeRejectsEmptyBytes' started at 2026-07-24 17:58:20.009
+Test Case 'Pass2PreviewReviewGateTests.testFreezeRejectsEmptyBytes' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testHappyPathTransitions' started at 2026-07-24 17:58:20.009
+Test Case 'Pass2PreviewReviewGateTests.testHappyPathTransitions' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testIllegalSkipReviewRejected' started at 2026-07-24 17:58:20.009
+Test Case 'Pass2PreviewReviewGateTests.testIllegalSkipReviewRejected' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testPackageWriteOnlyViaExporting' started at 2026-07-24 17:58:20.009
+Test Case 'Pass2PreviewReviewGateTests.testPackageWriteOnlyViaExporting' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testPromoteDoesNotRecalculateOrReplaceBytes' started at 2026-07-24 17:58:20.010
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159
+Test Case 'Pass2PreviewReviewGateTests.testPromoteDoesNotRecalculateOrReplaceBytes' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testRetakeFromReviewAndApproved' started at 2026-07-24 17:58:20.010
+Test Case 'Pass2PreviewReviewGateTests.testRetakeFromReviewAndApproved' passed (0.0 seconds)
+Test Suite 'Pass2PreviewReviewGateTests' passed at 2026-07-24 17:58:20.010
+Executed 10 tests, with 0 failures (0 unexpected) in 0.017 (0.017) seconds
+Test Suite 'Phase1RuntimeTests' started at 2026-07-24 17:58:20.010
+Test Case 'Phase1RuntimeTests.testCalibrationUnavailableByDefault' started at 2026-07-24 17:58:20.010
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+Test Case 'Phase1RuntimeTests.testCalibrationUnavailableByDefault' passed (0.014 seconds)
+Test Case 'Phase1RuntimeTests.testCanonicalJSONAcceptsUInt64Leaf' started at 2026-07-24 17:58:20.024
+Test Case 'Phase1RuntimeTests.testCanonicalJSONAcceptsUInt64Leaf' passed (0.0 seconds)
+Test Case 'Phase1RuntimeTests.testCanonicalJSONRejectsBoxedNilOptional' started at 2026-07-24 17:58:20.025
+Test Case 'Phase1RuntimeTests.testCanonicalJSONRejectsBoxedNilOptional' passed (0.101 seconds)
+Test Case 'Phase1RuntimeTests.testCanonicalManifestMatchesPythonGoldenBytes' started at 2026-07-24 17:58:20.126
+Test Case 'Phase1RuntimeTests.testCanonicalManifestMatchesPythonGoldenBytes' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testCanonicalManifestRoundTrip' started at 2026-07-24 17:58:20.127
+Test Case 'Phase1RuntimeTests.testCanonicalManifestRoundTrip' passed (0.002 seconds)
+Test Case 'Phase1RuntimeTests.testCaptureSideValidatorDoesNotClaimEdtsGates' started at 2026-07-24 17:58:20.129
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+Test Case 'Phase1RuntimeTests.testCaptureSideValidatorDoesNotClaimEdtsGates' passed (0.02 seconds)
+Test Case 'Phase1RuntimeTests.testEndToEndPackageWithPhysicalDeviceNilOptionals' started at 2026-07-24 17:58:20.148
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+Test Case 'Phase1RuntimeTests.testEndToEndPackageWithPhysicalDeviceNilOptionals' passed (0.116 seconds)
+Test Case 'Phase1RuntimeTests.testFailureCleanupRemovesIncompletePackage' started at 2026-07-24 17:58:20.264
+Test Case 'Phase1RuntimeTests.testFailureCleanupRemovesIncompletePackage' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testHashMismatchOnCorruptReadback' started at 2026-07-24 17:58:20.265
+Test Case 'Phase1RuntimeTests.testHashMismatchOnCorruptReadback' passed (0.002 seconds)
+Test Case 'Phase1RuntimeTests.testLifecycleStatusesAreCaptureOwned' started at 2026-07-24 17:58:20.266
+Test Case 'Phase1RuntimeTests.testLifecycleStatusesAreCaptureOwned' passed (0.0 seconds)
+Test Case 'Phase1RuntimeTests.testPackageBuildInventoryAndExtension' started at 2026-07-24 17:58:20.266
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+Test Case 'Phase1RuntimeTests.testPackageBuildInventoryAndExtension' passed (0.014 seconds)
+Test Case 'Phase1RuntimeTests.testPhysicalDeviceProvenanceDictionaryCanonicalizes' started at 2026-07-24 17:58:20.280
+[Phase1Capture] stage=test_buggy_optional event=preflight_unsupported_values lidar_available type=Optional<Bool> describing=nil reflecting=nil
+[Phase1Capture] stage=test_buggy_optional event=canonicalization_failed stage=test_buggy_optional | swiftErrorType=CaptureError | describing=packageInvalid("Unsupported JSON type Optional<Bool> (nil Optional boxed as Any; use NSNull() or omit the key). value=nil") | reflecting=ElektronCapture.CaptureError.packageInvalid("Unsupported JSON type Optional<Bool> (nil Optional boxed as Any; use NSNull() or omit the key). value=nil") | localizedDescription=The operation could not be completed. (ElektronCapture.CaptureError error 1.) | unsupportedValues=lidar_available type=Optional<Bool> describing=nil
+[Phase1Capture] stage=test_buggy_optional event=preflight_unsupported_values lidar_available type=Optional<Bool> describing=nil reflecting=nil
+[Phase1Capture] stage=test_buggy_optional event=canonicalization_failed stage=test_buggy_optional | swiftErrorType=CaptureError | describing=packageInvalid("Unsupported JSON type Optional<Bool> (nil Optional boxed as Any; use NSNull() or omit the key). value=nil") | reflecting=ElektronCapture.CaptureError.packageInvalid("Unsupported JSON type Optional<Bool> (nil Optional boxed as Any; use NSNull() or omit the key). value=nil") | localizedDescription=The operation could not be completed. (ElektronCapture.CaptureError error 1.) | unsupportedValues=lidar_available type=Optional<Bool> describing=nil
+Test Case 'Phase1RuntimeTests.testPhysicalDeviceProvenanceDictionaryCanonicalizes' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testPhysicalDeviceStatusPayloadWithClockCanonicalizes' started at 2026-07-24 17:58:20.282
+Test Case 'Phase1RuntimeTests.testPhysicalDeviceStatusPayloadWithClockCanonicalizes' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testReadbackSha256MatchesStreamingHash' started at 2026-07-24 17:58:20.283
+Test Case 'Phase1RuntimeTests.testReadbackSha256MatchesStreamingHash' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testReasonCodesAreStable' started at 2026-07-24 17:58:20.284
+Test Case 'Phase1RuntimeTests.testReasonCodesAreStable' passed (0.0 seconds)
+Test Case 'Phase1RuntimeTests.testStatusOwnerRejectsEdtsCodes' started at 2026-07-24 17:58:20.284
+Test Case 'Phase1RuntimeTests.testStatusOwnerRejectsEdtsCodes' passed (0.0 seconds)
+Test Suite 'Phase1RuntimeTests' passed at 2026-07-24 17:58:20.284
+	 Executed 16 tests, with 0 failures (0 unexpected) in 0.274 (0.274) seconds
+Test Suite 'ProductionConfigurationGuardTests' started at 2026-07-24 17:58:20.284
+Test Case 'ProductionConfigurationGuardTests.testDevelopmentAllowsMocks' started at 2026-07-24 17:58:20.284
+Test Case 'ProductionConfigurationGuardTests.testDevelopmentAllowsMocks' passed (0.0 seconds)
+Test Case 'ProductionConfigurationGuardTests.testProductionRejectsMocks' started at 2026-07-24 17:58:20.284
+Test Case 'ProductionConfigurationGuardTests.testProductionRejectsMocks' passed (0.0 seconds)
+Test Case 'ProductionConfigurationGuardTests.testTestAllowsMocks' started at 2026-07-24 17:58:20.285
+Test Case 'ProductionConfigurationGuardTests.testTestAllowsMocks' passed (0.0 seconds)
+Test Suite 'ProductionConfigurationGuardTests' passed at 2026-07-24 17:58:20.285
+Executed 3 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'UncertainValueTests' started at 2026-07-24 17:58:20.285
+Test Case 'UncertainValueTests.testUnknownUncertaintyWhenNil' started at 2026-07-24 17:58:20.285
+Test Case 'UncertainValueTests.testUnknownUncertaintyWhenNil' passed (0.0 seconds)
+Test Suite 'UncertainValueTests' passed at 2026-07-24 17:58:20.285
+Executed 1 test, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'GoldenEvidencePackageTests' started at 2026-07-24 17:58:20.285
+Test Case 'GoldenEvidencePackageTests.testGoldenPackageHashesMatchManifest' started at 2026-07-24 17:58:20.285
+Test Case 'GoldenEvidencePackageTests.testGoldenPackageHashesMatchManifest' passed (0.001 seconds)
+Test Case 'GoldenEvidencePackageTests.testPackageMetaDeclaresCompatibility' started at 2026-07-24 17:58:20.285
+Test Case 'GoldenEvidencePackageTests.testPackageMetaDeclaresCompatibility' passed (0.0 seconds)
+Test Suite 'GoldenEvidencePackageTests' passed at 2026-07-24 17:58:20.286
+Executed 2 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'debug.xctest' passed at 2026-07-24 17:58:20.286
+Executed 66 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.331 (0.331) seconds
+Test Suite 'All tests' passed at 2026-07-24 17:58:20.286
+Executed 66 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.331 (0.331) seconds

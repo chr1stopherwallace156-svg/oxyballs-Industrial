@@ -1,0 +1,23 @@
+{
+  "document_id": "FL_DOOR_RESEARCH_SATURATION",
+  "decision": "DT-D050",
+  "subsystem": "Front-Left Door (2019 F-450 RC 4x2 60CA DRW)",
+  "saturation_state": "PARTIALLY_SATURATED",
+  "public_search_lanes_completed": [
+    "OEM Body Builder Advisory Guides (BAG bytes ACQUIRED)",
+    "Sales specifications (brochure URL NOT_ACQUIRED — 404)",
+    "NHTSA Recall Databases (17S33 bytes ACQUIRED — PLATFORM_FAMILY_REFERENCE)",
+    "Generic teardown video references (indexed only)"
+  ],
+  "duplicate_result_rate": {
+    "macro_dimensions_wb_ca_cab": "HIGH_DUPLICATE_CONFIRMED",
+    "internal_cavity_cad_routing": "100_PERCENT_MISSING",
+    "explicit_fastener_torque": "100_PERCENT_MISSING"
+  },
+  "digital_saturation_status": "Free public digital channels saturated for macro dims; internal mechanics require commercial or physical acquisition.",
+  "transition_requirement": "Tier 1 Commercial Document Acquisition (MISN-000003) and/or Physical Asset Inspection (Sprint 7 template)",
+  "estimates": {
+    "status": "RESEARCH_ESTIMATE_NOT_MEASURED",
+    "notes": "Do not treat as hashed evidence coverage scores"
+  }
+}

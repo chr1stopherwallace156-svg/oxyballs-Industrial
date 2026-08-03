@@ -1,0 +1,79 @@
+{
+  "document_id": "FRONT_SUSPENSION_OPERATOR_CLAIM_SCRUB",
+  "decision": "DT-D053",
+  "mission_id": "MISN-000004",
+  "input": "Operator Subsystem Mission D front chassis dump (2026-07-20)",
+  "scrub_policy": [
+    "Indexed URL ≠ verified",
+    "Unread / unhashed PDF ≠ ASSERTION_VERIFIED",
+    "No invented torque / alignment as EXACT_MATCH",
+    "Exact-config only — no pickup / 4x4 / F-350 / F-550 baseline inheritance"
+  ],
+  "claims": [
+    {
+      "claim": "Non-driven solid beam / drop-forged front axle on F-450/F-550 4x2 Chassis Cab",
+      "operator_status": "presented_as_fact",
+      "edts_status": "ASSERTION_EXTRACTED_AS_MONOBEAM",
+      "correction": "Use OEM term Monobeam (Dana, forged steel). Supported by SRC-CAND-000010 Front Axle Specs — 4x2."
+    },
+    {
+      "claim": "F-350 4x2 uses Twin-I-Beam unlike F-450",
+      "edts_status": "ASSERTION_EXTRACTED_CROSS_CONFIG_ONLY",
+      "correction": "Valid contrast from same fleet PDF; must not contaminate F-450 silo."
+    },
+    {
+      "claim": "Front track 74.8 in",
+      "edts_status": "ASSERTION_EXTRACTED",
+      "source": "SRC-CAND-000010 code I"
+    },
+    {
+      "claim": "Standard FGAWR 5600 lb",
+      "edts_status": "REJECTED_AS_BASELINE",
+      "correction": "Reg Cab 4x2 145.3 Max Std Front GAWR = 4800 lb (6.8L) / 5200 lb (6.7L)."
+    },
+    {
+      "claim": "Max optional FGAWR 7500 lb via HD front package",
+      "edts_status": "DOCUMENT_SUPPORTED_OPTION_DEPENDENT",
+      "correction": "Available GAWR table + brochure Extra-HD Front-End package; not assumed on VEH-000001."
+    },
+    {
+      "claim": "Variable-rate single-stage coils",
+      "edts_status": "UNRESOLVED",
+      "correction": "Fleet text: Coil, Assigned Rating only."
+    },
+    {
+      "claim": "Haltenberger drag-link / tie-rod topology",
+      "edts_status": "CANDIDATE_UNVERIFIED"
+    },
+    {
+      "claim": "Lug 150 / radius-arm 222 / tie-rod 85 lb-ft EXACT_MATCH",
+      "edts_status": "REJECTED",
+      "correction": "WSM NOT_ACQUIRED"
+    },
+    {
+      "claim": "Camber +0.25° / caster +3.5°–+4.5° EXACT_MATCH",
+      "edts_status": "REJECTED",
+      "correction": "WSM NOT_ACQUIRED"
+    },
+    {
+      "claim": "Rotor ~15.39 in dual-piston calipers",
+      "edts_status": "ASSERTION_EXTRACTED",
+      "source": "SRC-CAND-000010 F-450 standard equipment"
+    },
+    {
+      "claim": "10-lug 225 mm BCD / 19.5x6 / 225/70R19.5G",
+      "edts_status": "ASSERTION_EXTRACTED",
+      "source": "SRC-CAND-000010 pages 49 and 65"
+    },
+    {
+      "claim": "Operator sources [1][2][3][4][7] as authority",
+      "edts_status": "REJECTED_AS_AUTHORITY",
+      "correction": "Use acquired hashed SRC-CAND-000010/000011; register others as pollution / not acquired."
+    }
+  ],
+  "configuration_dependency_initialized": {
+    "cfgcomp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRONT-SUSPENSION",
+    "status": "CANDIDATE_INITIALIZED",
+    "not": "ASSERTION_VERIFIED_COMPLETE"
+  }
+}

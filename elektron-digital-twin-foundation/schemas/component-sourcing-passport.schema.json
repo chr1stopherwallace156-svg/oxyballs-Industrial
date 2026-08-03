@@ -1,0 +1,467 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:schema:component-sourcing-passport:1.0.0",
+  "title": "EDTS Component Sourcing Passport (CSP)",
+  "description": "Modular component-level sourcing maturity tracker. Operator % bars are RESEARCH_DRAFT_ESTIMATE only \u2014 not Hard Rule 5 engineering confidence and not verified saturation without local evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sourcing_passport_id",
+    "id_immutable",
+    "component_name",
+    "bound_vehicle_instance_id",
+    "bound_configuration_id",
+    "maturity_channels",
+    "project_maturity_status",
+    "authority_status"
+  ],
+  "properties": {
+    "sourcing_passport_id": {
+      "type": "string",
+      "pattern": "^CSP-[0-9]{6}$"
+    },
+    "id_immutable": {
+      "type": "boolean",
+      "const": true
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "component_name": {
+      "type": "string"
+    },
+    "reported_oem_part_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "assembly_hub": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "bound_vehicle_instance_id": {
+      "type": "string"
+    },
+    "bound_configuration_id": {
+      "type": "string"
+    },
+    "configuration_fingerprint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "related_aid_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "related_ajr_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "related_gap_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "authority_status": {
+      "type": "string",
+      "enum": [
+        "RESEARCH_OPERATIONAL",
+        "ILLUSTRATIVE_ONLY"
+      ]
+    },
+    "maturity_channels": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "oem_docs",
+        "supplier_docs",
+        "cad_assets",
+        "marketplace",
+        "videos",
+        "parts_lookup",
+        "photos",
+        "physical"
+      ],
+      "properties": {
+        "oem_docs": {
+          "type": "object",
+          "required": [
+            "project_status"
+          ],
+          "properties": {
+            "project_status": {
+              "type": "string",
+              "enum": [
+                "NOT_STARTED",
+                "HUNT",
+                "PARTIAL",
+                "SATURATED_CLAIMED_UNVERIFIED",
+                "VERIFIED_LOCAL",
+                "BLOCKED"
+              ]
+            },
+            "operator_claim_pct": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 100
+            },
+            "operator_claim_status": {
+              "type": "string",
+              "enum": [
+                "ABSENT",
+                "RESEARCH_DRAFT_ESTIMATE",
+                "REJECTED_WITHOUT_BYTES"
+              ]
+            },
+            "notes": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "supplier_docs": {
+          "type": "object",
+          "required": [
+            "project_status"
+          ],
+          "properties": {
+            "project_status": {
+              "type": "string",
+              "enum": [
+                "NOT_STARTED",
+                "HUNT",
+                "PARTIAL",
+                "SATURATED_CLAIMED_UNVERIFIED",
+                "VERIFIED_LOCAL",
+                "BLOCKED"
+              ]
+            },
+            "operator_claim_pct": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 100
+            },
+            "operator_claim_status": {
+              "type": "string",
+              "enum": [
+                "ABSENT",
+                "RESEARCH_DRAFT_ESTIMATE",
+                "REJECTED_WITHOUT_BYTES"
+              ]
+            },
+            "notes": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "cad_assets": {
+          "type": "object",
+          "required": [
+            "project_status"
+          ],
+          "properties": {
+            "project_status": {
+              "type": "string",
+              "enum": [
+                "NOT_STARTED",
+                "HUNT",
+                "PARTIAL",
+                "SATURATED_CLAIMED_UNVERIFIED",
+                "VERIFIED_LOCAL",
+                "BLOCKED"
+              ]
+            },
+            "operator_claim_pct": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 100
+            },
+            "operator_claim_status": {
+              "type": "string",
+              "enum": [
+                "ABSENT",
+                "RESEARCH_DRAFT_ESTIMATE",
+                "REJECTED_WITHOUT_BYTES"
+              ]
+            },
+            "notes": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "marketplace": {
+          "type": "object",
+          "required": [
+            "project_status"
+          ],
+          "properties": {
+            "project_status": {
+              "type": "string",
+              "enum": [
+                "NOT_STARTED",
+                "HUNT",
+                "PARTIAL",
+                "SATURATED_CLAIMED_UNVERIFIED",
+                "VERIFIED_LOCAL",
+                "BLOCKED"
+              ]
+            },
+            "operator_claim_pct": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 100
+            },
+            "operator_claim_status": {
+              "type": "string",
+              "enum": [
+                "ABSENT",
+                "RESEARCH_DRAFT_ESTIMATE",
+                "REJECTED_WITHOUT_BYTES"
+              ]
+            },
+            "notes": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "videos": {
+          "type": "object",
+          "required": [
+            "project_status"
+          ],
+          "properties": {
+            "project_status": {
+              "type": "string",
+              "enum": [
+                "NOT_STARTED",
+                "HUNT",
+                "PARTIAL",
+                "SATURATED_CLAIMED_UNVERIFIED",
+                "VERIFIED_LOCAL",
+                "BLOCKED"
+              ]
+            },
+            "operator_claim_pct": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 100
+            },
+            "operator_claim_status": {
+              "type": "string",
+              "enum": [
+                "ABSENT",
+                "RESEARCH_DRAFT_ESTIMATE",
+                "REJECTED_WITHOUT_BYTES"
+              ]
+            },
+            "notes": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "parts_lookup": {
+          "type": "object",
+          "required": [
+            "project_status"
+          ],
+          "properties": {
+            "project_status": {
+              "type": "string",
+              "enum": [
+                "NOT_STARTED",
+                "HUNT",
+                "PARTIAL",
+                "SATURATED_CLAIMED_UNVERIFIED",
+                "VERIFIED_LOCAL",
+                "BLOCKED"
+              ]
+            },
+            "operator_claim_pct": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 100
+            },
+            "operator_claim_status": {
+              "type": "string",
+              "enum": [
+                "ABSENT",
+                "RESEARCH_DRAFT_ESTIMATE",
+                "REJECTED_WITHOUT_BYTES"
+              ]
+            },
+            "notes": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "photos": {
+          "type": "object",
+          "required": [
+            "project_status"
+          ],
+          "properties": {
+            "project_status": {
+              "type": "string",
+              "enum": [
+                "NOT_STARTED",
+                "HUNT",
+                "PARTIAL",
+                "SATURATED_CLAIMED_UNVERIFIED",
+                "VERIFIED_LOCAL",
+                "BLOCKED"
+              ]
+            },
+            "operator_claim_pct": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 100
+            },
+            "operator_claim_status": {
+              "type": "string",
+              "enum": [
+                "ABSENT",
+                "RESEARCH_DRAFT_ESTIMATE",
+                "REJECTED_WITHOUT_BYTES"
+              ]
+            },
+            "notes": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "physical": {
+          "type": "object",
+          "required": [
+            "project_status"
+          ],
+          "properties": {
+            "project_status": {
+              "type": "string",
+              "enum": [
+                "NOT_STARTED",
+                "HUNT",
+                "PARTIAL",
+                "SATURATED_CLAIMED_UNVERIFIED",
+                "VERIFIED_LOCAL",
+                "BLOCKED"
+              ]
+            },
+            "operator_claim_pct": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 100
+            },
+            "operator_claim_status": {
+              "type": "string",
+              "enum": [
+                "ABSENT",
+                "RESEARCH_DRAFT_ESTIMATE",
+                "REJECTED_WITHOUT_BYTES"
+              ]
+            },
+            "notes": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "operator_total_maturity_pct": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "project_maturity_status": {
+      "type": "string",
+      "enum": [
+        "RESEARCH_REQUIRED",
+        "PARTIAL",
+        "CRITICAL_GAP",
+        "CANDIDATE",
+        "NOT_SATURATED"
+      ]
+    },
+    "project_total_maturity_note": {
+      "type": "string"
+    },
+    "research_sprint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "decision": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
