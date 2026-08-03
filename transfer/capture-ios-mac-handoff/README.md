@@ -1,5 +1,43 @@
 # capture-ios Mac handoff
 
+
+## Historical — Pass 2 preview/review gate (`e33bb21`) — HARD STOP
+
+**Status:** submitted for operator review — **NOT operator-approved**. Do **not** start Pass 3 until operator approval after independent verification.
+
+| Field | Value |
+|---|---|
+| Capture branch | `cursor/pass2-preview-review-gate-d881` |
+| Tip | `e33bb212368858aeddb34743bb0947e84576bd23` |
+| Pass 1 approved ancestor | `9c35de663f3a64543738b57bc49426cd46256da0` |
+| Implementation commit | `a47739f1472e0e33779ed709a65adc4bb0ec72c4` |
+| Bundle | `elektron-capture-ios-pass2-complete.bundle` |
+| Bundle SHA-256 | `c07777b2a94255c80e29319b777a6ef8e3d1e3a69c150c85e52905f0284ece47` |
+| ZIP | `elektron-capture-ios-pass2-working-tree.zip` |
+| ZIP SHA-256 | `9da3f2bbe4a93776bd390996b466084be7d231d9762769bba5f01d8857eb320e` |
+| Evidence | `PASS2_APPROVAL_EVIDENCE/` |
+| Device checklist | `PASS2_DEVICE_VALIDATION.md` (`PENDING_OPERATOR_MAC`) |
+| Fresh-clone logs | `pass2-fresh-clone-swift-test.log`, `pass2-fresh-clone-handoff-layout.log` |
+| Cloud `swift test` | 61 executed, 1 skipped, 0 failures |
+
+```bash
+git clone elektron-capture-ios-pass2-complete.bundle elektron-capture-ios-pass2
+cd elektron-capture-ios-pass2
+git checkout cursor/pass2-preview-review-gate-d881
+git rev-parse HEAD   # expect e33bb212368858aeddb34743bb0947e84576bd23
+git merge-base --is-ancestor 9c35de663f3a64543738b57bc49426cd46256da0 HEAD && echo PASS1_ANCESTOR_OK
+./Scripts/verify-xcode-handoff.sh
+open Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj
+```
+
+Pass 1 accepted generic hashes remain:
+
+```text
+ae40b27146750ab879b59a299fe98f817f2449d7012a426d55338fc0d289d45c  elektron-capture-ios-complete.bundle
+85db178d7fb24dea593a4480140acfc0cbccf844ba14293b954fe44d2c64612b  elektron-capture-ios-working-tree.zip
+```
+
+
 ## Track A — Phase 1 freeze
 
 **Status:** `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_REPOSITORY_EQUIVALENCE_AND_FREEZE`  
