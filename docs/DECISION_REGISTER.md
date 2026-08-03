@@ -17,6 +17,20 @@ later entry that references it.
 
 ---
 
+## D-018 — Phase 3 Sprint 3.0 synthetic spatial slice + audit provenance (PR #55)
+
+- Date: 2026-08-03
+- Status: Accepted (proposed on draft PR #55; Industrial docs + Capture handoff ZIP)
+- Context: Phase 3 formal architecture audit P0 items and synthetic vertical slice must not erase audit v1.0.0 text, conflate stream vs adapter identities, or write non-portable absolute paths into SHA-256 sidecars.
+- Decision:
+  1. Preserve Formal Architecture Audit v1.0.0 by extracting it from immutable base `a1982ed106352b48c5ea96a8b2caf8f1f9fdceed` into `Docs/Architecture/PHASE_3_FORMAL_ARCHITECTURE_AUDIT_V1_0_ARCHIVE.md`.
+  2. Closure record remains `PHASE_3_FORMAL_ARCHITECTURE_AUDIT.md` (v1.1.0); charter advances to v1.6.0 with next gate = Mac xcodebuild/device proof and next implementation = Apple adapters.
+  3. Spatial identity rule: `stream_id` ∈ {camera, depth, motion, pose}; `adapter_id` ∈ {synth.camera, …}; canonical synthetic `capture_session_id` = `SESS-SYNTHETIC-000001`.
+  4. SHA-256 sidecars are basename-only (no absolute/`/workspace` paths); CURRENT_STATE uses non-circular `reviewed_pre_hardening_head` vs final post-hardening tip.
+  5. Capture ADRs P3-001…P3-006 remain authoritative for custody/PACKAGED/OCC/schema; Industrial Decision Register records the industrial-facing acceptance.
+- Consequences: PR #55 stays draft until owner merge; Mac/device gates remain BLOCKED_HOST_CAPABILITY on Linux; no Phase 4 / production Apple adapters authorized by this entry.
+
+
 ## D-017 — Local-runtime hardening (RC2) + admit runtime tooling to the frozen structure
 
 - Date: 2026-07-23

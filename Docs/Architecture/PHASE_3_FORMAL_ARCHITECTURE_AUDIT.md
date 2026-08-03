@@ -5,8 +5,20 @@
 | Status | **AUDIT_CLOSED** |
 | Version | **1.1.0** |
 | Date | 2026-08-03 |
-| Charter under audit | `Docs/Architecture/PHASE_3_SPATIAL_PLATFORM_ARCHITECTURE.md` **v1.5.0** |
+| Charter under audit | `Docs/Architecture/PHASE_3_SPATIAL_PLATFORM_ARCHITECTURE.md` **v1.6.0** |
 | Closure sprint | **3.0 — Gate Closure + Synthetic Spatial Evidence Vertical Slice** |
+
+
+## Provenance
+
+| Field | Value |
+|---|---|
+| Original audit v1.0.0 archive | `Docs/Architecture/PHASE_3_FORMAL_ARCHITECTURE_AUDIT_V1_0_ARCHIVE.md` |
+| Archive extracted from base SHA | `a1982ed106352b48c5ea96a8b2caf8f1f9fdceed` |
+| Archive content SHA-256 | `b4be3f54363ad669abbcba9d5eef1206e65c2960df003ee9a48f71c0d295b132` |
+| Reviewed pre-hardening PR tip | `d9aea20c8c4b8339edf293470f4dd82c0ec8b3b1` |
+
+Do **not** treat this closure file as a substitute for the archived v1.0.0 text.
 
 ---
 

@@ -3,17 +3,21 @@
 | Field | Value |
 |---|---|
 | Status | **ARCHITECTURE_ACCEPTED — SYNTHETIC SLICE AUTHORIZED** |
-| Version | **1.5.0** |
-| Date | 2026-07-27 |
+| Version | **1.6.0** |
+| Date | 2026-08-03 |
 | Path | `Docs/Architecture/PHASE_3_SPATIAL_PLATFORM_ARCHITECTURE.md` |
 | Applies to | `elektron-capture-ios` Phase 3 |
 | Prerequisite | Sprint 2.3 success gate closed (**Mac `xcodebuild` PASSED** on `Phase1StillCapture`); Phase 0–2.3 contracts remain authoritative |
 | Related | `COORDINATE_FRAME_STANDARD.md`, `TIMESTAMP_STANDARD.md`, `SYSTEM_BOUNDARIES.md`, `ENGINEERING_GUARDRAILS.md`, `STATUS_TAXONOMY.md`, `ADR-SESSION-REVISION-OCC.md`, `ADR-SESSION-RECOVERY-AND-QUARANTINE.md`, `Docs/Architecture/PHASE_3_FORMAL_ARCHITECTURE_AUDIT.md` |
-| Supersedes | Drafts 1.0.0–1.4.0 |
+| Supersedes | Drafts 1.0.0–1.5.0 |
 
 **This document is the Phase 3 engineering constitution.** It does not authorize production ARKit / AVFoundation / LiDAR workflows. **Foundation-portable synthetic Swift** authorized after audit closure + P0 ADRs (Sprint 3.0). Production ARKit/AVFoundation/LiDAR adapters remain gated until Mac xcodebuild success is recorded.
 
-**Strategic next step:** Formal Architecture Audit (`PHASE_3_FORMAL_ARCHITECTURE_AUDIT.md`) — map every contract in this charter against Phase 0–2.3, document conflicts/ADRs, then draft the synthetic vertical-slice harness. **Not** immediate production coding.
+**Next Gate:** Sprint 2.3 Mac `xcodebuild` and device proof (`BLOCKED_HOST_CAPABILITY` until recorded PASSED).
+
+**Next Implementation:** Production Apple sensor adapters (RGB/motion → pose → depth), after Mac gate. Synthetic Foundation slice remains the authorized Phase 3 coding surface until then.
+
+**Audit provenance:** original Formal Architecture Audit v1.0.0 is preserved at `Docs/Architecture/PHASE_3_FORMAL_ARCHITECTURE_AUDIT_V1_0_ARCHIVE.md` (extracted from base `a1982ed106352b48c5ea96a8b2caf8f1f9fdceed`); closure record is `PHASE_3_FORMAL_ARCHITECTURE_AUDIT.md` v1.1.0.
 
 ---
 
@@ -286,4 +290,6 @@ Full conflict detail: `Docs/Architecture/PHASE_3_FORMAL_ARCHITECTURE_AUDIT.md`.
 
 **Classification:** `ARCHITECTURE_ACCEPTED` (Sprint 3.0 synthetic vertical slice). Apple sensor adapters remain gated on Mac xcodebuild + later sprints.
 
-**Post-acceptance next step:** Formal Architecture Audit → ADR gap list → synthetic vertical-slice harness approval — **not** immediate production coding.
+**Next Gate:** Sprint 2.3 Mac `xcodebuild` and device proof.
+
+**Next Implementation:** Production Apple sensor adapters (RGB/motion → pose → depth).
