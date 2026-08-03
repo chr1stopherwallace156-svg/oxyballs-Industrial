@@ -1,32 +1,38 @@
-# Sprint 3.2 — Pose + Spatiotemporal Correlation (domain refinements)
+# Sprint 3.2 — Pose + Spatiotemporal Correlation (hardening)
 
 | Field | Value |
 |---|---|
 | Official name | `SPRINT_3_2_POSE_AND_SPATIOTEMPORAL_CORRELATION` |
 | Industrial baseline SHA | `1213526724b926fed6663b2f0e7b7c096faa64c4` (PR #56 **MERGED**) |
+| Reviewed pre-hardening head | `6479758f6c724d71df0b504b15d380e576cc8c6a` |
 | Delivery ZIP | `DOWNLOAD-elektron-capture-ios-sprint-3-2-pose-spatiotemporal.zip` |
-| Delivery ZIP SHA-256 | `2201ec8e6f884d93f7031a20106f114367903a48a208dc25128d35570cdd415a` |
+| Delivery ZIP SHA-256 | `c254db32b9d76d4bf00307f37f357a9ab81d985cd8e7a2a4248b26875d9eca77` |
 | Draft PR | https://github.com/chr1stopherwallace156-svg/oxyballs-Industrial/pull/57 |
-| Linux `swift test` | 411 executed, 4 skipped, 0 failures |
-| Phase32 filter | 28 executed, 1 skipped, 0 failures |
+| Linux `swift test` | 421 executed, 4 skipped, 0 failures |
+| Phase32 filter | 38 executed, 1 skipped, 0 failures |
 | Primary fixture | `SPKG-FIXTURE-CAMERA-POSE-000001` |
 | Fixture package SHA-256 | `98c726864d5a0c90642f87f407b146d5dbf137c8c85002fa79204919f7aaba12` |
+| Fixture manifest SHA-256 | `4db6ce41015f3a1b3950e71e0f03e7c91844a9a3544011c19a3cb7a411e51c54` |
+| Capability schema | `SpatialCapabilitySnapshot@1.0.0-phase3-fixture` |
 | ARKit | `APPLE_POSE_SOURCE_CANDIDATE_UNCOMPILED` |
-| Phase 4 / mesh / SfM / CAD | **None** |
+| Validation | `APPLE_RUNTIME_UNVALIDATED` / `DEFERRED_TO_3_6` |
+| Phase 4 / Sprint 3.3 | **None** |
 
 ## Dual planes
 
 | Plane | Value |
 |---|---|
 | IMPLEMENTATION_STATE | `SOURCE_IMPLEMENTED` |
-| VALIDATION_STATE | `APPLE_RUNTIME_UNVALIDATED` / `DEFERRED_TO_3_6` |
+| VALIDATION_STATE | `LINUX_FIXTURE_VALIDATED` (Apple runtime unvalidated) |
 
-## Domain refinements (locked)
+## Hardening corrections
 
-1. **Authority separation:** `evidence_origin_authority=TEST_FIXTURE` vs `pose_estimate_authority=GUIDANCE_ESTIMATE`
-2. **Cycle logic:** reciprocal transforms permitted when consistent inverses; reject inconsistent/ambiguous/degenerate (zero) transforms; reject length≥3 cycles
-3. **ARKit world epochs:** `frame_epoch_id`, `session_run_id`, `world_origin_revision` — cross-epoch joins fail closed
-4. **Integration fixture:** dual-stream camera+pose `SPKG-FIXTURE-CAMERA-POSE-000001` (motion/depth `NOT_REQUESTED`)
+1. Capability schema `1.0.0-phase3-fixture` (standalone ≡ embedded)
+2. Motion evidence stripped from primary camera-pose fixture (`NOT_REQUESTED`)
+3. Pose associations bound to `correlation_id` + epoch proof
+4. Transform edges bound to epoch + `source_sample_id`
+5. Cycle classifications: CONSISTENT_RECIPROCAL / INCONSISTENT_RECIPROCAL / AMBIGUOUS / DEGENERATE / UNSUPPORTED_COMPLEX_CYCLE
+6. D-020 Status: Proposed; Activation upon merge of PR #57
 
 ## Official completion status
 
