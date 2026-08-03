@@ -59,3 +59,6 @@ coverage/
 
 # EDE local
 .githooks/
+
+# Local Capture worktree (not committed; handoff ZIP is authoritative)
+.scratch-elektron-capture-ios/
