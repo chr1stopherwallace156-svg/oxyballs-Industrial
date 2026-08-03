@@ -17,9 +17,11 @@ For *where* systems connect, see [`SYSTEM_MAP.md`](SYSTEM_MAP.md).
 
 ## 1. Clone and workstation bootstrap (EDE)
 
+Exact clone URL (canonical GitHub location):
+
 ```bash
-git clone <repo-url> elektron-industrial
-cd elektron-industrial
+git clone https://github.com/chr1stopherwallace156-svg/oxyballs-Industrial.git
+cd oxyballs-Industrial
 
 ./scripts/setup.sh
 # or
@@ -31,6 +33,8 @@ npm run ede:doctor
 
 ./scripts/verify.sh
 ```
+
+Where a package lockfile exists, prefer **`npm ci`** over `npm install` for reproducible installs.
 
 Optional:
 
@@ -47,7 +51,7 @@ npm run check
 
 ```bash
 cd engine
-npm install
+npm ci
 npm test
 npm run platform001:generate   # produces DRAFT_INCOMPLETE package artifacts
 cd ..
@@ -61,7 +65,7 @@ Expect: tests green; Platform 001 remains **DRAFT_INCOMPLETE** — not an approv
 
 ```bash
 cd edts-visible-progress
-npm install
+npm ci
 npm run dev
 ```
 
@@ -73,7 +77,7 @@ Open the local URL printed by Vite. Treat renders as **provisional**, not twin t
 
 ```bash
 cd edts-vin-resolver
-npm install
+npm ci
 npm run vin -- 1HTKHPVK8KH805188
 ```
 
@@ -86,7 +90,7 @@ Outputs configuration **candidates**, not geometry-verified twins.
 Industrial delivers Capture as **versioned handoff artifacts**, not an in-tree app folder.
 
 ```bash
-# Prefer a versioned DOWNLOAD + matching .sha256
+# Prefer a versioned DOWNLOAD + matching .sha256 — never a mutable "latest" alias
 shasum -a 256 -c DOWNLOAD-elektron-capture-ios-<name>.zip.sha256
 
 # Or restore from transfer/capture-ios-mac-handoff/ pin-named .bundle
@@ -96,10 +100,18 @@ git clone <pin>.bundle elektron-capture-ios
 cd elektron-capture-ios
 ./Scripts/verify-xcode-handoff.sh   # expect HANDOFF_LAYOUT_OK when script present
 swift test                          # Linux/cloud may run package tests; xcodebuild needs Mac
-open Apps/Phase1StillCapture/Phase1StillCapture.xcworkspace
+open Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj
 ```
 
-Device Capture & Export proof is an **operator gate** — cloud agents cannot close it.
+Confirmed open path for Mac operators in this Industrial handoff set:  
+`Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj`  
+(Do not treat an unverified `.xcworkspace` path as authoritative from this runbook.)
+
+Device Capture & Export proof is an **operator gate** — cloud agents cannot close it.  
+Until Mac `xcodebuild` + device gates pass:  
+`CAPTURE_APP_VALIDATED_STAGE_1_EXECUTION = PENDING_MAC_XCODEBUILD_AND_DEVICE_GATE`.
+
+Capture produces **sealed, hash-bound evidence packages**. Digests verify content identity; repository/custody controls enforce immutability.
 
 ---
 
@@ -108,19 +120,24 @@ Device Capture & Export proof is an **operator gate** — cloud agents cannot cl
 ```bash
 cd elektron-digital-twin-foundation
 # Read README + layer docs; follow foundation verification instructions for the layer you are on
+python3 verification/run_kernel_validation.py
 ```
 
-Do not claim geometry lock without the foundation’s own acceptance criteria.
+Kernel is validated/frozen; active research layer is **L01 Exterior**. Do not claim geometry freeze without the foundation’s own acceptance criteria.
 
 ---
 
-## 7. Reference pilot (Stage 1)
+## 7. Reference pilot (Stage 1 — manual)
 
 When running the first physical vehicle:
 
 1. Read [`Docs/Architecture/VEHICLE_001_REFERENCE_PILOT.md`](Docs/Architecture/VEHICLE_001_REFERENCE_PILOT.md)  
-2. Execute **Stage 1 only** (photos + metadata + SHA-256)  
-3. Record digests; do not skip to “complete twin” language  
+2. Use identities: `vehicle_id=VEH-000001`, `pilot_id=PILOT-000001`, `current_stage=STAGE_1_EVIDENCE_ONLY`  
+3. Execute **manual Stage 1 only** (photos + metadata + digests under custody)  
+4. Meet expanded Stage 1 exit criteria in that document  
+
+`MANUAL_STAGE_1_EVIDENCE_PILOT = AUTHORIZED`  
+`CAPTURE_APP_VALIDATED_STAGE_1_EXECUTION = PENDING_MAC_XCODEBUILD_AND_DEVICE_GATE`
 
 ---
 
@@ -132,6 +149,7 @@ When running the first physical vehicle:
 | Build Engine test red | Stop feature work; restore green |
 | Capture layout script fails | Reject handoff ZIP/bundle; use pin digests |
 | Urge to invent a dimension | Stop → open-data / research register |
+| Urge to use `*-latest.zip` | Stop → use versioned `DOWNLOAD-*` + `.sha256` |
 
 ---
 

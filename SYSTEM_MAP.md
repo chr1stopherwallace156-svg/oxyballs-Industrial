@@ -14,11 +14,17 @@ This is a navigation map, not a claim that every box is production-complete. For
 |  (Mobile App)    |     | (EAE / XREPO)      |     | (Vehicle Truth)     |
 +------------------+     +--------------------+     +---------------------+
   Input: Sensors/Photos    Input: Raw packages      Input: Verified pkg /
-  Output: Signed pkg       Output: Digests /          config candidates
-  Auth: Device / ARKit       quarantine / reject      Auth: EDTS schema /
-  Gate: Device build +     Auth: Parser / hash        layer register
-        layout verify      Gate: Digest + layout      Gate: Layer / geometry
-                                                      acceptance (when due)
+  Output: Sealed, hash-    Output: Digests /          config candidates
+           bound evidence    quarantine / reject      Auth: EDTS schema /
+           packages          Auth: Parser / hash        layer register
+  Observation source:      Gate: Digest + layout      Gate: Layer / geometry
+    device sensors           + package closure          acceptance (when due)
+  Validation authority:
+    schema, package
+    closure, artifact
+    hashes
+  Gate: Device build +
+        layout verify
            │
            ▼
 +------------------+     +--------------------+
@@ -40,7 +46,7 @@ This is a navigation map, not a claim that every box is production-complete. For
 
 | Subsystem | May claim | Must not claim |
 |---|---|---|
-| **Capture** | Device-observed evidence, digests, session identity | Engineering twin complete; OEM geometry truth |
+| **Capture** | Device-observed evidence, digests, session identity | Cryptographic signature / attestation / non-repudiation; engineering twin complete; OEM geometry truth |
 | **EAE / XREPO** | Package parse, hash match, quarantine | Vehicle configuration approval |
 | **EDTS** | Layer-gated configuration / twin documentation | Phone LiDAR as CMM-grade metrology |
 | **Build Engine** | Deterministic blockers + draft BOM from locked inputs | Procurement / fabrication / energization authority |
@@ -50,10 +56,14 @@ This is a navigation map, not a claim that every box is production-complete. For
 
 ## Evidence → truth doctrine (short)
 
-1. **Photos + SHA-256** are immutable condition evidence (high authority for *presence / condition*, not for micron geometry).  
-2. **Phone LiDAR / ARKit** are provisional spatial layout tools (~±10 mm class — visual / envelope).  
-3. **Manual metrology** (caliper / tape) overrides LiDAR for critical dimensions when recorded.  
-4. **OEM / supplier docs** are the authoritative baseline for factory patterns.  
+1. **Guided photography** is strong evidence for *presence / condition* when sealed in a hash-bound package and held under custody controls.  
+2. **SHA-256** verifies **content identity** of bytes. It does **not** by itself enforce immutability — immutability is a property of repository and custody controls (no silent overwrite, append-only ledgers, quarantine).  
+3. **Phone LiDAR / ARKit** spatial outputs are classified:  
+   `PROVISIONAL_SPATIAL_EVIDENCE` · `NO_SYSTEM_TOLERANCE_ASSIGNED` · `PENDING_CHARACTERIZATION`  
+   Do **not** publish a universal millimetre tolerance for phone LiDAR.  
+4. **Manual metrology** becomes engineering evidence **only** when recorded with: instrument, datum, method, units, calibration status, operator, and uncertainty.  
+5. **Discrepancies** (LiDAR / manual / OEM) are resolved by applicability, vehicle specificity, instrument suitability, and uncertainty — **preserve every observation**; never silently overwrite one with another.  
+6. **OEM / supplier docs** remain an authoritative *baseline class* when applicability to the exact vehicle is established.
 
 Full pilot staging: [`Docs/Architecture/VEHICLE_001_REFERENCE_PILOT.md`](Docs/Architecture/VEHICLE_001_REFERENCE_PILOT.md).
 
@@ -63,7 +73,7 @@ Full pilot staging: [`Docs/Architecture/VEHICLE_001_REFERENCE_PILOT.md`](Docs/Ar
 
 | Box | Industrial path |
 |---|---|
-| Capture delivery | `transfer/capture-ios-mac-handoff/`, root `DOWNLOAD-elektron-capture-ios-*.zip` |
+| Capture delivery | `transfer/capture-ios-mac-handoff/`, root versioned `DOWNLOAD-elektron-capture-ios-*.zip` (+ `.sha256`) |
 | EDTS foundation | `elektron-digital-twin-foundation/` |
 | Build Engine | `engine/` + `docs/` governance |
 | Visible Progress | `edts-visible-progress/` |

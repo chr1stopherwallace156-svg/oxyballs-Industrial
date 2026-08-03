@@ -4,8 +4,8 @@ Gas-to-EV conversion services — Victorville, CA.
 
 **Start here:** [`START_HERE.md`](START_HERE.md) · [`SYSTEM_MAP.md`](SYSTEM_MAP.md) · [`CURRENT_STATE.md`](CURRENT_STATE.md) · [`RUNBOOK.md`](RUNBOOK.md)
 
-> **Reality check:** `READY_FOR_ONE_VEHICLE_REFERENCE_PILOT = YES` · `READY_FOR_COMPLETE_DIGITAL_TWIN = NO`  
-> Pilot doctrine: [`Docs/Architecture/VEHICLE_001_REFERENCE_PILOT.md`](Docs/Architecture/VEHICLE_001_REFERENCE_PILOT.md)
+> **Reality check:** `MANUAL_STAGE_1_EVIDENCE_PILOT = AUTHORIZED` · `CAPTURE_APP_VALIDATED_STAGE_1_EXECUTION = PENDING_MAC_XCODEBUILD_AND_DEVICE_GATE` · `READY_FOR_COMPLETE_DIGITAL_TWIN = NO`  
+> Pilot doctrine: [`Docs/Architecture/VEHICLE_001_REFERENCE_PILOT.md`](Docs/Architecture/VEHICLE_001_REFERENCE_PILOT.md) (`VEH-000001` / `PILOT-000001` / `STAGE_1_EVIDENCE_ONLY`)
 
 This repository holds coordinated bodies of work plus the public site:
 
@@ -30,13 +30,13 @@ Interactive 3D demonstrator (provisional visual — not engineering truth):
 [`edts-visible-progress/`](edts-visible-progress/README.md). Decision **DT-D058**.
 
 ```bash
-cd edts-visible-progress && npm install && npm run dev
+cd edts-visible-progress && npm ci && npm run dev
 ```
 
 ## VIN resolver (DT-D067)
 
 ```bash
-cd edts-vin-resolver && npm install && npm run vin -- 1HTKHPVK8KH805188
+cd edts-vin-resolver && npm ci && npm run vin -- 1HTKHPVK8KH805188
 ```
 
 Creates configuration **candidates** from NHTSA vPIC — not geometry-verified twins.
