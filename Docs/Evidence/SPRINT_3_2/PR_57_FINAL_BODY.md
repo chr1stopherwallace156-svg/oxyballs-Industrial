@@ -3,7 +3,7 @@
 Sprint 3.2 — Pose + Spatiotemporal Correlation under dual status planes.
 
 **PR #56 is merged.** Industrial baseline: `1213526724b926fed6663b2f0e7b7c096faa64c4`.  
-Head after this final record-closure pass: `77939ebfcce4c29a222a942829e9084b3f16e679`.
+Head after this final record-closure pass: `a78d4e214385e67cafdecf3eb3b23ebffcf9daaf`.
 
 **IMPLEMENTATION_STATE** = `SOURCE_IMPLEMENTED`  
 **VALIDATION_STATE** = `LINUX_FIXTURE_VALIDATED`  
