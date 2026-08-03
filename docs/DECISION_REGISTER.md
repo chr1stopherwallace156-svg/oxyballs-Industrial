@@ -29,21 +29,6 @@ later entry that references it.
   4. Authoritative backlog: `Docs/Architecture/PHASE_3_VALIDATION_BACKLOG.md`.
 - Consequences: PR merges for 3.2–3.5 may be classified `SOURCE_FOUNDATION_MERGED` / `APPLE_RUNTIME_UNVALIDATED` without waiting for hardware.
 
-
-
-
-- Date: 2026-08-03
-- Status: Accepted (proposed on draft PR; ARKit runtime remains APPLE_POSE_SOURCE_CANDIDATE_UNCOMPILED)
-- Context: Pose/spatiotemporal types and validators are required before Sprint 3.6 device pose validation; Mac Stage A gate remains blocked on Linux, but Foundation-portable pose law must not wait on ARKit host capability.
-- Decision:
-  1. Expand `PoseSample` with Vector3D/QuaternionD, tracking state/reason, explicit source/destination frames; fixture schema `PoseSample@1.0.0-phase3-fixture`.
-  2. `PoseSensorAdapter` is Foundation-portable; Apple ARKit lives only under `App/AppleSensors/AppleARKitPoseSensorAdapter.swift` with `#if canImport(ARKit)` and throws `APPLE_POSE_SOURCE_CANDIDATE_UNCOMPILED` on Linux.
-  3. Cross-domain time compares require explicit `ClockCorrelation` (stale/ambiguous fail closed); camera↔pose binding requires `PoseAssociationRecord`.
-  4. Fixture package identities are `SPKG-FIXTURE-POSE-*` / `SESS-FIXTURE-POSE-*` with `TEST_FIXTURE` authority and `NO_PHYSICAL_DEVICE_EXECUTION`; never `SPKG-DEVICE-*`.
-  5. Pose estimate authority remains `GUIDANCE_ESTIMATE` outside fixture paths.
-- Consequences: Sprint 3.6 still required for physical ARKit validation; Sprint 3.3 LiDAR remains separate; no Phase 4/mesh/SfM/CAD claims.
-
-
 ## D-019 — Sprint 3.1 RGB/motion production adapter foundation (draft PR)
 
 - Date: 2026-08-03
