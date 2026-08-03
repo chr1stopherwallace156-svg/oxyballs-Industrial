@@ -1,0 +1,39 @@
+{
+  "decision_id": "DT-D066",
+  "title": "Three-axis implementation maturity + IMPLEMENTATION_EVIDENCE ledger",
+  "status": "ACCEPTED",
+  "date_utc": "2026-07-21",
+  "related_locks": ["RL-035"],
+  "summary": "Extend DT-D065 audit process: every feature tracked on Implemented / Tested / Verified axes independently. Admit IMPLEMENTATION_EVIDENCE.md proof ledger and numeric category progress. Permanent hard rule: no false OEM STEP / measured claims. Confirm P0 real GLB vertical slice before PostgreSQL / Open3D / ARKit / AprilTags / quantum. Viewer framework success must never be conflated with digital-twin completeness.",
+  "accepted_artifacts": [
+    "IMPLEMENTATION_EVIDENCE.md",
+    "IMPLEMENTATION_AUDIT.md",
+    "NEXT_IMPLEMENTATION_PRIORITY.md"
+  ],
+  "maturity_axes": {
+    "implemented": "Code exists and is wired",
+    "tested": "Automated or recorded test in repo",
+    "verified": "Meets engineering acceptance criteria"
+  },
+  "category_progress_percent": {
+    "viewer": 90,
+    "vehicle_assets": 10,
+    "runtime_mapping": 25,
+    "vin_pipeline": 0,
+    "mobile_capture": 0,
+    "registration": 0,
+    "digital_twin_evidence_ui": 35,
+    "persistence": 5,
+    "vpr2_test_harness": 15
+  },
+  "hard_rules": [
+    "Documentation is not implementation",
+    "Implemented != Tested != Verified",
+    "No false OEM STEP / measured claims",
+    "Viewer success != twin complete"
+  ],
+  "recommended_decision": "EVIDENCE_LEDGER_ACTIVE_P0_GLB_FIRST",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "geometry_extraction_authorized": false,
+  "kernel_mutation": false
+}

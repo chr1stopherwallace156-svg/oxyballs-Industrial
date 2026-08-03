@@ -7,7 +7,9 @@
     "document_class": "ELECTRICAL_WIRING_DIAGRAM",
     "publisher": "Ford / Helm Inc. (reported commercial channel)",
     "reported_year": 2019,
-    "legacy_aliases": ["EDTS-OEM-004"]
+    "legacy_aliases": [
+      "EDTS-OEM-004"
+    ]
   },
   "acquisition_status": "NOT_ACQUIRED",
   "access_status": "NOT_ACQUIRED",
@@ -16,7 +18,7 @@
     {
       "at": "2026-07-16T20:20:00Z",
       "rc": 88,
-      "note": "Critical for door harness pinouts (8-pin vs 22-pin mirror options). Narrative VERIFIED_EVIDENCE rejected — commercial purchase not executed; no local bytes."
+      "note": "Critical for door harness pinouts (8-pin vs 22-pin mirror options). Narrative VERIFIED_EVIDENCE rejected \u2014 commercial purchase not executed; no local bytes."
     }
   ],
   "bound_vehicle_instance_id": "VEH-000001",
@@ -30,9 +32,19 @@
   "related_source_registry_id": null,
   "closes_conflicts": [],
   "closes_questions": [],
-  "parallel_lanes_triggered": ["LANE_SVC", "LANE_PRT", "LANE_A_DOC"],
-  "forbidden_uses_until_acquired": ["electrical_twin_pinout_truth", "VERIFIED_EVIDENCE_label"],
-  "notes": ["Alias EDTS-OEM-004. Isolate Regular Cab + mirror option before applying diagrams."],
-  "research_sprint": "RL-010",
-  "decision": "DT-D041"
+  "parallel_lanes_triggered": [
+    "LANE_SVC",
+    "LANE_PRT",
+    "LANE_A_DOC"
+  ],
+  "forbidden_uses_until_acquired": [
+    "electrical_twin_pinout_truth",
+    "VERIFIED_EVIDENCE_label"
+  ],
+  "notes": [
+    "Alias EDTS-OEM-004. Isolate Regular Cab + mirror option before applying diagrams.",
+    "Primary acquire target for MISN-000001 / KG-001 (DT-D045)."
+  ],
+  "research_sprint": "RL-014",
+  "decision": "DT-D045"
 }
