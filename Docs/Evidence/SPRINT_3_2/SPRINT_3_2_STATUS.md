@@ -5,7 +5,7 @@
 | Official name | `SPRINT_3_2_POSE_AND_SPATIOTEMPORAL_CORRELATION` |
 | Industrial baseline SHA | `1213526724b926fed6663b2f0e7b7c096faa64c4` (PR #56 **MERGED**) |
 | Pre-closure reviewed head | `b77271522c86cb639cfc2dd2a0650e9876088b96` |
-| Final closure head | `a78d4e214385e67cafdecf3eb3b23ebffcf9daaf` |
+| Final closure head | branch tip of `cursor/phase3-2-pose-spatiotemporal-d881` |
 | Delivery ZIP | `DOWNLOAD-elektron-capture-ios-sprint-3-2-pose-spatiotemporal.zip` |
 | Delivery ZIP SHA-256 | `3bcc630f8bb1c6b93f74beb48f66cced25ed42756eac0df7d34489cece77f090` |
 | Draft PR | https://github.com/chr1stopherwallace156-svg/oxyballs-Industrial/pull/57 |
