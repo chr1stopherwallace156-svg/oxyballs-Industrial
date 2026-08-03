@@ -64,3 +64,13 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 - [x] Required-failure / cancellation non-seal behavior
 - [ ] Mac compile sweep of coordinated adapters (Sprint 3.6)
 - [ ] Physical multi-stream runtime (Sprint 3.6)
+
+## Sprint 3.5 — Quality / coverage / guidance (Linux complete; Apple deferred)
+
+| Gate | Status |
+|---|---|
+| Linux fixture quality/coverage/guidance | COMPLETE (this PR) |
+| Mac compilation | PENDING → Sprint 3.6 |
+| Physical characterization of thresholds | PENDING → Sprint 3.6 |
+| Production validation claim | FORBIDDEN |
+

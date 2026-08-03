@@ -17,11 +17,25 @@ later entry that references it.
 
 ---
 
-## D-023 — Sprint 3.4 multi-stream capture orchestration (Foundation/fixture)
+## D-024 — Sprint 3.5 quality, coverage, and operator guidance (Foundation/fixture)
 
 - Date: 2026-08-03
 - Status: Proposed
-- Activation: Upon merge of the Sprint 3.4 PR
+- Activation: Upon merge of the Sprint 3.5 PR
+- Context: Coordinated multi-stream capture exists; technicians need derived quality signals, bounded coverage policy, and prioritized guidance without claiming geometric or engineering completeness.
+- Decision:
+  1. Guidance and coverage outputs are derived evidence (`guidance_authority=GUIDANCE_ESTIMATE`) that must reference immutable source evidence IDs; original sensor payloads are never mutated.
+  2. Fixture thresholds are `DETERMINISTIC_TEST_FIXTURE` with `PENDING_PHYSICAL_CHARACTERIZATION` and `NO_SYSTEM_TOLERANCE_ASSIGNED` — not proven physical optima.
+  3. Coverage completion / `SUFFICIENT_FOR_PACKAGE_FINALIZATION` means configured evidence-capture policy satisfaction only — never geometry-complete, reconstruction-verified, engineering-complete, or digital-twin-complete.
+  4. Guidance prioritization is deterministic; duplicate ACTIVE guidance for the same unresolved condition is forbidden.
+  5. Apple/device physical characterization remains deferred to Sprint 3.6; Sprint 3.5 does not reconstruct geometry or generate a mesh.
+- Consequences: Sprint 3.6 concentrates Mac compile + physical validation; Phase 4 reconstruction remains out of scope; production validation claims remain FORBIDDEN.
+
+## D-023 — Sprint 3.4 multi-stream capture orchestration (Foundation/fixture)
+
+- Date: 2026-08-03
+- Status: Accepted
+- Activation: Merged with Sprint 3.4 (`185120496a64a6e56b95dc3ea409f09064398e25`)
 - Context: Camera/motion/pose/depth foundations exist; a single coordinator must own session lifecycle, policy, buffering, interruption recovery, and package finalization without inventing evidence or claiming Apple runtime validation.
 - Decision:
   1. One `SpatialCaptureSessionCoordinator` owns capture-session lifecycle and state machine; invalid transitions fail closed.
