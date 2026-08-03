@@ -1,0 +1,1 @@
+{"capture_session_id":"SESS-FIXTURE-GUIDED-MISSING-REGION-000001","generated_at_nanoseconds":50000000,"note":"Continue capture to satisfy remaining coverage or quality policy conditions.","reasons":["MISSING_REQUIRED_REGION"],"recommendation":"CONTINUE_CAPTURE","schema_id":"CaptureCompletionRecommendation","schema_version":"1.0.0-phase3-fixture"}
