@@ -1,0 +1,42 @@
+{
+  "decision_id": "DT-D053",
+  "title": "Mission D front suspension honesty gate — Monobeam extracted; FGAWR baseline corrected; torques rejected",
+  "status": "ACCEPTED",
+  "date_utc": "2026-07-20",
+  "related_locks": ["RL-022"],
+  "mission_id": "MISN-000004",
+  "summary": "Admit honesty-gated Subsystem Mission D evidence brief. Promote F-450/F-550 4x2 front axle architecture to ASSERTION_EXTRACTED Monobeam from SRC-CAND-000010. Reject operator standard FGAWR=5600 for Reg Cab 4x2 145.3 (actual Max Std 4800/5200 by engine). Reject all EXACT_MATCH torque/alignment claims pending WSM. Initialize CFGCOMP-…-FRONT-SUSPENSION as CANDIDATE. Keep Mission E deferred. Do not open Mission F as substitute for incomplete Mission D.",
+  "accepted_artifacts": [
+    "research/vertical_slices/front_suspension_2019_f450/README.md",
+    "research/vertical_slices/front_suspension_2019_f450/ENGINEERING_EVIDENCE_BRIEF_D.json",
+    "research/vertical_slices/front_suspension_2019_f450/STRUCTURAL_NODES.json",
+    "research/vertical_slices/front_suspension_2019_f450/CANDIDATE_EDGES.json",
+    "research/vertical_slices/front_suspension_2019_f450/OPERATOR_CLAIM_SCRUB.json",
+    "research/vertical_slices/front_suspension_2019_f450/KNOWLEDGE_GAPS.json"
+  ],
+  "architecture_decision": {
+    "f450_f550_chassis_cab_4x2_front_axle": "Monobeam",
+    "status": "ASSERTION_EXTRACTED",
+    "source": "SRC-CAND-000010 page 55 Front Axle Specifications — 4x2",
+    "supersedes": "PRIMARY_SOURCE_REQUIRED open architecture question for series-level type (still not ASSERTION_VERIFIED; BAG parse + physical confirmation remain)",
+    "still_forbidden": [
+      "Import 4x4 live monobeam geometry as 4x2 truth",
+      "Invent spring rates",
+      "Authorize procedures"
+    ]
+  },
+  "fgawr_correction": {
+    "rejected_operator_baseline_lbs": 5600,
+    "extracted_max_std_reg_cab_4x2_1453": {"6.8L": 4800, "6.7L": 5200},
+    "optional_path_to_7500": "DOCUMENT_SUPPORTED_OPTION_DEPENDENT"
+  },
+  "next_mission_selection": {
+    "option_a_mission_e_ice_removal": "REMAIN_DEFERRED (MISN-000005)",
+    "option_b_mission_f_lv_network": "NOT_OPENED — would be MISN-000006 if authorized later; LV path already gated by MISN-000003 WSM/EWD",
+    "selected": "CONTINUE_MISSION_D",
+    "rationale": "Mission D is only partially complete. Opening E or F now would skip primary-source gaps (WSM torque/alignment, BAG parse, spring codes)."
+  },
+  "recommended_decision": "MISSION_D_IN_PROGRESS_PRIMARY_SOURCE_PARTIAL",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "geometry_extraction_authorized": false
+}

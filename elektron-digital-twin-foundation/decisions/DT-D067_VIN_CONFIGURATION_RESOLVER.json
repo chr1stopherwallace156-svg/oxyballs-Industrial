@@ -1,0 +1,28 @@
+{
+  "decision_id": "DT-D067",
+  "title": "EDTS VIN Configuration Resolver (NHTSA vPIC CLI + library)",
+  "status": "ACCEPTED",
+  "date_utc": "2026-07-22",
+  "related_locks": ["RL-036"],
+  "summary": "Implement production VIN workflow package edts-vin-resolver: validate VIN, DecodeVinValuesExtended, normalize without inventing fields, compare to registered CFGs, persist raw evidence + vehicle record + markdown report, CLI npm run vin. Outcomes are candidates only — never CONFIGURATION_CONFIRMED or geometry Verified from VIN alone. Example International VIN rejects CFG-2019-F450 reference match.",
+  "accepted_artifacts": [
+    "edts-vin-resolver/",
+    "edts-vin-resolver/docs/VIN_RESOLVER_SPEC.md",
+    "edts-vin-resolver/docs/VIN_RESOLVER_RUNBOOK.md"
+  ],
+  "endpoint": "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValuesExtended/{VIN}?format=json",
+  "maturity": {
+    "implemented": true,
+    "tested": true,
+    "verified_engineering_twin": false
+  },
+  "forbidden": [
+    "CONFIGURATION_CONFIRMED from VIN alone",
+    "Invented WB/CA/DRW/geometry",
+    "Unofficial VIN APIs / scraping"
+  ],
+  "recommended_decision": "VIN_RESOLVER_IMPLEMENTED_TESTED_NOT_GEOMETRY_VERIFIED",
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "geometry_extraction_authorized": false,
+  "kernel_mutation": false
+}

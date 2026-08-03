@@ -1,0 +1,40 @@
+{
+  "decision_id": "DT-D045",
+  "title": "Mission queue + twin VIS/ENG passports + honest evidence counts; assign MISN-001 to EWD",
+  "date": "2026-07-19",
+  "approved_status": "ACCEPTED",
+  "recommended_decision": "CONTINUE_RESEARCH",
+  "scope": [
+    "research/missions/",
+    "research/twin_passports/",
+    "research/evidence_matrices/",
+    "research/component_sourcing/COMPONENT_MATURITY_COUNTS.json",
+    "KG-003",
+    "AID-000012",
+    "AID-000013",
+    "MISN-000001",
+    "SRC-CAND-000006",
+    "RL-014"
+  ],
+  "reason": "Orchestration needs explicit missions and separated visual/engineering twin records. Operator evidence matrices claimed verified/acquired counts and Dana 8/8 supplier completion without local hashed bytes — honesty gate demotes those and assigns MISN-000001 to EWD acquisition for KG-001.",
+  "decision": [
+    "Authorize Research Mission Queue; create MISN-000001 (alias EDTS-MISN-001) NOT_STARTED targeting KG-001.",
+    "Primary mission assignment: acquire SRC-CAND-000006 (2019 Super Duty EWD) as OEM wiring source success criterion.",
+    "Authorize Twin Domain Passports: TWIN-VIS-000001 (AID-VIS-0104→AID-000012) and TWIN-ENG-000001 (AID-ENG-0082→AID-000013) remain independent; speculative LOD/mass/tolerance numerics are RESEARCH_CLAIM only.",
+    "Replace percentage maturity with acquired_hashed/required_target counts; operator N/N verified cells without bytes → project_acquired_hashed=0.",
+    "Reject Dana supplier documents 8/8 complete and any claim that physical axle scans are unnecessary.",
+    "Reject AID-ENG-0082 SOURCE_VERIFIED and AID-VIS-0104 CONFIGURATION_EVALUATED without URL/bytes.",
+    "Register KG-003 (inner impact beam) OPEN HIGH.",
+    "Evidence Coverage Matrix wiring remains 0/2 — blocks simulation until MISN success.",
+    "Frozen kernel and component-passport rc1 unchanged."
+  ],
+  "related_decisions": ["DT-D044", "DT-D043", "DT-D042", "DT-D041"],
+  "change_control": {
+    "kernel_schema_change": false,
+    "component_passport_rc1_change": false,
+    "new_schemas": [
+      "schemas/research-mission.schema.json",
+      "schemas/twin-domain-passport.schema.json"
+    ]
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "document_id": "COMPONENT_MATURITY_COUNTS",
+  "version": "1.0.0",
+  "authority_status": "RESEARCH_OPERATIONAL_HONEST",
+  "policy": {
+    "format": "acquired_hashed / required_target",
+    "operator_bars_without_bytes": "REJECTED_AS_PROJECT_TRUTH",
+    "marketplace_visual_saturation_\u2260_engineering": true
+  },
+  "components": [
+    {
+      "component": "FL Door Assembly (HC3Z-2520125-A claim)",
+      "csp_id": "CSP-000001",
+      "channels": {
+        "oem_documents": {
+          "required": 8,
+          "operator_claimed_acquired": 6,
+          "project_acquired_hashed": 0,
+          "status": "HUNT"
+        },
+        "supplier_documents": {
+          "required": 5,
+          "operator_claimed_acquired": 3,
+          "project_acquired_hashed": 0,
+          "status": "HUNT"
+        },
+        "cad_assets": {
+          "required": 7,
+          "operator_claimed_acquired": 2,
+          "project_acquired_hashed": 0,
+          "status": "DISCOVERED_NOT_ACQUIRED"
+        },
+        "marketplace_models": {
+          "required": 12,
+          "operator_claimed_acquired": 12,
+          "project_acquired_hashed": 0,
+          "status": "VISUAL_CANDIDATES_ONLY",
+          "note": "Visual saturation claim \u2260 acquired bytes"
+        },
+        "teardown_videos": {
+          "required": 18,
+          "operator_claimed_acquired": 12,
+          "project_acquired_hashed": 0,
+          "status": "MEDIA_CANDIDATES",
+          "note": "MEDIA-000001 candidate only"
+        },
+        "parts_cataloging": {
+          "required": 10,
+          "operator_claimed_acquired": 10,
+          "project_acquired_hashed": 0,
+          "status": "HUNT"
+        },
+        "reference_photos": {
+          "required": 20,
+          "operator_claimed_acquired": 16,
+          "project_acquired_hashed": 0,
+          "status": "HUNT"
+        },
+        "physical_scans": {
+          "required": 4,
+          "operator_claimed_acquired": 0,
+          "project_acquired_hashed": 0,
+          "status": "NOT_STARTED"
+        }
+      }
+    },
+    {
+      "component": "Dana M300 Rear Axle Assembly (HC3Z-4010-A claim)",
+      "csp_id": "CSP-000002",
+      "channels": {
+        "oem_documents": {
+          "required": 5,
+          "operator_claimed_acquired": 4,
+          "project_acquired_hashed": 0,
+          "status": "HUNT"
+        },
+        "supplier_documents": {
+          "required": 8,
+          "operator_claimed_acquired": 8,
+          "project_acquired_hashed": 0,
+          "status": "HUNT",
+          "honesty_note": "Operator 8/8 COMPLETE REJECTED \u2014 no Dana portal hashes in-repo"
+        },
+        "cad_assets": {
+          "required": 5,
+          "operator_claimed_acquired": 4,
+          "project_acquired_hashed": 0,
+          "status": "DISCOVERED_NOT_ACQUIRED",
+          "note": "AID-000009 NOT_ACQUIRED"
+        },
+        "marketplace_models": {
+          "required": 6,
+          "operator_claimed_acquired": 2,
+          "project_acquired_hashed": 0,
+          "status": "HUNT"
+        },
+        "teardown_videos": {
+          "required": 5,
+          "operator_claimed_acquired": 3,
+          "project_acquired_hashed": 0,
+          "status": "HUNT"
+        },
+        "parts_cataloging": {
+          "required": 6,
+          "operator_claimed_acquired": 6,
+          "project_acquired_hashed": 0,
+          "status": "HUNT"
+        },
+        "reference_photos": {
+          "required": 12,
+          "operator_claimed_acquired": 12,
+          "project_acquired_hashed": 0,
+          "status": "HUNT"
+        },
+        "physical_scans": {
+          "required": 2,
+          "operator_claimed_acquired": 0,
+          "project_acquired_hashed": 0,
+          "status": "NOT_STARTED"
+        }
+      },
+      "forbidden_conclusion": "Do not claim physical laser profiling is minimized \u2014 supplier saturation is NOT complete in-project."
+    }
+  ],
+  "research_sprint": "RL-014",
+  "decision": "DT-D045"
+}

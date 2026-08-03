@@ -1,0 +1,202 @@
+{
+  "manifest_id": "MESH-MAP-VPR2-001",
+  "spec": "EDTS-SPEC-3D-001",
+  "decision": "DT-D063",
+  "locked_configuration": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+  "vehicle_id": "VEH-000001",
+  "glb_path": null,
+  "glb_status": "NOT_ACQUIRED",
+  "coordinate_frame": {
+    "up": "+Y",
+    "forward": "+X",
+    "right": "+Z",
+    "origin": "FRONT_AXLE_MIDLINE",
+    "units": "meters",
+    "wheelbase_m": 3.69062,
+    "cab_to_axle_m": 1.524
+  },
+  "notes": [
+    "Multiple GLB mesh nodes may map to one COMP record until COMP is split (e.g. frame rails → FRAME).",
+    "Powertrain PROXY names are preferred; vendor 6.7L/6R140 names are aliases only — OPTION_DEPENDENT, not instance-locked.",
+    "Geometry maturity remains PLACEHOLDER_GEOMETRY / SIMPLIFIED_SURFACE until metrology — acquisition ≠ freeze."
+  ],
+  "primary_nodes": [
+    {
+      "mesh_node": "GEO_CHASSIS_FRAME_RAIL_LH_LOD0",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "geo_id": "GEO-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "geometry_role": "frame",
+      "required": true,
+      "separation": "Isolated LH C-channel rail",
+      "identity_claim": "CONFIGURATION_LOCKED_STRUCTURE",
+      "geometry_claim": "PLACEHOLDER_UNTIL_MEASURED"
+    },
+    {
+      "mesh_node": "GEO_CHASSIS_FRAME_RAIL_RH_LOD0",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "geo_id": "GEO-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "geometry_role": "frame",
+      "required": true,
+      "separation": "Isolated RH C-channel rail",
+      "identity_claim": "CONFIGURATION_LOCKED_STRUCTURE",
+      "geometry_claim": "PLACEHOLDER_UNTIL_MEASURED"
+    },
+    {
+      "mesh_node": "GEO_CHASSIS_FRAME_CROSSMEMBER_01_CTR_LOD0",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "geo_id": "GEO-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "geometry_role": "frame",
+      "required": true,
+      "separation": "Front crossmember",
+      "identity_claim": "CONFIGURATION_LOCKED_STRUCTURE",
+      "geometry_claim": "PLACEHOLDER_UNTIL_MEASURED"
+    },
+    {
+      "mesh_node": "GEO_CHASSIS_FRAME_CROSSMEMBER_02_CTR_LOD0",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "geo_id": "GEO-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "geometry_role": "frame",
+      "required": true,
+      "separation": "Midship/cab crossmember",
+      "identity_claim": "CONFIGURATION_LOCKED_STRUCTURE",
+      "geometry_claim": "PLACEHOLDER_UNTIL_MEASURED"
+    },
+    {
+      "mesh_node": "GEO_BODY_CAB_SHELL_CTR_LOD0",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB",
+      "geo_id": "GEO-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB",
+      "geometry_role": "cab",
+      "required": true,
+      "separation": "Regular cab outer shell (material not asserted by node name)",
+      "identity_claim": "CONFIGURATION_LOCKED_BODY",
+      "geometry_claim": "PLACEHOLDER_UNTIL_MEASURED"
+    },
+    {
+      "mesh_node": "GEO_BODY_DOOR_INNER_LH_LOD0",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB",
+      "geo_id": "GEO-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB",
+      "geometry_role": "cab",
+      "required": true,
+      "separation": "FL door assembly — separable from shell; COMP split deferred",
+      "identity_claim": "SUBMESH_OF_CAB",
+      "geometry_claim": "PLACEHOLDER_UNTIL_MEASURED"
+    },
+    {
+      "mesh_node": "GEO_BODY_DOOR_INNER_RH_LOD0",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB",
+      "geo_id": "GEO-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB",
+      "geometry_role": "cab",
+      "required": true,
+      "separation": "FR door assembly — separable from shell; COMP split deferred",
+      "identity_claim": "SUBMESH_OF_CAB",
+      "geometry_claim": "PLACEHOLDER_UNTIL_MEASURED"
+    },
+    {
+      "mesh_node": "GEO_DRIVETRAIN_AXLE_REAR_DANA_M300_CTR_LOD0",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
+      "geo_id": "GEO-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
+      "geometry_role": "rear_axle",
+      "required": true,
+      "separation": "DRW housing + differential cover envelope",
+      "identity_claim": "DOCUMENT_SUPPORTED_CLASS",
+      "geometry_claim": "PLACEHOLDER_UNTIL_MEASURED"
+    },
+    {
+      "mesh_node": "GEO_CHASSIS_SUSP_FRONT_MONOBEAM_CTR_LOD0",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "geo_id": "GEO-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "geometry_role": "front_axle",
+      "required": true,
+      "separation": "Front monobeam axle + spring envelope",
+      "identity_claim": "ASSERTION_EXTRACTED_ARCHITECTURE",
+      "geometry_claim": "PLACEHOLDER_UNTIL_MEASURED"
+    },
+    {
+      "mesh_node": "GEO_POWERTRAIN_ICE_ENGINE_PROXY_CTR_LOD0",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK",
+      "geo_id": "GEO-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK",
+      "geometry_role": "engine",
+      "required": true,
+      "separation": "Engine block envelope for deconstruction extract",
+      "identity_claim": "OPTION_DEPENDENT",
+      "geometry_claim": "PLACEHOLDER_UNTIL_MEASURED"
+    },
+    {
+      "mesh_node": "GEO_POWERTRAIN_ICE_TRANS_PROXY_CTR_LOD0",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+      "geo_id": "GEO-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+      "geometry_role": "transmission",
+      "required": true,
+      "separation": "Transmission envelope for deconstruction extract",
+      "identity_claim": "OPTION_DEPENDENT",
+      "geometry_claim": "PLACEHOLDER_UNTIL_MEASURED"
+    },
+    {
+      "mesh_node": "GEO_CHASSIS_WHEEL_FRONT_LH_LOD0",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
+      "geo_id": "GEO-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
+      "geometry_role": "wheels",
+      "required": true,
+      "separation": "Front left wheel + tire",
+      "identity_claim": "CONFIGURATION_LOCKED_WHEELS",
+      "geometry_claim": "PLACEHOLDER_UNTIL_MEASURED"
+    },
+    {
+      "mesh_node": "GEO_CHASSIS_WHEEL_FRONT_RH_LOD0",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
+      "geo_id": "GEO-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
+      "geometry_role": "wheels",
+      "required": true,
+      "separation": "Front right wheel + tire",
+      "identity_claim": "CONFIGURATION_LOCKED_WHEELS",
+      "geometry_claim": "PLACEHOLDER_UNTIL_MEASURED"
+    },
+    {
+      "mesh_node": "GEO_CHASSIS_WHEEL_REAR_DUALLY_LH_LOD0",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
+      "geo_id": "GEO-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
+      "geometry_role": "wheels",
+      "required": true,
+      "separation": "Rear left outer/inner dually set",
+      "identity_claim": "CONFIGURATION_LOCKED_WHEELS",
+      "geometry_claim": "PLACEHOLDER_UNTIL_MEASURED"
+    },
+    {
+      "mesh_node": "GEO_CHASSIS_WHEEL_REAR_DUALLY_RH_LOD0",
+      "comp_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
+      "geo_id": "GEO-CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
+      "geometry_role": "wheels",
+      "required": true,
+      "separation": "Rear right outer/inner dually set",
+      "identity_claim": "CONFIGURATION_LOCKED_WHEELS",
+      "geometry_claim": "PLACEHOLDER_UNTIL_MEASURED"
+    }
+  ],
+  "aliases": [
+    {
+      "from": "GEO_BODY_CAB_SHELL_ALUMINUM_CTR_LOD0",
+      "to": "GEO_BODY_CAB_SHELL_CTR_LOD0",
+      "reason": "Do not assert aluminum in node name without material evidence"
+    },
+    {
+      "from": "GEO_POWERTRAIN_ICE_ENGINE_6.7L_V8_CTR_LOD0",
+      "to": "GEO_POWERTRAIN_ICE_ENGINE_PROXY_CTR_LOD0",
+      "reason": "6.7L not instance-locked for VEH-000001"
+    },
+    {
+      "from": "GEO_POWERTRAIN_ICE_TRANS_6R140_CTR_LOD0",
+      "to": "GEO_POWERTRAIN_ICE_TRANS_PROXY_CTR_LOD0",
+      "reason": "6R140 not instance-locked for VEH-000001"
+    }
+  ],
+  "unmapped_ignore_prefixes": [
+    "Camera",
+    "Light",
+    "Helper",
+    "Empty",
+    "Root",
+    "Scene",
+    "Armature"
+  ],
+  "minimum_unique_comp_ids": 5
+}

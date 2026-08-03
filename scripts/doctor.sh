@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# Product scope: Elektron Local Runtime
+# Purpose: Diagnose installed offline runtime and engine state.
+# Not for EDE workstation validation (use scripts/dev/ede/doctor.sh / npm run ede:doctor).
+#
 # Read-only diagnostics. Mutates nothing.
 set -euo pipefail
 . "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/_common.sh"
