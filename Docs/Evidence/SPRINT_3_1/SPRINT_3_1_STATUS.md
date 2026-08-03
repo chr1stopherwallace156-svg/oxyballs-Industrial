@@ -6,11 +6,15 @@
 | Authoritative Capture source ZIP | `DOWNLOAD-elektron-capture-ios-sprint-3-0-synthetic-spatial.zip` |
 | Source ZIP SHA-256 | `e0576c87a0d61ffe5d7a780943c9a6b2342ba37e9db26f9e8bda0aced914e47c` |
 | Capture tip before work (Sprint 3.0 lineage) | `09a3c36f8413ac59608572d665d08c0b3c4e2c75` |
+| New Capture tip | Content-bound delivery ZIP `DOWNLOAD-elektron-capture-ios-sprint-3-1-rgb-motion.zip` SHA-256 `41d2f3f376c0afc5a7b63ae603d8a46b3b7c7ab426b8e54349851ad18983413e` (no separate Capture git remote tip on this host) |
+| Industrial draft PR head | `eb806b1a3b18a9c63591929aef9bc2cd9833578d` (+ follow-up commits if any) |
 | Linux `swift test` | 383 executed, 3 skipped, 0 failures |
-| Mac `xcodebuild` | `BLOCKED_HOST_CAPABILITY` (see `xcodebuild_attempt.log`) |
+| Mac `xcodebuild` | `BLOCKED_HOST_CAPABILITY` (see `xcodebuild_attempt.log`; log SHA-256 `2dee1e4ca98ac3224433120d28442aca345baf38eee7dc647765bdbd853f7bdb`) |
 | Simulator | `BLOCKED_HOST_CAPABILITY` |
 | Physical device smoke | `BLOCKED_HOST_CAPABILITY` |
+| Controllable package content SHA-256 | `b3466a2f49235f724cffb6114c094deecb2e29f9cde9413fc0da440a3c8d1f94` |
 | ARKit / LiDAR / pose / depth / Phase 4 | **None** |
+| PR status | Draft PR #56 — not merged |
 
 ## Stage A — Apple gate
 

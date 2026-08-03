@@ -1,0 +1,11 @@
+HOST: Linux cloud agent
+COMMAND:
+xcodebuild \
+  -project Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj \
+  -scheme Phase1StillCapture \
+  -destination 'generic/platform=iOS Simulator' \
+  CODE_SIGNING_ALLOWED=NO \
+  clean build
+RESULT: BLOCKED_HOST_CAPABILITY
+EXIT_STATUS: not_executed
+REASON: xcodebuild unavailable on Linux host; no Mac runner in this environment.
