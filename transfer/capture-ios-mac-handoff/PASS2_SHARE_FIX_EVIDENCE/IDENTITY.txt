@@ -1,0 +1,9 @@
+PASS2_TIP_PARENT=e33bb212368858aeddb34743bb0947e84576bd23
+SHARE_FIX_TIP=c59b84da7795373a3f160245fee34325ce000523
+BRANCH=cursor/pass2-share-presentation-d881
+DECISION=P2-004
+SWIFT_TEST=66_executed_1_skipped_0_failures
+HANDOFF_LAYOUT=OK
+BUNDLE_SHA256=5669a1dae55baad26759c2bdc55896a05a1a30dab7873f2777619984953f8d6e
+ZIP_SHA256=086e1b9828bc1d1b661dc1aaf0f54078817ca46ee31cd21841b5bf489de3a379
+NOTE=artifact_original.jpg not re-encoded; diagnostic zip is byte-identical extension copy

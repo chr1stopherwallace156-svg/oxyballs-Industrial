@@ -1,0 +1,43 @@
+{
+  "document_id": "HV_COMMISSIONING_GATE_INDEX",
+  "decision": "DT-D052",
+  "chain": ["05L-A", "05L-B", "05L-C", "05M-A", "05M-B", "05M-C"],
+  "staging_rule": "Do not execute 05M until 05L-C is fully cleaned and defined. After 05L-C exit, only 05M-A then 05M-B then 05M-C.",
+  "ownership": {
+    "VCU": "request_monitor",
+    "BMS_PDU": "contactor_precharge_execution",
+    "hardwired_safety_loop": "emergency_coil_supply_interrupt"
+  },
+  "gates": {
+    "05L-B": {
+      "path": "GATE_05L-B_PRECHARGE_OBSERVATION.md",
+      "status": "READY_WITH_WORDING_CLEANUP_APPLIED",
+      "live_execution_authorized": false,
+      "notes": "Doctrine cleaned; live HV still requires test-plan approval"
+    },
+    "05L-C": {
+      "path": "GATE_05L-C_SHUTDOWN_REPEATABILITY.md",
+      "status": "CLEANED_AND_DEFINED",
+      "live_execution_authorized": false,
+      "weld_tests": ["05L-C-005A", "05L-C-005B"],
+      "notes": "Must complete before 05M review"
+    },
+    "05M-A": {
+      "path": "GATE_05M-A_INVERTER_ZERO_TORQUE_READINESS.md",
+      "status": "DRAFT_CREATED",
+      "live_execution_authorized": false,
+      "requires": ["TORQUE_DISABLED_STATE", "NO_INTENTIONAL_MOTOR_ROTATION", "SUPPLIER_INVERTER_STATE_DEFINITIONS"]
+    },
+    "05M-B": {
+      "path": "GATE_05M-B_NO_LOAD_SPIN.md",
+      "status": "STAGED_OUTLINE_ONLY",
+      "live_execution_authorized": false
+    },
+    "05M-C": {
+      "path": "GATE_05M-C_LOW_SPEED_TRACTION.md",
+      "status": "STAGED_OUTLINE_ONLY",
+      "live_execution_authorized": false
+    }
+  },
+  "global_thresholds": "GLOBAL_INITIAL_TARGET_PROFILE.md"
+}

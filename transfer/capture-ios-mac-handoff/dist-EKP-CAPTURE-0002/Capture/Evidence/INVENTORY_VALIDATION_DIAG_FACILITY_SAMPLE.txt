@@ -1,0 +1,24 @@
+Test Case 'Phase1RuntimeTests.testPackageBuildInventoryAndExtension' started at 2026-07-24 23:55:00.374
+INV_VAL_DIAG package_root.raw=/tmp/phase1-alias-D7ABAACD-3742-43F0-A8DF-1F2D8C47724E/EVD-TEST-PKG-001
+INV_VAL_DIAG package_root.standardized=/tmp/phase1-tests-539F0CC7-9E29-4A29-81E9-8CB39EBDABE3/EVD-TEST-PKG-001
+INV_VAL_DIAG package_root.symlink_resolved=/tmp/phase1-tests-539F0CC7-9E29-4A29-81E9-8CB39EBDABE3/EVD-TEST-PKG-001
+INV_VAL_DIAG alias raw_has_/var/=false resolved_has_/private/var/=false raw_ne_resolved=true
+INV_VAL_DIAG counts discovered_pending entries=7 declared=7 declared_empty=false
+INV_VAL_DIAG declared=capture_device.json
+INV_VAL_DIAG declared=manifest.json
+INV_VAL_DIAG declared=package_status.json
+INV_VAL_DIAG declared=payload/artifact_original.jpg
+INV_VAL_DIAG declared=sidecars/avcapture_metadata.json
+INV_VAL_DIAG declared=sidecars/camera_calibration.json
+INV_VAL_DIAG declared=sidecars/motion_orientation.json
+INV_VAL_DIAG disk.absolute=/tmp/phase1-alias-D7ABAACD-3742-43F0-A8DF-1F2D8C47724E/EVD-TEST-PKG-001/manifest.json relative_key=manifest.json
+INV_VAL_DIAG disk.absolute=/tmp/phase1-alias-D7ABAACD-3742-43F0-A8DF-1F2D8C47724E/EVD-TEST-PKG-001/package_inventory.json relative_key=package_inventory.json
+INV_VAL_DIAG disk.absolute=/tmp/phase1-alias-D7ABAACD-3742-43F0-A8DF-1F2D8C47724E/EVD-TEST-PKG-001/capture_device.json relative_key=capture_device.json
+INV_VAL_DIAG disk.absolute=/tmp/phase1-alias-D7ABAACD-3742-43F0-A8DF-1F2D8C47724E/EVD-TEST-PKG-001/package_status.json relative_key=package_status.json
+INV_VAL_DIAG disk.absolute=/tmp/phase1-alias-D7ABAACD-3742-43F0-A8DF-1F2D8C47724E/EVD-TEST-PKG-001/payload/artifact_original.jpg relative_key=payload/artifact_original.jpg
+INV_VAL_DIAG disk.absolute=/tmp/phase1-alias-D7ABAACD-3742-43F0-A8DF-1F2D8C47724E/EVD-TEST-PKG-001/sidecars/camera_calibration.json relative_key=sidecars/camera_calibration.json
+INV_VAL_DIAG disk.absolute=/tmp/phase1-alias-D7ABAACD-3742-43F0-A8DF-1F2D8C47724E/EVD-TEST-PKG-001/sidecars/motion_orientation.json relative_key=sidecars/motion_orientation.json
+INV_VAL_DIAG disk.absolute=/tmp/phase1-alias-D7ABAACD-3742-43F0-A8DF-1F2D8C47724E/EVD-TEST-PKG-001/sidecars/avcapture_metadata.json relative_key=sidecars/avcapture_metadata.json
+Test Case 'Phase1RuntimeTests.testPackageBuildInventoryAndExtension' passed (0.025 seconds)
+Test Suite 'Phase1RuntimeTests' passed at 2026-07-24 23:55:00.399
+Test Suite 'Selected tests' passed at 2026-07-24 23:55:00.399

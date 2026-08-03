@@ -1,0 +1,38 @@
+{
+  "mepq_id": "MEPQ-005",
+  "operator_alias": "MEPQ-2019-F450-DECON-007",
+  "target_property": "Mid-chassis frame cross-member wall thickness and bracket configuration supporting front fuel-line / shield interfaces",
+  "system_context": "Assess reuse of mid-chassis brackets as HV cable tray attachment planes",
+  "affected_cfgcomp_ids": [
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-XMBR-MID"
+  ],
+  "priority": "HIGH",
+  "status": "DEFERRED",
+  "inference_forbidden_reason": "Sheet thickness and bracket shear capacity are not inferable from bumper-plane datums or frame rail outside width.",
+  "engineering_risk": "Localized fatigue / overstressed webs if HV tray loads guessed onto unknown gauge.",
+  "best_source_tiers": [
+    {
+      "tier": 2,
+      "source_class": "Ford Collision Repair Manual / body repair section cuts (if configuration-applicable)",
+      "notes": "Not acquired. Do not invent thicknesses."
+    },
+    {
+      "tier": 1,
+      "source_class": "BBLB / BAG frame charts + WSM",
+      "src_cand_ids": ["SRC-CAND-000001", "SRC-CAND-000002"]
+    }
+  ],
+  "related_gap_ids": ["KG-010"],
+  "related_mission_ids": ["MISN-000005"],
+  "acquisition_cost_vector": "OEM_LICENSE",
+  "high_roi_purchase_signal": true,
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "honesty_notes": [
+    "XMBR-MID CFGCOMP is placeholder only.",
+    "Deferred with Mission E."
+  ],
+  "decision": "DT-D055",
+  "research_sprint": "RL-024"
+}

@@ -1,0 +1,286 @@
+{
+  "store": "RELATIONSHIPS",
+  "records": {
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-UPFITTER-AFT-CAB",
+          "class": "STRUCTURAL_DATUM",
+          "target_component": null,
+          "status": "DOCUMENT_SUPPORTED"
+        },
+        {
+          "interface_id": "IFACE-AXLE-DATUM-FRONT",
+          "class": "STRUCTURAL_DATUM",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+          "status": "DOCUMENT_SUPPORTED"
+        },
+        {
+          "interface_id": "IFACE-AXLE-DATUM-REAR",
+          "class": "STRUCTURAL_DATUM",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
+          "status": "DOCUMENT_SUPPORTED"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": []
+      }
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-CAB",
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-CAB-PLANE-BACK",
+          "class": "STRUCTURAL_DATUM",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+          "status": "DOCUMENT_SUPPORTED"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": []
+      }
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-AXLE-DATUM-FRONT",
+          "class": "STRUCTURAL_DATUM",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+          "status": "DOCUMENT_SUPPORTED"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": []
+      }
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-AXLE-DATUM-REAR",
+          "class": "STRUCTURAL_DATUM",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+          "status": "DOCUMENT_SUPPORTED"
+        },
+        {
+          "interface_id": "IFACE-FLANGE-DRIVESHAFT-REAR-INPUT",
+          "class": "MECHANICALLY_COUPLED_TO",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT",
+          "status": "OPERATOR_CANDIDATE"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": [
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT"
+        ]
+      }
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-WHEELS",
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-WHEEL-MOUNT-FRONT",
+          "class": "BOLTED_TO",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-FRONT-MONOBEAM",
+          "status": "DOCUMENT_SUPPORTED"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": []
+      }
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-STEERING-GEAR",
+      "known_interfaces": [],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": []
+      }
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK",
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-ENGINE-TO-TRANS",
+          "class": "MECHANICALLY_COUPLED_TO",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+          "status": "OPERATOR_CANDIDATE"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": [
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION"
+        ],
+        "must_disconnect_before": [
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING",
+          "BLOCK-LV-GATEWAY"
+        ]
+      }
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-TRANS-OUTPUT-TO-DRIVESHAFT",
+          "class": "MECHANICALLY_COUPLED_TO",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT",
+          "status": "OPERATOR_CANDIDATE"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": [
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT"
+        ],
+        "must_disconnect_before": [
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK"
+        ]
+      }
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT",
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-FLANGE-DRIVESHAFT-REAR-INPUT",
+          "class": "MECHANICALLY_COUPLED_TO",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR",
+          "status": "OPERATOR_CANDIDATE"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": [
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-AXLE-REAR"
+        ]
+      }
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR",
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-RAD-LOWER-MOUNTS",
+          "class": "BOLTED_TO",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+          "status": "OPERATOR_CANDIDATE"
+        },
+        {
+          "interface_id": "IFACE-RAD-UPPER-BRACE",
+          "class": "BOLTED_TO",
+          "target_component": null,
+          "status": "UNKNOWN"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": [
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK"
+        ]
+      }
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT",
+      "known_interfaces": [
+        {
+          "interface_id": "IFACE-FUEL-TANK-STRAP-AFT",
+          "class": "BOLTED_TO",
+          "target_component": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+          "status": "DOCUMENT_SUPPORTED"
+        }
+      ],
+      "dependency_highlights": {
+        "blocks_access_to": [
+          "PROP-HV-PACK-01"
+        ],
+        "must_disconnect_before": []
+      }
+    },
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING": {
+      "component_id": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-EXHAUST-PIPING",
+      "known_interfaces": [],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": [
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-ENGINE-BLOCK"
+        ]
+      }
+    },
+    "BLOCK-LV-GATEWAY": {
+      "component_id": "BLOCK-LV-GATEWAY",
+      "known_interfaces": [],
+      "dependency_highlights": {
+        "blocks_access_to": [
+          "PROP-INVERTER-01",
+          "PROP-DCDC-01"
+        ],
+        "must_disconnect_before": []
+      }
+    },
+    "PROP-HV-PACK-01": {
+      "component_id": "PROP-HV-PACK-01",
+      "known_interfaces": [],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": [
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FUEL-TANK-AFT"
+        ]
+      }
+    },
+    "PROP-EDU-REAR-01": {
+      "component_id": "PROP-EDU-REAR-01",
+      "known_interfaces": [],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": [
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-TRANSMISSION",
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-DRIVESHAFT"
+        ]
+      }
+    },
+    "PROP-INVERTER-01": {
+      "component_id": "PROP-INVERTER-01",
+      "known_interfaces": [],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": [
+          "BLOCK-LV-GATEWAY"
+        ]
+      }
+    },
+    "PROP-DCDC-01": {
+      "component_id": "PROP-DCDC-01",
+      "known_interfaces": [],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": [
+          "BLOCK-LV-GATEWAY"
+        ]
+      }
+    },
+    "PROP-LTR-01": {
+      "component_id": "PROP-LTR-01",
+      "known_interfaces": [],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": [
+          "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-COOLING-RADIATOR"
+        ]
+      }
+    },
+    "PROP-CCS-PORT-01": {
+      "component_id": "PROP-CCS-PORT-01",
+      "known_interfaces": [],
+      "dependency_highlights": {
+        "blocks_access_to": [],
+        "must_disconnect_before": []
+      }
+    }
+  }
+}

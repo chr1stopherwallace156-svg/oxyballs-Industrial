@@ -2,6 +2,10 @@
 
 3D asset specification for the Elektron digital twin.
 
+## Demonstrator GLB acquisition (VPR-2)
+
+For purchasing or authoring the interactive WebGL vehicle GLB, follow **[`specs/EDTS-SPEC-3D-001_GLB_ACQUISITION.md`](specs/EDTS-SPEC-3D-001_GLB_ACQUISITION.md)** (DT-D063). That gate specializes this document for `CFG-2019-F450-REG-CAB-4X2-60CA-DRW`: front-axle origin CRS, `GEO_*` node separation, budgets, and `mesh_mapping_manifest.json` verification. This file remains the layer-wide twin ruleset.
+
 ## Scope
 
 Applies from L01 onward. L00 defines reference metadata only — no meshes.

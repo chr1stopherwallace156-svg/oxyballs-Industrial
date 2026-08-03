@@ -1,0 +1,3 @@
+Capture tip: 58d4ba006c7a1cabd0e1abfc47da5069d6c1495c
+capture_commit=58d4ba006c7a1cabd0e1abfc47da5069d6c1495c
+audit_date=2026-07-25

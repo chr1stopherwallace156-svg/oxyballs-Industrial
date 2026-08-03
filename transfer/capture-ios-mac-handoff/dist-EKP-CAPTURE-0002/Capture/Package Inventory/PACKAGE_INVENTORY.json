@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "2.0.0",
+  "packageKind": "elektron-capture-ios-handoff-metadata",
+  "stage": "HANDOFF_METADATA_PREPARED",
+  "fileCount": 33,
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 10386,
+      "sha256": "548271886a3c913f895b74e33c67e0737b3e98e469c373fb5504c703bf8a5e4f"
+    },
+    {
+      "path": "CURSOR_OPERATING_RULES.md",
+      "bytes": 7399,
+      "sha256": "755585c5b2abdb7a2df16fbc1d066174d3c5c4754293659dd0bd4f22874cde81"
+    },
+    {
+      "path": "Docs/Capture/PHASE_1C_FINAL_VALIDATION.md",
+      "bytes": 6470,
+      "sha256": "c008f97ffe5a71ad151bb70192934a274eebd9bb91c58b26fbe805780e9dc1bf"
+    },
+    {
+      "path": "Docs/Capture/PHASE_1C_FREEZE_COMMIT_SEPARATION.md",
+      "bytes": 1088,
+      "sha256": "2bdd359f8d2f98ecd26c7b578f846060587db272d61b37e2ae1b8a7433667d76"
+    },
+    {
+      "path": "Docs/Capture/PHASE_1_FREEZE.md",
+      "bytes": 1469,
+      "sha256": "dba3cac01529f5b3594c8a8d15508c5dd02f2fed57d09b4ab0fd32904c65025d"
+    },
+    {
+      "path": "Docs/Changes/CHANGE-0001-phase1c-freeze-preparation.md",
+      "bytes": 3914,
+      "sha256": "5123fdd04b9305608a0685484a8dbda11b65d19d6cffe5893964550d9ff13f64"
+    },
+    {
+      "path": "Docs/Changes/CHANGE-0002-v2-specification-hardening.md",
+      "bytes": 2961,
+      "sha256": "be3e14c46021238f47f3b49c508f037a1491a9a1d4f2fe6d689614345f93221e"
+    },
+    {
+      "path": "Docs/Changes/CHANGE-0004-two-stage-handoff-automation.md",
+      "bytes": 2662,
+      "sha256": "2d5b4772576968bd48085eab13bbf37c5fc2626cf5e32d17b892dee22c5d5b8b"
+    },
+    {
+      "path": "Docs/Changes/TEMPLATE.md",
+      "bytes": 973,
+      "sha256": "b52f9472db35d8e4c9bf4621cca6e97b1169951c6129f3b30ff18c16d7c0e5c4"
+    },
+    {
+      "path": "Docs/Governance/CHANGELOG_AND_HANDOFF_GOVERNANCE.md",
+      "bytes": 8646,
+      "sha256": "6f5405b167ba66fbd8da8e2f7ad0fd91a9ffb701922cfb48dcd972ba262cecbe"
+    },
+    {
+      "path": "Docs/Handoffs/HANDOFF_HISTORY.md",
+      "bytes": 5679,
+      "sha256": "96dea38c56695789d12a87fcb7386aeb2deac22b0ac0c980d43b7e48c85d6f1d"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 2558,
+      "sha256": "7dbc32be4b91d54a89d28988aa7b74d941a1b2d262205d2e703638cf508df73b"
+    },
+    {
+      "path": "OPEN_ITEMS.md",
+      "bytes": 726,
+      "sha256": "7cd3471f725b7254585fa675739a2d1c5844d9850e9227cd61fd4ea78961402a"
+    },
+    {
+      "path": "PACKAGE_INVENTORY.json",
+      "bytes": 5829,
+      "sha256": "d3560d0211d675d691dfb470a0953680326a1e19e6f1ea7564799913ba6a5929"
+    },
+    {
+      "path": "PHASE_1C_FINAL_VALIDATION.md",
+      "bytes": 638,
+      "sha256": "611d05df046500414c276c8da8b64de174c08bd56d09da24ddc355f4d3300e26"
+    },
+    {
+      "path": "REPOSITORY_STATE.md",
+      "bytes": 1008,
+      "sha256": "0d9966e0449e5b2e73aa1dd728ed68da40734d8f23d425b015dd7e6a14a1d7db"
+    },
+    {
+      "path": "Research/Deferred/SemanticMattes/README.md",
+      "bytes": 400,
+      "sha256": "60156bbc0643bdbe98243ce6cf705bd3d0cf9dd7af85fa17f7263b0e6521de2a"
+    },
+    {
+      "path": "Research/IntegrationReports/IR-0001-AVFoundation-Manual-Exposure-and-Focus.md",
+      "bytes": 3298,
+      "sha256": "1ac2aff8f2d5c709e22215faa1c6c25a268d250a3738e6173380862518461beb"
+    },
+    {
+      "path": "Research/README.md",
+      "bytes": 784,
+      "sha256": "39702849cb80206f6efaa0b857895f6d5fcbe81b0aa08ff3dc1f2ad435afb0dc"
+    },
+    {
+      "path": "Research/Spikes/IR-0001/NOTES.md",
+      "bytes": 420,
+      "sha256": "aa0e96f37531ea75f6fc97806ca189d50c0b4576dd2ce41d8a1a6dd7fc022dd1"
+    },
+    {
+      "path": "Research/Spikes/IR-0001/README.md",
+      "bytes": 1563,
+      "sha256": "b1f2dce1e57f28476da7a1e72bd1f0abb14ece874439148386270dca8bcc7b54"
+    },
+    {
+      "path": "Research/Spikes/IR-0001/RESULTS.md",
+      "bytes": 611,
+      "sha256": "bd140057b203a0b8e3bc09cb210601d31fa6eb45ad11c4439a2a5908493ee27c"
+    },
+    {
+      "path": "Specifications/CAPTURE_DEVICE_CAPABILITY_MATRIX.md",
+      "bytes": 7568,
+      "sha256": "698e0d8b52b21dfe9cb7a7fbe7c8e05bd74763f18fe92456f59ab12191a5c557"
+    },
+    {
+      "path": "Specifications/CAPTURE_QUALITY_POLICY.md",
+      "bytes": 5872,
+      "sha256": "e874cbd510a581a26674bc7af4b4a4c9558071c956d7ba28bad0ee5a269cc9b7"
+    },
+    {
+      "path": "Specifications/CAPTURE_SENSOR_FRAMEWORK.md",
+      "bytes": 6716,
+      "sha256": "a347b7117cbf8a2ef113090b8edaeef79f3abbe892745d0ae9137bd56892982d"
+    },
+    {
+      "path": "Specifications/CAPTURE_TELEMETRY_CONTRACT.md",
+      "bytes": 8308,
+      "sha256": "48ea92a11a5fdea6d42854fb0a48c4c7726c53c9868237da991758ed012d1b59"
+    },
+    {
+      "path": "Specifications/CAPTURE_V2_DOMAIN_MODEL.md",
+      "bytes": 6192,
+      "sha256": "41aece404a9c3e869a966bd08c4b23c095476bc1ad3fc74c645387454499a32f"
+    },
+    {
+      "path": "Specifications/ELEKTRON_CAPTURE_V2_SPEC.md",
+      "bytes": 8208,
+      "sha256": "deae758a3b12161482d12b377ee5c3f4ee19b979d5781d4aceadad550039692a"
+    },
+    {
+      "path": "Specifications/GITHUB_INTEGRATION_REVIEW_TEMPLATE.md",
+      "bytes": 1083,
+      "sha256": "72a0d662331665c5e527c35e5795c150a7a52b03ac4c99e844babc458c887e18"
+    },
+    {
+      "path": "Specifications/README.md",
+      "bytes": 1536,
+      "sha256": "603085363f0875e28256f97d9f86916eb15c0b512a27c7f34bfb4a33bd5d4fc2"
+    },
+    {
+      "path": "Specifications/V2_CROSS_SPEC_ENTITY_STATE_REGISTRY.md",
+      "bytes": 4093,
+      "sha256": "c5e329b091245f81c0ba94f26482443e8a943ccfd1f646f2a1f8852918135719"
+    },
+    {
+      "path": "Specifications/V2_SPECS_1_TO_6_CONSISTENCY_REVIEW.md",
+      "bytes": 2603,
+      "sha256": "203a16b0855cc7613a0fd0c4eca3dd704c4338405f4ca8fd81991a70ec89adab"
+    },
+    {
+      "path": "VALIDATION_SUMMARY.md",
+      "bytes": 658,
+      "sha256": "30a10304afb25b48774a5ab1377e2dbc5b7d32694ff1f6ec35d54e7e4bf6fd7b"
+    }
+  ]
+}

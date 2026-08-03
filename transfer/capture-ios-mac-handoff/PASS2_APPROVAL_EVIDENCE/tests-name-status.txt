@@ -1,0 +1,96 @@
+Test Case 'GoldenEvidencePackageTests.testGoldenPackageHashesMatchManifest' passed (0.002 seconds)
+Test Case 'GoldenEvidencePackageTests.testPackageMetaDeclaresCompatibility' passed (0.001 seconds)
+Test Suite 'GoldenEvidencePackageTests' passed at 2026-07-24 17:33:43.218
+Executed 2 tests, with 0 failures (0 unexpected) in 0.003 (0.003) seconds
+Test Case 'AuthorityGuardTests.testAllowsNeutralText' passed (0.0 seconds)
+Test Case 'AuthorityGuardTests.testRejectsForbiddenClaims' passed (0.0 seconds)
+Test Suite 'AuthorityGuardTests' passed at 2026-07-24 17:33:43.219
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Case 'CaptureSessionStateMachineTests.testGuidanceAuthorityDefaultForPose' passed (0.0 seconds)
+Test Case 'CaptureSessionStateMachineTests.testIllegalTransitionThrows' passed (0.0 seconds)
+Test Case 'CaptureSessionStateMachineTests.testLegalTransition' passed (0.0 seconds)
+Test Suite 'CaptureSessionStateMachineTests' passed at 2026-07-24 17:33:43.219
+Executed 3 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Case 'CaptureSideStatusTests.testAcceptsCaptureSideStatuses' passed (0.0 seconds)
+Test Case 'CaptureSideStatusTests.testDirectiveApprovedIsNotImplementationComplete' passed (0.0 seconds)
+Test Case 'CaptureSideStatusTests.testRejectsAllRegistryEdtsOwnedStatuses' passed (0.0 seconds)
+Test Suite 'CaptureSideStatusTests' passed at 2026-07-24 17:33:43.219
+Executed 3 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Case 'ContentHasherTests.testSha256KnownVector' passed (0.0 seconds)
+Test Suite 'ContentHasherTests' passed at 2026-07-24 17:33:43.219
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+/home/ubuntu/Elektron/elektron-capture-ios/Tests/Unit/CrossLanguageCanonicalJSONTests.swift:16: CrossLanguageCanonicalJSONTests.testSwiftCanonicalBytesMatchPythonGolden : Test skipped - CROSS_LANGUAGE_CANONICAL_JSON gate requires Darwin JSONSerialization boolean identity
+Test Case 'CrossLanguageCanonicalJSONTests.testSwiftCanonicalBytesMatchPythonGolden' skipped (0.0 seconds)
+Test Suite 'CrossLanguageCanonicalJSONTests' passed at 2026-07-24 17:33:43.219
+Executed 1 test, with 1 test skipped and 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONIndependentOfInsertionOrder' passed (0.001 seconds)
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONRejectsNonFinite' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONStable' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsAnonymousPoseFrames' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsDerivativeWithoutParent' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsEmptyHash' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsEngineeringVerifiedFromCapture' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsForbiddenClaimEmbeddedInExportValidation' passed (0.1 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsMeasurementWithoutUnit' passed (0.0 seconds)
+Test Suite 'EvidenceManifestValidatorTests' passed at 2026-07-24 17:33:43.322
+Executed 9 tests, with 0 failures (0 unexpected) in 0.102 (0.102) seconds
+Test Case 'ImmutableFileStoreTests.testWriteImmutablePreventsOverwrite' passed (0.002 seconds)
+Test Suite 'ImmutableFileStoreTests' passed at 2026-07-24 17:33:43.324
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Case 'MockEDTSClientTests.testAdapterMocksLabeled' passed (0.001 seconds)
+Test Case 'MockEDTSClientTests.testBuiltinPlanLoads' passed (0.001 seconds)
+Test Case 'MockEDTSClientTests.testMockIsLabeled' passed (0.0 seconds)
+Test Case 'MockEDTSClientTests.testSubmitAcceptsEvidenceManifestPresence' passed (0.001 seconds)
+Test Case 'MockEDTSClientTests.testSubmitRejectsMissingManifest' passed (0.0 seconds)
+Test Suite 'MockEDTSClientTests' passed at 2026-07-24 17:33:43.327
+Executed 5 tests, with 0 failures (0 unexpected) in 0.003 (0.003) seconds
+Test Case 'Pass1CanonicalInventoryTests.testInventoryValidatorAcceptsNSNumberByteSize' passed (0.007 seconds)
+Test Case 'Pass1CanonicalInventoryTests.testInventoryValidatorFlagsUndeclaredPath' passed (0.007 seconds)
+Test Case 'Pass1CanonicalInventoryTests.testSwiftLiteralCorpusMatchesPythonGoldenBytes' passed (0.001 seconds)
+Test Case 'Pass1CanonicalInventoryTests.testUnicodeEnsureAsciiEscapes' passed (0.0 seconds)
+Test Suite 'Pass1CanonicalInventoryTests' passed at 2026-07-24 17:33:43.342
+Executed 4 tests, with 0 failures (0 unexpected) in 0.015 (0.015) seconds
+Test Case 'Pass2PreviewReviewGateTests.testExportApprovedDetectsTamperedFrozenSha' passed (0.001 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testExportApprovedHashInvariance' passed (0.018 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testExportFailureReturnsToApproved' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testFreezeFromDelegateBytesComputesShaImmediately' passed (0.001 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testFreezeRejectsEmptyBytes' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testHappyPathTransitions' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testIllegalSkipReviewRejected' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testPackageWriteOnlyViaExporting' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testPromoteDoesNotRecalculateOrReplaceBytes' passed (0.001 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testRetakeFromReviewAndApproved' passed (0.0 seconds)
+Test Suite 'Pass2PreviewReviewGateTests' passed at 2026-07-24 17:33:43.364
+	 Executed 10 tests, with 0 failures (0 unexpected) in 0.022 (0.022) seconds
+Test Case 'Phase1RuntimeTests.testCalibrationUnavailableByDefault' passed (0.015 seconds)
+Test Case 'Phase1RuntimeTests.testCanonicalJSONAcceptsUInt64Leaf' passed (0.0 seconds)
+Test Case 'Phase1RuntimeTests.testCanonicalJSONRejectsBoxedNilOptional' passed (0.101 seconds)
+Test Case 'Phase1RuntimeTests.testCanonicalManifestMatchesPythonGoldenBytes' passed (0.002 seconds)
+Test Case 'Phase1RuntimeTests.testCanonicalManifestRoundTrip' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testCaptureSideValidatorDoesNotClaimEdtsGates' passed (0.021 seconds)
+Test Case 'Phase1RuntimeTests.testEndToEndPackageWithPhysicalDeviceNilOptionals' passed (0.016 seconds)
+Test Case 'Phase1RuntimeTests.testFailureCleanupRemovesIncompletePackage' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testHashMismatchOnCorruptReadback' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testLifecycleStatusesAreCaptureOwned' passed (0.0 seconds)
+Test Case 'Phase1RuntimeTests.testPackageBuildInventoryAndExtension' passed (0.016 seconds)
+[Phase1Capture] stage=test_buggy_optional event=canonicalization_failed stage=test_buggy_optional | swiftErrorType=CaptureError | describing=packageInvalid("Unsupported JSON type Optional<Bool> (nil Optional boxed as Any; use NSNull() or omit the key). value=nil") | reflecting=ElektronCapture.CaptureError.packageInvalid("Unsupported JSON type Optional<Bool> (nil Optional boxed as Any; use NSNull() or omit the key). value=nil") | localizedDescription=The operation could not be completed. (ElektronCapture.CaptureError error 1.) | unsupportedValues=lidar_available type=Optional<Bool> describing=nil
+[Phase1Capture] stage=test_buggy_optional event=canonicalization_failed stage=test_buggy_optional | swiftErrorType=CaptureError | describing=packageInvalid("Unsupported JSON type Optional<Bool> (nil Optional boxed as Any; use NSNull() or omit the key). value=nil") | reflecting=ElektronCapture.CaptureError.packageInvalid("Unsupported JSON type Optional<Bool> (nil Optional boxed as Any; use NSNull() or omit the key). value=nil") | localizedDescription=The operation could not be completed. (ElektronCapture.CaptureError error 1.) | unsupportedValues=lidar_available type=Optional<Bool> describing=nil
+Test Case 'Phase1RuntimeTests.testPhysicalDeviceProvenanceDictionaryCanonicalizes' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testPhysicalDeviceStatusPayloadWithClockCanonicalizes' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testReadbackSha256MatchesStreamingHash' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testReasonCodesAreStable' passed (0.0 seconds)
+Test Case 'Phase1RuntimeTests.testStatusOwnerRejectsEdtsCodes' passed (0.0 seconds)
+Test Suite 'Phase1RuntimeTests' passed at 2026-07-24 17:33:43.543
+Executed 16 tests, with 0 failures (0 unexpected) in 0.179 (0.179) seconds
+Test Case 'ProductionConfigurationGuardTests.testDevelopmentAllowsMocks' passed (0.0 seconds)
+Test Case 'ProductionConfigurationGuardTests.testProductionRejectsMocks' passed (0.101 seconds)
+Test Case 'ProductionConfigurationGuardTests.testTestAllowsMocks' passed (0.0 seconds)
+Test Suite 'ProductionConfigurationGuardTests' passed at 2026-07-24 17:33:43.644
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.101 (0.101) seconds
+Test Case 'UncertainValueTests.testUnknownUncertaintyWhenNil' passed (0.0 seconds)
+Test Suite 'UncertainValueTests' passed at 2026-07-24 17:33:43.644
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'debug.xctest' passed at 2026-07-24 17:33:43.644
+Executed 61 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.428 (0.428) seconds
+Test Suite 'All tests' passed at 2026-07-24 17:33:43.644
+Executed 61 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.428 (0.428) seconds
