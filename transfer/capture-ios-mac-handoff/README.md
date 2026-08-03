@@ -90,3 +90,26 @@ open Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj
 
 Root cause: nil `Optional` fields in `capture_device.json` encoded as `NSNull` (was boxed as `Any` → `CanonicalJSON` rejected `Optional.none`).
 
+## Historical — P1R-001 incident record + repair (`21d24e81`)
+
+Preserved under commit-scoped names so they do not overwrite the generic handoff bundle/zip paths.
+
+| Field | Value |
+|---|---|
+| Capture tip | `21d24e8131426511d79dcda812721ac1e3104a7c` |
+| Branch | `cursor/canonicalization-failed-repair-d881` |
+| Includes | `Docs/Incidents/PHASE_1_RUNTIME_INCIDENT_001.md` (+ ADR-001) |
+| Bundle | `elektron-capture-ios-21d24e81.bundle` |
+| Bundle SHA-256 | `83b061ca2ced452bffe6b10277e6bb4f8aa0ffccb15678992066e5c9664589c7` |
+| ZIP | `elektron-capture-ios-21d24e81-working-tree.zip` |
+| ZIP SHA-256 | `34943780314eee07a6b0b3e7d4273e8116d97f47c30c43e26ec7d3acc47ecb77` |
+| Status | `PENDING_PHYSICAL_DEVICE_RETEST` (not physical closure of P1R-001) |
+
+```bash
+git clone elektron-capture-ios-21d24e81.bundle elektron-capture-ios
+cd elektron-capture-ios
+git checkout cursor/canonicalization-failed-repair-d881
+open Docs/Incidents/PHASE_1_RUNTIME_INCIDENT_001.md
+open Apps/Phase1StillCapture/Phase1StillCapture.xcodeproj
+```
+
