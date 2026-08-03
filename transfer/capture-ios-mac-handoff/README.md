@@ -210,3 +210,26 @@ swift test
 open Apps/Phase1StillCapture/Phase1StillCapture.xcworkspace
 ```
 
+
+## Historical — professional Take→Approve→Export UX CANDIDATE (`2f61be34`)
+
+**Not** Phase 1 complete. Prefer pin-named files; do **not** use generic `elektron-capture-ios-complete.bundle` / `elektron-capture-ios-working-tree.zip` for this tip.
+
+| Field | Value |
+|---|---|
+| Capture tip | `2f61be34f37b72367b9a7945ff9e192dc2580789` |
+| Workflow | PREVIEWING → CAPTURING → REVIEWING → APPROVED → EXPORTED |
+| Bundle | `elektron-capture-ios-pro-ux.bundle` |
+| Bundle SHA-256 | `412ee5ed69803a27603122090dc0471ec7faff365801990937b1464d5d7ab99a` |
+| ZIP | `elektron-capture-ios-pro-ux.zip` |
+| ZIP SHA-256 | `26940209b3ba3c3e99f34b1eba7a0a0382f9e37ccc55789e80061d07839b08bd` |
+| Manifest | `CANDIDATE_HANDOFF_MANIFEST_2f61be34.md` |
+| Cloud `swift test` | 66 executed, 1 skipped, 0 failures |
+
+```bash
+git clone elektron-capture-ios-pro-ux.bundle elektron-capture-ios-pro-ux
+cd elektron-capture-ios-pro-ux
+git rev-parse HEAD   # must be 2f61be34f37b72367b9a7945ff9e192dc2580789
+swift test
+open Apps/Phase1StillCapture/Phase1StillCapture.xcworkspace
+```
