@@ -1,0 +1,36 @@
+{
+  "decision_id": "DT-D063",
+  "title": "Accept EDTS-SPEC-3D-001 GLB acquisition & authoring gate for VPR-2",
+  "status": "ACCEPTED",
+  "date_utc": "2026-07-21",
+  "related_locks": ["RL-032"],
+  "summary": "Lock technical criteria for purchasing, commissioning, or authoring the demonstrator vehicle GLB. Config boundary equals CFG-2019-F450-REG-CAB-4X2-60CA-DRW. Require separable GEO_ nodes, front-axle origin CRS, PBR/ORM, and automated verifyMeshMapping against mesh_mapping_manifest.json before Tier-2 admit. Prefer PROXY powertrain node names; treat vendor 6.7L/6R140 names as OPTION_DEPENDENT aliases. Acquisition does not authorize geometry freeze, ASSERTION_VERIFIED mesh, invented mass, or procedure generation.",
+  "accepted_artifacts": [
+    "elektron-digital-twin-foundation/specs/EDTS-SPEC-3D-001_GLB_ACQUISITION.md",
+    "edts-visible-progress/src/data/mesh_mapping_manifest.json",
+    "edts-visible-progress/src/data/verifyMeshMapping.ts",
+    "edts-visible-progress/qa/GLB_ACCEPTANCE_CHECKLIST.md",
+    "edts-visible-progress/public/assets/glb/README.md"
+  ],
+  "format_gates": {
+    "format": "GLB_GLTF2",
+    "units": "meters",
+    "max_mb": 25,
+    "max_triangles_lod0": 150000,
+    "max_materials": 30,
+    "up": "+Y",
+    "origin": "FRONT_AXLE_MIDLINE"
+  },
+  "recommended_decision": "SPEC_3D_001_ACCEPTED_GLB_NOT_YET_ACQUIRED",
+  "glb_status": "NOT_ACQUIRED",
+  "geometry_extraction_authorized": false,
+  "geometry_freeze_authorized": false,
+  "procedure_generation": "PROCEDURE_GENERATION_NOT_AUTHORIZED",
+  "kernel_mutation": false,
+  "honesty": [
+    "No invented OEM STEP/CAD claim",
+    "No aluminum assertion via cab node name",
+    "No 6.7L / 6R140 instance lock without build sheet",
+    "PLACEHOLDER_GEOMETRY until measured"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "document_id": "MEDIA_CANDIDATE_REGISTER",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "next_id": "MEDIA-000002",
+  "decision": "DT-D044",
+  "candidates": [
+    {
+      "media_id": "MEDIA-000001",
+      "path": "research/media_candidates/MEDIA-000001.json",
+      "supports_gaps": [
+        "KG-001"
+      ],
+      "url_status": "DISCOVERED_VIA_SEARCH_CANDIDATE"
+    }
+  ]
+}
