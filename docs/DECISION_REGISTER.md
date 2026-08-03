@@ -29,6 +29,24 @@ later entry that references it.
   4. Authoritative backlog: `Docs/Architecture/PHASE_3_VALIDATION_BACKLOG.md`.
 - Consequences: PR merges for 3.2–3.5 may be classified `SOURCE_FOUNDATION_MERGED` / `APPLE_RUNTIME_UNVALIDATED` without waiting for hardware.
 
+
+## D-020 — Sprint 3.2 pose + spatiotemporal correlation (Foundation/fixture)
+
+- Date: 2026-08-03
+- Status: Proposed
+- Activation: Upon merge of PR #57
+- Context: Pose/spatiotemporal types and validators are required before Sprint 3.6 device pose validation; Mac Stage A gate remains blocked on Linux, but Foundation-portable pose law must not wait on ARKit host capability.
+- Decision:
+  1. Expand `PoseSample` with Vector3D/QuaternionD, tracking state/reason, explicit source/destination frames, and AR world epoch fields (`frame_epoch_id`, `session_run_id`, `world_origin_revision`); fixture schema `PoseSample@1.0.0-phase3-fixture`. Cross-epoch joins fail closed.
+  2. `PoseSensorAdapter` is Foundation-portable; Apple ARKit lives only under `App/AppleSensors/AppleARKitPoseSensorAdapter.swift` with `#if canImport(ARKit)` and throws `APPLE_POSE_SOURCE_CANDIDATE_UNCOMPILED` on Linux.
+  3. Cross-domain time compares require explicit `ClockCorrelation` with stable `correlation_id` (stale/ambiguous fail closed); camera↔pose binding requires `PoseAssociationRecord` bound to that correlation and epoch identity.
+  4. Primary integration fixture identities are `SPKG-FIXTURE-CAMERA-POSE-*` / `SESS-FIXTURE-CAMERA-POSE-*` with dual-stream camera+pose (motion/depth `NOT_REQUESTED`). Pose-only `SPKG-FIXTURE-POSE-*` may exist only for explicitly named negative/unit fixtures, never as the primary package.
+  5. Authority separation: `evidence_origin_authority=TEST_FIXTURE` vs `pose_estimate_authority=GUIDANCE_ESTIMATE` (never conflate).
+  6. Transform graph permits consistent reciprocal pairs (`CONSISTENT_RECIPROCAL_TRANSFORM`); rejects `INCONSISTENT_RECIPROCAL_TRANSFORM`, `AMBIGUOUS_TRANSFORM_PATH`, `DEGENERATE_TRANSFORM`, and length≥3 cycles as `UNSUPPORTED_COMPLEX_CYCLE` (not mislabeled inconsistent). Fixture validation uses exact/canonical fixture comparison with `characterization_status=PENDING_CHARACTERIZATION` and `system_tolerance=NO_SYSTEM_TOLERANCE_ASSIGNED` — no system-wide physical tolerance.
+  7. Capability snapshots for fixture packages use `SpatialCapabilitySnapshot@1.0.0-phase3-fixture` (standalone and embedded must agree).
+- Consequences: Sprint 3.6 still required for physical ARKit validation; Sprint 3.3 LiDAR remains separate; no Phase 4/mesh/SfM/CAD claims; APPLE_RUNTIME_UNVALIDATED until 3.6.
+
+
 ## D-019 — Sprint 3.1 RGB/motion production adapter foundation (draft PR)
 
 - Date: 2026-08-03
