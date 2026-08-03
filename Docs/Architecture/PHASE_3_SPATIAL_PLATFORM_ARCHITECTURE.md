@@ -2,25 +2,34 @@
 
 | Field | Value |
 |---|---|
-| Status | **ARCHITECTURE_ACCEPTED — SYNTHETIC SLICE AUTHORIZED** |
-| Version | **1.7.0** |
+| Status | **ARCHITECTURE_ACCEPTED — SOURCE SPRINTS MAY ADVANCE UNDER DUAL STATUS PLANES** |
+| Version | **1.8.0** |
 | Date | 2026-08-03 |
 | Path | `Docs/Architecture/PHASE_3_SPATIAL_PLATFORM_ARCHITECTURE.md` |
 | Applies to | `elektron-capture-ios` Phase 3 |
 | Prerequisite (synthetic scope) | Formal Architecture Audit closed + P0 ADRs P3-001…P3-006 accepted; Phase 0–2.3 contracts remain authoritative |
-| Prerequisite (production Apple adapters) | Mac `xcodebuild` on `Phase1StillCapture` **PASSED** and physical-device smoke evidence **PASSED**; recorded under `Docs/Evidence/SPRINT_3_1/` |
-| Related | `COORDINATE_FRAME_STANDARD.md`, `TIMESTAMP_STANDARD.md`, `SYSTEM_BOUNDARIES.md`, `ENGINEERING_GUARDRAILS.md`, `STATUS_TAXONOMY.md`, `ADR-SESSION-REVISION-OCC.md`, `ADR-SESSION-RECOVERY-AND-QUARANTINE.md`, `Docs/Architecture/PHASE_3_FORMAL_ARCHITECTURE_AUDIT.md` |
-| Supersedes | Drafts 1.0.0–1.6.0 |
+| Prerequisite (production Apple **validation claim**) | Mac `xcodebuild` + physical-device smoke **PASSED** under Sprint 3.6 evidence (`Docs/Evidence/SPRINT_3_6/`) |
+| Related | `PHASE_3_VALIDATION_BACKLOG.md`, `COORDINATE_FRAME_STANDARD.md`, `TIMESTAMP_STANDARD.md`, `SYSTEM_BOUNDARIES.md`, `ENGINEERING_GUARDRAILS.md`, `STATUS_TAXONOMY.md`, `ADR-SESSION-REVISION-OCC.md`, `ADR-SESSION-RECOVERY-AND-QUARANTINE.md`, `Docs/Architecture/PHASE_3_FORMAL_ARCHITECTURE_AUDIT.md` |
+| Supersedes | Drafts 1.0.0–1.7.0 |
 
 **This document is the Phase 3 engineering constitution.**
 
-**Authorized now (Sprint 3.1 code surface):** Foundation-portable RGB/motion contracts, controllable failure harness, and Apple-only AVFoundation/CoreMotion adapter implementations gated behind `#if canImport`. ARKit pose, LiDAR/depth, meshing, SfM, CAD, and AI remain forbidden.
+### Dual status planes (mandatory)
 
-**Execution claim gate:** Declaring *production Apple adapter validation PASSED* still requires Mac `xcodebuild` + physical-device smoke evidence. Linux hosts must record `BLOCKED_HOST_CAPABILITY` honestly.
+```text
+IMPLEMENTATION_STATE   — source/contracts/fixtures/Apple candidates may advance on Linux
+VALIDATION_STATE       — Mac compilation + physical runtime (Sprint 3.6 concentrates promotion)
+```
 
-**Next Gate:** Mac `xcodebuild` + physical-iPhone smoke proof (`BLOCKED_HOST_CAPABILITY` on Linux agents until recorded PASSED).
+For Sprints 3.2–3.5: `SOURCE_IMPLEMENTATION=MAY_ADVANCE`, `LINUX/FIXTURE_VALIDATION=REQUIRED`, `MAC_COMPILATION=PENDING`, `PHYSICAL_DEVICE_RUNTIME=PENDING`, `PRODUCTION_VALIDATION_CLAIM=FORBIDDEN`.
 
-**Next Implementation after gate evidence:** ARKit pose + real clock correlation (Sprint 3.2); then LiDAR/depth (Sprint 3.3).
+Merge classification when Linux gates pass: `SOURCE_FOUNDATION_MERGED` / `APPLE_RUNTIME_UNVALIDATED`.
+
+Fixtures use `SPKG-FIXTURE-*` + `TEST_FIXTURE`. Physical `SPKG-DEVICE-*` reserved for Sprint 3.6.
+
+**Authorized implementation now:** Foundation-portable sensor contracts through the current source sprint; Apple framework code only under `App/AppleSensors` with `#if canImport`. Declaring production Apple validation **PASSED** remains forbidden until Sprint 3.6 evidence.
+
+**Roadmap:** 3.1 RGB/motion → 3.2 pose/clocks/frames → 3.3 depth → 3.4 orchestration → 3.5 quality/coverage guidance → 3.6 Mac+device promotion.
 
 **Audit provenance:** original Formal Architecture Audit v1.0.0 is preserved at `Docs/Architecture/PHASE_3_FORMAL_ARCHITECTURE_AUDIT_V1_0_ARCHIVE.md` (extracted from base `a1982ed106352b48c5ea96a8b2caf8f1f9fdceed`); closure record is `PHASE_3_FORMAL_ARCHITECTURE_AUDIT.md` v1.1.0.
 
