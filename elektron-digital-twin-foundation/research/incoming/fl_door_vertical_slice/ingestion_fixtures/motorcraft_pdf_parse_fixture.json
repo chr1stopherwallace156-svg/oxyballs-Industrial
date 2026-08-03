@@ -1,0 +1,53 @@
+{
+  "fixture_id": "INGEST-FIXTURE-MOTORCRAFT-PDF-PARSE-SYNTHETIC",
+  "purpose": "Prepare ingestion pipeline fixtures for Motorcraft Workshop PDF parsing without fabricating real WSM/EWD bytes or hashes.",
+  "decision": "DT-D050",
+  "rules": [
+    "Do not fabricate file hashes or torque values.",
+    "Keep sha256 null until raw PDF bytes are deposited in research/incoming/.",
+    "Parser output claims max out at ASSERTION_EXTRACTED until token-anchor ASSERTION_VERIFIED.",
+    "Reject any generated edge that fails egs_v1.validate."
+  ],
+  "placeholder_targets": [
+    {
+      "src_cand_id": "SRC-CAND-000002",
+      "expected_section": "501-14",
+      "local_file_path": null,
+      "sha256": null,
+      "lifecycle_status": "SOURCE_DISCOVERED",
+      "parser_job": "extract_torque_table_window_regulator_fl"
+    },
+    {
+      "src_cand_id": "SRC-CAND-000006",
+      "expected_section": "EWD Cell 59 Power Windows",
+      "local_file_path": null,
+      "sha256": null,
+      "lifecycle_status": "SOURCE_DISCOVERED",
+      "parser_job": "extract_connector_pinout_fl_door_regulator"
+    }
+  ],
+  "synthetic_parse_output_example": {
+    "note": "SYNTHETIC ONLY — values null; demonstrates schema shape for intake",
+    "assertions": [
+      {
+        "property_key": "torque_specification",
+        "value": null,
+        "unit": "Nm",
+        "status": "UNRESOLVED_SOURCE_REQUIRED",
+        "token_anchor": null,
+        "page": null
+      },
+      {
+        "property_key": "pin_count",
+        "value": null,
+        "status": "UNRESOLVED_SOURCE_REQUIRED",
+        "token_anchor": null,
+        "page": null
+      }
+    ]
+  },
+  "acquired_public_sources_ready_for_future_parse": [
+    "SRC-CAND-000001",
+    "SRC-CAND-000008"
+  ]
+}

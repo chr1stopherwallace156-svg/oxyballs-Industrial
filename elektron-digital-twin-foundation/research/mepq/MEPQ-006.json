@@ -1,0 +1,40 @@
+{
+  "mepq_id": "MEPQ-006",
+  "operator_alias": "MEPQ-2019-F450-METROLOGY-008",
+  "target_property": "Frame rail aft vertical-web hole positional tolerances, flatness, and hole edge-distance limits",
+  "system_context": "Rear structural battery cradle mounting interface (feeds L3 PROP-BATTERY-AFT; does not invent L1 geometry)",
+  "affected_cfgcomp_ids": [
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME-RAIL-LH",
+    "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME-RAIL-RH"
+  ],
+  "priority": "CRITICAL",
+  "status": "DEFERRED",
+  "inference_forbidden_reason": "Hole positional tolerances and edge distances cannot be inferred from tank capacity or frame outside width.",
+  "engineering_risk": "Pre-machined cradle mismatch, fastener shear, hole ovalization under fatigue.",
+  "best_source_tiers": [
+    {
+      "tier": 2,
+      "source_class": "Frame dimension charts / BBLB",
+      "src_cand_ids": ["SRC-CAND-000001"]
+    },
+    {
+      "tier": 5,
+      "source_class": "On-chassis CMM / portable arm metrology on physical mule",
+      "notes": "Physical asset intake required; AJR before purchase of metrology services/assets"
+    }
+  ],
+  "related_gap_ids": ["KG-011"],
+  "related_mission_ids": ["MISN-000005"],
+  "acquisition_cost_vector": "PHYSICAL_MEASUREMENT",
+  "high_roi_purchase_signal": true,
+  "bound_vehicle_instance_id": "VEH-000001",
+  "bound_configuration_id": "CFG-000001",
+  "honesty_notes": [
+    "Operator 'Estimated Hours Saved' and 'Confidence Gain' are L2/L3 planning metadata — not L1 truth.",
+    "Blocking level labels are project management only.",
+    "Complements MEPQ-004 (hole centers/torque); this node focuses on tolerance/flatness/edge distance.",
+    "Deferred with Mission E / aft battery proposal path."
+  ],
+  "decision": "DT-D056",
+  "research_sprint": "RL-025"
+}

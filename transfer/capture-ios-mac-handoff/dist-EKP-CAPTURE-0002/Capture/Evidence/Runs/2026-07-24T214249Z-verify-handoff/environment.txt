@@ -1,0 +1,4 @@
+uname: Linux cursor 6.12.94+ #1 SMP PREEMPT_DYNAMIC Mon Jul  6 18:05:21 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+Swift version 5.10.1 (swift-5.10.1-RELEASE)
+Target: x86_64-unknown-linux-gnu
+xcodebuild: missing

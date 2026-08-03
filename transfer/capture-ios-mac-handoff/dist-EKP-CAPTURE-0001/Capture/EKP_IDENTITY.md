@@ -1,0 +1,11 @@
+# EKP-CAPTURE-0001
+
+| Field | Value |
+|------|---------|
+| subsystem | Capture |
+| generatedAt | 2026-07-25T04:59:15Z |
+| sourceCommit | `792f6b42430b87f7bbd09c88e922b4594436f579` |
+| sourceBranch | `cursor/ekp-knowledge-artifacts-d881` |
+| Track A | `PHASE_1C_VALIDATION_PASSED_IN_ZIP_SNAPSHOT_PENDING_AUTHORITATIVE_REPOSITORY_EQUIVALENCE_AND_FREEZE` |
+| Track B | `BASELINE_APPROVAL_PENDING_FINAL_ARCHITECTURAL_REVIEW` |
+| IR | `IR_0001_EXECUTION_NOT_YET_AUTHORIZED` |

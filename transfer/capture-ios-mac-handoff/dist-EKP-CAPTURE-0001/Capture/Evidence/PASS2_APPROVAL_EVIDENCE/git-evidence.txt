@@ -1,0 +1,74 @@
+=== git rev-parse ===
+HEAD=a47739f1472e0e33779ed709a65adc4bb0ec72c4
+PARENT=9c35de663f3a64543738b57bc49426cd46256da0
+PASS1_TIP=9c35de663f3a64543738b57bc49426cd46256da0
+
+commit a47739f1472e0e33779ed709a65adc4bb0ec72c4
+Author:     Cursor Agent <cursoragent@cursor.com>
+AuthorDate: Fri Jul 24 17:33:34 2026 +0000
+Commit:     Cursor Agent <cursoragent@cursor.com>
+CommitDate: Fri Jul 24 17:33:34 2026 +0000
+
+    feat(pass2): preview, review gate, and post-delegate hash freeze
+    
+    Add Pass 2 still UI state machine (preview → capture → review →
+    approve → export), InteractiveStillCaptureController with warm-up
+    shutter gate, pending/approved freeze at photo delegate, and
+    exportApproved hash-invariance path. Pass 3 camera controls remain
+    out of scope. Preserve Pass 1 integrity gates; add Pass2 unit tests
+    and Decision Log P2-001…P2-003.
+
+=== git show --summary HEAD ===
+commit a47739f1472e0e33779ed709a65adc4bb0ec72c4
+Author: Cursor Agent <cursoragent@cursor.com>
+Date:   Fri Jul 24 17:33:34 2026 +0000
+
+    feat(pass2): preview, review gate, and post-delegate hash freeze
+    
+    Add Pass 2 still UI state machine (preview → capture → review →
+    approve → export), InteractiveStillCaptureController with warm-up
+    shutter gate, pending/approved freeze at photo delegate, and
+    exportApproved hash-invariance path. Pass 3 camera controls remain
+    out of scope. Preserve Pass 1 integrity gates; add Pass2 unit tests
+    and Decision Log P2-001…P2-003.
+
+ App/Capture/AVFoundation/CameraPreviewView.swift   |  31 ++
+ .../AVFoundation/Phase1CameraServices.swift        | 282 +++++++++--
+ App/Phase1/Phase1CaptureCoordinator.swift          |  59 +++
+ App/Phase1/Phase1StillCaptureUIState.swift         | 148 ++++++
+ .../Phase1StillCapture/Phase1CaptureRootView.swift | 558 ++++++++++++++++-----
+ Docs/Capture/PASS_APPROVAL_EVIDENCE_STANDARD.md    |   5 +-
+ Docs/Capture/PHASED_EXECUTION_GATES.md             |  39 +-
+ Docs/Decisions/DECISION_LOG.md                     |  49 ++
+ Docs/Evidence/PASS2_DEVICE_VALIDATION.md           |  51 ++
+ Tests/Unit/Pass2PreviewReviewGateTests.swift       | 165 ++++++
+ 10 files changed, 1213 insertions(+), 174 deletions(-)
+ create mode 100644 App/Capture/AVFoundation/CameraPreviewView.swift
+ create mode 100644 App/Phase1/Phase1StillCaptureUIState.swift
+ create mode 100644 Docs/Evidence/PASS2_DEVICE_VALIDATION.md
+ create mode 100644 Tests/Unit/Pass2PreviewReviewGateTests.swift
+
+=== git diff --stat PARENT..HEAD ===
+ App/Capture/AVFoundation/CameraPreviewView.swift   |  31 ++
+ .../AVFoundation/Phase1CameraServices.swift        | 282 +++++++++--
+ App/Phase1/Phase1CaptureCoordinator.swift          |  59 +++
+ App/Phase1/Phase1StillCaptureUIState.swift         | 148 ++++++
+ .../Phase1StillCapture/Phase1CaptureRootView.swift | 558 ++++++++++++++++-----
+ Docs/Capture/PASS_APPROVAL_EVIDENCE_STANDARD.md    |   5 +-
+ Docs/Capture/PHASED_EXECUTION_GATES.md             |  39 +-
+ Docs/Decisions/DECISION_LOG.md                     |  49 ++
+ Docs/Evidence/PASS2_DEVICE_VALIDATION.md           |  51 ++
+ Tests/Unit/Pass2PreviewReviewGateTests.swift       | 165 ++++++
+ 10 files changed, 1213 insertions(+), 174 deletions(-)
+
+=== git diff --name-status 9c35de6..HEAD ===
+A	App/Capture/AVFoundation/CameraPreviewView.swift
+M	App/Capture/AVFoundation/Phase1CameraServices.swift
+M	App/Phase1/Phase1CaptureCoordinator.swift
+A	App/Phase1/Phase1StillCaptureUIState.swift
+M	Apps/Phase1StillCapture/Phase1CaptureRootView.swift
+M	Docs/Capture/PASS_APPROVAL_EVIDENCE_STANDARD.md
+M	Docs/Capture/PHASED_EXECUTION_GATES.md
+M	Docs/Decisions/DECISION_LOG.md
+A	Docs/Evidence/PASS2_DEVICE_VALIDATION.md
+A	Tests/Unit/Pass2PreviewReviewGateTests.swift
