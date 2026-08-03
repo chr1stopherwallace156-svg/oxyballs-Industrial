@@ -21,3 +21,7 @@
 
 See `package_inventory.json` and `synthetic_spatial_package/`.
 Custody proof: `custody_hash_separation_proof.json`.
+
+## Deterministic ZIP rebuild
+
+Dual `TZ=UTC zip -X` builds after `touch -t 202608030000` produced identical archive digests. Sidecar basename-only verified via `scripts/test_sidecar_portability.py`.

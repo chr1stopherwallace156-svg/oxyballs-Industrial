@@ -7,7 +7,7 @@
 | Pre-work tip (ZIP manifest) | `09a3c36f8413ac59608572d665d08c0b3c4e2c75` |
 | Reviewed pre-hardening PR tip | `d9aea20c8c4b8339edf293470f4dd82c0ec8b3b1` |
 | Delivery ZIP | `DOWNLOAD-elektron-capture-ios-sprint-3-0-synthetic-spatial.zip` |
-| Delivery ZIP SHA-256 | `e3a3b4d20638ff70eeb0cee4c0e3539c96493340f060aa387f27c6119af44c64` |
+| Delivery ZIP SHA-256 | `e0576c87a0d61ffe5d7a780943c9a6b2342ba37e9db26f9e8bda0aced914e47c` |
 | Package content SHA-256 | `b11c9e73d1569102b14dd1c36a93b64a9735b6c88ea13bb639d49567fb14c09d` |
 | Linux tests | 361 executed, 2 skipped, 0 failures |
 | Mac xcodebuild | `BLOCKED_HOST_CAPABILITY` |
