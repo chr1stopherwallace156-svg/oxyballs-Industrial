@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "vehicle_id": "VEH-000042",
+  "vehicle": {
+    "year": 2019,
+    "make": "International",
+    "model": "CV515",
+    "vin": "1HTKHPVK8KH805188",
+    "gvwr": 19500,
+    "powertrain": "Gas V8",
+    "odometer": 84210,
+    "fleet_role": "Municipal utility",
+    "duty_cycle": "Urban stop-start / local service"
+  },
+  "assessment": {
+    "suitability_rating": "CONDITIONAL PASS",
+    "six_point_complete": true,
+    "notes": "Mode-1 photo envelope complete; Mode-2 caliper required for ePTO zone."
+  },
+  "pathways": [
+    {
+      "option": "WorkCore Modular EV",
+      "architecture": "120kWh Packaging Group",
+      "est_range": "~140 miles",
+      "status": "RECOMMENDED"
+    },
+    {
+      "option": "WorkCore Compact EV",
+      "architecture": "80kWh Packaging Group",
+      "est_range": "~95 miles",
+      "status": "ALTERNATE"
+    }
+  ]
+}

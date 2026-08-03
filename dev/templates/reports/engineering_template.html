@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ELEKTRON Internal Technical Assessment</title>
+  <style>
+    @page { size: A4; margin: 15mm; }
+    body {
+      font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 11px;
+      color: #0f172a;
+      line-height: 1.4;
+      margin: 0;
+    }
+    .alert-box {
+      background: #fef2f2;
+      border-left: 4px solid #b91c1c;
+      padding: 10px;
+      margin-bottom: 16px;
+    }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+    th, td { border: 1px solid #cbd5e1; padding: 6px; text-align: left; }
+    th { background: #e2e8f0; font-size: 10px; text-transform: uppercase; }
+    .field-missing { color: #b91c1c; font-weight: bold; }
+    .footer {
+      margin-top: 24px;
+      font-size: 9px;
+      color: #64748b;
+      border-top: 1px solid #cbd5e1;
+      padding-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="margin-bottom: 4px;">[INTERNAL ENGINEERING REPORT] VEHICLE ENVELOPE AUDIT</h2>
+  <div style="margin-bottom: 16px;">
+    TARGET: {{vehicle.vin}} | CAPTURE SESSION: {{capture.session_id}} | REPORT: {{report.id}}
+  </div>
+
+  {{#if report.has_missing_data}}
+  <div class="alert-box">
+    <strong>WARNING: UNVERIFIED PARAMETERS DETECTED</strong><br/>
+    One or more structural dimensions could not be calculated from Mode 1 photos.
+    Physical measurement (Mode 2 LiDAR / Caliper) required before release to manufacturing.
+  </div>
+  {{/if}}
+
+  <h3>1. Frame Rail Clearance &amp; Spatial Packaging Matrix</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Zone ID</th>
+        <th>Target Vol (L x W x H mm)</th>
+        <th>Measured Envelope</th>
+        <th>Tolerance Gap</th>
+        <th>Data Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each spatial_zones}}
+      <tr>
+        <td>{{this.zone_id}}</td>
+        <td>{{this.target_vol}}</td>
+        <td>{{this.measured_vol}}</td>
+        <td>{{this.tolerance_gap}}</td>
+        <td><code>{{this.source_type}}</code></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <h3>2. Metrology Discrepancy Log</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Phone LiDAR Derived</th>
+        <th>Manual Caliper Ground Truth</th>
+        <th>Delta</th>
+        <th>Authority Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each metrology}}
+      <tr>
+        <td>{{this.parameter}}</td>
+        <td>{{this.lidar_mm}} mm</td>
+        <td>{{this.caliper_mm}} mm</td>
+        <td>{{this.delta_mm}} mm</td>
+        <td>{{this.authority_action}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <h3>3. Missing Data Status Registers</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Attribute</th>
+        <th>Status Flag</th>
+        <th>Required Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each missing_registers}}
+      <tr>
+        <td>{{this.attribute}}</td>
+        <td><span class="field-missing">{{this.status}}</span></td>
+        <td>{{this.required_action}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <div class="footer">
+    DRAFT — source_hash={{report.source_hash}} — generated {{report.timestamp}}
+  </div>
+</body>
+</html>

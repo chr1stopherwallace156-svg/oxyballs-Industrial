@@ -16,10 +16,16 @@
     "db:health": "bash ./scripts/database/health.sh",
     "check": "bash ./dev/checks/run-all.sh",
     "format:check": "bash ./dev/checks/formatting.sh",
-    "lint": "eslint . --ext .js,.mjs,.cjs --max-warnings 0 || true"
+    "lint": "eslint . --ext .js,.mjs,.cjs --max-warnings 0 || true",
+    "report:package": "node ./scripts/generate-reports.mjs",
+    "report:internal": "node ./scripts/generate-reports.mjs --internal-only"
   },
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.8",
+    "puppeteer": "^24.11.2"
   },
   "devDependencies": {
     "eslint": "^9.9.0",

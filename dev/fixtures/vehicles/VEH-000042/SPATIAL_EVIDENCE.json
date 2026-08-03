@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0.0",
+  "vehicle_id": "VEH-000042",
+  "capture": {
+    "session_id": "CAP-SESS-2026-07-24-0042",
+    "mode": "MODE_1_PHOTO"
+  },
+  "photos": [
+    {
+      "label": "Frame rail — LH mid-span",
+      "timestamp": "2026-07-24T18:12:04Z",
+      "url": ""
+    },
+    {
+      "label": "Cab mount / firewall clearance",
+      "timestamp": "2026-07-24T18:14:22Z",
+      "url": ""
+    },
+    {
+      "label": "Rear crossmember packaging bay",
+      "timestamp": "2026-07-24T18:16:01Z",
+      "url": ""
+    },
+    {
+      "label": "ePTO candidate zone (unmeasured)",
+      "timestamp": "2026-07-24T18:18:44Z",
+      "url": ""
+    }
+  ],
+  "zones": [
+    {
+      "zone_id": "Z-FR-MID",
+      "target_vol": "1200 x 860 x 320",
+      "measured_vol": "1194 x 862 x 318",
+      "tolerance_gap": "+2 / +2 / -2 mm",
+      "source_type": "PHONE_LIDAR"
+    },
+    {
+      "zone_id": "Z-BAT-BAY",
+      "target_vol": "1800 x 700 x 400",
+      "measured_vol": "1792 x 698 x 396",
+      "tolerance_gap": "-8 / -2 / -4 mm",
+      "source_type": "PHONE_LIDAR"
+    }
+  ],
+  "metrology": [
+    {
+      "parameter": "Frame Mid-Span Outer Width",
+      "lidar_mm": 862,
+      "caliper_mm": 858,
+      "delta_mm": 4,
+      "authority_action": "CALIPER OVERRIDE APPLIED"
+    }
+  ],
+  "missing_registers": [
+    {
+      "attribute": "ePTO Hydraulic Pump Envelope",
+      "status": "NOT_MEASURED",
+      "required_action": "Perform manual shop floor inspection"
+    },
+    {
+      "attribute": "Auxiliary Frame Rail Hole Patterns",
+      "status": "RESEARCH_REQUIRED",
+      "required_action": "Cross-reference OEM body builder manual"
+    }
+  ]
+}
