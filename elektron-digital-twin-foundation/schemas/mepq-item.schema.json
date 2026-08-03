@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:edts:schema:mepq-item:1.0.0",
+  "title": "EDTS Missing Evidence Procurement Queue Item",
+  "description": "Procurement queue for evidence that cannot be safely inferred. Orthogonal to KG (what is unknown), MISN (research directive), and AJR (asset purchase clearance). Does not invent values.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mepq_id",
+    "target_property",
+    "priority",
+    "status",
+    "inference_forbidden_reason",
+    "bound_vehicle_instance_id",
+    "bound_configuration_id"
+  ],
+  "properties": {
+    "mepq_id": {"type": "string", "pattern": "^MEPQ-[0-9]{3}$"},
+    "operator_alias": {"type": ["string", "null"]},
+    "target_property": {"type": "string"},
+    "system_context": {"type": "string"},
+    "affected_cfgcomp_ids": {"type": "array", "items": {"type": "string"}},
+    "priority": {"type": "string", "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"]},
+    "status": {
+      "type": "string",
+      "enum": ["OPEN", "QUEUED", "ACQUISITION_IN_PROGRESS", "PARTIAL", "SATISFIED", "BLOCKED", "DEFERRED"]
+    },
+    "inference_forbidden_reason": {"type": "string"},
+    "engineering_risk": {"type": "string"},
+    "best_source_tiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["tier", "source_class"],
+        "properties": {
+          "tier": {"type": "integer", "minimum": 1, "maximum": 7},
+          "source_class": {"type": "string"},
+          "src_cand_ids": {"type": "array", "items": {"type": "string"}},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "related_gap_ids": {"type": "array", "items": {"type": "string"}},
+    "related_mission_ids": {"type": "array", "items": {"type": "string"}},
+    "related_csp_ids": {"type": "array", "items": {"type": "string"}},
+    "acquisition_cost_vector": {
+      "type": "string",
+      "enum": ["UNKNOWN", "COMMERCIAL_PAYWALL", "OEM_LICENSE", "PHYSICAL_MEASUREMENT", "SUPPLIER_NDA", "FREE_PUBLIC"]
+    },
+    "high_roi_purchase_signal": {"type": "boolean"},
+    "bound_vehicle_instance_id": {"type": "string"},
+    "bound_configuration_id": {"type": "string"},
+    "honesty_notes": {"type": "array", "items": {"type": "string"}},
+    "decision": {"type": "string"},
+    "research_sprint": {"type": "string"}
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "document_id": "CHASSIS_FRAME_ENGINEERING_EVIDENCE_BRIEF_AB",
+  "title": "Subsystem Mission A & B — Engineering Evidence Brief (Global Datums, Frame, Track, Upfitter)",
+  "decision": "DT-D051",
+  "research_sprint": "RL-020",
+  "locked_configuration": {
+    "proposal_configuration_id": "CFG-2019-F450-REG-CAB-4X2-60CA-DRW",
+    "kernel_configuration_id": "CFG-000001",
+    "vehicle_instance_id": "VEH-000001",
+    "configuration_fingerprint": "sha256:dde6a6251b97900dc192587903ce30a236de18f311996231a3f488ef0429d943",
+    "summary": "2019 Ford F-450 Chassis Cab Regular Cab 4x2 DRW 145.3 WB / 60 CA"
+  },
+  "pollution_filter": {
+    "rejected_as_authoritative": [
+      "pickup body platforms",
+      "4x4-only dimension columns when 4x2 values differ",
+      "alternate wheelbases (169.3 / 193.3 / 205.3)",
+      "F-350 Regular Cab track/frame-width values (H=34.1, I≠74.8)",
+      "SuperCab/Crew Cab tables except as CROSS_CONFIGURATION_COMPARISON"
+    ]
+  },
+  "sources": [
+    {
+      "cite": 1,
+      "source_id": "SRC-CAND-000001",
+      "title": "2019 Ford Body Application Guide",
+      "lifecycle_status": "SOURCE_ACQUIRED",
+      "sha256": "sha256:4c7a4bf129e91d0934cb1e7e160a3069c9486048ce643598cdd55504404df922",
+      "role": "Body builder / layout companion; WB/CA context"
+    },
+    {
+      "cite": 2,
+      "source_id": "SRC-CAND-000010",
+      "title": "2019 F-350/F-450/F-550 Chassis Cabs Fleet Specs",
+      "lifecycle_status": "SOURCE_ACQUIRED",
+      "sha256": "sha256:7a92e4ea839a3a7d163e2c374e6cfde0a24d277e1ee40013217cc6b3cab9c030",
+      "url": "https://irp.cdn-website.com/8e9b3e0f/files/uploaded/2019%20F-350_450_550%20Chassis%20Cabs.pdf",
+      "primary_for": "Regular Cab F-450 dimensional table (pages 3–4 of extract / dealer printable §)"
+    },
+    {
+      "cite": 3,
+      "source_id": "SRC-CAND-000011",
+      "title": "2019 Super Duty Chassis Cab Brochure (Skeeter mirror)",
+      "lifecycle_status": "SOURCE_ACQUIRED",
+      "sha256": "sha256:f71e9eebf97ebe4f90ab5aaa5d780504e73df63d5008a7f5af8e4e35c8c6589f",
+      "url": "https://skeeteremergencyvehicles.com/wp-content/uploads/2020/02/SkeeterFordChassis2019.pdf",
+      "applicability": "PLATFORM_FAMILY_MARKETING — C-channel / upfitter narrative; not sole authority for exact mm values",
+      "notes": ["Earlier Skeeter URL path was 404; this 2020/02 path acquired 2026-07-20"]
+    }
+  ],
+  "coordinate_datum_chain": {
+    "datum_system_id": "DATUM-2019-F450-RC-BUMPER-X",
+    "maps_to_edts_frame": "EDTS_ISO_ALIGNED_VEHICLE_FRAME",
+    "origin_convention": "X-000 = Front Bumper Plane (research/OEM layout convention)",
+    "stations_inches": [
+      {"id": "X-000", "x_in": 0.0, "label": "Front Bumper Plane"},
+      {"id": "X-038.3", "x_in": 38.3, "label": "Front Axle Centerline", "code": "B"},
+      {"id": "X-123.7", "x_in": 123.7, "label": "Back of Cab / Reference Plane", "code": "F"},
+      {"id": "X-183.7", "x_in": 183.7, "label": "Rear Axle Centerline", "derivation": "X-123.7 + CA 60.0"},
+      {"id": "X-230.7", "x_in": 230.7, "label": "End of Frame (base rail, no aft extension)", "code": "E"}
+    ],
+    "status": "DOCUMENT_SUPPORTED",
+    "evidence_source_ids": ["SRC-CAND-000010"]
+  },
+  "global_dimensions": [
+    {
+      "attr": "wheelbase_L101",
+      "value_in": 145.3,
+      "value_mm": 3690.62,
+      "status": "ASSERTION_EXTRACTED",
+      "applicability": "EXACT_CONFIGURATION_MATCH",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "series": "F-450", "cab": "Regular Cab Chassis Cab", "code": "A", "page_extract": 3},
+      "kernel_alignment": "CFG-000001.wheelbase_mm=3690.62"
+    },
+    {
+      "attr": "cab_to_axle_D",
+      "value_in": 60.0,
+      "value_mm": 1524.0,
+      "status": "ASSERTION_EXTRACTED",
+      "applicability": "EXACT_CONFIGURATION_MATCH",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "code": "D", "page_extract": 3},
+      "kernel_alignment": "CFG-000001.cab_to_axle_mm=1524.0"
+    },
+    {
+      "attr": "front_overhang_B",
+      "value_in": 38.3,
+      "value_mm": 972.82,
+      "status": "ASSERTION_EXTRACTED",
+      "applicability": "EXACT_CONFIGURATION_MATCH",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "code": "B", "page_extract": 3}
+    },
+    {
+      "attr": "bumper_to_back_of_cab_F",
+      "value_in": 123.7,
+      "value_mm": 3141.98,
+      "status": "ASSERTION_EXTRACTED",
+      "applicability": "EXACT_CONFIGURATION_MATCH",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "code": "F", "page_extract": 3}
+    },
+    {
+      "attr": "rear_axle_to_end_of_frame_C_base",
+      "value_in": 47.2,
+      "value_mm": 1198.88,
+      "status": "ASSERTION_EXTRACTED",
+      "applicability": "EXACT_CONFIGURATION_MATCH",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "code": "C", "page_extract": 3, "note": "Base value; alternate 89.4 with 42.2 aft extension (footnote 3)"}
+    },
+    {
+      "attr": "aft_of_axle_frame_extension_optional",
+      "compdef_id": "COMPDEF-FRAME-EXT-42",
+      "extension_in": 42.2,
+      "rear_overhang_with_extension_in": 89.4,
+      "rear_overhang_with_extension_mm": 2270.76,
+      "status": "ASSERTION_EXTRACTED",
+      "applicability": "OPTION_DEPENDENT_EXACT_SERIES",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "footnote": 3, "page_extract": 4},
+      "notes": ["Optional factory extension — not assumed present on bare reference unless ordered"]
+    },
+    {
+      "attr": "overall_chassis_length_E_base",
+      "value_in": 230.7,
+      "value_mm": 5859.78,
+      "status": "ASSERTION_EXTRACTED",
+      "applicability": "EXACT_CONFIGURATION_MATCH",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "code": "E", "page_extract": 3, "note": "Without aft extension; with extension 273.0"}
+    }
+  ],
+  "frame_geometry": [
+    {
+      "attr": "frame_structure_type_aft_of_cab",
+      "value": "Open C-channel steel rails aft of back-of-cab (Chassis Cab upfit interface)",
+      "compdef_ids": ["COMPDEF-FRAME-RAIL-LH", "COMPDEF-FRAME-RAIL-RH"],
+      "status": "DOCUMENT_SUPPORTED",
+      "applicability": "PLATFORM_FAMILY_CHASSIS_CAB",
+      "evidence_source_ids": ["SRC-CAND-000011"],
+      "notes": [
+        "Contrast to pickup boxed-frame narrative is marketing/engineering literature claim — do not inherit pickup CAD.",
+        "Not ASSERTION_VERIFIED until BAG/BBLB page token-anchor for exact silo."
+      ]
+    },
+    {
+      "attr": "outside_frame_rail_width_H",
+      "value_in": 34.2,
+      "value_mm": 868.68,
+      "status": "ASSERTION_EXTRACTED",
+      "applicability": "EXACT_CONFIGURATION_MATCH",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "series": "F-450", "code": "H", "page_extract": 3},
+      "cross_config_warning": "F-350 Regular Cab table lists H=34.1 — NOT inherited"
+    },
+    {
+      "attr": "material_yield_strength_min",
+      "value_psi": 50000,
+      "value_mpa": 344.7,
+      "status": "DOCUMENT_CLAIMED_PENDING_EXACT_PAGE_CITE",
+      "applicability": "PLATFORM_FAMILY_CANDIDATE",
+      "evidence_source_ids": ["SRC-CAND-000011"],
+      "notes": ["String hit for 50,000 in brochure; HSLA Class 4-5 narrative needs exact page/token before VERIFIED"]
+    },
+    {
+      "attr": "frame_height_top_of_rail_to_ground_curb_4x2",
+      "value_in": 35.0,
+      "value_mm": 889.0,
+      "alternate_reported_in": 35.9,
+      "status": "ASSERTION_EXTRACTED",
+      "applicability": "EXACT_CONFIGURATION_MATCH",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "series": "F-450 Regular Cab", "drive": "4x2", "code": "M curb", "page_extract": 4, "raw": "(4x2) 35.0/35.9"},
+      "notes": ["Dual values in OEM table — record both; do not silently pick one"]
+    },
+    {
+      "attr": "frame_height_top_of_rail_to_ground_loaded_4x2",
+      "value_in": 28.6,
+      "value_mm": 726.44,
+      "alternate_reported_in": 28.7,
+      "status": "ASSERTION_EXTRACTED",
+      "applicability": "EXACT_CONFIGURATION_MATCH",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "code": "M loaded", "page_extract": 4, "raw": "28.7/28.6"},
+      "notes": ["Operator brief cited 28.6; OEM lists 28.7/28.6 for 4x2 column"]
+    },
+    {
+      "attr": "top_of_rail_to_top_of_cab_G",
+      "value_in": 49.2,
+      "value_mm": 1249.68,
+      "status": "ASSERTION_EXTRACTED",
+      "applicability": "EXACT_CONFIGURATION_MATCH",
+      "token_anchor": {"source_id": "SRC-CAND-000010", "code": "G", "page_extract": 3}
+    }
+  ],
+  "track_and_packaging": [
+    {"attr": "front_track_I", "value_in": 74.8, "value_mm": 1899.92, "status": "ASSERTION_EXTRACTED", "applicability": "EXACT_CONFIGURATION_MATCH", "token_anchor": {"source_id": "SRC-CAND-000010", "code": "I", "page_extract": 3}},
+    {"attr": "rear_track_J", "value_in": 74.0, "value_mm": 1879.60, "status": "ASSERTION_EXTRACTED", "applicability": "EXACT_CONFIGURATION_MATCH", "token_anchor": {"source_id": "SRC-CAND-000010", "code": "J", "page_extract": 3}},
+    {"attr": "tire_outside_rear_width_L_DRW", "value_in": 93.9, "value_mm": 2385.06, "status": "ASSERTION_EXTRACTED", "applicability": "EXACT_CONFIGURATION_MATCH", "token_anchor": {"source_id": "SRC-CAND-000010", "code": "L", "page_extract": 3}},
+    {"attr": "rear_axle_clearance_O", "value_in": 8.2, "value_mm": 208.28, "status": "ASSERTION_EXTRACTED", "applicability": "EXACT_CONFIGURATION_MATCH", "token_anchor": {"source_id": "SRC-CAND-000010", "code": "O", "page_extract": 4}}
+  ],
+  "upfitter_constraints": {
+    "iface_id": "IFACE-UPFITTER-AFT-CAB",
+    "status": "DOCUMENT_SUPPORTED",
+    "applicability": "PLATFORM_FAMILY_CHASSIS_CAB",
+    "evidence_source_ids": ["SRC-CAND-000011", "SRC-CAND-000001"],
+    "rules": [
+      {
+        "rule_id": "UPFIT-NO-FLANGE-DRILL",
+        "text": "Drilling top/bottom horizontal flanges of open C-channel rail forbidden; attachments must clear flange boundaries",
+        "claim_status": "DOCUMENT_SUPPORTED_PENDING_TOKEN_ANCHOR"
+      },
+      {
+        "rule_id": "UPFIT-WEB-EDGE-DISTANCE",
+        "text": "Web fasteners in vertical web center; minimum 0.75 in (19.05 mm) edge distance from flange radii",
+        "claim_status": "DOCUMENT_SUPPORTED_PENDING_TOKEN_ANCHOR",
+        "value_in": 0.75,
+        "value_mm": 19.05
+      },
+      {
+        "rule_id": "UPFIT-NO-FIELD-WELD-HSLA",
+        "text": "Field welding HSLA rails aft of back-of-cab voids certifications; mechanical bolt-on mandatory",
+        "claim_status": "DOCUMENT_SUPPORTED_PENDING_TOKEN_ANCHOR"
+      }
+    ],
+    "notes": ["Promote to ASSERTION_VERIFIED only after exact BAG/BBLB page cites"]
+  },
+  "structural_graph_root": "CFGCOMP-2019-F450-RC-4X2-60CA-DRW-FRAME",
+  "next_mission_selected": "MISN-000004",
+  "next_mission_alias": "Subsystem Mission D — 4x2 Steering & Front Suspension",
+  "deferred_mission": "MISN-000005 (Subsystem Mission E — ICE Powertrain Removal Mapping) NOT_STARTED"
+}

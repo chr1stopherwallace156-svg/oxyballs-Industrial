@@ -1,0 +1,94 @@
+{
+  "document_id": "KNOWLEDGE_GAP_REGISTER",
+  "version": "1.6.0",
+  "status": "ACTIVE",
+  "schema": "schemas/knowledge-gap.schema.json",
+  "decision": "DT-D056",
+  "research_sprint": "RL-024",
+  "next_id": "KG-013",
+  "gaps": [
+    {
+      "gap_id": "KG-001",
+      "priority": "CRITICAL",
+      "status": "OPEN",
+      "path": "research/knowledge_gaps/KG-001.json",
+      "focus": "FL door harness routing + C309 pinout (CONTR logged)"
+    },
+    {
+      "gap_id": "KG-002",
+      "priority": "HIGH",
+      "status": "OPEN",
+      "path": "research/knowledge_gaps/KG-002.json",
+      "focus": "Dana M300 rear axle housing wall thickness"
+    },
+    {
+      "gap_id": "KG-003",
+      "priority": "HIGH",
+      "status": "OPEN",
+      "path": "research/knowledge_gaps/KG-003.json"
+    },
+    {
+      "gap_id": "KG-004",
+      "priority": "HIGH",
+      "status": "OPEN",
+      "path": "research/knowledge_gaps/KG-004.json"
+    },
+    {
+      "gap_id": "KG-005",
+      "priority": "HIGH",
+      "status": "OPEN",
+      "path": "research/knowledge_gaps/KG-005.json",
+      "focus": "FL regulator mounting fastener/torque"
+    },
+    {
+      "gap_id": "KG-006",
+      "priority": "CRITICAL",
+      "status": "BLOCKED",
+      "path": "research/knowledge_gaps/KG-006.json",
+      "focus": "ICE powertrain CG + dry mass (MEPQ-001 / Mission E deferred)"
+    },
+    {
+      "gap_id": "KG-007",
+      "priority": "HIGH",
+      "status": "BLOCKED",
+      "path": "research/knowledge_gaps/KG-007.json",
+      "focus": "Transmission cross-member interface geometry (MEPQ-002)"
+    },
+    {
+      "gap_id": "KG-008",
+      "priority": "CRITICAL",
+      "status": "OPEN",
+      "path": "research/knowledge_gaps/KG-008.json",
+      "focus": "Firewall/cab-engine LV connector + CAN (MEPQ-003 / Mission F)"
+    },
+    {
+      "gap_id": "KG-009",
+      "priority": "CRITICAL",
+      "status": "BLOCKED",
+      "path": "research/knowledge_gaps/KG-009.json",
+      "focus": "Aft fuel-tank strap holes + torque (MEPQ-004)"
+    },
+    {
+      "gap_id": "KG-010",
+      "priority": "HIGH",
+      "status": "BLOCKED",
+      "path": "research/knowledge_gaps/KG-010.json",
+      "focus": "Mid-chassis XMBR thickness (MEPQ-005)"
+    },
+    {
+      "gap_id": "KG-011",
+      "priority": "CRITICAL",
+      "status": "BLOCKED",
+      "path": "research/knowledge_gaps/KG-011.json",
+      "focus": "Aft hole tolerances (MEPQ-006)"
+    },
+    {
+      "gap_id": "KG-012",
+      "priority": "CRITICAL",
+      "status": "BLOCKED",
+      "path": "research/knowledge_gaps/KG-012.json",
+      "focus": "Frame dynamic loads (MEPQ-007)"
+    }
+  ],
+  "focus": "Three-layer protocol active; Mission D L1 focus; MEPQ-003 QUEUED; Mission E deferred"
+}

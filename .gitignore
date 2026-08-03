@@ -1,3 +1,13 @@
+# Dependencies / envs
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyc
+.pytest_cache/
+.mypy_cache/
+
 # Local runtime state — rebuilt by Install Elektron.command; never committed.
 .local/
 
@@ -12,13 +22,38 @@ IMMUTABLE_PAYLOAD_CHECKSUMS.sha256
 # Engine build + runtime artifacts (engine has its own .gitignore too)
 engine/dist/
 engine/data/
-node_modules/
 
-# OS / editor cruft
-.DS_Store
-Thumbs.db
+# Logs & development snapshots (EDE)
+logs/*.log
+logs/*.sqlite
+logs/*.sqlite-*
+!logs/.gitkeep
+artifacts/ede-snapshots/*
+!artifacts/ede-snapshots/.gitkeep
+# Legacy generic backup dir (do not use; runtime → .local/backups/, EDE → artifacts/ede-snapshots/)
+backups/
+*.bak
 *.log
 *.tmp
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
 *.swp
-__pycache__/
-*.pyc
+
+# Secrets / local overrides
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+
+# Build artifacts
+dist/
+build/
+coverage/
+.turbo/
+
+# EDE local
+.githooks/
