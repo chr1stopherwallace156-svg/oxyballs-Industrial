@@ -1,0 +1,35 @@
+# Sprint 3.2 Final Report Template
+
+```text
+SPRINT_3_2_FINAL_RECORD_CLOSURE_REPORT
+
+industrial_baseline_sha: 1213526724b926fed6663b2f0e7b7c096faa64c4
+capture_parent_git_tip: NOT_AVAILABLE
+capture_new_git_tip: NOT_AVAILABLE
+parent_delivery_zip_name: DOWNLOAD-elektron-capture-ios-sprint-3-1-rgb-motion.zip
+parent_delivery_zip_sha256: adfcfd9b4c92fcc58167e86e8dfe64ca108dffed1156ef320f7549ea4bbf47f2
+pre_hardening_delivery_zip_sha256: 2201ec8e6f884d93f7031a20106f114367903a48a208dc25128d35570cdd415a
+final_delivery_zip_sha256: SEE_INDUSTRIAL_BASENAME_SIDECAR
+
+fixture_payload_content_sha256: 98c726864d5a0c90642f87f407b146d5dbf137c8c85002fa79204919f7aaba12
+fixture_manifest_sha256: 4db6ce41015f3a1b3950e71e0f03e7c91844a9a3544011c19a3cb7a411e51c54
+fixture_package_closure_sha256: 571c22070db30d227b33eef8c8ff34f94870b7e393f5110e9d59daca8a8911a6
+closure_digest_algorithm: sha256-canonical-inventory-v1
+
+sprint_3_1_manifest_sha256: 793d769cef44dc02ebe9c67642b1dd74341048b0e5467a805d0c1b02846cd793
+sprint_3_1_payload_content_sha256: 727aa3ddead42a8089a4413013d58b90a53bbf5ea8f7cc6293c6e73f4438c3e7
+sprint_3_1_payload_changed: false
+
+arkit_status: APPLE_POSE_SOURCE_CANDIDATE_UNCOMPILED
+mac_compilation_status: PENDING
+physical_device_runtime_status: PENDING
+sprint_3_3_code_added: false
+phase_4_code_added: false
+production_validation_claim: FORBIDDEN
+
+IMPLEMENTATION_STATE = SOURCE_IMPLEMENTED
+VALIDATION_STATE = LINUX_FIXTURE_VALIDATED
+MERGE_CLASSIFICATION_WHEN_ACCEPTED = SOURCE_FOUNDATION_MERGED / APPLE_RUNTIME_UNVALIDATED
+```
+
+Do not substitute ZIP SHA-256 values for `capture_*_git_tip` fields.
