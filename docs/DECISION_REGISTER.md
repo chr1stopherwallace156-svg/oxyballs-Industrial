@@ -40,7 +40,10 @@ later entry that references it.
   2. `PoseSensorAdapter` is Foundation-portable; Apple ARKit lives only under `App/AppleSensors/AppleARKitPoseSensorAdapter.swift` with `#if canImport(ARKit)` and throws `APPLE_POSE_SOURCE_CANDIDATE_UNCOMPILED` on Linux.
   3. Cross-domain time compares require explicit `ClockCorrelation` (stale/ambiguous fail closed); camera↔pose binding requires `PoseAssociationRecord`.
   4. Fixture package identities are `SPKG-FIXTURE-POSE-*` / `SESS-FIXTURE-POSE-*` with `TEST_FIXTURE` authority and `NO_PHYSICAL_DEVICE_EXECUTION`; never `SPKG-DEVICE-*`.
-  5. Pose estimate authority remains `GUIDANCE_ESTIMATE` outside fixture paths.
+  5. Pose estimate authority remains `GUIDANCE_ESTIMATE`; package/fixture origin uses `evidence_origin_authority=TEST_FIXTURE` (never conflate).
+  6. Transform graph permits consistent reciprocal edges; rejects inconsistent/ambiguous/degenerate transforms and length≥3 cycles.
+  7. Pose samples carry `frame_epoch_id` / `session_run_id` / `world_origin_revision`; cross-epoch joins fail closed.
+  8. Primary integration fixture is dual-stream `SPKG-FIXTURE-CAMERA-POSE-000001` (camera+pose; motion/depth NOT_REQUESTED).
 - Consequences: Sprint 3.6 still required for physical ARKit validation; Sprint 3.3 LiDAR remains separate; no Phase 4/mesh/SfM/CAD claims.
 
 

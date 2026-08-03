@@ -46,6 +46,6 @@ current_stage          = STAGE_1_EVIDENCE_ONLY
 
 | Subsystem | Current reality | Blockers / notes |
 |---|---|---|
-| **Capture iOS** | Sprint 3.1 RGB/motion fixture foundation merged. Sprint 3.2 pose/clocks/frames proposed (draft PR #57). | ARKit = `APPLE_POSE_SOURCE_CANDIDATE_UNCOMPILED` until Sprint 3.6. No LiDAR/Phase 4. |
+| **Capture iOS** | Sprint 3.1 RGB/motion fixture foundation merged. Sprint 3.2 pose/clocks/frames + domain refinements proposed (draft PR #57; fixture SPKG-FIXTURE-CAMERA-POSE-000001). | ARKit = `APPLE_POSE_SOURCE_CANDIDATE_UNCOMPILED` until Sprint 3.6. No LiDAR/Phase 4. |
 
 Capture delivery via versioned `DOWNLOAD-elektron-capture-ios-*.zip` (+ `.sha256`).

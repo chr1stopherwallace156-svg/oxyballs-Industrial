@@ -1,6 +1,10 @@
 # Sprint 3.2 Pose Spatiotemporal — Handoff
 
-Draft PR #57. Merge class when accepted: **SOURCE_FOUNDATION_MERGED** / **APPLE_RUNTIME_UNVALIDATED**.
+Draft PR #57 (based on merged PR #56 / `1213526`).
+
+Merge class when accepted: **SOURCE_FOUNDATION_MERGED** / **APPLE_RUNTIME_UNVALIDATED**.
+
+Domain refinements: authority split · reciprocal-safe frame graph · AR world epochs · dual-stream `SPKG-FIXTURE-CAMERA-POSE-000001`.
 
 ARKit remains `APPLE_POSE_SOURCE_CANDIDATE_UNCOMPILED` until Sprint 3.6.
 
