@@ -1,0 +1,15 @@
+{
+  "apple_adapters": [
+    "App/AppleSensors/AppleProductionCameraSensorAdapter.swift",
+    "App/AppleSensors/AppleProductionMotionSensorAdapter.swift",
+    "App/AppleSensors/AppleARKitPoseSensorAdapter.swift",
+    "App/AppleSensors/AppleARKitDepthSensorAdapter.swift"
+  ],
+  "coverage": "App/Domain/SpatialEvidence/CaptureCoverageEngine.swift",
+  "device_package_builder": "App/Domain/SpatialEvidence/DeviceSpatialPackageBuilder.swift",
+  "guidance": "App/Domain/SpatialEvidence/CaptureGuidanceEngine.swift",
+  "linux_compile_state": "INCLUDED_VIA_STUBS",
+  "orchestration": "App/Domain/SpatialEvidence/SpatialCaptureSessionCoordinator.swift",
+  "quality": "App/Domain/SpatialEvidence/CaptureQualityAnalyzer.swift",
+  "xcode_compile_state": "NOT_EXECUTED_NO_APPLE_HOST"
+}

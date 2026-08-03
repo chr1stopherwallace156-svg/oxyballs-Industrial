@@ -1,0 +1,9 @@
+{
+  "characterization_status": "NOT_STARTED_NO_PHYSICAL_HOST",
+  "production_characterized": false,
+  "reason": "Linux cloud agent has no macOS/Xcode/physical iPhone",
+  "recorded_at_utc": "2026-08-03T23:46:00Z",
+  "spkg_device_emitted": false,
+  "status": "BLOCKED_APPLE_HOST_UNAVAILABLE",
+  "status_label": "INITIAL_PHYSICAL_OBSERVATION"
+}

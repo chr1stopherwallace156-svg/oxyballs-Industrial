@@ -1,0 +1,18 @@
+{
+  "schema_id": "AppleEnvironmentRecord",
+  "schema_version": "1.0.0-phase3",
+  "recorded_at_utc": "2026-08-03T23:45:36Z",
+  "uname": "Linux cursor 6.12.94+ #1 SMP PREEMPT_DYNAMIC Tue Jul 28 22:00:48 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux",
+  "os_family": "Linux",
+  "xcodebuild_available": false,
+  "host_gate": "BLOCKED_APPLE_HOST_UNAVAILABLE",
+  "mac_model": "NOT_AVAILABLE",
+  "mac_architecture": "x86_64",
+  "macos_version": "NOT_AVAILABLE",
+  "xcode_version": "NOT_AVAILABLE",
+  "swift_version": "Swift version 5.10.1 (swift-5.10.1-RELEASE)",
+  "xcode_select_path": "NOT_AVAILABLE",
+  "iphone_model": "NOT_CAPTURED_ON_THIS_HOST",
+  "iphone_os_version": "NOT_CAPTURED_ON_THIS_HOST",
+  "lidar_capable": "NOT_CAPTURED_ON_THIS_HOST"
+}

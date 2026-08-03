@@ -74,3 +74,13 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 | Physical characterization of thresholds | PENDING → Sprint 3.6 |
 | Production validation claim | FORBIDDEN |
 
+
+## Sprint 3.6 — Apple hardware validation
+
+| Gate | Status |
+|---|---|
+| Linux restoration + gate scaffolding | COMPLETE (this PR) |
+| Mac xcodebuild simulator/device | **BLOCKED** — no Apple host on Linux agent |
+| Physical iPhone capture / SPKG-DEVICE-000001 | **BLOCKED** |
+| Transfer + independent verify | **BLOCKED** |
+| Production threshold characterization | FORBIDDEN until physical observations |

@@ -1,0 +1,12 @@
+{
+  "clean_extraction": "PASS",
+  "industrial_baseline_sha": "0c18e2c6789ec6ac289006c80b115efb68cbe327",
+  "parent_delivery_zip": "DOWNLOAD-elektron-capture-ios-sprint-3-5-quality-coverage-guidance.zip",
+  "parent_delivery_zip_sha256": "b2323ac018ab80effe45b85e14dbb4cc46f67704c6d588dd4c01efc25f497eed",
+  "restoration_result": "PASS",
+  "restored_file_count": 1693,
+  "sidecar_result": "PASS_BASENAME_ONLY",
+  "source_inventory_sha256": "9e8e0a3840c708d953d17b7d80e67a526666aa508797f814477525a89c8a9c2b",
+  "source_tree_sha256": "edc25fe7d273610bb97c65826b71b2df6b99d6ad50561fd85435e36b3a79de6f",
+  "unexpected_source_mutation_during_transfer": false
+}
