@@ -56,3 +56,11 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 - [ ] Mac `xcodebuild` compile of `AppleARKitDepthSensorAdapter` (Sprint 3.6)
 - [ ] Physical LiDAR / sceneDepth runtime evidence (Sprint 3.6)
 - [ ] Production validation claim (FORBIDDEN until 3.6)
+
+## Sprint 3.4 — Multi-stream orchestration (Linux complete; Apple deferred)
+
+- [x] Session coordinator + policy + state machine (Linux)
+- [x] Coordinated primary fixture + degraded NODEPTH/POSEINT fixtures
+- [x] Required-failure / cancellation non-seal behavior
+- [ ] Mac compile sweep of coordinated adapters (Sprint 3.6)
+- [ ] Physical multi-stream runtime (Sprint 3.6)

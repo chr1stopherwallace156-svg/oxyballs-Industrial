@@ -17,11 +17,26 @@ later entry that references it.
 
 ---
 
-## D-022 — Sprint 3.3 depth and RGB/depth association (Foundation/fixture)
+## D-023 — Sprint 3.4 multi-stream capture orchestration (Foundation/fixture)
 
 - Date: 2026-08-03
 - Status: Proposed
-- Activation: Upon merge of the Sprint 3.3 PR
+- Activation: Upon merge of the Sprint 3.4 PR
+- Context: Camera/motion/pose/depth foundations exist; a single coordinator must own session lifecycle, policy, buffering, interruption recovery, and package finalization without inventing evidence or claiming Apple runtime validation.
+- Decision:
+  1. One `SpatialCaptureSessionCoordinator` owns capture-session lifecycle and state machine; invalid transitions fail closed.
+  2. `SpatialCaptureSessionPolicy` defines required vs optional streams; required failures follow explicit policy (no silent optionalization); unavailable optional streams may degrade without falsifying capture.
+  3. No adapter may mutate a sealed package; finalization rejected while adapters remain active or interruptions remain open.
+  4. Checkpoint recovery cannot duplicate accepted evidence or reuse sample IDs.
+  5. Primary fixture `SPKG-FIXTURE-COORDINATED-*`; degraded NODEPTH/POSEINT fixtures; failed/cancelled sessions do not seal packages.
+  6. Apple runtime validation remains deferred to Sprint 3.6; Sprint 3.4 does not perform reconstruction or mesh generation.
+- Consequences: Sprint 3.5 quality/coverage may build on orchestration; production Apple claims remain FORBIDDEN until 3.6.
+
+## D-022 — Sprint 3.3 depth and RGB/depth association (Foundation/fixture)
+
+- Date: 2026-08-03
+- Status: Accepted
+- Activation: Merged with Sprint 3.3 (`fdb95734a7460e5bb28f0a69bfc4561776476a7a`)
 - Context: Depth acquisition, calibration, and RGB/depth association are required before Sprint 3.6 Apple LiDAR validation; non-LiDAR devices must remain a truthful supported mode without synthesized depth.
 - Decision:
   1. Expand `DepthSample` with explicit geometry, units, invalid-value encoding, epoch fields, and authority separation (`evidence_origin_authority` vs `depth_estimate_authority=GUIDANCE_ESTIMATE`).

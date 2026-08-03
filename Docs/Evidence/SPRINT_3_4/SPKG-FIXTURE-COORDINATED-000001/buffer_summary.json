@@ -1,0 +1,1 @@
+{"buffer_state":{"dropped_newest_count":0,"dropped_oldest_count":0,"overflow_events":0,"queued_bytes_by_stream":{"camera":32,"depth":128,"motion":256,"pose":256},"queued_samples_by_stream":{"camera":2,"depth":2,"motion":2,"pose":2}},"schema_id":"BufferSummary","schema_version":"1.0.0-phase3-fixture"}
