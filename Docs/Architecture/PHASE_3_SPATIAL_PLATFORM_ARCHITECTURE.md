@@ -3,19 +3,24 @@
 | Field | Value |
 |---|---|
 | Status | **ARCHITECTURE_ACCEPTED — SYNTHETIC SLICE AUTHORIZED** |
-| Version | **1.6.0** |
+| Version | **1.7.0** |
 | Date | 2026-08-03 |
 | Path | `Docs/Architecture/PHASE_3_SPATIAL_PLATFORM_ARCHITECTURE.md` |
 | Applies to | `elektron-capture-ios` Phase 3 |
-| Prerequisite | Sprint 2.3 success gate closed (**Mac `xcodebuild` PASSED** on `Phase1StillCapture`); Phase 0–2.3 contracts remain authoritative |
+| Prerequisite (synthetic scope) | Formal Architecture Audit closed + P0 ADRs P3-001…P3-006 accepted; Phase 0–2.3 contracts remain authoritative |
+| Prerequisite (production Apple adapters) | Mac `xcodebuild` on `Phase1StillCapture` **PASSED** and physical-device smoke evidence **PASSED**; recorded under `Docs/Evidence/SPRINT_3_1/` |
 | Related | `COORDINATE_FRAME_STANDARD.md`, `TIMESTAMP_STANDARD.md`, `SYSTEM_BOUNDARIES.md`, `ENGINEERING_GUARDRAILS.md`, `STATUS_TAXONOMY.md`, `ADR-SESSION-REVISION-OCC.md`, `ADR-SESSION-RECOVERY-AND-QUARANTINE.md`, `Docs/Architecture/PHASE_3_FORMAL_ARCHITECTURE_AUDIT.md` |
-| Supersedes | Drafts 1.0.0–1.5.0 |
+| Supersedes | Drafts 1.0.0–1.6.0 |
 
-**This document is the Phase 3 engineering constitution.** It does not authorize production ARKit / AVFoundation / LiDAR workflows. **Foundation-portable synthetic Swift** authorized after audit closure + P0 ADRs (Sprint 3.0). Production ARKit/AVFoundation/LiDAR adapters remain gated until Mac xcodebuild success is recorded.
+**This document is the Phase 3 engineering constitution.**
 
-**Next Gate:** Sprint 2.3 Mac `xcodebuild` and device proof (`BLOCKED_HOST_CAPABILITY` until recorded PASSED).
+**Authorized now (Sprint 3.1 code surface):** Foundation-portable RGB/motion contracts, controllable failure harness, and Apple-only AVFoundation/CoreMotion adapter implementations gated behind `#if canImport`. ARKit pose, LiDAR/depth, meshing, SfM, CAD, and AI remain forbidden.
 
-**Next Implementation:** Production Apple sensor adapters (RGB/motion → pose → depth), after Mac gate. Synthetic Foundation slice remains the authorized Phase 3 coding surface until then.
+**Execution claim gate:** Declaring *production Apple adapter validation PASSED* still requires Mac `xcodebuild` + physical-device smoke evidence. Linux hosts must record `BLOCKED_HOST_CAPABILITY` honestly.
+
+**Next Gate:** Mac `xcodebuild` + physical-iPhone smoke proof (`BLOCKED_HOST_CAPABILITY` on Linux agents until recorded PASSED).
+
+**Next Implementation after gate evidence:** ARKit pose + real clock correlation (Sprint 3.2); then LiDAR/depth (Sprint 3.3).
 
 **Audit provenance:** original Formal Architecture Audit v1.0.0 is preserved at `Docs/Architecture/PHASE_3_FORMAL_ARCHITECTURE_AUDIT_V1_0_ARCHIVE.md` (extracted from base `a1982ed106352b48c5ea96a8b2caf8f1f9fdceed`); closure record is `PHASE_3_FORMAL_ARCHITECTURE_AUDIT.md` v1.1.0.
 

@@ -3,12 +3,11 @@
 **Honest truth ledger.** No fluff, no future promises — runtime and documentation reality tied to a specific `main` tip.
 
 ```text
-source_main_baseline_sha     = a1982ed106352b48c5ea96a8b2caf8f1f9fdceed
-state_change_pr              = 55
-reviewed_pre_hardening_head   = d9aea20c8c4b8339edf293470f4dd82c0ec8b3b1
+source_main_baseline_sha     = 1c03663e42fee02ac206d77c7d4e8fbfded99b3c
+state_change_pr              = 56
 state_change_status          = PROPOSED_IN_DRAFT_PR
-updated_at                   = 2026-08-03T09:29:00Z
-maintained_by                = Industrial Phase 3 maintainers (PR #55 draft)
+updated_at                   = 2026-08-03T11:01:00Z
+maintained_by                = Industrial Phase 3 maintainers (PR #56 draft)
 update_trigger               = DRAFT_PR_EVIDENCE_PROPOSED
 ```
 
@@ -43,7 +42,7 @@ Do **not** market or document a “complete engineering digital twin.”
 
 | Subsystem | Current reality | Blockers / notes |
 |---|---|---|
-| **Capture iOS** | Sprint 3.0 synthetic spatial slice delivered as versioned ZIP; Foundation Linux tests green. Apple adapters gated. | Physical Mac `xcodebuild` / device still `BLOCKED_HOST_CAPABILITY` on Linux agents. Do not treat `*-latest.zip` as authoritative. |
+| **Capture iOS** | Sprint 3.1 RGB/motion Foundation + Apple-gated adapters proposed (draft). Synthetic Sprint 3.0 proven on Linux. | Mac `xcodebuild` / physical device smoke remain `BLOCKED_HOST_CAPABILITY` on Linux agents. No ARKit/LiDAR yet. |
 | **EDTS Kernel / Foundation** | Exact-vehicle **kernel validated and frozen** (`kernel_state: VALIDATED_AND_FROZEN`). **Active layer: L01 Exterior.** L01 research draft **complete** (`L1_EXTERIOR_RESEARCH_DRAFT_COMPLETE`). | Source verification, physical acquisition, and geometry freeze **pending**. Not a verified engineering twin mesh. |
 | **EAE / XREPO ingest** | EDTS EAE core ingestion validated; full executable EAE product surface still incomplete. Capture↔EDTS package importer / digest gates exist in-repo. | Treat as validated ingestion paths + gaps, not a finished engine product. |
 | **Build Engine** | Bounded M10 Gate 05M-C3 foundation built under `engine/`. Platform 001 Build Package v0.1 = **`DRAFT_INCOMPLETE`**. | No approval / procurement / fabrication / energization claim. Open data still blocks completeness. |

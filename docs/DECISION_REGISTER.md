@@ -17,6 +17,19 @@ later entry that references it.
 
 ---
 
+## D-019 — Sprint 3.1 RGB/motion production adapter foundation (draft PR)
+
+- Date: 2026-08-03
+- Status: Accepted (proposed on draft PR; Mac/device gates remain BLOCKED_HOST_CAPABILITY on Linux)
+- Context: After PR #55 synthetic spatial evidence, production RGB/motion requires Apple-only adapters without contaminating Foundation-portable domain code, and without claiming Mac/device PASS without evidence.
+- Decision:
+  1. Split charter prerequisites: synthetic scope (audit+ADRs) vs production Apple validation (xcodebuild+device smoke).
+  2. `CameraSensorAdapter` / `MotionSensorAdapter` are Foundation protocols; AVFoundation/CoreMotion live only under `App/AppleSensors` with `#if canImport`.
+  3. Device RGB/motion packages omit pose/depth streams (`NOT_REQUESTED`); no fake depth/pose.
+  4. Controllable adapters prove failure matrix on Linux; physical package claims require device evidence.
+- Consequences: Sprint 3.2 (ARKit pose) and 3.3 (LiDAR) remain blocked until Stage A gate evidence lands.
+
+
 ## D-018 — Phase 3 Sprint 3.0 synthetic spatial slice + audit provenance (PR #55)
 
 - Date: 2026-08-03
