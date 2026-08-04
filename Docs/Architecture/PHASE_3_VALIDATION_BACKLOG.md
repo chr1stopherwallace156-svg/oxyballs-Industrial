@@ -37,7 +37,9 @@ Fixtures must use `SPKG-FIXTURE-*`, `TEST_FIXTURE` authority, and `host_claim=NO
 | 3.3 | Depth + RGB/depth association | LiDAR depth candidate + non-LiDAR honesty | Mac/device → Sprint 3.6 |
 | 3.4 | Multi-stream capture orchestration | Coordinator + recovery | Mac/device → Sprint 3.6 |
 | 3.5 | Capture quality + coverage guidance | Guidance engine (no engineering completeness) | Characterization → Sprint 3.6 |
-| 3.6 | Apple hardware validation + first real package | Repair/compile/promote accumulated sources | **REQUIRED PASSED** |
+| 3.6A | Apple validation readiness (Linux gate) | Host gate + Mac runbook; no fake DEVICE package | Mac/device → 3.6B |
+| 3.6B | Physical Apple hardware capture | First real `SPKG-DEVICE-000001` | **REQUIRED on Mac+iPhone** |
+| 3.7 | Evidence identity, recovery, resilience | Signatures, journal, thermal, telemetry (Linux fixtures) | SE/App Attest physical → 3.6B backlog |
 
 ## Sprint 3.6 promotion criteria
 
@@ -84,3 +86,22 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 | Physical iPhone capture / SPKG-DEVICE-000001 | **BLOCKED** |
 | Transfer + independent verify | **BLOCKED** |
 | Production threshold characterization | FORBIDDEN until physical observations |
+
+## Sprint 3.6A / 3.6B split
+
+| Gate | Status |
+|---|---|
+| 3.6A Validation readiness (PR #61) | COMPLETE / MERGED |
+| 3.6B Physical Apple hardware execution | PENDING_MAC_AND_IPHONE |
+| `SPKG-DEVICE-000001` | ABSENT until 3.6B |
+
+## Sprint 3.7 — Identity / journal / recovery / resilience
+
+| Gate | Status |
+|---|---|
+| Linux fixture signatures + enrollment + App Attest envelopes | COMPLETE (this PR) |
+| Hash-chained journal + crash recovery fixtures | COMPLETE (this PR) |
+| Thermal policy + performance telemetry | COMPLETE (this PR) |
+| Secure Enclave / App Attest physical validation | PENDING → Apple hardware backlog (3.6B) |
+| Production security claim | FORBIDDEN |
+
