@@ -1,0 +1,8 @@
+host: Linux cloud agent (no macOS)
+swift: 5.10.1 (Linux toolchain)
+xcodebuild: NOT_AVAILABLE
+xcode-select: NOT_AVAILABLE
+iphone: NOT_ATTACHED
+lidar: NOT_AVAILABLE
+swift_test: 514 executed / 7 skipped / 0 failed
+phase3-6-apple-validation-verify: BLOCKED_APPLE_HOST_UNAVAILABLE (exit 2)

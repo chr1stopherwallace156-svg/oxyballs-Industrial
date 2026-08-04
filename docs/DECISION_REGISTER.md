@@ -17,11 +17,26 @@ later entry that references it.
 
 ---
 
-## D-024 — Sprint 3.5 quality, coverage, and operator guidance (Foundation/fixture)
+## D-025 — Sprint 3.6 Apple hardware validation (evidence-backed only)
 
 - Date: 2026-08-03
 - Status: Proposed
-- Activation: Upon merge of the Sprint 3.5 PR
+- Activation: Upon merge of the Sprint 3.6 PR (or Mac-host completion follow-up)
+- Context: Sprints 3.1–3.5 delivered Foundation/fixture source; Apple compilation and physical iPhone validation require a real Mac host and must not be simulated on Linux.
+- Decision:
+  1. Apple runtime validation claims are evidence-backed only; simulator and physical-device claims remain separate.
+  2. Physical observations do not automatically become engineering metrology; initial threshold characterization remains provisional (`INITIAL_PHYSICAL_OBSERVATION` / `NOT_PRODUCTION_CHARACTERIZED`).
+  3. Unavailable hardware capabilities are reported truthfully; never invent DEVICE stream evidence.
+  4. Only a physically generated package may use `SPKG-DEVICE-*` / `SESS-DEVICE-*` identities and device evidence authorities.
+  5. Linux hosts must record `BLOCKED_APPLE_HOST_UNAVAILABLE` rather than fabricate Mac/device PASS.
+  6. Phase 3 Apple completion does not imply Phase 4 reconstruction completion.
+- Consequences: A Mac+iPhone follow-up run is required to reach `DEVICE_VALIDATED` / `FIRST_REAL_SPATIAL_PACKAGE_VERIFIED`.
+
+## D-024 — Sprint 3.5 quality, coverage, and operator guidance (Foundation/fixture)
+
+- Date: 2026-08-03
+- Status: Accepted
+- Activation: Merged with Sprint 3.5 (`0c18e2c6789ec6ac289006c80b115efb68cbe327`)
 - Context: Coordinated multi-stream capture exists; technicians need derived quality signals, bounded coverage policy, and prioritized guidance without claiming geometric or engineering completeness.
 - Decision:
   1. Guidance and coverage outputs are derived evidence (`guidance_authority=GUIDANCE_ESTIMATE`) that must reference immutable source evidence IDs; original sensor payloads are never mutated.

@@ -1,0 +1,3 @@
+BLOCKED_APPLE_HOST_UNAVAILABLE
+This Sprint 3.6 gate requires macOS + Xcode + physical iPhone.
+No SPKG-DEVICE package was emitted.

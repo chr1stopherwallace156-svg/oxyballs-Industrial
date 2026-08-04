@@ -1,0 +1,8 @@
+{
+  "apple_production_factory": "SpatialCaptureSessionCoordinator.appleProductionSession",
+  "coordinator_accepts_protocol_adapters": true,
+  "note": "App UI still Phase1-oriented; Mac validation runbook must exercise coordinator/adapters explicitly",
+  "phase1_app_links_elektroncapture_spm": true,
+  "phase1_app_sources_direct_pbx_refs_to_apple_adapters": false,
+  "sp_package_includes_apple_sensors_swift": true
+}
