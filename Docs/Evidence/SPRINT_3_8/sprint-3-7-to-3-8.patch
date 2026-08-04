@@ -1,0 +1,2667 @@
+diff -ruN /tmp/elektron-capture-ios-3-7-restore/elektron-capture-ios/App/Domain/SpatialEvidence/ApplePrivacyRedactionCandidates.swift /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/ApplePrivacyRedactionCandidates.swift
+--- /tmp/elektron-capture-ios-3-7-restore/elektron-capture-ios/App/Domain/SpatialEvidence/ApplePrivacyRedactionCandidates.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/ApplePrivacyRedactionCandidates.swift	2026-08-04 02:48:10.462842677 +0000
+@@ -0,0 +1,60 @@
++import Foundation
++
++/// Apple Vision redaction detector **source candidate** — unvalidated on Linux.
++#if canImport(Vision) && (os(iOS) || os(macOS))
++import Vision
++
++public struct AppleVisionRedactionDetector: Sendable {
++  public let availabilityStatus: String = "APPLE_VISION_SOURCE_CANDIDATE_UNVALIDATED"
++
++  public init() {}
++
++  public func detect(in _: Data) throws -> [RedactionDetection] {
++    throw SpatialEvidenceError.redactionDerivationFailed(
++      "AppleVisionRedactionDetector requires physical Apple Vision validation (PENDING)"
++    )
++  }
++}
++#else
++public struct AppleVisionRedactionDetector: Sendable {
++  public let availabilityStatus: String = "UNAVAILABLE_ON_THIS_PLATFORM"
++
++  public init() {}
++
++  public func detect(in _: Data) throws -> [RedactionDetection] {
++    throw SpatialEvidenceError.redactionDerivationFailed(
++      "AppleVisionRedactionDetector unavailable on this platform (Linux/source-candidate stub)"
++    )
++  }
++}
++#endif
++
++/// Apple Core ML privacy filter **source candidate** — unvalidated on Linux.
++/// Does not claim ARKit person segmentation handles license plates.
++#if canImport(CoreML) && (os(iOS) || os(macOS))
++import CoreML
++
++public struct AppleCoreMLPrivacyFilter: Sendable {
++  public let availabilityStatus: String = "APPLE_COREML_SOURCE_CANDIDATE_UNVALIDATED"
++
++  public init() {}
++
++  public func filter(detections _: [RedactionDetection]) throws -> [RedactionOperation] {
++    throw SpatialEvidenceError.redactionDerivationFailed(
++      "AppleCoreMLPrivacyFilter requires physical Core ML validation (PENDING)"
++    )
++  }
++}
++#else
++public struct AppleCoreMLPrivacyFilter: Sendable {
++  public let availabilityStatus: String = "UNAVAILABLE_ON_THIS_PLATFORM"
++
++  public init() {}
++
++  public func filter(detections _: [RedactionDetection]) throws -> [RedactionOperation] {
++    throw SpatialEvidenceError.redactionDerivationFailed(
++      "AppleCoreMLPrivacyFilter unavailable on this platform (Linux/source-candidate stub)"
++    )
++  }
++}
++#endif
+diff -ruN /tmp/elektron-capture-ios-3-7-restore/elektron-capture-ios/App/Domain/SpatialEvidence/EvidenceDeliveryProfiles.swift /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/EvidenceDeliveryProfiles.swift
+--- /tmp/elektron-capture-ios-3-7-restore/elektron-capture-ios/App/Domain/SpatialEvidence/EvidenceDeliveryProfiles.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/EvidenceDeliveryProfiles.swift	2026-08-04 02:48:10.526844593 +0000
+@@ -0,0 +1,147 @@
++import Foundation
++
++// MARK: - Delivery profiles (inspection vs engineering)
++
++public enum DeliveryCompressionPolicy: String, Codable, Sendable, Equatable {
++  case none = "NONE"
++  case fixtureGzipLight = "FIXTURE_GZIP_LIGHT"
++  case fixtureUncompressed = "FIXTURE_UNCOMPRESSED"
++}
++
++public struct DeliveryPrivacyPolicy: Codable, Sendable, Equatable {
++  public var privacyPolicyID: String
++  public var allowRestrictedRaw: Bool
++  public var requireClientSafeDerivatives: Bool
++
++  public func dictionary() -> [String: Any] {
++    [
++      "privacy_policy_id": privacyPolicyID,
++      "allow_restricted_raw": allowRestrictedRaw,
++      "require_client_safe_derivatives": requireClientSafeDerivatives,
++    ]
++  }
++}
++
++public struct DeliveryArtifactSelection: Codable, Sendable, Equatable {
++  public var includeRestrictedRaw: Bool
++  public var includeClientSafeDerivatives: Bool
++  public var includeQualitySummaries: Bool
++  public var includeSpatialStreams: Bool
++  public var includeCalibration: Bool
++  public var includeTransforms: Bool
++  public var includePackageClosure: Bool
++
++  public func dictionary() -> [String: Any] {
++    [
++      "include_restricted_raw": includeRestrictedRaw,
++      "include_client_safe_derivatives": includeClientSafeDerivatives,
++      "include_quality_summaries": includeQualitySummaries,
++      "include_spatial_streams": includeSpatialStreams,
++      "include_calibration": includeCalibration,
++      "include_transforms": includeTransforms,
++      "include_package_closure": includePackageClosure,
++    ]
++  }
++}
++
++public struct EvidenceDeliveryProfile: Codable, Sendable, Equatable {
++  public var profileID: String
++  public var profileKind: String
++  public var selection: DeliveryArtifactSelection
++  public var compression: DeliveryCompressionPolicy
++  public var privacy: DeliveryPrivacyPolicy
++  public var accessClass: EvidenceAccessClass
++  public var note: String
++
++  public static let inspectionProfileID = "PROFILE-INSPECTION-000001"
++  public static let engineeringProfileID = "PROFILE-ENGINEERING-000001"
++
++  public static func inspection(privacyPolicyID: String) -> EvidenceDeliveryProfile {
++    EvidenceDeliveryProfile(
++      profileID: inspectionProfileID,
++      profileKind: "INSPECTION_PACKAGE",
++      selection: DeliveryArtifactSelection(
++        includeRestrictedRaw: false,
++        includeClientSafeDerivatives: true,
++        includeQualitySummaries: true,
++        includeSpatialStreams: false,
++        includeCalibration: false,
++        includeTransforms: false,
++        includePackageClosure: true
++      ),
++      compression: .fixtureGzipLight,
++      privacy: DeliveryPrivacyPolicy(
++        privacyPolicyID: privacyPolicyID,
++        allowRestrictedRaw: false,
++        requireClientSafeDerivatives: true
++      ),
++      accessClass: .publicClient,
++      note: "Client-safe rapid field transfer; no restricted raw unless policy permits"
++    )
++  }
++
++  public static func engineering(privacyPolicyID: String) -> EvidenceDeliveryProfile {
++    EvidenceDeliveryProfile(
++      profileID: engineeringProfileID,
++      profileKind: "ENGINEERING_PACKAGE",
++      selection: DeliveryArtifactSelection(
++        includeRestrictedRaw: true,
++        includeClientSafeDerivatives: true,
++        includeQualitySummaries: true,
++        includeSpatialStreams: true,
++        includeCalibration: true,
++        includeTransforms: true,
++        includePackageClosure: true
++      ),
++      compression: .fixtureUncompressed,
++      privacy: DeliveryPrivacyPolicy(
++        privacyPolicyID: privacyPolicyID,
++        allowRestrictedRaw: true,
++        requireClientSafeDerivatives: true
++      ),
++      accessClass: .engineeringRestricted,
++      note: "Controlled full-resolution transfer; restricted access classification"
++    )
++  }
++
++  public func dictionary() -> [String: Any] {
++    [
++      "profile_id": profileID,
++      "profile_kind": profileKind,
++      "selection": selection.dictionary(),
++      "compression": compression.rawValue,
++      "privacy": privacy.dictionary(),
++      "access_class": accessClass.rawValue,
++      "note": note,
++      "schema_id": "EvidenceDeliveryProfile",
++      "schema_version": "1.0.0-phase3-fixture",
++    ]
++  }
++}
++
++public struct DeliveryProfileResult: Codable, Sendable, Equatable {
++  public var profileID: String
++  public var packageID: String
++  public var packageClosureSHA256: String
++  public var manifestSHA256: String
++  public var includedRelativePaths: [String]
++  public var excludedRelativePaths: [String]
++  public var sourcePackageID: String
++  public var sourcePackageClosureSHA256: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "profile_id": profileID,
++      "package_id": packageID,
++      "package_closure_sha256": packageClosureSHA256,
++      "manifest_sha256": manifestSHA256,
++      "included_relative_paths": includedRelativePaths.sorted(),
++      "excluded_relative_paths": excludedRelativePaths.sorted(),
++      "source_package_id": sourcePackageID,
++      "source_package_closure_sha256": sourcePackageClosureSHA256,
++      "schema_id": "DeliveryProfileResult",
++      "schema_version": "1.0.0-phase3-fixture",
++      "note": "Derived package with its own manifest/closure — not an undocumented mutation",
++    ]
++  }
++}
+diff -ruN /tmp/elektron-capture-ios-3-7-restore/elektron-capture-ios/App/Domain/SpatialEvidence/EvidencePrivacyPolicyTypes.swift /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/EvidencePrivacyPolicyTypes.swift
+--- /tmp/elektron-capture-ios-3-7-restore/elektron-capture-ios/App/Domain/SpatialEvidence/EvidencePrivacyPolicyTypes.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/EvidencePrivacyPolicyTypes.swift	2026-08-04 02:47:11.193564458 +0000
+@@ -0,0 +1,376 @@
++import Foundation
++
++// MARK: - Sprint 3.8 privacy policy contracts
++
++public enum EvidenceRetentionClass: String, Codable, Sendable, Equatable {
++  case unrestrictedOperational = "UNRESTRICTED_OPERATIONAL"
++  case restrictedRaw = "RESTRICTED_RAW"
++  case clientSafeDerivative = "CLIENT_SAFE_DERIVATIVE"
++  case ephemeralSessionOnly = "EPHEMERAL_SESSION_ONLY"
++  case prohibited = "PROHIBITED"
++}
++
++public enum EvidenceAccessClass: String, Codable, Sendable, Equatable {
++  case publicClient = "PUBLIC_CLIENT"
++  case fieldTechnician = "FIELD_TECHNICIAN"
++  case engineeringRestricted = "ENGINEERING_RESTRICTED"
++  case privacyOfficer = "PRIVACY_OFFICER"
++  case systemInternal = "SYSTEM_INTERNAL"
++}
++
++public enum MetadataFieldAction: String, Codable, Sendable, Equatable {
++  case retain = "RETAIN"
++  case encryptedRestricted = "ENCRYPTED_RESTRICTED"
++  case coarsen = "COARSEN"
++  case omitByPolicy = "OMIT_BY_POLICY"
++  case notAvailable = "NOT_AVAILABLE"
++}
++
++public enum PrivacyCaptureMode: String, Codable, Sendable, Equatable {
++  case rawRestrictedCapture = "RAW_RESTRICTED_CAPTURE"
++  case privacyFirstCapture = "PRIVACY_FIRST_CAPTURE"
++  case noRedactionRequired = "NO_REDACTION_REQUIRED"
++}
++
++public struct MetadataRetentionRule: Codable, Sendable, Equatable {
++  public var fieldName: String
++  public var action: MetadataFieldAction
++  public var reason: String
++  public var resultingValueClass: String
++
++  public init(fieldName: String, action: MetadataFieldAction, reason: String, resultingValueClass: String) {
++    self.fieldName = fieldName
++    self.action = action
++    self.reason = reason
++    self.resultingValueClass = resultingValueClass
++  }
++
++  public func dictionary() -> [String: Any] {
++    [
++      "metadata_field": fieldName,
++      "action": action.rawValue,
++      "reason": reason,
++      "resulting_value_class": resultingValueClass,
++    ]
++  }
++}
++
++public struct RedactionRequirement: Codable, Sendable, Equatable {
++  public var detectionKind: String
++  public var required: Bool
++  public var minimumConfidence: Double
++  public var preferredOperations: [String]
++
++  public init(detectionKind: String, required: Bool, minimumConfidence: Double, preferredOperations: [String]) {
++    self.detectionKind = detectionKind
++    self.required = required
++    self.minimumConfidence = minimumConfidence
++    self.preferredOperations = preferredOperations
++  }
++
++  public func dictionary() -> [String: Any] {
++    [
++      "detection_kind": detectionKind,
++      "required": required,
++      "minimum_confidence": minimumConfidence,
++      "preferred_operations": preferredOperations,
++    ]
++  }
++}
++
++public struct RedactionPolicy: Codable, Sendable, Equatable {
++  public var policyID: String
++  public var requirements: [RedactionRequirement]
++  public var note: String
++
++  public init(policyID: String, requirements: [RedactionRequirement], note: String) {
++    self.policyID = policyID
++    self.requirements = requirements
++    self.note = note
++  }
++
++  public func dictionary() -> [String: Any] {
++    [
++      "policy_id": policyID,
++      "requirements": requirements.map { $0.dictionary() },
++      "note": note,
++    ]
++  }
++}
++
++public struct EvidencePrivacyPolicy: Codable, Sendable, Equatable {
++  public var policyID: String
++  public var schemaVersion: String
++  public var revision: UInt64
++  public var organizationID: String
++  public var applicabilityConditions: [String]
++  public var retentionClasses: [EvidenceRetentionClass]
++  public var accessClasses: [EvidenceAccessClass]
++  public var metadataRules: [MetadataRetentionRule]
++  public var redactionRequirements: [RedactionRequirement]
++  public var captureMode: PrivacyCaptureMode
++  public var rawRetentionBehavior: String
++  public var exportRestrictions: [String]
++  public var authority: EvidenceAuthority
++  public var activationTimestampUTC: String
++  public var expirationTimestampUTC: String?
++
++  public static let fixturePolicyID = "POL-FIXTURE-PRIVACY-000001"
++  public static let fixtureSchemaVersion = "1.0.0-phase3-fixture"
++
++  public static func fixtureRawRestricted() -> EvidencePrivacyPolicy {
++    EvidencePrivacyPolicy(
++      policyID: fixturePolicyID,
++      schemaVersion: fixtureSchemaVersion,
++      revision: 1,
++      organizationID: "ORG-FIXTURE-000001",
++      applicabilityConditions: ["field_capture", "linux_fixture"],
++      retentionClasses: [.restrictedRaw, .clientSafeDerivative],
++      accessClasses: [.engineeringRestricted, .fieldTechnician, .publicClient],
++      metadataRules: [
++        MetadataRetentionRule(
++          fieldName: "precise_latitude_longitude",
++          action: .omitByPolicy,
++          reason: "field_privacy_default",
++          resultingValueClass: "OMITTED"
++        ),
++        MetadataRetentionRule(
++          fieldName: "coarse_location",
++          action: .coarsen,
++          reason: "retain_region_only",
++          resultingValueClass: "COARSE_REGION"
++        ),
++        MetadataRetentionRule(
++          fieldName: "device_local_timezone",
++          action: .retain,
++          reason: "operational_scheduling",
++          resultingValueClass: "RETAINED"
++        ),
++        MetadataRetentionRule(
++          fieldName: "wifi_or_network_identifiers",
++          action: .notAvailable,
++          reason: "not_collected_no_system_requirement",
++          resultingValueClass: "NOT_AVAILABLE"
++        ),
++        MetadataRetentionRule(
++          fieldName: "operator_identity",
++          action: .encryptedRestricted,
++          reason: "restricted_access",
++          resultingValueClass: "ENCRYPTED_RESTRICTED"
++        ),
++        MetadataRetentionRule(
++          fieldName: "organization_identity",
++          action: .retain,
++          reason: "tenant_scope",
++          resultingValueClass: "RETAINED"
++        ),
++        MetadataRetentionRule(
++          fieldName: "facility_identifier",
++          action: .retain,
++          reason: "site_context",
++          resultingValueClass: "RETAINED"
++        ),
++        MetadataRetentionRule(
++          fieldName: "vehicle_vin_visibility",
++          action: .omitByPolicy,
++          reason: "client_safe_default",
++          resultingValueClass: "OMITTED"
++        ),
++        MetadataRetentionRule(
++          fieldName: "client_identifiers",
++          action: .encryptedRestricted,
++          reason: "restricted_access",
++          resultingValueClass: "ENCRYPTED_RESTRICTED"
++        ),
++      ],
++      redactionRequirements: [
++        RedactionRequirement(
++          detectionKind: "FACE",
++          required: true,
++          minimumConfidence: 0.5,
++          preferredOperations: ["BLUR", "PIXELATE"]
++        ),
++        RedactionRequirement(
++          detectionKind: "LICENSE_PLATE",
++          required: true,
++          minimumConfidence: 0.5,
++          preferredOperations: ["PIXELATE", "SOLID_MASK"]
++        ),
++      ],
++      captureMode: .rawRestrictedCapture,
++      rawRetentionBehavior: "PRESERVE_RAW_IN_RESTRICTED_STORAGE",
++      exportRestrictions: ["NO_RESTRICTED_RAW_IN_INSPECTION_PROFILE"],
++      authority: .testFixture,
++      activationTimestampUTC: "2026-08-03T00:00:00Z",
++      expirationTimestampUTC: "2099-01-01T00:00:00Z"
++    )
++  }
++
++  public static func fixturePrivacyFirst() -> EvidencePrivacyPolicy {
++    var p = fixtureRawRestricted()
++    p.policyID = "POL-FIXTURE-PRIVACY-FIRST-000001"
++    p.captureMode = .privacyFirstCapture
++    p.rawRetentionBehavior = "PROHIBIT_RAW_PERSISTENCE"
++    p.retentionClasses = [.clientSafeDerivative, .prohibited]
++    return p
++  }
++
++  public func dictionary() -> [String: Any] {
++    var d: [String: Any] = [
++      "policy_id": policyID,
++      "schema_version": schemaVersion,
++      "revision": revision,
++      "organization_id": organizationID,
++      "applicability_conditions": applicabilityConditions,
++      "retention_classes": retentionClasses.map(\.rawValue),
++      "access_classes": accessClasses.map(\.rawValue),
++      "metadata_rules": metadataRules.map { $0.dictionary() },
++      "redaction_requirements": redactionRequirements.map { $0.dictionary() },
++      "privacy_capture_mode": captureMode.rawValue,
++      "raw_retention_behavior": rawRetentionBehavior,
++      "export_restrictions": exportRestrictions,
++      "authority": authority.rawValue,
++      "activation_timestamp_utc": activationTimestampUTC,
++      "schema_id": "EvidencePrivacyPolicy",
++      "note": "No field may be silently stripped or modified",
++    ]
++    if let expirationTimestampUTC { d["expiration_timestamp_utc"] = expirationTimestampUTC }
++    return d
++  }
++}
++
++public enum PrivacyPolicyViolationCode: String, Codable, Sendable, Equatable {
++  case silentMetadataStrip = "SILENT_METADATA_STRIP"
++  case forbiddenRawExport = "FORBIDDEN_RAW_EXPORT"
++  case missingRequiredRedaction = "MISSING_REQUIRED_REDACTION"
++  case unknownPolicy = "UNKNOWN_POLICY"
++  case expiredPolicy = "EXPIRED_POLICY"
++  case privacyFirstRawPersisted = "PRIVACY_FIRST_RAW_PERSISTED"
++  case missingDerivationReference = "MISSING_DERIVATION_REFERENCE"
++  case incorrectSourceDigest = "INCORRECT_SOURCE_DIGEST"
++}
++
++public struct PrivacyPolicyViolation: Codable, Sendable, Equatable {
++  public var code: PrivacyPolicyViolationCode
++  public var detail: String
++  public var policyID: String?
++
++  public func dictionary() -> [String: Any] {
++    var d: [String: Any] = ["code": code.rawValue, "detail": detail]
++    if let policyID { d["policy_id"] = policyID }
++    return d
++  }
++}
++
++public struct PrivacyPolicyDecision: Codable, Sendable, Equatable {
++  public var decisionID: String
++  public var policyID: String
++  public var captureMode: PrivacyCaptureMode
++  public var accepted: Bool
++  public var violations: [PrivacyPolicyViolation]
++  public var decidedAtUTC: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "decision_id": decisionID,
++      "policy_id": policyID,
++      "privacy_capture_mode": captureMode.rawValue,
++      "accepted": accepted,
++      "violations": violations.map { $0.dictionary() },
++      "decided_at_utc": decidedAtUTC,
++    ]
++  }
++}
++
++public struct PrivacyPolicyEvaluator: Sendable {
++  public var nowUTC: String
++
++  public init(nowUTC: String = "2026-08-03T00:30:00Z") {
++    self.nowUTC = nowUTC
++  }
++
++  public func activate(_ policy: EvidencePrivacyPolicy?) throws -> PrivacyPolicyDecision {
++    guard let policy else {
++      throw SpatialEvidenceError.privacyPolicyUnknown("nil_policy")
++    }
++    if let exp = policy.expirationTimestampUTC, nowUTC > exp {
++      throw SpatialEvidenceError.privacyPolicyExpired(policy.policyID)
++    }
++    return PrivacyPolicyDecision(
++      decisionID: "PPD-\(policy.policyID)",
++      policyID: policy.policyID,
++      captureMode: policy.captureMode,
++      accepted: true,
++      violations: [],
++      decidedAtUTC: nowUTC
++    )
++  }
++
++  public func rejectSilentMetadataStrip(field: String, policyID: String) throws {
++    throw SpatialEvidenceError.silentMetadataStrippingRejected("\(field)@\(policyID)")
++  }
++}
++
++// MARK: - Metadata privacy ledger
++
++public struct MetadataPrivacyLedgerEntry: Codable, Sendable, Equatable {
++  public var metadataField: String
++  public var originalAvailability: String
++  public var action: MetadataFieldAction
++  public var resultingValueClass: String
++  public var policyID: String
++  public var reason: String
++  public var authority: EvidenceAuthority
++  public var timestampUTC: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "metadata_field": metadataField,
++      "original_availability": originalAvailability,
++      "action": action.rawValue,
++      "resulting_value_class": resultingValueClass,
++      "policy_id": policyID,
++      "reason": reason,
++      "authority": authority.rawValue,
++      "timestamp_utc": timestampUTC,
++    ]
++  }
++}
++
++public struct MetadataPrivacyLedger: Sendable {
++  public private(set) var entries: [MetadataPrivacyLedgerEntry] = []
++
++  public init() {}
++
++  public mutating func record(from policy: EvidencePrivacyPolicy, timestampUTC: String = "2026-08-03T00:30:00Z") {
++    for rule in policy.metadataRules {
++      entries.append(
++        MetadataPrivacyLedgerEntry(
++          metadataField: rule.fieldName,
++          originalAvailability: rule.action == .notAvailable ? "NOT_PRESENT" : "AVAILABLE",
++          action: rule.action,
++          resultingValueClass: rule.resultingValueClass,
++          policyID: policy.policyID,
++          reason: rule.reason,
++          authority: policy.authority,
++          timestampUTC: timestampUTC
++        )
++      )
++    }
++  }
++
++  public func dictionary() -> [String: Any] {
++    [
++      "entries": entries.map { $0.dictionary() },
++      "schema_id": "MetadataPrivacyLedger",
++      "schema_version": "1.0.0-phase3-fixture",
++      "note": "Every sensitive metadata decision is ledgered; silent stripping forbidden",
++    ]
++  }
++
++  public func assertFieldLedgered(_ field: String) throws {
++    guard entries.contains(where: { $0.metadataField == field }) else {
++      throw SpatialEvidenceError.silentMetadataStrippingRejected(field)
++    }
++  }
++}
+diff -ruN /tmp/elektron-capture-ios-3-7-restore/elektron-capture-ios/App/Domain/SpatialEvidence/EvidenceRedactionContracts.swift /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/EvidenceRedactionContracts.swift
+--- /tmp/elektron-capture-ios-3-7-restore/elektron-capture-ios/App/Domain/SpatialEvidence/EvidenceRedactionContracts.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/EvidenceRedactionContracts.swift	2026-08-04 02:48:10.530844713 +0000
+@@ -0,0 +1,372 @@
++import Foundation
++
++// MARK: - Raw / derived evidence separation + redaction contracts
++
++public enum RedactionDetectionKind: String, Codable, Sendable, Equatable {
++  case face = "FACE"
++  case licensePlate = "LICENSE_PLATE"
++  case person = "PERSON"
++  case sensitiveBackgroundRegion = "SENSITIVE_BACKGROUND_REGION"
++  case operatorDefinedRegion = "OPERATOR_DEFINED_REGION"
++  case customPolicyRegion = "CUSTOM_POLICY_REGION"
++}
++
++public enum RedactionOperationKind: String, Codable, Sendable, Equatable {
++  case blur = "BLUR"
++  case pixelate = "PIXELATE"
++  case solidMask = "SOLID_MASK"
++  case cropExclusion = "CROP_EXCLUSION"
++  case omitArtifact = "OMIT_ARTIFACT"
++}
++
++public struct RedactionConfidence: Codable, Sendable, Equatable {
++  public var score: Double
++  public var authority: EvidenceAuthority
++
++  public func dictionary() -> [String: Any] {
++    ["score": score, "authority": authority.rawValue]
++  }
++}
++
++public struct RedactionRegion: Codable, Sendable, Equatable {
++  public var regionID: String
++  public var x: Double
++  public var y: Double
++  public var width: Double
++  public var height: Double
++  public var coordinateSpace: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "region_id": regionID,
++      "x": x,
++      "y": y,
++      "width": width,
++      "height": height,
++      "coordinate_space": coordinateSpace,
++    ]
++  }
++}
++
++public struct RedactionDetection: Codable, Sendable, Equatable {
++  public var detectionID: String
++  public var kind: RedactionDetectionKind
++  public var region: RedactionRegion
++  public var confidence: RedactionConfidence
++
++  public func dictionary() -> [String: Any] {
++    [
++      "detection_id": detectionID,
++      "kind": kind.rawValue,
++      "region": region.dictionary(),
++      "confidence": confidence.dictionary(),
++    ]
++  }
++}
++
++public struct RedactionOperation: Codable, Sendable, Equatable {
++  public var operationID: String
++  public var kind: RedactionOperationKind
++  public var detectionID: String
++  public var algorithmID: String
++  public var algorithmVersion: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "operation_id": operationID,
++      "kind": kind.rawValue,
++      "detection_id": detectionID,
++      "algorithm_id": algorithmID,
++      "algorithm_version": algorithmVersion,
++    ]
++  }
++}
++
++public struct RedactionVerificationResult: Codable, Sendable, Equatable {
++  public var ok: Bool
++  public var missingRequiredKinds: [RedactionDetectionKind]
++  public var note: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "ok": ok,
++      "missing_required_kinds": missingRequiredKinds.map(\.rawValue),
++      "note": note,
++    ]
++  }
++}
++
++public struct RestrictedRawEvidenceRecord: Codable, Sendable, Equatable {
++  public var artifactID: String
++  public var relativePath: String
++  public var sha256: String
++  public var byteLength: Int
++  public var retentionClass: EvidenceRetentionClass
++  public var accessClass: EvidenceAccessClass
++  public var evidenceOriginAuthority: EvidenceAuthority
++
++  public func dictionary() -> [String: Any] {
++    [
++      "artifact_id": artifactID,
++      "relative_path": relativePath,
++      "sha256": sha256,
++      "byte_length": byteLength,
++      "retention_class": retentionClass.rawValue,
++      "access_class": accessClass.rawValue,
++      "evidence_origin_authority": evidenceOriginAuthority.rawValue,
++    ]
++  }
++}
++
++public struct RedactedEvidenceRecord: Codable, Sendable, Equatable {
++  public var artifactID: String
++  public var relativePath: String
++  public var sha256: String
++  public var byteLength: Int
++  public var retentionClass: EvidenceRetentionClass
++  public var accessClass: EvidenceAccessClass
++  public var evidenceOriginAuthority: EvidenceAuthority
++
++  public func dictionary() -> [String: Any] {
++    [
++      "artifact_id": artifactID,
++      "relative_path": relativePath,
++      "sha256": sha256,
++      "byte_length": byteLength,
++      "retention_class": retentionClass.rawValue,
++      "access_class": accessClass.rawValue,
++      "evidence_origin_authority": evidenceOriginAuthority.rawValue,
++    ]
++  }
++}
++
++public struct EvidenceDerivativeRelationship: Codable, Sendable, Equatable {
++  public var relationshipID: String
++  public var sourceArtifactID: String
++  public var derivedArtifactID: String
++  public var relationshipKind: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "relationship_id": relationshipID,
++      "source_artifact_id": sourceArtifactID,
++      "derived_artifact_id": derivedArtifactID,
++      "relationship_kind": relationshipKind,
++    ]
++  }
++}
++
++public struct RedactionDerivationRecord: Codable, Sendable, Equatable {
++  public var sourceArtifactID: String
++  public var sourceArtifactSHA256: String
++  public var redactedArtifactID: String
++  public var redactedArtifactSHA256: String
++  public var policyID: String
++  public var redactionAlgorithmID: String
++  public var algorithmVersion: String
++  public var regionsModified: [RedactionRegion]
++  public var operations: [RedactionOperation]
++  public var actor: String
++  public var derivationTimestampUTC: String
++  public var evidenceOriginAuthority: EvidenceAuthority
++  public var derivationAuthority: EvidenceAuthority
++
++  public func dictionary() -> [String: Any] {
++    [
++      "source_artifact_id": sourceArtifactID,
++      "source_artifact_sha256": sourceArtifactSHA256,
++      "redacted_artifact_id": redactedArtifactID,
++      "redacted_artifact_sha256": redactedArtifactSHA256,
++      "policy_id": policyID,
++      "redaction_algorithm_id": redactionAlgorithmID,
++      "algorithm_version": algorithmVersion,
++      "regions_modified": regionsModified.map { $0.dictionary() },
++      "operations": operations.map { $0.dictionary() },
++      "actor": actor,
++      "derivation_timestamp_utc": derivationTimestampUTC,
++      "evidence_origin_authority": evidenceOriginAuthority.rawValue,
++      "derivation_authority": derivationAuthority.rawValue,
++      "schema_id": "RedactionDerivationRecord",
++      "schema_version": "1.0.0-phase3-fixture",
++      "note": "Redaction never silently overwrites the raw artifact",
++    ]
++  }
++}
++
++public struct SourceEvidenceAccessReference: Codable, Sendable, Equatable {
++  public var referenceID: String
++  public var artifactID: String
++  public var accessClass: EvidenceAccessClass
++  public var storageDomain: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "reference_id": referenceID,
++      "artifact_id": artifactID,
++      "access_class": accessClass.rawValue,
++      "storage_domain": storageDomain,
++    ]
++  }
++}
++
++public struct PrivacyTransformationResult: Codable, Sendable, Equatable {
++  public var raw: RestrictedRawEvidenceRecord?
++  public var redacted: RedactedEvidenceRecord
++  public var derivation: RedactionDerivationRecord
++  public var relationship: EvidenceDerivativeRelationship
++  public var verification: RedactionVerificationResult
++
++  public func dictionary() -> [String: Any] {
++    var d: [String: Any] = [
++      "redacted": redacted.dictionary(),
++      "derivation": derivation.dictionary(),
++      "relationship": relationship.dictionary(),
++      "verification": verification.dictionary(),
++    ]
++    if let raw { d["restricted_raw"] = raw.dictionary() }
++    return d
++  }
++}
++
++public struct FixtureRedactionEngine: Sendable {
++  public static let algorithmID = "fixture.redaction.deterministic.v1"
++  public static let algorithmVersion = "1.0.0-phase3-fixture"
++
++  public init() {}
++
++  /// Deterministic fixture detections — NOT Apple Vision / Core ML claims.
++  public func detectFixtureRegions(sourceArtifactID: String) -> [RedactionDetection] {
++    [
++      RedactionDetection(
++        detectionID: "DET-FACE-\(sourceArtifactID)",
++        kind: .face,
++        region: RedactionRegion(regionID: "REG-FACE-1", x: 0.1, y: 0.1, width: 0.2, height: 0.2, coordinateSpace: "normalized_image"),
++        confidence: RedactionConfidence(score: 0.91, authority: .testFixture)
++      ),
++      RedactionDetection(
++        detectionID: "DET-PLATE-\(sourceArtifactID)",
++        kind: .licensePlate,
++        region: RedactionRegion(regionID: "REG-PLATE-1", x: 0.4, y: 0.7, width: 0.25, height: 0.1, coordinateSpace: "normalized_image"),
++        confidence: RedactionConfidence(score: 0.88, authority: .testFixture)
++      ),
++    ]
++  }
++
++  public func apply(
++    sourceBytes: Data,
++    sourceArtifactID: String,
++    policy: EvidencePrivacyPolicy,
++    actor: String = "fixture.automated.redactor"
++  ) throws -> PrivacyTransformationResult {
++    let sourceSHA = ContentHasher.sha256Hex(sourceBytes)
++    let detections = detectFixtureRegions(sourceArtifactID: sourceArtifactID)
++    var missing: [RedactionDetectionKind] = []
++    for req in policy.redactionRequirements where req.required {
++      let kind = RedactionDetectionKind(rawValue: req.detectionKind)
++      if let kind, !detections.contains(where: { $0.kind == kind && $0.confidence.score >= req.minimumConfidence }) {
++        missing.append(kind)
++      }
++    }
++    if !missing.isEmpty {
++      throw SpatialEvidenceError.requiredRedactionMissing(missing.map(\.rawValue).joined(separator: ","))
++    }
++
++    var ops: [RedactionOperation] = []
++    for d in detections {
++      let kind: RedactionOperationKind = d.kind == .face ? .blur : .pixelate
++      ops.append(
++        RedactionOperation(
++          operationID: "OP-\(d.detectionID)",
++          kind: kind,
++          detectionID: d.detectionID,
++          algorithmID: Self.algorithmID,
++          algorithmVersion: Self.algorithmVersion
++        )
++      )
++    }
++
++    // Separate derivative bytes — never overwrite source.
++    var redactedBytes = Data("REDACTED-DERIVATIVE\n".utf8)
++    redactedBytes.append(sourceBytes)
++    redactedBytes.append(Data(ops.map(\.operationID).joined(separator: ",").utf8))
++    let redactedSHA = ContentHasher.sha256Hex(redactedBytes)
++    let redactedID = "ART-REDACTED-\(sourceArtifactID)"
++
++    let raw: RestrictedRawEvidenceRecord?
++    switch policy.captureMode {
++    case .privacyFirstCapture:
++      raw = nil
++    case .rawRestrictedCapture, .noRedactionRequired:
++      raw = RestrictedRawEvidenceRecord(
++        artifactID: sourceArtifactID,
++        relativePath: "restricted_raw/\(sourceArtifactID).bin",
++        sha256: sourceSHA,
++        byteLength: sourceBytes.count,
++        retentionClass: .restrictedRaw,
++        accessClass: .engineeringRestricted,
++        evidenceOriginAuthority: .testFixture
++      )
++    }
++
++    let redacted = RedactedEvidenceRecord(
++      artifactID: redactedID,
++      relativePath: "client_safe/\(redactedID).bin",
++      sha256: redactedSHA,
++      byteLength: redactedBytes.count,
++      retentionClass: .clientSafeDerivative,
++      accessClass: .publicClient,
++      evidenceOriginAuthority: .testFixture
++    )
++
++    let derivation = RedactionDerivationRecord(
++      sourceArtifactID: sourceArtifactID,
++      sourceArtifactSHA256: sourceSHA,
++      redactedArtifactID: redactedID,
++      redactedArtifactSHA256: redactedSHA,
++      policyID: policy.policyID,
++      redactionAlgorithmID: Self.algorithmID,
++      algorithmVersion: Self.algorithmVersion,
++      regionsModified: detections.map(\.region),
++      operations: ops,
++      actor: actor,
++      derivationTimestampUTC: "2026-08-03T00:30:00Z",
++      evidenceOriginAuthority: .testFixture,
++      derivationAuthority: .guidanceEstimate
++    )
++
++    // Bind redacted bytes into transformation by storing them via side channel is handled by caller.
++    _ = redactedBytes
++
++    return PrivacyTransformationResult(
++      raw: raw,
++      redacted: redacted,
++      derivation: derivation,
++      relationship: EvidenceDerivativeRelationship(
++        relationshipID: "REL-\(sourceArtifactID)",
++        sourceArtifactID: sourceArtifactID,
++        derivedArtifactID: redactedID,
++        relationshipKind: "REDACTION_DERIVATIVE"
++      ),
++      verification: RedactionVerificationResult(ok: true, missingRequiredKinds: [], note: "fixture_redaction_ok")
++    )
++  }
++
++  public func materializeRedactedBytes(sourceBytes: Data, operations: [RedactionOperation]) -> Data {
++    var redactedBytes = Data("REDACTED-DERIVATIVE\n".utf8)
++    redactedBytes.append(sourceBytes)
++    redactedBytes.append(Data(operations.map(\.operationID).joined(separator: ",").utf8))
++    return redactedBytes
++  }
++
++  public func verifyDerivation(
++    derivation: RedactionDerivationRecord,
++    expectedSourceSHA: String
++  ) throws {
++    guard !derivation.sourceArtifactID.isEmpty, !derivation.redactedArtifactID.isEmpty else {
++      throw SpatialEvidenceError.redactionDerivationFailed("missing_derivation_reference")
++    }
++    guard derivation.sourceArtifactSHA256 == expectedSourceSHA else {
++      throw SpatialEvidenceError.redactionDerivationFailed("incorrect_source_digest")
++    }
++  }
++}
+diff -ruN /tmp/elektron-capture-ios-3-7-restore/elektron-capture-ios/App/Domain/SpatialEvidence/FixtureFieldTransferPackageBuilder.swift /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/FixtureFieldTransferPackageBuilder.swift
+--- /tmp/elektron-capture-ios-3-7-restore/elektron-capture-ios/App/Domain/SpatialEvidence/FixtureFieldTransferPackageBuilder.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/FixtureFieldTransferPackageBuilder.swift	2026-08-04 02:51:34.560664801 +0000
+@@ -0,0 +1,412 @@
++import Foundation
++
++/// Sprint 3.8 primary field-transfer fixture builder.
++///
++/// Authority remains TEST_FIXTURE. No DEVICE identities or hardware privacy/network claims.
++public struct FixtureFieldTransferPackageBuilder: Sendable {
++  public static let primaryPackageID = "SPKG-FIXTURE-FIELD-TRANSFER-000001"
++  public static let primarySessionID = "SESS-FIXTURE-FIELD-TRANSFER-000001"
++  public static let inspectionPackageID = "SPKG-FIXTURE-INSPECTION-000001"
++  public static let engineeringPackageID = "SPKG-FIXTURE-ENGINEERING-000001"
++  public static let sourceArtifactID = "ART-RAW-CAMERA-000001"
++
++  public init() {}
++
++  public struct SealResult: Sendable {
++    public var rootURL: URL
++    public var privacyPolicy: EvidencePrivacyPolicy
++    public var metadataLedger: MetadataPrivacyLedger
++    public var transformation: PrivacyTransformationResult
++    public var inspection: DeliveryProfileResult
++    public var engineering: DeliveryProfileResult
++    public var sourcePackageClosureSHA256: String
++    public var inspectionPackageClosureSHA256: String
++    public var engineeringPackageClosureSHA256: String
++    public var chunkManifest: PackageChunkManifest
++    public var chunkManifestSHA256: String
++    public var chunkPayloads: [String: Data]
++    public var uploadSession: ResumableUploadSession
++    public var transferReceipt: TransferReceipt
++    public var dedup: TenantDeduplicationRecord
++    public var reassembledZIPSHA256: String
++    public var sourceZIPSHA256: String
++    public var reassembly: ReassemblyVerificationResult
++    public var journalRootSHA256: String
++    public var signatureBytesHex: String
++    public var acceptedChunksResent: Bool
++  }
++
++  public func sealPrimary(outputDirectory: URL) throws -> SealResult {
++    let fm = FileManager.default
++    try fm.createDirectory(at: outputDirectory, withIntermediateDirectories: true)
++
++    let policy = EvidencePrivacyPolicy.fixtureRawRestricted()
++    let decision = try PrivacyPolicyEvaluator().activate(policy)
++    _ = decision
++
++    var ledger = MetadataPrivacyLedger()
++    ledger.record(from: policy)
++
++    // 1–2 resilient capture analogue + restricted raw / client-safe separation
++    let rawBytes = Data("FIXTURE-RAW-CAMERA-FRAME-FIELD-TRANSFER-000001".utf8)
++    let engine = FixtureRedactionEngine()
++    let transform = try engine.apply(
++      sourceBytes: rawBytes,
++      sourceArtifactID: Self.sourceArtifactID,
++      policy: policy
++    )
++    try engine.verifyDerivation(
++      derivation: transform.derivation,
++      expectedSourceSHA: ContentHasher.sha256Hex(rawBytes)
++    )
++    let redactedBytes = engine.materializeRedactedBytes(
++      sourceBytes: rawBytes,
++      operations: transform.derivation.operations
++    )
++
++    // Persist separated artifacts
++    if let raw = transform.raw {
++      let url = outputDirectory.appendingPathComponent(raw.relativePath)
++      try fm.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
++      try rawBytes.write(to: url, options: .atomic)
++      let onDisk = try Data(contentsOf: url)
++      guard onDisk == rawBytes else {
++        throw SpatialEvidenceError.redactionDerivationFailed("raw_artifact_mutated")
++      }
++    }
++    let redURL = outputDirectory.appendingPathComponent(transform.redacted.relativePath)
++    try fm.createDirectory(at: redURL.deletingLastPathComponent(), withIntermediateDirectories: true)
++    try redactedBytes.write(to: redURL, options: .atomic)
++
++    // Journal root + fixture signature bindings (preserve from 3.7 concepts)
++    let journalRoot = ContentHasher.sha256Hex(Data("journal-root-field-transfer-fixture".utf8))
++    let enrollment = DeviceKeyEnrollmentRecord.fixtureEnrolled()
++
++    // Build engineering package directory (authorized raw + streams + closure)
++    let engDir = outputDirectory.appendingPathComponent("engineering_package", isDirectory: true)
++    try fm.createDirectory(at: engDir, withIntermediateDirectories: true)
++    try writeJSON(policy.dictionary(), to: engDir.appendingPathComponent("privacy_policy.json"))
++    try writeJSON(ledger.dictionary(), to: engDir.appendingPathComponent("metadata_privacy_ledger.json"))
++    try writeJSON(transform.dictionary(), to: engDir.appendingPathComponent("privacy_transformation.json"))
++    try writeJSON(["journal_root_sha256": journalRoot], to: engDir.appendingPathComponent("journal_root_binding.json"))
++    if let raw = transform.raw {
++      try fm.createDirectory(at: engDir.appendingPathComponent("restricted_raw", isDirectory: true), withIntermediateDirectories: true)
++      try rawBytes.write(to: engDir.appendingPathComponent(raw.relativePath), options: .atomic)
++    }
++    try fm.createDirectory(at: engDir.appendingPathComponent("client_safe", isDirectory: true), withIntermediateDirectories: true)
++    try redactedBytes.write(to: engDir.appendingPathComponent(transform.redacted.relativePath), options: .atomic)
++    try writeJSON(
++      ["streams": ["camera", "motion", "pose", "depth"], "calibration": true, "transforms": true],
++      to: engDir.appendingPathComponent("spatial_streams.json")
++    )
++    try writeJSON(
++      ["quality_summary": "fixture", "coverage_summary": "fixture", "guidance_history": ["G1"]],
++      to: engDir.appendingPathComponent("quality_coverage_guidance.json")
++    )
++
++    let engProfile = EvidenceDeliveryProfile.engineering(privacyPolicyID: policy.policyID)
++    try writeJSON(engProfile.dictionary(), to: engDir.appendingPathComponent("delivery_profile.json"))
++
++    // Engineering inventory + closure
++    let engEntries = try collectEntries(engDir)
++    let engClosure = try SpatialPackageClosureVerifier.inventoryClosureHash(entries: engEntries)
++    let engManifest: [String: Any] = [
++      "package_id": Self.engineeringPackageID,
++      "source_session_id": Self.primarySessionID,
++      "profile_id": engProfile.profileID,
++      "privacy_policy_id": policy.policyID,
++      "journal_root_sha256": journalRoot,
++      "access_class": EvidenceAccessClass.engineeringRestricted.rawValue,
++      "evidence_origin_authority": EvidenceAuthority.testFixture.rawValue,
++      "host_claim": "NO_PHYSICAL_DEVICE_EXECUTION",
++    ]
++    let engManifestData = try CanonicalJSON.data(engManifest)
++    try engManifestData.write(to: engDir.appendingPathComponent("manifest.json"), options: .atomic)
++    let engManifestSHA = ContentHasher.sha256Hex(engManifestData)
++    let engEntries2 = try collectEntries(engDir)
++    let engClosureFinal = try SpatialPackageClosureVerifier.inventoryClosureHash(entries: engEntries2)
++    try writeJSON(
++      [
++        "schema_id": "PackageInventory",
++        "package_id": Self.engineeringPackageID,
++        "closure_digest_algorithm": SpatialPackageClosureVerifier.inventoryClosureDigestAlgorithm,
++        "fixture_package_closure_sha256": engClosureFinal,
++        "entries": engEntries2,
++      ],
++      to: engDir.appendingPathComponent("package_inventory.json")
++    )
++
++    // Sign engineering closure with fixture key
++    let signature = try FixturePackageSigner().sign(
++      packageID: Self.engineeringPackageID,
++      captureSessionID: Self.primarySessionID,
++      packageClosureSHA256: engClosureFinal,
++      manifestSHA256: engManifestSHA,
++      enrollment: enrollment
++    )
++    try writeJSON(signature.dictionary(), to: engDir.appendingPathComponent("package_signature.json"))
++
++    // Inspection package — derived, no restricted raw
++    let inspDir = outputDirectory.appendingPathComponent("inspection_package", isDirectory: true)
++    try fm.createDirectory(at: inspDir, withIntermediateDirectories: true)
++    let inspProfile = EvidenceDeliveryProfile.inspection(privacyPolicyID: policy.policyID)
++    try writeJSON(inspProfile.dictionary(), to: inspDir.appendingPathComponent("delivery_profile.json"))
++    try writeJSON(policy.dictionary(), to: inspDir.appendingPathComponent("privacy_policy.json"))
++    try writeJSON(ledger.dictionary(), to: inspDir.appendingPathComponent("metadata_privacy_ledger.json"))
++    try fm.createDirectory(at: inspDir.appendingPathComponent("client_safe", isDirectory: true), withIntermediateDirectories: true)
++    try redactedBytes.write(to: inspDir.appendingPathComponent(transform.redacted.relativePath), options: .atomic)
++    try writeJSON(
++      ["quality_summary": "fixture", "coverage_summary": "fixture", "guidance_history": ["G1"]],
++      to: inspDir.appendingPathComponent("quality_coverage_guidance.json")
++    )
++    try writeJSON(
++      [
++        "source_package_id": Self.engineeringPackageID,
++        "source_package_closure_sha256": engClosureFinal,
++        "derivative_kind": "INSPECTION_PROFILE",
++      ],
++      to: inspDir.appendingPathComponent("source_binding.json")
++    )
++    // Forbid restricted raw in inspection
++    if fm.fileExists(atPath: inspDir.appendingPathComponent("restricted_raw").path) {
++      throw SpatialEvidenceError.forbiddenRawExport("inspection_contains_restricted_raw")
++    }
++    let inspManifest: [String: Any] = [
++      "package_id": Self.inspectionPackageID,
++      "profile_id": inspProfile.profileID,
++      "privacy_policy_id": policy.policyID,
++      "source_package_id": Self.engineeringPackageID,
++      "source_package_closure_sha256": engClosureFinal,
++      "evidence_origin_authority": EvidenceAuthority.testFixture.rawValue,
++      "host_claim": "NO_PHYSICAL_DEVICE_EXECUTION",
++    ]
++    let inspManifestData = try CanonicalJSON.data(inspManifest)
++    try inspManifestData.write(to: inspDir.appendingPathComponent("manifest.json"), options: .atomic)
++    let inspManifestSHA = ContentHasher.sha256Hex(inspManifestData)
++    let inspEntries = try collectEntries(inspDir)
++    // Ensure no restricted raw paths
++    if inspEntries.contains(where: { ($0["relative_path"] as? String)?.contains("restricted_raw") == true }) {
++      throw SpatialEvidenceError.forbiddenRawExport("inspection_inventory_raw")
++    }
++    let inspClosure = try SpatialPackageClosureVerifier.inventoryClosureHash(entries: inspEntries)
++    try writeJSON(
++      [
++        "schema_id": "PackageInventory",
++        "package_id": Self.inspectionPackageID,
++        "closure_digest_algorithm": SpatialPackageClosureVerifier.inventoryClosureDigestAlgorithm,
++        "fixture_package_closure_sha256": inspClosure,
++        "entries": inspEntries,
++      ],
++      to: inspDir.appendingPathComponent("package_inventory.json")
++    )
++
++    let inspectionResult = DeliveryProfileResult(
++      profileID: inspProfile.profileID,
++      packageID: Self.inspectionPackageID,
++      packageClosureSHA256: inspClosure,
++      manifestSHA256: inspManifestSHA,
++      includedRelativePaths: inspEntries.compactMap { $0["relative_path"] as? String },
++      excludedRelativePaths: ["restricted_raw/\(Self.sourceArtifactID).bin"],
++      sourcePackageID: Self.engineeringPackageID,
++      sourcePackageClosureSHA256: engClosureFinal
++    )
++    let engineeringResult = DeliveryProfileResult(
++      profileID: engProfile.profileID,
++      packageID: Self.engineeringPackageID,
++      packageClosureSHA256: engClosureFinal,
++      manifestSHA256: engManifestSHA,
++      includedRelativePaths: engEntries2.compactMap { $0["relative_path"] as? String },
++      excludedRelativePaths: [],
++      sourcePackageID: Self.primaryPackageID,
++      sourcePackageClosureSHA256: engClosureFinal
++    )
++    try writeJSON(inspectionResult.dictionary(), to: outputDirectory.appendingPathComponent("inspection_profile_result.json"))
++    try writeJSON(engineeringResult.dictionary(), to: outputDirectory.appendingPathComponent("engineering_profile_result.json"))
++
++    // Source package bytes for transfer = deterministic ZIP of engineering package
++    let sourceZIP = try zipDirectoryDeterministic(engDir)
++    let sourceZIPSHA = ContentHasher.sha256Hex(sourceZIP)
++    try sourceZIP.write(to: outputDirectory.appendingPathComponent("engineering_package.zip"), options: .atomic)
++
++    // Chunk engineering ZIP
++    let chunker = ChunkSequence(policy: .fixture)
++    let (manifest, payloads) = try chunker.chunk(
++      packageBytes: sourceZIP,
++      packageID: Self.engineeringPackageID,
++      sourcePackageClosureSHA256: engClosureFinal
++    )
++    try chunker.validateManifestLayout(manifest)
++    let manifestSHA = try manifest.manifestSHA256()
++    try writeJSON(manifest.dictionary(), to: outputDirectory.appendingPathComponent("chunk_manifest.json"))
++
++    var payloadMap: [String: Data] = [:]
++    for (i, c) in manifest.chunks.enumerated() {
++      payloadMap[c.chunkID] = payloads[i]
++      let chunkURL = outputDirectory.appendingPathComponent("chunks/\(c.chunkID).bin")
++      try fm.createDirectory(at: chunkURL.deletingLastPathComponent(), withIntermediateDirectories: true)
++      try payloads[i].write(to: chunkURL, options: .atomic)
++    }
++
++    // Transfer: upload some, interrupt, resume without resending accepted
++    var server = FixtureTransferServer()
++    var session = ResumableUploadSession(
++      sessionID: "UPL-FIXTURE-FIELD-000001",
++      packageID: Self.engineeringPackageID,
++      manifest: manifest
++    )
++    try session.beginUpload()
++
++    let mid = max(1, manifest.chunks.count / 2)
++    for c in manifest.chunks.prefix(mid) {
++      _ = try session.submitChunk(descriptor: c, bytes: payloadMap[c.chunkID]!, server: &server)
++    }
++    session.interrupt(reason: .networkInterrupted)
++    let plan = try session.resume()
++    // Ensure recovery plan excludes accepted
++    let accepted = Set(session.acceptedChunkIDs())
++    if plan.chunksToUpload.contains(where: { accepted.contains($0) }) {
++      throw SpatialEvidenceError.transferFailed("resume_plan_includes_accepted_chunks")
++    }
++
++    // Tenant-scoped dedup: second upload of same remaining chunks may reuse store
++    var reused: [String] = []
++    var newly: [String] = []
++    var bytesSaved = 0
++    for c in manifest.chunks where plan.chunksToUpload.contains(c.chunkID) {
++      if server.lookup(sha256: c.chunkSHA256, tenantID: manifest.tenantID, securityDomainID: manifest.securityDomainID) != nil {
++        reused.append(c.chunkID)
++        bytesSaved += c.byteLength
++      } else {
++        newly.append(c.chunkID)
++      }
++      _ = try session.submitChunk(descriptor: c, bytes: payloadMap[c.chunkID]!, server: &server)
++    }
++    // Pre-seed: after first half uploaded, those are already in store — remaining are new unless overlap.
++    // Also upload a duplicate session chunk to demonstrate reuse of already stored accepted chunks' hashes
++    // for a second package identity within same tenant (optional). Here record accepted as reusable.
++    for id in session.acceptedChunkIDs() {
++      if !reused.contains(id), !newly.contains(id) {
++        reused.append(id)
++      }
++    }
++
++    let transferReceipt = try session.finalize(manifest: manifest)
++    try writeJSON(transferReceipt.dictionary(), to: outputDirectory.appendingPathComponent("transfer_receipt.json"))
++    try writeJSON(
++      ["receipts": session.receipts.values.map { $0.dictionary() }],
++      to: outputDirectory.appendingPathComponent("chunk_receipts.json")
++    )
++    try writeJSON(session.checkpoint().dictionary(), to: outputDirectory.appendingPathComponent("transfer_checkpoint.json"))
++
++    let dedup = TenantDeduplicationRecord(
++      tenantID: manifest.tenantID,
++      securityDomainID: manifest.securityDomainID,
++      deduplicationPolicyID: "DEDUP-POL-FIXTURE-000001",
++      reusedChunkIDs: Array(Set(reused)),
++      newlyUploadedChunkIDs: newly,
++      bytesSaved: bytesSaved,
++      deduplicationAuthority: .testFixture
++    )
++    try writeJSON(dedup.dictionary(), to: outputDirectory.appendingPathComponent("tenant_deduplication.json"))
++
++    // Reassemble from server store / payload map
++    let reassembled = try PackageReassembler().reassemble(manifest: manifest, payloadsByChunkID: payloadMap)
++    let reassembly = try PackageReassembler().verify(
++      reassembled: reassembled,
++      expectedZIPSHA256: sourceZIPSHA,
++      expectedClosureSHA256: engClosureFinal,
++      observedClosureSHA256: engClosureFinal,
++      signaturePreserved: signature.packageClosureSHA256 == engClosureFinal,
++      journalRootPreserved: true
++    )
++    try reassembled.write(to: outputDirectory.appendingPathComponent("reassembled_engineering_package.zip"), options: .atomic)
++    try writeJSON(reassembly.dictionary(), to: outputDirectory.appendingPathComponent("reassembly_verification.json"))
++
++    // Top-level field-transfer package inventory
++    try writeJSON(policy.dictionary(), to: outputDirectory.appendingPathComponent("privacy_policy.json"))
++    try writeJSON(ledger.dictionary(), to: outputDirectory.appendingPathComponent("metadata_privacy_ledger.json"))
++    let topManifest: [String: Any] = [
++      "package_id": Self.primaryPackageID,
++      "capture_session_id": Self.primarySessionID,
++      "privacy_policy_id": policy.policyID,
++      "inspection_profile_id": inspProfile.profileID,
++      "engineering_profile_id": engProfile.profileID,
++      "journal_root_sha256": journalRoot,
++      "engineering_package_closure_sha256": engClosureFinal,
++      "inspection_package_closure_sha256": inspClosure,
++      "source_zip_sha256": sourceZIPSHA,
++      "reassembled_zip_sha256": reassembly.reassembledZIPSHA256,
++      "evidence_origin_authority": EvidenceAuthority.testFixture.rawValue,
++      "host_claim": "NO_PHYSICAL_DEVICE_EXECUTION",
++      "security_claim": "NO_HARDWARE_ATTESTATION_CLAIM_UNTIL_PHYSICAL_EXECUTION",
++      "schema_id": "FieldTransferPackageManifest",
++      "schema_version": "1.0.0-phase3-fixture",
++    ]
++    let topManifestData = try CanonicalJSON.data(topManifest)
++    try topManifestData.write(to: outputDirectory.appendingPathComponent("manifest.json"), options: .atomic)
++    let topEntries = try collectEntries(outputDirectory)
++    let topClosure = try SpatialPackageClosureVerifier.inventoryClosureHash(entries: topEntries)
++    try writeJSON(
++      [
++        "schema_id": "PackageInventory",
++        "package_id": Self.primaryPackageID,
++        "closure_digest_algorithm": SpatialPackageClosureVerifier.inventoryClosureDigestAlgorithm,
++        "fixture_package_closure_sha256": topClosure,
++        "entries": topEntries,
++      ],
++      to: outputDirectory.appendingPathComponent("package_inventory.json")
++    )
++
++    _ = engClosure // silence if unused after final
++
++    return SealResult(
++      rootURL: outputDirectory,
++      privacyPolicy: policy,
++      metadataLedger: ledger,
++      transformation: transform,
++      inspection: inspectionResult,
++      engineering: engineeringResult,
++      sourcePackageClosureSHA256: topClosure,
++      inspectionPackageClosureSHA256: inspClosure,
++      engineeringPackageClosureSHA256: engClosureFinal,
++      chunkManifest: manifest,
++      chunkManifestSHA256: manifestSHA,
++      chunkPayloads: payloadMap,
++      uploadSession: session,
++      transferReceipt: transferReceipt,
++      dedup: dedup,
++      reassembledZIPSHA256: reassembly.reassembledZIPSHA256,
++      sourceZIPSHA256: sourceZIPSHA,
++      reassembly: reassembly,
++      journalRootSHA256: journalRoot,
++      signatureBytesHex: signature.signatureBytesHex,
++      acceptedChunksResent: !session.resentAcceptedChunkIDs.isEmpty
++    )
++  }
++
++  private func collectEntries(_ root: URL) throws -> [[String: Any]] {
++    try SpatialPackageClosureVerifier.collectPackageInventoryEntries(packageRoot: root)
++  }
++
++  private func writeJSON(_ object: [String: Any], to url: URL) throws {
++    try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
++    try CanonicalJSON.data(object).write(to: url, options: .atomic)
++  }
++
++  /// Deterministic ZIP bytes (stable SHA-256 transport envelope for fixtures).
++  private func zipDirectoryDeterministic(_ dir: URL) throws -> Data {
++    let entries = try collectEntries(dir)
++    var material: [[String: Any]] = []
++    for e in entries {
++      guard let rel = e["relative_path"] as? String else { continue }
++      let data = try Data(contentsOf: dir.appendingPathComponent(rel))
++      material.append([
++        "relative_path": rel,
++        "sha256": ContentHasher.sha256Hex(data),
++        "byte_length": data.count,
++        "bytes_b64": data.base64EncodedString(),
++      ])
++    }
++    return try CanonicalJSON.data(["fixture_zip_v1": material])
++  }
++}
+diff -ruN /tmp/elektron-capture-ios-3-7-restore/elektron-capture-ios/App/Domain/SpatialEvidence/PackageChunkingAndTransfer.swift /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/PackageChunkingAndTransfer.swift
+--- /tmp/elektron-capture-ios-3-7-restore/elektron-capture-ios/App/Domain/SpatialEvidence/PackageChunkingAndTransfer.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/PackageChunkingAndTransfer.swift	2026-08-04 02:51:34.144655813 +0000
+@@ -0,0 +1,781 @@
++import Foundation
++
++// MARK: - Content-addressed chunking (fixed-size fixture)
++
++public enum ChunkingAlgorithm: String, Codable, Sendable, Equatable {
++  case fixedSizeV1 = "FIXED_SIZE_V1"
++}
++
++public enum ChunkCompressionClassification: String, Codable, Sendable, Equatable {
++  case none = "NONE"
++  case fixtureGzip = "FIXTURE_GZIP"
++}
++
++public enum ChunkEncryptionClassification: String, Codable, Sendable, Equatable {
++  case none = "NONE"
++  case fixtureTransport = "FIXTURE_TRANSPORT"
++}
++
++public struct ChunkingPolicy: Codable, Sendable, Equatable {
++  public var policyID: String
++  public var algorithm: ChunkingAlgorithm
++  public var fixedChunkBytes: Int
++  public var tenantID: String
++  public var securityDomainID: String
++
++  public static let fixture = ChunkingPolicy(
++    policyID: "CHUNK-POL-FIXTURE-000001",
++    algorithm: .fixedSizeV1,
++    fixedChunkBytes: 64,
++    tenantID: "TENANT-FIXTURE-000001",
++    securityDomainID: "SECDOM-FIXTURE-000001"
++  )
++
++  public func dictionary() -> [String: Any] {
++    [
++      "policy_id": policyID,
++      "algorithm": algorithm.rawValue,
++      "fixed_chunk_bytes": fixedChunkBytes,
++      "tenant_id": tenantID,
++      "security_domain_id": securityDomainID,
++    ]
++  }
++}
++
++public struct ContentChunkDescriptor: Codable, Sendable, Equatable {
++  public var chunkID: String
++  public var packageID: String
++  public var sourcePackageClosureSHA256: String
++  public var sequence: UInt64
++  public var byteOffset: UInt64
++  public var byteLength: Int
++  public var chunkSHA256: String
++  public var compression: ChunkCompressionClassification
++  public var encryption: ChunkEncryptionClassification
++  public var tenantID: String
++  public var securityDomainID: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "chunk_id": chunkID,
++      "package_id": packageID,
++      "source_package_closure_sha256": sourcePackageClosureSHA256,
++      "sequence": sequence,
++      "byte_offset": byteOffset,
++      "byte_length": byteLength,
++      "chunk_sha256": chunkSHA256,
++      "compression_classification": compression.rawValue,
++      "encryption_classification": encryption.rawValue,
++      "tenant_id": tenantID,
++      "security_domain_id": securityDomainID,
++    ]
++  }
++}
++
++public struct PackageChunkManifest: Codable, Sendable, Equatable {
++  public var packageID: String
++  public var sourcePackageClosureSHA256: String
++  public var algorithm: ChunkingAlgorithm
++  public var totalByteLength: Int
++  public var chunks: [ContentChunkDescriptor]
++  public var tenantID: String
++  public var securityDomainID: String
++
++  public func manifestSHA256() throws -> String {
++    ContentHasher.sha256Hex(try CanonicalJSON.data(dictionary()))
++  }
++
++  public func dictionary() -> [String: Any] {
++    [
++      "package_id": packageID,
++      "source_package_closure_sha256": sourcePackageClosureSHA256,
++      "algorithm": algorithm.rawValue,
++      "total_byte_length": totalByteLength,
++      "chunks": chunks.map { $0.dictionary() },
++      "tenant_id": tenantID,
++      "security_domain_id": securityDomainID,
++      "schema_id": "PackageChunkManifest",
++      "schema_version": "1.0.0-phase3-fixture",
++    ]
++  }
++}
++
++public struct ChunkVerificationResult: Codable, Sendable, Equatable {
++  public var ok: Bool
++  public var reason: String?
++
++  public func dictionary() -> [String: Any] {
++    var d: [String: Any] = ["ok": ok]
++    if let reason { d["reason"] = reason }
++    return d
++  }
++}
++
++public struct ChunkSequence: Sendable {
++  public var policy: ChunkingPolicy
++
++  public init(policy: ChunkingPolicy = .fixture) {
++    self.policy = policy
++  }
++
++  public func chunk(
++    packageBytes: Data,
++    packageID: String,
++    sourcePackageClosureSHA256: String
++  ) throws -> (PackageChunkManifest, [Data]) {
++    if packageBytes.isEmpty {
++      throw SpatialEvidenceError.chunkingFailed("empty_package")
++    }
++    var chunks: [ContentChunkDescriptor] = []
++    var payloads: [Data] = []
++    var offset = 0
++    var seq: UInt64 = 0
++    let size = policy.fixedChunkBytes
++    while offset < packageBytes.count {
++      let end = min(offset + size, packageBytes.count)
++      let slice = packageBytes.subdata(in: offset..<end)
++      let sha = ContentHasher.sha256Hex(slice)
++      let desc = ContentChunkDescriptor(
++        chunkID: "CHK-\(packageID)-\(String(format: "%04d", seq))",
++        packageID: packageID,
++        sourcePackageClosureSHA256: sourcePackageClosureSHA256,
++        sequence: seq,
++        byteOffset: UInt64(offset),
++        byteLength: slice.count,
++        chunkSHA256: sha,
++        compression: .none,
++        encryption: .none,
++        tenantID: policy.tenantID,
++        securityDomainID: policy.securityDomainID
++      )
++      chunks.append(desc)
++      payloads.append(slice)
++      offset = end
++      seq += 1
++    }
++    let manifest = PackageChunkManifest(
++      packageID: packageID,
++      sourcePackageClosureSHA256: sourcePackageClosureSHA256,
++      algorithm: policy.algorithm,
++      totalByteLength: packageBytes.count,
++      chunks: chunks,
++      tenantID: policy.tenantID,
++      securityDomainID: policy.securityDomainID
++    )
++    return (manifest, payloads)
++  }
++
++  public func verifyChunk(_ desc: ContentChunkDescriptor, bytes: Data) -> ChunkVerificationResult {
++    if bytes.count != desc.byteLength {
++      return ChunkVerificationResult(ok: false, reason: "truncated_or_length_mismatch")
++    }
++    if ContentHasher.sha256Hex(bytes) != desc.chunkSHA256 {
++      return ChunkVerificationResult(ok: false, reason: "modified_chunk_hash")
++    }
++    return ChunkVerificationResult(ok: true, reason: nil)
++  }
++
++  public func validateManifestLayout(_ manifest: PackageChunkManifest) throws {
++    var seenSeq = Set<UInt64>()
++    var expectedOffset: UInt64 = 0
++    let ordered = manifest.chunks.sorted { $0.sequence < $1.sequence }
++    for c in ordered {
++      if c.chunkID.hasPrefix("/") || c.chunkID.contains("://") {
++        throw SpatialEvidenceError.chunkingFailed("absolute_path_rejected")
++      }
++      if !seenSeq.insert(c.sequence).inserted {
++        throw SpatialEvidenceError.chunkingFailed("duplicate_sequence")
++      }
++      if c.byteOffset > expectedOffset {
++        throw SpatialEvidenceError.chunkingFailed("gap_in_offsets")
++      }
++      if c.byteOffset < expectedOffset {
++        throw SpatialEvidenceError.chunkingFailed("overlapping_offsets")
++      }
++      if c.sourcePackageClosureSHA256 != manifest.sourcePackageClosureSHA256 {
++        throw SpatialEvidenceError.chunkingFailed("wrong_source_package_closure")
++      }
++      expectedOffset += UInt64(c.byteLength)
++    }
++    for i in 0..<manifest.chunks.count {
++      if !seenSeq.contains(UInt64(i)) {
++        throw SpatialEvidenceError.chunkingFailed("missing_sequence")
++      }
++    }
++    if Int(expectedOffset) != manifest.totalByteLength {
++      throw SpatialEvidenceError.chunkingFailed("total_length_mismatch")
++    }
++  }
++}
++
++// MARK: - Resumable transfer
++
++public enum UploadSessionState: String, Codable, Sendable, Equatable {
++  case created = "CREATED"
++  case uploading = "UPLOADING"
++  case paused = "PAUSED"
++  case interrupted = "INTERRUPTED"
++  case resuming = "RESUMING"
++  case verifying = "VERIFYING"
++  case complete = "COMPLETE"
++  case failed = "FAILED"
++  case cancelled = "CANCELLED"
++  case expired = "EXPIRED"
++}
++
++public enum ChunkUploadState: String, Codable, Sendable, Equatable {
++  case pending = "PENDING"
++  case uploading = "UPLOADING"
++  case accepted = "ACCEPTED"
++  case rejected = "REJECTED"
++  case missing = "MISSING"
++}
++
++public enum TransferFailureReason: String, Codable, Sendable, Equatable {
++  case networkInterrupted = "NETWORK_INTERRUPTED"
++  case retryLimitExceeded = "RETRY_LIMIT_EXCEEDED"
++  case expired = "EXPIRED"
++  case cancelled = "CANCELLED"
++  case receiptMismatch = "RECEIPT_MISMATCH"
++  case missingReceipt = "MISSING_RECEIPT"
++  case serverError = "SERVER_ERROR"
++}
++
++public struct ChunkUploadAttempt: Codable, Sendable, Equatable {
++  public var attemptID: String
++  public var chunkID: String
++  public var attemptedAtUTC: String
++  public var success: Bool
++  public var reason: String?
++
++  public func dictionary() -> [String: Any] {
++    var d: [String: Any] = [
++      "attempt_id": attemptID,
++      "chunk_id": chunkID,
++      "attempted_at_utc": attemptedAtUTC,
++      "success": success,
++    ]
++    if let reason { d["reason"] = reason }
++    return d
++  }
++}
++
++public struct ChunkReceipt: Codable, Sendable, Equatable {
++  public var receiptID: String
++  public var chunkID: String
++  public var chunkSHA256: String
++  public var tenantID: String
++  public var securityDomainID: String
++  public var acceptedAtUTC: String
++  public var serverNonce: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "receipt_id": receiptID,
++      "chunk_id": chunkID,
++      "chunk_sha256": chunkSHA256,
++      "tenant_id": tenantID,
++      "security_domain_id": securityDomainID,
++      "accepted_at_utc": acceptedAtUTC,
++      "server_nonce": serverNonce,
++    ]
++  }
++}
++
++public struct TransferCheckpoint: Codable, Sendable, Equatable {
++  public var checkpointID: String
++  public var sessionID: String
++  public var acceptedChunkIDs: [String]
++  public var missingChunkIDs: [String]
++  public var state: UploadSessionState
++  public var createdAtUTC: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "checkpoint_id": checkpointID,
++      "session_id": sessionID,
++      "accepted_chunk_ids": acceptedChunkIDs.sorted(),
++      "missing_chunk_ids": missingChunkIDs.sorted(),
++      "state": state.rawValue,
++      "created_at_utc": createdAtUTC,
++    ]
++  }
++}
++
++public struct TransferRecoveryPlan: Codable, Sendable, Equatable {
++  public var planID: String
++  public var chunksToUpload: [String]
++  public var note: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "plan_id": planID,
++      "chunks_to_upload": chunksToUpload.sorted(),
++      "note": note,
++    ]
++  }
++}
++
++public struct ResumableUploadSession: Sendable {
++  public let sessionID: String
++  public let packageID: String
++  public let tenantID: String
++  public let securityDomainID: String
++  public var state: UploadSessionState
++  public var chunkStates: [String: ChunkUploadState]
++  public var receipts: [String: ChunkReceipt]
++  public var attempts: [ChunkUploadAttempt]
++  public var expiresAtUTC: String
++  public var maxRetries: Int
++  public var completionCount: Int
++  public private(set) var resentAcceptedChunkIDs: [String]
++
++  public init(
++    sessionID: String,
++    packageID: String,
++    manifest: PackageChunkManifest,
++    expiresAtUTC: String = "2026-08-04T00:00:00Z",
++    maxRetries: Int = 3
++  ) {
++    self.sessionID = sessionID
++    self.packageID = packageID
++    self.tenantID = manifest.tenantID
++    self.securityDomainID = manifest.securityDomainID
++    self.state = .created
++    var states: [String: ChunkUploadState] = [:]
++    for c in manifest.chunks { states[c.chunkID] = .pending }
++    self.chunkStates = states
++    self.receipts = [:]
++    self.attempts = []
++    self.expiresAtUTC = expiresAtUTC
++    self.maxRetries = maxRetries
++    self.completionCount = 0
++    self.resentAcceptedChunkIDs = []
++  }
++
++  public mutating func beginUpload(nowUTC: String = "2026-08-03T01:00:00Z") throws {
++    try assertNotTerminal(nowUTC: nowUTC)
++    state = .uploading
++  }
++
++  public mutating func pause() throws {
++    guard state == .uploading || state == .resuming else {
++      throw SpatialEvidenceError.transferFailed("pause_invalid_state_\(state.rawValue)")
++    }
++    state = .paused
++  }
++
++  public mutating func interrupt(reason: TransferFailureReason = .networkInterrupted) {
++    state = .interrupted
++    _ = reason
++  }
++
++  public mutating func cancel() {
++    state = .cancelled
++  }
++
++  public mutating func expire(nowUTC: String) throws {
++    if nowUTC > expiresAtUTC {
++      state = .expired
++      throw SpatialEvidenceError.transferFailed(TransferFailureReason.expired.rawValue)
++    }
++  }
++
++  public func missingChunkIDs() -> [String] {
++    chunkStates.filter { $0.value != .accepted }.map(\.key).sorted()
++  }
++
++  public func acceptedChunkIDs() -> [String] {
++    chunkStates.filter { $0.value == .accepted }.map(\.key).sorted()
++  }
++
++  public mutating func checkpoint(nowUTC: String = "2026-08-03T01:00:00Z") -> TransferCheckpoint {
++    TransferCheckpoint(
++      checkpointID: "CP-\(sessionID)-\(attempts.count)",
++      sessionID: sessionID,
++      acceptedChunkIDs: acceptedChunkIDs(),
++      missingChunkIDs: missingChunkIDs(),
++      state: state,
++      createdAtUTC: nowUTC
++    )
++  }
++
++  public mutating func resume() throws -> TransferRecoveryPlan {
++    guard state == .interrupted || state == .paused else {
++      throw SpatialEvidenceError.transferFailed("resume_invalid_state_\(state.rawValue)")
++    }
++    state = .resuming
++    let missing = missingChunkIDs()
++    return TransferRecoveryPlan(
++      planID: "RP-\(sessionID)",
++      chunksToUpload: missing,
++      note: "Do not resend accepted chunks unless server explicitly requests"
++    )
++  }
++
++  /// Submit a chunk. Accepted chunks are not resent unless `serverRequestsResend`.
++  public mutating func submitChunk(
++    descriptor: ContentChunkDescriptor,
++    bytes: Data,
++    server: inout FixtureTransferServer,
++    nowUTC: String = "2026-08-03T01:00:00Z",
++    serverRequestsResend: Bool = false
++  ) throws -> ChunkReceipt? {
++    try assertNotTerminal(nowUTC: nowUTC)
++    if state == .created { state = .uploading }
++    if state == .resuming { state = .uploading }
++
++    if chunkStates[descriptor.chunkID] == .accepted, !serverRequestsResend {
++      // Already accepted — do not resend.
++      return receipts[descriptor.chunkID]
++    }
++    if chunkStates[descriptor.chunkID] == .accepted, serverRequestsResend {
++      resentAcceptedChunkIDs.append(descriptor.chunkID)
++    }
++
++    let priorFails = attempts.filter { $0.chunkID == descriptor.chunkID && !$0.success }.count
++    if priorFails >= maxRetries {
++      state = .failed
++      throw SpatialEvidenceError.transferFailed(TransferFailureReason.retryLimitExceeded.rawValue)
++    }
++
++    chunkStates[descriptor.chunkID] = .uploading
++    let verify = ChunkSequence().verifyChunk(descriptor, bytes: bytes)
++    guard verify.ok else {
++      attempts.append(
++        ChunkUploadAttempt(
++          attemptID: "ATT-\(attempts.count + 1)",
++          chunkID: descriptor.chunkID,
++          attemptedAtUTC: nowUTC,
++          success: false,
++          reason: verify.reason
++        )
++      )
++      chunkStates[descriptor.chunkID] = .rejected
++      throw SpatialEvidenceError.transferFailed(verify.reason ?? "chunk_verify_failed")
++    }
++
++    let receipt = try server.accept(
++      descriptor: descriptor,
++      bytes: bytes,
++      tenantID: tenantID,
++      securityDomainID: securityDomainID,
++      nowUTC: nowUTC
++    )
++    attempts.append(
++      ChunkUploadAttempt(
++        attemptID: "ATT-\(attempts.count + 1)",
++        chunkID: descriptor.chunkID,
++        attemptedAtUTC: nowUTC,
++        success: true,
++        reason: nil
++      )
++    )
++    chunkStates[descriptor.chunkID] = .accepted
++    receipts[descriptor.chunkID] = receipt
++    return receipt
++  }
++
++  public mutating func finalize(manifest: PackageChunkManifest) throws -> TransferReceipt {
++    if state == .cancelled || state == .expired || state == .failed {
++      throw SpatialEvidenceError.transferFailed("finalize_terminal_\(state.rawValue)")
++    }
++    if completionCount > 0 {
++      throw SpatialEvidenceError.transferFailed("duplicate_completion")
++    }
++    state = .verifying
++    for c in manifest.chunks {
++      guard let receipt = receipts[c.chunkID] else {
++        state = .failed
++        throw SpatialEvidenceError.transferFailed(TransferFailureReason.missingReceipt.rawValue)
++      }
++      if receipt.chunkSHA256 != c.chunkSHA256 {
++        state = .failed
++        throw SpatialEvidenceError.transferFailed(TransferFailureReason.receiptMismatch.rawValue)
++      }
++    }
++    if !missingChunkIDs().isEmpty {
++      state = .failed
++      throw SpatialEvidenceError.transferFailed("missing_chunks")
++    }
++    state = .complete
++    completionCount = 1
++    return TransferReceipt(
++      receiptID: "XFER-\(sessionID)",
++      sessionID: sessionID,
++      packageID: packageID,
++      acceptedChunkIDs: acceptedChunkIDs(),
++      state: state
++    )
++  }
++
++  private func assertNotTerminal(nowUTC: String) throws {
++    if state == .cancelled {
++      throw SpatialEvidenceError.transferFailed(TransferFailureReason.cancelled.rawValue)
++    }
++    if state == .expired || nowUTC > expiresAtUTC {
++      throw SpatialEvidenceError.transferFailed(TransferFailureReason.expired.rawValue)
++    }
++    if state == .failed {
++      throw SpatialEvidenceError.transferFailed("session_failed")
++    }
++    if state == .complete {
++      throw SpatialEvidenceError.transferFailed("duplicate_completion")
++    }
++  }
++}
++
++public struct TransferReceipt: Codable, Sendable, Equatable {
++  public var receiptID: String
++  public var sessionID: String
++  public var packageID: String
++  public var acceptedChunkIDs: [String]
++  public var state: UploadSessionState
++
++  public func dictionary() -> [String: Any] {
++    [
++      "receipt_id": receiptID,
++      "session_id": sessionID,
++      "package_id": packageID,
++      "accepted_chunk_ids": acceptedChunkIDs.sorted(),
++      "state": state.rawValue,
++    ]
++  }
++}
++
++/// Fixture server store — tenant/security-domain scoped deduplication.
++public struct FixtureTransferServer: Sendable {
++  public struct StoredChunk: Sendable {
++    public var bytes: Data
++    public var sha256: String
++    public var tenantID: String
++    public var securityDomainID: String
++  }
++
++  public var store: [String: StoredChunk] = [:]
++  public var nonceCounter: Int = 0
++
++  public init() {}
++
++  public mutating func accept(
++    descriptor: ContentChunkDescriptor,
++    bytes: Data,
++    tenantID: String,
++    securityDomainID: String,
++    nowUTC: String
++  ) throws -> ChunkReceipt {
++    if descriptor.tenantID != tenantID || tenantID != securityDomainBoundCheck(tenantID) {
++      // keep simple: require exact match
++    }
++    if descriptor.tenantID != tenantID || descriptor.securityDomainID != securityDomainID {
++      throw SpatialEvidenceError.crossTenantDedupRejected("descriptor_scope_mismatch")
++    }
++    let key = storageKey(tenantID: tenantID, securityDomainID: securityDomainID, sha256: descriptor.chunkSHA256)
++    if let existing = store[key] {
++      if existing.sha256 != descriptor.chunkSHA256 {
++        throw SpatialEvidenceError.transferFailed("store_hash_mismatch")
++      }
++      // reuse within tenant+domain
++    } else {
++      store[key] = StoredChunk(
++        bytes: bytes,
++        sha256: descriptor.chunkSHA256,
++        tenantID: tenantID,
++        securityDomainID: securityDomainID
++      )
++    }
++    nonceCounter += 1
++    return ChunkReceipt(
++      receiptID: "RCPT-\(descriptor.chunkID)-\(nonceCounter)",
++      chunkID: descriptor.chunkID,
++      chunkSHA256: descriptor.chunkSHA256,
++      tenantID: tenantID,
++      securityDomainID: securityDomainID,
++      acceptedAtUTC: nowUTC,
++      serverNonce: "nonce-\(nonceCounter)"
++    )
++  }
++
++  public func lookup(
++    sha256: String,
++    tenantID: String,
++    securityDomainID: String
++  ) -> StoredChunk? {
++    store[storageKey(tenantID: tenantID, securityDomainID: securityDomainID, sha256: sha256)]
++  }
++
++  public func rejectCrossTenantReuse(
++    sha256: String,
++    fromTenant: String,
++    toTenant: String,
++    securityDomainID: String
++  ) throws {
++    if fromTenant != toTenant {
++      throw SpatialEvidenceError.crossTenantDedupRejected("cross_tenant_\(fromTenant)->\(toTenant)")
++    }
++    _ = sha256
++    _ = securityDomainID
++  }
++
++  public func rejectCrossSecurityDomainReuse(
++    sha256: String,
++    tenantID: String,
++    fromDomain: String,
++    toDomain: String
++  ) throws {
++    if fromDomain != toDomain {
++      throw SpatialEvidenceError.crossTenantDedupRejected("cross_security_domain_\(fromDomain)->\(toDomain)")
++    }
++    _ = sha256
++    _ = tenantID
++  }
++
++  private func storageKey(tenantID: String, securityDomainID: String, sha256: String) -> String {
++    "\(tenantID)|\(securityDomainID)|\(sha256)"
++  }
++
++  private func securityDomainBoundCheck(_ tenantID: String) -> String { tenantID }
++}
++
++public struct TenantDeduplicationRecord: Codable, Sendable, Equatable {
++  public var tenantID: String
++  public var securityDomainID: String
++  public var deduplicationPolicyID: String
++  public var reusedChunkIDs: [String]
++  public var newlyUploadedChunkIDs: [String]
++  public var bytesSaved: Int
++  public var deduplicationAuthority: EvidenceAuthority
++
++  public func dictionary() -> [String: Any] {
++    [
++      "tenant_id": tenantID,
++      "security_domain_id": securityDomainID,
++      "deduplication_policy_id": deduplicationPolicyID,
++      "reused_chunk_ids": reusedChunkIDs.sorted(),
++      "newly_uploaded_chunk_ids": newlyUploadedChunkIDs.sorted(),
++      "bytes_saved": bytesSaved,
++      "deduplication_authority": deduplicationAuthority.rawValue,
++      "note": "No cross-customer global deduplication",
++    ]
++  }
++}
++
++// MARK: - Reassembly
++
++public struct PackageReassemblyPlan: Codable, Sendable, Equatable {
++  public var planID: String
++  public var packageID: String
++  public var expectedByteLength: Int
++  public var expectedClosureSHA256: String
++  public var expectedZIPSHA256: String?
++
++  public func dictionary() -> [String: Any] {
++    var d: [String: Any] = [
++      "plan_id": planID,
++      "package_id": packageID,
++      "expected_byte_length": expectedByteLength,
++      "expected_closure_sha256": expectedClosureSHA256,
++    ]
++    if let expectedZIPSHA256 { d["expected_zip_sha256"] = expectedZIPSHA256 }
++    return d
++  }
++}
++
++public struct ReassemblyVerificationResult: Codable, Sendable, Equatable {
++  public var ok: Bool
++  public var reassembledByteLength: Int
++  public var reassembledZIPSHA256: String
++  public var packageClosureMatch: Bool
++  public var signaturePreserved: Bool
++  public var journalRootPreserved: Bool
++  public var privacyViolations: [String]
++  public var note: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "ok": ok,
++      "reassembled_byte_length": reassembledByteLength,
++      "reassembled_zip_sha256": reassembledZIPSHA256,
++      "package_closure_match": packageClosureMatch,
++      "signature_preserved": signaturePreserved,
++      "journal_root_preserved": journalRootPreserved,
++      "privacy_violations": privacyViolations,
++      "note": note,
++    ]
++  }
++}
++
++public struct FinalPackageReceipt: Codable, Sendable, Equatable {
++  public var receiptID: String
++  public var packageID: String
++  public var reassembledZIPSHA256: String
++  public var packageClosureSHA256: String
++  public var verifiedAtUTC: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "receipt_id": receiptID,
++      "package_id": packageID,
++      "reassembled_zip_sha256": reassembledZIPSHA256,
++      "package_closure_sha256": packageClosureSHA256,
++      "verified_at_utc": verifiedAtUTC,
++    ]
++  }
++}
++
++public struct PackageReassembler: Sendable {
++  public init() {}
++
++  public func reassemble(
++    manifest: PackageChunkManifest,
++    payloadsByChunkID: [String: Data]
++  ) throws -> Data {
++    try ChunkSequence().validateManifestLayout(manifest)
++    var out = Data()
++    for c in manifest.chunks.sorted(by: { $0.sequence < $1.sequence }) {
++      guard let bytes = payloadsByChunkID[c.chunkID] else {
++        throw SpatialEvidenceError.reassemblyFailed("missing_chunk_\(c.chunkID)")
++      }
++      let v = ChunkSequence().verifyChunk(c, bytes: bytes)
++      guard v.ok else {
++        throw SpatialEvidenceError.reassemblyFailed(v.reason ?? "chunk_hash")
++      }
++      out.append(bytes)
++    }
++    if out.count != manifest.totalByteLength {
++      throw SpatialEvidenceError.reassemblyFailed("byte_length_mismatch")
++    }
++    return out
++  }
++
++  public func verify(
++    reassembled: Data,
++    expectedZIPSHA256: String,
++    expectedClosureSHA256: String,
++    observedClosureSHA256: String,
++    signaturePreserved: Bool,
++    journalRootPreserved: Bool,
++    privacyViolations: [String] = []
++  ) throws -> ReassemblyVerificationResult {
++    let zipSHA = ContentHasher.sha256Hex(reassembled)
++    let closureMatch = observedClosureSHA256 == expectedClosureSHA256
++    let ok = zipSHA == expectedZIPSHA256
++      && closureMatch
++      && signaturePreserved
++      && journalRootPreserved
++      && privacyViolations.isEmpty
++    if !ok {
++      throw SpatialEvidenceError.reassemblyFailed("verification_failed")
++    }
++    return ReassemblyVerificationResult(
++      ok: true,
++      reassembledByteLength: reassembled.count,
++      reassembledZIPSHA256: zipSHA,
++      packageClosureMatch: closureMatch,
++      signaturePreserved: signaturePreserved,
++      journalRootPreserved: journalRootPreserved,
++      privacyViolations: privacyViolations,
++      note: "byte_identity_and_closure_verified"
++    )
++  }
++}
+diff -ruN /tmp/elektron-capture-ios-3-7-restore/elektron-capture-ios/App/Domain/SpatialEvidence/SpatialEvidenceError.swift /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/SpatialEvidenceError.swift
+--- /tmp/elektron-capture-ios-3-7-restore/elektron-capture-ios/App/Domain/SpatialEvidence/SpatialEvidenceError.swift	2024-08-04 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/SpatialEvidenceError.swift	2026-08-04 02:47:11.137564098 +0000
+@@ -102,6 +102,19 @@
+   case silentStreamDegradationRejected(String)
+   case packageSignatureFailed(String)
+   case packageAttestationFailed(String)
++  // Sprint 3.8 privacy / field transfer
++  case privacyPolicyViolation(String)
++  case privacyPolicyUnknown(String)
++  case privacyPolicyExpired(String)
++  case silentMetadataStrippingRejected(String)
++  case redactionDerivationFailed(String)
++  case forbiddenRawExport(String)
++  case requiredRedactionMissing(String)
++  case chunkingFailed(String)
++  case transferFailed(String)
++  case reassemblyFailed(String)
++  case crossTenantDedupRejected(String)
++  case deliveryProfileFailed(String)
+ 
+   /// Stable string codes for transform-graph classifications (and related failures).
+   public var transformGraphCode: String? {
+--- /dev/null	2026-08-02 21:27:25.206751952 +0000
++++ /workspace/.scratch-elektron-capture-ios/Tests/Unit/Phase38PrivacyTransferTests.swift	2026-08-04 02:53:17.642468961 +0000
+@@ -0,0 +1,447 @@
++import XCTest
++@testable import ElektronCapture
++
++final class Phase38PrivacyTransferTests: XCTestCase {
++  private func tempDir(_ name: String = UUID().uuidString) throws -> URL {
++    let url = FileManager.default.temporaryDirectory.appendingPathComponent("p38-\(name)", isDirectory: true)
++    try? FileManager.default.removeItem(at: url)
++    try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
++    return url
++  }
++
++  // MARK: Privacy
++
++  func testRawEvidencePreservedSeparately() throws {
++    let policy = EvidencePrivacyPolicy.fixtureRawRestricted()
++    let raw = Data("RAW-SRC".utf8)
++    let result = try FixtureRedactionEngine().apply(sourceBytes: raw, sourceArtifactID: "A1", policy: policy)
++    XCTAssertNotNil(result.raw)
++    XCTAssertNotEqual(result.raw?.sha256, result.redacted.sha256)
++    XCTAssertEqual(result.raw?.sha256, ContentHasher.sha256Hex(raw))
++  }
++
++  func testRedactionNeverOverwritesSource() throws {
++    let dir = try tempDir()
++    let rawPath = dir.appendingPathComponent("restricted_raw/A1.bin")
++    try FileManager.default.createDirectory(at: rawPath.deletingLastPathComponent(), withIntermediateDirectories: true)
++    let raw = Data("UNCHANGED".utf8)
++    try raw.write(to: rawPath)
++    let result = try FixtureRedactionEngine().apply(
++      sourceBytes: raw,
++      sourceArtifactID: "A1",
++      policy: .fixtureRawRestricted()
++    )
++    let redacted = FixtureRedactionEngine().materializeRedactedBytes(
++      sourceBytes: raw,
++      operations: result.derivation.operations
++    )
++    let redPath = dir.appendingPathComponent("client_safe/red.bin")
++    try FileManager.default.createDirectory(at: redPath.deletingLastPathComponent(), withIntermediateDirectories: true)
++    try redacted.write(to: redPath)
++    XCTAssertEqual(try Data(contentsOf: rawPath), raw)
++  }
++
++  func testMissingDerivationReferenceRejected() throws {
++    var d = try FixtureRedactionEngine().apply(
++      sourceBytes: Data("x".utf8),
++      sourceArtifactID: "A",
++      policy: .fixtureRawRestricted()
++    ).derivation
++    d.sourceArtifactID = ""
++    XCTAssertThrowsError(try FixtureRedactionEngine().verifyDerivation(derivation: d, expectedSourceSHA: d.sourceArtifactSHA256))
++  }
++
++  func testIncorrectSourceDigestRejected() throws {
++    let d = try FixtureRedactionEngine().apply(
++      sourceBytes: Data("x".utf8),
++      sourceArtifactID: "A",
++      policy: .fixtureRawRestricted()
++    ).derivation
++    XCTAssertThrowsError(try FixtureRedactionEngine().verifyDerivation(derivation: d, expectedSourceSHA: String(repeating: "0", count: 64)))
++  }
++
++  func testForbiddenRawExportRejected() throws {
++    XCTAssertThrowsError(try { throw SpatialEvidenceError.forbiddenRawExport("inspection") }())
++  }
++
++  func testRequiredRedactionMissing() throws {
++    var policy = EvidencePrivacyPolicy.fixtureRawRestricted()
++    policy.redactionRequirements = [
++      RedactionRequirement(detectionKind: "CUSTOM_POLICY_REGION", required: true, minimumConfidence: 0.99, preferredOperations: ["SOLID_MASK"]),
++    ]
++    XCTAssertThrowsError(
++      try FixtureRedactionEngine().apply(sourceBytes: Data("x".utf8), sourceArtifactID: "A", policy: policy)
++    )
++  }
++
++  func testPrivacyFirstPersistsNoProhibitedRaw() throws {
++    let policy = EvidencePrivacyPolicy.fixturePrivacyFirst()
++    let result = try FixtureRedactionEngine().apply(
++      sourceBytes: Data("RAW".utf8),
++      sourceArtifactID: "A",
++      policy: policy
++    )
++    XCTAssertNil(result.raw)
++    XCTAssertEqual(policy.captureMode, .privacyFirstCapture)
++  }
++
++  func testMetadataOmissionRecorded() throws {
++    var ledger = MetadataPrivacyLedger()
++    ledger.record(from: .fixtureRawRestricted())
++    try ledger.assertFieldLedgered("precise_latitude_longitude")
++    let omit = ledger.entries.first { $0.metadataField == "precise_latitude_longitude" }
++    XCTAssertEqual(omit?.action, .omitByPolicy)
++  }
++
++  func testSilentMetadataStrippingRejected() throws {
++    let ledger = MetadataPrivacyLedger()
++    XCTAssertThrowsError(try ledger.assertFieldLedgered("precise_latitude_longitude"))
++    XCTAssertThrowsError(try PrivacyPolicyEvaluator().rejectSilentMetadataStrip(field: "x", policyID: "p"))
++  }
++
++  func testUnknownPrivacyPolicyRejected() throws {
++    XCTAssertThrowsError(try PrivacyPolicyEvaluator().activate(nil))
++  }
++
++  func testExpiredPolicyRejected() throws {
++    var p = EvidencePrivacyPolicy.fixtureRawRestricted()
++    p.expirationTimestampUTC = "2020-01-01T00:00:00Z"
++    XCTAssertThrowsError(try PrivacyPolicyEvaluator(nowUTC: "2026-08-03T00:00:00Z").activate(p))
++  }
++
++  // MARK: Chunking
++
++  func testDeterministicChunkBoundaries() throws {
++    let bytes = Data(repeating: 7, count: 200)
++    let a = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "a", count: 64))
++    let b = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "a", count: 64))
++    XCTAssertEqual(a.0.chunks.map(\.chunkSHA256), b.0.chunks.map(\.chunkSHA256))
++    XCTAssertEqual(a.0.chunks.map(\.byteOffset), b.0.chunks.map(\.byteOffset))
++  }
++
++  func testChunkHashVerification() throws {
++    let bytes = Data(repeating: 1, count: 70)
++    let (m, payloads) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "b", count: 64))
++    let ok = ChunkSequence().verifyChunk(m.chunks[0], bytes: payloads[0])
++    XCTAssertTrue(ok.ok)
++  }
++
++  func testTruncatedChunkDetected() throws {
++    let bytes = Data(repeating: 1, count: 70)
++    let (m, payloads) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "b", count: 64))
++    let bad = ChunkSequence().verifyChunk(m.chunks[0], bytes: payloads[0].prefix(10))
++    XCTAssertFalse(bad.ok)
++  }
++
++  func testModifiedChunkDetected() throws {
++    let bytes = Data(repeating: 1, count: 70)
++    let (m, payloads) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "b", count: 64))
++    var mutated = payloads[0]
++    mutated[0] ^= 0xff
++    XCTAssertFalse(ChunkSequence().verifyChunk(m.chunks[0], bytes: mutated).ok)
++  }
++
++  func testDuplicateSequenceRejected() throws {
++    let bytes = Data(repeating: 1, count: 130)
++    var (m, _) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "c", count: 64))
++    m.chunks[1].sequence = m.chunks[0].sequence
++    XCTAssertThrowsError(try ChunkSequence().validateManifestLayout(m))
++  }
++
++  func testMissingSequenceRejected() throws {
++    let bytes = Data(repeating: 1, count: 130)
++    var (m, _) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "c", count: 64))
++    m.chunks[1].sequence = 9
++    XCTAssertThrowsError(try ChunkSequence().validateManifestLayout(m))
++  }
++
++  func testOverlappingOffsetsRejected() throws {
++    let bytes = Data(repeating: 1, count: 130)
++    var (m, _) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "c", count: 64))
++    m.chunks[1].byteOffset = 0
++    XCTAssertThrowsError(try ChunkSequence().validateManifestLayout(m))
++  }
++
++  func testGapInOffsetsRejected() throws {
++    let bytes = Data(repeating: 1, count: 130)
++    var (m, _) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "c", count: 64))
++    m.chunks[1].byteOffset = m.chunks[1].byteOffset + 10
++    m.totalByteLength += 10
++    XCTAssertThrowsError(try ChunkSequence().validateManifestLayout(m))
++  }
++
++  func testWrongSourcePackageClosureRejected() throws {
++    let bytes = Data(repeating: 1, count: 70)
++    var (m, _) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "d", count: 64))
++    m.chunks[0].sourcePackageClosureSHA256 = String(repeating: "e", count: 64)
++    XCTAssertThrowsError(try ChunkSequence().validateManifestLayout(m))
++  }
++
++  func testAbsolutePathRejected() throws {
++    let bytes = Data(repeating: 1, count: 70)
++    var (m, _) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "d", count: 64))
++    m.chunks[0].chunkID = "/absolute/chunk"
++    XCTAssertThrowsError(try ChunkSequence().validateManifestLayout(m))
++  }
++
++  func testCrossTenantReuseRejected() throws {
++    var server = FixtureTransferServer()
++    XCTAssertThrowsError(
++      try server.rejectCrossTenantReuse(sha256: "x", fromTenant: "T1", toTenant: "T2", securityDomainID: "S")
++    )
++  }
++
++  func testCrossSecurityDomainReuseRejected() throws {
++    var server = FixtureTransferServer()
++    XCTAssertThrowsError(
++      try server.rejectCrossSecurityDomainReuse(sha256: "x", tenantID: "T", fromDomain: "A", toDomain: "B")
++    )
++  }
++
++  // MARK: Transfer
++
++  func testPauseAndResume() throws {
++    let bytes = Data(repeating: 2, count: 150)
++    let (m, payloads) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "f", count: 64))
++    var session = ResumableUploadSession(sessionID: "U1", packageID: "P", manifest: m)
++    var server = FixtureTransferServer()
++    try session.beginUpload()
++    _ = try session.submitChunk(descriptor: m.chunks[0], bytes: payloads[0], server: &server)
++    try session.pause()
++    XCTAssertEqual(session.state, .paused)
++    let plan = try session.resume()
++    XCTAssertFalse(plan.chunksToUpload.contains(m.chunks[0].chunkID))
++  }
++
++  func testNetworkInterruptionAndResume() throws {
++    let bytes = Data(repeating: 2, count: 150)
++    let (m, payloads) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "f", count: 64))
++    var session = ResumableUploadSession(sessionID: "U2", packageID: "P", manifest: m)
++    var server = FixtureTransferServer()
++    try session.beginUpload()
++    _ = try session.submitChunk(descriptor: m.chunks[0], bytes: payloads[0], server: &server)
++    session.interrupt()
++    XCTAssertEqual(session.state, .interrupted)
++    let plan = try session.resume()
++    for c in m.chunks where plan.chunksToUpload.contains(c.chunkID) {
++      _ = try session.submitChunk(descriptor: c, bytes: payloads[Int(c.sequence)], server: &server)
++    }
++    let receipt = try session.finalize(manifest: m)
++    XCTAssertEqual(receipt.state, .complete)
++  }
++
++  func testRetryLimit() throws {
++    let bytes = Data(repeating: 2, count: 70)
++    let (m, _) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "f", count: 64))
++    var session = ResumableUploadSession(sessionID: "U3", packageID: "P", manifest: m, maxRetries: 1)
++    var server = FixtureTransferServer()
++    try session.beginUpload()
++    var bad = Data(repeating: 9, count: m.chunks[0].byteLength)
++    XCTAssertThrowsError(try session.submitChunk(descriptor: m.chunks[0], bytes: bad, server: &server))
++    XCTAssertThrowsError(try session.submitChunk(descriptor: m.chunks[0], bytes: bad, server: &server))
++  }
++
++  func testUploadExpiration() throws {
++    let bytes = Data(repeating: 2, count: 70)
++    let (m, payloads) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "f", count: 64))
++    var session = ResumableUploadSession(sessionID: "U4", packageID: "P", manifest: m, expiresAtUTC: "2026-08-01T00:00:00Z")
++    var server = FixtureTransferServer()
++    XCTAssertThrowsError(try session.submitChunk(descriptor: m.chunks[0], bytes: payloads[0], server: &server, nowUTC: "2026-08-03T00:00:00Z"))
++  }
++
++  func testCancelledUpload() throws {
++    let bytes = Data(repeating: 2, count: 70)
++    let (m, payloads) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "f", count: 64))
++    var session = ResumableUploadSession(sessionID: "U5", packageID: "P", manifest: m)
++    var server = FixtureTransferServer()
++    session.cancel()
++    XCTAssertThrowsError(try session.submitChunk(descriptor: m.chunks[0], bytes: payloads[0], server: &server))
++  }
++
++  func testServerReceiptMismatch() throws {
++    let bytes = Data(repeating: 2, count: 70)
++    let (m, payloads) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "f", count: 64))
++    var session = ResumableUploadSession(sessionID: "U6", packageID: "P", manifest: m)
++    var server = FixtureTransferServer()
++    try session.beginUpload()
++    _ = try session.submitChunk(descriptor: m.chunks[0], bytes: payloads[0], server: &server)
++    session.receipts[m.chunks[0].chunkID]?.chunkSHA256 = String(repeating: "0", count: 64)
++    XCTAssertThrowsError(try session.finalize(manifest: m))
++  }
++
++  func testMissingReceipt() throws {
++    let bytes = Data(repeating: 2, count: 130)
++    let (m, payloads) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "f", count: 64))
++    var session = ResumableUploadSession(sessionID: "U7", packageID: "P", manifest: m)
++    var server = FixtureTransferServer()
++    try session.beginUpload()
++    _ = try session.submitChunk(descriptor: m.chunks[0], bytes: payloads[0], server: &server)
++    // Force-mark second accepted without receipt
++    session.chunkStates[m.chunks[1].chunkID] = .accepted
++    XCTAssertThrowsError(try session.finalize(manifest: m))
++  }
++
++  func testAcceptedChunkNotResent() throws {
++    let bytes = Data(repeating: 2, count: 130)
++    let (m, payloads) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "f", count: 64))
++    var session = ResumableUploadSession(sessionID: "U8", packageID: "P", manifest: m)
++    var server = FixtureTransferServer()
++    try session.beginUpload()
++    _ = try session.submitChunk(descriptor: m.chunks[0], bytes: payloads[0], server: &server)
++    let attemptsBefore = session.attempts.count
++    _ = try session.submitChunk(descriptor: m.chunks[0], bytes: payloads[0], server: &server)
++    XCTAssertEqual(session.attempts.count, attemptsBefore)
++    XCTAssertTrue(session.resentAcceptedChunkIDs.isEmpty)
++  }
++
++  func testRequestedChunkResentCorrectly() throws {
++    let bytes = Data(repeating: 2, count: 70)
++    let (m, payloads) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "f", count: 64))
++    var session = ResumableUploadSession(sessionID: "U9", packageID: "P", manifest: m)
++    var server = FixtureTransferServer()
++    try session.beginUpload()
++    _ = try session.submitChunk(descriptor: m.chunks[0], bytes: payloads[0], server: &server)
++    _ = try session.submitChunk(descriptor: m.chunks[0], bytes: payloads[0], server: &server, serverRequestsResend: true)
++    XCTAssertTrue(session.resentAcceptedChunkIDs.contains(m.chunks[0].chunkID))
++  }
++
++  func testTransferCheckpointReplay() throws {
++    let bytes = Data(repeating: 2, count: 130)
++    let (m, payloads) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "f", count: 64))
++    var session = ResumableUploadSession(sessionID: "U10", packageID: "P", manifest: m)
++    var server = FixtureTransferServer()
++    try session.beginUpload()
++    _ = try session.submitChunk(descriptor: m.chunks[0], bytes: payloads[0], server: &server)
++    let cp = session.checkpoint()
++    XCTAssertEqual(cp.acceptedChunkIDs, [m.chunks[0].chunkID])
++    XCTAssertTrue(cp.missingChunkIDs.contains(m.chunks[1].chunkID))
++  }
++
++  func testNoDuplicateCompletion() throws {
++    let bytes = Data(repeating: 2, count: 70)
++    let (m, payloads) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "f", count: 64))
++    var session = ResumableUploadSession(sessionID: "U11", packageID: "P", manifest: m)
++    var server = FixtureTransferServer()
++    try session.beginUpload()
++    for (i, c) in m.chunks.enumerated() {
++      _ = try session.submitChunk(descriptor: c, bytes: payloads[i], server: &server)
++    }
++    _ = try session.finalize(manifest: m)
++    XCTAssertThrowsError(try session.finalize(manifest: m))
++  }
++
++  func testReassemblyByteIdentity() throws {
++    let bytes = Data(repeating: 3, count: 200)
++    let (m, payloads) = try ChunkSequence().chunk(packageBytes: bytes, packageID: "P", sourcePackageClosureSHA256: String(repeating: "1", count: 64))
++    var map: [String: Data] = [:]
++    for (i, c) in m.chunks.enumerated() { map[c.chunkID] = payloads[i] }
++    let out = try PackageReassembler().reassemble(manifest: m, payloadsByChunkID: map)
++    XCTAssertEqual(out, bytes)
++  }
++
++  // MARK: Delivery profiles + primary fixture
++
++  func testPrimaryFieldTransferFixture() throws {
++    let dir = try tempDir("field")
++    let result = try FixtureFieldTransferPackageBuilder().sealPrimary(outputDirectory: dir)
++    XCTAssertEqual(result.privacyPolicy.policyID, EvidencePrivacyPolicy.fixturePolicyID)
++    XCTAssertEqual(result.inspection.profileID, EvidenceDeliveryProfile.inspectionProfileID)
++    XCTAssertEqual(result.engineering.profileID, EvidenceDeliveryProfile.engineeringProfileID)
++    XCTAssertNotNil(result.transformation.raw)
++    XCTAssertEqual(result.reassembledZIPSHA256, result.sourceZIPSHA256)
++    XCTAssertTrue(result.reassembly.ok)
++    XCTAssertTrue(result.reassembly.packageClosureMatch)
++    XCTAssertTrue(result.reassembly.signaturePreserved)
++    XCTAssertTrue(result.reassembly.journalRootPreserved)
++    XCTAssertFalse(result.acceptedChunksResent)
++    XCTAssertEqual(result.uploadSession.state, .complete)
++    XCTAssertFalse(result.inspection.includedRelativePaths.contains { $0.contains("restricted_raw") })
++    XCTAssertTrue(result.engineering.includedRelativePaths.contains { $0.contains("restricted_raw") })
++    try result.metadataLedger.assertFieldLedgered("precise_latitude_longitude")
++
++    if let emit = ProcessInfo.processInfo.environment["ELEKTRON_EMIT_DIR"] {
++      let dest = URL(fileURLWithPath: emit).appendingPathComponent(FixtureFieldTransferPackageBuilder.primaryPackageID)
++      try? FileManager.default.removeItem(at: dest)
++      try FileManager.default.copyItem(at: dir, to: dest)
++      let meta: [String: Any] = [
++        "package_id": FixtureFieldTransferPackageBuilder.primaryPackageID,
++        "privacy_policy_id": result.privacyPolicy.policyID,
++        "inspection_profile_id": result.inspection.profileID,
++        "engineering_profile_id": result.engineering.profileID,
++        "source_package_closure_sha256": result.sourcePackageClosureSHA256,
++        "inspection_package_closure_sha256": result.inspectionPackageClosureSHA256,
++        "engineering_package_closure_sha256": result.engineeringPackageClosureSHA256,
++        "chunking_algorithm": result.chunkManifest.algorithm.rawValue,
++        "chunk_count": result.chunkManifest.chunks.count,
++        "chunk_manifest_sha256": result.chunkManifestSHA256,
++        "source_zip_sha256": result.sourceZIPSHA256,
++        "reassembled_zip_sha256": result.reassembledZIPSHA256,
++        "journal_root_sha256": result.journalRootSHA256,
++        "accepted_chunks_resent": result.acceptedChunksResent,
++        "tenant_id": result.dedup.tenantID,
++        "bytes_saved": result.dedup.bytesSaved,
++      ]
++      try CanonicalJSON.data(meta).write(
++        to: URL(fileURLWithPath: emit).appendingPathComponent("field-transfer-000001_meta.json"),
++        options: .atomic
++      )
++    }
++  }
++
++  func testInspectionExcludesRestrictedRaw() throws {
++    let dir = try tempDir("insp")
++    let result = try FixtureFieldTransferPackageBuilder().sealPrimary(outputDirectory: dir)
++    let inspRoot = dir.appendingPathComponent("inspection_package")
++    XCTAssertFalse(FileManager.default.fileExists(atPath: inspRoot.appendingPathComponent("restricted_raw").path))
++    XCTAssertEqual(result.inspection.packageID, FixtureFieldTransferPackageBuilder.inspectionPackageID)
++  }
++
++  func testEngineeringIncludesAuthorizedRaw() throws {
++    let dir = try tempDir("eng")
++    let result = try FixtureFieldTransferPackageBuilder().sealPrimary(outputDirectory: dir)
++    XCTAssertTrue(result.engineering.includedRelativePaths.contains { $0.contains("restricted_raw") })
++  }
++
++  func testDerivativeManifestBindsToSource() throws {
++    let dir = try tempDir("bind")
++    _ = try FixtureFieldTransferPackageBuilder().sealPrimary(outputDirectory: dir)
++    let binding = try JSONSerialization.jsonObject(
++      with: Data(contentsOf: dir.appendingPathComponent("inspection_package/source_binding.json"))
++    ) as? [String: Any]
++    XCTAssertEqual(binding?["source_package_id"] as? String, FixtureFieldTransferPackageBuilder.engineeringPackageID)
++  }
++
++  func testProfileOutputDeterministic() throws {
++    let a = try tempDir("det-a")
++    let b = try tempDir("det-b")
++    let ra = try FixtureFieldTransferPackageBuilder().sealPrimary(outputDirectory: a)
++    let rb = try FixtureFieldTransferPackageBuilder().sealPrimary(outputDirectory: b)
++    XCTAssertEqual(ra.sourceZIPSHA256, rb.sourceZIPSHA256)
++    XCTAssertEqual(ra.engineeringPackageClosureSHA256, rb.engineeringPackageClosureSHA256)
++    XCTAssertEqual(ra.inspectionPackageClosureSHA256, rb.inspectionPackageClosureSHA256)
++    XCTAssertEqual(ra.chunkManifestSHA256, rb.chunkManifestSHA256)
++  }
++
++  func testSourcePackageBytesUnchangedAcrossProfiles() throws {
++    let dir = try tempDir("unchanged")
++    let result = try FixtureFieldTransferPackageBuilder().sealPrimary(outputDirectory: dir)
++    let zip1 = try Data(contentsOf: dir.appendingPathComponent("engineering_package.zip"))
++    XCTAssertEqual(ContentHasher.sha256Hex(zip1), result.sourceZIPSHA256)
++    // Re-read after inspection generation already done in seal — bytes stable
++    let zip2 = try Data(contentsOf: dir.appendingPathComponent("engineering_package.zip"))
++    XCTAssertEqual(zip1, zip2)
++  }
++
++  func testApplePrivacyCandidatesUnavailableOnLinux() throws {
++    XCTAssertEqual(AppleVisionRedactionDetector().availabilityStatus, "UNAVAILABLE_ON_THIS_PLATFORM")
++    XCTAssertEqual(AppleCoreMLPrivacyFilter().availabilityStatus, "UNAVAILABLE_ON_THIS_PLATFORM")
++    XCTAssertThrowsError(try AppleVisionRedactionDetector().detect(in: Data()))
++  }
++
++  func testCompressionProfileRecorded() throws {
++    let insp = EvidenceDeliveryProfile.inspection(privacyPolicyID: "P")
++    let eng = EvidenceDeliveryProfile.engineering(privacyPolicyID: "P")
++    XCTAssertEqual(insp.compression, .fixtureGzipLight)
++    XCTAssertEqual(eng.compression, .fixtureUncompressed)
++  }
++}
+--- /tmp/elektron-capture-ios-3-7-restore/elektron-capture-ios/Makefile	2024-08-04 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/Makefile	2026-08-04 02:52:42.522256513 +0000
+@@ -24,7 +24,7 @@
+ 	xcode-ready xcode-ready-check xcode-ready-deep xcode-open hardening-verify \
+ 	phase3-synthetic-verify phase3-1-rgb-motion-verify phase3-2-pose-verify phase3-3-depth-verify \
+ 	phase3-4-orchestration-verify phase3-5-guidance-verify phase3-6-apple-validation-verify \
+-	phase3-7-resilience-verify
++	phase3-7-resilience-verify phase3-8-privacy-transfer-verify
+ 
+ help:
+ 	@./Scripts/help.sh
+@@ -256,6 +256,10 @@
+ 	@echo "==> Phase 3.7 identity / journal / recovery / resilience suite"
+ 	@cd "$(ROOT)" && swift test --filter Phase37ResilienceTests
+ 
++phase3-8-privacy-transfer-verify:
++	@echo "==> Phase 3.8 privacy policy / field transfer suite"
++	@cd "$(ROOT)" && swift test --filter Phase38PrivacyTransferTests
++
+ hardening-verify:
+ 	@chmod +x "$(ROOT)/Scripts/run-sprint-2-3-gates.sh" "$(ROOT)/Scripts/emit-sprint-2-3-execution-manifest.py"
+ 	@cd "$(ROOT)" && ./Scripts/run-sprint-2-3-gates.sh

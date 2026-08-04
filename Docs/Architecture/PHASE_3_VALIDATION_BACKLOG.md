@@ -40,6 +40,7 @@ Fixtures must use `SPKG-FIXTURE-*`, `TEST_FIXTURE` authority, and `host_claim=NO
 | 3.6A | Apple validation readiness (Linux gate) | Host gate + Mac runbook; no fake DEVICE package | Mac/device → 3.6B |
 | 3.6B | Physical Apple hardware capture | First real `SPKG-DEVICE-000001` | **REQUIRED on Mac+iPhone** |
 | 3.7 | Evidence identity, recovery, resilience | Signatures, journal, thermal, telemetry (Linux fixtures) | SE/App Attest physical → 3.6B backlog |
+| 3.8 | Privacy policy + resilient field transfer | Privacy/redaction/profiles/chunking/resume (Linux fixtures) | Vision/URLSession/cellular → Apple backlog |
 
 ## Sprint 3.6 promotion criteria
 
@@ -104,4 +105,14 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 | Thermal policy + performance telemetry | COMPLETE (this PR) |
 | Secure Enclave / App Attest physical validation | PENDING → Apple hardware backlog (3.6B) |
 | Production security claim | FORBIDDEN |
+
+## Sprint 3.8 — Privacy / field transfer
+
+| Gate | Status |
+|---|---|
+| Linux privacy + redaction + delivery profiles | COMPLETE (this PR) |
+| Content-addressed chunking + resumable transfer | COMPLETE (this PR) |
+| Tenant-scoped dedup + reassembly verification | COMPLETE (this PR) |
+| Apple Vision / Core ML / URLSession physical | PENDING |
+| Privacy certification / production transfer claim | FORBIDDEN |
 
