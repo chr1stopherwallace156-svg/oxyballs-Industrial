@@ -1,5 +1,0 @@
-{
-  "suite": "phase4e-tier1", "passed": 9, "failed": 0, "total": 9,
-  "result": "PASS",
-  "cases": [{"case":"handoff_real_evidence","expect":"PASS","got":"PASS","ok":true},{"case":"tamper_4d_closure_mismatch","expect":"FAIL","got":"FAIL","ok":true},{"case":"tamper_canonical_mesh_digest","expect":"FAIL","got":"FAIL","ok":true},{"case":"tamper_surface_id_substitution","expect":"FAIL","got":"FAIL","ok":true},{"case":"tamper_metrology_authority_elevation","expect":"FAIL","got":"FAIL","ok":true},{"case":"report_good","expect":"PASS","got":"PASS","ok":true},{"case":"tamper_acceptable_violates_decision_rule","expect":"FAIL","got":"FAIL","ok":true},{"case":"tamper_orphaned_recapture_reference","expect":"FAIL","got":"FAIL","ok":true},{"case":"tamper_impermissible_governance_enum","expect":"FAIL","got":"FAIL","ok":true}]
-}

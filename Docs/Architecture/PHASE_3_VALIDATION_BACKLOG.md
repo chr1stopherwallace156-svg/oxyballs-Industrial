@@ -157,10 +157,15 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 | Engineering metrology / manufacturing / digital twin | FORBIDDEN |
 | Physical surface validation (`SPKG-DEVICE-000001`) | PENDING |
 
-## Phase 4E Tier 1 (D-032, Proposed)
-- [ ] `swift build && swift test` the `phase4e/` package on a Swift host (authoring host had no toolchain).
-- [ ] Wire the Swift canonical engine into the reconstruction Package.swift + a `make phase4e-verify` target.
-- [ ] Tier 1B: SE(3) datum validation (exit 30), scale resolution (31).
-- [ ] Tier 1C: GUM linearized covariance + Welch–Satterthwaite (exit 40), policy/recapture engines.
-- [ ] Tier 2: full 15-fixture adversarial suite.
-- Locks remain: FIXTURE_ONLY · ENGINEERING_METROLOGY_CLAIM=FORBIDDEN · MANUFACTURING_RELEASE_CLAIM=FORBIDDEN.
+## Phase 4E (D-032, Proposed — specification only, nothing implemented)
+- [ ] Approve the Phase 4E specification (`Docs/Capture/PHASE_4E_CHARACTERIZATION_AND_MEASUREMENT_AUTHORITY.md`).
+- [ ] Implement the canonical Swift characterization engine in the established canonical source
+      architecture, derived from the approved specification.
+- [ ] Datum resolution and scale-authority establishment.
+- [ ] Uncertainty propagation, declared-use policy evaluation, and recapture-contract lifecycle.
+- [ ] Execute the proposed failure matrix (`Docs/Evidence/PHASE_4E/failure_matrix.md`); all cases
+      are currently `SPECIFIED_NOT_EXECUTED`.
+- [ ] Physical validation (separate approval; not authorized).
+- Locks remain: FIXTURE_ONLY · ENGINEERING_METROLOGY_CLAIM=FORBIDDEN ·
+  MANUFACTURING_RELEASE_CLAIM=FORBIDDEN · PRODUCTION_MESH_CLAIM=FORBIDDEN ·
+  COMPLETE_DIGITAL_TWIN_CLAIM=FORBIDDEN.

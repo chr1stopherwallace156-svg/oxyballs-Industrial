@@ -34,17 +34,22 @@ Real-device surface validation remains pending `SPKG-DEVICE-000001`.
 
 See `Docs/Architecture/PHASE_3_VALIDATION_BACKLOG.md` and D-031.
 
-## Phase 4E Tier 1 (draft PR — D-032 Proposed)
+## Phase 4E (draft PR — D-032 Proposed)
 
 ```text
-IMPLEMENTATION_STATE           = CONTRACT_FOUNDATION_AUTHORED (Swift not compiled on authoring host)
-GOVERNANCE_VALIDATION_STATE    = LINUX_FIXTURE_VALIDATED (phase4e/verify-phase4e.sh → 9/9)
-ENGINEERING_USE_AUTHORITY      = FIXTURE_ONLY
-ENGINEERING_METROLOGY_CLAIM    = FORBIDDEN
-MANUFACTURING_RELEASE_CLAIM    = FORBIDDEN
-PRODUCTION_MESH_CLAIM          = FORBIDDEN
-SWIFT_BUILD_STATE              = PENDING_SWIFT_HOST
+PHASE_4E_STATE                = CONTRACT_SPEC_PROPOSED
+IMPLEMENTATION_STATE          = NOT_IMPLEMENTED
+SWIFT_ENGINE_STATE            = NOT_STARTED
+VALIDATION_STATE              = NOT_EXECUTED
+PHYSICAL_VALIDATION_STATE     = NOT_EXECUTED
+ENGINEERING_USE_AUTHORITY     = FIXTURE_ONLY
+ENGINEERING_METROLOGY_CLAIM   = FORBIDDEN
+MANUFACTURING_RELEASE_CLAIM   = FORBIDDEN
+PRODUCTION_MESH_CLAIM         = FORBIDDEN
+COMPLETE_DIGITAL_TWIN_CLAIM   = FORBIDDEN
 ```
 
-Consumes the immutable Phase 4D → 4E handoff `SURFACE-OUT-FIXTURE-000001` (closure `fe043fdb…`),
-digests independently recomputed from committed bytes. Tier 1B/1C and Tier 2 pending. See D-032.
+Specification and governance documents only. Binds read-only to the Phase 4D → 4E handoff
+`SURFACE-OUT-FIXTURE-000001` (closure `fe043fdb…`); `4d92e539…` is inherited Phase 4C → 4D lineage
+only. The canonical engine remains future Swift work in the established canonical source
+architecture. See D-032 and `Docs/Evidence/PHASE_4E/PHASE_4E_STATUS.md`.

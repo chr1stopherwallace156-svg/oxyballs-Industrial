@@ -1257,17 +1257,24 @@ later entry that references it.
   place. README baseline updates are made by proposal at milestone
   boundaries, never silently.
 
-## D-032 — Phase 4E Tier 1 characterization contract foundation (Proposed)
+## D-032 — Phase 4E characterization & measurement-authority specification (Proposed)
 
-- Status: **Proposed** (draft PR evidence).
+- Status: **Proposed**
 - Context: Phase 4D (D-031, PR #68) emits an immutable `Phase4EHandoffContract`
-  (`SURFACE-OUT-FIXTURE-000001`, closure `fe043fdb…`, `READY_WITH_UNRESOLVED_BOUNDARIES`).
-- Decision: add a self-contained `phase4e/` Tier-1 contract foundation — hardened JSON schemas,
-  a Swift SPM package (canonical numerical engine, authored; to be built on a Swift host), and
-  out-of-band read-only Node governance/CI validators that independently recompute the 4D→4E
-  digests/lineage from committed bytes (never PR-body copies). Authority ceilings locked:
+  (`SURFACE-OUT-FIXTURE-000001`, closure `fe043fdb…`, `READY_WITH_UNRESOLVED_BOUNDARIES`,
+  `SCALE_DATUM_PENDING_PHASE4E`). Phase 4E must characterize that surface against declared
+  engineering uses without mutating geometry and without asserting metrology.
+- Decision: adopt a **specification and governance proposal only** for Phase 4E. It fixes the
+  authority order (immutable Phase 4D evidence → approved contracts/specification → canonical
+  Swift implementation → fixture truth → optional independent verification tools), separates six
+  authority dimensions (geometry, scale, datum, measurement, characterization, engineering-use),
+  requires declared-use-specific conclusions rather than a universal region disposition, and
+  requires verified existence, integrity, lineage, scope, operating envelope and declared-use
+  applicability before any authority elevation — presence of an evidence identifier grants nothing.
+  Verification tools may verify outputs but may never define canonical behaviour.
+- Consequences: the canonical numerical engine remains **future Swift work in the established
+  canonical source architecture**; no engine, package manifest, source, schema, executable or test
+  evidence is added to this repository by this decision. Claim locks hold:
   `ENGINEERING_USE_AUTHORITY=FIXTURE_ONLY`, `ENGINEERING_METROLOGY_CLAIM=FORBIDDEN`,
-  `MANUFACTURING_RELEASE_CLAIM=FORBIDDEN`.
-- Consequences: characterization can be gated in CI now; Tier 1B/1C (SE(3), GUM covariance, policy/
-  recapture in Swift) and Tier 2 follow in separate PRs. No metrology/physical claim; Swift build/test
-  pending a Swift host.
+  `MANUFACTURING_RELEASE_CLAIM=FORBIDDEN`, `PRODUCTION_MESH_CLAIM=FORBIDDEN`,
+  `COMPLETE_DIGITAL_TWIN_CLAIM=FORBIDDEN`. Nothing is implemented or validated.
