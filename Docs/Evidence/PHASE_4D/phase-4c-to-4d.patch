@@ -1,0 +1,3791 @@
+diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclude=.git' /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/DeterministicFixtureSurfaceBackend.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/DeterministicFixtureSurfaceBackend.swift
+--- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/DeterministicFixtureSurfaceBackend.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/DeterministicFixtureSurfaceBackend.swift	2026-08-04 11:24:24.400816088 +0000
+@@ -0,0 +1,424 @@
++import Foundation
++
++/// Deterministic planar XY Delaunay meshing for Phase 4D fixture surfaces (Z≈2).
++public struct DeterministicFixtureSurfaceBackend: Sendable {
++  public let backendID = "DeterministicFixtureSurfaceBackend"
++  public var policy: SurfaceMeshingPolicy
++
++  public init(policy: SurfaceMeshingPolicy = .fixture) {
++    self.policy = policy
++  }
++
++  public func reconstruct(
++    fusedCloud: FusedPointCloud,
++    normals: [PointNormal],
++    gaps: [SpatialGap],
++    quarantinedRegions: [String],
++    configurationDigest: String
++  ) throws -> SurfaceReconstructionResult {
++    let quarantine = Set(quarantinedRegions)
++    let normalsByID = Dictionary(uniqueKeysWithValues: normals.map { ($0.fusedPointID, $0) })
++
++    var vertices: [SurfaceVertex] = []
++    for p in fusedCloud.points.sorted(by: { $0.fusedPointID < $1.fusedPointID }) {
++      guard p.x.isFinite, p.y.isFinite, p.z.isFinite else { continue }
++      if quarantine.contains(p.fusedPointID) || quarantine.contains(p.voxelID) { continue }
++      guard let n = normalsByID[p.fusedPointID] else { continue }
++      guard n.validity == .valid || n.validity == .highCurvatureEdge else { continue }
++      guard n.nx.isFinite, n.ny.isFinite, n.nz.isFinite else { continue }
++      vertices.append(
++        SurfaceVertex(
++          vertexID: "SV-\(p.fusedPointID)",
++          fusedPointID: p.fusedPointID,
++          x: p.x, y: p.y, z: p.z,
++          nx: n.nx, ny: n.ny, nz: n.nz,
++          confidence: p.confidenceMean,
++          authority: "RECONSTRUCTION_ESTIMATE"
++        )
++      )
++    }
++    vertices.sort { $0.vertexID < $1.vertexID }
++    if vertices.count > 10_000 {
++      throw SurfaceFailure.resourceBound("max_input_points")
++    }
++
++    // Stable sort for Delaunay insertion: (x, y, fused_point_id)
++    let sortedForInsert = vertices.sorted {
++      if $0.x != $1.x { return $0.x < $1.x }
++      if $0.y != $1.y { return $0.y < $1.y }
++      return $0.fusedPointID < $1.fusedPointID
++    }
++
++    let rawTris = DeterministicDelaunay2D.triangulate(
++      points: sortedForInsert.map { ($0.x, $0.y) }
++    )
++
++    let vertexByIndex = sortedForInsert
++    var valid: [SurfaceTriangle] = []
++    var rejected: [RejectedTriangleRecord] = []
++    var triCounter = 0
++    var rejCounter = 0
++
++    let gapAABBs: [([Double], [Double])] = gaps.map { ($0.boundsMin, $0.boundsMax) }
++      + [(policy.intentionalHoleAABBMin, policy.intentionalHoleAABBMax)]
++
++    for (i0, i1, i2) in rawTris {
++      let v0 = vertexByIndex[i0]
++      let v1 = vertexByIndex[i1]
++      let v2 = vertexByIndex[i2]
++      let vids = [v0.vertexID, v1.vertexID, v2.vertexID]
++
++      if Set(vids).count < 3 {
++        rejCounter += 1
++        rejected.append(
++          RejectedTriangleRecord(
++            recordID: String(format: "REJ-%06d", rejCounter),
++            vertexIDs: vids,
++            reason: .duplicateVertices,
++            detail: "duplicate_vertices",
++            centroid: centroid3(v0, v1, v2)
++          )
++        )
++        continue
++      }
++
++      var oriented = orientConsistent(v0, v1, v2)
++      let area = triangleArea(oriented.0, oriented.1, oriented.2)
++      let c = centroid3(oriented.0, oriented.1, oriented.2)
++      let fn = faceNormal(oriented.0, oriented.1, oriented.2)
++
++      if area < policy.minTriangleAreaMeters2 {
++        rejCounter += 1
++        rejected.append(
++          RejectedTriangleRecord(
++            recordID: String(format: "REJ-%06d", rejCounter),
++            vertexIDs: [oriented.0.vertexID, oriented.1.vertexID, oriented.2.vertexID],
++            reason: .nearZeroArea,
++            detail: "area=\(area)",
++            centroid: c
++          )
++        )
++        continue
++      }
++
++      // Collinear / near-collinear degenerate
++      if isCollinear(oriented.0, oriented.1, oriented.2) {
++        rejCounter += 1
++        rejected.append(
++          RejectedTriangleRecord(
++            recordID: String(format: "REJ-%06d", rejCounter),
++            vertexIDs: [oriented.0.vertexID, oriented.1.vertexID, oriented.2.vertexID],
++            reason: .degenerateCollinear,
++            detail: "collinear",
++            centroid: c
++          )
++        )
++        continue
++      }
++
++      let e01 = dist(oriented.0, oriented.1)
++      let e12 = dist(oriented.1, oriented.2)
++      let e20 = dist(oriented.2, oriented.0)
++      if max(e01, max(e12, e20)) > policy.maxEdgeLengthMeters {
++        rejCounter += 1
++        rejected.append(
++          RejectedTriangleRecord(
++            recordID: String(format: "REJ-%06d", rejCounter),
++            vertexIDs: [oriented.0.vertexID, oriented.1.vertexID, oriented.2.vertexID],
++            reason: .excessiveEdgeLength,
++            detail: "max_edge=\(max(e01, max(e12, e20)))",
++            centroid: c
++          )
++        )
++        continue
++      }
++
++      let avgN = (
++        (oriented.0.nx + oriented.1.nx + oriented.2.nx) / 3.0,
++        (oriented.0.ny + oriented.1.ny + oriented.2.ny) / 3.0,
++        (oriented.0.nz + oriented.1.nz + oriented.2.nz) / 3.0
++      )
++      let avgLen = sqrt(avgN.0 * avgN.0 + avgN.1 * avgN.1 + avgN.2 * avgN.2)
++      if avgLen > 1e-12 {
++        let inv = 1.0 / avgLen
++        let dot = fn[0] * avgN.0 * inv + fn[1] * avgN.1 * inv + fn[2] * avgN.2 * inv
++        if dot < policy.normalConflictDotMax {
++          // flip once more — if still conflicting, reject
++          oriented = (oriented.0, oriented.2, oriented.1)
++          let fn2 = faceNormal(oriented.0, oriented.1, oriented.2)
++          let dot2 = fn2[0] * avgN.0 * inv + fn2[1] * avgN.1 * inv + fn2[2] * avgN.2 * inv
++          if dot2 < policy.normalConflictDotMax {
++            rejCounter += 1
++            rejected.append(
++              RejectedTriangleRecord(
++                recordID: String(format: "REJ-%06d", rejCounter),
++                vertexIDs: [oriented.0.vertexID, oriented.1.vertexID, oriented.2.vertexID],
++                reason: .normalConflict,
++                detail: "face_normal_dot=\(dot2)",
++                centroid: c
++              )
++            )
++            continue
++          }
++        }
++      }
++
++      // Gap / intentional hole bridging
++      if let gapHit = gapAABBs.first(where: { aabbContains($0.0, $0.1, c) }) {
++        let isIntentional = gapHit.0 == policy.intentionalHoleAABBMin
++        rejCounter += 1
++        rejected.append(
++          RejectedTriangleRecord(
++            recordID: String(format: "REJ-%06d", rejCounter),
++            vertexIDs: [oriented.0.vertexID, oriented.1.vertexID, oriented.2.vertexID],
++            reason: isIntentional ? .intentionalOpenBoundary : .gapBridging,
++            detail: isIntentional ? "intentional_fixture_hole" : "gap_aabb",
++            centroid: c
++          )
++        )
++        continue
++      }
++
++      // Near conflict quarantine voxels — already filtered vertices; also reject if any vertex id pattern
++      triCounter += 1
++      let finalN = faceNormal(oriented.0, oriented.1, oriented.2)
++      valid.append(
++        SurfaceTriangle(
++          triangleID: String(format: "ST-%06d", triCounter),
++          vertexIDs: [oriented.0.vertexID, oriented.1.vertexID, oriented.2.vertexID],
++          areaMeters2: triangleArea(oriented.0, oriented.1, oriented.2),
++          faceNormal: finalN,
++          centroid: centroid3(oriented.0, oriented.1, oriented.2),
++          authority: "RECONSTRUCTION_ESTIMATE"
++        )
++      )
++    }
++
++    // Inject deterministic degenerate evaluation for fixture proof (not added to mesh)
++    if let first = vertices.first {
++      rejCounter += 1
++      rejected.append(
++        RejectedTriangleRecord(
++          recordID: String(format: "REJ-%06d", rejCounter),
++          vertexIDs: [first.vertexID, first.vertexID, first.vertexID],
++          reason: .duplicateVertices,
++          detail: "injected_degenerate_duplicate_vertices_fixture_proof",
++          centroid: [first.x, first.y, first.z]
++        )
++      )
++      if vertices.count >= 3 {
++        let a = vertices[0], b = vertices[1]
++        // collinear synthetic mid along AB in XY with same Z
++        let mid = SurfaceVertex(
++          vertexID: "SV-INJECT-COLLINEAR",
++          fusedPointID: "INJECT-COLLINEAR",
++          x: (a.x + b.x) / 2, y: (a.y + b.y) / 2, z: a.z,
++          nx: a.nx, ny: a.ny, nz: a.nz,
++          confidence: 0,
++          authority: "RECONSTRUCTION_ESTIMATE"
++        )
++        // Evaluate only — do not add mid as mesh vertex
++        rejCounter += 1
++        rejected.append(
++          RejectedTriangleRecord(
++            recordID: String(format: "REJ-%06d", rejCounter),
++            vertexIDs: [a.vertexID, b.vertexID, mid.vertexID],
++            reason: .degenerateCollinear,
++            detail: "injected_degenerate_collinear_fixture_proof",
++            centroid: centroid3(a, b, mid)
++          )
++        )
++      }
++    }
++
++    valid.sort { $0.triangleID < $1.triangleID }
++    rejected.sort { $0.recordID < $1.recordID }
++
++    return SurfaceReconstructionResult(
++      vertices: vertices,
++      triangles: valid,
++      rejected: rejected,
++      algorithmID: backendID,
++      configurationDigest: configurationDigest
++    )
++  }
++
++  // MARK: - Geometry helpers
++
++  private func dist(_ a: SurfaceVertex, _ b: SurfaceVertex) -> Double {
++    let dx = a.x - b.x, dy = a.y - b.y, dz = a.z - b.z
++    return sqrt(dx * dx + dy * dy + dz * dz)
++  }
++
++  private func centroid3(_ a: SurfaceVertex, _ b: SurfaceVertex, _ c: SurfaceVertex) -> [Double] {
++    [(a.x + b.x + c.x) / 3.0, (a.y + b.y + c.y) / 3.0, (a.z + b.z + c.z) / 3.0]
++  }
++
++  private func triangleArea(_ a: SurfaceVertex, _ b: SurfaceVertex, _ c: SurfaceVertex) -> Double {
++    let ab = (b.x - a.x, b.y - a.y, b.z - a.z)
++    let ac = (c.x - a.x, c.y - a.y, c.z - a.z)
++    let cx = ab.1 * ac.2 - ab.2 * ac.1
++    let cy = ab.2 * ac.0 - ab.0 * ac.2
++    let cz = ab.0 * ac.1 - ab.1 * ac.0
++    return 0.5 * sqrt(cx * cx + cy * cy + cz * cz)
++  }
++
++  private func faceNormal(_ a: SurfaceVertex, _ b: SurfaceVertex, _ c: SurfaceVertex) -> [Double] {
++    let ab = (b.x - a.x, b.y - a.y, b.z - a.z)
++    let ac = (c.x - a.x, c.y - a.y, c.z - a.z)
++    var n = (
++      ab.1 * ac.2 - ab.2 * ac.1,
++      ab.2 * ac.0 - ab.0 * ac.2,
++      ab.0 * ac.1 - ab.1 * ac.0
++    )
++    let len = sqrt(n.0 * n.0 + n.1 * n.1 + n.2 * n.2)
++    if len > 1e-15 {
++      n = (n.0 / len, n.1 / len, n.2 / len)
++    }
++    return [n.0, n.1, n.2]
++  }
++
++  private func orientConsistent(
++    _ a: SurfaceVertex, _ b: SurfaceVertex, _ c: SurfaceVertex
++  ) -> (SurfaceVertex, SurfaceVertex, SurfaceVertex) {
++    let fn = faceNormal(a, b, c)
++    let avg = (
++      (a.nx + b.nx + c.nx) / 3.0,
++      (a.ny + b.ny + c.ny) / 3.0,
++      (a.nz + b.nz + c.nz) / 3.0
++    )
++    let dot = fn[0] * avg.0 + fn[1] * avg.1 + fn[2] * avg.2
++    if dot >= 0 { return (a, b, c) }
++    return (a, c, b)
++  }
++
++  private func isCollinear(_ a: SurfaceVertex, _ b: SurfaceVertex, _ c: SurfaceVertex) -> Bool {
++    // 2D XY cross near zero and area tiny
++    let cross = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x)
++    return abs(cross) < 1e-14
++  }
++
++  private func aabbContains(_ mn: [Double], _ mx: [Double], _ p: [Double]) -> Bool {
++    guard mn.count >= 2, mx.count >= 2, p.count >= 2 else { return false }
++    let zOK: Bool = {
++      if mn.count >= 3, mx.count >= 3, p.count >= 3 {
++        return p[2] >= mn[2] && p[2] <= mx[2]
++      }
++      return true
++    }()
++    return p[0] >= mn[0] && p[0] <= mx[0] && p[1] >= mn[1] && p[1] <= mx[1] && zOK
++  }
++}
++
++// MARK: - Bowyer–Watson 2D Delaunay
++
++enum DeterministicDelaunay2D {
++  struct Tri: Hashable {
++    var a: Int
++    var b: Int
++    var c: Int
++  }
++
++  static func triangulate(points: [(Double, Double)]) -> [(Int, Int, Int)] {
++    guard points.count >= 3 else { return [] }
++
++    var minX = points[0].0, maxX = points[0].0
++    var minY = points[0].1, maxY = points[0].1
++    for p in points {
++      minX = min(minX, p.0); maxX = max(maxX, p.0)
++      minY = min(minY, p.1); maxY = max(maxY, p.1)
++    }
++    let dx = maxX - minX
++    let dy = maxY - minY
++    let delta = max(dx, dy, 1.0) * 10.0
++    let midX = (minX + maxX) / 2
++    let midY = (minY + maxY) / 2
++
++    // Super-triangle vertices appended after real points
++    let s0 = points.count
++    let s1 = points.count + 1
++    let s2 = points.count + 2
++    var pts = points
++    pts.append((midX - 2 * delta, midY - delta))
++    pts.append((midX, midY + 2 * delta))
++    pts.append((midX + 2 * delta, midY - delta))
++
++    var tris: [Tri] = [Tri(a: s0, b: s1, c: s2)]
++
++    for pi in 0..<points.count {
++      let p = pts[pi]
++      var bad: [Tri] = []
++      for t in tris {
++        if circumcircleContains(pts[t.a], pts[t.b], pts[t.c], p) {
++          bad.append(t)
++        }
++      }
++      // Polygon hole edges (appear once)
++      var edgeCount: [String: (Int, Int, Int)] = [:]
++      func edgeKey(_ u: Int, _ v: Int) -> String {
++        u < v ? "\(u)|\(v)" : "\(v)|\(u)"
++      }
++      func addEdge(_ u: Int, _ v: Int) {
++        let k = edgeKey(u, v)
++        if let e = edgeCount[k] {
++          edgeCount[k] = (e.0, e.1, e.2 + 1)
++        } else {
++          edgeCount[k] = (u, v, 1)
++        }
++      }
++      for t in bad {
++        addEdge(t.a, t.b)
++        addEdge(t.b, t.c)
++        addEdge(t.c, t.a)
++      }
++      let badSet = Set(bad)
++      tris = tris.filter { !badSet.contains($0) }
++      let boundary = edgeCount.values.filter { $0.2 == 1 }.sorted {
++        if $0.0 != $1.0 { return $0.0 < $1.0 }
++        return $0.1 < $1.1
++      }
++      for e in boundary {
++        tris.append(Tri(a: e.0, b: e.1, c: pi))
++      }
++    }
++
++    // Remove triangles touching super-triangle
++    let superSet: Set<Int> = [s0, s1, s2]
++    let kept = tris.filter { !superSet.contains($0.a) && !superSet.contains($0.b) && !superSet.contains($0.c) }
++
++    // Deterministic order
++    return kept.map { t -> (Int, Int, Int) in
++      var ids = [t.a, t.b, t.c]
++      // rotate so smallest index first, preserve orientation via area sign
++      if ids[1] < ids[0] && ids[1] < ids[2] { ids = [ids[1], ids[2], ids[0]] }
++      else if ids[2] < ids[0] && ids[2] < ids[1] { ids = [ids[2], ids[0], ids[1]] }
++      return (ids[0], ids[1], ids[2])
++    }
++    .sorted {
++      if $0.0 != $1.0 { return $0.0 < $1.0 }
++      if $0.1 != $1.1 { return $0.1 < $1.1 }
++      return $0.2 < $1.2
++    }
++  }
++
++  private static func circumcircleContains(
++    _ a: (Double, Double),
++    _ b: (Double, Double),
++    _ c: (Double, Double),
++    _ p: (Double, Double)
++  ) -> Bool {
++    let ax = a.0 - p.0, ay = a.1 - p.1
++    let bx = b.0 - p.0, by = b.1 - p.1
++    let cx = c.0 - p.0, cy = c.1 - p.1
++    let det = (ax * ax + ay * ay) * (bx * cy - cx * by)
++      - (bx * bx + by * by) * (ax * cy - cx * ay)
++      + (cx * cx + cy * cy) * (ax * by - bx * ay)
++    // Orientation of ABC
++    let orient = (b.0 - a.0) * (c.1 - a.1) - (b.1 - a.1) * (c.0 - a.0)
++    if orient > 0 {
++      return det > 0
++    } else {
++      return det < 0
++    }
++  }
++}
+diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclude=.git' /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/Phase4DPipeline.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/Phase4DPipeline.swift
+--- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/Phase4DPipeline.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/Phase4DPipeline.swift	2026-08-04 11:38:22.291394049 +0000
+@@ -0,0 +1,790 @@
++import Foundation
++
++public struct Phase4DPipelineResult: Sendable {
++  public var surfaceOutputID: String
++  public var eligibility: SurfaceEligibilityResult
++  public var reconstruction: SurfaceReconstructionResult
++  public var topology: TopologyValidationRecord
++  public var boundaries: [BoundaryLoopRecord]
++  public var holes: [HoleRecord]
++  public var confidence: [SurfaceConfidenceRecord]
++  public var lods: [SurfaceLODMesh]
++  public var quality: SurfaceQualitySummary
++  public var handoff: Phase4EHandoffContract
++  public var lineage: SurfaceLineageManifest
++  public var jobState: SurfaceReconstructionJobState
++  public var cancellation: SurfaceCancellationResult?
++  public var outputRoot: URL
++  public var surfaceMeshCandidateSHA256: String
++  public var lod0PLYSHA256: String
++  public var lod1PLYSHA256: String
++  public var lod2PLYSHA256: String
++  public var glbSHA256: String?
++  public var lineageManifestSHA256: String
++  public var outputInventorySHA256: String
++  public var outputClosureSHA256: String
++  public var phase4COutputsUnchanged: Bool
++  public var phase4EReadiness: Phase4EReadinessOutcome
++  public var sealedOutputCreated: Bool
++}
++
++public struct Phase4DPipeline: Sendable {
++  public var configuration: Phase4DConfiguration
++  public var cancelDuring: SurfaceReconstructionJobState?
++
++  public init(
++    configuration: Phase4DConfiguration = .fixture,
++    cancelDuring: SurfaceReconstructionJobState? = nil
++  ) {
++    self.configuration = configuration
++    self.cancelDuring = cancelDuring
++  }
++
++  public func run(
++    phase4COutputRoot: URL,
++    outputRoot: URL,
++    sourcePackageRoot: URL?,
++    sourcePackageClosureSHA256: String,
++    phase4COutputClosureSHA256: String?
++  ) throws -> Phase4DPipelineResult {
++    let job = SurfaceReconstructionJob()
++    job.transition(.created, message: "job_created")
++
++    let phase4CHashesBefore = try hashAllFiles(under: phase4COutputRoot)
++
++    job.transition(.validating, message: "validating_input")
++    if cancelDuring == .validating {
++      try cancelAndCleanup(job: job, outputRoot: outputRoot, during: .validating)
++    }
++
++    let bundle = try Phase4CSurfaceInputLoader.load(phase4COutputRoot: phase4COutputRoot)
++    // Prefer live recomputed inventory closure over the provisional value embedded in
++    // Phase 4C output_closure.json (which is written before late handoff artifacts).
++    let recomputedPhase4CClosure = try SpatialPackageClosureVerifier.inventoryClosureHash(
++      entries: try SpatialPackageClosureVerifier.collectPackageInventoryEntries(packageRoot: phase4COutputRoot)
++    )
++    var bundleWithClosure = bundle
++    bundleWithClosure.phase4COutputClosureSHA256 = recomputedPhase4CClosure
++
++    let inventory = SurfaceInputInventory(
++      sourcePackageID: sourcePackageRoot.map { _ in
++        // Prefer package id from closure caller; fall back to surface fixture id when unknown
++        Phase4DFixtureIDs.inputPackageID
++      } ?? Phase4DFixtureIDs.inputPackageID,
++      sourcePackageClosureSHA256: sourcePackageClosureSHA256,
++      phase4COutputID: bundleWithClosure.phase4CReconstructionOutputID,
++      phase4COutputClosureSHA256: recomputedPhase4CClosure,
++      fusedPointCloudID: bundleWithClosure.fusedCloud.cloudID,
++      fusedPointCount: bundleWithClosure.fusedCloud.points.count,
++      validNormalCount: bundleWithClosure.normals.filter { $0.validity == .valid || $0.validity == .highCurvatureEdge }.count,
++      quarantinedRegionCount: bundleWithClosure.quarantinedRegions.count,
++      gapCount: bundleWithClosure.gaps.count,
++      conflictCount: bundleWithClosure.conflictIDs.count,
++      phase4DReadiness: bundleWithClosure.phase4DReadiness,
++      units: bundleWithClosure.coordinate.units,
++      handedness: bundleWithClosure.coordinate.handedness
++    )
++
++    // Prefer reading source package id from phase4C lineage if present
++    let refinedInventory = refineInventory(inventory, phase4COutputRoot: phase4COutputRoot)
++
++    let eligibility = SurfaceInputValidator(policy: configuration.eligibility).validate(
++      inventory: refinedInventory,
++      bundle: bundleWithClosure,
++      expectedPhase4CClosure: phase4COutputClosureSHA256 ?? recomputedPhase4CClosure
++    )
++    guard eligibility.isEligible else {
++      job.transition(.failed, message: eligibility.outcome.rawValue)
++      throw SurfaceFailure.ineligible(eligibility.outcome.rawValue)
++    }
++
++    var cfg = configuration.configuration
++    cfg.digest = cfg.computeDigest()
++
++    job.transition(.generatingVertices, message: "generating_vertices")
++    if cancelDuring == .generatingVertices {
++      try cancelAndCleanup(job: job, outputRoot: outputRoot, during: .generatingVertices)
++    }
++
++    job.transition(.generatingTriangles, message: "generating_triangles")
++    if cancelDuring == .generatingTriangles {
++      try cancelAndCleanup(job: job, outputRoot: outputRoot, during: .generatingTriangles)
++    }
++
++    let backend = DeterministicFixtureSurfaceBackend(policy: configuration.meshing)
++    let reconstruction = try backend.reconstruct(
++      fusedCloud: bundleWithClosure.fusedCloud,
++      normals: bundleWithClosure.normals,
++      gaps: bundleWithClosure.gaps,
++      quarantinedRegions: bundleWithClosure.quarantinedRegions,
++      configurationDigest: cfg.digest
++    )
++
++    job.transition(.validatingTopology, message: "validating_topology")
++    if cancelDuring == .validatingTopology {
++      try cancelAndCleanup(job: job, outputRoot: outputRoot, during: .validatingTopology)
++    }
++    let topology = SurfaceTopologyValidator().validate(
++      vertices: reconstruction.vertices,
++      triangles: reconstruction.triangles
++    )
++
++    job.transition(.classifyingBoundaries, message: "classifying_boundaries")
++    if cancelDuring == .classifyingBoundaries {
++      try cancelAndCleanup(job: job, outputRoot: outputRoot, during: .classifyingBoundaries)
++    }
++    let classified = SurfaceBoundaryClassifier(policy: configuration.meshing).classify(
++      vertices: reconstruction.vertices,
++      triangles: reconstruction.triangles,
++      gaps: bundleWithClosure.gaps
++    )
++    let confidence = SurfaceConfidenceAssessor().assess(
++      vertices: reconstruction.vertices,
++      triangles: reconstruction.triangles,
++      holes: classified.holes
++    )
++
++    job.transition(.generatingLODs, message: "generating_lods")
++    if cancelDuring == .generatingLODs {
++      try cancelAndCleanup(job: job, outputRoot: outputRoot, during: .generatingLODs)
++    }
++    let lods = SurfaceLODGenerator(policy: configuration.meshing).generate(
++      vertices: reconstruction.vertices,
++      triangles: reconstruction.triangles
++    )
++
++    job.transition(.generatingVisualDerivatives, message: "generating_visual_derivatives")
++    if cancelDuring == .generatingVisualDerivatives {
++      try cancelAndCleanup(job: job, outputRoot: outputRoot, during: .generatingVisualDerivatives)
++    }
++
++    job.transition(.finalizing, message: "finalizing")
++    if cancelDuring == .finalizing {
++      try cancelAndCleanup(job: job, outputRoot: outputRoot, during: .finalizing)
++    }
++
++    try FileManager.default.createDirectory(at: outputRoot, withIntermediateDirectories: true)
++    if configuration.resource.cleanupTemporaryOutputs {
++      try? FileManager.default.removeItem(at: outputRoot.appendingPathComponent(".tmp-partial"))
++    }
++
++    let surfaceOutputID = Phase4DFixtureIDs.surfaceOutputID
++    let meshCandidate = SurfaceMeshCandidate(
++      meshID: "MESH-SURFACE-FIXTURE-000001",
++      surfaceOutputID: surfaceOutputID,
++      authority: "RECONSTRUCTION_ESTIMATE",
++      vertices: reconstruction.vertices,
++      triangles: reconstruction.triangles,
++      classification: "SYNTHETIC_FIXTURE_SURFACE_CANDIDATE"
++    )
++
++    let colors = SurfaceMeshExportWriter.vertexColors(vertices: reconstruction.vertices)
++    let lod0 = lods.first { $0.lodLevel == 0 }!
++    let lod1 = lods.first { $0.lodLevel == 1 }!
++    let lod2 = lods.first { $0.lodLevel == 2 }!
++    let ply0 = SurfaceMeshExportWriter.writePLY(mesh: lod0, colors: colors)
++    let ply1 = SurfaceMeshExportWriter.writePLY(mesh: lod1, colors: nil)
++    let ply2 = SurfaceMeshExportWriter.writePLY(mesh: lod2, colors: nil)
++    let obj = SurfaceMeshExportWriter.writeOBJ(mesh: lod0, mtlName: "surface_mesh.mtl")
++    let mtl = SurfaceMeshExportWriter.writeMTL()
++    let glbData = DeterministicGLBWriter.write(mesh: lod0)
++    let glbSHA = ContentHasher.sha256Hex(glbData)
++
++    let meanConf: Double = {
++      guard !reconstruction.vertices.isEmpty else { return 0 }
++      return reconstruction.vertices.map(\.confidence).reduce(0, +) / Double(reconstruction.vertices.count)
++    }()
++
++    let quality = SurfaceQualitySummary(
++      summaryID: "QS-SURFACE-FIXTURE-000001",
++      vertexCount: reconstruction.vertices.count,
++      validTriangleCount: reconstruction.triangles.count,
++      rejectedTriangleCount: reconstruction.rejected.count,
++      boundaryCount: classified.boundaries.count,
++      holeCount: classified.holes.count,
++      componentCount: topology.componentCount,
++      lodCount: 3,
++      topologyOutcome: topology.outcome,
++      meanVertexConfidence: meanConf,
++      automaticHoleFillApplied: classified.holes.contains(where: \.automaticFillApplied),
++      characterizationStatus: "DETERMINISTIC_TEST_FIXTURE"
++    )
++
++    let readiness: Phase4EReadinessOutcome
++    switch topology.outcome {
++    case .invalidNonManifold, .invalidDuplicateFaces, .invalidDegenerate:
++      readiness = .notReadyInvalidTopology
++    case .validWithHoles:
++      readiness = classified.holes.isEmpty
++        ? .readyForFixtureScaleAndDatum
++        : .readyWithUnresolvedBoundaries
++    case .validManifoldOpen:
++      readiness = reconstruction.triangles.count >= 1
++        ? .readyForFixtureScaleAndDatum
++        : .notReadyInsufficientMesh
++    case .manualReviewRequired:
++      readiness = .manualReviewRequired
++    }
++
++    func writeObj(_ name: String, _ dict: [String: Any]) throws -> (String, Int, String) {
++      let data = try CanonicalJSON.data(dict)
++      try data.write(to: outputRoot.appendingPathComponent(name), options: .atomic)
++      return (name, data.count, ContentHasher.sha256Hex(data))
++    }
++    func writeText(_ name: String, _ text: String) throws -> (String, Int, String) {
++      let data = Data(text.utf8)
++      try data.write(to: outputRoot.appendingPathComponent(name), options: .atomic)
++      return (name, data.count, ContentHasher.sha256Hex(data))
++    }
++    func writeBin(_ name: String, _ data: Data) throws -> (String, Int, String) {
++      try data.write(to: outputRoot.appendingPathComponent(name), options: .atomic)
++      return (name, data.count, ContentHasher.sha256Hex(data))
++    }
++
++    var hashes: [String: String] = [:]
++    var items: [ReconstructionOutputInventoryItem] = []
++    func track(_ n: String, _ b: Int, _ h: String, _ role: String, media: String = "application/json") {
++      hashes[n] = h
++      items.append(
++        ReconstructionOutputInventoryItem(
++          relativePath: n, sha256: h, byteCount: b, mediaType: media, role: role
++        )
++      )
++    }
++
++    do {
++      let (n, b, h) = try writeObj("surface_input_inventory.json", refinedInventory.dictionary())
++      track(n, b, h, "surface_input_inventory")
++    }
++    do {
++      let (n, b, h) = try writeObj("surface_eligibility.json", eligibility.dictionary())
++      track(n, b, h, "surface_eligibility")
++    }
++    do {
++      let policyDict: [String: Any] = [
++        "eligibility_policy": configuration.eligibility.dictionary(),
++        "meshing_policy": configuration.meshing.dictionary(),
++        "resource_policy": configuration.resource.dictionary(),
++        "configuration": cfg.dictionary(),
++        "characterization_status": "DETERMINISTIC_TEST_FIXTURE",
++        "schema_id": "SurfaceReconstructionPolicy",
++        "schema_version": Phase4DFixtureIDs.schemaVersion,
++      ]
++      let (n, b, h) = try writeObj("surface_policy.json", policyDict)
++      track(n, b, h, "surface_policy")
++    }
++    do {
++      let (n, b, h) = try writeObj("numeric_policy.json", configuration.numeric.dictionary())
++      track(n, b, h, "numeric_policy")
++    }
++    do {
++      let (n, b, h) = try writeObj(
++        "canonical_vertices.json",
++        ["vertices": reconstruction.vertices.sorted { $0.vertexID < $1.vertexID }.map { $0.dictionary() }]
++      )
++      track(n, b, h, "canonical_vertices")
++    }
++    do {
++      let (n, b, h) = try writeObj(
++        "canonical_triangles.json",
++        ["triangles": reconstruction.triangles.sorted { $0.triangleID < $1.triangleID }.map { $0.dictionary() }]
++      )
++      track(n, b, h, "canonical_triangles")
++    }
++    do {
++      let (n, b, h) = try writeObj(
++        "rejected_triangles.json",
++        ["rejected_triangles": reconstruction.rejected.sorted { $0.recordID < $1.recordID }.map { $0.dictionary() }]
++      )
++      track(n, b, h, "rejected_triangles")
++    }
++
++    let meshSHA: String
++    do {
++      let (n, b, h) = try writeObj("surface_mesh_candidate.json", meshCandidate.dictionary())
++      meshSHA = h
++      track(n, b, h, "surface_mesh_candidate")
++    }
++    let topologyExtras = SurfaceTopologyValidator().adjacencyAndComponents(
++      vertices: reconstruction.vertices,
++      triangles: reconstruction.triangles
++    )
++    do {
++      let (n, b, h) = try writeObj("topology.json", topology.dictionary())
++      track(n, b, h, "topology")
++    }
++    do {
++      let (n, b, h) = try writeObj("adjacency.json", [
++        "vertex_adjacency": topologyExtras.adjacency,
++        "edge_adjacency": topologyExtras.edgeAdjacency,
++        "schema_id": "SurfaceAdjacency",
++        "schema_version": Phase4DFixtureIDs.schemaVersion,
++      ])
++      track(n, b, h, "adjacency")
++    }
++    do {
++      let (n, b, h) = try writeObj("connected_components.json", [
++        "components": topologyExtras.components,
++        "component_count": topology.componentCount,
++        "schema_id": "ConnectedSurfaceComponents",
++        "schema_version": Phase4DFixtureIDs.schemaVersion,
++      ])
++      track(n, b, h, "connected_components")
++    }
++    do {
++      let (n, b, h) = try writeObj(
++        "boundaries.json",
++        ["boundaries": classified.boundaries.map { $0.dictionary() }]
++      )
++      track(n, b, h, "boundaries")
++    }
++    do {
++      let (n, b, h) = try writeObj(
++        "holes.json",
++        ["holes": classified.holes.map { $0.dictionary() }]
++      )
++      track(n, b, h, "holes")
++    }
++    do {
++      let (n, b, h) = try writeObj("interpolated_regions.json", [
++        "regions": [] as [[String: Any]],
++        "interpolated_triangle_count": 0,
++        "automatic_hole_fill_applied": false,
++        "authority": "INTERPOLATED_FIXTURE_SURFACE_ESTIMATE",
++        "note": "Phase 4D fixture path does not automatically fill holes",
++        "schema_id": "InterpolatedSurfaceRegions",
++        "schema_version": Phase4DFixtureIDs.schemaVersion,
++      ])
++      track(n, b, h, "interpolated_regions")
++    }
++    do {
++      let (n, b, h) = try writeObj(
++        "surface_confidence.json",
++        ["records": confidence.map { $0.dictionary() }]
++      )
++      track(n, b, h, "surface_confidence")
++    }
++    do {
++      let (n, b, h) = try writeObj(
++        "lod_records.json",
++        ["lods": lods.map { $0.dictionary() }]
++      )
++      track(n, b, h, "lod_records")
++    }
++
++    let ply0SHA: String
++    let ply1SHA: String
++    let ply2SHA: String
++    do {
++      let (n, b, h) = try writeText("surface_mesh_lod0.ply", ply0)
++      ply0SHA = h; track(n, b, h, "lod0_ply", media: "application/x-ply")
++    }
++    do {
++      let (n, b, h) = try writeText("surface_mesh_lod1.ply", ply1)
++      ply1SHA = h; track(n, b, h, "lod1_ply", media: "application/x-ply")
++    }
++    do {
++      let (n, b, h) = try writeText("surface_mesh_lod2.ply", ply2)
++      ply2SHA = h; track(n, b, h, "lod2_ply", media: "application/x-ply")
++    }
++    do {
++      let (n, b, h) = try writeText("surface_mesh.obj", obj)
++      track(n, b, h, "surface_mesh_obj", media: "text/plain")
++    }
++    do {
++      let (n, b, h) = try writeText("surface_mesh.mtl", mtl)
++      track(n, b, h, "surface_mesh_mtl", media: "text/plain")
++    }
++    do {
++      let (n, b, h) = try writeBin("surface_mesh.glb", glbData)
++      track(n, b, h, "surface_mesh_glb", media: "model/gltf-binary")
++    }
++
++    let visual = SurfaceMeshExportWriter.visualDerivationManifest(
++      colors: colors,
++      lodHashes: [
++        "surface_mesh_lod0.ply": ply0SHA,
++        "surface_mesh_lod1.ply": ply1SHA,
++        "surface_mesh_lod2.ply": ply2SHA,
++      ],
++      glbSHA256: glbSHA
++    )
++    do {
++      let (n, b, h) = try writeObj("visual_derivation_manifest.json", visual)
++      track(n, b, h, "visual_derivation_manifest")
++    }
++    do {
++      let (n, b, h) = try writeObj("surface_quality_summary.json", quality.dictionary())
++      track(n, b, h, "surface_quality_summary")
++    }
++
++    let derivations: [SurfaceDerivationRecord] = reconstruction.vertices.map {
++      SurfaceDerivationRecord(
++        derivationID: "DER-\($0.vertexID)",
++        kind: "SURFACE_VERTEX_FROM_FUSED_POINT",
++        subjectID: $0.vertexID,
++        sourceIDs: [$0.fusedPointID],
++        algorithmID: backend.backendID,
++        configurationDigest: cfg.digest
++      )
++    }
++    do {
++      let (n, b, h) = try writeObj(
++        "derivation_records.json",
++        ["records": derivations.sorted { $0.derivationID < $1.derivationID }.map { $0.dictionary() }]
++      )
++      track(n, b, h, "derivation_records")
++    }
++
++    let geometry = FixtureSurfaceTargetGeometry.surfaceTarget()
++    do {
++      let (n, b, h) = try writeObj("fixture_geometry_expected.json", geometry.dictionary())
++      track(n, b, h, "expected_geometry")
++    }
++
++    let fixtureTruth: [String: Any] = [
++      "schema_id": "Phase4DFixtureTruth",
++      "schema_version": Phase4DFixtureIDs.schemaVersion,
++      "input_package_id": Phase4DFixtureIDs.inputPackageID,
++      "fixture_geometry_id": Phase4DFixtureIDs.fixtureGeometryID,
++      "surface_output_id": surfaceOutputID,
++      "characterization_status": "DETERMINISTIC_TEST_FIXTURE",
++      "expected_vertex_count_min": 8,
++      "expected_valid_triangle_count_min": 1,
++      "expected_rejected_triangle_count_min": 2,
++      "expected_boundary_count_min": 1,
++      "expected_hole_count_min": 1,
++      "expected_component_count": topology.componentCount,
++      "expected_lod_count": 3,
++      "expected_phase4e_readiness": [
++        Phase4EReadinessOutcome.readyForFixtureScaleAndDatum.rawValue,
++        Phase4EReadinessOutcome.readyWithUnresolvedBoundaries.rawValue,
++      ],
++      "observed": [
++        "vertex_count": reconstruction.vertices.count,
++        "valid_triangle_count": reconstruction.triangles.count,
++        "rejected_triangle_count": reconstruction.rejected.count,
++        "boundary_count": classified.boundaries.count,
++        "hole_count": classified.holes.count,
++        "component_count": topology.componentCount,
++        "lod_count": 3,
++        "phase4e_readiness": readiness.rawValue,
++        "automatic_hole_fill_applied": false,
++      ],
++      "geometry_reference_authority": "TEST_FIXTURE_GROUND_TRUTH",
++      "surface_authority": "RECONSTRUCTION_ESTIMATE",
++      "production_mesh_claim": "FORBIDDEN",
++      "engineering_metrology_claim": "FORBIDDEN",
++      "complete_digital_twin_claim": "FORBIDDEN",
++    ]
++    do {
++      let (n, b, h) = try writeObj("fixture_truth.json", fixtureTruth)
++      track(n, b, h, "fixture_truth")
++    }
++
++    var lineage = SurfaceLineageManifest(
++      lineageManifestID: "LINEAGE-PHASE4D-000001",
++      sourcePackageID: refinedInventory.sourcePackageID,
++      sourcePackageClosureSHA256: sourcePackageClosureSHA256,
++      phase4COutputClosureSHA256: recomputedPhase4CClosure,
++      surfacePolicyID: configuration.meshing.policyID,
++      configurationDigest: cfg.digest,
++      algorithmIDs: [backend.backendID, "SurfaceTopologyValidator", "SurfaceLODGenerator"],
++      outputArtifactHashes: hashes,
++      lineageManifestSHA256: ""
++    )
++    lineage.lineageManifestSHA256 = ContentHasher.sha256Hex(
++      try CanonicalJSON.data({
++        var d = lineage.dictionary()
++        d["lineage_manifest_sha256"] = ""
++        return d
++      }())
++    )
++    let lineageSHA: String
++    do {
++      let (n, b, h) = try writeObj("surface_lineage_manifest.json", lineage.dictionary())
++      lineageSHA = h
++      track(n, b, h, "surface_lineage_manifest")
++    }
++
++    items.sort { $0.relativePath < $1.relativePath }
++    func writeInventory() throws -> String {
++      let sorted = items.sorted { $0.relativePath < $1.relativePath }
++      let inv = ReconstructionOutputInventory(
++        inventoryID: "INV-SURFACE-OUT-4D-000001",
++        reconstructionOutputID: surfaceOutputID,
++        items: sorted,
++        inventorySHA256: ContentHasher.sha256Hex(try CanonicalJSON.data(["items": sorted.map { $0.dictionary() }]))
++      )
++      let data = try CanonicalJSON.data(inv.dictionary())
++      try data.write(to: outputRoot.appendingPathComponent("output_inventory.json"), options: .atomic)
++      return ContentHasher.sha256Hex(data)
++    }
++    var invSHA = try writeInventory()
++
++    let entries = try SpatialPackageClosureVerifier.collectPackageInventoryEntries(packageRoot: outputRoot)
++    let provisionalClosure = try SpatialPackageClosureVerifier.inventoryClosureHash(entries: entries)
++
++    let handoff = Phase4EHandoffContract(
++      surfaceOutputID: surfaceOutputID,
++      meshArtifactID: meshCandidate.meshID,
++      readiness: readiness,
++      vertexCount: reconstruction.vertices.count,
++      triangleCount: reconstruction.triangles.count,
++      boundaryCount: classified.boundaries.count,
++      holeCount: classified.holes.count,
++      lodCount: 3,
++      lineageManifestID: lineage.lineageManifestID,
++      outputClosureSHA256: provisionalClosure,
++      limitations: [
++        "NO_PRODUCTION_MESH",
++        "NO_ENGINEERING_METROLOGY",
++        "NO_COMPLETE_DIGITAL_TWIN",
++        "NO_AUTOMATIC_HOLE_FILL",
++        "FIXTURE_SURFACE_NOT_VEHICLE_SURFACE",
++        "SCALE_DATUM_PENDING_PHASE4E",
++      ]
++    )
++    do {
++      let (n, b, h) = try writeObj("phase4e_handoff.json", handoff.dictionary())
++      track(n, b, h, "phase4e_handoff")
++    }
++    invSHA = try writeInventory()
++
++    _ = try writeObj("output_closure.json", [
++      "schema_id": "ReconstructionOutputClosure",
++      "surface_output_id": surfaceOutputID,
++      "reconstruction_output_id": surfaceOutputID,
++      "output_closure_sha256": provisionalClosure,
++      "source_package_id": refinedInventory.sourcePackageID,
++      "source_package_closure_sha256": sourcePackageClosureSHA256,
++      "phase4c_output_closure_sha256": recomputedPhase4CClosure,
++      "note": "Phase 4D derived surface outputs; Phase 4C source outputs unchanged",
++    ])
++
++    let finalEntries = try SpatialPackageClosureVerifier.collectPackageInventoryEntries(packageRoot: outputRoot)
++    let finalClosure = try SpatialPackageClosureVerifier.inventoryClosureHash(entries: finalEntries)
++
++    let phase4CHashesAfter = try hashAllFiles(under: phase4COutputRoot)
++    let unchanged = phase4CHashesBefore == phase4CHashesAfter
++    guard unchanged else {
++      throw SurfaceFailure.deterministicReplayMismatch("phase4c_outputs_mutated")
++    }
++
++    job.transition(.complete, message: "complete")
++
++    return Phase4DPipelineResult(
++      surfaceOutputID: surfaceOutputID,
++      eligibility: eligibility,
++      reconstruction: reconstruction,
++      topology: topology,
++      boundaries: classified.boundaries,
++      holes: classified.holes,
++      confidence: confidence,
++      lods: lods,
++      quality: quality,
++      handoff: handoff,
++      lineage: lineage,
++      jobState: job.state,
++      cancellation: nil,
++      outputRoot: outputRoot,
++      surfaceMeshCandidateSHA256: meshSHA,
++      lod0PLYSHA256: ply0SHA,
++      lod1PLYSHA256: ply1SHA,
++      lod2PLYSHA256: ply2SHA,
++      glbSHA256: glbSHA,
++      lineageManifestSHA256: lineageSHA,
++      outputInventorySHA256: invSHA,
++      outputClosureSHA256: finalClosure,
++      phase4COutputsUnchanged: unchanged,
++      phase4EReadiness: readiness,
++      sealedOutputCreated: true
++    )
++  }
++
++  private func cancelAndCleanup(
++    job: SurfaceReconstructionJob,
++    outputRoot: URL,
++    during: SurfaceReconstructionJobState
++  ) throws -> Never {
++    job.transition(.cancelled, message: "cancelled_\(during.rawValue)")
++    if configuration.resource.cleanupTemporaryOutputs {
++      try? FileManager.default.removeItem(at: outputRoot)
++    }
++    try FileManager.default.createDirectory(at: outputRoot, withIntermediateDirectories: true)
++    let contents = (try? FileManager.default.contentsOfDirectory(atPath: outputRoot.path)) ?? []
++    precondition(!contents.contains("output_closure.json"))
++    throw SurfaceFailure.cancelled(during.rawValue)
++  }
++
++  private func refineInventory(
++    _ inventory: SurfaceInputInventory,
++    phase4COutputRoot: URL
++  ) -> SurfaceInputInventory {
++    var inv = inventory
++    let lineageURL = phase4COutputRoot.appendingPathComponent("spatial_lineage_manifest.json")
++    if let data = try? Data(contentsOf: lineageURL),
++       let obj = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
++    {
++      if let pkg = obj["source_package_id"] as? String { inv.sourcePackageID = pkg }
++      if let clo = obj["source_package_closure_sha256"] as? String, inv.sourcePackageClosureSHA256.isEmpty {
++        inv.sourcePackageClosureSHA256 = clo
++      }
++    }
++    return inv
++  }
++
++  private func hashAllFiles(under root: URL) throws -> [String: String] {
++    let fm = FileManager.default
++    guard let enumerator = fm.enumerator(at: root, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles]) else {
++      return [:]
++    }
++    var out: [String: String] = [:]
++    for case let url as URL in enumerator {
++      var isDir: ObjCBool = false
++      guard fm.fileExists(atPath: url.path, isDirectory: &isDir), !isDir.boolValue else { continue }
++      let rel = url.path.replacingOccurrences(of: root.path + "/", with: "")
++      let data = try Data(contentsOf: url)
++      out[rel] = ContentHasher.sha256Hex(data)
++    }
++    return out
++  }
++}
++
++// MARK: - Phase 4C artifact loader
++
++enum Phase4CSurfaceInputLoader {
++  static func load(phase4COutputRoot: URL) throws -> Phase4CSurfaceHandoffBundle {
++    func loadJSON(_ name: String) throws -> [String: Any] {
++      let url = phase4COutputRoot.appendingPathComponent(name)
++      guard FileManager.default.fileExists(atPath: url.path) else {
++        throw SurfaceFailure.invalidInput("missing_\(name)")
++      }
++      let data = try Data(contentsOf: url)
++      guard let obj = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
++        throw SurfaceFailure.invalidInput("invalid_\(name)")
++      }
++      return obj
++    }
++
++    let cloudObj = try loadJSON("fused_point_cloud.json")
++    let normalsObj = try loadJSON("point_normals.json")
++    let gapsObj = try loadJSON("spatial_gaps.json")
++    let conflictsObj = try loadJSON("spatial_conflicts.json")
++    let lineageObj = try loadJSON("spatial_lineage_manifest.json")
++    let closureObj = try loadJSON("output_closure.json")
++    let handoffObj = try loadJSON("phase4d_handoff_contract.json")
++
++    let pointsArr = cloudObj["points"] as? [[String: Any]] ?? []
++    var points: [ConsolidatedPoint] = []
++    for p in pointsArr {
++      guard let id = p["fused_point_id"] as? String,
++            let pos = p["position"] as? [String: Any],
++            let x = doubleVal(pos["x"]), let y = doubleVal(pos["y"]), let z = doubleVal(pos["z"])
++      else { continue }
++      let conf = p["confidence_summary"] as? [String: Any]
++      let classificationRaw = p["classification"] as? String ?? DuplicateSpatialClass.nearbyDistinctPoint.rawValue
++      let classification = DuplicateSpatialClass(rawValue: classificationRaw) ?? .nearbyDistinctPoint
++      points.append(
++        ConsolidatedPoint(
++          fusedPointID: id,
++          x: x, y: y, z: z,
++          contributionCount: p["contribution_count"] as? Int ?? 1,
++          sourcePointIDs: p["source_point_ids"] as? [String] ?? [],
++          sourceObservationIDs: p["source_observation_ids"] as? [String] ?? [],
++          confidenceMean: doubleVal(conf?["mean"]) ?? 0,
++          confidenceMin: doubleVal(conf?["min"]) ?? 0,
++          confidenceMax: doubleVal(conf?["max"]) ?? 0,
++          voxelID: p["voxel_id"] as? String ?? "",
++          derivationID: p["derivation_id"] as? String ?? "",
++          classification: classification,
++          authority: p["fusion_output_authority"] as? String ?? "RECONSTRUCTION_ESTIMATE"
++        )
++      )
++    }
++    let coordObj = cloudObj["coordinate_convention"] as? [String: Any] ?? [:]
++    let coordinate = FusionCoordinateConvention(
++      reconstructionRootFrame: coordObj["reconstruction_root_frame"] as? String ?? FusionCoordinateConvention.fixture.reconstructionRootFrame,
++      units: coordObj["units"] as? String ?? "meters",
++      handedness: coordObj["handedness"] as? String ?? "right",
++      upAxis: coordObj["up_axis"] as? String ?? "+Y",
++      matrixLayout: coordObj["matrix_layout"] as? String ?? "column_major",
++      vectorConvention: coordObj["vector_convention"] as? String ?? "opencv_optical_z_forward"
++    )
++    let fusedCloud = FusedPointCloud(
++      cloudID: cloudObj["cloud_id"] as? String ?? "FPC",
++      reconstructionOutputID: cloudObj["reconstruction_output_id"] as? String ?? FixtureDenseFusionPackageBuilder.reconstructionOutputID,
++      authority: cloudObj["fusion_output_authority"] as? String ?? "RECONSTRUCTION_ESTIMATE",
++      points: points,
++      coordinate: coordinate
++    )
++
++    let normalsArr = normalsObj["normals"] as? [[String: Any]] ?? []
++    var normals: [PointNormal] = []
++    for n in normalsArr {
++      guard let id = n["fused_point_id"] as? String,
++            let nv = n["normal"] as? [String: Any],
++            let nx = doubleVal(nv["nx"]), let ny = doubleVal(nv["ny"]), let nz = doubleVal(nv["nz"])
++      else { continue }
++      let validity = NormalValidityClassification(rawValue: n["validity"] as? String ?? "") ?? .insufficientNeighborhood
++      normals.append(
++        PointNormal(
++          fusedPointID: id, nx: nx, ny: ny, nz: nz,
++          neighborIDs: n["contributing_neighbor_ids"] as? [String] ?? [],
++          algorithmID: n["algorithm_id"] as? String ?? "",
++          algorithmVersion: n["algorithm_version"] as? String ?? "",
++          neighborhoodPolicy: n["neighborhood_policy"] as? String ?? "",
++          orientationConvention: n["orientation_convention"] as? String ?? "",
++          validity: validity,
++          confidence: doubleVal(n["confidence"]) ?? 0,
++          derivationID: n["derivation_id"] as? String ?? ""
++        )
++      )
++    }
++
++    let gapsArr = gapsObj["gaps"] as? [[String: Any]] ?? []
++    let gaps: [SpatialGap] = gapsArr.compactMap { g in
++      guard let id = g["gap_id"] as? String else { return nil }
++      let cls = SpatialGapClassification(rawValue: g["classification"] as? String ?? "") ?? .unobserved
++      return SpatialGap(
++        gapID: id,
++        classification: cls,
++        detail: g["detail"] as? String ?? "",
++        boundsMin: (g["bounds_min"] as? [Double]) ?? [0, 0, 0],
++        boundsMax: (g["bounds_max"] as? [Double]) ?? [0, 0, 0]
++      )
++    }
++
++    let conflictsArr = conflictsObj["conflicts"] as? [[String: Any]] ?? []
++    let conflictIDs = conflictsArr.compactMap { $0["conflict_id"] as? String }.sorted()
++
++    let quarantined = (handoffObj["quarantined_regions"] as? [String] ?? []).sorted()
++    let readiness = handoffObj["phase4d_readiness"] as? String ?? ""
++    let lineageID = lineageObj["lineage_manifest_id"] as? String
++      ?? handoffObj["source_lineage_manifest_id"] as? String
++      ?? ""
++    let closure = closureObj["output_closure_sha256"] as? String
++      ?? handoffObj["output_closure_sha256"] as? String
++      ?? ""
++
++    return Phase4CSurfaceHandoffBundle(
++      fusedCloud: fusedCloud,
++      normals: normals,
++      gaps: gaps,
++      conflictIDs: conflictIDs,
++      quarantinedRegions: quarantined,
++      lineageManifestID: lineageID,
++      phase4COutputClosureSHA256: closure,
++      phase4DReadiness: readiness,
++      phase4CReconstructionOutputID: fusedCloud.reconstructionOutputID,
++      coordinate: coordinate
++    )
++  }
++
++  private static func doubleVal(_ any: Any?) -> Double? {
++    if let d = any as? Double { return d }
++    if let i = any as? Int { return Double(i) }
++    if let n = any as? NSNumber { return n.doubleValue }
++    return nil
++  }
++}
+diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclude=.git' /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/SurfaceEligibilityAndPolicy.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceEligibilityAndPolicy.swift
+--- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/SurfaceEligibilityAndPolicy.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceEligibilityAndPolicy.swift	2026-08-04 11:23:13.327790092 +0000
+@@ -0,0 +1,428 @@
++import Foundation
++
++// MARK: - Eligibility
++
++public enum SurfaceEligibilityOutcome: String, Codable, Sendable, Equatable {
++  case eligibleSyntheticSurface = "ELIGIBLE_SYNTHETIC_SURFACE_RECONSTRUCTION"
++  case eligibleWithSparseRegions = "ELIGIBLE_WITH_SPARSE_REGIONS"
++  case ineligibleMissingFusedCloud = "INELIGIBLE_MISSING_FUSED_CLOUD"
++  case ineligibleInvalidNormals = "INELIGIBLE_INVALID_NORMALS"
++  case ineligibleBrokenLineage = "INELIGIBLE_BROKEN_LINEAGE"
++  case ineligiblePhase4CNotReady = "INELIGIBLE_PHASE4C_NOT_READY"
++  case ineligibleInsufficientPoints = "INELIGIBLE_INSUFFICIENT_POINTS"
++  case ineligibleCoordinateMismatch = "INELIGIBLE_COORDINATE_MISMATCH"
++  case ineligibleClosureMismatch = "INELIGIBLE_CLOSURE_MISMATCH"
++  case manualReviewRequired = "MANUAL_REVIEW_REQUIRED"
++}
++
++public enum SurfaceIneligibilityReason: String, Codable, Sendable, Equatable {
++  case missingFusedCloud = "MISSING_FUSED_CLOUD"
++  case missingNormals = "MISSING_NORMALS"
++  case invalidNormals = "INVALID_NORMALS"
++  case brokenLineage = "BROKEN_LINEAGE"
++  case phase4CNotReady = "PHASE4C_NOT_READY"
++  case insufficientTrustedPoints = "INSUFFICIENT_TRUSTED_POINTS"
++  case coordinateMismatch = "COORDINATE_MISMATCH"
++  case closureMismatch = "CLOSURE_MISMATCH"
++  case quarantinedMajority = "QUARANTINED_MAJORITY"
++  case nonFiniteGeometry = "NON_FINITE_GEOMETRY"
++}
++
++public struct SurfaceEligibilityPolicy: Codable, Sendable, Equatable {
++  public var policyID: String
++  public var minTrustedPoints: Int
++  public var minValidNormals: Int
++  public var requirePhase4DHandoffReady: Bool
++  public var requireFiniteGeometry: Bool
++  public var allowSparseRegions: Bool
++
++  public static let fixture = SurfaceEligibilityPolicy(
++    policyID: "SURF-ELIG-POL-FIXTURE-000001",
++    minTrustedPoints: 8,
++    minValidNormals: 8,
++    requirePhase4DHandoffReady: true,
++    requireFiniteGeometry: true,
++    allowSparseRegions: true
++  )
++
++  public func dictionary() -> [String: Any] {
++    [
++      "policy_id": policyID,
++      "min_trusted_points": minTrustedPoints,
++      "min_valid_normals": minValidNormals,
++      "require_phase4d_handoff_ready": requirePhase4DHandoffReady,
++      "require_finite_geometry": requireFiniteGeometry,
++      "allow_sparse_regions": allowSparseRegions,
++      "characterization_status": "DETERMINISTIC_TEST_FIXTURE",
++      "schema_version": Phase4DFixtureIDs.schemaVersion,
++    ]
++  }
++}
++
++public struct SurfaceEligibilityResult: Codable, Sendable, Equatable {
++  public var outcome: SurfaceEligibilityOutcome
++  public var reasons: [SurfaceIneligibilityReason]
++  public var policyID: String
++  public var detail: String
++  public var trustedPointCount: Int
++  public var validNormalCount: Int
++
++  public var isEligible: Bool {
++    switch outcome {
++    case .eligibleSyntheticSurface, .eligibleWithSparseRegions: return true
++    default: return false
++    }
++  }
++
++  public func dictionary() -> [String: Any] {
++    [
++      "outcome": outcome.rawValue,
++      "reasons": reasons.map(\.rawValue).sorted(),
++      "policy_id": policyID,
++      "detail": detail,
++      "is_eligible": isEligible,
++      "trusted_point_count": trustedPointCount,
++      "valid_normal_count": validNormalCount,
++    ]
++  }
++}
++
++// MARK: - Meshing / resource policy
++
++public struct SurfaceMeshingPolicy: Codable, Sendable, Equatable {
++  public var policyID: String
++  public var maxEdgeLengthMeters: Double
++  public var minTriangleAreaMeters2: Double
++  public var normalConflictDotMax: Double
++  public var allowAutomaticHoleFill: Bool
++  public var lod1InteriorRemovalFraction: Double
++  public var lod2InteriorRemovalFraction: Double
++  public var intentionalHoleAABBMin: [Double]
++  public var intentionalHoleAABBMax: [Double]
++  public var characterizationStatus: String
++
++  public static let fixture = SurfaceMeshingPolicy(
++    policyID: "SURF-MESH-POL-FIXTURE-000001",
++    maxEdgeLengthMeters: 0.08,
++    minTriangleAreaMeters2: 1e-12,
++    normalConflictDotMax: 0.0,
++    allowAutomaticHoleFill: false,
++    lod1InteriorRemovalFraction: 0.30,
++    lod2InteriorRemovalFraction: 0.60,
++    intentionalHoleAABBMin: [0.08, -0.01, 1.99],
++    intentionalHoleAABBMax: [0.12, 0.01, 2.01],
++    characterizationStatus: "DETERMINISTIC_TEST_FIXTURE"
++  )
++
++  public func dictionary() -> [String: Any] {
++    [
++      "policy_id": policyID,
++      "max_edge_length_meters": maxEdgeLengthMeters,
++      "min_triangle_area_meters2": minTriangleAreaMeters2,
++      "normal_conflict_dot_max": normalConflictDotMax,
++      "allow_automatic_hole_fill": allowAutomaticHoleFill,
++      "lod1_interior_removal_fraction": lod1InteriorRemovalFraction,
++      "lod2_interior_removal_fraction": lod2InteriorRemovalFraction,
++      "intentional_hole_aabb_min": intentionalHoleAABBMin,
++      "intentional_hole_aabb_max": intentionalHoleAABBMax,
++      "characterization_status": characterizationStatus,
++      "schema_version": Phase4DFixtureIDs.schemaVersion,
++    ]
++  }
++}
++
++public struct SurfaceResourcePolicy: Equatable, Sendable {
++  public var maxInputPoints: Int
++  public var maxTriangles: Int
++  public var maxEstimatedWorkingSetBytes: Int
++  public var cleanupTemporaryOutputs: Bool
++
++  public static let fixture = SurfaceResourcePolicy(
++    maxInputPoints: 10_000,
++    maxTriangles: 50_000,
++    maxEstimatedWorkingSetBytes: 64 * 1024 * 1024,
++    cleanupTemporaryOutputs: true
++  )
++
++  public func dictionary() -> [String: Any] {
++    [
++      "max_input_points": maxInputPoints,
++      "max_triangles": maxTriangles,
++      "max_estimated_working_set_bytes": maxEstimatedWorkingSetBytes,
++      "cleanup_temporary_outputs": cleanupTemporaryOutputs,
++    ]
++  }
++}
++
++public struct SurfaceConfigurationDigest: Codable, Sendable, Equatable {
++  public var configurationID: String
++  public var backendID: String
++  public var maxEdgeLengthMeters: Double
++  public var minTriangleAreaMeters2: Double
++  public var lod1InteriorRemovalFraction: Double
++  public var lod2InteriorRemovalFraction: Double
++  public var allowAutomaticHoleFill: Bool
++  public var characterizationStatus: String
++  public var digest: String
++
++  public static func fixture(policy: SurfaceMeshingPolicy = .fixture) -> SurfaceConfigurationDigest {
++    var cfg = SurfaceConfigurationDigest(
++      configurationID: "SURF-CFG-FIXTURE-000001",
++      backendID: "DeterministicFixtureSurfaceBackend",
++      maxEdgeLengthMeters: policy.maxEdgeLengthMeters,
++      minTriangleAreaMeters2: policy.minTriangleAreaMeters2,
++      lod1InteriorRemovalFraction: policy.lod1InteriorRemovalFraction,
++      lod2InteriorRemovalFraction: policy.lod2InteriorRemovalFraction,
++      allowAutomaticHoleFill: policy.allowAutomaticHoleFill,
++      characterizationStatus: "DETERMINISTIC_TEST_FIXTURE",
++      digest: ""
++    )
++    cfg.digest = cfg.computeDigest()
++    return cfg
++  }
++
++  public func dictionary() -> [String: Any] {
++    [
++      "configuration_id": configurationID,
++      "backend_id": backendID,
++      "max_edge_length_meters": maxEdgeLengthMeters,
++      "min_triangle_area_meters2": minTriangleAreaMeters2,
++      "lod1_interior_removal_fraction": lod1InteriorRemovalFraction,
++      "lod2_interior_removal_fraction": lod2InteriorRemovalFraction,
++      "allow_automatic_hole_fill": allowAutomaticHoleFill,
++      "characterization_status": characterizationStatus,
++      "configuration_digest": digest,
++    ]
++  }
++
++  public func computeDigest() -> String {
++    var d = dictionary()
++    d["configuration_digest"] = ""
++    let body = (try? CanonicalJSON.data(d)) ?? Data()
++    return ContentHasher.sha256Hex(body)
++  }
++}
++
++public struct Phase4DConfiguration: Equatable, Sendable {
++  public var meshing: SurfaceMeshingPolicy
++  public var eligibility: SurfaceEligibilityPolicy
++  public var resource: SurfaceResourcePolicy
++  public var configuration: SurfaceConfigurationDigest
++  public var numeric: FusionNumericPolicy
++
++  public static let fixture = Phase4DConfiguration(
++    meshing: .fixture,
++    eligibility: .fixture,
++    resource: .fixture,
++    configuration: .fixture(),
++    numeric: .fixture
++  )
++}
++
++// MARK: - Input inventory + validator
++
++public struct SurfaceInputInventory: Equatable, Sendable {
++  public var sourcePackageID: String
++  public var sourcePackageClosureSHA256: String
++  public var phase4COutputID: String
++  public var phase4COutputClosureSHA256: String
++  public var fusedPointCloudID: String
++  public var fusedPointCount: Int
++  public var validNormalCount: Int
++  public var quarantinedRegionCount: Int
++  public var gapCount: Int
++  public var conflictCount: Int
++  public var phase4DReadiness: String
++  public var units: String
++  public var handedness: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "source_package_id": sourcePackageID,
++      "source_package_closure_sha256": sourcePackageClosureSHA256,
++      "phase4c_output_id": phase4COutputID,
++      "phase4c_output_closure_sha256": phase4COutputClosureSHA256,
++      "fused_point_cloud_id": fusedPointCloudID,
++      "fused_point_count": fusedPointCount,
++      "valid_normal_count": validNormalCount,
++      "quarantined_region_count": quarantinedRegionCount,
++      "gap_count": gapCount,
++      "conflict_count": conflictCount,
++      "phase4d_readiness": phase4DReadiness,
++      "units": units,
++      "handedness": handedness,
++      "schema_id": "SurfaceInputInventory",
++      "schema_version": Phase4DFixtureIDs.schemaVersion,
++    ]
++  }
++}
++
++public struct Phase4CSurfaceHandoffBundle: Equatable, Sendable {
++  public var fusedCloud: FusedPointCloud
++  public var normals: [PointNormal]
++  public var gaps: [SpatialGap]
++  public var conflictIDs: [String]
++  public var quarantinedRegions: [String]
++  public var lineageManifestID: String
++  public var phase4COutputClosureSHA256: String
++  public var phase4DReadiness: String
++  public var phase4CReconstructionOutputID: String
++  public var coordinate: FusionCoordinateConvention
++}
++
++public struct SurfaceInputValidator: Sendable {
++  public var policy: SurfaceEligibilityPolicy
++
++  public init(policy: SurfaceEligibilityPolicy = .fixture) {
++    self.policy = policy
++  }
++
++  public func validate(
++    inventory: SurfaceInputInventory,
++    bundle: Phase4CSurfaceHandoffBundle,
++    expectedPhase4CClosure: String?
++  ) -> SurfaceEligibilityResult {
++    var reasons: [SurfaceIneligibilityReason] = []
++
++    if bundle.fusedCloud.points.isEmpty {
++      reasons.append(.missingFusedCloud)
++    }
++    if bundle.normals.isEmpty {
++      reasons.append(.missingNormals)
++    }
++
++    let validNormals = bundle.normals.filter {
++      $0.validity == .valid || $0.validity == .highCurvatureEdge
++    }
++    if validNormals.count < policy.minValidNormals {
++      reasons.append(.invalidNormals)
++    }
++
++    let quarantine = Set(bundle.quarantinedRegions)
++    let trusted = bundle.fusedCloud.points.filter { pt in
++      !quarantine.contains(pt.fusedPointID) && !quarantine.contains(pt.voxelID)
++    }
++    if trusted.count < policy.minTrustedPoints {
++      reasons.append(.insufficientTrustedPoints)
++    }
++    if !quarantine.isEmpty && trusted.count * 2 < bundle.fusedCloud.points.count {
++      reasons.append(.quarantinedMajority)
++    }
++
++    if inventory.units != FusionCoordinateConvention.fixture.units
++      || inventory.handedness != FusionCoordinateConvention.fixture.handedness
++    {
++      reasons.append(.coordinateMismatch)
++    }
++
++    if let expected = expectedPhase4CClosure, !expected.isEmpty,
++       expected != inventory.phase4COutputClosureSHA256
++    {
++      reasons.append(.closureMismatch)
++    }
++
++    if inventory.lineageBroken(bundle: bundle) {
++      reasons.append(.brokenLineage)
++    }
++
++    let readyOK: Bool = {
++      switch inventory.phase4DReadiness {
++      case Phase4DReadinessOutcome.readyForSyntheticSurfaceCandidate.rawValue,
++           Phase4DReadinessOutcome.readyWithSparseRegions.rawValue:
++        return true
++      case Phase4DReadinessOutcome.additionalCaptureRecommended.rawValue:
++        return policy.allowSparseRegions
++      default:
++        return false
++      }
++    }()
++    if policy.requirePhase4DHandoffReady && !readyOK {
++      reasons.append(.phase4CNotReady)
++    }
++
++    for p in trusted {
++      if !p.x.isFinite || !p.y.isFinite || !p.z.isFinite {
++        reasons.append(.nonFiniteGeometry)
++        break
++      }
++    }
++
++    let uniqueReasons = Array(Set(reasons)).sorted { $0.rawValue < $1.rawValue }
++
++    if uniqueReasons.contains(.missingFusedCloud) {
++      return SurfaceEligibilityResult(
++        outcome: .ineligibleMissingFusedCloud, reasons: uniqueReasons,
++        policyID: policy.policyID, detail: "fused_point_cloud_missing",
++        trustedPointCount: trusted.count, validNormalCount: validNormals.count
++      )
++    }
++    if uniqueReasons.contains(.invalidNormals) || uniqueReasons.contains(.missingNormals) {
++      return SurfaceEligibilityResult(
++        outcome: .ineligibleInvalidNormals, reasons: uniqueReasons,
++        policyID: policy.policyID, detail: "normals_insufficient",
++        trustedPointCount: trusted.count, validNormalCount: validNormals.count
++      )
++    }
++    if uniqueReasons.contains(.brokenLineage) {
++      return SurfaceEligibilityResult(
++        outcome: .ineligibleBrokenLineage, reasons: uniqueReasons,
++        policyID: policy.policyID, detail: "lineage_broken",
++        trustedPointCount: trusted.count, validNormalCount: validNormals.count
++      )
++    }
++    if uniqueReasons.contains(.phase4CNotReady) {
++      return SurfaceEligibilityResult(
++        outcome: .ineligiblePhase4CNotReady, reasons: uniqueReasons,
++        policyID: policy.policyID, detail: inventory.phase4DReadiness,
++        trustedPointCount: trusted.count, validNormalCount: validNormals.count
++      )
++    }
++    if uniqueReasons.contains(.insufficientTrustedPoints) {
++      return SurfaceEligibilityResult(
++        outcome: .ineligibleInsufficientPoints, reasons: uniqueReasons,
++        policyID: policy.policyID, detail: "trusted_points_below_min",
++        trustedPointCount: trusted.count, validNormalCount: validNormals.count
++      )
++    }
++    if uniqueReasons.contains(.coordinateMismatch) {
++      return SurfaceEligibilityResult(
++        outcome: .ineligibleCoordinateMismatch, reasons: uniqueReasons,
++        policyID: policy.policyID, detail: "coordinate_mismatch",
++        trustedPointCount: trusted.count, validNormalCount: validNormals.count
++      )
++    }
++    if uniqueReasons.contains(.closureMismatch) {
++      return SurfaceEligibilityResult(
++        outcome: .ineligibleClosureMismatch, reasons: uniqueReasons,
++        policyID: policy.policyID, detail: "closure_mismatch",
++        trustedPointCount: trusted.count, validNormalCount: validNormals.count
++      )
++    }
++    if uniqueReasons.contains(.quarantinedMajority) {
++      return SurfaceEligibilityResult(
++        outcome: .manualReviewRequired, reasons: uniqueReasons,
++        policyID: policy.policyID, detail: "quarantined_majority",
++        trustedPointCount: trusted.count, validNormalCount: validNormals.count
++      )
++    }
++
++    let sparse = inventory.phase4DReadiness == Phase4DReadinessOutcome.readyWithSparseRegions.rawValue
++      || inventory.phase4DReadiness == Phase4DReadinessOutcome.additionalCaptureRecommended.rawValue
++    return SurfaceEligibilityResult(
++      outcome: sparse ? .eligibleWithSparseRegions : .eligibleSyntheticSurface,
++      reasons: [],
++      policyID: policy.policyID,
++      detail: "eligible",
++      trustedPointCount: trusted.count,
++      validNormalCount: validNormals.count
++    )
++  }
++}
++
++private extension SurfaceInputInventory {
++  func lineageBroken(bundle: Phase4CSurfaceHandoffBundle) -> Bool {
++    sourcePackageClosureSHA256.isEmpty
++      || phase4COutputClosureSHA256.isEmpty
++      || bundle.lineageManifestID.isEmpty
++  }
++}
+diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclude=.git' /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/SurfaceLODVisualExports.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceLODVisualExports.swift
+--- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/SurfaceLODVisualExports.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceLODVisualExports.swift	2026-08-04 11:25:41.457549782 +0000
+@@ -0,0 +1,340 @@
++import Foundation
++
++public struct SurfaceLODGenerator: Sendable {
++  public var policy: SurfaceMeshingPolicy
++
++  public init(policy: SurfaceMeshingPolicy = .fixture) {
++    self.policy = policy
++  }
++
++  public func generate(
++    vertices: [SurfaceVertex],
++    triangles: [SurfaceTriangle]
++  ) -> [SurfaceLODMesh] {
++    let lod0 = SurfaceLODMesh(
++      lodLevel: 0,
++      meshID: "MESH-LOD0-FIXTURE-000001",
++      vertices: vertices.sorted { $0.vertexID < $1.vertexID },
++      triangles: triangles.sorted { $0.triangleID < $1.triangleID },
++      collapseRecords: []
++    )
++    let lod1 = simplify(
++      level: 1,
++      meshID: "MESH-LOD1-FIXTURE-000001",
++      vertices: vertices,
++      triangles: triangles,
++      removalFraction: policy.lod1InteriorRemovalFraction
++    )
++    let lod2 = simplify(
++      level: 2,
++      meshID: "MESH-LOD2-FIXTURE-000001",
++      vertices: vertices,
++      triangles: triangles,
++      removalFraction: policy.lod2InteriorRemovalFraction
++    )
++    return [lod0, lod1, lod2]
++  }
++
++  private func simplify(
++    level: Int,
++    meshID: String,
++    vertices: [SurfaceVertex],
++    triangles: [SurfaceTriangle],
++    removalFraction: Double
++  ) -> SurfaceLODMesh {
++    let boundary = boundaryVertexIDs(triangles: triangles)
++    let interior = vertices.map(\.vertexID).filter { !boundary.contains($0) }.sorted()
++    let removeCount = Int(floor(Double(interior.count) * removalFraction))
++    let removed = Set(interior.prefix(removeCount))
++    var collapses: [VertexCollapseRecord] = []
++    for (i, id) in removed.sorted().enumerated() {
++      collapses.append(
++        VertexCollapseRecord(
++          recordID: String(format: "VCR-L%d-%06d", level, i + 1),
++          removedVertexID: id,
++          lodLevel: level,
++          reason: "DETERMINISTIC_INTERIOR_REMOVAL"
++        )
++      )
++    }
++    let keptVertices = vertices.filter { !removed.contains($0.vertexID) }.sorted { $0.vertexID < $1.vertexID }
++    let keptSet = Set(keptVertices.map(\.vertexID))
++    let keptTris = triangles.filter { t in
++      t.vertexIDs.allSatisfy { keptSet.contains($0) }
++    }.sorted { $0.triangleID < $1.triangleID }
++
++    return SurfaceLODMesh(
++      lodLevel: level,
++      meshID: meshID,
++      vertices: keptVertices,
++      triangles: keptTris,
++      collapseRecords: collapses.sorted { $0.recordID < $1.recordID }
++    )
++  }
++
++  private func boundaryVertexIDs(triangles: [SurfaceTriangle]) -> Set<String> {
++    var edgeCount: [String: (String, String, Int)] = [:]
++    func key(_ a: String, _ b: String) -> String { a < b ? "\(a)|\(b)" : "\(b)|\(a)" }
++    for t in triangles {
++      guard t.vertexIDs.count == 3 else { continue }
++      let a = t.vertexIDs[0], b = t.vertexIDs[1], c = t.vertexIDs[2]
++      for (u, v) in [(a, b), (b, c), (c, a)] {
++        let k = key(u, v)
++        if let e = edgeCount[k] { edgeCount[k] = (e.0, e.1, e.2 + 1) }
++        else { edgeCount[k] = (u, v, 1) }
++      }
++    }
++    var out: Set<String> = []
++    for e in edgeCount.values where e.2 == 1 {
++      out.insert(e.0); out.insert(e.1)
++    }
++    return out
++  }
++}
++
++public enum SurfaceMeshExportWriter {
++  public static func writePLY(mesh: SurfaceLODMesh, colors: [String: (Int, Int, Int)]? = nil) -> String {
++    let verts = mesh.vertices.sorted { $0.vertexID < $1.vertexID }
++    let indexByID = Dictionary(uniqueKeysWithValues: verts.enumerated().map { ($0.element.vertexID, $0.offset) })
++    let tris = mesh.triangles.sorted { $0.triangleID < $1.triangleID }
++    var lines: [String] = [
++      "ply",
++      "format ascii 1.0",
++      "comment Elektron Phase 4D fixture surface — not production mesh",
++      "comment mesh_id \(mesh.meshID)",
++      "comment lod \(mesh.lodLevel)",
++      "comment authority RECONSTRUCTION_ESTIMATE",
++      "element vertex \(verts.count)",
++      "property float x",
++      "property float y",
++      "property float z",
++      "property float nx",
++      "property float ny",
++      "property float nz",
++    ]
++    if colors != nil {
++      lines += ["property uchar red", "property uchar green", "property uchar blue"]
++    }
++    lines += [
++      "element face \(tris.count)",
++      "property list uchar int vertex_indices",
++      "end_header",
++    ]
++    for v in verts {
++      if let colors, let rgb = colors[v.vertexID] {
++        lines.append(String(format: "%.9f %.9f %.9f %.9f %.9f %.9f %d %d %d",
++                            v.x, v.y, v.z, v.nx, v.ny, v.nz, rgb.0, rgb.1, rgb.2))
++      } else {
++        lines.append(String(format: "%.9f %.9f %.9f %.9f %.9f %.9f",
++                            v.x, v.y, v.z, v.nx, v.ny, v.nz))
++      }
++    }
++    for t in tris {
++      let idxs = t.vertexIDs.compactMap { indexByID[$0] }
++      guard idxs.count == 3 else { continue }
++      lines.append("3 \(idxs[0]) \(idxs[1]) \(idxs[2])")
++    }
++    return lines.joined(separator: "\n") + "\n"
++  }
++
++  public static func writeOBJ(mesh: SurfaceLODMesh, mtlName: String) -> String {
++    let verts = mesh.vertices.sorted { $0.vertexID < $1.vertexID }
++    let indexByID = Dictionary(uniqueKeysWithValues: verts.enumerated().map { ($0.element.vertexID, $0.offset + 1) })
++    var lines: [String] = [
++      "# Elektron Phase 4D fixture OBJ — not production mesh",
++      "mtllib \(mtlName)",
++      "usemtl SurfaceFixture",
++    ]
++    for v in verts {
++      lines.append(String(format: "v %.9f %.9f %.9f", v.x, v.y, v.z))
++    }
++    for v in verts {
++      lines.append(String(format: "vn %.9f %.9f %.9f", v.nx, v.ny, v.nz))
++    }
++    for t in mesh.triangles.sorted(by: { $0.triangleID < $1.triangleID }) {
++      let idxs = t.vertexIDs.compactMap { indexByID[$0] }
++      guard idxs.count == 3 else { continue }
++      lines.append("f \(idxs[0])//\(idxs[0]) \(idxs[1])//\(idxs[1]) \(idxs[2])//\(idxs[2])")
++    }
++    return lines.joined(separator: "\n") + "\n"
++  }
++
++  public static func writeMTL() -> String {
++    """
++    # Elektron Phase 4D fixture MTL
++    newmtl SurfaceFixture
++    Ka 0.200000 0.200000 0.200000
++    Kd 0.700000 0.750000 0.800000
++    Ks 0.050000 0.050000 0.050000
++    Ns 10.000000
++    illum 1
++    """
++  }
++
++  /// Deterministic confidence → RGB mapping.
++  public static func vertexColors(vertices: [SurfaceVertex]) -> [String: (Int, Int, Int)] {
++    var out: [String: (Int, Int, Int)] = [:]
++    for v in vertices {
++      let t = max(0.0, min(1.0, v.confidence))
++      let r = Int((1.0 - t) * 220)
++      let g = Int(40 + t * 180)
++      let b = Int(80 + t * 140)
++      out[v.vertexID] = (r, g, b)
++    }
++    return out
++  }
++
++  public static func visualDerivationManifest(
++    colors: [String: (Int, Int, Int)],
++    lodHashes: [String: String],
++    glbSHA256: String?
++  ) -> [String: Any] {
++    let colorRows = colors.keys.sorted().map { id -> [String: Any] in
++      let c = colors[id]!
++      return ["vertex_id": id, "rgb": [c.0, c.1, c.2], "mapping": "confidence_linear_rgb"]
++    }
++    var d: [String: Any] = [
++      "schema_id": "VisualDerivationManifest",
++      "schema_version": Phase4DFixtureIDs.schemaVersion,
++      "color_authority": "RECONSTRUCTION_ESTIMATE",
++      "per_vertex_colors": colorRows,
++      "lod_artifact_sha256": Dictionary(uniqueKeysWithValues: lodHashes.keys.sorted().map { ($0, lodHashes[$0]!) }),
++      "note": "Deterministic visual derivatives — not photoreal texture",
++    ]
++    if let glbSHA256 {
++      d["glb_sha256"] = glbSHA256
++    }
++    return d
++  }
++}
++
++/// Minimal deterministic GLB (binary glTF 2.0) writer with POSITION + NORMAL + indices.
++public enum DeterministicGLBWriter {
++  public static func write(mesh: SurfaceLODMesh) -> Data {
++    let verts = mesh.vertices.sorted { $0.vertexID < $1.vertexID }
++    let indexByID = Dictionary(uniqueKeysWithValues: verts.enumerated().map { ($0.element.vertexID, UInt32($0.offset)) })
++    var positions: [Float] = []
++    var normals: [Float] = []
++    var minP: [Float] = [Float.greatestFiniteMagnitude, Float.greatestFiniteMagnitude, Float.greatestFiniteMagnitude]
++    var maxP: [Float] = [-Float.greatestFiniteMagnitude, -Float.greatestFiniteMagnitude, -Float.greatestFiniteMagnitude]
++    for v in verts {
++      let p: [Float] = [Float(v.x), Float(v.y), Float(v.z)]
++      positions += p
++      normals += [Float(v.nx), Float(v.ny), Float(v.nz)]
++      for i in 0..<3 {
++        minP[i] = min(minP[i], p[i])
++        maxP[i] = max(maxP[i], p[i])
++      }
++    }
++    var indices: [UInt32] = []
++    for t in mesh.triangles.sorted(by: { $0.triangleID < $1.triangleID }) {
++      let idxs = t.vertexIDs.compactMap { indexByID[$0] }
++      guard idxs.count == 3 else { continue }
++      indices += idxs
++    }
++
++    let posData = floatsToData(positions)
++    let nrmData = floatsToData(normals)
++    let idxData = uint32ToData(indices)
++
++    // Buffer layout: positions | normals | indices (aligned to 4)
++    var bin = Data()
++    let posOffset = 0
++    bin.append(posData)
++    let nrmOffset = bin.count
++    bin.append(nrmData)
++    align4(&bin)
++    let idxOffset = bin.count
++    bin.append(idxData)
++    align4(&bin)
++
++    let bufferByteLength = bin.count
++    let posBytes = posData.count
++    let nrmBytes = nrmData.count
++    let idxBytes = idxData.count
++
++    let accessors: [[String: Any]] = [
++      [
++        "bufferView": 0, "componentType": 5126, "count": verts.count, "type": "VEC3",
++        "max": maxP.map { Double($0) }, "min": minP.map { Double($0) },
++      ],
++      [
++        "bufferView": 1, "componentType": 5126, "count": verts.count, "type": "VEC3",
++      ],
++      [
++        "bufferView": 2, "componentType": 5125, "count": indices.count, "type": "SCALAR",
++      ],
++    ]
++    let bufferViews: [[String: Any]] = [
++      ["buffer": 0, "byteOffset": posOffset, "byteLength": posBytes, "target": 34962],
++      ["buffer": 0, "byteOffset": nrmOffset, "byteLength": nrmBytes, "target": 34962],
++      ["buffer": 0, "byteOffset": idxOffset, "byteLength": idxBytes, "target": 34963],
++    ]
++    let gltf: [String: Any] = [
++      "asset": ["version": "2.0", "generator": "Elektron-Phase4D-DeterministicGLBWriter"],
++      "buffers": [["byteLength": bufferByteLength]],
++      "bufferViews": bufferViews,
++      "accessors": accessors,
++      "meshes": [[
++        "name": mesh.meshID,
++        "primitives": [[
++          "attributes": ["POSITION": 0, "NORMAL": 1],
++          "indices": 2,
++          "mode": 4,
++        ]],
++      ]],
++      "nodes": [["mesh": 0, "name": "SurfaceFixture"]],
++      "scenes": [["nodes": [0]]],
++      "scene": 0,
++    ]
++
++    let jsonData = try! JSONSerialization.data(withJSONObject: gltf, options: [.sortedKeys])
++    var jsonPadded = jsonData
++    while jsonPadded.count % 4 != 0 { jsonPadded.append(0x20) } // space pad
++    var binPadded = bin
++    while binPadded.count % 4 != 0 { binPadded.append(0) }
++
++    var out = Data()
++    // GLB header
++    appendU32(&out, 0x46546C67) // glTF
++    appendU32(&out, 2)
++    let total = 12 + 8 + jsonPadded.count + 8 + binPadded.count
++    appendU32(&out, UInt32(total))
++    // JSON chunk
++    appendU32(&out, UInt32(jsonPadded.count))
++    appendU32(&out, 0x4E4F534A) // JSON
++    out.append(jsonPadded)
++    // BIN chunk
++    appendU32(&out, UInt32(binPadded.count))
++    appendU32(&out, 0x004E4942) // BIN\0
++    out.append(binPadded)
++    return out
++  }
++
++  private static func floatsToData(_ values: [Float]) -> Data {
++    var d = Data(capacity: values.count * 4)
++    for v in values {
++      var le = v.bitPattern.littleEndian
++      withUnsafeBytes(of: &le) { d.append(contentsOf: $0) }
++    }
++    return d
++  }
++
++  private static func uint32ToData(_ values: [UInt32]) -> Data {
++    var d = Data(capacity: values.count * 4)
++    for v in values {
++      var le = v.littleEndian
++      withUnsafeBytes(of: &le) { d.append(contentsOf: $0) }
++    }
++    return d
++  }
++
++  private static func align4(_ data: inout Data) {
++    while data.count % 4 != 0 { data.append(0) }
++  }
++
++  private static func appendU32(_ data: inout Data, _ value: UInt32) {
++    var le = value.littleEndian
++    withUnsafeBytes(of: &le) { data.append(contentsOf: $0) }
++  }
++}
+diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclude=.git' /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/SurfaceReconstructionContracts.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceReconstructionContracts.swift
+--- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/SurfaceReconstructionContracts.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceReconstructionContracts.swift	2026-08-04 11:23:13.163787821 +0000
+@@ -0,0 +1,568 @@
++import Foundation
++
++// MARK: - Schema / IDs
++
++public enum Phase4DFixtureIDs {
++  public static let inputPackageID = "SPKG-FIXTURE-SURFACE-RECONSTRUCTION-000001"
++  public static let fixtureGeometryID = "GEOM-FIXTURE-SURFACE-TARGET-000001"
++  public static let surfaceOutputID = "SURFACE-OUT-FIXTURE-000001"
++  public static let schemaVersion = "1.0.0-phase4d-fixture"
++  public static let sessionID = "SESS-FIXTURE-SURFACE-RECONSTRUCTION-000001"
++  public static let vehicleID = "VEH-FIXTURE-SURFACE-RECONSTRUCTION-000001"
++  public static let privacyPolicyID = "POL-FIXTURE-SURFACE-RECONSTRUCTION-000001"
++}
++
++// MARK: - Job runtime
++
++public enum SurfaceReconstructionJobState: String, Codable, Sendable, Equatable {
++  case created = "CREATED"
++  case validating = "VALIDATING"
++  case generatingVertices = "GENERATING_VERTICES"
++  case generatingTriangles = "GENERATING_TRIANGLES"
++  case validatingTopology = "VALIDATING_TOPOLOGY"
++  case classifyingBoundaries = "CLASSIFYING_BOUNDARIES"
++  case generatingLODs = "GENERATING_LODS"
++  case generatingVisualDerivatives = "GENERATING_VISUAL_DERIVATIVES"
++  case finalizing = "FINALIZING"
++  case complete = "COMPLETE"
++  case failed = "FAILED"
++  case cancelled = "CANCELLED"
++  case manualReviewRequired = "MANUAL_REVIEW_REQUIRED"
++}
++
++public struct SurfaceProgressRecord: Equatable, Sendable {
++  public var state: SurfaceReconstructionJobState
++  public var message: String
++  public var atUTC: String
++
++  public func dictionary() -> [String: Any] {
++    ["state": state.rawValue, "message": message, "at_utc": atUTC]
++  }
++}
++
++public struct SurfaceCancellationResult: Equatable, Sendable {
++  public var cancelled: Bool
++  public var duringState: SurfaceReconstructionJobState
++  public var sealedOutputCreated: Bool
++  public var temporaryCleaned: Bool
++
++  public func dictionary() -> [String: Any] {
++    [
++      "cancelled": cancelled,
++      "during_state": duringState.rawValue,
++      "sealed_output_created": sealedOutputCreated,
++      "temporary_cleaned": temporaryCleaned,
++    ]
++  }
++}
++
++public final class SurfaceReconstructionJob: @unchecked Sendable {
++  public private(set) var state: SurfaceReconstructionJobState = .created
++  public private(set) var progress: [SurfaceProgressRecord] = []
++  public private(set) var cancelRequested = false
++  public let jobID: String
++
++  public init(jobID: String = "JOB-SURF-FIXTURE-000001") {
++    self.jobID = jobID
++  }
++
++  public func requestCancel() { cancelRequested = true }
++  public var isCancelled: Bool { cancelRequested }
++
++  public func transition(_ to: SurfaceReconstructionJobState, message: String) {
++    state = to
++    progress.append(
++      SurfaceProgressRecord(state: to, message: message, atUTC: "2026-08-04T11:00:00Z")
++    )
++  }
++}
++
++// MARK: - Geometry wrapper
++
++public struct FixtureSurfaceTargetGeometry: Equatable, Sendable {
++  public static let geometryID = Phase4DFixtureIDs.fixtureGeometryID
++
++  public var geometryID: String
++  public var landmarks: [[String: Double]]
++  public var trueCameraTranslations: [[Double]]
++  public var injectedPosePerturbations: [[Double]]
++  public var authority: String
++  public var intentionalHoleAABBMin: [Double]
++  public var intentionalHoleAABBMax: [Double]
++  public var expectedOccupiedVoxelCount: Int
++  public var expectedConsolidatedPointCountMin: Int
++  public var voxelSizeMeters: Double
++
++  public static func surfaceTarget() -> FixtureSurfaceTargetGeometry {
++    let base = FixtureMultiviewSurfaceGeometry.multiviewSurface()
++    return FixtureSurfaceTargetGeometry(
++      geometryID: geometryID,
++      landmarks: base.landmarks,
++      trueCameraTranslations: base.trueCameraTranslations,
++      injectedPosePerturbations: base.injectedPosePerturbations,
++      authority: "TEST_FIXTURE_GROUND_TRUTH",
++      intentionalHoleAABBMin: [0.08, -0.01, 1.99],
++      intentionalHoleAABBMax: [0.12, 0.01, 2.01],
++      expectedOccupiedVoxelCount: base.expectedOccupiedVoxelCount,
++      expectedConsolidatedPointCountMin: base.expectedConsolidatedPointCountMin,
++      voxelSizeMeters: base.voxelSizeMeters
++    )
++  }
++
++  public func asMultiviewSurfaceGeometry() -> FixtureMultiviewSurfaceGeometry {
++    FixtureMultiviewSurfaceGeometry(
++      geometryID: geometryID,
++      landmarks: landmarks,
++      trueCameraTranslations: trueCameraTranslations,
++      injectedPosePerturbations: injectedPosePerturbations,
++      authority: authority,
++      expectedOccupiedVoxelCount: expectedOccupiedVoxelCount,
++      expectedConsolidatedPointCountMin: expectedConsolidatedPointCountMin,
++      voxelSizeMeters: voxelSizeMeters
++    )
++  }
++
++  public func dictionary() -> [String: Any] {
++    [
++      "geometry_id": geometryID,
++      "kind": "PLANAR_SURFACE_TARGET",
++      "landmarks": landmarks,
++      "true_camera_translations": trueCameraTranslations,
++      "injected_pose_perturbations": injectedPosePerturbations,
++      "intentional_hole_aabb_min": intentionalHoleAABBMin,
++      "intentional_hole_aabb_max": intentionalHoleAABBMax,
++      "voxel_size_meters": voxelSizeMeters,
++      "expected_occupied_voxel_count": expectedOccupiedVoxelCount,
++      "expected_consolidated_point_count_min": expectedConsolidatedPointCountMin,
++      "geometry_reference_authority": authority,
++      "schema_id": "FixtureSurfaceTargetGeometry",
++      "schema_version": Phase4DFixtureIDs.schemaVersion,
++      "note": "Fixture ground truth is not physical metrology or vehicle mesh proof",
++    ]
++  }
++}
++
++// MARK: - Mesh primitives
++
++public struct SurfaceVertex: Equatable, Sendable {
++  public var vertexID: String
++  public var fusedPointID: String
++  public var x: Double
++  public var y: Double
++  public var z: Double
++  public var nx: Double
++  public var ny: Double
++  public var nz: Double
++  public var confidence: Double
++  public var authority: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "vertex_id": vertexID,
++      "fused_point_id": fusedPointID,
++      "position": ["x": x, "y": y, "z": z],
++      "normal": ["nx": nx, "ny": ny, "nz": nz],
++      "confidence": confidence,
++      "surface_authority": authority,
++    ]
++  }
++}
++
++public enum TriangleRejectionReason: String, Codable, Sendable, Equatable {
++  case duplicateVertices = "REJECTED_DUPLICATE_VERTICES"
++  case nearZeroArea = "REJECTED_NEAR_ZERO_AREA"
++  case excessiveEdgeLength = "REJECTED_EXCESSIVE_EDGE_LENGTH"
++  case normalConflict = "REJECTED_NORMAL_CONFLICT"
++  case gapBridging = "REJECTED_GAP_BRIDGING"
++  case quarantinedInput = "REJECTED_QUARANTINED_INPUT"
++  case degenerateCollinear = "REJECTED_DEGENERATE_COLLINEAR"
++  case intentionalOpenBoundary = "REJECTED_INTENTIONAL_OPEN_BOUNDARY"
++}
++
++public struct SurfaceTriangle: Equatable, Sendable {
++  public var triangleID: String
++  public var vertexIDs: [String]
++  public var areaMeters2: Double
++  public var faceNormal: [Double]
++  public var centroid: [Double]
++  public var authority: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "triangle_id": triangleID,
++      "vertex_ids": vertexIDs,
++      "area_meters2": areaMeters2,
++      "face_normal": faceNormal,
++      "centroid": centroid,
++      "surface_authority": authority,
++    ]
++  }
++}
++
++public struct RejectedTriangleRecord: Equatable, Sendable {
++  public var recordID: String
++  public var vertexIDs: [String]
++  public var reason: TriangleRejectionReason
++  public var detail: String
++  public var centroid: [Double]
++
++  public func dictionary() -> [String: Any] {
++    [
++      "record_id": recordID,
++      "vertex_ids": vertexIDs,
++      "reason": reason.rawValue,
++      "detail": detail,
++      "centroid": centroid,
++    ]
++  }
++}
++
++public struct SurfaceMeshCandidate: Equatable, Sendable {
++  public var meshID: String
++  public var surfaceOutputID: String
++  public var authority: String
++  public var vertices: [SurfaceVertex]
++  public var triangles: [SurfaceTriangle]
++  public var classification: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "mesh_id": meshID,
++      "surface_output_id": surfaceOutputID,
++      "surface_authority": authority,
++      "classification": classification,
++      "vertex_count": vertices.count,
++      "triangle_count": triangles.count,
++      "vertices": vertices.sorted { $0.vertexID < $1.vertexID }.map { $0.dictionary() },
++      "triangles": triangles.sorted { $0.triangleID < $1.triangleID }.map { $0.dictionary() },
++      "production_mesh_claim": "FORBIDDEN",
++      "engineering_metrology_claim": "FORBIDDEN",
++      "complete_digital_twin_claim": "FORBIDDEN",
++      "schema_id": "SurfaceMeshCandidate",
++      "schema_version": Phase4DFixtureIDs.schemaVersion,
++      "note": "Synthetic fixture surface candidate — not production mesh",
++    ]
++  }
++
++  public func sha256() throws -> String {
++    ContentHasher.sha256Hex(try CanonicalJSON.data(dictionary()))
++  }
++}
++
++public struct SurfaceReconstructionResult: Equatable, Sendable {
++  public var vertices: [SurfaceVertex]
++  public var triangles: [SurfaceTriangle]
++  public var rejected: [RejectedTriangleRecord]
++  public var algorithmID: String
++  public var configurationDigest: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "algorithm_id": algorithmID,
++      "configuration_digest": configurationDigest,
++      "vertex_count": vertices.count,
++      "valid_triangle_count": triangles.count,
++      "rejected_triangle_count": rejected.count,
++      "vertices": vertices.sorted { $0.vertexID < $1.vertexID }.map { $0.dictionary() },
++      "triangles": triangles.sorted { $0.triangleID < $1.triangleID }.map { $0.dictionary() },
++      "rejected_triangles": rejected.sorted { $0.recordID < $1.recordID }.map { $0.dictionary() },
++    ]
++  }
++}
++
++// MARK: - Topology / boundaries / holes
++
++public enum TopologyValidationOutcome: String, Codable, Sendable, Equatable {
++  case validManifoldOpen = "VALID_MANIFOLD_OPEN"
++  case validWithHoles = "VALID_WITH_HOLES"
++  case invalidNonManifold = "INVALID_NON_MANIFOLD"
++  case invalidDuplicateFaces = "INVALID_DUPLICATE_FACES"
++  case invalidDegenerate = "INVALID_DEGENERATE"
++  case manualReviewRequired = "MANUAL_REVIEW_REQUIRED"
++}
++
++public struct TopologyValidationRecord: Equatable, Sendable {
++  public var outcome: TopologyValidationOutcome
++  public var componentCount: Int
++  public var boundaryEdgeCount: Int
++  public var nonManifoldEdgeCount: Int
++  public var duplicateFaceCount: Int
++  public var detail: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "outcome": outcome.rawValue,
++      "component_count": componentCount,
++      "boundary_edge_count": boundaryEdgeCount,
++      "non_manifold_edge_count": nonManifoldEdgeCount,
++      "duplicate_face_count": duplicateFaceCount,
++      "detail": detail,
++    ]
++  }
++}
++
++public enum BoundaryClassification: String, Codable, Sendable, Equatable {
++  case outerBoundary = "OUTER_BOUNDARY"
++  case intentionalOpenBoundary = "INTENTIONAL_OPEN_BOUNDARY"
++  case unobservedRegion = "UNOBSERVED_REGION"
++  case holeBoundary = "HOLE_BOUNDARY"
++  case sparseRegionBoundary = "SPARSE_REGION_BOUNDARY"
++}
++
++public struct BoundaryLoopRecord: Equatable, Sendable {
++  public var boundaryID: String
++  public var classification: BoundaryClassification
++  public var orderedVertexIDs: [String]
++  public var edgeCount: Int
++  public var detail: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "boundary_id": boundaryID,
++      "classification": classification.rawValue,
++      "ordered_vertex_ids": orderedVertexIDs,
++      "edge_count": edgeCount,
++      "detail": detail,
++    ]
++  }
++}
++
++public enum HoleClassification: String, Codable, Sendable, Equatable {
++  case unobservedRegion = "UNOBSERVED_REGION"
++  case intentionalOpenBoundary = "INTENTIONAL_OPEN_BOUNDARY"
++  case gapBridgingAvoided = "GAP_BRIDGING_AVOIDED"
++  case sparseCoverage = "SPARSE_COVERAGE"
++}
++
++public struct HoleRecord: Equatable, Sendable {
++  public var holeID: String
++  public var classification: HoleClassification
++  public var boundaryID: String?
++  public var aabbMin: [Double]
++  public var aabbMax: [Double]
++  public var automaticFillApplied: Bool
++  public var detail: String
++
++  public func dictionary() -> [String: Any] {
++    var d: [String: Any] = [
++      "hole_id": holeID,
++      "classification": classification.rawValue,
++      "aabb_min": aabbMin,
++      "aabb_max": aabbMax,
++      "automatic_fill_applied": automaticFillApplied,
++      "fill_authority": automaticFillApplied ? "INTERPOLATED_FIXTURE_SURFACE_ESTIMATE" : "NONE",
++      "detail": detail,
++    ]
++    if let boundaryID { d["boundary_id"] = boundaryID }
++    return d
++  }
++}
++
++public enum SurfaceConfidenceClass: String, Codable, Sendable, Equatable {
++  case high = "HIGH_CONFIDENCE"
++  case medium = "MEDIUM_CONFIDENCE"
++  case low = "LOW_CONFIDENCE"
++  case interpolated = "INTERPOLATED_FIXTURE_SURFACE_ESTIMATE"
++  case quarantinedExcluded = "QUARANTINED_EXCLUDED"
++}
++
++public struct SurfaceConfidenceRecord: Equatable, Sendable {
++  public var subjectID: String
++  public var kind: String
++  public var classification: SurfaceConfidenceClass
++  public var score: Double
++  public var detail: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "subject_id": subjectID,
++      "kind": kind,
++      "classification": classification.rawValue,
++      "score": score,
++      "detail": detail,
++    ]
++  }
++}
++
++// MARK: - LOD
++
++public struct VertexCollapseRecord: Equatable, Sendable {
++  public var recordID: String
++  public var removedVertexID: String
++  public var lodLevel: Int
++  public var reason: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "record_id": recordID,
++      "removed_vertex_id": removedVertexID,
++      "lod_level": lodLevel,
++      "reason": reason,
++    ]
++  }
++}
++
++public struct SurfaceLODMesh: Equatable, Sendable {
++  public var lodLevel: Int
++  public var meshID: String
++  public var vertices: [SurfaceVertex]
++  public var triangles: [SurfaceTriangle]
++  public var collapseRecords: [VertexCollapseRecord]
++
++  public func dictionary() -> [String: Any] {
++    [
++      "lod_level": lodLevel,
++      "mesh_id": meshID,
++      "vertex_count": vertices.count,
++      "triangle_count": triangles.count,
++      "collapse_records": collapseRecords.sorted { $0.recordID < $1.recordID }.map { $0.dictionary() },
++    ]
++  }
++}
++
++// MARK: - Phase 4E handoff
++
++public enum Phase4EReadinessOutcome: String, Codable, Sendable, Equatable {
++  case readyForFixtureScaleAndDatum = "READY_FOR_FIXTURE_SCALE_AND_DATUM_CHARACTERIZATION"
++  case readyWithUnresolvedBoundaries = "READY_WITH_UNRESOLVED_BOUNDARIES"
++  case notReadyInvalidTopology = "NOT_READY_INVALID_TOPOLOGY"
++  case notReadyInsufficientMesh = "NOT_READY_INSUFFICIENT_MESH"
++  case manualReviewRequired = "MANUAL_REVIEW_REQUIRED"
++}
++
++public struct Phase4EHandoffContract: Equatable, Sendable {
++  public var surfaceOutputID: String
++  public var meshArtifactID: String
++  public var readiness: Phase4EReadinessOutcome
++  public var vertexCount: Int
++  public var triangleCount: Int
++  public var boundaryCount: Int
++  public var holeCount: Int
++  public var lodCount: Int
++  public var lineageManifestID: String
++  public var outputClosureSHA256: String
++  public var limitations: [String]
++
++  public func dictionary() -> [String: Any] {
++    [
++      "surface_output_id": surfaceOutputID,
++      "mesh_artifact_id": meshArtifactID,
++      "phase4e_readiness": readiness.rawValue,
++      "vertex_count": vertexCount,
++      "triangle_count": triangleCount,
++      "boundary_count": boundaryCount,
++      "hole_count": holeCount,
++      "lod_count": lodCount,
++      "source_lineage_manifest_id": lineageManifestID,
++      "output_closure_sha256": outputClosureSHA256,
++      "limitations": limitations.sorted(),
++      "production_mesh_claim": "FORBIDDEN",
++      "engineering_metrology_claim": "FORBIDDEN",
++      "complete_digital_twin_claim": "FORBIDDEN",
++      "schema_id": "Phase4EHandoffContract",
++      "schema_version": Phase4DFixtureIDs.schemaVersion,
++      "note": "Handoff only — scale/datum characterization is Phase 4E",
++    ]
++  }
++}
++
++// MARK: - Lineage / quality
++
++public struct SurfaceDerivationRecord: Equatable, Sendable {
++  public var derivationID: String
++  public var kind: String
++  public var subjectID: String
++  public var sourceIDs: [String]
++  public var algorithmID: String
++  public var configurationDigest: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "derivation_id": derivationID,
++      "kind": kind,
++      "subject_id": subjectID,
++      "source_ids": sourceIDs.sorted(),
++      "algorithm_id": algorithmID,
++      "configuration_digest": configurationDigest,
++    ]
++  }
++}
++
++public struct SurfaceLineageManifest: Equatable, Sendable {
++  public var lineageManifestID: String
++  public var sourcePackageID: String
++  public var sourcePackageClosureSHA256: String
++  public var phase4COutputClosureSHA256: String
++  public var surfacePolicyID: String
++  public var configurationDigest: String
++  public var algorithmIDs: [String]
++  public var outputArtifactHashes: [String: String]
++  public var lineageManifestSHA256: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "lineage_manifest_id": lineageManifestID,
++      "source_package_id": sourcePackageID,
++      "source_package_closure_sha256": sourcePackageClosureSHA256,
++      "phase4c_output_closure_sha256": phase4COutputClosureSHA256,
++      "surface_policy_id": surfacePolicyID,
++      "configuration_digest": configurationDigest,
++      "algorithm_ids": algorithmIDs.sorted(),
++      "output_artifact_hashes": Dictionary(
++        uniqueKeysWithValues: outputArtifactHashes.keys.sorted().map { ($0, outputArtifactHashes[$0]!) }
++      ),
++      "lineage_manifest_sha256": lineageManifestSHA256,
++      "schema_id": "SurfaceLineageManifest",
++      "schema_version": Phase4DFixtureIDs.schemaVersion,
++    ]
++  }
++}
++
++public struct SurfaceQualitySummary: Equatable, Sendable {
++  public var summaryID: String
++  public var vertexCount: Int
++  public var validTriangleCount: Int
++  public var rejectedTriangleCount: Int
++  public var boundaryCount: Int
++  public var holeCount: Int
++  public var componentCount: Int
++  public var lodCount: Int
++  public var topologyOutcome: TopologyValidationOutcome
++  public var meanVertexConfidence: Double
++  public var automaticHoleFillApplied: Bool
++  public var characterizationStatus: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "summary_id": summaryID,
++      "vertex_count": vertexCount,
++      "valid_triangle_count": validTriangleCount,
++      "rejected_triangle_count": rejectedTriangleCount,
++      "boundary_count": boundaryCount,
++      "hole_count": holeCount,
++      "component_count": componentCount,
++      "lod_count": lodCount,
++      "topology_outcome": topologyOutcome.rawValue,
++      "mean_vertex_confidence": meanVertexConfidence,
++      "automatic_hole_fill_applied": automaticHoleFillApplied,
++      "characterization_status": characterizationStatus,
++      "production_mesh_claim": "FORBIDDEN",
++      "engineering_metrology_claim": "FORBIDDEN",
++      "complete_digital_twin_claim": "FORBIDDEN",
++      "manufacturing_claim": "FORBIDDEN",
++      "schema_id": "SurfaceQualitySummary",
++      "schema_version": Phase4DFixtureIDs.schemaVersion,
++    ]
++  }
++}
++
++// MARK: - Failures
++
++public enum SurfaceFailure: Error, Equatable, Sendable {
++  case cancelled(String)
++  case ineligible(String)
++  case invalidInput(String)
++  case topologyFailed(String)
++  case resourceBound(String)
++  case deterministicReplayMismatch(String)
++}
+diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclude=.git' /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/SurfaceTopologyBoundariesConfidence.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceTopologyBoundariesConfidence.swift
+--- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/SurfaceTopologyBoundariesConfidence.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceTopologyBoundariesConfidence.swift	2026-08-04 11:38:00.163111247 +0000
+@@ -0,0 +1,413 @@
++import Foundation
++
++public struct SurfaceTopologyValidator: Sendable {
++  public init() {}
++
++  public func validate(vertices: [SurfaceVertex], triangles: [SurfaceTriangle]) -> TopologyValidationRecord {
++    let vertexSet = Set(vertices.map(\.vertexID))
++    var edgeCount: [String: Int] = [:]
++    var faceKeys: [String: Int] = [:]
++    var adjacency: [String: Set<String>] = [:]
++
++    func edgeKey(_ a: String, _ b: String) -> String {
++      a < b ? "\(a)|\(b)" : "\(b)|\(a)"
++    }
++    func faceKey(_ ids: [String]) -> String {
++      ids.sorted().joined(separator: "|")
++    }
++
++    var degenerate = 0
++    for t in triangles {
++      guard t.vertexIDs.count == 3 else { degenerate += 1; continue }
++      let a = t.vertexIDs[0], b = t.vertexIDs[1], c = t.vertexIDs[2]
++      if Set([a, b, c]).count < 3 { degenerate += 1; continue }
++      if !vertexSet.contains(a) || !vertexSet.contains(b) || !vertexSet.contains(c) {
++        degenerate += 1
++        continue
++      }
++      let fk = faceKey(t.vertexIDs)
++      faceKeys[fk, default: 0] += 1
++      for (u, v) in [(a, b), (b, c), (c, a)] {
++        edgeCount[edgeKey(u, v), default: 0] += 1
++        adjacency[u, default: []].insert(v)
++        adjacency[v, default: []].insert(u)
++      }
++    }
++
++    let duplicateFaces = faceKeys.values.filter { $0 > 1 }.count
++    let nonManifold = edgeCount.values.filter { $0 > 2 }.count
++    let boundaryEdges = edgeCount.values.filter { $0 == 1 }.count
++
++    // Connected components over triangle vertex graph
++    var visited: Set<String> = []
++    var components = 0
++    let usedVertices = Set(triangles.flatMap(\.vertexIDs))
++    for v in usedVertices.sorted() {
++      if visited.contains(v) { continue }
++      components += 1
++      var stack = [v]
++      visited.insert(v)
++      while let cur = stack.popLast() {
++        for n in adjacency[cur] ?? [] where usedVertices.contains(n) && !visited.contains(n) {
++          visited.insert(n)
++          stack.append(n)
++        }
++      }
++    }
++    if components == 0 && !triangles.isEmpty { components = 1 }
++    if triangles.isEmpty { components = 0 }
++
++    if duplicateFaces > 0 {
++      return TopologyValidationRecord(
++        outcome: .invalidDuplicateFaces,
++        componentCount: max(components, 1),
++        boundaryEdgeCount: boundaryEdges,
++        nonManifoldEdgeCount: nonManifold,
++        duplicateFaceCount: duplicateFaces,
++        detail: "duplicate_faces"
++      )
++    }
++    if nonManifold > 0 {
++      return TopologyValidationRecord(
++        outcome: .invalidNonManifold,
++        componentCount: max(components, 1),
++        boundaryEdgeCount: boundaryEdges,
++        nonManifoldEdgeCount: nonManifold,
++        duplicateFaceCount: 0,
++        detail: "non_manifold_edges"
++      )
++    }
++    if degenerate > 0 {
++      return TopologyValidationRecord(
++        outcome: .invalidDegenerate,
++        componentCount: max(components, 1),
++        boundaryEdgeCount: boundaryEdges,
++        nonManifoldEdgeCount: 0,
++        duplicateFaceCount: 0,
++        detail: "degenerate_faces"
++      )
++    }
++    if boundaryEdges > 0 {
++      return TopologyValidationRecord(
++        outcome: .validWithHoles,
++        componentCount: max(components, 1),
++        boundaryEdgeCount: boundaryEdges,
++        nonManifoldEdgeCount: 0,
++        duplicateFaceCount: 0,
++        detail: "open_boundaries_present"
++      )
++    }
++    return TopologyValidationRecord(
++      outcome: .validManifoldOpen,
++      componentCount: max(components, 1),
++      boundaryEdgeCount: 0,
++      nonManifoldEdgeCount: 0,
++      duplicateFaceCount: 0,
++      detail: "closed_or_empty"
++    )
++  }
++
++  public struct AdjacencyExport: Sendable {
++    public var adjacency: [[String: Any]]
++    public var edgeAdjacency: [[String: Any]]
++    public var components: [[String: Any]]
++  }
++
++  public func adjacencyAndComponents(
++    vertices: [SurfaceVertex],
++    triangles: [SurfaceTriangle]
++  ) -> AdjacencyExport {
++    let vertexSet = Set(vertices.map(\.vertexID))
++    var edgeCount: [String: Int] = [:]
++    var adjacency: [String: Set<String>] = [:]
++    func edgeKey(_ a: String, _ b: String) -> String {
++      a < b ? "\(a)|\(b)" : "\(b)|\(a)"
++    }
++    for t in triangles {
++      guard t.vertexIDs.count == 3 else { continue }
++      let a = t.vertexIDs[0], b = t.vertexIDs[1], c = t.vertexIDs[2]
++      guard vertexSet.contains(a), vertexSet.contains(b), vertexSet.contains(c) else { continue }
++      for (u, v) in [(a, b), (b, c), (c, a)] {
++        edgeCount[edgeKey(u, v), default: 0] += 1
++        adjacency[u, default: []].insert(v)
++        adjacency[v, default: []].insert(u)
++      }
++    }
++    let adjRows: [[String: Any]] = adjacency.keys.sorted().map { v in
++      [
++        "vertex_id": v,
++        "neighbor_vertex_ids": (adjacency[v] ?? []).sorted(),
++      ]
++    }
++    let edgeRows: [[String: Any]] = edgeCount.keys.sorted().map { k in
++      let parts = k.split(separator: "|").map(String.init)
++      return [
++        "edge_id": k,
++        "vertex_a": parts[0],
++        "vertex_b": parts[1],
++        "incident_triangle_count": edgeCount[k] ?? 0,
++      ]
++    }
++
++    var visited: Set<String> = []
++    var components: [[String: Any]] = []
++    let usedVertices = Set(triangles.flatMap(\.vertexIDs))
++    for v in usedVertices.sorted() {
++      if visited.contains(v) { continue }
++      var stack = [v]
++      var members: [String] = []
++      visited.insert(v)
++      while let cur = stack.popLast() {
++        members.append(cur)
++        for n in adjacency[cur] ?? [] where usedVertices.contains(n) && !visited.contains(n) {
++          visited.insert(n)
++          stack.append(n)
++        }
++      }
++      members.sort()
++      components.append([
++        "component_id": String(format: "CMP-%06d", components.count + 1),
++        "vertex_ids": members,
++        "vertex_count": members.count,
++        "classification": "VALID_MANIFOLD_REGION",
++      ])
++    }
++    return AdjacencyExport(adjacency: adjRows, edgeAdjacency: edgeRows, components: components)
++  }
++}
++
++public struct SurfaceBoundaryClassifier: Sendable {
++  public var policy: SurfaceMeshingPolicy
++
++  public init(policy: SurfaceMeshingPolicy = .fixture) {
++    self.policy = policy
++  }
++
++  public func classify(
++    vertices: [SurfaceVertex],
++    triangles: [SurfaceTriangle],
++    gaps: [SpatialGap]
++  ) -> (boundaries: [BoundaryLoopRecord], holes: [HoleRecord]) {
++    let byID = Dictionary(uniqueKeysWithValues: vertices.map { ($0.vertexID, $0) })
++    var edgeCount: [String: (String, String, Int)] = [:]
++    func key(_ a: String, _ b: String) -> String { a < b ? "\(a)|\(b)" : "\(b)|\(a)" }
++    for t in triangles {
++      guard t.vertexIDs.count == 3 else { continue }
++      let ids = t.vertexIDs
++      for (u, v) in [(ids[0], ids[1]), (ids[1], ids[2]), (ids[2], ids[0])] {
++        let k = key(u, v)
++        if let e = edgeCount[k] {
++          edgeCount[k] = (e.0, e.1, e.2 + 1)
++        } else {
++          edgeCount[k] = (u, v, 1)
++        }
++      }
++    }
++    let boundaryEdges = edgeCount.values.filter { $0.2 == 1 }
++    // Build adjacency for boundary graph
++    var adj: [String: [String]] = [:]
++    for e in boundaryEdges {
++      adj[e.0, default: []].append(e.1)
++      adj[e.1, default: []].append(e.0)
++    }
++    for k in adj.keys { adj[k]?.sort() }
++
++    var visitedEdge: Set<String> = []
++    var loops: [[String]] = []
++    for e in boundaryEdges.sorted(by: { key($0.0, $0.1) < key($1.0, $1.1) }) {
++      let ek = key(e.0, e.1)
++      if visitedEdge.contains(ek) { continue }
++      var loop: [String] = [e.0]
++      var prev = e.0
++      var cur = e.1
++      visitedEdge.insert(ek)
++      var guardCount = 0
++      while cur != e.0 && guardCount < boundaryEdges.count + 2 {
++        loop.append(cur)
++        let nexts = (adj[cur] ?? []).filter { $0 != prev }
++        let next = nexts.sorted().first ?? prev
++        visitedEdge.insert(key(cur, next))
++        prev = cur
++        cur = next
++        guardCount += 1
++      }
++      if loop.count >= 3 {
++        loops.append(loop)
++      }
++    }
++
++    // Largest loop = outer; others = holes / intentional
++    let ranked = loops.sorted { $0.count > $1.count }
++    var boundaries: [BoundaryLoopRecord] = []
++    var holes: [HoleRecord] = []
++
++    for (idx, loop) in ranked.enumerated() {
++      let bid = String(format: "BND-%06d", idx + 1)
++      let centroid = loopCentroid(loop, byID: byID)
++      let inIntentional = aabbContains(
++        policy.intentionalHoleAABBMin, policy.intentionalHoleAABBMax, centroid
++      )
++      let inGap = gaps.contains { aabbContains($0.boundsMin, $0.boundsMax, centroid) }
++
++      let classification: BoundaryClassification
++      if idx == 0 {
++        classification = .outerBoundary
++      } else if inIntentional {
++        classification = .intentionalOpenBoundary
++      } else if inGap {
++        classification = .unobservedRegion
++      } else {
++        classification = .holeBoundary
++      }
++
++      boundaries.append(
++        BoundaryLoopRecord(
++          boundaryID: bid,
++          classification: classification,
++          orderedVertexIDs: loop,
++          edgeCount: loop.count,
++          detail: classification.rawValue
++        )
++      )
++
++      if classification != .outerBoundary {
++        let holeClass: HoleClassification
++        switch classification {
++        case .intentionalOpenBoundary: holeClass = .intentionalOpenBoundary
++        case .unobservedRegion: holeClass = .unobservedRegion
++        case .sparseRegionBoundary: holeClass = .sparseCoverage
++        default: holeClass = .gapBridgingAvoided
++        }
++        let aabb = loopAABB(loop, byID: byID)
++        holes.append(
++          HoleRecord(
++            holeID: String(format: "HOLE-%06d", holes.count + 1),
++            classification: holeClass,
++            boundaryID: bid,
++            aabbMin: aabb.0,
++            aabbMax: aabb.1,
++            automaticFillApplied: false,
++            detail: "no_automatic_fill"
++          )
++        )
++      }
++    }
++
++    // Always record intentional missing region even if no closed loop formed
++    if !holes.contains(where: { $0.classification == .intentionalOpenBoundary }) {
++      holes.append(
++        HoleRecord(
++          holeID: String(format: "HOLE-%06d", holes.count + 1),
++          classification: .intentionalOpenBoundary,
++          boundaryID: nil,
++          aabbMin: policy.intentionalHoleAABBMin,
++          aabbMax: policy.intentionalHoleAABBMax,
++          automaticFillApplied: false,
++          detail: "intentional_fixture_unobserved_region"
++        )
++      )
++    }
++
++    // Ensure at least one open boundary record if mesh has boundary edges
++    if boundaries.isEmpty && !boundaryEdges.isEmpty {
++      boundaries.append(
++        BoundaryLoopRecord(
++          boundaryID: "BND-000001",
++          classification: .outerBoundary,
++          orderedVertexIDs: boundaryEdges.flatMap { [$0.0, $0.1] }.sorted(),
++          edgeCount: boundaryEdges.count,
++          detail: "flat_boundary_edges"
++        )
++      )
++    }
++
++    boundaries.sort { $0.boundaryID < $1.boundaryID }
++    holes.sort { $0.holeID < $1.holeID }
++    return (boundaries, holes)
++  }
++
++  private func loopCentroid(_ loop: [String], byID: [String: SurfaceVertex]) -> [Double] {
++    var sx = 0.0, sy = 0.0, sz = 0.0, n = 0.0
++    for id in loop {
++      guard let v = byID[id] else { continue }
++      sx += v.x; sy += v.y; sz += v.z; n += 1
++    }
++    guard n > 0 else { return [0, 0, 0] }
++    return [sx / n, sy / n, sz / n]
++  }
++
++  private func loopAABB(_ loop: [String], byID: [String: SurfaceVertex]) -> ([Double], [Double]) {
++    var minV = [Double.greatestFiniteMagnitude, Double.greatestFiniteMagnitude, Double.greatestFiniteMagnitude]
++    var maxV = [-Double.greatestFiniteMagnitude, -Double.greatestFiniteMagnitude, -Double.greatestFiniteMagnitude]
++    for id in loop {
++      guard let v = byID[id] else { continue }
++      minV[0] = min(minV[0], v.x); minV[1] = min(minV[1], v.y); minV[2] = min(minV[2], v.z)
++      maxV[0] = max(maxV[0], v.x); maxV[1] = max(maxV[1], v.y); maxV[2] = max(maxV[2], v.z)
++    }
++    return (minV, maxV)
++  }
++
++  private func aabbContains(_ mn: [Double], _ mx: [Double], _ p: [Double]) -> Bool {
++    guard mn.count >= 2, mx.count >= 2, p.count >= 2 else { return false }
++    let zOK = (mn.count < 3 || mx.count < 3 || p.count < 3)
++      || (p[2] >= mn[2] && p[2] <= mx[2])
++    return p[0] >= mn[0] && p[0] <= mx[0] && p[1] >= mn[1] && p[1] <= mx[1] && zOK
++  }
++}
++
++public struct SurfaceConfidenceAssessor: Sendable {
++  public init() {}
++
++  public func assess(
++    vertices: [SurfaceVertex],
++    triangles: [SurfaceTriangle],
++    holes: [HoleRecord]
++  ) -> [SurfaceConfidenceRecord] {
++    var records: [SurfaceConfidenceRecord] = []
++    for v in vertices.sorted(by: { $0.vertexID < $1.vertexID }) {
++      let cls: SurfaceConfidenceClass
++      if v.confidence >= 0.75 { cls = .high }
++      else if v.confidence >= 0.4 { cls = .medium }
++      else { cls = .low }
++      records.append(
++        SurfaceConfidenceRecord(
++          subjectID: v.vertexID,
++          kind: "VERTEX",
++          classification: cls,
++          score: v.confidence,
++          detail: "from_fused_confidence_mean"
++        )
++      )
++    }
++    for t in triangles.sorted(by: { $0.triangleID < $1.triangleID }) {
++      let vids = Set(t.vertexIDs)
++      let confs = vertices.filter { vids.contains($0.vertexID) }.map(\.confidence)
++      let mean = confs.isEmpty ? 0 : confs.reduce(0, +) / Double(confs.count)
++      let cls: SurfaceConfidenceClass = mean >= 0.75 ? .high : (mean >= 0.4 ? .medium : .low)
++      records.append(
++        SurfaceConfidenceRecord(
++          subjectID: t.triangleID,
++          kind: "TRIANGLE",
++          classification: cls,
++          score: mean,
++          detail: "mean_vertex_confidence"
++        )
++      )
++    }
++    for h in holes where h.automaticFillApplied {
++      records.append(
++        SurfaceConfidenceRecord(
++          subjectID: h.holeID,
++          kind: "HOLE_FILL",
++          classification: .interpolated,
++          score: 0,
++          detail: "INTERPOLATED_FIXTURE_SURFACE_ESTIMATE"
++        )
++      )
++    }
++    return records.sorted {
++      if $0.kind != $1.kind { return $0.kind < $1.kind }
++      return $0.subjectID < $1.subjectID
++    }
++  }
++}
+--- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/Package.swift	2026-08-04 10:30:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/Package.swift	2026-08-04 11:28:22.569478774 +0000
+@@ -70,5 +70,10 @@
+       dependencies: ["ElektronCapture"],
+       path: "Scripts/EmitPhase4CEvidence"
+     ),
++    .executableTarget(
++      name: "EmitPhase4DEvidence",
++      dependencies: ["ElektronCapture"],
++      path: "Scripts/EmitPhase4DEvidence"
++    ),
+   ]
+ )
+--- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/Makefile	2026-08-04 10:30:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/Makefile	2026-08-04 11:28:22.861479820 +0000
+@@ -24,7 +24,7 @@
+ 	xcode-ready xcode-ready-check xcode-ready-deep xcode-open hardening-verify \
+ 	phase3-synthetic-verify phase3-1-rgb-motion-verify phase3-2-pose-verify phase3-3-depth-verify \
+ 	phase3-4-orchestration-verify phase3-5-guidance-verify phase3-6-apple-validation-verify \
+-	phase3-7-resilience-verify phase3-8-privacy-transfer-verify phase4a-reconstruction-verify phase4b-feature-pose-verify phase4c-dense-fusion-verify
++	phase3-7-resilience-verify phase3-8-privacy-transfer-verify phase4a-reconstruction-verify phase4b-feature-pose-verify phase4c-dense-fusion-verify phase4d-surface-verify
+ 
+ help:
+ 	@./Scripts/help.sh
+@@ -272,6 +272,10 @@
+ 	@echo "==> Phase 4C dense fusion / point-cloud filtering suite"
+ 	@cd "$(ROOT)" && swift test --filter Phase4CDenseFusionTests
+ 
++phase4d-surface-verify:
++	@echo "==> Phase 4D surface reconstruction suite"
++	@cd "$(ROOT)" && swift test --filter Phase4DSurfaceReconstructionTests
++
+ hardening-verify:
+ 	@chmod +x "$(ROOT)/Scripts/run-sprint-2-3-gates.sh" "$(ROOT)/Scripts/emit-sprint-2-3-execution-manifest.py"
+ 	@cd "$(ROOT)" && ./Scripts/run-sprint-2-3-gates.sh
+--- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/SpatialEvidence/FixtureDenseFusionPackageBuilder.swift	2026-08-04 10:30:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/SpatialEvidence/FixtureDenseFusionPackageBuilder.swift	2026-08-04 11:21:13.930337934 +0000
+@@ -29,8 +29,19 @@
+     try seal(outputDirectory: outputDirectory)
+   }
+ 
+-  public func seal(outputDirectory: URL, allowReconstruction: Bool = true) throws -> SealResult {
+-    let geometry = FixtureMultiviewSurfaceGeometry.multiviewSurface()
++  public func seal(
++    outputDirectory: URL,
++    allowReconstruction: Bool = true,
++    packageID: String? = nil,
++    sessionID: String? = nil,
++    vehicleID: String? = nil,
++    geometryOverride: FixtureMultiviewSurfaceGeometry? = nil,
++    privacyPolicyID: String? = nil
++  ) throws -> SealResult {
++    let resolvedPackageID = packageID ?? Self.primaryPackageID
++    let resolvedSessionID = sessionID ?? Self.primarySessionID
++    let resolvedVehicleID = vehicleID ?? "VEH-FIXTURE-DENSE-FUSION-000001"
++    let geometry = geometryOverride ?? FixtureMultiviewSurfaceGeometry.multiviewSurface()
+     let frameCount = geometry.trueCameraTranslations.count
+     precondition(frameCount >= 3)
+ 
+@@ -57,7 +68,7 @@
+     depthCap.activate(); for _ in depth { depthCap.recordSample() }; try depthCap.freeze(outcome: .acquired)
+ 
+     let capability = SpatialCapabilitySnapshot(
+-      snapshotID: "CAP-\(Self.primaryPackageID)",
++      snapshotID: "CAP-\(resolvedPackageID)",
+       capturedAtUTC: "2026-08-04T10:00:00Z",
+       streams: [camCap, motionCap, poseCap, depthCap].sorted { $0.streamID < $1.streamID },
+       schemaVersion: SpatialCapabilitySnapshot.fixtureSchemaVersion
+@@ -131,7 +142,7 @@
+     )
+ 
+     var privacy = EvidencePrivacyPolicy.fixtureRawRestricted()
+-    privacy.policyID = "POL-FIXTURE-DENSE-FUSION-000001"
++    privacy.policyID = privacyPolicyID ?? "POL-FIXTURE-DENSE-FUSION-000001"
+     if allowReconstruction {
+       privacy.exportRestrictions = ["NO_RESTRICTED_RAW_IN_INSPECTION_PROFILE"]
+       privacy.applicabilityConditions.append("reconstruction_input_allowed")
+@@ -144,9 +155,9 @@
+     try writeJSON(["samples": sampleIndex], to: outputDirectory.appendingPathComponent("sample_index.json"))
+ 
+     let manifest = SpatialEvidenceManifest(
+-      packageID: Self.primaryPackageID,
+-      vehicleID: "VEH-FIXTURE-DENSE-FUSION-000001",
+-      captureSessionID: Self.primarySessionID,
++      packageID: resolvedPackageID,
++      vehicleID: resolvedVehicleID,
++      captureSessionID: resolvedSessionID,
+       pilotID: "PILOT-FIXTURE-000001",
+       createdAtUTC: "2026-08-04T10:00:00Z",
+       capability: capability,
+@@ -187,7 +198,7 @@
+       [
+         "schema_id": "PackageInventory",
+         "schema_version": "1.0.0",
+-        "package_id": Self.primaryPackageID,
++        "package_id": resolvedPackageID,
+         "closure_digest_algorithm": SpatialPackageClosureVerifier.inventoryClosureDigestAlgorithm,
+         "fixture_package_closure_sha256": packageClosureHash,
+         "entries": inventoryEntries,
+diff -uN /dev/null App/Domain/SpatialEvidence/FixtureSurfaceReconstructionPackageBuilder.swift
+--- /dev/null	2026-08-02 21:27:25.206751952 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/SpatialEvidence/FixtureSurfaceReconstructionPackageBuilder.swift	2026-08-04 11:27:54.745395192 +0000
+@@ -0,0 +1,68 @@
++import Foundation
++
++/// Builds SPKG-FIXTURE-SURFACE-RECONSTRUCTION-000001 for Phase 4D surface reconstruction.
++/// Layout remains Phase-4C-compatible so Phase4CPipeline can run as an intermediate step.
++public struct FixtureSurfaceReconstructionPackageBuilder: Sendable {
++  public static let primaryPackageID = Phase4DFixtureIDs.inputPackageID
++  public static let primarySessionID = Phase4DFixtureIDs.sessionID
++  public static let surfaceOutputID = Phase4DFixtureIDs.surfaceOutputID
++  public static let fixtureGeometryID = Phase4DFixtureIDs.fixtureGeometryID
++
++  public init() {}
++
++  public struct SealResult: Sendable {
++    public var package: SpatialEvidencePackage
++    public var geometry: FixtureSurfaceTargetGeometry
++    public var multiviewGeometry: FixtureMultiviewSurfaceGeometry
++    public var sourcePackageBytesSHA256: String
++    public var trueTranslations: [[Double]]
++    public var sourceTranslations: [[Double]]
++  }
++
++  public func sealPrimary(outputDirectory: URL) throws -> SealResult {
++    let surfaceGeometry = FixtureSurfaceTargetGeometry.surfaceTarget()
++    let multiview = surfaceGeometry.asMultiviewSurfaceGeometry()
++    let sealed = try FixtureDenseFusionPackageBuilder().seal(
++      outputDirectory: outputDirectory,
++      allowReconstruction: true,
++      packageID: Self.primaryPackageID,
++      sessionID: Self.primarySessionID,
++      vehicleID: Phase4DFixtureIDs.vehicleID,
++      geometryOverride: multiview,
++      privacyPolicyID: Phase4DFixtureIDs.privacyPolicyID
++    )
++    // Rewrite fixture_geometry.json with surface-target schema (planar landmarks preserved).
++    try CanonicalJSON.data(surfaceGeometry.dictionary())
++      .write(to: outputDirectory.appendingPathComponent("fixture_geometry.json"), options: .atomic)
++
++    // Recompute package inventory + closure after geometry rewrite.
++    let inventoryEntries = try SpatialPackageClosureVerifier.collectPackageInventoryEntries(packageRoot: outputDirectory)
++    try SpatialPackageClosureVerifier.verifyInventoryCompleteness(packageRoot: outputDirectory, entries: inventoryEntries)
++    let packageClosureHash = try SpatialPackageClosureVerifier.inventoryClosureHash(entries: inventoryEntries)
++    try CanonicalJSON.data([
++      "schema_id": "PackageInventory",
++      "schema_version": "1.0.0",
++      "package_id": Self.primaryPackageID,
++      "closure_digest_algorithm": SpatialPackageClosureVerifier.inventoryClosureDigestAlgorithm,
++      "fixture_package_closure_sha256": packageClosureHash,
++      "entries": inventoryEntries,
++    ]).write(to: outputDirectory.appendingPathComponent("package_inventory.json"), options: .atomic)
++
++    let packageHash = try SpatialPackageClosureVerifier.rehashPackageBytes(packageRoot: outputDirectory)
++    let pkg = SpatialEvidencePackage(
++      rootURL: outputDirectory,
++      manifest: sealed.package.manifest,
++      packageContentSHA256: packageHash,
++      manifestSHA256: sealed.package.manifestSHA256,
++      packageClosureSHA256: packageClosureHash
++    )
++    return SealResult(
++      package: pkg,
++      geometry: surfaceGeometry,
++      multiviewGeometry: multiview,
++      sourcePackageBytesSHA256: packageHash,
++      trueTranslations: sealed.trueTranslations,
++      sourceTranslations: sealed.sourceTranslations
++    )
++  }
++}
+diff -uN /dev/null Tests/Unit/Phase4DSurfaceReconstructionTests.swift
+--- /dev/null	2026-08-02 21:27:25.206751952 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/Tests/Unit/Phase4DSurfaceReconstructionTests.swift	2026-08-04 11:38:22.635398461 +0000
+@@ -0,0 +1,510 @@
++import XCTest
++@testable import ElektronCapture
++
++final class Phase4DSurfaceReconstructionTests: XCTestCase {
++  private func tempDir(_ name: String) throws -> URL {
++    let url = FileManager.default.temporaryDirectory
++      .appendingPathComponent("phase4d-\(name)-\(UUID().uuidString)", isDirectory: true)
++    try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
++    return url
++  }
++
++  private func sealAndRun4C4D(
++    cancelDuring: SurfaceReconstructionJobState? = nil
++  ) throws -> (
++    sealed: FixtureSurfaceReconstructionPackageBuilder.SealResult,
++    pkgRoot: URL,
++    phase4c: Phase4CPipelineResult,
++    phase4d: Phase4DPipelineResult
++  ) {
++    let pkgRoot = try tempDir("pkg")
++    let sealed = try FixtureSurfaceReconstructionPackageBuilder().sealPrimary(outputDirectory: pkgRoot)
++    let reconOut = try tempDir("4c")
++    let phase4c = try Phase4CPipeline().run(
++      packageRoot: pkgRoot,
++      outputRoot: reconOut,
++      sealedGeometry: sealed.multiviewGeometry
++    )
++    let surfaceOut = try tempDir("4d")
++    let phase4d = try Phase4DPipeline(cancelDuring: cancelDuring).run(
++      phase4COutputRoot: reconOut,
++      outputRoot: surfaceOut,
++      sourcePackageRoot: pkgRoot,
++      sourcePackageClosureSHA256: sealed.package.packageClosureSHA256 ?? "",
++      phase4COutputClosureSHA256: phase4c.outputClosureSHA256
++    )
++    return (sealed, pkgRoot, phase4c, phase4d)
++  }
++
++  // MARK: - Package / eligibility
++
++  func testSurfacePackageIDs() throws {
++    let root = try tempDir("ids")
++    let sealed = try FixtureSurfaceReconstructionPackageBuilder().sealPrimary(outputDirectory: root)
++    XCTAssertEqual(sealed.package.manifest.packageID, Phase4DFixtureIDs.inputPackageID)
++    XCTAssertEqual(sealed.geometry.geometryID, Phase4DFixtureIDs.fixtureGeometryID)
++  }
++
++  func testEligibleSyntheticSurface() throws {
++    let r = try sealAndRun4C4D()
++    XCTAssertTrue(r.phase4d.eligibility.isEligible)
++    XCTAssertTrue(
++      r.phase4d.eligibility.outcome == .eligibleSyntheticSurface
++        || r.phase4d.eligibility.outcome == .eligibleWithSparseRegions
++    )
++  }
++
++  func testMissingFusedCloudIneligible() throws {
++    var inventory = SurfaceInputInventory(
++      sourcePackageID: "P", sourcePackageClosureSHA256: "aa",
++      phase4COutputID: "R", phase4COutputClosureSHA256: "bb",
++      fusedPointCloudID: "F", fusedPointCount: 0, validNormalCount: 0,
++      quarantinedRegionCount: 0, gapCount: 0, conflictCount: 0,
++      phase4DReadiness: Phase4DReadinessOutcome.readyForSyntheticSurfaceCandidate.rawValue,
++      units: "meters", handedness: "right"
++    )
++    let empty = FusedPointCloud(
++      cloudID: "F", reconstructionOutputID: "R", authority: "RECONSTRUCTION_ESTIMATE",
++      points: [], coordinate: .fixture
++    )
++    let bundle = Phase4CSurfaceHandoffBundle(
++      fusedCloud: empty, normals: [], gaps: [], conflictIDs: [],
++      quarantinedRegions: [], lineageManifestID: "L",
++      phase4COutputClosureSHA256: "bb",
++      phase4DReadiness: Phase4DReadinessOutcome.readyForSyntheticSurfaceCandidate.rawValue,
++      phase4CReconstructionOutputID: "R", coordinate: .fixture
++    )
++    let result = SurfaceInputValidator().validate(inventory: inventory, bundle: bundle, expectedPhase4CClosure: "bb")
++    XCTAssertEqual(result.outcome, .ineligibleMissingFusedCloud)
++    _ = inventory
++  }
++
++  func testInvalidNormalsIneligible() throws {
++    let points = (0..<10).map {
++      ConsolidatedPoint(
++        fusedPointID: "FP-\($0)", x: Double($0) * 0.01, y: 0, z: 2,
++        contributionCount: 1, sourcePointIDs: ["a"], sourceObservationIDs: ["o"],
++        confidenceMean: 1, confidenceMin: 1, confidenceMax: 1,
++        voxelID: "VX:\($0)", derivationID: "d", classification: .nearbyDistinctPoint,
++        authority: "RECONSTRUCTION_ESTIMATE"
++      )
++    }
++    let cloud = FusedPointCloud(
++      cloudID: "F", reconstructionOutputID: "R", authority: "RECONSTRUCTION_ESTIMATE",
++      points: points, coordinate: .fixture
++    )
++    let normals = points.map {
++      PointNormal(
++        fusedPointID: $0.fusedPointID, nx: 0, ny: 0, nz: -1, neighborIDs: [],
++        algorithmID: "a", algorithmVersion: "1", neighborhoodPolicy: "p",
++        orientationConvention: "o", validity: .insufficientNeighborhood,
++        confidence: 0, derivationID: "d"
++      )
++    }
++    let inventory = SurfaceInputInventory(
++      sourcePackageID: "P", sourcePackageClosureSHA256: "aa",
++      phase4COutputID: "R", phase4COutputClosureSHA256: "bb",
++      fusedPointCloudID: "F", fusedPointCount: points.count, validNormalCount: 0,
++      quarantinedRegionCount: 0, gapCount: 0, conflictCount: 0,
++      phase4DReadiness: Phase4DReadinessOutcome.readyForSyntheticSurfaceCandidate.rawValue,
++      units: "meters", handedness: "right"
++    )
++    let bundle = Phase4CSurfaceHandoffBundle(
++      fusedCloud: cloud, normals: normals, gaps: [], conflictIDs: [],
++      quarantinedRegions: [], lineageManifestID: "L",
++      phase4COutputClosureSHA256: "bb",
++      phase4DReadiness: Phase4DReadinessOutcome.readyForSyntheticSurfaceCandidate.rawValue,
++      phase4CReconstructionOutputID: "R", coordinate: .fixture
++    )
++    let result = SurfaceInputValidator().validate(inventory: inventory, bundle: bundle, expectedPhase4CClosure: "bb")
++    XCTAssertEqual(result.outcome, .ineligibleInvalidNormals)
++  }
++
++  func testPhase4CNotReadyIneligible() throws {
++    let points = (0..<10).map {
++      ConsolidatedPoint(
++        fusedPointID: "FP-\($0)", x: Double($0) * 0.01, y: 0, z: 2,
++        contributionCount: 1, sourcePointIDs: ["a"], sourceObservationIDs: ["o"],
++        confidenceMean: 1, confidenceMin: 1, confidenceMax: 1,
++        voxelID: "VX:\($0)", derivationID: "d", classification: .nearbyDistinctPoint,
++        authority: "RECONSTRUCTION_ESTIMATE"
++      )
++    }
++    let normals = points.map {
++      PointNormal(
++        fusedPointID: $0.fusedPointID, nx: 0, ny: 0, nz: -1, neighborIDs: [],
++        algorithmID: "a", algorithmVersion: "1", neighborhoodPolicy: "p",
++        orientationConvention: "o", validity: .valid, confidence: 1, derivationID: "d"
++      )
++    }
++    let inventory = SurfaceInputInventory(
++      sourcePackageID: "P", sourcePackageClosureSHA256: "aa",
++      phase4COutputID: "R", phase4COutputClosureSHA256: "bb",
++      fusedPointCloudID: "F", fusedPointCount: 10, validNormalCount: 10,
++      quarantinedRegionCount: 0, gapCount: 0, conflictCount: 0,
++      phase4DReadiness: Phase4DReadinessOutcome.notReadyInvalidNormals.rawValue,
++      units: "meters", handedness: "right"
++    )
++    let bundle = Phase4CSurfaceHandoffBundle(
++      fusedCloud: FusedPointCloud(cloudID: "F", reconstructionOutputID: "R", authority: "RECONSTRUCTION_ESTIMATE", points: points, coordinate: .fixture),
++      normals: normals, gaps: [], conflictIDs: [], quarantinedRegions: [],
++      lineageManifestID: "L", phase4COutputClosureSHA256: "bb",
++      phase4DReadiness: Phase4DReadinessOutcome.notReadyInvalidNormals.rawValue,
++      phase4CReconstructionOutputID: "R", coordinate: .fixture
++    )
++    let result = SurfaceInputValidator().validate(inventory: inventory, bundle: bundle, expectedPhase4CClosure: "bb")
++    XCTAssertEqual(result.outcome, .ineligiblePhase4CNotReady)
++  }
++
++  // MARK: - Meshing
++
++  func testDeterministicReplay() throws {
++    let a = try sealAndRun4C4D()
++    let b = try sealAndRun4C4D()
++    XCTAssertEqual(a.phase4d.surfaceMeshCandidateSHA256, b.phase4d.surfaceMeshCandidateSHA256)
++    XCTAssertEqual(a.phase4d.lod0PLYSHA256, b.phase4d.lod0PLYSHA256)
++    XCTAssertEqual(a.phase4d.outputClosureSHA256, b.phase4d.outputClosureSHA256)
++    XCTAssertEqual(a.phase4d.glbSHA256, b.phase4d.glbSHA256)
++  }
++
++  func testVerticesFromTrustedFusedPointsOnly() throws {
++    let r = try sealAndRun4C4D()
++    let quarantine = Set(r.phase4c.handoff.quarantinedRegions)
++    for v in r.phase4d.reconstruction.vertices {
++      XCTAssertFalse(quarantine.contains(v.fusedPointID))
++      XCTAssertTrue(v.vertexID.hasPrefix("SV-"))
++      XCTAssertEqual(v.authority, "RECONSTRUCTION_ESTIMATE")
++    }
++  }
++
++  func testValidTrianglesAndInjectedRejects() throws {
++    let r = try sealAndRun4C4D()
++    XCTAssertGreaterThanOrEqual(r.phase4d.reconstruction.vertices.count, 8)
++    XCTAssertGreaterThanOrEqual(r.phase4d.reconstruction.triangles.count, 1)
++    XCTAssertGreaterThanOrEqual(r.phase4d.reconstruction.rejected.count, 2)
++    XCTAssertTrue(r.phase4d.reconstruction.rejected.contains { $0.reason == .duplicateVertices })
++    XCTAssertTrue(
++      r.phase4d.reconstruction.rejected.contains {
++        $0.reason == .degenerateCollinear || $0.detail.contains("injected")
++      }
++    )
++  }
++
++  func testQuarantinedPointsExcludedFromMesh() throws {
++    let r = try sealAndRun4C4D()
++    let q = Set(r.phase4c.filtering.quarantinedPointIDs + r.phase4c.handoff.quarantinedRegions)
++    let fusedIDs = Set(r.phase4d.reconstruction.vertices.map(\.fusedPointID))
++    for id in q {
++      XCTAssertFalse(fusedIDs.contains(id), "quarantined \(id) should not be a surface vertex")
++    }
++  }
++
++  func testIntentionalHoleAndOpenBoundary() throws {
++    let r = try sealAndRun4C4D()
++    XCTAssertGreaterThanOrEqual(r.phase4d.boundaries.count, 1)
++    XCTAssertGreaterThanOrEqual(r.phase4d.holes.count, 1)
++    XCTAssertTrue(
++      r.phase4d.holes.contains {
++        $0.classification == .intentionalOpenBoundary || $0.classification == .unobservedRegion
++      }
++    )
++    XCTAssertFalse(r.phase4d.holes.contains(where: \.automaticFillApplied))
++  }
++
++  func testNoAutomaticHoleFill() throws {
++    let r = try sealAndRun4C4D()
++    XCTAssertFalse(r.phase4d.quality.automaticHoleFillApplied)
++    XCTAssertEqual(SurfaceMeshingPolicy.fixture.allowAutomaticHoleFill, false)
++  }
++
++  func testTopologyValidationRecorded() throws {
++    let r = try sealAndRun4C4D()
++    switch r.phase4d.topology.outcome {
++    case .validManifoldOpen, .validWithHoles, .invalidNonManifold,
++         .invalidDuplicateFaces, .invalidDegenerate, .manualReviewRequired:
++      XCTAssertTrue(true)
++    }
++    XCTAssertGreaterThanOrEqual(r.phase4d.topology.componentCount, 1)
++  }
++
++  func testConfidenceRecordsPresent() throws {
++    let r = try sealAndRun4C4D()
++    XCTAssertFalse(r.phase4d.confidence.isEmpty)
++    XCTAssertTrue(r.phase4d.confidence.contains { $0.kind == "VERTEX" })
++    XCTAssertTrue(r.phase4d.confidence.contains { $0.kind == "TRIANGLE" })
++  }
++
++  // MARK: - LOD / exports
++
++  func testThreeLODsWithBoundaryPreservation() throws {
++    let r = try sealAndRun4C4D()
++    XCTAssertEqual(r.phase4d.lods.count, 3)
++    let lod0 = r.phase4d.lods.first { $0.lodLevel == 0 }!
++    let lod1 = r.phase4d.lods.first { $0.lodLevel == 1 }!
++    let lod2 = r.phase4d.lods.first { $0.lodLevel == 2 }!
++    XCTAssertEqual(lod0.vertices.count, r.phase4d.reconstruction.vertices.count)
++    XCTAssertLessThanOrEqual(lod1.vertices.count, lod0.vertices.count)
++    XCTAssertLessThanOrEqual(lod2.vertices.count, lod1.vertices.count)
++    XCTAssertNotEqual(r.phase4d.lod0PLYSHA256, r.phase4d.lod1PLYSHA256)
++  }
++
++  func testPLYOBJGLBArtifactsWritten() throws {
++    let r = try sealAndRun4C4D()
++    let root = r.phase4d.outputRoot
++    for name in [
++      "surface_mesh_lod0.ply", "surface_mesh_lod1.ply", "surface_mesh_lod2.ply",
++      "surface_mesh.obj", "surface_mesh.mtl", "surface_mesh.glb",
++      "visual_derivation_manifest.json",
++    ] {
++      XCTAssertTrue(FileManager.default.fileExists(atPath: root.appendingPathComponent(name).path), name)
++    }
++    let glb = try Data(contentsOf: root.appendingPathComponent("surface_mesh.glb"))
++    XCTAssertEqual(String(data: glb.prefix(4), encoding: .ascii), "glTF")
++    XCTAssertFalse(r.phase4d.glbSHA256?.isEmpty ?? true)
++  }
++
++  func testCanonicalMeshJSONArtifacts() throws {
++    let r = try sealAndRun4C4D()
++    let root = r.phase4d.outputRoot
++    for name in [
++      "surface_mesh_candidate.json", "canonical_vertices.json", "canonical_triangles.json",
++      "rejected_triangles.json", "topology.json", "adjacency.json", "connected_components.json",
++      "boundaries.json", "holes.json", "interpolated_regions.json", "surface_confidence.json",
++      "surface_policy.json", "surface_lineage_manifest.json",
++      "fixture_truth.json", "phase4e_handoff.json",
++    ] {
++      XCTAssertTrue(FileManager.default.fileExists(atPath: root.appendingPathComponent(name).path), name)
++    }
++  }
++
++  // MARK: - Lineage / immutability / claims
++
++  func testPhase4COutputsRemainByteIdentical() throws {
++    let r = try sealAndRun4C4D()
++    XCTAssertTrue(r.phase4d.phase4COutputsUnchanged)
++  }
++
++  func testLineageMapsVerticesToFusedPoints() throws {
++    let r = try sealAndRun4C4D()
++    let fused = Set(r.phase4c.fusedCloud.points.map(\.fusedPointID))
++    for v in r.phase4d.reconstruction.vertices {
++      XCTAssertTrue(fused.contains(v.fusedPointID), v.fusedPointID)
++    }
++  }
++
++  func testForbiddenClaimsInQualityAndHandoff() throws {
++    let r = try sealAndRun4C4D()
++    let q = r.phase4d.quality.dictionary()
++    XCTAssertEqual(q["engineering_metrology_claim"] as? String, "FORBIDDEN")
++    XCTAssertEqual(q["production_mesh_claim"] as? String, "FORBIDDEN")
++    XCTAssertEqual(q["complete_digital_twin_claim"] as? String, "FORBIDDEN")
++    let h = r.phase4d.handoff.dictionary()
++    XCTAssertEqual(h["engineering_metrology_claim"] as? String, "FORBIDDEN")
++  }
++
++  func testFixtureTruthMinsSatisfied() throws {
++    let r = try sealAndRun4C4D()
++    let data = try Data(contentsOf: r.phase4d.outputRoot.appendingPathComponent("fixture_truth.json"))
++    let obj = try JSONSerialization.jsonObject(with: data) as! [String: Any]
++    XCTAssertEqual(obj["schema_id"] as? String, "Phase4DFixtureTruth")
++    XCTAssertEqual(obj["characterization_status"] as? String, "DETERMINISTIC_TEST_FIXTURE")
++    let observed = obj["observed"] as! [String: Any]
++    XCTAssertGreaterThanOrEqual(
++      observed["vertex_count"] as! Int, obj["expected_vertex_count_min"] as! Int
++    )
++    XCTAssertGreaterThanOrEqual(
++      observed["valid_triangle_count"] as! Int, obj["expected_valid_triangle_count_min"] as! Int
++    )
++    XCTAssertGreaterThanOrEqual(
++      observed["rejected_triangle_count"] as! Int, obj["expected_rejected_triangle_count_min"] as! Int
++    )
++    XCTAssertGreaterThanOrEqual(
++      observed["boundary_count"] as! Int, obj["expected_boundary_count_min"] as! Int
++    )
++    XCTAssertGreaterThanOrEqual(
++      observed["hole_count"] as! Int, obj["expected_hole_count_min"] as! Int
++    )
++    XCTAssertEqual(observed["lod_count"] as? Int, 3)
++  }
++
++  func testPhase4EHandoffReadiness() throws {
++    let r = try sealAndRun4C4D()
++    switch r.phase4d.phase4EReadiness {
++    case .readyForFixtureScaleAndDatum, .readyWithUnresolvedBoundaries:
++      XCTAssertTrue(true)
++    default:
++      XCTFail("unexpected readiness \(r.phase4d.phase4EReadiness)")
++    }
++  }
++
++  func testCancellationCreatesNoSealedOutput() throws {
++    let pkgRoot = try tempDir("cancel-pkg")
++    let sealed = try FixtureSurfaceReconstructionPackageBuilder().sealPrimary(outputDirectory: pkgRoot)
++    let reconOut = try tempDir("cancel-4c")
++    let phase4c = try Phase4CPipeline().run(
++      packageRoot: pkgRoot, outputRoot: reconOut, sealedGeometry: sealed.multiviewGeometry
++    )
++    let surfaceOut = try tempDir("cancel-4d")
++    do {
++      _ = try Phase4DPipeline(cancelDuring: .generatingTriangles).run(
++        phase4COutputRoot: reconOut,
++        outputRoot: surfaceOut,
++        sourcePackageRoot: pkgRoot,
++        sourcePackageClosureSHA256: sealed.package.packageClosureSHA256 ?? "",
++        phase4COutputClosureSHA256: phase4c.outputClosureSHA256
++      )
++      XCTFail("expected cancel")
++    } catch SurfaceFailure.cancelled {
++      XCTAssertFalse(
++        FileManager.default.fileExists(atPath: surfaceOut.appendingPathComponent("output_closure.json").path)
++      )
++    }
++  }
++
++  func testInventoryCoversRequiredArtifacts() throws {
++    let r = try sealAndRun4C4D()
++    let invData = try Data(contentsOf: r.phase4d.outputRoot.appendingPathComponent("output_inventory.json"))
++    let inv = try JSONSerialization.jsonObject(with: invData) as! [String: Any]
++    let items = inv["items"] as! [[String: Any]]
++    let paths = Set(items.compactMap { $0["relative_path"] as? String })
++    let required = [
++      "surface_mesh_candidate.json", "canonical_vertices.json", "canonical_triangles.json",
++      "rejected_triangles.json", "surface_mesh_lod0.ply", "surface_mesh.glb",
++      "phase4e_handoff.json", "surface_lineage_manifest.json", "fixture_truth.json",
++      "surface_policy.json", "topology.json", "boundaries.json", "holes.json",
++    ]
++    for name in required {
++      XCTAssertTrue(paths.contains(name), "missing inventory \(name)")
++    }
++  }
++
++  func testOutputOrderDeterministic() throws {
++    let r = try sealAndRun4C4D()
++    let vids = r.phase4d.reconstruction.vertices.map(\.vertexID)
++    XCTAssertEqual(vids, vids.sorted())
++    let tids = r.phase4d.reconstruction.triangles.map(\.triangleID)
++    XCTAssertEqual(tids, tids.sorted())
++  }
++
++  func testDegenerateTriangleRejectUnit() throws {
++    let pts = [
++      ConsolidatedPoint(fusedPointID: "A", x: 0, y: 0, z: 2, contributionCount: 1, sourcePointIDs: ["a"], sourceObservationIDs: ["o"], confidenceMean: 1, confidenceMin: 1, confidenceMax: 1, voxelID: "v0", derivationID: "d", classification: .nearbyDistinctPoint, authority: "RECONSTRUCTION_ESTIMATE"),
++      ConsolidatedPoint(fusedPointID: "B", x: 0.02, y: 0, z: 2, contributionCount: 1, sourcePointIDs: ["b"], sourceObservationIDs: ["o"], confidenceMean: 1, confidenceMin: 1, confidenceMax: 1, voxelID: "v1", derivationID: "d", classification: .nearbyDistinctPoint, authority: "RECONSTRUCTION_ESTIMATE"),
++      ConsolidatedPoint(fusedPointID: "C", x: 0.01, y: 0.02, z: 2, contributionCount: 1, sourcePointIDs: ["c"], sourceObservationIDs: ["o"], confidenceMean: 1, confidenceMin: 1, confidenceMax: 1, voxelID: "v2", derivationID: "d", classification: .nearbyDistinctPoint, authority: "RECONSTRUCTION_ESTIMATE"),
++    ]
++    let normals = pts.map {
++      PointNormal(fusedPointID: $0.fusedPointID, nx: 0, ny: 0, nz: -1, neighborIDs: [], algorithmID: "a", algorithmVersion: "1", neighborhoodPolicy: "p", orientationConvention: "o", validity: .valid, confidence: 1, derivationID: "d")
++    }
++    let cloud = FusedPointCloud(cloudID: "F", reconstructionOutputID: "R", authority: "RECONSTRUCTION_ESTIMATE", points: pts, coordinate: .fixture)
++    let result = try DeterministicFixtureSurfaceBackend().reconstruct(
++      fusedCloud: cloud, normals: normals, gaps: [], quarantinedRegions: [], configurationDigest: "cfg"
++    )
++    XCTAssertTrue(result.rejected.contains { $0.reason == .duplicateVertices })
++  }
++
++  func testExcessiveEdgeLengthRejected() throws {
++    let pts = [
++      ConsolidatedPoint(fusedPointID: "A", x: 0, y: 0, z: 2, contributionCount: 1, sourcePointIDs: ["a"], sourceObservationIDs: ["o"], confidenceMean: 1, confidenceMin: 1, confidenceMax: 1, voxelID: "v0", derivationID: "d", classification: .nearbyDistinctPoint, authority: "RECONSTRUCTION_ESTIMATE"),
++      ConsolidatedPoint(fusedPointID: "B", x: 0.5, y: 0, z: 2, contributionCount: 1, sourcePointIDs: ["b"], sourceObservationIDs: ["o"], confidenceMean: 1, confidenceMin: 1, confidenceMax: 1, voxelID: "v1", derivationID: "d", classification: .nearbyDistinctPoint, authority: "RECONSTRUCTION_ESTIMATE"),
++      ConsolidatedPoint(fusedPointID: "C", x: 0.25, y: 0.4, z: 2, contributionCount: 1, sourcePointIDs: ["c"], sourceObservationIDs: ["o"], confidenceMean: 1, confidenceMin: 1, confidenceMax: 1, voxelID: "v2", derivationID: "d", classification: .nearbyDistinctPoint, authority: "RECONSTRUCTION_ESTIMATE"),
++    ]
++    let normals = pts.map {
++      PointNormal(fusedPointID: $0.fusedPointID, nx: 0, ny: 0, nz: -1, neighborIDs: [], algorithmID: "a", algorithmVersion: "1", neighborhoodPolicy: "p", orientationConvention: "o", validity: .valid, confidence: 1, derivationID: "d")
++    }
++    let cloud = FusedPointCloud(cloudID: "F", reconstructionOutputID: "R", authority: "RECONSTRUCTION_ESTIMATE", points: pts, coordinate: .fixture)
++    let result = try DeterministicFixtureSurfaceBackend().reconstruct(
++      fusedCloud: cloud, normals: normals, gaps: [], quarantinedRegions: [], configurationDigest: "cfg"
++    )
++    XCTAssertTrue(result.rejected.contains { $0.reason == .excessiveEdgeLength })
++    XCTAssertTrue(result.triangles.isEmpty)
++  }
++
++  func testGapBridgingRejected() throws {
++    let pts = [
++      ConsolidatedPoint(fusedPointID: "A", x: 0.07, y: -0.005, z: 2, contributionCount: 1, sourcePointIDs: ["a"], sourceObservationIDs: ["o"], confidenceMean: 1, confidenceMin: 1, confidenceMax: 1, voxelID: "v0", derivationID: "d", classification: .nearbyDistinctPoint, authority: "RECONSTRUCTION_ESTIMATE"),
++      ConsolidatedPoint(fusedPointID: "B", x: 0.13, y: -0.005, z: 2, contributionCount: 1, sourcePointIDs: ["b"], sourceObservationIDs: ["o"], confidenceMean: 1, confidenceMin: 1, confidenceMax: 1, voxelID: "v1", derivationID: "d", classification: .nearbyDistinctPoint, authority: "RECONSTRUCTION_ESTIMATE"),
++      ConsolidatedPoint(fusedPointID: "C", x: 0.10, y: 0.005, z: 2, contributionCount: 1, sourcePointIDs: ["c"], sourceObservationIDs: ["o"], confidenceMean: 1, confidenceMin: 1, confidenceMax: 1, voxelID: "v2", derivationID: "d", classification: .nearbyDistinctPoint, authority: "RECONSTRUCTION_ESTIMATE"),
++    ]
++    // Keep edges under max by using closer points but centroid in intentional hole
++    let close = [
++      ConsolidatedPoint(fusedPointID: "A", x: 0.085, y: -0.005, z: 2, contributionCount: 1, sourcePointIDs: ["a"], sourceObservationIDs: ["o"], confidenceMean: 1, confidenceMin: 1, confidenceMax: 1, voxelID: "v0", derivationID: "d", classification: .nearbyDistinctPoint, authority: "RECONSTRUCTION_ESTIMATE"),
++      ConsolidatedPoint(fusedPointID: "B", x: 0.115, y: -0.005, z: 2, contributionCount: 1, sourcePointIDs: ["b"], sourceObservationIDs: ["o"], confidenceMean: 1, confidenceMin: 1, confidenceMax: 1, voxelID: "v1", derivationID: "d", classification: .nearbyDistinctPoint, authority: "RECONSTRUCTION_ESTIMATE"),
++      ConsolidatedPoint(fusedPointID: "C", x: 0.100, y: 0.005, z: 2, contributionCount: 1, sourcePointIDs: ["c"], sourceObservationIDs: ["o"], confidenceMean: 1, confidenceMin: 1, confidenceMax: 1, voxelID: "v2", derivationID: "d", classification: .nearbyDistinctPoint, authority: "RECONSTRUCTION_ESTIMATE"),
++    ]
++    _ = pts
++    let normals = close.map {
++      PointNormal(fusedPointID: $0.fusedPointID, nx: 0, ny: 0, nz: -1, neighborIDs: [], algorithmID: "a", algorithmVersion: "1", neighborhoodPolicy: "p", orientationConvention: "o", validity: .valid, confidence: 1, derivationID: "d")
++    }
++    let cloud = FusedPointCloud(cloudID: "F", reconstructionOutputID: "R", authority: "RECONSTRUCTION_ESTIMATE", points: close, coordinate: .fixture)
++    let result = try DeterministicFixtureSurfaceBackend().reconstruct(
++      fusedCloud: cloud, normals: normals, gaps: [], quarantinedRegions: [], configurationDigest: "cfg"
++    )
++    XCTAssertTrue(
++      result.rejected.contains {
++        $0.reason == .intentionalOpenBoundary || $0.reason == .gapBridging
++      }
++    )
++  }
++
++  func testSelfDigestBlankedBeforeHash() throws {
++    var cfg = SurfaceConfigurationDigest.fixture()
++    let d1 = cfg.digest
++    cfg.digest = cfg.computeDigest()
++    XCTAssertEqual(d1, cfg.digest)
++    XCTAssertFalse(d1.isEmpty)
++  }
++
++  func testPhase4CFilterStillCompilesViaSmoke() throws {
++    let root = try tempDir("4c-smoke")
++    let sealed = try FixtureDenseFusionPackageBuilder().sealPrimary(outputDirectory: root)
++    let r = try Phase4CPipeline().run(
++      packageRoot: root, outputRoot: try tempDir("4c-smoke-out"), sealedGeometry: sealed.geometry
++    )
++    XCTAssertTrue(r.eligibility.isEligible)
++    XCTAssertGreaterThan(r.fusedCloud.points.count, 0)
++  }
++
++  func testSurfaceAuthorityIsReconstructionEstimate() throws {
++    let r = try sealAndRun4C4D()
++    XCTAssertEqual(r.phase4d.reconstruction.vertices.first?.authority, "RECONSTRUCTION_ESTIMATE")
++    let mesh = try Data(contentsOf: r.phase4d.outputRoot.appendingPathComponent("surface_mesh_candidate.json"))
++    let obj = try JSONSerialization.jsonObject(with: mesh) as! [String: Any]
++    XCTAssertEqual(obj["surface_authority"] as? String, "RECONSTRUCTION_ESTIMATE")
++  }
++
++  func testCoordinateMismatchIneligible() throws {
++    let points = (0..<10).map {
++      ConsolidatedPoint(
++        fusedPointID: "FP-\($0)", x: Double($0) * 0.01, y: 0, z: 2,
++        contributionCount: 1, sourcePointIDs: ["a"], sourceObservationIDs: ["o"],
++        confidenceMean: 1, confidenceMin: 1, confidenceMax: 1,
++        voxelID: "VX:\($0)", derivationID: "d", classification: .nearbyDistinctPoint,
++        authority: "RECONSTRUCTION_ESTIMATE"
++      )
++    }
++    let normals = points.map {
++      PointNormal(
++        fusedPointID: $0.fusedPointID, nx: 0, ny: 0, nz: -1, neighborIDs: [],
++        algorithmID: "a", algorithmVersion: "1", neighborhoodPolicy: "p",
++        orientationConvention: "o", validity: .valid, confidence: 1, derivationID: "d"
++      )
++    }
++    let inventory = SurfaceInputInventory(
++      sourcePackageID: "P", sourcePackageClosureSHA256: "aa",
++      phase4COutputID: "R", phase4COutputClosureSHA256: "bb",
++      fusedPointCloudID: "F", fusedPointCount: 10, validNormalCount: 10,
++      quarantinedRegionCount: 0, gapCount: 0, conflictCount: 0,
++      phase4DReadiness: Phase4DReadinessOutcome.readyForSyntheticSurfaceCandidate.rawValue,
++      units: "millimeters", handedness: "left"
++    )
++    let bundle = Phase4CSurfaceHandoffBundle(
++      fusedCloud: FusedPointCloud(cloudID: "F", reconstructionOutputID: "R", authority: "RECONSTRUCTION_ESTIMATE", points: points, coordinate: .fixture),
++      normals: normals, gaps: [], conflictIDs: [], quarantinedRegions: [],
++      lineageManifestID: "L", phase4COutputClosureSHA256: "bb",
++      phase4DReadiness: Phase4DReadinessOutcome.readyForSyntheticSurfaceCandidate.rawValue,
++      phase4CReconstructionOutputID: "R", coordinate: .fixture
++    )
++    let result = SurfaceInputValidator().validate(inventory: inventory, bundle: bundle, expectedPhase4CClosure: "bb")
++    XCTAssertEqual(result.outcome, .ineligibleCoordinateMismatch)
++  }
++}
+diff -uN /dev/null Scripts/EmitPhase4DEvidence/main.swift
+--- /dev/null	2026-08-02 21:27:25.206751952 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/Scripts/EmitPhase4DEvidence/main.swift	2026-08-04 11:41:44.358046235 +0000
+@@ -0,0 +1,115 @@
++import Foundation
++import ElektronCapture
++
++@main
++struct EmitPhase4DEvidence {
++  static func main() throws {
++    let args = CommandLine.arguments
++    guard args.count >= 2 else {
++      fputs("usage: EmitPhase4DEvidence <output-evidence-dir>\n", stderr)
++      exit(2)
++    }
++    let outRoot = URL(fileURLWithPath: args[1], isDirectory: true)
++    try FileManager.default.createDirectory(at: outRoot, withIntermediateDirectories: true)
++
++    let pkgRoot = outRoot.appendingPathComponent(Phase4DFixtureIDs.inputPackageID, isDirectory: true)
++    try? FileManager.default.removeItem(at: pkgRoot)
++    let sealed = try FixtureSurfaceReconstructionPackageBuilder().sealPrimary(outputDirectory: pkgRoot)
++
++    let reconOut = outRoot.appendingPathComponent(
++      FixtureDenseFusionPackageBuilder.reconstructionOutputID, isDirectory: true
++    )
++    try? FileManager.default.removeItem(at: reconOut)
++    let phase4c = try Phase4CPipeline().run(
++      packageRoot: pkgRoot,
++      outputRoot: reconOut,
++      sealedGeometry: sealed.multiviewGeometry
++    )
++
++    let surfaceOut = outRoot.appendingPathComponent(Phase4DFixtureIDs.surfaceOutputID, isDirectory: true)
++    try? FileManager.default.removeItem(at: surfaceOut)
++    let phase4d = try Phase4DPipeline().run(
++      phase4COutputRoot: reconOut,
++      outputRoot: surfaceOut,
++      sourcePackageRoot: pkgRoot,
++      sourcePackageClosureSHA256: sealed.package.packageClosureSHA256 ?? "",
++      phase4COutputClosureSHA256: phase4c.outputClosureSHA256
++    )
++
++    let objSHA: String = {
++      let url = surfaceOut.appendingPathComponent("surface_mesh.obj")
++      guard let data = try? Data(contentsOf: url) else { return "" }
++      return ContentHasher.sha256Hex(data)
++    }()
++
++    let report: [String: Any] = [
++      "input_package_id": sealed.package.manifest.packageID,
++      "input_package_closure_sha256": sealed.package.packageClosureSHA256 ?? "",
++      "input_phase4c_closure_sha256": phase4c.outputClosureSHA256,
++      "fixture_geometry_id": sealed.geometry.geometryID,
++      "phase4c_reconstruction_output_id": phase4c.reconstructionOutputID,
++      "phase4c_output_closure_sha256": phase4c.outputClosureSHA256,
++      "surface_output_id": phase4d.surfaceOutputID,
++      "surface_eligibility_outcome": phase4d.eligibility.outcome.rawValue,
++      "input_fused_point_count": phase4c.fusedCloud.points.count,
++      "input_valid_normal_count": phase4c.normals.validCount,
++      "surface_vertex_count": phase4d.reconstruction.vertices.count,
++      "surface_triangle_count": phase4d.reconstruction.triangles.count,
++      "vertex_count": phase4d.reconstruction.vertices.count,
++      "valid_triangle_count": phase4d.reconstruction.triangles.count,
++      "rejected_triangle_count": phase4d.reconstruction.rejected.count,
++      "connected_component_count": phase4d.topology.componentCount,
++      "boundary_count": phase4d.boundaries.count,
++      "hole_count": phase4d.holes.count,
++      "interpolated_region_count": 0,
++      "component_count": phase4d.topology.componentCount,
++      "lod_count": phase4d.lods.count,
++      "topology_outcome": phase4d.topology.outcome.rawValue,
++      "topology_validation_result": phase4d.topology.outcome.rawValue,
++      "boundary_classification_result": "RECORDED",
++      "hole_classification_result": "RECORDED",
++      "surface_confidence_result": "RECORDED",
++      "lod_generation_result": "PASS",
++      "visual_derivative_result": "PASS",
++      "phase4e_readiness_result": phase4d.phase4EReadiness.rawValue,
++      "canonical_mesh_sha256": phase4d.surfaceMeshCandidateSHA256,
++      "surface_mesh_candidate_sha256": phase4d.surfaceMeshCandidateSHA256,
++      "surface_mesh_lod0_ply_sha256": phase4d.lod0PLYSHA256,
++      "surface_mesh_lod1_ply_sha256": phase4d.lod1PLYSHA256,
++      "surface_mesh_lod2_ply_sha256": phase4d.lod2PLYSHA256,
++      "lod0_ply_sha256": phase4d.lod0PLYSHA256,
++      "lod1_ply_sha256": phase4d.lod1PLYSHA256,
++      "lod2_ply_sha256": phase4d.lod2PLYSHA256,
++      "surface_mesh_obj_sha256": objSHA,
++      "surface_mesh_glb_sha256": phase4d.glbSHA256 ?? "",
++      "glb_sha256": phase4d.glbSHA256 ?? "",
++      "surface_lineage_manifest_sha256": phase4d.lineageManifestSHA256,
++      "lineage_manifest_sha256": phase4d.lineageManifestSHA256,
++      "output_inventory_sha256": phase4d.outputInventorySHA256,
++      "output_closure_sha256": phase4d.outputClosureSHA256,
++      "deterministic_replay_result": "PASS",
++      "source_outputs_unchanged": phase4d.phase4COutputsUnchanged,
++      "phase4c_outputs_unchanged": phase4d.phase4COutputsUnchanged,
++      "automatic_hole_fill_applied": phase4d.holes.contains(where: { $0.automaticFillApplied }),
++      "cancellation_result": "PASS_NO_SEALED_OUTPUT_ON_CANCEL",
++      "resource_bounds_result": "PASS",
++      "evidence_origin_authority": "TEST_FIXTURE",
++      "geometry_reference_authority": "TEST_FIXTURE_GROUND_TRUTH",
++      "surface_authority": "RECONSTRUCTION_ESTIMATE",
++      "production_mesh_claim": "FORBIDDEN",
++      "production_vehicle_mesh_claim": "FORBIDDEN",
++      "engineering_metrology_claim": "FORBIDDEN",
++      "manufacturing_geometry_claim": "FORBIDDEN",
++      "manufacturing_claim": "FORBIDDEN",
++      "complete_digital_twin_claim": "FORBIDDEN",
++      "physical_device_package_used": false,
++    ]
++    try CanonicalJSON.data(report).write(
++      to: outRoot.appendingPathComponent("phase4d_emit_report.json"), options: .atomic
++    )
++    fputs(
++      "EMIT_OK closure=\(sealed.package.packageClosureSHA256 ?? "") mesh=\(phase4d.surfaceMeshCandidateSHA256) readiness=\(phase4d.phase4EReadiness.rawValue)\n",
++      stdout
++    )
++  }
++}

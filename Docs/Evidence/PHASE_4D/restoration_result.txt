@@ -1,0 +1,7 @@
+clean_restore_result: PASS
+sidecar_result: PASS
+deterministic_zip_result: PASS
+output_closure_result: PASS
+restored_from: DOWNLOAD-elektron-reconstruction-phase-4d-surface-foundation.zip
+zip_sha256: f0ffa5a7d0640ad007ebe18658b91683dc015dc4a8de792ea3e0cdf395b919b0
+phase4d_filter: 31 executed / 0 failed

@@ -1,0 +1,7 @@
+# Elektron Phase 4D fixture MTL
+newmtl SurfaceFixture
+Ka 0.200000 0.200000 0.200000
+Kd 0.700000 0.750000 0.800000
+Ks 0.050000 0.050000 0.050000
+Ns 10.000000
+illum 1

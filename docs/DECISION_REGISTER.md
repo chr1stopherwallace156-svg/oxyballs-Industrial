@@ -17,6 +17,28 @@ later entry that references it.
 
 ---
 
+---
+
+## D-031 — Phase 4D surface reconstruction and visual model foundation
+
+- Date: 2026-08-04
+- Status: Proposed
+- Activation: Upon merge of the Phase 4D PR
+- Context: Phase 4C produced a fused point foundation with readiness `READY_FOR_SYNTHETIC_SURFACE_CANDIDATE`; reconstruction must produce an auditable synthetic fixture surface candidate without claiming physical vehicle geometry, metrology, manufacturing release, or a complete digital twin.
+- Decision:
+  1. Surface geometry is derived evidence (`RECONSTRUCTION_ESTIMATE`); Phase 4C fused-point source outputs remain immutable.
+  2. Fixture surface geometry is not physical vehicle geometry.
+  3. Interpolated regions, if any, remain explicitly labeled `INTERPOLATED_FIXTURE_SURFACE_ESTIMATE` and are not indistinguishable from directly supported surface.
+  4. Gaps and holes are not silently filled; automatic hole fill is forbidden unless explicitly allowed by fixture policy with auditable authority.
+  5. Rejected triangles remain auditable in explicit records.
+  6. Simplified meshes (LOD1/LOD2) are visualization derivatives; LOD0 remains the fixture candidate reference.
+  7. Viewer exports (PLY/OBJ/GLB) are not authoritative CAD.
+  8. Fixture topology thresholds are deterministic test characterization — not physical tolerances.
+  9. Phase 4D performs no engineering metrology, manufacturing release, automatic component recognition, or final digital-twin declaration.
+  10. Physical surface validation remains pending `SPKG-DEVICE-000001`.
+  11. Canonical mesh JSON is the traceable authoritative surface artifact; PLY/OBJ/GLB are bound derivatives.
+- Consequences: Linux-fixture synthetic surface foundation may merge as `SOURCE_FOUNDATION_MERGED` with `PHYSICAL_RECONSTRUCTION_STATE=PENDING_SPKG_DEVICE_000001`; production vehicle mesh, metrology, manufacturing, and digital-twin claims remain FORBIDDEN.
+
 ## D-030 — Phase 4C dense fusion and point-cloud filtering
 
 - Date: 2026-08-04

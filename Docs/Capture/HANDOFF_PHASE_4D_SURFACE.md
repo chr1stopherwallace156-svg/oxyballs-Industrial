@@ -1,5 +1,5 @@
-# Handoff — Phase 4D surface reconstruction
+# HANDOFF — Phase 4D Surface Foundation
 
-Phase 4E consumes `phase4e_handoff.json` for fixture scale and datum characterization.
-
-Do not treat Phase 4D meshes as production vehicle surfaces or metrology outputs.
+Consumes Phase 4C readiness `READY_FOR_SYNTHETIC_SURFACE_CANDIDATE`.
+Produces Phase 4E handoff with readiness recorded in `phase4e_handoff.json`.
+Physical surface validation remains `PENDING_SPKG_DEVICE_000001`.

@@ -1,14 +1,16 @@
-# Phase 4D — Surface reconstruction (fixture)
+# PHASE_4D_SURFACE_RECONSTRUCTION_AND_VISUAL_MODEL_FOUNDATION
 
-Deterministic fixture surface meshing from Phase 4C fused point clouds + normals into a confidence-aware open mesh candidate suitable for Phase 4E scale/datum characterization.
+Deterministic synthetic fixture surface reconstruction consuming Phase 4C fused points.
 
-## Boundary
-- Input: Phase 4C fused cloud, normals, gaps, conflicts, lineage, `phase4d_handoff_contract.json`
-- Output: surface mesh candidate (JSON + PLY/OBJ/GLB LODs), topology/boundaries/holes, Phase 4E handoff
-- Does **not** claim production mesh, engineering metrology, manufacturing, or complete digital twin
-- Automatic hole fill is forbidden in fixture policy
+```
+make phase4d-surface-verify
+```
 
-## Authorities
-- Evidence origin: `TEST_FIXTURE`
-- Geometry reference: `TEST_FIXTURE_GROUND_TRUTH`
-- Surface estimate: `RECONSTRUCTION_ESTIMATE`
+Primary IDs:
+- `SPKG-FIXTURE-SURFACE-RECONSTRUCTION-000001`
+- `GEOM-FIXTURE-SURFACE-TARGET-000001`
+- `SURFACE-OUT-FIXTURE-000001`
+
+Classification: `SYNTHETIC_FIXTURE_SURFACE_CANDIDATE`  
+Authority: `RECONSTRUCTION_ESTIMATE`  
+Non-claims: production vehicle mesh · engineering metrology · manufacturing geometry · complete digital twin

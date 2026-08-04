@@ -2,20 +2,48 @@
 
 | Field | Value |
 |---|---|
-| INPUT_PACKAGE_ID | SPKG-FIXTURE-SURFACE-RECONSTRUCTION-000001 |
-| FIXTURE_GEOMETRY_ID | GEOM-FIXTURE-SURFACE-TARGET-000001 |
-| SURFACE_OUTPUT_ID | SURFACE-OUT-FIXTURE-000001 |
-| VERTEX_COUNT | 47 |
-| VALID_TRIANGLE_COUNT | 63 |
-| REJECTED_TRIANGLE_COUNT | 6 |
-| BOUNDARY_COUNT | 2 |
-| HOLE_COUNT | 1 |
+| Parent delivery ZIP | `DOWNLOAD-elektron-reconstruction-phase-4c-dense-fusion.zip` |
+| Parent delivery ZIP SHA-256 | `5961191834a09101f2867d7ebdf83d9963b74ac6a525398f2f1a5b4514f8be60` |
+| Delivery ZIP | `DOWNLOAD-elektron-reconstruction-phase-4d-surface-foundation.zip` |
+| Delivery ZIP SHA-256 | `8d0ec824d8198151e1610b558bf1b45bd122f4a68b5970296d7f423ae795f3e3` |
+| Baseline tip (main) | `028aa88be1af4aff67af225b6299de2d750673cf` |
+| Decision | D-031 |
+
+## Classification
+
+| Plane | Value |
+|---|---|
+| IMPLEMENTATION_STATE | SOURCE_IMPLEMENTED |
+| VALIDATION_STATE | LINUX_FIXTURE_VALIDATED |
+| RECONSTRUCTION_STATE | SYNTHETIC_SURFACE_RECONSTRUCTION_FOUNDATION_IMPLEMENTED |
+| PHYSICAL_RECONSTRUCTION_STATE | PENDING_SPKG_DEVICE_000001 |
 | PHASE_4E_READINESS | READY_WITH_UNRESOLVED_BOUNDARIES |
-| SURFACE_MESH_CANDIDATE_SHA256 | `9da47db63cb6ecab96e9a1f739e53c5f9636e8eaa2ccb3388ac9e1992be907e4` |
-| LOD0_PLY_SHA256 | `856e081ed03b33f7244295fad2dac6c23ad4dea475c1b22f759c4b458d9a79f1` |
-| GLB_SHA256 | `7707348846555014297b0248e76d86d34d11f363d24f6ba4757f8698e4dd38f3` |
-| OUTPUT_CLOSURE_SHA256 | `4452cd0c3497d8f330704328657d75a0dbb6e949c848c550ca53c7be96e6d140` |
-| PHASE4C_OUTPUTS_UNCHANGED | True |
-| AUTOMATIC_HOLE_FILL | False |
-| GLB_STATUS | IMPLEMENTED (deterministic binary glTF 2.0) |
-| TESTS | Phase4DSurfaceReconstructionTests — 31 passed / 0 failed |
+| PRODUCTION_VEHICLE_MESH_CLAIM | FORBIDDEN |
+| ENGINEERING_METROLOGY_CLAIM | FORBIDDEN |
+| MANUFACTURING_GEOMETRY_CLAIM | FORBIDDEN |
+| COMPLETE_DIGITAL_TWIN_CLAIM | FORBIDDEN |
+
+## Fixture results
+
+See `phase4d_emit_report.json`.
+
+| Field | Value |
+|---|---|
+| input fused points / normals | 47 / 47 |
+| vertices / triangles / rejected | 47 / 63 / 6 |
+| components / boundaries / holes | 1 / 2 / 1 |
+| interpolated regions | 0 (no automatic hole fill) |
+| Full suite | 713 executed / 7 skipped / 0 failed |
+| Phase4D filter | 31 / 0 |
+| clean_restore_result | PASS |
+| sidecar_result | PASS |
+| deterministic_zip_result | PASS |
+| output_closure_result | PASS |
+| GLB | IMPLEMENTED (deterministic binary glTF 2.0) |
+
+## Explicit non-claims
+
+- No physical device package (`SPKG-DEVICE-*`)
+- No engineering metrology / manufacturing geometry
+- No complete digital twin / production vehicle mesh
+- Fixture topology thresholds are not physical tolerances
