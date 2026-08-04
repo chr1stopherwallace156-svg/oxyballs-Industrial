@@ -111,13 +111,11 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 
 | Gate | Status |
 |---|---|
-| Linux privacy + redaction + delivery profiles | COMPLETE (this PR) |
-| Content-addressed chunking + resumable transfer | COMPLETE (this PR) |
-| Tenant-scoped dedup + reassembly verification | COMPLETE (this PR) |
+| Linux privacy + redaction + delivery profiles | COMPLETE (merged #63) |
+| Content-addressed chunking + resumable transfer | COMPLETE (merged #63) |
+| Tenant-scoped dedup + reassembly verification | COMPLETE (merged #63) |
 | Apple Vision / Core ML / URLSession physical | PENDING |
 | Privacy certification / production transfer claim | FORBIDDEN |
-
-
 
 ## Phase 4A — Reconstruction ingestion / registered point foundation
 
@@ -127,4 +125,3 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 | Registered point cloud + lineage + quality | COMPLETE (this PR) |
 | Physical device reconstruction (`SPKG-DEVICE-000001`) | PENDING |
 | Engineering metrology / complete digital twin | FORBIDDEN |
-
