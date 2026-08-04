@@ -1,0 +1,20 @@
+{
+  "schema_id": "RecaptureContract",
+  "recapture_contract_schema_version": "1.0.0",
+  "recapture_contract_id": "RC_REG_REAR_RIGHT_BATTERY_MOUNT_001",
+  "supersedes": null,
+  "target_region_id": "REG_REAR_RIGHT_BATTERY_MOUNT",
+  "affected_measurement_ids": ["M_RAIL_SPACING_01"],
+  "capture_guidance": {
+    "required_anchor_visibility": ["SA-02"],
+    "required_control_points": ["CP-RR-03", "CP-RR-04"],
+    "distance_range_meters": { "min": 0.5, "max": 1.0 },
+    "required_view_angles": [
+      { "type": "NEAR_NORMAL", "count": 1 },
+      { "type": "OBLIQUE_UNDERSIDE", "min_angle_deg": 35, "count": 2 }
+    ]
+  },
+  "closure_criteria": { "coverage_threshold_pct": 90.0, "max_control_residual_mm": 2.0, "max_repeated_spread_mm": 2.5 },
+  "prior_evidence_retention": "USABLE_FOR_COARSE_ALIGNMENT",
+  "closure_result": null
+}

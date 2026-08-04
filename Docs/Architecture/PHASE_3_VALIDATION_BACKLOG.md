@@ -156,3 +156,11 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 | Phase 4C outputs immutable; Phase 4E handoff recorded | COMPLETE |
 | Engineering metrology / manufacturing / digital twin | FORBIDDEN |
 | Physical surface validation (`SPKG-DEVICE-000001`) | PENDING |
+
+## Phase 4E Tier 1 (D-032, Proposed)
+- [ ] `swift build && swift test` the `phase4e/` package on a Swift host (authoring host had no toolchain).
+- [ ] Wire the Swift canonical engine into the reconstruction Package.swift + a `make phase4e-verify` target.
+- [ ] Tier 1B: SE(3) datum validation (exit 30), scale resolution (31).
+- [ ] Tier 1C: GUM linearized covariance + Welch–Satterthwaite (exit 40), policy/recapture engines.
+- [ ] Tier 2: full 15-fixture adversarial suite.
+- Locks remain: FIXTURE_ONLY · ENGINEERING_METROLOGY_CLAIM=FORBIDDEN · MANUFACTURING_RELEASE_CLAIM=FORBIDDEN.

@@ -1256,3 +1256,18 @@ later entry that references it.
   `ACTIVE_SPECIFICATION` at a time; superseded revisions are archived in
   place. README baseline updates are made by proposal at milestone
   boundaries, never silently.
+
+## D-032 — Phase 4E Tier 1 characterization contract foundation (Proposed)
+
+- Status: **Proposed** (draft PR evidence).
+- Context: Phase 4D (D-031, PR #68) emits an immutable `Phase4EHandoffContract`
+  (`SURFACE-OUT-FIXTURE-000001`, closure `fe043fdb…`, `READY_WITH_UNRESOLVED_BOUNDARIES`).
+- Decision: add a self-contained `phase4e/` Tier-1 contract foundation — hardened JSON schemas,
+  a Swift SPM package (canonical numerical engine, authored; to be built on a Swift host), and
+  out-of-band read-only Node governance/CI validators that independently recompute the 4D→4E
+  digests/lineage from committed bytes (never PR-body copies). Authority ceilings locked:
+  `ENGINEERING_USE_AUTHORITY=FIXTURE_ONLY`, `ENGINEERING_METROLOGY_CLAIM=FORBIDDEN`,
+  `MANUFACTURING_RELEASE_CLAIM=FORBIDDEN`.
+- Consequences: characterization can be gated in CI now; Tier 1B/1C (SE(3), GUM covariance, policy/
+  recapture in Swift) and Tier 2 follow in separate PRs. No metrology/physical claim; Swift build/test
+  pending a Swift host.

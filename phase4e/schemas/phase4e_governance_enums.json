@@ -1,0 +1,48 @@
+{
+  "schema_id": "Phase4EGovernanceEnums",
+  "schema_version": "1.0.0",
+  "note": "Machine-readable governance vocabulary for Phase 4E (characterization, governance, measurement-authority). Phase 4E evaluates an IMMUTABLE Phase 4D geometry; it never mutates geometry and never asserts engineering metrology until physical validation is recorded.",
+  "authority_state": ["UNCONTROLLED", "SCALE_ONLY", "CONTROL_COMPARED", "CONTROL_VERIFIED"],
+  "global_scale_state": ["UNSCALED", "SCALE_ESTIMATED", "SCALE_ANCHORED", "SCALE_VERIFIED"],
+  "measurement_basis": ["SCAN_ONLY", "COMBINED_SCAN_AND_PHYSICAL_CONTROL", "PHYSICAL_CONTROL_ONLY"],
+  "use_disposition": ["ACCEPTABLE", "PROVISIONAL", "UNSUITABLE", "INDETERMINATE"],
+  "region_disposition": ["ACCEPTABLE", "PROVISIONAL", "UNSUITABLE", "INDETERMINATE"],
+  "decision_rule": ["SIMPLE_ACCEPTANCE", "GUARDED_ACCEPTANCE", "GUARDED_REJECTION"],
+  "declared_use": [
+    "BATTERY_ENCLOSURE_PACKAGING",
+    "WIRE_HARNESS_ROUTING",
+    "BRACKET_HOLE_FABRICATION_RELEASE",
+    "HV_CLEARANCE_CREEPAGE",
+    "THERMAL_ENVELOPE_CLEARANCE",
+    "COOLANT_LINE_ROUTING"
+  ],
+  "reason_code": [
+    "SCALE_VERIFIED",
+    "SCALE_UNVERIFIED",
+    "UNCERTAINTY_WITHIN_BUDGET",
+    "UNCERTAINTY_EXCEEDS_TOLERANCE_BUDGET",
+    "UNCERTAINTY_OVERLAPS_GUARD_BAND",
+    "CONTROL_POINT_OCCLUDED",
+    "INSUFFICIENT_UNDERSIDE_VIEW_DIVERSITY",
+    "INSUFFICIENT_VIEW_DIVERSITY",
+    "REGION_BOUNDARY_UNRESOLVED",
+    "REGION_QUARANTINED_UPSTREAM",
+    "NO_EVALUATION_BASIS",
+    "CONTRADICTORY_UPSTREAM_CLASSIFICATION",
+    "LOW_CONFIDENCE_UPSTREAM_CLASSIFICATION"
+  ],
+  "determinism_axis": {
+    "software_pipeline_determinism": ["VERIFIED", "UNVERIFIED", "NOT_APPLICABLE"],
+    "physical_reproducibility": ["UNVERIFIED", "IN_PROGRESS", "VERIFIED"]
+  },
+  "engineering_use_authority": ["FORBIDDEN", "FIXTURE_ONLY", "AUTHORIZED"],
+  "claim_locks": {
+    "note": "These stay locked until a physical-validation evidence id is recorded per declared-use envelope. A validator MUST reject any report that sets these to anything but FORBIDDEN without a non-null physical_validation_evidence_id.",
+    "engineering_metrology_claim": ["FORBIDDEN", "AUTHORIZED"],
+    "production_vehicle_mesh_claim": ["FORBIDDEN", "AUTHORIZED"],
+    "manufacturing_geometry_claim": ["FORBIDDEN", "AUTHORIZED"],
+    "complete_digital_twin_claim": ["FORBIDDEN", "AUTHORIZED"]
+  },
+  "phase4d_readiness_accepted": ["READY_WITH_UNRESOLVED_BOUNDARIES", "READY"],
+  "recapture_view_angle_type": ["NEAR_NORMAL", "OBLIQUE_UNDERSIDE", "OBLIQUE_TOPSIDE", "GRAZING"]
+}
