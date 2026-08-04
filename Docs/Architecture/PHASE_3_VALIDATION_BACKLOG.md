@@ -115,4 +115,3 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 | Tenant-scoped dedup + reassembly verification | COMPLETE (this PR) |
 | Apple Vision / Core ML / URLSession physical | PENDING |
 | Privacy certification / production transfer claim | FORBIDDEN |
-
