@@ -146,3 +146,13 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 | Phase 4D handoff contract (no mesh generation) | COMPLETE |
 | Production dense fusion / surface mesh / metrology | FORBIDDEN |
 | Physical device fusion (`SPKG-DEVICE-000001`) | PENDING |
+
+## Phase 4D — Surface reconstruction / visual model foundation
+
+| Gate | Status |
+|---|---|
+| Linux fixture surface vertices, triangles, topology | COMPLETE (this PR) |
+| Boundaries / holes / confidence / LOD / GLB derivatives | COMPLETE (this PR) |
+| Phase 4C outputs immutable; Phase 4E handoff recorded | COMPLETE |
+| Engineering metrology / manufacturing / digital twin | FORBIDDEN |
+| Physical surface validation (`SPKG-DEVICE-000001`) | PENDING |
