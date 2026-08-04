@@ -17,11 +17,33 @@ later entry that references it.
 
 ---
 
-## D-029 — Phase 4B feature tracks and pose-graph refinement
+## D-030 — Phase 4C dense fusion and point-cloud filtering
 
 - Date: 2026-08-04
 - Status: Proposed
-- Activation: Upon merge of the Phase 4B PR
+- Activation: Upon merge of the Phase 4C PR
+- Context: Phase 4B produced refined poses and registered observations; denser reconstruction requires explicit multi-frame fusion, confidence weighting, duplicate consolidation, and auditable outlier/conflict handling without silently discarding evidence or claiming production surfaces.
+- Decision:
+  1. Fused points are derived `RECONSTRUCTION_ESTIMATE` outputs; source registered observations remain immutable.
+  2. Every consolidated point retains contributor lineage (source point IDs, observation IDs, derivation records).
+  3. Rejected and quarantined observations remain auditable in explicit records.
+  4. Confidence weighting uses explicit versioned fixture rules `w_i = c_depth * c_pose * max(0, cos(θ))^γ` — not invented physical sensor uncertainty.
+  5. Fixture default voxel size is 0.005 m (deterministic test rule); voxel match is a candidate group only and does not alone prove a single surface.
+  6. Outlier detection uses voxel-index backed k-NN (no all-pairs O(n²) runtime path); normals use covariance PCA eigen-decomposition.
+  7. Dynamic-object / contradictory classification remains provisional fixture disposition — not production moving-object segmentation.
+  8. Fixture density is not proof of real vehicle density; fixture numeric thresholds (including abs/rel epsilon) are not physical tolerances.
+  9. Phase 4C creates no production surface mesh (Phase 4D handoff only).
+  10. Physical fusion remains pending `SPKG-DEVICE-000001`.
+  11. Refinement-failed inputs must not silently substitute refined poses; eligibility is fail-closed.
+  12. Original Phase 3 / 4A / 4B evidence remains unchanged during Phase 4C processing.
+  13. Fixture truth is separated into `fixture_truth.json` with committed offsets (no platform PRNG).
+- Consequences: Linux-fixture dense-fusion foundation may merge as `SOURCE_FOUNDATION_MERGED` with `PHYSICAL_RECONSTRUCTION_STATE=PENDING_SPKG_DEVICE_000001`; production dense fusion, surface mesh, metrology, and digital-twin claims remain FORBIDDEN.
+
+## D-029 — Phase 4B feature tracks and pose-graph refinement
+
+- Date: 2026-08-04
+- Status: Accepted
+- Activation: Merged with Phase 4B (`7c4a21f126215e9f2f29f8214845675afa1759d7` / PR #65)
 - Context: Phase 4A produced registered points from immutable package poses; multi-frame geometry requires explicit feature correspondence validation and derived pose refinement without silently replacing source poses.
 - Decision:
   1. Source poses are immutable observations; refined poses are derived `RECONSTRUCTION_ESTIMATE` outputs only.

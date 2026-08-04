@@ -1,0 +1,5 @@
+Executed 1 test, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'debug.xctest' passed at 2026-08-04 10:27:22.254
+Executed 682 tests, with 7 tests skipped and 0 failures (0 unexpected) in 37.778 (37.778) seconds
+Test Suite 'All tests' passed at 2026-08-04 10:27:22.254
+Executed 682 tests, with 7 tests skipped and 0 failures (0 unexpected) in 37.778 (37.778) seconds
