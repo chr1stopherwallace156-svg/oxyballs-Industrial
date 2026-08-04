@@ -3,17 +3,17 @@
 **Honest truth ledger.** No fluff, no future promises — runtime and documentation reality tied to a specific tip.
 
 ```text
-source_main_baseline_sha     = 7c4a21f126215e9f2f29f8214845675afa1759d7 (main; Phase 4B / #65 merged)
+source_main_baseline_sha     = de9f4ebd337fa88e4951b0499cc17ee20670b61c (main; Phase 4C / #66 merged)
 sprint_3_8_merged_sha        = 3f673b3a599f9cbb9954893966f2473cf26ae7c8
 phase_4a_merged_sha          = a10c3140c5ce6f96a7a4cbd664af021a20f71bc9
 phase_4b_merged_sha          = 7c4a21f126215e9f2f29f8214845675afa1759d7
+phase_4c_merged_sha          = de9f4ebd337fa88e4951b0499cc17ee20670b61c
 phase_4c_evidence_head_sha   = c4db8b0546a7cf9b46d415309379858622539000
-phase_4c_tip_sha             = (this PR; stacked on merged 4B main)
-state_change_pr              = Phase 4C dense fusion / point filtering (PR #66)
-state_change_status          = PROPOSED_IN_DRAFT_PR
-updated_at                   = 2026-08-04T11:00:00Z
+state_change_pr              = Phase 4C dense fusion / point filtering (#66 MERGED)
+state_change_status          = MERGED
+updated_at                   = 2026-08-04T11:05:00Z
 maintained_by                = Industrial Phase 4 maintainers
-update_trigger               = DRAFT_PR_EVIDENCE_PROPOSED
+update_trigger               = STACK_RECONCILE_COMPLETE
 ```
 
 ## Dual status planes (Phase 4C)
@@ -33,7 +33,7 @@ PRIVACY_CERTIFICATION_CLAIM       = FORBIDDEN
 PRODUCTION_TRANSFER_CLAIM         = FORBIDDEN
 ```
 
-Sprint 3.8 (#63 / D-027), Phase 4A (#64 / D-028), and Phase 4B (#65 / D-029) are merged on main (`7c4a21f`). This PR adds Phase 4C dense fusion and filtered point foundation (D-030).
+Sprint 3.8 (#63 / D-027), Phase 4A (#64 / D-028), Phase 4B (#65 / D-029), and Phase 4C (#66 / D-030) are merged on main (`de9f4eb`).
 Sprint 3.6B physical Apple hardware execution remains pending Mac/iPhone.
 Real-device fusion remains pending `SPKG-DEVICE-000001`.
 
