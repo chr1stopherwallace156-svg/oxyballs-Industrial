@@ -17,6 +17,22 @@ later entry that references it.
 
 ---
 
+## D-026 — Sprint 3.7 evidence identity, journal recovery, and runtime resilience
+
+- Date: 2026-08-04
+- Status: Proposed
+- Activation: Upon merge of the Sprint 3.7 PR
+- Context: Phase 3 source architecture through Sprint 3.6A is assembled; dependable field capture requires cryptographic identity, crash-safe journaling, thermal adaptation, and telemetry before physical Secure Enclave / App Attest validation.
+- Decision:
+  1. Package hash identity, cryptographic signatures, device-key enrollment, and app-instance attestation are separate trust layers; an embedded public key is never trusted alone.
+  2. App Attest requires server-side verification; client generation and server verification contracts remain separate. Do not claim `DEVICE_PROVEN_UNCOMPROMISED`.
+  3. Hash-chained capture epoch journals provide tamper evidence but are not a blockchain.
+  4. Incomplete journal tails are quarantined; recovery may never invent or duplicate evidence.
+  5. Adaptive thermal/resource behavior must be recorded; silent required-stream degradation is rejected.
+  6. Fixture signatures (`FIXTURE_HMAC_SHA256_V1`, `TEST_FIXTURE`) are not hardware Secure Enclave signatures.
+  7. Physical Secure Enclave signing and App Attest validation remain pending Apple hardware (Sprint 3.6B backlog).
+- Consequences: Linux-fixture validation may merge as `SOURCE_FOUNDATION_MERGED / APPLE_RUNTIME_UNVALIDATED`; production security claims remain FORBIDDEN until physical execution.
+
 ## D-025 — Sprint 3.6 Apple hardware validation (evidence-backed only)
 
 - Date: 2026-08-03

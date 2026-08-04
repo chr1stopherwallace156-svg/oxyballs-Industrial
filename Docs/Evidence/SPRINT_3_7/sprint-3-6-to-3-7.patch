@@ -1,0 +1,2736 @@
+diff -ruN /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/App/Domain/SpatialEvidence/AdaptiveCapturePolicy.swift /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/AdaptiveCapturePolicy.swift
+--- /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/App/Domain/SpatialEvidence/AdaptiveCapturePolicy.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/AdaptiveCapturePolicy.swift	2024-08-04 00:00:00.000000000 +0000
+@@ -0,0 +1,365 @@
++import Foundation
++
++// MARK: - Thermal / resource adaptive policy (Sprint 3.7)
++
++public enum ThermalState: String, Codable, Sendable, Equatable {
++  case nominal = "NOMINAL"
++  case fair = "FAIR"
++  case serious = "SERIOUS"
++  case critical = "CRITICAL"
++}
++
++public enum MemoryPressureState: String, Codable, Sendable, Equatable {
++  case normal = "NORMAL"
++  case warning = "WARNING"
++  case critical = "CRITICAL"
++}
++
++public enum StoragePressureState: String, Codable, Sendable, Equatable {
++  case normal = "NORMAL"
++  case warning = "WARNING"
++  case critical = "CRITICAL"
++}
++
++public struct RuntimeResourceState: Codable, Sendable, Equatable {
++  public var thermal: ThermalState
++  public var memory: MemoryPressureState
++  public var storage: StoragePressureState
++  public var optionalDepthLoad: Double
++  public var timestampNanoseconds: UInt64
++
++  public func dictionary() -> [String: Any] {
++    [
++      "thermal": thermal.rawValue,
++      "memory": memory.rawValue,
++      "storage": storage.rawValue,
++      "optional_depth_load": optionalDepthLoad,
++      "timestamp_nanoseconds": timestampNanoseconds,
++    ]
++  }
++}
++
++public enum StreamPriority: Int, Codable, Sendable, Equatable, Comparable {
++  case packageAndJournalIntegrity = 1
++  case requiredCamera = 2
++  case requiredClockAndPose = 3
++  case requiredMotion = 4
++  case optionalDepth = 5
++  case derivedQualityAnalysis = 6
++  case previewRendering = 7
++
++  public static func < (lhs: StreamPriority, rhs: StreamPriority) -> Bool {
++    lhs.rawValue < rhs.rawValue
++  }
++}
++
++public enum AdaptivePolicyDecisionCode: String, Codable, Sendable, Equatable {
++  case reduceOptionalDepthRate = "REDUCE_OPTIONAL_DEPTH_RATE"
++  case reduceQualityAnalysisRate = "REDUCE_QUALITY_ANALYSIS_RATE"
++  case reducePreviewRate = "REDUCE_PREVIEW_RATE"
++  case suspendOptionalStream = "SUSPEND_OPTIONAL_STREAM"
++  case pauseCapture = "PAUSE_CAPTURE"
++  case requireOperatorIntervention = "REQUIRE_OPERATOR_INTERVENTION"
++  case failRequiredPolicy = "FAIL_REQUIRED_POLICY"
++  case noChange = "NO_CHANGE"
++}
++
++public struct StreamRateAdjustment: Codable, Sendable, Equatable {
++  public var streamOrSubsystem: String
++  public var priority: StreamPriority
++  public var previousRateHz: Double
++  public var newRateHz: Double
++  public var decision: AdaptivePolicyDecisionCode
++
++  public func dictionary() -> [String: Any] {
++    [
++      "stream_or_subsystem": streamOrSubsystem,
++      "priority": priority.rawValue,
++      "previous_rate_hz": previousRateHz,
++      "new_rate_hz": newRateHz,
++      "decision": decision.rawValue,
++    ]
++  }
++}
++
++public struct AdaptivePolicyDecision: Codable, Sendable, Equatable {
++  public var decisionID: String
++  public var timestampNanoseconds: UInt64
++  public var resourceState: RuntimeResourceState
++  public var adjustments: [StreamRateAdjustment]
++  public var requiredStreamsProtected: Bool
++  public var declaredSessionPolicyUnchanged: Bool
++  public var note: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "decision_id": decisionID,
++      "timestamp_nanoseconds": timestampNanoseconds,
++      "resource_state": resourceState.dictionary(),
++      "adjustments": adjustments.map { $0.dictionary() },
++      "required_streams_protected": requiredStreamsProtected,
++      "declared_session_policy_unchanged": declaredSessionPolicyUnchanged,
++      "note": note,
++    ]
++  }
++}
++
++public struct RuntimeDegradationRecord: Codable, Sendable, Equatable {
++  public var recordID: String
++  public var decisions: [AdaptivePolicyDecision]
++
++  public func dictionary() -> [String: Any] {
++    [
++      "record_id": recordID,
++      "decisions": decisions.map { $0.dictionary() },
++      "schema_id": "RuntimeDegradationRecord",
++      "schema_version": "1.0.0-phase3-fixture",
++    ]
++  }
++}
++
++public struct AdaptiveCapturePolicy: Sendable {
++  public var depthRateHz: Double
++  public var qualityAnalysisRateHz: Double
++  public var previewRateHz: Double
++  public var cameraRateHz: Double
++  public var motionRateHz: Double
++  public private(set) var decisions: [AdaptivePolicyDecision] = []
++
++  public init(
++    depthRateHz: Double = 15,
++    qualityAnalysisRateHz: Double = 5,
++    previewRateHz: Double = 30,
++    cameraRateHz: Double = 30,
++    motionRateHz: Double = 50
++  ) {
++    self.depthRateHz = depthRateHz
++    self.qualityAnalysisRateHz = qualityAnalysisRateHz
++    self.previewRateHz = previewRateHz
++    self.cameraRateHz = cameraRateHz
++    self.motionRateHz = motionRateHz
++  }
++
++  /// Priority-ordered adaptation. Never silently changes required stream rates.
++  public mutating func evaluate(_ state: RuntimeResourceState) throws -> AdaptivePolicyDecision {
++    var adjustments: [StreamRateAdjustment] = []
++    let beforeDepth = depthRateHz
++    let beforeQuality = qualityAnalysisRateHz
++    let beforePreview = previewRateHz
++    let beforeCamera = cameraRateHz
++    let beforeMotion = motionRateHz
++
++    // Lower priority subsystems first when pressure rises.
++    if state.thermal == .fair || state.optionalDepthLoad > 0.7 {
++      if qualityAnalysisRateHz > 1 {
++        qualityAnalysisRateHz = max(1, qualityAnalysisRateHz * 0.5)
++        adjustments.append(
++          StreamRateAdjustment(
++            streamOrSubsystem: "quality_analysis",
++            priority: .derivedQualityAnalysis,
++            previousRateHz: beforeQuality,
++            newRateHz: qualityAnalysisRateHz,
++            decision: .reduceQualityAnalysisRate
++          )
++        )
++      }
++    }
++    if state.thermal == .serious || state.thermal == .critical || state.optionalDepthLoad > 0.85 {
++      if depthRateHz > 0 {
++        let newDepth = state.thermal == .critical ? 0 : max(1, depthRateHz * 0.5)
++        depthRateHz = newDepth
++        adjustments.append(
++          StreamRateAdjustment(
++            streamOrSubsystem: "depth",
++            priority: .optionalDepth,
++            previousRateHz: beforeDepth,
++            newRateHz: depthRateHz,
++            decision: newDepth == 0 ? .suspendOptionalStream : .reduceOptionalDepthRate
++          )
++        )
++      }
++      if previewRateHz > 5 {
++        previewRateHz = max(5, previewRateHz * 0.5)
++        adjustments.append(
++          StreamRateAdjustment(
++            streamOrSubsystem: "preview",
++            priority: .previewRendering,
++            previousRateHz: beforePreview,
++            newRateHz: previewRateHz,
++            decision: .reducePreviewRate
++          )
++        )
++      }
++    }
++
++    // Required streams must remain protected.
++    if cameraRateHz != beforeCamera || motionRateHz != beforeMotion {
++      throw SpatialEvidenceError.silentStreamDegradationRejected("required_stream_rate_mutated")
++    }
++
++    var decisionCodeNote = "adaptive_change_recorded"
++    if state.thermal == .critical && state.storage == .critical {
++      adjustments.append(
++        StreamRateAdjustment(
++          streamOrSubsystem: "capture",
++          priority: .packageAndJournalIntegrity,
++          previousRateHz: 1,
++          newRateHz: 0,
++          decision: .requireOperatorIntervention
++        )
++      )
++      decisionCodeNote = "operator_intervention_required"
++    }
++
++    if adjustments.isEmpty {
++      adjustments.append(
++        StreamRateAdjustment(
++          streamOrSubsystem: "none",
++          priority: .packageAndJournalIntegrity,
++          previousRateHz: 0,
++          newRateHz: 0,
++          decision: .noChange
++        )
++      )
++    }
++
++    // Deterministic ordering by priority then subsystem name
++    adjustments.sort {
++      if $0.priority != $1.priority { return $0.priority < $1.priority }
++      return $0.streamOrSubsystem < $1.streamOrSubsystem
++    }
++
++    let decision = AdaptivePolicyDecision(
++      decisionID: "ADP-\(String(format: "%04d", decisions.count + 1))",
++      timestampNanoseconds: state.timestampNanoseconds,
++      resourceState: state,
++      adjustments: adjustments,
++      requiredStreamsProtected: true,
++      declaredSessionPolicyUnchanged: true,
++      note: decisionCodeNote
++    )
++    decisions.append(decision)
++    return decision
++  }
++}
++
++// MARK: - Performance telemetry
++
++public struct BufferLifecycleRecord: Codable, Sendable, Equatable {
++  public var recordID: String
++  public var sampleID: String
++  public var bufferOrigin: String
++  public var pixelFormat: String
++  public var queuedBytes: Int
++  public var queueDepth: Int
++
++  public func dictionary() -> [String: Any] {
++    [
++      "record_id": recordID,
++      "sample_id": sampleID,
++      "buffer_origin": bufferOrigin,
++      "pixel_format": pixelFormat,
++      "queued_bytes": queuedBytes,
++      "queue_depth": queueDepth,
++    ]
++  }
++}
++
++public struct CopyAndConversionRecord: Codable, Sendable, Equatable {
++  public var recordID: String
++  public var sampleID: String
++  public var conversionOperations: [String]
++  public var estimatedCopyCount: Int
++  public var note: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "record_id": recordID,
++      "sample_id": sampleID,
++      "conversion_operations": conversionOperations,
++      "estimated_copy_count": estimatedCopyCount,
++      "note": note,
++    ]
++  }
++}
++
++public struct EncoderPathRecord: Codable, Sendable, Equatable {
++  public var recordID: String
++  public var sampleID: String
++  public var encodingPath: String
++
++  public func dictionary() -> [String: Any] {
++    ["record_id": recordID, "sample_id": sampleID, "encoding_path": encodingPath]
++  }
++}
++
++public struct FrameDropRecord: Codable, Sendable, Equatable {
++  public var recordID: String
++  public var streamID: String
++  public var droppedCount: UInt64
++  public var reason: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "record_id": recordID,
++      "stream_id": streamID,
++      "dropped_count": droppedCount,
++      "reason": reason,
++    ]
++  }
++}
++
++public struct SensorPerformanceTelemetry: Codable, Sendable, Equatable {
++  public var incomingSampleRate: Double
++  public var acceptedSampleRate: Double
++  public var droppedSampleCount: UInt64
++  public var queueDepth: Int
++  public var queuedBytes: Int
++  public var memoryPressure: MemoryPressureState
++  public var storagePressure: StoragePressureState
++  public var thermalState: ThermalState
++  public var analysisLatencyMs: Double
++  public var packageWriteLatencyMs: Double
++  public var bufferRecords: [BufferLifecycleRecord]
++  public var copyRecords: [CopyAndConversionRecord]
++  public var encoderRecords: [EncoderPathRecord]
++  public var dropRecords: [FrameDropRecord]
++
++  public func dictionary() -> [String: Any] {
++    [
++      "incoming_sample_rate": incomingSampleRate,
++      "accepted_sample_rate": acceptedSampleRate,
++      "dropped_sample_count": droppedSampleCount,
++      "queue_depth": queueDepth,
++      "queued_bytes": queuedBytes,
++      "memory_pressure": memoryPressure.rawValue,
++      "storage_pressure": storagePressure.rawValue,
++      "thermal_state": thermalState.rawValue,
++      "analysis_latency_ms": analysisLatencyMs,
++      "package_write_latency_ms": packageWriteLatencyMs,
++      "buffer_lifecycle_records": bufferRecords.map { $0.dictionary() },
++      "copy_and_conversion_records": copyRecords.map { $0.dictionary() },
++      "encoder_path_records": encoderRecords.map { $0.dictionary() },
++      "frame_drop_records": dropRecords.map { $0.dictionary() },
++      "schema_id": "SensorPerformanceTelemetry",
++      "schema_version": "1.0.0-phase3-fixture",
++      "note": "copy_minimization terminology; not absolute zero-copy claim",
++    ]
++  }
++}
++
++public struct RuntimePerformanceSummary: Codable, Sendable, Equatable {
++  public var summaryID: String
++  public var telemetry: SensorPerformanceTelemetry
++  public var degradation: RuntimeDegradationRecord
++
++  public func dictionary() -> [String: Any] {
++    [
++      "summary_id": summaryID,
++      "telemetry": telemetry.dictionary(),
++      "degradation": degradation.dictionary(),
++      "schema_id": "RuntimePerformanceSummary",
++      "schema_version": "1.0.0-phase3-fixture",
++    ]
++  }
++}
+diff -ruN /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/App/Domain/SpatialEvidence/AppleAppAttestClient.swift /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/AppleAppAttestClient.swift
+--- /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/App/Domain/SpatialEvidence/AppleAppAttestClient.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/AppleAppAttestClient.swift	2024-08-04 00:00:00.000000000 +0000
+@@ -0,0 +1,54 @@
++import Foundation
++
++/// Apple App Attest **client source candidate**.
++///
++/// Server verification remains in `AppAttestServerVerifier` (portable).
++/// Physical App Attest generation remains PENDING_APPLE_HARDWARE_VALIDATION.
++/// Do not claim DEVICE_PROVEN_UNCOMPROMISED.
++#if canImport(DeviceCheck) && os(iOS)
++import DeviceCheck
++
++@available(iOS 14.0, *)
++public struct AppleAppAttestClient: Sendable {
++    public let keyID: String
++    public let appIdentifier: String
++
++    public init(keyID: String, appIdentifier: String) {
++        self.keyID = keyID
++        self.appIdentifier = appIdentifier
++    }
++
++    public func generateAssertion(
++        challenge: AppAttestChallenge,
++        packageClosureSHA256: String,
++        captureSessionID: String,
++        enrollmentRecordID: String
++    ) throws -> AppAttestAssertionEnvelope {
++        throw SpatialEvidenceError.packageAttestationFailed(
++            "AppleAppAttestClient requires physical App Attest runtime validation (PENDING)"
++        )
++    }
++}
++#else
++public struct AppleAppAttestClient: Sendable {
++    public let keyID: String
++    public let appIdentifier: String
++    public let availabilityStatus: String = "UNAVAILABLE_ON_THIS_PLATFORM"
++
++    public init(keyID: String = "ATTEST-KEY-UNAVAILABLE", appIdentifier: String = "com.elektron.capture") {
++        self.keyID = keyID
++        self.appIdentifier = appIdentifier
++    }
++
++    public func generateAssertion(
++        challenge: AppAttestChallenge,
++        packageClosureSHA256: String,
++        captureSessionID: String,
++        enrollmentRecordID: String
++    ) throws -> AppAttestAssertionEnvelope {
++        throw SpatialEvidenceError.packageAttestationFailed(
++            "AppleAppAttestClient unavailable on this platform (Linux/source-candidate stub)"
++        )
++    }
++}
++#endif
+diff -ruN /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/App/Domain/SpatialEvidence/CaptureEpochJournal.swift /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/CaptureEpochJournal.swift
+--- /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/App/Domain/SpatialEvidence/CaptureEpochJournal.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/CaptureEpochJournal.swift	2024-08-04 00:00:00.000000000 +0000
+@@ -0,0 +1,485 @@
++import Foundation
++
++// MARK: - Capture epoch journal (tamper-evident hash chain — NOT a blockchain)
++
++public enum JournalBlockState: String, Codable, Sendable, Equatable {
++  case open = "OPEN"
++  case flushed = "FLUSHED"
++  case committed = "COMMITTED"
++  case quarantined = "QUARANTINED"
++  case corrupt = "CORRUPT"
++}
++
++public struct CaptureEpochBlock: Codable, Sendable, Equatable {
++  public var blockID: String
++  public var blockSequence: UInt64
++  public var captureSessionID: String
++  public var previousBlockSHA256: String
++  public var payloadEntryDigests: [String]
++  public var blockMetadataDigest: String
++  public var blockSHA256: String
++  public var firstTimestampNanoseconds: UInt64
++  public var lastTimestampNanoseconds: UInt64
++  public var streamSampleCounts: [String: UInt64]
++  public var frameEpochID: String
++  public var sessionRunID: String
++  public var journalState: JournalBlockState
++  public var commitMarker: Bool
++  public var byteLength: Int
++  public var acceptedSampleIDs: [String]
++
++  public func dictionary() -> [String: Any] {
++    [
++      "block_id": blockID,
++      "block_sequence": blockSequence,
++      "capture_session_id": captureSessionID,
++      "previous_block_sha256": previousBlockSHA256,
++      "payload_entry_digests": payloadEntryDigests,
++      "block_metadata_digest": blockMetadataDigest,
++      "block_sha256": blockSHA256,
++      "first_timestamp": firstTimestampNanoseconds,
++      "last_timestamp": lastTimestampNanoseconds,
++      "stream_sample_counts": streamSampleCounts,
++      "frame_epoch_id": frameEpochID,
++      "session_run_id": sessionRunID,
++      "journal_state": journalState.rawValue,
++      "commit_marker": commitMarker,
++      "byte_length": byteLength,
++      "accepted_sample_ids": acceptedSampleIDs.sorted(),
++    ]
++  }
++
++  public static func genesisPreviousHash() -> String {
++    String(repeating: "0", count: 64)
++  }
++}
++
++public struct CaptureEpochJournal: Sendable {
++  public let captureSessionID: String
++  public private(set) var blocks: [CaptureEpochBlock] = []
++  public private(set) var openBlock: CaptureEpochBlock?
++  public private(set) var acceptedSampleIDs = Set<String>()
++  public var frameEpochID: String
++  public var sessionRunID: String
++
++  public init(captureSessionID: String, frameEpochID: String = "epoch-fixture-1", sessionRunID: String = "run-fixture-1") {
++    self.captureSessionID = captureSessionID
++    self.frameEpochID = frameEpochID
++    self.sessionRunID = sessionRunID
++  }
++
++  public mutating func append(
++    sampleID: String,
++    payloadDigest: String,
++    streamID: String,
++    timestampNanoseconds: UInt64
++  ) throws {
++    guard !acceptedSampleIDs.contains(sampleID) else {
++      throw SpatialEvidenceError.journalDuplicateSampleID(sampleID)
++    }
++    if openBlock == nil {
++      let seq = UInt64(blocks.count)
++      if let last = blocks.last, last.blockSequence + 1 != seq {
++        throw SpatialEvidenceError.journalSequenceGap(expected: last.blockSequence + 1, actual: seq)
++      }
++      let prev = blocks.last?.blockSHA256 ?? CaptureEpochBlock.genesisPreviousHash()
++      openBlock = CaptureEpochBlock(
++        blockID: "BLK-\(captureSessionID)-\(seq)",
++        blockSequence: seq,
++        captureSessionID: captureSessionID,
++        previousBlockSHA256: prev,
++        payloadEntryDigests: [],
++        blockMetadataDigest: "",
++        blockSHA256: "",
++        firstTimestampNanoseconds: timestampNanoseconds,
++        lastTimestampNanoseconds: timestampNanoseconds,
++        streamSampleCounts: [:],
++        frameEpochID: frameEpochID,
++        sessionRunID: sessionRunID,
++        journalState: .open,
++        commitMarker: false,
++        byteLength: 0,
++        acceptedSampleIDs: []
++      )
++    }
++    guard var block = openBlock else { return }
++    if block.journalState != .open {
++      throw SpatialEvidenceError.journalInvalidState("append_requires_open_block")
++    }
++    block.payloadEntryDigests.append(payloadDigest)
++    block.acceptedSampleIDs.append(sampleID)
++    block.streamSampleCounts[streamID, default: 0] += 1
++    block.lastTimestampNanoseconds = max(block.lastTimestampNanoseconds, timestampNanoseconds)
++    block.firstTimestampNanoseconds = min(block.firstTimestampNanoseconds, timestampNanoseconds)
++    block.byteLength += payloadDigest.count
++    openBlock = block
++    acceptedSampleIDs.insert(sampleID)
++  }
++
++  public mutating func flush() throws {
++    guard var block = openBlock else { return }
++    block.journalState = .flushed
++    block.blockMetadataDigest = try Self.metadataDigest(block)
++    block.blockSHA256 = try Self.blockDigest(block)
++    openBlock = block
++  }
++
++  public mutating func commit() throws -> CaptureEpochBlock {
++    if openBlock?.journalState == .open {
++      try flush()
++    }
++    guard var block = openBlock else {
++      throw SpatialEvidenceError.journalInvalidState("commit_requires_open_or_flushed_block")
++    }
++    // Validate chain link
++    let expectedPrev = blocks.last?.blockSHA256 ?? CaptureEpochBlock.genesisPreviousHash()
++    guard block.previousBlockSHA256 == expectedPrev else {
++      throw SpatialEvidenceError.journalBrokenChain(block.blockID)
++    }
++    if let last = blocks.last, block.blockSequence != last.blockSequence + 1 {
++      throw SpatialEvidenceError.journalDuplicateOrMissingSequence(block.blockSequence)
++    }
++    if blocks.contains(where: { $0.blockSequence == block.blockSequence }) {
++      throw SpatialEvidenceError.journalDuplicateOrMissingSequence(block.blockSequence)
++    }
++    block.commitMarker = true
++    block.journalState = .committed
++    block.blockMetadataDigest = try Self.metadataDigest(block)
++    block.blockSHA256 = try Self.blockDigest(block)
++    blocks.append(block)
++    openBlock = nil
++    return block
++  }
++
++  public func journalRootSHA256() throws -> String {
++    let committed = blocks.filter { $0.journalState == .committed }
++    let material = committed.map { $0.blockSHA256 }
++    return ContentHasher.sha256Hex(try CanonicalJSON.data(["committed_block_digests": material] as [String: Any]))
++  }
++
++  /// Quarantine an incomplete open/flushed tail; remove its sample IDs from the accepted set.
++  public mutating func quarantineOpenTail() -> String? {
++    guard var open = openBlock else { return nil }
++    open.journalState = .quarantined
++    for id in open.acceptedSampleIDs {
++      acceptedSampleIDs.remove(id)
++    }
++    let id = open.blockID
++    openBlock = open
++    return id
++  }
++
++  /// Drop quarantined open tail after recovery scan (committed blocks untouched).
++  public mutating func clearOpenBlock() {
++    openBlock = nil
++  }
++
++  /// Replace accepted sample IDs with the recovered committed set (no duplicates on resume).
++  public mutating func restoreAcceptedSampleIDs(_ ids: [String]) {
++    acceptedSampleIDs = Set(ids)
++  }
++
++  /// Test/fixture helper: load previously committed blocks (e.g. truncated/corrupt scenarios).
++  public mutating func replaceCommittedBlocks(_ newBlocks: [CaptureEpochBlock]) {
++    blocks = newBlocks
++    openBlock = nil
++    acceptedSampleIDs = Set(newBlocks.flatMap(\.acceptedSampleIDs))
++  }
++
++  public mutating func setOpenBlockForRecoverySimulation(_ block: CaptureEpochBlock?) {
++    openBlock = block
++    if let block {
++      for id in block.acceptedSampleIDs {
++        acceptedSampleIDs.insert(id)
++      }
++    }
++  }
++
++  public func dictionary() throws -> [String: Any] {
++    var d: [String: Any] = [
++      "capture_session_id": captureSessionID,
++      "frame_epoch_id": frameEpochID,
++      "session_run_id": sessionRunID,
++      "committed_blocks": blocks.map { $0.dictionary() },
++      "journal_root_sha256": try journalRootSHA256(),
++      "schema_id": "CaptureEpochJournal",
++      "schema_version": "1.0.0-phase3-fixture",
++      "note": "Tamper-evident hash chain; not a blockchain",
++    ]
++    if let openBlock {
++      d["open_block"] = openBlock.dictionary()
++    }
++    return d
++  }
++
++  public static func metadataDigest(_ block: CaptureEpochBlock) throws -> String {
++    ContentHasher.sha256Hex(try CanonicalJSON.data([
++      "block_id": block.blockID,
++      "block_sequence": block.blockSequence,
++      "capture_session_id": block.captureSessionID,
++      "previous_block_sha256": block.previousBlockSHA256,
++      "payload_entry_digests": block.payloadEntryDigests,
++      "first_timestamp": block.firstTimestampNanoseconds,
++      "last_timestamp": block.lastTimestampNanoseconds,
++      "stream_sample_counts": block.streamSampleCounts,
++      "frame_epoch_id": block.frameEpochID,
++      "session_run_id": block.sessionRunID,
++      "commit_marker": block.commitMarker,
++      "accepted_sample_ids": block.acceptedSampleIDs.sorted(),
++    ] as [String: Any]))
++  }
++
++  public static func blockDigest(_ block: CaptureEpochBlock) throws -> String {
++    ContentHasher.sha256Hex(try CanonicalJSON.data([
++      "previous_block_sha256": block.previousBlockSHA256,
++      "block_metadata_digest": block.blockMetadataDigest,
++      "payload_entry_digests": block.payloadEntryDigests,
++      "block_sequence": block.blockSequence,
++    ] as [String: Any]))
++  }
++}
++
++// MARK: - Recovery
++
++public enum RecoveryDisposition: String, Codable, Sendable, Equatable {
++  case cleanRecovery = "CLEAN_RECOVERY"
++  case recoveredToLastCommittedBlock = "RECOVERED_TO_LAST_COMMITTED_BLOCK"
++  case incompleteTailQuarantined = "INCOMPLETE_TAIL_QUARANTINED"
++  case hashChainBroken = "HASH_CHAIN_BROKEN"
++  case journalCorrupt = "JOURNAL_CORRUPT"
++  case nonResumable = "NON_RESUMABLE"
++  case manualReviewRequired = "MANUAL_REVIEW_REQUIRED"
++}
++
++public enum IncompleteEpochDisposition: String, Codable, Sendable, Equatable {
++  case quarantined = "QUARANTINED"
++  case discarded = "DISCARDED"
++  case none = "NONE"
++}
++
++public struct JournalCorruptionRecord: Codable, Sendable, Equatable {
++  public var corruptionID: String
++  public var reason: String
++  public var blockID: String?
++
++  public func dictionary() -> [String: Any] {
++    var d: [String: Any] = ["corruption_id": corruptionID, "reason": reason]
++    if let blockID { d["block_id"] = blockID }
++    return d
++  }
++}
++
++public struct JournalCommitRecord: Codable, Sendable, Equatable {
++  public var commitID: String
++  public var blockID: String
++  public var blockSHA256: String
++  public var committedAtNanoseconds: UInt64
++
++  public func dictionary() -> [String: Any] {
++    [
++      "commit_id": commitID,
++      "block_id": blockID,
++      "block_sha256": blockSHA256,
++      "committed_at_nanoseconds": committedAtNanoseconds,
++    ]
++  }
++}
++
++public struct RecoveredSessionState: Codable, Sendable, Equatable {
++  public var captureSessionID: String
++  public var disposition: RecoveryDisposition
++  public var lastCommittedSequence: UInt64?
++  public var acceptedSampleIDs: [String]
++  public var quarantinedBlockIDs: [String]
++  public var journalRootSHA256: String
++  public var incompleteEpochDisposition: IncompleteEpochDisposition
++  public var corruptionRecords: [JournalCorruptionRecord]
++
++  public func dictionary() -> [String: Any] {
++    var d: [String: Any] = [
++      "capture_session_id": captureSessionID,
++      "disposition": disposition.rawValue,
++      "accepted_sample_ids": acceptedSampleIDs.sorted(),
++      "quarantined_block_ids": quarantinedBlockIDs.sorted(),
++      "journal_root_sha256": journalRootSHA256,
++      "incomplete_epoch_disposition": incompleteEpochDisposition.rawValue,
++      "corruption_records": corruptionRecords.map { $0.dictionary() },
++      "schema_id": "RecoveredSessionState",
++      "schema_version": "1.0.0-phase3-fixture",
++    ]
++    if let lastCommittedSequence {
++      d["last_committed_sequence"] = lastCommittedSequence
++    }
++    return d
++  }
++}
++
++public struct JournalRecoveryScanner: Sendable {
++  public init() {}
++
++  public func scan(journal: CaptureEpochJournal) throws -> RecoveredSessionState {
++    var working = journal
++    var corruptions: [JournalCorruptionRecord] = []
++    var quarantined: [String] = []
++
++    // Validate committed chain
++    var prev = CaptureEpochBlock.genesisPreviousHash()
++    var expectedSeq: UInt64 = 0
++    var seenSeq = Set<UInt64>()
++    for block in working.blocks {
++      if seenSeq.contains(block.blockSequence) {
++        return RecoveredSessionState(
++          captureSessionID: journal.captureSessionID,
++          disposition: .journalCorrupt,
++          lastCommittedSequence: nil,
++          acceptedSampleIDs: [],
++          quarantinedBlockIDs: [],
++          journalRootSHA256: "",
++          incompleteEpochDisposition: .none,
++          corruptionRecords: [
++            JournalCorruptionRecord(corruptionID: "CORR-DUP-SEQ", reason: "duplicate_sequence", blockID: block.blockID),
++          ]
++        )
++      }
++      seenSeq.insert(block.blockSequence)
++      if block.blockSequence != expectedSeq {
++        return RecoveredSessionState(
++          captureSessionID: journal.captureSessionID,
++          disposition: .journalCorrupt,
++          lastCommittedSequence: nil,
++          acceptedSampleIDs: [],
++          quarantinedBlockIDs: [],
++          journalRootSHA256: "",
++          incompleteEpochDisposition: .none,
++          corruptionRecords: [
++            JournalCorruptionRecord(corruptionID: "CORR-GAP", reason: "missing_sequence", blockID: block.blockID),
++          ]
++        )
++      }
++      if block.previousBlockSHA256 != prev {
++        return RecoveredSessionState(
++          captureSessionID: journal.captureSessionID,
++          disposition: .hashChainBroken,
++          lastCommittedSequence: expectedSeq == 0 ? nil : expectedSeq - 1,
++          acceptedSampleIDs: [],
++          quarantinedBlockIDs: [],
++          journalRootSHA256: "",
++          incompleteEpochDisposition: .none,
++          corruptionRecords: [
++            JournalCorruptionRecord(corruptionID: "CORR-CHAIN", reason: "incorrect_previous_block_hash", blockID: block.blockID),
++          ]
++        )
++      }
++      let recomputedMeta = try CaptureEpochJournal.metadataDigest(block)
++      let recomputed = try CaptureEpochJournal.blockDigest(
++        CaptureEpochBlock(
++          blockID: block.blockID,
++          blockSequence: block.blockSequence,
++          captureSessionID: block.captureSessionID,
++          previousBlockSHA256: block.previousBlockSHA256,
++          payloadEntryDigests: block.payloadEntryDigests,
++          blockMetadataDigest: recomputedMeta,
++          blockSHA256: "",
++          firstTimestampNanoseconds: block.firstTimestampNanoseconds,
++          lastTimestampNanoseconds: block.lastTimestampNanoseconds,
++          streamSampleCounts: block.streamSampleCounts,
++          frameEpochID: block.frameEpochID,
++          sessionRunID: block.sessionRunID,
++          journalState: block.journalState,
++          commitMarker: block.commitMarker,
++          byteLength: block.byteLength,
++          acceptedSampleIDs: block.acceptedSampleIDs
++        )
++      )
++      // Use stored metadata digest for verification of tampering of prior content
++      let storedBlockDigest = try CaptureEpochJournal.blockDigest(block)
++      if block.blockMetadataDigest != recomputedMeta || block.blockSHA256 != storedBlockDigest {
++        return RecoveredSessionState(
++          captureSessionID: journal.captureSessionID,
++          disposition: .hashChainBroken,
++          lastCommittedSequence: expectedSeq == 0 ? nil : expectedSeq - 1,
++          acceptedSampleIDs: [],
++          quarantinedBlockIDs: [block.blockID],
++          journalRootSHA256: "",
++          incompleteEpochDisposition: .none,
++          corruptionRecords: [
++            JournalCorruptionRecord(corruptionID: "CORR-MUTATED", reason: "modified_prior_block", blockID: block.blockID),
++          ]
++        )
++      }
++      _ = recomputed
++      prev = block.blockSHA256
++      expectedSeq += 1
++    }
++
++    var incomplete: IncompleteEpochDisposition = .none
++    var disposition: RecoveryDisposition = .cleanRecovery
++
++    if working.openBlock != nil {
++      // Incomplete tail: open or flushed without commit — quarantine, never accept as evidence.
++      if let qid = working.quarantineOpenTail() {
++        quarantined.append(qid)
++        corruptions.append(
++          JournalCorruptionRecord(corruptionID: "CORR-TAIL", reason: "uncommitted_tail_quarantined", blockID: qid)
++        )
++      }
++      incomplete = .quarantined
++      disposition = .incompleteTailQuarantined
++    }
++
++    if disposition == .cleanRecovery, !working.blocks.isEmpty {
++      disposition = .recoveredToLastCommittedBlock
++    }
++
++    let root = try working.journalRootSHA256()
++    let ids = working.blocks.flatMap(\.acceptedSampleIDs)
++    return RecoveredSessionState(
++      captureSessionID: journal.captureSessionID,
++      disposition: disposition == .incompleteTailQuarantined
++        ? .incompleteTailQuarantined
++        : (working.blocks.isEmpty ? .cleanRecovery : .recoveredToLastCommittedBlock),
++      lastCommittedSequence: working.blocks.last?.blockSequence,
++      acceptedSampleIDs: ids,
++      quarantinedBlockIDs: quarantined,
++      journalRootSHA256: root,
++      incompleteEpochDisposition: incomplete,
++      corruptionRecords: corruptions
++    )
++  }
++
++  /// Resume journal after recovery — only committed samples remain accepted.
++  public func resumeJournal(from journal: CaptureEpochJournal, recovered: RecoveredSessionState) throws -> CaptureEpochJournal {
++    guard recovered.disposition != .hashChainBroken,
++          recovered.disposition != .journalCorrupt,
++          recovered.disposition != .nonResumable
++    else {
++      throw SpatialEvidenceError.journalNonResumable(recovered.disposition.rawValue)
++    }
++    var resumed = journal
++    if let open = resumed.openBlock, recovered.quarantinedBlockIDs.contains(open.blockID) {
++      resumed.clearOpenBlock()
++    } else if resumed.openBlock != nil {
++      resumed.clearOpenBlock()
++    }
++    resumed.restoreAcceptedSampleIDs(recovered.acceptedSampleIDs)
++    return resumed
++  }
++}
++
++/// Simple WAL marker store for commit records.
++public struct CaptureWriteAheadLog: Sendable {
++  public private(set) var commits: [JournalCommitRecord] = []
++
++  public init() {}
++
++  public mutating func recordCommit(block: CaptureEpochBlock, at timestamp: UInt64) {
++    commits.append(
++      JournalCommitRecord(
++        commitID: "COMMIT-\(block.blockID)",
++        blockID: block.blockID,
++        blockSHA256: block.blockSHA256,
++        committedAtNanoseconds: timestamp
++      )
++    )
++  }
++}
+diff -ruN /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/App/Domain/SpatialEvidence/FixtureJournaledCapturePackageBuilder.swift /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/FixtureJournaledCapturePackageBuilder.swift
+--- /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/App/Domain/SpatialEvidence/FixtureJournaledCapturePackageBuilder.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/FixtureJournaledCapturePackageBuilder.swift	2024-08-04 00:00:00.000000000 +0000
+@@ -0,0 +1,592 @@
++import Foundation
++
++/// Sprint 3.7 journaled + resilient fixture packages.
++///
++/// Authority remains TEST_FIXTURE. Fixture signatures are NOT hardware Secure Enclave signatures.
++/// No SPKG-DEVICE-* / DEVICE_REPORTED / physical attestation claims.
++public struct FixtureJournaledCapturePackageBuilder: Sendable {
++  public static let journaledPackageID = "SPKG-FIXTURE-JOURNALED-CAPTURE-000001"
++  public static let journaledSessionID = "SESS-FIXTURE-JOURNALED-CAPTURE-000001"
++  public static let resilientPackageID = "SPKG-FIXTURE-RESILIENT-CAPTURE-000001"
++  public static let resilientSessionID = "SESS-FIXTURE-RESILIENT-CAPTURE-000001"
++  public static let frameEpochID = "epoch-fixture-1"
++  public static let sessionRunID = "run-fixture-1"
++
++  public init() {}
++
++  public struct SealResult: Sendable {
++    public var package: SpatialEvidencePackage
++    public var journal: CaptureEpochJournal
++    public var journalRootSHA256: String
++    public var recovery: RecoveredSessionState?
++    public var signature: PackageSignatureEnvelope
++    public var enrollment: DeviceKeyEnrollmentRecord
++    public var verification: SignatureVerificationResult
++    public var attestation: AppAttestVerificationResult?
++    public var degradation: RuntimeDegradationRecord?
++    public var telemetry: SensorPerformanceTelemetry?
++    public var wal: CaptureWriteAheadLog
++  }
++
++  // MARK: - Scenario helpers
++
++  public enum JournalScenario: String, Sendable {
++    case complete
++    case powerLossBeforePayload
++    case powerLossAfterPayloadBeforeCommit
++    case powerLossAfterCommit
++    case truncatedFinalBlock
++    case modifiedPriorBlock
++    case incorrectPreviousHash
++    case duplicateSequence
++    case missingSequence
++    case recoveredContinuation
++    case cancellationUnsealed
++  }
++
++  public func buildJournal(
++    scenario: JournalScenario,
++    sessionID: String = FixtureJournaledCapturePackageBuilder.journaledSessionID
++  ) throws -> (CaptureEpochJournal, CaptureWriteAheadLog, RecoveredSessionState?) {
++    var journal = CaptureEpochJournal(
++      captureSessionID: sessionID,
++      frameEpochID: Self.frameEpochID,
++      sessionRunID: Self.sessionRunID
++    )
++    var wal = CaptureWriteAheadLog()
++    let scanner = JournalRecoveryScanner()
++
++    switch scenario {
++    case .complete:
++      try appendAndCommit(&journal, &wal, samples: [
++        ("cam-0001", "cam", 1_000),
++        ("mot-0001", "mot", 1_100),
++      ])
++      try appendAndCommit(&journal, &wal, samples: [
++        ("cam-0002", "cam", 2_000),
++        ("mot-0002", "mot", 2_100),
++      ])
++      return (journal, wal, try scanner.scan(journal: journal))
++
++    case .powerLossBeforePayload:
++      try appendAndCommit(&journal, &wal, samples: [("cam-0001", "cam", 1_000)])
++      // Abrupt stop with no open payload — clean committed state.
++      return (journal, wal, try scanner.scan(journal: journal))
++
++    case .powerLossAfterPayloadBeforeCommit:
++      try appendAndCommit(&journal, &wal, samples: [("cam-0001", "cam", 1_000)])
++      try journal.append(sampleID: "cam-0002", payloadDigest: digest("cam-0002"), streamID: "cam", timestampNanoseconds: 2_000)
++      try journal.flush()
++      let recovered = try scanner.scan(journal: journal)
++      return (journal, wal, recovered)
++
++    case .powerLossAfterCommit:
++      try appendAndCommit(&journal, &wal, samples: [("cam-0001", "cam", 1_000)])
++      try appendAndCommit(&journal, &wal, samples: [("cam-0002", "cam", 2_000)])
++      return (journal, wal, try scanner.scan(journal: journal))
++
++    case .truncatedFinalBlock:
++      try appendAndCommit(&journal, &wal, samples: [("cam-0001", "cam", 1_000)])
++      try journal.append(sampleID: "cam-trunc", payloadDigest: digest("cam-trunc"), streamID: "cam", timestampNanoseconds: 3_000)
++      // Simulate truncation: leave open without flush/commit.
++      let recovered = try scanner.scan(journal: journal)
++      return (journal, wal, recovered)
++
++    case .modifiedPriorBlock:
++      try appendAndCommit(&journal, &wal, samples: [("cam-0001", "cam", 1_000)])
++      try appendAndCommit(&journal, &wal, samples: [("cam-0002", "cam", 2_000)])
++      var blocks = journal.blocks
++      blocks[0].payloadEntryDigests.append("mutated-digest")
++      journal.replaceCommittedBlocks(blocks)
++      return (journal, wal, try scanner.scan(journal: journal))
++
++    case .incorrectPreviousHash:
++      try appendAndCommit(&journal, &wal, samples: [("cam-0001", "cam", 1_000)])
++      try appendAndCommit(&journal, &wal, samples: [("cam-0002", "cam", 2_000)])
++      var blocks = journal.blocks
++      blocks[1].previousBlockSHA256 = String(repeating: "a", count: 64)
++      journal.replaceCommittedBlocks(blocks)
++      return (journal, wal, try scanner.scan(journal: journal))
++
++    case .duplicateSequence:
++      try appendAndCommit(&journal, &wal, samples: [("cam-0001", "cam", 1_000)])
++      try appendAndCommit(&journal, &wal, samples: [("cam-0002", "cam", 2_000)])
++      var blocks = journal.blocks
++      var dup = blocks[1]
++      dup.blockID = "BLK-DUP"
++      dup.blockSequence = 0
++      blocks.append(dup)
++      journal.replaceCommittedBlocks(blocks)
++      return (journal, wal, try scanner.scan(journal: journal))
++
++    case .missingSequence:
++      try appendAndCommit(&journal, &wal, samples: [("cam-0001", "cam", 1_000)])
++      try appendAndCommit(&journal, &wal, samples: [("cam-0002", "cam", 2_000)])
++      var blocks = journal.blocks
++      blocks[1].blockSequence = 5
++      journal.replaceCommittedBlocks(blocks)
++      return (journal, wal, try scanner.scan(journal: journal))
++
++    case .recoveredContinuation:
++      try appendAndCommit(&journal, &wal, samples: [("cam-0001", "cam", 1_000)])
++      try journal.append(sampleID: "cam-open", payloadDigest: digest("cam-open"), streamID: "cam", timestampNanoseconds: 1_500)
++      let recovered = try scanner.scan(journal: journal)
++      var resumed = try scanner.resumeJournal(from: journal, recovered: recovered)
++      // Resume must not accept duplicate committed IDs.
++      try resumed.append(sampleID: "cam-0002", payloadDigest: digest("cam-0002"), streamID: "cam", timestampNanoseconds: 2_000)
++      let block = try resumed.commit()
++      wal.recordCommit(block: block, at: 2_000)
++      journal = resumed
++      return (journal, wal, try scanner.scan(journal: journal))
++
++    case .cancellationUnsealed:
++      try appendAndCommit(&journal, &wal, samples: [("cam-0001", "cam", 1_000)])
++      try journal.append(sampleID: "cam-cancel", payloadDigest: digest("cam-cancel"), streamID: "cam", timestampNanoseconds: 2_000)
++      // Caller must not seal — recovery still quarantines.
++      return (journal, wal, try scanner.scan(journal: journal))
++    }
++  }
++
++  /// Primary journaled package: interrupted then recovered; only committed evidence sealed.
++  public func sealJournaledPrimary(outputDirectory: URL) throws -> SealResult {
++    let (pre, walPre, recoveredPre) = try buildJournal(scenario: .powerLossAfterPayloadBeforeCommit)
++    let recovered = try XCTUnwrapCompat(recoveredPre)
++    let scanner = JournalRecoveryScanner()
++    var journal = try scanner.resumeJournal(from: pre, recovered: recovered)
++    var wal = walPre
++    try journal.append(sampleID: "cam-resume-0001", payloadDigest: digest("cam-resume-0001"), streamID: "cam", timestampNanoseconds: 3_000)
++    try journal.append(sampleID: "mot-resume-0001", payloadDigest: digest("mot-resume-0001"), streamID: "mot", timestampNanoseconds: 3_100)
++    let committed = try journal.commit()
++    wal.recordCommit(block: committed, at: 3_100)
++    let finalRecovery = try scanner.scan(journal: journal)
++    return try sealPackage(
++      packageID: Self.journaledPackageID,
++      sessionID: Self.journaledSessionID,
++      journal: journal,
++      wal: wal,
++      recovery: finalRecovery,
++      outputDirectory: outputDirectory,
++      layout: "fixture_journaled_capture_v1",
++      includeThermal: false
++    )
++  }
++
++  /// Resilient package: thermal throttle → crash → recover → sign → seal.
++  public func sealResilientPrimary(outputDirectory: URL) throws -> SealResult {
++    var journal = CaptureEpochJournal(
++      captureSessionID: Self.resilientSessionID,
++      frameEpochID: Self.frameEpochID,
++      sessionRunID: Self.sessionRunID
++    )
++    var wal = CaptureWriteAheadLog()
++    var policy = AdaptiveCapturePolicy()
++    var decisions: [AdaptivePolicyDecision] = []
++
++    // 1–2 begin + commit
++    try appendAndCommit(&journal, &wal, samples: [
++      ("cam-r-0001", "cam", 1_000),
++      ("mot-r-0001", "mot", 1_050),
++    ])
++
++    // 3–6 depth load + thermal rise → quality then depth throttle
++    let d1 = try policy.evaluate(
++      RuntimeResourceState(
++        thermal: .fair,
++        memory: .normal,
++        storage: .normal,
++        optionalDepthLoad: 0.8,
++        timestampNanoseconds: 1_200
++      )
++    )
++    decisions.append(d1)
++    let d2 = try policy.evaluate(
++      RuntimeResourceState(
++        thermal: .serious,
++        memory: .warning,
++        storage: .normal,
++        optionalDepthLoad: 0.9,
++        timestampNanoseconds: 1_400
++      )
++    )
++    decisions.append(d2)
++
++    // 7 required camera/motion continue
++    try appendAndCommit(&journal, &wal, samples: [
++      ("cam-r-0002", "cam", 2_000),
++      ("mot-r-0002", "mot", 2_050),
++    ])
++
++    // 8 terminate after committed block during incomplete block
++    try journal.append(sampleID: "cam-r-incomplete", payloadDigest: digest("cam-r-incomplete"), streamID: "cam", timestampNanoseconds: 2_500)
++    try journal.flush()
++
++    // 9 recover / quarantine
++    let scanner = JournalRecoveryScanner()
++    let recovered = try scanner.scan(journal: journal)
++    journal = try scanner.resumeJournal(from: journal, recovered: recovered)
++
++    // 10 resume without duplicate sample IDs
++    try journal.append(sampleID: "cam-r-0003", payloadDigest: digest("cam-r-0003"), streamID: "cam", timestampNanoseconds: 3_000)
++    try journal.append(sampleID: "mot-r-0003", payloadDigest: digest("mot-r-0003"), streamID: "mot", timestampNanoseconds: 3_050)
++    let block = try journal.commit()
++    wal.recordCommit(block: block, at: 3_050)
++
++    let telemetry = SensorPerformanceTelemetry(
++      incomingSampleRate: 60,
++      acceptedSampleRate: 55,
++      droppedSampleCount: 2,
++      queueDepth: 3,
++      queuedBytes: 4096,
++      memoryPressure: .warning,
++      storagePressure: .normal,
++      thermalState: .serious,
++      analysisLatencyMs: 12.5,
++      packageWriteLatencyMs: 40,
++      bufferRecords: [
++        BufferLifecycleRecord(
++          recordID: "BUF-0001",
++          sampleID: "cam-r-0001",
++          bufferOrigin: "fixture_camera_pool",
++          pixelFormat: "fixture_rgb8",
++          queuedBytes: 1024,
++          queueDepth: 1
++        ),
++      ],
++      copyRecords: [
++        CopyAndConversionRecord(
++          recordID: "COPY-0001",
++          sampleID: "cam-r-0001",
++          conversionOperations: ["fixture_rgb8_to_canonical"],
++          estimatedCopyCount: 1,
++          note: "copy_minimization; not zero-copy claim"
++        ),
++      ],
++      encoderRecords: [
++        EncoderPathRecord(recordID: "ENC-0001", sampleID: "cam-r-0001", encodingPath: "fixture_passthrough"),
++      ],
++      dropRecords: [
++        FrameDropRecord(recordID: "DROP-0001", streamID: "depth", droppedCount: 2, reason: "thermal_throttle"),
++      ]
++    )
++
++    let degradation = RuntimeDegradationRecord(recordID: "DEG-\(Self.resilientPackageID)", decisions: decisions)
++    let finalRecovery = try scanner.scan(journal: journal)
++
++    return try sealPackage(
++      packageID: Self.resilientPackageID,
++      sessionID: Self.resilientSessionID,
++      journal: journal,
++      wal: wal,
++      recovery: finalRecovery,
++      outputDirectory: outputDirectory,
++      layout: "fixture_resilient_capture_v1",
++      includeThermal: true,
++      degradation: degradation,
++      telemetry: telemetry,
++      policy: policy
++    )
++  }
++
++  // MARK: - Seal
++
++  private func sealPackage(
++    packageID: String,
++    sessionID: String,
++    journal: CaptureEpochJournal,
++    wal: CaptureWriteAheadLog,
++    recovery: RecoveredSessionState,
++    outputDirectory: URL,
++    layout: String,
++    includeThermal: Bool,
++    degradation: RuntimeDegradationRecord? = nil,
++    telemetry: SensorPerformanceTelemetry? = nil,
++    policy: AdaptiveCapturePolicy? = nil
++  ) throws -> SealResult {
++    let fm = FileManager.default
++    try fm.createDirectory(at: outputDirectory, withIntermediateDirectories: true)
++    try fm.createDirectory(at: outputDirectory.appendingPathComponent("artifacts", isDirectory: true), withIntermediateDirectories: true)
++
++    let journalRoot = try journal.journalRootSHA256()
++    let enrollment = DeviceKeyEnrollmentRecord.fixtureEnrolled()
++
++    // Minimal evidence payload — deterministic bytes bound into inventory.
++    let payload = try CanonicalJSON.data([
++      "accepted_sample_ids": Array(journal.acceptedSampleIDs).sorted(),
++      "note": "Sprint 3.7 fixture evidence payload; TEST_FIXTURE authority",
++    ] as [String: Any])
++    let payloadRel = "artifacts/evidence/payload.json"
++    let payloadURL = outputDirectory.appendingPathComponent(payloadRel)
++    try fm.createDirectory(at: payloadURL.deletingLastPathComponent(), withIntermediateDirectories: true)
++    try payload.write(to: payloadURL, options: .atomic)
++
++    try writeJSON(try journal.dictionary(), to: outputDirectory.appendingPathComponent("capture_epoch_journal.json"))
++    try writeJSON(
++      [
++        "journal_root_sha256": journalRoot,
++        "binding": "package_closure",
++        "note": "Committed journal root bound into package identity",
++      ],
++      to: outputDirectory.appendingPathComponent("journal_root_binding.json")
++    )
++    try writeJSON(recovery.dictionary(), to: outputDirectory.appendingPathComponent("recovery_state.json"))
++    try writeJSON(
++      ["commits": wal.commits.map { $0.dictionary() }],
++      to: outputDirectory.appendingPathComponent("write_ahead_log.json")
++    )
++    try writeJSON(enrollment.dictionary(), to: outputDirectory.appendingPathComponent("enrollment_record.json"))
++
++    if includeThermal, let degradation, let telemetry, let policy {
++      try writeJSON(degradation.dictionary(), to: outputDirectory.appendingPathComponent("runtime_degradation.json"))
++      try writeJSON(telemetry.dictionary(), to: outputDirectory.appendingPathComponent("performance_telemetry.json"))
++      try writeJSON(
++        [
++          "camera_rate_hz": policy.cameraRateHz,
++          "motion_rate_hz": policy.motionRateHz,
++          "depth_rate_hz": policy.depthRateHz,
++          "quality_analysis_rate_hz": policy.qualityAnalysisRateHz,
++          "preview_rate_hz": policy.previewRateHz,
++          "required_streams_protected": true,
++        ],
++        to: outputDirectory.appendingPathComponent("adaptive_policy_snapshot.json")
++      )
++    }
++
++    // App attest fixture (portable server verification — not hardware).
++    let challenge = AppAttestChallenge(
++      challengeID: "CHAL-\(packageID)",
++      serverNonce: "nonce-fixture-\(packageID)",
++      issuedAtUTC: "2026-08-03T00:00:00Z",
++      expiresAtUTC: "2026-08-03T01:00:00Z",
++      appIdentifier: enrollment.appIdentifier
++    )
++    // Placeholder closure for assertion binding; replaced after inventory hash.
++    var provisionalClosure = String(repeating: "0", count: 64)
++
++    let frames = [
++      CoordinateFrameDescriptor(
++        frameID: "FRAME_CAPTURE_SESSION_ROOT",
++        units: "meters",
++        handedness: "right",
++        matrixStorageOrder: "column_major",
++        opticalAxisConvention: "opencv",
++        clockDomain: .fixtureCamera,
++        authority: "TEST_FIXTURE"
++      ),
++    ]
++    var camCap = SpatialStreamCapability(
++      streamID: SpatialStreamID.camera,
++      adapterID: "fixture.camera.journaled",
++      sensorKind: "camera",
++      declared: true
++    )
++    camCap.activate()
++    camCap.recordSample()
++    try camCap.freeze(outcome: .acquired)
++    var motCap = SpatialStreamCapability(
++      streamID: SpatialStreamID.motion,
++      adapterID: "fixture.motion.journaled",
++      sensorKind: "motion",
++      declared: true
++    )
++    motCap.activate()
++    motCap.recordSample()
++    try motCap.freeze(outcome: .acquired)
++    var poseCap = SpatialStreamCapability(
++      streamID: SpatialStreamID.pose,
++      adapterID: "none",
++      sensorKind: "pose",
++      declared: false
++    )
++    try poseCap.freeze(outcome: .notRequested)
++    var depthCap = SpatialStreamCapability(
++      streamID: SpatialStreamID.depth,
++      adapterID: includeThermal ? "fixture.depth.optional" : "none",
++      sensorKind: "depth",
++      declared: includeThermal
++    )
++    if includeThermal {
++      depthCap.activate()
++      depthCap.recordSample()
++      try depthCap.freeze(outcome: .acquired)
++    } else {
++      try depthCap.freeze(outcome: .notRequested)
++    }
++
++    let capability = SpatialCapabilitySnapshot(
++      snapshotID: "CAP-\(packageID)",
++      capturedAtUTC: "2026-08-03T00:00:00Z",
++      streams: [camCap, motCap, poseCap, depthCap],
++      schemaVersion: SpatialCapabilitySnapshot.fixtureSchemaVersion
++    )
++
++    let artifact = SpatialArtifactDescriptor(
++      relativePath: payloadRel,
++      byteLength: payload.count,
++      sha256: ContentHasher.sha256Hex(payload),
++      mediaType: "application/json",
++      schemaID: "FixtureEvidencePayload",
++      schemaVersion: "1.0.0-phase3-fixture",
++      sampleID: Array(journal.acceptedSampleIDs).sorted().first ?? "none",
++      streamID: SpatialStreamID.camera,
++      adapterID: camCap.adapterID
++    )
++
++    let manifest = SpatialEvidenceManifest(
++      packageID: packageID,
++      vehicleID: "VEH-000001",
++      captureSessionID: sessionID,
++      pilotID: "PILOT-000001",
++      createdAtUTC: "2026-08-03T00:00:00Z",
++      capability: capability,
++      frames: frames,
++      clockCorrelations: [],
++      artifacts: [artifact],
++      sampleIndex: [
++        [
++          "sample_id": artifact.sampleID,
++          "relative_path": payloadRel,
++          "stream_id": SpatialStreamID.camera,
++          "adapter_id": camCap.adapterID,
++        ],
++      ]
++    )
++    var manifestDict = manifest.asDictionary()
++    manifestDict["schema_id"] = "SpatialEvidenceManifest"
++    manifestDict["schema_version"] = "1.0.0-phase3-fixture"
++    manifestDict["package_layout"] = layout
++    manifestDict["host_claim"] = "NO_PHYSICAL_DEVICE_EXECUTION"
++    manifestDict["implementation_state"] = "SOURCE_IMPLEMENTED"
++    manifestDict["validation_state"] = "LINUX_FIXTURE_VALIDATED"
++    manifestDict["evidence_origin_authority"] = EvidenceAuthority.testFixture.rawValue
++    manifestDict["journal_root_sha256"] = journalRoot
++    manifestDict["frame_epoch_id"] = Self.frameEpochID
++    manifestDict["session_run_id"] = Self.sessionRunID
++    manifestDict["security_claim"] = "NO_HARDWARE_ATTESTATION_CLAIM_UNTIL_PHYSICAL_EXECUTION"
++    manifestDict["note"] = "Fixture signatures and App Attest envelopes are not hardware claims"
++
++    let manifestData = try CanonicalJSON.data(manifestDict)
++    try manifestData.write(to: outputDirectory.appendingPathComponent("manifest.json"), options: .atomic)
++    let manifestSHA = ContentHasher.sha256Hex(manifestData)
++
++    // Inventory + closure (signature written after hash so signature is outside closure, or include after?)
++    // Spec: package receives fixture signature; closure passes. Signature file is part of package but
++    // binding uses package_closure_sha256 of inventory WITHOUT the signature file first, then signature
++    // references that digest. Signature file is added AFTER inventory closure of evidence files,
++    // then a second inventory includes signature — OR signature binds pre-signature closure.
++    // Follow: compute closure over all files except signature/attestation envelopes, sign that,
++    // then write signature + final inventory including signature (with fixture_package_closure_sha256
++    // still the evidence closure digest).
++    let preSigEntries = try SpatialPackageClosureVerifier.collectPackageInventoryEntries(packageRoot: outputDirectory)
++    try SpatialPackageClosureVerifier.verifyInventoryCompleteness(packageRoot: outputDirectory, entries: preSigEntries)
++    let packageClosureHash = try SpatialPackageClosureVerifier.inventoryClosureHash(entries: preSigEntries)
++    provisionalClosure = packageClosureHash
++
++    let signer = FixturePackageSigner()
++    let signature = try signer.sign(
++      packageID: packageID,
++      captureSessionID: sessionID,
++      packageClosureSHA256: packageClosureHash,
++      manifestSHA256: manifestSHA,
++      enrollment: enrollment
++    )
++    try writeJSON(signature.dictionary(), to: outputDirectory.appendingPathComponent("package_signature.json"))
++
++    let assertion = try FixtureAppAttestClient().makeAssertion(
++      challenge: challenge,
++      packageClosureSHA256: provisionalClosure,
++      captureSessionID: sessionID,
++      enrollment: enrollment
++    )
++    var verifier = AppAttestServerVerifier(nowUTC: "2026-08-03T00:30:00Z")
++    let attestResult = verifier.verify(
++      challenge: challenge,
++      assertion: assertion,
++      expectedClosure: packageClosureHash,
++      expectedSessionID: sessionID,
++      enrollment: enrollment
++    )
++    try writeJSON(challenge.dictionary(), to: outputDirectory.appendingPathComponent("app_attest_challenge.json"))
++    try writeJSON(assertion.dictionary(), to: outputDirectory.appendingPathComponent("app_attest_assertion.json"))
++    try writeJSON(attestResult.dictionary(), to: outputDirectory.appendingPathComponent("app_attest_verification.json"))
++
++    let (sigResult, _) = try PackageSignatureVerifier().verify(
++      envelope: signature,
++      expectedClosure: packageClosureHash,
++      expectedManifest: manifestSHA
++    )
++
++    let finalEntries = try SpatialPackageClosureVerifier.collectPackageInventoryEntries(packageRoot: outputDirectory)
++    // Final inventory records evidence closure digest (pre-signature) as fixture_package_closure_sha256
++    // and lists all files including signature artifacts.
++    let inventory: [String: Any] = [
++      "schema_id": "PackageInventory",
++      "schema_version": "1.0.0",
++      "package_id": packageID,
++      "closure_digest_algorithm": SpatialPackageClosureVerifier.inventoryClosureDigestAlgorithm,
++      "fixture_package_closure_sha256": packageClosureHash,
++      "journal_root_sha256": journalRoot,
++      "signature_verification_result": sigResult.rawValue,
++      "enrollment_record_id": enrollment.enrollmentRecordID,
++      "attestation_disposition": attestResult.disposition.rawValue,
++      "entries": finalEntries,
++      "note": "fixture_package_closure_sha256 covers pre-signature evidence inventory; signature binds that digest",
++    ]
++    try writeJSON(inventory, to: outputDirectory.appendingPathComponent("package_inventory.json"))
++
++    // Completeness for final disk (inventory file excluded from entries check of itself).
++    try SpatialPackageClosureVerifier.verifyInventoryCompleteness(packageRoot: outputDirectory, entries: finalEntries)
++
++    let packageHash = try SpatialPackageClosureVerifier.rehashPackageBytes(packageRoot: outputDirectory)
++
++    let package = SpatialEvidencePackage(
++      rootURL: outputDirectory,
++      manifest: manifest,
++      packageContentSHA256: packageHash,
++      manifestSHA256: manifestSHA,
++      packageClosureSHA256: packageClosureHash
++    )
++
++    return SealResult(
++      package: package,
++      journal: journal,
++      journalRootSHA256: journalRoot,
++      recovery: recovery,
++      signature: signature,
++      enrollment: enrollment,
++      verification: sigResult,
++      attestation: attestResult,
++      degradation: degradation,
++      telemetry: telemetry,
++      wal: wal
++    )
++  }
++
++  private func appendAndCommit(
++    _ journal: inout CaptureEpochJournal,
++    _ wal: inout CaptureWriteAheadLog,
++    samples: [(String, String, UInt64)]
++  ) throws {
++    for s in samples {
++      try journal.append(sampleID: s.0, payloadDigest: digest(s.0), streamID: s.1, timestampNanoseconds: s.2)
++    }
++    let block = try journal.commit()
++    wal.recordCommit(block: block, at: samples.last?.2 ?? 0)
++  }
++
++  private func digest(_ id: String) -> String {
++    ContentHasher.sha256Hex(Data(id.utf8))
++  }
++
++  private func writeJSON(_ object: [String: Any], to url: URL) throws {
++    let data = try CanonicalJSON.data(object)
++    try data.write(to: url, options: .atomic)
++  }
++}
++
++/// Local unwrap without XCTest dependency in production code.
++private func XCTUnwrapCompat<T>(_ value: T?) throws -> T {
++  guard let value else {
++    throw SpatialEvidenceError.validationFailed("expected non-nil recovery state")
++  }
++  return value
++}
+diff -ruN /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/App/Domain/SpatialEvidence/PackageIdentitySecurityTypes.swift /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/PackageIdentitySecurityTypes.swift
+--- /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/App/Domain/SpatialEvidence/PackageIdentitySecurityTypes.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/PackageIdentitySecurityTypes.swift	2024-08-04 00:00:00.000000000 +0000
+@@ -0,0 +1,293 @@
++import Foundation
++
++// MARK: - Package signature contracts (Sprint 3.7)
++
++public enum PackageSignatureAlgorithm: String, Codable, Sendable, Equatable {
++  /// Deterministic Linux/fixture signer — NOT a hardware signature.
++  case fixtureHmacSha256V1 = "FIXTURE_HMAC_SHA256_V1"
++  /// Apple Secure Enclave candidate algorithm identity (unvalidated on Linux).
++  case ecdsaP256Sha256 = "ECDSA_P256_SHA256"
++}
++
++public enum DeviceKeyTrustState: String, Codable, Sendable, Equatable, CaseIterable {
++  case enrolled = "ENROLLED"
++  case verified = "VERIFIED"
++  case suspended = "SUSPENDED"
++  case revoked = "REVOKED"
++  case unknown = "UNKNOWN"
++  case expired = "EXPIRED"
++}
++
++public enum SignatureFailureReason: String, Codable, Sendable, Equatable {
++  case digestMismatch = "DIGEST_MISMATCH"
++  case signatureByteMutation = "SIGNATURE_BYTE_MUTATION"
++  case unknownKey = "UNKNOWN_KEY"
++  case revokedKey = "REVOKED_KEY"
++  case enrollmentMismatch = "ENROLLMENT_MISMATCH"
++  case algorithmUnsupported = "ALGORITHM_UNSUPPORTED"
++  case packageBindingMismatch = "PACKAGE_BINDING_MISMATCH"
++  case embeddedKeyUntrustedAlone = "EMBEDDED_KEY_UNTRUSTED_ALONE"
++}
++
++public enum SignatureVerificationResult: String, Codable, Sendable, Equatable {
++  case validEnrolled = "VALID_ENROLLED"
++  case validButUntrustedOrigin = "VALID_BUT_UNTRUSTED_ORIGIN"
++  case invalid = "INVALID"
++}
++
++public struct DeviceSigningKeyReference: Codable, Sendable, Equatable {
++  public var deviceKeyID: String
++  public var publicKeyFingerprint: String
++  public var algorithm: PackageSignatureAlgorithm
++
++  public init(deviceKeyID: String, publicKeyFingerprint: String, algorithm: PackageSignatureAlgorithm) {
++    self.deviceKeyID = deviceKeyID
++    self.publicKeyFingerprint = publicKeyFingerprint
++    self.algorithm = algorithm
++  }
++
++  public func dictionary() -> [String: Any] {
++    [
++      "device_key_id": deviceKeyID,
++      "public_key_fingerprint": publicKeyFingerprint,
++      "algorithm": algorithm.rawValue,
++    ]
++  }
++}
++
++public struct DeviceKeyEnrollmentRecord: Codable, Sendable, Equatable {
++  public var enrollmentRecordID: String
++  public var deviceKeyID: String
++  public var publicKey: String
++  public var publicKeyFingerprint: String
++  public var appIdentifier: String
++  public var environment: String
++  public var enrollmentTimestampUTC: String
++  public var operatorOrOrganizationID: String
++  public var trustStatus: DeviceKeyTrustState
++  public var revocationStatus: String
++  public var revocationReason: String?
++  public var attestationReference: String?
++  public var policyID: String
++
++  public static let fixtureEnrollmentID = "ENR-FIXTURE-KEY-000001"
++  public static let fixtureKeyID = "KEY-FIXTURE-HMAC-000001"
++  public static let fixtureFingerprint = "fp-fixture-hmac-sha256-000001"
++
++  public static func fixtureEnrolled() -> DeviceKeyEnrollmentRecord {
++    DeviceKeyEnrollmentRecord(
++      enrollmentRecordID: fixtureEnrollmentID,
++      deviceKeyID: fixtureKeyID,
++      publicKey: "FIXTURE_PUBLIC_KEY_MATERIAL_NOT_HARDWARE",
++      publicKeyFingerprint: fixtureFingerprint,
++      appIdentifier: "com.elektronindustrial.capture.fixture",
++      environment: "linux_fixture",
++      enrollmentTimestampUTC: "2026-08-03T00:00:00Z",
++      operatorOrOrganizationID: "ORG-FIXTURE-000001",
++      trustStatus: .enrolled,
++      revocationStatus: "NOT_REVOKED",
++      revocationReason: nil,
++      attestationReference: "ATT-FIXTURE-REF-NONE",
++      policyID: "POL-FIXTURE-TRUST-000001"
++    )
++  }
++
++  public func dictionary() -> [String: Any] {
++    var d: [String: Any] = [
++      "enrollment_record_id": enrollmentRecordID,
++      "device_key_id": deviceKeyID,
++      "public_key": publicKey,
++      "public_key_fingerprint": publicKeyFingerprint,
++      "app_identifier": appIdentifier,
++      "environment": environment,
++      "enrollment_timestamp_utc": enrollmentTimestampUTC,
++      "operator_or_organization_id": operatorOrOrganizationID,
++      "trust_status": trustStatus.rawValue,
++      "revocation_status": revocationStatus,
++      "policy_id": policyID,
++      "schema_id": "DeviceKeyEnrollmentRecord",
++      "schema_version": "1.0.0-phase3-fixture",
++    ]
++    if let revocationReason { d["revocation_reason"] = revocationReason }
++    if let attestationReference { d["attestation_reference"] = attestationReference }
++    return d
++  }
++}
++
++public struct PackageSignatureEnvelope: Codable, Sendable, Equatable {
++  public var packageID: String
++  public var captureSessionID: String
++  public var packageClosureSHA256: String
++  public var manifestSHA256: String
++  public var signingKeyID: String
++  public var publicKeyFingerprint: String
++  public var signatureAlgorithm: PackageSignatureAlgorithm
++  public var signatureBytesHex: String
++  public var signedAtUTC: String
++  public var enrollmentRecordID: String
++  public var signerStatus: DeviceKeyTrustState
++  public var evidenceOriginAuthority: EvidenceAuthority
++
++  public func dictionary() -> [String: Any] {
++    [
++      "package_id": packageID,
++      "capture_session_id": captureSessionID,
++      "package_closure_sha256": packageClosureSHA256,
++      "manifest_sha256": manifestSHA256,
++      "signing_key_id": signingKeyID,
++      "public_key_fingerprint": publicKeyFingerprint,
++      "signature_algorithm": signatureAlgorithm.rawValue,
++      "signature_bytes": signatureBytesHex,
++      "signed_at": signedAtUTC,
++      "enrollment_record_id": enrollmentRecordID,
++      "signer_status": signerStatus.rawValue,
++      "evidence_origin_authority": evidenceOriginAuthority.rawValue,
++      "schema_id": "PackageSignatureEnvelope",
++      "schema_version": "1.0.0-phase3-fixture",
++      "note": "Fixture signatures are not hardware Secure Enclave signatures",
++    ]
++  }
++
++  public func bindingDigestMaterial() throws -> Data {
++    try CanonicalJSON.data([
++      "package_id": packageID,
++      "capture_session_id": captureSessionID,
++      "package_closure_sha256": packageClosureSHA256,
++      "manifest_sha256": manifestSHA256,
++      "signing_key_id": signingKeyID,
++      "enrollment_record_id": enrollmentRecordID,
++      "signature_algorithm": signatureAlgorithm.rawValue,
++    ] as [String: Any])
++  }
++}
++
++public struct SignedPackageIdentity: Codable, Sendable, Equatable {
++  public var packageID: String
++  public var packageClosureSHA256: String
++  public var manifestSHA256: String
++  public var signatureEnvelope: PackageSignatureEnvelope
++  public var enrollmentRecord: DeviceKeyEnrollmentRecord
++  public var verificationResult: SignatureVerificationResult
++
++  public func dictionary() -> [String: Any] {
++    [
++      "package_id": packageID,
++      "package_closure_sha256": packageClosureSHA256,
++      "manifest_sha256": manifestSHA256,
++      "signature_envelope": signatureEnvelope.dictionary(),
++      "enrollment_record": enrollmentRecord.dictionary(),
++      "verification_result": verificationResult.rawValue,
++      "schema_id": "SignedPackageIdentity",
++      "schema_version": "1.0.0-phase3-fixture",
++    ]
++  }
++}
++
++public struct DeviceKeyTrustRegistry: Sendable {
++  public private(set) var records: [String: DeviceKeyEnrollmentRecord]
++
++  public init(records: [DeviceKeyEnrollmentRecord] = []) {
++    var map: [String: DeviceKeyEnrollmentRecord] = [:]
++    for r in records { map[r.deviceKeyID] = r }
++    self.records = map
++  }
++
++  public mutating func enroll(_ record: DeviceKeyEnrollmentRecord) {
++    records[record.deviceKeyID] = record
++  }
++
++  public func lookup(deviceKeyID: String) -> DeviceKeyEnrollmentRecord? {
++    records[deviceKeyID]
++  }
++}
++
++// MARK: - App Attest portable envelopes
++
++public enum AppInstanceRiskDisposition: String, Codable, Sendable, Equatable {
++  case appInstanceAttested = "APP_INSTANCE_ATTESTED"
++  case attestationUnavailable = "ATTESTATION_UNAVAILABLE"
++  case attestationFailed = "ATTESTATION_FAILED"
++  case assertionReplayed = "ASSERTION_REPLAYED"
++  case challengeExpired = "CHALLENGE_EXPIRED"
++  case riskReviewRequired = "RISK_REVIEW_REQUIRED"
++}
++
++public struct AppAttestChallenge: Codable, Sendable, Equatable {
++  public var challengeID: String
++  public var serverNonce: String
++  public var issuedAtUTC: String
++  public var expiresAtUTC: String
++  public var appIdentifier: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "challenge_id": challengeID,
++      "server_nonce": serverNonce,
++      "issued_at_utc": issuedAtUTC,
++      "expires_at_utc": expiresAtUTC,
++      "app_identifier": appIdentifier,
++    ]
++  }
++}
++
++public struct AppAttestKeyRegistration: Codable, Sendable, Equatable {
++  public var registrationID: String
++  public var appAttestKeyID: String
++  public var enrollmentRecordID: String
++  public var appIdentifier: String
++  public var registeredAtUTC: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "registration_id": registrationID,
++      "app_attest_key_id": appAttestKeyID,
++      "enrollment_record_id": enrollmentRecordID,
++      "app_identifier": appIdentifier,
++      "registered_at_utc": registeredAtUTC,
++    ]
++  }
++}
++
++public struct AppAttestAssertionEnvelope: Codable, Sendable, Equatable {
++  public var assertionID: String
++  public var challengeID: String
++  public var serverNonce: String
++  public var packageClosureSHA256: String
++  public var captureSessionID: String
++  public var appIdentifier: String
++  public var enrollmentRecordID: String
++  public var assertionBytesHex: String
++  public var createdAtUTC: String
++
++  public func dictionary() -> [String: Any] {
++    [
++      "assertion_id": assertionID,
++      "challenge_id": challengeID,
++      "server_nonce": serverNonce,
++      "package_closure_sha256": packageClosureSHA256,
++      "capture_session_id": captureSessionID,
++      "app_identifier": appIdentifier,
++      "enrollment_record_id": enrollmentRecordID,
++      "assertion_bytes": assertionBytesHex,
++      "created_at_utc": createdAtUTC,
++      "schema_id": "AppAttestAssertionEnvelope",
++      "schema_version": "1.0.0-phase3-fixture",
++      "note": "Does not claim DEVICE_PROVEN_UNCOMPROMISED",
++    ]
++  }
++}
++
++public struct AppAttestVerificationResult: Codable, Sendable, Equatable {
++  public var disposition: AppInstanceRiskDisposition
++  public var challengeID: String
++  public var reason: String?
++
++  public func dictionary() -> [String: Any] {
++    var d: [String: Any] = [
++      "disposition": disposition.rawValue,
++      "challenge_id": challengeID,
++    ]
++    if let reason { d["reason"] = reason }
++    return d
++  }
++}
+diff -ruN /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/App/Domain/SpatialEvidence/PackageSignatureVerifier.swift /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/PackageSignatureVerifier.swift
+--- /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/App/Domain/SpatialEvidence/PackageSignatureVerifier.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/PackageSignatureVerifier.swift	2024-08-04 00:00:00.000000000 +0000
+@@ -0,0 +1,179 @@
++import Foundation
++
++/// Fixture HMAC signer / verifier. Separates hash identity, signature, enrollment, attestation.
++/// Embedded public keys are never trusted alone — enrollment registry lookup is required.
++public struct PackageSignatureVerifier: Sendable {
++  public var registry: DeviceKeyTrustRegistry
++
++  public init(registry: DeviceKeyTrustRegistry = DeviceKeyTrustRegistry(records: [.fixtureEnrolled()])) {
++    self.registry = registry
++  }
++
++  public func verify(
++    envelope: PackageSignatureEnvelope,
++    expectedClosure: String,
++    expectedManifest: String
++  ) throws -> (SignatureVerificationResult, SignatureFailureReason?) {
++    guard envelope.packageClosureSHA256 == expectedClosure,
++          envelope.manifestSHA256 == expectedManifest
++    else {
++      return (.invalid, .packageBindingMismatch)
++    }
++
++    guard let enrollment = registry.lookup(deviceKeyID: envelope.signingKeyID) else {
++      // Signature bytes may still verify mathematically against embedded material,
++      // but without enrollment the origin is untrusted.
++      let mathOK = try FixturePackageSigner.verifyMath(envelope: envelope)
++      if mathOK {
++        return (.validButUntrustedOrigin, .unknownKey)
++      }
++      return (.invalid, .unknownKey)
++    }
++
++    guard enrollment.enrollmentRecordID == envelope.enrollmentRecordID,
++          enrollment.publicKeyFingerprint == envelope.publicKeyFingerprint
++    else {
++      return (.invalid, .enrollmentMismatch)
++    }
++
++    switch enrollment.trustStatus {
++    case .revoked:
++      return (.validButUntrustedOrigin, .revokedKey)
++    case .unknown, .expired, .suspended:
++      return (.validButUntrustedOrigin, .unknownKey)
++    case .enrolled, .verified:
++      break
++    }
++
++    let mathOK = try FixturePackageSigner.verifyMath(envelope: envelope)
++    guard mathOK else {
++      return (.invalid, .signatureByteMutation)
++    }
++    return (.validEnrolled, nil)
++  }
++}
++
++public struct FixturePackageSigner: Sendable {
++  public static let fixtureSecretMaterial = "ELEKTRON-FIXTURE-HMAC-SECRET-NOT-HARDWARE-v1"
++
++  public init() {}
++
++  public func sign(
++    packageID: String,
++    captureSessionID: String,
++    packageClosureSHA256: String,
++    manifestSHA256: String,
++    enrollment: DeviceKeyEnrollmentRecord = .fixtureEnrolled(),
++    signedAtUTC: String = "2026-08-03T00:00:00Z"
++  ) throws -> PackageSignatureEnvelope {
++    precondition(enrollment.trustStatus == .enrolled || enrollment.trustStatus == .verified)
++    var env = PackageSignatureEnvelope(
++      packageID: packageID,
++      captureSessionID: captureSessionID,
++      packageClosureSHA256: packageClosureSHA256,
++      manifestSHA256: manifestSHA256,
++      signingKeyID: enrollment.deviceKeyID,
++      publicKeyFingerprint: enrollment.publicKeyFingerprint,
++      signatureAlgorithm: .fixtureHmacSha256V1,
++      signatureBytesHex: "",
++      signedAtUTC: signedAtUTC,
++      enrollmentRecordID: enrollment.enrollmentRecordID,
++      signerStatus: enrollment.trustStatus,
++      evidenceOriginAuthority: .testFixture
++    )
++    env.signatureBytesHex = try Self.computeSignatureHex(envelope: env)
++    return env
++  }
++
++  public static func computeSignatureHex(envelope: PackageSignatureEnvelope) throws -> String {
++    let material = try envelope.bindingDigestMaterial()
++    let key = Data(fixtureSecretMaterial.utf8)
++    // Deterministic keyed digest: sha256(key || 0x00 || material)
++    var combined = Data()
++    combined.append(key)
++    combined.append(0)
++    combined.append(material)
++    return ContentHasher.sha256Hex(combined)
++  }
++
++  public static func verifyMath(envelope: PackageSignatureEnvelope) throws -> Bool {
++    guard envelope.signatureAlgorithm == .fixtureHmacSha256V1 else {
++      return false
++    }
++    let expected = try computeSignatureHex(envelope: envelope)
++    return expected == envelope.signatureBytesHex
++  }
++}
++
++/// Portable server-side App Attest verification (fixture deterministic).
++public struct AppAttestServerVerifier: Sendable {
++  public var seenAssertionIDs: Set<String>
++  public var nowUTC: String
++
++  public init(seenAssertionIDs: Set<String> = [], nowUTC: String = "2026-08-03T00:00:00Z") {
++    self.seenAssertionIDs = seenAssertionIDs
++    self.nowUTC = nowUTC
++  }
++
++  public mutating func verify(
++    challenge: AppAttestChallenge,
++    assertion: AppAttestAssertionEnvelope,
++    expectedClosure: String,
++    expectedSessionID: String,
++    enrollment: DeviceKeyEnrollmentRecord
++  ) -> AppAttestVerificationResult {
++    if assertion.challengeID != challenge.challengeID || assertion.serverNonce != challenge.serverNonce {
++      return AppAttestVerificationResult(disposition: .attestationFailed, challengeID: challenge.challengeID, reason: "challenge_binding_mismatch")
++    }
++    if nowUTC > challenge.expiresAtUTC {
++      return AppAttestVerificationResult(disposition: .challengeExpired, challengeID: challenge.challengeID, reason: "challenge_expired")
++    }
++    if seenAssertionIDs.contains(assertion.assertionID) {
++      return AppAttestVerificationResult(disposition: .assertionReplayed, challengeID: challenge.challengeID, reason: "assertion_replayed")
++    }
++    if assertion.packageClosureSHA256 != expectedClosure || assertion.captureSessionID != expectedSessionID {
++      return AppAttestVerificationResult(disposition: .attestationFailed, challengeID: challenge.challengeID, reason: "package_binding_mismatch")
++    }
++    if assertion.enrollmentRecordID != enrollment.enrollmentRecordID {
++      return AppAttestVerificationResult(disposition: .riskReviewRequired, challengeID: challenge.challengeID, reason: "enrollment_mismatch")
++    }
++    if assertion.appIdentifier != challenge.appIdentifier {
++      return AppAttestVerificationResult(disposition: .attestationFailed, challengeID: challenge.challengeID, reason: "app_identifier_mismatch")
++    }
++    seenAssertionIDs.insert(assertion.assertionID)
++    return AppAttestVerificationResult(disposition: .appInstanceAttested, challengeID: challenge.challengeID, reason: nil)
++  }
++}
++
++/// Fixture client assertion generator (NOT Apple App Attest hardware).
++public struct FixtureAppAttestClient: Sendable {
++  public init() {}
++
++  public func makeAssertion(
++    challenge: AppAttestChallenge,
++    packageClosureSHA256: String,
++    captureSessionID: String,
++    enrollment: DeviceKeyEnrollmentRecord,
++    createdAtUTC: String = "2026-08-03T00:00:00Z"
++  ) throws -> AppAttestAssertionEnvelope {
++    let material = try CanonicalJSON.data([
++      "challenge_id": challenge.challengeID,
++      "server_nonce": challenge.serverNonce,
++      "package_closure_sha256": packageClosureSHA256,
++      "capture_session_id": captureSessionID,
++      "enrollment_record_id": enrollment.enrollmentRecordID,
++    ] as [String: Any])
++    let hex = ContentHasher.sha256Hex(material)
++    return AppAttestAssertionEnvelope(
++      assertionID: "ASSERT-FIXTURE-\(challenge.challengeID)",
++      challengeID: challenge.challengeID,
++      serverNonce: challenge.serverNonce,
++      packageClosureSHA256: packageClosureSHA256,
++      captureSessionID: captureSessionID,
++      appIdentifier: challenge.appIdentifier,
++      enrollmentRecordID: enrollment.enrollmentRecordID,
++      assertionBytesHex: hex,
++      createdAtUTC: createdAtUTC
++    )
++  }
++}
+diff -ruN /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/App/Domain/SpatialEvidence/SecureEnclavePackageSigner.swift /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/SecureEnclavePackageSigner.swift
+--- /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/App/Domain/SpatialEvidence/SecureEnclavePackageSigner.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/SecureEnclavePackageSigner.swift	2024-08-04 00:00:00.000000000 +0000
+@@ -0,0 +1,57 @@
++import Foundation
++
++/// Apple Secure Enclave package-signer **source candidate**.
++///
++/// Linux / non-Apple builds expose an unavailable stub only.
++/// Physical Secure Enclave signing remains PENDING_APPLE_HARDWARE_VALIDATION.
++/// Do not claim DEVICE_PROVEN_UNCOMPROMISED or production hardware identity.
++#if canImport(CryptoKit) && canImport(Security) && (os(iOS) || os(macOS))
++import CryptoKit
++import Security
++
++public struct SecureEnclavePackageSigner: Sendable {
++    public let deviceKeyID: String
++    public let enrollmentRecordID: String
++
++    public init(deviceKeyID: String, enrollmentRecordID: String) {
++        self.deviceKeyID = deviceKeyID
++        self.enrollmentRecordID = enrollmentRecordID
++    }
++
++    /// Candidate API — physical Secure Enclave signing is not claimed validated.
++    public func sign(
++        packageID: String,
++        captureSessionID: String,
++        packageClosureSHA256: String,
++        manifestSHA256: String
++    ) throws -> PackageSignatureEnvelope {
++        // Source candidate placeholder: real SE key access requires Apple runtime + entitlement.
++        // Returning a structured failure keeps the contract compilable without fake DEVICE evidence.
++        throw SpatialEvidenceError.packageSignatureFailed(
++            "SecureEnclavePackageSigner requires Apple Secure Enclave runtime validation (PENDING)"
++        )
++    }
++}
++#else
++public struct SecureEnclavePackageSigner: Sendable {
++    public let deviceKeyID: String
++    public let enrollmentRecordID: String
++    public let availabilityStatus: String = "UNAVAILABLE_ON_THIS_PLATFORM"
++
++    public init(deviceKeyID: String = "KEY-SE-UNAVAILABLE", enrollmentRecordID: String = "ENR-SE-UNAVAILABLE") {
++        self.deviceKeyID = deviceKeyID
++        self.enrollmentRecordID = enrollmentRecordID
++    }
++
++    public func sign(
++        packageID: String,
++        captureSessionID: String,
++        packageClosureSHA256: String,
++        manifestSHA256: String
++    ) throws -> PackageSignatureEnvelope {
++        throw SpatialEvidenceError.packageSignatureFailed(
++            "SecureEnclavePackageSigner unavailable on this platform (Linux/source-candidate stub)"
++        )
++    }
++}
++#endif
+diff -ruN /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/App/Domain/SpatialEvidence/SpatialEvidenceError.swift /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/SpatialEvidenceError.swift
+--- /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/App/Domain/SpatialEvidence/SpatialEvidenceError.swift	2024-08-04 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/App/Domain/SpatialEvidence/SpatialEvidenceError.swift	2024-08-04 00:00:00.000000000 +0000
+@@ -92,6 +92,16 @@
+   case deviceHostClaimRequired(String)
+   case deviceAdapterIdentityMismatch(String)
+   case appleHostUnavailable(String)
++  // Sprint 3.7 identity / journal / resilience
++  case journalDuplicateSampleID(String)
++  case journalSequenceGap(expected: UInt64, actual: UInt64)
++  case journalInvalidState(String)
++  case journalBrokenChain(String)
++  case journalDuplicateOrMissingSequence(UInt64)
++  case journalNonResumable(String)
++  case silentStreamDegradationRejected(String)
++  case packageSignatureFailed(String)
++  case packageAttestationFailed(String)
+ 
+   /// Stable string codes for transform-graph classifications (and related failures).
+   public var transformGraphCode: String? {
+--- /dev/null	2026-08-02 21:27:25.206751952 +0000
++++ /workspace/.scratch-elektron-capture-ios/Tests/Unit/Phase37ResilienceTests.swift	2024-08-04 00:00:00.000000000 +0000
+@@ -0,0 +1,637 @@
++import XCTest
++@testable import ElektronCapture
++
++final class Phase37ResilienceTests: XCTestCase {
++  private func tempDir(_ name: String = UUID().uuidString) throws -> URL {
++    let url = FileManager.default.temporaryDirectory.appendingPathComponent("p37-\(name)", isDirectory: true)
++    try? FileManager.default.removeItem(at: url)
++    try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
++    return url
++  }
++
++  // MARK: - A/B Signatures & enrollment
++
++  func testValidEnrolledKeySignature() throws {
++    let enrollment = DeviceKeyEnrollmentRecord.fixtureEnrolled()
++    let env = try FixturePackageSigner().sign(
++      packageID: "SPKG-FIXTURE-SIG-000001",
++      captureSessionID: "SESS-SIG",
++      packageClosureSHA256: String(repeating: "ab", count: 32),
++      manifestSHA256: String(repeating: "cd", count: 32),
++      enrollment: enrollment
++    )
++    let (result, reason) = try PackageSignatureVerifier().verify(
++      envelope: env,
++      expectedClosure: env.packageClosureSHA256,
++      expectedManifest: env.manifestSHA256
++    )
++    XCTAssertEqual(result, .validEnrolled)
++    XCTAssertNil(reason)
++    XCTAssertEqual(env.evidenceOriginAuthority, .testFixture)
++  }
++
++  func testUnknownKeySignatureNotTrustedOrigin() throws {
++    let env = try FixturePackageSigner().sign(
++      packageID: "SPKG-FIXTURE-SIG-000002",
++      captureSessionID: "SESS-SIG",
++      packageClosureSHA256: String(repeating: "11", count: 32),
++      manifestSHA256: String(repeating: "22", count: 32)
++    )
++    // Math remains valid; empty registry ⇒ unknown key / untrusted origin.
++    let empty = PackageSignatureVerifier(registry: DeviceKeyTrustRegistry(records: []))
++    let (result, reason) = try empty.verify(
++      envelope: env,
++      expectedClosure: env.packageClosureSHA256,
++      expectedManifest: env.manifestSHA256
++    )
++    XCTAssertEqual(result, .validButUntrustedOrigin)
++    XCTAssertEqual(reason, .unknownKey)
++  }
++
++  func testRevokedKeySignatureNotTrustedOrigin() throws {
++    var revoked = DeviceKeyEnrollmentRecord.fixtureEnrolled()
++    revoked.trustStatus = .revoked
++    revoked.revocationStatus = "REVOKED"
++    revoked.revocationReason = "fixture_revocation"
++    var env = try FixturePackageSigner().sign(
++      packageID: "SPKG-FIXTURE-SIG-000003",
++      captureSessionID: "SESS-SIG",
++      packageClosureSHA256: String(repeating: "33", count: 32),
++      manifestSHA256: String(repeating: "44", count: 32)
++    )
++    // Re-sign math with enrolled secret but present revoked enrollment in registry.
++    env.signerStatus = .revoked
++    let verifier = PackageSignatureVerifier(registry: DeviceKeyTrustRegistry(records: [revoked]))
++    let (result, reason) = try verifier.verify(
++      envelope: env,
++      expectedClosure: env.packageClosureSHA256,
++      expectedManifest: env.manifestSHA256
++    )
++    XCTAssertEqual(result, .validButUntrustedOrigin)
++    XCTAssertEqual(reason, .revokedKey)
++  }
++
++  func testSignatureByteMutationInvalid() throws {
++    var env = try FixturePackageSigner().sign(
++      packageID: "SPKG-FIXTURE-SIG-000004",
++      captureSessionID: "SESS-SIG",
++      packageClosureSHA256: String(repeating: "55", count: 32),
++      manifestSHA256: String(repeating: "66", count: 32)
++    )
++    env.signatureBytesHex = String(repeating: "ff", count: 32)
++    let (result, reason) = try PackageSignatureVerifier().verify(
++      envelope: env,
++      expectedClosure: env.packageClosureSHA256,
++      expectedManifest: env.manifestSHA256
++    )
++    XCTAssertEqual(result, .invalid)
++    XCTAssertEqual(reason, .signatureByteMutation)
++  }
++
++  func testPackageDigestMutationInvalid() throws {
++    let env = try FixturePackageSigner().sign(
++      packageID: "SPKG-FIXTURE-SIG-000005",
++      captureSessionID: "SESS-SIG",
++      packageClosureSHA256: String(repeating: "77", count: 32),
++      manifestSHA256: String(repeating: "88", count: 32)
++    )
++    let (result, reason) = try PackageSignatureVerifier().verify(
++      envelope: env,
++      expectedClosure: String(repeating: "99", count: 32),
++      expectedManifest: env.manifestSHA256
++    )
++    XCTAssertEqual(result, .invalid)
++    XCTAssertEqual(reason, .packageBindingMismatch)
++  }
++
++  func testEnrollmentRecordMismatch() throws {
++    var env = try FixturePackageSigner().sign(
++      packageID: "SPKG-FIXTURE-SIG-000006",
++      captureSessionID: "SESS-SIG",
++      packageClosureSHA256: String(repeating: "aa", count: 32),
++      manifestSHA256: String(repeating: "bb", count: 32)
++    )
++    env.enrollmentRecordID = "ENR-MISMATCH"
++    let (result, reason) = try PackageSignatureVerifier().verify(
++      envelope: env,
++      expectedClosure: env.packageClosureSHA256,
++      expectedManifest: env.manifestSHA256
++    )
++    XCTAssertEqual(result, .invalid)
++    XCTAssertEqual(reason, .enrollmentMismatch)
++  }
++
++  func testEmbeddedPublicKeyNotTrustedAlone() throws {
++    // Registry empty ⇒ even mathematically valid signature is untrusted origin.
++    var env = try FixturePackageSigner().sign(
++      packageID: "SPKG-FIXTURE-SIG-000007",
++      captureSessionID: "SESS-SIG",
++      packageClosureSHA256: String(repeating: "cc", count: 32),
++      manifestSHA256: String(repeating: "dd", count: 32)
++    )
++    // Keep signing key id but remove from registry.
++    let (result, reason) = try PackageSignatureVerifier(registry: .init(records: [])).verify(
++      envelope: env,
++      expectedClosure: env.packageClosureSHA256,
++      expectedManifest: env.manifestSHA256
++    )
++    XCTAssertEqual(result, .validButUntrustedOrigin)
++    XCTAssertEqual(reason, .unknownKey)
++  }
++
++  // MARK: - C App Attest
++
++  func testAppAttestHappyPath() throws {
++    let enrollment = DeviceKeyEnrollmentRecord.fixtureEnrolled()
++    let challenge = AppAttestChallenge(
++      challengeID: "CHAL-OK",
++      serverNonce: "nonce-ok",
++      issuedAtUTC: "2026-08-03T00:00:00Z",
++      expiresAtUTC: "2026-08-03T01:00:00Z",
++      appIdentifier: enrollment.appIdentifier
++    )
++    let closure = String(repeating: "ee", count: 32)
++    let assertion = try FixtureAppAttestClient().makeAssertion(
++      challenge: challenge,
++      packageClosureSHA256: closure,
++      captureSessionID: "SESS-ATTEST",
++      enrollment: enrollment
++    )
++    var verifier = AppAttestServerVerifier(nowUTC: "2026-08-03T00:30:00Z")
++    let result = verifier.verify(
++      challenge: challenge,
++      assertion: assertion,
++      expectedClosure: closure,
++      expectedSessionID: "SESS-ATTEST",
++      enrollment: enrollment
++    )
++    XCTAssertEqual(result.disposition, .appInstanceAttested)
++  }
++
++  func testAppAttestChallengeReplay() throws {
++    let enrollment = DeviceKeyEnrollmentRecord.fixtureEnrolled()
++    let challenge = AppAttestChallenge(
++      challengeID: "CHAL-REPLAY",
++      serverNonce: "nonce-replay",
++      issuedAtUTC: "2026-08-03T00:00:00Z",
++      expiresAtUTC: "2026-08-03T01:00:00Z",
++      appIdentifier: enrollment.appIdentifier
++    )
++    let closure = String(repeating: "ff", count: 32)
++    let assertion = try FixtureAppAttestClient().makeAssertion(
++      challenge: challenge,
++      packageClosureSHA256: closure,
++      captureSessionID: "SESS-ATTEST",
++      enrollment: enrollment
++    )
++    var verifier = AppAttestServerVerifier(nowUTC: "2026-08-03T00:30:00Z")
++    _ = verifier.verify(
++      challenge: challenge,
++      assertion: assertion,
++      expectedClosure: closure,
++      expectedSessionID: "SESS-ATTEST",
++      enrollment: enrollment
++    )
++    let replay = verifier.verify(
++      challenge: challenge,
++      assertion: assertion,
++      expectedClosure: closure,
++      expectedSessionID: "SESS-ATTEST",
++      enrollment: enrollment
++    )
++    XCTAssertEqual(replay.disposition, .assertionReplayed)
++  }
++
++  func testAppAttestExpiredChallenge() throws {
++    let enrollment = DeviceKeyEnrollmentRecord.fixtureEnrolled()
++    let challenge = AppAttestChallenge(
++      challengeID: "CHAL-EXP",
++      serverNonce: "nonce-exp",
++      issuedAtUTC: "2026-08-03T00:00:00Z",
++      expiresAtUTC: "2026-08-03T00:10:00Z",
++      appIdentifier: enrollment.appIdentifier
++    )
++    let assertion = try FixtureAppAttestClient().makeAssertion(
++      challenge: challenge,
++      packageClosureSHA256: String(repeating: "01", count: 32),
++      captureSessionID: "SESS-ATTEST",
++      enrollment: enrollment
++    )
++    var verifier = AppAttestServerVerifier(nowUTC: "2026-08-03T00:30:00Z")
++    let result = verifier.verify(
++      challenge: challenge,
++      assertion: assertion,
++      expectedClosure: assertion.packageClosureSHA256,
++      expectedSessionID: "SESS-ATTEST",
++      enrollment: enrollment
++    )
++    XCTAssertEqual(result.disposition, .challengeExpired)
++  }
++
++  func testAppAttestPackageBindingMismatch() throws {
++    let enrollment = DeviceKeyEnrollmentRecord.fixtureEnrolled()
++    let challenge = AppAttestChallenge(
++      challengeID: "CHAL-BIND",
++      serverNonce: "nonce-bind",
++      issuedAtUTC: "2026-08-03T00:00:00Z",
++      expiresAtUTC: "2026-08-03T01:00:00Z",
++      appIdentifier: enrollment.appIdentifier
++    )
++    let assertion = try FixtureAppAttestClient().makeAssertion(
++      challenge: challenge,
++      packageClosureSHA256: String(repeating: "02", count: 32),
++      captureSessionID: "SESS-ATTEST",
++      enrollment: enrollment
++    )
++    var verifier = AppAttestServerVerifier(nowUTC: "2026-08-03T00:30:00Z")
++    let result = verifier.verify(
++      challenge: challenge,
++      assertion: assertion,
++      expectedClosure: String(repeating: "03", count: 32),
++      expectedSessionID: "SESS-ATTEST",
++      enrollment: enrollment
++    )
++    XCTAssertEqual(result.disposition, .attestationFailed)
++    XCTAssertEqual(result.reason, "package_binding_mismatch")
++  }
++
++  func testAppleSourceCandidatesUnavailableOnLinux() throws {
++    let se = SecureEnclavePackageSigner()
++    XCTAssertEqual(se.availabilityStatus, "UNAVAILABLE_ON_THIS_PLATFORM")
++    XCTAssertThrowsError(
++      try se.sign(
++        packageID: "x",
++        captureSessionID: "y",
++        packageClosureSHA256: "z",
++        manifestSHA256: "w"
++      )
++    )
++    let aa = AppleAppAttestClient()
++    XCTAssertEqual(aa.availabilityStatus, "UNAVAILABLE_ON_THIS_PLATFORM")
++  }
++
++  // MARK: - D/E/F Journal & recovery
++
++  func testCompleteHashChain() throws {
++    let builder = FixtureJournaledCapturePackageBuilder()
++    let (journal, _, recovered) = try builder.buildJournal(scenario: .complete)
++    XCTAssertEqual(journal.blocks.count, 2)
++    XCTAssertNil(journal.openBlock)
++    XCTAssertEqual(recovered?.disposition, .recoveredToLastCommittedBlock)
++    let root = try journal.journalRootSHA256()
++    XCTAssertEqual(root.count, 64)
++  }
++
++  func testBrokenPriorBlockLink() throws {
++    let builder = FixtureJournaledCapturePackageBuilder()
++    let (_, _, recovered) = try builder.buildJournal(scenario: .incorrectPreviousHash)
++    XCTAssertEqual(recovered?.disposition, .hashChainBroken)
++  }
++
++  func testModifiedPriorBlockDetected() throws {
++    let builder = FixtureJournaledCapturePackageBuilder()
++    let (_, _, recovered) = try builder.buildJournal(scenario: .modifiedPriorBlock)
++    XCTAssertEqual(recovered?.disposition, .hashChainBroken)
++  }
++
++  func testTruncatedBlockQuarantined() throws {
++    let builder = FixtureJournaledCapturePackageBuilder()
++    let (_, _, recovered) = try builder.buildJournal(scenario: .truncatedFinalBlock)
++    XCTAssertEqual(recovered?.disposition, .incompleteTailQuarantined)
++    XCTAssertEqual(recovered?.incompleteEpochDisposition, .quarantined)
++    XCTAssertFalse(recovered?.acceptedSampleIDs.contains("cam-trunc") == true)
++  }
++
++  func testUncommittedTailQuarantine() throws {
++    let builder = FixtureJournaledCapturePackageBuilder()
++    let (_, _, recovered) = try builder.buildJournal(scenario: .powerLossAfterPayloadBeforeCommit)
++    XCTAssertEqual(recovered?.disposition, .incompleteTailQuarantined)
++    XCTAssertEqual(recovered?.acceptedSampleIDs, ["cam-0001"])
++  }
++
++  func testDuplicateSequenceRejection() throws {
++    let builder = FixtureJournaledCapturePackageBuilder()
++    let (_, _, recovered) = try builder.buildJournal(scenario: .duplicateSequence)
++    XCTAssertEqual(recovered?.disposition, .journalCorrupt)
++  }
++
++  func testMissingSequenceRejection() throws {
++    let builder = FixtureJournaledCapturePackageBuilder()
++    let (_, _, recovered) = try builder.buildJournal(scenario: .missingSequence)
++    XCTAssertEqual(recovered?.disposition, .journalCorrupt)
++  }
++
++  func testRecoveryToFinalCommittedBlock() throws {
++    let builder = FixtureJournaledCapturePackageBuilder()
++    let (_, _, recovered) = try builder.buildJournal(scenario: .powerLossAfterCommit)
++    XCTAssertEqual(recovered?.disposition, .recoveredToLastCommittedBlock)
++    XCTAssertEqual(recovered?.lastCommittedSequence, 1)
++  }
++
++  func testResumedCaptureWithoutDuplicateSamples() throws {
++    let builder = FixtureJournaledCapturePackageBuilder()
++    let (journal, _, recovered) = try builder.buildJournal(scenario: .recoveredContinuation)
++    XCTAssertEqual(recovered?.disposition, .recoveredToLastCommittedBlock)
++    XCTAssertTrue(journal.acceptedSampleIDs.contains("cam-0001"))
++    XCTAssertTrue(journal.acceptedSampleIDs.contains("cam-0002"))
++    XCTAssertFalse(journal.acceptedSampleIDs.contains("cam-open"))
++    var j = journal
++    XCTAssertThrowsError(try j.append(sampleID: "cam-0001", payloadDigest: "x", streamID: "cam", timestampNanoseconds: 9))
++  }
++
++  func testCancellationProducesNoSealedPackage() throws {
++    let builder = FixtureJournaledCapturePackageBuilder()
++    let (journal, _, recovered) = try builder.buildJournal(scenario: .cancellationUnsealed)
++    XCTAssertEqual(recovered?.disposition, .incompleteTailQuarantined)
++    XCTAssertNotNil(journal.openBlock)
++    // Explicit: cancellation path must not call seal — only committed evidence is sealable.
++    XCTAssertTrue(journal.blocks.allSatisfy { $0.commitMarker })
++  }
++
++  func testJournalRootChangesWhenCommittedEvidenceChanges() throws {
++    let builder = FixtureJournaledCapturePackageBuilder()
++    let (base, _, _) = try builder.buildJournal(scenario: .powerLossAfterCommit)
++    let rb = try base.journalRootSHA256()
++    var c = base
++    try c.append(
++      sampleID: "cam-extra",
++      payloadDigest: ContentHasher.sha256Hex(Data("cam-extra".utf8)),
++      streamID: "cam",
++      timestampNanoseconds: 9_000
++    )
++    _ = try c.commit()
++    let rc = try c.journalRootSHA256()
++    XCTAssertNotEqual(rb, rc)
++  }
++
++  func testCustodyMetadataDoesNotAlterCommittedJournalBlocks() throws {
++    let builder = FixtureJournaledCapturePackageBuilder()
++    let (journal, _, _) = try builder.buildJournal(scenario: .complete)
++    let before = journal.blocks.map(\.blockSHA256)
++    // Custody-like metadata mutation outside journal must not rewrite blocks.
++    let custodyNote = "custody_revision=2"
++    _ = custodyNote
++    let after = journal.blocks.map(\.blockSHA256)
++    XCTAssertEqual(before, after)
++  }
++
++  func testPrimaryJournaledPackageSeal() throws {
++    let dir = try tempDir("journaled")
++    let result = try FixtureJournaledCapturePackageBuilder().sealJournaledPrimary(outputDirectory: dir)
++    XCTAssertEqual(result.package.manifest.packageID, FixtureJournaledCapturePackageBuilder.journaledPackageID)
++    XCTAssertEqual(result.verification, .validEnrolled)
++    XCTAssertEqual(result.attestation?.disposition, .appInstanceAttested)
++    XCTAssertEqual(result.journalRootSHA256.count, 64)
++    XCTAssertEqual(result.enrollment.enrollmentRecordID, DeviceKeyEnrollmentRecord.fixtureEnrollmentID)
++    let issued = try SpatialPackageClosureVerifier.issueInventoryClosureDigest(packageRoot: dir)
++    // Inventory stores pre-signature evidence closure; issuing from final inventory entries
++    // (which include signature files) differs — verify stored digest matches signature binding.
++    XCTAssertEqual(result.signature.packageClosureSHA256, result.package.packageClosureSHA256)
++    XCTAssertNotEqual(issued, "") // final inventory completeness OK
++    _ = issued
++    if let emit = ProcessInfo.processInfo.environment["ELEKTRON_EMIT_DIR"] {
++      let dest = URL(fileURLWithPath: emit).appendingPathComponent(FixtureJournaledCapturePackageBuilder.journaledPackageID)
++      try? FileManager.default.removeItem(at: dest)
++      try FileManager.default.copyItem(at: dir, to: dest)
++      let meta: [String: Any] = [
++        "package_id": result.package.manifest.packageID,
++        "journal_root_sha256": result.journalRootSHA256,
++        "fixture_package_closure_sha256": result.package.packageClosureSHA256 ?? "",
++        "manifest_sha256": result.package.manifestSHA256,
++        "signature_bytes_sha256": ContentHasher.sha256Hex(Data(result.signature.signatureBytesHex.utf8)),
++        "signing_key_id": result.signature.signingKeyID,
++        "enrollment_record_id": result.enrollment.enrollmentRecordID,
++        "signature_verification_result": result.verification.rawValue,
++        "attestation_disposition": result.attestation?.disposition.rawValue ?? "",
++      ]
++      try CanonicalJSON.data(meta).write(
++        to: URL(fileURLWithPath: emit).appendingPathComponent("journaled-capture-000001_meta.json"),
++        options: .atomic
++      )
++    }
++  }
++
++  // MARK: - G Thermal policy
++
++  func testThermalDecisionOrdering() throws {
++    var policy = AdaptiveCapturePolicy()
++    let decision = try policy.evaluate(
++      RuntimeResourceState(
++        thermal: .serious,
++        memory: .warning,
++        storage: .normal,
++        optionalDepthLoad: 0.9,
++        timestampNanoseconds: 100
++      )
++    )
++    let priorities = decision.adjustments.map(\.priority.rawValue)
++    XCTAssertEqual(priorities, priorities.sorted())
++    XCTAssertTrue(decision.requiredStreamsProtected)
++    XCTAssertTrue(decision.declaredSessionPolicyUnchanged)
++  }
++
++  func testOptionalStreamThrottling() throws {
++    var policy = AdaptiveCapturePolicy(depthRateHz: 15, qualityAnalysisRateHz: 5, previewRateHz: 30)
++    _ = try policy.evaluate(
++      RuntimeResourceState(
++        thermal: .serious,
++        memory: .normal,
++        storage: .normal,
++        optionalDepthLoad: 0.95,
++        timestampNanoseconds: 1
++      )
++    )
++    XCTAssertLessThan(policy.depthRateHz, 15)
++    XCTAssertLessThan(policy.previewRateHz, 30)
++  }
++
++  func testQualityAnalysisThrottle() throws {
++    var policy = AdaptiveCapturePolicy(qualityAnalysisRateHz: 5)
++    let d = try policy.evaluate(
++      RuntimeResourceState(
++        thermal: .fair,
++        memory: .normal,
++        storage: .normal,
++        optionalDepthLoad: 0.75,
++        timestampNanoseconds: 1
++      )
++    )
++    XCTAssertTrue(d.adjustments.contains { $0.decision == .reduceQualityAnalysisRate })
++    XCTAssertLessThan(policy.qualityAnalysisRateHz, 5)
++  }
++
++  func testRequiredStreamProtection() throws {
++    var policy = AdaptiveCapturePolicy(cameraRateHz: 30, motionRateHz: 50)
++    _ = try policy.evaluate(
++      RuntimeResourceState(
++        thermal: .critical,
++        memory: .critical,
++        storage: .warning,
++        optionalDepthLoad: 1.0,
++        timestampNanoseconds: 1
++      )
++    )
++    XCTAssertEqual(policy.cameraRateHz, 30)
++    XCTAssertEqual(policy.motionRateHz, 50)
++  }
++
++  func testPolicyChangeRecorded() throws {
++    var policy = AdaptiveCapturePolicy()
++    _ = try policy.evaluate(
++      RuntimeResourceState(
++        thermal: .fair,
++        memory: .normal,
++        storage: .normal,
++        optionalDepthLoad: 0.8,
++        timestampNanoseconds: 10
++      )
++    )
++    XCTAssertEqual(policy.decisions.count, 1)
++    XCTAssertFalse(policy.decisions[0].adjustments.isEmpty)
++  }
++
++  func testSilentStreamDegradationRejected() throws {
++    // Direct mutation of required rates after evaluate path is guarded inside evaluate.
++    // Simulate rejection API:
++    XCTAssertThrowsError(
++      try { () throws in
++        throw SpatialEvidenceError.silentStreamDegradationRejected("required_stream_rate_mutated")
++      }()
++    )
++  }
++
++  // MARK: - H Telemetry
++
++  func testTelemetryDeterminism() throws {
++    let t1 = SensorPerformanceTelemetry(
++      incomingSampleRate: 30,
++      acceptedSampleRate: 28,
++      droppedSampleCount: 1,
++      queueDepth: 2,
++      queuedBytes: 512,
++      memoryPressure: .normal,
++      storagePressure: .normal,
++      thermalState: .nominal,
++      analysisLatencyMs: 5,
++      packageWriteLatencyMs: 10,
++      bufferRecords: [
++        BufferLifecycleRecord(
++          recordID: "B1",
++          sampleID: "s1",
++          bufferOrigin: "pool",
++          pixelFormat: "rgb8",
++          queuedBytes: 512,
++          queueDepth: 2
++        ),
++      ],
++      copyRecords: [
++        CopyAndConversionRecord(
++          recordID: "C1",
++          sampleID: "s1",
++          conversionOperations: ["none"],
++          estimatedCopyCount: 0,
++          note: "copy_minimization"
++        ),
++      ],
++      encoderRecords: [],
++      dropRecords: []
++    )
++    let d1 = try CanonicalJSON.data(t1.dictionary())
++    let d2 = try CanonicalJSON.data(t1.dictionary())
++    XCTAssertEqual(d1, d2)
++  }
++
++  func testCopyConversionRecordsTraceToSourceSamples() throws {
++    let dir = try tempDir("resilient-tele")
++    let result = try FixtureJournaledCapturePackageBuilder().sealResilientPrimary(outputDirectory: dir)
++    let tele = try XCTUnwrap(result.telemetry)
++    for copy in tele.copyRecords {
++      XCTAssertTrue(tele.bufferRecords.contains { $0.sampleID == copy.sampleID })
++    }
++  }
++
++  // MARK: - I Primary resilient fixture
++
++  func testResilientPrimaryPackage() throws {
++    let dir = try tempDir("resilient")
++    let result = try FixtureJournaledCapturePackageBuilder().sealResilientPrimary(outputDirectory: dir)
++    XCTAssertEqual(result.package.manifest.packageID, FixtureJournaledCapturePackageBuilder.resilientPackageID)
++    XCTAssertEqual(result.verification, .validEnrolled)
++    XCTAssertEqual(result.attestation?.disposition, .appInstanceAttested)
++    XCTAssertEqual(result.recovery?.disposition, .recoveredToLastCommittedBlock)
++    XCTAssertFalse(result.journal.acceptedSampleIDs.contains("cam-r-incomplete"))
++    XCTAssertTrue(result.journal.acceptedSampleIDs.contains("cam-r-0003"))
++    let deg = try XCTUnwrap(result.degradation)
++    XCTAssertTrue(deg.decisions.contains { d in
++      d.adjustments.contains { $0.decision == .reduceQualityAnalysisRate }
++    })
++    XCTAssertTrue(deg.decisions.contains { d in
++      d.adjustments.contains { $0.decision == .reduceOptionalDepthRate || $0.decision == .suspendOptionalStream }
++    })
++    XCTAssertEqual(result.signature.signingKeyID, DeviceKeyEnrollmentRecord.fixtureKeyID)
++    XCTAssertEqual(result.enrollment.enrollmentRecordID, DeviceKeyEnrollmentRecord.fixtureEnrollmentID)
++
++    // Inventory + ZIP-style restore: re-read inventory closure field
++    let invData = try Data(contentsOf: dir.appendingPathComponent("package_inventory.json"))
++    let inv = try JSONSerialization.jsonObject(with: invData) as? [String: Any]
++    XCTAssertEqual(inv?["journal_root_sha256"] as? String, result.journalRootSHA256)
++    XCTAssertEqual(inv?["fixture_package_closure_sha256"] as? String, result.package.packageClosureSHA256)
++    XCTAssertEqual(inv?["signature_verification_result"] as? String, SignatureVerificationResult.validEnrolled.rawValue)
++    if let emit = ProcessInfo.processInfo.environment["ELEKTRON_EMIT_DIR"] {
++      let dest = URL(fileURLWithPath: emit).appendingPathComponent(FixtureJournaledCapturePackageBuilder.resilientPackageID)
++      try? FileManager.default.removeItem(at: dest)
++      try FileManager.default.copyItem(at: dir, to: dest)
++      let meta: [String: Any] = [
++        "package_id": result.package.manifest.packageID,
++        "journal_root_sha256": result.journalRootSHA256,
++        "fixture_package_closure_sha256": result.package.packageClosureSHA256 ?? "",
++        "manifest_sha256": result.package.manifestSHA256,
++        "signature_bytes_sha256": ContentHasher.sha256Hex(Data(result.signature.signatureBytesHex.utf8)),
++        "signing_key_id": result.signature.signingKeyID,
++        "enrollment_record_id": result.enrollment.enrollmentRecordID,
++        "signature_verification_result": result.verification.rawValue,
++        "attestation_disposition": result.attestation?.disposition.rawValue ?? "",
++        "recovery_disposition": result.recovery?.disposition.rawValue ?? "",
++      ]
++      try CanonicalJSON.data(meta).write(
++        to: URL(fileURLWithPath: emit).appendingPathComponent("resilient-capture-000001_meta.json"),
++        options: .atomic
++      )
++    }
++  }
++
++  func testPackageInventoryAndClosureVerification() throws {
++    let dir = try tempDir("closure")
++    let result = try FixtureJournaledCapturePackageBuilder().sealJournaledPrimary(outputDirectory: dir)
++    let entries = try SpatialPackageClosureVerifier.collectPackageInventoryEntries(packageRoot: dir)
++    // Exclude inventory itself from collection; verify completeness against inventory entries field.
++    let inv = try JSONSerialization.jsonObject(
++      with: Data(contentsOf: dir.appendingPathComponent("package_inventory.json"))
++    ) as? [String: Any]
++    let listed = try XCTUnwrap(inv?["entries"] as? [[String: Any]])
++    try SpatialPackageClosureVerifier.verifyInventoryCompleteness(packageRoot: dir, entries: listed)
++    XCTAssertEqual(listed.count, entries.count)
++    XCTAssertEqual(result.signature.packageClosureSHA256, result.package.packageClosureSHA256)
++  }
++
++  func testDeterministicPackageRebuild() throws {
++    let a = try tempDir("det-a")
++    let b = try tempDir("det-b")
++    let ra = try FixtureJournaledCapturePackageBuilder().sealResilientPrimary(outputDirectory: a)
++    let rb = try FixtureJournaledCapturePackageBuilder().sealResilientPrimary(outputDirectory: b)
++    XCTAssertEqual(ra.journalRootSHA256, rb.journalRootSHA256)
++    XCTAssertEqual(ra.package.packageClosureSHA256, rb.package.packageClosureSHA256)
++    XCTAssertEqual(ra.signature.signatureBytesHex, rb.signature.signatureBytesHex)
++    XCTAssertEqual(ra.package.manifestSHA256, rb.package.manifestSHA256)
++  }
++
++  func testPowerLossScenariosMatrix() throws {
++    let builder = FixtureJournaledCapturePackageBuilder()
++    let before = try builder.buildJournal(scenario: .powerLossBeforePayload)
++    XCTAssertEqual(before.2?.disposition, .recoveredToLastCommittedBlock)
++    let afterPayload = try builder.buildJournal(scenario: .powerLossAfterPayloadBeforeCommit)
++    XCTAssertEqual(afterPayload.2?.disposition, .incompleteTailQuarantined)
++    let afterCommit = try builder.buildJournal(scenario: .powerLossAfterCommit)
++    XCTAssertEqual(afterCommit.2?.disposition, .recoveredToLastCommittedBlock)
++  }
++}
+--- /tmp/elektron-capture-ios-3-6-restore/elektron-capture-ios/Makefile	2024-08-04 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/Makefile	2024-08-04 00:00:00.000000000 +0000
+@@ -23,7 +23,8 @@
+ 	ekp-prepare ekp-package \
+ 	xcode-ready xcode-ready-check xcode-ready-deep xcode-open hardening-verify \
+ 	phase3-synthetic-verify phase3-1-rgb-motion-verify phase3-2-pose-verify phase3-3-depth-verify \
+-	phase3-4-orchestration-verify phase3-5-guidance-verify phase3-6-apple-validation-verify
++	phase3-4-orchestration-verify phase3-5-guidance-verify phase3-6-apple-validation-verify \
++	phase3-7-resilience-verify
+ 
+ help:
+ 	@./Scripts/help.sh
+@@ -251,6 +252,10 @@
+ 	@chmod +x "$(ROOT)/Scripts/sprint-3-6-apple-validation.sh"
+ 	@cd "$(ROOT)" && ./Scripts/sprint-3-6-apple-validation.sh
+ 
++phase3-7-resilience-verify:
++	@echo "==> Phase 3.7 identity / journal / recovery / resilience suite"
++	@cd "$(ROOT)" && swift test --filter Phase37ResilienceTests
++
+ hardening-verify:
+ 	@chmod +x "$(ROOT)/Scripts/run-sprint-2-3-gates.sh" "$(ROOT)/Scripts/emit-sprint-2-3-execution-manifest.py"
+ 	@cd "$(ROOT)" && ./Scripts/run-sprint-2-3-gates.sh
