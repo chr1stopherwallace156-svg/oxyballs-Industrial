@@ -41,6 +41,7 @@ Fixtures must use `SPKG-FIXTURE-*`, `TEST_FIXTURE` authority, and `host_claim=NO
 | 3.6B | Physical Apple hardware capture | First real `SPKG-DEVICE-000001` | **REQUIRED on Mac+iPhone** |
 | 3.7 | Evidence identity, recovery, resilience | Signatures, journal, thermal, telemetry (Linux fixtures) | SE/App Attest physical → 3.6B backlog |
 | 3.8 | Privacy policy + resilient field transfer | Privacy/redaction/profiles/chunking/resume (Linux fixtures) | Vision/URLSession/cellular → Apple backlog |
+| 4A | Reconstruction ingestion + registered points | Fixture SPKG ingest / keyframes / depth-pose register / lineage | Physical recon → SPKG-DEVICE-000001 |
 
 ## Sprint 3.6 promotion criteria
 
@@ -115,4 +116,15 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 | Tenant-scoped dedup + reassembly verification | COMPLETE (this PR) |
 | Apple Vision / Core ML / URLSession physical | PENDING |
 | Privacy certification / production transfer claim | FORBIDDEN |
+
+
+
+## Phase 4A — Reconstruction ingestion / registered point foundation
+
+| Gate | Status |
+|---|---|
+| Linux fixture ingestion + eligibility + registration | COMPLETE (this PR) |
+| Registered point cloud + lineage + quality | COMPLETE (this PR) |
+| Physical device reconstruction (`SPKG-DEVICE-000001`) | PENDING |
+| Engineering metrology / complete digital twin | FORBIDDEN |
 

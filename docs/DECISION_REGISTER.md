@@ -17,6 +17,24 @@ later entry that references it.
 
 ---
 
+## D-028 — Phase 4A reconstruction ingestion and registered point foundation
+
+- Date: 2026-08-04
+- Status: Proposed
+- Activation: Upon merge of the Phase 4A PR
+- Context: Phase 3 delivered sealed spatial evidence packages; reconstruction must begin only from validated packages without silent continuation on missing evidence, and without claiming physical metrology or a complete digital twin.
+- Decision:
+  1. Reconstruction begins only after package validation (closure, inventory, associations, clocks, frames, privacy when present).
+  2. Eligibility is explicit and fail-closed; missing required spatial evidence does not silently continue.
+  3. Registered points are derived evidence bound to source samples, artifacts, transforms, and package closure.
+  4. Every reconstruction output traces to source samples and package closure via lineage manifests.
+  5. Fixture ground truth (`TEST_FIXTURE_GROUND_TRUTH`) is not physical metrology; fixture thresholds are not production thresholds.
+  6. General feature matching and pose optimization may be expanded in later Phase 4 work.
+  7. Real-device reconstruction remains pending `SPKG-DEVICE-000001`.
+  8. Phase 4A does not claim a complete digital twin, production mesh, or engineering measurement accuracy.
+  9. Original SPKG evidence remains immutable during reconstruction.
+- Consequences: Linux-fixture registered-point foundation may merge as `SOURCE_FOUNDATION_MERGED` with `PHYSICAL_RECONSTRUCTION_STATE=PENDING_SPKG_DEVICE_000001`; engineering metrology and complete twin claims remain FORBIDDEN.
+
 ## D-027 — Sprint 3.8 privacy policy and resilient field transfer
 
 - Date: 2026-08-04
