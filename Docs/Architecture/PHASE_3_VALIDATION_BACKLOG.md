@@ -141,7 +141,7 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 
 | Gate | Status |
 |---|---|
-| Linux fixture dense fusion, filtering, normals, gaps | COMPLETE (this PR) |
+| Linux fixture dense fusion, filtering, normals, gaps | COMPLETE (merged #66) |
 | Source 4A/4B clouds immutable; fused = RECONSTRUCTION_ESTIMATE | COMPLETE |
 | Phase 4D handoff contract (no mesh generation) | COMPLETE |
 | Production dense fusion / surface mesh / metrology | FORBIDDEN |

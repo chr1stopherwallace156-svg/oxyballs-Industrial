@@ -20,8 +20,8 @@ later entry that references it.
 ## D-030 — Phase 4C dense fusion and point-cloud filtering
 
 - Date: 2026-08-04
-- Status: Proposed
-- Activation: Upon merge of the Phase 4C PR
+- Status: Accepted
+- Activation: Merged with Phase 4C (`de9f4ebd337fa88e4951b0499cc17ee20670b61c` / PR #66)
 - Context: Phase 4B produced refined poses and registered observations; denser reconstruction requires explicit multi-frame fusion, confidence weighting, duplicate consolidation, and auditable outlier/conflict handling without silently discarding evidence or claiming production surfaces.
 - Decision:
   1. Fused points are derived `RECONSTRUCTION_ESTIMATE` outputs; source registered observations remain immutable.
