@@ -2,14 +2,11 @@
 
 | Case | Expected | Result |
 |---|---|---|
-| Invalid / missing Phase 4C fused cloud | INELIGIBLE_INVALID_POINT_CLOUD | PASS |
-| Invalid normals | INELIGIBLE_INVALID_NORMALS | PASS |
-| Phase 4C not READY_FOR_SYNTHETIC_SURFACE_CANDIDATE | ineligible / fail-closed | PASS |
-| Quarantined inputs | excluded from mesh | PASS |
-| Gap bridging triangles | REJECTED_GAP_BRIDGING | PASS |
-| Degenerate / duplicate-vertex candidates | REJECTED_DEGENERATE (recorded) | PASS |
-| Intentional hole / open boundary | hole + boundary records; no auto-fill | PASS |
-| Cancellation during generation | no sealed output_closure | PASS |
-| Phase 4C outputs mutated by Phase 4D | forbidden; byte-identical | PASS |
-| Deterministic replay | identical digests | PASS |
-| Inventory / closure | complete, no orphans | PASS |
+| Ambiguous / near-zero mean normals | QUARANTINED_AMBIGUOUS_TOPOLOGY / REJECTED_NORMAL_CONFLICT | PASS |
+| Gap bridging | REJECTED_GAP_BRIDGING | PASS |
+| Degenerate candidates | REJECTED_* recorded | PASS |
+| Quarantined inputs | excluded | PASS |
+| Automatic hole fill | forbidden | PASS |
+| GLB empty / invalid | GLB_EXPORT_SKIPPED; JSON/PLY/OBJ retained | PASS |
+| Cancellation | no sealed output | PASS |
+| Phase 4C mutation | forbidden; byte-identical | PASS |

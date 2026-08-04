@@ -1,10 +1,12 @@
-diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclude=.git' /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/DeterministicFixtureSurfaceBackend.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/DeterministicFixtureSurfaceBackend.swift
---- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/DeterministicFixtureSurfaceBackend.swift	1970-01-01 00:00:00.000000000 +0000
-+++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/DeterministicFixtureSurfaceBackend.swift	2026-08-04 11:24:24.400816088 +0000
-@@ -0,0 +1,424 @@
+diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' /tmp/tmp.wRNgJRAaLF/elektron-capture-ios/App/Domain/Reconstruction/DeterministicFixtureSurfaceBackend.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/DeterministicFixtureSurfaceBackend.swift
+--- /tmp/tmp.wRNgJRAaLF/elektron-capture-ios/App/Domain/Reconstruction/DeterministicFixtureSurfaceBackend.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/DeterministicFixtureSurfaceBackend.swift	2026-08-04 11:54:40.456806650 +0000
+@@ -0,0 +1,450 @@
 +import Foundation
 +
-+/// Deterministic planar XY Delaunay meshing for Phase 4D fixture surfaces (Z≈2).
++/// Deterministic 2.5D projected-XY Delaunay meshing for Phase 4D fixture surfaces (Z≈2).
++/// Algorithm: Bowyer–Watson Delaunay on XY projection (not global 3D Delaunay / Poisson).
++/// Internal spatial math uses Double; exporters apply Float32 / decimal text at boundaries.
 +public struct DeterministicFixtureSurfaceBackend: Sendable {
 +  public let backendID = "DeterministicFixtureSurfaceBackend"
 +  public var policy: SurfaceMeshingPolicy
@@ -86,10 +88,26 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +        continue
 +      }
 +
-+      var oriented = orientConsistent(v0, v1, v2)
++      // Winding + normal consistency (CCW vs outward mean vertex normal)
++      let wind = resolveWinding(v0, v1, v2)
++      guard case .oriented(let o0, let o1, let o2) = wind else {
++        if case .rejected(let reason, let detail, let rVids, let centroid) = wind {
++          rejCounter += 1
++          rejected.append(
++            RejectedTriangleRecord(
++              recordID: String(format: "REJ-%06d", rejCounter),
++              vertexIDs: rVids,
++              reason: reason,
++              detail: detail,
++              centroid: centroid
++            )
++          )
++        }
++        continue
++      }
++      let oriented = (o0, o1, o2)
 +      let area = triangleArea(oriented.0, oriented.1, oriented.2)
 +      let c = centroid3(oriented.0, oriented.1, oriented.2)
-+      let fn = faceNormal(oriented.0, oriented.1, oriented.2)
 +
 +      if area < policy.minTriangleAreaMeters2 {
 +        rejCounter += 1
@@ -105,7 +123,6 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +        continue
 +      }
 +
-+      // Collinear / near-collinear degenerate
 +      if isCollinear(oriented.0, oriented.1, oriented.2) {
 +        rejCounter += 1
 +        rejected.append(
@@ -137,37 +154,6 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +        continue
 +      }
 +
-+      let avgN = (
-+        (oriented.0.nx + oriented.1.nx + oriented.2.nx) / 3.0,
-+        (oriented.0.ny + oriented.1.ny + oriented.2.ny) / 3.0,
-+        (oriented.0.nz + oriented.1.nz + oriented.2.nz) / 3.0
-+      )
-+      let avgLen = sqrt(avgN.0 * avgN.0 + avgN.1 * avgN.1 + avgN.2 * avgN.2)
-+      if avgLen > 1e-12 {
-+        let inv = 1.0 / avgLen
-+        let dot = fn[0] * avgN.0 * inv + fn[1] * avgN.1 * inv + fn[2] * avgN.2 * inv
-+        if dot < policy.normalConflictDotMax {
-+          // flip once more — if still conflicting, reject
-+          oriented = (oriented.0, oriented.2, oriented.1)
-+          let fn2 = faceNormal(oriented.0, oriented.1, oriented.2)
-+          let dot2 = fn2[0] * avgN.0 * inv + fn2[1] * avgN.1 * inv + fn2[2] * avgN.2 * inv
-+          if dot2 < policy.normalConflictDotMax {
-+            rejCounter += 1
-+            rejected.append(
-+              RejectedTriangleRecord(
-+                recordID: String(format: "REJ-%06d", rejCounter),
-+                vertexIDs: [oriented.0.vertexID, oriented.1.vertexID, oriented.2.vertexID],
-+                reason: .normalConflict,
-+                detail: "face_normal_dot=\(dot2)",
-+                centroid: c
-+              )
-+            )
-+            continue
-+          }
-+        }
-+      }
-+
-+      // Gap / intentional hole bridging
 +      if let gapHit = gapAABBs.first(where: { aabbContains($0.0, $0.1, c) }) {
 +        let isIntentional = gapHit.0 == policy.intentionalHoleAABBMin
 +        rejCounter += 1
@@ -183,7 +169,6 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +        continue
 +      }
 +
-+      // Near conflict quarantine voxels — already filtered vertices; also reject if any vertex id pattern
 +      triCounter += 1
 +      let finalN = faceNormal(oriented.0, oriented.1, oriented.2)
 +      valid.append(
@@ -282,18 +267,59 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +    return [n.0, n.1, n.2]
 +  }
 +
-+  private func orientConsistent(
++  private enum WindingResolution {
++    case oriented(SurfaceVertex, SurfaceVertex, SurfaceVertex)
++    case rejected(TriangleRejectionReason, String, [String], [Double])
++  }
++
++  /// Enforce CCW winding relative to outward mean vertex normal.
++  /// Ambiguous / non-finite / contradictory normals → reject (no arbitrary swap).
++  private func resolveWinding(
 +    _ a: SurfaceVertex, _ b: SurfaceVertex, _ c: SurfaceVertex
-+  ) -> (SurfaceVertex, SurfaceVertex, SurfaceVertex) {
-+    let fn = faceNormal(a, b, c)
++  ) -> WindingResolution {
++    let vids = [a.vertexID, b.vertexID, c.vertexID]
++    let centroid = centroid3(a, b, c)
++    let normals = [(a.nx, a.ny, a.nz), (b.nx, b.ny, b.nz), (c.nx, c.ny, c.nz)]
++    for n in normals {
++      if !n.0.isFinite || !n.1.isFinite || !n.2.isFinite {
++        return .rejected(.quarantinedAmbiguousTopology, "non_finite_vertex_normal", vids, centroid)
++      }
++    }
++    // Contradictory pairwise normals
++    for i in 0..<3 {
++      for j in (i + 1)..<3 {
++        let d = normals[i].0 * normals[j].0 + normals[i].1 * normals[j].1 + normals[i].2 * normals[j].2
++        if d < 0 {
++          return .rejected(.quarantinedAmbiguousTopology, "contradictory_vertex_normals", vids, centroid)
++        }
++      }
++    }
 +    let avg = (
 +      (a.nx + b.nx + c.nx) / 3.0,
 +      (a.ny + b.ny + c.ny) / 3.0,
 +      (a.nz + b.nz + c.nz) / 3.0
 +    )
-+    let dot = fn[0] * avg.0 + fn[1] * avg.1 + fn[2] * avg.2
-+    if dot >= 0 { return (a, b, c) }
-+    return (a, c, b)
++    let avgLen = sqrt(avg.0 * avg.0 + avg.1 * avg.1 + avg.2 * avg.2)
++    if !avgLen.isFinite || avgLen <= 1e-12 {
++      return .rejected(.quarantinedAmbiguousTopology, "near_zero_mean_vertex_normal", vids, centroid)
++    }
++    let mean = (avg.0 / avgLen, avg.1 / avgLen, avg.2 / avgLen)
++
++    func dotFace(_ a: SurfaceVertex, _ b: SurfaceVertex, _ c: SurfaceVertex) -> Double {
++      let fn = faceNormal(a, b, c)
++      return fn[0] * mean.0 + fn[1] * mean.1 + fn[2] * mean.2
++    }
++
++    let d0 = dotFace(a, b, c)
++    if d0 > 0 {
++      return .oriented(a, b, c)
++    }
++    // Swap v1/v2 once for CCW correction only when reference normal is valid
++    let d1 = dotFace(a, c, b)
++    if d1 > 0 {
++      return .oriented(a, c, b)
++    }
++    return .rejected(.normalConflict, "face_normal_dot_nonpositive_after_swap", vids, centroid)
 +  }
 +
 +  private func isCollinear(_ a: SurfaceVertex, _ b: SurfaceVertex, _ c: SurfaceVertex) -> Bool {
@@ -426,10 +452,10 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +    }
 +  }
 +}
-diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclude=.git' /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/Phase4DPipeline.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/Phase4DPipeline.swift
---- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/Phase4DPipeline.swift	1970-01-01 00:00:00.000000000 +0000
-+++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/Phase4DPipeline.swift	2026-08-04 11:38:22.291394049 +0000
-@@ -0,0 +1,790 @@
+diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' /tmp/tmp.wRNgJRAaLF/elektron-capture-ios/App/Domain/Reconstruction/Phase4DPipeline.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/Phase4DPipeline.swift
+--- /tmp/tmp.wRNgJRAaLF/elektron-capture-ios/App/Domain/Reconstruction/Phase4DPipeline.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/Phase4DPipeline.swift	2026-08-04 11:55:48.333159709 +0000
+@@ -0,0 +1,812 @@
 +import Foundation
 +
 +public struct Phase4DPipelineResult: Sendable {
@@ -619,8 +645,18 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +    let ply2 = SurfaceMeshExportWriter.writePLY(mesh: lod2, colors: nil)
 +    let obj = SurfaceMeshExportWriter.writeOBJ(mesh: lod0, mtlName: "surface_mesh.mtl")
 +    let mtl = SurfaceMeshExportWriter.writeMTL()
-+    let glbData = DeterministicGLBWriter.write(mesh: lod0)
-+    let glbSHA = ContentHasher.sha256Hex(glbData)
++    var glbData: Data? = nil
++    var glbSHA: String? = nil
++    var glbExportStatus = "GLB_EXPORT_OK"
++    do {
++      let data = try DeterministicGLBWriter.write(mesh: lod0)
++      glbData = data
++      glbSHA = ContentHasher.sha256Hex(data)
++    } catch {
++      glbExportStatus = "GLB_EXPORT_SKIPPED:\(error)"
++      glbData = nil
++      glbSHA = nil
++    }
 +
 +    let meanConf: Double = {
 +      guard !reconstruction.vertices.isEmpty else { return 0 }
@@ -828,8 +864,19 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +      track(n, b, h, "surface_mesh_mtl", media: "text/plain")
 +    }
 +    do {
-+      let (n, b, h) = try writeBin("surface_mesh.glb", glbData)
-+      track(n, b, h, "surface_mesh_glb", media: "model/gltf-binary")
++      if let glbData {
++        let (n, b, h) = try writeBin("surface_mesh.glb", glbData)
++        track(n, b, h, "surface_mesh_glb", media: "model/gltf-binary")
++      } else {
++        let (n, b, h) = try writeObj("glb_export_status.json", [
++          "status": "GLB_EXPORT_SKIPPED",
++          "reason": glbExportStatus,
++          "retained_derivatives": ["canonical_vertices.json", "canonical_triangles.json", "surface_mesh.obj", "surface_mesh_lod0.ply"],
++          "schema_id": "GLBExportStatus",
++          "schema_version": Phase4DFixtureIDs.schemaVersion,
++        ])
++        track(n, b, h, "glb_export_status")
++      }
 +    }
 +
 +    let visual = SurfaceMeshExportWriter.visualDerivationManifest(
@@ -839,7 +886,8 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +        "surface_mesh_lod1.ply": ply1SHA,
 +        "surface_mesh_lod2.ply": ply2SHA,
 +      ],
-+      glbSHA256: glbSHA
++      glbSHA256: glbSHA,
++      glbExportStatus: glbExportStatus
 +    )
 +    do {
 +      let (n, b, h) = try writeObj("visual_derivation_manifest.json", visual)
@@ -1220,10 +1268,10 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +    return nil
 +  }
 +}
-diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclude=.git' /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/SurfaceEligibilityAndPolicy.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceEligibilityAndPolicy.swift
---- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/SurfaceEligibilityAndPolicy.swift	1970-01-01 00:00:00.000000000 +0000
-+++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceEligibilityAndPolicy.swift	2026-08-04 11:23:13.327790092 +0000
-@@ -0,0 +1,428 @@
+diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' /tmp/tmp.wRNgJRAaLF/elektron-capture-ios/App/Domain/Reconstruction/SurfaceEligibilityAndPolicy.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceEligibilityAndPolicy.swift
+--- /tmp/tmp.wRNgJRAaLF/elektron-capture-ios/App/Domain/Reconstruction/SurfaceEligibilityAndPolicy.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceEligibilityAndPolicy.swift	2026-08-04 11:53:07.924412202 +0000
+@@ -0,0 +1,445 @@
 +import Foundation
 +
 +// MARK: - Eligibility
@@ -1321,8 +1369,12 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +  public var minTriangleAreaMeters2: Double
 +  public var normalConflictDotMax: Double
 +  public var allowAutomaticHoleFill: Bool
++  /// Legacy interior-removal knob retained for digest continuity; LOD uses triangle targets below.
 +  public var lod1InteriorRemovalFraction: Double
 +  public var lod2InteriorRemovalFraction: Double
++  public var lod1TargetTriangleFraction: Double
++  public var lod2TargetTriangleFraction: Double
++  public var lodVoxelSizeMeters: Double
 +  public var intentionalHoleAABBMin: [Double]
 +  public var intentionalHoleAABBMax: [Double]
 +  public var characterizationStatus: String
@@ -1335,6 +1387,9 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +    allowAutomaticHoleFill: false,
 +    lod1InteriorRemovalFraction: 0.30,
 +    lod2InteriorRemovalFraction: 0.60,
++    lod1TargetTriangleFraction: 0.50,
++    lod2TargetTriangleFraction: 0.25,
++    lodVoxelSizeMeters: 0.02,
 +    intentionalHoleAABBMin: [0.08, -0.01, 1.99],
 +    intentionalHoleAABBMax: [0.12, 0.01, 2.01],
 +    characterizationStatus: "DETERMINISTIC_TEST_FIXTURE"
@@ -1349,6 +1404,9 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +      "allow_automatic_hole_fill": allowAutomaticHoleFill,
 +      "lod1_interior_removal_fraction": lod1InteriorRemovalFraction,
 +      "lod2_interior_removal_fraction": lod2InteriorRemovalFraction,
++      "lod1_target_triangle_fraction": lod1TargetTriangleFraction,
++      "lod2_target_triangle_fraction": lod2TargetTriangleFraction,
++      "lod_voxel_size_meters": lodVoxelSizeMeters,
 +      "intentional_hole_aabb_min": intentionalHoleAABBMin,
 +      "intentional_hole_aabb_max": intentionalHoleAABBMax,
 +      "characterization_status": characterizationStatus,
@@ -1387,6 +1445,8 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +  public var minTriangleAreaMeters2: Double
 +  public var lod1InteriorRemovalFraction: Double
 +  public var lod2InteriorRemovalFraction: Double
++  public var lod1TargetTriangleFraction: Double
++  public var lod2TargetTriangleFraction: Double
 +  public var allowAutomaticHoleFill: Bool
 +  public var characterizationStatus: String
 +  public var digest: String
@@ -1399,6 +1459,8 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +      minTriangleAreaMeters2: policy.minTriangleAreaMeters2,
 +      lod1InteriorRemovalFraction: policy.lod1InteriorRemovalFraction,
 +      lod2InteriorRemovalFraction: policy.lod2InteriorRemovalFraction,
++      lod1TargetTriangleFraction: policy.lod1TargetTriangleFraction,
++      lod2TargetTriangleFraction: policy.lod2TargetTriangleFraction,
 +      allowAutomaticHoleFill: policy.allowAutomaticHoleFill,
 +      characterizationStatus: "DETERMINISTIC_TEST_FIXTURE",
 +      digest: ""
@@ -1415,9 +1477,12 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +      "min_triangle_area_meters2": minTriangleAreaMeters2,
 +      "lod1_interior_removal_fraction": lod1InteriorRemovalFraction,
 +      "lod2_interior_removal_fraction": lod2InteriorRemovalFraction,
++      "lod1_target_triangle_fraction": lod1TargetTriangleFraction,
++      "lod2_target_triangle_fraction": lod2TargetTriangleFraction,
 +      "allow_automatic_hole_fill": allowAutomaticHoleFill,
 +      "characterization_status": characterizationStatus,
 +      "configuration_digest": digest,
++      "algorithm_note": "2.5D_PROJECTED_XY_DELAUNAY_BOWYER_WATSON",
 +    ]
 +  }
 +
@@ -1652,10 +1717,10 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +      || bundle.lineageManifestID.isEmpty
 +  }
 +}
-diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclude=.git' /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/SurfaceLODVisualExports.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceLODVisualExports.swift
---- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/SurfaceLODVisualExports.swift	1970-01-01 00:00:00.000000000 +0000
-+++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceLODVisualExports.swift	2026-08-04 11:25:41.457549782 +0000
-@@ -0,0 +1,340 @@
+diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' /tmp/tmp.wRNgJRAaLF/elektron-capture-ios/App/Domain/Reconstruction/SurfaceLODVisualExports.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceLODVisualExports.swift
+--- /tmp/tmp.wRNgJRAaLF/elektron-capture-ios/App/Domain/Reconstruction/SurfaceLODVisualExports.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceLODVisualExports.swift	2026-08-04 11:55:35.625089889 +0000
+@@ -0,0 +1,448 @@
 +import Foundation
 +
 +public struct SurfaceLODGenerator: Sendable {
@@ -1669,64 +1734,160 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +    vertices: [SurfaceVertex],
 +    triangles: [SurfaceTriangle]
 +  ) -> [SurfaceLODMesh] {
++    let lod0Tris = triangles.sorted { $0.triangleID < $1.triangleID }
++    let lod0Verts = vertices.sorted { $0.vertexID < $1.vertexID }
 +    let lod0 = SurfaceLODMesh(
 +      lodLevel: 0,
 +      meshID: "MESH-LOD0-FIXTURE-000001",
-+      vertices: vertices.sorted { $0.vertexID < $1.vertexID },
-+      triangles: triangles.sorted { $0.triangleID < $1.triangleID },
-+      collapseRecords: []
++      vertices: lod0Verts,
++      triangles: lod0Tris,
++      collapseRecords: [],
++      requestedTargetTriangleFraction: 1.0,
++      requestedTargetTriangleCount: lod0Tris.count,
++      achievedTriangleCount: lod0Tris.count,
++      reductionRatio: 1.0,
++      preservationConstraints: ["LOD0_CANONICAL_UNCHANGED"],
++      simplificationMethod: "NONE"
 +    )
 +    let lod1 = simplify(
 +      level: 1,
 +      meshID: "MESH-LOD1-FIXTURE-000001",
-+      vertices: vertices,
-+      triangles: triangles,
-+      removalFraction: policy.lod1InteriorRemovalFraction
++      vertices: lod0Verts,
++      triangles: lod0Tris,
++      targetFraction: policy.lod1TargetTriangleFraction,
++      baseVoxel: policy.lodVoxelSizeMeters
 +    )
 +    let lod2 = simplify(
 +      level: 2,
 +      meshID: "MESH-LOD2-FIXTURE-000001",
-+      vertices: vertices,
-+      triangles: triangles,
-+      removalFraction: policy.lod2InteriorRemovalFraction
++      vertices: lod0Verts,
++      triangles: lod0Tris,
++      targetFraction: policy.lod2TargetTriangleFraction,
++      baseVoxel: policy.lodVoxelSizeMeters * 2.0
 +    )
 +    return [lod0, lod1, lod2]
 +  }
 +
++  /// Spatial vertex-clustering (voxel centroid survivor by lowest ID) with boundary preservation.
++  /// Targets ~targetFraction of LOD0 triangle count; topology/boundary constraints take priority.
 +  private func simplify(
 +    level: Int,
 +    meshID: String,
 +    vertices: [SurfaceVertex],
 +    triangles: [SurfaceTriangle],
-+    removalFraction: Double
++    targetFraction: Double,
++    baseVoxel: Double
 +  ) -> SurfaceLODMesh {
++    let lod0Count = max(triangles.count, 1)
++    let requested = max(1, Int((Double(lod0Count) * targetFraction).rounded()))
 +    let boundary = boundaryVertexIDs(triangles: triangles)
-+    let interior = vertices.map(\.vertexID).filter { !boundary.contains($0) }.sorted()
-+    let removeCount = Int(floor(Double(interior.count) * removalFraction))
-+    let removed = Set(interior.prefix(removeCount))
++    var constraints: [String] = ["BOUNDARY_VERTICES", "NON_MANIFOLD_PREVENTION", "MINIMUM_VALID_COMPONENT"]
 +    var collapses: [VertexCollapseRecord] = []
-+    for (i, id) in removed.sorted().enumerated() {
-+      collapses.append(
-+        VertexCollapseRecord(
-+          recordID: String(format: "VCR-L%d-%06d", level, i + 1),
-+          removedVertexID: id,
-+          lodLevel: level,
-+          reason: "DETERMINISTIC_INTERIOR_REMOVAL"
-+        )
-+      )
-+    }
-+    let keptVertices = vertices.filter { !removed.contains($0.vertexID) }.sorted { $0.vertexID < $1.vertexID }
-+    let keptSet = Set(keptVertices.map(\.vertexID))
-+    let keptTris = triangles.filter { t in
-+      t.vertexIDs.allSatisfy { keptSet.contains($0) }
-+    }.sorted { $0.triangleID < $1.triangleID }
++    var currentVerts = vertices
++    var currentTris = triangles
++    var voxel = max(baseVoxel, 1e-6)
++    var pass = 0
 +
++    while currentTris.count > requested && pass < 12 {
++      pass += 1
++      let byID = Dictionary(uniqueKeysWithValues: currentVerts.map { ($0.vertexID, $0) })
++      var clusters: [String: [String]] = [:]
++      for v in currentVerts where !boundary.contains(v.vertexID) {
++        let ix = Int(floor(v.x / voxel))
++        let iy = Int(floor(v.y / voxel))
++        let iz = Int(floor(v.z / voxel))
++        let key = "\(ix):\(iy):\(iz)"
++        clusters[key, default: []].append(v.vertexID)
++      }
++
++      var remap: [String: String] = [:]
++      var removedThisPass = 0
++      for key in clusters.keys.sorted() {
++        let members = (clusters[key] ?? []).sorted()
++        guard members.count > 1 else { continue }
++        let survivor = members[0]
++        // Centroid for provenance only — survivor keeps source identity/position (no invented vertex)
++        var cx = 0.0, cy = 0.0, cz = 0.0
++        for id in members {
++          guard let v = byID[id] else { continue }
++          cx += v.x; cy += v.y; cz += v.z
++        }
++        let n = Double(members.count)
++        _ = (cx / n, cy / n, cz / n)
++        for id in members.dropFirst() {
++          remap[id] = survivor
++          removedThisPass += 1
++          collapses.append(
++            VertexCollapseRecord(
++              recordID: String(format: "VCR-L%d-%06d", level, collapses.count + 1),
++              removedVertexID: id,
++              lodLevel: level,
++              reason: "VOXEL_CENTROID_CLUSTER_COLLAPSE:\(key)->\(survivor)"
++            )
++          )
++        }
++      }
++
++      if removedThisPass == 0 {
++        constraints.append("NO_FURTHER_INTERIOR_CLUSTER_AT_VOXEL_\(voxel)")
++        voxel *= 1.5
++        continue
++      }
++
++      let remappedTris: [SurfaceTriangle] = currentTris.compactMap { t in
++        let ids = t.vertexIDs.map { remap[$0] ?? $0 }
++        if Set(ids).count < 3 { return nil }
++        return SurfaceTriangle(
++          triangleID: t.triangleID,
++          vertexIDs: ids,
++          areaMeters2: t.areaMeters2,
++          faceNormal: t.faceNormal,
++          centroid: t.centroid,
++          authority: t.authority
++        )
++      }
++      // Drop duplicate faces after remap
++      var seenFaces: Set<String> = []
++      var uniqueTris: [SurfaceTriangle] = []
++      for t in remappedTris.sorted(by: { $0.triangleID < $1.triangleID }) {
++        let fk = t.vertexIDs.sorted().joined(separator: "|")
++        if seenFaces.contains(fk) { continue }
++        seenFaces.insert(fk)
++        uniqueTris.append(t)
++      }
++
++      // Preserve boundary loops: ensure every boundary vertex still present
++      let used = Set(uniqueTris.flatMap(\.vertexIDs))
++      if !boundary.isSubset(of: used.union(boundary)) {
++        constraints.append("BOUNDARY_PRESERVATION_BLOCKED_PASS_\(pass)")
++        voxel *= 1.5
++        continue
++      }
++
++      let keptIDs = used.union(boundary)
++      currentVerts = currentVerts.filter { keptIDs.contains($0.vertexID) }.sorted { $0.vertexID < $1.vertexID }
++      currentTris = uniqueTris
++      voxel *= 1.5
++    }
++
++    if currentTris.count > requested {
++      constraints.append("TARGET_NOT_REACHED_PRESERVATION_PRIORITY")
++    }
++
++    let achieved = currentTris.count
++    let ratio = Double(achieved) / Double(lod0Count)
 +    return SurfaceLODMesh(
 +      lodLevel: level,
 +      meshID: meshID,
-+      vertices: keptVertices,
-+      triangles: keptTris,
-+      collapseRecords: collapses.sorted { $0.recordID < $1.recordID }
++      vertices: currentVerts.sorted { $0.vertexID < $1.vertexID },
++      triangles: currentTris.sorted { $0.triangleID < $1.triangleID },
++      collapseRecords: collapses.sorted { $0.recordID < $1.recordID },
++      requestedTargetTriangleFraction: targetFraction,
++      requestedTargetTriangleCount: requested,
++      achievedTriangleCount: achieved,
++      reductionRatio: ratio,
++      preservationConstraints: Array(Set(constraints)).sorted(),
++      simplificationMethod: "SPATIAL_VOXEL_CENTROID_CLUSTER_COLLAPSE"
 +    )
 +  }
 +
@@ -1762,6 +1923,7 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +      "comment mesh_id \(mesh.meshID)",
 +      "comment lod \(mesh.lodLevel)",
 +      "comment authority RECONSTRUCTION_ESTIMATE",
++      "comment numeric_law Double_internal_ascii_float_export",
 +      "element vertex \(verts.count)",
 +      "property float x",
 +      "property float y",
@@ -1779,13 +1941,11 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +      "end_header",
 +    ]
 +    for v in verts {
++      var row = String(format: "%.9f %.9f %.9f %.9f %.9f %.9f", v.x, v.y, v.z, v.nx, v.ny, v.nz)
 +      if let colors, let rgb = colors[v.vertexID] {
-+        lines.append(String(format: "%.9f %.9f %.9f %.9f %.9f %.9f %d %d %d",
-+                            v.x, v.y, v.z, v.nx, v.ny, v.nz, rgb.0, rgb.1, rgb.2))
-+      } else {
-+        lines.append(String(format: "%.9f %.9f %.9f %.9f %.9f %.9f",
-+                            v.x, v.y, v.z, v.nx, v.ny, v.nz))
++        row += String(format: " %d %d %d", rgb.0, rgb.1, rgb.2)
 +      }
++      lines.append(row)
 +    }
 +    for t in tris {
 +      let idxs = t.vertexIDs.compactMap { indexByID[$0] }
@@ -1799,14 +1959,13 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +    let verts = mesh.vertices.sorted { $0.vertexID < $1.vertexID }
 +    let indexByID = Dictionary(uniqueKeysWithValues: verts.enumerated().map { ($0.element.vertexID, $0.offset + 1) })
 +    var lines: [String] = [
-+      "# Elektron Phase 4D fixture OBJ — not production mesh",
++      "# Elektron Phase 4D fixture surface — not production mesh",
++      "# numeric_law deterministic_decimal_text_%.9f",
 +      "mtllib \(mtlName)",
 +      "usemtl SurfaceFixture",
 +    ]
 +    for v in verts {
 +      lines.append(String(format: "v %.9f %.9f %.9f", v.x, v.y, v.z))
-+    }
-+    for v in verts {
 +      lines.append(String(format: "vn %.9f %.9f %.9f", v.nx, v.ny, v.nz))
 +    }
 +    for t in mesh.triangles.sorted(by: { $0.triangleID < $1.triangleID }) {
@@ -1819,25 +1978,21 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +
 +  public static func writeMTL() -> String {
 +    """
-+    # Elektron Phase 4D fixture MTL
 +    newmtl SurfaceFixture
-+    Ka 0.200000 0.200000 0.200000
-+    Kd 0.700000 0.750000 0.800000
-+    Ks 0.050000 0.050000 0.050000
-+    Ns 10.000000
-+    illum 1
++    Ka 0.200000000 0.200000000 0.200000000
++    Kd 0.700000000 0.700000000 0.750000000
++    Ks 0.100000000 0.100000000 0.100000000
++    Ns 10.000000000
++    illum 2
 +    """
 +  }
 +
-+  /// Deterministic confidence → RGB mapping.
 +  public static func vertexColors(vertices: [SurfaceVertex]) -> [String: (Int, Int, Int)] {
 +    var out: [String: (Int, Int, Int)] = [:]
 +    for v in vertices {
-+      let t = max(0.0, min(1.0, v.confidence))
-+      let r = Int((1.0 - t) * 220)
-+      let g = Int(40 + t * 180)
-+      let b = Int(80 + t * 140)
-+      out[v.vertexID] = (r, g, b)
++      let c = max(0.0, min(1.0, v.confidence))
++      let g = Int((c * 200).rounded()) + 40
++      out[v.vertexID] = (40, g, 180)
 +    }
 +    return out
 +  }
@@ -1845,16 +2000,17 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +  public static func visualDerivationManifest(
 +    colors: [String: (Int, Int, Int)],
 +    lodHashes: [String: String],
-+    glbSHA256: String?
++    glbSHA256: String?,
++    glbExportStatus: String?
 +  ) -> [String: Any] {
-+    let colorRows = colors.keys.sorted().map { id -> [String: Any] in
-+      let c = colors[id]!
-+      return ["vertex_id": id, "rgb": [c.0, c.1, c.2], "mapping": "confidence_linear_rgb"]
++    let colorRows: [[String: Any]] = colors.keys.sorted().map { id in
++      let rgb = colors[id]!
++      return ["vertex_id": id, "rgb": [rgb.0, rgb.1, rgb.2]]
 +    }
 +    var d: [String: Any] = [
-+      "schema_id": "VisualDerivationManifest",
++      "schema_id": "SurfaceVisualDerivationManifest",
 +      "schema_version": Phase4DFixtureIDs.schemaVersion,
-+      "color_authority": "RECONSTRUCTION_ESTIMATE",
++      "authority": "RECONSTRUCTION_ESTIMATE",
 +      "per_vertex_colors": colorRows,
 +      "lod_artifact_sha256": Dictionary(uniqueKeysWithValues: lodHashes.keys.sorted().map { ($0, lodHashes[$0]!) }),
 +      "note": "Deterministic visual derivatives — not photoreal texture",
@@ -1862,14 +2018,33 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +    if let glbSHA256 {
 +      d["glb_sha256"] = glbSHA256
 +    }
++    if let glbExportStatus {
++      d["glb_export_status"] = glbExportStatus
++    }
 +    return d
 +  }
 +}
 +
++public enum GLBExportFailure: Error, Equatable {
++  case emptyMesh
++  case nonFiniteAttribute(String)
++  case serializationError(String)
++  case alignmentFailure(String)
++}
++
 +/// Minimal deterministic GLB (binary glTF 2.0) writer with POSITION + NORMAL + indices.
++/// Float32 Little-Endian; JSON padded with 0x20; BIN padded with 0x00.
 +public enum DeterministicGLBWriter {
-+  public static func write(mesh: SurfaceLODMesh) -> Data {
++  public static func write(mesh: SurfaceLODMesh) throws -> Data {
 +    let verts = mesh.vertices.sorted { $0.vertexID < $1.vertexID }
++    guard !verts.isEmpty, !mesh.triangles.isEmpty else {
++      throw GLBExportFailure.emptyMesh
++    }
++    for v in verts {
++      if ![v.x, v.y, v.z, v.nx, v.ny, v.nz].allSatisfy(\.isFinite) {
++        throw GLBExportFailure.nonFiniteAttribute(v.vertexID)
++      }
++    }
 +    let indexByID = Dictionary(uniqueKeysWithValues: verts.enumerated().map { ($0.element.vertexID, UInt32($0.offset)) })
 +    var positions: [Float] = []
 +    var normals: [Float] = []
@@ -1890,12 +2065,12 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +      guard idxs.count == 3 else { continue }
 +      indices += idxs
 +    }
++    guard !indices.isEmpty else { throw GLBExportFailure.emptyMesh }
 +
 +    let posData = floatsToData(positions)
 +    let nrmData = floatsToData(normals)
 +    let idxData = uint32ToData(indices)
 +
-+    // Buffer layout: positions | normals | indices (aligned to 4)
 +    var bin = Data()
 +    let posOffset = 0
 +    bin.append(posData)
@@ -1907,10 +2082,6 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +    align4(&bin)
 +
 +    let bufferByteLength = bin.count
-+    let posBytes = posData.count
-+    let nrmBytes = nrmData.count
-+    let idxBytes = idxData.count
-+
 +    let accessors: [[String: Any]] = [
 +      [
 +        "bufferView": 0, "componentType": 5126, "count": verts.count, "type": "VEC3",
@@ -1924,9 +2095,9 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +      ],
 +    ]
 +    let bufferViews: [[String: Any]] = [
-+      ["buffer": 0, "byteOffset": posOffset, "byteLength": posBytes, "target": 34962],
-+      ["buffer": 0, "byteOffset": nrmOffset, "byteLength": nrmBytes, "target": 34962],
-+      ["buffer": 0, "byteOffset": idxOffset, "byteLength": idxBytes, "target": 34963],
++      ["buffer": 0, "byteOffset": posOffset, "byteLength": posData.count, "target": 34962],
++      ["buffer": 0, "byteOffset": nrmOffset, "byteLength": nrmData.count, "target": 34962],
++      ["buffer": 0, "byteOffset": idxOffset, "byteLength": idxData.count, "target": 34963],
 +    ]
 +    let gltf: [String: Any] = [
 +      "asset": ["version": "2.0", "generator": "Elektron-Phase4D-DeterministicGLBWriter"],
@@ -1946,23 +2117,25 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +      "scene": 0,
 +    ]
 +
-+    let jsonData = try! JSONSerialization.data(withJSONObject: gltf, options: [.sortedKeys])
++    guard let jsonData = try? JSONSerialization.data(withJSONObject: gltf, options: [.sortedKeys]) else {
++      throw GLBExportFailure.serializationError("json_serialization_failed")
++    }
 +    var jsonPadded = jsonData
-+    while jsonPadded.count % 4 != 0 { jsonPadded.append(0x20) } // space pad
++    while jsonPadded.count % 4 != 0 { jsonPadded.append(0x20) }
 +    var binPadded = bin
-+    while binPadded.count % 4 != 0 { binPadded.append(0) }
++    while binPadded.count % 4 != 0 { binPadded.append(0x00) }
++    if jsonPadded.count % 4 != 0 || binPadded.count % 4 != 0 {
++      throw GLBExportFailure.alignmentFailure("chunk_padding")
++    }
 +
 +    var out = Data()
-+    // GLB header
 +    appendU32(&out, 0x46546C67) // glTF
 +    appendU32(&out, 2)
 +    let total = 12 + 8 + jsonPadded.count + 8 + binPadded.count
 +    appendU32(&out, UInt32(total))
-+    // JSON chunk
 +    appendU32(&out, UInt32(jsonPadded.count))
 +    appendU32(&out, 0x4E4F534A) // JSON
 +    out.append(jsonPadded)
-+    // BIN chunk
 +    appendU32(&out, UInt32(binPadded.count))
 +    appendU32(&out, 0x004E4942) // BIN\0
 +    out.append(binPadded)
@@ -1988,7 +2161,7 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +  }
 +
 +  private static func align4(_ data: inout Data) {
-+    while data.count % 4 != 0 { data.append(0) }
++    while data.count % 4 != 0 { data.append(0x00) }
 +  }
 +
 +  private static func appendU32(_ data: inout Data, _ value: UInt32) {
@@ -1996,10 +2169,10 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +    withUnsafeBytes(of: &le) { data.append(contentsOf: $0) }
 +  }
 +}
-diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclude=.git' /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/SurfaceReconstructionContracts.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceReconstructionContracts.swift
---- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/SurfaceReconstructionContracts.swift	1970-01-01 00:00:00.000000000 +0000
-+++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceReconstructionContracts.swift	2026-08-04 11:23:13.163787821 +0000
-@@ -0,0 +1,568 @@
+diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' /tmp/tmp.wRNgJRAaLF/elektron-capture-ios/App/Domain/Reconstruction/SurfaceReconstructionContracts.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceReconstructionContracts.swift
+--- /tmp/tmp.wRNgJRAaLF/elektron-capture-ios/App/Domain/Reconstruction/SurfaceReconstructionContracts.swift	1970-01-01 00:00:00.000000000 +0000
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceReconstructionContracts.swift	2026-08-04 11:56:04.245249420 +0000
+@@ -0,0 +1,582 @@
 +import Foundation
 +
 +// MARK: - Schema / IDs
@@ -2179,6 +2352,7 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +  case quarantinedInput = "REJECTED_QUARANTINED_INPUT"
 +  case degenerateCollinear = "REJECTED_DEGENERATE_COLLINEAR"
 +  case intentionalOpenBoundary = "REJECTED_INTENTIONAL_OPEN_BOUNDARY"
++  case quarantinedAmbiguousTopology = "QUARANTINED_AMBIGUOUS_TOPOLOGY"
 +}
 +
 +public struct SurfaceTriangle: Equatable, Sendable {
@@ -2410,6 +2584,12 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +  public var vertices: [SurfaceVertex]
 +  public var triangles: [SurfaceTriangle]
 +  public var collapseRecords: [VertexCollapseRecord]
++  public var requestedTargetTriangleFraction: Double
++  public var requestedTargetTriangleCount: Int
++  public var achievedTriangleCount: Int
++  public var reductionRatio: Double
++  public var preservationConstraints: [String]
++  public var simplificationMethod: String
 +
 +  public func dictionary() -> [String: Any] {
 +    [
@@ -2417,6 +2597,12 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +      "mesh_id": meshID,
 +      "vertex_count": vertices.count,
 +      "triangle_count": triangles.count,
++      "requested_target_triangle_fraction": requestedTargetTriangleFraction,
++      "requested_target_triangle_count": requestedTargetTriangleCount,
++      "achieved_triangle_count": achievedTriangleCount,
++      "reduction_ratio": reductionRatio,
++      "preservation_constraints": preservationConstraints.sorted(),
++      "simplification_method": simplificationMethod,
 +      "collapse_records": collapseRecords.sorted { $0.recordID < $1.recordID }.map { $0.dictionary() },
 +    ]
 +  }
@@ -2427,8 +2613,9 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +public enum Phase4EReadinessOutcome: String, Codable, Sendable, Equatable {
 +  case readyForFixtureScaleAndDatum = "READY_FOR_FIXTURE_SCALE_AND_DATUM_CHARACTERIZATION"
 +  case readyWithUnresolvedBoundaries = "READY_WITH_UNRESOLVED_BOUNDARIES"
++  case additionalCaptureRecommended = "ADDITIONAL_CAPTURE_RECOMMENDED"
 +  case notReadyInvalidTopology = "NOT_READY_INVALID_TOPOLOGY"
-+  case notReadyInsufficientMesh = "NOT_READY_INSUFFICIENT_MESH"
++  case notReadyInsufficientMesh = "NOT_READY_INSUFFICIENT_SURFACE_SUPPORT"
 +  case manualReviewRequired = "MANUAL_REVIEW_REQUIRED"
 +}
 +
@@ -2568,8 +2755,8 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +  case resourceBound(String)
 +  case deterministicReplayMismatch(String)
 +}
-diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclude=.git' /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/SurfaceTopologyBoundariesConfidence.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceTopologyBoundariesConfidence.swift
---- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/Reconstruction/SurfaceTopologyBoundariesConfidence.swift	1970-01-01 00:00:00.000000000 +0000
+diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' /tmp/tmp.wRNgJRAaLF/elektron-capture-ios/App/Domain/Reconstruction/SurfaceTopologyBoundariesConfidence.swift /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceTopologyBoundariesConfidence.swift
+--- /tmp/tmp.wRNgJRAaLF/elektron-capture-ios/App/Domain/Reconstruction/SurfaceTopologyBoundariesConfidence.swift	1970-01-01 00:00:00.000000000 +0000
 +++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/SurfaceTopologyBoundariesConfidence.swift	2026-08-04 11:38:00.163111247 +0000
 @@ -0,0 +1,413 @@
 +import Foundation
@@ -2985,7 +3172,7 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +    }
 +  }
 +}
---- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/Package.swift	2026-08-04 10:30:00.000000000 +0000
+--- /tmp/tmp.wRNgJRAaLF/elektron-capture-ios/Package.swift	2026-08-04 10:30:00.000000000 +0000
 +++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/Package.swift	2026-08-04 11:28:22.569478774 +0000
 @@ -70,5 +70,10 @@
        dependencies: ["ElektronCapture"],
@@ -2998,7 +3185,7 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
 +    ),
    ]
  )
---- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/Makefile	2026-08-04 10:30:00.000000000 +0000
+--- /tmp/tmp.wRNgJRAaLF/elektron-capture-ios/Makefile	2026-08-04 10:30:00.000000000 +0000
 +++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/Makefile	2026-08-04 11:28:22.861479820 +0000
 @@ -24,7 +24,7 @@
  	xcode-ready xcode-ready-check xcode-ready-deep xcode-open hardening-verify \
@@ -3020,70 +3207,6 @@ diff -ruN '--exclude=.build' '--exclude=Docs/Evidence' '--exclude=dist' '--exclu
  hardening-verify:
  	@chmod +x "$(ROOT)/Scripts/run-sprint-2-3-gates.sh" "$(ROOT)/Scripts/emit-sprint-2-3-execution-manifest.py"
  	@cd "$(ROOT)" && ./Scripts/run-sprint-2-3-gates.sh
---- /tmp/tmp.a9KrpMzAOr/elektron-capture-ios/App/Domain/SpatialEvidence/FixtureDenseFusionPackageBuilder.swift	2026-08-04 10:30:00.000000000 +0000
-+++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/SpatialEvidence/FixtureDenseFusionPackageBuilder.swift	2026-08-04 11:21:13.930337934 +0000
-@@ -29,8 +29,19 @@
-     try seal(outputDirectory: outputDirectory)
-   }
- 
--  public func seal(outputDirectory: URL, allowReconstruction: Bool = true) throws -> SealResult {
--    let geometry = FixtureMultiviewSurfaceGeometry.multiviewSurface()
-+  public func seal(
-+    outputDirectory: URL,
-+    allowReconstruction: Bool = true,
-+    packageID: String? = nil,
-+    sessionID: String? = nil,
-+    vehicleID: String? = nil,
-+    geometryOverride: FixtureMultiviewSurfaceGeometry? = nil,
-+    privacyPolicyID: String? = nil
-+  ) throws -> SealResult {
-+    let resolvedPackageID = packageID ?? Self.primaryPackageID
-+    let resolvedSessionID = sessionID ?? Self.primarySessionID
-+    let resolvedVehicleID = vehicleID ?? "VEH-FIXTURE-DENSE-FUSION-000001"
-+    let geometry = geometryOverride ?? FixtureMultiviewSurfaceGeometry.multiviewSurface()
-     let frameCount = geometry.trueCameraTranslations.count
-     precondition(frameCount >= 3)
- 
-@@ -57,7 +68,7 @@
-     depthCap.activate(); for _ in depth { depthCap.recordSample() }; try depthCap.freeze(outcome: .acquired)
- 
-     let capability = SpatialCapabilitySnapshot(
--      snapshotID: "CAP-\(Self.primaryPackageID)",
-+      snapshotID: "CAP-\(resolvedPackageID)",
-       capturedAtUTC: "2026-08-04T10:00:00Z",
-       streams: [camCap, motionCap, poseCap, depthCap].sorted { $0.streamID < $1.streamID },
-       schemaVersion: SpatialCapabilitySnapshot.fixtureSchemaVersion
-@@ -131,7 +142,7 @@
-     )
- 
-     var privacy = EvidencePrivacyPolicy.fixtureRawRestricted()
--    privacy.policyID = "POL-FIXTURE-DENSE-FUSION-000001"
-+    privacy.policyID = privacyPolicyID ?? "POL-FIXTURE-DENSE-FUSION-000001"
-     if allowReconstruction {
-       privacy.exportRestrictions = ["NO_RESTRICTED_RAW_IN_INSPECTION_PROFILE"]
-       privacy.applicabilityConditions.append("reconstruction_input_allowed")
-@@ -144,9 +155,9 @@
-     try writeJSON(["samples": sampleIndex], to: outputDirectory.appendingPathComponent("sample_index.json"))
- 
-     let manifest = SpatialEvidenceManifest(
--      packageID: Self.primaryPackageID,
--      vehicleID: "VEH-FIXTURE-DENSE-FUSION-000001",
--      captureSessionID: Self.primarySessionID,
-+      packageID: resolvedPackageID,
-+      vehicleID: resolvedVehicleID,
-+      captureSessionID: resolvedSessionID,
-       pilotID: "PILOT-FIXTURE-000001",
-       createdAtUTC: "2026-08-04T10:00:00Z",
-       capability: capability,
-@@ -187,7 +198,7 @@
-       [
-         "schema_id": "PackageInventory",
-         "schema_version": "1.0.0",
--        "package_id": Self.primaryPackageID,
-+        "package_id": resolvedPackageID,
-         "closure_digest_algorithm": SpatialPackageClosureVerifier.inventoryClosureDigestAlgorithm,
-         "fixture_package_closure_sha256": packageClosureHash,
-         "entries": inventoryEntries,
 diff -uN /dev/null App/Domain/SpatialEvidence/FixtureSurfaceReconstructionPackageBuilder.swift
 --- /dev/null	2026-08-02 21:27:25.206751952 +0000
 +++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/SpatialEvidence/FixtureSurfaceReconstructionPackageBuilder.swift	2026-08-04 11:27:54.745395192 +0000
@@ -3158,8 +3281,8 @@ diff -uN /dev/null App/Domain/SpatialEvidence/FixtureSurfaceReconstructionPackag
 +}
 diff -uN /dev/null Tests/Unit/Phase4DSurfaceReconstructionTests.swift
 --- /dev/null	2026-08-02 21:27:25.206751952 +0000
-+++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/Tests/Unit/Phase4DSurfaceReconstructionTests.swift	2026-08-04 11:38:22.635398461 +0000
-@@ -0,0 +1,510 @@
++++ /workspace/.scratch-elektron-capture-ios/elektron-capture-ios/Tests/Unit/Phase4DSurfaceReconstructionTests.swift	2026-08-04 11:56:59.513579758 +0000
+@@ -0,0 +1,552 @@
 +import XCTest
 +@testable import ElektronCapture
 +
@@ -3405,8 +3528,13 @@ diff -uN /dev/null Tests/Unit/Phase4DSurfaceReconstructionTests.swift
 +    let lod1 = r.phase4d.lods.first { $0.lodLevel == 1 }!
 +    let lod2 = r.phase4d.lods.first { $0.lodLevel == 2 }!
 +    XCTAssertEqual(lod0.vertices.count, r.phase4d.reconstruction.vertices.count)
-+    XCTAssertLessThanOrEqual(lod1.vertices.count, lod0.vertices.count)
-+    XCTAssertLessThanOrEqual(lod2.vertices.count, lod1.vertices.count)
++    XCTAssertEqual(lod0.simplificationMethod, "NONE")
++    XCTAssertEqual(lod1.simplificationMethod, "SPATIAL_VOXEL_CENTROID_CLUSTER_COLLAPSE")
++    XCTAssertEqual(lod1.requestedTargetTriangleFraction, 0.50, accuracy: 1e-9)
++    XCTAssertEqual(lod2.requestedTargetTriangleFraction, 0.25, accuracy: 1e-9)
++    XCTAssertLessThanOrEqual(lod1.achievedTriangleCount, lod0.achievedTriangleCount)
++    XCTAssertLessThanOrEqual(lod2.achievedTriangleCount, lod1.achievedTriangleCount)
++    XCTAssertFalse(lod1.preservationConstraints.isEmpty)
 +    XCTAssertNotEqual(r.phase4d.lod0PLYSHA256, r.phase4d.lod1PLYSHA256)
 +  }
 +
@@ -3415,14 +3543,51 @@ diff -uN /dev/null Tests/Unit/Phase4DSurfaceReconstructionTests.swift
 +    let root = r.phase4d.outputRoot
 +    for name in [
 +      "surface_mesh_lod0.ply", "surface_mesh_lod1.ply", "surface_mesh_lod2.ply",
-+      "surface_mesh.obj", "surface_mesh.mtl", "surface_mesh.glb",
++      "surface_mesh.obj", "surface_mesh.mtl",
 +      "visual_derivation_manifest.json",
 +    ] {
 +      XCTAssertTrue(FileManager.default.fileExists(atPath: root.appendingPathComponent(name).path), name)
 +    }
-+    let glb = try Data(contentsOf: root.appendingPathComponent("surface_mesh.glb"))
-+    XCTAssertEqual(String(data: glb.prefix(4), encoding: .ascii), "glTF")
-+    XCTAssertFalse(r.phase4d.glbSHA256?.isEmpty ?? true)
++    let ply = try String(contentsOf: root.appendingPathComponent("surface_mesh_lod0.ply"), encoding: .utf8)
++    XCTAssertTrue(ply.contains("format ascii 1.0"))
++    let obj = try String(contentsOf: root.appendingPathComponent("surface_mesh.obj"), encoding: .utf8)
++    XCTAssertTrue(obj.contains("v "))
++    let glbURL = root.appendingPathComponent("surface_mesh.glb")
++    let statusURL = root.appendingPathComponent("glb_export_status.json")
++    if FileManager.default.fileExists(atPath: glbURL.path) {
++      let glb = try Data(contentsOf: glbURL)
++      XCTAssertEqual(String(data: glb.prefix(4), encoding: .ascii), "glTF")
++      XCTAssertEqual(glb.count % 4, 0)
++      XCTAssertFalse(r.phase4d.glbSHA256?.isEmpty ?? true)
++    } else {
++      XCTAssertTrue(FileManager.default.fileExists(atPath: statusURL.path))
++      let status = try JSONSerialization.jsonObject(with: Data(contentsOf: statusURL)) as! [String: Any]
++      XCTAssertEqual(status["status"] as? String, "GLB_EXPORT_SKIPPED")
++    }
++  }
++
++  func testGLBSoftFailOnEmptyMeshDoesNotThrowPipelineWriter() throws {
++    let empty = SurfaceLODMesh(
++      lodLevel: 0,
++      meshID: "EMPTY",
++      vertices: [],
++      triangles: [],
++      collapseRecords: [],
++      requestedTargetTriangleFraction: 1,
++      requestedTargetTriangleCount: 0,
++      achievedTriangleCount: 0,
++      reductionRatio: 1,
++      preservationConstraints: [],
++      simplificationMethod: "NONE"
++    )
++    XCTAssertThrowsError(try DeterministicGLBWriter.write(mesh: empty)) { err in
++      XCTAssertEqual(err as? GLBExportFailure, .emptyMesh)
++    }
++  }
++
++  func testAmbiguousWindingClassificationsExist() throws {
++    XCTAssertEqual(TriangleRejectionReason.quarantinedAmbiguousTopology.rawValue, "QUARANTINED_AMBIGUOUS_TOPOLOGY")
++    XCTAssertEqual(TriangleRejectionReason.normalConflict.rawValue, "REJECTED_NORMAL_CONFLICT")
 +  }
 +
 +  func testCanonicalMeshJSONArtifacts() throws {

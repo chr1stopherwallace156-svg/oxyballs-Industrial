@@ -5,9 +5,16 @@
 | Parent delivery ZIP | `DOWNLOAD-elektron-reconstruction-phase-4c-dense-fusion.zip` |
 | Parent delivery ZIP SHA-256 | `5961191834a09101f2867d7ebdf83d9963b74ac6a525398f2f1a5b4514f8be60` |
 | Delivery ZIP | `DOWNLOAD-elektron-reconstruction-phase-4d-surface-foundation.zip` |
-| Delivery ZIP SHA-256 | `8d0ec824d8198151e1610b558bf1b45bd122f4a68b5970296d7f423ae795f3e3` |
+| Delivery ZIP SHA-256 | `bb54c481da50c9c42e444b523eb8a1b7a810d257fc30d59d842af591734f5be4` |
 | Baseline tip (main) | `028aa88be1af4aff67af225b6299de2d750673cf` |
 | Decision | D-031 |
+
+## Precision / algorithm laws
+- Internal math: Double
+- Triangulation: 2.5D projected-XY Bowyer–Watson Delaunay
+- Winding: CCW vs mean vertex normal; ambiguous → QUARANTINED_AMBIGUOUS_TOPOLOGY / REJECTED_NORMAL_CONFLICT
+- LOD: spatial voxel-centroid cluster collapse; targets ~50% / ~25% triangles with preservation priority
+- GLB: Float32 LE + 0x20/0x00 padding; soft-fail GLB_EXPORT_SKIPPED
 
 ## Classification
 
@@ -25,25 +32,11 @@
 
 ## Fixture results
 
-See `phase4d_emit_report.json`.
-
 | Field | Value |
 |---|---|
-| input fused points / normals | 47 / 47 |
 | vertices / triangles / rejected | 47 / 63 / 6 |
 | components / boundaries / holes | 1 / 2 / 1 |
-| interpolated regions | 0 (no automatic hole fill) |
-| Full suite | 713 executed / 7 skipped / 0 failed |
-| Phase4D filter | 31 / 0 |
-| clean_restore_result | PASS |
-| sidecar_result | PASS |
-| deterministic_zip_result | PASS |
-| output_closure_result | PASS |
-| GLB | IMPLEMENTED (deterministic binary glTF 2.0) |
-
-## Explicit non-claims
-
-- No physical device package (`SPKG-DEVICE-*`)
-- No engineering metrology / manufacturing geometry
-- No complete digital twin / production vehicle mesh
-- Fixture topology thresholds are not physical tolerances
+| Full suite | 715 executed / 7 skipped / 0 failed |
+| Phase4D filter | 33 / 0 |
+| clean_restore / sidecar / deterministic_zip / closure | PASS |
+| GLB | IMPLEMENTED (`7707348846555014297b0248e76d86d34d11f363d24f6ba4757f8698e4dd38f3`) |
