@@ -17,6 +17,25 @@ later entry that references it.
 
 ---
 
+## D-030 — Phase 4C dense fusion and point-cloud filtering
+
+- Date: 2026-08-04
+- Status: Proposed
+- Activation: Upon merge of the Phase 4C PR
+- Context: Phase 4B produced refined poses and registered observations; denser reconstruction requires explicit multi-frame fusion, confidence weighting, duplicate consolidation, and auditable outlier/conflict handling without silently discarding evidence or claiming production surfaces.
+- Decision:
+  1. Fused points are derived `RECONSTRUCTION_ESTIMATE` outputs; source registered observations remain immutable.
+  2. Every consolidated point retains contributor lineage (source point IDs, observation IDs, derivation records).
+  3. Rejected and quarantined observations remain auditable in explicit records.
+  4. Confidence weighting uses explicit versioned fixture rules — not invented physical sensor uncertainty.
+  5. Dynamic-object / contradictory classification remains provisional fixture disposition — not production moving-object segmentation.
+  6. Fixture density is not proof of real vehicle density; fixture numeric thresholds are not physical tolerances.
+  7. Phase 4C creates no production surface mesh (Phase 4D handoff only).
+  8. Physical fusion remains pending `SPKG-DEVICE-000001`.
+  9. Refinement-failed inputs must not silently substitute refined poses; eligibility is fail-closed.
+  10. Original Phase 3 / 4A / 4B evidence remains unchanged during Phase 4C processing.
+- Consequences: Linux-fixture dense-fusion foundation may merge as `SOURCE_FOUNDATION_MERGED` with `PHYSICAL_RECONSTRUCTION_STATE=PENDING_SPKG_DEVICE_000001`; production dense fusion, surface mesh, metrology, and digital-twin claims remain FORBIDDEN.
+
 ## D-029 — Phase 4B feature tracks and pose-graph refinement
 
 - Date: 2026-08-04
