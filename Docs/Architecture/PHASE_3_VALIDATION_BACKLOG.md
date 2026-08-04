@@ -42,6 +42,7 @@ Fixtures must use `SPKG-FIXTURE-*`, `TEST_FIXTURE` authority, and `host_claim=NO
 | 3.7 | Evidence identity, recovery, resilience | Signatures, journal, thermal, telemetry (Linux fixtures) | SE/App Attest physical → 3.6B backlog |
 | 3.8 | Privacy policy + resilient field transfer | Privacy/redaction/profiles/chunking/resume (Linux fixtures) | Vision/URLSession/cellular → Apple backlog |
 | 4A | Reconstruction ingestion + registered points | Fixture SPKG ingest / keyframes / depth-pose register / lineage | Physical recon → SPKG-DEVICE-000001 |
+| 4B | Feature tracks + pose-graph refinement | Synthetic features / tracks / refined poses (Linux fixtures) | Physical recon → SPKG-DEVICE-000001 |
 
 ## Sprint 3.6 promotion criteria
 
@@ -127,4 +128,15 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 | Registered point cloud + lineage + quality | COMPLETE (this PR) |
 | Physical device reconstruction (`SPKG-DEVICE-000001`) | PENDING |
 | Engineering metrology / complete digital twin | FORBIDDEN |
+
+
+
+## Phase 4B — Feature tracks / pose-graph refinement
+
+| Gate | Status |
+|---|---|
+| Linux fixture features, tracks, pose refinement | COMPLETE (this PR) |
+| Source poses immutable; refined = RECONSTRUCTION_ESTIMATE | COMPLETE |
+| Production photogrammetry / dense fusion / metrology | FORBIDDEN |
+| Physical device reconstruction (`SPKG-DEVICE-000001`) | PENDING |
 

@@ -1,0 +1,6 @@
+clean_restore: PASS
+delivery_zip_sha256: 1120996684980a61f00410ca2bf2752c9d20956b63853a679c5bad559356937f
+parent_delivery_zip_sha256: 7b97887c348933a0042681a9c7fd8416f83109dd43e360d9ae2d5c1f130673ea
+sidecar_result: PASS
+deterministic_zip_result: PASS
+output_closure_result: PASS
