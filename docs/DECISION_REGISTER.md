@@ -42,8 +42,8 @@ later entry that references it.
 ## D-029 — Phase 4B feature tracks and pose-graph refinement
 
 - Date: 2026-08-04
-- Status: Proposed
-- Activation: Upon merge of the Phase 4B PR
+- Status: Accepted
+- Activation: Merged with Phase 4B (`7c4a21f126215e9f2f29f8214845675afa1759d7` / PR #65)
 - Context: Phase 4A produced registered points from immutable package poses; multi-frame geometry requires explicit feature correspondence validation and derived pose refinement without silently replacing source poses.
 - Decision:
   1. Source poses are immutable observations; refined poses are derived `RECONSTRUCTION_ESTIMATE` outputs only.
@@ -59,8 +59,8 @@ later entry that references it.
 ## D-028 — Phase 4A reconstruction ingestion and registered point foundation
 
 - Date: 2026-08-04
-- Status: Proposed
-- Activation: Upon merge of the Phase 4A PR
+- Status: Accepted
+- Activation: Merged with Phase 4A (`a10c3140c5ce6f96a7a4cbd664af021a20f71bc9` / PR #64)
 - Context: Phase 3 delivered sealed spatial evidence packages; reconstruction must begin only from validated packages without silent continuation on missing evidence, and without claiming physical metrology or a complete digital twin.
 - Decision:
   1. Reconstruction begins only after package validation (closure, inventory, associations, clocks, frames, privacy when present).
@@ -77,8 +77,8 @@ later entry that references it.
 ## D-027 — Sprint 3.8 privacy policy and resilient field transfer
 
 - Date: 2026-08-04
-- Status: Proposed
-- Activation: Upon merge of the Sprint 3.8 PR
+- Status: Accepted
+- Activation: Merged with Sprint 3.8 (`3f673b3a599f9cbb9954893966f2473cf26ae7c8` / PR #63)
 - Context: Dependable field capture requires explicit privacy policies and resumable transfer of large packages without silent mutation of raw evidence.
 - Decision:
   1. Raw and redacted evidence are separate artifacts; redaction is a derivation and never silently replaces source evidence.
@@ -94,8 +94,8 @@ later entry that references it.
 ## D-026 — Sprint 3.7 evidence identity, journal recovery, and runtime resilience
 
 - Date: 2026-08-04
-- Status: Proposed
-- Activation: Upon merge of the Sprint 3.7 PR
+- Status: Accepted
+- Activation: Merged with Sprint 3.7 (`a62aa7fb1206db06f02a191accfa0dd7178a3cc4` / PR #62)
 - Context: Phase 3 source architecture through Sprint 3.6A is assembled; dependable field capture requires cryptographic identity, crash-safe journaling, thermal adaptation, and telemetry before physical Secure Enclave / App Attest validation.
 - Decision:
   1. Package hash identity, cryptographic signatures, device-key enrollment, and app-instance attestation are separate trust layers; an embedded public key is never trusted alone.

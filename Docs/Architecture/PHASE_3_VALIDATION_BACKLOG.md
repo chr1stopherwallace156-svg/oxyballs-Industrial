@@ -113,30 +113,26 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 
 | Gate | Status |
 |---|---|
-| Linux privacy + redaction + delivery profiles | COMPLETE (this PR) |
-| Content-addressed chunking + resumable transfer | COMPLETE (this PR) |
-| Tenant-scoped dedup + reassembly verification | COMPLETE (this PR) |
+| Linux privacy + redaction + delivery profiles | COMPLETE (merged #63) |
+| Content-addressed chunking + resumable transfer | COMPLETE (merged #63) |
+| Tenant-scoped dedup + reassembly verification | COMPLETE (merged #63) |
 | Apple Vision / Core ML / URLSession physical | PENDING |
 | Privacy certification / production transfer claim | FORBIDDEN |
-
-
 
 ## Phase 4A — Reconstruction ingestion / registered point foundation
 
 | Gate | Status |
 |---|---|
-| Linux fixture ingestion + eligibility + registration | COMPLETE (this PR) |
-| Registered point cloud + lineage + quality | COMPLETE (this PR) |
+| Linux fixture ingestion + eligibility + registration | COMPLETE (merged #64) |
+| Registered point cloud + lineage + quality | COMPLETE (merged #64) |
 | Physical device reconstruction (`SPKG-DEVICE-000001`) | PENDING |
 | Engineering metrology / complete digital twin | FORBIDDEN |
-
-
 
 ## Phase 4B — Feature tracks / pose-graph refinement
 
 | Gate | Status |
 |---|---|
-| Linux fixture features, tracks, pose refinement | COMPLETE (PR #65) |
+| Linux fixture features, tracks, pose refinement | COMPLETE (merged #65) |
 | Source poses immutable; refined = RECONSTRUCTION_ESTIMATE | COMPLETE |
 | Production photogrammetry / dense fusion / metrology | FORBIDDEN |
 | Physical device reconstruction (`SPKG-DEVICE-000001`) | PENDING |
@@ -150,4 +146,3 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 | Phase 4D handoff contract (no mesh generation) | COMPLETE |
 | Production dense fusion / surface mesh / metrology | FORBIDDEN |
 | Physical device fusion (`SPKG-DEVICE-000001`) | PENDING |
-

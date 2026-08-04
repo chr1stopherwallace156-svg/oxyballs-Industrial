@@ -3,14 +3,15 @@
 **Honest truth ledger.** No fluff, no future promises — runtime and documentation reality tied to a specific tip.
 
 ```text
-source_main_baseline_sha     = a62aa7f (main; Sprint 3.7 merged)
-sprint_3_8_tip_sha           = 2dbce49740b77eccebc3c90234c60504e38e0fc3 (PR #63 open)
-phase_4a_tip_sha             = 9a12b24410bbe578a069dc2dc843163b7ebc2e07 (PR #64 open)
-phase_4b_tip_sha             = f54b63e3b920c9ce4ed94d4fa77602017d4545c3 (PR #65 open)
-phase_4c_tip_sha             = 4e292de74b4505551c4a8aa5286e3c7275236897 (PR #66; docs tip may lag by one commit)
-state_change_pr              = Phase 4C dense fusion / point filtering (PR #66; stacked on 4B)
+source_main_baseline_sha     = 7c4a21f126215e9f2f29f8214845675afa1759d7 (main; Phase 4B / #65 merged)
+sprint_3_8_merged_sha        = 3f673b3a599f9cbb9954893966f2473cf26ae7c8
+phase_4a_merged_sha          = a10c3140c5ce6f96a7a4cbd664af021a20f71bc9
+phase_4b_merged_sha          = 7c4a21f126215e9f2f29f8214845675afa1759d7
+phase_4c_evidence_head_sha   = c4db8b0546a7cf9b46d415309379858622539000
+phase_4c_tip_sha             = (this PR; stacked on merged 4B main)
+state_change_pr              = Phase 4C dense fusion / point filtering (PR #66)
 state_change_status          = PROPOSED_IN_DRAFT_PR
-updated_at                   = 2026-08-04T10:15:00Z
+updated_at                   = 2026-08-04T11:00:00Z
 maintained_by                = Industrial Phase 4 maintainers
 update_trigger               = DRAFT_PR_EVIDENCE_PROPOSED
 ```
@@ -28,9 +29,12 @@ SURFACE_MESH_CLAIM                = FORBIDDEN
 ENGINEERING_METROLOGY_CLAIM       = FORBIDDEN
 COMPLETE_DIGITAL_TWIN_CLAIM       = FORBIDDEN
 APPLE_RUNTIME_STATE               = SOURCE_CANDIDATES_UNVALIDATED
+PRIVACY_CERTIFICATION_CLAIM       = FORBIDDEN
+PRODUCTION_TRANSFER_CLAIM         = FORBIDDEN
 ```
 
-Sprint 3.8 (PR #63), Phase 4A (PR #64), and Phase 4B (PR #65) remain open. Phase 4C stacks on the 4B tip.
+Sprint 3.8 (#63 / D-027), Phase 4A (#64 / D-028), and Phase 4B (#65 / D-029) are merged on main (`7c4a21f`). This PR adds Phase 4C dense fusion and filtered point foundation (D-030).
+Sprint 3.6B physical Apple hardware execution remains pending Mac/iPhone.
 Real-device fusion remains pending `SPKG-DEVICE-000001`.
 
 See `Docs/Architecture/PHASE_3_VALIDATION_BACKLOG.md` and D-030.
