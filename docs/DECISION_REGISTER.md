@@ -27,13 +27,16 @@ later entry that references it.
   1. Fused points are derived `RECONSTRUCTION_ESTIMATE` outputs; source registered observations remain immutable.
   2. Every consolidated point retains contributor lineage (source point IDs, observation IDs, derivation records).
   3. Rejected and quarantined observations remain auditable in explicit records.
-  4. Confidence weighting uses explicit versioned fixture rules — not invented physical sensor uncertainty.
-  5. Dynamic-object / contradictory classification remains provisional fixture disposition — not production moving-object segmentation.
-  6. Fixture density is not proof of real vehicle density; fixture numeric thresholds are not physical tolerances.
-  7. Phase 4C creates no production surface mesh (Phase 4D handoff only).
-  8. Physical fusion remains pending `SPKG-DEVICE-000001`.
-  9. Refinement-failed inputs must not silently substitute refined poses; eligibility is fail-closed.
-  10. Original Phase 3 / 4A / 4B evidence remains unchanged during Phase 4C processing.
+  4. Confidence weighting uses explicit versioned fixture rules `w_i = c_depth * c_pose * max(0, cos(θ))^γ` — not invented physical sensor uncertainty.
+  5. Fixture default voxel size is 0.005 m (deterministic test rule); voxel match is a candidate group only and does not alone prove a single surface.
+  6. Outlier detection uses voxel-index backed k-NN (no all-pairs O(n²) runtime path); normals use covariance PCA eigen-decomposition.
+  7. Dynamic-object / contradictory classification remains provisional fixture disposition — not production moving-object segmentation.
+  8. Fixture density is not proof of real vehicle density; fixture numeric thresholds (including abs/rel epsilon) are not physical tolerances.
+  9. Phase 4C creates no production surface mesh (Phase 4D handoff only).
+  10. Physical fusion remains pending `SPKG-DEVICE-000001`.
+  11. Refinement-failed inputs must not silently substitute refined poses; eligibility is fail-closed.
+  12. Original Phase 3 / 4A / 4B evidence remains unchanged during Phase 4C processing.
+  13. Fixture truth is separated into `fixture_truth.json` with committed offsets (no platform PRNG).
 - Consequences: Linux-fixture dense-fusion foundation may merge as `SOURCE_FOUNDATION_MERGED` with `PHYSICAL_RECONSTRUCTION_STATE=PENDING_SPKG_DEVICE_000001`; production dense fusion, surface mesh, metrology, and digital-twin claims remain FORBIDDEN.
 
 ## D-029 — Phase 4B feature tracks and pose-graph refinement
