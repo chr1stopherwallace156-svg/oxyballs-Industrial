@@ -1,0 +1,244 @@
+[0/1] Planning build
+Building for debugging...
+[0/7] Write sources
+[1/7] Write swift-version--95C6105F3043FD2.txt
+[3/9] Compiling ElektronCapture Phase4DPipeline.swift
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/Phase4DPipeline.swift:17:14: warning: stored property 'outputRoot' of 'Sendable'-conforming struct 'Phase4DPipelineResult' has non-sendable type 'URL'
+  public var outputRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/Phase4DPipeline.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[4/9] Emitting module ElektronCapture
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Application/LocalCapturePlanProvider.swift:4:14: warning: stored property 'fixtureDirectory' of 'Sendable'-conforming struct 'LocalCapturePlanProvider' has non-sendable type 'URL?'
+  public var fixtureDirectory: URL?
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Application/LocalCapturePlanProvider.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/Phase4BPipeline.swift:16:14: warning: stored property 'outputRoot' of 'Sendable'-conforming struct 'Phase4BPipelineResult' has non-sendable type 'URL'
+  public var outputRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/Phase4BPipeline.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/Phase4CPipeline.swift:283:14: warning: stored property 'outputRoot' of 'Sendable'-conforming struct 'Phase4CPipelineResult' has non-sendable type 'URL'
+  public var outputRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/Phase4CPipeline.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/Phase4DPipeline.swift:17:14: warning: stored property 'outputRoot' of 'Sendable'-conforming struct 'Phase4DPipelineResult' has non-sendable type 'URL'
+  public var outputRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/Phase4DPipeline.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/ReconstructionPipeline.swift:44:14: warning: stored property 'packageRoot' of 'Sendable'-conforming struct 'ReconstructionPackageIngestResult' has non-sendable type 'URL'
+  public var packageRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/ReconstructionPipeline.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/ReconstructionPipeline.swift:48:14: warning: stored property 'calibrations' of 'Sendable'-conforming struct 'ReconstructionPackageIngestResult' has non-sendable type '[[String : Any]]'
+  public var calibrations: [[String: Any]]
+             ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/ReconstructionPipeline.swift:49:14: warning: stored property 'rgbDepthAssociations' of 'Sendable'-conforming struct 'ReconstructionPackageIngestResult' has non-sendable type '[[String : Any]]'
+  public var rgbDepthAssociations: [[String: Any]]
+             ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/ReconstructionPipeline.swift:50:14: warning: stored property 'poseAssociations' of 'Sendable'-conforming struct 'ReconstructionPackageIngestResult' has non-sendable type '[[String : Any]]'
+  public var poseAssociations: [[String: Any]]
+             ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/ReconstructionPipeline.swift:51:14: warning: stored property 'sampleIndex' of 'Sendable'-conforming struct 'ReconstructionPackageIngestResult' has non-sendable type '[[String : Any]]'
+  public var sampleIndex: [[String: Any]]
+             ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/ReconstructionPipeline.swift:52:14: warning: stored property 'artifacts' of 'Sendable'-conforming struct 'ReconstructionPackageIngestResult' has non-sendable type '[[String : Any]]'
+  public var artifacts: [[String: Any]]
+             ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/ReconstructionPipeline.swift:53:14: warning: stored property 'correlations' of 'Sendable'-conforming struct 'ReconstructionPackageIngestResult' has non-sendable type '[[String : Any]]'
+  public var correlations: [[String: Any]]
+             ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/Reconstruction/ReconstructionPipeline.swift:593:14: warning: stored property 'outputRoot' of 'Sendable'-conforming struct 'ReconstructionPipelineResult' has non-sendable type 'URL'
+  public var outputRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/SpatialEvidence/EvidenceCustodyRecord.swift:68:14: warning: stored property 'packageRootURL' of 'Sendable'-conforming struct 'VerifiedSpatialEvidencePackage' has non-sendable type 'URL'
+  public let packageRootURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/SpatialEvidence/EvidenceCustodyRecord.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/SpatialEvidence/FixtureFieldTransferPackageBuilder.swift:16:16: warning: stored property 'rootURL' of 'Sendable'-conforming struct 'SealResult' has non-sendable type 'URL'
+    public var rootURL: URL
+               ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/SpatialEvidence/FixtureFieldTransferPackageBuilder.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/SpatialEvidence/SpatialEvidencePackage.swift:90:14: warning: stored property 'sampleIndex' of 'Sendable'-conforming struct 'SpatialEvidenceManifest' has non-sendable type '[[String : Any]]'
+  public let sampleIndex: [[String: Any]]
+             ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/SpatialEvidence/SpatialEvidencePackage.swift:147:14: warning: stored property 'rootURL' of 'Sendable'-conforming struct 'SpatialEvidencePackage' has non-sendable type 'URL'
+  public let rootURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Domain/SpatialEvidence/SpatialEvidencePackage.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Phase1/ArtifactPersistenceService.swift:4:14: warning: stored property 'fileURL' of 'Sendable'-conforming struct 'PersistedArtifact' has non-sendable type 'URL'
+  public var fileURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Phase1/ArtifactPersistenceService.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Phase1/EvidenceLibrary/EvidenceLibraryPaths.swift:18:14: warning: stored property 'libraryRoot' of 'Sendable'-conforming struct 'EvidenceLibraryPaths' has non-sendable type 'URL'
+  public var libraryRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Phase1/EvidenceLibrary/EvidenceLibraryPaths.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Phase1/EvidencePackageBuilder.swift:4:14: warning: stored property 'packageDirectoryURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageDirectoryURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Phase1/EvidencePackageBuilder.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Phase1/EvidencePackageBuilder.swift:5:14: warning: stored property 'packageZipURL' of 'Sendable'-conforming struct 'Phase1PackageResult' has non-sendable type 'URL'
+  public var packageZipURL: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Phase1/Phase1CaptureCoordinator.swift:26:14: warning: stored property 'workRoot' of 'Sendable'-conforming struct 'Phase1CaptureCoordinator' has non-sendable type 'URL'
+  public var workRoot: URL
+             ^
+Foundation.URL:1:15: note: struct 'URL' does not conform to the 'Sendable' protocol
+public struct URL : ReferenceConvertible, Equatable {
+              ^
+/workspace/.scratch-elektron-capture-ios/elektron-capture-ios/App/Phase1/Phase1CaptureCoordinator.swift:1:1: remark: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'Foundation'
+import Foundation
+^
+@preconcurrency 
+[5/15] Write Objects.LinkFileList
+[10/15] Linking EmitPhase4BEvidence
+[11/15] Linking EmitPhase4AEvidence
+[11/15] Linking EmitPhase4CEvidence
+[11/15] Linking EmitPhase4DEvidence
+[14/15] Linking ElektronCapturePackageTests.xctest
+Build complete! (5.37s)
+Test Suite 'Selected tests' started at 2026-08-04 11:33:39.107
+Test Suite 'Phase4DSurfaceReconstructionTests' started at 2026-08-04 11:33:39.108
+Test Case 'Phase4DSurfaceReconstructionTests.testCancellationCreatesNoSealedOutput' started at 2026-08-04 11:33:39.108
+Test Case 'Phase4DSurfaceReconstructionTests.testCancellationCreatesNoSealedOutput' passed (1.1 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testCanonicalMeshJSONArtifacts' started at 2026-08-04 11:33:40.208
+Test Case 'Phase4DSurfaceReconstructionTests.testCanonicalMeshJSONArtifacts' passed (1.429 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testConfidenceRecordsPresent' started at 2026-08-04 11:33:41.636
+Test Case 'Phase4DSurfaceReconstructionTests.testConfidenceRecordsPresent' passed (1.402 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testCoordinateMismatchIneligible' started at 2026-08-04 11:33:43.038
+Test Case 'Phase4DSurfaceReconstructionTests.testCoordinateMismatchIneligible' passed (0.0 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testDegenerateTriangleRejectUnit' started at 2026-08-04 11:33:43.039
+Test Case 'Phase4DSurfaceReconstructionTests.testDegenerateTriangleRejectUnit' passed (0.001 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testDeterministicReplay' started at 2026-08-04 11:33:43.040
+Test Case 'Phase4DSurfaceReconstructionTests.testDeterministicReplay' passed (2.788 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testEligibleSyntheticSurface' started at 2026-08-04 11:33:45.827
+Test Case 'Phase4DSurfaceReconstructionTests.testEligibleSyntheticSurface' passed (1.413 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testExcessiveEdgeLengthRejected' started at 2026-08-04 11:33:47.240
+Test Case 'Phase4DSurfaceReconstructionTests.testExcessiveEdgeLengthRejected' passed (0.0 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testFixtureTruthMinsSatisfied' started at 2026-08-04 11:33:47.240
+Test Case 'Phase4DSurfaceReconstructionTests.testFixtureTruthMinsSatisfied' passed (1.411 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testForbiddenClaimsInQualityAndHandoff' started at 2026-08-04 11:33:48.651
+Test Case 'Phase4DSurfaceReconstructionTests.testForbiddenClaimsInQualityAndHandoff' passed (1.41 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testGapBridgingRejected' started at 2026-08-04 11:33:50.061
+Test Case 'Phase4DSurfaceReconstructionTests.testGapBridgingRejected' passed (0.0 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testIntentionalHoleAndOpenBoundary' started at 2026-08-04 11:33:50.061
+Test Case 'Phase4DSurfaceReconstructionTests.testIntentionalHoleAndOpenBoundary' passed (1.414 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testInvalidNormalsIneligible' started at 2026-08-04 11:33:51.475
+Test Case 'Phase4DSurfaceReconstructionTests.testInvalidNormalsIneligible' passed (0.0 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testInventoryCoversRequiredArtifacts' started at 2026-08-04 11:33:51.475
+Test Case 'Phase4DSurfaceReconstructionTests.testInventoryCoversRequiredArtifacts' passed (1.384 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testLineageMapsVerticesToFusedPoints' started at 2026-08-04 11:33:52.859
+Test Case 'Phase4DSurfaceReconstructionTests.testLineageMapsVerticesToFusedPoints' passed (1.38 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testMissingFusedCloudIneligible' started at 2026-08-04 11:33:54.239
+Test Case 'Phase4DSurfaceReconstructionTests.testMissingFusedCloudIneligible' passed (0.0 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testNoAutomaticHoleFill' started at 2026-08-04 11:33:54.239
+Test Case 'Phase4DSurfaceReconstructionTests.testNoAutomaticHoleFill' passed (1.411 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testOutputOrderDeterministic' started at 2026-08-04 11:33:55.651
+Test Case 'Phase4DSurfaceReconstructionTests.testOutputOrderDeterministic' passed (1.381 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testPLYOBJGLBArtifactsWritten' started at 2026-08-04 11:33:57.032
+Test Case 'Phase4DSurfaceReconstructionTests.testPLYOBJGLBArtifactsWritten' passed (1.392 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testPhase4CFilterStillCompilesViaSmoke' started at 2026-08-04 11:33:58.424
+Test Case 'Phase4DSurfaceReconstructionTests.testPhase4CFilterStillCompilesViaSmoke' passed (0.87 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testPhase4CNotReadyIneligible' started at 2026-08-04 11:33:59.295
+Test Case 'Phase4DSurfaceReconstructionTests.testPhase4CNotReadyIneligible' passed (0.001 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testPhase4COutputsRemainByteIdentical' started at 2026-08-04 11:33:59.295
+Test Case 'Phase4DSurfaceReconstructionTests.testPhase4COutputsRemainByteIdentical' passed (1.408 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testPhase4EHandoffReadiness' started at 2026-08-04 11:34:00.703
+Test Case 'Phase4DSurfaceReconstructionTests.testPhase4EHandoffReadiness' passed (1.41 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testQuarantinedPointsExcludedFromMesh' started at 2026-08-04 11:34:02.113
+Test Case 'Phase4DSurfaceReconstructionTests.testQuarantinedPointsExcludedFromMesh' passed (1.412 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testSelfDigestBlankedBeforeHash' started at 2026-08-04 11:34:03.525
+Test Case 'Phase4DSurfaceReconstructionTests.testSelfDigestBlankedBeforeHash' passed (0.001 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testSurfaceAuthorityIsReconstructionEstimate' started at 2026-08-04 11:34:03.526
+Test Case 'Phase4DSurfaceReconstructionTests.testSurfaceAuthorityIsReconstructionEstimate' passed (1.418 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testSurfacePackageIDs' started at 2026-08-04 11:34:04.944
+Test Case 'Phase4DSurfaceReconstructionTests.testSurfacePackageIDs' passed (0.117 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testThreeLODsWithBoundaryPreservation' started at 2026-08-04 11:34:05.062
+Test Case 'Phase4DSurfaceReconstructionTests.testThreeLODsWithBoundaryPreservation' passed (1.38 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testTopologyValidationRecorded' started at 2026-08-04 11:34:06.442
+Test Case 'Phase4DSurfaceReconstructionTests.testTopologyValidationRecorded' passed (1.401 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testValidTrianglesAndInjectedRejects' started at 2026-08-04 11:34:07.843
+Test Case 'Phase4DSurfaceReconstructionTests.testValidTrianglesAndInjectedRejects' passed (1.369 seconds)
+Test Case 'Phase4DSurfaceReconstructionTests.testVerticesFromTrustedFusedPointsOnly' started at 2026-08-04 11:34:09.212
+Test Case 'Phase4DSurfaceReconstructionTests.testVerticesFromTrustedFusedPointsOnly' passed (1.423 seconds)
+Test Suite 'Phase4DSurfaceReconstructionTests' passed at 2026-08-04 11:34:10.635
+	 Executed 31 tests, with 0 failures (0 unexpected) in 31.527 (31.527) seconds
+Test Suite 'Selected tests' passed at 2026-08-04 11:34:10.635
+	 Executed 31 tests, with 0 failures (0 unexpected) in 31.527 (31.527) seconds
