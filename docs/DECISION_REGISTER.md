@@ -17,11 +17,28 @@ later entry that references it.
 
 ---
 
-## D-028 — Phase 4A reconstruction ingestion and registered point foundation
+## D-029 — Phase 4B feature tracks and pose-graph refinement
 
 - Date: 2026-08-04
 - Status: Proposed
-- Activation: Upon merge of the Phase 4A PR
+- Activation: Upon merge of the Phase 4B PR
+- Context: Phase 4A produced registered points from immutable package poses; multi-frame geometry requires explicit feature correspondence validation and derived pose refinement without silently replacing source poses.
+- Decision:
+  1. Source poses are immutable observations; refined poses are derived `RECONSTRUCTION_ESTIMATE` outputs only.
+  2. Feature correspondences require explicit validation (descriptor, mutual/ratio, geometric); rejected correspondences remain traceable.
+  3. Optimization failure emits no refined pose.
+  4. Fixture convergence is not proof of real-vehicle photogrammetry or detector parity with Apple Vision / OpenCV / Metal.
+  5. Phase 4B performs no dense fusion, production mesh, or engineering metrology.
+  6. Physical validation remains pending real device packages (`SPKG-DEVICE-000001`).
+  7. Phase 4A source-pose point clouds are preserved separately from refined-pose clouds.
+  8. Original SPKG evidence remains immutable during Phase 4B processing.
+- Consequences: Linux-fixture feature-track and pose-refinement foundation may merge as `SOURCE_FOUNDATION_MERGED` with `PHYSICAL_RECONSTRUCTION_STATE=PENDING_SPKG_DEVICE_000001`; production photogrammetry and metrology claims remain FORBIDDEN.
+
+## D-028 — Phase 4A reconstruction ingestion and registered point foundation
+
+- Date: 2026-08-04
+- Status: Accepted
+- Activation: Merged with Phase 4A (`a10c3140c5ce6f96a7a4cbd664af021a20f71bc9` / PR #64)
 - Context: Phase 3 delivered sealed spatial evidence packages; reconstruction must begin only from validated packages without silent continuation on missing evidence, and without claiming physical metrology or a complete digital twin.
 - Decision:
   1. Reconstruction begins only after package validation (closure, inventory, associations, clocks, frames, privacy when present).
