@@ -17,11 +17,28 @@ later entry that references it.
 
 ---
 
-## D-026 — Sprint 3.7 evidence identity, journal recovery, and runtime resilience
+## D-027 — Sprint 3.8 privacy policy and resilient field transfer
 
 - Date: 2026-08-04
 - Status: Proposed
-- Activation: Upon merge of the Sprint 3.7 PR
+- Activation: Upon merge of the Sprint 3.8 PR
+- Context: Dependable field capture requires explicit privacy policies and resumable transfer of large packages without silent mutation of raw evidence.
+- Decision:
+  1. Raw and redacted evidence are separate artifacts; redaction is a derivation and never silently replaces source evidence.
+  2. Privacy-first capture must be selected by explicit policy before capture begins.
+  3. Metadata removal and coarsening are ledgered; silent stripping is rejected.
+  4. Inspection and engineering packages are separate delivery profiles with their own manifests and closures.
+  5. Resumable transfer is chunk- and receipt-based; accepted chunks are not resent unless requested.
+  6. Deduplication is tenant and security-domain scoped — never cross-customer global.
+  7. Final reassembly must reproduce package byte identity and closure; signature and journal identity preserved when present.
+  8. Apple privacy models and real network behavior remain physically unvalidated.
+- Consequences: Linux-fixture validation may merge as SOURCE_FOUNDATION_MERGED / APPLE_RUNTIME_UNVALIDATED; privacy certification and production transfer claims remain FORBIDDEN.
+
+## D-026 — Sprint 3.7 evidence identity, journal recovery, and runtime resilience
+
+- Date: 2026-08-04
+- Status: Accepted
+- Activation: Merged with Sprint 3.7 (`a62aa7fb1206db06f02a191accfa0dd7178a3cc4` / PR #62)
 - Context: Phase 3 source architecture through Sprint 3.6A is assembled; dependable field capture requires cryptographic identity, crash-safe journaling, thermal adaptation, and telemetry before physical Secure Enclave / App Attest validation.
 - Decision:
   1. Package hash identity, cryptographic signatures, device-key enrollment, and app-instance attestation are separate trust layers; an embedded public key is never trusted alone.

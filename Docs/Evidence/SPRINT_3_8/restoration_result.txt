@@ -1,0 +1,4 @@
+clean_restore_result: PASS
+delivery_zip_sha256: a83af02b3677f81d9ebf8e64b8769d247ab2ce130cf3b82881b3ec3f98d48cfd
+phase38_restore: PASS
+swift_test_restore: PASS

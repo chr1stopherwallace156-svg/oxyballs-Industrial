@@ -1,0 +1,4 @@
+Chunk binary payloads and engineering/reassembled ZIP envelopes are carried in
+DOWNLOAD-elektron-capture-ios-sprint-3-8-privacy-field-transfer.zip under
+elektron-capture-ios/Docs/Evidence/SPRINT_3_8/SPKG-FIXTURE-FIELD-TRANSFER-000001/
+to avoid bloating the Industrial git tree with 230 fixed-size chunk files.

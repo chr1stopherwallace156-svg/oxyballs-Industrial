@@ -1,0 +1,1430 @@
+[0/1] Planning build
+Building for debugging...
+[0/2] Write swift-version--95C6105F3043FD2.txt
+Build complete! (0.33s)
+Test Suite 'All tests' started at 2026-08-04 02:54:16.516
+Test Suite 'debug.xctest' started at 2026-08-04 02:54:16.517
+Test Suite 'AuthorityGuardTests' started at 2026-08-04 02:54:16.517
+Test Case 'AuthorityGuardTests.testAllowsNeutralText' started at 2026-08-04 02:54:16.517
+Test Case 'AuthorityGuardTests.testAllowsNeutralText' passed (0.001 seconds)
+Test Case 'AuthorityGuardTests.testRejectsForbiddenClaims' started at 2026-08-04 02:54:16.518
+Test Case 'AuthorityGuardTests.testRejectsForbiddenClaims' passed (0.0 seconds)
+Test Suite 'AuthorityGuardTests' passed at 2026-08-04 02:54:16.518
+Executed 2 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'CanonicalPackageIdentityTests' started at 2026-08-04 02:54:16.518
+Test Case 'CanonicalPackageIdentityTests.testCanonicalIdentityEquivalenceAcrossVariants' started at 2026-08-04 02:54:16.518
+Test Case 'CanonicalPackageIdentityTests.testCanonicalIdentityEquivalenceAcrossVariants' passed (0.003 seconds)
+Test Case 'CanonicalPackageIdentityTests.testCanonicalIdentityUnderSymlinkAliasedRoot' started at 2026-08-04 02:54:16.520
+Test Case 'CanonicalPackageIdentityTests.testCanonicalIdentityUnderSymlinkAliasedRoot' passed (0.002 seconds)
+Test Case 'CanonicalPackageIdentityTests.testCanonicalKeyIdempotence' started at 2026-08-04 02:54:16.522
+Test Case 'CanonicalPackageIdentityTests.testCanonicalKeyIdempotence' passed (0.0 seconds)
+Test Case 'CanonicalPackageIdentityTests.testCanonicalKeyPreservesDirectoryHierarchy' started at 2026-08-04 02:54:16.522
+Test Case 'CanonicalPackageIdentityTests.testCanonicalKeyPreservesDirectoryHierarchy' passed (0.0 seconds)
+Test Suite 'CanonicalPackageIdentityTests' passed at 2026-08-04 02:54:16.522
+Executed 4 tests, with 0 failures (0 unexpected) in 0.004 (0.004) seconds
+Test Suite 'CanonicalPathInvariantTests' started at 2026-08-04 02:54:16.522
+Test Case 'CanonicalPathInvariantTests.testCanonicalPathInvariantAcrossAliasesAndPrefixes' started at 2026-08-04 02:54:16.522
+Test Case 'CanonicalPathInvariantTests.testCanonicalPathInvariantAcrossAliasesAndPrefixes' passed (0.002 seconds)
+Test Case 'CanonicalPathInvariantTests.testDiscoveredEqualsDeclaredUnderSymlinkedWorkRoot' started at 2026-08-04 02:54:16.524
+Test Case 'CanonicalPathInvariantTests.testDiscoveredEqualsDeclaredUnderSymlinkedWorkRoot' passed (0.001 seconds)
+Test Suite 'CanonicalPathInvariantTests' passed at 2026-08-04 02:54:16.525
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.003 (0.003) seconds
+Test Suite 'CapabilityStateCodingTests' started at 2026-08-04 02:54:16.525
+Test Case 'CapabilityStateCodingTests.testCodableRoundTrip' started at 2026-08-04 02:54:16.525
+Test Case 'CapabilityStateCodingTests.testCodableRoundTrip' passed (0.0 seconds)
+Test Case 'CapabilityStateCodingTests.testRawValuesAreStable' started at 2026-08-04 02:54:16.526
+Test Case 'CapabilityStateCodingTests.testRawValuesAreStable' passed (0.0 seconds)
+Test Suite 'CapabilityStateCodingTests' passed at 2026-08-04 02:54:16.526
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'CaptureSessionStateMachineTests' started at 2026-08-04 02:54:16.526
+Test Case 'CaptureSessionStateMachineTests.testGuidanceAuthorityDefaultForPose' started at 2026-08-04 02:54:16.526
+Test Case 'CaptureSessionStateMachineTests.testGuidanceAuthorityDefaultForPose' passed (0.0 seconds)
+Test Case 'CaptureSessionStateMachineTests.testIllegalTransitionThrows' started at 2026-08-04 02:54:16.526
+Test Case 'CaptureSessionStateMachineTests.testIllegalTransitionThrows' passed (0.0 seconds)
+Test Case 'CaptureSessionStateMachineTests.testLegalTransition' started at 2026-08-04 02:54:16.526
+Test Case 'CaptureSessionStateMachineTests.testLegalTransition' passed (0.0 seconds)
+Test Suite 'CaptureSessionStateMachineTests' passed at 2026-08-04 02:54:16.526
+Executed 3 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'CaptureSideStatusTests' started at 2026-08-04 02:54:16.526
+Test Case 'CaptureSideStatusTests.testAcceptsCaptureSideStatuses' started at 2026-08-04 02:54:16.526
+Test Case 'CaptureSideStatusTests.testAcceptsCaptureSideStatuses' passed (0.0 seconds)
+Test Case 'CaptureSideStatusTests.testDirectiveApprovedIsNotImplementationComplete' started at 2026-08-04 02:54:16.526
+Test Case 'CaptureSideStatusTests.testDirectiveApprovedIsNotImplementationComplete' passed (0.0 seconds)
+Test Case 'CaptureSideStatusTests.testRejectsAllRegistryEdtsOwnedStatuses' started at 2026-08-04 02:54:16.526
+Test Case 'CaptureSideStatusTests.testRejectsAllRegistryEdtsOwnedStatuses' passed (0.0 seconds)
+Test Suite 'CaptureSideStatusTests' passed at 2026-08-04 02:54:16.526
+Executed 3 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'ContentHasherTests' started at 2026-08-04 02:54:16.526
+Test Case 'ContentHasherTests.testSha256KnownVector' started at 2026-08-04 02:54:16.526
+Test Case 'ContentHasherTests.testSha256KnownVector' passed (0.0 seconds)
+Test Suite 'ContentHasherTests' passed at 2026-08-04 02:54:16.526
+Executed 1 test, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'CrossLanguageCanonicalJSONTests' started at 2026-08-04 02:54:16.526
+Test Case 'CrossLanguageCanonicalJSONTests.testSwiftCanonicalBytesMatchPythonGolden' started at 2026-08-04 02:54:16.526
+/workspace/.scratch-elektron-capture-ios/Tests/Unit/CrossLanguageCanonicalJSONTests.swift:16: CrossLanguageCanonicalJSONTests.testSwiftCanonicalBytesMatchPythonGolden : Test skipped - CROSS_LANGUAGE_CANONICAL_JSON gate requires Darwin JSONSerialization boolean identity
+Test Case 'CrossLanguageCanonicalJSONTests.testSwiftCanonicalBytesMatchPythonGolden' skipped (0.0 seconds)
+Test Suite 'CrossLanguageCanonicalJSONTests' passed at 2026-08-04 02:54:16.526
+Executed 1 test, with 1 test skipped and 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'DeviceCapabilitySnapshotCanonicalEncodingTests' started at 2026-08-04 02:54:16.526
+Test Case 'DeviceCapabilitySnapshotCanonicalEncodingTests.testCanonicalEncodingIsDeterministicAndSorted' started at 2026-08-04 02:54:16.526
+Test Case 'DeviceCapabilitySnapshotCanonicalEncodingTests.testCanonicalEncodingIsDeterministicAndSorted' passed (0.001 seconds)
+Test Case 'DeviceCapabilitySnapshotCanonicalEncodingTests.testCodableRoundTripPreservesFields' started at 2026-08-04 02:54:16.528
+Test Case 'DeviceCapabilitySnapshotCanonicalEncodingTests.testCodableRoundTripPreservesFields' passed (0.0 seconds)
+Test Suite 'DeviceCapabilitySnapshotCanonicalEncodingTests' passed at 2026-08-04 02:54:16.528
+Executed 2 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'DeviceCapabilitySnapshotPackageIntegrationTests' started at 2026-08-04 02:54:16.528
+Test Case 'DeviceCapabilitySnapshotPackageIntegrationTests.testExistingPathWithoutSnapshotStillValidates' started at 2026-08-04 02:54:16.528
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=d20f6ffd523b78a86cd2f916fa34af5d1918d75f7b142237c752ad6b254213ab byteCount=22 synthetic=false
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=d20f6ffd523b78a86cd2f916fa34af5d1918d75f7b142237c752ad6b254213ab
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=d20f6ffd523b78a86cd2f916fa34af5d1918d75f7b142237c752ad6b254213ab byteCount=22 synthetic=false
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=d20f6ffd523b78a86cd2f916fa34af5d1918d75f7b142237c752ad6b254213ab
+Test Case 'DeviceCapabilitySnapshotPackageIntegrationTests.testExistingPathWithoutSnapshotStillValidates' passed (0.021 seconds)
+Test Case 'DeviceCapabilitySnapshotPackageIntegrationTests.testPackageIncludesSnapshotSidecarInventoryAndMetadataLink' started at 2026-08-04 02:54:16.549
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=d20f6ffd523b78a86cd2f916fa34af5d1918d75f7b142237c752ad6b254213ab byteCount=22 synthetic=false
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=d20f6ffd523b78a86cd2f916fa34af5d1918d75f7b142237c752ad6b254213ab
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=d20f6ffd523b78a86cd2f916fa34af5d1918d75f7b142237c752ad6b254213ab byteCount=22 synthetic=false
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=d20f6ffd523b78a86cd2f916fa34af5d1918d75f7b142237c752ad6b254213ab
+Test Case 'DeviceCapabilitySnapshotPackageIntegrationTests.testPackageIncludesSnapshotSidecarInventoryAndMetadataLink' passed (0.02 seconds)
+Test Suite 'DeviceCapabilitySnapshotPackageIntegrationTests' passed at 2026-08-04 02:54:16.569
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.041 (0.041) seconds
+Test Suite 'DeviceCapabilitySnapshotServiceTests' started at 2026-08-04 02:54:16.569
+Test Case 'DeviceCapabilitySnapshotServiceTests.testAuthorizedMapsSupportedUnsupported' started at 2026-08-04 02:54:16.569
+Test Case 'DeviceCapabilitySnapshotServiceTests.testAuthorizedMapsSupportedUnsupported' passed (0.001 seconds)
+Test Case 'DeviceCapabilitySnapshotServiceTests.testAuthorizedWithoutDepthOrLidarIsUnsupported' started at 2026-08-04 02:54:16.570
+Test Case 'DeviceCapabilitySnapshotServiceTests.testAuthorizedWithoutDepthOrLidarIsUnsupported' passed (0.0 seconds)
+Test Case 'DeviceCapabilitySnapshotServiceTests.testNotDeterminedWithEmptyDiscoveryIsUnknownDepthLidar' started at 2026-08-04 02:54:16.570
+Test Case 'DeviceCapabilitySnapshotServiceTests.testNotDeterminedWithEmptyDiscoveryIsUnknownDepthLidar' passed (0.0 seconds)
+Test Case 'DeviceCapabilitySnapshotServiceTests.testPermissionDeniedDoesNotEnumerateHardwareAsUnsupported' started at 2026-08-04 02:54:16.571
+Test Case 'DeviceCapabilitySnapshotServiceTests.testPermissionDeniedDoesNotEnumerateHardwareAsUnsupported' passed (0.0 seconds)
+Test Case 'DeviceCapabilitySnapshotServiceTests.testRestrictedMapsToPermissionDenied' started at 2026-08-04 02:54:16.571
+Test Case 'DeviceCapabilitySnapshotServiceTests.testRestrictedMapsToPermissionDenied' passed (0.0 seconds)
+Test Suite 'DeviceCapabilitySnapshotServiceTests' passed at 2026-08-04 02:54:16.571
+	 Executed 5 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'EvidenceDisplayFormattingTests' started at 2026-08-04 02:54:16.571
+Test Case 'EvidenceDisplayFormattingTests.testInspectionStatusLabels' started at 2026-08-04 02:54:16.571
+Test Case 'EvidenceDisplayFormattingTests.testInspectionStatusLabels' passed (0.0 seconds)
+Test Case 'EvidenceDisplayFormattingTests.testLocalDateTimeFromDateIncludesTimezoneAbbreviation' started at 2026-08-04 02:54:16.571
+Test Case 'EvidenceDisplayFormattingTests.testLocalDateTimeFromDateIncludesTimezoneAbbreviation' passed (0.001 seconds)
+Test Case 'EvidenceDisplayFormattingTests.testLocalDateTimeFromISO8601PreservesRawInternally' started at 2026-08-04 02:54:16.572
+Test Case 'EvidenceDisplayFormattingTests.testLocalDateTimeFromISO8601PreservesRawInternally' passed (0.001 seconds)
+Test Case 'EvidenceDisplayFormattingTests.testVINClassifyKindIsHeuristicNotVerified' started at 2026-08-04 02:54:16.573
+Test Case 'EvidenceDisplayFormattingTests.testVINClassifyKindIsHeuristicNotVerified' passed (0.0 seconds)
+Test Suite 'EvidenceDisplayFormattingTests' passed at 2026-08-04 02:54:16.574
+Executed 4 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'EvidenceLibraryTests' started at 2026-08-04 02:54:16.574
+Test Case 'EvidenceLibraryTests.testAtomicWriteFailureAndRecovery' started at 2026-08-04 02:54:16.574
+Test Case 'EvidenceLibraryTests.testAtomicWriteFailureAndRecovery' passed (0.003 seconds)
+Test Case 'EvidenceLibraryTests.testCaptureIdRejectsPathTraversal' started at 2026-08-04 02:54:16.576
+Test Case 'EvidenceLibraryTests.testCaptureIdRejectsPathTraversal' passed (0.001 seconds)
+Test Case 'EvidenceLibraryTests.testDuplicateStoreSameIdRefusesOverwrite' started at 2026-08-04 02:54:16.577
+Test Case 'EvidenceLibraryTests.testDuplicateStoreSameIdRefusesOverwrite' passed (0.01 seconds)
+Test Case 'EvidenceLibraryTests.testFullIndexRebuildFromCapturesFolder' started at 2026-08-04 02:54:16.587
+Test Case 'EvidenceLibraryTests.testFullIndexRebuildFromCapturesFolder' passed (0.018 seconds)
+Test Case 'EvidenceLibraryTests.testIndexDeleteRebuildsFromLibraryStatusNotMtime' started at 2026-08-04 02:54:16.605
+Test Case 'EvidenceLibraryTests.testIndexDeleteRebuildsFromLibraryStatusNotMtime' passed (0.012 seconds)
+Test Case 'EvidenceLibraryTests.testJpegCopyExportIsByteIdentical' started at 2026-08-04 02:54:16.617
+Test Case 'EvidenceLibraryTests.testJpegCopyExportIsByteIdentical' passed (0.009 seconds)
+Test Case 'EvidenceLibraryTests.testMissingAndCorruptedIntegrityDimensions' started at 2026-08-04 02:54:16.626
+Test Case 'EvidenceLibraryTests.testMissingAndCorruptedIntegrityDimensions' passed (0.015 seconds)
+Test Case 'EvidenceLibraryTests.testNonDestructivePackageReExportAndHashEquality' started at 2026-08-04 02:54:16.641
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c
+Test Case 'EvidenceLibraryTests.testNonDestructivePackageReExportAndHashEquality' passed (0.045 seconds)
+Test Case 'EvidenceLibraryTests.testOverwriteOfApprovedOriginalThrows' started at 2026-08-04 02:54:16.686
+Test Case 'EvidenceLibraryTests.testOverwriteOfApprovedOriginalThrows' passed (0.011 seconds)
+Test Case 'EvidenceLibraryTests.testPackageHashMismatchBlocksCreatedState' started at 2026-08-04 02:54:16.697
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c
+Test Case 'EvidenceLibraryTests.testPackageHashMismatchBlocksCreatedState' passed (0.027 seconds)
+Test Case 'EvidenceLibraryTests.testPartialStagingNeverAppearsAsStoredLocally' started at 2026-08-04 02:54:16.724
+[Phase1Capture] stage=evidence_library event=quarantined reason=abandoned_staging_on_launch path=EVD-PARTIAL-deadbeef-abandoned_staging_on_launch-49861732-804A-496F-83DF-1C5F540F720D
+[Phase1Capture] stage=evidence_library event=quarantined reason=abandoned_staging_on_launch path=EVD-PARTIAL-deadbeef-abandoned_staging_on_launch-49861732-804A-496F-83DF-1C5F540F720D
+Test Case 'EvidenceLibraryTests.testPartialStagingNeverAppearsAsStoredLocally' passed (0.005 seconds)
+Test Case 'EvidenceLibraryTests.testPathsWithSpacesSupported' started at 2026-08-04 02:54:16.730
+Test Case 'EvidenceLibraryTests.testPathsWithSpacesSupported' passed (0.008 seconds)
+Test Case 'EvidenceLibraryTests.testRetakeGetsNewCaptureIdDoesNotOverwrite' started at 2026-08-04 02:54:16.738
+Test Case 'EvidenceLibraryTests.testRetakeGetsNewCaptureIdDoesNotOverwrite' passed (0.016 seconds)
+Test Case 'EvidenceLibraryTests.testSoftDeleteQuarantinesAndRemovesIndexRow' started at 2026-08-04 02:54:16.754
+[Phase1Capture] stage=evidence_library event=quarantined reason=user_soft_delete path=EVD-DEL-user_soft_delete-F123E4CE-CAB5-41BF-B31E-38748505054F
+[Phase1Capture] stage=evidence_library event=user_soft_delete id=EVD-DEL
+[Phase1Capture] stage=evidence_library event=quarantined reason=user_soft_delete path=EVD-DEL-user_soft_delete-F123E4CE-CAB5-41BF-B31E-38748505054F
+[Phase1Capture] stage=evidence_library event=user_soft_delete id=EVD-DEL
+Test Case 'EvidenceLibraryTests.testSoftDeleteQuarantinesAndRemovesIndexRow' passed (0.016 seconds)
+Test Case 'EvidenceLibraryTests.testStoreApprovedUsesStagingCommitAndRelativePaths' started at 2026-08-04 02:54:16.770
+Test Case 'EvidenceLibraryTests.testStoreApprovedUsesStagingCommitAndRelativePaths' passed (0.009 seconds)
+Test Suite 'EvidenceLibraryTests' passed at 2026-08-04 02:54:16.779
+	 Executed 15 tests, with 0 failures (0 unexpected) in 0.205 (0.205) seconds
+Test Suite 'EvidenceManifestValidatorTests' started at 2026-08-04 02:54:16.779
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONIndependentOfInsertionOrder' started at 2026-08-04 02:54:16.779
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONIndependentOfInsertionOrder' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONRejectsNonFinite' started at 2026-08-04 02:54:16.779
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONRejectsNonFinite' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONStable' started at 2026-08-04 02:54:16.779
+Test Case 'EvidenceManifestValidatorTests.testCanonicalJSONStable' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsAnonymousPoseFrames' started at 2026-08-04 02:54:16.779
+Test Case 'EvidenceManifestValidatorTests.testRejectsAnonymousPoseFrames' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsDerivativeWithoutParent' started at 2026-08-04 02:54:16.779
+Test Case 'EvidenceManifestValidatorTests.testRejectsDerivativeWithoutParent' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsEmptyHash' started at 2026-08-04 02:54:16.779
+Test Case 'EvidenceManifestValidatorTests.testRejectsEmptyHash' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsEngineeringVerifiedFromCapture' started at 2026-08-04 02:54:16.779
+Test Case 'EvidenceManifestValidatorTests.testRejectsEngineeringVerifiedFromCapture' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsForbiddenClaimEmbeddedInExportValidation' started at 2026-08-04 02:54:16.779
+Test Case 'EvidenceManifestValidatorTests.testRejectsForbiddenClaimEmbeddedInExportValidation' passed (0.0 seconds)
+Test Case 'EvidenceManifestValidatorTests.testRejectsMeasurementWithoutUnit' started at 2026-08-04 02:54:16.780
+Test Case 'EvidenceManifestValidatorTests.testRejectsMeasurementWithoutUnit' passed (0.0 seconds)
+Test Suite 'EvidenceManifestValidatorTests' passed at 2026-08-04 02:54:16.780
+Executed 9 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'ImmutableFileStoreTests' started at 2026-08-04 02:54:16.780
+Test Case 'ImmutableFileStoreTests.testWriteImmutablePreventsOverwrite' started at 2026-08-04 02:54:16.780
+Test Case 'ImmutableFileStoreTests.testWriteImmutablePreventsOverwrite' passed (0.001 seconds)
+Test Suite 'ImmutableFileStoreTests' passed at 2026-08-04 02:54:16.781
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'InspectionEvidenceGroupingTests' started at 2026-08-04 02:54:16.781
+Test Case 'InspectionEvidenceGroupingTests.testCancelPreservesExportedCapturesInLibrary' started at 2026-08-04 02:54:16.781
+Test Case 'InspectionEvidenceGroupingTests.testCancelPreservesExportedCapturesInLibrary' passed (0.01 seconds)
+Test Case 'InspectionEvidenceGroupingTests.testCaptureOrderingIsDeterministic' started at 2026-08-04 02:54:16.791
+Test Case 'InspectionEvidenceGroupingTests.testCaptureOrderingIsDeterministic' passed (0.028 seconds)
+Test Case 'InspectionEvidenceGroupingTests.testCompletePreservesEvidenceGroup' started at 2026-08-04 02:54:16.820
+Test Case 'InspectionEvidenceGroupingTests.testCompletePreservesEvidenceGroup' passed (0.018 seconds)
+Test Case 'InspectionEvidenceGroupingTests.testDifferentVINsDoNotGroupByTimestampProximity' started at 2026-08-04 02:54:16.837
+Test Case 'InspectionEvidenceGroupingTests.testDifferentVINsDoNotGroupByTimestampProximity' passed (0.016 seconds)
+Test Case 'InspectionEvidenceGroupingTests.testFailedCaptureDoesNotIncrementSessionMetrics' started at 2026-08-04 02:54:16.854
+Test Case 'InspectionEvidenceGroupingTests.testFailedCaptureDoesNotIncrementSessionMetrics' passed (0.001 seconds)
+Test Case 'InspectionEvidenceGroupingTests.testInspectionContextCannotBeReassignedAfterPersistence' started at 2026-08-04 02:54:16.855
+Test Case 'InspectionEvidenceGroupingTests.testInspectionContextCannotBeReassignedAfterPersistence' passed (0.01 seconds)
+Test Case 'InspectionEvidenceGroupingTests.testLegacyRecordsWithoutSessionRemainUnassigned' started at 2026-08-04 02:54:16.864
+Test Case 'InspectionEvidenceGroupingTests.testLegacyRecordsWithoutSessionRemainUnassigned' passed (0.015 seconds)
+Test Case 'InspectionEvidenceGroupingTests.testPureGroupingDoesNotInventSessionIDs' started at 2026-08-04 02:54:16.880
+Test Case 'InspectionEvidenceGroupingTests.testPureGroupingDoesNotInventSessionIDs' passed (0.001 seconds)
+Test Case 'InspectionEvidenceGroupingTests.testRefreshReloadReconstructsSameGroups' started at 2026-08-04 02:54:16.880
+Test Case 'InspectionEvidenceGroupingTests.testRefreshReloadReconstructsSameGroups' passed (0.028 seconds)
+Test Case 'InspectionEvidenceGroupingTests.testSameVINDifferentSessionIDsRemainTwoGroups' started at 2026-08-04 02:54:16.908
+Test Case 'InspectionEvidenceGroupingTests.testSameVINDifferentSessionIDsRemainTwoGroups' passed (0.018 seconds)
+Test Case 'InspectionEvidenceGroupingTests.testSyntheticFlagPersistsOnRecord' started at 2026-08-04 02:54:16.926
+Test Case 'InspectionEvidenceGroupingTests.testSyntheticFlagPersistsOnRecord' passed (0.008 seconds)
+Test Case 'InspectionEvidenceGroupingTests.testThreeCapturesSameInspectionSessionBecomeOneGroup' started at 2026-08-04 02:54:16.934
+Test Case 'InspectionEvidenceGroupingTests.testThreeCapturesSameInspectionSessionBecomeOneGroup' passed (0.024 seconds)
+Test Suite 'InspectionEvidenceGroupingTests' passed at 2026-08-04 02:54:16.959
+	 Executed 12 tests, with 0 failures (0 unexpected) in 0.178 (0.178) seconds
+Test Suite 'InspectionPlanTests' started at 2026-08-04 02:54:16.959
+Test Case 'InspectionPlanTests.testCanonicalPayloadBytesAreStable' started at 2026-08-04 02:54:16.959
+Test Case 'InspectionPlanTests.testCanonicalPayloadBytesAreStable' passed (0.003 seconds)
+Test Case 'InspectionPlanTests.testRegistryDefaultTemplatesValidateAndLookup' started at 2026-08-04 02:54:16.962
+Test Case 'InspectionPlanTests.testRegistryDefaultTemplatesValidateAndLookup' passed (0.0 seconds)
+Test Case 'InspectionPlanTests.testSnapshotHashChangesWhenPointChanges' started at 2026-08-04 02:54:16.962
+Test Case 'InspectionPlanTests.testSnapshotHashChangesWhenPointChanges' passed (0.003 seconds)
+Test Case 'InspectionPlanTests.testSnapshotHashIgnoresCreatedAt' started at 2026-08-04 02:54:16.965
+Test Case 'InspectionPlanTests.testSnapshotHashIgnoresCreatedAt' passed (0.003 seconds)
+Test Case 'InspectionPlanTests.testSnapshotHashIsDeterministicForSameDefinition' started at 2026-08-04 02:54:16.968
+Test Case 'InspectionPlanTests.testSnapshotHashIsDeterministicForSameDefinition' passed (0.005 seconds)
+Test Case 'InspectionPlanTests.testValidatorRejectsDuplicatePointIDs' started at 2026-08-04 02:54:16.972
+Test Case 'InspectionPlanTests.testValidatorRejectsDuplicatePointIDs' passed (0.0 seconds)
+Test Case 'InspectionPlanTests.testValidatorRejectsInvalidSemver' started at 2026-08-04 02:54:16.972
+Test Case 'InspectionPlanTests.testValidatorRejectsInvalidSemver' passed (0.0 seconds)
+Test Case 'InspectionPlanTests.testValidatorRejectsNonDeterministicOrdering' started at 2026-08-04 02:54:16.972
+Test Case 'InspectionPlanTests.testValidatorRejectsNonDeterministicOrdering' passed (0.0 seconds)
+Test Case 'InspectionPlanTests.testVerifyRejectsTamperedDigest' started at 2026-08-04 02:54:16.973
+Test Case 'InspectionPlanTests.testVerifyRejectsTamperedDigest' passed (0.002 seconds)
+Test Case 'InspectionPlanTests.testVerifyRejectsUnknownAlgorithm' started at 2026-08-04 02:54:16.974
+Test Case 'InspectionPlanTests.testVerifyRejectsUnknownAlgorithm' passed (0.001 seconds)
+Test Suite 'InspectionPlanTests' passed at 2026-08-04 02:54:16.976
+	 Executed 10 tests, with 0 failures (0 unexpected) in 0.017 (0.017) seconds
+Test Suite 'InspectionSessionDomainTests' started at 2026-08-04 02:54:16.976
+Test Case 'InspectionSessionDomainTests.testEvidenceContextCanonicalEncodingStable' started at 2026-08-04 02:54:16.976
+Test Case 'InspectionSessionDomainTests.testEvidenceContextCanonicalEncodingStable' passed (0.0 seconds)
+Test Case 'InspectionSessionDomainTests.testFixedGeneratorIsStable' started at 2026-08-04 02:54:16.976
+Test Case 'InspectionSessionDomainTests.testFixedGeneratorIsStable' passed (0.0 seconds)
+Test Case 'InspectionSessionDomainTests.testProductionIDGeneratorUTCFormatting' started at 2026-08-04 02:54:16.976
+Test Case 'InspectionSessionDomainTests.testProductionIDGeneratorUTCFormatting' passed (0.001 seconds)
+Test Case 'InspectionSessionDomainTests.testSessionIDCodableSingleValue' started at 2026-08-04 02:54:16.977
+Test Case 'InspectionSessionDomainTests.testSessionIDCodableSingleValue' passed (0.0 seconds)
+Test Case 'InspectionSessionDomainTests.testSessionIDRejectsEmpty' started at 2026-08-04 02:54:16.977
+Test Case 'InspectionSessionDomainTests.testSessionIDRejectsEmpty' passed (0.0 seconds)
+Test Case 'InspectionSessionDomainTests.testTransitionMatrix' started at 2026-08-04 02:54:16.977
+Test Case 'InspectionSessionDomainTests.testTransitionMatrix' passed (0.0 seconds)
+Test Case 'InspectionSessionDomainTests.testVehicleIdentifierRejectsEmpty' started at 2026-08-04 02:54:16.977
+Test Case 'InspectionSessionDomainTests.testVehicleIdentifierRejectsEmpty' passed (0.0 seconds)
+Test Case 'InspectionSessionDomainTests.testVehicleIdentifierVINHeuristic' started at 2026-08-04 02:54:16.977
+Test Case 'InspectionSessionDomainTests.testVehicleIdentifierVINHeuristic' passed (0.0 seconds)
+Test Suite 'InspectionSessionDomainTests' passed at 2026-08-04 02:54:16.977
+Executed 8 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'InspectionSessionPackageIntegrationTests' started at 2026-08-04 02:54:16.977
+Test Case 'InspectionSessionPackageIntegrationTests.testBackwardCompatiblePackageWithoutSessionContext' started at 2026-08-04 02:54:16.977
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=d20f6ffd523b78a86cd2f916fa34af5d1918d75f7b142237c752ad6b254213ab byteCount=22 synthetic=false
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=d20f6ffd523b78a86cd2f916fa34af5d1918d75f7b142237c752ad6b254213ab
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=d20f6ffd523b78a86cd2f916fa34af5d1918d75f7b142237c752ad6b254213ab byteCount=22 synthetic=false
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=d20f6ffd523b78a86cd2f916fa34af5d1918d75f7b142237c752ad6b254213ab
+Test Case 'InspectionSessionPackageIntegrationTests.testBackwardCompatiblePackageWithoutSessionContext' passed (0.019 seconds)
+Test Case 'InspectionSessionPackageIntegrationTests.testFailedPackageDoesNotRequireCaptureIncrement' started at 2026-08-04 02:54:16.996
+Test Case 'InspectionSessionPackageIntegrationTests.testFailedPackageDoesNotRequireCaptureIncrement' passed (0.0 seconds)
+Test Case 'InspectionSessionPackageIntegrationTests.testPackageIncludesImmutableEvidenceContext' started at 2026-08-04 02:54:16.996
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=d20f6ffd523b78a86cd2f916fa34af5d1918d75f7b142237c752ad6b254213ab byteCount=22 synthetic=false
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=d20f6ffd523b78a86cd2f916fa34af5d1918d75f7b142237c752ad6b254213ab
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=d20f6ffd523b78a86cd2f916fa34af5d1918d75f7b142237c752ad6b254213ab byteCount=22 synthetic=false
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=d20f6ffd523b78a86cd2f916fa34af5d1918d75f7b142237c752ad6b254213ab
+Test Case 'InspectionSessionPackageIntegrationTests.testPackageIncludesImmutableEvidenceContext' passed (0.019 seconds)
+Test Suite 'InspectionSessionPackageIntegrationTests' passed at 2026-08-04 02:54:17.016
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.038 (0.038) seconds
+Test Suite 'InspectionSessionServiceTests' started at 2026-08-04 02:54:17.016
+Test Case 'InspectionSessionServiceTests.testCancelSetsFinishedAt' started at 2026-08-04 02:54:17.016
+Test Case 'InspectionSessionServiceTests.testCancelSetsFinishedAt' passed (0.0 seconds)
+Test Case 'InspectionSessionServiceTests.testCaptureCountIncrementsOnceOnlyWhenInProgress' started at 2026-08-04 02:54:17.016
+Test Case 'InspectionSessionServiceTests.testCaptureCountIncrementsOnceOnlyWhenInProgress' passed (0.0 seconds)
+Test Case 'InspectionSessionServiceTests.testCorruptPersistenceSurfacedAndCleared' started at 2026-08-04 02:54:17.016
+Test Case 'InspectionSessionServiceTests.testCorruptPersistenceSurfacedAndCleared' passed (0.001 seconds)
+Test Case 'InspectionSessionServiceTests.testCreatePersistRestore' started at 2026-08-04 02:54:17.018
+Test Case 'InspectionSessionServiceTests.testCreatePersistRestore' passed (0.005 seconds)
+Test Case 'InspectionSessionServiceTests.testInvalidAndRepeatedTerminal' started at 2026-08-04 02:54:17.023
+Test Case 'InspectionSessionServiceTests.testInvalidAndRepeatedTerminal' passed (0.0 seconds)
+Test Case 'InspectionSessionServiceTests.testLifecycleAndFinishedAt' started at 2026-08-04 02:54:17.023
+Test Case 'InspectionSessionServiceTests.testLifecycleAndFinishedAt' passed (0.0 seconds)
+Test Case 'InspectionSessionServiceTests.testPreventsSecondActiveSession' started at 2026-08-04 02:54:17.023
+Test Case 'InspectionSessionServiceTests.testPreventsSecondActiveSession' passed (0.0 seconds)
+Test Case 'InspectionSessionServiceTests.testStartInspectionClassifiesVINHeuristic' started at 2026-08-04 02:54:17.023
+Test Case 'InspectionSessionServiceTests.testStartInspectionClassifiesVINHeuristic' passed (0.0 seconds)
+Test Case 'InspectionSessionServiceTests.testStartRejectsEmptyVehicle' started at 2026-08-04 02:54:17.023
+Test Case 'InspectionSessionServiceTests.testStartRejectsEmptyVehicle' passed (0.0 seconds)
+Test Case 'InspectionSessionServiceTests.testTerminalOnDiskNotRestored' started at 2026-08-04 02:54:17.023
+Test Case 'InspectionSessionServiceTests.testTerminalOnDiskNotRestored' passed (0.004 seconds)
+Test Suite 'InspectionSessionServiceTests' passed at 2026-08-04 02:54:17.027
+Executed 10 tests, with 0 failures (0 unexpected) in 0.011 (0.011) seconds
+Test Suite 'MockEDTSClientTests' started at 2026-08-04 02:54:17.027
+Test Case 'MockEDTSClientTests.testAdapterMocksLabeled' started at 2026-08-04 02:54:17.027
+Test Case 'MockEDTSClientTests.testAdapterMocksLabeled' passed (0.0 seconds)
+Test Case 'MockEDTSClientTests.testBuiltinPlanLoads' started at 2026-08-04 02:54:17.027
+Test Case 'MockEDTSClientTests.testBuiltinPlanLoads' passed (0.0 seconds)
+Test Case 'MockEDTSClientTests.testMockIsLabeled' started at 2026-08-04 02:54:17.027
+Test Case 'MockEDTSClientTests.testMockIsLabeled' passed (0.0 seconds)
+Test Case 'MockEDTSClientTests.testSubmitAcceptsEvidenceManifestPresence' started at 2026-08-04 02:54:17.027
+Test Case 'MockEDTSClientTests.testSubmitAcceptsEvidenceManifestPresence' passed (0.001 seconds)
+Test Case 'MockEDTSClientTests.testSubmitRejectsMissingManifest' started at 2026-08-04 02:54:17.028
+Test Case 'MockEDTSClientTests.testSubmitRejectsMissingManifest' passed (0.0 seconds)
+Test Suite 'MockEDTSClientTests' passed at 2026-08-04 02:54:17.029
+Executed 5 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'PackageTransportShareSupportTests' started at 2026-08-04 02:54:17.029
+Test Case 'PackageTransportShareSupportTests.testDiagnosticZipCopyIsByteIdenticalAndPreservesCanonical' started at 2026-08-04 02:54:17.029
+Test Case 'PackageTransportShareSupportTests.testDiagnosticZipCopyIsByteIdenticalAndPreservesCanonical' passed (0.002 seconds)
+Test Case 'PackageTransportShareSupportTests.testDiagnosticZipDoesNotTouchPackageDirectoryArtifact' started at 2026-08-04 02:54:17.031
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159 synthetic=false
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159 synthetic=false
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c
+Test Case 'PackageTransportShareSupportTests.testDiagnosticZipDoesNotTouchPackageDirectoryArtifact' passed (0.014 seconds)
+Test Case 'PackageTransportShareSupportTests.testPrepareShareableStagesCopyWithoutMutatingCanonical' started at 2026-08-04 02:54:17.045
+Test Case 'PackageTransportShareSupportTests.testPrepareShareableStagesCopyWithoutMutatingCanonical' passed (0.002 seconds)
+Test Case 'PackageTransportShareSupportTests.testRequireEdtsPkgRejectsDirectory' started at 2026-08-04 02:54:17.046
+Test Case 'PackageTransportShareSupportTests.testRequireEdtsPkgRejectsDirectory' passed (0.0 seconds)
+Test Case 'PackageTransportShareSupportTests.testRequireEdtsPkgRejectsWrongExtension' started at 2026-08-04 02:54:17.047
+Test Case 'PackageTransportShareSupportTests.testRequireEdtsPkgRejectsWrongExtension' passed (0.001 seconds)
+Test Suite 'PackageTransportShareSupportTests' passed at 2026-08-04 02:54:17.047
+Executed 5 tests, with 0 failures (0 unexpected) in 0.019 (0.019) seconds
+Test Suite 'Pass1CanonicalInventoryTests' started at 2026-08-04 02:54:17.048
+Test Case 'Pass1CanonicalInventoryTests.testInventoryEmptyEntriesFailsUndeclaredCompleteness' started at 2026-08-04 02:54:17.048
+Test Case 'Pass1CanonicalInventoryTests.testInventoryEmptyEntriesFailsUndeclaredCompleteness' passed (0.005 seconds)
+Test Case 'Pass1CanonicalInventoryTests.testInventoryValidatorAcceptsNSNumberByteSize' started at 2026-08-04 02:54:17.052
+Test Case 'Pass1CanonicalInventoryTests.testInventoryValidatorAcceptsNSNumberByteSize' passed (0.005 seconds)
+Test Case 'Pass1CanonicalInventoryTests.testInventoryValidatorFlagsUndeclaredPath' started at 2026-08-04 02:54:17.057
+Test Case 'Pass1CanonicalInventoryTests.testInventoryValidatorFlagsUndeclaredPath' passed (0.005 seconds)
+Test Case 'Pass1CanonicalInventoryTests.testSwiftLiteralCorpusMatchesPythonGoldenBytes' started at 2026-08-04 02:54:17.062
+Test Case 'Pass1CanonicalInventoryTests.testSwiftLiteralCorpusMatchesPythonGoldenBytes' passed (0.001 seconds)
+Test Case 'Pass1CanonicalInventoryTests.testUnicodeEnsureAsciiEscapes' started at 2026-08-04 02:54:17.063
+Test Case 'Pass1CanonicalInventoryTests.testUnicodeEnsureAsciiEscapes' passed (0.0 seconds)
+Test Suite 'Pass1CanonicalInventoryTests' passed at 2026-08-04 02:54:17.063
+Executed 5 tests, with 0 failures (0 unexpected) in 0.016 (0.016) seconds
+Test Suite 'Pass2PreviewReviewGateTests' started at 2026-08-04 02:54:17.063
+Test Case 'Pass2PreviewReviewGateTests.testExportApprovedDetectsTamperedFrozenSha' started at 2026-08-04 02:54:17.063
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159 synthetic=false
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159 synthetic=false
+Test Case 'Pass2PreviewReviewGateTests.testExportApprovedDetectsTamperedFrozenSha' passed (0.001 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testExportApprovedHashInvariance' started at 2026-08-04 02:54:17.064
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159 synthetic=false
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159 synthetic=false
+[Phase1Capture] stage=artifact_hash event=export_invariance_ok sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c
+Test Case 'Pass2PreviewReviewGateTests.testExportApprovedHashInvariance' passed (0.014 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testExportFailureReturnsToApproved' started at 2026-08-04 02:54:17.078
+Test Case 'Pass2PreviewReviewGateTests.testExportFailureReturnsToApproved' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testFreezeFromDelegateBytesComputesShaImmediately' started at 2026-08-04 02:54:17.078
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159 synthetic=false
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159 synthetic=false
+Test Case 'Pass2PreviewReviewGateTests.testFreezeFromDelegateBytesComputesShaImmediately' passed (0.001 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testFreezeRejectsEmptyBytes' started at 2026-08-04 02:54:17.079
+Test Case 'Pass2PreviewReviewGateTests.testFreezeRejectsEmptyBytes' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testHappyPathTransitions' started at 2026-08-04 02:54:17.079
+Test Case 'Pass2PreviewReviewGateTests.testHappyPathTransitions' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testIllegalSkipReviewRejected' started at 2026-08-04 02:54:17.079
+Test Case 'Pass2PreviewReviewGateTests.testIllegalSkipReviewRejected' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testPackageWriteOnlyViaExporting' started at 2026-08-04 02:54:17.079
+Test Case 'Pass2PreviewReviewGateTests.testPackageWriteOnlyViaExporting' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testPromoteDoesNotRecalculateOrReplaceBytes' started at 2026-08-04 02:54:17.079
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159 synthetic=false
+[Phase1Capture] stage=artifact_hash event=post_delegate_freeze sha256=c26be9355c9338a1822c57de1ebd2e049f8df9e13f77e60c21ae25fadbbffc2c byteCount=159 synthetic=false
+Test Case 'Pass2PreviewReviewGateTests.testPromoteDoesNotRecalculateOrReplaceBytes' passed (0.0 seconds)
+Test Case 'Pass2PreviewReviewGateTests.testRetakeFromReviewAndApproved' started at 2026-08-04 02:54:17.080
+Test Case 'Pass2PreviewReviewGateTests.testRetakeFromReviewAndApproved' passed (0.0 seconds)
+Test Suite 'Pass2PreviewReviewGateTests' passed at 2026-08-04 02:54:17.080
+Executed 10 tests, with 0 failures (0 unexpected) in 0.017 (0.017) seconds
+Test Suite 'Phase1RuntimeTests' started at 2026-08-04 02:54:17.080
+Test Case 'Phase1RuntimeTests.testCalibrationUnavailableByDefault' started at 2026-08-04 02:54:17.080
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+Test Case 'Phase1RuntimeTests.testCalibrationUnavailableByDefault' passed (0.014 seconds)
+Test Case 'Phase1RuntimeTests.testCanonicalJSONAcceptsUInt64Leaf' started at 2026-08-04 02:54:17.094
+Test Case 'Phase1RuntimeTests.testCanonicalJSONAcceptsUInt64Leaf' passed (0.0 seconds)
+Test Case 'Phase1RuntimeTests.testCanonicalJSONRejectsBoxedNilOptional' started at 2026-08-04 02:54:17.094
+Test Case 'Phase1RuntimeTests.testCanonicalJSONRejectsBoxedNilOptional' passed (0.0 seconds)
+Test Case 'Phase1RuntimeTests.testCanonicalManifestMatchesPythonGoldenBytes' started at 2026-08-04 02:54:17.095
+Test Case 'Phase1RuntimeTests.testCanonicalManifestMatchesPythonGoldenBytes' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testCanonicalManifestRoundTrip' started at 2026-08-04 02:54:17.096
+Test Case 'Phase1RuntimeTests.testCanonicalManifestRoundTrip' passed (0.002 seconds)
+Test Case 'Phase1RuntimeTests.testCaptureSideValidatorDoesNotClaimEdtsGates' started at 2026-08-04 02:54:17.098
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+Test Case 'Phase1RuntimeTests.testCaptureSideValidatorDoesNotClaimEdtsGates' passed (0.019 seconds)
+Test Case 'Phase1RuntimeTests.testEndToEndPackageWithPhysicalDeviceNilOptionals' started at 2026-08-04 02:54:17.117
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+Test Case 'Phase1RuntimeTests.testEndToEndPackageWithPhysicalDeviceNilOptionals' passed (0.015 seconds)
+Test Case 'Phase1RuntimeTests.testFailureCleanupRemovesIncompletePackage' started at 2026-08-04 02:54:17.132
+Test Case 'Phase1RuntimeTests.testFailureCleanupRemovesIncompletePackage' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testHashMismatchOnCorruptReadback' started at 2026-08-04 02:54:17.133
+Test Case 'Phase1RuntimeTests.testHashMismatchOnCorruptReadback' passed (0.002 seconds)
+Test Case 'Phase1RuntimeTests.testLifecycleStatusesAreCaptureOwned' started at 2026-08-04 02:54:17.134
+Test Case 'Phase1RuntimeTests.testLifecycleStatusesAreCaptureOwned' passed (0.0 seconds)
+Test Case 'Phase1RuntimeTests.testPackageBuildInventoryAndExtension' started at 2026-08-04 02:54:17.135
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+[Phase1Capture] stage=photo_bytes event=received byteCount=159 empty=false
+Test Case 'Phase1RuntimeTests.testPackageBuildInventoryAndExtension' passed (0.021 seconds)
+Test Case 'Phase1RuntimeTests.testPackageRelativePathIgnoresAbsoluteTempPrefix' started at 2026-08-04 02:54:17.156
+Test Case 'Phase1RuntimeTests.testPackageRelativePathIgnoresAbsoluteTempPrefix' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testPackageRelativePathKeyUnderSymlinkAlias' started at 2026-08-04 02:54:17.157
+Test Case 'Phase1RuntimeTests.testPackageRelativePathKeyUnderSymlinkAlias' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testPhysicalDeviceProvenanceDictionaryCanonicalizes' started at 2026-08-04 02:54:17.158
+[Phase1Capture] stage=test_buggy_optional event=preflight_unsupported_values lidar_available type=Optional<Bool> describing=nil reflecting=nil
+[Phase1Capture] stage=test_buggy_optional event=canonicalization_failed stage=test_buggy_optional | swiftErrorType=CaptureError | describing=packageInvalid("Unsupported JSON type Optional<Bool> (nil Optional boxed as Any; use NSNull() or omit the key). value=nil") | reflecting=ElektronCapture.CaptureError.packageInvalid("Unsupported JSON type Optional<Bool> (nil Optional boxed as Any; use NSNull() or omit the key). value=nil") | localizedDescription=The operation could not be completed. (ElektronCapture.CaptureError error 1.) | unsupportedValues=lidar_available type=Optional<Bool> describing=nil
+[Phase1Capture] stage=test_buggy_optional event=preflight_unsupported_values lidar_available type=Optional<Bool> describing=nil reflecting=nil
+[Phase1Capture] stage=test_buggy_optional event=canonicalization_failed stage=test_buggy_optional | swiftErrorType=CaptureError | describing=packageInvalid("Unsupported JSON type Optional<Bool> (nil Optional boxed as Any; use NSNull() or omit the key). value=nil") | reflecting=ElektronCapture.CaptureError.packageInvalid("Unsupported JSON type Optional<Bool> (nil Optional boxed as Any; use NSNull() or omit the key). value=nil") | localizedDescription=The operation could not be completed. (ElektronCapture.CaptureError error 1.) | unsupportedValues=lidar_available type=Optional<Bool> describing=nil
+Test Case 'Phase1RuntimeTests.testPhysicalDeviceProvenanceDictionaryCanonicalizes' passed (0.002 seconds)
+Test Case 'Phase1RuntimeTests.testPhysicalDeviceStatusPayloadWithClockCanonicalizes' started at 2026-08-04 02:54:17.159
+Test Case 'Phase1RuntimeTests.testPhysicalDeviceStatusPayloadWithClockCanonicalizes' passed (0.001 seconds)
+Test Case 'Phase1RuntimeTests.testReadbackSha256MatchesStreamingHash' started at 2026-08-04 02:54:17.160
+Test Case 'Phase1RuntimeTests.testReadbackSha256MatchesStreamingHash' passed (0.002 seconds)
+Test Case 'Phase1RuntimeTests.testReasonCodesAreStable' started at 2026-08-04 02:54:17.162
+Test Case 'Phase1RuntimeTests.testReasonCodesAreStable' passed (0.0 seconds)
+Test Case 'Phase1RuntimeTests.testStatusOwnerRejectsEdtsCodes' started at 2026-08-04 02:54:17.162
+Test Case 'Phase1RuntimeTests.testStatusOwnerRejectsEdtsCodes' passed (0.0 seconds)
+Test Suite 'Phase1RuntimeTests' passed at 2026-08-04 02:54:17.163
+Executed 18 tests, with 0 failures (0 unexpected) in 0.082 (0.082) seconds
+Test Suite 'Phase31RGBMotionFoundationTests' started at 2026-08-04 02:54:17.163
+Test Case 'Phase31RGBMotionFoundationTests.testAdapterStartCalledTwice' started at 2026-08-04 02:54:17.163
+Test Case 'Phase31RGBMotionFoundationTests.testAdapterStartCalledTwice' passed (0.0 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testAdapterStopCalledTwice' started at 2026-08-04 02:54:17.163
+Test Case 'Phase31RGBMotionFoundationTests.testAdapterStopCalledTwice' passed (0.0 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testAppleAdaptersUnavailableOnLinuxHost' started at 2026-08-04 02:54:17.163
+Test Case 'Phase31RGBMotionFoundationTests.testAppleAdaptersUnavailableOnLinuxHost' passed (0.0 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testArtifactHashMismatch' started at 2026-08-04 02:54:17.163
+Test Case 'Phase31RGBMotionFoundationTests.testArtifactHashMismatch' passed (0.024 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testBackgroundDuringCapture' started at 2026-08-04 02:54:17.187
+Test Case 'Phase31RGBMotionFoundationTests.testBackgroundDuringCapture' passed (0.0 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testCameraPermissionDenied' started at 2026-08-04 02:54:17.188
+Test Case 'Phase31RGBMotionFoundationTests.testCameraPermissionDenied' passed (0.0 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testCameraStartsButMotionFails' started at 2026-08-04 02:54:17.188
+Test Case 'Phase31RGBMotionFoundationTests.testCameraStartsButMotionFails' passed (0.0 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testCustodyChangesDoNotMutatePackageBytes' started at 2026-08-04 02:54:17.188
+Test Case 'Phase31RGBMotionFoundationTests.testCustodyChangesDoNotMutatePackageBytes' passed (0.027 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testDevicePackageNoFakeDepthOrPose' started at 2026-08-04 02:54:17.215
+Test Case 'Phase31RGBMotionFoundationTests.testDevicePackageNoFakeDepthOrPose' passed (0.02 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testFrameDeliveredAfterStop' started at 2026-08-04 02:54:17.235
+Test Case 'Phase31RGBMotionFoundationTests.testFrameDeliveredAfterStop' passed (0.0 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testInterruption' started at 2026-08-04 02:54:17.235
+Test Case 'Phase31RGBMotionFoundationTests.testInterruption' passed (0.0 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testMissingCameraArtifact' started at 2026-08-04 02:54:17.235
+Test Case 'Phase31RGBMotionFoundationTests.testMissingCameraArtifact' passed (0.024 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testMissingMotionArtifact' started at 2026-08-04 02:54:17.259
+Test Case 'Phase31RGBMotionFoundationTests.testMissingMotionArtifact' passed (0.023 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testMotionStartsButCameraFails' started at 2026-08-04 02:54:17.282
+Test Case 'Phase31RGBMotionFoundationTests.testMotionStartsButCameraFails' passed (0.0 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testMotionUnavailable' started at 2026-08-04 02:54:17.282
+Test Case 'Phase31RGBMotionFoundationTests.testMotionUnavailable' passed (0.0 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testOrphanPayload' started at 2026-08-04 02:54:17.282
+Test Case 'Phase31RGBMotionFoundationTests.testOrphanPayload' passed (0.028 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testStaleCustodyOCC' started at 2026-08-04 02:54:17.310
+Test Case 'Phase31RGBMotionFoundationTests.testStaleCustodyOCC' passed (0.024 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testTimestampRegression' started at 2026-08-04 02:54:17.334
+Test Case 'Phase31RGBMotionFoundationTests.testTimestampRegression' passed (0.0 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testUnknownPixelFormat' started at 2026-08-04 02:54:17.335
+Test Case 'Phase31RGBMotionFoundationTests.testUnknownPixelFormat' passed (0.0 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testUserCancellation' started at 2026-08-04 02:54:17.335
+Test Case 'Phase31RGBMotionFoundationTests.testUserCancellation' passed (0.0 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testVerifiedHandleCannotIssueBeforeVerification' started at 2026-08-04 02:54:17.335
+Test Case 'Phase31RGBMotionFoundationTests.testVerifiedHandleCannotIssueBeforeVerification' passed (0.024 seconds)
+Test Case 'Phase31RGBMotionFoundationTests.testWriteDeviceGoldenWhenRequested' started at 2026-08-04 02:54:17.359
+/workspace/.scratch-elektron-capture-ios/Tests/Unit/Phase31RGBMotionFoundationTests.swift:379: Phase31RGBMotionFoundationTests.testWriteDeviceGoldenWhenRequested : Test skipped - Set PHASE31_WRITE_GOLDEN=1 to emit device package fixture
+Test Case 'Phase31RGBMotionFoundationTests.testWriteDeviceGoldenWhenRequested' skipped (0.0 seconds)
+Test Suite 'Phase31RGBMotionFoundationTests' passed at 2026-08-04 02:54:17.360
+	 Executed 22 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.197 (0.197) seconds
+Test Suite 'Phase32PoseSpatiotemporalTests' started at 2026-08-04 02:54:17.360
+Test Case 'Phase32PoseSpatiotemporalTests.testAmbiguousCorrelationPath' started at 2026-08-04 02:54:17.360
+Test Case 'Phase32PoseSpatiotemporalTests.testAmbiguousCorrelationPath' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testAmbiguousTransformPathRejected' started at 2026-08-04 02:54:17.360
+Test Case 'Phase32PoseSpatiotemporalTests.testAmbiguousTransformPathRejected' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testApplePoseAdapterUncompiledOnLinux' started at 2026-08-04 02:54:17.360
+Test Case 'Phase32PoseSpatiotemporalTests.testApplePoseAdapterUncompiledOnLinux' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testAssociationClockProofBinding' started at 2026-08-04 02:54:17.360
+Test Case 'Phase32PoseSpatiotemporalTests.testAssociationClockProofBinding' passed (0.001 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testAssociationCrossEpochFails' started at 2026-08-04 02:54:17.361
+Test Case 'Phase32PoseSpatiotemporalTests.testAssociationCrossEpochFails' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testCameraSampleWithNoPoseAssociation' started at 2026-08-04 02:54:17.361
+Test Case 'Phase32PoseSpatiotemporalTests.testCameraSampleWithNoPoseAssociation' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testCapabilityEmbeddedMatchesStandalone' started at 2026-08-04 02:54:17.361
+Test Case 'Phase32PoseSpatiotemporalTests.testCapabilityEmbeddedMatchesStandalone' passed (0.034 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testClosureInputRejectsAbsolutePaths' started at 2026-08-04 02:54:17.395
+Test Case 'Phase32PoseSpatiotemporalTests.testClosureInputRejectsAbsolutePaths' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testControllableEmitsInvalidQuaternionPayload' started at 2026-08-04 02:54:17.396
+Test Case 'Phase32PoseSpatiotemporalTests.testControllableEmitsInvalidQuaternionPayload' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testControllablePoseAuthorityIsGuidanceEstimate' started at 2026-08-04 02:54:17.396
+Test Case 'Phase32PoseSpatiotemporalTests.testControllablePoseAuthorityIsGuidanceEstimate' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testCrossDomainComparisonWithoutCorrelation' started at 2026-08-04 02:54:17.396
+Test Case 'Phase32PoseSpatiotemporalTests.testCrossDomainComparisonWithoutCorrelation' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testCrossEpochPoseJoinRejected' started at 2026-08-04 02:54:17.396
+Test Case 'Phase32PoseSpatiotemporalTests.testCrossEpochPoseJoinRejected' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testDegenerateZeroTransformRejected' started at 2026-08-04 02:54:17.396
+Test Case 'Phase32PoseSpatiotemporalTests.testDegenerateZeroTransformRejected' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testDuplicateFrameID' started at 2026-08-04 02:54:17.397
+Test Case 'Phase32PoseSpatiotemporalTests.testDuplicateFrameID' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testFixturePosePackageSealAndNoDeviceIdentities' started at 2026-08-04 02:54:17.397
+Test Case 'Phase32PoseSpatiotemporalTests.testFixturePosePackageSealAndNoDeviceIdentities' passed (0.034 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testInconsistentReciprocalRejected' started at 2026-08-04 02:54:17.431
+Test Case 'Phase32PoseSpatiotemporalTests.testInconsistentReciprocalRejected' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testInvalidQuaternion' started at 2026-08-04 02:54:17.431
+Test Case 'Phase32PoseSpatiotemporalTests.testInvalidQuaternion' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testInventoryClosureIdenticalEntriesSameDigest' started at 2026-08-04 02:54:17.431
+Test Case 'Phase32PoseSpatiotemporalTests.testInventoryClosureIdenticalEntriesSameDigest' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testInventoryReorderDoesNotChangeClosureDigest' started at 2026-08-04 02:54:17.431
+Test Case 'Phase32PoseSpatiotemporalTests.testInventoryReorderDoesNotChangeClosureDigest' passed (0.04 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testMetadataMutationChangesClosureNotPayloadContent' started at 2026-08-04 02:54:17.472
+Test Case 'Phase32PoseSpatiotemporalTests.testMetadataMutationChangesClosureNotPayloadContent' passed (0.052 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testMissingAndOrphanFailBeforeClosureIssuance' started at 2026-08-04 02:54:17.524
+Test Case 'Phase32PoseSpatiotemporalTests.testMissingAndOrphanFailBeforeClosureIssuance' passed (0.051 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testMissingTransformPath' started at 2026-08-04 02:54:17.575
+Test Case 'Phase32PoseSpatiotemporalTests.testMissingTransformPath' passed (0.001 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testNaNInfiniteTransformValue' started at 2026-08-04 02:54:17.576
+Test Case 'Phase32PoseSpatiotemporalTests.testNaNInfiniteTransformValue' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testNonNormalizedQuaternion' started at 2026-08-04 02:54:17.576
+Test Case 'Phase32PoseSpatiotemporalTests.testNonNormalizedQuaternion' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testNotRequestedHasNoPayload' started at 2026-08-04 02:54:17.576
+Test Case 'Phase32PoseSpatiotemporalTests.testNotRequestedHasNoPayload' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testNotRequestedNoActiveAdapter' started at 2026-08-04 02:54:17.576
+Test Case 'Phase32PoseSpatiotemporalTests.testNotRequestedNoActiveAdapter' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testNotRequestedNoStreamCorrelation' started at 2026-08-04 02:54:17.576
+Test Case 'Phase32PoseSpatiotemporalTests.testNotRequestedNoStreamCorrelation' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testNotRequestedNoStreamFrame' started at 2026-08-04 02:54:17.576
+Test Case 'Phase32PoseSpatiotemporalTests.testNotRequestedNoStreamFrame' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testPackageFailsWhenNotRequestedStillContributesEvidence' started at 2026-08-04 02:54:17.576
+Test Case 'Phase32PoseSpatiotemporalTests.testPackageFailsWhenNotRequestedStillContributesEvidence' passed (0.006 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testPayloadMutationChangesPayloadContentAndClosure' started at 2026-08-04 02:54:17.583
+Test Case 'Phase32PoseSpatiotemporalTests.testPayloadMutationChangesPayloadContentAndClosure' passed (0.154 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testPoseSampleWithNoCameraAssociation' started at 2026-08-04 02:54:17.737
+Test Case 'Phase32PoseSpatiotemporalTests.testPoseSampleWithNoCameraAssociation' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testPoseTimestampRegression' started at 2026-08-04 02:54:17.737
+Test Case 'Phase32PoseSpatiotemporalTests.testPoseTimestampRegression' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testReciprocalTransformsAllowed' started at 2026-08-04 02:54:17.737
+Test Case 'Phase32PoseSpatiotemporalTests.testReciprocalTransformsAllowed' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testRelocalizationRequested' started at 2026-08-04 02:54:17.738
+Test Case 'Phase32PoseSpatiotemporalTests.testRelocalizationRequested' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testRequireCorrelationByID' started at 2026-08-04 02:54:17.738
+Test Case 'Phase32PoseSpatiotemporalTests.testRequireCorrelationByID' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testSealedFixtureExposesDistinctPayloadAndClosureDigests' started at 2026-08-04 02:54:17.738
+Test Case 'Phase32PoseSpatiotemporalTests.testSealedFixtureExposesDistinctPayloadAndClosureDigests' passed (0.04 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testSessionInterruption' started at 2026-08-04 02:54:17.777
+Test Case 'Phase32PoseSpatiotemporalTests.testSessionInterruption' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testStaleCorrelation' started at 2026-08-04 02:54:17.777
+Test Case 'Phase32PoseSpatiotemporalTests.testStaleCorrelation' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testSyntheticPoseAdapterStillCompatible' started at 2026-08-04 02:54:17.778
+Test Case 'Phase32PoseSpatiotemporalTests.testSyntheticPoseAdapterStillCompatible' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testTrackingFailure' started at 2026-08-04 02:54:17.778
+Test Case 'Phase32PoseSpatiotemporalTests.testTrackingFailure' passed (0.101 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testTrackingNormalLimitedNormal' started at 2026-08-04 02:54:17.878
+Test Case 'Phase32PoseSpatiotemporalTests.testTrackingNormalLimitedNormal' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testTransformCycleDetection' started at 2026-08-04 02:54:17.878
+Test Case 'Phase32PoseSpatiotemporalTests.testTransformCycleDetection' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testUnknownCoordinateFrame' started at 2026-08-04 02:54:17.879
+Test Case 'Phase32PoseSpatiotemporalTests.testUnknownCoordinateFrame' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testUnsupportedComplexCycleNotInconsistent' started at 2026-08-04 02:54:17.879
+Test Case 'Phase32PoseSpatiotemporalTests.testUnsupportedComplexCycleNotInconsistent' passed (0.0 seconds)
+Test Case 'Phase32PoseSpatiotemporalTests.testWritePoseGoldenWhenRequested' started at 2026-08-04 02:54:17.879
+/workspace/.scratch-elektron-capture-ios/Tests/Unit/Phase32PoseSpatiotemporalTests.swift:893: Phase32PoseSpatiotemporalTests.testWritePoseGoldenWhenRequested : Test skipped - Set PHASE32_WRITE_GOLDEN=1 to emit pose package fixture
+Test Case 'Phase32PoseSpatiotemporalTests.testWritePoseGoldenWhenRequested' skipped (0.0 seconds)
+Test Suite 'Phase32PoseSpatiotemporalTests' passed at 2026-08-04 02:54:17.879
+Executed 45 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.519 (0.519) seconds
+Test Suite 'Phase33DepthRGBAssociationTests' started at 2026-08-04 02:54:17.879
+Test Case 'Phase33DepthRGBAssociationTests.testAbsolutePathsRejectedInClosureInput' started at 2026-08-04 02:54:17.879
+Test Case 'Phase33DepthRGBAssociationTests.testAbsolutePathsRejectedInClosureInput' passed (0.0 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testAppleDepthAdapterUncompiledOnLinux' started at 2026-08-04 02:54:17.879
+Test Case 'Phase33DepthRGBAssociationTests.testAppleDepthAdapterUncompiledOnLinux' passed (0.0 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testArtifactHashMismatchRejected' started at 2026-08-04 02:54:17.879
+Test Case 'Phase33DepthRGBAssociationTests.testArtifactHashMismatchRejected' passed (0.0 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testCalibrationDimensionMismatchRejected' started at 2026-08-04 02:54:17.879
+Test Case 'Phase33DepthRGBAssociationTests.testCalibrationDimensionMismatchRejected' passed (0.001 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testCapabilityStandaloneMatchesEmbedded' started at 2026-08-04 02:54:17.880
+Test Case 'Phase33DepthRGBAssociationTests.testCapabilityStandaloneMatchesEmbedded' passed (0.037 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testCrossEpochAssociationRejected' started at 2026-08-04 02:54:17.917
+Test Case 'Phase33DepthRGBAssociationTests.testCrossEpochAssociationRejected' passed (0.005 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testCrossEpochCalibrationRejected' started at 2026-08-04 02:54:17.922
+Test Case 'Phase33DepthRGBAssociationTests.testCrossEpochCalibrationRejected' passed (0.0 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testDepthActivationFailedDoesNotClaimAcquisition' started at 2026-08-04 02:54:17.922
+Test Case 'Phase33DepthRGBAssociationTests.testDepthActivationFailedDoesNotClaimAcquisition' passed (0.0 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testDeterministicPrimaryPackageBytes' started at 2026-08-04 02:54:17.923
+Test Case 'Phase33DepthRGBAssociationTests.testDeterministicPrimaryPackageBytes' passed (0.073 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testDuplicateAssociationRejected' started at 2026-08-04 02:54:17.996
+Test Case 'Phase33DepthRGBAssociationTests.testDuplicateAssociationRejected' passed (0.006 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testInfinityRejected' started at 2026-08-04 02:54:18.002
+Test Case 'Phase33DepthRGBAssociationTests.testInfinityRejected' passed (0.0 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testInvalidRowStrideRejected' started at 2026-08-04 02:54:18.002
+Test Case 'Phase33DepthRGBAssociationTests.testInvalidRowStrideRejected' passed (0.0 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testInventoryReorderDoesNotChangeClosure' started at 2026-08-04 02:54:18.002
+Test Case 'Phase33DepthRGBAssociationTests.testInventoryReorderDoesNotChangeClosure' passed (0.045 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testMetadataMutationChangesClosureNotPayload' started at 2026-08-04 02:54:18.047
+Test Case 'Phase33DepthRGBAssociationTests.testMetadataMutationChangesClosureNotPayload' passed (0.057 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testMissingCorrelationRejected' started at 2026-08-04 02:54:18.104
+Test Case 'Phase33DepthRGBAssociationTests.testMissingCorrelationRejected' passed (0.001 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testNaNRejectedUnlessDeclared' started at 2026-08-04 02:54:18.105
+Test Case 'Phase33DepthRGBAssociationTests.testNaNRejectedUnlessDeclared' passed (0.0 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testNegativeDepthRejectedWhenNotSentinelPolicy' started at 2026-08-04 02:54:18.105
+Test Case 'Phase33DepthRGBAssociationTests.testNegativeDepthRejectedWhenNotSentinelPolicy' passed (0.0 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testNonFiniteIntrinsicsRejected' started at 2026-08-04 02:54:18.105
+Test Case 'Phase33DepthRGBAssociationTests.testNonFiniteIntrinsicsRejected' passed (0.0 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testNotRequestedDistinctFromUnavailableDevice' started at 2026-08-04 02:54:18.105
+Test Case 'Phase33DepthRGBAssociationTests.testNotRequestedDistinctFromUnavailableDevice' passed (0.0 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testTruncatedArtifactRejected' started at 2026-08-04 02:54:18.105
+Test Case 'Phase33DepthRGBAssociationTests.testTruncatedArtifactRejected' passed (0.0 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testUnavailableDeviceProducesNoDepthEvidence' started at 2026-08-04 02:54:18.105
+Test Case 'Phase33DepthRGBAssociationTests.testUnavailableDeviceProducesNoDepthEvidence' passed (0.023 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testValidAssociationPackageSeals' started at 2026-08-04 02:54:18.128
+Test Case 'Phase33DepthRGBAssociationTests.testValidAssociationPackageSeals' passed (0.037 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testValidCalibrationAccepted' started at 2026-08-04 02:54:18.164
+Test Case 'Phase33DepthRGBAssociationTests.testValidCalibrationAccepted' passed (0.0 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testValidDepthSampleAccepted' started at 2026-08-04 02:54:18.164
+Test Case 'Phase33DepthRGBAssociationTests.testValidDepthSampleAccepted' passed (0.0 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testWriteDepthGoldenWhenRequested' started at 2026-08-04 02:54:18.165
+/workspace/.scratch-elektron-capture-ios/Tests/Unit/Phase33DepthRGBAssociationTests.swift:430: Phase33DepthRGBAssociationTests.testWriteDepthGoldenWhenRequested : Test skipped - Set PHASE33_WRITE_GOLDEN=1 to emit depth package fixtures
+Test Case 'Phase33DepthRGBAssociationTests.testWriteDepthGoldenWhenRequested' skipped (0.0 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testZeroHeightRejected' started at 2026-08-04 02:54:18.165
+Test Case 'Phase33DepthRGBAssociationTests.testZeroHeightRejected' passed (0.0 seconds)
+Test Case 'Phase33DepthRGBAssociationTests.testZeroWidthRejected' started at 2026-08-04 02:54:18.165
+Test Case 'Phase33DepthRGBAssociationTests.testZeroWidthRejected' passed (0.0 seconds)
+Test Suite 'Phase33DepthRGBAssociationTests' passed at 2026-08-04 02:54:18.165
+	 Executed 27 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.286 (0.286) seconds
+Test Suite 'Phase34OrchestrationTests' started at 2026-08-04 02:54:18.165
+Test Case 'Phase34OrchestrationTests.testBufferOverflowDropNewest' started at 2026-08-04 02:54:18.165
+Test Case 'Phase34OrchestrationTests.testBufferOverflowDropNewest' passed (0.0 seconds)
+Test Case 'Phase34OrchestrationTests.testBufferOverflowWithDropOldestPolicy' started at 2026-08-04 02:54:18.166
+Test Case 'Phase34OrchestrationTests.testBufferOverflowWithDropOldestPolicy' passed (0.0 seconds)
+Test Case 'Phase34OrchestrationTests.testCancellationDuringCaptureNoSealedPackage' started at 2026-08-04 02:54:18.166
+Test Case 'Phase34OrchestrationTests.testCancellationDuringCaptureNoSealedPackage' passed (0.001 seconds)
+Test Case 'Phase34OrchestrationTests.testCapabilityStandaloneMatchesEmbedded' started at 2026-08-04 02:54:18.166
+Test Case 'Phase34OrchestrationTests.testCapabilityStandaloneMatchesEmbedded' passed (0.064 seconds)
+Test Case 'Phase34OrchestrationTests.testCheckpointPreventsDuplicateSampleIDsOnRecovery' started at 2026-08-04 02:54:18.230
+Test Case 'Phase34OrchestrationTests.testCheckpointPreventsDuplicateSampleIDsOnRecovery' passed (0.001 seconds)
+Test Case 'Phase34OrchestrationTests.testDeterministicActivationPlan' started at 2026-08-04 02:54:18.231
+Test Case 'Phase34OrchestrationTests.testDeterministicActivationPlan' passed (0.001 seconds)
+Test Case 'Phase34OrchestrationTests.testDeterministicRegenerationIdenticalDigests' started at 2026-08-04 02:54:18.232
+Test Case 'Phase34OrchestrationTests.testDeterministicRegenerationIdenticalDigests' passed (0.128 seconds)
+Test Case 'Phase34OrchestrationTests.testDuplicateSampleIDRejected' started at 2026-08-04 02:54:18.359
+Test Case 'Phase34OrchestrationTests.testDuplicateSampleIDRejected' passed (0.001 seconds)
+Test Case 'Phase34OrchestrationTests.testDuplicateStartRejected' started at 2026-08-04 02:54:18.360
+Test Case 'Phase34OrchestrationTests.testDuplicateStartRejected' passed (0.0 seconds)
+Test Case 'Phase34OrchestrationTests.testDuplicateStopIdempotent' started at 2026-08-04 02:54:18.361
+Test Case 'Phase34OrchestrationTests.testDuplicateStopIdempotent' passed (0.0 seconds)
+Test Case 'Phase34OrchestrationTests.testFinalizationWithActiveAdapterRejected' started at 2026-08-04 02:54:18.361
+Test Case 'Phase34OrchestrationTests.testFinalizationWithActiveAdapterRejected' passed (0.001 seconds)
+Test Case 'Phase34OrchestrationTests.testInterruptionAndRecoverySuccess' started at 2026-08-04 02:54:18.362
+Test Case 'Phase34OrchestrationTests.testInterruptionAndRecoverySuccess' passed (0.052 seconds)
+Test Case 'Phase34OrchestrationTests.testInvalidStateTransitionRejected' started at 2026-08-04 02:54:18.414
+Test Case 'Phase34OrchestrationTests.testInvalidStateTransitionRejected' passed (0.0 seconds)
+Test Case 'Phase34OrchestrationTests.testInventoryReorderDoesNotChangeClosure' started at 2026-08-04 02:54:18.414
+Test Case 'Phase34OrchestrationTests.testInventoryReorderDoesNotChangeClosure' passed (0.081 seconds)
+Test Case 'Phase34OrchestrationTests.testOptionalDepthUnavailableDeviceDegradedValidPackage' started at 2026-08-04 02:54:18.495
+Test Case 'Phase34OrchestrationTests.testOptionalDepthUnavailableDeviceDegradedValidPackage' passed (0.049 seconds)
+Test Case 'Phase34OrchestrationTests.testOptionalPoseInterruptDegradedPackage' started at 2026-08-04 02:54:18.544
+Test Case 'Phase34OrchestrationTests.testOptionalPoseInterruptDegradedPackage' passed (0.052 seconds)
+Test Case 'Phase34OrchestrationTests.testRequiredMotionActivationFailureFailedNoPackage' started at 2026-08-04 02:54:18.596
+Test Case 'Phase34OrchestrationTests.testRequiredMotionActivationFailureFailedNoPackage' passed (0.001 seconds)
+Test Case 'Phase34OrchestrationTests.testSampleAfterStopRejected' started at 2026-08-04 02:54:18.597
+Test Case 'Phase34OrchestrationTests.testSampleAfterStopRejected' passed (0.001 seconds)
+Test Case 'Phase34OrchestrationTests.testStopBeforeStartCancelsWithoutPackage' started at 2026-08-04 02:54:18.597
+Test Case 'Phase34OrchestrationTests.testStopBeforeStartCancelsWithoutPackage' passed (0.0 seconds)
+Test Case 'Phase34OrchestrationTests.testTimestampRegressionRejected' started at 2026-08-04 02:54:18.598
+Test Case 'Phase34OrchestrationTests.testTimestampRegressionRejected' passed (0.0 seconds)
+Test Case 'Phase34OrchestrationTests.testValidFullCoordinatedSessionSealsPackage' started at 2026-08-04 02:54:18.598
+Test Case 'Phase34OrchestrationTests.testValidFullCoordinatedSessionSealsPackage' passed (0.065 seconds)
+Test Case 'Phase34OrchestrationTests.testWriteCoordinatedGoldenWhenRequested' started at 2026-08-04 02:54:18.663
+/workspace/.scratch-elektron-capture-ios/Tests/Unit/Phase34OrchestrationTests.swift:452: Phase34OrchestrationTests.testWriteCoordinatedGoldenWhenRequested : Test skipped - Set PHASE34_WRITE_GOLDEN=1 to emit coordinated package fixtures
+Test Case 'Phase34OrchestrationTests.testWriteCoordinatedGoldenWhenRequested' skipped (0.0 seconds)
+Test Suite 'Phase34OrchestrationTests' passed at 2026-08-04 02:54:18.663
+Executed 22 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.498 (0.498) seconds
+Test Suite 'Phase35GuidanceTests' started at 2026-08-04 02:54:18.663
+Test Case 'Phase35GuidanceTests.testBlurSignalGeneratedAndResolved' started at 2026-08-04 02:54:18.663
+Test Case 'Phase35GuidanceTests.testBlurSignalGeneratedAndResolved' passed (0.0 seconds)
+Test Case 'Phase35GuidanceTests.testCancelledProducesCancelledCompletion' started at 2026-08-04 02:54:18.663
+Test Case 'Phase35GuidanceTests.testCancelledProducesCancelledCompletion' passed (0.001 seconds)
+Test Case 'Phase35GuidanceTests.testCancelledSealRejected' started at 2026-08-04 02:54:18.664
+Test Case 'Phase35GuidanceTests.testCancelledSealRejected' passed (0.001 seconds)
+Test Case 'Phase35GuidanceTests.testCompletionLanguageForbidsEngineeringClaims' started at 2026-08-04 02:54:18.665
+Test Case 'Phase35GuidanceTests.testCompletionLanguageForbidsEngineeringClaims' passed (0.0 seconds)
+Test Case 'Phase35GuidanceTests.testCrossEpochCoverageRejected' started at 2026-08-04 02:54:18.665
+Test Case 'Phase35GuidanceTests.testCrossEpochCoverageRejected' passed (0.0 seconds)
+Test Case 'Phase35GuidanceTests.testCrossSessionAndUnknownEvidenceRejected' started at 2026-08-04 02:54:18.665
+Test Case 'Phase35GuidanceTests.testCrossSessionAndUnknownEvidenceRejected' passed (0.0 seconds)
+Test Case 'Phase35GuidanceTests.testCrossSessionQualityRejected' started at 2026-08-04 02:54:18.666
+Test Case 'Phase35GuidanceTests.testCrossSessionQualityRejected' passed (0.0 seconds)
+Test Case 'Phase35GuidanceTests.testDeterministicReplayIdenticalDerivedDigests' started at 2026-08-04 02:54:18.666
+Test Case 'Phase35GuidanceTests.testDeterministicReplayIdenticalDerivedDigests' passed (0.392 seconds)
+Test Case 'Phase35GuidanceTests.testDuplicateActiveGuidancePrevented' started at 2026-08-04 02:54:19.058
+Test Case 'Phase35GuidanceTests.testDuplicateActiveGuidancePrevented' passed (0.0 seconds)
+Test Case 'Phase35GuidanceTests.testDuplicateCoverageDoesNotInflate' started at 2026-08-04 02:54:19.058
+Test Case 'Phase35GuidanceTests.testDuplicateCoverageDoesNotInflate' passed (0.0 seconds)
+Test Case 'Phase35GuidanceTests.testDuplicateFrameAndDroppedSampleAndStorage' started at 2026-08-04 02:54:19.058
+Test Case 'Phase35GuidanceTests.testDuplicateFrameAndDroppedSampleAndStorage' passed (0.0 seconds)
+Test Case 'Phase35GuidanceTests.testExcessiveAngularAndTranslationMotion' started at 2026-08-04 02:54:19.058
+Test Case 'Phase35GuidanceTests.testExcessiveAngularAndTranslationMotion' passed (0.0 seconds)
+Test Case 'Phase35GuidanceTests.testGuidanceAuthorityRemainsGuidanceEstimate' started at 2026-08-04 02:54:19.059
+Test Case 'Phase35GuidanceTests.testGuidanceAuthorityRemainsGuidanceEstimate' passed (0.192 seconds)
+Test Case 'Phase35GuidanceTests.testMissingRegionFixtureContinueCapture' started at 2026-08-04 02:54:19.250
+Test Case 'Phase35GuidanceTests.testMissingRegionFixtureContinueCapture' passed (0.181 seconds)
+Test Case 'Phase35GuidanceTests.testMoveSlowerEmittedBeforeViewpointAndResolved' started at 2026-08-04 02:54:19.431
+Test Case 'Phase35GuidanceTests.testMoveSlowerEmittedBeforeViewpointAndResolved' passed (0.001 seconds)
+Test Case 'Phase35GuidanceTests.testNonFiniteObservedValueRejected' started at 2026-08-04 02:54:19.432
+Test Case 'Phase35GuidanceTests.testNonFiniteObservedValueRejected' passed (0.0 seconds)
+Test Case 'Phase35GuidanceTests.testOptionalDepthUnavailableStillCompletes' started at 2026-08-04 02:54:19.432
+Test Case 'Phase35GuidanceTests.testOptionalDepthUnavailableStillCompletes' passed (0.155 seconds)
+Test Case 'Phase35GuidanceTests.testOptionalRegionMissingDoesNotBlock' started at 2026-08-04 02:54:19.587
+Test Case 'Phase35GuidanceTests.testOptionalRegionMissingDoesNotBlock' passed (0.0 seconds)
+Test Case 'Phase35GuidanceTests.testPersistentBlurRequiresRecapture' started at 2026-08-04 02:54:19.587
+Test Case 'Phase35GuidanceTests.testPersistentBlurRequiresRecapture' passed (0.181 seconds)
+Test Case 'Phase35GuidanceTests.testRequiredInterruptionFailsPolicy' started at 2026-08-04 02:54:19.769
+Test Case 'Phase35GuidanceTests.testRequiredInterruptionFailsPolicy' passed (0.187 seconds)
+Test Case 'Phase35GuidanceTests.testRequiredRegionMissingAndSatisfied' started at 2026-08-04 02:54:19.956
+Test Case 'Phase35GuidanceTests.testRequiredRegionMissingAndSatisfied' passed (0.0 seconds)
+Test Case 'Phase35GuidanceTests.testStoragePressureGuidance' started at 2026-08-04 02:54:19.956
+Test Case 'Phase35GuidanceTests.testStoragePressureGuidance' passed (0.191 seconds)
+Test Case 'Phase35GuidanceTests.testThresholdChangeChangesDerivedDigest' started at 2026-08-04 02:54:20.148
+Test Case 'Phase35GuidanceTests.testThresholdChangeChangesDerivedDigest' passed (0.385 seconds)
+Test Case 'Phase35GuidanceTests.testTrackingDegradationAndDepthQualityAndSyncFailure' started at 2026-08-04 02:54:20.533
+Test Case 'Phase35GuidanceTests.testTrackingDegradationAndDepthQualityAndSyncFailure' passed (0.0 seconds)
+Test Case 'Phase35GuidanceTests.testTrackingDegradationGuidance' started at 2026-08-04 02:54:20.533
+Test Case 'Phase35GuidanceTests.testTrackingDegradationGuidance' passed (0.196 seconds)
+Test Case 'Phase35GuidanceTests.testUnderexposureAndOverexposureSignals' started at 2026-08-04 02:54:20.729
+Test Case 'Phase35GuidanceTests.testUnderexposureAndOverexposureSignals' passed (0.001 seconds)
+Test Case 'Phase35GuidanceTests.testValidGuidedCaptureSealsWithHistory' started at 2026-08-04 02:54:20.730
+Test Case 'Phase35GuidanceTests.testValidGuidedCaptureSealsWithHistory' passed (0.201 seconds)
+Test Case 'Phase35GuidanceTests.testWriteGuidedGoldenWhenRequested' started at 2026-08-04 02:54:20.930
+/workspace/.scratch-elektron-capture-ios/Tests/Unit/Phase35GuidanceTests.swift:765: Phase35GuidanceTests.testWriteGuidedGoldenWhenRequested : Test skipped - Set PHASE35_WRITE_GOLDEN=1 to emit guided package fixtures
+Test Case 'Phase35GuidanceTests.testWriteGuidedGoldenWhenRequested' skipped (0.0 seconds)
+Test Suite 'Phase35GuidanceTests' passed at 2026-08-04 02:54:20.931
+	 Executed 28 tests, with 1 test skipped and 0 failures (0 unexpected) in 2.267 (2.267) seconds
+Test Suite 'Phase36AppleValidationGateTests' started at 2026-08-04 02:54:20.931
+Test Case 'Phase36AppleValidationGateTests.testAppleAdapterIDsAreProductionIdentities' started at 2026-08-04 02:54:20.931
+Test Case 'Phase36AppleValidationGateTests.testAppleAdapterIDsAreProductionIdentities' passed (0.0 seconds)
+Test Case 'Phase36AppleValidationGateTests.testAppleHostGateRecordsUnavailableOnLinux' started at 2026-08-04 02:54:20.931
+Test Case 'Phase36AppleValidationGateTests.testAppleHostGateRecordsUnavailableOnLinux' passed (0.0 seconds)
+Test Case 'Phase36AppleValidationGateTests.testCompiledSourceInventoryListsAppleAdapters' started at 2026-08-04 02:54:20.931
+Test Case 'Phase36AppleValidationGateTests.testCompiledSourceInventoryListsAppleAdapters' passed (0.001 seconds)
+Test Case 'Phase36AppleValidationGateTests.testCoordinatorAcceptsAppleProductionFactory' started at 2026-08-04 02:54:20.932
+Test Case 'Phase36AppleValidationGateTests.testCoordinatorAcceptsAppleProductionFactory' passed (0.0 seconds)
+Test Case 'Phase36AppleValidationGateTests.testDeviceBuilderRejectsFixtureAuthority' started at 2026-08-04 02:54:20.932
+Test Case 'Phase36AppleValidationGateTests.testDeviceBuilderRejectsFixtureAuthority' passed (0.101 seconds)
+Test Case 'Phase36AppleValidationGateTests.testDeviceBuilderRejectsFixturePackageID' started at 2026-08-04 02:54:21.033
+Test Case 'Phase36AppleValidationGateTests.testDeviceBuilderRejectsFixturePackageID' passed (0.001 seconds)
+Test Case 'Phase36AppleValidationGateTests.testDeviceBuilderRejectsNoPhysicalHostClaim' started at 2026-08-04 02:54:21.033
+Test Case 'Phase36AppleValidationGateTests.testDeviceBuilderRejectsNoPhysicalHostClaim' passed (0.0 seconds)
+Test Case 'Phase36AppleValidationGateTests.testLinuxAppleCameraStubRefusesStart' started at 2026-08-04 02:54:21.033
+Test Case 'Phase36AppleValidationGateTests.testLinuxAppleCameraStubRefusesStart' passed (0.0 seconds)
+Test Case 'Phase36AppleValidationGateTests.testLinuxApplePoseStubRefusesStart' started at 2026-08-04 02:54:21.034
+Test Case 'Phase36AppleValidationGateTests.testLinuxApplePoseStubRefusesStart' passed (0.0 seconds)
+Test Suite 'Phase36AppleValidationGateTests' passed at 2026-08-04 02:54:21.034
+Executed 9 tests, with 0 failures (0 unexpected) in 0.103 (0.103) seconds
+Test Suite 'Phase37ResilienceTests' started at 2026-08-04 02:54:21.034
+Test Case 'Phase37ResilienceTests.testAppAttestChallengeReplay' started at 2026-08-04 02:54:21.034
+Test Case 'Phase37ResilienceTests.testAppAttestChallengeReplay' passed (0.0 seconds)
+Test Case 'Phase37ResilienceTests.testAppAttestExpiredChallenge' started at 2026-08-04 02:54:21.034
+Test Case 'Phase37ResilienceTests.testAppAttestExpiredChallenge' passed (0.0 seconds)
+Test Case 'Phase37ResilienceTests.testAppAttestHappyPath' started at 2026-08-04 02:54:21.034
+Test Case 'Phase37ResilienceTests.testAppAttestHappyPath' passed (0.0 seconds)
+Test Case 'Phase37ResilienceTests.testAppAttestPackageBindingMismatch' started at 2026-08-04 02:54:21.035
+Test Case 'Phase37ResilienceTests.testAppAttestPackageBindingMismatch' passed (0.0 seconds)
+Test Case 'Phase37ResilienceTests.testAppleSourceCandidatesUnavailableOnLinux' started at 2026-08-04 02:54:21.035
+Test Case 'Phase37ResilienceTests.testAppleSourceCandidatesUnavailableOnLinux' passed (0.0 seconds)
+Test Case 'Phase37ResilienceTests.testBrokenPriorBlockLink' started at 2026-08-04 02:54:21.035
+Test Case 'Phase37ResilienceTests.testBrokenPriorBlockLink' passed (0.004 seconds)
+Test Case 'Phase37ResilienceTests.testCancellationProducesNoSealedPackage' started at 2026-08-04 02:54:21.039
+Test Case 'Phase37ResilienceTests.testCancellationProducesNoSealedPackage' passed (0.003 seconds)
+Test Case 'Phase37ResilienceTests.testCompleteHashChain' started at 2026-08-04 02:54:21.041
+Test Case 'Phase37ResilienceTests.testCompleteHashChain' passed (0.005 seconds)
+Test Case 'Phase37ResilienceTests.testCopyConversionRecordsTraceToSourceSamples' started at 2026-08-04 02:54:21.047
+Test Case 'Phase37ResilienceTests.testCopyConversionRecordsTraceToSourceSamples' passed (0.052 seconds)
+Test Case 'Phase37ResilienceTests.testCustodyMetadataDoesNotAlterCommittedJournalBlocks' started at 2026-08-04 02:54:21.099
+Test Case 'Phase37ResilienceTests.testCustodyMetadataDoesNotAlterCommittedJournalBlocks' passed (0.005 seconds)
+Test Case 'Phase37ResilienceTests.testDeterministicPackageRebuild' started at 2026-08-04 02:54:21.104
+Test Case 'Phase37ResilienceTests.testDeterministicPackageRebuild' passed (0.103 seconds)
+Test Case 'Phase37ResilienceTests.testDuplicateSequenceRejection' started at 2026-08-04 02:54:21.208
+Test Case 'Phase37ResilienceTests.testDuplicateSequenceRejection' passed (0.004 seconds)
+Test Case 'Phase37ResilienceTests.testEmbeddedPublicKeyNotTrustedAlone' started at 2026-08-04 02:54:21.212
+Test Case 'Phase37ResilienceTests.testEmbeddedPublicKeyNotTrustedAlone' passed (0.001 seconds)
+Test Case 'Phase37ResilienceTests.testEnrollmentRecordMismatch' started at 2026-08-04 02:54:21.213
+Test Case 'Phase37ResilienceTests.testEnrollmentRecordMismatch' passed (0.0 seconds)
+Test Case 'Phase37ResilienceTests.testJournalRootChangesWhenCommittedEvidenceChanges' started at 2026-08-04 02:54:21.214
+Test Case 'Phase37ResilienceTests.testJournalRootChangesWhenCommittedEvidenceChanges' passed (0.006 seconds)
+Test Case 'Phase37ResilienceTests.testMissingSequenceRejection' started at 2026-08-04 02:54:21.220
+Test Case 'Phase37ResilienceTests.testMissingSequenceRejection' passed (0.004 seconds)
+Test Case 'Phase37ResilienceTests.testModifiedPriorBlockDetected' started at 2026-08-04 02:54:21.223
+Test Case 'Phase37ResilienceTests.testModifiedPriorBlockDetected' passed (0.004 seconds)
+Test Case 'Phase37ResilienceTests.testOptionalStreamThrottling' started at 2026-08-04 02:54:21.227
+Test Case 'Phase37ResilienceTests.testOptionalStreamThrottling' passed (0.0 seconds)
+Test Case 'Phase37ResilienceTests.testPackageDigestMutationInvalid' started at 2026-08-04 02:54:21.227
+Test Case 'Phase37ResilienceTests.testPackageDigestMutationInvalid' passed (0.0 seconds)
+Test Case 'Phase37ResilienceTests.testPackageInventoryAndClosureVerification' started at 2026-08-04 02:54:21.228
+Test Case 'Phase37ResilienceTests.testPackageInventoryAndClosureVerification' passed (0.047 seconds)
+Test Case 'Phase37ResilienceTests.testPolicyChangeRecorded' started at 2026-08-04 02:54:21.275
+Test Case 'Phase37ResilienceTests.testPolicyChangeRecorded' passed (0.0 seconds)
+Test Case 'Phase37ResilienceTests.testPowerLossScenariosMatrix' started at 2026-08-04 02:54:21.275
+Test Case 'Phase37ResilienceTests.testPowerLossScenariosMatrix' passed (0.01 seconds)
+Test Case 'Phase37ResilienceTests.testPrimaryJournaledPackageSeal' started at 2026-08-04 02:54:21.285
+Test Case 'Phase37ResilienceTests.testPrimaryJournaledPackageSeal' passed (0.042 seconds)
+Test Case 'Phase37ResilienceTests.testQualityAnalysisThrottle' started at 2026-08-04 02:54:21.327
+Test Case 'Phase37ResilienceTests.testQualityAnalysisThrottle' passed (0.0 seconds)
+Test Case 'Phase37ResilienceTests.testRecoveryToFinalCommittedBlock' started at 2026-08-04 02:54:21.327
+Test Case 'Phase37ResilienceTests.testRecoveryToFinalCommittedBlock' passed (0.005 seconds)
+Test Case 'Phase37ResilienceTests.testRequiredStreamProtection' started at 2026-08-04 02:54:21.332
+Test Case 'Phase37ResilienceTests.testRequiredStreamProtection' passed (0.0 seconds)
+Test Case 'Phase37ResilienceTests.testResilientPrimaryPackage' started at 2026-08-04 02:54:21.332
+Test Case 'Phase37ResilienceTests.testResilientPrimaryPackage' passed (0.054 seconds)
+Test Case 'Phase37ResilienceTests.testResumedCaptureWithoutDuplicateSamples' started at 2026-08-04 02:54:21.386
+Test Case 'Phase37ResilienceTests.testResumedCaptureWithoutDuplicateSamples' passed (0.006 seconds)
+Test Case 'Phase37ResilienceTests.testRevokedKeySignatureNotTrustedOrigin' started at 2026-08-04 02:54:21.391
+Test Case 'Phase37ResilienceTests.testRevokedKeySignatureNotTrustedOrigin' passed (0.001 seconds)
+Test Case 'Phase37ResilienceTests.testSignatureByteMutationInvalid' started at 2026-08-04 02:54:21.392
+Test Case 'Phase37ResilienceTests.testSignatureByteMutationInvalid' passed (0.001 seconds)
+Test Case 'Phase37ResilienceTests.testSilentStreamDegradationRejected' started at 2026-08-04 02:54:21.393
+Test Case 'Phase37ResilienceTests.testSilentStreamDegradationRejected' passed (0.0 seconds)
+Test Case 'Phase37ResilienceTests.testTelemetryDeterminism' started at 2026-08-04 02:54:21.393
+Test Case 'Phase37ResilienceTests.testTelemetryDeterminism' passed (0.001 seconds)
+Test Case 'Phase37ResilienceTests.testThermalDecisionOrdering' started at 2026-08-04 02:54:21.393
+Test Case 'Phase37ResilienceTests.testThermalDecisionOrdering' passed (0.0 seconds)
+Test Case 'Phase37ResilienceTests.testTruncatedBlockQuarantined' started at 2026-08-04 02:54:21.393
+Test Case 'Phase37ResilienceTests.testTruncatedBlockQuarantined' passed (0.003 seconds)
+Test Case 'Phase37ResilienceTests.testUncommittedTailQuarantine' started at 2026-08-04 02:54:21.396
+Test Case 'Phase37ResilienceTests.testUncommittedTailQuarantine' passed (0.003 seconds)
+Test Case 'Phase37ResilienceTests.testUnknownKeySignatureNotTrustedOrigin' started at 2026-08-04 02:54:21.399
+Test Case 'Phase37ResilienceTests.testUnknownKeySignatureNotTrustedOrigin' passed (0.001 seconds)
+Test Case 'Phase37ResilienceTests.testValidEnrolledKeySignature' started at 2026-08-04 02:54:21.400
+Test Case 'Phase37ResilienceTests.testValidEnrolledKeySignature' passed (0.001 seconds)
+Test Suite 'Phase37ResilienceTests' passed at 2026-08-04 02:54:21.401
+	 Executed 37 tests, with 0 failures (0 unexpected) in 0.367 (0.367) seconds
+Test Suite 'Phase38PrivacyTransferTests' started at 2026-08-04 02:54:21.401
+Test Case 'Phase38PrivacyTransferTests.testAbsolutePathRejected' started at 2026-08-04 02:54:21.401
+Test Case 'Phase38PrivacyTransferTests.testAbsolutePathRejected' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testAcceptedChunkNotResent' started at 2026-08-04 02:54:21.401
+Test Case 'Phase38PrivacyTransferTests.testAcceptedChunkNotResent' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testApplePrivacyCandidatesUnavailableOnLinux' started at 2026-08-04 02:54:21.402
+Test Case 'Phase38PrivacyTransferTests.testApplePrivacyCandidatesUnavailableOnLinux' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testCancelledUpload' started at 2026-08-04 02:54:21.402
+Test Case 'Phase38PrivacyTransferTests.testCancelledUpload' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testChunkHashVerification' started at 2026-08-04 02:54:21.402
+Test Case 'Phase38PrivacyTransferTests.testChunkHashVerification' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testCompressionProfileRecorded' started at 2026-08-04 02:54:21.402
+Test Case 'Phase38PrivacyTransferTests.testCompressionProfileRecorded' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testCrossSecurityDomainReuseRejected' started at 2026-08-04 02:54:21.402
+Test Case 'Phase38PrivacyTransferTests.testCrossSecurityDomainReuseRejected' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testCrossTenantReuseRejected' started at 2026-08-04 02:54:21.402
+Test Case 'Phase38PrivacyTransferTests.testCrossTenantReuseRejected' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testDerivativeManifestBindsToSource' started at 2026-08-04 02:54:21.402
+Test Case 'Phase38PrivacyTransferTests.testDerivativeManifestBindsToSource' passed (0.526 seconds)
+Test Case 'Phase38PrivacyTransferTests.testDeterministicChunkBoundaries' started at 2026-08-04 02:54:21.928
+Test Case 'Phase38PrivacyTransferTests.testDeterministicChunkBoundaries' passed (0.001 seconds)
+Test Case 'Phase38PrivacyTransferTests.testDuplicateSequenceRejected' started at 2026-08-04 02:54:21.929
+Test Case 'Phase38PrivacyTransferTests.testDuplicateSequenceRejected' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testEngineeringIncludesAuthorizedRaw' started at 2026-08-04 02:54:21.929
+Test Case 'Phase38PrivacyTransferTests.testEngineeringIncludesAuthorizedRaw' passed (0.512 seconds)
+Test Case 'Phase38PrivacyTransferTests.testExpiredPolicyRejected' started at 2026-08-04 02:54:22.441
+Test Case 'Phase38PrivacyTransferTests.testExpiredPolicyRejected' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testForbiddenRawExportRejected' started at 2026-08-04 02:54:22.441
+Test Case 'Phase38PrivacyTransferTests.testForbiddenRawExportRejected' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testGapInOffsetsRejected' started at 2026-08-04 02:54:22.441
+Test Case 'Phase38PrivacyTransferTests.testGapInOffsetsRejected' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testIncorrectSourceDigestRejected' started at 2026-08-04 02:54:22.441
+Test Case 'Phase38PrivacyTransferTests.testIncorrectSourceDigestRejected' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testInspectionExcludesRestrictedRaw' started at 2026-08-04 02:54:22.442
+Test Case 'Phase38PrivacyTransferTests.testInspectionExcludesRestrictedRaw' passed (0.524 seconds)
+Test Case 'Phase38PrivacyTransferTests.testMetadataOmissionRecorded' started at 2026-08-04 02:54:22.966
+Test Case 'Phase38PrivacyTransferTests.testMetadataOmissionRecorded' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testMissingDerivationReferenceRejected' started at 2026-08-04 02:54:22.966
+Test Case 'Phase38PrivacyTransferTests.testMissingDerivationReferenceRejected' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testMissingReceipt' started at 2026-08-04 02:54:22.966
+Test Case 'Phase38PrivacyTransferTests.testMissingReceipt' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testMissingSequenceRejected' started at 2026-08-04 02:54:22.967
+Test Case 'Phase38PrivacyTransferTests.testMissingSequenceRejected' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testModifiedChunkDetected' started at 2026-08-04 02:54:22.967
+Test Case 'Phase38PrivacyTransferTests.testModifiedChunkDetected' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testNetworkInterruptionAndResume' started at 2026-08-04 02:54:22.968
+Test Case 'Phase38PrivacyTransferTests.testNetworkInterruptionAndResume' passed (0.001 seconds)
+Test Case 'Phase38PrivacyTransferTests.testNoDuplicateCompletion' started at 2026-08-04 02:54:22.968
+Test Case 'Phase38PrivacyTransferTests.testNoDuplicateCompletion' passed (0.001 seconds)
+Test Case 'Phase38PrivacyTransferTests.testOverlappingOffsetsRejected' started at 2026-08-04 02:54:22.969
+Test Case 'Phase38PrivacyTransferTests.testOverlappingOffsetsRejected' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testPauseAndResume' started at 2026-08-04 02:54:22.969
+Test Case 'Phase38PrivacyTransferTests.testPauseAndResume' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testPrimaryFieldTransferFixture' started at 2026-08-04 02:54:22.969
+Test Case 'Phase38PrivacyTransferTests.testPrimaryFieldTransferFixture' passed (0.529 seconds)
+Test Case 'Phase38PrivacyTransferTests.testPrivacyFirstPersistsNoProhibitedRaw' started at 2026-08-04 02:54:23.498
+Test Case 'Phase38PrivacyTransferTests.testPrivacyFirstPersistsNoProhibitedRaw' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testProfileOutputDeterministic' started at 2026-08-04 02:54:23.499
+Test Case 'Phase38PrivacyTransferTests.testProfileOutputDeterministic' passed (1.005 seconds)
+Test Case 'Phase38PrivacyTransferTests.testRawEvidencePreservedSeparately' started at 2026-08-04 02:54:24.504
+Test Case 'Phase38PrivacyTransferTests.testRawEvidencePreservedSeparately' passed (0.001 seconds)
+Test Case 'Phase38PrivacyTransferTests.testReassemblyByteIdentity' started at 2026-08-04 02:54:24.505
+Test Case 'Phase38PrivacyTransferTests.testReassemblyByteIdentity' passed (0.001 seconds)
+Test Case 'Phase38PrivacyTransferTests.testRedactionNeverOverwritesSource' started at 2026-08-04 02:54:24.506
+Test Case 'Phase38PrivacyTransferTests.testRedactionNeverOverwritesSource' passed (0.002 seconds)
+Test Case 'Phase38PrivacyTransferTests.testRequestedChunkResentCorrectly' started at 2026-08-04 02:54:24.508
+Test Case 'Phase38PrivacyTransferTests.testRequestedChunkResentCorrectly' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testRequiredRedactionMissing' started at 2026-08-04 02:54:24.509
+Test Case 'Phase38PrivacyTransferTests.testRequiredRedactionMissing' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testRetryLimit' started at 2026-08-04 02:54:24.509
+Test Case 'Phase38PrivacyTransferTests.testRetryLimit' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testServerReceiptMismatch' started at 2026-08-04 02:54:24.509
+Test Case 'Phase38PrivacyTransferTests.testServerReceiptMismatch' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testSilentMetadataStrippingRejected' started at 2026-08-04 02:54:24.510
+Test Case 'Phase38PrivacyTransferTests.testSilentMetadataStrippingRejected' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testSourcePackageBytesUnchangedAcrossProfiles' started at 2026-08-04 02:54:24.510
+Test Case 'Phase38PrivacyTransferTests.testSourcePackageBytesUnchangedAcrossProfiles' passed (0.511 seconds)
+Test Case 'Phase38PrivacyTransferTests.testTransferCheckpointReplay' started at 2026-08-04 02:54:25.020
+Test Case 'Phase38PrivacyTransferTests.testTransferCheckpointReplay' passed (0.001 seconds)
+Test Case 'Phase38PrivacyTransferTests.testTruncatedChunkDetected' started at 2026-08-04 02:54:25.021
+Test Case 'Phase38PrivacyTransferTests.testTruncatedChunkDetected' passed (0.001 seconds)
+Test Case 'Phase38PrivacyTransferTests.testUnknownPrivacyPolicyRejected' started at 2026-08-04 02:54:25.021
+Test Case 'Phase38PrivacyTransferTests.testUnknownPrivacyPolicyRejected' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testUploadExpiration' started at 2026-08-04 02:54:25.022
+Test Case 'Phase38PrivacyTransferTests.testUploadExpiration' passed (0.0 seconds)
+Test Case 'Phase38PrivacyTransferTests.testWrongSourcePackageClosureRejected' started at 2026-08-04 02:54:25.022
+Test Case 'Phase38PrivacyTransferTests.testWrongSourcePackageClosureRejected' passed (0.0 seconds)
+Test Suite 'Phase38PrivacyTransferTests' passed at 2026-08-04 02:54:25.022
+Executed 43 tests, with 0 failures (0 unexpected) in 3.621 (3.621) seconds
+Test Suite 'Phase3SyntheticSpatialEvidenceTests' started at 2026-08-04 02:54:25.022
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testByteLengthMismatchRejection' started at 2026-08-04 02:54:25.022
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testByteLengthMismatchRejection' passed (0.018 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testCancellationBehavior' started at 2026-08-04 02:54:25.040
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testCancellationBehavior' passed (0.0 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testClockMismatchRejection' started at 2026-08-04 02:54:25.040
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testClockMismatchRejection' passed (0.001 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testCoordinateFrameRejection' started at 2026-08-04 02:54:25.041
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testCoordinateFrameRejection' passed (0.001 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testCustodyPackageHashSeparation' started at 2026-08-04 02:54:25.042
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testCustodyPackageHashSeparation' passed (0.018 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testDeterministicSyntheticReplayStableHash' started at 2026-08-04 02:54:25.060
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testDeterministicSyntheticReplayStableHash' passed (0.031 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testForbidsEDTSPackageQuarantinedOnCustody' started at 2026-08-04 02:54:25.091
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testForbidsEDTSPackageQuarantinedOnCustody' passed (0.017 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testHonestNoDepthBehavior' started at 2026-08-04 02:54:25.107
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testHonestNoDepthBehavior' passed (0.013 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testInterruptionBehavior' started at 2026-08-04 02:54:25.120
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testInterruptionBehavior' passed (0.001 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testMissingArtifactRejection' started at 2026-08-04 02:54:25.121
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testMissingArtifactRejection' passed (0.016 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testObservedRequiresSamples' started at 2026-08-04 02:54:25.137
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testObservedRequiresSamples' passed (0.0 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testOptionalDepthStreamDegradationPresentWhenEmitted' started at 2026-08-04 02:54:25.137
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testOptionalDepthStreamDegradationPresentWhenEmitted' passed (0.014 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testOrphanPayloadRejection' started at 2026-08-04 02:54:25.151
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testOrphanPayloadRejection' passed (0.018 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testPortableSHA256SidecarBasenameOnly' started at 2026-08-04 02:54:25.169
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testPortableSHA256SidecarBasenameOnly' passed (0.001 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testRGBOnlyOperation' started at 2026-08-04 02:54:25.169
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testRGBOnlyOperation' passed (0.013 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testSHA256MismatchRejection' started at 2026-08-04 02:54:25.182
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testSHA256MismatchRejection' passed (0.016 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testSessionVehiclePackageBinding' started at 2026-08-04 02:54:25.198
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testSessionVehiclePackageBinding' passed (0.016 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testStableCanonicalOrdering' started at 2026-08-04 02:54:25.214
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testStableCanonicalOrdering' passed (0.02 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testStaleOCCRejectionWithoutSideEffects' started at 2026-08-04 02:54:25.234
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testStaleOCCRejectionWithoutSideEffects' passed (0.013 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testStreamAdapterReferentialIntegrity' started at 2026-08-04 02:54:25.247
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testStreamAdapterReferentialIntegrity' passed (0.017 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testUnsupportedSchemaRejection' started at 2026-08-04 02:54:25.264
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testUnsupportedSchemaRejection' passed (0.001 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testVerifiedHandleIssuanceGate' started at 2026-08-04 02:54:25.264
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testVerifiedHandleIssuanceGate' passed (0.019 seconds)
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testWriteGoldenSyntheticPackageInventory' started at 2026-08-04 02:54:25.283
+/workspace/.scratch-elektron-capture-ios/Tests/Unit/Phase3SyntheticSpatialEvidenceTests.swift:361: Phase3SyntheticSpatialEvidenceTests.testWriteGoldenSyntheticPackageInventory : Test skipped - Set PHASE3_WRITE_GOLDEN=1 to emit golden package artifacts
+Test Case 'Phase3SyntheticSpatialEvidenceTests.testWriteGoldenSyntheticPackageInventory' skipped (0.001 seconds)
+Test Suite 'Phase3SyntheticSpatialEvidenceTests' passed at 2026-08-04 02:54:25.284
+Executed 23 tests, with 1 test skipped and 0 failures (0 unexpected) in 0.262 (0.262) seconds
+Test Suite 'PlatformCapabilityFallbackTests' started at 2026-08-04 02:54:25.284
+Test Case 'PlatformCapabilityFallbackTests.testAuthorizedEmptyDiscoveryDoesNotClaimDepthOrLidar' started at 2026-08-04 02:54:25.284
+Test Case 'PlatformCapabilityFallbackTests.testAuthorizedEmptyDiscoveryDoesNotClaimDepthOrLidar' passed (0.001 seconds)
+Test Case 'PlatformCapabilityFallbackTests.testDefaultDiscoveryOnNonIOSHostDoesNotEnumeratePhoneCameras' started at 2026-08-04 02:54:25.285
+Test Case 'PlatformCapabilityFallbackTests.testDefaultDiscoveryOnNonIOSHostDoesNotEnumeratePhoneCameras' passed (0.0 seconds)
+Test Case 'PlatformCapabilityFallbackTests.testMacHostDiscoveryReturnsNoIPhoneCapabilityNodes' started at 2026-08-04 02:54:25.285
+Test Case 'PlatformCapabilityFallbackTests.testMacHostDiscoveryReturnsNoIPhoneCapabilityNodes' passed (0.0 seconds)
+Test Case 'PlatformCapabilityFallbackTests.testSystemMotionCheckerDoesNotCrashOnHostWithoutCMMotionManager' started at 2026-08-04 02:54:25.285
+Test Case 'PlatformCapabilityFallbackTests.testSystemMotionCheckerDoesNotCrashOnHostWithoutCMMotionManager' passed (0.0 seconds)
+Test Suite 'PlatformCapabilityFallbackTests' passed at 2026-08-04 02:54:25.285
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'ProductionConfigurationGuardTests' started at 2026-08-04 02:54:25.285
+Test Case 'ProductionConfigurationGuardTests.testDevelopmentAllowsMocks' started at 2026-08-04 02:54:25.285
+Test Case 'ProductionConfigurationGuardTests.testDevelopmentAllowsMocks' passed (0.0 seconds)
+Test Case 'ProductionConfigurationGuardTests.testProductionRejectsMocks' started at 2026-08-04 02:54:25.285
+Test Case 'ProductionConfigurationGuardTests.testProductionRejectsMocks' passed (0.0 seconds)
+Test Case 'ProductionConfigurationGuardTests.testTestAllowsMocks' started at 2026-08-04 02:54:25.286
+Test Case 'ProductionConfigurationGuardTests.testTestAllowsMocks' passed (0.0 seconds)
+Test Suite 'ProductionConfigurationGuardTests' passed at 2026-08-04 02:54:25.286
+Executed 3 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'SchemaCompatibilityTests' started at 2026-08-04 02:54:25.286
+Test Case 'SchemaCompatibilityTests.testGroupingStrictlyByInspectionSessionID' started at 2026-08-04 02:54:25.286
+Test Case 'SchemaCompatibilityTests.testGroupingStrictlyByInspectionSessionID' passed (0.014 seconds)
+Test Case 'SchemaCompatibilityTests.testLegacyUnknownIdentifierKindStillDecodes' started at 2026-08-04 02:54:25.300
+Test Case 'SchemaCompatibilityTests.testLegacyUnknownIdentifierKindStillDecodes' passed (0.001 seconds)
+Test Case 'SchemaCompatibilityTests.testLegacyWithoutSessionRemainsUnassigned' started at 2026-08-04 02:54:25.300
+Test Case 'SchemaCompatibilityTests.testLegacyWithoutSessionRemainsUnassigned' passed (0.007 seconds)
+Test Case 'SchemaCompatibilityTests.testReconciliationUpgradesDerivedIndexWithoutMutatingCanonicalBytes' started at 2026-08-04 02:54:25.308
+Test Case 'SchemaCompatibilityTests.testReconciliationUpgradesDerivedIndexWithoutMutatingCanonicalBytes' passed (0.025 seconds)
+Test Case 'SchemaCompatibilityTests.testRepeatedReconciliationIsIdempotentForDerivedIndex' started at 2026-08-04 02:54:25.333
+Test Case 'SchemaCompatibilityTests.testRepeatedReconciliationIsIdempotentForDerivedIndex' passed (0.009 seconds)
+Test Case 'SchemaCompatibilityTests.testSameVINDifferentSessionsRemainSeparate' started at 2026-08-04 02:54:25.342
+Test Case 'SchemaCompatibilityTests.testSameVINDifferentSessionsRemainSeparate' passed (0.01 seconds)
+Test Case 'SchemaCompatibilityTests.testUnsupportedFutureMajorVersionFailsExplicitly' started at 2026-08-04 02:54:25.352
+Test Case 'SchemaCompatibilityTests.testUnsupportedFutureMajorVersionFailsExplicitly' passed (0.001 seconds)
+Test Case 'SchemaCompatibilityTests.testV100RecordsDecodeWithoutCrashing' started at 2026-08-04 02:54:25.353
+Test Case 'SchemaCompatibilityTests.testV100RecordsDecodeWithoutCrashing' passed (0.007 seconds)
+Test Case 'SchemaCompatibilityTests.testV110RecordsDecodeWithoutCrashing' started at 2026-08-04 02:54:25.360
+Test Case 'SchemaCompatibilityTests.testV110RecordsDecodeWithoutCrashing' passed (0.006 seconds)
+Test Case 'SchemaCompatibilityTests.testV120RecordsDecodeWithoutCrashingAndIgnoreAdditiveFields' started at 2026-08-04 02:54:25.366
+Test Case 'SchemaCompatibilityTests.testV120RecordsDecodeWithoutCrashingAndIgnoreAdditiveFields' passed (0.006 seconds)
+Test Suite 'SchemaCompatibilityTests' passed at 2026-08-04 02:54:25.372
+	 Executed 10 tests, with 0 failures (0 unexpected) in 0.086 (0.086) seconds
+Test Suite 'Sprint2_1ATests' started at 2026-08-04 02:54:25.372
+Test Case 'Sprint2_1ATests.testAssigningVerifiesDigestAndExposesAccessors' started at 2026-08-04 02:54:25.372
+Test Case 'Sprint2_1ATests.testAssigningVerifiesDigestAndExposesAccessors' passed (0.002 seconds)
+Test Case 'Sprint2_1ATests.testChangedCanonicalPlanProducesChangedDigest' started at 2026-08-04 02:54:25.374
+Test Case 'Sprint2_1ATests.testChangedCanonicalPlanProducesChangedDigest' passed (0.003 seconds)
+Test Case 'Sprint2_1ATests.testCodableRoundTripPreservesSnapshotAndIdentity' started at 2026-08-04 02:54:25.377
+Test Case 'Sprint2_1ATests.testCodableRoundTripPreservesSnapshotAndIdentity' passed (0.005 seconds)
+Test Case 'Sprint2_1ATests.testCreateSessionValidatesPlanSnapshotsAndAssigns' started at 2026-08-04 02:54:25.382
+Test Case 'Sprint2_1ATests.testCreateSessionValidatesPlanSnapshotsAndAssigns' passed (0.004 seconds)
+Test Case 'Sprint2_1ATests.testDecodeRejectsTamperedAssignedSnapshot' started at 2026-08-04 02:54:25.385
+Test Case 'Sprint2_1ATests.testDecodeRejectsTamperedAssignedSnapshot' passed (0.004 seconds)
+Test Case 'Sprint2_1ATests.testDigestMismatchRejection' started at 2026-08-04 02:54:25.389
+Test Case 'Sprint2_1ATests.testDigestMismatchRejection' passed (0.002 seconds)
+Test Case 'Sprint2_1ATests.testEqualCanonicalPlansProduceEqualDigests' started at 2026-08-04 02:54:25.391
+Test Case 'Sprint2_1ATests.testEqualCanonicalPlansProduceEqualDigests' passed (0.003 seconds)
+Test Case 'Sprint2_1ATests.testFileRepositoryRoundTripsAssignedSession' started at 2026-08-04 02:54:25.395
+Test Case 'Sprint2_1ATests.testFileRepositoryRoundTripsAssignedSession' passed (0.01 seconds)
+Test Case 'Sprint2_1ATests.testInvalidPlanRejection' started at 2026-08-04 02:54:25.405
+Test Case 'Sprint2_1ATests.testInvalidPlanRejection' passed (0.0 seconds)
+Test Case 'Sprint2_1ATests.testLegacySessionDecodesToLegacyUnassigned' started at 2026-08-04 02:54:25.405
+Test Case 'Sprint2_1ATests.testLegacySessionDecodesToLegacyUnassigned' passed (0.0 seconds)
+Test Case 'Sprint2_1ATests.testLegacyUnassignedHasNilPlanAccessors' started at 2026-08-04 02:54:25.406
+Test Case 'Sprint2_1ATests.testLegacyUnassignedHasNilPlanAccessors' passed (0.0 seconds)
+Test Case 'Sprint2_1ATests.testPointOrderAndOptionalMetadataSurviveAssignment' started at 2026-08-04 02:54:25.406
+Test Case 'Sprint2_1ATests.testPointOrderAndOptionalMetadataSurviveAssignment' passed (0.002 seconds)
+Test Case 'Sprint2_1ATests.testPre21JSONWithoutSnapshotDecodesAsLegacyUnassigned' started at 2026-08-04 02:54:25.407
+Test Case 'Sprint2_1ATests.testPre21JSONWithoutSnapshotDecodesAsLegacyUnassigned' passed (0.0 seconds)
+Test Case 'Sprint2_1ATests.testRegistryMutationDoesNotAffectSessionA' started at 2026-08-04 02:54:25.407
+Test Case 'Sprint2_1ATests.testRegistryMutationDoesNotAffectSessionA' passed (0.003 seconds)
+Test Case 'Sprint2_1ATests.testSessionBGetsUpdatedSnapshotWhileSessionARetainsOriginal' started at 2026-08-04 02:54:25.410
+Test Case 'Sprint2_1ATests.testSessionBGetsUpdatedSnapshotWhileSessionARetainsOriginal' passed (0.003 seconds)
+Test Case 'Sprint2_1ATests.testSessionDoesNotRequireRegistryToDecode' started at 2026-08-04 02:54:25.413
+Test Case 'Sprint2_1ATests.testSessionDoesNotRequireRegistryToDecode' passed (0.003 seconds)
+Test Case 'Sprint2_1ATests.testStartInspectionWithoutSnapshotRemainsLegacyUnassigned' started at 2026-08-04 02:54:25.417
+Test Case 'Sprint2_1ATests.testStartInspectionWithoutSnapshotRemainsLegacyUnassigned' passed (0.0 seconds)
+Test Suite 'Sprint2_1ATests' passed at 2026-08-04 02:54:25.417
+	 Executed 17 tests, with 0 failures (0 unexpected) in 0.045 (0.045) seconds
+Test Suite 'Sprint2_1BTests' started at 2026-08-04 02:54:25.417
+Test Case 'Sprint2_1BTests.testAbandonedTemporaryDoesNotReplaceValidDestination' started at 2026-08-04 02:54:25.417
+Test Case 'Sprint2_1BTests.testAbandonedTemporaryDoesNotReplaceValidDestination' passed (0.024 seconds)
+Test Case 'Sprint2_1BTests.testAssignedAndLegacyUnassignedEnvelopeRoundTrip' started at 2026-08-04 02:54:25.441
+Test Case 'Sprint2_1BTests.testAssignedAndLegacyUnassignedEnvelopeRoundTrip' passed (0.109 seconds)
+Test Case 'Sprint2_1BTests.testCurrentSchemaVersionRoundTrip' started at 2026-08-04 02:54:25.550
+Test Case 'Sprint2_1BTests.testCurrentSchemaVersionRoundTrip' passed (0.007 seconds)
+Test Case 'Sprint2_1BTests.testCurrentVersionBypassesMigration' started at 2026-08-04 02:54:25.557
+Test Case 'Sprint2_1BTests.testCurrentVersionBypassesMigration' passed (0.005 seconds)
+Test Case 'Sprint2_1BTests.testDeterministicCanonicalEncodingAndDigest' started at 2026-08-04 02:54:25.562
+Test Case 'Sprint2_1BTests.testDeterministicCanonicalEncodingAndDigest' passed (0.008 seconds)
+Test Case 'Sprint2_1BTests.testFileCurrentSessionRepositoryReadsLegacyAndWritesEnvelope' started at 2026-08-04 02:54:25.570
+Test Case 'Sprint2_1BTests.testFileCurrentSessionRepositoryReadsLegacyAndWritesEnvelope' passed (0.012 seconds)
+Test Case 'Sprint2_1BTests.testLegacyCurrentSessionEnvelopeLoadsAsCurrentWithoutFabricatingPlan' started at 2026-08-04 02:54:25.583
+Test Case 'Sprint2_1BTests.testLegacyCurrentSessionEnvelopeLoadsAsCurrentWithoutFabricatingPlan' passed (0.002 seconds)
+Test Case 'Sprint2_1BTests.testListIsDeterministicAndDeleteIsSelective' started at 2026-08-04 02:54:25.585
+Test Case 'Sprint2_1BTests.testListIsDeterministicAndDeleteIsSelective' passed (0.014 seconds)
+Test Case 'Sprint2_1BTests.testMissingMigrationPathThrows' started at 2026-08-04 02:54:25.599
+Test Case 'Sprint2_1BTests.testMissingMigrationPathThrows' passed (0.001 seconds)
+Test Case 'Sprint2_1BTests.testMissingSessionAndMalformedFileErrors' started at 2026-08-04 02:54:25.600
+Test Case 'Sprint2_1BTests.testMissingSessionAndMalformedFileErrors' passed (0.001 seconds)
+Test Case 'Sprint2_1BTests.testNoRegistryLookupOnLoad' started at 2026-08-04 02:54:25.601
+Test Case 'Sprint2_1BTests.testNoRegistryLookupOnLoad' passed (0.01 seconds)
+Test Case 'Sprint2_1BTests.testPlanSnapshotDigestRemainsIndependent' started at 2026-08-04 02:54:25.611
+Test Case 'Sprint2_1BTests.testPlanSnapshotDigestRemainsIndependent' passed (0.005 seconds)
+Test Case 'Sprint2_1BTests.testRawPreEnvelopeSessionJSONLoadsLegacyUnassigned' started at 2026-08-04 02:54:25.616
+Test Case 'Sprint2_1BTests.testRawPreEnvelopeSessionJSONLoadsLegacyUnassigned' passed (0.001 seconds)
+Test Case 'Sprint2_1BTests.testSaveLoadPreservesAssignedSessionAndAssignedAt' started at 2026-08-04 02:54:25.617
+Test Case 'Sprint2_1BTests.testSaveLoadPreservesAssignedSessionAndAssignedAt' passed (0.01 seconds)
+Test Case 'Sprint2_1BTests.testStorageDirectoryCreatedAndFilenameDeterministic' started at 2026-08-04 02:54:25.627
+Test Case 'Sprint2_1BTests.testStorageDirectoryCreatedAndFilenameDeterministic' passed (0.003 seconds)
+Test Case 'Sprint2_1BTests.testTamperedSessionPayloadRejected' started at 2026-08-04 02:54:25.630
+Test Case 'Sprint2_1BTests.testTamperedSessionPayloadRejected' passed (0.111 seconds)
+Test Case 'Sprint2_1BTests.testUnsupportedFutureVersionThrows' started at 2026-08-04 02:54:25.741
+Test Case 'Sprint2_1BTests.testUnsupportedFutureVersionThrows' passed (0.001 seconds)
+Test Suite 'Sprint2_1BTests' passed at 2026-08-04 02:54:25.742
+Executed 17 tests, with 0 failures (0 unexpected) in 0.325 (0.325) seconds
+Test Suite 'Sprint2_1CTests' started at 2026-08-04 02:54:25.742
+Test Case 'Sprint2_1CTests.testActivePointPersistedByIdentityNotIndex' started at 2026-08-04 02:54:25.742
+Test Case 'Sprint2_1CTests.testActivePointPersistedByIdentityNotIndex' passed (0.008 seconds)
+Test Case 'Sprint2_1CTests.testAdvanceDoesNotImplicitlyCompleteSkipOrBlockActivePoint' started at 2026-08-04 02:54:25.750
+Test Case 'Sprint2_1CTests.testAdvanceDoesNotImplicitlyCompleteSkipOrBlockActivePoint' passed (0.002 seconds)
+Test Case 'Sprint2_1CTests.testAssigningLeavesProgressNilUntilInitialize' started at 2026-08-04 02:54:25.752
+Test Case 'Sprint2_1CTests.testAssigningLeavesProgressNilUntilInitialize' passed (0.002 seconds)
+Test Case 'Sprint2_1CTests.testBlockedRequiredPointPreventsSuccessfulCompletion' started at 2026-08-04 02:54:25.754
+Test Case 'Sprint2_1CTests.testBlockedRequiredPointPreventsSuccessfulCompletion' passed (0.002 seconds)
+Test Case 'Sprint2_1CTests.testCompleteFromNotStartedRejected' started at 2026-08-04 02:54:25.756
+Test Case 'Sprint2_1CTests.testCompleteFromNotStartedRejected' passed (0.002 seconds)
+Test Case 'Sprint2_1CTests.testCompletionDispositionIsDerivedNotPersisted' started at 2026-08-04 02:54:25.758
+Test Case 'Sprint2_1CTests.testCompletionDispositionIsDerivedNotPersisted' passed (0.002 seconds)
+Test Case 'Sprint2_1CTests.testDecodeToleratesEarlierTipFieldNames' started at 2026-08-04 02:54:25.760
+Test Case 'Sprint2_1CTests.testDecodeToleratesEarlierTipFieldNames' passed (0.0 seconds)
+Test Case 'Sprint2_1CTests.testDuplicatePointProgressRejected' started at 2026-08-04 02:54:25.760
+Test Case 'Sprint2_1CTests.testDuplicatePointProgressRejected' passed (0.002 seconds)
+Test Case 'Sprint2_1CTests.testEngineHasNoSharedMutableGlobalState' started at 2026-08-04 02:54:25.762
+Test Case 'Sprint2_1CTests.testEngineHasNoSharedMutableGlobalState' passed (0.003 seconds)
+Test Case 'Sprint2_1CTests.testEnvelopeAndFileStoreRoundTripPreservesProgressFacts' started at 2026-08-04 02:54:25.765
+Test Case 'Sprint2_1CTests.testEnvelopeAndFileStoreRoundTripPreservesProgressFacts' passed (0.016 seconds)
+Test Case 'Sprint2_1CTests.testLegacyUnassignedDoesNotReceiveFabricatedProgression' started at 2026-08-04 02:54:25.781
+Test Case 'Sprint2_1CTests.testLegacyUnassignedDoesNotReceiveFabricatedProgression' passed (0.0 seconds)
+Test Case 'Sprint2_1CTests.testOlderV1SessionsDecodeWithoutProgress_OptionA' started at 2026-08-04 02:54:25.781
+Test Case 'Sprint2_1CTests.testOlderV1SessionsDecodeWithoutProgress_OptionA' passed (0.004 seconds)
+Test Case 'Sprint2_1CTests.testProgressPointSetMismatchWithFrozenSnapshotRejected' started at 2026-08-04 02:54:25.786
+Test Case 'Sprint2_1CTests.testProgressPointSetMismatchWithFrozenSnapshotRejected' passed (0.002 seconds)
+Test Case 'Sprint2_1CTests.testRepeatedInitializationIsDeterministicAndIdempotent' started at 2026-08-04 02:54:25.787
+Test Case 'Sprint2_1CTests.testRepeatedInitializationIsDeterministicAndIdempotent' passed (0.002 seconds)
+Test Case 'Sprint2_1CTests.testReturnToPreviousEligiblePointByIdentity' started at 2026-08-04 02:54:25.789
+Test Case 'Sprint2_1CTests.testReturnToPreviousEligiblePointByIdentity' passed (0.002 seconds)
+Test Case 'Sprint2_1CTests.testStrictlyTerminalReactivationPolicy' started at 2026-08-04 02:54:25.791
+Test Case 'Sprint2_1CTests.testStrictlyTerminalReactivationPolicy' passed (0.002 seconds)
+Test Case 'Sprint2_1CTests.testUnknownPointIDRejected' started at 2026-08-04 02:54:25.793
+Test Case 'Sprint2_1CTests.testUnknownPointIDRejected' passed (0.002 seconds)
+Test Case 'Sprint2_1CTests.testValidPointProgressionByPointID' started at 2026-08-04 02:54:25.794
+Test Case 'Sprint2_1CTests.testValidPointProgressionByPointID' passed (0.002 seconds)
+Test Case 'Sprint2_1CTests.testWhitespaceOnlySkipAndBlockReasonsRejected' started at 2026-08-04 02:54:25.796
+Test Case 'Sprint2_1CTests.testWhitespaceOnlySkipAndBlockReasonsRejected' passed (0.002 seconds)
+Test Suite 'Sprint2_1CTests' passed at 2026-08-04 02:54:25.798
+	 Executed 19 tests, with 0 failures (0 unexpected) in 0.056 (0.056) seconds
+Test Suite 'Sprint2_1DTests' started at 2026-08-04 02:54:25.798
+Test Case 'Sprint2_1DTests.testBindAndRetrieveEvidenceByPointID' started at 2026-08-04 02:54:25.798
+Test Case 'Sprint2_1DTests.testBindAndRetrieveEvidenceByPointID' passed (0.002 seconds)
+Test Case 'Sprint2_1DTests.testEnvelopeRoundTripPreservesBindings' started at 2026-08-04 02:54:25.800
+Test Case 'Sprint2_1DTests.testEnvelopeRoundTripPreservesBindings' passed (0.008 seconds)
+Test Case 'Sprint2_1DTests.testFileStoreRoundTripPreservesBindings' started at 2026-08-04 02:54:25.808
+Test Case 'Sprint2_1DTests.testFileStoreRoundTripPreservesBindings' passed (0.01 seconds)
+Test Case 'Sprint2_1DTests.testPointSatisfactionDerivedFromFrozenExpectedEvidenceType' started at 2026-08-04 02:54:25.818
+Test Case 'Sprint2_1DTests.testPointSatisfactionDerivedFromFrozenExpectedEvidenceType' passed (0.002 seconds)
+Test Case 'Sprint2_1DTests.testPre2_1DSessionsDecodeWithoutEvidenceBindings_OptionA' started at 2026-08-04 02:54:25.820
+Test Case 'Sprint2_1DTests.testPre2_1DSessionsDecodeWithoutEvidenceBindings_OptionA' passed (0.005 seconds)
+Test Case 'Sprint2_1DTests.testRejectDuplicateEvidenceID' started at 2026-08-04 02:54:25.825
+Test Case 'Sprint2_1DTests.testRejectDuplicateEvidenceID' passed (0.002 seconds)
+Test Case 'Sprint2_1DTests.testRejectSessionIDMismatchAndEmptyStorageKey' started at 2026-08-04 02:54:25.826
+Test Case 'Sprint2_1DTests.testRejectSessionIDMismatchAndEmptyStorageKey' passed (0.002 seconds)
+Test Case 'Sprint2_1DTests.testRejectUnknownPointID' started at 2026-08-04 02:54:25.828
+Test Case 'Sprint2_1DTests.testRejectUnknownPointID' passed (0.002 seconds)
+Test Case 'Sprint2_1DTests.testSatisfactionFalseForUnknownOrLegacySession' started at 2026-08-04 02:54:25.830
+Test Case 'Sprint2_1DTests.testSatisfactionFalseForUnknownOrLegacySession' passed (0.0 seconds)
+Test Case 'Sprint2_1DTests.testServiceHasNoSharedMutableGlobalState' started at 2026-08-04 02:54:25.830
+Test Case 'Sprint2_1DTests.testServiceHasNoSharedMutableGlobalState' passed (0.003 seconds)
+Test Case 'Sprint2_1DTests.testUnbindEvidenceByID' started at 2026-08-04 02:54:25.833
+Test Case 'Sprint2_1DTests.testUnbindEvidenceByID' passed (0.002 seconds)
+Test Suite 'Sprint2_1DTests' passed at 2026-08-04 02:54:25.835
+Executed 11 tests, with 0 failures (0 unexpected) in 0.037 (0.037) seconds
+Test Suite 'Sprint2_1E1Tests' started at 2026-08-04 02:54:25.835
+Test Case 'Sprint2_1E1Tests.testCoordinatorReplaceLibraryPreservesPointID' started at 2026-08-04 02:54:25.835
+Test Case 'Sprint2_1E1Tests.testCoordinatorReplaceLibraryPreservesPointID' passed (0.002 seconds)
+Test Case 'Sprint2_1E1Tests.testPointGroupingSectionsAndStatusLabels' started at 2026-08-04 02:54:25.836
+Test Case 'Sprint2_1E1Tests.testPointGroupingSectionsAndStatusLabels' passed (0.001 seconds)
+Test Case 'Sprint2_1E1Tests.testReplaceSwapsEvidenceAndRecalculatesSatisfaction' started at 2026-08-04 02:54:25.838
+Test Case 'Sprint2_1E1Tests.testReplaceSwapsEvidenceAndRecalculatesSatisfaction' passed (0.001 seconds)
+Test Case 'Sprint2_1E1Tests.testUnbindLibraryEvidenceDropsSatisfaction' started at 2026-08-04 02:54:25.839
+Test Case 'Sprint2_1E1Tests.testUnbindLibraryEvidenceDropsSatisfaction' passed (0.002 seconds)
+Test Suite 'Sprint2_1E1Tests' passed at 2026-08-04 02:54:25.841
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.006 (0.006) seconds
+Test Suite 'Sprint2_1ETests' started at 2026-08-04 02:54:25.841
+Test Case 'Sprint2_1ETests.testAdvanceEnablementRequiresSatisfactionOrTerminal' started at 2026-08-04 02:54:25.841
+Test Case 'Sprint2_1ETests.testAdvanceEnablementRequiresSatisfactionOrTerminal' passed (0.002 seconds)
+Test Case 'Sprint2_1ETests.testBindApprovedCaptureBuildsMetadataInCoordinator' started at 2026-08-04 02:54:25.843
+Test Case 'Sprint2_1ETests.testBindApprovedCaptureBuildsMetadataInCoordinator' passed (0.001 seconds)
+Test Case 'Sprint2_1ETests.testBlockEmptyReasonMapsToPresentationError' started at 2026-08-04 02:54:25.844
+Test Case 'Sprint2_1ETests.testBlockEmptyReasonMapsToPresentationError' passed (0.001 seconds)
+Test Case 'Sprint2_1ETests.testCaptureRequestedDoesNotConstructEvidenceMetadata' started at 2026-08-04 02:54:25.845
+Test Case 'Sprint2_1ETests.testCaptureRequestedDoesNotConstructEvidenceMetadata' passed (0.001 seconds)
+Test Case 'Sprint2_1ETests.testCaptureRequestedDoesNotPersist' started at 2026-08-04 02:54:25.847
+Test Case 'Sprint2_1ETests.testCaptureRequestedDoesNotPersist' passed (0.002 seconds)
+Test Case 'Sprint2_1ETests.testCaptureRequestedRejectedWhenNoActivePoint' started at 2026-08-04 02:54:25.849
+Test Case 'Sprint2_1ETests.testCaptureRequestedRejectedWhenNoActivePoint' passed (0.001 seconds)
+Test Case 'Sprint2_1ETests.testCoordinatorHandlePersistsBindingsViaPersister' started at 2026-08-04 02:54:25.850
+Test Case 'Sprint2_1ETests.testCoordinatorHandlePersistsBindingsViaPersister' passed (0.003 seconds)
+Test Case 'Sprint2_1ETests.testCoordinatorIsValueTypeWithoutSharedSingleton' started at 2026-08-04 02:54:25.853
+Test Case 'Sprint2_1ETests.testCoordinatorIsValueTypeWithoutSharedSingleton' passed (0.003 seconds)
+Test Case 'Sprint2_1ETests.testLegacyUnassignedIsUnavailable' started at 2026-08-04 02:54:25.856
+Test Case 'Sprint2_1ETests.testLegacyUnassignedIsUnavailable' passed (0.0 seconds)
+Test Case 'Sprint2_1ETests.testPrepareInitializesProgressAndActivatesFirstPoint' started at 2026-08-04 02:54:25.856
+Test Case 'Sprint2_1ETests.testPrepareInitializesProgressAndActivatesFirstPoint' passed (0.001 seconds)
+Test Case 'Sprint2_1ETests.testSkipEmptyReasonMapsToPresentationError' started at 2026-08-04 02:54:25.857
+Test Case 'Sprint2_1ETests.testSkipEmptyReasonMapsToPresentationError' passed (0.001 seconds)
+Test Case 'Sprint2_1ETests.testUIStateIsEphemeralAndNotOnSessionWireFormat' started at 2026-08-04 02:54:25.859
+Test Case 'Sprint2_1ETests.testUIStateIsEphemeralAndNotOnSessionWireFormat' passed (0.001 seconds)
+Test Suite 'Sprint2_1ETests' passed at 2026-08-04 02:54:25.860
+	 Executed 12 tests, with 0 failures (0 unexpected) in 0.019 (0.019) seconds
+Test Suite 'Sprint2_1FTests' started at 2026-08-04 02:54:25.860
+Test Case 'Sprint2_1FTests.testCompleteValidInspectionIsExportReady' started at 2026-08-04 02:54:25.860
+Test Case 'Sprint2_1FTests.testCompleteValidInspectionIsExportReady' passed (0.002 seconds)
+Test Case 'Sprint2_1FTests.testDeterministicFindingOrderAndStatelessness' started at 2026-08-04 02:54:25.862
+Test Case 'Sprint2_1FTests.testDeterministicFindingOrderAndStatelessness' passed (0.002 seconds)
+Test Case 'Sprint2_1FTests.testExportPreviewLibraryHint' started at 2026-08-04 02:54:25.864
+Test Case 'Sprint2_1FTests.testExportPreviewLibraryHint' passed (0.0 seconds)
+Test Case 'Sprint2_1FTests.testGenerateExportRequestedTOCTOU' started at 2026-08-04 02:54:25.864
+Test Case 'Sprint2_1FTests.testGenerateExportRequestedTOCTOU' passed (0.004 seconds)
+Test Case 'Sprint2_1FTests.testMissingSnapshotBlocksExport' started at 2026-08-04 02:54:25.868
+Test Case 'Sprint2_1FTests.testMissingSnapshotBlocksExport' passed (0.0 seconds)
+Test Case 'Sprint2_1FTests.testNoActiveSessionFactory' started at 2026-08-04 02:54:25.868
+Test Case 'Sprint2_1FTests.testNoActiveSessionFactory' passed (0.0 seconds)
+Test Case 'Sprint2_1FTests.testOpenRequiredPointsBlockExport' started at 2026-08-04 02:54:25.868
+Test Case 'Sprint2_1FTests.testOpenRequiredPointsBlockExport' passed (0.002 seconds)
+Test Case 'Sprint2_1FTests.testPointSectionsFollowSnapshotOrderIncludingEmpty' started at 2026-08-04 02:54:25.870
+Test Case 'Sprint2_1FTests.testPointSectionsFollowSnapshotOrderIncludingEmpty' passed (0.002 seconds)
+Test Case 'Sprint2_1FTests.testReviewPointIntentActivatesWithoutViewMutation' started at 2026-08-04 02:54:25.872
+Test Case 'Sprint2_1FTests.testReviewPointIntentActivatesWithoutViewMutation' passed (0.002 seconds)
+Test Case 'Sprint2_1FTests.testSkipAllowsExportBlockDoesNot' started at 2026-08-04 02:54:25.874
+Test Case 'Sprint2_1FTests.testSkipAllowsExportBlockDoesNot' passed (0.003 seconds)
+Test Case 'Sprint2_1FTests.testUnbindAfterCompleteDropsExportability' started at 2026-08-04 02:54:25.877
+Test Case 'Sprint2_1FTests.testUnbindAfterCompleteDropsExportability' passed (0.002 seconds)
+Test Case 'Sprint2_1FTests.testUnknownPointBindingAndEmptyStorageKeyAndDuplicateID' started at 2026-08-04 02:54:25.879
+Test Case 'Sprint2_1FTests.testUnknownPointBindingAndEmptyStorageKeyAndDuplicateID' passed (0.002 seconds)
+Test Suite 'Sprint2_1FTests' passed at 2026-08-04 02:54:25.881
+	 Executed 12 tests, with 0 failures (0 unexpected) in 0.02 (0.02) seconds
+Test Suite 'Sprint2_1F_ActionParityTests' started at 2026-08-04 02:54:25.881
+Test Case 'Sprint2_1F_ActionParityTests.testAssignLibraryEvidenceToPoint' started at 2026-08-04 02:54:25.881
+Test Case 'Sprint2_1F_ActionParityTests.testAssignLibraryEvidenceToPoint' passed (0.001 seconds)
+Test Case 'Sprint2_1F_ActionParityTests.testBindPersistKeepsSessionIdentity' started at 2026-08-04 02:54:25.882
+Test Case 'Sprint2_1F_ActionParityTests.testBindPersistKeepsSessionIdentity' passed (0.002 seconds)
+Test Case 'Sprint2_1F_ActionParityTests.testCannotCommitCompletionWhilePointsOnlyEvidenceSatisfied' started at 2026-08-04 02:54:25.884
+Test Case 'Sprint2_1F_ActionParityTests.testCannotCommitCompletionWhilePointsOnlyEvidenceSatisfied' passed (0.002 seconds)
+Test Case 'Sprint2_1F_ActionParityTests.testClearPointRemovesBindingsButReplaceKeepsUntilCommit' started at 2026-08-04 02:54:25.886
+Test Case 'Sprint2_1F_ActionParityTests.testClearPointRemovesBindingsButReplaceKeepsUntilCommit' passed (0.001 seconds)
+Test Case 'Sprint2_1F_ActionParityTests.testCompletedInspectionPresentationIsCompletedNotInProgress' started at 2026-08-04 02:54:25.887
+Test Case 'Sprint2_1F_ActionParityTests.testCompletedInspectionPresentationIsCompletedNotInProgress' passed (0.001 seconds)
+Test Case 'Sprint2_1F_ActionParityTests.testEvidenceActionIntentsAreDomainBounded' started at 2026-08-04 02:54:25.888
+Test Case 'Sprint2_1F_ActionParityTests.testEvidenceActionIntentsAreDomainBounded' passed (0.0 seconds)
+Test Case 'Sprint2_1F_ActionParityTests.testForceQuitPreservesActionResults' started at 2026-08-04 02:54:25.889
+Test Case 'Sprint2_1F_ActionParityTests.testForceQuitPreservesActionResults' passed (0.022 seconds)
+Test Case 'Sprint2_1F_ActionParityTests.testGuidedUsePhotoPathSkipsLegacyApprovedUIContract' started at 2026-08-04 02:54:25.911
+Test Case 'Sprint2_1F_ActionParityTests.testGuidedUsePhotoPathSkipsLegacyApprovedUIContract' passed (0.0 seconds)
+Test Case 'Sprint2_1F_ActionParityTests.testReadyForReviewWhenAllRequiredPointsTerminal' started at 2026-08-04 02:54:25.911
+Test Case 'Sprint2_1F_ActionParityTests.testReadyForReviewWhenAllRequiredPointsTerminal' passed (0.002 seconds)
+Test Case 'Sprint2_1F_ActionParityTests.testSkipPointRequiresNonblankReason' started at 2026-08-04 02:54:25.913
+Test Case 'Sprint2_1F_ActionParityTests.testSkipPointRequiresNonblankReason' passed (0.001 seconds)
+Test Case 'Sprint2_1F_ActionParityTests.testUnbindAndReplaceAreCoordinatorIntents' started at 2026-08-04 02:54:25.914
+Test Case 'Sprint2_1F_ActionParityTests.testUnbindAndReplaceAreCoordinatorIntents' passed (0.002 seconds)
+Test Suite 'Sprint2_1F_ActionParityTests' passed at 2026-08-04 02:54:25.916
+	 Executed 11 tests, with 0 failures (0 unexpected) in 0.035 (0.035) seconds
+Test Suite 'Sprint2_1F_AuthoritativeCommitTests' started at 2026-08-04 02:54:25.916
+Test Case 'Sprint2_1F_AuthoritativeCommitTests.testCompletedDoesNotImplyExportReady' started at 2026-08-04 02:54:25.916
+Test Case 'Sprint2_1F_AuthoritativeCommitTests.testCompletedDoesNotImplyExportReady' passed (0.002 seconds)
+Test Case 'Sprint2_1F_AuthoritativeCommitTests.testManualRefreshReloadsCommittedSessionByStableID' started at 2026-08-04 02:54:25.918
+Test Case 'Sprint2_1F_AuthoritativeCommitTests.testManualRefreshReloadsCommittedSessionByStableID' passed (0.024 seconds)
+Test Case 'Sprint2_1F_AuthoritativeCommitTests.testNotificationIsInvalidationOnlyNotAuthoritativeState' started at 2026-08-04 02:54:25.941
+Test Case 'Sprint2_1F_AuthoritativeCommitTests.testNotificationIsInvalidationOnlyNotAuthoritativeState' passed (0.0 seconds)
+Test Case 'Sprint2_1F_AuthoritativeCommitTests.testPersistFailureLeavesCallerSessionUntouched' started at 2026-08-04 02:54:25.942
+Test Case 'Sprint2_1F_AuthoritativeCommitTests.testPersistFailureLeavesCallerSessionUntouched' passed (0.001 seconds)
+Test Case 'Sprint2_1F_AuthoritativeCommitTests.testSoftDeleteThenOtherStoreWriteDoesNotResurrectDeletedRow' started at 2026-08-04 02:54:25.943
+[Phase1Capture] stage=evidence_library event=quarantined reason=user_soft_delete path=EVD-4812-user_soft_delete-FAD65AEC-1430-428F-B198-3E699C5BCD72
+[Phase1Capture] stage=evidence_library event=user_soft_delete id=EVD-4812
+[Phase1Capture] stage=evidence_library event=quarantined reason=user_soft_delete path=EVD-4812-user_soft_delete-FAD65AEC-1430-428F-B198-3E699C5BCD72
+[Phase1Capture] stage=evidence_library event=user_soft_delete id=EVD-4812
+Test Case 'Sprint2_1F_AuthoritativeCommitTests.testSoftDeleteThenOtherStoreWriteDoesNotResurrectDeletedRow' passed (0.018 seconds)
+Test Case 'Sprint2_1F_AuthoritativeCommitTests.testSuccessfulBindKeepsStableSessionID' started at 2026-08-04 02:54:25.961
+Test Case 'Sprint2_1F_AuthoritativeCommitTests.testSuccessfulBindKeepsStableSessionID' passed (0.002 seconds)
+Test Case 'Sprint2_1F_AuthoritativeCommitTests.testUnbindThenReloadDoesNotRestoreBinding' started at 2026-08-04 02:54:25.963
+Test Case 'Sprint2_1F_AuthoritativeCommitTests.testUnbindThenReloadDoesNotRestoreBinding' passed (0.133 seconds)
+Test Suite 'Sprint2_1F_AuthoritativeCommitTests' passed at 2026-08-04 02:54:26.095
+Executed 7 tests, with 0 failures (0 unexpected) in 0.179 (0.179) seconds
+Test Suite 'Sprint2_1F_DeviceRegressionTests' started at 2026-08-04 02:54:26.095
+Test Case 'Sprint2_1F_DeviceRegressionTests.testAdditionalRequiredPhotoStaysOnSamePoint' started at 2026-08-04 02:54:26.095
+Test Case 'Sprint2_1F_DeviceRegressionTests.testAdditionalRequiredPhotoStaysOnSamePoint' passed (0.003 seconds)
+Test Case 'Sprint2_1F_DeviceRegressionTests.testBindPromotesActiveNotStartedToInProgress' started at 2026-08-04 02:54:26.098
+Test Case 'Sprint2_1F_DeviceRegressionTests.testBindPromotesActiveNotStartedToInProgress' passed (0.002 seconds)
+Test Case 'Sprint2_1F_DeviceRegressionTests.testCommittedSessionAdoptedAcrossProjections' started at 2026-08-04 02:54:26.100
+Test Case 'Sprint2_1F_DeviceRegressionTests.testCommittedSessionAdoptedAcrossProjections' passed (0.003 seconds)
+Test Case 'Sprint2_1F_DeviceRegressionTests.testForceQuitRelaunchRestoresSameCommittedState' started at 2026-08-04 02:54:26.103
+Test Case 'Sprint2_1F_DeviceRegressionTests.testForceQuitRelaunchRestoresSameCommittedState' passed (0.039 seconds)
+Test Case 'Sprint2_1F_DeviceRegressionTests.testLibraryForceReloadShowsEvidenceWrittenByOtherStoreInstance' started at 2026-08-04 02:54:26.142
+Test Case 'Sprint2_1F_DeviceRegressionTests.testLibraryForceReloadShowsEvidenceWrittenByOtherStoreInstance' passed (0.011 seconds)
+Test Case 'Sprint2_1F_DeviceRegressionTests.testManualRefreshReloadsActiveSessionCatalogWithoutDuplicates' started at 2026-08-04 02:54:26.153
+Test Case 'Sprint2_1F_DeviceRegressionTests.testManualRefreshReloadsActiveSessionCatalogWithoutDuplicates' passed (0.009 seconds)
+Test Case 'Sprint2_1F_DeviceRegressionTests.testNoActiveInspectionCannotCoexistWithActiveSessionPresentation' started at 2026-08-04 02:54:26.162
+Test Case 'Sprint2_1F_DeviceRegressionTests.testNoActiveInspectionCannotCoexistWithActiveSessionPresentation' passed (0.002 seconds)
+Test Case 'Sprint2_1F_DeviceRegressionTests.testNotificationCarriesStableSessionId' started at 2026-08-04 02:54:26.164
+Test Case 'Sprint2_1F_DeviceRegressionTests.testNotificationCarriesStableSessionId' passed (0.0 seconds)
+Test Case 'Sprint2_1F_DeviceRegressionTests.testReviewDoesNotShowStaleNotStartedWhenEvidenceSatisfied' started at 2026-08-04 02:54:26.164
+Test Case 'Sprint2_1F_DeviceRegressionTests.testReviewDoesNotShowStaleNotStartedWhenEvidenceSatisfied' passed (0.002 seconds)
+Test Case 'Sprint2_1F_DeviceRegressionTests.testSatisfiedPointEnablesCorrectProgressionAction' started at 2026-08-04 02:54:26.166
+Test Case 'Sprint2_1F_DeviceRegressionTests.testSatisfiedPointEnablesCorrectProgressionAction' passed (0.002 seconds)
+Test Case 'Sprint2_1F_DeviceRegressionTests.testSkipAvailableOnUnsatisfiedPoint' started at 2026-08-04 02:54:26.168
+Test Case 'Sprint2_1F_DeviceRegressionTests.testSkipAvailableOnUnsatisfiedPoint' passed (0.002 seconds)
+Test Case 'Sprint2_1F_DeviceRegressionTests.testSkipRequiresNonblankReason' started at 2026-08-04 02:54:26.170
+Test Case 'Sprint2_1F_DeviceRegressionTests.testSkipRequiresNonblankReason' passed (0.002 seconds)
+Test Case 'Sprint2_1F_DeviceRegressionTests.testSuccessfulApprovalReturnsToCapturePresentation' started at 2026-08-04 02:54:26.173
+Test Case 'Sprint2_1F_DeviceRegressionTests.testSuccessfulApprovalReturnsToCapturePresentation' passed (0.002 seconds)
+Test Case 'Sprint2_1F_DeviceRegressionTests.testSuccessfulSkipAdvancesAndPersists' started at 2026-08-04 02:54:26.175
+Test Case 'Sprint2_1F_DeviceRegressionTests.testSuccessfulSkipAdvancesAndPersists' passed (0.002 seconds)
+Test Case 'Sprint2_1F_DeviceRegressionTests.testUsePhotoDestinationRemainsCaptureTabContract' started at 2026-08-04 02:54:26.177
+Test Case 'Sprint2_1F_DeviceRegressionTests.testUsePhotoDestinationRemainsCaptureTabContract' passed (0.1 seconds)
+Test Suite 'Sprint2_1F_DeviceRegressionTests' passed at 2026-08-04 02:54:26.278
+Executed 15 tests, with 0 failures (0 unexpected) in 0.182 (0.182) seconds
+Test Suite 'Sprint2_1F_PhaseA_CheckpointTests' started at 2026-08-04 02:54:26.278
+Test Case 'Sprint2_1F_PhaseA_CheckpointTests.testCannotDisplayCompletedWhilePointsOnlyEvidenceSatisfied' started at 2026-08-04 02:54:26.278
+Test Case 'Sprint2_1F_PhaseA_CheckpointTests.testCannotDisplayCompletedWhilePointsOnlyEvidenceSatisfied' passed (0.002 seconds)
+Test Case 'Sprint2_1F_PhaseA_CheckpointTests.testCompletedInspectionMayStillBeExportBlocked' started at 2026-08-04 02:54:26.279
+Test Case 'Sprint2_1F_PhaseA_CheckpointTests.testCompletedInspectionMayStillBeExportBlocked' passed (0.002 seconds)
+Test Case 'Sprint2_1F_PhaseA_CheckpointTests.testGuidedPathNeverRequiresApprovedState' started at 2026-08-04 02:54:26.281
+Test Case 'Sprint2_1F_PhaseA_CheckpointTests.testGuidedPathNeverRequiresApprovedState' passed (0.0 seconds)
+Test Case 'Sprint2_1F_PhaseA_CheckpointTests.testInProgressNeverShowsExportedEvenIfPackageFlagSet' started at 2026-08-04 02:54:26.281
+Test Case 'Sprint2_1F_PhaseA_CheckpointTests.testInProgressNeverShowsExportedEvenIfPackageFlagSet' passed (0.001 seconds)
+Test Case 'Sprint2_1F_PhaseA_CheckpointTests.testPersistenceFailureLeavesSessionUntouched' started at 2026-08-04 02:54:26.283
+Test Case 'Sprint2_1F_PhaseA_CheckpointTests.testPersistenceFailureLeavesSessionUntouched' passed (0.002 seconds)
+Test Case 'Sprint2_1F_PhaseA_CheckpointTests.testReadyForReviewThenCompletedSeparatesExportLabel' started at 2026-08-04 02:54:26.285
+Test Case 'Sprint2_1F_PhaseA_CheckpointTests.testReadyForReviewThenCompletedSeparatesExportLabel' passed (0.002 seconds)
+Test Case 'Sprint2_1F_PhaseA_CheckpointTests.testSessionIdentityPreservedAcrossBindPersistAdopt' started at 2026-08-04 02:54:26.287
+Test Case 'Sprint2_1F_PhaseA_CheckpointTests.testSessionIdentityPreservedAcrossBindPersistAdopt' passed (0.002 seconds)
+Test Suite 'Sprint2_1F_PhaseA_CheckpointTests' passed at 2026-08-04 02:54:26.289
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.011 (0.011) seconds
+Test Suite 'Sprint2_1F_SaveAndExitTests' started at 2026-08-04 02:54:26.289
+Test Case 'Sprint2_1F_SaveAndExitTests.testCannotDisplayCompletedAfterPartialSaveAndExit' started at 2026-08-04 02:54:26.289
+Test Case 'Sprint2_1F_SaveAndExitTests.testCannotDisplayCompletedAfterPartialSaveAndExit' passed (0.034 seconds)
+Test Case 'Sprint2_1F_SaveAndExitTests.testCompleteInspectionDisabledWhilePointsUnresolved' started at 2026-08-04 02:54:26.323
+Test Case 'Sprint2_1F_SaveAndExitTests.testCompleteInspectionDisabledWhilePointsUnresolved' passed (0.002 seconds)
+Test Case 'Sprint2_1F_SaveAndExitTests.testGuidedUsePhotoStillSkipsLegacyApprovedState' started at 2026-08-04 02:54:26.326
+Test Case 'Sprint2_1F_SaveAndExitTests.testGuidedUsePhotoStillSkipsLegacyApprovedState' passed (0.0 seconds)
+Test Case 'Sprint2_1F_SaveAndExitTests.testResumeRestoresExactSessionIDActivePointAndBindings' started at 2026-08-04 02:54:26.326
+Test Case 'Sprint2_1F_SaveAndExitTests.testResumeRestoresExactSessionIDActivePointAndBindings' passed (0.044 seconds)
+Test Case 'Sprint2_1F_SaveAndExitTests.testSaveAndExitDoesNotTriggerCompletionOrExportReadiness' started at 2026-08-04 02:54:26.369
+Test Case 'Sprint2_1F_SaveAndExitTests.testSaveAndExitDoesNotTriggerCompletionOrExportReadiness' passed (0.036 seconds)
+Test Case 'Sprint2_1F_SaveAndExitTests.testSaveAndExitFromPausedNormalizesToInProgress' started at 2026-08-04 02:54:26.405
+Test Case 'Sprint2_1F_SaveAndExitTests.testSaveAndExitFromPausedNormalizesToInProgress' passed (0.041 seconds)
+Test Case 'Sprint2_1F_SaveAndExitTests.testSaveAndExitWithOnePhotoMidInspectionStaysInProgress' started at 2026-08-04 02:54:26.447
+Test Case 'Sprint2_1F_SaveAndExitTests.testSaveAndExitWithOnePhotoMidInspectionStaysInProgress' passed (0.04 seconds)
+Test Case 'Sprint2_1F_SaveAndExitTests.testSaveAndExitWithZeroPhotosFourPointRemainsInProgress' started at 2026-08-04 02:54:26.487
+Test Case 'Sprint2_1F_SaveAndExitTests.testSaveAndExitWithZeroPhotosFourPointRemainsInProgress' passed (0.023 seconds)
+Test Case 'Sprint2_1F_SaveAndExitTests.testSaveAndExitWithZeroPhotosSixPointRemainsInProgress' started at 2026-08-04 02:54:26.510
+Test Case 'Sprint2_1F_SaveAndExitTests.testSaveAndExitWithZeroPhotosSixPointRemainsInProgress' passed (0.027 seconds)
+Test Suite 'Sprint2_1F_SaveAndExitTests' passed at 2026-08-04 02:54:26.537
+	 Executed 9 tests, with 0 failures (0 unexpected) in 0.248 (0.248) seconds
+Test Suite 'Sprint2_2_HardeningTests' started at 2026-08-04 02:54:26.537
+Test Case 'Sprint2_2_HardeningTests.testColdReloadPreservesBindingsAndRejectsResurrectionAfterUnbind' started at 2026-08-04 02:54:26.537
+Test Case 'Sprint2_2_HardeningTests.testColdReloadPreservesBindingsAndRejectsResurrectionAfterUnbind' passed (0.031 seconds)
+Test Case 'Sprint2_2_HardeningTests.testCompleteBlockedUntilRequiredWorkflowsResolved' started at 2026-08-04 02:54:26.568
+Test Case 'Sprint2_2_HardeningTests.testCompleteBlockedUntilRequiredWorkflowsResolved' passed (0.002 seconds)
+Test Case 'Sprint2_2_HardeningTests.testFailingPersisterOnSkipLeavesCallerSessionUntouched' started at 2026-08-04 02:54:26.570
+Test Case 'Sprint2_2_HardeningTests.testFailingPersisterOnSkipLeavesCallerSessionUntouched' passed (0.001 seconds)
+Test Case 'Sprint2_2_HardeningTests.testGuidedInspectionIntentCasesAreExplicitlyHandled' started at 2026-08-04 02:54:26.571
+Test Case 'Sprint2_2_HardeningTests.testGuidedInspectionIntentCasesAreExplicitlyHandled' passed (0.0 seconds)
+Test Case 'Sprint2_2_HardeningTests.testInspectionActionRouterSourceFileExistsOnDisk' started at 2026-08-04 02:54:26.571
+Test Case 'Sprint2_2_HardeningTests.testInspectionActionRouterSourceFileExistsOnDisk' passed (0.0 seconds)
+Test Case 'Sprint2_2_HardeningTests.testLibraryIndexUnsupportedSchemaFailsClosed' started at 2026-08-04 02:54:26.571
+Test Case 'Sprint2_2_HardeningTests.testLibraryIndexUnsupportedSchemaFailsClosed' passed (0.002 seconds)
+Test Case 'Sprint2_2_HardeningTests.testLibrarySoftDeleteDoesNotResurrectAfterOtherActorWrite' started at 2026-08-04 02:54:26.573
+[Phase1Capture] stage=evidence_library event=quarantined reason=user_soft_delete path=EVD-GONE-user_soft_delete-6FD3EFA2-4358-479B-8F05-01E763EDCFBC
+[Phase1Capture] stage=evidence_library event=user_soft_delete id=EVD-GONE
+[Phase1Capture] stage=evidence_library event=quarantined reason=user_soft_delete path=EVD-GONE-user_soft_delete-6FD3EFA2-4358-479B-8F05-01E763EDCFBC
+[Phase1Capture] stage=evidence_library event=user_soft_delete id=EVD-GONE
+Test Case 'Sprint2_2_HardeningTests.testLibrarySoftDeleteDoesNotResurrectAfterOtherActorWrite' passed (0.018 seconds)
+Test Case 'Sprint2_2_HardeningTests.testMediaExistsButMetadataMissingRebuildsOnReconcile' started at 2026-08-04 02:54:26.591
+Test Case 'Sprint2_2_HardeningTests.testMediaExistsButMetadataMissingRebuildsOnReconcile' passed (0.006 seconds)
+Test Case 'Sprint2_2_HardeningTests.testMetadataExistsButMediaMissingMarkedMissingOnReconcile' started at 2026-08-04 02:54:26.597
+Test Case 'Sprint2_2_HardeningTests.testMetadataExistsButMediaMissingMarkedMissingOnReconcile' passed (0.01 seconds)
+Test Case 'Sprint2_2_HardeningTests.testPersistFailureDoesNotAdoptAndLeavesCallerUntouched' started at 2026-08-04 02:54:26.607
+Test Case 'Sprint2_2_HardeningTests.testPersistFailureDoesNotAdoptAndLeavesCallerUntouched' passed (0.002 seconds)
+Test Case 'Sprint2_2_HardeningTests.testRandomizedActionSequenceWithRecordedSeed' started at 2026-08-04 02:54:26.609
+Test Case 'Sprint2_2_HardeningTests.testRandomizedActionSequenceWithRecordedSeed' passed (0.776 seconds)
+Test Case 'Sprint2_2_HardeningTests.testRepeatedUnbindIsIdempotentOnCommittedSession' started at 2026-08-04 02:54:27.384
+Test Case 'Sprint2_2_HardeningTests.testRepeatedUnbindIsIdempotentOnCommittedSession' passed (0.037 seconds)
+Test Case 'Sprint2_2_HardeningTests.testSaveAndExitSemanticsIndependentOfCompletionGate' started at 2026-08-04 02:54:27.422
+Test Case 'Sprint2_2_HardeningTests.testSaveAndExitSemanticsIndependentOfCompletionGate' passed (0.027 seconds)
+Test Case 'Sprint2_2_HardeningTests.testSessionLoadTruncatedJSONSurfacesCorruptAndClears' started at 2026-08-04 02:54:27.449
+Test Case 'Sprint2_2_HardeningTests.testSessionLoadTruncatedJSONSurfacesCorruptAndClears' passed (0.001 seconds)
+Test Case 'Sprint2_2_HardeningTests.testStaleRevisionRaceRejectsWithStaleRevisionConflict' started at 2026-08-04 02:54:27.450
+Test Case 'Sprint2_2_HardeningTests.testStaleRevisionRaceRejectsWithStaleRevisionConflict' passed (0.018 seconds)
+Test Suite 'Sprint2_2_HardeningTests' passed at 2026-08-04 02:54:27.468
+	 Executed 15 tests, with 0 failures (0 unexpected) in 0.931 (0.931) seconds
+Test Suite 'Sprint2_3_ErrorPresentationBoundaryTests' started at 2026-08-04 02:54:27.468
+Test Case 'Sprint2_3_ErrorPresentationBoundaryTests.testAppSessionContainerUsesPresentErrorNotDirectAssignment' started at 2026-08-04 02:54:27.468
+Test Case 'Sprint2_3_ErrorPresentationBoundaryTests.testAppSessionContainerUsesPresentErrorNotDirectAssignment' passed (0.001 seconds)
+Test Case 'Sprint2_3_ErrorPresentationBoundaryTests.testClearErrorRemovesMessage' started at 2026-08-04 02:54:27.469
+Test Case 'Sprint2_3_ErrorPresentationBoundaryTests.testClearErrorRemovesMessage' passed (0.0 seconds)
+Test Case 'Sprint2_3_ErrorPresentationBoundaryTests.testEvidenceLibraryViewModelErrorTextRemainsSeparatelyWritable' started at 2026-08-04 02:54:27.469
+Test Case 'Sprint2_3_ErrorPresentationBoundaryTests.testEvidenceLibraryViewModelErrorTextRemainsSeparatelyWritable' passed (0.001 seconds)
+Test Case 'Sprint2_3_ErrorPresentationBoundaryTests.testIdentityDivergencePresentsErrorWithoutClearingAuthorityOrExtraWrite' started at 2026-08-04 02:54:27.470
+Test Case 'Sprint2_3_ErrorPresentationBoundaryTests.testIdentityDivergencePresentsErrorWithoutClearingAuthorityOrExtraWrite' passed (0.007 seconds)
+Test Case 'Sprint2_3_ErrorPresentationBoundaryTests.testInspectionReviewViewUsesClearErrorNotDirectAssignment' started at 2026-08-04 02:54:27.477
+Test Case 'Sprint2_3_ErrorPresentationBoundaryTests.testInspectionReviewViewUsesClearErrorNotDirectAssignment' passed (0.003 seconds)
+Test Case 'Sprint2_3_ErrorPresentationBoundaryTests.testInspectionSessionViewModelDeclaresPrivateSetErrorTextAndIntentMethods' started at 2026-08-04 02:54:27.481
+Test Case 'Sprint2_3_ErrorPresentationBoundaryTests.testInspectionSessionViewModelDeclaresPrivateSetErrorTextAndIntentMethods' passed (0.001 seconds)
+Test Case 'Sprint2_3_ErrorPresentationBoundaryTests.testPresentErrorDoesNotMutateCurrentSession' started at 2026-08-04 02:54:27.481
+Test Case 'Sprint2_3_ErrorPresentationBoundaryTests.testPresentErrorDoesNotMutateCurrentSession' passed (0.001 seconds)
+Test Case 'Sprint2_3_ErrorPresentationBoundaryTests.testPresentErrorPublishesSuppliedMessage' started at 2026-08-04 02:54:27.483
+Test Case 'Sprint2_3_ErrorPresentationBoundaryTests.testPresentErrorPublishesSuppliedMessage' passed (0.0 seconds)
+Test Suite 'Sprint2_3_ErrorPresentationBoundaryTests' passed at 2026-08-04 02:54:27.483
+Executed 8 tests, with 0 failures (0 unexpected) in 0.015 (0.015) seconds
+Test Suite 'Sprint2_3_RevisionGuardTests' started at 2026-08-04 02:54:27.483
+Test Case 'Sprint2_3_RevisionGuardTests.testCallerMintedFutureRevisionOnPayloadIsIgnored' started at 2026-08-04 02:54:27.483
+Test Case 'Sprint2_3_RevisionGuardTests.testCallerMintedFutureRevisionOnPayloadIsIgnored' passed (0.001 seconds)
+Test Case 'Sprint2_3_RevisionGuardTests.testControlledInterleavingRejectsStaleExpectedRevision' started at 2026-08-04 02:54:27.484
+Test Case 'Sprint2_3_RevisionGuardTests.testControlledInterleavingRejectsStaleExpectedRevision' passed (0.014 seconds)
+Test Case 'Sprint2_3_RevisionGuardTests.testFirstPersistRequiresExpectedZeroAndAssignsOne' started at 2026-08-04 02:54:27.498
+Test Case 'Sprint2_3_RevisionGuardTests.testFirstPersistRequiresExpectedZeroAndAssignsOne' passed (0.001 seconds)
+Test Case 'Sprint2_3_RevisionGuardTests.testLegacyPayloadMissingRevisionDecodesAsZeroThenCommits' started at 2026-08-04 02:54:27.499
+Test Case 'Sprint2_3_RevisionGuardTests.testLegacyPayloadMissingRevisionDecodesAsZeroThenCommits' passed (0.006 seconds)
+Test Case 'Sprint2_3_RevisionGuardTests.testMultiSessionStoreEnforcesPerFileExpectedRevision' started at 2026-08-04 02:54:27.505
+Test Case 'Sprint2_3_RevisionGuardTests.testMultiSessionStoreEnforcesPerFileExpectedRevision' passed (0.014 seconds)
+Test Case 'Sprint2_3_RevisionGuardTests.testNonZeroExpectationAgainstEmptySlotIsRejectedWithoutAdopting' started at 2026-08-04 02:54:27.519
+Test Case 'Sprint2_3_RevisionGuardTests.testNonZeroExpectationAgainstEmptySlotIsRejectedWithoutAdopting' passed (0.001 seconds)
+Test Case 'Sprint2_3_RevisionGuardTests.testRejectedCommitLeavesDiskUnchanged' started at 2026-08-04 02:54:27.520
+Test Case 'Sprint2_3_RevisionGuardTests.testRejectedCommitLeavesDiskUnchanged' passed (0.009 seconds)
+Test Case 'Sprint2_3_RevisionGuardTests.testReplaceCurrentSessionRequiresIncumbentRevisionAwareness' started at 2026-08-04 02:54:27.530
+Test Case 'Sprint2_3_RevisionGuardTests.testReplaceCurrentSessionRequiresIncumbentRevisionAwareness' passed (0.002 seconds)
+Test Case 'Sprint2_3_RevisionGuardTests.testSaveDifferentIDIntoOccupiedSlotIsRejected' started at 2026-08-04 02:54:27.532
+Test Case 'Sprint2_3_RevisionGuardTests.testSaveDifferentIDIntoOccupiedSlotIsRejected' passed (0.002 seconds)
+Test Suite 'Sprint2_3_RevisionGuardTests' passed at 2026-08-04 02:54:27.534
+	 Executed 9 tests, with 0 failures (0 unexpected) in 0.051 (0.051) seconds
+Test Suite 'UncertainValueTests' started at 2026-08-04 02:54:27.534
+Test Case 'UncertainValueTests.testUnknownUncertaintyWhenNil' started at 2026-08-04 02:54:27.534
+Test Case 'UncertainValueTests.testUnknownUncertaintyWhenNil' passed (0.0 seconds)
+Test Suite 'UncertainValueTests' passed at 2026-08-04 02:54:27.534
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'GoldenEvidencePackageTests' started at 2026-08-04 02:54:27.534
+Test Case 'GoldenEvidencePackageTests.testGoldenPackageHashesMatchManifest' started at 2026-08-04 02:54:27.534
+Test Case 'GoldenEvidencePackageTests.testGoldenPackageHashesMatchManifest' passed (0.001 seconds)
+Test Case 'GoldenEvidencePackageTests.testPackageMetaDeclaresCompatibility' started at 2026-08-04 02:54:27.534
+Test Case 'GoldenEvidencePackageTests.testPackageMetaDeclaresCompatibility' passed (0.0 seconds)
+Test Suite 'GoldenEvidencePackageTests' passed at 2026-08-04 02:54:27.535
+Executed 2 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'SessionRecoveryMonotonicityTests' started at 2026-08-04 02:54:27.535
+Test Case 'SessionRecoveryMonotonicityTests.testGateRejectsLowerOrEqualRecoveredRevision' started at 2026-08-04 02:54:27.535
+Test Case 'SessionRecoveryMonotonicityTests.testGateRejectsLowerOrEqualRecoveredRevision' passed (0.004 seconds)
+Test Case 'SessionRecoveryMonotonicityTests.testInstallRecoveredAcceptsStrictlyNewerSnapshot' started at 2026-08-04 02:54:27.539
+Test Case 'SessionRecoveryMonotonicityTests.testInstallRecoveredAcceptsStrictlyNewerSnapshot' passed (0.002 seconds)
+Test Case 'SessionRecoveryMonotonicityTests.testInstallRecoveredRejectsRegressionWithoutTouchingDisk' started at 2026-08-04 02:54:27.540
+Test Case 'SessionRecoveryMonotonicityTests.testInstallRecoveredRejectsRegressionWithoutTouchingDisk' passed (0.015 seconds)
+Test Suite 'SessionRecoveryMonotonicityTests' passed at 2026-08-04 02:54:27.555
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.02 (0.02) seconds
+Test Suite 'debug.xctest' passed at 2026-08-04 02:54:27.555
+Executed 594 tests, with 7 tests skipped and 0 failures (0 unexpected) in 11.033 (11.033) seconds
+Test Suite 'All tests' passed at 2026-08-04 02:54:27.555
+Executed 594 tests, with 7 tests skipped and 0 failures (0 unexpected) in 11.033 (11.033) seconds
