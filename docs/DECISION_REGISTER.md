@@ -1278,3 +1278,20 @@ later entry that references it.
   `ENGINEERING_USE_AUTHORITY=FIXTURE_ONLY`, `ENGINEERING_METROLOGY_CLAIM=FORBIDDEN`,
   `MANUFACTURING_RELEASE_CLAIM=FORBIDDEN`, `PRODUCTION_MESH_CLAIM=FORBIDDEN`,
   `COMPLETE_DIGITAL_TWIN_CLAIM=FORBIDDEN`. Nothing is implemented or validated.
+- Specification refinement (pass 02A, documentation only; **status remains Proposed**): the
+  foundational contract was hardened with a normative-language convention; six closed authority
+  vocabularies (geometry, scale, datum, measurement, characterization, engineering-use) each with
+  evidence basis and prohibited cross-dimension implications, and with no generic authorized state;
+  transition tables, seven-field transition records, and the implication-vs-prerequisite
+  distinction with four prerequisite laws; identifier grammars with duplicates and orphans as
+  distinct hard failures; a scale model separated from the datum transform covering uniform,
+  per-axis, anisotropic and regional distortion; fitting-vs-validation control roles keyed on
+  canonical feature relationships; datum frame declaration with explicit inheritance of the
+  Phase 4D convention, canonical millimetre unit, normative operation order and SE(3) validity
+  criteria; execution-state identifiers with fail-closed semantics and prohibition of partial
+  authoritative output; and deterministic canonicalization requirements. All numeric thresholds,
+  tolerances, conditioning bounds and decimal precision remain versioned configuration or policy
+  values requiring separate approval. Measurement-record schemas, uncertainty budgets, policy
+  registries, disposition/reason-code vocabularies, recapture schemas and the characterization-report
+  schema are deferred to pass 02B. No implementation, schema file, executable or test evidence was
+  added; no status plane changed.

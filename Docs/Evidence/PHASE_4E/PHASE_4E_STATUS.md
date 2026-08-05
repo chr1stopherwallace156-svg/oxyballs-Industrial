@@ -43,3 +43,19 @@ result, digest sidecar or delivery archive is claimed or included, because nothi
 Engine implementation · compilation · test execution · governance-tool execution · production
 vehicle mesh · engineering metrology · manufacturing geometry or release · complete digital twin ·
 physical device validation.
+
+## Specification pass 02A — spatial authority hardening
+
+Documentation-only hardening of the foundational contract. **No status plane changed**; all values
+above remain exactly as stated. Added: normative-language convention; six closed authority
+vocabularies with evidence bases and prohibited implications; transition laws and transition
+records; identity/reference laws with duplicate and orphan as distinct hard failures; scale model
+with anisotropy and regional-residual requirements; fitting-vs-validation control roles; datum frame
+declaration, canonical millimetre unit, normative operation order and SE(3) validity criteria;
+execution-state identifiers with fail-closed semantics; deterministic canonicalization requirements.
+
+No numeric threshold, tolerance, conditioning bound or decimal precision is fixed by this pass; each
+remains a versioned configuration or policy value requiring separate approval.
+
+Deferred to pass 02B: measurement-record schemas, uncertainty budgets, policy registries,
+disposition/reason-code vocabularies, recapture schemas, characterization-report schema.

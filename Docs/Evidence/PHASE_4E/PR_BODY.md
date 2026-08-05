@@ -74,3 +74,58 @@ metrology · manufacturing geometry or release · complete digital twin · physi
 ## Out of scope for this PR
 
 Canonical Swift engine; Tier 1B; Tier 1C; Tier 2; physical calibration.
+
+---
+
+## Specification pass 02A — spatial authority hardening
+
+Documentation-only. **No status plane changed; D-032 remains Proposed; nothing is implemented,
+compiled, executed or validated.**
+
+Added normative precision to the foundational contract:
+
+1. **Normative-language convention** — MUST / SHOULD / MAY; examples non-normative unless labelled;
+   prose cannot override a closed vocabulary, transition table or invariant.
+2. **Six closed authority vocabularies** — geometry, scale, datum, measurement, characterization,
+   engineering-use; each with meaning, minimum evidence basis, ordering-vs-categorical designation,
+   and prohibited implications into other dimensions. Unknown values are rejected, never coerced.
+   No generic authorized state exists: authorization is envelope-bound and declared-use-bound.
+3. **Transition laws** — permitted edges per dimension; no skipped elevation without complete
+   independent evidence; elevation never inferred from another dimension; demotion/revocation on
+   invalid, contradictory, superseded or out-of-scope evidence; monotonicity within an evaluation
+   except for recorded integrity-triggered revocation; seven-field transition records; and the
+   implication (prohibited) vs prerequisite (permitted) distinction with four prerequisite laws.
+4. **Identity and reference laws** — closed ID grammars (uppercase ASCII, digits, hyphens),
+   case-sensitive, no whitespace normalization, uniqueness per artifact scope, duplicates and
+   orphans as **distinct** hard failures with distinct error identifiers, last-write-wins
+   prohibited, unresolved references never nulled; relationship identity keyed on canonical feature
+   identities rather than control labels.
+5. **Scale model** — represented separately from the datum transform; `S = diag(sx, sy, sz, 1)`;
+   uniform, per-axis, anisotropic and regional residual distortion all characterized; regional
+   residuals retained rather than averaged; scale correction never mutates Phase 4D vertices.
+6. **Fitting vs validation controls** — `FITTING_ONLY` / `VALIDATION_ONLY` / `EXCLUDED`; overlap of
+   relationship identity is a deterministic contract failure; states above `SINGLE_ANCHOR` require
+   at least one independent validation relationship.
+7. **Datum frames and transforms** — required frame declaration fields; the Phase 4D convention is
+   inherited explicitly, never assumed; canonical unit **millimetres** with explicit recorded
+   conversion; normative order `p_engineering = T_datum × S_scale × p_phase4d` (column vectors);
+   SE(3) validity criteria; reflection, scale-bearing, singular, unstable or ambiguous fits yield
+   `UNRESOLVED` with no arbitrary candidate selected.
+8. **Execution semantics** — execution status distinguished from engineering disposition; thirteen
+   stable specification identifiers; fail-closed on identity/integrity/reference failure; partial
+   authoritative output prohibited; diagnostic output explicitly non-authoritative.
+9. **Deterministic canonicalization** — UTF-8 without BOM, canonical key and array ordering, no
+   NaN/infinity, negative zero normalized, versioned numeric formatting policy, environment-dependent
+   fields excluded from hashed payloads, byte-identical reproducibility, canonicalization policy
+   identity in lineage.
+
+The failure matrix now carries **20 cases**, each bound to a required execution identifier or
+explicitly marked an engineering outcome; all remain `SPECIFIED_NOT_EXECUTED`.
+
+**No numeric threshold is invented by this pass.** Anisotropy threshold, SE(3) tolerances,
+conditioning bound, validation-control counts and canonical decimal precision are all versioned
+configuration or policy values requiring separate approval.
+
+**Deferred to pass 02B:** measurement-record schemas; GUM uncertainty budgets; engineering-use
+policy registries and decision-rule identity; guard-band semantics; closed disposition and
+reason-code vocabularies; recapture-contract schemas; characterization-report schema.

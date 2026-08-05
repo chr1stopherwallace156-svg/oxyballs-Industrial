@@ -2,6 +2,8 @@
 # Net content of this branch relative to Industrial main 48e6c1e.
 # Documentation and governance records only. No source, package manifest, schema,
 # executable, delivery archive, or generated test evidence.
+# Specification pass 02A (spatial authority hardening) modified documents in place;
+# no file was added or removed by that pass.
 
 ADDED
 Docs/Capture/PHASE_4E_CHARACTERIZATION_AND_MEASUREMENT_AUTHORITY.md

@@ -45,3 +45,32 @@ was moved. No other main file was touched.
 
 No executable, source file, package manifest, schema file, delivery archive, fixture payload, or
 generated test evidence. No test was executed in this pass.
+
+## Specification pass 02A — spatial authority hardening (documentation only)
+
+**No file was added or removed.** Modified in place:
+
+- `Docs/Capture/PHASE_4E_CHARACTERIZATION_AND_MEASUREMENT_AUTHORITY.md` — added normative-language
+  convention; six closed authority vocabularies with evidence bases, ordering/categorical
+  designation and prohibited implications; transition tables, transition records and the
+  implication-vs-prerequisite laws; identity and reference laws; scale model and threshold
+  discipline; fitting-vs-validation control roles; datum frame declaration, canonical millimetre
+  unit, normative operation order and SE(3) validity; execution semantics with stable identifiers
+  and fail-closed rules; deterministic canonicalization requirements. Section numbering expanded
+  accordingly; all prior normative content retained.
+- `Docs/Capture/HANDOFF_PHASE_4E_CHARACTERIZATION.md` — pass 02A summary.
+- `Docs/Evidence/PHASE_4E/PHASE_4E_STATUS.md` — pass 02A note; **status planes unchanged**.
+- `Docs/Evidence/PHASE_4E/PR_BODY.md` — updated to describe the added precision.
+- `Docs/Evidence/PHASE_4E/failure_matrix.md` — expanded to 20 cases, each bound to a required
+  execution identifier or explicitly marked as an engineering outcome; every case remains
+  `SPECIFIED_NOT_EXECUTED`.
+- `Docs/Evidence/PHASE_4E/SOURCE_TREE_MANIFEST.txt` — pass note.
+- `Docs/Architecture/PHASE_3_VALIDATION_BACKLOG.md` — pass 02B prerequisites.
+- `docs/DECISION_REGISTER.md` — D-032 refinement note; **status remains Proposed**.
+
+`CURRENT_STATE.md` was **not** modified: its recorded status is factually unchanged by this pass.
+
+**Not added in this pass:** no source, schema file, executable, package manifest, fixture payload,
+generated evidence, test execution, delivery archive, new language, or new dependency. The removed
+top-level tree was not recreated. No component defining behaviour above the canonical Swift
+implementation was introduced.
