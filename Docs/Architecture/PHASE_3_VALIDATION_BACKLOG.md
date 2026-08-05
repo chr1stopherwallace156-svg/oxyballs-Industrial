@@ -156,3 +156,32 @@ mesh · photogrammetry · point-cloud interpretation · CAD alignment · compone
 | Phase 4C outputs immutable; Phase 4E handoff recorded | COMPLETE |
 | Engineering metrology / manufacturing / digital twin | FORBIDDEN |
 | Physical surface validation (`SPKG-DEVICE-000001`) | PENDING |
+
+## Phase 4E (D-032, Proposed — specification only, nothing implemented)
+- [ ] Approve the Phase 4E specification (`Docs/Capture/PHASE_4E_CHARACTERIZATION_AND_MEASUREMENT_AUTHORITY.md`).
+- [ ] Implement the canonical Swift characterization engine in the established canonical source
+      architecture, derived from the approved specification.
+- [ ] Datum resolution and scale-authority establishment.
+- [ ] Uncertainty propagation, declared-use policy evaluation, and recapture-contract lifecycle.
+- [ ] Execute the proposed failure matrix (`Docs/Evidence/PHASE_4E/failure_matrix.md`); all cases
+      are currently `SPECIFIED_NOT_EXECUTED`.
+- [ ] Physical validation (separate approval; not authorized).
+- Locks remain: FIXTURE_ONLY · ENGINEERING_METROLOGY_CLAIM=FORBIDDEN ·
+  MANUFACTURING_RELEASE_CLAIM=FORBIDDEN · PRODUCTION_MESH_CLAIM=FORBIDDEN ·
+  COMPLETE_DIGITAL_TWIN_CLAIM=FORBIDDEN.
+
+## Phase 4E specification pass 02B (prerequisite to implementation; not authorized)
+- [ ] Measurement-record schema: measurand definition, endpoint semantics, units, instrument identity
+      and calibration, procedure, operator, timestamp, repeated readings, environmental conditions.
+- [ ] Uncertainty framework: Type A/B components, standard vs expanded, correlation and covariance,
+      coverage factor, effective degrees of freedom.
+- [ ] Decision-rule identity and version; guard-band semantics.
+- [ ] Engineering-use policy registry: policy ID/version, tolerance budgets, characteristic limits.
+- [ ] Closed disposition token set and reason-code vocabulary, including the distinction between
+      outside-envelope, unsuitable and indeterminate.
+- [ ] Recapture-contract schema: lifecycle states, supersession, capture conditions, closure criteria,
+      prior-evidence retention.
+- [ ] Characterization-report schema: report identity, per-dimension authority block, region/use
+      relationships, unresolved items, claim locks, output inventory and closure.
+- [ ] Versioned configuration/policy values: anisotropy threshold, SE(3) tolerances, conditioning
+      bound, validation-control counts and placement, canonical numeric precision.

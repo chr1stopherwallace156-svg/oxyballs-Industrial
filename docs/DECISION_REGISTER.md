@@ -1256,3 +1256,42 @@ later entry that references it.
   `ACTIVE_SPECIFICATION` at a time; superseded revisions are archived in
   place. README baseline updates are made by proposal at milestone
   boundaries, never silently.
+
+## D-032 — Phase 4E characterization & measurement-authority specification (Proposed)
+
+- Status: **Proposed**
+- Context: Phase 4D (D-031, PR #68) emits an immutable `Phase4EHandoffContract`
+  (`SURFACE-OUT-FIXTURE-000001`, closure `fe043fdb…`, `READY_WITH_UNRESOLVED_BOUNDARIES`,
+  `SCALE_DATUM_PENDING_PHASE4E`). Phase 4E must characterize that surface against declared
+  engineering uses without mutating geometry and without asserting metrology.
+- Decision: adopt a **specification and governance proposal only** for Phase 4E. It fixes the
+  authority order (immutable Phase 4D evidence → approved contracts/specification → canonical
+  Swift implementation → fixture truth → optional independent verification tools), separates six
+  authority dimensions (geometry, scale, datum, measurement, characterization, engineering-use),
+  requires declared-use-specific conclusions rather than a universal region disposition, and
+  requires verified existence, integrity, lineage, scope, operating envelope and declared-use
+  applicability before any authority elevation — presence of an evidence identifier grants nothing.
+  Verification tools may verify outputs but may never define canonical behaviour.
+- Consequences: the canonical numerical engine remains **future Swift work in the established
+  canonical source architecture**; no engine, package manifest, source, schema, executable or test
+  evidence is added to this repository by this decision. Claim locks hold:
+  `ENGINEERING_USE_AUTHORITY=FIXTURE_ONLY`, `ENGINEERING_METROLOGY_CLAIM=FORBIDDEN`,
+  `MANUFACTURING_RELEASE_CLAIM=FORBIDDEN`, `PRODUCTION_MESH_CLAIM=FORBIDDEN`,
+  `COMPLETE_DIGITAL_TWIN_CLAIM=FORBIDDEN`. Nothing is implemented or validated.
+- Specification refinement (pass 02A, documentation only; **status remains Proposed**): the
+  foundational contract was hardened with a normative-language convention; six closed authority
+  vocabularies (geometry, scale, datum, measurement, characterization, engineering-use) each with
+  evidence basis and prohibited cross-dimension implications, and with no generic authorized state;
+  transition tables, seven-field transition records, and the implication-vs-prerequisite
+  distinction with four prerequisite laws; identifier grammars with duplicates and orphans as
+  distinct hard failures; a scale model separated from the datum transform covering uniform,
+  per-axis, anisotropic and regional distortion; fitting-vs-validation control roles keyed on
+  canonical feature relationships; datum frame declaration with explicit inheritance of the
+  Phase 4D convention, canonical millimetre unit, normative operation order and SE(3) validity
+  criteria; execution-state identifiers with fail-closed semantics and prohibition of partial
+  authoritative output; and deterministic canonicalization requirements. All numeric thresholds,
+  tolerances, conditioning bounds and decimal precision remain versioned configuration or policy
+  values requiring separate approval. Measurement-record schemas, uncertainty budgets, policy
+  registries, disposition/reason-code vocabularies, recapture schemas and the characterization-report
+  schema are deferred to pass 02B. No implementation, schema file, executable or test evidence was
+  added; no status plane changed.
