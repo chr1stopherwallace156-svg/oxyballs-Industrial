@@ -1,5 +1,18 @@
 # ENGINEERING CONSTITUTION
 
+| Field | Value |
+|---|---|
+| **Document Identifier** | `ELEKTRON-ENG-CONST-BASE-001` |
+| **Status** | `ACTIVE_FOUNDATIONAL_CONSTITUTION` |
+| **Related Operational Governance Standard** | [`Docs/Governance/ELEKTRON-ENG-CONST-001.md`](../Docs/Governance/ELEKTRON-ENG-CONST-001.md) |
+
+**Relationship:** `ELEKTRON-ENG-CONST-001` extends, formalizes, and operationalizes this
+foundational Constitution. It does not replace, supersede, deprecate, weaken, or silently
+reinterpret it. This document remains the enduring foundational authority.
+
+**Citation:** cite articles of this document as `BASE-CONST Article <n>`; cite the operational
+standard as `ENG-CONST-001 Article <n>`. The two documents number their articles independently.
+
 **Scope:** Elektron Build Engine — all revisions, all milestones.
 **Stability:** These articles almost never change. Amending this document
 requires an explicit entry in the [Decision Register](DECISION_REGISTER.md)
