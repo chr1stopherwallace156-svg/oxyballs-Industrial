@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| File | `DOWNLOAD-elektron-capture-ios-app-interaction-repair-02.zip` |
+| File | `elektron-capture-ios.zip` (permanent Capture delivery name — see `CAPTURE_DELIVERY_NAMING.md`) |
 | SHA-256 | `e3135b6f033f8228a680d58da2c0bfb6b79895362351029ea49928653dbce257` |
 | Size | 3,928,130 bytes |
 | Entries | 2,275 |
@@ -78,8 +78,8 @@ byte-identical over all 1,910 files; SHA-256 re-verified with `sha256sum -c`.
 
 ```bash
 cd ~/Downloads
-shasum -a 256 DOWNLOAD-elektron-capture-ios-app-interaction-repair-02.zip
-unzip -q DOWNLOAD-elektron-capture-ios-app-interaction-repair-02.zip
+shasum -a 256 elektron-capture-ios.zip
+unzip -q elektron-capture-ios.zip
 cd elektron-capture-ios
 swift build && swift test
 open Phase1StillCapture.xcworkspace
