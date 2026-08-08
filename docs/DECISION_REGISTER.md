@@ -19,6 +19,164 @@ later entry that references it.
 
 ---
 
+## D-036 — ODR-018 / ODR-015 / ODR-017 do not close from the archived corpus; physical and application evidence required
+
+- Date: 2026-08-08
+- Status: Accepted
+- Context: D-035 left three evidence obligations standing between a ranking and a defensible
+  Dana selection. This entry records an exhaustive attempt to close them from
+  **already-archived primary evidence only** — no network retrieval, no new sources.
+- Scope of the search: all five archived primary artifacts, digests recomputed from the
+  archived bytes and all matching their manifests — `SRC-DANA-000001`, `SRC-CAND-000001`
+  (Ford Body Application Guide), `SRC-CAND-000010`, `SRC-CAND-000011`, `SRC-NHTSA-17S33`
+  (door-latch recall, subject matter unrelated). Full text extraction plus a
+  repository-wide grep for every road-load, axle-torque and voltage-derating term.
+  `SRC-DANA-000001` was additionally checked for graphed data that text extraction would
+  miss; it holds one embedded raster image, the product photograph.
+- Decision: record all three as **not closable from documentation**, at
+  `docs/research/PLATFORM_001_ODR_015_017_018_CLOSURE_ATTEMPT.md`, and define the minimum
+  evidence each needs rather than inferring any missing value.
+  1. **ODR-018 — `CONTROLLED_BENCH_CHARACTERIZATION_REQUIRED`** for all four survivors.
+     `SRC-DANA-000001` publishes a single rated operating point per variant (600 Vdc, or
+     650 Vdc for NEW rows, at 45 °C) with no curve, map, derating table or peak duration.
+     `OPERATING_RANGE_COMPATIBLE = YES` and `PERFORMANCE_RATED_AT_333_407_V = NO` are kept
+     as separate findings — a variant accepting a voltage is not a variant rated at it.
+  2. **ODR-015 — one term documented, four requiring measurement.** Vehicle test mass
+     applicability is `PRIMARY_DOCUMENT_SUPPORTED`; aerodynamic drag, rolling resistance,
+     driveline efficiency and effective rolling radius are `PHYSICAL_MEASUREMENT_REQUIRED`.
+  3. **ODR-017 — `OPEN`, confirmed.** No applicable input-torque rating exists in the
+     corpus, and **no Dana or Spicer axle document is archived at all**.
+- Findings that change what happens next:
+  - **Dana's own Application Policy names the documentary route.** The artifact states that
+    capacity ratings vary by model and type of service and that application approvals must
+    be obtained from Dana TM4. The sheet does not present itself as an application rating.
+    Dana-issued application data across 333–407 Vdc would close ODR-018 at
+    `VERIFIED_COMPONENT_DOCUMENTATION` without any bench programme, and should be attempted
+    first. This is consistent with B-006, which removed the *dependency* on a supplier reply
+    without making supplier documentation inadmissible; the bench remains the fallback that
+    keeps the project independent of a reply.
+  - **A governed coastdown already exists and is only a partial answer.** Gate 05M-C3B /
+    C3B-001 is already approved and its stated purpose is the rolling-resistance and drag
+    model. But Gate 05M-C3 is bounded `NO_PUBLIC_ROAD / NO_NORMAL_DRIVING_AUTHORITY`, and at
+    the low speeds it authorises the aerodynamic term is negligible — so it yields no usable
+    `CdA`, while the binding duty points at 55/65/70 mph are exactly where aero dominates.
+    **Closing the aerodynamic term requires an evidence activity the current authorised gate
+    ladder does not contain**, and that is escalated as a scope finding rather than absorbed
+    silently into an existing gate.
+- Discipline recorded so it is auditable: no field-weakening curve inferred, no linear
+  scaling of power with voltage, no derating factor derived, no family maximum used to fill a
+  per-variant gap. For ODR-017 the inputs for a tempting inference were all present and were
+  deliberately unused — the 13,660 lb rating **@ ground** is a vertical load limit and is not
+  convertible to torque, and the 11.8 in ring-gear pitch diameter in SC-029 is not a basis
+  for a torque estimate. The SC-036 sensitivity band is not promoted.
+- Consequences:
+  - `CAN_DANA_SELECTION_PROCEED = NO`. `POWERTRAIN_SELECTION_STATE = NOT_SELECTED`.
+    `CURRENT_SCREENING_LEADER = HV2800-6P NEW / 4.30` — a bookmark carrying no authority,
+    and the two states are never collapsed.
+  - All D-035 screening results are preserved unchanged; nothing is withdrawn or superseded.
+  - No escalation to a trade study is triggered: the survivors are `INDETERMINATE`, not
+    disqualified, which is a different condition from having been judged and failed. The
+    escalation condition is recorded in advance — if ODR-018 resolves such that no survivor
+    meets D1 at 333–407 Vdc, that opens a trade study (alternate Dana voltage class,
+    alternate battery/system voltage architecture, alternate inverter/motor architecture,
+    alternate propulsion supplier). **ODR-012 and SC-035 may change only through an explicit
+    owner decision that changes the Platform 001 mission — never to make a candidate pass.**
+  - Webasto topology remains `NOT_STARTED`. No component of any kind selected. No
+    energized-HV procedure written and no safety or test control bypassed.
+    `engine/src/platform/platform001.ts` untouched.
+
+## D-035 — Platform 001 Dana screening: six variants eliminated, no selection defensible
+
+- Date: 2026-08-08
+- Status: Accepted
+- Context: the owner issued design requirements (SC-035) that partially resolve ODR-012,
+  making the screening gates fixed in D-034 executable for the first time.
+- Decision: execute all screening gates that now have sufficient inputs, recorded at
+  `docs/research/PLATFORM_001_DANA_VARIANT_SCREENING_v0.1.md`, and record the outcome as
+  `PREFERRED_EXACT_SUMO_MD_VARIANT = NOT_YET_DEFENSIBLE` rather than forcing a winner.
+- Findings that stand on evidence:
+  1. **The binding duty point is D1** (6 % @ 55 mph for 20 min at 16,000 lb), requiring
+     142.9–179.4 kW of continuous shaft power. This figure is **ratio-independent** — no
+     final-drive ratio can repair a continuous-power shortfall.
+  2. **Six variants eliminated.** MV2500-6P (115 kW), HV1800-3P (100), HV2400-6P (120) and
+     HV3300-6P NEW (130) fail D1 at their own published rating conditions, ratio-independent,
+     against the *most favourable* end of the road-load band. HV2200-3P and HV2200-3P NEW
+     fail the 70 mph target at every ratio by 9.4–23.9 %, measured at the most favourable
+     end of the rolling-radius span.
+  3. **The central conflict.** MV2500-6P is the only variant whose published figures are
+     rated inside the governed pack window (350 Vdc within 333–407 V) — and it fails the
+     duty requirement by at least 27.9 kW. Every surviving candidate is an HV variant whose
+     output at 333–407 Vdc is unpublished. Filed as ODR-018.
+  4. Survivors: HV2200-6P, HV2800-6P NEW and HV2600-6P at i = 4.10 or 4.30; HV3000-6P at
+     4.10 only, doubly indeterminate.
+- Method rules applied, recorded so they are auditable:
+  - HV variants were **not** rejected for having figures quoted at 600/650 Vdc. The only
+    derating logic used eliminates variants that fail *at their own rating condition* — at
+    2,527–3,007 rpm a lower bus cannot increase power at that speed. That is reasoning, not
+    evidence, and it is labelled as such; no derate factor is asserted anywhere.
+  - Static loaded radius is a **provisional** basis. ODR-014 stays open. Rolling radius is
+    bounded above by the unloaded radius implied by the governed 225/70R19.5 designation
+    (a +6.34 % span), every speed result is reported at both ends plus a tolerance column,
+    and no candidate is failed on a margin lying inside that span.
+  - `Cr`, `CdA` and driveline efficiency are carried as `SENSITIVITY_BAND_NOT_EVIDENCE`
+    (SC-036), never as values. Results are ranges; the band's 25 % width is the sole reason
+    HV2600-6P and HV3000-6P read INDETERMINATE rather than decided.
+  - The ranking rule fixed in D-034 was applied unchanged after the answers were known.
+- Consequences:
+  - No motor selected. No axle ratio selected. No Webasto topology started — the screening
+    result points at it (survivors are rated at 600–650 Vdc; 1s gives 333–407 V and 2s gives
+    666–814 V, above every variant's 750/800 Vdc maximum), and B-004 remains open.
+  - ODR-012 moves to **Partially resolved**: payload target, drive-cycle basis and ambient
+    envelope are still unstated.
+  - ODR-018 filed and is the smallest blocking item; ODR-015 second.
+  - No cables, fuses, contactors, PDU, precharge, cooling hardware or mounting geometry
+    selected. `engine/src/platform/platform001.ts` untouched.
+
+## D-034 — Platform 001 duty requirement is authored as an explicit split between evidence and owner decision
+
+- Date: 2026-08-08
+- Status: Accepted
+- Context: ODR-012 blocks selection of an exact Dana SUMO MD variant because no governed
+  duty or performance requirement exists anywhere in `docs/`. Ten provenance-locked
+  variants span 100–190 kW continuous and 1,775–3,320 Nm peak; without a duty statement
+  there is no criterion to rank them, and the standing temptation is to fill the gap with
+  a plausible-sounding assumption. The Engineering Constitution forbids exactly that.
+- Decision: author `docs/research/PLATFORM_001_DUTY_REQUIREMENT_v0.1.md` under a
+  three-class rule that is enforced structurally rather than by intent:
+  1. `DR-E-nn` — parameters fixed by an archived primary source or by calculation from
+     one. Recorded as SC-028 … SC-034 from `SRC-CAND-000010` / `SRC-CAND-000011`, both
+     already archived with manifests and both digest-verified against the archived bytes.
+  2. `DR-OD-nn` — the sixteen parameters that no evidence in this repository determines.
+     Each is stated as a question with its evidence-bounded option space and the
+     consequence of each branch. **None has a default**; an unanswered `DR-OD` propagates
+     as `INDETERMINATE`, it does not become a value.
+  3. `DR-M-nn` — the relations that convert (1) and (2) into a per-variant verdict, fixed
+     now so the later evaluation is arithmetic rather than narrative.
+  Screening gates S1–S8 and the ranking rule are likewise fixed **before** the answers are
+  known, so the criterion cannot be chosen to fit a preferred variant. The ranking rule is
+  deliberately conservative: among variants passing every gate, prefer the smallest
+  continuous power that still passes, never the largest capability.
+- Consequences:
+  - No motor is selected. `PREFERRED_EXACT_SUMO_MD_VARIANT` stays `NOT_YET_DETERMINABLE`.
+  - ODR-012 remains **Open**. The draft is its proposed resolution, not its resolution.
+  - Five new evidence obligations are opened: ODR-013 (donor powertrain identity, and the
+    D-006 / SC-019 engine contradiction), ODR-014 (tyre rolling radius), ODR-015 (road-load
+    coefficients), ODR-016 (coolant-loop compatibility), ODR-017 (Dana M300 axle input
+    torque rating).
+  - **D-006 is contradicted by the archived MY2019 sources and is not silently corrected.**
+    D-006 names Platform 001A as *7.3L gas*; the 2019 sources publish the gas engine for
+    this chassis as the 6.8L 3-valve V10. This entry supersedes nothing — the contradiction
+    is filed as ODR-013 for the owner to resolve against the actual donor.
+  - ODR-004 … ODR-007 are **not** closed. Every Ford figure recorded here is a
+    model-configuration value and is labelled as such; donor axle weights, donor GVWR and
+    donor frame geometry still require label reading or calibrated measurement.
+  - Two chassis sources are recorded as `OFFICIAL_PUBLIC_DOCUMENT (MIRRORED ARTIFACT)`:
+    neither archived byte stream came from a ford.com URL, and their SHA-256 values fix the
+    archived artifacts, not Ford's hosted files. Same discipline as `SRC-DANA-000001`.
+  - No source code changed; `engine/src/platform/platform001.ts` untouched. No component
+    selection of any kind. A file added inside the already-frozen `docs/research/`
+    directory is permitted by `STRUCTURE_FREEZE.md`.
+
 ## D-033 — Platform 001 empirical evidence closure baseline; supplier reply is no longer the only path to closure
 
 - Date: 2026-08-08
