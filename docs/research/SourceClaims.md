@@ -186,3 +186,93 @@ Entries are append-only and never deleted; a discredited claim is marked
 - Authority class: none — not established as exact component facts by the reviewed current public material
 - Status: **Withdrawn** — recorded so the prior values remain traceable. Withdrawn set: 650 uF DC-link capacitance; 20 L/min coolant flow requirement; 85 C thermal-trip threshold; J1939 250/500 kbps configuration; proprietary torque-request PGN/SPN map; exact precharge completion threshold/timing; exact internal DC-link precharge responsibility; generic 125 kg SUMO MD motor mass; generic 22 kg inverter mass.
 - Used by: supersession lineage for SC-016 … SC-018; D-033; blocks the Phase E precharge calculation (C is not established)
+
+## SC-022 — Dana TM4 SUMO MD variant performance table (verbatim, ten variants)
+
+- Recorded: 2026-08-08
+- Source: `SRC-DANA-000001` — Dana TM4 official public specification sheet, document ID
+  `CORTM4-JRT2495-SUMOMD-0124`, © 2024 Dana TM4 Inc., page 2, archived at
+  `docs/research/raw/platform001_primary_sources/SRC-DANA-000001_CORTM4-JRT2495-SUMOMD-0124.pdf`
+  (sha256 `e3f3f9ba1b9e204a003fee3e300bab64da105dce622d86a4285984ba2144af28`)
+- Authority class: OFFICIAL_PUBLIC_DOCUMENT
+- Status: Unverified (published; no unit measured)
+- Claim — reproduced exactly as published, one row per exact variant, never blended:
+
+  | System | Casing Size | Inverter | Peak Power | Continuous Power | Peak Torque | Continuous Torque | Max Operating Speed | Voltage Range |
+  |---|---|---|---|---:|---:|---:|---:|---|
+  | SUMO MD MV2500-6P* | L2 | CO200 | 230 kW | 115 kW | 2500 Nm | 1140 Nm | 3000 RPM | 130-450 Vdc |
+  | SUMO MD HV1800-3P | L1 | CO150 | 170 kW | 100 kW | 1775 Nm | 680 Nm | 3250 RPM | 300-750 Vdc |
+  | SUMO MD HV2200-3P | L2 | CO150 | 215 kW | 145 kW | 2430 Nm | 1275 Nm | 2700 RPM | 300-750 Vdc |
+  | SUMO MD HV2200-3P** NEW | L2 | CO150 | 200 kW | 145 kW | 2200 Nm | 955 Nm | 2700 RPM | 300-800 Vdc |
+  | SUMO MD HV2200-6P | L2 | CO200 | 255 kW | 190 kW | 2355 Nm | 990 Nm | 3700 RPM | 300-750 Vdc |
+  | SUMO MD HV2400-6P | L1 | CO200 | 240 kW | 120 kW | 2300 Nm | 605 Nm | 3500 RPM | 300-750 Vdc |
+  | SUMO MD HV2600-6P | L2 | CO200 | 265 kW | 155 kW | 2760 Nm | 970 Nm | 3500 RPM | 300-750 Vdc |
+  | SUMO MD HV2800-6P** NEW | L2 | CO200 | 300 kW | 180 kW | 2860 Nm | 1050 Nm | 3500 RPM | 300-800 Vdc |
+  | SUMO MD HV3000-6P | L2 | CO200 | 235 kW | 145 kW | 3100 Nm | 1055 Nm | 3000 RPM | 300-750 Vdc |
+  | SUMO MD HV3300-6P** NEW | L2 | CO200 | 235 kW | 130 kW | 3320 Nm | 960 Nm | 3000 RPM | 300-800 Vdc |
+
+- Used by: exact-variant evaluation; supersedes SC-018's family maxima as the governing
+  source for per-variant figures. SC-018 remains valid as a family-level statement only.
+
+## SC-023 — Dana SUMO MD published rating conditions for the SC-022 table
+
+- Recorded: 2026-08-08
+- Source: `SRC-DANA-000001` page 2 footnote, verbatim: `600 Vdc, 45°C / *350 Vdc, 45°C / **650 Vdc, 45°C`
+  and `Specifications are subject to change`
+- Authority class: OFFICIAL_PUBLIC_DOCUMENT
+- Status: Unverified (published)
+- Claim: the SC-022 figures are stated **at a specific DC voltage and 45 °C**. Unmarked rows
+  are rated at 600 Vdc; the `*` row (MV2500-6P) at 350 Vdc; the `**` rows (HV2200-3P NEW,
+  HV2800-6P NEW, HV3300-6P NEW) at 650 Vdc. **The published power and torque values do not
+  transfer to operation at a materially different DC voltage.**
+- Used by: every compatibility evaluation against the Webasto pack voltage window
+
+## SC-024 — Dana SUMO MD motor casing dimensions and masses
+
+- Recorded: 2026-08-08
+- Source: `SRC-DANA-000001` page 2 dimension figure (confirmed by rendered page inspection)
+- Authority class: OFFICIAL_PUBLIC_DOCUMENT
+- Status: Unverified (published; not confirmed by NONENERGIZED_PHYSICAL_METROLOGY)
+- Claim: casing L1 length 426 mm, mass 180 kg. Casing L2 length 510 mm, mass 225 kg.
+  Motor diameter Ø 400 mm (both casings).
+- Used by: ODR-008 (motor dimensions), ODR-009 (motor mass), mass ledger, packaging study
+
+## SC-025 — Dana SUMO MD inverter dimensions and masses
+
+- Recorded: 2026-08-08
+- Source: `SRC-DANA-000001` page 2 dimension figure (confirmed by rendered page inspection)
+- Authority class: OFFICIAL_PUBLIC_DOCUMENT
+- Status: Unverified (published)
+- Claim: inverter CO150 — 432 mm x 304 mm x 111 mm, 13 kg. Inverter CO200 — 676 mm x 450 mm
+  x 135 mm, 25 kg.
+- Used by: packaging study; mass ledger. Supersedes the withdrawn generic 22 kg inverter
+  mass (SC-021)
+
+## SC-026 — Dana SUMO MD published standards, protection and cooling
+
+- Recorded: 2026-08-08
+- Source: `SRC-DANA-000001` page 1, verbatim
+- Authority class: OFFICIAL_PUBLIC_DOCUMENT
+- Status: Unverified (published)
+- Claim: system protection IP67 / IP6K9K; automotive components AEC-Q100 / AEC-Q101 /
+  AEC-Q200; EMC to main automotive international standards; shock and vibration GMW3172
+  sprung masses; **maximum coolant inlet temperature 65 °C**; **coolant type 40/60
+  water-glycol**.
+- Used by: cooling package framework. Supersedes the withdrawn 85 °C thermal-trip value
+  (SC-021). **Coolant flow rate and pressure drop are NOT published** and remain UNKNOWN —
+  the withdrawn 20 L/min figure is not reinstated.
+
+## SC-027 — Dana SUMO MD published motor, inverter and system features
+
+- Recorded: 2026-08-08
+- Source: `SRC-DANA-000001` pages 1-2, verbatim
+- Authority class: OFFICIAL_PUBLIC_DOCUMENT
+- Status: Unverified (published)
+- Claim: permanent magnet motor, outer rotor topology, four-quadrant operation, designed to
+  interface directly with standard axles (no gearbox required). Inverter: 3-phase or 6-phase
+  high-voltage, variable switching frequency, Reflex(TM) gate driver technology, EMI filter.
+  Latest system features marked NEW: voltage increase 750 V to 800 V; Quick Connect with
+  HVIL; increased performance range; KITAS option on demand.
+- Used by: driveline interface study; Gate 05 interlock work (HVIL). **Communications /
+  control protocol, CAN bit rate, torque-command map, DC-link capacitance, efficiency map
+  and DC input current are NOT published in this document** and remain UNKNOWN.

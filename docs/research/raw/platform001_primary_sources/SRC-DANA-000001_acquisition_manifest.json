@@ -1,0 +1,22 @@
+{
+  "source_id": "SRC-DANA-000001",
+  "document_id": "CORTM4-JRT2495-SUMOMD-0124",
+  "title": "TM4 SUMO MD Motor / Inverter System",
+  "source": "Dana TM4 official public specification sheet",
+  "publisher": "Dana TM4 Inc.",
+  "copyright_notice": "© 2024 Dana TM4 Inc. All rights reserved.",
+  "authority_class": "OFFICIAL_PUBLIC_DOCUMENT",
+  "local_file_path": "docs/research/raw/platform001_primary_sources/SRC-DANA-000001_CORTM4-JRT2495-SUMOMD-0124.pdf",
+  "sha256": "sha256:e3f3f9ba1b9e204a003fee3e300bab64da105dce622d86a4285984ba2144af28",
+  "byte_length": 2074055,
+  "page_count": 2,
+  "retrieval_date": "2026-08-08",
+  "supplied_by": "owner",
+  "acquisition_status": "SOURCE_ACQUIRED",
+  "hash_status": "HASHED",
+  "page_extraction_status": "FULL_EXECUTED",
+  "artifact_form": "OWNER_SUPPLIED_BROWSER_RENDER",
+  "artifact_form_note": "PDF metadata records Producer 'iOS Version 26.5.2 (Build 23F84) Quartz PDFContext' and Creator 'pdftopdf filter'. The CONTENT is the Dana official sheet and carries document ID CORTM4-JRT2495-SUMOMD-0124 and the Dana copyright line on page 2. The BYTE STREAM is a browser re-render, not Dana's originally served file, so this SHA-256 fixes the archived artifact and must not be represented as the digest of Dana's own hosted PDF.",
+  "resolves": ["ODR-008", "ODR-009", "ODR-010", "ODR-011"],
+  "claims_recorded": "SC-022..SC-027"
+}

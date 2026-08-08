@@ -97,52 +97,64 @@ reference to the evidence; entries are never deleted.
 ## ODR-008 — Traction-motor dimensions
 
 - Filed: 2026-07-22
-- Status: Open
+- Status: Resolved (2026-08-08)
+- Resolution evidence: `SRC-DANA-000001` — Dana TM4 official public specification sheet
+  `CORTM4-JRT2495-SUMOMD-0124`, archived at
+  `docs/research/raw/platform001_primary_sources/`, sha256
+  `e3f3f9ba1b9e204a003fee3e300bab64da105dce622d86a4285984ba2144af28`. Motor Ø 400 mm; casing L1
+  length 426 mm, casing L2 length 510 mm (SC-024). Inverter CO150 432 x 304 x 111 mm,
+  CO200 676 x 450 x 135 mm (SC-025).
+- Note: which casing applies is fixed by variant selection, which remains open under
+  ODR-012. Values are published, not yet confirmed by NONENERGIZED_PHYSICAL_METROLOGY.
 - Blocks: motor mounting/packaging compatibility; Platform 001 package release.
-- Resolution evidence: — (motor supplier documentation)
 
 ## ODR-009 — Traction-motor mass
 
 - Filed: 2026-07-22
-- Status: Open
+- Status: Resolved (2026-08-08)
+- Resolution evidence: `SRC-DANA-000001` — Dana TM4 official public specification sheet
+  `CORTM4-JRT2495-SUMOMD-0124`, archived at
+  `docs/research/raw/platform001_primary_sources/`, sha256
+  `e3f3f9ba1b9e204a003fee3e300bab64da105dce622d86a4285984ba2144af28`. Casing L1 180 kg, casing L2
+  225 kg (SC-024); inverter CO150 13 kg, CO200 25 kg (SC-025).
+- Note: which casing/inverter pair applies is fixed by variant selection, which remains
+  open under ODR-012. Published values, not calibrated measurements.
 - Blocks: axle-loading analysis; Platform 001 package release.
-- Resolution evidence: — (motor supplier documentation)
 
 ## ODR-010 — Traction-motor supplier documentation (verification)
 
 - Filed: 2026-07-22
-- Status: Open
+- Status: Resolved (2026-08-08)
+- Resolution evidence: `SRC-DANA-000001` — Dana TM4 official public specification sheet
+  `CORTM4-JRT2495-SUMOMD-0124`, archived at
+  `docs/research/raw/platform001_primary_sources/`, sha256
+  `e3f3f9ba1b9e204a003fee3e300bab64da105dce622d86a4285984ba2144af28`. The sheet is now held locally
+  and used without network dependency. Claims recorded as SC-022 … SC-027.
+- Note: the document does NOT publish DC-link capacitance, coolant flow rate, coolant
+  pressure drop, efficiency map, DC input current, or the CAN/torque-command map. Those
+  remain UNKNOWN and are not resolved by this entry.
 - Blocks: any motor candidate leaving UNVERIFIED; Platform 001 package release.
-- Resolution evidence: — (motor supplier datasheet / engineering documentation)
 
 ## ODR-011 — DANA_PRIMARY_ARTIFACT_NOT_YET_ARCHIVED_LOCALLY
 
 - Filed: 2026-08-08
-- Status: Open
-- State: `DANA_PRIMARY_ARTIFACT_NOT_YET_ARCHIVED_LOCALLY`
-- **Official public Dana evidence is known to exist externally.** Dana publishes TM4
-  SUMO MD specification material publicly, and the applicable document is identified by
-  ID: `CORTM4-JRT2495-SUMOMD-0124`. This entry does **not** assert that Dana
-  documentation is unavailable, incomplete, or withheld — it records only that the
-  artifact has not yet been archived into this repository as a local primary source.
-- What is required: the document archived locally with `source = Dana TM4 official public
-  specification sheet`, `document ID = CORTM4-JRT2495-SUMOMD-0124`,
-  `authority = OFFICIAL_PUBLIC_DOCUMENT`, its SHA-256, and the retrieval date — after
-  which it is used locally with no network dependency.
-- Blocks (pending local archiving): exact-variant closure for MV2500-6P, HV1800-3P,
-  HV2200-3P, HV2200-3P NEW, HV2200-6P, HV2400-6P, HV2600-6P, HV2800-6P NEW, HV3000-6P,
-  HV3300-6P NEW — casing, inverter designation, continuous/peak power, continuous/peak
-  torque, max RPM, DC voltage range, motor mass, inverter mass, envelope, coolant
-  requirement, mechanical/interface features, standards/protection. Archiving it also
-  resolves ODR-008 (motor dimensions), ODR-009 (motor mass) and ODR-010 (motor supplier
-  documentation).
-- Not an admissible substitute: prior research-batch material naming
-  "Dana TM4 SUMO MD HV2100-6P" with 130 kW / 250–265 kW / 685 Nm / 2150–3320 Nm /
-  3500–3700 RPM (`docs/research/raw/research_hunter/batch_16_powertrain_candidates.md`)
-  blends alternates into a single record, which the Platform 001 baseline prohibits, and
-  SC-018 already governs 265 kW / 3320 Nm / 3700 RPM as family maxima rather than a
-  variant specification.
-- Resolution evidence: — (the archived artifact and its acquisition record)
+- Status: **Resolved (2026-08-08)**
+- Original state: `DANA_PRIMARY_ARTIFACT_NOT_YET_ARCHIVED_LOCALLY`. Official public Dana
+  evidence was always known to exist externally; this entry recorded only that it had not
+  yet been archived into this repository as a local primary source.
+- Resolution evidence: owner supplied the document; archived as `SRC-DANA-000001` at
+  `docs/research/raw/platform001_primary_sources/SRC-DANA-000001_CORTM4-JRT2495-SUMOMD-0124.pdf`
+  with acquisition manifest. `source = Dana TM4 official public specification sheet`,
+  `document ID = CORTM4-JRT2495-SUMOMD-0124`, `authority = OFFICIAL_PUBLIC_DOCUMENT`,
+  `sha256 = e3f3f9ba1b9e204a003fee3e300bab64da105dce622d86a4285984ba2144af28`,
+  `retrieval date = 2026-08-08`. Used locally thereafter; no network dependency.
+- Provenance caveat recorded in the manifest: the archived byte stream is an owner-supplied
+  browser render (Producer `iOS ... Quartz PDFContext`), not Dana's originally served file.
+  The content carries document ID `CORTM4-JRT2495-SUMOMD-0124` and the Dana copyright line.
+  The SHA-256 fixes the archived artifact and must not be presented as the digest of Dana's
+  own hosted PDF.
+- Also resolves: ODR-008, ODR-009, ODR-010.
+- Claims recorded: SC-022 … SC-027.
 
 ## ODR-012 — Governed Platform 001 F-450 duty / performance requirement
 
