@@ -15,29 +15,6 @@ Active blockers and what unblocks them. Entries are closed by marking
 
 ---
 
-## B-007 — Dana primary documentation unreachable from the working environment
-
-- Filed: 2026-08-08
-- Status: Active
-- Finding: `www.dana.com`, `dana.com` and `dml.dana.com` are all refused by the network
-  egress proxy (`EGRESS_BLOCKED`; bare-domain probes return HTTP 000). The governed
-  Dana sources named in `PLATFORM_001_EMPIRICAL_EVIDENCE_CLOSURE.md` §6 therefore cannot
-  be retrieved, and no Dana PDF is archived anywhere in the repository. Same class as
-  B-002 (.gov/CARB sources blocked), different domain.
-- Blocks: ODR-011, and through it ODR-008/ODR-009/ODR-010 and all exact SUMO MD variant
-  closure. Does **not** block Webasto-side work, which is already governed by
-  SC-001…SC-015.
-- Does not block: recording the evaluation scaffold with all parameters UNKNOWN — absence
-  of the artifact is itself an evidence obligation, not a licence to infer values.
-- Unblocked by: the owner supplying `CORTM4-JRT2495-SUMOMD-0124.pdf` for local archiving,
-  or an agent/session whose network policy can reach the Dana domains. Once archived, the
-  artifact is used locally and no further network access is required.
-- Note: prior research material naming "Dana TM4 SUMO MD HV2100-6P" with 130 kW / 250–265 kW
-  / 685 Nm / 2150–3320 Nm / 3500–3700 RPM (`batch_16_powertrain_candidates.md`) is **not**
-  an admissible substitute. It is research-batch material, it blends alternates into one
-  record (prohibited), and SC-018 already governs 265 kW / 3320 Nm / 3700 RPM as family
-  maxima rather than a variant specification.
-
 ## B-006 — Gate label superseded: BLOCKED_PENDING_SUPPLIER_DATA → BLOCKED_PENDING_PRIMARY_OR_PHYSICAL_EVIDENCE
 
 - Filed: 2026-08-08 (owner-directed Platform 001 empirical evidence closure baseline, D-033)

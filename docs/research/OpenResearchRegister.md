@@ -115,23 +115,34 @@ reference to the evidence; entries are never deleted.
 - Blocks: any motor candidate leaving UNVERIFIED; Platform 001 package release.
 - Resolution evidence: — (motor supplier datasheet / engineering documentation)
 
-## ODR-011 — Dana TM4 SUMO MD official specification sheet `CORTM4-JRT2495-SUMOMD-0124` as a local primary artifact
+## ODR-011 — DANA_PRIMARY_ARTIFACT_NOT_YET_ARCHIVED_LOCALLY
 
 - Filed: 2026-08-08
 - Status: Open
-- Blocks: exact-variant closure for MV2500-6P, HV1800-3P, HV2200-3P, HV2200-3P NEW,
-  HV2200-6P, HV2400-6P, HV2600-6P, HV2800-6P NEW, HV3000-6P, HV3300-6P NEW. Every
-  provenance-locked field depends on it: casing, inverter designation, continuous/peak
-  power, continuous/peak torque, max RPM, DC voltage range, motor mass, inverter mass,
-  envelope, coolant requirement, mechanical/interface features, standards/protection.
-  Also blocks ODR-008 (motor dimensions), ODR-009 (motor mass) and ODR-010 (motor
-  supplier documentation), which this one artifact would resolve together.
-- Why not already resolved: the document was not delivered to the working environment,
-  and `www.dana.com`, `dana.com` and `dml.dana.com` are all blocked by the network egress
-  proxy (see B-007). No copy exists anywhere in the repository.
-- Resolution evidence: — (the PDF archived locally with source, document ID
-  `CORTM4-JRT2495-SUMOMD-0124`, authority `OFFICIAL_PUBLIC_DOCUMENT`, SHA-256 and
-  retrieval date recorded in an acquisition manifest)
+- State: `DANA_PRIMARY_ARTIFACT_NOT_YET_ARCHIVED_LOCALLY`
+- **Official public Dana evidence is known to exist externally.** Dana publishes TM4
+  SUMO MD specification material publicly, and the applicable document is identified by
+  ID: `CORTM4-JRT2495-SUMOMD-0124`. This entry does **not** assert that Dana
+  documentation is unavailable, incomplete, or withheld — it records only that the
+  artifact has not yet been archived into this repository as a local primary source.
+- What is required: the document archived locally with `source = Dana TM4 official public
+  specification sheet`, `document ID = CORTM4-JRT2495-SUMOMD-0124`,
+  `authority = OFFICIAL_PUBLIC_DOCUMENT`, its SHA-256, and the retrieval date — after
+  which it is used locally with no network dependency.
+- Blocks (pending local archiving): exact-variant closure for MV2500-6P, HV1800-3P,
+  HV2200-3P, HV2200-3P NEW, HV2200-6P, HV2400-6P, HV2600-6P, HV2800-6P NEW, HV3000-6P,
+  HV3300-6P NEW — casing, inverter designation, continuous/peak power, continuous/peak
+  torque, max RPM, DC voltage range, motor mass, inverter mass, envelope, coolant
+  requirement, mechanical/interface features, standards/protection. Archiving it also
+  resolves ODR-008 (motor dimensions), ODR-009 (motor mass) and ODR-010 (motor supplier
+  documentation).
+- Not an admissible substitute: prior research-batch material naming
+  "Dana TM4 SUMO MD HV2100-6P" with 130 kW / 250–265 kW / 685 Nm / 2150–3320 Nm /
+  3500–3700 RPM (`docs/research/raw/research_hunter/batch_16_powertrain_candidates.md`)
+  blends alternates into a single record, which the Platform 001 baseline prohibits, and
+  SC-018 already governs 265 kW / 3320 Nm / 3700 RPM as family maxima rather than a
+  variant specification.
+- Resolution evidence: — (the archived artifact and its acquisition record)
 
 ## ODR-012 — Governed Platform 001 F-450 duty / performance requirement
 
