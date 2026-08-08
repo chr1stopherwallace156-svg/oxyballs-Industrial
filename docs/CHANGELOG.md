@@ -5,6 +5,48 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-08-08 — Dana variant screening executed: six of ten eliminated, no selection defensible (D-035)
+
+- Owner design requirements adopted as **SC-035** (`OWNER_DESIGN_REQUIREMENT`): 16,000 lb
+  GVWR, no towing for v1, 70 mph maximum, 65 mph sustained, 6 % @ 55 mph for 20 min,
+  15 % @ 15 mph, 20 % startability. **ODR-012 → Partially resolved** (5 of 7 elements);
+  payload target, drive-cycle basis and ambient envelope are still unstated, so it stays open.
+- Added `docs/research/PLATFORM_001_DANA_VARIANT_SCREENING_v0.1.md` — all ten variants
+  against all three axle ratios, every gate reported PASS / FAIL / INDETERMINATE with the
+  exact reason.
+- **The binding constraint is continuous power, and it is ratio-independent.** The 6 % @
+  55 mph duty point needs **142.9–179.4 kW** of continuous shaft power (SC-037). No
+  final-drive ratio repairs a shortfall against it.
+- **Six variants eliminated on evidence:** MV2500-6P (115 kW), HV1800-3P (100), HV2400-6P
+  (120) and HV3300-6P NEW (130) fail that gate at their own rating conditions and at the
+  most favourable end of the road-load band; HV2200-3P and HV2200-3P NEW miss the 70 mph
+  target by 9.4–23.9 % at every ratio, measured at the most favourable rolling radius.
+- **The result is a genuine conflict, reported rather than smoothed over.** MV2500-6P was
+  the only variant whose published figures are rated inside the governed pack window
+  (350 Vdc) — and it is now eliminated on duty. Every survivor is an HV variant whose output
+  at 333–407 Vdc is unpublished. Filed as **ODR-018**, the single item between a ranking and
+  a selection.
+- Survivors: HV2200-6P and HV2800-6P NEW (both pass the continuous-power gate across the
+  whole band) and HV2600-6P (indeterminate) at i = 4.10 or 4.30; HV3000-6P at 4.10 only.
+  Provisional ranking held for when ODR-018 clears — HV2800-6P NEW at 4.30 — **explicitly a
+  ranking of unresolved candidates, not a selection**.
+- **Method discipline recorded so it is auditable.** HV variants were not rejected merely
+  for being rated at 600/650 Vdc, per instruction; the only derating logic used eliminates
+  variants failing *at their own rating condition*, and it is labelled reasoning, not
+  evidence. Static loaded radius stays **provisional** with ODR-014 open — rolling radius is
+  bounded above by the unloaded radius implied by the governed tyre designation (+6.34 %),
+  results are reported at both ends, and nothing is failed on a margin inside that span.
+  `Cr`, `CdA` and driveline efficiency are carried as **SC-036
+  `SENSITIVITY_BAND_NOT_EVIDENCE`** — bands, never values, never promoted, never written
+  into `platform001.ts`.
+- **New evidence obligation ODR-018**; ODR-014, ODR-015 and ODR-017 remain the next-largest
+  levers, in that order after ODR-018.
+- Webasto topology **not started**, as instructed — though the screening now points straight
+  at it: survivors are rated at 600–650 Vdc, one series string gives 333–407 V and two give
+  666–814 V, above every variant's 750/800 Vdc maximum. B-004 remains open.
+- No cables, fuses, contactors, PDU, precharge, cooling hardware or mounting geometry
+  selected. No source code changed; `engine/src/platform/platform001.ts` untouched.
+
 ## 2026-08-08 — Platform 001 duty requirement v0.1 drafted; evidence and owner decision kept apart (D-034)
 
 - Added `docs/research/PLATFORM_001_DUTY_REQUIREMENT_v0.1.md`. It supplies the missing

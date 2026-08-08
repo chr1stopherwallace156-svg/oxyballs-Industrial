@@ -407,3 +407,60 @@ Entries are append-only and never deleted; a discredited claim is marked
   figures are expected to be mildly conservative, but the margin is UNKNOWN and is not
   asserted. A variant must not be rejected on a margin of a few mph until ODR-014 closes.
 - Used by: `PLATFORM_001_DUTY_REQUIREMENT_v0.1.md` DR-M-01, screening gate S2
+
+## SC-035 — Platform 001 owner design requirements v0.1
+
+- Recorded: 2026-08-08
+- Source: owner-issued design requirements for Platform 001, adopted verbatim
+- Authority class: OWNER_DESIGN_REQUIREMENT
+- Status: Adopted (owner-issued target, not a measurement and not a derivation)
+- Claim: `TARGET_GVWR` = 16,000 lb; `TOWING_REQUIREMENT` = `NONE_FOR_PLATFORM_001_V1`;
+  `MAXIMUM_ROAD_SPEED_TARGET` = 70 mph; `SUSTAINED_HIGHWAY_SPEED_TARGET` = 65 mph;
+  `SUSTAINED_GRADE` = 6 % @ 55 mph for 20 minutes; `LOW_SPEED_GRADE` = 15 % @ 15 mph;
+  `STARTABILITY_GRADE` = 20 %.
+- Note: 16,000 lb is a published rung of the GVWR ladder for this configuration (SC-028),
+  so the target is documentarily supported. It does **NOT** close ODR-006 — the donor's
+  label GVWR remains unmeasured.
+- Note: a duration is stated only for `SUSTAINED_GRADE`. `LOW_SPEED_GRADE` carries none and
+  is therefore evaluated against both the continuous and the peak rating.
+- Note: this partially resolves ODR-012. Payload target, drive-cycle basis and ambient
+  envelope are still not stated — see the ODR-012 entry.
+- Used by: `PLATFORM_001_DANA_VARIANT_SCREENING_v0.1.md`; D-035
+
+## SC-036 — Road-load sensitivity band for Platform 001 screening (NOT EVIDENCE)
+
+- Recorded: 2026-08-08
+- Source: none — no archived source establishes any of these for Platform 001
+- Authority class: **SENSITIVITY_BAND_NOT_EVIDENCE**
+- Status: Provisional band, ODR-015 remains Open
+- Claim: for screening only, results are carried as ranges across `Cr` 0.006–0.010,
+  `Cd x A` 2.4–4.3 m2 (frontal area 4.0–4.8 m2, `Cd` 0.6–0.9), driveline efficiency
+  0.90–0.96, air density 1.225 kg/m3 at sea level.
+- **These are bands, not values.** They must never be cited as engineering values,
+  promoted to any other authority class, used to close a gate, or written into
+  `engine/src/platform/platform001.ts`. They exist so that screening reports a range
+  instead of inventing a point. Closing ODR-015 replaces the band with a measurement.
+- Note: the frontal-area band is wide because the body is unspecified (DR-OD-03), and the
+  altitude assumption is unbacked because the ambient envelope is unstated (DR-OD-10).
+- Used by: `PLATFORM_001_DANA_VARIANT_SCREENING_v0.1.md` §2.3
+
+## SC-037 — Derived Platform 001 duty-point requirements at 16,000 lb
+
+- Recorded: 2026-08-08
+- Source: DERIVED from SC-035 (duty points), SC-030 (ratios), SC-031 (static loaded
+  radius), SC-017 (direct axle interface, no gearbox), and the SC-036 sensitivity band
+- Authority class: DERIVED_CALCULATION
+- Status: Unverified (derived); range-valued pending ODR-014 and ODR-015
+- Claim, required shaft power: D1 (6 % @ 55 mph) **142.9–179.4 kW**; D2 (15 % @ 15 mph)
+  77.2–84.8 kW; D3 (20 % startability) 13.4–14.6 kW; D4 (65 mph level) 50.5–94.8 kW;
+  D5 (70 mph level) 60.8–114.4 kW.
+  Required motor torque at D1: 540–678 Nm (i=4.10), 515–646 Nm (4.30), 454–570 Nm (4.88).
+  At D3: 1,392–1,513 Nm (4.10), 1,327–1,443 Nm (4.30), 1,169–1,272 Nm (4.88).
+  Required motor speed at D5: 3,216 / 3,373 / 3,827 rpm for i = 4.10 / 4.30 / 4.88 on the
+  static-loaded-radius basis.
+- **Key structural property: D1 shaft power is ratio-independent.** No choice of final-drive
+  ratio can repair a continuous-power shortfall.
+- Note: rolling radius is bounded by `0.3810 m <= r_roll <= 0.4051 m`, the upper end being
+  the unloaded radius implied by the governed 225/70R19.5 designation (a +6.34 % span).
+  Speed results are reported at both ends and no candidate is failed on a margin inside it.
+- Used by: `PLATFORM_001_DANA_VARIANT_SCREENING_v0.1.md` §3, screening gates S2–S5

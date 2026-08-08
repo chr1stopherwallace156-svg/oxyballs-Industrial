@@ -159,7 +159,20 @@ reference to the evidence; entries are never deleted.
 ## ODR-012 — Governed Platform 001 F-450 duty / performance requirement
 
 - Filed: 2026-08-08
-- Status: Open
+- Status: **Partially resolved (2026-08-08)** — 5 of the 7 required elements are now stated
+- Partial resolution evidence: owner-issued design requirements adopted as SC-035
+  (`OWNER_DESIGN_REQUIREMENT`): `TARGET_GVWR` 16,000 lb; `TOWING_REQUIREMENT` NONE for v1;
+  `MAXIMUM_ROAD_SPEED_TARGET` 70 mph; `SUSTAINED_HIGHWAY_SPEED_TARGET` 65 mph;
+  `SUSTAINED_GRADE` 6 % @ 55 mph for 20 min; `LOW_SPEED_GRADE` 15 % @ 15 mph;
+  `STARTABILITY_GRADE` 20 %. Screening executed against these in
+  `PLATFORM_001_DANA_VARIANT_SCREENING_v0.1.md` (D-035).
+- **Still not stated, so this entry stays open:** (a) payload target — the split of payload
+  between body, cargo and HV system; (b) duty-cycle / drive-cycle basis; (c) ambient
+  operating envelope. A duration is given only for `SUSTAINED_GRADE`; `LOW_SPEED_GRADE`
+  carries none, so it is screened against both the continuous and the peak rating.
+- Effect of the partial resolution: gates S2a, S2b, S3, S3b and S4 became executable and
+  eliminated six of the ten variants. The remaining blocker to a selection is **not** this
+  entry — it is ODR-018 (HV-variant output at 333–407 Vdc), with ODR-015 second.
 - Blocks: selection of any exact SUMO MD variant. A variant cannot be chosen against
   "Class 4–7" alone; selection needs a governed statement of at least: GVWR/GCWR basis,
   payload target, gradeability (grade % at speed, loaded), sustained-speed requirement,
@@ -261,3 +274,26 @@ reference to the evidence; entries are never deleted.
   retained axle.
 - Resolution evidence: — (Dana axle documentation for the exact M300 application, Ford
   body-builder / powertrain documentation, or controlled characterization)
+
+## ODR-018 — Dana SUMO MD HV-variant output at the governed 333–407 Vdc operating point
+
+- Filed: 2026-08-08
+- Status: Open
+- Required: continuous and peak power and torque for **HV2200-6P**, **HV2600-6P** and
+  **HV2800-6P NEW** at 333–407 Vdc — the governed Webasto normal operating window (SC-005).
+- Why open: SC-023 states the SC-022 figures are published at 600 Vdc (or 650 Vdc for the
+  NEW rows), at 45 °C. The HV variants' DC input ranges (300–750 / 300–800 Vdc) accept
+  333–407 V, so operating-range compatibility is `PASS`; their **performance** at that
+  point is `NOT_RATED_AT_THIS_OPERATING_POINT` and is not derivable — no efficiency map,
+  no torque-speed curves and no derate data are published (SC-022 gap list).
+- Why it is decisive: the binding duty point D1 (6 % @ 55 mph for 20 minutes, SC-035) sits
+  at 2,527–3,007 rpm and 142.9–179.4 kW continuous (SC-037) — the high-speed corner where
+  available power is governed by bus voltage. After screening, **every surviving candidate
+  is an HV variant**, and the only variant rated inside the pack window (MV2500-6P at
+  350 Vdc) fails D1 by at least 27.9 kW. This entry is therefore the single item standing
+  between a ranking and a defensible selection.
+- Blocks: screening gate S3 for all surviving candidates;
+  `PREFERRED_EXACT_SUMO_MD_VARIANT`; and, downstream, the Webasto topology question
+  (B-004), which is not started.
+- Resolution evidence: — (Dana application data or torque-speed/efficiency curves at the
+  applicable bus voltage for the exact variant, or controlled bench characterization)

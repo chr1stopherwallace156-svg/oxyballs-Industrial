@@ -133,6 +133,15 @@ system current ceiling above the per-pack figures.
 PREFERRED_EXACT_SUMO_MD_VARIANT = NOT_YET_DETERMINABLE
 ```
 
+**Superseded 2026-08-08 by D-035.** The owner issued design requirements (SC-035),
+partially resolving ODR-012, and the screening was executed in
+`PLATFORM_001_DANA_VARIANT_SCREENING_v0.1.md`. Outcome there:
+`NOT_YET_DEFENSIBLE` — six variants eliminated, three survive, blocked on ODR-018. Note
+that §3 above identified MV2500-6P as the only variant rated inside the governed pack
+window; the duty requirement then eliminated it on continuous power (115 kW against
+142.9–179.4 kW required). Both findings stand; together they are the conflict recorded in
+D-035. Nothing in this document is withdrawn.
+
 Ranking requires ODR-012. What the archived artifact *has* established is a hard
 voltage-compatibility constraint that narrows the field independently of duty:
 
