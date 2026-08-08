@@ -19,6 +19,72 @@ later entry that references it.
 
 ---
 
+## D-036 — ODR-018 / ODR-015 / ODR-017 do not close from the archived corpus; physical and application evidence required
+
+- Date: 2026-08-08
+- Status: Accepted
+- Context: D-035 left three evidence obligations standing between a ranking and a defensible
+  Dana selection. This entry records an exhaustive attempt to close them from
+  **already-archived primary evidence only** — no network retrieval, no new sources.
+- Scope of the search: all five archived primary artifacts, digests recomputed from the
+  archived bytes and all matching their manifests — `SRC-DANA-000001`, `SRC-CAND-000001`
+  (Ford Body Application Guide), `SRC-CAND-000010`, `SRC-CAND-000011`, `SRC-NHTSA-17S33`
+  (door-latch recall, subject matter unrelated). Full text extraction plus a
+  repository-wide grep for every road-load, axle-torque and voltage-derating term.
+  `SRC-DANA-000001` was additionally checked for graphed data that text extraction would
+  miss; it holds one embedded raster image, the product photograph.
+- Decision: record all three as **not closable from documentation**, at
+  `docs/research/PLATFORM_001_ODR_015_017_018_CLOSURE_ATTEMPT.md`, and define the minimum
+  evidence each needs rather than inferring any missing value.
+  1. **ODR-018 — `CONTROLLED_BENCH_CHARACTERIZATION_REQUIRED`** for all four survivors.
+     `SRC-DANA-000001` publishes a single rated operating point per variant (600 Vdc, or
+     650 Vdc for NEW rows, at 45 °C) with no curve, map, derating table or peak duration.
+     `OPERATING_RANGE_COMPATIBLE = YES` and `PERFORMANCE_RATED_AT_333_407_V = NO` are kept
+     as separate findings — a variant accepting a voltage is not a variant rated at it.
+  2. **ODR-015 — one term documented, four requiring measurement.** Vehicle test mass
+     applicability is `PRIMARY_DOCUMENT_SUPPORTED`; aerodynamic drag, rolling resistance,
+     driveline efficiency and effective rolling radius are `PHYSICAL_MEASUREMENT_REQUIRED`.
+  3. **ODR-017 — `OPEN`, confirmed.** No applicable input-torque rating exists in the
+     corpus, and **no Dana or Spicer axle document is archived at all**.
+- Findings that change what happens next:
+  - **Dana's own Application Policy names the documentary route.** The artifact states that
+    capacity ratings vary by model and type of service and that application approvals must
+    be obtained from Dana TM4. The sheet does not present itself as an application rating.
+    Dana-issued application data across 333–407 Vdc would close ODR-018 at
+    `VERIFIED_COMPONENT_DOCUMENTATION` without any bench programme, and should be attempted
+    first. This is consistent with B-006, which removed the *dependency* on a supplier reply
+    without making supplier documentation inadmissible; the bench remains the fallback that
+    keeps the project independent of a reply.
+  - **A governed coastdown already exists and is only a partial answer.** Gate 05M-C3B /
+    C3B-001 is already approved and its stated purpose is the rolling-resistance and drag
+    model. But Gate 05M-C3 is bounded `NO_PUBLIC_ROAD / NO_NORMAL_DRIVING_AUTHORITY`, and at
+    the low speeds it authorises the aerodynamic term is negligible — so it yields no usable
+    `CdA`, while the binding duty points at 55/65/70 mph are exactly where aero dominates.
+    **Closing the aerodynamic term requires an evidence activity the current authorised gate
+    ladder does not contain**, and that is escalated as a scope finding rather than absorbed
+    silently into an existing gate.
+- Discipline recorded so it is auditable: no field-weakening curve inferred, no linear
+  scaling of power with voltage, no derating factor derived, no family maximum used to fill a
+  per-variant gap. For ODR-017 the inputs for a tempting inference were all present and were
+  deliberately unused — the 13,660 lb rating **@ ground** is a vertical load limit and is not
+  convertible to torque, and the 11.8 in ring-gear pitch diameter in SC-029 is not a basis
+  for a torque estimate. The SC-036 sensitivity band is not promoted.
+- Consequences:
+  - `CAN_DANA_SELECTION_PROCEED = NO`. `POWERTRAIN_SELECTION_STATE = NOT_SELECTED`.
+    `CURRENT_SCREENING_LEADER = HV2800-6P NEW / 4.30` — a bookmark carrying no authority,
+    and the two states are never collapsed.
+  - All D-035 screening results are preserved unchanged; nothing is withdrawn or superseded.
+  - No escalation to a trade study is triggered: the survivors are `INDETERMINATE`, not
+    disqualified, which is a different condition from having been judged and failed. The
+    escalation condition is recorded in advance — if ODR-018 resolves such that no survivor
+    meets D1 at 333–407 Vdc, that opens a trade study (alternate Dana voltage class,
+    alternate battery/system voltage architecture, alternate inverter/motor architecture,
+    alternate propulsion supplier). **ODR-012 and SC-035 may change only through an explicit
+    owner decision that changes the Platform 001 mission — never to make a candidate pass.**
+  - Webasto topology remains `NOT_STARTED`. No component of any kind selected. No
+    energized-HV procedure written and no safety or test control bypassed.
+    `engine/src/platform/platform001.ts` untouched.
+
 ## D-035 — Platform 001 Dana screening: six variants eliminated, no selection defensible
 
 - Date: 2026-08-08

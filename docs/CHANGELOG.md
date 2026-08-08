@@ -5,6 +5,61 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-08-08 — ODR-018 / ODR-015 / ODR-017 attempted from the archived corpus; none closes (D-036)
+
+- Added `docs/research/PLATFORM_001_ODR_015_017_018_CLOSURE_ATTEMPT.md`. All five archived
+  primary artifacts searched exhaustively, digests recomputed and all matching their
+  manifests. No network retrieval; no new sources.
+- **ODR-018 → `CONTROLLED_BENCH_CHARACTERIZATION_REQUIRED`** for HV2200-6P, HV2600-6P,
+  HV2800-6P NEW and HV3000-6P. The only Dana document archived publishes a **single rated
+  operating point per variant** — 600 Vdc, or 650 Vdc for the NEW rows, at 45 °C — with no
+  torque-speed curve, efficiency map, power-versus-voltage data, derating table or
+  peak-power duration. Checked for graphed data too: the document holds one embedded raster
+  image, the product photograph.
+- **The two findings are kept apart, for all four:** `OPERATING_RANGE_COMPATIBLE = YES` on
+  published DC input range, `PERFORMANCE_RATED_AT_333_407_V = NO`. A variant accepting a
+  voltage is not a variant rated at it.
+- **Dana's own Application Policy names a cheaper route than the bench** — the artifact
+  states capacity ratings vary by model and type of service and that application approvals
+  must be obtained from Dana TM4. Dana-issued application data across 333–407 Vdc would
+  close ODR-018 at `VERIFIED_COMPONENT_DOCUMENTATION`. Consistent with B-006, which removed
+  the *dependency* on a supplier reply without making supplier documentation inadmissible.
+- **ODR-015 — one term documented, four requiring measurement.** Vehicle test mass
+  applicability is `PRIMARY_DOCUMENT_SUPPORTED`; aerodynamic drag, rolling resistance,
+  driveline efficiency and effective rolling radius are all `PHYSICAL_MEASUREMENT_REQUIRED`.
+  No `Cd`, frontal area, `Crr`, coastdown data or driveline efficiency exists anywhere in
+  the corpus — the single "frontal area" hit is a Body Application Guide footnote pointing
+  at the VECI label, a constraint pointer rather than a coefficient.
+- **A governed coastdown already exists — and it is only half the answer.** Gate 05M-C3B /
+  C3B-001 is already approved for exactly this measurement, but Gate 05M-C3 is bounded
+  `NO_PUBLIC_ROAD / NO_NORMAL_DRIVING_AUTHORITY` and at those speeds the aerodynamic term is
+  negligible. The binding duty points sit at 55/65/70 mph, where aero dominates. **Closing
+  `CdA` requires an evidence activity the current authorised gate ladder does not contain** —
+  escalated as a scope finding for the owner rather than absorbed into an existing gate.
+- **ODR-017 stays `OPEN`**, confirmed against the whole corpus: no applicable input-torque
+  rating, and **no Dana or Spicer axle document is archived at all**. Nothing inferred,
+  though the inputs were present — the 13,660 lb rating **@ ground** is a vertical load limit
+  and is not convertible to torque, and the 11.8 in ring-gear pitch diameter is not a basis
+  for a torque estimate. The demand is bounded at ~1,513 Nm, so the open question is narrow.
+- `CAN_DANA_SELECTION_PROCEED = NO`. `POWERTRAIN_SELECTION_STATE = NOT_SELECTED`.
+  `CURRENT_SCREENING_LEADER = HV2800-6P NEW / 4.30` — a bookmark with no authority; the two
+  states are never collapsed. All D-035 screening results preserved unchanged.
+- **Architecture-change rule recorded as binding.** No escalation triggered — the survivors
+  are `INDETERMINATE`, not disqualified. If ODR-018 resolves such that no survivor meets the
+  binding duty point at 333–407 Vdc, that opens a separate trade study; **ODR-012 and SC-035
+  may change only through an explicit owner decision that changes the mission, never to make
+  a candidate pass.**
+- Characterization requirement defined as **measured evidence outputs only** — no procedure,
+  no energized-HV operating instructions, no safety or test control bypassed — including the
+  requirement to measure each variant's own published rating point alongside 333/370/407 V
+  so a bench result can be correlated back to the datasheet. Result authority would be
+  `CONTROLLED_BENCH_CHARACTERIZATION`, never aliased to `MANUFACTURER_VERIFIED` or
+  `VEHICLE_VERIFIED`.
+- Webasto topology still `NOT_STARTED`. No component selected. No source code changed;
+  `engine/src/platform/platform001.ts` untouched. EDTS acquisition-pipeline manifest fields
+  (`page_extraction_status`, `parser_status`) deliberately left untouched — a keyword search
+  is not the token-anchor parse those fields track.
+
 ## 2026-08-08 — Dana variant screening executed: six of ten eliminated, no selection defensible (D-035)
 
 - Owner design requirements adopted as **SC-035** (`OWNER_DESIGN_REQUIREMENT`): 16,000 lb

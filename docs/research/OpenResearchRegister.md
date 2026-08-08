@@ -241,6 +241,34 @@ reference to the evidence; entries are never deleted.
 - Blocks: screening gates S3 and S4; any required-torque or required-power figure.
 - Resolution evidence: — (coastdown measurement on the donor, applicable published
   coefficients for the exact body configuration, or a controlled characterization)
+- **Documentary closure attempted and failed (2026-08-08, D-036).** Every archived Ford
+  artifact was searched — `SRC-CAND-000001` (Body Application Guide), `SRC-CAND-000010`
+  (fleet specification), `SRC-CAND-000011` (brochure) — for drag coefficient, `Cd`, frontal
+  area, aerodynamic data, rolling resistance, `Crr`, coastdown data, road-load coefficients
+  and driveline efficiency. **No value for any of them exists in the corpus.** The single
+  textual hit for "frontal area" is a Body Application Guide footnote directing the reader
+  to the VECI label for restrictions — a constraint pointer, not a coefficient.
+- Term-by-term classification: vehicle test mass applicability is
+  `PRIMARY_DOCUMENT_SUPPORTED` (SC-028 + SC-035, with the ODR-004/005/006 donor caveat);
+  aerodynamic drag, rolling resistance, driveline efficiency and effective rolling radius
+  are all **`PHYSICAL_MEASUREMENT_REQUIRED`**.
+- Minimum physical evidence, recorded at
+  `PLATFORM_001_ODR_015_017_018_CLOSURE_ATTEMPT.md` §3.3: (1) low-speed zero-torque
+  coastdown — **already governed as Gate 05M-C3B / C3B-001**; (2) **high-speed coastdown
+  across 55–70 mph, bidirectional and wind-corrected**, for `CdA`; (3) wheel speed against
+  independent ground speed during (1) and (2), which also closes ODR-014; (4) dynamometer
+  or in-line torque measurement to separate driveline efficiency, which a coastdown cannot.
+- **Scope finding for the owner:** item (2) is **not covered by any currently authorised
+  gate.** Gate 05M-C3 is bounded `NO_PUBLIC_ROAD / NO_NORMAL_DRIVING_AUTHORITY`, and at the
+  low speeds it authorises the aerodynamic term is negligible — so C3B-001 alone yields no
+  usable `CdA`, while the binding duty points (55/65/70 mph) are squarely where aero
+  dominates. Closing the aerodynamic term requires separate owner authorisation.
+- Applicability caveat: a coastdown on the **donor ICE vehicle** transfers only for terms
+  the conversion does not change (aerodynamics if the body is unchanged, tyre rolling
+  resistance). It does **not** transfer for driveline losses — the driveline is what the
+  conversion replaces.
+- The SC-036 sensitivity band is **not** promoted by any of this and remains
+  `SENSITIVITY_BAND_NOT_EVIDENCE`.
 
 ## ODR-016 — Coolant-loop compatibility between the Webasto pack and the Dana system
 
@@ -274,6 +302,20 @@ reference to the evidence; entries are never deleted.
   retained axle.
 - Resolution evidence: — (Dana axle documentation for the exact M300 application, Ford
   body-builder / powertrain documentation, or controlled characterization)
+- **Documentary closure attempted and failed (2026-08-08, D-036).** `ODR_017_STATUS = OPEN`
+  confirmed against the complete archived corpus. Every Ford artifact was searched for input
+  torque, torque capacity, pinion torque and maximum input: **nothing.** There is **no Dana
+  or Spicer axle document archived in this repository at all** — `SRC-DANA-000001` is a
+  motor/inverter sheet. (That is a statement about the corpus, not a claim that such
+  documentation does not exist externally.)
+- **Nothing was inferred**, though the inputs for a tempting inference were all present and
+  were deliberately not used: the 13,660 lb maximum rating **@ ground** is a vertical load
+  limit and is not convertible to torque; the 11.8 in ring-gear pitch diameter recorded in
+  SC-029 is **not** a basis for a torque estimate; and neither donor engine torque, GCWR,
+  nor any other Dana/Spicer axle family was used.
+- Screening consequence unchanged: gate S4 stays `INDETERMINATE` for every candidate. The
+  demand is bounded at ~1,513 Nm (D3 at i = 4.10), so the question put to the evidence is
+  narrow — does the M300 accept ~1.5 kNm continuously and transiently in this application?
 
 ## ODR-018 — Dana SUMO MD HV-variant output at the governed 333–407 Vdc operating point
 
@@ -297,3 +339,37 @@ reference to the evidence; entries are never deleted.
   (B-004), which is not started.
 - Resolution evidence: — (Dana application data or torque-speed/efficiency curves at the
   applicable bus voltage for the exact variant, or controlled bench characterization)
+- **Documentary closure attempted and failed (2026-08-08, D-036).**
+  `ODR_018_STATUS = CONTROLLED_BENCH_CHARACTERIZATION_REQUIRED` for all four survivors
+  (HV2200-6P, HV2600-6P, HV2800-6P NEW, HV3000-6P). `SRC-DANA-000001` — the only Dana
+  document archived — publishes a **single rated operating point per variant** (600 Vdc, or
+  650 Vdc for the NEW rows, at 45 °C) and contains no torque-speed curve, no efficiency map,
+  no power-versus-voltage data, no base-speed or field-weakening information, no derating
+  table and no peak-power duration. The document was additionally checked for graphed data
+  that text extraction would miss: it holds exactly one embedded raster image, the product
+  photograph.
+- Per-variant outcome, with the two findings kept separate throughout:
+  `OPERATING_RANGE_COMPATIBLE = YES` for all four on published DC input range;
+  `PERFORMANCE_RATED_AT_333_407_V = NO` for all four. **A variant accepting a voltage is not
+  a variant rated at it.**
+- **Dana's own Application Policy, verbatim from the artifact:** *"Capacity ratings,
+  features, and specifications vary depending upon the model and type of service.
+  Application approvals must be obtained from Dana TM4; contact your representative for
+  application approval."* The sheet does not present itself as an application rating.
+- Nothing inferred: no field-weakening curve, no linear scaling of power with voltage, no
+  derating factor, no family maximum (SC-018) used to fill a per-variant gap, no
+  cross-variant borrowing.
+- **Documentary route remains open and is cheaper than the bench.** Dana-issued application
+  data for the exact variants across 333–407 Vdc would close this at
+  `VERIFIED_COMPONENT_DOCUMENTATION`. This is consistent with B-006, not a regression to it:
+  B-006 removed the *dependency* on a supplier reply, it did not make supplier documentation
+  inadmissible — and Dana's own document names this route. It should be attempted before a
+  bench programme is scoped, with the bench retained as the fallback that keeps the project
+  independent of a reply.
+- Characterization evidence outputs (measured quantities only, no procedure, no energized-HV
+  instructions, no safety control bypassed) defined at
+  `PLATFORM_001_ODR_015_017_018_CLOSURE_ATTEMPT.md` §5, including the requirement to measure
+  the variant's **own published rating point** alongside 333/370/407 V so the bench result
+  can be correlated back to `SRC-DANA-000001`. Result authority would be
+  `CONTROLLED_BENCH_CHARACTERIZATION` — never aliased to `MANUFACTURER_VERIFIED` or
+  `VEHICLE_VERIFIED` (baseline invariant 1).
