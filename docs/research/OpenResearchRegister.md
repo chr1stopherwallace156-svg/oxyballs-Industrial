@@ -114,3 +114,37 @@ reference to the evidence; entries are never deleted.
 - Status: Open
 - Blocks: any motor candidate leaving UNVERIFIED; Platform 001 package release.
 - Resolution evidence: — (motor supplier datasheet / engineering documentation)
+
+## ODR-011 — Dana TM4 SUMO MD official specification sheet `CORTM4-JRT2495-SUMOMD-0124` as a local primary artifact
+
+- Filed: 2026-08-08
+- Status: Open
+- Blocks: exact-variant closure for MV2500-6P, HV1800-3P, HV2200-3P, HV2200-3P NEW,
+  HV2200-6P, HV2400-6P, HV2600-6P, HV2800-6P NEW, HV3000-6P, HV3300-6P NEW. Every
+  provenance-locked field depends on it: casing, inverter designation, continuous/peak
+  power, continuous/peak torque, max RPM, DC voltage range, motor mass, inverter mass,
+  envelope, coolant requirement, mechanical/interface features, standards/protection.
+  Also blocks ODR-008 (motor dimensions), ODR-009 (motor mass) and ODR-010 (motor
+  supplier documentation), which this one artifact would resolve together.
+- Why not already resolved: the document was not delivered to the working environment,
+  and `www.dana.com`, `dana.com` and `dml.dana.com` are all blocked by the network egress
+  proxy (see B-007). No copy exists anywhere in the repository.
+- Resolution evidence: — (the PDF archived locally with source, document ID
+  `CORTM4-JRT2495-SUMOMD-0124`, authority `OFFICIAL_PUBLIC_DOCUMENT`, SHA-256 and
+  retrieval date recorded in an acquisition manifest)
+
+## ODR-012 — Governed Platform 001 F-450 duty / performance requirement
+
+- Filed: 2026-08-08
+- Status: Open
+- Blocks: selection of any exact SUMO MD variant. A variant cannot be chosen against
+  "Class 4–7" alone; selection needs a governed statement of at least: GVWR/GCWR basis,
+  payload target, gradeability (grade % at speed, loaded), sustained-speed requirement,
+  duty cycle / drive-cycle basis, required continuous vs peak power duration, and the
+  ambient envelope. Without it there is no criterion to rank variants, and comparing a
+  10-second pack rating against a peak of unpublished duration is not a decision.
+- Why not already resolved: ODR-004…ODR-010 cover axle weights, GVWR, frame geometry and
+  motor documentation. None of them states a duty or performance requirement, and no such
+  requirement is recorded anywhere in `docs/`.
+- Resolution evidence: — (owner-issued duty/performance requirement recorded as a governed
+  claim, or a specification module carrying it)
