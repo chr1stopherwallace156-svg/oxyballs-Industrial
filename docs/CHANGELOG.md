@@ -5,6 +5,35 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-08-08 — Platform 001 empirical evidence closure baseline recorded (D-033)
+
+- Added `docs/research/PLATFORM_001_EMPIRICAL_EVIDENCE_CLOSURE.md` — owner-supplied
+  baseline recorded verbatim. Documentary/empirical closure only: it authorizes no
+  procurement, fabrication, installation, HV energization, road operation, or vehicle
+  release.
+- **Blocker label superseded:** `BLOCKED_PENDING_SUPPLIER_DATA` →
+  `BLOCKED_PENDING_PRIMARY_OR_PHYSICAL_EVIDENCE` (B-006). A manufacturer reply is no
+  longer the only admissible path to closure; seven evidence classes are acceptable,
+  claim-specific. B-003 and B-004 keep their original text and gain a supersession
+  pointer — nothing was deleted.
+- **Source claims SC-001 … SC-021 recorded** (first entries in `SourceClaims.md`):
+  fourteen Webasto Standard Battery Pro 40 `OFFICIAL_PUBLIC_DOCUMENT` parameters, the
+  derived pack current envelope as `DERIVED_CALCULATION_FROM_OFFICIAL_PUBLIC_DOCUMENT`
+  (135.1–165.2 A continuous, 275.2–336.3 A 10-second — never a published current
+  rating), three Dana SUMO MD family-level claims, and the owner-locked donor config.
+- **Prior unsupported values withdrawn, not deleted** (SC-020 Webasto, SC-021 Dana):
+  350 V nominal, 96S, 150 A/300 A fixed ratings, integrated pyrofuse, 650 µF DC-link,
+  85 C trip, and the rest are marked `Withdrawn` with a note so they stay traceable and
+  cannot be silently reintroduced.
+- Phase A–H execution sequence adopted as the Platform 001 critical path.
+- Historical supplier-outreach artifacts under `docs/research/outreach/` and the prior
+  candidate values in `docs/research/candidates/RH01_SECOND_STAGE_FILTER.md` are
+  preserved unedited.
+- No source code changed. `engine/src/platform/platform001.ts` untouched by design
+  (baseline invariant 2). No structure-freeze or README change required — a file added
+  inside the already-frozen `docs/research/` directory is explicitly permitted by
+  `STRUCTURE_FREEZE.md` ("files may still be added inside existing directories").
+
 ## 2026-07-25 — Official adoption: changelog/handoff governance (CHANGE-0001)
 
 - Four operating rules + completion state machine adopted in capture-ios

@@ -19,6 +19,28 @@ later entry that references it.
 
 ---
 
+## D-033 — Platform 001 empirical evidence closure baseline; supplier reply is no longer the only path to closure
+
+- Date: 2026-08-08
+- Status: Accepted
+- Context: Platform 001 conversion engineering had repeatedly restarted its architecture, and the HV/powertrain/cooling gates were held behind `BLOCKED_PENDING_SUPPLIER_DATA` (B-003/B-004) — a label that made a manufacturer's email reply the sole admissible route to closure. Meanwhile prior draft material carried Webasto and Dana values that the reviewed current public documentation does not support.
+- Decision (owner-directed baseline, recorded verbatim at `docs/research/PLATFORM_001_EMPIRICAL_EVIDENCE_CLOSURE.md`):
+  1. Four invariants are locked: `CONTROLLED_BENCH_CHARACTERIZATION` is an independent authority class never aliased to `MANUFACTURER_VERIFIED` or `VEHICLE_VERIFIED`; `engine/src/platform/platform001.ts` stays conservative and generic with closure flowing through evidence state, not hard-coded values; unknowns remain UNKNOWN/NULL and create evidence obligations; existing architecture is preserved.
+  2. A seven-class evidence authority hierarchy is adopted and the classes must never be collapsed.
+  3. The gate label `BLOCKED_PENDING_SUPPLIER_DATA` is superseded by `BLOCKED_PENDING_PRIMARY_OR_PHYSICAL_EVIDENCE` (B-006). Supplier outreach remains a valid path and its artifacts are preserved, but it is no longer the only one.
+  4. A definitive Phase A–H execution sequence is adopted as the critical path.
+  5. Webasto Standard Battery Pro 40 and Dana TM4 SUMO MD public baselines are recorded as `OFFICIAL_PUBLIC_DOCUMENT` claims (SC-001 … SC-019). The derived pack current envelope is `DERIVED_CALCULATION_FROM_OFFICIAL_PUBLIC_DOCUMENT` (SC-015) and must never be restated as a manufacturer current rating.
+  6. Prior unsupported draft values for both components are recorded `Withdrawn` (SC-020, SC-021) rather than deleted, so they remain traceable and cannot be silently reintroduced.
+  7. SUMO MD is a family: an exact variant row must be selected before any electrical, mechanical, thermal or driveline compatibility is closed, and variants must not be blended.
+  8. ODR-004 … ODR-007 are not satisfied by broad model-family values; the exact donor still requires measured axle weights, applicable GVWR confirmation, and physical frame/mounting metrology.
+  9. Phase E selections (precharge R, cable gauge, fuse, contactor, PDU, pump/radiator/chiller) remain blocked until their inputs are evidence-backed. Dana DC-link capacitance is not established, so no Platform 001 precharge energy or resistor value is closed.
+- Consequences:
+  - Unblocks: documentary, metrology, and controlled-characterization work may proceed against public primary sources and physical measurement without waiting on a supplier reply.
+  - Still blocked: final fuse/cable/precharge/contactor/PDU selection; final cooling sizing; any compliance or safety claim; procurement, fabrication, installation, HV energization, road operation and vehicle release — this baseline authorizes none of them.
+  - Binds: every promoted value must carry claim ID, value/unit, applicability, source/evidence ID, source revision/date, authority class, uncertainty where applicable, verification state, and supersession lineage.
+  - No code change: `engine/src/platform/platform001.ts` is untouched by this decision, per invariant 2.
+  - Numbering: D-032 is reserved by the in-flight Phase 4E proposal (PR #69) and is deliberately not reused here.
+
 ## D-031 — Phase 4D surface reconstruction and visual model foundation
 
 - Date: 2026-08-04

@@ -15,6 +15,37 @@ Active blockers and what unblocks them. Entries are closed by marking
 
 ---
 
+## B-006 — Gate label superseded: BLOCKED_PENDING_SUPPLIER_DATA → BLOCKED_PENDING_PRIMARY_OR_PHYSICAL_EVIDENCE
+
+- Filed: 2026-08-08 (owner-directed Platform 001 empirical evidence closure baseline, D-033)
+- Status: Active — this is a **relabelling and widening** of the admissible evidence paths for
+  B-003 and B-004, not a clearing of them. Both remain Active on their original substance.
+- Supersedes: the unified gate label `BLOCKED_PENDING_SUPPLIER_DATA` applied to B-003/B-004
+  (review_16). That label made a manufacturer's reply the only route to closure. It is
+  replaced by `BLOCKED_PENDING_PRIMARY_OR_PHYSICAL_EVIDENCE`.
+- Acceptable evidence classes (suitability remains claim-specific):
+  `OFFICIAL_PUBLIC_DOCUMENT`, `VERIFIED_COMPONENT_DOCUMENTATION`,
+  `NONENERGIZED_PHYSICAL_METROLOGY`, `CONTROLLED_BENCH_CHARACTERIZATION`,
+  `SUBSYSTEM_INTEGRATION_TEST`, `VEHICLE_INTEGRATION_TEST`, `REFERENCE_VEHICLE_MEASUREMENT`.
+- Preserved: supplier outreach remains a valid path and its artifacts stay in force —
+  `docs/research/outreach/SUPPLIER_INQUIRY_WEBASTO_01.md`,
+  `SUPPLIER_INQUIRY_DANA_01.md`, `SUPPLIER_INQUIRY_ZF_01.md`,
+  `SUPPLIER_INQUIRY_FORD_LEE_STEERING_01.md`. The 13 supplier-only items and the
+  8 Webasto + 8 Dana question sets remain recorded. Nothing was deleted or rewritten.
+- Blocks (unchanged from B-003/B-004): final fuse selection; final cable gauge; final
+  precharge resistor; final contactor/PDU selection; final pump/radiator/cooling-loop
+  sizing; any final compliance or safety claim. Procurement, fabrication, installation,
+  HV energization, road operation and vehicle release remain unauthorized.
+- Newly allowed: documentary closure against public primary sources (Phase A), exact
+  hardware identification (Phase B), non-energized metrology (Phase C), and controlled
+  characterization of remaining unknowns (Phase D) may proceed **without** a supplier reply.
+- Unblocked by: per-claim evidence in one of the acceptable classes above, recorded in
+  `docs/research/SourceClaims.md` with authority class and verification state, followed by
+  engineering review. Academic sources may still build modeling logic; they still cannot
+  close a gate.
+- References: `docs/research/PLATFORM_001_EMPIRICAL_EVIDENCE_CLOSURE.md` §3;
+  D-033; SC-001 … SC-021.
+
 ## B-005 — A9 TRUSTED-TIME / CLOCK-ROLLBACK AUTHORIZATION BYPASS (engine)
 
 - Filed: 2026-07-23 (adversarial harness A9; confirmed by independent review)
@@ -55,6 +86,10 @@ Active blockers and what unblocks them. Entries are closed by marking
 
 ## B-003 — POWERTRAIN_COMPATIBILITY_REVIEW_REQUIRED
 
+- **Label superseded 2026-08-08 by B-006 (D-033):** the gate label below reads
+  `BLOCKED_PENDING_SUPPLIER_DATA`; the governing label is now
+  `BLOCKED_PENDING_PRIMARY_OR_PHYSICAL_EVIDENCE`. The original wording is retained
+  unedited as the historical record. The blocker itself remains **Active**.
 - Filed: 2026-07-15 (owner directive, review_11)
 - Status: Active — **unified gate label per owner (review_16):
   `BLOCKED_PENDING_SUPPLIER_DATA`** (applies jointly to the HV wiring,
@@ -101,6 +136,10 @@ Active blockers and what unblocks them. Entries are closed by marking
 
 ## B-004 — INTERFACE_SELECTION_REQUIRED (Webasto VIB vs VIG/VIG Plus)
 
+- **Label superseded 2026-08-08 by B-006 (D-033):** interface selection may now also be
+  closed by `OFFICIAL_PUBLIC_DOCUMENT` + `VERIFIED_COMPONENT_DOCUMENTATION` on the exact
+  physical interface hardware, not only by a supplier-confirmed reply. Original wording
+  retained unedited. The blocker remains **Active**.
 - Filed: 2026-07-15 (owner directive, review_12)
 - Status: Active
 - Blocks: acceptance of ANY battery-system current limit (the VIB's
