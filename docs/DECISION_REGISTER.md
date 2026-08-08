@@ -19,6 +19,51 @@ later entry that references it.
 
 ---
 
+## D-034 — Platform 001 duty requirement is authored as an explicit split between evidence and owner decision
+
+- Date: 2026-08-08
+- Status: Accepted
+- Context: ODR-012 blocks selection of an exact Dana SUMO MD variant because no governed
+  duty or performance requirement exists anywhere in `docs/`. Ten provenance-locked
+  variants span 100–190 kW continuous and 1,775–3,320 Nm peak; without a duty statement
+  there is no criterion to rank them, and the standing temptation is to fill the gap with
+  a plausible-sounding assumption. The Engineering Constitution forbids exactly that.
+- Decision: author `docs/research/PLATFORM_001_DUTY_REQUIREMENT_v0.1.md` under a
+  three-class rule that is enforced structurally rather than by intent:
+  1. `DR-E-nn` — parameters fixed by an archived primary source or by calculation from
+     one. Recorded as SC-028 … SC-034 from `SRC-CAND-000010` / `SRC-CAND-000011`, both
+     already archived with manifests and both digest-verified against the archived bytes.
+  2. `DR-OD-nn` — the sixteen parameters that no evidence in this repository determines.
+     Each is stated as a question with its evidence-bounded option space and the
+     consequence of each branch. **None has a default**; an unanswered `DR-OD` propagates
+     as `INDETERMINATE`, it does not become a value.
+  3. `DR-M-nn` — the relations that convert (1) and (2) into a per-variant verdict, fixed
+     now so the later evaluation is arithmetic rather than narrative.
+  Screening gates S1–S8 and the ranking rule are likewise fixed **before** the answers are
+  known, so the criterion cannot be chosen to fit a preferred variant. The ranking rule is
+  deliberately conservative: among variants passing every gate, prefer the smallest
+  continuous power that still passes, never the largest capability.
+- Consequences:
+  - No motor is selected. `PREFERRED_EXACT_SUMO_MD_VARIANT` stays `NOT_YET_DETERMINABLE`.
+  - ODR-012 remains **Open**. The draft is its proposed resolution, not its resolution.
+  - Five new evidence obligations are opened: ODR-013 (donor powertrain identity, and the
+    D-006 / SC-019 engine contradiction), ODR-014 (tyre rolling radius), ODR-015 (road-load
+    coefficients), ODR-016 (coolant-loop compatibility), ODR-017 (Dana M300 axle input
+    torque rating).
+  - **D-006 is contradicted by the archived MY2019 sources and is not silently corrected.**
+    D-006 names Platform 001A as *7.3L gas*; the 2019 sources publish the gas engine for
+    this chassis as the 6.8L 3-valve V10. This entry supersedes nothing — the contradiction
+    is filed as ODR-013 for the owner to resolve against the actual donor.
+  - ODR-004 … ODR-007 are **not** closed. Every Ford figure recorded here is a
+    model-configuration value and is labelled as such; donor axle weights, donor GVWR and
+    donor frame geometry still require label reading or calibrated measurement.
+  - Two chassis sources are recorded as `OFFICIAL_PUBLIC_DOCUMENT (MIRRORED ARTIFACT)`:
+    neither archived byte stream came from a ford.com URL, and their SHA-256 values fix the
+    archived artifacts, not Ford's hosted files. Same discipline as `SRC-DANA-000001`.
+  - No source code changed; `engine/src/platform/platform001.ts` untouched. No component
+    selection of any kind. A file added inside the already-frozen `docs/research/`
+    directory is permitted by `STRUCTURE_FREEZE.md`.
+
 ## D-033 — Platform 001 empirical evidence closure baseline; supplier reply is no longer the only path to closure
 
 - Date: 2026-08-08

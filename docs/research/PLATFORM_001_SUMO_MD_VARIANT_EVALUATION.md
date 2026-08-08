@@ -95,6 +95,18 @@ ODR-004…ODR-010 cover axle weights, GVWR, frame geometry and motor documentati
 states a duty requirement. Without it there is no criterion to rank ten variants that span
 100–190 kW continuous and 1775–3320 Nm peak.
 
+**Update 2026-08-08 (D-034).** `PLATFORM_001_DUTY_REQUIREMENT_v0.1.md` now drafts that
+requirement, separating what evidence fixes (DR-E-01 … DR-E-09, SC-028 … SC-034) from the
+sixteen owner decisions it cannot derive (DR-OD-01 … DR-OD-16), and fixing screening gates
+S1–S8 and the ranking rule in advance. It is a **draft**: ODR-012 stays Open and this
+evaluation's outcome below is unchanged. One new screening axis is already usable from
+evidence alone — SC-034 converts each variant's maximum speed through the available
+final-drive ratios (4.10 / 4.30 / 4.88) and the 15.00 in static loaded radius: on a 4.88
+axle no listed variant reaches 70 mph, and the 2700 RPM variants (HV2200-3P, HV2200-3P NEW)
+stay under 60 mph on every available ratio. That axis bites only once DR-OD-06 states a
+speed requirement, and ODR-014 (rolling radius) must close before it is used to reject a
+variant on a small margin.
+
 ## 5. Comparison — step 3: DC power requirement
 
 Cannot be closed. Two independent reasons:

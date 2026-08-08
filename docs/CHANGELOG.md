@@ -5,6 +5,78 @@ milestones. Append-only; newest entries first.
 
 ---
 
+## 2026-08-08 — Platform 001 duty requirement v0.1 drafted; evidence and owner decision kept apart (D-034)
+
+- Added `docs/research/PLATFORM_001_DUTY_REQUIREMENT_v0.1.md`. It supplies the missing
+  input to ODR-012 — the criterion the ten provenance-locked SUMO MD variants get measured
+  against. **Status is DRAFT, and no motor is selected.**
+- **The document's whole point is the split.** Parameters are typed: `DR-E-nn` if an
+  archived primary source fixes them, `DR-OD-nn` if only the owner can state them,
+  `DR-M-nn` for the relations that combine the two. Sixteen `DR-OD` items are presented as
+  questions with their evidence-bounded option space — **none is given a default**, and an
+  unanswered one propagates as `INDETERMINATE` rather than quietly becoming a value.
+- **New chassis claims SC-028 … SC-034**, mined from `SRC-CAND-000010` and
+  `SRC-CAND-000011` — two Ford sources already archived in this repository with acquisition
+  manifests, digests recomputed from the archived bytes and matching. Published weight
+  ratings for the exact Reg. Cab 4x2 145.3 in configuration (16,500/16,000/15,000 lbs GVWR;
+  6,641 lbs curb gas, 7,390 lbs diesel), the distinction between standard GAWR and axle
+  component rating (4,800/12,880 vs 7,000/13,660 lbs), available final-drive ratios
+  (4.88 gas; 4.10/4.30 diesel), the 225/70R19.5G tyre with 15.00 in static loaded radius,
+  frame data, and Class 5 status.
+- Both chassis sources are recorded as `OFFICIAL_PUBLIC_DOCUMENT (MIRRORED ARTIFACT)`:
+  neither archived byte stream came from a ford.com URL, so their SHA-256 values fix the
+  archived artifacts, not Ford's hosted files — the same provenance discipline applied to
+  `SRC-DANA-000001`.
+- **ODR-004 … ODR-007 are not closed by any of this.** Every Ford figure is a
+  model-configuration value and is labelled so; donor axle weights, donor GVWR and donor
+  frame geometry still require a label reading or calibrated measurement, per the baseline's
+  instruction not to replace those entries with model-family values.
+- **SC-034 is the one genuinely new screening axis**, derived from the direct-axle interface
+  (no gearbox): motor maximum speed ÷ final-drive ratio × rolling radius gives road speed.
+  On a 4.88 axle no listed variant reaches 70 mph, and the 2,700 RPM variants reach under
+  60 mph on any available ratio. The relation carries a **stated assumption** — rolling
+  radius set equal to the published static loaded radius, because rolling radius is not
+  published (ODR-014) — and the document forbids rejecting a variant on a few-mph margin
+  until that closes.
+- **A contradiction is filed, not silently fixed.** D-006 names Platform 001A as *7.3L gas*;
+  both archived MY2019 sources publish the gas engine for this chassis as the 6.8L 3-valve
+  V10. Filed as ODR-013 for resolution against the actual donor — the branch differs by
+  749 lbs of curb mass and by which final-drive ratios exist, so guessing it would corrupt
+  the mass/CG ledger D-006 exists to protect.
+- **Five evidence obligations opened:** ODR-013 (donor powertrain identity), ODR-014 (tyre
+  rolling radius), ODR-015 (road-load coefficients), ODR-016 (coolant-loop compatibility —
+  Dana publishes coolant type and inlet limit but no flow/pressure, Webasto publishes
+  flow/pressure but no coolant type or inlet limit, so the two sets do not compose),
+  ODR-017 (Dana M300 axle **input torque** rating, which caps how much of a variant's
+  1,775–3,320 Nm peak is usable on the retained axle).
+- Screening gates S1–S8 and the ranking rule are fixed **before** the answers are known, so
+  the criterion cannot be picked to suit a preferred variant. S1 (voltage) is already closed
+  against evidence; the rest are blocked and say which input blocks them.
+- ODR-012 stays **Open** — a draft carrying sixteen unanswered owner decisions is not a
+  governed duty requirement.
+- No component of any kind selected. No source code changed;
+  `engine/src/platform/platform001.ts` untouched.
+
+## 2026-08-08 — Dana SUMO MD primary artifact archived; all ten variants provenance-locked
+
+- Archived `SRC-DANA-000001` (`CORTM4-JRT2495-SUMOMD-0124`, sha256 `e3f3f9ba…44af28`,
+  2,074,055 bytes) at `docs/research/raw/platform001_primary_sources/` with an acquisition
+  manifest recording that the byte stream is an owner-supplied browser render, not Dana's
+  originally served file. Used locally thereafter; no network dependency.
+- **SC-022 … SC-027** record the ten-variant performance table verbatim, its rating
+  conditions (600 Vdc / *350 Vdc / **650 Vdc, all at 45 °C), casing and inverter dimensions
+  and masses, published standards and cooling limits, and system features. Variants are
+  never blended.
+- **ODR-008, ODR-009, ODR-010, ODR-011 resolved.** ODR-011 records only that the artifact
+  had not yet been archived locally — official public Dana evidence was always known to
+  exist externally.
+- Added `docs/research/PLATFORM_001_SUMO_MD_VARIANT_EVALUATION.md`, which establishes a
+  hard voltage constraint independent of duty: MV2500-6P is the only variant whose rating
+  condition (350 Vdc) falls inside the governed pack window 333–407 V, and a two-series
+  Webasto string reaches 814 V — above the maximum DC input of all ten (450/750/800 Vdc).
+- Outcome recorded honestly as `PREFERRED_EXACT_SUMO_MD_VARIANT = NOT_YET_DETERMINABLE`,
+  blocked on ODR-012. No winner forced.
+
 ## 2026-08-08 — Platform 001 empirical evidence closure baseline recorded (D-033)
 
 - Added `docs/research/PLATFORM_001_EMPIRICAL_EVIDENCE_CLOSURE.md` — owner-supplied

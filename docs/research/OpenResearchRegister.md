@@ -171,3 +171,93 @@ reference to the evidence; entries are never deleted.
   requirement is recorded anywhere in `docs/`.
 - Resolution evidence: — (owner-issued duty/performance requirement recorded as a governed
   claim, or a specification module carrying it)
+- Progress (2026-08-08): `docs/research/PLATFORM_001_DUTY_REQUIREMENT_v0.1.md` drafts the
+  requirement and separates what evidence fixes (DR-E-01 … DR-E-09, backed by SC-028 …
+  SC-034) from what only the owner can state (DR-OD-01 … DR-OD-16). It also fixes the
+  screening gates S1–S8 and the ranking rule in advance. **This entry stays Open**: a
+  draft carrying sixteen unanswered owner decisions is not a governed duty requirement.
+  It closes when DR-OD-01 … DR-OD-16 are answered and the result is accepted. The draft
+  additionally opened ODR-013 … ODR-017.
+
+## ODR-013 — Donor powertrain identity, and the D-006 / SC-019 engine contradiction
+
+- Filed: 2026-08-08
+- Status: Open
+- Required: which engine the donor actually carries (6.8L 3-valve gas V10 vs 6.7L Power
+  Stroke diesel), the donor's model year, its as-built final-drive ratio, and its as-built
+  tyre size.
+- **Contradiction to resolve.** D-006 names the active build direction as *Platform 001A =
+  7.3L gas*. SC-019 locks a **2019** F-450. Both archived 2019 Ford sources
+  (`SRC-CAND-000010`, `SRC-CAND-000011`) publish the gas engine for this chassis as the
+  **6.8L 3-valve V10**; a 7.3L gas engine appears in neither. Either the donor is a later
+  model year than SC-019 states, or D-006's engine label is not correct for MY2019. This
+  is not resolvable from documents — it requires knowing the actual donor.
+- Blocks: correct platform tagging of removed-component weight and CG data (D-006);
+  the curb-weight and front-GAWR baseline (SC-028 differs by 749 lbs of curb mass and
+  400 lbs of front GAWR between the two engines); the available final-drive ratio set
+  (SC-030: 4.88 for gas, 4.10/4.30 for diesel), which is the multiplier in SC-034;
+  `PLATFORM_001_DUTY_REQUIREMENT_v0.1.md` DR-OD-02 and DR-OD-11.
+- Resolution evidence: — (donor VIN decode, door-jamb / certification label, or physical
+  inspection of the exact donor)
+
+## ODR-014 — Rolling radius / revolutions-per-mile for the fitted 225/70R19.5G tyre
+
+- Filed: 2026-08-08
+- Status: Open
+- Required: dynamic rolling radius, or revolutions per mile, for the fitted tyre at the
+  applicable load and inflation.
+- Why open: `SRC-CAND-000010` page 64 publishes **static loaded radius 15.00 in**
+  (SC-031). Static loaded radius is not rolling radius. SC-034 currently sets them equal
+  as a **stated assumption**, which makes the derived road-speed table mildly conservative
+  by an UNKNOWN margin.
+- Blocks: using SC-034 to reject a SUMO MD variant on a small speed margin; the wheel-torque
+  conversion in `PLATFORM_001_DUTY_REQUIREMENT_v0.1.md` DR-M-02; screening gate S2.
+- Resolution evidence: — (tyre manufacturer data for the exact fitment, or measurement on
+  the donor)
+
+## ODR-015 — Road-load coefficients for the converted vehicle
+
+- Filed: 2026-08-08
+- Status: Open
+- Required: rolling-resistance coefficient `Cr`, frontal area `A`, drag coefficient `Cd`,
+  and driveline efficiency `eta_driveline` for the converted Platform 001 vehicle at its
+  intended body configuration.
+- Why open: none of these appears in any archived source. Without them the road-load
+  equation in `PLATFORM_001_DUTY_REQUIREMENT_v0.1.md` DR-M-02 cannot be evaluated even
+  once the owner states a gradeability requirement.
+- Blocks: screening gates S3 and S4; any required-torque or required-power figure.
+- Resolution evidence: — (coastdown measurement on the donor, applicable published
+  coefficients for the exact body configuration, or a controlled characterization)
+
+## ODR-016 — Coolant-loop compatibility between the Webasto pack and the Dana system
+
+- Filed: 2026-08-08
+- Status: Open
+- Required: whether one coolant loop can serve both the Webasto Standard Battery Pro 40
+  and the selected SUMO MD system, or whether two loops are required.
+- Why open: the two published sets do not compose. Dana publishes coolant type
+  **40/60 water-glycol** and **maximum inlet 65 °C** but neither flow rate nor pressure
+  drop (SC-026). Webasto publishes **10 L/min** and **< 50 mbar** but neither coolant type
+  nor a maximum inlet temperature (SC-008, SC-009). The pack operating range
+  −30 … +55 °C (SC-011) is an ambient/cell range, not a coolant inlet limit, and must not
+  be substituted for one.
+- Blocks: cooling-package sizing; screening gate S7; the ambient-envelope clause
+  (`PLATFORM_001_DUTY_REQUIREMENT_v0.1.md` DR-OD-10).
+- Resolution evidence: — (applicable primary documentation for both components, or
+  controlled hydronic bench characterization)
+
+## ODR-017 — Maximum input torque rating of the retained Dana M300 rear axle
+
+- Filed: 2026-08-08
+- Status: Open
+- Required: the maximum continuous and peak input torque the Dana M300 rear axle
+  (SC-029) accepts at the pinion.
+- Why open: neither Ford source publishes an axle input torque rating — only the maximum
+  rating **@ ground** in pounds (13,660 lbs), which is a vertical load limit, not a torque
+  limit. The SUMO MD variants span 1,775–3,320 Nm peak torque (SC-022) and drive the axle
+  directly without a gearbox (SC-017), so the axle input limit is a hard ceiling on how
+  much of a variant's peak torque is usable.
+- Blocks: screening gate S4; any claim that a high-peak-torque variant is usable on the
+  retained axle.
+- Resolution evidence: — (Dana axle documentation for the exact M300 application, Ford
+  body-builder / powertrain documentation, or controlled characterization)

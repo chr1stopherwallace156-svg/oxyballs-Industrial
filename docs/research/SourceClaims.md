@@ -276,3 +276,134 @@ Entries are append-only and never deleted; a discredited claim is marked
 - Used by: driveline interface study; Gate 05 interlock work (HVIL). **Communications /
   control protocol, CAN bit rate, torque-command map, DC-link capacitance, efficiency map
   and DC input current are NOT published in this document** and remain UNKNOWN.
+
+## SC-028 — Published weight ratings for the Platform 001 configuration (F-450 DRW Chassis Cab, Reg. Cab, 4x2, 145.3 in WB)
+
+- Recorded: 2026-08-08
+- Source: `SRC-CAND-000010` (2019 F-350/F-450/F-550 Super Duty Chassis Cabs, Ford fleet
+  specification printout; archived at
+  `elektron-digital-twin-foundation/research/incoming/chassis_frame_ab/`, sha256
+  `7a92e4ea839a3a7d163e2c374e6cfde0a24d277e1ee40013217cc6b3cab9c030`), page 28, table
+  "F-450 DRW Chassis Cab > Weight Ratings", row `Reg. Cab 4x2 — 145.3`
+- Authority class: OFFICIAL_PUBLIC_DOCUMENT (MIRRORED ARTIFACT — see note)
+- Status: Unverified (published)
+- Claim, 6.8L V10 gas: Max. GVWR 16,500 / 16,000 / 15,000 lbs; Max. payload 9,850 /
+  9,350 / 8,350 lbs; Max. std. GAWR front 4,800 lbs, rear 12,880 lbs; base curb weight
+  front 3,672 lbs, rear 2,969 lbs, total 6,641 lbs.
+  6.7L Power Stroke diesel: Max. GVWR 16,500 / 16,000 / 15,000 lbs; Max. payload 9,110 /
+  8,610 / 7,610 lbs; Max. std. GAWR front 5,200 lbs, rear 12,880 lbs; base curb weight
+  front 4,254 lbs, rear 3,136 lbs, total 7,390 lbs.
+- Note (provenance): the archived byte stream was retrieved from a third-party CDN mirror
+  of Ford's `dealerconnection` printable spec pages, not from a ford.com URL. The sha256
+  fixes the archived artifact and is not the digest of Ford's own hosted file.
+- Note (scope): these are **model-configuration** values. They do **NOT** close ODR-004
+  (donor front axle weight), ODR-005 (donor rear axle weight) or ODR-006 (donor GVWR),
+  which still require a door-jamb label reading or calibrated scale measurement per the
+  Platform 001 baseline instruction not to replace ODR-004…ODR-007 with model-family
+  values.
+- Used by: `PLATFORM_001_DUTY_REQUIREMENT_v0.1.md` DR-E-02; mass budget envelope
+
+## SC-029 — F-450 DRW axle component ratings are distinct from the standard GAWRs
+
+- Recorded: 2026-08-08
+- Source: `SRC-CAND-000010` pages 55 and 57 (Front Axle Specifications — 4x2; Rear Axle
+  Specifications); `SRC-CAND-000011` page 21 (Mechanical, "Max. Axle rating @ ground")
+- Authority class: OFFICIAL_PUBLIC_DOCUMENT (MIRRORED ARTIFACT)
+- Status: Unverified (published)
+- Claim: F-450 DRW maximum axle rating @ ground is 7,000 lbs front and 13,660 lbs rear.
+  The F-450/F-550 4x2 front axle is a Dana forged-steel monobeam, spring centres 46.45 in,
+  listed at 7,000/7,500 lbs. The rear axle is a **Dana M300**, full-floating, SPL-55 end
+  yoke, cast-centre housing, 4.5 in tube diameter, 11.8 in ring-gear pitch diameter,
+  13,660 lbs max rating @ ground.
+- Note: these component ratings are **not** the GAWRs in SC-028. Standard GAWR is
+  spring/tyre/wheel-limited for the configuration (4,800 or 5,200 lbs front, 12,880 lbs
+  rear); the axle rating is a component limit. The brochure's "class-best 7,500 lbs.
+  front GAWR" refers to an upgraded front spring/GAWR package, not to the standard
+  145.3 in Reg. Cab 4x2 configuration.
+- Note: the M300 **maximum input torque rating is NOT published** in either source and
+  remains UNKNOWN — filed as ODR-017.
+- Used by: `PLATFORM_001_DUTY_REQUIREMENT_v0.1.md` DR-E-03, screening gate S4
+
+## SC-030 — F-450 DRW 4x2 Regular Cab available final-drive ratios and ICE GCWR
+
+- Recorded: 2026-08-08
+- Source: `SRC-CAND-000011` (2019 Super Duty Chassis Cab brochure; archived at
+  `elektron-digital-twin-foundation/research/incoming/chassis_frame_ab/`, sha256
+  `f71e9eebf97ebe4f90ab5aaa5d780504e73df63d5008a7f5af8e4e35c8c6589f`), page 21,
+  5th-Wheel Towing table, Regular Cab rows, `F-450 DRW 4x2` column; corroborated by
+  `SRC-CAND-000010` page 55 (available ratios 4.10 / 4.30 / 4.88)
+- Authority class: OFFICIAL_PUBLIC_DOCUMENT (MIRRORED ARTIFACT — Skeeter Emergency
+  Vehicles mirror of the Ford brochure)
+- Status: Unverified (published)
+- Claim: 6.8L 3-valve gas V10 — axle ratio 4.88, GCWR 28,000 lbs, max loaded 5th-wheel
+  trailer 20,600 lbs. 6.7L Power Stroke diesel — axle ratio 4.10, GCWR 32,000 lbs,
+  trailer 23,900 lbs; axle ratio 4.30, GCWR 34,500 lbs, trailer 26,400 lbs.
+- Note: the GCWR and trailer figures are **ICE ratings for the Ford powertrain**. They do
+  not transfer to a converted powertrain and must not be carried forward as a conversion
+  requirement. The claim is used here only to establish which final-drive ratios exist for
+  this chassis.
+- Used by: `PLATFORM_001_DUTY_REQUIREMENT_v0.1.md` DR-E-04, DR-M-01, DR-OD-11
+
+## SC-031 — F-450 Chassis Cab standard wheel and tyre, with static loaded radius
+
+- Recorded: 2026-08-08
+- Source: `SRC-CAND-000010` page 50 (F-450 Chassis Cab standard equipment — Tires/Wheels)
+  and page 64 (Tire Specifications)
+- Authority class: OFFICIAL_PUBLIC_DOCUMENT (MIRRORED ARTIFACT)
+- Status: Unverified (published)
+- Claim: six 225/70Rx19.5G steel-belted radial all-season BSW tyres on six 19.5 in x 6 in
+  10-hole steel disc wheels. Tyre specification (Continental, A/S-BSW and Traction-BSW):
+  rim width 6.0 in, section width 8.7 in, load limits at maximum inflation pressure
+  3,970 / 3,750 lbs (single rear wheel / dual rear wheel), **static loaded radius
+  15.00 in**.
+- Note: **rolling radius and revolutions-per-mile are NOT published** and remain UNKNOWN —
+  filed as ODR-014. Static loaded radius is not the same quantity.
+- Used by: `PLATFORM_001_DUTY_REQUIREMENT_v0.1.md` DR-E-05, DR-M-01, DR-M-02
+
+## SC-032 — F-450 145.3 in wheelbase frame data
+
+- Recorded: 2026-08-08
+- Source: `SRC-CAND-000011` page 21 (Frames; Brakes; Wheels)
+- Authority class: OFFICIAL_PUBLIC_DOCUMENT (MIRRORED ARTIFACT)
+- Status: Unverified (published)
+- Claim: section modulus 12.7 cu in (cross-sectional modulus calculated at back of cab);
+  frame-rail yield strength 50,000 psi; maximum side-rail section (height x width x
+  thickness, measured to inside of metal) 7.50 in x 2.74 in x 0.32 in for F-450/F-550 at
+  145.3 in wheelbase; 7 crossmembers at 145.3 in wheelbase. Brake rotor diameter
+  15.39 in front / 15.74 in rear; lining area 68.8 / 64.8 sq in. Wheels: 10 studs,
+  8.85 in bolt-circle diameter.
+- Note: nominal published geometry. Does **NOT** close ODR-007 (physical frame geometry
+  measurement of the donor).
+- Used by: `PLATFORM_001_DUTY_REQUIREMENT_v0.1.md` DR-E-06, screening gate S6
+
+## SC-033 — The Platform 001 configuration is a Class 5 vehicle
+
+- Recorded: 2026-08-08
+- Source: `SRC-CAND-000010`, vehicle class table — class 5 covers 16,001 to 19,500 lbs and
+  lists "F-450 Chassis Cab (16,500 lbs.)"
+- Authority class: OFFICIAL_PUBLIC_DOCUMENT (MIRRORED ARTIFACT)
+- Status: Unverified (published)
+- Claim: the F-450 Chassis Cab at 16,500 lbs GVWR is a Class 5 vehicle.
+- Note: this places Platform 001 inside the Dana SUMO MD stated application range of
+  Class 4-7 (SC-016), which is a necessary condition and **not** a variant-selection
+  criterion.
+- Used by: `PLATFORM_001_DUTY_REQUIREMENT_v0.1.md` DR-E-02
+
+## SC-034 — Derived motor-speed to road-speed relation for Platform 001 (calculation, not a published figure)
+
+- Recorded: 2026-08-08
+- Source: DERIVED from SC-017 (direct axle interface, no gearbox), SC-022 (per-variant
+  maximum speed), SC-030 (available final-drive ratios) and SC-031 (static loaded radius)
+- Authority class: DERIVED_CALCULATION
+- Status: Unverified (derived)
+- Claim: `v [mph] = (n_motor / i_axle) * (2*pi*r_roll[in]/12) * 60 / 5280`. With
+  `r_roll = 15.00 in`, the constant is 0.089250 mph per axle-shaft RPM. Resulting maxima
+  (motor max speed x ratio): 2,700 RPM -> 58.8 / 56.0 / 49.4 mph; 3,000 RPM -> 65.3 /
+  62.3 / 54.9 mph; 3,250 RPM -> 70.7 / 67.5 / 59.4 mph; 3,500 RPM -> 76.2 / 72.6 /
+  64.0 mph; 3,700 RPM -> 80.5 / 76.8 / 67.7 mph, for i = 4.10 / 4.30 / 4.88 respectively.
+- **Stated assumption, not evidence:** rolling radius is set equal to the published static
+  loaded radius. Ford does not publish rolling radius or revolutions-per-mile for this
+  tyre (ODR-014). Dynamic rolling radius is normally slightly larger than SLR, so these
+  figures are expected to be mildly conservative, but the margin is UNKNOWN and is not
+  asserted. A variant must not be rejected on a margin of a few mph until ODR-014 closes.
+- Used by: `PLATFORM_001_DUTY_REQUIREMENT_v0.1.md` DR-M-01, screening gate S2
